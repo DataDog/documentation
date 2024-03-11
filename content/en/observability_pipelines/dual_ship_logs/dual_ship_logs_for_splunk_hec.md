@@ -6,9 +6,11 @@ disable_toc: false
 
 ## Overview
 
-Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker to dual ship logs to multiple destinations. See [Dual Ship Logs from Splunk TCP][1] if you want to use Splunk Heavy/Universal Forwarders.
+As your infrastructure scales, your volume of logs also increases along with the complexity of the data. To optimize how you manage your logs could involve experimenting with different log management tools and routing workflows. Use Observability Pipelines to send your logs to multiple destinations, also known as dual shipping, so that you can evaluate different tools and workflows with minimal disruption to your production environment.
 
-This document walks you through the following steps:
+Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker and then to multiple destinations. See [Dual Ship Logs from Splunk TCP][1] if you want to use Splunk Heavy/Universal Forwarders.
+
+This document walks you through the following steps to set up dual shipping:
 
 1. Set up the Splunk index
 1. Set up a pipeline in Observability Pipelines
@@ -26,11 +28,14 @@ After configuring the HTTP Event Collector, use the Splunk HEC token to set up O
 
 Do the following to set up a pipeline to dual ship your logs to multiple destinations:
 
-### Add a log source
+### Add Splunk HEC for log source
 
 1. Navigate to [Observability Pipelines][LINK].
 1. Select the **Dual Ship Logs** use case to create a new pipeline.
 1. Select **Splunk HEC** as the source.
+1. Enter the Splunk HEC token.
+1. Enter the Splunk HEC endpoint URL in the **Splunk HEC address**. For example `https://<your_account>.splunkcloud.com:8088`. See [Send Data to HTTP Event Collector][1] for more information.   
+**Note**: `/services/collector/event` is automatically appended to the endpoint.
 
 ### Add processors
 
@@ -50,9 +55,10 @@ Add a query to filter your logs.
 {{% /tab %}}
 {{% tab "Quota" %}}
 
-1. Add a query to filter you logs.
-1. Select in the **Enforce by** dropdown menu how do you want to determine the quota.
-1. Enter the daily quota limit.
+1. Add a query to filter your logs.
+1. Select in the **Unit for quota** dropdown menu if you want to determine the quota by events or volume.
+1. Set the daily quota limit and select the unit of measurement.
+1. Uncheck **Drop fields** if you want to…TKTK
 
 {{% /tab %}}
 {{% tab "Edit field" %}}
@@ -85,7 +91,33 @@ For the **Rename** remap:
 ### Add the destinations for your logs
 
 1. Select the destinations for your logs.
-1. Enter in the Splunk endpoint URL.
+1. If applicable, enter the information for the destinations selected:
+{{< tabs >}}
+{{% tab "Splunk HEC" %}}
+
+3. Enter the Splunk index.   
+4. In the **Encoding** dropdown menu, select whether you want to encode in **JSON** or **Raw**.   
+5. Check the box if you want to auto extract the timestamp.   
+6. Enter the `sourcetype`.
+
+{{% /tab %}}
+{{% tab "Splunk TCP" %}}
+
+TKTK
+
+{{% /tab %}}
+
+{{% tab "Sumo Logic" %}}
+
+This destination will be configured through environment variables in the Worker deployment step.
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+Secrets will be set (for example, the Datadog API Key) when you install the OP Worker.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Install the Observability Pipelines Worker
 
@@ -93,8 +125,8 @@ For the **Rename** remap:
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
 {{% tab "Splunk HEC" %}}
-1. Enter the Splunk HEC token in the **DD_OP_SOURCE_SPLUNK_HEC_TOKENS** field.   
-1. Enter the Splunk HEC endpoint URL in the **DD_OP_SOURCE_SPLUNK_HEC_ADDRESS**. For example `https://<your_account>.splunkcloud.com:8088`. See [Send Data to HTTP Event Collector][1] for more information.   
+1. Enter the Splunk HEC token.
+1. Enter the Splunk HEC endpoint URL in the **Splunk HEC address**. For example `https://<your_account>.splunkcloud.com:8088`. See [Send Data to HTTP Event Collector][1] for more information.   
 **Note**: `/services/collector/event` is automatically appended to the endpoint.
 
 [1]: https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector
@@ -102,22 +134,30 @@ For the **Rename** remap:
 {{% /tab %}}
 {{% tab "Splunk TCP" %}}
 
-Enter the Splunk TCP address into the **DD_OP_DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL** field.
-
-[1]: /agent/guide/agent-commands/
+TKTK
 
 {{% /tab %}}
 
 {{% tab "Sumo Logic" %}}
 
-Enter the Sumo Logic HTTP collector URL in the **DD_OP_DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL** field.
+Enter the Sumo Logic HTTP collector URL.
+
+For example, `https://<sumo_endpoint>/reciever/v1/http/<unique_http_collector_code`. Replace the placeholders with the following:   
+        - `<sumo_endpoint>` with your Sumo Logic collection endpoint.   
+        - `<unique_http_collector_code>` with the string that follows the last forward slash (`/`) in the upload URL for the HTTP source.
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
 
-Text inside tab. [Link references][1] must be inside the tab.
+TKTK
 
-[1]: /agent/guide/agent-commands/
+{{% /tab %}}
+{{% tab "Datadog Log Archives" %}}
+
+1. Enter the name of the S3 archive bucket you created earlier.
+1. Enter the AWS region of the target service.
+1. Enter the AWS access key ID of the S3 archive bucket you created earlier
+1. Enter the AWS secret access key of your S3 archive bucket.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -127,15 +167,12 @@ Text inside tab. [Link references][1] must be inside the tab.
 
 1. Click **Select an API key** to choose the Datadog API key you want to use.
 1. Run the command automatically provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-1. Run the following command to start the worker:
-    ```
-    sudo systemctl restart observability-pipelines-worker
-    ```
+1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 
-1. Download the [Helm chart values file][link] for AWS EKS.
+1. Download the [Helm chart values file][1] for AWS EKS.
 1. In the Helm chart values file, replace `site` with {{< region-param key="dd_site" code="true" >}}. Make sure you have the correct site region selected in the upper right side of the page to show the site URL you need to use. See [Datadog Site][2] for more information.
 1. To install the Worker, run the following commands:
 
@@ -153,6 +190,7 @@ Text inside tab. [Link references][1] must be inside the tab.
         -f aws_eks.yaml
     ```
 
+[1]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
 [2]: /getting_started/site/
 
 {{% /tab %}}
@@ -166,12 +204,7 @@ TKTK
 TKTK
 
 {{% /tab %}}
-{{% tab "Linux (APT)" %}}
-
-TKTK
-
-{{% /tab %}}
-{{% tab "Linux (RPM)" %}}
+{{% tab "Linux" %}}
 
 TKTK
 
