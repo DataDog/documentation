@@ -170,20 +170,17 @@ TKTK
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 {{% /tab %}}
-{{% tab "AWS EKS" %}}
+{{% tab "Amazon EKS" %}}
 
-1. Download the [Helm chart values file][1] for AWS EKS.
+1. Download the [Helm chart values file][1] for Amazon EKS.
 1. In the Helm chart values file, replace `site` with {{< region-param key="dd_site" code="true" >}}. Make sure you have the correct site region selected in the upper right side of the page to show the site URL you need to use. See [Datadog Site][2] for more information.
 1. To install the Worker, run the following commands:
-
     ```shell
     helm repo add datadog https://helm.datadoghq.com
     ```
-
     ```shell
     helm repo update
     ```
-
     ```shell
     helm upgrade --install \
         opw datadog/observability-pipelines-worker \
@@ -192,21 +189,54 @@ TKTK
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
 [2]: /getting_started/site/
-
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 
-TKTK
+1. Download the [Helm chart values file][1] for Azure AKS.
+1. In the Helm chart values file, replace `site` with {{< region-param key="dd_site" code="true" >}}. Make sure you have the correct site region selected in the upper right side of the page to show the site region URL you need to use. See [Datadog Site][2] for more information.
+1. To install the Worker, run the following commands:
+```shell
+helm repo add datadog https://helm.datadoghq.com
+```
+```shell
+helm repo update
+```
+```shell
+helm upgrade --install \
+  opw datadog/observability-pipelines-worker \
+  -f azure_aks.yaml
+```
+1.Navigate back to the Observability Pipelines installation page. Click **Deploy**.
 
+[1]: /resources/yaml/observability_pipelines/v2/setup/azure_aks.yaml
+[2]: /getting_started/site/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 
-TKTK
+1. Download the [Helm chart values file][1] for Google GKE.
+1. In the Helm chart values file, replace `site` with {{< region-param key="dd_site" code="true" >}}. Make sure you have the correct site region selected in the upper right side of the page to show the site region URL you need to use. See [Datadog Site][2] for more information.
+1. To install the Worker, run the following commands:
+```shell
+helm repo add datadog https://helm.datadoghq.com
+```
+```shell
+helm repo update
+```
+```shell
+helm upgrade --install \
+  opw datadog/observability-pipelines-worker \
+  -f google_gke.yaml
+```
+1.Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
+[1]: /resources/yaml/observability_pipelines/v2/setup/google_gke.yaml
+[2]: /getting_started/site/
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-TKTK
+1. Click **Select an API key** to choose the Datadog API key you want to use.
+1. Run the command automatically provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
+1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
