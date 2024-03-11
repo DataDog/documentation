@@ -235,7 +235,7 @@ To enable single step instrumentation with Helm:
 You can choose to selectively instrument specific namespaces or choose to not instrument them.
 
 To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=6-8" >}}
+{{< highlight yaml "hl_lines=6-9" >}}
       datadog:
         apiKeyExistingSecret: datadog-secret
         site: <DATADOG_SITE>
