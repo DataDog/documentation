@@ -11,13 +11,14 @@
     background: linear-gradient(90deg, #5C30A0 0%, #006BC2 100%);
     min-height: 54px;
     padding: 1px;
+    border-radius: 4px;
     .try-rule-content {
         display: flex;
         align-items: center;
         justify-content: space-between;
         background: white;
         padding: 16px;
-        border-radius: 5px;
+        border-radius: 3px;
         @media (max-width: 768px) {
             flex-direction: column;
         }
