@@ -44,17 +44,14 @@ Apply downtime schedules to specific monitors by name or to a broad range of mon
 **Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope.
 
 {{< tabs >}}
-
 {{% tab "By Monitor Name" %}}
 
 Search or use the dropdown menu to choose which monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Only monitors that have **ALL selected scopes** are silenced.
 {{% /tab %}}
-
 {{% tab "By Monitor Tags" %}}
 
 Schedule a downtime based on one or more [monitor tags][3]. The maximum number of tags that can be selected for a single downtime is 32. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 {{% /tab %}}
-
 {{% /tabs %}}
 
 #### Downtime scope
