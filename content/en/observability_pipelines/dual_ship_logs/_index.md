@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-As your infrastructure scales, your volume of logs also increases along with the complexity of the data. To optimize how you manage your logs could involve experimenting with different log management tools and routing workflows. Use Observability Pipelines to send your logs to multiple destinations, also known as dual shipping, so that you can evaluate different tools and workflows with minimal disruption to your production environment. 
+As your infrastructure scales, your log volume also increases and so does the complexity of the data. To optimize how you manage your logs, you might need to experiment with different log management tools and routing workflows. Use Observability Pipelines to send your logs to multiple destinations, also known as dual shipping, so that you can evaluate different tools and workflows with minimal disruption to your production environment.
 
 Select the source from which you want to dual ship logs:
 
