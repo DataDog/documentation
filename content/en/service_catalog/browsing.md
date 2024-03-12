@@ -117,6 +117,29 @@ The **Software Delivery tab** provides several ways to assess and improve the pr
 
 To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
 
+## Manage Service-Related Workflows
+
+[Workflow Automation][14] empowers you to streamline and automate end-to-end processes across your teams. It seamlessly integrates with Datadog's robust Service Catalog to enable dynamic and self-service workflows that save time and improve reliability.
+
+### Finding Service Catalog Actions
+
+To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Actions Catalog][15]. Here's how to filter for the actions you need:
+
+1. **Access the Actions Catalog**: Look for the Actions Catalog within your Datadog Workflow Automation environment.
+2. **Search Functionality**: Use the search bar to search for keywords like "Service Catalog" or more specific terms related to desired actions (e.g., "GEt service dependencies").
+
+### Available Service Catalog Actions
+
+Below is a comprehensive list of actions currently available for Service Catalog in Datadog Workflow Automation. Please note that this list may evolve as new actions are added. 
+
+{{< img src="tracing/service_catalog/service-catalog-workflow-actions.png" alt="List of actions currently available for Service Catalog in Datadog Workflow Automation." style="width:100%;" >}}
+
+- **Retrieve Service Information**
+  - "Get service definition" for a single service
+  - "List service definitions" to get all definitions from Datadog Service Catalog
+- **Incident Triage**
+  - "Get service pagerduty oncall"
+  - When integrated with other actions, you can trigger workflows based on critical events (e.g., execute runbooks). 
 
 
 ## Further reading
@@ -137,3 +160,5 @@ To access additional details describing your CI status and static analysis viola
 [11]: /cloud_cost_management/tag_pipelines
 [12]: https://app.datadoghq.com/ci/pipelines
 [13]: https://app.datadoghq.com/ci/static-analysis
+[14]: /service_management/workflows/
+[15]: /service_management/workflows/actions_catalog/
