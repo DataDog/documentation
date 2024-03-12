@@ -52,6 +52,7 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 
 {{< img src="real_user_monitoring/product_analytics/sankey_diagrams/sankey-node-interaction.png" alt="The actions menu of a Sankey diagram node" style="width:90%;" >}}
 
+
 ### Convert the diagram to a funnel
 
 1. From the Sankey diagram page, click the **Build Funnel** button.
@@ -59,6 +60,17 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 3. Click **Create Funnel from Selection**.
 
 {{< img src="real_user_monitoring/product_analytics/sankey_diagrams/sankey-funnel-conversion.png" alt="A Sankey to funnel conversion in process" style="width:90%;" >}}
+
+## Troubleshooting
+
+### The Sankey and the Funnel show me different view counts for the same view.
+
+The algorithm for the Sankey and the Funnel rely on two different computations. You may notice a different in the count of views for the first step of both visualizations. Imagine the use case of building a Funnel and a Sankey that both start with the same view: `/home`
+
+- The Funnel will count all views that went to `/home`
+- The Sankey will only count views to `/home`where was another view that followed it. This means that if a user goes to `/home` and stays on that page OR leaves the app, their sessions would not be counted.
+
+In addition, active sessions are not included in Funnels, while they are included in the Sankey.
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey
 [2]: /real_user_monitoring/explorer/search_syntax/#wildcards
