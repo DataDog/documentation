@@ -80,7 +80,7 @@ To begin profiling applications:
     
     php datadog-setup.php config set -d datadog.service=app-name     \
       -d datadog.env=prod \
-      -d datadog.verison=1.3.2
+      -d datadog.version=1.3.2
     
     php hello.php
     ```
