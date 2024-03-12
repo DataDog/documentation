@@ -1173,7 +1173,7 @@
           "AWS Accounts"
         ],
         "summary": "Delete AWS account",
-        "description": "Delete a registered AWS account.\n\n# Path Parameters\n\n*   **account_id**: *UUID*. AWS account ID. Required.",
+        "description": "Delete a registered AWS account.\n\n### Path Parameters\n\n*   **account_id**: *UUID*. AWS account ID. Required.",
         "operationId": "deleteAwsAccount",
         "responses": {
           "200": {
