@@ -736,7 +736,7 @@ For a sampled out session, all page views and associated telemetry for that sess
 
 ## User tracking consent
 
-To be compliant with GDPR, CCPA and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization.
+To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization.
 
 The `trackingConsent` initialization parameter can be one of the following values:
 
