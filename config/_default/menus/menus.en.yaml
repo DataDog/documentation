@@ -1728,7 +1728,7 @@ main:
     identifier: incidents_clipboard
     weight: 4
   - name: Guides
-    url: service_management/incident_management/guide
+    url: service_management/incident_management/guides
     parent: incidents
     identifier: incidents_guide
     weight: 10
