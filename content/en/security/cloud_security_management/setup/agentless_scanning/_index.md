@@ -26,7 +26,7 @@ For larger accounts with 250 or more hosts, this is the most cost-effective opti
 
 The following diagram illustrates how Agentless scanning works when deployed in a central cloud account:
 
-<img src="/images/security/agentless_scanning/agentless_advanced.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%">
+{{< img src="/security/agentless_scanning/agentless_advanced.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
 
 {{% /tab %}}
 {{% tab "AWS Integration (same account scanning)" %}}
@@ -35,7 +35,7 @@ With this option, a single Agentless scanner is deployed per account. Although t
 
 The following diagram illustrates how Agentless scanning works when deployed within each Cloud account:
 
-<img src="/images/security/agentless_scanning/agentless_quickstart.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%">
+{{< img src="/security/agentless_scanning/agentless_quickstart.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
 
 [3]: https://app.datadoghq.com/security/csm/vm
 [4]: /agent/remote_config/?tab=configurationyamlfile#setup
@@ -62,7 +62,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 1. Follow instructions for [Terraform][4] setup.
 1. Click **Done** to begin scanning. Make sure the template runs successfully before clicking "Done".
 
-<img src="/images/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%">
+{{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
 
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -81,7 +81,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 1. Follow instructions for [Terraform][4] setup.
 1. Click **Done** to begin scanning. Make sure the template runs successfully before clicking "Done".
 
-<img src="/images/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%">
+{{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
@@ -99,7 +99,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 
 When you add a new AWS account, the following screen appears:
 
-<img src="/images/security/agentless_scanning/agentless_scanning_aws.png" alt="Setup page for Agentless scanning for adding a new AWS account with adding a single AWS account selected" width="90%">
+{{< img src="/security/agentless_scanning/agentless_scanning_aws.png" alt="Setup page for Agentless scanning for adding a new AWS account with adding a single AWS account selected" width="90%">}}
 </br>
 
 1. Once you click "Yes" for **Enable Cloud Security Management**, turn on scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
@@ -121,7 +121,7 @@ When you add a new AWS account, the following screen appears:
 1. Go to your AWS console, create a new CloudFormation Stack with [this template][2], and run it.
 1. Click **Done** to begin scanning. Make sure the template runs successfully before clicking "Done".
 
-<img src="/images/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%">
+{{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/cloudformation/main.yaml
