@@ -63,7 +63,7 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 
 ## Troubleshooting
 
-### The Sankey and the Funnel show me different view counts for the same view.
+### The Sankey and the funnel show different view counts for the same view.
 
 The algorithm for the Sankey and the Funnel rely on two different computations. You may notice a different in the count of views for the first step of both visualizations. Imagine the use case of building a Funnel and a Sankey that both start with the same view: `/home`
 
