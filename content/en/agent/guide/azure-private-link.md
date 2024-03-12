@@ -33,7 +33,7 @@ You can configure Azure Private Link to expose a private IP address for each Dat
 
    Select **Next: Virtual Network** to continue.
 6. On the **Create a private endpoint** > **Virtual Network** page, configure the following:
-   - Under **Networking**, select the **Virtual network** and **Subnet** where the endpoint should live. Typically, this is located in the same network as the compute resources that need to access the the private endpoint.
+   - Under **Networking**, select the **Virtual network** and **Subnet** where the endpoint should live. Typically, this is located in the same network as the compute resources that need to access the private endpoint.
    - Under **Private DNS integration**, select **No**.
 
    Select **Next: Tags** to continue.
