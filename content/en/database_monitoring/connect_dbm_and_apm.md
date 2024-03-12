@@ -17,7 +17,7 @@ This guide assumes that you have configured [Database Monitoring][1] and are usi
 ## Before you begin
 
 Supported databases
-: Postgres, MySQL, SQL Server
+: Postgres, MySQL, Oracle, SQL Server
 
 Supported Agent versions
 : 7.46+
@@ -29,7 +29,7 @@ Data privacy
 APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 - `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
-- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for SQL Server applications.
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle and SQL Server applications.
 - `disabled` mode disables propagation and does not send any information from applications.
 
 SQL Server does not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
