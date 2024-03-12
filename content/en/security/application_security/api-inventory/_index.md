@@ -37,6 +37,7 @@ The following library versions are compatible with API Security Inventory. [Remo
 |.NET Fx   | v2.47.0  | Requests and responses |
 |Ruby      | v1.15.0  | Requests only |
 |Golang    | v1.59.0  | Requests only |
+|Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
 
 ## How it works
 
