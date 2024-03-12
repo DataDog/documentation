@@ -1139,7 +1139,7 @@ window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 
 ### User tracking consent
 
-To be compliant with the GDPR, CCPA and similar regulations, the Logs Browser SDK allows to provide the tracking consent value at initialization.
+To be compliant with GDPR, CCPA and similar regulations, the Logs Browser SDK lets you provide the tracking consent value at initialization.
 
 The `trackingConsent` initialization parameter can be one of the following values:
 
@@ -1148,8 +1148,8 @@ The `trackingConsent` initialization parameter can be one of the following value
 
 To change the tracking consent value after the Logs Browser SDK is initialized, use the `setTrackingConsent()` API call. The Logs Browser SDK changes its behavior according to the new value:
 
-* when changed from `"granted"` to `"not-granted"`, the Logs session is stopped, and no data will be sent anymore.
-* when changed from `"not-granted"` to `"granted"`, a new Logs session is be created if no previous session is active, and data collection is be started again.
+* when changed from `"granted"` to `"not-granted"`, the Logs session is stopped, and data is no longer sent to Datadog.
+* when changed from `"not-granted"` to `"granted"`, a new Logs session is created if no previous session is active, and data collection resumes.
 
 This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during Logs Browser SDK initialization or by using `setTrackingConsent()`.
 

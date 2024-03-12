@@ -736,7 +736,7 @@ For a sampled out session, all page views and associated telemetry for that sess
 
 ## User tracking consent
 
-To be compliant with the GDPR, CCPA and similar regulations, the RUM Browser SDK allows to provide the tracking consent value at initialization.
+To be compliant with GDPR, CCPA and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization.
 
 The `trackingConsent` initialization parameter can be one of the following values:
 
@@ -745,8 +745,8 @@ The `trackingConsent` initialization parameter can be one of the following value
 
 To change the tracking consent value after the RUM Browser SDK is initialized, use the `setTrackingConsent()` API call. The RUM Browser SDK changes its behavior according to the new value:
 
-* when changed from `"granted"` to `"not-granted"`, the RUM session is stopped, and no data will be sent anymore.
-* when changed from `"not-granted"` to `"granted"`, a new RUM session is be created if no previous session is active, and data collection is be started again.
+* when changed from `"granted"` to `"not-granted"`, the RUM session is stopped, data is no longer sent to Datadog.
+* when changed from `"not-granted"` to `"granted"`, a new RUM session is created if no previous session is active, and data collection resumes.
 
 This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during RUM Browser SDK initialization or by using `setTrackingConsent()`.
 
