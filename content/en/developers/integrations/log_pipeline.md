@@ -1,6 +1,7 @@
 ---
 aliases:
 - /logs/faq/partner_log_integration
+- /developers/integrations/log_integration/
 further_reading:
 - link: /integrations/#cat-log-collection
   tag: Documentation
@@ -15,24 +16,24 @@ further_reading:
   tag: Documentation
   text: Learn about log pipelines
 kind: documentation
-title: Create a Log Integration
+title: Create a Log Pipeline
 description: Learn how to create a Datadog Log integration.
 ---
 ## Overview
 
-This page walks Technology Partners through creating a Datadog Log integration.
+This page walks Technology Partners through creating a log pipeline.
 
 ## Log integrations
 
-Use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog. 
+Use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
 
 ## Development process
 
 ### Guidelines
 
-When creating a log integration, consider the following best practices:
+When creating a log pipeline, consider the following best practices:
 
-Map your data to Datadog’s standard attributes
+Map your data to Datadog's standard attributes
 : Centralizing logs from various technologies and applications can generate tens or hundreds of different attributes in a Log Management environment. Integrations must rely as much as possible on the [standard naming convention][17].
 
 Set the `source` tag to the integration name.
