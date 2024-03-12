@@ -9,7 +9,7 @@ further_reading:
   tag: 릴리스 노트
   text: 최신 Datadog 인프라스트럭처 모니터링 릴리스를 확인하세요! (앱 로그인 필요).
 - link: https://dtdg.co/fe
-  tag: 기반 활성화
+  tag: 기본 구축
   text: 대화형 세션에 참여하여 인프라스트럭처 모니터링 강화
 kind: 설명서
 title: 인프라스트럭처
@@ -25,8 +25,8 @@ title: 인프라스트럭처
 
 {{< whatsnext desc="이 섹션에는 다음 항목이 포함됩니다.">}}
     {{< nextlink href="/infrastructure/list" >}}<u>인프라스트럭처 리스트</u> - Datadog이 모니터링하는 모든 호스트 목록을 확인하세요.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/hostmap" >}}<u>호스트 및 컨테이너 맵</u> - 색상과 모양별로 이해하기 쉬운 사용자 정의 그룹화, 필터 및 필터를 사용하여 한 화면에서 호스트를 함께 시각화하세요.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/containers" >}}<u>컨테이너 보기</u> - 실시간 가시성을 통해 전체 환경의 컨테이너를 모니터링하세요.{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/hostmap" >}}<u>호스트 및 컨테이너 맵</u> - 색상과 모양으로 이해하기 쉬운 사용자 지정 그룹, 필터 및 메트릭을 통해 호스트를 한 화면에서 함께 시각화하세요.{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/containers" >}}<u>컨테이너 보기</u> - 실시간 가시성을 통해 환경 전체의 컨테이너를 모니터링하세요.{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process" >}}<u>프로세스 보기</u> - 배포에서 가장 세부적인 요소를 실시간으로 확인하여 프로세스를 모니터링하세요.{{< /nextlink >}}
 
 {{< /whatsnext >}}
