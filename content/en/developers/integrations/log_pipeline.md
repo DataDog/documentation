@@ -100,8 +100,6 @@ To add a facet or measure:
 4. For a measure, to define the unit, click **Advanced options**. Select the unit based on what the attribute represents.
 5. Click **Add**.
 
-**Note:** You do not need to create facets for standard attributes. Facets for standard attributes will be added automatically by Datadog when the log pipeline is published. See the [default standard attribute list][6] for the standard Datadog attributes under their specific groups.
-
 To easily navigate the facet list, facets are grouped together. For fields specific to the integration logs, create a single group with the same name as the `source` tag. 
 
 1. In the log panel, click the Cog icon next to the attribute that you want in the new group.
@@ -110,8 +108,16 @@ To easily navigate the facet list, facets are grouped together. For fields speci
 4. In the **Group** field, enter the name and a description of the new group, and select **New group**.
 5. Click **Update**.
 
+**Guidelines**
+- Before creating a new facet for an integration, review if the attribute should be remapped to a [standard attribute][6] instead. Facets for standard attributes are added automatically by Datadog when the log pipeline is published.
+- Not all attributes are meant to be used as a facet. Non-faceted attributes are still searchable. The need for facets in integrations is focused on three things:
+1. Facets that are measures allow for associated units with an attribute. For example an attribute "response_time" could have a unit of "ms" or "s". 
+2. Facets provide a straightforward filtering interface for logs. Each facet is listed under the group heading and usable for filtering.
+3. Facets allow for attributes with low readability to be renamed with a label that is easier to understand. For example: @deviceCPUper → Device CPU Utilization Percentage
+
 **Requirements:**
-- Use standard attributes as much as possible. Otherwise, use a specific namespace (such as the integration name) to avoid conflict, because facets are shared across Datadog.
+- Use standard attributes as much as possible.
+- All facets that are not mapped to reserved or standard attributes should be namespaced with the integration name.
 - A facet has a source. It can be `log` for attributes or `tag` for tags.
 - A facet has a type (String, Boolean, Double or Integer) which matches the type of the attribute. If the type of the value of the attribute does not match the one of the facet, the attribute is not indexed with the facet.
 - Double and Integer facets can have a unit. Units are composed of a family (such as time or bytes) and of a name (such as millisecond or gibibyte).
@@ -155,7 +161,7 @@ Once validations pass, Datadog creates and deploys the new log integration asset
 [3]: https://app.datadoghq.com/logs/pipelines
 [4]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-date-remapper
 [5]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[6]: https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#default-standard-attribute-list
+[6]: https://docs.datadoghq.com/standard-attributes?product=log+management
 [7]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
 [8]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#grok-parser
 [9]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-message-remapper
