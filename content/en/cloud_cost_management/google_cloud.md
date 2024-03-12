@@ -50,7 +50,7 @@ The following permissions allow Datadog to access and transfer the billing expor
 
 - Enable the [BigQuery Data Transfer Service][5].
   1. Open the BigQuery Data Transfer API page in the API library.
-  2. From the dropdown menu, select the appropriate project.
+  2. From the dropdown menu, select the project that contains the service account.
   3. Click the ENABLE button.
 
   **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.

@@ -173,11 +173,25 @@
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
+  "CreateCSMThreatsAgentRule": [
+    {
+      "group": "cloud_workload_security",
+      "suffix": "",
+      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "cloud_workload_security",
       "suffix": "",
       "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentRule": [
+    {
+      "group": "cloud_workload_security",
+      "suffix": "",
+      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
