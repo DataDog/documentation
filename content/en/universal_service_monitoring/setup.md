@@ -767,7 +767,7 @@ Universal Service Monitoring is available in <strong>beta</strong> to monitor TL
 </div>
 
 **Note**:
-* Go HTTPs servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta, please reach to your account manager for further details
+* Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach to your account manager for further details
 * Requires Agent version 7.51 or greater.
 
 {{< tabs >}}
@@ -791,7 +791,7 @@ DD_SERVICE_MONITORING_CONFIG_TLS_GO_ENABLED=true
 ```
 {{% /tab %}}
 
-{{% tab "Helm Chart" %}}
+{{% tab "Helm" %}}
 
 ```conf
 agents:
@@ -835,7 +835,7 @@ DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED=true
 ```
 {{% /tab %}}
 
-{{% tab "Helm Chart" %}}
+{{% tab "Helm" %}}
 
 ```conf
 agents:
