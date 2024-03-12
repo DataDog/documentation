@@ -363,5 +363,8 @@
   },
   "source" : {
     "other": "Source"
+  },
+  "available_for": {
+    "other": "Available for"
   }
 }

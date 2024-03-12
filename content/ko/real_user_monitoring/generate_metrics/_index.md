@@ -7,7 +7,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/
   tag: 설명서
   text: RUM 탐색기에서 쿼리를 만드는 방법 알아보기
-- link: /real_user_monitoring/explorer/search/#event-types/
+- link: /real_user_monitoring/explorer/search/#event-types
   tag: 설명서
   text: RUM 이벤트 유형에 대해 알아보기
 - link: /logs/log_configuration/logs_to_metrics/
@@ -106,7 +106,7 @@ RUM 기반 커스텀 메트릭이 **Custom RUM Metrics** 아래 목록에 나타
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration
+[1]: /ko/real_user_monitoring/guide/sampling-browser-plans
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ko/metrics/custom_metrics/
 [4]: https://app.datadoghq.com/rum/generate-metrics
