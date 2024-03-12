@@ -246,11 +246,11 @@
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of test events from your organization."
   },
   "ListCIAppTestEvents": {
-    "description": "List endpoint returns CI Visibility test events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
+    "description": "List endpoint returns CI Visibility test events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
     "summary": "Get a list of tests events"
   },
   "SearchCIAppTestEvents": {
-    "description": "List endpoint returns CI Visibility test events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "description": "List endpoint returns CI Visibility test events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search tests events",
     "request_description": "",
     "request_schema_description": "The request for a tests search."

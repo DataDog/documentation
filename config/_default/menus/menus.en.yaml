@@ -796,9 +796,9 @@ main:
     url: developers/integrations/api_integration/
     parent: dev_tools_integrations
     weight: 402
-  - name: Create a Log Integration
+  - name: Create a Log Pipeline
     identifier: dev_tools_integrations_log
-    url: developers/integrations/log_integration/
+    url: developers/integrations/log_pipeline/
     parent: dev_tools_integrations
     weight: 403
   - name: Integration Assets Reference
