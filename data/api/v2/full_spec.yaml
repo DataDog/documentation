@@ -34602,6 +34602,7 @@ paths:
         type: idempotent
   /api/v2/services:
     get:
+      deprecated: true
       description: Get all incident services uploaded for the requesting user's organization.
         If the `include[users]` query parameter is provided, the included attribute
         will contain the users related to these incident services.
@@ -34639,10 +34640,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
     post:
+      deprecated: true
       description: Creates a new incident service.
       operationId: CreateIncidentService
       requestBody:
@@ -34692,9 +34692,7 @@ paths:
         - name: service_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/services/definitions:
     get:
       description: Get a list of all service definitions from the Datadog Service
@@ -34852,6 +34850,7 @@ paths:
         type: safe
   /api/v2/services/{service_id}:
     delete:
+      deprecated: true
       description: Deletes an existing incident service.
       operationId: DeleteIncidentService
       parameters:
@@ -34880,10 +34879,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
     get:
+      deprecated: true
       description: 'Get details of an incident service. If the `include[users]` query
         parameter is provided,
 
@@ -34920,10 +34918,9 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
     patch:
+      deprecated: true
       description: Updates an existing incident service. Only provide the attributes
         which should be updated as this request is a partial update.
       operationId: UpdateIncidentService
@@ -34965,9 +34962,7 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
