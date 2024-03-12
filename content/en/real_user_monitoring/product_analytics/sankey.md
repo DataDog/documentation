@@ -67,8 +67,8 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 
 The algorithm for the Sankey diagram and the funnel rely on two different computations. You may notice a difference in the count of views for the first step of both visualizations. Imagine the use case of building a funnel and a Sankey diagram that both start with the same view: `/home`
 
-- The Funnel will count all views that went to `/home`
-- The Sankey will only count views to `/home`where was another view that followed it. This means that if a user goes to `/home` and stays on that page OR leaves the app, their sessions would not be counted.
+- The funnel counts all views that went to `/home`
+- The Sankey diagram only counts views to `/home` where another view follows. If a user goes to `/home` and stays on that page or leaves the app, the Sankey diagram does not include their sessions.
 
 In addition, active sessions are not included in Funnels, while they are included in the Sankey.
 
