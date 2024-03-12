@@ -10,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_inspector/
 draft: false
 git_integration_title: amazon_inspector
 has_logo: true
-integration_id: amazon-inspector
+integration_id: ''
 integration_title: Amazon Inspector
 integration_version: ''
 is_public: true

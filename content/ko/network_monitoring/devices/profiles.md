@@ -12,6 +12,10 @@ kind: 설명서
 title: NDM 프로필
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">네트워크 기기 모니터링은 이 사이트에서 지원되지 않습니다.</div>
+{{< /site-region >}}
+
 ## 개요
 
 네트워크 장치 모니터링은 프로필을 사용하여 수집할 메트릭과 관련 태그를 Datadog 에이전트에 알려줍니다. 프로필은 장치와 연결된 OID 컬렉션입니다.

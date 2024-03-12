@@ -68,7 +68,7 @@ providers:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-Datadog Operator v1.0.0 or greater is required. 
+Datadog Operator v1.0.0 or greater is required.
 
 To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
 
@@ -700,7 +700,7 @@ For optional HTTPS support, also add:
 
 If you use load balancers with your services, enable additional cloud integrations to allow Universal Service Monitoring to discover cloud-managed entities:
 
-1. Install the [AWS Integration][2] for visibility in AWS Load Balancer. 
+1. Install the [AWS Integration][2] for visibility in AWS Load Balancer.
 2. Enable ENI and EC2 metric collection.
 3. Add the following tags to each load balancer:
    ```conf
@@ -760,6 +760,51 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 {{< /tabs >}}
 
+### Go TLS Monitoring
+
+<div class="alert alert-info">
+Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
+</div>
+
+**Note**:
+* Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach to your account manager for further details
+* Requires Agent version 7.51 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  tls:
+    go:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_TLS_GO_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_TLS_GO_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 ### Istio Monitoring
 
@@ -790,7 +835,7 @@ DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED=true
 ```
 {{% /tab %}}
 
-{{% tab "Helm Chart" %}}
+{{% tab "Helm" %}}
 
 ```conf
 agents:

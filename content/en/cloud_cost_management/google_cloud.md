@@ -1,8 +1,6 @@
 ---
 title: Google Cloud
 kind: documentation
-is_beta: true
-private: true
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
@@ -19,10 +17,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
 {{< /site-region >}}
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-Cloud Cost for Google Cloud is in public beta
-{{< /beta-callout >}}
 
 ## Overview
 
@@ -56,7 +50,7 @@ The following permissions allow Datadog to access and transfer the billing expor
 
 - Enable the [BigQuery Data Transfer Service][5].
   1. Open the BigQuery Data Transfer API page in the API library.
-  2. From the dropdown menu, select the appropriate project.
+  2. From the dropdown menu, select the project that contains the service account.
   3. Click the ENABLE button.
 
   **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
@@ -133,7 +127,11 @@ You can visualize your ingested data using the following cost types:
 
 | Cost Type | Description |
 | ----------| ----------------------------------|
-| `gcp.cost.usage_date` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
+| `gcp.cost.amortized` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
+| `gcp.cost.amortized.shared.resources.allocated` | All of your GCP amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][15].|
+
+### Container allocation
+**Container allocation** metrics contain all of the same costs as the GCP metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][15] for more details.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -152,3 +150,4 @@ You can visualize your ingested data using the following cost types:
 [12]: /integrations/google_cloud_platform/
 [13]: /cloud_cost_management/google_cloud/#provide-service-account-necessary-permissions
 [14]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
+[15]: https://docs.datadoghq.com/cloud_cost_management/container_cost_allocation/
