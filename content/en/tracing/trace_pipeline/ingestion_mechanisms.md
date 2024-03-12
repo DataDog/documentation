@@ -141,7 +141,7 @@ For example, to send 50% of the traces for the service named `my-service` and 10
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+@env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
 ```
 
 Starting from version [v1.60.0][2], for Go applications, set by-resource and by-tags sampling rules with the `DD_TRACE_SAMPLING_RULES` environment variable.
@@ -190,7 +190,7 @@ For example, to send 50% of the traces for the service named `my-service` and 10
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+@env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
 ```
 
 Read more about sampling controls in the [PHP tracing library documentation][1].
@@ -207,7 +207,7 @@ For example, to send 50% of the traces for the service named `my-service` and 10
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+@env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
 ```
 
 C++ does not provide integrations for out-of-the-box instrumentation, but it's used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][1].
@@ -221,7 +221,7 @@ For example, to send 50% of the traces for the service named `my-service` and 10
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+@env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
 ```
 
 <div class="alert alert-info"><strong>Beta</strong>: Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
