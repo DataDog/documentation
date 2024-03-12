@@ -3,12 +3,12 @@ title: Integrate Statuspage with Datadog Incident Management
 kind: Guide
 disable_toc: false
 further_reading:
-- link: "integrations/statuspage/"
+- link: "integrations/jira/"
   tag: "Documentation"
-  text: "Install the Statuspage Integration"
-- link: "https://app.datadoghq.com/integrations/statuspage"
+  text: "Install the Jira Integration"
+- link: "https://app.datadoghq.com/integrations/jira"
   tag: "In-App"
-  text: "In-app Statuspage integration tile"
+  text: "In-app Jira integration tile"
 - link: "monitors/guide/integrate-monitors-with-statuspage/"
   tag: "Guide"
   text: "Integrating Monitors With Statuspage"
@@ -19,14 +19,12 @@ further_reading:
 
 ## Overview
 
-Atlassian's Statuspage conveys real-time status of an organization's services on a webpage. Enable the integration to automatically link and update your Statuspage incident within Datadog's Incident Management platform. As an Incident Commander or Responder, you can:
-- Send customer facing messages with accurate and up to date information
-- Update Statuspage while investigating an incident without leaving the Datadog platform
-- Resolve both Datadog incidents and linked Statuspage at the same time
+Atlassian's Jira 
+
 
 ## Prerequisites
 
-Install the integration through the [Statuspage Integration tile][1]. For more information, see the [Statuspage integration][2] documentation.
+Install the integration through the [Jira Integration tile][1]. For more information, see the [Statuspage integration][2] documentation.
 
 ## Setup
 
@@ -56,7 +54,7 @@ After a Statuspage is added to an incident, you can continue updating the Status
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/integrations/statuspage
+[1]: https://app.datadoghq.com/integrations/jira
 [2]: /integrations/statuspage/
 [3]: https://app.datadoghq.com/incidents/settings#Integrations
 [4]: https://app.datadoghq.com/incidents
