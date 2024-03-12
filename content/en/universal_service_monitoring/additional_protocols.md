@@ -29,9 +29,6 @@ Universal Service Monitoring can discover the following third-party API endpoint
 
 Request access and ensure your Datadog Agent is upgraded to at least version 7.49.0 to gain access to the following features.
 
-<div class="alert alert-info"><p>The following support does <strong>not</strong> include:
-<ul><li>Monitoring services that use gRPC/HTTP2</li></ul></p></div>
-
 gRPC and HTTP2
 : Universal Service Monitoring decodes gRPC and HTTP2 protocols.
 
