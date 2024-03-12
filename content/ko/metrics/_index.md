@@ -16,17 +16,17 @@ title: 메트릭
 이 섹션에서는 Datadog 메트릭에 대한 소개 및 메트릭이 유용한 이유에 대해 설명합니다. 구체적으로 다음 주제가 포함되어 있습니다: 
 
 {{< whatsnext desc="Datadog에 메트릭 제출하기" >}}
-    {{< nextlink href="/metrics/custom_metrics">}}<u>Submit Custom Metrics</u> - 커스텀 메트릭이 무엇인지, 어떻게 제출하는 지에 대해 알아보세요.{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>Send OpenTelemetry Metrics</u> - Datadog Agent 또는 OpenTelemetry Collector를 설정하세요.{{< /nextlink >}}
-    {{< nextlink href="/metrics/types" >}}<u>Metrics Types</u> - Datadog에 제출할 수 있는 메트릭 유형입니다.{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>Distribution Metrics</u> - 분포 메트릭과 전역적으로 정확한 백분위수에 대해 알아보세요.{{< /nextlink >}}
-    {{< nextlink href="/metrics/units" >}}<u>Metrics Units</u> - 메트릭과 연결될 수 있는 단위에 대해 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics">}}<u>커스텀 메트릭 제출하기</u> - 커스텀 메트릭이 무엇인지, 어떻게 제출하는 지에 대해 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>OpenTelemetry 메트릭 전송하기</u> - Datadog Agent 또는 OpenTelemetry Collector를 설정하세요.{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>메트릭 유형</u> - Datadog에 제출할 수 있는 메트릭 유형입니다.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>분포 메트릭</u> - 분포 메트릭과 전역적으로 정확한 백분위수에 대해 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="/metrics/units" >}}<u>메트릭 단위</u> - 메트릭과 연결될 수 있는 단위에 대해 알아보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="메트릭 시각화 및 쿼리" >}}
-    {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - 모든 메트릭을 탐색하고 분석하세요.{{< /nextlink >}}
-    {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - 적극적으로 보고하는 Datadog 메트릭에 대해 알아보세요.{{< /nextlink >}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - 데이터를 필터링하여 반환되는 메트릭의 범위를 좁힙니다.{{< /nextlink >}}
+    {{< nextlink href="/metrics/explorer" >}}<u>메트릭 탐색기</u> - 모든 메트릭을 탐색하고 분석하세요.{{< /nextlink >}}
+    {{< nextlink href="/metrics/summary" >}}<u>메트릭 요약</u> - 적극적으로 보고하는 Datadog 메트릭에 대해 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>고급 필터링</u> - 데이터를 필터링하여 반환되는 메트릭의 범위를 좁힙니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="커스텀 메트릭 볼륨 및 비용에 대한 이해와 관리" >}}
@@ -114,8 +114,8 @@ Datadog은 사용자가 메트릭을 쉽게 그래프로 표시하고 나타낼 
 메트릭 쿼리는 시작하기 위한 동일한 두 가지 평가 단계, 즉 시간 집계와 공간 집계로 구성됩니다. 자세한 내용은 [메트릭 쿼리의 구조][6]를 참조하세요.
 
 {{< whatsnext desc="Metrics 사용자가 유용하게 여기는 두 가지 시각화 기능:">}}
-    {{< nextlink href="dashboards/widgets/query_value/" >}}<u>Query Value Widget</u> - 두 단계의 결과를 단일 값으로 줄입니다.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>Top List</u> - 그룹당 단일 값을 반환합니다.{{< /nextlink >}}
+    {{< nextlink href="dashboards/widgets/query_value/" >}}<u>쿼리 값 위젯</u> - 두 단계의 결과를 단일 값으로 줄입니다.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>상위 목록</u> - 그룹당 단일 값을 반환합니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 추가적으로 Datadog는 시각화를 위한 많은 유형의 그래프와 위젯을 보유하고 있습니다. Datadog의 [메트릭 그래프에 대한 블로그 시리즈]에서 자세히 알아볼 수 있습니다.
