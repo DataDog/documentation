@@ -27,7 +27,7 @@ Make sure you have a [Datadog API Key][6] and are using a programming language [
 
 ### Dockerfile
 
-Datadog publishes new releases of the serverless-init container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
+Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
 
 | dockerhub.io | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
