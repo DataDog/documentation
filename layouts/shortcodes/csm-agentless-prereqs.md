@@ -1,23 +1,21 @@
 
 ## Prerequisites
 
-To deploy Agentless Scanning in your AWS environment, in addition to having [Cloud Security Management][3] enabled, complete the following steps:
+To deploy Agentless scanning in your AWS environment, in addition to having [Cloud Security Management][3] enabled, complete the following steps:
 
 ### Enable Remote Configuration
 
-[Remote Configuration][1] is required to allow Datadog to send information to agentless scanners, such as which EC2 compute instances should be scanned. To enable remote configuration for your organization, navigate to the AWS Integration tile and select the account for which you want to enable Agentless Scanning.
-
-### Enable API keys for Remote Configuration
-
-After configuring Remote Configuration for Agentless Scanning, Remote Configuration needs to be enabled for the API keys configured for Agentless Scanning. See [Enabling Remote Configuration][2] for more information.
+[Remote Configuration][1] is required to allow Datadog to send information to Agentless scanners, such as which cloud resources should be scanned. To enable Remote Configuration for your organization, navigate to your Organization Settings and follow [steps 1-4 outlined here.][2]
 
 **Note**: Only the CSM-enabled AWS Accounts that have scanners deployed need Remote-config enabled API keys.
 
 ### Permissions
 
+**Note**: The following are permissions required for Agentless scanning, and are applied automatically as a part of the installation process.
+
 ####  IAM permissions
 
-The Agentless Scanning instance requires the following IAM permissions to scan for resources:
+The Agentless scanning instance requires the following IAM permissions to scan for resources:
 
 ```
 ec2:DescribeVolumes
@@ -33,7 +31,7 @@ ebs:GetSnapshotBlock
 
 #### Lambda permissions
 
-The Agentless Scanning instance requires the following Lambda permissions to scan for resources:
+The Agentless scanning instance requires the following Lambda permissions to scan for resources:
 
 Permissions required:
 ```
@@ -42,5 +40,5 @@ lambda:GetFunction
 
 
 [1]: /agent/remote_config/?tab=configurationyamlfile
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /agent/remote_config/?tab=configurationyamlfile#setup
 [3]: /security/cloud_security_management/setup

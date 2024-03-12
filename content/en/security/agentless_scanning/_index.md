@@ -89,7 +89,7 @@ As a result, Agentless Scanning excludes resources that have the Datadog Agent i
 
 When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends to setup [Agentless Scanning with Terraform][4] as the default template, as this also avoids cross-region networking. 
 
-To establish estimates on scanner costs, reach out to your [Datadog Sales][6] or [Customer Success][7] representative.
+To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][7]
 
 
 ## Further reading
@@ -101,6 +101,5 @@ To establish estimates on scanner costs, reach out to your [Datadog Sales][6] or
 [3]: /security/cloud_security_management/setup/agentless_scanning/#permissions
 [4]: /security/cloud_security_management/setup/agentless_scanning#terraform
 [5]: https://cyclonedx.org/
-[6]: mailto:sales@datadoghq.com
 [7]: mailto:success@datadoghq.com
 [8]: https://www.cisa.gov/sbom
