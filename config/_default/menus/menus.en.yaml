@@ -4633,7 +4633,7 @@ main:
     identifier: rum_session_replay_mobile
     weight: 302
   - name: Setup
-    url: real_user_monitoring/session_replay/mobile
+    url: real_user_monitoring/session_replay/mobile/setup_and_configuration
     parent: rum_session_replay_mobile
     identifier: rum_session_replay_mobile_setup
     weight: 101
