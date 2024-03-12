@@ -20,7 +20,7 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 | Automatic user activity event tracking | 2.38.0 for Node.js 12+, or 3.25.0 for Node.js 14+, or 4.4.0 for Node.js 16+ |
 | API Security | 3.51.0 for Node.js 14+, or 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+ |
 
-The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.0.
+The minimum tracer version to get all supported ASM capabilities for Node.js is 3.51.0.
 
 
 **Note**:

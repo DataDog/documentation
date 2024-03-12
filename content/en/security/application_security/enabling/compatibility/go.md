@@ -20,7 +20,7 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | Code Security (beta) | not supported |
 | Automatic user activity event tracking | not supported |
 
-The minimum tracer version to get all supported ASM capabilities for Go is 1.50.0.
+The minimum tracer version to get all supported ASM capabilities for Go is 1.59.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.
 

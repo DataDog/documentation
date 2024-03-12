@@ -20,7 +20,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 | Code Security (beta) | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 
-The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
+The minimum tracer version to get all supported ASM capabilities for Java is 1.31.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
