@@ -1734,7 +1734,7 @@ The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows
 : Optional<br/>
 **Type**: `"granted"` or `"not-granted"`<br/>
 **Default**: `"granted"`<br/>
-Whether the user granted their tracking consent. See [User Tracking Consent][27].
+Set the initial user tracking consent state. See [User Tracking Consent][27].
 
 `trackViewsManually`
 : Optional<br/>
