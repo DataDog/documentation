@@ -593,7 +593,7 @@ If you are using the Datadog Exporter to also send OpenTelemetry traces to Datad
 
 {{< img src="logs/log_collection/logs_traces_correlation.png" alt="The trace panel showing a list of logs correlated with the trace" style="width:70%;">}}
 
-### Host name resolution
+### Hostname resolution
 
 See [Mapping OpenTelemetry Semantic Conventions to Hostnames][28] to understand how the hostname is resolved.
 
