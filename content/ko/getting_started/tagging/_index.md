@@ -19,7 +19,7 @@ further_reading:
   text: 태그 사용법 알아보기
 - link: https://dtdg.co/fe
   tag: 기반 활성화
-  text: 인터랙티브 세션에 참여하여 Datadog을 사용한 효과적인 태그 지정 방법에 대해 알아보세요.
+  text: 인터랙티브 세션에 참여하여 Datadog을 통한 효과적인 태그 지정에 대해 알아보세요.
 kind: 설명서
 title: 태그 시작하기
 ---
