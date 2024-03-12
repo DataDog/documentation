@@ -70,7 +70,7 @@ The algorithm for the Sankey diagram and the funnel rely on two different comput
 - The funnel counts all views that went to `/home`
 - The Sankey diagram only counts views to `/home` where another view follows. If a user goes to `/home` and stays on that page or leaves the app, the Sankey diagram does not include their sessions.
 
-In addition, active sessions are not included in Funnels, while they are included in the Sankey.
+In addition, funnels do not include active sessions, while Sankey diagrams do include active sessions.
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey
 [2]: /real_user_monitoring/explorer/search_syntax/#wildcards
