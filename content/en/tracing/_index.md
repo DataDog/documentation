@@ -46,36 +46,32 @@ Datadog Application Performance Monitoring (APM) provides deep visibility into y
 
 For an introduction to terminology used in Datadog APM, see [APM Terms and Concepts][1].
 
-## Getting started
+## Single Step Instrumentation
 
-<div class="alert alert-info"><strong>Simplify your setup!</strong> Install the Agent and instrument your application in one step with <a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a>.</div>
+The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
-{{< whatsnext desc="To get started, you need to:" >}}
-    {{< nextlink href="/agent/" >}} 1. Install the Datadog Agent.{{< /nextlink >}}
-    {{< nextlink href="/tracing/trace_collection/" >}} 2. Instrument your application.{{< /nextlink >}}
-    {{< nextlink href="/tracing/trace_explorer/" >}} 3. Explore your application's observability data in Datadog.{{< /nextlink >}}
-{{< /whatsnext >}}
+For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries. To learn more, read [Application Instrumentation][2].
 
 ## Use cases
 
-Discover how Datadog APM can help support your specific use cases:
+Discover some ways Datadog APM can help support your use cases:
 
 | You want to...| How Datadog APM can help |
 | ----------- | ----------- |
-| Understand how requests flow through your system. | Use the [Trace Explorer][21] to visualize and analyze end-to-end traces across distributed services. |
-| Monitor service health and performance of individual services. | Use the [service page][26] to assess service health by analyzing performance metrics, tracking deployments, identifying problematic resources. |
+| Understand how requests flow through your system. | [Trace Explorer][21] visualizes and analyzes end-to-end traces across distributed services. |
+| Monitor service health and performance of individual services. | The [service page][26] helps you assess service health by analyzing performance metrics, tracking deployments, identifying problematic resources. |
 | Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give more context to your data for more comprehensive analysis. |
-| Control how data flows into Datadog. | Use [Ingestion Controls][6] to adjust service-level ingestion configuration and sampling rates. Use [retention filters][7] to control which spans are retained for 15 days. |
+| Control how data flows into Datadog. | [Ingestion Controls][6] adjust service-level ingestion configuration and sampling rates. [Retention filters][7] controls which spans are retained for 15 days. |
 
 ### Trace Explorer
 
-Use the [Trace Explorer][21] to search and analyze your traces in real-time. Identify performance bottlenecks, troubleshoot errors, and pivot to related logs and metrics to understand the full context around any issue.
+The [Trace Explorer][21] allows you search and analyze your traces in real-time. Identify performance bottlenecks, troubleshoot errors, and pivot to related logs and metrics to understand the full context around any issue.
 
 {{< img src="/tracing/trace_explorer/trace_explorer.png" alt="Trace explorer view." style="width:100%;" >}}
 
 ### Service page
 
-[Monitor service performance][15] and compare between versions during deployments.
+The [service page][26] helps you monitor service performance and [compare between versions during deployments][15].
 
 {{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
 
@@ -127,3 +123,4 @@ Datadog APM provides tools to manage the volume and retention of your trace data
 [24]: /tracing/metrics/metrics_namespace/
 [25]: /tracing/metrics/runtime_metrics/
 [26]: /tracing/services/service_page/
+[27]: /tracing/trace_collection/single-step-apm/
