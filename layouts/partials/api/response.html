@@ -8,7 +8,7 @@
 
 <h3 class="mt-3 mb-2">{{ i18n "response" }}</h3>
 
-<ul class="nav nav-tabs border-none response-toggle" style="z-index: 10;">
+<ul class="nav nav-tabs border-none response-toggle px-0" style="z-index: 10;">
     {{ $count := 0}}
     {{ range $response_code, $response := $responses }}
         <li class="nav-item">
@@ -95,7 +95,7 @@
                               {{ end }}
                             {{ end }}
 
-                            <ul class="nav nav-tabs border-none response-toggle">
+                            <ul class="nav nav-tabs border-none response-toggle px-0">
                                 <li class="nav-item">
                                     <a class="nav-link me-1  js-model-link active"  href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
                                 </li>
