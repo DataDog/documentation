@@ -24181,8 +24181,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events:
     get:
-      description: 'List endpoint returns CI Visibility test events that match a [log
-        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+      description: 'List endpoint returns CI Visibility test events that match a [search
+        query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -24268,8 +24268,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events/search:
     post:
-      description: 'List endpoint returns CI Visibility test events that match a [log
-        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+      description: 'List endpoint returns CI Visibility test events that match a [search
+        query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
