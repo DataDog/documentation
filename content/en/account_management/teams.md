@@ -146,7 +146,7 @@ To enforce a strict membership model, configure your default team settings so **
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
-[3]: /dashboards/#edit-details
+[3]: /dashboards/#dashboard-details
 [4]: /service_management/incident_management/incident_details#overview-section
 [5]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [6]: /security/misconfigurations/resource_catalog
