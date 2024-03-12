@@ -1727,6 +1727,11 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 4
+  - name: Guides
+    url: service_management/incident_management/guide
+    parent: incidents
+    identifier: incidents_guide
+    weight: 10
   - name: Mobile Application
     url: service_management/mobile/
     identifier: mobile
