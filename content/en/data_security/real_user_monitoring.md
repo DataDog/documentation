@@ -10,7 +10,7 @@ further_reading:
 - link: "/data_security/synthetics/"
   tag: "Documentation"
   text: "Synthetic Monitoring Data Security"
-- link: "/real_user_monitoring/session_replay/privacy_options/"
+- link: "/real_user_monitoring/session_replay/browser/privacy_options/"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
 - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
@@ -133,7 +133,7 @@ See [privacy options specific to Session Replay][12].
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
 [11]: /sensitive_data_scanner/
-[12]: /real_user_monitoring/session_replay/privacy_options
+[12]: /real_user_monitoring/session_replay/browser/privacy_options
 [13]: https://www.datadoghq.com/privacy/
 [14]: /real_user_monitoring/explorer/search/
 [15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm

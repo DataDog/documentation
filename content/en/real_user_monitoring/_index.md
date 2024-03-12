@@ -179,6 +179,6 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [9]: /real_user_monitoring/android/mobile_vitals/
 [10]: /real_user_monitoring/ios/web_view_tracking/
 [11]: /real_user_monitoring/android/web_view_tracking/
-[12]: /real_user_monitoring/session_replay/
-[13]: /real_user_monitoring/session_replay/privacy_options/
-[14]: /real_user_monitoring/session_replay/developer_tools/
+[12]: /real_user_monitoring/session_replay/browser/
+[13]: /real_user_monitoring/session_replay/browser/privacy_options/
+[14]: /real_user_monitoring/session_replay/browser/developer_tools/
