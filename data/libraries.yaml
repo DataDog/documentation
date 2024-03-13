@@ -229,6 +229,12 @@ Classic:
       official: true
       dogstatsd: true
       authors: Datadog
+  - Rust:
+    - name: datadog-statsd
+      link: https://github.com/minato128/rust-dogstatsd
+      dogstatsd: true
+      notes: A fork of markstory/rust-statsd with additional Datadog features by minato128.
+      authors: minato128
   - Scala:
     - name: datadog-scala
       link: https://github.com/gphat/datadog-scala
