@@ -73,8 +73,10 @@
                             {{ with $json }}
                               {{/* we have json */}}
                             {{ else }}
-                              {{ with (index $examples $response.description) }}
-                                {{ $json = (highlight (.value | jsonify (dict "indent" "  ")) "json" "") }}
+                              {{ with $examples }}
+                                {{ range . }}
+                                  {{ $json = (highlight (.value | jsonify (dict "indent" "  ")) "json" "") }}
+                                {{ end }}
                               {{ end }}
                             {{ end }}
                             {{ with $html }}
