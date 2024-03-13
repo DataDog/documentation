@@ -26,7 +26,7 @@ further_reading:
 
 Cloud-based applications generate massive amounts of data, which can be overwhelming for your organization as it scales. Observability costs become a significant budget item but core observability teams lack visibility into what is truly valuable to each individual engineering team. Concurrently, individual teams may have limited insights into the costs of the metrics and tags they're submitting; teams are less incentivized to be proactive in helping manage this growth.
 
-Datadog's [Metrics Volume Management page][2] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. If used with [Metrics without Limits™][2], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
+Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. If used with [Metrics without Limits™][1], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
 
 ## Search, filter, and sort
 
@@ -65,7 +65,7 @@ Compare metric cardinality to understand:
 To view your spiking metric's cardinality over time:
 1. Select a timeframe in the top right hand corner (the recommended timeframe is **Past 1 Day** or **Past 4 Weeks**).
 2. Find the metric you want to compare and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
-3. (Optional) Create a Change monitor for `% change` to proactively alert on this spiking metric. For more information, see the [Change monitor][5] guide.
+3. (Optional) Create a Change monitor for `% change` to proactively alert on this spiking metric. For more information, see the [Change monitor][2] guide.
 
 ## Identify unqueried metrics
 
@@ -75,13 +75,13 @@ To effectively reduce costs with Metrics without Limits, identify your highest v
 
 ## Reduce metric volume and cost
 
-After you identify unqueried metrics, you can eliminate the volume and cost of these metric names by using [Metrics without Limits™][1]:
+After you identify unqueried metrics, you can eliminate the volume and cost of these metric names by using [Metrics without Limits™][3]:
 
 1. Click on the metric name to open its details side panel.
 2. Click the **Manage Tags** button to open the tag configuration modal.
 3. Select **Include tags…** and set an empty allowlist of tags.
 
-You can also click the **Configure Metrics** dropdown and select **Manage Tags** to open the [Metrics without Limits™ Tag configuration modal][10]. 
+You can also click the **Configure Metrics** dropdown and select **Manage Tags** to open the [Metrics without Limits™ Tag configuration modal][4]. 
 
 {{< img src="metrics/volume/configure_metrics.png" alt="Configure Metric dropdown at the top of the page highlighting the Manage tags option" style="width:100%;" >}}
 
@@ -110,9 +110,7 @@ To view a metric's related assets:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/metrics-without-limits
-[2]: https://app.datadoghq.com/metric/volume
-[3]: https://app.datadoghq.com/billing/usage
-[4]: https://app.datadoghq.com/billing/usage-attribution?view=table
-[5]: /monitors/guide/change-alert/
-[10]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
+[1]: https://app.datadoghq.com/metric/volume
+[2]: /monitors/guide/change-alert/
+[3]: /metrics/metrics-without-limits
+[4]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
