@@ -13,7 +13,7 @@ algolia:
   tags: ['event stream', 'log stream']
 ---
 
-The list widget gives you the option to display a list of events and issues, which can come from a variety of sources such as Logs, RUM, or Events. Search and query across sources to narrow down to the events you want the widget to highlight and display.
+The list widget displays a list of events and issues, which can come from a variety of sources such as Logs, RUM, or Events. Search and query across sources to narrow down the events you want the widget to highlight and display.
 
 _List widget displaying error tracking issues_
 

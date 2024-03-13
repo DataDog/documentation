@@ -11,7 +11,7 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-A scatter plot identifies a possible relationship between changes observed in two different sets of variables. It provides a visual and statistical means to test the strength of a relationship between two variables. The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregation.
+A scatter plot identifies a possible relationship between changes observed in two different sets of variables. It provides a visual and statistical means to test the strength of a relationship between two variables. The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregations.
 
 {{< img src="dashboards/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" >}}
 
