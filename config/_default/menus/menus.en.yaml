@@ -9941,7 +9941,8 @@ api:
         - v2
       operationids:
         - DownloadCSMThreatsPolicy
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: Update a CSM Threats Agent rule
     url: '#update-a-csm-threats-agent-rule'
@@ -9953,7 +9954,8 @@ api:
         - v2
       operationids:
         - UpdateCSMThreatsAgentRule
-      unstable: []
+      unstable:
+        - v2
       order: 5
   - name: Get a CSM Threats Agent rule
     url: '#get-a-csm-threats-agent-rule'
@@ -9965,7 +9967,8 @@ api:
         - v2
       operationids:
         - GetCSMThreatsAgentRule
-      unstable: []
+      unstable:
+        - v2
       order: 2
   - name: Delete a CSM Threats Agent rule
     url: '#delete-a-csm-threats-agent-rule'
@@ -9977,7 +9980,8 @@ api:
         - v2
       operationids:
         - DeleteCSMThreatsAgentRule
-      unstable: []
+      unstable:
+        - v2
       order: 6
   - name: Create a CSM Threats Agent rule
     url: '#create-a-csm-threats-agent-rule'
@@ -9989,7 +9993,8 @@ api:
         - v2
       operationids:
         - CreateCSMThreatsAgentRule
-      unstable: []
+      unstable:
+        - v2
       order: 4
   - name: Get all CSM Threats Agent rules
     url: '#get-all-csm-threats-agent-rules'
@@ -10001,7 +10006,8 @@ api:
         - v2
       operationids:
         - ListCSMThreatsAgentRules
-      unstable: []
+      unstable:
+        - v2
       order: 3
   - name: Cloudflare Integration
     url: /api/latest/cloudflare-integration/

@@ -32025,6 +32025,9 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create a new Cloud Security Management Threats Agent rule with
         the given parameters.
@@ -32071,6 +32074,9 @@ paths:
         - name: agent_rule_id
           source: data.id
         type: unsafe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/remote_config/products/cws/agent_rules/{agent_rule_id}:
     delete:
       description: Delete a specific Cloud Security Management Threats Agent rule.
@@ -32092,6 +32098,9 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Get the details of a specific Cloud Security Management Threats
         Agent rule.
@@ -32117,6 +32126,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
       description: 'Update a specific Cloud Security Management Threats Agent rule.
 
@@ -32155,6 +32167,9 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/remote_config/products/cws/policy/download:
     get:
       description: 'The download endpoint generates a CSM Threats policy file from
@@ -32183,6 +32198,9 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
