@@ -246,11 +246,11 @@
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of test events from your organization."
   },
   "ListCIAppTestEvents": {
-    "description": "List endpoint returns CI Visibility test events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
+    "description": "List endpoint returns CI Visibility test events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
     "summary": "Get a list of tests events"
   },
   "SearchCIAppTestEvents": {
-    "description": "List endpoint returns CI Visibility test events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "description": "List endpoint returns CI Visibility test events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search tests events",
     "request_description": "",
     "request_schema_description": "The request for a tests search."
@@ -990,6 +990,34 @@
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "ListCSMThreatsAgentRules": {
+    "description": "Get the list of Cloud Security Management Threats Agent rules.",
+    "summary": "Get all CSM Threats Agent rules"
+  },
+  "CreateCSMThreatsAgentRule": {
+    "description": "Create a new Cloud Security Management Threats Agent rule with the given parameters.",
+    "summary": "Create a CSM Threats Agent rule",
+    "request_description": "The definition of the new Agent rule.",
+    "request_schema_description": "Request object that includes the Agent rule to create."
+  },
+  "DeleteCSMThreatsAgentRule": {
+    "description": "Delete a specific Cloud Security Management Threats Agent rule.",
+    "summary": "Delete a CSM Threats Agent rule"
+  },
+  "GetCSMThreatsAgentRule": {
+    "description": "Get the details of a specific Cloud Security Management Threats Agent rule.",
+    "summary": "Get a CSM Threats Agent rule"
+  },
+  "UpdateCSMThreatsAgentRule": {
+    "description": "Update a specific Cloud Security Management Threats Agent rule.\nReturns the Agent rule object when the request is successful.",
+    "summary": "Update a CSM Threats Agent rule",
+    "request_description": "New definition of the Agent rule.",
+    "request_schema_description": "Request object that includes the Agent rule with the attributes to update."
+  },
+  "DownloadCSMThreatsPolicy": {
+    "description": "The download endpoint generates a CSM Threats policy file from your currently active\nCSM Threats rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
+    "summary": "Get the latest CSM Threats policy"
   },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",

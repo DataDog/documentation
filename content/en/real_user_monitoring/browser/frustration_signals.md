@@ -162,6 +162,6 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 [5]: /dashboards/
 [6]: /monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
-[8]: /real_user_monitoring/session_replay/
+[8]: /real_user_monitoring/session_replay/browser/
 [9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

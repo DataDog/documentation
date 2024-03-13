@@ -7,9 +7,6 @@ further_reading:
 - link: "monitors/downtimes/"
   tag: "Documentation"
   text: "Downtimes"
-- link: "monitors/downtimes/"
-  tag: "Documentation"
-  text: "Downtimes"
 - link: "api/latest/downtimes/"
   tag: "Documentation"
   text: "Downtime API reference"
@@ -339,7 +336,7 @@ Open the [Manage Downtime page][1] and add a new downtime. Select `recurring` an
 {{% /tab %}}
 {{< /tabs >}}
 
-### Further Reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -46,7 +46,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][3]+.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 2. Add the `ddtrace` gem to your `Gemfile` or `gems.rb` file:
 

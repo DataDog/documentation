@@ -1730,6 +1730,12 @@ The application's environment, for example: prod, pre-prod, and staging. Follows
 **Type**: String<br/>
 The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][15].
 
+`trackingConsent`
+: Optional<br/>
+**Type**: `"granted"` or `"not-granted"`<br/>
+**Default**: `"granted"`<br/>
+Set the initial user tracking consent state. See [User Tracking Consent][27].
+
 `trackViewsManually`
 : Optional<br/>
 **Type**: Boolean<br/>
@@ -1963,8 +1969,8 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [14]: /getting_started/site/
 [15]: /getting_started/tagging/#define-tags
 [16]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
-[17]: /real_user_monitoring/session_replay/
-[18]: /real_user_monitoring/session_replay/privacy_options
+[17]: /real_user_monitoring/session_replay/browser/
+[18]: /real_user_monitoring/session_replay/browser/privacy_options
 [19]: /getting_started/tagging/using_tags
 [20]: /real_user_monitoring/browser/frustration_signals/
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
@@ -1972,4 +1978,5 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [24]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[26]: /real_user_monitoring/session_replay/#usage
+[26]: /real_user_monitoring/session_replay/browser/#usage
+[27]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent

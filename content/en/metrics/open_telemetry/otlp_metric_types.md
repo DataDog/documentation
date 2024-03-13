@@ -133,28 +133,6 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter map the datap
 
 You may add all resource attributes as tags by using the `resource_attributes_as_tags` flag.
 
-### Hostname resolution
-
-OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog honors these conventions and tries to use its value as a hostname. The semantic conventions are considered in the following order:
-
-1. The `host` attribute, to avoid double tagging if present.
-1. `datadog.host.name`, a Datadog-specific hostname convention
-1. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
-1. Kubernetes-specific conventions from the `k8s.node.name` and `k8s.cluster.name` semantic conventions
-1. `host.id`, the unique host ID
-1. `host.name`, the system hostname
-
-The following host names are deemed invalid and discarded:
-1. `0.0.0.0`
-1. `127.0.0.1`
-1. `localhost`
-1. `localhost.localdomain`
-1. `localhost6.localdomain6`
-1. `ip6-localhost`
-
-If no valid host names are present, Datadog assigns a system-level host name to payloads.
-If sending data from a remote host, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
-
 ### Example
 
 {{< tabs >}}
@@ -237,6 +215,6 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
+[1]: /opentelemetry/schema_semantics/hostname/
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
 [3]: /opentelemetry/guide/otlp_delta_temporality/
