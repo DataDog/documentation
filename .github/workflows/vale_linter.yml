@@ -36,7 +36,7 @@ jobs:
       env: 
         CHANGED_FILES: ${{ steps.changed_lines.outputs.changed_files }}
       run: |
-        vale $CHANGED_FILES \
+        vale "${CHANGED_FILES}" \
           --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
     
     - name: Parse Vale output
@@ -44,4 +44,4 @@ jobs:
         CHANGED_LINES: ${{ steps.changed_lines.outputs.changed_lines }}
       run: |
         python local/bin/py/vale/vale_annotations.py \
-          --git_data='$CHANGED_LINES'
+          --git_data="${CHANGED_LINES}"
