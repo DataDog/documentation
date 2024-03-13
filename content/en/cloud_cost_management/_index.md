@@ -43,16 +43,23 @@ Datadog ingests your cloud cost data and transforms it into queryable metrics. I
   {{< nextlink href="/cloud_cost_management/saas_costs">}}<u>SaaS Cost Integrations</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
  {{< /whatsnext >}}
 
-## Cloud costs in dashboards
+## Use cloud cost data in dashboards
 
 Visualize infrastructure spend alongside related utilization metrics to spot potential inefficiencies and savings opportunities:
-- Add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
-- Export timeseries costs data using the [Metrics API][1].
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" >}}
+- Add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
+  
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:60%;" >}}
+
+- Export a timeseries graph of costs data using the [Metrics API][1].
+
+## Allocate costs
+
+Use [Container Cost Allocation][2] metrics to identify Kubernetes, AWS ECS, Azure, and Google Cloud cluster and workload costs, and gain visibility into into pod-level costs, idle resource costs, costs by resource type, and more.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products
+[2]: /cloud_cost_management/container_cost_allocation
