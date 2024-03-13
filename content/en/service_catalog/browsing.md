@@ -29,7 +29,7 @@ algolia:
   tags: ['service catalog']
 ---
 
-On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name.To narrow down to only explicitly declared entries, you can search by the **Service Origin** facet and filter by **user-defined**. 
+On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name. To narrow down to only explicitly declared entries, you can search by the **Service Origin** facet and filter by **user-defined**. 
 
 ## Ownership view
 
