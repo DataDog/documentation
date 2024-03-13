@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Datadog Unix Agent is being developed for specific system architectures, and is not the same as the Windows, Linux and MacOS Agents.
+The Datadog Unix Agent is being developed for specific system architectures, and is not the same as the Windows, Linux, and MacOS Agents.
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
