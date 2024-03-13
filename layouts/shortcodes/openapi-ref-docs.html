@@ -14,7 +14,6 @@
   </style>
   <div class="openapi-spec-content">
     {{ if not $tag }}
-    <h2>{{ $openapi.info.title }} version {{ $openapi.info.version }}</h2>
     <div class="description">
       <p>{{ $openapi.info.description | markdownify }}</p>
     </div>

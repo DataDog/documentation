@@ -14,7 +14,7 @@ further_reading:
   - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
     text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/dashboards/"
+  - link: "/real_user_monitoring/platform/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
 ---

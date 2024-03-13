@@ -1955,7 +1955,7 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/data_collected/
-[3]: /real_user_monitoring/dashboards/
+[3]: /real_user_monitoring/platform/dashboards/
 [4]: https://www.npmjs.com/package/@datadog/browser-rum
 [5]: /account_management/api-app-keys/#client-tokens
 [6]: /real_user_monitoring/browser/tracking_user_actions
@@ -1964,8 +1964,8 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [9]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[12]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
-[13]: /real_user_monitoring/session_replay/browser/privacy_options?tab=maskuserinput
+[12]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
+[13]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
 [14]: /getting_started/site/
 [15]: /getting_started/tagging/#define-tags
 [16]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
