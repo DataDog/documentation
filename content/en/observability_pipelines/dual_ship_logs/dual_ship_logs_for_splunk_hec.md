@@ -26,12 +26,11 @@ After configuring the HTTP Event Collector, use the Splunk HEC token to set up O
 
 ## Set up a pipeline
 
-Do the following to set up a pipeline to dual ship your logs to multiple destinations:
-
-### Add Splunk HEC for log source
-
 1. Navigate to [Observability Pipelines][LINK].
 1. Select the **Dual Ship Logs** use case to create a new pipeline.
+
+### Add Splunk HEC for the log source
+
 1. Select **Splunk HEC** as the source.
 1. Enter the Splunk HEC token.
 1. Enter the Splunk HEC endpoint URL in the **Splunk HEC address**. For example `https://<your_account>.splunkcloud.com:8088`. See [Send Data to HTTP Event Collector][1] for more information.   
@@ -254,6 +253,10 @@ TKTK
 
 For existing pipelines, you can update processors in the Observability Pipelines UI, but if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
 
+1. Navgate to [Observability Pipelines][LINK].
+1. Select the pipeline you want to update.
+1. Click **Edit Pipeline in the top right corner.
+
 ### Source environment variables
 
 These are the source environment variables that you can update:
@@ -265,7 +268,10 @@ These are the source environment variables that you can update:
 : The Splunk HEC token for the Splunk indexer from where you want to send logs to the Observability Pipelines Worker.
 
 `SPLUNK_HEC_ENDPOINT_URL`
-: The Observability Pipelines Worker listens to this Splunk HTTP endpoint to receive logs originally intended for the Splunk indexer.
+: The Observability Pipelines Worker listens to this Splunk HTTP endpoint to receive logs originally intended for the Splunk indexer. For example `https://<your_account>.splunkcloud.com:8088`.  
+**Note**: `/services/collector/event` is automatically appended to the endpoint.
+
+[1]: https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector
 
 {{% /tab %}}
 {{% tab "Splunk TCP" %}}
@@ -350,7 +356,17 @@ Run the following command for your environment to update the Worker:
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-TKTK
+```
+docker run -i -e DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+	-e DD_OP_PIPELINE_ID=dbfdba26-e14b-11ee-893c-da7ad0900002 \
+	-e DD_SITE=datadoghq.com \
+    -e SPLUNK_TOKEN=<new_token> \
+    -e SPLUNK_HEC_ENDPOINT_URL=<new_url> \
+	-e DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_ACCESS_KEY_ID=<new_access_key_id> \
+	-e DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_SECRET_ACCESS_KEY=<new_access_key> \
+	-p 8282:8282 \
+	datadog/observability-pipelines-worker run
+```
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}

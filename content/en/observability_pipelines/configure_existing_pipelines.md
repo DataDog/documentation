@@ -8,7 +8,13 @@ disable_toc: false
 
 For existing pipelines in Observability Pipelines, you can update processors in the Observability Pipelines UI. But if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
 
-## Source environment variables
+## Update an existing pipeline
+
+1. Navgate to [Observability Pipelines][LINK].
+1. Select the pipeline you want to update.
+1. Click **Edit Pipeline in the top right corner.
+
+### Source environment variables
 
 These are the source environment variables that you can update:
 
@@ -19,7 +25,8 @@ These are the source environment variables that you can update:
 : The Splunk HEC token for the Splunk indexer from where you want to send logs to the Observability Pipelines Worker.
 
 `SPLUNK_HEC_ENDPOINT_URL`
-: The Observability Pipelines Worker listens to this Splunk HTTP endpoint to receive logs originally intended for the Splunk indexer.
+: The Observability Pipelines Worker listens to this Splunk HTTP endpoint to receive logs originally intended for the Splunk indexer. For example `https://<your_account>.splunkcloud.com:8088`.  
+**Note**: `/services/collector/event` is automatically appended to the endpoint.
 
 {{% /tab %}}
 {{% tab "Splunk TCP" %}}
@@ -42,7 +49,7 @@ These are the source environment variables that you can update:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Destination environment variables
+### Destination environment variables
 
 These are the destination environment variables that you can update:
 
@@ -84,7 +91,7 @@ TKTK
 {{% /tab %}}
 {{< /tabs >}}
 
-## Update the Worker
+### Update the Worker
 
 You need to manually update your Worker with the new values for the environment variables. 
 
@@ -104,7 +111,17 @@ Run the following command for your environment to update the Worker:
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-TKTK
+```
+docker run -i -e DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+	-e DD_OP_PIPELINE_ID=dbfdba26-e14b-11ee-893c-da7ad0900002 \
+	-e DD_SITE=datadoghq.com \
+    -e SPLUNK_TOKEN=<new_token> \
+    -e SPLUNK_HEC_ENDPOINT_URL=<new_url> \
+	-e DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_ACCESS_KEY_ID=<new_access_key_id> \
+	-e DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_SECRET_ACCESS_KEY=<new_access_key> \
+	-p 8282:8282 \
+	datadog/observability-pipelines-worker run
+```
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}
