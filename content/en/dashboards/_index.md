@@ -44,11 +44,10 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on better visualizations with Dashboards"
-algolia:
-  tags: ['snapshot']
 cascade:
     algolia:
         rank: 70
+        tags: ['snapshot', 'dashboards']
 ---
 
 ## Overview
@@ -58,6 +57,7 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
 **Note**: View Dashboards with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3].
 
 {{< whatsnext desc="Dashboard features:">}}
+    {{< nextlink href="/dashboards/configure" >}}Configure: Overview of the configuration options for dashboards{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets" >}}Widgets: Learn the configuration for different visualizations{{< /nextlink >}}
     {{< nextlink href="/dashboards/querying" >}}Querying: See the formatting options for graph queries{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions" >}}Functions: Modify metric queries and resulting graphs{{< /nextlink >}}
@@ -81,9 +81,7 @@ Timeboards have automatic layouts, and represent a single point in time—either
 ### Screenboards
 Screenboards are dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
 
-## Configuring dashboards
-
-### Refresh rate
+## Refresh rate
 
 The refresh rate of a private dashboard depends on the time frame you are viewing. The shorter the time frame is, the more frequently the data is refreshed. Publicly shared dashboards refresh every thirty seconds, regardless of the selected time frame.
 
@@ -105,128 +103,13 @@ The refresh rate of a private dashboard depends on the time frame you are viewin
 | 6 months     | 1 hour       |
 | 1 year       | 1 hour       |
 
-### TV mode
-
-Dashboards are useful for displaying key performance metrics on large screens or TVs. To enable TV mode, use the keyboard shortcut `F` or click the TV icon on the dashboard.
-
-### Settings
-
-#### Version history
-
-From a dashboard, click on the settings icon and then click the version history option to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
-
-#### Generate public URL
-
-Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][13].
-
-#### Display UTC time
-
-Toggle between UTC time and your default time zone.
-
-#### Notifications
-
-If notifications are activated for a dashboard, an event is created in the [Events Explorer][14]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion, along with the name of the user performing the action.
-
-Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
-
-Change events for dashboards with notifications enabled are seen in the event explorer by searching:
-
-```text
-tags:audit,dash
-```
-
-To limit the search to a specific dashboard, include the dashboard's name in the search.
-
-#### Permissions
-
-<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available to anyone on an <strong>Enterprise</strong> tier plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature. </div>
-
-{{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
-
-Use granular access controls to limit the [roles][15] that may edit a particular dashboard:
-1. While viewing a dashboard, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
-1. Click **Add**.
-1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**
-
-**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][15].
-
-To restore general access to a dashboard with restricted access, follow the steps below:
-1. While viewing the dashboard, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
-
-If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
-
-If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
-
-The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
-
-#### High-density mode
-
-High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets.
-
-{{< img src="dashboards/high-density-mode.png" alt="The high-density mode display" style="width:90%;">}}
-
-Select **Increase density on wide screens** to expand widgets to the width of the screen.
-
-#### Clone dashboard
-
-Use this option to copy the entire dashboard to a new dashboard. You are prompted to name the clone.
-
-#### Copy, import, or export dashboard JSON
-
-From an individual dashboard, copy, import, or export a dashboard's JSON using the export icon (upper right) with the following options:
-
-| Option                          | Description                                                                                                                                                                |
-|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Copy&nbsp;dashboard&nbsp;JSON   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
-| Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
-| Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
-
-#### Delete dashboard
-
-<div class="alert alert-warning">Dashboards must be unstarred before deletion.</div>
-
-Use this option to permanently delete your dashboard. You are prompted to confirm deletion.
-
-## Dashboard details
-
-From an individual dashboard, hover over the dashboard title to view and edit dashboard details. A popover panel opens.
-
-{{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
-
-Under the title, the avatar tells you who created the dashboard.
-
-### Suggested dashboards
-
-From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. 
-
-To add a suggested dashboards list, add `[[suggested_dashboards]]` inside the dashboard description. 
-
-### Edit details
-
-Update Markdown-supported dashboard descriptions or associate [teams][17] with a dashboard:
-
-1. Open the dashboard you wish to edit.
-1. Hover the dashboard title. A dropdown panel opens.
-1. Click on the dashboard title or description to edit them. 
-1. Once done editing click the done button.
-1. Select up to 5 teams from the **Teams** dropdown.
-
-
 ## Dashboard list
 
 Search, view, or create dashboards and lists on the [Dashboard List][4] page.
 
 ### Teams
 
-Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][17].
+Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][5].
 
 To edit the teams associated with one or more dashboards, take the following steps:
 1. Select the checkbox next to each dashboard you wish to modify.
@@ -299,7 +182,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][18]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][6]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -317,22 +200,9 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /service_management/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists
-[5]: /dashboards/widgets/#full-screen
-[6]: https://app.datadoghq.com/process
-[7]: https://app.datadoghq.com/infrastructure/map
-[8]: https://app.datadoghq.com/logs
-[9]: /tracing/
-[10]: /profiler/
-[11]: /dashboards/guide/custom_time_frames/
-[12]: /dashboards/guide/version_history/
-[13]: /dashboards/sharing/#dashboards
-[14]: /events/
-[15]: /account_management/rbac/
-[16]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[17]: /account_management/teams/
-[18]: /dashboards/template_variables/#saved-views
+[5]: /account_management/teams/
+[6]: /dashboards/template_variables/#saved-views
