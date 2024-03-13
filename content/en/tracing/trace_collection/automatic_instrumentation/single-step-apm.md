@@ -184,7 +184,7 @@ You can enable APM by installing the Agent with either:
 - [`Helm`][1] for deploying the Datadog Operator.
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
 
-### Installing with Datadog Operator
+{{< collapse-content title="Installing with Datadog Operator" level="h3" >}}
 
 To enable single step instrumentation with the Datadog Operator:
 
@@ -236,8 +236,9 @@ To enable single step instrumentation with the Datadog Operator:
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 4. Restart your applications.
+{{< /collapse-content >}} 
 
-### Installing with Helm
+{{< collapse-content title="Installing with Helm" level="h3" >}}
 
 To enable single step instrumentation with Helm:
 
@@ -278,6 +279,8 @@ To enable single step instrumentation with Helm:
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
    ```
 5. Restart your applications.
+
+{{< /collapse-content >}} 
 
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
