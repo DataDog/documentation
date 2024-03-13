@@ -67,4 +67,5 @@ making data-driven decisions to improve your store
 [2]: https://help.shopify.com/en/manual/online-store/themes/theme-structure/extend/edit-theme-code
 [3]: /real_user_monitoring/session_replay/browser/
 [4]: /real_user_monitoring/product_analytics/funnel_analysis
-[5]: /real_user_monitoring/generate_metrics/
+[5]: /real_user_monitoring/platform/generate_metrics/
+
