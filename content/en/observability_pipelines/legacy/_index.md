@@ -25,6 +25,8 @@ cascade:
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
+<div class="alert alert-danger">If you upgrade your Observability Pipelines Workers (OPW) 1.8 to 2.0, your existing pipelines will break. Do not upgrade your OPWs if you want to continue using the legacy Observability Pipelines. If you want to use OPW 2.0, you must migrate your OPW 1.8 pipelines to OPW 2.0.</div>
+
 The following documents are for the Observability Pipelines Worker 1.8 and older.
 
 {{< whatsnext desc="Setup" >}}
