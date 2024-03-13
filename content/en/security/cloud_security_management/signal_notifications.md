@@ -1,5 +1,5 @@
 ---
-title: Signal Notifications
+title: Notification Rules
 kind: documentation
 is_beta: true
 products:
@@ -13,6 +13,8 @@ products:
   url: /security/identity_risks/
   icon: cloud-security-management
 ---
+
+<div class="alert alert-warning">This feature is in private beta.</div>
 
 Notifications rules allow customers to define an alerting criteria across all products, and all detections at once.
 
@@ -43,14 +45,23 @@ To create a notification rule, you define the logic for when the notification ru
 
 As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Example of matching issues** panel. This can be useful in determining if the notification rule is too specific or broad.
 
+### Select a source type
+
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
-2. Under **Source Types**, select whether the notification rule should alert on vulnerabilities or threats
+2. Under **Source Types**, select whether the notification rule should alert on vulnerabilities or threats.
 3. (Optional) For ASM, select the ASM Vulnerability Management source type, _or_ leave the source type empty and select the **Include Application level vulnerabilities** checkbox.
+
+### Specify rule criteria
+
 4. Under **Rule Criteria**, select one or more severity levels.
 5. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
+
+### Provide notification details
+
 6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
 7. Enter a name for the notification rule.
 8. Click **Save and Activate**.
 
 ## Migrate existing notification configurations
 
+placeholder text
