@@ -39,7 +39,7 @@ Do the following to set up a pipeline to dual ship your logs to multiple destina
 
 ### Add processors
 
-There are pre-selected processors and you can add additional processors for your use case. The following processors are available:
+There are pre-selected processors and you can add additional processors for your use case. The order of the processors is important because a log can match multiple filters. Click on the drag handle icon on the top left corner of the processor to reorder it. The following processors are available:
 
 {{< tabs >}}
 {{% tab "Filter" %}}
