@@ -1,14 +1,15 @@
 ---
-aliases: null
+aliases:
+- /ja/real_user_monitoring/session_replay/privacy_options
 description: セッションリプレイで利用可能なプライバシーコントロールとプライバシーオプションの設定方法について説明します。
 further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
-  text: セッション リプレイ
+  text: 送信 - Agent チェック
 - link: https://www.datadoghq.com/blog/default-privacy-session-replay/
   tag: ブログ
   text: セッションリプレイのデフォルトプライバシー設定によるユーザーデータの難読化
-kind: documentation
+kind: ドキュメント
 title: セッションリプレイブラウザのプライバシーオプション
 ---
 
@@ -20,11 +21,11 @@ title: セッションリプレイブラウザのプライバシーオプショ�
 
 セッションリプレイを有効にすることで、RUM ブラウザ SDK を通じて記録される機密要素を自動的にマスクすることができます。データがマスクされると、そのデータは Datadog の SDK によって元の形で収集されないため、バックエンドに送信されることはありません。
 
-## コンフィギュレーション
+## ブラウザトラブルシューティング
 
 <div class="alert alert-warning"><code>defaultPrivacyLevel</code> と <code>mask-user-input</code> は、SDK v3.6.0+ で利用できます。</div>
 
-プライバシー設定を有効にするには、JavaScript の構成で `defaultPrivacyLevel` を `mask-user-input`、`mask`、または `allow` に設定します。
+プライバシー設定を有効にするには、JavaScript の構成で `defaultPrivacyLevel` を `mask`、`mask-user-input`、または `allow` に設定します。
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -41,21 +42,11 @@ datadogRum.init({
     trackResources: true,
     trackLongTasks: true,
     trackUserInteractions: true,
-    defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
+    defaultPrivacyLevel: 'mask' | 'mask-user-input' | 'allow'
 });
-
-datadogRum.startSessionReplayRecording();
 ```
 
 構成を更新すると、以下のプライバシーオプションで HTML ドキュメントの要素を上書きすることができます。
-
-### ユーザー入力マスクモード
-
-入力、テキストエリア、チェックボックスの値など、ほとんどのフォームフィールドをマスクし、その他のテキストはそのまま記録します。入力は 3 つのアスタリスク (`***`) に置き換えられ、テキストエリアはスペースを保持する `x` 文字で難読化されます。
-
-{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="ユーザー入力マスクモード" style="width:70%;">}}
-
-**注:** デフォルトでは、セッションリプレイを有効にすると、`mask-user-input` がプライバシー設定になり、すべての入力フィールドが自動的にマスクされます。
 
 ### マスクモード
 
@@ -63,7 +54,15 @@ datadogRum.startSessionReplayRecording();
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="マスクモード" style="width:70%;">}}
 
-**注**: マスクされたデータは Datadog のサーバーには保管されません。
+**注**: セッションリプレイを有効にした場合、デフォルトでは `mask` がプライバシー設定になります。
+**注**: マスクされたデータは、Datadog サーバーに保存されません。
+
+### ユーザー入力マスクモード
+
+入力、テキストエリア、チェックボックスの値など、ほとんどのフォームフィールドをマスクし、その他のテキストはそのまま記録します。入力は 3 つのアスタリスク (`***`) に置き換えられ、テキストエリアはスペースを保持する `x` 文字で難読化されます。
+
+{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="ユーザー入力マスクモード" style="width:70%;">}}
+
 ### 許可モード
 
 マスクされていないすべてが記録されます。
