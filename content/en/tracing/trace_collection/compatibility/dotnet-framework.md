@@ -68,7 +68,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
 | Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
 | Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
+| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                    | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
@@ -95,7 +95,7 @@ Don't see the library you're looking for? First, check if the library produces o
 
 ## OpenTelemetry based integrations
 
-Some libraries provide built-in [Activity based tracing][11]. This is the same mechanism that OpenTelemetry is based on. 
+Some libraries provide built-in [Activity based tracing][11]. This is the same mechanism that OpenTelemetry is based on.
 
 For these libraries, set `DD_TRACE_OTEL_ENABLED` to `true`, and the .NET tracer automatically captures traces their traces. This is supported since [version 2.21.0][4].
 

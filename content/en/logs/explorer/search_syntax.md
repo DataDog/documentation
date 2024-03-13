@@ -42,6 +42,7 @@ To combine multiple terms into a complex query, you can use any of the following
 ## Escape special characters and spaces
 
 The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
+`/` is not considered a special character and doesn't need to be escaped.
 
 You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
 
@@ -74,8 +75,8 @@ Examples:
 | Search query                                                         | Description                                                                                                                                                         |
 |----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `@http.url_details.path:"/api/v1/test"`                              | Searches all logs matching `/api/v1/test` in the attribute `http.url_details.path`.                                                                               |
-| `@http.url:\/api\/v1\/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api/v1/`                                                                             |
-| `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
+| `@http.url:/api\-v1/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api-v1/`                                                                             |
+| `@http.status_code:[200 TO 299] @http.url_details.path:/api\-v1/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api-v1/` |
 | `-@http.status_code:*`                                                | Searches all logs not containing the `http.status_code` attribute |
 
 ### Search using CIDR notation
