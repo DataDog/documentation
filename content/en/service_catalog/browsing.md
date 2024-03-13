@@ -132,11 +132,10 @@ To explore the complete set of actions specifically related to Service Catalog, 
 
 Below is a comprehensive list of actions available for Service Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
 
-{{< img src="tracing/service_catalog/service-catalog-workflow-actions.png" alt="List of actions currently available for Service Catalog in Datadog Workflow Automation." style="width:100%;" >}}
-
 - **Retrieve Service Information**
   - "Get service definition" for a single service
   - "List service definitions" to get all definitions from Datadog Service Catalog
+  - "Get service dependencies" to get a service's immediate upstream and downstream services
 - **Incident Triage**
   - "Get service PagerDuty on call"
   - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks). 
