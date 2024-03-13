@@ -17,7 +17,7 @@ This guide assumes that you have configured [Database Monitoring][1] and are usi
 ## Before you begin
 
 Supported databases
-: Postgres, MySQL, Oracle, SQL Server
+: Postgres, MySQL, SQL Server, Oracle
 
 Supported Agent versions
 : 7.46+
@@ -32,39 +32,39 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 - `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle and SQL Server applications.
 - `disabled` mode disables propagation and does not send any information from applications.
 
-SQL Server does not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
+SQL Server and Oracle do not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
 
-| DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  |
-|:-------------------------|:---------:|:---------:|:------------:|
-| `full`                   | {{< X >}} | {{< X >}} |          |
-| `service`                | {{< X >}} | {{< X >}} | {{< X >}}    |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
+|:------------------------|:---------:|:---------:|:----------:|:---------:|
+| `full`                  | {{< X >}} | {{< X >}} |            |           |
+| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
 
 **Supported application tracers and drivers**
 
-| Language                                 | Library or Framework | Postgres  |   MySQL   |                SQL Server              |
-|:-----------------------------------------|:---------------------|:---------:|:---------:|:--------------------------------------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |                                        |
-|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} | `service` mode only                    |
-|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} | `service` mode only                    |
-| **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |                                        |
-|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} | `service` mode only                    |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |                                        |
-|                                          | [pg][8]              | {{< X >}} |           |                                        |
-|                                          | [mysql2][7]          |           | {{< X >}} |                                        |
-| **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |                                        |
-|                                          | [psycopg2][12]       | {{< X >}} |           |                                        |
-| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                      |           |           |                                        |
-|                                          | [Npgsql][16] *         | {{< X >}} |           |                                        |
-|                                          | [MySql.Data][17] *     |           | {{< X >}} |                                        |
-|                                          | [MySqlConnector][18] * |           | {{< X >}} |                                        |
-|                                          | [ADO.NET][24] *        |           |           | `service` mode only                    |
-| **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |           |                                        |
-|                                          | [pdo][20]            | {{< X >}} | {{< X >}} |                                        |
-|                                          | [MySQLi][21]         |           | {{< X >}} |                                        |
-| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |                                        |
-|                                          | [postgres][10]       | {{< X >}} |           |                                        |
-|                                          | [mysql][13]          |           | {{< X >}} |                                        |
-|                                          | [mysql2][14]         |           | {{< X >}} |                                        |
+| Language                                 | Library or Framework   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |
+|:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |
+|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
+|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
+|                                          | [pg][8]                | {{< X >}} |           |                     |                     |
+|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
+|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
+|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
+|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
+|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
+|                                          | [ADO.NET][24] *        |           |           | `service` mode only | `service` mode only |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
+|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
+|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |
+|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |
+|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |
+|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
 \* [CommandType.StoredProcedure][25] not supported
 
