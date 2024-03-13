@@ -1,5 +1,5 @@
 ---
-title: Browsing the Service Catalog
+title: Navigating the Service Catalog
 kind: documentation
 aliases:
   - /tracing/service_catalog/browsing
@@ -29,11 +29,7 @@ algolia:
   tags: ['service catalog']
 ---
 
-On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name. To filter the list, select one or more facets. For example, to see detected services without a service definition yet, click the **Ownership Info > Telemetry Only** facet. You may find it helpful to filter by your team name or scope the metrics displayed to particular environments and clusters in order to see only matching services in the list.
-
-The Service Catalog list is sortable by service type, service name, and many of the other columns. You can find missing ownership by sorting by team in the Ownership view and looking for blanks. Or you can sort by urgency in the Reliability view and see services with the most triggered monitors.
-
-Information about the service provided by the service definition or by Datadog products collecting observability data is organized into views: Ownership, Reliability, Performance, Security, and more.
+On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name.To narrow down to only explicitly declared entries, you can search by the **Service Origin** facet and filter by **user-defined**. 
 
 ## Ownership view
 
