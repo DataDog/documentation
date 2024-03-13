@@ -20,7 +20,7 @@ algolia:
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team. You can send a flare from the Datadog site or using the Datadog Agent command line.
 
-A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings.
+A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings. If APM is enabled, the flare includes [tracer debug logs][4] when available.
 
 The Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
@@ -171,3 +171,4 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /agent/fleet_automation/
 [3]: /agent/remote_config#enabling-remote-configuration
+[4]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=dotnet#data-collected
