@@ -80,11 +80,11 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: '<http://datadoghq.com|datadoghq.com>',
+      site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      allowedTracingUrls: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("<https://api.example.com>")]
+      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100, // if not included, the default is 100
       trackResources: true,
@@ -120,8 +120,16 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{% tab "Android RUM" %}}
 
 1. [RUM Android モニタリング][1]を設定します。
+2. [Android トレース収集][2]を設定します。
+3. モジュールレベルの `build.gradle` ファイルで、`dd-sdk-android-okhttp` ライブラリに Gradle 依存関係を追加します。
 
-2. Android アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`OkHttpClient` インターセプターを構成します。
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+    }
+    ```
+
+4. Android アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`OkHttpClient` インターセプターを構成します。
     ```java
     val tracedHosts = listOf("example.com", "example.eu")
 
@@ -134,41 +142,47 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 
    デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
 
-3.  _(オプション)_ `traceSamplingRate` パラメーターを構成して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。バックエンドトレースの 100% を保持する場合:
+3.  _(オプション)_ `traceSampler` パラメーターを構成して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。バックエンドトレースの 100% を保持する場合:
 
 ```java
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(RumInterceptor(traceSamplingRate = 100f))
+       .addInterceptor(DatadogInterceptor(traceSampler = RateBasedSampler(100f)))
        .build()
   ```
 
-**注**: `traceSamplingRate` は RUM セッションのサンプリングには影響**しません**。バックエンドのトレースのみがサンプリングされます。
+**注**:
+* `traceSamplingRate` は RUM セッションのサンプリングには影響**しません**。バックエンドのトレースのみがサンプリングされます。
+* Datadog 構成でカスタムトレーシングヘッダータイプを定義し、`GlobalTracer` で登録されたトレーサーを使用している場合、使用するトレーサーに同じトレーシングヘッダータイプが設定されていることを確認してください。
 
 [1]: /ja/real_user_monitoring/android/
+[2]: /ja/tracing/trace_collection/dd_libraries/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
 1. [RUM iOS モニタリング][1]を設定します。
 
-2. iOS アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、ビルダー関数 `trackURLSession(firstPartyHosts:)` を呼び出します。
+2. `Trace` を有効にします。
     ```swift
-    Datadog.initialize(
-        appContext: .init(),
-        configuration: Datadog.Configuration
-            .builderUsing(
-                rumApplicationID: "<rum_app_id>", 
-                clientToken: "<client_token>", 
-                environment: "<env_name>"
+    Trace.enable(
+        with: .init(
+            urlSessionTracking: .init(
+                firstPartyHostsTracing: .trace(
+                    hosts: [
+                        "example.com",
+                        "api.yourdomain.com"
+                    ]
+                )
             )
-            .trackURLSession(firstPartyHosts: ["example.com", "api.yourdomain.com"])
-            .build()
+        )
     )
     ```
 
-3. グローバル `Tracer` を初期化します。
+3. `URLSessionDataDelegate` プロトコルに準拠した `SessionDelegate` 型の URLSession インスツルメンテーションを有効にします。
     ```swift
-    Global.sharedTracer = Tracer.initialize(
-        configuration: Tracer.Configuration(...)
+    URLSessionInstrumentation.enable(
+        with: .init(
+            delegateClass: SessionDelegate.self
+        )
     )
     ```
 
@@ -176,7 +190,7 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
     ```swift
     let session =  URLSession(
         configuration: ...,
-        delegate: DDURLSessionDelegate(),
+        delegate: SessionDelegate(),
         delegateQueue: ...
     )
     ```
@@ -185,19 +199,25 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 
    `URLSession` に `URLRequest` を指定した場合、トレース ID 挿入が機能します。`URL` オブジェクトを使用した場合、分散型トレーシングは機能しません。
 
-5. _(オプション)_ `tracingSamplingRate` 初期化パラメーターを設定して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。
+5. _(オプション)_ `sampleRate` パラメーターを設定して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。
 
      バックエンドトレースの 100% を保持する場合:
     ```swift
-    Datadog.initialize(
-        appContext: .init(),
-        configuration: Datadog.Configuration
-            .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
-            .set(tracingSamplingRate: 100)
-            .build()
+    Trace.enable(
+        with: .init(
+            urlSessionTracking: .init(
+                firstPartyHostsTracing: .trace(
+                    hosts: [
+                        "example.com",
+                        "api.yourdomain.com"
+                    ],
+                    sampleRate: 100
+                )
+            )
+        )
     )
     ```
-**注**: `tracingSamplingRate` は RUM セッションのサンプリングには影響**しません**。バックエンドのトレースのみがサンプリングされます。
+**注**: `sampleRate` は RUM セッションのサンプリングには影響**しません**。バックエンドのトレースのみがサンプリングされます。
 
 [1]: /ja/real_user_monitoring/ios/
 {{% /tab %}}
@@ -231,19 +251,19 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{% /tab %}}
 {{% tab "Flutter RUM" %}}
 
-1. [RUM Flutter モニタリング][1]を設定します。
+1. [RUM Flutter モニタリング][1]をセットアップします。
 
 2. [Automatic Resource Tracking][2] の説明に従って、Datadog Tracking HTTP Client パッケージを含め、HTTP 追跡を有効にします。これには、Flutter アプリケーションによって呼び出される内部、ファーストパーティーのオリジンのリストを追加するために、初期化に対する以下の変更が含まれます。
     ```dart
-    final configuration = DdSdkConfiguration(
+    final configuration = DatadogConfiguration(
       // ...
       // added configuration
       firstPartyHosts: ['example.com', 'api.yourdomain.com'],
     )..enableHttpTracking()
     ```
 
-[1]: /ja/real_user_monitoring/flutter/
-[2]: /ja/real_user_monitoring/flutter/#automatic-resource-tracking
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
 
@@ -253,9 +273,6 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">RUM for Roku は、US1-FED Datadog サイトではご利用いただけません。</div>
 {{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku はベータ版です。</div>
 
 1. [RUM Roku モニタリング][1]を設定します。
 
@@ -268,8 +285,71 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
         result = ddUrlTransfer.GetToString()
     ```
 
-[1]: /ja/real_user_monitoring/roku/
-{{< /site-region >}}
+[1]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### セットアップの検証
+
+RUM との APM インテグレーションが構成されていることを検証するには、RUM をインストールした SDK に基づいて以下の手順に従ってください。
+
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+1. アプリケーションのページにアクセスします。
+2. ブラウザの開発者ツールで、**Network** タブを開きます。
+3. 相関が期待されるリソースリクエストのリクエストヘッダーに [Datadog からの相関ヘッダー][1]が含まれていることを確認します。
+
+[1]: /ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+1. Android Studio からアプリケーションを実行します。
+2. アプリケーションの画面にアクセスします。
+3. Android Studio の [Network Inspector][1] を開きます。
+4. RUM リソースのリクエストヘッダーをチェックし、[必要なヘッダーが SDK によって設定されている][2]ことを検証します。
+
+[1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces?tab=androidrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+1. Xcode からアプリケーションを実行します。
+2. アプリケーションの画面にアクセスします。
+3. Xcode の [Network Connections and HTTP Traffic instrument][1] を開きます。
+4. RUM リソースのリクエストヘッダーをチェックし、[必要なヘッダーが SDK によって設定されている][2]ことを検証します。
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tab=iosrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+1. Xcode (iOS) または Android Studio (Android) からアプリケーションを実行します。
+2. アプリケーションの画面にアクセスします。
+3. Xcode の [Network Connections and HTTP Traffic instrument][1] または Android Studio の [Network Inspector][2] を開きます。
+4. RUM リソースのリクエストヘッダーをチェックし、[必要なヘッダーが SDK によって設定されている][3]ことを検証します。
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+1. 希望の IDE または `flutter run` を使ってアプリケーションを実行します。
+2. アプリケーションの画面にアクセスします。
+3. Flutter の [Dev Tools][1] を開き、[Network View][2] に移動します。
+4. RUM リソースのリクエストヘッダーをチェックし、[必要なヘッダーが SDK によって設定されている][3]ことを検証します。
+
+[1]: https://docs.flutter.dev/tools/devtools/overview
+[2]: https://docs.flutter.dev/tools/devtools/network
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -293,7 +373,11 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 
 RUM は、OpenTelemetry ライブラリを使ってインスツルメントされたバックエンドとリソースを接続するため、複数のプロパゲータータイプをサポートしています。
 
-{{< tabs >}} {{% tab "ブラウザ RUM" %}}
+{{< tabs >}}
+{{% tab "ブラウザ RUM" %}}
+
+**注**: Next.js/Vercel など、OpenTelemetry を使用するバックエンドフレームワークを使用している場合は、以下の手順に従ってください。
+
 1. 上記に従い、RUM を APM に接続するためのセットアップを行います。
 
 2. `allowedTracingUrls` を次のように変更します。
@@ -314,30 +398,28 @@ RUM は、OpenTelemetry ライブラリを使ってインスツルメントさ�
       - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `b3`: [B3 シングルヘッダー](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 マルチヘッダー](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
-{{% /tab %}}
 
+{{% /tab %}}
 {{% tab "iOS RUM" %}}
+
 1. 上記に従い、RUM を APM に接続するためのセットアップを行います。
 
-2. 次のように、`trackURLSession(firstPartyHosts:)` の代わりに `trackURLSession(firstPartyHostsWithHeaderTypes:)` を使用します。
+2. 以下のように `.trace(hostsWithHeaders:sampleRate:)` の代わりに `.traceWithHeaders(hostsWithHeaders:sampleRate:)` を使用します。
     ```swift
-    Datadog.initialize(
-        appContext: .init(),
-        configuration: Datadog.Configuration
-            .builderUsing(
-                rumApplicationID: "<rum_app_id>", 
-                clientToken: "<client_token>", 
-                environment: "<env_name>"
-            )
-            .trackURLSession(
-                firstPartyHostsWithHeaderTypes: [
-                    "api.example.com": [.tracecontext]
-                ]
-            )
-            .build()
-        )
+      Trace.enable(
+          with: .init(
+              urlSessionTracking: .init(
+                  firstPartyHostsTracing: .traceWithHeaders(
+                      hostsWithHeaders: [
+                          "api.example.com": [.tracecontext]
+                      ],
+                      sampleRate: 100
+                  )
+              )
+          )
+      )
     ```
-    `trackURLSession(firstPartyHostsWithHeaderTypes:)` には `Dictionary<String, Set<TracingHeaderType>>` をパラメーターとして指定します。キーはホスト、値はサポートされるサポートトレーシングヘッダータイプのリストになります。
+   `.traceWithHeaders(hostsWithHeaders:sampleRate:)` は、`Dictionary<String, Set<TracingHeaderType>>` をパラメータとして取ります。ここでのキーはホストで、値はサポートされるトレーシングヘッダータイプのリストです。
 
     `TracingHeaderType` は列挙型で、次のトレーシングヘッダータイプを表します。
       - `.datadog`: Datadog のプロパゲーター (`x-datadog-*`)
@@ -351,7 +433,7 @@ RUM は、OpenTelemetry ライブラリを使ってインスツルメントさ�
 
 2. 内部のファーストパーティオリジンのリストと、使用するトレーシングヘッダータイプを指定して、次のように `OkHttpClient` インターセプターを構成します。
     ```java
-    val tracedHosts = mapOf("example.com" to setOf(TracingHeaderType.TRACECONTEXT), 
+    val tracedHosts = mapOf("example.com" to setOf(TracingHeaderType.TRACECONTEXT),
                           "example.eu" to setOf(TracingHeaderType.DATADOG))
 
     val okHttpClient = OkHttpClient.Builder()
@@ -377,10 +459,13 @@ RUM は、OpenTelemetry ライブラリを使ってインスツルメントさ�
     const config = new DatadogProviderConfiguration(
         // ...
     );
-    config.firstPartyHosts = [
-        {match: "example.com", propagatorTypes: PropagatorType.TRACECONTEXT},
-        {match: "example.com", propagatorTypes: PropagatorType.DATADOG}
-    ];
+    config.firstPartyHosts = [{ 
+        match: "example.com", 
+        propagatorTypes: [
+            PropagatorType.TRACECONTEXT, 
+            PropagatorType.DATADOG
+        ]
+    }];
     ```
 
    `PropagatorType` は列挙型で、次のトレーシングヘッダータイプを表します。
@@ -389,14 +474,14 @@ RUM は、OpenTelemetry ライブラリを使ってインスツルメントさ�
       - `PropagatorType.B3`: [B3 シングルヘッダー](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `PropagatorType.B3MULTI`: [B3 マルチヘッダー](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
-{{% /tab %}} 
+{{% /tab %}}
 
 {{% tab "Flutter RUM" %}}
 1. 上記に従い、RUM を APM に接続するためのセットアップを行います。
 
 2. 以下のように、`firstPartyHosts` の代わりに `firstPartyHostsWithTracingHeaders` を使用します。
     ```dart
-    final configuration = DdSdkConfiguration(
+    final configuration = DatadogConfiguration(
       // ...
       // added configuration
       firstPartyHostsWithTracingHeaders: {

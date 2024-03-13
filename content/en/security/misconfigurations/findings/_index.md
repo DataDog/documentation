@@ -1,5 +1,5 @@
 ---
-title: Misconfigurations Explorer
+title: Explore Misconfigurations
 kind: documentation
 aliases:
   - /security_platform/findings
