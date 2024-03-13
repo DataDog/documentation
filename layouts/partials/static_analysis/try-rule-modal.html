@@ -1,0 +1,79 @@
+
+<!-- CTA MODAL -->
+<div id="tryRuleModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header flex-column mx-auto">
+                <img src="{{.Site.Params.img_url}}images/dd-logo-white.svg" alt="datadog bits">
+                <h1 class="modal-title fs-4 mx-auto p-0">
+                    Try this rule and analyze your code with Datadog Code Analysis
+                </h1>
+                <div class="modal-close position-absolute" data-bs-dismiss="modal" aria-label="Close">
+                    {{ partial "icon" (dict "name" "x-circle-solid" "size" "16px" ) }}
+                </div>
+            </div>
+            <div class="row modal-body mx-auto">
+                <div class="col-12 floating-body-top d-flex flex-column">
+                    <h2 class="fs-6 m-0 p-0 fw-bold text-uppercase">How to use this rule</h2>
+                    <div class="position-relative">
+                        {{$valid_lang := replaceRE `(\w+)` .Page.Params.meta.language .Page.Params.group_id 1}}
+                        {{$valid_ruleset := (delimit (split $valid_lang "-") " ")}}
+                        {{$code := printf "rulesets:\n  - %s     # Rules to enforce %s." .Page.Params.group_id $valid_ruleset}}
+                        {{ highlight $code "yaml" "lineNos=table, lineNumbersInTable=true"}}
+                        <div class="copy-icon d-flex" title="Copy" data-bs-toggle='tooltip' data-bs-placement='left'>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="icon-left">
+                                <path id="Vector" d="M14.6634 11.6633H13.3301V2.66332H4.33008V1.32999H14.6634V11.6633ZM11.6634 4.32999H1.33008V14.6633H11.6634V4.32999ZM2.66341 5.66332H10.3301V13.33H2.66341V5.66332Z" fill-opacity="0.66"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <ol class="m-0">
+                        <li>Create a static-analysis.datadog.yml with the content above at the root of your repository</li>
+                        <li>Use our free IDE integrations or add Code Analysis scans to your CI pipelines</li>
+                        <li>Get feedback on your code</li>
+                    </ol>
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0">
+                            For more information, please read the <a href="/code_analysis">Code Analysis documentation</a>
+                            {{ partial "icon" (dict "name" "external-link" "title" "link to Code Analysis documentation" "size" "12px" "color" "#006BC2") }}
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row floating-body-bottom">
+                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center justify-content-between">
+                            <img src="{{.Site.Params.img_url}}images/icons/vscode.png" width="32" height="32" alt="vscode">
+                            <h2 class="fs-6 m-0 fw-bold">VS Code Extension</h2>
+                            <p>Identify code vulnerabilities directly in your VS Code editor</p>
+                            <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary position-relative">
+                                <span>Download Extension</span>
+                                {{ partial "icon" (dict "name" "external-link" "size" "13px" "color" "white") }}
+                                <a class="stretched-link" href="https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode"></a>
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center justify-content-between">
+                            <img src="{{.Site.Params.img_url}}images/icons/intellij.png" width="32" height="32" alt="intellij">
+                            <h2 class="fs-6 m-0 fw-bold">IntelliJ Plugin</h2>
+                            <p>Identify code vulnerabilities directly in JetBrains products (such as IntelliJ)</p>
+                            <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary position-relative">
+                                <span> Download Plugin</span>
+                                {{ partial "icon" (dict "name" "external-link" "size" "13px" "color" "white") }}
+                                <a class="stretched-link" href="https://plugins.jetbrains.com/plugin/19495-datadog"></a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer flex justify-content-center">
+                <p class="m-0">Use Datadog Code Analysis to catch code issues at every step of your development process</p>
+                <div class="m-0 position-relative">
+                    <span>Datadog Code Analysis</span>
+                    {{ partial "icon" (dict "name" "external-link" "size" "12px" "color" "#006BC2") }}
+                    <a class="stretched-link" href="https://www.datadoghq.com/code-analysis/"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
