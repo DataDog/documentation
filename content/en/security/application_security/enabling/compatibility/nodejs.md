@@ -11,13 +11,13 @@ code_lang_weight: 50
 The following ASM capabilities are supported in the Node.js library, for the specified tracer version:
 
 | ASM capability                   | Minimum NodeJS tracer version |
-| -------------------------------- | ----------------------------|
+| -------------------------------- | ---------------------------|
 | Threat Detection  | 3.13.1|
 | Threat Protection  | 3.19.0  |
-| Customize response to blocked requests | 4.1.0 |
-| Software Composition Analysis (SCA) |  2.23.0 for Node.js 12+, or 3.10.0 for Node.js 14+ |
-| Code Security (beta)  | 2.32.0 for Node.js 12+, or 3.19.0 for Node.js 14+ |
-| Automatic user activity event tracking | 2.38.0 for Node.js 12+, or 3.25.0 for Node.js 14+, or 4.4.0 for Node.js 16+ |
+| Customize response to blocked requests | 3.22.0 for Node.js 14+, 4.1.0 for Node.js 16+ |
+| Software Composition Analysis (SCA) | 3.10.0 for Node.js 14+ |
+| Code Security (beta)  | 3.19.0 for Node.js 14+ |
+| Automatic user activity event tracking | 3.25.0 for Node.js 14+, or 4.4.0 for Node.js 16+ |
 | API Security | 3.51.0 for Node.js 14+, or 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+ |
 
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.51.0.
@@ -58,14 +58,18 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
+| 5.x                 | Linux (glibc)         | arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+|                     | Linux (musl)          | arm64, x64       | Alpine 3.13                              |
+|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
+|                     | Windows               | x64             | Windows 8.1, Windows Server 2012         |
+| 4.x                 | Linux (glibc)         | arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+|                     | Linux (musl)          | arm64, x64       | Alpine 3.13                              |
+|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
+|                     | Windows               | x64             | Windows 8.1, Windows Server 2012         |
 | 3.x                 | Linux (glibc)         | arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
 |                     | Linux (musl)          | arm64, x64       | Alpine 3.13                              |
 |                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
 |                     | Windows               | x64             | Windows 8.1, Windows Server 2012         |
-| 2.x                 | Linux (glibc)         | arm64, x64 | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
-|                     | Linux (musl)          | arm64, x64 | Alpine 3.10                              |
-|                     | macOS                 | arm64, x64            | Yosemite (10.10)                         |
-|                     | Windows               |  x64             | Windows 8.1, Windows Server 2012         |
 
 
 
@@ -131,6 +135,8 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 | Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
+| [@apollo/server][43] | `>=4`    |{{< X >}}|{{< X >}} |          |
+| [apollo-server-core][44] | `>=3`    |{{< X >}}|{{< X >}} |          |
 | [cassandra-driver][28] | `>=3`    |{{< X >}}|{{< X >}} |          |
 | [couchbase][29]        | `^2.4.2` |{{< X >}}|          |          |
 | [elasticsearch][30]    | `>=10`   |{{< X >}}|          |          |
@@ -180,3 +186,5 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 [40]: https://share.github.io/sharedb/
 [41]: http://tediousjs.github.io/tedious
 [42]: https://github.com/sequelize/sequelize
+[43]: https://github.com/apollographql/apollo-server
+[44]: https://www.npmjs.com/package/apollo-server-core
