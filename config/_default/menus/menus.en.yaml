@@ -4621,7 +4621,7 @@ main:
     url: real_user_monitoring/session_replay/playlists
     parent: rum_session_replay
     identifier: rum_session_replay_playlists
-    weight: 305
+    weight: 405
   - name: Platform
     identifier: real_user_monitoring_platform
     url: real_user_monitoring/platform
@@ -4629,7 +4629,7 @@ main:
     weight: 4
   - name: Dashboards
     url: real_user_monitoring/platform/dashboards/
-    parent: rum_platform
+    parent: real_user_monitoring_platform
     identifier: rum_dashboards
     weight: 401
   - name: Performance
