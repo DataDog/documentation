@@ -4592,36 +4592,6 @@ main:
     parent: rum_product_analytics
     identifier: rum_heatmaps
     weight: 304
-  - name: Session Replay
-    url: real_user_monitoring/session_replay/
-    parent: rum
-    identifier: rum_session_replay
-    weight: 4
-  - name: Mobile
-    url: real_user_monitoring/session_replay/mobile
-    parent: rum_session_replay
-    identifier: rum_session_replay_mobile
-    weight: 401
-  - name: Browser Privacy Options
-    url: real_user_monitoring/session_replay/privacy_options
-    parent: rum_session_replay
-    identifier: rum_session_replay_privacy_options
-    weight: 402
-  - name: Browser Developer Tools
-    url: real_user_monitoring/session_replay/developer_tools
-    parent: rum_session_replay
-    identifier: rum_session_replay_developer_tools
-    weight: 403
-  - name: Browser Troubleshooting
-    url: real_user_monitoring/session_replay/troubleshooting
-    parent: rum_session_replay
-    identifier: rum_session_replay_troubleshooting
-    weight: 404
-  - name: Playlists
-    url: real_user_monitoring/session_replay/playlists
-    parent: rum_session_replay
-    identifier: rum_session_replay_playlists
-    weight: 405
   - name: Platform
     identifier: real_user_monitoring_platform
     url: real_user_monitoring/platform
@@ -4667,6 +4637,36 @@ main:
     parent: real_user_monitoring_platform
     identifier: rum_connect_rum_and_traces
     weight: 404
+  - name: Session Replay
+    url: real_user_monitoring/session_replay/
+    parent: rum
+    identifier: rum_session_replay
+    weight: 5
+  - name: Mobile
+    url: real_user_monitoring/session_replay/mobile
+    parent: rum_session_replay
+    identifier: rum_session_replay_mobile
+    weight: 501
+  - name: Browser Privacy Options
+    url: real_user_monitoring/session_replay/privacy_options
+    parent: rum_session_replay
+    identifier: rum_session_replay_privacy_options
+    weight: 502
+  - name: Browser Developer Tools
+    url: real_user_monitoring/session_replay/developer_tools
+    parent: rum_session_replay
+    identifier: rum_session_replay_developer_tools
+    weight: 503
+  - name: Browser Troubleshooting
+    url: real_user_monitoring/session_replay/troubleshooting
+    parent: rum_session_replay
+    identifier: rum_session_replay_troubleshooting
+    weight: 504
+  - name: Playlists
+    url: real_user_monitoring/session_replay/playlists
+    parent: rum_session_replay
+    identifier: rum_session_replay_playlists
+    weight: 505
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
