@@ -1,5 +1,5 @@
 ---
-title: Update Existing Pipelines
+title: Configure Existing Pipelines
 kind: documentation
 disable_toc: false
 ---

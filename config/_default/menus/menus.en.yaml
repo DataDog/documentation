@@ -3407,10 +3407,10 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_redact_log_data
     weight: 5
-  - name: Update Existing Pipelines
-    url: observability_pipelines/update_existing_pipelines/
+  - name: Configure Existing Pipelines
+    url: observability_pipelines/configure_existing_pipelines/
     parent: observability_pipelines
-    identifier: observability_pipelines_update_existing_pipelines
+    identifier: observability_pipelines_configure_existing_pipelines
     weight: 6
   - name: Log Management
     url: logs/

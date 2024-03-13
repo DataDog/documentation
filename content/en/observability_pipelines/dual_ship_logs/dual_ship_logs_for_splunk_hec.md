@@ -250,7 +250,7 @@ TKTK
 {{% /tab %}}
 {{< /tabs >}}
 
-## Update existing pipelines
+## Configure existing pipelines
 
 For existing pipelines, you can update processors in the Observability Pipelines UI, but if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
 
