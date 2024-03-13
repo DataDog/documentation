@@ -351,10 +351,12 @@ And also update the following Datadog Log Archives destination variables:
 - `DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_ACCESS_KEY_ID=<new_access_key_id>`
 - `DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_SECRET_ACCESS_KEY=<new_access_key>`
 
-Run the following command for your environment to update the Worker:
+Select the environment your Worker is running in:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
+
+Run the following command to update the Worker:
 
 ```
 docker run -i -e DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
