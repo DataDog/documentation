@@ -93,12 +93,37 @@ TKTK
 
 ### Update the Worker
 
-You need to manually update your Worker with the new values for the environment variables. 
+You need to manually update your Worker with the new values for the environment variables.
+
+Select the environment your Worker is running in:
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+The general command to update the Worker is:
+
+```
+docker run -i -e DD_API_KEY=<datadog_api_key> \
+	-e DD_OP_PIPELINE_ID=<op_pipeline-id> \
+	-e DD_SITE=<datadog_site> \
+        -e <source_env_variable> \
+        -e <destination_env_variable> \
+	-p 8282:8282 \
+	datadog/observability-pipelines-worker run
+```
+
+You need to replace the following placeholders:
+- `<datadog_api_key>` with the Datadog API key.
+- `<op_pipeline_id>` with the pipeline ID. To get the pipeline ID:
+    - Navigate to your pipeline.
+    - Click FILL IN
+- `<datadog_site>` with {{< region-param key="dd_site" code="true" >}}. Make sure you have the correct site region selected in the upper right side of the page to show the site region URL you need to use.
+- `<source_env_variable>` with the source environment variables if you are updating it.
+- `<destination_env_variable>` with the destination environment variables if you are updating it.
 
 #### Example
 
 For example, if you want to update the following Splunk source variables:
-
 - `SPLUNK_TOKEN=<new_token>`
 - `SPLUNK_HEC_ENDPOINT_URL=<new_url>`
 
@@ -106,21 +131,16 @@ And also update the following Datadog Log Archives destination variables:
 - `DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_ACCESS_KEY_ID=<new_access_key_id>`
 - `DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_SECRET_ACCESS_KEY=<new_access_key>`
 
-Select the environment your Worker is running in:
-
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-Run the following command to update the Worker:
+You need to run the following command to update the Worker. 
 
 ```
-docker run -i -e DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
-	-e DD_OP_PIPELINE_ID=dbfdba26-e14b-11ee-893c-da7ad0900002 \
-	-e DD_SITE=datadoghq.com \
-    -e SPLUNK_TOKEN=<new_token> \
-    -e SPLUNK_HEC_ENDPOINT_URL=<new_url> \
-	-e DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_ACCESS_KEY_ID=<new_access_key_id> \
-	-e DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_SECRET_ACCESS_KEY=<new_access_key> \
+docker run -i -e DD_API_KEY=<datadog_api_key> \
+	-e DD_OP_PIPELINE_ID=<op_pipeline-id> \
+	-e DD_SITE=<datadog_site> \
+        -e SPLUNK_TOKEN=<new_token> \
+        -e SPLUNK_HEC_ENDPOINT_URL=<new_splunk_hec_url> \
+	-e DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_ACCESS_KEY_ID=<new_aws_access_key_id> \
+	-e DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_SECRET_ACCESS_KEY=<new_aws_access_key> \
 	-p 8282:8282 \
 	datadog/observability-pipelines-worker run
 ```
@@ -142,12 +162,7 @@ TKTK
 TKTK
 
 {{% /tab %}}
-{{% tab "Linux (APT)" %}}
-
-TKTK
-
-{{% /tab %}}
-{{% tab "Linux (RPM)" %}}
+{{% tab "Linux" %}}
 
 TKTK
 

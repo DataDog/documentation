@@ -6,8 +6,6 @@ disable_toc: false
 
 ## Overview
 
-<div class="alert alert-warning">This documentation is for Observability Pipelines Worker (OPW) 2.0. If you are using OPW 1.8 and want to use OPW 2.0, you <strong>must</strong> migrate your OPW 1.8 pipelines to OPW 2.0.</div>
-
 Observability Pipelines allows you to collect, process, and route logs for the following use cases:
 
 - Dual ship logs: Send your logs to multiple destinations.
