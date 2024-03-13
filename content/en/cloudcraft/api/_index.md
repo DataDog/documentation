@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: Cloudcraft API Reference
 type: documentation
 cascade:
         disable_toc: true
