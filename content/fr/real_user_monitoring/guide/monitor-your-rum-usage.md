@@ -88,7 +88,7 @@ Pour créer un monitor de détection dʼanomalies afin de recevoir des alertes e
 
 ## Surveiller des sessions du RUM avec un seuil fixe
 
-{{< img src="real_user_monitoring/guide/monitor-your-rum-usage/anomaly-monitor-notifications-warning-rate.png" alt="Exemple de message de notification avec des degrés dʼavertissements dans le monitor dʼanomalies" style="width:90%" >}}
+{{< img src="real_user_monitoring/guide/monitor-your-rum-usage/anomaly-monitor-notifications-warning-rate.png" alt="Exemple de message de notification avec des seuils dʼavertissements dans le monitor dʼanomalies" style="width:90%" >}}
 
 Pour créer un monitor de détection des anomalies et recevoir une alerte lorsque le nombre de sessions devient trop élevé de façon imprévue et sʼapproche dʼun certain seuil :
 
