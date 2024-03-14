@@ -39,11 +39,11 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
    ```
    or to update from a previously installed 1.x version:
    ```shell
-   npm install dd-trace@2
+   npm install dd-trace@5
    ```
-   Use this [migration guide][1] to assess any breaking changes if you upgraded your library from 1.x to 2.x.
+   Use this [migration guide][1] to assess any breaking changes if you upgraded your library.
 
-   Application Security Management is compatible with Express v4+ and NodeJS v12.17.0+. For additional information, see [Compatibility][2].
+   Application Security Management is compatible with Express v4+ and NodeJS v14+. For additional information, see [Compatibility][2].
 
 2. **Where you import and initialize the Node.js library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
