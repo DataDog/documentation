@@ -19890,6 +19890,14 @@ components:
             feature, which the service is a part of.
           example: my-app
           type: string
+        ci-pipeline-fingerprints:
+          description: A set of CI fingerprints.
+          example:
+          - j88xdEy0J5lc
+          - eZ7LMljCk8vo
+          items:
+            type: string
+          type: array
         contacts:
           description: A list of contacts related to the services.
           items:
