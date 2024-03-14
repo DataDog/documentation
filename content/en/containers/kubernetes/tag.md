@@ -342,7 +342,7 @@ To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag k
 ```yaml
 datadog:
   podAnnotationsAsTags:
-    <POD_LABEL>: <TAG_KEY>
+    <POD_ANNOTATION>: <TAG_KEY>
 ```
 
 For example, you could set up:
