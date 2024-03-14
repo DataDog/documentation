@@ -1368,21 +1368,26 @@ main:
     url: metrics/summary/
     parent: metrics_top_level
     weight: 6
+  - name: Volume
+    identifier: metrics_volume
+    url: metrics/volume/
+    parent: metrics_top_level
+    weight: 7
   - name: Advanced Filtering
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
-    weight: 7
+    weight: 8
   - name: Metrics Without Limits™
     identifier: metrics_without_limits
     url: metrics/metrics-without-limits/
     parent: metrics_top_level
-    weight: 8
+    weight: 9
   - name: Guides
     url: metrics/guide
     parent: metrics_top_level
     identifier: metrics_guide
-    weight: 9
+    weight: 10
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
