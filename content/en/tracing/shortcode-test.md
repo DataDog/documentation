@@ -46,7 +46,7 @@ For an Ubuntu host:
 [2]: /agent/remote_config
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/service_catalog/
+[5]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 {{% /tab %}}
@@ -102,7 +102,7 @@ You can enable APM by installing the Agent with the Datadog Helm chart. This dep
 
 ### Installation
 
-{{< collapse-content title="Installing with Datadog Operator" level="h3" >}}
+{{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
 
 To enable single step instrumentation with the Datadog Operator:
 
@@ -156,7 +156,7 @@ To enable single step instrumentation with the Datadog Operator:
 4. Restart your applications.
 {{< /collapse-content >}} 
 
-{{< collapse-content title="Installing with Helm" level="h3" >}}
+{{< collapse-content title="Installing with Helm" level="h4" >}}
 
 To enable single step instrumentation with Helm:
 
@@ -200,7 +200,7 @@ To enable single step instrumentation with Helm:
 
 {{< /collapse-content >}} 
 
-
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [9]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
@@ -215,7 +215,7 @@ To enable single step instrumentation with Helm:
 
 ## Test without tabs
 
-{{% collapse-content title="Installing with Datadog Operator" level="h3" %}}
+{{% collapse-content title="Installing with Datadog Operator" level="h4" %}}
 
 To enable single step instrumentation with the Datadog Operator:
 
@@ -269,7 +269,7 @@ To enable single step instrumentation with the Datadog Operator:
 4. Restart your applications.
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Installing with Helm" level="h3" %}}
+{{% collapse-content title="Installing with Helm" level="h4" %}}
 
 To enable single step instrumentation with Helm:
 
