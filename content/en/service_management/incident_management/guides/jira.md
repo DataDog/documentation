@@ -1,5 +1,5 @@
 ---
-title: Integrate Statuspage with Datadog Incident Management
+title: Integrate Jira with Datadog Incident Management
 kind: Guide
 disable_toc: false
 further_reading:
@@ -9,52 +9,35 @@ further_reading:
 - link: "https://app.datadoghq.com/integrations/jira"
   tag: "In-App"
   text: "In-app Jira integration tile"
-- link: "monitors/guide/integrate-monitors-with-statuspage/"
-  tag: "Guide"
-  text: "Integrating Monitors With Statuspage"
-- link: "synthetics/guide/synthetic-test-monitors/#integrate-your-synthetic-test-monitor-with-statuspage"
-  tag: "Guide"
-  text: "Integrate your Synthetic test monitor with Statuspage"
+
 ---
 
 ## Overview
 
-Atlassian's Jira 
-
+Jira is an issue and project tracking system for software teams. The Datadog Jira integration allows you to create issues incidents in Datadog and view issues created in Jira as Datadog events. Use the Jira integration with Datadog Incident Management for:
+- **Improved Visibility**: Ensure that all stakeholders are immediately informed about incidents, facilitating a quicker response.
+- **Supporting Existing Workflows**: Seamlessly integrate with your current processes, making it easier to plan work and manage priorities with Jira.
+- **Customization at Your Fingertips**: With dynamic templates, you can map Datadog severities to Jira priorities, add custom labels, define dynamic assignees, and more.
 
 ## Prerequisites
 
-Install the integration through the [Jira Integration tile][1]. For more information, see the [Statuspage integration][2] documentation.
+To use automatic ticket creation, install the integration through the [Jira Integration tile][1]. For more information, see the [Jira integration][2] documentation.
 
 ## Setup
 
 1. In the [Integration Settings page][3], find the Statuspage integration. 
-1. Toggle the **Enable Statuspage incident creation**.
+1. Toggle the **Automatically create a Jira Issue**.
+3. Define a template with dynamic variables to drive the content of the Jira ticket. The template maps severities to Jira priorities, adds labels, defines a dynamic assignee, and more.
 
-## Add a Statuspage incident
+{{< img src="service_management/incidents/guide/jira/incident_jira_template.png" alt="Example template for Jira tickets that are automatically created from Datadog incidents" style="width:80%;" >}}
 
-1. In the [Incidents page][4], open an existing incident.
-1. At the top of the incident page, click **Add a Statuspage incident**.
-1. Enter all the required fields which include Select a Statuspage, Incident name, and Incident status. You can also specify which Statuspage components are affected. 
-
-{{< img src="service_management/incidents/guide/statuspage/add_update_statuspage_form.png" alt="Form to add or update a Statuspage incident, including required fields for Select a Statuspage, Incident name, and Incident status" style="width:70%;" >}}
-
-## Update status
-
-After a Statuspage is added to an incident, you can continue updating the Statuspage until the incident is resolved.
-
-{{< img src="service_management/incidents/guide/statuspage/update_status_modal.png" alt="Example incident highlighting the linked statuspage incident and the option to Update Statuspage incident" style="width:80%;" >}}
-
-1. In the [Incidents page][4], open the incident you want to update.
-1. Find the Statuspage you added and click the button to open an integration modal. You can unlink the Statuspage integration, change the impact, or update the Statuspage.
-1. Click **Update Statuspage** to open the linked Statuspage details and make your modifications.
-1. Click **Update** to update the Statuspage incident.
+As incidents are created, an issue is also created in the corresponding Jira instance. This Jira issue links to the incident in Datadog for reference. 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/jira
-[2]: /integrations/statuspage/
+[2]: /integrations/jira/
 [3]: https://app.datadoghq.com/incidents/settings#Integrations
 [4]: https://app.datadoghq.com/incidents
