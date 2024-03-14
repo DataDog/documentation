@@ -10,7 +10,7 @@ For existing pipelines in Observability Pipelines, you can update processors in 
 
 ## Update an existing pipeline
 
-1. Navgate to [Observability Pipelines][LINK].
+1. Navigate to [Observability Pipelines][LINK].
 1. Select the pipeline you want to update.
 1. Click **Edit Pipeline in the top right corner.
 
@@ -131,7 +131,7 @@ And also update the following Datadog Log Archives destination variables:
 - `DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_ACCESS_KEY_ID=<new_access_key_id>`
 - `DD_OP_DESTINATION_DATADOG_ARCHIVES_AWS_SECRET_ACCESS_KEY=<new_access_key>`
 
-You need to run the following command to update the Worker. 
+You need to run the following command to update the Worker.
 
 ```
 docker run -i -e DD_API_KEY=<datadog_api_key> \
@@ -147,17 +147,17 @@ docker run -i -e DD_API_KEY=<datadog_api_key> \
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}
-  
-TKTK
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}  
 
 TKTK
 
 {{% /tab %}}
+{{% tab "Azure AKS" %}}
 
-{{% tab "Google GKE" %}}  
+TKTK
+
+{{% /tab %}}
+
+{{% tab "Google GKE" %}}
 
 TKTK
 
@@ -175,6 +175,6 @@ TKTK
 {{% tab "Terraform (AWS)" %}}
 
 TKTK
-  
+
 {{% /tab %}}
 {{< /tabs >}}
