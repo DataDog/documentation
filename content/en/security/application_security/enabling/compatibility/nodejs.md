@@ -10,15 +10,15 @@ code_lang_weight: 50
 
 The following ASM capabilities are supported in the Node.js library, for the specified tracer version:
 
-| ASM capability                   | Minimum NodeJS tracer version |
-| -------------------------------- | ---------------------------|
-| Threat Detection  | 3.13.1|
-| Threat Protection  | 3.19.0  |
-| Customize response to blocked requests | 3.22.0 for Node.js 14+, 4.1.0 for Node.js 16+ |
-| Software Composition Analysis (SCA) | 3.10.0 for Node.js 14+ |
-| Code Security (beta)  | 3.19.0 for Node.js 14+ |
-| Automatic user activity event tracking | 3.25.0 for Node.js 14+, or 4.4.0 for Node.js 16+ |
-| API Security | 3.51.0 for Node.js 14+, or 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+ |
+| ASM capability                         | Minimum NodeJS tracer version                                               |
+|----------------------------------------|-----------------------------------------------------------------------------|
+| Threat Detection                       | 3.13.1                                                                      |
+| Threat Protection                      | 3.19.0                                                                      |
+| Customize response to blocked requests | 3.22.0 for Node.js 14+, 4.1.0 for Node.js 16+                               |
+| Software Composition Analysis (SCA)    | 3.10.0 for Node.js 14+                                                      |
+| Code Security (beta)                   | 3.19.0 for Node.js 14+                                                      |
+| Automatic user activity event tracking | 3.25.0 for Node.js 14+, or 4.4.0 for Node.js 16+                            |
+| API Security                           | 3.51.0 for Node.js 14+, or 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+ |
 
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.51.0.
 
@@ -27,13 +27,13 @@ The minimum tracer version to get all supported ASM capabilities for Node.js is 
 - Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 |
-| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         | beta                      |
+| Type        | Threat Detection support | Vulnerability Management for OSS support |
+|-------------|--------------------------|------------------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                                |
+| Kubernetes  | {{< X >}}                | {{< X >}}                                |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                                |
+| AWS Fargate | {{< X >}}                | {{< X >}}                                |
+| AWS Lambda  | {{< X >}}                | beta                                     |
 
 ## Language and framework compatibility
 
@@ -57,7 +57,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 
 | Operating System | Architectures | Minimum Versions                         |
-|------------------|---------------| ---------------------------------------- |
+|------------------|---------------|------------------------------------------|
 | Linux (glibc)    | arm64, x64    | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
 | Linux (musl)     | arm64, x64    | Alpine 3.13                              |
 | macOS            | arm64, x64    | Catalina (10.15)                         |
@@ -78,10 +78,10 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - If your framework is not listed below, **Vulnerability Management for Code** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
-| ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| express | >=4| {{< X >}}  |{{< X >}}  | {{< X >}} |
-| nextjs | >=11.1| {{< X >}}  |  |  |
+| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
+|-----------|----------|-----------------------------|------------------------------|----------------------------------------------------|
+| express   | >=4      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| nextjs    | >=11.1   | {{< X >}}                   |                              |                                                    |
 
 
 
@@ -103,10 +103,10 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 
 
-| Framework                | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| http    |  {{< X >}} |  {{< X >}}  |  {{< X >}}  |
-| https   |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
+| Framework | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
+|-----------|-----------------------------|------------------------------|----------------------------------------------------|
+| http      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| https     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
 
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -125,26 +125,26 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 
-| Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
-| ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| [@apollo/server][43] | `>=4`    |{{< X >}}|{{< X >}} |          |
-| [apollo-server-core][44] | `>=3`    |{{< X >}}|{{< X >}} |          |
-| [cassandra-driver][28] | `>=3`    |{{< X >}}|{{< X >}} |          |
-| [couchbase][29]        | `^2.4.2` |{{< X >}}|          |          |
-| [elasticsearch][30]    | `>=10`   |{{< X >}}|          |          |
-| [ioredis][31]          | `>=2`    |{{< X >}}|{{< X >}} |          |
-| [knex][32]             | `>=0.8`  |{{< X >}}|{{< X >}} |          |
-| [mariadb][5]           | `>=3`    |{{< X >}}|{{< X >}} |          |
-| [memcached][33]        | `>=2.2`  |{{< X >}}|{{< X >}} |          |
-| [mongodb-core][34]     | `>=2`    |{{< X >}}|{{< X >}} |          |
-| [mysql][35]            | `>=2`    |{{< X >}}|          |{{< X >}} |
-| [mysql2][36]           | `>=1`    |{{< X >}}|{{< X >}} |{{< X >}} |
-| [oracledb][37]         | `>=5`    |{{< X >}}|{{< X >}} |          |
-| [pg][38]               | `>=4`    |{{< X >}}|{{< X >}} |{{< X >}} |
-| [redis][39]            | `>=0.12` |{{< X >}}|{{< X >}} |          |
-| [sharedb][40]          | `>=1`    |{{< X >}}|{{< X >}} |          |
-| [tedious][41]          | `>=1`    |{{< X >}}|{{< X >}} |          |
-| [sequelize][42]        | `>=4`    |         |          | {{< X >}}|
+| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
+|--------------------------|-----------|-----------------------------|------------------------------|----------------------------------------------------|
+| [@apollo/server][43]     | `>=4`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [apollo-server-core][44] | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [cassandra-driver][28]   | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [couchbase][29]          | `^2.4.2`  | {{< X >}}                   |                              |                                                    |
+| [elasticsearch][30]      | `>=10`    | {{< X >}}                   |                              |                                                    |
+| [ioredis][31]            | `>=2`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [knex][32]               | `>=0.8`   | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [mariadb][5]             | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [memcached][33]          | `>=2.2`   | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [mongodb-core][34]       | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| [mysql][35]              | `>=2`     | {{< X >}}                   |                              | {{< X >}}                                          |
+| [mysql2][36]             | `>=1`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| [oracledb][37]           | `>=5`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [pg][38]                 | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| [redis][39]              | `>=0.12`  | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [sharedb][40]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [tedious][41]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [sequelize][42]          | `>=4`     |                             |                              | {{< X >}}                                          |
 
 
 ### User Authentication Frameworks compatibility
@@ -154,10 +154,10 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - User login events, including the user IDs
 - The Account Takeover detection monitoring the user login events
 
-| Framework         | Minimum Framework Version   |
-|-------------------| --------------------------- |
-| passport-local    | 1.0.0                       |
-| passport-http     | 0.3.0                       |
+| Framework       | Minimum Framework Version |
+|-----------------|---------------------------|
+| passport-local  | 1.0.0                     |
+| passport-http   | 0.3.0                     |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
 [2]: /agent/remote_config/#enabling-remote-configuration
