@@ -55,7 +55,7 @@ The Volume page displays a list of your metrics reported to Datadog sorted by es
 
 {{< img src="metrics/volume/compare_metric_cardinality.png" alt="Metrics Volume filtered down to metric names with “shopist”, sorted by estimated custom metrics. On hover over the change in volume, displays the cardinality graph of the metric over the past day" style="width:100%;" >}}
 
-Cardinality refers to the number of unique sets of tag values associated with a given key. Tags with very large numbers of possible values have a "high cardinality". A custom metric is identified by a unique combination of a metric's name and tag values (including the host tag). 
+Cardinality refers to the number of unique sets of tag values associated with a given key. Tags with large numbers of possible values have a "high cardinality". A custom metric is identified by a unique combination of a metric's name and tag values (including the host tag). 
 
 Compare metric cardinality to understand:
   - Which metric names are causing your custom metrics bill to spike. 
@@ -63,7 +63,7 @@ Compare metric cardinality to understand:
   - What metric names have spiked recently in the past day or month.
 
 To view your spiking metric's cardinality over time:
-1. Select a timeframe in the top right hand corner (the recommended timeframe is **Past 1 Day** or **Past 4 Weeks**).
+1. Select a time frame in the top right hand corner (the recommended time frame is **Past 1 Day** or **Past 4 Weeks**).
 2. Find the metric you want to compare and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
 3. (Optional) Create a Change monitor for `% change` to proactively alert on this spiking metric. For more information, see the [Change monitor][2] guide.
 
@@ -85,7 +85,7 @@ You can also click the **Configure Metrics** dropdown and select **Manage Tags**
 
 {{< img src="metrics/volume/configure_metrics.png" alt="Configure Metric dropdown at the top of the page highlighting the Manage tags option" style="width:100%;" >}}
 
-You have full control over the cardinality of your metrics at any time with zero changes needed to your applications or the requirement of a remote-write setup. Below is an example of how eliminating timeseries that are never or rarely leveraged can significantly reduce your custom metrics volumes and therefore costs.
+You have full control over the cardinality of your metrics without the need to change your applications nor the requirement of a remote-write setup. Below is an example of how eliminating timeseries that are rarely used can significantly reduce your custom metrics volumes and costs.
 
 In this example, the tag configuration modal shows a metric with a current volume of 13690031 indexed custom metrics. After you select Include tags… with an empty allowlist of tags, the modal shows an estimated new volume of 1. You can reduce the number of indexed custom metrics by 13690030.
 
