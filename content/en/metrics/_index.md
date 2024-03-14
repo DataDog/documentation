@@ -24,6 +24,7 @@ This is an introduction to Metrics in Datadog and why they're useful. This secti
 {{< whatsnext desc="Visualize and query your metrics" >}}
     {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
+    {{< nextlink href="/metrics/volume" >}}<u>Metrics Volume</u> - Understand and manage your custom metrics usage and costs.{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
 {{< /whatsnext >}}
 
