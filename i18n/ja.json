@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "650"
+    "other": "700"
   },
 
   "beta_sentence": {
@@ -354,5 +354,14 @@
   },
   "personalized_demo" : {
     "other": "個別デモのリクエスト"
+  },
+  "configuration_management" : {
+    "other": "Configuration management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and container"
+  },
+  "source" : {
+    "other": "Source"
   }
 }

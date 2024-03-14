@@ -1,7 +1,7 @@
 {
   "data": {
     "attributes": {
-      "client_email": "252bf553ef04b351@example.com",
+      "client_email": "Test-252bf553ef04b351@example.com",
       "host_filters": [
         "foo:bar"
       ]

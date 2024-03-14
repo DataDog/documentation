@@ -12,14 +12,14 @@
       "tags": [
         "sensitive_data:true"
       ],
-      "is_enabled": true
-    },
-    "relationships": {
-      "group": {
-        "data": {
-          "type": "sensitive_data_scanner_group",
-          "id": "46276802-1da2-9e0e-5ee1-317a7e85eb44"
-        }
+      "is_enabled": true,
+      "priority": 5,
+      "included_keyword_configuration": {
+        "keywords": [
+          "credit card",
+          "cc"
+        ],
+        "character_count": 35
       }
     }
   }

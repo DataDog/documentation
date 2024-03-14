@@ -51,6 +51,16 @@ Datadog Lambda Extension이나 Datadog Forwarder Lambda를 사용해 로그와 �
 
 [디플로이먼트 추적][6]을 사용하면 서버리스 코드, 설정, 디플로이먼트 변경 사항을 함수의 메트릭, 트레이스, 로그와 연결할 수 있어 변경 사항이 애플리케이션 상태와 성능에 미치는 영향을 실시간으로 확인할 수 있습니다.
 
+### AWS Step Functions (공개 베타)
+
+AWS Step Functions는 개발자가 AWS에서 다단계 애플리케이션 워크플로를 생성하고 관리할 수 있게 해주는 서버리스 오케스트레이션 서비스입니다.
+
+[AWS Step Functions 통합][13]의 메트릭과 로그를 모니터링하여 서버리스 앱 보기 내에서 클라우드 기반 텔레메트리를 확인하세요.
+
+[실행 추적][14]을 통해 버그와 병목 현상을 식별합니다. 계단 함수에 대한 트레이스는 Step Function 로그에서 생성될 수 있으며 상태 시스템 실행 경로, 각 단계의 입력 및 출력, 단계 실행 길이를 포함한 세부적인 실행 정보를 제공합니다.
+
+Datadog에 접두사 `aws.states.enhanced`가 붙은 강화된 Step Function 메트릭은 두 번째 세부 수준에서 사용 가능하며 Datadog 내에서 직접 생성됩니다.
+
 ### Azure 앱 서비스
 
 [Azure 앱 서비스용 Datadog 확장][7]은 Azure 웹 앱에 대한 추적 기능을 제공합니다.
@@ -95,3 +105,5 @@ Google Cloud Run은 소규모의 단일 목적 함수를 만들 수 있는 경�
 [10]: /ko/serverless/azure_container_apps
 [11]: /ko/integrations/google_cloud_platform/
 [12]: /ko/serverless/google_cloud_run
+[13]: /ko/integrations/amazon_step_functions
+[14]: /ko/serverless/step_functions/installation

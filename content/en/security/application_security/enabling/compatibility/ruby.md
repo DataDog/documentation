@@ -15,11 +15,12 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
 | Customize response to blocked requests | 1.15.0 |
-| Vulnerability Management for Open Source Software (OSS) | 1.11.0 |
-| Vulnerability Management for Code-level (beta) | not supported |
+| Software Composition Analysis (SCA) | 1.11.0 |
+| Code Security (beta) | not supported |
 | Automatic user activity event tracking | 1.14.0 |
+| API Security | 1.15.0 |
 
-The minimum tracer version to get all supported ASM capabilities for Ruby is 1.11.0.
+The minimum tracer version to get all supported ASM capabilities for Ruby is 1.15.0.
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Ruby framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 

@@ -1,13 +1,13 @@
 ---
 aliases:
 - /ja/synthetics/api_test_timing_variations
-description: API テストのタイミングと各バリエーションのトラブルシューティングを理解する
+description: API テストのタイミングを理解し、その変動に対してトラブルシューティングします。
 further_reading:
 - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
   tag: ドキュメント
   text: Synthetics API テストのメトリクス
 kind: documentation
-title: API テストのタイミングと各バリエーションのトラブルシューティングを理解する
+title: API テストのタイミングの理解と、その変動に対するトラブルシューティング
 ---
 
 

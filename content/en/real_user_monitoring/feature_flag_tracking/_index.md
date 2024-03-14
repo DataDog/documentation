@@ -61,7 +61,8 @@ Search and filter your feature flags by typing in the search bar. You can also u
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
 
 ### Feature Flag Status
-There are two possible feature flag statuses:
+There are three possible feature flag statuses:
+- **Active**: The feature flag has evaluated different variants for the past 2 weeks
 - **Inactive**: For the past 2 weeks, there have only been feature flag evaluations for your control variant
 - **Out to 100%**: For the past 2 weeks, there have only been feature flag evaluations for one of your non-control variants
 
@@ -96,7 +97,7 @@ You can compare important metrics to you and your teams by grouping your query b
 [2]: /real_user_monitoring/browser#setup
 [3]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
 [4]: https://app.datadoghq.com/rum/feature-flags
-[5]: /real_user_monitoring/session_replay/
+[5]: /real_user_monitoring/session_replay/browser/
 [6]: /real_user_monitoring/error_tracking/explorer/#explore-your-issues
 [7]: https://app.datadoghq.com/rum/explorer
 [8]: /dashboards/

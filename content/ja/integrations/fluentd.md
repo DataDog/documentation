@@ -37,12 +37,11 @@ draft: false
 git_integration_title: fluentd
 integration_id: fluentd
 integration_title: FluentD
-integration_version: 2.2.0
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: fluentd
-oauth: {}
 public_title: FluentD
 short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
 supported_os:
@@ -267,7 +266,7 @@ FluentD チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/fluentd/images/snapshot-fluentd.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-fluentd-datadog

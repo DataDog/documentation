@@ -10,9 +10,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and metrics"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
 {{< site-region region="gov" >}}
@@ -26,6 +26,8 @@ further_reading:
   - GitLab >= 14.1 (self-hosted)
   - GitLab >= 13.7.0 (self-hosted) by enabling the `datadog_ci_integration` feature flag
 
+- **Running pipelines**: View pipeline executions that are running
+
 - **Partial pipelines**: View [partially retried][11] and downstream pipeline executions
 
 - **Manual steps**: View manually triggered pipelines
@@ -38,7 +40,7 @@ further_reading:
 
 - **Custom pre-defined tags**: Configure [custom tags][10] to all generated pipeline, stages, and job spans
 
-- **Custom tags and metrics at runtime**: Configure [custom tags][13] and metrics at runtime
+- **Custom tags and measures at runtime**: Configure [custom tags][13] and measures at runtime
 
 - **Parameters**: Set custom `env` or `service` parameters
 
@@ -300,7 +302,7 @@ The storage must not have network restrictions, such as an IP range allowlist.</
 [10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
 [12]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
-[13]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[13]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
 [16]: /account_management/teams/

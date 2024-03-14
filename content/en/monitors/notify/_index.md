@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Say what's happening** and **Notify your team** sections.
+Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Notify your team** section.
 
-## Say what's happening
+## Notify your team
 
 Use this section to set the notifications sent to your team.
 
@@ -65,7 +65,7 @@ If renotification is enabled, you are given the option to include an escalation 
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *Renotification message* field in the `Say what's happening` section.
+* In the *Renotification message* field in the `Notify your team` section.
 * With the `escalation_message` attribute in the API.
 
 If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
@@ -118,7 +118,9 @@ Disk space is low @ops-team@company.com
 
 ### Toggle additional content
 
-Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors. 
+Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors.
+
+<div class="alert alert-warning">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
 

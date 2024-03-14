@@ -29,11 +29,11 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 1. Choose your instrumentation type, then copy and paste the code snippet from the Datadog RUM UI into the appropriate file based on the instrumentation type.
 
    {{< tabs >}}
-   {{% tab "NPM" %}}
+   {{% tab "npm" %}}
 
-   If using NPM, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
+   When using npm, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
 
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), the initialization code must run in a [client component][5] so that it can collect telemetry from the client. You can achieve this without making your [`layout.tsx`][2] file itself a client component by following the example below to create an empty `<DatadogInit />` component with the RUM initialization code, and then rendering that `<DatadogInit />` component in your `layout.tsx`. Another option to avoid making your `layout.tsx` a client component is to use the CDN RUM instrumentation.
+   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), Datadog recommends using the CDN RUM instrumentation to ensure that the RUM initialization occurs in the client. If you want to use the npm package, the initialization code must run in a [client component][5] so RUM can collect telemetry from the client. You can achieve this without making your [`layout.tsx`][2] file itself a client component by following the example below to create an empty `<DatadogInit />` component with the RUM initialization code, and then rendering that `<DatadogInit />` component in your `layout.tsx`.
    - If your Next.js application relies on the **older** Next.js [Page Router][3], you can paste the initialization snippet into the custom [`_app.tsx`][4] file without the `"use client"` directive and without a separate `<DatadogInit />` component.
 
    {{< code-block lang="javascript" filename="datadog-init.tsx" disable_copy="false" collapsible="true" >}}
@@ -237,8 +237,8 @@ To start backend monitoring of your Next.js applications:
 [1]: https://nextjs.org/
 [2]: https://app.datadoghq.com/rum/performance-monitoring?_gl=1*il22i*_gcl_aw*R0NMLjE2OTAzMDM5MzcuQ2owS0NRanc1ZjJsQmhDa0FSSXNBSGVUdmxqb3ZQX1YyMFRsV1o1UlJLVHNUNHNITll2ZEJ0bTZONnlxdVM1X3lzY2NOejE4QzVON1ktOGFBcHpYRUFMd193Y0I.*_gcl_au*MjMxOTI4ODMzLjE2OTAyMjI1NTA.*_ga*MTIwMTk2NTA5Ny4xNjY2NzEzMjY2*_ga_KN80RDFSQK*MTY5MTc5ODE4OS4xMzYuMS4xNjkxNzk4NTQyLjAuMC4w*_fplc*RnA3SEVTb1BoTG9ndDI0OFQ5TERxRWRtMjNwTWVrTWZ3VGNGeWRaYm9HRkpJSXBxVHdVdFNTcURCWW1rZENHUldmU2EyTzhtZ3NXVzRUR0JUTzRnSGdPeGRkVVpWYVA5V0x4JTJGeTFRNWo5djNqYmNwQnJpckdHUU93M08xU3clM0QlM0Q
 [3]: /real_user_monitoring/browser/data_collected/
-[4]: /real_user_monitoring/dashboards/
+[4]: /real_user_monitoring/platform/dashboards/
 [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
-[6]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#setup-rum
-[7]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#setup-rum
+[7]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
 [8]: https://vercel.com

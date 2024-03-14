@@ -37,6 +37,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import "pages/home";
 @import "pages/glossary";
 @import "pages/standard-attributes";
+@import "pages/static-analysis";
 @import "pages/reference";
 
 // Components
@@ -48,6 +49,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/global-modals';
 @import 'components/header';
 @import 'components/integration-labels';
+@import 'components/product-availability-labels';
 @import 'components/breadcrumbs';
 @import 'components/integrations';
 @import 'components/platforms';

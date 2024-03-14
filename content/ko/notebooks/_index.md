@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ko/graphing/notebooks/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/
   tag: 블로그
@@ -11,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: 블로그
   text: 인시던트 포스트모템(사후 분석) 생성 모범 사례
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+  tag: 블로그
+  text: Datadog 워크플로 및 Cloud SIEM으로 일반적인 보안 작업을 자동화하고 위협에 대비하세요.
 kind: 설명서
 title: 노트북
 ---
@@ -87,7 +93,10 @@ title: 노트북
 위젯 유형 및 Markdown을 포함하여 콘텐츠의 미리보기를 보려면 노트북의 Preview 아이콘 위로 마우스를 가져갑니다. 노트북을 [View Mode](#view-mode)로 열려면 노트북 위로 마우스를 가져간 후 오른쪽의 **Open notebook in view mode**를 클릭하세요.
 
 ## 템플릿 갤러리
-[Template Gallery][3]에서 인시던트 대응 사후 분석 및 새 노트북을 생성할 수 있는 인시던트 보고서를 포함하여 바로 사용 가능한 템플릿을 확인할 수 있습니다. 재사용 가능한 노트북 구조를 구축하기 위해 새 커스텀 템플릿을 생성할 수도 있습니다.
+[템플릿 갤러리][3]에서 새 노트북을 만들 수 있는 즉시 사용 가능한 템플릿을 확인하세요. 템플릿에는 사고 대응 사후 분석, 사고 보고서 및 SLO 사양이 포함됩니다. 또한 재사용 가능한 노트북 구조를 빌드할 새 커스텀 템플릿을 생성할 수 있습니다.
+
+## 비전 기록
+노트북에서 **설정** 아이콘을 클릭하고 **버전 기록**을 클릭하여 버전 기록 측면 패널을 엽니다. 노트북의 버전 기록을 미리 보거나 복원하거나 복제할 수 있습니다. 자세한 내용은 [버전 기록 가이드][4]를 참조하세요.
 
 ## 노트북 설정
 
@@ -129,7 +138,7 @@ title: 노트북
 
 ### 템플릿 변수
 
-노트북은 템플릿 변수를 지원합니다. 템플릿 변수 값을 추가하고 선택하여 시각화 범위를 동적으로 지정할 수 있습니다. 자세한 내용은 [템플릿 변수][4]를 참조하세요.
+노트북은 템플릿 변수를 지원합니다. 템플릿 변수 값을 추가하고 선택하여 시각화 범위를 동적으로 지정할 수 있습니다. 자세한 내용은 [템플릿 변수][5]를 참조하세요.
 
 ### 셀 설정
 
@@ -153,36 +162,62 @@ title: 노트북
 
 #### 콘텐츠 유형
 
-노트북은 시각화 및 텍스트 셀을 지원합니다. 텍스트 셀은 제목, 부제목, 링크, 이미지, 목록 및 코드 블록을 사용할 수 있는 [Markdown][5]으로 형식이 지정됩니다. 노트북은 [MermaidJS][15] 형식의 다이어그램도 지원합니다.
+Notebooks는 시각화 및 텍스트 셀을 지원합니다. 텍스트 셀은 제목, 부제목, 링크, 이미지, 목록 및 코드 블록을 사용할 수 있는 [Markdown][6]으로 형식이 지정됩니다. Notebooks는 [MermaidJS][7] 형식의 다이어그램도 지원합니다.
 
 노트북의 그래프는 메트릭, 로그 이벤트, 인덱스 스팬, 실시간 프로세스, 네트워크 트래픽, RUM 이벤트, 프로파일링 메트릭, 보안 신호 등 모든 Datadog 데이터 소스를 지원합니다. 그래프는 Datadog 쿼리 편집기로 생성됩니다. 노트북은 다음을 지원합니다.
 
-* [시계열][6]
-* [상위 목록][7]
-* [표][8]
-* [히트맵][9]
-* [배포][10]
-* [목록][11]
-* [쿼리 값][12]
-* [퍼널][13]
-* [파이][14]
+* [시계열][8]
+* [최대 목록][9]
+* [표][10]
+* [히트맵][11]
+* [배포][12]
+* [목록][13]
+* [쿼리 값][14]
+* [퍼넬][15]
+* [원형 차트][16]
+* [SLO 요약][17]
 
+### [편집 액세스 제한]
 
+기본적으로 모든 사용자는 노트북에 대한 전체 액세스 권한을 갖고 있습니다.
+
+세분화된 액세스 제어를 사용하여 특정 노트북을 편집할 수 있는 [역할][18]을 제한합니다.
+1. 노트북을 보고 있는 동안 오른쪽 상단의 톱니를 클릭하면 설정 메뉴가 열립니다.
+1. **권한**을 선택하세요.
+1. **액세스 제한**을 클릭하세요.
+1. 대화 상자가 업데이트되어 기본적으로 **뷰어** 액세스 권한이 있는 조직 구성원을 표시합니다.
+1. 드롭다운을 사용하여 노트북을 편집할 수 있는 하나 이상의 역할, 팀 또는 사용자를 선택하세요.
+1. **Add**를 클릭합니다.
+1. 대화상자가 업데이트되어 선택한 역할에 **편집자** 권한이 있는지 표시합니다.
+1. **Save**를 클릭합니다
+
+**참고:** 노트북에 대한 편집 권한을 유지하려면 저장하기 전에 사용자가 구성원인 역할을 하나 이상 포함해야 합니다.
+
+액세스가 제한된 노트북에 대한 일반 액세스를 복원하려면 다음 단계를 따르세요.
+1. 노트북을 보면서 오른쪽 상단의 톱니를 클릭하면 설정 메뉴가 열립니다.
+1. **권한**을 선택하세요.
+1. **Restore Full Access**를 클릭하세요.
+1. **Save**를 클릭합니다.
+
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/notebook
 [2]: https://app.datadoghq.com/notebook/list
 [3]: https://app.datadoghq.com/notebook/template-gallery
-[4]: /ko/dashboards/template_variables/
-[5]: https://daringfireball.net/projects/markdown/
-[6]: /ko/dashboards/widgets/timeseries/
-[7]: /ko/dashboards/widgets/top_list/
-[8]: /ko/dashboards/widgets/table/
-[9]: /ko/dashboards/widgets/heat_map/
-[10]: /ko/dashboards/widgets/distribution/
-[11]: /ko/dashboards/widgets/list/
-[12]: /ko/dashboards/widgets/query_value/
-[13]: /ko/dashboards/widgets/funnel/
-[14]: /ko/dashboards/widgets/pie_chart/
-[15]: https://mermaid.js.org/
+[4]: /ko/notebooks/guide/version_history
+[5]: /ko/dashboards/template_variables/
+[6]: https://daringfireball.net/projects/markdown/
+[7]: https://mermaid.js.org/
+[8]: /ko/dashboards/widgets/timeseries/
+[9]: /ko/dashboards/widgets/top_list/
+[10]: /ko/dashboards/widgets/table/
+[11]: /ko/dashboards/widgets/heatmap/
+[12]: /ko/dashboards/widgets/distribution/
+[13]: /ko/dashboards/widgets/list/
+[14]: /ko/dashboards/widgets/query_value/
+[15]: /ko/dashboards/widgets/funnel/
+[16]: /ko/dashboards/widgets/pie_chart/
+[17]: /ko/dashboards/widgets/slo/
+[18]: /ko/account_management/rbac/

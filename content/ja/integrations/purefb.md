@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: purefb
-oauth: {}
 public_title: Pure Storage FlashBlade
 short_description: Pure Storage FlashBlade のパフォーマンスと利用状況を監視
 supported_os:

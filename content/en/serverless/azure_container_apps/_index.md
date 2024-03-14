@@ -22,7 +22,7 @@ You can instrument your application in one of two ways: [Dockerfile](#dockerfile
 
 Datadog publishes new releases of the serverless-init container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
 
-| dockerhub.io | gcr.io | public.ecr.aws |
+| hub.docker.com | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
 | datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 

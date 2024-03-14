@@ -5,6 +5,10 @@ kind: 설명서
 title: 수집된 NDM 데이터
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">네트워크 기기 모니터링은 이 사이트에서 지원되지 않습니다.</div>
+{{< /site-region >}}
+
 ## 메트릭
 
 네트워크 디바이스 모니터링은 `snmp.*` 네임스페이스 아래에 지정된 메트릭을 제출합니다. 수집된 메트릭은 `[configured profile]`에 의해 결정됩니다.
@@ -12,11 +16,11 @@ title: 수집된 NDM 데이터
 
 {{< get-metrics-from-git "snmp" >}}
 
-## 이벤트
+## 이벤트 
 
 네트워크 장치 모니터링에는 이벤트가 포함되지 않습니다.
 
-## 서비스 점검
+## 서비스 검사
 
 {{< get-service-checks-from-git "snmp" >}}
 

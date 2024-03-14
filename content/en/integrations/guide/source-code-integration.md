@@ -15,12 +15,15 @@ further_reading:
 - link: "/serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code"
   tag: "Documentation"
   text: "Learn about Serverless Monitoring"
-- link: "/continuous_integration/tests/developer_workflows/"
+- link: "/tests/developer_workflows/"
   tag: "Documentation"
   text: "Learn about CI Visibility"
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Learn about Application Security Monitoring"
+- link: "/logs/error_tracking/"
+  tag: "Documentation"
+  text: "Learn about Error Tracking for logs"
 ---
 
 ## Overview
@@ -363,7 +366,7 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 [103]: /logs/error_tracking/backend/?tab=serilog#setup
 [104]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
 [105]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[106]: /continuous_integration/tests/developer_workflows/#open-tests-in-github-and-your-ide
+[106]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 [107]: /security/application_security/
 
 {{% /tab %}}
@@ -393,6 +396,21 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 {{% /tab %}}
+
+{{% tab "GitLab" %}}
+
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths. Run this command for every commit you need to be synchronized with Datadog. If you are using [gitlab.com][1], this also allows you to see inline code snippets in [Error Tracking][3], [Continuous Profiler][4], [Serverless Monitoring][5], [CI Visibility][6], and [Application Security Monitoring][7].
+
+[1]: https://gitlab.com
+[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[3]: /logs/error_tracking/backend/?tab=serilog#setup
+[4]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
+[5]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+[6]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
+[7]: /security/application_security/
+
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Usage
@@ -417,11 +435,11 @@ If you're using the GitHub integration, or if you're hosting your repositories o
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can see a source code preview for profile frames broken down by line in the [Continuous Profiler][1].
+You can see a source code preview for profile frames in the [Continuous Profiler][1].
 
 1. Navigate to [**APM** > **Profile Search**][2].
-2. Select **by Line** granularity in the explorer dropdowns.
-3. Hover your cursor over a method in the flame graph.
+2. Hover your cursor over a method in the flame graph.
+3. If needed, press `Opt` or `Alt` to enable the preview.
 
 {{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
@@ -463,7 +481,7 @@ You can see links from failed test runs to their source repository in **CI Visib
 For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /continuous_integration/tests/developer_workflows#open-tests-in-github-and-your-ide
+[102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}

@@ -9,9 +9,6 @@ further_reading:
   - link: "/tracing/guide/setting_primary_tags_to_scope/"
     tag: "Documentation"
     text: "Add primary and secondary tags to your traces"
-  - link: "/tracing/guide/add_span_md_and_graph_it/"
-    tag: "Documentation"
-    text: "Add custom tags to your spans to filter and group performance"
   - link: "/tracing/guide/security/"
     tag: "Documentation"
     text: "Automatically scrub PII from your traces"
@@ -59,7 +56,7 @@ Datadog Application Performance Monitoring (APM) gives deep visibility into your
 
 For an introduction to terminology used in Datadog APM, see [APM Terms and Concepts][1].
 
-## Send traces to Datadog
+## Getting started
 
 As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers, or serverless functions takes just minutes.
 
@@ -67,9 +64,9 @@ As you transition from monoliths to microservices, setting up Datadog APM across
 <strong>Beta: Single Step APM Instrumentation</strong> - Enable APM instrumentation when you install the Datadog Agent to get started quickly with application performance monitoring. This option automatically instruments your services without you needing to modify the code. For more information, read <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>.
 </div>
 
-**Read [Sending Traces to Datadog][2] to get started.**
+**Read [Application Instrumentation][2] to start using Datadog APM.**
 
-Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], using automatic or custom instrumentation, or instrumenting with [OpenTelemetry][5].
+Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], or using [automatic][17] or [custom instrumentation][18].
 
 ## Control and manage data flowing into and being kept by Datadog
 
@@ -85,7 +82,7 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 
 {{< img src="tracing/index/SpantoMetricsPreview.png" alt="Generate Custom Metrics from ingested spans" style="width:100%;">}}
 
-## Connect traces with other telemetry
+## Correlate traces with other telemetry
 
 [View your application logs][9] side-by-side with the trace for a single distributed request with automatic trace-id injection. [Link between real user sessions][10] and traces to see the exact traces that correspond to user experiences and reported issues. [Link simulated tests][11] to traces to find the root cause of failures across frontend, network and backend requests.
 
@@ -131,10 +128,12 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/
 [9]: /tracing/other_telemetry/connect_logs_and_traces/
-[10]: /real_user_monitoring/connect_rum_and_traces
+[10]: /real_user_monitoring/platform/connect_rum_and_traces
 [11]: /synthetics/apm/
 [12]: /tracing/trace_explorer/#live-search-for-15-minutes
 [13]: /tracing/services/services_map/
 [14]: /tracing/services/service_page/
 [15]: /tracing/services/deployment_tracking/
 [16]: /profiler/
+[17]: /tracing/trace_collection/automatic_instrumentation/
+[18]: /tracing/trace_collection/custom_instrumentation/

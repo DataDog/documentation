@@ -32,7 +32,7 @@ Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, the Co
 
 Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the Containers page provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real-time:
 
-{{< img src="infrastructure/livecontainers/live-containers-overview.png" alt="Live containers with summaries" >}}
+{{< img src="infrastructure/livecontainers/live-containers-overview_2.png" alt="Live containers with summaries" >}}
 
 ## Setup
 
