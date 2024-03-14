@@ -37,10 +37,6 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
    npm install dd-trace@^4
    npm install dd-trace@^5
    ```
-   or to update from a previously installed 1.x version:
-   ```shell
-   npm install dd-trace@5
-   ```
    Use this [migration guide][1] to assess any breaking changes if you upgraded your library.
 
    Application Security Management is compatible with Express v4+ and NodeJS v14+. For additional information, see [Compatibility][2].
