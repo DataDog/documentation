@@ -26,6 +26,7 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
           enabled: true
         cws:
           enabled: true
+        # Enables CSM Misconfigurations and Kubernetes Security Posture Management
         cspm:
           enabled: true
           hostBenchmarks:
@@ -55,10 +56,11 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
     datadog:
       remoteConfiguration:
         enabled: true
-      # Enables CSM Misconfigurations and CSM Threats
       securityAgent:
+        # Enables CSM Threats
         runtime:
           enabled: true
+        # Enables CSM Misconfigurations and Kubernetes Security Posture Management
         compliance:
           enabled: true
           host_benchmarks:
