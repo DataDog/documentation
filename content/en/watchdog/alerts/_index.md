@@ -162,7 +162,7 @@ Watchdog uses the same seasonal algorithms that power monitors and dashboards. T
 
 ## Where to find Watchdog Alerts
 
-Watchdog Alerts appear in three places within Datadog:
+Watchdog Alerts appear in four places within Datadog:
 
 * The [Watchdog Alert Explorer][1]
 * On any individual [APM Service Page][3]
