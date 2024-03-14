@@ -49,7 +49,7 @@ RumMonitor.shared().addAttribute(forKey: "department", value: "marketing")
 Once you've deployed this step, new RUM sessions are tracked according to the tags you added.
 
 ## View RUM usage
-The newly tagged sessions are displayed on the [Usage Attribution][3] page. When you review the RUM with Sessions and RUM Sessions columns, you can see the number of sessions by department.
+The newly tagged sessions are displayed on the [Usage Attribution][3] page. When you review the RUM with Session Replay Sessions and RUM Sessions columns, you can see the number of sessions by department.
 
 {{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-3.png" alt="View RUM usage by department" style="width:100%;">}}
 
