@@ -30,7 +30,7 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
-### Libraries Supported
+### Supported libraries
 Data Streams Monitoring supports the [confluent-kafka library][3].
 
 ### Monitoring SQS Pipelines
