@@ -39,6 +39,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: silk
+oauth: {}
 public_title: Silk
 short_description: Silk のパフォーマンスとシステム統計情報を監視します。
 supported_os:

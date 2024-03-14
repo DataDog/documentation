@@ -3,7 +3,6 @@ app_id: cortex
 app_uuid: 15baccdd-d89c-4591-ab45-e6378d8c174f
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: cortex.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10178
     source_type_name: cortex
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,6 +20,7 @@ author:
   support_email: support@getcortexapp.com
 categories:
 - インシデント
+- モニタリング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
 display_on_public_website: true
@@ -34,19 +33,21 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cortex
+oauth: {}
 public_title: Cortex
 short_description: Cortex ダッシュボードから直接 Datadog インシデントを作成
 supported_os:
 - linux
-- windows
 - macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Incidents
   - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Incidents
+  - Category::Monitoring
   configuration: README.md#Setup
   description: Cortex ダッシュボードから直接 Datadog インシデントを作成
   media: []
@@ -55,18 +56,17 @@ tile:
   title: Cortex
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 [Cortex][1] インテグレーションにより、Cortex ダッシュボードから直接 Datadog インシデントをトリガーできます。
 
-## 計画と使用
+## セットアップ
 
 このインテグレーションをセットアップするには、Cortex アカウント、Datadog API 、アプリケーションキーが必要です。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 1. 初めてのお客様でデモをご希望の場合、Cortex までお問い合わせください。
 2. [Datadog API キー][2]を作成します。
@@ -83,21 +83,21 @@ tile:
 6. 画面に以下のメッセージが表示されます。「インシデントがトリガーされました。Datadog で確認するには、こちらをクリックします。」
 7. また、新しいインシデントは "Incidents" でも確認できます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Cortex には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Cortex には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Cortex には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[support@getcortexapp.com][7] までお問い合わせください。
 

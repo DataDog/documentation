@@ -22,34 +22,33 @@ short_description: Azure Customer Insights のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Customer Insights を使用すると、どのような規模のオーガニゼーションであっても、多種多様なデータセットを結合して知識やインサイトを得ることで、あらゆる角度から捉えた顧客の全体像を構築することができます。
 
 Datadog Azure インテグレーションを使用して、Customer Insights からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_customer_insights" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Customer Insights インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Azure Customer Insights インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

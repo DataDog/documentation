@@ -39,6 +39,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: proxysql
+oauth: {}
 public_title: ProxySQL
 short_description: Recueillez vos métriques et logs ProxySQL.
 supported_os:

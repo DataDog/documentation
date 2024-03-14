@@ -5,7 +5,6 @@ assets:
   dashboards:
     Containers: assets/dashboards/containers.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +14,6 @@ assets:
       prefix: container.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10242
     source_type_name: コンテナ
 author:
   homepage: https://www.datadoghq.com
@@ -37,6 +35,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: コンテナ
+oauth: {}
 public_title: コンテナ
 short_description: コンテナのメトリクスを Datadog で追跡
 supported_os:
@@ -57,7 +56,6 @@ tile:
   title: コンテナ
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -67,9 +65,9 @@ tile:
 **注**: `container` チェックは `containerd` チェックとは異なります。`container` チェックでは、コンテナのランタイムにかかわらず、システムにあるすべてのコンテナの標準メトリクスが報告されます。
 `containerd` は、`containerd` ランタイムについて実行され、`containerd.*` ネームスペースでメトリクスを公開します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 コンテナは、Datadog Agent チェックの核であり、対応するコンテナランタイムが検出されると自動的にアクティベートされます。
 ご使用の環境により、対応するコンテナランタイム (Docker、containerd) へのアクセスの構成が必要になる場合があります。
@@ -78,7 +76,7 @@ tile:
 
 `container` チェックには、自動アクティベーションのためフォルダーのマウントが必要です。これは公式 Helm Chart および Datadog Operator により管理され、セットアップは Kubernetes、Docker、ECS、ECS Fargate 用に文書化されています。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 `container` チェックにより公開されるコンフィギュレーション設定はありません。共通フィールドをカスタマイズまたは `container` チェックのアクティベーションを強制するには、以下の手順に従います。
 
@@ -93,13 +91,13 @@ tile:
 
 [Agent の `status` サブコマンドを実行][1]し、**Checks** セクションで `container` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][12] を参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

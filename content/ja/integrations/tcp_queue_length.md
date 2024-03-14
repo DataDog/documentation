@@ -3,7 +3,6 @@ app_id: tcp-queue-length
 app_uuid: 2c48a360-9fbb-4cd6-9316-0e9afd9926c8
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: tcp_queue.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10295
     source_type_name: TCP Queue Length
 author:
   homepage: https://www.datadoghq.com
@@ -35,6 +33,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tcp_queue_length
+oauth: {}
 public_title: TCP Queue Length
 short_description: Datadog で、TCP バッファのサイズを追跡します。
 supported_os:
@@ -53,16 +52,15 @@ tile:
   title: TCP Queue Length
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Linux TCP によるキューの送受信の使用方法を監視します。キューを送受信する TCP が個々のコンテナに対して満杯の状態であるかどうかを検知できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 `tcp_queue_length` はコア Agent 6/7 のチェックで、`system-probe` に実装された eBPF パートに依存します。Agent バージョン 7.24.1/6.24.1 以上が必要です。
 
@@ -81,7 +79,7 @@ yum install -y kernel-devel-$(uname -r)
 
 **注**: バージョン 8 以前の Windows および CentOS/RHEL はサポートされません。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 `tcp_queue_length` インテグレーションを有効にするには、`system-probe` とコアエージェントの両方でコンフィギュレーションオプションを有効化する必要があります。
 
@@ -138,26 +136,26 @@ spec:
 
 [Agent の `status` サブコマンドを実行][2]し、Checks セクションで `tcp_queue_length` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "tcp_queue_length" >}}
 
 
-### ヘルプ
+### サービスのチェック
 
 TCP Queue Length チェックには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 TCP Queue Length チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/tcp_queue_length.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://github.com/DataDog/helm-charts
+[3]: https://github.com/helm/charts/tree/master/stable/datadog
 [4]: https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

@@ -21,34 +21,33 @@ short_description: Azure Automation のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Automation は、Azure 環境と非 Azure 環境の両方を一貫して管理できる、クラウドベースの自動化および構成サービスを提供します。
 
 Datadog Azure インテグレーションを使用して、Azure Automation からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_automation" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Automation インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Azure Automation インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

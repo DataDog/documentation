@@ -25,6 +25,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: rum_android
+oauth: {}
 public_title: Android
 short_description: Surveiller des applications Android et générer des métriques avec
   la solution RUM Datadog

@@ -36,6 +36,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: hbase_master
+oauth: {}
 public_title: Hbase Master
 short_description: Intégration de HBase Master.
 supported_os:

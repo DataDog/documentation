@@ -33,6 +33,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: zabbix
+oauth: {}
 public_title: zabbix
 short_description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
 supported_os:

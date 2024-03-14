@@ -20,7 +20,6 @@ short_description: Azure App Services のキーメトリクスを追跡。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure App Service は、Web、モバイル、API、およびビジネスロジックアプリケーションを実行し、それらのアプリケーションが必要とするリソースを自動的に管理する、PaaS (サービスとしてのプラットフォーム) です。
@@ -46,29 +45,29 @@ Azure App Service ビューを使用すると、次のことができます。
 
 Azure App Service で実行するアプリケーションに対して Datadog APM およびカスタムメトリクスを有効にするには、[Datadog Azure App Service 拡張機能][1]のドキュメントを参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
 ログおよびトレース ID 挿入など、その他のモニタリングオプションについては、[Azure App Service 拡張機能][1]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_app_services" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure App Service インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Azure App Service インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

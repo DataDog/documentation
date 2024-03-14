@@ -10,7 +10,7 @@ aliases:
 cascade:
   algolia:
     rank: 70
-description: Agent をインストールして、データ収集のために構成する
+description: Agent をインストールおよび構成してデータを収集する
 further_reading:
 - link: /logs/
   tag: Documentation

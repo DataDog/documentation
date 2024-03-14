@@ -3,7 +3,6 @@ app_id: hikaricp
 app_uuid: fa40ec7e-e8f6-4c4b-a675-31716b23a9fa
 assets:
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,7 +13,6 @@ assets:
       prefix: hikaricp.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10308
     source_type_name: hikaricp
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -29,11 +27,12 @@ draft: false
 git_integration_title: hikaricp
 integration_id: hikaricp
 integration_title: HikariCP
-integration_version: 1.2.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: hikaricp
+oauth: {}
 public_title: HikariCP
 short_description: HikariCP と openmetrics v2 とのインテグレーション
 supported_os:
@@ -54,16 +53,15 @@ tile:
   title: HikariCP
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 [HikariCP][1] は、軽量かつ高速な JDBC コネクションプーリングフレームワークです。
 このチェックでは、Datadog Agent を通じて HikariCP を監視しています。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 HikariCP チェックをホストにインストールするには
 
@@ -79,7 +77,7 @@ HikariCP チェックをホストにインストールするには
  `datadog-agent integration install -w
  path/to/hikaricp/dist/<ARTIFACT_NAME>.whl`.
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 1. HikariCP のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `hikaricp/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hikaricp/conf.yaml][4] を参照してください。
 
@@ -89,24 +87,24 @@ HikariCP チェックをホストにインストールするには
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `hikaricp` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hikaricp" >}}
 
 
-### ヘルプ
+### イベント
 
 HikariCP には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
 [1]: https://github.com/brettwooldridge/HikariCP
-[2]: https://docs.datadoghq.com/ja/developers/integrations/python/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-extras/blob/master/hikaricp/datadog_checks/hikaricp/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

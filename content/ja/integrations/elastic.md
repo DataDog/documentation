@@ -49,6 +49,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: elastic
+oauth: {}
 public_title: ElasticSearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
 supported_os:

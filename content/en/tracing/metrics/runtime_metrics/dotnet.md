@@ -29,7 +29,6 @@ further_reading:
 - .NET 5
 - .NET 6
 - .NET 7
-- .NET 8
  
 ## Automatic configuration
 

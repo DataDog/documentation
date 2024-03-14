@@ -24,11 +24,12 @@ draft: false
 git_integration_title: wmi_check
 integration_id: wmi
 integration_title: WMI チェック
-integration_version: 1.16.0
+integration_version: 1.15.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: wmi_check
+oauth: {}
 public_title: WMI チェック
 short_description: WMI メトリクスを収集してグラフを作成。
 supported_os:

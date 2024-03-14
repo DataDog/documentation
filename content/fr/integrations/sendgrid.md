@@ -36,6 +36,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: sendgrid
+oauth: {}
 public_title: SendGrid
 short_description: Recueillez des métriques SendGrid.
 supported_os:

@@ -5,7 +5,6 @@ assets:
   dashboards:
     InsightFinder Dashboard: assets/dashboards/ifdashboard.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -15,7 +14,6 @@ assets:
       prefix: insightfinder.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10253
     source_type_name: InsightFinder
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -26,8 +24,7 @@ categories:
 - アラート設定
 - 自動化
 - インシデント
-- notifications
-- ai/ml
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/insightfinder/README.md
 display_on_public_website: true
@@ -40,6 +37,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: insightfinder
+oauth: {}
 public_title: InsightFinder
 short_description: InsightFinder で DataDog からデータを統合して分析
 supported_os:
@@ -52,8 +50,7 @@ tile:
   - Category::Alerting
   - Category::Automation
   - Category::Incidents
-  - Category::Notifications
-  - Category::AI/ML
+  - Category::Notification
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -65,7 +62,6 @@ tile:
   title: InsightFinder
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,14 +70,14 @@ tile:
 
 この双方向インテグレーションは、高度な AIOps 機能を提供します。InsightFinder は、標準的な API を通じて Datadog からデータを取り込み、ビジネスに影響が及ぶ前に異常なイベントを発見します。これらの異常なイベントに対するアラートを Datadog に送信し、チームに通知することができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 InsightFinder のインテグレーションを構成してデータを送信するには、[InsightFinder-Datadog インテグレーション][2]を参照してください。Datadog [API キーおよびアプリケーションキー][3]が必要です。
 
 
-## Agent
+## サポート
 
 [Datadog サポート][4]にお問い合わせいただくか、[InsightFinder サポート][5]にメールしてください。
 

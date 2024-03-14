@@ -38,6 +38,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: jboss_wildfly
+oauth: {}
 public_title: JBoss/WildFly
 short_description: Recueille diverses métriques JMX fournies par des applications
   JBoss et WildFly

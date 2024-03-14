@@ -23,6 +23,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: harness_cloud_cost_management
+oauth: {}
 public_title: Harness クラウドコストマネジメント
 short_description: Harness のクラウドとクラスターのコストメトリクスを日付範囲で表示する
 supported_os:
@@ -55,7 +56,6 @@ tile:
   title: Harness クラウドコストマネジメント
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -70,22 +70,22 @@ Datadog と Harness を使えば、以下のことが可能です。
 - 支出上位のリソースを見直す
 
 
-## 計画と使用
+## セットアップ
 
 1. まだ Harness クラウドコストマネジメントの利用を開始していない場合は、14 日間のトライアルに[サインアップ][1]してください。
 
 2. インテグレーションをインストールします。
 3. Harness クラウドコストマネジメントダッシュボードにアクセスし、Harness のユーザー ID でログインして、いずれかのウィジェットに接続します。これにより、すべてのウィジェットで認証されます。
 
-### ヘルプ
+### イベント
 
 Harness クラウドコストマネジメントチェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Harness クラウドコストマネジメントチェックには、サービスのチェック機能は含まれません。
 
-## Agent
+## サポート
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

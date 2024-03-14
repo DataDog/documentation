@@ -1,9 +1,7 @@
 ---
 categories:
-- azure
 - cloud
-- iot
-- provisioning
+- azure
 dependencies: []
 description: Azure IOT Hub のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_iot_hub/
@@ -22,7 +20,6 @@ short_description: Azure IOT Hub のキーメトリクスを追跡。
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure IOT Hub は、多数の IoT デバイス間で信頼性が高くて安全な双方向通信を可能にするフルマネージド型のサービスです。
@@ -34,27 +31,27 @@ Azure IOT Hub からメトリクスを取得すると、以下のことができ
 
 Azure Provisioning Service は、IoT Hub 向けのヘルパーサービスです。人間が介入することなく、適切な IoT ハブへのゼロタッチ、ジャストインタイムプロビジョニングを可能にします。顧客は、多数のデバイスを安全かつスケーラブルな方法でプロビジョニングできます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_iot_hub" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure IoT Hub インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Azure IoT Hub インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

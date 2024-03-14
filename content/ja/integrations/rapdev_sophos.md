@@ -7,7 +7,6 @@ assets:
   dashboards:
     RapDev Sophos Dashboard: assets/dashboards/rapdev_sophos_dashboard.json
   integration:
-    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,7 +17,6 @@ assets:
       prefix: rapdev.sophos.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10192
     source_type_name: RapDev Sophos
   logs: {}
   monitors:
@@ -46,6 +44,7 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_sophos
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -70,7 +69,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Sophos が管理するエンドポイントの健全性を監視
   media:
@@ -83,21 +81,20 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 Sophos インテグレーションは、Sophos が管理するエンドポイント全体の健全性を監視し、管理対象デバイスが健全な状態にあることを確認します。このインテグレーションには、デバイスの健全性を監視するために使用できる複数のメトリクスの概要を提供する 1 つのダッシュボードがあらかじめ組み込まれています。また、Sophos インテグレーションには 2 つのモニターが付属しており、デバイスの健全性が悪くなった場合や、デバイス上の Sophos サービスの 1 つが停止した場合に、アラートを出すことができます。
 
-### ログ管理
+### アラート設定
 1. 管理対象エンドポイントの健全性が変化した
 2. 管理対象エンドポイントの Sophos サービスが停止している
 
-### ライブラリ
+### ダッシュボード  
 1. RapDev Sophos ダッシュボード
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io

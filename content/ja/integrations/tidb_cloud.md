@@ -5,7 +5,6 @@ assets:
   dashboards:
     TiDB Cloud Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -15,7 +14,6 @@ assets:
       prefix: tidb_cloud.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10247
     source_type_name: TiDB Cloud
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -24,7 +22,7 @@ author:
   support_email: xuyifan02@pingcap.com
 categories:
 - cloud
-- data stores
+- data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md
 display_on_public_website: true
@@ -37,6 +35,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: tidb_cloud
+oauth: {}
 public_title: TiDB Cloud
 short_description: Datadog による TiDB Cloud クラスターのモニタリング
 supported_os:
@@ -50,7 +49,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Cloud
-  - Category::Data Stores
+  - Category::Data Store
   configuration: README.md#Setup
   description: Datadog による TiDB Cloud クラスターのモニタリング
   media: []
@@ -59,7 +58,6 @@ tile:
   title: TiDB Cloud
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -72,29 +70,29 @@ TiDB Cloud と Datadog のインテグレーションを使用して、TiDB Clou
 >
 > - オンプレミスの TiDB クラスターについては、[TiDB インテグレーション][2]を参照してください。
 
-## 計画と使用
+## セットアップ
 
 クラスターに対して TiDB Cloud と Datadog のインテグレーションを設定するには、Datadog API キーとリージョンを TiDB Cloud に提供します。
 
 TiDB Cloud プロジェクトの Datadog インテグレーションを構成するには、[TiDB Cloud Preferences][3] を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "tidb_cloud" >}}
 
 
-### ヘルプ
+### サービスのチェック
 
 TiDB Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 TiDB Cloud インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://tidbcloud.com
 [2]: https://docs.datadoghq.com/ja/integrations/tidb/

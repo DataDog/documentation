@@ -34,6 +34,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: container
+oauth: {}
 public_title: Container
 short_description: Surveillez toutes vos métriques de conteneur avec Datadog.
 supported_os:

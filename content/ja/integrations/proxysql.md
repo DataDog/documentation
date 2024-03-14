@@ -5,7 +5,6 @@ assets:
   dashboards:
     ProxySQL Overview: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: proxysql.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10096
     source_type_name: ProxySQL
   logs:
     source: proxysql
@@ -26,7 +24,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data stores
+- data store
 - ログの収集
 - キャッシュ
 dependencies:
@@ -36,11 +34,12 @@ draft: false
 git_integration_title: proxysql
 integration_id: proxysql
 integration_title: ProxySQL
-integration_version: 5.1.0
+integration_version: 4.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: proxysql
+oauth: {}
 public_title: ProxySQL
 short_description: ProxySQLメトリクスとログを収集。
 supported_os:
@@ -53,7 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Stores
+  - Category::Data Store
   - Category::Log Collection
   - Category::Caching
   configuration: README.md#Setup
@@ -64,22 +63,21 @@ tile:
   title: ProxySQL
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [ProxySQL][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 #### SSL の有効化
 フル SSL/TLS 検証を使用して ProxySQL に接続するには、`conf.yaml` ファイルで `tls_verify` オプションを有効にします。SSL/TLS による接続に必要な証明書とパスワードを含めます。
@@ -90,17 +88,17 @@ ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含
 ```
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 1. ProxySQL のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1] のルートにある `conf.d/` フォルダーの `proxysql.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル proxysql.d/conf.yaml][2] を参照してください。
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -139,7 +137,7 @@ ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含
 [2]: https://github.com/DataDog/integrations-core/blob/master/proxysql/datadog_checks/proxysql/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -149,11 +147,11 @@ ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含
 
 | パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
-| `<INTEGRATION_NAME>` | `proxysql`                                                   |
-| `<INIT_CONFIG>`      | 空白または `{}`                                              |
-| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
+| `<インテグレーション名>` | `proxysql`                                                   |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
+| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
 
-##### 収集データ
+##### ログの収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
@@ -170,28 +168,28 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][4]し、Checks セクションで `proxysql` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "proxysql" >}}
 
 
-### ヘルプ
+### イベント
 
 ProxySQL チェックにはイベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 {{< get-service-checks-from-git "proxysql" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 
 [1]: https://proxysql.com/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help

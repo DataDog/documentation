@@ -15,7 +15,6 @@ assets:
       prefix: elastic_cloud.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10315
     source_type_name: Elastic Cloud
 author:
   homepage: https://www.datadoghq.com
@@ -23,7 +22,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニター
+- web
+- メトリクス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,12 +35,14 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: elastic_cloud
+oauth: {}
 public_title: Elastic Cloud
 short_description: Elastic Cloud でホストされている Elasticsearch サービスのメトリクスモニターです。
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Web
   - Category::Metrics
   configuration: README.md#Setup
   description: Elastic Cloud でホストされている Elasticsearch サービスのメトリクスモニターです。
@@ -50,7 +52,6 @@ tile:
   title: Elastic Cloud
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Elastic Cloud とインテグレーションすることで、ホスティングされた Elasticsearch のサービスを常に最新の状態に保つことができます。
@@ -62,13 +63,13 @@ Elastic Cloud とインテグレーションすることで、ホスティング
 - ノードとインデックスの統計情報
 - リソース使用率メトリクス
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 必要なインストール手順はありません。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -131,27 +132,27 @@ Datadog の IP プレフィックスを含める方法
 1. Datadog の IP 範囲を[こちら][3]で確認します。
 2. **webhooks** の各プレフィックスを **source** としてトラフィックルールに入力します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "elastic_cloud" >}}
 
 
-### ワークフローの自動化
+### ログ管理
 
 Elastic Cloud インテグレーションには、ログは含まれません。
 
-### ヘルプ
+### イベント
 
 Elastic Cloud インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Elastic Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 

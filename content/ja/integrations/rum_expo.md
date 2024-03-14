@@ -1,18 +1,16 @@
 ---
 app_id: rum-expo
 app_uuid: 6894cf91-e7a2-4600-966b-20a0c99ff08d
-assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- ログの収集
-- モニター
-- apm
+- メトリクス
+- モバイル
 - ネットワーク
-- profiler_troubleshooting
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_expo/README.md
 display_on_public_website: true
@@ -25,21 +23,27 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: rum_expo
+oauth: {}
 public_title: Expo
 short_description: Datadog RUM を使用した Expo アプリケーションの監視とメトリクス生成
 supported_os:
 - android
+- linux
+- windows
 - ios
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Log Collection
   - Category::Metrics
   - Category::Mobile
   - Category::Network
   - Category::Tracing
   - Supported OS::Android
+  - Supported OS::Linux
+  - Supported OS::Windows
   - Supported OS::iOS
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog RUM を使用した Expo アプリケーションの監視とメトリクス生成
   media: []
@@ -48,7 +52,6 @@ tile:
   title: Expo
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -71,7 +74,7 @@ Expo アプリケーションのエンドツーエンドの健全性を監視し
 - クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -85,21 +88,21 @@ Expo アプリケーションは、自動的に Datadog にトレースを送信
 
 Expo アプリケーションのログを Datadog に転送し始めるには、[Expo ログ収集][3]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Expo インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
-### ヘルプ
+### イベント
 
 イベントや属性の詳細については、[RUM Expo モニタリング][5]を参照してください。
 
-### ヘルプ
+### サービスのチェック
 
 Expo インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

@@ -1,5 +1,5 @@
 ---
-title: Upgrading to PostgreSQL 15 and higher
+title: Upgrading to PostgreSQL 15
 kind: guide
 ---
 

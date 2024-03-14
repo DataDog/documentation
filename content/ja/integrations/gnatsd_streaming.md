@@ -33,6 +33,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gnatsd_streaming
+oauth: {}
 public_title: Gnatsd Streaming
 short_description: NATS サーバーストリーミング
 supported_os:

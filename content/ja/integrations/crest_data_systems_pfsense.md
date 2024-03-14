@@ -11,7 +11,6 @@ assets:
     pfSense - OpenVPN: assets/dashboards/crest_data_systems_pfsense_OpenVPN_Details.json
     pfSense - Overview: assets/dashboards/crest_data_systems_pfsense_overview.json
   integration:
-    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -22,7 +21,6 @@ assets:
       prefix: cds.pfsense
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10347
     source_type_name: crest_data_systems_pfsense
 author:
   homepage: https://www.crestdatasys.com
@@ -100,7 +98,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -109,7 +106,7 @@ pfSense はオープンソースでカスタマイズされた FreeBSD のディ
 
 このインテグレーションは、pfSense CE からファイアウォール、OpenVPN、NGINX、および DHCP のログを監視します。このインテグレーションはまた、メトリクスをキャプチャし、収集したログからリクエストごとのパケット長や送信バイトに関する洞察を提供します。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
@@ -124,7 +121,6 @@ pfSense はオープンソースでカスタマイズされた FreeBSD のディ
 [5]: https://docs.netgate.com/pfsense/en/latest/monitoring/logs/settings.html
 [6]: https://docs.netgate.com/pfsense/en/latest/config/general.html#localization
 [7]: mailto:datadog.integrations@crestdatasys.com
-[8]: https://www.crestdatasys.com/datadog-integrations-readme/pFsense.pdf
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-pfsense" target="_blank">こちらをクリック</a>してください。

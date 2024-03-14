@@ -3,14 +3,12 @@ app_id: snmp-fortinet
 app_uuid: e501cab9-ba54-495c-80c2-ca3d373561a8
 assets:
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10331
     source_type_name: Fortinet
 author:
   homepage: https://www.datadoghq.com
@@ -19,7 +17,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ネットワーク
-- notifications
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_fortinet/README.md
 display_on_public_website: true
@@ -32,6 +30,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: snmp_fortinet
+oauth: {}
 public_title: Fortinet
 short_description: Fortinet ネットワークデバイスから SNMP メトリクスを収集
 supported_os:
@@ -42,7 +41,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Network
-  - Category::Notifications
+  - Category::Notification
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -54,7 +53,6 @@ tile:
   title: Fortinet
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -63,17 +61,17 @@ tile:
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## 計画と使用
+## セットアップ
 
 SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][2]のドキュメントを参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -27,6 +27,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: embrace_mobile
+oauth: {}
 public_title: Embrace Mobile
 short_description: Visibilité mobile pour iOS, Android, React Native et Unity
 supported_os:

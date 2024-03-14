@@ -2,7 +2,7 @@
 title: Connect Session Replay To Your Third-Party Tools
 kind: guide
 further_reading:
-- link: '/real_user_monitoring/session_replay/browser/'
+- link: '/real_user_monitoring/session_replay/'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
 ---
@@ -38,7 +38,7 @@ datadogRum.init({
     ...
 });
 
-const url = datadogRum.getSessionReplayLink();
+const url = datadogRum.getSessionReplayUrl();
 ```
 
 {{% /tab %}}
@@ -53,7 +53,7 @@ window.DD_RUM.onReady(function() {
         subdomain: ''
         ...
     })
-    const url = DD_RUM.getSessionReplayLink();
+    const url = DD_RUM.getSessionReplayUrl();
 })
 
 ```
@@ -70,7 +70,7 @@ window.DD_RUM &&
         subdomain: ''
         ...
     });
-const url = DD_RUM && DD_RUM.getSessionReplayLink();
+const url = DD_RUM && DD_RUM.getSessionReplayUrl();
 ```
 
 {{% /tab %}}

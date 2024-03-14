@@ -3,7 +3,6 @@ app_id: lacework
 app_uuid: e23af0ca-003e-4b3d-b6c5-24894b710750
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: lacework.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10079
     source_type_name: Lacework
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -35,6 +33,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: lacework
+oauth: {}
 public_title: Lacework
 short_description: Lacework は、すべてのクラウド環境に対応するセキュリティプラットフォームです
 supported_os:
@@ -57,18 +56,17 @@ tile:
   title: Lacework
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 Datadog-Lacework インテグレーションを使用して、Lacework のログとイベントを Datadog に転送します。
 
-## 計画と使用
+## セットアップ
 
 すべての構成は、Lacework ダッシュボードで行われます。[Lacework のドキュメント][1]で設定方法の詳細を確認してください。Datadog は、Lacework のログを検出すると、適切なログ処理パイプラインを自動的に有効にします。
 
-### インフラストラクチャーリスト
+### インストール
 
 1. Lacework で、_Settings_ に移動し、_Integrations_ を選択します。
 2. _Outgoing_ セクション（左パネル）で、Datadog を選択します。
@@ -89,28 +87,28 @@ Datadog-Lacework インテグレーションを使用して、Lacework のログ
    - **API KEY**: [Datadog API キー][2]を入力します。
    - **Alert Security Level**: 転送されたログの最小ログ重大度レベルを選択します
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Lacework インテグレーションはメトリクスを収集しません。
 
-### ヘルプ
+### サービスのチェック
 
 Lacework インテグレーションには、サービスのチェック機能は含まれません。
 
-### 収集データ
+### ログの収集
 
 Lacework インテグレーションは、ログを送信するように構成できます。
 
-### ヘルプ
+### イベント
 
 Lacework インテグレーションは、イベントを送信するように構成できます。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://docs.lacework.net/onboarding/datadog
+[1]: https://www.lacework.com/datadog/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ja/help/

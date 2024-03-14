@@ -5,7 +5,6 @@ assets:
   dashboards:
     IBM i Overview: assets/dashboards/ibm_i_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,7 +15,6 @@ assets:
       prefix: ibm_i.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10219
     source_type_name: IBM i
 author:
   homepage: https://www.datadoghq.com
@@ -32,11 +30,12 @@ draft: false
 git_integration_title: ibm_i
 integration_id: ibm-i
 integration_title: IBM i
-integration_version: 2.1.0
+integration_version: 1.5.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ibm_i
+oauth: {}
 public_title: IBM i
 short_description: ジョブ、ジョブキュー、ASP などを含む IBM i システムをリモートで監視します。
 supported_os:
@@ -56,18 +55,17 @@ tile:
   title: IBM i
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通して [IBM i][1] をリモートで監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 IBM i チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -80,7 +78,7 @@ IBM i チェックでは、IBM i ODBC ドライバーを使用して、IBM i ホ
 
 Linux ホスト用の `ACS Linux App Pkg` など、お使いのプラットフォーム用の `ACS App Pkg` パッケージを選択します。パッケージをダウンロードし、インストール手順に従って、ドライバーをインストールします。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 IBM i チェックは、Datadog Agent を実行しているホストから IBM i システムにリモートでクエリを実行します。IBM i システムと通信するには、Datadog Agent を実行しているホストで IBM i ODBC ドライバーをセットアップする必要があります。
 
@@ -114,23 +112,23 @@ IBM i ODBC ドライバーの名前は、IBM i のチェックを構成するた
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションの `ibm_i` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ibm_i" >}}
 
 
-### ヘルプ
+### イベント
 
 IBM i チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://www.ibm.com/it-infrastructure/power/os/ibm-i
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://www.ibm.com/support/pages/ibm-i-access-client-solutions
 [5]: https://github.com/DataDog/integrations-core/blob/master/ibm_i/datadog_checks/ibm_i/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

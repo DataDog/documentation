@@ -5,7 +5,6 @@ assets:
   dashboards:
     cri: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -15,7 +14,6 @@ assets:
       prefix: cri.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10043
     source_type_name: CRI
 author:
   homepage: https://www.datadoghq.com
@@ -37,6 +35,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cri
+oauth: {}
 public_title: CRI
 short_description: CRI のすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -55,16 +54,15 @@ tile:
   title: CRI
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは Container Runtime Interface を監視します
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 CRI は [Datadog Agent][1] の中核となるチェックで、`datadog.yaml` に `cri.d/conf.yaml` と共に構成する必要があります。
 
@@ -109,7 +107,7 @@ spec:
 
 **注:** 問題なくインテグレーションを実行するには、ホストから `/var/run` ディレクトリをマウントする必要があります。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 1. CRI-O のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cri.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル cri.d/conf.yaml][2] を参照してください。
 
@@ -119,25 +117,25 @@ spec:
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `cri` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cri" >}}
 
 
-### ヘルプ
+### サービスのチェック
 
 CRI には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 CRI には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv

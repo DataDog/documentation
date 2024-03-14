@@ -32,6 +32,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: stardog
+oauth: {}
 public_title: Stardog
 short_description: Un collecteur de données Stardog pour Datadog.
 supported_os:

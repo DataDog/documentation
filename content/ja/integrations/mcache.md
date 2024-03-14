@@ -39,11 +39,12 @@ draft: false
 git_integration_title: mcache
 integration_id: memcached
 integration_title: Memcache
-integration_version: 4.0.0
+integration_version: 3.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mcache
+oauth: {}
 public_title: Memcache
 short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
 supported_os:
@@ -204,7 +205,7 @@ Mcache チェックには、イベントは含まれません。
 - [Redis または Memcached を使用した ElastiCache のパフォーマンスメトリクスの監視][6]
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/
 [4]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached

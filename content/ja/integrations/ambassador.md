@@ -3,7 +3,6 @@ app_id: ambassador
 app_uuid: eb591405-8cda-486a-8cf5-a06af769a3d7
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: envoy.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10010
     source_type_name: Ambassador
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -37,6 +35,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ambassador
+oauth: {}
 public_title: Ambassador API Gateway
 short_description: Ambassador は、Envoy 上に構築された Kubernetes ネイティブのオープンソース API ゲートウェイです
 supported_os:
@@ -61,7 +60,6 @@ tile:
   title: Ambassador API Gateway
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,7 +72,7 @@ tile:
 
 ![スナップショット][2]
 
-## 計画と使用
+## セットアップ
 
 Agent Daemonset で DogStatsD を有効にし、Ambassador ポッドで次の環境変数を設定します。
 
@@ -91,21 +89,21 @@ valueFrom:
 
 Ambassador から Datadog APM へトレースデータを送信することも可能です。詳しくは、[Datadog による分散型トレース][4]をご参照ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ambassador" >}}
 
 
-### ヘルプ
+### イベント
 
 Ambassador チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Ambassador チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

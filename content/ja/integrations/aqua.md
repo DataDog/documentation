@@ -5,7 +5,6 @@ assets:
   dashboards:
     aqua: assets/dashboards/overview.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -15,7 +14,6 @@ assets:
       prefix: aqua.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10042
     source_type_name: Aqua
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -38,6 +36,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: aqua
+oauth: {}
 public_title: Aqua
 short_description: コンテナおよびクラウドネイティブアプリケーションの開発から運用までをフルカバーするセキュリティソリューション
 supported_os:
@@ -61,7 +60,6 @@ tile:
   title: Aqua
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -70,11 +68,11 @@ tile:
 
 Aqua チェックは、脆弱性の深刻度が高い場合、あるいは Aqua に登録されていないホスト上でコンテナが実行されている場合に、ユーザーに警告します。Aqua は、実行時にブロックされたイベントに関するデータアラートも送信します。さらに多くの Aqua スキャナが必要な場合は、インフラストラクチャーをスケーリングする Webhook をトリガーすることも可能です。
 
-## 計画と使用
+## セットアップ
 
 Aqua チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -86,7 +84,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェッ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -103,7 +101,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェッ
 
 2. [Agent を再起動します][7]。
 
-#### 収集データ
+#### ログの収集
 
 Aqua によって生成されるログには、次の 2 種類があります。
 
@@ -141,27 +139,27 @@ Aqua エンフォーサーログを収集するには、以下のようにしま
 
 [Agent の `status` サブコマンドを実行][11]し、Checks セクションで `aqua` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "aqua" >}}
 
 
-### ヘルプ
+### イベント
 
 Aqua には、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 {{< get-service-checks-from-git "aqua" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
 
 
 [1]: https://www.aquasec.com
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory

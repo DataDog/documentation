@@ -36,6 +36,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: zenduty
+oauth: {}
 public_title: Zenduty
 short_description: Utilisez Zenduty comme partenaire de notification et de résolution
   d'incidents pour les alertes Datadog

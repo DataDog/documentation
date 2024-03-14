@@ -38,11 +38,12 @@ draft: false
 git_integration_title: solr
 integration_id: solr
 integration_title: Solr
-integration_version: 1.12.1
+integration_version: 1.11.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: solr
+oauth: {}
 public_title: Solr
 short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
 supported_os:
@@ -314,6 +315,6 @@ attribute:
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/solr/images/solrgraph.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/integrations/java/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

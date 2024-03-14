@@ -177,30 +177,6 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 
 [1]: https://github.com/logstash/logstash-logback-encoder
 {{% /tab %}}
-{{% tab "Tinylog" %}}
-
-[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力する JSON ライターの構成を作成します。
-
-
-`tinylog.properties` ファイルには以下のフォーマットを使用します。
-
-```properties
-writer                     = json
-writer.file                = log.json
-writer.format              = LDJSON
-writer.level               = info
-writer.field.level         = level
-writer.field.source        = {class}.{method}()
-writer.field.message       = {message}
-writer.field.dd.trace_id   = {context: dd.trace_id}
-writer.field.dd.span_id    = {context: dd.span_id}
-writer.field.dd.service    = {context: dd.service}
-writer.field.dd.version    = {context: dd.version}
-writer.field.dd.env        = {context: dd.env}
-```
-
-[1]: https://tinylog.org/v2/configuration/#json-writer
-{{% /tab %}}
 {{< /tabs >}}
 
 #### ログへのトレース ID の挿入
@@ -282,22 +258,6 @@ writer.field.dd.env        = {context: dd.env}
 ```
 
 {{% /tab %}}
-{{% tab "Tinylog" %}}
-
-[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力するライターの構成を作成します。
-
-
-`tinylog.properties` ファイルには以下のフォーマットを使用します。
-
-```properties
-writer          = file
-writer.level    = debug
-writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "dd.span_id":{context: dd.span_id}
-writer.file     = log.txt
-```
-
-[1]: https://tinylog.org/v2/configuration/#json-writer
-{{% /tab %}}
 {{< /tabs >}}
 
 #### ログへのトレース ID の挿入
@@ -319,8 +279,8 @@ writer.file     = log.txt
     logs:
 
       - type: file
-        path: "<path_to_your_java_log>.log"
-        service: <service_name>
+        path: "/path/to/your/java/log.log"
+        service: java
         source: java
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -571,9 +531,9 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 [3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [5]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[6]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
 [9]: /ja/logs/log_configuration/parsing/?tab=matchers
 [10]: /ja/logs/explorer/#overview
 [11]: https://github.com/logstash/logstash-logback-encoder

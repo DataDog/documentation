@@ -3,7 +3,6 @@ app_id: containerd
 app_uuid: 206cf95f-1d2a-4ad5-b027-0de15431833b
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -13,7 +12,6 @@ assets:
       prefix: containerd.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10082
     source_type_name: Containerd
 author:
   homepage: https://www.datadoghq.com
@@ -35,6 +33,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: containerd
+oauth: {}
 public_title: Containerd
 short_description: Containerd のすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -55,16 +54,15 @@ tile:
   title: Containerd
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Containerd コンテナランタイムを監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Containerd は [Datadog Agent][1] の中核となるチェックです。Containerd は、`datadog.yaml` と `containerd.d/conf.yaml` の両方で構成する必要があります。
 
@@ -143,7 +141,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 1. Containerd のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `containerd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル containerd.d/conf.yaml][2] を参照してください。
 
@@ -153,29 +151,29 @@ spec:
 
 [Agent の `status` サブコマンドを実行][4]し、Checks セクションで `containerd` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "containerd" >}}
 
 
 このインテグレーションは Linux と Windows で動作しますが、一部のメトリクスは OS に依存します。OS に依存するメトリクスの一覧は `metadata.csv` をご覧ください。
 
-### ヘルプ
+### イベント
 
 Containerd チェックは、イベントを収集できます。`filters` を使用して関連イベントを選択します。詳細については、[サンプル containerd.d/conf.yaml][2] を参照してください。
 
-### ヘルプ
+### サービスのチェック
 {{< get-service-checks-from-git "containerd" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
 [3]: https://docs.datadoghq.com/ja/help/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

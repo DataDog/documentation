@@ -2,10 +2,6 @@
 title: Connections
 kind: documentation
 description: Workflow connections
-further_reading:
-- link: "/getting_started/workflow_automation/"
-  tag: "Documentation"
-  text: "Getting Started with Workflow Automation"
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
@@ -79,9 +75,9 @@ Alternatively, add a connection from the workflow page:
 1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
 1. Click **Save**.
 
-The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
+The example below shows the **New Connection** dialog box for the AWS connection. Each connection requires different authentication information. The AWS connection requires a valid AWS IAM Account ID and Role Name.
 
-{{< img src="service_management/workflows/new-connection2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
+{{< img src="service_management/workflows/new-connection.png" alt="The New Connection dialog box for the AWS connection" >}}
 
 ### Edit a connection
 
@@ -104,11 +100,19 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 ## HTTP connection
 
-To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
+To connect to an arbitrary service, use the HTTP connection type, and choose from two authentication options:
+- Token-based authentication
+- A username and password combination
 
-## Further reading
+### Create HTTP connection
 
-{{< partial name="whats-next/whats-next.html" >}}
+1. Navigate to the [connections list][3].
+1. Select **New Connection**. A dialog box appears.
+1. Select **HTTP Connection**. The dialog box updates to show the HTTP connection parameters.
+1. Enter the **Base URL**.
+1. If appropriate, use the **Add +** buttons to add headers or URL parameters.
+1. Choose an connection type: **Token Auth** or **Basic Auth**. Enter the appropriate parameters.
+1. Click **Create** to save your HTTP connection.
 
 [1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
@@ -117,4 +121,3 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 [6]: /integrations/
 [8]: /service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow
-[10]: /service_management/workflows/actions/http/

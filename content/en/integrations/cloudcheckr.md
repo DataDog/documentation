@@ -1,42 +1,35 @@
 ---
-categories:
-- cloud
-- configuration & deployment
-description: "Enable the integration to see Datadog metrics in CloudCheckr."
-doc_link: https://docs.datadoghq.com/integrations/cloudcheckr/
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md"]
-has_logo: true
 integration_title: CloudCheckr
-is_public: true
-kind: integration
 name: cloudcheckr
+kind: integration
+newhlevel: true
+is_public: true
 public_title: Datadog-CloudCheckr Integration
-short_description: "Add Datadog metrics in CloudCheckr to monitor and optimize your AWS usage."
+short_description: 'Help cloudcheckr help you: give it per-instance memory metrics from Datadog'
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md']
+categories:
+    - cloud
+    - configuration & deployment
 integration_id: "cloudcheckr"
-further_reading:
-  - link: "https://www.datadoghq.com/blog/rightsizing-cloudcheckr/"
-    tag: "Blog"
-    text: "CloudCheckr + Datadog: Better rightsizing of cloud resources"
 ---
-
-## Overview
-
-[CloudCheckr][1] is a web-based platform that allows you to monitor and optimize your AWS infrastructure by providing customized recommendations about cost and performance.
 
 {{< img src="integrations/cloudcheckr/EC2_Right_Sizing_Report.png" alt="ec2 right sizing report">}}
 
-With the Datadog-CloudCheckr integration, you can make data-driven decisions based on current and past resource consumption to maintain an agile, cost-effective infrastructure.
+## Overview
+
+Quickly make data-driven decisions based on current and past resource consumption to maintain an agile, cost-effective infrastructure with the Datadog-CloudCheckr Integration
 
 ## Setup
 
-To connect your Datadog account to your CloudCheckr account:
+To bind your Datadog account to your CloudCheckr account:
 
-- Click into your CloudCheckr Extensions.
-- Add your [Datadog API and application keys][2].
+- Click into your CloudCheckr Extensions
+- Add your [Datadog API and application keys][1].
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+Learn more about [Better rightsizing your cloud resources with the Datadog CloudCheckr][2] on the Datadog blog.
 
-[1]: https://spot.io/product/cloudcheckr/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://www.datadoghq.com/blog/rightsizing-cloudcheckr

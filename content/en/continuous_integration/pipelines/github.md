@@ -10,9 +10,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and measures"
+      text: "Extend Pipeline Visibility by adding custom tags and metrics"
     - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
       tag: "blog"
       text: "Monitor your GitHub Actions workflows with Datadog CI Visibility"
@@ -35,11 +35,9 @@ further_reading:
 
 - **Infrastructure metric correlation**: [Correlate infrastructure metrics][11] to pipeline jobs for self-hosted GitHub runners
 
-- **Custom tags and measures at runtime**: Configure custom tags and measures at runtime
+- **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime for pipeline spans
 
 - **Queue time**: View amount of time workflow jobs sit in the queue before processing
-
-- **Approval wait time**: View amount of time workflow runs and workflow jobs wait for manual approvals
 
 ## Configure the Datadog integration
 

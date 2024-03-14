@@ -7,7 +7,6 @@ assets:
   dashboards:
     Reporter: assets/dashboards/reporter_dashboard.json
   integration:
-    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -17,7 +16,6 @@ assets:
       prefix: ''
     service_checks:
       metadata_path: service_checks.json
-    source_type_id: 10110
     source_type_name: Reporter
 author:
   homepage: https://www.rapdev.io
@@ -40,6 +38,7 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: reporter
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -77,7 +76,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -88,7 +86,7 @@ Datadog Reporter を使用すると、レポートをスケジュールして、
 
 このインテグレーションにより、**Datadog Reporter** と呼ばれる新しいダッシュボードが Datadog インスタンスにセットアップされます。ダッシュボードに移動し、その iFrame から新しいユーザーを作成することで、アプリケーションに直接アクセスできます。*Datadog アカウントは DD Reporter アプリケーションでは機能しません。別のアカウントを登録する必要があります*
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 

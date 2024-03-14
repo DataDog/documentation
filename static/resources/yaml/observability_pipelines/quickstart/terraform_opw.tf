@@ -66,9 +66,14 @@ transforms:
       .tags.sender = "observability_pipelines_worker"
       .tags.opw_aggregator = get_hostname!()
 
-## SINKS: Data output destinations
-## datadog_logs: Ship logs to Datadog Log Management
-## datadog_metrics: Publish metric events to Datadog
+## This buffer configuration is split into the following, totaling the 288GB
+## provisioned automatically by the Terraform module:
+## - 240GB buffer for logs
+## - 48GB buffer for metrics
+##
+## This should work for the vast majority of OP Worker deployments and should rarely
+## need to be adjusted. If you do change it, be sure to update the `ebs-drive-size-gb`
+## parameter.
 sinks:
   datadog_logs:
     type: datadog_logs
@@ -76,22 +81,16 @@ sinks:
       - logs_finish_ddtags
     default_api_key: "$${DD_API_KEY}"
     compression: gzip
-    ## We've omitted the disk buffer here to simplify quickstart setup.
-    ## Consider re-enabling and configuring before deploying to production environments.
-    ## The disk buffer size is currently set to 240GB.
-    #buffer:
-    #   type: disk
-    #   max_size: 257698037760
+    buffer:
+       type: disk
+       max_size: 257698037760
   datadog_metrics:
     type: datadog_metrics
     inputs:
       - metrics_add_dd_tags
     default_api_key: "$${DD_API_KEY}"
-    ## We've omitted the disk buffer to simplify quickstart setup.
-    ## Consider re-enabling and configuring before deploying to production environments.
-    ## The disk buffer size is currently set to 48GB.
-    #buffer:
-    #  type: disk
-    #  max_size: 51539607552
+    buffer:
+      type: disk
+      max_size: 51539607552
 EOT
 }

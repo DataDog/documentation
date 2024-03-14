@@ -33,6 +33,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: sendmail
+oauth: {}
 public_title: Sendmail
 short_description: Intégration Sendmail pour surveiller les files d'attente d'e-mails
 supported_os:

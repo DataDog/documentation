@@ -47,6 +47,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cassandra
+oauth: {}
 public_title: Cassandra
 short_description: Surveillez les performances des clusters, leur capacité, leur santé
   globale, et bien plus encore.

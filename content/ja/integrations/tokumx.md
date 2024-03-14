@@ -39,6 +39,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tokumx
+oauth: {}
 public_title: TokuMX
 short_description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
 supported_os:

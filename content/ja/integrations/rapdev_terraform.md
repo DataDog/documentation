@@ -7,7 +7,6 @@ assets:
   dashboards:
     RapDev Terraform Dashboard: assets/dashboards/rapdev_terraform_overview.json
   integration:
-    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,7 +17,6 @@ assets:
       prefix: rapdev.terraform.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10193
     source_type_name: RapDev Terraform
   logs: {}
 author:
@@ -44,6 +42,7 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_terraform
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -66,7 +65,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: terraform アカウントと失敗した実行を監視する
   media:
@@ -79,18 +77,17 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 Terraform とのインテグレーションにより、組織は Terraform のアカウントをアクティブに監視し、その動作状況や使用頻度をよりよく理解することができます。このインテグレーションはさらに権限の監査も提供します。
 
-### ライブラリ
+### ダッシュボード  
 
 1. RapDev Terraform ダッシュボード
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io

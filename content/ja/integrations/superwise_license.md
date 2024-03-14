@@ -13,8 +13,7 @@ author:
 categories:
 - インシデント
 - マーケットプレイス
-- notifications
-- ai/ml
+- notification
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -28,6 +27,7 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: superwise_license
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -48,8 +48,7 @@ tile:
   classifier_tags:
   - Category::Incidents
   - Category::Marketplace
-  - Category::Notifications
-  - Category::AI/ML
+  - Category::Notification
   - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
@@ -75,7 +74,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -88,7 +86,7 @@ Superwise のモデル観測性プラットフォームにより、本番用 ML 
 
 Superwise のインテグレーションにより、Datadog ユーザーは既存の Datadog ワークフロー内で ML モデルを総合的に監視し、Superwise のメトリクスとインシデントを含めることで観測性を高め、モデルの問題をより深く調査することができます。Superwise ユーザーは、ビジネスにとって重要なカスタムメトリクスを Superwise 内で監視するように構成し、その情報を Datadog に送信して、あらゆるユースケースに対して観測性を拡張することができます。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Superwise にお問い合わせください。
 

@@ -32,6 +32,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: pivotal_pks
+oauth: {}
 public_title: Pivotal Container Service
 short_description: Offre Kubernetes pour entreprises proposée par Pivotal.
 supported_os:

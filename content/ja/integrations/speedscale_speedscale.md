@@ -28,6 +28,7 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: speedscale_speedscale
+oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -69,7 +70,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -77,7 +77,7 @@ tile:
 
 Speedscale のトラフィックリプレイ結果を Datadog に公開するには、[Speedscale インテグレーション][1]をインストールします。このインテグレーションにより、Datadog の観測可能性データと Speedscale の特定のリプレイ結果を組み合わせて、パフォーマンス低下の根本原因を調査することができます。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Speedscale にお問い合わせください。
 

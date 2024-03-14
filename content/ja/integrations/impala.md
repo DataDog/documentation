@@ -8,7 +8,6 @@ assets:
     Impala - Overview: assets/dashboards/impala_overview.json
     Impala - Statestore - Overview: assets/dashboards/impala_statestore_overview.json
   integration:
-    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -23,7 +22,6 @@ assets:
     - statestored
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10301
     source_type_name: Impala
   logs:
     source: impala
@@ -41,11 +39,12 @@ draft: false
 git_integration_title: impala
 integration_id: impala
 integration_title: Impala
-integration_version: 2.2.0
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: impala
+oauth: {}
 public_title: Impala
 short_description: Apache Impala の健全性とパフォーマンスを監視します。
 supported_os:
@@ -67,23 +66,22 @@ tile:
   title: Impala
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Impala][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 Impala チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 1. Impala のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `impala.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル impala.d/conf.yaml][4] を参照してください。
 
@@ -134,21 +132,21 @@ instances:
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `impala` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "impala" >}}
 
 
-### ヘルプ
+### イベント
 
 Impala インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 {{< get-service-checks-from-git "impala" >}}
 
 
-### ワークフローの自動化
+### ログ管理
 
 Impala インテグレーションは、Impala のサービスからログを収集し、Datadog に転送することができます。
 
@@ -202,14 +200,14 @@ Impala インテグレーションは、Impala のサービスからログを収
 
 すべてのログを収集する方法については、[コンフィギュレーションファイルの例][9]を参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://impala.apache.org
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/impala/datadog_checks/impala/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

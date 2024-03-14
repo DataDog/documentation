@@ -30,7 +30,7 @@ git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
 integration_id: システム
 integration_title: Disk
-integration_version: 5.3.0
+integration_version: 4.10.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -40,6 +40,7 @@ metric_to_check: system.disk.free
 monitors:
   disk-space-forecast: assets/monitors/disk_monitor.json
 name: disk
+oauth: {}
 public_title: Disk
 short_description: ディスクチェックで、マウントされたディスクのメトリクスを収集。
 support: コア
@@ -53,7 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS とシステム
+  - Category::OS & System
   configuration: README.md#Setup
   description: ディスクチェックで、マウントされたディスクのメトリクスを収集。
   media: []
@@ -62,20 +63,19 @@ tile:
   title: Disk
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 ディスクの使用状況および IO に関連したメトリクスを収集します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 ディスクチェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 ディスクチェックはデフォルトで有効になっています。Agent は、すべてのローカルパーティションに関するメトリクスを収集します。カスタムオプション付きでチェックを構成する場合は、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `disk.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル disk.d/conf.yaml][3] を参照してください。
 
@@ -101,26 +101,26 @@ tile:
 
 [Agent の `status` サブコマンドを実行][6]し、Checks セクションで `disk` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "disk" >}}
 
 
-### ヘルプ
+### イベント
 
 Disk チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 {{< get-service-checks-from-git "disk" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest
+[1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
 [4]: https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-findfirstvolumemountpointw

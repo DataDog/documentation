@@ -3,7 +3,6 @@ app_id: pulumi
 app_uuid: 7604c52b-dc07-4854-a5e4-799ab62798d8
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: pulumi.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10220
     source_type_name: Pulumi
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -40,6 +38,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: pulumi
+oauth: {}
 public_title: Pulumi
 short_description: 好きなプログラミング言語を使って、あらゆるクラウドに対応する Infrastructure as Code を実現
 supported_os:
@@ -67,7 +66,6 @@ tile:
   title: Pulumi
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -76,13 +74,13 @@ tile:
 
 Pulumi インテグレーションは、Datadog で利用可能な任意のクラウドリソースをプロビジョニングするために使用されます。このインテグレーションは、Datadog でリソースをデプロイおよび更新するための認証情報を使って構成される必要があります。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Pulumi と Datadog のインテグレーション][2]では、Datadog SDK を使用してリソースの管理およびプロビジョニングを行います。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 1. [無料または商用 Pulumi アカウントに登録します][3]
 
@@ -109,21 +107,21 @@ pulumi config set datadog:apiKey XXXXXXXXXXXXXX --secret && pulumi config set da
 
 5. クラウドのリソースをコードで定義したら、`pulumi up` を実行して、Pulumi プログラムで定義した新しいリソースを作成します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Pulumi には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Pulumi には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Pulumi には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

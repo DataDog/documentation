@@ -16,15 +16,14 @@ jobs:
 
     - name: Find changed files
       id: changed_files
-      uses: tj-actions/changed-files@v42
-
+      uses: tj-actions/changed-files@v3
+      
     - name: Look for gifs
       env:
         branch: ${{ github.head_ref }}
-        ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
       id: comment_body
       run: |
-        for file in $ALL_CHANGED_FILES; do
+        for file in ${{ steps.changed_files.outputs.all_changed_files }}; do
           echo "Checking file ${file}..."
           if [[ "$file" =~ ^static/images/(.*).gif$ ]]; then
             echo "The file $file is a gif. Please replace with an mp4"

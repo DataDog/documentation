@@ -42,11 +42,12 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 3.0.0
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kong
+oauth: {}
 public_title: Kong
 short_description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
 supported_os:
@@ -210,6 +211,6 @@ Kong チェックには、イベントは含まれません。
 [1]: https://docs.konghq.com/hub/kong-inc/datadog/
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://www.datadoghq.com/blog/monitor-kong-datadog
-[4]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/help/

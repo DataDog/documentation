@@ -43,6 +43,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sonarqube
+oauth: {}
 public_title: SonarQube
 short_description: SonarQube のサーバーとプロジェクトを監視します。
 supported_os:

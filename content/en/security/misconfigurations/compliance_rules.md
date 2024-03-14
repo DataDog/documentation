@@ -1,5 +1,5 @@
 ---
-title: Manage CSM Misconfigurations Compliance Rules
+title: Managing CSM Misconfigurations Compliance Rules
 kind: documentation
 aliases:
   - /security_platform/cspm/configuration_rules

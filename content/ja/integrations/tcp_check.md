@@ -29,11 +29,12 @@ draft: false
 git_integration_title: tcp_check
 integration_id: システム
 integration_title: TCP チェック
-integration_version: 4.8.0
+integration_version: 4.6.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tcp_check
+oauth: {}
 public_title: TCP チェック
 short_description: リモートホストへの TCP 接続を監視
 supported_os:
@@ -46,7 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::ネットワーク
+  - Category::Network
   - Category::Web
   configuration: README.md#Setup
   description: リモートホストへの TCP 接続を監視
@@ -56,7 +57,6 @@ tile:
   title: TCP チェック
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![ネットワークのグラフ][1]
@@ -65,22 +65,22 @@ tile:
 
 任意のホストおよびポートの TCP 接続と応答時間を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 TCP チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 多くのメトリクスチェックは、監視するサービスと同じホストで実行するのが最適です。しかし、このチェックの場合は、リモート接続をテストするために、監視する TCP サービスを実行していないホストから実行することをお勧めします。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `tcp_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル tcp_check.d/conf.yaml][2] を参照してください。
 
@@ -109,7 +109,7 @@ instances:
 [2]: https://github.com/DataDog/integrations-core/blob/master/tcp_check/datadog_checks/tcp_check/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -117,9 +117,9 @@ instances:
 
 | パラメーター            | 値                                                                         |
 | -------------------- | ----------------------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `tcp_check`                                                                   |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                 |
-| `<INSTANCE_CONFIG>`  | `{"name": "<TCP_CHECK_INSTANCE_NAME>", "host":"%%host%%", "port":"%%port%%"}` |
+| `<インテグレーション名>` | `tcp_check`                                                                   |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                 |
+| `<インスタンスコンフィギュレーション>`  | `{"name": "<TCP_CHECK_INSTANCE_NAME>", "host":"%%host%%", "port":"%%port%%"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -129,29 +129,29 @@ instances:
 
 [Agent の `status` サブコマンドを実行][3]し、Checks セクションで `tcp_check` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "tcp_check" >}}
 
 
-### ヘルプ
+### イベント
 
 TCP チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 {{< get-service-checks-from-git "tcp_check" >}}
 
 
 **注:** このサービスチェックにアラートを設定するには、[ネットワークモニター][4]を作成します。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/?tab=checkalert
 [5]: https://docs.datadoghq.com/ja/help/

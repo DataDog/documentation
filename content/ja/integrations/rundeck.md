@@ -3,7 +3,6 @@ app_id: rundeck
 app_uuid: beb808d2-cc12-4bc5-8ff7-b63552b35e0a
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -13,7 +12,6 @@ assets:
       prefix: rundeck.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10099
     source_type_name: Rundeck
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,10 +19,8 @@ author:
   sales_email: forrest@rundeck.com
   support_email: forrest@rundeck.com
 categories:
-- 自動化
-- インシデント
-- notifications
 - orchestration
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md
 display_on_public_website: true
@@ -37,22 +33,21 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: rundeck
+oauth: {}
 public_title: Rundeck
 short_description: Rundeck の Webhook を使用して修復アクションを自動化
 supported_os:
 - linux
-- windows
 - macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Automation
-  - Category::Incidents
-  - Category::Notifications
-  - Category::Orchestration
   - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Orchestration
+  - Category::Notification
   configuration: README.md#Setup
   description: Rundeck の Webhook を使用して修復アクションを自動化
   media: []
@@ -61,7 +56,6 @@ tile:
   title: Rundeck
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -80,12 +74,12 @@ Rundeck のワークフロー自動化機能は Datadog の通知と併せて使
 
 以下の指示に従って Datadog/Rundeck インテグレーションを構成してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低 1 つ準備してください。
 
-### ブラウザトラブルシューティング
+### コンフィギュレーション
 
 #### Rundeck
 
@@ -122,21 +116,21 @@ Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低
 
 場合に応じて、Advanced Run Job などのその他プラグインも利用可能です。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Rundeck インテグレーションは、メトリクスを提供しません。
 
-### ヘルプ
+### サービスのチェック
 
 Rundeck インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Rundeck インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

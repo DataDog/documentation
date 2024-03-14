@@ -1,7 +1,7 @@
 ---
 title: Search Syntax
 kind: documentation
-description: Learn how to create a search query in the Synthetic Monitoring & Continuous Testing Explorer.
+description: Learn how to create a search query in the CI Results Explorer.
 aliases:
   - /synthetics/explorer/search_syntax
 further_reading:

@@ -19,7 +19,7 @@ further_reading:
   text: AWS Elastic Beanstalk への Datadog のデプロイ
 git_integration_title: amazon_elasticbeanstalk
 has_logo: true
-integration_id: ''
+integration_id: amazon-elastic-beanstalk
 integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true
@@ -31,32 +31,31 @@ short_description: AWS Elastic Beanstalk のキーメトリクスを追跡しま
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣れたサーバーで、Java、.NET、PHP、Node.js、Python、Ruby、Go、および Docker を使用して開発された Web アプリケーションやサービスをデプロイおよびスケーリングするための使いやすいサービスです。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 まだ行っていない場合は、まず [Amazon Web Services インテグレーション][1]をセットアップします。Elastic Beanstalk メトリクスを受信するには、ご使用の環境で[拡張ヘルスレポート機能を有効][2]にし、[拡張ヘルスメトリクスを CloudWatch に公開][3]するように環境を構成する必要があります。
 
 **注**: これらの設定により、CloudWatch カスタムメトリクス料金が加算されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### イベント
 
 AWS Elastic Beanstalk インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 AWS Elastic Beanstalk インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -169,7 +168,7 @@ process_config:
 
 すべての言語で、環境変数 `DD_AGENT_HOST` をゲートウェイ IP に設定します。または、以下の言語の場合、次を使用してプログラムでホスト名を設定します。
 
-##### ブラウザエラーの収集
+##### Python
 
 ```python
 from ddtrace import tracer
@@ -177,7 +176,7 @@ from ddtrace import tracer
 tracer.configure(hostname="172.17.0.1")
 ```
 
-##### .NET
+##### Node.js
 
 ```javascript
 const tracer = require('dd-trace');
@@ -185,7 +184,7 @@ const tracer = require('dd-trace');
 tracer.init({ hostname: "172.17.0.1" });
 ```
 
-##### データとコンテキストの変更
+##### Ruby
 
 ```ruby
 require 'ddtrace'
@@ -195,7 +194,7 @@ Datadog.configure do |c|
 end
 ```
 
-##### 収集データ
+##### Go
 
 ```go
 package main
@@ -311,7 +310,7 @@ func main() {
 
 コンテナ定義が完了したら、それを Elastic Beanstalk に送信します。具体的な手順については、AWS Elastic Beanstalk ドキュメント内の [マルチコンテナ Docker 環境][4]を参照してください。
 
-#### ヘルプ
+#### DogStatsD
 
 [マルチコンテナ Docker 環境][4]で DogStatsD を使用してアプリケーションコンテナからカスタムメトリクスを収集するには、`Dockerrun.aws.json` に以下の追加を行います。
 
@@ -401,9 +400,9 @@ func main() {
 
 ```
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 

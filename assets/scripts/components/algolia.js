@@ -238,12 +238,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                         const clickPosition = getSearchResultClickPosition(target.href, hitsArray, numHits, page)
                         sendSearchRumAction(search.helper.state.query, target.href, clickPosition);
                         window.history.pushState({}, '', target.href);
-
-                        if (e.metaKey || e.ctrlKey) {
-                            window.open(target.href, "_blank")
-                        } else {
-                            window.location.reload()
-                        }
+                        window.location.reload();
                     }
 
                     target = target.parentNode;

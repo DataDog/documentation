@@ -26,6 +26,7 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: bottomline_mainframe
+oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

@@ -39,6 +39,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: hivemq
+oauth: {}
 public_title: HiveMQ
 short_description: HiveMQ クラスターを監視します。
 supported_os:

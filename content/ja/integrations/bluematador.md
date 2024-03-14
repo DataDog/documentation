@@ -3,7 +3,6 @@ app_id: blue-matador
 app_uuid: b1cfb279-ab1a-4f63-a04f-9c6508d06588
 assets:
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -13,7 +12,6 @@ assets:
       prefix: bluematador.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10071
     source_type_name: Blue Matador
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -35,6 +33,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: bluematador
+oauth: {}
 public_title: Blue Matador
 short_description: Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。
 supported_os:
@@ -57,7 +56,6 @@ tile:
   title: Blue Matador
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -72,27 +70,27 @@ Blue Matador の Datadog インテグレーションを使用すると、Blue Ma
 
 Blue Matador で監視し、Datadog にインポートできるイベントやメトリクスの一覧については、Blue Matador の[モニターのページ][3]を参照してください。
 
-## 計画と使用
+## セットアップ
 
 Blue Matador のイベントを Datadog にインポートするには、[Datadog API キー][4]を使用して、新しい通知メソッドを Blue Matador に作成します。
 
 **注**: 既に存在しているイベントは Datadog にインポートされず、新しいイベントが発生するとインポートされます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Blue Matador インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 すべてのイベントが Datadog のイベントストリームに送信されます。
 
-### ヘルプ
+### サービスのチェック
 
 Blue Matador インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、このインテグレーションの[メインテナー][5]までお問い合わせください。
 

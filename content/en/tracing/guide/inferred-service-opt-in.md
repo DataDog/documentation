@@ -44,48 +44,18 @@ To opt in, you must adjust your Datadog Agent and APM Tracer configurations. Che
 ### Datadog Agent configuration
 
 Requirements:
-- Datadog Agent version >= [7.50.3][4].
+- Datadog Agent version >= [7.45.0][4].
 
 Set the following in your `datadog.yaml` [configuration file][5]:
-
-{{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
-
-DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
-DD_APM_PEER_TAGS_AGGREGATION=true
-DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
-
-{{< /code-block >}}
-
-### OpenTelemetry Collector 
-
-Minimum version recommended: opentelemetry-collector-contrib >= [v0.95.0][7].
-
-Example [collector.yaml][6].
-
-{{< code-block lang="yaml"  collapsible="true" >}}
-
-connectors:
-  datadog/connector:
-    traces:
-      compute_stats_by_span_kind: true
-      peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
-
-{{< /code-block >}}
-
-If your collector version is below [v0.95.0][7], use an exporter configuration with the following `peer_tags`:
+- `DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true`
+- `DD_APM_PEER_SERVICE_AGGREGATION=true`
 
 
-{{< code-block lang="yaml" collapsible="true" >}}
+### OpenTelemetry Collector Datadog Exporter configuration
 
-exporters:
-  datadog:
-    traces:
-      compute_stats_by_span_kind: true
-      peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
-
-{{< /code-block >}}
+Set the following in your `collector.yaml` [configuration file][6]:
+- `compute_stats_by_span_kind=true`
+- `peer_service_aggregation=true`
 
 
 ### APM tracer configuration
@@ -101,6 +71,7 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `-Ddd.trace.peer.service.defaults.enabled=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `-Ddd.trace.remove.integration-service-names.enabled=true` |
 
 Remove the following settings from your configuration:
@@ -110,6 +81,22 @@ Remove the following settings from your configuration:
 | `DD_SERVICE_MAPPING` | All service names default to `DD_SERVICE`. |
 | `DD_TRACE_SPLIT_BY_TAGS` | Inferred services are automatically displayed with the introduction of the `peer.service` tag. |
 | `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` | DB instances are inferred based on the on the `peer.service` tag. |
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+**Note**: `key:value` pairs are case sensitive.
+| Environment variable | System property |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `dd.trace.peer.service.mapping` |
+
+Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
 
 [1]: https://dtdg.co/latest-java-tracer
 
@@ -123,7 +110,24 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `WithPeerServiceDefaultsEnabled(true)` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `WithGlobalServiceName(true)` |
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+**Note**: `key:value` pairs are case sensitive.
+| Environment variable | System property |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `WithPeerServiceMapping` |
+
+Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
 
 [1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.52.0
 
@@ -137,7 +141,24 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `spanComputePeerService=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `spanRemoveIntegrationFromService=true` |
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+**Note**: `key:value` pairs are case sensitive.
+| Environment variable | System property |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `peerServiceMapping` |
+
+Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
 
 [1]: https://github.com/DataDog/dd-trace-js/releases/tag/v2.44.0
 [2]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.31.0
@@ -152,7 +173,24 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `datadog.trace.peer_service_defaults_enabled=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `datadog.trace.remove_integration_service_names_enabled=true` |
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+**Note**: `key:value` pairs are case sensitive.
+| Environment variable | System property |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `datadog.trace.peer_service_mapping` |
+
+Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
 
 [1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.90.0
 {{% /tab %}}
@@ -161,8 +199,25 @@ To opt in, add the following environment variables or system properties to your 
 
 The minimum .NET tracer version required is [v2.35.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variable to your tracer settings or system properties:
+To opt in, add the following environment variables to your tracer settings or system properties:
+- `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+**Note**: `key:value` pairs are case sensitive.
+| Environment variable | TracerSettings |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `PeerServiceNameMappings` |
+
+Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.35.0
 
@@ -175,7 +230,24 @@ The minimum Python tracer version required is [v1.16.0][1]. Regular updates to t
 To opt in, add the following environment variables to your tracer settings or system properties:
 
 Add the following environment variables to your tracer settings or system properties:
+- `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+
+| Environment variable | TracerSettings |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `PeerServiceNameMappings` |
+
+Each setting accepts a comma-separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
 
 As of tracer version `v1.16.0` all libraries are supported except for Boto2.
 
@@ -213,7 +285,7 @@ For example, to set the `peer.service` value for all Dalli spans, use
 
 When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
-Previously, some tracing libraries included the name of the associated integration in service name tagging. For example, .NET tagged gRPC calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported tracing libraries tag spans from the downstream services with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
+Previously, some tracing libraries included the name of the associated integration in service name tagging. For example, .NET tagged gRCP calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported tracing libraries tag spans from the downstream services with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
 
 Consequently, if you have existing:
 
@@ -233,7 +305,6 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [1]: /tracing/services/service_page/
 [2]: /tracing/services/services_map/
 [3]: /tracing/service_catalog/
-[4]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
+[4]: https://github.com/DataDog/datadog-agent/releases/tag/7.45.0
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341

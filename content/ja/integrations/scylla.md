@@ -41,6 +41,7 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: Scylla
+oauth: {}
 public_title: Scylla
 short_description: クラスターのリソース、レイテンシー、健全性などを追跡
 supported_os:

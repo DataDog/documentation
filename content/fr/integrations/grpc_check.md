@@ -34,6 +34,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: grpc_check
+oauth: {}
 public_title: gRPC Health
 short_description: Surveiller des serveurs gRPC basés sur le protocole gRPC Health
   Checking

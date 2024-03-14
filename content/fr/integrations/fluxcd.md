@@ -32,6 +32,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: fluxcd
+oauth: {}
 public_title: fluxcd
 short_description: Intégration de Fluxcd avec la version 2 d'OpenMetrics
 supported_os:

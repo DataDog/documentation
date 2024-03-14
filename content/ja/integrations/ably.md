@@ -5,7 +5,6 @@ assets:
   dashboards:
     Ably: assets/dashboards/ably.json
   integration:
-    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -21,7 +20,6 @@ assets:
       prefix: ably.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_id: 10340
     source_type_name: Ably
 author:
   homepage: https://ably.com
@@ -43,6 +41,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ably
+oauth: {}
 public_title: Ably
 short_description: Ably メトリクスの収集とグラフ化
 supported_os:
@@ -71,7 +70,6 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 [Ably][1] プラットフォームは、世界中の拡張性の高い Web およびモバイルアプリケーションで、マルチプレイ、チャット、データ同期、データ放送、通知などのリアルタイムのユースケースを実現するために使用されています。Ably の API を利用することで、エンジニアはサーバーやクラウドインフラストラクチャーの準備や保守をする必要がなく、コア機能の構築に集中することができます。
 
@@ -82,7 +80,7 @@ Ably の Datadog インテグレーションを使用すると、次のことが
 - Ably メッセージ、チャンネル、接続の使用状況を相関させ、Datadog ダッシュボードで共同分析を行う
 - Datadog で Ably の利用統計を表示・追跡する
 
-## 計画と使用
+## セットアップ
 
 - **Datadog で**: **Integrations** に移動し、Ably タイルを選択し、**Install Integration** をクリックします。
 
@@ -106,19 +104,19 @@ Ably の Datadog インテグレーションを使用すると、次のことが
 
 Ably App の統計情報が Datadog に表示されるようになりました。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 Ably 統計の詳細については、[アプリケーション統計ドキュメント][2]をお読みください。
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ably" >}}
 
 
-### ヘルプ
+### イベント
 
 Ably インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Ably インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -140,7 +138,7 @@ Ably App の統計情報は Datadog に送信されなくなりました。
 
 また、[API Keys ページ][8]でインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
 
-## Agent
+## サポート
 ご不明な点は、[Ably のサポートチーム][9]までお問い合わせください。
 
 [1]: https://ably.com
