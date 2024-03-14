@@ -28,9 +28,6 @@ Data Streams Monitoring supports the [confluent-kafka library][4].
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][5] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
