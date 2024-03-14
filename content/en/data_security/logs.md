@@ -43,7 +43,7 @@ These features are not available to customers who have signed Datadog's BAA:
 
 * Users cannot request support through chat.
 * You cannot [share][5] logs, security signals, or traces from the Datadog explorer.
-* Security rules cannot include triggering group-by values in notification title.
+* Security rules cannot include triggering group-by values in the notification title.
 * Security rules cannot include message template variables.
 * Security rules cannot notify through webhooks.
 
