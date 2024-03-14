@@ -38,7 +38,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar p
 ### Supported libraries
 Data Streams Monitoring supports the [confluent-kafka library][3].
 
-### Monitoring SQS Pipelines
+### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
 ## Further Reading
