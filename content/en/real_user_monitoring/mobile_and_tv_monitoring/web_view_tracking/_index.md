@@ -100,6 +100,8 @@ DatadogWebViewTracking.xcframework
      WebViewTracking.enable(webView, allowedHosts)
    ```
 
+`allowedHosts` will match the given hosts and their subdomain. No regular expression is allowed.
+
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
 [2]: /real_user_monitoring/android/?tab=kotlin#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
@@ -122,6 +124,8 @@ To disable Web View Tracking:
 ```swift
 WebViewTracking.disable(webView: webView)
 ```
+
+`allowedHosts` will match the given hosts and their subdomain. No regular expression is allowed.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -149,6 +153,8 @@ webViewController = WebViewController()
 ```
 
 Note that `JavaScriptMode.unrestricted` is required for tracking to work on Android.
+`allowedHosts` will match the given hosts and their subdomain. No regular expression is allowed.
+
 
 [1]: https://pub.dev/packages/webview_flutter
 [2]: https://pub.dev/packages/datadog_webview_tracking
@@ -176,6 +182,8 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
        allowedHosts={['example.com']}
    />
    ```
+
+`allowedHosts` will match the given hosts and their subdomain. No regular expression is allowed.
 
 [1]: https://github.com/react-native-webview/react-native-webview/blob/master/docs/Getting-Started.md
 
