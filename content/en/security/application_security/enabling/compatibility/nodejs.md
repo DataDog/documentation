@@ -56,20 +56,12 @@ For more information about Node.js release, see the [official Node.js documentat
 The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example ASM, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
 
-| dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
-| ------------------- | --------------------- | --------------------- | ---------------------------------------- |
-| 5.x                 | Linux (glibc)         | arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
-|                     | Linux (musl)          | arm64, x64       | Alpine 3.13                              |
-|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
-|                     | Windows               | x64             | Windows 8.1, Windows Server 2012         |
-| 4.x                 | Linux (glibc)         | arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
-|                     | Linux (musl)          | arm64, x64       | Alpine 3.13                              |
-|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
-|                     | Windows               | x64             | Windows 8.1, Windows Server 2012         |
-| 3.x                 | Linux (glibc)         | arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
-|                     | Linux (musl)          | arm64, x64       | Alpine 3.13                              |
-|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
-|                     | Windows               | x64             | Windows 8.1, Windows Server 2012         |
+| Operating System | Architectures | Minimum Versions                         |
+|------------------|---------------| ---------------------------------------- |
+| Linux (glibc)    | arm64, x64    | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+| Linux (musl)     | arm64, x64    | Alpine 3.13                              |
+| macOS            | arm64, x64    | Catalina (10.15)                         |
+| Windows          | x64           | Windows 8.1, Windows Server 2012         |
 
 
 
