@@ -35,7 +35,7 @@ As an alternative, you can set the `-Ddd.data.streams.enabled=true` system prope
 ```bash
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
 ```
-### Libraries Supported
+### Supported libraries
 Data Streams Monitoring supports the [confluent-kafka library][3].
 
 ### Monitoring SQS Pipelines
