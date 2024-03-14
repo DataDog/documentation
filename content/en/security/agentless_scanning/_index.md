@@ -5,6 +5,9 @@ further_reading:
 - link: "/security/cloud_security_management/setup/agentless_scanning"
   tag: "Documentation"
   text: "Setting up Agentless Scanning"
+- link: "TBD"
+  tag: "Blog"
+  text: "Detect vulnerabilities in minutes with Datadog Agentless scanning for CSM"
 - link: "/security/vulnerabilities"
   tag: "Documentation"
   text: "Read more about CSM Vulnerabilities"
@@ -35,21 +38,24 @@ The following table provides a summary of Agentless scanning technologies in rel
 
 ## How it works
 
-After [setting up Agentless scanning][1] for your resources, Datadog initiates scans through [Remote Configuration,][2] which produce snapshots of your EC2 instances at scheduled intervals. Using the snapshots, the scanner conducts scans to generate and transmit the [Software Bill of Materials][8] (SBOM) to Datadog.
+After [setting up Agentless scanning][1] for your resources, Datadog schedules scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies while also creating snapshots of your EC2 instances. With these snapshots, the Agentless scanners conduct scans to generate and transmit [Software Bill of Materials][8] (SBOMs) to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted.
 
 The following diagram illustrates how Agentless Scanning works:
 
 **Insert diagram**
 
-0. Datadog schedules a scan and sends which resources to scan through Remote Configuration.
-1. The scanner creates snapshots of your EC2 instances every 12 hours or upon request (soon). These snapshots serve as the basis for conducting scans. For lambda, the scanners download the function's code.
-2. Using the snapshots, or the code, the scanner conducts scans to generate SBOMs.
-3. Once the scan is complete, only the list of SBOMs is transmitted to Datadog, while all other data remains within your infrastructure.
-4. Leveraging the collected SBOMs and vulnerabilities databases, Datadog finds matching affected vulnerabilities in your resources and code.
+1. Datadog schedules a scan and sends which resources to scan through Remote Configuration.
+
+  **Note**: Scheduled scans ignore hosts that already have the Datadog Agent installed with Cloud Security Management enabled. Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
+
+2. The scanner creates snapshots of EBS volumes used by EC2 instances. These snapshots serve as the basis for conducting scans. For Lambda functions, the scanners fetch the function's code.
+3. Using the snapshots, or the code, the scanner conducts scans to generate SBOMs.
+4. After the scan is complete, only the list of SBOMs is transmitted to Datadog, while all other data remains within your infrastructure. Snapshots created during the scan cycle are deleted.
+5. Leveraging the collected SBOMs and vulnerabilities databases, Datadog finds matching affected vulnerabilities in your resources and code.
 
 - The scanner operates as a separate EC2 instance within your infrastructure, ensuring minimal impact on existing systems and resources.
 - The scanner securely collects SBOMs from your hosts without transmitting any confidential or private information outside your infrastructure.
-- The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and will use exponential backoff if needed.
+- The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and uses exponential backoff if needed.
 
 
 ## What data is sent to Datadog
@@ -64,7 +70,7 @@ Datadog does **not** send:
 
 ## Security considerations
 
-As the scanner instances grant [permissions][3] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users. 
+Since the scanner instances grant [permissions][3] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users. 
 
 To further mitigate this risk, Datadog implements the following security measures:
 
@@ -81,7 +87,7 @@ To further mitigate this risk, Datadog implements the following security measure
 
 When installed, the Datadog Agent offers real-time, deep visibility into risks and vulnerabilities that exist in your cloud workloads. It is recommended to fully install the Datadog Agent.
 
-As a result, Agentless Scanning excludes resources that have the Datadog Agent installed and configured for Vulnerability Management from its scans. In this way, Cloud Security Management offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
+As a result, Agentless Scanning excludes resources that have the Datadog Agent installed and configured for [Vulnerability Management][8] from its scans. In this way, Cloud Security Management offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
 
 **Insert Diagram**
 
@@ -103,3 +109,4 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [5]: https://cyclonedx.org/
 [7]: mailto:success@datadoghq.com
 [8]: https://www.cisa.gov/sbom
+[9]: /security/vulnerabilities

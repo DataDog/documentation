@@ -11,14 +11,14 @@ To configure CSM Agentless scanning for your hosts and containers, use the follo
 
 ## Deployment methods
 
-There are two ways to deploy Agentless scanners in your environment, manually using Terraform, or by using the Cloud Formation template with the AWS Integration.
+There are two ways to deploy Agentless scanners in your environment, either using cross account scanning, or same account scanning.
 
 **Note**: When using Agentless scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends to setup Agentless scanning with Terraform as the default template, as this also avoids cross-region networking. 
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][8]
 
 {{< tabs >}}
-{{% tab "Terraform (cross-region scanning)" %}}
+{{% tab "Cross account scanning" %}}
 
 With this option, Agentless scanners are deployed on a single cloud account and are distributed across multiple regions within the account. Agentless scanners are granted visibility across multiple accounts without needing to perform cross-region scans, which are expensive in practice.
 
@@ -29,7 +29,7 @@ The following diagram illustrates how Agentless scanning works when deployed in 
 {{< img src="/security/agentless_scanning/agentless_advanced.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
 
 {{% /tab %}}
-{{% tab "AWS Integration (same account scanning)" %}}
+{{% tab "Same account scanning" %}}
 
 With this option, a single Agentless scanner is deployed per account. Although this can incur more costs, as it requires each Agentless scanner to perform cross-region scans per account, Datadog recommends this option if you do not want to grant cross-account permissions.
 
@@ -48,19 +48,20 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 
 ## Installation
 
+There are two ways to install and configure Agentless scanning for your cloud environments, manually using Terraform, or by using the CloudFormation template with the AWS Integration.
+
 ### Terraform
 
 {{< tabs >}}
 {{% tab "Agentless scanning (new AWS account)" %}}
 
-1. Follow the setup instructions for [AWS cloud environments][3] to add cloud accounts to CSM.
-1. Once complete, on the [Cloud Security Management Setup][1] page, click Cloud accounts.
-1. Expand the AWS section.
-1. Choose one account to deploy Agentless scanners.
-1. Click **Edit scanning options** for the account chosen.
-1. **Enable Resource Scanning** should already be enabled. Turn on scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
+1. Follow the setup instructions for [AWS cloud environments][3] to add cloud accounts to Cloud Security Management (CSM).
+1. On the [Cloud Security Management Setup][1] page, click **Cloud accounts > AWS**.
+1. Select the AWS account where you intend to deploy the Agentless scanner.
+1. Click **Edit scanning options** for this account.
+1. **Enable Resource Scanning** should already be enabled. Enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
 1. Follow instructions for [Terraform][4] setup.
-1. Click **Done** to begin scanning. Make sure the template runs successfully before clicking "Done".
+1. Make sure the template runs successfully, then click **Done** to begin scanning. 
 
 {{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
 
@@ -73,13 +74,13 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 
 {{% tab "Agentless scanning (existing AWS account)" %}}
 
-1. For this account, on the [Cloud Security Management Setup][1] page, click Cloud accounts.
+1. On the [Cloud Security Management Setup][1] page, click Cloud accounts.
 1. Expand the AWS section.
-1. Choose one account to deploy Agentless scanners.
+1. Select the AWS account where you intend to deploy the Agentless scanner.
 1. Click Edit scanning options for the account chosen.
-1. **Enable Resource Scanning** should already be enabled. Turn on scanning for the cloud resources you want to monitor in the **Agentless Scanning** section.
+1. **Enable Resource Scanning** should already be enabled. Enable scanning for the cloud resources you want to monitor in the **Agentless Scanning** section.
 1. Follow instructions for [Terraform][4] setup.
-1. Click **Done** to begin scanning. Make sure the template runs successfully before clicking "Done".
+1. Make sure the template runs successfully, then click **Done** to begin scanning. 
 
 {{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
 
@@ -102,9 +103,9 @@ When you add a new AWS account, the following screen appears:
 {{< img src="/security/agentless_scanning/agentless_scanning_aws.png" alt="Setup page for Agentless scanning for adding a new AWS account with adding a single AWS account selected" width="90%">}}
 </br>
 
-1. Once you click "Yes" for **Enable Cloud Security Management**, turn on scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
-1. From there, add an API key. The API key will have Remote Configuration automatically enabled.
-1. Finally, click **Launch CloudFormation Template**. The template will include all the necessary permissions to deploy and manage Agentless scanners. The template must run successfully in order to get scans.
+1. Click **Yes** under **Enable Cloud Security Management**, and enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
+1. Add an API key. This API key already has Remote Configuration automatically enabled.
+1. Click **Launch CloudFormation Template**. The template includes all the necessary permissions to deploy and manage Agentless scanners. The template must run successfully to receive scans.
 
 [1]: /integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
@@ -113,13 +114,13 @@ When you add a new AWS account, the following screen appears:
 
 {{% tab "Agentless scanning (existing AWS account)" %}}
 
-1. For this account, on the [Cloud Security Management Setup][1] page, click Cloud accounts.
+1. On the [Cloud Security Management Setup][1] page, click Cloud accounts.
 1. Expand the AWS section.
-1. Choose one account to deploy Agentless scanners.
-1. Click Edit scanning options for the account chosen.
-1. **Enable Resource Scanning** should already be enabled. Turn on scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
-1. Go to your AWS console, create a new CloudFormation Stack with [this template][2], and run it.
-1. Click **Done** to begin scanning. Make sure the template runs successfully before clicking "Done".
+1. Select the AWS account where you intend to deploy the Agentless scanner.
+1. Click Edit scanning options for this account account.
+1. **Enable Resource Scanning** should already be enabled. Enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
+1. Go to your AWS console, and create a new CloudFormation Stack with [this template][2], and run it.
+1. Make sure the template runs successfully, then click **Done** to begin scanning. 
 
 {{< img src="/security/agentless_scanning/agentless_scanning_setup.png" alt="Setup page for Agentless scanning showing toggle options for Resource Scanning" width="90%" >}}
 
@@ -131,7 +132,7 @@ When you add a new AWS account, the following screen appears:
 
 ## Resource exclusion
 
-Set the tag `DatadogAgentlessScanner:false` on AWS hosts, containers, and/or Lambda functions to be excluded from scans. To add this tag to your resources, follow [AWS documentation][3].
+Set the tag `DatadogAgentlessScanner:false` on AWS hosts, containers, and Lambda functions (if applicable), to be excluded from scans. To add this tag to your resources, follow the [AWS documentation][3].
 
 ## Disabling Agentless scanning
 To disable Agentless Scanning through the cloud formation template, remove roles, or the EC2 scanner instance.

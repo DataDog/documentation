@@ -68,17 +68,18 @@ The following table summarizes the CSM features available relative to each deplo
 
 <div class="alert alert-info">For more details, click each of the CSM feature headings to review additional requirements for that feature.</div>
 
-| Type          | Agent Required (7.46+) | CSM Misconfigurations | [CSM Threats][8]| [CSM Vulnerabilities][9] | [CSM Identity Risks][10] |
-|---------------|------------------------|-----------------------|-------------|---------------------|--------------------|
-| Docker        | {{< X >}}              | {{< X >}}             | {{< X >}}   |                     |                    |
-| Kubernetes    | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| Linux         | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| Amazon ECS/EKS    | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| AWS Account   |                        | {{< X >}}             |             |                     | {{< X >}}          |
-| Azure Account |                        | {{< X >}}             |             |                     |                    |
-| GCP Account   |                        | {{< X >}}             |             |                     |                    |
-| Windows       | {{< X >}}              |                       | beta        |                     |                    |
-| AWS Fargate ECS/EKS  | {{< X >}}              |                       | beta        |                     |                    |
+| Type             | Agent Required (7.46+) | CSM Misconfigurations | [CSM Threats][8] | [CSM Vulnerabilities][9] | [CSM Identity Risks][10] | [CSM Agentless Scanning][11] |
+|------------------|------------------------|-----------------------|------------------|-------------------------|---------------------------|------------------------------|
+| Docker           | {{< X >}}              | {{< X >}}             | {{< X >}}        |                         |                           |                    |
+| Kubernetes       | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}               |                           |                    |
+| Linux            | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}               |                           |                     |
+| Amazon ECS/EKS   | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}               |                           |                     |
+| AWS Account      |                        | {{< X >}}             |                  |                         | {{< X >}}                 |  beta               |
+| Azure Account    |                        | {{< X >}}             |                  |                         |                           |                     |
+| GCP Account      |                        | {{< X >}}             |                  |                         |                           |                     |
+| Windows          | {{< X >}}              |                       | beta             |                         |                           |                     |
+| AWS Fargate ECS/EKS | {{< X >}}           |                       | beta             |                         |                           |                      |
+
 
 The following tables represent additional prerequisites relative to each CSM feature.
 
@@ -129,16 +130,16 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][105]. I
 ## Scope of coverage
 
 The following table summarizes the scope of coverage available relative to each CSM feature.
-| Resources types                         | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | 
-| ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- |  
+| Resources types                         | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | CSM Agentless scanning |
+| ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- | ----------------------| 
 | Resources in AWS Account                | {{< X >}}             |             |                      |                     |  
 | Resources in Azure Subscription         | {{< X >}}             |             |                      |                     | 
 | Resources in GCP Project                | {{< X >}}             |             |                      |                     |  
 | Kubernetes Cluster                      | {{< X >}}             | {{< X >}}   |                      |                     |  
 | Docker Host                             | {{< X >}}             |             |                      |                     |
-| Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  
+| Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  {{< X >}}
 | Docker Container                        |                       | {{< X >}}   |                      |                     |
-| Container Image                         |                       |             |    {{< X >}}         |                     |
+| Container Image                         |                       |             |    {{< X >}}         |                     |  {{< X >}}
 | IAM in AWS Account                      |                       |             |                      |  {{< X >}}          |
 
 **Note**: CSM Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
@@ -169,7 +170,7 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][4] sec
 [8]: /security/cloud_security_management/setup/#csm-threats
 [9]: /security/cloud_security_management/setup/#csm-vulnerabilities
 [10]: /security/cloud_security_management/setup/#csm-identity-risks
-[11]: /security/cloud_security_management/setup/#agentless-scanning
+[11]: /security/cloud_security_management/setup/agentless_scanning?tab=crossaccountscanning#prerequisites
 [102]: /security/cloud_security_management/troubleshooting
 [103]: /containers/kubernetes/installation/?tab=helm
 [104]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
