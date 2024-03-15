@@ -3,6 +3,16 @@
     "type": "roles",
     "attributes": {
       "name": "Example-Role"
+    },
+    "relationships": {
+      "permissions": {
+        "data": [
+          {
+            "id": "string",
+            "type": "permissions"
+          }
+        ]
+      }
     }
   }
 }
