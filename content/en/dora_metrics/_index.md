@@ -252,7 +252,7 @@ curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/inciden
     "data": {
       "attributes": {
         "services": ["shopist"],
-        "team": "shopist-devs"
+        "team": "shopist-devs",
         "started_at": 1693491974000000000,
         "finished_at": 1693491984000000000,
         "git": {
