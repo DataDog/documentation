@@ -92,11 +92,11 @@ try (var scope = Profiling.get().newScope()) {
 }
 ```
 
-Then inform the Datadog backend of your intent to filter by this context key by setting the `profiling.context.attributes` configuration with one of:
+Then, inform the Datadog backend of your intent to filter by this context key; set the `profiling.context.attributes` configuration with one of the following:
 * Environment variable: `DD_PROFILING_CONTEXT_ATTRIBUTES=customer_name`
 * System setting: `-Ddd.profiling.context.attributes=customer_name`
 
-If you have several such context keys you should use a comma-separated string for the configuration (`-Ddd.profiling.context.attributes=customer_name,customer_group` for example).
+If you have multiple context keys, use a comma-separated string for the configuration (for example,`-Ddd.profiling.context.attributes=customer_name,customer_group`).
 
 Then, open CPU, Exceptions, or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
 
