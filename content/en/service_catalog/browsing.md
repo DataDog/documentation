@@ -1,5 +1,5 @@
 ---
-title: Browsing the Service Catalog
+title: Navigating the Service Catalog
 kind: documentation
 aliases:
   - /tracing/service_catalog/browsing
@@ -29,11 +29,7 @@ algolia:
   tags: ['service catalog']
 ---
 
-On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name. To filter the list, select one or more facets. For example, to see detected services without a service definition yet, click the **Ownership Info > Telemetry Only** facet. You may find it helpful to filter by your team name or scope the metrics displayed to particular environments and clusters in order to see only matching services in the list.
-
-The Service Catalog list is sortable by service type, service name, and many of the other columns. You can find missing ownership by sorting by team in the Ownership view and looking for blanks. Or you can sort by urgency in the Reliability view and see services with the most triggered monitors.
-
-Information about the service provided by the service definition or by Datadog products collecting observability data is organized into views: Ownership, Reliability, Performance, Security, and more.
+On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name. To narrow down to only explicitly declared entries, you can search by the **Service Origin** facet and filter by **user-defined**. 
 
 ## Ownership view
 
@@ -117,6 +113,28 @@ The **Software Delivery tab** provides several ways to assess and improve the pr
 
 To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
 
+## Manage service-related workflows
+
+[Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
+
+### Find Service Catalog actions
+
+To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][15]. Filter for the actions you need:
+
+1. **Access the Action Catalog**: Look for the Action Catalog within your Datadog Workflow Automation environment.
+2. **Search Functionality**: Use the search bar to search for keywords like "Service Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
+
+### Available Service Catalog Actions
+
+Below is a comprehensive list of actions available for Service Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
+
+- **Retrieve Service Information**
+  - "Get service definition" for a single service
+  - "List service definitions" to get all definitions from Datadog Service Catalog
+  - "Get service dependencies" to get a service's immediate upstream and downstream services
+- **Incident Triage**
+  - "Get service PagerDuty on call"
+  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks). 
 
 
 ## Further reading
@@ -137,3 +155,5 @@ To access additional details describing your CI status and static analysis viola
 [11]: /cloud_cost_management/tag_pipelines
 [12]: https://app.datadoghq.com/ci/pipelines
 [13]: https://app.datadoghq.com/ci/static-analysis
+[14]: /service_management/workflows/
+[15]: /service_management/workflows/actions_catalog/

@@ -50,6 +50,11 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 - Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries.
 - As you instrument more applications across your environments, they are automatically added to the Service Catalog.
 
+#### Dependencies mapping and management 
+- Document and track all of your upstream and downstream dependencies automatically with application telemetries collected by APM, USM, and RUM.
+- Manually declare dependency relationships across components (available through [metadata schema v3.0][8].
+- Understand and assess performance impacts across teams and services.
+
 #### Governance 
 - Providing engineering leadership with a high-level view of reliability practices across teams and services.
 - Proactively identifying services exposed to application attacks.
@@ -137,3 +142,4 @@ The services and resources statistics, and span summaries on the **Service List*
 [5]: /tracing/service_catalog/adding_metadata#service-definition-schema-v22
 [6]: https://www.datadoghq.com/blog/tagging-best-practices/#assign-owners-to-services-with-tags
 [7]: /tracing/other_telemetry/
+[8]: /service_catalog/add_metadata#metadata-schema-v30-beta

@@ -169,4 +169,4 @@ To enable Datadog Distributed Tracing, you must set the `First Party Hosts` in y
 [4]: https://openupm.com/packages/com.google.external-dependency-manager/
 [5]: https://github.com/DataDog/unity-package
 [6]: https://docs.unity3d.com/Manual/gradle-templates.html
-[7]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=browserrum
+[7]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum

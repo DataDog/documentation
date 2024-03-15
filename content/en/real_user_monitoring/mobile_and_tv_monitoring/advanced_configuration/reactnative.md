@@ -440,6 +440,6 @@ const configuration = {
 [8]: /account_management/api-app-keys/#client-tokens
 [9]: /getting_started/site/
 [11]: /real_user_monitoring/browser/frustration_signals/
-[12]: /real_user_monitoring/connect_rum_and_traces?tab=reactnativerum
+[12]: /real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
 [13]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [15]: /getting_started/tagging/#define-tags

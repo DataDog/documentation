@@ -16055,6 +16055,8 @@ components:
         host:
           description: Host name to perform the test with.
           type: string
+        httpVersion:
+          $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
