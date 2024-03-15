@@ -14,7 +14,7 @@ For [Cloud Security Management Misconfigurations][3], the security posture score
 
 **Formula**:
 
-$${({\text"Pcrictical"/\text"Pcritical + Fcritical"}^2) *8}+{(\text"Phigh"/\text"Phigh + Fhigh") *6}+{(\text"Pmedium"/\text"Pmedium + Fmedium") *3}+{(\text"Plow"/\text"Plow + Flow") *2}+{(\text"Pinfo"/\text"Pinfo + Finfo") *1}$$
+$${{({\text"Pcrictical"/\text"Pcritical + Fcritical"})^2 *8}+{(\text"Phigh"/\text"Phigh + Fhigh") *6}+{(\text"Pmedium"/\text"Pmedium + Fmedium") *3}+{(\text"Plow"/\text"Plow + Flow") *2}+{(\text"Pinfo"/\text"Pinfo + Finfo") *1}}/{8+6+3+2+1}$$
 
 - P is the number of misconfigurations that evaluate to pass.
 - F is the number of misconfigurations that evaluate to fail.
