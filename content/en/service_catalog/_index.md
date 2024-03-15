@@ -52,7 +52,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 
 #### Dependencies mapping and management 
 - Document and track all of your upstream and downstream dependencies automatically with application telemetries collected by APM, USM, and RUM.
-- Manually declare dependencies relationship across components (available through [metadata schema v3.0][8].
+- Manually declare dependency relationships across components (available through [metadata schema v3.0][8].
 - Understand and assess performance impacts across teams and services.
 
 #### Governance 
