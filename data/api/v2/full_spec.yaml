@@ -195,6 +195,13 @@ components:
       required: true
       schema:
         type: string
+    CustomDestinationId:
+      description: The ID of the custom destination.
+      in: path
+      name: custom_destination_id
+      required: true
+      schema:
+        type: string
     FastlyAccountID:
       description: Fastly Account id.
       in: path
@@ -3940,9 +3947,27 @@ components:
       type: string
       x-enum-varnames:
       - CLOUD_COST_ACTIVITY
+    CloudWorkloadSecurityAgentRuleAction:
+      description: The action the rule can perform if triggered.
+      properties:
+        filter:
+          description: SECL expression used to target the container to apply the action
+            on
+          type: string
+        kill:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleKill'
+      type: object
+    CloudWorkloadSecurityAgentRuleActions:
+      description: The array of actions the rule can perform if triggered.
+      items:
+        $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleAction'
+      nullable: true
+      type: array
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
+        actions:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleActions'
         agentConstraint:
           description: The version of the agent.
           type: string
@@ -4075,6 +4100,17 @@ components:
         type:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
       type: object
+    CloudWorkloadSecurityAgentRuleID:
+      description: The ID of the agent rule.
+      example: 3dd-0uc-h1s
+      type: string
+    CloudWorkloadSecurityAgentRuleKill:
+      description: Kill system call applied on the container matching the rule
+      properties:
+        signal:
+          description: Supported signals for the kill system call.
+          type: string
+      type: object
     CloudWorkloadSecurityAgentRuleResponse:
       description: Response object that includes an Agent rule.
       properties:
@@ -4111,6 +4147,8 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleID'
         type:
           $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleType'
       required:
@@ -5331,6 +5369,621 @@ components:
           nullable: true
           type: string
       type: object
+    CustomDestinationAttributeTagsRestrictionListType:
+      default: ALLOW_LIST
+      description: 'How `forward_tags_restriction_list` parameter should be interpreted.
+
+        If `ALLOW_LIST`, then only tags whose keys on the forwarded logs match the
+        ones on the restriction list
+
+        are forwarded.
+
+
+        `BLOCK_LIST` works the opposite way. It does not forward the tags matching
+        the ones on the list.'
+      enum:
+      - ALLOW_LIST
+      - BLOCK_LIST
+      example: ALLOW_LIST
+      type: string
+      x-enum-varnames:
+      - ALLOW_LIST
+      - BLOCK_LIST
+    CustomDestinationCreateRequest:
+      description: The custom destination.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomDestinationCreateRequestDefinition'
+      type: object
+    CustomDestinationCreateRequestAttributes:
+      description: The attributes associated with the custom destination.
+      properties:
+        enabled:
+          default: true
+          description: Whether logs matching this custom destination should be forwarded
+            or not.
+          example: true
+          type: boolean
+        forward_tags:
+          default: true
+          description: Whether tags from the forwarded logs should be forwarded or
+            not.
+          example: true
+          type: boolean
+        forward_tags_restriction_list:
+          default: []
+          description: 'List of [keys of tags](https://docs.datadoghq.com/getting_started/tagging/#define-tags)
+            to be filtered.
+
+
+            An empty list represents no restriction is in place and either all or
+            no tags will be
+
+            forwarded depending on `forward_tags_restriction_list_type` parameter.'
+          example:
+          - datacenter
+          - host
+          items:
+            description: The [key part of a tag](https://docs.datadoghq.com/getting_started/tagging/#define-tags).
+            type: string
+          maxItems: 10
+          minItems: 0
+          type: array
+        forward_tags_restriction_list_type:
+          $ref: '#/components/schemas/CustomDestinationAttributeTagsRestrictionListType'
+        forwarder_destination:
+          $ref: '#/components/schemas/CustomDestinationForwardDestination'
+        name:
+          description: The custom destination name.
+          example: Nginx logs
+          type: string
+        query:
+          default: ''
+          description: The custom destination query and filter. Logs matching this
+            query are forwarded to the destination.
+          example: source:nginx
+          type: string
+      required:
+      - name
+      - forwarder_destination
+      type: object
+    CustomDestinationCreateRequestDefinition:
+      description: The definition of a custom destination.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomDestinationCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CustomDestinationType'
+      required:
+      - type
+      - attributes
+      type: object
+    CustomDestinationElasticsearchDestinationAuth:
+      description: Basic access authentication.
+      properties:
+        password:
+          description: The password of the authentication. This field is not returned
+            by the API.
+          example: datadog-custom-destination-password
+          type: string
+          writeOnly: true
+        username:
+          description: The username of the authentication. This field is not returned
+            by the API.
+          example: datadog-custom-destination-username
+          type: string
+          writeOnly: true
+      required:
+      - username
+      - password
+      type: object
+    CustomDestinationForwardDestination:
+      description: A custom destination's location to forward logs.
+      oneOf:
+      - $ref: '#/components/schemas/CustomDestinationForwardDestinationHttp'
+      - $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunk'
+      - $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearch'
+      type: object
+    CustomDestinationForwardDestinationElasticsearch:
+      description: The Elasticsearch destination.
+      properties:
+        auth:
+          $ref: '#/components/schemas/CustomDestinationElasticsearchDestinationAuth'
+        endpoint:
+          description: 'The destination for which logs will be forwarded to.
+
+            Must have HTTPS scheme and forwarding back to Datadog is not allowed.'
+          example: https://example.com
+          type: string
+        index_name:
+          description: Name of the Elasticsearch index (must follow [Elasticsearch's
+            criteria](https://www.elastic.co/guide/en/elasticsearch/reference/8.11/indices-create-index.html#indices-create-api-path-params)).
+          example: nginx-logs
+          type: string
+        index_rotation:
+          description: 'Date pattern with US locale and UTC timezone to be appended
+            to the index name after adding `-`
+
+            (that is, `${index_name}-${indexPattern}`).
+
+            You can customize the index rotation naming pattern by choosing one of
+            these options:
+
+            - Hourly: `yyyy-MM-dd-HH` (as an example, it would render: `2022-10-19-09`)
+
+            - Daily: `yyyy-MM-dd` (as an example, it would render: `2022-10-19`)
+
+            - Weekly: `yyyy-''W''ww` (as an example, it would render: `2022-W42`)
+
+            - Monthly: `yyyy-MM` (as an example, it would render: `2022-10`)
+
+
+            If this field is missing or is blank, it means that the index name will
+            always be the same
+
+            (that is, no rotation).'
+          example: yyyy-MM-dd
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationForwardDestinationElasticsearchType'
+      required:
+      - type
+      - endpoint
+      - auth
+      - index_name
+      type: object
+    CustomDestinationForwardDestinationElasticsearchType:
+      default: elasticsearch
+      description: Type of the Elasticsearch destination.
+      enum:
+      - elasticsearch
+      example: elasticsearch
+      type: string
+      x-enum-varnames:
+      - ELASTICSEARCH
+    CustomDestinationForwardDestinationHttp:
+      description: The HTTP destination.
+      properties:
+        auth:
+          $ref: '#/components/schemas/CustomDestinationHttpDestinationAuth'
+        endpoint:
+          description: 'The destination for which logs will be forwarded to.
+
+            Must have HTTPS scheme and forwarding back to Datadog is not allowed.'
+          example: https://example.com
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationForwardDestinationHttpType'
+      required:
+      - type
+      - endpoint
+      - auth
+      type: object
+    CustomDestinationForwardDestinationHttpType:
+      default: http
+      description: Type of the HTTP destination.
+      enum:
+      - http
+      example: http
+      type: string
+      x-enum-varnames:
+      - HTTP
+    CustomDestinationForwardDestinationSplunk:
+      description: The Splunk HTTP Event Collector (HEC) destination.
+      properties:
+        access_token:
+          description: Access token of the Splunk HTTP Event Collector. This field
+            is not returned by the API.
+          example: splunk_access_token
+          type: string
+          writeOnly: true
+        endpoint:
+          description: 'The destination for which logs will be forwarded to.
+
+            Must have HTTPS scheme and forwarding back to Datadog is not allowed.'
+          example: https://example.com
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationForwardDestinationSplunkType'
+      required:
+      - type
+      - endpoint
+      - access_token
+      type: object
+    CustomDestinationForwardDestinationSplunkType:
+      default: splunk_hec
+      description: Type of the Splunk HTTP Event Collector (HEC) destination.
+      enum:
+      - splunk_hec
+      example: splunk_hec
+      type: string
+      x-enum-varnames:
+      - SPLUNK_HEC
+    CustomDestinationHttpDestinationAuth:
+      description: Authentication method of the HTTP requests.
+      oneOf:
+      - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthBasic'
+      - $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthCustomHeader'
+      type: object
+    CustomDestinationHttpDestinationAuthBasic:
+      description: Basic access authentication.
+      properties:
+        password:
+          description: The password of the authentication. This field is not returned
+            by the API.
+          example: datadog-custom-destination-password
+          type: string
+          writeOnly: true
+        type:
+          $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthBasicType'
+        username:
+          description: The username of the authentication. This field is not returned
+            by the API.
+          example: datadog-custom-destination-username
+          type: string
+          writeOnly: true
+      required:
+      - type
+      - username
+      - password
+      type: object
+    CustomDestinationHttpDestinationAuthBasicType:
+      default: basic
+      description: Type of the basic access authentication.
+      enum:
+      - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+      - BASIC
+    CustomDestinationHttpDestinationAuthCustomHeader:
+      description: Custom header access authentication.
+      properties:
+        header_name:
+          description: The header name of the authentication.
+          example: CUSTOM-HEADER-NAME
+          type: string
+        header_value:
+          description: The header value of the authentication. This field is not returned
+            by the API.
+          example: CUSTOM-HEADER-AUTHENTICATION-VALUE
+          type: string
+          writeOnly: true
+        type:
+          $ref: '#/components/schemas/CustomDestinationHttpDestinationAuthCustomHeaderType'
+      required:
+      - type
+      - header_name
+      - header_value
+      type: object
+    CustomDestinationHttpDestinationAuthCustomHeaderType:
+      default: custom_header
+      description: Type of the custom header access authentication.
+      enum:
+      - custom_header
+      example: custom_header
+      type: string
+      x-enum-varnames:
+      - CUSTOM_HEADER
+    CustomDestinationResponse:
+      description: The custom destination.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomDestinationResponseDefinition'
+      type: object
+    CustomDestinationResponseAttributes:
+      description: The attributes associated with the custom destination.
+      properties:
+        enabled:
+          default: true
+          description: Whether logs matching this custom destination should be forwarded
+            or not.
+          example: true
+          type: boolean
+        forward_tags:
+          default: true
+          description: Whether tags from the forwarded logs should be forwarded or
+            not.
+          example: true
+          type: boolean
+        forward_tags_restriction_list:
+          default: []
+          description: 'List of [keys of tags](https://docs.datadoghq.com/getting_started/tagging/#define-tags)
+            to be filtered.
+
+
+            An empty list represents no restriction is in place and either all or
+            no tags will be
+
+            forwarded depending on `forward_tags_restriction_list_type` parameter.'
+          example:
+          - datacenter
+          - host
+          items:
+            description: The [key part of a tag](https://docs.datadoghq.com/getting_started/tagging/#define-tags).
+            type: string
+          maxItems: 10
+          minItems: 0
+          type: array
+        forward_tags_restriction_list_type:
+          $ref: '#/components/schemas/CustomDestinationAttributeTagsRestrictionListType'
+        forwarder_destination:
+          $ref: '#/components/schemas/CustomDestinationResponseForwardDestination'
+        name:
+          description: The custom destination name.
+          example: Nginx logs
+          type: string
+        query:
+          default: ''
+          description: The custom destination query filter. Logs matching this query
+            are forwarded to the destination.
+          example: source:nginx
+          type: string
+      type: object
+    CustomDestinationResponseDefinition:
+      description: The definition of a custom destination.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomDestinationResponseAttributes'
+        id:
+          description: The custom destination ID.
+          example: be5d7a69-d0c8-4d4d-8ee8-bba292d98139
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationType'
+      type: object
+    CustomDestinationResponseElasticsearchDestinationAuth:
+      additionalProperties:
+        description: Basic access authentication.
+      description: Basic access authentication.
+      type: object
+    CustomDestinationResponseForwardDestination:
+      description: A custom destination's location to forward logs.
+      oneOf:
+      - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationHttp'
+      - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunk'
+      - $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearch'
+      type: object
+    CustomDestinationResponseForwardDestinationElasticsearch:
+      description: The Elasticsearch destination.
+      properties:
+        auth:
+          $ref: '#/components/schemas/CustomDestinationResponseElasticsearchDestinationAuth'
+        endpoint:
+          description: 'The destination for which logs will be forwarded to.
+
+            Must have HTTPS scheme and forwarding back to Datadog is not allowed.'
+          example: https://example.com
+          type: string
+        index_name:
+          description: Name of the Elasticsearch index (must follow [Elasticsearch's
+            criteria](https://www.elastic.co/guide/en/elasticsearch/reference/8.11/indices-create-index.html#indices-create-api-path-params)).
+          example: nginx-logs
+          type: string
+        index_rotation:
+          description: 'Date pattern with US locale and UTC timezone to be appended
+            to the index name after adding `-`
+
+            (that is, `${index_name}-${indexPattern}`).
+
+            You can customize the index rotation naming pattern by choosing one of
+            these options:
+
+            - Hourly: `yyyy-MM-dd-HH` (as an example, it would render: `2022-10-19-09`)
+
+            - Daily: `yyyy-MM-dd` (as an example, it would render: `2022-10-19`)
+
+            - Weekly: `yyyy-''W''ww` (as an example, it would render: `2022-W42`)
+
+            - Monthly: `yyyy-MM` (as an example, it would render: `2022-10`)
+
+
+            If this field is missing or is blank, it means that the index name will
+            always be the same
+
+            (that is, no rotation).'
+          example: yyyy-MM-dd
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationElasticsearchType'
+      required:
+      - type
+      - endpoint
+      - auth
+      - index_name
+      type: object
+    CustomDestinationResponseForwardDestinationElasticsearchType:
+      default: elasticsearch
+      description: Type of the Elasticsearch destination.
+      enum:
+      - elasticsearch
+      example: elasticsearch
+      type: string
+      x-enum-varnames:
+      - ELASTICSEARCH
+    CustomDestinationResponseForwardDestinationHttp:
+      description: The HTTP destination.
+      properties:
+        auth:
+          $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuth'
+        endpoint:
+          description: 'The destination for which logs will be forwarded to.
+
+            Must have HTTPS scheme and forwarding back to Datadog is not allowed.'
+          example: https://example.com
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationHttpType'
+      required:
+      - type
+      - endpoint
+      - auth
+      type: object
+    CustomDestinationResponseForwardDestinationHttpType:
+      default: http
+      description: Type of the HTTP destination.
+      enum:
+      - http
+      example: http
+      type: string
+      x-enum-varnames:
+      - HTTP
+    CustomDestinationResponseForwardDestinationSplunk:
+      description: The Splunk HTTP Event Collector (HEC) destination.
+      properties:
+        endpoint:
+          description: 'The destination for which logs will be forwarded to.
+
+            Must have HTTPS scheme and forwarding back to Datadog is not allowed.'
+          example: https://example.com
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationResponseForwardDestinationSplunkType'
+      required:
+      - type
+      - endpoint
+      type: object
+    CustomDestinationResponseForwardDestinationSplunkType:
+      default: splunk_hec
+      description: Type of the Splunk HTTP Event Collector (HEC) destination.
+      enum:
+      - splunk_hec
+      example: splunk_hec
+      type: string
+      x-enum-varnames:
+      - SPLUNK_HEC
+    CustomDestinationResponseHttpDestinationAuth:
+      description: Authentication method of the HTTP requests.
+      oneOf:
+      - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthBasic'
+      - $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthCustomHeader'
+      type: object
+    CustomDestinationResponseHttpDestinationAuthBasic:
+      description: Basic access authentication.
+      properties:
+        type:
+          $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthBasicType'
+      required:
+      - type
+      type: object
+    CustomDestinationResponseHttpDestinationAuthBasicType:
+      default: basic
+      description: Type of the basic access authentication.
+      enum:
+      - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+      - BASIC
+    CustomDestinationResponseHttpDestinationAuthCustomHeader:
+      description: Custom header access authentication.
+      properties:
+        header_name:
+          description: The header name of the authentication.
+          example: CUSTOM-HEADER-NAME
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationResponseHttpDestinationAuthCustomHeaderType'
+      required:
+      - type
+      - header_name
+      type: object
+    CustomDestinationResponseHttpDestinationAuthCustomHeaderType:
+      default: custom_header
+      description: Type of the custom header access authentication.
+      enum:
+      - custom_header
+      example: custom_header
+      type: string
+      x-enum-varnames:
+      - CUSTOM_HEADER
+    CustomDestinationType:
+      default: custom_destination
+      description: The type of the resource. The value should always be `custom_destination`.
+      enum:
+      - custom_destination
+      example: custom_destination
+      type: string
+      x-enum-varnames:
+      - custom_destination
+    CustomDestinationUpdateRequest:
+      description: The custom destination.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomDestinationUpdateRequestDefinition'
+      type: object
+    CustomDestinationUpdateRequestAttributes:
+      description: The attributes associated with the custom destination.
+      properties:
+        enabled:
+          default: true
+          description: Whether logs matching this custom destination should be forwarded
+            or not.
+          example: true
+          type: boolean
+        forward_tags:
+          default: true
+          description: Whether tags from the forwarded logs should be forwarded or
+            not.
+          example: true
+          type: boolean
+        forward_tags_restriction_list:
+          default: []
+          description: 'List of [keys of tags](https://docs.datadoghq.com/getting_started/tagging/#define-tags)
+            to be restricted from being forwarded.
+
+            An empty list represents no restriction is in place and either all or
+            no tags will be forwarded depending on `forward_tags_restriction_list_type`
+            parameter.'
+          example:
+          - datacenter
+          - host
+          items:
+            description: The [key part of a tag](https://docs.datadoghq.com/getting_started/tagging/#define-tags).
+            type: string
+          maxItems: 10
+          minItems: 0
+          type: array
+        forward_tags_restriction_list_type:
+          $ref: '#/components/schemas/CustomDestinationAttributeTagsRestrictionListType'
+        forwarder_destination:
+          $ref: '#/components/schemas/CustomDestinationForwardDestination'
+        name:
+          description: The custom destination name.
+          example: Nginx logs
+          type: string
+        query:
+          default: ''
+          description: The custom destination query and filter. Logs matching this
+            query are forwarded to the destination.
+          example: source:nginx
+          type: string
+      type: object
+    CustomDestinationUpdateRequestDefinition:
+      description: The definition of a custom destination.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomDestinationUpdateRequestAttributes'
+        id:
+          description: The custom destination ID.
+          example: be5d7a69-d0c8-4d4d-8ee8-bba292d98139
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationType'
+      required:
+      - type
+      - id
+      type: object
+    CustomDestinationsResponse:
+      description: The available custom destinations.
+      properties:
+        data:
+          description: A list of custom destinations.
+          items:
+            $ref: '#/components/schemas/CustomDestinationResponseDefinition'
+          type: array
+      type: object
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -6135,7 +6788,7 @@ components:
           type: string
       type: object
     DowntimeScheduleOneTimeCreateUpdateRequest:
-      additionalProperties: {}
+      additionalProperties: false
       description: A one-time downtime definition.
       properties:
         end:
@@ -6270,6 +6923,7 @@ components:
       - recurrences
       type: object
     DowntimeScheduleRecurrencesUpdateRequest:
+      additionalProperties: false
       description: A recurring downtime schedule definition.
       properties:
         recurrences:
@@ -10435,7 +11089,6 @@ components:
           example: project-id
           type: string
       required:
-      - project_id
       - client_email
       type: object
     LogsArchiveIntegrationS3:
@@ -11117,6 +11770,136 @@ components:
           $ref: '#/components/schemas/MetricAllTags'
       readOnly: true
       type: object
+    MetricAssetAttributes:
+      description: Assets where only included attribute is its title
+      properties:
+        title:
+          description: Title of the asset.
+          type: string
+      type: object
+    MetricAssetDashboardRelationship:
+      description: An object of type `dashboard` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricDashboardID'
+        type:
+          $ref: '#/components/schemas/MetricDashboardType'
+      type: object
+    MetricAssetDashboardRelationships:
+      description: An object containing the list of dashboards that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of dashboards that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetDashboardRelationship'
+          type: array
+      type: object
+    MetricAssetMonitorRelationship:
+      description: An object of type `monitor` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricMonitorID'
+        type:
+          $ref: '#/components/schemas/MetricMonitorType'
+      type: object
+    MetricAssetMonitorRelationships:
+      description: A object containing the list of monitors that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of monitors that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetMonitorRelationship'
+          type: array
+      type: object
+    MetricAssetNotebookRelationship:
+      description: An object of type `notebook` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricNotebookID'
+        type:
+          $ref: '#/components/schemas/MetricNotebookType'
+      type: object
+    MetricAssetNotebookRelationships:
+      description: An object containing the list of notebooks that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of notebooks that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetNotebookRelationship'
+          type: array
+      type: object
+    MetricAssetResponseData:
+      description: Metric assets response data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricName'
+        relationships:
+          $ref: '#/components/schemas/MetricAssetResponseRelationships'
+        type:
+          $ref: '#/components/schemas/MetricType'
+      required:
+      - id
+      - type
+      type: object
+    MetricAssetResponseIncluded:
+      description: List of included assets with full set of attributes.
+      oneOf:
+      - $ref: '#/components/schemas/MetricDashboardAsset'
+      - $ref: '#/components/schemas/MetricMonitorAsset'
+      - $ref: '#/components/schemas/MetricNotebookAsset'
+      - $ref: '#/components/schemas/MetricSLOAsset'
+    MetricAssetResponseRelationships:
+      description: Relationships to assets related to the metric.
+      properties:
+        dashboards:
+          $ref: '#/components/schemas/MetricAssetDashboardRelationships'
+        monitors:
+          $ref: '#/components/schemas/MetricAssetMonitorRelationships'
+        notebooks:
+          $ref: '#/components/schemas/MetricAssetNotebookRelationships'
+        slos:
+          $ref: '#/components/schemas/MetricAssetSLORelationships'
+      type: object
+    MetricAssetSLORelationship:
+      description: An object of type `slos` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricSLOID'
+        type:
+          $ref: '#/components/schemas/MetricSLOType'
+      type: object
+    MetricAssetSLORelationships:
+      description: An object containing a list of SLOs that can be referenced in the
+        `included` data.
+      properties:
+        data:
+          description: A list of SLOs that can be referenced in the `included` data.
+          items:
+            $ref: '#/components/schemas/MetricAssetSLORelationship'
+          type: array
+      type: object
+    MetricAssetsResponse:
+      description: Response object that includes related dashboards, monitors, notebooks,
+        and SLOs.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricAssetResponseData'
+        included:
+          description: Array of objects related to the metric assets.
+          items:
+            $ref: '#/components/schemas/MetricAssetResponseIncluded'
+          type: array
+      type: object
     MetricBulkConfigureTagsType:
       default: metric_bulk_configure_tags
       description: The metric bulk configure tags resource.
@@ -11358,6 +12141,44 @@ components:
       - MAX
       - MIN
       - SUM
+    MetricDashboardAsset:
+      description: A dashboard object with title and popularity.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricDashboardAttributes'
+        id:
+          $ref: '#/components/schemas/MetricDashboardID'
+        type:
+          $ref: '#/components/schemas/MetricDashboardType'
+      required:
+      - id
+      - type
+      type: object
+    MetricDashboardAttributes:
+      description: Attributes related to the dashboard, including title and popularity.
+      properties:
+        popularity:
+          description: Value from 0 to 5 that ranks popularity of the dashboard.
+          format: double
+          maximum: 5
+          minimum: 0
+          type: number
+        title:
+          description: Title of the asset.
+          type: string
+      type: object
+    MetricDashboardID:
+      description: The related dashboard's ID.
+      example: xxx-yyy-zzz
+      type: string
+    MetricDashboardType:
+      description: Dashboard resource type.
+      enum:
+      - dashboards
+      example: dashboards
+      type: string
+      x-enum-varnames:
+      - DASHBOARDS
     MetricDistinctVolume:
       description: Object for a single metric's distinct volume.
       properties:
@@ -11498,10 +12319,60 @@ components:
         origin:
           $ref: '#/components/schemas/MetricOrigin'
       type: object
+    MetricMonitorAsset:
+      description: A monitor object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricMonitorID'
+        type:
+          $ref: '#/components/schemas/MetricMonitorType'
+      required:
+      - id
+      - type
+      type: object
+    MetricMonitorID:
+      description: The related monitor's ID.
+      example: '1775073'
+      type: string
+    MetricMonitorType:
+      description: Monitor resource type.
+      enum:
+      - monitors
+      example: monitors
+      type: string
+      x-enum-varnames:
+      - MONITORS
     MetricName:
       description: The metric name for this resource.
       example: test.metric.latency
       type: string
+    MetricNotebookAsset:
+      description: A notebook object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricNotebookID'
+        type:
+          $ref: '#/components/schemas/MetricNotebookType'
+      required:
+      - id
+      - type
+      type: object
+    MetricNotebookID:
+      description: The related notebook's ID.
+      example: '12345'
+      type: string
+    MetricNotebookType:
+      description: Notebook resource type.
+      enum:
+      - notebooks
+      example: notebooks
+      type: string
+      x-enum-varnames:
+      - NOTEBOOKS
     MetricOrigin:
       description: Metric origin information.
       properties:
@@ -11575,6 +12446,31 @@ components:
           description: The type of the resource.
           type: string
       type: object
+    MetricSLOAsset:
+      description: A SLO object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricSLOID'
+        type:
+          $ref: '#/components/schemas/MetricSLOType'
+      required:
+      - id
+      - type
+      type: object
+    MetricSLOID:
+      description: The SLO ID.
+      example: 9ffef113b389520db54391d67d652dfb
+      type: string
+    MetricSLOType:
+      description: SLO resource type.
+      enum:
+      - slos
+      example: slos
+      type: string
+      x-enum-varnames:
+      - SLOS
     MetricSeries:
       description: 'A metric to submit to Datadog.
 
@@ -18280,7 +19176,10 @@ components:
           description: Name of the standard pattern.
           type: string
         pattern:
-          description: Regex to match.
+          deprecated: true
+          description: (Deprecated) Regex to match, optionally documented for older
+            standard rules. Refer to the `description` field to understand what the
+            rule does.
           type: string
         priority:
           description: Integer from 1 (high) to 5 (low) indicating standard pattern
@@ -18991,6 +19890,14 @@ components:
             feature, which the service is a part of.
           example: my-app
           type: string
+        ci-pipeline-fingerprints:
+          description: A set of CI fingerprints.
+          example:
+          - j88xdEy0J5lc
+          - eZ7LMljCk8vo
+          items:
+            type: string
+          type: array
         contacts:
           description: A list of contacts related to the services.
           items:
@@ -21496,6 +22403,10 @@ components:
       required:
       - type
       type: object
+    UserTeamIncluded:
+      description: Included resources related to the team membership
+      oneOf:
+      - $ref: '#/components/schemas/User'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -21550,6 +22461,11 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/UserTeam'
+        included:
+          description: Resources related to the team memberships
+          items:
+            $ref: '#/components/schemas/UserTeamIncluded'
+          type: array
       type: object
     UserTeamRole:
       description: The user's role within the team
@@ -23895,8 +24811,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events:
     get:
-      description: 'List endpoint returns CI Visibility test events that match a [log
-        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+      description: 'List endpoint returns CI Visibility test events that match a [search
+        query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -23982,8 +24898,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events/search:
     post:
-      description: 'List endpoint returns CI Visibility test events that match a [log
-        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+      description: 'List endpoint returns CI Visibility test events that match a [search
+        query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -26478,8 +27394,8 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"client_email\":
-              \"{{ unique_hash }}@example.com\",\n      \"host_filters\": []\n    },\n
-              \   \"type\": \"gcp_service_account\"\n  }\n}"
+              \"Test-{{ unique_hash }}@example.com\",\n      \"host_filters\": []\n
+              \   },\n    \"type\": \"gcp_service_account\"\n  }\n}"
           step: there is a valid "gcp_sts_account" in the system
       x-menu-order: 2
       x-undo:
@@ -28437,6 +29353,168 @@ paths:
       x-menu-order: 7
       x-undo:
         type: unsafe
+  /api/v2/logs/config/custom-destinations:
+    get:
+      description: Get the list of configured custom destinations in your organization
+        with their definitions.
+      operationId: ListLogsCustomDestinations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all custom destinations
+      tags:
+      - Logs Custom Destinations
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a custom destination in your organization.
+      operationId: CreateLogsCustomDestination
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomDestinationCreateRequest'
+        description: The definition of the new custom destination.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a custom destination
+      tags:
+      - Logs Custom Destinations
+      x-codegen-request-body-name: body
+      x-given:
+        custom_destination:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique }}\",\n      \"query\": \"source:nginx\",\n      \"enabled\":
+              false,\n      \"forwarder_destination\": {\n        \"type\": \"http\",\n
+              \       \"endpoint\": \"https://example.com\",\n        \"auth\": {\n
+              \         \"type\": \"basic\",\n          \"username\": \"my-username\",\n
+              \         \"password\": \"my-password\"\n        }\n      },\n      \"forward_tags_restriction_list_type\":
+              \"BLOCK_LIST\",\n      \"forward_tags_restriction_list\": [\"host\"],\n
+              \     \"forward_tags\": false\n    },\n    \"type\": \"custom_destination\"\n
+              \ }\n}"
+          step: there is a valid "custom_destination" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteLogsCustomDestination
+        parameters:
+        - name: custom_destination_id
+          source: data.id
+        type: unsafe
+  /api/v2/logs/config/custom-destinations/{custom_destination_id}:
+    delete:
+      description: Delete a specific custom destination in your organization.
+      operationId: DeleteLogsCustomDestination
+      parameters:
+      - $ref: '#/components/parameters/CustomDestinationId'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a custom destination
+      tags:
+      - Logs Custom Destinations
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a specific custom destination in your organization.
+      operationId: GetLogsCustomDestination
+      parameters:
+      - $ref: '#/components/parameters/CustomDestinationId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a custom destination
+      tags:
+      - Logs Custom Destinations
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    patch:
+      description: Update the given fields of a specific custom destination in your
+        organization.
+      operationId: UpdateLogsCustomDestination
+      parameters:
+      - $ref: '#/components/parameters/CustomDestinationId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomDestinationUpdateRequest'
+        description: New definition of the custom destination's fields.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a custom destination
+      tags:
+      - Logs Custom Destinations
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
   /api/v2/logs/config/metrics:
     get:
       description: Get the list of configured log-based metrics with their definitions.
@@ -29569,6 +30647,54 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+  /api/v2/metrics/{metric_name}/assets:
+    get:
+      description: Returns dashboards, monitors, notebooks, and SLOs that a metric
+        is stored in, if any.  Updated every 24 hours.
+      operationId: ListMetricAssets
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAssetsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Related Assets to a Metric
+      tags:
+      - Metrics
+      x-menu-order: 12
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/estimate:
     get:
       description: Returns the estimated cardinality for a metric with a given tag,
@@ -29585,7 +30711,8 @@ paths:
         schema:
           type: string
       - description: The number of hours of look back (from now) to estimate cardinality
-          with.
+          with. Estimates are based on historical data, and unspecified fields default
+          to the minimum 49 hours.
         example: 49
         in: query
         name: filter[hours_ago]
@@ -29593,6 +30720,7 @@ paths:
         schema:
           format: int32
           maximum: 2147483647
+          minimum: 49
           type: integer
       - description: The number of aggregations that a `count`, `rate`, or `gauge`
           metric is configured to use. Max number of aggregation combos is 9.
@@ -29660,20 +30788,7 @@ paths:
       summary: Tag Configuration Cardinality Estimator
       tags:
       - Metrics
-      x-dd-ownership:
-        notification_configuration:
-          manual_escalation_policy: '[Points Aggregation] Primary'
-          prod_high_urgency: '@pagerduty-Points-Aggregation @slack-points-aggr-ops'
-          prod_low_urgency: '@slack-points-aggr-ops'
-          slack_support_channel: '#points-aggregation'
-          staging_high_urgency: '@slack-points-aggr-stg-ops'
-          staging_low_urgency: '@slack-points-aggr-stg-ops'
-        team: points-aggregation
-        team_escalation: '[Points Aggregation] Primary'
       x-menu-order: 11
-      x-permission:
-        operator: OPEN
-        permissions: []
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/tags:
@@ -30897,6 +32012,185 @@ paths:
         We are gradually onboarding support for more sources. If you have any
 
         feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
+  /api/v2/remote_config/products/cws/agent_rules:
+    get:
+      description: Get the list of Cloud Security Management Threats Agent rules.
+      operationId: ListCSMThreatsAgentRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRulesListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all CSM Threats Agent rules
+      tags:
+      - Cloud Workload Security
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    post:
+      description: Create a new Cloud Security Management Threats Agent rule with
+        the given parameters.
+      operationId: CreateCSMThreatsAgentRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleCreateRequest'
+        description: The definition of the new Agent rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a CSM Threats Agent rule
+      tags:
+      - Cloud Workload Security
+      x-codegen-request-body-name: body
+      x-given:
+        agent_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"agent_rule\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique_lower_alnum }}\",\n      \"description\":
+              \"My Agent rule\",\n      \"expression\": \"exec.file.name == \\\"sh\\\"\",\n
+              \     \"enabled\": true\n     }\n  }\n}"
+          step: there is a valid "agent_rule_rc" in the system
+      x-menu-order: 4
+      x-undo:
+        operationId: DeleteCSMThreatsAgentRule
+        parameters:
+        - name: agent_rule_id
+          source: data.id
+        type: unsafe
+  /api/v2/remote_config/products/cws/agent_rules/{agent_rule_id}:
+    delete:
+      description: Delete a specific Cloud Security Management Threats Agent rule.
+      operationId: DeleteCSMThreatsAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a CSM Threats Agent rule
+      tags:
+      - Cloud Workload Security
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the details of a specific Cloud Security Management Threats
+        Agent rule.
+      operationId: GetCSMThreatsAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a CSM Threats Agent rule
+      tags:
+      - Cloud Workload Security
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific Cloud Security Management Threats Agent rule.
+
+        Returns the Agent rule object when the request is successful.'
+      operationId: UpdateCSMThreatsAgentRule
+      parameters:
+      - $ref: '#/components/parameters/CloudWorkloadSecurityAgentRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleUpdateRequest'
+        description: New definition of the Agent rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a CSM Threats Agent rule
+      tags:
+      - Cloud Workload Security
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+  /api/v2/remote_config/products/cws/policy/download:
+    get:
+      description: 'The download endpoint generates a CSM Threats policy file from
+        your currently active
+
+        CSM Threats rules, and downloads them as a `.policy` file. This file can then
+        be deployed to
+
+        your Agents to update the policy running in your environment.'
+      operationId: DownloadCSMThreatsPolicy
+      responses:
+        '200':
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get the latest CSM Threats policy
+      tags:
+      - Cloud Workload Security
+      x-menu-order: 1
+      x-undo:
+        type: safe
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -34100,6 +35394,7 @@ paths:
         type: idempotent
   /api/v2/services:
     get:
+      deprecated: true
       description: Get all incident services uploaded for the requesting user's organization.
         If the `include[users]` query parameter is provided, the included attribute
         will contain the users related to these incident services.
@@ -34137,10 +35432,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
     post:
+      deprecated: true
       description: Creates a new incident service.
       operationId: CreateIncidentService
       requestBody:
@@ -34190,9 +35484,7 @@ paths:
         - name: service_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/services/definitions:
     get:
       description: Get a list of all service definitions from the Datadog Service
@@ -34224,7 +35516,7 @@ paths:
       x-menu-order: 1
       x-pagination:
         limitParam: page[size]
-        pageOffsetParam: page[number]
+        pageParam: page[number]
         resultsPath: data
       x-undo:
         type: safe
@@ -34350,6 +35642,7 @@ paths:
         type: safe
   /api/v2/services/{service_id}:
     delete:
+      deprecated: true
       description: Deletes an existing incident service.
       operationId: DeleteIncidentService
       parameters:
@@ -34378,10 +35671,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
     get:
+      deprecated: true
       description: 'Get details of an incident service. If the `include[users]` query
         parameter is provided,
 
@@ -34418,10 +35710,9 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
     patch:
+      deprecated: true
       description: Updates an existing incident service. Only provide the attributes
         which should be updated as this request is a partial update.
       operationId: UpdateIncidentService
@@ -34463,9 +35754,7 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
@@ -36011,10 +37300,10 @@ paths:
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
           `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
-          `cws`, `dbm`, `fargate`,
+          `cws`, `dbm`, `error_tracking`,
 
-          `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
-          `iot`,
+          `fargate`, `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`,
+          `ingested_spans`, `iot`,
 
           `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `netflow_monitoring`,
           `observability_pipelines`,
@@ -36838,7 +38127,14 @@ tags:
     [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
     information.
   name: CI Visibility Tests
-- description: View and manage cases and project within Case Management
+- description: Cloud Security Management Threats (CSM Threats) monitors file, network,
+    and process activity across your environment to detect real-time threats to your
+    infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)
+    for more information on setting up CSM Threats.
+  name: CSM Threats
+- description: View and manage cases and projects within Case Management. See the
+    [Case Management page](https://docs.datadoghq.com/service_management/case_management/)
+    for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
     Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
@@ -36911,7 +38207,8 @@ tags:
 
     This is an enterprise-only feature. Request access by
 
-    contacting Datadog support.'
+    contacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/)
+    for more information.'
   name: IP Allowlist
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
@@ -36937,17 +38234,28 @@ tags:
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
 - description: Search your logs and send them to your Datadog platform over HTTP.
+    See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
 - description: 'Archives forward all the logs ingested to a cloud storage system.
 
 
     See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
 
-    for a list of the archives currently configured in web UI.'
+    for a list of the archives currently configured in Datadog.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
+- description: 'Custom Destinations forward all the logs ingested to an external destination.
+
+
+    See the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)
+
+    for a list of the custom destinations currently configured in web UI.'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/logs/log_configuration/forwarding_custom_destinations/
+  name: Logs Custom Destinations
 - description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
     for your organization.
   externalDocs:
@@ -37002,7 +38310,8 @@ tags:
     points\nand as the timeframe over which a metric is viewed increases,\naggregation
     between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete
     `manage_tags` API methods can only be performed by\na user who has the `Manage
-    Tags for Metrics` permission."
+    Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/)
+    for more information."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about and
@@ -37018,8 +38327,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
-- description: Configure your Datadog Okta integration directly through the Datadog
-    API.
+- description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
+    directly through the Datadog API.
   name: Okta Integration
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
@@ -37033,25 +38342,33 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/multi_organization
   name: Organizations
-- description: 'The powerpack endpoints allow you to:
+- description: 'The Powerpack endpoints allow you to:
 
 
-    - Get a powerpack
+    - Get a Powerpack
 
-    - Create a powerpack
+    - Create a Powerpack
 
-    - Delete a powerpack
+    - Delete a Powerpack
 
-    - Get a list of all powerpacks
+    - Get a list of all Powerpacks
 
 
-    The Patch and Delete API methods can only be performed on a powerpack by
+    The Patch and Delete API methods can only be performed on a Powerpack by
 
-    a user who has the powerpack create permission for that specific powerpack.'
+    a user who has the powerpack create permission for that specific Powerpack.
+
+
+    Read [Scale Graphing Expertise with Powerpacks](https://docs.datadoghq.com/dashboards/guide/powerpacks-best-practices/)
+    for more information.'
   name: Powerpack
 - description: The processes API allows you to query processes data for your organization.
+    See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/)
+    for more information.
   name: Processes
-- description: Search or aggregate your RUM events over HTTP.
+- description: Manage your Real User Monitoring (RUM) applications, and search or
+    aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
+    for more information
   name: RUM
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
@@ -37077,20 +38394,24 @@ tags:
 
     [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
   name: Roles
-- description: 'Detection rules for generating signals and listing of generated
-
-    signals.'
+- description: Create and manage your security rules, signals, filters, and more.
+    See the [Datadog Security page](https://docs.datadoghq.com/security/) for more
+    information.
   name: Security Monitoring
 - description: Create, update, delete, and retrieve sensitive data scanner groups
-    and rules.
+    and rules. See the [Sensitive Data Scanner page](https://docs.datadoghq.com/sensitive_data_scanner/)
+    for more information.
   name: Sensitive Data Scanner
-- description: Create, edit, and disable service accounts.
+- description: Create, edit, and disable service accounts. See the [Service Accounts
+    page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)
+    for more information.
   name: Service Accounts
 - description: API to create, update, retrieve and delete service definitions.
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
-- description: 'API to create, update scorecard rules and outcomes.
+- description: 'API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards)
+    for more information.
 
 
     This feature is currently in BETA. If you have any feedback, contact [Datadog
@@ -37099,7 +38420,8 @@ tags:
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
-    for your organization.
+    for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/)
+    for more information.
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/metrics/metrics_namespace/
@@ -37111,7 +38433,8 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: View and manage teams within Datadog.
+- description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
+    for more information.
   name: Teams
 - description: 'The usage metering API allows you to get hourly, daily, and
 

@@ -80,6 +80,8 @@ On browser tests, the DNS resolution is done directly by the browser, which usua
 **Default**: `none`<br>
 Proxy URL used by the private location to send requests to Datadog (for example, `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 
+**Note:** When setting up an HTTPS proxy, the `HTTP CONNECT` request made to the proxy establishes the initial TCP connection between the private location and Datadog. As such, reverse proxies like HAProxy that direct an `HTTP CONNECT` request to Datadog are not supported. Set up a forward proxy to open the connection to Datadog on behalf of the private location.
+
 `proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>
@@ -157,7 +159,7 @@ Proxy URL used by the private location to send requests to Datadog (for example,
 : **Type:** Boolean <br>
 **Default**: `false`<br>
 Disables the FIPS compliance for a private location using `ddog-gov.com`.
-By default, Private Locations reporting to `ddog-gov.com` communicate to Datadog using FIPS-compliant encryption. The communication complies on the use of FIPS 140-2 validated [Cryptographic Module - Certificate #4282][3].
+By default, Private Locations reporting to `ddog-gov.com` communicate to Datadog using FIPS-compliant encryption. The communication complies on the use of FIPS 140-2 validated [Cryptographic Module - Certificate #4282][3]. This option is required if you are using a Windows private location that reports to `ddog-gov.com`.
 
 `--dumpConfig`
 : **Type**: Boolean <br>

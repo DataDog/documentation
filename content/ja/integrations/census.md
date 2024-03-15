@@ -38,7 +38,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: census
-oauth: {}
 public_title: Census
 short_description: Census 同期のメトリクスとイベントを Datadog に送信します。
 supported_os:

@@ -38,7 +38,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cloudsmith
-oauth: {}
 public_title: Cloudsmith
 short_description: Cloudsmith メトリクスを監視する
 supported_os:

@@ -22,7 +22,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: rum_ios
-oauth: {}
 public_title: iOS
 short_description: Datadog RUM を使用した iOS アプリケーションの監視とメトリクス生成
 supported_os:

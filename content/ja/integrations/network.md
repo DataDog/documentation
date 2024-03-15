@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ネットワーク
-oauth: {}
 public_title: Network
 short_description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
 supported_os:

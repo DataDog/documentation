@@ -74,6 +74,7 @@ code_language_ids:
     reactnative: React Native
     codepush: CodePush
     roku: Roku
+    unity: Unity
     swiftui: Swift UI
     java: Java
     cpp: 'C++'

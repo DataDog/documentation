@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis/
 draft: false
 git_integration_title: amazon_kinesis
 has_logo: true
-integration_id: amazon-kinesis
+integration_id: ''
 integration_title: Amazon Kinesis
 integration_version: ''
 is_public: true

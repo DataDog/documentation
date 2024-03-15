@@ -147,16 +147,23 @@ Enable the exception profile type. Added in version `0.92.0` and GA
 in version `0.96.0`.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
+`DD_PROFILING_EXCEPTION_MESSAGE_ENABLED`
+: **INI**: `datadog.profiling.exception_message_enabled`. INI available since `0.98.0`.<br>
+**Default**: `0`<br>
+Enable the collection of exception messages with exception samples.<br><br>
+**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled.
+
 `DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
 : **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
 **Default**: `100`<br>
 Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE` environment variable (`datadog.profiling.experimental_exception_sampling_distance` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
-`DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED`
-: **INI**: `datadog.profiling.experimental_timeline_enabled`. INI available since `0.89.0`.<br>
-**Default**: `0`<br>
-Enable the experimental timeline profile type. Added in version `0.89.0`.
+`DD_PROFILING_TIMELINE_ENABLED`
+: **INI**: `datadog.profiling.timeline_enabled`. INI available since `0.98.0`.<br>
+**Default**: `1`<br>
+Enable the timeline profile type. Added in version `0.89.0`.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` environment variable (`datadog.profiling.experimental_timeline_enabled` INI setting), which was available since `0.89` (default `0`). If both are set, this one takes precedence.
 
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>

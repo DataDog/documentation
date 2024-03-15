@@ -6,7 +6,7 @@ is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
-  text: "Enhance application security in production with Datadog Application Vulnerability Management"
+  text: "Enhance application security in production with Software Composition Analysis"
 - link: "/getting_started/application_security/software_composition_analysis"
   tag: "Documentation"
   text: "Getting Started with Software Composition Analysis"
@@ -60,12 +60,12 @@ After you configure your CI pipelines to run Datadog SCA, violations are summari
 * The **Library Vulnerabilities** lens contains the vulnerable library versions found by Datadog SCA.
 * The **Library List** lens contains all the libraries (vulnerable or not) found by Datadog SCA.
 
-To filter your results, use the facets to the left of the list, or search. 
+To filter your results, use the facets to the left of the list, or search.
 
 Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default the latest commit on the default branch of the repository you are viewing).
 
 Click on a library with a vulnerability to open a side panel that contains information about the scope of the violation and where it originated.
-{{< img src="code_analysis/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} 
+{{< img src="code_analysis/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}}
 
 The content of the violation is shown in tabs:
 

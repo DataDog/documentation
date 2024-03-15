@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: nobl9
-oauth: {}
 public_title: Nobl9
 short_description: Nobl9 は、SLI 収集、SLO 計算、エラーバジェットアラートを可能にします
 supported_os:

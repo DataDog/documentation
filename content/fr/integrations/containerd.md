@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: containerd
-oauth: {}
 public_title: Containerd
 short_description: Surveillez toutes vos métriques Containerd avec Datadog.
 supported_os:

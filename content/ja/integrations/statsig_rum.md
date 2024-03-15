@@ -25,7 +25,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: statsig_rum
-oauth: {}
 public_title: Statsig - RUM
 short_description: Datadog の RUM データを Statsig の機能ゲート情報でリッチ化
 supported_os:
