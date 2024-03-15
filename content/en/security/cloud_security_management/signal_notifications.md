@@ -14,6 +14,12 @@ products:
   icon: cloud-security-management
 ---
 
+{{< product-availability >}}
+
+Target dates
+- internal, having docs ready ASAP
+- public-facing tied to public beta
+
 <div class="alert alert-warning">This feature is in private beta.</div>
 
 Notifications for cloud configuration and infrastructure configuration 
@@ -25,9 +31,29 @@ Signals: emphasize on communication / escalation / triage / remediation
 
 Create Notification Rules for 
 
+One of the bigger questions I have, which we don't need to fully complete at this meeting, are definitions for some of the terms we use for notification rules. Specifically:
+
+* security signal
+* security issue
+* attack path: 
+* finding (will be renamed to vulnerability, the label in the UI):  
+* misconfiguration
+* vulnerability
+* identity risk
+
+
+Source types (notification rules):
+
+* Application library vulnerability: This is for ASM (CSM Vulns not avail as a separate type, but will be soon)
+* Application code vulnerability: 
+* Workload Security: CSM Threats
+* Signal Correlation: Cloud SIEM
+* Log Detection: Cloud SIEM
+* Application Security: ASM(?)
+
 - What is a source type?
 
-{{< product-availability >}}
+
 
 <div class="alert alert-warning">On <strong>November 14, 2024 - REMOVE DATE FROM FINAL DOC</strong>, Datadog Cloud Security Management (CSM) will no longer support Cloud Configuration and Infrastructure Configuration signals. This does not impact other security signal types (Application Security Management, Cloud SIEM, and CSM Threats).</div>
 
@@ -78,12 +104,14 @@ As you configure the rule, a preview of issues matching the notification rule co
 
 I'm not seeing any banner or buttons to click. Is there a separate feature flag?
 
+**Not yet available**
+
 ### Migrate notifications configured for detection rules
 
 **Questions**: 
 
 - Is there a way to filter the rules to only show rules that have notifications configured for them?
-- What exactly is being migrated when you click **Update in 1-Click**? The severity and ...? What is `@workflow.rule.id`?
+- What exactly is being migrated when you click **Update in 1-Click**? The severity and ...? What is `@workflow.rule.id` <- this is the rule, finding should be pre-filled (when clicking 1-click) <- flag this in the notifications Slack channel
 
 1. On the [Misconfiguration Rules page][1], select a detection rule that has notifications enabled for it.
 2. In the banner displayed in the **Set severity and notifications** section, click **Update in 1-Click**.
