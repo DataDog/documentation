@@ -168,7 +168,7 @@ The default view includes:
 - A list of all defined SLOs in your organization
 - A list of available facets in left side facet list
 
-### Saved Views
+### Saved views
 
 Saved views allow you to save and share customized searches in the SLO list view for SLOs that are most relevant for you and your team by sharing:
 
@@ -226,7 +226,7 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 {{< img src="service_management/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor" >}}
 
-## SLO Widgets
+## SLO widgets
 
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
   - Use the SLO Summary widget to visualize the status of a single SLO.
@@ -284,22 +284,24 @@ To access SLO status corrections in the UI:
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
 
-## SLO Calendar View
+## SLO calendar view
 
 The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
 {{< img src="service_management/service_level_objectives/slo-calendar-view.png" alt="SLO calendar view" >}}
 
-## SLO CSV Export (Private Beta)
+## SLO CSV export
 
 {{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="Try Out the SLO CSV Export Feature">}}
 The CSV Export feature is in Private Beta. Complete the form to request access.
 {{< /callout >}}
 
-The SLO CSV Export feature is available on the [SLO status page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, can access the new “Export to CSV” option where you can download a CSV of your historical SLO data:
+The SLO CSV Export feature is available on the [SLO status page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data.
+
+**Notes:**
 
 - The SLOs that are exported are based on your search query.
-- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO id and name will be in the CSV (not the SLO’s status history data).
+- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO ID and name will be in the CSV (not the SLO’s status history data).
 - There is a limit of 1000 SLOs per export.
 
 {{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO calendar view" >}}
@@ -308,6 +310,8 @@ The following time windows are available for the CSV export:
 
 - **Weekly:** The SLO statuses are based on calendar-aligned weeks (Sunday 12am - Saturday 11:59pm)
 - **Monthly:** The SLO statuses are based on calendar-aligned months (First day of the month 12am - last day of the month 11:59pm)
+
+These times are based on the user's timezone setting in Datadog.
 
 The SLO statuses are calculated based on the SLO type:
 - **Metric-based SLOs:** Percent of good events out of total events for the time window
