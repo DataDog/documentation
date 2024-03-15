@@ -52,14 +52,18 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 
 #### Dependencies mapping and management 
 - Document and track all of your upstream and downstream dependencies automatically with application telemetries collected by APM, USM, and RUM.
-- Manually declare dependency relationships across components (available through [metadata schema v3.0][8].
+- Manually declare dependency relationships across components (available through [metadata schema v3.0][8]).
 - Understand and assess performance impacts across teams and services.
 
-#### Governance 
-- Providing engineering leadership with a high-level view of reliability practices across teams and services.
-- Proactively identifying services exposed to application attacks.
+#### Governance and optimization
+- Providing engineering leadership with a high-level view of best practices across teams and services through [Service Scorecards][9].
 - Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
 - Understanding trends and identifying inefficiencies in the costs related to your services.
+
+#### Knowledge sharing 
+- Locate information easily without navigating through numerous repos, channels, or documentation pages.
+- Save time searching for runbooks or wiki pages when onboarding new team members.
+- Leverage real-time, automatically-generated topology maps to understand system architecture.
 
 #### Evaluate monitoring coverage  
 - Detecting which services aren’t reporting observability data or having that data monitored.
@@ -68,7 +72,6 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 
 #### Streamline collaboration during incidents
 - Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside streamlined access to monitoring and troubleshooting details.
-- Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
 - Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
 - Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
 
@@ -143,3 +146,4 @@ The services and resources statistics, and span summaries on the **Service List*
 [6]: https://www.datadoghq.com/blog/tagging-best-practices/#assign-owners-to-services-with-tags
 [7]: /tracing/other_telemetry/
 [8]: /service_catalog/add_metadata#metadata-schema-v30-beta
+[9]: /service_catalog/scorecards/
