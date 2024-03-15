@@ -130,21 +130,21 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | [@apollo/server][43]     | `>=4`     | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [apollo-server-core][44] | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [cassandra-driver][28]   | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [couchbase][29]          | `^2.4.2`  | {{< X >}}                   |                              |                                                    |
-| [elasticsearch][30]      | `>=10`    | {{< X >}}                   |                              |                                                    |
+| [couchbase][29]          | `^2.4.2`  | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [elasticsearch][30]      | `>=10`    | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [ioredis][31]            | `>=2`     | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [knex][32]               | `>=0.8`   | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [mariadb][5]             | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [memcached][33]          | `>=2.2`   | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [mongodb-core][34]       | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
-| [mysql][35]              | `>=2`     | {{< X >}}                   |                              | {{< X >}}                                          |
+| [mysql][35]              | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
 | [mysql2][36]             | `>=1`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
 | [oracledb][37]           | `>=5`     | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [pg][38]                 | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
 | [redis][39]              | `>=0.12`  | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [sharedb][40]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [tedious][41]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
-| [sequelize][42]          | `>=4`     |                             |                              | {{< X >}}                                          |
+| [sequelize][42]          | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
 
 
 ### User Authentication Frameworks compatibility
