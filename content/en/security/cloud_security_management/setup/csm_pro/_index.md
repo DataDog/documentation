@@ -25,7 +25,9 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 ### Enable CSM Pro on the Agent
 
-Set up CSM Pro on the Agent to enable container image metadata collection and [Software Bill of Materials (SBOM)][5] collection for [CSM Vulnerabilities][2]. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
+<div class="alert alert-warning">Kubernetes Security Posture Management is in beta.</div>
+
+Set up CSM Pro on the Agent to enable [Kubernetes Security Posture Management][6] for [CSM Misconfigurations][1], and container image metadata collection and [Software Bill of Materials (SBOM)][5] collection for [CSM Vulnerabilities][2].
 
 Select your infrastructure type for details on how to enable CSM Pro on the Agent.
 
@@ -40,3 +42,4 @@ Select your infrastructure type for details on how to enable CSM Pro on the Agen
 [3]: /security/cloud_security_management/setup
 [4]: /security/cloud_security_management/setup/csm_pro/cloud_accounts
 [5]: https://www.cisa.gov/sbom
+[6]: /security/misconfigurations/frameworks_and_benchmarks/kspm
