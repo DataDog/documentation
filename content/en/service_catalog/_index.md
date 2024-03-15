@@ -61,7 +61,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 - Understanding trends and identifying inefficiencies in the costs related to your services.
 
 #### Knowledge sharing 
-- Locate information easily without navigating through numerous repos, channels, or documentation pages.
+- Locate information without navigating through numerous repos, channels, or documentation pages.
 - Save time searching for runbooks or wiki pages when onboarding new team members.
 - Leverage real-time, automatically-generated topology maps to understand system architecture.
 
