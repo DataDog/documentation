@@ -21,7 +21,9 @@ further_reading:
 
 ## Overview
 
-Once [Real User Monitoring (RUM) is enabled][1] for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
+Datadog's[Real User Monitoring (RUM)][1]  provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. 
+
+Once RUM for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
 
 ## Create a RUM monitor
 
