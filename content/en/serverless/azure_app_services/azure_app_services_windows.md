@@ -308,7 +308,7 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' }
 tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
 ```
 
-<div class="alert alert-info">Because the <code>dd-trace</code> module is included in <code>NODE_PATH</code>, you do not need to add <code>dd-trace</code> as a dependency.</div>
+<div class="alert alert-info"><strong>Do not add</strong> <code>dd-trace</code> <strong>as a dependency in</strong> <code>package.json</code>. Datadog's Azure App Service Node.js extension appends <code>dd-trace</code> to <code>NODE_PATH</code>. Explicitly adding <code>dd-trace</code> as a dependency may override the version provided by the extension.</div>
 
 Learn more about [custom metrics][10].
 
