@@ -109,6 +109,7 @@ code_language_ids:
     ecs_ec2: "ECS EC2"
     elixir: "Elixir"
     rust: "Rust"
+    dd-lib: "Datadog Library"
 branch: ""
 
 signupclass: sign-up-trigger
