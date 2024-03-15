@@ -121,7 +121,7 @@ Writing custom metrics and checks in Azure App Service is similar to the process
 1. Add the [DogStatsD NuGet package][10] to your Visual Studio project.
 2. Initialize DogStatsD and write custom metrics in your application.
 3. Deploy your code to Azure App Service.
-4. Install the Datadog App Service extension.
+4. If you have not already, install the Datadog App Service extension.
 
 **Note**: Unlike the [standard DogStatsD config process][11], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
 
@@ -216,7 +216,7 @@ Writing custom metrics and checks in this environment is similar to the process 
 1. Add the [DogStatsD client][8] to your project.
 2. Initialize DogStatsD and write custom metrics in your application.
 3. Deploy your code to a supported Azure web app.
-4. Install the Datadog App Service extension.
+4. If you have not already, install the Datadog App Service extension.
 
 **Note**: Unlike the [standard DogStatsD config process][9], there is no need to set ports or a server name when initializing the DogStatsD configuration. There are ambient environment variables in Azure App Service that determine how the metrics are sent (requires v6.0.0+ of the DogStatsD client).
 
@@ -274,7 +274,7 @@ Datadog's Azure App Service Node.js extension supports Azure App Service Web App
 7. **Stop** your application.
 
    <div class="alert alert-info">To avoid downtime, use <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots">deployment slots</a>. You can create a workflow that uses the <a href="https://github.com/marketplace/actions/azure-cli-action">GitHub Action for Azure CLI</a>. See the sample <a href="/resources/yaml/serverless/aas-workflow-windows.yaml">GitHub workflow</a>.</div>
-8. On the **Extensions** page, select the Datadog APM Node extension.
+8. On the **Extensions** page, select the **Node Datadog APM** extension.
 9. Accept the legal terms, select **OK**, and wait for the installation to complete. 
 10. **Start** your application.
     {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Start" >}}
@@ -293,10 +293,11 @@ Datadog's Azure App Service Node.js extension includes an instance of [DogStatsD
 
 Writing custom metrics and checks in this environment is similar to the process for doing so with an application on a standard host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
 
-1. Add the [DogStatsD client][8] to your project.
-2. Initialize DogStatsD and write custom metrics in your application.
-3. Deploy your code to a supported Azure Web App.
-4. Install Datadog's Azure App Service Node.js extension.
+1. Initialize DogStatsD and write custom metrics in your application.
+1. Deploy your code to a supported Azure Web App.
+1. If you have not already, install Datadog's Azure App Service Node.js extension.
+
+<div class="alert alert-info">You do not need to install a Node.js DogStatsD client, as it is included in the Node.js tracer (<code>dd-trace</code>) packaged in the Azure App Service extension.</div>
 
 To send metrics, use this code:
 
@@ -308,7 +309,7 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' }
 tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
 ```
 
-<div class="alert alert-info"><strong>Do not add</strong> <code>dd-trace</code> <strong>as a dependency in</strong> <code>package.json</code>. Datadog's Azure App Service Node.js extension appends <code>dd-trace</code> to <code>NODE_PATH</code>. Explicitly adding <code>dd-trace</code> as a dependency may override the version provided by the extension.</div>
+<div class="alert alert-info">Datadog's Node.js tracer, <code>dd-trace</code>, is packaged in the Azure App Services extension. It is automatically appended to the <code>NODE_PATH</code>.<br/><br/> <strong>You do not need to add</strong> <code>dd-trace</code> <strong>as a dependency in</strong> <code>package.json</code>. Explicitly adding <code>dd-trace</code> as a dependency may override the version provided by the extension. For local testing, reference the <a href="https://github.com/DataDog/datadog-aas-extension/releases">release notes</a> to find the appropriate version of the Node.js tracer for your version of the Azure App Service extension.</div>
 
 Learn more about [custom metrics][10].
 
