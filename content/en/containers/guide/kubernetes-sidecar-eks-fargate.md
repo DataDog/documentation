@@ -110,6 +110,82 @@ metadata:
 <div class="alert alert-warning"> This feature is only supported by Cluster Agent 7.52.0 or later <a href="http://docs.datadoghq.com/integrations/ecs_fargate">ECS Fargate integration</a>.
 </div>
 
+Cluster Agent 7.52.0+ can configure Admission Controller and inject Agent sidecar in every pod matching predefined criteria. This approach is considerable simpler and easier to maintain compared to manual sidecar configuration. Instead of modifying every workload manifest when adding or changing the agent sidecar, one needs to configure Cluster Agent using Helm and add a single label to the pod templates - Admission Controller will add Agent sidecar to the pods with the given label.
+
+Prerequisties:
+* Agent version
+* RBAC above
+* Secret?
+
+Setup instruction in the next section assume Fargate-only cluster. On mixed cluster set `agents.enabled` to `true` to create Daemonset for deploying Agents on EC2 instances.
+
+##### Minimal Setup
+
+Steps to accomplish this:
+1. Make sure you setup the RBAC and Service account following previous section.
+2. Add a secret to all namespace where agent sidecar will be used and to Cluster Agent installation namespace. Below commands assume Cluster Agent will be installed in `datadog-agent` namespace, while application pods will be created in `fargate` namespace:
+```sh
+kubectl create secret generic datadog-secret -n datadog-agent --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_TOKEN>
+kubectl create secret generic datadog-secret -n fargate --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_TOKEN>
+```
+API key is required by the Agent to send data to Datadog. Cluster agent token is to enable communication between cluster agent and agent agent sidecars.
+[TODO] what's the benfit?
+[TODO] link going into existinSecret config https://docs.datadoghq.com/containers/cluster_agent/setup/?tab=helm
+3. Install agent DCA using
+```sh
+helm template datadog datadog/datadog -n datadog-agent \
+    --set datadog.clusterName=cluster-name \
+    --set agents.enabled=false \
+    --set datadog.apiKeyExistingSecret=datadog-secret \
+    --set clusterAgent.tokenExistingSecret=datadog-secret \
+    --set clusterAgent.admissionController.agentSidecarInjection.enabled=true \
+    --set clusterAgent.admissionController.agentSidecarInjection.provider=fargate
+```
+4. Once Cluster Agent reaches running state and registers Admission Controller mutating webhooks, all pods created with label `agent.datadoghq.com/sidecar:fargate` will get Agent sidecar added. Admission Controller does not mutate pods which are already created.
+
+This setup will use image repository and Agent image tag set in the Helm values. Communication between Cluster Agent and sidecar Agents is enabled by default.
+
+##### Sidecar Profile
+
+Above setup configures sidecar Agent based on internal defaults and adds necessary settings to make it run in EKS Fargate environment. Users who want to further configure the Agent or its container resources can use Helm property `clusterAgent.admissionController.agentSidecarInjection.profiles` to add environment variable definitions and resource settings.
+
+Below Helm configuration replaces command line settings in previous sections and adds a profile definition:
+
+{{< highlight yaml "hl_lines=14" >}}
+datadog:
+  clusterName: cluster-name
+  apiKeyExistingSecret: datadog-secret
+
+agents:
+  enabled: false
+
+clusterAgent:
+  apiKeyExistingSecret: datadog-secret
+  admissionController:
+    agentSidecarInjection:
+      enabled: true
+      provider: fargate
+      profiles:
+        - env:
+            - name: DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED
+              value: "true"
+            - name: DD_TAGS
+              value: ["key1:value1", "key2:value2"]
+          resources:
+            requests:
+              cpu: "1"
+              memory: "512Mi"
+            limits:
+              cpu: "2"
+              memory: "1024Mi"
+{{< /highlight >}}
+
+Save the manifest in a file `datadog.yaml` and run command the command:
+
+```sh
+helm template datadog datadog/datadog -n datadog-agent -f datadog.yaml
+````
+
 
 {{% /tab %}}
 {{% tab "Manual" %}}
