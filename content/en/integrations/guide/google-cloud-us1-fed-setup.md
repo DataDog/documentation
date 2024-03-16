@@ -1,5 +1,5 @@
 ---
-guidetitle: Google Cloud integration setup for US1-FED
+title: Google Cloud integration setup for US1-FED
 kind: guide
 description: "Steps for setting up the Datadog Google Cloud integration for US1-FED users"
 
