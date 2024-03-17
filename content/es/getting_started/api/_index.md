@@ -83,7 +83,7 @@ Sigue estos pasos para actualizar la instancia a tu sitio seleccionado ({{< regi
 
 3. Haz clic en **Update (Actualizar)**.
 
-## Trabajos con la colección
+## Trabajar con la colección
 
 Una vez completada la configuración, estás listo para empezar a hacer llamadas a la API. En la carpeta Postman --> Datadog, hay subcarpetas para cada tipo de categoría de API mencionada en la [Referencia de la API de Datadog][7]. Expande las subcarpetas para ver los métodos HTTP y los nombres de las llamadas a la API.
 
