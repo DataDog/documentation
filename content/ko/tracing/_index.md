@@ -20,16 +20,16 @@ further_reading:
   tag: 릴리스 노트
   text: 최신 Datadog APM 릴리스를 확인하세요! (앱 로그인 필요).
 - link: /tracing/guide/setting_primary_tags_to_scope/
-  tag: Documentation
+  tag: 설명서
   text: 트레이스에 기본 및 보조 태그를 추가하세요
 - link: /tracing/guide/security/
-  tag: Documentation
+  tag: 설명서
   text: 트레이스에서 PII를 자동으로 제거하세요
 - link: /tracing/metrics/metrics_namespace/
   tag: Documentation
   text: 트레이스 메트릭 및 해당 태그에 대해 자세히 알아보세요
 - link: /tracing/glossary/
-  tag: Documentation
+  tag: 설명서
   text: APM 용어 및 개념에 대해 알아보세요
 - link: https://www.datadoghq.com/blog/span-based-metrics/
   tag: 블로그
