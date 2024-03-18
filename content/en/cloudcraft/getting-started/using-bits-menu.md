@@ -5,13 +5,13 @@ kind: documentation
 
 ## Overview
 
-With Cloudcraft's Bits menu, you can easily navigate from any resource in Cloudcraft directly to the most relevant views in Datadog. This allows you to quickly access the most relevant information for the resource you're currently viewing, so accessing your logs, APM traces, or other information in Datadog from your diagram in Cloudcraft is just a click away.
+Using Cloudcraft's Bits menu, you can seamlessly move from any resource within Cloudcraft to the most relevant views in Datadog. This feature enables quick access to relevant information tailored to the specific resource you're examining. Whether it's logs, APM traces, or other data in Datadog, accessing it from your Cloudcraft diagram is a click away.
 
-<div class="alert alert-info">To access this features you need to log in to Cloudcraft using your Datadog account. If you're currently logging in using another login method, <a href="https://app.cloudcraft.co/app/support">contact our support team</a> and they'll assist you.</div>
+<div class="alert alert-info">To access this feature, log into Cloudcraft using your Datadog account. If you are logging in using another login method, <a href="https://app.cloudcraft.co/app/support">contact our support team</a> for assistance.</div>
 
 ## The Bits menu
 
-Start by clicking on a [supported component](#supported-components) in your diagram. Once you've selected a component, you'll see the Bits menu appear on the right-hand side of the screen.
+Start by clicking on a [supported component](#supported-components) in your diagram. After you've selected a component, the Bits menu appears on the right-hand side of the screen.
 
 {{< img src="cloudcraft/getting-started/using-bits-menu/bits-menu.png" alt="Screenshot showing the Cloudcraft interface with a red arrow highlighting the Bits menu." responsive="true" style="width:100%;">}}
 
@@ -38,4 +38,4 @@ The Bits menu is available for the following Cloudcraft components:
 
 Support for additional components is coming soon.
 
-<div class="alert alert-info">To view telemetry in Datadog for a component, the component must have Datadog agents or other integrations installed and configured.</div>
+<div class="alert alert-info">To view telemetry in Datadog for a component, the component must have Datadog Agents or other integrations installed and configured.</div>
