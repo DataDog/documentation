@@ -20,7 +20,7 @@ title: 메트릭 상관관계
 
 ## 개요
 
-<div class="alert alert-info">메트릭 상관 관계는 <strong>메트릭</strong> 데이터 소스가 있는 <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">시계열 위젯</a>에 사용할 수 있습니다.
+<div class="alert alert-info">메트릭 상관관계는 <strong>메트릭</strong> 데이터 소스가 있는 <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">시계열 위젯</a>에 사용할 수 있습니다.
 
 메트릭 상관관계는 거의 동시에 불규칙한 동작을 보인 기타 메트릭을 검색하여 관찰된 문제의 잠재적인 근본 원인을 찾는 데 도움이 될 수 있습니다. 상관관계는 대시보드, 통합, APM 및 커스텀 메트릭과 같은 다양한 소스에서 메트릭을 스캔합니다.
 
