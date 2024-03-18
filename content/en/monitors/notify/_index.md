@@ -112,6 +112,11 @@ Disk space is low @ops-team@company.com
 
 {{% notifications-email %}}
 
+
+#### Teams
+
+If a [notification channel][17] is set, you can route notifications to a specific Team. Monitor alerts targeting @team-handle will be redirected to the selected communication channel.
+
 #### Integrations
 
 {{% notifications-integrations %}}
