@@ -58,7 +58,7 @@ The RUM Browser SDK relies on cookies to store session information and follow a 
 
 ## Session IDs, Cookies and RUM Applications
 
-There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie holds a direct relation to the RUM application it is monitoring and cannot monitor any additional application.
+There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie is fully dedicated to the RUM application it is monitoring and cannot monitor any additional applications.
 
 ## Technical limitations
 
