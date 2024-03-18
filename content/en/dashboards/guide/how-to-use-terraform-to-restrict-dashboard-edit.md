@@ -53,7 +53,7 @@ resource "datadog_restriction_policy" "example" {
 }
 ```
 
-Role IDs can be retrieved from the [Roles APIs][2] or Roles UI, or referring to role ID as defined in Terraform for [Terraform managed Roles][3].
+Role IDs can be retrieved from the [Roles API][2], [Roles UI][5], or by using the role ID defined in Terraform for [datadog_role][3] resources.
 
 Org ID can be obtained from the [Get user details API][4].
 
