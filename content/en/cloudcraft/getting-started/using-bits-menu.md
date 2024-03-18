@@ -38,4 +38,4 @@ The Bits menu is available for the following Cloudcraft components:
 
 Support for additional components is coming soon.
 
-<div class="alert alert-info">To view telemetry in Datadog for a component, the component must have Datadog Agents or other integrations installed and configured.</div>
+**Note**: To view telemetry in Datadog for a component, the component must have Datadog Agents or other integrations installed and configured.
