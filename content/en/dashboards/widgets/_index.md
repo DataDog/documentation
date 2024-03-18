@@ -207,3 +207,6 @@ Click on any dashboard graph to open an options menu:
 [5]: /notebooks/
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/
+[8]: /logs/explorer/
+[9]: /tracing/trace_explorer/
+[10]: /profiler/profile_visualizations/
