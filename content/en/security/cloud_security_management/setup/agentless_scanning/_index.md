@@ -74,8 +74,7 @@ There are two ways to install and configure Agentless scanning for your cloud en
 
 {{% tab "Agentless scanning (existing AWS account)" %}}
 
-1. On the [Cloud Security Management Setup][1] page, click Cloud accounts.
-1. Expand the AWS section.
+1. On the [Cloud Security Management Setup][1] page, click **Cloud accounts > AWS**.
 1. Select the AWS account where you intend to deploy the Agentless scanner.
 1. Click Edit scanning options for the account chosen.
 1. **Enable Resource Scanning** should already be enabled. Enable scanning for the cloud resources you want to monitor in the **Agentless Scanning** section.
@@ -105,17 +104,17 @@ When you add a new AWS account, the following screen appears:
 
 1. Click **Yes** under **Enable Cloud Security Management**, and enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
 1. Add an API key. This API key already has Remote Configuration automatically enabled.
-1. Click **Launch CloudFormation Template**. The template includes all the necessary permissions to deploy and manage Agentless scanners. The template must run successfully to receive scans.
+1. Click **Launch CloudFormation Template**. The template includes all the necessary [permissions][3] to deploy and manage Agentless scanners. The template must run successfully to receive scans.
 
 [1]: /integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
+[3]: /security/cloud_security_management/setup/agentless_scanning/?tab=agentlessscanningnewawsaccount#permissions
 
 {{% /tab %}}
 
 {{% tab "Agentless scanning (existing AWS account)" %}}
 
-1. On the [Cloud Security Management Setup][1] page, click Cloud accounts.
-1. Expand the AWS section.
+1. On the [Cloud Security Management Setup][1] page, click **Cloud accounts > AWS**
 1. Select the AWS account where you intend to deploy the Agentless scanner.
 1. Click Edit scanning options for this account account.
 1. **Enable Resource Scanning** should already be enabled. Enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
