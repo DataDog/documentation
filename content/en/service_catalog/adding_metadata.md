@@ -41,7 +41,7 @@ For more information about the latest updates, see the schemas on GitHub.
 The Entity Definition Schema is a structure that contains basic information about an entity.
 
 #### New features in v3.0 
-##### Expanded Analysis Units
+##### Analysis units
 Beyond services, now you can organize your systems using various components such as applications, services, queues, datastores, and libraries (WIP). This holistic view supports better analysis and management.
 
 ##### Enhanced Relationship Mapping
