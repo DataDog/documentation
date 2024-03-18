@@ -56,7 +56,7 @@ The RUM Browser SDK relies on cookies to store session information and follow a 
 
 **Note**: The `_dd_l`, `_dd_r`, and `_dd` cookies have been replaced with `_dd_s` in recent versions of the RUM Browser SDK.
 
-## Session IDs, Cookies and RUM Applications
+## Session IDs, cookies and RUM applications
 
 There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie is fully dedicated to the RUM application it is monitoring and cannot monitor any additional applications.
 
