@@ -70,4 +70,4 @@ Capabilities:
 [10]: /serverless/azure_app_services/azure_app_services_linux?tab=java
 [11]: /developers/dogstatsd/
 [12]: /serverless/azure_app_services/azure_app_services_container
-[13]: /serverless/azure_app_services/azure_app_services_windows?tab=node#setup
+[13]: /serverless/azure_app_services/azure_app_services_windows?tab=nodejs#setup
