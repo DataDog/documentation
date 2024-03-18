@@ -103,7 +103,7 @@ When you add a new AWS account, the following screen appears:
 </br>
 
 1. Click **Yes** under **Enable Cloud Security Management**, and enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
-1. Add an API key. This API key already has Remote Configuration automatically enabled.
+1. Include the API key that is already configured for Remote Configuration. If you input an API key without Remote Configuration enabled, it will be automatically activated upon selection.
 1. Click **Launch CloudFormation Template**. The template includes all the necessary [permissions][3] to deploy and manage Agentless scanners. The template must run successfully to receive scans.
 
 [1]: /integrations/amazon_web_services/
@@ -133,10 +133,23 @@ When you add a new AWS account, the following screen appears:
 
 Set the tag `DatadogAgentlessScanner:false` on AWS hosts, containers, and Lambda functions (if applicable), to be excluded from scans. To add this tag to your resources, follow the [AWS documentation][3].
 
-## Disabling Agentless scanning
-To disable Agentless Scanning through the cloud formation template, remove roles, or the EC2 scanner instance.
+## Disabling Agentless Scanning
 
+To disable Agentless Scanning in an AWS account, disable scanning for each cloud resource:
+- On the Cloud Security Management Setup page, click **Cloud accounts > AWS**.
+- Select the AWS account where you deployed the Agentless scanner.
+- Click **Edit scanning** options for this account.
+- Disable scanning for the cloud resources you want to stop monitoring in the **Agentless Scanning** section.
+- Click **Done** to disable scanning.
  
+### Uninstalling with CloudFormation
+
+Go to your AWS console, and remove the CloudFormation stack that was created for Agentless Scanning.
+
+### Uninstalling with Terraform
+
+Follow instructions for Terraform un-installation (need link).
+
 
 [1]: /security/vulnerabilities
 [2]: https://www.cisa.gov/sbom
