@@ -198,8 +198,6 @@ view. In the drawer, a new tab named **Infrastructure** appears which contains t
 
 We also support Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [correlate infrastructure metrics with GitLab jobs][18] guide.
 
-<div class="alert alert-info"><strong>Note</strong>: Infrastructure metrics are not supported with autoscaler GitLab runner executors.</div>
-
 
 ### View error messages for pipeline failures
 
