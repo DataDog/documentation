@@ -40,6 +40,22 @@ For more information about the latest updates, see the schemas on GitHub.
 ### Metadata Schema v3.0 (beta)
 The Entity Definition Schema is a structure that contains basic information about an entity.
 
+#### New features in v3.0 
+##### Expanded Analysis Units
+Beyond services, now you can organize your systems using various components such as applications, services, queues, datastores, and libraries (WIP). This holistic view supports better analysis and management.
+
+##### Enhanced Relationship Mapping
+With APM/USM data, you can always automatically detect dependencies among components. We now support manual declaration to augment auto-detected application topology. This ensures a complete overview of how components interact within your applications.
+
+##### Inheritance of Application Metadata
+Components within an application automatically inherit the application's metadata, simplifying management and visibility.
+
+##### Multi-Ownership Support
+For improved collaboration, you can now assign multiple owners to any entity within your system, ensuring responsibilities are clearly defined.
+
+##### Custom Filters for APM Metrics, Logs, and Events
+With the `datadog` field in v3.0 schema, you can now specify custom filters for logs and events associated with each component. This capability enables you to tailor the telemetry data to meet your specific needs, ensuring that you have access to the most relevant and actionable insights.
+
 #### Example Entity Definition (`kind:application`)
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
@@ -112,8 +128,7 @@ datadog:
       - fp2
 {{< /code-block >}}
 
-#### Example Entity Definition (`kind:service`)
-The same schema applies to `kind:datastore` and `kind:queue`. 
+#### Example Entity Definition (`kind:service`, `kind:datastore`, `kind:queue`) 
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
