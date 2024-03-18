@@ -42,7 +42,7 @@ The Entity Definition Schema is a structure that contains basic information abou
 
 #### New features in v3.0 
 ##### Analysis units
-Beyond services, now you can organize your systems using various components such as applications, services, queues, datastores, and libraries (WIP). This holistic view supports better analysis and management.
+Beyond services, you can organize your systems using various components such as applications, services, queues, and datastores. This holistic view supports better analysis and management.
 
 ##### Enhanced Relationship Mapping
 With APM/USM data, you can always automatically detect dependencies among components. We now support manual declaration to augment auto-detected application topology. This ensures a complete overview of how components interact within your applications.
