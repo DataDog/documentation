@@ -2,25 +2,27 @@
 title: Notification Rules for Cloud Security Management
 kind: documentation
 is_beta: true
-products:
-- name: CSM Misconfigurations
-  url: /security/misconfigurations
-  icon: cloud-security-management
-- name: CSM Vulnerabilities
-  url: /security/vulnerabilities/
-  icon: cloud-security-management
-- name: CSM Identity Risks
-  url: /security/identity_risks/
-  icon: cloud-security-management
+further_reading:
+- link: "/security/notifications/rules/"
+  tag: "Documentation"
+  text: "Notifications"
+- link: "/security/notifications/"
+  tag: "Documentation"
+  text: "Notification Rules"
 ---
 
-{{< product-availability >}}
+Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules.
+
+This article outlines
+
+**Questions**: 
+
+- Is there a way to filter the rules to only show rules that have notifications configured for them?
+- What exactly is being migrated when you click **Update in 1-Click**? The severity and ...? What is `@workflow.rule.id` <- this is the rule, finding should be pre-filled (when clicking 1-click) <- flag this in the notifications Slack channel
 
 Target dates
 - internal, having docs ready ASAP
 - public-facing tied to public beta
-
-<div class="alert alert-warning">This feature is in private beta.</div>
 
 Notifications for cloud configuration and infrastructure configuration 
 
@@ -53,10 +55,6 @@ Source types (notification rules):
 
 - What is a source type?
 
-
-
-<div class="alert alert-warning">On <strong>November 14, 2024 - REMOVE DATE FROM FINAL DOC</strong>, Datadog Cloud Security Management (CSM) will no longer support Cloud Configuration and Infrastructure Configuration signals. This does not impact other security signal types (Application Security Management, Cloud SIEM, and CSM Threats).</div>
-
 ## How it used to work
 
 Signals are security alerts that Datadog generates and displays in the Signals Explorer. Was required to be enabled in order to alert on misconfigurations.
@@ -67,7 +65,24 @@ Brand design ticket is in progress: https://datadoghq.atlassian.net/browse/BRAND
 
 ## How it works now
 
+Cloud Configuration and Infrastructure Configuration will no longer generate signals.
+
+no longer require that signals be enabled for 
+
+When you create a notification rule, you specify 
+
+| How it used to work | How it works now |
+|---------------------|------------------|
+|                     |                  |
+|                     |                  |
+|                     |                  |
+|                     |                  |
+
 **placeholder for diagram**
+
+A vulnerability...
+
+A signal...
 
 **Notes**:
 
@@ -75,47 +90,51 @@ Brand design ticket is in progress: https://datadoghq.atlassian.net/browse/BRAND
 - Support for Cloud Configuration and Infrastructure Configuration signals will be deprecated later in 2024. Legacy signals will be retained for 15 months from their trigger date (free of charge). 
 - Terraformed custom detection rules using the legacy notifications attribute are no longer supported. 
 
-## Create a notification rule
+## Create notification rules
 
-To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes.
+To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as source type (vulnerability or signal), severity, tags, and attributes.
 
-As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Example of matching issues** panel. This can be useful in determining if the notification rule is too specific or broad.
+As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Preview of Matching Results** panel. This is useful in determining if the notification rule is overly specific or too broad.
 
 ### Select a source type
 
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
-2. Under **Source Types**, select whether the notification rule should alert on vulnerabilities or threats.
-3. (Optional) For ASM, select the ASM Vulnerability Management source type, _or_ leave the source type empty and select the **Include Application level vulnerabilities** checkbox.
+1. Under **Source Types**, select whether the notification rule should alert on vulnerabilities or threats.
+1. (Optional) For ASM, select the ASM Vulnerability Management source type, _or_ leave the source type empty and select the **Include Application level vulnerabilities** checkbox.
 
 ### Specify rule criteria
 
-4. Under **Rule Criteria**, select one or more severity levels.
-5. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
+1. Under **Rule Criteria**, select one or more severity levels.
+1. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
 
 ### Provide notification details
 
-6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
-7. Enter a name for the notification rule.
-8. Click **Save and Activate**.
+1. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
+1. Enter a name for the notification rule.
+1. Click **Save and Activate**.
 
-## Migrate existing notifications
+## Migrate notifications
 
-### If you’ve configured a Notification Rule with a legacy signal type
+### Legacy notification rules
 
-I'm not seeing any banner or buttons to click. Is there a separate feature flag?
+To migrate notification rules that use the legacy Cloud Configuration and Infrastructure Configuration signals:
 
-**Not yet available**
+**Not yet available in the UI**
 
-### Migrate notifications configured for detection rules
+### Detection rule notifications
 
-**Questions**: 
-
-- Is there a way to filter the rules to only show rules that have notifications configured for them?
-- What exactly is being migrated when you click **Update in 1-Click**? The severity and ...? What is `@workflow.rule.id` <- this is the rule, finding should be pre-filled (when clicking 1-click) <- flag this in the notifications Slack channel
+To migrate notifications that are configured for individual detection rules:
 
 1. On the [Misconfiguration Rules page][1], select a detection rule that has notifications enabled for it.
 2. In the banner displayed in the **Set severity and notifications** section, click **Update in 1-Click**.
-3. ?
+
+   The **Notification Rules** editor page is displayed with the fields pre-populated with the information from the rule.
+
+3. Modify the settings, if desired.
 4. Click **Save and Activate**.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/compliance/rules
