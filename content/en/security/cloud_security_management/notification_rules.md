@@ -43,7 +43,6 @@ One of the bigger questions I have, which we don't need to fully complete at thi
 * vulnerability
 * identity risk
 
-
 Source types (notification rules):
 
 * Application library vulnerability: This is for ASM (CSM Vulns not avail as a separate type, but will be soon)
