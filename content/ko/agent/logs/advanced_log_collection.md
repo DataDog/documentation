@@ -1,7 +1,7 @@
 ---
 algolia:
   tags:
-  - 고급 로그 필터
+  - advanced log filter
 description: Datadog Agent를 사용하여 로그를 수집하고 Datadog로 전송하기
 further_reading:
 - link: /logs/log_configuration/processors
@@ -18,7 +18,7 @@ further_reading:
   text: 로그 탐색 방법 알아보기
 - link: /logs/logging_without_limits/
   tag: 설명서
-  text: 제한 없는 로그 수집*
+  text: Logging without Limits*
 - link: /glossary/#tail
   tag: 용어
   text: '"tail"에 대한 용어 항목'
