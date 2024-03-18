@@ -26,9 +26,9 @@ The `is_read_only` attribute is deprecated. It is recommended to use the `restri
 
 ## Restricting a dashboard using a restriction policy
 
-<div class="alert alert-info">
-Please reach out to your Datadog contact or support to enable the feature.
-</div>
+{{< callout url="https://www.datadoghq.com/support/" >}}
+Restriction policies are in beta. Reach out to Datadog support to enable the feature.
+{{< /callout >}} 
 
 [Restriction Policies][1] allow restricting resources to various principals including Roles, Teams, Users, and Service Accounts.
 
