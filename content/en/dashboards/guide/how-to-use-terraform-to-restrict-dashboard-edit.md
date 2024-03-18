@@ -9,7 +9,7 @@ aliases:
 
 ## Restricting a dashboard using the restricted_roles attribute
 
-The `restricted_roles` attribute can be used to restrict editing of the dashboard to specific roles. The field takes a list of IDs of roles whose associated users will be authorized.
+The `restricted_roles` attribute can be used to restrict editing of the dashboard to specific roles. The field takes a list of IDs of roles, and authorizes any associated users.
 
 Example usage:
 
