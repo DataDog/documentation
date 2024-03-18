@@ -317,7 +317,7 @@ Learn more about [custom metrics][10].
 [2]: /tracing/setup/java/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/trace_collection/library_config/dotnet-framework/#configuration-settings
+[5]: /tracing/trace_collection/library_config/nodejs/#configuration-settings
 [6]: /logs/log_collection/nodejs/?tab=winston30#agentless-logging
 [7]: /developers/dogstatsd
 [8]: https://github.com/brightcove/hot-shots
