@@ -29,7 +29,7 @@ integration_id: datadog-agent
 integration_title: Agent Metrics
 integration_version: ''
 is_public: true
-kind: 통합
+kind: integration
 manifest_version: 2.0.0
 name: agent_metrics
 public_title: Agent Metrics
@@ -66,13 +66,13 @@ Datadog Agent의 내부 메트릭으로 Datadog에서 시각화 및 모니터를
 
 ### 설치
 
-[go_expvar][1] 검사를 기반으로 하는 Agent 메트릭 통합은 [Datadog Agent][2] 패키지에 포함되어 있으므로 서버에 다른 것을 설치할 필요가 없습니다.
+[go_expvar][1] 검사를 기반으로 하는 Agent Metrics 통합은 [Datadog Agent][2] 패키지에 포함되어 있으므로 서버에 다른 것을 설치할 필요가 없습니다.
 
 ### 설정
 
 1. [Agent의 설정 디렉터리][4] 루트의 `conf.d/`  폴더에 있는 [`go_expvar.d/agent_stats.yaml.example`][3] 파일의 이름을 `go_expvar.d/agent_stats.yaml`로 변경합니다.
 
-2. [에이전트를 재시작합니다][5].
+2. [Agent를 재시작합니다][5].
 
 ### 검증
 
@@ -88,7 +88,7 @@ Agent Metrics 통합은 [`agent_stats.yaml.example`][3]에 정의된 메트릭�
 
 Agent Metrics 통합은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Agent Metrics 통합은 서비스 점검을 포함하지 않습니다.
 
