@@ -36,7 +36,7 @@ title: 시작하기
 {{< nextlink href="/getting_started/continuous_testing" >}}<u>연속 테스트</u>: CI 파이프라인 및 IDE에서 종합적인 엔드투엔드 테스트를 실행하세요.{{< /nextlink >}}
 {{< nextlink href="/getting_started/synthetics" >}}<u>합성 모니터링</u>: 합성 테스트를 통해 API 엔드포인트와 주요 비즈니스 여정을 테스트하고 모니터링하세요.{{< /nextlink >}}
 {{< nextlink href="/getting_started/incident_management" >}}<u>인시던트 관리</u>: 시스템 문제를 알리고 추적하세요.{{< /nextlink >}}
-{{< nextlink href="/getting_started/database_monitoring" >}}<u>데이터베이스 모니터링</u>: 데이터베이스의 상태와 성능을 확인하고 문제를 신속하게 해결하세요..{{< /nextlink >}}
+{{< nextlink href="/getting_started/database_monitoring" >}}<u>데이터베이스 모니터링</u>: 데이터베이스의 상태와 성능을 확인하고 문제를 신속하게 해결하세요.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_security_management" >}}<u>클라우드 보안 관리</u>: CSM을 통해 팀을 구성하고 운영하기 위한 모범 사례를 알아보세요.{{< /nextlink >}}
 {{< nextlink href="/getting_started/application_security" >}}<u>애플리케이션 보안 관리</u>: ASM을 통해 팀을 구성하고 운영하기 위한 모범 사례를 알아보세요..{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>클라우드 SIEM</u>: 클라우드 SIEM으로 팀을 구성하고 운영하기 위한 모범 사례를 알아보세요.{{< /nextlink >}}
