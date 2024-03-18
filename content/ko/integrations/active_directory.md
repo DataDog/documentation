@@ -38,7 +38,7 @@ integration_id: active-directory
 integration_title: Active Directory
 integration_version: 2.1.0
 is_public: true
-kind: 통합
+kind: integration
 manifest_version: 2.0.0
 name: active_directory
 public_title: Active Directory
@@ -99,7 +99,7 @@ Active Directory 검사에는 이벤트가 포함되지 않습니다.
 
 ### 서비스 점검
 
-Active Directory 검사에는 서비스 검사가 포함되지 않습니다.
+Active Directory 검사에는 서비스 점검이 포함되지 않습니다.
 
 ## 트러블슈팅
 
