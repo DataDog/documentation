@@ -51,7 +51,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::Data Stores
-  - Category::로그 수집
+  - Category::Log Collection
   configuration: README.md#Setup
   description: Aerospike 데이터베이스에서 클러스터 및 네임스페이스 통계를 수집하세요
   media: []
@@ -94,7 +94,7 @@ Aerospike 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니다.
 
 2. Agent의 설정 디렉터리 루트에서 `conf.d/` 폴더에 있는 `aerospike.d/conf.yaml` 파일을 편집하여 Aerospike 성능 데이터 수집을 시작하세요. 사용 가능한 모든 설정 옵션은 [샘플 aerospike.d/conf.yaml][3]를 참조하세요.
 
-3. [에이전트를 다시 시작합니다][4].
+3. [Agent를 재시작합니다][4].
 
 **참고**: 이 검사의 버전 1.16.0 이상에서는 메트릭 수집에 [OpenMetrics][5]를 사용하며, Python 3이 필요합니다. Python 3을 사용할 수 없거나 이 검사의 레거시 버전을 사용하려는 호스트의 경우 [예제 설정][6]을 참조하세요.
 
@@ -118,7 +118,7 @@ Aerospike 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니다.
 
     `path` 파라미터 값을 변경하고 환경에 맞게 설정하세요. 사용 가능한 모든 설정 옵션은 [샘플 aerospike.d/conf.yaml][3]을 참조하세요.
 
-3. [에이전트를 다시 시작합니다][4].
+3. [Agent를 재시작합니다][4].
 
 [1]: https://github.com/aerospike/aerospike-prometheus-exporter
 [2]: https://docs.aerospike.com/monitorstack/new/installing-components
@@ -144,7 +144,7 @@ Aerospike 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니다.
 
 ##### 로그 수집
 
-_에이전트 버전 > 6.0 이상 사용 가능_
+_Agent 버전 6.0 이상에서 사용 가능_
 
 Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
 
