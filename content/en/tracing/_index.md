@@ -9,9 +9,6 @@ further_reading:
   - link: "/tracing/guide/setting_primary_tags_to_scope/"
     tag: "Documentation"
     text: "Add primary and secondary tags to your traces"
-  - link: "/tracing/guide/add_span_md_and_graph_it/"
-    tag: "Documentation"
-    text: "Add custom tags to your spans to filter and group performance"
   - link: "/tracing/guide/security/"
     tag: "Documentation"
     text: "Automatically scrub PII from your traces"
@@ -131,7 +128,7 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/
 [9]: /tracing/other_telemetry/connect_logs_and_traces/
-[10]: /real_user_monitoring/connect_rum_and_traces
+[10]: /real_user_monitoring/platform/connect_rum_and_traces
 [11]: /synthetics/apm/
 [12]: /tracing/trace_explorer/#live-search-for-15-minutes
 [13]: /tracing/services/services_map/

@@ -328,6 +328,28 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
+#### Cypress `after:spec` event
+Datadog requires the [`after:spec`][11] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      require('dd-trace/ci/cypress/plugin')(on, config)
+      // other plugins
+      on('after:spec', (...args) => {
+        // other 'after:spec' handlers
+        // Important that this function call is returned
+        // Important that all the arguments are passed
+        return require('dd-trace/ci/cypress/after-spec')(...args)
+      })
+    }
+  }
+})
+{{< /code-block >}}
+
 ### Cypress before version 10
 
 These are the instructions if you're using a version older than `cypress@10`. See the [Cypress documentation][9] for more information about migrating to a newer version.
@@ -367,6 +389,22 @@ module.exports = (on, config) => {
     // other 'after:run' handlers
     // important that this function call is returned
     return require('dd-trace/ci/cypress/after-run')(details)
+  })
+}
+{{< /code-block >}}
+
+#### Cypress `after:spec` event
+Datadog requires the [`after:spec`][11] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
+
+{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
+module.exports = (on, config) => {
+  // your previous code is before this line
+  require('dd-trace/ci/cypress/plugin')(on, config)
+  on('after:spec', (...args) => {
+    // other 'after:spec' handlers
+    // Important that this function call is returned
+    // Important that all the arguments are passed
+    return require('dd-trace/ci/cypress/after-run')(...args)
   })
 }
 {{< /code-block >}}
@@ -435,13 +473,70 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [8]: /continuous_integration/guides/rum_integration/
 [9]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
 [10]: https://docs.cypress.io/api/plugins/after-run-api
+[11]: https://docs.cypress.io/api/plugins/after-spec-api
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Using Yarn 2 or later
+### How to fix "Cannot find module 'dd-trace/ci/init'" errors
 
-If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
+When using `dd-trace`, you might encounter the following error message:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+This might be because of an incorrect usage of `NODE_OPTIONS`.
+
+For example, if your GitHub Action looks like this:
+```yml
+jobs:
+  my-job:
+    name: Run tests
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: -r dd-trace/ci/init
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install node
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+```
+
+**Note:** This does not work because `NODE_OPTIONS` are interpreted by every node process, including `npm install`. If you try to import `dd-trace/ci/init` before it's installed, this step fails.
+
+Your GitHub Action should instead look like this:
+```yml
+jobs:
+  my-job:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install node
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+        env:
+          NODE_OPTIONS: -r dd-trace/ci/init
+```
+
+Follow these best practices:
+
+* Make sure the `NODE_OPTIONS` environment variable is only set to the process running tests.
+* Specifically avoid defining `NODE_OPTIONS` in the global environment variables settings in your pipeline or job definition.
+
+
+#### Using Yarn 2 or later
+
+If you're using `yarn>=2` and a `.pnp.cjs` file, you might also get the same error:
 
 ```text
  Error: Cannot find module 'dd-trace/ci/init'

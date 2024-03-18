@@ -6,6 +6,9 @@ aliases:
 - /continuous_integration/dora_metrics
 is_beta: true
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "/continuous_integration/tests"
   tag: "Documentation"
   text: "Learn about Test Visibility"
@@ -24,7 +27,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
@@ -249,7 +252,7 @@ curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/inciden
     "data": {
       "attributes": {
         "services": ["shopist"],
-        "team": "shopist-devs"
+        "team": "shopist-devs",
         "started_at": 1693491974000000000,
         "finished_at": 1693491984000000000,
         "git": {
@@ -279,7 +282,32 @@ Events can be sent both at the start of and after incident resolution. Incident 
 
 You can access and visualize your DORA metrics and filter them by team, service, repository, environment, and time period on the [DORA Metrics page][8].
 
-Use the information on this page to identify improvements or regressions for each metric, visualize changes, and compare trends over time. DORA metrics can be exported to dashboards and alerted on using [metric monitors][9].
+Use the information on this page to identify improvements or regressions for each metric, visualize changes, and compare trends over time. DORA metrics can be exported to dashboards or notebooks and be alerted on using [metric monitors][9].
+
+The metrics can also be queried with the [Query timeseries points][10] and [Query timeseries data across multiple products][11] API endpoints.
+
+The metrics provided by DORA Metrics are:
+
+| Metric | Type | Description |
+| :--- | :--- | :--- |
+| `dora.deployments.count` | count | Used for Deployment Frequency.
+| `dora.change_lead_time` | distribution | Contains the age in `seconds` of the git commits at the time of deployment.
+| `dora.incidents_impact` | count | Tracks the services or teams impacted by incidents. Used for Change Failure Rate with the formula `dora.incidents_impact / dora.deployments.count`. A big time rollup of at least 1 week is recommended to account for time difference between deployments and when the impact starts.
+| `dora.time_to_restore` | distribution | Contains the time in `seconds` between the incident's `started_at` and `finished_at`.
+
+All the metrics contain the following tags when available:
+- `service`
+- `team`
+- `env`
+- `repository_id`
+
+**Note**: The `severity` tag is available for the `dora.incidents_impact` and `dora.time_to_restore` metrics, if provided through the API.
+
+### Deployment and incident events
+
+DORA Metrics also provides individual `deployment`, `incident`, and `incident_finished` events in [Event Management][12] with `source:software_delivery_insights`.
+
+The events can be queried and visualized with the [Events Explorer][13].
 
 ### Limitations
 
@@ -300,3 +328,7 @@ Use the information on this page to identify improvements or regressions for eac
 [7]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/monitors/types/metric/?tab=threshold
+[10]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-points
+[11]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products
+[12]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
+[13]: https://docs.datadoghq.com/service_management/events/explorer/

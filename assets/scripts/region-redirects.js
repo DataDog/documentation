@@ -61,7 +61,7 @@ function regionOnChangeHandler(region) {
     const queryParams = new URLSearchParams(window.location.search);
 
     // on change, if query param exists, update the param
-    if (config.allowedRegions.includes(queryParams.get('site'))) {
+    if (config.allowedRegions.includes(queryParams.get('site') || region)) {
         queryParams.set('site', region);
 
         window.history.replaceState(
@@ -70,10 +70,6 @@ function regionOnChangeHandler(region) {
             `${window.location.pathname}?${queryParams}`
         );
 
-        showRegionSnippet(region);
-        replaceButtonInnerText(region);
-        Cookies.set('site', region, { path: '/' });
-    } else if (config.allowedRegions.includes(region)) {
         showRegionSnippet(region);
         replaceButtonInnerText(region);
         Cookies.set('site', region, { path: '/' });

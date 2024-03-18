@@ -16,7 +16,7 @@ There are three methods of deploying the Agent:
 
 2. In a **cloud environment**, such as [Amazon ECS][2], [Fargate in an Amazon ECS environment][3], or [Amazon EKS][4]
 
-3. In a [Kubernetes environment][2]
+3. In a [Kubernetes environment][16]
 
 These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance. 
 
@@ -170,3 +170,4 @@ $ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
 [13]: https://docs.datadoghq.com/integrations/eks_fargate/#log-collection
 [14]: https://docs.datadoghq.com/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/#overview
 [15]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare
+[16]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=operator
