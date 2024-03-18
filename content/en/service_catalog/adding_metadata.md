@@ -47,7 +47,7 @@ Beyond services, now you can organize your systems using various components such
 ##### Enhanced Relationship Mapping
 With APM/USM data, you can always automatically detect dependencies among components. We now support manual declaration to augment auto-detected application topology. This ensures a complete overview of how components interact within your applications.
 
-##### Inheritance of Application Metadata
+##### Inheritance of application metadata
 Components within an application automatically inherit the application's metadata, simplifying management and visibility.
 
 ##### Multi-Ownership Support
