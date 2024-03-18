@@ -110,7 +110,7 @@ nav_sections:
         desc: Monitor the health and performance of your CI pipelines
       - title: Test Visibility
         link: tests/
-        icon: intelligent-test-runner
+        icon: ci
         desc: Detect flaky tests and identify commits introducing flaky tests
       - title: Cloud Cost Management
         link: cloud_cost_management/
