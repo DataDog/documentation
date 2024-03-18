@@ -32,7 +32,7 @@ further_reading:
   tag: 설명서
   text: Synthetic 모니터링 가이드
 - link: https://dtdg.co/fe
-  tag: 기반 활성화
+  tag: \u0008기초 구축
   text: 대화형 세션에 참여하여 synthetic 테스트 역량을 강화하세요.
 kind: 설명서
 title: Synthetic Monitoring
