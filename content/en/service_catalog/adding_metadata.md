@@ -50,7 +50,7 @@ With APM/USM data, you can always automatically detect dependencies among compon
 ##### Inheritance of application metadata
 Components within an application automatically inherit the application's metadata, simplifying management and visibility.
 
-##### Multi-Ownership Support
+##### Multi-ownership
 For improved collaboration, you can now assign multiple owners to any entity within your system, ensuring responsibilities are clearly defined.
 
 ##### Custom Filters for APM Metrics, Logs, and Events
