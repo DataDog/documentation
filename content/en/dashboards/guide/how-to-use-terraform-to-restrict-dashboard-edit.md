@@ -55,11 +55,11 @@ resource "datadog_restriction_policy" "example" {
 
 Role IDs can be retrieved from the [Roles API][2], [Roles UI][5], or by using the role ID defined in Terraform for [datadog_role][3] resources.
 
-Org ID can be obtained from the [Get user details API][4].
+Org ID can be obtained from the [GET /api/v2/org API][4].
 
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/restriction_policy
 [2]: /api/latest/roles/#list-roles
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
-[4]: https://docs.datadoghq.com/api/latest/users/#get-user-details
+[4]: https://app.datadoghq.com/api/v2/org
 [5]: https://app.datadoghq.com/organization-settings/roles
