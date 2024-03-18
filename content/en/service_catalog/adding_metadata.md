@@ -54,7 +54,7 @@ Components within an application automatically inherit the application's metadat
 For improved collaboration, you can now assign multiple owners to any entity within your system, ensuring responsibilities are clearly defined.
 
 ##### Custom filters for APM metrics, logs, and events
-With the `datadog` field in v3.0 schema, you can now specify custom filters for logs and events associated with each component. This capability enables you to tailor the telemetry data to meet your specific needs, ensuring that you have access to the most relevant and actionable insights.
+With the `datadog` field in v3.0 schema, you can specify custom filters for logs and events associated with each component.
 
 #### Example Entity Definition (`kind:application`)
 
