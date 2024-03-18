@@ -92,7 +92,7 @@ try (var scope = Profiling.get().newScope()) {
 }
 ```
 
-Then, inform the Datadog backend of your intent to filter by this context key; set the `profiling.context.attributes` configuration with one of the following:
+To specify which label keys you want to use for filtering, set the `profiling.context.attributes` configuration with one of the following:
 * Environment variable: `DD_PROFILING_CONTEXT_ATTRIBUTES=customer_name`
 * System setting: `-Ddd.profiling.context.attributes=customer_name`
 
@@ -111,7 +111,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
 })
 ```
 
-To specify which label keys you want use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
+To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
 
 ```go
 profiler.Start(
