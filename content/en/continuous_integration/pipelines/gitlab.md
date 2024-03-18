@@ -196,7 +196,7 @@ through the UI by going to **Settings > CI/CD > Runners** and editing the approp
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
 view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 
-CI Visibility also support Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
+CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
 
 
 ### View error messages for pipeline failures
