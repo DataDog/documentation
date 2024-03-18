@@ -55,9 +55,9 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.2.x          | General Availability | All             |
 | 7.1.x          | General Availability | All             |
 | 7.0.x          | General Availability | All             |
-| 5.6.x          | EOL                  | > `1.0.0+`      |
-| 5.5.x          | EOL                  | > `1.0.0+`      |
-| 5.4.x          | EOL                  | > `1.0.0+`      |
+| 5.6.x          | EOL                  | < `1.0.0`      |
+| 5.5.x          | EOL                  | < `1.0.0`      |
+| 5.4.x          | EOL                  | < `1.0.0`      |
 
 PHP APM supports the following SAPI's:
 
