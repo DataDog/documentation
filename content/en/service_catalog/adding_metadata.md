@@ -44,7 +44,7 @@ The Entity Definition Schema is a structure that contains basic information abou
 ##### Analysis units
 Beyond services, you can organize your systems using various components such as applications, services, queues, and datastores. This holistic view supports better analysis and management.
 
-##### Enhanced Relationship Mapping
+##### Map relationships
 With APM/USM data, you can always automatically detect dependencies among components. We now support manual declaration to augment auto-detected application topology. This ensures a complete overview of how components interact within your applications.
 
 ##### Inheritance of application metadata
