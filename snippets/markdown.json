@@ -255,7 +255,7 @@
 		"body": [
 			"---",
 			"authors:",
-			"- email: email@datadoghq.com",
+			"- email: author@datadoghq.com",
 			"  name: author-full-name",
 			"  image: author-headshot-image.jpg",
 			"blog: engineering",
