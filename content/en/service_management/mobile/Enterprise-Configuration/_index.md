@@ -1,5 +1,5 @@
 ---
-title: Datadog Mobile App
+title: Enterprise Configuration
 kind: documentation
 aliases:
 - /mobile/enterprise-configuration
