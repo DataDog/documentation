@@ -51,7 +51,7 @@ With APM/USM data, you can always automatically detect dependencies among compon
 Components within an application automatically inherit the application's metadata, simplifying management and visibility.
 
 ##### Multi-ownership
-For improved collaboration, you can now assign multiple owners to any entity within your system, ensuring responsibilities are clearly defined.
+For improved collaboration, you can assign multiple owners to any entity within your system, ensuring responsibilities are accurately defined.
 
 ##### Custom filters for APM metrics, logs, and events
 With the `datadog` field in v3.0 schema, you can specify custom filters for logs and events associated with each component.
