@@ -22,7 +22,7 @@ further_reading:
   tag: 블로그
   text: Amazon Kinesis  Data Firehose 및 Datadog으로 Amazon VPC 플로우 로그 전송
 kind: 설명서
-title: 로그 익스플로러
+title: 로그 탐색기
 ---
 
 ## 개요
