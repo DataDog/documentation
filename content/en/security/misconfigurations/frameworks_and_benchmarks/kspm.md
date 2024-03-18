@@ -29,7 +29,7 @@ To take full advantage of KSPM, you must [install both the Datadog Agent and clo
 
 ## Monitor risk across Kubernetes deployments
 
-With KSPM, Datadog scans your environment for risks defined by the more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations Explorer][11].
+With KSPM, Datadog scans your environment for risks defined by more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations Explorer][11].
 
 Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within CSM or by [executing a pre-defined workflow][8].
 
@@ -57,7 +57,7 @@ To view a detailed report that gives you insight into how you score against the 
 
 In addition to the out-of-the-box detection rules, you can also create your own Kubernetes detection rules by cloning an existing rule or creating a new one from scratch. Rules are written in the [Rego policy language][4], a flexible Python-like language that serves as the industry standard for detection rules. For more information, see [Writing Custom Rules with Rego][5].
 
-After you create the detection rule, you can customize its severity (Critical, High, Medium, Low, or Info) and [set alerts for real-time notifications][6] to notify you when a new finding is detected.
+After you create the detection rule, you can customize its severity (`Critical`, `High`, `Medium`, `Low`, or `Info`) and [set alerts for real-time notifications][6] to notify you when a new finding is detected.
 
 ## Further reading
 
