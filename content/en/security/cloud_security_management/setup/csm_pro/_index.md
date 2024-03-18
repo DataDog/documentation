@@ -25,8 +25,6 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 ### Enable CSM Pro on the Agent
 
-<div class="alert alert-warning">Kubernetes Security Posture Management is in beta.</div>
-
 Set up CSM Pro on the Agent to enable [Kubernetes Security Posture Management][6] for [CSM Misconfigurations][1], and container image metadata collection and [Software Bill of Materials (SBOM)][5] collection for [CSM Vulnerabilities][2].
 
 Select your infrastructure type for details on how to enable CSM Pro on the Agent.
