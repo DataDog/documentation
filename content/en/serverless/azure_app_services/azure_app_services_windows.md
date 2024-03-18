@@ -293,7 +293,7 @@ Datadog's Azure App Service Node.js extension includes an instance of [DogStatsD
 
 Writing custom metrics and checks in this environment is similar to the process for doing so with an application on a standard host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
 
-1. Initialize DogStatsD and write custom metrics in your application.
+1. [Initialize DogStatsD and write custom metrics][12] in your application.
 1. Deploy your code to a supported Azure Web App.
 1. If you have not already, install Datadog's Azure App Service Node.js extension.
 
@@ -324,6 +324,7 @@ Learn more about [custom metrics][10].
 [9]: /developers/dogstatsd/?tab=java#code
 [10]: /metrics/
 [11]: /security/application_security/enabling/nodejs/
+[12]: /developers/dogstatsd/
 {{% /tab %}}
 {{< /tabs >}}
 
