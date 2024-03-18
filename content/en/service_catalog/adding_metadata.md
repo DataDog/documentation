@@ -45,7 +45,7 @@ The Entity Definition Schema is a structure that contains basic information abou
 Beyond services, you can organize your systems using various components such as applications, services, queues, and datastores. This holistic view supports better analysis and management.
 
 ##### Map relationships
-With APM/USM data, you can always automatically detect dependencies among components. The schema supports manual declaration to augment auto-detected application topology. This ensures a complete overview of how components interact within your applications.
+With APM/USM data, you can automatically detect dependencies among components. The schema supports manual declaration to augment auto-detected application topology. This ensures a complete overview of how components interact within your applications.
 
 ##### Inheritance of application metadata
 Components within an application automatically inherit the application's metadata, simplifying management and visibility.
@@ -56,7 +56,7 @@ For improved collaboration, you can assign multiple owners to any entity within 
 ##### Custom filters for APM metrics, logs, and events
 With the `datadog` field in v3.0 schema, you can specify custom filters for logs and events associated with each component.
 
-#### Example Entity Definition (`kind:application`)
+#### Example entity definition (`kind:application`)
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
