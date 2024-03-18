@@ -151,6 +151,11 @@ When this command is executed, Datadog receives the repository URL, the commit S
 
 Run this command in CI for every new commit. If a deployment is executed for a specific commit SHA, ensure that the `datadog-ci git-metadata upload` command is run for that commit **before** the deployment event is sent.
 
+<div class="alert alert-warning">
+Do not provide the <code>--no-gitsync</code> option to the <code>datadog-ci git-metadata upload</code> command.
+When that option is included, the commit information is not sent to Datadog and the Change Lead Time metric is not calculated.
+</div>
+
 You can validate the correct setup of the command by checking the command output. An example of a correct output is:
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:organization/example-repository.git.
