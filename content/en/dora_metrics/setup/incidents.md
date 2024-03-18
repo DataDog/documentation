@@ -82,7 +82,11 @@ Send both [deployment events][2] and [incident events](#overview) to correctly p
 The Mean Time to Restore (MTTR) metric is calculated as the duration distribution for *resolved incident* events.
 Include the `finished_at` attribute in an incident event to mark that the incident is resolved.
 
-Events can be sent both at the start of and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
+Events can be sent both at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics

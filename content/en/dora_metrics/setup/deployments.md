@@ -32,8 +32,8 @@ DORA Metrics are in private beta. Fill out the form below to be added to the wai
 
 Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate.
 To send deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. The following attributes are required:
-- `started_at`: The time when the deployment started.
-- `finished_at`: The time when the deployment finished.
+- `started_at`: The time the deployment started.
+- `finished_at`: The time the deployment finished.
 - `service`: The service that was deployed. The provided service must be registered in the [Service Catalog][3] (for more information, see [Adding Entries to Service Catalog][4]).
 The `team` ownership of the service is automatically inferred from the Service Catalog and associated with all metrics.
 
@@ -77,9 +77,9 @@ EOF
 
 {{% tab "datadog-ci CLI" %}}
 
-The [`datadog-ci`][1] CLI tool provides a shortcut to send the deployments within your Continuous Integration environment.
+The [`datadog-ci`][1] CLI tool provides a shortcut to send deployment events within your Continuous Integration environment.
 
-For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} and replace `<API_KEY>` with your [Datadog API Key][2]:
+For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} and set the `DD_API_KEY` environment variable to your [Datadog API Key][2]:
 ```shell
 export DD_BETA_COMMANDS_ENABLED=1
 export DD_SITE="<DD_SITE>"
@@ -95,7 +95,7 @@ datadog-ci dora deployment --service shopist --env prod \
 
 The deployment finish time is automatically set to now if `--finished-at` is not provided.
 
-If the deployment CI job is running on the exact same Git revision that has been deployed, `git-repository-url` and `git-commit-sha` can be omitted and will be automatically inferred from the CI context.
+If the deployment CI job is running on the exact same Git revision that is being deployed, `git-repository-url` and `git-commit-sha` can be omitted and will be automatically inferred from the CI context.
 The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric will not be available.
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
@@ -105,9 +105,9 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 
 ## Calculating Change Lead Time
 
-For a single Git commit, the Change Lead Time (CLT) is calculated as the time from the commit creation to when the deployment including the commit change was performed.
-To compute the Change Lead Time for a deployment, Datadog automatically finds all the commits done since the previous deployment, and perform the average of the related Change Lead Time values.
-Change Lead Time is not available for the first deployment of a service.
+For a single Git commit, the Change Lead Time (CLT) is calculated as the time from the commit creation to when the deployment including the commit change was executed.
+To calculate the Change Lead Time for a deployment, Datadog automatically finds all the commits done since the previous deployment, and computes the average of the related Change Lead Time values.
+Change Lead Time is not available for the first deployment of a service that includes Git information.
 
 For the Change Lead Time metric to be available, two requirements need to be met:
 1. The Git repository URL and the commit SHA information are provided when sending deployment events.
@@ -121,7 +121,7 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 -->
 
 <div class="alert alert-info">
-The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when Change Lead Time is computed. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
+The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing Change Lead Time. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 </div>
 
 {{< tabs >}}
@@ -135,8 +135,8 @@ If you are using the <code>pull_request</code> trigger, use the alternative meth
 If the [GitHub integration][1] is not already installed, install it on the [GitHub integration tile][2].
 
 When configuring the GitHub application:
-1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
-2. Subscribe to **Pull request** and **Push** events.
+1. Select at least **Read** repository permissions for **Contents**.
+2. Subscribe at least to **Push** events.
 
 To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, under the **Features** tab, the **DORA Metrics: Collect Change Lead Time metric** feature is enabled.
 
@@ -166,6 +166,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
+
 
 ### Handling multiple services in the same repository
 
@@ -197,6 +198,10 @@ extensions:
 ```
 
 DORA Metrics for the service `shopist` only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
