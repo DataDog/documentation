@@ -62,3 +62,4 @@ Org ID can be obtained from the [Get user details API][4].
 [2]: /api/latest/roles/#list-roles
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
 [4]: https://docs.datadoghq.com/api/latest/users/#get-user-details
+[5]: https://app.datadoghq.com/organization-settings/roles
