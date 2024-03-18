@@ -128,7 +128,7 @@ datadog:
       - fp2
 {{< /code-block >}}
 
-#### Example Entity Definition (`kind:service`, `kind:datastore`, `kind:queue`) 
+#### Example entity definition (`kind:service`, `kind:datastore`, `kind:queue`) 
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
