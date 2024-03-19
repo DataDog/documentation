@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Datadog Error Tracking automatically groups all your errors into Issues across your web, mobile, and backend application to help you prioritize and find the problems that are most impactful making it easier to minimize service downtimes and reduce user frustration.
+Datadog Error Tracking automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
 
 With [Real User Monitoring][1], [APM][2], or [Logs][6] enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs starts, when it has a high impact, and when it starts regressing.
 
@@ -43,8 +43,8 @@ There are two types of alerting conditions you can configure your Error Tracking
 
 | Alerting&nbsp;condition     | Description    | 
 | ---  | ----------- |
-|Count| Alert on issues with a high number of errors. For example, getting alerted for your service whenever more than 500 occurrences of your error happens |
-|New Issue| It triggers when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
+|Count| Alert on issues with a high number of errors. For example, alert for your service whenever more than 500 occurrences of your error happen. |
+|New Issue| Triggers when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
 
 ### Define the search query
 
