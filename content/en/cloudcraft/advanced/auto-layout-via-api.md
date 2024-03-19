@@ -30,7 +30,7 @@ Execute the following command in your terminal:
 {{< code-block lang="shell" >}}
 curl \
   --url 'https://api.cloudcraft.co/aws/account/ACCOUNT_ID/REGION/json' \
-  --tlsv1.3 \
+  --tlsv1.2 \
   --proto '=https' \
   --silent \
   --header "Authorization: Bearer API_KEY"
@@ -41,7 +41,7 @@ curl \
 {{< code-block lang="shell" >}}
 curl \
   --url 'https://api.cloudcraft.co/azure/account/ACCOUNT_ID/REGION/json' \
-  --tlsv1.3 \
+  --tlsv1.2 \
   --proto '=https' \
   --silent \
   --header "Authorization: Bearer API_KEY"
@@ -56,7 +56,7 @@ After executing the command, you will see the JSON representation of your AWS ac
 {{< code-block lang="shell" >}}
 curl \
   --url 'https://api.cloudcraft.co/aws/account/ACCOUNT_ID/REGION/json' \
-  --tlsv1.3 \
+  --tlsv1.2 \
   --proto '=https' \
   --silent \
   --header "Authorization: Bearer API_KEY" > '/tmp/account-infra.json'
@@ -67,7 +67,7 @@ curl \
 {{< code-block lang="shell" >}}
 curl \
   --url 'https://api.cloudcraft.co/azure/account/ACCOUNT_ID/REGION/json' \
-  --tlsv1.3 \
+  --tlsv1.2 \
   --proto '=https' \
   --silent \
   --header "Authorization: Bearer API_KEY" > '/tmp/account-infra.json'
@@ -85,7 +85,7 @@ Execute the following command in your terminal:
 curl \
   --request 'POST' \
   --url 'https://api.cloudcraft.co/blueprint' \
-  --tlsv1.3 \
+  --tlsv1.2 \
   --proto '=https' \
   --silent \
   --header 'Content-Type: application/json' \
