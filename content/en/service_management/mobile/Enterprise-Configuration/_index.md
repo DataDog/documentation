@@ -14,11 +14,11 @@ further_reading:
   tag: "Blog"
   text: "Improve your on-call experience with Datadog mobile dashboard widgets"
 ---
-The Datadog Mobile App is fully compatible with [https://www.appconfig.org/][1] and thus with Mobile Device Management (MDM) providers compatible with it.
+The Datadog Mobile App is fully compatible with [https://www.appconfig.org/][1] and Mobile Device Management (MDM) providers compatible with it.
 
 ## Supported capabilities
 
-In addition to capabilities supported by default for [iOS][2] and [Android][3], the Datadog mobile app provides the following dedicated features:
+The mobile app supports all default MDM capabilities for [iOS][2] and [Android][3] as well as the following dedicated features:
 
 | Key | Description |Type|Default Value| 
 |---------|---------|-----|-----|
@@ -31,9 +31,9 @@ To learn more about default capabilities, see your Mobile Device Management prov
 
 ## Use cases
 ### Organization specific login options
-Your organization may have a dedicated subdomain or some dedicated options for your users to authenticate. You can set the organization information to allow the mobile app to display a dedicated login page. For example, you can disable Google SSO and email/password authentication or add a dedicated SAML Login button. 
+The mobile app lets you set organization information to display a dedicated mobile app login page if your organization has a dedicated subdomain or dedicated options for your users to authenticate. For example, the mobile app lets you disable Google SSO and email/password authentication or add a dedicated SAML Login button. 
 
-Setting `datadogDefaultLoginOrganizationPublicID` or `datadogDefaultLoginOrganizationUUID` fundamentally leads to the same result, though information is fetched from different places:  
+You can set `datadogDefaultLoginOrganizationPublicID` or `datadogDefaultLoginOrganizationUUID` to identify the default organization passed as a parameter during login; if both are set, `datadogDefaultLoginOrganizationUUID takes precedence`.   
 
 `datadogDefaultLoginOrganizationPublicID` is available via the API.  
 
@@ -42,9 +42,10 @@ Setting `datadogDefaultLoginOrganizationPublicID` or `datadogDefaultLoginOrganiz
 ### Preventing data leaks from your users
 If you are concerned about the risk of data leaks from users, you can disable copy/paste and screenshots through standard configurations (for [iOS][2] and [Android][3]). The Datadog Mobile App offers the following features that you can enable at your discretion to further mitigate the risk of data leaks:  
 
-**Disabling sharing from the app**, which will remove every share button from Datadog mobile app product pages. Please note that share buttons create a link to the relevant product page which require authentication to view, and disabling sharing from the mobile app may inhibit your teams’ collaboration using the mobile app.  
+**Disabling sharing from the app**, which will remove every share button from Datadog mobile app product pages.  
+*Note*: Mobile app share buttons create a link to the relevant product page which require authentication to view. Consider whether this default control is sufficient; disabling sharing from the mobile app may inhibit your teams’ collaboration using the mobile app.  
 
-**Disabling home-screen widgets**, which, depending on the platform, will display a “Disabled by your organization” message on the home screen widget in place of actual data from your monitors, incidents, SLOs, and dashboards.
+**Disabling home-screen widgets**, which will display “Disabled by your organization” on the home screen widget in place of actual data from your monitors, incidents, SLOs, or dashboards.
 
 ### Further Reading
 
