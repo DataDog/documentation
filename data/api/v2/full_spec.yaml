@@ -22528,6 +22528,11 @@ components:
           items:
             $ref: '#/components/schemas/UserTeam'
           type: array
+        included:
+          description: Resources related to the team memberships
+          items:
+            $ref: '#/components/schemas/UserTeamIncluded'
+          type: array
         links:
           $ref: '#/components/schemas/TeamsResponseLinks'
         meta:
