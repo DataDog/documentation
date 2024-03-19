@@ -110,24 +110,25 @@ metadata:
 <div class="alert alert-warning"> This feature is only supported by Cluster Agent 7.52.0 or later <a href="http://docs.datadoghq.com/integrations/ecs_fargate">ECS Fargate integration</a>.
 </div>
 
-Cluster Agent 7.52.0+ can configure Admission Controller and inject Agent sidecar in every pod matching predefined criteria. This approach is considerably simpler and easier to maintain compared to manual sidecar configuration. Instead of modifying every workload manifest when adding or changing the agent sidecar, one just needs to configure the Cluster Agent using Helm and add `agent.datadoghq.com/sidecar:fargate` label to the application pod templates. With this setup admission controller will add an Agent sidecar to every pod created in the cluster using that label.
+Cluster Agent 7.52.0+ can configure Admission Controller and inject Agent sidecar in every pod matching predefined criteria. This approach is considerably simpler and easier to maintain compared to manual sidecar configuration. Instead of modifying every workload manifest when adding or changing the agent sidecar, one just needs to configure the Cluster Agent using Helm and add `agent.datadoghq.com/sidecar:fargate` label to the application pod templates. With this setup Admission Controller will add an Agent sidecar to every pod created in the cluster using that label.
+
+Below setup configures Cluster Agent to communicate with the Agent sidecars, allowing access to features such as [events collection][29], [Kubernetes resources view][30], and [cluster checks][31].
 
 **Prerequisties:**
 
 * RBAC is setup in the application namespace(s) according to the above instructions.
-* Kubernetes secret containing API key and Cluster Agent token is create in the Datadog installation and application namespaces.
+* Kubernetes secret containing API key and Cluster Agent token is create in the Datadog installation and application namespaces. For more information how these secrets are used, please see the [Cluster Agent Setup][25].
   ```yaml
-  kubectl create secret generic datadog-secret -n datadog-agent --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_ TOKEN>
-  kubectl create secret generic datadog-secret -n fargate --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_TOKEN>
+  kubectl create secret generic datadog-secret -n datadog-agent \
+          --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_ TOKEN>
+  kubectl create secret generic datadog-secret -n fargate \
+          --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_TOKEN>
   ```
 
 Setup instruction in the next section assume Fargate-only cluster. On mixed cluster set `agents.enabled` to `true` to create a Daemonset for monitoring workloads on EC2 instances.
 
 ##### Minimal Setup
 
-API key is required by the Agent to send data to Datadog. Cluster agent token is to enable communication between cluster agent and agent agent sidecars.
-[TODO] what's the benfit?
-[TODO] link going into existinSecret config https://docs.datadoghq.com/containers/cluster_agent/setup/?tab=helm
 1. Install agent DCA using
   ```sh
   helm template datadog datadog/datadog -n datadog-agent \
@@ -158,33 +159,31 @@ API key is required by the Agent to send data to Datadog. Cluster agent token is
         name: kube-api-access-6csjw
         readOnly: true
     - env:
-      - name: DD_API_KEY
-        valueFrom:
-          secretKeyRef:
-            key: api-key
-            name: datadog-secret
-      - name: DD_SITE
-        value: datadoghq.com
-      - name: DD_CLUSTER_NAME
-        value: levan-eks-fargate
-      - name: DD_KUBERNETES_KUBELET_NODENAME
-        valueFrom:
-          fieldRef:
-            apiVersion: v1
-            fieldPath: spec.nodeName
-      - name: DD_CLUSTER_AGENT_ENABLED
-        value: "true"
-      - name: DD_CLUSTER_AGENT_AUTH_TOKEN
-        valueFrom:
-          secretKeyRef:
-            key: token
-            name: datadog-secret
-      - name: DD_CLUSTER_AGENT_URL
-        value: https://datadog-cluster-agent.datadog-agent.svc.cluster.local:5005
-      - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-        value: "true"
-      - name: DD_EKS_FARGATE
-        value: "true"
+    - name: DD_API_KEY
+      valueFrom:
+        secretKeyRef:
+          key: api-key
+          name: datadog-secret
+    - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+      valueFrom:
+        secretKeyRef:
+          key: token
+          name: datadog-secret
+    - name: DD_CLUSTER_AGENT_URL
+      value: https://datadog-cluster-agent.datadog-agent.svc.cluster.local:5005
+    - name: DD_EKS_FARGATE
+      value: "true"
+    # ...
+    image: gcr.io/datadoghq/agent:7.51.0
+    imagePullPolicy: IfNotPresent
+    name: datadog-agent-injected
+    resources:
+      limits:
+        cpu: 800m
+        memory: 512Mi
+      requests:
+        cpu: 400m
+        memory: 256Mi
   ```
 
 This setup configures sidecar Agent using internal defaults and adds setting to make it run in EKS Fargate environment. Sidecar uses image repository and tag set in the Helm values. Communication between Cluster Agent and sidecars is enabled by default.
@@ -194,7 +193,7 @@ This setup configures sidecar Agent using internal defaults and adds setting to 
 Users who want to further configure the Agent or its container resources can use Helm property `clusterAgent.admissionController.agentSidecarInjection.profiles` to add environment variable definitions and resource settings. They have the ability to configure custom selector to target workload pods instead of updating their workload to add `agent.datadoghq.com/sidecar:fargate` label. Follow these steps to achieve  this:
 
 1. Create a below Helm values file which uses same settings from the previous section and adds a sidecar profile and custom pod selector. Profiles supplies two environment variables and resource settings. Selector targets all pods with a label `"app": redis`.
-  {{< highlight yaml "hl_lines=14,18" >}}
+  {{< highlight yaml "hl_lines=12-26" >}}
   datadog:
     clusterName: cluster-name
     apiKeyExistingSecret: datadog-secret
@@ -227,35 +226,24 @@ Users who want to further configure the Agent or its container resources can use
   helm template datadog datadog/datadog -n datadog-agent -f datadog.yaml
   ```
 3. Once Cluster Agent reaches running state and registers Admission Controller mutating webhooks, all pods created with label `app: redis` will get Agent sidecar added. Admission Controller does not mutate pods which are already created.
-  ```yaml
+  {{< highlight yaml "hl_lines=6-40" >}}
   labels:
     app: redis
     eks.amazonaws.com/fargate-profile: fp-fargate
     pod-template-hash: 7b86c456c4
-  ...
+  # ...
   containers:
   - args:
     - redis-server
     image: redis:latest
     imagePullPolicy: Always
-  ...
+  # ...
   - env:
     - name: DD_API_KEY
       valueFrom:
         secretKeyRef:
           key: api-key
           name: datadog-secret
-    - name: DD_SITE
-      value: datadoghq.com
-    - name: DD_CLUSTER_NAME
-      value: levan-eks-fargate
-    - name: DD_KUBERNETES_KUBELET_NODENAME
-      valueFrom:
-        fieldRef:
-          apiVersion: v1
-          fieldPath: spec.nodeName
-    - name: DD_CLUSTER_AGENT_ENABLED
-      value: "true"
     - name: DD_CLUSTER_AGENT_AUTH_TOKEN
       valueFrom:
         secretKeyRef:
@@ -263,12 +251,11 @@ Users who want to further configure the Agent or its container resources can use
           name: datadog-secret
     - name: DD_CLUSTER_AGENT_URL
       value: https://datadog-cluster-agent.datadog-agent.svc.cluster.local:5005
-    - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
-      value: "true"
     - name: DD_EKS_FARGATE
       value: "true"
     - name: DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED
       value: "true"
+    # ...
     image: gcr.io/datadoghq/agent:7.51.0
     imagePullPolicy: IfNotPresent
     name: datadog-agent-injected
@@ -279,8 +266,7 @@ Users who want to further configure the Agent or its container resources can use
       requests:
         cpu: 400m
         memory: 256Mi
-  ```
-
+  {{< /highlight >}}
 
 
 {{% /tab %}}
@@ -703,3 +689,4 @@ Additional helpful documentation, links, and articles:
 [32]: https://www.datadoghq.com/blog/aws-fargate-metrics/
 [33]: https://github.com/kubernetes/kube-state-metrics
 [34]: https://docs.datadoghq.com/containers/guide/clustercheckrunners
+[35]: http://docs.datadoghq.com/agent/cluster_agent
