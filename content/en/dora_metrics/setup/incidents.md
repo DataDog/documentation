@@ -22,7 +22,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
+The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
 ## Overview

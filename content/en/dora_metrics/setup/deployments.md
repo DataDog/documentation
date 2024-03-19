@@ -28,7 +28,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
+The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
 ## Overview
@@ -86,7 +86,7 @@ For the following example, set the `DD_SITE` environment variable to {{< region-
 ```shell
 export DD_BETA_COMMANDS_ENABLED=1
 export DD_SITE="<DD_SITE>"
-export DD_API_KEY="<API_KEY>"
+export DD_API_KEY="<DD_API_KEY>"
 
 export deploy_start=`date +%s`
 ./your-deploy-script.sh
@@ -113,7 +113,7 @@ To calculate the Change Lead Time for a deployment, Datadog performs the [Git Lo
 Change Lead Time is not available for the first deployment of a service that includes Git information. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
 There are two requirements for calculating Change Lead Time:
-1. Both Git repository URL and commit SHA are provided when sending deployment events.
+1. Both the Git repository URL and commit SHA are provided when sending deployment events.
 2. Your repository metadata is being [synchronized to Datadog](#synchronize-repository-metadata-to-datadog).
 
 ### Synchronize repository metadata to Datadog
@@ -184,7 +184,7 @@ links:
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
 
-DORA Metrics for the `shopist` service only consider the git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
+DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
 
 **Example (schema version v2.2):**
 

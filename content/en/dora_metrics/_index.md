@@ -28,7 +28,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
+The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
 ## Overview
@@ -55,7 +55,7 @@ The four DORA Metrics are calculated based on two types of events:
 - **Deployment events**: Indicate that a new deployment has occurred for a service in a specific environment.
   Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate.
 - **Incident events**: Indicate that a new issue has occurred for a service in a specific environment.
-  Incident events are used in order to compute Change Failure Rate and Mean Time to Restore.
+  Incident events are used to compute Change Failure Rate and Mean Time to Restore.
 
 {{< whatsnext desc="Set up DORA Metrics in Datadog:" >}}
     {{< nextlink href="continuous_integration/dora_metrics/setup/deployments" >}}Send Deployment Events{{< /nextlink >}}
