@@ -5906,7 +5906,7 @@ components:
       example: custom_destination
       type: string
       x-enum-varnames:
-      - custom_destination
+      - CUSTOM_DESTINATION
     CustomDestinationUpdateRequest:
       description: The custom destination.
       properties:
