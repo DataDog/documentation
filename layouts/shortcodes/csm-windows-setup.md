@@ -21,11 +21,9 @@ Datadog Cloud Security Management on Windows includes built-in threat detection 
 
 ## Installation
 
-<div class="alert alert-info">You must use the installer linked in this document, and <strong>not</strong> the installer available on the <strong>Integrations</strong> &gt; <strong>Agent</strong> page in Datadog.</div>
-
 ### Installer
 
-1. Download the [Datadog Agent installer][3].
+1. [Install the Datadog Windows Agent][3]. CSM Enterprise on Windows is supported on Agent versions 7.52 and higher.
 2. Right-click the downloaded `.msi` file and select **Run as administrator**.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5]. If you are upgrading from an existing version of the Agent, the installer may not prompt you for an API key.
 
@@ -33,7 +31,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Command line
 
-1. Download the [Datadog Agent installer][3].
+1. Download the [Datadog Agent installer][4]. CSM Enterprise on Windows is supported on Agent versions 7.52 and higher.
 2. Follow the instructions for command line installation using command prompts or PowerShell.
 
 ## Configuration
@@ -69,7 +67,8 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
-[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.3.cwsbeta-3.msi
+[3]: /agent/basic_agent_usage/windows/?tab=gui
+[4]: /agent/basic_agent_usage/windows/?tab=commandline
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/logs
