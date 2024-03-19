@@ -72,12 +72,13 @@ PHP APM supports the following SAPI's:
 
 PHP APM supports the following architectures:
 
-| Processor architectures                   | Support level         | Package version                        |
-| ------------------------------------------|-----------------------|----------------------------------------|
-| Linux GNU amd64 (`x86-64-linux-gnu`)      | [GA](#support-ga)     | All                                    |
-| Linux MUSL amd64 (`x86-64-linux-musl`)    | [GA](#support-ga)     | All                                    |
-| Linux GNU arm64 (`aarch64-linux-gnu`)     | [GA](#support-ga)     | > `0.78.0`                             |
-| Linux MUSL arm64 (`aarch64-linux-musl`)   | [GA](#support-ga)     | > `0.78.0`                             |
+| Processor architectures                 | Support level     | Package version |
+|-----------------------------------------|-------------------|---------------|
+| Linux GNU amd64 (`x86-64-linux-gnu`)    | [GA](#support-ga) | All           |
+| Linux MUSL amd64 (`x86-64-linux-musl`)  | [GA](#support-ga) | All           |
+| Linux GNU arm64 (`aarch64-linux-gnu`)   | [GA](#support-ga) | > `0.78.0`    |
+| Linux MUSL arm64 (`aarch64-linux-musl`) | [GA](#support-ga) | > `0.78.0`    |
+| Windows amd64 (`x86_64-windows`)        | [GA](#support-ga) | > `0.98.0`    |
 
 ### Integrations
 
