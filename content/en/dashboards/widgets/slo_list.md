@@ -13,7 +13,9 @@ further_reading:
   text: "Building Dashboards using JSON" 
 ---
 
-The SLO List widget displays a subset of [SLOs][1] over their primary time window. All other configured time windows are available in the SLO's side panel on the SLO page. 
+SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service.
+
+The SLO List widget displays a subset of SLOs over their primary time window. All other configured time windows are available in the SLO's side panel on the SLO page. For more information, see the [SLO][1] documentation.
 
 {{< img src="dashboards/widgets/slo_list/slo_list_widget_v2.png" alt="The SLO List widget displaying a list of SLOs" style="width:90%;" >}}
 
