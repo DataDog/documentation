@@ -15,7 +15,7 @@ In log templates and tag values, expressions are delimited from the static parts
 Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name, "abc")`, `len(str) > 20` or `a == b`.
 
 Generally, the Expression Language supports:
-* Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
+* Accessing local variables, method parameters (`p0`, `p1`, etc.), and deeply nested fields and attributes within objects.
 * Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
 * Using logical operators (`&&`, `||`, and `not` or `!`) to build complex Boolean conditions.
 * Using the `null` literal (equivalent to `nil` in Python).
