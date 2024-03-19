@@ -75,7 +75,7 @@ AWS Elastic Beanstalk 통합은 서비스 점검을 포함하지 않습니다.
 1. [애플리케이션 소스 번들][2]의 루트에 `.ebextensions`란 이름의 폴더를 생성합니다.
 2. [99datadog.config][3]를 다운로드한 다음 `.ebextensions` 폴더에 넣습니다.
 3. [Datadog API 키][4]를 사용해 `/etc/datadog-agent/datadog.yaml` 파일 템플릿 내에서 `api_key` 값을 변경합니다.
-4. Datadog 지역(예: {{< region-param key="dd_site" code="true" >})에 대해 `/etc/datadog-agent/datadog.yaml`에서 `site` 값을 변경하여 에이전트다 올바른 Datadog 위치에 데이터를 보내도록 합니다.
+4. Datadog 지역(예: {{< region-param key="dd_site" code="true" >}})에 대해 `/etc/datadog-agent/datadog.yaml`에서 `site` 값을 변경하여 에이전트다 올바른 Datadog 위치에 데이터를 보내도록 합니다.
 5. `option_settings` 아래 `DD_AGENT_VERSION`를 설정하고 특정 에이전트 버전을 고정하여 모든 호스트에 동일한 버전의 에이전트가 실행되도록 합니다.
 6. [Elastic Beanstalk Console][5], [EB CLI][6] 또는 [AWS CLI][7]를 사용해 애플리케이션을 배포합니다.
 
@@ -140,7 +140,7 @@ process_config:
 1. [애플리케이션 소스 번들][3]의 루트에서 `.ebextensions`란 이름의 폴더를 생성하세요.
 2. [99datadog.config][4]를 다운로드하고 `.ebextensions` 폴더에 넣습니다.
 3. [Datadog API 키][5]를 사용해 `/etc/datadog-agent/datadog.yaml` 파일 템플릿 내에 `api_key` 값을 변경합니다.
-4. Datadog 지역(예: {{< region-param key="dd_site" code="true" >})에 대해 `/etc/datadog-agent/datadog.yaml`에서 `site` 값을 변경하여 에이전트다 올바른 Datadog 위치에 데이터를 보내도록 합니다.
+4. Datadog 지역(예: {{< region-param key="dd_site" code="true" >}})에 대해 `/etc/datadog-agent/datadog.yaml`에서 `site` 값을 변경하여 에이전트다 올바른 Datadog 위치에 데이터를 보내도록 합니다.
 5. `option_settings` 아래 `DD_AGENT_VERSION`를 설정하고 특정 에이전트 버전을 고정하여 모든 호스트에 동일한 버전의 에이전트가 실행되도록 합니다.
 6. [Elastic Beanstalk Console][6], [EB CLI][7] 또는 [AWS CLI][8]를 사용해 애플리케이션을 배포합니다.
 
