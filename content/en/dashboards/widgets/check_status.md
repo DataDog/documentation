@@ -14,6 +14,8 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
+Service checks monitor the up or down status of a specific service. Alerts are triggered when the monitoring Agent fails to connect to the service in a specified number of consecutive checks. The check status widget can visually display service degradation, service failures, cluster-wide issues, drops in throughput or increases in latency in your dashboard. For more information, see the [Service check][1] documentation.
+
 Check status shows the current status or number of results for any check performed:
 
 {{< img src="dashboards/widgets/check_status/check_status.png" alt="Check status widget" >}}
@@ -29,6 +31,7 @@ Check status shows the current status or number of results for any check perform
     * **A cluster of checks**: Select this option if your Check Status widget is for a scope of elements as in all `host`s, or all `service`s.
 
 4. After selecting your scope, define your Check Status widget context with the **Reported by** field.
+5. For the scope **A Cluster of checks**, you have the option to select a subset with the **Group by** field. The check status does not show you the count of checks per group, it shows the count of groups running the check. For example, if you are monitoring Agent Up, grouped by `env`, the check status shows you the number of `env` that matches your scope configurations and is running the Agent, not the count of Agents in an environment.
 
 ## API
 
