@@ -93,11 +93,11 @@
         "eslint-plugin-standard": "^4.1.0",
         "jest": "^25.5.4",
         "postcss-import": "^12.0.1",
-        "postcss-preset-env": "^6.7.0",
+        "postcss-preset-env": "^6.7.2",
         "prettier": "^2.8.8",
         "rimraf": "^3.0.2",
         "run-sequence": "^2.2.1",
-        "sass": "^1.26.10",
+        "sass": "^1.72.0",
         "serialize-javascript": "^2.1.1"
     },
     "hugo-bin": {

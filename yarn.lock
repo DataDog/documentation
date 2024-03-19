@@ -2955,13 +2955,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"anymatch@npm:^3.0.3, anymatch@npm:~3.1.1":
+"anymatch@npm:^3.0.3":
   version: 3.1.1
   resolution: "anymatch@npm:3.1.1"
   dependencies:
     normalize-path: ^3.0.0
     picomatch: ^2.0.4
   checksum: c951385862bf114807d594bdffccb769bd7219ddc14f24fc135cde075ad2477a97991567b8bb5032d4f279f96897f0c2af6468a350a6c674ac0a5ee3b62a26d6
+  languageName: node
+  linkType: hard
+
+"anymatch@npm:~3.1.2":
+  version: 3.1.3
+  resolution: "anymatch@npm:3.1.3"
+  dependencies:
+    normalize-path: ^3.0.0
+    picomatch: ^2.0.4
+  checksum: 3e044fd6d1d26545f235a9fe4d7a534e2029d8e59fa7fd9f2a6eb21230f6b5380ea1eaf55136e60cbf8e613544b3b766e7a6fa2102e2a3a117505466e3025dc2
   languageName: node
   linkType: hard
 
@@ -3944,22 +3954,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:>=2.0.0 <4.0.0":
-  version: 3.4.3
-  resolution: "chokidar@npm:3.4.3"
+"chokidar@npm:>=3.0.0 <4.0.0":
+  version: 3.6.0
+  resolution: "chokidar@npm:3.6.0"
   dependencies:
-    anymatch: ~3.1.1
+    anymatch: ~3.1.2
     braces: ~3.0.2
-    fsevents: ~2.1.2
-    glob-parent: ~5.1.0
+    fsevents: ~2.3.2
+    glob-parent: ~5.1.2
     is-binary-path: ~2.1.0
     is-glob: ~4.0.1
     normalize-path: ~3.0.0
-    readdirp: ~3.5.0
+    readdirp: ~3.6.0
   dependenciesMeta:
     fsevents:
       optional: true
-  checksum: 1c7ab8bcbcf7b128346e79a26acb1c329d7c0f689a7a421afcebb5ddf9098f8f91d9122e9a9ac50a060a290f576e0fadfab936ace01312af73afd1c3e18dde7d
+  checksum: d2f29f499705dcd4f6f3bbed79a9ce2388cf530460122eed3b9c48efeab7a4e28739c6551fd15bec9245c6b9eeca7a32baa64694d64d9b6faeb74ddb8c4a413d
   languageName: node
   linkType: hard
 
@@ -4749,12 +4759,12 @@ __metadata:
     picturefill: 3.0.3
     popper.js: 1.16.1
     postcss-import: ^12.0.1
-    postcss-preset-env: ^6.7.0
+    postcss-preset-env: ^6.7.2
     prettier: ^2.8.8
     rimraf: ^3.0.2
     run-sequence: ^2.2.1
     safe-json-stringify: ^1.2.0
-    sass: ^1.26.10
+    sass: ^1.72.0
     serialize-javascript: ^2.1.1
     signup-failover: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/signup-failover-v1.0.0.tgz"
     slugify: ^1.4.6
@@ -6028,12 +6038,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@npm:~2.1.2":
-  version: 2.1.3
-  resolution: "fsevents@npm:2.1.3"
+"fsevents@npm:~2.3.2":
+  version: 2.3.3
+  resolution: "fsevents@npm:2.3.3"
   dependencies:
     node-gyp: latest
-  checksum: b5ec0516b44d75b60af5c01ff80a80cd995d175e4640d2a92fbabd02991dd664d76b241b65feef0775c23d531c3c74742c0fbacd6205af812a9c3cef59f04292
+  checksum: 11e6ea6fea15e42461fc55b4b0e4a0a3c654faa567f1877dbd353f39156f69def97a69936d1746619d656c4b93de2238bf731f6085a03a50cabf287c9d024317
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -6047,9 +6057,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@patch:fsevents@~2.1.2#~builtin<compat/fsevents>":
-  version: 2.1.3
-  resolution: "fsevents@patch:fsevents@npm%3A2.1.3#~builtin<compat/fsevents>::version=2.1.3&hash=31d12a"
+"fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
+  version: 2.3.3
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -6254,12 +6264,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob-parent@npm:^5.0.0, glob-parent@npm:~5.1.0":
+"glob-parent@npm:^5.0.0":
   version: 5.1.1
   resolution: "glob-parent@npm:5.1.1"
   dependencies:
     is-glob: ^4.0.1
   checksum: 9f9a19c8d441d9df51df5985b2280b084f5ebc07e0fe5de761f346cb707cc30e7d51fb51c0e82490730b6c0ca9c9a3d0c73e4a22861a3cf363cc745e01721dd4
+  languageName: node
+  linkType: hard
+
+"glob-parent@npm:~5.1.2":
+  version: 5.1.2
+  resolution: "glob-parent@npm:5.1.2"
+  dependencies:
+    is-glob: ^4.0.1
+  checksum: f4f2bfe2425296e8a47e36864e4f42be38a996db40420fe434565e4480e3322f18eb37589617a98640c5dc8fdec1a387007ee18dbb1f3f5553409c34d17f425e
   languageName: node
   linkType: hard
 
@@ -6761,6 +6780,13 @@ __metadata:
   version: 5.1.8
   resolution: "ignore@npm:5.1.8"
   checksum: 967abadb61e2cb0e5c5e8c4e1686ab926f91bc1a4680d994b91947d3c65d04c3ae126dcdf67f08e0feeb8ff8407d453e641aeeddcc47a3a3cca359f283cf6121
+  languageName: node
+  linkType: hard
+
+"immutable@npm:^4.0.0":
+  version: 4.3.5
+  resolution: "immutable@npm:4.3.5"
+  checksum: 0e25dd5c314421faede9e1122ab26cdb638cc3edc8678c4a75dee104279b12621a30c80a480fae7f68bc7e81672f1e672e454dc0fdc7e6cf0af10809348387b8
   languageName: node
   linkType: hard
 
@@ -10137,9 +10163,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-preset-env@npm:^6.7.0":
-  version: 6.7.0
-  resolution: "postcss-preset-env@npm:6.7.0"
+"postcss-preset-env@npm:^6.7.2":
+  version: 6.7.2
+  resolution: "postcss-preset-env@npm:6.7.2"
   dependencies:
     autoprefixer: ^9.6.1
     browserslist: ^4.6.4
@@ -10178,7 +10204,7 @@ __metadata:
     postcss-replace-overflow-wrap: ^3.0.0
     postcss-selector-matches: ^4.0.0
     postcss-selector-not: ^4.0.0
-  checksum: 209cbb63443a1631aa97ccfc3b95b1ff519ddaeb672f84d6af501bd9e9ad6727680b5b1bffb8209322e47d93029a69df6064f75cd0b7633b6df943cbef33f22e
+  checksum: cf5f5f043d2ce4a663b81b9daa5e83d5f534d596bf75850ca3ced8141f6eee77516fea48225c9b7a79bce6cad177a9936bdfd6f09e9a64f205860f35db39ccc8
   languageName: node
   linkType: hard
 
@@ -10562,12 +10588,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readdirp@npm:~3.5.0":
-  version: 3.5.0
-  resolution: "readdirp@npm:3.5.0"
+"readdirp@npm:~3.6.0":
+  version: 3.6.0
+  resolution: "readdirp@npm:3.6.0"
   dependencies:
     picomatch: ^2.2.1
-  checksum: 6b1a9341e295e15d4fb40c010216cbcb6266587cd0b3ce7defabd66fa1b4e35f9fba3d64c2187fd38fadd01ccbfc5f1b33fdfb1da63b3cbf66224b7c6d75ce5a
+  checksum: 1ced032e6e45670b6d7352d71d21ce7edf7b9b928494dcaba6f11fba63180d9da6cd7061ebc34175ffda6ff529f481818c962952004d273178acd70f7059b320
   languageName: node
   linkType: hard
 
@@ -11160,14 +11186,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.26.10":
-  version: 1.29.0
-  resolution: "sass@npm:1.29.0"
+"sass@npm:^1.72.0":
+  version: 1.72.0
+  resolution: "sass@npm:1.72.0"
   dependencies:
-    chokidar: ">=2.0.0 <4.0.0"
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 9068b66e3143eb60bfb34b30391686c34796036f3856f6c6998d5f5eedd464c6db2a70ead71327d28485f8834301c93943528d2a8099b4c5636f03977c80034e
+  checksum: f420079c7d51660b7256ee52463c1499ede36f7fd5c8ef50c687451777ad641509001454dea45244073cedd7c00e7a3bc1c362e55206ac6686171b994edb41e4
   languageName: node
   linkType: hard
 
@@ -11549,6 +11577,13 @@ __metadata:
   dependencies:
     is-plain-obj: ^1.0.0
   checksum: 5963fd191a2a185a5ec86f06e47721e8e04713eda43bb04ae60d2a8afb21241553dd5bc9d863ed2bd7c3d541b609b0c8d0e58836b1a3eb6764c09c094bcc8b00
+  languageName: node
+  linkType: hard
+
+"source-map-js@npm:>=0.6.2 <2.0.0":
+  version: 1.2.0
+  resolution: "source-map-js@npm:1.2.0"
+  checksum: 791a43306d9223792e84293b00458bf102a8946e7188f3db0e4e22d8d530b5f80a4ce468eb5ec0bf585443ad55ebbd630bf379c98db0b1f317fd902500217f97
   languageName: node
   linkType: hard
 
