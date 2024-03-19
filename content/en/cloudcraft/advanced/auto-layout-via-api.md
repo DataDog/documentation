@@ -25,48 +25,22 @@ Start by creating a snapshot of your AWS or Azure account using the [Snapshot AW
 
 Execute the following command in your terminal:
 
-**For AWS:**
-
 {{< code-block lang="shell" >}}
 curl \
-  --url 'https://api.cloudcraft.co/aws/account/ACCOUNT_ID/REGION/json' \
+  --url 'https://api.cloudcraft.co/PROVIDER/account/ACCOUNT_ID/REGION/json' \
   --tlsv1.2 \
   --proto '=https' \
   --silent \
   --header "Authorization: Bearer API_KEY"
 {{< /code-block >}}
 
-**For Azure:**
-
-{{< code-block lang="shell" >}}
-curl \
-  --url 'https://api.cloudcraft.co/azure/account/ACCOUNT_ID/REGION/json' \
-  --tlsv1.2 \
-  --proto '=https' \
-  --silent \
-  --header "Authorization: Bearer API_KEY"
-{{< /code-block >}}
-
-Replace ACCOUNT_ID with the ID of your AWS or Azure account in Cloudcraft, REGION with your desired scan region, and API_KEY with your Cloudcraft API key.
+Replace PROVIDER with the cloud provider, i.e., `azure` or `aws`, ACCOUNT_ID with the ID of your AWS or Azure account in Cloudcraft, REGION with your desired scan region, and API_KEY with your Cloudcraft API key.
 
 After executing the command, you will see the JSON representation of your AWS account snapshot. To save this output directly to a file, use the following command:
 
-**For AWS:**
-
 {{< code-block lang="shell" >}}
 curl \
-  --url 'https://api.cloudcraft.co/aws/account/ACCOUNT_ID/REGION/json' \
-  --tlsv1.2 \
-  --proto '=https' \
-  --silent \
-  --header "Authorization: Bearer API_KEY" > '/tmp/account-infra.json'
-{{< /code-block >}}
-
-**For Azure:**
-
-{{< code-block lang="shell" >}}
-curl \
-  --url 'https://api.cloudcraft.co/azure/account/ACCOUNT_ID/REGION/json' \
+  --url 'https://api.cloudcraft.co/PROVIDER/account/ACCOUNT_ID/REGION/json' \
   --tlsv1.2 \
   --proto '=https' \
   --silent \
