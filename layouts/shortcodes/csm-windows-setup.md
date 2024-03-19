@@ -14,6 +14,7 @@ Datadog Cloud Security Management on Windows includes built-in threat detection 
 
 ## Prerequisites
 
+- Agent versions 7.52 and later.
 - Access to hosts running Windows Server 2016 or newer.
 - (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
@@ -23,7 +24,7 @@ Datadog Cloud Security Management on Windows includes built-in threat detection 
 
 ### Installer
 
-1. [Install the Datadog Windows Agent][3]. CSM Enterprise on Windows is supported on Agent versions 7.52 and higher.
+1. [Install the Datadog Windows Agent][3].
 2. Right-click the downloaded `.msi` file and select **Run as administrator**.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5]. If you are upgrading from an existing version of the Agent, the installer may not prompt you for an API key.
 
@@ -31,7 +32,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Command line
 
-1. Download the [Datadog Agent installer][4]. CSM Enterprise on Windows is supported on Agent versions 7.52 and higher.
+1. Download the [Datadog Agent installer][4].
 2. Follow the instructions for command line installation using command prompts or PowerShell.
 
 ## Configuration
