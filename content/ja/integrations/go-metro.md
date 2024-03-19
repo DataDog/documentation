@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: go-metro
-oauth: {}
 public_title: Go-Metro
 short_description: ホスト間の TCP RTT を受動的に計算
 supported_os:

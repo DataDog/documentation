@@ -8,9 +8,11 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- メトリクス
+- ログの収集
+- モニター
+- apm
 - ネットワーク
-- トレーシング
+- profiler_troubleshooting
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_flutter/README.md
 display_on_public_website: true
@@ -23,26 +25,21 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: rum_flutter
-oauth: {}
 public_title: Flutter
 short_description: Datadog RUM を使用した Flutter アプリケーションの監視とメトリクス生成
 supported_os:
 - android
-- linux
-- windows
 - ios
-- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
   - Category::Metrics
+  - Category::Mobile
   - Category::Network
   - Category::Tracing
   - Supported OS::Android
-  - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::iOS
-  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog RUM を使用した Flutter アプリケーションの監視とメトリクス生成
   media: []

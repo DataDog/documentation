@@ -32,12 +32,11 @@ draft: false
 git_integration_title: amazon_kafka
 integration_id: amazon-kafka
 integration_title: Amazon MSK (Agent)
-integration_version: 4.4.0
+integration_version: 4.5.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: amazon_kafka
-oauth: {}
 public_title: Amazon MSK (Agent)
 short_description: Amazon MSK クラスターの健全性とパフォーマンスを監視。
 supported_os:

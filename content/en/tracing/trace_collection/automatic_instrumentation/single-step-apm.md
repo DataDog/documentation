@@ -4,11 +4,17 @@ kind: documentation
 is_beta: true
 aliases:
 - /tracing/trace_collection/single-step-apm
+further_reading:
+  - link: /tracing/metrics/runtime_metrics/
+    tag: Documentation
+    text: Enable Runtime Metrics
 ---
 
 ## Requirements
 
-Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
+- **Languages and architectures**: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
+
+- **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ## Enabling APM on your services in one step
 
@@ -29,7 +35,7 @@ For an Ubuntu host:
    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
    ```
 
-   a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
+   a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4].
 
    b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
    <div class="alert alert-info">
@@ -52,7 +58,7 @@ By default, enabling APM on your server installs support for Java, Python, Ruby,
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. Language names are comma-separated.
+You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
 Supported languages include:
 
@@ -124,7 +130,7 @@ For example, to install support for only v1.25.0 of the Java tracing library and
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. Language names are comma-separated.
+You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
 Supported languages include:
 
@@ -167,7 +173,7 @@ docker run -d --name dd-agent \
 
 You can enable APM by installing the Agent with the Datadog Helm chart. This deploys the Datadog Agent across all nodes in your Linux-based Kubernetes cluster with a DaemonSet.
 
-**Note:** Single step instrumentation is deployed to the `default` namespace and does not instrument any applications in the same namespace.
+**Note**: Single step instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.
 
 ### Requirements
 
@@ -228,19 +234,18 @@ To enable single step instrumentation with Helm:
 
 You can choose to selectively instrument specific namespaces or choose to not instrument them.
 
-To enable instrumentation for specific namespaces, replace `enabled: true` with `enabledNamespaces` configuration in your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=6-8" >}}
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to your `datadog-values.yaml` file:
+{{< highlight yaml "hl_lines=6-9" >}}
       datadog:
         apiKeyExistingSecret: datadog-secret
         site: <DATADOG_SITE>
         apm:
           instrumentation:
+            enabled:true
             enabledNamespaces: # Add namespaces to instrument
                - namespace_1
                - namespace_2
  {{< /highlight >}}
-
-<div class="alert alert-info">The <code>enabled: true</code> option enables instrumentation for the entire cluster. You need to remove this to only enable instrumentation for specific namespaces.</a></div>
 
 To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
 {{< highlight yaml "hl_lines=7-9" >}}
@@ -393,6 +398,10 @@ To stop producing traces, remove library injectors and restart the infrastructur
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config

@@ -246,11 +246,11 @@
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of test events from your organization."
   },
   "ListCIAppTestEvents": {
-    "description": "List endpoint returns CI Visibility test events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
+    "description": "List endpoint returns CI Visibility test events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
     "summary": "Get a list of tests events"
   },
   "SearchCIAppTestEvents": {
-    "description": "List endpoint returns CI Visibility test events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "description": "List endpoint returns CI Visibility test events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search tests events",
     "request_description": "",
     "request_schema_description": "The request for a tests search."
@@ -312,11 +312,11 @@
     "summary": "Cloud Cost Enabled"
   },
   "GetActiveBillingDimensions": {
-    "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 17th of the following month.",
+    "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
   },
   "GetMonthlyCostAttribution": {
-    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 17th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
+    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
     "summary": "Get Monthly Cost Attribution"
   },
   "ListCurrentUserApplicationKeys": {
@@ -767,6 +767,30 @@
     "request_description": "",
     "request_schema_description": "Relationship to role."
   },
+  "ListLogsCustomDestinations": {
+    "description": "Get the list of configured custom destinations in your organization with their definitions.",
+    "summary": "Get all custom destinations"
+  },
+  "CreateLogsCustomDestination": {
+    "description": "Create a custom destination in your organization.",
+    "summary": "Create a custom destination",
+    "request_description": "The definition of the new custom destination.",
+    "request_schema_description": "The custom destination."
+  },
+  "DeleteLogsCustomDestination": {
+    "description": "Delete a specific custom destination in your organization.",
+    "summary": "Delete a custom destination"
+  },
+  "GetLogsCustomDestination": {
+    "description": "Get a specific custom destination in your organization.",
+    "summary": "Get a custom destination"
+  },
+  "UpdateLogsCustomDestination": {
+    "description": "Update the given fields of a specific custom destination in your organization.",
+    "summary": "Update a custom destination",
+    "request_description": "New definition of the custom destination's fields.",
+    "request_schema_description": "The custom destination."
+  },
   "ListLogsMetrics": {
     "description": "Get the list of configured log-based metrics with their definitions.",
     "summary": "Get all log-based metrics"
@@ -872,6 +896,10 @@
   "ListTagsByMetricName": {
     "description": "View indexed tag key-value pairs for a given metric name.",
     "summary": "List tags by metric name"
+  },
+  "ListMetricAssets": {
+    "description": "Returns dashboards, monitors, notebooks, and SLOs that a metric is stored in, if any.  Updated every 24 hours.",
+    "summary": "Related Assets to a Metric"
   },
   "EstimateMetricsOutputSeries": {
     "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
@@ -986,6 +1014,34 @@
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "ListCSMThreatsAgentRules": {
+    "description": "Get the list of Cloud Security Management Threats Agent rules.",
+    "summary": "Get all CSM Threats Agent rules"
+  },
+  "CreateCSMThreatsAgentRule": {
+    "description": "Create a new Cloud Security Management Threats Agent rule with the given parameters.",
+    "summary": "Create a CSM Threats Agent rule",
+    "request_description": "The definition of the new Agent rule.",
+    "request_schema_description": "Request object that includes the Agent rule to create."
+  },
+  "DeleteCSMThreatsAgentRule": {
+    "description": "Delete a specific Cloud Security Management Threats Agent rule.",
+    "summary": "Delete a CSM Threats Agent rule"
+  },
+  "GetCSMThreatsAgentRule": {
+    "description": "Get the details of a specific Cloud Security Management Threats Agent rule.",
+    "summary": "Get a CSM Threats Agent rule"
+  },
+  "UpdateCSMThreatsAgentRule": {
+    "description": "Update a specific Cloud Security Management Threats Agent rule.\nReturns the Agent rule object when the request is successful.",
+    "summary": "Update a CSM Threats Agent rule",
+    "request_description": "New definition of the Agent rule.",
+    "request_schema_description": "Request object that includes the Agent rule with the attributes to update."
+  },
+  "DownloadCSMThreatsPolicy": {
+    "description": "The download endpoint generates a CSM Threats policy file from your currently active\nCSM Threats rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
+    "summary": "Get the latest CSM Threats policy"
   },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",

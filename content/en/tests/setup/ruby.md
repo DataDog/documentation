@@ -7,7 +7,7 @@ code_lang_weight: 40
 aliases:
   - /continuous_integration/setup_tests/ruby
   - /continuous_integration/tests/ruby
-  - continuous_integration/tests/setup/ruby
+  - /continuous_integration/tests/setup/ruby
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"

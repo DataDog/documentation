@@ -98,49 +98,49 @@
   ],
   "ArchiveCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Archive case returns \"OK\" response"
     }
   ],
   "AssignCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Assign case returns \"OK\" response"
     }
   ],
   "CreateCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Create a case returns \"CREATED\" response"
     }
   ],
   "UnarchiveCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Unarchive case returns \"OK\" response"
     }
   ],
   "UnassignCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Unassign case returns \"OK\" response"
     }
   ],
   "UpdatePriority": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Update case priority returns \"OK\" response"
     }
   ],
   "UpdateStatus": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Update case status returns \"OK\" response"
     }
@@ -173,11 +173,25 @@
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
     }
   ],
+  "CreateCSMThreatsAgentRule": [
+    {
+      "group": "cloud_workload_security",
+      "suffix": "",
+      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "cloud_workload_security",
       "suffix": "",
       "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentRule": [
+    {
+      "group": "cloud_workload_security",
+      "suffix": "",
+      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
@@ -320,6 +334,11 @@
     },
     {
       "group": "gcp_integration",
+      "suffix": "_194782945",
+      "description": "Create a new entry for your service account with cloud run revision filters enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
       "suffix": "_4235664992",
       "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
     },
@@ -339,6 +358,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Update STS Service Account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2241994060",
+      "description": "Update STS Service Account returns \"OK\" response with cloud run revision filters"
     },
     {
       "group": "gcp_integration",
@@ -524,6 +548,35 @@
       "group": "logs",
       "suffix": "",
       "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    }
+  ],
+  "CreateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2184123765",
+      "description": "Create a Basic HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1091442807",
+      "description": "Create a Custom Header HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1288180912",
+      "description": "Create a Splunk custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_141236188",
+      "description": "Create an Elasticsearch custom destination returns \"OK\" response"
+    }
+  ],
+  "UpdateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "",
+      "description": "Update a custom destination returns \"OK\" response"
     }
   ],
   "CreateLogsMetric": [

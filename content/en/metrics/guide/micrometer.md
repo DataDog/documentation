@@ -2,7 +2,7 @@
 title: Send metrics with Micrometer
 kind: Guide
 further_reading:
-- link: "https://micrometer.io/docs/registry/otlp"
+- link: "https://docs.micrometer.io/micrometer/reference/implementations/otlp"
   tag: "Micrometer"
   text: "Micrometer OTLP"
 - link: "https://micrometer.io/docs/registry/prometheus"

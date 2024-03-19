@@ -4,6 +4,9 @@ kind: documentation
 aliases:
 - /getting_started/application_security/vulnerability_management
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
+  tag: "Blog"
+  text: "Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis"
 - link: "/code_analysis/software_composition_analysis/"
   tag: "Documentation"
   text: "Read more about Software Composition Analysis in source code"

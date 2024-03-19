@@ -39,11 +39,12 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: meraki
-oauth: {}
 public_title: Cisco Meraki
 short_description: NDM メトリクス、ログ、Cloud SIEM を使用して Cisco Meraki プラットフォームを監視する
 supported_os:
-- any
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -53,7 +54,9 @@ tile:
   - Category::SNMP
   - Submitted Data Type::Logs
   - Submitted Data Type::Metrics
-  - Supported OS::Any
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: NDM メトリクス、ログ、Cloud SIEM を使用して Cisco Meraki プラットフォームを監視する
   media: []

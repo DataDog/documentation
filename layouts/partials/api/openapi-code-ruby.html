@@ -1,0 +1,69 @@
+{{- define "partials/api/openapi-code-ruby-get.html" -}}
+require "uri"
+require "net/http"
+
+url = URI("https://api.cloudcraft.co{{ .path }}")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Get.new(url)
+
+response = https.request(request)
+puts response.read_body
+{{- end -}}
+
+{{- define "partials/api/openapi-code-ruby-delete.html" -}}
+require "uri"
+require "net/http"
+
+url = URI("https://api.cloudcraft.co{{ .path }}")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Delete.new(url)
+
+response = https.request(request)
+puts response.read_body
+{{- end -}}
+
+{{- define "partials/api/openapi-code-ruby-put.html" -}}
+require "uri"
+require "net/http"
+
+url = URI("https://api.cloudcraft.co{{ .path }}")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Put.new(url)
+request.body = "{\n    \"name\": \"My updated AWS Account\",\n    \"roleArn\": \"arn:aws:iam::1234567890:role/cloudcraft\"\n}\n"
+
+response = https.request(request)
+puts response.read_body
+{{- end -}}
+
+{{- define "partials/api/openapi-code-ruby-post.html" -}}
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("https://api.cloudcraft.co{{ .path }}")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request.body = JSON.dump({
+  {{ .payload }}
+})
+
+response = https.request(request)
+puts response.read_body
+{{- end -}}
+
+{{- $p := printf "partials/api/openapi-code-ruby-%s.html" .method -}}
+{{- $pr := partial $p (dict "payload" .payload "path" .path) }}
+{{- highlight (trim $pr "\n\r") "ruby" -}}
