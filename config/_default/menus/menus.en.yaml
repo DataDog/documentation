@@ -3391,19 +3391,16 @@ main:
     weight: 190000
   - name: Setup
     url: dora_metrics/setup
-    pre: ci
     parent: dora_metrics
     identifier: dora_metrics_setup
     weight: 190001
   - name: Deployment events
     url: dora_metrics/setup/deployments
-    pre: ci
     parent: dora_metrics_setup
     identifier: dora_metrics_setup_deployments
     weight: 190002
   - name: Incident events
     url: dora_metrics/setup/incidents
-    pre: ci
     parent: dora_metrics_setup
     identifier: dora_metrics_setup_incidents
     weight: 190003
