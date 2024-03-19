@@ -75,7 +75,7 @@ Doing this enables Datadog to add them to the auto-detection list, and to work w
 
 ## Segmentation faults in `gc_finalize_deferred` in Ruby versions 2.6 to 3.2
 
-A workaround for this issue is automatically applied since [`dd-trace-rb` version 1.21.0][3]. We recommend upgrading to this version or later to fix this issue.
+A workaround for this issue is automatically applied since [`dd-trace-rb` version 1.21.0][3]. Datadog recommends upgrading to this version or later to fix this issue.
 
 Prior to version 1.21.0, in rare situations the profiler could trigger [Ruby VM Bug #19991][12] that manifests itself as a "Segmentation fault" with a crash stack trace including the `gc_finalize_deferred` function.
 
