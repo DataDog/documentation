@@ -53,6 +53,11 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
+Notes:
+* The Go build tag `appsec` is not necessary if CGO is enabled with `CGO_ENABLED=1`.
+* Datadog WAF needs the following shared libraries on linux: `libc.so.6` and `libpthread.so.0`.
+* When using the build tag `appsec` and CGO is disabled, the produced binary is still linked dynamically to these libraries.
+
 Add the following environment variable value to your Docker command line:
 
 ```console
