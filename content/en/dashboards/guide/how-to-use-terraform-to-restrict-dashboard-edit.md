@@ -30,7 +30,7 @@ The `is_read_only` attribute is deprecated. It is recommended to use the `restri
 Restriction policies are in beta. Reach out to Datadog support to enable the feature.
 {{< /callout >}} 
 
-[Restriction Policies][1] allow restricting resources to various principals including Roles, Teams, Users, and Service Accounts.
+[Restriction Policies][1] allow you to restrict the editing of dashboards and other resources to specific principals, including roles, teams, users, and service accounts.
 
 Example usage:
 
