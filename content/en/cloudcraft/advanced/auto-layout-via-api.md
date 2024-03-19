@@ -9,7 +9,7 @@ Cloudcraft's **Auto Layout** feature, accessible through the web application, is
 
 This guide provides a step-by-step approach to utilizing this feature via common command-line utilities and the Cloudcraft developer API.
 
-<div class="alert alert-info">The ability to add and scan AWS accounts, as well as to use Cloudcraft's developer API, is only available to Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">Cloudcraft's pricing page</a> for more information.</div>
+<div class="alert alert-info">The ability to add and scan AWS and Azure accounts, as well as to use Cloudcraft's developer API, is only available to Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">Cloudcraft's pricing page</a> for more information.</div>
 
 ## Prerequisites
 
