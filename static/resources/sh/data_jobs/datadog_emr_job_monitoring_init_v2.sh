@@ -44,8 +44,10 @@ EOF
 
 # Adding tags
 echo "tags:" | sudo tee --append /etc/datadog-agent/datadog.yaml
+echo "  - \"init_script_version:1\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"data_workload_monitoring_trial:true\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"cluster_name:${CLUSTER_NAME}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
+echo "  - \"cluster_id:${JOB_FLOW_ID}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"job_flow_id:${JOB_FLOW_ID}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"is_master_node:${IS_MASTER}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 echo "  - \"instance_group_id:${INSTANCE_GROUP_ID}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
