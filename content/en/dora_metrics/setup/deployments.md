@@ -9,6 +9,9 @@ further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
   text: "Check out the latest Software Delivery releases! (App login required)"
+- link: "/continuous_integration/dora_metrics/setup/incidents"
+  tag: "Documentation"
+  text: "Learn about sending incident events"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
@@ -25,7 +28,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics are in private beta. Fill out the form below to be added to the waitlist.
+DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
 ## Overview
@@ -105,12 +108,12 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 
 ## Calculating Change Lead Time
 
-For a single Git commit, the Change Lead Time (CLT) is calculated as the time from the commit creation to when the deployment including the commit change was executed.
+For a single Git commit, the Change Lead Time (CLT) is calculated as time from the creation of the commit to when the deployment including that commit was executed.
 To calculate the Change Lead Time for a deployment, Datadog automatically finds all the commits done since the previous deployment, and computes the average of the related Change Lead Time values.
-Change Lead Time is not available for the first deployment of a service that includes Git information.
+Change Lead Time is not available for the first deployment of a service that includes Git information. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
-For the Change Lead Time metric to be available, two requirements need to be met:
-1. The Git repository URL and the commit SHA information are provided when sending deployment events.
+There are two requirements for calculating Change Lead Time:
+1. Both Git repository URL and commit SHA are provided when sending deployment events.
 2. Your repository metadata is being [synchronized to Datadog](#synchronize-repository-metadata-to-datadog).
 
 ### Synchronize repository metadata to Datadog
@@ -119,10 +122,6 @@ For the Change Lead Time metric to be available, two requirements need to be met
 The Following tabs were mostly copied from the Source Code Integration docs until we find a way to document this in a shared page
 https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=github#synchronize-your-repository-metadata
 -->
-
-<div class="alert alert-info">
-The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing Change Lead Time. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
-</div>
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -171,7 +170,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ### Handling multiple services in the same repository
 
 If the source code of multiple services is present in the same repository, further actions are needed to ensure that the Change Lead Time is calculated by taking into account only the commits affecting the specific service being deployed.
-To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [Service definition][5].
+To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5].
 
 If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
 
@@ -198,6 +197,12 @@ extensions:
 ```
 
 DORA Metrics for the service `shopist` only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
+
+### Limitations
+
+- The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing Change Lead Time.
+Change Lead Time is not available for the first deployment of a service that includes Git information.
+
 
 ## Further Reading
 
