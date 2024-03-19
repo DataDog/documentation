@@ -144,23 +144,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/ui-components-highlight-vdom@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@algolia/ui-components-highlight-vdom@npm:1.2.1"
-  dependencies:
-    "@algolia/ui-components-shared": 1.2.1
-    "@babel/runtime": ^7.0.0
-  checksum: d06721372406678d7d3dcbc75894ff727994e7f71d9d53a0c7b94705d694826977082b4ae2cd1bd847a271661d2b6921ba9ffed26401289d06b1c609415b7e74
-  languageName: node
-  linkType: hard
-
-"@algolia/ui-components-shared@npm:1.2.1, @algolia/ui-components-shared@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@algolia/ui-components-shared@npm:1.2.1"
-  checksum: e0e7c06fbfc855c24283446a903adff3e4523c9a1652cfb187f3d701278d246f9ef23b7d80c0ec9e933f9a835d0a2227906f6e92b4fca5e315e89abcf8049b2f
-  languageName: node
-  linkType: hard
-
 "@apidevtools/json-schema-ref-parser@npm:^8.0.0":
   version: 8.0.0
   resolution: "@apidevtools/json-schema-ref-parser@npm:8.0.0"
@@ -1803,16 +1786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0":
-  version: 7.20.1
-  resolution: "@babel/runtime@npm:7.20.1"
-  dependencies:
-    regenerator-runtime: ^0.13.10
-  checksum: 00567a333d3357925742a6f5e39394dcc0af6e6029103fe188158bf7ae8b0b3ee3c6c0f68fccc217f0a6cfa455f6be252298baf56b3f5ff37b34313b170cd9f6
-  languageName: node
-  linkType: hard
-
-"@babel/runtime@npm:^7.23.2":
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.23.2":
   version: 7.24.1
   resolution: "@babel/runtime@npm:7.24.1"
   dependencies:
@@ -2833,14 +2807,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"algoliasearch-helper@npm:^3.11.3":
-  version: 3.12.0
-  resolution: "algoliasearch-helper@npm:3.12.0"
+"algoliasearch-helper@npm:3.16.3":
+  version: 3.16.3
+  resolution: "algoliasearch-helper@npm:3.16.3"
   dependencies:
     "@algolia/events": ^4.0.1
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: 177ead2a04c60f1005a9ccac4096714cd992f0f158b91791deb719765f9a94ea67efc782f29cf5182e9a8ce75bcf7461bb8bf8bab9846b5fa1b9ed1f8a2b902f
+  checksum: b4664168e2900628e274508dbf4a7f366fa1397468ba49bd0a5c4f2b0d2d1f7ed8bd137ca218a6d142fec49963b7c0774e8929371e1906416bf0d82bcbb61fc1
   languageName: node
   linkType: hard
 
@@ -4758,15 +4732,15 @@ __metadata:
     fancy-log: ^1.3.3
     geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz"
     hugo-bin: 0.108.0
-    instantsearch.js: ^4.53.0
-    jest: ^25.3.0
+    instantsearch.js: ^4.66.0
+    jest: ^25.5.4
     js-cookie: ^2.2.1
     js-yaml: ^3.14.1
-    jshint: 2.10.2
+    jshint: 2.13.6
     jshint-stylish: 2.2.1
-    json2csv: ^4.5.2
+    json2csv: ^4.5.4
     lazypipe: 1.0.2
-    lodash: ^4.17.20
+    lodash: ^4.17.21
     marked: ^1.2.7
     merge-stream: 2.0.0
     minimist: ^1.2.5
@@ -6931,26 +6905,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"instantsearch.js@npm:^4.53.0":
-  version: 4.53.0
-  resolution: "instantsearch.js@npm:4.53.0"
+"instantsearch-ui-components@npm:0.4.0":
+  version: 0.4.0
+  resolution: "instantsearch-ui-components@npm:0.4.0"
+  dependencies:
+    "@babel/runtime": ^7.1.2
+  checksum: 1878547d4c7c26d3d96161a25f9830e39148acaee40322bc6c23ec85d80fc71f459112f6c6f2d1d582faa6f17dbbebf601cb1326dcb4df55513ca8b950ba7cb2
+  languageName: node
+  linkType: hard
+
+"instantsearch.js@npm:^4.66.0":
+  version: 4.66.0
+  resolution: "instantsearch.js@npm:4.66.0"
   dependencies:
     "@algolia/events": ^4.0.1
-    "@algolia/ui-components-highlight-vdom": ^1.2.1
-    "@algolia/ui-components-shared": ^1.2.1
     "@types/dom-speech-recognition": ^0.0.1
     "@types/google.maps": ^3.45.3
     "@types/hogan.js": ^3.0.0
     "@types/qs": ^6.5.3
-    algoliasearch-helper: ^3.11.3
+    algoliasearch-helper: 3.16.3
     hogan.js: ^3.0.2
     htm: ^3.0.0
+    instantsearch-ui-components: 0.4.0
     preact: ^10.10.0
     qs: ^6.5.1 < 6.10
-    search-insights: ^2.1.0
+    search-insights: ^2.13.0
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: b27699ce6f3750118e18c814c3276b4216c3c984c6265aa7a8c6f02d59fc774cf9401dbea65b708339eb3edc7f3a5a5e0b1ac32e2642a388269a19661f549594
+  checksum: 0dd4fe5b38ac113b74cd0d4d4661d457babfe4559f196d61943573cfc528ba42c7f527d918894fded3a02aeacad7996d08dc1013f75725322c29a9a5548358c3
   languageName: node
   linkType: hard
 
@@ -8095,7 +8077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^25.3.0":
+"jest@npm:^25.5.4":
   version: 25.5.4
   resolution: "jest@npm:25.5.4"
   dependencies:
@@ -8243,21 +8225,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jshint@npm:2.10.2":
-  version: 2.10.2
-  resolution: "jshint@npm:2.10.2"
+"jshint@npm:2.13.6":
+  version: 2.13.6
+  resolution: "jshint@npm:2.13.6"
   dependencies:
     cli: ~1.0.0
     console-browserify: 1.1.x
     exit: 0.1.x
     htmlparser2: 3.8.x
-    lodash: ~4.17.11
+    lodash: ~4.17.21
     minimatch: ~3.0.2
-    shelljs: 0.3.x
     strip-json-comments: 1.0.x
   bin:
-    jshint: ./bin/jshint
-  checksum: 4ebe995ff2a1f3f02aa8878c787e171129b007f76e16bb0303057b73955b958c29d8cc51cba384a4ccbf6f42893f1130da86c5f0e163d50f2fb7a9f373ad94b8
+    jshint: bin/jshint
+  checksum: ec7f67feef215445a338f4d1594396428db42a47cb2e157e543331b41a7d590d83fa6441302af4d19a1700e1f9132328747913090d5590d2730798de4c9826d2
   languageName: node
   linkType: hard
 
@@ -8312,7 +8293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json2csv@npm:^4.5.2":
+"json2csv@npm:^4.5.4":
   version: 4.5.4
   resolution: "json2csv@npm:4.5.4"
   dependencies:
@@ -8608,14 +8589,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.14, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:~4.17.11":
+"lodash@npm:^4.17.14, lodash@npm:^4.17.19":
   version: 4.17.20
   resolution: "lodash@npm:4.17.20"
   checksum: b31afa09739b7292a88ec49ffdb2fcaeb41f690def010f7a067eeedffece32da6b6847bfe4d38a77e6f41778b9b2bca75eeab91209936518173271f0b69376ea
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.21, lodash@npm:^4.17.5":
+"lodash@npm:^4.17.21, lodash@npm:^4.17.5, lodash@npm:~4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -10637,13 +10618,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.10":
-  version: 0.13.10
-  resolution: "regenerator-runtime@npm:0.13.10"
-  checksum: 09893f5a9e82932642d9a999716b6c626dc53ef2a01307c952ebbf8e011802360163a37c304c18a6c358548be5a72b448e37209954a18696f21e438c81cbb4b9
-  languageName: node
-  linkType: hard
-
 "regenerator-runtime@npm:^0.13.4":
   version: 0.13.7
   resolution: "regenerator-runtime@npm:0.13.7"
@@ -11220,10 +11194,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"search-insights@npm:^2.1.0":
-  version: 2.2.1
-  resolution: "search-insights@npm:2.2.1"
-  checksum: 6809c0bb63af4846c60089b655f2a2485e5db5ed3a545b947939b678e2413f6aa924ff4834295d787c58a3f2c257654b3ae9bef255dd640f0d867f6cb304b2d0
+"search-insights@npm:^2.13.0":
+  version: 2.13.0
+  resolution: "search-insights@npm:2.13.0"
+  checksum: 6d553606c879fe67f9ce1bbeb3c909cdb1401a336679d321656f065985a4999ba57882850fdabf4df6bef72d179b71e5ccb5f5f9a04143bc4da52dd8ba66fab3
   languageName: node
   linkType: hard
 
@@ -11399,15 +11373,6 @@ __metadata:
   version: 3.0.0
   resolution: "shebang-regex@npm:3.0.0"
   checksum: 1a2bcae50de99034fcd92ad4212d8e01eedf52c7ec7830eedcf886622804fe36884278f2be8be0ea5fde3fd1c23911643a4e0f726c8685b61871c8908af01222
-  languageName: node
-  linkType: hard
-
-"shelljs@npm:0.3.x":
-  version: 0.3.0
-  resolution: "shelljs@npm:0.3.0"
-  bin:
-    shjs: ./bin/shjs
-  checksum: 6e57d6bff3bb101525f251fd80358b983fb9c8175dc31593496bfcdf66701b78dba33b9319e38026ac31b2c80875794fc71bd2fdd9cdb86fbeb81fcbfce28d7b
   languageName: node
   linkType: hard
 
