@@ -20,9 +20,7 @@ resource "datadog_dashboard" "example" {
 }
 ```
 
-<div class="alert alert-warning">
-The `is_read_only` attribute is deprecated. It is recommended to use the `restricted_roles` attribute or Restriction Policies to manage access to your dashboards.
-</div>
+**Note**: The `is_read_only` attribute is deprecated. It is recommended to use the `restricted_roles` attribute or restriction policies to manage access to your dashboards.
 
 ## Restricting a dashboard using a restriction policy
 
