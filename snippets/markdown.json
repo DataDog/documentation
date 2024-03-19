@@ -261,7 +261,7 @@
 			"blog: engineering",
 			"date: YYYY-MM-DD",
 			"publishDate: YYYY-MM-DD",
-			"description: \"A-short-summary-of-the-post-to-be-used-on-the-front-page-of-the-blog\"",
+			"description: \"A short summary of the post to be used on the front page of the blog\"",
 			"specific_interest:",
 			"core_product:",
 			" - product-name",
@@ -270,7 +270,7 @@
 			"private: false",
 			"slug: identical-to-your-markdown-filename",
 			"series: if-the-post-is-one-in-a-series-add-series-identifier",
-			"title: \"title-of-the-blog\"",
+			"title: \"Title of the Blog\"",
 			"image: filename-of-hero-image.png",
 			"preview_image: filename-of-hero-image.png",
             "---"
