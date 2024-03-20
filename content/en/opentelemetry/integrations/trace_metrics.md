@@ -49,15 +49,39 @@ service:
 
 ## Data collected
 
-See [Trace Metrics][2].
+[Trace Metrics][2] are generated for service entry spans and measured spans. These span conventions are unique to Datadog, so OpenTelemetry spans are identified with the following mapping:
+| OpenTelemetry Convention | Datadog Convention |
+| --- | --- |
+| Root span | Service entry span |
+| Server span (`span.kind: server`) | Service entry span |
+| Consumer span (`span.kind: consumer`) | Service entry span |
+| Client span (`span.kind: client`) | Measured span |
+| Producer span (`span.kind: producer`) | Measured span |
+| Internal span (`span.kind: internal`) | No trace metrics generated |
+
+[Span kind][4] is typically set when a span is created, but can also be updated by using the [transform processor][5] in order to control the mapping above. For example, if trace metrics are desired for an internal span, the following configuration will transform an internal span with `http.path: "/health"` into a server span:
+```yaml
+  transform:
+    trace_statements:
+      - context: span
+        statements:
+          - set(kind.string, "Server") where kind.string == "Internal" and attributes["http.path"] == "/health"
+```
+
+<div class="alert alert-info">
+This service entry span logic is a new behavior that may increase the number of spans that generate trace metrics. This change can be disabled if needed by enabling the `disable_otlp_compute_top_level_by_span_kind` feature flag, but this may result in OpenTelemetry spans being misidentified as service entry spans.
+</div>
 
 ## Full example configuration
 
 For a full working example configuration with the Datadog exporter, see [`trace-metrics.yaml`][3].
 
+## Service-entry span mapping
 
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
 [2]: /tracing/metrics/metrics_namespace/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/trace-metrics.yaml
+[4]: https://opentelemetry.io/docs/specs/otel/trace/api/#spankind
+[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/transformprocessor/README.md
