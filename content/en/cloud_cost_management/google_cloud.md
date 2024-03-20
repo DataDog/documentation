@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-To use Google Cloud Cost Management in Datadog, you must configure the [Google Cloud Platform Integration][12] and set up the [detailed usage cost][14] billing export for your desired billing account.
+To use Google Cloud Cost Management in Datadog, you must configure the [Google Cloud Platform Integration][12] and set up the [detailed usage cost][13] billing export for your desired billing account.
 Additionally, the Google Cloud Platform Datadog Integration Service Account must have the [necessary permissions][13] configured to interact with Google Cloud Storage and BigQuery.
 
 ## Setup
@@ -30,8 +30,8 @@ Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integ
 If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
 
 <div class="alert alert-warning">
-**Note**: The [Datadog Google Cloud Platform integration][4] will automatically monitor any projects this Service Account has access to.
-Cloud Cost Management will process all the resources in the project, but to limit infrastructure monitoring for these projects, Limit Metric Collection in the integration tile.
+**Note**: The [Datadog Google Cloud Platform integration][4] automatically monitors any projects this Service Account has access to.
+Cloud Cost Management processes all the resources in the project. To limit Infrastructure Monitoring hosts for these projects, use Limit Metric Collection in the integration tile.
 </div>
 
 {{< img src="cloud_cost/gcp_integration_limit_metric_collection" alt="In GCP Integration tile, limit metric collection" >}}
@@ -135,10 +135,10 @@ You can visualize your ingested data using the following cost types:
 | Cost Type | Description |
 | ----------| ----------------------------------|
 | `gcp.cost.amortized` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
-| `gcp.cost.amortized.shared.resources.allocated` | All of your GCP amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][15].|
+| `gcp.cost.amortized.shared.resources.allocated` | All of your GCP amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][14].|
 
 ### Container allocation
-**Container allocation** metrics contain all of the same costs as the GCP metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][15] for more details.
+**Container allocation** metrics contain all of the same costs as the GCP metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][14] for more details.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -155,6 +155,5 @@ You can visualize your ingested data using the following cost types:
 [10]: https://cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
 [12]: /integrations/google_cloud_platform/
-[13]: /cloud_cost_management/google_cloud/#provide-service-account-necessary-permissions
-[14]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
-[15]: https://docs.datadoghq.com/cloud_cost_management/container_cost_allocation/
+[13]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
+[14]: /cloud_cost_management/container_cost_allocation/
