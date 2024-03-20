@@ -45,6 +45,9 @@ The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-t
  2. Enable the [Detailed Usage cost][2] export (select or create a project and a BigQuery dataset).
  3. Document the `Billing Account ID` for the billing account where the export was configured, as well as the export `Project ID` and `Dataset Name`.
 
+{{< img src="cloud_cost/billing_export" alt="GCP project and dataset info highlighted" >}}
+
+
 #### Enable Google Service APIs
 The following permissions allow Datadog to access and transfer the billing export into the storage bucket using a scheduled BigQuery query.
 
