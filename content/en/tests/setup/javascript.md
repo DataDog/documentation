@@ -110,9 +110,9 @@ You can add custom tags to your tests by using the current active span:
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-Just like tags, you can add custom metrics to your tests by using the current active span:
+Just like tags, you can add custom measures to your tests by using the current active span:
 
 ```javascript
   it('sum function can sum', () => {
@@ -122,10 +122,10 @@ Just like tags, you can add custom metrics to your tests by using the current ac
     // ...
   })
 ```
-Read more about custom metrics in [Add Custom Metrics Guide][2].
+Read more about custom measures in [Add Custom Measures Guide][2].
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+[2]: /continuous_integration/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
@@ -179,9 +179,9 @@ The format of the annotations is the following, where `$TAG_NAME` and `$TAG_VALU
   "description": "$TAG_VALUE"
 }
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-Custom metrics also use custom annotations:
+Custom measures also use custom annotations:
 
 ```javascript
 test('user profile', async ({ page }) => {
@@ -243,9 +243,9 @@ You can add custom tags to your test by grabbing the current active span:
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-You may also add custom metrics to your test by grabbing the current active span:
+You may also add custom measures to your test by grabbing the current active span:
 
 ```javascript
   When('the function is called', function () {
@@ -255,10 +255,10 @@ You may also add custom metrics to your test by grabbing the current active span
     // ...
   })
 ```
-Read more about custom metrics in [Add Custom Metrics Guide][2]
+Read more about custom measures in [Add Custom Measures Guide][2]
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+[2]: /continuous_integration/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -440,9 +440,9 @@ it('renders a hello world', () => {
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Node.js custom instrumentation documentation.
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-To add custom metrics to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourNumericalTags: 1 })` in your test or hooks.
+To add custom measures to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourNumericalTags: 1 })` in your test or hooks.
 
 For example:
 
@@ -456,7 +456,7 @@ it('renders a hello world', () => {
 })
 ```
 
-Read more about custom metrics in [Add Custom Metrics Guide][6].
+Read more about custom measures in [Add Custom Measures Guide][6].
 
 ### Cypress - RUM integration
 
@@ -468,7 +468,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[6]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+[6]: /continuous_integration/guides/add_custom_measures/?tab=javascripttypescript
 [7]: /real_user_monitoring/browser/#setup
 [8]: /continuous_integration/guides/rum_integration/
 [9]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
@@ -692,7 +692,7 @@ const testAddTagsCh = channel('dd-trace:ci:manual:test:addTags')
 // code for your testing framework continues here ...
 ```
 
-The payload to be published is a dictionary `<string, string|number>` of tags or metrics that are added to the test.
+The payload to be published is a dictionary `<string, string|number>` of tags or measures that are added to the test.
 
 
 ### Run the tests

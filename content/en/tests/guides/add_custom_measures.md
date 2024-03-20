@@ -1,9 +1,9 @@
 ---
-title: Add Custom Metrics To Your Tests
+title: Add Custom Measures To Your Tests
 kind: guide
-description: Learn how to use custom metrics (measures) in your tests.
+description: Learn how to use custom measures in your tests.
 aliases:
-- /continuous_integration/guides/add_custom_metrics/
+- /continuous_integration/guides/add_custom_measures/
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
@@ -20,13 +20,11 @@ further_reading:
 
 ## Overview
 
-Before you begin, make sure that [Test Visibility][1] is already set up for your language. This guide walks you through adding and using custom metrics for your tests.
+Before you begin, make sure that [Test Visibility][1] is already set up for your language. This guide walks you through adding and using custom measures for your tests.
 
-<div class="alert alert-warning">These custom metrics are <strong>not</strong> <a href="/metrics">Datadog metrics</a>. They are numerical tags (also known as measures) that represent things like memory usage or request rates.</div>
+## Add the custom measure to your test
 
-## Add the custom metric to your test
-
-Add the custom metric to your test. The native instrumentation allows you to use the programmatic API:
+Add the custom measure to your test. The native instrumentation allows you to use the programmatic API:
 
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
@@ -102,10 +100,10 @@ Datadog::CI.active_test&.set_tag('test.memory.usage', 1e8)
 
 {{% tab "JUnit Report Uploads" %}}
 
-For `datadog-ci`, use the `DD_METRICS` environment variable or `--metrics` CLI argument:
+For `datadog-ci`, use the `DD_MEASURES` environment variable or `--measures` CLI argument:
 
 ```
-DD_METRICS="test.memory.usage:1000" datadog-ci junit upload --service my-service --metrics test.request.rate:30 report.xml
+DD_MEASURES="test.memory.usage:1000" datadog-ci junit upload --service my-service --measures test.request.rate:30 report.xml
 ```
 
 {{% /tab %}}
@@ -114,7 +112,7 @@ DD_METRICS="test.memory.usage:1000" datadog-ci junit upload --service my-service
 
 ## Create a facet
 
-Create a facet for the custom metric you added to the test by navigating to the [**Test Runs** page][2] and clicking **+ Add** on the facet list.
+Create a facet for the custom measure you added to the test by navigating to the [**Test Runs** page][2] and clicking **+ Add** on the facet list.
 
 {{< img src="/continuous_integration/facet_creation.png" text="Test Runs facet creation" style="width:100%" >}}
 
@@ -122,11 +120,11 @@ Make sure that the type of facet is **Measure**, which represents a numerical va
 
 {{< img src="/continuous_integration/measure_creation.png" text="Test Runs measure creation" style="width:100%" >}}
 
-Click **Add** to start using your custom metric.
+Click **Add** to start using your custom measure.
 
-## Graph the evolution of your metric
+## Graph the evolution of your measure
 
-Plot the evolution of your metric across time by selecting the **Timeseries** visualization:
+Plot the evolution of your measure across time by selecting the **Timeseries** visualization:
 
 {{< img src="/continuous_integration/plot_measure.png" text="Plot benchmark mean duration" style="width:100%" >}}
 
@@ -140,7 +138,7 @@ You can export your graph to a [dashboard][3] or a [notebook][4], and create a [
 
 ## Add a monitor
 
-Get alerted if the value of your metric goes above or below a certain threshold by creating a [CI Tests Monitor][6].
+Get alerted if the value of your measure goes above or below a certain threshold by creating a [CI Tests Monitor][6].
 
 {{< img src="/continuous_integration/monitor_measure.png" text="Monitor benchmark mean duration" style="width:100%" >}}
 

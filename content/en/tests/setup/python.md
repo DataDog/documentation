@@ -70,7 +70,7 @@ Install the Python tracer by running:
 pip install -U ddtrace
 {{< /code-block >}}
 
-For more information, see the [Python tracer installation documentation][4].
+For more information, see the [Python tracer installation documentation][1].
 
 ## Instrumenting your tests
 
@@ -106,9 +106,9 @@ def test_simple_case(ddspan):
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Python custom instrumentation documentation.
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-Just like tags, to add custom metrics to your tests, use the current active span:
+Just like tags, to add custom measures to your tests, use the current active span:
 
 ```python
 from ddtrace import tracer
@@ -120,7 +120,7 @@ def test_simple_case(ddspan):
     # test continues normally
     # ...
 ```
-Read more about custom metrics in the [Add Custom Metrics Guide][2].
+Read more about custom measures in the [Add Custom Measures Guide][2].
 
 ### Known limitations
 
@@ -138,12 +138,12 @@ Plugins that chage the ordering of test execution (such as [`pytest-randomly`][5
 
 The overall count of test events (and their correctness) remain unaffected.
 
+
 [1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
-[2]: /continuous_integration/guides/add_custom_metrics/?tab=python
+[2]: /continuous_integration/guides/add_custom_measures/?tab=python
 [3]: https://pypi.org/project/pytest-xdist/
 [4]: https://pypi.org/project/pytest-forked/
 [5]: https://pypi.org/project/pytest-randomly/
-
 {{% /tab %}}
 
 {{% tab "pytest-benchmark" %}}
@@ -211,7 +211,7 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][8].
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][2].
 
 The following environment variable can be used to configure the location of the Datadog Agent:
 
@@ -219,7 +219,7 @@ The following environment variable can be used to configure the location of the 
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][6] options can also be used.
+All other [Datadog Tracer configuration][3] options can also be used.
 
 ## Collecting Git metadata
 
@@ -229,11 +229,6 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /tracing/trace_collection/dd_libraries/python/
-[5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
-[6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
-[7]: /continuous_integration/guides/add_custom_metrics/?tab=python
-[8]: /getting_started/tagging/unified_service_tagging
+[1]: /tracing/trace_collection/dd_libraries/python/
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
