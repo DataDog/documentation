@@ -336,9 +336,14 @@ Timestamp: 2024-01-22 15:51:24.218 +0000 UTC
 Value: 25
 ```
 
+## Example App
+
+Please refer to the following [example application][6] which demonstrates the configurations discussed in this documentation. This example application comprises of a producer, consumer, broker and zookeeper instance. It demonstrates using the kafka metrics receiver, JMX Receiver and/or JMX Metrics Gatherer.
+
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkametricsreceiver
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jmxreceiver
 [3]: https://github.com/open-telemetry/opentelemetry-java-contrib/blob/main/jmx-metrics 
 [4]: /opentelemetry/collector_exporter/log_collection
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/kafka.yaml
+[6]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/kafka-metrics
