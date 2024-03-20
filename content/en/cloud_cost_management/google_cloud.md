@@ -29,8 +29,10 @@ Additionally, the Google Cloud Platform Datadog Integration Service Account must
 Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
 If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
 
-**Note**: [Datadog Google Cloud Platform integration][4] will automatically monitor any projects this Service Account has access to.
-Cloud Cost processes all resources in a project, regardless of the Metrics Collection limits defined per integration.
+<div class="alert alert-warning">
+**Note**: The [Datadog Google Cloud Platform integration][4] will automatically monitor any projects this Service Account has access to.
+Cloud Cost Management will process all the resources in the project, but to limit infrastructure monitoring for these projects, Limit Metric Collection in the integration tile.
+</div>
 
 ### Enable detailed usage cost export
 <div class="alert alert-info">
