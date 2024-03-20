@@ -30,7 +30,7 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 Incident events are used in order to compute Change Failure Rate and Mean Time to Restore.
 To send incident events, use the [DORA Metrics API][1]. The following attributes are required:
 
-- At least one between `services` and `team`
+- `services` or `team` (at least one must be present)
 - `started_at`
 
 You can optionally add the following attributes to the incident events:
