@@ -1,6 +1,8 @@
 ---
 title: (LEGACY) Deployment Design and Principles
 kind: Documentation
+aliases:
+  - /observability_pipelines/production_deployment_overview/
 ---
 
 {{< site-region region="gov" >}}

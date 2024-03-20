@@ -2,6 +2,8 @@
 title: (LEGACY) Route Logs in Datadog-Rehydratable Format to Amazon S3
 kind: documentation
 disable_toc: false
+aliases:
+  - /observability_pipelines/guide/route_logs_in_datadog_rehydratable_format_to_Amazon_S3/
 further_reading:
   - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"

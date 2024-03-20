@@ -1,6 +1,8 @@
 ---
 title: Transforms
 legacy: true
+aliases:
+  - /observability_pipelines/reference/transforms/
 ---
 
 {{< site-region region="gov" >}}

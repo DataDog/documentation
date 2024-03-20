@@ -1,6 +1,8 @@
 ---
 title: (LEGACY) High Availability and Disaster Recovery
 kind: Documentation
+aliases:
+  - /observability_pipelines/architecture/availability_disaster_recovery/
 ---
 
 {{< site-region region="gov" >}}

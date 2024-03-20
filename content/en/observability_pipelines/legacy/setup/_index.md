@@ -5,6 +5,7 @@ type: multi-code-lang
 aliases:
   - /getting_started/observability_pipelines/
   - /observability_pipelines/installation/
+  - /observability_pipelines/setup/
 further_reading:
   - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"

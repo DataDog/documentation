@@ -1,6 +1,8 @@
 ---
 title: (LEGACY) Advanced Configurations
 kind: Documentation
+aliases:
+  - /observability_pipelines/architecture/advanced_configurations/
 ---
 
 {{< site-region region="gov" >}}

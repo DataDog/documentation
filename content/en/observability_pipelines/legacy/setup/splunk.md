@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /integrations/observability_pipelines/splunk
   - /observability_pipelines/guide/setup_splunk_environment
+  - /observability_pipelines/setup/splunk/
 further_reading:
   - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"
