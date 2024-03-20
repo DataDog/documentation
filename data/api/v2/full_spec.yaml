@@ -1346,11 +1346,10 @@ components:
       - type
       type: object
     AuthNMappingCreateRelationships:
-      description: Relationship of AuthN Mapping create object to Role.
-      properties:
-        role:
-          $ref: '#/components/schemas/RelationshipToRole'
-      type: object
+      description: Relationship of AuthN Mapping create object to a Role or Team.
+      oneOf:
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToRole'
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToTeam'
     AuthNMappingCreateRequest:
       description: Request for creating an AuthN Mapping.
       properties:
@@ -1364,6 +1363,23 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SAMLAssertionAttribute'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/AuthNMappingTeam'
+    AuthNMappingRelationshipToRole:
+      description: Relationship of AuthN Mapping to a Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      required:
+      - role
+      type: object
+    AuthNMappingRelationshipToTeam:
+      description: Relationship of AuthN Mapping to a Team.
+      properties:
+        team:
+          $ref: '#/components/schemas/RelationshipToTeam'
+      required:
+      - team
+      type: object
     AuthNMappingRelationships:
       description: All relationships associated with AuthN Mapping.
       properties:
@@ -1371,6 +1387,8 @@ components:
           $ref: '#/components/schemas/RelationshipToRole'
         saml_assertion_attribute:
           $ref: '#/components/schemas/RelationshipToSAMLAssertionAttribute'
+        team:
+          $ref: '#/components/schemas/RelationshipToTeam'
       type: object
     AuthNMappingResponse:
       description: AuthN Mapping response from the API.
@@ -1382,6 +1400,60 @@ components:
           items:
             $ref: '#/components/schemas/AuthNMappingIncluded'
           type: array
+      type: object
+    AuthNMappingTeam:
+      description: Team.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingTeamAttributes'
+        id:
+          description: The ID of the Team.
+          example: f9bb8444-af7f-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
+      type: object
+    AuthNMappingTeamAttributes:
+      description: Team attributes.
+      properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
+        handle:
+          description: The team's identifier
+          example: example-team
+          maxLength: 195
+          type: string
+        link_count:
+          description: The number of links belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        name:
+          description: The name of the team
+          example: Example Team
+          maxLength: 200
+          type: string
+        summary:
+          description: A brief summary of the team, derived from the `description`
+          maxLength: 120
+          nullable: true
+          type: string
+        user_count:
+          description: The number of users belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
       type: object
     AuthNMappingUpdateAttributes:
       description: Key/Value pair of attributes used for update request.
@@ -1415,11 +1487,10 @@ components:
       - type
       type: object
     AuthNMappingUpdateRelationships:
-      description: Relationship of AuthN Mapping update object to Role.
-      properties:
-        role:
-          $ref: '#/components/schemas/RelationshipToRole'
-      type: object
+      description: Relationship of AuthN Mapping update object to a Role or Team.
+      oneOf:
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToRole'
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToTeam'
     AuthNMappingUpdateRequest:
       description: Request to update an AuthN Mapping.
       properties:
@@ -15702,6 +15773,22 @@ components:
       required:
       - id
       - type
+      type: object
+    RelationshipToTeam:
+      description: Relationship to team.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToTeamData'
+      type: object
+    RelationshipToTeamData:
+      description: Relationship to Team object.
+      properties:
+        id:
+          description: The unique identifier of the team.
+          example: f9bb8444-af7f-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
       type: object
     RelationshipToTeamLinkData:
       description: Relationship between a link and a team
