@@ -34,6 +34,8 @@ If you do not see your desired Service Account in the list, go to the [Google Cl
 Cloud Cost Management will process all the resources in the project, but to limit infrastructure monitoring for these projects, Limit Metric Collection in the integration tile.
 </div>
 
+{{< img src="cloud_cost/gcp_integration_limit_metric_collection" alt="In GCP Integration tile, limit metric collection" >}}
+
 ### Enable detailed usage cost export
 <div class="alert alert-info">
 The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage">detailed usage cost data</a> provides all the information included in the standard usage cost data, along with additional fields that provide granular, resource-level cost data.
