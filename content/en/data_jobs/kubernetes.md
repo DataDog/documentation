@@ -173,7 +173,7 @@ spark-submit \
   --conf spark.kubernetes.authenticate.driver.serviceAccountName=<SERVICE_ACCOUNT> \
   --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true \
   --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest \
-  --conf spark.driver.extraJavaOptions="-Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false -Ddd.service=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>" \
+  --conf spark.driver.extraJavaOptions="-Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>" \
   local:///usr/lib/spark/examples/jars/spark-examples.jar 20
 ```
 

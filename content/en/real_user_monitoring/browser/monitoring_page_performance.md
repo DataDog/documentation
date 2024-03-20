@@ -17,7 +17,7 @@ further_reading:
   - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
     text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/dashboards/"
+  - link: "/real_user_monitoring/platform/dashboards/"
     tag: "Documentation"
     text: "Learn about RUM Dashboards"
 ---
@@ -170,7 +170,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
+Once the timing is sent, the timing is accessible in nanoseconds as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
 
 For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
@@ -195,9 +195,9 @@ document.addEventListener("scroll", function handler() {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/dashboards/
+[1]: /real_user_monitoring/platform/dashboards/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/dashboards/performance
+[3]: /real_user_monitoring/platform/dashboards/performance
 [4]: /real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /synthetics/browser_tests/

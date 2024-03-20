@@ -36,6 +36,10 @@ Out-of-the box rules are available for the following security products:
     - [CSM Identity Risks][14] uses detection rules to detect IAM-based risks in your cloud infrastructure.
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
+## Beta detection rules
+
+Datadog's Security Research team continually adds new OOTB security detection rules. While the aim is to deliver high quality detections with the release of integrations or other new features, the performance of the detection at scale often needs to be observed before making the rule generally available. This gives Datadog's Security Research the time to either refine or deprecate detection opportunities that do not meet our standards.
+
 ## Custom detection rules
 
 There may be situations where you need to customize a rule based on your environment or workload. For example, if you're using ASM, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.

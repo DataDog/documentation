@@ -9,6 +9,8 @@ further_reading:
 
 ## Overview
 
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
+
 On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. 
 
 To make bulk edits to cases within a project, use the checkboxes to select one or more cases. Then, use the drop-down menus to perform actions in bulk, such as status management, assignment, and archiving. When cases are moved to a different project, the cases are assigned a new case ID. The old case URL does not redirect to the new case. 
@@ -58,7 +60,7 @@ To create a custom view:
 
 ## Case details
 
-{{< img src="/service_management/case_management/case_detail_view.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
+{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
 
 The Case Details page acts as the single source of truth on what is going on with the investigation. Each case has the following properties: 
 
@@ -93,6 +95,8 @@ From an individual case:
 - Close out the case: Let the team know that no further action is needed. Update the status of the case to closed.
 
 ## Case Analytics
+
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the cases options selected as a data source" style="width:100%;" >}}
 
 Case Analytics is a queryable data source for aggregated case statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][6] and [Notebooks][2] to analyze team productivity and identify patterns in issues. 
 

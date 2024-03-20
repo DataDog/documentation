@@ -62,6 +62,39 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
   kubectl apply -f /path/to/your/datadog-agent.yaml
   ```
 
+### Running Agents in a single container
+
+<div class="alert alert-warning">Available in Operator v1.4.0 or later</div>
+
+By default, the Datadog Operator creates an Agent DaemonSet with pods running multiple Agent containers. Datadog Operator v1.4.0 introduces a configuration which allows users to run Agents in a single container. In order to avoid elevating privileges for all Agents in the single container, this feature is only applicable when `system-probe` or `security-agent` is not required. For more details, see [Running as an unprivileged user][7] on the Agent Data Security page.
+
+To enable this feature add `global.containerStrategy: single` to the `DatadogAgent` manifest:
+
+{{< highlight yaml "hl_lines=7" >}}
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      containerStrategy: single
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
+    features:
+      apm:
+        enabled: true
+      logCollection:
+        enabled: true
+{{< /highlight >}}
+With the above configuration, Agent pods run as single containers with three Agent processes. The default for `global.containerStrategy` is `optimized` and runs each Agent process in a separate container.
+
+**Note**: Running multiple Agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Pods running multiple processes need their lifecycles to be managed by a process manager, which is not directly controllable by Kubernetes and potentially leads to inconsistencies or conflicts in the container lifecycle management.
+
 ## Validation
 
 Use `kubectl get daemonset` and `kubectl get pod -owide` to validate your installation.
@@ -99,3 +132,4 @@ helm delete my-datadog-operator
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[7]: https://docs.datadoghq.com/data_security/agent/#running-as-an-unprivileged-user

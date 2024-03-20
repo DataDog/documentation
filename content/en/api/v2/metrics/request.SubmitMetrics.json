@@ -5,7 +5,7 @@
       "type": 0,
       "points": [
         {
-          "timestamp": "${NOW}",
+          "timestamp": 1636629071,
           "value": 0.7
         }
       ],

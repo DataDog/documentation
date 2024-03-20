@@ -49,12 +49,11 @@ draft: false
 git_integration_title: nginx
 integration_id: nginx
 integration_title: Nginx
-integration_version: 5.4.1
+integration_version: 6.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx
-oauth: {}
 public_title: Nginx
 short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
 supported_os:
@@ -197,7 +196,7 @@ data:
 [...]
   status.conf: |
     server {
-      listen 18080;
+      listen 81;
 
       location /nginx_status {
         stub_status on;
@@ -216,7 +215,7 @@ spec:
   containers:
     - name: nginx
       ports:
-        - containerPort: 18080
+        - containerPort: 81
       volumeMounts:
         - mountPath: /etc/nginx/conf.d/status.conf
           subPath: status.conf

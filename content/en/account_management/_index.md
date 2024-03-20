@@ -27,12 +27,23 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ### Preferences
 
-You can set your timezone, desktop notifications, and email subscriptions from the [**Preferences** tab][3] within the **Personal Settings** page. Under email subscriptions, you have access to the following reports:
+{{% site-region region="us,us3,us5,eu,ap1" %}}
+You can set your timezone, desktop notifications, and email subscriptions from the [**Preferences** tab][1] within the **Personal Settings** page. Under email subscriptions, you have access to the following reports:
 
 * Daily Digest
 * Weekly Digest
 
 If you are unsure if an email digest is relevant to you, view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to quickly unsubscribe from all email subscriptions.
+
+[1]: https://app.datadoghq.com/account/preferences
+{{% /site-region %}}
+
+{{% site-region region="gov" %}}
+
+You can set your timezone and desktop notifications from the [**Preferences** tab][1] within the **Personal Settings** page.
+
+[1]: https://app.datadoghq.com/account/preferences
+{{% /site-region %}}
 
 ### Organizations
 

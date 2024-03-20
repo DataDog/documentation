@@ -25,7 +25,7 @@ Review the documentation for [configuring the Agent for vulnerability scanning][
 
 ## Prerequisites
 
-Ensure all the [prerequisites][5] are met for CSM Vulnerabilities:
+Ensure all the prerequisites are met for CSM Vulnerabilities:
 
 | Component                | Version/Requirement                     |
 | ------------------------ | ----------------------------------------|
@@ -84,6 +84,5 @@ The workaround for this issue is to set the configuration option `discard_unpack
 [2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
-[5]: /security/cloud_security_management/setup?tab=csmenterprise#csm-vulnerabilities
 [6]: /security/cloud_security_management/troubleshooting
 [7]: /containers/kubernetes/installation/?tab=helm

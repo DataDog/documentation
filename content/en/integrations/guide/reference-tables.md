@@ -21,8 +21,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The Reference Tables feature is currently in public beta. There are no billing implications for defining and querying Reference Tables. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-During the beta, there is a limit of 100 Reference Tables per account.
+Reference Tables are in public beta. There are no billing implications for defining and querying Reference Tables. During the beta, a limit of 100 Reference Tables per account and a limit of 10,000 rows per Reference Table might apply. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 </div>
 
 ## Overview

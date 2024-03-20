@@ -10,10 +10,6 @@ further_reading:
   text: "Incident Management Analytics"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Incident Management is not available on the Datadog {{< region-param key="dd_site_name" >}} site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 {{< img src="/service_management/incidents/incident_details/incident_overview_page.png" alt="Incident details page of an Active SEV-4 incident." style="width:100%;">}}

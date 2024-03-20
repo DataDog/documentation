@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gnatsd
-oauth: {}
 public_title: Gnatsd
 short_description: Datadog で gnatsd クラスターを監視。
 supported_os:

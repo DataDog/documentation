@@ -35,12 +35,13 @@ supported_os:
 - windows
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-[AWS App Mesh][1] は、AWS ECS Fargate クラスターや AWS EKS クラスターで実行するマイクロサービスにアプリケーションレベルのネットワーキングを提供するサービスメッシュです。
+[AWS App Mesh][1] は、Amazon ECS Fargate クラスターや AWS EKS クラスターで実行するマイクロサービスにアプリケーションレベルのネットワーキングを提供するサービスメッシュです。
 
 
-## セットアップ
+## 計画と使用
 
 {{< tabs >}}
 {{% tab "EKS" %}}
@@ -91,7 +92,7 @@ supported_os:
                 path: envoy.yaml
     ```
 
-#### ログの収集
+#### 収集データ
 
 {{< site-region region="us3" >}}
 
@@ -146,7 +147,7 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
             },
     ```
 
-#### ログの収集
+#### 収集データ
 
 {{< site-region region="us3" >}}
 
@@ -192,7 +193,7 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
             },
     ```
 
-#### ログの収集
+#### 収集データ
 
 {{< site-region region="us3" >}}
 
@@ -222,21 +223,21 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
 {{% /tab %}}
 {{< /tabs >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 メトリクス一覧については、[Envoy インテグレーション][2]をご参照ください。
 
-### イベント
+### ヘルプ
 
 AWS  App Mesh インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS App Mesh インテグレーションには、サービスチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

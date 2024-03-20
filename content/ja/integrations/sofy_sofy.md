@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: sofy_sofy
-oauth: {}
 pricing: []
 public_title: Sofy
 short_description: 自動テストケースの実行中にデバイスのメトリクスを監視する

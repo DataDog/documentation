@@ -14,7 +14,7 @@ further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentation
   text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
 kind: documentation
@@ -100,7 +100,51 @@ Agent の構成ファイルおよびフォルダーの場所
 {{% /tab %}}
 {{< /tabs >}}
 
-## トラブルシューティング
+## Agent のアンインストール
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+```shell
+sudo apt-get remove datadog-agent -y
+```
+
+このコマンドでは、Agent は削除されますが以下は削除されません。
+
+* `datadog.yaml` コンフィギュレーションファイル
+* `/etc/datadog-agent` コンフィギュレーションフォルダ内のユーザー作成ファイル
+* `/opt/datadog-agent` フォルダ内のユーザー作成ファイル
+* `dd-agent` ユーザー
+* Datadog ログファイル
+
+以上の要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
+
+```shell
+sudo apt-get remove --purge datadog-agent -y
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo apt-get remove datadog-agent -y
+```
+
+このコマンドでは、Agent は削除されますが以下は削除されません。
+* `datadog.yaml` コンフィギュレーションファイル
+* `/etc/dd-agent` コンフィギュレーションフォルダ内のユーザー作成ファイル
+* `/opt/datadog-agent` フォルダ内のユーザー作成ファイル
+* `dd-agent` ユーザー
+* Datadog ログファイル
+
+以上の要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
+
+```shell
+sudo apt-get --purge remove datadog-agent -y
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## ヘルプ
 
 [Agent のトラブルシューティングに関するドキュメント][3]を参照してください。
 
@@ -114,7 +158,7 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /ja/agent/troubleshooting/
 [4]: /ja/developers/guide/custom-python-package/
