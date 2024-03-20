@@ -3150,6 +3150,11 @@ main:
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_measures
     weight: 111
+  - name: Custom Pipelines API
+    url: continuous_integration/pipelines/custom/
+    parent: pipeline_visibility
+    identifier: ci_custom
+    weight: 112
   - name: Search and Manage
     url: continuous_integration/search/
     parent: ci
@@ -3389,6 +3394,21 @@ main:
     parent: software_delivery_heading
     identifier: dora_metrics
     weight: 190000
+  - name: Setup
+    url: dora_metrics/setup
+    parent: dora_metrics
+    identifier: dora_metrics_setup
+    weight: 1
+  - name: Deployment events
+    url: dora_metrics/setup/deployments
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_deployments
+    weight: 101
+  - name: Incident events
+    url: dora_metrics/setup/incidents
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_incidents
+    weight: 102
   - name: Code Analysis
     url: code_analysis/
     pre: ci
