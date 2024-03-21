@@ -46,7 +46,7 @@ Datadog Application Performance Monitoring (APM) provides deep visibility into y
 
 For an introduction to terminology used in Datadog APM, see [APM Terms and Concepts][1].
 
-## Single Step Instrumentation
+## Getting started
 
 The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
