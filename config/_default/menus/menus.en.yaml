@@ -3404,6 +3404,21 @@ main:
     parent: software_delivery_heading
     identifier: dora_metrics
     weight: 190000
+  - name: Setup
+    url: dora_metrics/setup
+    parent: dora_metrics
+    identifier: dora_metrics_setup
+    weight: 1
+  - name: Deployment events
+    url: dora_metrics/setup/deployments
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_deployments
+    weight: 101
+  - name: Incident events
+    url: dora_metrics/setup/incidents
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_incidents
+    weight: 102
   - name: Code Analysis
     url: code_analysis/
     pre: ci
@@ -4621,7 +4636,7 @@ main:
     pre: rum
     identifier: rum
     parent: ux_monitoring_heading
-    weight: 80000
+    weight: 40000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
@@ -4682,30 +4697,30 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_setup
     weight: 201
-  - name: Advanced Configuration
-    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_advanced
-    weight: 202
-  - name: Data Collected
-    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_data_collected
-    weight: 203
-  - name: Mobile Vitals
-    url: real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_vitals
-    weight: 204
-  - name: Web View Tracking
-    url: real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_web_view_tracking
-    weight: 205
   - name: Crash Reporting
     url: real_user_monitoring/error_tracking/mobile
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_error_tracking
+    weight: 202
+  - name: Advanced Configuration
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_advanced
+    weight: 203
+  - name: Data Collected
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_data_collected
+    weight: 204
+  - name: Mobile Vitals
+    url: real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_vitals
+    weight: 205
+  - name: Web View Tracking
+    url: real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_web_view_tracking
     weight: 206
   - name: Integrated Libraries
     url: real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
