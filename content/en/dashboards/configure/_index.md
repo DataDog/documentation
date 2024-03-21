@@ -30,7 +30,7 @@ Update Markdown-supported dashboard descriptions or associate [teams][1] with a 
 1. Click on the dashboard title or description to edit them. 
 1. Click the check button, to change the title.
 1. Select up to 5 teams from the **Teams** dropdown.
-1. (Optional) Add `[[suggested_dashboards]]` inside the dashboard description for a list of suggested dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other 
+1. (Optional) Add `[[suggested_dashboards]]` inside the dashboard description for a list of suggested dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other dashboards.
 
 ## Template variables
 
@@ -60,7 +60,7 @@ Enable notifications tracking to receive change notifications for a dashboard. A
 When notifications are activated for a dashboard, an event is created in the [Events Explorer][5]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion, along with the name of the user performing the action. View change events for a specific dashboard in the event explorer by searching:
 
 ```text
-tags:(audit AND dash) <DASHBOARD NAME>
+tags:(audit AND dash) <DASHBOARD_NAME>
 ```
 
 ### Copy, import, or export dashboard JSON
@@ -77,7 +77,7 @@ Copy, import, or export a dashboard's JSON using the export icon (upper right) w
 
 <div class="alert alert-warning">Dashboards must be unstarred before deletion.</div>
 
-Use this option to permanently delete your dashboard. Use the preset **Recently Deleted** list to restore deleted dashboards. Dashboards in **Recently Deleted** are permanently deleted after 30 days. For more information, see the [Dashboard list][8] documentation.
+Use this option to permanently delete your dashboard. Use the preset **Recently Deleted** list to restore deleted dashboards. Dashboards in **Recently Deleted** are permanently deleted after 30 days. For more information, see the [Dashboard list][6] documentation.
 
 ## Permissions
 
@@ -85,7 +85,7 @@ Use this option to permanently delete your dashboard. Use the preset **Recently 
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Use granular access controls to limit the [roles][6] that may edit a particular dashboard:
+Use granular access controls to limit the [roles][7] that may edit a particular dashboard:
 1. While viewing a dashboard, click on the cog **Configure** in the upper right.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
@@ -95,7 +95,7 @@ Use granular access controls to limit the [roles][6] that may edit a particular 
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**.
 
-**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][6].
+**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][7].
 
 To restore general access to a dashboard with restricted access, follow the steps below:
 1. While viewing a dashboard, click on the cog **Configure** in the upper right.
@@ -105,7 +105,7 @@ To restore general access to a dashboard with restricted access, follow the step
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
-If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][7].
+If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][8].
 
 The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
 
@@ -119,6 +119,6 @@ The access indicator appears at the top right of each edit-restricted dashboard.
 [3]: /dashboards/guide/version_history/
 [4]: /account_management/audit_trail/
 [5]: /events/
-[6]: /account_management/rbac/
-[7]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[8]: content/en/dashboards/view_and_manage/#dashboard-list
+[6]: content/en/dashboards/list
+[7]: /account_management/rbac/
+[8]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/

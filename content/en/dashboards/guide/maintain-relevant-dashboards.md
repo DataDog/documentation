@@ -67,7 +67,7 @@ You can also manage dashboards programmatically with the Dashboards API, which i
 - [Datadog Miscellany: Remove old dashboards and monitors][3]
 - [Datadog Miscellany: Delete dashboards based on text in title][4]
 
-[1]: https://docs.datadoghq.com/dashboards/view_and_manage/#restore-deleted-dashboards
+[1]: https://docs.datadoghq.com/dashboards/list/#restore-deleted-dashboards
 [2]: https://docs.datadoghq.com/api/latest/dashboards/#restore-deleted-dashboards
 [3]: https://github.com/DataDog/Miscellany/tree/master/remove_old_dash_monitors
 [4]: https://github.com/DataDog/Miscellany/tree/master/delete_dashboards_by_text_search
