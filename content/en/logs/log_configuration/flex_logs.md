@@ -60,7 +60,7 @@ Flex Tier storage is useful for storing logs where long running security/audit i
 - Need all logs for security investigations.
 - Need to query logs for reporting and analytics for high cardinality data over long time periods.
 
-## Potential sources
+## Potential sources for direct to Flex Logs indexing tier
 
 These are potential sources which are good candidates for sending direct to the Flex Tier, that is not going to Standard Indexing first. This is not an exhaustive list and is meant to give an idea about the types of logs that tend to be good targets for this configuration. Other log sources (e.g. Application logs) can still be sent to the Flex tier after going to Standard Indexing for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources can vary, and those matters very much when making the decision to skip Standard Indexing. Any high volume, infrequent access, long term retention log sources are good candidates.
 
