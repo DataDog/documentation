@@ -172,6 +172,84 @@ snmp_listener:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Ping
+
+When configured, the SNMP check can also send ICMP pings to your devices. This can be configured for individual as well as autodiscovered devices.
+
+To set up ping with Network Device Monitoring:
+
+1. Install or upgrade the Datadog Agent to v7.52+. For platform specific instructions, see the [Datadog Agent][7] documentation.
+
+2. Edit the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3] for individual devices or the [`datadog.yaml`][8] Agent configuration file for autodiscovery. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
+
+3. **Linux Only**: If you're receiving errors when running ping, you may need to configure the integration to send pings using a raw socket. This requires elevated privileges and is done using the agent's system-probe. See `linux.use_raw_socket` agent configuration and system-probe configuration below.
+
+**Note**: For autodiscovery, if the device does not respond to SNMP, we will not ping it.
+
+{{< tabs >}}
+{{% tab "Individual" %}}
+
+- To apply ping settings to all manually configured devices, create ping configuration in the `init_config` section.
+
+	```yaml
+	    init_config:
+	      loader: core  # use core check implementation of SNMP integration. recommended
+	      use_device_id_as_hostname: true  # recommended
+	    instances:
+	    - ip_address: '1.2.3.4'
+	      community_string: 'sample-string'  # enclose with single quote
+	      tags:
+	        - 'key1:val1'
+	        - 'key2:val2'
+	      ping:
+	        enabled: true            # (default false) enable the ping check
+	        linux:                   # (optional) Linux specific configuration
+	          use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+	```
+
+{{% /tab %}}
+
+{{% tab "Autodiscovery" %}}
+
+- To apply ping settings to all autodiscovery subnets, create ping configuration under the `snmp_listener` section.
+
+	```yaml
+	listeners:
+	  - name: snmp
+	snmp_listener:
+	  workers: 100  # number of workers used to discover devices concurrently
+	  discovery_interval: 3600  # interval between each autodiscovery in seconds
+	  loader: core  # use core check implementation of SNMP integration. recommended
+	  use_device_id_as_hostname: true  # recommended
+	  configs:
+	    - network_address: 10.10.0.0/24  # CIDR subnet
+	      loader: core
+	      snmp_version: 2
+	      port: 161
+	      community_string: '***'  # enclose with single quote
+	      tags:
+	      - "key1:val1"
+	      - "key2:val2"
+	      ping:
+	        enabled: true            # (default false) enable the ping check
+	        linux:                   # (optional) Linux specific configuration
+	          use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+	```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Use Raw Sockets (Linux Only)
+
+If you're on Linux and want to use raw sockets for ping, you must also enable ping in the system-probe configuration file in addition to the agent configuration above.
+
+Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to true.
+
+```yaml
+ping:
+  enabled: true
+```
+
 **Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
 
 ## Validation
