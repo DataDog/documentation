@@ -107,7 +107,7 @@ payloadsize=$(($sourcemapsize + $bundlesize))
 echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 ```
 
-If a `build` directory does not already exist, create it first by running `mkdir build`. Then run the command above.
+If a `build` directory does not already exist, create it first by running `mkdir build`, then run the command above.
 
 ## Test your implementation of crash reporting
 
