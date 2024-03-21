@@ -262,9 +262,9 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 
 ### Specifying tracing library versions
 
-You can optionally set specific tracing library versions to use. If you don't specify a version, it defaults to the latest version. To find the latest version for a library, go to **Releases** in the dd-trace-&lt;language&gt; GitHub repo. For example, [dd-trace-dotnet releases][15].
+You can optionally set specific tracing libraries and versions to use. If you don't specify a library in `libVersions`, it isn't included.
 
-To set specific tracing library versions, add the following configuration to your `datadog-values.yaml` file:
+For example, add the following configuration to your `datadog-values.yaml` file:
 {{< highlight yaml "hl_lines=7-12" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
@@ -280,13 +280,17 @@ To set specific tracing library versions, add the following configuration to you
             ruby: v1.15.0
 {{< /highlight >}}
 
-Supported languages include:
+If you include a library but don't specify its version, it defaults to the latest version. See the links in the following table to find the latest versions of Datadog tracing libraries on gcr.io, Docker Hub, and Amazon ECR:
 
-- .NET (`dotnet`)
-- Python (`python`)
-- Java (`java`)
-- Node.js (`js`)
-- Ruby (`ruby`)
+| Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
+|------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
+| Java       | [gcr.io/datadoghq/dd-lib-java-init][15]   | [hub.docker.com/r/datadog/dd-lib-java-init][16]   | [gallery.ecr.aws/datadog/dd-lib-java-init][17]   |
+| JavaScript | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
+| Python     | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
+| .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
+| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
+
+The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
 ### Tagging observability data by environment {#env-k8}
 
@@ -304,7 +308,22 @@ For example, add the following configuration to your `datadog-values.yaml` file:
          enabled: true
 {{< /highlight >}}
 
-[15]: https://github.com/DataDog/dd-trace-dotnet/releases
+[15]: http://gcr.io/datadoghq/dd-lib-java-init
+[16]: http://hub.docker.com/r/datadog/dd-lib-java-init
+[17]: http://gallery.ecr.aws/datadog/dd-lib-java-init
+[18]: http://gcr.io/datadoghq/dd-lib-js-init
+[19]: http://hub.docker.com/r/datadog/dd-lib-js-init
+[20]: http://gallery.ecr.aws/datadog/dd-lib-js-init
+[21]: http://gcr.io/datadoghq/dd-lib-python-init
+[22]: http://hub.docker.com/r/datadog/dd-lib-python-init
+[23]: http://gallery.ecr.aws/datadog/dd-lib-python-init
+[24]: http://gcr.io/datadoghq/dd-lib-dotnet-init
+[25]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
+[26]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
+[27]: http://gcr.io/datadoghq/dd-lib-ruby-init
+[28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
+[29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+
 {{% /tab %}}
 {{< /tabs >}}
 
