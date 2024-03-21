@@ -110,7 +110,7 @@ You can disable some files from uploading by setting the `iosDsyms`, `iosSourcem
 }
 ```
 
-If you want to disable **all file uploads**, remove the `expo-datadog` from the list of plugins.
+If you want to disable **all file uploads**, remove `expo-datadog` from the list of plugins.
 
 
 ### Using with Sentry
