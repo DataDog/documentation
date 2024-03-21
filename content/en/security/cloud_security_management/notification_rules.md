@@ -1,5 +1,5 @@
 ---
-title: Notification Rules for Cloud Security Management
+title: Upcoming Changes to Security Notification Rules
 kind: documentation
 is_beta: true
 further_reading:
@@ -11,50 +11,38 @@ further_reading:
   text: "Notification Rules"
 ---
 
-Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules.
+<div class="alert alert-warning">...in private beta.</div>
 
-This article outlines
+Notification rules allow you to set general alerting preferences that span across multiple detection rules and signals. They play a key role in keeping your team informed of issues without you having to manually configure notifications for individual detection rules.
 
-**Questions**: 
+This article outlines upcoming changes to how notification rules are configured. Although the changes primarily apply to Cloud Security Management, they also impact Application Security Management and Cloud SIEM.
 
-- Is there a way to filter the rules to only show rules that have notifications configured for them?
-- What exactly is being migrated when you click **Update in 1-Click**? The severity and ...? What is `@workflow.rule.id` <- this is the rule, finding should be pre-filled (when clicking 1-click) <- flag this in the notifications Slack channel
+## Upcoming changes to notification rules
 
-Target dates
-- internal, having docs ready ASAP
-- public-facing tied to public beta
+### CSM Misconfigurations signals deprecation
 
-Notifications for cloud configuration and infrastructure configuration 
+placeholder
 
-Notifications rules allow customers to define an alerting criteria across all products, and all detections at once.
+### Support for identity risks and attack paths
 
-Findings: emphasize on ticket creation / triage / remediation 
-Signals: emphasize on communication / escalation / triage / remediation
+placeholder
 
-Create Notification Rules for 
+### Notification rule source types selector
 
-One of the bigger questions I have, which we don't need to fully complete at this meeting, are definitions for some of the terms we use for notification rules. Specifically:
+The available source types for notification rules is now split into two types: Signals or Vulnerabilities.
 
-* security signal
-* security issue
-* attack path: 
-* finding (will be renamed to vulnerability, the label in the UI):  
-* misconfiguration
-* vulnerability
-* identity risk
+When you create or edit a notification rule, you now specify the source type by choosing either Vulnerabilities or Signals.
 
-Source types (notification rules):
+A vulnerability...
 
-* Application library vulnerability: This is for ASM (CSM Vulns not avail as a separate type, but will be soon)
-* Application code vulnerability: 
-* Workload Security: CSM Threats
-* Signal Correlation: Cloud SIEM
-* Log Detection: Cloud SIEM
-* Application Security: ASM(?)
+A signal...
 
-- What is a source type?
+The Notification Rule type selector is now split into two types: Signals or Vulnerabilities: 
 
-## How it used to work
+
+
+
+## How notification rules used to work
 
 Signals are security alerts that Datadog generates and displays in the Signals Explorer. Was required to be enabled in order to alert on misconfigurations.
 
@@ -62,20 +50,13 @@ Signals are security alerts that Datadog generates and displays in the Signals E
 
 Brand design ticket is in progress: https://datadoghq.atlassian.net/browse/BRAND-7001
 
-## How it works now
+## How notification rules work now
 
 Cloud Configuration and Infrastructure Configuration will no longer generate signals.
 
 no longer require that signals be enabled for 
 
 When you create a notification rule, you specify 
-
-| How it used to work | How it works now |
-|---------------------|------------------|
-|                     |                  |
-|                     |                  |
-|                     |                  |
-|                     |                  |
 
 **placeholder for diagram**
 
@@ -93,7 +74,7 @@ A signal...
 
 To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as source type (vulnerability or signal), severity, tags, and attributes.
 
-As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Preview of Matching Results** panel. This is useful in determining if the notification rule is overly specific or too broad.
+As you configure the rule, a preview of issues that match the notification rule conditions appears on the **Preview of Matching Results** panel. This is useful in determining if the notification rule is overly specific or too broad.
 
 ### Select a source type
 
