@@ -27,7 +27,7 @@ To use automatic ticket creation, install the integration through the [Jira Inte
 
 ## Setup
 
-1. On the [Integration Settings page][3], find the Statuspage integration. 
+1. On the [Integration Settings page][3], find the Jira integration. 
 1. Click the toggle for **Automatically create a Jira Issue**.
 3. Define a template with dynamic variables to drive the content of the Jira ticket. The template maps severities to Jira priorities, adds labels, defines a dynamic assignee, and more.
 
