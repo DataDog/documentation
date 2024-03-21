@@ -62,35 +62,35 @@ Flex Tier storage is useful for storing logs where long running security/audit i
 
 ## Potential sources for direct to Flex Logs indexing tier
 
-These are potential sources which are good candidates for sending direct to the Flex Tier, that is not going to Standard Indexing first. This is not an exhaustive list and is meant to give an idea about the types of logs that tend to be good targets for this configuration. Other log sources (e.g. Application logs) can still be sent to the Flex tier after going to Standard Indexing for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources can vary, and those matters very much when making the decision to skip Standard Indexing.
+These are potential sources which are good candidates for sending direct to the Flex Tier, that is not going to Standard Indexing first. This is not an exhaustive list and is meant to give an idea about the types of logs that tend to be good targets for this configuration. Other log sources (e.g. Application logs) can still be sent to the Flex tier after going to Standard Indexing for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources could vary, and that matters when making the decision to skip Standard Indexing.
 
-- CDN services
-  - e.g. Akamai, Cloudflare, Fastly, CloudFront, etc
-- DNS services
-  - e.g. Route53, Cloudflare, Akamai (Edge), NS1, etc
-- Firewall logs / Firewall appliances / Web Application Firewalls (WAF)
-  - e.g. AWS WAF, Barracuda WAF, pfSense, Checkpoint, Sophos, WatchGuard, FortiNet, etc
-- Cloud network services / VPC / Gateways / NAT / WAN
-  - e.g. AWS VPC, Azure Virtual Network (VNet), GCP VPC
-  - e.g. AWS NAT Gateway, PrivateLink, Direct Connect, VPN, etc
-  - e.g. GCP Cloud NAT, Azure ExpressRoute, Virtual WANs, Azure Bastion, etc
-- Loadbalancers
-  - e.g. AWS ELB / ALB / NLB (GCP/Azure flavors), F5, Nginx, etc
-- Identity tools
-  - e.g. Cisco ISE, Okta, OneLogin, Workday User Activity Logs, etc
-- Audit logs
-  - e.g. Cloud Provider Audit Logs (e.g. CloudTrail), k8s audit logs, Microsoft 365 audit logs, etc
-- Physical network appliances, i.e. Switches, Routers, Access Points, Network gear, etc
-  - e.g. Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda, etc
-- Network Flow logs
-  - e.g. Cisco NetFlow, IPFIX, sFlow, AWS VPC FlowLogs, etc
-- VPN services
+_Note that these examples are just a sampling for each category, there are many more services, tools, and technologies for each._
+
+- **CDN services**
+  - Akamai, Cloudflare, Fastly, CloudFront, etc
+- **DNS services**
+  - Route53, Cloudflare, Akamai (Edge), NS1, etc
+- **Firewall logs / Firewall appliances**
+  - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, FortiNet, etc
+- **Cloud network services / VPC / Gateways / NAT / WAN**
+  - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, Virtual WAN, etc
+- **Loadbalancers**
+  - AWS ELB / ALB / NLB (GCP/Azure flavors), F5, Nginx, etc
+- **Identity services and tools**
+  - Cisco ISE, Okta, OneLogin, Workday User Activity Logs, etc
+- **Audit logs**
+  - Cloud Provider Audit Logs (e.g. CloudTrail), k8s audit, Microsoft 365 audit, etc
+- **Physical network appliances**
+  - Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda, etc
+- **Network Flow logs**
+  - Cisco NetFlow, IPFIX, sFlow, AWS VPC FlowLogs, etc
+- **VPN services**
   - AWS/GCP/Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, WireGuard, etc
-- CI/CD services
-  - e.g. GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TravisCI, TeamCity, AWS CodePieline, Azure DevOps, Bamboo, etc
-- Service mesh
+- **CI/CD services and tools**
+  - GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePieline, etc
+- **Service mesh**
   - e.g. Anthos, Istio, proxyv2, consul, Linkerd, Kong, etc
-- Caching services/tools
+- **Caching**
   - e.g. Varnish, Memcached, Redis, etc
 
 You can use this spectrum of logs types to help rationalize about when to use the Flex Logs tier. Any high volume, infrequent access, long term retention log sources are good candidates, this includes extending Standard Tier (e.g. application logs) logs into the Flex Tier as well.
