@@ -1,6 +1,7 @@
 ---
-title: View and Manage
+title: Dashboard List
 kind: Documentation
+description: "Organize and manage dashboards with lists"
 disable_toc: false
 further_reading:
 - link: "dashboards/"
@@ -9,34 +10,27 @@ further_reading:
 - link: "dashboards/guide/maintain-relevant-dashboards"
   tag: "Guide"
   text: "Best practices for maintaining relevant dashboards"
-- link: "service_management/mobile/"
-  tag: "Documentation"
-  text: "Datadog Mobile App"
 ---
 
 ## Overview
 
-Search, view, or create dashboards and lists on the [Dashboard List][4] page.
-
-- Dashboard List page, see the list of dashboards in your organization, either custom created or available as an out-of-the-box integration dashboard. 
-- Use the **All Dashboards** table to sort, search, and group your lists. 
-- Organize your dashboard views through lists.
-
-Take dashboard views wherever you go with Mobile views.
-
+Take control of your expanding dashboard collection with Dashboard List features to organize and streamline effectively. Group dashboards into lists, assign them to specific teams, and mark important ones as favorites for fast access to key visualizations. Manage dashboard organization further by using functionalities like filtering by Teams, performing bulk actions for efficient management, and assigning Teams to multiple dashboards. Explore, create, and manage custom or integrated dashboards effortlessly on the [Dashboard List page][1].
+View and manage your dashboards:
+- [Use the *All Dashboards* table to sort, search, and group your lists.](#view-all-dashboards)
+- [Organize your dashboard views through lists.](#lists)
 
 ## View all dashboards
 
-The **All Dashboards** table lists dashboards in your Datadog organization, either custom created or available as an out-of-the-box dashboard. Use the table to [bulk edit Teams](#teams) associated to dashboards or [add dashboards to lists](#dashboard-list).
+The **All Dashboards** table lists dashboards in your Datadog organization, either custom created or available as an out-of-the-box dashboard. Select multiple dashboards in the table to conduct bulk actions, such as setting [Teams](#teams) to dashboards or adding dashboards to [lists](#lists).
 
-By default, starred dashboards are listed at the top. You can sort by column headers *Name*, *Modified*, and *Popularity*. All columns with descriptions are listed below:
+You can sort by column headers *Name*, *Modified*, and *Popularity*.
 
 | Column     | Description                                                                              |
 |------------|------------------------------------------------------------------------------------------|
 | Star       | All dashboards starred by the current user.                                              |
 | Name       | The name of the custom or preset dashboard.                                              |
 | Author     | The profile icon of the dashboard's creator.                                             |
-| Teams      | [Teams][7] assigned to the dashboard.                                                    |
+| Teams      | [Teams][2] assigned to the dashboard.                                                    |
 | Modified   | The last modified date of a custom dashboard.                                            |
 | Popularity | The relative [popularity](#popularity) of the dashboard for your organization.           |
 | Icon       | An icon indicating the type of dashboard (Timeboard or Screenboard).                     |
@@ -50,7 +44,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 ## Teams
 
-Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][5].
+Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][2].
 
 To edit the teams associated with one or more dashboards, take the following steps:
 1. Select the checkbox next to each dashboard you wish to modify.
@@ -58,7 +52,7 @@ To edit the teams associated with one or more dashboards, take the following ste
 1. Use the checkboxes to select the appropriate teams for the dashboards.
 1. Click **Apply Changes**.
 
-## Dashboard list
+## Lists
 
 Dashboard lists groups dashboards so you and your team can switch between dashboards within the same context. You can add dashboards to [preset lists](#preset-lists) or to a custom list.
 
@@ -93,20 +87,9 @@ Use the preset **Recently Deleted** list to restore deleted dashboards. From the
 
 {{< img src="dashboards/recently_deleted.png" alt="Restore deleted dashboard" style="width:100%;">}}
 
-## View dashboards on mobile devices
-
-View your dashboards in a mobile-friendly format with the Datadog Mobile App. The Mobile App comes equipped with mobile home screen widgets which allow you to monitor service health and infrastructure without opening the mobile app. 
-
-**Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI. For more information on installing the app, see the [Datadog Mobile App][1].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/mobile/
-[2]: https://apps.apple.com/app/datadog/id1391380318
-[3]: https://play.google.com/store/apps/details?id=com.datadog.app
-[4]: https://app.datadoghq.com/dashboard/lists
-[5]: /account_management/teams/
-[6]: /dashboards/template_variables/#saved-views
-[7]: /account_management/teams/
+[1]: https://app.datadoghq.com/dashboard/lists
+[2]: /account_management/teams/

@@ -93,7 +93,7 @@ Use granular access controls to limit the [roles][6] that may edit a particular 
 1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**
+1. Click **Save**.
 
 **Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][6].
 
