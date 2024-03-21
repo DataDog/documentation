@@ -77,21 +77,21 @@ The following list is an example of log sources that are potentially good candid
 - **Loadbalancers**
   - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX, and so forth.
 - **Identity services and tools**
-  - Cisco ISE, Okta, OneLogin, Workday User Activity Logs, etc
+  - Cisco ISE, Okta, OneLogin, Workday User Activity Logs, and so forth.
 - **Audit logs**
-  - Cloud Provider Audit Logs (e.g. CloudTrail), k8s audit, Microsoft 365 audit, etc
+  - Cloud Provider Audit Logs (for example, CloudTrail), Kubernetes audit, Microsoft 365 audit, and so forth.
 - **Physical network appliances**
-  - Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda, etc
+  - Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda, and so forth.
 - **Network Flow logs**
-  - Cisco NetFlow, IPFIX, sFlow, AWS VPC FlowLogs, etc
+  - Cisco NetFlow, IPFIX, sFlow, AWS VPC FlowLogs, and so forth.
 - **VPN services**
-  - AWS/GCP/Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, WireGuard, etc
+  - AWS, GCP, and Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, WireGuard, and so forth
 - **CI/CD services and tools**
-  - GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePieline, etc
+  - GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePipeline, and so forth.
 - **Service mesh**
-  - e.g. Anthos, Istio, proxyv2, consul, Linkerd, Kong, etc
+  - For example, Anthos, Istio, proxyv2, consul, Linkerd, Kong, and so forth.
 - **Caching**
-  - e.g. Varnish, Memcached, Redis, etc
+  - For example, Varnish, Memcached, Redis, and so forth.
 
 You can use this spectrum of logs types to help rationalize about when to use the Flex Logs tier. Any high volume, infrequent access, long term retention log sources are good candidates, this includes extending Standard Tier (e.g. application logs) logs into the Flex Tier as well.
 
