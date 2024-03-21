@@ -22,17 +22,20 @@ For more information on configuring credentials, see [Connections][2]. App Build
 
 ## App permissions
 
-### Coarse access to apps and connections
+### Permissions and access control
 
 Use [role-based access control (RBAC)][4] to control access to your apps and connections. 
 
-The coarse permissions that apply to apps include `apps_run` and `apps_write`.
+The coarse permissions that apply to apps include Apps View, Apps Write, and Connections Read.
 
-`apps_write`
+Apps View
+: Can view and run apps. Datadog Standard and Admin roles have view access to App Builder by default.
+
+Apps Write
 : Can create and edit new and existing apps. Datadog Standard and Admin roles have write access to App Builder by default.
 
-`apps_run`
-: Can interact with apps. Datadog Standard and Admin roles have run access to App Builder by default.
+Connections Read
+: Can list and view available connections. Datadog Read Only, Standard, and Admin roles have read access to connections by default.
 
 ### Restrict access to a specific connection
 
@@ -63,9 +66,9 @@ Use the following steps to modify the permissions on a specific connection:
 
 ### Restrict access to a specific app
 
-Set permissions on each app to restrict modifications to the app. The granular permissions include **Runner** and **Editor**.
+Set permissions on each app to restrict modifications to the app. The granular permissions include **Viewer** and **Editor**.
 
-Runner
+Viewer
 : Can run and view the app
 
 Editor

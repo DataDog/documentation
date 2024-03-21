@@ -34,7 +34,7 @@ further_reading:
 
 - **Custom spans**: Configure custom spans
 
-- **Custom pre-defined tags**: Configure [custom tags][12] and metrics at runtime
+- **Custom pre-defined tags**: Configure [custom tags][12] and measures at runtime
 
 - **Parameters**: Set custom parameters such as default branch name and Git information
 
@@ -857,6 +857,8 @@ You can configure the Jenkins Plugin to include or exclude some pipelines:
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
 **Example**: `susans-job,johns-.*,prod_folder/prod_release`
 
+Lists of included and excluded jobs can contain regular expressions, but not glob patterns. To include a job with a specific prefix, use `prefix-.*`—not `prefix-*`.
+
 ## Visualize pipeline data in Datadog
 
 Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.
@@ -954,7 +956,7 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
 [10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
 [11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
-[12]: /continuous_integration/pipelines/custom_tags_and_metrics/
+[12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/
 [15]: /account_management/teams/
 [16]: /continuous_integration/tests/

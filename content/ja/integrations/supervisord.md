@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: supervisord
-oauth: {}
 public_title: Supervisord
 short_description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
 supported_os:

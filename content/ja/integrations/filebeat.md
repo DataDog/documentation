@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: filebeat
-oauth: {}
 public_title: Filebeat
 short_description: 軽量ログシッパー
 supported_os:

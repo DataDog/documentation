@@ -50,7 +50,7 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7.
+The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7, and .NET 8.
 
 For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
@@ -359,6 +359,8 @@ export DD_RUNTIME_METRICS_ENABLED=true
 # Start your application
 dotnet example.dll
 ```
+
+<div class="alert alert-info"> If you are using Alpine Linux, set the <code>CORECLR_PROFILER_PATH</code> environment variable to a path for musl based distributions: <code>linux-musl-x64/</code>.</div>
 
 #### Linux Docker container
 
