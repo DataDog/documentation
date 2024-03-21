@@ -62,7 +62,7 @@ Flex Tier storage is useful for storing logs where long running security/audit i
 
 ## Potential sources for direct to Flex Logs indexing tier
 
-These are potential sources which are good candidates for sending direct to the Flex Tier, that is not going to Standard Indexing first. This is not an exhaustive list and is meant to give an idea about the types of logs that tend to be good targets for this configuration. Other log sources (e.g. Application logs) can still be sent to the Flex tier after going to Standard Indexing for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources can vary, and those matters very much when making the decision to skip Standard Indexing. Any high volume, infrequent access, long term retention log sources are good candidates.
+These are potential sources which are good candidates for sending direct to the Flex Tier, that is not going to Standard Indexing first. This is not an exhaustive list and is meant to give an idea about the types of logs that tend to be good targets for this configuration. Other log sources (e.g. Application logs) can still be sent to the Flex tier after going to Standard Indexing for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources can vary, and those matters very much when making the decision to skip Standard Indexing.
 
 - CDN services
   - e.g. Akamai, Cloudflare, Fastly, CloudFront, etc
@@ -92,6 +92,11 @@ These are potential sources which are good candidates for sending direct to the 
   - e.g. Anthos, Istio, proxyv2, consul, Linkerd, Kong, etc
 - Caching services/tools
   - e.g. Varnish, Memcached, Redis, etc
+
+You can use this spectrum of logs types to help rationalize about when to use the Flex Logs tier. Any high volume, infrequent access, long term retention log sources are good candidates, this includes extending Standard Tier (e.g. application logs) logs into the Flex Tier as well.
+
+{{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Logs indexing and access frequency spectrum graph" style="width:100%;" >}}
+
 
 ## Further reading
 
