@@ -41,14 +41,17 @@ To start collecting frustration signals, add the following to your SDK configura
 
 <details open>
   <summary>Latest version</summary>
+  
 ```
 window.DD_RUM.init({
   trackUserInteractions: true,
 })
 ```
+
 </details>
 <details>
   <summary>Before <code>v5.0.0</code></summary>
+  
 ```
 window.DD_RUM.init({
   trackUserInteractions: true,
