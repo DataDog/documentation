@@ -50,6 +50,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
             "name": "cws-instrumentation-init",
             "image": "datadog/cws-instrumentation-dev:cws-instrumentation-beta",
             "essential": false,
+            "user": "0",
             "command": [
                 "/cws-instrumentation",
                 "setup",
@@ -195,6 +196,8 @@ spec:
        volumeMounts:
          - name: cws-instrumentation-volume
            mountPath: "/cws-instrumentation-volume"
+       securityContext:
+         runAsUser: 0
      containers:
      - name: "<YOUR_APP_NAME>"
        image: "<YOUR_APP_IMAGE>"

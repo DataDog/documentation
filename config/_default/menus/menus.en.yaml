@@ -681,7 +681,7 @@ main:
     parent: otel_interoperability
     weight: 603
   - name: Correlate RUM and Traces
-    url: /real_user_monitoring/connect_rum_and_traces/#opentelemetry-support
+    url: /real_user_monitoring/platform/connect_rum_and_traces/#opentelemetry-support
     identifier: otel_rum
     parent: otel_interoperability
     weight: 604
@@ -796,9 +796,9 @@ main:
     url: developers/integrations/api_integration/
     parent: dev_tools_integrations
     weight: 402
-  - name: Create a Log Integration
+  - name: Create a Log Pipeline
     identifier: dev_tools_integrations_log
-    url: developers/integrations/log_integration/
+    url: developers/integrations/log_pipeline/
     parent: dev_tools_integrations
     weight: 403
   - name: Integration Assets Reference
@@ -959,6 +959,131 @@ main:
     identifier: cloudcraft_faq
     parent: cloudcraft
     weight: 7
+  - name: API
+    url: cloudcraft/api
+    identifier: cloudcraft_api
+    parent: cloudcraft
+    weight: 8
+  - name: AWS Accounts
+    url: cloudcraft/api/aws-accounts/
+    identifier: cloudcraft_api_aws_accounts
+    parent: cloudcraft_api
+    weight: 1
+  - name: List AWS accounts
+    url: cloudcraft/api/aws-accounts/#list-aws-accounts
+    identifier: cloudcraft_api_aws_accounts_list
+    parent: cloudcraft_api_aws_accounts
+    weight: 1
+  - name: Add an AWS account
+    url: cloudcraft/api/aws-accounts/#add-an-aws-account
+    identifier: cloudcraft_api_aws_accounts_add
+    parent: cloudcraft_api_aws_accounts
+    weight: 2
+  - name: Delete an AWS account
+    url: cloudcraft/api/aws-accounts/#delete-aws-account
+    identifier: cloudcraft_api_aws_accounts_delete
+    parent: cloudcraft_api_aws_accounts
+    weight: 3
+  - name: Update an AWS account
+    url: cloudcraft/api/aws-accounts/#update-an-aws-account
+    identifier: cloudcraft_api_aws_accounts_update
+    parent: cloudcraft_api_aws_accounts
+    weight: 4
+  - name: Snapshot an AWS account
+    url: cloudcraft/api/aws-accounts/#snapshot-aws-account
+    identifier: cloudcraft_api_aws_accounts_snapshot
+    parent: cloudcraft_api_aws_accounts
+    weight: 5
+  - name: Get my AWS iam role parameters
+    url: cloudcraft/api/aws-accounts/#get-aws-iam-role-parameters
+    identifier: cloudcraft_api_aws_accounts_iam
+    parent: cloudcraft_api_aws_accounts
+    weight: 6
+  - name: Azure Accounts
+    url: cloudcraft/api/azure-accounts/
+    identifier: cloudcraft_api_azure_accounts
+    parent: cloudcraft_api
+    weight: 2
+  - name: List Azure accounts
+    url: cloudcraft/api/azure-accounts/#list-azure-accounts
+    identifier: cloudcraft_api_azure_accounts_list
+    parent: cloudcraft_api_azure_accounts
+    weight: 1
+  - name: Add an Azure account
+    url: cloudcraft/api/azure-accounts/#add-an-azure-account
+    identifier: cloudcraft_api_azure_accounts_add
+    parent: cloudcraft_api_azure_accounts
+    weight: 2
+  - name: Delete an Azure account
+    url: cloudcraft/api/azure-accounts/#delete-an-azure-account
+    identifier: cloudcraft_api_azure_accounts_delete
+    parent: cloudcraft_api_azure_accounts
+    weight: 3
+  - name: Update an Azure account
+    url: cloudcraft/api/azure-accounts/#update-an-azure-account
+    identifier: cloudcraft_api_azure_accounts_update
+    parent: cloudcraft_api_azure_accounts
+    weight: 4
+  - name: Snapshot an Azure account
+    url: cloudcraft/api/azure-accounts/#snapshot-an-azure-account
+    identifier: cloudcraft_api_azure_accounts_snapshot
+    parent: cloudcraft_api_azure_accounts
+    weight: 5
+  - name: Blueprints
+    url: cloudcraft/api/blueprints/
+    identifier: cloudcraft_api_blueprints
+    parent: cloudcraft_api
+    weight: 3
+  - name: List my blueprints
+    url: cloudcraft/api/blueprints/#list-blueprints
+    identifier: cloudcraft_api_blueprints_list
+    parent: cloudcraft_api_blueprints
+    weight: 1
+  - name: Create a blueprint
+    url: cloudcraft/api/blueprints/#create-a-blueprint
+    identifier: cloudcraft_api_blueprints_create
+    parent: cloudcraft_api_blueprints
+    weight: 2
+  - name: Delete a blueprint
+    url: cloudcraft/api/blueprints/#delete-a-blueprint
+    identifier: cloudcraft_api_blueprints_delete
+    parent: cloudcraft_api_blueprints
+    weight: 3
+  - name: Retrieve a blueprint
+    url: cloudcraft/api/blueprints/#retrieve-a-blueprint
+    identifier: cloudcraft_api_blueprints_retrieve
+    parent: cloudcraft_api_blueprints
+    weight: 4
+  - name: Update a blueprint
+    url: cloudcraft/api/blueprints/#update-a-blueprint
+    identifier: cloudcraft_api_blueprints_update
+    parent: cloudcraft_api_blueprints
+    weight: 5
+  - name: Export blueprint as image
+    url: cloudcraft/api/blueprints/#export-a-blueprint-as-an-image
+    identifier: cloudcraft_api_blueprints_export
+    parent: cloudcraft_api_blueprints
+    weight: 6
+  - name: Budgets
+    url: cloudcraft/api/budgets/
+    identifier: cloudcraft_api_budgets
+    parent: cloudcraft_api
+    weight: 4
+  - name: Export budget for a blueprint
+    url: cloudcraft/api/budgets/#export-budget-for-a-blueprint
+    identifier: cloudcraft_api_budgets_export
+    parent: cloudcraft_api_budgets
+    weight: 1
+  - name: Users
+    url: cloudcraft/api/users/
+    identifier: cloudcraft_api_users
+    parent: cloudcraft_api
+    weight: 5
+  - name: Get user profile
+    url: cloudcraft/api/users/#get-user-profile
+    identifier: cloudcraft_api_users_info
+    parent: cloudcraft_api_users
+    weight: 1
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -2421,7 +2546,7 @@ main:
     identifier: tracing_connect_logs
     weight: 502
   - name: Correlate RUM and Traces
-    url: /real_user_monitoring/connect_rum_and_traces/
+    url: /real_user_monitoring/platform/connect_rum_and_traces/
     parent: tracing_other_telemetry
     identifier: tracing_connect_rum
     weight: 503
@@ -3030,6 +3155,11 @@ main:
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_measures
     weight: 111
+  - name: Custom Pipelines API
+    url: continuous_integration/pipelines/custom/
+    parent: pipeline_visibility
+    identifier: ci_custom
+    weight: 112
   - name: Search and Manage
     url: continuous_integration/search/
     parent: ci
@@ -3269,6 +3399,21 @@ main:
     parent: software_delivery_heading
     identifier: dora_metrics
     weight: 190000
+  - name: Setup
+    url: dora_metrics/setup
+    parent: dora_metrics
+    identifier: dora_metrics_setup
+    weight: 1
+  - name: Deployment events
+    url: dora_metrics/setup/deployments
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_deployments
+    weight: 101
+  - name: Incident events
+    url: dora_metrics/setup/incidents
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_incidents
+    weight: 102
   - name: Code Analysis
     url: code_analysis/
     pre: ci
@@ -4486,7 +4631,7 @@ main:
     pre: rum
     identifier: rum
     parent: ux_monitoring_heading
-    weight: 80000
+    weight: 40000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
@@ -4607,176 +4752,211 @@ main:
     parent: rum_product_analytics
     identifier: rum_heatmaps
     weight: 304
+  - name: Platform
+    identifier: real_user_monitoring_platform
+    url: real_user_monitoring/platform
+    parent: rum
+    weight: 4
+  - name: Dashboards
+    url: real_user_monitoring/platform/dashboards/
+    parent: real_user_monitoring_platform
+    identifier: rum_dashboards
+    weight: 401
+  - name: Performance
+    url: real_user_monitoring/platform/dashboards/performance
+    parent: rum_dashboards
+    identifier: rum_dashboards_performance
+    weight: 101
+  - name: Testing and Deployment
+    url: real_user_monitoring/platform/dashboards/testing_and_deployment
+    parent: rum_dashboards
+    identifier: rum_dashboards_testing_and_deployment
+    weight: 102
+  - name: Usage
+    url: real_user_monitoring/platform/dashboards/usage
+    parent: rum_dashboards
+    identifier: rum_dashboards_usage
+    weight: 103
+  - name: Errors
+    url: real_user_monitoring/platform/dashboards/errors
+    parent: rum_dashboards
+    identifier: rum_dashboards_errors
+    weight: 104
+  - name: Monitors
+    url: monitors/types/real_user_monitoring/
+    parent: real_user_monitoring_platform
+    identifier: rum_monitors
+    weight: 402
+  - name: Generate Custom Metrics
+    url: real_user_monitoring/generate_metrics
+    parent: real_user_monitoring_platform
+    identifier: rum_generate_metrics
+    weight: 403
+  - name: Connect RUM and Traces
+    url: real_user_monitoring/connect_rum_and_traces
+    parent: real_user_monitoring_platform
+    identifier: rum_connect_rum_and_traces
+    weight: 404
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
     identifier: rum_session_replay
-    weight: 4
+    weight: 5
   - name: Mobile
     url: real_user_monitoring/session_replay/mobile
     parent: rum_session_replay
     identifier: rum_session_replay_mobile
-    weight: 401
-  - name: Browser Privacy Options
+    weight: 501
+  - name: Setup
+    url: real_user_monitoring/session_replay/mobile/setup_and_configuration
+    parent: rum_session_replay_mobile
+    identifier: rum_session_replay_mobile_setup
+    weight: 101
+  - name: Privacy Options
+    url: real_user_monitoring/session_replay/mobile/privacy_options
+    parent: rum_session_replay_mobile
+    identifier: rum_session_replay_mobile_privacy
+    weight: 102
+  - name: Impact on App Performance
+    url: real_user_monitoring/session_replay/mobile/app_performance
+    parent: rum_session_replay_mobile
+    identifier: rum_session_replay_mobile_app_performance
+    weight: 103
+  - name: Troubleshooting
+    url: real_user_monitoring/session_replay/mobile/troubleshooting
+    parent: rum_session_replay_mobile
+    identifier: rum_session_replay_mobile_troubleshooting
+    weight: 104
+  - name: Browser
+    url: real_user_monitoring/session_replay/browser
+    parent: rum_session_replay
+    identifier: rum_session_replay_browser
+    weight: 502
+  - name: Privacy Options
     url: real_user_monitoring/session_replay/privacy_options
-    parent: rum_session_replay
+    parent: rum_session_replay_browser
     identifier: rum_session_replay_privacy_options
-    weight: 402
-  - name: Browser Developer Tools
+    weight: 102
+  - name: Developer Tools
     url: real_user_monitoring/session_replay/developer_tools
-    parent: rum_session_replay
+    parent: rum_session_replay_browser
     identifier: rum_session_replay_developer_tools
-    weight: 403
-  - name: Browser Troubleshooting
+    weight: 103
+  - name: Troubleshooting
     url: real_user_monitoring/session_replay/troubleshooting
-    parent: rum_session_replay
+    parent: rum_session_replay_browser
     identifier: rum_session_replay_troubleshooting
-    weight: 404
+    weight: 104
   - name: Playlists
     url: real_user_monitoring/session_replay/playlists
     parent: rum_session_replay
     identifier: rum_session_replay_playlists
-    weight: 305
+    weight: 503
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
     identifier: rum_heatmaps
-    weight: 4
-  - name: Dashboards
-    url: real_user_monitoring/dashboards/
-    parent: rum
-    identifier: rum_dashboards
-    weight: 5
-  - name: Performance
-    url: real_user_monitoring/dashboards/performance
-    parent: rum_dashboards
-    identifier: rum_dashboards_performance
-    weight: 501
-  - name: Testing and Deployment
-    url: real_user_monitoring/dashboards/testing_and_deployment
-    parent: rum_dashboards
-    identifier: rum_dashboards_testing_and_deployment
-    weight: 502
-  - name: Usage
-    url: real_user_monitoring/dashboards/usage
-    parent: rum_dashboards
-    identifier: rum_dashboards_usage
-    weight: 503
-  - name: Errors
-    url: real_user_monitoring/dashboards/errors
-    parent: rum_dashboards
-    identifier: rum_dashboards_errors
-    weight: 504
+    weight: 6
   - name: Exploring RUM Data
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 6
+    weight: 7
   - name: Search RUM Events
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 601
+    weight: 701
   - name: Search Syntax
     url: real_user_monitoring/explorer/search_syntax/
     parent: rum_explorer
     identifier: rum_explorer_search_syntax
-    weight: 602
+    weight: 702
   - name: Group
     url: real_user_monitoring/explorer/group/
     parent: rum_explorer
     identifier: rum_explorer_group
-    weight: 603
+    weight: 703
   - name: Visualize
     url: real_user_monitoring/explorer/visualize/
     parent: rum_explorer
     identifier: rum_explorer_visualize
-    weight: 604
+    weight: 704
   - name: Events
     url: real_user_monitoring/explorer/events/
     parent: rum_explorer
     identifier: rum_explorer_events
-    weight: 605
+    weight: 705
   - name: Export
     url: real_user_monitoring/explorer/export/
     parent: rum_explorer
     identifier: rum_explorer_export
-    weight: 606
+    weight: 706
   - name: Saved Views
     url: real_user_monitoring/explorer/saved_views/
     parent: rum_explorer
     identifier: rum_explorer_saved_views
-    weight: 607
+    weight: 707
   - name: Watchdog Insights for RUM
     url: real_user_monitoring/explorer/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
-    weight: 608
+    weight: 708
   - name: Funnel Analysis
     url: real_user_monitoring/funnel_analysis
     parent: rum
     identifier: rum_funnel_analysis
-    weight: 7
+    weight: 8
   - name: Retention Analysis
     url: real_user_monitoring/retention_analysis
     parent: rum
     identifier: rum_retention_analysis
-    weight: 8
+    weight: 9
   - name: Feature Flag Tracking
     url: real_user_monitoring/feature_flag_tracking
     parent: rum
     identifier: rum_feature_flag_tracking
-    weight: 9
-  - name: Generate Metrics
-    url: real_user_monitoring/generate_metrics
-    parent: rum
-    identifier: rum_generate_metrics
     weight: 10
-  - name: Connect RUM and Traces
-    url: real_user_monitoring/connect_rum_and_traces
-    parent: rum
-    identifier: rum_connect_rum_and_traces
-    weight: 11
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 12
+    weight: 11
   - name: Explorer
     url: error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 1201
+    weight: 1101
   - name: Track Browser Errors
     url: real_user_monitoring/error_tracking/browser/
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
-    weight: 1202
+    weight: 1102
   - name: Track Mobile Errors
     url: real_user_monitoring/error_tracking/mobile/
     parent: rum_error_tracking
     identifier: rum_error_tracking_mobile
-    weight: 1203
+    weight: 1103
   - name: Custom Grouping
     url: error_tracking/custom_grouping?tab=rum
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
-    weight: 1204
+    weight: 1104
   - name: Identify Suspect Commits
     url: error_tracking/suspect_commits
     parent: rum_error_tracking
     identifier: rum_error_tracking_suspect_commits
-    weight: 1205
+    weight: 1105
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 13
+    weight: 12
   - name: Data Security
     identifier: data_security_real_user_monitoring
     url: data_security/real_user_monitoring/
     parent: rum
-    weight: 14
+    weight: 13
   - name: Account Management
     url: account_management/
     pre: cog-2
@@ -10750,6 +10930,70 @@ api:
         - GetLogsArchiveOrder
       unstable: []
       order: 9
+  - name: Logs Custom Destinations
+    url: /api/latest/logs-custom-destinations/
+    identifier: logs-custom-destinations
+    generated: true
+  - name: Update a custom destination
+    url: '#update-a-custom-destination'
+    identifier: logs-custom-destinations-update-a-custom-destination
+    parent: logs-custom-destinations
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateLogsCustomDestination
+      unstable: []
+      order: 4
+  - name: Get a custom destination
+    url: '#get-a-custom-destination'
+    identifier: logs-custom-destinations-get-a-custom-destination
+    parent: logs-custom-destinations
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetLogsCustomDestination
+      unstable: []
+      order: 3
+  - name: Delete a custom destination
+    url: '#delete-a-custom-destination'
+    identifier: logs-custom-destinations-delete-a-custom-destination
+    parent: logs-custom-destinations
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteLogsCustomDestination
+      unstable: []
+      order: 5
+  - name: Create a custom destination
+    url: '#create-a-custom-destination'
+    identifier: logs-custom-destinations-create-a-custom-destination
+    parent: logs-custom-destinations
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateLogsCustomDestination
+      unstable: []
+      order: 2
+  - name: Get all custom destinations
+    url: '#get-all-custom-destinations'
+    identifier: logs-custom-destinations-get-all-custom-destinations
+    parent: logs-custom-destinations
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListLogsCustomDestinations
+      unstable: []
+      order: 1
   - name: Logs Metrics
     url: /api/latest/logs-metrics/
     identifier: logs-metrics

@@ -7172,7 +7172,7 @@ components:
           description: "A Boolean indicating whether this monitor needs a full window
             of data before it\u2019s evaluated.\nWe highly recommend you set this
             to `false` for sparse metrics,\notherwise some evaluations are skipped.
-            Default is false."
+            Default is false. This setting only applies to\nmetric monitors."
           type: boolean
         scheduling_options:
           $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
@@ -16055,6 +16055,8 @@ components:
         host:
           description: Host name to perform the test with.
           type: string
+        httpVersion:
+          $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string

@@ -550,6 +550,35 @@
       "description": "Send logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
     }
   ],
+  "CreateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_2184123765",
+      "description": "Create a Basic HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1091442807",
+      "description": "Create a Custom Header HTTP custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_1288180912",
+      "description": "Create a Splunk custom destination returns \"OK\" response"
+    },
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "_141236188",
+      "description": "Create an Elasticsearch custom destination returns \"OK\" response"
+    }
+  ],
+  "UpdateLogsCustomDestination": [
+    {
+      "group": "logs_custom_destinations",
+      "suffix": "",
+      "description": "Update a custom destination returns \"OK\" response"
+    }
+  ],
   "CreateLogsMetric": [
     {
       "group": "logs_metrics",
