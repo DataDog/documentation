@@ -6,7 +6,7 @@ further_reading:
 - link: "integrations/statuspage/"
   tag: "Documentation"
   text: "Install the Statuspage Integration"
-- link: "https://app.datadoghq.com/integrations/statuspage?search=statuspage"
+- link: "https://app.datadoghq.com/integrations/statuspage"
   tag: "In-App"
   text: "In-app Statuspage integration tile"
 - link: "monitors/guide/integrate-monitors-with-statuspage/"
