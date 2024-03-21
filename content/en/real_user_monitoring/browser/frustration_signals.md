@@ -42,7 +42,7 @@ To start collecting frustration signals, add the following to your SDK configura
 <details open>
   <summary>Latest version</summary>
   
-```
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
 })
@@ -52,7 +52,7 @@ window.DD_RUM.init({
 <details>
   <summary>Before <code>v5.0.0</code></summary>
   
-```
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
