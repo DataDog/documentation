@@ -60,6 +60,39 @@ Flex Tier storage is useful for storing logs where long running security/audit i
 - Need all logs for security investigations.
 - Need to query logs for reporting and analytics for high cardinality data over long time periods.
 
+## Potential sources
+
+These are potential sources which are good candidates for sending direct to the Flex Tier, that is not going to Standard Indexing first. This is not an exhaustive list and is meant to give an idea about the types of logs that tend to be good targets for this configuration. Other log sources (e.g. Application logs) can still be sent to the Flex tier after going to Standard Indexing for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources can vary, and those matters very much when making the decision to skip Standard Indexing. Any high volume, infrequent access, long term retention log sources are good candidates.
+
+- CDN services
+  - e.g. Akamai, Cloudflare, Fastly, CloudFront, etc
+- DNS services
+  - e.g. Route53, Cloudflare, Akamai (Edge), NS1, etc
+- Firewall logs / Firewall appliances / Web Application Firewalls (WAF)
+  - e.g. AWS WAF, Barracuda WAF, pfSense, Checkpoint, Sophos, WatchGuard, FortiNet, etc
+- Cloud network services / VPC / Gateways / NAT / WAN
+  - e.g. AWS VPC, Azure Virtual Network (VNet), GCP VPC
+  - e.g. AWS NAT Gateway, PrivateLink, Direct Connect, VPN, etc
+  - e.g. GCP Cloud NAT, Azure ExpressRoute, Virtual WANs, Azure Bastion, etc
+- Loadbalancers
+  - e.g. AWS ELB / ALB / NLB (GCP/Azure flavors), F5, Nginx, etc
+- Identity tools
+  - e.g. Cisco ISE, Okta, OneLogin, Workday User Activity Logs, etc
+- Audit logs
+  - e.g. Cloud Provider Audit Logs (e.g. CloudTrail), k8s audit logs, Microsoft 365 audit logs, etc
+- Physical network appliances, i.e. Switches, Routers, Access Points, Network gear, etc
+  - e.g. Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda, etc
+- Network Flow logs
+  - e.g. Cisco NetFlow, IPFIX, sFlow, AWS VPC FlowLogs, etc
+- VPN services
+  - AWS/GCP/Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, WireGuard, etc
+- CI/CD services
+  - e.g. GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TravisCI, TeamCity, AWS CodePieline, Azure DevOps, Bamboo, etc
+- Service mesh
+  - e.g. Anthos, Istio, proxyv2, consul, Linkerd, Kong, etc
+- Caching services/tools
+  - e.g. Varnish, Memcached, Redis, etc
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
