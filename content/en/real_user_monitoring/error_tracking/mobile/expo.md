@@ -54,29 +54,6 @@ yarn add -D @datadog/datadog-ci
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key.
 
-### Disable file uploads
-
-You can disable some files from uploading by setting the `iosDsyms`, `iosSourcemaps`, `androidProguardMappingFiles`, or `androidSourcemaps` parameters to `false`.
-
-```json
-{
-    "expo": {
-        "plugins": [
-            [
-                "expo-datadog",
-                {
-                    "errorTracking": {
-                        "iosDsyms": false
-                    }
-                }
-            ]
-        ]
-    }
-}
-```
-
-If you want to disable **all file uploads**, remove the `expo-datadog` from the list of plugins.
-
 ### Add git repository data to your mapping files on Expo Application Services (EAS)
 
 If you are using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files.
@@ -102,6 +79,39 @@ Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, 
 | `androidSourcemaps`           | `true`  | Enables the uploading of JavaScript source maps on Android builds.                                                                 |
 | `androidProguardMappingFiles` | `true`  | Enables the uploading of Proguard mapping files to deobfuscate native Android crashes (is only applied if obfuscation is enabled). |
 | `datadogGradlePluginVersion`  | `"1.+"` | Version of `dd-sdk-android-gradle-plugin` used for uploading Proguard mapping files.     |
+
+### Limitations
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
+Source maps, mapping files, and dSYM files are limited to **500** MB each.
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+Source maps, mapping files, and dSYM files  are limited to **500** MB each.
+{{< /site-region >}}
+
+### Disable file uploads
+
+You can disable some files from uploading by setting the `iosDsyms`, `iosSourcemaps`, `androidProguardMappingFiles`, or `androidSourcemaps` parameters to `false`.
+
+```json
+{
+    "expo": {
+        "plugins": [
+            [
+                "expo-datadog",
+                {
+                    "errorTracking": {
+                        "iosDsyms": false
+                    }
+                }
+            ]
+        ]
+    }
+}
+```
+
+If you want to disable **all file uploads**, remove the `expo-datadog` from the list of plugins.
+
 
 ### Using with Sentry
 
