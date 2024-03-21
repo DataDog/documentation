@@ -67,15 +67,15 @@ The following list is an example of log sources that are potentially good candid
 **Note**: These examples are just a sample for each category. There are many more services, tools, and technologies available for each category that you might want to send to the Flex Tier.
 
 - **CDN services**
-  - Akamai, Cloudflare, Fastly, CloudFront, etc
+  - Akamai, Cloudflare, Fastly, CloudFront, and so forth.
 - **DNS services**
-  - Route53, Cloudflare, Akamai (Edge), NS1, etc
+  - Route53, Cloudflare, Akamai (Edge), NS1, and so forth.
 - **Firewall logs / Firewall appliances**
-  - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, FortiNet, etc
+  - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, FortiNet, and so forth.
 - **Cloud network services / VPC / Gateways / NAT / WAN**
-  - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, Virtual WAN, etc
+  - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, Virtual WAN, and so forth.
 - **Loadbalancers**
-  - AWS ELB / ALB / NLB (GCP/Azure flavors), F5, Nginx, etc
+  - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX, and so forth.
 - **Identity services and tools**
   - Cisco ISE, Okta, OneLogin, Workday User Activity Logs, etc
 - **Audit logs**
