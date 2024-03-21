@@ -119,6 +119,6 @@ The access indicator appears at the top right of each edit-restricted dashboard.
 [3]: /dashboards/guide/version_history/
 [4]: /account_management/audit_trail/
 [5]: /events/
-[6]: content/en/dashboards/list
+[6]: /dashboards/list
 [7]: /account_management/rbac/
 [8]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
