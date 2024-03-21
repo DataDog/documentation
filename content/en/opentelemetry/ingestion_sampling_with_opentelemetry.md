@@ -23,7 +23,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 **Note**: Datadog doesn't support running the OpenTelemetry Collector and the Datadog Agent on the same host.
 
-In the first and second scenario, [APM RED metrics][4] (request/errors counts and latency distributions by service, operation and resource) are computed in the Datadog Exporter. In the third case, the Datadog Agent computes these metrics.
+In the first scenario, [APM RED metrics][4] (request/errors counts and latency distributions by service, operation and resource) are computed in the Datadog Exporter. In the second case, the Datadog Agent computes these metrics.
 
 {{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation.png" alt="Otel APM Metrics computation" style="width:100%;" >}}
 
