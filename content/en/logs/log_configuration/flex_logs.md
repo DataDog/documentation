@@ -93,7 +93,7 @@ The following list is an example of log sources that are potentially good candid
 - **Caching**
   - For example, Varnish, Memcached, Redis, and so forth.
 
-You can use this spectrum of logs types to help rationalize about when to use the Flex Logs tier. Any high volume, infrequent access, long term retention log sources are good candidates, this includes extending Standard Tier (e.g. application logs) logs into the Flex Tier as well.
+You can use the spectrum of logs types shown in the image to determine when to use the Flex Logs tier. Any high volume, infrequent access, long term retention log sources are good candidates, and this includes extending Standard Tier logs (for example, application logs) into the Flex Tier as well.
 
 {{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Logs indexing and access frequency spectrum graph" style="width:100%;" >}}
 
