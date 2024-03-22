@@ -92,8 +92,13 @@ try (var scope = Profiling.get().newScope()) {
 }
 ```
 
-Then, open CPU, Exceptions, or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+To specify which label keys you want to use for filtering, set the `profiling.context.attributes` configuration with one of the following:
+* Environment variable: `DD_PROFILING_CONTEXT_ATTRIBUTES=customer_name`
+* System setting: `-Ddd.profiling.context.attributes=customer_name`
 
+If you have multiple context keys, use a comma-separated string for the configuration (for example,`-Ddd.profiling.context.attributes=customer_name,customer_group`).
+
+Then, open CPU, Exceptions, or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go">}}
@@ -106,7 +111,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
 })
 ```
 
-To specify which label keys you want use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
+To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
 
 ```go
 profiler.Start(
