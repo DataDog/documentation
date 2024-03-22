@@ -19,7 +19,7 @@ For more information on contributing, see the [contribution guidelines][18].
 
 ### Installation
 
-1. [Install Node.js and npm][2] (Node.js `>=14.16.0`)
+1. [Install Node.js and npm][2] (Node.js `>=20.11.0`)
 1. [Install Python 3][3] (you can also use [pyenv][4])
 1. [Install Hugo][13]
 1. [Install Go][14] (at minimum, `go version` 1.12)

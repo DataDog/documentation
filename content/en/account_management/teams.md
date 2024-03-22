@@ -32,7 +32,7 @@ The [team directory page][1] lists all teams within your organization. Use the *
 1. Use the dropdown menu to select team members.
 1. Click **Create**.
 
-**Note:** Allowed characters for team names and team handles are `a-z`, `A-Z`, `0-9`, and `._-:/`.
+**Note:** Allowed characters for team names and team handles are `a-z`, `A-Z`, `0-9`, and `._-:/`. Replace spaces with underscores.
 
 ### Modify team
 
@@ -146,7 +146,7 @@ To enforce a strict membership model, configure your default team settings so **
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
-[3]: /dashboards/#edit-details
+[3]: /dashboards/#dashboard-details
 [4]: /service_management/incident_management/incident_details#overview-section
 [5]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [6]: /security/misconfigurations/resource_catalog

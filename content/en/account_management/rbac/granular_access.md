@@ -26,7 +26,7 @@ Use the different principals to control access patterns in your organization and
 A user with the `user_access_manage` permission can elevate their access to any individual resource that supports restrictions based on team, role, and user or service account. Resources with only role-based access restrictions are not supported. To get access, click the **Elevate Access** button in the granular access control modal.
 
 [1]: /account_management/teams/
-[2]: /dashboards/#permissions
+[2]: /dashboards/configure/#permissions
 [3]: /monitors/notify/#permissions
 [4]: /notebooks/#limit-edit-access
 [5]: /security/detection_rules/#limit-edit-access

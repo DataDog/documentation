@@ -11,14 +11,14 @@ disable_sidebar: true
 
 ### SQL Server versions supported
 
-|                 | Self-hosted | Azure     | Amazon RDS | Google Cloud SQL |
-|-----------------|-------------|-----------|------------|------------------|
-| SQL Server 2012 | {{< X >}}   | {{< X >}} | {{< X >}}  |                  |
-| SQL Server 2014 | {{< X >}}   | {{< X >}} | {{< X >}}  |                  |
-| SQL Server 2016 | {{< X >}}   | {{< X >}} | {{< X >}}  |                  |
-| SQL Server 2017 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |
-| SQL Server 2019 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |
-| SQL Server 2022 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |
+|                 | Self-hosted | Azure     | Amazon RDS | Google Cloud SQL | Note |
+|-----------------|-------------|-----------|------------|------------------|------|
+| SQL Server 2012 | {{< X >}}   |           |            |                  | SQL Server 2012 reached its end of life on July 12, 2022. Database Monitoring continues to support SQL Server 2012 with [known limitations][1]. |
+| SQL Server 2014 | {{< X >}}   | {{< X >}} | {{< X >}}  |                  |      |
+| SQL Server 2016 | {{< X >}}   | {{< X >}} | {{< X >}}  |                  |      |
+| SQL Server 2017 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
+| SQL Server 2019 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
+| SQL Server 2022 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
 
 For setup instructions, select your hosting type:
 
@@ -38,7 +38,9 @@ Agent integration overhead tests were run on an Amazon EC2 machine `c5.xlarge` i
 | Settings Collection Interval         | 600s                |
 
 * Agent Test version: `7.50.2`
-* CPU: ~0.84% of the CPU used on average
-* Memory: ~298 MiB of RAM used (RSS memory)
-* Network bandwidth: ~33.1 KB/s ▼ | 20.3 KB/s ▲
+* CPU: ~1% of the CPU used on average
+* Memory: ~300 MiB of RAM used (RSS memory)
+* Network bandwidth: ~40 KB/s ▼ | 30 KB/s ▲
 * Agent query overhead on database: ~1% CPU Time
+
+[1]: /database_monitoring/setup_sql_server/troubleshooting/#known-limitations
