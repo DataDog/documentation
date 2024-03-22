@@ -5,7 +5,7 @@ type: schema
 aliases:
   - /security_platform/cspm/custom_rules/schema
   - /security/cspm/custom_rules/schema
-  - /security/cloud_security_management/misconfigurations/custom_rules/schema/
+  - /security/misconfigurations/custom_rules/schema/
 list_section:
   AWS: Review detailed information about AWS resource types in the following pages.
   Azure: Review detailed information about Azure resource types in the following pages.

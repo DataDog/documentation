@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
   - /security/cspm/frameworks_and_benchmarks
-  - /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
+  - /security/misconfigurations/frameworks_and_benchmarks
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"

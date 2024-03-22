@@ -128,7 +128,7 @@ The implications of restricting or omitting the Azure AD roles are:
 [1]: /getting_started/site/
 [2]: https://www.datadoghq.com/
 [3]: /security/cloud_security_management/misconfigurations/
-[4]: /security/cloud_security_management/misconfigurations/resource_catalog/
+[4]: /infrastructure/resource_catalog/
 [5]: https://us3.datadoghq.com/signup
 [6]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/
 {{% /site-region %}}

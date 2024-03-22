@@ -3,7 +3,7 @@ title: Create Custom Rules
 kind: documentation
 aliases:
   - /security/cspm/custom_rules
-  - /security/cloud_security_management/misconfigurations/custom_rules
+  - /security/misconfigurations/custom_rules
 further_reading:
 - link: "security/cloud_security_management/guide/writing_rego_rules"
   tag: "Guide"

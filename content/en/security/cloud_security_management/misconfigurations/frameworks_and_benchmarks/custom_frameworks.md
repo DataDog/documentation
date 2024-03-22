@@ -2,7 +2,7 @@
 title: Create Custom Compliance Frameworks
 kind: documentation
 aliases:
-  - /security/cloud_security_management/misconfigurations/custom_frameworks
+  - /security/misconfigurations/custom_frameworks
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"

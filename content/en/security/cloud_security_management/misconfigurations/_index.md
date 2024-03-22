@@ -5,7 +5,7 @@ aliases:
   - /security_platform/cspm/
   - /security/cspm/#glossary
   - /security/cspm/
-  - /security/cloud_security_management/misconfigurations/
+  - /security/misconfigurations/
 algolia:
   tags: ['cspm']
 ---
