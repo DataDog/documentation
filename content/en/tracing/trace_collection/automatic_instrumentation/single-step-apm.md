@@ -280,8 +280,6 @@ For example, add the following configuration to your `datadog-values.yaml` file:
             ruby: v1.15.0
 {{< /highlight >}}
 
-If you include a library but don't specify its version, it defaults to the latest version.
-
 Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see [Changing your container registry][30].
 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
