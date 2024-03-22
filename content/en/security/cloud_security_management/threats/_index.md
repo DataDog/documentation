@@ -5,7 +5,7 @@ aliases:
   - /security_platform/cloud_workload_security/
   - /security/cloud_workload_security/
   - /security/cloud_workload_security/agent_expressions
-  - /security/cloud_security_management/threats/agent_expressions
+  - /security/threats/agent_expressions
   - /security/cloud_workload_security/backend/
   - /security/threats/backend/
   - /security/threats/security_profiles
