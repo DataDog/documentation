@@ -12478,7 +12478,7 @@ components:
       properties:
         interval:
           description: If the type of the metric is rate or count, define the corresponding
-            interval.
+            interval in seconds.
           example: 20
           format: int64
           type: integer
