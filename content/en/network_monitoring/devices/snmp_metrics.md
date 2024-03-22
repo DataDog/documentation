@@ -176,17 +176,17 @@ snmp_listener:
 
 ### Ping
 
-When configured, the SNMP check can also send ICMP pings to your devices. This can be configured for individual as well as autodiscovered devices.
+When configured, the SNMP check can also send ICMP pings to your devices. This can be configured for individual as well as Autodiscovered devices.
 
 To set up ping with Network Device Monitoring:
 
 1. Install or upgrade the Datadog Agent to v7.52+. For platform specific instructions, see the [Datadog Agent][7] documentation.
 
-2. Edit the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3] for individual devices or the [`datadog.yaml`][8] Agent configuration file for autodiscovery. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
+2. Edit the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3] for individual devices or the [`datadog.yaml`][8] Agent configuration file for Autodiscovery. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
 
-3. **Linux Only**: If you're receiving errors when running ping, you may need to configure the integration to send pings using a raw socket. This requires elevated privileges and is done using the agent's system-probe. See `linux.use_raw_socket` agent configuration and system-probe configuration below.
+3. **Linux Only**: If you're receiving errors when running ping, you may need to configure the integration to send pings using a raw socket. This requires elevated privileges and is done using the Agent's system-probe. See the `linux.use_raw_socket` Agent configuration and system-probe configuration below.
 
-**Note**: For autodiscovery, if the device does not respond to SNMP, we will not ping it.
+**Note**: For Autodiscovery, Datadog does not ping devices that do not respond to SNMP.
 
 {{< tabs >}}
 {{% tab "Individual" %}}
@@ -241,9 +241,9 @@ To set up ping with Network Device Monitoring:
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Use Raw Sockets (Linux Only)
+##### Use raw sockets (Linux only)
 
-If you're on Linux and want to use raw sockets for ping, you must also enable ping in the system-probe configuration file in addition to the agent configuration above.
+If you're on Linux and want to use raw sockets for ping, you must also enable ping in the system-probe configuration file in addition to the Agent configuration above.
 
 Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to true.
 
