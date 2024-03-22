@@ -8987,18 +8987,6 @@ api:
         - GetUsageAuditLogs
       unstable: []
       order: 40
-  - name: Get usage attribution
-    url: '#get-usage-attribution'
-    identifier: usage-metering-get-usage-attribution
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetUsageAttribution
-      unstable: []
-      order: 40
   - name: Get hourly usage for analyzed logs
     url: '#get-hourly-usage-for-analyzed-logs'
     identifier: usage-metering-get-hourly-usage-for-analyzed-logs
