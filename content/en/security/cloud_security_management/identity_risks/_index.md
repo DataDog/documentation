@@ -2,7 +2,7 @@
 title: Cloud Security Management Identity Risks
 kind: documentation
 aliases:
-  - /security/identity_risks
+  - /security/identity_risks/
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
