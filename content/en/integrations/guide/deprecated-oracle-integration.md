@@ -530,5 +530,5 @@ Need help? Contact [Datadog support][14].
 [18]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
 [19]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
 [20]: https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0
-[21]: https://app.datadoghq.com/dash/integration/30990/
+[21]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [22]: https://docs.datadoghq.com/database_monitoring/
