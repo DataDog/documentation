@@ -40,6 +40,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Security study"
+  - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
+    tag: "Blog"
+    text: "Detect malware in your containers with Datadog Cloud Security Management"
 algolia:
   tags: ['inbox']
 cascade:
