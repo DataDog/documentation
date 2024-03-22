@@ -172,7 +172,9 @@ snmp_listener:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Ping
+**Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
+
+### Ping
 
 When configured, the SNMP check can also send ICMP pings to your devices. This can be configured for individual as well as autodiscovered devices.
 
@@ -193,11 +195,11 @@ To set up ping with Network Device Monitoring:
 
 	```yaml
 	    init_config:
-	      loader: core  # use core check implementation of SNMP integration. recommended
-	      use_device_id_as_hostname: true  # recommended
+	      loader: core
+	      use_device_id_as_hostname: true
 	    instances:
 	    - ip_address: '1.2.3.4'
-	      community_string: 'sample-string'  # enclose with single quote
+	      community_string: 'sample-string'
 	      tags:
 	        - 'key1:val1'
 	        - 'key2:val2'
@@ -217,16 +219,16 @@ To set up ping with Network Device Monitoring:
 	listeners:
 	  - name: snmp
 	snmp_listener:
-	  workers: 100  # number of workers used to discover devices concurrently
-	  discovery_interval: 3600  # interval between each autodiscovery in seconds
-	  loader: core  # use core check implementation of SNMP integration. recommended
-	  use_device_id_as_hostname: true  # recommended
+	  workers: 100
+	  discovery_interval: 3600
+	  loader: core
+	  use_device_id_as_hostname: true
 	  configs:
-	    - network_address: 10.10.0.0/24  # CIDR subnet
+	    - network_address: 10.10.0.0/24
 	      loader: core
 	      snmp_version: 2
 	      port: 161
-	      community_string: '***'  # enclose with single quote
+	      community_string: '***'
 	      tags:
 	      - "key1:val1"
 	      - "key2:val2"
@@ -249,8 +251,6 @@ Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to true.
 ping:
   enabled: true
 ```
-
-**Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
 
 ## Validation
 
