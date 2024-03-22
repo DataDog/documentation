@@ -62,6 +62,9 @@ echo "hostname: \$hostname" >> /etc/datadog-agent/datadog.yaml
 # Avoid conflicts on port 6062
 echo "process_config.expvar_port: 6063" >> /etc/datadog-agent/datadog.yaml
 
+# Configure the agent to ensure metrics attached with desired tags
+echo "expected_tags_duration: 10m" >> /etc/datadog-agent/datadog.yaml
+
 # Restart to take config changes into account
 sudo service datadog-agent restart
 EOF
