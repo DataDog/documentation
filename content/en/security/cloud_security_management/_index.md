@@ -104,7 +104,7 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [6]: /security/notifications/
 [7]: https://app.datadoghq.com/security/compliance
 [8]: /security/cloud_security_management/identity_risks/
-[9]: /security/vulnerabilities/
+[9]: /security/cloud_security_management/vulnerabilities/
 [10]: /security/cloud_security_management/setup/
 [11]: https://app.datadoghq.com/security/configuration/reports
 [12]: https://app.datadoghq.com/infrastructure/catalog

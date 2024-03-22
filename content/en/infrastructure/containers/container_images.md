@@ -5,13 +5,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
-- link: "/security/vulnerabilities"
+- link: "/security/cloud_security_management/vulnerabilities"
   tag: "Documentation"
   text: "Cloud Security Management Vulnerabilities"
 - link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
   text: "Setting up container image vulnerabilities"
-- link: "/security/vulnerabilities/troubleshooting"
+- link: "/security/cloud_security_management/vulnerabilities/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Cloud Security Management Vulnerabilities"
 ---
@@ -165,4 +165,4 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [4]: /integrations/amazon_web_services/
 [5]: https://www.cisa.gov/sbom
 [6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
-[8]: /security/vulnerabilities
+[8]: /security/cloud_security_management/vulnerabilities
