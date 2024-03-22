@@ -83,5 +83,5 @@ Add the following settings to the `env` section of `security-agent` and `system-
 
 {{< /tabs >}}
 
-[1]: /security/threats
+[1]: /security/cloud_security_management/threats
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features

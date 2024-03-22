@@ -25,7 +25,7 @@ further_reading:
   - link: "/security/misconfigurations/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
-  - link: "/security/threats/setup"
+  - link: "/security/cloud_security_management/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
   - link: "https://securitylabs.datadoghq.com/"
@@ -98,7 +98,7 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [9]: https://app.datadoghq.com/security/configuration
 [10]: /security/cloud_security_management/
 [11]: /security/misconfigurations/
-[12]: /security/threats/
+[12]: /security/cloud_security_management/threats/
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /security/identity_risks/

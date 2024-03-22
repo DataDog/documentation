@@ -11,7 +11,7 @@ products:
   url: /security/cloud_siem/
   icon: siem
 - name: CSM Threats
-  url: /security/threats/
+  url: /security/cloud_security_management/threats/
   icon: cloud-security-management
 ---
 

@@ -1,11 +1,13 @@
 ---
 title: Creating Custom Detection Rules
 kind: documentation
+aliases:
+  - /security/cloud_security_management/threats/custom_rules
 further_reading:
-- link: "/security/threats/setup"
+- link: "/security/cloud_security_management/threats/setup"
   tag: "Documentation"
   text: "Setting Up CSM Threats"
-- link: "/security/threats/agent_expressions"
+- link: "/security/cloud_security_management/threats/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
 - link: "security/threats/backend"

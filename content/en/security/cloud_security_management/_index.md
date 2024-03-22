@@ -10,7 +10,7 @@ further_reading:
   - link: "/security/misconfigurations/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
-  - link: "/security/threats/setup"
+  - link: "/security/cloud_security_management/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
@@ -96,7 +96,7 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats/
+[1]: /security/cloud_security_management/threats/
 [2]: /security/misconfigurations/
 [3]: https://app.datadoghq.com/security/configuration
 [4]: https://app.datadoghq.com/security/csm

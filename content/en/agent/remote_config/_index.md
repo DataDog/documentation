@@ -11,7 +11,7 @@ further_reading:
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
-- link: "/security/threats/setup"
+- link: "/security/cloud_security_management/threats/setup"
   tag: "Documentation"
   text: "Setting Up CSM Threats"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
@@ -263,7 +263,7 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[3]: /security/threats/setup
+[3]: /security/cloud_security_management/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
 [6]: /security/application_security/enabling/compatibility/

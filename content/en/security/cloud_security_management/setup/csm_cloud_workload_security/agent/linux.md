@@ -58,6 +58,6 @@ runtime_security_config:
     enabled: true
 ```
 
-[1]: /security/threats
+[1]: /security/cloud_security_management/threats
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [3]: /getting_started/agent/#installation

@@ -4,11 +4,12 @@ kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
   - /security/cloud_workload_security/workload_security_rules
+  - /security/cloud_security_management/threats/workload_security_rules
 further_reading:
-- link: "/security/threats/setup"
+- link: "/security/cloud_security_management/threats/setup"
   tag: "Documentation"
   text: "Setting Up CSM Threats"
-- link: "/security/threats/agent_expressions"
+- link: "/security/cloud_security_management/threats/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
 - link: "security/threats/backend"
@@ -62,10 +63,10 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/default_rules/#cat-workload-security
-[2]: /security/threats/agent_expressions
+[2]: /security/cloud_security_management/threats/agent_expressions
 [3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
-[7]: /security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
-[8]: /security/threats/security_signals
+[7]: /security/cloud_security_management/threats/setup?tab=kuberneteshelm#enable-remote-configuration
+[8]: /security/cloud_security_management/threats/security_signals

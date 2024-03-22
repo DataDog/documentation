@@ -5,9 +5,12 @@ aliases:
   - /security_platform/cloud_workload_security/
   - /security/cloud_workload_security/
   - /security/cloud_workload_security/agent_expressions
+  - /security/cloud_security_management/threats/agent_expressions
   - /security/cloud_workload_security/backend/
-  - /security/threats/security_profiles
-  - /security/threats/runtime_anomaly_detection
+  - /security/cloud_security_management/threats/backend/
+  - /security/cloud_security_management/threats/security_profiles
+  - /security/cloud_security_management/threats/runtime_anomaly_detection
+  - /security/cloud_security_management/threats/
 ---
 
 Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
@@ -52,19 +55,19 @@ Datadog is introducing a new feature called Active Protection to address the thr
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/threats/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_security_management/threats/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Threats{{< /nextlink >}}
-  {{< nextlink href="/security/threats/workload_security_rules">}}Learn about CSM Threats detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_security_management/threats/workload_security_rules">}}Learn about CSM Threats detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box CSM Threats detection rules{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/threats/setup/?tab=kuberneteshelm#prerequisites
+[1]: /security/cloud_security_management/threats/setup/?tab=kuberneteshelm#prerequisites
 [2]: /agent/
 [3]: /security/notifications/
 [4]: /security/notifications/#notification-channels
 [5]: /security/notifications/#detection-rule-notifications
-[6]: /security/threats/agent_expressions
-[7]: /security/threats/setup
-[8]: /security/threats/security_signals
+[6]: /security/cloud_security_management/threats/agent_expressions
+[7]: /security/cloud_security_management/threats/setup
+[8]: /security/cloud_security_management/threats/security_signals
 [9]: /network_monitoring/performance/

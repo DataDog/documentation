@@ -2,10 +2,10 @@
 title: Guidelines for Writing Custom CSM Threats Rules
 kind: guide
 further_reading:
-- link: "/security/threats/workload_security_rules"
+- link: "/security/cloud_security_management/threats/workload_security_rules"
   tag: "Documentation"
   text: "Managing CSM Threats Rules"
-- link: "/security/threats/agent_expressions"
+- link: "/security/cloud_security_management/threats/agent_expressions"
   tag: "Documentation"
   text: "Agent Expression Syntax"
 ---
@@ -46,5 +46,5 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats/workload_security_rules
-[2]: /security/threats/agent_expressions/#operators
+[1]: /security/cloud_security_management/threats/workload_security_rules
+[2]: /security/cloud_security_management/threats/agent_expressions/#operators

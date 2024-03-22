@@ -7,7 +7,7 @@ further_reading:
   - link: "/security/cloud_security_management/setup"
     tag: "Documentation"
     text: "Setting up Cloud Security Management"
-  - link: "/security/threats/"
+  - link: "/security/cloud_security_management/threats/"
     tag: "Documentation"
     text: "Cloud Security Management Threats"
   - link: "/agent/remote_config"
@@ -31,7 +31,7 @@ Select your infrastructure type for details on how to enable CSM Workload Securi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats
+[1]: /security/cloud_security_management/threats
 [2]: /security/cloud_security_management/setup
 [4]: /agent/remote_config
 [5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration

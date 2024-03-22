@@ -2,11 +2,13 @@
 title: Investigate Security Signals
 kind: documentation
 disable_toc: false
+aliases:
+  - /security/cloud_security_management/threats/security_signals
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"
     text: "Explore CSM Threats detection rules"
-  - link: "/security/threats/workload_security_rules"
+  - link: "/security/cloud_security_management/threats/workload_security_rules"
     tag: "Documentation"
     text: "Learn how to manage CSM Threats detection rules"
   - link: "/security/notifications/"
@@ -75,4 +77,4 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 [6]: /service_management/case_management/
 [7]: /security/cloud_security_management/workflows
 [8]: /service_management/workflows
-[9]: /security/threats/
+[9]: /security/cloud_security_management/threats/

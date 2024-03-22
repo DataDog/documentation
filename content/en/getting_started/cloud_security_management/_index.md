@@ -63,11 +63,11 @@ This guide walks you through best practices for getting your team up and running
 
 [1]: /security/cloud_security_management/
 [2]: /security/misconfigurations/
-[3]: /security/threats/
+[3]: /security/cloud_security_management/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: /security/threats/setup/?tab=kuberneteshelm#configure-the-csm-threats-agent
-[6]: /security/threats/setup/?tab=docker#configure-the-csm-threats-agent
-[7]: /security/threats/setup/?tab=hostothers#configure-the-csm-threats-agent
+[5]: /security/cloud_security_management/threats/setup/?tab=kuberneteshelm#configure-the-csm-threats-agent
+[6]: /security/cloud_security_management/threats/setup/?tab=docker#configure-the-csm-threats-agent
+[7]: /security/cloud_security_management/threats/setup/?tab=hostothers#configure-the-csm-threats-agent
 [8]: /security/misconfigurations/setup?tab=kubernetes
 [9]: /security/misconfigurations/setup?tab=docker
 [10]: /security/misconfigurations/setup?tab=aws
@@ -80,7 +80,7 @@ This guide walks you through best practices for getting your team up and running
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: /security/cloud_security_management/guide/tuning-rules/
 [19]: /security/misconfigurations/custom_rules
-[20]: /security/threats/agent_expressions
+[20]: /security/cloud_security_management/threats/agent_expressions
 [21]: /security/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
 [23]: /security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities

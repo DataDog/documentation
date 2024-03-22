@@ -12,7 +12,7 @@ aliases:
   - /security/cloud_security_management/workflows
 products:
   - name: CSM Threats
-    url: /security/threats/
+    url: /security/cloud_security_management/threats/
     icon: cloud-security-management
   - name: CSM Misconfigurations
     url: /security/misconfigurations/

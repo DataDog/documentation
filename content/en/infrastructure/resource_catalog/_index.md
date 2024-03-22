@@ -10,7 +10,7 @@ further_reading:
 - link: "/security/misconfigurations/"
   tag: "Documentation"
   text: "Cloud Security Management Misconfigurations"
-- link: "/security/threats/"
+- link: "/security/cloud_security_management/threats/"
   tag: "Documentation"
   text: "Cloud Security Management Threats"
 - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"

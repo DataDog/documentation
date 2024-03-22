@@ -5,7 +5,7 @@ further_reading:
   - link: "/security/cloud_security_management/setup"
     tag: "Documentation"
     text: "Setting up Cloud Security Management"
-  - link: "/security/threats/"
+  - link: "/security/cloud_security_management/threats/"
     tag: "Documentation"
     text: "Cloud Security Management Threats"
   - link: "/security/misconfigurations/"
@@ -48,7 +48,7 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats
+[1]: /security/cloud_security_management/threats
 [2]: /security/misconfigurations
 [3]: /security/identity_risks
 [4]: /security/vulnerabilities

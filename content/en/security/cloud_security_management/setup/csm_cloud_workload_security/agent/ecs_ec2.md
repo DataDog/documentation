@@ -135,5 +135,5 @@ Add the following environment variables to your `datadog-agent` container defini
 }
 ```
 
-[1]: /security/threats
+[1]: /security/cloud_security_management/threats
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
