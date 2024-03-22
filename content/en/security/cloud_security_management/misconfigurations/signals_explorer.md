@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cspm/signals_explorer
   - /security/cspm/signals_explorer
+  - /security/cloud_security_management/misconfigurationssignals_explorer
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
@@ -63,7 +64,7 @@ At the top of the side panel, you can configure the rule or send a notification 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/misconfigurations/findings/
+[1]: /security/cloud_security_management/misconfigurationsfindings/
 [2]: /security/cloud_siem/
 [3]: /security/threats/
 [4]: https://app.datadoghq.com/security

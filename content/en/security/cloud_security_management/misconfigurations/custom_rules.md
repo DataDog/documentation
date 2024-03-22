@@ -3,6 +3,7 @@ title: Create Custom Rules
 kind: documentation
 aliases:
   - /security/cspm/custom_rules
+  - /security/cloud_security_management/misconfigurationscustom_rules
 further_reading:
 - link: "security/cloud_security_management/guide/writing_rego_rules"
   tag: "Guide"
@@ -85,7 +86,7 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 [2]: https://app.datadoghq.com/security/compliance
 [3]: https://www.openpolicyagent.org/docs/latest/
 [4]: /security/cloud_security_management/guide/writing_rego_rules/
-[5]: /security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
+[5]: /security/cloud_security_management/misconfigurationscompliance_rules#set-notification-targets-for-compliance-rules
 [6]: /security/notifications/
 [7]: https://app.datadoghq.com/security/
 [8]: /infrastructure/resource_catalog/schema/

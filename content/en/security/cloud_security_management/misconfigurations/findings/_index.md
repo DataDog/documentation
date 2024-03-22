@@ -5,6 +5,7 @@ aliases:
   - /security_platform/findings
   - /security_platform/cspm/findings
   - /security/cspm/findings
+  - /security/cloud_security_management/misconfigurationsfindings
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"

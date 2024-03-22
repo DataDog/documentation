@@ -8,7 +8,7 @@ further_reading:
   - link: "/security/threats/"
     tag: "Documentation"
     text: "Cloud Security Management Threats"
-  - link: "/security/misconfigurations/"
+  - link: "/security/cloud_security_management/misconfigurations"
     tag: "Documentation"
     text: "Cloud Security Management Misconfigurations"
   - link: "/security/identity_risks/"
@@ -49,7 +49,7 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threats
-[2]: /security/misconfigurations
+[2]: /security/cloud_security_management/misconfigurations
 [3]: /security/identity_risks
 [4]: /security/vulnerabilities
 [5]: https://app.datadoghq.com/security/configuration/csm/setup

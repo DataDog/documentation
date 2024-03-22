@@ -6,14 +6,15 @@ aliases:
   - /security/cspm/configuration_rules
   - /security/cspm/detection_rules
   - /security/cspm/compliance_rules
+  - /security/cloud_security_management/misconfigurationscompliance_rules
 further_reading:
-  - link: "/security/misconfigurations/setup"
+  - link: "/security/cloud_security_management/misconfigurationssetup"
     tag: "Documentation"
     text: Getting Started with CSM Misconfigurations
-  - link: "/security/misconfigurations/custom_rules/"
+  - link: "/security/cloud_security_management/misconfigurationscustom_rules/"
     tag: "Documentation"
     text: Custom Rules
-  - link: "/security/misconfigurations/frameworks_and_benchmarks/"
+  - link: "/security/cloud_security_management/misconfigurationsframeworks_and_benchmarks/"
     tag: "Documentation"
     text: Misconfigurations Reports
 ---
@@ -99,7 +100,7 @@ The rule deprecation process is as follows:
 [1]: /security/default_rules/#cat-csm-misconfigurations-cloud
 [2]: /security/detection_rules/
 [3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
-[4]: /security/misconfigurations/frameworks_and_benchmarks
+[4]: /security/cloud_security_management/misconfigurationsframeworks_and_benchmarks
 [5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
 [7]: /security/notifications/
@@ -110,7 +111,7 @@ The rule deprecation process is as follows:
 [17]: /integrations/servicenow/
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
-[20]: /security/misconfigurations/custom_rules/
+[20]: /security/cloud_security_management/misconfigurationscustom_rules/
 [21]: /security/notifications/rules/
-[22]: /security/misconfigurations/signals_explorer/
+[22]: /security/cloud_security_management/misconfigurationssignals_explorer/
 [23]: /security/detection_rules/#clone-a-rule
