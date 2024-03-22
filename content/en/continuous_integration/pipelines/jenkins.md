@@ -546,7 +546,7 @@ There are different ways to enable Test Visibility inside a Jenkins job or pipel
 2. Adding the `datadog` step inside the pipeline script.
 3. Configuring the tracer manually.
 
-For pipelines that spin up a Docker container to execute tests, only option 3 is suitable.
+For pipelines that spin up a Docker container to execute tests, you can only configure the tracer manually.
 
 ### Enable with the Jenkins configuration UI
 

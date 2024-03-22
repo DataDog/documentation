@@ -120,8 +120,7 @@ Some examples of non-deterministic test parameters are:
 - a value that depends on the test execution environment (such as an absolute file path or the current username)
 - a value that has no deterministic string representation (for example an instance of a Java class whose `toString()` method is not overridden)
 
-It is best to try to avoid using non-deterministic test parameters.
-In case this is not possible, some testing frameworks provide a way to specify a deterministic string representation for a non-deterministic parameter (such as overriding parameter display name).
+Avoid using non-deterministic test parameters. In case this is not possible, some testing frameworks provide a way to specify a deterministic string representation for a non-deterministic parameter (such as overriding parameter display name).
 
 ## Custom configurations
 

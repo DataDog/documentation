@@ -194,7 +194,7 @@ The tracer exposes a set of APIs that can be used to extend its functionality pr
 
 To add custom tags include [opentracing-util][4] library as a compile-time dependency to your project.
 
-You can then add custom tags to your tests by using the current active span:
+You can then add custom tags to your tests by using the active span:
 
 ```java
 import io.opentracing.Span;
@@ -216,7 +216,7 @@ For more information about adding tags, see the [Adding Tags][5] section of the 
 
 ### Adding custom metrics to tests
 
-To add custom metrics include [opentracing-util][4] library as a compile-time dependency to your project.
+To add custom metrics, include the [`opentracing-util`][4] library as a compile-time dependency to your project.
 
 Just like tags, you can add custom metrics to your tests by using the current active span:
 
@@ -242,7 +242,7 @@ If you use one of the supported testing frameworks, the Java Tracer automaticall
 
 If you are using a framework that is not supported, or an ad-hoc testing solution, you can harness the manual testing API, which also reports test results to the backend.
 
-To use manual testing API add [dd-trace-api][7] library as a compile-time dependency to your project.
+To use the manual testing API, add the [`dd-trace-api`][7] library as a compile-time dependency to your project.
 
 #### Domain model
 
@@ -369,8 +369,8 @@ For example, the history of executions may not be available, or the test case ma
 
 The best way to fix this is to make sure that the test parameters are the same between test runs.
 
-In JUnit 5 this can also be addressed by [customizing the string representation of the test parameters][9] without changing their values.
-To do this use `org.junit.jupiter.api.Named` interface or change the `name` parameter of the `org.junit.jupiter.params.ParameterizedTest` annotation:
+In JUnit 5, this can also be addressed by [customizing the string representation of the test parameters][9] without changing their values.
+To do so, use `org.junit.jupiter.api.Named` interface or change the `name` parameter of the `org.junit.jupiter.params.ParameterizedTest` annotation:
 
 ```java
 @ParameterizedTest
@@ -412,8 +412,8 @@ static Stream<Arguments> randomArguments() {
 
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
 
-Verify that the tracer is injected into your build process: examine your build's logs.
-If the injection is successful, you will see a line containing `DATADOG TRACER CONFIGURATION`.
+Verify that the tracer is injected into your build process by examining your build's logs.
+If the injection is successful, you can see a line containing `DATADOG TRACER CONFIGURATION`.
 If the line is not there, make sure that the environment variables used to inject and configure the tracer are available to the build process.
 A common mistake is to set the variables in a build step and run the tests in another build step. This approach may not work if the variables are not propagated between build steps.
 
@@ -423,7 +423,7 @@ Verify that your build system and testing framework are supported by CI Visibili
 
 Ensure that the `dd.civisibility.enabled` property (or `DD_CIVISIBILITY_ENABLED` environment variable) is set to `true` in the tracer arguments.
 
-Try running your build with tracer debug logging enabled (set `DD_TRACE_DEBUG` environment variable to `true`).
+Try running your build with tracer debug logging enabled by setting the `DD_TRACE_DEBUG` environment variable to `true`.
 Check the build output for any errors that indicate tracer misconfiguration, such as an unset `DD_API_KEY` environment variable.
 
 ### Tests or source code compilation fails when building a project with the tracer attached
@@ -442,7 +442,7 @@ If the plugin interferes with the build, disable it by adding `dd.civisibility.c
 It is possible that the Java compiler plugin injected into the build is not available if the build uses a custom artifactory storage or if it is run in offline mode.
 
 If this is the case, you can disable plugin injection by adding `dd.civisibility.compiler.plugin.auto.configuration.enabled=false` to the list of `-javaagent` arguments
-(or by setting `DD_CIVISIBILITY_COMPILER_PLUGIN_AUTO_CONFIGURATION_ENABLED=false` environment variable).
+(or by setting the `DD_CIVISIBILITY_COMPILER_PLUGIN_AUTO_CONFIGURATION_ENABLED` environment variable to false).
 
 The plugin is optional, as it only serves to reduce the performance overhead.
 

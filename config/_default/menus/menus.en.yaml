@@ -3211,7 +3211,7 @@ main:
     parent: tests_setup
     identifier: tests_setup_dotnet
     weight: 101
-  - name: Java and JVM languages
+  - name: Java and JVM Languages
     url: tests/setup/java/
     parent: tests_setup
     identifier: tests_setup_java

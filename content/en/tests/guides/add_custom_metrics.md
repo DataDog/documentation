@@ -44,7 +44,7 @@ Add the custom metric to your test. The native instrumentation allows you to use
 
 {{% tab "Java" %}}
 
-To add custom metrics include [opentracing-util][1] library as a compile-time dependency to your project.
+To add custom metrics, include the [`opentracing-util`][1] library as a compile-time dependency to your project.
 
 ```java
 import io.opentracing.Span;
