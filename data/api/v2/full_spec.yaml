@@ -12478,7 +12478,7 @@ components:
       properties:
         interval:
           description: If the type of the metric is rate or count, define the corresponding
-            interval.
+            interval in seconds.
           example: 20
           format: int64
           type: integer
@@ -38252,6 +38252,10 @@ tags:
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
 - description: 'Custom Destinations forward all the logs ingested to an external destination.
+
+
+    **Note**: Log forwarding is not available for the Government (US1-FED) site. Contact
+    your account representative for more information.
 
 
     See the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)
