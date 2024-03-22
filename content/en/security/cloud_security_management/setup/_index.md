@@ -44,7 +44,7 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_enterprise">CSM Enterprise</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_pro">CSM Pro</a></td>
@@ -156,7 +156,7 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][4] sec
 [2]: /security/cloud_security_management/setup/csm_pro
 [3]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
-[5]: /security/identity_risks/#setup
+[5]: /security/cloud_security_management/identity_risks/#setup
 [6]: /security/cloud_security_management/setup/compatibility
 [7]: https://www.datadoghq.com/blog/cloud-security-management-changes/
 [8]: /security/cloud_security_management/setup/#csm-threats

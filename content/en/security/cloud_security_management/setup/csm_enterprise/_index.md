@@ -11,7 +11,7 @@ further_reading:
   - link: "/security/misconfigurations/"
     tag: "Documentation"
     text: "Cloud Security Management Misconfigurations"
-  - link: "/security/identity_risks/"
+  - link: "/security/cloud_security_management/identity_risks/"
     tag: "Documentation"
     text: "Cloud Security Management Identity Risks"
   - link: "/security/vulnerabilities/"
@@ -50,7 +50,7 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 
 [1]: /security/threats
 [2]: /security/misconfigurations
-[3]: /security/identity_risks
+[3]: /security/cloud_security_management/identity_risks
 [4]: /security/vulnerabilities
 [5]: https://app.datadoghq.com/security/configuration/csm/setup
 [6]: /agent/remote_config

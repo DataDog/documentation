@@ -62,7 +62,7 @@ Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail lo
 
 [1]: /security/threats
 [2]: /security/misconfigurations
-[3]: /security/identity_risks
+[3]: /security/cloud_security_management/identity_risks
 [4]: /security/vulnerabilities
 [5]: https://app.datadoghq.com/security/configuration/csm/setup
 [6]: /agent/remote_config

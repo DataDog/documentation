@@ -101,5 +101,5 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [12]: /security/threats/
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/
-[15]: /security/identity_risks/
+[15]: /security/cloud_security_management/identity_risks/
 [16]: /security/vulnerabilities/
