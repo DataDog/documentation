@@ -144,6 +144,35 @@ metadata:
     dd_customtags: "region:us1-east, team:backend"
 ```
 
+## Correlate deployments with CI pipelines
+
+If Argo CD deployments are triggered from a CI pipeline, you may correlate the deployment execution and the pipeline,
+allowing to check the associated deployments to a pipeline and the pipeline that triggered a deployment from Datadog.
+
+In this moment, not all the setups are supported. To be able to make the correlation your setup has to be similar to this:
+
+{{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
+
+If you are using [argo cd image updater][14], this command does not work since it relies on making the changes on
+the configuration repository using `git commit`.
+
+If you are using a similar setup as the one described above, then the correlation can be done by calling
+`datadog-ci deployment correlate` ([command syntax][15]) just before pusing the changes to the configuration repository:
+
+```yaml
+- job: JobToUpdateConfigurationRepository
+  run: |
+    # Update the configuration files
+    ...
+    git commit
+    # Correlate the deployment with the CI pipeline
+    datadog-ci deployment correlate --provider argocd
+    git push
+```
+
+
+
+
 ## Visualize deployments in Datadog
 
 The [**Deployments**][6] and [**Deployment Executions**][7] pages populate with data after a deployment is executed. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
@@ -170,3 +199,5 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
 [13]: /tracing/service_catalog
+[14]: https://argocd-image-updater.readthedocs.io/en/stable/
+[15]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
