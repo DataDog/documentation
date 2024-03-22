@@ -13,6 +13,7 @@
 @import 'base/mixins';
 @import 'base/colors';
 @import 'base/typography';
+@import 'base/typography_utilities';
 @import 'base/spacing';
 @import 'base/helpers';
 $baseImgURL: '{{.Site.Params.img_url}}';
