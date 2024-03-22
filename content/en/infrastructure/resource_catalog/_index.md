@@ -5,9 +5,9 @@ is_beta: true
 aliases:
   - /security_platform/cspm/resource_catalog
   - /security/cspm/resource_catalog
-  - /security/cloud_security_management/misconfigurationsresource_catalog
+  - /security/cloud_security_management/misconfigurations/resource_catalog
 further_reading:
-- link: "/security/cloud_security_management/misconfigurations"
+- link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Cloud Security Management Misconfigurations"
 - link: "/security/threats/"

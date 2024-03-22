@@ -26,5 +26,5 @@ Use the following instructions to enable [CSM Misconfigurations][1] for your clo
 
 {{< /tabs >}}
 
-[1]: /security/cloud_security_management/misconfigurations
+[1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features

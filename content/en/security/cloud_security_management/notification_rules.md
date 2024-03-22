@@ -76,5 +76,5 @@ To migrate notifications that are configured for individual detection rules:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/notifications/rules/
-[2]: /security/cloud_security_management/misconfigurations
+[2]: /security/cloud_security_management/misconfigurations/
 [3]: https://app.datadoghq.com/security/configuration/compliance/rules

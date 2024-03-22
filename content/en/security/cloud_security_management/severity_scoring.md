@@ -2,7 +2,7 @@
 title: Severity Scoring
 kind: documentation
 further_reading:
-- link: "/security/cloud_security_management/misconfigurations"
+- link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Start tracking misconfigurations with CSM Misconfigurations"
 - link: "/security/identity_risks/"

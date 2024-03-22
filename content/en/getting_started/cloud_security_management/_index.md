@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
   text: "Cloud Security Management"
-- link: "/security/cloud_security_management/misconfigurationscustom_rules/schema/"
+- link: "/security/cloud_security_management/misconfigurations/custom_rules/schema/"
   tag: "Documentation"
   text: "CSM Misconfigurations cloud resources schema"
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
@@ -62,26 +62,26 @@ This guide walks you through best practices for getting your team up and running
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/
-[2]: /security/cloud_security_management/misconfigurations
+[2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /security/threats/setup/?tab=kuberneteshelm#configure-the-csm-threats-agent
 [6]: /security/threats/setup/?tab=docker#configure-the-csm-threats-agent
 [7]: /security/threats/setup/?tab=hostothers#configure-the-csm-threats-agent
-[8]: /security/cloud_security_management/misconfigurationssetup?tab=kubernetes
-[9]: /security/cloud_security_management/misconfigurationssetup?tab=docker
-[10]: /security/cloud_security_management/misconfigurationssetup?tab=aws
-[11]: /security/cloud_security_management/misconfigurationssetup?tab=azure
-[12]: /security/cloud_security_management/misconfigurationssetup?tab=googlecloud
+[8]: /security/cloud_security_management/misconfigurations/setup?tab=kubernetes
+[9]: /security/cloud_security_management/misconfigurations/setup?tab=docker
+[10]: /security/cloud_security_management/misconfigurations/setup?tab=aws
+[11]: /security/cloud_security_management/misconfigurations/setup?tab=azure
+[12]: /security/cloud_security_management/misconfigurations/setup?tab=googlecloud
 [13]: https://app.datadoghq.com/security/csm
 [14]: /security/default_rules/#cat-cloud-security-management
-[15]: /security/cloud_security_management/misconfigurationssignals_explorer/
-[16]: /security/cloud_security_management/misconfigurationsfindings/
+[15]: /security/cloud_security_management/misconfigurations/signals_explorer/
+[16]: /security/cloud_security_management/misconfigurations/findings/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: /security/cloud_security_management/guide/tuning-rules/
-[19]: /security/cloud_security_management/misconfigurationscustom_rules
+[19]: /security/cloud_security_management/misconfigurations/custom_rules
 [20]: /security/threats/agent_expressions
-[21]: /security/cloud_security_management/misconfigurationsframeworks_and_benchmarks
+[21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
 [23]: /security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities
 [24]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-csm-for-vulnerabilities

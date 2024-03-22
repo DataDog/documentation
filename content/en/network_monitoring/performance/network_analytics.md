@@ -323,7 +323,7 @@ The **Security** tab highlights potential network threats and findings detected 
 [4]: /network_monitoring/performance/guide/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
 [6]: /security/threats/
-[7]: /security/cloud_security_management/misconfigurations
+[7]: /security/cloud_security_management/misconfigurations/
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries

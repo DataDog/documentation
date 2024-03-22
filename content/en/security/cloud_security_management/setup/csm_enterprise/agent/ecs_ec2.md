@@ -174,7 +174,7 @@ If the Agent fails to extract the SBOM from the container image, increase the Ag
 }
 ```
 
-[1]: /security/cloud_security_management/misconfigurations
+[1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
 [3]: /security/vulnerabilities
 [4]: /security/cloud_security_management/setup#supported-deployment-types-and-features

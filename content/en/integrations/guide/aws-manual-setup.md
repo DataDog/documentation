@@ -105,7 +105,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
 [4]: https://console.aws.amazon.com/iam/home#/roles
-[5]: /security/cloud_security_management/misconfigurations
+[5]: /security/cloud_security_management/misconfigurations/
 [6]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 {{% /tab %}}
 {{% tab "Access keys (GovCloud or China Only)" %}}

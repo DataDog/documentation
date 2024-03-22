@@ -5,7 +5,7 @@ further_reading:
   - link: "/security/cloud_security_management/setup"
     tag: "Documentation"
     text: "Setting up Cloud Security Management"
-  - link: "/security/cloud_security_management/misconfigurations"
+  - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Cloud Security Management Misconfigurations"
   - link: "/security/vulnerabilities/"
@@ -35,7 +35,7 @@ Select your infrastructure type for details on how to enable CSM Pro on the Agen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/misconfigurations
+[1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/vulnerabilities
 [3]: /security/cloud_security_management/setup
 [4]: /security/cloud_security_management/setup/csm_pro/cloud_accounts

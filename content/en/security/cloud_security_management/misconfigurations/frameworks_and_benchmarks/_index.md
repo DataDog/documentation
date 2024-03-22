@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
   - /security/cspm/frameworks_and_benchmarks
-  - /security/cloud_security_management/misconfigurationsframeworks_and_benchmarks
+  - /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
@@ -52,7 +52,7 @@ Select a rule to view details about the misconfigured resources, the rule descri
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_monitoring/default_rules/
-[2]: /security/cloud_security_management/misconfigurationssupported_frameworks
+[2]: /security/cloud_security_management/misconfigurations/supported_frameworks
 [11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
 [13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
@@ -63,8 +63,8 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance/homepage
-[21]: /security/cloud_security_management/misconfigurationsdetection_rules
-[26]: /security/cloud_security_management/misconfigurationscustom_rules/#tagging-findings
+[21]: /security/cloud_security_management/misconfigurations/detection_rules
+[26]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-findings
 [27]: https://app.datadoghq.com/security/compliance
 [28]: /dashboards/template_variables/
 [29]: /api/latest/security-monitoring/#update-an-existing-rule

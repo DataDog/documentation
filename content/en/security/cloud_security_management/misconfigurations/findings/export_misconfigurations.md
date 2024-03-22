@@ -2,7 +2,7 @@
 title: Export Misconfigurations
 kind: documentation
 aliases:
-  - /security/cloud_security_management/misconfigurationsexport_misconfigurations
+  - /security/cloud_security_management/misconfigurations/export_misconfigurations
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
