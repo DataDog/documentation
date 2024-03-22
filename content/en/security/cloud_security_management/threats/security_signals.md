@@ -3,7 +3,7 @@ title: Investigate Security Signals
 kind: documentation
 disable_toc: false
 aliases:
-  - /security/cloud_security_management/threats/security_signals
+  - /security/threats/security_signals
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"

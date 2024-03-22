@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
   - /security/cloud_workload_security/workload_security_rules
-  - /security/cloud_security_management/threats/workload_security_rules
+  - /security/threats/workload_security_rules
 further_reading:
 - link: "/security/cloud_security_management/threats/setup"
   tag: "Documentation"

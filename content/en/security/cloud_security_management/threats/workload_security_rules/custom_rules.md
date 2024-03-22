@@ -2,7 +2,7 @@
 title: Creating Custom Detection Rules
 kind: documentation
 aliases:
-  - /security/cloud_security_management/threats/custom_rules
+  - /security/threats/custom_rules
 further_reading:
 - link: "/security/cloud_security_management/threats/setup"
   tag: "Documentation"
