@@ -15,11 +15,11 @@ further_reading:
 
 The SLO List widget displays a subset of [SLOs][1] over their primary time window. All other configured time windows are available in the SLO's side panel on the SLO page. 
 
-{{< img src="dashboards/widgets/slo_list/slo_list_widget_v2.png" alt="The SLO List widget displaying a list of SLOs" style="width:90%;" >}}
+{{< img src="dashboards/widgets/slo_list/slo-list-widget-latest.png" alt="The SLO List widget displaying a list of SLOs" style="width:90%;" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/slo_list/slo_list_editor_v2.png" alt="A search query defining the service as web-store in the SLO List widget editor" style="width:90%;" >}}
+{{< img src="dashboards/widgets/slo_list/slo-list-widget-editor-latest.png" alt="A search query defining the service as web-store in the SLO List widget editor" style="width:90%;" >}}
 
 ### Configuration
 
