@@ -4053,32 +4053,32 @@ main:
     identifier: csm_setup_cloud_workload_security_agent
     weight: 1000000
   - name: Threats
-    url: security/threats/
+    url: security/cloud_security_management/threats/
     parent: csm
     identifier: cloud_workload_security
     weight: 2
   - name: Detection Rules
-    url: security/threats/workload_security_rules
+    url: security/cloud_security_management/threats/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 201
   - name: Create Custom Rules
-    url: security/threats/workload_security_rules/custom_rules
+    url: security/cloud_security_management/threats/workload_security_rules/custom_rules
     parent: cws_workload_security_rules
     identifier: cws_custom_rules
     weight: 101
   - name: Investigate Security Signals
-    url: security/threats/security_signals
+    url: security/cloud_security_management/threats/security_signals
     parent: cloud_workload_security
     identifier: cws_security_signals
     weight: 202
   - name: Creating Custom Agent Rules
-    url: security/threats/agent_expressions
+    url: security/cloud_security_management/threats/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
     weight: 203
   - name: CWS Events Formats
-    url: security/threats/backend
+    url: security/cloud_security_management/threats/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 204
