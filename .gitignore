@@ -73,6 +73,8 @@ content/en/security/cloud_workload_security/agent_expressions.md
 content/en/security/cloud_workload_security/backend.md
 content/en/security/threats/agent_expressions.md
 content/en/security/threats/backend.md
+content/en/security/cloud_security_management/threats/backend.md
+content/en/security/cloud_security_management/threats/agent_expressions.md
 content/en/security_platform/
 
 # cspm cloud resource schemas

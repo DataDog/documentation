@@ -554,7 +554,7 @@
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend.md'
           options:
-            dest_dir: '/security/threats/'
+            dest_dir: '/security/cloud_security_management/threats/'
             path_to_remove: 'docs/cloud-workload-security/'
 
       - repo_name: dd-source
