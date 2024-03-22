@@ -130,6 +130,40 @@ You can visualize your ingested data using the following cost types:
 | `gcp.cost.amortized` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
 | `gcp.cost.amortized.shared.resources.allocated` | All of your GCP amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][15].|
 
+### Out-of-the-box tags
+Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data.
+
+The following out-of-the-box tags are available for filtering and grouping data:
+
+| Tag                          | Description       |
+| ---------------------------- | ----------------- |
+| `google_product`             | The Google service being billed.|
+| `google_cost_type`           | The type of charge covered by this item (for example, regular, tax, adjustment, or rounding error).|
+| `google_usage_type`          | The usage details of the item (for example, Standard Storage US).|
+| `google_location`            | The location associated with the item at the level of a multi-region, country, region, or zone.|
+| `google_region`              | The region associated with the item.|
+| `google_zone`                | The availability zone associated with the item.|
+| `google_pricing_usage_unit`  | The pricing unit used for calculating the usage cost (for example, gibibyte, tebibyte, or year).|
+| `google_is_unused_reservation`| Whether the usage was reserved but not used|
+
+#### Cost and observability correlation
+
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top GCP products to simplify correlating observability and cost metrics.
+
+For example, to view cost and utilization for each Cloud SQL database, you can make a table with `gcp.cost.amortized`, `gcp.cloudsql.database.cpu.utilization`, and `gcp.cloudsql.database.memory.utilization` (or any other Cloud SQL metric) and group by `database_id`. Or, to see Cloud Function usage and costs side by side, you can graph `gcp.cloudfunctions.function.execution_count` and `gcp.cost.amortized` grouped by `function_name`.
+
+The following out-of-the-box tags are available:
+| AWS Product                  | Tag       |
+| ---------------------------- | ----------------- |
+| Compute Engine                | `instance_id`, `instance-type`|
+| Cloud Functions         | `function_name`|
+| Cloud Run         | `job_name`, `service_name`|
+| Cloud SQL         | `database_id`|
+| Cloud Spanner         | `instance_id`|
+| App Engine      | `module_id`|
+| BigQuery  | `project_id`, `dataset_id` |
+| Kubernetes Engine  | `cluster_name`|
+
 ### Container allocation
 **Container allocation** metrics contain all of the same costs as the GCP metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][15] for more details.
 
@@ -151,3 +185,4 @@ You can visualize your ingested data using the following cost types:
 [13]: /cloud_cost_management/google_cloud/#provide-service-account-necessary-permissions
 [14]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
 [15]: https://docs.datadoghq.com/cloud_cost_management/container_cost_allocation/
+[16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage
