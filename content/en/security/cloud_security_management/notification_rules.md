@@ -11,89 +11,47 @@ further_reading:
   text: "Notification Rules"
 ---
 
-<div class="alert alert-warning">...in private beta.</div>
+This article outlines upcoming changes to how [notification rules][1] are configured. Although the most significant changes apply to Cloud Security Management (CSM), they also impact Application Security Management and Cloud SIEM.
 
-Notification rules allow you to set general alerting preferences that span across multiple detection rules and signals. They play a key role in keeping your team informed of issues without you having to manually configure notifications for individual detection rules.
+## CSM Misconfigurations signals deprecation
 
-This article outlines upcoming changes to how notification rules are configured. Although the changes primarily apply to Cloud Security Management, they also impact Application Security Management and Cloud SIEM.
+Currently, notifications for [CSM Misconfigurations][2] can only be configured for detection rules that have signals enabled. As part of the upcoming changes to notification rules, you will no longer be required to enable signals in order to generate notifications.
 
-## Upcoming changes to notification rules
+This change will have the following impact on how notifications are generated for CSM Misconfigurations:
 
-### CSM Misconfigurations signals deprecation
+1. You will now be able to specify misconfiguration as a source type when creating notification rules.
+1. You will no longer be able to enable signals for CSM Misconfigurations detection rules. This also means that notifications can no longer be enabled for individual detection rules.
+1. Support for CSM Misconfigurations signals will be deprecated in late 2024. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
-placeholder
+## Notification rules source types selector
 
-### Support for identity risks and attack paths
+When you create a notification rule, you will now be required to choose between two different source types (Vulnerability or Signal).
 
-placeholder
+### What is a vulnerability?
 
-### Notification rule source types selector
+A vulnerability represents a potential security flaw in your infrastructure. The available options are:
 
-The available source types for notification rules is now split into two types: Signals or Vulnerabilities.
+  - Application library vulnerability
+  - Application code vulnerability
+  - Misconfiguration
+  - Attack Path
+  - Identity Risk
 
-When you create or edit a notification rule, you now specify the source type by choosing either Vulnerabilities or Signals.
+### What is a signal?
 
-A vulnerability...
+A signal represents suspicious activity that poses an active threat against your infrastructure. The available options are:
 
-A signal...
+  - Application Security
+  - Log Detection
+  - Signal Correlation 
+  - Workload Security
 
-The Notification Rule type selector is now split into two types: Signals or Vulnerabilities: 
+## Additional changes
 
+- Notification rules can now be configured for identity risks and attack paths.
+- Terraformed custom detection rules using the legacy notifications attribute are no longer supported.
 
-
-
-## How notification rules used to work
-
-Signals are security alerts that Datadog generates and displays in the Signals Explorer. Was required to be enabled in order to alert on misconfigurations.
-
-**placeholder for diagram**
-
-Brand design ticket is in progress: https://datadoghq.atlassian.net/browse/BRAND-7001
-
-## How notification rules work now
-
-Cloud Configuration and Infrastructure Configuration will no longer generate signals.
-
-no longer require that signals be enabled for 
-
-When you create a notification rule, you specify 
-
-**placeholder for diagram**
-
-A vulnerability...
-
-A signal...
-
-**Notes**:
-
-- As part of this change, notifications can no longer be configured for individual detection rules.
-- Support for Cloud Configuration and Infrastructure Configuration signals will be deprecated later in 2024. Legacy signals will be retained for 15 months from their trigger date (free of charge). 
-- Terraformed custom detection rules using the legacy notifications attribute are no longer supported. 
-
-## Create notification rules
-
-To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as source type (vulnerability or signal), severity, tags, and attributes.
-
-As you configure the rule, a preview of issues that match the notification rule conditions appears on the **Preview of Matching Results** panel. This is useful in determining if the notification rule is overly specific or too broad.
-
-### Select a source type
-
-1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
-1. Under **Source Types**, select whether the notification rule should alert on vulnerabilities or threats.
-1. (Optional) For ASM, select the ASM Vulnerability Management source type, _or_ leave the source type empty and select the **Include Application level vulnerabilities** checkbox.
-
-### Specify rule criteria
-
-1. Under **Rule Criteria**, select one or more severity levels.
-1. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
-
-### Provide notification details
-
-1. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
-1. Enter a name for the notification rule.
-1. Click **Save and Activate**.
-
-## Migrate notifications
+## How to migrate existing notifications
 
 ### Legacy notification rules
 
@@ -117,4 +75,6 @@ To migrate notifications that are configured for individual detection rules:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/compliance/rules
+[1]: /security/notifications/rules/
+[2]: /security/misconfigurations
+[3]: https://app.datadoghq.com/security/configuration/compliance/rules
