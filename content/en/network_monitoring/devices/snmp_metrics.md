@@ -94,7 +94,7 @@ To expand your setup:
 
 ### Autodiscovery
 
-An alternative to specifying individual devices is to use autodiscovery to automatically discover all the devices on your network.
+An alternative to specifying individual devices is to use Autodiscovery to automatically discover all the devices on your network.
 
 Autodiscovery polls each IP on the configured subnet, and checks for a response from the device. Then, the Datadog Agent looks up the `sysObjectID` of the discovered device and maps it to one of [Datadog's device profiles][6]. The profiles contain lists of predefined metrics to collect for various types of devices.
 
@@ -213,7 +213,7 @@ To set up ping with Network Device Monitoring:
 
 {{% tab "Autodiscovery" %}}
 
-- To apply ping settings to all autodiscovery subnets, create ping configuration under the `snmp_listener` section.
+- To apply ping settings to all Autodiscovery subnets, create ping configuration under the `snmp_listener` section.
 
 	```yaml
 	listeners:
