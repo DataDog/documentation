@@ -148,7 +148,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 
 #### Cost and observability correlation
 
-Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top GCP products to simplify correlating observability and cost metrics.
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top Google products to simplify correlating observability and cost metrics.
 
 For example, to view cost and utilization for each Cloud SQL database, you can make a table with `gcp.cost.amortized`, `gcp.cloudsql.database.cpu.utilization`, and `gcp.cloudsql.database.memory.utilization` (or any other Cloud SQL metric) and group by `database_id`. Or, to see Cloud Function usage and costs side by side, you can graph `gcp.cloudfunctions.function.execution_count` and `gcp.cost.amortized` grouped by `function_name`.
 
