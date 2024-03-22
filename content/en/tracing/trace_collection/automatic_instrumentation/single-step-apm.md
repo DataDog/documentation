@@ -280,7 +280,11 @@ For example, add the following configuration to your `datadog-values.yaml` file:
             ruby: v1.15.0
 {{< /highlight >}}
 
-If you include a library but don't specify its version, it defaults to the latest version. See the links in the following table to find the latest versions of Datadog tracing libraries on gcr.io, Docker Hub, and Amazon ECR:
+If you include a library but don't specify its version, it defaults to the latest version.
+
+Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see [Changing your container registry][30].
+
+Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
 
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
@@ -323,6 +327,7 @@ For example, add the following configuration to your `datadog-values.yaml` file:
 [27]: http://gcr.io/datadoghq/dd-lib-ruby-init
 [28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+[30]: /containers/guide/changing_container_registry/
 
 {{% /tab %}}
 {{< /tabs >}}
