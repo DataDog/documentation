@@ -25,6 +25,7 @@ Before proceeding with the upgrade to the OTel Collector versions 0.95.0+:
 To upgrade:
 1. Include `datadog/connector` in the list of configured connectors.
 1. Include `datadog/connector` and `datadog/exporter` in the list of the configured exporters in your OpenTelemetry `traces` pipeline.
+1. Include `datadog/connector` in the list of the configured receivers in your OpenTelemetry `metrics` pipeline.
 1. Include `datadog/exporter` in the list of the configured exporters in your OpenTelemetry `metrics` pipeline.
 
 ## Example configuration
