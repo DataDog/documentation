@@ -48,6 +48,14 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 - `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
+**Note**: The `TrackingConsent` values do not use the same capitalization patterns across the SDK languages:
+
+Android | iOS, React Native and Flutter | Unity
+--- | --- | ---
+`PENDING` | `pending` | `Pending`
+`GRANTED` | `granted` | `Granted`
+`NOT_GRANTED` | `not_granted` | `NotGranted`
+
 ### Sending data when device is offline
 
 RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
