@@ -15,7 +15,7 @@ To continue receiving Trace Metrics, configure the Datadog Connector in the Open
 
 ## Migrate to OpenTelemetry Collector version 0.95.0+
 
-<div class="alert alert-warning">To continue receiving Trace Metrics, you must configure the Datadog Connector as a part of your upgrade to OpenTelemetry Collector version 0.95.0+. Upgrading without configuring Datadog Connector might also result in difficulties viewing the APM Trace page within the application. Monitors and dashboards based on the affected metrics might also be impacted.</a></div>
+<div class="alert alert-warning">To continue receiving Trace Metrics, you must configure the Datadog Connector as a part of your upgrade to OpenTelemetry Collector version 0.95.0+. Upgrading without configuring the Datadog Connector might also result in difficulties viewing the APM Traces page within the application. Monitors and dashboards based on the affected metrics might also be impacted.</a></div>
 
 Before proceeding with the upgrade to the OTel Collector versions 0.95.0+:
 - Review the [release notes](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0) to understand the nature of the changes.
@@ -83,7 +83,7 @@ service:
 
 ## Vendor-specific Open-Telemetry distributions
 
-If you're running a vendor-specific OpenTelemetry distribution that does not include Datadog Connector, revert to the previous Trace Connector behavior by disabling the `exporter.datadogexporter.DisableAPMStats` feature gate.
+If you're running a vendor-specific OpenTelemetry distribution that does not include the Datadog Connector, revert to the previous Trace Connector behavior by disabling the `exporter.datadogexporter.DisableAPMStats` feature gate.
 
 ```sh
 otelcol --config=config.yaml --feature-gates=-exporter.datadogexporter.DisableAPMStats
