@@ -32,7 +32,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest PHP Tracer supports versions >= 5.4.x.
+The latest PHP Tracer supports versions >= 7.X.
 
 For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
@@ -57,7 +57,7 @@ apk add libgcc
 Run the installer:
 
 ```shell
-# Full installation: APM + ASM + Profiling (Beta)
+# Full installation: APM + ASM + Profiling
 php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 
 # APM only
