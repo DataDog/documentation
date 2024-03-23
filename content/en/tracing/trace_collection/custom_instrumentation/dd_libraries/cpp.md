@@ -23,35 +23,80 @@ further_reading:
 If you have not yet read the setup instructions, start with the <a href="https://docs.datadoghq.com/tracing/setup/cpp/">C++ Setup Instructions</a>.
 </div>
 
-## Add tags
+## Creating spans
+
+### Manually instrument a method
+
+```cpp
+{
+  // Create a root span for the current request.
+  auto root_span = tracer.create_span();
+  root_span.set_name("get_ingredients");
+  // Set a resource name for the root span.
+  root_span.set_resource("bologna_sandwich");
+  // Create a child span with the root span as its parent.
+  auto child_span = root_span.create_child();
+  child_span.set_name("cache_lookup");
+  // Set a resource name for the child span.
+  child_span.set_resource_name("ingredients.bologna_sandwich");
+  // Spans can be finished at an explicit time ...
+  child_span.set_end_time(std::chrono::steady_clock::now());
+} // ... or implicitly when the destructor is invoked.
+  // For example, root_span finishes here.
+```
+
+## Adding tags
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-C++ tracing uses "common tags". These tags can be sourced from both [Datadog specific tags][3] or [OpenTracing tags][4], and included like this:
-
-```cpp
-#include <opentracing/ext/tags.h>
-#include <datadog/tags.h>
-```
-
 Note that the Datadog tags are necessary for [unified service tagging][5].
 
-### Add custom span tags
+{{< tabs >}}
 
-Add [tags][1] directly to a [span][2] object by calling `Span::SetTag`. For example:
+{{% tab "Locally" %}}
+
+Add [tags][1] directly to a [span][2] object by calling `Span::set_tag`. For example:
 
 ```cpp
 auto tracer = ...
-auto span = tracer->StartSpan("operation_name");
-span->SetTag("key must be string", "Values are variable types");
-span->SetTag("key must be string", 1234);
+
+// Add tags directly to a span by calling `Span::set_tag`
+auto span = tracer->create_span();
+span->set_tag("key must be string", "value must also be a string");
+
+// Or, add tags by providing a `SpanConfig`
+datadog::tracing::SpanConfig opt;
+opt.tag.emplace("team", "apm-proxy");
+auto span2 = tracer->create_span(opts);
 ```
 
-Values are of [variable type][6] and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
+{{% /tab %}}
 
-### Adding tags globally to all spans
+{{% tab "Globally" %}}
+
+There is two ways to set tags across all your spans.
+
+### Environment variable
 
 To set tags across all your spans, set the `DD_TAGS` environment variable as a list of `key:value` pairs separated by commas.
+
+### Manually
+
+```cpp
+const datadog::tracing::TracerConfig tracer_config;
+tracer_config.tags.emplace("team", "apm-proxy");
+tracer_config.tags.emplace("apply", "on all spans");
+
+const auto validated_config = validate_config(tracer_config);
+auto tracer = datadog::trace::Tracer(*validated_config);
+
+// New spans will have all tags defined in `tracer_config.tags`
+auto span = tracer.create_tags();
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Set errors on a span
 
@@ -59,13 +104,15 @@ To associate a span with an error, set one or more error-related tags on the
 span. For example:
 
 ```cpp
-span->SetTag(opentracing::ext::error, true);
+span.set_error(true);
 ```
 
 Or, alternatively:
 
 ```cpp
-span->SetTag("error", true);
+span.set_error_message("error");
+span.set_error_type("propagation");
+span.set_error_stack(stack);
 ```
 
 Add more specific information about the error by setting any combination of the
@@ -77,45 +124,18 @@ An example of adding a combination of error tags:
 ```cpp
 // Associate this span with the "bad file descriptor" error from the standard
 // library.
-span->SetTag("error.msg", "[EBADF] invalid file");
-span->SetTag("error.type", "errno");
+span.set_error_stack("[EBADF] invalid file");
+span.set_error_type("errno");
 ```
 
-Adding any of the `error.msg`, `error.stack`, or `error.type` tags sets
-`error` to the value `true`.
+Using any of the `Span::set_error_stack`, `Span::set_error_type` or `Span::set_error_message` sets tags `error` to the value `true`.
 
-To unset an error on a span, set the `error` tag to value `false`, which removes
-any previously set `error.msg`, `error.stack`, or `error.type` tags.
+To unset an error on a span, set the `error` tag to value `false`, which removes any previously set `error.msg`, `error.stack`, or `error.type` tags.
 
 ```cpp
 // Clear any error information associated with this span.
-span->SetTag("error", false);
+span.set_error(false);
 ```
-
-## Adding spans
-
-### Manually instrument a method
-
-To manually instrument your code, install the tracer as in the [setup examples][8], and then use the tracer object to create [spans][2].
-
-```cpp
-{
-  // Create a root span for the current request.
-  auto root_span = tracer->StartSpan("get_ingredients");
-  // Set a resource name for the root span.
-  root_span->SetTag(datadog::tags::resource_name, "bologna_sandwich");
-  // Create a child span with the root span as its parent.
-  auto child_span = tracer->StartSpan(
-      "cache_lookup",
-      {opentracing::ChildOf(&root_span->context())});
-  // Set a resource name for the child span.
-  child_span->SetTag(datadog::tags::resource_name, "ingredients.bologna_sandwich");
-  // Spans can be finished at an explicit time ...
-  child_span->Finish();
-} // ... or implicitly when the destructor is invoked.
-  // For example, root_span finishes here.
-```
-
 
 ## Propagating context with headers extraction and injection
 
