@@ -19,11 +19,12 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
-<div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/java/">Java Setup Instructions</a>.
-</div>
 
-This page details common use cases for adding and customizing observability with Datadog APM.
+This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
+
+<div class="alert alert-info">
+To learn about using the OpenTelemetry API, read <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/java/">Custom Instrumentation with the OpenTelemetry API</a>.
+</div>
 
 ## Adding tags
 
@@ -355,3 +356,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [8]: /tracing/trace_collection/trace_context_propagation/java/
 [9]: /tracing/security
 [10]: /tracing/guide/ignoring_apm_resources/
+[11]: /tracing/setup/java/
