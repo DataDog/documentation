@@ -705,9 +705,9 @@ main:
     identifier: otel_guides_heatmaps
     parent: otel_guides
     weight: 801
-  - name: Switching to Datadog Connector
-    url: opentelemetry/guide/switch_from_processor_to_connector/
-    identifier: otel_guides_connector
+  - name: Migrate to OpenTelemetry Collector version 0.95.0+
+    url: opentelemetry/guide/migration/
+    identifier: otel_guides_migration
     parent: otel_guides
     weight: 802
   - name: Producing Delta Temporality Metrics
