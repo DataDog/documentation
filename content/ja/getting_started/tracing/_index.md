@@ -11,7 +11,7 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-apm
   tag: ラーニングセンター
   text: Application Performance Monitoring の紹介
-- link: https://dtdg.co/fe
+- link: https://corpsite-preview.datadoghq.com/ccole/tem-lang-pref/technical-enablement/sessions
   tag: Foundation Enablement
   text: APM の理解を深めるためのインタラクティブなセッションに参加できます
 kind: documentation

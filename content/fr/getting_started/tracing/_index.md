@@ -11,6 +11,9 @@ further_reading:
 - link: https://learn.datadoghq.com/enrol/index.php?id=4
   tag: Centre d'apprentissage
   text: Découvrir la solution Application Performance Monitoring avec Docker
+- link: 'https://corpsite-preview.datadoghq.com/ccole/tem-lang-pref/technical-enablement/sessions/'
+  tag: 'Foundation Enablement'
+  text: 'Join an interactive session to boost your APM understanding'
 kind: documentation
 title: Débuter avec le tracing
 ---
