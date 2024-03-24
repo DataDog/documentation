@@ -70,9 +70,9 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 3. Instrument your Step Function.
 
    ```shell
-   datadog-ci stepfunctions instrument --step-function <STEP_FUNCTION_ARN> --forwarder <FORWARDER_ARN>
+   datadog-ci stepfunctions instrument --step-function <STEP_FUNCTION_ARN_1>,<STEP_FUNCTION_ARN_2> --forwarder <FORWARDER_ARN>
    ```
-   - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function.
+   - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function. 
    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
 
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
