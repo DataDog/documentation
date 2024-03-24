@@ -273,6 +273,12 @@ You can use the following properties in `Datadog.Configuration` when creating th
 `uploadFrequency`
 : Sets the preferred frequency of uploading data to Datadog. Available values include: `.frequent`, `.average`, and `.rare`.
 
+`batchProcessingLevel`
+: Sets the preferred level of batch processing when uploading it to Datadog. Available values include: `.low`, `.medium`, and `.high`, which translates to `1`, `10`, `100` of batches processed in one iteration.
+
+`backgroundTasksEnabled`
+: Enables background tasks for uploading data to Datadog. This allows the RUM iOS SDK to continue uploading data when the app is in the background. For more information, see [Apple Documentation](https://developer.apple.com/documentation/uikit/uiapplication/1623031-beginbackgroundtaskwithexpiratio).
+
 ### RUM configuration
 
 You can use the following properties in `RUM.Configuration` when enabling RUM:
