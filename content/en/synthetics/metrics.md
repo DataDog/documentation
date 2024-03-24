@@ -86,7 +86,7 @@ For more information on API test timings, read the guide on [API Test Timings an
 
 ### Private locations
 
-{{< get-metrics-from-git "synthetics" "synthetics.pl.worker" >}}
+{{< get-metrics-from-git "synthetics" "synthetics.pl" >}}
 
 ### Continuous Testing
 
