@@ -10,7 +10,7 @@ Configure your Splunk HTTP Event Collectors (HEC) so that the Observability Pipe
 
 This document walks you through the following steps to set up dual shipping:
 
-1. Set up the Splunk index
+1. Set up the Splunk index if you don't have one set up already
 1. Set up a pipeline in Observability Pipelines
 1. Install the Observability Pipelines Worker
 1. Connect your Splunk collector to the Observability Pipelines Worker
@@ -28,7 +28,7 @@ For existing HEC configurations, you can get this token from the Splunk app:
 1. Go to the **HTTP Event Collector** tab
 1. Copy the **Token Value** from your target collector.
 
-## Set up a pipeline for a Splunk HEC source
+## Set up a pipeline in Observability Pipelines
 
 1. Navigate to [Observability Pipelines][LINK].
 1. Select the **Dual Ship Logs** use case to create a new pipeline.

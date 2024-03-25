@@ -3392,15 +3392,15 @@ main:
     parent: observability_pipelines_dual_ship_logs
     identifier: observability_pipelines_dual_ship_logs_sumo_logic
     weight: 2003
+  - name: Archive Logs to Amazon S3
+    url: observability_pipelines/archive_logs_s3/
+    parent: observability_pipelines
+    identifier: observability_pipelines_archive_logs_s3
+    weight: 3
   - name: Split Logs
     url: observability_pipelines/split_logs/
     parent: observability_pipelines
     identifier: observability_pipelines_split_logs
-    weight: 3
-  - name: Archive Logs
-    url: observability_pipelines/archive_logs/
-    parent: observability_pipelines
-    identifier: observability_pipelines_archive_logs
     weight: 4
   - name: Redact log data
     url: observability_pipelines/redact_log_data/
