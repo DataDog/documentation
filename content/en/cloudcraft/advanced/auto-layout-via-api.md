@@ -15,6 +15,7 @@ This guide provides a step-by-step approach to utilizing this feature via common
 
 - An active [Cloudcraft Pro subscription][1].
 - An API key with read-write permissions.
+- The account ID of the AWS or Azure account you wish to scan.
 - Access to a Unix-like environment (Linux, macOS, or Windows Subsystem for Linux).
 - Familiarity with command-line operations.
 - Basic knowledge of API usage.
