@@ -400,6 +400,6 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
 [4]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [5]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
-[6]: /continuous_integration/guides/add_custom_measures/?tab=java
+[6]: /tests/guides/add_custom_measures/?tab=java
 [7]: /tracing/trace_collection/compatibility/java#integrations
 [8]: /getting_started/tagging/unified_service_tagging

@@ -419,7 +419,7 @@ Datadog::CI.active_test_session&.finish
 
 [1]: /tracing/trace_collection/dd_libraries/ruby/#installation
 [2]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
-[3]: /continuous_integration/guides/add_custom_measures/?tab=ruby
+[3]: /tests/guides/add_custom_measures/?tab=ruby
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
 [6]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation

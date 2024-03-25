@@ -32,10 +32,10 @@ Ensure that [Test Visibility][1] is already set up for your language.
 * `jest>=24.8.0`, only when run with `jest-circus`.
 * `mocha>=5.2.0`.
 * `cucumber-js>=7.0.0`.
-* Only [`Istanbul`][1] code coverage is supported.
+* Only [`Istanbul`][101] code coverage is supported.
 
 
-When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][2].
+When tests are instrumented with [Istanbul][101], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][102].
 
 To report total code coverage from your test sessions, follow these steps:
 
@@ -72,8 +72,8 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 ```
 
 
-[1]: https://istanbul.js.org/
-[2]: https://github.com/istanbuljs/nyc
+[101]: https://istanbul.js.org/
+[102]: https://github.com/istanbuljs/nyc
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -83,7 +83,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-If you are using [Coverlet][1] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
+If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
 ### Advanced options
 
@@ -149,7 +149,7 @@ Filters provide fine-grained control over what gets excluded using **filter expr
 #### VS code coverage options
 
 
-See [Customize code coverage analysis][2] in the Microsoft documentation for additional information.
+See [Customize code coverage analysis][102] in the Microsoft documentation for additional information.
 
 | Option                   | Summary                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -189,8 +189,8 @@ See [Customize code coverage analysis][2] in the Microsoft documentation for add
 </RunSettings>
 ```
 
-[1]: https://github.com/coverlet-coverage/coverlet
-[2]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
+[101]: https://github.com/coverlet-coverage/coverlet
+[102]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
 {{% /tab %}}
 {{% tab "Java" %}}
 
@@ -199,16 +199,16 @@ See [Customize code coverage analysis][2] in the Microsoft documentation for add
 
 When code coverage is available, the Datadog Tracer reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-[Jacoco][1] is supported as a code coverage library.
+[Jacoco][101] is supported as a code coverage library.
 
 If your project already has Jacoco configured, the Datadog Tracer instruments it and reports the coverage data to Datadog automatically.
 
 Otherwise, you can configure the tracer to add Jacoco to your test runs at runtime.
-Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][2] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
+Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][102] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
 
 
-[1]: https://www.eclemma.org/jacoco/
-[2]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
+[101]: https://www.eclemma.org/jacoco/
+[102]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
 {{% /tab %}}
 {{% tab "JUnit Report Uploads" %}}
 
@@ -237,12 +237,12 @@ The code coverage report needs to be generated in a different process, otherwise
 * `pytest>=3.0.0`.
 * `pytest-cov>=2.7.0`.
 * `unittest>=3.8`.
-* Only [`coverage.py`][1] and [`pytest-cov`][2] code coverage are supported.
+* Only [`coverage.py`][101] and [`pytest-cov`][2] code coverage are supported.
 
 
-When tests are instrumented with [`coverage.py`][1] or [`pytest-cov`][2], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
+When tests are instrumented with [`coverage.py`][101] or [`pytest-cov`][2], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
 
-To report total code coverage from your test sessions with [`coverage.py`][1], follow these steps:
+To report total code coverage from your test sessions with [`coverage.py`][101], follow these steps:
 
 1. Install `coverage`:
 ```
@@ -254,7 +254,7 @@ python3 -m pip install coverage
 DD_ENV=ci DD_SERVICE=my-python-service coverage run -m pytest
 ```
 
-Alternatively, to report total code coverage from your test sessions with [`pytest-cov`][2], follow these steps:
+Alternatively, to report total code coverage from your test sessions with [`pytest-cov`][102], follow these steps:
 
 1. Install `pytest`:
 ```
@@ -271,8 +271,8 @@ python3 -m pip install pytest-cov
 DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 ```
 
-[1]: https://github.com/nedbat/coveragepy
-[2]: https://github.com/pytest-dev/pytest-cov
+[101]: https://github.com/nedbat/coveragepy
+[102]: https://github.com/pytest-dev/pytest-cov
 {{% /tab %}}
 
 {{< /tabs >}}

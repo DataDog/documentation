@@ -3,7 +3,8 @@ title: Add Custom Measures To Your Tests
 kind: guide
 description: Learn how to use custom measures in your tests.
 aliases:
-- /continuous_integration/guides/add_custom_measures/
+- /continuous_integration/guides/add_custom_metrics/
+- /tests/guides/add_custom_metrics/
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"

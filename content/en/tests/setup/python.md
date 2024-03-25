@@ -140,7 +140,7 @@ The overall count of test events (and their correctness) remain unaffected.
 
 
 [1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
-[2]: /continuous_integration/guides/add_custom_measures/?tab=python
+[2]: /tests/guides/add_custom_measures/?tab=python
 [3]: https://pypi.org/project/pytest-xdist/
 [4]: https://pypi.org/project/pytest-forked/
 [5]: https://pypi.org/project/pytest-randomly/
