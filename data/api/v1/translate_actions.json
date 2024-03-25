@@ -1009,10 +1009,6 @@
     "description": "Get hourly usage for analyzed logs (Security Monitoring).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for analyzed logs"
   },
-  "GetUsageAttribution": {
-    "description": "Get usage attribution.\n**Note:** This endpoint will be fully deprecated on December 1, 2022.\nRefer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) for the associated migration guide.",
-    "summary": "Get usage attribution"
-  },
   "GetUsageAuditLogs": {
     "description": "Get hourly usage for audit logs.\n**Note:** This endpoint has been deprecated.",
     "summary": "Get hourly usage for audit logs"

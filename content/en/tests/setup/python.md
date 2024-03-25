@@ -134,7 +134,7 @@ The overall count of test events (and their correctness) remain unaffected. Indi
 
 #### Test ordering
 
-Plugins that chage the ordering of test execution (such as [`pytest-randomly`][5]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
+Plugins that change the ordering of test execution (such as [`pytest-randomly`][5]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
 
 The overall count of test events (and their correctness) remain unaffected.
 

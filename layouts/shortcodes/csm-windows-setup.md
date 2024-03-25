@@ -1,5 +1,3 @@
-<div class="alert alert-warning">Cloud Security Management on Windows is in public beta and should only be installed on hosts that are not critical to production workloads.</div>
-
 Use the following instructions to enable [CSM Threats][11] on Windows. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][12].
 
 Datadog Cloud Security Management on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
@@ -16,6 +14,7 @@ Datadog Cloud Security Management on Windows includes built-in threat detection 
 
 ## Prerequisites
 
+- Agent versions 7.52 and later.
 - Access to hosts running Windows Server 2016 or newer.
 - (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
@@ -23,11 +22,9 @@ Datadog Cloud Security Management on Windows includes built-in threat detection 
 
 ## Installation
 
-<div class="alert alert-info">You must use the installer linked in this document, and <strong>not</strong> the installer available on the <strong>Integrations</strong> &gt; <strong>Agent</strong> page in Datadog.</div>
-
 ### Installer
 
-1. Download the [Datadog Agent installer][3].
+1. [Install the Datadog Windows Agent][3].
 2. Right-click the downloaded `.msi` file and select **Run as administrator**.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5]. If you are upgrading from an existing version of the Agent, the installer may not prompt you for an API key.
 
@@ -35,7 +32,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Command line
 
-1. Download the [Datadog Agent installer][3].
+1. Download the [Datadog Agent installer][4].
 2. Follow the instructions for command line installation using command prompts or PowerShell.
 
 ## Configuration
@@ -71,7 +68,8 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
-[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.3.cwsbeta-3.msi
+[3]: /agent/basic_agent_usage/windows/?tab=gui
+[4]: /agent/basic_agent_usage/windows/?tab=commandline
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/logs

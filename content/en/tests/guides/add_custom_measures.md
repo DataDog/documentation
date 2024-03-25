@@ -43,7 +43,13 @@ Add the custom measure to your test. The native instrumentation allows you to us
 
 {{% tab "Java" %}}
 
+To add custom metrics, include the [`opentracing-util`][1] library as a compile-time dependency to your project.
+
 ```java
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+
+// ...
 // inside your test
 final Span span = GlobalTracer.get().activeSpan();
 if (span != null) {
@@ -52,6 +58,8 @@ if (span != null) {
 // test continues normally
 // ...
 ```
+
+[1]: https://mvnrepository.com/artifact/io.opentracing/opentracing-util
 
 {{% /tab %}}
 
