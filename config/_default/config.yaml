@@ -89,6 +89,9 @@ module:
      - source: content/en/integrations/ably.md
        target: content/integrations/ably-apw.md
        lang: en
+     - source: content/en/integrations/akamai_mpulse.md
+       target: content/integrations/akamai_mpulse-apw.md
+       lang: en
 
   mounts:
     # default mounts
