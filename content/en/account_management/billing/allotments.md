@@ -65,25 +65,23 @@ Below is a summary of each allotment's default usage aggregation function:
 
 | Allotment             | Possible Parent Products                                      | Default monthly usage aggregation function | Default hourly usage aggregation function |
 |-----------------------|---------------------------------------------------------------|--------------------------------------------|-------------------------------------------|
-| Containers (CSPM)     | Cloud Security Posture Management (CSPM)                      |                                            | Sum                                       |
-| Containers (CWS)      | Cloud Workload Security (CWS)                                 |                                            | Sum                                       |
-| Containers (Infra)    | Infra Pro Hosts, Infra Pro Plus Hosts, Infra Enterprise Hosts |                                            | Sum                                       |
-| Containers (Profiled) | APM Enterprise, Continuous Profiler                           |                                            | Sum                                       |
-| Profiled Hosts        | APM Enterprise                                                | HWMP                                       | Sum                                       |
-| Indexed Spans (CI)    | Pipeline Visibility, Testing Visibility                       | Sum                                        | Sum                                       |
-| Indexed Spans (APM)| APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM), Fargate Task (APM Enterprise), Fargate Task (APM Pro) | Sum | Sum |
-| Indexed Spans (Application Security)| Application Security Monitoring | Sum | Sum |
-| Ingested Spans (APM) | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM), Fargate Task (APM Enterprise), Fargate Task (APM Pro) | Sum | Sum | 
-| Custom Events | Infra Pro Hosts, Infra Pro Plus Hosts, Infra Enterprise Hosts | Sum | Sum |
-| Custom Metrics | Infra Pro Hosts, Infra Pro Plus Hosts, Infra Enterprise Hosts, Serverless Workload (Functions), Serverless Workload (Apps), Internet of Things (IoT), Legacy - Serverless Invocations, Legacy - Serverless Functions  | Average | Average |
-| Ingested Custom Metrics | Infra Pro Hosts, Infra Pro Plus Hosts, Infra Enterprise Hosts, Serverless Workload (Functions), Serverless Workload (Apps) | Average | Average |
+| Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps,
+Serverless Invocations, Serverless Functions  | Average | Average |
+| Ingested Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps | Average | Average |
+| Custom Events | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts | Sum | Sum |
+| CSM Enterprise Containers    | Cloud Security Management (CSM)       |                 | Sum                     |
+| CWS Containers      | Cloud Workload Security (CWS)              |                     | Sum                       |
+| Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |               | Sum            |
+| Profiled Containers | APM Enterprise, Continuous Profiler               |           | Sum                                       |
+| Profiled Hosts        | APM Enterprise                        | HWMP                         | Sum                      |
+| CI Indexed Spans    | CI Visibility         | Sum                | Sum                        |      
+| Test Indexed Spans    | Test Visibility         | Sum                | Sum                        |               
+| APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum |
+| APM Ingested Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
 | DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
-| DSM Fargate Task | Fargate Task (APM Enterprise), Fargate Task (APM Pro) | Average | |
-| Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise), Fargate Task (APM Pro) | Average | |
-| Log Events (CWS) | Cloud Workload Security (CWS) | Sum | Sum | 
-| Network Flows | Network Performance Monitoring (NPM)| Sum | Sum |
-| SNMP Traps | Network Device Monitoring (NDM) | Sum | | 
+| Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
 | CSPM Workflow Executions | Cloud Security Management Pro, Cloud Security Management Enterprise | Sum | Sum |
+| Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | Average | |
 
 
 ## Calculating on-demand usage
