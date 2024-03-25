@@ -262,9 +262,9 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 
 ### Specifying tracing library versions
 
-<div class="alert alert-info">Injecting specific tracing libraries is only available for Datadog Cluster Agent version 7.52.0+.</div>
+<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can inject a subset of tracing libraries into your applications.</div>
 
-Specify Datadog tracing library versions to control which versions and libraries are injected into your applications. You can configure this in two ways, which are applied in the following order of precedence:
+Specify Datadog tracing libraries and their versions to inject into your applications. You can configure this in two ways, which are applied in the following order of precedence:
 
 1. [Specify at the service level](#specifying-at-the-service-level), or
 2. [Specify at the cluster level](#specifying-at-the-cluster-level).
@@ -293,8 +293,6 @@ Replace <CONTAINER IMAGE TAG> with the desired library version. Available versio
 
 <div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
 
-If an application is already instrumented using a different library version, the version loaded first takes precedence. Library injection happens at the admission controller level before runtime, so it overrides manually configured libraries.
-
 For example, to inject a Java library:
 
 {{< highlight yaml "hl_lines=12" >}}
@@ -315,6 +313,8 @@ spec:
         - # ...
 {{< /highlight >}}
 
+If an application is already instrumented using a different library version, the version loaded first takes precedence. Library injection happens at the admission controller level before runtime, so it overrides manually configured libraries.
+
 #### Specifying at the cluster level
 
 If you don't inject tracing libraries from the pod spec, you can specify tracing libraries for the entire cluster with Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only the specified libraries and versions are injected.
@@ -328,7 +328,7 @@ For example, add the following configuration to your `datadog-values.yaml` file:
      apm:
        instrumentation:
          enabled: true
-         libVersions: # Add any versions you want to set
+         libVersions: # Add any libraries and versions you want to set
             dotnet: v2.46.0
             python: v1.20.6
             java: v1.22.0
