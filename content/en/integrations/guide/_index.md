@@ -69,7 +69,7 @@ cascade:
     {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}Which integrations use Jmxfetch?{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="SQL guides:" >}}
+{{< whatsnext desc="Database guides:" >}}
     {{< nextlink href="integrations/guide/collect-more-metrics-from-the-sql-server-integration" tag=" SQL Server" >}}Collect more metrics from the SQL Server integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag=" SQL Server" >}}Collect SQL Server custom metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics" tag=" SQL Server" >}}Use WMI to collect more SQL Server performance metrics{{< /nextlink >}}
