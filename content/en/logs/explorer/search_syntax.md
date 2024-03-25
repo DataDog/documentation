@@ -125,7 +125,7 @@ However, this search term does not return logs that contain the string `NETWORK`
 
 ### Full-text search across all log attributes
 
-<div class="alert alert-warning">The full-text search feature is in beta. It is only available in Log Managment and works for monitors, dashboards, and notebooks. The full-text search syntax cannot be used for defining index filters, archive filters, log pipeline filters, or in Live Tail. </div>
+<div class="alert alert-warning">The full-text search feature is in beta. It is only available in Log Management and works for monitors, dashboards, and notebooks. The full-text search syntax cannot be used for defining index filters, archive filters, log pipeline filters, or in Live Tail. </div>
 
 Use the syntax `*:search_term` to perform a free text search across all log attributes, including the log message.
 
@@ -136,18 +136,18 @@ Use the syntax `*:search_term` to perform a free text search across all log attr
 | `*:("hello")` | Full-text   | Searches all log attributes for the term `hello`.     |
 | `hello`       | Free text   | Searches only the log message for the term `hello`.   |
 
-#### Multiple terms with exact match
+#### Multiple terms with exact match example
 
 | Search syntax       | Search type | Description                                            |
 | ------------------- | ----------- |------------------------------------------------------- |
 | `*:("hello world")` | Full-text   |Searches all log attributes for the term `hello world`. |
 | `hello world`       | Free text   |Searches only the log message for the term `hello`.     |
 
-#### Multiple terms without exact match
+#### Multiple terms without exact match example
 
 The full-text search syntax `*:(hello world)` is equivalent to `*:(hello) *:(world)`. It searches all log attributes for the terms `hello` and `world`.
 
-#### Multiple terms with a white space
+#### Multiple terms with a white space example
 
 The full-text search syntax `*:("hello world") ("i am here")` is equivalent to `*:("hello world") *:("i am here")`. It searches all log attributes for the terms `hello world` and `i am here`.
 
