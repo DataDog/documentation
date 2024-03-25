@@ -130,21 +130,21 @@ A user has a monthly commit of 10 APM Pro Hosts and 0.3 GB Ingested Spans. Their
 
 | Timestamp    | APM host commitment | APM host usage | Ingested spans allotment | Ingested spans usage | On-demand ingested spans usage |
 |--------------|---------------------|----------------|--------------------------|----------------------|--------------------------------|
-| 03:00:00 UTC | 10                  | 5              | 2.054 GB                 | 2.500 GB             | 0.446 GB                       |
-| 04:00:00 UTC | 10                  | 15             | 3.082 GB                 | 3.000 GB             | 0 GB                           |
-| 05:00:00 UTC | 10                  | 10             | 2.054 GB                 | 2.054 GB             | 0 GB                           |
+| Hour 1 | 10                  | 5              | 2.054 GB                 | 2.500 GB             | 0.446 GB                       |
+| Hour 2 | 10                  | 15             | 3.082 GB                 | 3.000 GB             | 0 GB                           |
+| Hour 3 | 10                  | 10             | 2.054 GB                 | 2.054 GB             | 0 GB                           |
 
 For a user with an hourly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 0.2054 GB.
 
-At **03:00:00 UTC**, the user was committed to 10 APM hosts but only used 5. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(5, 10)  * 0.2054 GB = 2.054 GB / hour. Their on-demand usage for Ingested Spans is the maximum of 0 and the difference between their billable usage and their allotted usage: maximum(0, 2.500 – 2.054) = 0.446 GB.
+In **Hour 1**, the organization was committed to 10 APM hosts but only used 5. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(5, 10)  * 0.2054 GB = 2.054 GB / hour. Their on-demand usage for the hour is the maximum of 0 and the difference between their billable usage and their allotted usage: maximum(0, 2.500 – 2.054) = 0.446 GB.
 
-At **04:00:00 UTC**, the user was committed to 10 APM hosts but used 15. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(15,10) * 0.2054 GB = 3.082 GB / hour. Their on-demand usage for Ingested Spans is the maximum of 0 and the difference between their billable usage and their allotted usage: maximum(0, 3.000 – 3.082) = 0 GB.
+In **Hour 2**, the organization was committed to 10 APM hosts but used 15. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(15,10) * 0.2054 GB = 3.081 GB / hour. Their on-demand usage for the hour is the maximum of 0 and the difference between their billable usage and their allotted usage: maximum(0, 3.000 – 3.081) = 0 GB.
 
-At **05:00:00 UTC**, the user was committed to 10 APM hosts and used 10. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(10,10) * 0.2054 GB = 2.054 GB / hour. Their on-demand usage for Ingested Spans is the maximum of 0 and the difference between their billable usage and their allotted usage: maximum(0, 2.054 – 2.054) = 0 GB.
+In **Hour 3**, the organization was committed to 10 APM hosts and used 10. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(10,10) * 0.2054 GB = 2.054 GB / hour. Their on-demand usage for the hour is the maximum of 0 and the difference between their billable usage and their allotted usage: maximum(0, 2.054 – 2.054) = 0 GB.
 
-Since the default usage aggregation function for Ingested Spans is sum, usage is summed over all hours in the month to get the total monthly usage for the month. If this user only had 3 hours of Ingested Spans usage over the month, their total monthly usage would be 0: 4452 + 0 + 0 = 0.446 GB. 
+Since the default usage aggregation function for Ingested Spans is sum, usage is summed over all hours in the month to get the total on-demand usage for the month. If this organization only had 3 hours of Ingested Spans usage over the month, their total monthly usage would be 0: 4452 + 0 + 0 = 0.446 GB. 
 
-Additionally, the user has a monthly commitment of 0.3 GB of Ingested Spans. Thus, their monthly on-demand usage is the maximum of 0 and the difference between their monthly usage and commitment: maximum(0, 0.446 – 0.3) = 0.146 GB.
+Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Spans. Thus, their monthly on-demand usage is the maximum of 0 and the difference between their monthly usage and commitment: maximum(0, 0.446 – 0.3) = 0.146 GB.
 
 ## Allotments table
 Allotment usage refers to product usage that is included with the purchase of select parent products. These allotments grant a certain amount of usage for a child product as part of the account's committed and on-demand usage of the parent product. 
