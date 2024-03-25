@@ -6,7 +6,7 @@ const doOnLoad = () => {
     const signupModal = document.getElementById('signupModal');
 
     const getLanguageParam = () => {
-        let lang_param = '';
+        let langParam = '';
         let lang = '';
 
         if (document.documentElement.lang) {
@@ -16,9 +16,9 @@ const doOnLoad = () => {
         }
 
         if (lang === 'fr' || lang === 'ja') {
-            lang_param = `?lang=${lang}`;
+            langParam = `?lang=${lang}`;
         } else {
-            lang_param = '';
+            langParam = '';
         }
     
         return langParam;
@@ -88,7 +88,7 @@ const doOnLoad = () => {
             if (isMobile()) {
                 document.querySelector('#signUpIframe').setAttribute('src', `${baseUrl}?mobile=true`);
             } else {
-                document.querySelector('#signUpIframe').setAttribute('src', baseUrl + lang_param);
+                document.querySelector('#signUpIframe').setAttribute('src', baseUrl + langParam);
             }
         });
     });
