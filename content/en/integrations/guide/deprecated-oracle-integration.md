@@ -9,9 +9,7 @@ kind: guide
 
 ## Overview
 
-The Oracle integration provides health and performance metrics for your Oracle database in near real-time. Visualize these metrics with the provided [dashboard][21] and create monitors to alert your team on Oracle states.
-
-Enable [Database Monitoring][22] (DBM) for enhanced insights into query performance and database health. In addition to the standard integration, Datadog DBM provides query-level metrics, live and historical query snapshots, wait event analysis, database load, query explain plans, and blocking query insights.
+This guide describes setting up the Oracle integration on versions of the Datadog Agent lower than 7.50.1. For more information on the Oracle integration, including setting it up on newer Agent versions, see the [Oracle integration documentation][1].
 
 ## Setup
 
