@@ -1,9 +1,10 @@
 ---
 title: Managing Incidents
 kind: guide
-disable_toc: false
-private: true
-is_beta: true
+further_reading:
+- link: "logs/processing/pipelines"
+  tag: "Documentation"
+  text: "Log processing pipelines"
 ---
 
 <div class="alert alert-warning">The following features are part of the <a href="https://www.datadoghq.com/product/incident-management/">Datadog Incident Management</a> product.</div>
@@ -51,7 +52,7 @@ Without going into the Datadog web app, you can ask Bits AI in Slack to:
 To generate an AI-assisted postmortem draft,
 
 1. Navigate to the incident page in Datadog. For example, to view Incident 2679, you might search for `2679` on the [**Incidents**][2] page and click the relevant match.
-1. Ensure that the incident is resolved and that the timeline has 15 or more messages.
+1. Ensure that the incident is resolved and that the timeline has ten or more messages.
 1. Click the **Generate Postmortem** button.
 1. Select the AI template.
 1. Allow up to one minute for the postmortem to be generated. Do not close the tab during this time.

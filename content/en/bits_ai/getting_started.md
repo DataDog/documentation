@@ -1,9 +1,10 @@
 ---
 title: Getting Started
 kind: guide
-disable_toc: false
-private: true
-is_beta: true
+further_reading:
+- link: "logs/processing/pipelines"
+  tag: "Documentation"
+  text: "Log processing pipelines"
 ---
 
 ## Querying in Datadog

@@ -2,9 +2,12 @@
 title: Example Natural Language Queries
 kind: guide
 disable_toc: false
-private: true
-is_beta: true
+further_reading:
+- link: "logs/processing/pipelines"
+  tag: "Documentation"
+  text: "Log processing pipelines"
 ---
+
 
 ## Logs
 
