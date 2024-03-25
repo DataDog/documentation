@@ -66,34 +66,34 @@ The following list is an example of log sources that are potentially good candid
 
 **Note**: These examples are just a sample for each category. There are many more services, tools, and technologies available for each category that you might want to send to the Flex Tier.
 
-- **CDN services**
-  - Akamai, Cloudflare, Fastly, CloudFront, and so forth.
-- **DNS services**
-  - Route53, Cloudflare, Akamai (Edge), NS1, and so forth.
-- **Firewall logs / Firewall appliances**
-  - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, FortiNet, and so forth.
-- **Cloud network services / VPC / Gateways / NAT / WAN**
-  - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, Virtual WAN, and so forth.
-- **Loadbalancers**
-  - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX, and so forth.
-- **Identity services and tools**
-  - Cisco ISE, Okta, OneLogin, Workday User Activity Logs, and so forth.
-- **Audit logs**
-  - Cloud Provider Audit Logs (for example, CloudTrail), Kubernetes audit, Microsoft 365 audit, and so forth.
-- **Physical network appliances**
-  - Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda, and so forth.
-- **Network Flow logs**
-  - Cisco NetFlow, IPFIX, sFlow, AWS VPC FlowLogs, and so forth.
-- **VPN services**
-  - AWS, GCP, and Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, WireGuard, and so forth
-- **CI/CD services and tools**
-  - GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePipeline, and so forth.
-- **Service mesh**
-  - For example, Anthos, Istio, proxyv2, consul, Linkerd, Kong, and so forth.
-- **Caching**
-  - For example, Varnish, Memcached, Redis, and so forth.
+- **CDN services examples**
+  - Akamai, Cloudflare, Fastly, and CloudFront.
+- **DNS services examples**
+  - Route53, Cloudflare, Akamai (Edge),and NS1.
+- **Firewall logs and Firewall appliances examples**
+  - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, and FortiNet.
+- **Cloud network services, VPC, Gateways, NAT, and WAN examples**
+  - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, and Virtual WAN.
+- **Loadbalancers examples**
+  - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, and NGINX.
+- **Identity services and tools examples**
+  - Cisco ISE, Okta, OneLogin, and Workday User Activity Logs.
+- **Audit logs examples**
+  - Cloud Provider Audit Logs (for example, CloudTrail), Kubernetes audit, and Microsoft 365 audit.
+- **Physical network appliances examples**
+  - Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, and Barracuda.
+- **Network Flow logs examples**
+  - Cisco NetFlow, IPFIX, sFlow, and AWS VPC FlowLogs.
+- **VPN services examples**
+  - AWS, GCP, and Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, and WireGuard.
+- **CI/CD services and tools examples**
+  - GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, and AWS CodePipeline.
+- **Service mesh examples**
+  - Anthos, Istio, proxyv2, consul, Linkerd, and Kong.
+- **Caching examples**
+  - Varnish, Memcached, and Redis.
 
-You can use the spectrum of log types shown in the image to determine when to use the Flex Logs tier. Any high volume, infrequent access, long term retention log sources are good candidates, and this includes extending Standard Tier logs (for example, application logs) into the Flex Tier as well.
+You can use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, long term retention log sources are good candidates, and this includes extending Standard Tier logs (for example, application logs) into the Flex Tier as well.
 
 {{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Logs indexing and access frequency spectrum graph" style="width:100%;" >}}
 
