@@ -1,7 +1,7 @@
 
 ## Prerequisites
 
-To deploy Agentless scanning in your AWS environment, in addition to having [Cloud Security Management][3] enabled, complete the following steps:
+To deploy Agentless scanning in your AWS environment, in addition to having [Cloud Security Management][3] enabled, you must enable Remote Configuration.
 
 ### Enable Remote Configuration
 
@@ -15,7 +15,7 @@ To deploy Agentless scanning in your AWS environment, in addition to having [Clo
 
 ####  IAM permissions
 
-The Agentless scanning instance requires the following IAM permissions to scan for resources:
+The Agentless Scanning instance requires the following IAM permissions to scan for hosts and containers:
 
 ```
 ec2:DescribeVolumes
@@ -31,7 +31,7 @@ ebs:GetSnapshotBlock
 
 #### Lambda permissions
 
-The Agentless scanning instance requires the following Lambda permissions to scan for resources:
+The Agentless Scanning instance requires the following IAM permissions to scan for Lambdas:
 
 Permissions required:
 ```

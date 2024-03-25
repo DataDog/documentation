@@ -3,28 +3,30 @@ title: Setting up CSM Agentless Scanning
 kind: documentation
 ---
 
-<div class="alert alert-info">CSM Agentless scanning is in beta.</div>
+<div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
-To configure CSM Agentless scanning for your hosts and containers, use the following steps:
+Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMI's), without requiring you to install the Datadog Agent. 
+
 
 {{% csm-agentless-prereqs %}}
 
 ## Deployment methods
 
-There are two ways to deploy Agentless scanners in your environment, either using cross account scanning, or same account scanning.
+There are two recommended ways to deploy Agentless scanners in your environment, either using cross account scanning, or same account scanning.
 
-**Note**: When using Agentless scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends to setup Agentless scanning with Terraform as the default template, as this also avoids cross-region networking. 
+**Note**: When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up Agentless Scanning with Terraform as the default template, as this also avoids cross-region networking. 
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][8]
 
 {{< tabs >}}
 {{% tab "Cross account scanning" %}}
 
-With this option, Agentless scanners are deployed on a single cloud account and are distributed across multiple regions within the account. Agentless scanners are granted visibility across multiple accounts without needing to perform cross-region scans, which are expensive in practice.
+With this option, Agentless scanners are deployed on a single cloud account and are distributed across multiple regions within the account. With this deployment model, Agentless scanners are granted visibility across multiple accounts without needing to perform cross-region scans, which are expensive in practice.
 
 For larger accounts with 250 or more hosts, this is the most cost-effective option since cross-region scans are avoided, and reduces friction to manage your Agentless scanners, as they are located in a single account. You can either create a dedicated account for your Agentless scanners or choose an existing one. The account where the Agentless scanners are located can also be scanned.
 
 The following diagram illustrates how Agentless scanning works when deployed in a central cloud account:
+
 
 {{< img src="/security/agentless_scanning/agentless_advanced.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
 
@@ -44,7 +46,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 {{< /tabs >}}
 
 
-**Note**: The actual data that is scanned remains within your infrastructure, and only the collected Software Bill of Materials (SBOMs) are reported back to Datadog.
+**Note**: The actual data that is scanned remains within your infrastructure, and only the collected list of packages are reported back to Datadog.
 
 ## Installation
 
@@ -148,13 +150,10 @@ Go to your AWS console, and remove the CloudFormation stack that was created for
 
 ### Uninstalling with Terraform
 
-Follow instructions for Terraform un-installation (need link).
-
+Follow instructions for [Terraform][4] un-installation (need link).
 
 [1]: /security/vulnerabilities
-[2]: https://www.cisa.gov/sbom
 [3]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+[4]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
 [8]: mailto:success@datadoghq.com
-
-
 

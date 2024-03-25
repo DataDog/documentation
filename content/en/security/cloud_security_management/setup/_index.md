@@ -81,6 +81,7 @@ The following table summarizes the CSM features available relative to each deplo
 | AWS Fargate ECS/EKS | {{< X >}}           |                       | beta             |                         |                           |                     |
 | Terraform           |                     |                       |                  |                         |                           |  beta               |
 
+
 The following tables represent additional prerequisites relative to each CSM feature.
 
 ### CSM Threats 
@@ -170,5 +171,3 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][4] sec
 [105]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [106]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#enable-resource-scanning-for-cloud-accounts
 [107]: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#enable-cloudtrail-logs-forwarding
-
-
