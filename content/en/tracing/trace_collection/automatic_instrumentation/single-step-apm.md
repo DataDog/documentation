@@ -262,9 +262,11 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 
 ### Specifying tracing library versions
 
-You can optionally set specific tracing libraries and versions to use. If you don't specify a library in `libVersions`, it isn't included.
+You can optionally set specific tracing libraries and versions to use. Only libraries specified in `libVersions` are included. However, if `apm.instrumentation.enabled=true` and you don't set anything in `apm.instrumentation.libVersions`, the latest version of all five libraries are included.
 
-For example, add the following configuration to your `datadog-values.yaml` file:
+**Note**: Injecting specific tracing libraries is only available for Datadog Cluster Agent version 7.52.0+.
+
+To specify libraries and versions, add the following configuration to your `datadog-values.yaml` file:
 {{< highlight yaml "hl_lines=7-12" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
@@ -280,7 +282,7 @@ For example, add the following configuration to your `datadog-values.yaml` file:
             ruby: v1.15.0
 {{< /highlight >}}
 
-Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see [Changing your container registry][30].
+You can also overwrite libraries and their versions for specific deployments using the annotation `admission.datadoghq.com/<language>-lib.version`.
 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
 
@@ -291,6 +293,8 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Am
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
 | .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
 | Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
+
+Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see [Changing your container registry][30].
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
