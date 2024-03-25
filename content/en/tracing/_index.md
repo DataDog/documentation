@@ -59,8 +59,8 @@ Discover some ways Datadog APM can help support your use cases:
 | You want to...| How Datadog APM can help |
 | ----------- | ----------- |
 | Understand how requests flow through your system. | Use the [Trace Explorer][21] to query and visualize end-to-end traces across distributed services. |
-| Monitor service health and performance of individual services. | The [service][26] and [resource pages][28] helps you assess service health by analyzing performance metrics, tracking deployments, identifying problematic resources. |
-| Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give more context to your data for more comprehensive analysis. |
+| Monitor service health and performance of individual services. | The [service][26] and [resource pages][28] help you assess service health by analyzing performance metrics, tracking deployments, and identifying problematic resources. |
+| Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give context to your data for more comprehensive analysis. |
 | Control how data flows into Datadog. | Use [Ingestion Controls][6] to adjust ingestion configuration and sampling rates by service and resource. Use [Retention filters][7] to choose which spans to retain for 15 days. |
 
 ### Trace Explorer
