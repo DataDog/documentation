@@ -170,7 +170,7 @@ If you are using a similar setup as the one described above, then the correlatio
     git push
 ```
 
-
+Note: the code snippet above is just an example. You should adapt it to your CI provider syntax.
 
 
 ## Visualize deployments in Datadog
