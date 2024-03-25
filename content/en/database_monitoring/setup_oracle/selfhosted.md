@@ -36,15 +36,15 @@ Data security considerations
 
 Complete the following to enable Database Monitoring with your Oracle database:
 
-1. [Create the user](#create-the-user)
-1. [Grant the Agent access to the database](#grant-the-agent-access-to-the-database)
+1. [Create the Datadog user](#create-the-datadog-user)
+1. [Grant the user access to the database](#grant-the-user-access-to-the-database)
 1. [Create a view](#create-a-view)
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
 1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
 1. [Validate the setup](#validate-the-setup)
 
-### Create the user
+### Create the Datadog user
 
 If you already have the legacy Oracle integration installed, skip this step, because the user already exists.
 
@@ -72,7 +72,7 @@ CREATE USER datadog IDENTIFIED BY &password ;
 {{% /tab %}}
 {{< /tabs >}}
 
-### Grant the Agent access to the database
+### Grant the user access to the database
 
 Log on as `sysdba`, and grant the following permissions:
 
