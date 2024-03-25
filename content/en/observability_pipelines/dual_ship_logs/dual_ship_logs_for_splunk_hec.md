@@ -6,35 +6,33 @@ disable_toc: false
 
 ## Overview
 
-As your infrastructure scales, your log volume also increases and so does the complexity of the data. To optimize how you manage your logs, you might need to experiment with different log management tools and routing workflows.  Use Observability Pipelines to send your logs to multiple destinations, also known as dual shipping, so that you can evaluate different tools and workflows with minimal disruption to your production environment.
-
-Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker and then to multiple destinations. See [Dual Ship Logs from Splunk TCP][1] if you want to use Splunk Heavy/Universal Forwarders.
+Configure your Splunk HTTP Event Collectors (HEC) so that the Observability Pipelines Worker processes the collected logs before routing them to various applications. These applications could be a SIEM product, archives, or another vendor as part of a vendor migration workflow. See [Dual Ship Logs from Splunk TCP][1] if you want to use Splunk Heavy/Universal Forwarders.
 
 This document walks you through the following steps to set up dual shipping:
 
 1. Set up the Splunk index
 1. Set up a pipeline in Observability Pipelines
-1. Connect Splunk to the Observability Pipelines Worker
+1. Install the Observability Pipelines Worker
+1. Connect your Splunk collector to the Observability Pipelines Worker
 
 ## Set up the Splunk index
 
 <div class="alert alert-info">Observability Pipelines supports acknowledgments when you enable the <strong>Enable Indexer Acknowledgments</strong> setting on the input. Indexer acknowledgement is only available for Splunk Enterprise</div>
 
-You must provision a Splunk HEC input and HEC token on the Splunk index so that the Observability Pipelines Worker can send logs to Splunk. Follow the instructions in the [Configure HTTP Event Collector on Splunk Cloud Platform][2] section.
+You must provision a Splunk HEC input and HEC token on the Splunk index so that the Observability Pipelines Worker can send logs to Splunk. If you don't have one set up, follow the instructions in the [Configure HTTP Event Collector on Splunk Cloud Platform][2] section.
 
 After configuring the HTTP Event Collector, use the Splunk HEC token to set up Observability Pipelines.
 
-## Set up a pipeline
+For existing HEC configurations, you can get this token from the Splunk app:
+1. In Splunk, navigate to **Settings** > **Data Inputs**.
+1. Go to the **HTTP Event Collector** tab
+1. Copy the **Token Value** from your target collector.
+
+## Set up a pipeline for a Splunk HEC source
 
 1. Navigate to [Observability Pipelines][LINK].
 1. Select the **Dual Ship Logs** use case to create a new pipeline.
-
-### Add Splunk HEC for the log source
-
 1. Select **Splunk HEC** as the source.
-1. Enter the Splunk HEC token.
-1. Enter the Splunk HEC endpoint URL in the **Splunk HEC address**. For example `https://<your_account>.splunkcloud.com:8088`. See [Send Data to HTTP Event Collector][1] for more information.   
-**Note**: `/services/collector/event` is automatically appended to the endpoint.
 
 ### Add processors
 
@@ -94,9 +92,9 @@ For the **Rename** remap:
 {{< tabs >}}
 {{% tab "Splunk HEC" %}}
 
-3. Enter the Splunk index.   
-4. In the **Encoding** dropdown menu, select whether you want to encode in **JSON** or **Raw**.   
-5. Check the box if you want to auto extract the timestamp.   
+3. Enter the Splunk index.
+4. In the **Encoding** dropdown menu, select whether you want to encode in **JSON** or **Raw**.
+5. Check the box if you want to auto extract the timestamp.
 6. Enter the `sourcetype`.
 
 {{% /tab %}}
@@ -121,12 +119,16 @@ Secrets will be set (for example, the Datadog API Key) when you install the OP W
 ## Install the Observability Pipelines Worker
 
 1. Select your platform in the **Choose your installation platform** dropdown menu.
+1. Enter the Splunk HEC address. The Observability Pipelines Worker listens on the this port address for logs originally intended for the Splunk indexer. See [Connect Splunk HEC to the Observability Pipelines Worker](#connect-splunk-hec-to-the-observability-pipelines-worker) for instructions on how to direct the Splunk HEC to the Worker. The Splunk HEC address is stored in the `DD_OP_SOURCE_SPLUNK_HEC_ADDRESS` environment variable.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
 {{% tab "Splunk HEC" %}}
-1. Enter the Splunk HEC token.
-1. Enter the Splunk HEC endpoint URL in the **Splunk HEC address**. For example `https://<your_account>.splunkcloud.com:8088`. See [Send Data to HTTP Event Collector][1] for more information.   
-**Note**: `/services/collector/event` is automatically appended to the endpoint.
+1. Enter the Splunk HEC token, which is typically in UUID format. This information is stored in the `DD_OP_DESTINATION_SPLUNK_HEC_TOKEN` environment variable.
+1. Enter the Splunk HEC endpoint URL in the **Splunk HEC address** field.    
+    - Make sure to specify the port. If you are using Splunk Cloud, this is an example URL: `https://<your_account>.splunkcloud.com:8088`.  The Observability Pipelines Worker listens on this port for logs originally intended for the Splunk indexer. See [Send Data to HTTP Event Collector][1] for more information.   
+    - If you are using Splunk on-premises, then check the port here under **global settings**.
+    - **Note**: `/services/collector/event` is automatically appended to the endpoint.   
+    - The Splunk HEC endpoint URL is stored in the `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT` environment variable.   
 
 [1]: https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector
 
@@ -248,6 +250,10 @@ TKTK
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Connect Splunk HEC to the Observability Pipelines Worker
+
+TKTK
 
 [1]: /obs_pipelines/dual_ship_logs_for_splunk_tcp
 [2]: https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector
