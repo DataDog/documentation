@@ -262,11 +262,65 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 
 ### Specifying tracing library versions
 
-You can optionally set specific tracing libraries and versions to use. Only libraries specified in `libVersions` are included. However, if `apm.instrumentation.enabled=true` and you don't set anything in `apm.instrumentation.libVersions`, the latest version of all five libraries are included.
+<div class="alert alert-info">Injecting specific tracing libraries is only available for Datadog Cluster Agent version 7.52.0+.</div>
 
-**Note**: Injecting specific tracing libraries is only available for Datadog Cluster Agent version 7.52.0+.
+Specify Datadog tracing library versions to control which versions and libraries are injected into your applications. You can configure this in two ways, which are applied in the following order of precedence:
 
-To specify libraries and versions, add the following configuration to your `datadog-values.yaml` file:
+1. [Specify at the service level](#specifying-at-the-service-level), or
+2. [Specify at the cluster level](#specifying-at-the-cluster-level).
+
+If you don't specify any library versions and `apm.instrumentation.enabled=true`, the latest version of all supported tracing libraries are injected.
+
+#### Specifying at the service level
+
+To select pods for library injection and specify the library version, use the appropriate annotation for your language within your pod spec:
+
+| Language   | Pod annotation                                                        |
+|------------|-----------------------------------------------------------------------|
+| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
+| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
+| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
+
+Replace <CONTAINER IMAGE TAG> with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
+
+- [Java][31]
+- [JavaScript][32]
+- [Python][33]
+- [.NET][34] (For .NET applications using a musl-based Linux distribution like Alpine, specify a tag with the `-musl` suffix, such as `v2.29.0-musl`.)
+- [Ruby][35]
+
+<div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
+
+If an application is already instrumented using a different library version, the version loaded first takes precedence. Library injection happens at the admission controller level before runtime, so it overrides manually configured libraries.
+
+For example, to inject a Java library:
+
+{{< highlight yaml "hl_lines=12" >}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    # ...
+spec:
+  template:
+    metadata:
+      labels:
+        admission.datadoghq.com/enabled: "true"
+      annotations:
+        admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
+    spec:
+      containers:
+        - # ...
+{{< /highlight >}}
+
+#### Specifying at the cluster level
+
+If you don't inject tracing libraries from the pod spec, you can specify tracing libraries for the entire cluster with Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only the specified libraries and versions are injected.
+
+For example, add the following configuration to your `datadog-values.yaml` file:
+
 {{< highlight yaml "hl_lines=7-12" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
@@ -282,7 +336,7 @@ To specify libraries and versions, add the following configuration to your `data
             ruby: v1.15.0
 {{< /highlight >}}
 
-You can also overwrite libraries and their versions for specific deployments using the annotation `admission.datadoghq.com/<language>-lib.version`.
+#### Container registries
 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
 
@@ -330,6 +384,11 @@ For example, add the following configuration to your `datadog-values.yaml` file:
 [28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
 [30]: /containers/guide/changing_container_registry/
+[31]: https://github.com/DataDog/dd-trace-java/releases
+[32]: https://github.com/DataDog/dd-trace-js/releases
+[33]: https://github.com/DataDog/dd-trace-py/releases
+[34]: https://github.com/DataDog/dd-trace-dotnet/releases
+[35]: https://github.com/DataDog/dd-trace-rb/releases
 
 {{% /tab %}}
 {{< /tabs >}}
