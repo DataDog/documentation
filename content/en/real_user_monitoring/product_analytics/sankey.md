@@ -1,5 +1,5 @@
 ---
-title: Sankey Diagrams
+title: Sankey Diagram
 kind: documentation
 ---
 
@@ -17,7 +17,7 @@ Each node represents a view the user visited. The thickness of each node represe
 
 If a user visits the same page multiple times during their session, that page is only counted once.
 
-Actions are not supported in Sankey diagrams.
+Actions are not supported in the Sankey diagram.
 
 ## Build a Sankey diagram
 
@@ -52,6 +52,7 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 
 {{< img src="real_user_monitoring/product_analytics/sankey_diagrams/sankey-node-interaction.png" alt="The actions menu of a Sankey diagram node" style="width:90%;" >}}
 
+
 ### Convert the diagram to a funnel
 
 1. From the Sankey diagram page, click the **Build Funnel** button.
@@ -59,6 +60,17 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 3. Click **Create Funnel from Selection**.
 
 {{< img src="real_user_monitoring/product_analytics/sankey_diagrams/sankey-funnel-conversion.png" alt="A Sankey to funnel conversion in process" style="width:90%;" >}}
+
+## Troubleshooting
+
+### The Sankey diagram and the funnel show different view counts for the same view
+
+The algorithms for the Sankey diagram and the funnel rely on two different computations. You may notice a difference in the count of views for the first step of both visualizations. Imagine the use case of building a funnel and a Sankey diagram that both start with the same view: `/home`.
+
+- The funnel counts all views that went to `/home`.
+- The Sankey diagram only counts views to `/home` where another view follows. If a user goes to `/home` and stays on that page or leaves the app, the Sankey diagram does not include their sessions.
+
+In addition, funnels do not include active sessions, while Sankey diagrams do include active sessions.
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey
 [2]: /real_user_monitoring/explorer/search_syntax/#wildcards

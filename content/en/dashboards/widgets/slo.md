@@ -17,6 +17,11 @@ further_reading:
   text: "Scope metric-based SLO queries"
 ---
 
+SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service. The SLO summary widget visualizes the status, budget, and remaining error budget of the existing SLOs. It displays all underlying groups of the SLO and lets you sort the groups by any of the time windows in the widget. Use this widget to build out meaningful dashboards with the most critical SLO information:
+- **View all of the SLO groups directly in the widget**: For any metric-based and time slice SLOs containing groups, you can see all of the groups in the widget, compared to the previous limit of 20 groups. This is helpful for SLOs containing a lot of groups, as the widget provides key information related to SLO groups.
+- **Set your preferred sorting order for the SLO groups in the widget**: For all SLO types, sort groups based on any of the available time windows in the widget. Quickly identify the best and worst performing SLO groups for different time periods.
+- **Easily identify time periods with missing data in an SLO**: For all SLO types, the SLO summary widget shows time periods with missing data as "-". The "-" is displayed for any time window where the entire window is missing data.
+
 ## Setup
 
 Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
@@ -61,7 +66,10 @@ If you are visualizing an SLO with multiple groups or a monitor-based SLO with m
 
 When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
 - The groups are sorted by ascending status in the smallest time window by default. After adding the widget to a dashboard, you have the ability to sort by status for any of the configured time windows through the widget UI.
-- For metric-based and Time Slice SLOs, the widget displays *all* underlying groups of the SLO. For monitor-based SLOs, the widget displays up to 20 groups if specific groups have been selected for the SLO, or it displays the 5 groups with the lowest status percentages if no specific groups have been selected.  
+- For metric-based and Time Slice SLOs, the widget displays *all* underlying groups of the SLO. For monitor-based SLOs, the widget displays:
+  + Up to 20 groups if specific groups have been selected for the SLO, 
+  + All groups if the SLO contains up to 5,000 groups (and no specific groups have been selected), or
+  + No groups if the SLO contains more than 5,000 groups (and no specific groups have been selected)
 
 **Note:** For monitor-based SLOs, you can only use the `Overall` view mode when the `Global Time` time window option is selected. 
 

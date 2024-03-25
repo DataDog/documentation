@@ -31,7 +31,13 @@ The following library versions are compatible with API Security Inventory. [Remo
 |Technology|Minimum version| Support for sensitive data scanning |
 |----------|----------|----------|
 |Python    | v2.1.6   | Requests and responses |
-|Golang    | v1.59.0  | Requests |
+|Java      | v1.31.0  | Requests only |
+|PHP      | v0.98.0  | Requests and responses |
+|.NET Core | v2.42.0  | Requests and responses |
+|.NET Fx   | v2.47.0  | Requests and responses |
+|Ruby      | v1.15.0  | Requests only |
+|Golang    | v1.59.0  | Requests only |
+|Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
 
 ## How it works
 
