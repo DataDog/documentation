@@ -14,14 +14,7 @@ Team membership is flexible. Users can join teams, be added by other members, or
 
 ### Navigation
 
-To find the [team directory page][1]:
-
-1. Navigate to **Organization Settings** from your account menu.
-1. Under **Groups**, select **Teams**.
-
-The [team directory page][1] lists all teams within your organization. Use the **Only My Teams** slider in the upper right to toggle the view between your teams and all teams in the organization.
-
-{{< img src="account_management/teams-directory.jpg" alt="Organization Settings page, Teams tab, showing a panel highlighting the Caching team" >}}
+Access the team directory page, from [Organization Settings][1] or by navigating to [**Service Management > Teams**][20]. The [team directory page][1] lists all teams within your organization.
 
 ### Create team
 
@@ -36,10 +29,10 @@ The [team directory page][1] lists all teams within your organization. Use the *
 
 ### Modify team
 
-1. On the [team directory page][1], click the team you wish to modify. A side panel appears with the team details.
-1. Mouse over the item you wish to modify. A pencil icon appears.
-1. Click the pencil icon. A pop-up window appears.
-1. Make your changes, then click the appropriate button to save your changes.
+1. On the [team directory page][1], click the team you wish to modify. 
+1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
+1. Select the item you wish to modify.
+1. Make your changes, then click **Save**.
 
 ### Choose provisioning source
 
@@ -54,8 +47,7 @@ SAML
 All sources
 : Use SAML as a starting point, and allow overrides through the UI and API
 
-1. On the [team directory page][1], select the team. A side panel appears with team details.
-1. Click **Settings**.
+1. On the [team directory page][1], click **Teams Settings**.
 1. Select one of the options under **Team Provisioning Sources**.
 
 If you have teams with existing members, picking the SAML strict option overrides your settings and removes team members from those teams. Picking the All Sources option preserves existing memberships. To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][2].
@@ -83,6 +75,15 @@ Datadog supports associating the following resources with team handles:
 - [Service Catalog][7]
 - [Service Level Objectives][8]
 - Synthetic Tests, Global Variables, Private Locations
+
+### Send notifications to a separate communication channel 
+
+Add a notification channel to your Team to route alerts to communication channels such as Slack or Microsoft Teams. Monitor alerts targeting `@team-<handle>` are redirected to the selected channel. 
+
+1. On the [team directory page][1], click the team you wish to modify. 
+1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
+1. Select **Notifications**.
+1. Add a channel, then click **Save**.
 
 ## Filter
 
@@ -162,3 +163,4 @@ To enforce a strict membership model, configure your default team settings so **
 [16]: https://app.datadoghq.com/data-streams
 [17]: https://app.datadoghq.com/synthetics
 [18]: https://app.datadoghq.com/notebook/list/
+[20]: https://app.datadoghq.com/teams
