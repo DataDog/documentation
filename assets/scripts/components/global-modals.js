@@ -5,25 +5,84 @@ import { getGeoloc, getAppBaseUrl } from 'geo-locate';
 const doOnLoad = () => {
     const signupModal = document.getElementById('signupModal');
 
+    const getLanguageParam = () => {
+        let lang_param = '';
+        let lang = '';
+
+        if (document.documentElement.lang) {
+            lang = document.documentElement.lang;
+        } else {
+            lang = ddc.lang;
+        }
+
+        if (lang === 'fr' || lang === 'ja') {
+            lang_param = `?lang=${lang}`;
+        } else {
+            lang_param = '';
+        }
+    
+        return langParam;
+    };
+
+    const appendUrlQueryParams = (url) => {
+        let completeUrl = url;
+        let operator = completeUrl.includes('?') ? '&' : '?';
+        const currentUrl = new URL(window.location.href);
+        const currentParams = currentUrl.searchParams;
+    
+        // If non-english lang, append param
+        if (getLanguageParam()) {
+            completeUrl += `${operator}${getLanguageParam()}`;
+            operator = '&';
+        }
+    
+        // If mobile, append param
+        if (userDeviceIsMobile() && !shortForm) {
+            completeUrl += `${operator}mobile=true`;
+            operator = '&';
+        }
+    
+        // Convert selected cookies to UTM so they are preserved during signup process per https://datadoghq.atlassian.net/browse/WEB-4703
+        const allCookies = UTMCookies.getAll();
+        let customSignupUTM = ['gclid', 'MSCLKID', '_mkto_trk']; // harcoded list of UTM params to preserve
+        for (const [key, value] of Object.entries(allCookies)) {
+            // If the cookie value exists in the pre-defined list of desired UTM params, append it to the URL
+            if(customSignupUTM.includes(key)) {
+                completeUrl += `${operator}${key}=${encodeURIComponent(value)}`;
+                operator = '&';
+            }
+        }
+    
+        // Rebuild UTM params from original query params
+        let utmParam = false;
+        currentParams.forEach((value,key) => {
+            if (key.startsWith('utm')) {
+                utmParam = true;
+                completeUrl += `${operator}${`dd-${key.replace('_', '-')}`}=${encodeURIComponent(value)}`;
+                operator = '&';
+            }
+        });
+    
+        // If no UTM values were detected in query params, check to see if they already exist as a cookie
+        if(!utmParam) {
+            const allCookies = UTMCookies.getAll();
+            for (const [key, value] of Object.entries(allCookies)) {
+                if(key.includes('dd-utm')) {
+                    completeUrl += `${operator}${key}=${encodeURIComponent(value)}`;
+                    operator = '&';
+                }
+            }
+        }
+    
+        return completeUrl;
+    };
+
     signupModal.addEventListener('show.bs.modal', () => {
       
         getGeoloc().then((loc) => {
             const baseUrl = `https://${getAppBaseUrl(loc.appRegion)}/signup_corp`;
         
-            var lang_param = '';
-            var lang = '';
-
-            if (document.documentElement.lang) {
-                lang = document.documentElement.lang;
-            } else {
-                lang = ddc.lang;
-            }
-
-            if (lang === 'fr' || lang === 'ja') {
-                lang_param = `?lang=${lang}`;
-            } else {
-                lang_param = '';
-            }
+            appendUrlQueryParams(baseUrl);
 
             // Trigger conditional URL
             if (isMobile()) {
