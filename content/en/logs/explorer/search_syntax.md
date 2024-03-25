@@ -95,7 +95,7 @@ The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Lo
 
 ## Wildcards
 
-You can use wildcards with free text search, however, it only searches in the log message, which is the `content` column in Log Explorer. See [Full-text search across all log attributes](#full-text-search-across-all-log-attributes) if you want to search for a value in a log attribute.
+You can use wildcards with free text search. However, it only searches for terms in the log message, the text in the `content` column in Log Explorer. See [Full-text search across all log attributes](#full-text-search-across-all-log-attributes) if you want to search for a value in a log attribute.
 
 ### Multi-character wildcard
 
@@ -131,25 +131,25 @@ Use the syntax `*:search_term` to perform a free text search across all log attr
 
 #### Single term example
 
-| Search syntax | Description                                           |
-| ------------- | ----------------------------------------------------- |
-| `*:("hello")` | Searches all log attributes for the term `hello`.     |
-| `hello`       | Searches only the log message for the term `hello`.   |
+| Search syntax | Search type | Description                                           |
+| ------------- | ----------- | ----------------------------------------------------- |
+| `*:("hello")` | Full-text   | Searches all log attributes for the term `hello`.     |
+| `hello`       | Free text   | Searches only the log message for the term `hello`.   |
 
 #### Multiple terms with exact match
 
-| Search syntax       | Description                                             |
-| ------------------- | ------------------------------------------------------- |
-| `*:("hello world")` | Searches all log attributes for the term `hello world`. |
-| `hello world`       | Searches only the log message for the term `hello`.     |
+| Search syntax       | Search type | Description                                            |
+| ------------------- | ----------- |------------------------------------------------------- |
+| `*:("hello world")` | Full-text   |Searches all log attributes for the term `hello world`. |
+| `hello world`       | Free text   |Searches only the log message for the term `hello`.     |
 
 #### Multiple terms without exact match
 
-The search syntax `*:(hello world)` is equivalent to `*:(hello) *:(world)`. It searches all log attributes for the terms `hello` and `world`.
+The full-text search syntax `*:(hello world)` is equivalent to `*:(hello) *:(world)`. It searches all log attributes for the terms `hello` and `world`.
 
 #### Multiple terms with a white space
 
-The search syntax `*:("hello world") ("i am here")` is equivalent to `*:("hello world") *:("i am here")`. It searches all log attributes for the terms `hello world` and `i am here`.
+The full-text search syntax `*:("hello world") ("i am here")` is equivalent to `*:("hello world") *:("i am here")`. It searches all log attributes for the terms `hello world` and `i am here`.
 
 ### Search wildcard
 
