@@ -22,6 +22,8 @@ further_reading:
 ## Compatibility
 
 - **Partial pipelines**: View partially retried executions
+- **Running pipelines**: View pipeline executions that are running
+    - NOTE: Running pipelines don't have git information until they have finished.
 
 ## Configure the Datadog integration
 
