@@ -54,7 +54,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | Source | Category | Source Use Cases | Primary Products | 
 |--------|------------|-----------|------------------|
 | Datadog Threat Research| scanners, exploits | Honeypots focused on software specific threats | ASM and CWS |
-| [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fruad | ASM and Cloud SIEM |
+| [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | ASM and Cloud SIEM |
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |

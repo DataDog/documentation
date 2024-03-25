@@ -705,9 +705,9 @@ main:
     identifier: otel_guides_heatmaps
     parent: otel_guides
     weight: 801
-  - name: Switching to Datadog Connector
-    url: opentelemetry/guide/switch_from_processor_to_connector/
-    identifier: otel_guides_connector
+  - name: Migrate to OpenTelemetry Collector version 0.95.0+
+    url: opentelemetry/guide/migration/
+    identifier: otel_guides_migration
     parent: otel_guides
     weight: 802
   - name: Producing Delta Temporality Metrics
@@ -1852,6 +1852,11 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 4
+  - name: Guides
+    url: service_management/incident_management/guides
+    parent: incidents
+    identifier: incidents_guide
+    weight: 10
   - name: Mobile Application
     url: service_management/mobile/
     identifier: mobile
@@ -3150,6 +3155,11 @@ main:
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_measures
     weight: 111
+  - name: Custom Pipelines API
+    url: continuous_integration/pipelines/custom/
+    parent: pipeline_visibility
+    identifier: ci_custom
+    weight: 112
   - name: Search and Manage
     url: continuous_integration/search/
     parent: ci
@@ -3211,7 +3221,7 @@ main:
     parent: tests_setup
     identifier: tests_setup_dotnet
     weight: 101
-  - name: Java
+  - name: Java and JVM Languages
     url: tests/setup/java/
     parent: tests_setup
     identifier: tests_setup_java
@@ -3389,6 +3399,21 @@ main:
     parent: software_delivery_heading
     identifier: dora_metrics
     weight: 190000
+  - name: Setup
+    url: dora_metrics/setup
+    parent: dora_metrics
+    identifier: dora_metrics_setup
+    weight: 1
+  - name: Deployment events
+    url: dora_metrics/setup/deployments
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_deployments
+    weight: 101
+  - name: Incident events
+    url: dora_metrics/setup/incidents
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_incidents
+    weight: 102
   - name: Code Analysis
     url: code_analysis/
     pre: ci
@@ -4667,30 +4692,30 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_setup
     weight: 201
-  - name: Advanced Configuration
-    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_advanced
-    weight: 202
-  - name: Data Collected
-    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_data_collected
-    weight: 203
-  - name: Mobile Vitals
-    url: real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_vitals
-    weight: 204
-  - name: Web View Tracking
-    url: real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_web_view_tracking
-    weight: 205
   - name: Crash Reporting
     url: real_user_monitoring/error_tracking/mobile
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_error_tracking
+    weight: 202
+  - name: Advanced Configuration
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_advanced
+    weight: 203
+  - name: Data Collected
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_data_collected
+    weight: 204
+  - name: Mobile Vitals
+    url: real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_vitals
+    weight: 205
+  - name: Web View Tracking
+    url: real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_web_view_tracking
     weight: 206
   - name: Integrated Libraries
     url: real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
@@ -8960,18 +8985,6 @@ api:
         - v1
       operationids:
         - GetUsageAuditLogs
-      unstable: []
-      order: 40
-  - name: Get usage attribution
-    url: '#get-usage-attribution'
-    identifier: usage-metering-get-usage-attribution
-    parent: usage-metering
-    generated: true
-    params:
-      versions:
-        - v1
-      operationids:
-        - GetUsageAttribution
       unstable: []
       order: 40
   - name: Get hourly usage for analyzed logs
