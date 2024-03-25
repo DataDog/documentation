@@ -1,5 +1,5 @@
 ---
-title: Configuring Oracle integration on the Agent versions lower than 7.50.1
+title: Configuring the Oracle integration on Agent versions lower than 7.50.1
 kind: guide
 aliases:
   - integrations/guide/deprecated-oracle-integration
