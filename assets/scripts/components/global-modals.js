@@ -1,6 +1,7 @@
 import { DOMReady } from '../helpers/documentReady';
 import { isMobile } from '../utils/isMobile';
 import { getGeoloc, getAppBaseUrl } from 'geo-locate';
+import { UTMCookies } from '../utms';
 
 const doOnLoad = () => {
     const signupModal = document.getElementById('signupModal');
@@ -20,7 +21,7 @@ const doOnLoad = () => {
         } else {
             langParam = '';
         }
-    
+
         return langParam;
     };
 
@@ -29,67 +30,59 @@ const doOnLoad = () => {
         let operator = completeUrl.includes('?') ? '&' : '?';
         const currentUrl = new URL(window.location.href);
         const currentParams = currentUrl.searchParams;
-    
+
         // If non-english lang, append param
         if (getLanguageParam()) {
             completeUrl += `${operator}${getLanguageParam()}`;
             operator = '&';
         }
-    
+
         // If mobile, append param
-        if (userDeviceIsMobile() && !shortForm) {
+        if (isMobile()) {
             completeUrl += `${operator}mobile=true`;
             operator = '&';
         }
-    
+
         // Convert selected cookies to UTM so they are preserved during signup process per https://datadoghq.atlassian.net/browse/WEB-4703
         const allCookies = UTMCookies.getAll();
         let customSignupUTM = ['gclid', 'MSCLKID', '_mkto_trk']; // harcoded list of UTM params to preserve
         for (const [key, value] of Object.entries(allCookies)) {
             // If the cookie value exists in the pre-defined list of desired UTM params, append it to the URL
-            if(customSignupUTM.includes(key)) {
+            if (customSignupUTM.includes(key)) {
                 completeUrl += `${operator}${key}=${encodeURIComponent(value)}`;
                 operator = '&';
             }
         }
-    
+
         // Rebuild UTM params from original query params
         let utmParam = false;
-        currentParams.forEach((value,key) => {
+        currentParams.forEach((value, key) => {
             if (key.startsWith('utm')) {
                 utmParam = true;
                 completeUrl += `${operator}${`dd-${key.replace('_', '-')}`}=${encodeURIComponent(value)}`;
                 operator = '&';
             }
         });
-    
+
         // If no UTM values were detected in query params, check to see if they already exist as a cookie
-        if(!utmParam) {
+        if (!utmParam) {
             const allCookies = UTMCookies.getAll();
             for (const [key, value] of Object.entries(allCookies)) {
-                if(key.includes('dd-utm')) {
+                if (key.includes('dd-utm')) {
                     completeUrl += `${operator}${key}=${encodeURIComponent(value)}`;
                     operator = '&';
                 }
             }
         }
-    
+
         return completeUrl;
     };
 
     signupModal.addEventListener('show.bs.modal', () => {
-      
+
         getGeoloc().then((loc) => {
             const baseUrl = `https://${getAppBaseUrl(loc.appRegion)}/signup_corp`;
-        
-            appendUrlQueryParams(baseUrl);
-
-            // Trigger conditional URL
-            if (isMobile()) {
-                document.querySelector('#signUpIframe').setAttribute('src', `${baseUrl}?mobile=true`);
-            } else {
-                document.querySelector('#signUpIframe').setAttribute('src', baseUrl + langParam);
-            }
+            document.querySelector('#signUpIframe').setAttribute('src', appendUrlQueryParams(baseUrl));;
         });
     });
 
