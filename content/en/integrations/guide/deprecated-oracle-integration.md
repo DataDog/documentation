@@ -5,8 +5,6 @@ kind: guide
 
 # Oracle Integration
 
-![Oracle Dashboard][1]
-
 ## Overview
 
 This guide describes setting up the Oracle integration on versions of the Datadog Agent lower than 7.50.1. For more information on the Oracle integration, including setting it up on newer Agent versions, see the [Oracle integration documentation][1].
@@ -506,7 +504,7 @@ Ensure the displayed output matches the correct value.
 
 Need help? Contact [Datadog support][14].
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
+[1]: https://docs.datadoghq.com/integrations/oracle/?tab=linux
 [2]: https://oracle.github.io/python-oracledb/
 [3]: https://github.com/DataDog/integrations-core/tree/7.41.x/oracle#oracle-instant-client
 [4]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
