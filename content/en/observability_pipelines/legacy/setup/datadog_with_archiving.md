@@ -1,6 +1,8 @@
 ---
 title: (LEGACY) Set Up Observability Pipelines to Send Logs in Datadog-Rehydratable Format to Amazon S3 and Datadog
 kind: Documentation
+aliases:
+  - /observability_pipelines/setup/datadog_with_archiving/
 further_reading:
   - link: "/observability_pipelines/legacy/production_deployment_overview/"
     tag: "Documentation"
@@ -13,6 +15,8 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
+
+<div class="alert alert-danger">If you upgrade your Observability Pipelines Workers 1.8 or earlier to 2.0 or later, your existing pipelines will break. Do not upgrade your Workers if you want to continue using the legacy Observability Pipelines. If you want to use Worker 2.0 or later, you must migrate your Worker 1.8 or earlier pipelines to Worker 2.x.</div>
 
 ## Overview
 

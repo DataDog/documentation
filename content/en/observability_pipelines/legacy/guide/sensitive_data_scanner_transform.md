@@ -4,6 +4,8 @@ kind: documentation
 disable_toc: false
 private: true
 is_beta: true
+aliases:
+  - /observability_pipelines/guide/sensitive_data_scanner_transform/
 further_reading:
 - link: "/observability_pipelines/legacy/setup/"
   tag: "Documentation"

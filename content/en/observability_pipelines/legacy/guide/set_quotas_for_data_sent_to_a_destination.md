@@ -4,6 +4,8 @@ kind: documentation
 disable_toc: false
 private: true
 is_beta: true
+aliases:
+  - /observability_pipelines/guide/set_quotas_for_data_sent_to_a_destination/
 further_reading:
 - link: "/observability_pipelines/legacy/setup/"
   tag: "Documentation"

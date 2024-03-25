@@ -1,6 +1,8 @@
 ---
 title: (LEGACY) Networking
 kind: Documentation
+aliases:
+  - /observability_pipelines/architecture/networking/
 ---
 
 {{< site-region region="gov" >}}

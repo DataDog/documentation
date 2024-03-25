@@ -1,5 +1,7 @@
 ---
 title: (LEGACY) Errors
+aliases:
+  - /observability_pipelines/reference/processing_language/errors/
 ---
 
 {{< site-region region="gov" >}}

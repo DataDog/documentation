@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /integrations/observability_pipelines/splunk
   - /observability_pipelines/guide/setup_splunk_environment
+  - /observability_pipelines/setup/splunk/
 further_reading:
   - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"
@@ -19,6 +20,8 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
+
+<div class="alert alert-danger">If you upgrade your Observability Pipelines Workers 1.8 or earlier to 2.0 or later, your existing pipelines will break. Do not upgrade your Workers if you want to continue using the legacy Observability Pipelines. If you want to use Worker 2.0 or later, you must migrate your Worker 1.8 or earlier pipelines to Worker 2.x.</div>
 
 <div class="alert alert-info">Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
 
