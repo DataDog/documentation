@@ -3402,10 +3402,10 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_split_logs
     weight: 4
-  - name: Redact log data
-    url: observability_pipelines/redact_log_data/
+  - name: Sensitive Data Redaction
+    url: observability_pipelines/sensitive_data_redaction/
     parent: observability_pipelines
-    identifier: observability_pipelines_redact_log_data
+    identifier: observability_pipelines_sensitive_data_redaction
     weight: 5
   - name: Configure Existing Pipelines
     url: observability_pipelines/configure_existing_pipelines/
