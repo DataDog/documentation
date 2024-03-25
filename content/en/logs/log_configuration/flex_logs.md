@@ -72,7 +72,7 @@ The following list is an example of log sources that are potentially good candid
   - Route53, Cloudflare, Akamai (Edge),and NS1.
 - **Firewall logs and Firewall appliances examples**
   - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, and FortiNet.
-- **Cloud network services, VPC, Gateways, NAT, and WAN examples**
+- **Cloud network services (VPC, Gateways, NAT, and WAN) examples**
   - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, and Virtual WAN.
 - **Loadbalancers examples**
   - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, and NGINX.
