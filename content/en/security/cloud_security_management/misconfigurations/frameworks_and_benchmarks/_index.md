@@ -64,7 +64,7 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [19]: /integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance/homepage
 [21]: /security/cloud_security_management/misconfigurations/detection_rules
-[26]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-findings
+[26]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
 [27]: https://app.datadoghq.com/security/compliance
 [28]: /dashboards/template_variables/
 [29]: /api/latest/security-monitoring/#update-an-existing-rule

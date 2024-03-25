@@ -7,7 +7,7 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "See What's New in Datadog Security Compliance"
-  - link: "/security/cloud_security_management/misconfigurations/setup"
+  - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"

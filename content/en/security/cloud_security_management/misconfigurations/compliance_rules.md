@@ -8,7 +8,7 @@ aliases:
   - /security/cspm/compliance_rules
   - /security/misconfigurations/compliance_rules
 further_reading:
-  - link: "/security/cloud_security_management/misconfigurations/setup"
+  - link: "/security/cloud_security_management/misconfigurations"
     tag: "Documentation"
     text: Getting Started with CSM Misconfigurations
   - link: "/security/cloud_security_management/misconfigurations/custom_rules/"

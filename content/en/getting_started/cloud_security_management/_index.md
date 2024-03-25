@@ -34,11 +34,11 @@ This guide walks you through best practices for getting your team up and running
 ## Phase 1: Deployment
 
 1. Install the [Datadog Agent (version 7.46 or above)][4].
-2. Enable CSM for for your cloud resources and infrastructure:
-    - **CSM Threats**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
-    - **CSM Misconfigurations**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
-    - **CSM Identity Risks**: Enable [AWS resource collection][26] and [Cloudtrail logs forwarding][27].
-    - **CSM Vulnerabilities**: [Container image scanning][23] and [host scanning][24] instructions for Kubernetes, ECS EC2 instances, and host-based installations.
+2. [Enable CSM for for your cloud resources and infrastructure][5]:
+    - **CSM Threats**: Kubernetes, Docker, and host-based installations.
+    - **CSM Misconfigurations**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
+    - **CSM Identity Risks**: Enable AWS resource collection and Cloudtrail logs forwarding.
+    - **CSM Vulnerabilities**: Container image scanning and host scanning instructions for Kubernetes, ECS EC2 instances, and host-based installations.
 3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
 4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
 5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
@@ -65,14 +65,7 @@ This guide walks you through best practices for getting your team up and running
 [2]: /security/cloud_security_management/misconfigurations/
 [3]: /security/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: /security/threats/setup/?tab=kuberneteshelm#configure-the-csm-threats-agent
-[6]: /security/threats/setup/?tab=docker#configure-the-csm-threats-agent
-[7]: /security/threats/setup/?tab=hostothers#configure-the-csm-threats-agent
-[8]: /security/cloud_security_management/misconfigurations/setup?tab=kubernetes
-[9]: /security/cloud_security_management/misconfigurations/setup?tab=docker
-[10]: /security/cloud_security_management/misconfigurations/setup?tab=aws
-[11]: /security/cloud_security_management/misconfigurations/setup?tab=azure
-[12]: /security/cloud_security_management/misconfigurations/setup?tab=googlecloud
+[5]: /security/cloud_security_management/setup
 [13]: https://app.datadoghq.com/security/csm
 [14]: /security/default_rules/#cat-cloud-security-management
 [15]: /security/cloud_security_management/misconfigurations/signals_explorer/

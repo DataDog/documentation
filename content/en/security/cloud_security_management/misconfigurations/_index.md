@@ -55,7 +55,7 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/cloud_security_management/misconfigurations/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_security_management/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box cloud detection rules for CSM Misconfigurations{{< /nextlink >}}

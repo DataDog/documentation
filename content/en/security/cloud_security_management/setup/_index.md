@@ -9,7 +9,7 @@ aliases:
   - /security_platform/cspm/getting_started
   - /security/cspm/getting_started
   - /security/cspm/setup
-  - /security/cloud_security_management/misconfigurations/setup
+  - /security/misconfigurations/setup
   - /security/vulnerabilities/setup
   - /security/infrastructure_vulnerabilities/setup/
 further_reading:

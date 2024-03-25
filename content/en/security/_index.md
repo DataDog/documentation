@@ -22,7 +22,7 @@ further_reading:
   - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
-  - link: "/security/cloud_security_management/misconfigurations/setup"
+  - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"
