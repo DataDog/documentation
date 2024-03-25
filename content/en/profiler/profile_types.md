@@ -160,7 +160,7 @@ Wall Time
 
 Allocations (beta, v1.21.1+)
 : The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
-_Requires: [Manual enablement][3]
+_Requires:_ [Manual enablement][3]
 
 Heap Live Objects (alpha, v1.21.1+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
