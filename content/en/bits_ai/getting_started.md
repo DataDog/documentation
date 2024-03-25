@@ -6,15 +6,7 @@ private: true
 is_beta: true
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Bits AI is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
-
-The page describes how to run a natural language query in Datadog and in Slack. For example query verbiage, see [Example Natural Language Queries][2].
-
 ## Querying in Datadog
-
-You can access Bits AI from its dedicated chat panel and from the search bars of some products.
 
 ### In the chat panel
 
@@ -36,12 +28,15 @@ Where available, the feature can be accessed by typing a space into the search b
 
 {{< img src="bits_ai/search-bar-with-ai-suggestions.png" alt="Search bar displaying suggested natural language queries" style="width:90%;">}}
 
+### On the mobile app
+<!-- insert image -->
+
 ## Querying in Slack
 
 1. [Connect your Datadog account to your Slack workspace][1].
 1. Use the `/dd connect` command to display a list of accounts to connect to.
 1. Choose the name of your Datadog account in the dropdown.
-1. Authorize additional permissions needed by Bits AI. Your Customer Success Manager should have emailed you a link for this step; contact them if you're unable to locate it.
+1. Authorize additional permissions needed by Bits AI.
 
 After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
 
@@ -49,9 +44,8 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 
 {{< whatsnext desc="Additional Bits AI documentation:">}}
     {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}
-    {{< nextlink href="bits_ai/query_examples" >}}Query Examples{{< /nextlink >}}
+    {{< nextlink href="bits_ai/query_examples" >}}Example Natural Language Queries{{< /nextlink >}}
     {{< nextlink href="bits_ai/managing_incidents/" >}}Managing Incidents{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /integrations/slack/?tab=applicationforslack
-[2]: /bits_ai/query_examples/

@@ -6,36 +6,47 @@ private: true
 is_beta: true
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Bits AI is in private beta. Fill out this form to join the wait list.
-{{< /callout >}}
-
 <div class="alert alert-warning">The following features are part of the <a href="https://www.datadoghq.com/product/incident-management/">Datadog Incident Management</a> product.</div>
 
 ## Prerequisites
 
-- Make sure you've enabled the "Mirror all incident Slack channel messages to its incident timeline in real-time" in **[Incident > Settings > Integrations][3] > Slack**. This allows Datadog to generate summaries and postmortems from Slack conversations.
-- The incident channel name must be prefixed with `#incident-`. This enables you to use Bits AI in Slack (`@Datadog`) to ask questions about the incident.
-- Your Datadog account must be connected to Slack. Running a query automatically initiates this process, which can be completed by following the prompts.
+- Your Datadog account must be connected to Slack. Running the `/dd` connect command automatically initiates this process, which can be completed by following the prompts.
+- In **[Incident > Settings > Integrations][3] > Slack**, enable the "Push Slack channel messages to the incident timeline" and "Activate Bits AI features in incident Slack channels for your organization" toggles. This allows Datadog to ingest Slack conversations into the incident timeline to generate summaries and postmortems. **Note**: a Slack workspace can only have Bits AI activated for one Datadog Organization.   
+- Incident channels you'd like to work with Bits AI must be prefixed with `#incident-`. 
+- You can ask Bits AI questions about incidents from any Slack channel, as long as you've invited Bits AI to that channel. To do this, run the @Datadog command and follow the instructions on the screen. 
 
 {{< img src="bits_ai/integration-settings.png" alt="Slack integration settings in Datadog" style="width:90%;">}}
 
-## View incident summaries and schedule updates
+## View incident summaries
 
-When you join an incident channel in Slack, you automatically receive a summary of the incident. The channel must be connected to Incident Management and have at least fifteen messages. The summary, which is only visible to you, does not persist across reloads, between desktop and mobile apps, or across sessions.
+When you join an incident channel in Slack, you automatically receive a summary of the incident. The channel must be connected to Incident Management and have at least ten messages. The summary, which is only visible to you, does not persist across reloads, between desktop and mobile apps, or across sessions.
 
-At any time, you can ask for a fresh summary by asking `@DataDog Give me a summary of this incident`. Schedule an update by asking `@DataDog Give me an update in X minutes`.
+At any time, you can ask for a fresh summary by asking `@DataDog Give me a summary of this incident`. 
 
-## Ask questions
+# Search across your entire incident history and ask questions
 
-You can use the Bits AI chatbot in Slack to ask customized questions about your incident: `@Datadog I am a customer relations manager, and my customer is asking for an update on incident 2781. Can you give me a few bullet points that I can send to my customer?`
+You can ask Bits to find incidents that you're looking for. For instance,
+- `@Datadog How many incidents are currently ongoing?`
+- `@Datadog A customer is unable to check out. Is there an incident?`
+- `@Datadog Show me all Sev-1 incidents that occurred in the past week`
+- `@Datadog Were there any incidents in the past month that impacted the payments service?` 
 
-## Update the severity level and status
+You can then dive deeper by asking questions about those incidents, like `@Datadog What was the root cause of incident-123?` or `@Datadog What remediation actions did the responders take in incident-123?`
 
-- Severity level: `@Datadog Update this incident to SEV-3`
-- Status: `@Datadog Mark this incident as stable`
+## Find related incidents
+
+Bits AI can also perform semantic search for related incidents. If you're currently responding to an incident, you can ask Bits AI to find other active incidents that look similar to the one you're in (`@Datadog Are there any related incidents?`). Bits AI will look for incidents that were active within the past 2 hours. You can also specify the time frame you want Bits to look across. If you say `@Datadog Find me incidents related to DDOS attacks from the past month`, Bits will return both active and resolved DDOS incidents from the past month. 
+
+## Manage incidents
+
+Without going into the Datadog web app, you can ask Bits AI in Slack to:
+- Open an incident: `@Datadog Declare an incident`
+- Change an incident's severity level: `@Datadog Update this incident to SEV-3`
+- Change an incident's status: `@Datadog Mark this incident as stable`
 
 ## Generate a first draft of a postmortem
+
+<div class="alert alert-info">AI-assisted postmortem drafting is in private beta.</div>
 
 To generate an AI-assisted postmortem draft,
 
@@ -65,7 +76,7 @@ If an incident already has a linked postmortem, you can unlink it before [genera
 {{< whatsnext desc="Additional Bits AI documentation:">}}
     {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}
     {{< nextlink href="bits_ai/getting_started" >}}Getting Started{{< /nextlink >}}
-    {{< nextlink href="bits_ai/query_examples" >}}Query Examples{{< /nextlink >}}
+    {{< nextlink href="bits_ai/query_examples" >}}Example Natural Language Queries{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents/settings#Postmortems

@@ -6,15 +6,6 @@ private: true
 is_beta: true
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Bits AI is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
-
-{{< whatsnext desc="For instructions on running natural language queries in Datadog, see:">}}
-    {{< nextlink href="bits_ai/getting_started/#in-the-chat-panel" >}}Querying in the chat panel{{< /nextlink >}}
-    {{< nextlink href="bits_ai/getting_started/#in-a-search-bar" >}}Querying in a search bar{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Logs
 
 `Find errors in AWS CloudTrail where a user is assuming a different user's role`:
