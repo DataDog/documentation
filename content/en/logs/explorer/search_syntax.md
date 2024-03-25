@@ -64,7 +64,7 @@ For instance, if your attribute name is **url** and you want to filter on the **
 
 1. It is **not** required to define a facet to search on attributes and tags.
 
-2. Attributes searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+2. Attributes searches are case sensitive. Use free text search to get case insensitive results, see [Wildcards](#wildcards) for more information on free text search. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
 3. Searching for an attribute value that contains special characters requires escaping or double quotes.
     - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
@@ -95,13 +95,15 @@ The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Lo
 
 ## Wildcards
 
+You can use wildcards with free text search, however, it only searches in the log message, which is the `content` column in Log Explorer. See [Full-text search across all log attributes](#full-text-search-across-all-log-attributes) if you want to search for a value in a log attribute.
+
 ### Multi-character wildcard
 
-To perform a multi-character wildcard search, use the `*` symbol as follows:
+To perform a multi-character wildcard search in the log message (the `content` column in Log Explorer), use the `*` symbol as follows:
 
 * `service:web*` matches every log message that has a service starting with `web`.
-* `web*` matches all log messages starting with `web`
-* `*web` matches all log messages that end with `web`
+* `web*` matches all log messages starting with `web`.
+* `*web` matches all log messages that end with `web`.
 
 **Note**: Wildcards only work as wildcards outside of double quotes. For example, `"*test*"` matches a log which has the string `*test*` in its message. `*test*` matches a log which has the string test anywhere in its message.
 
@@ -113,13 +115,41 @@ Wildcard searches work within tags and attributes (faceted or not) with this syn
 service:*mongo
 ```
 
-Wildcard searches can also be used to search in the plain text of a log that is not part of a facet. This query returns all the logs that contain the string `NETWORK`:
+Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all the logs that contain the string `NETWORK`:
 
 ```
 *NETWORK*
 ```
 
-However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
+However, this search term does not return logs that contain the string `NETWORK` if it is in a log attribute and not part of the log message.
+
+### Full-text search across all log attributes
+
+<div class="alert alert-warning">The full-text search feature is in beta. It is only available in Log Managment and works for monitors, dashboards, and notebooks. The full-text search syntax cannot be used for defining index filters, archive filters, log pipeline filters, or in Live Tail. </div>
+
+Use the syntax `*:search_term` to perform a free text search across all log attributes, including the log message.
+
+#### Single term example
+
+| Search syntax | Description                                           |
+| ------------- | ----------------------------------------------------- |
+| `*:("hello")` | Searches all log attributes for the term `hello`.     |
+| `hello`       | Searches only the log message for the term `hello`.   |
+
+#### Multiple terms with exact match
+
+| Search syntax       | Description                                             |
+| ------------------- | ------------------------------------------------------- |
+| `*:("hello world")` | Searches all log attributes for the term `hello world`. |
+| `hello world`       | Searches only the log message for the term `hello`.     |
+
+#### Multiple terms without exact match
+
+The search syntax `*:(hello world)` is equivalent to `*:(hello) *:(world)`. It searches all log attributes for the terms `hello` and `world`.
+
+#### Multiple terms with a white space
+
+The search syntax `*:("hello world") ("i am here")` is equivalent to `*:("hello world") *:("i am here")`. It searches all log attributes for the terms `hello world` and `i am here`.
 
 ### Search wildcard
 
