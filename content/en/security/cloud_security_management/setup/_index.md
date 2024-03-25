@@ -10,7 +10,7 @@ aliases:
   - /security/cspm/getting_started
   - /security/cspm/setup
   - /security/misconfigurations/setup
-  - /security/cloud_security_management/vulnerabilities/setup
+  - /security/vulnerabilities/setup
   - /security/infrastructure_vulnerabilities/setup/
 further_reading:
 - link: "/getting_started/cloud_security_management"
@@ -156,7 +156,7 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][4] sec
 [2]: /security/cloud_security_management/setup/csm_pro
 [3]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
-[5]: /security/cloud_security_management/identity_risks/#setup
+[5]: /security/identity_risks/#setup
 [6]: /security/cloud_security_management/setup/compatibility
 [7]: https://www.datadoghq.com/blog/cloud-security-management-changes/
 [8]: /security/cloud_security_management/setup/#csm-threats

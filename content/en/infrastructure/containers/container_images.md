@@ -11,7 +11,7 @@ further_reading:
 - link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
   text: "Setting up container image vulnerabilities"
-- link: "/security/cloud_security_management/vulnerabilities/troubleshooting"
+- link: "/security/cloud_security_management/troubleshooting/vulnerabilities/"
   tag: "Documentation"
   text: "Troubleshooting Cloud Security Management Vulnerabilities"
 ---

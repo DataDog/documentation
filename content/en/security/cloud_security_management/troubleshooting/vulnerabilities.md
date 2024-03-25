@@ -2,7 +2,7 @@
 title: Troubleshooting Cloud Security Management Vulnerabilities
 kind: documentation
 aliases:
-  - /security/cloud_security_management/vulnerabilities/troubleshooting/
+  - /security/vulnerabilities/troubleshooting/
 further_reading:
 - link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
