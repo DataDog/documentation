@@ -18,7 +18,9 @@ further_reading:
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Node.js libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Node.js Tracer v2.39.0, v3.26.0, v4.5.0, or later][2] (v4.21.0 for Amazon SQS)
+* [Node.js Tracer][2]
+  * Kafka: v2.39.0, v3.26.0, v4.5.0, or later
+  * Amazon SQS: v4.21.0
 
 ### Installation
 
