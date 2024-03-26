@@ -140,7 +140,7 @@ You can visualize your ingested data using the following cost types:
 | `gcp.cost.amortized.shared.resources.allocated` | All of your Google Cloud Platform amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][14].|
 
 ### Container allocation
-**Container allocation** metrics contain all of the same costs as the GCP metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][14] for more details.
+**Container allocation** metrics contain all of the same costs as the Google Cloud Platform metrics, but with additional breakdowns and insights for container workloads. See [Container Cost Allocation][14] for more details.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
