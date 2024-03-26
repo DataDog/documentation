@@ -32,7 +32,7 @@ Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integ
 If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
 
 <div class="alert alert-warning">
-Note: The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitors all projects this Service Account has access to.
+The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
 To limit Infrastructure Monitoring hosts for these projects, use Limit Metric Collection in the integration tile.
 </div>
 
