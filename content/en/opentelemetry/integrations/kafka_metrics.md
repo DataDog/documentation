@@ -15,7 +15,7 @@ OTel Kafka Metrics Remapping is in public alpha. It is available in versions >= 
 
 {{< img src="/opentelemetry/collector_exporter/kafka_metrics.png" alt="OpenTelemetry Kafka metrics in OOTB Kafka dashboard" style="width:100%;" >}}
 
-The [kafka metrics receiver][1], [JMX Receiver][2]/ [JMX Metrics Gatherer][3] allow collecting kafka metrics and access to the OOTB Kafka Dashboard "Kafka, Zookeeper and Kafka Consumer Overview". 
+The [kafka metrics receiver][1], [JMX Receiver][2]/ [JMX Metrics Gatherer][3] allow collecting kafka metrics and access to the out of the box [Kafka Dashboard][7] "Kafka, Zookeeper and Kafka Consumer Overview". 
 
 Please note the the [JMX Receiver][2] and [JMX Metrics Gatherer][3] should be considered as replacements. They collect the same set of metrics ([JMX Receiver][2] launches the [JMX Metrics Gatherer][3]).
 
@@ -40,7 +40,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-The kafka metrics receiver needs to be used in a collector in `deployment` mode to avoid collecting the same metrics multiple times.
+The kafka metrics receiver needs to be used in a collector in `deployment` mode with a single replica. This ensures that the same metric is not collected multiple times. The collector in deployment mode can then leverage the Datadog Exporter to export the metrics directly to Datadog, or leverage the OTLP exporter to forward the metrics to another collector instance. 
 
 Add the following lines to `values.yaml`:
 ```yaml
@@ -97,7 +97,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-The JMX receiver needs to be used in a collector in `deployment` mode to avoid collecting the same metrics multiple times. 
+The JMX receiver needs to be used in a collector in `deployment` mode with a single replica. This ensures that the same metric is not collected multiple times. The collector in deployment mode can then leverage the Datadog Exporter to export the metrics directly to Datadog, or leverage the OTLP exporter to forward the metrics to another collector instance. 
 
 The JMX Receiver has the following requirements:
 - JRE is available on the host in which you are running the collector.
@@ -123,7 +123,7 @@ ARG USER_UID=65532
 RUN chown ${USER_UID} /opt/opentelemetry-jmx-metrics.jar
 
 
-FROM gcr.io/distroless/java11-debian11:nonroot
+FROM gcr.io/distroless/java17-debian11:nonroot
 
 COPY --from=prep /opt/opentelemetry-jmx-metrics.jar /opt/opentelemetry-jmx-metrics.jar
 COPY --from=prep /otelcol-contrib /otelcol-contrib
@@ -219,7 +219,7 @@ ADD https://github.com/open-telemetry/opentelemetry-java-contrib/releases/downlo
 ARG USER_UID=65532
 RUN chown ${USER_UID} /opt/opentelemetry-jmx-metrics.jar
 
-FROM gcr.io/distroless/java11-debian11:nonroot
+FROM gcr.io/distroless/java17-debian11:nonroot
 
 COPY --from=prep /opt/opentelemetry-jmx-metrics.jar /opt/opentelemetry-jmx-metrics.jar
 
@@ -251,59 +251,12 @@ processors:
         action: insert
 ```
 
+In order to ensure this attribute only gets added to your kafka logs, you can use [include/exclude filtering][8] of the attributes processor.
 
 ## Data collected
 
-| OpenTelemetry Metric | DD Metric | Source | Transform done DD Metric |
-|---|---|---|---|
-| otel.kafka.producer.request-rate | kafka.producer.request_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
-| otel.kafka.producer.response-rate | kafka.producer.response_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
-| otel.kafka.producer.request-latency-avg|kafka.producer.request_latency_avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer}| |
-| kafka.producer.outgoing-byte-rate | kafka.producer.outgoing-byte-rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer}| |
-| kafka.producer.io-wait-time-ns-avg | kafka.producer.io_wait | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer}| |
-| kafka.producer.byte-rate | kafka.producer.bytes_out | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
-| kafka.consumer.total.bytes-consumed-rate | kafka.consumer.bytes_in | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
-| kafka.consumer.total.records-consumed-rate | kafka.consumer.messages_in | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
-| kafka.network.io{state:out} | kafka.net.bytes_out.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.network.io{state:in} | kafka.net.bytes_in.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.purgatory.size{type:produce} | kafka.request.producer_request_purgatory.size | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.purgatory.size{type:fetch} | kafka.request.fetch_request_purgatory.size | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.partition.under_replicated | kafka.replication.under_replicated_partitions | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.isr.operation.count{operation:shrink} | kafka.replication.isr_shrinks.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.isr.operation.count{operation:expand} | kafka.replication.isr_expands.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge | 
-| kafka.leader.election.rate | kafka.replication.leader_elections.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge | 
-| kafka.partition.offline | kafka.replication.offline_partitions_count | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.request.time.avg{type:produce} | kafka.request.produce.time.avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.request.time.avg{type:fetchconsumer} | kafka.request.fetch_consumer.time.avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.request.time.avg{type:fetchfollower} | kafka.request.fetch_follower.time.avg |JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.message.count |kafka.messages_in.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.request.failed{type:produce} | kafka.request.produce.failed.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.request.failed{type:fetch} | kafka.request.fetch.failed.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.request.time.99p{type:produce} | kafka.request.produce.time.99percentile | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.request.time.99p{type:fetchconsumer} | kafka.request.fetch_consumer.time.99percentile | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.request.time.99p{type:fetchfollower} | kafka.request.fetch_follower.time.99percentile | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.partition.count | kafka.replication.partition_count | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.max.lag | kafka.replication.max_lag | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.controller.active.count | kafka.replication.active_controller_count | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.unclean.election.rate | kafka.replication.unclean_leader_elections.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.request.queue | kafka.request.channel.queue.size | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
-| kafka.logs.flush.time.count | kafka.log.flush_rate.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.consumer.bytes-consumed-rate | kafka.consumer.bytes_consumed | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
-| kafka.consumer.records-consumed-rate | kafka.consumer.records_consumed | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
-| otel.kafka.consumer.fetch-size-avg | kafka.consumer.fetch_size_avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-consumer} | |
-| otel.kafka.producer.compression-rate | kafka.producer.compression-rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
-| otel.kafka.producer.record-error-rate | kafka.producer.record_error_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
-| otel.kafka.producer.record-retry-rate | kafka.producer.record_retry_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
-| otel.kafka.producer.record-send-rate | kafka.producer.record_send_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
-| kafka.partition.current_offset | kafka.broker_offset | kafkametricsreceiver | |
-| kafka.consumer_group.lag | kafka.consumer_lag | kafkametricsreceiver
-| kafka.consumer_group.offset | kafka.consumer_offset | kafkametricsreceiver
-| jvm.gc.collections.count{name:Copy && name:PS Scavenge && name:ParNew && name:G1 Young Generation} | jvm.gc.min&&_collection_count | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge |
-| jvm.gc.maj&&_collection_count{name:MarkSweepCompact && name:PS MarkSweep &&name:ConcurrentMarkSweep &&name:G1 Mixed Generation && G1 Old Generation && Shenandoah Cycles && ZGC} | jvm.gc.maj&&_collection_count | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge |
-| jvm.gc.collections.elapsed{name:Copy && name:PS Scavenge && name:ParNew && name:G1 Young Generation} | jvm.gc.min&&_collection_time | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge |
-| jvm.gc.collections.elapsed{name:MarkSweepCompact && name:PS MarkSweep &&name:ConcurrentMarkSweep &&name:G1 Mixed Generation && G1 Old Generation && Shenandoah Cycles && ZGC} | jvm.gc.major_collection_time | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge
+See [OpenTelemetry Metrics Mapping][9] for information about collected container metrics.
 
-**Note:** In Datadog `-` gets translated to `_`. For 8 of the metrics above (the ones prepended by `otel.`), this means that the OTel metric name and the DD metric name are the same (e.g. `kafka.producer.request-rate` and `kafka.producer.request_rate`). In order to avoid double counting for these metrics, we then prepend the OTel metric with `otel.`.
 
 
 ## Full example configuration
@@ -347,3 +300,6 @@ Please refer to the following [example application][6] which demonstrates the co
 [4]: /opentelemetry/collector_exporter/log_collection
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/kafka.yaml
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/kafka-metrics
+[7]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
+[9]: /opentelemetry/guide/metrics_mapping/#kafka-metrics
