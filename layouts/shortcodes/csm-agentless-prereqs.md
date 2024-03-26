@@ -13,7 +13,7 @@ To deploy Agentless scanning in your AWS environment, in addition to having [Clo
 
 **Note**: The following are permissions required for Agentless scanning, and are applied automatically as a part of the installation process.
 
-####  IAM permissions
+####  IAM permissions (host and container permissions)
 
 The Agentless Scanning instance requires the following IAM permissions to scan for hosts and containers:
 

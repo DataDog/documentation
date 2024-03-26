@@ -13,7 +13,7 @@ further_reading:
   text: "Read more about CSM Vulnerabilities"
 ---
 
-<div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments</div>
+<div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
 ## Overview
 
@@ -105,4 +105,5 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [4]: /security/cloud_security_management/setup/agentless_scanning#terraform
 [5]: https://cyclonedx.org/
 [7]: mailto:success@datadoghq.com
+[8]: https://app.datadoghq.com/security/csm/vm
 [9]: /security/vulnerabilities

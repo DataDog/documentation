@@ -5,7 +5,7 @@ kind: documentation
 
 <div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMI's), without requiring you to install the Datadog Agent. 
+Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs), without requiring you to install the Datadog Agent. 
 
 
 {{% csm-agentless-prereqs %}}
@@ -101,7 +101,7 @@ There are two ways to install and configure Agentless scanning for your cloud en
 
 When you add a new AWS account, the following screen appears:
 
-{{< img src="/security/agentless_scanning/agentless_scanning_aws.png" alt="Setup page for Agentless scanning for adding a new AWS account with adding a single AWS account selected" width="90%">}}
+{{< img src="/security/agentless_scanning/agentless_scanning_aws_2.png" alt="Setup page for Agentless scanning for adding a new AWS account with adding a single AWS account selected" width="90%">}}
 </br>
 
 1. Click **Yes** under **Enable Cloud Security Management**, and enable scanning for the cloud resources you want to monitor in the **Agentless scanning** section.
