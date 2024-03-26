@@ -193,6 +193,15 @@ jobs:
 
 For more information, see [dSYMs commands][7].
 
+### Limitations
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
+dSYM files are limited to **500** MB.
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+dSYM files are limited to **500** MB.
+{{< /site-region >}}
+
 ## Verify crash reports
 
 To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
