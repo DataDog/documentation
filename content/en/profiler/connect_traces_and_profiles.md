@@ -61,10 +61,9 @@ Requires `dd-trace-py` version 0.44.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-rb` 1.21.1+.
-
-To additionally enable showing [GC in timeline](#span-execution-timeline-view):
-- set `DD_PROFILING_FORCE_ENABLE_GC=true`
+To enable the new [timeline feature](#span-execution-timeline-view) (beta):
+- upgrade to `dd-trace-rb` 1.15+
+- set `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=true`
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
