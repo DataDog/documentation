@@ -15,7 +15,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: ドキュメント
   text: イベントへの視覚化の適用
-- link: /real_user_monitoring/dashboards/
+- link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボードについて
 kind: documentation
@@ -195,9 +195,9 @@ document.addEventListener("scroll", function handler() {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/dashboards/
+[1]: /ja/real_user_monitoring/platform/dashboards/
 [2]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /ja/real_user_monitoring/dashboards/performance
+[3]: /ja/real_user_monitoring/platform/dashboards/performance
 [4]: /ja/real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /ja/synthetics/browser_tests/

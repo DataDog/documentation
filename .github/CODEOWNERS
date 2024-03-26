@@ -13,8 +13,8 @@ go.mod                    @DataDog/corpweb @DataDog/documentation
 go.sum                    @DataDog/corpweb @DataDog/documentation
 
 # SDK versions
-.github/workflows/bump_versions.yml   @DataDog/integrations-tools-and-libraries @DataDog/documentation
-/data/sdk_versions.json               @DataDog/integrations-tools-and-libraries @DataDog/documentation
+.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
+/data/sdk_versions.json               @DataDog/api-clients @DataDog/documentation
 
 # Serverless
 

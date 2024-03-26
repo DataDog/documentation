@@ -66,6 +66,9 @@ The Go packages listed in this page are relevant for ASM. You can also find more
 | [echo v4][9]     | {{< X >}}  | {{< X >}} |
 | [echo v3][10]     | {{< X >}} | {{< X >}} |
 | [chi][12] | {{< X >}} | {{< X >}} |
+| [graphql-go][17] | {{< X >}} | {{< X >}} |
+| [gqlgen][18] | {{< X >}} | {{< X >}} |
+
 
 ### Networking framework compatibility
 
@@ -96,4 +99,6 @@ The Go packages listed in this page are relevant for ASM. You can also find more
 [14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
 [15]: https://github.com/golang/go/wiki/cgo
 [16]: /tracing/compatibility_requirements/go
+[17]: https://pkg.go.dev/github.com/graphql-go/graphql
+[18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
 
