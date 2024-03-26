@@ -176,7 +176,7 @@ spec:
       apiKey: <DATADOG_API_KEY>
   override:
     nodeAgent:
-    env:
+      env:
       - name: DD_EXCLUDE_PAUSE_CONTAINER
         value: "false"
 ```

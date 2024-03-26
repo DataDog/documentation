@@ -3,6 +3,9 @@ title: Pipeline Scanner
 kind: documentation
 disable_toc: false
 further_reading:
+    - link: "https://www.datadoghq.com/blog/log-pipeline-scanner-datadog/"
+      tag: "Blog"
+      text: "Investigate your log processing with the Datadog Log Pipeline Scanner"
     - link: "/logs/log_configuration/pipelines/"
       tag: "Documentation"
       text: "Learn more about log pipelines"
@@ -10,8 +13,6 @@ further_reading:
       tag: "Documentation"
       text: "Learn more about log processors"
 ---
-
-<div class="alert alert-warning">Log Pipeline Scanner is in private beta. <a href="/help">Contact Support</a> to request access. </div>
 
 ## Overview
 

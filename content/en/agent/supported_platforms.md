@@ -82,15 +82,9 @@ The Datadog Agent is supported on a range of widely used operating systems and p
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
-    <th rowspan='2'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
-    <td>5.0</td>
-    <td><i class='icon-check-bold'></td>
+    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <td>>= 7.0</td>
     <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>>= 6.0</td>
-    <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
@@ -203,7 +197,6 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 [7]: /agent/basic_agent_usage/fedora/
 
 {{% /tab %}}
-
 {{% tab "Windows" %}}
 
 <table>
@@ -262,6 +255,10 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 </table>
 
 A check mark ({{< X >}}) indicates support for all minor and patch versions.
+
+To install a specific version of the Windows Agent, see the [installer list][8].
+
+[8]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 
 {{% /tab %}}
 {{% tab "macOS" %}}
@@ -326,6 +323,5 @@ Agent 6 and 7 support the following [AIX][1] versions:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/basic_agent_usage/source/

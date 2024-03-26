@@ -7,7 +7,7 @@ code_lang_weight: 60
 aliases:
   - /continuous_integration/setup_tests/junit_upload
   - /continuous_integration/tests/junit_upload
-  - continuous_integration/tests/setup/junit_xml
+  - /continuous_integration/tests/setup/junit_xml
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -210,20 +210,20 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
-`--metrics`
-: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--metrics` parameter can be specified multiple times). When specifying metrics using `DD_METRICS`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
-**Environment variable**: `DD_METRICS`<br/>
+`--measures`
+: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--measures` parameter can be specified multiple times). When specifying measures using `DD_MEASURES`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
+**Environment variable**: `DD_MEASURES`<br/>
 **Default**: (none)<br/>
 **Example**: `memory_allocations:13`<br/>
-**Note**: Metrics specified using `--metrics` and with the `DD_METRICS` environment variable are merged. If the same key appears in both `--metrics` and `DD_METRICS`, the value in the environment variable `DD_METRICS` takes precedence.
+**Note**: Measures specified using `--measures` and with the `DD_MEASURES` environment variable are merged. If the same key appears in both `--measures` and `DD_MEASURES`, the value in the environment variable `DD_MEASURES` takes precedence.
 
 `--report-tags`
 : Key-value pairs in the form `key:value`. Works like the `--tags` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_TAGS`<br/>
 **Default**: (none)<br/>
 **Example**: `test.code_coverage.enabled:true`<br/>
 
-`--report-metrics`
-: Key-value pairs in the form `key:123`. Works like the `--metrics` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_METRICS`<br/>
+`--report-measures`
+: Key-value pairs in the form `key:123`. Works like the `--measures` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_MEASURES`<br/>
 **Default**: (none)<br/>
 **Example**: `test.code_coverage.lines_pct:82`<br/>
 
@@ -261,9 +261,10 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Flag used to add extra verbosity to the output of the command<br/>
 **Default**: `false`<br/>
 
-
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][17].
 
 The following environment variables are supported:
 
@@ -336,6 +337,64 @@ For mobile apps (Swift, Android):
 : The name of the device being tested.<br/>
 **Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
+## Adding code owners
+To add [codeowners][11] information to your JUnit XML tests, you can use the [GitHub integration][16] to read the `CODEOWNERS` file in your repository or provide some additional information manually.
+
+As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of those tests.
+
+### Using the GitHub integration (recommended)
+
+To automatically add the `test.codeowners` tag to your tests, you need to:
+1. Have a `CODEOWNERS` file [in one of the allowed locations][15] in your repository.
+2. Provide the tests source file in your JUnit XML report. The following plugins do this automatically and add the `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report:
+
+    * phpunit
+    * Most Python plugins (pytest, unittest)
+    * Most Ruby plugins (ruby minitest)
+
+    If the XML does not have the `file` attribute, you need to [provide the source file manually](#manually-providing-the-testsourcefile-tag).
+   Example of a valid report:
+
+  {{< code-block lang="xml" >}}
+  <?xml version="1.0" encoding="UTF-8"?>
+  <testsuite name="suite">
+    <testcase name="test_with_file" file="src/commands/junit" />
+  </testsuite>
+  {{< /code-block >}}
+
+3. Enable the [GitHub app][12]. If you do not have a GitHub app, follow the steps in the next section. If you already have
+   a GitHub app, enable the `Contents: Read` permission so Datadog can read the `CODEOWNERS` file. Once enabled, wait a few minutes for the changes to take effect.
+
+**Note:** Github is the only supported Git provider.
+
+#### Configure a GitHub App
+
+The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
+
+1. Go to the [GitHub integration tile][13].
+2. Click **Link GitHub Account**.
+3. Follow the instructions to configure the integration for a personal or organization account.
+4. In **Edit Permissions**, grant `Contents: Read` access.
+5. Click **Create App in GitHub** to finish the app creation process on GitHub.
+6. Give the app a name, for example, `Datadog CI Visibility`.
+7. Click **Install GitHub App** and follow the instructions on GitHub.
+
+### Manually providing the `test.source.file` tag
+This is an alternative to using the GitHub integration.
+
+For those plugins that do not provide the `file` attribute in the XML report, you can provide the `test.source.file` tag.
+There is no need to provide the exact path to a specific file, [you can use any syntax you would use in the CODEOWNERS file][14]
+such as `src/myTeamFolder` or `*.md`.
+
+There are multiple ways to provide the `test.source.file` tag:
+* Using the [`--tags` parameter or the `DD_TAGS` environment variable](#configuration-settings).
+
+   ```shell
+   datadog-ci junit upload --service service-name --tags test.source.file:src/myTeamFolder my_report.xml
+   ```
+
+   This adds the `test.source.file` tag to all the tests in the report. All of the tests will have the same owner(s).
+* If you want to provide different source files for the same XML report, you can use [property elements](#Providing-metadata-through-property-elements) or set the `file` attribute manually to individual `<testcase>` or `<testsuite>` elements.
 
 ## Providing metadata with XPath expressions
 
@@ -478,15 +537,15 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
+The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--measures` flag and the `DD_MEASURES` environment variable.
 
 
 ## Reporting code coverage
 
-It is possible to report code coverage for a given JUnit report via the `--report-metrics` option, by setting the `test.code_coverage.lines_pct` metric:
+It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:
 
 ```shell
-datadog-ci junit upload --service my-api-service --report-metrics test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
+datadog-ci junit upload --service my-api-service --report-measures test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
 ```
 
 For more information, see [Code Coverage][10].
@@ -504,3 +563,10 @@ For more information, see [Code Coverage][10].
 [7]: /getting_started/site/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
 [10]: /continuous_integration/tests/code_coverage/?tab=junitreportuploads
+[11]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[12]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
+[13]: https://app.datadoghq.com/integrations/github/
+[14]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
+[15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
+[16]: https://docs.datadoghq.com/integrations/github/
+[17]: /getting_started/tagging/unified_service_tagging

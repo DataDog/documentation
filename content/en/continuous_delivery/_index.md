@@ -2,9 +2,9 @@
 title: Continuous Delivery Visibility
 kind: documentation
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=CI%20Visibility"
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
-  text: "Check out the latest CI/CD Visibility releases! (App login required)"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn how to set up Deployment Visibility"
@@ -14,6 +14,9 @@ further_reading:
 - link: "/continuous_delivery/explorer"
   tag: "Documentation"
   text: "Learn about the CD Visibility Explorer"
+- link: "https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/"
+  tag: "Blog"
+  text: "Best practices for CI/CD monitoring"
 cascade:
     algolia:
         rank: 70

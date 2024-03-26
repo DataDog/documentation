@@ -67,7 +67,7 @@ For the remaining steps, follow the [Quick start instructions][10] within the Da
 
 ### Enable APM
 
-For the latest versions of Agent v6 and v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][11]:
+For the latest versions of Agent v6 & v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][11]:
 
 ```yaml
 # apm_config:

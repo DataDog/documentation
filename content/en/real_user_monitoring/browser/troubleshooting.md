@@ -56,6 +56,10 @@ The RUM Browser SDK relies on cookies to store session information and follow a 
 
 **Note**: The `_dd_l`, `_dd_r`, and `_dd` cookies have been replaced with `_dd_s` in recent versions of the RUM Browser SDK.
 
+## Session IDs, cookies and RUM applications
+
+There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie is fully dedicated to the RUM application it is monitoring and cannot monitor any additional applications.
+
 ## Technical limitations
 
 Each event sent by the RUM Browser SDK is built with the following:
@@ -102,13 +106,15 @@ If an event or a request goes beyond any of the following limitations, it is rej
 | Maximum event size                       | 256 KB       |
 | Maximum intake payload size              | 5 MB         |
 
-## Customer data exceeds the recommended 3KiB warning
+## "Customer data exceeds the recommended threshold" warning
 
 The RUM browser SDK allows you to set [global context][9], [user information][10] and [feature flags][11] which are then included with the collected events.
 
 To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However, sending large volumes of data can still impact the performance for users on slow internet connections.
 
 For the best user experience, Datadog recommends keeping the size of the global context, user information, and feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
+
+Since v5.3.0, the RUM Browser SDK supports data compression via the `compressIntakeRequest` [initialization parameter][12]. When enabled, this recommended limit is extended from 3KiB to 16KiB.
 
 ## Cross origin read blocking warning
 
@@ -131,3 +137,4 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [11]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
+[12]: /real_user_monitoring/browser/#initialization-parameters

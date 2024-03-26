@@ -3,6 +3,7 @@ app_id: buddy
 app_uuid: f9d740e2-31b5-427c-a65b-41984656cc73
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: buddy.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10004
     source_type_name: Buddy
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,6 +22,8 @@ author:
   support_email: support@buddy.works
 categories:
 - automation
+- developer tools
+- event management
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md
 display_on_public_website: true
@@ -32,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: buddy
-oauth: {}
 public_title: Buddy
 short_description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。
 supported_os:
@@ -43,6 +46,8 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Automation
+  - Category::Developer Tools
+  - Category::Event Management
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -54,23 +59,25 @@ tile:
   title: Buddy
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
+Buddy は、Web サイトやアプリケーションのビルド、テスト、デプロイに使用できる継続的インテグレーション自動化プラットフォームです。
 
-このインテグレーションを有効にすると、
+Buddy インテグレーションにより、以下のことが可能になります。
 
-- デプロイに関するイベントを Datadog に送信できます。
+- Buddy のデプロイメントに関するイベントを Datadog に送信できます。
 - デプロイの詳細を Datadog のメトリクスと関連付けることができます。
-- パフォーマンススパイクの原因を検出できます。
+- パイプラインのパフォーマンススパイクの原因を検出できます。
 
 ![Datadog インテグレーション][1]
 
-## セットアップ
+## 計画と使用
 
 - Datadog のアカウント設定で、[Integrations -> APIs][2] に移動し、**API キー**トークンをコピーします。
 
-- [Buddy アカウントにサインイン][3]し、追跡したいデプロイアクションを含むパイプラインに移動します。
+- [Buddy アカウントにサインイン][3]し、追跡したいデプロイメントアクションを含むパイプラインに移動します。
 
 - パイプラインの末尾にあるプラス記号をクリックし、**Notifications** セクションで **Datadog** を選択します。
 
@@ -90,23 +97,23 @@ ${'${execution.to_revision.revision} - ${execution.to_revision.message}'}
 
 ![スナップショット][5]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Buddy チェックには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 すべての Buddy デプロイイベントが [Datadog のイベントストリーム][6]に送信されます。
 
-### サービスのチェック
+### ヘルプ
 
 Buddy チェックには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/buddy/images/datadog-integration.png
 [2]: https://app.datadoghq.com/organization-settings/api-keys

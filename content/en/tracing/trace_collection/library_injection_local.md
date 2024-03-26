@@ -9,8 +9,6 @@ aliases:
 
 ## Overview
 
-<div class="alert alert-warning">Support for local library injection will be deprecated. To automatically instrument your application, you can use <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation (Beta)</a> or <a href="/tracing/trace_collection/dd_libraries/">Datadog tracing libraries.</a></div>
-
 To automatically instrument your application, you can:
 
 - Use automatic instrumentation with local library injection, as described on this page.
@@ -404,7 +402,7 @@ DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-
 The supported blob storage solutions are:
 - **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
 See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
 - **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
 
 <a id="supplying-configuration-source-host"></a>
@@ -756,7 +754,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 The supported blob storage solutions are:
 - **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
 See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
 - **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 ### Basic configuration settings
@@ -954,7 +952,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 The supported blob storage solutions are:
 - **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
 See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
-- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
 - **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 ### Basic configuration settings

@@ -20,7 +20,7 @@ APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM give
 | [Ingested span][5] | $.10 per GB Ingested Spans per month | Billed when usage is in excess of Ingested Spans included with every APM host | An Ingested span is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested to Datadog at the end of the month. [More APM pricing information.][5]                                                                                          |
 
 **Notes**:  
-   - If you're using a container based environment, you get billed for the underlying host deploying the Datadog Agent.
+   - If you're using a non-Fargate container based environment, you get billed for the underlying host deploying the Datadog Agent.
    - One profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled. For instance, a DNS service container that is NOT profiled, running concurrently with your application container that IS profiled, is not counted towards the four profiler containers allotment.
    - [Universal Service Monitoring][15] is included in all APM tiers (APM, APM Pro, APM Enterprise) at no additional cost.
 

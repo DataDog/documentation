@@ -16,7 +16,6 @@ Bits AI is in private beta. Fill out this form to join the wait list.
 {{< /whatsnext >}}
 
 ## Logs
-You can query your logs in natural language from the Logs Explorer search bar.
 
 `Find errors in AWS CloudTrail where a user is assuming a different user's role`:
 {{< img src="bits_ai/cloudtrail-user-role-errors.png" alt="Query result for user role changes" style="width:100%;">}}
@@ -29,8 +28,6 @@ You can query your logs in natural language from the Logs Explorer search bar.
 
 ## APM traces
 
-To query APM traces, use the chat panel.
-
 `Show me traces for web-store that are slower than 1s`:
 {{< img src="bits_ai/slow-web-store-traces.png" alt="Query result for slow traces" style="width:100%;">}}
 
@@ -38,7 +35,7 @@ To query APM traces, use the chat panel.
 
 <div class="alert alert-info">Bits AI includes access to Inventories SQL, which is in private beta.</div>
 
-Infrastructure resource data can be queried in natural language from the search bar of [Inventories SQL][3], a centralized interface for infrastructure resource data. You can also use the chat panel to query infrastructure data from anywhere in Datadog.
+Infrastructure resource data can be queried in [Inventories SQL][3].
 
 `How many hosts am I running by availability zone?`:
 {{< img src="bits_ai/hosts-by-az.png" alt="Query result for host count by availability zone" style="width:100%;">}}
@@ -48,13 +45,17 @@ Infrastructure resource data can be queried in natural language from the search 
 
 ## Cloud cost
 
-Natural language querying of cloud cost is available through the in-product search bar or the chat panel.
-
 `Show me how much each team spends on the web-store service`:
 {{< img src="bits_ai/web-store-spend-by-team.png" alt="Query result for service spend per team" style="width:100%;">}}
 
 `AWS products with >5% increase in costs`:
 {{< img src="bits_ai/aws-product-cost-increase.png" alt="Query result for AWS products with an increase in costs" style="width:100%;">}}
+
+## RUM
+
+`Crashes in the iOS app over the past 1 week`:
+{{< img src="bits_ai/rum-ios-crashes-query.png" alt="Query result for iOS app crashes" style="width:100%;">}}
+
 
 {{< whatsnext desc="Additional Bits AI documentation:">}}
     {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}

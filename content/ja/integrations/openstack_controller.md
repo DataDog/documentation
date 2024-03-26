@@ -33,12 +33,11 @@ draft: false
 git_integration_title: openstack_controller
 integration_id: openstack-controller
 integration_title: OpenStack Controller
-integration_version: 3.0.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: openstack_controller
-oauth: {}
 public_title: OpenStack Controller
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
 supported_os:
@@ -158,7 +157,7 @@ OpenStack Controller には、イベントは含まれません。
 
 [1]: https://docs.datadoghq.com/ja/integrations/openstack/
 [2]: https://www.openstack.org
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/openstack_controller/datadog_checks/openstack_controller/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

@@ -51,7 +51,7 @@ CDN 同期
 [`@datadog/browser-rum`][4]を `package.json` ファイルに追加したら、次のコマンドを実行して初期化します。
 
 <details open>
-  <summary>最新バージョンn
+  <summary>最新バージョン
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'

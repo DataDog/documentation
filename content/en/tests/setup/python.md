@@ -7,7 +7,7 @@ code_lang_weight: 30
 aliases:
   - /continuous_integration/setup_tests/python
   - /continuous_integration/tests/python
-  - continuous_integration/tests/setup/python
+  - /continuous_integration/tests/setup/python
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -41,7 +41,7 @@ Supported test frameworks:
 
 | Test Framework | Version |
 |---|---|
-| `pytest` | >= 3.0.0 |
+| `pytest` | >= 3.0.0 <= 7.0.0 |
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
@@ -70,11 +70,12 @@ Install the Python tracer by running:
 pip install -U ddtrace
 {{< /code-block >}}
 
-For more information, see the [Python tracer installation documentation][4].
+For more information, see the [Python tracer installation documentation][1].
 
 ## Instrumenting your tests
 
-### Using pytest
+{{< tabs >}}
+{{% tab "pytest" %}}
 
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
@@ -88,7 +89,64 @@ If you also want to enable the rest of the APM integrations to get more informat
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
-### Using pytest-benchmark
+### Adding custom tags to tests
+
+To add custom tags to your tests, declare `ddspan` as an argument in your test:
+
+```python
+from ddtrace import tracer
+
+# Declare `ddspan` as argument to your test
+def test_simple_case(ddspan):
+    # Set your tags
+    ddspan.set_tag("test_owner", "my_team")
+    # test continues normally
+    # ...
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Python custom instrumentation documentation.
+
+### Adding custom measures to tests
+
+Just like tags, to add custom measures to your tests, use the current active span:
+
+```python
+from ddtrace import tracer
+
+# Declare `ddspan` as an argument to your test
+def test_simple_case(ddspan):
+    # Set your tags
+    ddspan.set_tag("memory_allocations", 16)
+    # test continues normally
+    # ...
+```
+Read more about custom measures in the [Add Custom Measures Guide][2].
+
+### Known limitations
+
+Plugins for `pytest` that alter test execution may cause unexpected behavior.
+
+#### Parallelization
+
+Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][3] or [`pytest-forked`][4]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
+
+The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
+
+#### Test ordering
+
+Plugins that change the ordering of test execution (such as [`pytest-randomly`][5]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
+
+The overall count of test events (and their correctness) remain unaffected.
+
+
+[1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
+[2]: /tests/guides/add_custom_measures/?tab=python
+[3]: https://pypi.org/project/pytest-xdist/
+[4]: https://pypi.org/project/pytest-forked/
+[5]: https://pypi.org/project/pytest-randomly/
+{{% /tab %}}
+
+{{% tab "pytest-benchmark" %}}
 
 To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest`, and Datadog detects metrics from `pytest-benchmark` automatically:
 
@@ -102,7 +160,9 @@ def test_square_value(benchmark):
     assert result == 25
 ```
 
-### Using unittest
+{{% /tab %}}
+
+{{% tab "unittest" %}}
 
 To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command.
 
@@ -121,8 +181,8 @@ import unittest
 patch(unittest=True)
 
 class MyTest(unittest.TestCase):
-    def test_will_pass(self):
-        assert True
+def test_will_pass(self):
+assert True
 {{< /code-block >}}
 
 #### Known limitations
@@ -131,54 +191,27 @@ In some cases, if your `unittest` test execution is run in a parallel manner, th
 
 Datadog recommends you use up to one process at a time to prevent affecting test visibility.
 
-### Adding custom tags to tests
+{{% /tab %}}
 
-You can add custom tags to your tests by using the declaring `ddspan` as argument to your test:
-
-```python
-from ddtrace import tracer
-
-# Declare `ddspan` as argument to your test
-def test_simple_case(ddspan):
-    # Set your tags
-    ddspan.set_tag("test_owner", "my_team")
-    # test continues normally
-    # ...
-```
-
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
-
-### Adding custom metrics to tests
-
-Just like tags, you can add custom metrics to your tests by using the current active span:
-
-```python
-from ddtrace import tracer
-
-# Declare `ddspan` as an argument to your test
-def test_simple_case(ddspan):
-    # Set your tags
-    ddspan.set_tag("memory_allocations", 16)
-    # test continues normally
-    # ...
-```
-Read more about custom metrics in the [Add Custom Metrics Guide][7].
+{{< /tabs >}}
 
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
 
-`ddtrace.config.service`
+`DD_SERVICE`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
 **Default**: `pytest`<br/>
 **Example**: `my-python-app`
 
-`ddtrace.config.env`
+`DD_ENV`
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][2].
 
 The following environment variable can be used to configure the location of the Datadog Agent:
 
@@ -186,7 +219,7 @@ The following environment variable can be used to configure the location of the 
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][6] options can also be used.
+All other [Datadog Tracer configuration][3] options can also be used.
 
 ## Collecting Git metadata
 
@@ -196,10 +229,6 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /tracing/trace_collection/dd_libraries/python/
-[5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
-[6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
-[7]: /continuous_integration/guides/add_custom_metrics/?tab=python
+[1]: /tracing/trace_collection/dd_libraries/python/
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /tracing/trace_collection/library_config/python/?tab=containers#configuration

@@ -40,12 +40,18 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Security study"
+  - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
+    tag: "Blog"
+    text: "Detect malware in your containers with Datadog Cloud Security Management"
 algolia:
   tags: ['inbox']
+cascade:
+    algolia:
+        subcategory: Cloud Security Management
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.

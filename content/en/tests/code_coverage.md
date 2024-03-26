@@ -32,10 +32,10 @@ Ensure that [Test Visibility][1] is already set up for your language.
 * `jest>=24.8.0`, only when run with `jest-circus`.
 * `mocha>=5.2.0`.
 * `cucumber-js>=7.0.0`.
-* Only [`Istanbul`][1] code coverage is supported.
+* Only [`Istanbul`][101] code coverage is supported.
 
 
-When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][2].
+When tests are instrumented with [Istanbul][101], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][102].
 
 To report total code coverage from your test sessions, follow these steps:
 
@@ -72,8 +72,8 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 ```
 
 
-[1]: https://istanbul.js.org/
-[2]: https://github.com/istanbuljs/nyc
+[101]: https://istanbul.js.org/
+[102]: https://github.com/istanbuljs/nyc
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -206,9 +206,9 @@ If your project already has Jacoco configured, the Datadog Tracer instruments it
 Otherwise, you can configure the tracer to add Jacoco to your test runs at runtime.
 Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][102] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
 
+
 [101]: https://www.eclemma.org/jacoco/
 [102]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
-
 {{% /tab %}}
 {{% tab "JUnit Report Uploads" %}}
 
@@ -218,13 +218,61 @@ Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify whic
 You can upload a code coverage percentage value when using JUnit Report uploads:
 
 ```shell
-datadog-ci junit upload --service <service_name> --report-metrics=test.code_coverage.lines_pct:85 <path>
+datadog-ci junit upload --service <service_name> --report-measures=test.code_coverage.lines_pct:85 <path>
 ```
 
 In this example, `85` is the percentage of lines covered by your tests and needs to be generated with a different tool.
 
 The code coverage report needs to be generated in a different process, otherwise the JUnit report uploads will not generate code coverage reports. The reported metric name must be `test.code_coverage.lines_pct`.
 
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+### Compatibility
+
+* `dd-trace>=2.5.0`.
+* `Python>=3.7`.
+* `coverage>=4.4.2`.
+* `pytest>=3.0.0`.
+* `pytest-cov>=2.7.0`.
+* `unittest>=3.8`.
+* Only [`coverage.py`][101] and [`pytest-cov`][2] code coverage are supported.
+
+
+When tests are instrumented with [`coverage.py`][101] or [`pytest-cov`][2], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
+
+To report total code coverage from your test sessions with [`coverage.py`][101], follow these steps:
+
+1. Install `coverage`:
+```
+python3 -m pip install coverage
+```
+
+2. Run your test with the new `coverage` command:
+```
+DD_ENV=ci DD_SERVICE=my-python-service coverage run -m pytest
+```
+
+Alternatively, to report total code coverage from your test sessions with [`pytest-cov`][102], follow these steps:
+
+1. Install `pytest`:
+```
+python3 -m pip install pytest
+```
+
+2. Install `pytest-cov`:
+```
+python3 -m pip install pytest-cov
+```
+
+3. Run your test by appending the `--cov` flag to your `pytest` command:
+```
+DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
+```
+
+[101]: https://github.com/nedbat/coveragepy
+[102]: https://github.com/pytest-dev/pytest-cov
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -262,9 +310,13 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 {{< img src="/continuous_integration/code_coverage_branch_view.png" text="Branch view's code coverage" style="width:100%" >}}
 
 
+## Show code coverage change of a pull request
+
+The pull request's [test summary comment][7] shows the code coverage change of a GitHub pull request compared to the default branch.
+
 ## Intelligent Test Runner and total code coverage
 
-[Intelligent Test Runner][7] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
+[Intelligent Test Runner][8] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
 
 ## Further reading
 
@@ -277,4 +329,5 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 [4]: /monitors
 [5]: /monitors/types/ci/#maintain-code-coverage-percentage
 [6]: /continuous_integration/tests/developer_workflows#branch-overview
-[7]: /continuous_integration/intelligent_test_runner/
+[7]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
+[8]: /continuous_integration/intelligent_test_runner/

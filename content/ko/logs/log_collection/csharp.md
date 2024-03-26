@@ -23,6 +23,9 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: 로그 수집 문제 해결 가이드
+- link: /glossary/#tail
+  tag: 설정
+  text: '"tail"에 대한 용어 항목'
 kind: 설명서
 title: C# 로그 수집
 ---
@@ -37,7 +40,7 @@ C# 로그를 Datadog으로 보내려면 다음 방법 중 하나를 이용하세
 
 ## Datadog 에이전트를 이용한 파일-테일 로깅
 
-C# 로그 수집에 권장되는 접근 방식은 로그를 파일로 출력한 다음 Datadog 에이전트로 해당 파일을 추적하는 것입니다. 이렇게 하면 Datadog 에이전트가 추가 메타데이터로 로그를 보강할 수 있습니다.
+C# 로그 수집에 권장되는 접근 방식은 로그를 파일로 출력한 다음 Datadog 에이전트로 해당 파일을 [추적][20]하는 것입니다. 이렇게 하면 Datadog 에이전트가 추가 메타데이터로 로그를 보강할 수 있습니다.
 
 Datadog에서는 [커스텀 파싱 규칙][1]이 필요하지 않도록 로깅 라이브러리를 설정하여 로그를 JSON 형식으로 생성하는 것을 권장합니다.
 
@@ -280,8 +283,8 @@ JSON 형식으로 로깅할 때의 장점에도 불구하고 원시 문자열 �
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -571,7 +574,7 @@ using (var log = new LoggerConfiguration()
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-다음 필수 속성을 수동으로 지정하여 기본 동작을 재정의하고 TCP에서 로그를 전달할 수도 있습니다: `url`, `port`, `useSSL`, `useTCP`. 선택적으로, [`source`, `service`, `host`, 커스텀 태그를 지정합니다.][1]
+다음 필수 속성을 수동으로 지정하여 기본 동작을 재정의하고 TCP에서 로그를 전달할 수도 있습니다: `port`, `useSSL`, `useTCP`. 선택적으로, [`source`, `service`, `host`, 커스텀 태그를 지정합니다.][1]
 
 예를 들어 TCP의 Datadog US 영역에 로그를 전달하려면 다음 싱크 설정을 사용합니다:
 
@@ -631,9 +634,9 @@ using (var log = new LoggerConfiguration()
 [1]: /ko/logs/log_configuration/parsing
 [2]: /ko/agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /ko/agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /ko/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /ko/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /ko/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ko/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /ko/logs/log_configuration/parsing/?tab=matchers
 [8]: /ko/logs/explorer/#overview
 [9]: /ko/tracing/other_telemetry/connect_logs_and_traces/dotnet/
@@ -647,3 +650,4 @@ using (var log = new LoggerConfiguration()
 [17]: /ko/logs/log_configuration/pipelines/?tab=source
 [18]: /ko/api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[20]: /ko/glossary/#tail

@@ -49,13 +49,13 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 Datadog supports the [W3C Trace Context standard][6], ensuring complete traces are captured even when a request travels between services that have been instrumented with different tools. Services need only be instrumented with any system, such as an OpenTelemetry library or Datadog tracing library, that follows the W3C Trace Context standard. Read [Propagating Trace Context][5] for more information.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/
 [2]: https://www.cncf.io/
-[3]: /opentelemetry/otel_collector_datadog_exporter/
+[3]: /opentelemetry/collector_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [5]: /tracing/trace_collection/trace_context_propagation/
 [6]: https://www.w3.org/TR/trace-context/

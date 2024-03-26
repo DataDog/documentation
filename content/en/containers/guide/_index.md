@@ -17,6 +17,7 @@ disable_toc: true
     {{< nextlink href="/containers/guide/docker-deprecation" >}}Deprecating Docker in Kubernetes{{< /nextlink >}}
     {{< nextlink href="/containers/guide/podman-support-with-docker-integration" >}}Using the Docker integration with Podman container runtime{{< /nextlink >}}
     {{< nextlink href="/containers/guide/changing_container_registry" >}}Changing Your Container Registry{{< /nextlink >}}
+    {{< nextlink href="/containers/guide/sync_container_images" >}}Synchronize Datadog's images with a private registry{{< /nextlink >}}
     {{< nextlink href="/containers/guide/template_variables" >}}Autodiscovery Template Variables{{< /nextlink >}}
     {{< nextlink href="/containers/guide/auto_conf" >}}Autodiscovery Auto-Configuration{{< /nextlink >}}
     {{< nextlink href="/containers/guide/how-to-import-datadog-resources-into-terraform/" >}}How to Import Datadog Resources into Terraform{{< /nextlink >}}

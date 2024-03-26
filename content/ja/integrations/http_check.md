@@ -29,12 +29,11 @@ draft: false
 git_integration_title: http_check
 integration_id: ネットワーク
 integration_title: HTTP チェック
-integration_version: 8.2.1
+integration_version: 9.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: http_check
-oauth: {}
 public_title: HTTP チェック
 short_description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
 supported_os:
@@ -144,7 +143,7 @@ HTTP チェックにはイベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/developers/write_agent_check/#collection-interval

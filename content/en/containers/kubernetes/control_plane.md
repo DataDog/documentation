@@ -786,7 +786,7 @@ spec:
 {{< /tabs >}}
 
 
-## Kubernetes on Rancher Kubernetes Engine (\<v2.5) {#RKEBefore2_5}
+## Kubernetes on Rancher Kubernetes Engine (before v2.5) {#RKEBefore2_5}
 
 ### API Server, Controller Manager, and Scheduler
 
