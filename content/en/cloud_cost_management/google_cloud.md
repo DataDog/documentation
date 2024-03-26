@@ -36,7 +36,7 @@ The Datadog Google Cloud Platform integration allows Cloud Costs to automaticall
 To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the **Limit Metric Collection Filters** section of the integration page.
 </div>
 
-{{< img src="cloud_cost/gcp_integration_limit_metric_collection" alt="In GCP Integration tile, limit metric collection" >}}
+{{< img src="cloud_cost/gcp_integration_limit_metric_collection.png" alt="Limit metric collection filters section configured in the Google Cloud Platform integration page" >}}
 
 ### Enable detailed usage cost export
 <div class="alert alert-info">
