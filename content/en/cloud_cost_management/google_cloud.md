@@ -33,7 +33,7 @@ If you do not see your desired Service Account in the list, go to the [Google Cl
 
 <div class="alert alert-warning">
 The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
-To limit Infrastructure Monitoring hosts for these projects, use Limit Metric Collection in the integration tile.
+To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the **Limit Metric Collection Filters** section of the integration page.
 </div>
 
 {{< img src="cloud_cost/gcp_integration_limit_metric_collection" alt="In GCP Integration tile, limit metric collection" >}}
