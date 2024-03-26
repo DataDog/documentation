@@ -22,7 +22,7 @@ further_reading:
 
 To use Google Cloud Cost Management in Datadog, you must: 
 1. Configure the [Google Cloud Platform Integration][12] 
-2. Set up the [detailed usage cost][13] with the necessary permissions (Google Service APIs, export project access, and BigQuery Dataset access)
+2. Set up the [detailed usage cost export][13] with the necessary permissions (Google Service APIs, export project access, and BigQuery Dataset access)
 3. Create or select a [Google Cloud Storage bucket][15] with the necessary permissions (Bucket access)
 
 ## Setup
