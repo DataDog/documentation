@@ -1,9 +1,7 @@
 ---
-title: Configuring the Oracle integration on Agent versions lower than 7.50.1
+title: Configuring the Oracle Integration on Agent Versions Lower than 7.50.1
 kind: guide
 ---
-
-# Oracle Integration
 
 ## Overview
 
@@ -19,15 +17,12 @@ To use the Oracle integration you can either use the native client (no additiona
 
 ##### Oracle Instant Client
 
-<!-- xxx tabs xxx -->
-
-<!-- xxx tab "Linux" xxx -->
-###### Linux
-
-1. Follow the [Oracle Instant Client installation for Linux][17].
+{{< tabs >}}
+{{% tab "Linux" %}}
+1. Follow the [Oracle Instant Client installation for Linux][1].
 
 2. Verify the following:
-    - Both the *Instant Client Basic* and *SDK* packages are installed. Find them on Oracle's [download page][18].
+    - Both the *Instant Client Basic* and *SDK* packages are installed. Find them on Oracle's [download page][2].
 
         After the Instant Client libraries are installed, ensure the runtime linker can find the libraries. For example, using `ldconfig`:
 
@@ -49,22 +44,24 @@ To use the Oracle integration you can either use the native client (no additiona
        unzip /opt/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip
        ```
 
-<!-- xxz tab xxx -->
-<!-- xxx tab "Windows" xxx -->
-###### Windows
+[1]: https://docs.oracle.com/en/database/oracle/oracle-database/21/lacli/install-instant-client-using-zip.html
+[2]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+{{% /tab %}}
 
-1. Follow the [Oracle Windows installation guide][19] to configure your Oracle Instant Client.
+{{% tab "Windows" %}}
+1. Follow the [Oracle Windows installation guide][1] to configure your Oracle Instant Client.
 
 2. Verify the following:
-    - The [Microsoft Visual Studio 2017 Redistributable][20] or the appropriate version is installed for the Oracle Instant Client.
+    - The [Microsoft Visual Studio 2017 Redistributable][2] or the appropriate version is installed for the Oracle Instant Client.
 
     - Both the *Instant Client Basic* and *SDK* packages from Oracle's [download page][18] are installed.
 
     - Both packages are extracted into a single directory that is available to all users on the given machine (for example, `C:\oracle`).
 
-
-<!-- xxz tab xxx -->
-<!-- xxz tabs xxx -->
+[1]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
+[2]: https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0
+{{% /tab %}}
+{{< /tabs >}}
 
 ##### JDBC driver
 
@@ -79,9 +76,8 @@ Once it is installed, complete the following steps:
 
 #### Datadog user creation
 
-<!-- xxx tabs xxx -->
-<!-- xxx tab "Stand Alone" xxx -->
-
+{{< tabs >}}
+{{% tab "Standalone" %}}
 Create a read-only `datadog` user with proper access to your Oracle Database Server. Connect to your Oracle database with an administrative user, such as `SYSDBA` or `SYSOPER`, and run:
 
 ```text
@@ -105,10 +101,9 @@ GRANT SELECT ON sys.dba_tablespace_usage_metrics TO datadog;
 ```text
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 ```
+{{% /tab %}}
 
-<!-- xxz tab xxx -->
-<!-- xxx tab "Multitenant" xxx -->
-
+{{% tab "Multi-tenant" %}}
 ##### Oracle 12c or 19c
 
 Log in to the root database as an Administrator to create a `datadog` user and grant permissions:
@@ -121,20 +116,16 @@ Grant select any dictionary to c##datadog container=all;
 GRANT SELECT ON GV_$PROCESS TO c##datadog CONTAINER=ALL;
 GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
 ```
-
-<!-- xxz tab xxx -->
-<!-- xxz tabs xxx -->
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Configuration
 
-<!-- xxx tabs xxx -->
-<!-- xxx tab "Host" xxx -->
-
-#### Host
-
+{{< tabs >}}
+{{% tab "Host" %}}
 To configure this check for an Agent running on a host:
 
-1. Edit the `oracle.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][6]. Update the `server` and `port` to set the masters to monitor. See the [sample oracle.d/conf.yaml][5] for all available configuration options.
+1. Edit the `oracle.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. Update the `server` and `port` to set the masters to monitor. See the [sample oracle.d/conf.yaml][1] for all available configuration options.
 
    ```yaml
    init_config:
@@ -162,12 +153,12 @@ To configure this check for an Agent running on a host:
         password: <PASSWORD>
    ```
 
-2. [Restart the Agent][7].
+2. [Restart the Agent][3].
 
 
 #### Only custom queries
 
-To skip default metric checks for an instance and only run custom queries with an existing metrics gathering user, insert the tag `only_custom_queries` with a value of `true`. This allows a configured instance of the Oracle integration to skip the system, process, and tablespace metrics from running, and allows custom queries to be run without having the permissions described in the [Datadog user creation](#datadog-user-creation) section. If this configuration entry is omitted, the user you specify is required to have those table permissions to run a custom query.
+To skip default metric checks for an instance and only run custom queries with an existing metrics-gathering user, insert the tag `only_custom_queries` with a value of `true`. This allows a configured instance of the Oracle integration to prevent the system, process, and tablespace metrics from running, and allows custom queries to be run without having the permissions described in the [Datadog user creation](#datadog-user-creation) section. If this configuration entry is omitted, the user you specify must have those table permissions to run a custom query.
 
 ```yaml
 init_config:
@@ -253,7 +244,7 @@ If you are not using JDBC, verify that the Datadog Agent is able to connect to y
 sqlplus <USER>/<PASSWORD>@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCPS)(HOST=<HOST>)(PORT=<PORT>))(SERVICE_NAME=<SERVICE_NAME>)))
 ```
 
-When using the [Oracle Instant Client][16] connection, move three files to the `network/admin` directory of the client libraries used by your application:
+When using the [Oracle Instant Client][5] connection, move three files to the `network/admin` directory of the client libraries used by your application:
   * `tnsnames.ora`: Maps net service names used for application connection strings to your database services.
   * `sqlnet.ora`: Configures Oracle Network settings.
   * `cwallet.sso`: Enables SSL or TLS connections. Keep this file secure.
@@ -284,14 +275,18 @@ If you are connecting to Oracle Database using JDBC, you also need to specify `j
     # jdbc_truststore_password: <JDBC_TRUSTSTORE_PASSWORD>
 ```
 
-For more information about connecting to the Oracle Database through TCPS on JDBC, see the official [Oracle whitepaper][15].
+For more information about connecting to the Oracle Database through TCPS on JDBC, see the official [Oracle whitepaper][4].
 
-<!-- xxz tab xxx -->
-<!-- xxx tab "Containerized" xxx -->
+[1]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
+[5]: https://python-oracledb.readthedocs.io/en/latest/user_guide/connection_handling.html#install-the-wallet-and-network-configuration-files
 
-#### Containerized
+{{% /tab %}}
 
-For containerized environments, see the [Autodiscovery Integration Templates][8] for guidance on applying the parameters below.
+{{% tab "Containerized" %}}
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
 | Parameter            | Value                                                                                                     |
 | -------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -299,9 +294,10 @@ For containerized environments, see the [Autodiscovery Integration Templates][8]
 | `<INIT_CONFIG>`      | blank or `{}`                                                                                             |
 | `<INSTANCE_CONFIG>`  | `{"server": "%%host%%:1521", "service_name":"<SERVICE_NAME>", "username":"datadog", "password":"<PASSWORD>"}` |
 
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 
-<!-- xxz tab xxx -->
-<!-- xxz tabs xxx -->
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
@@ -491,9 +487,7 @@ The structure of the directory should look similar:
         ```
     - Then restart the Agent.
 
-- If you encounter this error `Unsupported major.minor version 52.0` it means that you're running a Java version that
-is too old. You need to either update your system Java or additionally install a newer version and point your `JAVA_HOME`
-variable to the new install as explained above.
+- If you encounter this error `Unsupported major.minor version 52.0` it means you're running a Java version that is too old. You need to either update your system Java or additionally install a newer version and point your `JAVA_HOME` variable to the new install as explained above.
 
 - Verify your environment variables are set correctly by running the following command from the Agent.
 Ensure the displayed output matches the correct value.
@@ -509,20 +503,9 @@ Need help? Contact [Datadog support][14].
 [3]: https://github.com/DataDog/integrations-core/tree/7.41.x/oracle#oracle-instant-client
 [4]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://docs.datadoghq.com/monitors/monitor_types/metric/?tab=threshold
 [11]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
 [12]: https://github.com/DataDog/integrations-core/blob/master/oracle/assets/service_checks.json
-[13]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html
 [14]: https://docs.datadoghq.com/help/
-[15]: https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
-[16]: https://python-oracledb.readthedocs.io/en/latest/user_guide/connection_handling.html#install-the-wallet-and-network-configuration-files
-[17]: https://docs.oracle.com/en/database/oracle/oracle-database/21/lacli/install-instant-client-using-zip.html
 [18]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
-[19]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
-[20]: https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0
-[21]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
-[22]: https://docs.datadoghq.com/database_monitoring/
