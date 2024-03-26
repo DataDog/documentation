@@ -207,9 +207,9 @@ Allocations (beta, v2.18+)
 : The number and size of allocated objects by each method, as well as their type.<br />
 _Requires: .NET 6+_
 
-Lock (v2.31+ for .NET 5+ and 2.49+ for .NET Framework with Datadog Agent 7.51+)
+Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
-_Requires: .NET 5+/.NET Framework_
+_Requires: .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
 Live Heap (beta, v2.22+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
