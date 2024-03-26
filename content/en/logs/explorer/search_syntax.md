@@ -115,7 +115,7 @@ Wildcard searches work within tags and attributes (faceted or not) with this syn
 service:*mongo
 ```
 
-Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all the logs that contain the string `NETWORK`:
+Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all logs with content (message) that contain the string `NETWORK`:
 
 ```
 *NETWORK*
@@ -125,7 +125,7 @@ However, this search term does not return logs that contain the string `NETWORK`
 
 ### Full-text search across all log attributes
 
-<div class="alert alert-warning">The full-text search feature is in beta. It is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used for defining index filters, archive filters, log pipeline filters, or in Live Tail. </div>
+<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used for defining index filters, archive filters, log pipeline filters, or in Live Tail. </div>
 
 <div class="alert alert-warning">You can use full-text search for all logs ingested after MONTH DATE YEAR.</div>
 
