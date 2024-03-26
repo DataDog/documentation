@@ -4229,6 +4229,7 @@ components:
       - ndm_netflow_usage
       - npm_host_usage
       - obs_pipeline_bytes_usage
+      - obs_pipelines_vcpu_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
@@ -4240,6 +4241,7 @@ components:
       - snmp_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
+      - workflow_executions_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -4295,6 +4297,7 @@ components:
       - NDM_NETFLOW_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
+      - OBS_PIPELINE_VCPU_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
@@ -4306,6 +4309,7 @@ components:
       - SNMP_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
+      - WORKFLOW_EXECUTIONS_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7168,7 +7172,7 @@ components:
           description: "A Boolean indicating whether this monitor needs a full window
             of data before it\u2019s evaluated.\nWe highly recommend you set this
             to `false` for sparse metrics,\notherwise some evaluations are skipped.
-            Default is false."
+            Default is false. This setting only applies to\nmetric monitors."
           type: boolean
         scheduling_options:
           $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
@@ -7925,6 +7929,8 @@ components:
       - npm_host_percentage
       - obs_pipeline_bytes_usage
       - obs_pipeline_bytes_percentage
+      - obs_pipelines_vcpu_usage
+      - obs_pipelines_vcpu_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
@@ -7981,6 +7987,8 @@ components:
       - ingested_spans_bytes_percentage
       - siem_ingested_bytes_usage
       - siem_ingested_bytes_percentage
+      - workflow_executions_usage
+      - workflow_executions_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -8052,6 +8060,8 @@ components:
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
       - OBS_PIPELINE_BYTES_PERCENTAGE
+      - OBS_PIPELINES_VCPU_USAGE
+      - OBS_PIPELINES_VCPU_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
@@ -8108,6 +8118,8 @@ components:
       - INGESTED_SPANS_BYTES_PERCENTAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SIEM_INGESTED_BYTES_PERCENTAGE
+      - WORKFLOW_EXECUTIONS_USAGE
+      - WORKFLOW_EXECUTIONS_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -8543,6 +8555,15 @@ components:
           description: The observability pipeline bytes usage by tag(s).
           format: double
           type: number
+        obs_pipelines_vcpu_percentage:
+          description: The percentage of observability pipeline per core usage by
+            tag(s).
+          format: double
+          type: number
+        obs_pipelines_vcpu_usage:
+          description: The observability pipeline per core usage by tag(s).
+          format: double
+          type: number
         profiled_container_percentage:
           description: The percentage of profiled container usage by tag(s).
           format: double
@@ -8630,6 +8651,14 @@ components:
           type: number
         vuln_management_hosts_usage:
           description: The Application Vulnerability Management usage by tag(s).
+          format: double
+          type: number
+        workflow_executions_percentage:
+          description: The percentage of workflow executions usage by tag(s).
+          format: double
+          type: number
+        workflow_executions_usage:
+          description: The total workflow executions usage by tag(s).
           format: double
           type: number
       type: object
@@ -16026,6 +16055,8 @@ components:
         host:
           description: Host name to perform the test with.
           type: string
+        httpVersion:
+          $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -17017,270 +17048,6 @@ components:
           format: double
           type: number
       type: object
-    UsageAttributionBody:
-      description: Usage Summary by tag for a given organization.
-      properties:
-        month:
-          description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
-          format: date-time
-          type: string
-        org_name:
-          description: The name of the organization.
-          type: string
-        public_id:
-          description: The organization public ID.
-          type: string
-        tag_config_source:
-          description: The source of the usage attribution tag configuration and the
-            selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
-            tag 2>///<selected tag 3>`.
-          type: string
-        tags:
-          $ref: '#/components/schemas/UsageAttributionTagNames'
-        updated_at:
-          description: Shows the the most recent hour in the current month for all
-            organizations for which all usages were calculated.
-          type: string
-        values:
-          $ref: '#/components/schemas/UsageAttributionValues'
-      type: object
-    UsageAttributionLimit:
-      default: 5000
-      description: Maximum number of records to be returned.
-      format: int64
-      type: integer
-    UsageAttributionMetadata:
-      description: The object containing document metadata.
-      properties:
-        aggregates:
-          $ref: '#/components/schemas/UsageAttributionAggregates'
-        pagination:
-          $ref: '#/components/schemas/UsageAttributionPagination'
-      type: object
-    UsageAttributionOffset:
-      default: 0
-      description: Number of records to skip before beginning to return.
-      format: int64
-      type: integer
-    UsageAttributionPagination:
-      description: The metadata for the current pagination.
-      properties:
-        limit:
-          description: Maximum amount of records to be returned.
-          format: int64
-          type: integer
-        offset:
-          description: Records to be skipped before beginning to return.
-          format: int64
-          type: integer
-        sort_direction:
-          description: Direction to sort by.
-          type: string
-        sort_name:
-          description: Field to sort by.
-          type: string
-        total_number_of_records:
-          description: Total number of records.
-          format: int64
-          type: integer
-      type: object
-    UsageAttributionResponse:
-      description: Response containing the Usage Summary by tag(s).
-      properties:
-        metadata:
-          $ref: '#/components/schemas/UsageAttributionMetadata'
-        usage:
-          description: Get usage summary by tag(s).
-          items:
-            $ref: '#/components/schemas/UsageAttributionBody'
-          type: array
-      type: object
-    UsageAttributionSort:
-      default: custom_timeseries_usage
-      description: The field to sort by.
-      enum:
-      - api_percentage
-      - snmp_usage
-      - apm_host_usage
-      - api_usage
-      - appsec_usage
-      - appsec_percentage
-      - container_usage
-      - custom_timeseries_percentage
-      - container_percentage
-      - apm_host_percentage
-      - npm_host_percentage
-      - browser_percentage
-      - browser_usage
-      - infra_host_percentage
-      - snmp_percentage
-      - npm_host_usage
-      - infra_host_usage
-      - custom_timeseries_usage
-      - lambda_functions_usage
-      - lambda_functions_percentage
-      - lambda_invocations_usage
-      - lambda_invocations_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
-      - estimated_indexed_spans_usage
-      - estimated_indexed_spans_percentage
-      - estimated_ingested_spans_usage
-      - estimated_ingested_spans_percentage
-      - apm_fargate_usage
-      - apm_fargate_percentage
-      - appsec_fargate_usage
-      - appsec_fargate_percentage
-      - estimated_rum_usage_attribution_usage
-      - estimated_rum_usage_attribution_percentage
-      - asm_serverless_traced_invocations_usage
-      - asm_serverless_traced_invocations_percentage
-      type: string
-      x-enum-varnames:
-      - API_PERCENTAGE
-      - SNMP_USAGE
-      - APM_HOST_USAGE
-      - API_USAGE
-      - APPSEC_USAGE
-      - APPSEC_PERCENTAGE
-      - CONTAINER_USAGE
-      - CUSTOM_TIMESERIES_PERCENTAGE
-      - CONTAINER_PERCENTAGE
-      - APM_HOST_PERCENTAGE
-      - NPM_HOST_PERCENTAGE
-      - BROWSER_PERCENTAGE
-      - BROWSER_USAGE
-      - INFRA_HOST_PERCENTAGE
-      - SNMP_PERCENTAGE
-      - NPM_HOST_USAGE
-      - INFRA_HOST_USAGE
-      - CUSTOM_TIMESERIES_USAGE
-      - LAMBDA_FUNCTIONS_USAGE
-      - LAMBDA_FUNCTIONS_PERCENTAGE
-      - LAMBDA_INVOCATIONS_USAGE
-      - LAMBDA_INVOCATIONS_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
-      - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
-      - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
-      - APM_FARGATE_USAGE
-      - APM_FARGATE_PERCENTAGE
-      - APPSEC_FARGATE_USAGE
-      - APPSEC_FARGATE_PERCENTAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
-      - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
-      - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
-    UsageAttributionSupportedMetrics:
-      description: Supported fields for usage attribution requests (valid requests
-        contain one or more metrics, or `*` for all).
-      enum:
-      - custom_timeseries_usage
-      - container_usage
-      - snmp_percentage
-      - apm_host_usage
-      - browser_usage
-      - npm_host_percentage
-      - infra_host_usage
-      - custom_timeseries_percentage
-      - container_percentage
-      - api_usage
-      - apm_host_percentage
-      - infra_host_percentage
-      - snmp_usage
-      - browser_percentage
-      - api_percentage
-      - npm_host_usage
-      - lambda_functions_usage
-      - lambda_functions_percentage
-      - lambda_invocations_usage
-      - lambda_invocations_percentage
-      - fargate_usage
-      - fargate_percentage
-      - profiled_host_usage
-      - profiled_host_percentage
-      - profiled_container_usage
-      - profiled_container_percentage
-      - dbm_hosts_usage
-      - dbm_hosts_percentage
-      - dbm_queries_usage
-      - dbm_queries_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
-      - appsec_usage
-      - appsec_percentage
-      - estimated_indexed_spans_usage
-      - estimated_indexed_spans_percentage
-      - estimated_ingested_spans_usage
-      - estimated_ingested_spans_percentage
-      - apm_fargate_usage
-      - apm_fargate_percentage
-      - appsec_fargate_usage
-      - appsec_fargate_percentage
-      - estimated_rum_usage_attribution_usage
-      - estimated_rum_usage_attribution_percentage
-      - asm_serverless_traced_invocations_usage
-      - asm_serverless_traced_invocations_percentage
-      - '*'
-      type: string
-      x-enum-varnames:
-      - CUSTOM_TIMESERIES_USAGE
-      - CONTAINER_USAGE
-      - SNMP_PERCENTAGE
-      - APM_HOST_USAGE
-      - BROWSER_USAGE
-      - NPM_HOST_PERCENTAGE
-      - INFRA_HOST_USAGE
-      - CUSTOM_TIMESERIES_PERCENTAGE
-      - CONTAINER_PERCENTAGE
-      - API_USAGE
-      - APM_HOST_PERCENTAGE
-      - INFRA_HOST_PERCENTAGE
-      - SNMP_USAGE
-      - BROWSER_PERCENTAGE
-      - API_PERCENTAGE
-      - NPM_HOST_USAGE
-      - LAMBDA_FUNCTIONS_USAGE
-      - LAMBDA_FUNCTIONS_PERCENTAGE
-      - LAMBDA_INVOCATIONS_USAGE
-      - LAMBDA_INVOCATIONS_PERCENTAGE
-      - FARGATE_USAGE
-      - FARGATE_PERCENTAGE
-      - PROFILED_HOST_USAGE
-      - PROFILED_HOST_PERCENTAGE
-      - PROFILED_CONTAINER_USAGE
-      - PROFILED_CONTAINER_PERCENTAGE
-      - DBM_HOSTS_USAGE
-      - DBM_HOSTS_PERCENTAGE
-      - DBM_QUERIES_USAGE
-      - DBM_QUERIES_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
-      - APPSEC_USAGE
-      - APPSEC_PERCENTAGE
-      - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
-      - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
-      - APM_FARGATE_USAGE
-      - APM_FARGATE_PERCENTAGE
-      - APPSEC_FARGATE_USAGE
-      - APPSEC_FARGATE_PERCENTAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
-      - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
-      - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
-      - ALL
     UsageAttributionTagNames:
       additionalProperties:
         description: 'A list of values that are associated with each tag key.
@@ -17309,225 +17076,6 @@ components:
 
         In this scenario the API returns the total usage, not broken down by tags.'
       nullable: true
-      type: object
-    UsageAttributionValues:
-      description: Fields in Usage Summary by tag(s).
-      properties:
-        api_percentage:
-          description: The percentage of synthetic API test usage by tag(s).
-          format: double
-          type: number
-        api_usage:
-          description: The synthetic API test usage by tag(s).
-          format: double
-          type: number
-        apm_fargate_percentage:
-          description: The percentage of APM ECS Fargate task usage by tag(s).
-          format: double
-          type: number
-        apm_fargate_usage:
-          description: The APM ECS Fargate task usage by tag(s).
-          format: double
-          type: number
-        apm_host_percentage:
-          description: The percentage of APM host usage by tag(s).
-          format: double
-          type: number
-        apm_host_usage:
-          description: The APM host usage by tag(s).
-          format: double
-          type: number
-        appsec_fargate_percentage:
-          description: The percentage of Application Security Monitoring ECS Fargate
-            task usage by tag(s).
-          format: double
-          type: number
-        appsec_fargate_usage:
-          description: The Application Security Monitoring ECS Fargate task usage
-            by tag(s).
-          format: double
-          type: number
-        appsec_percentage:
-          description: The percentage of Application Security Monitoring host usage
-            by tag(s).
-          format: double
-          type: number
-        appsec_usage:
-          description: The Application Security Monitoring host usage by tag(s).
-          format: double
-          type: number
-        browser_percentage:
-          description: The percentage of synthetic browser test usage by tag(s).
-          format: double
-          type: number
-        browser_usage:
-          description: The synthetic browser test usage by tag(s).
-          format: double
-          type: number
-        container_percentage:
-          description: The percentage of container usage by tag(s).
-          format: double
-          type: number
-        container_usage:
-          description: The container usage by tag(s).
-          format: double
-          type: number
-        cspm_container_percentage:
-          description: The percentage of Cloud Security Management Pro container usage
-            by tag(s)
-          format: double
-          type: number
-        cspm_container_usage:
-          description: The Cloud Security Management Pro container usage by tag(s)
-          format: double
-          type: number
-        cspm_host_percentage:
-          description: The percentage of Cloud Security Management Pro host usage
-            by tag(s)
-          format: double
-          type: number
-        cspm_host_usage:
-          description: The Cloud Security Management Pro host usage by tag(s)
-          format: double
-          type: number
-        custom_timeseries_percentage:
-          description: The percentage of custom metrics usage by tag(s).
-          format: double
-          type: number
-        custom_timeseries_usage:
-          description: The custom metrics usage by tag(s).
-          format: double
-          type: number
-        cws_container_percentage:
-          description: The percentage of Cloud Workload Security container usage by
-            tag(s)
-          format: double
-          type: number
-        cws_container_usage:
-          description: The Cloud Workload Security container usage by tag(s)
-          format: double
-          type: number
-        cws_host_percentage:
-          description: The percentage of Cloud Workload Security host usage by tag(s)
-          format: double
-          type: number
-        cws_host_usage:
-          description: The Cloud Workload Security host usage by tag(s)
-          format: double
-          type: number
-        dbm_hosts_percentage:
-          description: The percentage of Database Monitoring host usage by tag(s).
-          format: double
-          type: number
-        dbm_hosts_usage:
-          description: The Database Monitoring host usage by tag(s).
-          format: double
-          type: number
-        dbm_queries_percentage:
-          description: The percentage of Database Monitoring normalized queries usage
-            by tag(s).
-          format: double
-          type: number
-        dbm_queries_usage:
-          description: The Database Monitoring normalized queries usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_percentage:
-          description: The percentage of estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_spans_percentage:
-          description: The percentage of estimated indexed spans usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_percentage:
-          description: The percentage of estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_spans_percentage:
-          description: The percentage of estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        infra_host_percentage:
-          description: The percentage of infrastructure host usage by tag(s).
-          format: double
-          type: number
-        infra_host_usage:
-          description: The infrastructure host usage by tag(s).
-          format: double
-          type: number
-        lambda_functions_percentage:
-          description: The percentage of Lambda function usage by tag(s).
-          format: double
-          type: number
-        lambda_functions_usage:
-          description: The Lambda function usage by tag(s).
-          format: double
-          type: number
-        lambda_invocations_percentage:
-          description: The percentage of Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        lambda_invocations_usage:
-          description: The Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        npm_host_percentage:
-          description: The percentage of network host usage by tag(s).
-          format: double
-          type: number
-        npm_host_usage:
-          description: The network host usage by tag(s).
-          format: double
-          type: number
-        profiled_container_percentage:
-          description: The percentage of profiled containers usage by tag(s).
-          format: double
-          type: number
-        profiled_container_usage:
-          description: The profiled container usage by tag(s).
-          format: double
-          type: number
-        profiled_hosts_percentage:
-          description: The percentage of profiled hosts usage by tag(s).
-          format: double
-          type: number
-        profiled_hosts_usage:
-          description: The profiled host usage by tag(s).
-          format: double
-          type: number
-        snmp_percentage:
-          description: The percentage of network device usage by tag(s).
-          format: double
-          type: number
-        snmp_usage:
-          description: The network device usage by tag(s).
-          format: double
-          type: number
       type: object
     UsageAuditLogsHour:
       description: Audit logs usage for a given organization for a given hour.
@@ -25786,7 +25334,7 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-given:
-        aws_account:
+        azure_account:
           parameters:
           - name: body
             origin: request
@@ -27856,7 +27404,7 @@ paths:
         **Notes**:
 
         - Synthetic monitors are created through the Synthetics API. See the [Synthetics
-        API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
         more information.
 
         - Log monitors require an unscoped App Key.
@@ -28163,10 +27711,7 @@ paths:
 
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        **NOTE** Database Monitoring monitors are in alpha on US1.'
+        - `#` an integer or decimal number used to set the threshold.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -33043,103 +32588,6 @@ paths:
       x-menu-order: 23
       x-undo:
         type: safe
-  /api/v1/usage/attribution:
-    get:
-      deprecated: true
-      description: 'Get usage attribution.
-
-        **Note:** This endpoint will be fully deprecated on December 1, 2022.
-
-        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
-        for the associated migration guide.'
-      operationId: GetUsageAttribution
-      parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for usage beginning in this month.
-
-          Maximum of 15 months ago.'
-        in: query
-        name: start_month
-        required: true
-        schema:
-          format: date-time
-          type: string
-      - description: Comma-separated list of usage types to return, or `*` for all
-          usage types.
-        in: query
-        name: fields
-        required: true
-        schema:
-          $ref: '#/components/schemas/UsageAttributionSupportedMetrics'
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for usage ending this month.'
-        in: query
-        name: end_month
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'The direction to sort by: `[desc, asc]`.'
-        in: query
-        name: sort_direction
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageSortDirection'
-      - description: The field to sort by.
-        in: query
-        name: sort_name
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionSort'
-      - description: Include child org usage in the response. Defaults to false.
-        in: query
-        name: include_descendants
-        required: false
-        schema:
-          default: false
-          type: boolean
-      - description: Number of records to skip before beginning to return.
-        in: query
-        name: offset
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionOffset'
-      - description: Maximum number of records to be returned.
-        in: query
-        name: limit
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionLimit'
-      responses:
-        '200':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/UsageAttributionResponse'
-          description: OK
-        '403':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden - User is not authorized
-        '429':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
-      summary: Get usage attribution
-      tags:
-      - Usage Metering
-      x-menu-order: 40
-      x-undo:
-        type: safe
   /api/v1/usage/audit_logs:
     get:
       deprecated: true
@@ -35874,6 +35322,7 @@ tags:
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
 - description: Search your logs and send them to your Datadog platform over HTTP.
+    See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
 - description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
 
@@ -35904,7 +35353,8 @@ tags:
     A graph can only contain a set number of points\nand as the timeframe over which
     a metric is viewed increases,\naggregation between points occurs to stay below
     that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
-    only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee
+    the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about and
@@ -35947,9 +35397,9 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Screenboards
   x-deprecated: true
-- description: 'Detection rules for generating signals and listing of generated
-
-    signals.'
+- description: Create and manage your security rules, signals, filters, and more.
+    See the [Datadog Security page](https://docs.datadoghq.com/security/) for more
+    information.
   name: Security Monitoring
 - description: 'The service check endpoint allows you to post check statuses for use
     with monitors.
@@ -35966,18 +35416,18 @@ tags:
     an OK status.
 
 
-    - [Read more about Service Check monitors.][1]
+    - [Read more about Service Check monitors][1].
 
-    - [Read more about Process Check monitors.][2]
+    - [Read more about Process Check monitors][2].
 
-    - [Read more about Network Check monitors.][3]
+    - [Read more about Network monitors][3].
 
-    - [Read more about Custom Check monitors.][4]
+    - [Read more about Custom Check monitors][4].
 
-    - [Read more about Service Check and status codes.][5]
+    - [Read more about Service Checks and status codes][5].
 
 
-    [1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert
+    [1]: https://docs.datadoghq.com/monitors/types/service_check/
 
     [2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert
 
@@ -35989,7 +35439,7 @@ tags:
   name: Service Checks
 - description: 'APM Service Map API. For more information, visit
 
-    the [services map documentation](https://docs.datadoghq.com/tracing/visualization/services_map/).'
+    the [Service Map page](https://docs.datadoghq.com/tracing/visualization/services_map/).'
   externalDocs:
     url: https://docs.datadoghq.com/tracing/visualization/services_map/
   name: Service Dependencies
@@ -35997,7 +35447,8 @@ tags:
     from negatively impacting\nyour SLO\u2019s status and error budget. You can use
     Status Corrections for various purposes, such\nas removing planned maintenance
     windows, non-business hours, or other time periods that do\nnot correspond to
-    genuine issues."
+    genuine issues. See [SLO status corrections](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-status-corrections)
+    for more information."
   name: Service Level Objective Corrections
 - description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
 
@@ -36047,9 +35498,7 @@ tags:
     users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.
 
 
-    Read more about tags on the dedicated
-
-    [documentation page](https://docs.datadoghq.com/tagging).'
+    Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).'
   name: Tags
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
     instead.
@@ -36088,9 +35537,8 @@ tags:
 - description: 'Configure your Datadog-Webhooks integration directly through the Datadog
     API.
 
-    For more information about the Datadog-Webhooks integration,
-
-    see the [integration page](https://docs.datadoghq.com/integrations/webhooks).'
+    See the [Webhooks integration page](https://docs.datadoghq.com/integrations/webhooks)
+    for more information.'
   externalDocs:
     url: https://docs.datadoghq.com/integrations/webhooks
   name: Webhooks Integration

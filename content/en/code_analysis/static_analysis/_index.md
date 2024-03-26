@@ -88,7 +88,7 @@ The content of the violation is shown in tabs:
 - **Event**: JSON metadata regarding the Static Analysis violation event.
 
 ### Using suggested fixes
-<div class="alert alert-warning">AI Suggested Fixes are still in private beta. To request access, contact <a href="/help/">Support.</div>
+<div class="alert alert-warning">AI Suggested Fixes are in private beta. To request access, contact <a href="/help/">Support.</div>
 
 {{< img src="code_analysis/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}}
 

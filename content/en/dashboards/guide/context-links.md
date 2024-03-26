@@ -256,7 +256,7 @@ The parenthesis translates the `(env:{{$env.value}})` to `(env:*)` which allows 
 
 [1]: /monitors/notify/
 [2]: /notebooks/
-[3]: /dashboards/#permissions
+[3]: /dashboards/configure/#permissions
 [4]: https://app.datadoghq.com/apm/traces/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/rum/explorer/

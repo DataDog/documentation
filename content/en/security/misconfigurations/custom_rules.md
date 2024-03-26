@@ -1,5 +1,5 @@
 ---
-title: Custom Rules
+title: Create Custom Rules
 kind: documentation
 aliases:
   - /security/cspm/custom_rules

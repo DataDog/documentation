@@ -1,5 +1,5 @@
 ---
-title: Compliance Reports
+title: Manage Your Security Compliance Posture
 kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks

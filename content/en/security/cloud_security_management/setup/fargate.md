@@ -8,9 +8,9 @@ private: true
 
 Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS on AWS Fargate. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
 
-Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as [95 out-of-the-box rules][3].
+Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as [100+ out-of-the-box rules][3].
 
-{{< img src="security/csm/csm_fargate_workflow.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="80%">}}
+{{< img src="security/csm/csm_fargate_workflow2.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="100%">}}
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 
 ### Images
 
-* cws-instrumentation: datadog/cws-instrumentation-dev:cws-instrumentation-beta
+* cws-instrumentation: datadog/cws-instrumentation:latest
 * Datadog-agent: datadog/agent:latest
 
 ## Installation
@@ -48,8 +48,9 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     "containerDefinitions": [
         {
             "name": "cws-instrumentation-init",
-            "image": "datadog/cws-instrumentation-dev:cws-instrumentation-beta",
+            "image": "datadog/cws-instrumentation:latest",
             "essential": false,
+            "user": "0",
             "command": [
                 "/cws-instrumentation",
                 "setup",
@@ -186,7 +187,7 @@ spec:
    spec:
      initContainers:
      - name: cws-instrumentation-init
-       image: datadog/cws-instrumentation-dev:cws-instrumentation-beta
+       image: datadog/cws-instrumentation:latest
        command:
          - "/cws-instrumentation"
          - "setup"
@@ -195,6 +196,8 @@ spec:
        volumeMounts:
          - name: cws-instrumentation-volume
            mountPath: "/cws-instrumentation-volume"
+       securityContext:
+         runAsUser: 0
      containers:
      - name: "<YOUR_APP_NAME>"
        image: "<YOUR_APP_IMAGE>"
@@ -229,6 +232,29 @@ spec:
        - name: cws-instrumentation-volume
 {{< /code-block >}}
 
+## Verify that the Agent is sending events to CSM
+
+When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+
+Another method to verify that the Agent is sending events to CSM is to manually trigger an AWS Fargate security signal.
+
+In the task definition, replace the "workload" container with the following:
+
+{{< code-block lang="yaml" collapsible="true" >}}
+            "name": "cws-signal-test",
+            "image": "ubuntu:latest",
+            "entryPoint": [
+                "/cws-instrumentation-volume/cws-instrumentation",
+                "trace",
+                "--verbose",
+                "--",
+                "/usr/bin/bash",
+                "-c",
+                "apt update;apt install -y curl; while true; do curl https://google.com; sleep 5; done"
+            ],
+{{< /code-block >}}
+
+
 [1]: /security/threats/
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [3]: /security/default_rules/?category=cat-csm-threats
@@ -237,3 +263,4 @@ spec:
 [6]: https://aws.amazon.com/console
 [7]: /resources/json/datadog-agent-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[9]: https://app.datadoghq.com/logs
