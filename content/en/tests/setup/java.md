@@ -214,11 +214,9 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 For more information about adding tags, see the [Adding Tags][5] section of the Java custom instrumentation documentation.
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-To add custom metrics, include the [`opentracing-util`][4] library as a compile-time dependency to your project.
-
-Just like tags, you can add custom metrics to your tests by using the current active span:
+Just like tags, you can add custom measures to your tests by using the current active span:
 
 ```java
 import io.opentracing.Span;
@@ -234,7 +232,7 @@ if (span != null) {
 // ...
 ```
 
-For more information about custom metrics, see the [Add Custom Metrics guide][6].
+For more information about custom measures, see the [Add Custom Measures guide][6].
 
 ### Using manual testing API
 
@@ -469,7 +467,7 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
 [4]: https://mvnrepository.com/artifact/io.opentracing/opentracing-util
 [5]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
-[6]: /continuous_integration/guides/add_custom_metrics/?tab=java
+[6]: /tests/guides/add_custom_measures/?tab=java
 [7]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [8]: /tests/#parameterized-test-configurations
 [9]: https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-display-names

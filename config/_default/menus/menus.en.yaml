@@ -1863,6 +1863,11 @@ main:
     pre: mobile
     parent: service_management_heading
     weight: 50000
+  - name: Enterprise Configuration
+    url: service_management/mobile/enterprise_configuration
+    identifier: mobile_enterprise_configuration
+    parent: mobile
+    weight: 1
   - name: Workflow Automation
     url: service_management/workflows/
     pre: workflows
