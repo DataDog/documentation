@@ -19,8 +19,7 @@ further_reading:
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Java libraries:
 * [Datadog Agent v7.34.0 or later][1]
 * [APM enabled with the Java Agent][2]
-  * Kafka: v1.9.0 or later
-  * RabbitMQ: v1.9.0 or later
+  * Kafka and RabbitMQ: v1.9.0 or later
   * Amazon SQS: v1.27.0 or later
 
 ### Installation
