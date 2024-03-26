@@ -49,7 +49,6 @@ DatadogSdk.instance.initialize(configuration);
 
 If your application suffers a fatal crash, after your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
 
-
 ## Upload symbol files to Datadog
 
 Native iOS crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires that you upload .dSYM files, which are generated in your application's build process.
@@ -79,6 +78,15 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
 For a full list of options, see the `datadog-ci` [Flutter Symbols documentation][5].
+
+### Limitations
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
+Source maps and dSYM files are limited to **500** MB each.
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+Source maps and dSYM files are limited to **500** MB each.
+{{< /site-region >}}
 
 ## Advanced Configuration - Flavors and Build Numbers
 

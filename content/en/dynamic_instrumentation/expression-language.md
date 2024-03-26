@@ -16,7 +16,7 @@ Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name,
 
 Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
-* Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
+* Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
 * Using logical operators (`&&`, `||`, and `not` or `!`) to build complex Boolean conditions.
 * Using the `null` literal (equivalent to `nil` in Python).
 
@@ -33,6 +33,7 @@ The following sections summarize the variables and operations that the Dynamic I
 | `@return`   | Provides access to the return value                                        |
 | `@duration` | Provides access to the call execution duration                             |
 | `@it`       | Provides access to the current value in collection iterating operations    |
+| `@exception`| Provides access to the current uncaught exception                          |
 
 
 ## String operations

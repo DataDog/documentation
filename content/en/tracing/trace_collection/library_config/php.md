@@ -147,6 +147,12 @@ Enable the exception profile type. Added in version `0.92.0` and GA
 in version `0.96.0`.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
+`DD_PROFILING_EXCEPTION_MESSAGE_ENABLED`
+: **INI**: `datadog.profiling.exception_message_enabled`. INI available since `0.98.0`.<br>
+**Default**: `0`<br>
+Enable the collection of exception messages with exception samples.<br><br>
+**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled.
+
 `DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
 : **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
 **Default**: `100`<br>
