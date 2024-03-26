@@ -47,7 +47,7 @@ The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-t
  2. Enable the [Detailed Usage cost][2] export (select or create a project and a BigQuery dataset).
  3. Document the `Billing Account ID` for the billing account where the export was configured, as well as the export `Project ID` and `Dataset Name`.
 
-{{< img src="cloud_cost/billing_export" alt="GCP project and dataset info highlighted" >}}
+{{< img src="cloud_cost/billing_export.png" alt="Google Cloud project and dataset info highlighted" >}}
 
 
 #### Enable Google Service APIs
