@@ -59,17 +59,17 @@ service:
 | Producer span (`span.kind: producer`) | Measured span |
 | Internal span (`span.kind: internal`) | No trace metrics generated |
 
-[`SpanKind`][3] is typically set when a span is created, but can also be updated by using the [transform processor][4] to control the mapping above. For example, if trace metrics are desired for an internal span, the following configuration transforms an internal span with `http.path: "/health"` into a server span:
+[`SpanKind`][3] is typically set when a span is created, but can also be updated by using the [transform processor][4] in the OpenTelemetry Collector to control the mapping above. For example, if trace metrics are desired for an internal span, the following configuration transforms an internal span with `http.path: "/health"` into a client span:
 ```yaml
   transform:
     trace_statements:
       - context: span
         statements:
-          - set(kind.string, "Server") where kind.string == "Internal" and attributes["http.path"] == "/health"
+          - set(kind.string, "Client") where kind.string == "Internal" and attributes["http.path"] == "/health"
 ```
 
 <div class="alert alert-info">
-This service entry span logic may increase the number of spans that generate trace metrics. If needed, you can disable this change by enabling the <code>disable_otlp_compute_top_level_by_span_kind</code> APM feature, but this may result in OpenTelemetry spans being misidentified as service entry spans. <code>apm_config.compute_stats_by_span_kind</code> also needs to be disabled to turn off computing stats by `SpanKind` for OTel traces.
+This service entry span logic may increase the number of spans that generate trace metrics. If needed, you can disable this change by enabling the <code>disable_otlp_compute_top_level_by_span_kind</code> APM feature, but this may result in OpenTelemetry spans being misidentified as service entry spans. <code>apm_config.compute_stats_by_span_kind</code> also needs to be disabled to turn off computing stats by <code>SpanKind</code> for OTel traces.
 </div>
 
 ## Full example configuration
