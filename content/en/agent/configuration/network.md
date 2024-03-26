@@ -459,4 +459,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [10]: /network_monitoring/devices
 [11]: /getting_started/site/
 [12]: /agent/troubleshooting/send_a_flare
-[13]: infrastructure/containers/container_images
+[13]: /infrastructure/containers/container_images
