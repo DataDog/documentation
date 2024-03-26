@@ -18,7 +18,10 @@ further_reading:
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Python libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Python Tracer v1.16.0 or later][2] (v1.20.0 for Amazon SQS and Kinesis)
+* [Python Tracer][2]
+  * Kafka: v1.16.0 or later
+  * Amazon SQS: v1.20.0
+  * Amazon Kinesis: v1.20.0
 
 ### Installation
 
