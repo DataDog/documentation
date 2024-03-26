@@ -14,6 +14,7 @@ const getRumDeviceId = () => {
 
 // Temporary solution attributing website page views w. dd app user
 const setRumDeviceId = () => {
+    console.log('in set rum device id')
     const deviceId = getRumDeviceId()
     const domain = window.location.hostname.split('.').slice(-2).join('.')
     const maxAge = 60 * 60 * 24 * 365
@@ -46,8 +47,8 @@ if (window.DD_RUM) {
         if (branch) {
             window.DD_RUM.addRumGlobalContext('branch', branch);
         }
-
-        if (env === 'live') {
+        // remove preview condition before merging
+        if (env === 'live' || env === 'preview') {
             setRumDeviceId()
         }
     }
