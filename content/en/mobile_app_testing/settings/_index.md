@@ -19,7 +19,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Support for Mobile Application Testing is coming soon.</div>
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
