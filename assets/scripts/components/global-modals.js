@@ -43,11 +43,10 @@ const doOnLoad = () => {
             operator = '&';
         }
 
-        // Convert selected cookies to UTM so they are preserved during signup process per https://datadoghq.atlassian.net/browse/WEB-4703
+        // Convert selected cookies to query params so they are preserved during signup process per https://datadoghq.atlassian.net/browse/WEB-4695
         const allCookies = UTMCookies.getAll();
-        let customSignupUTM = ['gclid', 'MSCLKID', '_mkto_trk']; // harcoded list of UTM params to preserve
+        let customSignupUTM = ['gclid', 'MSCLKID', '_mkto_trk'];
         for (const [key, value] of Object.entries(allCookies)) {
-            // If the cookie value exists in the pre-defined list of desired UTM params, append it to the URL
             if (customSignupUTM.includes(key)) {
                 completeUrl += `${operator}${key}=${encodeURIComponent(value)}`;
                 operator = '&';
