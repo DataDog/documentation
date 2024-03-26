@@ -53,7 +53,7 @@ echo "  - \"is_master_node:${IS_MASTER}\"" | sudo tee --append /etc/datadog-agen
 echo "  - \"instance_group_id:${INSTANCE_GROUP_ID}\"" | sudo tee --append /etc/datadog-agent/datadog.yaml
 
 # Configure the agent to ensure metrics attached with desired tags
-echo "expected_tags_duration:10m" | sudo tee --append /etc/datadog-agent/datadog.yaml
+echo "expected_tags_duration: 10m" | sudo tee --append /etc/datadog-agent/datadog.yaml
 
 if [[ "$IS_MASTER" = true ]]; then
   HOST=$(hostname -f)
