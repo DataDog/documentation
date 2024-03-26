@@ -60,6 +60,44 @@ Flex Tier storage is useful for storing logs where long running security/audit i
 - Need all logs for security investigations.
 - Need to query logs for reporting and analytics for high cardinality data over long time periods.
 
+## Potential sources for sending directly to the Flex Logs indexing tier
+
+The following list is an example of log sources that are potentially good candidates for sending logs directly to the Flex Tier, therefore not going to Standard Indexing first. This is not an exhaustive list and is meant to give you an idea about the types of logs that are suitable for this configuration. Other log sources (for example, application logs) can still be sent to the Flex Tier after going to Standard indexing first for live troubleshooting, alerting, and debugging use cases. Your use cases for these sources could vary, and that is important to consider when making the decision to skip Standard Indexing.
+
+**Note**: These examples are just a sample for each category. There are many more services, tools, and technologies available for each category that you might want to send to the Flex Tier.
+
+- **CDN services**
+  - Akamai, Cloudflare, Fastly, CloudFront, and so forth.
+- **DNS services**
+  - Route53, Cloudflare, Akamai (Edge), NS1, and so forth.
+- **Firewall logs / Firewall appliances**
+  - AWS Web Application Firewall (WAF), Barracuda WAF, pfSense, Checkpoint, Sophos, FortiNet, and so forth.
+- **Cloud network services / VPC / Gateways / NAT / WAN**
+  - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, Virtual WAN, and so forth.
+- **Loadbalancers**
+  - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, NGINX, and so forth.
+- **Identity services and tools**
+  - Cisco ISE, Okta, OneLogin, Workday User Activity Logs, and so forth.
+- **Audit logs**
+  - Cloud Provider Audit Logs (for example, CloudTrail), Kubernetes audit, Microsoft 365 audit, and so forth.
+- **Physical network appliances**
+  - Cisco, Meraki, Juniper, Arbua, HPE, Palo Alto, Barracuda, and so forth.
+- **Network Flow logs**
+  - Cisco NetFlow, IPFIX, sFlow, AWS VPC FlowLogs, and so forth.
+- **VPN services**
+  - AWS, GCP, and Azure VPN, Tailscale, Twingate, OpenVPN, ZeroTier, WireGuard, and so forth
+- **CI/CD services and tools**
+  - GitLab, GitHub Actions, ArgoCD, Jenkins, CircleCI, TeamCity, AWS CodePipeline, and so forth.
+- **Service mesh**
+  - For example, Anthos, Istio, proxyv2, consul, Linkerd, Kong, and so forth.
+- **Caching**
+  - For example, Varnish, Memcached, Redis, and so forth.
+
+You can use the spectrum of log types shown in the image to determine when to use the Flex Logs tier. Any high volume, infrequent access, long term retention log sources are good candidates, and this includes extending Standard Tier logs (for example, application logs) into the Flex Tier as well.
+
+{{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Logs indexing and access frequency spectrum graph" style="width:100%;" >}}
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

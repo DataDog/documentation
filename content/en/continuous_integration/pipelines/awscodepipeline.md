@@ -59,11 +59,11 @@ For more information about monitoring pipeline events, see the [official AWS gui
    }
    ```
    The JSON above sets up the integration for all of your pipelines. To restrict the set of pipelines,
-   follow the [Only monitor specific pipelines][6] section below.
+   follow the [Only monitor specific pipelines][7] section below.
 6. Click **Next**.
 7. Under **Target Types**, select **EventBridge API destination**. Then, choose **Use an existing API Destination**
 and select the API destination that you have created in the previous step. Alternatively, you can also create the API destination
-by following the steps outlined in the [Create the API Destination][7] section.
+by following the steps outlined in the [Create the API Destination][6] section.
 8. Under **Headers Parameters**, click **Add header parameter**. Input `DD-CI-PROVIDER-AWSCODEPIPELINE` as the key and `true` as the value.
 9. Choose **Create a new role for this specific resource** (or use an existing one).
 10. Review that the information is correct and create the rule.
