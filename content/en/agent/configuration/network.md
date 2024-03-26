@@ -38,6 +38,9 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[Container Images][13]
+: `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
@@ -47,7 +50,8 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Orchestrator][5]
-: `orchestrator.`{{< region-param key="dd_site" code="true" >}}
+: `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
+`contlcycle-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Profiling][7]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
@@ -455,3 +459,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [10]: /network_monitoring/devices
 [11]: /getting_started/site/
 [12]: /agent/troubleshooting/send_a_flare
+[13]: infrastructure/containers/container_images
