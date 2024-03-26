@@ -11,7 +11,10 @@ kind: documentation
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and .NET libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* .NET Tracer v2.28.0 or later (v2.48.0 for Amazon SQS) ([.NET Core][2], [.NET Framework][3])
+* .NET Tracer ([.NET Core][2], [.NET Framework][3])
+  * Kafka: v2.28.0 or later
+  * RabbitMQ: v2.28.0 or later
+  * Amazon SQS: v2.48.0
 
 ### Installation
 
