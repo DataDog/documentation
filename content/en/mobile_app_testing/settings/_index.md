@@ -15,7 +15,7 @@ further_reading:
 {{< jqmath-vanilla >}}
 
 {{< site-region region="us,us5,eu" >}}
-<div class="alert alert-warning">Mobile Application Testing is generally available for US1, US5, and EU sites.</div>
+<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
 {{< /site-region >}}
 
 {{< site-region region="us3,ap1" >}}
