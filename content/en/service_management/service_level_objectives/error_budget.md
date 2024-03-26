@@ -22,7 +22,7 @@ SLO error budget alerts are threshold based and notify you when a certain percen
 
 For a description of key terminology around SLOs, including *error budgets*, see [Service Level Objectives][3].
 
-{{< img src="service_management/service_level_objectives/error_budget_alert_config.png" alt="Error budget alert configuration">}}
+{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="Error budget alert configuration">}}
 
 ## Monitor creation
 

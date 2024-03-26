@@ -17,7 +17,7 @@ SLO burn rate alerts notify you when the rate of consumption of your SLO error b
 - [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
 - [Time Slice SLOs][7]
 
-{{< img src="service_management/service_level_objectives/burn_rate_alert_config.jpeg" alt="Burn rate alert configuration">}}
+{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
 
 ## How Burn Rate Alerts work
 
