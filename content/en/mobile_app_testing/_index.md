@@ -2,7 +2,6 @@
 title: Mobile Application Testing and Monitoring
 kind: documentation
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
-disable_sidebar: true
 aliases:
 - /mobile_testing
 further_reading:
@@ -23,13 +22,18 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-{{< site-region region="us3,us5,gov,eu,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="us,us5,eu" >}}
+<div class="alert alert-warning">Mobile Application Testing is generally available for US1, US5, and EU sites. Support for US3 and AP1 coming soon.</div>
 {{< /site-region >}}
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">Mobile Application Testing is in limited availability and is only supported for the Datadog US1 site.</div>
+{{< site-region region="us3,ap1" >}}
+<div class="alert alert-warning">Support for Mobile Application Testing is coming soon.</div>
 {{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
+{{< /site-region >}}
+
 
 Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. Datadog runs these tests on real devices to provide a realistic, step-by-step representation of key application workflows, screenshots of each step, and detailed pass or fail results so your team can quickly visualize what went wrong.
 
