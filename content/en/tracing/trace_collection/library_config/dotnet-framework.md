@@ -254,7 +254,7 @@ The following configuration variables are available **only** when using automati
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
 **Default**: `true`
-**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods, such as configuration files or in code. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
+**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
 
 `DD_DBM_PROPAGATION_MODE`
 : Enables linking between data sent from APM and the Database Monitoring product when set to `service` or `full`. The `service` option enables the connection between DBM and APM services. The `full` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
