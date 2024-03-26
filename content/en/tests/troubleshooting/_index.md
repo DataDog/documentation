@@ -17,7 +17,7 @@ This page provides information to help you troubleshot issues with Test Visibili
 
 ## Your tests are instrumented, but Datadog isn't showing any data
 
-1. Go to the [**Tests**][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section. 
+1. Go to the [**Tests**][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section.
 2. Check if you see any test results in the [**Test Runs**][4] section. If you do see results there, but not in the [**Tests**][5] section, Git information is missing. See [Data appears in Test Runs but not Tests](#data-appears-in-test-runs-but-not-tests) to troubleshoot it.
 3. If you are reporting the data through the Datadog Agent, make sure it is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][6] in the tracer to check if it's able to connect to the Agent.
 4. If you still don't see any results, [contact Support][2] for troubleshooting help.
@@ -28,14 +28,14 @@ If you are uploading JUnit test report files with `datadog-ci` CLI and you do no
 The following aspects make a JUnit test report incorrect:
 * A timestamp of the reported tests that is older than **71 hours** before the moment the report is uploaded.
 * A testsuite without a name.
-  
+
 ## Data appears in test runs but not tests
 
 If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in the [**Tests**][5] section.
 
 1. Tracers first use the environment variables, if any, set by the CI provider to collect Git information. See [Running tests inside a container][7] for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
 2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
-3. You can also provide Git information manually using environment variables, which override information detected by any of the previous steps. 
+3. You can also provide Git information manually using environment variables, which override information detected by any of the previous steps.
 
    The supported environment variables for providing Git information are:
 
@@ -155,7 +155,15 @@ The default branch is used to power some features of the products, namely:
 
 If you have admin access, you can update it from the [Repository Settings Page][11].
 
+## Execution history is not available for a specific test case
 
+Other symptoms of the same issue include:
+- A test case is not classified as flaky even if it exhibits flakiness.
+- A test case cannot be skipped by [Intelligent Test Runner][12].
+
+It is likely that the [test case configuration][13] is unstable because one or more of the test parameters are non-deterministic (for instance, they include current date or a random number).
+
+The best way to fix this is to make sure that the test parameters are the same between test runs.
 
 ## Further reading
 
@@ -173,3 +181,4 @@ If you have admin access, you can update it from the [Repository Settings Page][
 [10]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [11]: https://app.datadoghq.com/ci/settings/repository
 [12]: /continuous_integration/intelligent_test_runner/
+[13]: /tests/#parameterized-test-configurations

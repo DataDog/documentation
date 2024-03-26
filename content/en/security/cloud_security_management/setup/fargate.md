@@ -187,7 +187,7 @@ spec:
    spec:
      initContainers:
      - name: cws-instrumentation-init
-       image: datadog/cws-instrumentation-dev:cws-instrumentation-beta
+       image: datadog/cws-instrumentation:latest
        command:
          - "/cws-instrumentation"
          - "setup"
