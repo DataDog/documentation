@@ -12,7 +12,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: Documentation
   text: イベントへの視覚化の適用
-- link: /real_user_monitoring/dashboards/
+- link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボード
 kind: documentation
@@ -22,12 +22,14 @@ title: ブラウザエラーの収集
 
 フロントエンドのエラーはリアルユーザーモニタリング (RUM) で収集されます。エラーメッセージとスタックトレースが利用できる場合は含まれます。
 
-## エラーの原因
-`origin` によって、フロントエンドのエラーは 4 つの異なるカテゴリーに分類されます。
+## エラーソース
+フロントエンドのエラーは、いくつかの異なるソースから発生します。
 
-- **source**: 未処理の例外または未処理のプロミス拒否 (ソースコード関連)。
-- **console**: `console.error()` API 呼び出し。
-- **custom**: [RUM `addError` API](#collect-errors-manually) と共に送信されるエラー。
+- **agent**: SDK の実行から
+- **console**: `console.error()` API コールから
+- **custom**: [RUM `addError` API](#collect-errors-manually) と共に送信される
+- **report**: `ReportingObserver` API から
+- **source**: ソースコードの未処理の例外または未処理の約束拒否から
 
 ## エラー属性
 
@@ -219,7 +221,7 @@ class ErrorBoundary extends React.Component {
 {{< /tabs >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ### スクリプトエラー
 
