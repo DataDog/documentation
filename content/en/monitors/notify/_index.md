@@ -206,4 +206,4 @@ Message variables auto-populate with a randomly selected group based on the scop
 [14]: /monitors/guide/how-to-set-up-rbac-for-monitors/
 [15]: /monitors/types
 [16]: /monitors/guide/recovery-thresholds/
-[17]: /account_management/teams/#send-notifications-to-a-separate-communication-channel
+[17]: /account_management/teams/#send-notifications-to-a-specific-communication-channel

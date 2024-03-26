@@ -76,7 +76,7 @@ Datadog supports associating the following resources with team handles:
 - [Service Level Objectives][9]
 - Synthetic Tests, Global Variables, Private Locations
 
-### Send notifications to a separate communication channel 
+### Send notifications to a specific communication channel 
 
 Add a notification channel to your Team to route alerts to communication channels such as Slack or Microsoft Teams. Monitor alerts targeting `@team-<handle>` are redirected to the selected channel. 
 
