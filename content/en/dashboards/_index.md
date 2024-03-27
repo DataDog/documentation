@@ -59,8 +59,8 @@ Dashboards provide real-time insights into the performance and health of systems
 
 ## Get started
 
-{{< whatsnext desc="See the following resources to get started with Dashboards:" >}}
-   {{< nextlink href="/getting_started/dashboards/" >}}Getting started with Dashboards{{< /nextlink >}}
+{{< whatsnext desc="See the following resources:" >}}
+   {{< nextlink href="/getting_started/dashboards/" >}}Getting Started with Dashboards{{< /nextlink >}}
    {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Learning Course: Introduction to Dashboards{{< /nextlink >}}
    {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Learning Course: Building Better Dashboards{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -70,13 +70,13 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 Dashboards 
-: A grid-based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views which update in realtime, and can represent fixed points in the past. They have a maximum width of 12 grid squares and also work well for debugging.
+: A grid-based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views which update in real time, and can represent fixed points in the past. They have a maximum width of 12 grid squares and also work well for debugging.
 
 Timeboards
 : Automatic layouts that represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
 Screenboards
-: Dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real-time or represent fixed points in the past.
+: Dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real time or represent fixed points in the past.
 
 ## Refresh rate
 
@@ -102,7 +102,7 @@ The refresh rate of a private dashboard depends on the time frame you are viewin
 
 ## View dashboards on mobile devices
 
-View your dashboards in a mobile-friendly format with the Datadog Mobile App, available on the [Apple App Store][2] and [Google Play Store][3]. The Mobile App comes equipped with mobile home screen widgets which allow you to monitor service health and infrastructure without opening the mobile app.
+View your dashboards in a mobile-friendly format with the Datadog Mobile App, available on the [Apple App Store][2] and [Google Play Store][3]. The Mobile App comes equipped with mobile home screen widgets that allow you to monitor service health and infrastructure without opening the mobile app.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI. For more information on installing the app, see the [Datadog Mobile App][1] documentation.
 

@@ -14,14 +14,14 @@ further_reading:
 
 ## Overview
 
-Take control of your expanding dashboard collection with Dashboard List features to organize and streamline effectively. Group dashboards into lists, assign them to specific teams, and mark important ones as favorites for fast access to key visualizations. Manage dashboard organization further by using functionalities like filtering by Teams, performing bulk actions for efficient management, and assigning Teams to multiple dashboards. Explore, create, and manage custom or integrated dashboards effortlessly on the [Dashboard List page][1].
+Organize and streamline your expanding dashboard collection with Dashboard List features. Group dashboards into lists, assign them to specific teams, and mark important ones as favorites for fast access to key visualizations. Manage dashboard organization further by using functionalities like filtering by Teams, performing bulk actions for efficient management, and assigning Teams to multiple dashboards. Explore, create, and manage custom or integrated dashboards effortlessly on the [Dashboard List page][1].
 View and manage your dashboards:
 - [Use the *All Dashboards* table to sort, search, and group your lists.](#view-all-dashboards)
 - [Organize your dashboard views through lists.](#lists)
 
 ## View all dashboards
 
-The **All Dashboards** table lists dashboards in your Datadog organization, either custom created or available as an out-of-the-box dashboard. Select multiple dashboards in the table to conduct bulk actions, such as setting [Teams](#teams) to dashboards or adding dashboards to [lists](#lists).
+The **All Dashboards** table lists dashboards in your Datadog organization, either custom created or available as an out-of-the-box dashboard. Select multiple dashboards in the table to conduct bulk actions, such as associating [Teams](#teams) with dashboards or adding dashboards to [lists](#lists).
 
 You can sort by column headers *Name*, *Modified*, and *Popularity*.
 
@@ -58,7 +58,7 @@ Dashboard lists groups dashboards so you and your team can switch between dashbo
 
 1. To create a dashboard list, click **+ New List** in the upper right.
 1. Click the pencil icon to change a list's title. The list's title is automatically set with the user's first name. For example, `John's list`. 
-1. Add dashboards to a list. In the **[All Dashboards](#view-all-dashboards)** table, check the check boxes next to the Dashboard title. Then click the **Add to** dropdown in the upper right corner of the Dashboard list and select the list.
+1. Add dashboards to a list. In the **[All Dashboards](#view-all-dashboards)** table, check the checkboxes next to the Dashboard title. Then click the **Add to** dropdown in the upper right corner of the Dashboard list and select the list.
 
 The left sidebar displays all lists, which you can filter by Team or through search terms. Toggle **Hide Controls** to hide this sidebar.
 
