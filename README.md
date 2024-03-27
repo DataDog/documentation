@@ -18,7 +18,7 @@ For more information on contributing, see the [contribution guidelines][18].
 
 - Always branch off of master; never commit directly to master.
 - Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>`.
-- Consult our [contributing guidelines][8], and the [Documentation Build Wiki][7].
+- Consult our [contributing guidelines][8].
 - When you're ready to commit, create a new pull request to master from your branch.
 - Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
 - If you've named your branch correctly, a GitHub bot posts a link to the docs preview website for your PR. After the preview build completes, you can use the link to preview your changes.
