@@ -3,6 +3,7 @@ title: Cloud Security Management Vulnerabilities
 kind: documentation
 aliases:
     - /security/infrastructure_vulnerabilities/
+    - /security/vulnerabilities/
 further_reading:
 - link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
@@ -13,7 +14,7 @@ further_reading:
 - link: "/infrastructure/containers/container_images"
   tag: "Documentation"
   text: "Viewing Container Images"
-- link: "/security/vulnerabilities/troubleshooting"
+- link: "/security/cloud_security_management/troubleshooting/vulnerabilities"
   tag: "Documentation"
   text: "Troubleshooting CSM Vulnerabilities"
 - link: "https://www.datadoghq.com/blog/csm-vulnerability-management/"

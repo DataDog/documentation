@@ -88,7 +88,7 @@ This guide walks you through best practices for getting your team up and running
 [25]: https://app.datadoghq.com/containers/images
 [26]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [27]: /integrations/amazon_cloudtrail/#send-logs-to-datadog
-[28]: /security/identity_risks/
+[28]: /security/cloud_security_management/identity_risks/
 [29]: https://app.datadoghq.com/security/identities
 [30]: https://app.datadoghq.com/security/infra-vulnerability
 [31]: https://app.datadoghq.com/security/configuration/reports
