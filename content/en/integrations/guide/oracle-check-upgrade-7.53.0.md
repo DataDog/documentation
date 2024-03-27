@@ -3,9 +3,9 @@ title: Oracle Integration in Agent 7.53.0
 kind: guide
 ---
 
-# What has changed?
+This guide describes how to activate the new [Oracle check][2].
 
-- The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.0`.
+# What has changed?
 
 - The new check doesn't require any external clients such as Oracle JDBC drivers. The `jdbc` related parameters are ignored in the new check.
 
@@ -231,6 +231,5 @@ mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 5. Restart the Agent.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
-[2]: https://github.com/DataDog/datadog-agent/releases
-[3]: https://docs.datadoghq.com/integrations/oracle
+[2]: https://docs.datadoghq.com/integrations/oracle
 
