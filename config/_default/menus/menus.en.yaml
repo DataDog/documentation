@@ -3352,6 +3352,66 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 10000
+  - name: Log Volume Control
+    url: observability_pipelines/log_volume_control/
+    parent: observability_pipelines
+    identifier: observability_pipelines_log_volume_control
+    weight: 1
+  - name: Splunk HEC
+    url: observability_pipelines/log_volume_control/splunk_hec/
+    parent: observability_pipelines_log_volume_control
+    identifier: observability_pipelines_log_volume_control_splunk_hec
+    weight: 1001
+  - name: Splunk TCP
+    url: observability_pipelines/dual_ship_logs/splunk_tcp/
+    parent: observability_pipelines_log_volume_control
+    identifier: observability_pipelines_log_volume_control_splunk_tcp
+    weight: 1002
+  - name: Sumo Logic
+    url: observability_pipelines/log_volume_control/log_volume_control_for_sumo_logic/
+    parent: observability_pipelines_log_volume_control
+    identifier: observability_pipelines_log_volume_control_sumo_logic
+    weight: 1003
+  - name: Dual Ship Logs
+    url: observability_pipelines/dual_ship_logs/
+    parent: observability_pipelines
+    identifier: observability_pipelines_dual_ship_logs
+    weight: 2
+  - name: Splunk HEC
+    url: observability_pipelines/dual_ship_logs/dual_ship_logs_for_splunk_hec/
+    parent: observability_pipelines_dual_ship_logs
+    identifier: observability_pipelines_dual_ship_logs_splunk_hec
+    weight: 2001
+  - name: Splunk TCP
+    url: observability_pipelines/dual_ship_logs/dual_ship_logs_for_splunk_tcp/
+    parent: observability_pipelines_dual_ship_logs
+    identifier: observability_pipelines_dual_ship_logs_splunk_tcp
+    weight: 2002
+  - name: Sumo Logic
+    url: observability_pipelines/dual_ship_logs/dual_ship_logs_for_sumo_logic/
+    parent: observability_pipelines_dual_ship_logs
+    identifier: observability_pipelines_dual_ship_logs_sumo_logic
+    weight: 2003
+  - name: Archive Logs to Amazon S3
+    url: observability_pipelines/archive_logs_s3/
+    parent: observability_pipelines
+    identifier: observability_pipelines_archive_logs_s3
+    weight: 3
+  - name: Split Logs
+    url: observability_pipelines/split_logs/
+    parent: observability_pipelines
+    identifier: observability_pipelines_split_logs
+    weight: 4
+  - name: Sensitive Data Redaction
+    url: observability_pipelines/sensitive_data_redaction/
+    parent: observability_pipelines
+    identifier: observability_pipelines_sensitive_data_redaction
+    weight: 5
+  - name: Configure Existing Pipelines
+    url: observability_pipelines/configure_existing_pipelines/
+    parent: observability_pipelines
+    identifier: observability_pipelines_configure_existing_pipelines
+    weight: 6
   - name: Log Management
     url: logs/
     pre: log
