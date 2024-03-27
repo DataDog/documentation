@@ -25,7 +25,7 @@ further_reading:
   - link: "/security/misconfigurations/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
-  - link: "/security/cloud_security_management/threats/setup"
+  - link: "/security/cloud_security_management/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
   - link: "https://securitylabs.datadoghq.com/"

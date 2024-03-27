@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security/threats/custom_rules
 further_reading:
-- link: "/security/cloud_security_management/threats/setup"
+- link: "/security/cloud_security_management/setup"
   tag: "Documentation"
   text: "Setting Up CSM Threats"
 - link: "/security/cloud_security_management/threats/agent_expressions"

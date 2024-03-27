@@ -152,7 +152,7 @@ The rule deprecation process is as follows:
 [10]: /account_management/rbac/
 [11]: /security/application_security/threats/custom_rules/
 [12]: /security/misconfigurations/custom_rules
-[13]: /security/cloud_security_management/threats/workload_security_rules?tab=host#create-custom-rules
+[13]: /security/cloud_security_management/threats/workload_security_rules
 [14]: /security/identity_risks/
 [15]: https://app.datadoghq.com/security/configuration/
 [16]: https://app.datadoghq.com/security

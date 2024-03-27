@@ -55,19 +55,19 @@ Datadog is introducing a new feature called Active Protection to address the thr
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/cloud_security_management/threats/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_security_management/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Threats{{< /nextlink >}}
   {{< nextlink href="/security/cloud_security_management/threats/workload_security_rules">}}Learn about CSM Threats detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box CSM Threats detection rules{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/cloud_security_management/threats/setup/?tab=kuberneteshelm#prerequisites
+[1]: /security/cloud_security_management/setup
 [2]: /agent/
 [3]: /security/notifications/
 [4]: /security/notifications/#notification-channels
 [5]: /security/notifications/#detection-rule-notifications
 [6]: /security/cloud_security_management/threats/agent_expressions
-[7]: /security/cloud_security_management/threats/setup
+[7]: /agent/remote_config
 [8]: /security/cloud_security_management/threats/security_signals
 [9]: /network_monitoring/performance/
