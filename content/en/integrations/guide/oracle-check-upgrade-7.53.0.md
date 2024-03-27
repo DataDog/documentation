@@ -5,11 +5,11 @@ kind: guide
 
 # What has changed?
 
-- The completely rewritten Oracle integration becomes the default in the Agent release `7.53.0`.
+- The Oracle integration is completely rewritten in the Agent release `7.53.0`.
 
-- The new integration is easier to set up, and is less prone to configuration errors because it doesn't require any external clients such as Oracle JDBC drivers. The jdbc parameter are ignored in the new integration.
+- The new check is easier to set up, and is less prone to configuration errors because it doesn't require any external clients such as Oracle JDBC drivers. The `jdbc` related parameters are ignored in the new check.
 
-- The New Oracle check emits all metrics as the deprecated Oracle integration.
+- The new Oracle check emits the same metrics as the deprecated Oracle integration.
 
 - System metrics in multi-tenant databases are emitted for each pluggable database.
 
@@ -19,7 +19,7 @@ kind: guide
 
 The configuration in the subdirectory `oracle.d` remains the same.
 
-The Oracle new check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for you hosting type.
+The Oracle new check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for you hosting type prior to upgrading the agent.
 
 <!-- xxx tabs xxx -->
 
@@ -216,7 +216,9 @@ The configuration subdirectory for the Agent releases between `7.50.1` and `7.52
 cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
 ```
 
-2. If you are using the configuration parameter `user`, rename it to `username`.
+2. Rename the following configuration parameters if you are using them:
+- `user` to `username`,
+- `use_instant_client` to `instant_client`
 
 3. Deactivate the configuration file in the `oracle.d` subdirectory, for example:
 
