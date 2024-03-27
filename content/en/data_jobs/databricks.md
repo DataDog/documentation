@@ -65,7 +65,7 @@ Provide the values for the init script parameters at the beginning of the global
 
 1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Spark** tab.
-   {{< img src="data_jobs/databricks/configure-databricks-spark-envvars-updated.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
+   {{< img src="data_jobs/databricks/configure-databricks-cluster-init-script.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
 
    In the **Environment variables** textbox, provide the values for the init script parameters.
 1. Click **Confirm**.
