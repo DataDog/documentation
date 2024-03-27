@@ -4213,7 +4213,7 @@ main:
     parent: appsec_getting_started
     identifier: appsec_compat
     weight: 201
-  - name: Using Single Step Enablement
+  - name: Using Single Step Instrumentation
     url: security/application_security/enabling/single_step/
     parent: appsec_getting_started
     identifier: appsec_enabling_single_step
