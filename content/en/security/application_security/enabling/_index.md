@@ -39,11 +39,18 @@ Enable your application to [detect and protect against threats][1] targeting you
 
 {{% appsec-getstarted-with-rc %}}
 
-Select your application language for details on how to do these steps for your language and infrastructure types.
+## ASM enablement types
 
-{{< partial name="security-platform/appsec-languages.html" >}}
+There are two main approaches to enable ASM on your tracing libraries: single-step or with Datadog tracing libraries.
 
-<br>
+### Single-step enablement
+
+- [Single Step Instrumentation (Beta)][3]: Run a one-line install command to install the Datadog Agent, enable ASM, and protect all of your services on your Linux host, VM, or containers.
+
+### Datadog Tracing libraries
+
+- [Datadog libraries][4]: Use Datadog tracing libraries to add and customize observability within Datadog.
+
 
 ## Further Reading
 
@@ -51,3 +58,5 @@ Select your application language for details on how to do these steps for your l
 
 [1]: /security/application_security/threats/
 [2]: /security/application_security/risk_management/
+[3]: /security/application_security/enabling/single_step
+[4]: /security/application_security/enabling/tracing_libraries
