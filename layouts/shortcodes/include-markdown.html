@@ -1,10 +1,9 @@
 {{ $file := .Get 0 }}
 
 {{ if fileExists $file }}
-    {{ $content := readFile $file }}
-    {{ $content = $content | replaceRE `^---[\s\S]*?---` "" }}
-    {{ $content = $content | markdownify | safeHTML }}
-    {{ $content }}
+    {{ with .Site.GetPage $file }}
+        {{ .Content }}
+    {{ end }}
 {{ else }}
     {{ printf "File %s not found" $file }}
 {{ end }}
