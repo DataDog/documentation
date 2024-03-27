@@ -1,1 +1,10 @@
-{{ readFile (.Get 0) | markdownify }}
+{{ $file := .Get 0 }}
+
+{{ if fileExists $file }}
+    {{ $content := readFile $file }}
+    {{ $content = $content | replaceRE `^---[\s\S]*?---` "" }}
+    {{ $content = $content | markdownify | safeHTML }}
+    {{ $content }}
+{{ else }}
+    {{ printf "File %s not found" $file }}
+{{ end }}
