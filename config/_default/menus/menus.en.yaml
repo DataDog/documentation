@@ -4328,6 +4328,11 @@ main:
     parent: appsec_threats
     identifier: threats_threat_overview
     weight: 710
+  - name: Attacker Explorer
+    url: security/application_security/threats/attacker-explorer/
+    parent: appsec_threats
+    identifier: threats_attackers
+    weight: 711
   - name: API Security Inventory
     url: security/application_security/api-inventory/
     parent: application_security
