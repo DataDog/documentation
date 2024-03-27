@@ -47,7 +47,7 @@ if (window.DD_RUM) {
             window.DD_RUM.addRumGlobalContext('branch', branch);
         }
 
-        if (env === 'live') {
+        if (env === 'live' || env === 'preview') {
             setRumDeviceId()
         }
     }
