@@ -55,7 +55,7 @@ Visualize infrastructure spend alongside related utilization metrics to spot pot
 
 ## Allocate costs
 
-Use [Container Cost Allocation][2] metrics to identify Kubernetes, AWS ECS, Azure, and Google Cloud cluster and workload costs, and gain visibility into into pod-level costs, idle resource costs, costs by resource type, and more.
+Use [Container Cost Allocation][2] metrics to discover costs associated with clusters and workloads across Kubernetes, AWS ECS, Azure, and Google Cloud. Gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
 
 ## Further reading
 
