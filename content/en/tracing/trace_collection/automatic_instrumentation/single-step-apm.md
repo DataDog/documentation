@@ -176,7 +176,7 @@ You can enable APM by installing the Agent with either:
 - [Datadog Operator](#installing-with-datadog-operator)
 - [Datadog Helm chart](#installing-with-helm)
 
-<div class="alert alert-info">Single step instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.</div>
+<div class="alert alert-info">Single Step Instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.</div>
 
 ### Requirements
 
@@ -185,10 +185,11 @@ You can enable APM by installing the Agent with either:
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
 
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
+Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
 
-To enable single step instrumentation with the Datadog Operator:
+To enable Single Step Instrumentation with the Datadog Operator:
 
-1. Install the [Datadog Operator][5] with Helm:
+1. Install the [Datadog Operator][36] v1.5.0+ with Helm:
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm install my-datadog-operator datadog/datadog-operator
@@ -197,10 +198,10 @@ To enable single step instrumentation with the Datadog Operator:
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```
-2. Create `datadog-agent.yaml` with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
+3. Create `datadog-agent.yaml` with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
    ```yaml
-   kind: DatadogAgent
    apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
    metadata:
      name: datadog
    spec:
@@ -212,9 +213,6 @@ To enable single step instrumentation with the Datadog Operator:
          apiSecret:
            secretName: datadog-secret
            keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
    features:
      apm:
        instrumentation:
@@ -231,16 +229,17 @@ To enable single step instrumentation with the Datadog Operator:
       </ul>
    </div>
 
-3. Run the following command:
+4. Run the following command:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
-4. Restart your applications.
+5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 {{< /collapse-content >}} 
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
+Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
 
-To enable single step instrumentation with Helm:
+To enable Single Step Instrumentation with Helm:
 
 1. Add the Helm Datadog repo:
    ```shell
@@ -278,9 +277,10 @@ To enable single step instrumentation with Helm:
    ```shell
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
    ```
-5. Restart your applications.
+5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
 {{< /collapse-content >}} 
+
 
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -290,10 +290,13 @@ To enable single step instrumentation with Helm:
 [12]: /getting_started/site
 [13]: https://v3.helm.sh/docs/intro/install/
 [14]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[36]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 
 ### Enabling or disabling instrumentation for namespaces
 
-You can choose to enable or disable instrumentation for applications in specific namespaces. The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
+You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enabledNamespaces or disabledNamespaces, not both.
+
+The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
 {{< collapse-content title="Datadog Operator" level="h4" >}}
 
@@ -575,7 +578,14 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 {{< collapse-content title="Datadog Operator" level="h4" >}}
 
-1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-agent.yaml` 
+1. Set `instrumentation.enabled=false` in `datadog-agent.yaml`:
+   ```yaml
+   features:
+     apm:
+       instrumentation:
+         enabled: false
+   ```
+
 2. Deploy the Datadog Agent with the updated configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
@@ -584,7 +594,14 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 {{< collapse-content title="Helm" level="h4" >}}
 
-1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml` 
+1. Set `instrumentation.enabled=false` in `datadog-values.yaml`:
+   ```yaml
+   datadog:
+     apm:
+       instrumentation:
+         enabled: false
+   ```
+
 2. Deploy the Datadog Agent with the updated configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
