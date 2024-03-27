@@ -88,9 +88,14 @@ Serverless Invocations, Serverless Functions  | Average | Average |
 
 On-demand usage refers to usage accrued beyond the sum of committed and allotted usage. To calculate on-demand usage, subtract **included usage** (that is, committed and allotted usages) from **billable usage**. 
 
-For example, a user has a commitment of 100 GB of Ingested Spans and 5 APM Pro Hosts. Their host commitment results in a span allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. Their included usage of Ingested Spans is `750 GB + 100`. If they have 1000 GB worth of Ingested Spans usage, then use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional spans usage, since their allotment increases to 900 GB.
+The on-demand option determines how frequently on-demand usage is calculated. For the monthly on-demand option, on-demand usage is calculated at the end of each month. For the hourly on-demand option, on-demand usage is calculated each hour and the total on-demand usage to be billed at the end of the month is the aggregate of hourly on-demand usage across all hours in the month. On-demand usage is billed at an on-demand rate. See [Datadog Pricing][1].
 
-On-demand usage is billed at an on-demand rate. See [Datadog Pricing][1].
+### Example
+**An organization with a monthly on-demand option** is committed to 5 APM Pro hosts and no Ingested Spans. They will have a total included usage of (5 APM Pro hosts * 150 GB Ingested Spans per host) + 0 commitment = a total included usage of 750 GB Ingested Spans. If they have 1000 GB of Ingested Spans usage, the additional 250 GB is classified as on-demand usage.
+
+**An organization with an hourly on-demand option** is committed to 5 APM Pro hosts and no Ingested Spans. Since their on-demand usage is calculated hourly, their monthly allotment is annualized then divided by the number of hours in a year: (365 * 24 / 12) = 730. Thus, their hourly Ingested Spans allotment is (5 APM Hosts * (150 GB Ingested Spans / Host) /  (730 hours))  = 1.027 GB Ingested Spans per hour.
+
+If they used 1.1 GB during hour 1, 0.9 GB during hour 2, and 1.2 GB during hour 3, their on-demand usage for the month is the difference between their billable usage and their allotted usage summed across all usage hours in the month: ((1.1 - 1.027 = 0.073) + (0.9 - 1.027 = 0) + (1.2 - 1.027 = 0.173)) = 0.246 GB on-demand usage for Ingested Spans.
 
 ## Calculating billable usage
 
