@@ -7,7 +7,6 @@ further_reading:
   tag: 'Documentation'
   text: 'Learn about Error Tracking Monitors'
 aliases:
-  - /real_user_monitoring/error_tracking/explorer
   - /logs/error_tracking/explorer
   - /tracing/error_tracking/explorer
 ---
