@@ -38322,8 +38322,10 @@ tags:
     points\nand as the timeframe over which a metric is viewed increases,\naggregation
     between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete
     `manage_tags` API methods can only be performed by\na user who has the `Manage
-    Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/)
-    for more information."
+    Tags for Metrics` permission.\n\nTo view or run the requests on this page, you
+    can also use the [Datadog Postman collection](https://www.postman.com/datadog/workspace/datadog-s-public-workspace/folder/20651290-91b6cc1e-d376-4e47-a513-3a11e372f423).\nThe
+    Postman collection displays examples for configuring all of the optional parameters.\n\nSee
+    the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about and
