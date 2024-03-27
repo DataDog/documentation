@@ -144,7 +144,7 @@ To trigger a workflow from incidents, create an incident notification rule:
 1. Click **New Rule**.
 1. Configure a **Severity**, **Service**, and **Other attributes** for your notification rule.
 1. Under **Notify**, paste the workflow handle that you copied earlier.
-1. Enter a Template and configure the Renotify settings for the notification rule.
+1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
 1. Click **Save**.
 
 ## Trigger a workflow on a schedule
