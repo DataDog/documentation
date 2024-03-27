@@ -13,7 +13,7 @@ further_reading:
     text: "Cloud Security Management Vulnerabilities"
 ---
 
-The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations][1] (cloud accounts) and [CSM Vulnerabilities][2] (container images). To learn more about the available CSM packages, see [Setting up Cloud Security Management][3].
+The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations][1] (cloud accounts), [CSM Vulnerabilities][2] (container images), and [Agentless Scanning][6] (container images). To learn more about the available CSM packages, see [Setting up Cloud Security Management][3].
 
 ## Getting started
 
@@ -40,3 +40,4 @@ Select your infrastructure type for details on how to enable CSM Pro on the Agen
 [3]: /security/cloud_security_management/setup
 [4]: /security/cloud_security_management/setup/csm_pro/cloud_accounts
 [5]: https://www.cisa.gov/sbom
+[6]: /security/agentless_scanning

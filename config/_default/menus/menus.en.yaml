@@ -4057,6 +4057,11 @@ main:
     parent: csm_setup
     identifier: csm_setup_cloud_workload_security
     weight: 10010
+  - name: CSM Agentless Scanning
+    url: security/cloud_security_management/setup/agentless_scanning
+    parent: csm_setup
+    identifier: csm_setup_agentless_scanning
+    weight: 10015
   - name: Agent
     url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
     parent: csm_setup_cloud_workload_security
@@ -4147,16 +4152,21 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 5
+  - name: Agentless  Scanning
+    url: security/cloud_security_management/agentless_scanning
+    parent: csm
+    identifier: csm_agentless
+    weight: 6
   - name: OOTB Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
-    weight: 6
+    weight: 7
   - name: Review and Remediate
     url: security/cloud_security_management/review_remediate
     parent: csm
     identifier: csm_review_remediate
-    weight: 7
+    weight: 8
   - name: Mute Issues
     url: security/cloud_security_management/review_remediate/mute_issues
     parent: csm_review_remediate
@@ -4176,7 +4186,7 @@ main:
     url: security/cloud_security_management/severity_scoring/
     parent: csm
     identifier: csm_severity_scoring
-    weight: 10
+    weight: 9
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
