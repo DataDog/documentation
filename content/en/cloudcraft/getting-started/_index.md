@@ -13,4 +13,5 @@ kind: guide
     {{< nextlink href="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence">}}Embedding Cloudcraft diagrams with the Confluence app{{< /nextlink >}}
     {{< nextlink href="cloudcraft/getting-started/generate-api-key">}}Generate an API key{{< /nextlink >}}
     {{< nextlink href="cloudcraft/getting-started/system-requirements">}}System requirements{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/getting-started/using-bits-menu">}}Using the bits menu{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -2,7 +2,7 @@
   "data": {
     "attributes": {
       "is_security_command_center_enabled": true,
-      "client_email": "252bf553ef04b351@test-project.iam.gserviceaccount.com",
+      "client_email": "Test-252bf553ef04b351@test-project.iam.gserviceaccount.com",
       "host_filters": []
     },
     "type": "gcp_service_account"

@@ -29,12 +29,16 @@ jobs:
     - name: Generate links
       env:
         branch: ${{ github.head_ref }}
+        DELETED_FILES: ${{ steps.changed_files.outputs.deleted_files }}
+        RENAMED_FILES: ${{ steps.changed_files.outputs.renamed_files }}
+        MODIFIED_FILES: ${{ steps.changed_files.outputs.modified_files }}
+        ADDED_FILES: ${{ steps.changed_files.outputs.added_files }}
       id: comment_body
       run: |
-        python local/bin/py/preview_links.py --deleted='${{ steps.changed_files.outputs.deleted_files }}' \
-        --renamed='${{ steps.changed_files.outputs.renamed_files }}' \
-        --modified='${{ steps.changed_files.outputs.modified_files }}' \
-        --added='${{ steps.changed_files.outputs.added_files }}'
+        python local/bin/py/preview_links.py --deleted="${DELETED_FILES}" \
+        --renamed="${RENAMED_FILES}" \
+        --modified="${MODIFIED_FILES}" \
+        --added="${ADDED_FILES}"
 
     - name: Render template
       id: template

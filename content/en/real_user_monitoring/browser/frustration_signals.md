@@ -7,7 +7,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'Blog'
   text: 'Detect user pain points with Datadog Frustration Signals'
-- link: '/real_user_monitoring/dashboards/usage#frustration-signals'
+- link: '/real_user_monitoring/platform/dashboards/usage#frustration-signals'
   tag: 'Documentation'
   text: 'Frustration Signals Dashboard'
 - link: '/real_user_monitoring/explorer'
@@ -41,15 +41,18 @@ To start collecting frustration signals, add the following to your SDK configura
 
 <details open>
   <summary>Latest version</summary>
-```
+  
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
 })
 ```
+
 </details>
 <details>
   <summary>Before <code>v5.0.0</code></summary>
-```
+  
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
@@ -157,11 +160,11 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/explorer/
-[3]: /real_user_monitoring/dashboards/usage#frustration-signals
+[3]: /real_user_monitoring/platform/dashboards/usage#frustration-signals
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/
 [6]: /monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
-[8]: /real_user_monitoring/session_replay/
+[8]: /real_user_monitoring/session_replay/browser/
 [9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

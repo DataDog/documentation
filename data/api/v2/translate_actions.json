@@ -767,6 +767,30 @@
     "request_description": "",
     "request_schema_description": "Relationship to role."
   },
+  "ListLogsCustomDestinations": {
+    "description": "Get the list of configured custom destinations in your organization with their definitions.",
+    "summary": "Get all custom destinations"
+  },
+  "CreateLogsCustomDestination": {
+    "description": "Create a custom destination in your organization.",
+    "summary": "Create a custom destination",
+    "request_description": "The definition of the new custom destination.",
+    "request_schema_description": "The custom destination."
+  },
+  "DeleteLogsCustomDestination": {
+    "description": "Delete a specific custom destination in your organization.",
+    "summary": "Delete a custom destination"
+  },
+  "GetLogsCustomDestination": {
+    "description": "Get a specific custom destination in your organization.",
+    "summary": "Get a custom destination"
+  },
+  "UpdateLogsCustomDestination": {
+    "description": "Update the given fields of a specific custom destination in your organization.",
+    "summary": "Update a custom destination",
+    "request_description": "New definition of the custom destination's fields.",
+    "request_schema_description": "The custom destination."
+  },
   "ListLogsMetrics": {
     "description": "Get the list of configured log-based metrics with their definitions.",
     "summary": "Get all log-based metrics"
@@ -1554,7 +1578,7 @@
     "request_schema_description": "Update request with an incident team payload."
   },
   "GetUsageApplicationSecurityMonitoring": {
-    "description": "Get hourly usage for application security .\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for application security"
   },
   "GetCostByOrg": {
@@ -1574,11 +1598,11 @@
     "summary": "Get hourly usage by product family"
   },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Get hourly usage for Lambda traced invocations.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "description": "Get hourly usage for Lambda traced invocations.\n**Note:** This endpoint has been deprecated.. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for Lambda traced invocations"
   },
   "GetUsageObservabilityPipelines": {
-    "description": "Get hourly usage for observability pipelines.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "description": "Get hourly usage for observability pipelines.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for observability pipelines"
   },
   "GetProjectedCost": {
