@@ -897,6 +897,13 @@
       "description": "Update a suppression rule returns \"OK\" response"
     }
   ],
+  "ValidateSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Validate a detection rule returns \"OK\" response"
+    }
+  ],
   "CreateScanningGroup": [
     {
       "group": "sensitive_data_scanner",

@@ -7387,7 +7387,7 @@ api:
       operationids:
         - SearchSecurityMonitoringSignals
       unstable: []
-      order: 8
+      order: 9
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
     identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -7399,7 +7399,7 @@ api:
       operationids:
         - ListSecurityMonitoringSignals
       unstable: []
-      order: 9
+      order: 10
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: security-monitoring-update-an-existing-rule
@@ -7436,6 +7436,18 @@ api:
         - DeleteSecurityMonitoringRule
       unstable: []
       order: 7
+  - name: Validate a detection rule
+    url: '#validate-a-detection-rule'
+    identifier: security-monitoring-validate-a-detection-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ValidateSecurityMonitoringRule
+      unstable: []
+      order: 8
   - name: Create a detection rule
     url: '#create-a-detection-rule'
     identifier: security-monitoring-create-a-detection-rule

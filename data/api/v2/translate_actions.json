@@ -1275,6 +1275,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "ValidateSecurityMonitoringRule": {
+    "description": "Validate a detection rule.",
+    "summary": "Validate a detection rule",
+    "request_description": "",
+    "request_schema_description": "Create a new rule."
+  },
   "DeleteSecurityMonitoringRule": {
     "description": "Delete an existing rule. Default rules cannot be deleted.",
     "summary": "Delete an existing rule"
