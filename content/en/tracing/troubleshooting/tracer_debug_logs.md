@@ -7,7 +7,57 @@ further_reading:
   text: "Troubleshooting APM Connection Errors"
 ---
 
-## Enable debug mode
+## Debug logs flare
+
+<div class="alert alert-warning">Debug logs flares are supported for Java and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">manual debug log collection</a> instead.</div>
+
+A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
+
+The data collected varies by language. See [Data collected](#data-collected).
+
+### Prerequisites
+
+- [Remote configuration][3] must be enabled.
+- Your API key must be configured for Remote Configuration.
+- You must have a supported tracer version:
+  - Java: `1.26.0` or greater
+  - .NET: `2.46.0` or greater
+
+### Send a flare
+
+To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][4] and [Remote configuration][5] on the Agent.
+
+{{% remote-flare %}}
+
+{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
+
+### Data collected
+
+{{< programming-lang-wrapper langs="java,.NET" >}}
+
+{{< programming-lang lang="java" >}}
+All application tracer debug logs are included in the flare.
+{{< /programming-lang>}}
+
+{{< programming-lang lang=".NET" >}}
+The following logs are included in the flare:
+
+- `classpath.txt`
+- `dynamic_config.txt`
+- `initial_config.txt`
+- `instrumenter_metrics.txt`
+- `instrumenter_state.txt`
+- `jmxfetch.txt`
+- `span_metrics.txt`
+- `threads.txt`
+- `tracer_health.txt`
+- `tracer_version.txt`
+- `version.txt`
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
+## Manual debug log collection
 
 Use Datadog debug settings to diagnose issues or audit trace data. Datadog does not recommend that you enable debug mode in production systems because it increases the number of events that are sent to your loggers. Use debug mode for debugging purposes only.
 
@@ -484,3 +534,6 @@ Available starting in 0.98.0:
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare
+[3]: /agent/remote_config
+[4]: /agent/fleet_automation/
+[5]: /agent/remote_config#enabling-remote-configuration
