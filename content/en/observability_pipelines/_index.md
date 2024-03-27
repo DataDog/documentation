@@ -23,11 +23,12 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 1. Navigate to [Observability Pipelines][LINK].
 1. Select a use case:
-    - Log volume control
-    - [Dual ship logs][1]
+    - [Log volume control][1]
+    - [Dual ship logs][2]
     - Split logs
     - Archive logs
     - Senstive data redaction
 1. Add monitors.
 
-[1]: content/en/observability_pipelines/dual_ship_logs/
+[1]: /observability_pipelines/log_volume_control/
+[2]: /observability_pipelines/dual_ship_logs/
