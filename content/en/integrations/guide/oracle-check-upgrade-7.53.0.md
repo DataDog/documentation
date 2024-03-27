@@ -1,25 +1,25 @@
 ---
-title: Oracle Integration in the Agent 7.53.0
+title: Oracle Integration in Agent 7.53.0
 kind: guide
 ---
 
 # What has changed?
 
-- The Oracle integration is completely rewritten in the Agent release `7.53.0`.
+- The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.0`.
 
-- The new check is easier to set up, and is less prone to configuration errors because it doesn't require any external clients such as Oracle JDBC drivers. The `jdbc` related parameters are ignored in the new check.
+- The new check doesn't require any external clients such as Oracle JDBC drivers. The `jdbc` related parameters are ignored in the new check.
 
-- The new Oracle check emits the same metrics as the deprecated Oracle integration.
+- The new Oracle check emits the same [metrics][1] as the deprecated Oracle integration.
 
 - System metrics in multi-tenant databases are emitted for each pluggable database.
 
-- The metrics are emitted with the database host name as recorded in the system view `v$instance.host_name` instead of the Agent host name. That can break dashboards and monitors which are based on the host name tag.
+- The metrics are emitted with the database host name as recorded in the system view `v$instance.host_name` instead of the Agent host name.
 
-# Required action
+# Required action for users running Agent v7.53.0+
 
 The configuration in the subdirectory `oracle.d` remains the same.
 
-The Oracle new check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for you hosting type prior to upgrading the agent.
+The Oracle new check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for you hosting type prior to upgrading the Agent:
 
 <!-- xxx tabs xxx -->
 
@@ -204,7 +204,7 @@ grant select on dba_data_files to datadog;
 
 If the privileges are missing, the Oracle check will start executing in the legacy compatibility mode, and the following warning will appear in the log file: `missing privileges detected, running in deprecated integration compatibility mode`.
 
-# Earlier Agent releases
+# Instructions for earlier Agent releases (v7.50.1-7.52.1)
 
 The new Oracle check can be activated as of the Agent release `7.50.1`.
 
@@ -226,6 +226,11 @@ cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml.bak
 ```
 
-4. [Grant privileges](#required-action) to the Datadog database account for your hosting type.
+4. [Grant privileges](#required-action-for-users-running-agent-v7530) to the Datadog database account for your hosting type.
 
-5. Restart the Agent
+5. Restart the Agent.
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
+[2]: https://github.com/DataDog/datadog-agent/releases
+[3]: https://docs.datadoghq.com/integrations/oracle
+
