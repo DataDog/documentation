@@ -41,7 +41,7 @@ After [setting up Agentless scanning][1] for your resources, Datadog schedules s
 
 The following diagram illustrates how Agentless Scanning works:
 
-**Insert diagram**
+{{< img src="/security/agentless_scanning/how_agentless_works.png" alt="Diagram showing how Agentless scanning works" width="90%" >}}
 
 1. Datadog schedules a scan and sends which resources to scan through Remote Configuration.
 
@@ -87,7 +87,9 @@ When installed, the Datadog Agent offers real-time, deep visibility into risks a
 
 As a result, Agentless Scanning excludes resources that have the Datadog Agent installed and configured for [Vulnerability Management][8] from its scans. In this way, Cloud Security Management offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
 
-**Insert Diagram**
+The following diagram illustrations how Agentless scanning works with existing Agent installations:
+
+{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with CSM vulnerability management" width="90%" >}}
 
 ## Cloud service provider cost
 

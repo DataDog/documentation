@@ -28,7 +28,7 @@ For larger accounts with 250 or more hosts, this is the most cost-effective opti
 The following diagram illustrates how Agentless scanning works when deployed in a central cloud account:
 
 
-{{< img src="/security/agentless_scanning/agentless_advanced.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
+{{< img src="/security/agentless_scanning/agentless_advanced_2.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
 
 {{% /tab %}}
 {{% tab "Same account scanning" %}}
@@ -37,7 +37,7 @@ With this option, a single Agentless scanner is deployed per account. Although t
 
 The following diagram illustrates how Agentless scanning works when deployed within each Cloud account:
 
-{{< img src="/security/agentless_scanning/agentless_quickstart.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
+{{< img src="/security/agentless_scanning/agentless_quickstart_2.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
 
 [3]: https://app.datadoghq.com/security/csm/vm
 [4]: /agent/remote_config/?tab=configurationyamlfile#setup
@@ -150,10 +150,11 @@ Go to your AWS console, and remove the CloudFormation stack that was created for
 
 ### Uninstalling with Terraform
 
-Follow instructions for [Terraform][4] un-installation (need link).
+Follow instructions for [Terraform][9] un-installation.
 
 [1]: /security/vulnerabilities
 [3]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [4]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
 [8]: mailto:success@datadoghq.com
+[9]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md#uninstall
 
