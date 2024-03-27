@@ -20,7 +20,7 @@ kind: guide
 
 -  **`require_full_window`** a boolean indicating whether this monitor needs a full window of data before it's evaluated. Datadog recommends you set this to `False` for sparse metrics, otherwise some evaluations are skipped. Default: **False**.
 - **`renotify_interval`** the number of minutes after the last notification before a monitor re-notifies on the current status. It only re-notifies if it's not resolved. Default: **null**.
-- **`renotify_statuses`** the states from which a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**. Without `renotify_statuses` set, it renotifies from `Alert` and `No Data` states.
+- **`renotify_statuses`** the states from which a monitor re-notifies. Default: *null* if `renotify_interval` is **null**. If `renotify_interval` is set, defaults to re-notify on `Alert` and `No Data`.
 - **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**, it renotifies without a limit.
 - **`escalation_message`** a message to include with a re-notification. Supports the '@username' notification that is allowed elsewhere. Not applicable if `renotify_interval` is `null`. Default: **null**.
 - **`notify_audit`** a boolean indicating whether tagged users are notified on changes to this monitor. Default: **False**
