@@ -5141,8 +5141,13 @@ main:
   - name: Billing
     identifier: account_management_billing
     url: account_management/billing/
+    identifier: account_management_billing
     parent: account_management
     weight: 11
+  - name: Allotments
+    url: account_management/billing/allotments
+    parent: account_management_billing
+    weight: 5
   - name: Multi-org Accounts
     identifier: account_management_multi_org_accounts
     url: account_management/multi_organization/
