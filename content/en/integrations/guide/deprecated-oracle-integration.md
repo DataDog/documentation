@@ -406,20 +406,6 @@ where blocking_session is not NULL order by blocking_session;
 
 3. Once configured, you can create a [monitor][10] based on `oracle.custom_query.locks` metrics.
 
-## Data Collected
-
-### Metrics
-
-See [metadata.csv][11] for a list of metrics provided by this integration.
-
-### Events
-
-The Oracle Database check does not include any events.
-
-### Service Checks
-
-See [service_checks.json][12] for a list of service checks provided by this integration.
-
 ## Troubleshooting
 
 ### Common problems
