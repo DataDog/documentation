@@ -147,8 +147,8 @@ fi
 # Avoid conflicts on port 6062
 echo "process_config.expvar_port: 6063" >> /etc/datadog-agent/datadog.yaml
 
-# Send host tags with metrics for 60 minutes
-echo "expected_tags_duration: 60m" >> /etc/datadog-agent/datadog.yaml
+# Send host tags with metrics for the first 10 minutes
+echo "expected_tags_duration: 10m" >> /etc/datadog-agent/datadog.yaml
 
 echo \$(date -u) "Installation completed. Starting Datadog Agent..."
 sudo service datadog-agent start
