@@ -60,7 +60,7 @@ Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail lo
 6. Click **Add**.
 7. See CloudTrail logs in Datadog's [Log Explorer][21].
 
-[1]: /security/threats
+[1]: /security/cloud_security_management/threats
 [2]: /security/misconfigurations
 [3]: /security/identity_risks
 [4]: /security/vulnerabilities

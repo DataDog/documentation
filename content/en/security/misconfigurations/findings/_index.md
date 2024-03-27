@@ -52,5 +52,5 @@ Group by **Resources** on the Security Findings Explorer and select a resource t
 
 [1]: https://app.datadoghq.com/security/compliance?time=now
 [2]: /security/cloud_siem/
-[3]: /security/threats/
+[3]: /security/cloud_security_management/threats/
 [4]: /security/default_rules/cis-aws-1.5.0-2.1.5/

@@ -255,7 +255,7 @@ In the task definition, replace the "workload" container with the following:
 {{< /code-block >}}
 
 
-[1]: /security/threats/
+[1]: /security/cloud_security_management/threats/
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [3]: /security/default_rules/?category=cat-csm-threats
 [4]: /security/cloud_security_management/setup/csm_enterprise
