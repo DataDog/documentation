@@ -209,6 +209,8 @@ instances:
         identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
 ```
 
+DEPRECATED: `managed_identity` is deprecated in favor of `azure.managed_authentication`.
+
 
 ### Connect to SQL Server
 
@@ -255,7 +257,7 @@ CREATE USER <DBM_DATADOG_TEST_IDENTITY> FOR LOGIN <DBM_DATADOG_TEST_IDENTITY>;
 ```
 
 
-5. Update your instance config with the `managed_identity` config block:
+5. Update your instance config with the `azure.managed_authentication` config block:
 
 
 **Note**: [ODBC Driver 17 for SQL Server][18] or greater is required to use this feature.
@@ -263,16 +265,17 @@ CREATE USER <DBM_DATADOG_TEST_IDENTITY> FOR LOGIN <DBM_DATADOG_TEST_IDENTITY>;
 
 ```yaml
 instances:
- - host: "example.cfcc2366ab90.database.windows.net,1433"
-   connector: "odbc"
-   driver: "{ODBC Driver 18 for SQL Server}"
-   dbm: true
-   connection_string: "TrustServerCertificate=no;Encrypt=yes;"
-   managed_identity:
-     client_id: "<CLIENT_ID>"
-   azure:
-     deployment_type: managed_instance
-     fully_qualified_domain_name: example.cfcc2366ab90.database.windows.net
+  - host: "example.cfcc2366ab90.database.windows.net,1433"
+    connector: "odbc"
+    driver: "{ODBC Driver 18 for SQL Server}"
+    dbm: true
+    connection_string: "TrustServerCertificate=no;Encrypt=yes;"
+    azure:
+      deployment_type: managed_instance
+      fully_qualified_domain_name: example.cfcc2366ab90.database.windows.net
+      managed_authentication:
+        enabled: true
+        client_id: "<CLIENT_ID>"
 ```
 
 
