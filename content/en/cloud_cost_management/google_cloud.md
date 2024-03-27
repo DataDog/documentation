@@ -153,16 +153,16 @@ Viewing costs in context of observability data is important to understand how in
 For example, to view cost and utilization for each Cloud SQL database, you can make a table with `gcp.cost.amortized`, `gcp.cloudsql.database.cpu.utilization`, and `gcp.cloudsql.database.memory.utilization` (or any other Cloud SQL metric) and group by `database_id`. Or, to see Cloud Function usage and costs side by side, you can graph `gcp.cloudfunctions.function.execution_count` and `gcp.cost.amortized` grouped by `function_name`.
 
 The following out-of-the-box tags are available:
-| Google Product                  | Tag(s)       |
-| ---------------------------- | ----------------- |
-| Compute Engine                | `instance_id`, `instance-type`|
-| Cloud Functions         | `function_name`|
-| Cloud Run         | `job_name`, `service_name`|
-| Cloud SQL         | `database_id`|
-| Cloud Spanner         | `instance_id`|
-| App Engine      | `module_id`|
-| BigQuery  | `project_id`, `dataset_id` |
-| Kubernetes Engine  | `cluster_name`|
+| Google Product     | Tag(s)                        |
+| -------------------| ----------------------------- |
+| Compute Engine     | `instance_id`, `instance-type`|
+| Cloud Functions    | `function_name`               |
+| Cloud Run          | `job_name`, `service_name`    |
+| Cloud SQL          | `database_id`                 |
+| Cloud Spanner      | `instance_id`                 |
+| App Engine         | `module_id`                   |
+| BigQuery           | `project_id`, `dataset_id`    |
+| Kubernetes Engine  | `cluster_name`                |
 
 ### Container allocation
 **Container allocation** metrics contain all of the same costs as the GCP metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][15] for more details.
