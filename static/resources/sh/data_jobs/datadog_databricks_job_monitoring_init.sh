@@ -5,11 +5,12 @@ export DD_API_KEY=${DD_API_KEY}
 export DD_SITE=${DD_SITE:-datadoghq.com}
 export DATABRICKS_WORKSPACE=${DATABRICKS_WORKSPACE}
 
-# Optional parameters
-export DD_PROCESS_AGENT_ENABLED=${DD_PROCESS_AGENT_ENABLED:-false}
-export DD_PROFILING_ENABLED=${DD_PROFILING_ENABLED:-false}
-export DRIVER_LOGS_ENABLED=${DRIVER_LOGS_ENABLED:-false}
-export WORKER_LOGS_ENABLED=${WORKER_LOGS_ENABLED:-false}
+## Optional parameters - boolean - default: false
+## Setting any of these options to "true" will enable the respective telemetry to be collected
+# export DD_PROCESS_AGENT_ENABLED=false
+# export DD_PROFILING_ENABLED=false
+# export DRIVER_LOGS_ENABLED=false
+# export WORKER_LOGS_ENABLED=false
 
 
 # Installation script
@@ -22,7 +23,9 @@ echo "DD_INTEGRATIONS_ENABLED=false" >> /etc/environment
 echo "DD_INTEGRATION_SPARK_ENABLED=true" >> /etc/environment
 echo "DD_TRACE_EXPERIMENTAL_LONG_RUNNING_ENABLED=true" >> /etc/environment
 echo "JAVA_TOOL_OPTIONS=-javaagent:/databricks/driver/dd-java-agent.jar" >> /etc/environment
-echo "DD_PROFILING_ENABLED=${DD_PROCESS_AGENT_ENABLED}" >> /etc/environment
+if [[ ${DD_PROFILING_ENABLED} = true ]]; then
+  echo "DD_PROFILING_ENABLED=true" >> /etc/environment
+fi
 
 
 echo $(date -u) "Generating the script /tmp/start_datadog.sh..."

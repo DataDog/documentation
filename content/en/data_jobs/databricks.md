@@ -32,14 +32,14 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Install the Datadog Agent on your Databricks cluster(s)
 
-Use the following init script:
-- [Install the Datadog Agent][8]
+The following init script will install the Datadog Agent on the cluster:
+- [`datadog_databricks_job_monitoring_init.sh`][8]
 
 You can choose to install the Agent globally, or on a specific Databricks cluster.
 
 {{< tabs >}}
 {{% tab "Global init (Recommended)" %}}
-1. In Databricks, go to **Settings** > **Compute**. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
+1. In Databricks, go to **Admin Settings** > **Compute**. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
 1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the init script.
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
