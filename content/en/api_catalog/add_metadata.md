@@ -41,6 +41,9 @@ paths:
    get:
      summary: get customer information
      operationId: getCustomerInfo
+     tags:
+       - public
+       - important
      parameters:
        - in: path
          name: id
