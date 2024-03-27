@@ -115,7 +115,7 @@ config.serviceName = 'com.example.reactnative';
 // Optional: let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
 config.verbosity = SdkVerbosity.WARN;
 
-//Wrap the content of your App component by a DatadogProvider component, passing it your configuration:
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
 export default function App() {
     return (
@@ -156,7 +156,7 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-//Wrap the content of your App component by a DatadogProvider component, passing it your configuration:
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
 export default function App() {
     return (
@@ -197,7 +197,7 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-//Wrap the content of your App component by a DatadogProvider component, passing it your configuration:
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
 export default function App() {
     return (
@@ -237,7 +237,7 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-//Wrap the content of your App component by a DatadogProvider component, passing it your configuration:
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
 export default function App() {
     return (
@@ -277,7 +277,7 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-//Wrap the content of your App component by a DatadogProvider component, passing it your configuration:
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
 export default function App() {
     return (
