@@ -144,7 +144,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `google_region`              | The region associated with the item.|
 | `google_zone`                | The availability zone associated with the item.|
 | `google_pricing_usage_unit`  | The pricing unit used for calculating the usage cost (for example, gibibyte, tebibyte, or year).|
-| `google_is_unused_reservation`| Whether the usage was reserved but not used|
+| `google_is_unused_reservation`| Whether the usage was reserved but not used.|
 
 #### Cost and observability correlation
 
