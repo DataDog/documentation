@@ -85,7 +85,7 @@ Preset lists are out-of-the-box dashboard lists in Datadog:
 
 Use the preset **Recently Deleted** list to restore deleted dashboards. From the list, select all dashboards to restore and click **Restore to**. Select a specific list to restore the dashboards to, or select **All Custom** to restore them without a custom list. Dashboards in **Recently Deleted** are permanently deleted after 30 days.
 
-{{< img src="dashboards/recently_deleted.png" alt="Restore deleted dashboard" style="width:100%;">}}
+{{< img src="dashboards/list/recently_deleted_restore.png" alt="Restore deleted dashboard on the Recently Deleted list" style="width:100%;">}}
 
 ## Further Reading
 
