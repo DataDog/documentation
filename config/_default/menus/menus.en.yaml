@@ -4093,47 +4093,47 @@ main:
     identifier: cws_backend_event_schema_documentation
     weight: 204
   - name: Misconfigurations
-    url: security/misconfigurations/
+    url: security/cloud_security_management/misconfigurations/
     parent: csm
     identifier: cspm
     weight: 3
   - name: Manage Compliance Rules
-    url: security/misconfigurations/compliance_rules
+    url: security/cloud_security_management/misconfigurations/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 301
   - name: Create Custom Rules
-    url: security/misconfigurations/custom_rules
+    url: security/cloud_security_management/misconfigurations/custom_rules
     parent: cspm
     identifier: cspm_custom_rules
     weight: 302
   - name: Manage Compliance Posture
-    url: security/misconfigurations/frameworks_and_benchmarks
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 303
   - name: Create Custom Frameworks
-    url: security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks
     parent: cspm_frameworks_benchmarks
     identifier: cspm_custom_frameworks
     weight: 101
   - name: Supported Frameworks
-    url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks
     parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
     weight: 102
   - name: Explore Misconfigurations
-    url: /security/misconfigurations/findings
+    url: /security/cloud_security_management/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 305
   - name: Export Misconfigurations
-    url: /security/misconfigurations/findings/export_misconfigurations
+    url: /security/cloud_security_management/misconfigurations/findings/export_misconfigurations
     parent: cspm_findings_explorer
     identifier: cspm_export_misconfigurations
     weight: 101
   - name: Signals Explorer
-    url: /security/misconfigurations/signals_explorer/
+    url: /security/cloud_security_management/misconfigurations/signals_explorer/
     parent: cspm
     identifier: signals
     weight: 306

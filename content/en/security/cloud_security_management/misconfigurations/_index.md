@@ -5,6 +5,7 @@ aliases:
   - /security_platform/cspm/
   - /security/cspm/#glossary
   - /security/cspm/
+  - /security/misconfigurations/
 algolia:
   tags: ['cspm']
 ---
@@ -54,26 +55,26 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/misconfigurations/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_security_management/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box cloud detection rules for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box infrastructure detection rules for CSM Misconfigurations{{< /nextlink >}}
-  {{< nextlink href="/security/misconfigurations/findings">}} Learn more about misconfigurations{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_security_management/misconfigurations/findings">}} Learn more about misconfigurations{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/">}} Improve the compliance and security posture of your Google Cloud environment{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/security/csm
 [2]: https://app.datadoghq.com/security/compliance
-[3]: /security/misconfigurations/frameworks_and_benchmarks
+[3]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [4]: /security/default_rules/#cat-posture-management-cloud
-[5]: /security/misconfigurations/frameworks_and_benchmarks#view-your-compliance-posture
-[6]: /security/misconfigurations/custom_rules
+[5]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks#view-your-compliance-posture
+[6]: /security/cloud_security_management/misconfigurations/custom_rules
 [7]: /security/notifications/
 [8]: /security/notifications/#notification-channels
 [9]: /security/notifications/#detection-rule-notifications
-[10]: /security/misconfigurations/findings
+[10]: /security/cloud_security_management/misconfigurations/findings
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
 [13]: /security/cloud_security_management/mute_issues

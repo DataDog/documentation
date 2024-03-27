@@ -1,6 +1,8 @@
 ---
 title: Create Custom Compliance Frameworks
 kind: documentation
+aliases:
+  - /security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
@@ -30,5 +32,5 @@ Create your own compliance framework by adding a custom tag to the compliance ru
 
 [1]: https://app.datadoghq.com/security/compliance
 [2]: /dashboards/template_variables/
-[3]: /security/misconfigurations/custom_rules/#tagging-findings
+[3]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
 [4]: /api/latest/security-monitoring/#update-an-existing-rule

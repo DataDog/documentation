@@ -27,4 +27,4 @@ You can improve your score by remediating misconfigurations, either by fixing th
 
 [1]: /security/default_rules/#cat-posture-management-cloud
 [2]: /security/default_rules/#cat-posture-management-infra
-[3]: /security/misconfigurations/
+[3]: /security/cloud_security_management/misconfigurations/
