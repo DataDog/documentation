@@ -45,12 +45,12 @@ The following diagram illustrates how Agentless Scanning works:
 
 1. Datadog schedules a scan and sends which resources to scan through Remote Configuration.
 
-  **Note**: Scheduled scans ignore hosts that already have the Datadog Agent installed with Cloud Security Management enabled. Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
+  **Note**: Scheduled scans ignore hosts that already have the [Datadog Agent installed with Cloud Security Management enabled](#agentless-scanning-with-existing-agent-installation). Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
 
-2. The scanner creates snapshots of EBS volumes used by EC2 instances. These snapshots serve as the basis for conducting scans. For Lambda functions, the scanners fetch the function's code.
-3. Using the snapshots, or the code, the scanner conducts scans to generate a list of packages.
+2. For Lambda functions, the scanners fetch the function's code.
+3. The scanner creates snapshots of EBS volumes used by EC2 instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner conducts scans to generate a list of packages.
 4. After the scan is complete, only the list of packages is transmitted to Datadog, while all other data remains within your infrastructure. Snapshots created during the scan cycle are deleted.
-5. Leveraging the collected package list, along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
+5. Leveraging the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
 
 **Notes**:
 - The scanner operates as a separate EC2 instance within your infrastructure, ensuring minimal impact on existing systems and resources.
