@@ -1,0 +1,229 @@
+---
+title: Oracle Integration in the Agent 7.53.0
+kind: guide
+---
+
+# What has changed?
+
+- The completely rewritten Oracle integration becomes the default in the Agent release `7.53.0`.
+
+- The new integration is easier to set up, and is less prone to configuration errors because it doesn't require any external clients such as Oracle JDBC drivers. The jdbc parameter are ignored in the new integration.
+
+- The New Oracle check emits all metrics as the deprecated Oracle integration.
+
+- System metrics in multi-tenant databases are emitted for each pluggable database.
+
+- The metrics are emitted with the database host name as recorded in the system view `v$instance.host_name` instead of the Agent host name. That can break dashboards and monitors which are based on the host name tag.
+
+# Required action
+
+The configuration in the subdirectory `oracle.d` remains the same.
+
+The Oracle new check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for you hosting type.
+
+<!-- xxx tabs xxx -->
+
+<!-- xxx tab "Multi-tenant" xxx -->
+## Multi-tenant
+
+Log on as `sysdba`, and grant the following permissions:
+
+```SQL
+grant create session to c##datadog ;
+grant select on v_$session to c##datadog ;
+grant select on v_$database to c##datadog ;
+grant select on v_$containers to c##datadog;
+grant select on v_$sqlstats to c##datadog ;
+grant select on v_$instance to c##datadog ;
+grant select on dba_feature_usage_statistics to c##datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
+grant select on V_$PROCESS to c##datadog ;
+grant select on V_$SESSION to c##datadog ;
+grant select on V_$CON_SYSMETRIC to c##datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to c##datadog ;
+grant select on CDB_TABLESPACES to c##datadog ;
+grant select on V_$SQLCOMMAND to c##datadog ;
+grant select on V_$DATAFILE to c##datadog ;
+grant select on V_$SYSMETRIC to c##datadog ;
+grant select on V_$SGAINFO to c##datadog ;
+grant select on V_$PDBS to c##datadog ;
+grant select on CDB_SERVICES to c##datadog ;
+grant select on V_$OSSTAT to c##datadog ;
+grant select on V_$PARAMETER to c##datadog ;
+grant select on V_$SQLSTATS to c##datadog ;
+grant select on V_$CONTAINERS to c##datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
+grant select on V_$SQL to c##datadog ;
+grant select on V_$PGASTAT to c##datadog ;
+grant select on v_$asm_diskgroup to c##datadog ;
+grant select on v_$rsrcmgrmetric to c##datadog ;
+grant select on v_$dataguard_config to c##datadog ;
+grant select on v_$dataguard_stats to c##datadog ;
+grant select on v_$transaction to c##datadog;
+grant select on v_$locked_object to c##datadog;
+grant select on dba_objects to c##datadog;
+grant select on cdb_data_files to c##datadog;
+grant select on dba_data_files to c##datadog;
+```
+
+<!-- xxz tab xxx -->
+
+<!-- xxx tab "Non-CDB" xxx -->
+## Non-CDB
+
+Log on as `sysdba`, and grant the following permissions:
+
+```SQL
+grant create session to datadog ;
+grant select on v_$session to datadog ;
+grant select on v_$database to datadog ;
+grant select on v_$containers to datadog;
+grant select on v_$sqlstats to datadog ;
+grant select on v_$instance to datadog ;
+grant select on dba_feature_usage_statistics to datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V_$PROCESS to datadog ;
+grant select on V_$SESSION to datadog ;
+grant select on V_$CON_SYSMETRIC to datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to datadog ;
+grant select on CDB_TABLESPACES to datadog ;
+grant select on V_$SQLCOMMAND to datadog ;
+grant select on V_$DATAFILE to datadog ;
+grant select on V_$SYSMETRIC to datadog ;
+grant select on V_$SGAINFO to datadog ;
+grant select on V_$PDBS to datadog ;
+grant select on CDB_SERVICES to datadog ;
+grant select on V_$OSSTAT to datadog ;
+grant select on V_$PARAMETER to datadog ;
+grant select on V_$SQLSTATS to datadog ;
+grant select on V_$CONTAINERS to datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V_$SQL to datadog ;
+grant select on V_$PGASTAT to datadog ;
+grant select on v_$asm_diskgroup to datadog ;
+grant select on v_$rsrcmgrmetric to datadog ;
+grant select on v_$dataguard_config to datadog ;
+grant select on v_$dataguard_stats to datadog ;
+grant select on v_$transaction to datadog;
+grant select on v_$locked_object to datadog;
+grant select on dba_objects to datadog;
+grant select on cdb_data_files to datadog;
+grant select on dba_data_files to datadog;
+```
+
+<!-- xxz tab xxx -->
+
+<!-- xxx tab "RDS" xxx -->
+## RDS
+
+```SQL
+grant create session to datadog ;
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATABASE','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$INSTANCE','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_FEATURE_USAGE_STATISTICS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PROCESS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CON_SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACE_USAGE_METRICS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACES','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLCOMMAND','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAFILE','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SGAINFO','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PDBS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_SERVICES','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$OSSTAT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PARAMETER','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PGASTAT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$ASM_DISKGROUP','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$RSRCMGRMETRIC','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAGUARD_CONFIG','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAGUARD_STATS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$TRANSACTION','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$LOCKED_OBJECT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
+```
+
+<!-- xxz tab xxx -->
+
+<!-- xxx tab "Oracle Autonomous Database" xxx -->
+## Oracle Autonomous Database
+
+```SQL
+grant create session to datadog ;
+grant select on v$session to datadog ;
+grant select on v$database to datadog ;
+grant select on v$containers to datadog;
+grant select on v$sqlstats to datadog ;
+grant select on v$instance to datadog ;
+grant select on dba_feature_usage_statistics to datadog ;
+grant select on V$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V$PROCESS to datadog ;
+grant select on V$SESSION to datadog ;
+grant select on V$CON_SYSMETRIC to datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to datadog ;
+grant select on CDB_TABLESPACES to datadog ;
+grant select on V$SQLCOMMAND to datadog ;
+grant select on V$DATAFILE to datadog ;
+grant select on V$SYSMETRIC to datadog ;
+grant select on V$SGAINFO to datadog ;
+grant select on V$PDBS to datadog ;
+grant select on CDB_SERVICES to datadog ;
+grant select on V$OSSTAT to datadog ;
+grant select on V$PARAMETER to datadog ;
+grant select on V$SQLSTATS to datadog ;
+grant select on V$CONTAINERS to datadog ;
+grant select on V$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V$SQL to datadog ;
+grant select on V$PGASTAT to datadog ;
+grant select on v$asm_diskgroup to datadog ;
+grant select on v$rsrcmgrmetric to datadog ;
+grant select on v$dataguard_config to datadog ;
+grant select on v$dataguard_stats to datadog ;
+grant select on v$transaction to datadog;
+grant select on v$locked_object to datadog;
+grant select on dba_objects to datadog;
+grant select on cdb_data_files to datadog;
+grant select on dba_data_files to datadog;
+```
+
+<!-- xxz tab xxx -->
+
+<!-- xxz tabs xxx -->
+
+If the privileges are missing, the Oracle check will start executing in the legacy compatibility mode, and the following warning will appear in the log file: `missing privileges detected, running in deprecated integration compatibility mode`.
+
+# Earlier Agent releases
+
+The new Oracle check can be activated as of the Agent release `7.50.1`.
+
+The configuration subdirectory for the Agent releases between `7.50.1` and `7.52.1` is `oracle-dbm.d`.
+
+1. Copy the configuration file from the subdirectory `oracle.d` to `oracle-dbm.d`, for example:
+
+```shell
+cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
+```
+
+2. If you are using the configuration parameter `user`, rename it to `username`.
+
+3. Deactivate the configuration file in the `oracle.d` subdirectory, for example:
+
+```shell
+mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml.bak
+```
+
+4. [Grant privileges](#required-action) to the Datadog database account for your hosting type.
+
+5. Restart the Agent
