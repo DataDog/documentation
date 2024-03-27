@@ -26,9 +26,12 @@ To learn more about the supported deployment types for each CSM feature, see [Se
         # ...
         sbom:
           enabled: true
-          # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.
+          # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
+        # Enables Kubernetes Security Posture Management for CSM Misconfigurations
+        cspm:
+          enabled: true
     ```
 
 2. Apply the changes and restart the Agent.
@@ -41,7 +44,7 @@ To learn more about the supported deployment types for each CSM feature, see [Se
 
     ```yaml
     datadog:
-      # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`.
+      # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
       containerImageCollection:
         enabled: true
       sbom:
@@ -49,6 +52,10 @@ To learn more about the supported deployment types for each CSM feature, see [Se
           enabled: true
           # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
           # uncompressedLayersSupport: true
+      securityAgent:
+        # Enables Kubernetes Security Posture Management for CSM Misconfigurations
+        compliance:
+          enabled: true
     ```
 
 2. Restart the Agent.
