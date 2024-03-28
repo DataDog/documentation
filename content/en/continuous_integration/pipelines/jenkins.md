@@ -334,9 +334,9 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
      source: jenkins
    ```
 
-3. [Restart the Agent][1] for the changes to take effect.
+3. [Restart the Agent][101] for the changes to take effect.
 
-[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[101]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{% tab "macOS" %}}
