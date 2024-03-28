@@ -3392,6 +3392,11 @@ main:
     parent: observability_pipelines_dual_ship_logs
     identifier: observability_pipelines_dual_ship_logs_sumo_logic
     weight: 2003
+  - name: Datadog Agent
+    url: observability_pipelines/dual_ship_logs/datadog_agent/
+    parent: observability_pipelines_dual_ship_logs
+    identifier: observability_pipelines_dual_ship_logs_datadog_agent
+    weight: 2004
   - name: Archive Logs
     url: observability_pipelines/archive_logs/
     parent: observability_pipelines
