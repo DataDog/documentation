@@ -3,6 +3,7 @@ title: Supported Frameworks
 kind: documentation
 aliases:
   - /security/misconfigurations/supported_frameworks
+  - /security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
