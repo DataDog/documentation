@@ -44,10 +44,16 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    $ go build -v -tags appsec my-program
    ```
 
+   **Notes**:
+   - The Go build tag `appsec` is not necessary if CGO is enabled with `CGO_ENABLED=1`.
+   - Datadog WAF needs the following shared libraries on Linux: `libc.so.6` and `libpthread.so.0`.
+   - When using the build tag `appsec` and CGO is disabled, the produced binary is still linked dynamically to these libraries.
+
 4. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
    ```console
    $ env DD_APPSEC_ENABLED=true ./my-program
    ```
+
    Or one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
@@ -106,7 +112,7 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 {{% appsec-getstarted-2 %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 

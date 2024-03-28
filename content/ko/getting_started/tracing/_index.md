@@ -67,7 +67,7 @@ sudo datadog-agent status
 
 ### 애플리케이션 성능 모니터링(APM) 활성화
 
-최신 버전의 에이전트 v6와 v7에서는 APM이 기본으로 활성화되어 있습니다. 에이전트의 [`datadog.yaml` 설정 파일][11]에서 확인할 수 있습니다.
+최신 버전 Agent v6 및 v7의 경우 애플리케이션 성능 모니터링(APM) 이 기본적으로 활성화되어 있습니다. Agent [`datadog.yaml` 설정 파일][11]에서 확인할 수 있습니다:
 
 ```yaml
 # apm_config:

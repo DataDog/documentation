@@ -1,7 +1,6 @@
 ---
 title: RUM Roku Data Collected
 kind: documentation
-is_beta: true
 code_lang: roku
 type: multi-code-lang
 code_lang_weight: 50
@@ -18,10 +17,6 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku is in beta.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -238,9 +233,9 @@ Before data is uploaded to Datadog, it is stored in cleartext in your channel's 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /real_user_monitoring/roku/advanced_configuration/#enrich-user-sessions
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /real_user_monitoring/roku/advanced_configuration/#identifying-your-users
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#identifying-your-users
 [6]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs
 [8]: /data_security/real_user_monitoring/#ip-address
 [9]: /data_security/real_user_monitoring/#geolocation

@@ -42,6 +42,8 @@ By default, runtime metrics from your application are sent to the Datadog Agent 
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
 
+Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][8].
+
 ## Data Collected
 
 The following metrics are collected by default after enabling runtime metrics:
@@ -61,3 +63,4 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 [5]: /developers/dogstatsd/?tab=kubernetes#agent
 [6]: /agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30267/python-runtime-metrics
+[8]: /developers/dogstatsd/unix_socket/

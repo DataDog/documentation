@@ -21,7 +21,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Collect your traces'
 algolia:
-  tags: ['network traffic', 'destinations', 'ports', 'data buffering']
+  tags: ['network traffic', 'destinations', 'ports', 'data buffering', 'static IP addresses']
 ---
 
 ## Overview
@@ -38,6 +38,9 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[Container Images][13]
+: `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
@@ -47,7 +50,8 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Orchestrator][5]
-: `orchestrator.`{{< region-param key="dd_site" code="true" >}}
+: `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
+`contlcycle-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Profiling][7]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
@@ -171,6 +175,12 @@ Since v6.1.0, the Agent also queries Datadog's API to provide non-critical funct
 Agent v7.18.0 or 6.18.0 and later: `api.`{{< region-param key="dd_site" code="true" >}}<br>
 Agent < v7.18.0 or 6.18.0: `app.`{{< region-param key="dd_site" code="true" >}}
 
+[Agent flare][12]
+: `<VERSION>-flare.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+For example, Agent v7.31.0 sends flare data to `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
+
+### Static IP addresses
+
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 The information is structured as JSON following this schema:
@@ -275,7 +285,7 @@ See [logs endpoints][3] for other connection types.
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov" %}}
+{{% site-region region="us3,us5,gov,ap1" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes & Containers).
@@ -431,7 +441,7 @@ Agent v7.27.0 or later stores the metrics on disk when the memory limit is reach
 
 The metrics are stored in the folder defined by the `forwarder_storage_path` setting, which is by default `/opt/datadog-agent/run/transactions_to_retry` on Unix systems, and `C:\ProgramData\Datadog\run\transactions_to_retry` on Windows.
 
-To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 95 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
+To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 80 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
 
 ## Further Reading
 
@@ -448,3 +458,5 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [9]: /agent/configuration/proxy/
 [10]: /network_monitoring/devices
 [11]: /getting_started/site/
+[12]: /agent/troubleshooting/send_a_flare
+[13]: /infrastructure/containers/container_images

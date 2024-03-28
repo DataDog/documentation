@@ -19,8 +19,9 @@ further_reading:
     text: "Standardize tags across Cloud Cost with Tag Pipelines"
 cascade:
     algolia:
-        rank: 70
-        tags: ['cloud cost', 'cloud cost management', 'cloud cost aws', 'cloud cost azure', 'cloud cost google cloud', 'cloud cost gcp']
+      subcategory: 'Cloud Cost Management'
+      rank: 70
+      tags: ['cloud cost', 'cloud cost management', 'cloud cost aws', 'cloud cost azure', 'cloud cost google cloud', 'cloud cost gcp']
 ---
 
 {{< site-region region="gov" >}}
@@ -38,6 +39,8 @@ Datadog ingests your cloud cost data and transforms it into queryable metrics. I
   {{< nextlink href="/cloud_cost_management/aws">}}<u>AWS</u>: Configure Cloud Cost Management for your AWS bill.{{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/azure">}}<u>Azure</u>: Configure Cloud Cost Management for your Azure bill. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/google_cloud">}}<u>Google Cloud</u>: Configure Cloud Cost Management for your Google Cloud bill. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/custom">}}<u>Custom Costs</u>: Upload any cost data source to Datadog. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/saas_costs">}}<u>SaaS Cost Integrations</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
  {{< /whatsnext >}}
 
 ## Cloud costs in dashboards

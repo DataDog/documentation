@@ -246,11 +246,11 @@ is unlocked won't be captured, since the credential encrypted storage won't be a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[2]: /real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
-[3]: /real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#enrich-user-sessions
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#track-custom-global-attributes
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /real_user_monitoring/android/advanced_configuration/#track-user-sessions
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#track-user-sessions
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://developer.android.com/training/articles/direct-boot
 [8]: /data_security/real_user_monitoring/#ip-address

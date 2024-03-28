@@ -10,7 +10,7 @@ further_reading:
 - link: "/data_security/synthetics/"
   tag: "Documentation"
   text: "Synthetic Monitoring Data Security"
-- link: "/real_user_monitoring/session_replay/privacy_options/"
+- link: "/real_user_monitoring/session_replay/browser/privacy_options/"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
 - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
@@ -124,16 +124,16 @@ See [privacy options specific to Session Replay][12].
 
 [1]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[3]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[4]: /real_user_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#modify-or-drop-rum-events
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter/#modify-or-drop-rum-events
 [5]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
-[7]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [8]: /help/
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
 [11]: /sensitive_data_scanner/
-[12]: /real_user_monitoring/session_replay/privacy_options
+[12]: /real_user_monitoring/session_replay/browser/privacy_options
 [13]: https://www.datadoghq.com/privacy/
 [14]: /real_user_monitoring/explorer/search/
 [15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm

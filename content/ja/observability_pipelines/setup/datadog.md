@@ -9,7 +9,7 @@ further_reading:
 - link: /observability_pipelines/production_deployment_overview/
   tag: ドキュメント
   text: 観測可能性パイプラインワーカーの本番デプロイ設計と原則
-- link: https://dtdg.co/d22op
+- link: https://learn.datadoghq.com/courses/safe-and-secure-local-processing-with-observability-pipelines
   tag: ラーニングセンター
   text: 観測可能性パイプラインによる安心・安全なローカル処理
 kind: ドキュメント

@@ -28,6 +28,8 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag="snmp" >}}よく使われる SNMP と互換性のある OID{{< /nextlink >}} 
     {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}OpenMetrics ベースのインテグレーションのバージョン管理{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry の手動セットアップ{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/application-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}VMware Tanzu のための Datadog Application Monitoring{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}VMware Tanzu のための Datadog Cluster Monitoring{{< /nextlink >}} 
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS ガイド:" >}}
@@ -56,6 +58,7 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}メトリクスなしでアプリに表示される Azure VM{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}インフラストラクチャーリスト上のパワーダウンした Azure VM{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Azure Datadog 拡張機能をインストールするコマンド{{< /nextlink >}}
+{{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Azure を監視するための Microsoft Graph API 権限{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="JMX ガイド" >}}

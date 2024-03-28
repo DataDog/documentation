@@ -1,6 +1,6 @@
 import CookieHandler from './utils/cookieJar';
 
-const UTMCookies = new CookieHandler({
+export const UTMCookies = new CookieHandler({
     domain: `.datadoghq.com`,
     // domain: `localhost`,
     path: '/',

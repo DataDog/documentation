@@ -25,6 +25,10 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{ warnf "Could not load RBAC permission set" }}
+  {{ if eq hugo.Environment "development" -}}
+    {{ warnf "Could not load RBAC permission set" }}
+  {{ else }}
+    {{ errorf "Could not load RBAC permission set" }}
+  {{ end }}
 {{- end -}}
 

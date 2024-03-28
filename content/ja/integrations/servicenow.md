@@ -1,5 +1,7 @@
 ---
 categories:
+- alerting
+- incidents
 - issue tracking
 - notification
 dependencies: []
@@ -42,7 +44,7 @@ Datadog は、以下の ServiceNow ツールと統合されます。
 
 ## CMDB のセットアップ
 
-### コンフィギュレーション
+### Datadog 用サービスグラフコネクタ
 
 [Datadog 用サービスグラフコネクタ][1]により、Datadog によって検出された新しいリソースの CMDB に、サーバーとデータベースの構成アイテム (CI) が自動的に入力されます。サービスグラフコネクタは ServiceNow [ストア][2]から入手可能です。
 
@@ -57,9 +59,74 @@ Datadog は、以下の ServiceNow ツールと統合されます。
 * サービスグラフコネクタでは、コンフィギュレーションタイルの `Target table` 値と `Custom table` 値を使用しません。Target テーブルのデフォルト値とのインテグレーションを保存できます。
 * サービスグラフコネクタのセットアップ手順に記載されているように、ユーザーに cmdb_import_api_admin ロールを付与することで、同じ ITOM/ITSM ユーザーをサービスグラフコネクタで使用できます。
 
+### ホストのタグ付け
+
+ホストのタグ付けにより、ServiceNow CMDB のメタデータで Datadog ホストをリッチ化します。
+
+ホストタグの取り込みを有効にするには
+1. ServiceNow インスタンスで、Datadog でタグ付けしたいすべてのホストを返す Query Builder クエリを構成します。
+1. 希望の更新間隔でクエリを実行するようにスケジュールします。
+1. クエリを ServiceNow に保存したら、Datadog の ServiceNow インテグレーションタイルに移動します。**Host Tagging** タブを選択します。
+1. **Query Configuration** の下にある、**Add New Row** ボタンをクリックします。
+1. ドロップダウンメニューから、**ServiceNow Instance** と **Query** を選択します。
+1. クエリの root CI のホスト名フィールドを Datadog のホスト名フィールドにマッピングする **Hostname Column** の値を選択します。
+1. **Column Name Maps** で任意のフィールド名の再マッピングを選択します。
+1. Save をクリックします。
+
+クエリのスケジュール実行後すぐにホストタグが Datadog に入力されます。
+
+{{< img src="integrations/servicenow/host-tags.jpg" alt="ServiceNow のホストタグを表示するホスト情報タブのスクリーンショット" >}}
+
+Datadog の[イベントエクスプローラー][3]で、検索クエリを `source:servicenow` にスコープして、取り込みプロセスを監視します。
+
+{{< img src="integrations/servicenow/ingestion-progress.jpg" alt="取り込み実行中のスクリーンショット" >}}
+
+#### トラブルシューティング
+
+ホストのタグ付けが正しく機能するためには、以下のことがシステムで正しいことを確認してください。
+
+- Query Builder クエリを作成・実行するユーザが、Datadog 構成のユーザ名と一致している。ServiceNow のユーザーは `cmdb_query_builder_read` というロールを持っている必要があります。
+- クエリが返す結果の数は、ServiceNow の `glide.cmdb.query.max_results_limit` 設定以下でなければなりません。デフォルトでは、結果の最大数は 10000 です。設定を変更するには、**Configuration** -> **CMDB Properties** -> **Query Builder Properties** に移動します。
+- Query Builder クエリで構成されるすべての CI には **1** ラベルが必要です。これにより、パーサーがサポートしない重複した CI を作成していないことを確認できます。
+
+#### 制限
+- 取り込みは 1 回の実行につき 100k ホストに制限されています。
+- ホストへの更新は 1 時間あたり数千件に制限されます。スケジュール間隔を選択する際にはこの制限を考慮してください。
+- Datadog のホストエイリアスは大文字と小文字を区別するため、小文字のホスト名を持つ Linux マシンではタグ付けが機能しません。
+
+### サービスの取り込み
+
+サービスの取り込みにより、ServiceNow CMDB メタデータで Datadog サービスカタログをリッチ化します。
+
+サービス取り込みを使用すると、ServiceNow CMDB から Datadog [サービスカタログ][4]にサービスを取り込むことができます。
+
+#### セットアップ
+
+サービスデータの取り込みを有効にするには
+1. ServiceNow インスタンスで、サービスカタログをリッチ化したいすべてのサービスを返す [Query Builder][5] クエリを構成します。
+1. 希望の更新間隔でクエリを実行するようにスケジュールします。
+1. クエリを ServiceNow に保存したら、Datadog の ServiceNow インテグレーションタイルに移動します。**Service Ingestion** タブを選択します。
+1. **Query Configuration** の下にある、**Add New Row** ボタンをクリックします。
+1. ドロップダウンメニューから、**ServiceNow Instance** と **Query** を選択します。
+1. **Service Name Column** ドロップダウンメニューから値を選択します。この値は、クエリのルートサービス CI 上の列名と一致し、サービスカタログのサービス名を入力します。
+1. スキーママッピングを構成して、サービスに関する追加のメタデータをサービスカタログに取り込みます。詳細は[サービス定義][6]を参照してください。Datadog が取り込みを受け入れるためには、マッピングの各フィールドが、サービスカタログのサービス定義スキーマにマッピングされる正しいタイプである必要があります。
+1. **保存**をクリックします。
+
+Datadog にサービスデータが反映されるのは、クエリのスケジュール実行の数分後です。取り込みエラーを表示するには、[イベントエクスプローラー][3]で `source:servicenow` でイベントを検索します。
+
+{{< img src="integrations/servicenow/service-metadata.jpg" alt="ServiceNow から入力されたメタデータを示す Service Configuration パネルのスクリーンショット" >}}
+
+#### トラブルシューティング
+
+サービスの取り込みが正しく機能するためには、以下のことがシステムで正しいことを確認してください。
+
+- クエリビルダーのクエリを作成・実行するユーザが、Datadog 構成のユーザ名と一致している。ServiceNow のユーザーは `cmdb_query_builder_read` というロールを持っている必要があります。
+- クエリが返す結果の数は、ServiceNow の `glide.cmdb.query.max_results_limit` 設定以下でなければなりません。デフォルトでは、結果の最大数は 10000 です。設定を変更するには、**Configuration** -> **CMDB Properties** -> **Query Builder Properties** に移動します。
+- Query Builder クエリで構成されるすべての CI には **1** ラベルが必要です。これにより、パーサーがサポートしない重複した CI を作成していないことを確認できます。
+
 ## ITOM と ITSM のセットアップ
 
-モジュールを使用するには、まず、ServiceNow インスタンスに最新の [Datadog 更新セット][3]をインストールし、Datadog で ServiceNow インテグレーションタイルを構成します。
+モジュールを使用するには、まず、ServiceNow インスタンスに最新の [Datadog 更新セット][7]をインストールし、Datadog で ServiceNow インテグレーションタイルを構成します。
 
 1. [最新の Datadog Update Set のインストール](#install-the-datadog-update-set)
 1. [Datadog アカウントのアクセス許可の設定](#permissions)
@@ -70,13 +137,13 @@ Datadog は、以下の ServiceNow ツールと統合されます。
 ServiceNow で以下を実行します。
 
 1. **Update Set** を検索し、左側のメニューで **Retrieved Update Sets** を探します。
-2. 提供された [`Datadog-SNow_Update_Set_vX.X.X.xml`][3] ファイルを手動でインポートします。
+2. 提供された [`Datadog-SNow_Update_Set_vX.X.X.xml`][7] ファイルを手動でインポートします。
 3. XML ファイルをアップロードすると、Update Set の状態が `Loaded` と表示されます。更新セットの名前をクリックして、コードをプレビューし、システムへコミットします。
 4. Update Set をプレビューしてエラーがないことを確認します。その後、**Commit Update Set** を選択してアプリケーションをお使いのシステムにマージします。
 
 設定完了後、ナビゲーションメニューで **Datadog** を検索すると、テーブルが表示されます。
 
-### アクセス許可
+### 権限
 
 インポートテーブルにアクセスして変換マップを適用するには、ServiceNow ユーザーに次のアクセス許可が必要です。
 
@@ -99,7 +166,7 @@ Datadog で `@servicenow-<INSTANCE_NAME>` を使用する通知は、ServiceNow 
 
 ### ITOM/ITSM 対応 Datadog で ServiceNow タイルを構成する
 
-1. Datadog で Integrations ページの [ServiceNow インテグレーションタイル][4]に移動します。
+1. Datadog で Integrations ページの [ServiceNow インテグレーションタイル][8]に移動します。
 1. `Add New Instance` をクリックします。
 1. ServiceNow ドメインのサブドメインであるインスタンス名、`<インスタンス>.service-now.com` を追加します。
 1. ServiceNow インスタンスのユーザー名とパスワードを追加します。
@@ -129,7 +196,7 @@ ServiceNow のテーブルにイベントが表示されず、代わりに
 
   ServiceNow ユーザーは、インポートテーブルにアクセスできるように、`rest_service` および `x_datad_datadog.user` ロールが必要です。インシデントテーブルまたはイベントテーブルのいずれかに直接通知を送信する従来の方法を使用している場合は、`itil` および `evt_mgmt_integration` のアクセス許可が必要です。
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## ナレッジベース
 
@@ -155,7 +222,7 @@ ServiceNow が Datadog アカウントに接続されると、受信したアラ
 
 ### インシデント優先度のフィールドマッピング
 
-ServiceNow インシデントの `priority` フィールドは読み取り専用で、[優先度ルックアップ規則][6]を使用してのみ更新することができます。
+ServiceNow インシデントの `priority` フィールドは読み取り専用で、[優先度ルックアップ規則][10]を使用してのみ更新することができます。
 
 ServiceNow のインシデント優先度を計算するために、モニターで `Impact` と `Urgency` を定義します。
 
@@ -225,7 +292,11 @@ answer = (function transformEntry(source)
 
 [1]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/26b85b762f6a1010b6a0d49df699b6fe
 [2]: https://store.servicenow.com/
-[3]: https://docs.datadoghq.com/resources/xml/Datadog-SNow_Update_Set.xml
-[4]: https://app.datadoghq.com/account/settings#integrations/servicenow
-[5]: https://docs.datadoghq.com/ja/help/
-[6]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
+[3]: https://app.datadoghq.com/event/explorer
+[4]: https://docs.datadoghq.com/ja/tracing/service_catalog/
+[5]: https://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/configuration-management/task/use-cmdb-query-builder.html
+[6]: https://docs.datadoghq.com/ja/tracing/service_catalog/service_metadata_structure
+[7]: https://docs.datadoghq.com/resources/xml/Datadog-SNow_Update_Set.xml
+[8]: https://app.datadoghq.com/account/settings#integrations/servicenow
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html

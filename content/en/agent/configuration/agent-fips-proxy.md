@@ -8,6 +8,9 @@ further_reading:
 - link: "agent/configuration/proxy"
   tag: "Documentation"
   text: "Agent Proxy Configuration"
+- link: "https://www.datadoghq.com/blog/datadog-fips-enabled-agent/"
+  tag: "Blog"
+  text: "Monitor highly regulated workloads with Datadog's FIPS-enabled Agent"
 algolia:
   rank: 80
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
@@ -19,7 +22,7 @@ algolia:
 
 The Datadog Agent FIPS Proxy ensures that communication between the Datadog Agent and Datadog uses FIPS-compliant encryption.
 
-The Datadog Agent FIPS Proxy is a separately distributed component that you deploy on the same host as the Datadog Agent. The proxy acts as an intermediary between the Agent and Datadog intake. The Agent communicates with the Datadog Agent FIPS Proxy, which encrypts payloads using a FIPS 140-2 validated cryptography and relays the payloads to Datadog.
+The Datadog Agent FIPS Proxy is a separately distributed component that you deploy on the same host as the Datadog Agent. The proxy acts as an intermediary between the Agent and Datadog intake. The Agent communicates with the Datadog Agent FIPS Proxy, which encrypts payloads using a FIPS 140-2 validated cryptography and relays the payloads to Datadog. The Datadog Agent and the Agent FIPS Proxy must be configured in tandem to communicate with one another.
 
 ## Supported platforms and limitations
 
@@ -31,7 +34,7 @@ Supported platforms (64-bit x86):
 
 |||
 | ---  | ----------- |
-| Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04|
+| Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12 (beta)|
 | Cloud and container| Amazon ECS<br>AWS EKS (Helm)|
 
 **Note**: arm64 architecture is available in beta

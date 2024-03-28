@@ -7,13 +7,13 @@ further_reading:
   text: Datadog 클러스터 에이전트 소개
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: 블로그
-  text: Datadog 메트릭으로 쿠버네티스 작업량 오토스케일링
+  text: Datadog 메트릭으로 Kubernetes 작업량 오토스케일링
 - link: /agent/cluster_agent/clusterchecks/
   tag: 설명서
   text: 자동탐지로 클러스터 검사 실행
 - link: /agent/kubernetes/daemonset_setup/
   tag: 설명서
-  text: 쿠버네티스 DaemonSet 설정
+  text: Kubernetes DaemonSet 설정
 - link: /agent/cluster_agent/troubleshooting/
   tag: 설명서
   text: Datadog 클러스터 에이전트 트러블슈팅
@@ -38,7 +38,7 @@ Datadog 클러스터 에이전트에서 사용할 수 있는 명령은 다음과
 
 지원되는 환경 변수는 다음과 같습니다:
 
-`DD_API_KEY`
+`DD_API_KEY`                                  
 : 사용자의 [Datadog API key][1].
 
 `DD_HOSTNAME`
@@ -54,7 +54,7 @@ Datadog 클러스터 에이전트에서 사용할 수 있는 명령은 다음과
 : 클러스터 레벨 메타데이터 매핑을 활성화합니다. 기본값은 `true`입니다.
 
 `DD_COLLECT_KUBERNETES_EVENTS`
-: 쿠버네티스 이벤트를 수집하도록 에이전트를 설정합니다. 기본값은 `false`입니다.
+: Kubernetes 이벤트를 수집하도록 에이전트를 설정합니다. 기본값은 `false`입니다.
 
 `DD_LEADER_ELECTION`
 : 리더 선택을 활성화합니다. 이 기능을 활성화하려면 `DD_COLLECT_KUBERNETES_EVENTS`를 `true`로 설정합니다. 기본값은 `false`입니다.
@@ -69,7 +69,7 @@ Datadog 클러스터 에이전트에서 사용할 수 있는 명령은 다음과
 : 클러스터 에이전트가 리더 선택, 이벤트 수집(선택 사항) 및 수평 포드 오토스케일링에 필요한 구성 맵을 만드는 네임스페이스를 설정합니다.
 
 `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`
-: 클러스터 에이전트가 노출되는 쿠버네티스 서비스의 이름입니다. 기본값은 `datadog-cluster-agent`입니다.
+: 클러스터 에이전트가 노출되는 Kubernetes 서비스의 이름입니다. 기본값은 `datadog-cluster-agent`입니다.
 
 `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`
 : API 서버를 쿼리하여 로컬 캐시를 다시 동기화하는 빈도(초)입니다. 기본값은 5분 또는 `300` 초입니다.
@@ -77,8 +77,8 @@ Datadog 클러스터 에이전트에서 사용할 수 있는 명령은 다음과
 `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`
 : API 서버와 통신하는 클라이언트의 시간 제한(초)입니다. 기본값은 `60`초입니다.
 
-`DD_EXPVAR_PORT`
-: Datadog 클러스터 에이전트에서 [expvar][2] 공용 변수를 가져오기 위한 포트입니다. 기본값은 `5000`포트입니다.
+`DD_METRICS_PORT`                              
+: Datadog 클러스터 에이전트 메트릭 포트. 기본값은 포트 `5000`.
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`
 : 여러 오토스케일러에서 메트릭 집단을 처리하기 위해 대기한 시간(초)입니다. 기본값은 `10`초입니다.
@@ -118,6 +118,21 @@ Datadog 클러스터 에이전트에서 사용할 수 있는 명령은 다음과
 
 `DD_CLUSTER_CHECKS_EXTRA_TAGS`
 : 클러스터 검사 메트릭에 태그를 추가합니다.
+
+`DD_PROXY_HTTPS`                
+: HTTPS 요청의 프록시 서버를 설정합니다.
+
+`DD_PROXY_HTTP`                
+: HTTP 요청의 프록시 서버를 설정합니다.
+
+`DD_PROXY_NO_PROXY`                
+: 프록시를 바이패스하는 호스트 목록을 설정합니다. 이 목록은 띄어쓰기로 구분됩니다.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_CPU`
+: init 컨테이너의 CPU 요청과 제한을 구성합니다.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
+: init 컨테이너의 메모리 요청과 제한을 구성합니다.
 
 ## 참고 자료
 

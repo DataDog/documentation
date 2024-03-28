@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_glue/
 draft: false
 git_integration_title: amazon_glue
 has_logo: true
-integration_id: amazon-glue
+integration_id: ''
 integration_title: AWS Glue
 integration_version: ''
 is_public: true
@@ -21,15 +21,16 @@ short_description: AWS Glue のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Glue は、シンプルかつコスト効率よくデータを分類、クリーニング、補完したり、さまざまなデータストア間のデータ移動を高い信頼性で行うことができるフルマネージド型 ETL (抽出、変換、ロード) サービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての Glue メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -38,7 +39,7 @@ AWS Glue は、シンプルかつコスト効率よくデータを分類、ク�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Glue` が有効になっていることを確認します。
 2. [Datadog - AWS Glue インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -54,21 +55,21 @@ AWS Glue から S3 バケットまたは CloudWatch のいずれかにログを�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_glue" >}}
 
 
-### イベント
+### ヘルプ
 
 AWS Glue インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS Glue インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

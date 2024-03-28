@@ -48,7 +48,8 @@ title: メトリクスの概要
 
 * **Configure Tags**: Metrics without Limits™ を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
 
-{{< img src="metrics/summary/bulkconfig.mp4" alt="一括メトリクスタグコンフィギュレーション" video=true style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="一括メトリクスタグ構成" video="true" style="width:100%;" >}}
+
 
 ## メトリクスの詳細サイドパネル
 
@@ -143,10 +144,11 @@ Metrics without Limits™ は、Agent やコードレベルの変更を必要と
 
 1. **Metrics Summary** テーブルでカスタムディストリビューションのメトリクス名をクリックし、メトリクス詳細のサイドパネルを開きます。
 2. **Manage Tags** ボタンをクリックして、タグコンフィギュレーションモーダルを開きます。
-3. **Custom...** タブをクリックすると、クエリで使用できるようにするタグをカスタマイズすることができます。タグコンフィギュレーションは、保持したいタグの_許可リスト_です。
-4. **Save** を選択する前に、カーディナリティ推定機能で提案した許可リストの効果をプレビューします。
 
-**注**: 許可リストベースのタグのカスタマイズでは、タグの除外はサポートされていません。`!` で始まるタグは追加できません。また、カーディナリティ推定機能では、メトリクスが 48 時間より古いことが要求されます。
+3. **Include tags...** または **Exclude tags...** を選択して、クエリに含めるタグまたは除外するタグをカスタマイズします。タグ構成の詳細については、[Metrics without Limits][10] ドキュメントを参照してください。
+4. **Save** を選択する前に、カーディナリティ推定機能を用いて提案されたタグ構成の効果をプレビューします。
+
+**注**: カーディナリティ推定機能では、メトリクスが 48 時間より古い必要があります。
 
 ### クエリ可能なタグ 
 
@@ -169,7 +171,7 @@ Metrics without Limits™ は、Agent やコードレベルの変更を必要と
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]:/ja/metrics/metrics-without-limits
+[10]: /ja/metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /ja/metrics/explorer/
 [3]: /ja/dashboards/

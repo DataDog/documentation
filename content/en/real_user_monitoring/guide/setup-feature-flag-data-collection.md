@@ -95,7 +95,7 @@ Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/flutter/
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
 {{% /tab %}}
 {{% tab "React Native" %}}
 
@@ -150,7 +150,7 @@ For more information about initializing Amplitude's SDK, see Amplitude's [iOS SD
     func track(exposure: Exposure) {
       // Send the feature flag when Amplitude reports the exposure
       if let variant = exposure.variant {
-        Global.rum.addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+        RUMMonitor.shared().addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
       }
     }
   }
@@ -217,7 +217,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```swift
-   Global.rum.addFeatureFlagEvaluation(key, value);
+   RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -454,7 +454,7 @@ For more information about initializing Split's SDK, see Split's [iOS SDK docume
   config.impressionListener = { impression in
       if let feature = impression.feature,
           let treatment = impression.treatment {
-          Global.rum.addFeatureFlagEvaluation(name: feature, value: treatment)
+          RUMMonitor.shared().addFeatureFlagEvaluation(name: feature, value: treatment)
       }
   }
 ```
@@ -547,7 +547,7 @@ const client = factory.client();
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Feature flag tracking is available in the RUM Browser SDK. For detailed set up instructions, visit [Getting started with feature flag data in RUM](https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection).
+Initialize Statsig's SDK with `statsig.initialize`.
 
 1. Update your Browser RUM SDK version 4.25.0 or above.
 2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]`.

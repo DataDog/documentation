@@ -14,10 +14,6 @@ further_reading:
 <div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 
-{{% site-region region="ap1"%}}
-<div class="alert alert-primary">Datadog PrivateLink in AP1 is currently in private beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
-{{% /site-region %}}
-
 {{% site-region region="us,ap1" %}}
 
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.

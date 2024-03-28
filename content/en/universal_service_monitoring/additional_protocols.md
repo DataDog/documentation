@@ -13,8 +13,8 @@ further_reading:
 ---
 
 {{< callout url="https://docs.google.com/forms/d/1dYRQxWEAC3nFsv75tlG0hbiPXd899r36v5R2ar6hJLE/" >}}
-  Cloud service discovery and support for additional protocols and traffic encryption methods are in private beta. 
-{{< /callout >}} 
+  Cloud service discovery and support for additional protocols and traffic encryption methods are in private beta.
+{{< /callout >}}
 
 ## Discovering cloud services and third-party APIs
 
@@ -27,20 +27,10 @@ Universal Service Monitoring can discover the following third-party API endpoint
 
 ## Additional protocols and methods of traffic encryption
 
-Request access and ensure your Datadog Agent is upgraded to at least version 7.48.0 to gain access to the following features.
+Request access and ensure your Datadog Agent is upgraded to at least version 7.49.0 to gain access to the following features.
 
-<div class="alert alert-info"><p>The following support does <strong>not</strong> include:
-<ul><li>Monitoring services that use TLS with gRPC/HTTP2</li> 
-<li>Monitoring Go-TLS applications where the Golang server upgrades the HTTP connection to HTTP2.</li></ul></p></div>
-
-Istio and mTLS
-: Universal Service Monitoring discovers, maps, and monitors services running in an Istio service mesh and using mTLS encryption. 
-
-gRPC and HTTP2 
+gRPC and HTTP2
 : Universal Service Monitoring decodes gRPC and HTTP2 protocols.
-
-Go and TLS
-: Universal Service Monitoring supports applications written in Golang and using TLS encryption.
 
 
 ## Further reading

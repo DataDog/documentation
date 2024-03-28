@@ -27,7 +27,11 @@ With these three tags, you can:
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
-**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+**Notes**:
+
+- The `version` tag is expected to change with each new application deployment. Two different versions of your application's code should have distinct `version` tags.
+- The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+- Host information is excluded for database and cache spans because the host associated with the span is not the database/cache host.
 
 ### Requirements
 
@@ -327,7 +331,7 @@ To form a single point of configuration for all telemetry emitted directly from 
    When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
-[1]: /real_user_monitoring/connect_rum_and_traces/
+[1]: /real_user_monitoring/platform/connect_rum_and_traces/
 [2]: /real_user_monitoring/browser/#setup
    {{% /tab %}}
 
@@ -416,7 +420,7 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
-[10]: /real_user_monitoring/connect_rum_and_traces/
+[10]: /real_user_monitoring/platform/connect_rum_and_traces/
 [11]: /getting_started/synthetics/
 [12]: /integrations/statsd/
 [13]: https://www.chef.io/

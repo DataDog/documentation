@@ -91,7 +91,7 @@ DatadogRUM.xcframework
 
 ### Specify application details in the UI
 
-1. Navigate to [**UX Monitoring** > **RUM Applications** > **New Application**][5].
+1. Navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][5].
 2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][12].
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM iOS Data Collected][14].

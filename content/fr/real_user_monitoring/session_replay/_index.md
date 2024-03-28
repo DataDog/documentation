@@ -46,18 +46,21 @@ Session Replay est disponible dans le SDK RUM Browser. Pour commencer à recuei
 
 ## Utilisation
 
-L'enregistrement Session Replay ne commence pas automatiquement après que `init()` a été appelé. Pour le lancer, appelez `startSessionReplayRecording()`. Cela vous permet de démarrer un enregistrement lorsque certaines conditions sont respectées. Par exemple, pour enregistrer uniquement les sessions d'utilisateurs authentifiés :
+Depuis la version 5.0.0 du SDK Browser RUM, l'enregistrement Session Replay commence automatiquement après que `init()` a été appelé. Pour démarrer un enregistrement lorsque certaines conditions sont respectées, utilisez le paramètre d'initialisation `startSessionReplayRecordingManually` et appelez `startSessionReplayRecording()`.
+
+Par exemple, pour enregistrer uniquement les sessions utilisateur authentifiées, utilisez ce qui suit :
 
 ```javascript
 window.DD_RUM.init({
-  applicationId: '<DATADOG_APPLICATION_ID>',
-  clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>',
+  applicationId: '<ID_APPLICATION_DATADOG>',
+  clientToken: '<TOKEN_CLIENT_DATADOG>',
+  site: '<SITE_DATADOG>',
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
   sessionSampleRate: 100,
-  sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+  sessionReplaySampleRate: 100,
+  startSessionReplayRecordingManually: true,
   ...
 });
 
@@ -68,9 +71,11 @@ if (user.isAuthenticated) {
 
 Pour arrêter l'enregistrement Session Replay, appelez `stopSessionReplayRecording()`.
 
+<div class="alert alert-warning">Pour les versions du SDK Browser RUM antérieures à la v5.0.0, l'enregistrement Session Replay ne commence pas automatiquement. Appelez `startSessionReplayRecording()` pour débuter l'enregistrement.</div>
+
 ## Désactiver Session Replay
 
-Pour arrêter les enregistrements de session, supprimez `startSessionReplayRecording()` et définissez `sessionReplaySampleRate` sur `0`. Cela mettra fin à la collecte de données pour les [solutions Browser RUM et Session Replay][6], y compris les replays.
+Pour arrêter les enregistrements de session, définissez `sessionReplaySampleRate` sur `0`. Cela met fin à la collecte de données pour les [solutions Browser RUM et Session Replay][6].
 
 ## Rétention
 
@@ -78,16 +83,21 @@ Par défaut, les données Session Replay sont conservées pendant 30 jours.
 
 Pour prolonger la durée de rétention jusqu'à 15 mois, vous pouvez activer l'option _Extended Retention_ (rétention prolongée) sur des Sessions Replays spécifiques. Ces sessions doivent être inactives (l'utilisateur a terminé son expérience).
 
-La rétention prolongée s'applique uniquement à Session Replay et n'inclut pas les événements associés. Les 15 mois commencent à l'activation de la rétention prolongée, et non à la collecte de la session.
+La rétention prolongée s'applique uniquement à Session Replay et n'inclut pas les événements associés. Les 15 mois commencent à l'activation de la rétention prolongée, et non à la collecte de la session.
 
-Vous pouvez désactiver la rétention prolongée à tout moment. Si le Session Replay a été recueilli il y a moins de 30 jours, il expire à la fin de la fenêtre initiale de 30 jours. Si vous désactivez la rétention prolongée sur un Session Replay de plus de 30 jours, celui-ci expire immédiatement.
+Vous pouvez désactiver la rétention prolongée à tout moment. Si l'enregistrement Session Replay a été recueilli il y a moins de 30 jours, il expire à la fin de la fenêtre initiale de 30 jours. Si vous désactivez la rétention prolongée sur un enregistrement Session Replay de plus de 30 jours, celui-ci expire immédiatement.
 
 {{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Activer la rétention prolongée" style="width:100%;" >}}
+
+Le diagramme ci-dessous décrit les données qui sont conservées pendant une durée prolongée.
+
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagramme des données conservées pendant une durée prolongée" style="width:100%;" >}}
+
 
 
 ## Session Replay sur mobile
 
-Consultez la section [Session Replay pour mobile][5] pour en savoir plus.
+Consultez la section [Session Replay sur mobile][5] pour en savoir plus.
 
 ## Pour aller plus loin
 

@@ -30,9 +30,11 @@ title: OpenTelemetry ガイド
 
 
 {{< whatsnext desc="OpenTelemetry ガイド" >}}
+    {{< nextlink href="/opentelemetry/guide/otel_api_tracing_interoperability/" >}}OpenTelemetry API と Datadog インスツルメンテーショントレースの相互運用性{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}OpenTelemetry によるデルタ一時性メトリクスの生成{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/semantic_mapping/" >}}OpenTelemetry のセマンティック規則と Datadog の規則をマッピングする{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}OpenTelemetry によるデルタ時系列メトリクスの生成{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/semantic_mapping/" >}}OpenTelemetry のリソース属性セマンティック規則と Datadog の規則をマッピングする{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/metrics_mapping/" >}}OpenTelemetry のメトリクス規則と Datadog の規則をマッピングする{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}OTLP ヒストグラムのヒートマップとしての視覚化{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/switch_from_processor_to_connector/" >}}OpenTelemetry APM メトリクスを Datadog プロセッサから Datadog Connector に切り替える{{< /nextlink >}}
 {{< /whatsnext >}}

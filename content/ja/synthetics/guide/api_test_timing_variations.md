@@ -1,13 +1,13 @@
 ---
 aliases:
 - /ja/synthetics/api_test_timing_variations
-description: API テストのタイミングと各バリエーションのトラブルシューティングを理解する
+description: API テストのタイミングを理解し、その変動に対してトラブルシューティングします。
 further_reading:
 - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
   tag: ドキュメント
   text: Synthetics API テストのメトリクス
 kind: documentation
-title: API テストのタイミングと各バリエーションのトラブルシューティングを理解する
+title: API テストのタイミングの理解と、その変動に対するトラブルシューティング
 ---
 
 
@@ -37,7 +37,7 @@ Synthetic テストは以下を測定する[メトリクス][1]を収集しま�
 
 `synthetics.dns.response.time` メトリクスと `*.dns.time`メトリクスは、ドメイン名の解決にかかった時間を測定します。Synthetic API テストでは、ドメイン名の解決に Google、CloudFlare、AWS、Azure などの一般的なDNS サーバーを使用しています。これらのサーバーは[プライベートロケーション][3]または [DNS テスト][4]でオーバーライドできます。
 
-これらのメトリクスは、API テストの URL フィールドにドメイン名が含まれる場合にのみ測定されます。IP アドレスを使用した場合 DNS 解決はスキップされ、これらのメトリクスの時系列は表示されません。
+これらのメトリクスは、API テストの URL フィールドにドメイン名が含まれている場合にのみ計測されます。IP アドレスを使用すると、DNS 解決がスキップされ、これらのメトリクスの時系列データは表示されません。
 
 
 リダイレクトがあった場合、DNS 解決時間は最後のリクエストにのみ対応します。

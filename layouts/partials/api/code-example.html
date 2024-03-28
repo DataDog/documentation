@@ -149,7 +149,7 @@
                                               {{- end -}}
                                             {{- else -}}
                                               {{- $exampleValue = $exampleDefinition.value -}}
-                                              {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
+                                              {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json") (hasPrefix $contentType "multipart/form-data")) -}}
                                                   {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                                               {{- end -}}
                                             {{- end -}}
@@ -206,7 +206,7 @@
                                         {{- end -}}
                                       {{- else -}}
                                         {{- $exampleValue = $exampleDefinition.value -}}
-                                        {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
+                                        {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json") (hasPrefix $contentType "multipart/form-data")) -}}
                                             {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                                         {{- end -}}
                                       {{- end -}}

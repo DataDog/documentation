@@ -9,12 +9,12 @@ further_reading:
   tag: ドキュメント
   text: Synthetic モニタリングの設定
 kind: documentation
-title: Synthetics で RUM とセッションリプレイを確認する
+title: Synthetic の RUM 機能のプレビューを見る
 ---
 
 ## 概要
 
-<div class="alert alert-info">Real User Monitoring を導入していない場合、Synthetic ブラウザテストの実行から RUM のプレビュー、セッションリプレイ、エラートラッキング、追加パフォーマンスデータにアクセスできます。</div>
+<div class="alert alert-info">Real User Monitoring を導入している場合、Synthetic ブラウザテストの実行を通じて RUM、セッションリプレイ、エラートラッキング、および追加のパフォーマンスデータのプレビューにアクセスできます。</div>
 
 Synthetic ブラウザテストは、Real User Monitoring SDK を組み込み、以下の確認を可能にします。
 

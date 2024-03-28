@@ -102,7 +102,7 @@ AWS CLI で設定する例としては、[Kinesis を使ったサブスクリプ
 
 [CloudWatch][1] のロググループインデックスページの **Subscriptions** をチェックして、新しい Kinesis ストリームがロググループをサブスクライブしているかを確認します。
 
-### Datadog で AWS Kinesis ログを検索する
+### Datadog で Amazon Kinesis のログを検索する
 
 Amazon Kinesis 配信ストリームを設定した後、Datadog で配信ストリームにサブスクライブされたログを分析できます。
 

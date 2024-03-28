@@ -169,7 +169,7 @@ With the third method, you need to explicitly install the `datadog-signing-keys`
 `datadog-signing-keys` versions before 1.1.0 do not handle the following corner cases:
 
 * On Ubuntu >= 16 and Debian >= 9, only `/usr/share/keyrings/datadog-archive-keyring.gpg` was created, but `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` was not.
-* If the APT source list file (e.g. `/etc/apt/sources.list.d/datadog.list`) does not contain the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`, APT never knows about the new key. Any operations with the Datadog repository will fail after the key rotation.
+* If the APT source list file (For example, `/etc/apt/sources.list.d/datadog.list`) does not contain the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`, APT never knows about the new key. Any operations with the Datadog repository will fail after the key rotation.
 
 `datadog-signing-keys` version 1.1.0 addresses this issue by creating `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when `/etc/apt/sources.list.d/datadog.list` doesn't contain the proper `signed-by` option. This ensures that the above corner case is covered as well.
 

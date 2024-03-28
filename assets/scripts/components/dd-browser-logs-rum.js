@@ -32,12 +32,13 @@ if (window.DD_RUM) {
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
             trackInteractions: true,
+            trackUserInteractions: true,
             trackFrustrations: true,
             enableExperimentalFeatures: ["clickmap"],
             sessionSampleRate: 100,
             sessionReplaySampleRate: 50,
             allowedTracingOrigins: [window.location.origin],
-            internalAnalyticsSubdomain: 'iam-rum-intake'
+            internalAnalyticsSubdomain: IA_SUBDOMAIN
         });
 
         window.DD_RUM.startSessionReplayRecording();
@@ -60,7 +61,7 @@ if (window.DD_LOGS) {
         env,
         service: 'docs',
         version: CI_COMMIT_SHORT_SHA,
-        internalAnalyticsSubdomain: 'iam-rum-intake'
+        internalAnalyticsSubdomain: IA_SUBDOMAIN
     });
 
     // global context

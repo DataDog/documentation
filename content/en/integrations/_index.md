@@ -6,6 +6,9 @@ aliases:
     - /integrations/verisign_openhybrid/
     - /integrations/snyk/
     - /integrations/lightstep_incident_response/
+    - /integrations/mainstorconcept_ziris/
+    - /integrations/rookout/
+    - /integrations/rookout_license/
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
@@ -88,6 +91,10 @@ cascade:
     path: /integrations/stormforge_license.md
   aliases:
     - /integrations/stormforge_stormforge_license/
+- _target:
+    path: /integrations/feed.md
+  aliases:
+    - /integrations/rss/
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

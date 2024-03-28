@@ -29,6 +29,7 @@ further_reading:
 - .NET 5
 - .NET 6
 - .NET 7
+- .NET 8
  
 ## Automatic configuration
 
@@ -42,6 +43,8 @@ If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL
 
 - **Kubernetes**: You _must_ [bind the DogstatsD port to a host port][4].
 - **ECS**: [Set the appropriate flags in your task definition][5].
+
+Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][7].
 
 ## Data Collected
 
@@ -73,3 +76,4 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 [4]: /developers/dogstatsd/?tab=kubernetes#agent
 [5]: /agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30412/net-runtime-metrics
+[7]: /developers/dogstatsd/unix_socket/

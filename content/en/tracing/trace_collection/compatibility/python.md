@@ -22,16 +22,19 @@ Two release branches are supported:
 
 | Release    | Support level        |
 |------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+| `>=1.0,<2` | Maintenance          |
+| `>=2.0,<3` | General Availability |
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions  |
+|---------|-----------------------|---------|-----------------|---------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7+            | `>=2`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7+            | `>=2`                     |
+| Windows | 64bit, 32bit          | CPython | 3.7+            | `>=2`                     |
 
 ## Integrations
 
@@ -105,10 +108,10 @@ The `ddtrace` library includes support for the following libraries:
 | [asyncio][46]     | Fully Supported   | > Python 3.7 yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
 | [Botocore][47]    | >= 1.4.51         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
 | [Boto2][48]       | >= 2.29.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
-| [Celery][49]      | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Celery][49]      | >= 4.4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
 | [Consul][50]      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
 | [Futures][51]     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
-| [gevent][52]      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [gevent][52]      | >= 20.12          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][53]        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
 | [Logbook][66]     | >= 1.0.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#logbook     |

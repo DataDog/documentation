@@ -34,7 +34,7 @@ further_reading:
 
 - **Custom spans**: Configure custom spans
 
-- **Custom pre-defined tags**: Configure [custom tags][12] and metrics at runtime
+- **Custom pre-defined tags**: Configure [custom tags][12] and measures at runtime
 
 - **Parameters**: Set custom parameters such as default branch name and Git information
 
@@ -360,7 +360,7 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
-### Correlate infrastructure metrics 
+## Correlate infrastructure metrics
 
 If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
 
@@ -535,6 +535,81 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Enable Test Visibility
+
+This is an optional step that enables the collection of tests data using [Test Visibility][16].
+
+See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
+
+There are different ways to enable Test Visibility inside a Jenkins job or pipeline:
+1. Using the Jenkins configuration UI.
+2. Adding the `datadog` step inside the pipeline script.
+3. Configuring the tracer manually.
+
+For pipelines that spin up a Docker container to execute tests, you can only configure the tracer manually.
+
+### Enable with the Jenkins configuration UI
+
+UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or newer.
+
+This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
+For these pipelines use declarative configuration with the `datadog` step (described in the next section).
+
+To enable Test Visibility via UI do the following:
+1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
+2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
+3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
+4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for these languages, follow the manual [configuration instructions][18].
+5. Optionally, provide [additional configuration settings][18].
+6. Click **Save**.
+
+{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}
+
+### Enable with the `datadog` pipeline step
+
+This configuration option is available in Datadog Jenkins plugin v5.6.2 or newer.
+
+In declarative pipelines, add the step to a top-level `options` block like so:
+
+```groovy
+pipeline {
+    agent any
+    options {
+        datadog(testVisibility: [
+            enabled: true,
+            serviceName: "my-service", // the name of service or library being tested
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
+            additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
+        ])
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello world."
+            }
+        }
+    }
+}
+```
+
+In a scripted pipeline, wrap the relevant section with the `datadog` step like so:
+
+```groovy
+datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
+  node {
+    stage('Example') {
+      echo "Hello world."
+    }
+  }
+}
+```
+
+The other `datadog` settings, such as `collectLogs` or `tags` can be added alongside the `testVisibility` block.
+
+### Enable with manual tracer configuration
+
+Follow the manual Test Visibility [configuration instructions][17] that are specific to your language.
+
 ## Set the default branch name
 
 To report pipeline results, attach the default branch name (for example, `main`) to pipeline spans in an attribute called `git.default_branch`. This is usually done automatically, but in some cases the plugin cannot extract this information because it might not be provided by Jenkins.
@@ -554,11 +629,12 @@ pipeline {
 }
 {{< /code-block >}}
 
-## Propagate Git information in pipelines without a Jenkinsfile from SCM
+## Propagate Git information from SCM
 
-The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository, and you're configuring the pipeline directly in Jenkins using the `checkout` step.
+The Jenkins plugin is capable of automatically detecting Git information associated with a build or a pipeline.
+However, depending on the Jenkins version and the pipeline details, there may be cases when automatic Git data detection is not possible.
 
-In this case, you can propagate the Git information to the environment variables in your build. Use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
+In this case you can make the Git information available to the plugin by using the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
 
 {{< tabs >}}
 {{% tab "Using Declarative Pipelines" %}}
@@ -622,10 +698,10 @@ node {
 
 ## Set Git information manually
 
-The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables are not always set
-automatically due to dependencies on the Git plugin that is being used in the pipeline.
+In case the plugin cannot detect Git information automatically and propagating Git data via SCM is not an option,
+the necessary Git information can be set manually.
 
-If the Git information is not detected automatically, you can set the following environment variables manually.
+To do so, set the following environment variables.
 
 **Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
 
@@ -784,6 +860,8 @@ You can configure the Jenkins Plugin to include or exclude some pipelines:
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
 **Example**: `susans-job,johns-.*,prod_folder/prod_release`
 
+Lists of included and excluded jobs can contain regular expressions, but not glob patterns. To include a job with a specific prefix, use `prefix-.*`—not `prefix-*`.
+
 ## Visualize pipeline data in Datadog
 
 Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.
@@ -881,6 +959,9 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
 [10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
 [11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
-[12]: /continuous_integration/pipelines/custom_tags_and_metrics/
+[12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/
 [15]: /account_management/teams/
+[16]: /continuous_integration/tests/
+[17]: /continuous_integration/tests/setup/
+[18]: /tracing/trace_collection/library_config/

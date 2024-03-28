@@ -13,13 +13,14 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | ASM capability                   | Minimum Go tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection| 1.47.0  |
+| API Security | 1.59.0 |
 | Threat Protection |  1.50.0   |
 | Customize response to blocked requests | 1.53.0 |
-| Vulnerability Management for Open Source Software (OSS) | 1.49.0 |
-| Vulnerability Management for Code-level (beta) | not supported |
+| Software Composition Analysis (SCA) | 1.49.0 |
+| Code Security (beta) | not supported |
 | Automatic user activity event tracking | not supported |
 
-The minimum tracer version to get all supported ASM capabilities for Go is 1.50.0.
+The minimum tracer version to get all supported ASM capabilities for Go is 1.59.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.
 
@@ -65,6 +66,9 @@ The Go packages listed in this page are relevant for ASM. You can also find more
 | [echo v4][9]     | {{< X >}}  | {{< X >}} |
 | [echo v3][10]     | {{< X >}} | {{< X >}} |
 | [chi][12] | {{< X >}} | {{< X >}} |
+| [graphql-go][17] | {{< X >}} | {{< X >}} |
+| [gqlgen][18] | {{< X >}} | {{< X >}} |
+
 
 ### Networking framework compatibility
 
@@ -95,4 +99,6 @@ The Go packages listed in this page are relevant for ASM. You can also find more
 [14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
 [15]: https://github.com/golang/go/wiki/cgo
 [16]: /tracing/compatibility_requirements/go
+[17]: https://pkg.go.dev/github.com/graphql-go/graphql
+[18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
 

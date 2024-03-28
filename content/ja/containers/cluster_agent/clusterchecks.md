@@ -7,7 +7,7 @@ further_reading:
 - link: /containers/cluster_agent/
   tag: ドキュメント
   text: Datadog Cluster Agent
-- link: /containers/cluster_agent/troubleshooting#cluster-checks
+- link: /containers/troubleshooting/cluster-and-endpoint-checks
   tag: ドキュメント
   text: クラスターチェックのトラブルシューティング
 - link: /containers/guide/clustercheckrunners
@@ -513,5 +513,5 @@ Init Config:
 [10]: /ja/integrations/http_check/
 [11]: /ja/agent/faq/template_variables/
 [12]: /ja/integrations/nginx/
-[13]: /ja/containers/cluster_agent/troubleshooting/#dispatching-logic-in-the-cluster-agent
+[13]: /ja/containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
 [14]: /ja/containers/cluster_agent/commands/#cluster-agent-commands

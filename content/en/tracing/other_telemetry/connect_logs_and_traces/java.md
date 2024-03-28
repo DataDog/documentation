@@ -1,5 +1,5 @@
 ---
-title: Connecting Java Logs and Traces
+title: Correlating Java Logs and Traces
 kind: documentation
 description: 'Connect your Java logs and traces to correlate them in Datadog.'
 code_lang: java
@@ -74,6 +74,25 @@ try {
 } finally {
     MDC.remove("dd.trace_id");
     MDC.remove("dd.span_id");
+}
+```
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+```java
+import org.tinylog.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
+
+// There must be spans started and active before this block.
+try {
+    ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
+
+// Log something
+
+} finally {
+    ThreadContext.remove("dd.trace_id");
+    ThreadContext.remove("dd.span_id");
 }
 ```
 {{% /tab %}}

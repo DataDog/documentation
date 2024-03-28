@@ -29,7 +29,7 @@ RUM は自動的にイベントをキャプチャしますが、自分でイベ�
 
 RUM イベントを検索するには、検索バーの左側にあるドロップダウンメニューから、イベントタイプを選択します。
 
-{{< img src="real_user_monitoring/explorer/search/rum_explorer_search-3.png" alt="RUM エクスプローラー" style="width:100%;">}}
+{{< img src="real_user_monitoring/explorer/search/rum-explorer-search-4.png" alt="RUM エクスプローラー" style="width:100%;">}}
 
 ## 検索クエリ
 
@@ -51,7 +51,7 @@ RUM イベントの検索とタイムフレームの使用については、[検
 
 ファセットには、1 つの属性またはタグの個別メンバーがすべて表示されると共に、表示された RUM イベントの数などの基本的な分析が提供されます。ファセットを使用すると、特定の属性に基づきデータセットの絞り込みや切り口の切り替えができます。値を選択すると、検索バーでフィルターが適用されます。
 
-{{< img src="real_user_monitoring/explorer/rum_facet-2.png" alt="イベントリストの左側にあるファセットのリスト" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/rum-facet-3.png" alt="イベントリストの左側にあるファセットのリスト" style="width:90%;">}}
 
 ファセットを作成するには、[イベントサイドパネル][7]で属性を探してクリックします。これにより、サイドパネルの値の属性のセクション ("Country subdivision" など) が作成されます。
 
@@ -59,7 +59,7 @@ RUM イベントの検索とタイムフレームの使用については、[検
 
 また、左側のパネルから **+ Add** をクリックし、ファセットへのパスを入力または選択することで、セッションのメタデータをファセットにすることができます (例: Virginia)。
 
-{{< img src="real_user_monitoring/explorer/create-facet-1.png" alt="ファセット一覧から +Add ボタンでファセットを作成します" style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/create-facet-3.png" alt="ファセット一覧から +Add ボタンでファセットを作成します" style="width:40%;">}}
 
 **Advanced options** をクリックすると、表示名、タイプ、グループ、説明など、ファセットをさらにカスタマイズすることができます。
 

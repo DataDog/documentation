@@ -21,11 +21,11 @@ further_reading:
   text: "Quick Start Guide"
 ---
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Event Management is not supported for this site.</div>
 {{< /site-region >}}
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeYkh0jFy_wMCLGKZ5019H0DpFvq0fILvyJEt_gRyeGgvRymA/viewform" btn_hidden="false" header="Join the Beta!">}}
+{{< callout url="https://app.datadoghq.com/event/configuration/quick-start" btn_hidden="false" header="Join the Beta!">}}
 Join the Event Management beta to correlate Datadog and third party alerts, change events into actionable insights, centralize investigations, and manage critical issues faster as a team. Read the <a href="https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#event-management">announcement</a> to learn more.
 {{< /callout >}}
 

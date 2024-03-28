@@ -82,7 +82,7 @@ The Datadog Agent is supported on a range of widely used operating systems and p
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
-    <th rowspan='2'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th rowspan='3'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
     <td>5.0</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -91,6 +91,12 @@ The Datadog Agent is supported on a range of widely used operating systems and p
   <tr>
     <td>>= 6.0</td>
     <td><i class='icon-check-bold'></td>
+    <td><= 6.51.1</td>
+    <td><= 7.51.1</td>
+  </tr>
+  <tr>
+    <td>>= 7.0</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
@@ -203,7 +209,6 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 [7]: /agent/basic_agent_usage/fedora/
 
 {{% /tab %}}
-
 {{% tab "Windows" %}}
 
 <table>
@@ -216,44 +221,44 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <th>Notes</th>
   </thead>
   <tr>
-    <th rowspan=2><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=3><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
-    <td><= 6.45.1 </td>
+    <td><= 6.45.1</td>
     <td><= 7.45.1</td>
     <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
   </tr>
   <tr>
-    <td>>= 2012</td>
+    <td>2012/R2</td>
+    <td></td>
+    <td><= 6.49.0</td>
+    <td><= 7.49.0</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>>= 2016</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td></td>
   </tr>
   <tr>
-    <td rowspan=4>Windows</td>
-    <td>>= 7</td>
+    <td rowspan=3>Windows</td>
+    <td>7</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>>= 8.1</td>
+    <td>8.1</td>
     <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
+    <td><= 6.49.0</td>
+    <td><= 7.49.0</td>
     <td></td>
   </tr>
   <tr>
-    <td>11</td>
+    <td>>=10</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
@@ -262,6 +267,10 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 </table>
 
 A check mark ({{< X >}}) indicates support for all minor and patch versions.
+
+To install a specific version of the Windows Agent, see the [installer list][8].
+
+[8]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 
 {{% /tab %}}
 {{% tab "macOS" %}}
@@ -326,6 +335,5 @@ Agent 6 and 7 support the following [AIX][1] versions:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/basic_agent_usage/source/

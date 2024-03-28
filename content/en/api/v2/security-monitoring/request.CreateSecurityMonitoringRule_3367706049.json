@@ -1,0 +1,40 @@
+{
+  "name": "Example-Security-Monitoring",
+  "type": "log_detection",
+  "isEnabled": true,
+  "thirdPartyCases": [
+    {
+      "query": "status:error",
+      "name": "high",
+      "status": "high"
+    },
+    {
+      "query": "status:info",
+      "name": "low",
+      "status": "low"
+    }
+  ],
+  "queries": [],
+  "cases": [],
+  "message": "This is a third party rule",
+  "options": {
+    "detectionMethod": "third_party",
+    "keepAlive": 0,
+    "maxSignalDuration": 0,
+    "thirdPartyRuleOptions": {
+      "defaultStatus": "info",
+      "rootQueries": [
+        {
+          "query": "source:guardduty @details.alertType:*EC2*",
+          "groupByFields": [
+            "instance-id"
+          ]
+        },
+        {
+          "query": "source:guardduty",
+          "groupByFields": []
+        }
+      ]
+    }
+  }
+}

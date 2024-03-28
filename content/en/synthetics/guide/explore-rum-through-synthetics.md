@@ -68,8 +68,8 @@ To navigate back to Synthetics and your test's results, click **View Synthetic T
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/
-[2]: /real_user_monitoring/session_replay/developer_tools/
+[1]: /real_user_monitoring/session_replay/browser/
+[2]: /real_user_monitoring/session_replay/browser/developer_tools/
 [3]: /real_user_monitoring/explorer/
 [4]: /real_user_monitoring/error_tracking/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations

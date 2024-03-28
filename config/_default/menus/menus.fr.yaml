@@ -8984,11 +8984,6 @@ main:
   parent: cloud_workload_security
   url: security/cloud_workload_security/workload_security_rules
   weight: 202
-- identifier: cws_workload_security_profiles
-  name: Profils de sécurité
-  parent: cloud_workload_security
-  url: security/cloud_workload_security/security_profiles
-  weight: 203
 - identifier: cws_agent_expressions
   name: Créer des règles d'Agent personnalisées
   parent: cloud_workload_security
@@ -10020,6 +10015,11 @@ main:
   parent: ide_integrations
   url: developers/ide_integrations/vscode/
   weight: 802
+- identifier: ide_integrations_visual_studio
+  name: Visual Studio
+  parent: ide_integrations
+  url: developers/ide_integrations/visual_studio/
+  weight: 803
 - identifier: dev_community
   name: Communauté
   parent: dev_tools

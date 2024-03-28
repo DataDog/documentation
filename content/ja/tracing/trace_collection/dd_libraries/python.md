@@ -26,113 +26,25 @@ title: Python アプリケーションのトレース
 type: multi-code-lang
 ---
 ## 互換性要件
-最新の Python トレーサーは、CPython バージョン 2.7 と 3.5-3.10 に対応しています。
+最新の Python トレーサーは、CPython バージョン 2.7 と 3.5-3.11 に対応しています。
 
 Datadog の Python バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
 
-## インストールと利用開始
+## はじめに
 
-### アプリ内のドキュメントに従ってください (推奨)
+作業を始める前に、[Agent のインストールと構成][13]が済んでいることを確認してください。
 
-Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+### インスツルメンテーション方法の選択
 
-- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
-- `service`、`env`、`version` タグを動的に設定します。
-- セットアップ中に Continuous Profiler、トレースの 100% の取り込み、およびトレース ID 挿入を有効にします。
+Datadog Agent をデプロイまたはインストールして構成したら、次はアプリケーションをインスツルメンテーションします。アプリが動作するインフラストラクチャー、書かれている言語、必要な構成のレベルに応じて、以下の方法でこれを行うことができます。
 
-### APM 用に Datadog Agent を構成する
+サポートされるデプロイシナリオと言語については、次のページを参照してください。
 
-今インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、デフォルトで `http://localhost:8126` でトレースデータをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
+- [インスツルメンテーションライブラリをローカル挿入する][11] (Agent で)。
+- [Datadog UI からインスツルメンテーションライブラリを挿入する][12] (ベータ版)、または
+- [トレーサーをインストールする](#install-the-tracer)セクションで説明したように、アプリケーションに直接トレーシングライブラリを追加する。[互換性情報][1]を参照してください。
 
-{{< tabs >}}
-{{% tab "コンテナ" %}}
-
-1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
-
-2. コンテナ化された環境でトレースを受信するように Agent を構成する方法については、それぞれの説明を参照してください。
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. アプリケーションがインスツルメントされた後、トレースクライアントはデフォルトで Unix ドメインソケット `/var/run/datadog/apm.socket` にトレースを送信しようとします。ソケットが存在しない場合、トレースは `http://localhost:8126` に送信されます。
-
-   別のソケット、ホスト、またはポートが必要な場合は、環境変数 `DD_TRACE_AGENT_URL` を使用します。以下にいくつかの例を示します。
-
-   ```
-   DD_TRACE_AGENT_URL=http://custom-hostname:1234
-   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
-   ```
-
-   トレース用の接続は、コードで構成することも可能です。
-
-   ```python
-   from ddtrace import tracer
-
-   # Network sockets
-   tracer.configure(
-       https=False,
-       hostname="custom-hostname",
-       port="1234",
-   )
-
-   # Unix domain socket configuration
-   tracer.configure(
-       uds_path="/var/run/datadog/apm.socket",
-   )
-   ```
-
-   同様に、トレースクライアントは Unix ドメインソケット `/var/run/datadog/dsd.socket` に統計情報を送信しようと試みます。ソケットが存在しない場合、統計情報は `http://localhost:8125` に送信されます。
-
-   別の構成が必要な場合は、環境変数 `DD_DOGSTATSD_URL` を使用することができます。以下にいくつかの例を示します。
-   ```
-   DD_DOGSTATSD_URL=udp://custom-hostname:1234
-   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
-   ```
-   統計用の接続は、コードで構成することも可能です。
-
-   ```python
-   from ddtrace import tracer
-
-   # Network socket
-   tracer.configure(
-     dogstatsd_url="udp://localhost:8125",
-   )
-
-   # Unix domain socket configuration
-   tracer.configure(
-     dogstatsd_url="unix:///var/run/datadog/dsd.socket",
-   )
-   ```
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
-
-4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
-
-{{< /site-region >}}
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-AWS Lambda で Datadog APM を設定するには、[サーバーレス関数のトレース][1]ドキュメントを参照してください。
-
-
-[1]: /ja/tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "その他の環境" %}}
-
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、さまざまな環境で利用できます。
-
-その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
-
-[1]: /ja/agent/basic_agent_usage/heroku/#installation
-[2]: /ja/integrations/cloud_foundry/#trace-collection
-[3]: /ja/integrations/amazon_elasticbeanstalk/
-[5]: /ja/integrations/
-[6]: /ja/help/
-{{% /tab %}}
-{{< /tabs >}}
-
-### アプリケーションのインスツルメンテーション
+### アプリケーションをインスツルメントする
 
 <div class="alert alert-info">Kubernetes アプリケーションからトレースを収集する場合、以下の説明の代わりに、Cluster Agent Admission Controller を使用してアプリケーションにトレーシングライブラリを挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local">Admission Controller を使用したライブラリの挿入</a>をお読みください。</div>
 
@@ -158,9 +70,43 @@ ddtrace-run python app.py
 
 セットアップが完了し、アプリケーションでトレーサーを実行したら、`ddtrace-run --info` を実行して、構成が期待通りに動作しているかどうかを確認することができます。このコマンドの出力は、実行中にコード内で行われた構成の変更を反映しないことに注意してください。
 
-## コンフィギュレーション
+## 構成
 
 必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][3]を参照してください。
+
+トレース用の接続は、コードで構成することも可能です。
+
+```python
+from ddtrace import tracer
+
+# ネットワークソケット
+tracer.configure(
+    https=False,
+    hostname="custom-hostname",
+    port="1234",
+)
+
+# Unix ドメインソケットの構成
+tracer.configure(
+    uds_path="/var/run/datadog/apm.socket",
+)
+```
+
+統計用の接続は、コードで構成することも可能です。
+
+```python
+from ddtrace import tracer
+
+# ネットワークソケット
+tracer.configure(
+  dogstatsd_url="udp://localhost:8125",
+)
+
+# Unix ドメインソケットの構成
+tracer.configure(
+  dogstatsd_url="unix:///var/run/datadog/dsd.socket",
+)
+```
 
 ### v1 へのアップグレード
 
@@ -175,3 +121,6 @@ ddtrace v1 にアップグレードする場合は、ライブラリドキュメ
 [3]: /ja/tracing/trace_collection/library_config/python/
 [4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 [5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
+[11]: /ja/tracing/trace_collection/library_injection_local/
+[12]: /ja/tracing/trace_collection/library_injection_remote/
+[13]: /ja/tracing/trace_collection#install-and-configure-the-agent
