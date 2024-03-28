@@ -515,7 +515,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 1. Add the following environment variables on your Jenkins instance machine:
     ```bash
-    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
+    # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
     DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
 
     # Enable log collection
