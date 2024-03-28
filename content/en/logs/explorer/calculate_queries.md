@@ -7,7 +7,7 @@ private: true
 
 ## Overview
 
-Use calculated fields when you want to apply boolean logic, perform arithmetic operations, and/or manipulate strings while querying your logs.
+Use calculated fields when you want to apply Boolean logic, perform arithmetic operations, and/or manipulate strings while querying your logs.
 
 {{< img src="logs/explorer/calculated_query.png" alt="The create a calculated field modal with a formula that concatenates the first name and last name and makes it lowercase" style="width:50%;">}}
 
