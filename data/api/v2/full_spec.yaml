@@ -34250,6 +34250,37 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/validation:
+    post:
+      description: Validate a detection rule.
+      operationId: ValidateSecurityMonitoringRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Validate a detection rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}:
     delete:
       description: Delete an existing rule. Default rules cannot be deleted.
@@ -34427,7 +34458,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 9
+      x-menu-order: 10
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -34471,7 +34502,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -36992,10 +37023,11 @@ paths:
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/usage/application_security:
     get:
+      deprecated: true
       description: 'Get hourly usage for application security .
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageApplicationSecurityMonitoring
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -37408,10 +37440,11 @@ paths:
         type: safe
   /api/v2/usage/lambda_traced_invocations:
     get:
+      deprecated: true
       description: 'Get hourly usage for Lambda traced invocations.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated.. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageLambdaTracedInvocations
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -37470,10 +37503,11 @@ paths:
         type: safe
   /api/v2/usage/observability_pipelines:
     get:
+      deprecated: true
       description: 'Get hourly usage for observability pipelines.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageObservabilityPipelines
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
