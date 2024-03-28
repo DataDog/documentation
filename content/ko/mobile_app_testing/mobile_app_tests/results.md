@@ -33,7 +33,7 @@ title: 모바일 앱 테스트 결과
 
 **Properties** 섹션에서는 테스트 ID, 테스트 생성 및 편집 날짜, 테스트 우선 순위, 환경 태그 및 추가 태그를 확인할 수 있습니다.
 
-**Overview** 
+**Overview**
 : 이 섹션에서는 모바일 애플리케이션, 버전, 위치, 장치 수, 테스트 간격 및 테스트 단계 수를 포함한 신서틱(Synthetic) 테스트 세부 정보에 대해 설명합니다.
 
 **Monitor**
@@ -89,20 +89,11 @@ title: 모바일 앱 테스트 결과
 
 일반적인 모바일 앱 테스트 오류는 다음과 같습니다:
 
-`Element located but it's invisible` 
+`Element located but it's invisible`
 : 요소가 페이지에 있지만 클릭할 수 없습니다. 예를 들어 다른 요소가 그 위에 겹쳐져 있는 경우입니다.
 
 `Cannot locate element`
-: HTML에서 요소를 찾을 수 없습니다.
-
-`Select did not have option`
-: 드롭다운 메뉴에 지정한 옵션이 없습니다.
-
-`Forbidden URL`
-: 테스트에서 지원되지 않는 프로토콜이 발견되었을 수 있습니다. [지원팀에 문의][6]하여 자세한 내용을 확인하세요.
-
-`General test failure`
-: 일반 오류 메시지입니다. 자세한 내용은 [지원팀에 문의][6]하세요.
+: XML에서 요소를 찾을 수 없습니다.
 
 ## 테스트 이벤트
 
