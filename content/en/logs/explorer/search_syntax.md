@@ -134,21 +134,21 @@ Use the syntax `*:search_term` to perform a free text search across all log attr
 
 | Search syntax | Search type | Description                                           |
 | ------------- | ----------- | ----------------------------------------------------- |
-| `*:("hello")` | Full-text   | Searches all log attributes for the term `hello`.     |
+| `*:hello` | Full-text   | Searches all log attributes for the term `hello`.     |
 | `hello`       | Free text   | Searches only the log message for the term `hello`.   |
 
 #### Search term with wildcard example
 
 | Search syntax | Search type | Description                                                                                  |
 | ------------- | ----------- | -------------------------------------------------------------------------------------------- |
-| `*:("hello")` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
-| `*:("hello"*)`| Full-text   | Searches all log attributes for strings that starts with `hello`. For example, `hello_world`.|
+| `*:hello` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
+| `*:hello*`| Full-text   | Searches all log attributes for strings that starts with `hello`. For example, `hello_world`.|
 
 #### Multiple terms with exact match example
 
 | Search syntax       | Search type | Description                                            |
 | ------------------- | ----------- |------------------------------------------------------- |
-| `*:("hello world")` | Full-text   |Searches all log attributes for the term `hello world`. |
+| `*:"hello world"` | Full-text   |Searches all log attributes for the term `hello world`. |
 | `hello world`       | Free text   |Searches only the log message for the term `hello`.     |
 
 #### Multiple terms without exact match example
