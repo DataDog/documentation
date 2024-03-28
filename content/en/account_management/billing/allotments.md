@@ -99,37 +99,37 @@ If they used 1.1 GB during hour 1, 0.9 GB during hour 2, and 1.2 GB during hour 
 
 ## Calculating billable usage
 
-Billable usage refers to any raw usage that is eligible to appear on a user's invoice, excluding organization and product trial usage. Refer to the [Plan and Usage page][3] for context on your billable usage. The following variables determine how billable usage is calculated:
+Billable usage refers to any raw usage that is eligible to appear on a user's invoice, excluding organization and product trial usage. Refer to the [Plan and Usage page][3] to view your billable usage. The following variables determine how billable usage is calculated:
 
-- On-demand option (hourly or monthly)
+- On-demand option
 - Usage aggregation function
 
 ### On-demand option
-On monthly metering, on-demand usage is calculated at the end of the month by comparing billable usage to included usage. On hourly metering, on-demand usage is calculated every hour instead of at the end of the month.
+On monthly metering, on-demand usage is calculated at the end of the month by comparing billable usage to included usage. On hourly metering, on-demand usage is calculated every hour instead of at the end of the month. It is then aggregated over all usage hours in the month, and the commitment is then applied to arrive at a final billable on-demand usage value.
 
 ## Examples
 
 ### Monthly on-demand option
 
-A user has a monthly commitment of 10 APM Pro Hosts and no Ingested Spans commit over a period of three months. Their usage is as follows: 
+An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested Spans commitment per month over a period of three months. Their usage is as follows: 
 
-| Month     | APM host commitment | APM host usage | Ingested spans allotment | Ingested spans usage | On-demand ingested spans usage |
+| Month | APM host commitment | APM host usage | Allotment for Ingested Spans | Included usage for Ingested Spans | Billable usage for Ingested Spans | On-demand usage for Ingested Spans |
 |-----------|---------------------|----------------|--------------------------|----------------------|--------------------------------|
-| July      | 10                  | 5              | 1500 GB                  | 2000 GB              | 500 GB                         |
-| August    | 10                  | 15             | 2250 GB                  | 2000 GB              | 0 GB                           |
-| September | 10                  | 10             | 1500 GB                  | 1500 GB              | 0 GB                           |
+| Month 1  | 10  | 5   | 1500 GB   | 1600 GB   | 2000 GB | 400 GB   |
+| Month 2  | 10  | 15 | 2250 GB  | 2350 GB | 2000 GB  | 0 GB      |
+| Month 3 | 10   | 10   | 1500 GB  | 1600 GB  | 1600 GB | 0 GB  |
 
-For a user with a monthly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 150 GB. 
+For a monthly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 150 GB. 
 
-In **July**, the user was committed to 10 APM hosts but only used 5. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(5, 10) * 150 GB = 1500 GB allotment of Ingested Spans. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their usage and allotment: maximum(0, 2000 – 1500) = 500 GB.
+In **Month 1,**, the organization was committed to 10 APM hosts but only used 5. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(5, 10) * 150 GB = 1500 GB allotment of Ingested Spans. Their included usage for ingested spans was the sum of their commitment and allotment: 1500 GB + 100 GB = 1600 GB. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their billable usage and allotment: maximum(0, 2000 – 1600) = 400 GB.
 
-In **August**, the user was committed to 10 APM hosts but used 15. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(15, 10) * 150 GB = 2250 GB allotment of Ingested Spans. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their usage and allotment: maximum(0, 2000 – 2250) = 0 GB.
+In **Month 2**, the organization was committed to 10 APM hosts but used 15. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(15, 10) * 150 GB = 2250 GB allotment of Ingested Spans. Their included usage for Ingested Spans was the sum of their commitment and allotment: 2250 GB + 100 GB = 2350 GB. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their usage and allotment: maximum(0, 2000 – 2350) = 0 GB.
 
-In **September**, the user was committed to 10 APM hosts, and they used 10. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(10, 10) * 150 GB = 1500 GB allotment of Ingested Spans. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their usage and allotment: maximum(0, 1500 – 1500) = 0 GB.
+In **Month 3**, the organization was committed to 10 APM hosts, and they used 10. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: maximum(10, 10) * 150 GB = 1500 GB allotment of Ingested Spans. Their included usage for Ingested Spans was the sum of their commitment and allotment: 1500 GB + 100 GB = 1600 GB. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their usage and allotment: maximum(0, 1600 – 1600) = 0 GB.
 
 ### Hourly on-demand option
 
-A user has a monthly commit of 10 APM Pro Hosts and 0.3 GB Ingested Spans. Their usage is as follows: 
+An organization has a monthly commit of 10 APM Pro Hosts and 0.3 GB Ingested Spans commitment per month over a period of a month. Their usage is as follows: 
 
 | Timestamp    | APM host commitment | APM host usage | Ingested spans allotment | Ingested spans usage | On-demand ingested spans usage |
 |--------------|---------------------|----------------|--------------------------|----------------------|--------------------------------|
