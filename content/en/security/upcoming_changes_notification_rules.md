@@ -25,11 +25,13 @@ This change will have the following impact on how notifications are generated fo
 
 ## Notification rules source types selector
 
-When you create a notification rule, you will now be required to choose between two different source types (Vulnerability or Signal).
+When you create a notification rule, you will now be required to choose between two different source types (finding or signal).
 
-### What is a vulnerability?
+{{< img src="security/csm/notification_rules_new_selectors.png" alt="New source types for notification rules" width="75%">}}
 
-A vulnerability represents a potential security flaw in your infrastructure. The available options are:
+### What is a finding?
+
+A finding represents a potential security flaw in your infrastructure. The available options are:
 
   - Application library vulnerability
   - Application code vulnerability
@@ -52,12 +54,6 @@ A signal represents suspicious activity that poses an active threat against your
 - Terraformed custom detection rules using the legacy notifications attribute are no longer supported.
 
 ## How to migrate existing notifications
-
-### Legacy notification rules
-
-To migrate notification rules that use the legacy Cloud Configuration and Infrastructure Configuration signals:
-
-**Not yet available in the UI**
 
 ### Detection rule notifications
 
