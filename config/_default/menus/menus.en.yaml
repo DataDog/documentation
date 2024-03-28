@@ -4138,12 +4138,12 @@ main:
     identifier: signals
     weight: 306
   - name: Identity Risks
-    url: security/identity_risks/
+    url: security/cloud_security_management/identity_risks/
     parent: csm
     identifier: csm_identity_risks
     weight: 4
   - name: Vulnerabilities
-    url: security/vulnerabilities
+    url: security/cloud_security_management/vulnerabilities
     parent: csm
     identifier: vulnerabilities
     weight: 5
