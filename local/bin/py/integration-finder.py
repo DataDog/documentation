@@ -53,7 +53,7 @@ def update_repos(integrations_repos):
                     local_repo = git.Repo(local_repo_path)
                     local_repo.remotes.origin.pull(repo[k])
                 except: 
-                    print(f'\n\x1b[31mERROR\x1b[0m:Failed to update {k}: {repo[k]}' +
+                    print(f'\n\x1b[33mWARNING\x1b[0m:Failed to update {k}: {repo[k]}' +
                           '\nContinuing without updating the repo. ' + 
                           f'To resolve, check {k} for a dirty feature branch and commit, ' +
                           'stash, or reset any changes and try again.\n')
