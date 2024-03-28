@@ -1,9 +1,9 @@
 ---
-title: Configuring the Oracle Integration in Agent 7.53.0+
+title: Configuring the Oracle Integration on Agent 7.50.1+
 kind: guide
 ---
 
-The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.0`. This guide describes how to properly configure the new Oracle check.
+The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.0`, and can be configured for Agent `7.50.1` and above. This guide describes how to properly configure the new Oracle check.
 
 ## What has changed?
 

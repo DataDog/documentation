@@ -69,12 +69,13 @@ cascade:
     {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}Which integrations use Jmxfetch?{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="SQL guides:" >}}
+{{< whatsnext desc="Database guides:" >}}
     {{< nextlink href="integrations/guide/collect-more-metrics-from-the-sql-server-integration" tag=" SQL Server" >}}Collect more metrics from the SQL Server integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag=" SQL Server" >}}Collect SQL Server custom metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics" tag=" SQL Server" >}}Use WMI to collect more SQL Server performance metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/connection-issues-with-the-sql-server-integration" tag=" SQL Server" >}}Connection issues with the SQL Server integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/mysql-custom-queries" tag=" MySQL" >}}MySQL custom queries{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/oracle-check-upgrade-7.53.0" tag=" Oracle" >}}Configuring the Oracle Integration in Agent 7.53.0+{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/oracle-check-upgrade-7.50.1" tag=" Oracle" >}}Configuring the Oracle Integration on Agent 7.50.1+{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/deprecated-oracle-integration" tag=" Oracle" >}}Configuring the Oracle Integration on Agent versions lower than 7.50.1{{< /nextlink >}}
 {{< /whatsnext >}}
 
