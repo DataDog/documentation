@@ -602,9 +602,9 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
          enabled: false
    ```
 
-2. Deploy the Datadog Agent with the updated configuration file:
+2. Run the following command:
    ```shell
-   kubectl apply -f /path/to/your/datadog-agent.yaml
+   helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
    ```
 {{< /collapse-content >}}
 
