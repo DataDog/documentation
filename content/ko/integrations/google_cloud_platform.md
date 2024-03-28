@@ -83,10 +83,24 @@ Datadog의 GCP 통합은 <a href="https://cloud.google.com/monitoring/api/metric
 | [Pub/Sub][29]                       | 실시간 메시징 서비스                                                           |
 | [Spanner][30]                       | 수평적으로 확장 가능하고 전 세계적으로 일관된 관계형 데이터베이스 서비스               |
 | [Storage][31]                       | 통합 객체 스토리지                                                                |
-| [Vertex AI][32]                     | 커스텀 머신 러닝(ML) 모델을 구축, 교육 및 배포합니다.                          |
+| [Vertex AI][32]                     | 커스텀 머신 러닝(ML) 모델을 구축, 학습 및 배포합니다.                          |
 | [VPN][33]                           | 관리형 네트워크 기능                                                         |
 
 ## 설정
+
+Datadog의 Google Cloud 통합을 설정하여 Google Cloud 서비스에서 메트릭과 로그를 수집하세요.
+
+### 필수 구성 요소
+
+* 조직에서 도메인별로 ID를 제한하는 경우 Datadog의 고객 ID 를 정책에 허용되는 값으로 추가해야 합니다. Datadog의 고객 ID: `C0147pk0i`
+
+* 서비스 계정 가장 및 프로젝트 자동 검색은 프로젝트를 모니터링할 수 있는 특정 역할과 API를 사용하도록 설정해야 합니다. 시작하기 전에 모니터링하려는 프로젝트에 대해 다음 API가 활성화되어 있는지 확인하세요.
+  * [Cloud Resource Manager API][34]
+  * [Google Cloud Billing API][35]
+  * [Cloud Monitoring API][36]
+  * [Compute Engine API][37]
+  * [Cloud Asset API][38]
+  * [IAM API][39]
 
 ### 메트릭 수집
 
@@ -94,89 +108,77 @@ Datadog의 GCP 통합은 <a href="https://cloud.google.com/monitoring/api/metric
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-    서비스 계정 가장은 {{< region-param key="dd_site_name" >}} 사이트에서 사용할 수 없습니다.
+     {{< region-param key="dd_site_name" >}} 사이트에서는 서비스 계정 가장을 사용할 수 없습니다.
 </div>
 {{% /site-region %}}
 
-[서비스 계정 가장][34]과 자동 프로젝트 검색을 사용하여 Datadog을 [Google Cloud][35]와 통합할 수 있습니다.
+[서비스 계정 가장][40]과 자동 프로젝트 검색을 사용하여 Datadog을 [Google Cloud][41]와 통합할 수 있습니다.
 
-이 방법을 사용하면 관련 프로젝트에 IAM 역할을 할당하여 서비스 계정에 표시되는 모든 프로젝트를 모니터링할 수 있습니다. 이러한 역할을 프로젝트에 개별적으로 할당하거나 조직 또는 폴더 수준에서 이러한 역할을 할당하여 프로젝트 그룹을 모니터링하도록 Datadog을 구성할 수 있습니다. 이러한 방식으로 역할을 할당하면 Datadog이 향후 그룹에 추가될 수 있는 새 프로젝트를 포함하여 지정된 범위의 모든 프로젝트를 자동으로 검색하고 모니터링할 수 있습니다.
+이 방법을 사용하면 관련 프로젝트에 IAM 역할을 할당하여 서비스 계정에 표시되는 모든 프로젝트를 모니터링할 수 있습니다. 이러한 역할을 프로젝트에 개별적으로 할당하거나 조직 또는 폴더 수준에서 이러한 역할을 할당하여 프로젝트 그룹을 모니터링하도록 Datadog을 설정할 수 있습니다. 이러한 방식으로 역할을 할당하면 Datadog이 향후 그룹에 추가될 수 있는 새 프로젝트를 포함하여 지정된 범위의 모든 프로젝트를 자동으로 검색하고 모니터링할 수 있습니다.
 
-##### 필수 요건
-
-* 조직에서 도메인별로 ID를 제한하는 경우 Datadog의 고객 ID를 정책에 허용되는 값으로 추가해야 합니다. Datadog의 고객 ID: `C0147pk0i`
-
-* 서비스 계정 가장과 자동 프로젝트 검색은 프로젝트를 모니터링하기 위해 특정 역할과 API를 활성화해야 합니다. 시작하기 전에 모니터링하려는 프로젝트에 대해 다음 API가 활성화되어 있는지 확인하세요.:
-  * [Cloud Resource Manager API][36]
-  * [Google Cloud Billing API][37]
-  * [Cloud Monitoring API][38]
-  * [Compute Engine API][39]
-  * [Cloud Asset API][40]
-  * [IAM API][41]
-
-##### 1. Google Cloud 서비스 계정 만들기
+#### 1. Google Cloud 서비스 계정 만들기
 
 1. [Google Cloud 콘솔][42]을 엽니다.
 2. **IAM & Admin** > **Service Accounts**로 이동합니다.
-3. 상단의 **Create service account**를 클릭합니다.
-4. 서비스에 고유한 이름을 지정한 후 **Create and continue**를 클릭합니다.
-5. 서비스 계정에 다음과 같은 역할을 추가합니다:
+3. 상단에서 **Create service account**를 클릭합니다.
+4. 서비스 계정에 고유한 이름을 부여한 후 **Create and continue**를 클릭합니다.
+5. 서비스 계정에 다음 역할을 추가합니다.
    * Monitoring Viewer
    * Compute Viewer
    * Cloud Asset Viewer
    * Browser
-6. **Continue**를 클릭한 후 서비스 계정 생성을 완료하기 위해 **Done**을 클릭합니다.
+6. **Continue**를 클릭한 다음 **Done**을 클릭해 서비스 계정 생성을 종료합니다.
 
-{{< img src="integrations/google_cloud_platform/create-service-account.png" alt="'Create service account' 플로우를 보여주는 Google Cloud 콘솔 인터페이스. 'Grant this service account access to project' 아래에 지침에 있는 네 가지 역할이 추가됩니다." style="width:70%;">}}
+{{< img src="integrations/google_cloud_platform/create-service-account.png" alt="서비스 계정 만들기' 흐름을 보여주는 Google Cloud 콘솔 인터페이스 'Grant this service account access to project' 아래에 지침에 있는 네 가지 역할이 추가됩니다." style="width:70%;">}}
 
-##### 2. 서비스 계정에 Datadog 프린시플 추가하기 
+#### 2. 서비스 계정에 Datadog 주체 추가하기
 
 1. Datadog에서 [**Integrations** > **Google Cloud Platform**][43]으로 이동합니다.
-2. **Add GCP Account**를 클릭합니다. 설정된 프로젝트가 없으면 자동으로 이 페이지로 리디렉션됩니다.
-3. 조직에 대한 Datadog 프린시플을 생성하지 않은 경우, **Generate Principal** 버튼을 클릭합니다.
-4. Datadog 프린시플을 복사하고 다음 섹션을 위해 보관하세요.
-   {{< img src="integrations/google_cloud_platform/principal-2.png" alt="'Add New GCP Account' 플로우를 보여주는 Datadog 인터페이스 첫 번째 단계인 'Google에 Datadog Principal 추가'에는 사용자가 Datadog Principal을 생성하고 이를 클립보드에 복사할 수 있는 텍스트 상자가 있습니다. 두 번째 단계인 '서비스 계정 이메일 추가'에는 사용자가 섹션 3에서 완료할 수 있는 텍스트 상자가 있습니다." style="width:70%;">}}
-   [다음 섹션]을 위해 이 창을 열어두세요(#3-complete-the-integration-setup-in-datadog).
-5. [Google Cloud 콘솔][42]에서  **Service Acounts** 메뉴의 [첫 번째 섹션]에서 생성한 서비스 계정을 찾습니다.(#1-create-your-google-cloud-service-account).
-6. **Permissions** 탭으로 이동해 **Grant Access**를 클릭합니디ㅏ.
-   {{< img src="integrations/google_cloud_platform/grant-access.png" alt="Service Acounts의 Permissions 탭이 표시된 Google Cloud 콘솔 인터페이스" style="width:70%;">}}
-7. Datadog 프린시플을 **New principals** 텍스트 상자에 붙여넣습니다.
+2. **Add GCP Account**를 클릭합니다. 설정된 프로젝트가 없으면 이 페이지로 자동 리디렉션됩니다.
+3. 조직에 대한 Datadog 주체를 생성하지 않은 경우 **Generate Principal** 버튼을 클릭합니다.
+4. Datadog 주체를 복사하고 다음 섹션을 위해 보관합니다.
+   {{< img src="integrations/google_cloud_platform/principal-2.png" alt="'새 GCP 계정 추가' 흐름을 보여주는 Datadog 인터페이스 첫 번째 단계인  'Add Datadog Principal to Google'에는 사용자가 Datadog 주체을 생성하고 이를 클립보드에 복사할 수 있는 텍스트 상자가 있습니다. 두 번째 단계인 'Add Service Account Email'에는 사용자가 섹션 3에서 완료할 수 있는 텍스트 상자가 있습니다." style="width:70%;">}}
+   [다음 섹션](#3-complete-the-integration-setup-in-datadog)을 위해 이 창을 열어둡니다
+5. [Google Cloud console][42]의 **Service Acounts** 메뉴에서, [첫 번째 섹션](#1-create-your-google-cloud-service-account)에서 생성한 서비스 계정을 찾습니다.
+6. **Permissions** 탭으로 이동하여 **Grant Access**를 클릭합니다.
+   {{< img src="integrations/google_cloud_platform/grant-access.png" alt="서비스 계정 아래에 권한 탭이 표시된 Google Cloud 콘솔 인터페이스. style="width:70%;">}}
+7. **New principals** 텍스트 상자에 Datadog 주체를 붙여넣기합니다.
 8. **Service Account Token Creator** 역할을 할당한 후 **Save**를 클릭합니다.
-   {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt="'Add principals' 상자와 'Assign roles'' 인터페이스를 보여주는 Google Cloud 콘솔 인터페이스." style="width:70%;">}}
+   {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt="'Add principals' 상자와 'Assign roles' 인터페이스를 보여주는 Google Cloud 콘솔 인터페이스." style="width:70%;">}}
 
-**참고**: 이전에 공유 Datadog 프린시플을 사용하여 액세스를 설정했다면 이 단계를 완료한 후 해당 프린시플에 대한 권한을 취소할 수 있습니다.
+**참고**: 이전에 공유 Datadog 주체를 사용하여 액세스를 구성한 경우 이 단계를 완료한 후 해당 주체에 대한 권한을 취소할 수 있습니다.
 
-##### 3. Datadog에서 통합 설정을 완료하기
+#### 3. Datadog에서 통합 설정을 완료하기
 
-1. Google Cloud 콘솔에서 **Service Account** > **Details** 탭으로 이동합니다. 여기에서 이 Google 서비스 계정과 연결된 이메일을 찾을 수 있습니다. `<sa-name>@<project-id>.iam.gserviceaccount.com`과 같은 형식입니다.
+1. Google Cloud 콘솔에서, **Service Account** > **Details** 탭으로 이동합니다. 여기에서 이 Google 서비스 계정과 연결된 이메일을 찾을 수 있습니다. `<sa-name>@<project-id>.iam.gserviceaccount.com` 형식입니다.
 2. 이 이메일을 복사합니다.
-3. Datadog의 통합 설정 타일로 돌아갑니다([이전 섹션]에서 Datadog 프린시플을 복사한 위치).(#2-add-the-datadog-principal-to-your-service-account)).
-4.**Add Service Account Email** 아래 상자에 복사한 이메일을 붙여넣습니다.
+3. Datadog의 통합 설정 타일로 돌아갑니다([이전 섹션](#2-add-the-datadog-principal-to-your-service-account)에서 Datadog 주체를 복사한 위치).
+4. **Add Service Account Email**아래 상자에 이전에 복사한 이메일을 붙여넣습니다.
 5. **Verify and Save Account**를 클릭합니다.
 
 약 15분 후에 Datadog에 메트릭이 나타납니다.
 
-##### 4. 다른 프로젝트에 역할 할당(선택 사항)
+#### 4. 다른 프로젝트에 역할 할당하기 (선택 사항)
 
-자동 프로젝트 검색은 모니터링할 추가 프로젝트를 추가하는 프로세스를 단순화합니다. 서비스 계정에 다른 프로젝트, 폴더 또는 조직에 대한 액세스 권한을 부여하면 Datadog은 이러한 프로젝트(및 폴더 또는 조직에 중첩된 모든 프로젝트)를 검색하고 자동으로 통합 타일에 추가합니다.
+자동 프로젝트 검색은 모니터링할 프로젝트를 추가하는 프로세스를 단순화합니다. 서비스 계정에 다른 프로젝트, 폴더 또는 조직에 대한 액세스 권한을 부여하면 Datadog은 이러한 프로젝트(및 폴더 또는 조직에 중첩된 모든 프로젝트)를 검색하고 자동으로 통합 타일에 추가합니다.
 
-1. 원하는 범위에서 역할을 할당할 수 있는 적절한 권한이 있는지 확인합니다.
+1. 원하는 범위에서 역할을 할당할 수 있는 적절한 권한이 있는지 확인하세요.
    * Project IAM Admin (또는 이상)
    * Folder Admin
    * Organization Admin
-2. Google Cloud 콘솔에서 **IAM** 페이지로 이동합니다.
-3. 프로젝트, 폴더, 조직을 선택합니다. 
-4. 아직 리소스에 대한 다른 역할이 없는 주 구성원에게 역할을 부여하려면 **Grant Access**를 클릭한 다음 앞서 만든 서비스 계정의 이메일을 입력합니다.
+2. Google Cloud 콘솔에서, **IAM** 페이지로 이동합니다.
+3. 프로젝트, 폴더, 또는 조직을 선택합니다. 
+4. 아직 리소스에 대한 다른 역할이 없는 주 구성원에게 역할을 부여하려면  **Grant Access**를 클릭한 다음 앞서 만든 서비스 계정의 이메일을 입력합니다.
 5. 다음 역할을 할당합니다.
    * Compute Viewer
    * Monitoring Viewer
    * Cloud Asset Viewer
-  **참고**: 브라우저 역할은 서비스 계정의 기본 프로젝트에만 필요합니다.
-6. **Save**를 저장합니다.
+   **참고**: 브라우저 역할은 서비스 계정의 기본 프로젝트에만 필요합니다.
+6. **Save**를 클릭합니다.
 
-#### 설정
+#### 설정 
 
-(선택 사항) 특정 프로젝트의 드롭다운 메뉴 아래에 있는 **Limit Metric Collection** 텍스트 상자에 태그를 입력하여 Datadog에 주입되는 GCE 인스턴스를 제한할 수 있습니다. 정의된 태그 중 하나와 일치하는 호스트만 Datadog로 가져옵니다. 여러 호스트와 일치하는 와일드카드(단일 문자의 경우 `?`, 여러 문자의 경우, `*`), 또는 특정 호스트만 제외하는 `!`를 사용할 수 있습니다. 다음 예에서는 `c1*` 크기의 인스턴스가 포함되지만 스테이징 호스트는 제외됩니다.
+선택적으로 특정 프로젝트의 드롭다운 메뉴 아래에 있는 **Limit Metric Collection** 텍스트 상자에 태그를 입력하여 Datadog으로 가져오는 GCE 인스턴스를 제한할 수 있습니다. 정의된 태그 중 하나와 일치하는 호스트만 Datadog으로 가져옵니다. 와일드카드(단일 문자의 경우`?`, 다중 문자의 경우 `*`)를 사용하여 여러 호스트를 일치시키거나 를 사용하여 특정 호스트를 제외할 수 있습니다. 이 예에는 `c1*` 크기의 모든 인스턴스가 포함되지만 스테이징 호스트는 제외됩니다.
 
 ```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
@@ -188,25 +190,25 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 [Google Cloud Dataflow][45] 및 [Datadog 템플릿][46]을 사용하여 Google Cloud 서비스의 로그를 Datadog으로 전달합니다. 이 방법은 Datadog으로 전달하기 전에 이벤트를 압축하고 일괄 처리하는 기능을 모두 제공합니다. 이 섹션의 지침에 따라 다음을 수행하세요.
 
-[1](#1-create-a-cloud-pubsub-topic-and-subscription). Pub/Sub [주제][47]를 만들고 [서브스크립션을 가져와][48] 설정된 로그 싱크에서 로그를 수신하세요.
-[2](#2-create-a-custom-dataflow-worker-service-account). Dataflow 파이프라인 작업자에게 [최소 권한][49]을 제공하기 위해 커스텀 Dataflow 작업자 서비스 계정을 만듭니다. 
-[3](#3-export-logs-from-google-cloud-pubsub-topic).Pub/Sub 주제에 로그를 게시하려면 [로그 싱크][50]를 만드세요.
-[4](#4-create-and-run-the-dataflow-job). [Datadog 템플릿][46]을 사용하여 Dataflow 작업을 만들어 Pub/Sub 서브스크립션에서 Datadog으로 로그를 스트리밍합니다.
+[1](#1-create-a-cloud-pubsub-topic-and-subscription). 설정된 로그 싱크에서 로그를 수신하려면 Pub/Sub [주제][47] 및 [구독 가져오기][48]를 만듭니다.
+[2](#2-create-a-custom-dataflow-worker-service-account). Dataflow 파이프라인 작업자에게 [최소 권한][49]을 제공하기 위해 커스텀 Dataflow 작업자 서비스 계정을 만듭니다.
+[3](#3-export-logs-from-google-cloud-pubsub-topic). Pub/Sub 주제에 로그를 게시하려면 [로그 싱크][50]를 만듭니다.
+[4](#4-create-and-run-the-dataflow-job). [Datadog 템플릿][46]을 사용하여 Dataflow 작업을 만들어 Pub/Sub 구독에서 Datadog으로 로그를 스트리밍합니다.
 
-GCE 및 GKE 로그를 포함하여 로그 싱크에서 생성한 로깅 필터를 통해 Datadog으로 전송되는 로그를 완전히 제어할 수 있습니다. 필터 작성에 대한 자세한 내용은 Google의 [로깅 쿼리 언어 페이지][51]를 참조하세요.
+GCE 및 GKE 로그를 포함하여 로그 싱크에서 생성한 로깅 필터를 통해 Datadog에 전송되는 로그를 완전히 제어할 수 있습니다. 필터 작성에 대한 자세한 내용은 Google의 [로깅 쿼리 언어 페이지][51]를 참조하세요.
 
 **참고**: Google Cloud Dataflow를 사용하려면 Dataflow API를 활성화해야 합니다. 자세한 내용은 Google Cloud 문서의 [API 활성화][52]를 참조하세요.
 
-GCE 또는 GKE에서 실행되는 애플리케이션에서 로그를 수집하려면 [Datadog Agent][53]를 사용할 수도 있습니다.
+GCE 또는 GKE에서 실행되는 애플리케이션에서 로그를 수집하려면 [Datadog Agent][53]를 사용할 수도 있습니다..
 
 <div class="alert alert-danger">
 
-<a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Pub/Sub Push 서브스크립션을 통한 Google Cloud 로그 수집</a> 다음과 같은 이유로 지원이 중단될 수 있습니다.
-- Google Cloud VPC가 있는 경우 Push 서브스크립션은 VPC 외부 엔드포인트에 액세스할 수 없습니다.
-- Push 서브스크립션은 이벤트 압축이나 일괄 처리를 제공하지 않으므로 매우 적은 양의 로그에만 적합합니다.
+<a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Pub/Sub Push 구독을 통한 Google Cloud 로그 수집</a>은 다음과 같은 이유로 지원 중단되는 중입니다.
 
-<strong>Push</strong>서브스크립션에 대한 문서는 레거시 설정 문제 해결 또는 수정을 위해서만 유지됩니다. 대신 Datadog Dataflow 템플릿과 함께 <strong>Pull</strong>서브스크립션을 사용하여 Google Cloud 로그를 Datadog에 전달하세요.
+- Google Cloud VPC가 있는 경우 Push 구독은 VPC 외부 엔드포인트에 액세스할 수 없습니다.
+- Push 구독은 이벤트 압축이나 일괄 처리를 제공하지 않으므로 매우 적은 양의 로그에만 적합합니다.
 
+<strong>Push</strong> 구독에 대한 문서는 레거시 설정 문제 해결 또는 수정을 위해서만 유지됩니다. 대신 Datadog Dataflow 템플릿과 함께 <strong>Pull</strong> 구독을 사용하여 Google Cloud 로그를 Datadog에 전달하세요.
 </div>
 
 #### 1. Cloud Pub/Sub 주제 및 서브스크립션 만들기
@@ -215,15 +217,15 @@ GCE 또는 GKE에서 실행되는 애플리케이션에서 로그를 수집하�
 
    **참고**: **Pull** 전송 유형을 사용하여 [Cloud Pub/Sub 서브스크립션][55]을 수동으로 설정할 수도 있습니다. Pub/Sub 서브스크립션을 수동으로 만드는 경우 `Enable dead lettering` 체크박스를 **선택 해제**하세요. 자세한 내용은 [지원되지 않는 Pub/Sub 기능][56]을 참조하세요.
 
-{{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="기본 서브스크립션 추가 체크박스가 선택된 Google Cloud Console의 주제 만들기 페이지" style="width:80%;">}}
+{{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="기본 서브스크립션 추가 체크박스가 선택된 Google Cloud Console 주제 생성 페이지" style="width:80%;">}}
 
-2. 해당 주제에 `export-logs-to-datadog`과 같은 명시적인 이름을 지정하고 **Create**를 클릭합니다.
+2. 해당 주제에 `export-logs-to-datadog`과 같은 명확한 이름을 지정하고 **Create**를 클릭합니다.
 
 3. Datadog API에서 거부된 로그 메시지를 처리하기 위해 추가 주제와 기본 서브스크립션을 생성합니다. 이 주제의 이름은 `outputDeadletterTopic` [템플릿 파라미터][57]에 대한 경로 설정의 일부로 Datadog Dataflow 템플릿 내에서 사용됩니다. 실패한 메시지의 문제를 검사하고 수정한 후 [Pub/Sub to Pub/Sub 템플릿][58] 작업을 실행하여 문제를 원래 `export-logs-to-datadog` 주제로 다시 보냅니다.
 
 4. Datadog에서는 나중에 Datadog Dataflow 템플릿에서 사용할 수 있도록 유효한 Datadog API 키 값을 사용하여 [Secret Manager][59]에서 비밀을 생성할 것을 권장합니다.
 
-**경고**: Cloud Pub/Sub에는 [Google Cloud 할당량 및 제한사항][60]이 적용됩니다. 보유한 로그 수가 해당 제한을 초과하는 경우 Datadog에서는 로그를 여러 주제로 분할할 것을 권장합니다. 해당 제한에 도달하는 경우 모니터 알림 설정에 대한 자세한 내용은 [Pub/Sub 로그 전달 모니터링 섹션](#monitor-the-cloud-pubsub-log-forwarding)을 참조하세요.
+**경고**: Cloud Pub/Sub에는 [Google Cloud 할당량 및 제한사항][60]이 적용됩니다. 보유한 로그 수가 해당 제한을 초과하는 경우 Datadog에서는 로그를 여러 주제로 분할할 것을 권장합니다. 해당 제한에 도달하는 경우 모니터 알림 설정에 대한 자세한 내용은 [Pub/Sub Log Forwarding 섹션 모니터링](#monitor-the-cloud-pubsub-log-forwarding)을 참조하세요.
 
 #### 2. 커스텀 Dataflow 작업자 서비스 계정 만들기
 
@@ -231,7 +233,7 @@ Dataflow 파이프라인 작업자의 기본 동작은 프로젝트의 모든 �
 
 1. Google Cloud 콘솔의 [Service Accounts][62] 페이지로 이동하여 프로젝트를 선택합니다.
 2. **CREATE SERVICE ACCOUNT**를 클릭하고 서비스 계정에 설명이 포함된 이름을 지정합니다. 그런 다음**CREATE AND CONTINUE**를 클릭합니다.
-3. 필수 권한 테이블에 역할을 추가하고 **DONE**을 클릭하세요.
+3. 필수 권한 테이블에 역할을 추가하고 **DONE**을 클릭합니다.
 
 ##### 필수 권한
 
@@ -256,7 +258,7 @@ Dataflow 파이프라인 작업자의 기본 동작은 프로젝트의 모든 �
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub 로그를 Pub Sub로 내보내기" >}}
 
-5. 선택적 포함 또는 제외 필터를 사용하여 싱크에 포함하려는 로그를 선택하세요. 검색어를 사용하여 로그를 필터링하거나 [샘플 함수][71]를 사용할 수 있습니다. 예를 들어 `ERROR`의 `severity` 레벨이 있는 로그 중 10%만 포함하려면 `severity="ERROR" AND sample(insertId, 0.01)`를 사용하여 포함 필터를 만듭니다.
+5. 선택적 포함 또는 제외 필터를 사용하여 싱크에 포함하려는 로그를 선택하세요. 검색어를 사용하여 로그를 필터링하거나 [샘플 함수][71]를 사용할 수 있습니다. 예를 들어 `ERROR`에서 `severity` 레벨이 있는 로그 중 10%만 포함하려면 `severity="ERROR" AND sample(insertId, 0.01)`를 사용하여 포함 필터를 만듭니다.
 
     {{< img src="integrations/google_cloud_platform/sink_inclusion_filter.png" alt="심각도=ERROR 및 샘플(insertId, 0.1) 쿼리가 포함된 Google Cloud 로깅 싱크의 포함 필터" >}}
 
@@ -267,7 +269,7 @@ Dataflow 파이프라인 작업자의 기본 동작은 프로젝트의 모든 �
 #### 4. Dataflow 작업 생성 및 실행하기
 
 1. Google Cloud 콘솔의 [Create job from template][72] 페이지로 이동합니다.
-2. 작업 이름을 지정하고 Dataflow 리전 엔드포인트를 선택합니다.
+2. 작업 이름을 지정하고 Dataflow 리저널 엔드포인트를 선택합니다.
 3. **Dataflow template** 드롭다운에서 `Pub/Sub to Datadog`을 선택하면 **Required parameters** 섹션이 나타납니다.
    a. **Pub/Sub input subscription** 드롭다운에서 인풋 서브스크립션을 선택합니다.
    b. **Datadog Logs API URL** 필드에 다읍을 입력합니다:  
@@ -285,14 +287,14 @@ Dataflow 파이프라인 작업자의 기본 동작은 프로젝트의 모든 �
 
 4. [1단계](#1-create-a-cloud-pubsub-topic-and-subscription)에서 언급한 대로 Datadog API 키 값을 사용하여 Secret Manager에서 비밀을 생성한 경우 **Google Cloud Secret Manager ID** 필드에서 해당 비밀의 **리소스 이름**을 입력하세요.
 
-{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Google Cloud Secret Manager ID와 API 키 전달 소스 필드가 모두 강조표시된 Datadog Dataflow 템플릿의 선택적 파라미터" style="width:80%;">}}  
+{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Datadog Dataflow 템플릿의 선택적 파라미터(Google Cloud Secret Manager ID 및 전달된 API 키의 소스 필드가 모두 강조 표시됨)." style="width:80%;">}}  
 
 사용 가능한 다른 옵션 사용에 대한 자세한 내용은 Dataflow 템플릿의 [템플릿 파라미터][57]를 참조하세요.
 
    - `apiKeyKMSEncryptionKey`와 함께 `apiKeySource=KMS`를  [Cloud KMS][73] 키 ID로 설정하고 `apiKey`를 암호화된 API 키로 설정 
    - **권장하지 않음**: `apiKey`와 `apiKeySource=PLAINTEXT`가 플레인 텍스트 API 키로 설정된 경우
 
-5. 커스텀 작업자 서비스 계정을 만든 경우 **Service account email** 드롭다운에서 선택합니다.
+5. 커스텀 작업자 서비스 계정을 만든 경우 **Service account email** 드롭다운에서 해당 계정을 선택합니다.
 
 {{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="서비스 계정 이메일 드롭다운이 강조표시된 Datadog Dataflow 템플릿의 선택적 파라미터" style="width:80%;">}}
 
@@ -321,17 +323,25 @@ Datadog의 [Google Cloud Dataflow 통합][9]을 사용하여 Dataflow 파이프�
 
 사전 설정된 [권장 모니터][78]를 사용하여 파이프라인의 백로그 시간 증가에 대한 알림을 설정할 수도 있습니다. 자세한 내용은 Datadog 블로그에서 [Datadog으로 Dataflow 파이프라인 모니터링하기][79]를 읽어보세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 
-메트릭은 개별 Google Cloud 통합 페이지를 참조하세요.
+메트릭에 대해서는 개별 Google Cloud 통합 페이지를 참조하세요.
+
+#### 누적 메트릭
+
+누적 메트릭은 각 메트릭 이름에 대한 `.delta` 메트릭과 함께 Datadog으로 가져옵니다. 누적 메트릭은 시간이 지남에 따라 값이 지속적으로 증가하는 메트릭입니다. 예를 들어 `sent bytes` 메트릭은 누적될 수 있습니다. 각 값은 해당 시점에 서비스에서 보낸 총 바이트 수를 기록합니다. 델타 값은 이전 측정 이후의 변화를 나타냅니다.
+
+예시:
+
+`gcp.gke.container.restart_count`는 CUMULATIVE 메트릭입니다. 이 메트릭을 누적 메트릭으로 가져오는 동안 Datadog은 델타 값(CUMULATIVE 메트릭의 일부로 방출된 집계 값과 반대)을 포함하는 `gcp.gke.container.restart_count.delta` 메트릭을 추가합니다. 자세한 내용은 [Google Cloud 메트릭 종류][80]를 참조하세요.
 
 ### 이벤트
 
-Google Cloud Platform에서 생성된 모든 서비스 이벤트는 [Datadog Events Explorer][80]로 전달됩니다.
+Google Cloud Platform에서 생성된 모든 서비스 이벤트는 [Datadog Events Explorer][81]로 전달됩니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Google Cloud Platform 통합에는 서비스 검사가 포함되지 않습니다.
 
@@ -348,11 +358,11 @@ Google Cloud Platform 통합에는 서비스 검사가 포함되지 않습니다
 
 ### 사용자 정의 gcp.logging 메트릭에 대한 메타데이터가 잘못되었나요?
 
-[Datadog의 기본 로깅 메트릭][81] 이외의 메트릭과 같은 비표준 _gcp.logging_ 메트릭의 경우 적용된 메타데이터가 Google Cloud Logging과 일치하지 않을 수 있습니다.
+[Datadog의 기본 로깅 메트릭][82] 이외의 메트릭과 같은 비표준 _gcp.logging_ 메트릭의 경우 적용된 메타데이터가 Google Cloud Logging과 일치하지 않을 수 있습니다.
 
-이러한 경우 [메트릭 요약 페이지][82]로 이동하여 문제의 메트릭을 검색 및 선택한 후 메타데이터 옆에 있는 연필 아이콘을 클릭하여 메타데이터를 수동으로 설정해야 합니다.
+이러한 경우 [메트릭 요약 페이지][83]로 이동하여 문제의 메트릭을 검색 및 선택한 후 메타데이터 옆에 있는 연필 아이콘을 클릭하여 메타데이터를 수동으로 설정해야 합니다.
 
-도움이 필요하신가요? [Datadog 지원팀][83]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][84]에 문의하세요.
 
 ## 참고 자료
 
@@ -391,14 +401,14 @@ Google Cloud Platform 통합에는 서비스 검사가 포함되지 않습니다
 [31]: https://docs.datadoghq.com/ko/integrations/google_cloud_storage/
 [32]: https://docs.datadoghq.com/ko/integrations/google_cloud_vertex_ai/
 [33]: https://docs.datadoghq.com/ko/integrations/google_cloud_vpn/
-[34]: https://cloud.google.com/iam/docs/service-account-overview#impersonation
-[35]: /ko/integrations/google_cloud_platform/
-[36]: https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com
-[37]: https://console.cloud.google.com/apis/library/cloudbilling.googleapis.com
-[38]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
-[39]: https://console.cloud.google.com/apis/library/compute.googleapis.com
-[40]: https://console.cloud.google.com/apis/library/cloudasset.googleapis.com
-[41]: https://console.cloud.google.com/apis/library/iam.googleapis.com
+[34]: https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com
+[35]: https://console.cloud.google.com/apis/library/cloudbilling.googleapis.com
+[36]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
+[37]: https://console.cloud.google.com/apis/library/compute.googleapis.com
+[38]: https://console.cloud.google.com/apis/library/cloudasset.googleapis.com
+[39]: https://console.cloud.google.com/apis/library/iam.googleapis.com
+[40]: https://cloud.google.com/iam/docs/service-account-overview#impersonation
+[41]: /ko/integrations/google_cloud_platform/
 [42]: https://console.cloud.google.com/
 [43]: https://app.datadoghq.com/integrations/google-cloud-platform
 [44]: https://cloud.google.com/compute/docs/labeling-resources
@@ -437,7 +447,8 @@ Google Cloud Platform 통합에는 서비스 검사가 포함되지 않습니다
 [77]: https://docs.datadoghq.com/ko/monitors/types/metric/
 [78]: https://www.datadoghq.com/blog/datadog-recommended-monitors/
 [79]: https://www.datadoghq.com/blog/monitor-dataflow-pipelines-with-datadog/
-[80]: https://app.datadoghq.com/event/stream
-[81]: https://docs.datadoghq.com/ko/integrations/google_stackdriver_logging/#metrics
-[82]: https://app.datadoghq.com/metric/summary
-[83]: https://docs.datadoghq.com/ko/help/
+[80]: https://cloud.google.com/monitoring/api/v3/kinds-and-types
+[81]: https://app.datadoghq.com/event/stream
+[82]: https://docs.datadoghq.com/ko/integrations/google_stackdriver_logging/#metrics
+[83]: https://app.datadoghq.com/metric/summary
+[84]: https://docs.datadoghq.com/ko/help/
