@@ -252,5 +252,13 @@ export default {
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
       gov: 'The private link service for GOV is not supported.'
+    },
+    ip_ranges_url: {
+      us: 'http://ip-ranges.datadoghq.com',
+      us3: 'http://ip-ranges.us3.datadoghq.com',
+      us5: 'http://ip-ranges.us5.datadoghq.com',
+      eu: 'http://ip-ranges.datadoghq.eu',
+      ap1: 'http://ip-ranges.ap1.datadoghq.com',
+      gov: 'http://ip-ranges.ddog-gov.com'
     }
 };
