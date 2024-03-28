@@ -160,7 +160,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Java RMI                           | all         | Distributed Tracing Not Supported                   | `rmi`, `rmi-client`, `rmi-server`                       |
 | Jax RS Clients                     | 2.0+        | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
 | Jersey Client                      | 1.9-2.29    | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
-| JMS                                | 1 and 2     | Fully Supported                                     | `jms`, `jms-1`, `jms-2`                                 |
+| JMS / Jakarta JMS                  | 1-3.0+      | Fully Supported                                     | `jms`, `jms-1`, `jms-2`, `jakarta-jms`                  |
 | Netty HTTP Client                  | 4.0+        | Fully Supported                                     | `netty`, `netty-4.0`, `netty-4.1`                       |
 | Ning HTTP Client                   | 1.9.0+      | [Beta](#framework-integrations-disabled-by-default) | `ning`                                                  |
 | OkHTTP                             | 2.2+        | Fully Supported                                     | `okhttp`, `okhttp-2`,`okhttp-3`                         |

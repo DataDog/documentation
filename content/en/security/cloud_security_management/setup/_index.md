@@ -77,7 +77,7 @@ The following table summarizes the CSM features available relative to each deplo
 | AWS Account   |                        | {{< X >}}             |             |                     | {{< X >}}          |
 | Azure Account |                        | {{< X >}}             |             |                     |                    |
 | GCP Account   |                        | {{< X >}}             |             |                     |                    |
-| Windows       | {{< X >}}              |                       | beta        |                     |                    |
+| Windows       | {{< X >}}              |                       |  {{< X >}}  |                     |                    |
 | AWS Fargate ECS/EKS  | {{< X >}}              |                       | beta        |                     |                    |
 
 
