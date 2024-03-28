@@ -97,7 +97,7 @@ Common mobile app test errors include:
 : The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.
 
 `Cannot locate element`
-: The element cannot be found in the HTML.
+: The element cannot be found in the XML.
 
 ## Test events
 
