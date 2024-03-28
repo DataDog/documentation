@@ -28,9 +28,7 @@ A few tools control access and authentication for workflows and their components
 
 ## Workflow identity
 
-A workflow can run using the identity of the owner of the workflow, or a service account associated with the workflow. By default:
-- A workflow uses the Datadog user identity of its author.
-- The author of the workflow recieves **Editor** access to the workflow, and the Datadog org receives **Viewer** access to the workflow.
+A workflow can run using the identity of the owner of the workflow, or a service account associated with the workflow. By default a workflow uses the Datadog user identity of its author.
 
 ### Use a service account
 
@@ -78,9 +76,11 @@ For more information on configuring credentials, see [Connections][6].
 
 Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][7].
 
+By default, the author of a workflow or connection is the only user who receives **Editor** access. The rest of the Datadog organization receives **Viewer** access to the workflow or connection.
+
 ### Restrict access on a specific connection
 
-Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**.
+Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**. By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
 : Can view the connection
@@ -107,7 +107,7 @@ Follow the steps below to modify the permissions on a specific connection:
 
 ### Restrict access on a specific workflow
 
-Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**.
+Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**. By default, only the author of the workflow receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
 : Can view the workflow
