@@ -14,7 +14,7 @@ further_reading:
   - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
     text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/dashboards/"
+  - link: "/real_user_monitoring/platform/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
 ---
@@ -22,12 +22,14 @@ further_reading:
 
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
-## Error origins
-Front-end errors are split into four different categories depending on their `origin`:
+## Error sources
+Front-end errors come from several different sources:
 
-- **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
-- **console**: `console.error()` API calls.
-- **custom**: Errors sent with the [RUM `addError` API](#collect-errors-manually).
+- **agent**: From the SDK execution
+- **console**: From `console.error()` API calls
+- **custom**: Sent with the [RUM `addError` API](#collect-errors-manually)
+- **report**: From the `ReportingObserver` API
+- **source**: From unhandled exceptions or unhandled promise rejections in the source code
 
 ## Error attributes
 

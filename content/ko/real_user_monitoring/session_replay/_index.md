@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: 블로그
   text: 퍼널 분석을 사용하여 주요 사용자 흐름을 파악하고 최적화하기
+- link: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
+  tag: 블로그
+  text: Zendesk 및 Datadog Session Replay를 통해 사용자가 경험하는 문제를 시각적으로 재현합니다.
 - link: /real_user_monitoring/explorer
   tag: 설명서
   text: 탐색기에서 RUM 데이터 시각화
@@ -41,9 +44,9 @@ RUM Browser SDK는 [오픈 소스][1]이며 오픈 소스 [rrweb][2] 프로젝�
 
 <div class="alert alert-info">최신 버전의 SDK(v3.6.0 이상)가 필요합니다</div>
 
-## 사용법
+## 사용량
 
-RUM Browser SDK v5.0.0부터 `init()`을 호출할 때 세션 재생이 자동으로 기록됩니다. 조건적으로 기록하려면 `startSessionReplayRecordingManually` init 파라미터를 사용하고 `startSessionReplayRecording()`을 호출합니다.
+RUM Browser SDK v5.0.0부터 Session Replay는 `init()` 호출 시 자동으로 녹화를 시작합니다. 조건부로 녹음을 시작하려면 `startSessionReplayRecordingManually` init 파라미터를 사용하고 `startSessionReplayRecording()`를 호출하세요.
 
 예를 들어, 인증된 사용자 세션만 기록하려면 다음을 따르세요.
 
@@ -90,7 +93,15 @@ if (user.isAuthenticated) {
 
 {{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="보존 기간을 연장했을 때 보존되는 데이터를 보여주는 다이어그램" style="width:100%;" >}}
 
+## 재생 기록
 
+플레이어 페이지에 표시된 **watched** 횟수를 클릭하면 해당 세션 리플레이를 누가 시청했는지 확인할 수 있습니다. 이 기능을 사용하면 녹화 내용을 공유하려고 했던 사람이 이미 해당 내용을 시청했는지 확인할 수 있습니다.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="세션 녹화를 본 사람 확인" style="width:100%;" >}}
+
+기록에는 플레이어 페이지나 [노트북][8] 또는 사이드 패널과 같은 내장 플레이어에서 발생한 재생만 포함됩니다. 포함된 재생은 [감사 추적][7] 이벤트도 생성합니다. 썸네일 미리보기는 기록에 포함되지 않습니다.
+
+자신의 재생 기록을 보려면 [My Watch History][9] 재생 목록을 확인하세요.
 
 ## 모바일 세션 재생
 
@@ -106,3 +117,6 @@ if (user.isAuthenticated) {
 [4]: /ko/real_user_monitoring/browser/
 [5]: /ko/real_user_monitoring/session_replay/mobile/
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
+[7]: https://docs.datadoghq.com/ko/account_management/audit_trail/
+[8]: https://docs.datadoghq.com/ko/notebooks/
+[9]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history

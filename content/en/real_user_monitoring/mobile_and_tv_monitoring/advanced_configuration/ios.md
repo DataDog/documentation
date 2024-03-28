@@ -487,7 +487,7 @@ let session = URLSession(
 
 This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace][1].
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[1]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 
 {{% /tab %}}
 {{% tab "Objective-C" %}}
@@ -745,6 +745,6 @@ This means that even if users open your application while offline, no data is lo
 [3]: /real_user_monitoring/ios/data_collected
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [5]: /real_user_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift

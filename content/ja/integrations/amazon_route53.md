@@ -13,7 +13,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_route53/
 draft: false
 git_integration_title: amazon_route53
 has_logo: true
-integration_id: amazon-route-53
+integration_id: ''
 integration_title: Amazon Route 53
 integration_version: ''
 is_public: true

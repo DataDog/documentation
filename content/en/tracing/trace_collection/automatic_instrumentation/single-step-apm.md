@@ -35,7 +35,7 @@ For an Ubuntu host:
    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
    ```
 
-   a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
+   a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4].
 
    b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
    <div class="alert alert-info">
@@ -234,19 +234,18 @@ To enable single step instrumentation with Helm:
 
 You can choose to selectively instrument specific namespaces or choose to not instrument them.
 
-To enable instrumentation for specific namespaces, replace `enabled: true` with `enabledNamespaces` configuration in your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=6-8" >}}
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to your `datadog-values.yaml` file:
+{{< highlight yaml "hl_lines=6-9" >}}
       datadog:
         apiKeyExistingSecret: datadog-secret
         site: <DATADOG_SITE>
         apm:
           instrumentation:
+            enabled:true
             enabledNamespaces: # Add namespaces to instrument
                - namespace_1
                - namespace_2
  {{< /highlight >}}
-
-<div class="alert alert-info">The <code>enabled: true</code> option enables instrumentation for the entire cluster. You need to remove this to only enable instrumentation for specific namespaces.</a></div>
 
 To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
 {{< highlight yaml "hl_lines=7-9" >}}
@@ -263,9 +262,61 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 
 ### Specifying tracing library versions
 
-You can optionally set specific tracing library versions to use. If you don't specify a version, it defaults to the latest version. To find the latest version for a library, go to **Releases** in the dd-trace-&lt;language&gt; GitHub repo. For example, [dd-trace-dotnet releases][15].
+<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can inject a subset of tracing libraries into your applications.</div>
 
-To set specific tracing library versions, add the following configuration to your `datadog-values.yaml` file:
+Specify Datadog tracing libraries and their versions to inject into your applications. You can configure this in two ways, which are applied in the following order of precedence:
+
+1. [Specify at the service level](#specifying-at-the-service-level), or
+2. [Specify at the cluster level](#specifying-at-the-cluster-level).
+
+**Default**: If you don't specify any library versions and `apm.instrumentation.enabled=true`, the latest version of all supported tracing libraries are injected.
+
+#### Specifying at the service level
+
+To select pods for library injection and specify the library version, use the appropriate annotation for your language within your pod spec:
+
+| Language   | Pod annotation                                                        |
+|------------|-----------------------------------------------------------------------|
+| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
+| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
+| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
+
+Replace <CONTAINER IMAGE TAG> with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
+
+- [Java][31]
+- [JavaScript][32]
+- [Python][33]
+- [.NET][34] (For .NET applications using a musl-based Linux distribution like Alpine, specify a tag with the `-musl` suffix, such as `v2.29.0-musl`.)
+- [Ruby][35]
+
+<div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
+
+For example, to inject a Java library:
+
+{{< highlight yaml "hl_lines=10" >}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    # ...
+spec:
+  template:
+    metadata:
+      annotations:
+        admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
+    spec:
+      containers:
+        - # ...
+{{< /highlight >}}
+
+#### Specifying at the cluster level
+
+If you don't inject tracing libraries from the pod spec, you can specify tracing libraries for the entire cluster with Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only the specified libraries and versions are injected.
+
+For example, to instrument .NET, Python, and Javascript applications, add the following configuration to your `datadog-values.yaml` file:
+
 {{< highlight yaml "hl_lines=7-12" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
@@ -273,21 +324,29 @@ To set specific tracing library versions, add the following configuration to you
      apm:
        instrumentation:
          enabled: true
-         libVersions: # Add any versions you want to set
+         libVersions: # Add any libraries and versions you want to set
             dotnet: v2.46.0
             python: v1.20.6
-            java: v1.22.0
             js: v4.17.0
-            ruby: v1.15.0
 {{< /highlight >}}
 
-Supported languages include:
+#### Container registries
 
-- .NET (`dotnet`)
-- Python (`python`)
-- Java (`java`)
-- Node.js (`js`)
-- Ruby (`ruby`)
+Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
+
+| Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
+|------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
+| Java       | [gcr.io/datadoghq/dd-lib-java-init][15]   | [hub.docker.com/r/datadog/dd-lib-java-init][16]   | [gallery.ecr.aws/datadog/dd-lib-java-init][17]   |
+| JavaScript | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
+| Python     | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
+| .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
+| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
+
+The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
+
+You can pull the tracing library from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
+
+For instructions on changing your container registry, see [Changing Your Container Registry][30].
 
 ### Tagging observability data by environment {#env-k8}
 
@@ -305,7 +364,28 @@ For example, add the following configuration to your `datadog-values.yaml` file:
          enabled: true
 {{< /highlight >}}
 
-[15]: https://github.com/DataDog/dd-trace-dotnet/releases
+[15]: http://gcr.io/datadoghq/dd-lib-java-init
+[16]: http://hub.docker.com/r/datadog/dd-lib-java-init
+[17]: http://gallery.ecr.aws/datadog/dd-lib-java-init
+[18]: http://gcr.io/datadoghq/dd-lib-js-init
+[19]: http://hub.docker.com/r/datadog/dd-lib-js-init
+[20]: http://gallery.ecr.aws/datadog/dd-lib-js-init
+[21]: http://gcr.io/datadoghq/dd-lib-python-init
+[22]: http://hub.docker.com/r/datadog/dd-lib-python-init
+[23]: http://gallery.ecr.aws/datadog/dd-lib-python-init
+[24]: http://gcr.io/datadoghq/dd-lib-dotnet-init
+[25]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
+[26]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
+[27]: http://gcr.io/datadoghq/dd-lib-ruby-init
+[28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
+[29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+[30]: /containers/guide/changing_container_registry/
+[31]: https://github.com/DataDog/dd-trace-java/releases
+[32]: https://github.com/DataDog/dd-trace-js/releases
+[33]: https://github.com/DataDog/dd-trace-py/releases
+[34]: https://github.com/DataDog/dd-trace-dotnet/releases
+[35]: https://github.com/DataDog/dd-trace-rb/releases
+
 {{% /tab %}}
 {{< /tabs >}}
 

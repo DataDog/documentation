@@ -10,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_neptune/
 draft: false
 git_integration_title: amazon_neptune
 has_logo: true
-integration_id: amazon-neptune
+integration_id: ''
 integration_title: Amazon Neptune
 integration_version: ''
 is_public: true

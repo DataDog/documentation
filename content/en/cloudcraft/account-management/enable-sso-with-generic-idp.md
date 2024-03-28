@@ -41,8 +41,8 @@ For more general information on using SSO with Cloudcraft, check out [Enable SSO
 
 {{< img src="cloudcraft/account-management/enable-sso-with-generic-idp/upload-metadata.png" alt="Successfully configured SAML Single Sign-On status with identity provider URL visible in security settings interface." responsive="true" style="width:100%;">}}
 
-10. Toggle the **SAML Single Sign-On is enabled** option. 
-11.  If you prefer to have your users access Cloudcraft only via Azure AD, enable the **Strict mode** option.
+10. Toggle the **SAML Single Sign-On is enabled** option.
+11.  If you prefer to have your users access Cloudcraft only via your identity provider, enable the **Strict mode** option.
 
 [1]: /cloudcraft/account-management/enable-sso-with-azure-ad/
 [2]: /cloudcraft/account-management/enable-sso-with-okta/

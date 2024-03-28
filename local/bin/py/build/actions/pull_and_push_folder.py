@@ -29,6 +29,7 @@ def pull_and_push_folder(content, content_dir):
     """
 
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
+        print(f'Processing: {file_name.replace("./integrations_data/extracted", "")}')
         source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n"
         with open(file_name, mode="r+", encoding="utf-8", errors="ignore") as f:
             file_name_path = Path(file_name)
