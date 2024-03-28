@@ -1,20 +1,21 @@
 Github:
-- .github/**/*
+- any-glob-to-any-file: ['.github/**/*']
 
 Images:
-- static/images/**/*
+- any-glob-to-any-file: [static/images/**/*]
 
 Architecture:
-- local/**/*
-- layouts/**/*
-- config/**/*
-- assets/**/*
+- any-glob-to-any-file: 
+  - local/**/*
+  - layouts/**/*
+  - config/**/*
+  - assets/**/*
 
 $1:
-- content/en/([^/]+)/.*
+- any-glob-to-any-file: ['content/en/([^/]+)/.*']
 
 FAQ:
-- content/en/*/faq/*
+- any-glob-to-any-file: ['content/en/*/faq/*']
 
-Guide:
-- content/en/*/guide/*
+Guide: 
+- any-glob-to-any-file: ['content/en/*/guide/*']
