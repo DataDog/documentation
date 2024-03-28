@@ -92,7 +92,6 @@ Users can use the `CIDR()` function to query attributes in logs using CIDR notat
 
 The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Log Explorer, Live Tail, log widgets in Dashboards, log monitors, and log configurations.
 
-
 ## Wildcards
 
 You can use wildcards with free text search. However, it only searches for terms in the log message, the text in the `content` column in Log Explorer. See [Full-text search across all log attributes](#full-text-search-across-all-log-attributes) if you want to search for a value in a log attribute.
@@ -137,6 +136,13 @@ Use the syntax `*:search_term` to perform a free text search across all log attr
 | ------------- | ----------- | ----------------------------------------------------- |
 | `*:("hello")` | Full-text   | Searches all log attributes for the term `hello`.     |
 | `hello`       | Free text   | Searches only the log message for the term `hello`.   |
+
+#### Search term with wildcard
+
+| Search syntax | Search type | Description                                                                                  |
+| ------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| `*:("hello")` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
+| `*:("hello"*)`| Full-text   | Searches all log attributes for strings that starts with `hello`. For example, `hello_world`.|
 
 #### Multiple terms with exact match example
 
