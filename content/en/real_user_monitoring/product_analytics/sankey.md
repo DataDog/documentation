@@ -23,7 +23,7 @@ Actions are not supported in the Sankey diagram.
 
 ### View the default diagram
 
-1. Navigate to [**UX Monitoring > Product Analytics > User Journeys**][1].
+1. Navigate to [**Digital Experience > Product Analytics > User Journeys**][1].
 2. Click **Sankey** if it's not already selected. This displays the default visualization, which represents the most popular user journeys in your application.
 
 ### Start or end the diagram at a given view
