@@ -13,6 +13,9 @@ further_reading:
 - link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
+- link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
+  tag: "Blog"
+  text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
 {{< site-region region="gov" >}}
