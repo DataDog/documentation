@@ -141,7 +141,7 @@ Datadog의 Google Cloud 통합을 설정하여 Google Cloud 서비스에서 메�
    [다음 섹션](#3-complete-the-integration-setup-in-datadog)을 위해 이 창을 열어둡니다
 5. [Google Cloud console][42]의 **Service Acounts** 메뉴에서, [첫 번째 섹션](#1-create-your-google-cloud-service-account)에서 생성한 서비스 계정을 찾습니다.
 6. **Permissions** 탭으로 이동하여 **Grant Access**를 클릭합니다.
-   {{< img src="integrations/google_cloud_platform/grant-access.png" alt="서비스 계정 아래에 권한 탭이 표시된 Google Cloud 콘솔 인터페이스. style="width:70%;">}}
+   {{< img src="integrations/google_cloud_platform/grant-access.png" alt="서비스 계정 아래에 권한 탭이 표시된 Google Cloud 콘솔 인터페이스." style="width:70%;">}}
 7. **New principals** 텍스트 상자에 Datadog 주체를 붙여넣기합니다.
 8. **Service Account Token Creator** 역할을 할당한 후 **Save**를 클릭합니다.
    {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt="'Add principals' 상자와 'Assign roles' 인터페이스를 보여주는 Google Cloud 콘솔 인터페이스." style="width:70%;">}}
