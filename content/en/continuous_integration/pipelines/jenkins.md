@@ -340,9 +340,9 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
 {{% /tab %}}
 
 {{% tab "macOS" %}}
-1. Add `logs_enabled: true` to your Agent configuration file `datadog.yaml`, or set the `DD_LOGS_ENABLED=true` environment variable.
+1. Add `logs_enabled: true` to your Agent's `datadog.yaml` configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
 
-2. Create a file at `~/.datadog-agent/conf.d/jenkins.d/conf.yaml` with the contents below. Make sure that `service` matches the CI instance name provided earlier.
+2. Create a file at `~/.datadog-agent/conf.d/jenkins.d/conf.yaml` with the following contents. Ensure the `service` matches the CI instance name provided earlier.
 
    ```yaml
    logs:
