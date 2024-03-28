@@ -7,4 +7,4 @@ announcement_banner:
   mobile_message: "Join our Security Observability Day"
   external_link: "https://www.datadoghq.com/event/security-obs-day-q2-24/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-security-na-docs-banner-livewebinar-202404SecurityObservabilityDay"
 exclude: []
-translate_status_banner: "This translation isn't up to date, for the latest english version click here"
+translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"
