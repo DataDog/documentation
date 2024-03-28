@@ -28,7 +28,7 @@ A few tools control access and authentication for workflows and their components
 
 ## Workflow identity
 
-A workflow can run using the identity of the owner of the workflow, or a service account associated with the workflow. By default a workflow uses the Datadog user identity of its author.
+A workflow can run using the identity of the owner of the workflow, or a service account associated with the workflow. By default, a workflow uses the Datadog user identity of its author.
 
 ### Use a service account
 
