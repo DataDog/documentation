@@ -472,7 +472,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     def j = Jenkins.getInstance()
     def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
+    // Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
     d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
 
     // Enable log collection
