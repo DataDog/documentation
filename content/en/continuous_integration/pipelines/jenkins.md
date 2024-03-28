@@ -382,7 +382,7 @@ This is only required for Jenkins workers. For the Jenkins controller, the infra
 
 ## Enable job log collection
 
-This is an optional step that enables the collection of job logs. Both agentless and agent-based options are supported.
+This is an optional step that enables the collection of job logs. Both Agentless and Agent-based options are supported.
 
 ### Enable with the Jenkins configuration UI
 
