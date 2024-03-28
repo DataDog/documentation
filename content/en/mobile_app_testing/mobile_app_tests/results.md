@@ -13,12 +13,16 @@ further_reading:
   text: "Learn about the Events Explorer"
 ---
 
-{{< site-region region="us3,us5,gov,eu,ap1" >}}
+{{< site-region region="us,us5,eu" >}}
+<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
+{{< /site-region >}}
+
+{{< site-region region="us3,ap1" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">Mobile Application Testing is in limited availability and is only supported for the Datadog US1 site.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
 ## Overview
