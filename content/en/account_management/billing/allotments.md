@@ -93,13 +93,13 @@ See [Usage aggregation function](#usage-aggregation-function).
 
 #### Monthly on-demand option
 
-An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested Spans commitment per month over a period of three months. Their usage is as follows: 
+An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested Spans commitment per month over a period of three months. Their usage is as follows (with derived columns in italics): 
 
-| Month | APM host commitment | APM host usage | Allotment for Ingested Spans | Included usage for Ingested Spans | Billable usage for Ingested Spans | On-demand usage for Ingested Spans |
+| Month | APM host commitment | APM host usage | *Allotment for Ingested Spans* | *Included usage for Ingested Spans* | Billable usage for Ingested Spans | *On-demand usage for Ingested Spans* |
 |-----------|---------------------|----------------|--------------------------|----------------------|--------------------------------|
-| Month 1  | 10  | 5   | 1500 GB   | 1600 GB   | 2000 GB | 400 GB   |
-| Month 2  | 10  | 15 | 2250 GB  | 2350 GB | 2000 GB  | 0 GB      |
-| Month 3 | 10   | 10   | 1500 GB  | 1600 GB  | 1600 GB | 0 GB  |
+| Month 1  | 10  | 5   | *1500 GB*   | *1600 GB*   | 2000 GB | *400 GB*   |
+| Month 2  | 10  | 15 | *2250 GB*  | *2350 GB* | 2000 GB  | *0 GB*      |
+| Month 3 | 10   | 10   | *1500 GB*  | *1600 GB*  | 1600 GB | *0 GB*  |
 
 For a monthly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 150 GB. 
 
