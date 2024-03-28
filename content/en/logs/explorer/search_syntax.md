@@ -137,7 +137,7 @@ Use the syntax `*:search_term` to perform a free text search across all log attr
 | `*:("hello")` | Full-text   | Searches all log attributes for the term `hello`.     |
 | `hello`       | Free text   | Searches only the log message for the term `hello`.   |
 
-#### Search term with wildcard
+#### Search term with wildcard example
 
 | Search syntax | Search type | Description                                                                                  |
 | ------------- | ----------- | -------------------------------------------------------------------------------------------- |
