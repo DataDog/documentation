@@ -1,7 +1,7 @@
 ---
 title: Mobile App Test Results
 kind: documentation
-description: View Synthetic mobile app test results and compare successful or failed sample runs to test runs. 
+description: View Synthetic mobile app test results and compare successful or failed sample runs to test runs.
 aliases:
 - /mobile_testing/mobile_app_tests/results
 further_reading:
@@ -37,7 +37,7 @@ Test runs appear in a test details page after a Synthetic mobile app test execut
 
 In the **Properties** section, you can see the test ID, test creation and edit dates, test priority, environment tag, and additional tags.
 
-**Overview** 
+**Overview**
 : This section describes the Synthetic test details, including the mobile application, version, location, number of devices, test interval, and the number of test steps.
 
 **Monitor**
@@ -48,7 +48,7 @@ In the **Properties** section, you can see the test ID, test creation and edit d
 
 ## Test history
 
-In the **History** section, you can see the **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][4] configured for a test. 
+In the **History** section, you can see the **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][4] configured for a test.
 
 {{< img src="mobile_app_testing/history.png" alt="The History graph displays global uptime" style="width=80%" >}}
 
@@ -93,20 +93,11 @@ A test result is considered `FAILED` if it does not satisfy its assertions or if
 
 Common mobile app test errors include:
 
-`Element located but it's invisible` 
+`Element located but it's invisible`
 : The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.
 
 `Cannot locate element`
 : The element cannot be found in the HTML.
-
-`Select did not have option`
-: The specified option is missing from the dropdown menu.
-
-`Forbidden URL`
-: The test likely encountered a protocol that is not supported. [Contact Support][6] for more details.
-
-`General test failure`
-: A general error message. [Contact Support][6] for more details.
 
 ## Test events
 
