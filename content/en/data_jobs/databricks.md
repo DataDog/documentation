@@ -32,51 +32,24 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Install the Datadog Agent on your Databricks cluster(s)
 
-The following init script will install the Datadog Agent on the cluster:
+The following init script installs the Datadog Agent on the cluster:
 - [`datadog_databricks_job_monitoring_init.sh`][8]
 
 You can choose to install the Agent globally, or on a specific Databricks cluster.
 
-{{< tabs >}}
-{{% tab "Global init (Recommended)" %}}
-1. In Databricks, go to **Admin Settings** > **Compute**. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
+<!-- xxx tabs xxx -->
+<!-- xxx tab "Global init (Recommended)" xxx -->
+1. In Databricks, click your display name (email address) in the upper right corner of the page.
+1. Select **Admin Settings** and click the **Compute** tab.
+1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
 1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the init script.
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
 1. Click **Add**.
 
-#### Add your Datadog API key in Databricks
+#### Set the required init script parameters
 
 Provide the values for the init script parameters at the beginning of the global init script.
-
-{{< img src="data_jobs/databricks/configure-databricks-global-init-script.png" alt="Databricks UI, global init script. A textbox titled 'Script' contains values for DD_API_KEY, DD_SITE and DATABRICKS_WORKSPACE." style="width:100%;" >}}
-
-{{% /tab %}}
-{{% tab "On a specific cluster" %}}
-1. Download the init script.
-1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
-1. At the bottom of the page, go to the **Init Scripts** tab.
-   {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
-   - Under the **Destination** drop-down, select `Workspace`.
-   - Under **Init script path**, enter the path to your init script.
-   - Click **Add**.
-
-#### Add your Datadog API key in Databricks
-
-1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
-1. At the bottom of the page, go to the **Spark** tab.
-   {{< img src="data_jobs/databricks/configure-databricks-cluster-init-script.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
-
-   In the **Environment variables** textbox, provide the values for the init script parameters.
-1. Click **Confirm**.
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-### Init script parameters
-
-Provide the following parameters to the init script:
 
 ```text
 export DD_API_KEY=<YOUR API KEY>
@@ -91,11 +64,49 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DD_API_KEY               | Your [Datadog API key][3]                                                                                                                                        |         |
 | DD_SITE                  | Your [Datadog site][5]                                                                                                                                           |         |
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration) |         |
-| DD_PROCESS_AGENT_ENABLED | To enable monitoring of processes using Datadog's process agent                                                                                                  | false   |
-| DD_PROFILING_ENABLED     | To enable profiling of Databricks hosts                                                                                                                          | false   |
 | DRIVER_LOGS_ENABLED      | To collect spark driver logs in Datadog                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   |
 
+
+<!-- xxz tab xxx -->
+<!-- xxx tab "On a specific cluster" xxx -->
+1. Download the init script.
+1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
+1. At the bottom of the page, go to the **Init Scripts** tab.
+   {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
+   - Under the **Destination** drop-down, select `Workspace`.
+   - Under **Init script path**, enter the path to your init script.
+   - Click **Add**.
+
+#### Set the required init script parameters
+
+1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
+1. At the bottom of the page, go to the **Spark** tab.
+   {{< img src="data_jobs/databricks/configure-databricks-cluster-init-script.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
+
+   In the **Environment variables** textbox, provide the values for the init script parameters.
+
+   ```text
+   DD_API_KEY=<YOUR API KEY>
+   DD_SITE={{< region-param key="dd_site" code="true" >}}
+   DATABRICKS_WORKSPACE=<YOUR WORKSPACE NAME>
+   ```
+
+   Optionally, you can also set other init script parameters and Datadog environment variables here, such as `DD_ENV` and `DD_SERVICE`. The script can be configured using the following parameters:
+
+| Variable                 | Description                                                                                                                                                      | Default |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| DD_API_KEY               | Your [Datadog API key][3]                                                                                                                                        |         |
+| DD_SITE                  | Your [Datadog site][5]                                                                                                                                           |         |
+| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration) |         |
+| DRIVER_LOGS_ENABLED      | To collect spark driver logs in Datadog                                                                                                                          | false   |
+| WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   |
+
+
+1. Click **Confirm**.
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
 
 ## Validation
 

@@ -7,8 +7,6 @@ export DATABRICKS_WORKSPACE=${DATABRICKS_WORKSPACE}
 
 ## Optional parameters - boolean - default: false
 ## Setting any of these options to "true" will enable the respective telemetry to be collected
-# export DD_PROCESS_AGENT_ENABLED=false
-# export DD_PROFILING_ENABLED=false
 # export DRIVER_LOGS_ENABLED=false
 # export WORKER_LOGS_ENABLED=false
 
@@ -23,9 +21,6 @@ echo "DD_INTEGRATIONS_ENABLED=false" >> /etc/environment
 echo "DD_INTEGRATION_SPARK_ENABLED=true" >> /etc/environment
 echo "DD_TRACE_EXPERIMENTAL_LONG_RUNNING_ENABLED=true" >> /etc/environment
 echo "JAVA_TOOL_OPTIONS=-javaagent:/databricks/driver/dd-java-agent.jar" >> /etc/environment
-if [[ ${DD_PROFILING_ENABLED} = true ]]; then
-  echo "DD_PROFILING_ENABLED=true" >> /etc/environment
-fi
 
 
 echo $(date -u) "Generating the script /tmp/start_datadog.sh..."
@@ -140,11 +135,6 @@ else
       auto_multi_line_detection: true
 " > /etc/datadog-agent/conf.d/databricks_logs.yaml
   fi
-fi
-
-if [[ \${DD_PROCESS_AGENT_ENABLED} = true ]]; then
-  echo \$(date -u) "Enabling process collection"
-  echo "process_config.process_collection.enabled: true" >> /etc/datadog-agent/datadog.yaml
 fi
 
 # Avoid conflicts on port 6062
