@@ -1,13 +1,13 @@
 ---
-title: Oracle Integration in Agent 7.53.0
+title: Configuring the Oracle Integration in Agent 7.53.0+
 kind: guide
 ---
 
 The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.0`. This guide describes how to properly configure the new Oracle check.
 
-# What has changed?
+## What has changed?
 
-- The new check doesn't require any external clients such as Oracle JDBC drivers. The `jdbc` related parameters are ignored in the new check.
+- The new check doesn't require any external clients, such as Oracle JDBC drivers. The `jdbc` related parameters are ignored in the new check.
 
 - The new Oracle check emits the same [metrics][1] as the deprecated Oracle integration.
 
@@ -15,16 +15,16 @@ The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.
 
 - The metrics are emitted with the database host name as recorded in the system view `v$instance.host_name` instead of the Agent host name.
 
-# Required action for users running Agent v7.53.0+
+## Configuration steps
+
+### Agent v7.53.0+
 
 The configuration in the subdirectory `oracle.d` remains the same.
 
-The Oracle new check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for you hosting type prior to upgrading the Agent:
+The new Oracle check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for your hosting type prior to upgrading the Agent:
 
-<!-- xxx tabs xxx -->
-
-<!-- xxx tab "Multi-tenant" xxx -->
-## Multi-tenant
+{{< tabs >}}
+{{% tab "Multi-tenant" %}}
 
 Log on as `sysdba`, and grant the following permissions:
 
@@ -65,12 +65,9 @@ grant select on dba_objects to c##datadog;
 grant select on cdb_data_files to c##datadog;
 grant select on dba_data_files to c##datadog;
 ```
+{{% /tab %}}
 
-<!-- xxz tab xxx -->
-
-<!-- xxx tab "Non-CDB" xxx -->
-## Non-CDB
-
+{{% tab "Non-CDB" %}}
 Log on as `sysdba`, and grant the following permissions:
 
 ```SQL
@@ -110,12 +107,9 @@ grant select on dba_objects to datadog;
 grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
 ```
+{{% /tab %}}
 
-<!-- xxz tab xxx -->
-
-<!-- xxx tab "RDS" xxx -->
-## RDS
-
+{{% tab "RDS" %}}
 ```SQL
 grant create session to datadog ;
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false);
@@ -154,12 +148,9 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 ```
+{{% /tab %}}
 
-<!-- xxz tab xxx -->
-
-<!-- xxx tab "Oracle Autonomous Database" xxx -->
-## Oracle Autonomous Database
-
+{{% tab "Oracle Autonomous Database" %}}
 ```SQL
 grant create session to datadog ;
 grant select on v$session to datadog ;
@@ -197,14 +188,12 @@ grant select on dba_objects to datadog;
 grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-<!-- xxz tab xxx -->
+If the privileges are missing, the Oracle check starts executing in the legacy compatibility mode, and the following warning appears in the log file: `missing privileges detected, running in deprecated integration compatibility mode`.
 
-<!-- xxz tabs xxx -->
-
-If the privileges are missing, the Oracle check will start executing in the legacy compatibility mode, and the following warning will appear in the log file: `missing privileges detected, running in deprecated integration compatibility mode`.
-
-# Instructions for earlier Agent releases (v7.50.1-7.52.1)
+### Agent v7.50.1-7.52.1
 
 The new Oracle check can be activated as of the Agent release `7.50.1`.
 
@@ -226,7 +215,7 @@ cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml.bak
 ```
 
-4. [Grant privileges](#required-action-for-users-running-agent-v7530) to the Datadog database account for your hosting type.
+4. Grant privileges to the Datadog database account for your hosting type, as described in the [configuration steps for Agent v7.53.0+](#agent-v7530).
 
 5. Restart the Agent.
 
