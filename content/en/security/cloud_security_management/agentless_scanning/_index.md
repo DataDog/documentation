@@ -1,6 +1,8 @@
 ---
 title: Cloud Security Management Agentless Scanning
 kind: documentation
+aliases:
+ - /security/agentless_scanning
 further_reading:
 - link: "/security/cloud_security_management/setup/agentless_scanning"
   tag: "Documentation"

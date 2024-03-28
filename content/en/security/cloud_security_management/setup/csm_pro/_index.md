@@ -40,4 +40,4 @@ Select your infrastructure type for details on how to enable CSM Pro on the Agen
 [3]: /security/cloud_security_management/setup
 [4]: /security/cloud_security_management/setup/csm_pro/cloud_accounts
 [5]: https://www.cisa.gov/sbom
-[6]: /security/agentless_scanning
+[6]: /security/cloud_security_management/agentless_scanning

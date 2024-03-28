@@ -67,4 +67,4 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 [20]: https://console.aws.amazon.com/lambda/home
 [21]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
 [22]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
-[23]: /security/agentless_scanning
+[23]: /security/cloud_security_management/agentless_scanning
