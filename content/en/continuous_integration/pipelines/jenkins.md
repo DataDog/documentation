@@ -298,7 +298,7 @@ If the Jenkins controller and the Datadog Agent have been deployed to a Kubernet
 
 <div class="alert alert-info"><strong>Note</strong>: Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
 
-### Configure the Agent for logs collection
+### Configure the Agent for log collection
 
 To enable [collecting logs from your jobs](#enable-job-log-collection), configure the Datadog Agent to listen for logs on a TCP port:
 
