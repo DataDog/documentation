@@ -20,7 +20,7 @@ Currently, notifications for [CSM Misconfigurations][2] can only be configured f
 This change will have the following impact on how notifications are generated for CSM Misconfigurations:
 
 1. You will now be able to specify misconfiguration as a source type when creating notification rules.
-1. You will no longer be able to enable signals for CSM Misconfigurations detection rules. This also means that notifications can no longer be enabled for individual detection rules.
+1. You will no longer be able to configure signals for CSM Misconfigurations detection rules. This also means that notifications can no longer be enabled for individual detection rules.
 1. Support for CSM Misconfigurations signals will be deprecated in late 2024. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
 ## Notification rules source types selector
