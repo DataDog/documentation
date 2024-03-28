@@ -13,15 +13,13 @@ Use calculated fields when you want to apply Boolean logic, perform arithmetic o
 
 ## Add a calculated field
 
-You can add a calculated field from the Log Explore or on a specific JSON attribute.
-
-To add a calculated field from the Log Explorer:
+In the Log Explorer:
 
 1. Navigate to [Log Explorer][1].
 1. Click the **Add** button that is next to the search query bar.
 1. Select **Calculated field**.
 
-To add a calculated field on a specific JSON attribute:
+Pivot directly from a specific JSON attribute:
 
 1. Navigate to [Log Explorer][1].
 1. Open a log event to the side panel.
@@ -30,8 +28,8 @@ To add a calculated field on a specific JSON attribute:
 
 ## Supported functions and operations
 
-- Arithmetic functions between attributes or literals: (`+`, `-`, `*`, and `/`)
-- Comparisons operators between attributes or literals: (`>`, `>`, `=`, `<`, `<=`, `==`, and `!=`)
+- Arithmetic operations between attributes or literals: (`+`, `-`, `*`, and `/`)
+- Comparisons between attributes or literals: (`>`, `>`, `=`, `<`, `<=`, `==`, and `!=`)
 - The following string manipulation functions:
     - `lower(<attribute>)`
     - `upper(<attribute>)`
