@@ -13,6 +13,9 @@ To learn more about RBAC configuration and IAM entities, see [Managing users or 
 
 ## Prerequisites
 
+<div class="alert alert-info">Scanning EKS clusters requires public endpoints. Read <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS cluster endpoint access control
+</a> for endpoint access options.</div>
+
 Before connecting your Amazon EKS clusters with Cloudcraft, you must connect your AWS account and generate diagrams that include your clusters.
 
 To connect your AWS account and familiarize yourself with Cloudcraft, see the following articles:
