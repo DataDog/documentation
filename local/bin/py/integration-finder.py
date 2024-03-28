@@ -56,7 +56,7 @@ def update_repos(integrations_repos):
                     print(f'\n\x1b[31mERROR\x1b[0m:Failed to update {k}: {repo[k]}' +
                           '\nContinuing without updating the repo. ' + 
                           f'To resolve, check {k} for a dirty feature branch and commit, ' +
-                          'stash, or reset any changes. Then try again.\n')
+                          'stash, or reset any changes, then try again.\n')
             else:
                 print(f'{k}: {repo[k]} not found. Cloning to {local_repo_path}')
                 git.Repo.clone_from(url=f'git@github.com:DataDog/{k}.git', to_path=local_repo_path)
