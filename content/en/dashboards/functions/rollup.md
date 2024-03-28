@@ -43,7 +43,7 @@ Applying the `moving_rollup()` function to a query allows you to combine points 
 
 ## Rollup interval: enforced vs custom
 
-When graphing, Datadog sets a limit on the number of points per time series. To retain visual clarity, series can have up to 1500 points. To respect this limit, Datadog rolls up data points automatically, defaulting to the `avg` method, effectively displaying the average of all data points within a time interval for a given metric. The default rollup time interval varies depending on how the data is being visualized. See the following chart to reference these default time intervals:
+When graphing, Datadog sets a limit on the number of points per timeseries. To retain visual clarity, a series can have up to 1500 points. To respect this limit, Datadog rolls up datapoints automatically, defaulting to the `avg` method, effectively displaying the average of all datapoints within a time interval for a given metric. The default rollup time interval varies depending on how the data is visualized. See the following chart to reference these default time intervals:
 
 | Timeframe           | Rollup Interval, Line Graph | Rollup Interval, Bar Graph | Rollup Interval, API |
 |---------------------|-----------------------------|----------------------------|----------------------|
