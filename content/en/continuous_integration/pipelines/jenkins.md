@@ -483,7 +483,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     ```
 {{% /tab %}}
 
-{{% tab "Report through the Datadog Agent (recommended)" %}}
+{{% tab "Report through the Datadog Agent" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Update your configuration script to include the following:
