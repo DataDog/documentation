@@ -75,6 +75,6 @@ cascade:
     {{< nextlink href="integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics" tag=" SQL Server" >}}Use WMI to collect more SQL Server performance metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/connection-issues-with-the-sql-server-integration" tag=" SQL Server" >}}Connection issues with the SQL Server integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/mysql-custom-queries" tag=" MySQL" >}}MySQL custom queries{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/oracle-check-upgrade-7.53.0" tag=" Oracle" >}}Oracle check in the Agent version 7.53.0{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/oracle-check-upgrade-7.53.0" tag=" Oracle" >}}Configuring the Oracle Integration in Agent 7.53.0+{{< /nextlink >}}
 {{< /whatsnext >}}
 
