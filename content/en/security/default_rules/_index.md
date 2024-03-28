@@ -42,4 +42,4 @@ Click the following buttons to filter the detection rules. Security detection ru
 [3]: /security/cloud_security_management/misconfigurations/
 [4]: /security/threats/
 [5]: /security/application_security/
-[6]: /security/identity_risks/
+[6]: /security/cloud_security_management/identity_risks/

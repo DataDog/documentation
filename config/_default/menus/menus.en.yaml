@@ -1126,111 +1126,116 @@ main:
     url: dashboards/configure/
     parent: dashboards
     weight: 1
+  - name: Dashboard List
+    identifier: dashboards_list
+    url: dashboards/list/
+    parent: dashboards
+    weight: 2
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
     identifier: dashboards_widgets
-    weight: 2
+    weight: 3
   - name: Querying
     identifier: dashboards_querying
     url: dashboards/querying/
     parent: dashboards
-    weight: 3
+    weight: 4
   - name: Functions
     url: dashboards/functions/
     parent: dashboards
     identifier: dashboards_functions
-    weight: 4
+    weight: 5
   - name: Algorithms
     identifier: dashboards_functions_algorithms
     url: dashboards/functions/algorithms/
     parent: dashboards_functions
-    weight: 401
+    weight: 501
   - name: Arithmetic
     identifier: dashboards_functions_arithmetic
     url: dashboards/functions/arithmetic/
     parent: dashboards_functions
-    weight: 402
+    weight: 502
   - name: Count
     identifier: dashboards_functions_count
     url: dashboards/functions/count/
     parent: dashboards_functions
-    weight: 403
+    weight: 503
   - name: Exclusion
     identifier: dashboards_functions_exclusion
     url: dashboards/functions/exclusion/
     parent: dashboards_functions
-    weight: 404
+    weight: 504
   - name: Interpolation
     identifier: dashboards_functions_interpolation
     url: dashboards/functions/interpolation/
     parent: dashboards_functions
-    weight: 405
+    weight: 505
   - name: Rank
     identifier: dashboards_functions_rank
     url: dashboards/functions/rank/
     parent: dashboards_functions
-    weight: 406
+    weight: 506
   - name: Rate
     identifier: dashboards_functions_rate
     url: dashboards/functions/rate/
     parent: dashboards_functions
-    weight: 407
+    weight: 507
   - name: Regression
     identifier: dashboards_functions_regression
     url: dashboards/functions/regression/
     parent: dashboards_functions
-    weight: 408
+    weight: 508
   - name: Rollup
     identifier: dashboards_functions_rollup
     url: dashboards/functions/rollup/
     parent: dashboards_functions
-    weight: 409
+    weight: 509
   - name: Smoothing
     identifier: dashboards_functions_smoothing
     url: dashboards/functions/smoothing/
     parent: dashboards_functions
-    weight: 410
+    weight: 510
   - name: Timeshift
     identifier: dashboards_functions_timeshift
     url: dashboards/functions/timeshift/
     parent: dashboards_functions
-    weight: 411
+    weight: 511
   - name: Beta
     identifier: dashboards_functions_beta
     url: dashboards/functions/beta/
     parent: dashboards_functions
-    weight: 412
+    weight: 512
   - name: Correlations
     identifier: dashboards_correlations
     url: dashboards/correlations/
     parent: dashboards
-    weight: 5
+    weight: 6
   - name: Scheduled Reports
     url: dashboards/scheduled_reports/
     parent: dashboards
-    weight: 6
+    weight: 7
     identifier: dashboards_reporting
   - name: Template Variables
     url: dashboards/template_variables/
     parent: dashboards
-    weight: 7
+    weight: 8
     identifier: dashboards_temp_variables
   - name: Overlays
     url: dashboards/change_overlays/
     parent: dashboards
-    weight: 8
+    weight: 9
     identifier: dashboards_overlays
   - name: Sharing
     identifier: dashboards_sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 9
+    weight: 10
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
     identifier: dashboards_guides
-    weight: 10
+    weight: 11
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -4133,12 +4138,12 @@ main:
     identifier: signals
     weight: 306
   - name: Identity Risks
-    url: security/identity_risks/
+    url: security/cloud_security_management/identity_risks/
     parent: csm
     identifier: csm_identity_risks
     weight: 4
   - name: Vulnerabilities
-    url: security/vulnerabilities
+    url: security/cloud_security_management/vulnerabilities
     parent: csm
     identifier: vulnerabilities
     weight: 5
@@ -4793,7 +4798,7 @@ main:
     identifier: rum_monitors
     weight: 402
   - name: Generate Custom Metrics
-    url: real_user_monitoring/generate_metrics
+    url: real_user_monitoring/platform/generate_metrics
     parent: real_user_monitoring_platform
     identifier: rum_generate_metrics
     weight: 403
@@ -7382,7 +7387,7 @@ api:
       operationids:
         - SearchSecurityMonitoringSignals
       unstable: []
-      order: 8
+      order: 9
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
     identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -7394,7 +7399,7 @@ api:
       operationids:
         - ListSecurityMonitoringSignals
       unstable: []
-      order: 9
+      order: 10
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: security-monitoring-update-an-existing-rule
@@ -7431,6 +7436,18 @@ api:
         - DeleteSecurityMonitoringRule
       unstable: []
       order: 7
+  - name: Validate a detection rule
+    url: '#validate-a-detection-rule'
+    identifier: security-monitoring-validate-a-detection-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ValidateSecurityMonitoringRule
+      unstable: []
+      order: 8
   - name: Create a detection rule
     url: '#create-a-detection-rule'
     identifier: security-monitoring-create-a-detection-rule

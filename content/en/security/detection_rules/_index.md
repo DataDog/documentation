@@ -153,6 +153,6 @@ The rule deprecation process is as follows:
 [11]: /security/application_security/threats/custom_rules/
 [12]: /security/cloud_security_management/misconfigurations/custom_rules
 [13]: /security/threats/workload_security_rules?tab=host#create-custom-rules
-[14]: /security/identity_risks/
+[14]: /security/cloud_security_management/identity_risks/
 [15]: https://app.datadoghq.com/security/configuration/
 [16]: https://app.datadoghq.com/security
