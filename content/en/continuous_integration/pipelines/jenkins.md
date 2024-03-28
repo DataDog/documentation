@@ -20,7 +20,7 @@ further_reading:
 {{< /site-region >}}
 
 ## Compatibility
-This integration supports both [agentless](https://docs.datadoghq.com/continuous_integration/pipelines/jenkins/?tab=linux#install-the-datadog-jenkins-plugin) and [agent-based](https://docs.datadoghq.com/continuous_integration/pipelines/jenkins/?tab=linux#install-the-datadog-agent-optional) installation. Agentless is recommended; install the Datadog agent for infrastructure metric correlation.
+This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-agentless) and [Agent-based](#install-the-datadog-agent-optional) installation. Agentless mode is recommended; for instrastructure metric correlation, use the Agent-based mode.
 
 - **Supported Jenkins versions**:
   - Jenkins >= 2.346.1
