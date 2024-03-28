@@ -15,4 +15,4 @@ Select the source from which you want to dual ship logs:
 - Sumo Logic
 - Datadog Agent
 
-[1]: /observability_pipelines/dual_ship_logs/dual_ship_logs_for_splunk_hec
+[1]: /observability_pipelines/dual_ship_logs/splunk_hec
