@@ -191,7 +191,7 @@ grant select on dba_data_files to datadog;
 {{% /tab %}}
 {{< /tabs >}}
 
-If the privileges are missing, the Oracle check starts executing in the legacy compatibility mode, and the following warning appears in the log file: `missing privileges detected, running in deprecated integration compatibility mode`.
+If the privileges are missing, the Oracle check executes in the legacy compatibility mode, and the following warning appears in the log file: `missing privileges detected, running in deprecated integration compatibility mode`.
 
 ### Agent v7.50.1-7.52.1
 
