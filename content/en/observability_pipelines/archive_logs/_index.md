@@ -12,6 +12,8 @@ Use Observability Pipelines to route ingested logs to an archive or a bucket in 
 - You have a high volume of noisy logs, but you may need to index them in Log Management ad hoc.
 - You have a retention policy.
 
+Select a source to get started:
+
 - [Splunk HEC][1]
 - [Splunk TCP][2]
 - [Sumo Logic][3]
