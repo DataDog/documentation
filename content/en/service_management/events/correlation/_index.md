@@ -25,7 +25,7 @@ Group events to reduce the number of notifications, and get to the root cause of
 ### Configure patterns
 
 {{< whatsnext desc="Customize your own event groupings and configure your own correlation patterns:" >}}
-   {{< nextlink href="service_management/event_management/correlation/pattern" >}}Pattern based correlation{{< /nextlink >}}
+   {{< nextlink href="service_management/events/correlation/pattern" >}}Pattern based correlation{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Recommended patterns
