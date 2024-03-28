@@ -5906,7 +5906,7 @@ components:
       example: custom_destination
       type: string
       x-enum-varnames:
-      - custom_destination
+      - CUSTOM_DESTINATION
     CustomDestinationUpdateRequest:
       description: The custom destination.
       properties:
@@ -6001,7 +6001,7 @@ components:
           type: string
         finished_at:
           description: Unix timestamp in nanoseconds when the deployment finished.
-            It should not be older than 3 hours.
+            It should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -12478,7 +12478,7 @@ components:
       properties:
         interval:
           description: If the type of the metric is rate or count, define the corresponding
-            interval.
+            interval in seconds.
           example: 20
           format: int64
           type: integer
@@ -19890,6 +19890,14 @@ components:
             feature, which the service is a part of.
           example: my-app
           type: string
+        ci-pipeline-fingerprints:
+          description: A set of CI fingerprints.
+          example:
+          - j88xdEy0J5lc
+          - eZ7LMljCk8vo
+          items:
+            type: string
+          type: array
         contacts:
           description: A list of contacts related to the services.
           items:
@@ -22519,6 +22527,11 @@ components:
           description: Team memberships response data
           items:
             $ref: '#/components/schemas/UserTeam'
+          type: array
+        included:
+          description: Resources related to the team memberships
+          items:
+            $ref: '#/components/schemas/UserTeamIncluded'
           type: array
         links:
           $ref: '#/components/schemas/TeamsResponseLinks'
@@ -34237,6 +34250,37 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/validation:
+    post:
+      description: Validate a detection rule.
+      operationId: ValidateSecurityMonitoringRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Validate a detection rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}:
     delete:
       description: Delete an existing rule. Default rules cannot be deleted.
@@ -34414,7 +34458,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 9
+      x-menu-order: 10
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -34458,7 +34502,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -36979,10 +37023,11 @@ paths:
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/usage/application_security:
     get:
+      deprecated: true
       description: 'Get hourly usage for application security .
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageApplicationSecurityMonitoring
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -37395,10 +37440,11 @@ paths:
         type: safe
   /api/v2/usage/lambda_traced_invocations:
     get:
+      deprecated: true
       description: 'Get hourly usage for Lambda traced invocations.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated.. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageLambdaTracedInvocations
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -37457,10 +37503,11 @@ paths:
         type: safe
   /api/v2/usage/observability_pipelines:
     get:
+      deprecated: true
       description: 'Get hourly usage for observability pipelines.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageObservabilityPipelines
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -38239,6 +38286,10 @@ tags:
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
 - description: 'Custom Destinations forward all the logs ingested to an external destination.
+
+
+    **Note**: Log forwarding is not available for the Government (US1-FED) site. Contact
+    your account representative for more information.
 
 
     See the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)

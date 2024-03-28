@@ -18,7 +18,7 @@ const setRumDeviceId = () => {
     const domain = window.location.hostname.split('.').slice(-2).join('.')
     const maxAge = 60 * 60 * 24 * 365
 
-    document.cookie = `_dd_device_id=${deviceId}; Domain=.${domain}; Max-Age=${maxAge}; Path=/; SameSite=None; Secure`
+    document.cookie = `_dd_device_id=${deviceId}; Domain=.${domain}; Max-Age=${maxAge}; Path=/; SameSite=None; Secure; Partitioned`
 
     window.DD_RUM.setUserProperty('device_id', deviceId)
 }

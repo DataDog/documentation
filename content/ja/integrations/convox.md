@@ -3,6 +3,7 @@ app_id: convox
 app_uuid: 4476973b-6e79-4861-a321-7e24e581873b
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: convox.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10006
     source_type_name: Convox
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -57,6 +59,7 @@ tile:
   title: Convox
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -65,7 +68,7 @@ Convox からリアルタイムにメトリクスを取得して、コンテナ�
 
 ![Convox インテグレーションダッシュボードウィジェット][1]
 
-## セットアップ
+## 計画と使用
 
 [Convox ドキュメント][2]を参照して、Datadog インテグレーションを設定してください。
 
@@ -93,27 +96,27 @@ Rack でオートスケーリングが有効になっている場合は、Rack �
 
 詳しくは、[Listening for ECS CloudWatch Events][3] チュートリアルをご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Convox インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 Convox インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Convox インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 環境変数を `convox.yml` ファイルで構成する場合、`environment` パラメーターは `services` パラメーターと同じレベルで定義する必要があります。
 
 ![同じレベルで定義された Environment と Services のパラメーター][4]
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
