@@ -28,7 +28,7 @@ To add a calculated field on a specific JSON attribute:
 1. Click on a specific log attribute to open the context menu.
 1. Click **Create calculated field from <attribute>**.
 
-## Support functions and operations
+## Supported functions and operations
 
 - Arithmetic functions between attributes or literals: (`+`, `-`, `*`, and `/`)
 - Comparisons operators between attributes or literals: (`>`, `>`, `=`, `<`, `<=`, `==`, and `!=`)
