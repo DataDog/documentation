@@ -4798,7 +4798,7 @@ main:
     identifier: rum_monitors
     weight: 402
   - name: Generate Custom Metrics
-    url: real_user_monitoring/generate_metrics
+    url: real_user_monitoring/platform/generate_metrics
     parent: real_user_monitoring_platform
     identifier: rum_generate_metrics
     weight: 403
