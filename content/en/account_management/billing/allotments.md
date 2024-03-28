@@ -61,28 +61,7 @@ Aggregation functions are used to convert the hourly billable usage into a month
 - **Maximum:** This is the maximum usage over all intervals across a given time period, usually monthly.
 - **High watermark plan (HWMP):** The billable count of hosts is calculated at the end of the month using the maximum count of the lower 99 percent of usage for those hours. Datadog excludes the top 1% to reduce the impact of spikes in usage on your bill. 
 
-Below is a summary of each allotment's default usage aggregation function:
-
-| Allotment             | Possible Parent Products                                      | Default monthly usage aggregation function | Default hourly usage aggregation function |
-|-----------------------|---------------------------------------------------------------|--------------------------------------------|-------------------------------------------|
-| Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps,
-Serverless Invocations, Serverless Functions  | Average | Average |
-| Ingested Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps | Average | Average |
-| Custom Events | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts | Sum | Sum |
-| CSM Enterprise Containers    | Cloud Security Management (CSM)       |                 | Sum                     |
-| CWS Containers      | Cloud Workload Security (CWS)              |                     | Sum                       |
-| Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |               | Sum            |
-| Profiled Containers | APM Enterprise, Continuous Profiler               |           | Sum                                       |
-| Profiled Hosts        | APM Enterprise                        | HWMP                         | Sum                      |
-| CI Indexed Spans    | CI Visibility         | Sum                | Sum                        |      
-| Test Indexed Spans    | Test Visibility         | Sum                | Sum                        |               
-| APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum |
-| APM Ingested Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
-| DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
-| Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
-| CSPM Workflow Executions | Cloud Security Management Pro, Cloud Security Management Enterprise | Sum | Sum |
-| Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | Average | |
-
+See [Usage aggregation functions for allotments](#usage-aggregation-functions-for-allotments) for individual product details.
 
 ## Calculating on-demand usage
 
@@ -379,6 +358,28 @@ The table below provides an overview of default allotments and quantities includ
     </tr>
 </table>
 <div style="margin-top: -10px; font-size: 1em">*Divide each summed monthly quantity by 730 hours to get the hourly quantity.</div>
+
+## Usage aggregation functions for allotments
+
+| Allotment             | Possible Parent Products                                      | Default monthly usage aggregation function | Default hourly usage aggregation function |
+|-----------------------|---------------------------------------------------------------|--------------------------------------------|-------------------------------------------|
+| Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps,
+Serverless Invocations, Serverless Functions  | Average | Average |
+| Ingested Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps | Average | Average |
+| Custom Events | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts | Sum | Sum |
+| CSM Enterprise Containers    | Cloud Security Management (CSM)       |                 | Sum                     |
+| CWS Containers      | Cloud Workload Security (CWS)              |                     | Sum                       |
+| Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |               | Sum            |
+| Profiled Containers | APM Enterprise, Continuous Profiler               |           | Sum                                       |
+| Profiled Hosts        | APM Enterprise                        | HWMP                         | Sum                      |
+| CI Indexed Spans    | CI Visibility         | Sum                | Sum                        |      
+| Test Indexed Spans    | Test Visibility         | Sum                | Sum                        |               
+| APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum |
+| APM Ingested Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
+| DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
+| Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
+| CSPM Workflow Executions | Cloud Security Management Pro, Cloud Security Management Enterprise | Sum | Sum |
+| Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | Average | |
 
 [1]: https://www.datadoghq.com/pricing/list/
 [2]: https://app.datadoghq.com/billing/usage
