@@ -39,6 +39,7 @@ SCA can run in CI pipelines by using [Code Analysis][3] and provide runtime moni
 
 SCA currently supports scanning the following languages and technologies for vulnerable libraries:
 
+- C#
 - Go
 - Java
 - Node.js
