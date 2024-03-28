@@ -93,17 +93,17 @@ See [Usage aggregation function](#usage-aggregation-function).
 
 #### Monthly on-demand option
 
-An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested Spans commitment per month over a period of three months. Their usage is as follows (with derived columns in italics): 
+An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested Spans commitment per month over a period of three months. Their usage is as follows (with derived values in *italics*): 
 
-| Month | APM host commitment | APM host usage | *Allotment for Ingested Spans* | *Included usage for Ingested Spans* | Billable usage for Ingested Spans | *On-demand usage for Ingested Spans* |
-|-----------|---------------------|----------------|--------------------------|----------------------|--------------------------------|
-| Month 1  | 10  | 5   | *1500 GB*   | *1600 GB*   | 2000 GB | *400 GB*   |
-| Month 2  | 10  | 15 | *2250 GB*  | *2350 GB* | 2000 GB  | *0 GB*      |
-| Month 3 | 10   | 10   | *1500 GB*  | *1600 GB*  | 1600 GB | *0 GB*  |
+| Month | APM host commitment | APM host usage | Allotment for Ingested Spans | Included usage for Ingested Spans | Billable usage for Ingested Spans | On-demand usage for Ingested Spans |
+|-----|--------|--------|-----------|-----------|---------|---|
+| 1  | 10  | 5   | *1500 GB*   | *1600 GB*   | 2000 GB | *400 GB*  |
+| 2  | 10  | 15 | *2250 GB*  | *2350 GB* | 2000 GB  | *0 GB*      |
+| 3 | 10   | 10   | *1500 GB*  | *1600 GB*  | 1600 GB | *0 GB*  |
 
 For a monthly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 150 GB. 
 
-In **Month 1,**, the organization was committed to 10 APM hosts but only used 5. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(5, 10) * 150 GB = 1500 GB allotment of Ingested Spans`. Their included usage for Ingested Spans was the sum of their commitment and allotment: `1500 GB + 100 GB = 1600 GB`. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their billable usage and allotment: `maximum(0, 2000 – 1600) = 400 GB`.
+In **Month 1**, the organization was committed to 10 APM hosts but only used 5. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(5, 10) * 150 GB = 1500 GB allotment of Ingested Spans`. Their included usage for Ingested Spans was the sum of their commitment and allotment: `1500 GB + 100 GB = 1600 GB`. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their billable usage and allotment: `maximum(0, 2000 – 1600) = 400 GB`.
 
 In **Month 2**, the organization was committed to 10 APM hosts but used 15. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(15, 10) * 150 GB = 2250 GB allotment of Ingested Spans`. Their included usage for Ingested Spans was the sum of their commitment and allotment: `2250 GB + 100 GB = 2350 GB`. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their usage and allotment: `maximum(0, 2000 – 2350) = 0 GB`.
 
