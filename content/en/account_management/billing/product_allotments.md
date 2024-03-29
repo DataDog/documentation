@@ -86,7 +86,7 @@ Billable usage refers to any raw usage that is eligible to appear on a user's in
 ### On-demand option
 On monthly metering, on-demand usage is calculated at the end of the month by comparing billable usage to included usage. On hourly metering, on-demand usage is calculated every hour instead of at the end of the month. It is then aggregated over all usage hours in the month, and the commitment is then applied to arrive at a final billable on-demand usage value.
 
-### Usage Aggregation
+### Usage aggregation
 See [Usage aggregation function](#usage-aggregation-function).
 
 ### Examples
