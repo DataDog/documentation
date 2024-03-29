@@ -17,7 +17,7 @@ further_reading:
   text: "Troubleshooting the AWS integration"
 - link: "https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/"
   tag: "Guide"
-  text: "AWS CloudWatch metric streams with Kinesis Data Firehose"
+  text: "AWS CloudWatch metric streams with Amazon Data Firehose"
 - link: "https://www.datadoghq.com/blog/aws-monitoring/"
   tag: "Blog"
   text: "Key metrics for AWS monitoring"
