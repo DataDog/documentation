@@ -18,6 +18,12 @@ The Observability Pipelines Worker is the software that runs in your infrastruct
 
 The Datadog UI provides a control plane to manage your Observability Pipelines Workers. You can build and edit pipelines, deploy pipeline changes to your Workers, and monitor your pipelines to evaluate the health of your pipelines.
 
+The following sources are available:
+
+- Datadog Agent
+- Splunk HTTP Event Collector (HEC)
+- Splunk Forwarder
+- Sumo Logic
 
 ## Get started
 
@@ -25,10 +31,13 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 1. Select a use case:
     - [Log volume control][1]
     - [Dual ship logs][2]
-    - Split logs
-    - Archive logs
-    - Senstive data redaction
-1. Add monitors.
+    - [Split logs][3]
+    - [Archive logs to Datadog Archives][4]
+    - [Sensitive data redaction][5]
+1. Enable monitors.
 
 [1]: /observability_pipelines/log_volume_control/
 [2]: /observability_pipelines/dual_ship_logs/
+[3]: /observability_pipelines/split_logs/
+[4]: /observability_pipelines/archives_logs/
+[5]: /observability_pipelines/sensitive_data_scanner/
