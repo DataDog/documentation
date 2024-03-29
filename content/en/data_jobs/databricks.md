@@ -37,8 +37,8 @@ The following init script installs the Datadog Agent on the cluster:
 
 You can choose to install the Agent globally, or on a specific Databricks cluster.
 
-<!-- xxx tabs xxx -->
-<!-- xxx tab "Global init (Recommended)" xxx -->
+{{< tabs >}}
+{{% tab "Global init (Recommended)" %}}
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Admin Settings** and click the **Compute** tab.
 1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
@@ -68,8 +68,9 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   |
 
 
-<!-- xxz tab xxx -->
-<!-- xxx tab "On a specific cluster" xxx -->
+{{% /tab %}}
+{{% tab "On a specific cluster" %}}
+
 1. Download the init script.
 1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
@@ -81,7 +82,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 #### Set the required init script parameters
 
 1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
-1. At the bottom of the page, go to the **Spark** tab.
+2. At the bottom of the page, go to the **Spark** tab.
    {{< img src="data_jobs/databricks/configure-databricks-cluster-init-script.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
 
    In the **Environment variables** textbox, provide the values for the init script parameters.
@@ -103,10 +104,9 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   |
 
 
-1. Click **Confirm**.
+3. Click **Confirm**.
 
-<!-- xxz tab xxx -->
-<!-- xxz tabs xxx -->
+{{% /tab %}}
 
 ## Validation
 
