@@ -4218,11 +4218,6 @@ main:
     parent: appsec_getting_started
     identifier: appsec_enabling_single_step
     weight: 202
-  - name: Software Composition Analysis
-    url: security/application_security/enabling/single_step/software_composition_analysis/
-    parent: appsec_enabling_single_step
-    identifier: appsec_enabling_single_step_sca
-    weight: 2100
   - name: Threat Detection and Protection
     url: security/application_security/enabling/single_step/threat_detection/
     parent: appsec_enabling_single_step
@@ -4238,11 +4233,6 @@ main:
     parent: appsec_getting_started
     identifier: appsec_enabling_tracing_libraries
     weight: 203
-  - name: Software Composition Analysis
-    url: security/application_security/enabling/tracing_libraries/software_composition_analysis/
-    parent: appsec_enabling_tracing_libraries
-    identifier: appsec_enabling_tracing_libraries_sca
-    weight: 2100
   - name: Threat Detection and Protection
     url: security/application_security/enabling/tracing_libraries/threat_detection/
     parent: appsec_enabling_tracing_libraries

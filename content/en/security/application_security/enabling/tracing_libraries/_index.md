@@ -4,9 +4,13 @@ kind: documentation
 disable_toc: true
 ---
 
-{{< whatsnext desc="" >}}
-    {{< nextlink href="/security/application_security/enabling/tracing_libraries/software_composition_analysis" >}}Enabling ASM for Software Composition Analysis using Datadog tracing libraries{{< /nextlink >}}
+## Overview
 
+Instrumentation allows you to quickly get security insights from a wide range of standard operations and popular frameworks with minimal manual intervention. You can automatically instrument your ASM libraries when you install the Datadog Agent with single step instrumentation, or when you [manually add Datadog tracing libraries][1] to your code.
+
+The following documentation provides instructions to enable ASM using Datadog tracing libraries for threat detection and protection capabilities, and for code security. 
+
+{{< whatsnext desc=" " >}}
     {{< nextlink href="/security/application_security/enabling/tracing_libraries/threat_detection" >}}Enabling ASM for Threat Detection and Protection using Datadog tracing libraries{{< /nextlink >}}
 
      {{< nextlink href="/security/application_security/enabling/tracing_libraries/code_security" >}}Enabling ASM for Code Security using Datadog tracing libraries{{< /nextlink >}}
