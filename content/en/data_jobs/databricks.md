@@ -108,6 +108,8 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{% /tab %}}
 
+{{< /tabs >}}
+
 ## Validation
 
 In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
