@@ -56,8 +56,6 @@ Note that the Datadog tags are necessary for [unified service tagging][5].
 Add [tags][1] directly to a [span][2] object by calling `Span::set_tag`. For example:
 
 ```cpp
-auto tracer = ...
-
 // Add tags directly to a span by calling `Span::set_tag`
 auto span = tracer->create_span();
 span->set_tag("key must be string", "value must also be a string");
@@ -105,30 +103,23 @@ span. For example:
 span.set_error(true);
 ```
 
-Or, alternatively:
-
-```cpp
-span.set_error_message("error");
-span.set_error_type("propagation");
-span.set_error_stack(stack);
-```
-
-Add more specific information about the error by setting any combination of the
-`error.msg`, `error.stack`, or `error.type` tags. See [Error Tracking][7] for
-more information about error tags.
+Add more specific information about the error by setting any combination of `error.msg`, `error.stack`, or `error.type` by using respectively `Span::set_error_message`, `Span::set_error_stack` and `Span::set_error_type`. See [Error Tracking][7] for more information about error tags.
 
 An example of adding a combination of error tags:
 
 ```cpp
 // Associate this span with the "bad file descriptor" error from the standard
 // library.
+span.set_error_message("error");
 span.set_error_stack("[EBADF] invalid file");
 span.set_error_type("errno");
 ```
 
-Using any of the `Span::set_error_stack`, `Span::set_error_type` or `Span::set_error_message` sets tags `error` to the value `true`.
+<div class="alert alert-info">
+Using any of the `Span::set_error_*` result in an underlying call to `Span::set_error(true)`.
+</div>
 
-To unset an error on a span, set the `error` tag to value `false`, which removes any previously set `error.msg`, `error.stack`, or `error.type` tags.
+To unset an error on a span, set the `error` tag to value `false`, which removes any previously combination of `Span::set_error_stack`, `Span::set_error_type` or `Span::set_error_message`.
 
 ```cpp
 // Clear any error information associated with this span.

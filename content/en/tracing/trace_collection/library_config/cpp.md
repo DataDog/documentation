@@ -55,9 +55,9 @@ Sets the port where traces are sent (the port where the Agent is listening for c
 `DD_TRACE_AGENT_URL` 
 : **Since**: v0.1.0 <br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, or `http://localhost:8126`.
-**Examples**:
-  - HTTP URL: `http://localhost:8126`
-  - Unix Domain Socket: `unix:///var/run/datadog/apm.socket`
+**Examples**: <br>
+HTTP URL: `http://localhost:8126` <br>
+Unix Domain Socket: `unix:///var/run/datadog/apm.socket` <br><br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. This URL supports HTTP, HTTPS, and Unix address schemes. <br>
 If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
@@ -68,42 +68,50 @@ Maximum number of traces allowed to be submitted per second.
 
 `DD_TRACE_SAMPLE_RATE`
 : **Since**: 0.1.0 <br>
-**Default**: The Datadog Agent default rates or `1.0`. <br>
+**Default**: The Datadog Agent default rate or `1.0`. <br>
 Sets the sampling rate for all generated traces. The value must be between `0.0` and `1.0` (inclusive). By default, the sampling rate is delegated to the Datadog Agent. If no sampling rate is set by the Datadog Agent, then the default is `1.0`.
 
 `DD_TRACE_SAMPLING_RULES` 
 : **Since**: v0.1.0 <br>
 **Default**: `null` <br>
-A JSON array of objects. Each object must have a `sample_rate`, and the `name` and `service` fields are optional. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+**Examples:**<br>
+Set the sample rate to 20%: `[{"sample_rate": 0.2}]` <br>
+Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'` <br><br>
+A JSON array of objects. Each object must have a `sample_rate`, and the `name` and `service` fields are optional. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. <br>
+For more information, see [Ingestion Mechanisms][2].<br>
 
 `DD_SPAN_SAMPLING_RULES`
 : **Version**: v0.1.0 <br>
 **Default**: `null`<br>
-**Example:**<br>
-  - Set the sample rate to 20%: `[{"sample_rate": 0.2}]`
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'` <br>
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][2].<br>
+
+`DD_SPAN_SAMPLING_RULES_FILE`
+: **Since**: 0.1.0 <br>
+Points to a JSON file that contains the span sampling rules. See `DD_SPAN_SAMPLING_RULES` for the rule format.
+
+`DD_PROPAGATION_STYLE`
+: **Since**: 0.1.0 <br>
+Comma separated list of propagation style(s) to use when extracting and injecting tracing context. <br>
+When multiple values are given, the order of matching is based on the order of values.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT` 
 : **Since**: v0.1.6 <br>
 **Default**: `datadog,tracecontext` <br>
 **Accepted values**: `datadog`, `tracecontext`, `b3` <br>
-Propagation style(s) to use when injecting tracing headers.
+Comma separated list of propagation styles to use when injecting tracing context.
 When multiple values are given, the order of matching is based on the order of values.
-TODO: write incompatibilities
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT` 
 : **Since**: v0.1.6 <br>
 **Default**: `datadog,tracecontext` <br>
 **Accepted values**: `datadog`, `tracecontext`, `b3` <br>
-Propagation style(s) to use when extracting tracing headers. 
+Comma separated list of propagation style to use when extracting tracing context. 
 When multiple values are given, the order of matching is based on the order of values.
 TODO: Ditto!
 
 `DD_TRACE_ENABLED`
 : **Since**: 0.1.0 <br>
-**Default**: `true`
+**Default**: `true` <br>
 Submit or not traces to the Datadog Agent. <br>
 When `false`, the library stop sending traces to the Datadog Agent. However, the library continues to generate traces, report telemetry and poll for remote configuration updates.
 
@@ -128,48 +136,22 @@ If `false`, the tracer will generate legacy 64-bit trace IDs.
 **Default**: `true` <br>
 Datadog may collect [environmental and diagnostic information about your system][4] to improve the product. When `false`, this telemetry data will not be collected.
 
+`DD_REMOTE_CONFIGURATION_ENABLED`
+: **Since**: 0.2.0 <br>
+**Default**: `true` <br>
+Enable the capability that allows you to remotely configure and change the behavior of the tracer. <br>
+When `false` this feature is disabled.
+For more information, see [Remote Configuration][5]
+
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
-: **Since**: 0.1.13 (NOT RELEASE YET) <br>
+: **Since**: 0.2.0 <br>
 **Default**: `5` <br>
 Sets how often, in seconds, the Datadog Agent is queried for Remote Configuration updates.
 
 `DD_TRACE_DELEGATE_SAMPLING`
-: **Version**: 0.1.13 (NOT RELEASE YET) <br>
+: **Version**: 0.2.0 <br>
 **Default**: `false` <br>
 If `true`, delegate trace sampling decision to a child service and prefer the resulting decision over its own, if appropriate.
-
---- 
-TODO
-
-`DD_PROPAGATION_STYLE_EXTRACT`
-: **Since**: 0.1.0 <br>
-**Default**: `datadog,tracecontext`
-
-`DD_PROPAGATION_STYLE_INJECT`
-: **Since**: 0.1.0 <br>
-**Default**: `datadog,tracecontext`
-
-`DD_PROPAGATION_STYLE`
-: **Since**: 0.1.0 <br>
-Propagation style(s) to use when extracting and injecting tracing headers. <br>
-When multiple values are given, the order of matching is based on the order of values.
-
-`DD_SPAN_SAMPLING_RULES_FILE`
-: **Since**: 0.1.0 <br>
-
-`DD_TRACE_TAGS_PROPAGATION_MAX_LENGTH`
-?? 
-
-## Deprecated (should we still mention them?)
-
-`DD_TRACE_ANALYTICS_ENABLED` 
-: ***Deprecated*** <br>
-**Default**: `false` <br>
-Enable App Analytics globally for the application.
-
-`DD_TRACE_ANALYTICS_SAMPLE_RATE` 
-: ***Deprecated*** <br>
-Sets the App Analytics sampling rate. Overrides `DD_TRACE_ANALYTICS_ENABLED` if set. A floating point number between `0.0` and `1.0`.
 
 
 ## Further Reading
@@ -180,3 +162,4 @@ Sets the App Analytics sampling rate. Overrides `DD_TRACE_ANALYTICS_ENABLED` if 
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
 [3]: /agent/configuration/network/#configure-ports
 [4]: /tracing/configure_data_security#telemetry-collection
+[5]: /agent/remote_config
