@@ -202,6 +202,16 @@ An [SQS Queue][32] (`aws_sqs_queue`) is considered publicly accessible if:
 
 See [Amazon SQS security best practices][33] for more information about public SQS queues.
 
+### Amazon Lambda Function
+
+A [lambda function][58] (`aws_lambda_function`) is considered publicly accessible if:
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|The function has a policy that allows any principal (principal_policy or principal_aws set to `"*"`) to perform actions unconditionally.|This setting makes the function accessible to everyone in the world or to any authenticated AWS user.|
+
+See [AWS Lambda documentation][59] for more information about public Lambda functions.
+
 ## Azure public accessibility logic by resource
 
 ### Azure Network Security Group (NSG)
@@ -250,6 +260,17 @@ A Storage Blob Container (`azure_storage_blob_container`) is considered publicly
 |The storage blob container is part of a storage account that does not explicitly block public access. | When a Storage Account doesn't explicitly block public access, Storage Blob Containers inside it can be made public. |
 
 To learn more about disallowing blob public access on Azure Storage accounts, see [Choose to allow or disallow blob public access on Azure Storage accounts][46].
+
+### Azure AKS Cluster
+
+An [AKS cluster][60] (`azure_aks_cluster`) is considered publicly accessible if:
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|`enable_private_cluster` is set to `false` in the cluster's configuration.|This setting makes the cluster publicly accessible when combined with an open public CIDR. |
+|The cluster's `authorized_ip_ranges` contains an open CIDR block (`"0.0.0.0/0"`) or is unset.|You can limit the CIDR blocks that can access the public endpoint of the AKS cluster. An open CIDR block means anyone on the internet can access the endpoint.|
+
+See [Azure Kubernetes Service (AKS) clusters][61] for more information on public AKS clusters.
 
 ## Google Cloud Public accessibility logic by resource
 
@@ -359,3 +380,7 @@ Explore more information about making storage buckets public [here][57].
 [55]: https://cloud.google.com/storage/docs/public-access-prevention
 [56]: https://cloud.google.com/iam/docs/understanding-roles#cloud-storage-roles
 [57]: https://cloud.google.com/storage/docs/access-control/making-data-public
+[58]: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+[59]: https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html
+[60]: https://learn.microsoft.com/en-us/azure/aks/intro-kubernetes
+[61]: https://learn.microsoft.com/en-us/azure/aks/best-practices
