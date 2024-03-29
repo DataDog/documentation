@@ -35,7 +35,7 @@ The following are key differences between using Amazon Data Firehose and CloudWa
 
 The following steps outline the process for sending logs from a sample application deployed on an EKS cluster through Fluent Bit and an Amazon Data Firehose delivery stream to Datadog. To maximize consistency with standard Kubernetes tags in Datadog, instructions are included to remap selected attributes to tag keys.
 
-1. [Create an Amazon Data Firehose delivery stream](#create-amazon-data-firehose-delivery-stream) that delivers logs to Datadog, along with an S3 Backup for any failed log deliveries.
+1. [Create an Amazon Data Firehose delivery stream](#create-an-amazon-data-firehose-delivery-stream) that delivers logs to Datadog, along with an S3 Backup for any failed log deliveries.
 2. [Configure Fluent Bit for Firehose on EKS Fargate](#configure-fluent-bit-for-firehose-on-an-eks-fargate-cluster).
 3. [Deploy a sample application](#deploy-a-sample-application).
 4. [Apply remapper processors](#remap-attributes-for-log-correlation) for correlation using Kubernetes tags and the `container_id` tag.
