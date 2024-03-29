@@ -1,7 +1,8 @@
 import { getConfig } from '../helpers/getConfig';
 import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
-import { configure, searchBox } from 'instantsearch.js/es/widgets';
+import { configure, index, searchBox } from 'instantsearch.js/es/widgets';
+import { history } from 'instantsearch.js/es/lib/routers';
 import { searchbarHits } from './algolia/searchbarHits';
 import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
@@ -100,8 +101,15 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
         const search = instantsearch({
             indexName,
             searchClient,
+            future: {
+                preserveSharedStateOnUnmount: true
+            },
+
             // routing handles search state URL sync
             routing: {
+                router: history({
+                    cleanUrlOnDispose: false
+                }),
                 stateMapping: {
                     stateToRoute(uiState) {
                         const indexUiState = uiState[indexName];
@@ -115,13 +123,18 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                                 query: routeState.s
                             }
                         };
-                    }
+                    },
                 }
             },
-            // Handle hitting algolia API based on query and page
-            searchFunction(helper) {
-                if (helper.state.query) {
-                    helper.search();
+
+            onStateChange({ uiState, setUiState }) {
+                const query = uiState[indexName].query
+
+                setUiState({
+                    [indexName]: { query }
+                })
+                                
+                if (query) {
                     if (!searchResultsPage) {
                         searchBoxContainerContainer.classList.add('active-search');
                         hitsContainerContainer.classList.remove('d-none');
@@ -130,8 +143,6 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                     if (!searchResultsPage) {
                         searchBoxContainerContainer.classList.remove('active-search');
                         hitsContainerContainer.classList.add('d-none');
-                    } else {
-                        helper.search();
                     }
                 }
             }
