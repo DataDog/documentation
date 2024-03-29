@@ -45,7 +45,7 @@ On hourly metering, the monthly allotment is adjusted to an hourly allotment. Fo
 
 ## Allotments by parent products
 
-For a full list of default allotments by parent product, see the allotments table in the [Allotments Calculator][3]. For custom or otherwise non-default allotments, refer to your contract for more information.
+For a full list of default allotments by parent product, see the allotments table on the [Allotments Calculator][3] page. For custom or otherwise non-default allotments, refer to your contract for more information.
 
 If an organization's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. Once that additional allotment is exhausted, any additional usage of the child product may be billed at an on-demand rate. For either on-demand option, allotments are not carried over to subsequent hours; if an organization has a remainder at the end of their hourly or monthly metering period, it is not applicable in the next period.
 
