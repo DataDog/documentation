@@ -25,7 +25,7 @@ further_reading:
       text: 'Monitor Amazon ECS Anywhere with Datadog'
     - link: '/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation'
       tag: 'Documentation'
-      text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
+      text: 'AWS CloudWatch Metric Streams with Amazon Data Firehose'
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
       tag: 'Blog'
       text: 'Monitor your Graviton3-powered EC2 instances with Datadog'
