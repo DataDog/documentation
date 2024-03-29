@@ -12,7 +12,7 @@ products:
     url: /security/misconfigurations/
     icon: cloud-security-management
   - name: CSM Identity Risks
-    url: /security/identity_risks/
+    url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
 ---
 
