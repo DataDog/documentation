@@ -10,7 +10,16 @@ further_reading:
     text: Datadog Jira Integration
 aliases:
   - /security/cloud_security_management/guide/jira
+products:
+  - name: CSM Misconfigurations
+    url: /security/misconfigurations/
+    icon: cloud-security-management
+  - name: CSM Identity Risks
+    url: /security/cloud_security_management/identity_risks/
+    icon: cloud-security-management
 ---
+
+{{< product-availability >}}
 
 Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Cloud Security Management (CSM) security issue. Jira for Cloud Security Management is available for [CSM Misconfigurations][3] and [CSM Identity Risks][4].
 
@@ -95,5 +104,5 @@ After you create the issue, a link to the Jira issue is displayed on the side pa
 [1]: /integrations/jira/
 [2]: /account_management/rbac/permissions/#cloud-security-platform
 [3]: /security/misconfigurations/
-[4]: /security/identity_risks/
+[4]: /security/cloud_security_management/identity_risks/
 [5]: https://app.datadoghq.com/integrations/jira?search=jira

@@ -112,6 +112,10 @@ Disk space is low @ops-team@company.com
 
 {{% notifications-email %}}
 
+#### Teams
+
+If a notification channel is set, you can route notifications to a specific Team. Monitor alerts targeting @team-handle are redirected to the selected communication channel. For more information on setting a notification channel to your Team, see the [Teams][17] documentation.
+
 #### Integrations
 
 {{% notifications-integrations %}}
@@ -202,3 +206,4 @@ Message variables auto-populate with a randomly selected group based on the scop
 [14]: /monitors/guide/how-to-set-up-rbac-for-monitors/
 [15]: /monitors/types
 [16]: /monitors/guide/recovery-thresholds/
+[17]: /account_management/teams/#send-notifications-to-a-specific-communication-channel

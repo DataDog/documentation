@@ -27,7 +27,10 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
+Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS. 
+The feature is not available on Windows.
+
+For manually instrumented code, continuous profiler requires scope activation of spans:
 
 ```java
 final Span span = tracer.buildSpan("ServicehandlerSpan").start();
@@ -58,9 +61,10 @@ Requires `dd-trace-py` version 0.44.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-To enable the new [timeline feature](#span-execution-timeline-view) (beta):
-- upgrade to `dd-trace-rb` 1.15+
-- set `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=true`
+The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-rb` 1.21.1+.
+
+To additionally enable showing [GC in timeline](#span-execution-timeline-view):
+- set `DD_PROFILING_FORCE_ENABLE_GC=true`
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}

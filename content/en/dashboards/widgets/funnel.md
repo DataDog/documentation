@@ -13,7 +13,7 @@ further_reading:
   text: "Use funnel analysis to understand and optimize key user flows"
 ---
 
-The funnel widget visualizes conversion rates across user workflows and end-to-end user journeys.
+Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. The funnel widget visualizes conversion rates across user workflows and end-to-end user journeys.
 
 {{< img src="dashboards/widgets/funnel/funnel.png" alt="Funnel widget visualizing drop-off rates of a user on an e-commerce site" >}}
 
