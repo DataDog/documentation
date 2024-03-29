@@ -13,7 +13,7 @@ As Datadog receives dates, it timestamps them using the value(s) from any of the
 * `eventTime`
 * `published_date`
 
-If your events have dates in an attribute that are not in this list, use the log date remapper processor to define their date attribute as the official event timestamp:
+If your events have dates in an attribute that are not in this list, use the date remapper processor to define their date attribute as the official event timestamp:
 
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
@@ -25,10 +25,8 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 
 **Notes**:
 
-* Log events can be submitted up to 18 hours in the past and two hours in the future.
 * As of ISO 8601-1:2019, the basic format is `T[hh][mm][ss]` and the extended format is `T[hh]:[mm]:[ss]`. Earlier versions omitted the T (representing time) in both formats.
-* If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
-* If multiple log date remapper processors are applied to a given log within the pipeline, the last one (according to the pipeline's order) is taken into account.
+* If multiple  date remapper processors are applied to a given pipeline, the last one (according to the pipeline's order) is taken into account.
 
 Example date remapper processor  
 
