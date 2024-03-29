@@ -11,7 +11,7 @@ further_reading:
   text: "Datadog Forwarder Lambda function"
 - link: "https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/"
   tag: "Guide"
-  text: "Send AWS service logs with the Datadog Kinesis Firehose destination"
+  text: "Send AWS service logs with the Datadog Amazon Data Firehose destination"
 - link: "https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/"
   tag: "Guide"
   text: "Troubleshooting the AWS integration"
