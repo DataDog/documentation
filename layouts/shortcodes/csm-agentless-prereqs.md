@@ -5,9 +5,9 @@ To deploy Agentless scanning in your AWS environment, in addition to having [Clo
 
 ### Enable Remote Configuration
 
-[Remote Configuration][1] is required to allow Datadog to send information to Agentless scanners, such as which cloud resources should be scanned. To enable Remote Configuration for your organization, navigate to your Organization Settings and follow [steps 1-4 outlined here.][2]
+[Remote Configuration][1] is required to allow Datadog to send information to Agentless scanners, such as which cloud resources should be scanned. To enable Remote Configuration for your organization, navigate to your [Organization Settings in Datadog][4] and follow [steps 1-4][2] in the Remote Configuration docs.
 
-**Note**: Only the CSM-enabled AWS Accounts that have scanners deployed need Remote-config enabled API keys.
+**Note**: Only CSM-enabled AWS accounts that have scanners deployed need Remote-config enabled API keys.
 
 ### Permissions
 
@@ -33,7 +33,6 @@ ebs:GetSnapshotBlock
 
 The Agentless Scanning instance requires the following IAM permissions to scan for Lambdas:
 
-Permissions required:
 ```
 lambda:GetFunction
 ```
@@ -42,3 +41,4 @@ lambda:GetFunction
 [1]: /agent/remote_config/?tab=configurationyamlfile
 [2]: /agent/remote_config/?tab=configurationyamlfile#setup
 [3]: /security/cloud_security_management/setup
+[4]: https://app.datadoghq.com/organization-settings/remote-config
