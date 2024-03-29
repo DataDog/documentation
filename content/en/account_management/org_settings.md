@@ -109,7 +109,7 @@ Learn how to access and control [Synthetic Monitoring Settings][13].
 
 ### Safety Center
 
-The **Safety Center** page contains security alerts, warnings and recommendations to review in your organization. You can also set **Security Contacts** to receive security notifications for your organization by clicking **Configuration**, entering up to 2 email addresses, then clicking the **Save** button.
+The **Safety Center** page contains security alerts, warnings, and recommendations to review in your organization. You can also set **Security Contacts** to receive security notifications for your organization by clicking **Configuration**, entering up to 2 email addresses, then clicking the **Save** button.
 
 ### Public sharing
 
