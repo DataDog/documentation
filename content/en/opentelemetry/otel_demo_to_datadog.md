@@ -276,6 +276,18 @@ And then, you can navigate to <http://localhost:8080>.
 As soon as the OTel demo is running, the load generator will simulate traffic in the application, and
 in a couple of seconds you can already start seeing data arriving in Datadog.
 
+### Service Catalog
+
+Check out all services that are part of the OTel demo.
+
+1. Go to **APM** > **Service Catalog**.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog.png" alt="View Service Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
+
+2. On the top left corner, select **Map** to see how the services are connected (you can view the map as Cluster or Flow).
+
+{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_flow.png" alt="View Service Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
