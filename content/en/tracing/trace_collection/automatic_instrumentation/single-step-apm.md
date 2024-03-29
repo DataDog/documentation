@@ -173,8 +173,8 @@ docker run -d --name dd-agent \
 
 You can enable APM by installing the Agent with either:
 
-- [Datadog Operator](#installing-with-datadog-operator)
-- [Datadog Helm chart](#installing-with-helm)
+- Datadog Operator
+- Datadog Helm chart
 
 <div class="alert alert-info">Single Step Instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.</div>
 
