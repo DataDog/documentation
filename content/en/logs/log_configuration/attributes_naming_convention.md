@@ -127,6 +127,6 @@ See [Alias Facets][11] for additional information.
 [6]: /getting_started/tagging/unified_service_tagging/
 [7]: /logs/explorer/patterns/
 [8]: /tracing/other_telemetry/connect_logs_and_traces/
-[9]: https://docs.datadoghq.com/standard-attributes/?product=log+management
+[9]: /standard-attributes/?product=log+management
 [10]: /logs/explorer/facets/#aliased-facets
 [11]: /logs/explorer/facets/#alias-facets
