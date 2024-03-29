@@ -41,7 +41,7 @@ cascade:
     {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}Use the Container Agent to Tail Logs from the Host{{< /nextlink >}}
     {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}Mechanisms to Ensure Logs are Not Lost{{< /nextlink >}}
     {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}Send Logs from a Custom Log File with Heightened Read Permissions{{< /nextlink >}}   
-    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send AWS EKS Fargate Logs with Amazon Data Firehose{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send Amazon EKS Fargate Logs with Amazon Data Firehose{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
