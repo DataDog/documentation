@@ -39,6 +39,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 
 {{< tabs >}}
 {{% tab "Global init (Recommended)" %}}
+
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Admin Settings** and click the **Compute** tab.
 1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
@@ -51,9 +52,9 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 
 Provide the values for the init script parameters at the beginning of the global init script.
 
-```text
+```bash
 export DD_API_KEY=<YOUR API KEY>
-export DD_SITE={{< region-param key="dd_site" code="true" >}}
+export DD_SITE=<YOUR DATADOG SITE>
 export DATABRICKS_WORKSPACE=<YOUR WORKSPACE NAME>
 ```
 
@@ -61,12 +62,15 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 | Variable                 | Description                                                                                                                                                      | Default |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| DD_API_KEY               | Your [Datadog API key][3]                                                                                                                                        |         |
-| DD_SITE                  | Your [Datadog site][5]                                                                                                                                           |         |
+| DD_API_KEY               | Your [Datadog API key][1]                                                                                                                                        |         |
+| DD_SITE                  | Your [Datadog site][2]                                                                                                                                           |         |
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration) |         |
 | DRIVER_LOGS_ENABLED      | To collect spark driver logs in Datadog                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   |
 
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/
 
 {{% /tab %}}
 {{% tab "On a specific cluster" %}}
@@ -89,7 +93,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
    ```text
    DD_API_KEY=<YOUR API KEY>
-   DD_SITE={{< region-param key="dd_site" code="true" >}}
+   DD_SITE=<YOUR DATADOG SITE>
    DATABRICKS_WORKSPACE=<YOUR WORKSPACE NAME>
    ```
 
@@ -97,12 +101,14 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 | Variable                 | Description                                                                                                                                                      | Default |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| DD_API_KEY               | Your [Datadog API key][3]                                                                                                                                        |         |
-| DD_SITE                  | Your [Datadog site][5]                                                                                                                                           |         |
+| DD_API_KEY               | Your [Datadog API key][1]                                                                                                                                        |         |
+| DD_SITE                  | Your [Datadog site][2]                                                                                                                                           |         |
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration) |         |
 | DRIVER_LOGS_ENABLED      | To collect spark driver logs in Datadog                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   |
 
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/
 
 3. Click **Confirm**.
 
@@ -123,9 +129,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/databricks?search=databricks
-[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.databricks.com/en/security/secrets/index.html
-[5]: /getting_started/site/
 [6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
 [8]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init.sh
