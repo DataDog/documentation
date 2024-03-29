@@ -45,7 +45,7 @@ On hourly metering, the monthly allotment is adjusted to an hourly allotment. Fo
 
 ## Allotments by parent products
 
-For a full list of default allotments by parent product, see the [allotments table](#allotments-table). For custom or otherwise non-default allotments, refer to your contract for more information.
+For a full list of default allotments by parent product, see the allotments table in the [Allotments Calculator][3]. For custom or otherwise non-default allotments, refer to your contract for more information.
 
 If an organization's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. Once that additional allotment is exhausted, any additional usage of the child product may be billed at an on-demand rate. For either on-demand option, allotments are not carried over to subsequent hours; if an organization has a remainder at the end of their hourly or monthly metering period, it is not applicable in the next period.
 
@@ -131,255 +131,27 @@ Since the default usage aggregation function for Ingested Spans is sum, usage is
 
 Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Spans. Thus, their monthly on-demand usage is the maximum of 0 and the difference between their monthly usage and commitment: `maximum(0, 0.446 – 0.3) = 0.146 GB`.
 
-## Allotments table
-Allotment usage refers to product usage that is included with the purchase of select parent products. These allotments grant a certain amount of usage for a child product as part of the account's committed and on-demand usage of the parent product. 
-
-The table below provides an overview of default allotments and quantities included with each parent product, for both the monthly and hourly on-demand options.
-
-<table>
-    <thead>
-        <th>Parent product</th>
-        <th>Allotment product</th>
-        <th>Default quantity - monthly on-demand option</th>
-        <th>Default quantity - hourly on-demand option*</th>
-    </thead>
-    <tr>
-        <th style="border-top: none !important;" rowspan="4">Infrastructure - Pro</th>
-        <td>Custom Metrics</td>
-        <td>100 per host</td>
-        <td>100 per host</td>
-    </tr>
-    <tr>
-        <td>Ingested Custom Metrics</td>
-        <td>100 per host</td>
-        <td>100 per host</td>
-    </tr>
-    <tr>
-        <td>Containers</td>
-        <td style="background-color: #e8e8e8"></td>
-        <td>5 per host</td>
-    </tr>
-    <tr>
-        <td>Custom Events</td>
-        <td>500 per host</td>
-        <td>0.68 per host per hour</td>
-    </tr>
-    <tr>
-        <th rowspan="4">Infrastructure - Enterprise</th>
-        <td>Custom Metrics</td>
-        <td>200 per host</td>
-        <td>200 per host</td>
-    </tr>
-    <tr>
-        <td>Ingested Custom Metrics</td>
-        <td>200 per host</td>
-        <td>200 per host</td>
-    </tr>
-    <tr>
-        <td>Containers</td>
-        <td style="background-color: #e8e8e8"></td>
-        <td>10 per host</td>
-    </tr>
-    <tr>
-        <td>Custom Events</td>
-        <td>1,000 per host</td>
-        <td>1.37 per host per hour</td>
-    </tr>
-    <tr>
-        <th rowspan="2">APM</th>
-        <td>Indexed Spans</td>
-        <td>1M per host</td>
-        <td>1370 per host per hour</td>
-    </tr>
-    <tr>
-        <td>Ingested Spans</td>
-        <td>150 GB per host</td>
-        <td>0.205 GB per host per hour</td>
-    </tr>
-    <tr>
-        <th rowspan="3">APM Pro</th>
-        <td>Indexed Spans</td>
-        <td>1M per host</td>
-        <td>1370 per host per hour</td>
-    </tr>
-    <tr>
-        <td>Data Streams Monitoring</td>
-        <td>1 per host</td>
-        <td>1 per host per hour</td>
-    </tr>
-    <tr>
-        <td>Ingested Spans</td>
-        <td>150 GB per host</td>
-        <td>0.205 GB per host per hour</td>
-    </tr>
-    <tr>
-        <th rowspan="5">APM Enterprise</th>
-        <td>Indexed Spans</td>
-        <td>1M per host</td>
-        <td>1370 per host per hour</td>
-    </tr>
-    <tr>
-        <td>Ingested Spans</td>
-        <td>150 GB per host</td>
-        <td>0.205 GB per host per hour</td>
-    </tr>
-    <tr>
-        <td>Data Streams Monitoring</td>
-        <td>1 per host</td>
-        <td>1 per host per hour</td>
-    </tr>
-    <tr>
-        <td>Profiled Container</td>
-        <td style="background-color: #e8e8e8"></td>
-        <td>4 per host</td>
-    </tr>
-    <tr>
-        <td>Profiled Host</td>
-        <td>1 per host</td>
-        <td>1 per host</td>
-    </tr>
-    <tr>
-        <th rowspan="1">Continuous Profiler</th>
-        <td>Profiled Container</td>
-        <td style="background-color: #e8e8e8"></td>
-        <td>4 per host</td>
-    </tr>
-    <tr>
-        <th rowspan="1">Database Monitoring</th>
-        <td>Normalized Queries</td>
-        <td>200 per database host</td>
-        <td>200 per database host per hour</td>
-    </tr>
-    <tr>
-        <th rowspan="2">Serverless Workload Monitoring - Functions</th>
-        <td>Custom Metrics</td>
-        <td>5 per function</td>
-        <td>5 per function</td>
-    </tr>
-    <tr>
-        <td>Ingested Custom Metrics</td>
-        <td>5 per function</td>
-        <td>5 per function</td>
-    </tr>
-    <tr>
-        <th rowspan="2">Serverless Workload Monitoring - Apps</th>
-        <td>Custom Metrics</td>
-        <td>5 per instance app</td>
-        <td>5 per instance app</td>
-    </tr>
-    <tr>
-        <td>Ingested Custom Metrics</td>
-        <td>5 per instance app</td>
-        <td>5 per instance app</td>
-    </tr>
-    <tr>
-        <th rowspan="2">Serverless APM</th>
-        <td>Indexed Spans (15-Day Retention)</td>
-        <td>300K per 1M invocations</td>
-        <td>411 per 1M invocations per hour</td>
-    </tr>
-    <tr>
-        <td>Ingested Spans</td>
-        <td>50GB per 1M invocations</td>
-        <td>0.068 GB per 1M invocations per hour</td>
-    </tr>
-    <tr>
-        <th rowspan="1">Pipeline Visibility</th>
-        <td>CI Indexed Spans (30 Day Retention Period)</td>
-        <td>400K per committer</td>
-        <td>547.95 per committer per hour</td>
-    </tr>
-    <tr>
-        <th rowspan="1">Testing Visibility</th>
-        <td>CI Indexed Spans (30 Day Retention Period)</td>
-        <td>1M per committer</td>
-        <td>1370 per committer per hour</td>
-    </tr>
-    <tr>
-        <th rowspan="1">Cloud Security Management Pro</th>
-        <td>CSPM Workflow Executions</td>
-        <td>5 per host</td>
-        <td>5 per host</td>
-    </tr>
-    <tr>
-        <th rowspan="2">Cloud Security Management Enterprise</th>
-        <td>CSM Enterprise Containers</td>
-        <td style="background-color: #e8e8e8"></td>
-        <td>20 per host</td>
-    </tr>
-    <tr>
-        <td>CSPM Workflow Executions</td>
-        <td>20 per host</td>
-        <td>20 per host</td>
-    </tr>
-    <tr>
-        <th rowspan="2">IOT</th>
-        <td>Custom Metrics</td>
-        <td>20 per device</td>
-        <td>20 per device</td>
-    </tr>
-    <tr>
-        <td>Ingested Custom Metrics</td>
-        <td>20 per device</td>
-        <td>20 per device</td>
-    </tr>
-    <tr>
-        <th rowspan="1">Cloud Workload Security Host</th>
-        <td>CWS Containers</td>
-        <td style="background-color: #e8e8e8"></td>
-        <td>4 per host</td>
-    </tr>
-    <tr>
-        <th rowspan="2">Fargate (APM Pro)</th>
-        <td>Ingested Spans</td>
-        <td>10 GB per task</td>
-        <td>0.0137 GB per task</td>
-    </tr>
-    <tr>
-        <td>Indexed Spans</td>
-        <td>65K per task</td>
-        <td>89.04 per task</td>
-    </tr>
-    <tr>
-        <th rowspan="3">Fargate (APM Enterprise)</th>
-        <td>Ingested Spans</td>
-        <td>10 GB per task</td>
-        <td>0.0137 GB per task</td>
-    </tr>
-    <tr>
-        <td>Indexed Spans</td>
-        <td>65K per task</td>
-        <td>89.04 per task</td>
-    </tr>
-    <tr>
-        <td>Fargate Task (Continuous Profiler)</td>
-        <td>1 per task</td>
-        <td>1 per task</td>
-    </tr>
-</table>
-<div style="margin-top: -10px; font-size: 1em">*Divide each summed monthly quantity by 730 hours to get the hourly quantity.</div>
-
 ## Usage aggregation functions for allotments
 
 | Allotment             | Possible Parent Products                                      | Default monthly usage aggregation function | Default hourly usage aggregation function |
 |-----------------------|---------------------------------------------------------------|--------------------------------------------|-------------------------------------------|
-| Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps,
-Serverless Invocations, Serverless Functions  | Average | Average |
+| Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps, Serverless Invocations, Serverless Functions  | Average | Average |
 | Ingested Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps | Average | Average |
 | Custom Events | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts | Sum | Sum |
-| CSM Enterprise Containers    | Cloud Security Management (CSM)       |                 | Sum                     |
-| CWS Containers      | Cloud Workload Security (CWS)              |                     | Sum                       |
-| Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |               | Sum            |
-| Profiled Containers | APM Enterprise, Continuous Profiler               |           | Sum                                       |
-| Profiled Hosts        | APM Enterprise                        | HWMP                         | Sum                      |
-| CI Indexed Spans    | CI Visibility         | Sum                | Sum                        |      
-| Test Indexed Spans    | Test Visibility         | Sum                | Sum                        |               
+| CSM Enterprise Containers    | Cloud Security Management (CSM)       |      N/A     | Sum    |
+| CWS Containers      | Cloud Workload Security (CWS)              |       N/A     | Sum      |
+| Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |   N/A   | Sum  |
+| Profiled Containers | APM Enterprise, Continuous Profiler    |   N/A        | Sum   |
+| Profiled Hosts        | APM Enterprise       | HWMP   | Sum     |
+| CI Indexed Spans    | CI Visibility         | Sum     | Sum   |      
+| Test Indexed Spans    | Test Visibility         | Sum   | Sum   |               
 | APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum |
 | APM Ingested Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
 | DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
 | Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
 | CSPM Workflow Executions | Cloud Security Management Pro, Cloud Security Management Enterprise | Sum | Sum |
-| Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | Average | |
+| Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | Average | N/A |
 
 [1]: https://www.datadoghq.com/pricing/list/
 [2]: https://app.datadoghq.com/billing/usage
+[3]: https://www.datadoghq.com/pricing/allotments/
