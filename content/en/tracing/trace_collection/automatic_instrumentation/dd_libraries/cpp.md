@@ -13,7 +13,7 @@ code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-- link: "https://github.com/DataDog/dd-opentracing-cpp"
+- link: "https://github.com/DataDog/dd-trace-cpp"
   tag: "Github"
   text: Source code
 - link: "/tracing/glossary/"
@@ -25,11 +25,11 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2].
+  <strong>Note:</strong> C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as <a href="/tracing/setup/envoy/">Envoy</a> and <a href="/tracing/setup/nginx/">Nginx</a>.
 </div>
 
 ## Compatibility requirements
-The C++ tracing library requires C++17 to build. For a full list of Datadog's tracing library compatiblity requirements and processor architecture support, visit the [Compatibility Requirements][3] page.
+The C++ tracing library requires C++17 toolchain to build. For a full list of Datadog's tracing library compatiblity requirements and processor architecture support, visit the [Compatibility Requirements][3] page.
 
 ## Getting started
 Before you begin, make sure you have already [installed and configured the Agent][6].
@@ -131,7 +131,7 @@ wget https://github.com/DataDog/dd-trace-cpp/archive/${DD_TRACE_CPP_VERSION}.tar
 mkdir dd-trace-cpp && tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
 cd dd-trace-cpp
 
-# Download and install the correct version of opentracing-cpp, & other deps.
+# Download and install the correct version of dd-trace-cpp.
 # Configure the project, build it, and install it.
 cmake -B build .
 cmake --build build -j
@@ -172,10 +172,10 @@ int main() {
 }
 ```
 
-Link against `libdd_trace_cpp`, making sure that they are both in your `LD_LIBRARY_PATH`:
+Link against `libdd_trace_cpp`, making sure the shared library is in `LD_LIBRARY_PATH`.
 
 ````bash
-g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
+clang -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
 ./tracer_example
 DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler" ... }}}
 ````

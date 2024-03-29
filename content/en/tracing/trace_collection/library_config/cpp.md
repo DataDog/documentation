@@ -83,7 +83,7 @@ For more information, see [Ingestion Mechanisms][2].<br>
 `DD_SPAN_SAMPLING_RULES`
 : **Version**: v0.1.0 <br>
 **Default**: `null`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between `0.0` and `1.0` (inclusive).
 
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Since**: 0.1.0 <br>
@@ -107,7 +107,6 @@ When multiple values are given, the order of matching is based on the order of v
 **Accepted values**: `datadog`, `tracecontext`, `b3` <br>
 Comma separated list of propagation style to use when extracting tracing context. 
 When multiple values are given, the order of matching is based on the order of values.
-TODO: Ditto!
 
 `DD_TRACE_ENABLED`
 : **Since**: 0.1.0 <br>
@@ -134,13 +133,13 @@ If `false`, the tracer will generate legacy 64-bit trace IDs.
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **Since**: 0.1.12 <br>
 **Default**: `true` <br>
-Datadog may collect [environmental and diagnostic information about your system][4] to improve the product. When `false`, this telemetry data will not be collected.
+Datadog may collect [environmental and diagnostic information about your system][4] to improve the product. When `false`, telemetry data are not be collected.
 
 `DD_REMOTE_CONFIGURATION_ENABLED`
 : **Since**: 0.2.0 <br>
 **Default**: `true` <br>
-Enable the capability that allows you to remotely configure and change the behavior of the tracer. <br>
-When `false` this feature is disabled.
+Enable the capability that allows to remotely configure and change the behavior of the tracer. <br>
+When `false` this feature is disabled. <br>
 For more information, see [Remote Configuration][5]
 
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`

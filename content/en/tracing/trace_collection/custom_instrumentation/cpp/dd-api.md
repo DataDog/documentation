@@ -45,36 +45,40 @@ If you have not yet read the setup instructions, start with the <a href="https:/
 
 ## Adding tags
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. Span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-Note that the Datadog tags are necessary for [unified service tagging][5].
+Note that some Datadog tags are necessary for [unified service tagging][5].
 
 {{< tabs >}}
 
 {{% tab "Locally" %}}
 
-Add [tags][1] directly to a [span][2] object by calling `Span::set_tag`. For example:
+### Manually
+
+Add tags directly to a span object by calling `Span::set_tag`. For example:
 
 ```cpp
 // Add tags directly to a span by calling `Span::set_tag`
 auto span = tracer->create_span();
-span->set_tag("key must be string", "value must also be a string");
+span.set_tag("key must be string", "value must also be a string");
 
-// Or, add tags by providing a `SpanConfig`
+// Or, add tags by setting a `SpanConfig`
 datadog::tracing::SpanConfig opt;
 opt.tag.emplace("team", "apm-proxy");
-auto span2 = tracer->create_span(opts);
+auto span2 = tracer.create_span(opts);
 ```
 
 {{% /tab %}}
 
 {{% tab "Globally" %}}
 
-There is two ways to set tags across all your spans.
-
 ### Environment variable
 
 To set tags across all your spans, set the `DD_TAGS` environment variable as a list of `key:value` pairs separated by commas.
+
+```
+export DD_TAGS=team:apm-proxy,key:value
+```
 
 ### Manually
 
@@ -86,8 +90,8 @@ tracer_config.tags.emplace("apply", "on all spans");
 const auto validated_config = validate_config(tracer_config);
 auto tracer = datadog::trace::Tracer(*validated_config);
 
-// New spans will have all tags defined in `tracer_config.tags`
-auto span = tracer.create_tags();
+// All new spans will have contains tags defined in `tracer_config.tags`
+auto span = tracer.create_span();
 ```
 
 {{% /tab %}}
@@ -119,7 +123,7 @@ span.set_error_type("errno");
 Using any of the `Span::set_error_*` result in an underlying call to `Span::set_error(true)`.
 </div>
 
-To unset an error on a span, set the `error` tag to value `false`, which removes any previously combination of `Span::set_error_stack`, `Span::set_error_type` or `Span::set_error_message`.
+To unset an error on a span, set `Span::set_error` to `false`, which removes any  combination of `Span::set_error_stack`, `Span::set_error_type` or `Span::set_error_message`.
 
 ```cpp
 // Clear any error information associated with this span.
