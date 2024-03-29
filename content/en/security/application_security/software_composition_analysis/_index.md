@@ -126,4 +126,4 @@ Software Composition Analysis enriches the information APM is already collecting
 [10]: /account_management/rbac/permissions/#integrations
 [11]: /integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/setup
-[13]:https://github.com/DataDog/guarddog
+[13]: https://github.com/DataDog/guarddog
