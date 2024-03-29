@@ -3417,6 +3417,11 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_configure_existing_pipelines
     weight: 6
+  - name: Architecture
+    url: observability_pipelines/architecture/
+    parent: observability_pipelines
+    identifier: observability_pipelines_architecture
+    weight: 7
   - name: Log Management
     url: logs/
     pre: log
