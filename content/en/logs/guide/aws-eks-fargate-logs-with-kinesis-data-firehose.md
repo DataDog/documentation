@@ -23,7 +23,7 @@ AWS Fargate on EKS provides a fully managed experience for running Kubernetes wo
 
 The following are key differences between using Amazon Data Firehose and CloudWatch log forwarding.
 
-- **Metadata and tagging**: Metadata such as Kubernetes namespace and container ID are accessible as structured attributes when sending logs with Amazon Data Firehose.
+- **Metadata and tagging**: Metadata, such as Kubernetes namespace and container ID, are accessible as structured attributes when sending logs with Amazon Data Firehose.
 
 - **AWS Costs**: AWS Costs may vary for individual use cases but Amazon Data Firehose ingestion is generally less expensive than comparable Cloudwatch Log ingestion.
 
