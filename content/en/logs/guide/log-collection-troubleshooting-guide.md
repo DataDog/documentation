@@ -240,7 +240,7 @@ These are a few of the common configuration issues that are worth triple-checkin
 There might be an error in the logs that would explain the issue. Run the following command to check for errors:
 
 ```shell
-sudo cat /var/log/datadog/agent.log | grep ERROR
+sudo grep -i error /var/log/datadog/agent.log
 ```
 
 ## Docker environment
