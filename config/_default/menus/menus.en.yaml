@@ -1795,11 +1795,21 @@ main:
     identifier: event_usage
     parent: events
     weight: 3
+  - name: Correlation
+    url: service_management/events/correlation/
+    identifier: event_correlation
+    parent: events
+    weight: 4
+  - name: Pattern-based
+    url: service_management/events/correlation/pattern
+    identifier: event_correlation_pattern
+    parent: event_correlation
+    weight: 401
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
     parent: events
-    weight: 4
+    weight: 5
   - name: Case Management
     url: service_management/case_management/
     pre: case-management
