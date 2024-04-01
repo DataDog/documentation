@@ -119,7 +119,7 @@ Add the following settings to the `env` section of `security-agent` and `system-
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /security/misconfigurations/
+[1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/cloud_security_management/threats
-[3]: /security/vulnerabilities
+[3]: /security/cloud_security_management/vulnerabilities
 [4]: /security/cloud_security_management/setup#supported-deployment-types-and-features

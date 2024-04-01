@@ -236,5 +236,29 @@ export default {
       eu: 'The private link service for EU is not supported.',
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0a5d94b2e8f6e70fc',
       gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_dbm_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-0ce70d55ec4af8501',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-0cc53180ae06bb977',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    aws_private_link_remote_config_service_name: {
+      us: 'com.amazonaws.vpce.us-east-1.vpce-svc-01f21309e507e3b1d',
+      us3: 'The private link service for US3 is not supported.',
+      us5: 'The private link service for US5 is not supported.',
+      eu: 'The private link service for EU is not supported.',
+      ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
+      gov: 'The private link service for GOV is not supported.'
+    },
+    ip_ranges_url: {
+      us: 'http://ip-ranges.datadoghq.com',
+      us3: 'http://ip-ranges.us3.datadoghq.com',
+      us5: 'http://ip-ranges.us5.datadoghq.com',
+      eu: 'http://ip-ranges.datadoghq.eu',
+      ap1: 'http://ip-ranges.ap1.datadoghq.com',
+      gov: 'http://ip-ranges.ddog-gov.com'
     }
 };

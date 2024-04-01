@@ -7,7 +7,7 @@ aliases:
   - /security/cspm/resource_catalog
   - /security/misconfigurations/resource_catalog
 further_reading:
-- link: "/security/misconfigurations/"
+- link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Cloud Security Management Misconfigurations"
 - link: "/security/cloud_security_management/threats/"

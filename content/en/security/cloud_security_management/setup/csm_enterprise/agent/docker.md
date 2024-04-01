@@ -42,6 +42,6 @@ docker run -d --name dd-agent \
 
 {{< /code-block >}}
 
-[1]: /security/misconfigurations/
+[1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/cloud_security_management/threats
 [3]: /security/cloud_security_management/setup#supported-deployment-types-and-features
