@@ -25,7 +25,7 @@ further_reading:
       text: 'Monitor Amazon ECS Anywhere with Datadog'
     - link: '/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation'
       tag: 'Documentation'
-      text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
+      text: 'AWS CloudWatch Metric Streams with Amazon Data Firehose'
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
       tag: 'Blog'
       text: 'Monitor your Graviton3-powered EC2 instances with Datadog'
@@ -266,7 +266,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [51]: /security/default_rules/#cat-log-detection
 [52]: /security/cloud_siem/investigate_security_signals
 [53]: /security/notifications/rules/
-[54]: /security/misconfigurations/setup/
+[54]: /security/cloud_security_management/setup/
 [55]: /security/default_rules/#cat-posture-management-cloud
 [56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/guide/aws-integration-troubleshooting/
