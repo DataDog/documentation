@@ -18,7 +18,7 @@ further_reading:
 ---
 
 SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service. The SLO summary widget visualizes the status, budget, and remaining error budget of the existing SLOs. It displays all underlying groups of the SLO and lets you sort the groups by any of the time windows in the widget. Use this widget to build out meaningful dashboards with the most critical SLO information:
-- **View all of the SLO groups directly in the widget**: For any metric-based and time slice SLOs containing groups, you can see all of the groups in the widget, compared to the previous limit of 20 groups. This is helpful for SLOs containing a lot of groups, as the widget provides key information related to SLO groups.
+- **View all of the SLO groups directly in the widget**: This is helpful for SLOs containing a lot of groups, as the widget provides key information related to SLO groups.
 - **Set your preferred sorting order for the SLO groups in the widget**: For all SLO types, sort groups based on any of the available time windows in the widget. Quickly identify the best and worst performing SLO groups for different time periods.
 - **Easily identify time periods with missing data in an SLO**: For all SLO types, the SLO summary widget shows time periods with missing data as "-". The "-" is displayed for any time window where the entire window is missing data.
 
