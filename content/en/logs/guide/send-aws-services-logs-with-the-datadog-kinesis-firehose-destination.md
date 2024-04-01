@@ -25,7 +25,7 @@ AWS fully manages Amazon Data Firehose, so you don't need to maintain any additi
 ## Setup
 
 {{< tabs >}}
-{{% tab "Kinesis Firehose Delivery stream" %}}
+{{% tab "Amazon Data Firehose Delivery stream" %}}
 
 Datadog recommends using a Kinesis Data Stream as input when using the Datadog destination with Amazon Data Firehose. It gives you the ability to forward your logs to multiple destinations, in case Datadog is not the only consumer for those logs. If Datadog is the only destination for your logs, or if you already have a Kinesis Data Stream with your logs, you can ignore step one.
 
