@@ -1,7 +1,7 @@
 import { getConfig } from '../helpers/getConfig';
 import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
-import { configure, index, searchBox } from 'instantsearch.js/es/widgets';
+import { configure, searchBox } from 'instantsearch.js/es/widgets';
 import { history } from 'instantsearch.js/es/lib/routers';
 import { searchbarHits } from './algolia/searchbarHits';
 import { searchpageHits } from './algolia/searchpageHits';
