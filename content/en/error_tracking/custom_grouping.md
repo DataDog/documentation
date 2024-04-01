@@ -24,13 +24,12 @@ If `error.fingerprint` is provided, the grouping behavior follows these rules:
 
 ## Setup
 
-{{< tabs >}}
-{{% tab "APM" %}}
+### APM
 Custom grouping only needs an error span and an `error.fingerprint` string span tag.
 
 If you aren't already collecting APM traces with Datadog, see the [APM documentation][1] to set up APM.
 
-### Example
+#### Example
 
 If you're already sending APM spans, add a new `error.fingerprint` tag to your error span.
 
@@ -46,17 +45,14 @@ Exception information is captured and attached to a span if there is one active 
 In this case, `my-custom-grouping-material` is used to group these error spans into a single
 issue in Error Tracking.
 
-[1]: /tracing/
-{{% /tab %}}
-
-{{% tab "Log Management" %}}
+### Log Management
 Custom grouping only needs an error log and an `error.fingerprint` string attribute.
 
-If you aren't already collecting logs with Datadog, see the [Log Management documentation][1] to set up logs.
+If you aren't already collecting logs with Datadog, see the [Log Management documentation][2] to set up logs.
 
 Ensure that the `source` tag (specifying language) is properly configured.
 
-### Example
+#### Example
 
 If you're already logging in JSON format, add a new `error.fingerprint` attribute to your error log.
 
@@ -81,7 +77,7 @@ logger.error('Error processing request', extra={'error.fingerprint': 'my-custom-
 In this case, `my-custom-grouping-material` is used to group these error logs into a single
 issue in Error Tracking.
 
-### Mobile Example
+#### Mobile Example
 
 In Datadog's mobile SDKs, you can add a custom error fingerprint when logging an error by adding
 a predefined attribute to the log call:
@@ -191,14 +187,12 @@ final configuration = DatadogConfiguration(
 );
 ```
 {{% /tab %}}
-
-[1]: /logs/log_collection/
-{{% /tab %}}
 {{< /tabs >}}
 
-{{% tab "RUM" %}}
-### Example
-If you aren't already collecting Browser RUM events with Datadog, see the [RUM Browser Monitoring setup documentation][1] or the [RUM Mobile and TV Monitoring setup documentation][2]
+### RUM
+
+#### Example
+If you aren't already collecting Browser RUM events with Datadog, see the [RUM Browser Monitoring setup documentation][3] or the [RUM Mobile and TV Monitoring setup documentation][4]
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -332,15 +326,10 @@ final configuration = DatadogConfiguration(
     rumConfiguration: rumConfiguration,
 );
 ```
-
-{{% /tab %}}
-
-[1]: /logs/log_collection/
-{{% /tab %}}
-
-{{< /tabs >}}
-
-[1]: /real_user_monitoring/browser/
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /tracing/
+[2]: /logs/log_collection/
+[3]: /real_user_monitoring/browser/
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup
