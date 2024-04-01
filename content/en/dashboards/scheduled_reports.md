@@ -23,31 +23,15 @@ aliases:
 
 ## Overview
 
-Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a linear HTML format and high-density PDF format, with links to the original dashboard. 
+Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a high-density PDF attachment. 
 
 {{< img src="dashboards/scheduled_reports/scheduled_report_open_pdf.png" alt="An example report titled Reporting Security Dashboard showing the option to open the PDF report and an HTML format report of the example dashboard" style="width:70%;" >}}
 
 ## Schedule a report
 
-Create a report from any dashboard with a grid-based or automatic layout. Click the **Configure** button at the top of your dashboard and select **Schedule a Report**.
+Dashboards must have a grid or timeboard layout and must have at least one supported widget to send a PDF report. See the list of [supported widget types](#supported-widget-types).
 
-The following widget types are supported:
-
-- [Change][1]
-- [Distribution][2]
-- [Geomap][3]
-- [Group][4]
-- [Heatmap][5]
-- [Monitor Summary][6]
-- [Notes and Links][7]
-- [Pie Chart][16]
-- [Query Value][8]
-- [Scatter Plot][9]
-- [SLO Summary][10]
-- [SLO List][11]
-- [Table][12]
-- [Timeseries][13]
-- [Top List][14]
+Create a report from any dashboard with a grid-based or automatic layout. Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
 
 ### Set a schedule
 
@@ -90,6 +74,37 @@ Users with the Admin role or **Org Management** permission can enable or disable
 
 {{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:100%;" >}}
 
+## Supported widget types
+
+The following widget types are supported:
+
+- [Alert Graph][18]
+- [Alert Value][19]
+- [Change][1]
+- [Check Status][20]
+- [Distribution][2]
+- [Free Text][21]
+- [Funnel][22]
+- [Geomap][3]
+- [Group][4]
+- [Heatmap][5]
+- [List][23]
+- [Monitor Summary][6]
+- [Notes and Links][7]
+- [Pie Chart][16]
+- [Powerpack][24]
+- [Profiling Flame Graph][25]
+- [Query Value][8]
+- [Scatter Plot][9]
+- [SLO Summary][10]
+- [SLO List][11]
+- [Split Graph][26]
+- [Table][12]
+- [Timeseries][13]
+- [Top List][14]
+- [Topology][27]
+- [Tree Map][28]
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -111,4 +126,14 @@ Users with the Admin role or **Org Management** permission can enable or disable
 [15]: /account_management/org_settings/#public-sharing
 [16]: /dashboards/widgets/pie_chart/
 [17]: /account_management/users
-
+[18]: /dashboards/widgets/alert_graph/
+[19]: /dashboards/widgets/alert_value/
+[20]: /dashboards/widgets/check_status/
+[21]: /dashboards/widgets/free_text/
+[22]: /dashboards/widgets/funnel/
+[23]: /dashboards/widgets/list/
+[24]: /dashboards/widgets/powerpack/
+[25]: /dashboards/widgets/profiling_flame_graph/
+[26]: /dashboards/widgets/split_graph/
+[27]: /dashboards/widgets/topology_map/
+[28]: /dashboards/widgets/treemap/
