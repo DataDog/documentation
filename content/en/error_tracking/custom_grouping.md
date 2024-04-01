@@ -87,7 +87,7 @@ In Datadog's mobile SDKs, you can add a custom error fingerprint when logging an
 a predefined attribute to the log call:
 
 {{< tabs >}}
-{{% tab "iOS" }}
+{{% tab "iOS" %}}
 In order to use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
 
 ```swift
@@ -100,9 +100,9 @@ logger.error(
   ]
 )
 ```
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "Android" }}
+{{% tab "Android" %}}
 In order to use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
 
 ```kotlin
@@ -110,13 +110,13 @@ val errorFingerprint = "my-custom-grouping-material"
 val attributes = mapOf(LogAttributes.ERROR_FINGERPRINT to errorFingerprint)
 logger.e("My error message", error, attributes)
 ```
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "React Native" }}
+{{% tab "React Native" %}}
 TODO:
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "Flutter" }}
+{{% tab "Flutter" %}}
 In order to use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
 
 ```dart
@@ -129,13 +129,13 @@ logger.error(
   }
 );
 ```
-{{% /tab }}
+{{% /tab %}}
 {{< /tabs >}}
 
 Or, you can add or adjust the fingerprint in the log mapper:
 
 {{< tabs >}}
-{{% tab "iOS" }}
+{{% tab "iOS" %}}
 In order to use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
 
 ```swift
@@ -149,9 +149,9 @@ Logs.enable(
   with: logsConfiguration
 )
 ```
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "Android" }}
+{{% tab "Android" %}}
 In order to use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
 
 ```kotlin
@@ -166,13 +166,13 @@ val logsConfiguration = LogsConfiguration.Builder()
     .build()
 Logs.enable(logsConfiguration)
 ```
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "React Native" }}
+{{% tab "React Native" %}}
 TODO:
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "Flutter" }}
+{{% tab "Flutter" %}}
 In order to use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
 
 ```dart
@@ -190,7 +190,7 @@ final configuration = DatadogConfiguration(
     loggingConfiguration: loggingConfiguration,
 );
 ```
-{{% /tab }}
+{{% /tab %}}
 
 [1]: /logs/log_collection/
 {{% /tab %}}
@@ -201,7 +201,7 @@ final configuration = DatadogConfiguration(
 If you aren't already collecting Browser RUM events with Datadog, see the [RUM Browser Monitoring setup documentation][1] or the [RUM Mobile and TV Monitoring setup documentation][2]
 
 {{< tabs >}}
-{{% tab "Browser" }}
+{{% tab "Browser" %}}
 In order to use custom grouping, you need the Datadog Browser SDK [v4.42.0 or later][2], a [browser RUM error][1], and an additional string attribute.
 
 If you're already [collecting browser errors][1], it's possible to add the attribute by either:
@@ -235,7 +235,7 @@ In both cases, `my-custom-grouping-material` is used to group the Browser RUM er
 [2]: https://github.com/DataDog/browser-sdk/releases/tag/v4.42.0
 {{% /tab %}}
 
-{{% tab "iOS" }}
+{{% tab "iOS" %}}
 In order to use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
 
 To add a custom fingerprint when manually reporting errors, you can add a predefined attribute when calling `addError`:
@@ -262,9 +262,9 @@ config.errorEventMapper = { errorEvent in
 RUM.enable(with: config)
 ```
 
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "Android" }}
+{{% tab "Android" %}}
 In order to use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
 
 To add a custom fingerprint when manually reporting errors, you can add a predefined attribute when calling `addError`:
@@ -293,13 +293,13 @@ val rumConfiguration = RumConfiguration.Builder("rum-application-id")
 RUM.enable(rumConfiguration)
 ```
 
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "React Native" }}
+{{% tab "React Native" %}}
 TODO:
-{{% /tab }}
+{{% /tab %}}
 
-{{% tab "Flutter" }}
+{{% tab "Flutter" %}}
 In order to use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
 
 To add a custom fingerprint when manually reporting errors, you can add a predefined attribute when calling `addError`:
@@ -333,7 +333,7 @@ final configuration = DatadogConfiguration(
 );
 ```
 
-{{% /tab }}
+{{% /tab %}}
 
 [1]: /logs/log_collection/
 {{% /tab %}}
