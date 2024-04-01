@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import os
+import yaml
+
+# reads the contents of each device profile in the directory
+# returns device_profiles dictionary
+def find_profiles(directory):
+    final_array = []
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.yaml'):
+                with open(os.path.join(root, file), 'r') as f:
+                    # read the file as YAML
+                    profile = yaml.safe_load(f)
+                    if profile.get('metadata'):
+                        if profile.get('metadata').get('device'):
+                            if profile.get('metadata').get('device').get('fields'):
+                                vendor = profile.get('metadata').get('device').get('fields').get('vendor')
+                                type = profile.get('metadata').get('device').get('fields').get('type')
+                                if vendor and type:
+                                    final_array.append[{'vendor': vendor, 'type': type}]
+                                # build a dictionary of device profiles
+                                # final_dict[profile['vendor']] = vendor
+                    
+                    
+    
+
+if __name__ == '__main__':
+    ndm_device_path = 'integrations_data/extracted/integrations-core/snmp/datadog_checks/snmp/data/default_profiles'
+    device_profiles = find_profiles(ndm_device_path)
+    print(device_profiles)
+    # Build a dictionary of device profiles:
+    # device_profiles = { [vendor: "", model: "", link: ""] }

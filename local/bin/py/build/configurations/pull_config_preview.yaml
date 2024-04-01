@@ -102,6 +102,7 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+          - "snmp/**/*.yaml"
 
       - repo_name: integrations-extras
         contents:
