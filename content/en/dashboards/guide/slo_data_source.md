@@ -5,7 +5,7 @@ disable_toc: false
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  The SLO data source is in public beta. This feature is supported for <strong>metric-based</strong> and <strong>Time Slice</strong> SLOs.
+  The SLO data source is in public beta. This feature is supported for <strong>Metric-based</strong> and <strong>Time Slice</strong> SLOs.
 {{< /callout >}}
 
 ## Overview
