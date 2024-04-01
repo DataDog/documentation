@@ -15,6 +15,7 @@ assets:
       metadata_path: metadata.csv
       prefix: weaviate.
     process_signatures:
+    - weaviate
     - /bin/weaviate
     service_checks:
       metadata_path: assets/service_checks.json
@@ -36,7 +37,7 @@ draft: false
 git_integration_title: weaviate
 integration_id: weaviate
 integration_title: Weaviate
-integration_version: 2.3.0
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

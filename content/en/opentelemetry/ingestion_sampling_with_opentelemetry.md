@@ -18,11 +18,12 @@ further_reading:
 ## Overview
 
 If your applications and services are instrumented with OpenTelemetry libraries, you can: 
-- Send traces to the **[OpenTelemetry collector][1]**, and use the Datadog exporter to forward them to Datadog
-- Send traces to the **[OpenTelemetry collector alongside the Datadog Agent][2]**, which then forwards them to Datadog.
+- Send traces to the **[OpenTelemetry Collector][1]**, and use the Datadog exporter to forward them to Datadog.
 - Send traces to the **[Datadog Agent OTLP ingest][3]**, which forwards them to Datadog.
 
-In the first and second scenario, [APM RED metrics][4] (request/errors counts and latency distributions by service, operation and resource) are computed in the Datadog Exporter. In the third case, the Datadog Agent computes these metrics.
+**Note**: Datadog doesn't support running the OpenTelemetry Collector and the Datadog Agent on the same host.
+
+In the first scenario, [APM Trace metrics][4] are computed in the Datadog Connector ([not the Datadog Exporter][14]). In the second case, the Datadog Agent computes these metrics.
 
 {{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation.png" alt="Otel APM Metrics computation" style="width:100%;" >}}
 
@@ -111,3 +112,4 @@ You can leverage the [APM Estimated Usage dashboard][13] and the estimated usage
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector#datadog-connector
 [12]: /tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
 [13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
+[14]: /opentelemetry/guide/migration/

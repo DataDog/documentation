@@ -10,7 +10,19 @@ further_reading:
     text: Workflow Automation
 aliases:
   - /security/cloud_security_management/workflows
+products:
+  - name: CSM Threats
+    url: /security/threats/
+    icon: cloud-security-management
+  - name: CSM Misconfigurations
+    url: /security/cloud_security_management/misconfigurations/
+    icon: cloud-security-management
+  - name: CSM Identity Risks
+    url: /security/cloud_security_management/identity_risks/
+    icon: cloud-security-management
 ---
+
+{{< product-availability >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>

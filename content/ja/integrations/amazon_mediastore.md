@@ -10,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_mediastore/
 draft: false
 git_integration_title: amazon_mediastore
 has_logo: true
-integration_id: amazon-mediastore
+integration_id: ''
 integration_title: AWS Elemental MediaStore
 integration_version: ''
 is_public: true
