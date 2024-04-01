@@ -4138,12 +4138,12 @@ main:
     identifier: signals
     weight: 306
   - name: Identity Risks
-    url: security/identity_risks/
+    url: security/cloud_security_management/identity_risks/
     parent: csm
     identifier: csm_identity_risks
     weight: 4
   - name: Vulnerabilities
-    url: security/vulnerabilities
+    url: security/cloud_security_management/vulnerabilities
     parent: csm
     identifier: vulnerabilities
     weight: 5
@@ -4798,7 +4798,7 @@ main:
     identifier: rum_monitors
     weight: 402
   - name: Generate Custom Metrics
-    url: real_user_monitoring/generate_metrics
+    url: real_user_monitoring/platform/generate_metrics
     parent: real_user_monitoring_platform
     identifier: rum_generate_metrics
     weight: 403
@@ -7387,7 +7387,7 @@ api:
       operationids:
         - SearchSecurityMonitoringSignals
       unstable: []
-      order: 8
+      order: 9
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
     identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -7399,7 +7399,7 @@ api:
       operationids:
         - ListSecurityMonitoringSignals
       unstable: []
-      order: 9
+      order: 10
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: security-monitoring-update-an-existing-rule
@@ -7436,6 +7436,18 @@ api:
         - DeleteSecurityMonitoringRule
       unstable: []
       order: 7
+  - name: Validate a detection rule
+    url: '#validate-a-detection-rule'
+    identifier: security-monitoring-validate-a-detection-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ValidateSecurityMonitoringRule
+      unstable: []
+      order: 8
   - name: Create a detection rule
     url: '#create-a-detection-rule'
     identifier: security-monitoring-create-a-detection-rule
