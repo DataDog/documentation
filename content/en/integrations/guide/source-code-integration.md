@@ -370,13 +370,48 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 [107]: /security/application_security/
 
 {{% /tab %}}
+{{% tab "GitLab" %}}
+
+<div class="alert alert-warning">
+Repositories from self-managed GitLab instances are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
+</div>
+
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command.
+
+When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+
+Run this command for every commit that you need to be synchronized with Datadog.
+
+If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**Application Security Monitoring**][7].
+
+### Validation
+
+To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
+
+You can expect to see the following output:
+
+```
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
+180 tracked file paths will be reported.
+✅  Handled in 0.077 seconds.
+```
+
+[1]: https://gitlab.com
+[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[3]: /logs/error_tracking/backend/?tab=serilog#setup
+[4]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
+[5]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+[6]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
+[7]: /security/application_security/
+
+{{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
 <div class="alert alert-warning">
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry to your source code, you can upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
+To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
@@ -389,27 +424,12 @@ To ensure the data is being collected, run `datadog-ci git-metadata upload` in y
 You can expect to see the following output:
 
 ```
-Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:my-org/my-repository.git.
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
 ✅  Handled in 0.077 seconds.
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-{{% /tab %}}
-
-{{% tab "GitLab" %}}
-
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths. Run this command for every commit you need to be synchronized with Datadog. If you are using [gitlab.com][1], this also allows you to see inline code snippets in [Error Tracking][3], [Continuous Profiler][4], [Serverless Monitoring][5], [CI Visibility][6], and [Application Security Monitoring][7].
-
-[1]: https://gitlab.com
-[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[3]: /logs/error_tracking/backend/?tab=serilog#setup
-[4]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
-[5]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[6]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
-[7]: /security/application_security/
-
-
 {{% /tab %}}
 {{< /tabs >}}
 
