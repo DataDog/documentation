@@ -77,7 +77,7 @@ Find your dashboard on the [Dashboard List page][12]. Ensure logos render correc
 
 ## Follow dashboard best practices
 
-{{< img src="developers/create-an-integration-dashboard/dashboard-example.png" alt="An example of a Dashboard" width="100%">}}
+{{< img src="developers/create-an-integration-dashboard/dashboard_best_practices_example.png" alt="An example of a Dashboard" width="100%">}}
 
 An integration dashboard should adhere to the following visual style guidelines:
 

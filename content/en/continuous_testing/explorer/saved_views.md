@@ -42,7 +42,7 @@ You can set a saved view to be your default landing page in the [Synthetic Monit
 
 {{< img src="continuous_testing/saved_view.png" alt="Saved Views in the Synthetic Monitoring & Continuous Testing Explorer" width="100%" >}}
 
-Temporarily override your default saved view by completing an action in the UI or opening links in the Explorer that embeds a different configuration.
+Temporarily override your default saved view by completing an action in the UI or opening links in the Results Explorer that embeds a different configuration.
 
 In the default view entry in the **Views** panel, you can:
 

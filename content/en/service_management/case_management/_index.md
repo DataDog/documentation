@@ -25,6 +25,8 @@ Case Management is not available in the {{< region-param key=dd_datacenter code=
 
 ## Overview
 
+{{< img src="/service_management/case_management/case_management_overview.png" alt="Overview of the Case Management page" style="width:100%;" >}}
+
 Datadog Case Management offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations. After you create a case, you can assign it to a user, establishing clear lines of ownership that persist throughout the lifespan of the case. 
 
 While investigating, populate the case with graphs, logs, and other telemetry data from across Datadog and collaborate with your team members in the activity timeline. Case Management also integrates with tools like Jira, ServiceNow, PagerDuty, Slack, and Microsoft Teams—allowing you to fit Case Management solutions to your organization's processes. 

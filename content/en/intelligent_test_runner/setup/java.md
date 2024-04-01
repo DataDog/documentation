@@ -5,8 +5,8 @@ code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
 aliases:
-  - continuous_integration/intelligent_test_runner/java/
-  - continuous_integration/intelligent_test_runner/setup/java/
+  - /continuous_integration/intelligent_test_runner/java/
+  - /continuous_integration/intelligent_test_runner/setup/java/
 
 further_reading:
     - link: "/continuous_integration/tests"

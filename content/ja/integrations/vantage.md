@@ -24,7 +24,6 @@ legal_terms:
   eula: assets/terms-of-service.pdf
 manifest_version: 2.0.0
 name: vantage
-oauth: {}
 public_title: Vantage
 short_description: Datadog のコストをインポートし、他のインフラストラクチャー費用と一緒に追跡することができます
 supported_os:

@@ -1,6 +1,7 @@
 ---
 categories:
-- Collaboration
+- cloud
+- collaboration
 dependencies: []
 description: Datadog アラートとグラフを Moxtra に送信。
 doc_link: https://docs.datadoghq.com/integrations/moxtra/
@@ -19,6 +20,7 @@ short_description: Datadog アラートとグラフを Moxtra に送信。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Moxtra は、出先でもデスクでも作業を可能にする埋め込み可能なマルチレイヤークラウドコラボレーションサービスを提供します。
@@ -28,9 +30,9 @@ Moxtra を統合して、以下のことができます。
 - メトリクスアラートがトリガーされたときに通知を受けることができます。
 - チーム内でグラフを共有できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 このインテグレーションを有効にするには、以下の手順に従ってください。
 
@@ -39,24 +41,24 @@ Moxtra を統合して、以下のことができます。
 3. Datadog の Webhook 対応サービス [Datadog-Webhook タイル][1]に Webhook URL を追加します。
 4. [Moxtra インテグレーションタイル][2]の **Install Integration** ボタンをクリックします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Moxtra インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 Moxtra インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Moxtra インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[2]: https://app.datadoghq.com/account/settings#integrations/moxtra
+[1]: https://app.datadoghq.com/integrations/webhooks
+[2]: https://app.datadoghq.com/integrations/moxtra
 [3]: https://docs.datadoghq.com/ja/help/

@@ -17,7 +17,7 @@ further_reading:
   text: "Troubleshooting the AWS integration"
 - link: "https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/"
   tag: "Guide"
-  text: "AWS CloudWatch metric streams with Kinesis Data Firehose"
+  text: "AWS CloudWatch metric streams with Amazon Data Firehose"
 - link: "https://www.datadoghq.com/blog/aws-monitoring/"
   tag: "Blog"
   text: "Key metrics for AWS monitoring"
@@ -120,12 +120,15 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 ### Datadog
 
 3. In the [AWS integration tile][1], click **Add AWS Account**, and then select **Manually**.
-4. Select the **Access Keys (GovCloud or China Only)** tab.
+4. Select the **Access Keys (GovCloud or China\* Only)** tab.
 5. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
 6. Click **Save**.
 7. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
+\* _All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][2] section on our website._
+
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
+[2]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{< /tabs >}}
 

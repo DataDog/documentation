@@ -281,7 +281,7 @@ Tracing:
       link: https://github.com/DataDog/dd-trace-go
       official: true
       authors: Datadog
-      notes: Go package 'tracer'.
+      notes: Go package is 'gopkg.in/DataDog/dd-trace-go.v1'.
     - name: dd-go-opentracing
       link: https://github.com/gchaincl/dd-go-opentracing
       authors: Gustavo Chaín

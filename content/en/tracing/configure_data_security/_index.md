@@ -10,6 +10,10 @@ aliases:
     - /tracing/custom_instrumentation/agent_customization
     - /tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
     - /tracing/setup_overview/configure_data_security/
+further_reading:
+- link: "/data_security/pci_compliance/"
+  tag: "Documentation"
+  text: "Set up a PCI-compliant Datadog organization"
 ---
 ## Overview
 
@@ -587,27 +591,22 @@ PCI compliance for APM is only available for Datadog organizations in the <a hre
 
 To set up a PCI-compliant Datadog org, follow these steps:
 
-1. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the org be configured as a PCI-compliant org.
-2. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
-    ```
-    apm_config:
-      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
-    ```
+{{% pci-apm %}}
 
-To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][5].
+See [PCI DSS Compliance][1] for more information. To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][2].
 
-[1]: /getting_started/site/
-[2]: /help/
-[3]: mailto:success@datadoghq.com
-[4]: /account_management/audit_trail/
-[5]: /data_security/logs/#pci-dss-compliance-for-log-management
-
+[1]: /data_security/pci_compliance/
+[2]: /data_security/pci_compliance/?tab=logmanagement
 
 {{< /site-region >}}
 
 {{< site-region region="us2,us3,us5,eu,gov" >}}
 PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
 {{< /site-region >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
 [2]: /tracing/glossary/#trace
