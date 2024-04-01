@@ -302,8 +302,6 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 
 ## Suppression rules
 
-<div class="alert alert-warning"> <a href="https://docs.datadoghq.com/security/suppressions/"> Suppression rules</a> are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024. See <a href="https://docs.datadoghq.com/security/suppressions/#migrate-legacy-suppression-queries-to-suppression-rules">Migrate legacy suppression queries to suppression rules</a> for more information. </div>
-
 Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
 
 ## Rule deprecation
