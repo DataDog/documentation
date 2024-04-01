@@ -304,6 +304,8 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 
 Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
 
+Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These are based on **log attributes**. (**Note:** This field depicts the same behavior as legacy suppressions).
+
 ## Rule deprecation
 
 Regular audits of all out-of-the-box detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
