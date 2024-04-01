@@ -17,13 +17,13 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) automatically allocates the costs of your cloud clusters to individual services and workloads running in those clusters.
+Datadog Cloud Cost Management (CCM) automatically allocates the costs of your cloud clusters to individual services and workloads running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
 Clouds
 : CCM allocates costs of your AWS, Azure, or Google host instances. A host is a computer (such as an EC2 instance in AWS, a virtual machine in Azure, or a Compute Engine instance in Google Cloud) that is listed in your cloud provider's cost and usage report and may be running Kubernetes pods.
 
 Resources
-: CCM allocates costs for Kubernetes clusters and includes cost analysis for associated resources such as non-local AWS EBS volumes used by those clusters. 
+: CCM allocates costs for Kubernetes clusters and includes cost analysis for many associated resources such as Kubernetes persistent volumes used by your pods. 
 
 CCM displays costs for resources including CPU, memory, and more depending on the cloud and orchestrator you are using.
 
@@ -36,7 +36,7 @@ Use cost metrics enriched with tags from your services, nodes, and workloads to 
 {{< tabs >}}
 {{% tab "Azure" %}}
 
-CCM allocates costs of Azure VM instances to your Azure Kubernetes Service (AKS) clusters.
+CCM allocates costs of all Kubernetes clusters, including those managed through Azure Kubernetes Service (AKS). 
 
 1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
@@ -54,19 +54,18 @@ The following table presents the list of collected features and the minimal Agen
 {{% /tab %}}
 {{% tab "AWS" %}}
 
-CCM allocates costs of AWS EC2 instances to your AWS ECS clusters.
+CCM allocates costs of all AWS EC2 instances across your container orchestration environments, including Kubernetes clusters and AWS-specific ECS clusters.
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
-| AWS Persistent Volume Allocation | 7.46.0 |  |
-| AWS Split Cost Allocation | TBD | |
+| AWS Persistent Volume Allocation | 7.46.0 | 1.11.0  |
 
 1. Configure the AWS Cloud Cost Management integration on the [Cloud Costs Setup page][101].
-1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
-1. Set up [**Datadog Container Monitoring**][104] in ECS tasks. 
+1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
+1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks. 
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
 
 [101]: https://app.datadoghq.com/cost/setup
@@ -78,7 +77,7 @@ The following table presents the list of collected features and the minimal Agen
 {{% /tab %}}
 {{% tab "Google" %}}
 
-CCM allocates costs of Google Compute Engine instances to your Google Cloud clusters.
+CCM allocates costs of Google Kubernetes Engine instances to your Google Cloud clusters.
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
@@ -98,7 +97,9 @@ The following table presents the list of collected features and the minimal Agen
 
 ## Allocate costs
 
-Cost allocation divides host compute and storage volume costs from your cloud provider into individual tasks or pods associated with them.
+Cost allocation divides host compute and other resource costs from your cloud provider into individual tasks or pods associated with them. These divided costs are then enriched with tags from related resources so you can break down costs by any associated dimensions.
+
+Use the `allocated_resource` tag to visualize the spend resource associated with your costs at various levels, including the Kubernetes node, container orchestration host, storage volume, or entire cluster level.
 
 {{< tabs >}}
 {{% tab "Azure" %}}
@@ -111,7 +112,7 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
-All other costs besides compute are given the same value and tags as the source metric `azure.cost.amortized`.
+All other costs are given the same value and tags as the source metric `azure.cost.amortized`.
 
 [101]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
 [102]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
@@ -129,7 +130,7 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
-All other costs besides compute are given the same value and tags as the source metric `aws.cost.amortized`.
+All other costs are given the same value and tags as the source metric `aws.cost.amortized`.
 
 ### Persistent volume storage
 
@@ -162,7 +163,7 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
-All other costs besides compute are given the same value and tags as the source metric `gcp.cost.amortized`.
+All other costs are given the same value and tags as the source metric `gcp.cost.amortized`.
 
 ### Agentless Kubernetes costs
 
