@@ -3306,6 +3306,18 @@ components:
             key.'
           example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
+        cloud_run_revision_filters:
+          description: 'Limit the Cloud Run revisions that are pulled into Datadog
+            by using tags.
+
+            Only Cloud Run revision resources that apply to specified filters are
+            imported into Datadog.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: Cloud Run Filters
+            type: string
+          type: array
         errors:
           description: An array of errors.
           example:
@@ -4170,6 +4182,8 @@ components:
       - apm_usm_usage
       - appsec_fargate_usage
       - appsec_usage
+      - asm_serverless_traced_invocations_usage
+      - asm_serverless_traced_invocations_percentage
       - browser_usage
       - ci_pipeline_indexed_spans_usage
       - ci_test_indexed_spans_usage
@@ -4186,6 +4200,8 @@ components:
       - cws_hosts_usage
       - dbm_hosts_usage
       - dbm_queries_usage
+      - error_tracking_usage
+      - error_tracking_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_spans_usage
       - estimated_ingested_logs_usage
@@ -4193,6 +4209,7 @@ components:
       - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
+      - incident_management_monthly_active_users_usage
       - indexed_spans_usage
       - infra_host_usage
       - ingested_logs_bytes_usage
@@ -4213,6 +4230,8 @@ components:
       - ndm_netflow_usage
       - npm_host_usage
       - obs_pipeline_bytes_usage
+      - obs_pipelines_vcpu_usage
+      - online_archive_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
@@ -4224,6 +4243,7 @@ components:
       - snmp_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
+      - workflow_executions_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -4232,6 +4252,8 @@ components:
       - APM_USM_USAGE
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
+      - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
+      - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
       - BROWSER_USAGE
       - CI_PIPELINE_INDEXED_SPANS_USAGE
       - CI_TEST_INDEXED_SPANS_USAGE
@@ -4248,6 +4270,8 @@ components:
       - CWS_HOSTS_USAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
+      - ERROR_TRACKING_USAGE
+      - ERROR_TRACKING_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_LOGS_USAGE
@@ -4255,6 +4279,7 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
       - INDEXED_SPANS_USAGE
       - INFRA_HOST_USAGE
       - INGESTED_LOGS_BYTES_USAGE
@@ -4275,6 +4300,8 @@ components:
       - NDM_NETFLOW_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
+      - OBS_PIPELINE_VCPU_USAGE
+      - ONLINE_ARCHIVE_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
@@ -4286,6 +4313,7 @@ components:
       - SNMP_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
+      - WORKFLOW_EXECUTIONS_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -6851,6 +6879,7 @@ components:
       - events
       - logs
       - spans
+      - database_queries
       example: rum
       type: string
       x-enum-varnames:
@@ -6861,6 +6890,7 @@ components:
       - EVENTS
       - LOGS
       - SPANS
+      - DATABASE_QUERIES
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -7146,7 +7176,7 @@ components:
           description: "A Boolean indicating whether this monitor needs a full window
             of data before it\u2019s evaluated.\nWe highly recommend you set this
             to `false` for sparse metrics,\notherwise some evaluations are skipped.
-            Default is false."
+            Default is false. This setting only applies to\nmetric monitors."
           type: boolean
         scheduling_options:
           $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
@@ -7847,6 +7877,8 @@ components:
       - apm_usm_percentage
       - appsec_usage
       - appsec_percentage
+      - asm_serverless_traced_invocations_usage
+      - asm_serverless_traced_invocations_percentage
       - browser_usage
       - browser_percentage
       - ci_visibility_itr_usage
@@ -7873,6 +7905,8 @@ components:
       - dbm_hosts_usage
       - dbm_queries_percentage
       - dbm_queries_usage
+      - error_tracking_usage
+      - error_tracking_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
       - estimated_ingested_logs_usage
@@ -7885,6 +7919,8 @@ components:
       - fargate_percentage
       - functions_usage
       - functions_percentage
+      - incident_management_monthly_active_users_usage
+      - incident_management_monthly_active_users_percentage
       - infra_host_usage
       - infra_host_percentage
       - invocations_usage
@@ -7899,6 +7935,10 @@ components:
       - npm_host_percentage
       - obs_pipeline_bytes_usage
       - obs_pipeline_bytes_percentage
+      - obs_pipelines_vcpu_usage
+      - obs_pipelines_vcpu_percentage
+      - online_archive_usage
+      - online_archive_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
@@ -7955,6 +7995,8 @@ components:
       - ingested_spans_bytes_percentage
       - siem_ingested_bytes_usage
       - siem_ingested_bytes_percentage
+      - workflow_executions_usage
+      - workflow_executions_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7970,6 +8012,8 @@ components:
       - APM_USM_PERCENTAGE
       - APPSEC_USAGE
       - APPSEC_PERCENTAGE
+      - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
+      - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
       - CI_VISIBILITY_ITR_USAGE
@@ -7996,6 +8040,8 @@ components:
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_PERCENTAGE
       - DBM_QUERIES_USAGE
+      - ERROR_TRACKING_USAGE
+      - ERROR_TRACKING_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
       - ESTIMATED_INGESTED_LOGS_USAGE
@@ -8008,6 +8054,8 @@ components:
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_PERCENTAGE
       - INFRA_HOST_USAGE
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
@@ -8022,6 +8070,10 @@ components:
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
       - OBS_PIPELINE_BYTES_PERCENTAGE
+      - OBS_PIPELINES_VCPU_USAGE
+      - OBS_PIPELINES_VCPU_PERCENTAGE
+      - ONLINE_ARCHIVE_USAGE
+      - ONLINE_ARCHIVE_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
@@ -8078,6 +8130,8 @@ components:
       - INGESTED_SPANS_BYTES_PERCENTAGE
       - SIEM_INGESTED_BYTES_USAGE
       - SIEM_INGESTED_BYTES_PERCENTAGE
+      - WORKFLOW_EXECUTIONS_USAGE
+      - WORKFLOW_EXECUTIONS_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -8132,6 +8186,16 @@ components:
           type: number
         appsec_usage:
           description: The Application Security Monitoring host usage by tag(s).
+          format: double
+          type: number
+        asm_serverless_traced_invocations_percentage:
+          description: The percentage of Application Security Monitoring Serverless
+            traced invocations usage by tag(s).
+          format: double
+          type: number
+        asm_serverless_traced_invocations_usage:
+          description: The Application Security Monitoring Serverless traced invocations
+            usage by tag(s).
           format: double
           type: number
         browser_percentage:
@@ -8269,6 +8333,14 @@ components:
           description: The Database Monitoring queries usage by tag(s).
           format: double
           type: number
+        error_tracking_percentage:
+          description: The percentage of error tracking events usage by tag(s).
+          format: double
+          type: number
+        error_tracking_usage:
+          description: The error tracking events usage by tag(s).
+          format: double
+          type: number
         estimated_indexed_logs_percentage:
           description: The percentage of estimated live indexed logs usage by tag(s).
           format: double
@@ -8323,6 +8395,15 @@ components:
           type: number
         functions_usage:
           description: The Lambda function usage by tag(s).
+          format: double
+          type: number
+        incident_management_monthly_active_users_percentage:
+          description: The percentage of Incident Management monthly active users
+            usage by tag(s).
+          format: double
+          type: number
+        incident_management_monthly_active_users_usage:
+          description: The Incident Management monthly active users usage by tag(s).
           format: double
           type: number
         indexed_spans_percentage:
@@ -8495,6 +8576,23 @@ components:
           description: The observability pipeline bytes usage by tag(s).
           format: double
           type: number
+        obs_pipelines_vcpu_percentage:
+          description: The percentage of observability pipeline per core usage by
+            tag(s).
+          format: double
+          type: number
+        obs_pipelines_vcpu_usage:
+          description: The observability pipeline per core usage by tag(s).
+          format: double
+          type: number
+        online_archive_percentage:
+          description: The percentage of online archive usage by tag(s).
+          format: double
+          type: number
+        online_archive_usage:
+          description: The online archive usage by tag(s).
+          format: double
+          type: number
         profiled_container_percentage:
           description: The percentage of profiled container usage by tag(s).
           format: double
@@ -8582,6 +8680,14 @@ components:
           type: number
         vuln_management_hosts_usage:
           description: The Application Vulnerability Management usage by tag(s).
+          format: double
+          type: number
+        workflow_executions_percentage:
+          description: The percentage of workflow executions usage by tag(s).
+          format: double
+          type: number
+        workflow_executions_usage:
+          description: The total workflow executions usage by tag(s).
           format: double
           type: number
       type: object
@@ -13441,10 +13547,12 @@ components:
         only supporting `http`.
       enum:
       - http
+      - grpc
       example: http
       type: string
       x-enum-varnames:
       - HTTP
+      - GRPC
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -15976,6 +16084,8 @@ components:
         host:
           description: Host name to perform the test with.
           type: string
+        httpVersion:
+          $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -16967,262 +17077,6 @@ components:
           format: double
           type: number
       type: object
-    UsageAttributionBody:
-      description: Usage Summary by tag for a given organization.
-      properties:
-        month:
-          description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
-          format: date-time
-          type: string
-        org_name:
-          description: The name of the organization.
-          type: string
-        public_id:
-          description: The organization public ID.
-          type: string
-        tag_config_source:
-          description: The source of the usage attribution tag configuration and the
-            selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
-            tag 2>///<selected tag 3>`.
-          type: string
-        tags:
-          $ref: '#/components/schemas/UsageAttributionTagNames'
-        updated_at:
-          description: Shows the the most recent hour in the current months for all
-            organizations for which all usages were calculated.
-          type: string
-        values:
-          $ref: '#/components/schemas/UsageAttributionValues'
-      type: object
-    UsageAttributionLimit:
-      default: 5000
-      description: Maximum number of records to be returned.
-      format: int64
-      type: integer
-    UsageAttributionMetadata:
-      description: The object containing document metadata.
-      properties:
-        aggregates:
-          $ref: '#/components/schemas/UsageAttributionAggregates'
-        pagination:
-          $ref: '#/components/schemas/UsageAttributionPagination'
-      type: object
-    UsageAttributionOffset:
-      default: 0
-      description: Number of records to skip before beginning to return.
-      format: int64
-      type: integer
-    UsageAttributionPagination:
-      description: The metadata for the current pagination.
-      properties:
-        limit:
-          description: Maximum amount of records to be returned.
-          format: int64
-          type: integer
-        offset:
-          description: Records to be skipped before beginning to return.
-          format: int64
-          type: integer
-        sort_direction:
-          description: Direction to sort by.
-          type: string
-        sort_name:
-          description: Field to sort by.
-          type: string
-        total_number_of_records:
-          description: Total number of records.
-          format: int64
-          type: integer
-      type: object
-    UsageAttributionResponse:
-      description: Response containing the Usage Summary by tag(s).
-      properties:
-        metadata:
-          $ref: '#/components/schemas/UsageAttributionMetadata'
-        usage:
-          description: Get usage summary by tag(s).
-          items:
-            $ref: '#/components/schemas/UsageAttributionBody'
-          type: array
-      type: object
-    UsageAttributionSort:
-      default: custom_timeseries_usage
-      description: The field to sort by.
-      enum:
-      - api_percentage
-      - snmp_usage
-      - apm_host_usage
-      - api_usage
-      - appsec_usage
-      - appsec_percentage
-      - container_usage
-      - custom_timeseries_percentage
-      - container_percentage
-      - apm_host_percentage
-      - npm_host_percentage
-      - browser_percentage
-      - browser_usage
-      - infra_host_percentage
-      - snmp_percentage
-      - npm_host_usage
-      - infra_host_usage
-      - custom_timeseries_usage
-      - lambda_functions_usage
-      - lambda_functions_percentage
-      - lambda_invocations_usage
-      - lambda_invocations_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
-      - estimated_indexed_spans_usage
-      - estimated_indexed_spans_percentage
-      - estimated_ingested_spans_usage
-      - estimated_ingested_spans_percentage
-      - apm_fargate_usage
-      - apm_fargate_percentage
-      - appsec_fargate_usage
-      - appsec_fargate_percentage
-      - estimated_rum_usage_attribution_usage
-      - estimated_rum_usage_attribution_percentage
-      type: string
-      x-enum-varnames:
-      - API_PERCENTAGE
-      - SNMP_USAGE
-      - APM_HOST_USAGE
-      - API_USAGE
-      - APPSEC_USAGE
-      - APPSEC_PERCENTAGE
-      - CONTAINER_USAGE
-      - CUSTOM_TIMESERIES_PERCENTAGE
-      - CONTAINER_PERCENTAGE
-      - APM_HOST_PERCENTAGE
-      - NPM_HOST_PERCENTAGE
-      - BROWSER_PERCENTAGE
-      - BROWSER_USAGE
-      - INFRA_HOST_PERCENTAGE
-      - SNMP_PERCENTAGE
-      - NPM_HOST_USAGE
-      - INFRA_HOST_USAGE
-      - CUSTOM_TIMESERIES_USAGE
-      - LAMBDA_FUNCTIONS_USAGE
-      - LAMBDA_FUNCTIONS_PERCENTAGE
-      - LAMBDA_INVOCATIONS_USAGE
-      - LAMBDA_INVOCATIONS_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
-      - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
-      - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
-      - APM_FARGATE_USAGE
-      - APM_FARGATE_PERCENTAGE
-      - APPSEC_FARGATE_USAGE
-      - APPSEC_FARGATE_PERCENTAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
-    UsageAttributionSupportedMetrics:
-      description: Supported fields for usage attribution requests (valid requests
-        contain one or more metrics, or `*` for all).
-      enum:
-      - custom_timeseries_usage
-      - container_usage
-      - snmp_percentage
-      - apm_host_usage
-      - browser_usage
-      - npm_host_percentage
-      - infra_host_usage
-      - custom_timeseries_percentage
-      - container_percentage
-      - api_usage
-      - apm_host_percentage
-      - infra_host_percentage
-      - snmp_usage
-      - browser_percentage
-      - api_percentage
-      - npm_host_usage
-      - lambda_functions_usage
-      - lambda_functions_percentage
-      - lambda_invocations_usage
-      - lambda_invocations_percentage
-      - fargate_usage
-      - fargate_percentage
-      - profiled_host_usage
-      - profiled_host_percentage
-      - profiled_container_usage
-      - profiled_container_percentage
-      - dbm_hosts_usage
-      - dbm_hosts_percentage
-      - dbm_queries_usage
-      - dbm_queries_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
-      - appsec_usage
-      - appsec_percentage
-      - estimated_indexed_spans_usage
-      - estimated_indexed_spans_percentage
-      - estimated_ingested_spans_usage
-      - estimated_ingested_spans_percentage
-      - apm_fargate_usage
-      - apm_fargate_percentage
-      - appsec_fargate_usage
-      - appsec_fargate_percentage
-      - estimated_rum_usage_attribution_usage
-      - estimated_rum_usage_attribution_percentage
-      - '*'
-      type: string
-      x-enum-varnames:
-      - CUSTOM_TIMESERIES_USAGE
-      - CONTAINER_USAGE
-      - SNMP_PERCENTAGE
-      - APM_HOST_USAGE
-      - BROWSER_USAGE
-      - NPM_HOST_PERCENTAGE
-      - INFRA_HOST_USAGE
-      - CUSTOM_TIMESERIES_PERCENTAGE
-      - CONTAINER_PERCENTAGE
-      - API_USAGE
-      - APM_HOST_PERCENTAGE
-      - INFRA_HOST_PERCENTAGE
-      - SNMP_USAGE
-      - BROWSER_PERCENTAGE
-      - API_PERCENTAGE
-      - NPM_HOST_USAGE
-      - LAMBDA_FUNCTIONS_USAGE
-      - LAMBDA_FUNCTIONS_PERCENTAGE
-      - LAMBDA_INVOCATIONS_USAGE
-      - LAMBDA_INVOCATIONS_PERCENTAGE
-      - FARGATE_USAGE
-      - FARGATE_PERCENTAGE
-      - PROFILED_HOST_USAGE
-      - PROFILED_HOST_PERCENTAGE
-      - PROFILED_CONTAINER_USAGE
-      - PROFILED_CONTAINER_PERCENTAGE
-      - DBM_HOSTS_USAGE
-      - DBM_HOSTS_PERCENTAGE
-      - DBM_QUERIES_USAGE
-      - DBM_QUERIES_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
-      - APPSEC_USAGE
-      - APPSEC_PERCENTAGE
-      - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
-      - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
-      - APM_FARGATE_USAGE
-      - APM_FARGATE_PERCENTAGE
-      - APPSEC_FARGATE_USAGE
-      - APPSEC_FARGATE_PERCENTAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
-      - ALL
     UsageAttributionTagNames:
       additionalProperties:
         description: 'A list of values that are associated with each tag key.
@@ -17251,225 +17105,6 @@ components:
 
         In this scenario the API returns the total usage, not broken down by tags.'
       nullable: true
-      type: object
-    UsageAttributionValues:
-      description: Fields in Usage Summary by tag(s).
-      properties:
-        api_percentage:
-          description: The percentage of synthetic API test usage by tag(s).
-          format: double
-          type: number
-        api_usage:
-          description: The synthetic API test usage by tag(s).
-          format: double
-          type: number
-        apm_fargate_percentage:
-          description: The percentage of APM ECS Fargate task usage by tag(s).
-          format: double
-          type: number
-        apm_fargate_usage:
-          description: The APM ECS Fargate task usage by tag(s).
-          format: double
-          type: number
-        apm_host_percentage:
-          description: The percentage of APM host usage by tag(s).
-          format: double
-          type: number
-        apm_host_usage:
-          description: The APM host usage by tag(s).
-          format: double
-          type: number
-        appsec_fargate_percentage:
-          description: The percentage of Application Security Monitoring ECS Fargate
-            task usage by tag(s).
-          format: double
-          type: number
-        appsec_fargate_usage:
-          description: The Application Security Monitoring ECS Fargate task usage
-            by tag(s).
-          format: double
-          type: number
-        appsec_percentage:
-          description: The percentage of Application Security Monitoring host usage
-            by tag(s).
-          format: double
-          type: number
-        appsec_usage:
-          description: The Application Security Monitoring host usage by tag(s).
-          format: double
-          type: number
-        browser_percentage:
-          description: The percentage of synthetic browser test usage by tag(s).
-          format: double
-          type: number
-        browser_usage:
-          description: The synthetic browser test usage by tag(s).
-          format: double
-          type: number
-        container_percentage:
-          description: The percentage of container usage by tag(s).
-          format: double
-          type: number
-        container_usage:
-          description: The container usage by tag(s).
-          format: double
-          type: number
-        cspm_container_percentage:
-          description: The percentage of Cloud Security Management Pro container usage
-            by tag(s)
-          format: double
-          type: number
-        cspm_container_usage:
-          description: The Cloud Security Management Pro container usage by tag(s)
-          format: double
-          type: number
-        cspm_host_percentage:
-          description: The percentage of Cloud Security Management Pro host usage
-            by tag(s)
-          format: double
-          type: number
-        cspm_host_usage:
-          description: The Cloud Security Management Pro host usage by tag(s)
-          format: double
-          type: number
-        custom_timeseries_percentage:
-          description: The percentage of custom metrics usage by tag(s).
-          format: double
-          type: number
-        custom_timeseries_usage:
-          description: The custom metrics usage by tag(s).
-          format: double
-          type: number
-        cws_container_percentage:
-          description: The percentage of Cloud Workload Security container usage by
-            tag(s)
-          format: double
-          type: number
-        cws_container_usage:
-          description: The Cloud Workload Security container usage by tag(s)
-          format: double
-          type: number
-        cws_host_percentage:
-          description: The percentage of Cloud Workload Security host usage by tag(s)
-          format: double
-          type: number
-        cws_host_usage:
-          description: The Cloud Workload Security host usage by tag(s)
-          format: double
-          type: number
-        dbm_hosts_percentage:
-          description: The percentage of Database Monitoring host usage by tag(s).
-          format: double
-          type: number
-        dbm_hosts_usage:
-          description: The Database Monitoring host usage by tag(s).
-          format: double
-          type: number
-        dbm_queries_percentage:
-          description: The percentage of Database Monitoring normalized queries usage
-            by tag(s).
-          format: double
-          type: number
-        dbm_queries_usage:
-          description: The Database Monitoring normalized queries usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_percentage:
-          description: The percentage of estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_spans_percentage:
-          description: The percentage of estimated indexed spans usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_percentage:
-          description: The percentage of estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_spans_percentage:
-          description: The percentage of estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        infra_host_percentage:
-          description: The percentage of infrastructure host usage by tag(s).
-          format: double
-          type: number
-        infra_host_usage:
-          description: The infrastructure host usage by tag(s).
-          format: double
-          type: number
-        lambda_functions_percentage:
-          description: The percentage of Lambda function usage by tag(s).
-          format: double
-          type: number
-        lambda_functions_usage:
-          description: The Lambda function usage by tag(s).
-          format: double
-          type: number
-        lambda_invocations_percentage:
-          description: The percentage of Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        lambda_invocations_usage:
-          description: The Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        npm_host_percentage:
-          description: The percentage of network host usage by tag(s).
-          format: double
-          type: number
-        npm_host_usage:
-          description: The network host usage by tag(s).
-          format: double
-          type: number
-        profiled_container_percentage:
-          description: The percentage of profiled containers usage by tag(s).
-          format: double
-          type: number
-        profiled_container_usage:
-          description: The profiled container usage by tag(s).
-          format: double
-          type: number
-        profiled_hosts_percentage:
-          description: The percentage of profiled hosts usage by tag(s).
-          format: double
-          type: number
-        profiled_hosts_usage:
-          description: The profiled host usage by tag(s).
-          format: double
-          type: number
-        snmp_percentage:
-          description: The percentage of network device usage by tag(s).
-          format: double
-          type: number
-        snmp_usage:
-          description: The network device usage by tag(s).
-          format: double
-          type: number
       type: object
     UsageAuditLogsHour:
       description: Audit logs usage for a given organization for a given hour.
@@ -18932,6 +18567,11 @@ components:
             Fargate tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
+        asm_serverless_sum:
+          description: Shows the sum of all Application Security Monitoring Serverless
+            invocations over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_sum:
           deprecated: true
           description: Shows the sum of audit logs lines indexed over all hours in
@@ -19019,6 +18659,11 @@ components:
           type: integer
         cloud_cost_management_azure_host_count_avg:
           description: Host count average of Cloud Cost Management for Azure for the
+            given date and given organization.
+          format: int64
+          type: integer
+        cloud_cost_management_gcp_host_count_avg:
+          description: Host count average of Cloud Cost Management for GCP for the
             given date and given organization.
           format: int64
           type: integer
@@ -19169,6 +18814,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        error_tracking_events_sum:
+          description: Shows the sum of all Error Tracking events over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         fargate_tasks_count_avg:
           description: Shows the high-watermark of all Fargate tasks over all hours
             in the current date for all organizations.
@@ -19177,6 +18827,31 @@ components:
         fargate_tasks_count_hwm:
           description: Shows the average of all Fargate tasks over all hours in the
             current date for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_large_avg:
+          description: Shows the average number of Flex Logs Compute Large Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_medium_avg:
+          description: Shows the average number of Flex Logs Compute Medium Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_small_avg:
+          description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xsmall_avg:
+          description: Shows the average number of Flex Logs Compute Extra Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_stored_logs_avg:
+          description: Shows the average of all Flex Stored Logs over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         forwarding_events_bytes_sum:
@@ -19449,7 +19124,7 @@ components:
           type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
-            in the current months for the given org.
+            in the current month for the given org.
           format: int64
           type: integer
         apm_host_top99p:
@@ -19459,7 +19134,12 @@ components:
           type: integer
         appsec_fargate_count_avg:
           description: Shows the average of all Application Security Monitoring ECS
-            Fargate tasks over all hours in the current months for the given org.
+            Fargate tasks over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        asm_serverless_sum:
+          description: Shows the sum of all Application Security Monitoring Serverless
+            invocations over all hours in the current month for the given org.
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
@@ -19550,6 +19230,11 @@ components:
           type: integer
         cloud_cost_management_azure_host_count_avg:
           description: Host count average of Cloud Cost Management for Azure for the
+            given date and given org.
+          format: int64
+          type: integer
+        cloud_cost_management_gcp_host_count_avg:
+          description: Host count average of Cloud Cost Management for GCP for the
             given date and given org.
           format: int64
           type: integer
@@ -19706,6 +19391,11 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        error_tracking_events_sum:
+          description: Shows the sum of all Error Tracking events over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         fargate_tasks_count_avg:
           description: The average task count for Fargate.
           format: int64
@@ -19713,6 +19403,31 @@ components:
         fargate_tasks_count_hwm:
           description: Shows the high-water mark of all Fargate tasks over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_large_avg:
+          description: Shows the average number of Flex Logs Compute Large Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_medium_avg:
+          description: Shows the average number of Flex Logs Compute Medium Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_small_avg:
+          description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_logs_compute_xsmall_avg:
+          description: Shows the average number of Flex Logs Compute Extra Small Instances
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        flex_stored_logs_avg:
+          description: Shows the average of all Flex Stored Logs over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         forwarding_events_bytes_sum:
@@ -19977,38 +19692,43 @@ components:
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         apm_azure_app_service_host_top99p_sum:
           description: Shows the 99th percentile of all Azure app services using APM
-            over all hours in the current months all organizations.
+            over all hours in the current month all organizations.
           format: int64
           type: integer
         apm_devsecops_host_top99p_sum:
           description: Shows the 99th percentile of all APM DevSecOps hosts over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         apm_fargate_count_avg_sum:
           description: Shows the average of all APM ECS Fargate tasks over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         appsec_fargate_count_avg_sum:
           description: Shows the average of all Application Security Monitoring ECS
-            Fargate tasks over all hours in the current months for all organizations.
+            Fargate tasks over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        asm_serverless_agg_sum:
+          description: Shows the sum of all Application Security Monitoring Serverless
+            invocations over all hours in the current months for all organizations.
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
           deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         audit_trail_enabled_hwm_sum:
@@ -20018,77 +19738,77 @@ components:
           type: integer
         avg_profiled_fargate_tasks_sum:
           description: Shows the average of all profiled Fargate tasks over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
           description: Shows the 99th percentile of all AWS hosts over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         aws_lambda_func_count:
           description: Shows the average of the number of functions that executed
-            1 or more times each hour in the current months for all organizations.
+            1 or more times each hour in the current month for all organizations.
           format: int64
           type: integer
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         azure_app_service_top99p_sum:
           description: Shows the 99th percentile of all Azure app services over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
           description: Shows the 99th percentile of all Azure hosts over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current months for all organizations.
+            current month for all organizations.
           format: int64
           type: integer
         browser_rum_lite_session_count_agg_sum:
           description: Shows the sum of all browser lite sessions over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         browser_rum_replay_session_count_agg_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         browser_rum_units_agg_sum:
           description: Shows the sum of all browser RUM units over all hours in the
-            current months for all organizations.
+            current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
           description: Shows the sum of all CI pipeline indexed spans over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         ci_test_indexed_spans_agg_sum:
           description: Shows the sum of all CI test indexed spans over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         ci_visibility_itr_committers_hwm_sum:
           description: Shows the high-water mark of all CI visibility intelligent
-            test runner committers over all hours in the current months for all organizations.
+            test runner committers over all hours in the current month for all organizations.
           format: int64
           type: integer
         ci_visibility_pipeline_committers_hwm_sum:
           description: Shows the high-water mark of all CI visibility pipeline committers
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         ci_visibility_test_committers_hwm_sum:
           description: Shows the high-water mark of all CI visibility test committers
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         cloud_cost_management_aws_host_count_avg_sum:
@@ -20101,6 +19821,11 @@ components:
             Azure.
           format: int64
           type: integer
+        cloud_cost_management_gcp_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management for
+            GCP.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg_sum:
           description: Sum of the host count average for Cloud Cost Management for
             all cloud providers.
@@ -20108,12 +19833,12 @@ components:
           type: integer
         cloud_siem_events_agg_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
-            events over all hours in the current months for all organizations.
+            events over all hours in the current month for all organizations.
           format: int64
           type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         container_excl_agent_avg_sum:
@@ -20123,123 +19848,123 @@ components:
           type: integer
         container_hwm_sum:
           description: Shows the sum of the high-water marks of all distinct containers
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         csm_container_enterprise_compliance_count_agg_sum:
           description: Shows the sum of all Cloud Security Management Enterprise compliance
-            containers over all hours in the current months for all organizations.
+            containers over all hours in the current month for all organizations.
           format: int64
           type: integer
         csm_container_enterprise_cws_count_agg_sum:
           description: Shows the sum of all Cloud Security Management Enterprise Cloud
-            Workload Security containers over all hours in the current months for
-            all organizations.
+            Workload Security containers over all hours in the current month for all
+            organizations.
           format: int64
           type: integer
         csm_container_enterprise_total_count_agg_sum:
           description: Shows the sum of all Cloud Security Management Enterprise containers
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_aas_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise Azure app services hosts over all hours in the current months
+            Enterprise Azure app services hosts over all hours in the current month
             for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_aws_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise AWS hosts over all hours in the current months for all organizations.
+            Enterprise AWS hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_azure_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise Azure hosts over all hours in the current months for all organizations.
+            Enterprise Azure hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_compliance_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise compliance hosts over all hours in the current months for all
+            Enterprise compliance hosts over all hours in the current month for all
             organizations.
           format: int64
           type: integer
         csm_host_enterprise_cws_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
             Enterprise Cloud Workload Security hosts over all hours in the current
-            months for all organizations.
+            month for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_gcp_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise GCP hosts over all hours in the current months for all organizations.
+            Enterprise GCP hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         csm_host_enterprise_total_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Enterprise hosts over all hours in the current months for all organizations.
+            Enterprise hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_aas_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Pro Azure app services hosts over all hours in the current months for
-            all organizations.
+            Pro Azure app services hosts over all hours in the current month for all
+            organizations.
           format: int64
           type: integer
         cspm_aws_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Pro AWS hosts over all hours in the current months for all organizations.
+            Pro AWS hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_azure_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Pro Azure hosts over all hours in the current months for all organizations.
+            Pro Azure hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_container_avg_sum:
           description: Shows the average number of Cloud Security Management Pro containers
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_container_hwm_sum:
           description: Shows the sum of the the high-water marks of Cloud Security
-            Management Pro containers over all hours in the current months for all
+            Management Pro containers over all hours in the current month for all
             organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Pro GCP hosts over all hours in the current months for all organizations.
+            Pro GCP hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
-            Pro hosts over all hours in the current months for all organizations.
+            Pro hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         custom_historical_ts_sum:
           description: Shows the average number of distinct historical custom metrics
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         custom_live_ts_sum:
           description: Shows the average number of distinct live custom metrics over
-            all hours in the current months for all organizations.
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
           description: Shows the average number of distinct custom metrics over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         cws_containers_avg_sum:
           description: Shows the average of all distinct Cloud Workload Security containers
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         cws_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         dbm_host_top99p_sum:
@@ -20253,80 +19978,109 @@ components:
           format: int64
           type: integer
         end_date:
-          description: Shows the last date of usage in the current months for all
-            organizations.
+          description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        error_tracking_events_agg_sum:
+          description: Shows the sum of all Error Tracking events over all hours in
+            the current months for all organizations.
+          format: int64
+          type: integer
         fargate_tasks_count_avg_sum:
           description: Shows the average of all Fargate tasks over all hours in the
-            current months for all organizations.
+            current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_hwm_sum:
           description: Shows the sum of the high-water marks of all Fargate tasks
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_large_avg_sum:
+          description: Shows the average number of Flex Logs Compute Large Instances
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_medium_avg_sum:
+          description: Shows the average number of Flex Logs Compute Medium Instances
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_small_avg_sum:
+          description: Shows the average number of Flex Logs Compute Small Instances
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_logs_compute_xsmall_avg_sum:
+          description: Shows the average number of Flex Logs Compute Extra Small Instances
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        flex_stored_logs_avg_sum:
+          description: Shows the average of all Flex Stored Logs over all hours in
+            the current months for all organizations.
           format: int64
           type: integer
         forwarding_events_bytes_agg_sum:
           description: Shows the sum of all logs forwarding bytes over all hours in
-            the current months for all organizations (data available as of April 1,
+            the current month for all organizations (data available as of April 1,
             2023)
           format: int64
           type: integer
         gcp_host_top99p_sum:
           description: Shows the 99th percentile of all GCP hosts over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         heroku_host_top99p_sum:
           description: Shows the 99th percentile of all Heroku dynos over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         incident_management_monthly_active_users_hwm_sum:
           description: Shows sum of the the high-water marks of incident management
-            monthly active users in the current months for all organizations.
+            monthly active users in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
           description: Shows the sum of all log events indexed over all hours in the
-            current months for all organizations.
+            current month for all organizations.
           format: int64
           type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current months for all organizations.
+            current month for all organizations.
           format: int64
           type: integer
         iot_device_agg_sum:
           description: Shows the sum of all IoT devices over all hours in the current
-            months for all organizations.
+            month for all organizations.
           format: int64
           type: integer
         iot_device_top99p_sum:
           description: Shows the 99th percentile of all IoT devices over all hours
-            in the current months of all organizations.
+            in the current month of all organizations.
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current months for all
+          description: Shows the the most recent hour in the current month for all
             organizations for which all usages were calculated.
           format: date-time
           type: string
         live_indexed_events_agg_sum:
           description: Shows the sum of all live logs indexed over all hours in the
-            current months for all organizations (data available as of December 1,
+            current month for all organizations (data available as of December 1,
             2020).
           format: int64
           type: integer
         live_ingested_bytes_agg_sum:
           description: Shows the sum of all live logs bytes ingested over all hours
-            in the current months for all organizations (data available as of December
+            in the current month for all organizations (data available as of December
             1, 2020).
           format: int64
           type: integer
@@ -20334,105 +20088,105 @@ components:
           $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_lite_session_count_agg_sum:
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_android_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_flutter_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_ios_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current months for all organizations.
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_roku_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
           description: Shows the sum of all mobile RUM units over all hours in the
-            current months for all organizations.
+            current month for all organizations.
           format: int64
           type: integer
         ndm_netflow_events_agg_sum:
           description: Shows the sum of all Network Device Monitoring NetFlow events
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current months for all organizations.
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_agg_sum:
           description: Sum of all observability pipelines bytes processed over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
           description: Sum of all online archived events over all hours in the current
-            months for all organizations.
+            month for all organizations.
           format: int64
           type: integer
         opentelemetry_apm_host_top99p_sum:
           description: Shows the 99th percentile of APM hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
-            months for all organizations.
+            month for all organizations.
           format: int64
           type: integer
         opentelemetry_host_top99p_sum:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
-            months for all organizations.
+            month for all organizations.
           format: int64
           type: integer
         profiling_aas_count_top99p_sum:
           description: Shows the 99th percentile of all profiled Azure app services
-            over all hours in the current months for all organizations.
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         profiling_container_agent_count_avg:
           description: Shows the average number of profiled containers over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         rehydrated_indexed_events_agg_sum:
           description: Shows the sum of all rehydrated logs indexed over all hours
-            in the current months for all organizations (data available as of December
+            in the current month for all organizations (data available as of December
             1, 2020).
           format: int64
           type: integer
         rehydrated_ingested_bytes_agg_sum:
           description: Shows the sum of all rehydrated logs bytes ingested over all
-            hours in the current months for all organizations (data available as of
+            hours in the current month for all organizations (data available as of
             December 1, 2020).
           format: int64
           type: integer
@@ -20443,27 +20197,27 @@ components:
           type: integer
         rum_session_count_agg_sum:
           description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         rum_total_session_count_agg_sum:
           description: Shows the sum of RUM Sessions (browser and mobile) over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         rum_units_agg_sum:
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
           description: Sum of all APM bytes scanned with sensitive data scanner in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         sds_events_scanned_bytes_sum:
           description: Sum of all event stream events bytes scanned with sensitive
-            data scanner in the current months for all organizations.
+            data scanner in the current month for all organizations.
           format: int64
           type: integer
         sds_logs_scanned_bytes_sum:
@@ -20473,7 +20227,7 @@ components:
           type: integer
         sds_rum_scanned_bytes_sum:
           description: Sum of all RUM bytes scanned with sensitive data scanner in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -20484,37 +20238,37 @@ components:
           type: integer
         serverless_apps_azure_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure in the
-            current months for all organizations.
+            current month for all organizations.
           format: int64
           type: integer
         serverless_apps_google_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Google Cloud
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         serverless_apps_total_count_avg_sum:
           description: Sum of the average number of Serverless Apps for Azure and
-            Google Cloud in the current months for all organizations.
+            Google Cloud in the current month for all organizations.
           format: int64
           type: integer
         start_date:
-          description: Shows the first date of usage in the current months for all
+          description: Shows the first date of usage in the current month for all
             organizations.
           format: date-time
           type: string
         synthetics_browser_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         synthetics_mobile_test_runs_agg_sum:
           description: Shows the sum of Synthetic mobile application tests over all
-            hours in the current months for all organizations.
+            hours in the current month for all organizations.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm_sum:
@@ -20524,17 +20278,17 @@ components:
           type: integer
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all Indexed Spans indexed over all hours in
-            the current months for all organizations.
+            the current month for all organizations.
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
           description: Shows the sum of all ingested APM span bytes over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         universal_service_monitoring_host_top99p_sum:
           description: Shows the 99th percentile of all Universal Service Monitoring
-            hosts over all hours in the current months for all organizations.
+            hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         usage:
@@ -20544,17 +20298,17 @@ components:
           type: array
         vsphere_host_top99p_sum:
           description: Shows the 99th percentile of all vSphere hosts over all hours
-            in the current months for all organizations.
+            in the current month for all organizations.
           format: int64
           type: integer
         vuln_management_host_count_top99p_sum:
           description: Shows the 99th percentile of all Application Vulnerability
-            Management hosts over all hours in the current months for all organizations.
+            Management hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         workflow_executions_usage_agg_sum:
           description: Sum of all workflows executed over all hours in the current
-            months for all organizations.
+            month for all organizations.
           format: int64
           type: integer
       type: object
@@ -25609,7 +25363,7 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-given:
-        aws_account:
+        azure_account:
           parameters:
           - name: body
             origin: request
@@ -27679,7 +27433,7 @@ paths:
         **Notes**:
 
         - Synthetic monitors are created through the Synthetics API. See the [Synthetics
-        API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
         more information.
 
         - Log monitors require an unscoped App Key.
@@ -27986,10 +27740,7 @@ paths:
 
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        **NOTE** Database Monitoring monitors are in alpha on US1.'
+        - `#` an integer or decimal number used to set the threshold.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -32804,10 +32555,11 @@ paths:
         type: idempotent
   /api/v1/usage/analyzed_logs:
     get:
+      deprecated: true
       description: 'Get hourly usage for analyzed logs (Security Monitoring).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageAnalyzedLogs
@@ -32864,103 +32616,6 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 23
-      x-undo:
-        type: safe
-  /api/v1/usage/attribution:
-    get:
-      deprecated: true
-      description: 'Get usage attribution.
-
-        **Note:** This endpoint will be fully deprecated on December 1, 2022.
-
-        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
-        for the associated migration guide.'
-      operationId: GetUsageAttribution
-      parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for usage beginning in this month.
-
-          Maximum of 15 months ago.'
-        in: query
-        name: start_month
-        required: true
-        schema:
-          format: date-time
-          type: string
-      - description: Comma-separated list of usage types to return, or `*` for all
-          usage types.
-        in: query
-        name: fields
-        required: true
-        schema:
-          $ref: '#/components/schemas/UsageAttributionSupportedMetrics'
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for usage ending this month.'
-        in: query
-        name: end_month
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'The direction to sort by: `[desc, asc]`.'
-        in: query
-        name: sort_direction
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageSortDirection'
-      - description: The field to sort by.
-        in: query
-        name: sort_name
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionSort'
-      - description: Include child org usage in the response. Defaults to false.
-        in: query
-        name: include_descendants
-        required: false
-        schema:
-          default: false
-          type: boolean
-      - description: Number of records to skip before beginning to return.
-        in: query
-        name: offset
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionOffset'
-      - description: Maximum number of records to be returned.
-        in: query
-        name: limit
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionLimit'
-      responses:
-        '200':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/UsageAttributionResponse'
-          description: OK
-        '403':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden - User is not authorized
-        '429':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
-      summary: Get usage attribution
-      tags:
-      - Usage Metering
-      x-menu-order: 40
       x-undo:
         type: safe
   /api/v1/usage/audit_logs:
@@ -33027,10 +32682,11 @@ paths:
         type: safe
   /api/v1/usage/aws_lambda:
     get:
+      deprecated: true
       description: 'Get hourly usage for Lambda.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageLambda
@@ -33138,10 +32794,11 @@ paths:
         type: safe
   /api/v1/usage/ci-app:
     get:
+      deprecated: true
       description: 'Get hourly usage for CI visibility (tests, pipeline, and spans).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageCIApp
@@ -33202,10 +32859,11 @@ paths:
         type: safe
   /api/v1/usage/cspm:
     get:
+      deprecated: true
       description: 'Get hourly usage for cloud security management (CSM) pro.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageCloudSecurityPostureManagement
@@ -33266,10 +32924,11 @@ paths:
         type: safe
   /api/v1/usage/cws:
     get:
+      deprecated: true
       description: 'Get hourly usage for cloud workload security.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageCWS
@@ -33330,10 +32989,11 @@ paths:
         type: safe
   /api/v1/usage/dbm:
     get:
+      deprecated: true
       description: 'Get hourly usage for database monitoring
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageDBM
@@ -33394,10 +33054,11 @@ paths:
         type: safe
   /api/v1/usage/fargate:
     get:
+      deprecated: true
       description: 'Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageFargate
@@ -33456,10 +33117,11 @@ paths:
         type: safe
   /api/v1/usage/hosts:
     get:
+      deprecated: true
       description: 'Get hourly usage for hosts and containers.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageHosts
@@ -33609,10 +33271,11 @@ paths:
         type: safe
   /api/v1/usage/incident-management:
     get:
+      deprecated: true
       description: 'Get hourly usage for incident management.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetIncidentManagement
@@ -33673,10 +33336,11 @@ paths:
         type: safe
   /api/v1/usage/indexed-spans:
     get:
+      deprecated: true
       description: 'Get hourly usage for indexed spans.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageIndexedSpans
@@ -33735,10 +33399,11 @@ paths:
         type: safe
   /api/v1/usage/ingested-spans:
     get:
+      deprecated: true
       description: 'Get hourly usage for ingested spans.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetIngestedSpans
@@ -33799,10 +33464,11 @@ paths:
         type: safe
   /api/v1/usage/iot:
     get:
+      deprecated: true
       description: 'Get hourly usage for IoT.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageInternetOfThings
@@ -33863,10 +33529,11 @@ paths:
         type: safe
   /api/v1/usage/logs:
     get:
+      deprecated: true
       description: 'Get hourly usage for logs.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageLogs
@@ -33925,10 +33592,11 @@ paths:
         type: safe
   /api/v1/usage/logs-by-retention:
     get:
+      deprecated: true
       description: 'Get hourly usage for indexed logs by retention period.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageLogsByRetention
@@ -34166,10 +33834,11 @@ paths:
         type: safe
   /api/v1/usage/network_flows:
     get:
+      deprecated: true
       description: 'Get hourly usage for network flows.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageNetworkFlows
@@ -34230,10 +33899,11 @@ paths:
         type: safe
   /api/v1/usage/network_hosts:
     get:
+      deprecated: true
       description: 'Get hourly usage for network hosts.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageNetworkHosts
@@ -34292,10 +33962,11 @@ paths:
         type: safe
   /api/v1/usage/online-archive:
     get:
+      deprecated: true
       description: 'Get hourly usage for online archive.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageOnlineArchive
@@ -34356,10 +34027,11 @@ paths:
         type: safe
   /api/v1/usage/profiling:
     get:
+      deprecated: true
       description: 'Get hourly usage for profiled hosts.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageProfiling
@@ -34420,11 +34092,12 @@ paths:
         type: safe
   /api/v1/usage/rum:
     get:
+      deprecated: true
       description: 'Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
         Units.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageRumUnits
@@ -34483,11 +34156,12 @@ paths:
         type: safe
   /api/v1/usage/rum_sessions:
     get:
+      deprecated: true
       description: 'Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
         Sessions.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageRumSessions
@@ -34552,10 +34226,11 @@ paths:
         type: safe
   /api/v1/usage/sds:
     get:
+      deprecated: true
       description: 'Get hourly usage for sensitive data scanner.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSDS
@@ -34616,10 +34291,11 @@ paths:
         type: safe
   /api/v1/usage/snmp:
     get:
+      deprecated: true
       description: 'Get hourly usage for SNMP devices.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSNMP
@@ -34748,8 +34424,8 @@ paths:
       deprecated: true
       description: 'Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSynthetics
@@ -34808,10 +34484,11 @@ paths:
         type: safe
   /api/v1/usage/synthetics_api:
     get:
+      deprecated: true
       description: 'Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSyntheticsAPI
@@ -34870,10 +34547,11 @@ paths:
         type: safe
   /api/v1/usage/synthetics_browser:
     get:
+      deprecated: true
       description: 'Get hourly usage for synthetics browser checks.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSyntheticsBrowser
@@ -34932,10 +34610,11 @@ paths:
         type: safe
   /api/v1/usage/timeseries:
     get:
+      deprecated: true
       description: 'Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageTimeseries
@@ -35697,6 +35376,7 @@ tags:
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
 - description: Search your logs and send them to your Datadog platform over HTTP.
+    See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
 - description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
 
@@ -35727,7 +35407,8 @@ tags:
     A graph can only contain a set number of points\nand as the timeframe over which
     a metric is viewed increases,\naggregation between points occurs to stay below
     that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
-    only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee
+    the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about and
@@ -35770,9 +35451,9 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Screenboards
   x-deprecated: true
-- description: 'Detection rules for generating signals and listing of generated
-
-    signals.'
+- description: Create and manage your security rules, signals, filters, and more.
+    See the [Datadog Security page](https://docs.datadoghq.com/security/) for more
+    information.
   name: Security Monitoring
 - description: 'The service check endpoint allows you to post check statuses for use
     with monitors.
@@ -35789,18 +35470,18 @@ tags:
     an OK status.
 
 
-    - [Read more about Service Check monitors.][1]
+    - [Read more about Service Check monitors][1].
 
-    - [Read more about Process Check monitors.][2]
+    - [Read more about Process Check monitors][2].
 
-    - [Read more about Network Check monitors.][3]
+    - [Read more about Network monitors][3].
 
-    - [Read more about Custom Check monitors.][4]
+    - [Read more about Custom Check monitors][4].
 
-    - [Read more about Service Check and status codes.][5]
+    - [Read more about Service Checks and status codes][5].
 
 
-    [1]: https://docs.datadoghq.com/monitors/create/types/host/?tab=checkalert
+    [1]: https://docs.datadoghq.com/monitors/types/service_check/
 
     [2]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert
 
@@ -35812,7 +35493,7 @@ tags:
   name: Service Checks
 - description: 'APM Service Map API. For more information, visit
 
-    the [services map documentation](https://docs.datadoghq.com/tracing/visualization/services_map/).'
+    the [Service Map page](https://docs.datadoghq.com/tracing/visualization/services_map/).'
   externalDocs:
     url: https://docs.datadoghq.com/tracing/visualization/services_map/
   name: Service Dependencies
@@ -35820,7 +35501,8 @@ tags:
     from negatively impacting\nyour SLO\u2019s status and error budget. You can use
     Status Corrections for various purposes, such\nas removing planned maintenance
     windows, non-business hours, or other time periods that do\nnot correspond to
-    genuine issues."
+    genuine issues. See [SLO status corrections](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-status-corrections)
+    for more information."
   name: Service Level Objective Corrections
 - description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
 
@@ -35870,9 +35552,7 @@ tags:
     users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.
 
 
-    Read more about tags on the dedicated
-
-    [documentation page](https://docs.datadoghq.com/tagging).'
+    Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).'
   name: Tags
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
     instead.
@@ -35911,9 +35591,8 @@ tags:
 - description: 'Configure your Datadog-Webhooks integration directly through the Datadog
     API.
 
-    For more information about the Datadog-Webhooks integration,
-
-    see the [integration page](https://docs.datadoghq.com/integrations/webhooks).'
+    See the [Webhooks integration page](https://docs.datadoghq.com/integrations/webhooks)
+    for more information.'
   externalDocs:
     url: https://docs.datadoghq.com/integrations/webhooks
   name: Webhooks Integration

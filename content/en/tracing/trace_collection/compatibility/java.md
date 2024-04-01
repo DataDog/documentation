@@ -126,6 +126,7 @@ The following instrumentations are disabled by default and can be enabled with t
 | Grizzly-HTTP    | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
 | Ning            | `-Ddd.integration.ning.enabled=true`                                                                                                      |
 | Spark Java      | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
+| Hazelcast       | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                               |
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
 
@@ -159,7 +160,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Java RMI                           | all         | Distributed Tracing Not Supported                   | `rmi`, `rmi-client`, `rmi-server`                       |
 | Jax RS Clients                     | 2.0+        | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
 | Jersey Client                      | 1.9-2.29    | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
-| JMS                                | 1 and 2     | Fully Supported                                     | `jms`, `jms-1`, `jms-2`                                 |
+| JMS / Jakarta JMS                  | 1-3.0+      | Fully Supported                                     | `jms`, `jms-1`, `jms-2`, `jakarta-jms`                  |
 | Netty HTTP Client                  | 4.0+        | Fully Supported                                     | `netty`, `netty-4.0`, `netty-4.1`                       |
 | Ning HTTP Client                   | 1.9.0+      | [Beta](#framework-integrations-disabled-by-default) | `ning`                                                  |
 | OkHTTP                             | 2.2+        | Fully Supported                                     | `okhttp`, `okhttp-2`,`okhttp-3`                         |
@@ -234,21 +235,22 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 `dd-java-agent` includes support for automatically tracing the following frameworks.
 
-| Framework         | Versions   | Support Type    | Instrumentation Names (used for configuration) |
-|-------------------|------------|-----------------|------------------------------------------------|
-| Datanucleus JDO   | 4.0+       | Fully Supported | `datanucleus`                                  |
-| Dropwizard Views  | 0.7+       | Fully Supported | `dropwizard`, `dropwizard-view`                |
-| GraphQL           | 14.0+      | Fully Supported | `graphql-java`                                 |
-| Hibernate         | 3.5+       | Fully Supported | `hibernate`, `hibernate-core`                  |
-| Hystrix           | 1.4+       | Fully Supported | `hystrix`                                      |
-| JSP Rendering     | 2.3+       | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |
-| JUnit             | 4.1+, 5.3+ | Fully Supported | `junit`, `junit-4`, `junit-5`                  |
-| Project Reactor   | 3.1+       | Fully Supported | `reactor-core`                                 |
-| Quartz            | 2.x        | Fully Supported | `quartz`                                       |
-| RxJava            | 2.x        | Fully Supported | `rxjava`                                       |
-| Spring Data       | 1.8+       | Fully Supported | `spring-data`                                  |
-| Spring Scheduling | 3.1+       | Fully Supported | `spring-scheduling`                            |
-| Twilio SDK        | < 8.0      | Fully Supported | `twilio-sdk`                                   |
+| Framework         | Versions   | Support Type                                                     | Instrumentation Names (used for configuration) |
+|-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
+| Datanucleus JDO   | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
+| Dropwizard Views  | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
+| GraphQL           | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
+| Hazelcast         | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
+| Hibernate         | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
+| Hystrix           | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
+| JSP Rendering     | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
+| JUnit             | 4.1+, 5.3+ | Fully Supported                                                  | `junit`, `junit-4`, `junit-5`                  |
+| Project Reactor   | 3.1+       | Fully Supported                                                  | `reactor-core`                                 |
+| Quartz            | 2.x        | Fully Supported                                                  | `quartz`                                       |
+| RxJava            | 2.x        | Fully Supported                                                  | `rxjava`                                       |
+| Spring Data       | 1.8+       | Fully Supported                                                  | `spring-data`                                  |
+| Spring Scheduling | 3.1+       | Fully Supported                                                  | `spring-scheduling`                            |
+| Twilio SDK        | < 8.0      | Fully Supported                                                  | `twilio-sdk`                                   |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 
@@ -275,7 +277,6 @@ Integrations can be enabled or disabled individually (overriding the default abo
 ### Known issues
 
 - Running the Java tracer in Bitbucket is not supported.
-- JDK 21 virtual threads are in [Beta](#levels-of-support).
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
 
 ## Further Reading

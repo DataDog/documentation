@@ -34,7 +34,7 @@ further_reading:
 
 - **Custom spans**: Configure custom spans
 
-- **Custom pre-defined tags**: Configure [custom tags][12] and metrics at runtime
+- **Custom pre-defined tags**: Configure [custom tags][12] and measures at runtime
 
 - **Parameters**: Set custom parameters such as default branch name and Git information
 
@@ -546,6 +546,8 @@ There are different ways to enable Test Visibility inside a Jenkins job or pipel
 2. Adding the `datadog` step inside the pipeline script.
 3. Configuring the tracer manually.
 
+For pipelines that spin up a Docker container to execute tests, you can only configure the tracer manually.
+
 ### Enable with the Jenkins configuration UI
 
 UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or newer.
@@ -576,7 +578,7 @@ pipeline {
         datadog(testVisibility: [
             enabled: true,
             serviceName: "my-service", // the name of service or library being tested
-            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON")
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
         ])
     }
@@ -627,11 +629,12 @@ pipeline {
 }
 {{< /code-block >}}
 
-## Propagate Git information in pipelines without a Jenkinsfile from SCM
+## Propagate Git information from SCM
 
-The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository, and you're configuring the pipeline directly in Jenkins using the `checkout` step.
+The Jenkins plugin is capable of automatically detecting Git information associated with a build or a pipeline.
+However, depending on the Jenkins version and the pipeline details, there may be cases when automatic Git data detection is not possible.
 
-In this case, you can propagate the Git information to the environment variables in your build. Use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
+In this case you can make the Git information available to the plugin by using the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
 
 {{< tabs >}}
 {{% tab "Using Declarative Pipelines" %}}
@@ -695,10 +698,10 @@ node {
 
 ## Set Git information manually
 
-The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables are not always set
-automatically due to dependencies on the Git plugin that is being used in the pipeline.
+In case the plugin cannot detect Git information automatically and propagating Git data via SCM is not an option,
+the necessary Git information can be set manually.
 
-If the Git information is not detected automatically, you can set the following environment variables manually.
+To do so, set the following environment variables.
 
 **Note:** These variables are optional, but if they are set, they take precedence over the Git information set by other Jenkins plugins.
 
@@ -956,7 +959,7 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
 [10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
 [11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
-[12]: /continuous_integration/pipelines/custom_tags_and_metrics/
+[12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/
 [15]: /account_management/teams/
 [16]: /continuous_integration/tests/

@@ -14,14 +14,7 @@ Team membership is flexible. Users can join teams, be added by other members, or
 
 ### Navigation
 
-To find the [team directory page][1]:
-
-1. Navigate to **Organization Settings** from your account menu.
-1. Under **Groups**, select **Teams**.
-
-The [team directory page][1] lists all teams within your organization. Use the **Only My Teams** slider in the upper right to toggle the view between your teams and all teams in the organization.
-
-{{< img src="account_management/teams-directory.jpg" alt="Organization Settings page, Teams tab, showing a panel highlighting the Caching team" >}}
+Access the team directory page, from [Organization Settings][1] or by navigating to [**Service Management > Teams**][2]. The [team directory page][1] lists all teams within your organization.
 
 ### Create team
 
@@ -32,12 +25,14 @@ The [team directory page][1] lists all teams within your organization. Use the *
 1. Use the dropdown menu to select team members.
 1. Click **Create**.
 
+**Note:** Allowed characters for team names and team handles are `a-z`, `A-Z`, `0-9`, and `._-:/`. Replace spaces with underscores.
+
 ### Modify team
 
-1. On the [team directory page][1], click the team you wish to modify. A side panel appears with the team details.
-1. Mouse over the item you wish to modify. A pencil icon appears.
-1. Click the pencil icon. A pop-up window appears.
-1. Make your changes, then click the appropriate button to save your changes.
+1. On the [team directory page][1], click the team you wish to modify. 
+1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
+1. Select the item you wish to modify.
+1. Make your changes, then click **Save**.
 
 ### Choose provisioning source
 
@@ -52,11 +47,10 @@ SAML
 All sources
 : Use SAML as a starting point, and allow overrides through the UI and API
 
-1. On the [team directory page][1], select the team. A side panel appears with team details.
-1. Click **Settings**.
+1. On the [team directory page][1], click **Teams Settings**.
 1. Select one of the options under **Team Provisioning Sources**.
 
-If you have teams with existing members, picking the SAML strict option overrides your settings and removes team members from those teams. Picking the All Sources option preserves existing memberships. To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][2].
+If you have teams with existing members, picking the SAML strict option overrides your settings and removes team members from those teams. Picking the All Sources option preserves existing memberships. To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][3].
 
 ## Team handle
 
@@ -74,13 +68,22 @@ Team handles that aren't associated with a defined team in Datadog behave simila
 
 Datadog supports associating the following resources with team handles:
 
-- [Dashboards][3]
-- [Incidents][4]
-- [Monitors][5]
-- [Resource Catalog][6]
-- [Service Catalog][7]
-- [Service Level Objectives][8]
+- [Dashboards][4]
+- [Incidents][5]
+- [Monitors][6]
+- [Resource Catalog][7]
+- [Service Catalog][8]
+- [Service Level Objectives][9]
 - Synthetic Tests, Global Variables, Private Locations
+
+### Send notifications to a specific communication channel 
+
+Add a notification channel to your Team to route alerts to communication channels such as Slack or Microsoft Teams. Monitor alerts targeting `@team-<handle>` are redirected to the selected channel. 
+
+1. On the [team directory page][1], click the team you wish to modify. 
+1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
+1. Select **Notifications**.
+1. Add a channel, then click **Save**.
 
 ## Filter
 
@@ -97,17 +100,17 @@ The table below describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][9]         | Team handle                                                                      |
-| [Resource Catalog][6]   | Team handle                                                                      |
-| [Service Catalog][10]    | Team handle                                                                      |
-| [Incidents][11]          | Team handle                                                                      |
-| [Monitors][12]          | Team handle                                                                      |
-| [APM Error Tracking][13] | Service owned by teams (determined by ownership inside the [Service Catalog][10]) |
-| [Logs Error Tracking][14] | Service owned by teams (determined by ownership inside the [Service Catalog][10]) |
-| [Service Level Objectives][15] | Team handle                                                                 |
-| [Data Streams Monitoring][16]  | Team handle                                                                 |
-| [Synthetic Tests][17]          | Team handle                                                                 |
-| [Notebooks][18]          | Team handle                                                                      |
+| [Dashboards][10]         | Team handle                                                                      |
+| [Resource Catalog][7]   | Team handle                                                                      |
+| [Service Catalog][11]    | Team handle                                                                      |
+| [Incidents][12]          | Team handle                                                                      |
+| [Monitors][13]          | Team handle                                                                      |
+| [APM Error Tracking][14] | Service owned by teams (determined by ownership inside the [Service Catalog][11]) |
+| [Logs Error Tracking][15] | Service owned by teams (determined by ownership inside the [Service Catalog][11]) |
+| [Service Level Objectives][16] | Team handle                                                                 |
+| [Data Streams Monitoring][17]  | Team handle                                                                 |
+| [Synthetic Tests][18]          | Team handle                                                                 |
+| [Notebooks][19]          | Team handle                                                                      |
 
 
 
@@ -131,7 +134,7 @@ Users with the `user_access_manage` permission can set default rules on who can 
 
 ### SAML attribute mapping
 
-To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][2].
+To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][3].
 
 ### Delegate team management
 
@@ -141,22 +144,23 @@ If you prefer a team-driven membership model, set your default team settings so 
 
 To enforce a strict membership model, configure your default team settings so **Only users with user_access_manage** can add or remove members. Assign the `teams_manage` permission only to organization administrators.
 
-[1]: https://app.datadoghq.com/organization-settings/teams
-[2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
-[3]: /dashboards/#edit-details
-[4]: /service_management/incident_management/incident_details#overview-section
-[5]: /monitors/configuration/?tab=thresholdalert#add-metadata
-[6]: /security/misconfigurations/resource_catalog
-[7]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
-[8]: /service_management/service_level_objectives/#slo-tags
-[9]: https://app.datadoghq.com/dashboard/lists
-[10]: https://app.datadoghq.com/services
-[11]: https://app.datadoghq.com/incidents
-[12]: https://app.datadoghq.com/monitors/manage
-[13]: https://app.datadoghq.com/apm/error-tracking
-[14]: https://app.datadoghq.com/logs/error-tracking
-[15]: https://app.datadoghq.com/slo/manage
-[16]: https://app.datadoghq.com/data-streams
-[17]: https://app.datadoghq.com/synthetics
-[18]: https://app.datadoghq.com/notebook/list/
 
+[1]: https://app.datadoghq.com/organization-settings/teams
+[2]: https://app.datadoghq.com/teams
+[3]: /account_management/saml/mapping/#map-saml-attributes-to-teams
+[4]: /dashboards/#dashboard-details
+[5]: /service_management/incident_management/incident_details#overview-section
+[6]: /monitors/configuration/?tab=thresholdalert#add-metadata
+[7]: /infrastructure/resource_catalog/
+[8]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[9]: /service_management/service_level_objectives/#slo-tags
+[10]: https://app.datadoghq.com/dashboard/lists
+[11]: https://app.datadoghq.com/services
+[12]: https://app.datadoghq.com/incidents
+[13]: https://app.datadoghq.com/monitors/manage
+[14]: https://app.datadoghq.com/apm/error-tracking
+[15]: https://app.datadoghq.com/logs/error-tracking
+[16]: https://app.datadoghq.com/slo/manage
+[17]: https://app.datadoghq.com/data-streams
+[18]: https://app.datadoghq.com/synthetics
+[19]: https://app.datadoghq.com/notebook/list/

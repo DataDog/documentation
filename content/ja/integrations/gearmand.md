@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gearmand
-oauth: {}
 public_title: Gearman
 short_description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
 supported_os:

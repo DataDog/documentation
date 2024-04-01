@@ -48,8 +48,8 @@ To get started, follow the installation instructions to configure services with 
 |---|----|
 | Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
 | Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
-| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ |
-| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform) |
+| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
+| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
 | Go | All (with [manual instrumentation][1]) |
   
 

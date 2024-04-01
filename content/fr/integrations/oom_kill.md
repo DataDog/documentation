@@ -32,7 +32,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: oom_kill
-oauth: {}
 public_title: OOM Kill
 short_description: Surveillez les éliminations de processus OOM (Out of Memory) effectuées
   par le système ou un cgroup.

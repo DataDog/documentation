@@ -105,6 +105,10 @@ def security_rules(content, content_dir):
             if not message_file_name.exists():
                 continue
 
+        # get path relative to the repo root for comparisons
+        relative_path = str(p.parent).split(f"/{content['repo_name']}/")[1]
+
+        is_enabled = bool(data.get("isEnabled", True))
         is_beta = bool(data.get("isBeta", False))
 
         # Logic for when to remove a rule.
@@ -117,8 +121,11 @@ def security_rules(content, content_dir):
         is_past_deprecation_date = date(*[int(x) for x in deprecation_date.split('-')]) < date.today() if deprecation_date else False
         # 3. general flags we should respect for removal. At least one true to cause removal
         is_removed = (data.get('isShadowDeployed', False) or data.get('isDeleted', False) or data.get('isDeprecated', False))
+        # 4. If rule not enabled and under posture-management/infrastructure-monitoring directory lets remove the rule
+        # this is to cover the case where some rules were inherited that haven't been evaluated completely..
+        is_disabled_and_infra = not is_enabled and 'posture-management' in relative_path
 
-        if is_restricted_and_not_beta or is_removed or is_past_deprecation_date:
+        if is_restricted_and_not_beta or is_removed or is_past_deprecation_date or is_disabled_and_infra:
             if p.exists():
                 logger.info(f"removing file {p.name}")
                 global_aliases.append(f"/security/default_rules/{p.stem}")
@@ -149,8 +156,6 @@ def security_rules(content, content_dir):
                 "is_beta": is_beta
             }
 
-            # get path relative to the repo root for comparisons
-            relative_path = str(p.parent).split(f"/{content['repo_name']}/")[1]
             # lets build up this categorization for filtering purposes
 
             tags = data.get('tags', [])
@@ -234,7 +239,10 @@ def security_rules(content, content_dir):
                 # CSM Identity Risks, CSM Misconfigurations, CSM Sec Issues
                 page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/compliance/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=framework&product=cspm&sort=rule_name"
                 if page_data['rule_category'][0] != "CSM Security Issues":
-                    page_data["view_findings_url"] = f"https://app.datadoghq.com/security/identities?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
+                    if "CSM Misconfigurations" in page_data['rule_category'][0]:
+                        page_data["view_findings_url"] = f"https://app.datadoghq.com/security/compliance?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
+                    else:
+                        page_data["view_findings_url"] = f"https://app.datadoghq.com/security/identities?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
 
 
             front_matter = yaml.dump(page_data, default_flow_style=False).strip()

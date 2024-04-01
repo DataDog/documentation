@@ -10,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_cognito/
 draft: false
 git_integration_title: amazon_cognito
 has_logo: true
-integration_id: amazon-cognito
+integration_id: ''
 integration_title: Amazon Cognito
 integration_version: ''
 is_public: true
@@ -22,15 +22,16 @@ short_description: Amazon Cognito のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダーによるユーザー ID の認証、AWS Cloud へのモバイルユーザーデータの保存を行うことができるサービスです。
 
 このインテグレーションを有効にすると、Datadog に Cognito Advanced Security メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -41,7 +42,7 @@ Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダー�
 
 **注**: AWS で Advanced Security を有効にする必要があります。[User Pool に Advanced Security][4] を追加するには、AWS のドキュメントを参照してください。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -59,21 +60,21 @@ Amazon Cognito から S3 バケットまたは CloudWatch のいずれかにロ�
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_cognito" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon Cognito インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon Cognito インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

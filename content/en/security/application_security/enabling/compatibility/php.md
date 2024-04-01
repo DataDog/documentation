@@ -15,11 +15,12 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
 | Customize response to blocked requests | 0.86.0 |
-| Vulnerability Management for Open Source Software (OSS) | 0.90.0              |
-| Vulnerability Management for Code-level (beta) | not supported              |
+| Software Composition Analysis (SCA) | 0.90.0              |
+| Code Security (beta) | not supported              |
 | Automatic user activity event tracking | 0.89.0                     |
+| API Security | 0.98.0 |
 
-The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
+The minimum tracer version to get all supported ASM capabilities for PHP is 0.98.0.
 
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -111,6 +112,7 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 | Yii           | 3.1+        |  {{< X >}} | {{< X >}} |
 | Zend          | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
+| RoadRunner    | 2.x         |  {{< X >}} | {{< X >}} |
 
 
 ### Data store compatibility
