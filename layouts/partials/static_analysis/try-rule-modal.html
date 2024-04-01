@@ -49,7 +49,7 @@
                         <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center justify-content-between">
                             <img src="{{$ctx.Site.Params.img_url}}images/icons/{{.icon}}.png" width="32" height="32" alt="{{.icon}}">
                             <h2 class="fs-6 m-0 fw-bold">{{.title}}</h2>
-                            <p>{{.subtitle}}</p>
+                            <p>{{.subtitle | safeHTML}}</p>
                             <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary position-relative">
                                 <span>{{.cta_title}}</span>
                                 {{ partial "icon" (dict "name" "external-link" "size" "13px" "color" "white") }}

@@ -167,7 +167,7 @@ cascade:
     bottom_boxes:
       - title: VS Code Extension
         icon: vscode
-        subtitle: Identify code vulnerabilities directly in your VS Code editor
+        subtitle: Identify code vulnerabilities directly in your</br>VS Code editor
         cta_title: Download Extension
         cta_url: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
       - title: JetBrains Plugin
