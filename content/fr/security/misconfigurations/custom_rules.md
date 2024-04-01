@@ -8,7 +8,7 @@ cascade:
 further_reading:
 - link: security/cloud_security_management/guide/writing_rego_rules
   tag: Guide
-  text: Commencer à rédiger ses propres règles Rego
+  text: Commencer à écrire ses propres règles Rego
 - link: security/default_rules
   tag: Documentation
   text: Découvrir les règles de conformité de configuration cloud CMS Misconfigurations
@@ -18,7 +18,7 @@ further_reading:
   text: En savoir plus sur les frameworks et les benchmarks de l'industrie
 is_beta: true
 kind: documentation
-title: Règles personnalisées
+title: Créer des règles personnalisées
 ---
 
 {{< site-region region="gov" >}}
