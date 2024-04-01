@@ -81,6 +81,8 @@ A classic Kafka setup shows a trace with a producer span, and as a child, a cons
 
 See [Java's tracer documentation][7] for configuration of Kafka.
 
+[7]: /tracing/trace_collection/compatibility/java/#networking-framework-compatibility
+
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -89,13 +91,20 @@ The [Kafka .NET Client documentation][9] states that a typical Kafka consumer ap
 
 When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` in your consuming application. When this setting is `false`, the consumer span is created and immediately closed. If you have child spans to trace, follow [the headers extraction and injection documentation for .NET custom instrumentation][10] to extract the trace context.
 
-The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][11]. The trace context propagation API is available since [v2.7.0][12]
+The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][11]. The trace context propagation API is available since [v2.7.0][12].
+
+[9]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
+[10]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
+[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
 
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
 
-The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's tracer documentation][8] to enable it
+The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's tracer documentation][8] to enable it.
+
+[8]: /tracing/trace_collection/dd_libraries/ruby/#kafka
 
 {{% /tab %}}
 
@@ -115,9 +124,3 @@ If you want to disable Kafka tracing on an application, set the appropriate [lan
 [4]: /tracing/trace_collection/compatibility/
 [5]: /tracing/trace_collection/
 [6]: /tracing/trace_collection/library_config/
-[7]: /tracing/trace_collection/compatibility/java/#networking-framework-compatibility
-[8]: /tracing/trace_collection/dd_libraries/ruby/#kafka
-[9]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
-[10]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[11]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
-[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
