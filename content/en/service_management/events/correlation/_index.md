@@ -22,7 +22,7 @@ Event Correlation groups events based on their relationships or on user defined 
 
 ## Configure correlations
 
-Group events to reduce the number of notifications, and get to the root cause of an issue faster. Get started with correlation patterns either through Datadog's Recommended patterns, or through custom configurations.
+You can group events to reduce the number of notifications, and get to the root cause of an issue faster. Get started with correlation patterns either through Datadog's recommended patterns, or through custom configurations.
 
 ### Configure patterns
 
@@ -32,14 +32,14 @@ Group events to reduce the number of notifications, and get to the root cause of
 
 ### Recommended patterns
 
-Datadog automatically suggests correlation patterns based on your environment. Click any of the recommendations to open the pattern configuration for the recommended pattern. Configuration fields are pre-populated.
+Datadog automatically suggests correlation patterns based on your environment. Click any of the recommendations to open the configuration for the recommended pattern. Configuration fields are pre-populated.
 
 {{< img src="service_management/events/correlation/recommended_patterns_preview.png" alt="Correlation recommended patterns with the preview panel showing potential cases the pattern would create" style="width:100%;" >}}
 
 ## View patterns
 
 View all your configured patterns in the [Correlation page][1]. Get a high level overview of each pattern's time window, how it's grouped, the ratio of events to cases, compression percentage, and the date the pattern was last updated. From the table you can: 
-- Sort by last updated to see patterns that were updated most recently. 
+- Sort by last updated to see patterns that were updated most recently
 - View related cases
 - Toggle to activate or disable a pattern
 - Clone or delete a pattern
@@ -54,14 +54,14 @@ From the [Correlation][1], find the pattern you want to analyze and click **Tria
 1. Open the case you are investigating.
 1. From the case Overview, click **Investigation** or **Investigate Correlations and Related Metrics**.
 1. Under the *Correlations* section, you can see a list of alerts and events. 
-1. (Optional) Select to remove alerts or events that are not related to the case. Click the event to open a side panel detailing related logs and metrics. Troubleshoot issues with all the related data pulled into one page.
+1. (Optional) Select any alerts or events you want to remove that are not related to the case. Click the event to open a side panel detailing related logs and metrics. Troubleshoot issues with all the related data pulled into one page.
 1. Under the *Related Metrics* section, compare all related metrics or group by tags.
 
 ## Create a notification or ticket
 
 With correlated events, you can configure one notification for a group. So, instead of having 20 notifications and 20 potential issues to investigate, you have one single case and one notification. Combine all your alerts in the Case Management Projects page. There are a few ways to group notifications in Case Management:
 - On the Project Settings page, configure the Integrations you want your projects to send notifications to. For setup instructions, see the [Case Management Settings][3] documentation.
-- Views in case management group cases based on a configured query. You can set up a notification when a case matching this query is created. To learn how to create a view, see the [Case Management Views][4] documentation
+- Views in case management group cases based on a configured query. You can set up a notification when a case matching this query is created. To learn how to create a view, see the [Case Management Views][4] documentation.
 
 **Note**: You need to reconfigure underlying monitors to remove multiple notifications. Grouping monitor events does not mute individual notifications.
 

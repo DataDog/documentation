@@ -26,7 +26,7 @@ To create a pattern-based correlation:
    : is any event that is available in your Event Explorer as an event, but does not have an associated monitor or alert.
    
    Add grouping tags
-   : in addition to grouping by out-of-the-box tags like `Service` or `Env`, you can also group on a custom tag.
+   : in addition to grouping by out-of-the-box tags like `Service` or `Env`, you can also group by a custom tag.
 1. Under *Advanced correlation logic*:
     - Specify the minimum number of correlated events it takes to create a case.
     - Set the time frame you want to correlate and deduplicate events based on your correlation pattern. 
@@ -43,7 +43,7 @@ Use this data to preview the impact of your correlations and understand the expe
 ## Select a Case Management destination
 
 1. From the *Project* dropdown menu, select from an existing Case to send your grouped events to.
-1.(Optional) Add a tag to resulting cases.
+1. (Optional) Add a tag to resulting cases.
 1. Click **Save and Activate** to activate this pattern and group events into cases.
 
 ## Further reading
