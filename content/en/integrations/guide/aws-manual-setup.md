@@ -17,7 +17,7 @@ further_reading:
   text: "Troubleshooting the AWS integration"
 - link: "https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/"
   tag: "Guide"
-  text: "AWS CloudWatch metric streams with Kinesis Data Firehose"
+  text: "AWS CloudWatch metric streams with Amazon Data Firehose"
 - link: "https://www.datadoghq.com/blog/aws-monitoring/"
   tag: "Blog"
   text: "Key metrics for AWS monitoring"
@@ -105,7 +105,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
 [4]: https://console.aws.amazon.com/iam/home#/roles
-[5]: /security/misconfigurations
+[5]: /security/cloud_security_management/misconfigurations/
 [6]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 {{% /tab %}}
 {{% tab "Access keys (GovCloud or China Only)" %}}

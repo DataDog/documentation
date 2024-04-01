@@ -55,6 +55,6 @@ To learn more about the supported deployment types for each CSM feature, see [Se
     ```
 
 [1]: https://www.cisa.gov/sbom
-[2]: /security/vulnerabilities
+[2]: /security/cloud_security_management/vulnerabilities
 [3]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [7]: /containers/amazon_ecs/?tab=awscli#setup

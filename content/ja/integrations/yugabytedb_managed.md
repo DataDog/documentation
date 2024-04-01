@@ -80,6 +80,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: YugabyteDB Managed
+  uninstallation: README.md#Uninstallation
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
