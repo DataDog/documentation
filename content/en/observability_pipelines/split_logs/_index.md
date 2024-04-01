@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-Oftentimes, organizations need to send their logs to multiple products for different use cases. For example you might send your security logs to your SIEM application and your devops logs to Datadog. Use Observability Pipelines to send your logs to different destinations based on your use case.
+Oftentimes, organizations need to send their logs to multiple products for different use cases. For example, you might send your security logs to your SIEM application and your devops logs to Datadog. Use Observability Pipelines to send your logs to different destinations based on your use case.
 
 Select your log source to get started:
 

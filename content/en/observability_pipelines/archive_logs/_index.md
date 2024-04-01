@@ -8,7 +8,7 @@ disable_toc: false
 
 Use Observability Pipelines to route ingested logs to an archive or a bucket in Datadog rehydratable format. You can then rehydrate the archive in Datadog ad hoc whenever you need to analyze and investigate them. This is useful when:
 
-- You are migrating from another log vendor to Datadog Log Management, and want to ensure you have access to historical logs when you finish migrating
+- You are migrating from another log vendor to Datadog Log Management, and want to ensure you have access to historical logs when you finish migrating.
 - You have a high volume of noisy logs, but you may need to index them in Log Management ad hoc.
 - You have a retention policy.
 
