@@ -9,6 +9,8 @@ further_reading:
 - link: "service_management/case_management/"
   tag: "Documentation"
   text: "Case Management"
+algolia:
+  tags: ["event correlation", "event grouping", "correlation pattern"]
 ---
 
 ## Overview
@@ -55,7 +57,7 @@ From the [Correlation][1], find the pattern you want to analyze and click **Tria
 1. (Optional) Select to remove alerts or events that are not related to the case. Click the event to open a side panel detailing related logs and metrics. Troubleshoot issues with all the related data pulled into one page.
 1. Under the *Related Metrics* section, compare all related metrics or group by tags.
 
-## Create a notification for grouped events
+## Create a notification or ticket
 
 With correlated events, you can configure one notification for a group. So, instead of having 20 notifications and 20 potential issues to investigate, you have one single case and one notification. Combine all your alerts in the Case Management Projects page. There are a few ways to group notifications in Case Management:
 - On the Project Settings page, configure the Integrations you want your projects to send notifications to. For setup instructions, see the [Case Management Settings][3] documentation.
@@ -63,7 +65,7 @@ With correlated events, you can configure one notification for a group. So, inst
 
 **Note**: You need to reconfigure underlying monitors to remove multiple notifications. Grouping monitor events does not mute individual notifications.
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
