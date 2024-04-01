@@ -25,8 +25,6 @@ aliases:
 
 Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a high-density PDF attachment. 
 
-{{< img src="dashboards/scheduled_reports/scheduled_report_open_pdf.png" alt="An example report titled Reporting Security Dashboard showing the option to open the PDF report and an HTML format report of the example dashboard" style="width:70%;" >}}
-
 ## Schedule a report
 
 Dashboards must have a grid or timeboard layout and must have at least one supported widget to send a PDF report. See the list of [supported widget types](#supported-widget-types).
@@ -54,9 +52,7 @@ Click **Edit Template Variables** to modify the filters applied when the report 
 To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
 
 ## Managing reports
-A single dashboard can have multiple scheduled reports with different settings, for example, to support different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, click the **Configure** button and select **Configure Reports**. 
-
-{{< img src="dashboards/scheduled_reports/configure_reports_menu_option.png" alt="A view of the option to configure reports in the dashboard Configuration Actions menu" style="width:100%;" >}}
+A single dashboard can have multiple scheduled reports with different settings, for example, to support different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, click the **Share** button and select **Configure Reports**. 
 
 From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click **Edit**.
 
