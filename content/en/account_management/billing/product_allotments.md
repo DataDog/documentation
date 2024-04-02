@@ -3,7 +3,7 @@ title: Product Allotments
 kind: documentation
 ---
 
-Allotments refer to additional usage that comes with subscriptions to select parent products. Allotments grant a certain amount of usage for a child product as part of the account's committed and on-demand usage of the parent product.
+Allotments provide additional usage that comes with subscriptions to select parent products. They grant a certain amount of usage for a child product as part of the account's committed and on-demand usage of the parent product.
 
 Examples of products that have this structure include Infrastructure hosts and containers, where every host comes with a container allotment.
 
@@ -30,7 +30,9 @@ Total included usage is made up of the **commitment for the product, and the sum
 
 ### On-demand option
 
-The allotment usage of a product can be computed according to the organization's on-demand metering option. Organizations can opt for a **monthly or hourly** on-demand option. Refer to your contract for information on your metering option. By default, the on-demand option is set at the subscription level and applies to all products except for the following, which support a single default. 
+The allotment usage of a product can be computed according to the organization's on-demand metering option. Organizations can opt for a **monthly or hourly** on-demand option. Refer to your contract for information on your metering option. 
+
+By default, the on-demand option is set at the subscription level and applies to all products except for the following, which support a single default: 
 
 | Product                                         | Default option |
 |-------------------------------------------------|----------------|
@@ -45,11 +47,11 @@ On hourly metering, the monthly allotment is adjusted to an hourly allotment. Fo
 
 ## Allotments by parent products
 
-For a full list of default allotments by parent product, see the allotments table on the [Allotments Calculator][3] page. For custom or otherwise non-default allotments, refer to your contract for more information.
+For a full list of default allotments by parent product, see the allotments table on the [Allotments Calculator][3] page. For custom or otherwise non-default allotments, review your contract for more information.
 
-If an organization's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. Once that additional allotment is exhausted, any additional usage of the child product may be billed at an on-demand rate. For either on-demand option, allotments are not carried over to subsequent hours; if an organization has a remainder at the end of their hourly or monthly metering period, it is not applicable in the next period.
+If an organization's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. After that additional allotment is exhausted, any additional usage of the child product may be billed at an on-demand rate. For either on-demand option, allotments are not carried over to subsequent hours; if an organization has a remainder at the end of their hourly or monthly metering period, it is not applicable in the next period.
 
-For example, if an organization with a monthly on-demand option is committed to 5 APM Pro Hosts, they have a default Ingested Spans allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. If they use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional spans usage, since their Ingested Spans allotment increases to 900 GB. The 100 GB remainder is not applicable in the following month.
+For example, if an organization with a monthly on-demand option is committed to 5 APM Pro Hosts, they have a default Ingested Spans allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. If they use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional _spans_ usage, since their Ingested Spans allotment increases to 900 GB. The 100 GB remainder is not applicable in the following month.
 
 ## Usage aggregation function
 Aggregation functions are used to convert the hourly billable usage into a monthly usage value that can be used for billing. Each product can have up to two usage aggregation functions (one for each possible on-demand option). The available aggregation functions include sum, average, maximum, and high watermark plan (HWMP). 
@@ -57,7 +59,7 @@ Aggregation functions are used to convert the hourly billable usage into a month
 - **Sum:** This is the sum of total usage volume over all hours in the month. Usage is calculated every hour as included usage is compared with billable usage of each distinct instance of product usage. At the end of the month, on-demand usage is added up for each hour in the month.
 - **Average:** On a monthly on-demand option, this is the average usage across all hours in the month. On-demand usage for the month is derived by subtracting total included usage from the average usage for the month.
 
-    On an hourly on-demand option, usage is metered each hour, then the total included usage is then subtracted from the metered usage each hour to get the on-demand usage for each hour. At the end of the month, the average is calculated by summing on-demand usage across all hours and dividing by the number of hours in the month.
+    On an hourly on-demand option, usage is metered each hour, then the total included usage is subtracted from the metered usage each hour to get the on-demand usage for each hour. At the end of the month, the average is calculated by summing on-demand usage across all hours and dividing by the number of hours in the month.
 - **Maximum:** This is the maximum usage over all intervals across a given time period, usually monthly.
 - **High watermark plan (HWMP):** The billable count of hosts is calculated at the end of the month using the maximum count of the lower 99 percent of usage for those hours. Datadog excludes the top 1% to reduce the impact of spikes in usage on your bill. 
 
@@ -145,8 +147,8 @@ Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Sp
 | Profiled Hosts        | APM Enterprise       | HWMP   | Sum     |
 | CI Indexed Spans    | CI Visibility         | Sum     | Sum   |      
 | Test Indexed Spans    | Test Visibility         | Sum   | Sum   |               
-| APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum |
-| APM Ingested Spans | APM, APM Pro, APM Enterprise, Serverless APM, Legacy - Serverless Invocations, Legacy - Serverless Functions, Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
+| APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, </br> Legacy - Serverless Invocations, </br> Legacy - Serverless Functions, Fargate Task (APM Pro), </br> Fargate Task (APM Enterprise) | Sum | Sum |
+| APM Ingested Spans | APM, APM Pro, APM Enterprise </br> Serverless APM, Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
 | DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
 | Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
 | CSPM Workflow Executions | Cloud Security Management Pro, Cloud Security Management Enterprise | Sum | Sum |
