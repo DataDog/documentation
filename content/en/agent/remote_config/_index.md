@@ -111,6 +111,7 @@ To enable Remote Configuration:
 **Note:** Beginning April 8, 2024, Remote Configuration is on-by-default for:
 * New sub-organizations created by existing Datadog customers who already have enabled RC at the master organization level and where they are creating new sub-organizations in the same Datadog site as their master organization.
 * Organizations created by new Datadog customers.
+  
 To opt-out of Remote Configuration use, see the [opt-out section][23].
 
 6. Select an existing API key or create a new API key, and enable the Remote Configuration capability on the key:
