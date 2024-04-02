@@ -38,7 +38,7 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
+1. In the Datadog site, hover over **[Digital Experience][5]** and select **Settings** > **Private Locations**. 
 2. Click **Add Private Location**.
 3. Fill out your private location details. Only `Name` and `API key` fields are mandatory.
 4. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
