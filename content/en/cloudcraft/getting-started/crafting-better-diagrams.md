@@ -24,7 +24,7 @@ If you're a new user, you may already have the new live experience enabled by de
 
 ## Select account and region
 
-Click the dropdown under the **Account** section and select the account you want to scan. If you only added one AWS account to Cloudcraft, it’s automatically selected for you.
+Click the dropdown under the **Account** section and select the account you want to scan. If you only added one AWS account to Cloudcraft, it's automatically selected for you.
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/select-account.png" alt="Screenshot highlighting the dropdown to select an account to want to scan in the Cloudcraft interface with a red arrow pointing to the dropdown." responsive="true" style="width:100%;">}}
 
@@ -32,13 +32,13 @@ Under **Region**, select the regions you want to scan. By default, `Global` and 
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/select-region.png" alt="Screenshot highlighting the regions to scan in the Cloudcraft interface with red arrows pointing to the regions and the More button." responsive="true" style="width:100%;">}}
 
-Once selected, regions are scanned automatically and the number of resources found is displayed right next to the region name. You can click the **Sync** button just above the **Region** section to trigger a manual scan of all selected regions.
+After selecting, regions are scanned automatically and the number of resources found is displayed right next to the region name. You can click the **Sync** button above the **Region** section to trigger a manual scan of all selected regions.
 
 ## Filter resources
 
 You can filter resources by type and tags.
 
-Tags are automatically detected from your AWS account and displayed in the **Custom tags**, **AWS tags**, and **Kubernetes tags** sections, depending on the tag's type.
+Tags are automatically detected from your AWS account and displayed in the **Custom tags**, **AWS tags**, and **Kubernetes tags** sections.
 
 - **Custom tags** are tags that you added to resources in AWS or Azure.
 - **AWS tags** are tags that are automatically added to resources by AWS.
@@ -54,7 +54,7 @@ Say you want to create a diagram showing only EC2 instances and RDS databases. C
 
 Click **Apply layout** to create a diagram showing only the selected resources.
 
-Now say you want to create a diagram showing only EC2 instances and RDS databases without the `Environment` tag. Click the **Resource** section, deselect all resource types, and select only `EC2` and `RDS`. Then click the **Custom tags** section, click the **Environment** tag, and leave only the `Untagged` option selected.
+Say you want to create a diagram showing only EC2 instances and RDS databases without the `Environment` tag. Click the **Resource** section, deselect all resource types, and select only `EC2` and `RDS`. Then click the **Custom tags** section, click the **Environment** tag, and leave only the `Untagged` option selected.
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/select-specific-resources-and-tags.mp4" alt="A 15 seconds video showing a Cloudcraft user selecting EC2 and RDS instances and untagged resources from the Resource and Custom tags sections." video="true">}}
 
