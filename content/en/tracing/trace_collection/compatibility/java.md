@@ -292,6 +292,8 @@ Use the latest versions of:
 
 ### Setup
 
+{{< tabs >}}
+{{% tab "GraalVM" %}}
 To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
@@ -302,7 +304,11 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
 
-#### Quarkus Native builds
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+{{% /tab %}}
+
+{{% tab "Quarkus Native" %}}
+To set up the Datadog Java tracer with Quarkus Native, follow these steps:
 
 1. Instrument your application, following the steps described in [Tracing Java Applications][6].
 2. When you build a native executable, use the `quarkus.native.additional-build-args` property. For example:
@@ -312,7 +318,11 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
 
-#### Spring Native builds
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+{{% /tab %}}
+
+{{% tab "Spring Native" %}}
+To set up the Datadog Java tracer with Spring Native, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
 2. For Spring Native builds based on Buildpacks, add the [Paketo Buildpack for Datadog][8] and enable it using `BP_DATADOG_ENABLED=true`.
@@ -345,14 +355,19 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    - Alternatively, you can use the `pack build` command with `--buildpack gcr.io/paketo-buildpacks/datadog` option to add the Datadog buildpack and use the `--env BP_DATADOG_ENABLED=true` option to enable it.
 3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
 
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[8]: https://github.com/paketo-buildpacks/datadog
+{{% /tab %}}
+
+{{< /tabs >}}
+
 #### Usage
 
 After completing the setup, the service should send traces to Datadog.
 
 You can view traces using the [Trace Explorer][9].
 
-#### Troubleshooting
-
+{{% collapse-content title="Troubleshooting" level="h4" %}}
 ##### Native-image buildpack versions older than 5.12.2
 
 Older native-image buildpack versions expose the following option: `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM`.
@@ -384,6 +399,8 @@ paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 
 The solution to this issue is to upgrade to version 4.6.0 or later.
 
+{{% /collapse-content %}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -393,7 +410,5 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [3]: /tracing/manual_instrumentation/java
 [4]: https://github.com/DataDog/documentation#outside-contributors
 [5]: /tracing/trace_collection/otel_instrumentation/java/
-[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [7]: https://www.graalvm.org/downloads/
-[8]: https://github.com/paketo-buildpacks/datadog
 [9]: /tracing/trace_explorer/
