@@ -21950,6 +21950,7 @@ components:
             If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
+          nullable: true
           type: array
       type: object
     TimeseriesResponseSeriesList:
