@@ -266,6 +266,9 @@ The span metadata above is invalid since the value of `key` cannot reference a s
 
 Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
 
+{{< img src="tagging/assigning_tags/host_add_tags.png" alt="Host map with an host details opened highlighting Add Tags button" style="width:80%;">}}
+
+
 [1]: /infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
