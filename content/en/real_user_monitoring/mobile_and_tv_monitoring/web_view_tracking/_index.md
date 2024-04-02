@@ -25,6 +25,8 @@ You can perform the following:
 - Scope the root cause of latency to web pages or native components in mobile applications
 - Support users that have difficulty loading web pages on mobile devices
 
+**Note:** When Web View Tracking is enabled, Browser Session Replay will be disabled, no matter how the Browser SDK is configured.
+
 ## Setup
 
 ### Prerequisites
@@ -126,6 +128,12 @@ WebViewTracking.disable(webView: webView)
 
 The RUM Flutter SDK provides APIs for you to control web view tracking when using the [`webview_flutter`][1] package. To add Web View Tracking, call the `trackDatadogEvents` extension method on `WebViewController`, providing the list of allowed hosts.
 
+Add the following to your `pubspec.yaml` with the most recent version of the [`datadog_webview_tracking`][2] plugin:
+```yaml
+dependencies:
+  datadog_webview_tracking: ^x.x.x
+```
+
 For example:
 
 ```dart
@@ -143,6 +151,7 @@ webViewController = WebViewController()
 Note that `JavaScriptMode.unrestricted` is required for tracking to work on Android.
 
 [1]: https://pub.dev/packages/webview_flutter
+[2]: https://pub.dev/packages/datadog_webview_tracking
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -175,60 +184,15 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 
 ### Access your web views
 
-{{< tabs >}}
-{{% tab "Android" %}}
+Your web views appear in the [RUM Explorer][1] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
 
-Your web views appear in the [RUM Explorer][1] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android. 
-
-Filter on your Android and Android TV applications, and click a session. A side panel with a list of events in the session appears. 
+Filter on your Android and Android TV applications, and click a session. A side panel with a list of events in the session appears.
 
 {{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
 
 Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
 
 [1]: https://app.datadoghq.com/rum/explorer
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Your web views appear as events and views in the [RUM Explorer][1] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as iOS. 
-
-Filter on your iOS and tvOS applications, and click a session. A side panel with a list of events in the session appears. 
-
-{{< img src="real_user_monitoring/ios/ios-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
-
-Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
-
-[1]: https://app.datadoghq.com/rum/explorer
-
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-Your web views appear as events and views in the [RUM Explorer][1] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Flutter. 
-
-Filter on your Flutter application and click a session. A side panel with a list of events in the session appears. 
-
-{{< img src="real_user_monitoring/ios/ios-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
-
-Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab. 
-
-[1]: https://app.datadoghq.com/rum/explorer
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-Your web views appear in the [RUM Explorer][1] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as React Native.
-
-Filter on your React Native applications, and click a session. A side panel with a list of events in the session appears.
-
-{{< img src="real_user_monitoring/react_native/reactnative_webview_session.png" alt="webview session example" >}}
-
-Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
-
-[1]: https://app.datadoghq.com/rum/explorer?_gl=1*1ftt3v2*_gcl_aw*R0NMLjE2NzE1MzAwMzUuQ2owS0NRaUExNFdkQmhEOEFSSXNBTmFvMDdnVzZFSGZaVXQ0dGRFY3ZwcERPVkpFUTJEWEZHYVhSd0djQmNGdDRnZ0pra0xGbW5uUjFHQWFBcjlZRUFMd193Y0I.*_ga*MTkyMzQ5MTc1MC4xNjc4MjczMTI3*_ga_KN80RDFSQK*MTY3ODI3OTIzNC4yLjAuMTY3ODI3OTIzNC42MC4wLjA.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 

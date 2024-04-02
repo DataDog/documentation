@@ -36,6 +36,10 @@ Out-of-the box rules are available for the following security products:
     - [CSM Identity Risks][14] uses detection rules to detect IAM-based risks in your cloud infrastructure.
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
+## Beta detection rules
+
+Datadog's Security Research team continually adds new OOTB security detection rules. While the aim is to deliver high quality detections with the release of integrations or other new features, the performance of the detection at scale often needs to be observed before making the rule generally available. This gives Datadog's Security Research the time to either refine or deprecate detection opportunities that do not meet our standards.
+
 ## Custom detection rules
 
 There may be situations where you need to customize a rule based on your environment or workload. For example, if you're using ASM, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
@@ -139,7 +143,7 @@ The rule deprecation process is as follows:
 [1]: /security/default_rules/
 [2]: /security/cloud_siem/
 [3]: /security/cloud_siem/log_detection_rules/
-[4]: /security/misconfigurations/
+[4]: /security/cloud_security_management/misconfigurations/
 [5]: /security/threats/
 [6]: /security/application_security/
 [7]: /tracing/
@@ -147,8 +151,8 @@ The rule deprecation process is as follows:
 [9]: https://app.datadoghq.com/security/configuration/rules
 [10]: /account_management/rbac/
 [11]: /security/application_security/threats/custom_rules/
-[12]: /security/misconfigurations/custom_rules
+[12]: /security/cloud_security_management/misconfigurations/custom_rules
 [13]: /security/threats/workload_security_rules?tab=host#create-custom-rules
-[14]: /security/identity_risks/
+[14]: /security/cloud_security_management/identity_risks/
 [15]: https://app.datadoghq.com/security/configuration/
 [16]: https://app.datadoghq.com/security

@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: akamai_datastream_2
-oauth: {}
 public_title: Akamai DataStream 2
 short_description: Akamai DataStream のログを Datadog に送信
 supported_os:

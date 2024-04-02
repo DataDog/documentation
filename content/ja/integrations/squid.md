@@ -22,7 +22,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - caching
 - log collection
 dependencies:
@@ -32,27 +31,25 @@ draft: false
 git_integration_title: squid
 integration_id: squid
 integration_title: Squid
-integration_version: 2.2.0
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: squid
-oauth: {}
 public_title: Squid
 short_description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::キャッシュ
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
   media: []
@@ -174,6 +171,6 @@ Squid チェックには、イベントは含まれません。
 
 
 [1]: http://www.squid-cache.org/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ecs_fargate
-oauth: {}
 public_title: Amazon ECS on AWS Fargate
 short_description: ECS Fargate を使用して実行中のコンテナのメトリクスを追跡する
 supported_os:

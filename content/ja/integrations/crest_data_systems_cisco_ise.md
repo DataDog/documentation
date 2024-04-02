@@ -13,11 +13,13 @@ assets:
     CDS Cisco ISE - Posture Details: assets/dashboards/cds_cisco_ise_posture_details.json
     CDS Cisco ISE - Profiler Details: assets/dashboards/cds_cisco_ise_profiler_details.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10364
     source_type_name: crest_data_systems_cisco_ise
 author:
   homepage: https://www.crestdatasys.com
@@ -97,6 +99,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -106,12 +109,12 @@ Cisco Identity Services Engine (ISE) は、企業がコンプライアンスを�
 管理者は、アクセススイッチ、無線 LAN コントローラー (WLC)、仮想プライベートネットワーク (VPN) ゲートウェイ、データセンタースイッチなど、さまざまなネットワーク要素にアイデンティティを紐づけることで、その情報を使ってプロアクティブなガバナンスの決定を下すことができます。
 
 このインテグレーションは、以下のタイプのログを視覚化できます。
-   * 認証
+   * PHP
    * ポスチャ
-   * プロファイラー
+   * タグ
    * クライアントプロビジョニング
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
@@ -126,6 +129,7 @@ Cisco Identity Services Engine (ISE) は、企業がコンプライアンスを�
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+[7]: https://www.crestdatasys.com/datadog-integrations-readme/Cisco_ISE.pdf
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-cisco-ise" target="_blank">こちらをクリック</a>してください。

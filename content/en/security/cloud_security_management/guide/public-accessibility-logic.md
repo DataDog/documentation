@@ -2,13 +2,17 @@
 title: How Datadog Determines if Resources are Publicly Accessible
 kind: guide
 further_reading:
-- link: "/security/misconfigurations"
+- link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Start tracking misconfigurations with CSM Misconfigurations"
 - link: "/security/default_rules/#cat-cloud-security-management"
   tag: "Documentation"
   text: "Out-of-the-box Detection Rules"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Datadog uses a graph processing framework to map relationships between cloud resources to determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework. 
 

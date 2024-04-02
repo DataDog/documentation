@@ -7,14 +7,14 @@ kind: documentation
 
 ## Overview
 
-API Security Inventory monitors your API traffic to provide visibility into the security posture of your APIs, including:
+[API Security Inventory][7] monitors your API traffic to provide visibility into the security posture of your APIs, including:
 
 - **Authentication**: Type of authentication used, such as Basic Auth and API key.
 - **Public Exposure**: Whether the API is processing traffic from the internet.
 - **Production status**: If the API is running in a production environment.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
 - **Attack Exposure**: If the endpoint is targeted by attacks (powered by [Application Threat Management][2]).
-- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Application Vulnerability Management][3]).
+- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Software Composition Analysis][3]).
 
 Using the API Security Inventory you can:
 
@@ -22,7 +22,7 @@ Using the API Security Inventory you can:
 - See at a glance your publicly exposed endpoints that are handling sensitive data, such as payment card numbers.
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
 
-{{< img src="security/application_security/api/welcome.png" alt="API Security Inventory main page">}}
+{{< img src="security/application_security/api/api_endpoints.png" alt="API Security Inventory main page">}}
 
 ## Configuration
 
@@ -31,6 +31,13 @@ The following library versions are compatible with API Security Inventory. [Remo
 |Technology|Minimum version| Support for sensitive data scanning |
 |----------|----------|----------|
 |Python    | v2.1.6   | Requests and responses |
+|Java      | v1.31.0  | Requests only |
+|PHP      | v0.98.0  | Requests and responses |
+|.NET Core | v2.42.0  | Requests and responses |
+|.NET Fx   | v2.47.0  | Requests and responses |
+|Ruby      | v1.15.0  | Requests only |
+|Golang    | v1.59.0  | Requests only |
+|Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
 
 ## How it works
 
@@ -96,7 +103,7 @@ Authentication is determined by:
 
 ### Contains exploitable vulnerabilities
 
-This risk is determined by [Vulnerability Management][3] for the service hosting the endpoint.
+This risk is determined by [Software Composition Analysis][3] for the service hosting the endpoint.
 
 ## Performance impact
 
@@ -104,7 +111,8 @@ By default, API Security Inventory evaluates every tenth request (10% sample rat
 
 [1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [2]: /security/application_security/threats/
-[3]: /security/application_security/vulnerability_management/
+[3]: /security/application_security/software_composition_analysis/
 [4]: /agent/remote_config/
 [5]: /security/application_security/enabling/
 [6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
+[7]: https://app.datadoghq.com/security/appsec/inventory/apis

@@ -9,9 +9,9 @@ further_reading:
 - link: /security/application_security/threats/
   tag: 설명서
   text: 보안 위협 관리
-- link: /security/application_security/risk_management/
+- link: /security/application_security/software_composition_analysis/
   tag: 설명서
-  text: 애플리케이션 취약성 관리
+  text: 소프트웨어 구성 분석
 - link: /security/application_security/enabling/#compatibility
   tag: 설명서
   text: 언어와 프레임워크 호환성에 대해 자세히 알아보기
@@ -75,7 +75,7 @@ ASM을 사용하여 위협을 감지하고 보호하도록 환경 설정을 시�
 
 ## 업스트림 오픈 소스 라이브러리 및 종속성에서 발생한 리스크 조사
 
-[애플리케이션 취약성 관리][8]는 알려진 취약성이 있는 오픈 소스 라이브러리를 사용하거나 이에 종속되어 있어 서비스가 위험에 처한 경우를 보여줍니다. 발견된 취약점을 조사하고 수정 조언을 따르거나 취약점의 원인을 조사하여 소프트웨어를 보호하세요.
+[소프트웨어 구성 분석(SCA)][8]은 알려진 취약점이 있는 오픈 소스 라이브러리를 사용하거나 이에 종속되어 있어 서비스가 위험에 처해 있을 때를 알려줍니다. 취약점을 조사하고 해당 도움말을 따르거나 취약점의 원인을 조사하여 소프트웨어를 보호하세요.
 
 ## 다음 단계
 
@@ -88,4 +88,4 @@ ASM을 사용하여 위협을 감지하고 보호하도록 환경 설정을 시�
 [5]: /ko/security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /ko/security/application_security/vulnerability_management/
+[8]: /ko/security/application_security/software_composition_analysis/

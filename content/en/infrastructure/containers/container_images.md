@@ -5,13 +5,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
-- link: "/security/vulnerabilities"
+- link: "/security/cloud_security_management/vulnerabilities"
   tag: "Documentation"
   text: "Cloud Security Management Vulnerabilities"
 - link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
   text: "Setting up container image vulnerabilities"
-- link: "/security/vulnerabilities/troubleshooting"
+- link: "/security/cloud_security_management/troubleshooting/vulnerabilities/"
   tag: "Documentation"
   text: "Troubleshooting Cloud Security Management Vulnerabilities"
 ---
@@ -40,26 +40,12 @@ The following instructions enable the container image metadata collection and [S
 
 **Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
 
+
 {{< tabs >}}
-{{% tab "Kubernetes (Helm)" %}}
-
-If you are using Helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
-Or, add the following to your `values.yaml` Helm configuration file:
-
-```yaml
-datadog:
-  containerImageCollection:
-    enabled: true
-  sbom:
-    containerImage:
-      enabled: true
-```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
-{{% /tab %}}
-
 {{% tab "Kubernetes (Operator)" %}}
 
-Add the following to the spec section of your `values.yaml` file:
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
+Or, add the following to the spec section of your `values.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -75,6 +61,22 @@ spec:
         enabled: true
 ```
 
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+If you are using Helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
+Or, add the following to your `values.yaml` Helm configuration file:
+
+```yaml
+datadog:
+  containerImageCollection:
+    enabled: true
+  sbom:
+    containerImage:
+      enabled: true
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}
@@ -163,4 +165,4 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [4]: /integrations/amazon_web_services/
 [5]: https://www.cisa.gov/sbom
 [6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
-[8]: /security/vulnerabilities
+[8]: /security/cloud_security_management/vulnerabilities

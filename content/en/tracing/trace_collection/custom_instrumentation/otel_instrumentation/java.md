@@ -80,12 +80,12 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 ```java
 // Add attributes to the current span
 Span currentSpan = Span.current();
-currentSpan.setAttributes("some-key", "some-value");
+currentSpan.setAttribute("some-key", "some-value");
 
 // Add attributes to the local root span
-ContextKey<OtelSpan> localRootSpanKey = ContextKey.named("datadog-root-span-key");
+ContextKey<OtelSpan> localRootSpanKey = ContextKey.named("opentelemetry-traces-local-root-span");
 Span rootSpan = Context.current().get(localRootSpanKey);
-rootSpan.setAttributes("some-key", "some-value");
+rootSpan.setAttribute("some-key", "some-value");
 ```
 
 **Note:** If there isn't a current or local root span, the returned span is invalid, not `null`, and attributes are not set.

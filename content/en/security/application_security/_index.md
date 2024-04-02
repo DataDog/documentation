@@ -11,9 +11,9 @@ further_reading:
 - link: "/security/application_security/threats/"
   tag: "Documentation"
   text: "Threat Management"
-- link: "/security/application_security/risk_management/"
+- link: "/security/application_security/software_composition_analysis/"
   tag: "Documentation"
-  text: "Application Vulnerability Management"
+  text: "Software Composition Analysis"
 - link: "/security/application_security/enabling/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
@@ -74,7 +74,7 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 
 ## Investigate risk introduced in upstream open source libraries and dependencies
 
-[Application Vulnerability Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
+[Software Composition Analysis (SCA)][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
 
 ## Next steps
 
@@ -87,4 +87,4 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [5]: /security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/vulnerability_management/
+[8]: /security/application_security/software_composition_analysis/
