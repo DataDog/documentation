@@ -21,7 +21,7 @@ The Java Datadog Trace library is open source - view the [GitHub repository][1] 
 
 ### Supported Java runtimes
 
-The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
+The Java Tracer supports automatic instrumentation for the following Oracle JDK, OpenJDK JVM, and [GraalVM](#graalvm-native-image-support) runtimes.
 
 #### Java Tracer v1 (latest)
 
