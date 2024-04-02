@@ -43,7 +43,7 @@ Datadog does not support Desktop (Windows, Mac, or Linux), console, or web deplo
 
 ### Specify application details in the UI
 
-1. In Datadog, navigate to [**Digital Experience** > **Setup & Configurations** > **New Application**][1].
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `Unity` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
