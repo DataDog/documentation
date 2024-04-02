@@ -30,7 +30,7 @@ Natural language querying is in private beta. Fill out this form to join the wai
 
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
 
-You can ask Bits AI questions such as
+You can ask Bits AI questions such as:
 - `Who is on call for example-service?`
 - `Find me the example-service dashboard.`
 - `What is going on with example-service?`
@@ -47,7 +47,7 @@ Within [Datadog Incident Management][3], Bits AI can help you
 - **Stay informed:** Get an up-to-date summary of the incident when you join an incident Slack channel.
 - **Engage responders:** Page on-call teams with PagerDuty with Slack queries like "`@DataDog` Page the team that owns example-service."
 - **Update incidents:** Update the severity level and status of an incident.
-- **Find related incidents**: Quickly search through your entire incident history and find similar incidents to the one you're currently in.
+- **Find related incidents**: Search through your entire incident history and find similar incidents to the one you're currently in.
 - **Generate a postmortem:** Get a head start with a first draft, which you can then review and revise.
 
 See [Managing Incidents][4] for details.

@@ -13,24 +13,24 @@ further_reading:
 
 To open the chat panel, click on **Ask Bits AI** at the bottom of the navigation bar, or use **Cmd + /** to show or hide the chat panel.
 
-{{< img src="bits_ai/bits-ai-nav.png" alt="Bits AI link in the side nav of the Datadog app" style="width:30%;">}}
+{{< img src="bits_ai/getting_started/bits-ai-nav.png" alt="Bits AI link in the side nav of the Datadog app" style="width:30%;">}}
 
 Some responses from Bits AI include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
 
-{{< img src="bits_ai/chat-panel.png" alt="Bits AI chat panel" style="width:90%;">}}
+{{< img src="bits_ai/getting_started/chat_panel_star_service.png" alt="Bits AI chat panel with example question of 'How do I star a service' and Bits AI's answer" style="width:90%;">}}
 
 ### In a search bar
 
 Some Datadog search bars support natural language querying. 
 
-{{< img src="bits_ai/ai-enabled-search-bar.png" alt="Search bar with natural language querying enabled" style="width:90%;">}}
+{{< img src="bits_ai/getting_started/ai-enabled-search-bar.png" alt="Search bar with natural language querying enabled" style="width:90%;">}}
 
 Where available, the feature can be accessed by typing a space into the search bar, then choosing from the suggested queries or typing a new query.
 
-{{< img src="bits_ai/search-bar-with-ai-suggestions.png" alt="Search bar displaying suggested natural language queries" style="width:90%;">}}
+{{< img src="bits_ai/getting_started/search-bar-with-ai-suggestions.png" alt="Search bar displaying suggested natural language queries" style="width:90%;">}}
 
 ### On the mobile app
-<!-- insert image -->
+{{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with BitsAI" style="width:40%;" >}}
 
 ## Querying in Slack
 
@@ -41,7 +41,7 @@ Where available, the feature can be accessed by typing a space into the search b
 
 After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
 
-{{< img src="bits_ai/example-slack-query.png" alt="Output of an example service-dependency query in Slack" style="width:60%;">}}
+{{< img src="bits_ai/getting_started/example-slack-query.png" alt="Output of an example service-dependency query in Slack" style="width:60%;">}}
 
 {{< whatsnext desc="Additional Bits AI documentation:">}}
     {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}
