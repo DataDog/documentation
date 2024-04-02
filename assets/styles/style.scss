@@ -70,6 +70,8 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/dd-navbar'; // for body-noscroll
 @import 'components/demo-request-modal'; // imported from websites-modules
 
+@import 'components/collapsible-section'; // Collapsible section styles
+
 
 // for now just include ie fixes
 @import 'ie';

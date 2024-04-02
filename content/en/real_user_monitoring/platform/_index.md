@@ -3,6 +3,9 @@ title: Platform
 kind: documentation
 description: Learn how to leverage Datadog platform capabilities to maximize RUM capabilities.
 further_reading:
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Learn about the RUM Explorer'
 ---
 
 ## Overview

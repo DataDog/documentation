@@ -52,34 +52,6 @@ const config = new DdSdkReactNativeConfiguration(
 config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
-## Limitations
-
-{{< site-region region="us,us3,us5,eu" >}}
-Datadog can accept uploads up to **300** MB.
-{{< /site-region >}}
-{{< site-region region="ap1,gov" >}}
-Datadog can accept uploads up to **50** MB.
-{{< /site-region >}}
-
-To compute the size of your source maps and bundle, run the following command:
-
-```shell
-npx react-native bundle \
-  --dev false \
-  --platform ios \
-  --entry-file index.js \
-  --bundle-output build/main.jsbundle \
-  --sourcemap-output build/main.jsbundle.map
-
-sourcemapsize=$(wc -c build/main.jsbundle.map | awk '{print $1}')
-bundlesize=$(wc -c build/main.jsbundle | awk '{print $1}')
-payloadsize=$(($sourcemapsize + $bundlesize))
-
-echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
-```
-
-If a `build` directory does not already exist, create it first by running `mkdir build`. Then run the command above.
-
 ## Symbolicate crash reports
 
 In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
@@ -108,6 +80,34 @@ project.ext.datadog = [
 ### On iOS using the `datadog-ci react-native xcode` command
 
 Options for the `datadog-ci react-native xcode` command are available on the [command documentation page][12].
+
+### Limitations
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
+Source maps, mapping files, and dSYM files are limited to **500** MB each.
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+Source maps, mapping files, and dSYM files are limited to **500** MB each.
+{{< /site-region >}}
+
+To compute the size of your source maps and bundle, run the following command:
+
+```shell
+npx react-native bundle \
+  --dev false \
+  --platform ios \
+  --entry-file index.js \
+  --bundle-output build/main.jsbundle \
+  --sourcemap-output build/main.jsbundle.map
+
+sourcemapsize=$(wc -c build/main.jsbundle.map | awk '{print $1}')
+bundlesize=$(wc -c build/main.jsbundle | awk '{print $1}')
+payloadsize=$(($sourcemapsize + $bundlesize))
+
+echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
+```
+
+If a `build` directory does not already exist, create it first by running `mkdir build`, then run the command above.
 
 ## Test your implementation of crash reporting
 

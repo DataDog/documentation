@@ -156,7 +156,7 @@ Watchdog se base sur les mêmes algorithmes saisonniers que ceux des monitors et
 
 ## Emplacement des alertes Watchdog
 
-Vous pouvez retrouver les alertes Watchdog à quatre endroits différents sur la plateforme Datadog :
+Vous pouvez retrouver les alertes Watchdog à différents endroits de la plateforme Datadog :
 
 * Dans le [Watchdog Alert Explorer][1]
 * Sur n'importe quelle [page d'un service APM][3]
