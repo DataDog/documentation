@@ -133,7 +133,7 @@ This example creates an automated ticket routing workflow that creates and assig
 1. On the [Workflow Automation page][4], click **New Workflow**.
 1. Enter a name for the workflow and click **Save**.
 
-#### Get security issue
+#### Get security finding
 
 To retrieve the finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][8] API endpoint.
 
