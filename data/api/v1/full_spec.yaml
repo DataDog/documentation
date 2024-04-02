@@ -4209,6 +4209,7 @@ components:
       - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
+      - incident_management_monthly_active_users_usage
       - indexed_spans_usage
       - infra_host_usage
       - ingested_logs_bytes_usage
@@ -4230,6 +4231,7 @@ components:
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - obs_pipelines_vcpu_usage
+      - online_archive_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
@@ -4277,6 +4279,7 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
       - INDEXED_SPANS_USAGE
       - INFRA_HOST_USAGE
       - INGESTED_LOGS_BYTES_USAGE
@@ -4298,6 +4301,7 @@ components:
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - OBS_PIPELINE_VCPU_USAGE
+      - ONLINE_ARCHIVE_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
@@ -7915,6 +7919,8 @@ components:
       - fargate_percentage
       - functions_usage
       - functions_percentage
+      - incident_management_monthly_active_users_usage
+      - incident_management_monthly_active_users_percentage
       - infra_host_usage
       - infra_host_percentage
       - invocations_usage
@@ -7931,6 +7937,8 @@ components:
       - obs_pipeline_bytes_percentage
       - obs_pipelines_vcpu_usage
       - obs_pipelines_vcpu_percentage
+      - online_archive_usage
+      - online_archive_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
@@ -8046,6 +8054,8 @@ components:
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_PERCENTAGE
       - INFRA_HOST_USAGE
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
@@ -8062,6 +8072,8 @@ components:
       - OBS_PIPELINE_BYTES_PERCENTAGE
       - OBS_PIPELINES_VCPU_USAGE
       - OBS_PIPELINES_VCPU_PERCENTAGE
+      - ONLINE_ARCHIVE_USAGE
+      - ONLINE_ARCHIVE_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
@@ -8385,6 +8397,15 @@ components:
           description: The Lambda function usage by tag(s).
           format: double
           type: number
+        incident_management_monthly_active_users_percentage:
+          description: The percentage of Incident Management monthly active users
+            usage by tag(s).
+          format: double
+          type: number
+        incident_management_monthly_active_users_usage:
+          description: The Incident Management monthly active users usage by tag(s).
+          format: double
+          type: number
         indexed_spans_percentage:
           description: The percentage of APM Indexed Spans usage by tag(s).
           format: double
@@ -8562,6 +8583,14 @@ components:
           type: number
         obs_pipelines_vcpu_usage:
           description: The observability pipeline per core usage by tag(s).
+          format: double
+          type: number
+        online_archive_percentage:
+          description: The percentage of online archive usage by tag(s).
+          format: double
+          type: number
+        online_archive_usage:
+          description: The online archive usage by tag(s).
           format: double
           type: number
         profiled_container_percentage:
