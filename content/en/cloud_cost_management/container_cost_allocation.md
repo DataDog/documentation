@@ -247,6 +247,7 @@ Costs are allocated into the following spend types:
 | Usage | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
 | Workload idle | Cost of resources (such as memory and CPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory and CPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
+| Not monitored | Cost of resources where the spend type is unknown. To resolve this, install the Datadog Agent on these clusters or nodes. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -266,7 +267,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | GPU |  |  | Limited* |
 | {{< ccm-details title="Local storage" >}}Directly-attached storage resources for a node.{{< /ccm-details >}} |  | Limited* | Limited* |
 
-For `Limited*` resources, you are required to tag them as part of your Kubernetes cost allocation using the `allocated_spend_type:<resource>_not_supported` tagging format, for example: `allocated_spend_type:gpu_not_supported`. These resources are host-level costs, not pod or namespace-level costs.
+`Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`. 
 
 ## Cost metrics
 
