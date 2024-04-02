@@ -34,7 +34,7 @@ cascade:
 ---
 
 <div class="alert alert-danger">
-  <strong>Important:</strong> OpenTelemetry Collector Contrib v0.95.0 introduces a breaking change that disables Trace Metrics computation in the Datadog Exporter. Please follow Datadog's <a href="/opentelemetry/guide/migration/">migration guide</a> when upgrading.
+  <strong>Important:</strong> OpenTelemetry Collector Contrib v0.95.0 introduces a breaking change that disables Trace Metrics computation in the Datadog Exporter. Follow Datadog's <a href="/opentelemetry/guide/migration/">migration guide</a> when upgrading.
 </div>
 
 ## Overview
