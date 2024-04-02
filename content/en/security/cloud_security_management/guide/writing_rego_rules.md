@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "/security/misconfigurations/frameworks_and_benchmarks"
+- link: "/security/cloud_security_management/misconfigurations/frameworks_and_benchmarks"
   tag: "Guide"
   text: "Learn about frameworks and industry benchmarks"
 is_beta: true

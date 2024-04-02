@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/mute_issues
 products:
   - name: CSM Misconfigurations
-    url: /security/misconfigurations/
+    url: /security/cloud_security_management/misconfigurations/
     icon: cloud-security-management
   - name: CSM Identity Risks
     url: /security/cloud_security_management/identity_risks/

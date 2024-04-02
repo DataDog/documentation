@@ -12,6 +12,8 @@ assets:
       - snmp.devStatus
       metadata_path: metadata.csv
       prefix: ''
+    service_checks:
+      metadata_path: assets/service_checks.json
     source_type_id: 602
     source_type_name: Meraki
   monitors:
