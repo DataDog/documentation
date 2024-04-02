@@ -37,7 +37,7 @@ Deployment events are used to compute Deployment Frequency, Change Lead Time, an
 To send deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. The following attributes are required:
 - `started_at`: The time the deployment started.
 - `finished_at`: The time the deployment finished.
-- `service`: The service that was deployed. The provided service must be registered in the [Service Catalog][3] (for more information, see [Adding Entries to Service Catalog][4]).
+- `service`: The service that was deployed. The provided service must be registered in the [Service Catalog][3] (see [Adding Entries to Service Catalog][4]) with metadata set up (see [Adding Metadata][5]).
 The `team` ownership of the service is automatically inferred from the Service Catalog and associated with all metrics.
 
 The `repository_url` and `commit_sha` attributes are required for calculating the Change Lead Time metric. For more information, see [Calculating Change Lead Time](#calculating-change-lead-time).

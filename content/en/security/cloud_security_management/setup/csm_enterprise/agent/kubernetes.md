@@ -26,6 +26,7 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
           enabled: true
         cws:
           enabled: true
+        # Enables CSM Misconfigurations
         cspm:
           enabled: true
           hostBenchmarks:
@@ -33,7 +34,7 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
         # Enables the image metadata collection and Software Bill of Materials (SBOM) collection
         sbom:
           enabled: true
-          # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.
+          # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
           host:
@@ -55,16 +56,17 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
     datadog:
       remoteConfiguration:
         enabled: true
-      # Enables CSM Misconfigurations and CSM Threats
       securityAgent:
+        # Enables CSM Threats
         runtime:
           enabled: true
+        # Enables CSM Misconfigurations
         compliance:
           enabled: true
           host_benchmarks:
             enabled: true
       # Enables CSM Vulnerabilities
-      # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`.
+      # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
       containerImageCollection:
         enabled: true
       sbom:

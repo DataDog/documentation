@@ -4132,6 +4132,11 @@ main:
     parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
     weight: 102
+  - name: Kubernetes Security Posture Management
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/kspm
+    parent: cspm_frameworks_benchmarks
+    identifier: cspm_kspm
+    weight: 103
   - name: Explore Misconfigurations
     url: /security/cloud_security_management/misconfigurations/findings
     parent: cspm
