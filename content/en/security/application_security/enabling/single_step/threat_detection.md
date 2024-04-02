@@ -3,9 +3,8 @@ title: Enabling ASM threat detection and protection using single step instrument
 kind: documentation
 ---
 
-<div class="alert alert-info">Enabling ASM using single step instrumentation is in beta.</div>
+<div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in beta.</div>
 
-**NOT Complete, copied from APM docs**
 
 ## Requirements
 
@@ -16,7 +15,10 @@ kind: documentation
 
 ## Enabling in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable ASM Instrumentation (beta)** option selected, the Agent is installed and configured to enable ASM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you [install or update a Datadog Agent][1] with the **Enable Threat Protection (new)** option selected, the Agent is installed and configured to enable ASM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+
+
+{{< img src="/security/application_security/single_step/asm_single_step_threat_detection.png" alt="Account settings Ubuntu setup page highlighting the toggle for Enabling APM instrumentation and Threat Protection." style="width:100%;" >}}
 
 The following examples show how it works on each infrastructure type.
 
@@ -30,7 +32,7 @@ For an Ubuntu host:
 1. Run the one-line installation command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_IAST_ENABLED=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
    ```
 
    a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4].
@@ -50,10 +52,10 @@ For an Ubuntu host:
 
 ### Specifying tracing library versions {#lib-linux}
 
-By default, enabling ASM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
+By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
@@ -75,13 +77,13 @@ Set `DD_ENV` in your one-line installation command for Linux to automatically ta
 For example:
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 [2]: /agent/remote_config
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/service_catalog/
+[5]: /service_catalog/
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 {{% /tab %}}
@@ -99,6 +101,7 @@ For a Docker Linux container:
    docker run -d --name dd-agent \
      -e DD_API_KEY=${YOUR_DD_API_KEY} \
      -e DD_APM_ENABLED=true \
+     -e DD_APPSEC_ENABLED=true \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
      -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
@@ -146,10 +149,11 @@ Set `DD_ENV` in the library injector installation command for Docker to automati
 
 For example:
 
-{{< highlight shell "hl_lines=4" >}}
+{{< highlight shell "hl_lines=5" >}}
 docker run -d --name dd-agent \
   -e DD_API_KEY=${YOUR_DD_API_KEY} \
   -e DD_APM_ENABLED=true \
+  -e DD_APPSEC_ENABLED=true \
   -e DD_ENV=staging \
   -e DD_APM_NON_LOCAL_TRAFFIC=true \
   -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
@@ -161,7 +165,7 @@ docker run -d --name dd-agent \
 {{< /highlight >}}
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /tracing/service_catalog/
+[6]: /service_catalog/
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 
@@ -198,6 +202,9 @@ To enable single step instrumentation with Helm:
     apm:
       instrumentation:
          enabled: true
+    env:
+      - name: DD_APPSEC_ENABLED
+        value: "true"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12].
 
@@ -300,13 +307,16 @@ For example, add the following configuration to your `datadog-values.yaml` file:
      apm:
        instrumentation:
          enabled: true
+     env:
+      - name: DD_APPSEC_ENABLED
+        value: "true"
 {{< /highlight >}}
 
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 {{< /tabs >}}
 
-## Removing Single Step APM instrumentation from your Agent
+## Removing Single Step APM and ASM instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the follow steps:
 
@@ -324,6 +334,10 @@ Run the following commands and restart the service to stop injecting the library
    ```
 2. Restart the service.
 
+3. To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+
+
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -333,6 +347,8 @@ Run the following commands and restart the service to stop injecting the library
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
 2. Restart the service.
+
+3. To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -396,10 +412,6 @@ To stop producing traces, remove library injectors and restart the infrastructur
 {{% /tab %}}
 
 {{< /tabs >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config
