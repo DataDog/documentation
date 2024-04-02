@@ -32,7 +32,7 @@ Total included usage is made up of the **commitment for the product, and the sum
 
 The allotment usage of a product can be computed according to the organization's on-demand metering option. Organizations can opt for a **monthly or hourly** on-demand option. Refer to your contract for information on your metering option. 
 
-By default, the on-demand option is set at the subscription level and applies to all products except for the following, which support a single default: 
+By default, the on-demand option is set at the subscription level and applies to all products except for the following, which support a single default on-demand option: 
 
 | Product                                         | Default option |
 |-------------------------------------------------|----------------|
