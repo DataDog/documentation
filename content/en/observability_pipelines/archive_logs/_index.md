@@ -14,12 +14,12 @@ Use Observability Pipelines to route ingested logs to an archive or a bucket in 
 
 Select a source to get started:
 
-- [Splunk HEC][1]
-- [Splunk TCP][2]
-- [Sumo Logic][3]
-- [Datadog Agent][4]
+- [Datadog Agent][1]
+- [Splunk HEC][2]
+- [Splunk TCP][3]
+- [Sumo Logic][4]
 
-[1]: \observability_pipelines\archive_logs\splunk_hec
-[2]: \observability_pipelines\archive_logs\splunk_tcp
-[3]: \observability_pipelines\archive_logs\sumo_logic
-[4]: \observability_pipelines\archive_logs\datadog_agent
+[1]: \observability_pipelines\archive_logs\datadog_agent
+[2]: \observability_pipelines\archive_logs\splunk_hec
+[3]: \observability_pipelines\archive_logs\splunk_tcp
+[4]: \observability_pipelines\archive_logs\sumo_logic
