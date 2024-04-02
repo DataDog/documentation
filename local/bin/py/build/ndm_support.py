@@ -3,6 +3,8 @@
 import os
 import yaml
 
+DIRNAME = os.path.dirname(__file__)
+
 # reads the contents of each device profile in the directory
 # returns device_profiles dictionary
 def find_profiles(directory):
@@ -20,15 +22,13 @@ def find_profiles(directory):
                                 type = profile.get('metadata').get('device').get('fields').get('type')
                                 if vendor and type:
                                     final_array.append[{'vendor': vendor, 'type': type}]
-                                # build a dictionary of device profiles
-                                # final_dict[profile['vendor']] = vendor
                     
                     
     
 
 if __name__ == '__main__':
-    ndm_device_path = 'integrations_data/extracted/integrations-core/snmp/datadog_checks/snmp/data/default_profiles'
+    ndm_device_path = DIRNAME + 'integrations_data/extracted/integrations-core/snmp/datadog_checks/snmp/data/default_profiles'
     device_profiles = find_profiles(ndm_device_path)
-    print(device_profiles)
+    print(f"Device profiles: {device_profiles}")
     # Build a dictionary of device profiles:
     # device_profiles = { [vendor: "", model: "", link: ""] }
