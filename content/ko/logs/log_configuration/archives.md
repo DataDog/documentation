@@ -14,9 +14,9 @@ further_reading:
 - link: /logs/explorer/
   tag: 설명서
   text: 로그 탐색기에 대해 알아보기
-- link: /logs/logging_without_limits/
+- link: /logs/
   tag: 설명서
-  text: Logging without Limits*에 대해 알아보기
+  text: Log Management
 kind: 설명서
 title: 로그 아카이브
 ---
@@ -447,8 +447,6 @@ Datadog이 스토리지 버킷에 전달하는 로그 아카이브는 압축된 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>
-*제한 없는 로그 수집(Logging without Limits)은 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/logs/indexes/#exclusion-filters
 [2]: /ko/logs/archives/rehydrating/
