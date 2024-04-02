@@ -342,7 +342,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
      </plugins>
      </build>
      ```
-   - Alternatively, you can use the `pack build` command with `--buildpack gcr.io/paketo-buildpacks/datadog` option to add Datadog buildpack and `--env BP_DATADOG_ENABLED=true` option to enable it.
+   - Alternatively, you can use the `pack build` command with `--buildpack gcr.io/paketo-buildpacks/datadog` option to add the Datadog buildpack and use the `--env BP_DATADOG_ENABLED=true` option to enable it.
 3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
 
 #### Usage
@@ -382,7 +382,7 @@ ERROR: failed to launch: exec.d: failed to execute exec.d file at path '/layers
 paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 ```
 
-The solution to this issue is to upgrade to version 4.6.0 or newer.
+The solution to this issue is to upgrade to version 4.6.0 or later.
 
 ## Further Reading
 
