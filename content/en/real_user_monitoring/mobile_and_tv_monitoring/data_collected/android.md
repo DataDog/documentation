@@ -36,6 +36,14 @@ The following diagram illustrates the RUM event hierarchy:
 
 {{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" >}}
 
+## Application launch
+
+During initialization, the RUM Android SDK creates a view called "ApplicationLaunch". This view's start time matches the start of the Android process, and can be used to track your application launch time.
+
+The ApplicationLaunch view includes any logs, actions, and resources created before your first call to `startView`. Use the duration of this view to determine time to first view. This view has an action, `application_start`, with a duration equal to the amount of time from process start until the call to `applicationDidBecomeActive`.
+
+In cases where Android decides to [prewarm your application][4], the ApplicationLaunch view instead starts when the RUM Android SDK is initialized, and the `application_start` event does not have a duration.
+
 ## Default attributes
 
 RUM collects common attributes for all events and attributes specific to each event listed below [automatically][1]. You can also choose to enrich your user session data by tracking [additional events][2] or by [adding custom attributes][3] to default events specific to your application monitoring and business analytics needs.
@@ -72,7 +80,6 @@ The following network-related attributes are attached automatically to Resource 
 | `connectivity.cellular.technology` | string | The type of a radio technology used for cellular connection. |
 | `connectivity.cellular.carrier_name` | string | The name of the SIM carrier. |
 
-
 ### Operating system
 
 The following OS-related attributes are attached automatically to all events collected by Datadog:
@@ -82,7 +89,6 @@ The following OS-related attributes are attached automatically to all events col
 | `os.name`       | string | The OS name as reported by the device (System User-Agent).       |
 | `os.version`  | string | The OS version as reported by the device (System User-Agent).  |
 | `os.version_major`   | string | The OS version major as reported by the device (System User-Agent).   |
-
 
 ### Geo-location
 
@@ -98,8 +104,6 @@ The below attributes are related to the geo-location of IP addresses.
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, or `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).                    |
 | `geo.city`            | string | The name of the city (for example, `San Francisco`, `Paris`, or `New York`).                                                                                   |
-
-
 ### Global user attributes
 
 You can enable [tracking user info][5] globally to collect and apply user attributes to all RUM events.
