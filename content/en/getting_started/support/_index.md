@@ -44,9 +44,9 @@ If you're not sure which option is best, feel free to use either channel to conn
 
 ## Reaching out on chat
 
-<div class="alert alert-warning">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA enabled accounts.</a></div>
+<div class="alert alert-warning">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
 
-To get started, click **Support** on the left panel of your Datadog Account.
+To get started, click **Support** on the bottom-left corner of the navigation menu.
 
 {{< img src="getting_started/support/support_chat_nav.png" alt="The Support button at the bottom of the app left navigation menu" style="width:40%" >}}
 
