@@ -2,18 +2,22 @@
 title: Getting Started
 kind: guide
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "bits_ai/"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Feature Overview"
+- link: "bits_ai/query_examples"
+  tag: "Documentation"
+  text: "Example Natural Language Queries"
+- link: bits_ai/managing_incidents/"
+  tag: "Documentation"
+  text: "Managing Incidents"
 ---
 
 ## Querying in Datadog
 
 ### In the chat panel
 
-To open the chat panel, click on **Ask Bits AI** at the bottom of the navigation bar, or use **Cmd + /** to show or hide the chat panel.
-
-{{< img src="bits_ai/getting_started/bits-ai-nav.png" alt="Bits AI link in the side nav of the Datadog app" style="width:30%;">}}
+To open the chat panel in the app, click on **Bits AI** at the bottom of the navigation bar, or use **Cmd + /** to show or hide the chat panel.
 
 Some responses from Bits AI include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
 
@@ -30,6 +34,7 @@ Where available, the feature can be accessed by typing a space into the search b
 {{< img src="bits_ai/getting_started/search-bar-with-ai-suggestions.png" alt="Search bar displaying suggested natural language queries" style="width:90%;">}}
 
 ### On the mobile app
+
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with BitsAI" style="width:40%;" >}}
 
 ## Querying in Slack
@@ -43,10 +48,8 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 
 {{< img src="bits_ai/getting_started/example-slack-query.png" alt="Output of an example service-dependency query in Slack" style="width:60%;">}}
 
-{{< whatsnext desc="Additional Bits AI documentation:">}}
-    {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}
-    {{< nextlink href="bits_ai/query_examples" >}}Example Natural Language Queries{{< /nextlink >}}
-    {{< nextlink href="bits_ai/managing_incidents/" >}}Managing Incidents{{< /nextlink >}}
-{{< /whatsnext >}}
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/slack/?tab=applicationforslack
