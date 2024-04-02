@@ -84,8 +84,8 @@ _\*A pipeline's step granularity is not available in Datadog._
 
 | Datadog | CircleCI |
 |---|---|
-| Pipeline | Pipeline |
-| Stage | Workflow |
+| Pipeline | Workflow |
+| Stage |  |
 | Job | Job |
 | Step* | Step |
 
