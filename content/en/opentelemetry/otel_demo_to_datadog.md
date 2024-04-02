@@ -247,7 +247,7 @@ helm install my-otel-demo open-telemetry/opentelemetry-demo --values my-values-f
 
 ## Navigating the application
 
-The OTel demo comes with a load generator, but in case you want to check how the Astronomy Shop
+The OTel Demo comes with a load generator, but in case you want to check how the Astronomy Shop
 looks like, you can navigate to its Web UI.
 
 {{< tabs >}}
@@ -273,20 +273,82 @@ And then, you can navigate to <http://localhost:8080>.
 
 ## Exploring OpenTelemetry data in Datadog
 
-As soon as the OTel demo is running, the load generator will simulate traffic in the application, and
+As soon as the OTel Demo is running, the load generator will simulate traffic in the application, and
 in a couple of seconds you can already start seeing data arriving in Datadog.
 
 ### Service Catalog
 
-Check out all services that are part of the OTel demo.
+Check out all services that are part of the OTel Demo.
 
 1. Go to **APM** > **Service Catalog**.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/service_catalog.png" alt="View Service Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
 
-2. On the top left corner, select **Map** to see how the services are connected (you can view the map as Cluster or Flow).
+2. On the top left corner, select **Map** to see how the services are connected (you can choose view the map as Cluster or Flow on the top right corner).
 
-{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_flow.png" alt="View Service Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
+
+3. Go back to **List** (top left corner) and select one of the services to view a summarized view of Performance from the selected service.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
+
+4. From the previous view, you can navigate to the Distributed Tracing view in order to explore the received traces.
+
+### Distributed Tracing
+
+1. Click on **View Traces** to navigate to the **Traces** view, with the selected service applied as filter.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/traces_view.png" alt="Traces view with all indexed spans for checkout service" style="width:90%;" >}}
+
+2. Select one of the indexed spans to see the whole Trace of which this transaction belongs to. In this view, you can see in context everything
+that is being sent to Datadog related to this Trace.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/trace_flamegraph.png" alt="Trace view with all spans belonging to that specific transaction" style="width:90%;" >}}
+
+3. Infrastructure metrics for the services reporting Host Metrics.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/infrastructure_metrics.png" alt="Flame graph trace view on top and Host Metrics at the bottom" style="width:90%;" >}}
+
+4. Runtime metrics for the services that have that already implemented.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/runtime_metrics.png" alt="Flame graph trace view on top and Runtime Metrics at the bottom" style="width:90%;" >}}
+
+5. All the log entries correlated with this Trace.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/logs.png" alt="Flame graph trace view on top and logs at the bottom" style="width:90%;" >}}
+
+6. All span links linked to this Trace. If you want to you can click on the span, to navigate to the linked span.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/logs.png" alt="Flame graph trace view on top and span links at the bottom" style="width:90%;" >}}
+
+### Trace Queries
+
+As Datadog is receiving all this OpenTelemetry data, you can take advantage of Datadog's features to slice and dice that data.
+
+Imagine you would like to find all transaction from a specific user.
+
+As the OTel Demo sends `user.id` as span tags, you can use it with Trace Queries for filtering all transactions this user triggered.
+
+You can use the Span Info view to help you out.
+
+1. Mouse hover the line where user id is, click on the **engine** icon and **filter by @app.user.id:<user_id>**.
+
+2. You may need to clean up some previous filters that were applied, but once you have only the **@app.user.id** applied, you
+will be able to see all transactions that contain spans which this user id is present.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/trace_query.png" alt="Trace query filtering all spans that contain a specific app.user.id" style="width:90%;" >}}
+
+### Error Tracking
+
+The OpenTelemetry Demo comes with a [flagd][5], a feature flag evaluation engine, which can be used to simulate some error scenarios.
+
+In your IDE or text editor, you can navigate to the file: `src/flagd/demo.flagd.json` and set the `defaultVariant` to `on` in one of the cases.
+
+You can check all available cases in the official [OpenTelemetry Demo documentation][6].
+
+Once the demo starts producing errors, you can visualize them in Datadog and track down what are the affected services.
+
+{{< img src="/getting_started/opentelemetry/otel_demo/error_tracking.png" alt="Error tracking view showing error PaymentService Fail Feature Flag Enabled" style="width:90%;" >}}
 
 ## Further Reading
 
@@ -295,3 +357,5 @@ Check out all services that are part of the OTel demo.
 [1]: https://github.com/open-telemetry/opentelemetry-demo
 [2]: https://www.datadoghq.com/free-datadog-trial/
 [3]: https://app.datadoghq.com/organization-settings/api-keys/
+[5]: https://flagd.dev/
+[6]: https://opentelemetry.io/docs/demo/feature-flags/
