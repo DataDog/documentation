@@ -24,11 +24,11 @@ If you're a new user, you may already have the new live experience enabled by de
 
 ## Select account and region
 
-Click the dropdown under the **Account** section and select the account you want to scan. If you only added one AWS account to Cloudcraft, it's automatically selected for you.
+Click the dropdown under the **Account** section and select the account you want to scan. If you only added one AWS or Azure account to Cloudcraft, it's automatically selected for you.
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/select-account.png" alt="Screenshot highlighting the dropdown to select an account to want to scan in the Cloudcraft interface with a red arrow pointing to the dropdown." responsive="true" style="width:100%;">}}
 
-Under **Region**, select the regions you want to scan. By default, `Global` and `US East (N. Virginia)` are selected, but you can click the **More** button to select or search for additional regions.
+Under **Region**, select the regions you want to scan. By default, `Global` and your default region are selected, but you can click the **More** button to select or search for additional regions.
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/select-region.png" alt="Screenshot highlighting the regions to scan in the Cloudcraft interface with red arrows pointing to the regions and the More button." responsive="true" style="width:100%;">}}
 
@@ -38,7 +38,7 @@ After selecting, regions are scanned automatically and the number of resources f
 
 You can filter resources by type and tags.
 
-Tags are automatically detected from your AWS account and displayed in the **Custom tags**, **AWS tags**, and **Kubernetes tags** sections.
+Tags are automatically detected from your AWS account and displayed in the **Custom tags**, **AWS tags**, **Terraform tags**, and **Kubernetes tags** sections.
 
 - **Custom tags** are tags that you added to resources in AWS or Azure.
 - **AWS tags** are tags that are automatically added to resources by AWS.
