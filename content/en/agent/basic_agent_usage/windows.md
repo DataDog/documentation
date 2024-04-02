@@ -247,7 +247,8 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 Use the following PowerShell command to uninstall the Agent without rebooting:
 
 {{< code-block lang="shell" >}}
-(@(Get-ChildItem -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" -Recurse) | Where {$_.GetValue("DisplayName") -like "Datadog Agent" }).PSChildName
+$productCode = (@(Get-ChildItem -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" -Recurse) | Where {$_.GetValue("DisplayName") -like "Datadog Agent" }).PSChildName
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', "$productCode", 'REBOOT=ReallySuppress')
 {{< /code-block >}}
 
 {{% /tab %}}
