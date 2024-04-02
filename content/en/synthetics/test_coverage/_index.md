@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Explore your testing suite's Synthetic test coverage of RUM browser actions or API endpoints on the **Test Coverage** page.
+Explore your testing suite's Synthetic test coverage of RUM browser actions or API endpoints on the [**Test Coverage** page][1], which you can find under **Digital Experience** > **Synthetic Monitoring & Testing**.
 
 {{< tabs >}}
 {{% tab "Browser Actions" %}}
