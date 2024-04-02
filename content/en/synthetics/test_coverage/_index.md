@@ -154,4 +154,3 @@ To create a test, click **+ New Test** on the top right of the [Test Coverage pa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/synthetics/test-coverage/browser
