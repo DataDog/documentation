@@ -564,21 +564,28 @@ See the Application Security [set up documentation][11] to validate you you are 
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
-## Disabling Threat Detection and Protection
+## Disabling threat detection and protection
 
 To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 
 If no `DD_APPSEC_ENABLED=true` environment variable is set for your service:
 * If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If ASM was activated in one click: go to [ASM service configuration][15], select **Services with Threat Management Capabilities**, click on your service, and then click **Deactivate**.
-* To disable ASM on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Threat Management detection on (number of) services**.
+* If ASM was activated in one click, do the following: 
+  1. Go to [ASM service configuration][15].
+  2. Select **Threat Management in Monitoring Mode**.
+  3. Click on a service.
+  4. In the service details, in **Threat Detection**, click **Deactivate**.
+* To disable ASM on your services in bulk, do the following: 
+  1. Go to [ASM service configuration][15].
+  2. Select the check boxes for the services where you want to disable threat detection.
+  3. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
 
-## Disabling Software Composition Analysis (SCA)
+## Disabling Software Composition Analysis
 
 To disable [Software Composition Analysis][14]:
 
-* Go to [ASM service configuration][15], select **Services with Open Source Vulnerability Detection**, click on your service and then click **Deactivate**.
-* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Open source vulnerability detection on (number of) services**.
+* Go to [ASM service configuration][15], select **Software Composition Analysis (SCA)**, click on your service and then click **Deactivate**.
+* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
 
 ## Disabling Code Security
 
@@ -586,6 +593,12 @@ To disable [Software Composition Analysis][14]:
 
 To disable [Code Security][13] vulnerability detection, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service. 
 
+If no `DD_IAST_ENABLED=true` environment variable is set for your service, do the following:
+  1. Go to [ASM service configuration][15].
+  2. Select **Code Security**.
+  3. Click on a service.
+  4. In the service details, in **Vulnerability Detection**, click **Deactivate**.
+  
 ## Need more help?
 
 If you continue to have issues with ASM, contact [Datadog support][1] with the following information:
