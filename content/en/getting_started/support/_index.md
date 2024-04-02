@@ -31,7 +31,7 @@ For the most efficient resolution of an issue, be ready to provide any of the re
 
 ## Chat or support ticket?
 
-Use the table below to determine whether to open a [support ticket][1] or reach out on chat. 
+Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat). 
 
 | Support Ticket                  | Chat        |
 | ------------------------------- | ----------- |
