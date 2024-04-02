@@ -279,6 +279,111 @@ Integrations can be enabled or disabled individually (overriding the default abo
 - Running the Java tracer in Bitbucket is not supported.
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
 
+## GraalVM Native Image support
+
+GraalVM Native Image is a technology that allows you to compile Java applications into native executables. The Datadog Java tracer supports GraalVM Native Image. This allows you to compile your applications into native executables while still benefiting from the tracing capabilities offered by the library.
+
+### Requirements
+
+Use the latest versions of:
+
+- [GraalVM][7]
+- [Datadog Java tracer][1]
+
+### Setup
+
+To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
+
+1. Instrument your application, following the steps described on [Tracing Java Applications][6].
+2. When you build a native executable with the `native-image` command, add the following argument:
+   ```shell
+   -J-javaagent:/path/to/dd-java-agent.jar
+   ```
+3. (Optional) Enable the profiler integration by adding the following argument:
+`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+
+#### Quarkus Native builds
+
+1. Instrument your application, following the steps described in [Tracing Java Applications][6].
+2. When you build a native executable, use the `quarkus.native.additional-build-args` property. For example:
+   ```shell
+   ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
+   ```
+3. (Optional) Enable the profiler integration by adding the following argument:
+`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+
+#### Spring Native builds
+
+1. Instrument your application, following the steps described on [Tracing Java Applications][6].
+2. For Spring Native builds based on Buildpacks, add the [Paketo Buildpack for Datadog][8] and enable it using `BP_DATADOG_ENABLED=true`.
+   - You can do this at the build tool level, like Maven:
+     ```yaml
+     <build>
+     <plugins>
+       <plugin>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-maven-plugin</artifactId>
+         <configuration>
+           <image>
+             ...
+             <buildpacks>
+               ...
+               <buildpack>gcr.io/paketo-buildpacks/datadog</buildpack>
+               ...
+             </buildpacks>
+             <env>
+               ...
+               <BP_DATADOG_ENABLED>true</BP_DATADOG_ENABLED>
+               ...
+             </env>
+           </image>
+         </configuration>
+       </plugin>
+     </plugins>
+     </build>
+     ```
+   - Alternatively, you can use the `pack build` command with `--buildpack gcr.io/paketo-buildpacks/datadog` option to add Datadog buildpack and `--env BP_DATADOG_ENABLED=true` option to enable it.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+
+#### Usage
+
+After completing the setup, the service should send traces to Datadog.
+
+You can view traces using the [Trace Explorer][9].
+
+#### Troubleshooting
+
+##### Native-image buildpack versions older than 5.12.2
+
+Older native-image buildpack versions expose the following option: `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM`.
+
+When this option is `false`, exceptions like the following can occur:
+
+```text
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError: 
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException: 
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap 
+as this class should be initialized at image runtime. To see how this object got 
+instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
+```
+
+Solutions to this issue are:
+
+- Set `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM` explicitly to true in the image env configuration,
+- Or upgrade the `native-image` buildpack to version 5.12.2 or later. The best way to do this is by upgrading the `java-native-image` buildpack to 8.13.0 or later.
+
+##### Paketo buildpack for Datadog versions older than 4.6.0
+
+Paketo buildpack for Datadog had a bug in older versions that materialized with the following error message:
+
+```text
+disabling Datadog at launch time is unsupported for Node
+ERROR: failed to launch: exec.d: failed to execute exec.d file at path '/layers
+paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
+```
+
+The solution to this issue is to upgrade to version 4.6.0 or newer.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -288,3 +393,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 [3]: /tracing/manual_instrumentation/java
 [4]: https://github.com/DataDog/documentation#outside-contributors
 [5]: /tracing/trace_collection/otel_instrumentation/java/
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[7]: https://www.graalvm.org/downloads/
+[8]: https://github.com/paketo-buildpacks/datadog
+[9]: /tracing/trace_explorer/
