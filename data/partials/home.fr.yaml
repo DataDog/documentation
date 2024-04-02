@@ -92,7 +92,7 @@ nav_sections:
       title: Network Monitoring
     - desc: Détectez et résolvez les problèmes de performance de vos applications
         sans serveur.
-      icon: sans serveur
+      icon: serverless
       link: serverless/
       title: Sans serveur
     - desc: Consultez les alertes, les incidents et d'autres insights Datadog depuis

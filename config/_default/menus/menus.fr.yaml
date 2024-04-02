@@ -7135,7 +7135,7 @@ main:
   name: Administration
   weight: 10000000
 - identifier: getting_started
-  name: Prise en main
+  name: Getting Started
   parent: essentials_heading
   pre: hex-ringed
   url: getting_started/
@@ -7146,55 +7146,55 @@ main:
   url: getting_started/application/
   weight: 1
 - identifier: getting_started_datadog_site
-  name: Site Datadog
+  name: Datadog Site
   parent: getting_started
   url: getting_started/site/
   weight: 2
-- identifier: getting_started_agent
-  name: Agent
-  parent: getting_started
-  url: getting_started/agent/
-  weight: 3
-- identifier: getting_started_containers
-  name: Conteneurs
-  parent: getting_started
-  url: getting_started/containers/
-  weight: 4
-- identifier: getting_started_containers_autodiscovery
-  name: Autodiscovery
-  parent: getting_started_containers
-  url: getting_started/containers/autodiscovery
-  weight: 5
-- identifier: getting_started_containers_operator
-  name: Operator Datadog
-  parent: getting_started_containers
-  url: getting_started/containers/datadog_operator
-  weight: 6
 - identifier: getting_started_serverless
   name: Serverless pour AWS Lambda
   parent: getting_started
   url: getting_started/serverless/
-  weight: 601
+  weight: 3
+- identifier: getting_started_agent
+  name: Agent
+  parent: getting_started
+  url: getting_started/agent/
+  weight: 4
 - identifier: getting_started_integrations
   name: Intégrations
   parent: getting_started
   url: getting_started/integrations/
-  weight: 602
+  weight: 5
 - identifier: getting_started_with_aws
   name: AWS
   parent: getting_started_integrations
   url: getting_started/integrations/aws/
-  weight: 7
+  weight: 501
 - identifier: getting_started_with_terraform
   name: Terraform
   parent: getting_started_integrations
   url: getting_started/integrations/terraform/
-  weight: 701
+  weight: 502
+- identifier: getting_started_containers
+  name: Conteneurs
+  parent: getting_started
+  url: getting_started/containers/
+  weight: 6
+- identifier: getting_started_containers_autodiscovery
+  name: Autodiscovery
+  parent: getting_started_containers
+  url: getting_started/containers/autodiscovery
+  weight: 601
+- identifier: getting_started_containers_operator
+  name: Datadog Operator
+  parent: getting_started_containers
+  url: getting_started/containers/datadog_operator
+  weight: 602
 - identifier: getting_started_dashboards
   name: Dashboards
   parent: getting_started
   url: getting_started/dashboards/
-  weight: 702
+  weight: 7
 - identifier: getting_started_monitors
   name: Monitors
   parent: getting_started
@@ -7215,242 +7215,226 @@ main:
   parent: getting_started
   url: getting_started/profiler/
   weight: 11
-- identifier: tagging_
+- identifier: getting_started_tagging
   name: Tags
   parent: getting_started
   url: getting_started/tagging/
   weight: 12
-- identifier: assigning_tags
+- identifier: getting_started_tagging_assigning_tags
   name: Assigner des tags
-  parent: tagging_
+  parent: getting_started_tagging
   url: getting_started/tagging/assigning_tags
-  weight: 13
-- identifier: unified_service_tagging
+  weight: 1201
+- identifier: getting_started_tagging_unified_service_tagging
   name: Tagging de service unifié
-  parent: tagging_
+  parent: getting_started_tagging
   url: getting_started/tagging/unified_service_tagging
-  weight: 1301
-- identifier: using_tags
+  weight: 1202
+- identifier: getting_started_tagging_using_tags
   name: Utiliser les tags
-  parent: tagging_
+  parent: getting_started_tagging
   url: getting_started/tagging/using_tags
-  weight: 1302
+  weight: 1203
 - identifier: getting_started_api
   name: API
   parent: getting_started
   url: getting_started/api/
-  weight: 1303
-- identifier: getting_started_api
-  name: Session Replay
-  parent: getting_started
-  url: getting_started/api/
-  weight: 14
+  weight: 13
 - identifier: getting_started_service_catalog
-  name: NodeJS
+  name: Service Catalog
   parent: getting_started
   url: getting_started/service_catalog/
+  weight: 14
+- identifier: getting_started_session_replay
+  name: Session Replay
+  parent: getting_started
+  url: getting_started/session_replay/
   weight: 15
 - identifier: getting_started_synthetics
-  name: Session Replay
+  name: Synthetic Monitoring
   parent: getting_started_synthetics
   url: getting_started/synthetics/
   weight: 16
-- identifier: getting_started_browser_test
-  name: Suivi des erreurs
+- identifier: getting_started_synthetics_api_test
+  name: API Tests
+  parent: getting_started_synthetics
+  url: getting_started/synthetics/api_test
+  weight: 1601
+- identifier: getting_started_synthetics_browser_test
+  name: Browser Tests
   parent: getting_started_synthetics
   url: getting_started/synthetics/browser_test
-  weight: 17
-- identifier: getting_started_api_test
-  name: Aide
-  parent: getting_started_containers
-  url: getting_started/synthetics/api_test
-  weight: 18
-- identifier: getting_started_private_location
-  name: 'Surveillance Flutter '
-  parent: getting_started
+  weight: 1602
+- identifier: getting_started_synthetics_private_location
+  name: Private Locations
+  parent: getting_started_synthetics
   url: getting_started/synthetics/private_location
-  weight: 1801
-- identifier: getting_started_private_location
-  name: Configuration avancée
+  weight: 1603
+- identifier: getting_started_incident_management
+  name: Incident Management
   parent: getting_started
   url: getting_started/incident_management/
-  weight: 1802
-- identifier: getting_started_private_location
-  name: Mobile Application Testing
-  parent: getting_started_api_test
+  weight: 17
+- identifier: getting_started_database_monitoring
+  name: Database Monitoring
+  parent: getting_started
   url: getting_started/database_monitoring/
-  weight: 1803
-- identifier: getting_started_incident_management
-  name: Node.js
+  weight: 18
+- identifier: getting_started_cloud_security_management
+  name: Cloud Security Management
   parent: getting_started
   url: getting_started/cloud_security_management/
   weight: 19
-- identifier: getting_started_database_monitoring
-  name: Associer vos logs à vos traces
+- identifier: getting_started_cloud_siem
+  name: Cloud SIEM
   parent: getting_started
   url: getting_started/cloud_siem/
   weight: 20
-- identifier: getting_started_cloud_security_management
-  name: Syntaxe de recherche
-  parent: getting_started_application_security
-  url: getting_started/application_security
-  weight: 21
-- identifier: getting_started_cloud_siem
-  name: Dimensionnement
+- identifier: getting_started_application_security
+  name: Application Security Management
   parent: getting_started
-  url: getting_started/application_security/vulnerability_management
+  url: getting_started/application_security/
+  weight: 21
+- identifier: getting_started_application_security_software_composition_analysis
+  name: Software Composition Analysis
+  parent: getting_started_application_security
+  url: getting_started/application_security/software_composition_analysis/
+  weight: 2101
+- identifier: getting_started_workflow_automation
+  name: Workflow Automation
+  parent: getting_started
+  url: getting_started/workflow_automation/
   weight: 22
-- identifier: getting_started_application_vulnerability
-  name: Étapes des tests
-  parent: getting_started_containers
+- identifier: getting_started_learning_center
+  name: Learning Center
+  parent: getting_started
   url: getting_started/learning_center/
   weight: 23
-- identifier: getting_started_software_composition_analysis
-  name: Analyse de la composition dʼun logiciel
-  parent: getting_started_application_vulnerability
-  url: getting_started/application_security/software_composition_analysis
-  weight: 2301
-- identifier: getting_started_workflow_automation
-  name: Go
-  parent: essentials_heading
-  url: glossary/
-  weight: 24
-- identifier: getting_started_learning_center
-  name: Guides
-  parent: essentials_heading
-  url: glossary/
-  weight: 25
 - identifier: getting_started_support
-  name: Agent
-  parent: getting_started_containers
-  url: agent/
-  weight: 26
-- identifier: basic_agent_usage
-  name: Envoi - API
-  parent: basic_agent_usage
-  pre: agent-fill
-  url: agent/basic_agent_usage/
+  name: Support
+  parent: getting_started_support
+  url: getting_started/support/
+  weight: 24
+- name: Glossary
+  url: glossary/
+  pre: features
+  identifier: glossary
+  parent: essentials_heading
   weight: 20000
-- identifier: agent_standard_attributes
-  name: Attributs standards
-  parent: basic_agent_usage
-  pre: search
-  url: /standard-attributes
+- name: Guides
+  url: all_guides/
+  pre: compass
+  identifier: guides
+  parent: essentials_heading
   weight: 30000
-- identifier: basic_agent_usage_aix
-  name: Aide
-  parent: account_management_saml
+- name: Agent
+  url: agent/
   pre: agent-fill
-  url: agent/basic_agent_usage/aix/
+  parent: essentials_heading
   weight: 40000
-- identifier: containers_kubernetes
-  name: Configurations avancées
-  parent: account_management_saml
-  pre: agent-fill
-  url: agent/basic_agent_usage/amazonlinux/
-  weight: 50000
-- identifier: basic_agent_usage_alma_linux
-  name: Alma Linux
-  parent: containers_kubernetes
-  url: agent/basic_agent_usage/centos/
+  identifier: agent
+- name: Basic Agent Usage
+  url: agent/basic_agent_usage/
+  parent: agent
+  identifier: basic_agent_usage
   weight: 1
-- identifier: basic_agent_usage_ansible
-  name: Ansible
-  parent: basic_agent_usage
-  url: agent/basic_agent_usage/ansible/
+- name: AIX
+  identifier: basic_agent_usage_aix
+  url: agent/basic_agent_usage/aix/
   weight: 101
-- identifier: basic_agent_usage_centos
-  name: CentOS
   parent: basic_agent_usage
-  url: agent/basic_agent_usage/centos/
+- name: Amazon Linux
+  identifier: basic_agent_usage_amazon_linux
+  url: agent/basic_agent_usage/amazonlinux/
   weight: 102
-- identifier: basic_agent_usage_chef
-  name: Chef
   parent: basic_agent_usage
-  url: agent/basic_agent_usage/fedora/
-  weight: 103
-- identifier: basic_agent_usage_deb
-  name: Debian
-  parent: basic_agent_usage
-  url: agent/basic_agent_usage/deb/
-  weight: 104
-- identifier: basic_agent_usage_fedora
-  name: Fedora
-  parent: basic_agent_usage
-  url: agent/basic_agent_usage/fedora/
-  weight: 105
-- identifier: basic_agent_usage_heroku
-  name: Heroku
-  parent: basic_agent_usage
-  url: agent/basic_agent_usage/heroku/
-  weight: 106
-- identifier: basic_agent_usage_osx
-  name: Mac OS X
-  parent: basic_agent_usage
-  url: agent/basic_agent_usage/osx/
-  weight: 107
-- identifier: basic_agent_usage_puppet
-  name: Puppet
-  parent: basic_agent_usage
-  url: agent/basic_agent_usage/puppet/
-  weight: 108
-- identifier: basic_agent_usage_redhat
-  name: Red Hat
-  parent: basic_agent_usage
-  url: agent/basic_agent_usage/redhat/
-  weight: 109
-- identifier: basic_agent_usage_rockylinux
-  name: Rocky Linux
-  parent: basic_agent_usage
+- name: Alma Linux
+  identifier: basic_agent_usage_alma_linux
   url: agent/basic_agent_usage/centos/
-  weight: 110
-- identifier: basic_agent_usage_saltstack
-  name: SaltStack
+  weight: 103
   parent: basic_agent_usage
-  url: agent/basic_agent_usage/saltstack/
-  weight: 111
-- identifier: basic_agent_usage_suse
-  name: SUSE
+- name: Ansible
+  identifier: basic_agent_usage_ansible
+  url: agent/basic_agent_usage/ansible/
   parent: basic_agent_usage
-  url: agent/basic_agent_usage/suse/
-  weight: 112
-- identifier: basic_agent_usage_ubuntu
-  name: Ubuntu
+  weight: 104
+- name: CentOS
+  identifier: basic_agent_usage_centos
+  url: agent/basic_agent_usage/centos/
+  weight: 105
   parent: basic_agent_usage
+- name: Chef
+  identifier: basic_agent_usage_chef
+  url: agent/basic_agent_usage/chef/
+  weight: 106
+  parent: basic_agent_usage
+- name: Debian
+  identifier: basic_agent_usage_deb
+  url: agent/basic_agent_usage/deb/
+  weight: 107
+  parent: basic_agent_usage
+- name: Fedora
+  identifier: basic_agent_usage_fedora
   url: agent/basic_agent_usage/fedora/
+  weight: 108
+  parent: basic_agent_usage
+- name: Heroku
+  identifier: basic_agent_usage_heroku
+  url: agent/basic_agent_usage/heroku/
+  weight: 109
+  parent: basic_agent_usage
+- name: Mac OS X
+  identifier: basic_agent_usage_osx
+  url: agent/basic_agent_usage/osx/
+  weight: 110
+  parent: basic_agent_usage
+- name: Puppet
+  identifier: basic_agent_usage_puppet
+  url: agent/basic_agent_usage/puppet/
+  weight: 111
+  parent: basic_agent_usage
+- name: Red Hat
+  identifier: basic_agent_usage_redhat
+  url: agent/basic_agent_usage/redhat/
+  weight: 112
+  parent: basic_agent_usage
+- name: Rocky Linux
+  identifier: basic_agent_usage_rockylinux
+  url: agent/basic_agent_usage/centos/
   weight: 113
-- identifier: basic_agent_usage_windows
-  name: Windows
-  parent: agent
-  url: agent/basic_agent_usage/windows/
+  parent: basic_agent_usage
+- name: SaltStack
+  identifier: basic_agent_usage_saltstack
+  url: agent/basic_agent_usage/saltstack/
   weight: 114
-- identifier: basic_agent_usage_sccm
-  name: SCCM
-  parent: agent
+  parent: basic_agent_usage
+- name: SCCM
+  identifier: basic_agent_usage_sccm
   url: agent/basic_agent_usage/sccm/
   weight: 115
-- identifier: basic_agent_usage_source
-  name: Depuis les sources
-  parent: agent_logs
-  url: agent/basic_agent_usage/source/
+  parent: basic_agent_usage
+- name: SUSE
+  identifier: basic_agent_usage_suse
+  url: agent/basic_agent_usage/suse/
   weight: 116
-- identifier: agent_iot
-  name: IoT
-  parent: basic_agent_usage_alma_linux
-  url: agent/iot/
+  parent: basic_agent_usage
+- name: Ubuntu
+  identifier: basic_agent_usage_ubuntu
+  url: agent/basic_agent_usage/ubuntu/
   weight: 117
-- identifier: agent_logs
-  name: Windows
-  parent: basic_agent_usage_alma_linux
-  url: agent/logs/
+  parent: basic_agent_usage
+- name: Windows
+  identifier: basic_agent_usage_windows
+  url: agent/basic_agent_usage/windows/
   weight: 118
-- identifier: agent
-  name: Configurations avancées
-  parent: basic_agent_usage_alma_linux
-  url: agent/logs/advanced_log_collection
+  parent: basic_agent_usage
+- name: From Source
+  identifier: basic_agent_usage_source
+  url: agent/basic_agent_usage/source/
   weight: 119
+  parent: basic_agent_usage
 - identifier: agent
-  name: Surveillance Synthetic
+  name: Proxy
   parent: agent
   url: agent/logs/proxy
   weight: 2
