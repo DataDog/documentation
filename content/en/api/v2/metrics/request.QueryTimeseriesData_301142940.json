@@ -15,7 +15,7 @@
       "queries": [
         {
           "data_source": "metrics",
-          "query": "avg:system.cpu.user{*}",
+          "query": "avg:datadog.estimated_usage.metrics.custom{*}",
           "name": "a"
         }
       ],

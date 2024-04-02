@@ -40,7 +40,7 @@ cascade:
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag=" AWS" >}}Troubleshooting the AWS integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag=" AWS" >}}Monitor your AWS billing details{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}Error: Datadog is not authorized to perform sts:AssumeRole{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}AWS CloudWatch Metric Streams with Kinesis Data Firehose{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}AWS CloudWatch Metric Streams with Amazon Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag=" AWS" >}}Using Amazon CloudFormation{{< /nextlink >}}
     {{< nextlink href="integrations/guide/events-from-sns-emails" tag=" AWS" >}}Create Datadog events from Amazon SNS emails{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag=" AWS" >}}AWS integration and CloudWatch FAQ{{< /nextlink >}}
@@ -75,6 +75,7 @@ cascade:
     {{< nextlink href="integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics" tag=" SQL Server" >}}Use WMI to collect more SQL Server performance metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/connection-issues-with-the-sql-server-integration" tag=" SQL Server" >}}Connection issues with the SQL Server integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/mysql-custom-queries" tag=" MySQL" >}}MySQL custom queries{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/deprecated-oracle-integration" tag=" Oracle" >}}Configuring Oracle integration on the Agent versions lower than 7.50.1{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/oracle-check-upgrade-7.50.1" tag=" Oracle" >}}Configuring the Oracle Integration on Agent 7.50.1+{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/deprecated-oracle-integration" tag=" Oracle" >}}Configuring the Oracle Integration on Agent versions lower than 7.50.1{{< /nextlink >}}
 {{< /whatsnext >}}
 
