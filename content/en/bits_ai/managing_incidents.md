@@ -4,7 +4,7 @@ kind: guide
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
-  text: "Feature Overview"
+  text: "Bits AI Overview"
 - link: bits_ai/getting_started"
   tag: "Documentation"
   text: "Getting Started"
@@ -13,7 +13,11 @@ further_reading:
   text: "Example Natural Language Queries"
 ---
 
+## Overview
+
 <div class="alert alert-warning">The following features are part of the <a href="https://www.datadoghq.com/product/incident-management/">Datadog Incident Management</a> product.</div>
+
+Bits AI simplifies incident management processes, improves collaboration, and provides valuable support for incident responders, making it a beneficial tool for efficient incident resolution.
 
 ## Prerequisites
 
@@ -22,7 +26,7 @@ further_reading:
 - Incident channels you'd like to work with Bits AI must be prefixed with `#incident-`. 
 - To ask Bits AI questions about incidents from any Slack channel, you must invite Bits AI to that channel. Run the `@Datadog` command and follow the instructions on the screen. 
 
-{{< img src="bits_ai/integration-settings.png" alt="Slack integration settings in Datadog" style="width:90%;">}}
+{{< img src="bits_ai/managing_incidents/integration-settings.png" alt="Slack integration settings in Datadog" style="width:90%;">}}
 
 ## View incident summaries
 
@@ -30,7 +34,7 @@ When you join an incident channel in Slack, you automatically receive a summary 
 
 At any time, you can ask for a fresh summary by asking `@DataDog Give me a summary of this incident`. 
 
-# Search across your entire incident history and ask questions
+## Search across your entire incident history and ask questions
 
 You can ask Bits to find incidents that you're looking for. For instance,
 - `@Datadog How many incidents are currently ongoing?`
@@ -38,11 +42,13 @@ You can ask Bits to find incidents that you're looking for. For instance,
 - `@Datadog Show me all Sev-1 incidents that occurred in the past week`
 - `@Datadog Were there any incidents in the past month that impacted the payments service?` 
 
-You can then dive deeper by asking questions about those incidents, like `@Datadog What was the root cause of incident-123?` or `@Datadog What remediation actions did the responders take in incident-123?`
+You can then investigate further and ask questions about those incidents, like `@Datadog What was the root cause of incident-123?` or `@Datadog What remediation actions did the responders take in incident-123?`
 
-## Find related incidents
+Bits AI can also perform semantic search for related incidents. If you're responding to an incident, you can ask Bits AI to find other active incidents that look similar to the one you're in (`@Datadog Are there any related incidents?`). Bits AI looks for incidents that were active within the past 2 hours. You can also specify the time frame you want Bits to look across. If you say `@Datadog Find me incidents related to DDOS attacks from the past month`, Bits AI returns both active and resolved DDOS incidents from the past month. 
 
-Bits AI can also perform semantic search for related incidents. If you're responding to an incident, you can ask Bits AI to find other active incidents that look similar to the one you're in (`@Datadog Are there any related incidents?`). Bits AI will look for incidents that were active within the past 2 hours. You can also specify the time frame you want Bits to look across. If you say `@Datadog Find me incidents related to DDOS attacks from the past month`, Bits will return both active and resolved DDOS incidents from the past month. 
+Or if you suspect there's an issue before an incident is even declared, you can ask Bits AI a question like `@Datadog A customer is unable to check out. Is there an incident?` or `@Datadog Are there any incidents now impacting the payments service?` 
+
+**Note**: Incident search is limited to the past 120 days.
 
 ## Manage incidents
 

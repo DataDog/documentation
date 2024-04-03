@@ -38,7 +38,7 @@ You can ask Bits AI questions such as:
 
 When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
-For more example query syntax, see [Example Natural Language Queries][2].
+For more example query syntax, see the [Example Natural Language Queries][2] guide.
 
 ### Streamline incident management
 
@@ -62,6 +62,6 @@ Bits AI is in active development, and your feedback is valuable. To report issue
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/getting_started/
-[2]: /bits_ai/query_examples
+[2]: /bits_ai/guide/query_examples
 [3]: /service_management/incident_management
 [4]: /bits_ai/managing_incidents/

@@ -4,8 +4,8 @@ kind: guide
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
-  text: "Feature Overview"
-- link: "bits_ai/query_examples"
+  text: "Bits AI Overview"
+- link: "bits_ai/guide/query_examples"
   tag: "Documentation"
   text: "Example Natural Language Queries"
 - link: bits_ai/managing_incidents/"
@@ -17,7 +17,7 @@ further_reading:
 
 ### In the chat panel
 
-To open the chat panel in the app, click on **Bits AI** at the bottom of the navigation bar, or use **Cmd + /** to show or hide the chat panel.
+To open the chat panel in the app, click **Bits AI** at the bottom-left corner of the navigation menu, or use `Cmd + /` to show or hide the chat panel.
 
 Some responses from Bits AI include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
 
@@ -37,10 +37,12 @@ Where available, the feature can be accessed by typing a space into the search b
 
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with BitsAI" style="width:40%;" >}}
 
+Click Bits AI on the mobile app to access the same querying features available on the browser.
+
 ## Querying in Slack
 
 1. [Connect your Datadog account to your Slack workspace][1].
-1. Use the `/dd connect` command to display a list of accounts to connect to.
+1. In Slack, use the `/dd connect` command to display a list of accounts to connect to.
 1. Choose the name of your Datadog account in the dropdown.
 1. Authorize additional permissions needed by Bits AI.
 
