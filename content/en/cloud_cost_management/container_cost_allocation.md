@@ -57,16 +57,18 @@ The following table presents the list of collected features and the minimal Agen
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-CCM allocates costs of all Kubernetes clusters, including those managed through Azure Kubernetes Service (AKS). 
+<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
 
-1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
-1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
+CCM allocates costs of all Kubernetes clusters, including those managed through Azure Kubernetes Service (AKS). 
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
 | Feature | Minimal Agent version | Minimal Cluster Agent version |
 |---|---|---|
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
+
+1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
+1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 
 [101]: https://app.datadoghq.com/cost/setup
 [102]: /containers/kubernetes/installation/?tab=operator
@@ -136,6 +138,8 @@ ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM
 
 {{% /tab %}}
 {{% tab "Azure" %}}
+
+<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
 
 ### Compute
 
@@ -221,6 +225,8 @@ The cost of an AWS EBS volume has three components: IOPS, throughput, and storag
 {{% /tab %}}
 {{% tab "Azure" %}}
 
+<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
+
 ### Compute
 
 The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
@@ -283,6 +289,8 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 {{% /tab %}}
 {{% tab "Azure" %}}
+
+<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
@@ -351,6 +359,8 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 {{% /tab %}}
 {{% tab "Azure" %}}
+
+<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
 
 ### Kubernetes
 
