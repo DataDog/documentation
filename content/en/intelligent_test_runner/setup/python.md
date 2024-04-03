@@ -39,6 +39,17 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python]
 
 {{% ci-itr-activation-instructions %}}
 
+### Required dependencies
+
+The Intelligent Test Runner requires the [`coverage` package][2].
+
+Install it in your environment by specifying it in your `requirements.txt` (for example), or using `pip`:
+{{< code-block lang="shell" >}}
+pip install coverage
+{{< /code-block >}}
+
+See [known limitations](#known-limitations) if you are already using the `coverage` package or a plugin like `pytest-cov`.
+
 ## Running tests with the Intelligent Test Runner enabled
 
 The Intelligent Test Runner is enabled when you run tests with the Datadog integration active. Run your tests with the following command:
