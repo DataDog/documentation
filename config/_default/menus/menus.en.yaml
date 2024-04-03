@@ -1115,12 +1115,32 @@ main:
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
     weight: 5
+  - name: Bits AI
+    pre: bits-ai
+    identifier: bits_ai
+    parent: platform_heading
+    weight: 20000
+  - name: Getting Started
+    url: bits_ai/getting_started
+    identifier: bits_ai_getting_started
+    parent: bits_ai
+    weight: 1
+  - name: Managing Incidents
+    url: bits_ai/managing_incidents
+    identifier: bits_ai_managing_incidents
+    parent: bits_ai
+    weight: 2
+  - name: Guides
+    url: bits_ai/guide
+    identifier: bits_ai_guide
+    parent: bits_ai
+    weight: 10
   - name: Dashboards
     url: dashboards/
     pre: dashboard
     identifier: dashboards
     parent: platform_heading
-    weight: 20000
+    weight: 30000
   - name: Configure
     identifier: dashboards_configure
     url: dashboards/configure/
@@ -1236,7 +1256,7 @@ main:
     identifier: infrastructure
     pre: host-map
     parent: platform_heading
-    weight: 30000
+    weight: 40000
   - name: Host and Container Maps
     url: infrastructure/hostmap/
     parent: infrastructure
@@ -1297,7 +1317,7 @@ main:
     identifier: metrics_top_level
     pre: metric
     parent: platform_heading
-    weight: 40000
+    weight: 50000
   - name: Custom Metrics
     url: metrics/custom_metrics/
     parent: metrics_top_level
@@ -1388,7 +1408,7 @@ main:
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 50000
+    weight: 60000
   - name: Guides
     url: notebooks/guide
     parent: notebooks
@@ -1399,7 +1419,7 @@ main:
     pre: monitor
     identifier: alerting
     parent: platform_heading
-    weight: 60000
+    weight: 70000
   - name: Configure Monitors
     url: monitors/configuration/
     parent: alerting
@@ -1580,7 +1600,7 @@ main:
     pre: service-catalog
     parent: platform_heading
     identifier: service_catalog
-    weight: 70000
+    weight: 80000
   - name: Browsing
     url: service_catalog/browsing
     parent: service_catalog
@@ -1631,7 +1651,7 @@ main:
     pre: api-catalog
     parent: platform_heading
     identifier: api_catalog
-    weight: 80000
+    weight: 90000
   - name: Exploring APIs
     url: /api_catalog/explore_apis/
     identifier: api_catalog_explore
@@ -1677,7 +1697,7 @@ main:
     pre: error-tracking
     parent: platform_heading
     identifier: error_tracking
-    weight: 90000
+    weight: 100000
   - name: Explorer
     url: error_tracking/explorer
     parent: error_tracking
