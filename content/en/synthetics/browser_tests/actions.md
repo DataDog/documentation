@@ -269,9 +269,9 @@ Create a variable from content such as a `span` or `div` by extracting the eleme
 
 Create a variable from email body using one of the following method: [`regex`][12] or [`Xpath`][13].
 
-* [`Regex`][12] searches and returns the first matching pattern (e.g. `/*./`) from the email's plain text body, if not found check the HTML body.
+* [`Regex`][12] searches and returns the first matching pattern (for example `/*./`) from the email's plain text body, if not found check the HTML body.
 
-* [`Xpath`][13] is only applicable when the email contains an HTML body. It return the content of the corresponding location (e.g. `$`).
+* [`Xpath`][13] is only applicable when the email contains an HTML body. It return the content of the corresponding location (for example `$`).
 
 #### JavaScript
 
