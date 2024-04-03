@@ -4,9 +4,9 @@ kind: documentation
 aliases:
   - /ci
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=CI%20Visibility"
+  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
     tag: "Release Notes"
-    text: "Check out the latest CI Visibility releases! (App login required)"
+    text: "Check out the latest Software Delivery releases! (App login required)"
   - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
     tag: "Blog"
     text: "Monitor your CircleCI environment with Datadog"
@@ -22,6 +22,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
     tag: "Blog"
     text: "Best practices for monitoring static web applications"
+  - link: "https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/"
+    tag: "Blog"
+    text: "Best practices for CI/CD monitoring"
+  - link: "https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/"
+    tag: "Blog"
+    text: "Best practices for monitoring software testing in CI/CD"
 cascade:
     algolia:
         rank: 70
@@ -54,7 +60,7 @@ Datadog integrates with the following CI providers to gather pipeline metrics wh
 
 </br>
 
-You can use the `datadog-ci` CLI to [trace commands][8] in your pipelines, as well as the [custom tags and metrics commands][9] to add user-defined text and numerical tags in your pipeline traces.
+You can use the `datadog-ci` CLI to [trace commands][8] in your pipelines, as well as the [custom tags and measures commands][9] to add user-defined text and numerical tags in your pipeline traces.
 
 ## Ready to start?
 
@@ -71,4 +77,4 @@ See [Pipeline Visibility][3] and [Test Visibility][4] for instructions on settin
 [6]: /monitors/types/ci/
 [7]: /continuous_integration/explorer/
 [8]: /continuous_integration/pipelines/custom_commands/
-[9]: /continuous_integration/pipelines/custom_tags_and_metrics/
+[9]: /continuous_integration/pipelines/custom_tags_and_measures/

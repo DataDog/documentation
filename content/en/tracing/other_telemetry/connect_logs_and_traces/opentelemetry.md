@@ -1,5 +1,5 @@
 ---
-title: Connect OpenTelemetry Traces and Logs
+title: Correlating OpenTelemetry Traces and Logs
 kind: documentation
 description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
 code_lang: opentelemetry
@@ -26,9 +26,7 @@ Connecting OpenTelemetry language SDK logs and traces within Datadog is similar 
 
 1. OpenTelemetry `TraceId` and `SpanId` properties differ from Datadog conventions. Therefore it's necessary to translate `TraceId` and `SpanId` from their OpenTelemetry formats ([a 128bit unsigned int and 64bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string, respectively][2]) into their Datadog Formats([a 64bit unsigned int][3]). 
 
-2. OpenTelemetry Language SDKs lack the automatic trace-log correlation that Datadog SDKs offer, so it's necessary to manually patch your particular logging module or library with a processor that adds the aforementioned translated `TraceId` and `SpanId` as Log attributes marked `dd.trace_id` and `dd.span_id`, respectively. 
-
-3. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
+2. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
 
 See the following examples for language-specific information about how to correlate your OpenTelemetry traces and logs.
 
@@ -181,10 +179,12 @@ String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{datadogSpanIdString} %n
 ```
 
+See [Java Log Collection][4] on how to send your Java logs to Datadog.
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
 [2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
+[4]: /logs/log_collection/java/?tab=logback
 {{% /tab %}}
 
 {{% tab "PHP" %}}

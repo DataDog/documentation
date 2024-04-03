@@ -22,6 +22,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][12].
+
 As of dd-trace-java 1.0.0, you have two options for the engine that generates profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of dd-trace-java 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
 {{< tabs >}}
@@ -72,7 +74,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][4]+ or [6.20.2][5]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][4]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
@@ -151,6 +153,7 @@ The Datadog profiler consists of several profiling engines, including CPU, wallc
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
+_Requires JDK 11+._
 
 The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
@@ -239,7 +242,6 @@ or:
 {{% /tab %}}
 
 {{% tab "Datadog Profiler" %}}
-_Requires JDK 11+._
 
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
 In dd-java-agent earlier than v1.17.0 it is **disabled** by default. Enable it with:
@@ -341,3 +343,4 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /getting_started/profiler/
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[12]: /profiler/enabling/supported_versions/

@@ -79,7 +79,7 @@ If the Agent does not have the correct permissions, you might see one of the fol
 - Access is denied.
 - Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable.
 
-To fix the error, give the Datadog Agent user read, write, and execute permissions to the log file and subdirectories.
+To fix the error, give the Datadog Agent user read and execute permissions to the log file and subdirectories.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -240,7 +240,7 @@ These are a few of the common configuration issues that are worth triple-checkin
 There might be an error in the logs that would explain the issue. Run the following command to check for errors:
 
 ```shell
-sudo cat /var/log/datadog/agent.log | grep ERROR
+sudo grep -i error /var/log/datadog/agent.log
 ```
 
 ## Docker environment

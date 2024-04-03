@@ -25,6 +25,7 @@ title: イベントエクスプローラー
     {{< nextlink href="/service_management/events/explorer/attributes" >}}属性{{< /nextlink >}}
     {{< nextlink href="/service_management/events/explorer/notifications" >}}通知の送信{{< /nextlink >}}
     {{< nextlink href="/service_management/events/explorer/analytics" >}}分析{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/saved_views" >}}保存ビュー{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料

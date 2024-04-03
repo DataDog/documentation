@@ -61,6 +61,8 @@ ad_identifiers:
   - my-custom-httpd-image
 ```
 
+This matches **any** container images on your host that match `httpd` **or** `my-custom-httpd-image`.
+
 ## Custom Autodiscovery container identifiers
 
 To apply different Autodiscovery configuration templates to containers running the same image, choose a custom value to supply as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`. Then, apply a Docker label or Kubernetes annotation to your container that contains this custom value.
@@ -84,7 +86,7 @@ Then, apply a Docker label or Kubernetes annotation to identify your container a
 {{% tab "Docker label" %}}
 
 ```yaml
-com.datadoghq.ad.check.id: foo
+LABEL com.datadoghq.ad.check.id="foo"
 ```
 
 **Note**: The `com.datadoghq.ad.check.id` label takes precedence over the image name.

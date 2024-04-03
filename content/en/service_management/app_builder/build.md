@@ -46,6 +46,10 @@ Blueprints are helpful starter apps. They cover common use cases and come loaded
 
 ### Create a starter app with AI
 
+{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
+AI functionality for App Builder is opt-in.
+{{< /callout >}}
+
 If you're not sure where to start, describe your app to the App Builder AI and let it create a starter app for you.
 
 1. From [App Builder][1], click **New App**.

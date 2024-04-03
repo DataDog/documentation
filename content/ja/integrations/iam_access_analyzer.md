@@ -32,7 +32,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: iam_access_analyzer
-oauth: {}
 public_title: AWS IAM Access Analyzer
 short_description: AWS IAM Access Analyzer は、一般にアクセス可能なリソースを特定します。
 supported_os:

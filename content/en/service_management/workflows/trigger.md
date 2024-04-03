@@ -2,16 +2,21 @@
 title: Trigger a workflow
 kind: documentation
 disable_toc: false
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows/trigger
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/service_management/workflows/access/#service-accounts/"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"
-- link: "security/explorer"
+- link: "/security"
   tag: "Documentation"
   text: "Find out more about Security Signals"
 - link: "monitors"
@@ -53,6 +58,16 @@ To run the workflow:
 1. Under **Execution parameters**, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
 1. Click **Run** to run the workflow.
 
+## Trigger a workflow from a workflow
+
+You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, add the steps to a new workflow and trigger it in your other workflows using the Trigger Workflow action.
+
+<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
+
+If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **service_name** input parameter is required because `service_name` is set as an input parameter in the child workflow.
+
+{{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
+
 ## Trigger a workflow from a Monitor
 
 To trigger a workflow from a Monitor:
@@ -71,6 +86,20 @@ Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
 <div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
+### Test a monitor trigger
+
+You can test a monitor trigger during workflow creation. Testing a monitor generates a snippet that you can paste into your monitor notification window to trigger the workflow.
+
+To test a monitor trigger:
+1. Select the monitor trigger action in your workflow.
+1. Click **Test from Monitor**.
+1. If your monitor passes inputs to the workflow, enter a test value under **Workflow Inputs**.
+1. Select a monitor to test.
+1. Select a monitor state.
+1. Click **Run From Monitor**.
+
+{{< img src="service_management/workflows/test-monitor.mp4" alt="Test your monitor using the Test from Monitor button" video="true" >}}
+
 ## Trigger a workflow from a Security Signal
 
 You can trigger a Workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel.
@@ -83,11 +112,12 @@ To trigger a workflow from a Notification Rule:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
 1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
 1. Save your Workflow.
-1. From the [Setup & Configuration][3] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
+1. From the [Configuration][3] page, find the notification rule you'd like to use to trigger your workflow, or create a new rule.
 1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
+1. Add a unique notification name.
 1. Click **Save and Activate**.
 
-{{< img src="service_management/workflows/notification-rule-trigger.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
+{{< img src="service_management/workflows/notification-rule-trigger2.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
 Each time the Notification Rule fires, it triggers a workflow run.
 
@@ -104,6 +134,18 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 1. You can see the workflow run status in the **Workflow** section of the Security Signal.
 
 For additional examples of Security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
+
+## Trigger a workflow from incidents
+
+To trigger a workflow from incidents, create an incident notification rule:
+1. Create a workflow with a **Monitor, Incident, or Security signal** trigger, or add a **Monitor, Incident, or Security signal** trigger to an existing workflow.
+1. Click on the trigger in the workflow canvas and copy the **Mention handle**.
+1. From the [Incidents Settings][6] page, select **Rules**.
+1. Click **New Rule**.
+1. Configure a **Severity**, **Service**, and **Other attributes** for your notification rule.
+1. Under **Notify**, paste the workflow handle that you copied earlier.
+1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
+1. Click **Save**.
 
 ## Trigger a workflow on a schedule
 
@@ -132,5 +174,7 @@ The initial run history for a workflow provides a panel with the list of previou
 
 [1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
-[3]: https://app.datadoghq.com/security/configuration/rules
+[3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
+[5]: /service_management/workflows/build/#input-parameters
+[6]: https://app.datadoghq.com/incidents/settings#Rules

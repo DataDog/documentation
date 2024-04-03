@@ -22,7 +22,7 @@ title: ログの量とサイズの制御
 
 ## ログ量を管理するために変換を使用する
 
-観測可能性パイプラインでは、変換はイベントを変更するアクションを実行します。イベントは、パイプラインを流れるログ、メトリクス、またはトレースです。
+観測可能性パイプラインでは、変換はイベントを変更するアクションを実行します。イベントは、パイプラインを流れるログです。
 
 ### イベントの重複排除
 
@@ -80,9 +80,9 @@ inputs = [ "my-source-or-transform-id" ]
 - `env` のような特定のタグ。
 - 特定のフィールドの値、例えば `status` フィールドは `400` でなければなりません。
 
-そのような場合は、[Vector Remap Language (VRL)][5] または [Datadog Log Search 構文][6]を使用して条件を設定するログをフィルタリングするための[フィルター変換][4]を含むコンポーネントを挿入してください。条件に一致しないログはドロップされます。
+そのような場合は、[Datadog Processing Language (DPL) / Vector Remap Language (VRL)][5] または [Datadog Log Search 構文][6]を使用して条件を設定するログをフィルタリングするための[フィルター変換][4]を含むコンポーネントを挿入してください。条件に一致しないログはドロップされます。
 
-以下の例では、フィルター変換と Vector Remap Language を使って、`status` が `500` のログのみを送信しています。
+以下の例では、フィルター変換と DPL/VRL を使って、`status` が `500` のログのみを送信しています。
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -138,7 +138,7 @@ inputs = [ "my-source-or-transform-id" ]
 
 CDN のログなど、大量に送られてくるデータやノイズを多く含むデータを分析する場合、すべてのログを送信先に送ることは不要です。代わりに、[サンプル変換][7]を使って、統計的に有意な分析を行うために必要なログのみを送信します。
 
-`exclude` フィールドは、サンプリングするイベントを除外し、VRL や Datadog Log Search 構文もサポートします。以下の例では、`rate` で設定された 10 イベントごとにサンプリングする構成を示しています。
+`exclude` フィールドは、サンプリングするイベントを除外し、DPL/VRL や Datadog Log Search 構文もサポートします。以下の例では、`rate` で設定された 10 イベントごとにサンプリングする構成を示しています。
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -439,7 +439,7 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 
 ログには不要なフィールドが含まれることがあります。1 日に何テラバイトものデータを処理する場合、不要なフィールドを削除することで、取り込みとインデックス作成を行うログの総数を大幅に削減することができます。
 
-不要なフィールドを削除するには、[Vector Remap Language][5] を使ってログデータをリマップします。次の例では、`del` を使って不要なタグを削除しています。
+不要なフィールドを削除するには、[DPL/VRL][5] を使ってログデータをリマップします。次の例では、`del` を使って不要なタグを削除しています。
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -493,11 +493,11 @@ del(.unecessary_tag_field)"""
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/observability_pipelines/installation/
+[1]: /ja/observability_pipelines/setup/
 [2]: /ja/observability_pipelines/configurations/
 [3]: /ja/observability_pipelines/reference/transforms/#dedupe
 [4]: /ja/observability_pipelines/reference/transforms/#filter
-[5]: https://vector.dev/docs/reference/vrl/
+[5]: /ja/observability_pipelines/reference/processing_language/
 [6]: /ja/logs/explorer/search_syntax/
 [7]: /ja/observability_pipelines/reference/transforms/#sample
 [8]: /ja/observability_pipelines/reference/transforms/#logtometric

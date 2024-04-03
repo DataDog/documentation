@@ -48,7 +48,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mongo
-oauth: {}
 public_title: MongoDB
 short_description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
 supported_os:
