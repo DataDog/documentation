@@ -21950,6 +21950,7 @@ components:
             If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
+          nullable: true
           type: array
       type: object
     TimeseriesResponseSeriesList:
@@ -30546,8 +30547,8 @@ paths:
         type: unsafe
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
-      description: List tags and aggregations that are actively queried on dashboards
-        and monitors for a given metric name.
+      description: List tags and aggregations that are actively queried on dashboards,
+        notebooks, monitors, and the Metrics Explorer for a given metric name.
       operationId: ListActiveMetricConfigurations
       parameters:
       - $ref: '#/components/parameters/MetricName'
