@@ -132,7 +132,8 @@ In order to use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
 
 ```swift
 let logsConfiguration = Logs.Configuration(
-  eventMapper: {
+  eventMapper: { log in
+      var log = log
       log.error?.fingerprint = "my-custom-grouping-material"
       return log
   }
