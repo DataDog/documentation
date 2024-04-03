@@ -66,7 +66,8 @@ The map in the `arguments` field uses an argument's name as its key, and the val
 * To set a value for the whole repository, you can specify it as a string.
 * To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree. 
 
-Thus the full structure of the static-analysis.datadog.yml is as follows:
+The full structure of the `static-analysis.datadog.yml` file is as follows:
+
 ```yaml
 rulesets:
   - ruleset-name
