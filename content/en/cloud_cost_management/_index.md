@@ -17,6 +17,9 @@ further_reading:
   - link: "/cloud_cost_management/tag_pipelines"
     tag: "Documentation"
     text: "Standardize tags across Cloud Cost with Tag Pipelines"
+  - link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
+    tag: "blog"
+    text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
