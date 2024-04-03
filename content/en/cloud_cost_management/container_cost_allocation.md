@@ -34,7 +34,7 @@ CCM displays costs for resources including CPU, memory, and more depending on th
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-CCM allocates costs of all AWS EC2 instances across your container orchestration environments, including Kubernetes clusters and AWS-specific ECS clusters.
+CCM allocates costs of AWS ECS clusters as well as all Kubernetes clusters, including those managed through Elastic Kubernetes Service (EKS).
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
@@ -75,7 +75,7 @@ The following table presents the list of collected features and the minimal Agen
 {{% /tab %}}
 {{% tab "Google" %}}
 
-CCM allocates costs of Google Kubernetes Engine instances to your Google Cloud clusters.
+CCM allocates costs of all Kubernetes clusters, including those managed through Google Kubernetes Engine (GKE).
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
