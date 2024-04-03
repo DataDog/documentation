@@ -156,8 +156,7 @@ In this moment, not all the setups are supported. To be able to make the correla
 If you are using [argo cd image updater][14], this command does not work since it relies on making the changes on
 the configuration repository using `git commit`.
 
-If you are using a similar setup as the one described above, then the correlation can be done by calling
-`datadog-ci deployment correlate` ([command syntax][15]) just before pushing the changes to the configuration repository:
+If your setup is similar to the one described above, run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][15] for additional details:
 
 ```yaml
 - job: JobToUpdateConfigurationRepository
@@ -170,7 +169,7 @@ If you are using a similar setup as the one described above, then the correlatio
     git push
 ```
 
-Note: the code snippet above is just an example. You should adapt it to your CI provider syntax.
+**Note**: the code snippet above is an example. Adapt it to your CI provider syntax as necessary.
 
 
 ## Visualize deployments in Datadog
