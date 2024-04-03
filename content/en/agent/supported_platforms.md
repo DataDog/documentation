@@ -82,7 +82,7 @@ The Datadog Agent is supported on a range of widely used operating systems and p
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
-    <th rowspan='2'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th rowspan='3'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
     <td>5.0</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -91,6 +91,12 @@ The Datadog Agent is supported on a range of widely used operating systems and p
   <tr>
     <td>>= 6.0</td>
     <td><i class='icon-check-bold'></td>
+    <td><= 6.51.1</td>
+    <td><= 7.51.1</td>
+  </tr>
+  <tr>
+    <td>>= 7.0</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
