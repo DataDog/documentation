@@ -108,10 +108,6 @@ logger.e("My error message", error, attributes)
 ```
 {{% /tab %}}
 
-{{% tab "React Native" %}}
-TODO:
-{{% /tab %}}
-
 {{% tab "Flutter" %}}
 In order to use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
 
@@ -162,10 +158,6 @@ val logsConfiguration = LogsConfiguration.Builder()
     .build()
 Logs.enable(logsConfiguration)
 ```
-{{% /tab %}}
-
-{{% tab "React Native" %}}
-TODO:
 {{% /tab %}}
 
 {{% tab "Flutter" %}}
@@ -287,10 +279,6 @@ val rumConfiguration = RumConfiguration.Builder("rum-application-id")
 RUM.enable(rumConfiguration)
 ```
 
-{{% /tab %}}
-
-{{% tab "React Native" %}}
-TODO:
 {{% /tab %}}
 
 {{% tab "Flutter" %}}
