@@ -812,7 +812,7 @@ Universal Service Monitoring is available in <strong>beta</strong> to monitor HT
 </div>
 
 **Note**:
-* Requires Agent version 7.51 or greater.
+* Requires Agent version 7.54 or greater.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
