@@ -11,8 +11,8 @@ Oftentimes, organizations need to send their logs to multiple products for diffe
 Select your log source to get started:
 
 - [Datadog Agent][1]
-- [Splunk HEC][2]
-- [Splunk TCP][3]
+- [Splunk HTTP Event Collector][2]
+- [Splunk Heavy and Universal Forwarders][3]
 - [Sumo Logic][4]
 
 [1]: \observability_pipelines\split_logs\datadog_agent

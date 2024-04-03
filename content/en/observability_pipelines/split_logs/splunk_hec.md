@@ -1,17 +1,14 @@
 ---
-title: Dual Ship Logs from Splunk HTTP Event Collector (HEC)
+title: Split Logs from Splunk HTTP Event Collector (HEC)
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure your Splunk HTTP Event Collectors (HEC) and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications, including Splunk.
+Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker and then to different destinations based on your use case. See [Split logs from Splunk Heavy and Universal Forwarders][1] if you want to use Splunk Heavy or Universal Forwarders.
 
-See [Dual Ship Logs from Splunk TCP][1] if you want to ingest logs from Splunk Heavy or Splunk Universal Forwarders.
-
-This document walks you through the following steps to set up dual shipping:
-
+This document walks you through the following setup steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Connecting your log sources to the Observability Pipelines Worker](#connect-your-log-sources-to-the-observability-pipelines-worker)
@@ -22,8 +19,8 @@ This document walks you through the following steps to set up dual shipping:
 
 ## Set up Observability Pipelines
 
-1. Navigate to [Observability Pipelines][1].
-1. Select the **Dual Ship Logs** use case to create a new pipeline.
+1. Navigate to [Observability Pipelines][2].
+1. Select the **Split Logs** use case to create a new pipeline.
 1. Select **Splunk HEC** as the source.
 
 ### Set up the source
@@ -159,5 +156,5 @@ This document walks you through the following steps to set up dual shipping:
 
 TKTK
 
-[1]: /dual_ship_logs/splunk_tcp/
+[1]: /split_logs/splunk_tcp/
 [2]: https://app.datadoghq.com/observability-pipelines

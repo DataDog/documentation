@@ -16,8 +16,8 @@ As your infrastructure and applications grow, so does your log volume and the co
 
 Select a log source to get started:
 
-- [Splunk HEC][1]
-- [Splunk TCP][2]
+- [Splunk HTTP Event Collector][1]
+- [Splunk Heavy and Universal Forwarders][2]
 - [Sumo Logic][3]
 
 [1]: \observability_pipelines\log_volume_control\splunk_hec

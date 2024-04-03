@@ -15,8 +15,8 @@ Use Observability Pipelines to route ingested logs to an archive or a bucket in 
 Select a source to get started:
 
 - [Datadog Agent][1]
-- [Splunk HEC][2]
-- [Splunk TCP][3]
+- [Splunk HTTP Event Collector][2]
+- [Splunk Heavy and Universal Forwarders][3]
 - [Sumo Logic][4]
 
 [1]: \observability_pipelines\archive_logs\datadog_agent
