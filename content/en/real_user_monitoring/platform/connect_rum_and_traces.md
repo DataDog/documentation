@@ -162,7 +162,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM iOS Monitoring][1].
 
-2. Enable `RUM` with `urlSessionTracking` option and `firstPartyHostsTracing` parameter:
+2. Enable `RUM` with the `urlSessionTracking` option and `firstPartyHostsTracing` parameter:
     ```swift
     RUM.enable(
         with: RUM.Configuration(
