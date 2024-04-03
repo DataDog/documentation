@@ -29,15 +29,15 @@ algolia:
 The [OpenTelemetry Demo][1] is a microservices demo application developed by the community to demonstrate OpenTelemetry (OTel)
 instrumentation and its observability capabilities.
 
-It is an e-commerce web page composed by multiple microservices which communicate with each other via HTTP and gRPC, all services
+It is an e-commerce web page composed by multiple microservices communicating with each other through HTTP and gRPC. All services
 are instrumented with OpenTelemetry and producing Traces, Metrics and Logs.
 
-This page will guide you through the steps to deploy the OpenTelemetry Demo and send its data to Datadog.
+This page guides you through the required steps to deploy the OpenTelemetry Demo and send its data to Datadog.
 
 ## Prerequisites
 
-The demo can be deployed using Docker or Kubernetes (with Helm),
-to complete this guide, make sure you have all prerequisites for the chosen deployment option.
+The demo can be deployed using Docker or Kubernetes (with Helm). To complete this guide,
+make sure you have all prerequisites for the chosen option.
 
 ### General
 
@@ -74,8 +74,8 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 
 ### Configuring the OpenTelemetry Collector
 
-In this section you will configure the OpenTelemetry Collector in order to send all the telemetry data produced by the Demo
-to your Datadog account.
+To send all the telemetry data produced by the Demo to your Datadog
+account, you need to configure the OpenTelemetry Collector.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -94,7 +94,7 @@ to your Datadog account.
 
 3. Configure the OpenTelemetry Collector
 
-    By default, the collector in the demo application will merge the configuration from two files:
+    By default, the collector in the demo application merges the configuration from two files:
 
     - `src/otelcollector/otelcol-config.yml`
       - Which contains the default configuration for the collector.
@@ -142,8 +142,8 @@ to your Datadog account.
     Note
 
     When merging YAML values, objects are merged and arrays are replaced.\
-    That's the reason why we have more components specified in the pipelines than we actually have configured.\
-    With the above configuration we do not replace the values configured in the main otelcol-config file.
+    That's the reason why there are more components specified in the pipelines than actually configured.\
+    The above configuration does not replace the values configured in the main otelcol-config file.
     </div>
 
 {{% /tab %}}
@@ -156,7 +156,7 @@ to your Datadog account.
     kubectl create secret generic dd-secrets --from-literal="DD_SITE=<Your API Site>" --from-literal="DD_API_KEY=<Your API Key>"
     ```
 
-2. Add the OpenTelemetry [Helm chart][4] to your repo in order to manage and deploy the OpenTelemetry Demo.
+2. Add the OpenTelemetry [Helm chart][4] to your repo to manage and deploy the OpenTelemetry Demo.
 
     ```shell
     helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
@@ -208,8 +208,8 @@ to your Datadog account.
     Note
 
     When merging YAML values, objects are merged and arrays are replaced.\
-    That's the reason why we have more components specified in the pipelines than we actually have configured.\
-    With the above configuration we do not replace the values configured in the main otelcol-config file.
+    That's the reason why there are more components specified in the pipelines than actually configured.\
+    The above configuration does not replace the values configured in the main otelcol-config file.
     </div>
 
 [4]: https://opentelemetry.io/docs/demo/kubernetes-deployment/
@@ -245,7 +245,7 @@ helm install my-otel-demo open-telemetry/opentelemetry-demo --values my-values-f
 
 ## Navigating the application
 
-The OTel Demo comes with a load generator, but in case you want to check how the Astronomy Shop
+The OTel Demo comes with a load generator. In case you want to check how the Astronomy Shop
 looks like, you can navigate to its Web UI.
 
 {{< tabs >}}
@@ -271,8 +271,8 @@ And then, you can navigate to <http://localhost:8080>.
 
 ## Exploring OpenTelemetry data in Datadog
 
-As soon as the OTel Demo is running, the load generator will simulate traffic in the application, and
-in a couple of seconds you can already start seeing data arriving in Datadog.
+As soon as the OTel Demo is running, the load generator will simulate traffic in the application.
+In a couple of seconds you can already see data arriving in Datadog.
 
 ### Service Catalog
 
