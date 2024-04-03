@@ -47,19 +47,19 @@ You can include the following **global** options in the `static-analysis.datadog
 
 You can include the following **ruleset** options in the `static-analysis.datadog.yml` file:
 
-| Name               | Description                                                                                                          | Required | Default |
-|--------------------|----------------------------------------------------------------------------------------------------------------------|----------|---------|
-| `rules`            | A list of rule configurations for rules belonging to ruleset.                                                        | `false`  |         |
-| `ignore`           | A list of path prefixes and glob patterns to ignore for this specific ruleset. Matching files will not be analyzed.  | `false`  |         |
-| `only`             | A list of path prefixes and glob patterns to analyze for this specific ruleset. Only matching files will be analyzed.| `false`  |         |
+| Name               | Description                                                                                                          | Required |
+|--------------------|----------------------------------------------------------------------------------------------------------------------|----------|
+| `rules`            | A list of rule configurations for rules belonging to ruleset.                                                        | `false`  |
+| `ignore`           | A list of path prefixes and glob patterns to ignore for this specific ruleset. Matching files will not be analyzed.  | `false`  |
+| `only`             | A list of path prefixes and glob patterns to analyze for this specific ruleset. Only matching files will be analyzed.| `false`  |
 
 You can include the following **rule** options in the `static-analysis.datadog.yml` file:
 
-| Name               | Description                                                                                                          | Required | Default |
-|--------------------|----------------------------------------------------------------------------------------------------------------------|----------|---------|
-| `ignore`           | A list of path prefixes and glob patterns to ignore for this specific rule. Matching files will not be analyzed.     | `false`  |         |
-| `only`             | A list of path prefixes and glob patterns to analyze for this specific rule. Only matching files will be analyzed.   | `false`  |         |
-| `arguments`        | A map of values for rules that support customizable arguments.                                                       | `false`  |         |
+| Name               | Description                                                                                                          | Required |
+|--------------------|----------------------------------------------------------------------------------------------------------------------|----------|
+| `ignore`           | A list of path prefixes and glob patterns to ignore for this specific rule. Matching files will not be analyzed.     | `false`  |
+| `only`             | A list of path prefixes and glob patterns to analyze for this specific rule. Only matching files will be analyzed.   | `false`  |
+| `arguments`        | A map of values for rules that support customizable arguments.                                                       | `false`  |
 
 The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
 
