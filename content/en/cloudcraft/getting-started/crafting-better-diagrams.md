@@ -64,5 +64,10 @@ Say you want to create a diagram showing only EC2 instances and RDS databases wi
 
 Click **Apply layout** to create a diagram showing only the selected resources without the `Environment` tag.
 
+<hr>
+
+Cloudcraft's new live experience is part of an ongoing effort to improve the user experience and make cloud infrastructure diagramming more efficient and effective. We're excited to see how you use these new features and to [hear your feedback][3].
+
 [1]: https://docs.datadoghq.com/cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
 [2]: https://docs.datadoghq.com/cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
+[3]: https://docs.google.com/forms/d/e/1FAIpQLSemnd5CJgrS9o-5ZCoZSxi99ATqIg9jpgqtcUZpMBzPJO75Wg/viewform
