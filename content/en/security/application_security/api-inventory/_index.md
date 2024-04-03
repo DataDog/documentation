@@ -113,6 +113,8 @@ This risk is determined by [Software Composition Analysis][3] for the service ho
 
 By default, API Security Inventory evaluates every tenth request (10% sample rate).
 
+## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
