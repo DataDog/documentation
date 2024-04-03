@@ -306,34 +306,8 @@ For example, say you have the tag `team` on a storage bucket, a cloud provider m
 
 Datadog consolidates and applies the following tags from various sources to cost metrics. 
 
-### Orchestration
-
-Datadog adds an `orchestrator` tag to all resources associated with your cluster.
-
 {{< tabs >}}
 {{% tab "AWS" %}}
-
-| Out-of-the-box tag                         | Description                                                                                                                                                   |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
-| `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
-| `orchestrator:ecs`                         | The orchestration platform associated with the item is AWS ECS.                                                                                               |
-
-{{% /tab %}}
-{{% tab "Azure" %}}
-
-| Out-of-the-box tag                         | Description                                                                                                                                                   |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
-| `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
-
-{{% /tab %}}
-{{% tab "Google" %}}
-
-| Out-of-the-box tag                         | Description                                                                                                                                                   |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
-| `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Kubernetes
 
@@ -341,6 +315,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 
 | Out-of-the-box tag  |  Description |
 | ---                 | ------------ |
+| `orchestrator:kubernetes` | The orchestration platform associated with the item is Kubernetes. |
 | `kube_cluster_name` | The name of the Kubernetes cluster. |
 | `kube_namespace` | The namespace where workloads are running. |
 | `kube_deployment` | The name of the Kubernetes Deployment. |
@@ -349,22 +324,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 
 Conflicts are resolved by favoring higher-specificity tags such as pod tags over lower-specificity tags such as host tags. For example, a Kubernetes pod tagged `service:datadog-agent` running on a node tagged `service:aws-node` results in a final tag `service:datadog-agent`.
 
-{{< tabs >}}
-{{% tab "AWS" %}}
-
-In addition to ECS task tags, the following out-of-the-box tags are applied to cost metrics. 
-
-**Note**: Most tags from ECS containers are applied (excluding `container_name`).
-
-| Out-of-the-box tag      |  Description |
-| ---                     | ------------ |
-| `allocated_resource:data_transfer`      | The tracking and allocation of costs associated with data transfer activities used by AWS services. |
-| `ecs_cluster_name`      | The name of the ECS cluster. |
-| `is_aws_ecs`            | All costs associated with running ECS. |
-| `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
-| `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
-
-### Persistent volume
+#### Persistent volume
 
 In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the-box tags are applied to cost metrics.
 
@@ -375,18 +335,42 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 | `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                    |
 | `ebs_volume_type`                       | The type of the AWS EBS volume. Can be `gp3`, `gp2`, or others.                                                                              |
 
+### Amazon ECS
+
+In addition to ECS task tags, the following out-of-the-box tags are applied to cost metrics. 
+
+**Note**: Most tags from ECS containers are applied (excluding `container_name`).
+
+| Out-of-the-box tag      |  Description |
+| ---                     | ------------ |
+| `orchestrator:ecs`      | The orchestration platform associated with the item is AWS ECS. |
+| `ecs_cluster_name`      | The name of the ECS cluster. |
+| `is_aws_ecs`            | All costs associated with running ECS. |
+| `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
+| `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
+
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-| Out-of-the-box tag  |  Description |
-| ---                 | ------------ |
-| `allocated_resource:local_storage` | The tracking and allocation of costs at a host level associated with local storage resources used by Azure services or workloads. |
+### Kubernetes
+
+In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
+
+| Out-of-the-box tag                         | Description                                                                                                                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
+| `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
+| `allocated_resource:local_storage`         | The tracking and allocation of costs at a host level associated with local storage resources used by Azure services or workloads.                             |
 
 {{% /tab %}}
 {{% tab "Google" %}}
 
-| Out-of-the-box tag  |  Description |
-| ---                 | ------------ |
+### Kubernetes
+
+In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
+
+| Out-of-the-box tag                         | Description                                                                                                                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
+| `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
 | `allocated_spend_type:not_monitored` | The tracking and allocation of [Agentless Kubernetes costs](#agentless-kubernetes-costs) associated with resources used by Google Cloud services or workloads, and the Datadog Agent is not monitoring those resources. |
 | `allocated_resource:gpu` | The tracking and allocation of costs at a host level associated with GPU resources used by Google Cloud services or workloads. |
 | `allocated_resource:local_storage` | The tracking and allocation of costs at a host level associated with local storage resources used by Google Cloud services or workloads. |
