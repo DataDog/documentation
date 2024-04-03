@@ -1,25 +1,19 @@
 ---
-title: Sending data from OpenTelemetry Demo to Datadog
+title: Sending Data from the OpenTelemetry Demo to Datadog
 kind: Documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
-  tag: "Blog"
-  text: "Datadog's partnership with OpenTelemetry"
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
-  tag: "Blog"
-  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter
-- link: "https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/"
-  tag: "Blog"
-  text: "Forward logs from the OpenTelemetry Collector with the Datadog Exporter"
-- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
-  tag: "Blog"
-  text: "OTLP ingestion in the Agent"
-- link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
-  tag: "Blog"
-  text: "Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications"
-- link: "https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/"
-  tag: "Blog"
-  text: "Monitor runtime metrics from OTel-instrumented apps with Datadog APM"
+- link: "/service_catalog/"
+  tag: "Documentation"
+  text: "Service Catalog"
+- link: "/tracing/trace_explorer/"
+  tag: "Documentation"
+  text: "Trace Explorer"
+- link: "/tracing/trace_explorer/trace_queries/"
+  tag: "Documentation"
+  link: "Trace Queries"
+- link: "/error_tracking/"
+  tag: "Documentation"
+  link: "Error Tracking"
 algolia:
   tags: ['opentelemetry', 'open telemetry', 'otel', 'opentelemetry demo']
 ---
