@@ -125,7 +125,7 @@ rulesets:
           - "src/main/util/process.py"
           - "src/main/util/datetime.py"
         arguments:
-          # Set the max-function-lines rule's threshold to 150 lines.
+          # Set the max-function-lines rule's threshold to 150 lines
           max-lines: 150
       max-class-lines:
         arguments:
