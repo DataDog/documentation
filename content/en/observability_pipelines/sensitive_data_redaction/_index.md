@@ -12,10 +12,10 @@ Select a log source to get started:
 
 - [Datadog Agent][1]
 - [Splunk HTTP Event Collector][2]
-- [Splunk Heavy and Universal Forwarders][3]
+- [Splunk Heavy and Universal Forwarders (TCP)][3]
 - [Sumo Logic][4]
 
-[1]: \observability_pipelines\sesntive_data_redaction\datadog_agent
-[2]: \observability_pipelines\sesntive_data_redaction\splunk_hec
-[3]: \observability_pipelines\sesntive_data_redaction\splunk_tcp
-[4]: \observability_pipelines\sesntive_data_redaction\sumo_logic
+[1]: /observability_pipelines/sensitive_data_redaction/datadog_agent
+[2]: /observability_pipelines/sensitive_data_redaction/splunk_hec
+[3]: /observability_pipelines/sensitive_data_redaction/splunk_tcp
+[4]: /observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector

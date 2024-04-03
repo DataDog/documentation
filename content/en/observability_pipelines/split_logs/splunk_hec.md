@@ -1,5 +1,5 @@
 ---
-title: Split Logs from Splunk HTTP Event Collector (HEC)
+title: Split Logs for Splunk HTTP Event Collector (HEC)
 kind: document
 disable_toc: false
 ---
@@ -11,7 +11,7 @@ Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observabil
 This document walks you through the following setup steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Connecting your log sources to the Observability Pipelines Worker](#connect-your-log-sources-to-the-observability-pipelines-worker)
+1. [Routing your logs to the Observability Pipelines Worker](#route-your-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -152,7 +152,7 @@ This document walks you through the following setup steps:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect your log sources to the Observability Pipelines Worker
+## Route your logs to the Observability Pipelines Worker
 
 TKTK
 

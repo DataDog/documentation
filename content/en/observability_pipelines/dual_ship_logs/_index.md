@@ -12,10 +12,10 @@ Select a source to get started:
 
 - [Datadog Agent][1]
 - [Splunk HTTP Event Collector][2]
-- [Splunk Heavy and Universal Forwarders][3]
+- [Splunk Heavy and Universal Forwarders (TCP)][3]
 - [Sumo Logic][4]
 
 [1]: /observability_pipelines/dual_ship_logs/datadog_agent
 [2]: /observability_pipelines/dual_ship_logs/splunk_hec
 [3]: /observability_pipelines/dual_ship_logs/splunk_tcp
-[4]: /observability_pipelines/dual_ship_logs/sumo_logic
+[4]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
