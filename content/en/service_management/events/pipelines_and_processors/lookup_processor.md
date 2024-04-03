@@ -4,7 +4,7 @@ kind: Documentation
 
 ---
 
-Use the lookup processor to define a mapping between a event attribute and a human readable value saved in a [Reference Table][1] or the processors mapping table.
+Use the lookup processor to define a mapping between an event attribute and a human readable value saved in a [Reference Table][1] or the processors mapping table.
 
 For example, you can use the lookup processor to enrich your events with information from your CMDB. Alternatively, you can use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 

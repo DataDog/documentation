@@ -4,7 +4,7 @@ kind: Documentation
 
 ---
 
-Use the string builder processor to add a new attribute (without spaces or special characters) to a event with the result of the provided template. This enables aggregation of different attributes or raw strings into a single attribute.
+Use the string builder processor to add a new attribute (without spaces or special characters) to an event with the result of the provided template. This enables aggregation of different attributes or raw strings into a single attribute.
 
 The template is defined by both raw text and blocks with the syntax `%{attribute_path}`.
 

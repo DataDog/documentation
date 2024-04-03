@@ -4,7 +4,7 @@ kind: Documentation
 
 ---
 
-Use the status remapper processor to assign attributes as an official status to your events. For example, add a event severity level to your events with the status remapper.
+Use the status remapper processor to assign attributes as an official status to your events. For example, add an event severity level to your events with the status remapper.
 
 {{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log severity after remapping" style="width:40%;" >}}
 

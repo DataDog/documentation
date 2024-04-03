@@ -5,13 +5,13 @@ kind: Documentation
 ---
 
 
-Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the parsing section below. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
+Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
 
 
 {{< img src="service_management/events/grok-parser.png" alt="Parsing example 1" style="width:80%;">}}
 
 
-Click Parse my events to kickstart a set of three parsing rules for the events flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of events if needed. This feature requires that the corresponding events are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
+Click **Parse My Events** to kickstart a set of three parsing rules for the events flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of events if needed. This feature requires that the corresponding events are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
 
 Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
@@ -20,7 +20,7 @@ Up to five samples can be saved with the processor, and each sample can be up to
 
 ### Grok Syntax
 
-The Grok Parser enables you to extract attributes from semi-structured text messages. Grok comes with reusable patterns to parse integers, IP addresses, hostnames, etc. These values must be sent into the grok parser as strings.
+The Grok Parser extracts attributes from semi-structured text messages. Grok comes with reusable patterns to parse integers, IP addresses, hostnames, and more. These values must be sent into the grok parser as strings.
 
 You can write parsing rules with the `%{MATCHER:EXTRACT:FILTER}` syntax:
 
@@ -205,7 +205,7 @@ At the bottom of your Grok processor tiles, there is an **Advanced Settings** se
 
 Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
 
-For example, consider a event containing a `command.line` attribute that should be parsed as a key-value. You could parse this event as follows:
+For example, consider an event containing a `command.line` attribute that should be parsed as a key-value. You could parse this event as follows:
 
 {{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line" style="width:80%;">}}
 
@@ -629,7 +629,7 @@ Other examples:
 
 ### Use data matcher to discard unneeded text
 
-If you have a event where after you have parsed what is needed and know that the text after that point is safe to discard, you can use the data matcher to do so. For the following event example, you can use the `data` matcher to discard the `%` at the end.
+If you have an event where after you have parsed what is needed and know that the text after that point is safe to discard, you can use the data matcher to do so. For the following event example, you can use the `data` matcher to discard the `%` at the end.
 
 **Event**:
 
