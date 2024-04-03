@@ -298,4 +298,4 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [22]: /tracing/trace_collection/runtime_config/
 [23]: /agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration-at-the-agent-level
 [24]: /organization-settings/api-keys
-[25]: /agent/guide/?site=us
+[25]: /agent/guide/
