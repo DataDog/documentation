@@ -5,7 +5,7 @@ disable_toc: false
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
-  text: "Bits AIgit  Overview"
+  text: "Bits AI Overview"
 - link: "bits_ai/getting_started"
   tag: "Documentation"
   text: "Get Started Using Bits AI"

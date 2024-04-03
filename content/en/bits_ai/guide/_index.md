@@ -10,5 +10,5 @@ cascade:
 ---
 
 {{< whatsnext desc="Querying:" >}}
-    {{< nextlink href="=bits_ai/guide/query_examples" >}}Example Natural Language Queries{{< /nextlink >}}
+    {{< nextlink href="bits_ai/guide/query_examples" >}}Example Natural Language Queries{{< /nextlink >}}
 {{< /whatsnext >}}
