@@ -32,7 +32,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest PHP Tracer supports versions >= 7.X.
+The minimum PHP version requirement for the latest version of `dd-trace-php` is PHP 7. If you are using PHP 5, you can still use the PHP tracer up to version [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 is EOL as of version 1.0 of the PHP library.
 
 For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
