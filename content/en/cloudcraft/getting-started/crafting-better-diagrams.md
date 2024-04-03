@@ -46,11 +46,12 @@ Tags are automatically detected from your AWS account and displayed in the **Cus
 
 - **Custom tags** are tags that you added to resources in AWS or Azure.
 - **AWS tags** are tags that are automatically added to resources by AWS.
+- **Terraform tags** are tags that are automatically added to resources by Terraform.
 - **Kubernetes tags** are tags that are automatically added to resources by Kubernetes.
 
 To filter resources by type, click the **Resource** section and select the resource type you want to filter by. By default, all resource types are selected and displayed in order of the number of resources found.
 
-The same goes for tags. Click the **Custom tags**, **AWS tags**, or **Kubernetes tags** section and select the tags you want to filter by. By default, all tags are selected and displayed in order of the number of resources found, with `Untagged` always at the bottom.
+The same goes for tags. Click the **Custom tags**, **AWS tags**, **Terraform tags**, or **Kubernetes tags** section and select the tags you want to filter by. By default, all tags are selected and displayed in order of the number of resources found, with `Untagged` always at the bottom.
 
 Say you want to create a diagram showing only EC2 instances and RDS databases. Click the **Resource** section, deselect all resource types, and select only `EC2` and `RDS`.
 
