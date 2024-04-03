@@ -340,7 +340,7 @@ It is valuable to track top endpoints that are consuming valuable resources such
 
 The following image shows that `GET /store_history` is periodically impacting this service by consuming 20% of its CPU and 50% of its allocated memory:
 
-{{< img src="profiler/endpoint_metric.png" alt="Graphing top endpoints in terms of resource consumption" >}}
+{{< img src="profiler/apm_endpoint_metric.png" alt="Graphing top endpoints in terms of resource consumption" >}}
 
 ### Track average resource consumption per request
 
