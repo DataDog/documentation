@@ -212,9 +212,9 @@ If runtime metrics are enabled in the tracing client, you'll see a Runtime metri
 ### Profiling
 You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service.
 
-Use Profiling tab to correlate a latency/throughput change to a code performance change.
+Use the information in the **Profiling** tab to correlate a latency and throughput change to a code performance change.
 
-In this example, you can see how latency is linked to a lock contention increase on `/GET train` caused by the following line of code
+In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
 
 ```java
 Thread.sleep(DELAY_BY.minus(elapsed).toMillis());

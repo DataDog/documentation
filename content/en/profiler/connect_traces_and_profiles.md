@@ -324,9 +324,9 @@ With endpoint profiling you can:
 
 ### Surface code that impacted your production latency
 
-In APM Service page, use `Profiling` tab to correlate a latency/throughput change to a code performance change.
+In the APM Service page, use the information in the **Profiling** tab to correlate a latency or throughput change to a code performance change.
 
-In this example, you can see how latency is linked to a lock contention increase on `/GET train` caused by the following line of code
+In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
 
 ```java
 Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
