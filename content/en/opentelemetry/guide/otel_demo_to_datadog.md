@@ -21,39 +21,33 @@ algolia:
 ## Overview
 
 The [OpenTelemetry Demo][1] is a microservices demo application developed by the community to demonstrate OpenTelemetry (OTel)
-instrumentation and its observability capabilities.
+instrumentation and its observability capabilities. It is an e-commerce web page composed by multiple microservices communicating with each other through HTTP and gRPC. All services are instrumented with OpenTelemetry and produce traces, metrics, and logs.
 
-It is an e-commerce web page composed by multiple microservices communicating with each other through HTTP and gRPC. All services
-are instrumented with OpenTelemetry and producing Traces, Metrics and Logs.
-
-This page guides you through the required steps to deploy the OpenTelemetry Demo and send its data to Datadog.
+This page guides you through the steps required to deploy the OpenTelemetry Demo and send its data to Datadog.
 
 ## Prerequisites
 
-The demo can be deployed using Docker or Kubernetes (with Helm). To complete this guide,
-make sure you have all prerequisites for the chosen option.
+To complete this guide, ensure you have the following:
 
-### General
+1. [Create a Datadog account][2] if you haven't yet.
+2. Find or create your [Datadog API key][3].
+3. 6 GB of free RAM for the application.
 
-1. 6 GB of free RAM for the application.
-2. [Create a Datadog account][2] if you haven't yet.
-3. Find or create your [Datadog API key][3].
-
-### Deployment choice
+You can deploy the demo using Docker or Kubernetes (with Helm). Choose your preferred deployment method and make sure you have the necessary tools installed:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-4. Docker
-5. Docker Compose v2.0.0+
-6. Make (optional)
+- Docker
+- Docker Compose v2.0.0+
+- Make (optional)
 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
-4. Kubernetes 1.24+
-5. Helm 3.9+
+- Kubernetes 1.24+
+- Helm 3.9+
 
 {{% /tab %}}
 {{< /tabs >}}
