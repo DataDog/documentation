@@ -115,7 +115,6 @@ to your Datadog account.
           key: ${DD_API_KEY}
 
     processors:
-      cumulativetodelta:
       resource:
         attributes:
           - key: deployment.environment   # Set env tag for Datadog
@@ -132,7 +131,7 @@ to your Datadog account.
           exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
         metrics:
           receivers: [httpcheck/frontendproxy, otlp, spanmetrics, datadog/connector]
-          processors: [batch, resource, cumulativetodelta]
+          processors: [batch, resource]
           exporters: [otlphttp/prometheus, debug, datadog]
         logs:
           processors: [batch, resource]
@@ -182,7 +181,6 @@ to your Datadog account.
               key: ${env:DD_API_KEY}
 
         processors:
-          cumulativetodelta:
           resource:
             attributes:
               - key: deployment.environment   # Set env tag for Datadog
@@ -199,7 +197,7 @@ to your Datadog account.
               exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
             metrics:
               receivers: [otlp, spanmetrics, datadog/connector]
-              processors: [batch, resource, cumulativetodelta]
+              processors: [batch, resource]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:
               processors: [batch, resource]
