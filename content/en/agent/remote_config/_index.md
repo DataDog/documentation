@@ -180,7 +180,7 @@ After the Agent configuration is updated in the [`datadog.yaml`][16] file, resta
 
 ### Ensure Datadog Remote Configuration endpoints are reachable from your environment	
 
-To use Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Configuration [endpoints][17]. Ensure that outbound HTTPS has access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your [proxy settings][18] to incorporate Remote Configuration endpoints.
+To use Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Configuration [endpoints][17]. You can also connect to Remote Configuration [Virtual Private Cloud endpoints][25]. Ensure that outbound HTTPS has access to Remote Configuration endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your [proxy settings][18] to incorporate Remote Configuration endpoints.
 
 ### Enable Remote Configuration at the organization level
 
@@ -298,3 +298,4 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [22]: /tracing/trace_collection/runtime_config/
 [23]: /agent/remote_config/?tab=configurationyamlfile#opting-out-of-remote-configuration-at-the-agent-level
 [24]: /organization-settings/api-keys
+[25]: /agent/guide/?site=us
