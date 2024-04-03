@@ -52,9 +52,11 @@ You can deploy the demo using Docker or Kubernetes (with Helm). Choose your pref
 {{% /tab %}}
 {{< /tabs >}}
 
-## Steps
+## Configuring and deploying the demo
 
 ### Cloning the repository
+
+Clone the `opentelemetry-demo` repository to your device:
 
 ```shell
 git clone https://github.com/open-telemetry/opentelemetry-demo.git
@@ -62,34 +64,24 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 
 ### Configuring the OpenTelemetry Collector
 
-To send all the telemetry data produced by the Demo to your Datadog
-account, you need to configure the OpenTelemetry Collector.
+Configure the OpenTelemetry Collector to send the demo's telemetry data to Datadog:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-1. Export your Datadog API site to an environment variable
+1. Export your [Datadog site][7] to an environment variable:
 
     ```shell
     export DD_SITE=<Your API Site>
     ```
 
-2. Export your Datadog API key to an environment variable
+2. Export your [Datadog API key][8] to an environment variable:
 
     ```shell
     export DD_API_KEY=<Your API Key>
     ```
 
-3. Configure the OpenTelemetry Collector
-
-    By default, the collector in the demo application merges the configuration from two files:
-
-    - `src/otelcollector/otelcol-config.yml`
-      - Which contains the default configuration for the collector.
-    - `src/otelcollector/otelcol-config-extras.yml`
-      - Which can be used to add extra configuration to the collector.
-
-    Open `src/otelcollector/otelcol-config-extras.yml` in an IDE or a text editor of your choice and add the following to the file:
+3. To configure the OpenTelemetry Collector, open `src/otelcollector/otelcol-config-extras.yml` in an IDE or a text editor of your choice and add the following to the file:
 
     ```yaml
     exporters:
@@ -125,26 +117,33 @@ account, you need to configure the OpenTelemetry Collector.
           processors: [batch, resource]
           exporters: [opensearch, debug, datadog]
     ```
+     By default, the collector in the demo application merges the configuration from two files:
+
+    - `src/otelcollector/otelcol-config.yml`
+      - Which contains the default configuration for the collector.
+    - `src/otelcollector/otelcol-config-extras.yml`
+      - Which can be used to add extra configuration to the collector.
 
     <div class="alert alert-info">
-    Note
-
-    When merging YAML values, objects are merged and arrays are replaced.\
-    That's the reason why there are more components specified in the pipelines than actually configured.\
-    The above configuration does not replace the values configured in the main otelcol-config file.
+    When merging YAML values, objects are merged and arrays are replaced.
+    That's why there are more components specified in the pipelines than actually configured.
+    The previous configuration does not replace the values configured in the main <code>otelcol-config</code> file.
     </div>
+
+[7]: /getting_started/site/
+[8]: https://app.datadoghq.com/organization-settings/api-keys/
 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
-1. Create a secret named `dd-secrets` to store Datadog Site and API Key secrets.
+1. Create a secret named `dd-secrets` to store Datadog Site and API Key secrets:
 
     ```shell
     kubectl create secret generic dd-secrets --from-literal="DD_SITE=<Your API Site>" --from-literal="DD_API_KEY=<Your API Key>"
     ```
 
-2. Add the OpenTelemetry [Helm chart][4] to your repo to manage and deploy the OpenTelemetry Demo.
+2. Add the OpenTelemetry [Helm chart][4] to your repo to manage and deploy the OpenTelemetry Demo:
 
     ```shell
     helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
@@ -193,11 +192,9 @@ account, you need to configure the OpenTelemetry Collector.
     ```
 
     <div class="alert alert-info">
-    Note
-
-    When merging YAML values, objects are merged and arrays are replaced.\
-    That's the reason why there are more components specified in the pipelines than actually configured.\
-    The above configuration does not replace the values configured in the main otelcol-config file.
+    When merging YAML values, objects are merged and arrays are replaced.
+    That's why there are more components specified in the pipelines than actually configured.
+    The previous configuration does not replace the values configured in the main <code>otelcol-config</code> file.
     </div>
 
 [4]: https://opentelemetry.io/docs/demo/kubernetes-deployment/
@@ -205,16 +202,18 @@ account, you need to configure the OpenTelemetry Collector.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Run the Demo
+### Run the demo
 
 {{< tabs >}}
 {{% tab "Docker" %}}
+
+If you have make installed, you can use the following command to start the demo:
 
 ```shell
 make start
 ```
 
-Or, if you don't have `make` installed, you can use the following:
+If you don't have `make` installed, you can use the the `docker compose` command directly:
 
 ```shell
 docker compose up --force-recreate --remove-orphans --detach
@@ -223,6 +222,8 @@ docker compose up --force-recreate --remove-orphans --detach
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
+
+To deploy the demo application on Kubernetes using Helm, run the following command:
 
 ```shell
 helm install my-otel-demo open-telemetry/opentelemetry-demo --values my-values-file.yml
@@ -233,8 +234,7 @@ helm install my-otel-demo open-telemetry/opentelemetry-demo --values my-values-f
 
 ## Navigating the application
 
-The OTel Demo comes with a load generator. In case you want to check how the Astronomy Shop
-looks like, you can navigate to its Web UI.
+The OTel Demo comes with a load generator. In case you want to check how the Astronomy Shop looks like, you can navigate to its Web UI.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
