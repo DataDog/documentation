@@ -92,6 +92,35 @@ Compromised and Targeted users can be reviewed and blocked within Signals.
 
 # Best practices for Signal Review and Protection
 
+## Have an Incident Response Plan
+
+### What is your customer authentication profile
+
+What networks do your customers authenticate from?
+1. Mobile ISPs
+2. Corporate VPNs
+3. Residential IPs
+4. Data centers
+
+Understanding typical networks can inform your blocking strategy. For example, if you have a consumer application it is unexpected for customers to authenticate from data centers, you may have more leeway to block the IP addresses associated with that data center. However if your customers source entirely from Mobile ISPs, you may have significant impacts to legitimate traffic if you block those ISPs.
+
+Who are your customers and what is their account name structure
+1. Employees with an expected ID format such as integers, corporate domains, or combinations if numbers and text
+2. SaaS customers, using domain names associated with the customer company
+3. Consumers using free providers such as gMail, hotmail, or protonmail
+
+Understanding your customers account name structure helps understand if attacks are targeted or blind attempts at credential stuffing.
+
+
+### Distributed Attacks
+Blocking advanced, distributed attacks is often business decision as the attack affects availability, may affect user funds, and may impact legitimate users. There are three critical components for success in these attacks
+1. Proper onboarding: Are you configured for blocking with ASM.
+2. Proper configuration: ensure that you have correctly set Client IPs and XFF headers
+3. Internal communication plans: Communication with security teams, services owners, and product leads is critical to understanding the impact of mitigating large scale attacks.
+
+Note: Responders can identify services owners via the tags in all ASM Signals.
+
+
 ## Signal Review
 
 ### Attackers
@@ -150,13 +179,7 @@ Review the managed ruleset and determine which rules fit your internal policies 
 { insert rules }
 * Pin Reset
 
-### Distributed Attacks
-Blocking advanced, distributed attacks is often business decision as the attack affects availability, may affect user funds, and may impact legitimate users. There are three critical components for success in these attacks
-1. Proper onboarding: Are you configured for blocking with ASM.
-2. Proper configuration: ensure that you have correctly set Client IPs and XFF headers
-3. Internal communication plans: Communication with security teams, services owners, and product leads is critical to understanding the impact of mitigating large scale attacks.
 
-Note: Responders can identify services owners via the tags in all ASM Signals.
 
 
 ### Users
