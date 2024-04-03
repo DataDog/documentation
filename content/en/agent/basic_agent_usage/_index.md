@@ -47,6 +47,7 @@ GUI requirements:
 - To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
 - For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the host where the Agent is running. You can't run the Agent on a VM or a container and access it from the host machine.
 
+
 ### Command-line interface
 
 From Agent 6 and later, the Agent command-line interface is based on subcommands. For a full list of Agent subcommands, see [Agent Commands][2].
