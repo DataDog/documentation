@@ -12,6 +12,7 @@ assets:
     Crest Dell EMC Isilon - Protocol Details: assets/dashboards/dell_emc_isilon_protocol_details.json
     Crest Dell EMC Isilon - Quota Information: assets/dashboards/dell_emc_isilon_quota_information.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -22,12 +23,13 @@ assets:
       prefix: cds.emc.isilon.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10225
     source_type_name: crest_data_systems_dell_emc_isilon
   logs: {}
   monitors:
-    '[crest_data_systems_dell_emc_isilon] CPU Usage for each Node of Cluster': assets/recommended_monitors/cds_cpu_usage_for_each_node_and_cluster.json
-    '[crest_data_systems_dell_emc_isilon] Disk Usage for each Node of Cluster': assets/recommended_monitors/cds_disk_usage_for_each_node_and_cluster.json
-    '[crest_data_systems_dell_emc_isilon] Memory Usage for each Node of Cluster': assets/recommended_monitors/cds_memory_usage_for_each_node_and_cluster.json
+    '[crest_data_systems_dell_emc_isilon] CPU Usage for each Node of Cluster': assets/monitors/cds_cpu_usage_for_each_node_and_cluster.json
+    '[crest_data_systems_dell_emc_isilon] Disk Usage for each Node of Cluster': assets/monitors/cds_disk_usage_for_each_node_and_cluster.json
+    '[crest_data_systems_dell_emc_isilon] Memory Usage for each Node of Cluster': assets/monitors/cds_memory_usage_for_each_node_and_cluster.json
 author:
   homepage: https://www.crestdatasys.com
   name: Crest Data Systems
@@ -36,7 +38,7 @@ author:
   vendor_id: crest-data-systems
 categories:
 - キャッシュ
-- data store
+- data stores
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -70,12 +72,13 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Caching
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Marketplace
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Dell EMC Isilon クラスターのパフォーマンスと使用量の監視
   media:
@@ -103,6 +106,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## 概要
 
 このインテグレーションは、Dell EMC Isilon クラスターとノードのパフォーマンスと使用量を監視します。重要なメトリクスを取得し、Dell EMC Isilon クラスターの健全性と運用に関する洞察を提供します。このインテグレーションは、各ノードおよびクラスターの CPU、メモリ、およびディスクの使用量を警告するモニターもサポートします。
@@ -116,7 +120,7 @@ tile:
 | クォータ情報   | このダッシュボードでは、クォータ情報を提供します。                                              |
 | モニター概要    | このダッシュボードでは、このインテグレーションでサポートされるモニターの概要を提供します。 |
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
@@ -135,6 +139,7 @@ tile:
 [2]: https://www.crestdatasys.com/data_sheet/datadog-setup-monitor/
 [3]: https://www.crestdatasys.com/
 [4]: https://www.dell.com/support/manuals/en-in/isilon-onefs/ifs_pub_administration_guide_cli/administrative-roles-and-privileges
+[5]: https://www.crestdatasys.com/datadog-integrations-readme/Dell_EMC_Isilon.pdf
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-dell-emc-isilon" target="_blank">こちらをクリック</a>してください。

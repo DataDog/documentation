@@ -34,6 +34,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/"
   tag: "Blog"
   text: "Improve your shift-left observability with the Datadog Service Catalog"
+- link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
+  tag: "Blog"
+  text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
 algolia:
   tags: ['service catalog']
 ---

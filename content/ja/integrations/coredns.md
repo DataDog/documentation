@@ -43,7 +43,7 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 3.2.0
+integration_version: 3.2.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
