@@ -153,7 +153,7 @@ In this moment, not all the setups are supported. To be able to make the correla
 
 {{< img src="ci/cd-argocd-ci-correlation-setup-git.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
-**Note**: Setups using [Argo CD image updater][14] are incompatible at the moment.
+**Note**: does not make changes to the configuration repository with `git commit`, and as such is incompatible with this setup.
 
 If your setup is similar to the one described above, run the `datadog-ci deployment correlate` command before pushing the changes to the configuration repository. See the [command syntax][15] for additional details:
 
