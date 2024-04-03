@@ -407,7 +407,7 @@ RUM supports several propagator types to connect resources with backends that ar
 
 1. Set up RUM to connect with APM as described above.
 
-2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hostsWithHeaders:sampleRate:)` as follows:
+2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hosts:sampleRate:)` as follows:
     ```swift
       RUM.enable(
           with: RUM.Configuration(
