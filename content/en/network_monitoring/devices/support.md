@@ -86,5 +86,4 @@ further_reading:
 | zebra | [zebra-printer.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zebra-printer.yaml) <br> |
 | zyxel | [zyxel-switch.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zyxel-switch.yaml) <br> |
 
-<!-- {{< ndm_support >}} -->
 
