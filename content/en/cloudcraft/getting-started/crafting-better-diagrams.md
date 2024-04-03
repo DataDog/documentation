@@ -5,7 +5,11 @@ kind: documentation
 
 ## Overview
 
-Introduction.
+Cloudcraft is a powerful tool for creating diagrams of your cloud infrastructure. The new live experience makes it easier than ever to create accurate and up-to-date diagrams of your cloud infrastructure.
+
+With the ability to filter resources by type and tags, you can quickly create targeted diagrams that focus on specific components you care about. This not only improves diagram performance and readability but also allows you to craft more meaningful visualizations of your infrastructure.
+
+In this guide, you'll learn how to enable the new live experience and use it to create beautiful and informative diagrams tailored to your needs.
 
 ## Prerequisites
 
