@@ -34,7 +34,7 @@ Remote Configuration is a Datadog capability that allows you to remotely configu
 For Datadog security products, Application Security Management and Cloud Security Management Threats (CSM Threats), Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
-Once you enable Remote Configuration on the Datadog Agent, it periodically polls the configured [Datadog site][1], to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
+When Remote Configuration is enabled on the Datadog Agent, it periodically polls the configured [Datadog site][1], to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
 
 After you submit configuration changes in the respective Datadog product UI for a Remote Configuration-enabled product feature, the changes are stored in Datadog.
 
@@ -119,7 +119,7 @@ To opt-out of Remote Configuration use, see the [opt-out section][23].
    {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
 
 7. Update your Agent configuration file:
-**Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent.
+**Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. To opt-out of Remote Configuration use, see the [opt-out section][23].
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
@@ -221,7 +221,7 @@ The following table describes the meaning of each Tracing library status:
   | UNKNOWN   | The Tracing library status is unknown, and it can't be determined if an Agent is associated with the Tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
 
 ## Opting out of Remote Configuration 
-To opt-out of Remote Configuration use, disable Remote Configuration at the organization level, API key level, and agent level.
+To opt-out of Remote Configuration use, you can simply disable Remote Configuration at the organization level. Optionally, you can also disable Remote Configuration capability at the API key level and agent level.
 
 ### At the Organization level
 Disable Remote Configuration at the organization level on the [Remote Configuration][8] page. This disables Datadog components across your organization to receive configurations from Datadog. You need the [`org_management`][7] permission to disable Remote Configuraiton at the organization level.
