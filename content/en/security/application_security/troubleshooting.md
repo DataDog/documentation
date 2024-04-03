@@ -564,27 +564,30 @@ See the Application Security [set up documentation][11] to validate you you are 
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
-## Disabling threat detection and protection
+## Disabling threat management and protection
 
-To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+To disable threat management, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 
 If no `DD_APPSEC_ENABLED=true` environment variable is set for your service:
 * If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If ASM was activated in one click, do the following: 
-  1. Go to [ASM service configuration][15].
+* If threat management was activated using [Remote Configuration][16], you can use a **Deactivate** button. If threat management was activated using local configuration, the **Deactivate** button is not available.
+* If threat management was activated using [Remote Configuration][16], do the following: 
+  1. Go to [Services][15] (**ASM** > **Catalog** > **Services**).
   2. Select **Threat Management in Monitoring Mode**.
-  3. Click on a service.
-  4. In the service details, in **Threat Detection**, click **Deactivate**.
-* To disable ASM on your services in bulk, do the following: 
-  1. Go to [ASM service configuration][15].
-  2. Select the check boxes for the services where you want to disable threat detection.
-  3. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
+  3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  4. Click on a service.
+  5. In the service details, in **Threat Detection**, click **Deactivate**.
+* To disable threat management on your services in bulk, do the following: 
+  1. Go to [Services][15].
+  2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  3. Select the check boxes for the services where you want to disable threat detection.
+  4. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
 
 ## Disabling Software Composition Analysis
 
 To disable [Software Composition Analysis][14]:
 
-* Go to [ASM service configuration][15], select **Software Composition Analysis (SCA)**, click on your service and then click **Deactivate**.
+* Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
 
 ## Disabling Code Security
@@ -594,7 +597,7 @@ To disable [Software Composition Analysis][14]:
 To disable [Code Security][13] vulnerability detection, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service. 
 
 If no `DD_IAST_ENABLED=true` environment variable is set for your service, do the following:
-  1. Go to [ASM service configuration][15].
+  1. Go to [Services][15].
   2. Select **Code Security**.
   3. Click on a service.
   4. In the service details, in **Vulnerability Detection**, click **Deactivate**.
@@ -625,3 +628,4 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [13]: /security/application_security/code_security/
 [14]: /security/application_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
+[16]: https://app.datadoghq.com/organization-settings/remote-config
