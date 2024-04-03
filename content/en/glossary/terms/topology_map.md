@@ -1,5 +1,5 @@
 ---
-title: hostmap
+title: topology
 core_product:
   - dashboards
 related_terms:

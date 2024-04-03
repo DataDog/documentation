@@ -1,5 +1,5 @@
 ---
-title: standard deviation
+title: flush interval
 core_product:
   - datadog agent
   - metrics

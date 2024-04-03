@@ -6,6 +6,4 @@ core_product:
 related_terms:
   - metric
 ---
-The heatmap widget shows metrics aggregated across multiple tags. 
-
-Use heatmap widgets to visualize OpenTelemetry histograms, distribution metrics, high resolution and data display. For more information, <a href="/dashboards/widgets/geomap/">see the documentation</a>.
+The Geomap widget visualizes geographic data with shaded regions or points. Use this widget to view user sessions by country, filter to see a list of all sessions in a new tab, or monitor performance metrics like load time, core web vitals, and percent of views with errors. For more information, <a href="/dashboards/widgets/geomap/">see the documentation</a>.

@@ -1,5 +1,5 @@
 ---
-title: slo summary
+title: slo list
 core_product:
   - dashboards
 related_terms:
