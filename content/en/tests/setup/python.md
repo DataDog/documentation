@@ -122,28 +122,8 @@ def test_simple_case(ddspan):
 ```
 Read more about custom measures in the [Add Custom Measures Guide][2].
 
-### Known limitations
-
-Plugins for `pytest` that alter test execution may cause unexpected behavior.
-
-#### Parallelization
-
-Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][3] or [`pytest-forked`][4]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
-
-The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
-
-#### Test ordering
-
-Plugins that change the ordering of test execution (such as [`pytest-randomly`][5]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
-
-The overall count of test events (and their correctness) remain unaffected.
-
-
 [1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=python
-[3]: https://pypi.org/project/pytest-xdist/
-[4]: https://pypi.org/project/pytest-forked/
-[5]: https://pypi.org/project/pytest-randomly/
 {{% /tab %}}
 
 {{% tab "pytest-benchmark" %}}
@@ -185,12 +165,6 @@ def test_will_pass(self):
 assert True
 {{< /code-block >}}
 
-#### Known limitations
-
-In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
-
-Datadog recommends you use up to one process at a time to prevent affecting test visibility.
-
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -224,6 +198,45 @@ All other [Datadog Tracer configuration][3] options can also be used.
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
+
+## Known limitations
+
+{{< tabs >}}
+
+{{% tab "pytest" %}}
+
+Plugins for `pytest` that alter test execution may cause unexpected behavior.
+
+#### Parallelization
+
+Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
+
+The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
+
+#### Test ordering
+
+Plugins that change the ordering of test execution (such as [`pytest-randomly`][3]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
+
+The overall count of test events (and their correctness) remain unaffected.
+
+
+[1]: https://pypi.org/project/pytest-xdist/
+[2]: https://pypi.org/project/pytest-forked/
+[3]: https://pypi.org/project/pytest-randomly/
+
+{{% /tab %}}
+
+{{% tab "unittest" %}}
+
+
+In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
+
+Datadog recommends you use up to one process at a time to prevent affecting test visibility.
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 ## Further reading
 
