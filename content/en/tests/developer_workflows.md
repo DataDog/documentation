@@ -1,7 +1,7 @@
 ---
 title: Enhancing Developer Workflows with Datadog 
 kind: documentation
-description: Learn how to use Datadog CI Visibility & other features to accelerate your development process.
+description: Learn how to use Datadog Test Visibility with additional Datadog features to accelerate your development process.
 aliases:
 - /continuous_integration/guides/developer_workflows
 - /continuous_integration/guides/pull_request_comments
@@ -13,7 +13,10 @@ further_reading:
   text: "Monitor your GitHub Actions workflows with Datadog CI Visibility"
 - link: "/integrations/guide/source-code-integration"
   tag: "Documentation"
-  text: "Learn about the source code integration"
+  text: "Learn about the Source Code Integration"
+- link: "/service_management/case_management"
+  tag: "Documentation"
+  text: "Learn about Case Management"
 ---
 
 ## Overview
@@ -27,6 +30,7 @@ further_reading:
 - [Create and open GitHub issues](#create-and-open-github-issues) 
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
 - [Enable test summaries in GitHub Pull Request comments](#test-summaries-in-github-pull-requests)
+- [Create Jira issues](#create-jira-issues)
 
 These features are available for all Test Visibility customers, and they do not require usage of the [Datadog GitHub integration][4].
 
@@ -122,6 +126,38 @@ You can enable test summaries in pull requests with the following steps:
 
 Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled test service.
 
+## Create Jira issues
+
+With Test Visibility, you can create and open pre-filled Jira issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
+
+### In-app entry points
+
+You can create pre-filled Jira issues from three areas within Test Visibility:
+
+- [Commit Overview page (from the **Commits** table)](#commit-overview-1) 
+- [Flaky Tests section](#branch-overview-1)
+- [Test Runs side panel](#test-runs-view)
+
+### Commit Overview
+
+The overview page for any commit can be discovered through a particular branch or from within any particular test. 
+
+{{< img src="continuous_integration/case_failed_test.png" alt="Create a Case Management issue in the Commit Overview page" style="width:100%;">}}
+
+From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Create case**. 
+
+#### Branch Overview
+From this page, click on any row in the **Flaky Tests** table and select **Create case**.
+
+{{< img src="continuous_integration/case_flaky_test.png" alt="Create a Case Management issue in the Flaky Tests list" style="width:100%;">}}
+
+#### Test Runs View
+From within a specific test run, click the **Actions** button and select **Create case**. 
+
+{{< img src="continuous_integration/case_test_runs.png" alt="Create a Case Management issue in the Test Runs side panel" style="width:100%;">}}
+
+For more information, see the [Case Management documentation][7].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -132,3 +168,4 @@ Comments only appear on pull requests that were opened before the test run and t
 [4]: /integrations/github/
 [5]: /continuous_integration/tests/
 [6]: https://app.datadoghq.com/integrations/github
+[7]: /service_management/case_management/settings/#jira
