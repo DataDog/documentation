@@ -359,6 +359,11 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | Out-of-the-box tag                         | Description                                                                                                                                                   |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
 | `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
+| `kube_cluster_name` | The name of the Kubernetes cluster. |
+| `kube_namespace` | The namespace where workloads are running. |
+| `kube_deployment` | The name of the Kubernetes Deployment. |
+| `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
+| `pod_name` | The name of any individual pod. |
 | `allocated_resource:local_storage`         | The tracking and allocation of costs at a host level associated with local storage resources used by Azure services or workloads.                             |
 
 {{% /tab %}}
@@ -371,6 +376,11 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 | Out-of-the-box tag                         | Description                                                                                                                                                   |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
 | `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
+| `kube_cluster_name` | The name of the Kubernetes cluster. |
+| `kube_namespace` | The namespace where workloads are running. |
+| `kube_deployment` | The name of the Kubernetes Deployment. |
+| `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
+| `pod_name` | The name of any individual pod. |
 | `allocated_spend_type:not_monitored` | The tracking and allocation of [Agentless Kubernetes costs](#agentless-kubernetes-costs) associated with resources used by Google Cloud services or workloads, and the Datadog Agent is not monitoring those resources. |
 | `allocated_resource:gpu` | The tracking and allocation of costs at a host level associated with GPU resources used by Google Cloud services or workloads. |
 | `allocated_resource:local_storage` | The tracking and allocation of costs at a host level associated with local storage resources used by Google Cloud services or workloads. |
