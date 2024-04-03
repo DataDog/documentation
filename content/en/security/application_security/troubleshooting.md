@@ -568,15 +568,17 @@ Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRAC
 
 To disable threat management, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 
-If no `DD_APPSEC_ENABLED=true` environment variable is set for your service:
+If no `DD_APPSEC_ENABLED=true` environment variable is set for your service, do one of the following:
 * If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If threat management was activated using [Remote Configuration][16], you can use a **Deactivate** button. If threat management was activated using local configuration, the **Deactivate** button is not available.
 * If threat management was activated using [Remote Configuration][16], do the following: 
   1. Go to [Services][15] (**ASM** > **Catalog** > **Services**).
   2. Select **Threat Management in Monitoring Mode**.
   3. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
   4. Click on a service.
   5. In the service details, in **Threat Detection**, click **Deactivate**.
+
+<div class="alert alert-info">If threat management was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If threat management was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
+
 * To disable threat management on your services in bulk, do the following: 
   1. Go to [Services][15].
   2. In the **Threat Management** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
