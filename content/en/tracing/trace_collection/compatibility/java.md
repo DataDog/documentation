@@ -297,9 +297,9 @@ Use the latest versions of:
 To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
-2. When you build a native executable with the `native-image` command, add the following argument:
+2. When you build a native executable with the `native-image` command, add the `-J-javaagent:/path/to/dd-java-agent.jar` argument. For example:
    ```shell
-   -J-javaagent:/path/to/dd-java-agent.jar
+   native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
 `-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
