@@ -21,7 +21,7 @@ algolia:
 ## Overview
 
 The [OpenTelemetry Demo][1] is a microservices demo application developed by the community to demonstrate OpenTelemetry (OTel)
-instrumentation and its observability capabilities. It is an e-commerce web page composed by multiple microservices communicating with each other through HTTP and gRPC. All services are instrumented with OpenTelemetry and produce traces, metrics, and logs.
+instrumentation and its observability capabilities. It is an e-commerce web page composed of multiple microservices communicating with each other through HTTP and gRPC. All services are instrumented with OpenTelemetry and produce traces, metrics, and logs.
 
 This page guides you through the steps required to deploy the OpenTelemetry Demo and send its data to Datadog.
 
@@ -119,10 +119,8 @@ Configure the OpenTelemetry Collector to send the demo's telemetry data to Datad
     ```
      By default, the collector in the demo application merges the configuration from two files:
 
-    - `src/otelcollector/otelcol-config.yml`
-      - Which contains the default configuration for the collector.
-    - `src/otelcollector/otelcol-config-extras.yml`
-      - Which can be used to add extra configuration to the collector.
+    - `src/otelcollector/otelcol-config.yml`: contains the default configuration for the collector.
+    - `src/otelcollector/otelcol-config-extras.yml`: used to add extra configuration to the collector.
 
     <div class="alert alert-info">
     When merging YAML values, objects are merged and arrays are replaced.
@@ -245,8 +243,7 @@ Go to http://localhost:8080.
 
 {{% tab "Kubernetes" %}}
 
-1. If you are running a local cluster, you need to port
-forward the frontend proxy:
+1. If you are running a local cluster, you need to port forward the frontend proxy:
    ```shell
    kubectl port-forward svc/my-otel-demo-frontendproxy 8080:8080
    ```
@@ -267,11 +264,11 @@ View all services that are part of the OTel Demo:
 
 {{< img src="/getting_started/opentelemetry/otel_demo/service_catalog.png" alt="View Service Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
 
-2. Select **Map** to see how the services are connected. Change the **Map layout** to view the map as **Cluster** or **Flow**.
+2. Select **Map** to see how the services are connected. Change the **Map layout** to **Cluster** or **Flow** to view the map in different modes.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
 
-3. Select the **List** view, then select a service to see a performance summary in the side panel.
+3. Select the **List** view, then select a service to view a performance summary in the side panel.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
 
@@ -279,11 +276,11 @@ View all services that are part of the OTel Demo:
 
 Explore traces received from the OTel Demo:
 
-1. From **Performance** > **Setup Guidance**, click **View Traces** to open the Trace Explorer, with the selected service applied as filter.
+1. From **Performance** > **Setup Guidance**, click **View Traces** to open the Trace Explorer, with the selected service applied as a filter.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/traces_view.png" alt="Traces view with all indexed spans for checkout service" style="width:90%;" >}}
 
-2. Select an indexed spans to view the full trace details for this transaction.
+2. Select an indexed span to view the full trace details for this transaction.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/trace_flamegraph.png" alt="Trace view with all spans belonging to that specific transaction" style="width:90%;" >}}
 
@@ -295,11 +292,11 @@ Explore traces received from the OTel Demo:
 
 ### Trace Queries
 
-Datadog allows you to filter and group the OpenTelemetry data that's received. For example, to find all transactions from a specific user, you can use Trace Queries.
+Datadog allows you to filter and group the received OpenTelemetry data. For example, to find all transactions from a specific user, you can use Trace Queries.
 
 The OTel Demo sends `user.id` as span tags, so you can use this to filter all transactions triggered by the user:
 
-1. From **Info** in the side panel, hover over the line with the user ID, click on the **cog** icon, and select **filter by @app.user.id:<user_id>**.
+1. From **Info** in the side panel, hover over the line with the user ID, click the **cog** icon, and select **filter by @app.user.id:<user_id>**.
 
 2. Remove any previous filters, leaving only **@app.user.id** applied to view all transactions containing spans with the specified user ID.
 
