@@ -38,6 +38,8 @@ Under **Region**, select the regions you want to scan. By default, `Global` and 
 
 After selecting, regions are scanned automatically and the number of resources found is displayed right next to the region name. You can click the **Sync** button above the **Region** section to trigger a manual scan of all selected regions.
 
+<div class="alert alert-info">Note that selecting many regions may impact performance of the live scanning process.</div>
+
 ## Filter resources
 
 You can filter resources by type and tags.
@@ -52,6 +54,8 @@ Tags are automatically detected from your AWS account and displayed in the **Cus
 To filter resources by type, click the **Resource** section and select the resource type you want to filter by. By default, all resource types are selected and displayed in order of the number of resources found.
 
 The same goes for tags. Click the **Custom tags**, **AWS tags**, **Terraform tags**, or **Kubernetes tags** section and select the tags you want to filter by. By default, all tags are selected and displayed in order of the number of resources found, with `Untagged` always at the bottom.
+
+<div class="alert alert-info">Consider focusing on the most relevant resoure types and tags for your specific use case to ensure optimal performance and readability of your diagram.</div>
 
 Say you want to create a diagram showing only EC2 instances and RDS databases. Click the **Resource** section, deselect all resource types, and select only `EC2` and `RDS`.
 
