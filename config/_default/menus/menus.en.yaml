@@ -5156,7 +5156,6 @@ main:
   - name: Billing
     identifier: account_management_billing
     url: account_management/billing/
-    identifier: account_management_billing
     parent: account_management
     weight: 11
   - name: Product Allotments
