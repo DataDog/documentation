@@ -63,8 +63,8 @@ You can include the following **rule** options in the `static-analysis.datadog.y
 
 The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
 
-* If you want to set a value for the whole repository, you can specify it as a string;
-* If you want to set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree. 
+* To set a value for the whole repository, you can specify it as a string.
+* To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree. 
 
 Thus the full structure of the static-analysis.datadog.yml is as follows:
 ```yaml
