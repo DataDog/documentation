@@ -325,7 +325,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
 To set up the Datadog Java tracer with Spring Native, follow these steps:
 
 1. Instrument your application, following the steps described on [Tracing Java Applications][6].
-2. For Spring Native builds based on Buildpacks, add the [Paketo Buildpack for Datadog][8] and enable it using `BP_DATADOG_ENABLED=true`.
+2. For Spring Native builds based on Buildpacks, enable the [Paketo Buildpack for Datadog][8] using `BP_DATADOG_ENABLED=true`.
    - You can do this at the build tool level, like Maven:
      ```yaml
      <build>
@@ -336,11 +336,6 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
          <configuration>
            <image>
              ...
-             <buildpacks>
-               ...
-               <buildpack>gcr.io/paketo-buildpacks/datadog</buildpack>
-               ...
-             </buildpacks>
              <env>
                ...
                <BP_DATADOG_ENABLED>true</BP_DATADOG_ENABLED>
@@ -352,7 +347,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      </plugins>
      </build>
      ```
-   - Alternatively, you can use the `pack build` command with `--buildpack gcr.io/paketo-buildpacks/datadog` option to add the Datadog buildpack and use the `--env BP_DATADOG_ENABLED=true` option to enable it.
+   - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
 3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
