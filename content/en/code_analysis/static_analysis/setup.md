@@ -43,7 +43,7 @@ You can include the following **global** options in the `static-analysis.datadog
 | `ignore`           | A list of path prefixes and glob patterns to ignore. Matching files will not be analyzed.  | `false`  |         |
 | `only`             | A list of path prefixes and glob patterns to analyze. Only matching files will be analyzed.| `false`  |         |
 | `ignore-gitignore` | Do not use paths listed in the `.gitignore` file to skip analysis on certain files.        | `false`  | `false` |
-| `max-file-size-kb` | Ignore files larger than the specified size (unit: kB).                                    | `false`  | `200`   |
+| `max-file-size-kb` | Ignore files larger than the specified size (in kB units).                                    | `false`  | `200`   |
 
 You can include the following **ruleset** options in the `static-analysis.datadog.yml` file:
 
