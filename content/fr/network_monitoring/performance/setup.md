@@ -183,7 +183,7 @@ La collecte de logs réseau pour Windows repose sur un pilote de filtre.
 
 Pour activer NPM pour des hosts Windows, procédez comme suit 
 
-1. Installez l'[Agent Datadog][1 (version 7.27.1+) en prenant soin d'activer le composant du pilote de filtre.
+1. Installez l'[Agent Datadog][1] (version 7.27.1+) en prenant soin d'activer le composant du pilote de filtre.
 
    [OBSOLÈTE] _(version 7.44 ou antérieure)_ Lors de l'installation, transmettez `ADDLOCAL="MainApplication,NPM"` à la commande `msiexec`, ou sélectionnez « Network Performance Monitoring » pour une installation de lʼAgent via l'interface graphique.
 
