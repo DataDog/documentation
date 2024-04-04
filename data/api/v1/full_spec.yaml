@@ -7166,8 +7166,13 @@ components:
           nullable: true
           type: integer
         renotify_statuses:
-          description: The types of monitor statuses for which re-notification messages
+          description: 'The types of monitor statuses for which re-notification messages
             are sent.
+
+            Default: **null** if `renotify_interval` is **null**.
+
+            If `renotify_interval` is set, defaults to renotify on `Alert` and `No
+            Data`.'
           items:
             $ref: '#/components/schemas/MonitorRenotifyStatusType'
           nullable: true
