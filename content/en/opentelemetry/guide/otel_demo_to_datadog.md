@@ -67,7 +67,7 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 To send the demo's telemetry data to Datadog you need to add 3 components to the the OpenTelemetry Collector configuration:
 
 - `Resource Processor` is an `optional` component which is recommended, used to set the `env` tag for Datadog.
-- `Datadog Connector` is responsible for computing Datadog APM Stats.
+- `Datadog Connector` is responsible for computing Datadog APM Trace Metrics.
 - `Datadog Exporter` is responsible for exporting Traces, Metrics and Logs to Datadog.
 
 Follow the steps below to configure those 3 components.
