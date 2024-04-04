@@ -22,7 +22,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][15].
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][17].
 
 The Datadog Profiler requires Go 1.19+.
 
@@ -34,7 +34,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][16].
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][18].
 
 2. Get `dd-trace-go` using the command:
 
@@ -121,9 +121,15 @@ To add detailed C function call information to CPU profiles, you may opt to use 
 
 **Note**: This library is considered experimental. It can cause (infrequent) deadlocks in programs that use C++ exceptions, or that use libraries such as `tcmalloc`, which also collect call stacks.
 
+## Save 2 to 14% CPU in production with PGO
+
+Starting [Go 1.21][14], Go compiler supports Profile-Guided Optimization (PGO). PGO enables additional optimizations on code identified as hot by profiles of production workloads. This is compatible with Datadog Go Continuous Profiler and can be used for production builds.
+
+Follow [this guide][15] to set it up.
+
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][14] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][16] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
@@ -142,6 +148,8 @@ The [Getting Started with Profiler][14] guide takes a sample service with a perf
 [11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
-[14]: /getting_started/profiler/
-[15]: /profiler/enabling/supported_versions/
-[16]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[14]: https://tip.golang.org/doc/go1.21
+[15]: /profiler/guide/save-cpu-in-production-with-go-pgo
+[16]: /getting_started/profiler/
+[17]: /profiler/enabling/supported_versions/
+[18]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
