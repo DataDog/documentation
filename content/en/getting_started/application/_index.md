@@ -19,7 +19,7 @@ further_reading:
     text: 'DRUIDS, the design system that powers Datadog'
 ---
 
-{{< learning-center-callout url="#" header="Try Foundations in the learning center" btn_title="Sign up" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
+{{< learning-center-callout header="Try Foundations in the learning center" btn_title="Sign up" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
   The Datadog learning center is full of hands-on courses to help you learn about this topic. Sign up today to learn more about APM.
 {{< /learning-center-callout >}}
 
