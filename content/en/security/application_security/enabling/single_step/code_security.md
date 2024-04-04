@@ -32,7 +32,7 @@ For an Ubuntu host:
 1. Run the one-line installation command:
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_IAST_ENABLED=true"  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_IAST_ENABLED=true"  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
    a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4].
@@ -50,12 +50,14 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENA
 4. Restart the services on the host or VM.
 5. [Explore the performance observability of your services in Datadog][5].
 
+**Note:** To configure single-step for both ASM Threat Protection and Code Security, add the environment variables `DD_APPSEC_ENABLED=true` _and_ `DD_IAST_ENABLED=true` to your one-line installation command.
+
 ### Specifying tracing library versions {#lib-linux}
 
 By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_IAST_ENABLED=true  DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_IAST_ENABLED=true  DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
@@ -77,7 +79,7 @@ Set `DD_ENV` in your one-line installation command for Linux to automatically ta
 For example:
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_IAST_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_IAST_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 [2]: /agent/remote_config
@@ -101,7 +103,6 @@ For a Docker Linux container:
    docker run -d --name dd-agent \
      -e DD_API_KEY=${YOUR_DD_API_KEY} \
      -e DD_APM_ENABLED=true \
-     -e DD_APPSEC_ENABLED=true \
      -e DD_IAST_ENABLED=true \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
@@ -150,11 +151,10 @@ Set `DD_ENV` in the library injector installation command for Docker to automati
 
 For example:
 
-{{< highlight shell "hl_lines=6" >}}
+{{< highlight shell "hl_lines=5" >}}
 docker run -d --name dd-agent \
   -e DD_API_KEY=${YOUR_DD_API_KEY} \
   -e DD_APM_ENABLED=true \
-  -e DD_APPSEC_ENABLED=true \
   -e DD_IAST_ENABLED=true \ 
   -e DD_ENV=staging \
   -e DD_APM_NON_LOCAL_TRAFFIC=true \
@@ -205,8 +205,6 @@ To enable single step instrumentation with Helm:
       instrumentation:
          enabled: true
     env:
-      - name: DD_APPSEC_ENABLED
-        value: "true"
       - name: DD_IAST_ENABLED=true 
         value: "true"
    ```
@@ -312,8 +310,6 @@ For example, add the following configuration to your `datadog-values.yaml` file:
        instrumentation:
          enabled: true
      env:
-      - name: DD_APPSEC_ENABLED
-        value: "true"
       - name: DD_IAST_ENABLED=true 
         value: "true"
 
