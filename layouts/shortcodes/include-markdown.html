@@ -1,1 +1,9 @@
-{{ readFile (.Get 0) | markdownify }}
+{{- $file := .Get 0 -}}
+
+{{- if fileExists $file -}}
+    {{- with .Site.GetPage $file -}}
+        {{ .Content }}
+    {{- end -}}
+{{- else -}}
+    {{ printf "File %s not found" $file }}
+{{- end -}}
