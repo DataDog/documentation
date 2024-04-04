@@ -128,7 +128,7 @@ You can trigger a [workflow automation][9] or create a new workflow from a monit
 **To add an existing workflow to a monitor**:
 1. In the message section, add the full workflow mention name:
    - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
-   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname={{host.name}})`
+   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname=host.name)`
 
 1. Alternatively, click **Add Workflow** and search for it in the drop-down menu.
 
