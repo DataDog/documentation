@@ -1,0 +1,30 @@
+.learning-center-callout {
+    border: #B37BFF solid 1px;
+    border-radius: 16px;
+    background-color: #F0E7FF;
+
+    .card-content {
+        @media(min-width: 768px) {
+            display: flex;
+            column-gap: 20px;
+        }
+        img {
+            min-height: 94px;
+            min-width: 166px;
+            object-fit: cover;
+
+            @media (min-width: 768px) {
+                height: 94px;
+            }
+        }
+    }
+    
+
+    a.btn {
+        height: 34px;
+        width: 138px;
+        padding-top: 8px;
+        background-color: #4300B0;
+        border-radius: 4px;
+    }
+}
