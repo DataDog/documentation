@@ -640,6 +640,146 @@ The following special characters are not supported for [Feature Flag Tracking][5
 datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ```
 
+### Eppo Integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK documentation][1]
+
+```javascript
+const assignmentLogger: IAssignmentLogger = {
+  logAssignment(assignment) {
+    // Send the assignment event to customers' event logging
+    analytics.track({
+      userId: assignment.subject,
+      event: "Eppo Randomized Assignment",
+      type: "track",
+      properties: { ...assignment },
+    });
+
+    // Send the feature flag when Eppo reports the exposure
+    datadogRum.addFeatureFlagEvaluation(assignment.experiment, exposure.variation);
+  },
+};
+
+await eppoInit({
+  apiKey: "<API_KEY>",
+  assignmentLogger,
+});
+```
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/javascript
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's iOS SDK documentation][1]
+
+```swift
+func segmentAssignmentLogger(assignment: Assignment) {
+    let assignmentDictionary: [String: Any] = [
+        "allocation": assignment.allocation,
+        "experiment": assignment.experiment,
+        "featureFlag": assignment.featureFlag,
+        "variation": assignment.variation,
+        "subject": assignment.subject,
+        "timestamp": assignment.timestamp
+    ]
+
+    analytics.track(
+        name: "AssignmentLogged", 
+        properties: TrackProperties(assignmentDictionary)
+    )
+
+    // Send the feature flag when Eppo reports the exposure
+    RUMMonitor.shared()addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation)
+}
+
+eppoClient = EppoClient("mock-api-key", assignmentLogger: segmentAssignmentLogger)
+```
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/ios
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's Android SDK documentation][1]
+
+```java
+AssignmentLogger logger = new AssignmentLogger() {
+    @Override
+    public void logAssignment(Assignment assignment) {
+        analytics.enqueue(TrackMessage.builder("Eppo Randomized Assignment")
+                .userId(assignment.getSubject())
+                .properties(ImmutableMap.builder()
+                        .put("timestamp", assignment.getTimestamp())
+                        .put("experiment", assignment.getExperiment())
+                        .put("variation", assignment.getVariation())
+                        .build()
+                );
+        );
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(assignment.getExperiment, assignment.getVariation);
+    }
+};
+
+EppoClient eppoClient = new EppoClient.Builder()
+    .apiKey("YOUR_API_KEY")
+    .assignmentLogger(assignmentLogger)
+    .application(application)
+    .buildAndInit();
+```
+
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/android
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Eppo does not support this integration. Create a ticket with Eppo to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's React native SDK documentation][1]
+
+```javascript
+const assignmentLogger: IAssignmentLogger = {
+  logAssignment(assignment) {
+    const { track } = useAnalytics();
+
+    track(
+        'Eppo Randomized Assignment',
+        {
+            userId: assignment.subject,
+            type: 'track',
+            properties: { ...assignment }
+        }
+    );
+  DdRum.addFeatureFlagEvaluation(assignment.experiment, exposure.variation);
+  },
+};
+
+await eppoInit({
+  apiKey: "<API_KEY>",
+  assignmentLogger,
+});
+```
+
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/react-native
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
