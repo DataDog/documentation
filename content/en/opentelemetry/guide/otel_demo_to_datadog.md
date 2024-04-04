@@ -64,7 +64,13 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 
 ### Configuring the OpenTelemetry Collector
 
-Configure the OpenTelemetry Collector to send the demo's telemetry data to Datadog:
+To send the demo's telemetry data to Datadog you need to add 3 components to the the OpenTelemetry Collector configuration:
+
+- `Resource Processor` is an `optional` component which is recommended, used to set the `env` tag for Datadog.
+- `Datadog Connector` is responsible for computing Datadog APM Stats.
+- `Datadog Exporter` is responsible for exporting Traces, Metrics and Logs to Datadog.
+
+Follow the steps below to configure those 3 components.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -72,7 +78,7 @@ Configure the OpenTelemetry Collector to send the demo's telemetry data to Datad
 1. Export your [Datadog site][7] to an environment variable:
 
     ```shell
-    export DD_SITE=<Your API Site>
+    export DD_SITE_PARAMETER=<Your API Site>
     ```
 
 2. Export your [Datadog API key][8] to an environment variable:
@@ -91,13 +97,13 @@ Configure the OpenTelemetry Collector to send the demo's telemetry data to Datad
           trace_buffer: 500
         hostname: "otelcol-docker"
         api:
-          site: ${DD_API_SITE}
+          site: ${DD_SITE_PARAMETER}
           key: ${DD_API_KEY}
 
     processors:
       resource:
         attributes:
-          - key: deployment.environment   # Set env tag for Datadog
+          - key: deployment.environment
             value: "otel"
             action: upsert
 
@@ -117,7 +123,8 @@ Configure the OpenTelemetry Collector to send the demo's telemetry data to Datad
           processors: [batch, resource]
           exporters: [opensearch, debug, datadog]
     ```
-     By default, the collector in the demo application merges the configuration from two files:
+
+    By default, the collector in the demo application merges the configuration from two files:
 
     - `src/otelcollector/otelcol-config.yml`: contains the default configuration for the collector.
     - `src/otelcollector/otelcol-config-extras.yml`: used to add extra configuration to the collector.
@@ -138,7 +145,7 @@ Configure the OpenTelemetry Collector to send the demo's telemetry data to Datad
 1. Create a secret named `dd-secrets` to store Datadog Site and API Key secrets:
 
     ```shell
-    kubectl create secret generic dd-secrets --from-literal="DD_SITE=<Your API Site>" --from-literal="DD_API_KEY=<Your API Key>"
+    kubectl create secret generic dd-secrets --from-literal="DD_SITE_PARAMETER=<Your API Site>" --from-literal="DD_API_KEY=<Your API Key>"
     ```
 
 2. Add the OpenTelemetry [Helm chart][4] to your repo to manage and deploy the OpenTelemetry Demo:
@@ -162,13 +169,13 @@ Configure the OpenTelemetry Collector to send the demo's telemetry data to Datad
               trace_buffer: 500
             hostname: "otelcol-helm"
             api:
-              site: ${env:DD_SITE}
-              key: ${env:DD_API_KEY}
+              site: ${DD_SITE_PARAMETER}
+              key: ${DD_API_KEY}
 
         processors:
           resource:
             attributes:
-              - key: deployment.environment   # Set env tag for Datadog
+              - key: deployment.environment
                 value: "otel"
                 action: upsert
 
@@ -237,30 +244,41 @@ You can access the Astronomy Shop web UI to explore the application and observe 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Go to http://localhost:8080.
+Go to <http://localhost:8080>.
 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
 1. If you are running a local cluster, you need to port forward the frontend proxy:
+
    ```shell
    kubectl port-forward svc/my-otel-demo-frontendproxy 8080:8080
    ```
-2. Go to http://localhost:8080.
+
+2. Go to <http://localhost:8080>.
 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Telemetry data correlation
+
+The instrumentation steps used in all services from the Demo can be found
+on the main OpenTelemetry documentation.
+
+You can find the language in which each service was implemented as well as its
+documentation in the [language feature reference table][10].
+
 ## Exploring OpenTelemetry data in Datadog
 
-When the OTel Demo is running, the built-in load generator simulates traffic in the application. After a couple of seconds you, can see data arriving in Datadog.
+When the OTel Demo is running, the built-in load generator simulates traffic in the application.
+After a couple of seconds you can see data arriving in Datadog.
 
 ### Service Catalog
 
 View all services that are part of the OTel Demo:
 
-1. Go to [**APM** > **Service Catalog**][10].
+1. Go to [**APM** > **Service Catalog**][11].
 
 {{< img src="/getting_started/opentelemetry/otel_demo/service_catalog.png" alt="View Service Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
 
@@ -320,4 +338,5 @@ The OpenTelemetry Demo includes [flagd][5], a feature flag evaluation engine for
 [3]: https://app.datadoghq.com/organization-settings/api-keys/
 [5]: https://flagd.dev/
 [6]: https://opentelemetry.io/docs/demo/feature-flags/
-[10]: https://app.datadoghq.com/services
+[10]: https://opentelemetry.io/docs/demo/#language-feature-reference
+[11]: https://app.datadoghq.com/services
