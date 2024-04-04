@@ -15,7 +15,23 @@ This document walks you through the following setup steps:
 
 ## Prerequisites
 
+{{< tabs >}}
+{{% tab "Splunk HEC" %}}
+
 {{% observability_pipelines/prerequisites/splunk_hec %}}
+
+{{% /tab %}}
+
+{{% tab "Sumo Logic" %}}
+
+{{% observability_pipelines/prerequisites/sumo_logic %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Datadog Agent
+
+{{% observability_pipelines/prerequisites/datadog_agent %}}
 
 ## Set up Observability Pipelines
 

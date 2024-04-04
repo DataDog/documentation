@@ -18,7 +18,12 @@ This document walks you through the following steps to set up dual shipping:
 
 ## Prerequisites
 
+### Splunk HEC
 {{% observability_pipelines/prerequisites/splunk_hec %}}
+
+### Datadog Agent
+
+{{% observability_pipelines/prerequisites/datadog_agent %}}
 
 ## Set up Observability Pipelines
 
