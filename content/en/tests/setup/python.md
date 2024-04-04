@@ -207,13 +207,13 @@ All other [Datadog Tracer configuration][3] options can also be used.
 
 Plugins for `pytest` that alter test execution may cause unexpected behavior.
 
-#### Parallelization
+### Parallelization
 
 Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
 
 The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
 
-#### Test ordering
+### Test ordering
 
 Plugins that change the ordering of test execution (such as [`pytest-randomly`][3]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
 
@@ -227,7 +227,6 @@ The overall count of test events (and their correctness) remain unaffected.
 {{% /tab %}}
 
 {{% tab "unittest" %}}
-
 
 In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
 
