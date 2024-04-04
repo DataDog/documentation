@@ -696,10 +696,10 @@ func segmentAssignmentLogger(assignment: Assignment) {
     )
 
     // Send the feature flag when Eppo reports the exposure
-    RUMMonitor.shared()addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation)
+    RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: assignment.featureFlag, variation: assignment.variation)
 }
 
-eppoClient = EppoClient("mock-api-key", assignmentLogger: segmentAssignmentLogger)
+let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: segmentAssignmentLogger)
 ```
 
 [1]: https://docs.geteppo.com/sdks/client-sdks/ios
