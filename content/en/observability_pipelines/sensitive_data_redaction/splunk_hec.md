@@ -11,7 +11,7 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 This document walks through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Routing your logs to the Observability Pipelines Worker](#route-your-logs-to-the-observability-pipelines-worker)
+1. [Sending logs to the Worker over Splunk HEC](#send-logs-to-the-observability-pipelines-worker-over-splunk-hec)
 
 ## Prerequisites
 
@@ -148,8 +148,6 @@ Enter the information for the processors you want to use. Click the **Add** butt
 {{% /tab %}}
 {{< /tabs >}}
 
-## Route your logs to the Observability Pipelines Worker
-
-TKTK
+{{% observability_pipelines/log_source_configuration/splunk_hec %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
