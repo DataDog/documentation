@@ -1,9 +1,9 @@
-{{ $file := .Get 0 }}
+{{- $file := .Get 0 -}}
 
-{{ if fileExists $file }}
-    {{ with .Site.GetPage $file }}
+{{- if fileExists $file -}}
+    {{- with .Site.GetPage $file -}}
         {{ .Content }}
-    {{ end }}
-{{ else }}
+    {{- end -}}
+{{- else -}}
     {{ printf "File %s not found" $file }}
-{{ end }}
+{{- end -}}
