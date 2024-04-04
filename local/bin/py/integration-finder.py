@@ -48,9 +48,15 @@ def update_repos(integrations_repos):
         for k in repo:
             local_repo_path = os.path.join('..', k)
             if isdir(local_repo_path):
-                print(f'Updating {k}: {repo[k]}')
-                local_repo = git.Repo(local_repo_path)
-                local_repo.remotes.origin.pull(repo[k])
+                try:
+                    print(f'Updating {k}: {repo[k]}')
+                    local_repo = git.Repo(local_repo_path)
+                    local_repo.remotes.origin.pull(repo[k])
+                except: 
+                    print(f'\n\x1b[33mWARNING\x1b[0m:Failed to update {k}: {repo[k]}' +
+                          '\nContinuing without updating the repo. ' + 
+                          f'To resolve, check {k} for a dirty feature branch and commit, ' +
+                          'stash, or reset any changes and try again.\n')
             else:
                 print(f'{k}: {repo[k]} not found. Cloning to {local_repo_path}')
                 git.Repo.clone_from(url=f'git@github.com:DataDog/{k}.git', to_path=local_repo_path)
@@ -64,7 +70,7 @@ def find_integration(integrations_repos, integration_name):
             location = os.path.join('..', k)
             url = f'- https://github.com/DataDog/{k}/blob/{repo[k]}/{integration_name}/README.md'
             if k == 'dogweb':
-                location = location + '/integration/'
+                location = location + '/integration'
                 url = f'- https://github.com/DataDog/{k}/blob/{repo[k]}/integration/{integration_name}/README.md'
             integration_list = [f.name for f in os.scandir(location) if f.is_dir()]
             integration_list = filter_out_dots(integration_list)
