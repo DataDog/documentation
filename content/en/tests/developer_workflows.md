@@ -74,7 +74,9 @@ Below is what a pre-filled GitHub issue might look like:
 
 ## Create Jira issues
 
-With [Case Management][8], you can create and open pre-filled Jira issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
+With [Case Management][8], you can create and open pre-filled Jira issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests. 
+
+When you update the status of a Jira issue, the status in Case Management updates and reflects the latest case status.
 
 ### In-app entry points
 
