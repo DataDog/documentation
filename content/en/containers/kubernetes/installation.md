@@ -45,7 +45,7 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
 
    Choose one of the following installation methods:
 
-   - [**Datadog Operator**][9] (recommended): a Kubernetes [operator][10] that you can use to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+   - [Datadog Operator][9] (recommended): a Kubernetes [operator][10] that you can use to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
    - [Helm][11]
    - Manual installation. See [Manually install and configure the Datadog Agent with a DaemonSet][12]
 
@@ -172,7 +172,7 @@ agent:
 
 Then, deploy the Agent:
 
-```bash
+```shell
 kubectl apply -f datadog-agent.yaml
 ```
 
@@ -195,7 +195,7 @@ datadog:
 
 Then, deploy the Agent:
 
-```bash
+```shell
 helm install datadog-agent -f datadog-values.yaml datadog/datadog
 ```
 
@@ -270,7 +270,7 @@ helm delete my-datadog-operator
 This command deletes all Kubernetes resources created by installing Datadog Operator and deploying the Datadog Agent.
 {{% /tab %}}
 {{% tab "Helm" %}}
-```bash
+```shell
 helm uninstall datadog-agent
 ```
 {{% /tab %}}
