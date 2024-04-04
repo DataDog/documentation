@@ -542,7 +542,7 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 
 ## No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Service Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
 
 ### Confirm ASM is enabled
 
@@ -612,3 +612,4 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [13]: /security/application_security/code_security/
 [14]: /security/application_security/software_composition_analysis
 [15]: https://app.datadoghq.com/security/configuration/asm/services-config
+[16]: https://app.datadoghq.com/services?env=dev&hostGroup=%2A&lens=Security

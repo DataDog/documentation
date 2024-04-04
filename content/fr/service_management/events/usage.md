@@ -10,15 +10,6 @@ kind: Documentation
 title: Utiliser des événements
 ---
 
-## Enrichissement et normalisation
-
-Un _processeur_ exécute des opérations de structuration de données sur les attributs des événements au moment de leur ingestion. Un _pipeline_ regroupe un ou plusieurs processeurs, qui sont exécutés l'un après l'autre. Les pipelines de traitement d'événements vous permettent d'accomplir ce qui suit :
-
-- Normaliser des sources d'événements distinctes, en remappant des attributs. Vous pouvez par exemple utiliser les mêmes [tags de service][1] réservés pour tous vos événements.
-- Enrichir des événements avec des données externes stockées dans un [tableau de référence][2] (version bêta). Vous pouvez par exemple mapper un nom de service au répertoire de votre service, de façon à ajouter aux événements des informations sur l'équipe à qui appartient l'événement, des liens vers des dashboards ou encore des références à une documentation.
-
-Pour ajouter et configurer des pipelines de traitement d'événements, consultez l'onglet **[Enrichir et normaliser][3]**d'Event Management. Si vous avez besoin d'aide supplémentaire, contactez l'[assistance][4] Datadog.
-
 ## Métriques custom
 
 [Générez des métriques][5] avec une période de rétention de 15 mois à partir de n'importe quelle requête de recherche d'événements pour créer et surveiller des événements historiques ainsi que des alertes. Consultez la section sur l'[analyse d'événements][6] pour en savoir plus.
@@ -31,7 +22,7 @@ Pour ajouter et configurer des pipelines de traitement d'événements, consultez
 
 L'[Events Explorer][7] vous permet d'agréger et de visualiser les événements reçus par Datadog. Vous pouvez regrouper ou filtrer des événements en fonction d'un attribut et les représenter sur un graphique avec les outils d'analyse d'événements. Grâce à la syntaxe de recherche de requête, il est même possible de filtrer des événements à l'aide d'opérateurs booléens et de wildcards.
 
-### Dashboards
+### Bibliothèques
 
 {{< img src="service_management/events/usage/events-dashboard.mp4" alt="Un widget de graphique utilisant une source basée sur des événements" video=true >}}
 
