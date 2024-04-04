@@ -649,8 +649,8 @@ Initialize Eppo's SDK and create an assignment logger that additionally reports 
 
 For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK documentation][1]
 
-```javascript
-const assignmentLogger = {
+```typescript
+const assignmentLogger: IAssignmentLogger = {
   logAssignment(assignment) {
     // Send the assignment event to customers' event logging
     analytics.track({
@@ -716,21 +716,21 @@ AssignmentLogger logger = new AssignmentLogger() {
     @Override
     public void logAssignment(Assignment assignment) {
         analytics.enqueue(TrackMessage.builder("Eppo Randomized Assignment")
-                .userId(assignment.getSubject())
-                .properties(ImmutableMap.builder()
-                        .put("timestamp", assignment.getTimestamp())
-                        .put("experiment", assignment.getExperiment())
-                        .put("variation", assignment.getVariation())
-                        .build()
-                );
+            .userId(assignment.getSubject())
+            .properties(ImmutableMap.builder()
+                .put("timestamp", assignment.getTimestamp())
+                .put("experiment", assignment.getExperiment())
+                .put("variation", assignment.getVariation())
+                .build())
         );
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(assignment.getExperiment, assignment.getVariation);
+
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(assignment.getExperiment(), assignment.getVariation());
     }
 };
 
 EppoClient eppoClient = new EppoClient.Builder()
     .apiKey("YOUR_API_KEY")
-    .assignmentLogger(assignmentLogger)
+    .assignmentLogger(logger)
     .application(application)
     .buildAndInit();
 ```
@@ -751,7 +751,7 @@ Initialize Eppo's SDK and create an assignment logger that additionally reports 
 
 For more information about initializing Eppo's SDK, see [Eppo's React native SDK documentation][1]
 
-```javascript
+```typescript
 const assignmentLogger: IAssignmentLogger = {
   logAssignment(assignment) {
     const { track } = useAnalytics();
