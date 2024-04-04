@@ -890,7 +890,7 @@
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
   },
   "ListActiveMetricConfigurations": {
-    "description": "List tags and aggregations that are actively queried on dashboards and monitors for a given metric name.",
+    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, and the Metrics Explorer for a given metric name.",
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
@@ -1272,6 +1272,12 @@
   "CreateSecurityMonitoringRule": {
     "description": "Create a detection rule.",
     "summary": "Create a detection rule",
+    "request_description": "",
+    "request_schema_description": "Create a new rule."
+  },
+  "ValidateSecurityMonitoringRule": {
+    "description": "Validate a detection rule.",
+    "summary": "Validate a detection rule",
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
