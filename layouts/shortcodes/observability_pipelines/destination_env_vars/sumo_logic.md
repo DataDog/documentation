@@ -1,1 +1,1 @@
-REUSE INSTRUCTIONS
+Enter the Sumo Logic HTTP collector URL. See [prerequisites](#prerequisites) for more information.

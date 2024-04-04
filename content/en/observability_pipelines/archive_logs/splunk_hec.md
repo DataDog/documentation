@@ -238,10 +238,11 @@ Enter the information for the processors you want to use. Click the **Add** butt
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Splunk HEC address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
-1. Provide the environment variables for each of your selected destinations.
+1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+
 {{< tabs >}}
 {{% tab "Datadog" %}}
 
@@ -251,11 +252,6 @@ Enter the information for the processors you want to use. Click the **Add** butt
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_env_vars/splunk_hec %}}
-
-{{% /tab %}}
-{{% tab "Splunk TCP" %}}
-
-{{% observability_pipelines/destination_env_vars/splunk_tcp %}}
 
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}

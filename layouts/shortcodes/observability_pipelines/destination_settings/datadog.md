@@ -1,1 +1,1 @@
-There are no configuration steps for your Datadog destination. Your `Datadog API key` is selected in the [installation step][link to installation step] later. 
+There are no configuration steps for your Datadog destination.
