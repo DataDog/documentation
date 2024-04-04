@@ -30,13 +30,13 @@ Credential stuffing relies on credential dumps.
 
 **Credential dumps** occur when stolen credentials from a security breach are posted publicly or sold on dark web markets, often resulting in a large compilation of usernames, passwords, and other account details being released.
 
-**Credential Cracking** involves attempting to decipher a user's password by systematically trying different combinations of passwords until the correct one is found, often using software tools that apply various password-guessing techniques.
+**Credential cracking** involves attempting to decipher a user's password by systematically trying different combinations of passwords until the correct one is found, often using software tools that apply various password-guessing techniques.
 
 **Brute force** is a trial-and-error method used to obtain information such as a user password or personal identification number (PIN); in this attack, automation is used to generate consecutive guesses to gain unauthorized access to a system
 
 # Onboarding
 
-ASM provides managed detections for Account Takeover {show detection rules page}.
+ASM provides managed detections for Account Takeover attacks.
 
 Effective ATO detection and prevention requires the following
 1. Instrumenting your production login endpoints. This enables detection with ASM managed rules.
@@ -49,50 +49,73 @@ Effective ATO detection and prevention requires the following
 
 | Enrichment              | Auto-instrumented | Use Case                                     |
 |-------------------------|-------------------|----------------------------------------------|
-| users.login.success     | True              | Account takeover detection rule requirement       |
-| users.login.failure     | True              | Account takeover detection rule requirement       |
-| users.exists            | False             | Signal triage and determining if attack is targeted |
-| user.password_reset     | False             | Detection rule requirement to identifying user enumeration through password reset |
+| `users.login.success`     | True              | Account takeover detection rule requirement       |
+| `users.login.failure`     | True              | Account takeover detection rule requirement       |
+| `users.exists`            | False             | Signal review and determining if attack is targeted |
+| `user.password_reset`     | False             | Detection rule requirement to identifying user enumeration through password reset |
 
 
-The latest list of relevant detections and instrumentation requirements are available on the Detection Rules page. {link with filter}
+The latest list of relevant detections and instrumentation requirements are available on the [Detection Rules](https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name) page.
 
-Auto-instrumentation will provide login success and failure for most authentication implementations. It is recommended that users instrument their application for all recommended enrichments for the best efficacy.
 
-You are not limited to these enrichments. Many platform products opt to add additional enrichments such as identifying the customer organization or user role.
+[Auto-instrumentation](https://docs.datadoghq.com/security/application_security/threats/add-user-info/?tab=set_user#automatic-user-activity-event-tracking)
+ is a Datadog capability that automatically identifies user login success and failure for most authentication implementations. It is recommended that applications are additionally instrumented for all recommended enrichments, such as `users.exists`, for the best efficacy.
+
+You are not limited to Datadog defined these enrichments. Many platform products opt to add additional enrichments such as identifying the customer organization or user role.
 
 ## Remote Configuration
-{ insert remote configuration onboarding }
+[Remote Configuration](https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration)
+
+Remote configuration enables ASM users to intrument apps with with enrichments such as `users.exists` or custom [business logic](https://app.datadoghq.com/security/appsec/business-logic)
+ data in near real time.
+
 
 ## Notifications
-{ insert notifications onboarding and best practices}
+
+[Notifications](https://docs.datadoghq.com/security/notifications/rules/)
+ are a flexible way ensure the correct team members are contacted when an attack occurs. [Integrations](https://app.datadoghq.com/integrations?category=Collaboration)
+ with common communication methods are available out of the box including Datadog CoScreen.
+
 
 ## Review your first detection
 
-**Trusted Activity**
-
-IP addresses can be trusted, preventing them from being automatically blocked. This is useful for 
-
-Approved scanning sources that attempt to login
-Corporate sites with large numbers of users behind single IP addresses
-
-To configure Trusted IPs { instructions and link }
+![First Detection](./DELETE_appsec-52386/review_first_detection.png)
 
 **Compromised Users**
 
-Compromised and Targeted users can be reviewed and blocked within Signals.
+Compromised and Targeted users can be reviewed and blocked within Signals, Traces, and Attacker Explorer.
+
+Signals
+
+![Signal users](./DELETE_appsec-52386/compromised_users_signals.png)
 
 
+Traces
+![Trace users](./DELETE_appsec-52386/compromised_users_traces.png)
 
-1. Signals
-2. IP address drawers
-3. Attacker Explorer
 
+**Blocking**
+
+ASM suggests actions to take based on the detection type and indicates what actions have been taken.
+
+![Suggested action](./DELETE_appsec-52386/review_suggested_steps.png)
 
 
 # Best practices for Signal Review and Protection
 
 ## Have an Incident Response Plan
+
+### Do you use authenticated scanners
+
+IP addresses can be trusted, preventing them from being automatically blocked. This is useful for 
+
+1. Approved scanning sources that attempt to login
+2. Corporate sites with large numbers of users behind single IP addresses
+
+To configure Trusted IPs, visit the [Passlist](https://app.datadoghq.com/security/appsec/passlist) page and add a `Monitored` entry. Monitored entries are excluded from automated blocking.
+
+![Monitored Passlist](./DELETE_appsec-52386/passlist.png)
+
 
 ### What is your customer authentication profile
 
@@ -102,7 +125,7 @@ What networks do your customers authenticate from?
 3. Residential IPs
 4. Data centers
 
-Understanding typical networks can inform your blocking strategy. For example, if you have a consumer application it is unexpected for customers to authenticate from data centers, you may have more leeway to block the IP addresses associated with that data center. However if your customers source entirely from Mobile ISPs, you may have significant impacts to legitimate traffic if you block those ISPs.
+Understanding typical networks can inform your blocking strategy. For example, if you have a consumer application it may be unexpected for customers to authenticate from data centers, you may have more leeway to block the IP addresses associated with that data center. However if your customers source entirely from Mobile ISPs, you may have significant impacts to legitimate traffic if you block those ISPs.
 
 Who are your customers and what is their account name structure
 1. Employees with an expected ID format such as integers, corporate domains, or combinations if numbers and text
@@ -114,7 +137,7 @@ Understanding your customers account name structure helps understand if attacks 
 
 ### Distributed Attacks
 Blocking advanced, distributed attacks is often business decision as the attack affects availability, may affect user funds, and may impact legitimate users. There are three critical components for success in these attacks
-1. Proper onboarding: Are you configured for blocking with ASM.
+1. Proper onboarding: Are you configured for blocking with ASM?
 2. Proper configuration: ensure that you have correctly set Client IPs and XFF headers
 3. Internal communication plans: Communication with security teams, services owners, and product leads is critical to understanding the impact of mitigating large scale attacks.
 
@@ -141,21 +164,20 @@ Many consumer applications have low occurrences of user authentication from data
 
 There are two types of proxies frequently seen in distributed account takeovers; hosting and residential. 
 
-Datadog uses Spur {link threat intel} to determine if an IP is proxy. Datadog correlating IOC's with account takeover attacks for faster detection with the ASM managed account takeover rules.
+Datadog uses [Spur](https://docs.datadoghq.com/security/threat_intelligence#threat-intelligence-sources)
+ to determine if an IP is proxy. Datadog correlating indicators of compromise (IOCs) with account takeover attacks for faster detection with the ASM managed account takeover rules.
 
-Datadog recommends never blocking solely on threat intelligence IOCs for IP addresses. See our threat intellince docs for details.
+Datadog recommends never blocking solely on threat intelligence IOCs for IP addresses. See our threat intelligence [best practices](https://docs.datadoghq.com/security/threat_intelligence#best-practices-in-threat-intelligence) for details.
+
+Details on IP Addresses, including ownership and threat intelligence is available in the IP address drawers. Click on  IP addresses to view.
 
 Hosting Proxies
 
 These are proxies that exist at data centers, often the result of a compromised host at that data center. Guidance for interacting with hosting proxies is similar to data centers.
 
-{show IP pill}
-
 Residential Proxies
 
 These are proxies that exist behind Residential IP addresses. Residential proxies are frequently enabled by mobile application SDKs or browser plugins. The user of the SDK or plugin is typically unaware that they are running a proxy. It is common to see benign traffic from IP addresses identified as residential proxies.
-
-{show IP pill}
 
 Mobile ISPs
 
@@ -166,20 +188,15 @@ Mobile ISPs use CGNAT {link wikipedia} and frequently have large numbers of phon
 
 
 **Attacker Attributes**
+Use attacker attributes to target response actions.
 
-Datadog identifies attributes of attackers using Attacker Similarity. Users can create custom WAF rules that block these attributes. 
-1. Understand the impact to legitimate traffic by checking for benign traces that match the attributes.
-2. Expect attackers to adjust their attack strategy to work around blocking efforts.
+Datadog clusters attackers using Attacker Similarity and identifies attributes of those attackers. Responders can use custom rules to block to attributes of persistant attackers.
+
 
 ## Protection
 
 ### Automated Protection
-Review the managed ruleset and determine which rules fit your internal policies for automated blocking. If you do not have a policy, review your existing detections or consider starting with automated blocking for rules such as 
-
-{ insert rules }
-* Pin Reset
-
-
+Review the managed ruleset and determine which rules fit your internal policies for automated blocking. If you do not have a policy, review your existing detections and start with the suggested responses in Signals. Build your policy based on the most relevant actions taken over time.
 
 
 ### Users
@@ -197,6 +214,3 @@ Attack motivation can influence post compromise activity. Attackers wanting to r
 Attackers attempting to access stored funds will use accounts immediately after compromise.
 
 Consider blocking compromised users in addition to blocking the attacker.
-
-
-
