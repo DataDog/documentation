@@ -17489,7 +17489,8 @@ components:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -17737,7 +17738,8 @@ components:
           type: array
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -17839,7 +17841,8 @@ components:
           type: integer
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -18118,7 +18121,8 @@ components:
           type: array
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -18245,7 +18249,8 @@ components:
           type: integer
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
