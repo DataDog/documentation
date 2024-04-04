@@ -1,4 +1,4 @@
-Enter the name of the Splunk index you want your data. This has to be an allowed index for your HEC.
+Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC.
 
 The following fields are optional:
 1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON` or `Raw` text encodings. If no decoding is selected, the decoding defaults to JSON.

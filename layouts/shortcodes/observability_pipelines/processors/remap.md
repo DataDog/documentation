@@ -5,7 +5,7 @@ Use **add field** to append a new key-value field to your log.
 
 To set up add field processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) is processed.
-1. Enter the key and value you want to add. To specify a nested field for your key, use path notation: `outer_field.inner_field`. All values are stored as strings.   
+1. Enter the key and value you want to add. To specify a nested field for your key, use the path notation: `outer_field.inner_field`. All values are stored as strings.   
     **Note**: If the key you specify already exists, then that key's original value is overwritten.
 
 ##### Drop field
@@ -14,7 +14,7 @@ Use **drop field** to drop a field from logging data that matches the filter you
 
 To set up the drop field processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) is processed.
-1. Enter the key of the field you want to drop. To specify a nested field for your specified key, use path notation: `outer_field.inner_field`.   
+1. Enter the key of the field you want to drop. To specify a nested field for your specified key, use the path notation: `outer_field.inner_field`.   
     **Note**: If your specified key does not exist, then your log will be unimpacted.
 
 ##### Rename field
@@ -23,8 +23,8 @@ Use **rename field** to rename a field within your log.
 
 To set up the rename field processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) is processed.
-1. Enter the name of the field you want to rename in the **Source key** field. To specify a nested field for your key, use path notation: `outer_field.inner_field`. Once renamed, your original field is deleted unless you enable the **Preserve source tag** checkbox described below.   
+1. Enter the name of the field you want to rename in the **Source key** field. To specify a nested field for your key, use the path notation: `outer_field.inner_field`. Once renamed, your original field is deleted unless you enable the **Preserve source tag** checkbox described below.   
     **Note**: If the source key you specify doesn't exist, then your target has a default null value applied to it.
-1. In the **Target key** field, enter the name you want the source field to be renamed to. To specify a nested field for your specified key, use path notation: `outer_field.inner_field`.   
+1. In the **Target key** field, enter the name you want the source field to be renamed to. To specify a nested field for your specified key, use the path notation: `outer_field.inner_field`.   
     **Note**: If the target key you specify already exists, then that key's original value is overwritten.
 1. Optionally, check the **Preserve source tag** box if you want to retain the original source field and duplicate the information from your source key to your specified target key. If this box is not checked, the source key is dropped after it is renamed.
