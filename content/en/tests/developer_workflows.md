@@ -30,7 +30,7 @@ further_reading:
 - [Create and open GitHub issues](#create-and-open-github-issues) 
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
 - [Enable test summaries in GitHub Pull Request comments](#test-summaries-in-github-pull-requests)
-- [Create Jira issues](#create-jira-issues)
+- [Create Jira issues through Case Management](#create-jira-issues)
 
 These features are available for all Test Visibility customers, and they do not require usage of the [Datadog GitHub integration][4].
 
@@ -128,11 +128,11 @@ Comments only appear on pull requests that were opened before the test run and t
 
 ## Create Jira issues
 
-With Test Visibility, you can create and open pre-filled Jira issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
+With [Case Management][7], you can create and open pre-filled Jira issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
 
 ### In-app entry points
 
-You can create pre-filled Jira issues from three areas within Test Visibility:
+You can create Jira issues through Case Management from three areas within Test Visibility:
 
 - [Commit Overview page (from the **Commits** table)](#commit-overview-1) 
 - [Flaky Tests section](#branch-overview-1)
@@ -156,7 +156,7 @@ From within a specific test run, click the **Actions** button and select **Creat
 
 {{< img src="continuous_integration/case_test_runs.png" alt="Create a Case Management issue in the Test Runs side panel" style="width:100%;">}}
 
-For more information, see the [Case Management documentation][7].
+For more information about configuring the Jira integration, see the [Case Management documentation][7].
 
 ## Further reading
 
