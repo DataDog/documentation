@@ -44,11 +44,11 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_enterprise">CSM Enterprise</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_pro">CSM Pro</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts)</a></li><li style="font-size:16px"><a href="/security/vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/cloud_security_management/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_cloud_workload_security">CSM Workload Security</a></td>
