@@ -25,6 +25,8 @@ aliases:
 
 Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a high-density PDF attachment. 
 
+{{< img src="dashboards/scheduled_reports/report_email.png" alt="Example of a scheduled report email with a dashboard pdf attachment" style="width:80%;" >}}
+
 ## Schedule a report
 
 Dashboards must have a grid or timeboard layout and must have at least one supported widget to send a PDF report. See the list of [supported widget types](#supported-widget-types).
