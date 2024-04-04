@@ -72,7 +72,7 @@ You can also graph and visualize these metrics on any dashboard or notebook:
 
 Depending on how events traverse through your system, different paths can lead to increased latency. With the **Measure** tab, you can select a start service and end service for end-to-end latency information to identify bottlenecks and optimize performance. Easily create a monitor for that pathway, or export to a dashboard.
 
-{{< img src="path/to/your/measure.3.0.mp4" alt="Datadog Data Stream Monitoring measure" video="true" >}}
+{{< img src="data_streams/measure_3.0.mov" alt="Datadog Data Stream Monitoring measure" video="true" >}}
 
 Alternatively, view the **Pathways** tab for latency between the select service and upstream services.
 
@@ -81,11 +81,11 @@ Alternatively, view the **Pathways** tab for latency between the select service 
 ### Alert on slowdowns in event-driven applications
 Slowdowns caused by high consumer lag or stale messages can lead to cascading failures and increase downtime. With out-of-the-box alerts, you can pinpoint where bottlenecks occur in your pipelines and respond to them right away. For supplementary metrics, Datadog provides additional integrations for message queue technologies like [Kafka][4] and [SQS][5].
 
-{{< img src="data_streams/Product_Doc_Kafka_Lag.png" alt="Datadog Data Streams Monitoring Kafka Lag" style="width:100%;" >}}
+{{< img src="data_streams/dsm_kafka_lag.png" alt="Datadog Data Streams Monitoring Kafka Lag" style="width:100%;" >}}
 
-Through Data Stream Monitoring’s out-of-the-box recommended monitors, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
+Through Data Stream Monitoring's out-of-the-box recommended monitors, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
 
-{{< img src="data_streams/Product_Doc_Recommended_Monitors.png" alt="Datadog Data Streams Monitoring Recommended Monitors" style="width:100%;" >}}
+{{< img src="data_streams/dsm_recommended.png" alt="Datadog Data Streams Monitoring Recommended Monitors" style="width:100%;" >}}
 
 ### Attribute incoming messages to any queue, service, or cluster
 
