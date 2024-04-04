@@ -5,11 +5,11 @@ code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30
 aliases:
-- /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
+- /real_user_monitoring/flutter/integrated_libraries/
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-reactnative
+- link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: Source code for dd-sdk-reactnative
+  text: Source code for dd-sdk-flutter
 - link: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
   tag: Documentation
   text: Integrated Libraries

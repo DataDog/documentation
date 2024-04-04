@@ -1,7 +1,6 @@
 ---
 title: Integrated Libraries
 kind: documentation
-aliases:
 further_reading:
 - link: /real_user_monitoring
   tag: Documentation
