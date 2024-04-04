@@ -132,7 +132,7 @@ With [Case Management][7], you can create and open pre-filled Jira issues with r
 
 ### In-app entry points
 
-You can create Jira issues through Case Management from three areas within Test Visibility:
+Once you have [set up the Jira integration][7], you can create cases from three areas within Test Visibility, and Case Management opens a Jira issue that is associated with your test:
 
 - [Commit Overview page (from the **Commits** table)](#commit-overview-1) 
 - [Flaky Tests section](#branch-overview-1)
