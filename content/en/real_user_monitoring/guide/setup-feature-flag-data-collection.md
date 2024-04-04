@@ -120,7 +120,7 @@ Datadog supports integrations with:
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize Amplitude's SDK and and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Initialize Amplitude's SDK and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
 For more information about initializing Amplitude's SDK, see Amplitude's [JavaScript SDK documentation][1].
 
