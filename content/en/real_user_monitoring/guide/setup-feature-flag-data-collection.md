@@ -650,7 +650,7 @@ Initialize Eppo's SDK and create an assignment logger that additionally reports 
 For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK documentation][1]
 
 ```javascript
-const assignmentLogger: IAssignmentLogger = {
+const assignmentLogger = {
   logAssignment(assignment) {
     // Send the assignment event to customers' event logging
     analytics.track({
@@ -660,7 +660,7 @@ const assignmentLogger: IAssignmentLogger = {
       properties: { ...assignment },
     });
 
-    // Send the feature flag when Eppo reports the exposure
+    // Assuming `exposure` is defined in this context and has a property `variation`
     datadogRum.addFeatureFlagEvaluation(assignment.experiment, exposure.variation);
   },
 };
