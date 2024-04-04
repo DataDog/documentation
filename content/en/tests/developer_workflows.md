@@ -28,9 +28,9 @@ further_reading:
 [Test Visibility][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
 
 - [Create and open GitHub issues](#create-and-open-github-issues) 
+- [Create Jira issues through Case Management](#create-jira-issues)
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
 - [Enable test summaries in GitHub Pull Request comments](#test-summaries-in-github-pull-requests)
-- [Create Jira issues through Case Management](#create-jira-issues)
 
 These features are available for all Test Visibility customers, and they do not require usage of the [Datadog GitHub integration][4].
 
@@ -71,6 +71,40 @@ You also have the option to copy an issue description in Markdown for pasting te
 ### Sample GitHub issue
 Below is what a pre-filled GitHub issue might look like:
 {{< img src="ci/prefilled_github_issue.png" alt="Pre-filled GitHub issue" style="width:80%;">}}
+
+## Create Jira issues
+
+With [Case Management][8], you can create and open pre-filled Jira issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
+
+### In-app entry points
+
+Once you have [set up the Jira integration][7], you can create cases from three areas within Test Visibility:
+
+- [Commit Overview page (from the **Commits** table)](#commit-overview-1) 
+- [Flaky Tests section](#branch-overview-1)
+- [Test Runs side panel](#test-runs-view)
+
+You can manually create a Jira issue from a case in [Case Management][9] by clicking `Shift + J`.
+
+### Commit Overview
+
+The overview page for any commit can be discovered through a particular branch or from within any particular test. 
+
+{{< img src="continuous_integration/case_failed_test.png" alt="Create a Case Management issue in the Commit Overview page" style="width:100%;">}}
+
+From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Create case**. 
+
+#### Branch Overview
+From this page, click on any row in the **Flaky Tests** table and select **Create case**.
+
+{{< img src="continuous_integration/case_flaky_test.png" alt="Create a Case Management issue in the Flaky Tests list" style="width:100%;">}}
+
+#### Test Runs View
+From within a specific test run, click the **Actions** button and select **Create case**. 
+
+{{< img src="continuous_integration/case_test_runs.png" alt="Create a Case Management issue in the Test Runs side panel" style="width:100%;">}}
+
+For more information about configuring the Jira integration, see the [Case Management documentation][7].
 
 ## Open tests in GitHub and your IDE
 ### In-app entry points
@@ -126,38 +160,6 @@ You can enable test summaries in pull requests with the following steps:
 
 Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled test service.
 
-## Create Jira issues
-
-With [Case Management][7], you can create and open pre-filled Jira issues with relevant context into your tests as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
-
-### In-app entry points
-
-Once you have [set up the Jira integration][7], you can create cases from three areas within Test Visibility, and Case Management opens a Jira issue that is associated with your test:
-
-- [Commit Overview page (from the **Commits** table)](#commit-overview-1) 
-- [Flaky Tests section](#branch-overview-1)
-- [Test Runs side panel](#test-runs-view)
-
-### Commit Overview
-
-The overview page for any commit can be discovered through a particular branch or from within any particular test. 
-
-{{< img src="continuous_integration/case_failed_test.png" alt="Create a Case Management issue in the Commit Overview page" style="width:100%;">}}
-
-From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Create case**. 
-
-#### Branch Overview
-From this page, click on any row in the **Flaky Tests** table and select **Create case**.
-
-{{< img src="continuous_integration/case_flaky_test.png" alt="Create a Case Management issue in the Flaky Tests list" style="width:100%;">}}
-
-#### Test Runs View
-From within a specific test run, click the **Actions** button and select **Create case**. 
-
-{{< img src="continuous_integration/case_test_runs.png" alt="Create a Case Management issue in the Test Runs side panel" style="width:100%;">}}
-
-For more information about configuring the Jira integration, see the [Case Management documentation][7].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -169,3 +171,5 @@ For more information about configuring the Jira integration, see the [Case Manag
 [5]: /continuous_integration/tests/
 [6]: https://app.datadoghq.com/integrations/github
 [7]: /service_management/case_management/settings/#jira
+[8]: /service_management/case_management/view_and_manage#take-action
+[9]: https://app.datadoghq.com/cases
