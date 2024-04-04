@@ -20,7 +20,7 @@ further_reading:
 ---
 
 {{< learning-center-callout header="Try Foundations in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Sign up today to learn more about APM.
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about Datadog Foundations.
 {{< /learning-center-callout >}}
 
 ## Overview
