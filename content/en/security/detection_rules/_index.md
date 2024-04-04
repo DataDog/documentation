@@ -48,7 +48,7 @@ To [create custom rules](#create-detection-rules), you can clone the default rul
 
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security** > **Configuration**][15] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][15] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
 
 To search and filter the rules, use the search box and facets to query by value. For example, to only show rules for a given rule type, hover over the rule type and select `only`. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
