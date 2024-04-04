@@ -79,27 +79,25 @@ Remote configuration enables ASM users to intrument apps with with enrichments s
 
 ## Review your first detection
 
-![First Detection](./DELETE_appsec-52386/review_first_detection.png)
+{{<img src="security/application_security/threats/ato/review_first_detection.png" alt="An Account Takeover signal showing different highlighted areas of interest" style="width:100%;">}}
 
 **Compromised Users**
 
 Compromised and Targeted users can be reviewed and blocked within Signals, Traces, and Attacker Explorer.
 
-Signals
+**Signals:**
 
-![Signal users](./DELETE_appsec-52386/compromised_users_signals.png)
+{{<img src="security/application_security/threats/ato/compromised_users_signals.png" alt="Compromised users shown on a security signal" style="width:100%;">}}
 
+**Traces:**
 
-Traces
-![Trace users](./DELETE_appsec-52386/compromised_users_traces.png)
-
+{{<img src="security/application_security/threats/ato/compromised_users_traces.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
 
 **Blocking**
 
 ASM suggests actions to take based on the detection type and indicates what actions have been taken.
 
-![Suggested action](./DELETE_appsec-52386/review_suggested_steps.png)
-
+{{<img src="security/application_security/threats/ato/review_suggested_steps.png" alt="Suggested actions on an ASM Account Takeover signal" style="width:100%;">}}
 
 # Best practices for Signal Review and Protection
 
@@ -114,8 +112,7 @@ IP addresses can be trusted, preventing them from being automatically blocked. T
 
 To configure Trusted IPs, visit the [Passlist](https://app.datadoghq.com/security/appsec/passlist) page and add a `Monitored` entry. Monitored entries are excluded from automated blocking.
 
-![Monitored Passlist](./DELETE_appsec-52386/passlist.png)
-
+{{<img src="security/application_security/threats/ato/passlist.png" alt="Monitored passlist" style="width:100%;">}}
 
 ### What is your customer authentication profile
 
