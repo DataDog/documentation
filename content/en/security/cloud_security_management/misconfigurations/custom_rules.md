@@ -34,9 +34,9 @@ To view the list of the available resource types for your custom rules, see [Clo
 
 To clone a rule:
 
-1. Find the rule you want to copy one of the following ways:
-   - Navigate to [**Security** > **Configuration** > **Cloud Security Management** > **Compliance Rules**][1]. Select a rule you want to copy to open its details page.
-   - Navigate to [**Security** > **Cloud Security Management** > **Explorer** > **Misconfigurations**][2]. Select a misconfiguration to open its details, and select **Edit Rule** from the **Rule** menu.
+1. Find the rule you want to copy by doing one of the following:
+   - Navigate to the [**Misconfigurations Rules**][1] page. Select a rule you want to copy to open its details page.
+   - Navigate to the [**Misconfigurations Explorer**][2]. Select a misconfiguration to open its details, then select **Edit Rule** from the **Rule** menu.
 2. Make any changes you want for your new rule.
 3. Scroll to the bottom of the details page and click **Clone Rule**.
 
@@ -44,7 +44,7 @@ To clone a rule:
 
 To create a rule from scratch:
 
-1. Navigate to [**Security** > **Configuration** > **Cloud Security Management** > **Compliance Rules**][1].
+1. Navigate to the [**Misconfigurations Rules**][1] page.
 2. Click **New Rule** in the upper-right.
 3. Select **Cloud Configuration** as the rule type.
 4. Specify the cloud resource types you are writing the rule for.
@@ -68,21 +68,21 @@ When you create, clone, or modify CSM Misconfigurations compliance rules, you ca
 
 You can assign almost any key-value as a tag. The following table shows tags that are useful in common security scenarios.
 
-| Key     | Valid values    | Description |
-| ------  | --------------- | ----------- |
-| `scored` | `true`, `false` | Indicates whether to include the rule when calculating organization's overall posture score. Automatically added to cloned rules. |
-| `security` | `compliance` | Categorizes misconfigurations on the [Security Signals page][7]. Can't be removed. |
-| `requirement` | String | Not allowed for custom rules. Indicates a requirement related to a compliance framework. Don't add this to rules not part of a compliance framework. |
-| `cloud_provider` | `aws`, `gcp`, `azure` | Cannot be removed. Is set automatically based on resource type.  |
-| `control` | String | Not allowed for custom rules. Indicates a control related to a compliance framework. Don't add this to rules not part of a compliance framework. |
-| `source` | String from a defined set given by cloud providers as listed in the [Source facet in the Misconfigurations explorer][2]. | Cannot be removed. Automatically added to cloned rules. Facilitates grouping rules by cloud provider. |
-| `framework` | String | Not allowed for custom rules. Indicates the compliance framework the rule belongs to. Not automatically added to cloned rules. |
+| Key              | Valid values                                                                                                             | Description                                                                                                                                          |
+|------------------|--------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `scored`         | `true`, `false`                                                                                                          | Indicates whether to include the rule when calculating organization's overall posture score. Automatically added to cloned rules.                    |
+| `security`       | `compliance`                                                                                                             | Categorizes misconfigurations on the [Security Signals page][7]. Can't be removed.                                                                   |
+| `requirement`    | String                                                                                                                   | Not allowed for custom rules. Indicates a requirement related to a compliance framework. Don't add this to rules not part of a compliance framework. |
+| `cloud_provider` | `aws`, `gcp`, `azure`                                                                                                    | Cannot be removed. Is set automatically based on resource type.                                                                                      |
+| `control`        | String                                                                                                                   | Not allowed for custom rules. Indicates a control related to a compliance framework. Don't add this to rules not part of a compliance framework.     |
+| `source`         | String from a defined set given by cloud providers as listed in the [Source facet in the Misconfigurations Explorer][2]. | Cannot be removed. Automatically added to cloned rules. Facilitates grouping rules by cloud provider.                                                |
+| `framework`      | String                                                                                                                   | Not allowed for custom rules. Indicates the compliance framework the rule belongs to. Not automatically added to cloned rules.                       |
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/rules?product=cspm&query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29&all=false&product=cspm&sort=rule_name
+[1]: https://app.datadoghq.com/security/configuration/compliance/rules
 [2]: https://app.datadoghq.com/security/compliance
 [3]: https://www.openpolicyagent.org/docs/latest/
 [4]: /security/cloud_security_management/guide/writing_rego_rules/
