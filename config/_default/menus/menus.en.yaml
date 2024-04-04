@@ -4398,16 +4398,21 @@ main:
     parent: application_security
     identifier: asm_api_security
     weight: 8
+  - name: Account Takeover Protection
+    url: security/application_security/account_takeover_protection/
+    parent: application_security
+    identifier: asm_ato_protection
+    weight: 9
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
     identifier: appsec_guides
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 10
+    weight: 11
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
