@@ -27,9 +27,9 @@ This document walks through the following steps:
 
 {{% observability_pipelines/source_settings/splunk_hec %}}
 
-### Set up destinations
+### Set up the destination
 
-{{% observability_pipelines/destination_settings/splunk_hec %}}
+Enter the following information based on your selected logs destination.
 
 {{< tabs >}}
 {{% tab "Datadog" %}}
@@ -40,11 +40,6 @@ This document walks through the following steps:
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
-
-{{% /tab %}}
-{{% tab "Splunk TCP" %}}
-
-{{% observability_pipelines/destination_settings/splunk_tcp %}}
 
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}

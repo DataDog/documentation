@@ -30,9 +30,9 @@ This document walks you through the following steps to set up dual shipping:
 
 {{% observability_pipelines/source_settings/splunk_hec %}}
 
-### Set up destinations
+### Set up the destinations
 
-{{% observability_pipelines/destination_settings/splunk_hec %}}
+Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
 {{% tab "Datadog" %}}
@@ -43,11 +43,6 @@ This document walks you through the following steps to set up dual shipping:
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
-
-{{% /tab %}}
-{{% tab "Splunk TCP" %}}
-
-{{% observability_pipelines/destination_settings/splunk_tcp %}}
 
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}
