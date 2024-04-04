@@ -8,7 +8,7 @@ further_reading:
 - link: "bits_ai/guide/query_examples"
   tag: "Documentation"
   text: "Example Natural Language Queries"
-- link: bits_ai/managing_incidents/"
+- link: "bits_ai/managing_incidents/"
   tag: "Documentation"
   text: "Managing Incidents"
 ---
