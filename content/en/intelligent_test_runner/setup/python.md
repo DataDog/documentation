@@ -43,7 +43,8 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python]
 
 The Intelligent Test Runner requires the [`coverage` package][2].
 
-Install the package in your environment by specifying it in your `requirements.txt` for example, or using `pip`:
+Install the package in your CI test environment by specifying it in the relevant requirements file, for example, or using `pip`:
+
 {{< code-block lang="shell" >}}
 pip install coverage
 {{< /code-block >}}
