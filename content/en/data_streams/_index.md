@@ -47,7 +47,7 @@ To get started, follow the installation instructions to configure services with 
 | Runtime | Supported technologies |
 |---|----|
 | Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
-| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
+| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS, Amazon Kinesis |
 | .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
 | Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
 | Go | All (with [manual instrumentation][1]) |
@@ -70,9 +70,22 @@ You can also graph and visualize these metrics on any dashboard or notebook:
 
 ### Monitor end-to-end latency of any pathway
 
-Depending on how events traverse through your system, different paths can lead to increased latency. With the **Pathways** tab, you can view latency between any two points throughout your pipelines, including queues, producers, and consumers to identify bottlenecks and optimize performance. Easily create a monitor for a pathway, or export to a dashboard.
+Depending on how events traverse through your system, different paths can lead to increased latency. With the **Measure** tab, you can select a start service and end service for end-to-end latency information to identify bottlenecks and optimize performance. Easily create a monitor for that pathway, or export to a dashboard.
+
+{{< img src="path/to/your/measure.3.0.mp4" alt="Datadog Data Stream Monitoring measure" video="true" >}}
+
+Alternatively, view the **Pathways** tab for latency between the select service and upstream services.
 
 {{< img src="data_streams/data_streams_pathway.jpg" alt="Datadog Data Streams Monitoring Pathway tab" style="width:100%;" >}}
+
+### Alert on slowdowns in event-driven applications
+Slowdowns caused by high consumer lag or stale messages can lead to cascading failures and increase downtime. With out-of-the-box alerts, you can pinpoint where bottlenecks occur in your pipelines and respond to them right away. For supplementary metrics, Datadog provides additional integrations for message queue technologies like [Kafka][4] and [SQS][5].
+
+{{< img src="data_streams/Product_Doc_Kafka_Lag.png" alt="Datadog Data Streams Monitoring Kafka Lag" style="width:100%;" >}}
+
+Through Data Stream Monitoring’s out-of-the-box recommended monitors, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
+
+{{< img src="data_streams/Product_Doc_Recommended_Monitors.png" alt="Datadog Data Streams Monitoring Recommended Monitors" style="width:100%;" >}}
 
 ### Attribute incoming messages to any queue, service, or cluster
 
@@ -86,7 +99,7 @@ By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect 
 
 ### Quickly pivot to identify root causes in infrastructure, logs, or traces 
 
-Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra** or **Logs** tabs to further troubleshoot why pathway latency or consumer lag has increased. To view traces within your pathways, click the **Processing Latency** tab.
+Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra**, **Logs** or **Traces** tabs to further troubleshoot why pathway latency or consumer lag has increased.
   
 {{< img src="data_streams/data_streams_infra.jpg" alt="Datadog Data Streams Monitoring Infra tab" style="width:100%;" >}}
 
@@ -97,3 +110,5 @@ Datadog automatically links the infrastructure powering your services and relate
 [1]: /data_streams/go#manual-instrumentation
 [2]: /tracing/service_catalog/
 [3]: /getting_started/tagging/unified_service_tagging
+[4]: /integrations/kafka/
+[5]: /integrations/amazon_sqs/
