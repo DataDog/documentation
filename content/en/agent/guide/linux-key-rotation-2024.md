@@ -103,7 +103,7 @@ $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo apt-key
 Run the following command on the host:
 
 ```
-$ curl https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public | sudo rpm --import -
+$ sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 ```
 
 {{% /tab %}}
@@ -190,7 +190,7 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 **Note**: Agent v5 uses Python 2 which reached end-of-life on January 1, 2020. Datadog recommends [upgrading to Agent v7][13].
 
 [1]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
-[2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public 
+[2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 [3]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
 [4]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [5]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh
