@@ -72,7 +72,7 @@ You can also graph and visualize these metrics on any dashboard or notebook:
 
 Depending on how events traverse through your system, different paths can lead to increased latency. With the **Measure** tab, you can select a start service and end service for end-to-end latency information to identify bottlenecks and optimize performance. Easily create a monitor for that pathway, or export to a dashboard.
 
-{{< img src="data_streams/measure_3.0.mov" alt="Datadog Data Stream Monitoring measure" video="true" >}}
+{{< img src="data_streams/measure_3.0.mp4" alt="Datadog Data Stream Monitoring measure" video="true" >}}
 
 Alternatively, view the **Pathways** tab for latency between the select service and upstream services.
 
