@@ -3363,7 +3363,7 @@ main:
     identifier: observability_pipelines_log_volume_control_splunk_hec
     weight: 1001
   - name: Splunk Forwarders (TCP)
-    url: observability_pipelines/dual_ship_logs/splunk_tcp/
+    url: observability_pipelines/log_volume_control/splunk_tcp/
     parent: observability_pipelines_log_volume_control
     identifier: observability_pipelines_log_volume_control_splunk_tcp
     weight: 1002
