@@ -53,73 +53,57 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 ```sh
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} --forwarder "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
 ```
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog CLI를 사용하여 계측하려면 먼저 Datadog의 서명 프로파일 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][1]에 추가해야 합니다.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog CLI를 사용하여 계측하려면 먼저 Datadog의 서명 프로파일 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc``)을 함수의 [코드 서명 설정][1]에 추가해야 합니다.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog Signing Profile ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 구성][3]에 추가한 후 Datadog CLI로 계측해야 합니다.
 
 자세한 내용 및 추가 파라미터는 [CLI 설명서][4]에서 확인할 수 있습니다.
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/ko/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/ko/serverless/serverless_integrations/cli
+
 {{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{% tab "서버리스 프레임워크" %}}
 
 [Datadog 서버리스 플러그인][1]은 레이어를 사용하여 Datadog Lambda 라이브러리를 함수에 자동으로 추가하고 [Datadog 포워더][2]를 통해 메트릭, 트레이스 및 로그를 Datadog으로 전송하도록 함수를 설정합니다.
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog 서버리스 플러그인을 설치하기 전 함수의 [코드 서명 설정][1]에 Datadog의 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 추가해야 합니다.
+Lambda 함수가 코드 서명을 사용하도록 설정된 경우 먼저 Datadog의 Signing Profile ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 구성][6]에 추가한 후 Datadog Serverless Plugin을 설치해야 합니다.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
+Datadog 서버리스 플러그인을 설치 및 설정하려면 다음 단계를 따르세요.
 
-{{< site-region region="ap1" >}}
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog 서버리스 플러그인을 설치하기 전 함수의 [코드 서명 설정][1]에 Datadog의 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 추가해야 합니다.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-Datadog Serverless Plugin을 설치하고 설정하려면 다음 절차를 따라주세요.
-
-1. Datadog Serverless Plugin을 설치합니다.
+1. Datadog 서버리스 플러그인을 설치합니다.
     ```
     yarn add --dev serverless-plugin-datadog
     ```
-2. `serverless.yml`에서 다음을 추가합니다:
+2. `serverless.yml`에서 다음을 추가합니다.
     ```
     plugins:
       - serverless-plugin-datadog
     ```
-3. `serverless.yml`에서 다음 섹션도 추가합니다:
+3. `serverless.yml`에서 다음 섹션도 추가합니다.
     ```
     custom:
       datadog:
         forwarderArn: # The Datadog Forwarder ARN goes here.
     ```
-   Datadog 포워더 ARN 또는 설치에 대한 자세한 내용은 [여기][2]를 참조하세요. 또한, 추가적인 설정 방법은 [플러그인 설명서][1]을 참조하세요.
+   Datadog 포워더 ARN 또는 설치에 대한 자세한 내용은 [여기][2]를 참고하세요. 또한, 추가적인 설정 방법은 [플러그인 설명서][1]을 참고하세요.
 
-**참고**: Lambda 함수가 Datadog의 트레이스 라이브러리와 [웹팩][5]을 동시에 사용하는 경우 다음 [추가 설정 단계][4]를 따라야 합니다.
-
+**참고**: Lambda 함수가 Datadog의 추적 라이브러리와 [웹팩][5]을 동시에 사용하는 경우 다음 [추가 설정 단계][4]를 따라야 합니다.
 
 [1]: https://docs.datadoghq.com/ko/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ko/serverless/forwarder/
 [4]: /ko/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
+[6]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-[Datadog CloudFormation 매크로][1]는 레이어를 사용하여 Datadog Lambda 라이브러리를 함수에 추가하기 위해 SAM 애플리케이션을 템플릿을 자동으로 변환하고, [Datadog 포워더][2]를 통해 메트릭, 트레이스 및 로그를 Datadog으로 전송하도록 함수를 설정합니다.
+[Datadog CloudFormation 매크로][1]는 레이어를 사용하여 Datadog Lambda 라이브러리를 함수에 추가하기 위해 SAM 애플리케이션 템플릿을 자동으로 변환하고, [Datadog 포워더][2]를 통해 메트릭, 트레이스, 로그를 Datadog로 전송하도록 함수를 설정합니다.
 
 ### 설치
 
-[AWS 크리덴셜][3]과 함께 다음 명령을 실행하여 매크로 AWS 리소스를 설치하는 CloudFormation 스택을 배포합니다. 계정에서 특정 지역에 대해 매크로를 한 번만 설치하면 됩니다. 매크로를 최신 버전으로 업데이트하려면 `create-stack`를 `update-stack`로 대체합니다.
+다음 명령을 [AWS 자격 증명][3]과 함께 실행해 매크로 AWS 리소스를 설치하는 CloudFormation 스택을 배포합니다. 매크로는 계정에서 특정 지역에  한 번만 설치하면 됩니다. 매크로를 최신 버전으로 업데이트하려면 `create-stack`을 `update-stack`으로 변경합니다.
 
 ```sh
 aws cloudformation create-stack \
@@ -128,11 +112,11 @@ aws cloudformation create-stack \
   --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
 ```
 
-매크로가 배포되어 사용할 준비가 되었습니다.
+매크로가 배포되었고 사용할 준비가 되었습니다.
 
 ### 계측
 
-`template.yml`에서 SAM에 대한 `AWS::Serverless` 변환 **후** `Transform` 섹션 아래에 다음을 추가합니다.
+SAM의 `AWS::Serverless` 변환 **후** `template.yml`의 `Transform` 섹션 아래에 다음을 추가합니다.
 
 ```yaml
 Transform:
@@ -142,43 +126,34 @@ Transform:
       stackName: !Ref "AWS::StackName"
       nodeLayerVersion: "{{< latest-lambda-layer-version layer="node" >}}"
       forwarderArn: "<FORWARDER_ARN>"
-      service: "<SERVICE>" # Optional
-      env: "<ENV>" # Optional
+      service: "<SERVICE>" # 선택사항
+      env: "<ENV>" # 선택사항
 ```
 
-플레이스홀더를 채우려면:
-- `<FORWARDER_ARN>`를 포워더 ARN으로 대체합니다 ([포워더 설명서][2] 참조).
-- `<SERVICE>`와 `<ENV>`를 서비스와 환경값으로 대체합니다. 
+자리 표시자를 채우는 방법:
+- `<FORWARDER_ARN>`를 포워더 ARN으로 대체합니다 ([포워더 설명서][2] 참고).
+- `<SERVICE>`와 `<ENV>`를 서비스와 환경 값으로 대체합니다. 
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 매크로를 사용하려면 먼저 Datadog의 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][1]에 추가해야 합니다.
+Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][4]에 추가한 다음 매크로를 사용해야 합니다.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 매크로를 사용하려면 먼저 Datadog의 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][1]에 추가해야 합니다.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-자세한 정보와 추가적인 파라미터는 [매크로 설명서][1]에서 확인할 수 있습니다.
+자세한 정보와 추가 파라미터는 [매크로 설명서][1]에서 확인할 수 있습니다.
 
 [1]: https://docs.datadoghq.com/ko/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ko/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-[Datadog CDK 컨스트럭트][1]는 다음과 같은 방법으로 서버리스 애플리케이션에서 메트릭, 트레이스 및 로그 수집을 자동으로 설정합니다:
+[Datadog CDK Constructs][1]에서는 다음과 같은 방법으로 서버리스 애플리케이션에서 메트릭, 트레이스, 로그 수집을 자동으로 구성합니다.
 
--  Python 및 Node.js Lambda 함수에 대한 Datadog Lambda 라이브러리를 설치 및 설정합니다.
+-  Python 및 Node.js Lambda 함수의 Datadog Lambda 라이브러리를 설치 및 설정합니다.
 - Lambda 함수에서 트레이스 및 커스텀 메트릭 수집을 활성화합니다.
-- Datadog 포워더에서 Lambda 함수 로그 그룹으로의 구독을 관리합니다.
+- Datadog 포워더에서 Lambda 함수 로그 그룹으로 구독을 관리합니다.
 
 ### 설치
 
-CDK 프로젝트에서 다음 Yarn 또는 NPM 명령을 실행하여 Datadog CDK 컨스트럭트 라이브러리를 설치합니다:
+CDK 프로젝트에서 다음 Yarn 또는 NPM 명령을 실행하여 Datadog CDK Constructs 라이브러리를 설치합니다.
 
 ```sh
 #Yarn
@@ -190,7 +165,7 @@ npm install datadog-cdk-constructs --save-dev
 
 ### 계측
 
-이 함수를 계측하려면 AWS CDK 앱에서 `datadog-cdk-construct` 모듈을 가져온 뒤 다음 설정을 추가합니다 (이 예시는 TypeScript이나 다른 언어에서의 사용법도 유사함):
+이 함수를 계측하려면 AWS CDK 앱에서 `datadog-cdk-construct` 모듈을 가져온 뒤 다음 설정을 추가합니다(이 예시는 TypeScript이지만 다른 언어에서도 사용법이 유사함).
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
@@ -202,42 +177,33 @@ class CdkStack extends cdk.Stack {
     const datadog = new Datadog(this, "Datadog", {
       nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
-      service: "<SERVICE>",  // Optional
-      env: "<ENV>",  // Optional
+      service: "<SERVICE>",  // 선택사항
+      env: "<ENV>",  // 선택사항
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
   }
 }
 ```
 
-플레이스홀더를 채우려면:
+자리 표시자를 채우는 방법:
 
 - `<FORWARDER_ARN>`를 포워더 ARN으로 대체합니다 ([포워더 설명서][2] 참조).
-- `<SERVICE>`와 `<ENV>`를 서비스와 환경값으로 대체합니다. 
+- `<SERVICE>`와 `<ENV>`를 서비스와 환경 값으로 대체합니다. 
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-람다 함수가 코드 서명을 사용하도록 구성된 경우 매크로를 사용려면 먼저 Datadog의 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc``)을 함수의 [코드 서명 설정][1]에 추가해야 합니다.
+Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog Signing Profile ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 구성][3]에 추가한 다음 매크로를 사용해야 합니다.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 매크로를 사용하려면 먼저 Datadog의 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][1]에 추가해야 합니다.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-자세한 내용 및 추가적인 파라미터는 [Datadog CDK NPM 페이지][1]에서 확인할 수 있습니다.
+자세한 내용 및 추가 파라미터는 [Datadog CDK NPM 페이지][1]에서 확인할 수 있습니다.
 
 
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://docs.datadoghq.com/ko/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "컨테이너 이미지" %}}
 
 ### 설치
 
-Lambda 함수를 컨테이너 이미지로 배포하는 경우 Datadog  Lambd다 라이브러리를 레이어로 사용할 수 없습니다. 대신 Datadog Lambda 라이브러리를 이미지 내 함수의 종속성으로 설치해야 하며, Datadog 트레이스를 사용하는 경우에도 `dd-trace`를 설치해야 합니다.
+Lambda 함수를 컨테이너 이미지로 배포하는 경우 Datadog  Lambda 라이브러리를 레이어로 사용할 수 없습니다. 대신 Datadog Lambda 라이브러리를 이미지 내 함수의 종속성으로 설치해야 하며, Datadog 트레이스를 사용하는 경우에도 `dd-trace`를 설치해야 합니다.
 
 **NPM**:
 
@@ -255,16 +221,16 @@ yarn add datadog-lambda-js dd-trace
 
 ### 설정
 
-함수를 설정하려면 다음 단계를 따르세요:
+함수를 설정하려면 다음 단계를 따르세요.
 
-1. 이미지의 `CMD` 값을 `node_modules/datadog-lambda-js/dist/handler.handler`로 설정합니다. AWS 또는 도커 파일에서 직접 설정할 수 있습니다. **참고**: 둘 다 설정한 경우 AWS에서 설정한 값이 도커 파일의 값보다 우선합니다.
-2. AWS에서 다음 환경 변수를 설정하세요:
+1. 이미지의 `CMD` 값을 `node_modules/datadog-lambda-js/dist/handler.handler`로 설정합니다. AWS 또는 Dockerfile에서 직접 설정할 수 있습니다. **참고**: 둘 다 설정한 경우 AWS에서 설정한 값이 Dockerfile의 값보다 우선합니다.
+2. AWS에서 다음 환경 변수를 설정하세요.
   - `myfunc.handler`와 같이 `DD_LAMBDA_HANDLER`를 원래 핸들러로 설정합니다.
   - `DD_TRACE_ENABLED`를 `true`로 설정합니다.
   - `DD_FLUSH_TO_LOG`를 `true`로 설정합니다.
 3. 필요 시 적절한 값을 사용하여 함수에 `service`와 `env` 태그를 추가합니다.
 
-### 구독
+### 연결
 
 메트릭, 트레이스, 로그를 Datadog으로 보내려면 각 함수 로그 그룹에 Datadog 포워더 Lamda 함수를 등록합니다.
 
@@ -285,41 +251,24 @@ Datadog Lambda 라이브러리는 레이어 또는 JavaScript 패키지로 가�
 
 #### 레이어 사용하기
 
-다음 형식에 맞추어 ARN을 사용해 Lambda 함수의 [레이어를 설정합니다][1].
+다음 형식에 따라 ARN을 사용해 Lambda 함수의 [레이어를 설정합니다][8].
 
 ```
-# For us,us3,us5,eu regions
+# us,us3,us5,eu, ap1 리전의 경우
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
-# For us-gov regions
+# us-gov 리전의 경우
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 
-# For ap1 region
-arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-사용 가능한`RUNTIME`옵션은 `Node12-x`, `Node14-x` 및 `Node16-x`입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="node" >}}`입니다. 예를 들어:
+사용 가능한 `RUNTIME` 옵션은: {{< latest-lambda-layer-version layer="node-versions" >}}입니다. 최신`VERSION`은 `{{< latest-lambda-layer-version layer="node" >}}`입니다.다음 예를 참고하세요.
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
-```
-
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog Lambda 라이브러리를 레이어로 추가하려면 먼저 Datadog의 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][1]에 추가해야 합니다.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```
-arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
-Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog Lambda 라이브러리를 레이어로 추가하려면 먼저 Datadog의 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][1]에 추가해야 합니다.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /site-region >}}
-
+Lambda 함수가 코드 서명을 사용하도록 설정된 경우 먼저 Datadog Signing Profile ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 구성][2]에 추가한 후 Datadog Lambda 라이브러리를 레이어로 추가해야 합니다.
 
 #### 패키지 사용하기
 
@@ -335,11 +284,11 @@ npm install --save datadog-lambda-js
 yarn add datadog-lambda-js
 ```
 
-[최신 릴리스][3]를 참조하세요.
+[최신 릴리스][3]를 참고하세요.
 
-### 설정
+### 구성
 
-함수를 설정하려면 다음 단계를 따르세요:
+함수를 설정하려면 다음 단계를 따르세요.
 
 1. 레이어를 사용하는 경우 함수 핸들러를 `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`로 설정하거나 패키지를 사용하는 경우 `node_modules/datadog-lambda-js/dist/handler.handler`로 설정합니다.
 2. 환경 변수 `DD_LAMBDA_HANDLER`를 `myfunc.handler`와 같이 원래의 핸들러로 설정합니다.
@@ -351,56 +300,58 @@ yarn add datadog-lambda-js
 
 ### 구독
 
-메트릭, 트레이스, 로그를 Datadog로 보내려면 각 함수 로그 그룹에서 Datadog Forwarder Lamda 함수를 구독하세요. 
+메트릭, 트레이스, 로그를 Datadog로 보내려면 각 함수 로그 그룹에서 Datadog 포워더 Lamda 함수를 연결하세요. 
 
 1. [Datadog 포워더를 설치하지 않았다면 먼저 설치하세요][6].
 2. [Datadog 포워더를 함수의 로그 그룹에 등록합니다][7].
 
-
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
 [4]: /ko/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/ko/serverless/forwarder/
 [7]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 태그
 
-선택 사항이지만 Datadog은 [통합 서비스 태깅 설명서][2]에 따라 `env`,`service` 및 `version`태그를 사용해 서버리스 애플리케이션을 태깅할 것을 권장합니다.
+선택 사항이지만 Datadog에서는 [통합 서비스 태깅 설명서][2]에 따라 `env`,`service`, `version`태그를 사용해 서버리스 애플리케이션을 태깅할 것을 권장합니다.
 
 ## 탐색
 
-위의 단계에 따라 함수를 설정한 후 [서버리스 홈페이지][3]에서 메트릭, 로그 및 트레이스를 확인합니다.
+위의 단계에 따라 함수를 설정한 후 [서버리스 홈페이지][3]에서 메트릭, 로그, 트레이스를 확인합니다.
 
 ## 커스텀 비즈니스 로직 모니터링
 
-커스텀 메트릭 또는 스팬을 제출하려면 아래 샘플 코드를 참조하세요:
+커스텀 메트릭 또는 스팬을 제출하려면 아래 샘플 코드를 참고하세요.
 
 ```javascript
 const { sendDistributionMetric, sendDistributionMetricWithDate } = require("datadog-lambda-js");
 const tracer = require("dd-trace");
 
-// submit a custom span named "sleep"
+// 이름이 "sleep"인 커스텀 스팬 제출
 const sleep = tracer.wrap("sleep", (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 });
 
 exports.handler = async (event) => {
-  // add custom tags to the lambda function span,
-  // does NOT work when X-Ray tracing is enabled
+  // Lambda 함수 스팬에 커스텀 태그 추가,
+  // X-Ray 추적이 활성화된 경우 작동하지 않음
   const span = tracer.scope().active();
   span.setTag('customer_id', '123456');
 
   await sleep(100);
 
-  // submit a custom span
+  // 커스텀 스팬 제출
   const sandwich = tracer.trace('hello.world', () => {
     console.log('Hello, World!');
   });
 
-  // submit a custom metric
+  // 커스텀 메트릭 제출
   sendDistributionMetric(
     "coffee_house.order_value", // metric name
     12.45, // metric value
@@ -408,7 +359,7 @@ exports.handler = async (event) => {
     "order:online", // another tag
   );
 
-  // submit a custom metric with timestamp
+  // 태임스탬프와 함께 커스텀 메트릭 제출
   sendDistributionMetricWithDate(
     "coffee_house.order_value", // metric name
     12.45, // metric value
@@ -425,7 +376,7 @@ exports.handler = async (event) => {
 };
 ```
 
-커스텀 메트릭 제출에 대한 자세한 내용은 [서버리스 커스텀 메트릭][4]을 참조하세요. 커스텀 계측에 대한 자세한 내용은 [커스텀 계측][5]의 Datadog APM 설명서를 참조하세요.
+커스텀 메트릭 제출과 관련한 자세한 내용은 [서버리스 커스텀 메트릭][4]을 참고하세요. 커스텀 계측에 관한 자세한 내용은 Datadog APM 설명서에서 [커스텀 계측][5]을 참고하세요.
 
 ## 참고 자료
 

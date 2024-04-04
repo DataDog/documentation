@@ -9,7 +9,7 @@ title: beforeSend を使用してブラウザ RUM データを強化および制
 
 ## 概要
 
-RUM ブラウザ SDK は RUM イベントをキャプチャし、それらの主な属性を設定します。`beforeSend` コールバック関数を使用すると、RUM  SDK によって収集されたすべてのイベントにアクセスしてから Datadog に送信できます。
+RUM ブラウザ SDK は RUM イベントをキャプチャし、その主要な属性を設定します。`beforeSend` コールバック関数を使用することで、RUM SDK によって収集されたすべてのイベントにアクセスし、それらが Datadog に送信される前に処理することができます。
 
 RUM イベントをインターセプトすると、次のことが可能になります。
 
@@ -64,8 +64,9 @@ datadogRum.init({
     beforeSend: (event, context) => {
         // RUM リソースの応答ヘッダーを収集します
         if (event.type === 'resource' && event.resource.type === 'fetch') {
-            event.context = {...event.context, responseHeaders: context.response.headers}
+            event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
+        return true
     },
     ...
 });

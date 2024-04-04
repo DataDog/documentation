@@ -1,8 +1,7 @@
 ---
 aliases:
 - /ja/synthetics/dashboards/testing_coverage
-description: Test Coverage ページでは、テストカバレッジを充実させるために新しい Synthetic ブラウザテストが必要なビューやアクションを推奨し、Synthetic
-  のステップと実際のユーザーの動作を比較します。
+description: ブラウザテストのアプリケーションカバレッジを評価し、アプリケーション内の人気のある要素を RUM と Synthetic のデータを使用して追跡する要素として特定します。
 further_reading:
 - link: https://www.datadoghq.com/blog/test-coverage-monitoring-datadog/
   tag: GitHub

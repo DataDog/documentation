@@ -1,5 +1,6 @@
 | Name | Description |
 | --- | --- |
+| Category::AI | Integrations that monitor AI technologies. |
 | Category::Alerting | Integrations that collect Datadog data to alert on, or send alerts into Datadog. |
 | Category::Automation | Integrations for technologies that automate processes such as security, compliance, testing, and AIOps. |
 | Category::AWS | Integrations that send in data from Amazon Web Services and its related services. |
@@ -21,6 +22,7 @@
 | Category::Kubernetes | Integrations that send in data from Kubernetes and Kubernetes-related services. |
 | Category::Languages | Integrations that send metrics and additional data based on specific programming languages. |
 | Category::Log Collection | Integrations that submit or query logs from Datadog. |
+| Category::Machine Learning & LLM | Integrations that monitor Machine Learning technologies, Large Language Models, and assist with ML Operations. |
 | Category::Mainframe | Integrations that monitor mainframe systems such as IBM z/OS. |
 | Category::Marketplace | Integrations that are sold in the Datadog Marketplace for an additional fee. |
 | Category::Messaging | Integrations that monitor messaging queues and messaging systems. |

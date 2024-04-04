@@ -58,7 +58,7 @@ If you do not want to change your current notebook but you'd like to create a co
 | Audit Trail **Enabled**  | 90 days |
 
 
-[1]:/account_management/audit_trail/
+[1]: /account_management/audit_trail/
 
 ## Further reading
 

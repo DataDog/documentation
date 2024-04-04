@@ -2,7 +2,6 @@
 title: Mobile Application Testing and Monitoring
 kind: documentation
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
-disable_sidebar: true
 aliases:
 - /mobile_testing
 further_reading:
@@ -23,13 +22,18 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-{{< site-region region="us3,us5,gov,eu,ap1" >}}
+{{< site-region region="us,us5,eu" >}}
+<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
+{{< /site-region >}}
+
+{{< site-region region="us3,ap1" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">Mobile Application Testing is in limited availability and is only supported for the Datadog US1 site.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
+
 
 Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. Datadog runs these tests on real devices to provide a realistic, step-by-step representation of key application workflows, screenshots of each step, and detailed pass or fail results so your team can quickly visualize what went wrong.
 
@@ -47,7 +51,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 Create [search queries and visualizations][5] for your Synthetic test runs or batches of tests running in CI/CD pipelines in the [Synthetic Monitoring & Continuous Testing Explorer][6]. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="mobile_app_testing/explorer_mobile_test_runs.png" alt="Mobile App Test Runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
 
 ## Further reading
 

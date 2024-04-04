@@ -8,6 +8,10 @@ further_reading:
     text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 SNMP Traps are notifications sent from an SNMP-enabled device to an SNMP manager. When a network device encounters unusual activity, such as a sudden state change on a piece of equipment, the device triggers an SNMP Trap event.
@@ -30,15 +34,25 @@ network_devices:
       - <STRING_1>
       - <STRING_2>
     bind_host: 0.0.0.0
-    users: # limited to only a single v3 user
-      - username: 'user'
-        authKey: 'fakeKey'
-        authProtocol: 'SHA' # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
-        privKey: 'fakePrivKey'
-        privProtocol: 'AES' # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+    users: # SNMP v3
+    - user: "user"
+      authKey: myAuthKey
+      authProtocol: "SHA"
+      privKey: myPrivKey
+      privProtocol: "AES" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+    - user: "user"
+      authKey: myAuthKey
+      authProtocol: "MD5"
+      privKey: myPrivKey
+      privProtocol: "DES"
+    - user: "user2"
+      authKey: myAuthKey2
+      authProtocol: "SHA"
+      privKey: myPrivKey2
+      privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
 ```
 
-**Note**: Multiple v3 users and passwords are not supported. If this is a requirement in your environment, contact [Datadog support][2].
+**Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
 
 ## Device namespaces
 
@@ -117,12 +131,15 @@ You can write these mappings by hand, or generate mappings from a list of MIBs u
 Put all your MIBs into a dedicated folder. Then, run:
 `ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...`
 
-If your MIBs have dependencies, `ddev` fetches them online if they can be found. Alternatively, put all your dependencies in a separate folder and use the `--mib-sources` parameter to specify this folder.
+If your MIBs have dependencies, `ddev` fetches them online if they can be found.
+
+If there are errors due to missing dependencies and you have access to the missing MIB files, put the files in a separate folder and use the `--mib-sources <DIR>` parameter so that ddev knows where to find them. Make sure that each filename is the same as the MIB name (for example, `SNMPv2-SMI` and not `snmp_v2_smi.txt`).
+
 
 
 
 [1]: /monitors/
 [2]: /help/
 [3]: /network_monitoring/devices
-[4]: /developers/integrations/new_check_howto/?tab=configurationtemplate#developer-toolkit
+[4]: /developers/integrations/python
 [5]: https://pypi.org/project/pysmi/

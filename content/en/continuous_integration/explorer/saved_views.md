@@ -38,7 +38,7 @@ All saved views except for the [default view](#default-views) are shared across 
 
   {{< img src="continuous_integration/saved-view-pipelines-executions.png" alt="Access Saved Views by clicking the tab to the left of CI Visibility" width="40%" >}}
 
-[1]: /agent/guide/agent-commands/
+[1]: /agent/configuration/agent-commands/
 
 {{% /tab %}}
 {{< /tabs >}}

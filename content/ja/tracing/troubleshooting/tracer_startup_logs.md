@@ -8,13 +8,13 @@ title: Tracer Startup Logs
 ---
 ## 起動ログ
 
-トレーサー起動ログは、起動時に取得可能なすべての情報を取得し、`DATADOG TRACER CONFIGURATION`、`DATADOG TRACER DIAGNOSTICS`、または `DATADOG CONFIGURATION` として記録し、ログ内の検索を簡素化することができます。
+トレーサー起動ログは、起動時に取得可能なすべての情報を取得し、`DATADOG TRACER CONFIGURATION`、`DATADOG TRACER DIAGNOSTICS`、`DATADOG ERROR`、または `DATADOG CONFIGURATION` として記録し、ログ内の検索を簡素化することができます。
 
 言語によっては、言語の慣習や `Stdout` やそれに相当するものにアクセスする安全性に応じて、別のファイルにログを記録するものもあります。そのような場合、ログの場所は以下の言語タブに記されています。いくつかの言語では、診断エントリをログに残しません。
 
 `CONFIGURATION` ログは、トレーサーに適用された設定の JSON 形式の表現です。Agent の接続性チェックが実行される言語では、コンフィギュレーション JSON には、Agent に到達できるかどうかを示す `agent_error` キーも含まれます。
 
-`DIAGNOSTICS` ログエントリは、それを生成する言語では、アプリケーションの起動中にトレーサーがエラーに遭遇したときに発生します。もし `DIAGNOSTICS` のログが表示された場合は、表示されたログから設定や構成が正しく適用されていることを確認してください。
+`DIAGNOSTICS` または `ERROR` ログエントリは、それを生成する言語では、アプリケーションの起動中にトレーサーがエラーに遭遇したときに発生します。もし `DIAGNOSTICS` または `ERROR` のログ行が表示された場合は、表示されたログから設定や構成が正しく適用されていることを確認してください。
 
 ログが全く表示されない場合は、アプリケーションのログが消されていないか、またログレベルが少なくとも `INFO` であることを確認してください (該当する場合)。
 
@@ -49,11 +49,13 @@ Java トレーサーは診断ログを出力しません。このチェックで
 
 **注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
 
-- `dotnet-tracer-managed-{processName}-{timestamp}.log` には、コンフィギュレーションログが含まれています。
+バージョン `2.19.0` 以降では、`DD_TRACE_LOGFILE_RETENTION_DAYS` 設定を使うことで、起動時に現在のロギングディレクトリからログファイルを削除するようにトレーサーを構成することができます。トレーサーは指定された日数より古いログファイルと同じ年齢のログファイルを削除します。デフォルト値は `31` です。
 
-- `dotnet-tracer-native.log` には、診断ログが（生成されている場合）含まれています。
+- `dotnet-tracer-managed-{processName}-{timestamp}.log` には、構成ログが含まれています。
 
-**コンフィギュレーション:**
+- `dotnet-tracer-native-{processName}-{processID}.log` には、診断ログが（生成されている場合）含まれています。
+
+**構成:**
 
 ```text
 2020-06-29 12:26:39.572 +02:00 [INF] DATADOG TRACER CONFIGURATION -
@@ -123,7 +125,7 @@ ddtrace.disable => Off => Off
 ...
 ```
 
-**コンフィギュレーション:**
+**構成:**
 
 トレーサーが [DEBUG モード][1]の場合、最初のリクエストでプロセスごとに 1 回、起動ログが `error_log` に表示されます。
 
@@ -152,7 +154,7 @@ echo \DDTrace\startup_logs() . PHP_EOL;
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-**コンフィギュレーション:**
+**構成:**
 
 ```text
 2020/07/09 15:57:07 Datadog Tracer v1.26.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2020-07-09T15:57:07-05:00","os_name":"darwin","os_version":"10.15.4","version":"v1.26.0","lang":"Go","lang_version":"go1.14.2","env":"","service":"splittest2","agent_url":"http://127.0.0.1:8126/v0.4/traces","agent_error":"","debug":true,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","tags":{"runtime-id":"d269781c-b1bf-4d7b-9a55-a8174930554f"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"dd_version":"","architecture":"amd64","global_service":""}
@@ -174,7 +176,7 @@ Go トレーサーは、2 つの可能性のある診断行の 1 つを出力し
 
 起動ログは、トレーサーのバージョン 2.x からデフォルトで無効になっています。環境変数 `DD_TRACE_STARTUP_LOGS=true` を使用することで有効にすることができます。
 
-**コンフィギュレーション:**
+**構成:**
 
 ```text
 [2020-07-02 14:51:16.421] [INFO] app - host:port==localhost:9080
@@ -199,15 +201,15 @@ DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent
 
 **ログの場所:**
 
-Python トレーサーは、コンフィギュレーション情報を INFO レベルで記録します。診断情報が見つかった場合は、ERROR としてログに記録します。
+Python トレーサーは、構成情報を INFO レベルで記録します。診断情報が見つかった場合は、ERROR レベルでログに記録します。
 
-ログコンフィギュレーションがない場合、診断のみが `Stderr` に出力されます。
+ログ構成がない場合、診断のみが `Stderr` に出力されます。
 
-トレーサーの起動ログを表示するには、ロガーを追加するか、コンフィギュレーションに `DD_TRACE_DEBUG=true` を設定して、`ddtrace-run` でアプリケーションを実行します。これにより、ロガーが追加され、デバッグと起動の両方のトレーサーログが公開されます。
+トレーサーの起動ログを表示するには、ロガーを追加するか、構成に `DD_TRACE_DEBUG=true` を設定して、`ddtrace-run` でアプリケーションを実行します。これにより、ロガーが追加され、デバッグと起動の両方のトレーサーログが公開されます。
 
 `DD_TRACE_LOG_FILE` でファイルにログを記録するためのオプションについては、 [トレーサーデバッグログ][1]を参照してください。
 
-**コンフィギュレーション:**
+**構成:**
 
 ```text
 2020-07-09 11:04:08,098 INFO [ddtrace.tracer] [tracer.py:338] - - DATADOG TRACER CONFIGURATION - {"date": "2020-07-09T15:04:08.092797", "os_name": "Darwin", "os_version": "19.5.0", "is_64_bit": true, "architecture": "64bit", "vm": "CPython", "version": "0.38.1.dev79+gd22e2972.d20200707", "lang": "python", "lang_version": "3.7.6", "pip_version": "20.0.2", "in_virtual_env": true, "agent_url": "http://localhost:1234", "agent_error": "Agent not reachable. Exception raised: [Errno 61] Connection refused", "env": "", "is_global_tracer": true, "enabled_env_setting": null, "tracer_enabled": true, "sampler_type": "DatadogSampler", "priority_sampler_type": "RateByServiceSampler", "service": "", "debug": true, "enabled_cli": true, "analytics_enabled": false, "log_injection_enabled": false, "health_metrics_enabled": false, "dd_version": "", "priority_sampling_enabled": true, "global_tags": "", "tracer_tags": "", "integrations": {"asyncio": "N/A", "boto": "N/A", "botocore": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.15.32", "module_imported": false, "config": "N/A"}, "bottle": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "0.12.18", "module_imported": false, "config": null}, "cassandra": "N/A", "celery": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "4.2.2", "module_imported": false, "config": "N/A"}, "consul": "N/A", "django": "N/A", "elasticsearch": "N/A", "algoliasearch": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "2.2.0", "module_imported": false, "config": "N/A"}, "futures": "N/A", "grpc": "N/A", "mongoengine": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.19.1", "module_imported": false, "config": "N/A"}, "mysql": "N/A", "mysqldb": "N/A", "pymysql": "N/A", "psycopg": "N/A", "pylibmc": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.6.1", "module_imported": false, "config": "N/A"}, "pymemcache": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.4.4", "module_imported": false, "config": "N/A"}, "pymongo": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.10.1", "module_imported": false, "config": "N/A"}, "redis": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.5.3", "module_imported": false, "config": "N/A"}, "rediscluster": "N/A", "requests": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "2.23.0", "module_imported": false, "config": "N/A"}, "sqlalchemy": "N/A", "sqlite3": "N/A", "aiohttp": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.6.2", "module_imported": false, "config": "N/A"}, "aiopg": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.15.0", "module_imported": false, "config": "N/A"}, "aiobotocore": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.0.1", "module_imported": false, "config": null}, "httplib": "N/A", "vertica": "N/A", "molten": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.7.4", "module_imported": false, "config": "N/A"}, "jinja2": "N/A", "mako": "N/A", "flask": "N/A", "kombu": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "4.3.0", "module_imported": false, "config": null}, "falcon": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.4.1", "module_imported": false, "config": null}, "pylons": "N/A", "pyramid": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.10.4", "module_imported": false, "config": null}, "logging": "N/A"}}
@@ -225,7 +227,7 @@ DATADOG TRACER DIAGNOSTIC - Agent not reachable. Exception raised: [Errno 61] Co
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-**コンフィギュレーション:**
+**構成:**
 
 ```text
 W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER CONFIGURATION - {"date":"2020-07-08T21:14:25+00:00","os_name":"x86_64-pc-linux-gnu","version":"0.37.0","lang":"ruby","lang_version":"2.7.0","enabled":true,"agent_url":"http://ddagent:8126?timeout=1","debug":false,"analytics_enabled":false,"runtime_metrics_enabled":false,"vm":"ruby-2.7.0","partial_flushing_enabled":false,"priority_sampling_enabled":false,"health_metrics_enabled":false}
@@ -233,26 +235,30 @@ W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 
 **診断:**
 
-Ruby トレーサーは、Agent に到達できない場合に診断行を出力します。
+Ruby トレーサーは、Agent に到達できない場合にエラー行を出力します。
 
 ```text
-W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
+W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR - TRACER - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
 ```
 
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-**コンフィギュレーション:**
+**構成:**
+
+Ruby トレーサーは、各製品 (プロファイリング、コア、トレーシング) の構成行を出力します。
 
 ```text
+I, [2023-08-16T18:09:01.972265 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
 
-{"agent_url":"http://localhost:8126","analytics_enabled":false,"analytics_sample_rate":null,"date":"2020-07-03T00:44:37+0000","dd_version":"","enabled":true,"env":"test-env","lang":"cpp","lang_version":"201402","operation_name_override":"","report_hostname":false,"sampling_rules":"[{\"sample_rate\": 1.0}]","service":"service_name","tags":{},"version":"v1.2.0"}
+I, [2023-08-16T18:09:01.972767 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2023-08-16T18:09:01+00:00","os_name":"aarch64-unknown-linux-gnu","version":"1.13.0","lang":"ruby","lang_version":"3.0.6","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.0.6","health_metrics_enabled":false}
 
+I, [2023-08-16T18:09:27.223143 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - TRACING - {"enabled":true,"agent_url":"http://agent:8126?timeout=30","analytics_enabled":false,"sample_rate":null,"sampling_rules":null,"integrations_loaded":"active_model_serializers@,aws@","partial_flushing_enabled":false,"priority_sampling_enabled":false,"integration_active_model_serializers_analytics_enabled":"false","integration_active_model_serializers_analytics_sample_rate":"1.0","integration_active_model_serializers_enabled":"true","integration_active_model_serializers_service_name":"","integration_aws_analytics_enabled":"false","integration_aws_analytics_sample_rate":"1.0","integration_aws_enabled":"true","integration_aws_service_name":"aws","integration_aws_peer_service":""}
 ```
 
 **診断:**
 
-C++ の場合、トレーサーログに出力される `DATADOG TRACER DIAGNOSTICS` 行はありません。ただし、Agent に到達できない場合は、アプリケーションログにエラーが表示されます。Envoy では、メトリクスの `tracing.datadog.reports_failed` と `tracing.datadog.reports_dropped` が増加します。
+C++ の場合、トレーサーログに出力される `DATADOG TRACER DIAGNOSTICS` 行は出力されません。ただし、Agent に到達できない場合は、アプリケーションログにエラーが表示されます。Envoy では、メトリクスの `tracing.datadog.reports_failed` と `tracing.datadog.reports_dropped` が増加します。
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -261,15 +267,15 @@ C++ の場合、トレーサーログに出力される `DATADOG TRACER DIAGNOST
 
 アプリケーションや起動ログに `DIAGNOSTICS` エラーや Agent に到達できない、接続できないというメッセージ (言語によって異なる) がある場合、トレーサーが Datadog Agent にトレースを送ることができないことを意味します。
 
-これらのエラーがある場合は、Agent が [ECS][1]、[Kubernetes][2]、[Docker][3] または[その他のオプション][4]のトレースを受信するように設定されていることを確認するか、または[サポートチームまでお問い合わせ][5]の上、トレーサーと Agent のコンフィギュレーションを確認してください。
+これらのエラーがある場合は、Agent が [ECS][1]、[Kubernetes][2]、[Docker][3] または[その他のオプション][4]のトレースを受信するように設定されていることを確認するか、または[サポートチームまでお問い合わせ][5]の上、トレーサーと Agent の構成を確認してください。
 
-インスツルメントされたアプリケーションが Datadog Agent と通信できないことを示すエラーについては、[接続エラー][6]を参照してください。
+インスツルメンテーションされたアプリケーションが Datadog Agent と通信できないことを示すエラーについては、[接続エラー][6]を参照してください。
 
-## コンフィギュレーション設定
+## 構成設定
 
-ログに `CONFIGURATION` 行のみが含まれている場合にトラブルシューティングするには、トレーサーによって出力された設定が、Datadog トレーサーのデプロイとコンフィギュレーションの設定と一致することを確認すると良いでしょう。さらに、Datadog に特定のトレースが表示されない場合は、ドキュメントの[互換性要件][7]セクションを確認して、これらのインテグレーションがサポートされていることを確認してください。
+ログに `CONFIGURATION` 行のみが含まれている場合にトラブルシューティングするには、トレーサーによって出力された設定が、Datadog トレーサーのデプロイと構成の設定と一致することを確認すると良いでしょう。さらに、Datadog に特定のトレースが表示されない場合は、ドキュメントの[互換性要件][7]セクションを確認して、これらのインテグレーションがサポートされていることを確認してください。
 
-使用しているインテグレーションがサポートされていない場合、またはトレースが Datadog で期待どおりに表示されない理由を理解するためにコンフィギュレーションの出力を別の人にも確認してもらいたい場合は、[サポートチームにお問い合わせ][5]ください。診断と、新しいインテグレーションの機能リクエストの作成をお手伝いします。
+使用しているインテグレーションがサポートされていない場合、またはトレースが Datadog で期待どおりに表示されない理由を理解するために構成の出力を別の人にも確認してもらいたい場合は、[サポートチームにお問い合わせ][5]ください。診断と、新しいインテグレーションの機能リクエストの作成をお手伝いします。
 
 ## 起動ログの無効化
 

@@ -1,7 +1,7 @@
 ---
-title: Understanding API Test Timings And Troubleshooting Variations
+title: Understand API Test Timings And Troubleshoot Variations
 kind: documentation
-description: Understanding API test timings and troubleshooting their variations
+description: Understand API test timings and troubleshoot their variations.
 aliases:
 - /synthetics/api_test_timing_variations
 further_reading:
@@ -37,7 +37,7 @@ The `synthetics.http.redirect.time` metric is only measured if redirects occur d
 
 The `synthetics.dns.response.time` metric and `*.dns.time` metrics measure the time spent resolving the domain name. Synthetic API tests use common DNS servers for domain name resolution, such as Google, CloudFlare, AWS, and Azure. You can override these servers with [private locations][3] or [DNS tests][4]. 
 
-These metrics are only measured when the API test URL field contains a domain name. If you use an IP address, DNS resolution is skipped and no time series appear for these metrics.
+These metrics are only measured when the API test URL field contains a domain name. If you use an IP address, DNS resolution is skipped and no timeseries appear for these metrics.
 
 
 In case of any redirection, the DNS resolution time only corresponds to the last request.

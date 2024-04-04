@@ -22,11 +22,12 @@ title: Ruby の ASM を有効にする
 type: multi-code-lang
 ---
 
-Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのアプリケーションセキュリティを監視することができます。
+Docker、Kubernetes、Amazon ECS、および AWS Fargate で実行されている Ruby アプリケーションのセキュリティを監視することができます。
 
 {{% appsec-getstarted %}}
 
-## 詳細はこちら
+## 脅威検出を有効にする
+### はじめに
 
 1. **Gemfile を更新して Datadog ライブラリを含めます**:
 
@@ -38,9 +39,9 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 
    `dd-trace` 0.x バージョンからのアップグレードの詳細については、[Ruby トレーサーアップグレードガイド][2]を参照してください。
 
-2. APMトレーサーを有効にして、**ASM を有効にします**。以下のオプションは、最も一般的なケースをカバーするクイックセットアップを説明します。詳細については、[Ruby トレーサーのドキュメント][3]をお読みください。
+2. APMトレーサーを有効にすることで、**ASM を有効にします**。以下のオプションは、最も一般的なケースをカバーするクイックセットアップを説明します。詳細については、[Ruby トレーサーのドキュメント][3]をお読みください。
 
-   ASM を有効にするには、コード内で行います。
+   コード内で ASM を有効にすることができます。
 
    {{< tabs >}}
 
@@ -87,6 +88,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 {{% /tab %}}
 
 {{% tab "Sinatra" %}}
+   アプリケーションのスタートアップに以下を追加して、APM トレーサーを有効にします。
 
    ```ruby
    require 'sinatra'
@@ -122,13 +124,32 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 {{% tab "Rack" %}}
    `config.ru` ファイルに以下を追加して、APM トレーサーを有効にします。
 
+   ```ruby
+   require 'ddtrace'
+   require 'datadog/appsec'
+
+   Datadog.configure do |c|
+     # APM トレーサーを有効にする
+     c.tracing.instrument :rack
+
+     # ASM for Rack を有効にする
+     c.appsec.enabled = true
+     c.appsec.instrument :rack
+   end
+
+   use Datadog::Tracing::Contrib::Rack::TraceMiddleware
+   use Datadog::AppSec::Contrib::Rack::RequestMiddleware
+   ```
 {{% /tab %}}
+
 {{< /tabs >}}
 
-または、アプリケーションが実行される場所に応じて、以下の方法のいずれかを使用します。
+または、アプリケーションの実行場所に応じて、以下の方法のいずれかを使用します。
 
-{{< tabs >}}
+   {{< tabs >}}
 {{% tab "Docker CLI" %}}
+
+APM 用の構成コンテナを更新するには、`docker run` コマンドに以下の引数を追加します。
 
 ```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
@@ -161,7 +182,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 以下を環境セクションに追加して、ECS タスク定義 JSON ファイルを更新します。
 
@@ -178,7 +199,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-コード内で ASM を初期化するか、サービス起動時に環境変数 `DD_APPSEC_ENABLED` を true に設定します。
+コード内で ASM を初期化するか、サービスの呼び出し時に環境変数 `DD_APPSEC_ENABLED` を true に設定します。
 ```shell
 env DD_APPSEC_ENABLED=true rails server
 ```

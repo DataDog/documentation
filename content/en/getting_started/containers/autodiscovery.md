@@ -21,7 +21,7 @@ further_reading:
 - link: "/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui"
   tag: "faq"
   text: "Integration Setup for ECS Fargate"
-- link: "/agent/guide/secrets-management/"
+- link: "/agent/configuration/secrets-management/"
   tag: "Documentation"
   text: "Secrets Management"
 ---

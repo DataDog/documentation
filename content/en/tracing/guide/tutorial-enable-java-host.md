@@ -152,10 +152,10 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 Next, download the Java tracing library (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
 
 {{< code-block lang="sh" >}}
-curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
-If your operating system does not support curl, you can go directly to `https://dtdg.co/latest-java-tracer ` to download the `dd-java-agent.jar` file.
+If your operating system does not support curl, you can go directly to `'https://dtdg.co/latest-java-tracer' ` to download the `dd-java-agent.jar` file.
 
 ## Launch the Java application with automatic instrumentation
 

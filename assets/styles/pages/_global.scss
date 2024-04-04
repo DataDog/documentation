@@ -58,7 +58,11 @@ body {
         position: relative;
     }
 }
-
+.chroma {
+    max-height: 350px;
+    overflow-wrap: break-word;
+    white-space: inherit;
+}
 .greyside {
     position: absolute;
     height: 100%;

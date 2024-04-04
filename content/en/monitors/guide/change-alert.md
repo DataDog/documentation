@@ -35,8 +35,8 @@ The **average** of the **change** over **1 hour** compared to **5 minutes**
 | ---------------  | ------------------------------------------------------------------------------------------------| ----------- |
 | average          | The aggregation that is used on the query.                                                      | `Average`, `Maximum`, `Minimum`, `Sum` |
 | change           | Choose between the absolute or percentage change of the value.                                  | `change` or `% change`|
-| 5 minutes        | The evaluation window. For more information, see the [Monitor Configuration][1] documentation.  | This can be N minutes, hours, days, weeks, or at most one month. |
-| 1 hour           | The timeframe that you wish to shift the query by.                                              | This can be N minutes, hours, days, weeks, or at most one month ago.|
+| 1 hour           | The evaluation window. For more information, see the [Monitor Configuration][1] documentation.  | This can be N minutes, hours, days, weeks, or at most one month. |
+| 5 minutes        | The timeframe that you wish to shift the query by.                                              | This can be N minutes, hours, days, weeks, or at most one month ago.|
 
 ### Change and change %
 

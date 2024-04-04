@@ -3,6 +3,10 @@ title: Deployment Design and Principles
 kind: Documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 When you start deploying Observability Pipelines Worker into your infrastructure, you may run into questions such as: 
@@ -47,7 +51,7 @@ Choose the source that aligns with your protocol. Each Observability Pipelines W
 
 ## Collecting data
 
-Your pipeline begins with data collection. Your services and systems generate logs, metrics, and traces that can be collected and sent downstream to your destinations. Data collection is achieved with agents, and understanding which agents to use ensures you are collecting the data you want.
+Your pipeline begins with data collection. Your services and systems generate data[*](#support) that can be collected and sent downstream to your destinations. Data collection is achieved with agents, and understanding which agents to use ensures you are collecting the data you want.
 
 ### Choosing agents
 
@@ -69,7 +73,7 @@ If you want to design an efficient pipeline between your Observability Pipelines
 
 ### Choosing which data to process
 
-You can use Observability Pipelines Worker to process logs, metrics, and traces. However, real-time, vendor-specific data, such as continuous profiling data, is not interoperable and typically does not benefit from processing.
+You can use Observability Pipelines Worker to process data[*](#support). However, real-time, vendor-specific data, such as continuous profiling data, is not interoperable and typically does not benefit from processing.
 
 #### Remote processing
 
@@ -134,8 +138,11 @@ Optimize your system of analysis for analysis while reducing costs by doing the 
 - Filter events not used for analysis
 - Consider sampling logs with `level` `info` or lower to reduce their volume
 
-
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
 [2]: /observability_pipelines/reference/sources/
 [4]: /network_monitoring/performance/
 [5]: /observability_pipelines/architecture/
+
+---
+
+<a name="support"></a> * Observability Pipelines support logs. Support for metrics is in beta.

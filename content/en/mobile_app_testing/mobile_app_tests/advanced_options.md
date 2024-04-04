@@ -19,12 +19,16 @@ further_reading:
   text: "Learn about Synthetic Monitoring Data Security"
 ---
 
-{{< site-region region="us3,us5,gov,eu,ap1" >}}
+{{< site-region region="us,us5,eu" >}}
+<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
+{{< /site-region >}}
+
+{{< site-region region="us3,ap1" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">Mobile Application Testing is in limited availability and is only supported for the Datadog US1 site.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -69,6 +73,12 @@ You can prevent a step screenshot from being captured at test execution by click
 
 This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].
 
+## Subtests
+
+The advanced options for [subtests][3] allow you to set the behavior of your mobile app test if the subtest fails.
+
+{{< img src="mobile_app_testing/example_subtest.png" alt="Select a mobile test to add as a subtest" style="width:50%" >}}
+
 ### Set failure behavior
 
 Click **Continue with test if this step fails** to ensure your mobile app test continues if the subtest fails.
@@ -79,3 +89,4 @@ Click **Continue with test if this step fails** to ensure your mobile app test c
 
 [1]: /mobile_app_testing/mobile_app_tests/steps/
 [2]: /data_security/synthetics/
+[3]: /mobile_testing/mobile_app_tests/steps/#subtests

@@ -13,7 +13,7 @@ This guide assumes that you have configured [Database Monitoring][1].
 ## Before you begin
 
 Supported databases
-: postgres, mysql, sqlserver
+: Postgres, MySQL, SQL Server
 
 Supported Agent versions
 : 7.36.1+
@@ -27,6 +27,11 @@ Using any database API supporting execution of SQL statements, add a comment in 
 
 ```sql
 /*key='val'*/ SELECT * from FOO
+```
+
+Separate multiple tags with commas:
+```sql
+/*key1='val1',key2='val2'*/ SELECT * from FOO
 ```
 
 Full example:

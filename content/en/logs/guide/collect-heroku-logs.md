@@ -3,8 +3,6 @@ title: Collect Heroku logs
 kind: guide
 ---
 
-**This log integration is currently in public beta**
-
 Heroku provides 3 types of logs:
 
 * `App Logs`: output from the application you pushed on the platform.

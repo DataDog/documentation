@@ -22,31 +22,33 @@ title: Go の ASM を有効にする
 type: multi-code-lang
 ---
 
-Docker、Kubernetes、AWS ECS で動作する Go アプリのアプリケーションセキュリティを監視することができます。
+Docker、Kubernetes、Amazon ECS で動作する Go アプリのアプリケーションセキュリティを監視することができます。
 
 {{% appsec-getstarted %}}
-- [supportedサポートされている APM トレーシングインテグレーション][1]のうちのいずれか 1 つ。
-- ビルド環境で、C 言語ライブラリのヘッダーとコンパイルターゲット用の C 言語ツールチェーンとともに、[CGO][2] が有効になっていること。詳細な手順については、[CGO を有効にする][3]を参照してください。
+- あなたのサービスは[サポートされています][2]。
 
-## 詳細はこちら
+## 脅威検知を有効にする
+### はじめに
 
-1. Datadog Go ライブラリの最新バージョン (バージョン 1.36.0 以降) で**プログラムの依存関係を更新します**。
+1. 最新バージョンの Datadog Go ライブラリ (バージョン 1.53.0 以降) を**プログラムの go.mod 依存関係に追加**します。
 
    ```console
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
-   サービスの言語やフレームワークのバージョンが ASM 機能に対応しているかどうかは、[互換性][4]をご参照ください。
 
-2. **プログラムを再コンパイル**して、ASM と CGO を有効にします。
+2. Datadog には、一連の Go ライブラリやフレームワークのインスツルメンテーション向けにすぐに使えるサポートを提供するプラグイン可能な一連のパッケージがあります。
+   これらのパッケージのリストは、[互換性要件][1]ページにあります。これらのパッケージをアプリケーションにインポートし、各インテグレーションの横に記載されている構成の説明に従ってください。
+
+3. ASM を有効にして**プログラムを再コンパイル**します。
    ```console
-   $ env CGO_ENABLED=1 go build -v -tags appsec my-program
+   $ go build -v -tags appsec my-program
    ```
 
-3. 環境変数 `DD_APPSEC_ENABLED` を `true` に設定して **Go サービスを再デプロイし、ASM を有効にします**。
+4. 環境変数 `DD_APPSEC_ENABLED` を `true` に設定することで **Go サービスを再デプロイし、ASM を有効にします**。
    ```console
    $ env DD_APPSEC_ENABLED=true ./my-program
    ```
-   または、アプリケーションが実行される場所に応じて、以下の方法のいずれかを使用します。
+   または、アプリケーションの実行場所に応じて、以下の方法のいずれかを使用します。
 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
@@ -57,7 +59,7 @@ Docker コマンドラインに以下の環境変数の値を追加します。
 $ docker run -e DD_APPSEC_ENABLED=true [...]
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 {{% tab "Dockerfile" %}}
 
 アプリケーションコンテナの Dockerfile に以下の環境変数の値を追加します。
@@ -84,7 +86,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 以下を環境セクションに追加して、アプリケーションの ECS タスク定義 JSON ファイルを更新します。
 
@@ -110,7 +112,5 @@ spec:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/application_security/enabling/compatibility/go#supported-frameworks
-[2]: https://github.com/golang/go/wiki/cgo
-[3]: /ja/security/application_security/enabling/compatibility/go#enabling-cgo
-[4]: /ja/security/application_security/enabling/compatibility/go#compatibility
+[1]: /ja/security/application_security/enabling/compatibility/go/#web-framework-compatibility
+[2]: /ja/security/application_security/enabling/compatibility/go

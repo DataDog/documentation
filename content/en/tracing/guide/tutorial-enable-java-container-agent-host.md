@@ -125,7 +125,7 @@ Now that you have a working Java application, configure it to enable tracing.
 1. Add the Java tracing package to your project. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -339,7 +339,7 @@ The sample project includes a second application called `calendar` that returns 
 
 1. Configure the calendar app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -434,7 +434,7 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/java/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[14]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[15]: /agent/configuration/agent-configuration-files/?tab=agentv6v7
 [16]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: /tracing/trace_collection/library_config/java/

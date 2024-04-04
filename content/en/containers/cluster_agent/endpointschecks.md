@@ -12,7 +12,7 @@ further_reading:
     - link: '/containers/cluster_agent/clusterchecks/'
       tag: 'Documentation'
       text: 'Cluster Checks'
-    - link: '/containers/cluster_agent/troubleshooting#endpoint-checks'
+    - link: '/containers/troubleshooting/cluster-and-endpoint-checks'
       tag: 'Documentation'
       text: 'Troubleshooting Endpoint Checks'
 
@@ -161,7 +161,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 [Restart the Agent][2] to apply the configuration change.
 
 [1]: /agent/cluster_agent/clusterchecks/
-[2]: /agent/guide/agent-commands/
+[2]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 

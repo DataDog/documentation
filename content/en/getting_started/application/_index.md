@@ -19,6 +19,10 @@ further_reading:
     text: 'DRUIDS, the design system that powers Datadog'
 ---
 
+{{< learning-center-callout header="Try Foundations in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about Datadog Foundations.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 This page provides a high-level overview of capabilities available on the [Datadog site][1].
@@ -159,7 +163,7 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 [8]: /getting_started/tagging/
 [9]: /infrastructure/hostmap/
 [10]: /service_management/events/
-[11]: /service_management/events/explorer/#event-analytics
+[11]: /service_management/events/explorer/analytics
 [12]: /dashboards/
 [13]: /dashboards/#screenboards
 [14]: /dashboards/functions/arithmetic/
@@ -167,7 +171,7 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 [16]: /monitors/
 [17]: /network_monitoring/performance/
 [18]: /real_user_monitoring/
-[19]: /real_user_monitoring/session_replay/
+[19]: /real_user_monitoring/session_replay/browser/
 [20]: /serverless
 [21]: /security/cloud_siem/
 [22]: /synthetics/

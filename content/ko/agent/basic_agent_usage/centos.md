@@ -11,18 +11,24 @@ further_reading:
 - link: /tracing/
   tag: 설명서
   text: 트레이스 수집
-kind: 설명서
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: 설명서
+  text: 에이전트 아키텍처 자세히 알아보기
+- link: /agent/configuration/network#configure-ports
+  tag: 설명서
+  text: 인바운드 포트 구성
+kind: documentation
 platform: CentOS
-title: CentOS Agent의 기본 사용법
+title: CentOS(Rocky/Alma Linux 포함)를 위한 기본 Agent 사용법
 ---
 
 ## 개요
 
-이번 페이지에서는 CentOS용 Datadog Agent의 기본적인 기능을 설명해드리겠습니다. Datadog Agent를 설치하려면 CentOS용 [Agent 설치 가이드][1]를 따라주세요.
+이 페이지에서는 CentOS 및 그 파생 버전인 Rocky Linux, Alma Linux를 위한 Datadog Agent의 기본 기능에 대해 설명합니다. Datadog Agent를 설치하려면 CentOS용 [Agent 설치 지침][1]을 따르세요.
 
 패키지는 64-bit x86 및 Arm v8 아키텍처로 이용하실 수 있습니다. 다른 아키텍처의 경우에는 소스 설치를 활용하세요.
 
-**참조**: CentOS 6 이상을 지원합니다.
+**참고**: CentOS 6 이상은 64비트 x86 아키텍처에서 지원됩니다. CentOS/Rocky/Alma 8 이상은 64비트 Arm v8 아키텍처에서 지원됩니다.
 
 ## 명령어
 
@@ -124,6 +130,6 @@ Agent는 `/opt/datadog-agent/embedded/`에 임베디드 파이썬(Python) 환경
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/centos
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
 [2]: /ko/agent/troubleshooting/
 [3]: /ko/developers/guide/custom-python-package/

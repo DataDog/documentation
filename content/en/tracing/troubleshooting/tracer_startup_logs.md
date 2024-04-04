@@ -53,7 +53,7 @@ Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` settin
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
-- `dotnet-tracer-native.log` contains the diagnostics logs, if any are generated.
+- `dotnet-tracer-native-{processName}-{processID}.log` contains the diagnostics logs, if any are generated.
 
 **Configuration:**
 
@@ -174,7 +174,7 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Startup logs are disabled by default starting in version 2.x of the tracer. They can enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
+Startup logs are disabled by default starting in version 2.x of the tracer. They can be enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
 
 **Configuration:**
 

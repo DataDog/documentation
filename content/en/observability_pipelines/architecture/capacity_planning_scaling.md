@@ -3,6 +3,14 @@ title: Capacity Planning and Scaling
 kind: Documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ## Units for estimations
 
 The following units are starting points for estimating your resource capacity, but can vary depending on your workload.

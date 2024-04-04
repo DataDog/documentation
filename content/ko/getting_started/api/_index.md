@@ -31,8 +31,9 @@ Datadog API를 사용하면 Datadog와 데이터를 주고받을 수 있습니�
 </br>
 <div class="postman-run-button"
 data-postman-action="collection/fork"
-data-postman-var-1="20651290-b051b74a-bbe6-433a-8670-7ec450e80199"
-data-postman-collection-url="entityId=20651290-b051b74a-bbe6-433a-8670-7ec450e80199&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-visibility="public"
+data-postman-var-1="20651290-809b13c1-4ada-46c1-af65-ab276c434068"
+data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
 data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
@@ -56,7 +57,7 @@ Postman 컬렉션을 불러왔다면 사용 가능한 Datadog API 호출의 전�
 
 다음 절차를 따라 환경 설정을 완료해주세요.
 
-1. Postman 오른쪽 상단에 있는 **Environments** 드롭다운을 클릭합니다.
+1. Postman 오른쪽 상단 코너에 있는 **Environments** 드롭다운을 클릭합니다. 선택된 환경이 없는 경우 **Environments** 드롭다운은 `No Environment`로 표시됩니다.
 
 2. **Datadog Authentication**을 선택합니다.
 
@@ -90,7 +91,7 @@ Datadog 사이트를 `https://api.datadoghq.com`이 아닌 다른 주소로 액�
 
 엔드포인트 이름을 클릭하면 엔드포인트 설명과 필수/선택 파라미터가 전부 표시되어 요청을 구성하도록 도와줍니다.
 
-{{< img src="getting_started/postman/description.mp4" alt="Postman 설명" video="true"  >}}
+{{< img src="getting_started/postman/description.mp4" alt="Postman 설명" video="true" >}}
 
 ### Params
 
@@ -111,5 +112,5 @@ Datadog 사이트를 `https://api.datadoghq.com`이 아닌 다른 주소로 액�
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
 [6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[7]: /ko/api/v1/organizations/
+[7]: /ko/api/latest/#api-reference
 [8]: /ko/api/

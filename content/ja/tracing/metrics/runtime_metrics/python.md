@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/tracing/runtime_metrics/python
-code_lang: php
+code_lang: python
 code_lang_weight: 20
 description: Python アプリケーションのパフォーマンスに関する詳細情報を、トレースに紐づくランタイムメトリクスと共に取得します。
 further_reading:

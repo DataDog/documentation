@@ -1,16 +1,24 @@
 {{ $size := "inherit" }}
 {{ $color := "" }}
+{{ $title := "" }}
 {{ $style := "" }}
 
 {{ if .size }}
-{{ $size = .size }}
+{{ $size = printf "font-size:%s" .size }}
 {{ end }}
 
 {{ if .color }}
-{{ $color = .color }}
+{{ $color = printf "color:%s" .color }}
+{{ end }}
+
+{{ if .title }}
+{{/*  enable bootstrap tooltip if title attribute needed  */}}
+{{ $title = (printf "title=%q data-bs-toggle='tooltip' data-bs-placement='top'" .title) }}
 {{ end }}
 
 {{/* Combine contextual params into inline style */}}
-{{ $style = print "style='" (delimit (slice (print "font-size: " ($size)) (print "color: " ($color))) "; ") "'" }}
+{{ if or .size .color }}
+{{ $style = (printf "style='%s; %s'" $size $color) }}
+{{ end }}
 
-<i class="icon-{{ .name }}" {{ $style | safeHTMLAttr }}></i>
+<i class="icon-{{ .name }}" {{ $style | safeHTMLAttr }} {{ $title | safeHTMLAttr }}></i>

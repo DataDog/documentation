@@ -5,8 +5,7 @@ aliases:
 - /ja/integrations/datadog_checks_dev/
 - /ja/guides/new_integration/
 - /ja/developers/integrations/new_check_howto/
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/agent_integration.md
+description: Datadog Agent インテグレーションを開発し、公開する方法をご紹介します。
 further_reading:
 - link: /developers/integrations/create_a_tile/
   tag: Documentation

@@ -1418,7 +1418,7 @@ api:
     - v2
     versions:
     - v2
-  parent: metrics
+  parent: メトリクス
   url: '#query-timeseries-data-across-multiple-products'
 - generated: true
   identifier: metrics-query-scalar-data-across-multiple-products
@@ -1431,7 +1431,7 @@ api:
     - v2
     versions:
     - v2
-  parent: metrics
+  parent: メトリクス
   url: '#query-scalar-data-across-multiple-products'
 - generated: true
   identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -1443,7 +1443,7 @@ api:
     unstable: []
     versions:
     - v2
-  parent: metrics
+  parent: メトリクス
   url: '#list-distinct-metric-volumes-by-metric-name'
 - generated: true
   identifier: metrics-create-a-tag-configuration
@@ -8984,11 +8984,6 @@ main:
   parent: cloud_workload_security
   url: security/cloud_workload_security/workload_security_rules
   weight: 202
-- identifier: cws_workload_security_profiles
-  name: Security Profiles
-  parent: cloud_workload_security
-  url: security/cloud_workload_security/security_profiles
-  weight: 203
 - identifier: cws_agent_expressions
   name: カスタム Agent ルールの作成
   parent: cloud_workload_security
@@ -9126,7 +9121,7 @@ main:
   url: security/application_security/vulnerability_management/
   weight: 4
 - identifier: appsec_threats
-  name: Threat Monitoring and Protection
+  name: Threat Management
   parent: application_security
   url: security/application_security/threats/
   weight: 5

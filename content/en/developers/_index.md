@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/"
   tag: "Blog"
   text: "DRUIDS, the design system that powers Datadog"
+- link: "https://www.datadoghq.com/blog/introducing-open-source-hub/"
+  tag: "Blog"
+  text: "Introducing the Datadog Open Source Hub"
 cascade:
     algolia:
         rank: 70
@@ -67,7 +70,7 @@ Writing a public integration (that is, one that is part of Datadog's ecosystem, 
 
 The initial goal is to generate some code that collects the desired metrics in a reliable way, and to ensure that the general integration framework is in place. Start by writing the basic functionality as a custom Check, then fill in the framework details from [Create an Agent Integration][13].
 
-Next, open a pull request against the [`integrations-extras` repository][7]. This signals to Datadog that you're ready to start reviewing code together. Don't worry if you have questions about tests, Datadog internals, or other topics—the Datadog Ecosystems team is ready to help, and the pull request is a good place to go over those concerns. Be sure to take advantage of the [Community Office Hours][4] as well.
+Next, open a pull request against the [`integrations-extras` repository][7]. This signals to Datadog that you're ready to start reviewing code together. Don't worry if you have questions about tests, Datadog internals, or other topics—the Datadog Ecosystems team is ready to help, and the pull request is a good place to go over those concerns. 
 
 Once the integration has been validated for functionality, framework compliance, and general code quality, it is merged into `integrations-extras` where it becomes part of the Datadog ecosystem. 
 
@@ -111,7 +114,6 @@ A [custom check][11], also know as a custom Agent check, lets you send internal 
 
 {{< whatsnext desc="Learn how to get involved with the Datadog developer community:" >}}
     {{< nextlink href="/developers/libraries" >}}<u>Libraries</u>: A list of official and community-contributed libraries for the Datadog API, DogStatsD client, APM & Continuous Profiler, and externally-supported community integrations for a wide variety of platforms.{{< /nextlink >}}
-    {{< nextlink href="/developers/office_hours" >}}<u>Community Office Hours</u>: Regular Datadog office hours, where you can chat directly with engineers about developing on Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/guide/" >}}<u>Guides</u>: Read helpful articles covering technical details, code examples, and reference documentation.{{< /nextlink >}}
 {{< /whatsnext >}}
 

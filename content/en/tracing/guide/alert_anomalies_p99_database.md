@@ -11,9 +11,6 @@ further_reading:
 - link: "/tracing/guide/apm_dashboard/"
   tag: "4 mins"
   text: "Create a Dashboard to track and correlate APM metrics"
-- link: "/tracing/guide/add_span_md_and_graph_it/"
-  tag: "7 mins"
-  text: "Add span tags and filter and group your application performance"
 - link: "/tracing/guide/"
   tag: ""
   text: "All guides"
@@ -61,7 +58,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     Here you can see the current status of your monitor, mute it, or explore deeper into the specifics of a triggered alert.
 
-8. **Navigate back to the [Services Page][8]** and from there find the service you just set the monitor on, **click into the Service Page** and there **click on the Monitor bar** under the header.
+8. **Navigate back to the [Service Catalog][8]** and from there find the service you just set the monitor on, **click into the Service Page** and there **click on the Monitor bar** under the header.
 
     Here you should **see the new monitor** alongside any other monitor set for the service and suggested monitors that are recommended to set.
 
@@ -84,5 +81,5 @@ Datadog allows you to set monitors to keep track of the health of your services 
 [5]: /tracing/glossary/#services
 [6]: /monitors/types/anomaly/#faq
 [7]: /monitors/notify/?tab=is_alertis_warning
-[8]: https://app.datadoghq.com/apm/services
+[8]: https://app.datadoghq.com/services
 [9]: https://app.datadoghq.com/service/map

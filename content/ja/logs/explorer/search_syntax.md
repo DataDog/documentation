@@ -87,7 +87,7 @@ CIDR (Classless Inter Domain Routing) は、IP アドレスの範囲 (CIDR ブ�
 - `CIDR(@network.client.ip,13.0.0.0/8)` は、フィールド `network.client.ip` の IP アドレスが 13.0.0.0/8 CIDR ブロックに該当するログにマッチしてフィルターをかけます。
 - `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` は、配列属性 `network.ip.list` の IP アドレスが 13.0.0.0/8 または 15.0.0.0/8 CIDR ブロックに該当するログにマッチしてフィルターをかけます。
 - `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` は、13.0.0.0/8 サブネットで発信されるパロアルトファイアウォールの拒否イベントにマッチしてフィルターにかけます。
-- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` は、13.0.0.0/8 から発信されていない VPC ログをすべて表示しますが、これはサブネット間の環境におけるネットワークトラフィックを分析したいため、宛先サブネット 15.0.0.8 に指定されているものであることを示します
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` は、サブネット間で環境内のネットワークトラフィックを分析するため、サブネット 13.0.0.0/8 から発生していないが、宛先サブネット 15.0.0.0/8 へ向けられている VPC ログをすべて表示します。
 
 `CIDR()` 関数は、IPv4 と IPv6 の CIDR 表記をサポートし、ログエクスプローラー、Live Tail、ダッシュボードのログウィジェット、ログモニター、およびログ構成で動作します。
 

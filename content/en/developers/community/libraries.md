@@ -93,10 +93,6 @@ To use the PHP tracer or profiler on Heroku, use the following buildpack.
 
 * [Heroku Datadog PHP Tracer and Profiler Buildpack][65] maintained by [SpeedCurve][66].
 
-### Jira
-
-A [tool][39] to poll data from Jira and upload it as metrics to Datadog.
-
 ### K6
 
 K6, a load and performance regression testing tool developed by Load Impact, can send test results to Datadog using [DogStatsD][1]. To enable this feature, see [the tutorial][40].
@@ -121,7 +117,6 @@ A Moogsoft [listener][44] that ingests Datadog notifications.
 
 ### OpenVPN
 
-* Send OpenVPN [bandwidth usage][50] and the count of active connections to Datadog.
 * Send OpenVPN [licensing information][51] to Datadog.
 
 ### Phusion Passenger
@@ -199,8 +194,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[39]: https://bitbucket.org/atlassian/jiradog/src/master/
-[40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
+[40]: https://grafana.com/docs/k6/latest/results-output/real-time/datadog/
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd
@@ -210,7 +204,6 @@ If you've written a Datadog library and would like to add it to this page, send 
 [47]: https://github.com/dailymotion/lua-resty-dogstatsd
 [48]: http://www.mediba.jp
 [49]: https://www.dailymotion.com/us
-[50]: https://github.com/byronwolfman/dd-openvpn
 [51]: https://github.com/denniswebb/datadog-openvpn
 [52]: https://github.com/Sjeanpierre/passenger-datadog-monitor
 [53]: https://github.com/Sjeanpierre

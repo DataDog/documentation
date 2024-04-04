@@ -34,6 +34,8 @@ The canonical hostname is chosen according to the following rules. The first mat
 
 If the name is recognized as a common non-unique name (for example, `localhost.localdomain`), the current rule fails and passes through to the next.
 
+See [Hostname detection logic][5] for details on how the Agent determines the hostname.
+
 ### AWS hosts
 
 When pulling information on your AWS hosts from the [Datadog API][3], the following attributes display based on availability:
@@ -115,7 +117,7 @@ By default, Agent v6 uses the instance's hostname provided by GCE. This matches 
 If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to false, and the hostname of the Agent is not hardcoded in `datadog.conf`/`datadog.yaml`, the reported hostname on Datadog changes from the GCE instance `name` to the full GCE instance `hostname` (which includes the GCE project id).
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -124,7 +126,8 @@ If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to fa
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /agent/guide/agent-commands/#agent-status-and-information
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-commands/#agent-status-and-information
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /api/v1/hosts/
 [4]: https://app.datadoghq.com/infrastructure
+[5]: https://github.com/DataDog/datadog-agent/tree/main/pkg/util/hostname

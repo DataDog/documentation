@@ -166,7 +166,7 @@ As a matter of good practice, always consider using an existing facet rather tha
 
 To create a facet on an array of JSON objects, first use a [grok parser][29] to extract the attribute and then create a facet for that attribute.
 
-**Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
+**Note**: Once a facet is created, its content is populated **for all new logs**. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
 #### Log side panel
 

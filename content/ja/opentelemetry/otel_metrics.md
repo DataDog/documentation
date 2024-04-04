@@ -22,9 +22,9 @@ OpenTelemetry のメトリクスを Datadog に送信するには、Datadog Agen
 
 アプリケーションやサービスが [OpenTelemetry][4] ライブラリでインスツルメントされている場合、メトリクスデータを Datadog バックエンドに取得するために 2 つの経路から選択することができます。
 
-1. [トレースを OpenTelemetry コレクターに送信し、Datadog エクスポーターで Datadog に転送する][5]、または
+1. [メトリクスを OpenTelemetry コレクターに送信し、Datadog エクスポーターで Datadog に転送する][5]、または
 
-2. [Datadog Agent でトレースを取り込み、Datadog のために収集させます][6]。
+2. [Datadog Agent でメトリクスを取り込み、Datadog のために収集させます][6]。
 
 詳しくは [OpenTelemetry][7] をお読みください。
 

@@ -10,19 +10,19 @@ short_description: "Capture any RSS feed inside your Datadog event explorer"
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md']
 categories:
-    - notification
-    - web
+    - notifications
 integration_id: "feed"
 ---
 
-{{< img src="integrations/rss/rss.png" alt="RSS event" >}}
+{{< img src="integrations/rss/rss_event.png" alt="RSS event in Datadog events explorer" >}}
 
 ## Overview
 
-Capture RSS feed activity in Datadog to:
+The RSS Feed integration allows you to collect all of your RSS Feed events in Datadog, such as cloud provider status feeds or the Datadog release notes feed. Use your RSS Feed events to:
 
-- Add events from custom sources to your explorer.
-- Discuss feed events with your team.
+- Set up alerts for new or unexpected activity
+- Display and analyze events on dashboards
+- Discuss feed events with your team
 
 ## Setup
 
@@ -31,9 +31,9 @@ Capture RSS feed activity in Datadog to:
 Configuration requires:
 
 - A full URL to an RSS or ATOM feed
-- At least one custom tag per feed.
+- At least one custom tag per feed
 
-**Optional**: Enter a username and a password to access the RSS feed
+**Optional**: Enter a username and a password to access the RSS feed.
 
 {{< img src="integrations/rss/rss_setup.png" alt="RSS setup" >}}
 

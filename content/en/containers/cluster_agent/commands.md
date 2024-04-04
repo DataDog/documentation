@@ -128,6 +128,12 @@ The following environment variables are supported:
 `DD_PROXY_NO_PROXY`                
 : Sets a list of hosts that should bypass the proxy. The list is space-separated.
 
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_CPU`
+: Configures the CPU request and limit for the init containers.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
+: Configures the memory request and limit for the init containers.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

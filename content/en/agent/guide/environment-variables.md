@@ -11,7 +11,7 @@ further_reading:
   - link: "/logs/log_collection/#container-log-collection"
     tag: "Documentation"
     text: "Container log collection"
-  - link: "/agent/proxy/#environment-variables"
+  - link: "/agent/configuration/proxy/#environment-variables"
     tag: "Documentation"
     text: "Proxy environment variables"
 ---
@@ -85,9 +85,10 @@ In general, use the following rules:
 
           ```yaml
              process_config:
-                 enabled: true
+                 process_collection:
+                     enabled: true
                  process_dd_url: https://process.datadoghq.com
-             # DD_PROCESS_AGENT_ENABLED=true
+             # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
              # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
           ```
 
@@ -110,11 +111,11 @@ From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: /agent/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config.go
+[3]: /agent/configuration/proxy/#environment-variables
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
 [5]: https://docs.datadoghq.com/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/apm.go
-[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/process.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm.go
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go
 [8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment

@@ -41,12 +41,11 @@ draft: false
 git_integration_title: sqlserver
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 13.0.0
+integration_version: 14.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sqlserver
-oauth: {}
 public_title: SQL Server
 short_description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
 supported_os:

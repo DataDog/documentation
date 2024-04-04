@@ -2,6 +2,7 @@
 aliases:
 - /ja/agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
 - /ja/agent/faq/agent-5-custom-agent-check/
+- /ja/developers/write_agent_check/
 further_reading:
 - link: /developers/
   tag: ドキュメント
@@ -14,15 +15,15 @@ title: カスタム Agent チェックの書き方
 
 このページでは、`min_collection_interval` を使用してサンプルのカスタム Agent チェックを作成し、サンプルのカスタムチェックを拡張するためのユースケースの例を示します。カスタムチェックは、Agent ベースのインテグレーションと同じ固定間隔で実行されます。デフォルトでは 15 秒ごとです。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 カスタム Agent チェックを作成するには、まず [Datadog Agent][1] をインストールします。
 
 **注**: Agent v7+ を実行している場合、Agent チェックは Python 3 と互換性がある必要があります。それ以外の場合は Python 2.7+ との互換性が必要です。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. システムの `conf.d` ディレクトリに移動します。`conf.d` ディレクトリの場所の詳細については、[Agent コンフィギュレーションファイル][2]を参照してください。
 2. `conf.d` ディレクトリに、新しい Agent チェック用の新しいコンフィギュレーションファイルを作成します。ファイルに `custom_checkvalue.yaml` という名前を付けます。
@@ -32,7 +33,7 @@ init_config:
 instances:
   [{}]
 {{< /code-block >}}
-4. `checks.d` ディレクトリに新しいチェックファイルを作成します。ファイルに `custom_checkvalue.py` という名前を付けます。
+4. `checks.d` ディレクトリにチェックファイルを作成します。ファイルに `custom_checkvalue.py` という名前を付けます。
 5. ファイルを編集して、以下を含めます。
    {{< code-block lang="python" filename="checks.d/custom_checkvalue.py" >}}
 from checks import AgentCheck
@@ -93,7 +94,7 @@ vgs -o vg_free
 out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, raise_on_empty_output=True)
 {{< /code-block >}}
 
- **注**: チェックを実行する Python インタープリターは、マルチスレッド Go ランタイムに埋め込まれるため、Python 標準ライブラリにある `subprocess` または `multithreading` モジュールの使用は、Agent バージョン 6 以降ではサポートされていません。
+**注**: チェックを実行する Python インタープリターは、マルチスレッド Go ランタイムに埋め込まれるため、Python 標準ライブラリにある `subprocess` または `multithreading` モジュールの使用は、Agent バージョン 6 以降ではサポートされていません。
 
 ### 結果
 
@@ -171,8 +172,8 @@ class HelloCheck(AgentCheck):
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/account/settings/agent/latest
-[2]: /ja/agent/guide/agent-configuration-files#agent-configuration-directory
-[3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[2]: /ja/agent/configuration/agent-configuration-files#agent-configuration-directory
+[3]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [4]: https://app.datadoghq.com/metric/summary
-[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output
+[5]: https://github.com/DataDog/integrations-core/blob/9414403b361e583e8f1ebcdee2f006c384c61045/datadog_checks_base/datadog_checks/base/utils/subprocess_output.py#L22
 [6]: /ja/dashboards/

@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{- $dot := . -}}
 <!-- Grab all files from the custom_rules directory-->
-{{ $filepath := printf "content/en/security/misconfigurations/custom_rules/" }}
+{{ $filepath := printf "content/en/infrastructure/resource_catalog/" }}
 {{ $files := readDir $filepath }}
 <!-- check to ensure file exist-->
 {{ if (fileExists $filepath)}}
@@ -33,7 +33,7 @@
       {{ range $files }}
       {{ if (findRE $lowerKey .Name) }}
       <div class="list-group">
-        <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href='/security/misconfigurations/custom_rules/{{ strings.TrimSuffix ".md" .Name }}/'>
+        <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href='/infrastructure/resource_catalog/{{ strings.TrimSuffix ".md" .Name }}/'>
           <span class="w-100 d-flex justify-content-between">
               <span class="text">
                 <code>{{ strings.TrimSuffix ".md" .Name }}</code>

@@ -109,7 +109,7 @@ title: 属性とエイリアス設定
 | `network.bytes_read`       | `number` | ログの送信時にクライアントからサーバーに転送された合計バイト数。 |
 | `network.bytes_written`    | `number` | ログの送信時にサーバーからクライアントに転送された合計バイト数。 |
 
-これらの属性に依存する代表的なインテグレーションには、[Apache][4]、[Varnish][9]、[AWS ELB][10]、[Nginx][11]、[HAProxy][12] などがあります。
+これらの属性に依存する代表的なインテグレーションには、[Apache][4]、[Varnish][9]、[Amazon ELB][10]、[Nginx][11]、[HAProxy][12] などがあります。
 
 #### 位置情報
 

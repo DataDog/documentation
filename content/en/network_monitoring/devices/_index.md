@@ -28,6 +28,10 @@ algolia:
   tags: ['network device monitoring']
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
@@ -40,7 +44,7 @@ Network Device Monitoring gives you visibility into your on-premise and virtual 
 
 1. Install the Datadog Agent (usually on a server that is not the monitored device).
 2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
-3. Start monitoring your entire network infrastructure on the Network Devices explore page.
+3. Start monitoring your entire network infrastructure on the [Network Devices][7] page.
 4. View metrics collected on Datadog's out-of-the-box dashboards:
     - [Overview of all devices monitored][3]
     - [Across the performance on all interfaces][4]
@@ -92,3 +96,4 @@ The following vendor devices are supported with dedicated profiles. If a vendor/
 [4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
 [5]: /monitors/types/metric/
 [6]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
+[7]: https://app.datadoghq.com/devices

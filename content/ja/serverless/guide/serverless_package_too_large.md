@@ -18,50 +18,35 @@ title: サーバーレスパッケージが大きすぎるエラーのトラブ�
 - 関数コードをインスツルメントする言語固有のライブラリと
 - 観測データを集計し、バッファリングし、Datadog のバックエンドに転送する拡張機能。
 
-AWS CLI コマンド [`aws lambda get-layer-version`][3] で Datadog Lambda レイヤーの内容やサイズを検査します。例えば、以下のコマンドを実行すると、_Datadog-Node16-x version 67_ と _Datadog-Extension version 19_ の Lambda レイヤーをダウンロードするリンクが得られ、圧縮されていないサイズ (合わせて約 30MB) を検査することが可能です。解凍サイズはレイヤーやバージョンによって異なります。以下の例のレイヤー名とバージョン番号は、アプリケーションで使用されているものに置き換えてください。
+AWS CLI コマンド [`aws lambda get-layer-version`][3] で Datadog Lambda レイヤーの内容やサイズを検査します。例えば、以下のコマンドを実行すると、_Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} version {{< latest-lambda-layer-version layer="node" >}} と _Datadog-Extension version {{< latest-lambda-layer-version layer="extension" >}} の Lambda レイヤーをダウンロードするリンクが得られ、圧縮されていないサイズ (合わせて約 30MB) を検査することが可能です。解凍サイズはレイヤーやバージョンによって異なります。以下の例のレイヤー名とバージョン番号は、アプリケーションで使用されているものに置き換えてください。
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
-  --version-number 67
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
+  --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension \
-  --version-number 19
+  --version-number {{< latest-lambda-layer-version layer="extension" >}}
 ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```
-aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Node16-x \
-  --version-number 67
-
-aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Extension \
-  --version-number 19
-```
-{{< /site-region >}}
-
 
 Datadog の Lambda レイヤー以外にも、関数に追加された (または追加される) Lambda レイヤーも検査します。[Serverless Framework][4] を利用している場合、CloudFormation のテンプレートは `deploy` または `package` コマンドを実行した後の隠しフォルダ `.serverless` から、Lambda レイヤー一覧は `Layers` セクションから確認することが可能です。
 
 ## パッケージ
 
-関数デプロイパッケージには、不要な大きなファイルやコードが含まれていることがあります。Serverless Framework を使用している場合、`deploy` または `package` コマンドを実行すると、隠しフォルダである `.serverless` に生成されたデプロイパッケージ (`.zip` ファイル) を見つけることができます。
+関数デプロイメントパッケージには、不要な大きなファイルやコードが含まれていることがあります。Serverless Framework を使用している場合、`deploy` または `package` コマンドを実行した後に、隠しフォルダである `.serverless` に生成されたデプロイメントパッケージ (`.zip` ファイル) を見つけることができます。
 
-デプロイパッケージとレイヤーのサイズの合計が制限を超えない場合は、AWS サポートに連絡して調査を受けてください。合計サイズが制限を超える場合は、デプロイパッケージを検査し、実行時に不要な大きなファイルを[パッケージ][5]オプションを使用して除外してください。
+デプロイメントパッケージとレイヤーのサイズの合計が制限を超えていない場合は、AWS サポートに連絡して調査を依頼してください。合計サイズが制限を超える場合は、デプロイメントパッケージを検査し、実行時に不要な大きなファイルを[パッケージ][5]オプションを使用して除外してください。
 
 ## 依存関係
 
-Datadog Lambda レイヤーはインスツルメンテーションライブラリをパッケージ化し、Lambda 実行環境で使用できるようにするので、 `datadog-lambda-js` と `dd-trace` を `package.json` で依存関係に指定する必要は _ありません_。もし、ローカルのビルドやテストに Datadog のライブラリが必要な場合は、`devDependencies` として指定し、デプロイパッケージから除外するようにします。同様に、 `serverless-plugin-datadog` は開発時にのみ必要なので、 `devDependencies` に指定してください。
+Datadog Lambda レイヤーはインスツルメンテーションライブラリをパッケージ化し、Lambda 実行環境で使用できるようにするので、 `datadog-lambda-js` と `dd-trace` を `package.json` で依存関係に指定する必要は _ありません_。もし、ローカルのビルドやテストに Datadog のライブラリが必要な場合は、`devDependencies` として指定し、デプロイメントパッケージから除外するようにします。同様に、`serverless-plugin-datadog` は開発時にのみ必要であり、 `devDependencies` の下に指定するべきです。
 
-また、デプロイパッケージに含まれる他の依存関係 (`node_modules` フォルダ) を検査し、必要なものだけを `dependencies` に保存してください。
+また、デプロイメントパッケージに含まれる他の依存関係 (`node_modules` フォルダ) を検査し、必要なものだけを `dependencies` に保存してください。
 
 ## バンドラー
 
-[Webpack][6] や [esbuild][7] のようなバンドラーを使用すると、使われているコードのみを含めることができ、デプロイパッケージのサイズを劇的に削減することができます。必要な Webpack の構成は [Node.js の Lambda Tracing とバンドラーの互換性][7]を参照してください。
+[Webpack][6] や [esbuild][7] のようなバンドラーを使用すると、使われているコードのみを含めることができ、デプロイメントパッケージのサイズを劇的に削減することができます。必要な Webpack の構成は [Node.js の Lambda Tracing とバンドラーの互換性][8]を参照してください。
 
 ## Datadog-ci
 
@@ -72,7 +57,7 @@ Datadog Lambda レイヤーはインスツルメンテーションライブラ�
 Datadog のサポートチームによる調査が必要な場合は、チケットに以下の情報を含めてください。
 
 1. この関数の構成された Lambda レイヤー (名前とバージョン、または ARN)。
-2. AWS にアップロードする関数のデプロイパッケージ (または解凍したパッケージの内容とサイズがわかるスクリーンショット)。
+2. AWS にアップロードする関数のデプロイメントパッケージ (または解凍したパッケージの内容とサイズがわかるスクリーンショット)。
 3. プロジェクトのコンフィギュレーションファイル (**編集されたシークレット**を含む): `serverless.yaml`、`package.json`、`package-lock.json`、`yarn.lock`、 `tsconfig.json` および `webpack.config.json`。
 
 ## その他の参考資料

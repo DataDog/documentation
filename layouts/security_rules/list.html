@@ -26,6 +26,7 @@
 </div>
 
 {{ .Content }}
+
 <form id="rules">
     {{- partial "grouped-item-listings.html" ( dict "context" $dot "filters" (sort ($.Scratch.Get "filters")) "listgroups" ($list.GroupByParam "source") "transformGroupTitle" true ) -}}
 </form>

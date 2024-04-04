@@ -3,6 +3,7 @@ title: Query Syntax
 kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
+ - /tracing/search_syntax/
  - /tracing/trace_search_analytics/
  - /tracing/trace_search/
  - /tracing/search
@@ -25,9 +26,9 @@ further_reading:
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"

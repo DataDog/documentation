@@ -36,7 +36,7 @@ Metrics starting with:
     * `synthetics.icmp.*` come from your API [ICMP tests][8]
 * `synthetics.multi.*` come from your [multistep API tests][9]
 * `synthetics.browser.*` come from your [browser tests][10]
-* `synthetics.pl.worker.*`come from your [private locations][11]
+* `synthetics.pl.*`come from your [private locations][11]
 
 ### General metrics
 

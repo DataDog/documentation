@@ -24,16 +24,12 @@ further_reading:
 
 You can access, [search](#search-for-tests), and [manage](#manage-tests) all of your tests on the [Synthetic Tests page][1]. 
 
-{{< img src="synthetics/search/synthetic_tests_page.png" alt="Synthetic Monitoring Tests page" style="width:100%" >}}
+{{< img src="synthetics/search/synthetic_tests_page_2.png" alt="Synthetic Monitoring Tests page" style="width:100%" >}}
 
 By using [facets](#facets-and-tags), you can accomplish the following actions:
 
 - Search for specific Synthetic tests
-- Investigate every CI/CD job execution to identify and troubleshoot failing test runs
-- Keep track of the progress of your tests in CI/CD pipelines
-- Identify flaky tests to fix
 - Manage your tests with bulk actions
-- Monitor events to track changes to your Synthetic Monitoring configuration
 
 ## Search for tests
 
@@ -48,6 +44,7 @@ The default facets include the following:
 | `Type`         | The type of Synthetic test: `browser`, `api`, `api-multi`, `api-websocket`, `api-ssl`, `api-dns`, `api-tcp`, `api-udp`, `api-icmp`, or `api-grpc`. |
 | `Status`       | The Synthetic test status: `OK`, `Alert`, or `No Data`.                       |
 | `Creator`      | The creator of the Synthetic test.                                            |
+| `Team`         | The team responsible for responding to the Synthetic test.                    |
 | `Region`       | The managed and private locations the Synthetic test is running from.         |
 | `State`        | The state of the Synthetic test: `live` or `paused`.                          |
 | `Notification` | The handle used by the Synthetic test for notifications.                      |
@@ -60,7 +57,6 @@ The default tags include the following:
 
 | Tag          | Description                                                                     |
 |----------------|-------------------------------------------------------------------------------|
-| `Team`         | The team responsible for responding to the Synthetic test.                    |
 | `Tag`          | The tag assigned to the Synthetic test.                                       |
 | `Service`      | The service the Synthetic test is running on.                                 |
 | `Private Locations`| Whether or not private locations are enabled: `true` or `false`.          |
@@ -82,7 +78,7 @@ When you select and deselect facets, the search bar automatically reflects your 
 
 To search on a type of Synthetics test, select the test type under the **Type** facet.
 
-{{< img src="synthetics/search/facet_search.mp4" alt="Search for tests using facets in the Tests page" video=true >}}
+{{< img src="synthetics/search/facet_search_2.mp4" alt="Search for tests using facets in the Tests page" video=true >}}
 
 ## Manage tests
 
@@ -90,19 +86,19 @@ To search on a type of Synthetics test, select the test type under the **Type** 
 
 Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1] and clicking **Edit Tags**, **Run Tests Now**, or **Delete**. 
 
-{{< img src="synthetics/search/edit_tags.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
+{{< img src="synthetics/search/edit_tags_2.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
 
 ### Test actions
 
-Hovering over a test populates option icons on the right such as `Pause`, `Run Test Now`, `Edit`, `Clone`, and `Delete`. The `Edit Recording` option is available for browser tests.
+Clicking on the kebab menu to the right of a test populates option icons such as `Pause`, `Run Test Now`, `Edit Test`, `Clone`, and `Delete`. The `Edit Recording` option is available for browser tests.
 
-{{< img src="synthetics/search/manage_test_options.mp4" alt="Action tray options that appear when hovering on a Synthetic test" video="true" width="100%">}}
+{{< img src="synthetics/search/test_option_2.mp4" alt="Options appear when you click on the kebab menu to the right of a Synthetic test" video="true" width="100%">}}
 
 ### Track events
 
 Creating, adding, and deleting Synthetic tests, global variables, and private locations generates events in the [Events Explorer][6]. Events describe changes that occurred and display the users who performed the changes.
 
-{{< img src="synthetics/search/synthetic_events.png" alt="Synthetic test alerts in the Events Explorer" style="width:100%" >}}
+{{< img src="synthetics/search/synthetic_events_2.png" alt="Synthetic test alerts in the Events Explorer" style="width:100%" >}}
 
 Find all Synthetics-related changes by searching for your test monitors' alerts in the search bar, or by selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
 

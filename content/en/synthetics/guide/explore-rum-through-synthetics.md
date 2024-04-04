@@ -1,5 +1,5 @@
 ---
-title: Explore RUM & Session Replay In Synthetics
+title: Explore A Preview of RUM Features In Synthetics
 kind: documentation
 description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost. 
 aliases:
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">If you don't have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
+<div class="alert alert-info">If you have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
 
 Synthetic browser tests embed the Real User Monitoring SDK, allowing you to explore:
 
@@ -68,8 +68,8 @@ To navigate back to Synthetics and your test's results, click **View Synthetic T
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/
-[2]: /real_user_monitoring/session_replay/developer_tools/
+[1]: /real_user_monitoring/session_replay/browser/
+[2]: /real_user_monitoring/session_replay/browser/developer_tools/
 [3]: /real_user_monitoring/explorer/
 [4]: /real_user_monitoring/error_tracking/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations

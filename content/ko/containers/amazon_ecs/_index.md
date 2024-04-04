@@ -1,6 +1,8 @@
 ---
+algolia:
+  tags:
+  - ecs
 aliases:
-- /ko/integrations/amazon_ecs/
 - /ko/agent/amazon_ecs/
 further_reading:
 - link: /agent/amazon_ecs/logs/
@@ -15,6 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: 블로그
   text: Amazon ECS Anywhere 지원 발표
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  tag: 블로그
+  text: Datadog 클라우드 비용 관리를 통해 Kubernetes 및 ECS 지출 내역을 확인하세요.
 kind: 설명서
 title: Amazon ECS
 ---
@@ -120,7 +125,7 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 위에 제공된 초기 작업 정의는 상당히 최소화된 것입니다. 이 작업 정의는 기본 설정이 되어 있는 에이전트 컨테이너를 배포하여 ECS 클러스터의 컨테이너에 대한 핵심 메트릭을 수집합니다. 또한 이 에이전트는 해당 컨테이너에서 검색된 [도커(Docker) 자동탐지 라벨][12]를 기반으로 에이전트 통합을 실행할 수 있습니다.
 
 사용한다면
-- 애플리케이션 성능 모니터링(APM): [애플리케이션 성능 모니터링 설치 설명서]와 샘플 [datadog-agent-ecs-apm.json][23]을 찾아보세요.
+- 애플리케이션 성능 모니터링(APM): [애플리케이션 성능 모니터링 설치 설명서][6] 와 샘플 [datadog-agent-ecs-apm.json][23]을 찾아보세요.
 - 로그 관리: [로그 수집 설명서][7] 및 샘플 [datadog-agent-eccs-logs.json][24]을 참조하세요.
 
 #### DogStatsD
@@ -220,7 +225,135 @@ Agent를 `awsvpc` 모드로 실행할 수는 있습니다만, 권장하지는 �
 
 대신 브리지 모드에서 에이전트를 포트 매핑과 함께 실행하면 [메타데이터 서버를 통해 호스트 IP][8]를 더욱 쉽게 가져올 수 있습니다.
 
-## 트러블슈팅
+{{% site-region region="gov" %}}
+#### GOVCLOUD 환경에 대한 FIPS 프록시
+
+Datadog의 GOVCLOUD 데이터 센터로 데이터를 보내려면 `fips-proxy` 사이드카 컨테이너를 추가하고 컨테이너 포트를 열어 [지원되는 기능](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations)에 대한 적절한 통신이 이루어지도록 합니다.
+
+**참고**: 이 기능은 Linux에서만 사용할 수 있습니다.
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:1.1.1",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9815,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+또한 FIPS 프록시를 통해 트래픽을 전송하려면 Datadog Agent 컨테이너의 환경 변수를 업데이트해야 합니다.
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+{{% /site-region %}}
+
+## 문제 해결
 
 도움이 필요하신가요? [Datadog 고객 지원팀][11]에 문의해 주세요.
 

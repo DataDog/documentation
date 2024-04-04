@@ -161,7 +161,7 @@ environment:
 
 [1]: /agent/basic_agent_usage/
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Host Agent with Custom Logging" %}}
 
@@ -184,8 +184,8 @@ environment:
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
-[3]: /agent/guide/agent-configuration-files/
-[4]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-configuration-files/
+[4]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -1,8 +1,7 @@
 ---
 aliases:
 - /ja/developers/marketplace/
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/marketplace_offering.md
+description: Datadog マーケットプレイスについて
 further_reading:
 - link: https://www.datadoghq.com/partner/
   tag: パートナーネットワーク

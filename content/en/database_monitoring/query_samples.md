@@ -70,7 +70,7 @@ Graphs show the query's performance metrics---number of executions, duration, an
 
 The Explain Plan section shows Duration and Cost stats for the current sample _and_ averages and p90 for all collected snapshots across the time frame.
 
-The explain plan also shows measures for each node (step) in the the plan: startup cost, total cost, plan rows, and plan width. Hover over the column heading to see a description of each measure.
+The explain plan also shows measures for each node (step) in the plan: startup cost, total cost, plan rows, and plan width. Hover over the column heading to see a description of each measure.
 
 {{< img src="database_monitoring/dbm_sd_explain_plan.png" alt="Explain plan samples statistics and step metrics" style="width:100%;">}}
 

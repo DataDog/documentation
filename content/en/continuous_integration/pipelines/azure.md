@@ -10,10 +10,14 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and metrics"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
+
+<div class="alert alert-warning">
+Azure DevOps Server is not officially supported.
+</div>
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
@@ -21,13 +25,13 @@ further_reading:
 
 ## Compatibility
 
-- **Custom tags and metrics at runtime**: Configure [custom tags][6] and metrics at runtime
+- **Custom tags and measures at runtime**: Configure [custom tags][6] and measures at runtime
 
 ## Configure the Datadog integration
 
 The Datadog integration for [Azure Pipelines][1] works by using [service hooks][2] to send data to Datadog.
 
-1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace.
+1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace. There are several extensions starting with **Datadog**, make sure that you are installing the [Datadog CI Visibility][8] extension.
 
 2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
 
@@ -35,6 +39,8 @@ The Datadog integration for [Azure Pipelines][1] works by using [service hooks][
     - **Run state changed**
     - **Run stage state changed**
     - **Run job state changed**
+    - **Run stage approval completed**
+    - **Run stage waiting for approval**
 
 4. Click **Next** to continue to the next step and set the following:
     - **Datadog Site**: {{< region-param key="dd_site" >}}
@@ -43,7 +49,7 @@ The Datadog integration for [Azure Pipelines][1] works by using [service hooks][
 5. Click **Finish**.
 
 <div class="alert alert-info">
-All 3 supported types of events are required and must be enabled individually.
+All 5 supported types of events are required and must be enabled individually.
 Not enabling one or more events results in an an incomplete installation, leading to unexpected behavior in Datadog.
 </div>
 
@@ -100,5 +106,6 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
+[9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals

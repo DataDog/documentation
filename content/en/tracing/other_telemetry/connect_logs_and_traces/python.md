@@ -1,5 +1,5 @@
 ---
-title: Connecting Python Logs and Traces
+title: Correlating Python Logs and Traces
 kind: documentation
 description: "Connect your Python logs and traces to correlate them in Datadog."
 code_lang: python
@@ -29,8 +29,32 @@ further_reading:
 
 ### Standard library logging
 
-To correlate your [traces][1] with your logs, update your log format to include
-the required attributes from the log record and call `ddtrace.patch(logging=True)`.
+To correlate your [traces][1] with your logs, complete the following steps:
+
+  1. [Activate automatic instrumentation](#step-1---activate-automatic-instrumentation).
+  2. [Include required attributes from the log record](#step-2---include-required-attributes).
+
+#### Step 1 - Activate automatic instrumentation
+
+Activate automatic instrumentation using one of the following options:
+ 
+Option 1: [Library Injection][5]:
+  1. Set the environment variable `DD_LOGS_INJECTION=true` in the application `deployment/manifest` file.
+  2. Follow the instructions in [Library Injection][5] to set up tracing.
+
+Option 2: `ddtrace-run`:
+  1. Set the environment variable `DD_LOGS_INJECTION=true` in the environment where the application is running.
+  2. Import **ddtrace** into the application.
+  3. Run the application with `ddtrace-run` (for example, `ddtrace-run python appname.py`).
+     
+Option 3: `patch`:
+  1. Import **ddtrace** into the application.
+  2. Add `ddtrace.patch(logging=True)` to the start of the application code.
+
+#### Step 2 - Include required attributes
+
+Update your log format to include the required attributes from the log record.
+
 
 Include the ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` and
 ``dd.span_id`` attributes for your log record in the format string.
@@ -38,7 +62,6 @@ Include the ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` and
 Here is an example using `logging.basicConfig` to configure the log injection:
 
 ``` python
-from ddtrace import patch; patch(logging=True)
 import logging
 from ddtrace import tracer
 
@@ -56,6 +79,8 @@ def hello():
 hello()
 ```
 
+To learn more about logs injection, read the [ddtrace documentation][6].
+
 ### No standard library logging
 
 If you are not using the standard library `logging` module, you can use the following code snippet to inject tracer information into your logs:
@@ -64,7 +89,7 @@ If you are not using the standard library `logging` module, you can use the foll
 from ddtrace import tracer
 
 span = tracer.current_span()
-correlation_ids = (span.trace_id, span.span_id) if span else (None, None)
+correlation_ids = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
 ```
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
@@ -77,7 +102,7 @@ import structlog
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
     span = tracer.current_span()
-    trace_id, span_id = (span.trace_id, span.span_id) if span else (None, None)
+    trace_id, span_id = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
 
     # add ids to structlog event dictionary
     event_dict['dd.trace_id'] = str(trace_id or 0)
@@ -118,3 +143,5 @@ Once the logger is configured, executing a traced function that logs an event yi
 [2]: /logs/log_collection/python/#configure-the-datadog-agent
 [3]: /logs/log_configuration/processors/#trace-remapper
 [4]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[5]: /tracing/trace_collection/library_injection_local/
+[6]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#logs-injection

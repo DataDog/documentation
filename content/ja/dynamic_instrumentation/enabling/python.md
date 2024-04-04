@@ -1,13 +1,13 @@
 ---
 aliases:
 - /ja/tracing/dynamic_instrumentation/enabling/python/
-code_lang: php
+code_lang: python
 code_lang_weight: 20
 further_reading:
 - link: /agent/
   tag: ドキュメント
   text: Datadog Agent の概要
-is_beta: true
+is_beta: false
 kind: ドキュメント
 private: false
 title: Python のダイナミックインスツルメンテーションを有効にする
@@ -28,7 +28,7 @@ type: multi-code-lang
    pip install ddtrace
    ```
 
-   **注**: ダイナミックインスツルメンテーションは、`ddtrace` ライブラリバージョン 1.15.0 以降で利用可能です。
+   **注**: ダイナミックインスツルメンテーションは、`ddtrace` ライブラリバージョン 2.2.0 以降で利用可能です。
 
 4. `DD_DYNAMIC_INSTRUMENTATION_ENABLED` 環境変数を `true` に設定し、ダイナミックインスツルメンテーションを有効にしてサービスを稼働させます。`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の統合サービスタグを指定すると、プローブをフィルターしたりグループ化したり、アクティブなクライアントをこれらの次元でターゲットにすることができるようになります。
 {{< tabs >}}
