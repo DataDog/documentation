@@ -14,7 +14,7 @@ curl http://<OPW_HOST>:8088/services/collector/event \
 
 `<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use. For Kubernetes installs, the internal DNS record of the Observability Pipelines Worker service can be used, for example `opw-observability-pipelines-worker.default.svc.cluster.local`.
 
-`<DD_OP_DESTINATION_SPLUNK_HEC_TOKEN>` is the HEC token you provided during the [Install your OP Worker](link to [Draft] OP 2.0 Doc instructions) step.
+`<DD_OP_DESTINATION_SPLUNK_HEC_TOKEN>` is the HEC token you provided during the [Install your Observability Pipelines Worker](#install-the-observability-pipelines-worker) step.
 
 At this point, your logs should be going to the Worker, processed by the pipeline, and delivered to the Splunk index.
 

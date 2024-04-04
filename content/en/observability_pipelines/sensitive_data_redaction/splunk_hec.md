@@ -85,6 +85,11 @@ Enter the information for the processors you want to use. Click the **Add** butt
 {{% observability_pipelines/processors/remap %}}
 
 {{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker

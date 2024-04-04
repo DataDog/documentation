@@ -8,7 +8,6 @@ disable_toc: false
 
 Configure your Splunk HTTP Event Collector (HEC) so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives. See [Archive Logs from Splunk Heavy and Universal Forwarders][1] if you want to archives logs from your Splunk Heavy or Splunk Universal Forwarders.
 
-
 This document walks through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Configuring a Log Archive](#configure-a-log-archive)
@@ -75,6 +74,11 @@ Enter the following information based on your selected logs destinations.
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/destination_settings/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Datadog Archives" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives %}}
 
 {{% /tab %}}
 {{< /tabs >}}
