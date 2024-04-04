@@ -39,6 +39,41 @@ To combine multiple terms into a complex query, you can use any of the following
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
+### Full-text search across all log attributes
+
+<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used for defining index filters, archive filters, log pipeline filters, or in Live Tail. </div>
+
+Use the syntax `*:search_term` to perform a full-text search across all log attributes, including the log message.
+
+#### Single term example
+
+| Search syntax | Search type | Description                                           |
+| ------------- | ----------- | ----------------------------------------------------- |
+| `*:hello` | Full-text   | Searches all log attributes for the term `hello`.     |
+| `hello`       | Free text   | Searches only the log message for the term `hello`.   |
+
+#### Search term with wildcard example
+
+| Search syntax | Search type | Description                                                                                  |
+| ------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| `*:hello` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
+| `*:hello*`| Full-text   | Searches all log attributes for strings that starts with `hello`. For example, `hello_world`.|
+
+#### Multiple terms with exact match example
+
+| Search syntax       | Search type | Description                                            |
+| ------------------- | ----------- |------------------------------------------------------- |
+| `*:"hello world"` | Full-text   |Searches all log attributes for the term `hello world`. |
+| `hello world`       | Free text   |Searches only the log message for the term `hello`.     |
+
+#### Multiple terms without exact match example
+
+The full-text search syntax `*:hello world` is equivalent to `*:hello *:world`. It searches all log attributes for the terms `hello` and `world`.
+
+#### Multiple terms with a white space example
+
+The full-text search syntax `*:"hello world" "i am here"` is equivalent to `*:"hello world" *:"i am here"`. It searches all log attributes for the terms `hello world` and `i am here`.
+
 ## Escape special characters and spaces
 
 The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
@@ -121,43 +156,6 @@ Wildcard searches can also be used to search in the plain text of a log that is 
 ```
 
 However, this search term does not return logs that contain the string `NETWORK` if it is in a log attribute and not part of the log message.
-
-### Full-text search across all log attributes
-
-<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used for defining index filters, archive filters, log pipeline filters, or in Live Tail. </div>
-
-<div class="alert alert-warning">You can use full-text search for all logs ingested after MONTH DATE YEAR.</div>
-
-Use the syntax `*:search_term` to perform a free text search across all log attributes, including the log message.
-
-#### Single term example
-
-| Search syntax | Search type | Description                                           |
-| ------------- | ----------- | ----------------------------------------------------- |
-| `*:hello` | Full-text   | Searches all log attributes for the term `hello`.     |
-| `hello`       | Free text   | Searches only the log message for the term `hello`.   |
-
-#### Search term with wildcard example
-
-| Search syntax | Search type | Description                                                                                  |
-| ------------- | ----------- | -------------------------------------------------------------------------------------------- |
-| `*:hello` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
-| `*:hello*`| Full-text   | Searches all log attributes for strings that starts with `hello`. For example, `hello_world`.|
-
-#### Multiple terms with exact match example
-
-| Search syntax       | Search type | Description                                            |
-| ------------------- | ----------- |------------------------------------------------------- |
-| `*:"hello world"` | Full-text   |Searches all log attributes for the term `hello world`. |
-| `hello world`       | Free text   |Searches only the log message for the term `hello`.     |
-
-#### Multiple terms without exact match example
-
-The full-text search syntax `*:(hello world)` is equivalent to `*:(hello) *:(world)`. It searches all log attributes for the terms `hello` and `world`.
-
-#### Multiple terms with a white space example
-
-The full-text search syntax `*:("hello world") ("i am here")` is equivalent to `*:("hello world") *:("i am here")`. It searches all log attributes for the terms `hello world` and `i am here`.
 
 ### Search wildcard
 
