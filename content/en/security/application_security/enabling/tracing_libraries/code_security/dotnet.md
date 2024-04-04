@@ -14,7 +14,7 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-dotnet'
       tag: 'GitHub'
       text: '.NET Datadog library source code'
-    - link: "/security/default_rules/#cat-application-security"
+    - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"
@@ -39,10 +39,10 @@ To leverage code security vulnerability detection capabilities for your service:
 2. Update your tracing library to at least the minimum version needed to turn on code security vulnerability detection. For details, see [ASM capabilities support][4].
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
-```sh
-$target=[System.EnvironmentVariableTarget]::Process
-[System.Environment]::SetEnvironmentVariable("DD_IAST_ENABLED","true",$target)
-```
+   ```sh
+   $target=[System.EnvironmentVariableTarget]::Process
+   [System.Environment]::SetEnvironmentVariable("DD_IAST_ENABLED","true",$target)
+   ```
 
 Or one of the following methods, depending on where your application runs:
 

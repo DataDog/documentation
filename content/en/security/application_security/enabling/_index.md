@@ -15,7 +15,7 @@ further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Tracking user activity"
-- link: "/security/default_rules/#cat-application-security"
+- link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
   text: "OOTB Application Security Management Rules"
 - link: "/security/application_security/troubleshooting"
@@ -37,17 +37,15 @@ Enable your application to [detect and protect against threats][1] targeting you
 
 {{% appsec-getstarted %}}
 
-{{% appsec-getstarted-with-rc %}}
-
 ## ASM enablement types
 
 There are two main approaches to enable ASM on your tracing libraries: single-step or with Datadog tracing libraries.
 
-### Single-step enablement
+### Single-step instrumentation
 
 - [Single Step Instrumentation (Beta)][3]: Run a one-line install command to install the Datadog Agent, enable ASM, and protect all of your services on your Linux host, VM, or containers.
 
-### Datadog Tracing libraries
+### Datadog tracing libraries
 
 - [Datadog libraries][4]: Use Datadog tracing libraries to add and customize observability within Datadog.
 

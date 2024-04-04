@@ -14,7 +14,7 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-js'
       tag: 'GitHub'
       text: 'Node.js Datadog library source code'
-    - link: "/security/default_rules/#cat-application-security"
+    - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"

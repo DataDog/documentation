@@ -12,7 +12,7 @@ further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Tracking user activity"
-- link: "/security/default_rules/#cat-application-security"
+- link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
   text: "OOTB Application Security Management Rules"
 - link: "/security/application_security/troubleshooting"
@@ -26,6 +26,10 @@ further_reading:
   text: "Secure serverless applications with Datadog ASM"
 ---
 
-Select your application language for details on how to implement these steps for your language and infrastructure types.
+Select your application language for details on how to enable ASM Threat Detection for your language and infrastructure types.
 
-{{< partial name="security-platform/appsec-languages.html" >}}
+{{< partial name="security-platform/appsec-languages.html" >}}</br>
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

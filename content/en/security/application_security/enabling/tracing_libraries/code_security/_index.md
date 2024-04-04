@@ -12,7 +12,7 @@ further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Tracking user activity"
-- link: "/security/default_rules/#cat-application-security"
+- link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
   text: "OOTB Application Security Management Rules"
 - link: "/security/application_security/troubleshooting"
@@ -28,6 +28,10 @@ further_reading:
 
 <div class="alert alert-info">Code security vulnerability detection is in beta.</div>
 
-Select your application language for details on how to implement these steps for your language and infrastructure types.
+Select your application language for details on how to enable ASM code security for your language and infrastructure types.
 
-{{< partial name="security-platform/appsec-languages-code-security.html" >}}
+{{< partial name="security-platform/appsec-languages-code-security.html" >}}</br>
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

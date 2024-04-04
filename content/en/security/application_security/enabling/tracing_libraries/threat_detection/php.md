@@ -14,7 +14,7 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-php'
       tag: 'GitHub'
       text: 'PHP Datadog Tracer Library source code'
-    - link: "/security/default_rules/#cat-application-security"
+    - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"
