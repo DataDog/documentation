@@ -11,9 +11,9 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 Select a log source to get started:
 
 - [Datadog Agent][1]
-- [Splunk HTTP Event Collector][2]
+- [Splunk HTTP Event Collector (HEC)][2]
 - [Splunk Heavy and Universal Forwarders (TCP)][3]
-- [Sumo Logic][4]
+- [Sumo Logic Host Collector][4]
 
 [1]: /observability_pipelines/sensitive_data_redaction/datadog_agent
 [2]: /observability_pipelines/sensitive_data_redaction/splunk_hec

@@ -22,8 +22,8 @@ The following sources are available:
 
 - Datadog Agent
 - Splunk HTTP Event Collector (HEC)
-- Splunk Forwarder
-- Sumo Logic
+- Splunk Forwarders (TCP)
+- Sumo Logic Host Collector
 
 ## Get started
 

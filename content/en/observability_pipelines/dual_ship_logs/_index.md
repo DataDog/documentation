@@ -11,9 +11,9 @@ As your infrastructure and your organization scales, so does your log volume, co
 Select a source to get started:
 
 - [Datadog Agent][1]
-- [Splunk HTTP Event Collector][2]
+- [Splunk HTTP Event Collector (HEC)][2]
 - [Splunk Heavy and Universal Forwarders (TCP)][3]
-- [Sumo Logic][4]
+- [Sumo Logic Host Collector][4]
 
 [1]: /observability_pipelines/dual_ship_logs/datadog_agent
 [2]: /observability_pipelines/dual_ship_logs/splunk_hec
