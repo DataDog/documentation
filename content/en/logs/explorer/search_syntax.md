@@ -39,7 +39,7 @@ To combine multiple terms into a complex query, you can use any of the following
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
-### Full-text search across all log attributes
+## Full-text search 
 
 <div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, or in Live Tail. </div>
 
