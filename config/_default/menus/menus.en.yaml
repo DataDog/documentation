@@ -4035,6 +4035,11 @@ main:
     parent: security_platform
     identifier: security_audit_trail
     weight: 6
+  - name: Account Takeover Protection
+    url: security/account_takeover_protection
+    parent: security_platform
+    identifier: security_ato_protection
+    weight: 7
   - name: Cloud SIEM
     url: security/cloud_siem/
     pre: siem
@@ -4398,11 +4403,6 @@ main:
     parent: application_security
     identifier: asm_api_security
     weight: 8
-  - name: Account Takeover Protection
-    url: security/application_security/account_takeover_protection/
-    parent: application_security
-    identifier: asm_ato_protection
-    weight: 9
   - name: Guides
     url: security/application_security/guide/
     parent: application_security

@@ -87,7 +87,7 @@ Remote configuration enables ASM users to instrument apps with with enrichments 
 
 ## Review your first detection
 
-{{<img src="security/application_security/threats/ato/review_first_detection.png" alt="An Account Takeover signal showing different highlighted areas of interest" style="width:100%;">}}
+{{<img src="security/ato/review_first_detection.png" alt="An Account Takeover signal showing different highlighted areas of interest" style="width:100%;">}}
 
 **Compromised Users**
 
@@ -95,17 +95,17 @@ Compromised and Targeted users can be reviewed and blocked within Signals, Trace
 
 **Signals:**
 
-{{<img src="security/application_security/threats/ato/compromised_users_signals.png" alt="Compromised users shown on a security signal" style="width:100%;">}}
+{{<img src="security/ato/compromised_users_signals.png" alt="Compromised users shown on a security signal" style="width:100%;">}}
 
 **Traces:**
 
-{{<img src="security/application_security/threats/ato/compromised_users_traces.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
+{{<img src="security/ato/compromised_users_traces.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
 
 **Blocking**
 
 ASM suggests actions to take based on the detection type and indicates what actions have been taken.
 
-{{<img src="security/application_security/threats/ato/review_suggested_steps.png" alt="Suggested actions on an ASM Account Takeover signal" style="width:100%;">}}
+{{<img src="security/ato/review_suggested_steps.png" alt="Suggested actions on an ASM Account Takeover signal" style="width:100%;">}}
 
 # Best practices for Signal Review and Protection
 
@@ -120,7 +120,7 @@ IP addresses can be trusted, preventing them from being automatically blocked. T
 
 To configure Trusted IPs, visit the [Passlist](https://app.datadoghq.com/security/appsec/passlist) page and add a `Monitored` entry. Monitored entries are excluded from automated blocking.
 
-{{<img src="security/application_security/threats/ato/passlist.png" alt="Monitored passlist" style="width:100%;">}}
+{{<img src="security/ato/passlist.png" alt="Monitored passlist" style="width:100%;">}}
 
 ### What is your customer authentication profile
 
