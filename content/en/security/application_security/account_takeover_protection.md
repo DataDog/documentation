@@ -24,15 +24,23 @@ Account takeover occurs when an attacker gains access to a user's account creden
 ## Attacker Strategies
 Attacks use publicly available automated tools for compromise. The tools and their configurations have varying capabilities for sophistication and scale.
 
-**Credential stuffing** is an automated cyberattack where stolen account credentials, typically usernames or email addresses and the corresponding passwords, are used to gain unauthorized access to user accounts through large-scale automated login requests directed against a web application.
+### Credential stuffing
+
+An automated cyberattack where stolen account credentials, typically usernames or email addresses and the corresponding passwords, are used to gain unauthorized access to user accounts through large-scale automated login requests directed against a web application.
 
 Credential stuffing relies on credential dumps.
 
-**Credential dumps** occur when stolen credentials from a security breach are posted publicly or sold on dark web markets, often resulting in a large compilation of usernames, passwords, and other account details being released.
+### Credential dumps
 
-**Credential cracking** involves attempting to decipher a user's password by systematically trying different combinations of passwords until the correct one is found, often using software tools that apply various password-guessing techniques.
+Occur when stolen credentials from a security breach are posted publicly or sold on dark web markets, often resulting in a large compilation of usernames, passwords, and other account details being released.
 
-**Brute force** is a trial-and-error method used to obtain information such as a user password or personal identification number (PIN); in this attack, automation is used to generate consecutive guesses to gain unauthorized access to a system
+### Credential cracking
+
+Involves attempting to decipher a user's password by systematically trying different combinations of passwords until the correct one is found, often using software tools that apply various password-guessing techniques.
+
+### Brute force
+
+A trial-and-error method used to obtain information such as a user password or personal identification number (PIN); in this attack, automation is used to generate consecutive guesses to gain unauthorized access to a system
 
 # Onboarding
 
@@ -66,7 +74,7 @@ You are not limited to Datadog defined these enrichments. Many platform products
 ## Remote Configuration
 [Remote Configuration](https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration)
 
-Remote configuration enables ASM users to intrument apps with with enrichments such as `users.exists` or custom [business logic](https://app.datadoghq.com/security/appsec/business-logic)
+Remote configuration enables ASM users to instrument apps with with enrichments such as `users.exists` or custom [business logic](https://app.datadoghq.com/security/appsec/business-logic)
  data in near real time.
 
 
@@ -133,6 +141,7 @@ Understanding your customers account name structure helps understand if attacks 
 
 
 ### Distributed Attacks
+
 Blocking advanced, distributed attacks is often business decision as the attack affects availability, may affect user funds, and may impact legitimate users. There are three critical components for success in these attacks
 1. Proper onboarding: Are you configured for blocking with ASM?
 2. Proper configuration: ensure that you have correctly set Client IPs and XFF headers
@@ -145,19 +154,21 @@ Note: Responders can identify services owners via the tags in all ASM Signals.
 
 ### Attackers
 
-**IP Addresses**
+#### IP Addresses
 
 Use short durations for blocking attackers. 15 minutes or less is recommended. It is rare for attackers to re-use IP addresses in distributed account takeovers.
 
-**Data centers**
+#### Data centers
 
 Some attacks launch attacks cheap VPS and hosting providers. Attackers are motivated by the low cost and automation which provides abilities to quickly access new IP addresses at the data center.
 
-Many consumer applications have low occurrences of user authentication from data centers, especially low cost data centers and VPS providers. Consider blocking the entire data center or ASN when the network range is small, such as a /20 (4096 IP Addresses) , and not within your typical user authentication expecations.
+Many consumer applications have low occurrences of user authentication from data centers, especially low cost data centers and VPS providers. Consider blocking the entire data center or ASN when the network range is small, such as a /20 (4096 IP Addresses) , and not within your typical user authentication expectations.
 
+<span style="color:red">
 {show IP pill} Datadog uses third parties such as IPinfo and Spur to determine if an IP is a hosting provider.
+</span>
 
-**Proxies**
+#### Proxies
 
 There are two types of proxies frequently seen in distributed account takeovers; hosting and residential. 
 
@@ -169,25 +180,23 @@ Datadog recommends never blocking solely on threat intelligence IOCs for IP addr
 Details on IP Addresses, including ownership and threat intelligence is available in the IP address drawers. Click on  IP addresses to view.
 
 Hosting Proxies
-
-These are proxies that exist at data centers, often the result of a compromised host at that data center. Guidance for interacting with hosting proxies is similar to data centers.
+: These are proxies that exist at data centers, often the result of a compromised host at that data center. Guidance for interacting with hosting proxies is similar to data centers.
 
 Residential Proxies
+: These are proxies that exist behind Residential IP addresses. Residential proxies are frequently enabled by mobile application SDKs or browser plugins. The user of the SDK or plugin is typically unaware that they are running a proxy. It is common to see benign traffic from IP addresses identified as residential proxies.
 
-These are proxies that exist behind Residential IP addresses. Residential proxies are frequently enabled by mobile application SDKs or browser plugins. The user of the SDK or plugin is typically unaware that they are running a proxy. It is common to see benign traffic from IP addresses identified as residential proxies.
-
-Mobile ISPs
+#### Mobile ISPs
 
 Datadog uses third parties such as IPinfo and Spur to determine if an IP is a Mobile ISP.
 
 Excercise caution when blocking Mobile ISPs.
 Mobile ISPs use CGNAT {link wikipedia} and frequently have large numbers of phones behind single IP addresses. 
 
+#### Attacker Attributes
 
-**Attacker Attributes**
 Use attacker attributes to target response actions.
 
-Datadog clusters attackers using Attacker Similarity and identifies attributes of those attackers. Responders can use custom rules to block to attributes of persistant attackers.
+Datadog clusters attackers using Attacker Similarity and identifies attributes of those attackers. Responders can use custom rules to block to attributes of persistent attackers.
 
 
 ## Protection
@@ -198,7 +207,7 @@ Review the managed ruleset and determine which rules fit your internal policies 
 
 ### Users
 
-In Signals, the What and Targeted User sections will provide examples of the attempted usernames.
+In Signals, the **What Happened** and **Targeted Users** sections will provide examples of the attempted usernames.
 
 The traces section will identify if the users exist. Understanding if users exist may influence your incident response decisions.
 
