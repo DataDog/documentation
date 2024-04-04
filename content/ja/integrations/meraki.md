@@ -12,6 +12,8 @@ assets:
       - snmp.devStatus
       metadata_path: metadata.csv
       prefix: ''
+    service_checks:
+      metadata_path: assets/service_checks.json
     source_type_id: 602
     source_type_name: Meraki
   monitors:
@@ -42,7 +44,9 @@ name: meraki
 public_title: Cisco Meraki
 short_description: NDM メトリクス、ログ、Cloud SIEM を使用して Cisco Meraki プラットフォームを監視する
 supported_os:
-- any
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
@@ -52,7 +56,9 @@ tile:
   - Category::SNMP
   - Submitted Data Type::Logs
   - Submitted Data Type::Metrics
-  - Supported OS::Any
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: NDM メトリクス、ログ、Cloud SIEM を使用して Cisco Meraki プラットフォームを監視する
   media: []

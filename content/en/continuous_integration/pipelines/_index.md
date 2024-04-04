@@ -15,7 +15,7 @@ further_reading:
 cascade:
     algolia:
         rank: 70
-        tags: ['ci pipeline', 'ci pipelines']
+        tags: ['ci pipeline', 'ci pipelines', 'supported features']
 ---
 
 {{< site-region region="gov" >}}
@@ -50,103 +50,87 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
 
-| Datadog | GitHub Actions |
-|---|---|
-| Pipeline | Workflow |
-| Stage |  |
-| Job | Job |
-| Step | Step |
+| Datadog  | GitHub Actions |
+|----------|----------------|
+| Pipeline | Workflow       |
+| Job      | Job            |
+| Step     | Step           |
 
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-| Datadog | GitLab |
-|---|---|
-| Pipeline | Pipeline |
-| Stage | Stage |
-| Job | Job |
-| Step* | Script |
-
-_\*A pipeline's step granularity is not available in Datadog._
+| Datadog                    | GitLab   |
+|----------------------------|----------|
+| Pipeline                   | Pipeline |
+| Stage                      | Stage    |
+| Job                        | Job      |
+| _Not available in Datadog_ | Script   |
 
 {{% /tab %}}
 {{% tab "Jenkins" %}}
 
-| Datadog | Jenkins |
-|---|---|
+| Datadog  | Jenkins  |
+|----------|----------|
 | Pipeline | Pipeline |
-| Stage | Stage |
-| Job | Step |
-| Step |  |
+| Stage    | Stage    |
+| Job      | Step     |
 
 {{% /tab %}}
 {{% tab "CircleCI" %}}
 
-| Datadog | CircleCI |
-|---|---|
-| Pipeline | Pipeline |
-| Stage | Workflow |
-| Job | Job |
-| Step* | Step |
-
-_\*A pipeline's step granularity is not available in Datadog._
+| Datadog                    | CircleCI  |
+|----------------------------|-----------|
+| Pipeline                   | Workflow  |
+| Job                        | Job       |
+| _Not available in Datadog_ | Step      |
 
 {{% /tab %}}
 {{% tab "Buildkite" %}}
 
-| Datadog | Buildkite |
-|---|---|
-| Pipeline | Pipeline |
-| Stage |  |
-| Job | Job |
-| Step* | Step |
-
-_\*A pipeline's step granularity is not available in Datadog._
+| Datadog                    | Buildkite |
+|----------------------------|-----------|
+| Pipeline                   | Pipeline  |
+| Job                        | Job       |
+| _Not available in Datadog_ | Step      |
 
 {{% /tab %}}
 {{% tab "TeamCity" %}}
 
-| Datadog | TeamCity |
-|---|---|
-| Pipeline | Build Chain |
-| Stage |  |
-| Job | Build |
-| Step* | Step |
-
-_\*A pipeline's step granularity is not available in Datadog._
+| Datadog                    | TeamCity    |
+|----------------------------|-------------|
+| Pipeline                   | Build Chain |
+| Job                        | Build       |
+| _Not available in Datadog_ | Step        |
 
 {{% /tab %}}
 {{% tab "Azure Pipelines" %}}
 
-| Datadog | Azure Pipelines |
-|---|---|
-| Pipeline | Pipeline |
-| Stage | Stage |
-| Job | Job |
-| Step* | Step |
-
-_\*A pipeline's step granularity is not available in Datadog._
+| Datadog                    | Azure Pipelines |
+|----------------------------|-----------------|
+| Pipeline                   | Pipeline        |
+| Stage                      | Stage           |
+| Job                        | Job             |
+| _Not available in Datadog_ | Step            |
 
 {{% /tab %}}
 {{% tab "AWS CodePipeline" %}}
 
-| Datadog | AWS CodePipeline |
-|---|---|
-| Pipeline | Pipeline |
-| Stage | Stage |
-| Job | Action |
-| Step |  |
+| Datadog  | AWS CodePipeline |
+|----------|------------------|
+| Pipeline | Pipeline         |
+| Stage    | Stage            |
+| Job      | Action           |
 
 {{% /tab %}}
 
 {{% tab "Other CI Providers" %}}
 
-| Datadog | Other CI Providers |
-|---|---|
-| Pipeline | Pipeline |
-| Stage | Stage |
-| Job | Job |
-| Step | Step |
+| Datadog  | Other CI Providers |
+|----------|--------------------|
+| Pipeline | Pipeline           |
+| Stage    | Stage              |
+| Job      | Job                |
+| Step     | Step               |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -155,10 +139,10 @@ If your CI provider is not supported, you can try setting up Pipeline Visibility
 
 ### Supported features
 
-|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS Code Pipeline | Other CI Providers |
+|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS CodePipeline | Other CI Providers |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | {{< ci-details title="Pipeline trace visualization" >}}Visualization of pipeline executions with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | | {{< X >}} | | | {{< X >}} | | | | |
+| {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | | {{< X >}} | | | {{< X >}} | | | | {{< X >}} |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
 | {{< ci-details title="Step spans" >}}Step level spans are available for more granular visibility.{{< /ci-details >}} | {{< X >}} (_But are presented as job spans_) |  |  |  | {{< X >}} |  | {{< X >}} |  |  |  {{< X >}} |
 | {{< ci-details title="Manual steps" >}}Identification of when there is a job with a manual approval phase in the overall pipeline.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  {{< X >}} |

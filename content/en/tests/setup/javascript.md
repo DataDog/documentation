@@ -107,12 +107,12 @@ You can add custom tags to your tests by using the current active span:
   })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][101] section of the Node.js custom instrumentation documentation.
 
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-Just like tags, you can add custom metrics to your tests by using the current active span:
+Just like tags, you can add custom measures to your tests by using the current active span:
 
 ```javascript
   it('sum function can sum', () => {
@@ -122,10 +122,11 @@ Just like tags, you can add custom metrics to your tests by using the current ac
     // ...
   })
 ```
-Read more about custom metrics in [Add Custom Metrics Guide][2].
 
-[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+For more information about custom measures, see the [Add Custom Measures Guide][102].
+
+[101]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[102]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
@@ -147,7 +148,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the [custom annotations API from Playwright][1]:
+You can add custom tags to your tests by using the [custom annotations API from Playwright][101]:
 
 ```javascript
 test('user profile', async ({ page }) => {
@@ -179,9 +180,9 @@ The format of the annotations is the following, where `$TAG_NAME` and `$TAG_VALU
   "description": "$TAG_VALUE"
 }
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-Custom metrics also use custom annotations:
+Custom measures also use custom annotations:
 
 ```javascript
 test('user profile', async ({ page }) => {
@@ -200,14 +201,14 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
   "description": $TAG_VALUE
 }
 ```
-**Note**: `description` values in annotations are [typed as strings][2]. Numbers also work, but you may need to disable the typing error with `// @ts-expect-error`.
+**Note**: `description` values in annotations are [typed as strings][102]. Numbers also work, but you may need to disable the typing error with `// @ts-expect-error`.
 
 <div class="alert alert-warning">
   <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
-[1]: https://playwright.dev/docs/test-annotations#custom-annotations
-[2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
+[101]: https://playwright.dev/docs/test-annotations#custom-annotations
+[102]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -240,12 +241,12 @@ You can add custom tags to your test by grabbing the current active span:
   })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][101] section of the Node.js custom instrumentation documentation.
 
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-You may also add custom metrics to your test by grabbing the current active span:
+You may also add custom measures to your test by grabbing the current active span:
 
 ```javascript
   When('the function is called', function () {
@@ -255,10 +256,11 @@ You may also add custom metrics to your test by grabbing the current active span
     // ...
   })
 ```
-Read more about custom metrics in [Add Custom Metrics Guide][2]
 
-[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+For more information about custom measures, see the [Add Custom Measures Guide][102].
+
+[101]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[102]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -328,6 +330,28 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
+#### Cypress `after:spec` event
+Datadog requires the [`after:spec`][11] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      require('dd-trace/ci/cypress/plugin')(on, config)
+      // other plugins
+      on('after:spec', (...args) => {
+        // other 'after:spec' handlers
+        // Important that this function call is returned
+        // Important that all the arguments are passed
+        return require('dd-trace/ci/cypress/after-spec')(...args)
+      })
+    }
+  }
+})
+{{< /code-block >}}
+
 ### Cypress before version 10
 
 These are the instructions if you're using a version older than `cypress@10`. See the [Cypress documentation][9] for more information about migrating to a newer version.
@@ -371,6 +395,22 @@ module.exports = (on, config) => {
 }
 {{< /code-block >}}
 
+#### Cypress `after:spec` event
+Datadog requires the [`after:spec`][11] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
+
+{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
+module.exports = (on, config) => {
+  // your previous code is before this line
+  require('dd-trace/ci/cypress/plugin')(on, config)
+  on('after:spec', (...args) => {
+    // other 'after:spec' handlers
+    // Important that this function call is returned
+    // Important that all the arguments are passed
+    return require('dd-trace/ci/cypress/after-run')(...args)
+  })
+}
+{{< /code-block >}}
+
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
@@ -402,9 +442,9 @@ it('renders a hello world', () => {
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Node.js custom instrumentation documentation.
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-To add custom metrics to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourNumericalTags: 1 })` in your test or hooks.
+To add custom measures to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourNumericalTags: 1 })` in your test or hooks.
 
 For example:
 
@@ -418,7 +458,7 @@ it('renders a hello world', () => {
 })
 ```
 
-Read more about custom metrics in [Add Custom Metrics Guide][6].
+For more information about custom measures, see the [Add Custom Measures Guide][6].
 
 ### Cypress - RUM integration
 
@@ -430,18 +470,75 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[6]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+[6]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [7]: /real_user_monitoring/browser/#setup
 [8]: /continuous_integration/guides/rum_integration/
 [9]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
 [10]: https://docs.cypress.io/api/plugins/after-run-api
+[11]: https://docs.cypress.io/api/plugins/after-spec-api
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Using Yarn 2 or later
+### How to fix "Cannot find module 'dd-trace/ci/init'" errors
 
-If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
+When using `dd-trace`, you might encounter the following error message:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+This might be because of an incorrect usage of `NODE_OPTIONS`.
+
+For example, if your GitHub Action looks like this:
+```yml
+jobs:
+  my-job:
+    name: Run tests
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: -r dd-trace/ci/init
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install node
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+```
+
+**Note:** This does not work because `NODE_OPTIONS` are interpreted by every node process, including `npm install`. If you try to import `dd-trace/ci/init` before it's installed, this step fails.
+
+Your GitHub Action should instead look like this:
+```yml
+jobs:
+  my-job:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install node
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+        env:
+          NODE_OPTIONS: -r dd-trace/ci/init
+```
+
+Follow these best practices:
+
+* Make sure the `NODE_OPTIONS` environment variable is only set to the process running tests.
+* Specifically avoid defining `NODE_OPTIONS` in the global environment variables settings in your pipeline or job definition.
+
+
+#### Using Yarn 2 or later
+
+If you're using `yarn>=2` and a `.pnp.cjs` file, you might also get the same error:
 
 ```text
  Error: Cannot find module 'dd-trace/ci/init'
@@ -459,7 +556,7 @@ When tests are instrumented with [Istanbul][5], the Datadog Tracer (v3.20.0 or l
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
-Read more about code coverage in Datadog in [code coverage in Datadog guide][6].
+For more information, see [Code Coverage][6].
 
 ## Configuration settings
 
@@ -597,7 +694,7 @@ const testAddTagsCh = channel('dd-trace:ci:manual:test:addTags')
 // code for your testing framework continues here ...
 ```
 
-The payload to be published is a dictionary `<string, string|number>` of tags or metrics that are added to the test.
+The payload to be published is a dictionary `<string, string|number>` of tags or measures that are added to the test.
 
 
 ### Run the tests
@@ -685,7 +782,7 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [3]: /tracing/trace_collection/dd_libraries/nodejs
 [4]: https://github.com/DataDog/dd-trace-js#version-release-lines-and-maintenance
 [5]: https://istanbul.js.org/
-[6]: /continuous_integration/guides/code_coverage/?tab=javascripttypescript
+[6]: /tests/code_coverage/?tab=javascripttypescript
 [7]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
 [8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
 [9]: https://nodejs.org/api/packages.html#packages_determining_module_system

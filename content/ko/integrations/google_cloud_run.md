@@ -30,6 +30,7 @@ short_description: 클러스터 전체에서 메트릭, 트레이스, 로그를 
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
 Cloud Run은 HTTP 요청으로 호출 가능한 스테이트리스(Stateless) 컨테이너를 실행할 수 있게 해주는 관리형 컴퓨팅 플랫폼입니다.
@@ -50,7 +51,7 @@ Cloud Run for Anthos에 대한 자세한 내용은 [Google Cloud Run for Anthos 
 
 #### 통합
 Google Cloud Run은 [감사 로그][4]도 노출합니다.
-Google Cloud Run 로그는 Google Cloud Logging으로 수집되어 HTTP 푸시 포워더를 통해 Cloud Pub/Sub로 전송됩니다. 아직 설정하지 않았다면 [HTTP 푸시 포워더를 사용하는 Cloud Pub/sub][5]를 설정하세요.
+Google Cloud Run 로그는 Google Cloud Logging으로 수집되어 Cloud Pub/Sub 주제를 통해 Dataflow 작업으로 전송됩니다. 아직 설정하지 않았다면 [Datadog Dataflow 템플릿을 사용하여 로깅을 설정][5]하세요.
 
 이 작업이 완료되면 Google Cloud Logging에서 Google Cloud Run 로그를 pub/sub로 내보냅니다.
 
@@ -65,26 +66,26 @@ Google Cloud Run 로그는 Google Cloud Logging으로 수집되어 HTTP 푸시 �
 #### 직접 로깅
 Cloud Run 서비스에서 Datadog에 직접 애플리케이션을 로깅하는 방법은 [서버리스 문서][3]를 참조하세요.
 
-### 추적
+### 트레이싱 
 
-완전 관리형 Google Cloud Run의 전문 Agent 설정 지침에 대한 내용은 [서버리스 문서][3]를 참조하세요.
+완전 관리형 Google Cloud Run에 대한 전문적인 Agent 설정 지침은 [서버리스 문서][3]에서 확인하세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "google_cloud_run" >}}
 
 
-### 이벤트 
+### 이벤트
 
 Google Cloud Functions 통합에는 이벤트가 포함되지 않습니다.
 
-### 서비스 점검
+### 서비스 검사
 
 Google Cloud Functions 통합에는 서비스 점검이 포함되지 않습니다.
 
 
-## 문제 해결
+## 트러블슈팅
 
 도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
 
