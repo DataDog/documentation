@@ -1,12 +1,12 @@
 ---
-title: Dual Ship Logs for the Sumo Logic Hosted Collector with HTTP Logs Source
+title: Dual Ship Logs for the Sumo Logic Hosted Collector HTTP Logs Source
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure Sumo Logic Hosted Collector with the HTTP Logs source to send logs to the Observability Pipelines Worker so that Observability Pipelines receives and routes logs from the Sumo Logic Hosted Collector to downstream destinations.
+Configure Sumo Logic Hosted Collector the HTTP Logs source to send logs to the Observability Pipelines Worker so that Observability Pipelines receives and routes logs from the Sumo Logic Hosted Collector to downstream destinations.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines

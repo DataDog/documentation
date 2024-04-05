@@ -1,5 +1,5 @@
 ---
-title: Sensitive Data Redaction for the Sumo Logic Hosted Collector with HTTP Logs Source
+title: Sensitive Data Redaction for the Sumo Logic Hosted Collector HTTP Logs Source
 kind: document
 disable_toc: false
 ---
@@ -10,7 +10,7 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 
 Use the Observability Pipelines to identify, tag, and optionally redact or hash sensitive information before routing logs to different destinations and outside of your infrastructure. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
 
-Observability Pipelines support Sumo Logic Collector's HTTP Logs source.
+Observability Pipelines supports Sumo Logic Collector HTTP Logs source.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines

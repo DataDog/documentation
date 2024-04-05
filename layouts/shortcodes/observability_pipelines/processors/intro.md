@@ -1,3 +1,3 @@
 There are pre-selected processors added to your processor group out of the box. You can add additional processors or delete any existing ones based on your processing needs.
 
-Processor groups are executed from top to bottom, and the individual processors can be reordered with the drag handle on their top left corner. The order of the processors is important because logs pass through all processors in a group and are processed by each processor where the log a matches the filter query.
+Processor groups are executed from top to bottom. The order of the processors is important because logs are checked by each processor, but only logs that match the processor's filters are processed. To modify the order of the processors, use the drag handle on the top left corner of the processor you want to move.

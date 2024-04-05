@@ -1,12 +1,12 @@
 ---
-title: Split Logs for the Sumo Logic Hosted Collector with HTTP Logs Source
+title: Split Logs for the Sumo Logic Hosted Collector HTTP Logs Source
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure you Sumo Logic Hosted Collector with the HTTP Logs source to send logs to the Observability Pipelines Worker and then to different destinations based on your use case.
+Configure you Sumo Logic Hosted Collector HTTP Logs source to send logs to the Observability Pipelines Worker and then to different destinations based on your use case.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines

@@ -1,12 +1,12 @@
 ---
-title: Archive Logs for the Sumo Logic Hosted Collector with HTTP Logs Source
+title: Archive Logs for the Sumo Logic Hosted Collector HTTP Logs Source
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure your Sumo Logic Hosted Collector with the HTTP Logs source so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Configure your Sumo Logic Hosted Collector HTTP Logs source so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
