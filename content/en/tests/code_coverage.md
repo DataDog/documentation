@@ -237,10 +237,10 @@ The code coverage report needs to be generated in a different process, otherwise
 * `pytest>=3.0.0`.
 * `pytest-cov>=2.7.0`.
 * `unittest>=3.8`.
-* Only [`coverage.py`][101] and [`pytest-cov`][2] code coverage are supported.
+* Only [`coverage.py`][101] and [`pytest-cov`][102] code coverage are supported.
 
 
-When tests are instrumented with [`coverage.py`][101] or [`pytest-cov`][2], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
+When tests are instrumented with [`coverage.py`][101] or [`pytest-cov`][102], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
 
 To report total code coverage from your test sessions with [`coverage.py`][101], follow these steps:
 

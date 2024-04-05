@@ -107,6 +107,10 @@ Learn how to access and control [Synthetic Monitoring Settings][13].
 
 ## Security
 
+### Safety Center
+
+The **Safety Center** page contains security alerts, warnings, and recommendations to review in your organization. You can also set **Security Contacts** to receive security notifications for your organization by clicking **Configuration**, entering up to two email addresses, then clicking the **Save** button.
+
 ### Public sharing
 
 The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can also edit your sharing settings by clicking the **Enabled** toggles.

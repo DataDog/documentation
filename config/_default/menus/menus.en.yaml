@@ -1126,111 +1126,116 @@ main:
     url: dashboards/configure/
     parent: dashboards
     weight: 1
+  - name: Dashboard List
+    identifier: dashboards_list
+    url: dashboards/list/
+    parent: dashboards
+    weight: 2
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
     identifier: dashboards_widgets
-    weight: 2
+    weight: 3
   - name: Querying
     identifier: dashboards_querying
     url: dashboards/querying/
     parent: dashboards
-    weight: 3
+    weight: 4
   - name: Functions
     url: dashboards/functions/
     parent: dashboards
     identifier: dashboards_functions
-    weight: 4
+    weight: 5
   - name: Algorithms
     identifier: dashboards_functions_algorithms
     url: dashboards/functions/algorithms/
     parent: dashboards_functions
-    weight: 401
+    weight: 501
   - name: Arithmetic
     identifier: dashboards_functions_arithmetic
     url: dashboards/functions/arithmetic/
     parent: dashboards_functions
-    weight: 402
+    weight: 502
   - name: Count
     identifier: dashboards_functions_count
     url: dashboards/functions/count/
     parent: dashboards_functions
-    weight: 403
+    weight: 503
   - name: Exclusion
     identifier: dashboards_functions_exclusion
     url: dashboards/functions/exclusion/
     parent: dashboards_functions
-    weight: 404
+    weight: 504
   - name: Interpolation
     identifier: dashboards_functions_interpolation
     url: dashboards/functions/interpolation/
     parent: dashboards_functions
-    weight: 405
+    weight: 505
   - name: Rank
     identifier: dashboards_functions_rank
     url: dashboards/functions/rank/
     parent: dashboards_functions
-    weight: 406
+    weight: 506
   - name: Rate
     identifier: dashboards_functions_rate
     url: dashboards/functions/rate/
     parent: dashboards_functions
-    weight: 407
+    weight: 507
   - name: Regression
     identifier: dashboards_functions_regression
     url: dashboards/functions/regression/
     parent: dashboards_functions
-    weight: 408
+    weight: 508
   - name: Rollup
     identifier: dashboards_functions_rollup
     url: dashboards/functions/rollup/
     parent: dashboards_functions
-    weight: 409
+    weight: 509
   - name: Smoothing
     identifier: dashboards_functions_smoothing
     url: dashboards/functions/smoothing/
     parent: dashboards_functions
-    weight: 410
+    weight: 510
   - name: Timeshift
     identifier: dashboards_functions_timeshift
     url: dashboards/functions/timeshift/
     parent: dashboards_functions
-    weight: 411
+    weight: 511
   - name: Beta
     identifier: dashboards_functions_beta
     url: dashboards/functions/beta/
     parent: dashboards_functions
-    weight: 412
+    weight: 512
   - name: Correlations
     identifier: dashboards_correlations
     url: dashboards/correlations/
     parent: dashboards
-    weight: 5
+    weight: 6
   - name: Scheduled Reports
     url: dashboards/scheduled_reports/
     parent: dashboards
-    weight: 6
+    weight: 7
     identifier: dashboards_reporting
   - name: Template Variables
     url: dashboards/template_variables/
     parent: dashboards
-    weight: 7
+    weight: 8
     identifier: dashboards_temp_variables
   - name: Overlays
     url: dashboards/change_overlays/
     parent: dashboards
-    weight: 8
+    weight: 9
     identifier: dashboards_overlays
   - name: Sharing
     identifier: dashboards_sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 9
+    weight: 10
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
     identifier: dashboards_guides
-    weight: 10
+    weight: 11
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -1740,61 +1745,121 @@ main:
     identifier: event_ingest
     parent: events
     weight: 1
+  - name: Pipelines and Processors
+    url: service_management/events/pipelines_and_processors/overview
+    identifier: overview
+    parent: events
+    weight: 2
+  - name: Arithmetic Processor
+    url: service_management/events/pipelines_and_processors/arithmetic_processor
+    identifier: arithmetic_processor
+    parent: overview
+    weight: 201
+  - name: Date Remapper
+    url: service_management/events/pipelines_and_processors/date_remapper
+    identifier: date_remapper
+    parent: overview
+    weight: 202
+  - name: Category Processor
+    url: service_management/events/pipelines_and_processors/category_processor
+    identifier: category_processor
+    parent: overview
+    weight: 203
+  - name: Grok Parser
+    url: service_management/events/pipelines_and_processors/grok_parser
+    identifier: grok_parser
+    parent: overview
+    weight: 204
+  - name: Lookup Processor
+    url: service_management/events/pipelines_and_processors/lookup_processor
+    identifier: lookup_processor
+    parent: overview
+    weight: 205
+  - name: Remapper
+    url: service_management/events/pipelines_and_processors/remapper
+    identifier: remapper
+    parent: overview
+    weight: 206
+  - name: Service Remapper
+    url: service_management/events/pipelines_and_processors/service_remapper
+    identifier: service_remapper
+    parent: overview
+    weight: 207
+  - name: Status Remapper
+    url: service_management/events/pipelines_and_processors/status_remapper
+    identifier: status_remapper
+    parent: overview
+    weight: 208
+  - name: String Builder Processor
+    url: service_management/events/pipelines_and_processors/string_builder_processor
+    identifier: string_builder_processor
+    parent: overview
+    weight: 209
   - name: Explorer
     url: service_management/events/explorer/
     identifier: events_explorer
     parent: events
-    weight: 2
+    weight: 3
   - name: Searching
     url: service_management/events/explorer/searching
     identifier: events_explorer_searching
     parent: events_explorer
-    weight: 201
+    weight: 301
   - name: Navigate the Explorer
     url: service_management/events/explorer/navigate
     identifier: events_explorer_navigate
     parent: events_explorer
-    weight: 202
+    weight: 302
   - name: Customization
     url: service_management/events/explorer/customization
     identifier: events_explorer_customization
     parent: events_explorer
-    weight: 203
+    weight: 303
   - name: Facets
     url: service_management/events/explorer/facets
     identifier: events_explorer_facets
     parent: events_explorer
-    weight: 204
+    weight: 304
   - name: Attributes
     url: service_management/events/explorer/attributes
     identifier: events_explorer_attributes
     parent: events_explorer
-    weight: 205
+    weight: 305
   - name: Notifications
     url: service_management/events/explorer/notifications
     identifier: event_explorer_notifications
     parent: events_explorer
-    weight: 206
+    weight: 306
   - name: Analytics
     url: service_management/events/explorer/analytics
     identifier: event_explorer_analytics
     parent: events_explorer
-    weight: 207
+    weight: 307
   - name: Saved Views
     url: service_management/events/explorer/saved_views
     identifier: event_explorer_saved_views
     parent: events_explorer
-    weight: 208
+    weight: 308
   - name: Using Events
     url: service_management/events/usage/
     identifier: event_usage
     parent: events
-    weight: 3
+    weight: 4
+  - name: Correlation
+    url: service_management/events/correlation/
+    identifier: event_correlation
+    parent: events
+    weight: 5
+  - name: Pattern-based
+    url: service_management/events/correlation/pattern
+    identifier: event_correlation_pattern
+    parent: event_correlation
+    weight: 501
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
     parent: events
-    weight: 4
+    weight: 10
   - name: Case Management
     url: service_management/case_management/
     pre: case-management
@@ -4088,57 +4153,62 @@ main:
     identifier: cws_backend_event_schema_documentation
     weight: 204
   - name: Misconfigurations
-    url: security/misconfigurations/
+    url: security/cloud_security_management/misconfigurations/
     parent: csm
     identifier: cspm
     weight: 3
   - name: Manage Compliance Rules
-    url: security/misconfigurations/compliance_rules
+    url: security/cloud_security_management/misconfigurations/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 301
   - name: Create Custom Rules
-    url: security/misconfigurations/custom_rules
+    url: security/cloud_security_management/misconfigurations/custom_rules
     parent: cspm
     identifier: cspm_custom_rules
     weight: 302
   - name: Manage Compliance Posture
-    url: security/misconfigurations/frameworks_and_benchmarks
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 303
   - name: Create Custom Frameworks
-    url: security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks
     parent: cspm_frameworks_benchmarks
     identifier: cspm_custom_frameworks
     weight: 101
   - name: Supported Frameworks
-    url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks
     parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
     weight: 102
+  - name: Kubernetes Security Posture Management
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/kspm
+    parent: cspm_frameworks_benchmarks
+    identifier: cspm_kspm
+    weight: 103
   - name: Explore Misconfigurations
-    url: /security/misconfigurations/findings
+    url: /security/cloud_security_management/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 305
   - name: Export Misconfigurations
-    url: /security/misconfigurations/findings/export_misconfigurations
+    url: /security/cloud_security_management/misconfigurations/findings/export_misconfigurations
     parent: cspm_findings_explorer
     identifier: cspm_export_misconfigurations
     weight: 101
   - name: Signals Explorer
-    url: /security/misconfigurations/signals_explorer/
+    url: /security/cloud_security_management/misconfigurations/signals_explorer/
     parent: cspm
     identifier: signals
     weight: 306
   - name: Identity Risks
-    url: security/identity_risks/
+    url: security/cloud_security_management/identity_risks/
     parent: csm
     identifier: csm_identity_risks
     weight: 4
   - name: Vulnerabilities
-    url: security/vulnerabilities
+    url: security/cloud_security_management/vulnerabilities
     parent: csm
     identifier: vulnerabilities
     weight: 5
@@ -4793,7 +4863,7 @@ main:
     identifier: rum_monitors
     weight: 402
   - name: Generate Custom Metrics
-    url: real_user_monitoring/generate_metrics
+    url: real_user_monitoring/platform/generate_metrics
     parent: real_user_monitoring_platform
     identifier: rum_generate_metrics
     weight: 403
@@ -5138,6 +5208,10 @@ main:
     url: account_management/billing/
     parent: account_management
     weight: 11
+  - name: Product Allotments
+    url: account_management/billing/product_allotments
+    parent: account_management_billing
+    weight: 5
   - name: Multi-org Accounts
     identifier: account_management_multi_org_accounts
     url: account_management/multi_organization/
@@ -7382,7 +7456,7 @@ api:
       operationids:
         - SearchSecurityMonitoringSignals
       unstable: []
-      order: 8
+      order: 9
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
     identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -7394,7 +7468,7 @@ api:
       operationids:
         - ListSecurityMonitoringSignals
       unstable: []
-      order: 9
+      order: 10
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: security-monitoring-update-an-existing-rule
@@ -7431,6 +7505,18 @@ api:
         - DeleteSecurityMonitoringRule
       unstable: []
       order: 7
+  - name: Validate a detection rule
+    url: '#validate-a-detection-rule'
+    identifier: security-monitoring-validate-a-detection-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ValidateSecurityMonitoringRule
+      unstable: []
+      order: 8
   - name: Create a detection rule
     url: '#create-a-detection-rule'
     identifier: security-monitoring-create-a-detection-rule
