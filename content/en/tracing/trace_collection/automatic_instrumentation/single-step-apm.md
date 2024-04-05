@@ -16,6 +16,8 @@ further_reading:
 
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
+- **Datadog library compatibility**: [dd-trace-java][37], [dd-trace-py][38], [dd-trace-rb][39], [dd-trace-js][40], and [dd-trace-dotnet][41].
+
 ## Enabling APM on your services in one step
 
 If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
@@ -617,3 +619,8 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config
+[37]: https://github.com/DataDog/dd-trace-java
+[38]: https://github.com/DataDog/dd-trace-py
+[39]: https://github.com/DataDog/dd-trace-rb
+[40]: https://github.com/DataDog/dd-trace-js
+[41]: https://github.com/DataDog/dd-trace-dotnet
