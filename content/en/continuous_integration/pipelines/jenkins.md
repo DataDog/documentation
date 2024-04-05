@@ -80,13 +80,13 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
 3. Select the mode `Use Datadog API URL and Key to report to Datadog`.
-4. For Datadog sites other that `datadoghq.com`, change the `Datadog API URL`, `Log Intake URL` and `Webhook Intake URL` to point to your Datadog site.
+4. For Datadog sites other that `datadoghq.com`, change the `Datadog API URL`, `Log Intake URL`, and `Webhook Intake URL` to point to your Datadog site.
 5. Enter a valid `Datadog API Key`.
 6. Mark the `Enable CI Visibility` checkbox.
 7. (Optional) Configure your CI Instance name.
 8. Save your configuration.
 
-{{< img src="ci/ci-jenkins-plugin-config-agentless.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+{{< img src="ci/jenkins_plugin_agentless_urls_blurred.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -297,7 +297,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Select the Datadog Agent mode
     d.setReportWith('HTTP')
 
-    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetApiURL("https://api.datadoghq.com/api/")
     d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
     d.setTargetWebhookIntakeURL("https://webhook-intake.datadoghq.com/api/v2/webhook/")
@@ -328,7 +328,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Select the Datadog Agent mode
     d.setReportWith('HTTP')
 
-    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetApiURL("https://api.ap1.datadoghq.eu/api/")
     d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.eu/v1/input/")
     d.setTargetWebhookIntakeURL("https://webhook-intake.ap1.datadoghq.eu/api/v2/webhook/")
@@ -359,7 +359,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Select the Datadog Agent mode
     d.setReportWith('HTTP')
 
-    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetApiURL("https://api.dd-gov.com/api/")
     d.setTargetLogIntakeURL("https://http-intake.logs.dd-gov.com/v1/input/")
     d.setTargetWebhookIntakeURL("https://webhook-intake.dd-gov.com/api/v2/webhook/")
@@ -390,7 +390,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Select the Datadog Agent mode
     d.setReportWith('HTTP')
 
-    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetApiURL("https://api.us3.datadoghq.com/api/")
     d.setTargetLogIntakeURL("https://http-intake.logs.us3.datadoghq.com/v1/input/")
     d.setTargetWebhookIntakeURL("https://webhook-intake.us3.datadoghq.com/api/v2/webhook/")
@@ -421,7 +421,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Select the Datadog Agent mode
     d.setReportWith('HTTP')
 
-    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetApiURL("https://api.us5.datadoghq.com/api/")
     d.setTargetLogIntakeURL("https://http-intake.logs.us5.datadoghq.com/v1/input/")
     d.setTargetWebhookIntakeURL("https://webhook-intake.us5.datadoghq.com/api/v2/webhook/")
@@ -452,7 +452,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Select the Datadog Agent mode
     d.setReportWith('HTTP')
 
-    // Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetApiURL("https://api.ap1.datadoghq.com/api/")
     d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.com/v1/input/")
     d.setTargetWebhookIntakeURL("https://webhook-intake.ap1.datadoghq.com/api/v2/webhook/")
@@ -513,7 +513,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    # Endpoint URLs correspond to your Datadog site
     DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.datadoghq.com/api/"
     DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
     DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.datadoghq.com/api/v2/webhook/"
@@ -535,7 +535,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    # Endpoint URLs correspond to your Datadog site
     DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.datadoghq.eu/api/"
     DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.eu/v1/input/"
     DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.datadoghq.eu/api/v2/webhook/"
@@ -557,7 +557,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    # Endpoint URLs correspond to your Datadog site
     DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.dd-gov.com/api/"
     DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.dd-gov.com/v1/input/"
     DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.dd-gov.com/api/v2/webhook/"
@@ -579,7 +579,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    # Endpoint URLs correspond to your Datadog site
     DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.us3.datadoghq.com/api/"
     DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us3.datadoghq.com/v1/input/"
     DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.us3.datadoghq.com/api/v2/webhook/"
@@ -601,7 +601,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    # Endpoint URLs correspond to your Datadog site
     DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.us5.datadoghq.com/api/"
     DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us5.datadoghq.com/v1/input/"
     DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.us5.datadoghq.com/api/v2/webhook/"
@@ -623,7 +623,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     # Select the Datadog Agent mode
     DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Update the endpoints if reporting to Datadog sites other that `datadoghq.com` (default)
+    # Endpoint URLs correspond to your Datadog site
     DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.ap1.datadoghq.com/api/"
     DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.ap1.datadoghq.com/v1/input/"
     DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.ap1.datadoghq.com/api/v2/webhook/"
@@ -787,7 +787,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
     unclassified:
     datadogGlobalConfiguration:
-        # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+        # Endpoint URLs correspond to your Datadog site
         targetLogIntakeURL: "https://http-intake.logs.datadoghq.com/v1/input/"
         # Enable Log collection
         collectBuildLogs: true
@@ -799,7 +799,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
     unclassified:
     datadogGlobalConfiguration:
-        # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+        # Endpoint URLs correspond to your Datadog site
         targetLogIntakeURL: "https://http-intake.logs.datadoghq.eu/v1/input/"
         # Enable Log collection
         collectBuildLogs: true
@@ -811,7 +811,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
     unclassified:
     datadogGlobalConfiguration:
-        # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+        # Endpoint URLs correspond to your Datadog site
         targetLogIntakeURL: "https://http-intake.logs.dd-gov.com/v1/input/"
         # Enable Log collection
         collectBuildLogs: true
@@ -823,7 +823,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
     unclassified:
     datadogGlobalConfiguration:
-        # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+        # Endpoint URLs correspond to your Datadog site
         targetLogIntakeURL: "https://http-intake.logs.us3.datadoghq.com/v1/input/"
         # Enable Log collection
         collectBuildLogs: true
@@ -835,7 +835,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
     unclassified:
     datadogGlobalConfiguration:
-        # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+        # Endpoint URLs correspond to your Datadog site
         targetLogIntakeURL: "https://http-intake.logs.us5.datadoghq.com/v1/input/"
         # Enable Log collection
         collectBuildLogs: true
@@ -847,7 +847,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
     unclassified:
     datadogGlobalConfiguration:
-        # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+        # Endpoint URLs correspond to your Datadog site
         targetLogIntakeURL: "https://http-intake.logs.ap1.datadoghq.com/v1/input/"
         # Enable Log collection
         collectBuildLogs: true
@@ -899,7 +899,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     def j = Jenkins.getInstance()
     def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-    // Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
 
     // Enable log collection
@@ -919,7 +919,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     def j = Jenkins.getInstance()
     def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-    // Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.eu/v1/input/")
 
     // Enable log collection
@@ -939,7 +939,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     def j = Jenkins.getInstance()
     def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-    // Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetLogIntakeURL("https://http-intake.logs.us3.datadoghq.com/v1/input/")
 
     // Enable log collection
@@ -959,8 +959,28 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     def j = Jenkins.getInstance()
     def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-    // Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetLogIntakeURL("https://http-intake.logs.us5.datadoghq.com/v1/input/")
+
+    // Enable log collection
+    d.setCollectBuildLogs(true)
+
+    // Save config
+    d.save()
+    {{< /code-block >}}
+
+    {{% /site-region %}}
+    {{% site-region region="gov" %}}
+
+    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
+    import jenkins.model.*
+    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+
+    def j = Jenkins.getInstance()
+    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+
+    // Endpoint URLs correspond to your Datadog site
+    d.setTargetLogIntakeURL("https://http-intake.logs.dd-gov.com/v1/input/")
 
     // Enable log collection
     d.setCollectBuildLogs(true)
@@ -979,7 +999,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     def j = Jenkins.getInstance()
     def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-    // Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+    // Endpoint URLs correspond to your Datadog site
     d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.com/v1/input/")
 
     // Enable log collection
@@ -1025,7 +1045,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
   
    {{% site-region region="us" %}}
    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+   # Endpoint URLs correspond to your Datadog site
    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
 
    # Enable log collection
@@ -1036,7 +1056,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
    {{% site-region region="eu" %}}
    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+   # Endpoint URLs correspond to your Datadog site
    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.eu/v1/input/"
 
    # Enable log collection
@@ -1047,7 +1067,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
    {{% site-region region="us3" %}}
 
    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+   # Endpoint URLs correspond to your Datadog site
    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us3.datadoghq.com/v1/input/"
 
    # Enable log collection
@@ -1058,8 +1078,19 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
    {{% site-region region="us5" %}}
 
    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+   # Endpoint URLs correspond to your Datadog site
    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us5.datadoghq.com/v1/input/"
+
+   # Enable log collection
+   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+   {{< /code-block >}}
+
+   {{% /site-region %}}
+   {{% site-region region="gov" %}}
+
+   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
+   # Endpoint URLs correspond to your Datadog site
+   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.dd-gov.com/v1/input/"
 
    # Enable log collection
    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
@@ -1069,7 +1100,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
    {{% site-region region="ap1" %}}
 
    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Update the endpoints if reporting to Datadog sites other than `datadoghq.com`
+   # Endpoint URLs correspond to your Datadog site
    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.ap1.datadoghq.com/v1/input/"
 
    # Enable log collection
