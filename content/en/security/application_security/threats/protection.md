@@ -16,7 +16,7 @@ Application Security Management (ASM) Protect enables you to slow down attacks a
 
 ## Prerequisites 
 
-To leveraging protection capabilities for your service:
+To use protection capabilities with your service:
 
 - [Update your Datadog Agent][3] to at least version 7.41.1.
 - [Enable ASM][1].
