@@ -39,7 +39,7 @@ API 폴링 메서드를 통해 특정 CloudWatch 네임스페이스에 대한 �
 
 나중에 특정 AWS 계정 및 리전 또는 특정 네임스페이스에 대한 메트릭을 스트리밍하지 않을 경우 Datadog은 AWS 통합 페이지의 설정에 따라 다시 API 폴링을 사용하여 해당 메트릭을 자동으로 수집하기 시작합니다. AWS 계정 및 리전에 대한 모든 메트릭 스트리밍을 중지하려면 이 문서의 [메트릭 스트리밍 비활성화 섹션](#disable-metric-streaming) 지침을 따르세요.
 
-### 네트워크 장치 모니터링
+### 청구
 
 Datadog은 메트릭 스트리밍에 대한 추가 비용을 청구하지 않습니다.
 
@@ -47,7 +47,7 @@ AWS는 CloudWatch Metric Stream의 메트릭 업데이트 수와 Amazon Data Fir
 
 스트림의 EC2 또는 Lambda 메트릭은 청구 대상 호스트 수 또는 Lambda 호출 수를 늘릴 수 있습니다 (EC2라면 이러한 호스트와 함수가 AWS 통합 또는 Datadog Agent에서 아직 모니터링되지 않은 경우 ).
 
-## 서비스 계정
+## 설정
 
 ### 시작 전 참고 사항
 
@@ -55,7 +55,7 @@ AWS는 CloudWatch Metric Stream의 메트릭 업데이트 수와 Amazon Data Fir
 
 2. 아직 연결하지 않았다면 AWS 계정을 Datadog에 연결하세요. 자세한 내용은 [CloudFormation 설정 지침][3]을 참조하세요.
 
-### 수집 데이터
+### 설치
 
 {{< tabs >}}
 {{% tab "CloudFormation" %}}
