@@ -26,7 +26,7 @@ The following sources are available:
 
 - Datadog Agent
 - Splunk HTTP Event Collector (HEC)
-- Splunk Forwarders (TCP)
+- Splunk Heavy and Universal Forwarders (TCP)
 - Sumo Logic Host Collector
 
 ## Get started
@@ -43,5 +43,5 @@ The following sources are available:
 [1]: /observability_pipelines/log_volume_control/
 [2]: /observability_pipelines/dual_ship_logs/
 [3]: /observability_pipelines/split_logs/
-[4]: /observability_pipelines/archives_logs/
-[5]: /observability_pipelines/sensitive_data_scanner/
+[4]: /observability_pipelines/archive_logs/
+[5]: /observability_pipelines/sensitive_data_redaction/
