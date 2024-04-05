@@ -1,6 +1,6 @@
 ## Send logs to the Observability Pipelines Worker over Sumo Logic HTTP Source
 
-After you install the Observability Pipelines Worker and deploy the configuration, the Worker exposes HTTP endpoints that uses the [Sumo Logic Http Source API][101].
+After you install the Observability Pipelines Worker and deploy the configuration, the Worker exposes HTTP endpoints that uses the [Sumo Logic Http Source API][1001].
 
 To send logs to your Sumo Logic HTTP Source, you must point your existing logs upstream to the Worker:
 ```shell
@@ -12,4 +12,4 @@ curl -v -X POST -T [local_file_name] http://<OPW_HOST>/receiver/v1/http/<UNIQUE_
 
 At this point, your logs should be going to the Worker, processed by the pipeline, and uploaded to the Sumo Logic HTTP Source.
 
-[101]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/upload-logs/
+[1001]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/upload-logs/

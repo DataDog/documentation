@@ -6,6 +6,6 @@ To set up the quota processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) is counted towards the daily limit.
 1. In the **Unit for quota** dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
 1. Set the daily quota limit and select the unit of magnitude for your desired quota.
-1. Set the **Drop events** dropdown to **True** if you want to drop all events when your quota is met. Leave it at **False** if you plan to set up a [metric monitor][201] that sends an alert when the quota is met.
+1. Set the **Drop events** dropdown to **True** if you want to drop all events when your quota is met. Leave it at **False** if you plan to set up a [metric monitor][5001] that sends an alert when the quota is met.
 
-[201]: /monitors/types/metric/?tab=threshold
+[5001]: /monitors/types/metric/?tab=threshold

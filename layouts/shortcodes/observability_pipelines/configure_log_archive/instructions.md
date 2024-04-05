@@ -2,7 +2,7 @@
 
 ### Create an Amazon S3 bucket
 
-1. Navigate to [Amazon S3 buckets][1001].
+1. Navigate to [Amazon S3 buckets][401].
 1. Click **Create bucket**.
 1. Enter a descriptive name for your bucket.
 1. Do not make your bucket publicly readable.
@@ -11,7 +11,7 @@
 
 ### Set up an IAM policy that allows Workers to write to the S3 bucket
 
-1. Navigate to the [IAM console][1002].
+1. Navigate to the [IAM console][402].
 1. Select **Policies** in the left side menu.
 1. Click **Create policy**.
 1. Click **JSON** in the **Specify permissions** section.
@@ -40,5 +40,5 @@
 1. Optionally, add tags.
 1. Click **Create policy**.
 
-[1001]: https://s3.console.aws.amazon.com/s3/home
-[1002]: https://console.aws.amazon.com/iam/
+[401]: https://s3.console.aws.amazon.com/s3/home
+[402]: https://console.aws.amazon.com/iam/

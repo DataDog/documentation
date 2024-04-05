@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-Configure your Splunk Universal/Heavy Forwarder so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives. 
+Configure your Splunk Universal/Heavy Forwarder so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -16,6 +16,34 @@ This document walks you through the following steps:
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/splunk_tcp %}}
+
+{{% observability_pipelines/configure_log_archive/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/docker %}}
+
+
+{{% /tab %}}
+{{% tab "Amazon EKS" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
 
 ## Set up Observability Pipelines
 

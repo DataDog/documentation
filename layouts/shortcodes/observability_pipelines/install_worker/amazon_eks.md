@@ -1,4 +1,4 @@
-1. Download the [Helm chart values file][101] for Amazon EKS.
+1. Download the [Helm chart values file][601] for Amazon EKS.
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Add the Datadog chart repository to Helm:
     ```shell
@@ -25,4 +25,4 @@
     ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-[101]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
+[601]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml

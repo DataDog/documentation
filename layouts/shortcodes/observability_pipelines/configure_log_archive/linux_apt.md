@@ -2,7 +2,7 @@
 
 Create an IAM user and attach the IAM policy you created earlier to it.
 
-1. Navigate to the [IAM console][1001].
+1. Navigate to the [IAM console][501].
 1. Select **Users** in the left side menu.
 1. Click **Create user**.
 1. Enter a user name.
@@ -15,4 +15,4 @@ Create an IAM user and attach the IAM policy you created earlier to it.
 
 Create access credentials for the new IAM user. The AWS access key and AWS secret access key are added later as environment variables when you install the Observability Pipelines Worker.
 
-[1001]: https://console.aws.amazon.com/iam/
+[501]: https://console.aws.amazon.com/iam/
