@@ -99,7 +99,7 @@ For instance, if your attribute name is **url** and you want to filter on the **
 
 1. It is **not** required to define a facet to search on attributes and tags.
 
-2. Attributes searches are case sensitive. Use full-text search to get case insensitive results, see [Full-text search](#full-text-search) for more information. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+2. Attributes searches are case sensitive. Use [full-text search](#full-text-search) to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
 3. Searching for an attribute value that contains special characters requires escaping or double quotes.
     - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
