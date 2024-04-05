@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker and then to different destinations based on your use case. See [Split logs from Splunk Heavy and Universal Forwarders][1] if you want to use Splunk Heavy or Universal Forwarders.
+Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker and then to different destinations based on your use case.
 
 This document walks you through the following setup steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -25,7 +25,7 @@ This document walks you through the following setup steps:
 
 ## Set up Observability Pipelines
 
-1. Navigate to [Observability Pipelines][2].
+1. Navigate to [Observability Pipelines][1].
 1. Select the **Split Logs** use case to create a new pipeline.
 1. Select **Splunk HEC** as the source.
 
@@ -154,5 +154,4 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/log_source_configuration/splunk_hec %}}
 
-[1]: /split_logs/splunk_tcp/
-[2]: https://app.datadoghq.com/observability-pipelines
+[1]: https://app.datadoghq.com/observability-pipelines

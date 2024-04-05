@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-TKTK
+Configure your Datadog Agent so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines

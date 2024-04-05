@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-TKTK
+Configure your Datadog Agent to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
