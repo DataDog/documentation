@@ -6,12 +6,7 @@ disable_toc: false
 
 ## Overview
 
-TKTK
-
-## Overview
-
-TKTK
-
+Configure your Splunk Universal/Heavy Forwarder so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives. 
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -25,7 +20,7 @@ This document walks you through the following steps:
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **USECASENAME** use case to create a new pipeline.
+1. Select the **Archive Logs** use case to create a new pipeline.
 1. Select **Splunk TCP** as the source.
 
 ### Set up the source
