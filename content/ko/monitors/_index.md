@@ -4,6 +4,10 @@ aliases:
 - /ko/guides/monitoring/
 - /ko/guides/alerting/
 - /ko/guides/monitors/the-conditions
+- /ko/monitoring
+cascade:
+  algolia:
+    rank: 70
 description: 모니터를 생성하고, 중요한 경우 팀에 알리고, 경고 플랫폼을 사용하여 모니터를 관리하세요.
 disable_sidebar: true
 further_reading:
@@ -16,6 +20,15 @@ further_reading:
 - link: /api/v1/monitors/
   tag: Documentation
   text: Datadog 모니터 API
+- link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
+  tag: 블로그
+  text: GitHub 배포 보호 규칙 및 Datadog을 사용하여 실패한 품질 검사를 감지하세요
+- link: https://dtdg.co/fe
+  tag: 기초 구축
+  text: 효과적인 모니터 생성에 대한 대화형 세션에 참여하세요
+- link: https://www.datadoghq.com/blog/aws-recommended-monitors/
+  tag: 블로그
+  text: AWS용 권장 모니터로 사전 설정된 알림을 활성화하세요
 kind: 설명서
 title: 경고
 ---
@@ -58,6 +71,13 @@ Datadog에서 모니터를 생성하려면 다음과 같이 하세요.
 
 [Manage Monitors][11]: 모니터를 같은 위치에서 편집, 복제, 삭제, 음소거 및 해결합니다. 고급 패싯 검색을 사용하여 우선순위가 높은 알림에 집중합니다. Monitor Status 페이지에서 실시간으로 모니터 상세정보 및 경고를 탐색합니다.
 
+## 태그 정책으로 모니터 태그 제어
+
+[모니터 태그 정책][12]은 Datadog 모니터의 태그 및 태그 값에 대한 데이터 유효성 검사를 시행합니다. 다음 규칙 중 하나를 추가하여 예기치 않은 태그가 있는 모니터가 생성되는 것을 방지하세요.
+- 필수 값을 가진 태그가 필요한 경우
+- 태그만 필요한 경우
+- 필수 값을 가진 부수적인 태그
+
 ## 모바일 장치에서 모니터 보기 및 검색
 
 [Mobile-Friendly Monitors on iOS and Android][12]: [Apple App Store][2] 및 [Google Play Store][3]에서 사용 가능한 [Datadog Mobile App][1]을 이용해 iOS 또는 Android 장치에서 모니터를 보기, 음소거 및 음소거 해제합니다. 실시간으로 모니터를 필터링하려면 검색창에 쿼리를 작성하세요. [Monitor Saved Views][13]를 사용하여 모바일에서 몇 번의 탭으로 모니터 모음에 액세스할 수도 있습니다.
@@ -67,12 +87,12 @@ Datadog에서 모니터를 생성하려면 다음과 같이 하세요.
 ## 기타 섹션
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/monitors/service_level_objectives" >}}<u>서비스 수준 목표(Service Level Objectives)</u>: 메트릭 또는 기존 Datadog 모니터를 사용하여 서비스 수준 목표를 생성, 편집 또는 봅니다.{{< /nextlink >}}
-    {{< nextlink href="/monitors/incident_management" >}}<u>인시던트 관리</u>: 인시던트를 신고 및 관리합니다.{{< /nextlink >}}
-    {{< nextlink href="/monitors/guide" >}}<u>가이드</u>: 모니터 및 경고에 대한 기타 유용한 문서입니다.{{< /nextlink >}}
+    {{< nextlink href="/service_management/service_level_objectives" >}}<u>서비스 수준 목표</u>: 메트릭 또는 기존 Datadog 모니터를 사용하여 서비스 수준 목표를 생성, 편집 또는 확인합니다.{{< /nextlink >}}
+    {{< nextlink href="/monitors/incident_management" >}}<u>인시던트 관리</u>: 인시던트를 선언하고 관리합니다.{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide" >}}<u>가이드</u>: 모니터 및 알림에 대한 유용한 문서.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -85,7 +105,8 @@ Datadog에서 모니터를 생성하려면 다음과 같이 하세요.
 [7]: /ko/developers/community/libraries/#managing-monitors
 [8]: https://app.datadoghq.com/monitors#create/import
 [9]: /ko/monitors/notify
-[10]: /ko/monitors/notify/downtimes
+[10]: /ko/monitors/downtimes
 [11]: /ko/monitors/manage
-[12]: /ko/mobile/?tab=ios#monitors
-[13]: /ko/monitors/manage/search/#saved-view
+[12]: /ko/monitors/settings/
+[13]: /ko/service_management/mobile/?tab=ios#monitors
+[14]: /ko/monitors/manage/search/#saved-view

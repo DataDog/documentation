@@ -46,12 +46,12 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][3]+.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 2. Add the `ddtrace` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.15'
+    gem 'ddtrace', '~> 1.21'
     ```
 
     If you're running a version of `ddtrace` older than 1.15.0, add the `google-protobuf` gem (version ~> 3.0) as a dependency.
@@ -87,21 +87,23 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Add the `ddtracerb exec` command to your Ruby application start command:
+4. Add the `ddprofrb exec` command to your Ruby application start command:
 
     ```shell
-    bundle exec ddtracerb exec ruby myapp.rb
+    bundle exec ddprofrb exec ruby myapp.rb
     ```
 
     Rails example:
 
     ```shell
-    bundle exec ddtracerb exec bin/rails s
+    bundle exec ddprofrb exec bin/rails s
     ```
+
+    If you're running a version of `ddtrace` older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
 
     **Note**
 
-    If starting the application via `ddtracerb exec` is not an option (eg. when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point such as `config.ru` for a web application:
+    If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
 
     ```ruby
     require 'datadog/profiling/preload'

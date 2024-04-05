@@ -366,5 +366,8 @@
   },
   "legacy" : {
     "other": "Legacy"
+  },
+  "available_for": {
+    "other": "Available for"
   }
 }

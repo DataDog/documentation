@@ -25,7 +25,7 @@
 
     {{ range $finalCodeLangs }}
         <li class="nav-item" style="margin-bottom: 6px;">
-            <a class="nav-link me-1 js-code-example-link" data-code-lang-trigger="{{ . }}" href="?code-lang={{ . }}#">{{ index $.context.Site.Params.code_language_ids . }}</a>
+            <a class="nav-link me-1 js-code-example-link" data-code-lang-trigger="{{ . }}" href="?code-lang={{ . }}#">{{ index site.Params.code_language_ids . }}</a>
         </li>
 
         {{ $count = add $count 1 }}
