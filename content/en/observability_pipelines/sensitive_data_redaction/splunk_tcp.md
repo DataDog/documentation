@@ -29,7 +29,7 @@ This document walks you through the following steps:
 
 {{% observability_pipelines/source_settings/splunk_tcp %}}
 
-### Set up destinations
+### Set up the destination
 
 Enter the following information based on your selected logs destination.
 

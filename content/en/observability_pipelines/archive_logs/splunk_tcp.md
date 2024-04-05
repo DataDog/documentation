@@ -55,11 +55,16 @@ This document walks you through the following steps:
 
 {{% observability_pipelines/source_settings/splunk_tcp %}}
 
-### Set up destinations
+### Set up the destinations
 
 Enter the following information based on your selected logs destination.
 
 {{< tabs >}}
+{{% tab "Datadog Archives" %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
@@ -73,11 +78,6 @@ Enter the following information based on your selected logs destination.
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/destination_settings/sumo_logic %}}
-
-{{% /tab %}}
-{{% tab "Datadog Archives" %}}
-
-{{% observability_pipelines/destination_settings/datadog_archives %}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -1,37 +1,35 @@
 ---
-title: Dual Ship Logs for Splunk Heavy and Universal Forwarders (TCP)
+title: Sensitive Data Redaction for Sumo Logic Hosted Collector
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure your Splunk Heavy or Universal Forwarders to send logs to the Observability Pipelines Worker to process and route them to downstream destinations.
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys, can be revealed unintentionally in your logs, which can expose your organization to financial and privacy risks.
+
+Use the Observability Pipelines to identify, tag, and optionally redact or hash sensitive information before routing logs to different destinations and outside of your infrastructure. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
+
+Observability Pipelines support Sumo Logic Collector's HTTP Logs source.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Connect Splunk Forwarder to the Observability Pipelines Worker](#connect-splunk-forwarder-to-the-observability-pipelines-worker)
+1. [Sending logs to the Observability Pipelines Worker over Sumo Logic HTTP Source](#send-logs-to-the-observability-pipelines-worker-over-sumo-logic-http-source)
 
 ## Prerequisites
 
-### Splunk Heavy and Universal Forwarders (TCP)
-
-{{% observability_pipelines/prerequisites/splunk_tcp %}}
-
-### Datadog Agent
-
-{{% observability_pipelines/prerequisites/datadog_agent %}}
+{{% observability_pipelines/prerequisites/sumo_logic %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Dual Ship** use case to create a new pipeline.
-1. Select **Splunk TCP** as the source.
+1. Select the **Sensitive Data Redaction** use case to create a new pipeline.
+1. Select **Sumo Logic** as the source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/splunk_tcp %}}
+{{% observability_pipelines/source_settings/splunk_hec %}}
 
 ### Set up the destinations
 
@@ -89,11 +87,16 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/remap %}}
 
 {{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Splunk TCP address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
+1. Enter the Sumo Logic address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog" %}}
@@ -151,6 +154,6 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/log_source_configuration/splunk_tcp %}}
+{{% observability_pipelines/log_source_configuration/sumo_logic %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
