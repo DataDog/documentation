@@ -1,1 +1,1 @@
-Enter the AWS Access key ID and AWS secret access key for the S3 archive bucket you created earlier. You select your Datadog API key in the next step, when you install the Worker.
+Enter the AWS Access key ID and AWS secret access key for the S3 archive bucket you created earlier.

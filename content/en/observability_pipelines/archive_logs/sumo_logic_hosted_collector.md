@@ -123,6 +123,11 @@ Enter the following information based on your selected logs destination.
 1. Enter the Sumo Logic address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
+{{% tab "Datadog Archives" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog %}}

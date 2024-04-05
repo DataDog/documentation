@@ -1,71 +1,37 @@
 ---
-title: Archive Logs for Splunk HTTP Event Collector (HEC)
+title: Dual Ship Logs for the Datadog Agent
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure your Splunk HTTP Event Collector (HEC) so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives. See [Archive Logs from Splunk Heavy and Universal Forwarders][1] if you want to archives logs from your Splunk Heavy or Splunk Universal Forwarders.
+TKTK
 
-This document walks through the following steps:
+This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
-1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Worker over Splunk HEC](#send-logs-to-the-observability-pipelines-worker-over-splunk-hec)
+1. [Connect the Datadog Agent to the Observability Pipelines Worker](#connect-the-datadog-agent-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/splunk_hec %}}
-
-{{% observability_pipelines/configure_log_archive/instructions %}}
-
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-{{% observability_pipelines/configure_log_archive/docker %}}
-
-
-{{% /tab %}}
-{{% tab "Amazon EKS" %}}
-
-{{% observability_pipelines/configure_log_archive/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Linux (APT)" %}}
-
-{{% observability_pipelines/configure_log_archive/linux_apt %}}
-
-{{% /tab %}}
-{{% tab "Linux (RPM)" %}}
-
-{{% observability_pipelines/configure_log_archive/linux_rpm %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
+{{% observability_pipelines/prerequisites/datadog_agent %}}
 
 ## Set up Observability Pipelines
 
-1. Navigate to [Observability Pipelines][6].
-1. Select the **Archive Logs** use case to create a new pipeline.
-1. Select **Splunk HEC** as the source.
+1. Navigate to [Observability Pipelines][1].
+1. Select the **Dual Ship** use case to create a new pipeline.
+1. Select **Datadog Agent** as the source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/splunk_hec %}}
+{{% observability_pipelines/source_settings/datadog_agent %}}
 
 ### Set up the destinations
 
-Enter the following information based on your selected logs destinations.
+Enter the following information based on your selected logs destination.
 
 {{< tabs >}}
-{{% tab "Datadog Archives" %}}
-
-{{% observability_pipelines/destination_settings/datadog_archives %}}
-
-{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
@@ -90,7 +56,6 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/filter_syntax %}}
 
 {{% observability_pipelines/processors/add_processors %}}
-
 {{< tabs >}}
 {{% tab "Filter" %}}
 
@@ -119,16 +84,11 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Install the Observability Pipelines Worker
+## Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Splunk HEC address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Enter the Datadog Agent address. This is the address and port where your datadog agent is sending its logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
+1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
-{{% tab "Datadog Archives" %}}
-
-{{% observability_pipelines/destination_settings/datadog_archives %}}
-
-{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog %}}
@@ -145,7 +105,6 @@ Enter the following information based on your selected logs destinations.
 
 {{% /tab %}}
 {{< /tabs >}}
-
 1. Follow the instructions for your environment to install the Worker.
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -185,7 +144,6 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/log_source_configuration/splunk_hec %}}
+{{% observability_pipelines/log_source_configuration/datadog_agent %}}
 
-[1]: /archive_logs/splunk_tcp/
-[6]: https://app.datadoghq.com/observability-pipelines
+[1]: https://app.datadoghq.com/observability-pipelines
