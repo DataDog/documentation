@@ -16,6 +16,8 @@ further_reading:
 
 This page provides a step-by-step overview on how to implement the OAuth protocol end-to-end on your application once your **confidential** client is created. 
 
+{{< img src="developers/authorization/oauth_process.png" alt="A diagram explaining how the OAuth authentication process works after a user clicks the Connect Account button in an integration tile." style="width:100%;">}}
+
 ## Implement the OAuth protocol
 
 1. Create and configure your OAuth client in the [Developer Platform][16]. 
