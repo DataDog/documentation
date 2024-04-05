@@ -99,7 +99,7 @@ For instance, if your attribute name is **url** and you want to filter on the **
 
 1. It is **not** required to define a facet to search on attributes and tags.
 
-2. Attributes searches are case sensitive. Use free text search to get case insensitive results, see [Wildcards](#wildcards) for more information on free text search. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
+2. Attributes searches are case sensitive. Use full text search to get case insensitive results, see [Full-text search across all log attributes](#full-text-search) for more information. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
 3. Searching for an attribute value that contains special characters requires escaping or double quotes.
     - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
@@ -129,7 +129,7 @@ The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Lo
 
 ## Wildcards
 
-You can use wildcards with free text search. However, it only searches for terms in the log message, the text in the `content` column in Log Explorer. See [Full-text search across all log attributes](#full-text-search-across-all-log-attributes) if you want to search for a value in a log attribute.
+You can use wildcards with free text search. However, it only searches for terms in the log message, the text in the `content` column in Log Explorer. See [Full-text search across all log attributes](#full-text-search) if you want to search for a value in a log attribute.
 
 ### Multi-character wildcard
 
