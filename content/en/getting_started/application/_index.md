@@ -20,7 +20,7 @@ further_reading:
 ---
 
 {{< learning-center-callout header="Try Foundation in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about Datadog Foundation.
+  Learn for free on real cloud compute and a Datadog trial account. Start these hands-on labs to get up to speed with services, logs, metrics, integrations, and dashboards.
 {{< /learning-center-callout >}}
 
 ## Overview
