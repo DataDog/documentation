@@ -4,6 +4,8 @@ kind: documentation
 code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30
+aliases:
+- /real_user_monitoring/flutter/integrated_libraries/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub

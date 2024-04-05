@@ -1,10 +1,6 @@
 ---
 title: Integrated Libraries
 kind: documentation
-aliases:
-- /real_user_monitoring/android/integrated_libraries/
-- /real_user_monitoring/flutter/integrated_libraries/
-- /real_user_monitoring/reactnative/integrated_libraries/
 further_reading:
 - link: /real_user_monitoring
   tag: Documentation

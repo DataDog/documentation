@@ -4,6 +4,8 @@ kind: documentation
 code_lang: reactnative
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+- /real_user_monitoring/reactnative/integrated_libraries/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
