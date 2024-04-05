@@ -1753,17 +1753,17 @@ main:
     url: service_management/events/pipelines_and_processors/overview
     identifier: overview
     parent: events
-    weight: 2     
+    weight: 2
   - name: Arithmetic Processor
     url: service_management/events/pipelines_and_processors/arithmetic_processor
     identifier: arithmetic_processor
     parent: overview
-    weight: 201 
+    weight: 201
   - name: Date Remapper
     url: service_management/events/pipelines_and_processors/date_remapper
     identifier: date_remapper
     parent: overview
-    weight: 202         
+    weight: 202
   - name: Category Processor
     url: service_management/events/pipelines_and_processors/category_processor
     identifier: category_processor

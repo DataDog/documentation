@@ -7166,8 +7166,13 @@ components:
           nullable: true
           type: integer
         renotify_statuses:
-          description: The types of monitor statuses for which re-notification messages
+          description: 'The types of monitor statuses for which re-notification messages
             are sent.
+
+            Default: **null** if `renotify_interval` is **null**.
+
+            If `renotify_interval` is set, defaults to renotify on `Alert` and `No
+            Data`.'
           items:
             $ref: '#/components/schemas/MonitorRenotifyStatusType'
           nullable: true
@@ -11469,7 +11474,8 @@ components:
       description: 'The time-slice condition, composed of 3 parts: 1. the metric timeseries
         query, 2. the comparator,
 
-        and 3. the threshold.'
+        and 3. the threshold. Optionally, a fourth part, the query interval, can be
+        provided.'
       example:
         comparator: <
         query:
@@ -11488,6 +11494,8 @@ components:
           $ref: '#/components/schemas/SLOTimeSliceComparator'
         query:
           $ref: '#/components/schemas/SLOTimeSliceQuery'
+        query_interval_seconds:
+          $ref: '#/components/schemas/SLOTimeSliceInterval'
         threshold:
           description: The threshold value to which each SLI value will be compared.
           example: 5
@@ -11498,6 +11506,22 @@ components:
       - threshold
       - query
       type: object
+    SLOTimeSliceInterval:
+      description: 'The interval used when querying data, which defines the size of
+        a time slice.
+
+        Two values are allowed: 60 (1 minute) and 300 (5 minutes).
+
+        If not provided, the value defaults to 300 (5 minutes).'
+      enum:
+      - 60
+      - 300
+      example: 300
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE_MINUTE
+      - FIVE_MINUTES
     SLOTimeSliceQuery:
       description: The queries and formula used to calculate the SLI value.
       example:
