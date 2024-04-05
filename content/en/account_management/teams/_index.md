@@ -14,22 +14,22 @@ Team membership is flexible. Users can join teams, be added by other members, or
 
 ### Navigation
 
-Access the team directory page, from [Organization Settings][1] or by navigating to [**Service Management > Teams**][2]. The [team directory page][1] lists all teams within your organization.
+Access the team directory page from [Organization Settings][1] or by navigating to [**Service Management > Teams**][2]. The [team directory page][1] lists all teams within your organization.
 
 ### Create team
 
 1. On the [team directory page][1], click **New Team** at the upper right.
 1. Choose a **Team Name**.
 1. The **Handle** populates based on your team name.
+1. Use the dropdown menu to select team members and team managers.
 1. Provide an optional **Description**.
-1. Use the dropdown menu to select team members.
 1. Click **Create**.
 
 **Note:** Allowed characters for team names and team handles are `a-z`, `A-Z`, `0-9`, and `._-:/`. Replace spaces with underscores.
 
 ### Modify team
 
-1. On the [team directory page][1], click the team you wish to modify. 
+1. On the [team directory page][1], click the team you wish to modify. The team detail page appears. 
 1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
 1. Select the item you wish to modify.
 1. Make your changes, then click **Save**.
@@ -93,10 +93,9 @@ The team filter appears in two places in each list view:
 - A list of search facets at the top left
 - A search term in the search bar
 
-
 When a user enables a team filter, they see only the resources associated with their teams or with the services owned by their teams. The team filter state is global and persistent. Therefore, Datadog maintains team context across a user's navigation journey over all applicable products.
 
-The table below describes the products in which you can use the team filter:
+The following table describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
