@@ -4,6 +4,10 @@ kind: documentation
 disable_toc: false
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">
 Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
 </div>
