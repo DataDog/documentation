@@ -6,12 +6,7 @@ disable_toc: false
 
 ## Overview
 
-TKTK
-
-## Overview
-
-TKTK
-
+Configure your Splunk Heavy or Universal Forwarders to send logs to the Observability Pipelines Worker to process and route them to downstream destinations.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -20,12 +15,18 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
+### Splunk Heavy and Universal Forwarders (TCP)
+
 {{% observability_pipelines/prerequisites/splunk_tcp %}}
+
+### Datadog Agent
+
+{{% observability_pipelines/prerequisites/datadog_agent %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **USECASENAME** use case to create a new pipeline.
+1. Select the **Dual Ship** use case to create a new pipeline.
 1. Select **Splunk TCP** as the source.
 
 ### Set up the source

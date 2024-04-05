@@ -6,12 +6,9 @@ disable_toc: false
 
 ## Overview
 
-TKTK
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys, can be revealed unintentionally in your logs, which can expose your organization to financial and privacy risks. 
 
-## Overview
-
-TKTK
-
+Use the Observability Pipelines to identify, tag, and optionally redact or hash sensitive information before routing logs to different destinations and outside of your infrastructure. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -25,7 +22,7 @@ This document walks you through the following steps:
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **USECASENAME** use case to create a new pipeline.
+1. Select the **Sensitive Data Redaction** use case to create a new pipeline.
 1. Select **Splunk TCP** as the source.
 
 ### Set up the source
@@ -86,6 +83,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Remap" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}
