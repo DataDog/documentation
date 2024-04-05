@@ -19,7 +19,7 @@ further_reading:
 
 Datadog exposes some of its data intake services in Google Cloud as Private Service Connect [_published services_][2], as seen in the [table of published services](#published-services). 
 
-You can configure a PSC endpoint to expose a private IP address for each Datadog intake service; this IP address routes traffic to the Datadog backend. You can then configures a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed. 
+You can configure a PSC endpoint to expose a private IP address for each Datadog intake service. This IP address routes traffic to the Datadog backend. You can then configure a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed. 
 
 {{< img src="agent/guide/psc/gcp-psc-overview-1.png" alt="Google Cloud Private Service Connect schema. On the left, a 'Customer VPC' box contains Datadog Agents sending data to a PSC endpoint. On the right, a 'Datadog VPC' box contains a service attachment in communication with Datadog services. The endpoint in the 'Customer VPC' box connects to the service attachment in the 'Datadog VPC' box through the Google Cloud backbone. " >}}
 
