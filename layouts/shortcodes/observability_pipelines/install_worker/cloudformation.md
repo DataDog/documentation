@@ -1,9 +1,12 @@
 1. Select one of the options in the dropdown to provide the expected log volume for the pipeline:
-    - Unsure - Use this option if you are not able to project the log volume or you want to test the Worker. This option provisions the EC2 AutoScaling group with a maximum of 2 general purpose instances `t4g.large`.
-    - 1-5 TB/day - This option provisions the EC2 AutoScaling group with a maximum of 2 compute optimized instances `c6g.large`.
-    - 5-10 TB/day -  This option provisions the EC2 AutoScaling group with a minimum of 2 and a maximum of 5 compute optimized instances `c6g.large`.
-    - >10 TB/day - Datadog recommends this option for large-scale production deployments. It provisions the EC2 AutoScaling group with a minimum of 2 and a maximum of 10 compute optimized instances `c6g.xlarge`.
-    - **Note**: All other parameters are set to reasonable defaults for a Worker deployment but you can adjust them for your use case as needed in the AWS Console before creating the stack.
+|   Option   | Description |
+| ---------- | ----------- |
+| Unsure | Use this option if you are not able to project the log volume or you want to test the Worker. This option provisions the EC2 AutoScaling group with a maximum of 2 general purpose instances `t4g.large`. |
+| 1-5 TB/day | This option provisions the EC2 AutoScaling group with a maximum of 2 compute optimized instances `c6g.large`. |
+| 5-10 TB/day | This option provisions the EC2 AutoScaling group with a minimum of 2 and a maximum of 5 compute optimized instances `c6g.large`. |
+| >10 TB/day | Datadog recommends this option for large-scale production deployments. It provisions the EC2 AutoScaling group with a minimum of 2 and a maximum of 10 compute optimized instances `c6g.xlarge`. |
+
+    **Note**: All other parameters are set to reasonable defaults for a Worker deployment but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 1. Select the AWS region you want to use to install the Worker.
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
