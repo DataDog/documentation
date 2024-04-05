@@ -8,10 +8,10 @@ kind: documentation
 
 ## Requirements
 
+- **Minimum Agent version 7.53.0**
+- **Minimum Helm version 3.60.0** (For Kubernetes deployments)
 - **Languages and architectures**: Single step ASM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
-
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
-
 
 ## Enabling in one step
 
@@ -204,9 +204,9 @@ To enable single step instrumentation with Helm:
     apm:
       instrumentation:
          enabled: true
-    env:
-      - name: DD_APPSEC_ENABLED
-        value: "true"
+    asm:
+       threats:
+         enabled: true
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12].
 
@@ -309,9 +309,9 @@ For example, add the following configuration to your `datadog-values.yaml` file:
      apm:
        instrumentation:
          enabled: true
-     env:
-      - name: DD_APPSEC_ENABLED
-        value: "true"
+    asm:
+       threats:
+         enabled: true
 {{< /highlight >}}
 
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -369,6 +369,8 @@ Run the following commands and restart the service to stop injecting the library
    ```
 3. Restart the services you want to remove instrumentation for.
 
+**Note:** You can disable ASM while keeping APM up by adding the `DD_APPSEC_ENABLED=false` environment variable to your deployments.
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -405,11 +407,12 @@ To stop producing traces, remove library injectors and restart the infrastructur
 {{% tab "Kubernetes" %}}
 
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
-2. Run the following command:
+2. Remove `asm:` and all underlying values in `datadog-values.yaml`.
+3. Run the following command:
    ```bash
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
    ```
-3. Restart your services.
+4. Restart your services.
 
 {{% /tab %}}
 
