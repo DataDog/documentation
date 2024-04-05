@@ -58,7 +58,7 @@ For line graphs, different metrics can be assigned specific palettes by separati
 
 ### Sorting
 
-Order the graph by **Tags** or by **Values** to sort timeseries legends and stacked graphs. This only sorts the graph visualization, it does not impact the query. Toggle the **Reverse** option to sort in reverse alphabetical order or sort descending values. 
+Order the graph by **Tags** or by **Values** to sort timeseries legends and stacked graphs. This only sorts the graph visualization, and does not impact the query. Toggle the **Reverse** option to sort by reverse alphabetical order or by descending values. 
 
 ### Metric aliasing
 
