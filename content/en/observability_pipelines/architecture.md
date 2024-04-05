@@ -14,7 +14,7 @@ This guide is for large-scale production-level deployments.
 
 ## Overview
 
-Deploy Observability Pipelines Worker into your infrastructure, like any other service to intercept and manipulate data, and then forward it to your destinations. Each Observability Pipelines Worker instance operates independently, so that you can scale the architecture with a simple load balancer.
+Deploy Observability Pipelines Worker into your infrastructure like any other service to intercept and manipulate data, and then forward it to your destinations. Each Observability Pipelines Worker instance operates independently, so that you can scale the architecture with a simple load balancer.
 
 This guide walks you through the recommended aggregator architecture for new Observability Pipelines Worker users. Specifically these topics:
 
@@ -25,7 +25,7 @@ This guide walks you through the recommended aggregator architecture for new Obs
 
 ### Instance sizing
 
-Compute optimized instances with at least 8 vCPUs and 16 GiB of memory. These are ideal units for horizontally scaling the Observability Pipelines Worker aggregator. Observability Pipelines Worker can vertically scale and automatically take advantage of additional resources if you choose larger instances. Choose a size that allows for at least two Observability Pipelines Worker instances for your data volume to improve availability.
+Use compute optimized instances with at least 8 vCPUs and 16 GiB of memory. These are ideal units for horizontally scaling the Observability Pipelines Worker aggregator. Observability Pipelines Worker can vertically scale and automatically take advantage of additional resources if you choose larger instances. To improve availability, choose a size that allows for at least two Observability Pipelines Worker instances for your data volume.
 
 | Cloud Provider| Recommendation                                    	|
 | ------------- | ----------------------------------------------------- |
@@ -104,7 +104,7 @@ A load balancer is only required for push-based sources, such as agents. You do 
 Client-side load balancing is not recommended. Client-side load balancing refers to clients doing the load balancing of traffic across multiple Observability Pipelines Worker instances. While this approach sounds simpler, it may be less reliable and more complicated because:
 
 - Load balancing with proper failover is complex. Issues in this area are sensitive as they can result in data loss or incidents that disrupt your services. This is exacerbated if you are working with multiple types of clients.
-- The point of the Observability Pipelines Worker aggregator is to shift responsibility away from your agents and taking on load balancing helps to do that.
+- The point of the Observability Pipelines Worker aggregator is to shift responsibility away from your agents, and taking on load balancing helps to do that.
 
 ###### Load balancer types
 
@@ -115,7 +115,7 @@ Datadog recommends Layer 4 (L4) load balancers (network load balancers) since th
 | AWS           | AWS Network Load Balancer (NLB)                               |
 | Azure         | Internal Azure Load Balancer                                  |
 | Google Cloud  | Internal TCP/UDP Network Load Balancer                        |
-| Private       | HAProxy, Nginx, or another load balancer with layer-4 support |
+| Private       | HAProxy, NGINX, or another load balancer with layer-4 support |
 
 ###### Load balancer configurations
 
@@ -144,9 +144,9 @@ In these cases, the following respective mitigation tactics are recommended:
 
 Observability Pipelines Worker's concurrency model automatically scales to take advantage of all vCPUs. There are no concurrency settings or configuration changes required. When vertically scaling, Datadog recommends capping an instance's size to process no more than 50% of your total volume and deploying at least two Observability Pipelines Worker instances for high availability.
 
-#### Autoscaling
+#### Auto-scaling
 
-Autoscaling should be based on average CPU utilization. For the vast majority of workloads, Observability Pipelines Worker is CPU constrained. CPU utilization is the strongest signal for autoscaling since it does not produce false positives. Datadog recommends you use the following settings, adjusting as necessary:
+Auto-scaling should be based on average CPU utilization. For the vast majority of workloads, Observability Pipelines Worker is CPU constrained. CPU utilization is the strongest signal for auto-scaling since it does not produce false positives. Datadog recommends you use the following settings, adjusting as necessary:
 
 - Average CPU with a 85% utilization target.
 - A five minute stabilization period for scaling up and down.

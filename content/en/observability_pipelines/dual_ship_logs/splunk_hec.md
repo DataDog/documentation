@@ -27,7 +27,7 @@ This document walks you through the following steps to set up dual shipping:
 
 ## Set up Observability Pipelines
 
-1. Navigate to [Observability Pipelines][1].
+1. Navigate to [Observability Pipelines][2].
 1. Select the **Dual Ship Logs** use case to create a new pipeline.
 1. Select **Splunk HEC** as the source.
 
@@ -95,7 +95,7 @@ Enter the following information based on your selected logs destinations.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Splunk HEC address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
+1. Enter the Splunk HEC address. This is the address and port where your applications are sending their logging data. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog" %}}

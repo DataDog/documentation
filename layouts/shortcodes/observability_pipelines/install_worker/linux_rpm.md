@@ -1,11 +1,11 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Run the one-step command provided in the UI to install the Worker:
     ```shell
-    DD_API_KEY=<datadog_api_key> DD_OP_PIPELINE_ID=<pipeline_id> DD_SITE=<datadog_site> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker2.sh)"
+    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker2.sh)"
     ```
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:
-1. Set up the Datadog `rpm` repo on your system with the below command. **Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration above.
+1. Set up the Datadog `rpm` repo on your system with the below command. **Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration below.
     ```shell
     cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
     [observability-pipelines-worker]
@@ -29,8 +29,8 @@ If you prefer not to use the one-line installation script, follow these step-by-
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
-    <source_env_variables>
-    <destination_env_variables>
+    <SOURCE_ENV_VARIABLES>
+    <DESTINATION_ENV_VARIABLES>
     EOF
     ```
 1. Start the worker:

@@ -15,7 +15,7 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-### Sumo Logic Hosted Collect with HTTP Logs source
+### Sumo Logic Hosted Collector with HTTP Logs source
 
 {{% observability_pipelines/prerequisites/sumo_logic %}}
 
@@ -93,7 +93,7 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Sumo Logic address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
+1. Enter the Sumo Logic address. This is the address and port where your applications are sending their logging data. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Datadog" %}}

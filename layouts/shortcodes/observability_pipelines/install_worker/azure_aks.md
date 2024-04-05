@@ -4,7 +4,7 @@
     ```shell
     helm repo add datadog https://helm.datadoghq.com
     ```
-    If you already have Datadog chart repository, run the following command to make sure it is up to date:
+    If you already have the Datadog chart repository, run the following command to make sure it is up to date:
     ```shell
     helm repo update
     ```

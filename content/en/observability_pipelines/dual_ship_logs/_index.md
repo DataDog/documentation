@@ -6,14 +6,14 @@ disable_toc: false
 
 ## Overview
 
-As your infrastructure and your organization scales, so does your log volume, complexity of your data, and your observability architecture. To optimize how you manage your logs, you might need to experiment with different log management tools and routing workflows. Use Observability Pipelines to send your logs to different destinations, so that you can evaluate different tools and workflows with minimal disruption to your production environment.
+As your infrastructure and your organization scales, so does your log volume, the complexity of your data, and your observability architecture. To optimize how you manage your logs, you might need to experiment with different log management tools and routing workflows. Use Observability Pipelines to send your logs to different destinations, so you can evaluate different tools and workflows with minimal disruption to your production environment.
 
 Select a source to get started:
 
 - [Datadog Agent][1]
 - [Splunk HTTP Event Collector (HEC)][2]
 - [Splunk Heavy and Universal Forwarders (TCP)][3]
-- [Sumo Logic Host Collector][4]
+- [Sumo Logic Hosted Collector][4]
 
 [1]: /observability_pipelines/dual_ship_logs/datadog_agent
 [2]: /observability_pipelines/dual_ship_logs/splunk_hec

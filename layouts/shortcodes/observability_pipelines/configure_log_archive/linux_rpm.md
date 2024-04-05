@@ -5,7 +5,7 @@ Create an IAM user and attach the IAM policy you created earlier to it.
 1. Navigate to the [IAM console][1001].
 1. Select **Users** in the left side menu.
 1. Click **Create user**.
-1. Enter a user name.
+1. Enter a username.
 1. Click **Next**.
 1. Select **Attach policies directly**.
 1. Choose the IAM policy you created earlier to attach to the new IAM user.

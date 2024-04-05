@@ -1,7 +1,7 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Run the one-step command provided in the UI to install the Worker:
     ```shell
-    DD_API_KEY=<datadog_api_key> DD_OP_PIPELINE_ID=<pipeline_id> DD_SITE=<datadog_site> <source_env_variables> <destination_env_variables> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker2.sh)"
+    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLES> <DESTINATION_ENV_VARIABLES> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker2.sh)"
     ```
 
 If you prefer not to use the one-line installation script, follow these step-by-step instructions:
@@ -27,11 +27,11 @@ If you prefer not to use the one-line installation script, follow these step-by-
 1. Add your keys, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
     ```shell
     sudo cat <<EOF > /etc/default/observability-pipelines-worker
-    DD_API_KEY=<datadog_api_key>
-    DD_OP_PIPELINE_ID=<pipeline_id>
-    DD_SITE=<datadog_site>
-    <source_env_variables>
-    <destination_env_variables>
+    DD_API_KEY=<DATADOG_API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<DATADOG_SITE>
+    <SOURCE_ENV_VARIABLES>
+    <DESTINATION_ENV_VARIABLES>
     EOF
     ```
 1. Start the worker:

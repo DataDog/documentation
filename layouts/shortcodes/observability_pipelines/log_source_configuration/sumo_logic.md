@@ -6,7 +6,7 @@ To send logs to your Sumo Logic HTTP Source, you must point your existing logs u
 ```shell
 curl -v -X POST -T [local_file_name] http://<OPW_HOST>/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>
 ```
-`<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use. For Kubernetes installs, the internal DNS record of the Observability Pipelines Worker service can be used, eg. `opw-observability-pipelines-worker.default.svc.cluster.local`.
+`<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use. For Kubernetes installs, the internal DNS record of the Observability Pipelines Worker service can be used, such as `opw-observability-pipelines-worker.default.svc.cluster.local`.
 
 `<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source that you provided during the [Install your OP Worker](link to [Draft] OP 2.0 Doc instructions) step.
 

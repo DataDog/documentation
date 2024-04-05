@@ -11,7 +11,7 @@ Configure your Datadog Agent to send logs to the Observability Pipelines Worker 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Connect the Datadog Agent to the Observability Pipelines Worker](#connect-the-datadog-agent-to-the-observability-pipelines-worker)
+1. [Connecting the Datadog Agent to the Observability Pipelines Worker](#connect-the-datadog-agent-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
@@ -100,7 +100,7 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Datadog Agent address. This is the address and port where your datadog agent is sending its logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
+1. Enter the Datadog Agent address. This is the address and port where your Datadog Agent is sending its logging data. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
 {{% tab "Datadog" %}}
