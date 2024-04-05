@@ -1,6 +1,6 @@
 ## Send logs to the Observability Pipelines Worker over Sumo Logic HTTP Source
 
-After you install the Observability Pipelines Worker and deploy the configuration, the Worker exposes HTTP endpoints that uses the [Sumo Logic Http Source API][1001].
+After you install the Observability Pipelines Worker and deploy the configuration, the Worker exposes HTTP endpoints that uses the [Sumo Logic HTTP Source API][1001].
 
 To send logs to your Sumo Logic HTTP Source, you must point your existing logs upstream to the Worker:
 ```shell

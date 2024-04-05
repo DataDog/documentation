@@ -13,6 +13,6 @@ Create an IAM user and attach the IAM policy you created earlier to it.
 1. Optionally, add tags.
 1. Click **Create user**.
 
-Create access credentials for the new IAM user. The AWS access key and AWS secret access key are added later as environment variables when you install the Observability Pipelines Worker.
+Create access credentials for the new IAM user. The AWS access key and AWS secret access key are added as environment variables in the [Install the Observability Pipelines Worker](#install-the-observability-pipelines-worker) step.
 
 [1001]: https://console.aws.amazon.com/iam/

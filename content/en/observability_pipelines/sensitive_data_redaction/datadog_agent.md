@@ -92,7 +92,7 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Datadog Agent address. This is the address and port where your datadog agent is sending its logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations.

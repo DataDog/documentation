@@ -19,7 +19,7 @@ This document walks you through the following steps to set up the Observability 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **USECASENAME** use case to create a new pipeline.
+1. Select the **Log Volume** use case to create a new pipeline.
 1. Select **Splunk TCP** as the source.
 
 ### Set up the source
@@ -84,11 +84,16 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Splunk TCP address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_env_vars/splunk_hec %}}
@@ -97,11 +102,6 @@ Enter the following information based on your selected logs destination.
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/destination_env_vars/sumo_logic %}}
-
-{{% /tab %}}
-{{% tab "Datadog" %}}
-
-{{% observability_pipelines/destination_env_vars/datadog %}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -171,7 +171,7 @@ You need to connect the S3 bucket you created earlier to Datadog Log Archives so
 
 See the [Log Archives documentation][7] for additional information.
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 
 {{< tabs >}}
 {{% tab "Docker" %}}

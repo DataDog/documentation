@@ -126,7 +126,7 @@ Enter the following information based on your selected logs destinations.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/destination_settings/datadog_archives %}}
+{{% observability_pipelines/destination_env_vars/datadog_archives %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
