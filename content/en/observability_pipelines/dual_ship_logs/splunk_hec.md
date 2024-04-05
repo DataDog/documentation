@@ -1,5 +1,5 @@
 ---
-title: Dual Ship Logs from Splunk HTTP Event Collector (HEC)
+title: Dual Ship Logs for the Splunk HTTP Event Collector (HEC)
 kind: document
 disable_toc: false
 ---

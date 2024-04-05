@@ -1,5 +1,5 @@
 ---
-title: Dual Ship Logs for Sumo Logic Hosted Collector
+title: Dual Ship Logs for the Sumo Logic Hosted Collector with HTTP Logs Source
 kind: document
 disable_toc: false
 ---
