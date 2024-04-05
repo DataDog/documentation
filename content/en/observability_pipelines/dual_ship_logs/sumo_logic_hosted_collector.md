@@ -1,5 +1,5 @@
 ---
-title: Dual Ship Logs from Sumo Logic Hosted Collector
+title: Dual Ship Logs for Sumo Logic Hosted Collector
 kind: document
 disable_toc: false
 ---
@@ -31,7 +31,7 @@ This document walks you through the following steps:
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/splunk_hec %}}
+{{% observability_pipelines/source_settings/sumo_logic %}}
 
 ### Set up the destinations
 
