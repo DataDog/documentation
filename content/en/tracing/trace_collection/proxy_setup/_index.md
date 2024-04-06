@@ -683,6 +683,20 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 [3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
 
 {{% /tab %}}
+
+{{% tab "Apache HTTPD" %}}
+
+## Apache HTTPD with Datadog module
+Datadog provides [httpd-datadog][1] an HTTPD module offering distributed tracing capabilities.
+
+### Module installation
+Notes: As of now, only Apache HTTP Server 2.4.x is supported.
+
+For each release, there is one artifact per platform and CPU architecture supported
+
+[1]: https://github.com/DataDog/httpd-datadog
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further Reading
