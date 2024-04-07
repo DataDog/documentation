@@ -41,7 +41,7 @@ Los resultados de los tests de las localizaciones privadas se muestran de forma 
 1. En el sitio de Datadog, pasa el cursor sobre **[UX Monitoring][5]** (Monitorizar la experiencia de uso) y selecciona *Settings** > **Private Locations** (Configuración > Localizaciones privadas).
 2. Haz clic en **Add Private Location** (Añadir localización privada).
 3. Rellena los datos de tu localización privada. Solo los campos `Name` y `API key` son obligatorios.
-4. Haz clic en **Save Location and Generate Configuration File** (Guardar localización y generar archivo de configuración) para generar el archivo de configuración asociado a tu localización privado en tu worker. 
+4. Haz clic en **Save Location and Generate Configuration File** (Guardar localización y generar archivo de configuración) para generar el archivo de configuración asociado a tu localización privada en tu worker. 
 5. Dependiendo de dónde hayas instalado tu localización privada, es posible que tengas que introducir parámetros adicionales en el archivo de configuración:
     - Si utilizas un proxy, introduce la URL del siguiente modo: `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`.
     - Si quieres bloquear direcciones IP reservadas, activa **Block reserved IPs** (Bloquear IP reservadas) e introduce los rangos de IP.
@@ -63,7 +63,7 @@ Los resultados de los tests de las localizaciones privadas se muestran de forma 
 
     <div class="alert alert-info">Puedes utilizar otro tiempo de ejecución de contenedor, como por ejemplo Podman. Para obtener más información, consulta la <a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=podman#install-your-private-location">documentación sobre localizaciones privadas</a>.</div>
 
-    Si utiliza Windows, ejecuta el instalador de localizaciones privadas de Synthetics con una GUI][12] o ejecuta el comando `msiexec` en la línea de comandos, en el directorio donde has descargado el instalador:
+    Si utiliza Windows, ejecuta el instalador de localizaciones privadas de Synthetics con una GUI][12] o ejecuta el comando `msiexec` en la línea de comandos, dentro del directorio donde has descargado el instalador:
 
     ```shell
     msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi
