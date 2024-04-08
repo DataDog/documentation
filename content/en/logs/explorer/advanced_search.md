@@ -73,7 +73,7 @@ In this example, use `service:network_directory` as your main query, and then de
 
 {{< img src="logs/explorer/advanced_search/narrow_dataset_example.png" alt="The query editor showing the setup for filtering out the results for recognized devices" style="width:100%;" >}}
 
-## Joins with Reference Tables
+## Join with Reference Tables
 
 <div class="alert alert-warning">Reference Tables are in beta. Reference Tables containing over 40,000 rows cannot be used to filter logs. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
