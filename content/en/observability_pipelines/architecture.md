@@ -55,7 +55,7 @@ Due to Observability Pipelines Worker's affine type system, memory is rarely con
 
 ### Disk sizing
 
-If you're using Observability Pipelines Worker's disk buffers for high durability (recommended), provision at least 36 GiB per vCPU of disk space. Following the recommendation of 8 vCPUs, provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
+If you're using Observability Pipelines Worker's disk buffers for high durability (recommended), provision at least 36 GiB per vCPU of disk space. The recommended sizes are calculated at Observability Pipelines Worker's 10 MiB/s/vCPU throughput for one hour. For example, an 8 vCPU machine would require 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
 
 | Cloud Provider| Recommendation*                                               |
 | ------------- | --------------------------------------------------------------|
@@ -64,7 +64,6 @@ If you're using Observability Pipelines Worker's disk buffers for high durabilit
 | Google Cloud  | Balanced or SSD persistent disks, 36 GiB per vCPU             |
 | Private       | Network-based block storage equivalent, 36 GiB per vCPU       |
 
-*The recommended sizes are calculated at Observability Pipelines Worker's 10 MiB/s/vCPU throughput for one hour. For example, an 8 vCPU machine would require 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
 
 ## Capacity planning and scaling
 

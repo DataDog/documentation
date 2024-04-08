@@ -6,7 +6,7 @@ To set up the deduplicate processor:
     - If `Match` is selected, then after a log passes through, future logs that have the same values for all of the fields you specify below are removed.
     - If `Ignore` is selected, then after a log passes through, future logs that have the same values for all of their fields, *except* the ones you specify below, are removed.
 1.  Enter the fields you want to match on, or ignore. Click **Add field** if you have additional fields you want to filter on. At least one field is required, and you can specify a maximum of three fields.
-    - Use the path notation `outer_field.inner_field` to match subfields. See [example](#path-notation-example).
+    - Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See [example](#path-notation-example).
     
 ##### Path notation example
 

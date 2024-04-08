@@ -8,7 +8,7 @@ curl -v -X POST -T [local_file_name] http://<OPW_HOST>/receiver/v1/http/<UNIQUE_
 ```
 `<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use. For Kubernetes installs, the internal DNS record of the Observability Pipelines Worker service can be used, such as `opw-observability-pipelines-worker.default.svc.cluster.local`.
 
-`<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source that you provided during the [Install your OP Worker](link to [Draft] OP 2.0 Doc instructions) step.
+`<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source that you provided in the [Install the Observability Pipelines Worker](#install-the-observability-pipelines-worker) step.
 
 At this point, your logs should be going to the Worker, processed by the pipeline, and uploaded to the Sumo Logic HTTP Source.
 

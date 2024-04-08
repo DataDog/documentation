@@ -5,7 +5,7 @@
 1. Enter a descriptive archive name.
 1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
 1. Select **AWS S3**.
-1. Select the AWS Account that your bucket is in.
+1. Select the AWS account that your bucket is in.
 1. Enter the name of the S3 bucket.
 1. Optionally, enter a path.
 1. Check the confirmation statement.
