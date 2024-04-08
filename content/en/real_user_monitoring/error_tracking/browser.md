@@ -41,6 +41,15 @@ Error Tracking and RUM can use this information to correlate errors with your so
 
 For more information, see the [Datadog Source Code Integration][13].
 
+### Limitations
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
+Source maps are limited to **500** MB each.
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+Source maps are limited to **500** MB each.
+{{< /site-region >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -39,6 +39,7 @@ SCA can run in CI pipelines by using [Code Analysis][3] and provide runtime moni
 
 SCA currently supports scanning the following languages and technologies for vulnerable libraries:
 
+- C#
 - Go
 - Java
 - Node.js
@@ -55,17 +56,18 @@ SCA currently supports scanning the following languages and technologies for vul
 
 ## Search and filter results
 
-After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [Code Analysis page][4]. Drill down to a specific repository and observe SCA results divided into **Library Vulnerabilities** and **Library List** lenses. 
+After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [Code Analysis page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library List** results from Software Composition Analysis. 
 
-* The **Library Vulnerabilities** lens contains the vulnerable library versions found by Datadog SCA.
-* The **Library List** lens contains all the libraries (vulnerable or not) found by Datadog SCA.
+* The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
+* The **Library List** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
-To filter your results, use the facets to the left of the list, or search. 
+To filter your results, use the facets to the left of the list, or search.
 
-Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default the latest commit on the default branch of the repository you are viewing).
+Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, the latest commit on the default branch of the repository you selected).
 
 Click on a library with a vulnerability to open a side panel that contains information about the scope of the violation and where it originated.
-{{< img src="code_analysis/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} 
+
+{{< img src="code_analysis/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}}
 
 The content of the violation is shown in tabs:
 

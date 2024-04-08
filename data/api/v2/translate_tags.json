@@ -23,6 +23,10 @@
     "name": "CI Visibility Tests",
     "description": "Search or aggregate your CI Visibility test events over HTTP. See the [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more information."
   },
+  "csm-threats": {
+    "name": "CSM Threats",
+    "description": "Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/) for more information on setting up CSM Threats."
+  },
   "case-management": {
     "name": "Case Management",
     "description": "View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
@@ -102,6 +106,10 @@
   "logs-archives": {
     "name": "Logs Archives",
     "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in Datadog."
+  },
+  "logs-custom-destinations": {
+    "name": "Logs Custom Destinations",
+    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\n**Note**: Log forwarding is not available for the Government (US1-FED) site. Contact your account representative for more information.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
   },
   "logs-metrics": {
     "name": "Logs Metrics",

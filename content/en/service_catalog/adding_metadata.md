@@ -37,10 +37,26 @@ For more information about the latest updates, see the schemas on GitHub.
 {{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
 {{< /callout >}}
 
-### Metadata Schema v3.0 (beta)
-The Entity Definition Schema is a structure that contains basic information about an entity.
+### Metadata Schema v3.0 (beta) 
+The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][16].
 
-#### Example Entity Definition (`kind:application`)
+#### New features in v3.0 
+##### Analysis units
+Beyond services, you can organize your systems using various components such as applications, services, queues, and datastores. This holistic view supports better analysis and management.
+
+##### Map relationships
+With APM/USM data, you can automatically detect dependencies among components. The schema supports manual declaration to augment auto-detected application topology. This ensures a complete overview of how components interact within your applications.
+
+##### Inheritance of application metadata
+Components within an application automatically inherit the application's metadata, simplifying management and visibility.
+
+##### Multi-ownership
+For improved collaboration, you can assign multiple owners to any entity within your system, ensuring responsibilities are accurately defined.
+
+##### Custom filters for APM metrics, logs, and events
+With the `datadog` field in v3.0 schema, you can specify custom filters for logs and events associated with each component.
+
+#### Example entity definition (`kind:application`)
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -112,8 +128,7 @@ datadog:
       - fp2
 {{< /code-block >}}
 
-#### Example Entity Definition (`kind:service`)
-The same schema applies to `kind:datastore` and `kind:queue`. 
+#### Example entity definition (`kind:service`, `kind:datastore`, `kind:queue`) 
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -455,4 +470,5 @@ extensions:
 [13]: https://app.datadoghq.com/personal-settings/profile
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [15]: https://github.com/DataDog/schema/blob/main/service-catalog/v2.2/schema.json
+[16]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 
