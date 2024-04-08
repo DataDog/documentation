@@ -8,7 +8,7 @@ further_reading:
 - link: "bits_ai/getting_started"
   tag: "Documentation"
   text: "Getting Started"
-- link: "bits_ai/guide/query_examples"
+- link: "bits_ai/query_examples"
   tag: "Documentation"
   text: "Example Natural Language Queries"
 ---
@@ -26,7 +26,7 @@ Bits AI simplifies incident management processes, improves collaboration, and pr
 - Incident channels you'd like to work with Bits AI must be prefixed with `#incident-`. 
 - To ask Bits AI questions about incidents from any Slack channel, you must invite Bits AI to that channel. Run the `@Datadog` command and follow the instructions on the screen. 
 
-{{< img src="bits_ai/managing_incidents/integration-settings.png" alt="Slack integration settings in Datadog" style="width:90%;">}}
+{{< img src="bits_ai/managing_incidents/bitsai_slack_prerequisites.png" alt="Slack integration settings in Datadog" style="width:90%;">}}
 
 ## View incident summaries
 

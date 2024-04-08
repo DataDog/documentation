@@ -1130,11 +1130,11 @@ main:
     identifier: bits_ai_managing_incidents
     parent: bits_ai
     weight: 2
-  - name: Guides
-    url: bits_ai/guide
-    identifier: bits_ai_guide
+  - name: Natural Language Querying
+    url: bits_ai/query_examples
+    identifier: bits_ai_natural_language_querying
     parent: bits_ai
-    weight: 10
+    weight: 3
   - name: Dashboards
     url: dashboards/
     pre: dashboard
