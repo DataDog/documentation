@@ -1,0 +1,1 @@
+Enter the Datadog Agent address. This is the address and port where your datadog agent is sending its logging data to. The Observability Pipelines Worker listens to this address for incoming logs.

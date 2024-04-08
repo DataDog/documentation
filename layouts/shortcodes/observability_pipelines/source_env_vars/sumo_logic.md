@@ -1,0 +1,1 @@
+Enter the Sumo Logic address. This is the address and port where your applications are sending their logging data to. The Observability Pipelines Worker listens to this address for incoming logs.
