@@ -84,7 +84,7 @@ a predefined attribute to the log call:
 
 {{< tabs >}}
 {{% tab "iOS" %}}
-In order to use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
+To use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
 
 ```swift
 let errorFingerprint = "my-custom-grouping-material"
@@ -99,7 +99,7 @@ logger.error(
 {{% /tab %}}
 
 {{% tab "Android" %}}
-In order to use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
+To use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
 
 ```kotlin
 val errorFingerprint = "my-custom-grouping-material"
@@ -109,7 +109,7 @@ logger.e("My error message", error, attributes)
 {{% /tab %}}
 
 {{% tab "Flutter" %}}
-In order to use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
+To use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
 
 ```dart
 final errorFingerprint = "my-custom-grouping-material";
@@ -128,7 +128,7 @@ Or, you can add or adjust the fingerprint in the log mapper:
 
 {{< tabs >}}
 {{% tab "iOS" %}}
-In order to use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
+To use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
 
 ```swift
 let logsConfiguration = Logs.Configuration(
@@ -145,7 +145,7 @@ Logs.enable(
 {{% /tab %}}
 
 {{% tab "Android" %}}
-In order to use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
+To use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
 
 ```kotlin
 val mapper = object : EventMapper<LogEvent> {
@@ -162,7 +162,7 @@ Logs.enable(logsConfiguration)
 {{% /tab %}}
 
 {{% tab "Flutter" %}}
-In order to use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
+To use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
 
 ```dart
 LogEvent? mapLogEvent(LogEvent event) {
@@ -185,11 +185,11 @@ final configuration = DatadogConfiguration(
 ### RUM
 
 #### Example
-If you aren't already collecting Browser RUM events with Datadog, see the [RUM Browser Monitoring setup documentation][3] or the [RUM Mobile and TV Monitoring setup documentation][4]
+If you aren't already collecting Browser RUM events with Datadog, see the [RUM Browser Monitoring setup documentation][3] or the [RUM Mobile and TV Monitoring setup documentation][4].
 
 {{< tabs >}}
 {{% tab "Browser" %}}
-In order to use custom grouping, you need the Datadog Browser SDK [v4.42.0 or later][2], a [browser RUM error][1], and an additional string attribute.
+To use custom grouping, you need the Datadog Browser SDK [v4.42.0 or later][2], a [browser RUM error][1], and an additional string attribute.
 
 If you're already [collecting browser errors][1], it's possible to add the attribute by either:
 
@@ -223,7 +223,7 @@ In both cases, `my-custom-grouping-material` is used to group the Browser RUM er
 {{% /tab %}}
 
 {{% tab "iOS" %}}
-In order to use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
+To use custom grouping, you need the Datadog iOS SDK `2.8.1` or higher.
 
 To add a custom fingerprint when manually reporting errors, you can add a predefined attribute when calling `addError`:
 
@@ -252,7 +252,7 @@ RUM.enable(with: config)
 {{% /tab %}}
 
 {{% tab "Android" %}}
-In order to use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
+To use custom grouping, you need the Datadog Android SDK `2.7.0` or higher.
 
 To add a custom fingerprint when manually reporting errors, you can add a predefined attribute when calling `addError`:
 
@@ -283,7 +283,7 @@ RUM.enable(rumConfiguration)
 {{% /tab %}}
 
 {{% tab "Flutter" %}}
-In order to use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
+To use custom grouping, you need the Datadog Flutter SDK `2.4.0` or higher.
 
 To add a custom fingerprint when manually reporting errors, you can add a predefined attribute when calling `addError`:
 
