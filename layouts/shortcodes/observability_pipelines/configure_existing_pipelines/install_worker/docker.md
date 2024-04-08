@@ -9,6 +9,9 @@
         -p 8088:8088 \
         datadog/observability-pipelines-worker run
     ```
-    **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option: `-p 8282:8088 datadog/observability-pipelines-worker run`.
+    **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option:
+    ```
+    -p 8282:8088 datadog/observability-pipelines-worker run
+    ```
 1. Click **Navigate Back** to go back to the Observability Pipelines edit pipeline page.
 1. Click **Deploy Changes**.
