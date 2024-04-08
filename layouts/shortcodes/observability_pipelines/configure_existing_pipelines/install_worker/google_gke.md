@@ -1,4 +1,4 @@
-1. Download the [Helm chart values file](​​https://docs.datadoghq.com/resources/yaml/observability_pipelines/v2/setup/google_gke.yam) for Google GKE.
+1. Download the [Helm chart values file][6001] for Google GKE.
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Add the Datadog chart repository to Helm:
     ```shell
@@ -25,3 +25,5 @@ If you already have Datadog chart repository, run the following command to make 
     ```
 1. Click **Navigate Back** to go back to the Observability Pipelines edit pipeline page.
 1. Click **Deploy Changes**.
+
+[6001]: /resources/yaml/observability_pipelines/v2/setup/google_gke.yaml
