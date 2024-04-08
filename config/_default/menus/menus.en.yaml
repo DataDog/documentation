@@ -2509,6 +2509,11 @@ main:
     parent: tracing_trace_collection
     identifier: custom_instrumentation
     weight: 202
+  - name: Java
+    url: /tracing/trace_collection/custom_instrumentation/java
+    parent: custom_instrumentation
+    identifier: tracing_custom_java
+    weight: 2023
   - name: Using Datadog Libraries
     url: tracing/trace_collection/custom_instrumentation/dd_libraries/
     parent: custom_instrumentation
