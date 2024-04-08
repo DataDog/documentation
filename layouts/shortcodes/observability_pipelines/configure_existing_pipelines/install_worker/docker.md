@@ -1,11 +1,11 @@
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
     ```shell
-    docker run -i -e DD_API_KEY=<datadog_api_key> \
-        -e DD_OP_PIPELINE_ID=<pipeline_id> \
-        -e DD_SITE=<datadog_site> \
-        -e <source_env_variable> \
-        -e <destination_env_variable> \
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -e <SOURCE_ENV_VARIABLE> \
+        -e <DESINATION_ENV_VARIABLE> \
         -p 8088:8088 \
         datadog/observability-pipelines-worker run
     ```

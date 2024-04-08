@@ -12,14 +12,14 @@
     ```shell
     helm upgrade --install opw \
         -f azure_aks.yaml \
-        --set datadog.apiKey=<datadog_api_key> \
-        --set datadog.pipelineId=<pipeline_id> \
-        --set <source_env_variables> \
-        --set <destination_env_variables> \
-        --set service.ports[0].protocol=TCP,service.ports[0].port=<service_port>,service.ports[0].targetPort=<target_port> \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        --set <SOURCE_ENV_VARIABLES> \
+        --set <DESTINATION_ENV_VARIABLES> \
+        --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
         datadog/observability-pipelines-worker
     ```
-    **Note**: By default, the Kubernetes Service maps incoming port `<service_port>` to the port the Worker is listening on (`<target_port>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values:
+    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values:
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
