@@ -20,11 +20,11 @@ Before you begin, you must connect your AWS or Azure account to Cloudcraft. For 
 
 ## Enable new live experience
 
-To enable the new live experience, toggle the **New Live Experience** switch at the top of the **Live** tab in Cloudcraft.
+To enable, toggle the **New Live Experience** switch at the top of the **Live** tab in Cloudcraft.
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/enable-new-experience.png" alt="Screenshot highlighting the switch to enable the new live experience beta feature in the Cloudcraft interface with a red arrow pointing to the switch." responsive="true" style="width:80%;">}}
 
-If you're a new user, you may already have the new live experience enabled by default.
+If you're a new user, you may already have the New Live Experience enabled by default.
 
 ## Select account and region
 
