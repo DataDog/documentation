@@ -63,7 +63,7 @@ This guide walks you through best practices for getting your team up and running
 
 [1]: /security/cloud_security_management/
 [2]: /security/cloud_security_management/misconfigurations/
-[3]: /security/threats/
+[3]: /security/cloud_security_management/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /security/cloud_security_management/setup
 [13]: https://app.datadoghq.com/security/csm
@@ -73,7 +73,7 @@ This guide walks you through best practices for getting your team up and running
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: /security/cloud_security_management/guide/tuning-rules/
 [19]: /security/cloud_security_management/misconfigurations/custom_rules
-[20]: /security/threats/agent_expressions
+[20]: /security/cloud_security_management/threats/agent_expressions
 [21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
 [23]: /security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities

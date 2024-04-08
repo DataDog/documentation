@@ -88,7 +88,7 @@ runtime_security_config:
 ```
 
 [1]: /security/cloud_security_management/misconfigurations/
-[2]: /security/threats
+[2]: /security/cloud_security_management/threats
 [3]: /security/cloud_security_management/vulnerabilities
 [4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [5]: /getting_started/agent/#installation
