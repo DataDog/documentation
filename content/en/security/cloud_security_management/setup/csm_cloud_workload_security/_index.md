@@ -13,6 +13,9 @@ further_reading:
   - link: "/agent/remote_config"
     tag: "Documentation"
     text: "Remote Configuration"
+  - link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
+    tag: "Blog"
+    text: "Secure your Windows workloads with Datadog Cloud Security Management"
 ---
 
 The Cloud Security Management (CSM) Workload Security package includes [CSM Threats][1]. To learn more about the available CSM packages, see [Setting up Cloud Security Management][2].
