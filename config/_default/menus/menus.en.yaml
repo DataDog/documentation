@@ -2739,7 +2739,7 @@ main:
     identifier: tracing_error_tracking_explorer
     weight: 1001
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=apm
+    url: error_tracking/custom_grouping
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
     weight: 1002
@@ -3959,7 +3959,7 @@ main:
     parent: log_management_error_tracking
     weight: 603
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=logs
+    url: error_tracking/custom_grouping
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
@@ -5017,7 +5017,7 @@ main:
     identifier: rum_error_tracking_mobile
     weight: 1103
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=rum
+    url: error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
     weight: 1104
