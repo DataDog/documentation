@@ -77,7 +77,7 @@ In this example, use `service:network_directory` as your main query, and then de
 
 <div class="alert alert-warning">Reference Tables are in beta. Reference Tables containing over 40,000 rows cannot be used to filter logs. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
-Use Reference Tables to combine metadata with logs at query time so you have more information to help resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. You can also add data from columns in a Reference Table to your logs.
+Use Reference Tables to combine metadata with logs at query time, so you have more information to help resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. You can also add data from columns in a Reference Table to your logs.
 
 To apply a query filter with Reference Tables:
 1. Navigate to [Log Explorer][1].
