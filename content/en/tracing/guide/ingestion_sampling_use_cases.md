@@ -144,7 +144,7 @@ The backend service `web-store` is calling a Mongo database multiple times per t
 
   **Note**: Configuring a single span sampling rule is especially useful if you are using [span-based metrics][8], which are derived from ingested spans.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling.png" alt="Database spans sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling3.png" alt="Database spans sampling" style="width:100%;" >}}
 
 
 ## Further Reading

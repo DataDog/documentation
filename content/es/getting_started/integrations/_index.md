@@ -30,6 +30,10 @@ También puedes crear un [check personalizado][10] para definir y enviar métric
 
 El paquete del Datadog Agent incluye integraciones compatibles oficialmente con Datadog en el [núcleo de integraciones][11]. Para poder utilizar esas integraciones, es necesario descargar el Datadog Agent. Las integraciones basadas en la comunidad se encuentran en [integraciones adicionales][12]. Para obtener más información sobre cómo instalar o gestionar estas integraciones, consulta la [guía de gestión de integraciones][14].
 
+### Python
+
+El permiso `manage_integrations` es necesario para interactuar con un integración cuadro . Ver [RBAC roles][45] para más información.
+
 ### Claves de API y de aplicación
 
 Para [instalar el Datadog Agent][15], necesitas una [clave de API][16]. Si ya te has descargado el Agent, recuerda configurar la clave API en el archivo `datadog.yaml`. Además, es necesaria una [clave de aplicación][16] para utilizar la mayoría de las funcionalidades adicionales de Datadog, así como para enviar métricas y eventos. Puedes gestionar las claves de API y de aplicación de tus cuentas en la [página de API Settings (Configuración de la API)][17].
@@ -118,14 +122,13 @@ Para instalar más de una integración, basta con añadir la información de con
 
 Si configuras la [recopilación de procesos][29], Datadog detectará de forma automática las tecnologías que se ejecutan en tus hosts. De este modo, se identificarán las integraciones de Datadog que pueden ayudarte a monitorizar estas tecnologías. Estas integraciones detectadas automáticamente se muestran en la [sección de búsqueda de Integrations (Integraciones)][2]:
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="Integraciones detectadas automáticamente" >}}
+{{< img src="getting_started/integrations/ad_integrations_1.png" alt="Integraciones detectadas automáticamente" >}}
 
-Cada integración puede adoptar uno de los dos estados siguientes:
+Cada integración tiene uno de los tres tipos de estado:
 
-- **+ Detected** (Detectada): Esta integración no se ha activado en ninguno de los hosts que la ejecutan.
-- **✓ Partial Visibility** (Visibilidad parcial): Esta integración se ha activado en algunos hosts, pero no todos la ejecutan.
-
-Puedes encontrar los hosts que ejecutan la integración, pero en los que esta no se ha activado, en la pestaña **Hosts** del cuadro de integraciones.
+- **Detectado**: La tecnología se está ejecutando en un host, pero la integración no se ha instalado ni configurado y sólo se están recopilando métricas parciales. Configurar la integración para obtener una cobertura completa. Para encontrar una lista de hosts que estén ejecutando una tecnología autodetectada, abra el cuadro de integraciones y seleccione la pestaña **hosts**.
+- **Instalado**: Esta integración está instalada y configurada en un host.
+- **Disponible**: Todas las integraciones que no entran en las categorías **Instalada** y **Detectada**.
 
 ## Protocolos de seguridad
 
@@ -185,7 +188,7 @@ etiquetado
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/developers/integrations/new_check_howto/
+[1]: /es/developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /es/integrations/slack/
 [4]: /es/integrations/amazon_web_services/
@@ -198,12 +201,12 @@ etiquetado
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [14]: /es/agent/guide/integration-management/
-[15]: https://app.datadoghq.com/account/settings#agent
+[15]: https://app.datadoghq.com/account/settings/agent/latest
 [16]: /es/account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /es/integrations/
-[19]: https://app.datadoghq.com/account/settings#agent/docker
-[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /es/agent/guide/agent-commands/#restart-the-agent
 [22]: /es/developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -228,3 +231,4 @@ etiquetado
 [42]: /es/metrics/
 [43]: /es/metrics/custom_metrics/
 [44]: /es/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /es/account_management/rbac/permissions/#integrations

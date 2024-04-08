@@ -3,7 +3,7 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-incident-management
   tag: Centro de aprendizaje
   text: Introducción a la gestión de incidencias
-- link: /monitors/incident_management/datadog_clipboard
+- link: /gestión_de_servicios/gestión_de_incidentes/tablero_de_datos
   tag: Documentación
   text: Clipboard de Datadog
 - link: https://www.youtube.com/watch?v=QIambwILy_M
@@ -12,25 +12,34 @@ further_reading:
 - link: /monitors/incident_management
   tag: Documentación
   text: Gestión de incidencias
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participe en una sesión interactiva para mejorar su gestión de incidentes
 - link: https://www.datadoghq.com/blog/incident-response-with-datadog/
   tag: Blog
   text: Gestión de incidencias con Datadog
-- link: /monitors/incident_management/notification_rules
+- link: /gestión_de_servicios/gestión_de_incidentes/configuración_de_incidentes
   tag: Documentación
   text: Reglas de notificación
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: Documentación
   text: Integración de Slack en las incidencias
+- link: https://www.datadoghq.com/blog/pair-programming-coscreen-Datadog/
+  tag: Blog
+  text: Programación por parejas más eficaz con Datadog CoScreen
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: Blog
   text: Prácticas recomendadas para redactar informes retrospectivos de incidencias
+- link: https://www.datadoghq.com/blog/how-Datadog-gestiona-incidentes/
+  tag: Blog
+  text: Cómo gestionamos los incidentes en Datadog
 kind: documentación
 title: Empezando con la gestión de incidencias
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La herramienta Gestión de incidencias no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">La gestión de incidencias no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
 
 ## Información general
 
@@ -46,7 +55,7 @@ En esta guía, te enseñaremos a utilizar el sitio de Datadog para declarar una 
 
 Esta guía explica cómo utilizar el [Clipboard de Datadog][2] para declarar una incidencia. El Clipboard permite recopilar información de distintas fuentes, como gráficos, monitores, dashboards completos o [notebooks][3]. De este modo, podrás aportar la máxima información posible al declarar una incidencia.
 
-1. En el menú de Datadog de la izquierda, dirígete a **Dashboard** > **Dashboard lists* (Dashboard > Listas de dashboards) y selecciona **System - Metrics**.
+1. En el menú de Datadog de la izquierda, dirígete a **Dashboard** > **Dashboard lists** (Dashboard > Listas de dashboards) y selecciona **System - Metrics**.
 2. Pasa el cursor sobre uno de los gráficos y cópialo en el Clipboard con uno de los siguientes comandos:
     - **Ctrl**/**Cmd** + **C**
     - Haz clic en el icono para **exportar** del gráfico y selecciona **Copy** (Copiar).
@@ -90,7 +99,7 @@ En la sección _Overview_ (Información general), puedes actualizar los campos d
 Para actualizar el nivel de gravedad y la causa principal:
 1. Haz clic en el menú desplegable _Severity_ (Gravedad) y selecciona **SEV-3**.
 2. En _What happened_ (Qué ocurrió), selecciona **Monitor** en el menú desplegable _Detection Method_ (Método de detección), ya que la primera alerta que recibiste sobre el problema provenía de un monitor.
-1. Indica que el host que se está quedando sin memoria en el campo _Why it happened_ (Por qué ocurrió). Ejemplo: `TEST: Host is running out 3f memory.`
+1. Indica que el host que se está quedando sin memoria en el campo _Why it happened_ (Por qué ocurrió). Ejemplo: `TEST: Host is running out of memory.`
 4. Haz clic en **Save** (Guardar) para actualizar las propiedades.
     Desde Slack, también puedes actualizar el título, la gravedad o el estado de una incidencia en curso utilizando el comando `/datadog incident update`.
 
@@ -127,7 +136,7 @@ Para poder unificar las comunicaciones importantes relacionadas con la investiga
  En la sección _Remediation_ (Solución), se puede hacer un seguimiento de los documentos y las tareas relacionadas con la investigación de la incidencia o con las medidas correctivas posteriores a la incidencia.
 
 1. Haz clic en la pestaña **Remediation**.
-2. Haz clic en el icono más `+`, en el recuadro _Documents_ (Documentos), y añade un enlace a un [notebook de Datadog][7]. Todas las actualizaciones de la sección _Documents_ se añaden a la cronología como un tipo de _actualización de la incidencia_.
+2. Haga clic en el icono más `+` en el cuadro _Documentos_ y añada un enlace a un [Datadog notebook ][7]. Todas las actualizaciones de la sección _Documentos_ se añaden a la línea de tiempo como un tipo de _Actualización de incidente_.
 3. Para añadir una tarea, basta con introducir la descripción de la misma en el recuadro _Incident Tasks_ (Tareas de la incidencia). Ejemplo: `Run the steps in the notebook.`
 4. Haz clic en **Create Task** (Crear tarea).
 5. Haz clic en **Assign To** (Asignar a) y asígnatela a ti mismo.
@@ -171,7 +180,7 @@ Si es necesario que se realicen tareas de seguimiento para garantizar que el pro
 
 Según las necesidades de tu organización, la gestión de incidencias de Datadog puede personalizarse con diferentes niveles de gravedad y estado, e incluye información adicional, como los servicios de APM y los equipos relacionados con la incidencia. Para obtener más información, consulta esta [sección][9] de la página de Gestión de incidencias.
 
-Además, puedes configurar reglas de notificación para notificar automáticamente a personas o servicios concretos en función del nivel de gravedad de una incidencia. Para obtener más información, consulta la documentación sobre las [reglas de notificación][10].
+También puede configurar reglas de notificación para notificar automáticamente a personas concretas o a servicios en función del nivel de gravedad de un incidente. Para obtener más información, consulte la documentación [Configuración de incidentes][10].
 
 Para personalizar la gestión de incidencias, dirígete a la [página de configuración de incidencias][11]. Desde el menú de Datadog de la izquierda, dirígete a **Monitors** > **Incidents** (Monitores > Incidencias); si aparece una pantalla de bienvenida a la gestión de incidencias, haz clic en **Get Started** (Comenzar). A continuación, en la parte superior, haz clic en **Settings** (Configuración).
 
@@ -181,23 +190,23 @@ La [aplicación móvil de Datadog][12], disponible en el [App Store de Apple][13
 
 Asimismo, puedes declarar y editar incidencias y comunicarte rápidamente con tus equipos gracias a las integraciones con Slack, Zoom y muchas otras herramientas.
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitores en la aplicación móvil">}}
+{{< img src="service_management/incidents/incidents-lista-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
 
 ## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/integrations/slack/
-[2]: /es/monitors/incident_management/datadog_clipboard
+[2]: /es/service_management/incident_management/datadog_clipboard
 [3]: /es/notebooks/#overview
-[4]: /es/monitors/incident_management/#from-a-graph
-[5]: /es/monitors/incident_management/#from-a-monitor
+[4]: /es/service_management/incident_management/#from-a-graph
+[5]: /es/service_management/incident_management/#from-a-monitor
 [6]: /es/api/latest/incidents/#create-an-incident
 [7]: https://app.datadoghq.com/notebook/list
 [8]: https://app.datadoghq.com/incidents/settings#Messages
-[9]: /es/monitors/incident_management/#status-levels
-[10]: /es/monitors/incident_management/notification_rules
+[9]: /es/service_management/incident_management/#status-levels
+[10]: /es/service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /es/mobile/
+[12]: /es/service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app

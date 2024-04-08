@@ -783,6 +783,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_1241981394",
+      "description": "Create an API test with a file payload returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1279271422",
       "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
     }

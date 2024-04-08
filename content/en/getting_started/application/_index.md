@@ -19,6 +19,10 @@ further_reading:
     text: 'DRUIDS, the design system that powers Datadog'
 ---
 
+{{< learning-center-callout header="Try Foundations in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about Datadog Foundations.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 This page provides a high-level overview of capabilities available on the [Datadog site][1].

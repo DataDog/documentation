@@ -35,12 +35,68 @@ title: Synthetic モニタリングの設定
 
 [Synthetic Monitoring & Continuous Testing の設定ページ][1]で、次のトピックにアクセスして制御することができます。
 
+* [デフォルトの設定](#default-settings)
 * [プライベートロケーション](#private-locations)
 * [グローバル変数](#global-variables)
-* [デフォルトの設定](#default-settings)
 * [インテグレーション設定](#integration-settings)
 * [Continuous Testing 設定][2]
 * [モバイルアプリケーションの設定][18]
+
+## デフォルトの設定
+
+### 強制タグの設定
+
+Usage Attribution ページでは、コストと使用量の属性を分析するために最大 3 つのタグを構成できます。Synthetic テストを作成または編集する際に、ユーザーがすべての構成済み使用量属性タグを入力することを要求するには、**Enforce tags for usage attribution on all tests** (すべてのテストで使用量属性に関するタグを強制する) を選択します。この設定を有効にした場合、ユーザーはすべての必須タグを入力しないとテストを保存できません。
+
+### デフォルトの場所
+
+[API テスト][4]、[マルチステップ API テスト][5]、または[ブラウザテスト][6]の詳細にデフォルトの場所を選択します。
+
+Datadog で管理されるすべての場所と、ご使用のアカウントでセットアップしたプライベートロケーションから選択できます。
+
+ロケーションの選択が完了したら、**Save Default Locations** をクリックします。
+
+### デフォルトのブラウザとデバイス
+
+[ブラウザテスト][6]の詳細で、デフォルトのブラウザとデバイスの種類を選択します。
+
+ブラウザは、Google Chrome、Mozilla Firefox、Microsoft Edge から選択できます。デバイスは、大型のノートパソコン、タブレット、小型のモバイルデバイスから選択できます。
+
+ブラウザとデバイスの選択が完了したら、**Save Default Browsers &amp; Devices** をクリックします。
+
+### デフォルトのタグ
+
+[API テスト][4]、[マルチステップ API テスト][5]、または[ブラウザテスト][6]の詳細にデフォルトのタグを選択または追加します。
+
+関連タグの選択が完了したら、**Save Default Tags** をクリックします。
+
+### ヘルプ
+
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが Synthetic Monitoring **Default Settings** ページにアクセスできます。**Default Settings** ページにアクセスするには、ユーザーをこの 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
+
+[カスタムロール機能][12]を使用している場合は、`synthetics_default_settings_read` および `synthetics_default_settings_write` 権限を含むカスタムロールにユーザーを追加します。
+
+## インテグレーション設定
+
+{{< img src="synthetics/settings/integration_settings.png" alt="インテグレーション設定ページ" style="width:100%;">}}
+
+### ブラウザテスト用の APM インテグレーション
+
+Datadog の APM インテグレーションヘッダーにより、Datadog はブラウザテストと APM を関連付けることができます。 
+
+APM ヘッダーを送信するエンドポイントを定義するには、**Value** リストに URL を追加します。エンドポイントがトレースされ、許可されている場合、ブラウザテストの結果は自動的にその対応するトレースに結びつけられます。
+
+`*` を使用すると幅広いドメイン名を許容することができます。たとえば、`https://*.datadoghq.com/*` を追加すると、`https://datadoghq.com/` のすべてが許可されます。URL の追加が完了したら、**Save APM Integration Settings** をクリックします。
+
+詳しくは、[Synthetics と APM トレースの接続][15]をご覧ください。
+
+### Synthetic データ収集と RUM アプリケーション
+
+テスト実行からの RUM データの収集を Datadog に許可するには、**Enable Synthetic RUM data collection** (Synthetic RUM データ収集を有効にする) をクリックします。無効にすると、ブラウザテストレコーダーで RUM 設定を編集することができなくなります。変更を適用するには、**Save RUM Data Collection** をクリックします。
+
+新しいブラウザテストがデータを送信するデフォルトのアプリケーションを選択します。**Default Application** ドロップダウンメニューを使用し、ブラウザテストのデータを収集する RUM アプリケーションを選択します。変更を適用するには、**Save RUM Data Applications** をクリックします。
+
+詳しくは、[RUM とセッションリプレイの確認][14]をご覧ください。
 
 ## プライベートロケーション
 
@@ -142,9 +198,11 @@ Synthetic テストでパスキーを使ってユーザージャーニーを完�
 
 変数については、[HTTP テスト][8]、[マルチステップ API テスト][9]、[ブラウザテスト][10]、[モバイルアプリテスト][19]、[ブラウザテストステップのドキュメント][16]をご参照ください。
 
-### 権限
+### ヘルプ
 
 デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが Synthetic Monitoring **Global Variables** ページにアクセスできます。ユーザーをこの 2 つの[デフォルトのロール][11]のいずれかにアップグレードすると、**Global Variables** ページにアクセスできます。
+
+[カスタムロール機能][12]を使用している場合は、`synthetics_default_settings_read` および `synthetics_default_settings_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
@@ -153,36 +211,6 @@ Synthetic テストでパスキーを使ってユーザージャーニーを完�
 組織内のロールに基づきグローバル変数へのアクセスを制限できます。グローバル変数を作成する際に、**Permissions settings** で、グローバル変数の読み取りおよび書き込みが可能なロール (ユーザーに加えて) を選択します。
 
 {{< img src="synthetics/settings/restrict_access_1.png" alt="グローバル変数へのアクセス制限" style="width:100%;" >}}
-
-## デフォルトの設定
-
-### デフォルトの場所
-
-[API テスト][4]、[マルチステップ API テスト][5]、または[ブラウザテスト][6]の詳細にデフォルトの場所を選択します。
-
-Datadog で管理されるすべての場所と、ご使用のアカウントでセットアップしたプライベートロケーションから選択できます。
-
-ロケーションの選択が完了したら、**Save Default Locations** をクリックします。
-
-### デフォルトのブラウザとデバイス
-
-[ブラウザテスト][6]の詳細で、デフォルトのブラウザとデバイスの種類を選択します。
-
-ブラウザは、Google Chrome、Firefox、Microsoft Edge から選択できます。デバイスは、大型のノートパソコン、タブレット、小型のモバイルデバイスから選択できます。
-
-ブラウザとデバイスの選択が完了したら、**Save Default Browsers &amp; Devices** をクリックします。
-
-### デフォルトのタグ
-
-[API テスト][4]、[マルチステップ API テスト][5]、または[ブラウザテスト][6]の詳細にデフォルトのタグを選択または追加します。
-
-関連タグの選択が完了したら、**Save Default Tags** をクリックします。
-
-### 権限
-
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが Synthetic Monitoring **Default Settings** ページにアクセスできます。**Default Settings** ページにアクセスするには、ユーザーをこの 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
-
-[カスタムロール機能][12]を使用している場合は、`synthetics_default_settings_read` および `synthetics_default_settings_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ## インテグレーション設定
 
@@ -205,12 +233,6 @@ Datadog がテスト実行から RUM データを収集することを許可す�
 ブラウザテストデータを収集する RUM アプリケーションを **Default Application** ドロップダウンメニューから選択します。デフォルトアプリケーションの指定が完了したら、**Save RUM Data Applications** をクリックします。
 
 詳しくは、[RUM とセッションリプレイの確認][14]をご覧ください。
-
-### 権限
-
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが Synthetic Monitoring **Integration Settings** ページにアクセスできます。**Integration Settings** ページにアクセスするには、ユーザーをこの 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
-
-[カスタムロール機能][12]を使用している場合は、`synthetics_default_settings_read` および `synthetics_default_settings_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ## その他の参考資料
 

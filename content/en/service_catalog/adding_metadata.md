@@ -37,8 +37,8 @@ For more information about the latest updates, see the schemas on GitHub.
 {{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
 {{< /callout >}}
 
-### Metadata Schema v3.0 (beta)
-The Entity Definition Schema is a structure that contains basic information about an entity.
+### Metadata Schema v3.0 (beta) 
+The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][16].
 
 #### New features in v3.0 
 ##### Analysis units
@@ -470,4 +470,5 @@ extensions:
 [13]: https://app.datadoghq.com/personal-settings/profile
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [15]: https://github.com/DataDog/schema/blob/main/service-catalog/v2.2/schema.json
+[16]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 
