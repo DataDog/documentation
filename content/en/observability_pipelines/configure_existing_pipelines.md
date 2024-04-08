@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-For existing pipelines in Observability Pipelines, you can update processors in the Observability Pipelines UI. But if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
+For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
 
 ## Update an existing pipeline
 
