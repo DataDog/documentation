@@ -1,5 +1,7 @@
 ---
 title: (LEGACY) Datadog Processing Language / Vector Remap Language
+aliases:
+  - /observability_pipelines/reference/processing_language/
 ---
 
 {{< site-region region="gov" >}}

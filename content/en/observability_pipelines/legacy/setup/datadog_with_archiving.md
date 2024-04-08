@@ -1,6 +1,8 @@
 ---
 title: (LEGACY) Set Up Observability Pipelines to Send Logs in Datadog-Rehydratable Format to Amazon S3 and Datadog
 kind: Documentation
+aliases:
+  - /observability_pipelines/setup/datadog_with_archiving/
 further_reading:
   - link: "/observability_pipelines/legacy/production_deployment_overview/"
     tag: "Documentation"
@@ -13,6 +15,8 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
+
+{{% observability_pipelines/legacy_warning %}}
 
 ## Overview
 
@@ -167,7 +171,7 @@ You need to connect the S3 bucket you created earlier to Datadog Log Archives so
 
 See the [Log Archives documentation][7] for additional information.
 
-## Install the Observability Pipelines Worker
+### Install the Observability Pipelines Worker
 
 {{< tabs >}}
 {{% tab "Docker" %}}

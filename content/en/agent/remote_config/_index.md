@@ -77,7 +77,7 @@ The following products and features are supported with Remote Configuration:
 - **Automatic deployment of custom Agent rules**: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
 ### Observability Pipelines
-<div class="alert alert-info">This feature is in private beta.</div>
+<div class="alert alert-info">This feature is in public beta.</div>
 
 - **Remotely deploy and update [Observability Pipelines Workers][4] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 

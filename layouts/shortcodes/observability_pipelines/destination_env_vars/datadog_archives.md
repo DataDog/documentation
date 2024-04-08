@@ -1,0 +1,1 @@
+Enter the AWS Access key ID and AWS secret access key for the S3 archive bucket you created earlier.

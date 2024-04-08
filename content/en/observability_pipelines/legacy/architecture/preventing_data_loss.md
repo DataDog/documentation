@@ -1,6 +1,8 @@
 ---
 title: (LEGACY) Preventing Data Loss
 kind: Documentation
+aliases:
+  - /observability_pipelines/architecture/preventing_data_loss/
 ---
 
 {{< site-region region="gov" >}}

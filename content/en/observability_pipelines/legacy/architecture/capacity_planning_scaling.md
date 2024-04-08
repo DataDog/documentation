@@ -1,6 +1,8 @@
 ---
 title: (LEGACY) Capacity Planning and Scaling
 kind: Documentation
+aliases:
+  - /observability_pipelines/architecture/capacity_planning_scaling/
 ---
 
 {{< site-region region="gov" >}}

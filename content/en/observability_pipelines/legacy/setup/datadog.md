@@ -7,6 +7,7 @@ aliases:
   - /observability_pipelines/integrate_vector_with_datadog/
   - /observability_pipelines/integrations/integrate_vector_with_datadog/
   - /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
+  - /observability_pipelines/setup/datadog/
 further_reading:
   - link: "/observability_pipelines/legacy/production_deployment_overview/"
     tag: "Documentation"
@@ -19,6 +20,8 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
+
+{{% observability_pipelines/legacy_warning %}}
 
 ## Overview
 

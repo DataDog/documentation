@@ -4,6 +4,7 @@ legacy: true
 aliases:
     - /integrations/observability_pipelines/guide/
     - /observability_pipelines/integrations/
+    - /observability_pipelines/reference/sources/
 ---
 
 {{< site-region region="gov" >}}

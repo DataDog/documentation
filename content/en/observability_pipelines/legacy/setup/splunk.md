@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /integrations/observability_pipelines/splunk
   - /observability_pipelines/guide/setup_splunk_environment
+  - /observability_pipelines/setup/splunk/
 further_reading:
   - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"
@@ -19,6 +20,8 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
+
+{{% observability_pipelines/legacy_warning %}}
 
 <div class="alert alert-info">Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
 

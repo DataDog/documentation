@@ -5,6 +5,7 @@ type: multi-code-lang
 aliases:
   - /getting_started/observability_pipelines/
   - /observability_pipelines/installation/
+  - /observability_pipelines/setup/
 further_reading:
   - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"
@@ -23,6 +24,8 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
+
+{{% observability_pipelines/legacy_warning %}}
 
 ## Overview
 

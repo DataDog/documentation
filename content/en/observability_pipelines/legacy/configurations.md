@@ -5,6 +5,7 @@ aliases:
   - /integrations/observability_pipelines/vector_configurations/
   - /observability_pipelines/vector_configurations/
   - /observability_pipelines/reference/
+  - /observability_pipelines/configurations/
 further_reading:
   - link: /observability_pipelines/legacy/working_with_data/
     tag: Documentation

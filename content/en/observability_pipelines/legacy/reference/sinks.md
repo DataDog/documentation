@@ -1,6 +1,8 @@
 ---
 title: Sinks
 legacy: true
+aliases:
+  - /observability_pipelines/reference/sinks/
 ---
 
 {{< site-region region="gov" >}}

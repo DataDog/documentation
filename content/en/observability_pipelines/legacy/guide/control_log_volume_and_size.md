@@ -3,6 +3,7 @@ title: (LEGACY) Control Log Volume and Size
 kind: guide
 aliases:
   - /integrations/observability_pipelines/guide/control_log_volume_and_size/
+  - /observability_pipelines/guide/control_log_volume_and_size/
 further_reading:
   - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"

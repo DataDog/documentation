@@ -1,18 +1,21 @@
 ---
-title: Dual Ship Logs to Multiple Destinations
+title: Dual Ship Logs
 kind: Documentation
 disable_toc: false
 ---
 
 ## Overview
 
-As your infrastructure scales, your log volume also increases and so does the complexity of the data. To optimize how you manage your logs, you might need to experiment with different log management tools and routing workflows. Use Observability Pipelines to send your logs to multiple destinations, also known as dual shipping, so that you can evaluate different tools and workflows with minimal disruption to your production environment.
+As your infrastructure and your organization scales, so does your log volume, complexity of your data, and your observability architecture. To optimize how you manage your logs, you might need to experiment with different log management tools and routing workflows. Use Observability Pipelines to send your logs to different destinations, so that you can evaluate different tools and workflows with minimal disruption to your production environment.
 
-Select the source from which you want to dual ship logs:
+Select a source to get started:
 
-- [Splunk HEC][1]
-- Splunk TCP
-- Sumo Logic
-- Datadog Agent
+- [Datadog Agent][1]
+- [Splunk HTTP Event Collector (HEC)][2]
+- [Splunk Heavy and Universal Forwarders (TCP)][3]
+- [Sumo Logic Host Collector][4]
 
-[1]: /observability_pipelines/dual_ship_logs/dual_ship_logs_for_splunk_hec
+[1]: /observability_pipelines/dual_ship_logs/datadog_agent
+[2]: /observability_pipelines/dual_ship_logs/splunk_hec
+[3]: /observability_pipelines/dual_ship_logs/splunk_tcp
+[4]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
