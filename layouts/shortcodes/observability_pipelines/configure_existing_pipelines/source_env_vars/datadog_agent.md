@@ -1,0 +1,1 @@
+`DD_OP_SOURCE_DATADOG_AGENT_ADDRESS`: The Observability Pipelines Worker listens to this socket address to receive logs from the Datadog Agent.

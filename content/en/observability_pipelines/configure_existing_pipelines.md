@@ -13,30 +13,34 @@ For existing pipelines in Observability Pipelines, you can update and deploy cha
 1. Navigate to [Observability Pipelines][1].
 1. Select the pipeline you want to update.
 1. Click **Edit Pipeline** in the top right corner.
-1. Make changes to the pipeline:
-	- If you are only updating the source or destination settings shown in the tiles or updating and adding processors, make the changes and then click **Deploy Changes**.
-	- If you want to update the source or destination environment variables, click **Go to Worker Installation Steps**.
+1. Make changes to the pipeline.
+	- If you are updating the source or destination settings shown in the tiles, or updating and adding processors, make the changes and then click **Deploy Changes**.
+	- To update source or destination environment variables, click **Go to Worker Installation Steps** and see [Update source or destination variables](#update-source-or-destination-variables) for instructions.
+
+### Update source or destination variables
+
+On the the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. If you want to update source environment variables, update the information based on your selected logs source.
 {{< tabs >}}
 {{% tab "Datadog Agent" %}}
 
-{{% observability_pipelines/source_env_vars/datadog_agent %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
-{{% observability_pipelines/source_env_vars/splunk_hec %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
 
 {{% /tab %}}
 {{% tab "Splunk TCP" %}}
 
-{{% observability_pipelines/source_env_vars/splunk_tcp %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_tcp %}}
 
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}
 
-{{% observability_pipelines/source_env_vars/splunk_hec %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -44,22 +48,22 @@ For existing pipelines in Observability Pipelines, you can update and deploy cha
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog_archives %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 {{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
-{{% observability_pipelines/destination_env_vars/splunk_hec %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/splunk_hec %}}
 
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}
 
-{{% observability_pipelines/destination_env_vars/sumo_logic %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -67,37 +71,37 @@ For existing pipelines in Observability Pipelines, you can update and deploy cha
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-{{% observability_pipelines/install_worker/docker %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}
 
-{{% observability_pipelines/install_worker/amazon_eks %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/amazon_eks %}}
 
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 
-{{% observability_pipelines/install_worker/azure_aks %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/azure_aks %}}
 
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 
-{{% observability_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/google_gke %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
 
-{{% observability_pipelines/install_worker/linux_apt %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/linux_apt %}}
 
 {{% /tab %}}
 {{% tab "Linux (RPM)" %}}
 
-{{% observability_pipelines/install_worker/linux_rpm %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/linux_rpm %}}
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-{{% observability_pipelines/install_worker/cloudformation %}}
+{{% observability_pipelines/configure_existing_pipelines/install_worker/cloudformation %}}
 
 {{% /tab %}}
 {{< /tabs >}}
