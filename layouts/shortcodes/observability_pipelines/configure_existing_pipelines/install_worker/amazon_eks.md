@@ -4,11 +4,6 @@
     ```shell
     helm repo update
     ```
-1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.   
-    **Note**: By default, the Kubernetes Service maps incoming port `<service_port>` to the port the Worker is listening on (`<target_port>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-    ```
 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
     ```shell
     helm upgrade --install opw \
@@ -20,7 +15,7 @@
     --set service.ports[0].protocol=TCP,service.ports[0].port=<service_port>,service.ports[0].targetPort=<target_port> \
     datadog/observability-pipelines-worker
     ```
-    **Note**: By default, the Kubernetes Service maps incoming port `<service_port>` to the port the Worker is listening on `(<target_port>)`. If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values: 
+    **Note**: By default, the Kubernetes Service maps incoming port `<service_port>` to the port the Worker is listening on `(<target_port>)`. If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values:
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
