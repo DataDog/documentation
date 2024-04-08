@@ -30,7 +30,7 @@ Bits AI simplifies incident management processes, improves collaboration, and pr
 
 ## View incident summaries
 
-When you join an incident channel in Slack, you automatically receive a summary of the incident. The channel must be connected to Incident Management and have at least ten messages. The summary, which is only visible to you, does not persist across reloads, between desktop and mobile apps, or across sessions.
+When you join an incident channel in Slack, you automatically receive a summary of the incident. The channel must be connected to Incident Management and **have at least ten messages**. The summary, which is only visible to you, does not persist across reloads, between desktop and mobile apps, or across sessions.
 
 At any time, you can ask for a fresh summary by asking `@DataDog Give me a summary of this incident`. 
 
@@ -38,9 +38,7 @@ At any time, you can ask for a fresh summary by asking `@DataDog Give me a summa
 
 You can ask Bits to find incidents that you're looking for. For instance,
 - `@Datadog How many incidents are currently ongoing?`
-- `@Datadog A customer is unable to check out. Is there an incident?`
 - `@Datadog Show me all Sev-1 incidents that occurred in the past week`
-- `@Datadog Were there any incidents in the past month that impacted the payments service?` 
 
 You can then investigate further and ask questions about those incidents, like `@Datadog What was the root cause of incident-123?` or `@Datadog What remediation actions did the responders take in incident-123?`
 
