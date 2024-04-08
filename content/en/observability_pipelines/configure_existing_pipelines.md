@@ -40,7 +40,7 @@ On the the Worker installation page:
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -1,6 +1,6 @@
 1. Download the [Helm chart values file][4001] for AWS EKS.
 1. Click **Select API key** to choose the Datadog API key you want to use.
-1. Update Datadog Helm chart to the latest version:
+1. Update the Datadog Helm chart to the latest version:
     ```shell
     helm repo update
     ```
