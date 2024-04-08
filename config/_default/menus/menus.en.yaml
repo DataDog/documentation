@@ -715,6 +715,10 @@ main:
     identifier: otel_guides_delta_temporality
     parent: otel_guides
     weight: 803
+  - name: Sending Data from OpenTelemetry Demo
+    url: /opentelemetry/guide/otel_demo_to_datadog/
+    parent: otel_guides
+    weight: 804
   - name: Developers
     url: developers/
     pre: dev-code
