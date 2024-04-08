@@ -30,7 +30,7 @@ An automated cyberattack where stolen account credentials, typically usernames o
 
 Credential stuffing relies on credential dumps.
 
-### Credential dumps
+### Credential dumps
 
 Occur when stolen credentials from a security breach are posted publicly or sold on dark web markets, often resulting in a large compilation of usernames, passwords, and other account details being released.
 
@@ -69,7 +69,7 @@ The latest list of relevant detections and instrumentation requirements is avail
 [Auto-instrumentation](https://docs.datadoghq.com/security/application_security/threats/add-user-info/?tab=set_user#automatic-user-activity-event-tracking)
  is a Datadog capability that automatically identifies user login success and failure for most authentication implementations. It is recommended that applications are additionally instrumented for all recommended enrichments, such as `users.exists`, for the best efficacy.
 
-You are not limited to how Datadog defined these enrichments. Many platform products opt to add additional enrichments such as identifying the customer organization or user role.
+You are not limited to how Datadog defines these enrichments. Many platform products opt to add additional enrichments such as identifying the customer organization or user role.
 
 ## Remote Configuration
 [Remote Configuration](https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration)
@@ -82,32 +82,32 @@ Remote configuration enables ASM users to instrument apps with with enrichments 
 
 [Notifications](https://docs.datadoghq.com/security/notifications/rules/)
  are a flexible way ensure the correct team members are contacted when an attack occurs. [Integrations](https://app.datadoghq.com/integrations?category=Collaboration)
- with common communication methods are available out of the box including Datadog CoScreen.
+ with common communication methods are available out of the box.
 
 
 ## Review your first detection
+
+ASM highlights the most relevant information and suggests actions to take based on the detection type and indicates what actions have been taken.
 
 {{<img src="security/ato/review_first_detection.png" alt="An Account Takeover signal showing different highlighted areas of interest" style="width:100%;">}}
 
 **Compromised Users**
 
-Compromised and Targeted users can be reviewed and blocked within Signals, Traces, and Attacker Explorer.
+Compromised and Targeted users can be reviewed and blocked within Signals and Traces.
 
-**Signals:**
+**Signals**
+
+Individual users may be blocked in Signals from the Targeted Users panel.
 
 {{<img src="security/ato/compromised_users_signals.png" alt="Compromised users shown on a security signal" style="width:100%;">}}
 
-**Traces:**
+**Traces**
 
-{{<img src="security/ato/compromised_users_traces.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
+Individual users may be blocked on Traces from the User panel. Click on any user to show.
 
-**Blocking**
+{{<img src="security/ato/traces_block_user.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
 
-ASM suggests actions to take based on the detection type and indicates what actions have been taken.
-
-{{<img src="security/ato/review_suggested_steps.png" alt="Suggested actions on an ASM Account Takeover signal" style="width:100%;">}}
-
-# Best practices for Signal Review and Protection
+# Best Practices for Signal Review and Protection
 
 ## Have an Incident Response Plan
 
@@ -122,7 +122,7 @@ To configure Trusted IPs, visit the [Passlist](https://app.datadoghq.com/securit
 
 {{<img src="security/ato/passlist.png" alt="Monitored passlist" style="width:100%;">}}
 
-### What is your customer authentication profile
+### Know your customer authentication profile
 
 What networks do your customers authenticate from?
 1. Mobile ISPs
@@ -130,7 +130,7 @@ What networks do your customers authenticate from?
 3. Residential IPs
 4. Data centers
 
-Understanding typical networks can inform your blocking strategy. For example, if you have a consumer application, it may be unexpected for customers to authenticate from data centers. You may have more leeway to block the IP addresses associated with that data center. However, if your customers source entirely from Mobile ISPs, you may have an impact to legitimate traffic if you block those ISPs.
+Understanding authentication sources can inform your blocking strategy. For example, if you have a consumer application, it may be unexpected for customers to authenticate from data centers. You may have more leeway to block the IP addresses associated with that data center. However, if your customers source entirely from Mobile ISPs, you may have an impact to legitimate traffic if you block those ISPs.
 
 Who are your customers, and what is their account name structure?
 1. Employees with an expected ID format such as integers, corporate domains, or combinations of numbers and text
@@ -144,10 +144,16 @@ Understanding your customers account name structure helps understand if attacks 
 
 Blocking advanced, distributed attacks is often a business decision, as the attack affects availability, may affect user funds, and may impact legitimate users. There are three critical components for success in these attacks
 1. Proper onboarding: Are you configured for blocking with ASM?
-2. Proper configuration: ensure that you have correctly set Client IPs and XFF headers
+2. Proper configuration: Ensure that you have correctly set Client IPs and XFF headers
 3. Internal communication plans: Communication with security teams, services owners, and product leads is critical to understanding the impact of mitigating large-scale attacks.
 
 Note: Responders can identify service owners via the tags in all ASM Signals.
+
+## Know your trends
+
+Check the [Threats Overview](https://app.datadoghq.com/security/appsec/threat) to monitor business logic trends such as spikes in failed logins against your services.
+
+{{<img src="security/ato/threats_overview.png" alt="Threats Overview" style="width:100%;">}}
 
 
 ## Signal Review
@@ -156,16 +162,16 @@ Note: Responders can identify service owners via the tags in all ASM Signals.
 
 #### IP Addresses
 
-Use short durations for blocking attackers. 15 minutes or less is recommended. It is rare for attackers to re-use IP addresses in distributed account takeovers.
+Use short durations for blocking attackers. 15 minutes or less is recommended. It is uncommon for attackers to re-use IP addresses in distributed account takeovers.
 
 #### Data centers
 
 Some attacks launch attacks cheap VPS and hosting providers. Attackers are motivated by the low cost and automation, which provides abilities to quickly access new IP addresses at the data center.
 
-Many consumer applications have low occurrences of user authentication from data centers, especially low cost data centers and VPS providers. Consider blocking the entire data center or ASN when the network range is small, such as a /20 (4096 IP Addresses) , and not within your typical user authentication expectations.
+Many consumer applications have low occurrences of user authentication from data centers, especially low cost data centers and VPS providers. Consider blocking the entire data center or ASN when the network range is small, and not within your typical user authentication expectations.
 
 <span style="color:red">
-{show IP pill} Datadog uses third parties such as IPinfo and Spur to determine if an IP is a hosting provider.
+Datadog uses third party data sources such as IPinfo and Spur to determine if an IP is a hosting provider. Datadog processes this data within Datadog infrastructure.
 </span>
 
 #### Proxies
