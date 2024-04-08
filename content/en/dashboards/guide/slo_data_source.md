@@ -5,7 +5,7 @@ disable_toc: false
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  The SLO data source is in public beta. This feature is supported for <strong>metric-based</strong> and <strong>Time Slice</strong> SLOs.
+  The SLO data source is in public beta. This feature is supported for <strong>Metric-based</strong> and <strong>Time Slice</strong> SLOs.
 {{< /callout >}}
 
 ## Overview
@@ -21,7 +21,7 @@ To get started, pick one of the standard visualization types from the dashboard 
 For the *Measure* parameter, see the table below for more information on what each measure visualizes. The *Display* parameter allows you to break out the query by the groups that are already configured for the SLO. 
 
 {{< callout url="#" btn_hidden="true" header="Key Information">}}
-  SLO status corrections are applied to scalar widgets only, not the timeseries widget. When using an SLO data source measures in the Timeseries widget, the value shown at each point is based on the default rollup in the widget, not rolling time period of the SLO.
+  When using an SLO data source measures in the Timeseries widget, the value shown at each point is based on the default rollup in the widget, not rolling time period of the SLO. Additionally, SLO status corrections are applied to scalar widgets only, not the timeseries widget. 
 {{< /callout >}}
 
 | Measure | SLO type |  Timeseries widget  | Scalar widgets |
