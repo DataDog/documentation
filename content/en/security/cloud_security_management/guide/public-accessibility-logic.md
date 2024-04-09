@@ -41,7 +41,7 @@ The following diagrams show how related resources are used to determine whether 
 
 ### Amazon S3 bucket
 
-An [S3 Bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
+An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -52,7 +52,7 @@ See [Blocking public access to your Amazon S3 storage][2] for more information.
 
 ### AWS CloudTrail trail
 
-A [CloudTrail Trail][3] (`aws_cloudtrail_trail`) is considered publicly accessible if:
+A [CloudTrail trail][3] (`aws_cloudtrail_trail`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -60,18 +60,18 @@ A [CloudTrail Trail][3] (`aws_cloudtrail_trail`) is considered publicly accessib
 
 ### Amazon VPC subnet
 
-A [Subnet][4] (`aws_subnet`) is considered public if:
+A [subnet][4] (`aws_subnet`) is considered public if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|It's connected to one or more [route tables][5] that are connected to an [Internet gateway][6] and that route to a destination CIDR block of `"0.0.0.0/0"`, or an IPv6 CIDR block of `"::/0"`.| The route table attached to this subnet routes egress traffic through an Internet gateway, meaning resources in the subnet can access the public Internet.|
+|It's connected to one or more [route tables][5] that are connected to an [Internet gateway][6] and that route to a destination CIDR block of `"0.0.0.0/0"`, or an IPv6 CIDR block of `"::/0"`.| The route table attached to this subnet routes egress traffic through an internet gateway, meaning resources in the subnet can access the public internet.|
 |It's connected to one or more [network ACLs][7] that have at least one ingress and at least one egress entry that have a CIDR block of `"0.0.0.0/0"`, or an IPv6 CIDR block of `"::/0"`.| Network ACLs control traffic that can leave or enter the subnet at the subnet level. When a network ACL rule allows ingress traffic from the Internet and allows egress traffic to ephemeral ports, it allows resources in the subnet to be exposed to the Internet if they are assigned a public IP and their security group allows it.|
 
 See [Subnets for your VPC][8] for the AWS definition of a public subnet.
 
 ### Amazon Redshift cluster
 
-A [Redshift Cluster][9] (`aws_redshift_cluster`) is considered publicly accessible if:
+A [Redshift cluster][9] (`aws_redshift_cluster`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -84,7 +84,7 @@ See [Make a private Amazon Redshift Cluster publicly accessible][13] for more in
 
 ### Amazon RDS DB instance
 
-An [RDS DB Instance][14] (`aws_rds_instance`) is considered publicly accessible if:
+An [RDS DB instance][14] (`aws_rds_instance`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -96,7 +96,7 @@ See [Fix connectivity to an RDS DB instance that uses a VPC's subnet][15] for mo
 
 ### Amazon RDS DB snapshot
 
-An [RDS DB Snapshot][16] (`aws_rds_db_snapshot`) is considered publicly accessible if:
+An [RDS DB snapshot][16] (`aws_rds_db_snapshot`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -194,7 +194,7 @@ See [Amazon EKS cluster endpoint access control][31] for more information on pub
 
 ### Amazon SQS queue
 
-An [SQS Queue][32] (`aws_sqs_queue`) is considered publicly accessible if:
+An [SQS queue][32] (`aws_sqs_queue`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -262,11 +262,11 @@ A Compute Firewall (`gcp_compute_firewall`) grants public access if:
 |The firewall has one or more rules whose protocol is TCP or all and which have `0.0.0.0/0` or `::/0` in their `source_ranges`. | These CIDR prefixes allow access from the Internet, and are the protocol values that are relevant for determining public access. |
 |The firewall's direction is `ingress`. | This means that the firewall is relevant for inbound access from the Internet. |
 
-For more information about using Compute Firewalls, [Choose to allow or disallow blob public access on Azure Storage accounts][47].
+For more information about using Compute firewalls, [Choose to allow or disallow blob public access on Azure Storage accounts][47].
 
 ### Google Cloud Compute instance
 
-A Compute Instance (`gcp_compute_instance`) is considered publicly accessible if:
+A Compute instance (`gcp_compute_instance`) is considered publicly accessible if:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -277,14 +277,14 @@ Learn more about how compute firewall rules are used to restrict port ranges for
 
 ### Google Cloud BigQuery dataset
 
-A BigQuery Dataset (`gcp_bigquery_dataset`) is considered publicly accessible if:
+A BigQuery dataset (`gcp_bigquery_dataset`) is considered publicly accessible if:
 
 | Criteria | Explanation |
 |----------|-------------|
 |The dataset has an IAM policy attached that has a `member` value of either `AllUsers` or `AllAuthenticatedUsers`. | These members allow anyone on the internet to access the database. See [IAM overview][51] for more information. |
 |The dataset has an IAM policy attached that binds it to one of the following roles: `roles/viewer`, `roles/owner`, `roles/editor`, `roles/bigquery.admin`, `roles/bigquery.metadataviewer`, `roles/bigquery.dataowner`, `roles/bigquery.dataeditor`, `roles/bigquery.dataviewer`, or `roles/bigquery.user`. | These roles allow the person who accesses the resource to perform dangerous operations on the database. See the [role reference][52] for more information. |
 
-Learn more about [BigQuery Datasets][53].
+Learn more about [BigQuery datasets][53].
 
 ### Google Cloud Storage bucket
 
