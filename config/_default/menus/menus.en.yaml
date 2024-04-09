@@ -1120,6 +1120,7 @@ main:
     parent: watchdog_top_level
     weight: 5
   - name: Bits AI
+    url: bits_ai/
     pre: bits-ai
     identifier: bits_ai
     parent: platform_heading
