@@ -19,23 +19,23 @@ Cloud Cost Recommendations is in public beta with support for AWS, and is automa
 
 ## Overview
 
-[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. 
+[Cloud Cost Recommendations][1] provide recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. 
 
 {{< img src="cloud_cost/recommendations/cost_recommendations.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
 
-Recommendations combines billing data and observability data to identify orphaned, legacy, or over-provisioned cloud resources.
+Recommendations combine billing data and observability data to identify orphaned, legacy, or over-provisioned cloud resources.
 
 ## Setup
 
 For each AWS account that you would like to receive recommendations for:
 
-1. Configure [Cloud Cost Management][2] to start sending bill data to Datadog.
+1. Configure [Cloud Cost Management][2] to send bill data to Datadog.
 1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4].
 1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
 
 ## Recommendation types
 
-Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider's billing data. You can see the detailed logic for each recommendation type, along with observability metrics or cost data used to generate the recommendation [on the **Recommendations** page][1].
+Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider's billing data. You can see the detailed logic for each recommendation type, along with observability metrics or cost data used to generate the recommendation, [on the **Recommendations** page][1].
 
 {{< img src="cloud_cost/recommendations/overprovisioned_k8s_containers_sidepanel.png" alt="A side panel displaying a Kubernetes container that is over-provisioned in the ad-auction service with recommended next steps to change its usage as well as investigation metrics." style="width:100%;" >}}
 
@@ -48,7 +48,7 @@ Datadog scans your cloud environment to identify and surface orphaned resources 
 Low Utilization EC2 Instances
 : EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. 
 
-Unattached EBS Volumes Unattached
+Unattached EBS Volumes
 : Volumes that have been detached from an EC2 instance. 
 
 Unused EBS Volumes
@@ -64,7 +64,7 @@ Unused Redshift Cluster
 : Redshift cluster with 0 database connections.  
 
 Unused Elasticache Redis Cluster
-: Elasticache Redis Cluster has 0 cache hits and 0 replication bytes.  
+: Elasticache Redis Cluster with 0 cache hits and 0 replication bytes.  
 
 Unused MQ Broker
 : An MQ broker with 0 connections. 
@@ -108,11 +108,11 @@ I01 EBS Volumes
 Datadog identifies individual resources that are under-utilized or over-provisioned, which you can consider adjusting the size and configuration to reduce your costs and improve the performance of your resources.
 
 Overprovisioned EC2 instances
-: EC2 instances not in an auto-scaling group, with less than 50% CPU & memory utilization.
+: EC2 instances not in an auto-scaling group, with less than 50% CPU and memory utilization.
 
 
 Overprovisioned Kubernetes Containers
-: Containers with less than 30 CPU & memory utilization.
+: Containers with less than 30% CPU and memory utilization.
 
 
 Overprovisioned EBS Volume Throughput
