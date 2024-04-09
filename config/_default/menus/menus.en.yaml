@@ -1865,31 +1865,26 @@ main:
     identifier: event_explorer_saved_views
     parent: events_explorer
     weight: 308
-  - name: Using Events
-    url: service_management/events/usage/
-    identifier: event_usage
-    parent: events
-    weight: 4
   - name: Correlation
     url: service_management/events/correlation/
     identifier: event_correlation
     parent: events
-    weight: 5
+    weight: 4
   - name: Configurate Correlation
     url: service_management/events/correlation/configuration
     identifier: event_correlation_configure
     parent: event_correlation
-    weight: 501
+    weight: 401
   - name: Traging & Notifying
     url: service_management/events/correlation/triage_and_notify
     identifier: event_correlation_triage_and_notify
     parent: event_correlation
-    weight: 502    
+    weight: 402    
   - name: Analytics
     url: service_management/events/correlation/analytics
     identifier: event_correlation_analytics
     parent: event_correlation
-    weight: 503       
+    weight: 403       
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
