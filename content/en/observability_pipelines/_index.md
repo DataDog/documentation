@@ -20,7 +20,7 @@ Observability Pipelines allows you to collect, process, and route logs in your o
 - Dual ship logs: Send copies of your logs to multiple destinations.
 - Split logs: Send your logs to different destinations based on your use case. For example, you can send DevOps logs to Datadog and security logs to a security vendor.
 - Archive logs: Send logs to a log vendor and to an archive in Datadog rehydratable format.
-- Sensitive data redaction: Redact sensitive data in your logs before they are routed outside of your infrastructure.
+- Sensitive data redaction: Remove sensitive data from your logs before they are routed outside of your infrastructure.
 
 The Observability Pipelines Worker is the software that runs in your infrastructure. It aggregates and centrally processes and routes your logs based on the selected use case.
 
