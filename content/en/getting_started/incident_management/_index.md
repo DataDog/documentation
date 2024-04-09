@@ -55,7 +55,7 @@ This guide walks you through using the Datadog site for declaring an incident, u
 
 This guide describes using the [Datadog Clipboard][2] to declare an incident. Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
 
-1. In the Datadog navigate to [**Dashboard List**][15] and select **System - Metrics**.
+1. In Datadog, navigate to [**Dashboard List**][15] and select **System - Metrics**.
 2. Hover over one of the graphs and copy it to the Clipboard with one of the following commands:
     - **Ctrl**/**Cmd** + **C**
     - Click the **Export** icon on the graph and select **Copy**.
