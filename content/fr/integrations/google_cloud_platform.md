@@ -138,14 +138,14 @@ Cette méthode vous permet de surveiller tous les projets visibles par un compte
 2. Cliquez sur **Add GCP Account**. Si vous nʼavez configuré aucun projet, vous êtes automatiquement redirigé vers cette page.
 3. Si vous nʼavez pas généré de principal Datadog pour votre organisation, cliquez sur le bouton **Generate Principal**.
 4. Copiez votre principal Datadog et conservez-le pour la prochaine section.
-   {{< img src="integrations/google_cloud_platform/principal-2.png" alt=« Interface de Datadog, affichant le flux 'Add New GCP Account'. La première étape, 'Add Datadog Principal to Google,' contient une zone de texte permettant à un utilisateur de générer un principal Datadog et de le copier dans son presse-papiers. La deuxième étape, 'Add Service Account Email,' contient une zone de texte que lʼutilisateur peut remplir dans la section 3." style="width:70%;">}}
+   {{< img src="integrations/google_cloud_platform/principal-2.png" alt="Interface de Datadog, affichant le flux 'Add New GCP Account'. La première étape, 'Add Datadog Principal to Google,' contient une zone de texte permettant à un utilisateur de générer un principal Datadog et de le copier dans son presse-papiers. La deuxième étape, 'Add Service Account Email,' contient une zone de texte que lʼutilisateur peut remplir dans la section 3." style="width:70%;">}}
    Gardez cette fenêtre ouverte pour la [prochaine section](#3-terminer-la-cofiguration-de-l-integration-dans-datadog).
 5. Dans la [console Google Cloud][43], dans le menu **Service Acounts**, recherchez le compte de service que vous avez créé lors de la [première section](#1-creer-un-compte-de-service-google-cloud).
 6. Accédez à lʼonglet **Permissions** et cliquez sur **Grant Access**.
-   {{< img src="integrations/google_cloud_platform/grant-access.png" alt=« Interface de la console Google Cloud, affichant lʼonglet Permissions sous Service Accounts." style="width:70%;">}}
+   {{< img src="integrations/google_cloud_platform/grant-access.png" alt=" Interface de la console Google Cloud, affichant lʼonglet Permissions sous Service Accounts." style="width:70%;">}}
 7. Collez votre principal Datadog dans la zone de texte **New principals**.
 8. Attribuez le rôle de **Service Account Token Creator** et cliquez sur **Save**.
-   {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt=« Interface de la console Google Cloud, affichant une zone 'Add principals' et une interface 'Assign roles'." style="width:70%;">}}
+   {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt=" Interface de la console Google Cloud, affichant une zone 'Add principals' et une interface 'Assign roles'." style="width:70%;">}}
 
 **Remarque** : si vous avez déjà configuré un accès à lʼaide dʼun principal Datadog partagé, vous pouvez révoquer lʼautorisation de ce principal après avoir terminé ces étapes.
 
