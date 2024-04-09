@@ -4153,7 +4153,7 @@ main:
     parent: appsec_threats
     identifier: threats_threat_overview
     weight: 710
-  - name: Attacker Explorer
+  - name: Attackers Explorer
     url: security/application_security/threats/attacker-explorer/
     parent: appsec_threats
     identifier: threats_attackers
