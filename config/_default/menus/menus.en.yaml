@@ -2510,7 +2510,7 @@ main:
     identifier: custom_instrumentation
     weight: 202
   - name: Java
-    url: tracing/trace_collection/custom_instrumentation/java/
+    url: tracing/trace_collection/custom_instrumentation/java/java-library
     parent: custom_instrumentation
     identifier: custom_instrumentation_java
     weight: 2021
