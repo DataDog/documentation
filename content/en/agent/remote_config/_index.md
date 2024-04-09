@@ -221,7 +221,7 @@ The following table describes the meaning of each Tracing library status:
   | UNKNOWN   | The Tracing library status is unknown, and it can't be determined if an Agent is associated with the Tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
 
 ## Opting out of Remote Configuration 
-To opt-out of Remote Configuration use, you can simply disable Remote Configuration at the organization level. Optionally, you can also disable Remote Configuration capability at the API key level and agent level.
+To opt-out of Remote Configuration use, you can disable Remote Configuration at the organization level. Optionally, you can also disable Remote Configuration capability at the API key level and Agent level.
 
 ### At the Organization level
 Disable Remote Configuration at the organization level on the [Remote Configuration][8] page. This disables Datadog components across your organization to receive configurations from Datadog. You need the [`org_management`][7] permission to disable Remote Configuraiton at the organization level.
