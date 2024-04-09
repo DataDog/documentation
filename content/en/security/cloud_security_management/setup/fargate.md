@@ -42,6 +42,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     "cpu": "256",
     "memory": "512",
     "networkMode": "awsvpc",
+    "pidMode": "task",
     "requiresCompatibilities": [
         "FARGATE"
     ],
@@ -230,6 +231,7 @@ spec:
                fieldPath: spec.nodeName
      volumes:
        - name: cws-instrumentation-volume
+     shareProcessNamespace: true
 {{< /code-block >}}
 
 ## Verify that the Agent is sending events to CSM
