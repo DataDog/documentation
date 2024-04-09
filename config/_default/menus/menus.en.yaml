@@ -715,6 +715,10 @@ main:
     identifier: otel_guides_delta_temporality
     parent: otel_guides
     weight: 803
+  - name: Sending Data from OpenTelemetry Demo
+    url: /opentelemetry/guide/otel_demo_to_datadog/
+    parent: otel_guides
+    weight: 804
   - name: Developers
     url: developers/
     pre: dev-code
@@ -2735,7 +2739,7 @@ main:
     identifier: tracing_error_tracking_explorer
     weight: 1001
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=apm
+    url: error_tracking/custom_grouping
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
     weight: 1002
@@ -3955,7 +3959,7 @@ main:
     parent: log_management_error_tracking
     weight: 603
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=logs
+    url: error_tracking/custom_grouping
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
@@ -5013,7 +5017,7 @@ main:
     identifier: rum_error_tracking_mobile
     weight: 1103
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=rum
+    url: error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
     weight: 1104
@@ -5168,6 +5172,11 @@ main:
     url: account_management/teams/
     parent: account_management
     weight: 7
+  - name: Team Management
+    identifier: account_management_teams_management
+    url: account_management/teams/manage/
+    parent: account_management_teams
+    weight: 701
   - name: Multi-Factor Authentication
     identifier: account_management_mfa
     url: account_management/multi-factor_authentication/

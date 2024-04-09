@@ -1,73 +1,73 @@
 ---
 aliases:
-- /es/arranque_de_la_aplicación/monitors
+- /es/getting_started/application/monitors
 further_reading:
-- link: https://www.datadoghq.com/blog/monitorización-101-Alertar/
+- link: https://www.datadoghq.com/blog/monitoring-101-alerting/
   tag: Blog
-  text: 'monitorización 101: Alertar en lo que importa'
+  text: 'Inicio a la monitorización: alertar sobre lo importante'
 - link: https://learn.datadoghq.com/courses/introduction-to-observability
   tag: Centro de aprendizaje
   text: Introducción a la observabilidad
 - link: /monitors/types/metric/
   tag: Documentación
-  text: métrica monitors
+  text: Métrica de Monitors
 - link: /monitors/notify/
   tag: Documentación
-  text: Notificaciones de los monitores
+  text: Notificaciones de Monitor
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
-  text: Participe en una sesión interactiva sobre la creación de monitors eficaces
+  text: Participa en una sesión interactiva sobre la creación de monitores eficaces
 kind: documentación
-title: Empezando con monitors
+title: Empezando con Monitors
 ---
 
 ## Información general
 
-Con Datadog Alertar, usted tiene la capacidad de crear monitores que activamente check métricas, integración disponibilidad, red puntos finales, y más. Utilice monitores para llamar la atención sobre los sistemas que requieren observación, inspección e intervención.
+Con la función para alertar de Datadog, tienes la capacidad de crear monitores que hagan checks de forma activa de las métricas, la disponibilidad de la integración y los endpoints de red, entre otros. Utiliza monitores para alertar sobre los sistemas que requieren observación, inspección e intervención.
 
-Esta página es una introducción a monitors y describe las instrucciones para configurar una métrica monitor. Una [métrica monitor][1] proporciona alertas y notificaciones si una métrica específica está por encima o por debajo de un determinado umbral. Por ejemplo, una métrica monitor puede alertarle cuando el espacio en disco es bajo. 
+Esta página es una introducción a los monitores y describe las instrucciones para configurar una métrica de Monitor. Una [métrica de Monitor][1] proporciona alertas y notificaciones si una métrica específica está por encima o por debajo de un determinado umbral. Por ejemplo, una métrica de Monitor puede alertarte cuando el espacio en disco es bajo. 
 
-Esta guía cubre:
-- monitor creación y Configuración
-- Configuración de alertas en monitor 
-- Personalización de los mensajes notificación 
-- monitor permisos
+Esta guía aborda lo siguiente:
+- Creación y configuración de Monitor
+- Configuración de alertas de Monitor 
+- Personalización de los mensajes de notificación 
+- Permisos de Monitor
 
 ## Requisitos previos
 
-Antes de Empezando, necesita una cuenta Datadog vinculada a un host con Datadog Agent instalada. Para obtener más información sobre Agent, consulte la guía [Empezando con la Agent][2], o navegue hasta **[integraciones > Agent][3]** para ver las instrucciones de instalación.
+Antes de comenzar, necesitas una cuenta de Datadog vinculada a un host con el Datadog Agent instalado. Para obtener más información sobre el Agent, consulta la [guía Empezando con el Agent][2], o navega hasta **[Integration > Agent (Integraciones > Agent)][3]** para ver las instrucciones de instalación.
 
-Para verificar que el Datadog Agent se está ejecutando, check que su [infraestructura lista][4] en Datadog está poblado.
+Para verificar que el Datadog Agent se está ejecutando, comprueba que la [Lista de infraestructura][4] en Datadog está completa.
 
 ## Crear un monitor
 
-Para crear un monitor, navegue hasta **[monitors > Nuevo monitor > métrica][5]**.
+Para crear un monitor, navega hasta **[Monitors > New Monitor > Metric][5]** (Monitors > Nuevo Monitor > Métrica).
 
 ## Configurar
 
-Los principales componentes de monitor Configuración son:
-- **Método de detección**: ¿Cómo se mide lo que se va a alertar? ¿Le preocupa que un valor de métrica supere un umbral, que un cambio en un valor supere un umbral, un valor anómalo o cualquier otra cosa?
-- **Defina el métrica**: ¿Qué valor <txprotected>monitorización</txprotected> alertar? ¿El espacio en disco de su sistema? ¿El número de errores encontradosred en los inicios de sesión?
+Los principales componentes de la configuración de monitor son:
+- **Método de detección**: ¿Cómo se mide lo que se va a alertar? ¿Te preocupa que un valor de métrica supere un umbral, que un cambio en un valor supere un umbral, un valor anómalo o algo más?
+- **Definir la métrica**: ¿Qué valor vas a monitorear para alertar? ¿El espacio en disco de tu sistema? ¿El número de errores encontrados red en los inicios de sesión?
 - **Condiciones de alerta**: ¿Cuándo hay que despertar a un ingeniero? 
-- **notificación**: ¿Qué información debe figurar en la alerta?
+- **Notificación**: ¿Qué información debe figurar en la alerta?
 
 ### Elegir el método de detección
 
-Al crear una métrica monitor, se selecciona automáticamente **Alerta de umbral** como método de detección. Una alerta de umbral compara los valores de métrica con los umbrales definidos por el usuario. El objetivo de este monitor es alertar sobre un umbral estático, por lo que no es necesario realizar ningún cambio.
+Al crear una métrica de Monitor, se selecciona automáticamente **Alerta de umbral** como método de detección. Una alerta de umbral compara los valores de métrica con los umbrales definidos por el usuario. El objetivo de este monitor es alertar sobre un umbral estático, por lo que no es necesario realizar ningún cambio.
 
 ### Definir la métrica
 
-Para obtener una alerta de poco espacio en disco, utilice el `system.disk.in_use` métrica del [Disco integración][6] y promedie la métrica sobre `host` y `device`:
+Para obtener una alerta de poco espacio en disco, utiliza la métrica `system.disk.in_use` de la [Integración del disco][6] y promedia la métrica contra `host` y `device`:
 
-{{< img src="getting_started/monitors/define_the_metric.png" alt="Define the métrica for system.disk.in_use avg by host and device" >}}
+{{< img src="getting_started/monitors/define_the_metric.png" alt="Defina la métrica para system.disk.in_use avg por host y dispositivo" >}}
 
-### Definir tus condiciones de alerta
+### Definir condiciones de alerta
 
-Según la [documentación de Disk integración][6], `system.disk.in_use` es *la cantidad de espacio de disco en uso como fracción del total*. Así, cuando esta métrica está reportando un valor de `0.7`, el dispositivo está lleno en un 70%.
+Según la [documentación de integración del disco][6], `system.disk.in_use` es *la cantidad de espacio de disco en uso como fracción del total*. Así, cuando esta métrica tiene un valor de `0.7`, el dispositivo está lleno en un 70%.
 
-Para alertar sobre poco espacio en disco, el monitor debe activarse cuando la métrica es `above` el umbral. Los valores del umbral se basan en sus preferencias. Para esta métrica, valores entre `0` y `1` son apropiados:
+Para alertar sobre poco espacio en disco, el monitor debe activarse cuando la métrica esté `above` el umbral. Los valores del umbral se basan en tus preferencias. Para esta métrica, los valores entre `0` y `1` son apropiados:
 
-Establece los siguientes umbrales:
+Establezca los siguientes umbrales:
 ```
 Umbral de alerta: > 0.9
 Umbral de alerta: > 0.8
@@ -77,49 +77,49 @@ Para este ejemplo, deje los demás ajustes de esta sección en los valores prede
 
 ### notificación
 
-Cuando se activa este monitor alerta, se envía un mensaje notificación. En este mensaje se pueden incluir valores condicionales, instrucciones para la resolución o un resumen de lo que es la alerta. Como mínimo, una notificación debe tener un título y un mensaje.
+Cuando se activa este monitor para alertar, se envía un mensaje de notificación. En este mensaje se pueden incluir valores condicionales, instrucciones para la resolución o un resumen de lo que es la alerta. Como mínimo, una notificación debe tener un título y un mensaje.
 
 #### Título
 
-El título debe ser único para cada monitor. Dado que se trata de una alerta múltiple monitor, los nombres están disponibles para cada elemento del grupo (`host` y `device`) con el mensaje Variables de plantilla:
+El título debe ser único para cada monitor. Dado que se trata de un monitor con varias alertas, los nombres están disponibles para cada elemento del grupo (`host` y `device`) con las variables de plantilla de mensaje:
 ```Texto
-El espacio en disco es bajo en {{device.name}} / {{host.name}}
+El espacio en disco es bajo en {{device.name}}/{{host.name}}
 ```
 
 #### Mensaje
 
-Utilice el mensaje para indicar a su equipo cómo resolver el problema, por ejemplo:
+Utiliza el mensaje para indicar a tu equipo cómo resolver el problema, por ejemplo:
 ```Texto
 Pasos para liberar espacio en disco:
-1. Elimine los paquetes que no utilice
+1. Eliminar los paquetes que no utilices
 2. Borrar la caché de APT
 3. Desinstalar aplicaciones innecesarias
 4. Eliminar archivos duplicados
 ```
 
-Para añadir mensajes condicionales basados en umbrales de alerta o advertencia, consulte las [notificación Variables][8] disponibles que puede incluir en su mensaje.
+Para añadir mensajes condicionales basados en umbrales de alerta o advertencia, consulta las [Variables de notificación][8] disponibles que puedes incluir en tu mensaje.
 
-#### Notifíquelo a servicios y a los miembros de su equipo
+#### Notificar a servicios y a los miembros de tu equipo
 
-Envía notificaciones a tu equipo a través de Email, Slack, PagerDuty y más. Puede Buscar para los miembros del equipo y las cuentas conectadas con el cuadro desplegable. Cuando se añade un `@notification` a este cuadro, la notificación se añade automáticamente al cuadro de mensaje:
+Envía notificaciones a tu equipo a través de Email, Slack, PagerDuty y más. Puedes buscar miembros del equipo y cuentas conectadas con el cuadro desplegable. Cuando se añade una `@notification` a este cuadro, la notificación se añade automáticamente al cuadro de mensaje:
 
-{{< img src="getting_started/monitors/message_notify.png" alt="Message with conditional variables and @notificación" style="width:90%;" >}}
+{{< img src="getting_started/monitors/message_notify.png" alt="Mensaje con variables condicionales y @notification" style="width:90%;" >}}
 
-Si se quita el `@notification` de una de las secciones, se quita de las dos.
+Si se quita la `@notification` de una de las secciones, se quita de las dos.
 
-Deje las demás secciones como están. Para más información sobre lo que hace cada opción de Configuración, consulte la documentación [monitor Configuración][9].
+Deja las demás secciones como están. Para obtener más información sobre lo que hace cada opción de Configuración, consulta la documentación de  [Configuración de Monitor][9].
 
 ### Permisos
 
-{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="RBAC Restricted monitor" style="width:90%;" >}}
+{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="Monitor restringido para RBAC" style="width:90%;" >}}
 
-Utilice esta opción para restringir la edición de su monitor a su creador y a funciones específicas de su organización. Para obtener más información sobre las funciones, consulte [Control de acceso basado en funciones][10].
+Utiliza esta opción para restringir la edición de tu monitor al creador y a roles específicos de tu organización. Para obtener más información sobre los roles, consulta [Control de acceso basado en roles][10].
 
-## Ver monitors y alertas de triaje en el móvil
+## Ver Monitors y alertas de triaje en el móvil
 
-Puede consultar monitor Vistas guardadas desde la pantalla de inicio de su móvil o ver y silenciar monitors descargando la [Datadog Mobile App][11], disponible en [Apple App Store][12] y [Google Play Store][13]. Esto le ayudará a clasificar los mensajes cuando esté lejos de su ordenador portátil o de sobremesa.
+Puedes consultar las Vistas guardadas de Monitor desde la pantalla de inicio de tu móvil o ver y silenciar monitores al descargar la [Datadog Mobile App][11], disponible en [Apple App Store][12] y [Google Play Store][13]. Esto te ayudará a clasificar los mensajes cuando estés lejos de tu ordenador portátil o de escritorio.
 
-{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidencias en Mobile App">}}
 
 ## Leer más
 
