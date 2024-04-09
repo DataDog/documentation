@@ -158,7 +158,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace](https://datadoghq.dev/dd-trace-js/interfaces/scope.html
 {{% /tab %}}
 
 {{% tab "Promises" %}}
@@ -187,7 +187,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Async/await" %}}
@@ -213,7 +213,7 @@ app.get('/make-sandwich', async (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Wrapper" %}}
@@ -242,7 +242,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 {{< /tabs >}}
 
