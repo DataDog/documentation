@@ -37,7 +37,7 @@ For each AWS account that you would like to receive recommendations for:
 
 Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider's billing data. You can see the detailed logic for each recommendation type, along with observability metrics or cost data used to generate the recommendation [on the **Recommendations** page][1].
 
-{{< img src="cloud_cost/recommendations/resource_side_panel.png" alt="Cloud cost allocation table showing requests and idle costs over the past month on the Containers page" style="width:100%;" >}}
+{{< img src="cloud_cost/recommendations/overprovisioned_k8s_containers_sidepanel.png" alt="A side panel displaying a Kubernetes container that is over-provisioned in the ad-auction service with recommended next steps to change its usage as well as investigation metrics." style="width:100%;" >}}
 
 Recommendations are run on a daily basis, and are automatically refreshed in your account. When new recommendations are released, Datadog automatically adds them to your account. 
 
