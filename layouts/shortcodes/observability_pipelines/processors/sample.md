@@ -4,4 +4,4 @@ The sampling only applies to logs that match your filter query and does not impa
 
 To set up the sample processor:
 1.  Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are sampled at the specified retention rate below.
-1. Set **retain** field with your desired sampling rate expressed as a percentage. For example, entering `1` means 1% of logs is retained out of all the logs that match the filter query.
+1. Set the **retain** field with your desired sampling rate expressed as a percentage. For example, entering `1` means 1% of logs is retained out of all the logs that match the filter query.

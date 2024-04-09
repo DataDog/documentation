@@ -35,17 +35,18 @@ The following sources are available:
 
 ## Get started
 
-1. Navigate to [Observability Pipelines][LINK].
+1. Navigate to [Observability Pipelines][1].
 1. Select a use case:
-    - [Log volume control][1]
-    - [Dual ship logs][2]
-    - [Split logs][3]
-    - [Archive logs to Datadog Archives][4]
-    - [Sensitive data redaction][5]
+    - [Log volume control][2]
+    - [Dual ship logs][3]
+    - [Split logs][4]
+    - [Archive logs to Datadog Archives][5]
+    - [Sensitive data redaction][6]
 1. Enable monitors.
 
-[1]: /observability_pipelines/log_volume_control/
-[2]: /observability_pipelines/dual_ship_logs/
-[3]: /observability_pipelines/split_logs/
-[4]: /observability_pipelines/archive_logs/
-[5]: /observability_pipelines/sensitive_data_redaction/
+[1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/log_volume_control/
+[3]: /observability_pipelines/dual_ship_logs/
+[4]: /observability_pipelines/split_logs/
+[5]: /observability_pipelines/archive_logs/
+[6]: /observability_pipelines/sensitive_data_redaction/
