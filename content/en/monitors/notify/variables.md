@@ -362,7 +362,7 @@ If the matching event does not contain the attribute in its definition, the vari
 
 #### Explorer link
 
-Use `{{log.link}}`, `{{span.link}}`, and `{{rum.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, or RUM Explorer, scoped on the events matching the query.
+Use `{{log.link}}`, `{{span.link}}`, `{{rum.link}}`, and `{{issue.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, RUM Explorer, or Error Tracking, scoped on the events matching the query.
 
 ### Check monitor variables
 
@@ -521,7 +521,7 @@ The monitors link is customizable with additional parameters. The most common ar
 Use the `{{last_triggered_at_epoch}}` [template variable](#template-variables) to provide a link to all logs happening in the moment of the alert.
 
 ```text
-https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
+https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
 ```
 
 The logs link is customizable with additional parameters. The most common are:

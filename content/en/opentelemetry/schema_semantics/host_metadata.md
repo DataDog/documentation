@@ -101,4 +101,4 @@ To collect these conventions with the OpenTelemetry Collector, set up the [recom
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor#transform-processor
 [8]: https://opentelemetry.io/docs/specs/semconv/resource/os/
 [9]: https://opentelemetry.io/docs/collector/deployment/
-[10]: /metrics/open_telemetry/otlp_metric_types/?tab=sum#hostname-resolution
+[10]: /opentelemetry/schema_semantics/hostname/

@@ -2,9 +2,11 @@
 aliases:
 - /ja/guides/chef/
 categories:
+- automation
 - configuration & deployment
-- provisioning
+- issue tracking
 - log collection
+- provisioning
 dependencies: []
 description: Chef クライアントの実行を追跡。失敗、成功、大きな変更を把握。
 doc_link: https://docs.datadoghq.com/integrations/chef/
@@ -23,6 +25,7 @@ short_description: Chef クライアントの実行を追跡。失敗、成功�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/chef/chefdashboard.png" alt="Chef イベント" popup="true">}}
 
 ## 概要

@@ -8,14 +8,18 @@ further_reading:
   text: Solucionar problemas
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog/
   tag: Blog
-  text: Monitorización del rendimiento de bases de datos con Datadog
+  text: Monitorización del rendimiento de las bases de datos con Datadog
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participa en una sesión interactiva para mejorar la Monitorización de bases
+    de datos
 kind: documentación
 title: Empezando con la monitorización de bases de datos
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">La monitorización de bases de datos no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Información general
 
@@ -53,7 +57,7 @@ git clone https://github.com/DataDog/dd-database-monitoring-example
 cd dd-database-monitoring-example
 ```
 
-3. Configura la variable de entorno `DD_API_KEY` con tu clave API de Datadog:
+3. Configura la variable de entorno `DD_API_KEY` con tu clave de API de Datadog:
 ```
 export DD_API_KEY=<API_KEY>
 ```
@@ -79,7 +83,7 @@ La consulta que más tiempo consume en la base de datos aparecerá en la primera
 
 ## Soluciona los problemas de una consulta lenta
 
-Además de identificar las consultas lentas, la monitorización de bases de datos de Datadog puede ayudarte a hacer un diagnóstico de ellas. Las acciones que lleva a cabo la base de datos para resolver esas consultas se describen en el Explain Plan (plan explicativo) de cada una. Si deseas ver un Explain Plan, haz clic en una muestra en la vista Query Samples (Muestras de consultas).
+Además de identificar las consultas lentas, la monitorización de bases de datos de Datadog puede ayudarte a hacer un diagnóstico de ellas. Las acciones que lleva a cabo la base de datos para resolver esas consultas se describen en el plan explicativo (Explain Plan) de cada una. Si deseas ver un plan explicativo, haz clic en una muestra en la vista Query Samples (Muestras de consultas).
 
 Para acceder a la vista Query Samples de la monitorización de bases de datos, haz clic en **[APM > Databases][6]** (APM > Bases de datos) y selecciona la pestaña **Query Samples** de la IU.
 
@@ -87,7 +91,7 @@ Ordena la tabla Normalized Query (Consulta normalizada) por **Duration** (Duraci
 
 {{< img src="database_monitoring/dbm_qs_sort_duration.png" alt="Muestras de consultas normalizadas ordenadas por duración" style="width:100%;">}}
 
-Encuentra una consulta en la tabla con los datos de la columna **Explain Plan** y haz clic en ella para abrir la página Sample Details (Detalles de la muestra). El Explain Plan que aparece en la parte inferior de Sample Details indica que la consulta requiere un _Index Scan_ (Análisis de índice).
+Encuentra una consulta en la tabla con los datos de la columna **Explain Plan** y haz clic en ella para abrir la página Sample Details (Detalles de la muestra). El plan explicativo que aparece en la parte inferior de Sample Details indica que la consulta requiere un _Index Scan_ (análisis de índice).
 
 {{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="Plan explicativo de una consulta que requiere un análisis de índice" style="width:100%;">}}
 
