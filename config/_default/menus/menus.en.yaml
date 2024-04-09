@@ -7881,6 +7881,45 @@ api:
     url: /api/latest/service-level-objectives/
     identifier: service-level-objectives
     generated: true
+  - name: Get SLO report status
+    url: '#get-slo-report-status'
+    identifier: service-level-objectives-get-slo-report-status
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSLOReportJobStatus
+      unstable:
+        - v2
+      order: 2
+  - name: Get SLO report
+    url: '#get-slo-report'
+    identifier: service-level-objectives-get-slo-report
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSLOReport
+      unstable:
+        - v2
+      order: 3
+  - name: Create a new SLO report
+    url: '#create-a-new-slo-report'
+    identifier: service-level-objectives-create-a-new-slo-report
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSLOReportJob
+      unstable:
+        - v2
+      order: 1
   - name: Get an SLO's history
     url: '#get-an-slos-history'
     identifier: service-level-objectives-get-an-slos-history
