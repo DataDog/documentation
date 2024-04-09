@@ -23,10 +23,6 @@ kind: documentation
 title: Exécuter des tests Synthetic à partir d'emplacements privés
 ---
 
-<div class="alert alert-info">
-Pour être ajouté à la version bêta des emplacements privés Windows, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
-</div>
-
 ## Présentation
 
 Les emplacements privés vous permettent de **surveiller des applications internes ou des endpoints privés** qui ne sont pas accessibles sur l’Internet public. Ils servent également à effectuer les actions suivantes :
@@ -35,7 +31,9 @@ Les emplacements privés vous permettent de **surveiller des applications intern
 * **Vérifier les performances des applications dans votre environnement de CI interne** avant de mettre en production de nouvelles fonctionnalités avec les [tests continus et le CI/CD][1]
 * **Comparer les performances des applications** à l'intérieur et à l'extérieur de votre réseau interne
 
-Les emplacements privés sont des conteneurs Docker que vous pouvez installer partout où cela s'avère judicieux dans votre réseau privé. Une fois créés et installés, vous pouvez assigner des [tests Synthetic][2] à vos emplacements privés, comme vous le feriez pour un emplacement géré.
+{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Diagramme de l'architecture montrant le fonctionnement dʼun emplacement privé dans la surveillance Synthetic" style="width:100%;">}}
+
+Les emplacements privés sont des conteneurs Docker ou des services Windows que vous pouvez installer au sein de votre réseau privé. Une fois que vous avez créé et installé un emplacement privé, vous pouvez lui assigner des [tests Synthetic][2], comme vous le feriez pour un emplacement géré.
 
 Votre worker d'emplacement privé récupère vos configurations de test à partir des serveurs Datadog via HTTPS, exécute le test selon un programme ou à la demande et renvoie les résultats du test aux serveurs Datadog. Vous pouvez ensuite visualiser les résultats des tests effectués sur vos emplacements privés exactement de la même façon que pour les tests exécutés à partir d'emplacements gérés :
 
@@ -43,13 +41,43 @@ Votre worker d'emplacement privé récupère vos configurations de test à parti
 
 ## Prérequis
 
-### Tests continus
-
 Pour utiliser les emplacements privés pour des [tests continus][23], vous devez utiliser la version 1.27.0 ou une version ultérieure.
 
-### Docker
+{{< tabs >}}
+{{% tab "Docker" %}}
 
-Les emplacements privés correspondent à des conteneurs Docker installables sur n'importe quelle entité au sein de votre réseau privé. Vous pouvez accéder à l'[image du worker de l'emplacement privé][3] sur Google Container Registry. L'image peut être exécutée sur Linux ou Windows si le [Docker Engine][4] est disponible sur votre host. Elle peut également être exécutée avec le mode de conteneurs de Linux.
+Les emplacements privés correspondent à des conteneurs Docker installables sur n'importe quelle entité au sein de votre réseau privé. Vous pouvez accéder à l'[image du worker de l'emplacement privé][101] sur Google Container Registry. L'image peut être exécutée sur Linux ou Windows si le [Docker Engine][102] est disponible sur votre host. Elle peut également être exécutée avec le mode de conteneurs de Linux.
+
+[101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
+[102]: https://docs.docker.com/engine/install/
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Les emplacements privés sont des services Windows vous permettant dʼeffectuer des installations nʼimporte où au sein de votre réseau privé à lʼaide dʼun [fichier MSI][101]. Exécutez ce fichier à partir de la machine virtuelle ou physique sur laquelle vous souhaitez installer lʼemplacement privé. 
+
+Les exigences liées à cette machine sont indiquées dans le tableau ci-dessous. Les scripts PowerShell doivent être activés sur la machine sur laquelle vous installez le worker de lʼemplacement privé.
+
+| Système | Prérequis |
+|---|---|
+| Système d'exploitation | Windows Server 2016, Windows Server 2019 ou Windows 10. |
+| RAM | 4 Go minimum. 8 Go recommandés. |
+| CPU | Processeur Intel ou AMD avec prise en charge 64-bit. Processeur de 2,8 GHz ou plus recommandé. |
+
+**Remarque** : pour que Windows Private Locations exécute des tests de navigateurs, ces derniers (comme Chrome, Edge ou Firefox) doivent être installés sur lʼordinateur Windows.
+
+Vous devez installer la version 4.7.2 ou ultérieure de .NET sur votre ordinateur avant de pouvoir utiliser le programme dʼinstallation de MSI. 
+
+{{< site-region region="gov" >}}
+
+<div class="alert alert-danger">La conformité à la norme FIPS nʼest pas prise en charge pour les emplacements privés qui transmettent des données à <code>ddog-gov.com</code>. Pour désactiver ceci, utilisez lʼoption <a href"="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code></a>.</div>
+
+{{< /site-region >}}
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Endpoints des emplacements privés Datadog
 
@@ -72,7 +100,7 @@ Pour extraire les configurations de test et renvoyer les résultats de test, le 
 | ---- | ---------------------------------- | -------------------------------------------------------------- |
 | 443  | `intake.synthetics.datadoghq.eu`   | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
 
-**Remarque** : ces domaines pointent vers un ensemble d'adresses IP statiques. Ces adresses sont disponibles sur https://ip-ranges.datadoghq.eu, plus spécifiquement sur https://ip-ranges.datadoghq.eu/api.json pour `api.datadoghq.eu` et sur https://ip-ranges.datadoghq.eu/synthetics-private-locations.json pour `intake-v2.synthetics.datadoghq.eu`.
+**Remarque** : ces domaines pointent vers un ensemble d'adresses IP statiques. Vous pouvez trouver ces adresses sur la page https://ip-ranges.datadoghq.eu.
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -120,22 +148,23 @@ Pour extraire les configurations de test et renvoyer les résultats de test, le 
 
 ## Configurer votre emplacement privé
 
-Seuls les utilisateurs disposant du rôle **Admin** peuvent créer des emplacements privés. Pour en savoir plus, consultez la rubrique [Autorisations](#autorisations).
+Seuls les utilisateurs disposant du rôle **Synthetics Private Locations Write** peuvent créer des emplacements privés. Pour en savoir plus, consultez la rubrique [Autorisations](#autorisations).
 
 ### Créer votre emplacement privé
 
 Accédez à [**Synthetic Monitoring** > **Settings** > **Private Locations**][22], puis cliquez sur **Add Private Location**.
 
-{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="Créer un emplacement privé" style="width:90%;">}}
+{{< img src="synthetics/private_locations/synthetics_pl_add_1.png" alt="Créer un emplacement privé" style="width:90%;">}}
 
 Remplissez les détails de votre emplacement privé :
 
 1. Indiquez le **nom** et la **description** de votre emplacement privé.
-2. Ajoutez les **tags** que vous souhaitez associer à votre emplacement privé. Si vous configurez un emplacement privé pour Windows, cochez la case **This is a Windows Private Location**.
+2. Ajoutez les **tags** que vous souhaitez associer à votre emplacement privé.
 3. Choisissez l'une de vos **clés d'API** existantes. La sélection d'une clé d'API est nécessaire pour autoriser les communications entre votre emplacement privé et Datadog. Si vous ne possédez aucune clé d'API, cliquez sur **Generate API key** pour en créer une sur la page dédiée. Seuls les champs `Name` et `API key` sont requis.
 4. Définissez les autorisations d'accès pour votre emplacement privé, puis cliquez sur **Save Location and Generate Configuration File**. Datadog crée alors votre emplacement privé et génère le fichier de configuration associé.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Ajouter les détails de l'emplacement privé" style="width:85%;">}}
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Ajouter des détails à un emplacement privé" style="width:85%;">}} 
+
 ### Configurer votre emplacement privé
 
 Configurez votre emplacement privé en personnalisant le fichier de configuration généré. Lorsque vous ajoutez des paramètres de configuration initiale, tels que des [proxies](#configuration-d-un-proxy) et des [IP réservées et bloquées](#bloquer-des-ip-reservees) dans la section **Step 3**, le fichier de configuration généré est automatiquement modifié dans la section **Step 4**.
@@ -179,7 +208,7 @@ Lancez votre emplacement privé sur :
 Exécutez cette commande pour démarrer votre worker d'emplacement privé en montant votre fichier de configuration dans le conteneur. Assurez-vous que votre fichier `<NOM_FICHIER_CONFIGURATION_WORKER>.json` est placé dans `/etc/docker` et non dans le dossier de base :
 
 ```shell
-docker run --rm -v $PWD/<NOM_FICHIER_CONFIGURATION_WORKER>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
+docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
 **Remarque :** si vous avez bloqué des IP réservées, ajoutez les [capacités Linux][1] `NET_ADMIN` au conteneur de votre emplacement privé.
@@ -462,7 +491,78 @@ Créez une définition de tâche Fargate correspondant à celle indiquée ci-des
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
+{{% tab "Windows via GUI" %}}
 
+1. Téléchargez le [fichier `datadog-synthetics-worker-<version>.amd64.msi`][101] et exécutez-le depuis la machine sur laquelle vous souhaitez installer lʼemplacement privé. 
+1. Cliquez sur **Next** sur la page dʼaccueil, lisez le texte de lʼEULA et acceptez les conditions dʼutilisation. Cliquez sur **Next**.
+1. Changez lʼemplacement de lʼinstallation de lʼapplication ou conservez les réglages par défaut. Cliquez sur **Next**.
+1. Pour configurer votre emplacement privé Windows, vous pouvez :
+   - coller et saisir une configuration JSON pour le worker de votre emplacement privé Synthetics Datadog. Ce fichier est créé par Datadog lorsque vous [créez un emplacement privé][102].
+   - parcourir ou saisir un chemin de fichier contenant une configuration JSON pour le worker de votre emplacement privé Synthetics Datadog.
+   - Vous pouvez laisser ce champ vide et exécuter `C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=<PathToYourConfiguration>` dans lʼinvite de ligne de commande de Windows une fois lʼinstallation terminée.
+
+   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Assistant du worker de lʼemplacement privé Synthetics, programme dʼinstallation de MSI. Lʼoption 'Paste in a JSON configuration' est sélectionnée. Un champ de texte est affiché pour cette configuration JSON." style="width:80%;" >}}
+
+1. Vous pouvez appliquer les options de configuration suivantes :
+
+   {{< img src="synthetics/private_locations/settings.png" alt="Assistant du worker dʼemplacement privé Synthetics, programme dʼinstallation de MSI. Les réglages du pare-feu et des logs sont affichés." style="width:80%;" >}}
+
+   Appliquer les règles du pare-feu nécessitées par ce programme au pare-feu Windows
+   : Autorisez le programme dʼinstallation à appliquer les règles du pare-feu lors de lʼinstallation et à les supprimer lors de la désinstallation.
+
+   Appliquer des règles pour bloquer les IP réservées dans le pare-feu Windows
+   : Configurez des règles pour bloquer Chrome, Firefox et Edge (si installés) et ajoutez des règles pour bloquer des plages dʼadresses IP réservées sortantes dans le pare-feu Windows.
+
+   Activer la journalisation de fichier
+   : Autorisez le worker dʼemplacement privé Synthetics à logguer des fichiers dans le répertoire dʼinstallation.
+
+   Jours de rotation des logs
+   : indique le nombre de jours pendant lesquels les logs sont conservés avant leur suppression du système local.
+
+   Verbosité des logs
+   : indique la verbosité de la console et du logging de fichiers pour le worker de lʼemplacement privé Synthetics.
+
+1. Cliquez sur **Next** et **Install** pour lancer le processus dʼinstallation. 
+
+Une fois que le processus est terminé, cliquez sur **Finish** dans la page signalant la fin de lʼinstallation.
+
+<div class="alert alert-warning">Si vous avez saisi votre configuration JSON, le service Windows lance son exécution à lʼaide de cette configuration. Si vous nʼavez pas saisi votre configuration, exécutez <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< CheminVersVotreConfiguration ></code> depuis une invite de commande ou utilisez le raccourci du <code>menu Démarrer</code> pour lancer le worker de lʼemplacement privé Synthetics.</div>
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[102]: https://app.datadoghq.com/synthetics/settings/private-locations
+
+{{% /tab %}}
+{{% tab "Windows via CLI" %}}
+
+1. Téléchargez le [fichier `datadog-synthetics-worker-<version>.amd64.msi`][101] et exécutez-le depuis la machine sur laquelle vous souhaitez installer lʼemplacement privé. 
+2. Exécutez lʼune des commandes suivantes dans le répertoire où vous avez téléchargé le programme dʼinstallation :
+
+   - Dans un terminal PowerShell :
+
+     ```powershell
+     Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     ```
+
+   - Ou dans un terminal de commande :
+
+     ```cmd
+     msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     ```
+
+Dʼautres paramètres peuvent être ajoutés :
+
+| Paramètre facultatif | Définition | Valeur | Valeur par défaut | Type |
+|---|---|---|---|---|
+| APPLYDEFAULTFIREWALLRULES | Applique les règles du pare-feu nécessaires au programme. | 1 | S. O. | 0 : désactivé<br>1 : activé |
+| APPLYFIREWALLDEFAULTBLOCKRULES | Bloquez des adresses IP réservées pour chaque navigateur que vous avez installé (Chrome, Edge et Firefox). Le blocage de connexions loopback nʼest pas possible dans le pare-feu Windows. | 0 | S. O. | 0 : désactivé<br>1 : activé |
+| LOGGING_ENABLED | Lorsque cette option est activée, elle permet de configurer les logs de fichiers. Ces derniers sont stockés dans le répertoire de lʼinstallation, dans le dossier des logs. | 0 | `--enableFileLogging` | 0 : désactivé<br>1 : activé |
+| LOGGING_VERBOSITY | Configure la verbosité de lʼenregistrement de logs pour le programme. Ceci impacte les logs de console et de fichiers. | Ceci impacte les logs de console et de fichiers. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv` : debugging |
+| LOGGING_MAXDAYS | La durée en jours pendant laquelle les logs sont conservés sur le système avant leur suppression. Il peut sʼagir de nʼimporte quel chiffre si lʼinstallation nʼest pas surveillée. | 7 | `--logFileMaxDays` | Nombre entier |
+| WORKERCONFIG_FILEPATH | Ceci doit être remplacé par le chemin vers votre fichier de configuration JSON du worker de lʼemplacement privé Synthetics. Placez ce chemin entre guillemets sʼil contient des espaces. | <None> | `--config` | Chaîne |
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Configurer des sondes d'activité et de disponibilité
@@ -695,15 +795,26 @@ livenessProbe:
 
 {{< /tabs >}}
 
+### Mettre à niveau une image dʼemplacement privé
+
+Pour mettre à niveau un emplacement privé existant, cliquez sur lʼicône **Gear** dans le volet latéral de lʼemplacement privé et cliquez sur **Installation instructions**.
+
+{{< img src="synthetics/private_locations/pl_edit_config.png" alt="Accéder au workflow de configuration pour un emplacement privé" style="width:90%;" >}}
+
+Exécutez ensuite la [commande de configuration correspondant à votre environnement](#installer-votre-emplacement-privé
+) pour obtenir la dernière version de lʼimage de lʼemplacement privé. 
+
+**Remarque** : si vous utilisez `docker run` pour lancer votre image dʼemplacement privé et si vous avez déjà installé lʼimage dʼemplacement privé à lʼaide du tag `latest`, assurez-vous dʼajouter le tag `--pull=always` to the `docker run` command to make sure the newest version is pulled rather than relying on the cached version of the image that may exist locally with the same `latest`.
+
 ### Tester votre endpoint interne
 
-Lorsqu'au moins un conteneur d'emplacement privé a commencé à envoyer des données à Datadog, le statut de l'emplacement privé devient vert :
+Lorsqu'au moins un worker d'emplacement privé a commencé à envoyer des données à Datadog, le statut de l'emplacement privé devient vert :
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Envoi de données par l'emplacement privé" style="width:90%;">}}
 
-Le statut de santé `REPORTING` s'affiche également dans la liste Private Locations de la page **Settings** :
+Le statut de santé `REPORTING` et un statut de monitor associé s'affiche dans la liste Private Locations de la page **Settings**.
 
-{{< img src="synthetics/private_locations/pl_monitoring_table_reporting.png" alt="Santé de l'emplacement privé" style="width:95%;">}}
+{{< img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Statut de santé et de monitor de lʼemplacement privé" style="width:100%;">}}
 
 Commencez à tester votre premier endpoint interne en lançant un test rapide dessus. Vérifiez que vous obtenez la réponse attendue :
 
@@ -721,9 +832,9 @@ Utilisez vos emplacements privés de la même manière que les emplacements gér
 
 ## Redimensionner votre emplacement privé
 
-Étant donné que vous pouvez exécuter plusieurs conteneurs pour un seul emplacement privé avec un seul fichier de configuration, vous pouvez procéder à un **scaling horizontal** de vos emplacements privés en y ajoutant ou en supprimant des workers. Lorsque vous effectuez cette opération, assurez-vous de définir un paramètre `concurrency` et d'attribuer des ressources de worker qui conviennent aux types et au nombre de tests que vous souhaitez que votre emplacement privé exécute.
+Étant donné que vous pouvez exécuter plusieurs workers pour un seul emplacement privé avec un seul fichier de configuration, vous pouvez procéder à un **scaling horizontal** de vos emplacements privés en y ajoutant ou en supprimant des workers. Lorsque vous effectuez cette opération, assurez-vous de définir un paramètre `concurrency` et d'attribuer des ressources de worker qui conviennent aux types et au nombre de tests que vous souhaitez que votre emplacement privé exécute.
 
-Vous pouvez également procéder à un **scaling vertical** de vos emplacements privés en augmentant la charge que les conteneurs de vos emplacements privés peuvent gérer. Là encore, vous devez utiliser le paramètre `concurrency` pour ajuster le nombre maximum de tests que vos workers sont autorisés à exécuter et mettre à jour les ressources attribuées à vos workers.
+Vous pouvez également procéder à un **scaling vertical** de vos emplacements privés en augmentant la charge que les workers de vos emplacements privés peuvent gérer. Là encore, vous devez utiliser le paramètre `concurrency` pour ajuster le nombre maximum de tests que vos workers sont autorisés à exécuter et mettre à jour les ressources attribuées à vos workers.
 
 Pour en savoir plus, consultez la section [Dimensionner vos emplacements privés][18].
 
@@ -735,7 +846,7 @@ La quantité de ressources allouées initialement doit être cohérente avec le 
 
 Pour en savoir plus, consultez la section [Surveillance des emplacements privés][19].
 
-## Autorisations
+## Aide
 
 Par défaut, seuls les utilisateurs disposant du rôle Admin Datadog peuvent créer des emplacements, les supprimer et consulter les directives d'installation connexes.
 

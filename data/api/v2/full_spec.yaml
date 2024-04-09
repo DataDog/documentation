@@ -1346,11 +1346,10 @@ components:
       - type
       type: object
     AuthNMappingCreateRelationships:
-      description: Relationship of AuthN Mapping create object to Role.
-      properties:
-        role:
-          $ref: '#/components/schemas/RelationshipToRole'
-      type: object
+      description: Relationship of AuthN Mapping create object to a Role or Team.
+      oneOf:
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToRole'
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToTeam'
     AuthNMappingCreateRequest:
       description: Request for creating an AuthN Mapping.
       properties:
@@ -1364,6 +1363,23 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SAMLAssertionAttribute'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/AuthNMappingTeam'
+    AuthNMappingRelationshipToRole:
+      description: Relationship of AuthN Mapping to a Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      required:
+      - role
+      type: object
+    AuthNMappingRelationshipToTeam:
+      description: Relationship of AuthN Mapping to a Team.
+      properties:
+        team:
+          $ref: '#/components/schemas/RelationshipToTeam'
+      required:
+      - team
+      type: object
     AuthNMappingRelationships:
       description: All relationships associated with AuthN Mapping.
       properties:
@@ -1371,6 +1387,8 @@ components:
           $ref: '#/components/schemas/RelationshipToRole'
         saml_assertion_attribute:
           $ref: '#/components/schemas/RelationshipToSAMLAssertionAttribute'
+        team:
+          $ref: '#/components/schemas/RelationshipToTeam'
       type: object
     AuthNMappingResponse:
       description: AuthN Mapping response from the API.
@@ -1382,6 +1400,60 @@ components:
           items:
             $ref: '#/components/schemas/AuthNMappingIncluded'
           type: array
+      type: object
+    AuthNMappingTeam:
+      description: Team.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingTeamAttributes'
+        id:
+          description: The ID of the Team.
+          example: f9bb8444-af7f-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
+      type: object
+    AuthNMappingTeamAttributes:
+      description: Team attributes.
+      properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
+        handle:
+          description: The team's identifier
+          example: example-team
+          maxLength: 195
+          type: string
+        link_count:
+          description: The number of links belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        name:
+          description: The name of the team
+          example: Example Team
+          maxLength: 200
+          type: string
+        summary:
+          description: A brief summary of the team, derived from the `description`
+          maxLength: 120
+          nullable: true
+          type: string
+        user_count:
+          description: The number of users belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
       type: object
     AuthNMappingUpdateAttributes:
       description: Key/Value pair of attributes used for update request.
@@ -1415,11 +1487,10 @@ components:
       - type
       type: object
     AuthNMappingUpdateRelationships:
-      description: Relationship of AuthN Mapping update object to Role.
-      properties:
-        role:
-          $ref: '#/components/schemas/RelationshipToRole'
-      type: object
+      description: Relationship of AuthN Mapping update object to a Role or Team.
+      oneOf:
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToRole'
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToTeam'
     AuthNMappingUpdateRequest:
       description: Request to update an AuthN Mapping.
       properties:
@@ -5906,7 +5977,7 @@ components:
       example: custom_destination
       type: string
       x-enum-varnames:
-      - custom_destination
+      - CUSTOM_DESTINATION
     CustomDestinationUpdateRequest:
       description: The custom destination.
       properties:
@@ -6001,7 +6072,7 @@ components:
           type: string
         finished_at:
           description: Unix timestamp in nanoseconds when the deployment finished.
-            It should not be older than 3 hours.
+            It should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -12478,7 +12549,7 @@ components:
       properties:
         interval:
           description: If the type of the metric is rate or count, define the corresponding
-            interval.
+            interval in seconds.
           example: 20
           format: int64
           type: integer
@@ -15703,6 +15774,22 @@ components:
       - id
       - type
       type: object
+    RelationshipToTeam:
+      description: Relationship to team.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToTeamData'
+      type: object
+    RelationshipToTeamData:
+      description: Relationship to Team object.
+      properties:
+        id:
+          description: The unique identifier of the team.
+          example: f9bb8444-af7f-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
+      type: object
     RelationshipToTeamLinkData:
       description: Relationship between a link and a team
       properties:
@@ -17489,7 +17576,8 @@ components:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -17737,7 +17825,8 @@ components:
           type: array
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -17839,7 +17928,8 @@ components:
           type: integer
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -18118,7 +18208,8 @@ components:
           type: array
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -18245,7 +18336,8 @@ components:
           type: integer
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -21950,6 +22042,7 @@ components:
             If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
+          nullable: true
           type: array
       type: object
     TimeseriesResponseSeriesList:
@@ -22527,6 +22620,11 @@ components:
           description: Team memberships response data
           items:
             $ref: '#/components/schemas/UserTeam'
+          type: array
+        included:
+          description: Resources related to the team memberships
+          items:
+            $ref: '#/components/schemas/UserTeamIncluded'
           type: array
         links:
           $ref: '#/components/schemas/TeamsResponseLinks'
@@ -30541,8 +30639,8 @@ paths:
         type: unsafe
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
-      description: List tags and aggregations that are actively queried on dashboards
-        and monitors for a given metric name.
+      description: List tags and aggregations that are actively queried on dashboards,
+        notebooks, monitors, and the Metrics Explorer for a given metric name.
       operationId: ListActiveMetricConfigurations
       parameters:
       - $ref: '#/components/parameters/MetricName'
@@ -34245,6 +34343,37 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/validation:
+    post:
+      description: Validate a detection rule.
+      operationId: ValidateSecurityMonitoringRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        required: true
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Validate a detection rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}:
     delete:
       description: Delete an existing rule. Default rules cannot be deleted.
@@ -34422,7 +34551,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 9
+      x-menu-order: 10
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -34466,7 +34595,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -36987,10 +37116,11 @@ paths:
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/usage/application_security:
     get:
+      deprecated: true
       description: 'Get hourly usage for application security .
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageApplicationSecurityMonitoring
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -37403,10 +37533,11 @@ paths:
         type: safe
   /api/v2/usage/lambda_traced_invocations:
     get:
+      deprecated: true
       description: 'Get hourly usage for Lambda traced invocations.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated.. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageLambdaTracedInvocations
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -37465,10 +37596,11 @@ paths:
         type: safe
   /api/v2/usage/observability_pipelines:
     get:
+      deprecated: true
       description: 'Get hourly usage for observability pipelines.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
       operationId: GetUsageObservabilityPipelines
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -38247,6 +38379,10 @@ tags:
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
 - description: 'Custom Destinations forward all the logs ingested to an external destination.
+
+
+    **Note**: Log forwarding is not available for the Government (US1-FED) site. Contact
+    your account representative for more information.
 
 
     See the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)

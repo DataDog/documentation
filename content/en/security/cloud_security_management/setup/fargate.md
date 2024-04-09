@@ -20,8 +20,8 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 
 ### Images
 
-* cws-instrumentation: datadog/cws-instrumentation-dev:cws-instrumentation-beta
-* Datadog-agent: datadog/agent:7.52.0-rc.4
+* cws-instrumentation: datadog/cws-instrumentation:latest
+* Datadog-agent: datadog/agent:latest
 
 ## Installation
 
@@ -42,13 +42,14 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     "cpu": "256",
     "memory": "512",
     "networkMode": "awsvpc",
+    "pidMode": "task",
     "requiresCompatibilities": [
         "FARGATE"
     ],
     "containerDefinitions": [
         {
             "name": "cws-instrumentation-init",
-            "image": "datadog/cws-instrumentation-dev:cws-instrumentation-beta",
+            "image": "datadog/cws-instrumentation:latest",
             "essential": false,
             "user": "0",
             "command": [
@@ -187,7 +188,7 @@ spec:
    spec:
      initContainers:
      - name: cws-instrumentation-init
-       image: datadog/cws-instrumentation-dev:cws-instrumentation-beta
+       image: datadog/cws-instrumentation:latest
        command:
          - "/cws-instrumentation"
          - "setup"
@@ -230,6 +231,7 @@ spec:
                fieldPath: spec.nodeName
      volumes:
        - name: cws-instrumentation-volume
+     shareProcessNamespace: true
 {{< /code-block >}}
 
 ## Verify that the Agent is sending events to CSM
