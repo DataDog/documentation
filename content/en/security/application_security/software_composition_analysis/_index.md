@@ -63,13 +63,17 @@ Datadog SCA leverages two techniques to analyze your services:
 
 Combining both techniques monitors open source libraries end-to-end, from the code repository commit (static point of view), to the applications running in production (runtime point of view).
 
-To switch to the code repository commit point of view, select **Static**. The static view shows vulnerabilities from the _source code_ in your repositories. To switch to the _real-time_ point of view for the applications already running, select **Runtime**. The runtime view is the live view of the services monitored by Datadog.
+To switch to the code repository commit point of view, select **Static**. The static view shows vulnerabilities from the _source code_ in your repositories. 
 
-{{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities_2.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
+To switch to the _real-time_ point of view for the applications already running, select **Runtime**. The runtime view is the live view of the services monitored by Datadog.
 
-Select a specific vulnerability to see its details, including the services are affected, severity breakdown score, and recommended remediation steps. On the Details Explorer for the vulnerability, you can also view impacted infrastructure to gain better insights to your overall attack exposure.
+{{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
-Within ASM, the severity of a vulnerability is modified from the base score to account for the presence of attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.
+Select a specific vulnerability to see its details, including the affected services, severity breakdown score, and recommended remediation steps. 
+
+On the Details Explorer for a vulnerability, you can view impacted infrastructure. This view gives you better insights to your overall attack exposure.
+
+Within ASM, the vulnerability severity base score is modified using existing attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.
 
 The adjusted vulnerability score includes the full context of each service:
 
@@ -83,7 +87,7 @@ See [Getting Started with Software Composition Analysis][7] for more information
 
 ## Remediation
 
-The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities that enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. It also includes a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
+The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities. Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. They also include a collection of links and references to websites or information sources to help you understand the context behind each vulnerability.
 
 **Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][10] documentation.
 
@@ -98,6 +102,7 @@ Code Analysis is in public beta.
 Software Composition Analysis contains additional capabilities to allow you to scan for vulnerabilities in your CI pipelines by using [Code Analysis][9]. With SCA for Code Analysis, you can identify vulnerable open source libraries that have been imported into your codebase.
 
 To configure vulnerabilities in your CI pipelines, navigate to [Security -> Configuration -> Application Security -> Setup][12].
+
 Click **Get Started** to enable Software Composition Analysis for static analysis in source code, and select and configure your CI/CD provider.
 
 See [Getting Started with Software Composition Analysis][7] for more detailed instructions.

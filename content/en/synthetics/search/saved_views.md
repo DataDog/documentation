@@ -15,9 +15,9 @@ You can also use saved views to share common queries and configurations with you
 
 ## Create a saved view
 
-To access your saved views, expand **> Views** to the left of **Synthetic Monitoring & Continuous Testing** in the [Synthetic Tests page][1]. To create a saved view, search through your Synthetic tests and click **+ Create a New Saved View**. 
+To access your saved views, expand **> Views** to the left of **Synthetic Monitoring & Continuous Testing** in the [Synthetic Tests page][1]. To create a saved view, search through your Synthetic tests and click **+ Save new view as**. 
 
-{{< img src="synthetics/search/create_a_new_saved_view.png" alt="Create a new saved view in the Synthetic Tests page" style="width:100%" >}}
+{{< img src="synthetics/search/create_a_new_saved_view_2.png" alt="Create a new saved view in the Synthetic Tests page" style="width:100%" >}}
 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Enter a name and click **Save** to create a saved view from the current content in the Synthetic Tests page.
 
@@ -35,9 +35,9 @@ You can:
 
 You can set a [saved view](#create-a-saved-view) to be your default landing page in the [Synthetic Tests page][2]. Default views are set per user and have no impact on your organization. 
 
-Temporarily override your default saved view by adding facets to your search query and clicking **Update your default view**. To create a new saved view, Click the **+ Create a New Saved View** button.
+Temporarily override your default saved view by adding facets to your search query and clicking **Update your default view**. To create a new saved view, Click the **+ Save new view as** button.
 
-{{< img src="synthetics/search/update_your_default_view.png" alt="Update your default view in the Synthetic Tests page" style="width:100%" >}}
+{{< img src="synthetics/search/update_your_default_view_2.png" alt="Update your default view in the Synthetic Tests page" style="width:100%" >}}
 
 In the default view entry in the **Views** panel, you can:
 

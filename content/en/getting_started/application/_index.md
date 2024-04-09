@@ -19,6 +19,10 @@ further_reading:
     text: 'DRUIDS, the design system that powers Datadog'
 ---
 
+{{< learning-center-callout header="Try Datadog Foundation in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Start these hands-on labs to get up to speed with services, logs, metrics, integrations, and dashboards.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 This page provides a high-level overview of capabilities available on the [Datadog site][1].

@@ -12,7 +12,7 @@ aliases:
   - /security/cloud_security_management/guide/jira
 products:
   - name: CSM Misconfigurations
-    url: /security/misconfigurations/
+    url: /security/cloud_security_management/misconfigurations/
     icon: cloud-security-management
   - name: CSM Identity Risks
     url: /security/cloud_security_management/identity_risks/
@@ -103,6 +103,6 @@ After you create the issue, a link to the Jira issue is displayed on the side pa
 
 [1]: /integrations/jira/
 [2]: /account_management/rbac/permissions/#cloud-security-platform
-[3]: /security/misconfigurations/
+[3]: /security/cloud_security_management/misconfigurations/
 [4]: /security/cloud_security_management/identity_risks/
 [5]: https://app.datadoghq.com/integrations/jira?search=jira
