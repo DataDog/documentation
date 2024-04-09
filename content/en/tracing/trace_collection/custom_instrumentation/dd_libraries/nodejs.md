@@ -158,7 +158,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace](https://datadoghq.dev/dd-trace-js/interfaces/scope.html
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Promises" %}}
