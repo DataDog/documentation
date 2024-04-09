@@ -8,15 +8,13 @@ categories:
 - log collection
 - network
 dependencies: []
-description: Recueillez une multitude de métriques GCP et visualisez vos instances
-  sur une host map.
+description: Recueillez une multitude de métriques GCP et visualisez vos instances sur une host map.
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_platform/
 draft: false
 further_reading:
 - link: https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/
   tag: Blog
-  text: Améliorez la conformité et la sécurité de votre environnement Google Cloud
-    avec Datadog
+  text: Améliorez la conformité et la sécurité de votre environnement Google Cloud avec Datadog
 - link: https://www.datadoghq.com/blog/google-cloud-vertex-ai-monitoring-datadog/
   tag: Blog
   text: Surveiller Google Cloud Vertex AI avec Datadog
@@ -39,8 +37,7 @@ kind: integration
 manifest_version: '1.0'
 name: google_cloud_platform
 public_title: Intégration Datadog/Google Cloud Platform
-short_description: Recueillez une multitude de métriques GCP et visualisez vos instances
-  sur une host map.
+short_description: Recueillez une multitude de métriques GCP et visualisez vos instances sur une host map.
 version: '1.0'
 ---
 
