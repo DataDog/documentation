@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-netapp-aiqum
 app_uuid: b96cf12b-48c7-473f-9aac-3f1132a98402
 assets:
@@ -26,13 +28,12 @@ assets:
 author:
   homepage: https://www.crestdatasys.com
   name: Crest Data Systems
-  sales_email: sales@crestdatasys.com
+  sales_email: datadog-sales@crestdatasys.com
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
-- マーケットプレイス
 - data store
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -59,19 +60,18 @@ public_title: NetApp AIQUM
 short_description: NetApp AIQUM クラスターのパフォーマンスと使用量の監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Data Store
-  - Category::Monitoring
+  - Category::Marketplace
   - Offering::Integration
   - Submitted Data Type::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: NetApp AIQUM クラスターのパフォーマンスと使用量の監視
   media:
@@ -119,13 +119,14 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
-- メール: datadog.integrations@crestdatasys.com
+- サポートメール: datadog.integrations@crestdatasys.com
+- 営業メール: datadog-sales@crestdatasys.com
 - Web サイト: [crestdatasys.com][3]
-
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.crestdatasys.com/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-aiqum" target="_blank">こちらをクリック</a>してください。

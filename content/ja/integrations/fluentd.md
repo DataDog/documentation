@@ -29,6 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+- metrics
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_on_public_website: true
@@ -36,25 +37,25 @@ draft: false
 git_integration_title: fluentd
 integration_id: fluentd
 integration_title: FluentD
-integration_version: 2.2.0
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: fluentd
-oauth: {}
 public_title: FluentD
 short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
   - Category::ログの収集
+  - Category::Metrics
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
   media: []
@@ -76,7 +77,7 @@ Fluentd からメトリクスを取得して、以下のことができます。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Fluentd チェックは [Datadog Agent][2] パッケージに含まれています。Fluentd サーバーに追加でインストールする必要はありません。
 
@@ -265,7 +266,7 @@ FluentD チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/fluentd/images/snapshot-fluentd.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-fluentd-datadog

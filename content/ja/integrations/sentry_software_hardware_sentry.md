@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: hardware-sentry
 app_uuid: daade024-2095-4a73-afe5-35afbe9e2b12
 assets:
@@ -7,6 +9,7 @@ assets:
     Hardware Sentry - Main: assets/dashboards/main.json
     Hardware Sentry - Site: assets/dashboards/site.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -16,6 +19,7 @@ assets:
       prefix: hardware_sentry.
     service_checks:
       metadata_path: service_checks.json
+    source_type_id: 10286
     source_type_name: Hardware Sentry
   logs: {}
   monitors:
@@ -47,8 +51,9 @@ author:
   support_email: support@sentrysoftware.com
   vendor_id: sentry-software
 categories:
-- モニタリング
+- コスト管理
 - マーケットプレイス
+- ネットワーク
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -62,7 +67,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: sentry_software_hardware_sentry
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -81,11 +85,14 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cost Management
+  - Category::Marketplace
+  - Category::Network
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Marketplace
-  - Offering::Integration
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: サーバー、ネットワーク、ストレージのハードウェアとその二酸化炭素排出量の監視
   media:
@@ -115,20 +122,21 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
-**[Hardware Sentry](https://www.sentrysoftware.com/products/hardware-sentry.html)** は、データセンター内のサーバー、ネットワークスイッチ、ストレージシステムのハードウェアコンポーネントの監視に特化した Agent で、Datadog 用のダッシュボードやモニターのコレクションとパッケージ化されています。
+**[Hardware Sentry][1]** は、データセンター内のサーバー、ネットワークスイッチ、ストレージシステムのハードウェアコンポーネントの監視に特化した Agent で、Datadog 用のダッシュボードやモニターのコレクションとパッケージ化されています。
 
 ### ハードウェアの監視
 
 **Hardware Sentry** は、サーバー、ネットワークスイッチ、ストレージシステムの物理的な健全性を報告することができる監視 Agent です。定期的にメトリクスを収集し、各プロセッサ、コントローラ、ディスク、電源の状態、温度、ファンの回転数、ネットワークカードのリンク状態や速度などを報告します。
 
 * **リモート**: SNMP、WBEM、WMI、SSH、IPMI、REST API などを通じて、1 つの Agent で数百のシステムを監視することができます。
-* **マルチプラットフォーム**: 100 以上のプラットフォームを 250 以上のコネクターでサポート済み (Cisco、Dell EMC、HP、Huawei、IBM、Lenovo、NetApp、Oracle、Pure など。[全リストを見る](https://www.sentrysoftware.com/docs/hws-doc/latest/platform-requirements.html))
+* **マルチプラットフォーム**: 100 以上のプラットフォームを 250 以上のコネクターでサポート済み (Cisco、Dell EMC、HP、Huawei、IBM、Lenovo、NetApp、Oracle、Pure など。対応プラットフォームの全リストは、[Hardware Sentry ドキュメント][2]を参照してください。
 * **シンプル**: システムの監視は、ホスト名または IP アドレスと認証情報を指定する最小限の構成作業で済みます。**Hardware Sentry** は、利用可能なインスツルメンテーションを自動的に検出し、すぐに監視を開始します。
-* **正規化**: 必要な情報はすべて、Datadog の標準化されたメトリクスを通じて報告されます。例えば、同じ `hw.temperature` メトリクスは、NetApp ファイラー、HP BladeSystem、Windows を実行している Dell PowerEdge、Linux を実行している Cisco UCS、またはその他のプラットフォームの温度を表すために使用されています。これらのメトリクスは、[OpenTelemetry のセマンティック規約] (https://opentelemetry.io/docs/reference/specification/metrics/semantic_conventions/hardware-metrics/) に従っています。
+* **正規化**: 必要な情報はすべて、Datadog の標準化されたメトリクスを通じて報告されます。例えば、同じ `hw.temperature` メトリクスは、NetApp ファイラー、HP BladeSystem、Windows を実行している Dell PowerEdge、Linux を実行している Cisco UCS、またはその他のプラットフォームの温度を表すために使用されています。これらのメトリクスは、[OpenTelemetry のセマンティック規約][3]に従っています。
 
 **Hardware Sentry** は、プロセッサ、メモリモジュール、ディスク、ネットワークカード、コントローラ、電源、ファン、温度センサーなどの障害を検出・予測するための定義済みモニターを搭載しています。
 
@@ -138,9 +146,9 @@ tile:
 
 **100% ソフトウェア開発**: 電力センサーを内蔵していないシステムでも、スマート PDU は不要です。
 
-### ダッシュボード  
+### ライブラリ
 
-このインテグレーションには、**[Hardware Sentry OpenTelemetry Collector](https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html)** が収集したメトリクスを活用するダッシュボードのセットが付属しています。
+このインテグレーションには、**[Hardware Sentry OpenTelemetry Collector][4]** が収集したメトリクスを活用するダッシュボードのセットが付属しています。
 
 | ダッシュボード   | 説明 |
 |---|---|
@@ -148,15 +156,35 @@ tile:
 | Hardware Sentry - サイト | 1 つの*サイト* (データセンターまたはサーバールーム) とその監視対象*ホスト*に関連するメトリクス |
 | Hardware Sentry - ホスト | 1 つの*ホスト*とその内部デバイスに関連するメトリクス |
 
-## サポート
+## Agent
 
-Datadog Marketplace を通じた **Hardware Sentry** のサブスクリプションにより、[Sentry Desk] (https://www.sentrysoftware.com/desk) が提供するすべてのサービスにアクセスすることができるようになります。
+Datadog Marketplace を通じた **Hardware Sentry** のサブスクリプションにより、[Sentry Desk][12] が提供するすべてのサービスにアクセスすることができるようになります。
 
-* [Jira Service Management](https://sentrydesk.atlassian.net/servicedesk/customer/portals) による技術サポート
+* [Jira Service Management][13] によるテクニカルサポート
 * ナレッジベース
 * パッチ
 
 ご契約後、お客様の組織に *Sentry Desk* のアカウント管理のための招待状が届きます。
 
+### その他の参考資料:
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace で Hardware Sentry の製品を使って二酸化炭素排出量を追跡する][14]
+
+[1]: https://www.sentrysoftware.com/products/hardware-sentry.html
+[2]: https://www.sentrysoftware.com/docs/hws-doc/latest/platform-requirements.html
+[3]: https://opentelemetry.io/docs/reference/specification/metrics/semantic_conventions/hardware-metrics/
+[4]: https://www.sentrysoftware.com/products/hardware-sentry-opentelemetry-collector.html
+[5]: https://www.sentrysoftware.com/docs/hws-doc/latest/integration/datadog.html
+[6]: https://www.sentrysoftware.com/downloads/products-for-opentelemetry.html
+[7]: https://www.sentrysoftware.com/products/hardware-sentry.html
+[8]: https://www.sentrysoftware.com/docs/hws-doc/latest/install.html
+[9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
+[10]: https://www.sentrysoftware.com/docs/hws-doc/latest/configuration/configure-agent.html
+[11]: https://www.sentrysoftware.com/docs/hws-otel-collector/latest/install.html
+[12]: https://www.sentrysoftware.com/desk
+[13]: https://sentrydesk.atlassian.net/servicedesk/customer/portals
+[14]: https://www.datadoghq.com/blog/sustainability-monitoring-carbon-footprint-hardware-sentry-datadog/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/hardware-sentry" target="_blank">こちらをクリック</a>してください。

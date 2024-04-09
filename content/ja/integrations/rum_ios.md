@@ -7,12 +7,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- ネットワーク
-- 例外
 - メトリクス
-- アラート設定
-- 問題追跡
+- モバイル
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_ios/README.md
 display_on_public_website: true
@@ -25,7 +22,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: rum_ios
-oauth: {}
 public_title: iOS
 short_description: Datadog RUM を使用した iOS アプリケーションの監視とメトリクス生成
 supported_os:
@@ -33,13 +29,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::iOS
-  - Category::Monitoring
-  - Category::Network
-  - Category::Exceptions
   - Category::Metrics
-  - Category::Alerting
-  - Category::Issue Tracking
+  - Category::Mobile
+  - Category::Tracing
+  - Supported OS::iOS
   configuration: README.md#Setup
   description: Datadog RUM を使用した iOS アプリケーションの監視とメトリクス生成
   media: []
@@ -58,7 +51,7 @@ Datadog [iOS インテグレーション][1]を利用することで、問題の
 - アプリケーションの応答性向上、サービスレベルインジケータ (SLI) の設定、すぐに使えるダッシュボード、リアルタイムメトリクス、難読化されたクラッシュレポートによる問題の診断
 - 大量のアプリケーションエラーを管理可能な固有の問題群にインテリジェントにグループ化
 
-ユーザーエクスペリエンスがビジネスに与える影響を、次のように関連付けます。
+ユーザーエクスペリエンスがビジネスに与える影響を関連付けます。
 
 - ビジネス KPI を達成するために、デモグラフィック、バージョンリリース、または任意のカスタム属性による画面エンゲージメントなど、重要なモバイルユーザーエクスペリエンスデータを分析
 - すべてのユーザージャーニーを、ID、セルラーアクティビティ、リファーラル URL などのセッションイベントや属性のタイムラインと自動的に相関付け
@@ -78,42 +71,43 @@ iOS アプリケーションのエンドツーエンドの健全性を監視し�
 
 ### トレースの収集
 
-iOS アプリケーションのトレースを Datadog に送信し始めるには、[RUM とトレースの接続][3]をご覧ください。
+iOS アプリケーションのトレースを Datadog に送信し始めるには、[iOS トレース収集][3]をご覧ください。また、[RUM とトレースの接続][4]することもできます。
 
 ### ログの収集
 
-iOS アプリケーションのログを Datadog に転送し始めるには、[iOS ログ収集][4]をご覧ください。
+iOS アプリケーションのログを Datadog に転送し始めるには、[iOS ログ収集][5]をご覧ください。
 
 ## 収集データ
 
 ### メトリクス
 
-iOS インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][5]を参照してください。
+iOS インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][6]を参照してください。
 
 ### イベント
 
-イベントや属性の詳細については、[RUM iOS データ収集][6]を参照してください。
+イベントや属性の詳細については、[RUM iOS データ収集][7]を参照してください。
 
 ### サービスチェック
 
-Android インテグレーションには、サービスのチェック機能は含まれません。
+iOS インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料 
 
 お役に立つドキュメント、リンクや記事:
 
-- [iOS と tvOS のモニタリング][8]
+- [iOS と tvOS のモニタリング][9]
 
 
 [1]: https://app.datadoghq.com/integrations/rum-ios
 [2]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/?tabs=swift#setup
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces?tab=iosrum#setup-rum
-[4]: https://docs.datadoghq.com/ja/logs/log_collection/ios/
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/data_collected/
-[7]: https://docs.datadoghq.com/ja/help/
-[8]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/
+[3]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ios/?tab=cocoapods
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tab=iosrum#setup-rum
+[5]: https://docs.datadoghq.com/ja/logs/log_collection/ios/
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[7]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/data_collected/
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/

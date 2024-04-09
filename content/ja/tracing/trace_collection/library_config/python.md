@@ -8,8 +8,11 @@ further_reading:
 - link: https://ddtrace.readthedocs.io/en/stable/
   tag: Pypi
   text: API ドキュメント
-- link: tracing/glossary/
+- link: /tracing/trace_collection/trace_context_propagation/python/
   tag: ドキュメント
+  text: トレースコンテキストの伝搬
+- link: tracing/glossary/
+  tag: Documentation
   text: サービス、リソース、トレースを調査する
 - link: tracing/
   tag: 高度な使用方法
@@ -39,12 +42,12 @@ type: multi-code-lang
 : このアプリケーションで使用するサービス名。値は、Web フレームワークのインテグレーション (例: Pylons、Flask、Django) 用のミドルウェアを設定する際にパススルーされます。Web インテグレーションを行わずにトレースする場合は、コード内でサービス名を設定する ([Django ドキュメントで例をご確認ください][4]) ことをお勧めします。バージョン 0.38 以降で利用可能。
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **デフォルト**: `Datadog`<br>
+: **デフォルト**: `tracecontext,Datadog`<br>
 トレーシングヘッダを注入するときに使用する伝搬スタイル。例えば、`DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` を使用すると、 Datadog と B3 形式のヘッダを注入することができます。
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **デフォルト**: `DD_TRACE_PROPAGATION_STYLE_INJECT` の値 (`Datadog`)<br>
-トレーシングヘッダを抽出する際に使用する伝搬スタイル。複数の値が与えられた場合、最初に見つかったヘッダのマッチングを使用します。マッチングの順番は静的なもので、与えられた値の順番とは関係ありません。例えば、`DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` は `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,B3` と同じ挙動となります。
+: **デフォルト**: `DD_TRACE_PROPAGATION_STYLE_INJECT` の値 (`tracecontext,Datadog`)<br>
+トレーシングヘッダを抽出する際に使用する伝搬スタイル。複数の値が与えられた場合、最初に見つかったヘッダのマッチングを使用します。マッチングの順番は、与えられた値の順番に基づきます。例えば、`DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` は最初に `B3` ヘッダーを探し、それが利用できない場合にのみ `Datadog` ヘッダーを使用します。
 
 `DD_SERVICE_MAPPING`
 : サービス名のマッピングを定義し、トレース内におけるサービスの名前変更を許可します (例: `postgres:postgresql,defaultdb:postgresql`)。バージョン 0.47 以降で利用可能。
@@ -71,7 +74,7 @@ type: multi-code-lang
 
 
 `DD_TAGS`
-: すべてのスパンとプロファイルに追加されるデフォルトタグのリスト (例: `layer:api,team:intake`)。バージョン 0.38 以降で利用可能。
+: すべてのスパンとプロファイルに追加されるデフォルトタグのリスト (例: `layer:api,team:intake,key:value`)。バージョン 0.38 以降で利用可能。
 
 `DD_TRACE_HEADER_TAGS`
 : **デフォルト**: `null`<br>
@@ -109,7 +112,7 @@ Web フレームワークとライブラリインスツルメンテーション�
 
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

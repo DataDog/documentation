@@ -26,6 +26,7 @@ categories:
 - 構成 & デプロイ
 - コンテナ
 - コスト管理
+- kubernetes
 - orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/stormforge/README.md
@@ -39,7 +40,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: stormforge
-oauth: {}
 public_title: StormForge
 short_description: 機械学習を用いた Kubernetes リソースのリアルタイム最適化
 supported_os:
@@ -47,13 +47,14 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Containers
   - Category::Cost Management
+  - Category::Kubernetes
   - Category::Orchestration
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: 機械学習を用いた Kubernetes リソースのリアルタイム最適化
   media:
@@ -118,7 +119,7 @@ StormForge インテグレーションには、サービスのチェック機能
 [1]: https://www.stormforge.io/how-stormforge-optimize-live-works/
 [2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#application-keys
-[4]: https://docs.stormforge.io/optimize-live/install/#datadog-metrics
+[4]: https://docs.stormforge.io/optimize-live/getting-started/install/#datadog-metric-provider
 [5]: https://app.stormforge.io
 [6]: https://docs.stormforge.io/optimize-live/
 [7]: https://github.com/DataDog/integrations-extras/blob/master/stormforge/metadata.csv

@@ -1,5 +1,5 @@
 ---
-description: ブラウザテストのステップでメールとその内容を検証
+description: ブラウザテストのステップでメールとその内容を検証します。
 further_reading:
 - link: /synthetics/browser_tests/actions
   tag: Documentation
@@ -8,7 +8,7 @@ further_reading:
   tag: Documentation
   text: ステップに高度なオプションを構成する
 kind: documentation
-title: ブラウザテストのメール検証
+title: ブラウザテストでメール検証を使用する
 ---
 
 ## 概要
@@ -24,7 +24,7 @@ Web サイトで優れたユーザー体験を維持するためには、アプ�
 1. **Variables** をクリックし、ドロップダウンメニューから **Email** を選択します。
 2. **Add Variable** をクリックすると、記録を開始するときに使用できる変数になります。
 
-{{< img src="synthetics/guide/email-validation/adding-variable.mp4" alt="メール変数の作成" video="true"  width="100%">}}
+{{< img src="synthetics/guide/email-validation/adding-variable.mp4" alt="メール変数の作成" video="true" width="100%">}}
 
 メール変数は、テストの実行ごとに Datadog が管理する一意のメールボックスを生成するため、ブラウザテストを競合なく実行することが可能です。
 
@@ -34,7 +34,7 @@ Web サイトで優れたユーザー体験を維持するためには、アプ�
 
 **Start Recording** をクリックし、メールがトリガーされるまでのすべてのステップをメール変数で記録します。変数の手のアイコンをクリックすると、フォームやフィールドのテキスト入力にその値が挿入されます。
 
-{{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="ステップを記録" video="true"  width="100%">}}
+{{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="ステップを記録" video="true" width="100%">}}
 
 フォームを完成させるためのステップを記録した後、**Sign Up** ボタンをクリックして、メール通知をトリガーします。この記録セッションに合わせたメールが、Datadog のメールボックス (例: `838-n3q-q2y.6238933596@synthetics.dtdg.co`) に送信されます。
 
@@ -42,7 +42,7 @@ Web サイトで優れたユーザー体験を維持するためには、アプ�
 
 メールが送信されたことを確認するには、**Assertion** をクリックし、**Test that an email was received** を選択します。メールの内容が特定のガイドラインに従っていることを確認するために、件名と本文に追加の検証を追加することができます。
 
-{{< img src="synthetics/guide/email-validation/assertion-step.mp4" alt="アサーションを追加" video="true"  width="100%">}}
+{{< img src="synthetics/guide/email-validation/assertion-step.mp4" alt="アサーションを追加" video="true" width="100%">}}
 
 この例では、メールの件名が `Welcome to Shopist!` で、本文に `Your verification code is...` という文があり、検証コードが `\d{1,6}` 正規表現パターンに一致する場合にアサーションが成功します。
 
@@ -57,7 +57,7 @@ Web サイトで優れたユーザー体験を維持するためには、アプ�
 
 この例では、ブラウザテストは `Welcome to Shopist` のメールを調べ、`Verify your email by clicking here` のリンクをクリックし、ユーザー登録メカニズムが期待通りに動作していることを確認します。
 
-{{< img src="synthetics/guide/email-validation/navigation-step.mp4" alt="ナビゲーションステップの追加" video="true"  width="100%">}}
+{{< img src="synthetics/guide/email-validation/navigation-step.mp4" alt="ナビゲーションステップの追加" video="true" width="100%">}}
 
 ブラウザテストの最終ステップとして、`div` コンテンツが適切なアカウント検証をトリガーすることを確認するためのアサーションを作成します。例えば、このページには `Your account is now verified` が含まれています。
 

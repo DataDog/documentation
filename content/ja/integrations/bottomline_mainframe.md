@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: bottomline-mainframe
 app_uuid: 249f45de-03cc-45f3-8a57-c40ce33e62a3
 assets: {}
@@ -9,9 +11,8 @@ author:
   support_email: partner.cfrm@bottomline.com
   vendor_id: bottomline
 categories:
+- mainframe
 - マーケットプレイス
-- クラウド
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -25,7 +26,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: bottomline_mainframe
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -43,12 +43,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Mainframe
+  - Category::Marketplace
+  - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
-  - Offering::Software License
   configuration: README.md#Setup
   description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
   media:

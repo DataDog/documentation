@@ -10,7 +10,7 @@
         ]
       ],
       "tags": [
-        "test:ExampleSubmitdeflatemetricsreturnsPayloadacceptedresponse"
+        "test:ExampleMetric"
       ]
     }
   ]

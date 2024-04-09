@@ -1,10 +1,13 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: fairwinds-insights
 app_uuid: a488d774-fd45-4765-b947-e48792c6ab32
 assets:
   dashboards:
     Insights Overview: assets/dashboards/overview.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +17,7 @@ assets:
       prefix: fairwinds.insights.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10112
     source_type_name: Fairwinds Insights
 author:
   homepage: https://www.fairwinds.com
@@ -22,10 +26,12 @@ author:
   support_email: insights@fairwinds.com
   vendor_id: fairwinds
 categories:
-- マーケットプレイス
-- containers
+- コンテナ
 - コスト管理
-- security
+- kubernetes
+- マーケットプレイス
+- プロビジョニング
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +45,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: fairwinds_insights
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -53,20 +58,24 @@ public_title: Fairwinds Insights
 short_description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Containers
   - Category::Cost Management
+  - Category::Kubernetes
+  - Category::Marketplace
+  - Category::Provisioning
   - Category::Security
-  - Offering::Software License
   - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
   media:
@@ -105,6 +114,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -132,29 +142,28 @@ tile:
 * コンテナ内の既知の脆弱性を監視
 * Kubernetes のデプロイメントコンフィギュレーションを確認
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Fairwinds Insights インサイトのアクションアイテムは、タグと共に Datadog に表示されるため、必要な分析を行うことができます。
 
-### サービスのチェック
+### ヘルプ
 
 Fairwinds Insights にサービスのチェックは含まれません。
 
-### イベント
+### ヘルプ
 
 * 最初のイベントは、インテグレーションのセットアップを完了すると表示されます
 * Fairwinds Insights の新しいアクションアイテムごとのイベント
 * Fairwinds Insights のイベント修正済みアクションアイテムごとのイベント
 
-## サポート
+## Agent
 
 サポートまたはリクエストをご希望の場合は、以下のチャンネルから Fairwinds にお問い合わせください。
 
-電話: +1 617-202-3659 メール: sales@fairwinds.com
-
-[こちら](https://insights.docs.fairwinds.com/)でドキュメントをご確認いただけます。セットアップ、インテグレーションのほか、Fairwinds Insights を最大限に活用するための実際の使用法などをご紹介しています。
+- 電話: +1 617-202-3659 
+- メール: [sales@fairwinds.com][2]
 
 ### よくある質問
 
@@ -185,13 +194,21 @@ Fairwinds Insights は、広く使用されているさまざまな素晴らし�
 * 古くなった Helm チャートの自動通知
 * カスタム Kubernetes ポリシーおよびコンフィギュレーションチェック
 
-[1]: https://insights.fairwinds.com
-
 ### 返金ポリシー
 
 Insights のキャンセルおよび返金ポリシー:
 
 Fairwinds Insights は月々の定額利用で提供されるため、お客様は Datadog マーケットプレイスのアカウントを使用していつでもご利用を中止することが可能です。定額利用を中止した場合、その時点で有効な月間利用期間の残りの分のみが請求されます。Insights では、すでにお支払いいただいた料金の返金はいたしかねます。
 
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace で Fairwinds Insights の製品を使って Kubernetes を監視する][2]
+- [Fairwinds Insights のドキュメント][3]
+
+[1]: https://insights.fairwinds.com
+[2]: https://www.datadoghq.com/blog/fairwinds-insights-datadog-marketplace/
+[3]: https://insights.docs.fairwinds.com/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/fairwinds-insights" target="_blank">こちらをクリック</a>してください。

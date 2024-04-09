@@ -26,7 +26,7 @@ Ce plug-in Jenkins transmet automatiquement des métriques, des événements et 
 
 ### Installation
 
-_Ce plug-in nécessite [Jenkins 2.303.3][2]._
+_Ce plug-in nécessite [Jenkins 2.346.1][2]._
 
 _Pour les anciennes versions de Jenkins (c'est-à-dire 1.632+), vous trouverez la version 1.2.0 du plug-in [ici](https://updates.jenkins.io/download/plugins/datadog/)._
 
@@ -44,12 +44,11 @@ Installez le plug-in depuis l'[Update Center][3] (disponible en accédant à `Ma
 
 Vous pouvez configurer votre plug-in de deux façons différentes pour transmettre des données à Datadog :
 
-* **CONFIGURATION RECOMMANDÉE** : en utilisant un Agent Datadog en tant que redirecteur entre Jenkins et Datadog.
+* En utilisant un Agent Datadog en tant que redirecteur entre Jenkins et Datadog (méthode recommandée).
   - Si vous utilisez un serveur DogStatsD à la place d'un Agent Datadog complet, seuls les événements et les métriques sont pris en charge.
   - Pour les données envoyées depuis un host externe, l'Agent Datadog exige la configuration suivante : `dogstatsd_non_local_traffic: true` et `apm_non_local_traffic: true`. Ces paramètres peuvent être configurés à l'aide du [fichier de configuration][17] `datadog.yaml`.
-* En envoyant directement les données à Datadog, via HTTP.
+* En envoyant directement les données à Datadog via HTTP.
   - L'implémentation du client HTTP utilisée dispose d'un délai d'expiration d'une minute. En cas de problème de connexion avec Datadog, cela peut ralentir votre instance Jenkins.
-  - Avec cette méthode, il n'est actuellement pas possible de recueillir des traces afin de les analyser avec la solution CI Visibility.
 
 Cette configuration peut être effectuée depuis [l'interface utilisateur du plug-in](#interface-utilisateur-du-plug-in) avec un [script Groovy](#script-groovy) ou à l'aide de [variables d'environnement](#variables-d-environnement).
 
@@ -64,7 +63,8 @@ Pour configurer votre plug-in Datadog, accédez à `Manage Jenkins -> Configure 
 3. Testez votre clé d'API Datadog à l'aide du bouton `Test Key` situé en dessous, sur ce même écran.
 4. (Facultatif) Saisissez le hostname du serveur Jenkins dans l'onglet Advanced afin de l'inclure dans les événements.
 5. (Facultatif) Saisissez votre [URL d'admission des logs Datadog][15] et sélectionnez Enable Log Collection dans l'onglet Advanced.
-6. Enregistrez votre configuration.
+6. (Facultatif) Sélectionnez l'option Enable CI Visibility. Vous avez également la possibilité de définir le nom de votre instance CI.
+7. Enregistrez votre configuration.
 
 ##### Transmission de données par l'Agent Datadog
 
@@ -73,7 +73,7 @@ Pour configurer votre plug-in Datadog, accédez à `Manage Jenkins -> Configure 
 3. (Facultatif) Saisissez le hostname du serveur Jenkins dans l'onglet Advanced afin de l'inclure dans les événements.
 4. (Facultatif) Spécifiez votre port de collecte des logs, configurez la [collecte de logs](#collecte-de-logs-avec-l-Agent) pour l'Agent Datadog, puis sélectionnez Enable Log Collection.
 5. (Facultatif) Saisissez votre port de collecte de traces et sélectionnez Enable Ci Visibility. Vous avez également la possibilité de définir le nom de votre instance CI.
-5. Enregistrez votre configuration.
+6. Enregistrez votre configuration.
 
 #### Script Groovy
 
@@ -141,7 +141,13 @@ Configurez votre plug-in Datadog avec des variables d'environnement à l'aide de
 1. Définissez la variable `DATADOG_JENKINS_PLUGIN_REPORT_WITH` sur `HTTP`.
 2. Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_API_URL`, qui indique l'endpoint de l'API Datadog (valeur par défaut : `https://api.datadoghq.com/api/`).
 3. Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_API_KEY`, qui indique votre [clé d'API Datadog][4].
-4. Vous pouvez choisir de définir la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL`, qui indique l'URL d'admission des logs Datadog (valeur par défaut : `https://http-intake.logs.datadoghq.com/v1/input/`).
+4. (Facultatif) Collecte de logs :
+  - Définissez la variable `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` sur `true` pour activer la collecte de logs (désactivée par défaut).
+  - Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL`, qui indique l'URL d'admission des logs Datadog (valeur par défaut : `https://http-intake.logs.datadoghq.com/v1/input/`).
+5. (Facultatif) CI Visibility (collecte de traces) :
+  - Définissez la variable `DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` sur `true` pour activer CI Visibility (désactivé par défaut).
+  - Définissez la variable `DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL`, qui spécifie l'URL d'admission du Webhook Datadog (valeur par défaut : `https://webhook-intake.datadoghq.com/api/v2/webhook/`).
+  - Définissez la variable `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME`, qui spécifie le nom de l'instance Jenkins pour CI Visibility (`jenkins` par défaut).
 
 ##### Transmission de données par l'Agent Datadog avec des variables d'environnement
 
@@ -150,11 +156,11 @@ Configurez votre plug-in Datadog avec des variables d'environnement à l'aide de
 3. Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_PORT`, qui indique le port du serveur DogStatsD (valeur par défaut : `8125`).
 4. (Facultatif) Collecte de logs :
    -  Activez la [collecte de log](#collecte-de-logs-avec-l-agent) pour l'Agent Datadog.
-   - Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT`, qui indique le port de collecte de logs de l'Agent Datadog.
    - Définissez la variable `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` sur `true` pour activer la collecte de logs (désactivée par défaut).
+   - Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT`, qui indique le port de collecte de logs de l'Agent Datadog.
 5. (Facultatif) CI Visibility (collecte de traces) :
-   - Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT`, qui indique le port de collecte de traces de l'Agent Datadog (`8126` par défaut).
    - Définissez la variable `DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` sur `true` pour activer CI Visibility (désactivé par défaut).
+   - Définissez la variable `DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT`, qui indique le port de collecte de traces de l'Agent Datadog (`8126` par défaut).
    - Définissez la variable `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME`, qui spécifie le nom de l'instance Jenkins pour CI Visibility (`jenkins` par défaut).
 
 Vous avez également la possibilité d'utiliser les variables d'environnement Datadog standard :
@@ -173,8 +179,14 @@ La journalisation repose sur l'utilisation de `java.util.Logger`, un logger qui 
 
 ### Personnalisation des pipelines
 
-Le plug-in Datadog ajoute une étape "datadog" qui offre certaines options de configuration pour vos tâches basées sur des pipelines.
-Dans les pipelines déclaratifs, ajoutez l'étape à un bloc d'options de premier niveau comme suit :
+Le plug-in Datadog ajoute une étape `datadog` qui permet de personnaliser vos tâches basées sur des pipelines.
+
+| Option (type)              | Description                                                                 |
+|----------------------------|-----------------------------------------------------------------------------|
+| `collectLogs` (`boolean`)  | Permet d'activer la collecte de logs pour le pipeline lorsqu'elle est désactivée à l'échelle globale. |
+| `tags` (`String[]`)        | Liste des tags à associer aux données recueillies concernant le pipeline.      |
+
+Dans les pipelines déclaratifs, ajoutez l'étape dans un bloc `options` de premier niveau, comme suit :
 
 ```groovy
 pipeline {
@@ -195,7 +207,7 @@ pipeline {
 Dans un pipeline scripté, incorporez la section concernée dans l'étape Datadog comme suit :
 
 ```groovy
-datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
+datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
   node {
     stage('Example') {
       echo "Hello world."
@@ -227,14 +239,14 @@ Depuis la page de configuration d'une tâche spécifique :
 
 | Personnalisation                         | Description                                                                                                                                                                                           |
 |---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Custom tags                           | Les tags sont définis depuis un `File` (fichier) de l'espace de travail de la tâche (fonctionnalité non compatible avec les tâches de pipeline) ou sous forme de `Properties` (propriétés) texte directement depuis la page de configuration. Lorsque cette fonctionnalité est activée, elle remplace la configuration de la fonctionnalité `Global Job Tags`. |
+| Tags personnalisés                           | Les tags sont définis depuis un `File` (fichier) de l'espace de travail de la tâche (fonctionnalité non compatible avec les tâches de pipeline) ou sous forme de `Properties` (propriétés) texte directement depuis la page de configuration. Lorsque cette fonctionnalité est activée, elle remplace la configuration de la fonctionnalité `Global Job Tags`. |
 | Send source control management events | Envoie le `Source Control Management Events Type` (type des événements de gestion des commandes source) des événements et métriques (fonctionnalité activée par défaut).                                                                                                         |
 
 ## Données collectées
 
 Ce plug-in recueille les [événements](#evenements), [métriques](#metriques) et [checks de service](#checks-de-service) suivants :
 
-### Événements
+### Events
 
 #### Type d'événement par défaut
 
@@ -379,7 +391,7 @@ Tout d'abord, **merci** de contribuer à ce projet.
 Lisez les [règles de contribution][11] (en anglais) avant d'envoyer un problème ou une pull request. Consultez le [document relatif au développement][12] (en anglais) pour obtenir des conseils et faire tourner un environnement de développement local rapide.
 
 [1]: https://plugins.jenkins.io/datadog
-[2]: http://updates.jenkins-ci.org/download/war/2.303.3/jenkins.war
+[2]: http://updates.jenkins-ci.org/download/war/2.346.1/jenkins.war
 [3]: https://wiki.jenkins-ci.org/display/JENKINS/Plugins#Plugins-Howtoinstallplugins
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://github.com/jenkinsci/docker

@@ -1,9 +1,10 @@
 ---
 aliases: []
 categories:
-  - cloud
-  - oracle
-  - ログの収集
+- cloud
+- ログの収集
+- ネットワーク
+- oracle
 dependencies: []
 description: カスタムログとサービスログを Oracle Cloud Infrastructure から Datadog に送信します。
 doc_link: https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/
@@ -23,6 +24,7 @@ short_description: Oracle Cloud からログを収集、監視します。
 type: ''
 version: '1.0'
 ---
+
 ## 概要
 
 Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業で使用されるInfrastructure-as-a-Service (IaaS) および Platform-as-a-Service (PaaS) です。ホスティング、ストレージ、ネットワーキング、データベースなどのマネージドサービスの完全なスイートを備えています。
@@ -46,22 +48,19 @@ Datadog インテグレーションにより、OCI ユーザーはすべての�
 
 #### OCI ロギング
 
-1. OCI ポータルで、*Solutions and Platform -> Logging -> Log Groups* に移動します。
-2. **Create Log Group** をクリックして、**Create Custom Log** ページに移動します。
-3. **Compartment name** を選択します。この選択は、インストール全体で一貫しています。
-4. **Name** として "data_log_group" を使用し、選択した **Description** を入力します。
-5. **Create** をクリックして、新しいロググループを設定します。
-6. *Solutions and Platform -> Logging -> Logs* に移動します。
-7. **Enable Service Log** をクリックします。
-8. **Select Resource** で、**Compartment**、ログを収集する **Service**、およびそのサービスに属する **Resource** を選択します。
-9. **Configure Log** で、**Log Category** として "Write Access Events" を選択し、選択した **Name** を入力します。
-10. **Enable Log** をクリックして、新しい OCI ログを作成します。
+1. OCI ポータルで、*Logging -> Log Groups* に移動します。
+2. コンパートメントを選択し、**Create Log Group** をクリックします。サイドパネルが開きます。
+3. 名前には `data_log_group` を入力し、オプションで説明とタグを入力します。
+4. **Create** をクリックして、新しいロググループを設定します。
+5. **Resources** の下にある **Logs** をクリックします。 
+6. 必要に応じて、**Create custom log** または **Enable service log** をクリックします。
+7. **Enable Log** をクリックして、新しい OCI ログを作成します。
 
 OCI ログの詳細については、[リソースのログを有効にする][1]を参照してください。
 
 #### OCI 関数
 
-1. OCI ポータルで、*Solutions and Platform -> Developer Services -> Functions* に移動します。
+1. OCI ポータルで、*Functions* に移動します。
 2. 既存のアプリケーションを選択するか、**Create Application** をクリックします。
 3. アプリケーション内に新しい OCI 関数を作成します。詳細については、[Oracle の関数概要][2]を参照してください。
 4. 最初にボイラープレート Python 関数を作成し、自動生成されたファイルを Datadog のソースコードに置き換えることをお勧めします。
@@ -71,14 +70,14 @@ OCI ログの詳細については、[リソースのログを有効にする][1
 
 #### OCI サービスコネクタハブ
 
-1. OCI ポータルで、*Solutions and Platform -> Logging -> Service Connectors* に移動します。
-2. **Create Connector** をクリックして、**Edit Service Connector** ページに移動します。
+1. OCI ポータルで、*Logging -> Service Connectors* に移動します。
+2. **Create Service Connector** をクリックして、**Create Service Connector** ページに移動します。
 3. ロギングとして **Source** を選択し、関数として **Target** を選択します。
 4. **Configure Source Connection** で、**Compartment name**、**Log Group**、**Log** を選択します。(最初のステップで作成された **Log Group** と **Log**)
 5. **Audit Logs** も送信する場合は、**+Another Log** をクリックし、同じ **Compartment** を選択して、**Log Group** として "_Audit" を置き換えます。
-6. **Configure Target Condition** で、**Compartment name**、**Function Application**、**Function** を選択します。(前のステップで作成された **Function Application** と **Function**)
-7. ポリシーを作成するように求められたら、**Create** をクリックします。
-8. **Save Changes** をクリックして、サービスコネクタの作成を完了します。
+6. **Configure target** で、**Compartment**、**Function application**、**Function** を選択します。(前のステップで作成された **Function Application** と **Function**)
+7. ポリシーを作成するように求められたら、プロンプトから **Create** をクリックします。
+8. 一番下の **Create** をクリックして、サービスコネクタの作成を完了します。
 
 OCI オブジェクトストレージの詳細については、[Oracle のサービスコネクタのブログ記事][6]を参照してください。
 

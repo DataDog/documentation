@@ -1,6 +1,8 @@
 ---
+algolia:
+  tags:
+  - ecs
 aliases:
-- /ja/integrations/amazon_ecs/
 - /ja/agent/amazon_ecs/
 further_reading:
 - link: /agent/amazon_ecs/logs/
@@ -10,11 +12,14 @@ further_reading:
   tag: ドキュメント
   text: アプリケーショントレースの収集
 - link: /agent/amazon_ecs/data_collected/#metrics
-  tag: ドキュメント
+  tag: Documentation
   text: ECS メトリクスの収集
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: ブログ
   text: Amazon ECS Anywhere のサポート開始
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  tag: blog
+  text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
 kind: documentation
 title: Amazon ECS
 ---
@@ -116,6 +121,7 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 6. デーモンサービスはオートスケーリングを必要としないので、**Next Step** の後に **Create Service** をクリックします。
 
 ### Agent の追加機能の設定
+
 上記の最初のタスク定義は、かなり最小限のものです。このタスク定義は、E CSクラスタ内のコンテナに関するコアメトリクスを収集するための基本構成を持つ Agent コンテナをデプロイします。この Agent は、対応するコンテナ上で発見された [Docker オートディスカバリーラベル][12]に基づいて、Agent インテグレーションを実行することも可能です。
 
 もし、
@@ -123,7 +129,8 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 - ログ管理を使用している場合は、[ログ収集ドキュメント][7]とサンプル [datadog-agent-ecs-logs.json][24] を参照してください。
 
 #### DogStatsD
-[DogStatsD][8] を使用している場合、以下のように Datadog Agent のコンテナ定義に 8125/udp のホストポートマッピングを追加することができます。
+
+[DogStatsD][8] を使用している場合、以下のように Datadog Agent のコンテナ定義に 8125/udp のホストポートマッピングを追加します。
 ```json
 "portMappings": [
   {
@@ -133,9 +140,12 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
   }
 ]
 ```
-また、環境変数 `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` を `true` に設定します。
 
-APM と DogStatsD については、EC2 インスタンスのセキュリティグループ設定をダブルチェックしてください。これらのポートが一般に公開されていないことを確認します。Datadog は、ホストのプライベート IP を使用して、アプリケーションコンテナから Datadog Agent コンテナにデータをルーティングすることを推奨しています。
+このポートマッピングに加えて、環境変数 `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` を `true` に設定します。
+
+この設定により、DogStatsD のトラフィックは、アプリケーションコンテナからホストとホストポートを経由して、Datadog Agent コンテナにルーティングされるようになります。ただし、アプリケーションコンテナは、このトラフィックにホストのプライベート IP アドレスを使用する必要があります。これは、環境変数 `DD_AGENT_HOST` に EC2 インスタンスのプライベート IP アドレスを設定することで有効になり、インスタンスメタデータサービス (IMDS) から取得することができます。また、初期化時にコードで設定することもできます。DogStatsD の構成は APM と同じで、Agent のエンドポイントを設定する例については [Trace Agent のエンドポイントを構成する][17]を参照してください。
+
+EC2 インスタンスのセキュリティグループ設定で、APM と DogStatsD のポートが公に公開されていないことを確認します。
 
 #### プロセスの収集
 
@@ -215,6 +225,134 @@ Agent を `awsvpc` モードで実行することは可能ですが、これは�
 
 代わりに、ブリッジモードで Agent をポートマッピングとともに実行すると、[メタデータサーバを介するホスト IP][6] を簡単に取得できます。
 
+{{% site-region region="gov" %}}
+#### GOVCLOUD 環境向け FIPS プロキシ
+
+Datadog の GOVCLOUD データセンターにデータを送信するには、`fips-proxy` サイドカーコンテナを追加し、コンテナポートを開いて、[サポートされている機能](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations)の適切な通信を確保します。
+
+**注**: この機能は、Linux でのみ使用可能です
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:1.1.1",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9815,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+また、Datadog Agent のコンテナの環境変数を更新して、FIPS プロキシを介したトラフィックの送信を可能にする必要があります。
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+{{% /site-region %}}
+
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
@@ -239,6 +377,7 @@ Agent を `awsvpc` モードで実行することは可能ですが、これは�
 [14]: https://app.datadoghq.com/organization-settings/api-keys
 [15]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+[17]: /ja/containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
 [20]: /resources/json/datadog-agent-ecs.json
 [21]: /resources/json/datadog-agent-ecs1.json
 [22]: /resources/json/datadog-agent-ecs-win.json

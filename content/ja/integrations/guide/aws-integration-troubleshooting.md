@@ -59,38 +59,38 @@ AWS ホストに Agent をインストールする際、Agent の構成でホス
 
 ### IMDS v2 を使用した EC2 メタデータ
 
-EC2 の [IMDSv2][8] の構成によって、Agent がメタデータにアクセスできなくなり、`aws` ではなく `os` ホスト名プロバイダにフォールバックする場合があります (`agent status` の出力に見られるように)。
+EC2 の [IMDSv2][5] の構成によって、Agent がメタデータにアクセスできなくなり、`aws` ではなく `os` ホスト名プロバイダにフォールバックする場合があります (`agent status` の出力に見られるように)。
 
 コンテナ環境では、Kubernetes クラスターで動作するポッドに IAM ロール/認証情報を割り当てることで、EC2 メタデータエンドポイントをロックしていることが問題になる場合があります。`Kube2IAM` と `kiam` は、これを行うために使用される一般的なツールです。これを解決するには、このエンドポイントへのアクセスを許可するように `Kube2IAM` または `kiam` の構成を更新します。
 
-AWS API は、Agent がデフォルトで使用する IMDSv1 を無効にすることをサポートしています。もし、IMDSv2 が有効でアクセス可能な場合、[Agent 構成][5]でパラメーター `ec2_prefer_imdsv2` を `true` に設定 (デフォルトは `false`) してください。詳しくは、[Instance Metadata Service Version 2 の使用への移行][6]のドキュメントを参照してください。
+AWS API は、Agent がデフォルトで使用する IMDSv1 を無効にすることをサポートしています。もし、IMDSv2 が有効でアクセス可能な場合、[Agent 構成][6]でパラメーター `ec2_prefer_imdsv2` を `true` に設定 (デフォルトは `false`) してください。詳しくは、[Instance Metadata Service Version 2 の使用への移行][7]のドキュメントを参照してください。
 
 IMDSv2 のデフォルト構成では、IP ホップ数が 1 より大きい接続、つまり、IP ゲートウェイを通過した接続は拒否されます。これは、Agent がホストのネットワーク以外のネットワークを持つコンテナで実行されている場合、ランタイムが仮想 IP ゲートウェイを介してコンテナのトラフィックを転送するため、問題が発生する可能性があります。これは、ECS のデプロイでは一般的です。次のオプションにより、この問題が改善される場合があります。
 
- * [最大ホップ数を最低でも `2` に増やします][9]。これは、Agent 以外のコンテナが IMDS に保存されているデータにアクセスすることを許可しているため、IMDS に保存されているデータのセキュリティに影響を与える可能性があります。
- * [`providers.eks.ec2.useHostnameFromFile` を true に設定][10]し、cloud-init で検出したホスト名を使用します。
- * [`agents.useHostNetwork` を true に設定][11]し、Agent をホストの UTS ネームスペースで実行します。
+ * [最大ホップ数を最低でも `2` に増やします][8]。これは、Agent 以外のコンテナが IMDS に保存されているデータにアクセスすることを許可しているため、IMDS に保存されているデータのセキュリティに影響を与える可能性があります。
+ * [`providers.eks.ec2.useHostnameFromFile` を true に設定][9]し、cloud-init で検出したホスト名を使用します。
+ * [`agents.useHostNetwork` を true に設定][10]し、Agent をホストの UTS ネームスペースで実行します。
 
 ## タグ
 
-### AWS EC2 とのインテグレーションを解除しても、ホストに AWS タグが残っている
+### Amazon EC2 とのインテグレーションを解除しても、ホストに AWS タグが残っている
 
 AWS インテグレーションを使用して CloudWatch からデータを収集するか、各 EC2 インスタンスに Datadog Agent を直接インストールしてデータとタグを取得することができます。これらの両方の方法でデータを収集する場合、Datadog のバックエンドはインテグレーションと Datadog Agent の両方からのデータを 1 つのホストオブジェクトにマージします。
 
-AWS インテグレーションを削除しても、EC2 インスタンス上で Datadog Agent を実行し続ける場合、Datadog アカウントのホストには、AWS から収集した古いホストタグが引き続き関連付けられます。これは意図した動作であり、AWS インテグレーションまたは AWS EC2 インテグレーションがまだ有効であることを示すものではありません。
+AWS インテグレーションを削除しても、EC2 インスタンス上で Datadog Agent を実行し続ける場合、Datadog アカウントのホストには、AWS から収集した古いホストタグが引き続き関連付けられます。これは意図した動作であり、AWS インテグレーションまたは Amazon EC2 インテグレーションがまだ有効であることを示すものではありません。
 
-インフラストラクチャーの一覧からそのホストの “Apps Running” を確認するか、メトリクスサマリーを確認し、そのホストをスコープとしたノートブックを作成することで、インテグレーションが有効であることを確認することができます。
+インフラストラクチャーの一覧からそのホストの "Apps Running" を確認するか、メトリクスサマリーを確認し、そのホストをスコープとしたノートブックを作成することで、インテグレーションが有効であることを確認することができます。
 
-ホストから AWS ホストタグを永久に削除したい場合は、[ホストタグの削除 API エンドポイント][7]を使用して行うことができます。
+ホストから AWS ホストタグを永久に削除したい場合は、[ホストタグの削除 API エンドポイント][11]を使用して行うことができます。
 
 [1]: /ja/integrations/amazon_web_services/
 [2]: /ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
 [3]: /ja/agent/
 [4]: /ja/help/
-[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
-[6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
-[7]: /ja/api/latest/tags/#remove-host-tags
-[8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
-[9]: https://docs.aws.amazon.com/cli/latest/reference/ec2/modify-instance-metadata-options.html
-[10]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L1683-L1688
-[11]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L930-L937
+[5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
+[8]: https://docs.aws.amazon.com/cli/latest/reference/ec2/modify-instance-metadata-options.html
+[9]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L1683-L1688
+[10]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L930-L937
+[11]: /ja/api/latest/tags/#remove-host-tags

@@ -16,8 +16,6 @@ kind: documentation
 title: Datadog Operator
 ---
 
-<div class="alert alert-warning">Datadog Operator はベータ版です。</div>
-
 [Datadog Operator][1] は、Kubernetes 環境に Datadog Agent をデプロイし、構成することができるオープンソースの [Kubernetes Operator][2] です。
 
 Operator を使用することで、単一の Custom Resource Definition (CRD) を使用して、ノードベースの Agent、[Cluster Agent][3]、[クラスターチェックランナー][4]をデプロイすることができます。Operator は、デプロイのステータス、健全性、およびエラーを Operator の CRD のステータスで報告します。Operator はより高度な構成オプションを使用するため、誤構成のリスクを制限できます。

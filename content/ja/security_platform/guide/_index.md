@@ -2,9 +2,14 @@
 aliases:
 - /ja/security_monitoring/guide/
 disable_toc: true
-kind: ガイド
+kind: guide
 private: true
 title: セキュリティプラットフォームガイド
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: セキュリティプラットフォームガイド
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}

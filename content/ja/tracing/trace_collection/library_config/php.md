@@ -8,11 +8,14 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-php
   tag: GitHub
   text: ソースコード
+- link: /tracing/trace_collection/trace_context_propagation/php/
+  tag: ドキュメント
+  text: トレースコンテキストの伝搬
 - link: /tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースを調査する
 - link: /tracing/
-  tag: ドキュメント
+  tag: Documentation
   text: 高度な使用方法
 kind: documentation
 title: PHP トレーシングライブラリの構成
@@ -101,7 +104,7 @@ Agent ホスト名。
 `DD_ENV`
 : **INI**: `datadog.env`<br>
 **デフォルト**: `null`<br>
-`prod`、`pre-prod`、`stage` など、アプリケーションの環境を設定します。バージョン `0.47.0` に追加されています。
+`prod`、`pre-prod`、`stage` など、アプリケーションの環境を設定します。バージョン `0.47.0` で追加されました。
 
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`INI は `0.82.0` から利用可能です。<br>
@@ -113,10 +116,11 @@ Datadog プロファイラーを有効にします。バージョン `0.69.0` �
 **デフォルト**: `1`<br>
 プロファイルでエンドポイントデータの収集を有効にするかどうか。バージョン `0.79.0` で追加されました。
 
-`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`
-: **INI**: `datadog.profiling.experimental_allocation_enabled` INI は `0.84.0`から利用可能です。<br>
-**デフォルト**: `0`<br>
-実験的な割り当てサイズと割り当てバイトのプロファイルの種類を有効にします。バージョン `0.84.0` で追加されました。
+`DD_PROFILING_ALLOCATION_ENABLED`
+: **INI**: `datadog.profiling.allocation_enabled`。`0.88.0` 以降で利用可能な INI。<br>
+**デフォルト**: `1`<br>
+<br>アロケーションサイズとアロケーションバイトのプロファイルタイプを有効にします。バージョン `0.88.0` で追加されました。
+**注**: これは `0.84` から利用できるようになった `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` 環境変数 (`datadog.profiling.experimental_allocation_enabled` INI 設定) よりも優先されます。両方が設定されている場合は、こちらが優先されます。
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`。INI は `0.82.0` から利用可能です。<br>
@@ -142,6 +146,11 @@ Datadog プロファイラーを有効にします。バージョン `0.69.0` �
 : **INI**: `datadog.service_mapping`<br>
 **デフォルト**: `null`<br>
 APM インテグレーションのデフォルト名を変更します。1 つ以上のインテグレーションの名前変更を同時に行うことができます。例: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` ([インテグレーション名](#integration-names)を参照してください)
+
+`DD_TRACE_HEALTH_METRICS_ENABLED`
+: **INI**: `datadog.trace_health_metrics_enabled`<br>
+**デフォルト**: `false`<br>
+有効な場合、トレーサーは DogStatsD に統計情報を送信します。また、ビルド時に `sigaction` が利用可能な場合、トレーサーはセグメンテーションの際にキャッチされない例外のメトリクスを送信します。
 
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
 : **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
@@ -173,15 +182,25 @@ Agent リクエスト転送のタイムアウト (ミリ秒)。
 **デフォルト**: `null`<br>
 Agent の URL。`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` よりも優先されます。例: `https://localhost:8126` [Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに一致させる必要があります。バージョン `0.47.1` で追加されました。
 
+`DD_DOGSTATSD_URL`
+: **INI**: `datadog.dogstatsd_url`<br>
+**デフォルト**: `null`<br>
+DogStatsD への接続をネゴシエートするために使用する URL。この設定は `DD_AGENT_HOST` と `DD_DOGSTATSD_PORT` よりも優先されます。`udp://` または `unix://` スキーマのみをサポートします。
+
+`DD_DOGSTATSD_PORT`
+: **INI**: `datadog.dogstatsd_port`<br>
+**デフォルト**: `8125`<br>
+`DD_TRACE_HEALTH_METRICS_ENABLED` が有効な場合に、DogStatsD への接続をネゴシエートするために `DD_AGENT_HOST` と組み合わせて使用されるポート。
+
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **デフォルト**: `0`<br>
-すべてのスパンが終了されたタイミングでトレーサーを自動的にフラッシュします。[長時間実行されるプロセス](#long-running-cli-scripts)をトレースするために、`DD_TRACE_GENERATE_ROOT_SPAN=0` と併せて `1` に設定されます。
+すべてのスパンが終了されたタイミングでトレーサーを自動的にフラッシュします。[長時間実行されるプロセス][14]をトレースするために、`DD_TRACE_GENERATE_ROOT_SPAN=0` と併せて `1` に設定されます。
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
 **デフォルト**: `0`<br>
-CLI から送られた PHP スクリプトのトレーシングを有効にします。 [CLI スクリプトのトレーシング](#tracing-cli-scripts)を参照してください。
+CLI から送られた PHP スクリプトのトレーシングを有効にします。 [CLI スクリプトのトレーシング][15]を参照してください。
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
@@ -201,7 +220,7 @@ CLI から送られた PHP スクリプトのトレーシングを有効にし�
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
 **デフォルト**: `1`<br>
-トップレベルのスパンを自動生成します。[長時間実行されるプロセス](#long-running-cli-scripts)をトレースするために、`DD_TRACE_AUTO_FLUSH_ENABLED=1` と併せて `0` に設定されます。
+トップレベルのスパンを自動生成します。[長時間実行されるプロセス][14]をトレースするために、`DD_TRACE_AUTO_FLUSH_ENABLED=1` と併せて `0` に設定されます。
 
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
@@ -290,12 +309,26 @@ JSON でエンコードされた文字列で、サンプリングレートを構
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
 **デフォルト**: `null`<br>
-トレースとログで、アプリケーションのバージョン (例:  `1.2.3`、`6c44da20`、`2020.02.13`) を設定します。バージョン `0.47.0` で追加されています
+トレースとログで、アプリケーションのバージョン (例:  `1.2.3`、`6c44da20`、`2020.02.13`) を設定します。バージョン `0.47.0` で追加されました。
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
 **デフォルト**: `*`<br>
 URL の一部として収集するクエリパラメータのカンマ区切りリスト。パラメータを収集しない場合は空、すべてのパラメータを収集する場合は `*` を設定します。バージョン `0.74.0` で追加されました。
+
+`DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED`
+: **INI**: `datadog.trace.http_post_data_param_allowed`<br>
+**デフォルト**: ""<br>
+収集される HTTP POST データフィールドのカンマ区切りリスト。POST 送信された値を収集しない場合は、空のままにします。この値をワイルドカードの `*` に設定した場合、POST 送信されたすべてのデータが収集されますが、`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` 難読化ルールに一致するフィールドの値は編集されます。特定のフィールドが指定された場合、これらのフィールドの値のみが表示され、その他すべてのフィールドの値は編集されます。バージョン `0.86.0` で追加されました。<br>
+**例**:
+  - POST 送信されたデータは `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
+  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` は `foo.baz,foo.bar.password` に設定
+  - このシナリオにおいて、収集されるメタデータ:
+    - `http.request.foo.bar.password=Password12!`
+    - `http.request.foo.bar.username=<redacted>`
+    - `http.request.foo.baz.bar=qux`
+    - `http.request.foo.baz.key=value`
+    - `http.request.qux=<redacted>`
 
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
@@ -318,13 +351,12 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
- URL の一部として含まれるクエリ文字列を難読化するために使用される正規表現。バージョン `0.76.0` で追加されました。
+ URL の一部として含まれるクエリ文字列を難読化するために使用される正規表現。この表現は、HTTP POST データの編集プロセスでも使用されます。バージョン `0.76.0` で追加されました。
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
 **デフォルト**: `tracecontext,Datadog`<br>
 トレースヘッダーを挿入する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
-
 
   - [tracecontext][10]
   - [b3multi][7]
@@ -340,6 +372,14 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
   - [b3multi][7]
   - [B3 シングルヘッダ][8]
   - Datadog
+
+`DD_DBM_PROPAGATION_MODE`
+: **INI**: `datadog.dbm_propagation_mode`<br>
+**デフォルト**: `'disabled'`<br>
+`'service'` または `'full'` に設定すると、APM から送信されるデータとデータベースモニタリング製品との連携が可能になります。<br>
+`'service'` オプションは、DBM と APM のサービス間の接続を有効にします。Postgres、MySQL、SQLServer で利用可能です。<br>
+`'full'` オプションは、データベースクエリイベントを持つデータベーススパン間の接続を可能にします。Postgres と MySQL で利用可能です。<br>
+
 
 #### インテグレーション名
 
@@ -436,26 +476,7 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 
 ### ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][7] と [W3C][10] のヘッダー抽出と挿入をサポートしています。
-
-分散ヘッダーの挿入と抽出のスタイルを構成することができます。
-
-PHP トレーサーは、以下のスタイルをサポートしています。
-
-- Datadog: `Datadog`
-- W3C: `tracecontext`
-- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
-- B3 シングルヘッダー: `B3 single header`
-
-以下の環境変数を使用して、挿入および抽出のスタイルを構成することができます。例:
-
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext`
-
-環境変数の値は、挿入または抽出に有効なヘッダースタイルのカンマ区切りのリストです。デフォルトでは、`tracecontext` と `Datadog` の挿入スタイルのみが有効になっています。
-
-複数の抽出スタイルが有効な場合、次の順番で抽出が試みられます: `tracecontext` が最優先で、次が `Datadog`、その次が B3。
-
+分散トレースコンテキストの伝播を目的としてヘッダーの抽出と挿入を行うための PHP トレーシングライブラリの構成については、[トレースコンテキストの伝播][11]をお読みください。
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -470,4 +491,7 @@ PHP トレーサーは、以下のスタイルをサポートしています。
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[11]: /ja/tracing/trace_collection/trace_context_propagation/php/
 [13]: /ja/agent/guide/network/#configure-ports
+[14]: /ja/tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
+[15]: /ja/tracing/guide/trace-php-cli-scripts/

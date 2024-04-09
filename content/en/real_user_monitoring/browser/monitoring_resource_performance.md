@@ -11,14 +11,10 @@ further_reading:
   - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
     text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/dashboards/"
+  - link: "/real_user_monitoring/platform/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
 ---
-
-{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Enrich your RUM data with feature flags to get visibility into performance monitoring. <a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">Feature Flag Tracking</a> is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
-{{< /callout >}}
 
 The RUM Browser SDK collects resources and assets for every RUM view (page load): [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files. A RUM Resource event is generated for each one of them, with detailed timings and metadata.
 
@@ -34,7 +30,7 @@ To get even more complete, end-to-end visibility into requests as they move acro
 
 See [Connect RUM and Traces][2] for information about setting up this feature.
 
-{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource"  >}}
+{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource" >}}
 
 ## Resource timing and metrics
 
@@ -84,6 +80,6 @@ To resolve this, enable extended data collection for resources subject to CORS b
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /real_user_monitoring/connect_rum_and_traces
+[2]: /real_user_monitoring/platform/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

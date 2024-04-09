@@ -12,7 +12,9 @@ author:
   sales_email: sales@f5.com
   support_email: g.coward@f5.com
 categories:
-- notification
+- クラウド
+- 構成 & デプロイ
+- notifications
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/f5-distributed-cloud/README.md
 display_on_public_website: true
@@ -25,21 +27,22 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: f5-distributed-cloud
-oauth: {}
 public_title: F5 Distributed Cloud Services
 short_description: F5 Distributed Cloud Services のイベントログをストリーミングし、視覚化します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Notification
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: F5 Distributed Cloud Services のイベントログをストリーミングし、視覚化します。
   media:
@@ -54,6 +57,7 @@ tile:
   title: F5 Distributed Cloud Services
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 F5 Distributed Cloud (XC) Services は、ハイブリッド環境 (パブリッククラウド、プライベートデータセンター、コロケーション) において、アプリケーションをデプロイ、管理、保護できるグローバルなクラウドネイティブプラットフォームをお客様に提供します。また、ADN と CDN のサービスも利用可能です。
@@ -66,7 +70,7 @@ F5 XC プラットフォームには、Datadog HTTPS ロギングエンドポイ
 - ダッシュボード - *アクセスログの概要*
 - 保存ビュー - *よくクエリされるフィールドのためのファセットを含む*
 
-## セットアップ
+## 計画と使用
 
 グローバルログストリーミングは、システムネームスペースまたは共有ネームスペースで利用できます。
 - 共有ネームスペースは、アカウント内のすべての共有ネームスペース、または指定できる特定の共有ネームスペースのリストからのログのストリーミングをサポートしています。
@@ -115,23 +119,41 @@ Global Log Receiver セクションで以下を実行します。
     d. Client Private Key フィールドで Configure を選択し、Type を Text にしたボックスに秘密鍵を入力します。 
     e. Blindfold を選択し、オペレーションが完了するのを待ち、Apply をクリックします。 
 
-**ステップ 4: セットアップを終了する*
+**ステップ 4: F5XC のセットアップを終了する*
 
 - Save & Exit を選択して、グローバルログレシーバーの作成を完了します。Datadog アカウントに[ログ][4]が受信されることを確認します。
 
+**ステップ 5: Datadog ログファセットを作成する**
+ログが届くようになったら、データ分析やダッシュボードの可視化のために、[ログファセット][5]を作成する必要があります。ログファセットの作成は簡単で、Datadog のログサイドパネルから行うことができ、ガイダンスも[こちら][6]にあります。
 
-## トラブルシューティング
+以下のフィールドに対してファセットを作成します。
 
-ヘルプが必要ですか？[Datadog サポート][5]または [F5 サポート][6]にお問い合わせください。
+- namespace
+- domain
+- country
+- src_ip
+- dst_site
+- dst_instance
+- method
+- req_size
+- rsp_size
+- path
+- connection_state
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## ヘルプ
 
-[F5 Distributed Cloud Services][7] の詳細についてはこちらをご覧ください。
+ヘルプが必要ですか？[Datadog サポート][7]または [F5 サポート][8]にお問い合わせください。
+
+## その他の参考資料
+
+[F5 Distributed Cloud Services][9] の詳細についてはこちらをご覧ください。
 
 [1]: https://www.f5.com/cloud/products/distributed-cloud-console
 [2]: https://youtu.be/VUtXCUngiw8
 [3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [4]: https://app.datadoghq.com/logs
-[5]: http://docs.datadoghq.com/help/
-[6]: https://docs.cloud.f5.com/docs/support/support
-[7]: https://www.f5.com/cloud
+[5]: https://docs.datadoghq.com/ja/logs/explorer/facets/
+[6]: https://docs.datadoghq.com/ja/logs/explorer/facets/#create-facets
+[7]: http://docs.datadoghq.com/help/
+[8]: https://docs.cloud.f5.com/docs/support/support
+[9]: https://www.f5.com/cloud

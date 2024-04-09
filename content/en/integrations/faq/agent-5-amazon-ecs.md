@@ -5,7 +5,7 @@ private: true
 ---
 
 <div class="alert alert-warning">
-This documentation is to setup AWS EC2 container Service with <strong>Datadog Agent 5</strong>
+This documentation is to setup Amazon EC2 container Service with <strong>Datadog Agent 5</strong>
 </div>
 
 ## Setup

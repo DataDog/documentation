@@ -1,58 +1,84 @@
 ---
+app_id: syncthing
+app_uuid: a61c3428-6898-45be-8a20-89f4c039a56d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Syncthing Overview: assets/dashboards/syncthing_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: syncthing.connections.count
+      metadata_path: metadata.csv
+      prefix: syncthing.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10276
+    source_type_name: Syncthing
   monitors:
+    '[Syncthing] Device not connected': assets/monitors/syncthing_device_not_connected.json
     '[Syncthing] Disconnected': assets/monitors/syncthing_disconnected.json
     '[Syncthing] Folder error': assets/monitors/syncthing_folder_error.json
     '[Syncthing] Out of sync': assets/monitors/syncthing_out_of_sync.json
+    '[Syncthing] Service error': assets/monitors/syncthing_service_error.json
     '[Syncthing] System error': assets/monitors/syncthing_system_error.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: Alexander@Bushnev.pro
+  support_email: Alexander@Bushnev.pro
 categories:
 - コラボレーション
-creates_events: false
-ddtype: check
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/syncthing/README.md
-display_name: Syncthing
+display_on_public_website: true
 draft: false
 git_integration_title: syncthing
-guid: 1e29ccc9-cec4-4cf5-b566-2f71021ad315
 integration_id: syncthing
 integration_title: Syncthing
-integration_version: 1.0.0
+integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: Alexander@Bushnev.ru
-manifest_version: 1.0.0
-metric_prefix: syncthing.
-metric_to_check: syncthing.connections.count
+manifest_version: 2.0.0
 name: syncthing
-public_title: Datadog-Syncthing インテグレーション
+public_title: Syncthing
 short_description: Syncthing インスタンスからの全体的な統計情報を追跡
-support: contrib
 supported_os:
 - linux
-- mac_os
 - windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Collaboration
+  - Category::Security
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Syncthing インスタンスからの全体的な統計情報を追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Syncthing
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 Syncthing は、2 台以上のコンピュータ間でファイルをリアルタイムに同期させます。このインテグレーションにより、Datadog を使用して [Syncthing][1] を監視することができます。
 
-## セットアップ
+## 計画と使用
 
 Syncthing チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent で Syncthing チェックをインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -64,7 +90,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Syncthing の[メトリクス](#metrics) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `syncthing.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル syncthing.d/conf.yaml][6] を参照してください。
 
@@ -74,27 +100,27 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Syncthing チ�
 
 [Agent の status サブコマンド][8]を実行し、Checks セクションで `syncthing` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "syncthing" >}}
 
 
-### イベント
+### ヘルプ
 
 Syncthing には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "syncthing" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 
 [1]: https://syncthing.net/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rollbar-license
 app_uuid: 8b08ddce-a1be-4438-9889-ba4113de9a93
 assets: {}
@@ -23,7 +25,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rollbar_license
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

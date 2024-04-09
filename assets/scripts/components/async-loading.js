@@ -1,18 +1,24 @@
 import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
-import { redirectToRegion } from '../region-redirects';
+import { redirectToRegion, hideTOCItems } from '../region-redirects';
+import { initCopyCode } from './copy-code';
 import { initializeIntegrations } from './integrations';
 import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
+import { loadInstantSearch } from './algolia';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
-    window.scroll(0, 0);
+    window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
 
     let mainContent = document.getElementById('mainContent');
 
@@ -39,19 +45,46 @@ function loadPage(newUrl) {
             const mainContentWrapper = document.querySelector(
                 '.mainContent-wrapper'
             );
-            const newmainContentWrapper = httpRequest.responseXML.querySelector(
+            const newmainContentWrapper = newDocument.querySelector(
                 '.mainContent-wrapper'
             );
 
-            const newContent = httpRequest.responseXML.getElementById(
+            const newContent = newDocument.getElementById(
                 'mainContent'
             );
-            const newTOC = httpRequest.responseXML.querySelector(
+            const newTOC = newDocument.querySelector(
                 '.js-toc-container'
             );
 
             const currentSidebar = document.querySelector('.sidebar');
-            const newSidebar = httpRequest.responseXML.querySelector('.sidebar');
+            const newSidebar = newDocument.querySelector('.sidebar');
+
+            const currentPageIsSearchPage = (document.documentElement.dataset.relpermalink || "").includes("search");
+            const newPageIsSearchPage = (newDocument.querySelector("html").dataset.relpermalink || "").includes("search");
+
+            // For going from search page (/search) with no sidenav searchbar, to another page with sidenav searchbar
+            if (currentPageIsSearchPage && !newPageIsSearchPage) {
+                const sidenavSearchbarMount = document.querySelector('#async-searchbar-mount');
+
+                const searchBoxContainer = document.createElement("div");
+                searchBoxContainer.classList.add("searchbox-container");
+                const searchBox = document.createElement("div");
+                searchBox.setAttribute("id", "searchbox");
+                const hitsContainer = document.createElement("div");
+                hitsContainer.classList.add("hits-container", "d-none");
+                const hits = document.createElement("div");
+                hits.setAttribute("id", "hits");
+
+                searchBoxContainer.append(searchBox);
+                searchBoxContainer.append(hitsContainer);
+                hitsContainer.append(hits);
+
+                if(sidenavSearchbarMount) {
+                  sidenavSearchbarMount.append(searchBoxContainer);
+                }
+
+                loadInstantSearch(asyncLoad=true);
+            }
 
             if (newContent === null) {
                 return;
@@ -194,13 +227,14 @@ function loadPage(newUrl) {
             }
 
             const {pageCodeLang} = document.documentElement.dataset;
-
             addCodeTabEventListeners();
             addCodeBlockVisibilityToggleEventListeners();
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
             toggleMultiCodeLangNav(pageCodeLang);
-
+            hideTOCItems(true)
+            initCopyCode()
+            
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
 

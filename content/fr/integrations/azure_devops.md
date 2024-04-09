@@ -1,10 +1,11 @@
 ---
 categories:
-  - azure
-  - source control
-  - collaboration
-  - issue tracking
-ddtype: crawler
+- azure
+- collaboration
+- outils de développement
+- issue tracking
+- provisioning
+- source control
 dependencies: []
 description: Surveillez des métriques clés d'Azure DevOps.
 doc_link: https://docs.datadoghq.com/integrations/azure_devops
@@ -20,8 +21,10 @@ manifest_version: '1.0'
 name: azure_devops
 public_title: Intégration Datadog/Microsoft Azure DevOps
 short_description: Surveillez des métriques clés d'Azure DevOps.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Intégrez Datadog à Azure DevOps pour :
@@ -31,7 +34,7 @@ Intégrez Datadog à Azure DevOps pour :
 - Suivre le temps passé à terminer un build ou un élément de travail
 - Gérer les éléments de travail et les mises à jour
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -41,7 +44,7 @@ Dans Datadog, cliquez sur le bouton d'installation figurant sur le [carré d'int
 
 Utilisez un hook de service pour créer des événements et des métriques Datadog en réponse aux événements Azure DevOps Services :
 
-{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="Configurer des hooks de service" >}}
+{{< img src="integrations/azure_devops/configure-service-hook.mp4" alt="Configurer des hooks de service" video="true" >}}
 
 1. Dans Azure, accédez à la page des hooks de service pour votre projet.
 2. Cliquez sur **Créer un abonnement**.
@@ -66,17 +69,11 @@ https://{{< region-param key="dd_full_site" >}}/intake/webhook/azuredevops?api_k
 
 ### Utiliser les monitors Datadog en tant que portes dans Azure Pipelines
 
-{{< site-region region="eu" >}}
-<div class="alert alert-warning">
-    L'extension permettant d'utiliser les monitors Datadog en tant que portes de déploiement n'est pas disponible pour le site {{< region-param key="dd_site_name" >}}.
-</div>
-{{< /site-region >}}
-
 Vous pouvez également utiliser les monitors Datadog en tant que portes pour [contrôler le déploiement des versions][5] dans Azure Pipelines. Cette option vous permet d'arrêter automatiquement les déploiements problématiques si un état anormal est détecté dans Datadog.
 
 1. Ajoutez l'extension [Datadog Monitors as Deployment Gates][6] à votre organisation Azure DevOps.
 
-    {{< img src="integrations/azure_devops/extension-service-connection.gif" alt="Connexion de service pour l'extension" >}}
+    {{< img src="integrations/azure_devops/extension-service-connection.mp4" alt="Connexion de service pour l'extension" video="true" >}}
 
 2. Dans Azure DevOps, accédez à **Service Connections** dans les paramètres de votre projet, et sélectionnez **New Service Connection**.
 3. Dans la liste, sélectionnez Datadog et cliquez sur **Next**.
@@ -85,7 +82,7 @@ Vous pouvez également utiliser les monitors Datadog en tant que portes pour [co
 6. Cliquez sur **Ajouter** et sélectionnez l'option **Query Datadog monitors**.
 7. Sélectionnez la connexion de service Datadog, puis saisissez l'ID de votre monitor et le seuil de gravité de votre choix. Le seuil de gravité correspond au statut du monitor (`Alert` ou `Warning`) auquel la tâche échoue.
 
-    {{< img src="integrations/azure_devops/datadog-monitor-gate.gif" alt="Porte de monitor Datadog" >}}
+    {{< img src="integrations/azure_devops/datadog-monitor-gate.mp4" alt="Porte de monitor Datadog" video="true" >}}
 
 8. Répétez les étapes 5 à 7 pour ajouter d'autres portes dans votre pipeline de déploiement, si nécessaire.
 

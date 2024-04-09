@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_dbformysql
+- /fr/integrations/azure_dbformysql
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data store
 dependencies: []
 description: Surveillez des métriques clés d'Azure Database pour MySQL.
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
@@ -22,6 +22,7 @@ public_title: Intégration Datadog/Microsoft Azure Database pour MySQL
 short_description: Surveillez des métriques clés d'Azure Database pour MySQL.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Database pour MySQL fournit une base de données en tant que service MySQL community entièrement managée et conçue pour l'entreprise.
@@ -31,7 +32,7 @@ Recueillez des métriques d'Azure Database pour MySQL pour :
 - Visualiser les performances de vos bases de données MySQL
 - Corréler les performances de vos bases de données MySQL avec vos applications
 
-## Configuration
+## Implémentation
 
 ### Installation
 

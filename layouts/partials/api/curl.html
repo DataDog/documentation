@@ -4,6 +4,36 @@
 {{- $parameters := partial "api/arguments-data.html" (dict "endpoint" $endpoint) -}}
 {{- $count := 0 -}}
 {{- $body := .body -}}
+{{- $title := .title -}}
+{{- $contentEncoding := "" -}}
+{{- $exampleDefinition := .exampleDefinition -}}
+{{- $exampleId := .exampleId -}}
+
+{{/* Determine contentencoding */}}
+{{- with $parameters.headerParams -}}
+  {{- range . -}}
+    {{- if eq .name "Content-Encoding" -}}
+      {{- $def := "" -}}
+      {{- range $enumVal := .schema.enum -}}
+        {{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
+      {{- end -}}
+      {{- if gt (len $def) 0 -}}
+        {{- $contentEncoding = $def -}}
+      {{- else if (or (and (isset .schema "example") (.required | default false)) (in $title "compression") ) -}}
+        {{- $contentEncoding = (.example | default .schema.example) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $exampleDefinition -}}
+## {{ default $exampleId .summary }}
+{{- range split .description "\n" }}
+# {{ . }}
+{{- end }}
+<br/>
+{{- end -}}
+{{- if ne $contentEncoding "deflate" -}}
 
 {{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
@@ -34,7 +64,20 @@
     {{- end -}}
 {{- end -}}
 
-<span class="c1"># Curl command</span>
+<span class="c1"># Curl command</span><br/>
+{{- if gt (len $contentEncoding) 0 -}}
+{{- if eq $contentEncoding "gzip" -}}
+<span class="o">echo $(cat <<</span> <span class="n">EOF</span>
+<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="n">EOF</span>
+<span class="n">) | gzip | </span>
+{{- else if eq $contentEncoding "deflate" -}}
+<span class="o">echo $(cat <<</span> <span class="n">EOF</span>
+<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="n">EOF</span>
+<span class="n">) | gzip --no-name | tail --bytes=+11 | head --bytes=-8 | </span>
+{{- end -}}
+{{- end -}}
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ $endpoint.actionType | upper }}</span> {{ range $region, $url := $endpoint.regions }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace $endpoint.pathKey "{" "${" }}</span>
 {{- range $qi, $q := where $parameters.queryStrings ".required" true -}}
       <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
@@ -53,14 +96,27 @@
         {{- end -}}
     {{- end -}}
 {{- end -}}
-<span class="kn">"</span>&nbsp;\
+<span class="kn">"</span>{{ " \\" }}
 <span class="o">-H</span> <span class="s1">"Accept: application/json"</span>
 {{- /* Content-Type header based on "requestBody" */ -}}
 {{- if (or ($body) ($endpoint.action.requestBody)) -}}
 {{- with (index $endpoint.action.responses "204") -}}
 {{- else -}}
-&nbsp;\
+{{ " \\" }}
 <span class="o">-H</span> <span class="s1">"Content-Type: {{ default "application/json" .contentType }}"</span>
+{{- with $parameters.headerParams -}}
+{{- range . -}}
+{{- if eq .name "Content-Encoding" -}}
+  {{- if $contentEncoding -}}
+{{ " \\" }}
+<span class="o">-H</span> <span class="s1">"{{ .name }}: {{ $contentEncoding }}"</span>
+  {{- end -}}
+{{- else -}}
+{{ " \\" }}
+<span class="o">-H</span> <span class="s1">"{{ .name }}: {{ .example | default .schema.example }}"</span>
+{{- end -}}
+{{- end -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
 
@@ -71,23 +127,42 @@
         {{- range $key, $val := . -}}
             {{ $authSchema := (index $securitySchemes $key) }}
             {{- if eq $authSchema.in "header" -}}
-                &nbsp;\
+                {{ " \\" }}
 <span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
             {{- end -}}
         {{- end -}}
     {{- end -}}
 {{- else -}}
     {{- /* Use global authentication */ -}}
-    &nbsp;\
+    {{ " \\" }}
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
 {{- end -}}
-
+{{- /* Render binary data (usually compressed) */ -}}
+{{- if gt (len $contentEncoding) 0 -}}
+{{- if eq $contentEncoding "gzip" -}}
+{{ " \\" }}
+<span class="o">--data-binary</span> <span class="n">@-</span>
+{{- else if eq $contentEncoding "deflate" -}}
+{{ " \\" }}
+<span class="o">--data-binary</span> <span class="n">@-</span>
+{{- end -}}
+{{- else if eq .contentType "multipart/form-data" -}}
+{{ " \\" }}
+{{ $items := (index $endpoint.action.requestBody.content "multipart/form-data").schema.properties -}}
+{{- $i := 0 -}}
+{{- range $k, $prop := $items -}}
+<span class="o">-F</span> <span class="n">{{ $k }}={{- if eq ($prop.format | default "") "binary" -}}@{{- end -}}{{- $prop.type -}}</span>{{ if ne $i (sub (len $items) 1) }} \{{ end }}
+{{- $i = add $i 1 -}}
+{{- end -}}
+{{ else if (or ($body) ($endpoint.action.requestBody)) }}
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
-{{- if (or ($body) ($endpoint.action.requestBody)) -}}
-&nbsp;\
+{{ " \\" }}
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
 <span class="s1">{{ .exampleValue | default $body | default (.dollarScratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>
 {{- end -}}
 <br/>
+{{- else -}}
+<span class="c1">See one of the other client libraries for an example of sending deflate-compressed data.</span><br/><br/>
+{{- end -}}

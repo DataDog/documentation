@@ -25,6 +25,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/teradata/README.md
@@ -38,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: teradata
-oauth: {}
 public_title: Teradata
 short_description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
 supported_os:
@@ -47,9 +47,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Caching
+  - Category::Data Store
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Data Store
   configuration: README.md#Setup
   description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
   media: []

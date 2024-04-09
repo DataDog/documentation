@@ -5,6 +5,7 @@ assets:
   dashboards:
     HiveMQ: assets/dashboards/hivemq.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: hivemq.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10101
     source_type_name: HiveMQ
   logs:
     source: hivemq
@@ -24,9 +26,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- メッセージング
-- 処理
+- iot
 - ログの収集
+- メッセージキュー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md
 display_on_public_website: true
@@ -34,27 +36,26 @@ draft: false
 git_integration_title: hivemq
 integration_id: hivemq
 integration_title: HiveMQ
-integration_version: 1.6.1
+integration_version: 1.8.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: hivemq
-oauth: {}
 public_title: HiveMQ
 short_description: HiveMQ クラスターを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Messaging
-  - Category::Processing
+  - Category::IoT
   - Category::Log Collection
+  - Category::Message Queues
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: HiveMQ クラスターを監視します。
   media: []
@@ -63,27 +64,28 @@ tile:
   title: HiveMQ
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 [HiveMQ][1] は、接続された IoT デバイスと行き来するデータの高速で効率的かつ信頼性の高い移動のために設計された MQTT ベースのメッセージングプラットフォームです。MQTT 3.1、3.1.1、5.0 に準拠したブローカーです。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 HiveMQ チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -98,7 +100,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 2. [Agent を再起動します][4]。
 
-##### ログの収集
+##### 収集データ
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -127,7 +129,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 [3]: https://docs.datadoghq.com/ja/help
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -135,7 +137,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
@@ -167,21 +169,28 @@ JMXFetch
 {{% /tab %}}
 {{< /tabs >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "hivemq" >}}
 
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "hivemq" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog で IoT アプリケーションを監視するために HiveMQ と OpenTelemetry を使用する][4]
+
 
 [1]: https://www.hivemq.com/hivemq/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/help
+[4]: https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/

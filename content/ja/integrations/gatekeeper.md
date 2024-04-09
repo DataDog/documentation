@@ -5,6 +5,7 @@ assets:
   dashboards:
     Gatekeeper base dashboard: assets/dashboards/gatekeeper_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: gatekeeper.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10148
     source_type_name: Gatekeeper
   logs:
     source: gatekeeper
@@ -24,9 +26,11 @@ author:
   sales_email: ara.pulido@datadoghq.com
   support_email: ara.pulido@datadoghq.com
 categories:
-- security
-- containers
+- クラウド
+- コンプライアンス
 - 構成 & デプロイ
+- コンテナ
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/README.md
 display_on_public_website: true
@@ -39,7 +43,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: gatekeeper
-oauth: {}
 public_title: Gatekeeper
 short_description: Gatekeeper インテグレーション
 supported_os:
@@ -47,10 +50,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Category::Security
-  - Category::Containers
+  - Category::Cloud
+  - カテゴリ::コンプライアンス
   - Category::Configuration & Deployment
+  - Category::Containers
+  - Category::Security
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Gatekeeper インテグレーション
   media: []
@@ -59,6 +64,7 @@ tile:
   title: Gatekeeper
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -67,11 +73,11 @@ tile:
 
 ![Gatekeeper 概要ダッシュボード][2]
 
-## セットアップ
+## 計画と使用
 
 Kubernetes クラスターで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。[オートディスカバリーのインテグレーションテンプレート][3]のガイドも参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 #### Agent バージョン >=7.26.0 または >=6.26.0
 
@@ -155,7 +161,7 @@ gatekeeper チェックを Kubernetes クラスターにインストールする
 
 12. Datadog Agent ポッドを再起動します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. gatekeeper のパフォーマンスデータの収集を開始するには、Agent ポッドに追加した `/confd` フォルダーの `gatekeeper/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cert_manager.d/conf.yaml][6] を参照してください。
 
@@ -165,21 +171,21 @@ gatekeeper チェックを Kubernetes クラスターにインストールする
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `gatekeeper` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "gatekeeper" >}}
 
 
-### イベント
+### ヘルプ
 
 Gatekeeper には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "gatekeeper" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
@@ -187,7 +193,7 @@ Gatekeeper には、イベントは含まれません。
 [1]: https://github.com/open-policy-agent/gatekeeper
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gatekeeper/images/gatekeeper_dashboard.png
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[4]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
+[4]: https://docs.datadoghq.com/ja/developers/integrations/python/
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile
 [6]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/datadog_checks/gatekeeper/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

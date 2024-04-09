@@ -51,7 +51,7 @@ synthetic-tests:
   stage: test
   script: 
     - npm install -g @datadog/datadog-ci
-    - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s ‘tag:e2e-tests’
+    - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests'
 {{< /code-block >}}
 
 ### 変数のオーバーライドを使ったテストの実行
@@ -65,7 +65,7 @@ synthetic-tests:
   stage: test
   script: 
     - npm install -g @datadog/datadog-ci
-    - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s ‘tag:e2e-tests’ -v PASSWORD=”$PASSWORD”
+    - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests' -v PASSWORD="$PASSWORD"
 {{< /code-block >}}
 
 ## 高度なコンフィギュレーション

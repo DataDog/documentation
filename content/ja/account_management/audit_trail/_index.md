@@ -4,10 +4,10 @@ aliases:
 further_reading:
 - link: /account_management/audit_trail/events/
   tag: ドキュメント
-  text: さまざまな監査証跡のイベントを見る
+  text: 監査証跡イベントについて
 - link: /account_management/org_settings/
   tag: ドキュメント
-  text: オーガニゼーションの設定について
+  text: 組織設定について
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
   text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
@@ -49,7 +49,7 @@ Datadog 監査証跡を有効にするには、[オーガニゼーションの�
 監査証跡を有効にした人を確認するには
 1. [イベントエクスプローラー][3]に移動します。
 2. 検索バーに `Datadog Audit Trail was enabled by` と入力します。イベントをキャプチャするために、より広い時間範囲を選択する必要がある場合があります。
-3.  "A user enabled Datadog Audit Trail" というタイトルの最新イベントには、最後に監査証跡を有効にしたのが誰であるかが表示されます。
+3. "A user enabled Datadog Audit Trail" というタイトルの最新イベントには、最後に監査証跡を有効にしたのが誰であるかが表示されます。
 
 ## コンフィギュレーション
 
@@ -72,13 +72,13 @@ Datadog 監査証跡を有効にするには、[オーガニゼーションの�
 
 監査イベントを詳しく確認するには、[Audit Trail][1] セクションに移動します。Datadog の[オーガニゼーションの設定][2]からもアクセス可能です。
 
-{{< img src="account_management/audit_logs/audit_side_nav.png" alt="組織設定メニューの監査証跡" style="width:30%;">}}
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="組織設定メニューの監査証跡設定" style="width:30%;">}}
 
 監査証跡イベントは、[ログエクスプローラー][4]内のログと同様の機能を持っています。
 
-- フィルターを使用して、イベント名（ダッシュボード、モニター、認証など）、認証属性（アクター、API キー ID、ユーザーのメールアドレスなど）、`Status`（`Error`、`Warn`、`Info`）、メソッド（`POST`、`GET`、`DELETE`）およびその他のファセット別に監査証跡イベントを確認。
+- フィルターを使用して、イベント名 (ダッシュボード、モニター、認証など)、認証属性 (アクター、API キー ID、ユーザーのメールアドレスなど)、`Status` (`Error`、`Warn`、`Info`)、メソッド (`POST`、`GET`、`DELETE`) およびその他のファセット別に監査証跡イベントを確認します。
 
-- イベントを選択してイベント属性タブに移動し、関連する監査証跡イベントを確認。絞り込みまたは検索から除外する特定の属性を選択（`http.method`、`usr.email`、`client.ip` など）。
+- イベントを選択してイベント属性タブに移動し、関連する監査証跡イベントを確認します。絞り込みまたは検索から除外する特定の属性を選択します (`http.method`、`usr.email`、`client.ip` など)。
 
 {{< img src="account_management/audit_logs/attributes.png" alt="組織設定メニューの監査証跡" style="width:50%;">}}
 
@@ -158,6 +158,22 @@ Views パネルのデフォルト保存ビューエントリからは、いつ�
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="監査証跡をデータソースとして設定しデータからグラフを作成" style="width:100%;">}}
 4. 表示設定を完了してグラフにタイトルを付けます。*Save* ボタンをクリックしてダッシュボードを作成します。
 
+## スケジュールレポートの作成
+
+Datadog 監査証跡では、監査分析ビューを定期的にスケジュールされたメールとして送信することができます。これらのレポートは、Datadog プラットフォームの使用状況を定期的に監視するのに便利です。例えば、国別のユニークな Datadog ユーザーログイン数の週次レポートを取得するように選択できます。このクエリにより、異常なログインアクティビティを監視したり、使用状況に関する自動化された洞察を受け取ったりすることができます。
+
+監査分析クエリをレポートとしてエクスポートするには、時系列、トップリスト、またはテーブルクエリを作成し、**More...** > **Export as scheduled report** をクリックして、クエリをスケジュールレポートとしてエクスポートを開始します。
+
+{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="More… ドロップダウンメニューの Export as scheduled report 機能" style="width:90%;" >}}
+
+1. クエリウィジェットで作成されるダッシュボードの名称を入力します。新しいダッシュボードは、スケジュールされたレポートごとに作成されます。このダッシュボードは、レポートの内容やスケジュールを変更する必要がある場合に、後で参照・変更することができます。
+2. レポートの頻度や時間帯をカスタマイズして、メールレポートのスケジュールを設定します。
+3. メールを送信したい受信者を追加します。
+4. メールレポートの一部として必要なカスタマイズされたメッセージを追加します。
+5. **Create Dashboard and Schedule Report** をクリックします。
+
+{{< img src="account_management/audit_logs/export_workflow.png" alt="監査分析ビューをスケジュールメールにエクスポートする" style="width:80%;" >}}
+
 ## すぐに使えるダッシュボード
 
 Datadog 監査証跡には、インデックス保持の変更、ログパイプラインの変更、ダッシュボードの変更など、さまざまな監査イベントを表示する[すぐに使えるダッシュボード][12]が付属しています。このダッシュボードを複製して、監査ニーズに合わせてクエリや視覚化をカスタマイズすることができます。
@@ -178,5 +194,5 @@ Datadog 監査証跡には、インデックス保持の変更、ログパイプ
 [8]: /ja/dashboards/widgets/top_list/
 [9]: /ja/dashboards/widgets/timeseries/
 [10]: /ja/dashboards/widgets/list/
-[11]: /ja/dashboards/querying/#choose-the-metric-to-graph/
+[11]: /ja/dashboards/querying/#define-the-metric/
 [12]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true

@@ -27,8 +27,8 @@ author:
   sales_email: info@netnology.io
   support_email: info@netnology.io
 categories:
-- monitoring
-- réseau
+- network
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md
 display_on_public_website: true
@@ -36,26 +36,25 @@ draft: false
 git_integration_title: nn_sdwan
 integration_id: nn-sdwan
 integration_title: Netnology Cisco SD-WAN
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: nn_sdwan
-oauth: {}
 public_title: Netnology Cisco SD-WAN
 short_description: Exportateur de métriques pour les contrôleurs Cisco SD-WAN
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
   - Category::Network
+  - Category::Notification
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Exportateur de métriques pour les contrôleurs Cisco SD-WAN
   media: []
@@ -83,7 +82,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 1. Exécutez la commande suivante pour installer l'intégration de l'Agent :
 
    ``` bash
-   datadog-agent integration install -t nn_sdwan==1.0.0
+   datadog-agent integration install -t nn_sdwan==1.0.1
    ```
 
 2. Configurez votre intégration comme une [intégration][4] de base.

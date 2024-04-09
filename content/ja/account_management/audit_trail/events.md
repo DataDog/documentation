@@ -26,7 +26,7 @@ title: 監査証跡イベント
 - [セキュリティ通知](#security-notification-events)
 
 #### 製品別イベント
-- [Application Performance Monitoring (APM)](#apm-events)
+- [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
 - [Application Security Management (ASM)](#application-security-management)
 - [監査証跡](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
@@ -56,6 +56,7 @@ title: 監査証跡イベント
 | [ロールアクセスリクエスト][8] | ユーザーが、ロールに対するアクセスリクエストを作成、応答、または削除し、そのアクセスリクエストの値。 | `@evt.name:"Access Management" @asset.type:role_request` |
 | [ユーザーのロール][6] | ユーザーが組織内のロールに追加または削除された。 | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [パスワード][9] | 組織でユーザーがパスワードを変更した。 | `@evt.name:"Access Management" @asset.type:password @action:modified` |
+| [制限ポリシー][86] | リソースの制限ポリシーが変更されました。 | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
 
 ### API リクエストイベント
 
@@ -74,12 +75,15 @@ title: 監査証跡イベント
 | [リモート構成されたサンプリングレート][21] | ユーザーがリモートで APM のサンプリングレートを構成した。  | `@evt.name:APM @asset.type:samplerconfig` |
 
 ### Application Security Management
+
 | 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Denylist][22] | ユーザーが IP アドレスのブロック、ブロック解除、ブロック期間の延長を行った。 | `@evt.name:"Application Security" @asset.type:ip_denylist` |
-| [イベントルール][23] | ユーザーが ASM イベントルールを有効または無効にした。 | `@evt.name:"Application Security" @asset.type:event_rules` |
 | [1 クリックアクティベーション][24] | ユーザーがサービス上で ASM をアクティブまたは非アクティブにした。 | `@evt.name:"Application Security" @asset.type:compatible_services` |
-
+| [保護][23] | ユーザーが ASM 保護を有効または無効にした。 | `@evt.name:"Application Security" @asset.type:blocking_configuration` |
+| [Denylist][22] | ユーザーが IP アドレスまたはユーザー ID のブロック、ブロック解除、ブロック期間の延長を行った。 | `@evt.name:"Application Security" @asset.type:ip_user_denylist` |
+| [パスリスト][81] | ユーザーがパスリストにエントリーを追加、修正、または削除した。 | `@evt.name:"Application Security" @asset.type:passlist_entry` |
+| [アプリ内 WAF ポリシー][82] | ユーザーがアプリ内 WAF ポリシーを作成、修正、または削除した。 | `@evt.name:"Application Security" @asset.type:policy_entry` |
+| [アプリ内 WAF カスタムルール][83] | ユーザーがアプリ内 WAF カスタムルールを作成、修正、または削除した。 | `@evt.name:"Application Security" @asset.type:waf_custom_rule` |
 
 ### 監査証跡イベント
 
@@ -189,6 +193,8 @@ title: 監査証跡イベント
 | 名前                 | 監査イベントの説明                                                       | 監査エクスプローラーのクエリ                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
 | [トークンリーク][80］ | Datadog は、失効させるべき Datadog API またはアプリケーションキーのリークを検出しました。| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+| [ログイン方法のオーバーライド][85] | Datadog は、組織に設定されたデフォルトのログイン方法とは異なる、ユーザーのログイン方法のオーバーライドを検出しました。| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
+| [異常なログイン][84] | Datadog は、異常なログインイベントを検出しました。| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
 
 ### 機密データスキャナーイベント
 | 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
@@ -244,8 +250,8 @@ title: 監査証跡イベント
 [19]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Asecond_primary_tag
 [20]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [21]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40asset.type%3Asamplerconfig
-[22]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aip_denylist
-[23]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aevent_rules
+[22]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aip_user_denylist
+[23]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Ablocking_configuration
 [24]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Acompatible_services
 [25]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Audit%20Trail%22%20%40asset.type%3Aaudit_events_csv
 [26]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40asset.type%3Aapi_key
@@ -303,3 +309,9 @@ title: 監査証跡イベント
 [78]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Synthetics%20Monitoring%22%20%40asset.type%3Asynthetics_settings%20%40action%3Amodified
 [79]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table%20%40action%3A%28created%20OR%20deleted%20OR%20modified%29
 [80]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40asset.type%3A%28api_key%20OR%20application_key%29
+[81]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apasslist_entry
+[82]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apolicy_entry
+[83]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Awaf_custom_rule
+[84]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Aunusual_login
+[85]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser
+[86]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Arestriction_policy

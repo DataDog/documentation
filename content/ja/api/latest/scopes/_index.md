@@ -1,6 +1,7 @@
 ---
-title: 認可スコープ
 disable_sidebar: true
+title: 認可スコープ
+type: documentation
 ---
 ## 認可スコープ
 

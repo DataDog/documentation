@@ -59,7 +59,7 @@ View your data on the [Pipelines][3] and [Pipeline Executions][4] pages after th
 
 **Note**: The Pipelines page only shows data for the [default branch][12] of each repository.
 
-## Git user information
+## Configure Git user information
 
 The plugin retrieves the Git author name and email based on the [TeamCity username style][7].
 Datadog recommends using either **Author Name and Email** or **Author Email** username styles, as they

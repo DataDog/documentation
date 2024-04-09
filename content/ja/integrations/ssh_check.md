@@ -10,7 +10,7 @@ assets:
     metrics:
       check: sftp.response_time
       metadata_path: metadata.csv
-      prefix: ssh.
+      prefix: sftp.
     process_signatures:
     - ssh
     - sftp
@@ -25,8 +25,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- developer tools
 - network
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
 display_on_public_website: true
@@ -34,26 +34,25 @@ draft: false
 git_integration_title: ssh_check
 integration_id: ssh
 integration_title: SSH
-integration_version: 2.3.2
+integration_version: 2.7.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ssh_check
-oauth: {}
 public_title: SSH
 short_description: SSH 接続と SFTP レイテンシーを監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Developer Tools
   - Category::ネットワーク
-  - Category::オートディスカバリー
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: SSH 接続と SFTP レイテンシーを監視。
   media: []
@@ -145,6 +144,6 @@ SSH チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

@@ -31,60 +31,87 @@ In this section, choose between an APM, Infrastructure, or Logs alert:
 
 An APM alert is created when Watchdog detects anomalous behavior on your system's services or their child resources.
 
+{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-apm3.png" alt="Configuring a Watchdog Monitor on APM" style="width:80%;">}}
+
 ### Select sources {#select-sources-1}
 
-Choose your [primary tags][1], [service][2], and [resource][3] from the dropdown menus.
+Select the scope to be alerted on by configuring:
 
-After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time, along with a list of events.
+**1. Predefined selectors**
+* The type of Watchdog anomaly: Error Rates, Latency, Hits, or any APM alert
+* The value for APM primary tags (see the [Set primary tags to scope][1] page for instructions to configure APM primary and second primary tags)
+* The [APM service][2] (choose `Any services` to monitor all services)
+* The [APM resource][3] of a service (choose `*` to monitor all resources of a service)
+
+**2. Additional filters**
+* Filter on any additional tag available on the Watchdog event (like `team` for example)
+* Boolean and wildcards are supported
+* Dimensions available on the predefined selectors should not be used in the additional filters
+
+**3. Group By**
+* The dimensions you want to [group notifications by][4]
+
+After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame.
 
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /tracing/services/service_page/
 [3]: /tracing/services/resource_page/
+[4]: /monitors/configuration/?tab=thresholdalert#alert-grouping
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-Infrastructure-wide alerts can include issues over the following integrations:
-
-* [System][1]: Host-level memory usage (memory leak), TCP retransmit rate, etc.
-* [Redis][2]
-* [PostgreSQL][3]
-* [NGINX][4]
-* [Amazon Web Services][5]: For the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
-
-After selecting Infrastructure, the graph at the top of the monitor creation page displays Watchdog events over time, along with a list of events.
+{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-infra-2.png" alt="Configuring a Watchdog Monitor on Infrastructure" style="width:80%;">}}
 
 ### Select sources {#select-sources-2}
 
-No selection is necessary. You are notified when Watchdog detects issues across your infrastructure.
+Select the scope to be alerted on by configuring:
 
+**1. Predefined selectors**
+* The Infrastructure integration to cover (select `Any Infrastructure alert` to cover them all). See the [Watchdog overview][1] for a full list of integrations covered by Watchdog infrastructure)
+* The Tags available for the selected integration
 
-[1]: /integrations/system/
-[2]: /integrations/redisdb/
-[3]: /integrations/postgres/
-[4]: /integrations/nginx/
-[5]: /integrations/amazon_web_services/
-[6]: /integrations/amazon_s3/
-[7]: /integrations/amazon_elb/
-[8]: /integrations/amazon_cloudfront/
-[9]: /integrations/amazon_dynamodb/
+**2. Additional filters**
+* Filter on any additional tag available on the Watchdog event (like `team` for example)
+* Boolean and wildcards are supported
+* Dimensions available on the predefined selectors should not be used in the additional filters
 
+**3. Group By**
+* The dimensions you want to [group notifications by][2]
+
+After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame.
+
+[1]: /watchdog/#overview
+[2]: /monitors/configuration/?tab=thresholdalert#alert-grouping
 {{% /tab %}}
-{{% tab "Logs (beta)" %}}
+{{% tab "Logs" %}}
 
 A logs alert indicates that either a new pattern of error logs has been detected or that there has been an increase in an existing pattern of error logs.
 
-{{< img src="/monitors/monitor_types/watchdog/log_anomaly_monitor.png" alt="The Watchdog monitor's edit page showing the alert category set to logs, alert type as log anomaly, env set to production, service set to ad-server, and the monitor's title is Anomaly Detected in Production Ad Server" style="width:55%;">}}
+{{< img src="/monitors/monitor_types/watchdog/log_anomaly_monitor-3.png" alt="The Watchdog monitor's edit page showing the alert category set to logs, alert type as log anomaly, env set to production, service set to ad-server, and the monitor's title is Anomaly Detected in Production Ad Server" style="width:55%;">}}
 
 ### Select sources {#select-sources-3}
 
-Choose your environment, service, log source, log status, and log anomaly type from the dropdown menus.
+Select the scope to be alerted on by configuring:
 
-The first four parameters (environment, service, log source, log status) refer to attributes of the logs themselves. The monitor only triggers if Watchdog finds an anomaly on logs with attributes that match the ones specified.
+**1. Predefined selectors**
+* The environment (leave empty to alert on all environments). These values are derived from the `env` tag in your logs
+* The service (leave empty to alert on all services). These values are derived from the `service` [reserved attribute][2] in your logs
+* The log source (leave empty to alert on all sources). These values are derived from the `source` [reserved attribute][2] in your logs
+* The log status (leave empty to alert on all status). These values are derived from the `status` [reserved attribute][2] in your logs
+* The log anomaly type (`new Error` or `Spike in existing logs`) determines whether the anomaly describes a new pattern of error logs or an increase in an existing pattern of error logs
 
-The fifth parameter, log anomaly type, refers to whether the anomaly describes a new pattern of error logs or an increase in an existing pattern of error logs.
+**2. Additional filters**
+* Filter on any additional tag available on the Watchdog event (like `team` for example)
+* Boolean and wildcards are supported
+* Dimensions available on the predefined selectors should not be used in the additional filters
 
-After the selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time, along with a list of events.
+**3. Group By**
+* The dimensions you want to [group notifications by][1]
 
+After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame.
+
+[1]: /monitors/configuration/?tab=thresholdalert#alert-grouping
+[2]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 {{% /tab %}}
 {{< /tabs >}}
 

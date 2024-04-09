@@ -1,0 +1,10 @@
+{
+  "apiUrl": "https://dd-corpsite.datadoghq.com/api/v1",
+  "files": ["{,!(node_modules)/**/}*.preview.synthetics.json"],
+  "global": {
+    "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}"
+  },
+  "subdomain": "dd-corpsite",
+  "timeout": 220000,
+  "headers": {"gitlab":  "true"}
+}

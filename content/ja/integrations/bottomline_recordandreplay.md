@@ -24,8 +24,7 @@ author:
   support_email: partner.cfrm@bottomline.com
   vendor_id: bottomline
 categories:
-- クラウド
-- モニタリング
+- mainframe
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md
 display_on_public_website: true
@@ -38,8 +37,7 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: bottomline_recordandreplay
-oauth: {}
-public_title: 'Bottomline の Record and Replay: Mainframe インテグレーション'
+public_title: 'Bottomline の Record and Replay: Mainframe'
 short_description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
 supported_os:
 - linux
@@ -47,11 +45,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Mainframe
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Cloud
-  - Category::Monitoring
-  - Offering::Integration
   configuration: README.md#Setup
   description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
   media:
@@ -69,7 +66,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: 'Bottomline の Record and Replay: Mainframe インテグレーション'
+  title: 'Bottomline の Record and Replay: Mainframe'
 ---
 
 

@@ -109,13 +109,11 @@ En esta guía, se asume que actualizaste a la v6 del Agent utilizando la [guía 
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-7. Reinicia el Agent
+7. Reinicia el Agent:
 
     ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo /etc/init.d/datadog-agent restart
+    sudo systemctl restart datadog-agent # Systemd
+    sudo /etc/init.d/datadog-agent restart # Upstart
     ```
 
 8. Elimina `/etc/datadog-agent` (opcional):
@@ -158,13 +156,11 @@ En esta guía, se asume que actualizaste a la v6 del Agent utilizando la [guía 
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-5. Reinicia el Agent
+5. Reinicia el Agent:
 
     ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo /etc/init.d/datadog-agent restart
+    sudo systemctl restart datadog-agent # Systemd
+    sudo /etc/init.d/datadog-agent restart # Upstart
     ```
 
 6. Elimina `/etc/datadog-agent` (opcional):

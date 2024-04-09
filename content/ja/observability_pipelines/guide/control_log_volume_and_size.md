@@ -4,25 +4,25 @@ aliases:
 further_reading:
 - link: /observability_pipelines/working_with_data/
   tag: ドキュメント
-  text: Vector を使ったデータ操作
-- link: /observability_pipelines/vector_configurations/
+  text: 観測可能性パイプラインを使ったデータの操作
+- link: /observability_pipelines/configurations/
   tag: ドキュメント
-  text: Vector の構成の詳細
+  text: 観測可能性パイプラインの構成の詳細
 kind: ガイド
 title: ログの量とサイズの制御
 ---
 
 ## 概要
 
-組織の規模が大きくなるとログの量が増えるため、下流のサービス (ログ管理ソリューション、SIEM など) で取り込みやインデックスを作成するコストも増加します。このガイドでは、Vector 変換を使用してログ量を削減し、ログのサイズを切り詰めて、データがインフラストラクチャーやネットワークから離れる前にコストを管理する方法を説明します。
+組織の規模が大きくなるとログの量が増えるため、下流のサービス (ログ管理ソリューション、SIEM など) で取り込みやインデックスを作成するコストも増加します。このガイドでは、観測可能性パイプラインの変換を使用してログ量を削減し、ログのサイズを切り詰めて、データがインフラストラクチャーやネットワークから離れる前にコストを管理する方法を説明します。
 
 ## 前提条件
-- [Vector のインストールと構成][1]を行い、ソースからデータを収集し、目的地までルーティングしています。
-- 事前に [Vector の構成の基本][2]をご確認ください。
+- [観測可能性パイプラインワーカーをインストール、構成し][1]、ソースからデータを収集し、宛先にルーティングしている。
+- [観測可能性パイプラインの構成の基本][2]に精通している。
 
 ## ログ量を管理するために変換を使用する
 
-観測可能性パイプラインでは、**変換**はイベントを変更するアクションを実行します。イベントは、パイプラインを流れるログ、メトリクス、またはトレースです。
+観測可能性パイプラインでは、変換はイベントを変更するアクションを実行します。イベントは、パイプラインを流れるログです。
 
 ### イベントの重複排除
 
@@ -71,7 +71,7 @@ inputs = [ "my-source-or-transform-id" ]
 {{% /tab %}}
 {{< /tabs >}}
 
-Vector は、重複排除されたイベントを追跡するために、すべてのイベントに一意の識別子を割り当てます。`cache` オプションは、将来的に重複したデータをチェックするために、最近のイベントをキャッシュすることができます。`fields` オプションは、イベントが重複しているかどうかを判断するためにどのフィールドを使用するかをリストアップします。
+観測可能性パイプラインワーカーは、重複排除されたイベントを追跡するために、すべてのイベントに一意の識別子を割り当てます。`cache` オプションは、将来的に重複したデータをチェックするために、最近のイベントをキャッシュすることができます。`fields` オプションは、イベントが重複しているかどうかを判断するためにどのフィールドを使用するかをリストアップします。
 
 ### イベントの絞り込み
 
@@ -80,9 +80,9 @@ Vector は、重複排除されたイベントを追跡するために、すべ�
 - `env` のような特定のタグ。
 - 特定のフィールドの値、例えば `status` フィールドは `400` でなければなりません。
 
-そのような場合は、[Vector Remap Language (VRL)][5] または [Datadog Log Search 構文][6]を使用して条件を設定するログをフィルタリングするための[フィルター変換][4]を含むコンポーネントを挿入してください。条件に一致しないログはドロップされます。
+そのような場合は、[Datadog Processing Language (DPL) / Vector Remap Language (VRL)][5] または [Datadog Log Search 構文][6]を使用して条件を設定するログをフィルタリングするための[フィルター変換][4]を含むコンポーネントを挿入してください。条件に一致しないログはドロップされます。
 
-以下の例では、フィルター変換と Vector Remap Language を使って、`status` が `500` のログのみを送信しています。
+以下の例では、フィルター変換と DPL/VRL を使って、`status` が `500` のログのみを送信しています。
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -138,7 +138,7 @@ inputs = [ "my-source-or-transform-id" ]
 
 CDN のログなど、大量に送られてくるデータやノイズを多く含むデータを分析する場合、すべてのログを送信先に送ることは不要です。代わりに、[サンプル変換][7]を使って、統計的に有意な分析を行うために必要なログのみを送信します。
 
-`exclude` フィールドは、サンプリングするイベントを除外し、VRL や Datadog Log Search 構文もサポートします。以下の例では、`rate` で設定された 10 イベントごとにサンプリングする構成を示しています。
+`exclude` フィールドは、サンプリングするイベントを除外し、DPL/VRL や Datadog Log Search 構文もサポートします。以下の例では、`rate` で設定された 10 イベントごとにサンプリングする構成を示しています。
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -362,7 +362,7 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 
 縮小変換では、`group_by` はイベントをグループ化するために使用するフィールドの順序付きリストです。この例では、イベントは `host`、`pid`、`tid` フィールドでグループ化されています。
 
-`merge_strategies` は、フィールド名とカスタム統合戦略の対応表です。各値を配列に追加する `array` や、すべての数値を加算する `sum` など、[さまざまな統合戦略][10]が存在します。この例では、`concat_newline` を使用して、各文字列の値を連結し、改行で区切ります。
+`merge_strategies` は、フィールド名とカスタム統合戦略の対応表です。各値を配列に追加する `array` や、すべての数値を加算する `sum` など、さまざまな統合戦略が存在します。この例では、`concat_newline` を使用して、各文字列の値を連結し、改行で区切ります。
 
 `starts_when` はトランザクションの最初のイベントを区別するために使用される条件です。この条件があるイベントに対して `true` に解決されると、前のトランザクションはこのイベントなしでフラッシュされ、新しいトランザクションが開始されます。この例では、`^[^\\s]` 正規表現条件にマッチしない `.message` を持つイベントは、1 つのイベントにまとめられます。
 
@@ -439,7 +439,7 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 
 ログには不要なフィールドが含まれることがあります。1 日に何テラバイトものデータを処理する場合、不要なフィールドを削除することで、取り込みとインデックス作成を行うログの総数を大幅に削減することができます。
 
-不要なフィールドを削除するには、[Vector Remap Language][5] を使ってログデータをリマップします。次の例では、`del` を使って不要なタグを削除しています。
+不要なフィールドを削除するには、[DPL/VRL][5] を使ってログデータをリマップします。次の例では、`del` を使って不要なタグを削除しています。
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -489,17 +489,16 @@ del(.unecessary_tag_field)"""
 {{% /tab %}}
 {{< /tabs >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/observability_pipelines/setup/
-[2]: /ja/observability_pipelines/vector_configurations/
-[3]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
-[4]: https://vector.dev/docs/reference/configuration/transforms/filter/
-[5]: https://vector.dev/docs/reference/vrl/
+[2]: /ja/observability_pipelines/configurations/
+[3]: /ja/observability_pipelines/reference/transforms/#dedupe
+[4]: /ja/observability_pipelines/reference/transforms/#filter
+[5]: /ja/observability_pipelines/reference/processing_language/
 [6]: /ja/logs/explorer/search_syntax/
-[7]: https://vector.dev/docs/reference/configuration/transforms/sample/
-[8]: https://vector.dev/docs/reference/configuration/transforms/log_to_metric/
-[9]: https://vector.dev/docs/reference/configuration/transforms/reduce/
-[10]: https://vector.dev/docs/reference/configuration/transforms/reduce/#merge_strategies
+[7]: /ja/observability_pipelines/reference/transforms/#sample
+[8]: /ja/observability_pipelines/reference/transforms/#logtometric
+[9]: /ja/observability_pipelines/reference/transforms/#reduce

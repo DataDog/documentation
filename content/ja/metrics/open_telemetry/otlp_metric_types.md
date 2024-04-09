@@ -5,7 +5,7 @@ further_reading:
 - link: metrics/distributions
   tag: ドキュメント
   text: ディストリビューションの詳細
-- link: tracing/trace_collection/open_standards/
+- link: opentelemetry/
   tag: ドキュメント
   text: OpenTelemetry の詳細
 - link: /opentelemetry/guide/otlp_delta_temporality/
@@ -35,7 +35,7 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターは、Ope
 
 **注**: OpenTelemetry はメトリクス API のインスツルメント (`Gauge`、`Counter`、`UpDownCounter`、`Histogram` など) を提供しており、それらの計測値は OTLP メトリクス (Sum、Gauge、Histogram) としてエクスポートすることが可能です。OTLP メトリクスの他のソースも可能です。アプリケーションやライブラリは、生成する OTLP のメトリクスをカスタマイズすることができます。生成される OTLP メトリクスとそのカスタマイズ方法を理解するために、OpenTelemetry SDK または OTLP 生成アプリケーションのドキュメントをお読みください。
 
-**注**: OpenTelemetry プロトコルは、メトリクスを時間で表現する 2 つの方法をサポートしています。[累積一時性とデルタ一時性][2]があり、以下に説明するメトリクスに影響します。CUMULATIVE に設定すると、アプリケーション (またはコレクター) の起動時にいくつかのデータポイントを破棄する可能性があるため、OTel 実装の一時性設定を **DELTA** に設定します。詳細については、[OpenTelemetry によるデルタ一時性メトリクスの生成][3]をお読みください。
+**注**: OpenTelemetry プロトコルは、メトリクスを時間で表現する 2 つの方法をサポートしています。[累積一時性とデルタ一時性][2]があり、以下に説明するメトリクスに影響します。CUMULATIVE に設定すると、アプリケーション (またはコレクター) の起動時にいくつかのデータポイントを破棄する可能性があるため、OpenTelemetry 実装の一時性設定を **DELTA** に設定します。詳細については、[OpenTelemetry によるデルタ一時性メトリクスの生成][3]をお読みください。
 
 ## メトリクスタイプ
 
@@ -83,7 +83,7 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターでは、
 : 指定された下限値と上限値を持つバケットのタイムウィンドウにおけるバケット数。<br>
 **Datadog In-App Type**: COUNT
 
-- `send_count_sum_metrics` フラグが有効な場合、以下のメトリクスが生成されます。
+- `send_aggregation_metrics` フラグが有効な場合、以下のメトリクスが生成されます。
 
 `<METRIC_NAME>.sum`
 : タイムウィンドウ内に送信された値の総和。<br>
@@ -93,7 +93,15 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターでは、
 : タイムウィンドウ内に送信された値の数。<br>
 **Datadog In-App Type**: COUNT
 
-**注**: `send_count_sum_metrics` は、ディストリビューションモードを使用していないときのみ有効です。
+`<METRIC_NAME>.min`
+: タイムウィンドウで送信された値の最小値。delta OTLP ヒストグラムでのみ利用可能です。Datadog エクスポーター v0.75.0 および Datadog Agent v6.45.0 および v7.45.0 以降利用可能です。 <br>
+**Datadog アプリ内タイプ**: GAUGE
+
+`<METRIC_NAME>.max`
+: タイムウィンドウで送信された値の最大値。delta OTLP ヒストグラムでのみ利用可能です。Datadog エクスポーター v0.75.0 および Datadog Agent v6.45.0 および v7.45.0 以降利用可能です。 <br>
+**Datadog アプリ内タイプ**: GAUGE
+
+**注**: `send_aggregation_metrics` は、ディストリビューションモードを使用していない場合にのみ有効です。Datadog エクスポーター v0.75.0 以前、Datadog Agent v6.45.0 および v7.45.0 では、代わりに `send_count_sum_metrics` を使用します。
 
 [1]: /ja/metrics/distributions
 [2]: /ja/dashboards/functions/arithmetic/#cumulative-sum
@@ -124,19 +132,6 @@ OTLP はデータポイントレベルの属性とリソース属性の 2 種類
 Datadog Agent と OpenTelemetry Collector Datadog エクスポーターは、データポイントレベルの属性をタグとしてマッピングします。OpenTelemetry のセマンティック規則に従ったリソース属性は、同等の Datadog 規則が存在すればそれにマッピングされます。
 
 `resource_attributes_as_tags` フラグを使用すると、すべてのリソースの属性をタグとして追加することができます。
-
-### ホスト名解決
-
-OpenTelemetry は、ホスト名に関する特定のセマンティック規則を定義しています。OTLP ペイロードが既知のホスト名属性を持つ場合、Datadog はこれらの規則に従い、その値をホスト名として使用しようとします。セマンティック規則は、以下の順序で考慮されます。
-
-1. `datadog.host.name`、Datadog 固有のホスト名規則
-1. クラウドプロバイダー固有の規則、`cloud.provider` セマンティック規則がベース
-1. Kubernetes 固有のセマンティック規約である `k8s.node.name` と `k8s.cluster.name`
-1. `host.id`、一意のホスト ID
-1. `host.name`、システムホスト名
-
-存在しない場合、Datadog はペイロードにシステムレベルのホスト名を割り当てます。
-リモートホストからデータを送信する場合、パイプラインに ['resource detection' プロセッサー][1]を追加することで、正確なホスト名解決を行うことができます。
 
 ### 例
 
@@ -186,12 +181,14 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 
 [分布についてもっと読む][1]と、さらなる集計の構成方法を理解できます。
 
-また、`counters` モードを使用していて、`send_count_sum_metrics` フラグを有効にすると、ヒストグラムバケットの境界を `[-inf, 2, inf]` に設定した場合に，以下のメトリクスが報告されます。
+また、`counters` モードを使用し、`send_aggregation_metrics` フラグを有効にし、ヒストグラムのバケットの境界を `[-inf, 2, inf]` とした場合、以下のメトリクスが報告されます。
 
-| メトリクス名                                 | 値  | タグ                                | Datadog アプリ内タイプ |
+| メトリクス名                                 | 値  | Lambda のトレースされた起動の 1 時間単位使用量の取得                                | Datadog アプリ内タイプ |
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`  | `8`    | 非該当                                 | COUNT               |
 | `request.response_time.distribution.sum`    | `15`   | 非該当                                 | COUNT               |
+| `request.response_time.distribution.max`    | `3`    | 非該当                                 | GAUGE               |
+| `request.response_time.distribution.min `   | `1`    | 非該当                                 | GAUGE               |
 | `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`、`upper_bound:2` | GAUGE               |
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`、`upper_bound:inf`  | GAUGE               |
 
@@ -201,7 +198,7 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 
 レガシー OTLP Summary のメトリクス、`request.response_time.summary` をあるウェブサーバーから送信しているとします。ある収集期間において、ウェブサーバーは `[1,1,1,2,2,3,3]` という値でメトリクスを報告したとします。最小分位数、最大分位数、および中央値分位数が有効になっている場合、次のメトリクスが報告されます。
 
-| メトリクス名                                   | 値  | タグ                                | Datadog アプリ内タイプ |
+| メトリクス名                                   | 値  | Lambda のトレースされた起動の 1 時間単位使用量の取得                                | Datadog アプリ内タイプ |
 | --------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`    | `8`    | 非該当                                 | COUNT               |
 | `request.response_time.distribution.sum`      | `15`   | 非該当                                 | COUNT               |
@@ -218,6 +215,6 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
+[1]: /ja/opentelemetry/schema_semantics/hostname/
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
 [3]: /ja/opentelemetry/guide/otlp_delta_temporality/

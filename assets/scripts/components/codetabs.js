@@ -1,13 +1,19 @@
 import { getQueryParameterByName } from '../helpers/browser';
+import { getCookieByName } from '../helpers/helpers';
+import regionConfig from '../config/regions.config';
 
 const initCodeTabs = () => {
-    const codeTabsList = document.querySelectorAll('.code-tabs')
+    let codeTabsList = document.querySelectorAll('.code-tabs');
+    const { allowedRegions } = regionConfig;
     const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
+    const codeTabParameters = allowedRegions.reduce((k,v) => ({...k, [v]: {}}), {});
 
     const init = () => {
         renderCodeTabElements()
         addEventListeners()
         activateTabsOnLoad()
+        getContentTabHeight()
+        addObserversToCodeTabs()
     }
 
     /**
@@ -19,7 +25,6 @@ const initCodeTabs = () => {
                 const navTabsElement = codeTabsElement.querySelector('.nav-tabs')
                 const tabContent = codeTabsElement.querySelector('.tab-content')
                 const tabPaneNodeList = tabContent.querySelectorAll('.tab-pane')
-
                 tabPaneNodeList.forEach(tabPane => {
                     const title = tabPane.getAttribute('title')
                     const lang = tabPane.getAttribute('data-lang')
@@ -76,29 +81,50 @@ const initCodeTabs = () => {
     }
 
     const activateTabsOnLoad = () => {
+        const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
         if (tabQueryParameter) {
             const selectedLanguageTab = document.querySelector(`a[data-lang="${tabQueryParameter}"]`);
 
             if (selectedLanguageTab) {
                 selectedLanguageTab.click()
+            }else{
+                activateCodeTab(firstTab)
             }
         } else {
             if (codeTabsList.length > 0) {
-                const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
                 activateCodeTab(firstTab)
             }
         }
     }
 
     const addEventListeners = () => {
-        const allTabLinksNodeList = document.querySelectorAll('.code-tabs .nav-tabs li a')
-
-        allTabLinksNodeList.forEach(link => {
-            link.addEventListener('click', () => {
-                event.preventDefault()
-                activateCodeTab(link)
-            })
-        })
+        if (codeTabsList.length > 0) {
+            codeTabsList.forEach(codeTabsElement => {
+                let allTabLinksNodeList = codeTabsElement.querySelectorAll('.nav-tabs li a');
+                allTabLinksNodeList.forEach(link => {
+                    link.addEventListener('click', e => {                        
+                        e.preventDefault();
+                        const region = getCookieByName('site');
+                        const regionalCodeTabs = codeTabParameters[region];
+                        const targetTop = e.target.getBoundingClientRect().top + window.scrollY;
+                        let offsetY = 0;
+                        activateCodeTab(link);
+                        getContentTabHeight();
+                        for(const [idx, codeTab] of Object.entries(regionalCodeTabs)) {
+                            if (codeTab.elementTop < targetTop && codeTab.elementCurrentHeight > 0) {
+                                offsetY += codeTab.elementHeightDifference;
+                            }
+                        }
+                        window.scrollTo({
+                            top: window.scrollY + offsetY,
+                            behavior: "instant"
+                        });
+                        getContentTabHeight();
+                        offsetY = 0;
+                    })
+                });
+            });
+        }
     }
 
     /**
@@ -121,6 +147,68 @@ const initCodeTabs = () => {
             null,
             `${url}?${queryParams}${window.location.hash}`
         );
+    }
+
+    const addObserversToCodeTabs = () => {
+        allowedRegions.forEach((targetRegion) => {
+        let tabContentList = document.querySelectorAll('.tab-content');
+        tabContentList = filterArrayOfNonRegionalCodeTabs(tabContentList, targetRegion);
+        const resizeObserver = new ResizeObserver((entries) => {
+            entries.forEach((entry, idx) => {
+                if (entry?.contentBoxSize?.[0]) {
+                            const elementTop = entry.target.getBoundingClientRect().top + window.scrollY;
+                            const elementCurrentHeight = entry.target.getBoundingClientRect().height;
+                            const elementHeightDifference =  elementCurrentHeight - codeTabParameters[targetRegion][idx].elementCurrentHeight;
+                            codeTabParameters[targetRegion][idx] = {
+                                elementTop,
+                                elementCurrentHeight,
+                                elementHeightDifference: Math.round(elementHeightDifference),
+                            }
+                        }
+                    })
+                });
+                tabContentList.forEach((codeTabsElement) => {
+                    resizeObserver.observe(codeTabsElement);
+                })
+            })
+    }
+
+    const getContentTabHeight = () => {
+        allowedRegions.forEach((targetRegion) => {
+            let tabContentList = document.querySelectorAll('.tab-content');
+            tabContentList = filterArrayOfNonRegionalCodeTabs(tabContentList, targetRegion);
+            tabContentList.forEach((tabContentElement, idx) => {
+                    if (codeTabParameters?.[targetRegion]?.[idx]) {
+                        const elementCurrentHeight = tabContentElement.getBoundingClientRect().height;
+                        const elementHeightDifference = elementCurrentHeight - codeTabParameters[targetRegion][idx].elementCurrentHeight;
+                        codeTabParameters[targetRegion][idx] = {
+                            elementTop: codeTabParameters[targetRegion][idx].elementTop || tabContentElement.getBoundingClientRect().top + window.scrollY,
+                            elementCurrentHeight,
+                            elementHeightDifference: Math.round(elementHeightDifference),
+                        }
+                    } else {
+                        codeTabParameters[targetRegion][idx] = {
+                            elementCurrentHeight: tabContentElement.getBoundingClientRect().height,
+                            ...codeTabParameters?.[targetRegion]?.[idx]
+                        }
+                    }
+            });
+        });
+    }
+
+    const filterArrayOfNonRegionalCodeTabs = (codeTabElements, targetRegion) => {
+        return [...codeTabElements].filter((codeTabElement) => {
+            let targetNode = codeTabElement;
+            const arr = [];
+            while (targetNode) {
+                if (targetNode instanceof Element && targetNode?.hasAttribute("data-region")) {
+                    return targetNode.getAttribute("data-region").includes(targetRegion) ? true : false;
+                }
+                arr.unshift(targetNode);
+                targetNode = targetNode.parentNode;
+            }
+            return true;
+        })
     }
 
     init()

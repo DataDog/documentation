@@ -1,12 +1,16 @@
 ---
-disable_sidebar: true
+cascade:
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: Guides sur CI Visibility
+disable_toc: true
 kind: guide
 private: true
 title: Guides sur CI Visibility
 ---
 
-{{< whatsnext desc="Guides sur CI Visibility :" >}}
-    {{< nextlink href="/continuous_integration/guides/flaky_test_management" >}}Gestion des tests irréguliers{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/rum_integration" >}}Instrumenter vos tests Browser avec RUM{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/rum_swift_integration" >}}Instrumenter vos tests Swift avec RUM{{< /nextlink >}}
+{{< whatsnext desc="Guides sur Pipeline Visibility :" >}}
+    {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}Créer des filtres d'exclusion pour le contrôle de l'ingestion{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}Comprendre le modèle de données des pipelines et les types d'exécution{{< /nextlink >}}
 {{< /whatsnext >}}

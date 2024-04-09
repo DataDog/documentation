@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: twingate-inc-twingate
 app_uuid: ae992049-e257-4322-a520-cb348a17ae5e
 assets: {}
@@ -9,13 +11,9 @@ author:
   support_email: support@twingate.com
   vendor_id: twingate
 categories:
+- マーケットプレイス
 - ネットワーク
 - セキュリティ
-- クラウド
-- AWS
-- azure
-- google cloud
-- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -29,7 +27,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: twingate_inc_twingate
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -43,22 +40,18 @@ public_title: Twingate
 short_description: 簡単にデプロイできるゼロトラストネットワークアクセス
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Marketplace
   - Category::Network
   - Category::Security
-  - Category::Cloud
-  - Category::AWS
-  - Category::Azure
-  - Category::Google Cloud
-  - Category::Marketplace
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 簡単にデプロイできるゼロトラストネットワークアクセス
   media:
@@ -71,8 +64,10 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Twingate
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -88,7 +83,7 @@ Twingate Business Tier には、以下のものが含まれます。
 
 エンタープライズ層への加入するには、Datadog Marketplace から購入してください。Twingate のスタッフがアカウントのアップグレードをサポートします。
 
-## サポート
+## Agent
 お困りですか？詳しくは以下をご覧ください。
 * [Twingate ドキュメント](https://www.twingate.com/docs/)
 * [Twingate サポートポータル](https://help.twingate.com/)

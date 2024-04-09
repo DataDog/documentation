@@ -17,7 +17,7 @@ further_reading:
 
 ### Versioning
 
-Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here’s an outline of what constitutes each type of semver change:
+Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
 
 | Major          | Minor                                                          | Patch    |
 |---------------------------------|-------------------------------------------------------------------------|----------------------|
@@ -41,7 +41,7 @@ If you have any questions or concerns about our support for a particular version
 When the Node.js project drops support for an LTS major release line (when it goes EOL), support for it is dropped in the next major version of `dd-trace`.
 The last major supporting release line of `dd-trace` library supports that EOL version of Node.js for at least another year on a maintenance mode basis.
 
-Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it’s not possible to solve the issue without moving to another non-EOL release.
+Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it's not possible to solve the issue without moving to another non-EOL release.
 Datadog does not make new releases of `dd-trace` to provide specific support for non-LTS Node.js major release lines (odd numbered versions).
 
 For the best level of support, always run the latest LTS release of Node.js, and the latest major version of `dd-trace`. Whatever release line of Node.js you use, also use the latest version of Node.js on that release line, to ensure you have the latest security fixes.
@@ -82,7 +82,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=9.5`  | Fully supported | CLI usage requires `NODE_OPTIONS='-r dd-trace/init'`. |
+| [next][18]              | `>=9.5`  | Fully supported | CLI usage requires `NODE_OPTIONS='-r dd-trace/init'`. <br><br>The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul>|
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
 
@@ -91,7 +91,6 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module      | Support Type        | Notes |
 | ----------- | ------------------- | ------------------------------------------ |
 | [dns][22]   | Fully supported     |       |
-| [fs][23]    | Fully supported     |       |
 | [http][24]  | Fully supported     |       |
 | [https][25] | Fully supported     |       |
 | [http2][26] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
@@ -134,6 +133,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
 | [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [openai][64]       | `3.x`      | Fully supported |                                                        |
 
 ### Promise library compatibility
 
@@ -169,7 +169,7 @@ For additional information or to discuss [leave a comment on this github issue][
 [1]: https://semver.org/
 [2]: https://github.com/DataDog/dd-trace-js/releases
 [3]: /help/
-[4]: https://nodejs.org/en/about/releases/
+[4]: https://github.com/nodejs/release#release-schedule
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com
@@ -229,3 +229,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
+[64]: https://github.com/openai/openai-node

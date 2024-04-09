@@ -1,6 +1,6 @@
 ---
 categories:
-- web
+- caching
 dependencies: []
 description: Surveillez le trafic Web Edgecast à l'aide de métriques Datadog.
 doc_link: https://docs.datadoghq.com/integrations/edgecast_cdn/

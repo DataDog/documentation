@@ -26,7 +26,7 @@ The IoT Agent also supports:
 - Custom metric collection using an embedded [DogStatsD][6] server
 - Log collection using [tailing files][7], [TCP/UDP][8], and [journald][9]
 
-The IoT Agent does not include the Python interpreter and other integrations pre-packaged with the standard Agent. It also doesn’t support tracing for APM, live process monitoring, or network performance monitoring.
+The IoT Agent does not include the Python interpreter and other integrations pre-packaged with the standard Agent. It also doesn't support tracing for APM, live process monitoring, or network performance monitoring.
 
 ## Setup
 
@@ -74,8 +74,9 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. If running Ubuntu 14 or earlier or Debian 8 or earlier, copy the keyring to `/etc/apt/trusted.gpg.d`:
@@ -119,6 +120,7 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```

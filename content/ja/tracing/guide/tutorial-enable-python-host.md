@@ -167,7 +167,7 @@ pip install ddtrace
 : `( 2, newNote)`
 
 `curl -X GET 'localhost:8080/notes'`
-: `{ “1”: “hello”, “2”: “newNote” }`
+: `{ "1": "hello", "2": "newNote" }`
 
 しばらく待って、Datadog の UI を見てみてください。[**APM > Traces**][11] に移動します。Traces リストには、次のように表示されます。
 

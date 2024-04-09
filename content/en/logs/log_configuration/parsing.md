@@ -49,7 +49,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 After processing, the following structured log is generated:
 
-{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1"  style="width:80%;">}}
+{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1" style="width:80%;">}}
 
 **Note**:
 
@@ -59,7 +59,6 @@ After processing, the following structured log is generated:
 * You must have unique rule names within the same Grok parser.
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 * Properties with null or empty values are not displayed.
-* A full list of regular expression syntax accepted by the Agent is available in the [RE2 repo][1].
 * The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
 * Certain logs can produce large gaps of whitespace. Use `\n` and `\s+` to account for newlines and whitespace.
 
@@ -107,7 +106,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 : Matches an integer number (with scientific notation support) and parses it as an integer number.
 
 `word`
-: Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.
+: Matches a _word_, which starts with a word boundary; contains characters from a-z, A-Z, 0-9, including the `_` (underscore) character; and ends with a word boundary. Equivalent to `\b\w+\b` in regex.
 
 `doubleQuotedString`
 : Matches a double-quoted string.
@@ -208,7 +207,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 
 At the bottom of your Grok processor tiles, there is an **Advanced Settings** section:
 
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" style="width:80%;">}}
 
 ### Parsing a specific text attribute
 
@@ -216,7 +215,7 @@ Use the **Extract from** field to apply your Grok processor on a given text attr
 
 For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could parse this log as follows:
 
-{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line" style="width:80%;">}}
 
 ### Using helper rules to factorize multiple parsing rules
 
@@ -242,7 +241,7 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" style="width:80%;">}}
 
 ## Examples
 
@@ -282,12 +281,12 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2" style="width:80%;">}}
 
 You don't need to specify the name of your parameters as they are already contained in the log.
 If you add an **extract** attribute `my_attribute` in your rule pattern you will see:
 
-{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" style="width:80%;">}}
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with a separator.
 
@@ -303,7 +302,7 @@ user: john connect_date: 11/08/2017 id: 123 action: click
 rule %{data::keyvalue(": ")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser" style="width:80%;" >}}
 
 If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the allowlist in the parsing rule:
 
@@ -336,7 +335,7 @@ Other examples:
 | key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
 **Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
-The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters is extracted.
+The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterAllowList` is ignored as everything between the quoting characters is extracted.
 
 **Log:**
 
@@ -412,9 +411,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **Results**:
 
-{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4" style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" style="width:80%;" >}}
 
 ### Optional attribute
 
@@ -434,9 +433,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Note**: A rule will not match if you include a space after the first word in the optional section.
 
-{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" style="width:80%;" >}}
 
 ### Nested JSON
 
@@ -454,7 +453,7 @@ Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":20
 parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
-{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" style="width:80%;" >}}
 
 ### Regex
 
@@ -470,7 +469,7 @@ john_1a2b3c4 connected on 11/08/2017
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
 
 ### List to array
 
@@ -488,7 +487,7 @@ Users [John, Oliver, Marc, Tom] have been added to the database
 myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
-{{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
 
 **Log**:
 
@@ -587,7 +586,7 @@ Use the **CSV** filter to more-easily map strings to attributes when separated b
 The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` where:
 
 * `headers`: Defines the keys name separated by `,`. Keys names must start with alphabetical character and can contain any alphanumerical character in addition to `_`.
-* `separator`: Defines separators used to separate the different values. Only one character is accepted. Default: `,` . **Note**: Use `tab` to represent the tabulation character.
+* `separator`: Defines separators used to separate the different values. Only one character is accepted. Default: `,`. **Note**: Use `tab` for the `separator` to represent the tabulation character for TSVs.
 * `quotingcharacter`: Defines the quoting character. Only one character is accepted. Default: `"`
 
 **Note**:
@@ -634,6 +633,32 @@ Other examples:
 | `value1,value2,value3`       | `%{data::csv("key1,key2")}`                                              | {"key1": "value1", "key2":"value2"}             |
 | `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
+| <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
+
+### Use data matcher to discard unneeded text
+
+If you have a log where after you have parsed what is needed and know that the text after that point is safe to discard, you can use the data matcher to do so. For the following log example, you can use the `data` matcher to discard the `%` at the end.
+
+**Log**:
+
+```
+Usage: 24.3%
+```
+
+**Rule**:
+
+```
+MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
+```
+
+**Result**:
+
+```
+{
+  "usage": 24.3,
+  "ignore": "%"
+}
+```
 
 ### ASCII control characters
 

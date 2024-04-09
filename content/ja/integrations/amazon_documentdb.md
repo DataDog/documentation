@@ -1,11 +1,11 @@
 ---
 categories:
 - cloud
-- data store
+- data stores
 - aws
 - ログの収集
 dependencies: []
-description: AWS DocumentDB のメトリクスとログを監視
+description: Amazon DocumentDB のメトリクスとログを監視
 doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/
 draft: false
 further_reading:
@@ -14,7 +14,7 @@ further_reading:
   text: Amazon DocumentDB のメトリクスとログを Datadog で収集
 git_integration_title: amazon_documentdb
 has_logo: true
-integration_id: amazon-documentdb
+integration_id: ''
 integration_title: Amazon DocumentDB
 integration_version: ''
 is_public: true
@@ -22,26 +22,27 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_documentdb
 public_title: Datadog-Amazon DocumentDB インテグレーション
-short_description: AWS DocumentDB のメトリクスとログを監視
+short_description: Amazon DocumentDB のメトリクスとログを監視
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon DocumentDB は、MongoDB のワークロードをサポートする、高速で、スケーラブル、高可用性、フルマネージド型のドキュメントデータベースサービスです。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DocumentDB` が有効になっていることを確認します。
-2. [Datadog - AWS DocumentDB インテグレーション][3]をインストールします。
+2. [Datadog - Amazon DocumentDB インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -51,29 +52,29 @@ Amazon DocumentDB から S3 バケットまたは CloudWatch のいずれかに�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
+1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon DocumentDB ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_documentdb" >}}
 
 
 AWS から取得される各メトリクスには、dbinstanceidentifier、dbclusteridentifier など、AWS コンソールに表示されるタグと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS DocumentDB インテグレーションには、イベントは含まれません。
+Amazon DocumentDB インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
+Amazon DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
@@ -84,7 +85,7 @@ AWS DocumentDB インテグレーションには、サービスのチェック�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-documentdb
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_documentdb/amazon_documentdb_metadata.csv

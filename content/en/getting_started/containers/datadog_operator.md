@@ -8,7 +8,7 @@ further_reading:
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
     tag: 'GitHub'
     text: 'Datadog Operator: Advanced Installation'
-  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md'
+  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
     tag: 'GitHub'
     text: 'Datadog Operator: Configuration'
 ---
@@ -17,7 +17,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 
 ## Prerequisites
 
-- Kubernetes v1.14.X+
+- Kubernetes v1.20.X+
 - [Helm][3] for deploying the Datadog Operator
 - The Kubernetes command-line tool, [kubectl][4], for installing the Datadog Agent
 
@@ -36,29 +36,64 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
   ```yaml
-  apiVersion: datadoghq.com/v1alpha1
+  apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
   metadata:
     name: datadog
   spec:
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-    agent:
+    global:
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
+    features:
       apm:
         enabled: true
-      log:
+      logCollection:
         enabled: true
   ```
+  For all configuration options, see the [Operator configuration spec][6].
 
 4. Deploy the Datadog Agent:
   ```bash
   kubectl apply -f /path/to/your/datadog-agent.yaml
   ```
+
+### Running Agents in a single container
+
+<div class="alert alert-warning">Available in Operator v1.4.0 or later</div>
+
+By default, the Datadog Operator creates an Agent DaemonSet with pods running multiple Agent containers. Datadog Operator v1.4.0 introduces a configuration which allows users to run Agents in a single container. In order to avoid elevating privileges for all Agents in the single container, this feature is only applicable when `system-probe` or `security-agent` is not required. For more details, see [Running as an unprivileged user][7] on the Agent Data Security page.
+
+To enable this feature add `global.containerStrategy: single` to the `DatadogAgent` manifest:
+
+{{< highlight yaml "hl_lines=7" >}}
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      containerStrategy: single
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
+    features:
+      apm:
+        enabled: true
+      logCollection:
+        enabled: true
+{{< /highlight >}}
+With the above configuration, Agent pods run as single containers with three Agent processes. The default for `global.containerStrategy` is `optimized` and runs each Agent process in a separate container.
+
+**Note**: Running multiple Agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Pods running multiple processes need their lifecycles to be managed by a process manager, which is not directly controllable by Kubernetes and potentially leads to inconsistencies or conflicts in the container lifecycle management.
 
 ## Validation
 
@@ -96,3 +131,5 @@ helm delete my-datadog-operator
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: https://app.datadoghq.com/account/settings#api
+[6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[7]: https://docs.datadoghq.com/data_security/agent/#running-as-an-unprivileged-user

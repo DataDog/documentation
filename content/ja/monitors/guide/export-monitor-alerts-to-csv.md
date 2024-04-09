@@ -18,7 +18,7 @@ curl を使用して CSV を取得する場合は、以下のようにします�
 
 ```shell
 api_key=<DATADOG_API_KEY>
-app_key = <DATADOG_APPLICATION_KEY>
+app_key=<DATADOG_APPLICATION_KEY>
 
 curl -G \
     "https://app.datadoghq.com/report/hourly_data/monitor" \
@@ -29,12 +29,13 @@ curl -G \
 応答例
 
 ```text
-org_id,hour,source_type_name,alert_type,priority,event_object,host_name,device_name,alert_name,user,cnt
-<org_id_integer>, 2018-06-07 17,monitor alert,error,1,<event_object_string>,test.example.eu,"Host name: {{host.name}} Name name: {{name.name}}",<user_email>,1
+hour,host_name,alert_name,user,cnt
+
+2022-10-23 20,example_host_name,"Host name: {{host.name}} Name name: {{name.name}}",<user_email>,67
 ```
 {{< /site-region >}}
 
-{{< site-region region="eu,gov,us3,us5" >}}
+{{< site-region region="eu,gov,us3,us5,ap1" >}}
 
 この機能はサポートされていません。
 

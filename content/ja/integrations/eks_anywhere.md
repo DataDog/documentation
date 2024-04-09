@@ -3,11 +3,13 @@ app_id: eks-anywhere
 app_uuid: 21bd91d8-7594-4c2f-bbd8-11595e4511d1
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10248
     source_type_name: Amazon EKS Anywhere
 author:
   homepage: https://www.datadoghq.com
@@ -16,9 +18,12 @@ author:
   support_email: help@datadoghq.com
 categories:
 - AWS
-- containers
-- orchestration
+- クラウド
+- コンテナ
+- kubernetes
 - ログの収集
+- orchestration
+- プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md
 display_on_public_website: true
@@ -31,23 +36,25 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: eks_anywhere
-oauth: {}
 public_title: Amazon EKS Anywhere
 short_description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::AWS
+  - Category::Cloud
   - Category::Containers
-  - Category::Orchestration
+  - Category::Kubernetes
   - Category::Log Collection
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
   media: []
@@ -56,6 +63,7 @@ tile:
   title: Amazon EKS Anywhere
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![EKS ダッシュボード][1]
@@ -66,7 +74,7 @@ Amazon Elastic Kubernetes Service (EKS) は、標準 Kubernetes 環境のデプ�
 
 [Amazon EKS Anywhere][2]は、仮想マシン (VMware vSphere など) やベアメタルサーバーなど、オンプレミスで Kubernetes クラスターを作成・運用できるデプロイメントオプションです。
 
-## セットアップ
+## 計画と使用
 
 Datadog は既に Kubernetes や AWS と統合されているため、すぐに EKS を監視することができます。Kubernetes クラスターで実行中の Agent を EKS に移行する予定がある場合に、Datadog でクラスターの監視を続行できます。
 
@@ -100,7 +108,7 @@ EKS のモニタリングには、以下の Datadog インテグレーション�
 - [AWS][8]
 - [AWS EC2][9]
 
-### ログの収集
+### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -111,7 +119,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 環境変数の詳細とさらに高度なセットアップオプションについては、[コンテナログの収集手順][12]を参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
@@ -136,4 +144,4 @@ _Agent バージョン 6.0 以降で利用可能_
 [13]: https://docs.datadoghq.com/ja/help/
 [14]: https://www.datadoghq.com/blog/announcing-eks
 [15]: https://www.datadoghq.com/blog/eks-cluster-metrics
-[16]: https://docs.datadoghq.com/ja/integrations/amazon_eks_fargate/
+[16]: https://docs.datadoghq.com/ja/integrations/eks_fargate/

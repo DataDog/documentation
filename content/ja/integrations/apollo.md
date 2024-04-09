@@ -3,6 +3,7 @@ app_id: apollo
 app_uuid: b39f1239-b97f-4b3b-ab5a-7a888915eedd
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: apollo.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10014
     source_type_name: Apollo Engine
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,7 +23,6 @@ author:
   sales_email: sachin@apollographql.com
   support_email: sachin@apollographql.com
 categories:
-- モニター
 - キャッシュ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
@@ -35,21 +36,19 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: apollo
-oauth: {}
 public_title: Apollo
 short_description: GraphQL インフラストラクチャーのパフォーマンスを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
   - Category::Caching
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: GraphQL インフラストラクチャーのパフォーマンスを監視
   media: []
@@ -58,6 +57,7 @@ tile:
   title: Apollo
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -86,9 +86,9 @@ Studio は次のメトリクスを Datadog に送信します。
 
 (2020 年 10 月より前に設定されたインテグレーションでは、メトリクス名が `apollo.operations` ではなく `apollo.engine.operations` で始まり、`graph` ではなく `service` タグが使用されます。Apollo Studio のグラフのインテグレーションページで新しいメトリクス名に移行できます。)
 
-## セットアップ
+## 計画と使用
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 Apollo Datadog インテグレーションは、Studio に Datadog API キーとリージョンを提供するだけで簡単にセットアップできます。それ以上の構成は必要ありません。
 
@@ -110,25 +110,25 @@ Apollo Datadog インテグレーションは、Studio に Datadog API キーと
 
 6. Datadog  メトリクスエクスプローラーにアクセスし、メトリクスを確認します。メトリクスは、表示されるまでに最大 5 分かかる場合があります。
 
-### 使用方法
+### API
 
 詳細な使用方法については、[Apollo インテグレーションのドキュメント][7]を参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "apollo" >}}
 
 
-### イベント
+### ヘルプ
 
 現時点で、Apollo インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 現時点で、Apollo インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

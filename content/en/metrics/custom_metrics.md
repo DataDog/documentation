@@ -17,9 +17,17 @@ further_reading:
 - link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to unlock the full potential of metrics"
 - link: "https://www.datadoghq.com/blog/metrics-without-limits/"
   tag: "Blog"
   text: "Dynamically control your custom metrics volume with Metrics without Limits™"
+- link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+  tag: "Blog"
+  text: "Monitor your Linux web apps on Azure App Service with Datadog"
+algolia:
+  tags: ['custom metrics']
 ---
 
 ## Overview
@@ -55,6 +63,10 @@ The following custom metric naming convention must be followed:
 
 **Note**: Metric names are case sensitive in Datadog.
 
+### Metric units
+
+Set metric units through [Metrics Summary][12] or set custom metric units with the [Unit override][13] feature in the graph editor of your visualizations. For more information, see the [Metrics Units][14] documentation.
+
 ## Submitting custom metrics
 
 {{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
@@ -65,11 +77,11 @@ The following custom metric naming convention must be followed:
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}Generate APM span-based metrics{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generate live process-based metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
-You can also use one of the [Datadog official and community contributed API and DogStatsD client libraries][12] to submit your custom metrics
+You can also use one of the [Datadog official and community contributed API and DogStatsD client libraries][15] to submit your custom metrics
 
 **Note**: There are no enforced fixed rate limits on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][6].
 
@@ -90,4 +102,7 @@ You can also use one of the [Datadog official and community contributed API and 
 [9]: /metrics/types/?tab=rate#metric-types
 [10]: /metrics/types/?tab=count#metric-types
 [11]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
-[12]: /developers/community/libraries/
+[12]: /metrics/summary/#metric-unit
+[13]: /dashboards/guide/unit-override/
+[14]: /metrics/units/
+[15]: /developers/community/libraries/

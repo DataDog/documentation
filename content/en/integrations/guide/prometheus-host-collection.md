@@ -40,7 +40,7 @@ To collect your exposed metrics:
     init_config:
 
     instances:
-        - prometheus_url: 'localhost:<PORT>/<ENDPOINT>'
+        - openmetrics_endpoint: 'localhost:<PORT>/<ENDPOINT>'
           namespace: '<NAMESPACE>'
           metrics:
               - '<METRIC_TO_FETCH>': '<DATADOG_METRIC_NAME>'
@@ -64,10 +64,10 @@ Find below the full list of parameters that can be used for your `instances`:
 
 | Name                                    | Type                                    | Necessity | Default value | Description                                                                                                                                                                                                                                                          |
 | --------------------------------------- | --------------------------------------- | --------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `prometheus_url`                        | string                                  | required  | none          | The URL where your application metrics are exposed by Prometheus/OpenMetrics.                                                                                                                                                                                        |
+| `openmetrics_endpoint`                        | string                                  | required  | none          | The URL exposing metrics in the OpenMetrics format.                                                                           |
 | `namespace`                             | string                                  | required  | none          | The namespace to be appended before all metrics namespaces. Your metrics are collected in the form `namespace.metric_name`.                                                                                                                                          |
 | `metrics`                               | list of strings or `key:value` elements | required  | none          | List of `<METRIC_TO_FETCH>: <NEW_METRIC_NAME>` pairs for metrics to be fetched from the Prometheus endpoint.<br> `<NEW_METRIC_NAME>` is optional. It transforms the name in Datadog if set. This list should contain at least one metric.                            |
-| `prometheus_metrics_prefix`             | string                                  | optional  | none          | Prefix for exposed Prometheus/OpenMetrics metrics.                                                                                                                                                                                                                   |
+| `raw_metric_prefix`             | string                                  | optional  | none          | A prefix that is removed from all exposed metric names, if present.                                                                                                                 |
 | `health_service_check`                  | boolean                                 | optional  | true          | Send a service check reporting on the health of the Prometheus endpoint. The check is named `<NAMESPACE>.prometheus.health`.                                                                                                                                         |
 | `label_to_hostname`                     | string                                  | optional  | none          | Override the hostname with the value of one label.                                                                                                                                                                                                                   |
 | `label_joins`                           | object                                  | optional  | none          | The label join allows you to target a metric and retrieve its label using a 1:1 mapping.                                                                                                                                                                               |
@@ -106,7 +106,7 @@ To get started with collecting metrics exposed by Prometheus, follow these steps
     init_config:
 
     instances:
-        - prometheus_url: http://localhost:9090/metrics
+        - openmetrics_endpoint: http://localhost:9090/metrics
           namespace: 'documentation_example'
           metrics:
               - promhttp_metric_handler_requests_total: prometheus.handler.requests.total
@@ -133,7 +133,7 @@ Official integrations have their own dedicated directories. There's a default in
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [5]: /developers/custom_checks/prometheus/
-[6]: https://app.datadoghq.com/account/settings#agent
+[6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: /getting_started/tagging/
 [8]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example

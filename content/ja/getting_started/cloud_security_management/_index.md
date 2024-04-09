@@ -5,10 +5,13 @@ further_reading:
   text: クラウド セキュリティ マネジメント
 - link: /security/cspm/custom_rules/schema/
   tag: Documentation
-  text: CSPM クラウドリソーススキーマ
+  text: CSM Misconfigurations クラウドリソーススキーマ
 - link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
   tag: ブログ
   text: Datadog Workflows でエンドツーエンドプロセスを自動化する
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
@@ -18,25 +21,25 @@ title: Cloud Security Management の概要
 
 ## 概要
 
-[Datadog Cloud Security Management][1] (CSM) は、クラウドインフラストラクチャー全体にわたって、リアルタイムの脅威検出と継続的な構成監査を提供します。観測可能性データを活用した CSM には、[Cloud Security Posture Management (CSPM)][2] と [Cloud Workload Security (CWS)][3] が含まれています。
+[Datadog Cloud Security Management][1] (CSM) は、クラウドインフラストラクチャー全体にわたって、リアルタイムの脅威検出と継続的な構成監査を提供します。観測可能性データを活用した CSM には、[Misconfigurations][2] と [Threats][3] が含まれています。
 
 このガイドでは、CSM の導入と運用のためのベストプラクティスを説明します。
 
 ## フェーズ 1: デプロイメント
 
-1. [Datadog Agent (バージョン 7.40 以上)][4] をインストールします。
+1. [Datadog Agent (バージョン 7.44 以上)][4] をインストールします。
 2. クラウドリソースとインフラストラクチャーに対して、CSM を有効にします。
-    - **CWS**: [Kubernetes][5]、[Docker][6]、[ホストベース][7]のインストール。
-    - **CSPM**: [AWS][10]、[Azure][11]、[GCP][12]、[Kubernetes][8]、[Docker][9] の手順。
+    - **CSM Threats**: [Kubernetes][5]、[Docker][6]、[ホストベース][7]のインストール。
+    - **CSM Misconfigurations**: [AWS][10]、[Azure][11]、[GCP][12]、[Kubernetes][8]、[Docker][9] の手順。
 3. [CSM ホームページ][13]をチェックして、組織のリスクと脅威の概要を把握します。
-4. [すぐに使える 500 以上の CWS と CSPM の検出ルール][14]を確認します。
-5. [セキュリティシグナル][15]を探り、[CSPM の発見][16]を確認します。
+4. [すぐに使える 500 以上の Threats と Misconfigurations の検出ルール][14]を確認します。
+5. [セキュリティシグナル][15]を探り、[CSM Misconfigurations の発見][16]を確認します。
 6. [通知ルール][17]を設定し、Slack、Jira、メールなどを使ってアラートを受け取ります。
 
 ## フェーズ 2: カスタマイズ
 
-1. [CWS 抑制ルール][18]を設定し、ノイズを低減します。
-2. [CSPM][19] と [CWS][20] のカスタム検出ルールを作成します。
+1. [CSM Threats 抑制ルール][18]を設定し、ノイズを低減します。
+2. [CSM Misconfigurations][19] と [CSM Threats][20] のカスタム検出ルールを作成します。
 
 ## フェーズ 3: レポートとダッシュボード
 
@@ -50,7 +53,7 @@ title: Cloud Security Management の概要
 [1]: /ja/security/cloud_security_management/
 [2]: /ja/security/cspm/
 [3]: /ja/security/cloud_workload_security/
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /ja/security/cloud_workload_security/setup/?tab=kubernetes
 [6]: /ja/security/cloud_workload_security/setup/?tab=docker
 [7]: /ja/security/cloud_workload_security/setup/?tab=hostothers

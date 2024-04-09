@@ -22,7 +22,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
@@ -31,26 +30,24 @@ draft: false
 git_integration_title: statsd
 integration_id: statsd
 integration_title: StatsD
-integration_version: 1.10.0
+integration_version: 1.11.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: statsd
-oauth: {}
 public_title: StatsD
 short_description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::モニタリング
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
   media: []
@@ -69,7 +66,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 StatsD チェックは [Datadog Agent][1] パッケージに含まれています。StatsD を実行するサーバーに追加でインストールする必要はありません。
 
@@ -167,7 +164,7 @@ StatsD チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/statsd/datadog_checks/statsd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

@@ -2,7 +2,8 @@
 aliases:
 - /ja/integrations/akamai/
 categories:
-- cloud
+- キャッシュ
+- クラウド
 dependencies: []
 description: Akamai DataStream を Datadog と統合
 doc_link: https://docs.datadoghq.com/integrations/akamai_datastream/

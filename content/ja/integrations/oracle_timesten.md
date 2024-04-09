@@ -1,10 +1,13 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-oracle-timesten
 app_uuid: bddd0f6a-efe0-4e3f-bff4-46df8bb839f9
 assets:
   dashboards:
     Oracle TimesTen: assets/dashboards/oracle_timesten.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +17,7 @@ assets:
       prefix: rapdev.oracle_timesten.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10116
     source_type_name: Oracle TimesTen
 author:
   homepage: https://www.rapdev.io
@@ -22,9 +26,10 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- キャッシュ
+- data stores
 - マーケットプレイス
 - oracle
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +43,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: oracle_timesten
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -48,18 +52,20 @@ pricing:
   tag: ホスト
   unit_label: Oracle Times Ten データベース
   unit_price: 500
-public_title: Oracle TimesTen インテグレーション
+public_title: Oracle TimesTen
 short_description: Oracle TimesTen データベースのパフォーマンスを監視する
 supported_os:
 - linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
+  - Category::Caching
+  - Category::Data Stores
   - Category::Marketplace
   - Category::Oracle
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Oracle TimesTen データベースのパフォーマンスを監視する
   media:
@@ -81,10 +87,11 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Oracle TimesTen インテグレーション
+  title: Oracle TimesTen
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -93,7 +100,7 @@ Oracle TimesTen インテグレーションにより、TimesTen インメモリ�
 
 このインテグレーションには、TimesTen データベースのステータスとメトリクスを概観するダッシュボードが含まれています。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 

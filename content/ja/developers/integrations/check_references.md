@@ -1,12 +1,29 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/check_references.md
+description: Datadog インテグレーションを準備する際に含める必要がある様々なアセットについて学びます。
+further_reading:
+- link: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
+  tag: GitHub
+  text: ドキュメントサイトへの寄稿ガイドライン
+- link: /developers/integrations/
+  tag: Documentation
+  text: Agent または API ベースのインテグレーションの作成について
+- link: /developers/integrations/oauth_for_integrations/
+  tag: Documentation
+  text: OAuth を使ったインテグレーションについて
 kind: ドキュメント
 title: インテグレーションアセットリファレンス
 ---
+## 概要
+
+このページでは、[** Integrations** ページ][12]または [**Marketplace** ページ][9]で製品を作成するために入力する必要があるファイルについて説明します。
+
 ## 構成ファイル
 
-新しいインテグレーションを用意する際は、必要なオプションと適正なデフォルトを設定したコンフィギュレーションサンプルを追加する必要があります。この例のサンプルコンフィギュレーションファイルは `<チェック名>/datadog_checks/<チェック名>/data/conf.yaml.example` にあり、`init_config` と `instances` という 2 つのトップレベル要素を持っています。`init_config` 下のコンフィギュレーションはインテグレーションにグローバルに適用され、インテグレーションのすべてのインスタンスで使用されます。一方、`instances` 内のコンフィギュレーションは特定のインスタンスに適用されます。
+新しいインテグレーションを用意する際は、必要なオプションと適正なデフォルトを設定したコンフィギュレーションサンプルを追加する必要があります。この例のサンプルコンフィギュレーションファイルは `<チェック名>/datadog_checks/<チェック名>/data/conf.yaml.example` にあり、`init_config` と `instances` という 2 つのトップレベル要素を持っています。
+
+`init_config` 下のコンフィギュレーションはインテグレーションにグローバルに適用され、インテグレーションのすべてのインスタンスで使用されます。一方、`instances` 内のコンフィギュレーションは特定のインスタンスに適用されます。
 
 どちらのセクションの構成ブロックも次の形式になります。
 
@@ -21,14 +38,16 @@ title: インテグレーションアセットリファレンス
 構成ブロックは以下のガイドラインに従います。
 
 - 説明を空にすることはできません。
-- [ドキュメント寄稿ガイドライン][1]に準拠して、プレースホルダーは常に `<これはプレースホルダーです>` の形式に従う必要があります。
+- プレースホルダーは常に `<THIS_IS_A_PLACEHOLDER>` のフォーマットに従ってください。詳しくは、[ドキュメントサイトの寄稿ガイドライン][1]を参照してください。
 - すべての必須パラメーターはデフォルトでコメントに**されません**。
 - すべてのオプションパラメーターはデフォルトでコメントにされます。
 - プレースホルダーにインテグレーションのデフォルト値がある場合 (たとえば、インテグレーションのステータスエンドポイント)、それを汎用プレースホルダーの代わりに使用できます。
 
 ### `@param` の指定
 
-事実上 `@param` が唯一のコマンドです。`@param` は、主に文書化の目的で構成ブロックについて説明するために使用され、以下のいずれかの形式を使用して実装されます。
+`@param` コマンドは、構成ブロックを記述し、構成のドキュメントを提供するために使用することができます。
+
+`param` は、以下のいずれかの形式で実装されます。
 
 ```text
 @param <name> - <type> - 必須
@@ -36,18 +55,11 @@ title: インテグレーションアセットリファレンス
 @param <name> - <type> - オプション - デフォルト: <defval>
 ```
 
-引数
+**引数**:
 
 - `name`: パラメーターの名前。例: `search_string` (必須)。
-- `type`: パラメーター値のデータタイプ (必須)。使用可能な値:
-  - _boolean_
-  - _string_
-  - _integer_
-  - _double_
-  - _float_
-  - _dictionary_
-  - _list\*_
-  - _object_
+- `type`: パラメーター値のデータタイプ (必須)。
+          Possible values include the following: _boolean_, _string_, _integer_, _double_, _float_, _dictionary_, _list\*_, and _object\*_.
 - `defval`: パラメーターのデフォルト値。空でもかまいません (オプション)。
 
 `list` および `object` 変数は複数行にまたがり、特別な規則があります。
@@ -66,66 +78,32 @@ title: インテグレーションアセットリファレンス
 - コメントは `##` で開始されます。
 - コメントは変数と同様にインデントされます (ハイフンはカウントされません)。
 
-YAML 構文の詳細については、[Wikipedia][2] を参照してください。[Online YAML Parser][3] も活用してください。
+YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]を参照してください。また、[Online YAML Parser][3] を調べることもできます。
 
 ## マニフェストファイル
 
-[Integrations ページ][4]や [Marketplace][11] にある全てのオファーは、操作パラメーター、Datadog インテグレーションエコシステム内での位置づけ、その他のメタデータを記述した `manifest.json` ファイルを含んでいます。
+[**Integrations** ページ][4]または [**Marketplace** ページ][11]にあるすべての製品には、動作パラメーター、より大きなDatadog インテグレーションエコシステム内での位置づけ、追加のメタデータを定義する `manifest.json` ファイルがあります。
 
-以下に、`manifest.json` ファイルの必須属性とオプション属性の完全なリストを示します。
+{{% integration-assets-reference %}}
 
-| 属性                                            | タイプ                        | 必須/オプション                        | 説明                                                                                                                                                                                                                                 |
-|------------------------------------------------------|-----------------------------|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `manifest_version`                                   | 文字列 列挙型                 | 必須                                 | マニフェストスキーマのバージョン。サポートされる値は `1.0.0` と `2.0.0` です。                                                                                                                                                               |
-| `app_id`                                             | 文字列                      | 必須                                 | この製品の固有の識別名。通常、アプリのタイトルのケバブケースです。例えば、アプリのタイトルが "Marketplace Offering" の場合、`app_id` は `marketplace-offering` となります。                                              |
-| `app_uuid`                                           | UUID                        | 必須                                 | このアプリケーションのグローバルにユニークな UUID。                                                                                                                                                                                                  |
-| `assets`                                             | 辞書                  | 必須                                 | 任意の Datadog インストール可能なエンティティを含むオブジェクト。                                                                                                                                                                                           |
-| `assets[dashboards]`                                 | 辞書                  | オプション                                  | この製品に関連するすぐに使えるダッシュボード。                                                                                                                                                                                    |
-| `assets[dashboards["dashboard_short_name"]]`         | 文字列                      | 必須                                 | すぐに使えるダッシュボードのキーと値のペア。キーはダッシュボードのグローバルに一意な短縮名で、値はこのマニフェストに関連するダッシュボードの JSON 定義への相対パスです。                            |
-| `assets[integration]`                                | 辞書                  | オプション                                  | インテグレーションに関する情報を含むオブジェクト。                                                                                                                                                                                        |
-| `assets[integration[configuration]]`                 | 辞書                  | 必須、`{ }` でも可                   | このインテグレーションのための構成仕様を表すオブジェクト。                                                                                                                                                                   |
-| `assets[integration[configuration[spec]]]`           | 文字列                      | 必須                                 | このマニフェストに関連して構成スペックが存在する場所への相対パス。                                                                                                                                                           |
-| `assets[integration[events]]`                        | 辞書                  | 必須                                 | このインテグレーションが発するイベントに関する情報。                                                                                                                                                                                       |
-| `assets[integration[events[creates_events]]]`        | Boolean                     | 必須                                 | このインテグレーションが Datadog にイベントを発するかどうか。                                                                                                                                                                                    |
-| `assets[integration[metrics]]`                       | 辞書                  | 必須                                 | このインテグレーションが発するメトリクスに関する情報。                                                                                                                                                                                       |
-| `assets[integration[metrics[check]]]`                | 文字列または文字列のリスト    | 必須                                 | このインテグレーションが実行されるたびに必ず発するメトリクスを表す文字列またはリスト。                                                                                                                                                     |
-| `assets[integration[metrics[metadata_path]]]`        | 文字列                      | 必須                                 | このマニフェストに関連して、メトリクスのメタデータが存在する場所への相対パス。                                                                                                                                                             |
-| `assets[integration[metrics[prefix]]]`               | 文字列                      | 必須                                 | このインテグレーションで発されるメトリクスのプレフィックス。                                                                                                                                                                                         |
-| `assets[integration[service_checks]]`                | 辞書                  | 必須、しかし `{ }` でも可               | このインテグレーションが発するサービスチェックに関する情報。                                                                                                                                                                               |
-| `assets[integration[service_checks[metadata_path]]]` | 文字列                      | 必須                                 | このマニフェストに関連して、サービスチェックのメタデータが存在する場所への相対パス。                                                                                                                                                       |
-| `assets[integration[source_type_name]]`              | 文字列                      | 必須                                 | このインテグレーションのユーザー向けの名前。                                                                                                                                                                                                       |
-| `assets[monitors]`                                   | 辞書                  | オプション                                  | 推奨モニター。                                                                                                                                                                                                                       |
-| `assets[monitors["monitor_short_name"]]`             | 文字列                      | 必須                                 | 推奨モニターのキーと値のペア。キーはモニターのグローバルに一意な短縮名で、値はこのマニフェストに関連するモニターの JSON 定義への相対パスです。                                   |
-| `author `                                            | 辞書                  | 必須                                 | このアプリの作者に関する情報。                                                                                                                                                                                                   |
-| `author[homepage] `                                  | 文字列 (URL)                | 必須                                 | 作者のホームページの Web URL。                                                                                                                                                                                                  |
-| `author[name]`                                       | 文字列                      | 必須                                 | この会社の読みやすい名前。                                                                                                                                                                                                   |
-| `author[sales_email]`                                | 文字列 (メール)              | 必須                                 | サブスクリプションレベルのイベントに関する連絡先メール。                                                                                                                                                                                     |
-| `author[support_email]`                              | 文字列 (メール)              | 必須                                 | サポートやメンテナンスの問い合わせ先となるメール。                                                                                                                                                                               |
-| `author[vendor_id]`                                  | 文字列                      | 必須                                 | サブスクリプションのために使用するベンダー ID。グローバルに一意でなければならず、変更することはできません。ダッシュとアルファベットのみ使用可能な `app_id` の厳格な基準に従わなければなりません。この値はパートナーに提供されます。       |
-| `display_on_public_website `                         | Boolean                     | 必須                                 | このリストに関する情報を、公開されている Datadog ドキュメントサイトに表示するかどうか。これを True に設定すると、変更することはできません。                                                                                                 |
-| `legal_terms `                                       | 辞書                  | 必須                                 | このアプリを使用するためにユーザーが同意する必要がある法的文書。                                                                                                                                                             |
-| `legal_terms[eula] `                                 | 文字列                      | 必須                                 | このマニフェストに関連する EULA (End User License Agreement) PDF への相対パス。                                                                                                                                                    |
-| `pricing`                                            | 辞書の配列       | 必須                                 | インテグレーションの価格モデルを表すオブジェクトのリスト。価格の詳細については、[Marketplace GitHub リポジトリ][12]を参照してください。Marketplace GitHub リポジトリは非公開です。アクセスするには marketplace@datadog.com にメールを送ってください。                      |
-| `tile`                                               | 辞書                  | 必須                                 | この製品に関する情報                                                                                                                                                                                                             |
-| `tile[media]`                                        | 辞書の配列       | 必須、`[ ]` でも可                   | リスティングページのメディアギャラリーカルーセルに表示される、さまざまな画像やビデオのスタイルオブジェクトに関する情報。                                                                                                               |
-| `tile[media[media_type]]`                            | 文字列または列挙型              | 必須                                 | メディアの種類。許可される値は `image` および `video` です。                                                                                                                                                                          |
-| `tile[media[caption]]`                               | 文字列                      | 必須                                 | 画像のキャプション。                                                                                                                                                                                                                  |
-| `tile[media[image_url]]`                             | 文字列                      | 必須                                 | このマニフェストファイルに対する、この画像の相対パス。                                                                                                                                                                          |
-| `tile[classifier_tags]`                              | 文字列の配列             | 必須、`[ ]` でも可                   | このアプリに関するいくつかの分類子情報。これには `supported_os` や `available_offerings` などの情報が含まれます。                                                                                                                     |
-| `tile[description]`                                  | 文字列\[80\]                | 必須                                 | この製品の提供内容の簡単な説明。80 文字以内です。                                                                                                                                                               |
-| `tile[title]`                                        | 文字列\[50\]                | 必須                                 | このアプリのユーザーフレンドリーなタイトル。                                                                                                                                                                                                       |
+### 分類子タグ
 
+`classifier_tags` パラメーターを使用して、複数のカテゴリーを設定し、インテグレーションに送信またはクエリされるデータタイプを定義することができます。
+
+`manifest.json` ファイルに対する分類子タグの完全なリストは、以下の通りです。
+
+{{% integration_categories %}}
 
 ## サービスチェックファイル
 
 `service_check.json` ファイルは、インテグレーションによって作成されたサービスチェックを記述します。
 
-`service_checks.json` ファイルには、次の必須属性が含まれています。
+`service_checks.json` ファイルの必須属性の完全なリストは、以下の通りです。
 
 | 属性       | 説明                                                                                                                |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `agent_version` | サポートされている Agent の最小バージョン。                                                                                           |
-| `integration`   | このサービスチェックを送信するインテグレーションの名前。これは、`manifest.json` にある正規化されていない `display_name` です。 |
+| `integration`   | このサービスチェックを送信するインテグレーションの名前。これは、`manifest.json` にある正規化されていない `tile.title` です。   |
 | `check`         | サービスチェックの名前。一意である必要があります。                                                                              |
 | `statuses`      | チェックのさまざまなステータスのリスト。`ok`、`warning`、`critical` から選択します。`unknown` も可能です。   |
 | `groups`        | サービスチェックと共に送信される[タグ][8]。                                                                                     |
@@ -137,31 +115,34 @@ YAML 構文の詳細については、[Wikipedia][2] を参照してください
 
 `metadata.csv` ファイルには、インテグレーションが収集できるすべてのメトリクスが記述されます。
 
-`metadata.csv` ファイルの各列について以下に説明します。
+以下に、`metadata.csv` ファイルの必須属性とオプション属性の完全なリストを示します。
 
-| 列名     | 必須/オプション | 説明                                                                                                                                                                                                                                                                                                                             |
+| 列名     | 必須またはオプション | 説明                                                                                                                                                                                                                                                                                                                             |
 | --------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `metric_name`   | 必須          | メトリクスの名前。                                                                                                                                                                                                                                                                                                                     |
-| `metric_type`   | 必須          | [メトリクスのタイプ][6]。                                                                                                                                                                                                                                                                                                                |
+| `metric_type`   | 必須          | メトリクスのタイプ。利用可能なメトリクス送信タイプの一覧は、[メトリクスタイプ][6]を参照してください。                                                                                                                                                                                                                                                                                                                |
 | `interval`      | オプション           | メトリクスの収集間隔 (秒単位)。                                                                                                                                                                                                                                                                                            |
-| `unit_name`     | オプション           | メトリクスの単位。[サポートされているすべての単位のリスト][7]。                                                                                                                                                                                                                                                                              |
+| `unit_name`     | オプション           | メトリクスの単位。対応する単位の一覧は、[メトリクスの単位][7]を参照してください。                                                                                                                                                                                                                                                                              |
 | `per_unit_name` | オプション           | 単位の下位区分がある場合。`request per second` (1 秒あたりのリクエスト) など。                                                                                                                                                                                                                                                                               |
 | `description`   | オプション           | メトリクスの説明。                                                                                                                                                                                                                                                                                                              |
 | `orientation`   | 必須          | `myapp.turnover` のように、大きい方がよいメトリクスの場合は `1` に設定します。メトリクスの変動が特に重要でない場合は `0` に設定します。`myapp.latency` のように、小さい方がよいメトリクスの場合は `-1` に設定します。                                                                                                                                                         |
-| `integration`   | 必須          | メトリクスを送信するインテグレーションの名前。これは、`manifest.json` ファイルにある `display_name` を正規化した文字列です。文字、アンダースコア、ダッシュ、数字以外の文字はアンダースコアに変換されます。例: `Openstack Controller` -> `openstack_controller`、`ASP.NET` -> `asp_net`、`CRI-o` -> `cri-o`。 |
+| `integration`   | 必須          | メトリクスを送信するインテグレーションの名前。これは、`manifest.json` ファイルにある `tile.title` を正規化した文字列です。文字、アンダースコア、ダッシュ、数字以外の文字はアンダースコアに変換されます。例: `Openstack Controller` -> `openstack_controller`、`ASP.NET` -> `asp_net`、`CRI-o` -> `cri-o`。 |
 | `short_name`    | 必須          | メトリクスの明示的な一意の ID。                                                                                                                                                                                                                                                                                                      |
 | `curated_metric`| オプション           | インテグレーションのためのどのメトリクスが、与えられたタイプで注目すべきかをマークします (`cpu`と`memory`の両方が受け入れられる)。これらは、UI で他のインテグレーションメトリクスの上に表示されます。
 
+## その他の参考資料
 
-[1]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#code-substitution
 [2]: https://en.wikipedia.org/wiki/YAML
 [3]: http://yaml-online-parser.appspot.com/
 [4]: https://docs.datadoghq.com/ja/integrations/
 [5]: https://www.uuidgenerator.net
-[6]: https://docs.datadoghq.com/ja/developers/metrics/metrics_type/
-[7]: https://docs.datadoghq.com/ja/developers/metrics/metrics_units/
+[6]: https://docs.datadoghq.com/ja/metrics/types/#metric-types
+[7]: https://docs.datadoghq.com/ja/metrics/units/#unit-list
 [8]: https://docs.datadoghq.com/ja/getting_started/tagging/
-[9]: https://docs.datadoghq.com/ja/developers/marketplace/
+[9]: https://app.datadoghq.com/marketplace/
 [10]: https://docs.datadoghq.com/ja/developers/datadog_apps/
-[11]: https://app.datadoghq.com/marketplace
-[12]: https://github.com/DataDog/marketplace#faq
+[11]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering
+[12]: https://app.datadoghq.com/integrations

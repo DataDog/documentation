@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_datalakestore
+- /fr/integrations/azure_datalakestore
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data store
 dependencies: []
 description: Surveillez des métriques clés Azure Data Lake Store.
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
@@ -22,13 +22,14 @@ public_title: Intégration Datadog/Microsoft Azure Data Lake Store
 short_description: Surveillez des métriques Azure Data Lake Store.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Data Lake Store est une solution Data Lake sans limite qui améliore l'analytique Big Data.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques de Data Lake Store.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

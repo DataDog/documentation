@@ -40,7 +40,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
+- configuration & deployment
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
@@ -49,26 +49,25 @@ draft: false
 git_integration_title: nginx
 integration_id: nginx
 integration_title: Nginx
-integration_version: 5.4.0
+integration_version: 6.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx
-oauth: {}
 public_title: Nginx
 short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
+  - Category::構成 & デプロイ
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
   media: []
@@ -197,7 +196,7 @@ data:
 [...]
   status.conf: |
     server {
-      listen 18080;
+      listen 81;
 
       location /nginx_status {
         stub_status on;
@@ -209,14 +208,14 @@ data:
     }
 ```
 
-次に、NGINX ポッドで `18080` エンドポイントを公開し、そのファイルを NGINX 構成フォルダーにマウントします。
+次に、NGINX ポッドで `81` エンドポイントを公開し、そのファイルを NGINX 構成フォルダーにマウントします。
 
 ```yaml
 spec:
   containers:
     - name: nginx
       ports:
-        - containerPort: 18080
+        - containerPort: 81
       volumeMounts:
         - mountPath: /etc/nginx/conf.d/status.conf
           subPath: status.conf
@@ -228,20 +227,6 @@ spec:
           name: "nginx-conf"
 ```
 
-最後に、NGINX サービスでそのポートを公開します。
-
-```yaml
-spec:
-  ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
-    name: default
-  - port: 81
-    protocol: TCP
-    targetPort: 18080
-    name: status
-```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -531,7 +516,7 @@ NGINX チェックには、イベントは含まれません。
 
 - [あるはずのタイムスタンプがログに含まれないのはなぜですか？][6]
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 ## その他の参考資料
 

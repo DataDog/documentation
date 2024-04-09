@@ -29,9 +29,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
-- network
+- caching
 - log collection
+- network
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
 display_on_public_website: true
@@ -39,27 +39,26 @@ draft: false
 git_integration_title: powerdns_recursor
 integration_id: powerdns
 integration_title: Power DNS Recursor
-integration_version: 2.2.0
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: powerdns_recursor
-oauth: {}
 public_title: Power DNS Recursor
 short_description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
-  - Category::ネットワーク
+  - Category::キャッシュ
   - Category::ログの収集
+  - Category::ネットワーク
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
   media: []
@@ -84,7 +83,7 @@ PowerDNS Recursor のパフォーマンスを追跡し、異常または注意�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれています。Recursor に追加でインストールする必要はありません。
 
@@ -232,6 +231,6 @@ PowerDNS Recursor チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

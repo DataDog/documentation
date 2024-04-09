@@ -70,15 +70,14 @@ datadog:
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  agent:
-    config:
-      kubelet:
-        tlsVerify: false
+  global:
+    kubelet:
+      tlsVerify: false
 ```
 
 {{% /tab %}}
@@ -106,7 +105,7 @@ spec:
 
 ### クラウドプロバイダーのメタデータエンドポイントへのアクセス
 
-AWS、GCP、または Azure で実行する場合、Agent はホスト名を取得するためにメタデータエンドポイントを使用することができます。
+AWS、Google Cloud、または Azure で実行する場合、Agent はホスト名を取得するためにメタデータエンドポイントを使用することができます。
 
 クラウドプロバイダーのメタデータエンドポイントにアクセスすることで、Datadog は Agent データとアプリケーション内のクラウドインテグレーションデータを適切に照合することができます。
 
@@ -139,17 +138,18 @@ datadog:
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  agent:
-    env:
-      - name: DD_HOSTNAME
-        valueFrom:
-          fieldRef:
-            fieldPath: spec.nodeName
+  override:
+    nodeAgent:
+      env:
+        - name: DD_HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
 ```
 
 {{% /tab %}}
@@ -177,7 +177,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## AWS ECS と Docker VM のホスト名エラー
+## Amazon ECS と Docker VM のホスト名エラー
 
 クラウドプロバイダー上の Docker で Agent を実行する場合、ホスト名エラーは通常、Agent が少なくとも次のいずれかにアクセスできないことを意味します。
 * コンテナランタイム API
@@ -188,7 +188,7 @@ spec:
 Agent が Docker ソケットに接続できるようにします。
 
 {{< tabs >}}
-{{% tab "EC2 上の AWS ECS" %}}
+{{% tab "EC2 上の Amazon ECS" %}}
 
 [タスク定義][1]で Docker ソケットがマウントされていることを確認します。
 
@@ -208,7 +208,7 @@ Agent が Docker ソケットに接続できるようにします。
 
 ### クラウドプロバイダーのメタデータエンドポイントへのアクセス
 
-AWS、GCP、または Azure で実行する場合、Agent はホスト名を取得するためにメタデータエンドポイントを使用することができます。
+AWS、Google Cloud、または Azure で実行する場合、Agent はホスト名を取得するためにメタデータエンドポイントを使用することができます。
 
 クラウドプロバイダーのメタデータエンドポイントにアクセスすることで、Datadog は Agent データとアプリケーション内のクラウドインテグレーションデータを適切に照合することができます。
 

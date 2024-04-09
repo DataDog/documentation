@@ -1,17 +1,21 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: statsig-statsig
 app_uuid: 289b74cb-ad37-4a0e-98f5-4d5c6f3e3d19
 assets:
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: true
     metrics:
-      check: ''
+      check: []
       metadata_path: metadata.csv
       prefix: statsig.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10188
     source_type_name: Statsig ライセンス
 author:
   homepage: https://www.statsig.com
@@ -20,6 +24,7 @@ author:
   support_email: support@statsig.com
   vendor_id: statsig
 categories:
+- 構成 & デプロイ
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -34,7 +39,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: statsig-statsig
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -48,16 +52,17 @@ public_title: Statsig
 short_description: 顧客が必要とする機能をすばやく構築、計測、そして納品
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
   - Category::Marketplace
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 顧客が必要とする機能をすばやく構築、計測、そして納品
   media:
@@ -76,17 +81,19 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Statsig
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
-[Statsig](https://www.statsig.com) を使用すると、機能のリリース前に安全に AB テストを実施し、製品に関する議論や納品ミスによるコストロスを削減できます。さらに、Statsig はイベントのログを作成するだけで試験が自動的に実行され、追加のコンフィギュレーションなしですべての新機能による影響が表示されるという点が特徴です。他のプラットフォームでは、実行するそれぞれの試験についてメトリクスを作成しサンプルサイズおよびセグメントのユーザーを計算する必要があるため、機能のパフォーマンスの確認が困難ですが、Statsig なら面倒な作業を省いて自動的に AB テストが常に実行され、機能のパフォーマンスを常時確認できます。
+[Statsig][1] を使用すると、機能のリリース前に安全に A/B テストを実施し、製品に関する議論や納品ミスによるコストロスを削減できます。さらに、Statsig はイベントのログを作成するだけで試験が自動的に実行され、追加のコンフィギュレーションなしですべての新機能による影響が表示されるという点が特徴です。他のプラットフォームでは、実行するそれぞれの試験についてメトリクスを作成しサンプルサイズおよびセグメントのユーザーを計算する必要があるため、機能のパフォーマンスの確認が困難ですが、Statsig なら面倒な作業を省いて自動的に A/B テストが常に実行され、機能のパフォーマンスを常時確認できます。
 
 Facebook のエンジニア経験者からなるチームにより、さまざまなチームが数千の機能を正確にローンチできる同等のインフラストラクチャーを提供できるよう、Statsig が作成されました。
 
-マーケットプレイスでのご提供には、Statsig のプラットフォームへのアクセスが含まれています。すでに Statsig をご利用の場合は、[Datadog Statsig インテグレーション](https://app.datadoghq.com/account/settings#integrations/statsig)で アカウントを Datadog に接続してインテグレーションをセットアップできます。
+Datadog Marketplace の製品には、Statsig のプラットフォームへのアクセスが含まれています。すでに Statsig をご利用の場合は、[Datadog Statsig インテグレーション][2]で アカウントを Datadog に接続してインテグレーションをセットアップできます。
 
 {{< img src="marketplace/statsig-statsig/images/statsig_pulse.png" alt="Statsig Pulse" >}}
 
@@ -94,19 +101,35 @@ Facebook のエンジニア経験者からなるチームにより、さまざ�
 
 {{< img src="marketplace/statsig-statsig/images/statsig_metrics.png" alt="Statsig メトリクス" >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
-このインテグレーションにより提供されるメトリクスのリストおよびそれぞれの説明については、[metadata.csv](https://github.com/DataDog/marketplace/blob/master/statsig/metadata.csv) をご参照ください。
+このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][3] を参照してください。
 
-### イベント
+### ヘルプ
 
 Statsig インテグレーションにより、Statsig でのコンフィギュレーション変更イベントが Datadog に送信されます（たとえば、新規または更新された機能ゲートまたは新しいインテグレーションが有効になった時）。
 
-## サポート
+## Agent
 
-ヘルプが必要な場合は、Statsig サポート（support@statsig.com）または[弊社までお問い合わせ](https://www.statsig.com/contact)ください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Statsig サポートにお問い合わせください。
+
+- メール: [support@statsig.com][4] 
+- サポート: [Statsig][5]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog マーケットプレイスの Statsig の提供とモニター機能のリリース][6]
+
+[1]: https://www.statsig.com
+[2]: https://app.datadoghq.com/integrations/statsig
+[3]: https://console.statsig.com/sign_up
+[4]: mailto:support@statsig.com
+[5]: https://www.statsig.com/contact
+[6]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">こちらをクリック</a>してください。

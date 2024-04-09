@@ -29,7 +29,7 @@ Datadog チェックの実行ごとにステータスを報告します。過去
 
 特定のチェックを探すには、サマリーページで `filter checks` 検索ボックスを使用します。チェック名をクリックして、そのチェックに紐づくステータスとタグを確認します。一覧をさらに絞り込むには、チェックパネル内の `filter checks` 検索ボックスを使用します。
 
-{{< img src="monitors/check_summary/check_search.png" alt="チェック詳細"  style="width:100%;">}}
+{{< img src="monitors/check_summary/check_search.png" alt="チェック詳細" style="width:100%;">}}
 
 ## ダッシュボード  
 

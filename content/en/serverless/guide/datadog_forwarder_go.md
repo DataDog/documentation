@@ -80,7 +80,7 @@ Follow these steps to instrument the function:
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function's log groups, in order to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
 2. [Subscribe the Datadog Forwarder to your function's log groups][4].

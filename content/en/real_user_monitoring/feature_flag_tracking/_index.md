@@ -8,12 +8,15 @@ further_reading:
   text: "Set up Feature Flag data collection"
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
-  text: "RUM Explorer"
+  text: "Learn about the RUM Explorer"
+- link: "https://www.datadoghq.com/blog/feature-flag-tracking/"
+  tag: "Blog"
+  text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Feature Flag Tracking in RUM is in private beta. To request access, contact Support at support@datadoghq.com.
-{{< /callout >}}
+<div class="alert alert-warning">
+    Feature Flag Tracking is in beta.
+</div>
 
 ## Overview
 
@@ -32,23 +35,24 @@ Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM
 
 You can start collecting feature flag data for [custom feature flag management solutions][3], or using one of our integration partners. 
 
-We currently support integrations with:
-- [LaunchDarkly][4]
-- [Split][5]
-- [Flagsmith][6]
+We support integrations with:
+
+{{< partial name="rum/rum-feature-flag-tracking.html" >}}
+
+</br>
 
 Feature flags will show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 ## View your Feature Flags
 
-Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][7] tab within RUM or click the [**Feature Flags**][7] tab under **UX Monitoring**
+Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][4] tab within RUM.
 
-From this view, you can investigate any questions you have about your feature flag’s health and usage.
+From this view, you can investigate any questions you have about your feature flag's health and usage.
 - Monitor the number of users experiencing each variant and see summary statistics of your feature flag
 - Check the status of your feature flag to see if there are any that can be removed for code clean up
 - View which pages your feature flags are being evaluated on
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list.png" alt="View a list of your feature flags to investigate any questions you have about your feature flag’s health and usage" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="View a list of your feature flags to investigate any questions you have about your feature flag's health and usage" style="width:90%;" >}}
 
 
 ### Search and filter
@@ -57,7 +61,8 @@ Search and filter your feature flags by typing in the search bar. You can also u
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
 
 ### Feature Flag Status
-There are two possible feature flag statuses:
+There are three possible feature flag statuses:
+- **Active**: The feature flag has evaluated different variants for the past 2 weeks
 - **Inactive**: For the past 2 weeks, there have only been feature flag evaluations for your control variant
 - **Out to 100%**: For the past 2 weeks, there have only been feature flag evaluations for one of your non-control variants
 
@@ -71,19 +76,18 @@ These out-of-the-box graphs are aggregated across your flag variants, making it 
 
 The **Users** tab provides some high level summary statistics of your feature flag and allows you to further analyze the users viewing each of your feature flag variants by any attribute. If you want to understand what it looks like for someone who experienced a certain variant versus another, you can watch a [Session Replay][5] for each case.
 
-The **Issues** tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. See if any issues detected by [Error Tracking][7] occurred for a specific variant of your feature flag and may be related to your changes.
+The **Issues** tab gives you a view of the errors that are occurring in your application for user sessions that have your feature flag. See if any issues detected by [Error Tracking][6] occurred for a specific variant of your feature flag and may be related to your changes.
 
 The **Performance** tab allows you to understand if one of your feature flag variants have caused poor performance. You can view your Core Web Vitals and loading time for each variant to determine if one of your variants may be causing a negative impact on your application's performance.
 
 ### Build custom views from Feature Flag data using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer][8] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][9] and [monitors][10]. 
+Search through all the data collected by RUM in the [RUM Explorer][7] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][8] and [monitors][9]. 
 
 You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute to scope down and focus on events where users were shown a specific user experience.
 
 You can compare important metrics to you and your teams by grouping your query by `@feature_flags.{flag_name}`. For example, if you want to understand how your new checkout flow is affecting the conversion rate from the checkout page to users making a purchase, you can add a "Group by" on the conversion rate graph.
 
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-rum-explorer.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
-
 
 ## Further reading
 
@@ -92,10 +96,9 @@ You can compare important metrics to you and your teams by grouping your query b
 [1]: /real_user_monitoring/guide/setup-feature-flag-data-collection/
 [2]: /real_user_monitoring/browser#setup
 [3]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
-[4]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#launchdarkly-integration
-[5]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#split-integration
-[6]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#flagsmith-integration
-[7]: https://app.datadoghq.com/rum/feature-flags
-[8]: https://app.datadoghq.com/rum/explorer
-[9]: /dashboards/
-[10]: /monitors/#create-monitors
+[4]: https://app.datadoghq.com/rum/feature-flags
+[5]: /real_user_monitoring/session_replay/browser/
+[6]: /real_user_monitoring/error_tracking/explorer/#explore-your-issues
+[7]: https://app.datadoghq.com/rum/explorer
+[8]: /dashboards/
+[9]: /monitors/#create-monitors

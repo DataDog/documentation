@@ -25,7 +25,7 @@ title: スケジュールされたレポート
 
 ## レポートのスケジュール
 
-グリッドベースまたは自動レイアウトの任意のダッシュボードから新しいレポートを作成します。ダッシュボードのエクスポートアイコンをクリックし、**Schedule a Report** を選択します。
+グリッドベースまたは自動レイアウトのダッシュボードからレポートを作成します。**Share** ボタンをクリックし、**Schedule a Report** を選択します。
 
 以下のウィジェットタイプに対応しています。
 
@@ -33,7 +33,7 @@ title: スケジュールされたレポート
 - [Distribution][2]
 - [Geomap][3]
 - [Group][4]
-- [Heat Map][5]
+- [ヒートマップ][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
 - [円グラフ][16]
@@ -66,9 +66,9 @@ title: スケジュールされたレポート
 スケジュールを保存する前にレポートを確認するには、**Send Preview** をクリックします。レポートスケジュールはいつでも一時停止することができます。
 
 ## レポートの管理
-同じダッシュボードに関心を持つ異なるグループの関係者をサポートするためなどに、1 つのダッシュボードに異なる設定で複数のスケジュールレポートを設定することができます。既存のダッシュボードのレポートを確認するには、ダッシュボードの歯車メニューを開き、**Configure Reports** を選択します。
+同じダッシュボードに関心を持つ異なるグループの関係者をサポートするためなどに、1 つのダッシュボードに異なる設定で複数のスケジュールレポートを設定することができます。既存のダッシュボードのレポートを確認するには、**Share** メニューを開き、**Configure Reports** を選択します。
 
-{{< img src="dashboards/scheduled_reports/dashboard_cog_menu.png" alt="ダッシュボードで歯車のアイコンにカーソルを合わせたときに表示されるメニューに、レポートを構成するオプションが表示された様子" style="width:50%;" >}}
+{{< img src="dashboards/scheduled_reports/configure_reports.png" alt="ダッシュボードの Share メニューでレポートを構成するオプションの様子" style="width:50%;" >}}
 
 開いた構成モーダルから、既存のレポートを一時停止したり、新しいレポートを作成したりすることができます。既存のレポートの詳細を確認・編集したり、レポートを削除するには、**Edit** をクリックします。
 
@@ -94,7 +94,7 @@ Admin ロールまたは **Org Management** 権限を持つユーザーは、**O
 [2]: /ja/dashboards/widgets/distribution/
 [3]: /ja/dashboards/widgets/geomap/
 [4]: /ja/dashboards/widgets/group/
-[5]: /ja/dashboards/widgets/heat_map/
+[5]: /ja/dashboards/widgets/heatmap/
 [6]: /ja/dashboards/widgets/monitor_summary/
 [7]: /ja/dashboards/widgets/note/
 [8]: /ja/dashboards/widgets/query_value/

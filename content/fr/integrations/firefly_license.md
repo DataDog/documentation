@@ -11,8 +11,7 @@ author:
 categories:
 - automation
 - cloud
-- google cloud
-- aws
+- configuration & deployment
 - marketplace
 dependencies: []
 display_on_public_website: true
@@ -27,7 +26,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: firefly_license
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -38,20 +36,19 @@ public_title: Firefly
 short_description: Intégrer votre cloud Up-to-Code
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Automation
   - Category::Cloud
-  - Category::Google Cloud
-  - Category::AWS
+  - Category::Configuration & Deployment
   - Category::Marketplace
   - Offering::Software License
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Intégrer votre cloud Up-to-Code
   media:

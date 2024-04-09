@@ -26,9 +26,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
-- notification
 - log collection
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
 display_on_public_website: true
@@ -36,27 +35,25 @@ draft: false
 git_integration_title: nagios
 integration_id: nagios
 integration_title: Nagios
-integration_version: 1.11.0
+integration_version: 1.12.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nagios
-oauth: {}
 public_title: Nagios
 short_description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::モニタリング
-  - Category::通知
   - Category::ログの収集
+  - Category::通知
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
   media: []
@@ -185,7 +182,7 @@ Nagios チェックには、サービスのチェック機能は含まれませ�
 - [Datadog を使用した Nagios アラートの把握][6]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

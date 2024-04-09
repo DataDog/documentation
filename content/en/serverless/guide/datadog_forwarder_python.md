@@ -43,7 +43,7 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 
 To fill in the placeholders:
 - Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
-- Replace `<aws_region>` with the AWS region name. 
+- Replace `<aws_region>` with the AWS region name.
 - Replace `<layer_version>` with the desired version of the Datadog Lambda Library. The latest version is `{{< latest-lambda-layer-version layer="python" >}}`.
 - Replace `<forwarder_arn>` with the Forwarder ARN (see the [Forwarder documentation][2]).
 
@@ -53,24 +53,24 @@ For example:
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="python" >}} --forwarder "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can instrument it with the Datadog CLI. 
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][5] before you can instrument it with the Datadog CLI.
 
 More information and additional parameters can be found in the [CLI documentation][4].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/serverless/forwarder/
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
 The [Datadog Serverless Plugin][1] automatically adds the Datadog Lambda library to your functions using a layer, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Forwarder][2].
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you install the Datadog Serverless Plugin. 
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you install the Datadog Serverless Plugin.
 
 To install and configure the Datadog Serverless Plugin, follow these steps:
 
-1. Install the Datadog Serverless Plugin: 
+1. Install the Datadog Serverless Plugin:
 	  ```
     yarn add --dev serverless-plugin-datadog
     ```
@@ -209,23 +209,22 @@ More information and additional parameters can be found in the [macro documentat
         }
     }
     ```
-1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
+1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are {{< latest-lambda-layer-version layer="python-versions" >}}. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
-    
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
+
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
     ```
-1. If your Lambda function is configured to use code signing, add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1]. 
+1. If your Lambda function is configured to use code signing, add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1].
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function's log groups, to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder][2] if you haven't.
 2. [Subscribe the Datadog Forwarder to your function's log groups][3].
-
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [2]: https://docs.datadoghq.com/serverless/forwarder/
@@ -265,20 +264,20 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
     def index():
         return {'hello': 'world'}
     ```
-1. If your Lambda function is configured to use code signing, add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][2].
+
+1. If your Lambda function is configured to use code signing, add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][5].
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function for each of your function’s log groups, to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function for each of your function's log groups, to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder][3] if you haven't.
 2. [Subscribe the Datadog Forwarder to your function's log groups][4].
 
-
 [1]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
-[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://docs.datadoghq.com/serverless/forwarder/
 [4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -328,20 +327,21 @@ The minor version of the `datadog-lambda` package always matches the layer versi
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
 ```
-# For regular regions
+# For us,us3,us5,ap1, and eu regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # For us-gov regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
+The available `RUNTIME` options are {{< latest-lambda-layer-version layer="python-versions" >}}. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][2] before you can add the Datadog Lambda library as a layer.
+If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][9] before you can add the Datadog Lambda library as a layer.
+
 
 #### Using the package
 
@@ -351,7 +351,7 @@ Install `datadog-lambda` and its dependencies locally to your function project f
 pip install datadog-lambda -t ./
 ```
 
-See the [latest release][6]. 
+See the [latest release][6].
 
 ### Configure
 
@@ -365,26 +365,26 @@ Follow these steps to configure the function:
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function's log groups, to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder][7] if you haven't.
 2. [Subscribe the Datadog Forwarder to your function's log groups][8].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
 [4]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
 [5]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [6]: https://pypi.org/project/datadog-lambda/
 [7]: https://docs.datadoghq.com/serverless/forwarder/
 [8]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Tag
 
-Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][2].
+Although it's optional, Datadog recommends tagging your serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][2].
 
 ## Explore
 

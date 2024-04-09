@@ -9,7 +9,7 @@ disable_edit: true
 ## `available_maintenance_versions`
 **タイプ**: `UNORDERED_LIST_STRING`<br>
 **プロバイダー名**: `availableMaintenanceVersions`<br>
-**説明**: インスタンスに適用されるすべてのメンテナンスバージョンをリストアップします<br>
+**説明**: 出力のみ。インスタンスに適用されるすべてのメンテナンスバージョンをリストアップします<br>
 ## `backend_type`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `backendType`<br>
@@ -63,6 +63,7 @@ disable_edit: true
   - `MYSQL_8_0_29` - データベースのメジャーバージョンは MySQL 8.0、マイナーバージョンは 29 です。<br>
   - `MYSQL_8_0_30` - データベースのメジャーバージョンは MySQL 8.0、マイナーバージョンは 30 です。<br>
   - `MYSQL_8_0_31` - データベースのメジャーバージョンは MySQL 8.0、マイナーバージョンは 31 です。<br>
+  - `MYSQL_8_0_32` - データベースのメジャーバージョンは MySQL 8.0、マイナーバージョンは 32 です。<br>
   - `SQLSERVER_2019_STANDARD` - データベースのバージョンは、SQL Server 2019 Standard です。<br>
   - `SQLSERVER_2019_ENTERPRISE` - データベースのバージョンは、SQL Server 2019 Enterprise です。<br>
   - `SQLSERVER_2019_EXPRESS` - データベースのバージョンは、SQL Server 2019 Express です。<br>
@@ -73,11 +74,11 @@ disable_edit: true
 **説明**: インスタンスに固有のディスク暗号化構成。<br>
    - `kind`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `kind`<br>
+    **プロバイダー名**: `kind`<br>
     **説明**: これは常に `sql#diskEncryptionConfiguration` です。<br>
    - `kms_key_name`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `kmsKeyName`<br>
+    **プロバイダー名**: `kmsKeyName`<br>
     **説明**: ディスク暗号化用 KMS キーのリソース名<br>
 ## `disk_encryption_status`
 **タイプ**: `STRUCT`<br>
@@ -85,7 +86,7 @@ disable_edit: true
 **説明**: インスタンスに固有のディスク暗号化ステータス。<br>
    - `kind`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `kind`<br>
+    **プロバイダー名**: `kind`<br>
     **説明**: これは常に `sql#diskEncryptionStatus` です。<br>
    - `kms_key_version_name`<br>
     **タイプ**: `STRING`<br>
@@ -93,7 +94,7 @@ disable_edit: true
     **説明**: Cloud SQL インスタンスリソースの暗号化に使用した KMS キーのバージョン<br>
 ## `etag`
 **タイプ**: `STRING`<br>
-**Provider name**: `etag`<br>
+**プロバイダー名**: `etag`<br>
 **説明**: このフィールドは非推奨で、API の将来のバージョンでは削除される予定です。代わりに `settings.settingsVersion` フィールドを使用してください。<br>
 ## `failover_replica`
 **タイプ**: `STRUCT`<br>
@@ -144,11 +145,11 @@ disable_edit: true
       - `MIGRATED_1ST_GEN` - 移行したインスタンスの V1 IP。移行が完了したらすぐにこの IP を廃止してください。注: V1 IP アドレスを持つ V1 インスタンスは、PRIMARY としてカウントされます。<br>
 ## `ipv6_address`
 **タイプ**: `STRING`<br>
-**Provider name**: `ipv6Address`<br>
+**プロバイダー名**: `ipv6Address`<br>
 **説明**: インスタンスに割り当てられた IPv6 アドレス。(非推奨) このプロパティは、第一世代のインスタンスにのみ適用可能でした。<br>
 ## `kind`
 **タイプ**: `STRING`<br>
-**Provider name**: `kind`<br>
+**プロバイダー名**: `kind`<br>
 **説明**: これは常に `sql#instance` です。<br>
 ## `labels`
 **タイプ**: `UNORDERED_LIST_STRING`<br>
@@ -194,7 +195,7 @@ disable_edit: true
     **説明**: オンプレミスインスタンスのホストとポート (host:port 形式)<br>
    - `kind`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `kind`<br>
+    **プロバイダー名**: `kind`<br>
     **説明**: これは常に `sql#onPremisesConfiguration` です。<br>
    - `password`<br>
     **タイプ**: `STRING`<br>
@@ -262,7 +263,7 @@ disable_edit: true
     **説明**: レプリカがフェイルオーバーのターゲットであるかどうかを指定します。このフィールドを `true` に設定すると、レプリカはフェイルオーバーレプリカとして指定されます。プライマリインスタンスに障害が発生した場合、そのレプリカインスタンスが新しいプライマリインスタンスとして昇格します。フェイルオーバーの対象として指定できるレプリカは 1 つだけで、そのレプリカはプライマリインスタンスと異なるゾーンにある必要があります。<br>
    - `kind`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `kind`<br>
+    **プロバイダー名**: `kind`<br>
     **説明**: これは常に `sql#replicaConfiguration` です。<br>
    - `mysql_replica_configuration`<br>
     **タイプ**: `STRUCT`<br>
@@ -290,7 +291,7 @@ disable_edit: true
         **説明**: レプリカインスタンスの作成元となる、Google Cloud Storage にある SQL ダンプファイルへのパス。URI は gs://bucketName/fileName の形式です。圧縮された gzip ファイル (.gz) もサポートされています。ダンプには、レプリケーションを開始する binlog 座標を指定します。これは、mysqldump を使用する際に --master-data を 1 に設定することで実現可能です。<br>
        - `kind`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `kind`<br>
+        **プロバイダー名**: `kind`<br>
         **説明**: これは常に `sql#mysqlReplicaConfiguration` です。<br>
        - `master_heartbeat_period`<br>
         **タイプ**: `INT64`<br>
@@ -324,7 +325,7 @@ disable_edit: true
 **説明**: ルートパスワードの初期値。作成時のみ使用します。PostgreSQL インスタンスに接続する前に、ルートパスワードを設定する必要があります。<br>
 ## `satisfies_pzs`
 **タイプ**: `BOOLEAN`<br>
-**Provider name**: `satisfiesPzs`<br>
+**プロバイダー名**: `satisfiesPzs`<br>
 **説明**: インスタンスが Pzs を満たすかどうかを示すステータス。将来の使用のために予約されています。<br>
 ## `scheduled_maintenance`
 **タイプ**: `STRUCT`<br>
@@ -343,7 +344,7 @@ disable_edit: true
     **説明**: この期限を過ぎてのメンテナンス開始の再スケジューリングはできません。<br>
    - `start_time`<br>
     **タイプ**: `TIMESTAMP`<br>
-    **Provider name**: `startTime`<br>
+    **プロバイダー名**: `startTime`<br>
     **説明**: このインスタンスに対して今後予定されているメンテナンスの開始時間。<br>
 ## `secondary_gce_zone`
 **タイプ**: `STRING`<br>
@@ -351,7 +352,7 @@ disable_edit: true
 **説明**: リージョンインスタンスの場合、フェイルオーバーインスタンスが現在サービスを提供している Compute Engine のゾーン。この値は、インスタンスがセカンダリ/フェイルオーバーゾーンにフェイルオーバーした場合、インスタンスの作成時に指定されたゾーンと異なる可能性があります。<br>
 ## `self_link`
 **タイプ**: `STRING`<br>
-**Provider name**: `selfLink`<br>
+**プロバイダー名**: `selfLink`<br>
 **説明**: このリソースの URI。<br>
 ## `server_ca_cert`
 **タイプ**: `STRUCT`<br>
@@ -371,11 +372,11 @@ disable_edit: true
     **説明**: ユーザー提供の名前。[a-zA-Z.-_ ]+ に制限されています。<br>
    - `create_time`<br>
     **タイプ**: `TIMESTAMP`<br>
-    **Provider name**: `createTime`<br>
+    **プロバイダー名**: `createTime`<br>
     **説明**: 証明書が作成された時刻。[RFC 3339](https://tools.ietf.org/html/rfc3339) 形式で、例えば `2012-11-15T16:19:00.094Z` のようになります。<br>
    - `expiration_time`<br>
     **タイプ**: `TIMESTAMP`<br>
-    **Provider name**: `expirationTime`<br>
+    **プロバイダー名**: `expirationTime`<br>
     **説明**: 証明書の有効期限。[RFC 3339](https://tools.ietf.org/html/rfc3339) 形式で、例えば `2012-11-15T16:19:00.094Z` のようになります。<br>
    - `instance`<br>
     **タイプ**: `STRING`<br>
@@ -383,11 +384,11 @@ disable_edit: true
     **説明**: データベースインスタンスの名前。<br>
    - `kind`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `kind`<br>
+    **プロバイダー名**: `kind`<br>
     **説明**: これは常に `sql#sslCert` です。<br>
    - `self_link`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `selfLink`<br>
+    **プロバイダー名**: `selfLink`<br>
     **説明**: このリソースの URI。<br>
    - `sha1_fingerprint`<br>
     **タイプ**: `STRING`<br>
@@ -420,8 +421,16 @@ disable_edit: true
         **説明**: ドメイン名 (例: mydomain.com)。<br>
        - `kind`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `kind`<br>
+        **プロバイダー名**: `kind`<br>
         **説明**: これは常に sql#activeDirectoryConfig です。<br>
+   - `advanced_machine_features`<br>
+    **タイプ**: `STRUCT`<br>
+    **プロバイダー名**: `advancedMachineFeatures`<br>
+    **説明**: SQL Server のみに関連するインスタンスの事前マシン構成を指定します。<br>
+       - `threads_per_core`<br>
+        **タイプ**: `INT32`<br>
+        **プロバイダー名**: `threadsPerCore`<br>
+        **説明**: 物理コアあたりのスレッド数。<br>
    - `authorized_gae_applications`<br>
     **タイプ**: `UNORDERED_LIST_STRING`<br>
     **プロバイダー名**: `authorizedGaeApplications`<br>
@@ -463,7 +472,7 @@ disable_edit: true
         **説明**: この構成が有効であるかどうか。<br>
        - `kind`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `kind`<br>
+        **プロバイダー名**: `kind`<br>
         **説明**: これは常に `sql#backupConfiguration` です。<br>
        - `location`<br>
         **タイプ**: `STRING`<br>
@@ -479,7 +488,7 @@ disable_edit: true
         **説明**: 将来の使用に備えた予約。<br>
        - `start_time`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `startTime`<br>
+        **プロバイダー名**: `startTime`<br>
         **説明**: 毎日のバックアップ構成の開始時刻。UTC タイムゾーンで、24 時間形式 - `HH:MM` で指定します。<br>
        - `transaction_log_retention_days`<br>
         **タイプ**: `INT32`<br>
@@ -524,7 +533,7 @@ disable_edit: true
         **説明**: フラグの名前。これらのフラグはインスタンスの起動時に渡されるので、 サーバーオプションとシステム変数の両方が含まれます。フラグはハイフンではなくアンダースコアで指定します。詳しくは、Cloud SQL ドキュメントの[データベースフラグの構成](https://cloud.google.com/sql/docs/mysql/flags)を参照してください。<br>
        - `value`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `value`<br>
+        **プロバイダー名**: `value`<br>
         **説明**: フラグの値。ブール値のフラグは、true の場合は `on` に、false の場合は `off` に設定されます。フラグが値をとらない場合は、このフィールドを省略しなければなりません。<br>
    - `database_replication_enabled`<br>
     **タイプ**: `BOOLEAN`<br>
@@ -588,11 +597,11 @@ disable_edit: true
         **説明**: IP を使用してインスタンスへの接続が許可されている外部ネットワークのリスト。'CIDR' 表記で、'slash' 表記としても知られています (例: `157.197.200.0/24`)。<br>
            - `expiration_time`<br>
             **タイプ**: `TIMESTAMP`<br>
-            **Provider name**: `expirationTime`<br>
+            **プロバイダー名**: `expirationTime`<br>
             **説明**: このアクセス制御エントリーの有効期限。[RFC 3339](https://tools.ietf.org/html/rfc3339) 形式で、例えば `2012-11-15T16:19:00.094Z` のようになります。<br>
            - `kind`<br>
             **タイプ**: `STRING`<br>
-            **Provider name**: `kind`<br>
+            **プロバイダー名**: `kind`<br>
             **説明**: これは常に `sql#aclEntry` です。<br>
            - `name`<br>
             **タイプ**: `STRING`<br>
@@ -600,7 +609,7 @@ disable_edit: true
             **説明**: オプション。このエントリーを識別するためのラベルです。<br>
            - `value`<br>
             **タイプ**: `STRING`<br>
-            **Provider name**: `value`<br>
+            **プロバイダー名**: `value`<br>
             **説明**: アクセス制御リストの allowlisted 値。<br>
        - `enable_private_path_for_google_cloud_services`<br>
         **タイプ**: `BOOLEAN`<br>
@@ -620,7 +629,7 @@ disable_edit: true
         **説明**: IP 経由の SSL 接続が強制されるかどうか。<br>
    - `kind`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `kind`<br>
+    **プロバイダー名**: `kind`<br>
     **説明**: これは常に `sql#settings` です。<br>
    - `location_preference`<br>
     **タイプ**: `STRUCT`<br>
@@ -632,7 +641,7 @@ disable_edit: true
         **説明**: フォローする App Engine アプリケーション。Cloud SQL インスタンスと同じリージョンにある必要があります。警告: これを変更すると、インスタンスが再起動する場合があります。<br>
        - `kind`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `kind`<br>
+        **プロバイダー名**: `kind`<br>
         **説明**: これは常に `sql#locationPreference` です。<br>
        - `secondary_zone`<br>
         **タイプ**: `STRING`<br>
@@ -640,7 +649,7 @@ disable_edit: true
         **説明**: セカンダリ/フェイルオーバーの優先 Compute Engine ゾーン (例: us-central1-a、us-central1-b など)。<br>
        - `zone`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `zone`<br>
+        **プロバイダー名**: `zone`<br>
         **説明**: 優先 Compute Engine ゾーン (例: us-central1-a、us-central1-b など)。警告: これを変更すると、インスタンスが再起動する場合があります。<br>
    - `maintenance_window`<br>
     **タイプ**: `STRUCT`<br>
@@ -656,7 +665,7 @@ disable_edit: true
         **説明**: 時間帯 - 0～23。<br>
        - `kind`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `kind`<br>
+        **プロバイダー名**: `kind`<br>
         **説明**: これは常に `sql#maintenanceWindow` です。<br>
        - `update_track`<br>
         **タイプ**: `STRING`<br>
@@ -727,7 +736,7 @@ disable_edit: true
         **説明**: 宛先バケット名 (例: gs://mybucket)。<br>
        - `kind`<br>
         **タイプ**: `STRING`<br>
-        **Provider name**: `kind`<br>
+        **プロバイダー名**: `kind`<br>
         **説明**: これは常に sql#sqlServerAuditConfig です<br>
        - `retention_interval`<br>
         **タイプ**: `STRING`<br>
@@ -747,7 +756,7 @@ disable_edit: true
     **説明**: ストレージの容量を自動的に増加させることができる最大サイズ。デフォルト値は 0 で、無制限であることを指定します。<br>
    - `tier`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `tier`<br>
+    **プロバイダー名**: `tier`<br>
     **説明**: このインスタンスの階層 (またはマシンタイプ)、たとえば `db-custom-1-3840` です。警告: これを変更すると、インスタンスが再起動します。<br>
    - `time_zone`<br>
     **タイプ**: `STRING`<br>
@@ -759,7 +768,7 @@ disable_edit: true
     **説明**: ユーザー提供のラベルで、各ラベルが 1 つのキーと値の組である辞書として表現されます。<br>
 ## `state`
 **タイプ**: `STRING`<br>
-**Provider name**: `state`<br>
+**プロバイダー名**: `state`<br>
 **説明**: Cloud SQL インスタンスの現在のサービス状態。<br>
 **可能な値**:<br>
   - `SQL_INSTANCE_STATE_UNSPECIFIED` - インスタンスの状態は不明です。<br>

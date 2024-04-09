@@ -57,7 +57,7 @@ git clone https://github.com/DataDog/apm-tutorial-java-host.git
 
 このアプリケーションでは、AWS プロファイル (ECS クラスターを作成し、ECR から読み取るための正しい権限で構成済み)、AWS リージョン、AWS ECR リポジトリの追加など、いくつかの初期構成が必要です。
 
-`terraform/EC2/global_constants/variables.tf` を開きます。 以下の変数の値を、正しい AWS アカウント情報に置き換えます。
+`terraform/EC2/global_constants/variables.tf` を開きます。以下の変数の値を、正しい AWS アカウント情報に置き換えます。
 
 ```
 output "aws_profile" {
@@ -368,7 +368,7 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 アプリケーションを再デプロイし、API を実行します。
 
-1. 先ほどと同じ terraform コマンド](#deploy-the-application)を使って、AWS ECS にアプリケーションを再デプロイしてください。`terraform/EC2/deployment` ディレクトリから、以下のコマンドを実行します。
+1. [先ほどと同じ terraform コマンド](#deploy-the-application)を使って、AWS ECS にアプリケーションを再デプロイしてください。`terraform/EC2/deployment` ディレクトリから、以下のコマンドを実行します。
 
    ```sh
    terraform init

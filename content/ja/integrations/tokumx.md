@@ -25,6 +25,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- caching
 - data store
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
@@ -38,20 +39,20 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tokumx
-oauth: {}
 public_title: TokuMX
 short_description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::キャッシュ
   - Category::データストア
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
   media: []
@@ -72,7 +73,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 TokuMX チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

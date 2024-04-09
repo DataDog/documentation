@@ -1,5 +1,5 @@
 ---
-title: Using Custom JavaScript Assertions In Browser Tests
+title: Use Custom JavaScript Assertions In Browser Tests
 kind: guide
 description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
@@ -29,7 +29,7 @@ For more information about assertions, see [Browser Test Steps][2].
 
 ## Assert that an element is not on the page
 
-To verify that an element with a specific ID is *not* on the page, use `return !document.getElementById("<ELEMENT_ID>”);`.
+To verify that an element with a specific ID is *not* on the page, use `return !document.getElementById("<ELEMENT_ID>");`.
 
 To verify that elements are *not* on the page and return the number of elements in the console error, add the following in the body assertion:
 

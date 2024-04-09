@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-When [creating a new detection rule or modifying an existing one][1], use [template variables](#template-variables) (such as attributes and signal tags) and [conditional variables](#conditional-variables) to customize a rule’s notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
+When [creating a new detection rule or modifying an existing one][1], use [template variables](#template-variables) (such as attributes and signal tags) and [conditional variables](#conditional-variables) to customize a rule's notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
 
 ## Template Variables
 
@@ -22,17 +22,21 @@ Use template variables to inject dynamic context from triggered logs or traces d
 
 The following variables are available:
 
-| Variable              | Description                                                                                   |
-| --------------------- | --------------------------------------------------------------------------------------------- |
-| `{{severity}}`        | The severity of the triggering rule case (integer, 0-4).                                      |
-| `{{timestamp}}`       | Time the signal was created. For example, `Mon Jan 01 00:00:00 UTC 1970`.                     |
-| `{{timestamp_epoch}}` | Time the signal was created, in milliseconds since midnight, January 1, 1970.                 |
-| `{{first_seen}}`      | Time the signal was first seen. For example, `Mon Jan 01 00:00:00 UTC 1970`.                  |
-| `{{first_seen_epoch}}`| Time the signal was first seen, in milliseconds since midnight, January 1, 1970.              |
-| `{{last_seen}}`       | Time the signal was most recently triggered. For example, `Mon Jan 01 00:00:00 UTC 1970`.     |
-| `{{last_seen_epoch}}` | Time the signal was most recently triggered, in milliseconds, since midnight, January 1, 1970.|
-| `{{rule_name}}`       | Name of the associated rule.                                                                  |
-| `{{case_name}}`       | Name of the triggering rule case.                                                             |
+| Variable                                           | Description                                                                                   |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `{{severity}}`                                     | The severity of the triggering rule case (integer, 0-4).                                      |
+| `{{timestamp}}`                                    | Time the signal was created. For example, `Mon Jan 01 00:00:00 UTC 1970`.                     |
+| `{{timestamp_epoch}}`                              | Time the signal was created, in milliseconds since midnight, January 1, 1970.                 |
+| `{{first_seen}}`                                   | Time the signal was first seen. For example, `Mon Jan 01 00:00:00 UTC 1970`.                  |
+| `{{first_seen_epoch}}`                             | Time the signal was first seen, in milliseconds since midnight, January 1, 1970.              |
+| `{{last_seen}}`                                    | Time the signal was most recently triggered. For example, `Mon Jan 01 00:00:00 UTC 1970`.     |
+| `{{last_seen_epoch}}`                              | Time the signal was most recently triggered, in milliseconds, since midnight, January 1, 1970.|
+| `{{rule_name}}`                                    | Name of the associated rule.                                                                  |
+| `{{case_name}}`                                    | Name of the triggering rule case.                                                             |
+| `{{events_matched}}`                               | Number of events that have matched the associated rule.                                       |
+| `{{events_matched_per_query.<name_of_the_query>}}` | Number of events that have matched the associated rule query `<name_of_the_query>`.           |
+
+When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview tab of the signal's side panel.
 
 ### Dynamic links
 
@@ -52,7 +56,7 @@ Or, if a signal is tagged with a specific service, use the `{{@service}}` variab
 
 ### Evaluation of numerical values
 
-For template variables that return numerical values, use `eval` to perform mathematical operations or change the value’s format. For more information, see [Template Variable Evaluation][2].
+For template variables that return numerical values, use `eval` to perform mathematical operations or change the value's format. For more information, see [Template Variable Evaluation][2].
 
 ### Epoch
 
@@ -66,12 +70,12 @@ For more information on the `eval` function, see [Template Variable Evaluation][
 
 ### Local time
 
-Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time 'time_variable' 'timezone'}}`. 
+Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time "time_variable" "timezone"}}`.
 
 For example, to add the last triggered time of the signal in the Tokyo time zone in your notification, include the following in the notification message:
 
 ```
-{{local_time 'last_triggered_at' 'Asia/Tokyo'}}
+{{local_time "last_triggered_at" "Asia/Tokyo"}}
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example, `2021-05-31 23:43:27+09:00`. See the [list of TZ database time zones][3], specifically the `TZ database name` column, to see the list of available time zone values.
@@ -84,7 +88,7 @@ HIPAA-enabled Datadog organizations have access to only <a href="#template-varia
 
 Use attribute variables to customize signal notifications with specific information about the triggered signal. 
 
-To see a signal’s list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal’s side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
+To see a signal's list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal's side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
 
 The following is an example JSON object with event attributes that may be associated with a security signal:
 
@@ -171,7 +175,7 @@ The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}}
 ```
 ## Tag variables
 
-Use the following syntax to add a tag variable to your rule’s notification message: `{{tag_name}}`. 
+Use the following syntax to add a tag variable to your rule's notification message: `{{tag_name}}`. 
 
 For tags following the `key:value` syntax, use the variable: `{{key.name}}`. This renders the value associated with the key in the notification. For example, if a signal has the tag key `region`, use the variable `{{region.name}}` in your notification message.
 
@@ -258,6 +262,16 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 ```
 {{ .matched }} the host name
+```
+
+### URL Encode
+
+If your signal notification includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
+
+**Example**: If your signal message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+
+```
+https://app.datadoghq.com/services/{{urlencode "service.name"}}
 ```
 
 ## Further reading

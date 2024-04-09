@@ -29,8 +29,10 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- marketplace
+- caching
 - data store
+- marketplace
+- sap
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -44,7 +46,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_maxdb
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -54,22 +55,24 @@ pricing:
   tag: db
   unit_label: Base de données
   unit_price: 50
-public_title: Intégration MaxDB
+public_title: MaxDB
 short_description: Surveiller les volumes, les caches, les schémas, les tables et
   d'autres éléments de vos bases de données MaxDB
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
+  - Category::Caching
   - Category::Data Store
+  - Category::Marketplace
+  - Category::SAP
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Surveiller le volume, le cache, les schémas, les tables et d'autres
     éléments de vos bases de données MaxDB
@@ -85,7 +88,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration MaxDB
+  title: MaxDB
   uninstallation: README.md#Uninstallation
 ---
 

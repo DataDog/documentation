@@ -42,6 +42,8 @@ author:
 categories:
 - data store
 - log collection
+- notification
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
 display_on_public_website: true
@@ -49,26 +51,27 @@ draft: false
 git_integration_title: postgres
 integration_id: postgres
 integration_title: Postgres
-integration_version: 13.3.0
+integration_version: 14.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: postgres
-oauth: {}
 public_title: Postgres
 short_description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
+  - Category::通知
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
   media: []
@@ -91,7 +94,7 @@ Postgres インテグレーションは、Postgres データベースの健全�
 
 <div class="alert alert-info">このページでは、標準的な Postgres Agent のインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### APM に Datadog Agent を構成する
+### インストール
 
 PostgreSQL チェックは Agent にパッケージ化されています。PostgreSQL メトリクスとログの収集を開始するには、[Agent をインストールします][3]。
 
@@ -533,7 +536,7 @@ PostgreSQL チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/database_monitoring/#postgres
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example

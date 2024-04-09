@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
+- 構成 & デプロイ
 - ログの収集
 dependencies: []
 description: Amazon AppStream のキーメトリクスを追跡
@@ -9,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_appstream/
 draft: false
 git_integration_title: amazon_appstream
 has_logo: true
-integration_id: amazon-appstream
+integration_id: ''
 integration_title: Amazon AppStream
 integration_version: ''
 is_public: true
@@ -21,15 +22,16 @@ short_description: Amazon AppStream のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon AppStream は、AWS から Web ブラウザへデスクトップアプリケーションをストリーミングできるフルマネージド型の安全なアプリケーションストリーミングサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての AppStream メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -38,7 +40,7 @@ Amazon AppStream は、AWS から Web ブラウザへデスクトップアプリ
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `AppStream` が有効になっていることを確認します。
 2. [Datadog - Amazon AppStream インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -48,34 +50,34 @@ Amazon AppStream から S3 バケットまたは CloudWatch のいずれかに�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
+1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon AppStream ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_appstream" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon AppStream インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon AppStream インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-appstream
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_appstream/amazon_appstream_metadata.csv

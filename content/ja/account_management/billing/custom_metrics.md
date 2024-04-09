@@ -1,25 +1,24 @@
 ---
+algolia:
+  tags:
+  - カスタムメトリクスの請求
 aliases:
 - /ja/integrations/faq/what-standard-integrations-emit-custom-metrics/
-further_reading:
-- link: /observability_pipelines/guide/custom-metrics-governance
-  tag: ドキュメント
-  text: 観測可能性パイプラインを使用したカスタムメトリクスの管理
 kind: documentation
 title: カスタムメトリクスの課金
 ---
 
 メトリクスが [{{< translate key="integration_count" >}} 種以上の Datadog インテグレーション][1]以外から送信された場合、そのメトリクスは[カスタムメトリクス][2]<sup>[(1)](#標準インテグレーション)</sup>とみなされます。
 
-**カスタムメトリクスは、メトリクス名とタグ値 (ホストタグを含む) の組み合わせにより、一意に識別されます**。一般に、[DogStatsD][25] または[カスタム Agent チェック][26]を使用して送信されるメトリクスはすべて、カスタムメトリクスとなります。
+**カスタムメトリクスは、メトリクス名とタグ値 (ホストタグを含む) の組み合わせにより、一意に識別されます**。一般に、[DogStatsD][3] または[カスタム Agent チェック][4]を使用して送信されるメトリクスはすべて、カスタムメトリクスとなります。
 
 カスタムメトリクスの月間請求対象数 (使用量ページに反映) は、ある月の各時間のすべての個別カスタムメトリクスを合計し、それを月の時間数で割って月間平均値を算出します。
 
-Metrics without LimitsTM のユーザーは、インジェストおよびインデックスされたカスタムメトリクスの月間課金量を Usage ページで確認できます。インジェストおよびインデックスされたカスタムメトリクスと [Metrics without LimitsTM][3] について詳しくはこちら。
+Metrics without LimitsTM のユーザーは、インジェストおよびインデックスされたカスタムメトリクスの月間課金量を Usage ページで確認できます。インジェストおよびインデックスされたカスタムメトリクスと [Metrics without LimitsTM][5] について詳しくはこちら。
 
 ## カスタムメトリクスの数え方
 
-特定のメトリクス名に関連付けられたカスタムメトリクスの数は、メトリクスの[送信タイプ][4]により異なります。次のシナリオを使って、カスタムメトリクスの数え方をいくつかご紹介します。
+特定のメトリクス名に関連付けられたカスタムメトリクスの数は、メトリクスの[送信タイプ][6]により異なります。次のシナリオを使って、カスタムメトリクスの数え方をいくつかご紹介します。
 
 エンドポイントリクエストのレイテンシーを測定する 2 つのホスト (`host:A` と `host:B`) から、`request.Latency` というメトリクスを送信しているとします。このメトリクスを 2 つのタグキーと共に送信します。
 
@@ -70,7 +69,7 @@ Florida の気温を入手するには、次のようにカスタムメトリク
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
 
-**注意**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
+**注**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
 
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
@@ -155,7 +154,7 @@ Florida の気温を入手するには、次のようにカスタムメトリク
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
 
-**注意**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
+**注**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
 
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
@@ -215,7 +214,7 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 
 [1]: /ja/metrics/types/?tab=histogram#metric-types
 [2]: /ja/metrics/types/?tab=histogram#definition
-[3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
 
@@ -236,7 +235,7 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 
 この表は、パーセンタイル集計をディストリビューションメトリクスに追加した場合の効果をまとめたものです。
 
-| メトリクス                                                                                   | 課金対象となるカスタムメトリクスの数 |
+| ガイド                                                                                   | 課金対象となるカスタムメトリクスの数 |
 |-------------------------------------------------------------------------------------------|-----------------------------------|
 | ベースラインディストリビューションからのカスタムメトリクスの数 (count、sum、min、max、avg)         | `5*(tag value combinations)`      |
 | パーセンタイル集計（p50、p75、p90、p95、p99）を含むカスタムメトリクスの数 | `5*(tag value combinations)`      |
@@ -283,9 +282,9 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 
 ## カスタムメトリクスの追跡
 
-管理者ユーザー ([Datadog Admin ロール][5]を持つユーザー) は、1 時間あたりの**インジェスト**および**インデックス**されたカスタムメトリクスの月平均数を確認することができます。また、カスタムメトリクスのトップテーブルでは、[使用量の詳細ページ][6]で**インデックスされた**カスタムメトリクスの平均数を一覧で確認できます。詳細については、[使用量の詳細][7]のドキュメントを参照してください。
+管理者ユーザー ([Datadog Admin ロール][7]を持つユーザー) は、1 時間あたりの**インジェスト**および**インデックス**されたカスタムメトリクスの月平均数を確認することができます。また、カスタムメトリクスのトップテーブルでは、[使用量の詳細ページ][8]で**インデックスされた**カスタムメトリクスの平均数を一覧で確認できます。詳細については、[使用量の詳細][9]のドキュメントを参照してください。
 
-特定のメトリクス名のカスタムメトリクスの数をよりリアルタイムに追跡するには、[Metrics Summary ページ][8]でメトリクス名をクリックします。メトリクスの詳細サイドパネルで、**インジェストされた**カスタムメトリクスと**インデックスされた**カスタムメトリクスの数を確認することができます。
+特定のメトリクス名のカスタムメトリクスの数をよりリアルタイムに追跡するには、[Metrics Summary ページ][10]でメトリクス名をクリックします。メトリクスの詳細サイドパネルで、**インジェストされた**カスタムメトリクスと**インデックスされた**カスタムメトリクスの数を確認することができます。
 {{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary サイドパネル" style="width:80%;">}}
 
 
@@ -298,55 +297,51 @@ Datadog では、料金プランごとに一定数の**インジェスト**お�
 
 割り当ては、インフラストラクチャー全体でカウントされます。たとえば、プロプランを利用しており、3 ホスト分のライセンスを取得している場合、300 個のインデックスされたカスタムメトリクスが割り当てられます。300 個のインデックスされたカスタムメトリクスは、ホストごとに均等に振り分けることも、1 つのホストでのみ使用することもできます。例として、割り当てられたカスタムメトリクス数を超えないシナリオを下記に示しています。
 
-{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="カスタムメトリクスの割り当て"  >}}
+{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="カスタムメトリクスの割り当て" >}}
 
-課金されるインデックスされたカスタムメトリクスの数は、特定の月の (有料ホストすべての) カスタムメトリクスの 1 時間当たりの平均に基づきます。Metrics without LimitsTM を使用してメトリクスを構成した場合のみ、インジェストされたカスタムメトリクスの請求対象数が増加します。アカウントのカスタムメトリクスについてのご相談や、カスタムメトリクスパッケージの追加購入については、[セールス][9]チームまたは担当の[カスタマーサクセス][10]マネージャーまでお問い合わせください。
+課金されるインデックスされたカスタムメトリクスの数は、特定の月の (有料ホストすべての) カスタムメトリクスの 1 時間当たりの平均に基づきます。Metrics without LimitsTM を使用してメトリクスを構成した場合のみ、インジェストされたカスタムメトリクスの請求対象数が増加します。アカウントのカスタムメトリクスについてのご相談や、カスタムメトリクスパッケージの追加購入については、[セールス][11]チームまたは担当の[カスタマーサクセス][12]マネージャーまでお問い合わせください。
 
 ## 標準インテグレーション
 
 以下の標準インテグレーションでは、カスタムメトリクスを生成することができます。
 
-| インテグレーションの種類                           | インテグレーション                                                                       |
+| インテグレーションの種類                           | ヘルプ                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
-| デフォルトで上限 350 個のカスタムメトリクス。      | [ActiveMQ XML][11] / [Go-Expvar][12] / [Java-JMX][13]                              |
-| カスタムメトリクスの収集では既定の上限なし。 | [Nagios][14] /[PDH チェック][15] /[OpenMetrics][16] /[Windows Services][17] /[WMI][18] /[Prometheus][27] |
-| カスタムメトリクス収集の構成が可能。   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                        |
-| クラウドインテグレーションから送信されたカスタムメトリクス    | [AWS][23]                                                                          |
+| デフォルトで上限 350 個のカスタムメトリクス。      | [ActiveMQ XML][13] / [Go-Expvar][14] / [Java-JMX][15]                              |
+| カスタムメトリクスの収集では既定の上限なし。 | [Nagios][16] /[PDH チェック][17] /[OpenMetrics][18] /[Windows パフォーマンスカウンター][19] /[WMI][20] /[Prometheus][21] |
+| カスタムメトリクス収集の構成が可能。   | [MySQL][22] /[Oracle][23] /[Postgres][24] /[SQL Server][25]                        |
+| クラウドインテグレーションから送信されたカスタムメトリクス    | [AWS][26]                                                                          |
 
-## トラブルシューティング
+## ヘルプ
 
-技術的な質問については、[Datadog サポートチーム][24]にお問い合わせください。
+技術的な質問については、[Datadog のサポートチーム][27]にお問い合わせください。
 
-課金に関するご質問は、[カスタマーサクセス][10]マネージャーにお問い合わせください。
-
-## {{< partial name="whats-next/whats-next.html" >}}
-
-{{< partial name="whats-next/whats-next.html" >}}
+課金に関するご質問は、[カスタマーサクセス][12]マネージャーにお問い合わせください。
 
 [1]: /ja/integrations/
 [2]: /ja/metrics/custom_metrics/
-[3]: /ja/metrics/metrics-without-limits
-[4]: /ja/metrics/types/#metric-types
-[5]: /ja/account_management/users/default_roles/
-[6]: https://app.datadoghq.com/billing/usage
-[7]: /ja/account_management/billing/usage_details/
-[8]: https://app.datadoghq.com/metric/summary
-[9]: mailto:sales@datadoghq.com
-[10]: mailto:success@datadoghq.com
-[11]: /ja/integrations/activemq/#activemq-xml-integration
-[12]: /ja/integrations/go_expvar/
-[13]: /ja/integrations/java/
-[14]: /ja/integrations/nagios/
-[15]: /ja/integrations/pdh_check/
-[16]: /ja/integrations/openmetrics/
-[17]: /ja/integrations/windows_service/
-[18]: /ja/integrations/wmi_check/
-[19]: /ja/integrations/mysql/
-[20]: /ja/integrations/oracle/
-[21]: /ja/integrations/postgres/
-[22]: /ja/integrations/sqlserver/
-[23]: /ja/integrations/amazon_web_services/
-[24]: /ja/help/
-[25]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
-[26]: /ja/metrics/custom_metrics/agent_metrics_submission/
-[27]: /ja/integrations/prometheus
+[3]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /ja/metrics/custom_metrics/agent_metrics_submission/
+[5]: /ja/metrics/metrics-without-limits
+[6]: /ja/metrics/types/#metric-types
+[7]: /ja/account_management/users/default_roles/
+[8]: https://app.datadoghq.com/billing/usage
+[9]: /ja/account_management/plan_and_usage/usage_details/
+[10]: https://app.datadoghq.com/metric/summary
+[11]: mailto:sales@datadoghq.com
+[12]: mailto:success@datadoghq.com
+[13]: /ja/integrations/activemq/#activemq-xml-integration
+[14]: /ja/integrations/go_expvar/
+[15]: /ja/integrations/java/
+[16]: /ja/integrations/nagios/
+[17]: /ja/integrations/pdh_check/
+[18]: /ja/integrations/openmetrics/
+[19]: /ja/integrations/windows_performance_counters/
+[20]: /ja/integrations/wmi_check/
+[21]: /ja/integrations/prometheus
+[22]: /ja/integrations/mysql/
+[23]: /ja/integrations/oracle/
+[24]: /ja/integrations/postgres/
+[25]: /ja/integrations/sqlserver/
+[26]: /ja/integrations/amazon_web_services/
+[27]: /ja/help/

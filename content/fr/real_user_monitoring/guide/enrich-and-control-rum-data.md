@@ -61,8 +61,9 @@ datadogRum.init({
     beforeSend: (event, context) => {
         // recueillir des en-têtes de réponse d'une ressource RUM
         if (event.type === 'resource' && event.resource.type === 'fetch') {
-            event.context = {...event.context, responseHeaders: context.response.headers}
+            event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
+        return true
     },
     ...
 });

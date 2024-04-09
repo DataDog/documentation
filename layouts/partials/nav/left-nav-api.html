@@ -23,6 +23,24 @@
     {{ $currentEnURL = (print "/" (strings.TrimLeft (print "/" .Lang "/") $currentPage.RelPermalink)) }}
 {{ end }}
 
+
+{{/*
+    build array ($engMenuChildren) of english menu items with parents from "menus.en.yaml".
+    for use in providing english names for anchoring the nav-links (.nav-link)
+*/}}
+{{ if ne $currentPage.Lang "en" }}
+{{$engMenu := (index .Sites.First.Menus $apiMenu) }}
+{{ range $engMenu }}
+    {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/") }}
+    {{ range .Children }}
+        {{ $dot.Scratch.SetInMap "engMenuChildren" .Identifier .Name }}
+    {{ end }}
+    {{ end }}
+{{ end }}
+{{ end }}
+
+{{$engMenuChildren := $dot.Scratch.Get "engMenuChildren" | default dict}}
+
 <ul class="list-unstyled">
 {{ range $menu }}
     <!-- check if on /api/ top level section page, don't generate sub anchors if true -->
@@ -33,9 +51,18 @@
             </a>
             <ul class="nav">
                 {{ range sort .Children ".Params.order" "asc"  }}
-                    {{ $menuChild := . }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                        <a class="col nav-link d-inline-block" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-bs-target="#{{.Identifier}}">
+                        {{$identifier := .Identifier}}
+                        {{/*
+                            lookup english equivalent of non-english menu item identifier attr.
+                            pull the name attr and plug into anchor href.
+                        */}}
+                        {{ if ne $currentPage.Lang "en" }}
+                        {{ $dot.Scratch.Set "name" (index $engMenuChildren $identifier) }}
+                        {{ end }}
+
+                        {{$engName := $dot.Scratch.Get "name"}}
+                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>

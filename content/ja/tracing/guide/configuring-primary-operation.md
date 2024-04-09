@@ -1,25 +1,26 @@
 ---
-title: サービスのプライマリオペレーション
-kind: ガイド
 aliases:
-  - /ja/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+- /ja/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
-  - link: /tracing/setup/
-    tag: ドキュメント
-    text: アプリケーションで APM トレースをセットアップする方法
-  - link: /tracing/visualization/services_list/
-    tag: ドキュメント
-    text: Datadog に報告するサービスの一覧
-  - link: /tracing/visualization/service/
-    tag: ドキュメント
-    text: Datadog のサービスについて
-  - link: /tracing/visualization/resource/
-    tag: ドキュメント
-    text: リソースのパフォーマンスとトレースの詳細
-  - link: /tracing/visualization/trace/
-    tag: ドキュメント
-    text: Datadog トレースの読み方を理解する
+- link: /tracing/trace_collection/
+  tag: ドキュメント
+  text: アプリケーションで APM トレースをセットアップする方法
+- link: /tracing/services/services_list/
+  tag: ドキュメント
+  text: Datadog に報告するサービスの一覧
+- link: /tracing/services/service_page/
+  tag: ドキュメント
+  text: Datadog のサービスについて
+- link: /tracing/services/resource_page/
+  tag: ドキュメント
+  text: リソースのパフォーマンスとトレースの詳細
+- link: /tracing/trace_explorer/trace_view/
+  tag: ドキュメント
+  text: Datadog トレースの読み方を理解する
+kind: ガイド
+title: サービスのプライマリオペレーション
 ---
+
 ## APM サービス
 
 APM サービスは、エラー、スループット、レイテンシーのトレースメトリクスを計算します。メトリクスは 1 つのスパン名に一致する複数のリソースを基に計算され、プライマリオペレーションとみなされます。サービスメトリクスは、製品全体で、デフォルトのサービス詳細画面としてサービスリストとサービスマップで使用されています。
@@ -50,7 +51,7 @@ APM サービスは、エラー、スループット、レイテンシーのト�
 5. サービスのエントリーポイントとして設定するオペレーションを選択します。
 6. **保存**をクリックします。
 
-{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM の保存"  >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM の保存" >}}
 
 ## 追加スパン名の統計を表示する
 
@@ -89,7 +90,7 @@ try (Scope scope = tracer.activateSpan(span)) {
 詳細は、[Java および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /ja/tracing/setup_overview/open_standards/java/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/java/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -108,7 +109,7 @@ span.finish()
 詳細は、[Python および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /ja/tracing/setup_overview/open_standards/python/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/python/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -122,7 +123,7 @@ end
 詳細は、[Ruby および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /ja/tracing/setup_overview/open_standards/ruby/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/ruby/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -134,7 +135,7 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 詳細は、[Go および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /ja/tracing/setup_overview/open_standards/go/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -147,10 +148,10 @@ span.setTag('span.type', 'web')
 span.finish();
 ```
 
-詳細は、[Nodejs および OpenTracing のセットアップ][1]をご参照ください。
+詳細は、[Node.js および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /ja/tracing/setup_overview/open_standards/nodejs/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/nodejs/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -170,7 +171,7 @@ using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(f
 詳細は、[.NET および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /ja/tracing/setup_overview/open_standards/dotnet/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/dotnet/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -198,7 +199,7 @@ $scope->close();
 詳細は、[PHP および OpenTracing のセットアップ][1]をご参照ください。
 
 
-[1]: /ja/tracing/setup_overview/open_standards/php/#opentracing
+[1]: /ja/tracing/trace_collection/opentracing/php/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
@@ -210,10 +211,10 @@ auto root_span = tracer->StartSpan("web.request");
 root_span->SetTag(datadog::tags::resource_name, "/user/profile");
 ```
 
-詳細は、[CPP および カスタムインスツルメンテーションのセットアップ][1]をご参照ください。
+詳細は、[C++ および カスタムインスツルメンテーションのセットアップ][1]をご参照ください。
 
 
-[1]: /ja/tracing/setup_overview/custom_instrumentation/cpp/#manually-instrument-a-method
+[1]: /ja/tracing/trace_collection/custom_instrumentation/cpp/#manually-instrument-a-method
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -223,6 +224,6 @@ root_span->SetTag(datadog::tags::resource_name, "/user/profile");
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/tracing/guide/metrics_namespace/
+[1]: /ja/tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
-[3]: /ja/tracing/setup_overview/custom_instrumentation/
+[3]: /ja/tracing/trace_collection/custom_instrumentation/

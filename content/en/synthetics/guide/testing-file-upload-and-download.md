@@ -1,5 +1,5 @@
 ---
-title: Test File Upload and Download
+title: Upload and Download A Test File
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
@@ -21,13 +21,13 @@ Web applications can embed a lot of logic, and although end-to-end tests are oft
 
 You can **upload a file** to validate the final step of a functional workflow to test a profile creation. When uploading a file at the test recorder level, Datadog Synthetic browser tests automatically identify the uploaded file and create the [`Upload file` associated step][1]. It is then able to upload that file again at test execution.
 
-{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="Upload File" video="true"  width="100%">}}
+{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="Upload File" video="true" width="100%">}}
 
 ## Testing a file download
 
 **Downloading files** is another common action users take on web applications: downloading an order confirmation from an e-commerce website or the PDF or CSV export history of bank account transactions.
 
-Datadog’s browser tests and the `Test a downloaded file` assertion allow you to verify that downloadable files from your web application are correctly being served (for example, from your FTP server). With this assertion, downloadable files can be tested to ensure they have the correct file name, size, and data.
+Datadog's browser tests and the `Test a downloaded file` assertion allow you to verify that downloadable files from your web application are correctly being served (for example, from your FTP server). With this assertion, downloadable files can be tested to ensure they have the correct file name, size, and data.
 
 To setup a browser test with this assertion:
 
@@ -53,5 +53,5 @@ To setup a browser test with this assertion:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/actions/#upload
+[1]: /synthetics/browser_tests/actions/#upload-file
 [2]: /synthetics/browser_tests/actions/#assertion

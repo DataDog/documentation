@@ -31,10 +31,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- security
-- 構成 & デプロイ
 - ログの収集
-- オートディスカバリー
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
 display_on_public_website: true
@@ -42,28 +40,25 @@ draft: false
 git_integration_title: vault
 integration_id: vault
 integration_title: Vault
-integration_version: 3.3.2
+integration_version: 3.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: vault
-oauth: {}
 public_title: Vault
 short_description: Vault は機密情報管理サービスアプリケーション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
-  - Category::Configuration & Deployment
   - Category::Log Collection
-  - Category::Autodiscovery
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Vault は機密情報管理サービスアプリケーション
   media: []
@@ -105,7 +100,7 @@ Vault インテグレーションには以下の機能が必要です。
    }
    ```
 
-      セットアップポリシーとロール:
+セットアップポリシーとロール:
 
    ```text
    $ vault policy write metrics /path/to/metrics_policy.hcl
@@ -115,7 +110,8 @@ Vault インテグレーションには以下の機能が必要です。
    $ vault agent -config=/path/to/agent_config.hcl
    ```
 
-   `agent_config.hcl` のコンテンツ:
+`agent_config.hcl` のコンテンツ:
+
    ```
    exit_after_auth = true
    pid_file = "/tmp/agent_pid"

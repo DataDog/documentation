@@ -4,7 +4,7 @@ kind: documentation
 description: "Display a summary view of all your Datadog monitors, or a subset based on a query."
 widget_type: "manage_status"
 aliases:
-    - /graphing/widgets/monitor_summary/
+- /graphing/widgets/monitor_summary/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -17,20 +17,18 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 
 ## Setup
 
-{{< img src="dashboards/widgets/monitor_summary/monitor-summary-setup.png" alt="monitor summary setup" style="width:80%;">}}
-
 ### Configuration
 
 1. Select one of the three summary types: `Monitor`, `Group` or `Combined`
-    - The `Monitor` summary type lists statuses and names of monitors matching the [monitor query][1]. Multi alert monitors have only one row in the results list and their status is the multi alert monitor’s overall status. The Status Counts are the number of matching monitors with each status type.
+    - The `Monitor` summary type lists statuses and names of monitors matching the [monitor query][1]. Multi alert monitors have only one row in the results list and their status is the multi alert monitor's overall status. The Status Counts are the number of matching monitors with each status type.
 
     {{< img src="dashboards/widgets/monitor_summary/monitor_summary_type.png" alt="monitor summary type" style="width:80%;">}}
 
-    - The `Group` summary type lists statuses, names, and groups of monitors matching the monitor query. Multi alert monitors are broken into several rows in the results list and correspond to each group and that group’s specific status in the multi alert monitor. The `Group` summary type also supports `group` and `group_status` facets in its monitor query similar to the [Triggered Monitors][2] page. The Status Counts are the number of matching monitor groups with each status type.
+    - The `Group` summary type lists statuses, names, and groups of monitors matching the monitor query. Multi alert monitors are broken into several rows in the results list and correspond to each group and that group's specific status in the multi alert monitor. The `Group` summary type also supports `group` and `group_status` facets in its monitor query similar to the [Triggered Monitors][2] page. The Status Counts are the number of matching monitor groups with each status type.
 
     {{< img src="dashboards/widgets/monitor_summary/group_summary_type.png" alt="group summary type" style="width:80%;">}}
 
-    - The `Combined` summary type lists the number of group statuses and names of the monitors matching the monitor query. Multi alert monitors have only one row in the results list like in the `Monitor` summary type but the groups column displays the number of groups in each status type instead of the monitor’s overall status. Similar to the `Group` summary type, the `Combined` summary type also supports the `group` and `group_status` facets in its monitor query. The Status Counts still show the count of overall monitor statuses like in the `Monitor` summary type.
+    - The `Combined` summary type lists the number of group statuses and names of the monitors matching the monitor query. Multi alert monitors have only one row in the results list like in the `Monitor` summary type but the groups column displays the number of groups in each status type instead of the monitor's overall status. Similar to the `Group` summary type, the `Combined` summary type also supports the `group` and `group_status` facets in its monitor query. The Status Counts still show the count of overall monitor statuses like in the `Monitor` summary type.
 
     {{< img src="dashboards/widgets/monitor_summary/combined_summary_type.png" alt="combined summary type" style="width:80%;">}}
 
@@ -71,19 +69,9 @@ Selecting the `Show triggered column` option filters the results to monitors or 
 
 {{< img src="dashboards/widgets/monitor_summary/monitor-summary.png" alt="display preferences" style="width:80%;">}}
 
-#### Title
-
-Display a custom title for your widget by checking the `Show a title` check box:
-
-{{< img src="dashboards/widgets/monitor_summary/widget_title.png" alt="widget title" style="width:80%;">}}
-
-You can optionally define the title’s size and alignment.
-
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
-
-The dedicated [widget JSON schema definition][4] for the monitor summary widget is:
+This widget can be used with the **[Dashboards API][3]**. See the following table for the [widget JSON schema definition][4]:
 
 {{< dashboards-widgets-api >}}
 
@@ -92,6 +80,6 @@ The dedicated [widget JSON schema definition][4] for the monitor summary widget 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/manage/
-[2]: /monitors/manage/#manage-triggered-monitors-with-group-level-granularity
-[3]: /api/v1/dashboards/
+[2]: /monitors/manage/#grouped-results
+[3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

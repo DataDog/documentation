@@ -8,10 +8,9 @@ author:
   sales_email: sales@docontrol.io
   support_email: support@docontrol.io
 categories:
-- security
-- インシデント
 - 自動化
-- アラート設定
+- ログの収集
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/docontrol/README.md
 display_on_public_website: true
@@ -24,23 +23,21 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: docontrol
-oauth: {}
 public_title: DoControl
 short_description: SaaS データセキュリティ - DLP と CASB の最新化による SaaS データの安全性確保
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
-  - Category::Incidents
   - Category::Automation
-  - Category::Alerting
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: SaaS データセキュリティ - DLP と CASB の最新化による SaaS データの安全性確保
   media:
@@ -71,17 +68,18 @@ tile:
   title: DoControl
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 このインテグレーションにより、[DoControl][1] のお客様は、自動化されたセキュリティワークフローを通じて、DoControl 関連のログとイベントを Datadog に転送することができます。
 
-## セットアップ
+## 計画と使用
 
 このインテグレーションを設定するには、アクティブな [DoControl アカウント][2]が必要です。また、Datadog の適切な[管理者権限][3]も必要となります。
 
-### インストール
+### インフラストラクチャーリスト
 
 ホストでのインストールは必要ありません。
 
@@ -128,7 +126,7 @@ DoControl については、[DoControl ドキュメント][14]で詳しく説明
 
 
 
-## サポート
+## Agent
 
 ヘルプが必要ですか？[Datadog サポート][15]または [DoControl サポート][16]にお問い合わせください。
 

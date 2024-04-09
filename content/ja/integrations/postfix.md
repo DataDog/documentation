@@ -29,7 +29,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- collaboration
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
@@ -38,12 +37,11 @@ draft: false
 git_integration_title: postfix
 integration_id: postfix
 integration_title: Postfix
-integration_version: 1.12.0
+integration_version: 1.13.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: postfix
-oauth: {}
 public_title: Postfix
 short_description: すべての Postfix キューのサイズを監視する。
 supported_os:
@@ -52,10 +50,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::コラボレーション
-  - Category::ログの収集
   configuration: README.md#Setup
   description: すべての Postfix キューのサイズを監視する。
   media: []
@@ -246,7 +243,7 @@ Postfix チェックには、サービスのチェック機能は含まれませ
 - [Postfix キューのパフォーマンスの監視][10]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postfix/images/postfixgraph.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/postfix/datadog_checks/postfix/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

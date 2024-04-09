@@ -9,7 +9,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -30,7 +30,7 @@ To create a [forecast monitor][1] in Datadog, use the main navigation: *Monitors
 Any metric currently reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
 
 After defining the metric, the forecast monitor provides two preview graphs in the editor:
-{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="Editor graphs"  style="width:95%;">}}
+{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="Editor graphs" style="width:95%;">}}
 
 * The **Historical View** lets you explore the past metric data at different time scales.
 * The **Evaluation Preview** shows a combination of historical and predicted metric data.
@@ -40,13 +40,15 @@ After defining the metric, the forecast monitor provides two preview graphs in t
 * Trigger an alert when the edge of the forecast confidence bounds goes `above` or `below`.
 * the threshold within the next `24 hours`, `1 week`, `1 month`, etc. or `custom` to set a value between 12 hours and 3 months.
 * Alert threshold: >= `<NUMBER>`
+* Warning threshold: >= `<NUMBER>`
 * Alert [recovery threshold][3]: < `<NUMBER>`
+* Warning [recovery threshold][3]: < `<NUMBER>`
 
 #### Advanced options
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available to edit under **Advanced Options**:
 
-{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Advanced options"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Advanced options" style="width:80%;">}}
 
 | Option                     | Description                                                                                                             |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -72,11 +74,11 @@ Use the linear algorithm for metrics that have steady trends but no repeating se
 | Simple   | Does a robust linear regression through the entire history.                                |
 | Reactive | Extrapolates recent behavior better at the risk of overfitting to noise, spikes, or dips.  |
 
-{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" style="width:80%;">}}
 
-{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple" style="width:80%;">}}
 
-{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive"  style="width:80%;" >}}
+{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" style="width:80%;" >}}
 
 {{% /tab %}}
 {{% tab "Seasonal" %}}
@@ -91,7 +93,7 @@ Use the seasonal algorithm for metrics with repeating patterns. There are three 
 
 **Note**: This algorithm requires at least two seasons of history and uses up to six seasons for forecasting.
 
-{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -117,7 +119,7 @@ The `query` property in the request body should contain a query string in the fo
 ```
 
 * `aggregator`: Use `min` if the alert should trigger when the forecast goes below the threshold. Use `max` if the alert should trigger when the forecast goes above the threshold.
-* `query_window`: A timeframe, for example: `last_4h` or `last_7d`. The timeframe is recommended to be around five times the `alert_window`, but it must be at least as large as `alert_window`. This parameter controls the time range displayed in graphs included in notifications.
+* `query_window`: A timeframe, for example: `next_4h` or `next_7d`.
 * `metric_query`: A standard Datadog metric query, for example: `min:system.disk.free{service:database,device:/data}by{host}`.
 * `algorithm`: `linear` or `seasonal`
 * `deviations`: A number greater than or equal to one. This parameter controls the size of the confidence bounds, allowing a monitor to be made more or less sensitive.
@@ -135,7 +137,7 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html"  >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /monitors/types/metric/#define-the-metric

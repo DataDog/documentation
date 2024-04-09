@@ -3,6 +3,7 @@ app_id: alertnow
 app_uuid: cdb258cc-5e74-4fa2-be21-1489375bb370
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,13 +13,19 @@ assets:
       prefix: alertnow.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10279
     source_type_name: AlertNow
 author:
   homepage: https://service.opsnow.com
   name: AlertNow
   sales_email: sales@opsnow.com
   support_email: support@opsnow.com
-categories: []
+categories:
+- アラート設定
+- 自動化
+- コラボレーション
+- インシデント
+- モバイル
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
 display_on_public_website: true
@@ -31,19 +38,23 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: alertnow
-oauth: {}
 public_title: AlertNow
 short_description: Datadog のアラートと AlertNow のアラートを同期させる
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Alerting
+  - Category::Automation
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Mobile
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog のアラートと AlertNow のアラートを同期させる
   media: []
@@ -52,6 +63,7 @@ tile:
   title: AlertNow
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,7 +81,7 @@ AlertNow が提供するもの
 
 ![alertnow 概要][1]
 
-## セットアップ
+## 計画と使用
 
 ### AlertNow
 
@@ -91,7 +103,7 @@ Datadog と AlertNow を接続するには、Datadog で Webhook とモニター
     ![datadog 詳細][4]
 
 
-### Datadog
+### Ruby
 
 Datadog のアカウントで、以下の手順を実行します。
 
@@ -151,7 +163,7 @@ Datadog のアカウントで、以下の手順を実行します。
 
 
 
-## サポート
+## Agent
 
 ご不明な点は、[AlertNow サポート][8]までお問い合わせください。
 

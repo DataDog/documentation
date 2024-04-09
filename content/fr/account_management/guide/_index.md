@@ -2,6 +2,11 @@
 kind: guide
 private: true
 title: Guides sur la gestion de compte
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Guides sur la gestion de compte
 ---
 
 {{< whatsnext desc="Guides sur la migration des API de mesure de l'utilisation :" >}}

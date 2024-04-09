@@ -125,7 +125,7 @@ Now that you have a working Java application, configure it to enable tracing.
 1. Add the Java tracing package to your project. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -244,11 +244,11 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library uses Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][17] and [sampling mechanisms][16].
 
-Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
+Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That's because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
 
 
 ## Add manual instrumentation to the Java application
@@ -339,7 +339,7 @@ The sample project includes a second application called `calendar` that returns 
 
 1. Configure the calendar app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -425,7 +425,7 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [2]: /tracing/trace_collection/dd_libraries/java/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/java/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /getting_started/site/
 [7]: https://www.baeldung.com/java-instrumentation
 [8]: https://app.datadoghq.com/event/explorer
@@ -434,7 +434,7 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/java/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[14]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[15]: /agent/configuration/agent-configuration-files/?tab=agentv6v7
 [16]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: /tracing/trace_collection/library_config/java/

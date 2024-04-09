@@ -15,6 +15,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- 構成 & デプロイ
+- developer tools
 - orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/terraform/README.md
@@ -28,20 +30,21 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: terraform
-oauth: {}
 public_title: terraform
 short_description: Terraform を使用して Datadog アカウントを管理する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
   - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Terraform を使用して Datadog アカウントを管理する
   media: []
@@ -84,7 +87,11 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
     ```
 
 4. `terraform init` を実行します。これにより、Terraform での利用のためにディレクトリが初期化され、Datadog プロバイダーがプルされます。
-5. `terraform_config/` ディレクトリ内に任意の `.tf` ファイルを作成し、Datadog リソースの作成を開始します。例:
+5. `terraform_config/` ディレクトリ内に任意の `.tf` ファイルを作成し、Datadog リソースの作成を開始します。
+
+## モニターの作成
+
+この例では、[ライブプロセスモニター][3]を作成する `monitor.tf` ファイルを示します。
 
     ```
     # monitor.tf
@@ -103,7 +110,7 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
     }
     ```
 
-6. `terraform apply` を実行して Datadog アカウントにこのモニターを作成します。
+`terraform apply` を実行して Datadog アカウントにこのモニターを作成します。
 
 ## Datadog にイベントを送信する
 
@@ -114,7 +121,7 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
   pip install datadog
   ```
 
-詳しくは、[Datadog Python ライブラリ][3]をご覧ください。
+詳しくは、[Datadog Python ライブラリ][4]をご覧ください。
 
 `terraform apply` イベントを送信します:
 
@@ -144,9 +151,10 @@ Terraform には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [2]: https://learn.hashicorp.com/tutorials/terraform/install-cli
-[3]: https://github.com/DataDog/datadogpy
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/monitors/types/process/
+[4]: https://github.com/DataDog/datadogpy
+[5]: https://docs.datadoghq.com/ja/help/

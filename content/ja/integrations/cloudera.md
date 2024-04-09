@@ -25,7 +25,8 @@ author:
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
-categories: []
+categories:
+- クラウド
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cloudera
-oauth: {}
 public_title: Cloudera
 short_description: Cloudera
 supported_os:
@@ -48,6 +48,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -69,7 +70,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cloudera チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -264,6 +265,11 @@ Cloudera ホストからメトリクスを収集する際に、Agent のステ�
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog で Cloudera クラスターを視覚化する][11]
 
 
 [1]: https://www.cloudera.com/products/cloudera-data-platform.html
@@ -276,3 +282,4 @@ Cloudera ホストからメトリクスを収集する際に、Agent のステ�
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://docs.cloudera.com/data-hub/cloud/access-clusters/topics/mc-accessing-cluster-via-ssh.html
 [10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/cloudera-integration-announcement/

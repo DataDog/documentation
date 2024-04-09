@@ -23,6 +23,30 @@
     "request_description": "",
     "request_schema_description": "API キーの更新に使用されるリクエスト。"
   },
+  "ListSpansMetrics": {
+    "description": "構成されたスパンベースのメトリクスとその定義のリストを取得します。",
+    "summary": "Get all span-based metrics"
+  },
+  "CreateSpansMetric": {
+    "description": "組織で収集されたスパンに基づきメトリクスを作成します。\nリクエストが正常に完了すると、リクエスト本文からスパンベースのメトリクスオブジェクトを返します。",
+    "summary": "Create a span-based metric",
+    "request_description": "新しいスパンベースメトリクスの定義。",
+    "request_schema_description": "新しいスパンベースのメトリクス本文。"
+  },
+  "DeleteSpansMetric": {
+    "description": "組織から特定のスパンベースメトリクスを削除します。",
+    "summary": "スパンベースのメトリクスを削除する"
+  },
+  "GetSpansMetric": {
+    "description": "組織から特定のスパンベースメトリクスを取得します。",
+    "summary": "スパンベースのメトリクスを取得する"
+  },
+  "UpdateSpansMetric": {
+    "description": "組織の特定のスパンベースメトリクスを更新します。\nリクエストが正常に完了すると、リクエスト本文からスパンベースのメトリクスオブジェクトを返します。",
+    "summary": "スパンベースのメトリクスを更新する",
+    "request_description": "スパンベースメトリクスの新しい定義。",
+    "request_schema_description": "新しいスパンベースのメトリクス本文。"
+  },
   "ListApplicationKeys": {
     "description": "組織で利用できるすべてのアプリケーションキーを一覧表示",
     "summary": "すべてのアプリケーションキーを取得"
@@ -75,6 +99,44 @@
     "request_description": "",
     "request_schema_description": "AuthN Mapping の更新リクエスト。"
   },
+  "CreateCIAppPipelineEvent": {
+    "description": "パイプラインイベントを HTTP 経由で Datadog プラットフォームに送信します。パイプライン実行がどのようにモデル化され、どのような実行データタイプをサポートしているかについては、[Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/) を参照してください。\n\nパイプラインイベントは、過去 18 時間までのタイムスタンプで送信できます。",
+    "summary": "パイプラインイベントの送信",
+    "request_description": "",
+    "request_schema_description": "リクエストオブジェクト。"
+  },
+  "AggregateCIAppPipelineEvents": {
+    "description": "この API エンドポイントを使用して、CI Visibility パイプラインイベントを、計算されたメトリクスとタイムシリーズのバケットに集計します。",
+    "summary": "Aggregate pipelines events",
+    "request_description": "",
+    "request_schema_description": "組織からパイプラインイベントの集計バケットを取得するリクエストと共に送信されたオブジェクト。"
+  },
+  "ListCIAppPipelineEvents": {
+    "description": "リストエンドポイントは、[検索クエリ](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のパイプラインイベントを確認するために使用します。",
+    "summary": "パイプラインのイベント一覧の取得"
+  },
+  "SearchCIAppPipelineEvents": {
+    "description": "リストエンドポイントは、[検索クエリ](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、複雑なイベントのフィルターと検索を構築するために使用します。",
+    "summary": "パイプラインイベントの検索",
+    "request_description": "",
+    "request_schema_description": "パイプライン検索のリクエスト。"
+  },
+  "AggregateCIAppTestEvents": {
+    "description": "CI Visibility テストイベントを、計算されたメトリクスとタイムシリーズのバケットに集計する API エンドポイント。",
+    "summary": "テストイベントの集計",
+    "request_description": "",
+    "request_schema_description": "組織からテストイベントの集計バケットを取得するリクエストと共に送信されたオブジェクト。"
+  },
+  "ListCIAppTestEvents": {
+    "description": "リストエンドポイントは、[ログ検索クエリ](https://docs.datadoghq.com/logs/explorer/search_syntax/)に一致する CI Visibility テストイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のテストイベントを確認するために使用します。",
+    "summary": "テストイベント一覧の取得"
+  },
+  "SearchCIAppTestEvents": {
+    "description": "リストエンドポイントは、[ログ検索クエリ](https://docs.datadoghq.com/logs/explorer/search_syntax/)に一致する CI Visibility テストイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、複雑なイベントのフィルターと検索を構築するために使用します。",
+    "summary": "テストイベントの検索",
+    "request_description": "",
+    "request_schema_description": "テスト検索のリクエスト。"
+  },
   "ListCurrentUserApplicationKeys": {
     "description": "現在のユーザーが利用できるすべてのアプリケーションキーを一覧表示",
     "summary": "現在のユーザーが所有するすべてのアプリケーションキーを取得する"
@@ -121,6 +183,30 @@
     "request_description": "ダッシュボードリストの新しいダッシュボード。",
     "request_schema_description": "更新するダッシュボードのリストを含むリクエスト。"
   },
+  "ListDowntimes": {
+    "description": "すべてのスケジュール済みダウンタイムを取得します。",
+    "summary": "すべてのダウンタイムを取得する"
+  },
+  "CreateDowntime": {
+    "description": "ダウンタイムのスケジュールを設定します。",
+    "summary": "ダウンタイムをスケジュールする",
+    "request_description": "ダウンタイムリクエスト本文のスケジュールを設定します。",
+    "request_schema_description": "ダウンタイム作成のリクエスト。"
+  },
+  "CancelDowntime": {
+    "description": "ダウンタイムをキャンセルします。",
+    "summary": "ダウンタイムをキャンセルする"
+  },
+  "GetDowntime": {
+    "description": "`downtime_id` でダウンタイムの詳細を取得します。",
+    "summary": "ダウンタイムを取得する"
+  },
+  "UpdateDowntime": {
+    "description": "`downtime_id` でダウンタイムを更新します。",
+    "summary": "ダウンタイムを更新する",
+    "request_description": "ダウンタイムのリクエスト本文を更新します。",
+    "request_schema_description": "ダウンタイム編集のリクエスト。"
+  },
   "ListEvents": {
     "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のイベントを確認するために使用します。",
     "summary": "イベントのリストを取得する"
@@ -129,7 +215,7 @@
     "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントを使用して、複雑なイベントのフィルタリングと検索を構築します。",
     "summary": "イベントの検索",
     "request_description": "",
-    "request_schema_description": "オーガニゼーションからイベントのリストを取得するリクエストと共に送信されたオブジェクト。"
+    "request_schema_description": "組織からイベントのリストを取得するリクエストと共に送信されたオブジェクト。"
   },
   "ListIncidents": {
     "description": "ユーザーの組織のすべてのインシデントを取得します。",
@@ -140,6 +226,10 @@
     "summary": "インシデントを作成",
     "request_description": "インシデントのペイロード。",
     "request_schema_description": "インシデントのリクエストを作成します。"
+  },
+  "SearchIncidents": {
+    "description": "特定のクエリに一致するインシデントを検索します。",
+    "summary": "インシデントの検索"
   },
   "DeleteIncident": {
     "description": "ユーザーの組織から既存のインシデントを削除します。",
@@ -165,6 +255,84 @@
     "request_description": "インシデント添付ファイルペイロード。",
     "request_schema_description": "インシデントの添付ファイルの更新リクエスト。"
   },
+  "ListIncidentIntegrations": {
+    "description": "インシデントのすべてのインテグレーションメタデータを取得します。",
+    "summary": "インシデントのインテグレーションメタデータのリストを取得する"
+  },
+  "CreateIncidentIntegration": {
+    "description": "インシデントインテグレーションメタデータを作成します。",
+    "summary": "インシデントインテグレーションメタデータを作成する",
+    "request_description": "インシデントインテグレーションメタデータのペイロード。",
+    "request_schema_description": "インシデントインテグレーションメタデータのリクエストを作成します。"
+  },
+  "DeleteIncidentIntegration": {
+    "description": "インシデントインテグレーションメタデータを削除します。",
+    "summary": "インシデントインテグレーションメタデータを削除する"
+  },
+  "GetIncidentIntegration": {
+    "description": "インシデントインテグレーションメタデータの詳細を取得します。",
+    "summary": "インシデントインテグレーションメタデータの詳細を取得する"
+  },
+  "UpdateIncidentIntegration": {
+    "description": "既存のインシデントインテグレーションメタデータを更新します。",
+    "summary": "既存のインシデントインテグレーションメタデータを更新する",
+    "request_description": "インシデントインテグレーションメタデータのペイロード。",
+    "request_schema_description": "インシデントインテグレーションメタデータのリクエストをパッチします。"
+  },
+  "ListIncidentTodos": {
+    "description": "インシデントのすべての Todo を取得します。",
+    "summary": "Get a list of an incident's todos"
+  },
+  "CreateIncidentTodo": {
+    "description": "インシデント Todo を作成します。",
+    "summary": "Create an incident todo",
+    "request_description": "インシデント Todo ペイロード。",
+    "request_schema_description": "インシデント Todo のリクエストを作成します。"
+  },
+  "DeleteIncidentTodo": {
+    "description": "インシデント Todo を削除します。",
+    "summary": "Delete an incident todo"
+  },
+  "GetIncidentTodo": {
+    "description": "インシデント Todo の詳細を取得します。",
+    "summary": "Get incident todo details"
+  },
+  "UpdateIncidentTodo": {
+    "description": "インシデント Todo を更新します。",
+    "summary": "Update an incident todo",
+    "request_description": "インシデント Todo ペイロード。",
+    "request_schema_description": "インシデント Todo のリクエストをパッチします。"
+  },
+  "ListGCPSTSAccounts": {
+    "description": "お使いの Datadog アカウントで構成された、GCP STS が有効なすべてのサービスアカウントを一覧表示します。",
+    "summary": "GCP STS が有効なすべてのサービスアカウントを一覧表示します。"
+  },
+  "CreateGCPSTSAccount": {
+    "description": "STS が有効なサービスアカウント用に、Datadog 内に新しいエントリを作成します。",
+    "summary": "サービスアカウント用の新しいエントリの作成",
+    "request_description": "",
+    "request_schema_description": "新しく生成されたサービスアカウントに関するデータ。"
+  },
+  "DeleteGCPSTSAccount": {
+    "description": "STS が有効な GCP アカウントを Datadog 内から削除します。",
+    "summary": "STS が有効な GCP アカウントの削除"
+  },
+  "UpdateGCPSTSAccount": {
+    "description": "STS が有効なサービスアカウントを更新します。",
+    "summary": "STS サービスアカウントの更新",
+    "request_description": "",
+    "request_schema_description": "サービスアカウント情報。"
+  },
+  "GetGCPSTSDelegate": {
+    "description": "お使いの Datadog アカウントで構成されたすべての Datadog-GCP STS デリゲートアカウントを一覧表示します。",
+    "summary": "デリゲートアカウントの一覧表示"
+  },
+  "MakeGCPSTSDelegate": {
+    "description": "Datadog GCP プリンシパルを作成します。",
+    "summary": "Datadog GCP プリンシパルの作成",
+    "request_description": "Datadog 内にデリゲートサービスアカウントを作成します。",
+    "request_schema_description": ""
+  },
   "ListOpsgenieServices": {
     "description": "Datadog Opsgenie インテグレーションからすべてのサービスのリストを取得します。",
     "summary": "すべてのサービスオブジェクトを取得する"
@@ -188,6 +356,30 @@
     "summary": "単一のサービスオブジェクトを更新する",
     "request_description": "Opsgenie サービスペイロード。",
     "request_schema_description": "Opsgenie サービスに対するリクエストを更新します。"
+  },
+  "ListCloudflareAccounts": {
+    "description": "Cloudflare アカウントを一覧表示します。",
+    "summary": "Cloudflare アカウントを一覧表示する"
+  },
+  "CreateCloudflareAccount": {
+    "description": "Cloudflare アカウントを作成します。",
+    "summary": "Cloudflare アカウントを追加する",
+    "request_description": "",
+    "request_schema_description": "Cloudflare アカウントを追加する際のペイロードスキーマ。"
+  },
+  "DeleteCloudflareAccount": {
+    "description": "Cloudflare アカウントを削除します。",
+    "summary": "Cloudflare アカウントを削除する"
+  },
+  "GetCloudflareAccount": {
+    "description": "Cloudflare アカウントを取得します。",
+    "summary": "Cloudflare アカウントを取得する"
+  },
+  "UpdateCloudflareAccount": {
+    "description": "Cloudflare アカウントを更新します。",
+    "summary": "Cloudflare アカウントを更新する",
+    "request_description": "",
+    "request_schema_description": "Cloudflare アカウントを更新する際のペイロードスキーマ。"
   },
   "ListConfluentAccount": {
     "description": "Confluent アカウントを一覧表示します。",
@@ -237,8 +429,66 @@
     "request_description": "Confluent ペイロード",
     "request_schema_description": "Confluent リソースを更新するための JSON:API リクエスト。"
   },
+  "ListFastlyAccounts": {
+    "description": "Fastly アカウントを一覧表示します。",
+    "summary": "Fastly アカウントを一覧表示する"
+  },
+  "CreateFastlyAccount": {
+    "description": "Fastly アカウントを作成します。",
+    "summary": "Fastly アカウントを追加する",
+    "request_description": "",
+    "request_schema_description": "Fastly アカウントを追加する際のペイロードスキーマ。"
+  },
+  "DeleteFastlyAccount": {
+    "description": "Fastly アカウントを削除します。",
+    "summary": "Fastly アカウントを削除する"
+  },
+  "GetFastlyAccount": {
+    "description": "Fastly アカウントを取得します。",
+    "summary": "Fastly アカウントを取得する"
+  },
+  "UpdateFastlyAccount": {
+    "description": "Fastly アカウントを更新します。",
+    "summary": "Fastly アカウントを更新する",
+    "request_description": "",
+    "request_schema_description": "Fastly アカウントを更新する際のペイロードスキーマ。"
+  },
+  "ListFastlyServices": {
+    "description": "アカウントの Fastly サービスを一覧表示します。",
+    "summary": "Fastly サービスを一覧表示する"
+  },
+  "CreateFastlyService": {
+    "description": "アカウントの Fastly サービスを作成します。",
+    "summary": "Fastly サービスを追加する",
+    "request_description": "",
+    "request_schema_description": "Fastly サービスリクエストのペイロードスキーマ。"
+  },
+  "DeleteFastlyService": {
+    "description": "アカウントの Fastly サービスを削除します。",
+    "summary": "Fastly サービスを削除する"
+  },
+  "GetFastlyService": {
+    "description": "アカウントの Fastly サービスを取得します。",
+    "summary": "Fastly サービスを取得する"
+  },
+  "UpdateFastlyService": {
+    "description": "アカウントの Fastly サービスを更新します。",
+    "summary": "Fastly サービスを更新する",
+    "request_description": "",
+    "request_schema_description": "Fastly サービスリクエストのペイロードスキーマ。"
+  },
+  "GetIPAllowlist": {
+    "description": "IP 許可リストとその有効・無効の状態を返します。",
+    "summary": "IP 許可リストを取得する"
+  },
+  "UpdateIPAllowlist": {
+    "description": "IP 許可リストのエントリを編集し、有効または無効にします。",
+    "summary": "IP 許可リストを更新する",
+    "request_description": "",
+    "request_schema_description": "IP 許可リストを更新します。"
+  },
   "SubmitLog": {
-    "description": "HTTP を使用して Datadog プラットフォームにログを送信します。HTTP リクエストごとの制限は以下のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ (非圧縮) : 5MB\n- 単一ログの最大サイズ : 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ : 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します.\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\n\nHTTP API により回答されるステータスコード :\n- 202: Accepted: 処理リクエストを受信済み\n- 400: Bad request (ペイロードの形式の問題など)- 401: Unauthorized (API キーの不足など)\n\n- 403: Permission issue (無効な API キーの使用など)\n- 408: Request Timeout (しばらくしてからリクエストを再試行)\n- 413: Payload too large (バッチのサイズが非圧縮で 5MB 以上)\n- 429: Too Many Requests (しばらくしてからリクエストを再試行)\n- 500: Internal Server Error (サーバーがリクエストの遂行を阻む予期せぬ状況がサーバーに発生、しばらくしてからリクエストを再試行)\n- 503: Service Unavailable (おそらく過負荷によりサーバーがリクエストに対応できないため、しばらくしてからリクエストを再試行)",
+    "description": "HTTP を使用して Datadog プラットフォームにログを送信します。HTTP リクエストごとの制限は以下のとおりです。\n\n- ペイロードあたりの最大コンテンツサイズ (非圧縮) : 5MB\n- 単一ログの最大サイズ : 1MB\n- アレイで複数のログを送信する場合の最大アレイサイズ : 1000 エントリ\n\n1MB を超えるログは、Datadog によって受け入れられ、切り捨てられます。\n- 単一のログリクエストの場合、API はログを 1MB で切り捨て、2xx を返します.\n- マルチログリクエストの場合、API はすべてのログを処理し、1MB を超えるログのみを切り捨て、2xx を返します。\n\nDatadog では、圧縮されたログを送信することをお勧めしています。\n圧縮されたログを送信するときは、リクエストに `Content-Encoding: gzip` ヘッダーを追加します。\nログイベントは、過去 18 時間までのタイムスタンプで送信可能です。\n\nHTTP API により回答されるステータスコード :\n- 202: Accepted: 処理リクエストを受信済み\n- 400: Bad request (ペイロードの形式の問題など)- 401: Unauthorized (API キーの不足など)\n\n- 403: Permission issue (無効な API キーの使用など)\n- 408: Request Timeout (しばらくしてからリクエストを再試行)\n- 413: Payload too large (バッチのサイズが非圧縮で 5MB 以上)\n- 429: Too Many Requests (しばらくしてからリクエストを再試行)\n- 500: Internal Server Error (サーバーがリクエストの遂行を阻む予期せぬ状況がサーバーに発生、しばらくしてからリクエストを再試行)\n- 503: Service Unavailable (おそらく過負荷によりサーバーがリクエストに対応できないため、しばらくしてからリクエストを再試行)",
     "summary": "ログを送信する",
     "request_description": "送信するログ (JSON 形式) 。",
     "request_schema_description": "構造化されたログメッセージ。"
@@ -387,7 +637,7 @@
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "既存の count、gauge、rate、distribution メトリクスについて、クエリが可能なタグキーのすべてのカスタムリストを削除します。\nメトリクスは、メトリクス名のプレフィックスを渡すことで選択できます。\nDatadog ウェブアプリでの操作と同様に、結果はアカウントのメールアドレスに送信できます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみで使用できます。",
-    "summary": "複数のメトリクスにタグを構成",
+    "summary": "Delete tags for multiple metrics",
     "request_description": "",
     "request_schema_description": "1 回の一括タグ削除リクエストのラッパーオブジェクト。"
   },
@@ -433,13 +683,81 @@
     "description": "指定されたメトリクス名に対する個別のメトリクスボリュームを表示します。\n\n他の製品からアプリ内で生成されたカスタムメトリクスは、取り込まれたボリュームに対して `null` を返します。",
     "summary": "メトリクス名で個別のメトリクスボリュームを一覧表示する"
   },
+  "ListMonitorConfigPolicies": {
+    "description": "すべてのモニター構成ポリシーを取得します。",
+    "summary": "すべてのモニター構成ポリシーを取得する"
+  },
+  "CreateMonitorConfigPolicy": {
+    "description": "モニター構成ポリシーを作成します。",
+    "summary": "モニター構成ポリシーを作成する",
+    "request_description": "モニター構成ポリシーのリクエスト本文を作成します。",
+    "request_schema_description": "モニター構成ポリシーの作成リクエスト。"
+  },
+  "DeleteMonitorConfigPolicy": {
+    "description": "モニター構成ポリシーを削除します。",
+    "summary": "モニター構成ポリシーを削除する"
+  },
+  "GetMonitorConfigPolicy": {
+    "description": "`policy_id` でモニター構成ポリシーを取得します。",
+    "summary": "モニター構成ポリシーを取得する"
+  },
+  "UpdateMonitorConfigPolicy": {
+    "description": "モニター構成ポリシーを編集します。",
+    "summary": "モニター構成ポリシーを編集する",
+    "request_description": "更新内容の説明。",
+    "request_schema_description": "モニター構成ポリシーの編集リクエスト。"
+  },
+  "ListMonitorDowntimes": {
+    "description": "指定したモニターのすべてのアクティブダウンタイムを取得。",
+    "summary": "モニターのアクティブなダウンタイムを取得"
+  },
   "ListPermissions": {
     "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",
     "summary": "アクセス許可を一覧表示する"
   },
+  "ListFindings": {
+    "description": "CSPM の発見のリストを取得します。\n\n### フィルター\n\nURL にクエリパラメータを付加することで、フィルターを適用することができます。\n\n  - フィルター単体の使用: `?filter[attribute_key]=attribute_value`\n  - フィルターの連結: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - タグでフィルターをかける: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nここで、`attribute_key` は、後述するフィルターキーのいずれかを指定することができます。\n\n`integer` 型のクエリパラメーターは、比較演算子 (`>`、`>=`、`<`、`<=`) をサポートしています。これは、`evaluation_changed_at` や `resource_discovery_timestamp` でフィルターをかける場合に特に有効です。例: `?filter[evaluation_changed_at]=>20123123121`\n\nまた、文字列に対して否定演算子を使うこともできます。例えば、`filter[resource_type]=-aws*` を使用すると、AWS 以外のリソースをフィルターにかけることができます。\n\n演算子は等号の後につける必要があります。例えば、`>=` 演算子でフィルターをかけるには、等号の後に演算子を追加します: `filter[evaluation_changed_at]=>=1678809373257`\n\nクエリパラメーターは、ドキュメントに記載されているもので、正しい型の値を持つものだけでなければなりません。重複するクエリーパラメーター (例: `filter[status]=low&filter[status]=info`) は認められません。\n\n### レスポンス\n\nレスポンスには、発見オブジェクトの配列、ページネーションメタデータ、クエリにマッチするアイテムのカウントが含まれます。\n\n各発見オブジェクトには、以下のものが含まれます。\n\n- 発見の詳細を取得するための `GetFinding` リクエストで使用することができる発見 ID。\n- ステータス、評価、高レベルのリソースの詳細、ミュート状態、ルールの詳細などのコア属性。\n- `evaluation_changed_at` および `resource_discovery_date` タイムスタンプ。\n- 関連するタグの配列。\n",
+    "summary": "発見を一覧化する"
+  },
+  "GetFinding": {
+    "description": "メッセージとリソースの構成を持つ 1 つの発見を返します。",
+    "summary": "発見を取得する"
+  },
+  "UpdateFinding": {
+    "description": "特定の診断結果をミュートまたはミュート解除します。\nリクエストに成功すると、API は更新された診断結果オブジェクトを返します。",
+    "summary": "Mute or unmute a finding",
+    "request_description": "診断結果をミュートまたはミュート解除するには、リクエスト本文に少なくとも 2 つの属性 (`muted` と `reason`) を含める必要があります。許可される理由は、診断結果がミュートされるかミュート解除されるかに依存します。\n- 診断結果をミュートするには: `PENDING_FIX`、`FALSE_POSITIVE`、`ACCEPTED_RISK`、`OTHER`\n- 診断結果をミュート解除するには: `NO_PENDING_FIX`、`HUMAN_ERROR`、`NO_LONGER_ACCEPTED_RISK`、`OTHER` ",
+    "request_schema_description": "新しい診断結果のミュートリクエスト。"
+  },
   "ListProcesses": {
     "description": "組織のすべてのプロセスを取得します。",
     "summary": "すべてのプロセスを取得"
+  },
+  "QueryScalarData": {
+    "description": "スカラー値をクエリします (Query Value、Table、Toplist ウィジェットに表示されます)。\n複数のデータソースをサポートし、数式や関数を使用してデータを処理することができます。",
+    "summary": "複数の製品にまたがるスカラーデータのクエリ",
+    "request_description": "",
+    "request_schema_description": "実行するスカラークエリを 1 つ囲むラッパーリクエスト。"
+  },
+  "QueryTimeseriesData": {
+    "description": "さまざまなデータソースの時系列データをクエリし、数式や関数を適用してデータを処理します。",
+    "summary": "複数の製品にまたがる時系列データのクエリ",
+    "request_description": "",
+    "request_schema_description": "実行する時系列クエリを 1 つ囲むリクエストラッパー。"
+  },
+  "DeleteRestrictionPolicy": {
+    "description": "指定されたリソースに関連する制限ポリシーを削除します。",
+    "summary": "Delete a restriction policy"
+  },
+  "GetRestrictionPolicy": {
+    "description": "指定されたリソースに関連する制限ポリシーを取得します。",
+    "summary": "制限ポリシーを取得する"
+  },
+  "UpdateRestrictionPolicy": {
+    "description": "リソースに関連する制限ポリシーを更新します。\n\n#### サポートされるリソース\n制限ポリシーは、以下のリソースに適用することができます。\n- 接続: `connection`\n- ダッシュボード: `dashboard`\n- ノートブック: `notebook`\n- セキュリティルール: `security-rule`\n- サービスレベル目標: `slo`\n\n#### リソースのサポートされる関係\nリソースタイプ            | サポートされる関係\n-------------------------|--------------------------\n接続              | `viewer`、`editor`、`resolver`\nダッシュボード               | `viewer`、`editor`\nノートブック                | `viewer`、`editor`\nセキュリティルール           | `viewer`、`editor`\nサービスレベル目標 | `viewer`、`editor`",
+    "summary": "制限ポリシーを更新する",
+    "request_description": "制限ポリシーペイロード",
+    "request_schema_description": "制限ポリシーのリクエストを更新します。"
   },
   "ListRoles": {
     "description": "名前とその一意の識別子を含むすべてのロールを返します。",
@@ -549,7 +867,7 @@
     "request_description": ""
   },
   "DownloadCloudWorkloadPolicyFile": {
-    "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、\n .policy ファイルとしてダウンロードします。それからこのファイルは　\nAgent にデプロイされ、環境で実行中のポリシーを更新します。",
+    "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、.policy ファイルとしてダウンロードします。それからこのファイルは Agent にデプロイされ、環境で実行中のポリシーを更新します。",
     "summary": "最新のクラウドワークロードセキュリティポリシーを取得"
   },
   "ListCloudWorkloadSecurityAgentRules": {
@@ -656,6 +974,56 @@
     "request_description": "シグナルの更新を記述する属性。",
     "request_schema_description": "所定のセキュリティモニタリングシグナルの状態を変更するためのリクエスト本文。"
   },
+  "ListScanningGroups": {
+    "description": "組織内のすべての Scanning グループをリストアップします。",
+    "summary": "スキャングループのリストアップ"
+  },
+  "ReorderScanningGroups": {
+    "description": "グループのリストを並び替えます。",
+    "summary": "グループの並べ替え",
+    "request_description": "",
+    "request_schema_description": "グループの並び替えリクエスト。"
+  },
+  "CreateScanningGroup": {
+    "description": "スキャニンググループを作成します。 リクエストは構成関係を含むことができます。 ルール関係は完全に省略することができますが、含まれる場合は NULL または空の配列でなければなりません (ルールを同時に作成することはできません)。 新しいグループは、構成内で最後に並びます。",
+    "summary": "スキャングループの作成",
+    "request_description": "",
+    "request_schema_description": "グループリクエストを作成します。"
+  },
+  "DeleteScanningGroup": {
+    "description": "特定のグループを削除します。",
+    "summary": "スキャングループの削除",
+    "request_description": "",
+    "request_schema_description": "グループリクエストを削除します。"
+  },
+  "UpdateScanningGroup": {
+    "description": "ルールの順序を含め、グループを更新します。グループ内のルールは、ルール関係を含めることで順序が変更されます。ルール関係が存在する場合、そのデータセクションは、現在グループにあるすべてのルールのリンケージを含まなければならず、他のものを含んではなりません。",
+    "summary": "スキャングループの更新",
+    "request_description": "",
+    "request_schema_description": "グループリクエストを更新します。"
+  },
+  "CreateScanningRule": {
+    "description": "機密データスキャナーグループで、最後の順番にスキャンルールを作成します。投稿されたルールは、グループ関係を含まなければなりません。standard_pattern 関係か正規表現属性のどちらかを含まなければなりませんが、両方を含んではなりません。included_attributes が空または見つからない場合、excluded_attributes を除くすべての属性をスキャンします。両方が欠けている場合、イベント全体をスキャンします。",
+    "summary": "スキャンルールの作成",
+    "request_description": "",
+    "request_schema_description": "ルールリクエストを作成します。"
+  },
+  "DeleteScanningRule": {
+    "description": "特定のルールを削除します。",
+    "summary": "スキャンルールの削除",
+    "request_description": "",
+    "request_schema_description": "ルールリクエストを削除します。"
+  },
+  "UpdateScanningRule": {
+    "description": "スキャンルールを更新します。リクエスト本文は standard_pattern 関係を含んではなりません。この関係は編集できないからです。standard_pattern 関係を持つルールの正規表現を編集しようとすると、エラーになることもあります。",
+    "summary": "スキャンルールの更新",
+    "request_description": "",
+    "request_schema_description": "ルールリクエストを更新します。"
+  },
+  "ListStandardPatterns": {
+    "description": "すべての標準パターンを返します。",
+    "summary": "標準パターンのリストアップ"
+  },
   "SubmitMetrics": {
     "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 500 キロバイト (512000 バイト) です。非圧縮ペイロードの場合、サイズは 5 メガバイト (5242880 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 64 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでです。\n\nホスト名は、Resources フィールドのリソースの 1 つです。",
     "summary": "メトリクスを送信する",
@@ -734,6 +1102,110 @@
     "request_description": "インシデントサービスのペイロード。",
     "request_schema_description": "インシデントサービスペイロードを使用してリクエストを更新します。"
   },
+  "AggregateSpans": {
+    "description": "スパンをバケットに集計し、メトリクスと時系列を計算するための API エンドポイント。\nこのエンドポイントは 1 時間あたり `300` リクエストにレート制限されています。",
+    "summary": "スパンを集計する",
+    "request_description": "",
+    "request_schema_description": "組織から集計スパンのリストを取得するリクエストと共に送信されたオブジェクト。"
+  },
+  "ListSpansGet": {
+    "description": "リストエンドポイントは、スパン検索クエリに一致するスパンを返します。\n[結果はページ分割されます][1]。\n\n最新のスパンを見るには、このエンドポイントを使用してください。\nこのエンドポイントは 1 時間あたり `300` リクエストにレート制限されています。\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "summary": "スパンのリストを取得する"
+  },
+  "ListSpans": {
+    "description": "リストエンドポイントは、スパン検索クエリに一致するスパンを返します。\n[結果はページ分割されます][1]。\n\n複雑なスパンのフィルターと検索を構築するには、このエンドポイントを使用してください。\nこのエンドポイントは 1 時間あたり `300` リクエストにレート制限されています。\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "summary": "スパンを検索する",
+    "request_description": "",
+    "request_schema_description": "スパンリストのリクエスト。"
+  },
+  "GetOnDemandConcurrencyCap": {
+    "description": "オンデマンド同時実行の上限を取得します。",
+    "summary": "オンデマンド同時実行の上限を取得する"
+  },
+  "SetOnDemandConcurrencyCap": {
+    "description": "オンデマンド同時実行の上限の新しい値を保存します。",
+    "summary": "オンデマンド同時キャップの新しい値を保存する",
+    "request_description": ".",
+    "request_schema_description": "オンデマンド同時実行上限属性。"
+  },
+  "ListTeams": {
+    "description": "すべてのチームを取得します。\n`filter[keyword]` と `filter[me]` のクエリパラメーターを使って、チームを検索することができます。",
+    "summary": "すべてのチームを取得する"
+  },
+  "CreateTeam": {
+    "description": "新しいチームを作成します。\n`users` 関係フィールドに渡されたユーザー ID がチームに追加されます。",
+    "summary": "チームを作成する",
+    "request_description": "",
+    "request_schema_description": "チーム作成リクエスト"
+  },
+  "DeleteTeam": {
+    "description": "チームの `id` を使ってチームを削除します。",
+    "summary": "チームを削除する"
+  },
+  "GetTeam": {
+    "description": "チームの `id` を使って、単一のチームを取得します。",
+    "summary": "チームを取得する"
+  },
+  "UpdateTeam": {
+    "description": "チームの `id` を使ってチームを更新します。\n`team_links` 関係が存在する場合、関連するリンクは配列に表示される順番に更新され、存在しない既存のチームリンクは削除されます。",
+    "summary": "チームを更新する",
+    "request_description": "",
+    "request_schema_description": "チーム更新リクエスト"
+  },
+  "GetTeamLinks": {
+    "description": "特定のチームの全リンクを取得します。",
+    "summary": "チームのリンクを取得する"
+  },
+  "CreateTeamLink": {
+    "description": "チームに新しいリンクを追加します。",
+    "summary": "チームリンクを作成する",
+    "request_description": "",
+    "request_schema_description": "チームリンク作成リクエスト"
+  },
+  "DeleteTeamLink": {
+    "description": "チームからリンクを削除します。",
+    "summary": "チームリンクを削除する"
+  },
+  "GetTeamLink": {
+    "description": "チームに対して 1 つのリンクを取得します。",
+    "summary": "チームリンクを取得する"
+  },
+  "UpdateTeamLink": {
+    "description": "チームリンクを更新します。",
+    "summary": "チームリンクを更新する",
+    "request_description": "",
+    "request_schema_description": "チームリンク作成リクエスト"
+  },
+  "GetTeamMemberships": {
+    "description": "チームメンバーのページ分割されたリストを取得します",
+    "summary": "チームのメンバーシップを取得する"
+  },
+  "CreateTeamMembership": {
+    "description": "ユーザーをチームに追加します。",
+    "summary": "ユーザーをチームに追加する",
+    "request_description": "",
+    "request_schema_description": "チームメンバーシップリクエスト"
+  },
+  "DeleteTeamMembership": {
+    "description": "チームからユーザーを削除します。",
+    "summary": "チームからユーザーを削除する"
+  },
+  "UpdateTeamMembership": {
+    "description": "チーム内のユーザーのメンバーシップ属性を更新します。",
+    "summary": "チーム内のユーザーのメンバーシップ属性を更新する",
+    "request_description": "",
+    "request_schema_description": "チームメンバーシップリクエスト"
+  },
+  "GetTeamPermissionSettings": {
+    "description": "特定のチームの全権限設定を取得します。",
+    "summary": "チームの権限設定を取得する"
+  },
+  "UpdateTeamPermissionSetting": {
+    "description": "特定のチームの権限設定を更新します。",
+    "summary": "チームの権限設定を更新する",
+    "request_description": "",
+    "request_schema_description": "チーム権限設定更新リクエスト"
+  },
   "ListIncidentTeams": {
     "description": "要求するユーザーのオーガニゼーションのすべてのインシデントチームを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
     "summary": "すべてのインシデントチームのリストを取得する"
@@ -764,10 +1236,10 @@
   },
   "GetCostByOrg": {
     "description": "複数組織のアカウントにまたがるコストを取得します。\nある月の組織別コストデータは、翌月 16 日までに利用可能になります。\n**注:** このエンドポイントは非推奨となりました。代わりに新しいエンドポイント [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account) を使用してください。",
-    "summary": "マルチオーガニゼーションのアカウントのコストを取得"
+    "summary": "マルチ組織のアカウントのコストを取得"
   },
   "GetEstimatedCostByOrg": {
-    "description": "複数組織および単一ルート組織のアカウントにまたがる推定コストを取得します。\n推定コストデータは、当月と前月分のみ利用可能です。\nそれ以前の過去のコストにアクセスするには、`/historical_cost` エンドポイントを使用します。",
+    "description": "複数組織および単一ルート組織のアカウントにまたがる推定コストを取得します。\n推定コストデータは、当月と前月分のみ利用可能で、発生した時点から最大 72 時間遅延します。\nそれ以前の過去のコストにアクセスするには、`/historical_cost` エンドポイントを使用します。",
     "summary": "アカウントの推定コストを取得"
   },
   "GetHistoricalCostByOrg": {
@@ -775,7 +1247,7 @@
     "summary": "アカウントの過去のコストを取得"
   },
   "GetHourlyUsage": {
-    "description": "製品ファミリーの時間単位使用量の取得",
+    "description": "製品ファミリーの時間単位使用量を取得します。",
     "summary": "製品ファミリーの時間単位使用量の取得"
   },
   "GetUsageLambdaTracedInvocations": {

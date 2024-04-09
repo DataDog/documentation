@@ -13,12 +13,13 @@ author:
   homepage: https://www.blinkops.com/
   name: Blink
   sales_email: support@blinkops.com
-  support_email: liav@blinkops.com
+  support_email: support@blinkops.com
 categories:
-- orchestration
-- notification
 - 自動化
 - クラウド
+- インシデント
+- 通知
+- オーケストレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/blink/README.md
 display_on_public_website: true
@@ -31,9 +32,8 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: blink
-oauth: {}
 public_title: Blink
-short_description: モダンな CloudOps のためのノーコード自動化。
+short_description: Blink は、セキュリティとインフラストラクチャーのためのノーコード自動化プラットフォームです。
 supported_os:
 - linux
 - windows
@@ -41,24 +41,25 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Automation
+  - Category::Cloud
+  - Category::Incidents
+  - Category::Notification
+  - Category::Orchestration
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Orchestration
-  - Category::Notification
-  - Category::Automation
-  - Category::Cloud
-  - Offering::Integration
   configuration: README.md#Setup
-  description: モダンな CloudOps のためのノーコード自動化。
+  description: Blink は、セキュリティとインフラストラクチャーのためのノーコード自動化プラットフォームです。
   media:
-  - caption: Blink の UI で Datadog のインシデントを作成する方法を紹介。
+  - caption: Blink のインタラクティブなワークフローを使用して、Datadog のインシデントを自動的に作成および更新します。
     image_url: ./images/incident.png
     media_type: image
-  - caption: DataDog のアクティブなインシデントをすべてリストアップした Blink Automation。
+  - caption: Blink オートメーション内から、すべてのアクティブな Datadog インシデントのリストを素早く参照することができます。
     image_url: ./images/list-incidents.png
     media_type: image
-  - caption: Blink とインテグレーションするための Datadog の接続を作成する。
+  - caption: Blink インテグレーションを接続し、Datadog のインシデントに対応したアクションを実行するオートメーションの作成を開始します。
     image_url: ./images/connection-creation.png
     media_type: image
   - caption: Datadog にインシデントを作成する Blink Automation の自動スケジュール。
@@ -73,18 +74,28 @@ tile:
 
 ## 概要
 
-[Blink][1] インテグレーションは、Blink Automations で使用可能なノーコードアクションとトリガーのコレクションです。手動で API コールやスクリプトを書く代わりに、Blink の視覚化されたエディターを使って Datadog API アクションをワークフローにドラッグアンドドロップしたり、[ライブラリ][2]から既存の何百もの既成オートメーションの1 つを使用することができます。
+[Blink][1] は、インシデントレスポンスの自動化、クラウドネイティブな運用、セキュリティ運用ワークフローを実現するローコード/ノーコード (LCNC) プラットフォームです。Blink は、クラウドネイティブプラットフォームのセキュリティと信頼性に支えられ、手動タスクをインタラクティブな自動タスクに変換します。すべてのスクリプトやチケットが、完全マネージド型のオートメーションになります。
 
-このインテグレーションにより、以下のことが可能になります。
-1. Datadog の新しいインシデントに反応して Blink 内でオートメーションをトリガーする
-2. Blink で Datadog のインシデントを作成、更新する
-3. Blink の Datadog イベントストリームからインシデントやイベントを表示する
+ユーザーインターフェイスと[オートメーションライブラリ][2]には、あらかじめ作成された Datadog ベースのオートメーションとユースケースが用意されています。Blink は、運用のボトルネックを減らし、より優れたクラウド効率と競争力のある SLA を達成することを支援します。
 
-[ドキュメントサイト][3]でアクションと機能の全リストをご覧いただけます。
+このすぐに使えるインテグレーションにより、以下のことが可能になります。
+
+- Datadog のインシデントを利用してイベントベースの Blink オートメーションをトリガーする。
+- Blink から Datadog のインシデントを自動的に作成、更新する。
+- Blink の Datadog イベントエクスプローラーからインシデントやイベントを確認する。
+- Blink オートメーションを利用して Datadog インシデントを自動的にリッチ化、修復する。
+
+Blink の詳細については、[Blink ドキュメント][3]を参照してください。
 
 ## セットアップ
 
 Datadog のワークスペースと Blink の接続方法については、[弊社ドキュメント][4]をご覧ください。
+
+## アンインストール
+
+インテグレーションをアンインストールする場合は、Blink ワークスペースで対応する Datadog 接続を削除するだけです。
+
+削除が完了すると、それまでの認可やアクセストークンはすべて取り消されます。また、Datadog [API Keys][5] ページでインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
 
 ## 収集データ
 
@@ -102,10 +113,11 @@ Blink にはメトリクスは含まれていませんが、Blink のオート�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Blink サポート][6]までお問い合わせください。
 
 [1]: https://www.blinkops.com/
-[2]: https://library.blinkops.com/
+[2]: https://library.blinkops.com/automations?vendors=Datadog
 [3]: https://www.docs.blinkops.com/docs/Integrations/Datadog/Actions
 [4]: https://www.docs.blinkops.com/docs/Integrations/Datadog/
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: mailto:support@blinkops.com

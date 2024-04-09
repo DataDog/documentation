@@ -114,7 +114,7 @@ El Agent tiene un entorno Python integrado en `/opt/datadog-agent/embedded/`. Lo
 
 Si deseas obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][4].
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

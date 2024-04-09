@@ -2,6 +2,8 @@
 
 This document is a guide to writing and editing documentation for the [Datadog Documentation site][7] (Docs site). Treat this as a guide rather than a rulebook. You should strive to follow what's prescribed, but there are exceptions to most rules.
 
+Some of these guidelines are enforced by [the Datadog docs implementation of the Vale linter][4]. After you make a PR, check its **Files changed** tab to see and fix warnings and errors flagged by the linter.
+
 ## Language
 
 - Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.  
@@ -39,7 +41,7 @@ The purpose of the Docs site is to clearly inform readers about how to use Datad
 - **Recommended**: Configure this thing. Optionally, configure that thing.
 - **Not recommended**: You must configure this thing, and you may want to configure that thing.
 
-**Don't wax philosophical**: Think pieces and pontification belong on the corporate blog.
+**Don't wax philosophical**: Think pieces and pontification don't belong on the Docs site.
 
 **Don't constantly explain basic Datadog features**: Outside of introductory material, don't tell readers again and again that metrics submitted to Datadog may be graphed alongside other metrics, have events overlaid onto them, etc. It's okay to point out cases that are compelling and specific, such as "Overlay Jenkins deploys onto a graph of your application response times", but don't re-explain Datadog; instead, provide a useful description that enhances understanding of the feature.
 
@@ -98,7 +100,7 @@ Avoid temporal words like "currently", "now", "will", etc. Describe the present 
 
 ### Words and phrases
 
-The [Gobwords Style Guide][4] is an index of commonly mis-capitalized, mispunctuated, and misused words that often appear on the corporate blog. Use this word guide when writing for the Docs site, too.
+The [datadog-vale][4] repo contains a set of linting rules for Vale based on the Documentation Style Guide. You can refer to the rules when writing for the Docs site.
 
 Otherwise, here are some words and phrases to avoid or use sparingly:
 
@@ -189,14 +191,14 @@ Use text formatting to clarify and enhance content.
 |-------------------|----------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
 | `` `backquote` `` | Used for code related content within a sentence.                                                               | Use the `foo` parameter                               |
 | `**Bold**`        | Subjectively pointing the reader to something important.                                                       | **This is important**, not that.                      |
-| `_Italic_`        | Literally translated words, default values, functions, settings, and page names.                               | Go the the *setting* page in your Datadog application |
+| `_Italic_`        | Literally translated words, default values, functions, settings, and page names.                               | Go to the *setting* page in your Datadog application |
 | `[Link][3]`       | Links must be specified using the reference format (in the footnote) to aid with the [translation process][5]. | Text with `[a link][1]`                               |
 
 
 [1]: https://github.com/DataDog/documentation/wiki
 [2]: https://tools.ietf.org/html/rfc2119
 [3]: https://tools.ietf.org/html/rfc2606
-[4]: https://github.com/DataDog/gobwords/wiki/Style-guide
+[4]: https://github.com/DataDog/datadog-vale
 [5]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [6]: https://github.com/DataDog/documentation/wiki/Import-an-Image-or-a-mp4-video
 [7]: https://docs.datadoghq.com/

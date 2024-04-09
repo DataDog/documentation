@@ -1,12 +1,14 @@
 ---
 title: Dimensioning Private Locations
 kind: documentation
-description: Dimensioning requirements for your Private Locations
+description: Dimensioning requirements for your containerized private locations.
 further_reading:
 - link: "/synthetics/private_locations/monitoring"
   tag: "Documentation"
   text: "Monitor your Private Locations"
 ---
+
+<div class="alert alert-info">The dimensioning recommendations are for the containerized private location.</div>
 
 ## Overview 
 
@@ -68,7 +70,9 @@ For example, Datadog recommends ~ 8 cores CPU, ~ 10GiB memory, and ~ 5GiB disk f
 
 When multiple workers are associated with a private location, each worker requests a couple test runs, which depend on the [`concurrency` parameter][4] and on the number of additional test runs that can be assigned.   
 
-For example, ten tests are scheduled to run simultaneously on a private location that has two workers running. If Worker 1 is running two tests, Worker 1 can request three additional tests to run. If Worker 2 is not running any tests, Worker 2 can request the five following tests. The remaining two tests can be requested by whichever worker has finished running its test first (any worker that has available slots).
+For example, ten tests are scheduled to run simultaneously on a private location that has two workers running. If Worker 1 is running two tests, Worker 1 can request three additional tests to run. If Worker 2 is not running any tests, Worker 2 can request the five following tests. 
+
+The remaining two tests can be requested by whichever worker has finished running its test first (any worker that has available slots).
 
 ## Further Reading
 

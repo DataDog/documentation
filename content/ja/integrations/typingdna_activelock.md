@@ -17,9 +17,7 @@ author:
   sales_email: datadog.support@typingdna.com
   support_email: datadog.support@typingdna.com
 categories:
-- アラート設定
 - ログの収集
-- モニタリング
 - セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/typingdna_activelock/README.md
@@ -33,7 +31,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: typingdna_activelock
-oauth: {}
 public_title: TypingDNA ActiveLock
 short_description: TypingDNA ActiveLock のログを閲覧・分析することができます。
 supported_os:
@@ -42,13 +39,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
+  - Category::Security
+  - Offering::Integration
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
-  - Category::Alerting
-  - Category::Log Collection
-  - Category::Monitoring
-  - Category::Security
   configuration: README.md#Setup
   description: TypingDNA ActiveLock のログを閲覧・分析することができます。
   media:

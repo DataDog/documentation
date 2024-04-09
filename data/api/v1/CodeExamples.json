@@ -1,9 +1,44 @@
 {
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Delete an AWS integration returns \"OK\" response"
+    }
+  ],
   "UpdateAWSAccount": [
     {
       "group": "aws_integration",
       "suffix": "",
       "description": "Update an AWS integration returns \"OK\" response"
+    }
+  ],
+  "CreateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Create an Azure integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Delete an Azure integration returns \"OK\" response"
+    }
+  ],
+  "UpdateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Update an Azure integration returns \"OK\" response"
     }
   ],
   "CreateDashboardList": [
@@ -38,8 +73,18 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3513586382",
+      "description": "Create a geomap widget using an event_list request"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3562282606",
+      "description": "Create a new dashboard with a change widget using formulas and functions slo query"
     },
     {
       "group": "dashboards",
@@ -60,6 +105,16 @@
       "group": "dashboards",
       "suffix": "_765140092",
       "description": "Create a new dashboard with a query value widget using timeseries background"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2261785072",
+      "description": "Create a new dashboard with a timeseries widget and an overlay request"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1284514532",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions cloud cost query"
     },
     {
       "group": "dashboards",
@@ -123,6 +178,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3777304439",
+      "description": "Create a new dashboard with formula and function heatmap widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2104498738",
       "description": "Create a new dashboard with formulas and functions scatterplot widget"
     },
@@ -168,6 +228,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1877023900",
+      "description": "Create a new dashboard with list_stream widget with a valid sort parameter ASC"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2361531620",
+      "description": "Create a new dashboard with list_stream widget with a valid sort parameter DESC"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2029850837",
       "description": "Create a new dashboard with log_stream widget"
     },
@@ -205,6 +275,11 @@
       "group": "dashboards",
       "suffix": "_417992286",
       "description": "Create a new dashboard with note widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1754992756",
+      "description": "Create a new dashboard with powerpack widget"
     },
     {
       "group": "dashboards",
@@ -253,8 +328,18 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2278756614",
+      "description": "Create a new dashboard with split graph widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2705593938",
       "description": "Create a new dashboard with sunburst widget and metrics data"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2064651578",
+      "description": "Create a new dashboard with team tags returns \"OK\" response"
     },
     {
       "group": "dashboards",
@@ -293,6 +378,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2618036642",
+      "description": "Create a new dashboard with trace_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2800096921",
       "description": "Create a new timeseries widget with ci_pipelines data source"
     },
@@ -300,6 +390,13 @@
       "group": "dashboards",
       "suffix": "_1307120899",
       "description": "Create a new timeseries widget with ci_tests data source"
+    }
+  ],
+  "CreatePublicDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Create a shared dashboard returns \"OK\" response"
     }
   ],
   "DeleteDashboards": [
@@ -316,11 +413,30 @@
       "description": "Restore deleted dashboards returns \"No Content\" response"
     }
   ],
+  "SendPublicDashboardInvitation": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Send shared dashboard invitation email returns \"OK\" response"
+    }
+  ],
   "UpdateDashboard": [
     {
       "group": "dashboards",
       "suffix": "",
       "description": "Update a dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3454865944",
+      "description": "Update a dashboard with tags returns \"OK\" response"
+    }
+  ],
+  "UpdatePublicDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Update a shared dashboard returns \"OK\" response"
     }
   ],
   "CancelDowntimesByScope": [
@@ -374,6 +490,32 @@
       "group": "events",
       "suffix": "_19927815",
       "description": "Post an event with a long title returns \"OK\" response"
+    }
+  ],
+  "CreateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Create a GCP integration returns \"OK\" response"
+    }
+  ],
+  "DeleteGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Delete a GCP integration returns \"OK\" response"
+    }
+  ],
+  "UpdateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "_3544259255",
+      "description": "Update a GCP integration cloud run revision filters returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Update a GCP integration returns \"OK\" response"
     }
   ],
   "ListLogs": [
@@ -454,6 +596,11 @@
       "group": "monitors",
       "suffix": "_2012680290",
       "description": "Create a metric monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1539578087",
+      "description": "Create a metric monitor with a custom schedule returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -556,6 +703,11 @@
   "CreateSLO": [
     {
       "group": "service_level_objectives",
+      "suffix": "_3765703239",
+      "description": "Create a time-slice SLO object returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objectives",
       "suffix": "",
       "description": "Create an SLO object returns \"OK\" response"
     }
@@ -631,6 +783,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_1241981394",
+      "description": "Create an API test with a file payload returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1279271422",
       "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
     }
@@ -642,11 +799,25 @@
       "description": "Edit an API test returns \"OK\" response"
     }
   ],
+  "PatchTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Patch a Synthetic test returns \"OK\" response"
+    }
+  ],
   "TriggerTests": [
     {
       "group": "synthetics",
       "suffix": "",
-      "description": "Trigger Synthetics tests returns \"OK\" response"
+      "description": "Trigger Synthetic tests returns \"OK\" response"
+    }
+  ],
+  "CreateUser": [
+    {
+      "group": "users",
+      "suffix": "_266604071",
+      "description": "Create a user returns null access role"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [

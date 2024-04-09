@@ -14,6 +14,9 @@ assets:
       check: yarn.metrics.total_mb
       metadata_path: metadata.csv
       prefix: yarn.
+    process_signatures:
+    - java org.apache.hadoop.yarn.server.resourcemanager.ResourceManager
+    - java org.apache.hadoop.yarn.server.nodemanager.NodeManager
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Yarn
@@ -25,7 +28,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
@@ -34,26 +36,24 @@ draft: false
 git_integration_title: yarn
 integration_id: yarn
 integration_title: Yarn
-integration_version: 4.3.0
+integration_version: 4.3.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: yarn
-oauth: {}
 public_title: Yarn
 short_description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::処理
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
   media: []
@@ -80,7 +80,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 YARN チェックは [Datadog Agent][2] パッケージに含まれています。YARN ResourceManager に追加でインストールする必要はありません。
 
@@ -203,7 +203,7 @@ Yarn チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/yarn/images/yarn_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/hadoop-architecture-overview

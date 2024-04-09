@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: skykit-digital-signage-license
 app_uuid: f1d99715-3b71-4caa-9682-09224b8419dd
 assets: {}
@@ -23,7 +25,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: skykit_digital_signage
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -72,6 +73,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## 概要
 
 ### Skykit とは
@@ -82,13 +84,24 @@ Skykit は、デジタルサイネージとワークプレイスエクスペリ�
 
 オフィス内のデジタルサイネージでデータを共有し、データのパワーを引き出しましょう。Datadog のダッシュボードを使いやすいデジタルサイネージ CMS である Skykit Beam に接続すると、ダッシュボードを迅速、安全、簡単に選択したスクリーンに表示することができます。Skykit が提供するメディアプレーヤー (試用期間中は 1 台無料) をディスプレイに接続し、CMS にログインして Datadog のダッシュボードを安全にプログラムに追加するだけです。
 
-[Skykit の機能をご覧ください。](https://www.skykit.com/products/dashboards/connections/datadog-trial/)
+[Skykit の仕組みをご覧ください。][1]
 
-## サポート
+## Agent
 
-Skykit では、[support.skykit.com](https://support.skykit.com) でオンラインサポートを提供しています。Datadog ダッシュボードと Skykit Beam の接続方法に関するサポートは、[Skykit Beam と Datadog ダッシュボードの概要](https://support.skykit.com/en/articles/324-getting-started-with-skykit-beam-and-datadog-dashboards)をご覧ください。
+サポート、機能リクエスト、北米以外の組織の場合は、以下のチャンネルで Skykit にお問い合わせください。
 
-その他のサポートに関するご質問や北米以外の組織の方は、[sales@skykit.com](mailto:sales@skykit.com) に直接ご連絡ください。
+- メール: [sales@skykit.com][2]
 
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の Skykit の製品を使ってダッシュボードを安全かつ簡単に表示する][3]
+- [Skykit Beam と Datadog ダッシュボードの概要][4]
+
+[1]: https://www.skykit.com/products/dashboards/connections/datadog-trial/
+[2]: mailto:sales@skykit.com
+[3]: https://www.datadoghq.com/blog/showcase-datadog-dashboards-securely-with-skykit/
+[4]: https://support.skykit.com/en/articles/324-getting-started-with-skykit-beam-and-datadog-dashboards
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/skykit-digital-signage-license" target="_blank">こちらをクリック</a>してください。

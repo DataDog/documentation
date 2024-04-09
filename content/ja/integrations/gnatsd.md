@@ -16,7 +16,7 @@ assets:
     source_type_name: Gnatsd
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: dev@goldstar.com
   support_email: dev@goldstar.com
 categories:
@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gnatsd
-oauth: {}
 public_title: Gnatsd
 short_description: Datadog で gnatsd クラスターを監視。
 supported_os:

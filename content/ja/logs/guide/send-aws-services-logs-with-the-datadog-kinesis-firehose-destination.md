@@ -18,7 +18,7 @@ title: Datadog Kinesis Firehose Destination を使用して AWS AWS Services Log
 
 ## 概要
 
-AWS サービスのログは通常、S3 バケットや CloudWatch ロググループに保存されています。これらのログを購読し、Amazon Kinesis ストリームに転送して、1 つまたは複数の宛先に転送することができます。Datadog は、Amazon Kinesis 配信ストリームのデフォルトの転送先の 1 つです。
+CloudWatch Log グループに格納された AWS サービスログをサブスクライブして Amazon Kinesis ストリームに転送し、1 つまたは複数の宛先に転送することが可能です。Datadog は、Amazon Kinesis Delivery ストリームのデフォルトの宛先の 1 つです。
 
 AWS は Amazon Kinesis Data Firehose を完全に管理しているため、ログをストリーミングするための追加のインフラストラクチャーや転送構成を維持する必要はありません。AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定するか、CloudFormation テンプレートを使って自動的に転送先を設定することができます。
 
@@ -40,6 +40,7 @@ Datadog は、Datadog Kinesis 宛先を使用する場合、入力として Kine
    d. **Destination settings** で、[Datadog サイト][5]に対応する `Datadog logs` HTTP エンドポイント URL を選択します。 
    e. API キーを **API key** フィールドに貼り付けます。API キーは、[Datadog API Keys ページ][3]から取得または作成できます。 
    f. オプションとして、**Retry duration**、バッファの設定を構成するか、またはログにタグとしてアタッチされる **Parameters** を追加することができます。 
+   **注**: Datadog は、ログが 1 行のメッセージである場合、**Buffer size** を `2 MiB` に設定することを推奨します。
    g. **Backup settings** で、再試行期間を超える失敗したイベントを受け取る S3 バックアップバケットを選択します。 
    **注**: 配信ストリームで失敗したログがまだ Datadog に送信されるようにするには、Datadog Forwarder Lambda 関数をこの S3 バケットから[ログを転送][4]するように設定します。
    h. **Create delivery stream** をクリックします。
@@ -49,7 +50,7 @@ Datadog は、Datadog Kinesis 宛先を使用する場合、入力として Kine
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
 [5]: /ja/getting_started/site/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "CloudFormation template" %}}
 
@@ -101,7 +102,7 @@ AWS CLI で設定する例としては、[Kinesis を使ったサブスクリプ
 
 [CloudWatch][1] のロググループインデックスページの **Subscriptions** をチェックして、新しい Kinesis ストリームがロググループをサブスクライブしているかを確認します。
 
-### Datadog で AWS Kinesis ログを検索する
+### Datadog で Amazon Kinesis のログを検索する
 
 Amazon Kinesis 配信ストリームを設定した後、Datadog で配信ストリームにサブスクライブされたログを分析できます。
 
@@ -109,6 +110,8 @@ ARN ですべてのログにデータを入力するには
 
 1. Datadog の [Logs Explorer][5] に移動して、サブスクライブされたすべてのログを表示します。
 2. 検索バーに `@aws.firehose.arn:"<ARN>"` と入力し、`<ARN>` を Amazon Kinesis Data Firehose ARN に置き換えて、**Enter** を押します。
+
+**注**: 1 つの Kinesis ペイロードは、65,000 以上のログメッセージであってはなりません。この制限を超えたログメッセージは削除されます。
 
 ## その他の参考資料
 

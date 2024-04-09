@@ -22,7 +22,7 @@ assets:
     source_type_name: JFrog Platform
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: JFrog
   sales_email: integrations@jfrog.com
   support_email: integrations@jfrog.com
 categories:
@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: jfrog_platform
-oauth: {}
 public_title: JFrog Platform
 short_description: JFrog Artifactory と Xray のメトリクスおよびイベントを表示、分析します。
 supported_os:
@@ -100,10 +99,16 @@ JFrog Artifactory および Xray メトリクス API と Datadog のインテグ
 
 ### メトリクスの収集
 
+#### 注:
+
+メトリクスの収集を利用できるのは、[JFrog Platform Self-Hosted のユーザーのみです。JFrog Cloud はサポートされていません。][6]
+
+#### セットアップと構成
+
 1. Artifactory および Xray でメトリクスを有効化:
 
-    1. [Artifactory でメトリクスを有効化][6]
-    2. [Artifactory および Xray の管理者アクセストークンを作成][7]
+    1. [Artifactory でメトリクスを有効化します][7]
+    2. [Artifactory および Xray の管理者アクセストークンを作成します][8]
 
 2. Datadog コンフィギュレーション
 
@@ -117,7 +122,7 @@ JFrog Artifactory および Xray メトリクス API と Datadog のインテグ
     ```
     ホストで実行中の Agent に対してこのチェックを構成するには:
 
-    1. [Agent のコンフィギュレーションディレクトリ][8]のルートにある openmetrics.d/conf.yaml ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル openmetrics.d/conf.yaml][9] を参照してください。
+    1. [Agent のコンフィギュレーションディレクトリ][9]のルートにある openmetrics.d/conf.yaml ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル openmetrics.d/conf.yaml][10] を参照してください。
         ```text
         instances:
            - prometheus_url: http://<ARTIFACTORY_HOST_NAME_OR_IP>:80/artifactory/api/v1/metrics
@@ -144,37 +149,16 @@ JFrog Artifactory および Xray メトリクス API と Datadog のインテグ
                  - sys*
                  - jfxr*
         ```
-    2. [Agent を再起動][10]します。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][11]のガイドを参照して、上記のパラメーターを適用します。変更が適用されたことを確認するには、[Agent の status サブコマンドを実行][12]し、Checks セクションで `openmetrics` を探します。
-
-### ログ収集 - Agent の使用 (推奨)
-
-1. Agent のログ収集が有効になっていることを確認します。Agent のメインコンフィギュレーションファイル `datadog.yaml` で `logs_enabled: true` が設定されているかどうかを確認することで確認することができます。[詳細については、このドキュメントを参照してください][13]。
-
-2. OpenMetrics のコンフィギュレーションファイル (`openmetrics.d/conf.yaml` にあります) を修正して、適切なログファイルを収集するようにします。 [ワイルドカード][14]を使って、複数のログファイルを選択することができます。ファイルの末尾に以下を追加します。
-
-```yaml
-logs:
-  - type: file
-    path: "<PATH_TO_ARTIFACTORY_LOGS>/<LOG_FILE_NAME>.log"
-    service: "artifactory"
-    source: "jfrog"
-
-  - type: file
-    path: "<PATH_TO_XRAY_LOGS>/<LOG_FILE_NAME>.log"
-    service: "xray"
-    source: "jfrog"
-```
-
-3. [変更を適用するために Agent を再起動][10]します。
+    2. [Agent を再起動][10]します。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][12]のガイドを参照して、上記のパラメーターを適用します。変更が適用されたことを確認するには、[Agent の status サブコマンドを実行][13]し、Checks セクションで `openmetrics` を探します。
 
 ### ログ収集 - FluentD の使用
 
 #### 要件
 
-* [Datadog API キー][15]。
+* [Datadog API キー][14]。
 
 #### セットアップと構成
-1. インストールタイプに基づき、[jFrog ドキュメント][16]を使用して Fluentd をインストールして、環境変数を定義します。
+1. インストールタイプに基づき、[jFrog ドキュメント][15]を使用して Fluentd をインストールして、環境変数を定義します。
 
 2. 書き込み許可のあるディレクトリ（例: `$JF_PRODUCT_DATA_INTERNAL` などの場所）に Artifactory Fluentd コンフィギュレーションファイルをダウンロードして、Artifactory でFluentD を構成します。
 
@@ -195,7 +179,7 @@ logs:
     </match>
     ```
 
-    - `API_KEY` (必須) は、[Datadog][17] の API キーです。
+    - `API_KEY` (必須) は、[Datadog][16] の API キーです。
     - `dd_source` は、Datadog でインテグレーションの自動セットアップをトリガーするための、ログ内のログインテグレーションの名前です。
     - `include_tag_key` のデフォルトは false で、true に設定すると JSON レコードに `fluentd` タグが追加されます
 
@@ -221,7 +205,7 @@ logs:
 
     * `JPD_URL` (必須) は、Xray Violations をプルするために使用されるフォーマット `http://<ip_address>` の Artifactory JPD URL です。
     * `USER` (必須) は、認証用の Artifactory ユーザー名です。
-    * `JFROG_API_KEY` (必須) は、認証用の [Artifactory API キー][18]です。
+    * `JFROG_API_KEY` (必須) は、認証用の [Artifactory API キー][17]です。
 
     ダウンロードした `fluent.conf.xray` の match ディレクティブ（最終セクション）を、以下の詳細で上書きします。
 
@@ -235,7 +219,7 @@ logs:
     </match>
     ```
 
-    * `API_KEY` (必須) は、[Datadog][17] の API キーです。
+    * `API_KEY` (必須) は、[Datadog][16] の API キーです。
     * `dd_source` は、Datadog でインテグレーションの自動セットアップをトリガーするための、ログ内のログインテグレーションの名前です。
     * `include_tag_key` のデフォルトは false で、true に設定すると json レコードに `fluentd` タグが追加されます
 
@@ -245,7 +229,7 @@ logs:
     td-agent
     ```
 
-    API キーは `td-agent` で構成され、これにより Datadog へのログの送信が開始します。別のタイプのインストールについては、[JFrog ドキュメント][16]を参照してください。
+    API キーは `td-agent` で構成され、これにより Datadog へのログの送信が開始します。別のタイプのインストールについては、[JFrog ドキュメント][15]を参照してください。
 
     **Facets** > **Add** (ログの画面左側)  > **Search** からすべての属性をファセットとして追加します。
 
@@ -262,29 +246,28 @@ Dashboard -> Dashboard List の順に移動し、`JFrog Artifactory Dashboard`�
 
 #### メトリクス
 
-このチェックによって提供されるメトリクスのリストについては、[metadata.csv][19] を参照してください。
+このチェックによって提供されるメトリクスのリストについては、[metadata.csv][18] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][20]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][19]までお問合せください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/dashboard.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/xray_logs.png
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/xray_violations.png
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/artifactory_metrics_dashboard.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/xray_metrics_dashboard.png
-[6]: https://github.com/jfrog/metrics#setup
-[7]: https://www.jfrog.com/confluence/display/JFROG/Access+Tokens#AccessTokens-GeneratingAdminTokens
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[9]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/datadog_checks/jfrog_platform/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[11]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://docs.datadoghq.com/ja/agent/logs/?tab=tailfiles#activate-log-collection
-[14]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile#tail-directories-by-using-wildcards
-[15]: https://app.datadoghq.com/organization-settings/api-keys
-[16]: https://github.com/jfrog/log-analytics-datadog/blob/master/README.md
-[17]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
-[18]: https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey
-[19]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/metadata.csv
-[20]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.jfrog.com/confluence/display/JFROG/Open+Metrics
+[7]: https://github.com/jfrog/metrics#setup
+[8]: https://www.jfrog.com/confluence/display/JFROG/Access+Tokens#AccessTokens-GeneratingAdminTokens
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[10]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/datadog_checks/jfrog_platform/data/conf.yaml.example
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[12]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[14]: https://app.datadoghq.com/organization-settings/api-keys
+[15]: https://github.com/jfrog/log-analytics-datadog/blob/master/README.md
+[16]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[17]: https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey
+[18]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/metadata.csv
+[19]: https://docs.datadoghq.com/ja/help/

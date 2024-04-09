@@ -26,7 +26,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 2. Click the Monitoring tab.
 
-    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab"  style="width:80%;" >}}
+    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab" style="width:80%;" >}}
 
 3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function: 
     * invocations
@@ -48,7 +48,7 @@ If you have enabled AWS Lambda metrics, you can view metrics related to Lambda i
 | `aws.lambda.duration.maximum` | Maximum amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
 | `aws.lambda.throttles`        | Count of invocation attempts that were throttled due to invocation rates exceeding customer limits |
 
-For more information on these and other AWS Lambda metrics, see [Amazon Lambda Metrics][6].
+For more information on these and other AWS Lambda metrics, see [AWS Lambda Metrics][6].
 
 ### Manage your function triggers
 
@@ -81,7 +81,7 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 1. From the monitoring tab, click **View logs in Cloudwatch**.
 
-{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Lambda logs in Cloudwatch"  style="width:80%;" >}}
+{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Lambda logs in Cloudwatch" style="width:80%;" >}}
 
 2. Find the most recent log stream.
 

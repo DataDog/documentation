@@ -146,7 +146,7 @@ Pour découvrir comment surveiller l'utilisation de Datadog par vos différents 
 
 [1]: /fr/monitors
 [2]: https://www.datadoghq.com/blog/monitoring-101-alerting/
-[3]: https://learn.datadoghq.com/courses/intro-to-monitoring
+[3]: https://learn.datadoghq.com/courses/introduction-to-observability
 [4]: /fr/monitors/types/anomaly/
 [5]: /fr/monitors/guide/monitor-arithmetic-and-sparse-metrics/
 [6]: /fr/monitors/types/metric/?tab=change

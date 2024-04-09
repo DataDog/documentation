@@ -32,7 +32,7 @@ version: '1.0'
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 インテグレーションタイルを有効にしたら、監視するサービスの Statuspage の URL を入力します。たとえば、PagerDuty Statuspage ページは `https://status.pagerduty.com` にあります。ページに関連付けるカスタムタグを入力し、**Update Configuration** をクリックします。
 

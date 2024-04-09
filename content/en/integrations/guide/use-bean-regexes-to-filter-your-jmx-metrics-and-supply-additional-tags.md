@@ -12,7 +12,7 @@ further_reading:
   text: "View JMX data in jConsole and set up your jmx.yaml to collect them"
 ---
 
-Datadog supports regexes to match JMX Mbean names and domain names to configure your `include` and `exclude` filters. The regexes must conform to [Java’s regular expression format][1]. Note that these filters were added in version 5.5.0.
+Datadog supports regexes to match JMX Mbean names and domain names to configure your `include` and `exclude` filters. The regexes must conform to [Java's regular expression format][1]. Note that these filters were added in version 5.5.0.
 
 Capture groups from the provided regex can be used to supply additional tag values for your metrics.
 

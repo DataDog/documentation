@@ -11,11 +11,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
+algolia:
+  tags: ['unified service tags','unified','unified service','service tags']
 ---
 
 ## Overview
 
-Unified service tagging ties Datadog telemetry together through using three [reserved tags][1]: `env`, `service`, and `version`.
+Unified service tagging ties Datadog telemetry together by using three [reserved tags][1]: `env`, `service`, and `version`.
 
 With these three tags, you can:
 
@@ -25,11 +27,15 @@ With these three tags, you can:
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
-**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+**Notes**:
+
+- The `version` tag is expected to change with each new application deployment. Two different versions of your application's code should have distinct `version` tags.
+- The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+- Host information is excluded for database and cache spans because the host associated with the span is not the database/cache host.
 
 ### Requirements
 
-- Unified service tagging requires setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
+- Unified service tagging requires the setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
 
 - Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
 
@@ -325,7 +331,7 @@ To form a single point of configuration for all telemetry emitted directly from 
    When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
-[1]: /real_user_monitoring/connect_rum_and_traces/
+[1]: /real_user_monitoring/platform/connect_rum_and_traces/
 [2]: /real_user_monitoring/browser/#setup
    {{% /tab %}}
 
@@ -393,7 +399,7 @@ instances:
 
 **Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/configuration/agent-configuration-files
 [2]: /integrations/process
     {{% /tab %}}
     {{< /tabs >}}
@@ -414,7 +420,7 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
-[10]: /real_user_monitoring/connect_rum_and_traces/
+[10]: /real_user_monitoring/platform/connect_rum_and_traces/
 [11]: /getting_started/synthetics/
 [12]: /integrations/statsd/
 [13]: https://www.chef.io/

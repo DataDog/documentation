@@ -103,7 +103,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 : `(1, hello)`
 
 `curl -X GET 'localhost:8080/notes'`
-: `{”1”, "hello"}`
+: `{"1", "hello"}`
 
 `curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
 : `(1, UpdatedNote)`
@@ -415,7 +415,7 @@ def create_note(self, desc, add_date=None):
 [2]: /ja/tracing/trace_collection/dd_libraries/python/
 [3]: /ja/account_management/api-app-keys/
 [4]: /ja/tracing/trace_collection/compatibility/python/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /ja/getting_started/site/
 [7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer

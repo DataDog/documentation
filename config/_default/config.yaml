@@ -21,6 +21,11 @@ defaultContentLanguageInSubdir: false
 # set this as a default otherwise we get "Error: found overlapping content dirs"
 # contentDir: "content/en"
 
+caches:
+    getjson:
+        dir: :cacheDir/:project
+        maxAge: '1h'
+
 # gitinfo vars
 enableGitInfo: true
 
@@ -49,8 +54,22 @@ module:
        target: layouts/partials/search-bar.html
      - source: layouts/partials/announcement_banner.html
        target: layouts/partials/announcement_banner.html
+     - source: layouts/partials/footer.html
+       target: layouts/partials/footer.html
+     - source: layouts/partials/svg.html
+       target: layouts/partials/svg.html
+     - source: layouts/partials/footer_link.html
+       target: layouts/partials/footer_link.html
+     - source: layouts/partials/language-selector-docs.html
+       target: layouts/partials/language-selector-docs.html
+     - source: layouts/partials/modals/modal-header-demo-signup.html
+       target: layouts/partials/modals/modal-header-demo-signup.html
+     - source: assets/styles/components/_demo-request-modal.scss
+       target: assets/styles/components/_demo-request-modal.scss
      - source: assets/styles/components/_announcement-banner.scss
        target: assets/styles/components/_announcement-banner.scss
+     - source: assets/styles/components/_footer.scss
+       target: assets/styles/components/_footer.scss
      - source: assets/styles/base/_variables.scss
        target: assets/styles/base/_modules_variables.scss
      - source: assets/styles/components/_main-nav.scss
@@ -75,6 +94,9 @@ module:
     - source: content/ja
       target: content
       lang: ja
+    - source: content/ko
+      target: content
+      lang: ko
     - source: static
       target: static
     - source: layouts
@@ -99,16 +121,25 @@ security:
   funcs:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
-      - ^(HUGO_|CI_)
+      - ^(HUGO_|CI_|IA_SUBDOMAIN)
   exec:
     osEnv:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
       - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
 
-# Output Format for Redirects
 outputFormats:
+  Algolia:
+    baseName: "algolia"
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
   Redirects:
     baseName: "redirects"
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
+
+timeout: "90s"
+
+minify:
+  disableSVG: true

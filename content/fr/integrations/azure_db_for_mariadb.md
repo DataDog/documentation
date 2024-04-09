@@ -1,25 +1,26 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data store
 dependencies: []
-description: "Surveillez des métriques clés d'Azure\_Database pour MariaDB."
+description: Surveillez des métriques clés d'Azure Database pour MariaDB.
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mariadb/
 draft: false
 git_integration_title: azure_db_pour_mariadb
 has_logo: true
 integration_id: azure-dbformariadb
-integration_title: "Microsoft\_Azure\_Database pour MariaDB"
+integration_title: Microsoft Azure Database pour MariaDB
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: azure_db_pour_mariadb
-public_title: "Intégration Datadog/Microsoft\_Azure\_Database pour MariaDB"
-short_description: "Surveillez des métriques clés d'Azure\_Database pour MariaDB."
+public_title: Intégration Datadog/Microsoft Azure Database pour MariaDB
+short_description: Surveillez des métriques clés d'Azure Database pour MariaDB.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Database pour MariaDB offre une version communautaire complètement managée et prête à l'emploi de MariaDB en tant que service.
@@ -29,7 +30,7 @@ Recueillez des métriques d'Azure Database pour MariaDB pour :
 - Visualiser les performances de vos bases de données MariaDB 
 - Corréler les performances de vos bases de données MariaDB avec vos applications
 
-## Configuration
+## Implémentation
 
 ### Installation
 

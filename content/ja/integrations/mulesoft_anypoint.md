@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: ioconnect-mulesoft-anypoint
 app_uuid: fdb057e7-9be6-459f-ab3e-e745766e9158
 assets:
@@ -36,9 +38,9 @@ author:
   support_email: support_ddp@ioconnectservices.com
   vendor_id: ioconnect
 categories:
+- クラウド
 - マーケットプレイス
-- cloud
-- コラボレーション
+- ネットワーク
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -52,7 +54,6 @@ legal_terms:
   eula: assets/EULA - IO Connect Services.pdf
 manifest_version: 2.0.0
 name: mulesoft_anypoint
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -62,22 +63,22 @@ pricing:
   tag: vcoreid
   unit_label: プロダクション vCore
   unit_price: 200
-public_title: Mule® インテグレーション
+public_title: Mule®
 short_description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
-  - Category::Collaboration
+  - Category::Marketplace
+  - Category::Network
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします
   media:
@@ -104,7 +105,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Mule® インテグレーション
+  title: Mule®
   uninstallation: README.md#Uninstallation
 ---
 

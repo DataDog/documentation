@@ -14,9 +14,11 @@ further_reading:
 - link: "/logs/logs_to_metrics/"
   tag: "Documentation"
   text: "Learn how to generate metrics from ingested logs"
+algolia:
+  tags: ['logging without limits']
 ---
 
-{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}
+{{< img src="logs/lwl_marketecture_20231030.png" alt="Logging without Limits™" >}}
 
 ## Overview
 
@@ -98,7 +100,7 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 
 1. In the main navigation, navigate to **Monitors -> New Monitor -> Anomaly**.
 2. Enter the log-based metric you defined in the previous section.
-3. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what’s happening.
+3. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what's happening.
 4. Save the monitor.
 
 {{< img src="logs/guide/getting-started-lwl/anomaly_monitor.mp4" alt="Anomaly Monitor" video=true style="width:100%;">}}

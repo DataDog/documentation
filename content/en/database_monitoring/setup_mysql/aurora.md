@@ -26,7 +26,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6, 5.7, and 8.0 or later 
+: 5.6, 5.7, and 8.0 or later
 
 Supported Agent versions
 : 7.36.1 or later
@@ -36,7 +36,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. If connected to the cluster endpoint, the Agent collects data from one random replica, and only provides visibility into that replica. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -83,27 +83,26 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
-ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-
-{{% tab "MySQL 5.6 and 5.7" %}}
+{{% tab "MySQL 5.6" %}}
 
 Create the `datadog` user and grant basic permissions:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL ≥ 5.7" %}}
+
+Create the `datadog` user and grant basic permissions:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
+ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -119,7 +118,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -187,6 +186,10 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+        
+    # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
+    aws:
+      instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
@@ -196,9 +199,9 @@ instances:
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
 
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -246,7 +249,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
+[2]: /agent/configuration/secrets-management
 [3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -266,14 +269,14 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD>" \
+    password: "<UNIQUEPASSWORD>"' \
   datadog/datadog
 ```
 
@@ -327,14 +330,14 @@ spec:
 ```
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
 
-The Cluster Agent automatically registers this configuration and begin running the MySQL check.
+The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -362,8 +365,8 @@ If you have installed and configured the integrations and Agent as described and
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: https://app.datadoghq.com/account/settings/agent/latest
+[6]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: zigiwave-nutanix-integration
 app_uuid: df66726a-0691-4c82-827c-f474ae98e4f5
 assets:
@@ -11,12 +13,10 @@ author:
   support_email: support@zigiwave.com
   vendor_id: zigiwave
 categories:
-- メトリクス
-- マーケットプレイス
-- コラボレーション
 - event management
-- モニタリング
 - インシデント
+- マーケットプレイス
+- メトリクス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -30,14 +30,13 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: zigiwave_nutanix_datadog_integration
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
   product_id: nutanix-integration
   short_description: 接続された Datadog/Nutanix インスタンスの月額ライセンス
   unit_price: 750.0
-public_title: Nutanix インテグレーション
+public_title: Nutanix
 short_description: Datadog と Nutanix のノーコードインテグレーション
 supported_os:
 - linux
@@ -45,14 +44,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Event Management
+  - Category::Incidents
+  - Category::Marketplace
+  - Category::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Metrics
-  - Category::Marketplace
-  - Category::Collaboration
-  - Category::Event Management
-  - Category::Monitoring
-  - Category::Incidents
   configuration: README.md#Setup
   description: Datadog と Nutanix のノーコードインテグレーション
   media:
@@ -64,7 +61,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Nutanix インテグレーション
+  title: Nutanix
   uninstallation: README.md#Uninstallation
 ---
 

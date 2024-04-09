@@ -7,9 +7,9 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -23,7 +23,7 @@ further_reading:
 
 ## APM services
 
-APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service List, and the Service Map.
+APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service Catalog, and the Service Map.
 
 **Note**: Trace Metrics can be queried based on their `trace.*` [namespace][1].
 
@@ -51,7 +51,7 @@ When there are multiple primary operations defined for a service, the highest re
 5. Select the operation that you want reflected as the entry-point to the service.
 6. Click **Save**.
 
-{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save"  >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save" >}}
 
 ## Viewing stats for additional span names
 
@@ -90,7 +90,7 @@ try (Scope scope = tracer.activateSpan(span)) {
 For more information, see [Setting up Java and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/java/#opentracing
+[1]: /tracing/trace_collection/opentracing/java/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -109,7 +109,7 @@ span.finish()
 For more information, see [Setting up Python and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/python/#opentracing
+[1]: /tracing/trace_collection/opentracing/python/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -123,7 +123,7 @@ end
 For more information, see [Setting up Ruby and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/ruby/#opentracing
+[1]: /tracing/trace_collection/opentracing/ruby/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -135,7 +135,7 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 For more information, see [Setting up Go and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/go/#opentracing
+[1]: /tracing/trace_collection/opentracing/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -151,7 +151,7 @@ span.finish();
 For more information, see [Setting up Node.js and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/nodejs/#opentracing
+[1]: /tracing/trace_collection/opentracing/nodejs/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -171,7 +171,7 @@ using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(f
 For more information, see [Setting up .NET and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/dotnet/#opentracing
+[1]: /tracing/trace_collection/opentracing/dotnet/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -199,7 +199,7 @@ $scope->close();
 For more information, see [Setting up PHP and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/php/#opentracing
+[1]: /tracing/trace_collection/opentracing/php/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
@@ -211,7 +211,7 @@ auto root_span = tracer->StartSpan("web.request");
 root_span->SetTag(datadog::tags::resource_name, "/user/profile");
 ```
 
-For more information, see [Setting up CPP and Custom Instrumentation][1].
+For more information, see [Setting up C++ and Custom Instrumentation][1].
 
 
 [1]: /tracing/trace_collection/custom_instrumentation/cpp/#manually-instrument-a-method

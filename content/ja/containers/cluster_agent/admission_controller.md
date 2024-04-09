@@ -22,23 +22,25 @@ Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します�
 
 ## 要件
 
-- Datadog Cluster Agent v7.39+
+- Datadog Cluster Agent v7.40+
 
-## コンフィギュレーション
+## 構成
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-Admission Controller で Datadog Operator を有効にするには、カスタムリソースでパラメーター `clusterAgent.config.admissionController.enabled` を `true` に設定します。
+Datadog Operator の Admission Controller を有効にするには、`DatadogAgent` の構成でパラメーター `features.admissionController.enabled` を `true` に設定します。
 
 {{< code-block lang="yaml" disable_copy="false" >}}
-[...]
- clusterAgent:
-[...]
-    config:
-      admissionController:
-        enabled: true
-        mutateUnlabelled: false
-[...]
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  features:
+    admissionController:
+      enabled: true
+      mutateUnlabelled: false
 {{< /code-block >}}
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -47,9 +49,9 @@ Helm chart v2.35.0 から、Datadog Admission Controller がデフォルトで�
 Admission Controller で v2.34.6 以前の Helm チャートを有効にするには、パラメーター `clusterAgent.admissionController.enabled` を `true` に設定してください。
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="false" >}}
-[...]
- clusterAgent:
-[...]
+#(...)
+clusterAgent:
+  #(...)
   ## @param admissionController - オブジェクト - 必須
   ## admissionController での自動 APM 挿入を有効化
   ## DogStatsD config および標準タグ (env、service、version) を
@@ -63,7 +65,6 @@ Admission Controller で v2.34.6 以前の Helm チャートを有効にする�
     ## admission.datadoghq.com/enabled="true"
     #
     mutateUnlabelled: false
-[...]
 {{< /code-block >}}
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
@@ -152,11 +153,11 @@ Helm チャートに `mutateUnlabelled: true` という Agent 構成を追加す
 
 | mutateUnlabelled | ポッドラベル                               | 挿入可否 |
 |------------------|-----------------------------------------|-----------|
-| `true`           | ラベルなし                                | 〇       |
-| `true`           | `admission.datadoghq.com/enabled=true`  | 〇       |
+| `true`           | ラベルなし                                | はい       |
+| `true`           | `admission.datadoghq.com/enabled=true`  | はい       |
 | `true`           | `admission.datadoghq.com/enabled=false` | ✕        |
 | `false`          | ラベルなし                                | ✕        |
-| `false`          | `admission.datadoghq.com/enabled=true`  | 〇       |
+| `false`          | `admission.datadoghq.com/enabled=true`  | はい       |
 | `false`          | `admission.datadoghq.com/enabled=false` | ✕        |
 
 
@@ -187,7 +188,7 @@ Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプ
 - 新しいアプリケーションポッドを作成する前に、Admission Controller のデプロイと構成が必要です。既に存在するポッドは更新できません。
 - Admission Controller の挿入機能を無効化するには、Cluster Agent のコンフィギュレーション: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false` を使用します。
 - Datadog Admission Controller を使用すれば、ユーザーは Downward API ([Kubernetes トレースコレクション設定のステップ 2 ][3]) を利用してアプリケーションポッドの構成をスキップすることができます。
-- Google Kubernetes Engine (GKE) Private Cluster では、[コントロールプレーン用のファイアーウォールルールを追加する][4]必要があります。着信接続を処理する Webhook は、ポート `443` でリクエストを受け取り、ポート `8000` に実装されたサービスに誘導します。デフォルトでは、クラスターのネットワークに `gke-<CLUSTER_NAME>-master` という名前のファイアーウォールルールが存在するはずです。ルールの "ソースフィルター" は、クラスターの "コントロールプレーンのアドレス範囲" と一致します。このファイアーウォールルールを編集して、TCP ポート `8000` へのイングレッションを許可するようにします。
+- プライベートクラスターでは、[コントロールプレーン用のファイアーウォールルールを追加する][4]必要があります。着信接続を処理する Webhook は、ポート `443` でリクエストを受け取り、ポート `8000` に実装されたサービスに誘導します。デフォルトでは、クラスターのネットワークに `gke-<CLUSTER_NAME>-master` という名前のファイアーウォールルールが存在するはずです。ルールの "ソースフィルター" は、クラスターの "コントロールプレーンのアドレス範囲" と一致します。このファイアーウォールルールを編集して、TCP ポート `8000` へのイングレッションを許可するようにします。
 
 
 ## その他の参考資料
@@ -195,6 +196,6 @@ Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
-[2]: /ja/tracing/trace_collection/admission_controller/
+[2]: /ja/tracing/trace_collection/library_injection_local/
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules

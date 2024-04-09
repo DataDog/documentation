@@ -7,14 +7,14 @@ further_reading:
 - link: /synthetics/guide/browser-tests-totp
   tag: Documentation
   text: ブラウザテストにおける多要素認証 (MFA) 用 TOTP
-- link: /synthetics/browser_tests
+- link: /synthetics/guide/browser-tests-passkeys
   tag: ドキュメント
-  text: ブラウザテストについて
+  text: ブラウザテストのパスキーについて
 - link: /synthetics/browser_tests/actions
   tag: ドキュメント
   text: ブラウザテストステップについて
 kind: ガイド
-title: 認証が必要なアプリケーションでテストを実行する
+title: ブラウザテストを使用して認証が必要なアプリケーションを監視する
 ---
 
 ## 概要 
@@ -24,7 +24,7 @@ title: 認証が必要なアプリケーションでテストを実行する
 ログイン後に配置されているユーザージャーニーを監視する必要がある場合、Datadog のブラウザテストでアプリケーションのログイン手順を実行しログイン後のページ検証を実行するには 2 つの方法があります。
 
 - [ブラウザテストの記録にログイン手順を含める](#include-the-login-steps-in-your-recording)
-- [ブラウザテストの高度なオプションを活用する](#leverage-test-configuration-options)
+- [ブラウザテストの高度なオプションを活用する](#leverage-browser-test-configuration-options)
 
 認証情報をアプリケーション全体で確実に難読化し安全に保存するには、[難読化されたグローバル変数](#account-security)を使用します。
 
@@ -53,16 +53,21 @@ SSO を使用してログインするウェブサイトの場合は、ブラウ�
 
 その他、SSO 以外のアプローチを使用して通常のユーザー名とパスワードの組み合わせを利用してログインする方法があります。
 
+### パスキー
+Datadog Synthetic モニタリングは、フィッシングやあらゆる形態のパスワード盗難、リプレイ攻撃のリスクを排除するセキュリティ手法である[パスキー][4]をサポートしています。
+
+Virtual Authenticator グローバル変数を作成し、テストにインポートします。次に、ブラウザ内でパスキーに関連するステップを記録します。
+
 ### 多要素認証
 
-Datadog Synthetic モニタリングは、[Time-based One Time Passwords (TOTP)][4] をサポートしています。これは、秘密鍵と現在時刻を組み合わせてワンタイムパスワードを生成する多要素認証方法です。
+Datadog Synthetic モニタリングは、[Time-based One Time Passwords (TOTP)][5] をサポートしています。これは、秘密鍵と現在時刻を組み合わせてワンタイムパスワードを生成する多要素認証方法です。
 
 ブラウザテストでは、通常のユーザーがブラウザ内で実行するすべてのアクションを再現できます。テストを設定するときは、ブラウザ内で多要素 (2FA または TFA を含む) 認証手順を記録します。
 
 一部の MFA プロバイダーでは、Datadog のブラウザテストがボットと認識され、ログインできない場合があります（例: reCAPTCHA の追加）。このような場合、[Synthetic ブラウザテストからのリクエストの検出][3]時 (特定の認証情報、Synthetic テスト固有のヘッダーなど) には、ボット検出機能を無効化することが可能かどうか、MFA プロバイダーにお問い合わせください。
 
 MFA プロセスに、ブラウザ外で実行される手順 (音声およびテキストメッセージの送信や TOTP を利用しないモバイルアプリケーションを開くなど) が含まれる場合、[Synthetic ブラウザテストからのリクエストの検出][3]時 (特定の認証情報、Synthetic テスト固有のヘッダーなど) には、テストの目的のため MFA 設定の変更または MFA の無効化が可能かどうか、MFA プロバイダーにお問い合わせください。
-アプリケーションにより利用される MFA のタイプによっては、[JavaScript 手順][5]が有効な場合があります。
+アプリケーションにより利用される MFA のタイプによっては、[JavaScript 手順][6]が有効な場合があります。
 
 <div class="alert alert-info">Datadog では、テストシナリオをより簡単に記録できるよう、常に機能が追加されています。最も重要な MFA システムについて、ぜひ<a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">ご意見をお聞かせください</a>。</div>
 
@@ -84,20 +89,24 @@ Datadog のブラウザテストがアプリケーションにログインでき
 
 ### 認証データの安全性を確保
 
-認証情報を[グローバル変数][6]として保存 (たとえば、ユーザー名に 1 つのグローバル変数、パスワードに別のグローバル変数) し、この変数を難読化と設定して Datadog のインスタンスにアクセスが可能なすべてのユーザーに対して隠します。
+資格情報を[グローバル変数][7]として保存し (例えば、ユーザー名用のグローバル変数とパスワード用のグローバル変数)、**Hide and obfuscate variable value** を選択してテスト結果からその値を隠します。Datadog のインスタンスにアクセスできる個人に対して、ブラウザテストの権限を制限することができます。
 
-難読化された変数を作成したら、ブラウザテストに[そのグローバル変数をインポート][7]して、ログイン手順に利用します。
+難読化された変数を作成したら、ブラウザテストに[そのグローバル変数をインポート][8]して、ログイン手順に利用します。
 
 **注:** Datadog のグローバル変数は安全に保存され暗号化されますが、テストの一般的なベストプラクティスとして、ダミーの資格情報に紐づけられたテスト用のアカウントを使用することを強くお勧めします。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+アカウントセキュリティについては、[Synthetic モニタリングのデータセキュリティ][9]を参照してください。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/browser_tests/actions/
 [2]: /ja/synthetics/browser_tests/actions/#subtests
 [3]: /ja/synthetics/guide/identify_synthetics_bots/
-[4]: /ja/synthetics/guide/browser-tests-totp
-[5]: /ja/synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
-[6]: /ja/synthetics/settings/?tab=specifyvalue#global-variables
-[7]: /ja/synthetics/browser_tests/actions#a-global-variable
+[4]: /ja/synthetics/guide/browser-tests-passkeys
+[5]: /ja/synthetics/guide/browser-tests-totp
+[6]: /ja/synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
+[7]: /ja/synthetics/settings/?tab=specifyvalue#global-variables
+[8]: /ja/synthetics/browser_tests/actions#a-global-variable
+[9]: /ja/data_security/synthetics

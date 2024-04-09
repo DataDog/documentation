@@ -1,22 +1,23 @@
 ---
-title: Log Configuration
-kind: Documentation
-description: "Traiter, enrichir, contrôler et gérer vos logs depuis la page Logs\_Configuration"
 aliases:
-  - /fr/logs/processing
+- /fr/logs/processing
+description: Traiter, enrichir, contrôler et gérer vos logs depuis la page Logs Configuration
 further_reading:
-  - link: https://www.datadoghq.com/blog/logging-without-limits/
-    tag: Blog
-    text: En savoir plus sur Logging without Limits*
-  - link: /logs/guide/
-    tag: Guide
-    text: Guides supplémentaires sur la journalisation avec Datadog
+- link: https://www.datadoghq.com/blog/logging-without-limits/
+  tag: Blog
+  text: En savoir plus sur Logging without Limits*
+- link: /logs/guide/
+  tag: Guide
+  text: Guides supplémentaires sur la journalisation avec Datadog
+kind: Documentation
+title: Log Configuration
 ---
+
 ## Présentation
 
-La solution Logging without Limits* de Datadog dissocie l'ingestion des logs de leur indexation. Elle vous permet de choisir les logs que vous souhaitez indexer et conserver, ou archiver, et de gérer les paramètres et contrôles de façon globale depuis la [section de configuration des logs][1].
+La solution Logging without Limits* de Datadog dissocie l'ingestion des logs de leur indexation. Elle vous permet de choisir les logs que vous souhaitez indexer et conserver, ou archiver, et de gérer les paramètres et contrôles de façon globale depuis la page de configuration des logs, accessible depuis [**Logs > Configuration**][1].
 
-{{< img src="logs/log_configuration_overview.mp4" alt="La section de configuration des logs dans l'application Datadog" video=true >}}
+{{< img src="logs/log_configuration_overview1.mp4" alt="La section de configuration des logs dans l'application Datadog" video=true >}}
 
 ## Options de configuration
 

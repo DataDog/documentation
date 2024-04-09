@@ -77,8 +77,8 @@ The following environment variables are supported:
 `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  
 : Timeout (in seconds) of the client communicating with the API server. Defaults to `60` seconds.
 
-`DD_EXPVAR_PORT`                              
-: Port for fetching [expvar][2] public variables from the Datadog Cluster Agent. Defaults to port `5000`.
+`DD_METRICS_PORT`                              
+: Port to expose Datadog Cluster Agent metrics. Defaults to port `5000`.
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`   
 : Time waited (in seconds) to process a batch of metrics from multiple autoscalers. Defaults to `10` seconds.
@@ -118,6 +118,21 @@ The following environment variables are supported:
 
 `DD_CLUSTER_CHECKS_EXTRA_TAGS`                
 : Adds extra tags to cluster checks metrics.
+
+`DD_PROXY_HTTPS`                
+: Sets a proxy server for HTTPS requests.
+
+`DD_PROXY_HTTP`                
+: Sets a proxy server for HTTP requests.
+
+`DD_PROXY_NO_PROXY`                
+: Sets a list of hosts that should bypass the proxy. The list is space-separated.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_CPU`
+: Configures the CPU request and limit for the init containers.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
+: Configures the memory request and limit for the init containers.
 
 ## Further Reading
 

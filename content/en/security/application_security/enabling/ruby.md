@@ -22,11 +22,12 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for Ruby apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your Gemfile to include the Datadog library**:
 
@@ -34,7 +35,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    gem 'ddtrace', '~> 1.1'
    ```
 
-   For information about which language and framework versions are supported by the library, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
    For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
 
@@ -181,7 +182,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -209,12 +210,12 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{% appsec-getstarted-2-canary %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=ruby#compatibility
+[1]: /security/application_security/enabling/compatibility/ruby
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [3]: /tracing/trace_collection/dd_libraries/ruby/

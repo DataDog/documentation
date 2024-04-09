@@ -8,7 +8,7 @@
 
 <h3 class="mt-3 mb-2">{{ i18n "response" }}</h3>
 
-<ul class="nav nav-tabs border-none response-toggle" style="z-index: 10;">
+<ul class="nav nav-tabs border-none response-toggle px-0" style="z-index: 10;">
     {{ $count := 0}}
     {{ range $response_code, $response := $responses }}
         <li class="nav-item">
@@ -32,91 +32,124 @@
                 <p class="mb-2">{{ $translate_action_response.description | default $response.description }}</p>
 
                 {{ range $content := . }}
-                    {{ range $schema := $content }}
 
-                        <!-- Get Json and HTML -->
-                        {{ $s.Set "json" "" }}
-                        {{ $s.Set "html" "" }}
-                        {{ with $resourcePage.Resources.Match "examples.json" }}
-                            {{ range . }}
-                                {{ $data := . | unmarshal}}
-                                {{ with (index $data $operationid) }}
-                                    {{ with (index . "responses") }}
-                                        {{ $res := (index . $response_code) }}
-                                        {{ if $res }}
-                                            {{ $jsonifiedData := (index $res "json") | jsonify (dict "indent" "  ") }}
-                                            {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
-                                            {{ $s.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                            {{ $s.Set "html" (index $res "html") }}
+                    {{ $examples := index $content "examples" }}
+
+                    {{ range $k, $schema := $content }}
+                        {{ if ne $k "examples" }}
+
+                            <!-- Get Json and HTML -->
+                            {{ $s.Set "json" "" }}
+                            {{ $s.Set "html" "" }}
+                            {{ with $resourcePage.Resources.Match "examples.json" }}
+                                {{ range . }}
+                                    {{ $data := . | unmarshal}}
+                                    {{ with (index $data $operationid) }}
+                                        {{ with (index . "responses") }}
+                                            {{ $res := (index . $response_code) }}
+                                            {{ if $res }}
+                                                {{ $jsonifiedData := (index $res "json") | jsonify (dict "indent" "  ") }}
+                                                {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                                {{ $s.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                                                {{ $s.Set "html" (index $res "html") }}
+                                            {{ else }}
+                                                {{ warnf "Could not load html/json response code %q in %q" $response_code $operationid }}
+                                            {{ end }}
                                         {{ else }}
-                                            {{ warnf "Could not load html/json response code %q in %q" $response_code $operationid }}
+                                            {{ warnf "Could not load html/json responses in data for operation %q" $operationid }}
                                         {{ end }}
                                     {{ else }}
-                                        {{ warnf "Could not load html/json responses in data for operation %q" $operationid }}
+                                        {{ warnf "Could not load html/json response for %q" $operationid }}
                                     {{ end }}
-                                {{ else }}
-                                    {{ warnf "Could not load html/json response for %q" $operationid }}
                                 {{ end }}
                             {{ end }}
-                        {{ end }}
-                        {{ $json := ($s.Get "json") }}
-                        {{ $html := ($s.Get "html") }}
+                            {{ $json := ($s.Get "json") }}
+                            {{ $html := ($s.Get "html") }}
 
-                        <ul class="nav nav-tabs border-none response-toggle">
-                            <li class="nav-item">
-                                <a class="nav-link me-1  js-model-link active"  href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-1  js-example-link"  href="#" data-bs-toggle="tab">{{ i18n "example" }}</a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid }}-{{ $response_code }}-model">
-
-                                {{ with $schema.description }}
-                                    <p>{{- . | markdownify -}}</p>
+                            {{/*
+                                If we are missing json/html lets build from an examples entry in data if it exists
+                                This is mostly for cloudcraft api usage
+                            */}}
+                            {{ with $json }}
+                              {{/* we have json */}}
+                            {{ else }}
+                              {{ with $examples }}
+                                {{ range . }}
+                                  {{ $json = (highlight (.value | jsonify (dict "indent" "  ")) "json" "") }}
                                 {{ end }}
+                              {{ end }}
+                            {{ end }}
+                            {{ with $html }}
+                              {{/* we have html */}}
+                            {{ else }}
+                              {{ $row := "" }}
+                              {{ range $sk, $sv := $schema.properties }}
+                                {{ $row = "<div class=\"row\">" }}
+                                {{ $row = (print $row "<div class=\"col-12 first-column\">") }}
+                                {{ $row = (print $row "<div class=\"row\">") }}
+                                {{ $row = (print $row "<div class=\"col-4 column\"><p class=\"key\">" $sk "</p></div>") }}
+                                {{ $row = (print $row "<div class=\"col-2 column\"><p>" $sv.type "</p></div>") }}
+                                {{ $row = (print $row "<div class=\"col-6 column\"><p>" ($sv.description | default "&nbsp;") "</p></div>") }}
+                                {{ $row = (print $row "</div>") }}
+                                {{ $row = (print $row "</div>") }}
+                                {{ $row = (print $row "</div>") }}
+                                {{ $html = (print $html $row) }}
+                              {{ end }}
+                            {{ end }}
+
+                            <ul class="nav nav-tabs border-none response-toggle px-0">
+                                <li class="nav-item">
+                                    <a class="nav-link me-1  js-model-link active"  href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link me-1  js-example-link"  href="#" data-bs-toggle="tab">{{ i18n "example" }}</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid }}-{{ $response_code }}-model">
+
+                                    {{ with $schema.description }}
+                                        <p>{{- . | markdownify -}}</p>
+                                    {{ end }}
 
 
-                                {{ if in $html "schema-table" }}
-                                    {{ $html | safeHTML }}
-                                {{ else }}
-                                    <div class="table-response schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
-                                      <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
-                                      <div class="col-12">
-                                        <div class="row table-header">
-                                          <div class="col-4 column">
-                                            <p class="font-semibold">{{ i18n "field" }}</p>
-                                          </div>
-                                          <div class="col-2 column">
-                                            <p class="font-semibold">{{ i18n "type" }}</p>
-                                          </div>
-                                          <div class="col-6 column">
-                                            <p class="font-semibold">{{ i18n "description" }}</p>
-                                          </div>
-                                        </div>
+                                    {{ if in $html "schema-table" }}
                                         {{ $html | safeHTML }}
-                                      </div>
-                                    </div>
-                                {{ end }}
-
-                            </div>
-                            <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid }}-{{ $response_code }}-example">
-                                <div class="code-snippet-wrapper">
-                                    <div class="code-snippet">
-                                        <div class="code-button-wrapper position-absolute">
-                                            <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                                    {{ else }}
+                                        <div class="table-response schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
+                                          <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
+                                          <div class="col-12">
+                                            <div class="row table-header">
+                                              <div class="col-4 column">
+                                                <p class="font-semibold">{{ i18n "field" }}</p>
+                                              </div>
+                                              <div class="col-2 column">
+                                                <p class="font-semibold">{{ i18n "type" }}</p>
+                                              </div>
+                                              <div class="col-6 column">
+                                                <p class="font-semibold">{{ i18n "description" }}</p>
+                                              </div>
+                                            </div>
+                                            {{ $html | safeHTML }}
+                                          </div>
                                         </div>
+                                    {{ end }}
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid }}-{{ $response_code }}-example">
+                                    <div class="code-snippet-wrapper append-copy-btn">
+                                        {{/*  $json is a highlight hugo function  */}}
                                         {{ $json }}
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        {{ end }}
                     {{ end }}
                 {{ end }}
             {{ else }}
-                <p class="mb-2">{{ $response.description }}</p>
+                <p class="mb-2">{{ $response.description | default "No response content" }}</p>
             {{ end}}
         </div>
         {{ $count = add $count 1 }}

@@ -3,7 +3,7 @@ aliases:
 - /fr/graphing/using_graphs/
 description: Interroger vos données pour mieux les comprendre
 further_reading:
-- link: https://learn.datadoghq.com/course/view.php?id=8
+- link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: Centre d'apprentissage
   text: Améliorer vos dashboards
 kind: documentation
@@ -26,28 +26,29 @@ Depuis les widgets, ouvrez l'éditeur de graphiques en cliquant sur l'icône en 
 
 Lorsque vous ouvrez l'éditeur de graphiques pour la première fois, vous accédez à l'onglet **Edit**. De là, vous pouvez utiliser l'interface pour définir la plupart des paramètres. Voici un exemple :
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Onglet Edit des graphiques" style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Onglet Edit d'un graphique" style="width:100%;" >}}
 
 ## Configuration d'un graphique
 
 Pour configurer votre graphique sur un dashboard, suivez ce processus :
 
 1. [Sélectionner la visualisation](#selectionner-votre-visualisation)
-2. [Choisir la métrique à représenter](#choisir-la-metrique-a-representer)
-3. [Filtrer](#filtrer)
-4. [Agréger et cumuler des données](#agreger-et-cumuler-des-donnees)
-5. [Appliquer des fonctions supplémentaires](#creer-des-graphiques-avances)
-6. [Donner un titre au graphique](#creer-un-titre)
+2. [Définir la métrique](#definir-la-metrique)
+3. [Filtrer votre métrique](#filtrer)
+4. [Configurer l'agrégation temporelle](#configurer-l-agregation-temporelle)
+5. [Configurer l'agrégation spatiale](#configurer-l-agregation-spatiale)
+6. [Appliquer une fonction](#creer-des-graphiques-avances)
+7. [Donner un titre au graphique](#creer-un-titre)
 
 ### Sélectionner votre visualisation
 
 Sélectionnez votre visualisation à partir des [widgets][3] disponibles.
 
-### Choisir la métrique à représenter
+### Définir la métrique
 
 Choisissez la métrique à représenter en la recherchant ou en la sélectionnant dans la liste déroulante à côté de **Metric**. Si vous ne savez pas quelle métrique utiliser, la liste déroulante de métriques fournit des informations supplémentaires, y compris `unit`, `type`, `interval`, `description`, `tags` et le nombre de `tag values`. 
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:100%;">}}
 
 Explorez vos métriques plus en détail depuis la page [Metrics Explorer][4] ou un [Notebook][5], ou consultez la liste des métriques sur la page [Metrics Summary][6].
 
@@ -55,11 +56,10 @@ Explorez vos métriques plus en détail depuis la page [Metrics Explorer][4] ou 
 
 La métrique choisie peut être filtrée en fonction d'un host ou d'un tag à l'aide du menu déroulant **from** à droite de la métrique. Le filtre par défaut est *(everywhere)*.
 
-{{< img src="dashboards/querying/filter-2.png" alt="Filtre sur un graphique" style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="Filtrer le graphique avec le champ 'from', à l'aide de template variables et d'une logique booléenne" style="width:100%;" >}}
 
-Vous pouvez également utiliser le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer les requêtes avec des filtres basés sur un opérateur booléen ou des wildcards, comme suit :
-
-{{< img src="dashboards/querying/booleanfilters.png" alt="Création d'un graphique avec filtres booléens" style="width:75%;" >}} 
+- Utilisez le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer les requêtes avec des filtres basés sur un opérateur booléen ou des wildcards.
+- Filtrez de façon dynamique des requêtes grâce aux template variables. Ajoutez le caractère `$` devant la clé d'un tag pour filtrer automatiquement le graphique en fonction du tag sélectionné dans la liste déroulante des template variables. Pour en savoir plus, consultez la section [Template variables][16].
 
 Pour en savoir plus sur les tags, consultez la [documentation relative au tagging][8].
 
@@ -69,23 +69,17 @@ Pour en savoir plus sur les tags, consultez la [documentation relative au taggin
 
 La méthode d'agrégation est indiquée à côté de la liste déroulante du filtre. La méthode par défaut est `avg by`, mais vous pouvez la définir sur `max by`, `min by` ou `sum by`. Dans la plupart des cas, la métrique possède de nombreuses valeurs issues d'un grand nombre de hosts ou d'instances pour chaque intervalle de temps. La méthode d'agrégation choisie détermine comment les valeurs de la métrique sont agrégées en une seule ligne.
 
-#### Groupes d'agrégation
-
-Après la méthode d'agrégation, vous pouvez déterminer ce qui constitue une ligne ou un groupe dans un graphique. Par exemple, si vous choisissez `host`, une ligne apparaîtra pour chaque `host`. Chaque ligne représente la métrique sélectionnée pour un `host` spécifique, ses valeurs étant agrégées selon la méthode choisie.
-
-En outre, vous pouvez cliquer sur les tags dans la liste déroulante utilisée pour [choisir la métrique](#choisir-la-metrique-a-representer) afin de regrouper et d'agréer vos données.
-
-#### Agréger vos données au fil du temps avec la fonction rollup
+#### Configurer l'agrégation temporelle
 
 Indépendamment des options précédemment choisies, en raison des contraintes de taille physique de la fenêtre du graphique, les données font toujours l'objet d'une certaine agrégation. Si une métrique est mise à jour toutes les secondes et que vous consultez 4 heures de données, vous avez besoin d'afficher 14 400 points pour tout représenter. Chaque graphique illustre environ 300 points à la fois. Ainsi, chaque point de données affiché à l'écran représente 48 points de données.
 
-Dans la pratique, les métriques sont recueillies par l'Agent toutes les 15 à 20 secondes. Ainsi, un jour de données représente 4 320 points. Si vous représentez les données d'un jour entier sur un seul graphique, les données sont automatiquement cumulées par Datadog. Pour en savoir plus, consultez la page [Présentation des métriques][9].
+Dans la pratique, les métriques sont recueillies par l'Agent toutes les 15 à 20 secondes. Ainsi, un jour de données représente 4 320 points. Si vous représentez les données d'un jour entier sur un seul graphique, les données sont automatiquement cumulées par Datadog. Pour en savoir plus sur l'agrégation temporelle, consultez la page [Présentation des métriques][9]. Consultez la documentation sur la fonction [Rollup][10] pour en savoir plus sur les intervalles de cumul et découvrir comment Datadog effectue automatiquement un cumul des points de données.
 
-Pour cumuler manuellement les données, utilisez la [fonction rollup][10]. Cliquez sur le signe « + » à droite du groupe d'agrégation et choisissez `rollup` dans la liste déroulante. Choisissez ensuite la méthode d'agrégation de vos données ainsi que l'intervalle en secondes.
+Pour cumuler manuellement les données, utilisez la [fonction rollup][11]. Cliquez sur l'icône Sigma pour ajouter une fonction et sélectionnez `rollup` dans le menu déroulant. Choisissez ensuite la méthode d'agrégation de vos données ainsi que l'intervalle en secondes.
 
 Cette requête crée une ligne unique représentant l'espace disque total disponible en moyenne sur l'ensemble des machines déployées, avec un intervalle de cumul des données de 1 minute :
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-2.png" alt="exemple de cumul" style="width:90%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="Exemple d'utilisation de la fonction rollup sur la métrique system.disk.free. L'icône Sigma permettant d'ajouter une fonction est mise en évidence " style="width:100%;">}}
 
 Lorsque vous passez à la vue JSON, voici à quoi ressemble la requête :
 
@@ -134,15 +128,21 @@ Le JSON complet ressemble à ce qui suit :
 
 Pour obtenir davantage d'informations sur l'utilisation de la vue JSON, consultez la section [Graphiques JSON][1].
 
+#### Configurer l'agrégation spatiale
+
+Après la méthode d'agrégation, vous pouvez déterminer ce qui constitue une ligne ou un groupe dans un graphique. Par exemple, si vous choisissez `host`, une ligne apparaîtra pour chaque `host`. Chaque ligne représente la métrique sélectionnée pour un `host` spécifique, ses valeurs étant agrégées selon la méthode choisie.
+
+En outre, vous pouvez cliquer sur les tags dans la liste déroulante utilisée pour [définir la métrique](#definir-la-metrique) afin de regrouper et d'agréer vos données.
+
 ### Créer des graphiques avancés
 
-En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres fonctions mathématiques à votre requête. Vous pouvez par exemple calculer les taux et les dérivées, appliquer un lissage, et plus encore. Consultez la [liste des fonctions disponibles][11].
+En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres fonctions mathématiques à votre requête. Vous pouvez par exemple calculer les taux et les dérivées, appliquer un lissage, et plus encore. Référez-vous à la [liste des fonctions disponibles][12].
 
 Datadog vous permet également de représenter graphiquement vos métriques, logs, traces et autres sources de données avec différentes opérations arithmétiques. Utilisez les options `+`, `-`, `/`, et `*` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe accepte à la fois des nombres entiers et des opérations arithmétiques sur plusieurs métriques.
 
 Pour représenter les métriques séparément, ajoutez une virgule (`,`). Par exemple, `a, b, c`.
 
-**Remarque** : les requêtes utilisant des virgules sont uniquement prises en charge dans les visualisations et ne fonctionnent pas sur les monitors. Utilisez des [opérateurs booléens][12] ou des opérations arithmétiques pour combiner plusieurs métriques dans un monitor.
+**Remarque** : les requêtes utilisant des virgules sont uniquement prises en charge dans les visualisations et ne fonctionnent pas sur les monitors. Utilisez des [opérateurs booléens][13] ou des opérations arithmétiques pour combiner plusieurs métriques dans un monitor.
 
 #### Opérations arithmétiques avec un entier
 
@@ -188,28 +188,32 @@ Si vous ne saisissez pas de titre, Datadog en génère un automatiquement en fon
 
 Cliquez sur **Done** pour enregistrer votre travail et quitter l'éditeur. Vous pourrez toujours revenir à l'éditeur pour modifier le graphique. Si vous ne souhaitez pas enregistrer les modifications effectuées, cliquez sur **Cancel**.
 
-## Configuration d'un graphique de statistiques APM
-
-Pour configurer votre graphique à l'aide des données statistiques de l'APM, suivez ces étapes :
-
-1. [Sélectionner votre visualisation](#selectionner-votre-visualisation) (procédure identique à celle des métriques)
-2. [Choisir votre niveau de détail](#niveau-de-detail)
-3. [Choisir vos paramètres](#parametres-des-statistiques-de-l-APM)
-4. [Donner un titre au graphique](#creer-un-titre) (procédure identique à celle des métriques)
-
-### Niveau de détail
-Choisissez le niveau de détail pour lequel vous souhaitez visualiser des statistiques : services, ressources ou spans. Tous les niveaux de détail ne sont pas disponibles pour chaque type de widget.
-
-### Paramètres des statistiques de l'APM
-Sélectionnez les paramètres suivants depuis l'éditeur de graphiques : Environnement (`env`), Tag primaire (`primary_tag`), Service (`service`) et Nom de l'opération (`name`).
-
-Si le niveau de détail choisi correspond à une ressource ou à une span, vous devrez également sélectionner un Nom de ressource (`resource`) pour certains types de widget afin d'affiner le contexte de votre requête.
-
 ## Options supplémentaires
 
 ### Superposition d'événements
 
-Identifiez les corrélations avec vos événements à l'aide de la section **Event Overlays** dans l'éditeur de graphiques. Dans la barre de recherche, saisissez du texte ou une requête de recherche structurée. Pour en savoir plus sur les recherches, consultez la documentation sur le [langage de requête d'événement][13] de Datadog.
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Widget Série temporelle affichant les taux d'erreurs RUM avec les événements de déploiement en superposition" style="width:100%;" >}}
+
+Identifiez les corrélations avec vos événements à l'aide de la section **Event Overlays** dans l'éditeur de graphiques pour la visualisation de [Séries temporelles][15]. Dans la barre de recherche, saisissez du texte ou une requête de recherche structurée. La recherche d'événements utilise la [syntaxe de recherche de logs][14].
+
+La superposition d'événements prend en charge toutes les sources de données. Vous pouvez ainsi facilement mettre en corrélation les événements au sein de votre entreprise avec les données de n'importe quel service Datadog.
+
+La superposition d'événements vous permet de déterminer rapidement comment les actions effectuées au sein de votre organisation affectent les performances de vos applications et de votre infrastructure. Voici quelques exemples de cas d'utilisation :
+- Affichage des taux d'erreurs RUM avec les événements de déploiement superposés
+- Mise en corrélation de la charge CPU avec les événements associés au provisionnement de serveurs supplémentaires
+- Mise en corrélation du trafic de sortie avec les activités de connexion suspectes
+- Mise en corrélation des données de séries temporelles avec les alertes de monitor pour vérifier que les alertes appropriées ont bien été configurées dans Datadog
+
+
+### Graphique partagé
+
+Les graphiques partagés vous permettent de visualiser des représentations d'une métrique en fonction de différents tags.
+
+{{< img src="dashboards/querying/split_graph_beta.png" alt="Graphiques partagés de la métrique dans le widget plein écran" style="width:100%;" >}}
+
+1. Pour accéder à cette fonctionnalité, cliquez sur l'onglet **Split Graph** lorsque vous visualisez un graphique.
+1. Utilisez le champ *sort by* pour modifier la métrique de tri et visualiser la relation entre les données représentées sur le graphique et d'autres métriques.
+1. Pour limiter le nombre de graphique affichés, modifiez la valeur du champ *limit to*.
 
 ## Pour aller plus loin
 
@@ -223,8 +227,11 @@ Identifiez les corrélations avec vos événements à l'aide de la section **Eve
 [6]: https://app.datadoghq.com/metric/summary
 [7]: /fr/metrics/advanced-filtering/
 [8]: /fr/getting_started/tagging/
-[9]: /fr/metrics/introduction/
-[10]: /fr/dashboards/functions/rollup/
-[11]: /fr/dashboards/functions/#apply-functions-optional
-[12]: /fr/metrics/advanced-filtering/#boolean-filtered-queries
-[13]: /fr/events/#event-query-language
+[9]: /fr/metrics/#time-aggregation
+[10]: /fr/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[11]: /fr/dashboards/functions/rollup/
+[12]: /fr/dashboards/functions/#function-types
+[13]: /fr/metrics/advanced-filtering/#boolean-filtered-queries
+[14]: /fr/logs/explorer/search_syntax/
+[15]: /fr/dashboards/widgets/timeseries/#event-overlay
+[16]: /fr/dashboards/template_variables/

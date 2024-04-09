@@ -11,11 +11,11 @@ aliases:
 
 ## Definition
 
-Recovery thresholds are optional thresholds added to a monitor to indicate an additional condition to a monitor’s recovery from alert or warning states.
+Recovery thresholds are optional thresholds added to a monitor to indicate an additional condition to a monitor's recovery from alert or warning states.
 
 ## Behavior
 
-The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has **passed** the recovery threshold. If no recovery threshold is set, the monitor recovers whenever the alert conditions are no longer met.
+The recovery threshold adds a condition to the monitor's recovery such that it only enters recovered state once it has **passed** the recovery threshold. If no recovery threshold is set, the monitor recovers whenever the alert conditions are no longer met.
 
 The recovery threshold is satisfied with the recovery condition is met. The recovery condition varies based on the alert condition:
 

@@ -21,7 +21,7 @@ type: multi-code-lang
 ---
 ## 互換性要件
 
-最新の Java トレーサーは、すべてのプラットフォームの JVM バージョン 7 以降に対応しています。
+最新の Java トレーサーは、バージョン 8 以上のすべての JVM をサポートしています。8 以下の JVM バージョンに関する追加情報は、[サポートする JVM ランタイム][10]をお読みください。
 
 Datadog の Java バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
 
@@ -35,7 +35,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 - `service`、`env`、`version` タグを動的に設定します。
 - セットアップ中に Continuous Profiler、トレースの 100% の取り込み、およびトレース ID 挿入を有効にします。
 
-### APM に Datadog Agent を構成する
+### APM 用に Datadog Agent を構成する
 
 インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
@@ -56,6 +56,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
    DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+
    ```
 
    ```bash
@@ -72,7 +73,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
    同様に、トレースクライアントは Unix ドメインソケット `/var/run/datadog/dsd.socket` に統計情報を送信しようと試みます。ソケットが存在しない場合、統計情報は `http://localhost:8125` に送信されます。
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -104,19 +105,23 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 
 ### アプリケーションのインスツルメンテーション
 
+<div class="alert alert-info">Kubernetes アプリケーション、または Linux ホストやコンテナ上のアプリケーションからトレースを収集する場合、以下の説明の代わりに、アプリケーションにトレーシングライブラリを挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local">ライブラリの挿入</a>をお読みください。</div>
+
 Agent のインストール後、アプリケーションをトレースする場合は以下の操作を行ってください。
 
-1. 最新の Agent クラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
+1. 最新のトレーサークラスファイルを含む `dd-java-agent.jar` を、Datadog ユーザーがアクセス可能なフォルダにダウンロードします。
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
-   特定のトレーサーバージョンにアクセスするには、Datadog の [Maven リポジトリ][3]を参照してください。
+
+   **注:** 特定の**メジャー**バージョンの最新ビルドをダウンロードするには、代わりに `https://dtdg.co/java-tracer-vX` リンクを使用します。ここで `X` は希望するメジャーバージョンです。
+   例えば、最新のバージョン 1 のビルドには `https://dtdg.co/java-tracer-v1` を使用します。マイナーバージョン番号を含めることはできません。また、特定のバージョンについては、Datadog の [Maven リポジトリ][3]を参照してください。
 
 2. IDE、Maven または Gradle アプリケーションスクリプト、`java -jar` コマンドから、Continuous Profiler、デプロイ追跡、ログ挿入（Datadog へログを送信する場合）を使用してアプリケーションを実行するには、`-javaagent` JVM 引数と、該当する以下のコンフィギュレーションオプションを追加します。
 
     ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
 
     **注:** プロファイリングを有効にすると、APM のバンドルによっては請求に影響を与える場合があります。詳しくは、[料金ページ][4]を参照してください。
@@ -274,3 +279,4 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 [7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: /ja/tracing/trace_collection/library_config/java/
+[10]: /ja/tracing/trace_collection/compatibility/java/#supported-jvm-runtimes

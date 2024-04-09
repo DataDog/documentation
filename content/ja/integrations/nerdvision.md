@@ -1,10 +1,13 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: nerdvision
 app_uuid: dace6217-8e5b-4b96-ae65-b0b58d44cc3e
 assets:
   dashboards:
     NerdVision Overview: assets/dashboards/overview.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +17,7 @@ assets:
       prefix: nerdvision.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10140
     source_type_name: NerdVision
 author:
   homepage: https://nerd.vision
@@ -22,10 +26,8 @@ author:
   support_email: support@nerd.vision
   vendor_id: nerdvision
 categories:
-- マーケットプレイス
-- containers
 - ログの収集
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +41,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: nerdvision
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -53,20 +54,21 @@ public_title: NerdVision
 short_description: .NET、Java、Python、Node 向けのライブデバッガ
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
-  - Category::Containers
   - Category::Log Collection
-  - Category::Monitoring
-  - Offering::Software License
+  - Category::Marketplace
   - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: .NET、Java、Python、Node 向けのライブデバッガ
   media:
@@ -91,6 +93,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -114,32 +117,43 @@ NerdVision はアプリケーションにトレースポイントをインスト
 Datadog ダッシュボードはコード内でトレースポイントがトリガーされる際の重要なインサイトを提供します。
 このデータを活用してデバッグのホットスポットを特定することができます。
 
-### イベント
+### ヘルプ
 
 トリガーされる各トレースポイントは、適切なタグと NerdVision でデータを閲覧できるリンクを含むイベントとして Datadog に送信されます。
 トレースポイントを利用して、トレースポイントがトリガーされるフレームでアクティブなスタック全体および変数を
 収集することができます。
 
-### ログ管理
+### ワークフローの自動化
 
 動的なロギングにより、コードのどの箇所にでも新しいログメッセージを挿入し、欠けていたデータを追加することができます。
 トリガーされるそれぞれのログメッセージは、NerdVision で処理されてからすぐに Datadog と同期されます。
 
-### メトリクス
+### データセキュリティ
 
 NerdVision はオンラインクライアントおよびトレースポイントのトリガー向けにメトリクスを生成します。
 
-### サービスのチェック
+### ヘルプ
 
 NerdVision には、サービスのチェック機能は含まれません。
 
-## サポート
+## Agent
 
-サポートまたはリクエストをご希望の場合は、以下のチャンネルから NerdVision にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから NerdVision にお問い合わせください。
 
-メールアドレス: support@nerd.vision
+- メール: [support@nerd.vision][4]
 
-[こちら](https://docs.nerd.vision/)でドキュメントをご確認いただけます。
+### その他の参考資料
 
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の NerdVision のインテグレーションを使ってデバッグデータを監視する][5]
+- [NerdVision ドキュメント][6]
+
+[1]: https://app.nerd.vision
+[2]: https://app.nerd.vision/setup
+[3]: https://app.nerd.vision
+[4]: mailto:support@nerd.vision
+[5]: https://www.datadoghq.com/blog/monitor-nerdvision-datadog-marketplace/
+[6]: https://docs.nerd.vision/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/nerdvision" target="_blank">こちらをクリック</a>してください。

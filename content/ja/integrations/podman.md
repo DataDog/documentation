@@ -3,11 +3,13 @@ app_id: podman
 app_uuid: ecc06845-18ac-448e-b352-1bbf31fdfcc3
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10267
     source_type_name: Podman
 author:
   homepage: https://www.datadoghq.com
@@ -28,7 +30,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: podman
-oauth: {}
 public_title: Podman
 short_description: Podman コンテナのすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -46,6 +47,7 @@ tile:
   title: Podman
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 [Podman][1] は、Linux システムで OCI コンテナを開発、管理、実行するためのデーモンレスコンテナエンジンです。コンテナは、ルートで実行することも、ルートレスで実行することも可能です。
@@ -57,19 +59,19 @@ Podman コンテナランタイムは、[コンテナ Agent チェック][2]で�
 
 **注**: `container` チェックレポートは、コンテナランタイムに関係なく、システム上で見つかったすべてのコンテナのメトリクスを標準化します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Podman][1] で管理されているコンテナを監視するには、[コンテナ Agent チェック][2]の[インストール手順][3]をご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][4] を参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 

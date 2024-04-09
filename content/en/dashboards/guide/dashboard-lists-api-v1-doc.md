@@ -91,7 +91,7 @@ curl -X GET \
                 'name': None
             },
             'url': '/screen/integration/66/aws-dynamodb',
-            'title': 'AWS DynamoDB',
+            'title': 'Amazon DynamoDB',
             'modified': None,
             'created': None,
             'is_favorite': True,
@@ -183,7 +183,7 @@ curl -X GET \
         "total" => 5,
         "dashboards" => [
             {
-                "title" => "AWS DynamoDB",
+                "title" => "Amazon DynamoDB",
                 "is_favorite" => true,
                 "id" => 66,
                 "icon" => "/static/v/34.254868/images/saas_logos/small/amazon_dynamodb.png",
@@ -287,7 +287,7 @@ curl -X GET \
                 "name": None
             },
             "url": "/screen/integration/66/aws-dynamodb",
-            "title": "AWS DynamoDB",
+            "title": "Amazon DynamoDB",
             "modified": None,
             "created": None,
             "is_favorite": True,

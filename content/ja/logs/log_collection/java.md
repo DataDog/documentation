@@ -23,11 +23,16 @@ further_reading:
 - link: https://www.datadoghq.com/blog/java-logging-guide/
   tag: ブログ
   text: Java ログの収集、カスタマイズ、標準化方法
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: Java ログ収集
 ---
 
-一般的な Java ログのスタックトレースは複数の行に分割されているため、元のログイベントに関連付けることが困難です。
+ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で[テール][14]します。
+
+一般的な Java ログのスタックトレースは複数の行に分割されているため、元のログイベントに関連付けることが困難です。例:
 
 ```java
 //1 つのはずのイベントに、4 つのイベントが生成される
@@ -37,14 +42,12 @@ Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-この複雑さを軽減するには、ログを JSON 形式で生成するようにログライブラリを構成します。JSON にログすると、次のことができます。
+この問題を解決するには、ログを JSON 形式で生成するようにログライブラリを構成します。JSON にログすると、次のことができます。
 
 * スタックトレースがログイベントに適切にラップされることを確実にします。
 * すべてのログイベント属性 (重大度、ロガー名、スレッド名など) が適切に抽出されることを確実にします。
 * [マップされた診断コンテキスト (MDC)][1] 属性にアクセスできます。この属性は、任意のログイベントにアタッチできます。
 * [カスタムパースルール][2]が不要になります。
-
-**ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で調整します。**
 
 次の手順は、Log4j、Log4j 2、および Logback ログライブラリのセットアップ例を示しています。
 
@@ -118,7 +121,7 @@ Log4j 2 には JSON レイアウトが含まれています。
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.17.0</version>
+        <version>2.17.1</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -173,6 +176,30 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     ```
 
 [1]: https://github.com/logstash/logstash-logback-encoder
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力する JSON ライターの構成を作成します。
+
+
+`tinylog.properties` ファイルには以下のフォーマットを使用します。
+
+```properties
+writer                     = json
+writer.file                = log.json
+writer.format              = LDJSON
+writer.level               = info
+writer.field.level         = level
+writer.field.source        = {class}.{method}()
+writer.field.message       = {message}
+writer.field.dd.trace_id   = {context: dd.trace_id}
+writer.field.dd.span_id    = {context: dd.span_id}
+writer.field.dd.service    = {context: dd.service}
+writer.field.dd.version    = {context: dd.version}
+writer.field.dd.env        = {context: dd.env}
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -255,6 +282,22 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 ```
 
 {{% /tab %}}
+{{% tab "Tinylog" %}}
+
+[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力するライターの構成を作成します。
+
+
+`tinylog.properties` ファイルには以下のフォーマットを使用します。
+
+```properties
+writer          = file
+writer.level    = debug
+writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "dd.span_id":{context: dd.span_id}
+writer.file     = log.txt
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
+{{% /tab %}}
 {{< /tabs >}}
 
 #### ログへのトレース ID の挿入
@@ -276,8 +319,8 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     logs:
 
       - type: file
-        path: "/path/to/your/java/log.log"
-        service: java
+        path: "<path_to_your_java_log>.log"
+        service: <service_name>
         source: java
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -289,6 +332,8 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 
 3. [Agent を再起動します][7]。
 4. [Agent の status サブコマンド][8]を実行し、`Checks` セクションで `java` を探し、ログが Datadog に正常に送信されることを確認します。
+
+ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][9]し、ログ属性を抽出します。[ログエクスプローラー][10]を使用して、ログを表示し、トラブルシューティングを行うことができます。
 
 ## エージェントレスのログ収集
 
@@ -333,7 +378,7 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Log4j 2" %}}
 
@@ -344,7 +389,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.17.0</version>
+        <version>2.17.1</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
@@ -367,17 +412,17 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
 ### Logback を構成する
 
-[logstash-logback-encoder][9] ログライブラリを Logback と一緒に使用して、ログを Datadog に直接ストリーミングします。
+[logstash-logback-encoder][11] ログライブラリを Logback と一緒に使用して、ログを Datadog に直接ストリーミングします。
 
 1. `logback.xml` ファイルに TCP アペンダーを構成します。この構成では、API キーは環境変数 `DD_API_KEY` から取得されます。あるいは、コンフィギュレーションファイルに直接 API キーを挿入することもできます。
 
-    {{< site-region region="us,us3,us5" >}}
+    {{< site-region region="us,us3,us5,ap1" >}}
 
   ```xml
   <configuration>
@@ -441,7 +486,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
   サポートされていません。
     {{< /site-region >}}
 
-   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][10]を参照してください。
+   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][12]を参照してください。
 
 2. Logstash エンコーダの依存関係を `pom.xml` ファイルに追加します。
 
@@ -464,7 +509,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 ### キー値パーサーの使用
 
-[キー値パーサー][11]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
+[キー値パーサー][13]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
 
 Java のログイベントを補完するには、コードでメッセージを書き直し、`<キー>=<値>` のシーケンスを挿入します。
 
@@ -517,7 +562,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 
 **注:** MDC は文字列タイプのみを許可するため、数値メトリクスには使用しないでください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -526,9 +571,12 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 [3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [5]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
-[9]: https://github.com/logstash/logstash-logback-encoder
-[10]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[11]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
+[6]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[9]: /ja/logs/log_configuration/parsing/?tab=matchers
+[10]: /ja/logs/explorer/#overview
+[11]: https://github.com/logstash/logstash-logback-encoder
+[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[13]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
+[14]: /ja/glossary/#tail

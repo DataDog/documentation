@@ -11,7 +11,7 @@ Additional containers are billed at an [additional cost][1] per container per ho
 
 ### Kubernetes
 
-Kubernetes creates pause containers (requires Agent v5.8+) to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent v7.20+ for AWS EKS pause container exclusion). 
+Kubernetes creates pause containers (requires Agent v5.8+) to acquire the respective pod's IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent v7.20+ for AWS EKS pause container exclusion). 
 
 ### Fargate
 
@@ -41,7 +41,7 @@ The on-demand calculations are performed using the allotment that is based on th
 
 **Are Datadog Agent containers counted against the allocation?**
 
-No.
+No, the Datadog Agent containers are not counted against your 5 (Pro tier) or 10 (Enterprise tier) allocation.
 
 **Are containers belonging to pods in constant `CrashLoopBackoff` counted?**
 

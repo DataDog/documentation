@@ -19,7 +19,7 @@ La fonctionnalité Network Device Monitoring utilise des profils pour indiquer �
 
 Par défaut, tous les profils dans le répertoire de configuration sont chargés. Pour personnaliser les profils spécifiques à recueillir, spécifiez leur nom de fichier sous `definition_file`, ou incorporez-les sous forme de liste à `definition`. Tous les profils Datadog peuvent être spécifiés en indiquant leur nom. Pour fournir des profils personnalisés supplémentaires, indiquez leur chemin dans la configuration, ou ajoutez-les au répertoire de configuration.
 
-**Remarque **: le profil générique est [generic_router.yaml][1], qui prend en charge les routeurs, les switchs, etc.
+**Remarque **: le profil générique est [generic-device.yaml][1], qui prend en charge les routeurs, les switchs, etc.
 
 ### Appareils mappés avec un sysOID
 
@@ -64,5 +64,5 @@ Pour en savoir plus sur les profils fournis par Datadog, consultez le [référen
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-router.yaml
+[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-device.yaml
 [2]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles

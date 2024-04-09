@@ -1,9 +1,10 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- data store
+- google cloud
+- ログの収集
+- モバイル
 dependencies: []
 description: Google Cloud Firestore のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_firestore/
@@ -21,6 +22,7 @@ public_title: Datadog-Google Cloud Firestore インテグレーション
 short_description: Google Cloud Firestore のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Firestore は、Firebase と Google Cloud Platform によるモバイル、Web、およびサーバー開発に対応した柔軟で拡張性の高いデータベースです。

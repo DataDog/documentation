@@ -152,10 +152,10 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 Next, download the Java tracing library (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
 
 {{< code-block lang="sh" >}}
-curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
-If your operating system does not support curl, you can go directly to `https://dtdg.co/latest-java-tracer ` to download the `dd-java-agent.jar` file.
+If your operating system does not support curl, you can go directly to `'https://dtdg.co/latest-java-tracer' ` to download the `dd-java-agent.jar` file.
 
 ## Launch the Java application with automatic instrumentation
 
@@ -240,13 +240,13 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library uses Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 In addition to the `javaagent` flag, which enables the Java Agent, the launch commands specify three [Unified Service Tagging][10] settings to uniquely identify your application within Datadog. Always specify `env`, `service`, and `version` tags for every monitored application.
 
 And finally, the `dd.trace.sample.rate` flag sets the sample rate for this application. The launch commands above set its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-Notice that the flags in the commands appear _before_ the `-jar` flag. That’s because these are parameters for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flags in the right location.
+Notice that the flags in the commands appear _before_ the `-jar` flag. That's because these are parameters for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flags in the right location.
 
 
 ## Add manual instrumentation to the Java application
@@ -438,7 +438,7 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [2]: /tracing/trace_collection/dd_libraries/java/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/java/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /getting_started/site/
 [7]: https://www.baeldung.com/java-instrumentation
 [8]: https://app.datadoghq.com/event/explorer

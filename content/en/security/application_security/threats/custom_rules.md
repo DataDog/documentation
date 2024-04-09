@@ -24,13 +24,23 @@ further_reading:
 
 ## Overview
 
-Application Security Management (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
+Application Security Management (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.
 
-However, there are situations where you may want to customize a rule based on your environment. For example, you may want to customize a detection rule that catches attack attempts on a pre-production development route that accepts SQL and returns the results. Catching SQL attempts is noisy, as the route is restricted to internal developers; therefore you can customize this rule to exclude these patterns.
+However, there are situations where you may want to customize a rule based on your environment or workload. For example, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
 
 Another example is customizing a rule to exclude an internal security scanner. ASM detects its activity as expected. However, you may not want to be notified of its regularly occurring scan.
 
 In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for ASM.
+
+## Business logic abuse detection rule
+
+ASM offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
+
+Recent Datadog Tracing Libraries attempt to detect and send user login and signup events automatically without needing to modify the code. If needed, you can [opt out of the automatic user activity event tracking][8].
+
+You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic. 
+
+See the section below to see how to configure your rules.
 
 ## Configuration
 
@@ -38,35 +48,37 @@ To customize an OOTB detection rule, you must first clone an existing rule. Navi
 
 ### Define an ASM query
 
-Construct an ASM query using the [same query syntax as in the APM Trace Explorer][3]. For example, create a query to monitor an endpoint for SQL injection attempts: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+Construct an ASM query using the [same query syntax as in the ASM Trace Explorer][3]. For example, create a query to monitor login successes from outside of the United States: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
-Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user or IP). The group-by is also used to [join the queries together](#joining-queries).
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user, IP, or service). The group-by is also used to [join the queries together](#joining-queries).
 
-You can add additional queries with the Add Query button.
-
-##### Advanced options
-
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a service is triggering a signal, but the action is benign and you no longer want signals triggered from this service, create a logs query that excludes `Service` under the **Never trigger a signal when:** option.
+Use the preview section to see which ASM traces match the search query. You can also add additional queries with the Add Query button.
 
 ##### Joining queries
 
 Joining queries to span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful attack, both successful and unsuccessful triggers can be correlated for a service.
 
-Queries are correlated together by using a `group by` value. The `group by` value is typically an entity (for example, `IP address` or `Service`), but can be any attribute.
+Queries are correlated together by using a `group by` value. The `group by` value is typically an entity (for example, `IP` or `Service`), but can be any attribute.
 
-For example, create opposing queries that search for the same `sql_injection` activity, but append opposing HTTP path queries for successful and unsuccessful attempts:
+For example, create opposing queries that search for the same `business_logic.users.login.success` activity, but append opposing HTTP path queries for successful and unsuccessful attempts:
 
-Query 1: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+Query 1: `@appsec.security_activity:business_logic.users.login.success @actor.ip_details.country.iso_code:US`.
 
-Query 2: `@appsec.type:sql_injection @http.url_details.path:"/debug-endpoint-executing-sql" env:production`.
+Query 2: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
-In this instance, the joined queries technically hold the same attribute value: the value must be the same for the case to be met. If a `group by` value doesn’t exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+In this instance, the joined queries technically hold the same attribute value: the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+
+### Exclude benign activity with suppression queries
+
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a service is triggering a signal, but the action is benign and you no longer want signals triggered from this service, create a query that excludes `service`.
 
 ### Set a rule case
 
 #### Trigger
 
-Rule cases, such as `successful trigger > 0`, are evaluated as case statements. Thus, the first case to match generates the signal. Create one or multiple rule cases, and click on the grey area next to them to drag and manipulate their orderings.
+Rule cases, such as `successful login > 0`, are evaluated as case statements. Thus, the first case to match generates the signal. Create one or multiple rule cases, and click on the grey area next to them to drag and manipulate their orderings.
 
 A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries.
 
@@ -76,100 +88,21 @@ Provide a **name** for each rule case. This name is appended to the rule name wh
 
 #### Severity and notification
 
-Set the severity of the signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the "Notify" section, configure zero or more [notification targets][4] for each rule case.
-
-You can also create [notification rules][5] to alleviate manual edits to notification preferences for individual detection rules.
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real time.
+{{% security-rule-time-windows %}}
 
-When a signal is generated, it remains "open" if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
-
-A signal will "close" regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
-
-Additional cases can be added by clicking the **Add Case** button.
+Click **Add Case** to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ### Say what's happening
 
-The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the signal.
+{{% security-rule-say-whats-happening %}}
 
-Use [Notification Variables][5] to provide specific details about the signal by referencing its tags and event attributes.
-
-#### Template variables
-
-Use [template variables][6] to inject dynamic context from traces directly into a security signal and its associated notifications.
-
-Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation. For example:
-
-```text
-* [Investigate service in the services dashboard](https://app.datadoghq.com/example/integration/application-security---service-events?tpl_var_service={{@service}})
-```
-
-Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification. For example:
-
-```text
-{{eval "first_seen_epoch-15*60*1000"}}
-```
-
-The attributes can be seen on a signal in the JSON dropdown, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
-
-**Note**: You can copy the raw JSON directly from a security signal. Select any security signal in the Signals Explorer to view its details. Click the export button in the top left corner, and select **Copy raw JSON to clipboard**.
-
-This JSON object is an example of event attributes which may be associated with a security signal:
-
-```json
-{
-  "attributes":{
-    "title":"Security scanner detected",
-    "http":{
-      "url":"http://www.example.com"
-    },
-    "rule":{
-      "detectionMethod":"threshold",
-      "name":"Your rule name"
-    },
-    "events_matched":2,
-    "first_seen":"2022-01-26T13:23:33.000Z",
-    "last_seen":"2022-01-27T04:01:57.000Z"
-  },
-  "groupByPaths":[
-    "service"
-  ]
-}
-```
-
-For this attribute, use the following in the **Say what's happening** section:
-
-```
-Real routes targeted for {{@service}}.
-```
-
-This renders your service name in any notifications you receive.
-
-```
-Real routes targeted for `your_service_name`.
-```
-
-You can also use if-else logic to see if an attribute exists with the notation:
-
-```
-{{#if @network.client.ip}}The attribute IP attribute exists.{{/if}}
-```
-
-Or use if-else logic to see if an attribute matches a value:
-
-```
-{{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
-```
-
-See [Template Variables][6] for more information.
-
-Use the Tag Resulting Signals dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`.
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `attack:sql-injection-attempt`.
 
 **Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
@@ -183,3 +116,6 @@ Use the Tag Resulting Signals dropdown to tag your signals with different tags. 
 [4]: /monitors/notify/?tab=is_alert#integrations
 [5]: /security/notifications/variables/
 [6]: /security/notifications/variables/#template-variables
+[7]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[8]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+

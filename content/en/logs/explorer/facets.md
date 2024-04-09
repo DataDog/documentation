@@ -31,39 +31,9 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-{{< site-region region="gov,us3,us5" >}}
-
-**Note**: You do not need facets to support [log processing][1], [livetail search][2], [archive][3] forwarding, rehydration, or [metric generation][4] from logs. You also do not need facets for routing logs through to [Pipelines][5] and [Indexes][6] with filters, or excluding or sampling logs from indexes with [exclusion filters][7]. 
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][30], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
 
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
-
-[1]: /logs/log_configuration/processors
-[2]: /logs/live_tail/
-[3]: /logs/archives/
-[4]: /logs/logs_to_metrics/
-[5]: /logs/log_configuration/pipelines
-[6]: /logs/indexes/#indexes-filters
-[7]: /logs/indexes/#exclusion-filters
-
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
-
-**Note**: You do not need facets to support [log processing][1], [livetail search][2], [log explorer search][8], [metric generation][4] from logs, [archive][3] forwarding, or [rehydration][9]. You also do not need facets for routing logs through to [Pipelines][5] and [Indexes][6] with filters, or excluding or sampling logs from indexes with [exclusion filters][7]. 
-
-In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
-
-[1]: /logs/log_configuration/processors
-[2]: /logs/live_tail/
-[3]: /logs/archives/
-[4]: /logs/logs_to_metrics/
-[5]: /logs/log_configuration/pipelines
-[6]: /logs/indexes/#indexes-filters
-[7]: /logs/indexes/#exclusion-filters
-[8]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
-[9]: /logs/archives/rehydrating/
-
-{{< /site-region >}}
 
 ### Qualitative facets
 
@@ -71,24 +41,11 @@ In all these contexts, autocomplete capabilities rely on existing facets, but an
 
 Use qualitative facets when you need:
 
-- To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][16] web access logs, enriched with the Datadog [GeoIP Processor][17].<br/><br/>
-
+- To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][16] web access logs, enriched with the Datadog [GeoIP Processor][17].
 - To **count unique values**. For instance, create a facet on `user.email` from your [Kong][18] logs to know how many users connect every day to your website.
-
-{{< site-region region="gov,us3,us5" >}}
-- To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][1] to scope troubleshooting down to development, staging, or production environments.
-
-[1]: /getting_started/tagging/assigning_tags/
-
-{{< /site-region >}}
-{{< site-region region="us,eu" >}}
-- To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][1] to scope troubleshooting down to development, staging, or production environments.
+- To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][19] to scope troubleshooting down to development, staging, or production environments.
 
 **Note**: Although it is not required to create facets to filter on attribute values, defining them on attributes that you often use during investigations can help reduce your time to resolution.
-
-[1]: /getting_started/tagging/assigning_tags/
-
-{{< /site-region >}}
 
 #### Types
 
@@ -157,9 +114,17 @@ Hiding facets is specific to your own troubleshooting context and does not impac
 
 ### Group facets
 
-Facets are grouped into meaningful themes, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see how to [manage facets](#manage-facets)) is only a matter of display in the facet list, and has no impact on search and analytics capabilities.
+Facets are grouped into meaningful themes to ease navigation in the facet list. Assigning or reassigning a group for a facet only affects the display in the facet list and has no impact on search and analytics capabilities.
 
 {{< img src="logs/explorer/facet/group_facets.png" alt="Group Facet" style="width:30%;">}}
+
+To group facets:
+
+1. Click the cog for the facet.
+2. Select **Edit facet**.
+3. Click the **Advanced options** section to expand it.
+4. In the **Group** field, enter the name of the group that you want the facet to be in.
+5. Click **Update**.
 
 ### Filter facets
 
@@ -191,7 +156,7 @@ Facets on [Reserved Attributes][25] and most [Standard Attributes][26] are avail
 
 ### Index facet
 
-The index facet is a specific facet that appears only if your organization has [multiple indexes][27], and/or if you have active [historical views][15]. Use this facet if you want to scope down your query to a subset of your indexes.
+The index facet is a specific facet that appears only if your organization has [multiple indexes][27], and/or if you have active [historical views][28]. Use this facet if you want to scope down your query to a subset of your indexes.
 
 {{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
 
@@ -199,9 +164,9 @@ The index facet is a specific facet that appears only if your organization has [
 
 As a matter of good practice, always consider using an existing facet rather than creating a new one (see the [alias facets](#alias-facets) section). Using a unique facet for information of a similar nature fosters cross-team collaboration.
 
-To create a facet on an array of JSON objects, first use a [grok parser][28] to extract the attribute and then create a facet for that attribute.
+To create a facet on an array of JSON objects, first use a [grok parser][29] to extract the attribute and then create a facet for that attribute.
 
-**Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
+**Note**: Once a facet is created, its content is populated **for all new logs**. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
 #### Log side panel
 
@@ -273,10 +238,19 @@ To delete a facet, follow these steps:
 [4]: /monitors/types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
-[15]: /logs/log_configuration/rehydrating
+[7]: /logs/log_configuration/processors
+[8]: /logs/live_tail/
+[9]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
+[10]: /logs/logs_to_metrics/
+[11]: /logs/archives/
+[12]: /logs/archives/rehydrating/
+[13]: /logs/log_configuration/pipelines
+[14]: /logs/indexes/#indexes-filters
+[15]: /logs/indexes/#exclusion-filters
 [16]: /integrations/nginx/
 [17]: /logs/log_configuration/processors/#geoip-parser
 [18]: /integrations/kong/
+[19]: /getting_started/tagging/assigning_tags/
 [20]: /integrations/varnish/
 [21]: /integrations/ansible/
 [22]: /integrations/python/
@@ -285,4 +259,6 @@ To delete a facet, follow these steps:
 [25]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /logs/log_configuration/attributes_naming_convention
 [27]: /logs/indexes/#indexes
-[28]: /logs/log_configuration/parsing/?tab=matchers#nested-json
+[28]: /logs/log_configuration/rehydrating
+[29]: /logs/log_configuration/parsing/?tab=matchers#nested-json
+[30]: /logs/explorer/

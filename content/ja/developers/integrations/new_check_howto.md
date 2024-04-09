@@ -343,7 +343,7 @@ ddev validate config --sync awesome
   "app_id": "awesome",
   "classifier_tags": [
     "Supported OS::Linux",
-    "Supported OS::Mac OS",
+    "Supported OS::macOS",
     "Supported OS::Windows"
   ],
   "display_on_public_website": false,

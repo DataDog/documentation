@@ -3,6 +3,7 @@ app_id: signl4
 app_uuid: 07952edd-2dc5-4c11-a697-5cba325f64ee
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: signl4.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10158
     source_type_name: SIGNL4
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,47 +21,49 @@ author:
   sales_email: success@signl4.com
   support_email: success@signl4.com
 categories:
-- 問題追跡
+- アラート設定
 - コラボレーション
-- notification
-- モニタリング
+- インシデント
+- 問題追跡
+- notifications
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: signl4
 integration_id: signl4
-integration_title: SIGNL4  for Datadog
+integration_title: SIGNL4
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: signl4
-oauth: {}
-public_title: Datadog と SIGNL4 のインテグレーション
+public_title: SIGNL4
 short_description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Issue Tracking
+  - Category::Alerting
   - Category::Collaboration
-  - Category::Notification
-  - Category::Monitoring
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Notifications
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Datadog と SIGNL4 のインテグレーション
+  title: SIGNL4
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 [SIGNL4][1] インテグレーションを使用すると、Datadog のアラートを SIGNL4 チームに送信し、SIGNL4 アプリ内でシームレスにこのアラートに対応できます。
@@ -71,7 +75,7 @@ SIGNL4 を Datadog に接続すると、以下が可能になります。
 
 ![SIGNL4 App][2]
 
-## セットアップ
+## 計画と使用
 
 ### SIGNL4
 
@@ -205,21 +209,21 @@ Datadog インシデントについては、それぞれのアラートを承認
 - Datadog Application Key: Datadog のアプリケーションキー。アプリケーションキーは、自分のアカウントの Datadog で、Organization Settings -> Application Keys で検索または作成することができます。 
 - Acknowledgement as Stable: Acknowledgements は、インシデントのステータスを Stable に設定します。 
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 SIGNL4 インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 SIGNL4 でトリガーされ解決したイベントは、SIGNL4 アプリおよびウェブポータルに表示されます。
 
-### サービスのチェック
+### ヘルプ
 
 SIGNL4 インテグレーションには、サービスチェックは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 ヘルプが必要な場合は、[SIGNL4 サポート][9]までお問い合わせください。
 
 

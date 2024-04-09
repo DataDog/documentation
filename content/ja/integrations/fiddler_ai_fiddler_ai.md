@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: fiddler-ai-license
 app_uuid: cbad9445-1ce9-466e-b16f-073437eddff5
 assets: {}
@@ -10,8 +12,8 @@ author:
   vendor_id: fiddler
 categories:
 - アラート設定
-- モニタリング
 - マーケットプレイス
+- ai/ml
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -22,10 +24,9 @@ integration_version: ''
 is_public: true
 kind: integration
 legal_terms:
-  eula: assets/fiddler-msa.pdf
+  eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: fiddler_ai_fiddler_ai
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -36,18 +37,18 @@ public_title: Fiddler AI
 short_description: AI に信頼を築く - Fiddler のモデルパフォーマンスマネジメントプラットフォーム
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Alerting
-  - Category::Monitoring
   - Category::Marketplace
+  - Category::AI/ML
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: AI に信頼を築く - Fiddler のモデルパフォーマンスマネジメントプラットフォーム
   media:
@@ -73,6 +74,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -84,7 +86,7 @@ Datadog でモデルパフォーマンスの問題が検出されると、ML 担
 
 このオファーは、Fiddler MPM プラットフォームへのアクセスを提供するもので、特に Fiddler の[ライトティア](https://www.fiddler.ai/pricing)が対象です。より高いティアにご興味のある方は、プライベートオファーでご連絡ください。また、すでに Fiddler のお客様で、インスタンスを Datadog に接続する必要がある場合は、[Fiddler インテグレーション](/integrations/fiddler)をセットアップしてください。
 
-## サポート
+## Agent
 
 Fiddler では、お客様が高性能なモデルを提供し、責任ある AI を構築できるよう支援することをお約束します。ML プロジェクトで成功するために必要なツールや情報を提供します。
 

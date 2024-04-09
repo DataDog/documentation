@@ -6,14 +6,17 @@ further_reading:
   text: 機能フラグデータ収集の設定
 - link: /real_user_monitoring/explorer/
   tag: Documentation
-  text: RUM エクスプローラー
+  text: RUM エクスプローラーについて
+- link: https://www.datadoghq.com/blog/feature-flag-tracking/
+  tag: ブログ
+  text: Datadog RUM の機能フラグ追跡によるリリースの安全性の確保
 kind: documentation
 title: 機能フラグ追跡
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-RUM の機能フラグ追跡は非公開ベータ版です。アクセスをリクエストするには、サポート (support@datadoghq.com) までご連絡ください。
-{{< /callout >}}
+<div class="alert alert-warning">
+    機能フラグ追跡はベータ版です。
+</div>
 
 ## 概要
 
@@ -32,23 +35,24 @@ RUM データを機能フラグデータでリッチ化することで、以下�
 
 機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション][3]、またはインテグレーションパートナーのいずれかを使用して開始することができます。
 
-現在、以下とのインテグレーションをサポートしています。
-- [LaunchDarkly][4]
-- [Split][5]
-- [Flagsmith][6]
+以下とのインテグレーションをサポートしています。
+
+{{< partial name="rum/rum-feature-flag-tracking.html" >}}
+
+</br>
 
 機能フラグは、それが評価されるイベントのコンテキストに表示されます。つまり、機能フラグのコードロジックが実行されるビューに表示されるはずです。
 
 ## 機能フラグを表示する
 
-機能フラグデータ収集を設定したら、RUM 内の [**Feature Flags**][7] タブに移動するか、**UX Monitoring** の下の [**Feature Flags**][7] タブをクリックします。
+機能フラグデータ収集をセットアップしたら、RUM 内の [**Feature Flags**][4] タブに移動します。
 
 このビューから、機能フラグの健全性や使用状況について疑問点を調査することができます。
 - 各バリアントを体験しているユーザー数をモニターし、機能フラグのサマリー統計を見る
 - 機能フラグのステータスを確認し、コードクリーンアップのために削除できるものがあるかどうかを確認する
 - 機能フラグがどのページで評価されているかを確認する
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list.png" alt="機能フラグの一覧を表示し、機能フラグの健全性や使用状況について疑問点を調査することができます" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="機能フラグの一覧を表示し、機能フラグの健全性や使用状況について疑問点を調査することができます" style="width:90%;" >}}
 
 
 ### 検索とフィルター
@@ -71,19 +75,18 @@ RUM データを機能フラグデータでリッチ化することで、以下�
 
 **Users** タブでは、機能フラグの概要統計が表示され、さらに機能フラグの各バリアントを閲覧しているユーザーを任意の属性で分析することが可能です。あるバリアントと別のバリアントを経験した人がどのように見えるかを理解したい場合は、各ケースの[セッションリプレイ][5] を見ることができます。
 
-**Issues** タブでは、機能フラグを持つユーザーセッションに対してアプリケーションで発生しているエラーを確認することができます。[エラー追跡][7]で検出された問題が、あなたの機能フラグの特定のバリエーションで発生し、あなたの変更に関連している可能性があるかどうかを確認します。
+**Issues** タブでは、機能フラグを持つユーザーセッションに対してアプリケーションで発生しているエラーを確認することができます。[エラー追跡][6]で検出された問題が、あなたの機能フラグの特定のバリエーションで発生し、あなたの変更に関連している可能性があるかどうかを確認します。
 
 **Performance** タブでは、機能フラグバリアントの 1 つがパフォーマンス低下を引き起こしているかどうかを把握することができます。Core Web Vitals と各バリアントのロード時間を表示し、バリアントの 1 つがアプリケーションのパフォーマンスに悪影響を及ぼしているかどうかを判断することができます。
 
 ### RUM エクスプローラーを使用して機能フラグデータからカスタムビューを構築する
-[RUM エクスプローラー][8]で RUM が収集したすべてのデータを検索し、機能フラグの傾向を把握したり、より大きな文脈でパターンを分析したり、[ダッシュボード][9]や[モニター][10]にエクスポートしたりすることができます。
+[RUM エクスプローラー][7]で RUM が収集したすべてのデータを検索し、機能フラグの傾向を把握したり、より大きな文脈でパターンを分析したり、[ダッシュボード][8]や[モニター][9]にエクスポートしたりすることができます。
 
 RUM エクスプローラーでは、`@feature_flags.{flag_name}` 属性でセッション、ビュー、またはエラーを検索して、ユーザーが特定のユーザー体験を表示されたイベントにスコープダウンして焦点を当てることができます。
 
 クエリを `@feature_flags.{flag_name}` でグループ化することで、自分やチームにとって重要なメトリクスを比較することができます。例えば、新しいチェックアウトフローが、チェックアウトページからユーザーが購入するまでのコンバージョン率にどのような影響を与えているかを理解したい場合、コンバージョン率グラフに "Group by" を追加することができます。
 
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-rum-explorer.png" alt="機能フラグリストの検索バーとフィルター" style="width:90%;" >}}
-
 
 ## その他の参考資料
 
@@ -92,10 +95,9 @@ RUM エクスプローラーでは、`@feature_flags.{flag_name}` 属性でセ�
 [1]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/
 [2]: /ja/real_user_monitoring/browser#setup
 [3]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
-[4]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#launchdarkly-integration
-[5]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#split-integration
-[6]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#flagsmith-integration
-[7]: https://app.datadoghq.com/rum/feature-flags
-[8]: https://app.datadoghq.com/rum/explorer
-[9]: /ja/dashboards/
-[10]: /ja/monitors/#create-monitors
+[4]: https://app.datadoghq.com/rum/feature-flags
+[5]: /ja/real_user_monitoring/session_replay/
+[6]: /ja/real_user_monitoring/error_tracking/explorer/#explore-your-issues
+[7]: https://app.datadoghq.com/rum/explorer
+[8]: /ja/dashboards/
+[9]: /ja/monitors/#create-monitors

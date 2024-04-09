@@ -23,7 +23,7 @@ title: Google Cloud SQL マネージド SQL Server のデータベースモニ�
 ## はじめに
 
 サポートされている SQL Server バージョン
-: 2012、2014、2016、2017、2019
+: 2012、2014、2016、2017、2019、2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -51,7 +51,7 @@ CREATE USER datadog FOR LOGIN datadog;
 
 ## Agent のインストール
 
-GCP はホストへの直接アクセスを許可しません。つまり、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
+Google Cloud はホストへの直接アクセスを許可しません。つまり、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
 {{< tabs >}}
 {{% tab "Windows ホスト" %}}
@@ -71,7 +71,7 @@ instances:
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -90,7 +90,7 @@ instances:
 推奨する [ADO][6] プロバイダーは、[Microsoft OLE DB Driver][7] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
 ```yaml
 connector: adodbapi
-provider: MSOLEDBSQL
+adoprovider: MSOLEDBSQL19  # バージョン 18 以下の MSOLEDBSQL に置き換えます
 ```
 
 他の 2 つのプロバイダー、`SQLOLEDB` と `SQLNCLI` は、Microsoft によって非推奨とされており、もはや使用するべきではありません。
@@ -111,7 +111,7 @@ driver: '{ODBC Driver 17 for SQL Server}'
 [Agent の status サブコマンドを実行][10]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][11]のページへ移動して開始します。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/windows
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
@@ -144,7 +144,7 @@ instances:
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -161,7 +161,7 @@ instances:
 [Agent の status サブコマンドを実行][7]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][8]のページへ移動して開始します。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
@@ -236,23 +236,23 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <HOSTNAME>
     port: 1433
     username: datadog
-    password: '<PASSWORD>'
-    connector: 'odbc'
-    driver: 'FreeTDS'
+    password: "<PASSWORD>"
+    connector: "odbc"
+    driver: "FreeTDS"
     tags:  # オプション
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
+      - "service:<CUSTOM_SERVICE>"
+      - "env:<CUSTOM_ENV>"
     gcp:
-      project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_ID>' \
-  datadog/datadog"
+      project_id: "<PROJECT_ID>"
+      instance_id: "<INSTANCE_ID>"' \
+  datadog/datadog
 ```
 
 ### マウントされたファイルで構成する
@@ -273,7 +273,7 @@ instances:
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'

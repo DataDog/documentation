@@ -48,11 +48,49 @@ Next, use your `dog` commands to quickly use the Datadog API from your terminal/
 
 If you would rather write the `.dogrc` file yourself, the content of this file should be as follows:
 
+{{< site-region region="us" >}}
 ```text
 [Connection]
 apikey = <DATADOG_API_KEY>
 appkey = <YOUR_APPLICATION_KEY>
+api_host = https://datadoghq.com
 ```
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://us3.datadoghq.com
+```
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://us5.datadoghq.com
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://datadoghq.eu
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://ddog-gov.com
+```
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://ap1.datadoghq.com
+```
+{{< /site-region >}}
+
 This is useful if you'd like to push the file to many of your servers programmatically so that you can run `dog` commands from any of your servers.
 
 ## Dogshell commands
@@ -71,6 +109,8 @@ For reference, [find the code for Dogshell][4]. But once you have Dogshell insta
 * `dog tag`
 * `dog search`
 * `dog comment`
+
+**Note**: The `dogshell` command sends data to the Datadog US1 by default. If you need to send data to another site you can do so using the `--api_host` option or by specificying an api_host in your `.dogrc` file.
 
 ### Dogshell in use
 
@@ -92,7 +132,7 @@ Find more details on sending metrics from Dogshell by running:
 dog metric post -h
 ```
 
-{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test"  >}}
+{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" >}}
 
 [1]: https://github.com/DataDog/datadogpy
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/

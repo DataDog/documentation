@@ -17,6 +17,10 @@ aliases:
     - /dashboards/reporting/
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Scheduled Reports are not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a linear HTML format.
@@ -25,7 +29,7 @@ Scheduled dashboard reports automatically send a visual summary of a dashboard t
 
 ## Schedule a report
 
-Create a new report from any dashboard with a grid-based or automatic layout. Click on the dashboard’s export icon and select **Schedule a Report**.
+Create a report from any dashboard with a grid-based or automatic layout. Click the **Share** button and select **Schedule a Report**.
 
 The following widget types are supported:
 
@@ -33,7 +37,7 @@ The following widget types are supported:
 - [Distribution][2]
 - [Geomap][3]
 - [Group][4]
-- [Heat Map][5]
+- [Heatmap][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
 - [Pie Chart][16]
@@ -61,14 +65,14 @@ Add recipients to your report by entering their email addresses. The email assoc
 
 Finally, customize the report to provide recipients with more context or a tailored view. The optional description appears at the top of each report to provide more context on the dashboard.
 
-Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard’s defaults. 
+Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard's defaults. 
 
 To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
 
 ## Managing reports
-A single dashboard can have multiple scheduled reports with different settings, for example, to support different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, open the dashboard cog menu and select **Configure Reports**. 
+A single dashboard can have multiple scheduled reports with different settings, for example, to support different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, open the **Share** menu and select **Configure Reports**. 
 
-{{< img src="dashboards/scheduled_reports/dashboard_cog_menu.png" alt="A view of the menu displayed when hovering over the cog icon in a dashboard, showing the option to configure reports" style="width:50%;" >}}
+{{< img src="dashboards/scheduled_reports/configure_reports.png" alt="A view of the option to configure reports in the dashboard Share menu" style="width:50%;" >}}
 
 From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click **Edit**.
 
@@ -94,7 +98,7 @@ Users with the Admin role or **Org Management** permission can enable or disable
 [2]: /dashboards/widgets/distribution/
 [3]: /dashboards/widgets/geomap/
 [4]: /dashboards/widgets/group/
-[5]: /dashboards/widgets/heat_map/
+[5]: /dashboards/widgets/heatmap/
 [6]: /dashboards/widgets/monitor_summary/
 [7]: /dashboards/widgets/note/
 [8]: /dashboards/widgets/query_value/

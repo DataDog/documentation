@@ -3,6 +3,9 @@ further_reading:
 - link: https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show
   tag: ドキュメント
   text: ウィジェットを追加し表示内容を調整
+- link: https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/
+  tag: ブログ
+  text: パワーパックでダッシュボードウィジェットを再利用可能なグループに保存する
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: ガイド
   text: 適切なダッシュボードを維持するためのベストプラクティス
@@ -60,7 +63,7 @@ title: パワーパックでグラフの専門知識を拡大する
 
 適切なユーザーにパワーパックを見つけてもらうために、タイトルや説明文にユーザーが検索しそうなキーワード (「パフォーマンス」など) を含め、キーテクノロジーをタグ付けしてください。
 
-説明文は 80 文字までに制限されています。そのパックが何のためにあり、どのように使うことができるかを簡単に要約しているのが良い説明文です。例えば、`RUM Feature Usage` の "View usage patterns for a UI action on a specific app page" (特定のアプリのページで UI アクションの使用量を表示する) は、パワーパックが何を追跡し、入力として何を期待するか (特定のアプリページ) を説明しており、そして “usage"、”UI"、"app" といったキーワードを含んでいます。
+説明文は 80 文字までに制限されています。そのパックが何のためにあり、どのように使うことができるかを簡単に要約しているのが良い説明文です。例えば、`RUM Feature Usage` の "View usage patterns for a UI action on a specific app page" (特定のアプリのページで UI アクションの使用量を表示する) は、パワーパックが何を追跡し、入力として何を期待するか (特定のアプリページ) を説明しており、そして "usage"、"UI"、"app" といったキーワードを含んでいます。
 
 #### パワーパックのタグ付け
 
@@ -91,5 +94,7 @@ title: パワーパックでグラフの専門知識を拡大する
 ### 情報を発信する
 
 パワーパックを作成したら、そのことを組織に知らせましょう。パワーパックについて伝えることは、パワーパックの存在を知らせると同時に、質問を受けるチャンネルにもなります。メールやメッセージングプラットフォームなどのコミュニケーションチャンネルを通じて、パワーパックの名前を組織で共有し、そのパワーパックが誰を対象としているかを明記し、それが表示される場所を記述してください。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

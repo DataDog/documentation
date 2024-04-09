@@ -11,6 +11,9 @@ further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
+- link: "/tracing/trace_collection/trace_context_propagation/cpp/"
+  tag: "Documentation"
+  text: "Propagating trace context"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -68,12 +71,12 @@ If specified, adds the `version` tag with the specified value to all generated s
 : **Version**: v1.1.4 <br>
 If specified, will add tags to all generated spans. A comma-separated list of `key:value` pairs.
 
-`DD_PROPAGATION_STYLE_INJECT` 
+`DD_TRACE_PROPAGATION_STYLE_INJECT` 
 : **Version**: v0.4.1 <br>
 **Default**: `Datadog` <br>
 Propagation style(s) to use when injecting tracing headers. `Datadog`, `B3`, or `Datadog B3`.
 
-`DD_PROPAGATION_STYLE_EXTRACT` 
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT` 
 : **Version**: v0.4.1 <br>
 **Default**: `Datadog` <br>
 Propagation style(s) to use when extracting tracing headers. `Datadog`, `B3`, or `Datadog B3`.
@@ -84,4 +87,4 @@ Propagation style(s) to use when extracting tracing headers. `Datadog`, `B3`, or
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
-[3]: /agent/guide/network/#configure-ports
+[3]: /agent/configuration/network/#configure-ports

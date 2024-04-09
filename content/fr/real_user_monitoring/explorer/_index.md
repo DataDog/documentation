@@ -7,7 +7,7 @@ further_reading:
   text: En savoir plus sur la fonctionnalité de recherche du RUM Explorer
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
   tag: Blog
-  text: Surveiller les signaux Web essentiels avec le RUM
+  text: Surveiller les signaux Web essentiels avec RUM
 - link: https://www.datadoghq.com/blog/modern-frontend-monitoring/
   tag: Blog
   text: Surveiller des applications monopages
@@ -19,15 +19,21 @@ title: RUM Explorer
 
 Le Real User Monitoring (RUM) Explorer vous permet d'étudier toutes les données recueillies à partir de vos différentes applications ainsi que des informations précises sur vos événements RUM.
 
-Accédez à **UX Monitoring** > **RUM Applications** et cliquez sur l'onglet **Sessions** pour ouvrir le [RUM Explorer][1]. Cette vue vous permet d'obtenir différents insights sur la santé et l'utilisation de vos applications.
+Depuis le menu, accédez à **UX Monitoring** > **Real User Monitoring** et cliquez sur **Sessions & Replays** pour accéder au [RUM Explorer][1]. Cette vue vous permet d'obtenir différents insights sur la santé et l'utilisation de vos applications.
 
 Vous pouvez :
 
 - parcourir les sessions utilisateur ;
 - étudier les problèmes de performance affectant vos vues, ressources ou actions ;
-- résoudre les erreurs liées aux applications.
+- résoudre les erreurs et tâches longues de vos applications.
 
-{{< img src="real_user_monitoring/explorer/rum_explorer_1.png" alt="RUM Explorer" style="width:95%;" >}}
+{{< img src="real_user_monitoring/explorer/rum_explorer-1.png" alt="RUM Explorer" style="width:95%;" >}}
+
+## Vue par application
+
+Le sélecteur d'application dans la barre de navigation supérieure vous permet de sélectionner et d'afficher toutes les données RUM d'une certaine application.
+
+{{< img src="real_user_monitoring/explorer/application-selector.png" alt="Cliquez sur le sélecteur d'application pour afficher toutes les données RUM d'une certaine application." style="width:95%;" >}}
 
 ## Rechercher et filtrer des événements
 
@@ -51,7 +57,7 @@ Pour commencer à visualiser vos données RUM dans le RUM Explorer, consultez l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/explorer
+[1]: https://app.datadoghq.com/rum/sessions
 [2]: /fr/real_user_monitoring/explorer/group
 [3]: /fr/real_user_monitoring/explorer/search_syntax
 [4]: /fr/real_user_monitoring/explorer/visualize

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: moogsoft
 app_uuid: db3d32c6-1127-4bd5-b270-01aa573616b7
 assets:
@@ -22,10 +24,10 @@ author:
   support_email: support@moogsoft.com
   vendor_id: moogsoft
 categories:
-- marketplace
 - automation
+- incidents
+- marketplace
 - notification
-- monitoring
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +41,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: moogsoft
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -54,20 +55,20 @@ public_title: Moogsoft
 short_description: Plateforme d'observabilité avancée en libre service basée sur l'IA
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Automation
+  - Category::Incidents
+  - Category::Marketplace
   - Category::Notification
-  - Category::Monitoring
-  - Offering::Software License
   - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Plateforme d'observabilité avancée en libre service basée sur l'IA
   media:

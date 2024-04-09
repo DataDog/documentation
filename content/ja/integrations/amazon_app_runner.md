@@ -1,15 +1,17 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- 構成 & デプロイ
 - ログの収集
+- プロビジョニング
 dependencies: []
 description: 主要な AWS App Runner メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
 draft: false
 git_integration_title: amazon_app_runner
 has_logo: true
-integration_id: amazon-app-runner
+integration_id: ''
 integration_title: AWS App Runner
 integration_version: ''
 is_public: true
@@ -21,15 +23,16 @@ short_description: 主要な AWS App Runner メトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS App Runner を使用すると、ソースコードまたはコンテナイメージから AWS にアプリケーションをデプロイできます。
 
 このインテグレーションを有効にすると、Datadog にすべての App Runner メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -38,12 +41,12 @@ AWS App Runner を使用すると、ソースコードまたはコンテナイ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `AppRunner` が有効になっていることを確認します。
 2. [Datadog - AWS App Runner インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 AWS App Runner によって管理されるアプリケーションから Datadog と統合できるログには 2 種類あります。これらのログは、2 つの異なるロググループで CloudWatch に送信されます。1 つ目は、アプリケーションのビルドやデプロイなど、App Runner サービスのすべてのライフサイクルアクティビティログをキャプチャするサービスロググループです。2 つ目は、実行中のアプリケーションのコードからのログ出力を含むアプリケーションロググループです。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
+1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数をインストールしたら、AWS コンソールで App Runner サービスまたはアプリケーション CloudWatch ロググループにトリガーを手動で追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="CloudWatch Logs グループ" popup="true" style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
@@ -58,28 +61,28 @@ AWS App Runner は、サービスとオペレーションのステータス変�
 2. AWS App Runner のイベントに対応する EventBridge ルールを作成します ([EventBridge で App Runner のイベントを処理する][8]を参照)。ターゲットとして API Destination を選択します。
 3. Datadog イベントストリームで新しいステータス変更イベントの表示を開始します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_app_runner" >}}
 
 
-### イベント
+### ヘルプ
 
 AWS App Runner インテグレーションは、EventBridge からのサービスとオペレーションのステータス変更イベントの両方をサポートします。
 
-### サービスのチェック
+### ヘルプ
 
 AWS App Runner  インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-app-runner
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/event/stream
 [7]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-partners.html#eb-api-destination-datadog

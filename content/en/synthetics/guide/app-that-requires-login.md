@@ -1,5 +1,5 @@
 ---
-title: Running Tests On An Application That Requires Authentication
+title: Monitor An Application That Requires Authentication With Browser Tests
 kind: guide
 description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 further_reading:
@@ -9,9 +9,9 @@ further_reading:
   - link: '/synthetics/guide/browser-tests-totp'
     tag: 'Documentation'
     text: 'TOTPs for Multi-Factor Authentication (MFA) in browser tests'
-  - link: '/synthetics/browser_tests'
+  - link: '/synthetics/guide/browser-tests-passkeys'
     tag: 'Documentation'
-    text: 'Learn about browser tests'
+    text: 'Learn about Passkeys in browser tests'
   - link: '/synthetics/browser_tests/actions'
     tag: 'Documentation'
     text: 'Learn about browser test steps'
@@ -53,16 +53,21 @@ Some SSO providers might detect Datadog's browser tests as bots and prevent them
 
 An alternative would be to use a non-SSO approach and leverage a regular username and password combination to go through login.
 
+### Passkeys
+Datadog Synthetic Monitoring supports [Passkeys][4], a security method that eliminates the risks of phishing, all forms of password theft, and replay attacks.
+
+Create a Virtual Authenticator global variable and import it in your test. Then, record any passkey-related steps inside the browser.
+
 ### Multi-factor authentication
 
-Datadog Synthetic Monitoring supports [Time-based One Time Passwords (TOTP)][4], a multi-factor authentication method that combines a secret key and the current time to generate a one-time password.
+Datadog Synthetic Monitoring supports [Time-based One Time Passwords (TOTP)][5], a multi-factor authentication method that combines a secret key and the current time to generate a one-time password.
 
 Browser tests can reproduce any actions a regular user take inside their browser. When setting up your test, record any multi-factor (including 2FA or TFA) authentication steps inside the browser.
 
 Some MFA providers may detect Datadog's browser tests as bots and prevent them from logging in, for instance, by adding a reCAPTCHA. In this case, contact your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers).
 
 If your MFA process involves steps performed outside of the browser (such as voice, text message, or opening a mobile application that does not leverage TOTP), consider reaching out to your MFA provider to ask if your MFA settings can be modified or if MFA can be turned off when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers) for testing purposes.
-Depending on the type of MFA leveraged by your application, [JavaScript steps][5] can help to work around that.
+Depending on the type of MFA leveraged by your application, [JavaScript steps][6] can help to work around that.
 
 <div class="alert alert-info">Datadog is constantly adding features to help you record test scenarios more easily. <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">Sending feedback</a> about the MFA systems that matter the most to you is appreciated.</div>
 
@@ -84,13 +89,13 @@ You can manually apply these configured headers, cookies, and credentials on the
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
+Store your credentials as [global variables][7] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
 
-Once you create the obfuscated variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
+Once you create the obfuscated variables, you can then [import these global variables][8] into your browser tests and leverage them for your login steps.
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
 
-For more information about account security, see [Synthetic Monitoring Data Security][8].
+For more information about account security, see [Synthetic Monitoring Data Security][9].
 
 ## Further Reading
 
@@ -99,8 +104,9 @@ For more information about account security, see [Synthetic Monitoring Data Secu
 [1]: /synthetics/browser_tests/actions/
 [2]: /synthetics/browser_tests/actions/#subtests
 [3]: /synthetics/guide/identify_synthetics_bots/
-[4]: /synthetics/guide/browser-tests-totp
-[5]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
-[6]: /synthetics/settings/?tab=specifyvalue#global-variables
-[7]: /synthetics/browser_tests/actions#a-global-variable
-[8]: /data_security/synthetics
+[4]: /synthetics/guide/browser-tests-passkeys
+[5]: /synthetics/guide/browser-tests-totp
+[6]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
+[7]: /synthetics/settings/?tab=specifyvalue#global-variables
+[8]: /synthetics/browser_tests/actions#a-global-variable
+[9]: /data_security/synthetics

@@ -11,9 +11,11 @@ further_reading:
     - link: '/real_user_monitoring/explorer/visualize/'
       tag: 'Documentation'
       text: 'Apply visualizations on your events'
-    - link: '/real_user_monitoring/dashboards/'
+    - link: '/real_user_monitoring/platform/dashboards/'
       tag: 'Documentation'
       text: 'Learn about RUM dashboards'
+algolia:
+  tags: ['user actions']
 ---
 
 ## Overview
@@ -86,7 +88,7 @@ For example:
 
 ```html
 <script>
-  DD_RUM.init({
+  window.DD_RUM.init({
     ...
     trackUserInteractions: true,
     actionNameAttribute: 'data-custom-name',
@@ -109,7 +111,7 @@ For more information, see [Send Custom Actions][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/modifying_data_and_context/
+[1]: /real_user_monitoring/browser/advanced_configuration/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [3]: /real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

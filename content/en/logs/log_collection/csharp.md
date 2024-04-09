@@ -25,6 +25,9 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
 To send your C# logs to Datadog, use one of the following approaches:
@@ -37,7 +40,7 @@ This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Micr
 
 ## File-tail logging with the Datadog Agent
 
-The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
+The recommended approach for C# log collection is to output your logs to a file and then [tail][20] that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
@@ -130,7 +133,7 @@ Once the library is in your classpath, attach the following layout to any target
     <!-- Write logs as Json into a file -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
+        <attribute name="date" layout="${date:universalTime=true:format=o}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -280,8 +283,8 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -290,9 +293,9 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-
-3. [Restart the Agent][5].
-4. Run the [Agent’s status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+3. Make sure the Agent user has read access permissions to the log file.
+4. [Restart the Agent][5].
+5. Run the [Agent's status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][7] to extract log attributes. Use the [Log Explorer][8] to view and troubleshoot your logs.
 
@@ -399,6 +402,14 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -476,6 +487,19 @@ using (var log = new LoggerConfiguration()
 ```csharp
 using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
     .CreateLogger())
 {
     // Some code
@@ -611,15 +635,15 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [1]: /logs/log_configuration/parsing
 [2]: /agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /logs/log_configuration/parsing/?tab=matchers
 [8]: /logs/explorer/#overview
 [9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /agent/logs/advanced_log_collection
 [11]: /serverless/azure_app_services
-[12]: /account_management/org_settings/sensitive_data_detection/#overview
+[12]: /sensitive_data_scanner/
 [13]: /tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys
@@ -627,3 +651,4 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [17]: /logs/log_configuration/pipelines/?tab=source
 [18]: /api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[20]: /glossary/#tail

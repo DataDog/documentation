@@ -8,7 +8,7 @@ kind: documentation
 title: Amazon RDS マネージド MySQL のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -16,6 +16,7 @@ title: Amazon RDS マネージド MySQL のデータベースモニタリング�
 
 Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。MySQL データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
+1. [AWS インテグレーションを構成する](#configure-the-aws-integration)
 1. [データベースのパラメーターを構成する](#configure-mysql-settings)
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 1. [Agent をインストールする](#install-the-agent)
@@ -30,14 +31,18 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 7.36.1+
 
 パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。
+: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
-: Agent は、できればインスタンスエンドポイントを介して、監視対象のホストに直接接続する必要があります。Agent をプロキシ、ロードバランサー、コネクションプーラーを経由してデータベースに接続しないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
+: Datadog Agent は、監視対象のホストにできればインスタンスエンドポイントを通じて直接接続する必要があります。Agent は、プロキシ、ロードバランサー、またはコネクションプーラーを介してデータベースに接続すべきではありません。Agent が実行中に異なるホストに接続すると (フェイルオーバーやロードバランシングなどの場合)、Agent は 2 つのホスト間で統計情報の差を計算し、不正確なメトリクスを生成します。
 
 データセキュリティへの配慮
 : Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
+
+## AWS インテグレーションの構成
+
+[Amazon Web Services インテグレーションタイル][10]の **Resource Collection** セクションで **Standard Collection** を有効にします。
 
 ## MySQL 設定を構成する
 
@@ -74,26 +79,26 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
-
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
-ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-{{% tab "MySQL 5.6 & 5.7" %}}
+{{% tab "MySQL 5.6" %}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL ≥ 5.7" %}}
+
+`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
+ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -160,7 +165,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 RDS ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスのエンドポイントにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][5]を参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 ホストで実行されている Agent に対してこのチェックを設定するには (Agent が RDS データベースから収集するように小さな EC2 インスタンスをプロビジョニングする場合など)
 
@@ -176,7 +181,11 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 前の CREATE USER ステップから
+    password: '<YOUR_CHOSEN_PASSWORD>' # 先ほどの CREATE USER のステップから
+
+     # プロジェクトとインスタンスを追加した後、CPU やメモリなどの追加のクラウドデータをプルするために Datadog AWS インテグレーションを構成します。
+    aws:
+      instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 **注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
@@ -184,9 +193,9 @@ instances:
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -232,7 +241,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOI
 
 
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/guide/secrets-management
+[2]: /ja/agent/configuration/secrets-management
 [3]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -252,14 +261,14 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: "<UNIQUEPASSWORD>"' \
   datadog/datadog
 ```
 
@@ -280,7 +289,7 @@ instances:
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスのコンフィギュレーションをKubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 
 ```yaml
@@ -314,18 +323,21 @@ spec:
 
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/guide/secrets-management
+[4]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
+
+## Agent の構成例
+{{% dbm-mysql-agent-config-examples %}}
 
 ## RDS インテグレーションをインストール
 
@@ -335,7 +347,7 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 
 インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][9]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -343,8 +355,9 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://app.datadoghq.com/account/settings/agent/latest
+[6]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /ja/integrations/amazon_rds
 [9]: /ja/database_monitoring/troubleshooting/?tab=mysql
+[10]: https://app.datadoghq.com/integrations/amazon-web-services

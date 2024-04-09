@@ -1,32 +1,56 @@
 ---
-title: RUM エラー追跡
-kind: ドキュメント
+algolia:
+  tags:
+  - エラー追跡
+description: Web アプリケーションやモバイルアプリケーションから収集したエラーを検索し、管理する方法をご紹介します。
 further_reading:
+- link: https://www.datadoghq.com/blog/error-tracking/
+  tag: GitHub
+  text: Datadog Error Tracking で、アプリケーションの問題を解明
+- link: https://www.datadoghq.com/blog/ios-crash-reporting-datadog
+  tag: GitHub
+  text: Datadog RUM で iOS のクラッシュを効率的にデバッグする
+- link: https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/
+  tag: GitHub
+  text: Datadog のテクニカルソリューションチームが RUM、セッションリプレイ、エラー追跡を使用して顧客の問題を解決する方法
+- link: https://www.datadoghq.com/blog/error-tracking-logs/
+  tag: ブログ
+  text: Datadog Error Tracking でログのエラーを追跡し、トリアージする
 - link: /real_user_monitoring/error_tracking/explorer
-  tag: Documentation
-  text: Error Tracking Explorer
-- link: "https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"
-  tag: Documentation
-  text: Datadog CLI の公式リポジトリ
-- link: /real_user_monitoring/guide/upload-javascript-source-maps
-  tag: ガイド
-  text: JavaScript ソースマップのアップロード
-- link: "https://app.datadoghq.com/error-tracking"
-  tag: UI
-  text: エラー追跡
+  tag: ドキュメント
+  text: エラートラッキングエクスプローラーについて
+- link: /monitors/types/error_tracking/
+  tag: ドキュメント
+  text: エラー追跡モニターを作成する
+kind: ドキュメント
+title: Web アプリケーションとモバイルアプリケーションのエラー追跡
 ---
 
-{{< img src="real_user_monitoring/error_tracking/page.png" alt="エラー追跡ページ"  >}}
+## 概要
 
-## Error Tracking とは？
+{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="エラートラッキングエクスプローラーの問題の詳細画面" style="width:100%;" >}}
 
-Datadog では、非常に多くのエラーが収集されます。システムの正常性維持には、このエラーを監視することが不可欠ですが、件数が多いため個々のエラーイベントを重要度により特定し修正の順序を見極めることは大変困難です。Error Tracking を使用すると、以下の機能により簡単にエラーを監視できます。
+{{% error-tracking-description %}}
 
-- __同様のエラーを問題としてグループ化する__ ため、ノイズがなくなり最も重要なエラーを特定することができます。
-- __経時的に問題を監視する__ ため、開始のタイミングや継続した場合の頻度を把握できます。
-- __必要なコンテキストをまとめて 1 か所で確認__ できるため、問題のトラブルシューティングが容易になります。
+RUM エラーの課題には、スタックトレース、ユーザーセッションのタイムライン、メタデータ (ユーザーの場所、バージョン、クラッシュレポートに含まれるカスタム属性を含む) が含まれます。
 
+エラートラッキングの主な機能は、[エラートラッキングエクスプローラー][3]のドキュメントで確認することができます。RUM 用のエラートラッキングエクスプローラーを表示するには、[**UX Monitoring** > **Error Tracking**][1] に移動します。
+
+## 計画と使用
+
+{{< whatsnext desc="RUM 用の Datadog エラー追跡を始めるには、対応するドキュメントを参照して、フレームワーク用のソースマップをアップロードしてください。" >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}ブラウザ{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/expo" >}}Expo{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/rum/error-tracking
+[2]: /ja/real_user_monitoring/
+[3]: /ja/error_tracking/explorer

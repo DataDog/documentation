@@ -22,7 +22,8 @@ author:
   name: Datadog
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
-categories: []
+categories:
+- クラウド
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zscaler/README.md
 description: TODO
@@ -38,19 +39,19 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: zscaler
-oauth: {}
 public_title: Zscaler
 short_description: Zscaler とのインテグレーションにより、クラウドセキュリティログを提供
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Zscaler とのインテグレーションにより、クラウドセキュリティログを提供
   media: []

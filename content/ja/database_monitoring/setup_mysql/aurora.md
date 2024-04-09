@@ -8,12 +8,12 @@ kind: documentation
 title: Aurora マネージド MySQL のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
 
-データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
+データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、実行計画、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
 
 Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。MySQL データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
@@ -25,10 +25,10 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 ## はじめに
 
 サポートされている MySQL バージョン
-: 5.6 または 5.7
+: 5.6、5.7、8.0 以降
 
 サポートされている Agent バージョン
-: 7.36.1+
+: 7.36.1 以降
 
 パフォーマンスへの影響
 : データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
@@ -81,8 +81,24 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
+{{< tabs >}}
+{{% tab "MySQL ≥ 8.0" %}}
 
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+`datadog` ユーザーを作成し、基本的な権限を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+
+{{% tab "MySQL 5.6 and 5.7" %}}
+
+`datadog` ユーザーを作成し、基本的な権限を付与します。
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
@@ -90,6 +106,9 @@ GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 次のスキーマを作成します。
 
@@ -167,6 +186,10 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # 前の CREATE USER ステップから
+
+# プロジェクトとインスタンスを追加した後、CPU やメモリなどの追加のクラウドデータをプルできるよう、Datadog AWS インテグレーションを構成します。
+aws:
+instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 <div class="alert alert-warning"><strong>重要</strong>: ここでは、クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントを使用します。</div>
@@ -246,14 +269,14 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD>" \
+    password: "<UNIQUEPASSWORD>"' \
   datadog/datadog
 ```
 
@@ -322,6 +345,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
 
+## Agent の構成例
+{{% dbm-mysql-agent-config-examples %}}
+
 ## RDS インテグレーションをインストール
 
 AWS からより包括的なデータベースメトリクスを収集するには、[RDS インテグレーション][8]をインストールします (オプション)。
@@ -339,7 +365,7 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /ja/integrations/amazon_rds

@@ -11,9 +11,9 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -45,7 +45,7 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 * Breakdown of time spent by service/type
 * [Apdex score][2] (web services only)
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data."  style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." style="width:90%;">}}
 
 ### Goal of sampling
 
@@ -55,7 +55,7 @@ The goal of sampling is to *keep* the traces that matter the most:
 * Low QPS Services
 * Representative variety set of traces
 
-{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level."  style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level." style="width:90%;">}}
 
 ### Sampling rules
 
@@ -70,7 +70,7 @@ For the lifecycle of a trace, decisions are made at Tracing Client, Agent, and B
     | **AUTO_KEEP**   | Automatic sampling decision | The Agent keeps the trace.                                                                                                                                                                                                     |
     | **MANUAL_KEEP** | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. Note that when used with [App Analytics filtering][3] - all spans marked for `MANUAL_KEEP` are counted as billable spans. |
 
-    Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won’t have to sample more than it is allowed. Users can [manually adjust](#manually-control-trace-priority) this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
+    Traces are automatically assigned a priority of AUTO_DROP or AUTO_KEEP, with a proportion ensuring that the Agent won't have to sample more than it is allowed. Users can [manually adjust](#manually-control-trace-priority) this attribute to give priority to specific types of traces, or entirely drop uninteresting ones.
 
 2. Trace Agent (Host or Container Level)- The Agent receives traces from various tracing clients and filters requests based on two rules -
     * Ensure traces are kept across variety of traces. (across services, resources, HTTP status codes, errors)
@@ -373,13 +373,13 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can’t ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules](#sampling-rules).
+Note that trace priority should be manually controlled only before any context propagation. If this happens after the propagation of a context, the system can't ensure that the entire trace is kept across services. Manually controlled trace priority is set at tracing client location, the trace can still be dropped by Agent or server location based on the [sampling rules](#sampling-rules).
 
 ## Trace storage
 
-Individual traces are stored for 15 days. This means that all **sampled** traces are retained for a period of 15 days and at the end of the 15th day, the entire set of expired traces is deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `{{< region-param key="dd_full_site" >}}/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
+Individual traces are stored for 30 days. This means that all **sampled** traces are retained for a period of 30 days and at the end of the 30th day, the entire set of expired traces is deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `{{< region-param key="dd_full_site" >}}/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
 
-{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID"  >}}
+{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID" >}}
 
 ## Further Reading
 

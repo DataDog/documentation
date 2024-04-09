@@ -19,6 +19,9 @@ further_reading:
     - link: '/getting_started/tagging/using_tags/'
       tag: 'Documentation'
       text: 'Learn how to use tags'
+    - link: "https://dtdg.co/fe"
+      tag: "Foundation Enablement"
+      text: "Join an interactive session on effective tagging with Datadog"
 ---
 
 ## Overview
@@ -55,7 +58,7 @@ Below are Datadog's tagging requirements:
 
     Other special characters are converted to underscores.
 
-2. Tags can be **up to 200 characters** long and support Unicode (which includes most character sets, including languages such as Japanese).
+2. Tags can be **up to 200 characters** long and support Unicode letters (which includes most character sets, including languages such as Japanese).
 3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
 
@@ -99,14 +102,16 @@ After you have [assigned tags][7] at the host and [integration][9] level, start 
 | [Integrations][15]   | Optionally limit metrics for AWS, Google Cloud, and Azure.                                        |
 | [APM][16]            | Filter services, traces, and profiles, or navigate to other areas with the Service Map.           |
 | [RUM & Session Replay][17] | Filter event search, analytics, patterns, replays, and issues with the RUM Explorer.        |
-| [Synthetics][18]     | Filter and group Synthetic tests or tests running in CI pipelines with the CI Results Explorer.   |
+| [Synthetic Monitoring & Continuous Testing][18]     | Filter and group Synthetic tests or tests running in CI pipelines with the Synthetic Monitoring & Continuous Testing Explorer.   |
 | [Notebooks][19]      | Filter and group metrics on graphs.                                                               |
 | [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines.                                |
 | [SLOs][21]           | Search for SLOs, grouped metric-based SLOs, and grouped monitor-based SLOs.                       |
 | [Developers][22]     | Pull information or setup different areas in the UI with the API.                                 |
 | [Billing][23]        | Report on Datadog usage by choosing up to three tags, for example: `env`, `team`, and `account_id`. |
+| [CI Visibility][24]  | Filter and group test runs or pipeline executions with the CI Visibility Explorer. |
 
 For more information, see [Using Tags][1].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -134,3 +139,4 @@ For more information, see [Using Tags][1].
 [21]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
 [22]: /getting_started/tagging/using_tags/#developers
 [23]: /account_management/billing/usage_attribution/
+[24]: /getting_started/tagging/using_tags/#ci-visibility

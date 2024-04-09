@@ -2,7 +2,7 @@
 title: Reduce alert flapping
 kind: guide
 further_reading:
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 aliases:
@@ -11,7 +11,7 @@ aliases:
 
 A frequent issue or pain point can be alert fatigue, or when alerts 'flap' (rapidly switching from an 'ok' to an 'alert' status).
 
-Your individual Datadog alerts with groups [have notification][1] rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
+There is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
 * Re-Evaluate the Alert Threshold Value
     * The easiest way to reduce flapping when the alert <-> ok or state changes are frequent could be to increase/decrease the threshold condition.
@@ -37,7 +37,6 @@ If the issue is alert routing, [template variables][4] and the separation of **w
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/blog/alert-rollup
 [2]: /monitors/types/anomaly/
 [3]: /monitors/types/outlier/
 [4]: /monitors/notify/variables/?tab=is_alert#template-variables

@@ -490,7 +490,7 @@ Après avoir créé votre intégration basée sur l'Agent, consultez cette liste
 
 Après avoir fait une pull request dans le référentiel `integrations-extras`, les tests de validation CI s'exécutent. Ces tests doivent être verts pour que votre pull request soit mergée et que votre carré d'intégration soit publié.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 Documentation, liens et articles supplémentaires utiles :
 

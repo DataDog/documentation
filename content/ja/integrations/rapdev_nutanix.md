@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-nutanix
 app_uuid: 53711ca7-b5f8-4472-b921-e70a3103ede4
 assets:
@@ -9,6 +11,7 @@ assets:
     RapDev Nutanix Protection Domain Dashboard: assets/dashboards/rapdev_nutanix_protection_domain_dashboard.json
     RapDev Nutanix VMs Dashboard: assets/dashboards/rapdev_nutanix_vms_dashboard.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -19,6 +22,7 @@ assets:
       prefix: rapdev.nutanix.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10138
     source_type_name: RapDev Nutanix
   logs: {}
   monitors:
@@ -34,8 +38,6 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-- cloud
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -49,7 +51,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_nutanix
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -59,22 +60,21 @@ pricing:
   tag: コア
   unit_label: Nutanix ホストコア
   unit_price: 5
-public_title: Nutanix インテグレーション
+public_title: Nutanix
 short_description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
   media:
@@ -92,30 +92,31 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Nutanix インテグレーション
+  title: Nutanix
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 Nutanix インテグレーションではストレージ、CPU 使用量、読み取り/書き込み IOPS、および Nutanix Clusters 内のその他のメトリクスを監視し、お使いの環境が常に最適なパフォーマンスで稼働しているかどうかを確認することができます。インテグレーションは 4 つのダッシュボードで構成されており、Nutanix Clusters を俯瞰的に可視化するとともに、潜在的なパフォーマンスの劣化をピンポイントかつ詳細に表示します。また、Nutanix インテグレーションには、ストレージの使用率やデータ重複除去といった、Nutanix 環境の総合的なパフォーマンス維持に欠かせない主要なメトリクスの監視機能も搭載されています。
 
-### アラート設定
+### ログ管理
 
 1. Nutanix Cluster ストレージ使用率
 2. Nutanix Cluster CPU 使用率
 3. Nutanix Cluster データ重複除去率
 4. Nutanix Cluster データ圧縮率
 
-### ダッシュボード  
+### ライブラリ
 
 RapDev Nutanix 概要
 RapDev Nutanix Clusters
 RapDev Nutanix ホスト & ディスク
 RapDev Nutanix VM
 
-## サポート
+## Agent
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - メール: support@rapdev.io

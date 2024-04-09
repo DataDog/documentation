@@ -1,0 +1,4 @@
+{{- $file := "layouts/shortcodes/semantic-color.md" -}}
+{{- if (fileExists $file) -}}
+  {{- $file | readFile | markdownify -}}
+{{- end -}}

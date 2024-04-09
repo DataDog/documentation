@@ -28,11 +28,13 @@ further_reading:
       text: 'Compare and optimize your code with Datadog Profile Comparison.'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
       tag: 'Blog'
-      text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
+      text: "How we optimized our Akka application using Datadog's Continuous Profiler"
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
       tag: 'Blog'
       text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
-
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
@@ -71,9 +73,9 @@ See [Profile Types][6] for descriptions of the kinds of profile data collected f
 
 ### Search profiles by tags
 
-[Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
+[Use tags to search profiles][2] across any dimension—whether it's a specific host, service, version, or any combination.
 
-{{< img src="profiler/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
 
 ### Track function performance over deployments
 

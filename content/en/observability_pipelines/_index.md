@@ -4,69 +4,88 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/
 further_reading:
-  - link: /getting_started/observability_pipelines/
+  - link: /observability_pipelines/setup/
     tag: Documentation
-    text: Install the Observability Pipelines Worker
-  - link: /getting_started/observability_pipelines/
-    tag: Documentation
-    text: Get started with Observability Pipelines and Datadog
+    text: Set up Observability Pipelines
   - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
     tag: Blog
     text: Take control of your telemetry data with Observability Pipelines
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
+cascade:
+    algolia:
+        rank: 70
 ---
 
-{{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
 
-## What is Observability Pipelines and the Observability Pipelines Worker?
 
-### Observability Pipelines Worker
+{{< img src="observability_pipelines/obs_pipelines_new.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
-Observability Pipelines Worker is an on-premise end-to-end data pipeline solution designed to collect, process, and route logs and metrics from any source to any destination. You can deploy Observability Pipelines as an aggregator within your infrastructure for central processing, collecting data from multiple upstream sources, and performing cross-host aggregation and analysis. With the Observability Pipelines Worker, you can also:
+## Overview
+
+Observability Pipelines allow you to collect, process, and route logs from any source to any destination in infrastructure that you own or manage.
+
+With Observability Pipelines, you can:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
-- Transform logs and metrics by adding, parsing, enriching, and removing fields and tags.
+- Transform logs by adding, parsing, enriching, and removing fields and tags.
 - Redact sensitive data from your telemetry data.
 
-### Observability Pipelines
+The Observability Pipelines Worker is the software that runs in your infrastructure. It aggregates and centrally processes and routes your data. More specifically, the Worker can:
 
-Using Datadog, you can monitor, build, and manage all of your Observability Pipelines Worker deployments at scale.
+- Receive or pull all your observability data collected by your agents, collectors, or forwarders.
+- Transform ingested data (for example: parse, filter, sample, enrich, and more).
+- Route the processed data to any destination.
 
-Add your Datadog API key to your Observability Pipelines configuration to monitor your pipelines in Datadog: Identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more.
+The Datadog UI provides a control plane to manage your Observability Pipelines Workers. You can monitor your pipelines to understand the health of your pipelines, identify bottlenecks and latencies, fine-tune performance, validate data delivery, and investigate your largest volume contributors. You can build or edit pipelines, whether it be routing a subset of data to a new destination or introducing a new sensitive data redaction rule, and roll out these changes to your active pipelines from the Datadog UI.
 
 ## Get started
 
-1. [Install the Observability Pipelines Worker][1].
-2. [Set up configurations][2] to collect, transform and route your data.
+1. [Set up the Observability Pipelines Worker][1].
+2. [Create pipelines to collect, transform and route your data][2].
+3. Discover how to deploy Observability Pipelines at production scale:
+    - See [Deployment Design and Principles][3] for information on what to consider when designing your Observability Pipelines architecture.
+    - See [Best Practices for OP Worker Aggregator Architecture][4].
 
 ## Explore Observability Pipelines
 
-Start exploring and getting insights into your Observability Pipelines:
+Start getting insights into your Observability Pipelines:
+
+###  Collect data from any source and route data to any destination
+
+Collect data[*](#support) from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
+
+
+{{< img src="observability_pipelines/component_panel.png" alt="The Datadog Logs component side panel showing a line graph of events in/out per second and a link graph of bytes in/out per second" style="width:100%;" >}}
+
+### Control your data volume before it gets routed
+
+Optimize volume and reduce the size of your observability data by sampling, filtering, deduplicating, and aggregating your logs.
+
+{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, Amazon EC2 Metadata, dedupe and more." style="width:100%;" >}}
+
+### Redact sensitive data from your telemetry data
+
+Redact sensitive data before they are routed outside of your infrastructure, using out-of-the-box patterns to scan for PII, PCI, private keys, and more.
+
+{{< img src="observability_pipelines/scanning_rules.png" alt="The sensitive data scanner rules library panel showing the available rules for personal identifiable information and network and device information" style="width:85%;" >}}
 
 ### Monitor the health of your pipelines
 
-Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows. 
+Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows.
 
-{{< img src="observability_pipelines/config-map.png" alt="The configuration map showing data coming from http, splunk_hec, and datadog, and flowing into different transforms and then sent to different destinations" style="width:80%;" >}}
-
-### Quickly identify bottlenecks and optimize performance
-
-Dive into specific configuration components to understand how observability data is flowing into your pipeline to troubleshoot and pinpoint performance bottlenecks and to optimize your pipeline. 
-
-{{< img src="observability_pipelines/config-map-side-panel.png" alt="The S3 source configuration side panel showing graphs for events in and out per second, percentage of errors, and load average percentage" style="width:85%;" >}}
-
-### Ensure data delivery and reduce latency. 
-
-Find out if data is reaching its destination and get full visibility into any latency issues to meet SLIs and SLOs.
-
-{{< img src="observability_pipelines/configuration-list.png" alt="The Observability Pipelines page showing a list of active and inactive pipelines with columns for created date, number of hosts, version, events in, bytes in, and error rate" style="width:85%;" >}}
+{{< img src="observability_pipelines/pipeline_health.png" alt="The pipeline configuration page showing a warning because components are experiencing errors and an event ingestion delay was detected" style="width:90%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/installation/
+[1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/configurations/
+[3]: /observability_pipelines/production_deployment_overview/
+[4]: /observability_pipelines/architecture/

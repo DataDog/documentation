@@ -1,8 +1,13 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-box
 app_uuid: 3de78642-7136-41a8-9df9-48d65ed46251
 assets:
+  dashboards:
+    RapDev Box Overview: assets/dashboards/rapdev_box_overview.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,18 +18,20 @@ assets:
       prefix: rapdev.box.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10278
     source_type_name: RapDev Box
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
 - クラウド
 - ログの収集
+- マーケットプレイス
 - メトリクス
+- notifications
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +45,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_box
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -48,23 +54,26 @@ pricing:
   tag: user_login
   unit_label: Box 登録ユーザー
   unit_price: 1
-public_title: Box インテグレーション
+public_title: Box
 short_description: Box エンタープライズユーザーとストレージの監視
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
   - Category::Log Collection
+  - Category::Marketplace
   - Category::Metrics
+  - Category::Notifications
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: Box エンタープライズユーザーとストレージの監視
   media:
@@ -85,16 +94,18 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Box インテグレーション
+  title: Box
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 ## 概要
 このインテグレーションは、[Box エンタープライズアカウント](https://box.com/)のユーザーストレージに関するメトリクスをレポートし、`admin_logs_streaming` エンドポイントを使用して Box 管理者ログを収集するものです。以下のトリガーはログとして Datadog に送信されます。
  + [ユーザーソースオブジェクト](https://developer.box.com/guides/events/event-triggers/event-source/#user-source-object)
  + [シールドイベント](https://developer.box.com/guides/events/event-triggers/shield-alert-events/)
  + [サインイベント](https://developer.box.com/guides/events/event-triggers/sign-events/)
-### メトリクス
+### データセキュリティ
 このインテグレーションは、Box エンタープライズアカウントのユーザーに関するストレージメトリクスを収集します。
 以下のメトリクスを送信します。
 ```
@@ -102,7 +113,7 @@ rapdev.box.users.count
 rapdev.box.users.storage.max
 rapdev.box.users.storage.used
 ```
-### ログ管理
+### ワークフローの自動化
 このインテグレーションは、`admin_logs_streaming` エンドポイントを使用して Box 管理者ログを収集します。
 以下のトリガーは、ログとして Datadog に送信されます。
  + [ユーザーソースオブジェクト](https://developer.box.com/guides/events/event-triggers/event-source/#user-source-object)
@@ -197,12 +208,12 @@ rapdev.box.users.storage.used
     }
 }
  ```
-### ダッシュボード  
+### ライブラリ
 このインテグレーションは、**Box Integration Overview** という名前のすぐに使えるダッシュボードを提供します。ダッシュボードは、メトリクスとログが収集されると、ポップアップ表示されます。
 
 Agent がログを収集するためには、メインの `datadog.yaml` ファイルで `logs_enabled: true` を設定します。
 
-## サポート
+## Agent
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 - サポート: support@rapdev.io
 - セールス: sales@rapdev.io

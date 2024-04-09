@@ -201,7 +201,7 @@ const getSchema = (content) => {
   const contentTypeKeys = Object.keys(content);
   const [firstContentType] = contentTypeKeys;
   contentTypeKeys.forEach((key) => {
-    if(key.startsWith("application/json") || key.startsWith("text/json")) {
+    if(key.startsWith("application/json") || key.startsWith("text/json") || key.startsWith("multipart/form-data")) {
       return content[key].schema;
     }
   });
@@ -722,7 +722,8 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
-  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
+  const def = (value.default) ? `<p>default: <code>${value.default}</code></p>` : '';
+  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}${def}</div>`.trim();
 };
 
 
@@ -926,6 +927,8 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
             item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
           } else if(action.requestBody.content && action.requestBody.content["text/json"]) {
             item['request_schema_description'] = action.requestBody.content["text/json"].schema.description || '';
+          } else if(action.requestBody.content && action.requestBody.content["multipart/form-data"]) {
+            item['request_schema_description'] = action.requestBody.content["multipart/form-data"].schema.description || '';
           }
         }
         /*

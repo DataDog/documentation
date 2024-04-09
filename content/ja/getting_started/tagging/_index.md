@@ -17,6 +17,9 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
   text: タグの使用方法について
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Datadog を使った効果的なタグ付けに関するインタラクティブなセッションに参加できます
 kind: ドキュメント
 title: タグの使用を開始する
 ---
@@ -55,7 +58,7 @@ Datadog は、集計の `サービス` レベルでコンテナー、VM、クラ
 
     その他の特殊文字は、アンダースコアに変換されます。
 
-2. タグの長さは**最大 200 文字**で、Unicode (日本語などの言語を含むほとんどの文字セットを含む) をサポートします。
+2. タグの長さは**最大 200 文字**で、Unicode 文字 (日本語などの言語を含むほとんどの文字セットを含む) をサポートします。
 3. タグは小文字に変換されます。そのため、`CamelCase (キャメル ケース)` 形式のタグは推奨されません。認証 (クローラー) ベースのインテグレーションでは、タグのキャメル ケース部分はアンダースコアに変換されます。たとえば、`TestTag` は `test_tag` となります。
 4. タグは `value` または `<KEY>:<VALUE>` の形式にすることができます。よく使用されるタグ キーは、`env`、`instance`、`name` です。キーの後ろには常に、グローバルタグ定義の最初のコロンが付きます。例:
 
@@ -99,14 +102,16 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 | [インテグレーション][15]   | AWS、Google Cloud、Azure のメトリクスをオプションで制限。                                        |
 | [APM][16]            | サービス、トレース、プロファイルをフィルターにかける。サービスマップを使って他のエリアに移動する。           |
 | [RUM & セッションリプレイ][17] | RUM エクスプローラーで、イベント検索、分析、パターン、リプレイ、問題をフィルターにかける。        |
-| [Synthetics][18]     | CI Results Explorer で Synthetic テストや CI パイプラインで実行中のテストをフィルターし、グループ化。   |
+| [Synthetic Monitoring & Continuous Testing][18]     | Synthetic Monitoring & Continuous Testing Explorer を使用して、Synthetic テストや CI パイプラインで実行中のテストをフィルタリングおよびグループ化します。   |
 | [ノートブック][19]      | グラフでのメトリクスの絞り込みおよびグループ化。                                                               |
 | [ログ][20]           | ログ検索、分析、パターン、Live Tail、パイプラインの絞り込み。                                |
 | [SLO][21]           | SLO、グループ化されたメトリクスベース SLO、グループ化されたモニターベース SLO の検索。                       |
 | [開発者][22]     | API を使用して情報を取得、または UI のさまざまな領域をセットアップ。                                 |
 | [請求][23]        | 3 つのタグを選択することで Datadog の使用量を報告します。たとえば、`env`、`team`、`account_id` のように選択できます。 |
+| [CI Visibility][24]  | CI Visibility Explorer を使用して、テスト実行またはパイプライン実行をフィルタリングおよびグループ化します。 |
 
 詳しくは、[タグの使用方法][1]をご覧ください。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -134,3 +139,4 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 [21]: /ja/getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
 [22]: /ja/getting_started/tagging/using_tags/#developers
 [23]: /ja/account_management/billing/usage_attribution/
+[24]: /ja/getting_started/tagging/using_tags/#ci-visibility

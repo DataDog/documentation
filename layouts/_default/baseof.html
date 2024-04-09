@@ -3,9 +3,8 @@
   data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
   class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
 
-<head>
-
-  {{ partial "header-scripts.html" . }}
+<head>  
+  {{ partialCached "header-scripts.html" . }}
 
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
@@ -50,7 +49,7 @@
       </div>
 
       <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
-        <div class="{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}"
+        <div class='{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}'
           id="mainContent">
           {{ block "main" . }}{{ end }}
           {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
@@ -77,6 +76,10 @@
 
   {{ partial "preview_banner/preview_banner" . }}
 
+  <!--- integrations carousel modal --->
+  {{ if and (in .Params.Kind "integration") (.Params.tile) (.Params.tile.media | len) }}
+  {{ partial "integrations-carousel/integrations-carousel-modal.html" . }}
+  {{ end }}
 </body>
 
 </html>

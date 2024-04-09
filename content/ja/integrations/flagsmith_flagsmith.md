@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: flagsmith-platform
 app_uuid: ad6a3059-12b6-4a11-a72c-336d732add15
 assets: {}
@@ -9,11 +11,9 @@ author:
   support_email: support@flagsmith.com
   vendor_id: flagsmith
 categories:
-- マーケットプレイス
-- クラウド
 - 構成 & デプロイ
+- マーケットプレイス
 - テスト
-- web
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -27,7 +27,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: flagsmith_flagsmith
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -46,15 +45,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Configuration & Deployment
+  - Category::Marketplace
+  - Category::Testing
+  - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Marketplace
-  - Category::Cloud
-  - Category::Configuration & Deployment
-  - Category::Testing
-  - Category::Web
-  - Offering::Software License
   configuration: README.md#Setup
   description: Flagsmith は、オープンソースの機能フラグおよびリモート構成サービスです。
   media:
@@ -73,11 +70,12 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
-[Flagsmith](https://flagsmith.com/) は、安心して機能をリリースできるよう支援し、Web、モバイル、サーバーサイドのアプリケーションで機能フラグを管理します。ホスティングされた API を使用したり、プライベートクラウドにデプロイしたり、オンプレミスで実行したりすることができます。
+[Flagsmith][1] は、安心して機能をリリースできるよう支援し、Web、モバイル、サーバーサイドのアプリケーションで機能フラグを管理します。Flagsmith がホストする API を使用したり、プライベートクラウドにデプロイしたり、オンプレミスで実行したりすることができます。
 
 Flagsmith は、機能フラグの開発、実装、管理のためのオールインワンプラットフォームを提供します。社内のソリューションから移行する場合でも、初めてトグルを使用する場合でも、Flagsmith はパワーと効率の両方を提供します。
 
@@ -93,17 +91,30 @@ Flagsmith は、Web、モバイル、サーバーサイドのアプリケーシ�
 
 多変量フラグにより、2 つ以上のバリエーションでパーセンテージ分割を行い、正確なA/B/n テストや実験が可能です。
 
-### ダッシュボード  
+### ライブラリ
 
 Flagsmith のフラグを既存の Datadog ダッシュボードから直接表示し、制御することができます。
 
-### イベント
+### ヘルプ
 
-[Datadog Flagsmith インテグレーション](https://app.datadoghq.com/integrations/flagsmith)により、Flagsmith から Datadog のイベントストリームにフラグ変更イベントを送信します。
+[Datadog Flagsmith インテグレーション][2]により、Flagsmith から Datadog のイベントストリームにフラグ変更イベントを送信します。
 
-## サポート
+## Agent
 
-ご質問・お問い合わせは、[こちら](https://flagsmith.com/contact-us/)までお気軽にどうぞ。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Flagsmith にお問い合わせください。
 
+- [Flagsmith サポート][4]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Flagsmith のインテグレーションと Datadog Marketplace の製品を使って、機能をより早くリリースし、その影響を追跡する][5]
+
+[1]: https://flagsmith.com/
+[2]: https://app.datadoghq.com/integrations/flagsmith
+[3]: https://docs.flagsmith.com/integrations/datadog
+[4]: https://flagsmith.com/contact-us/
+[5]: https://www.datadoghq.com/blog/flagsmith-datadog-marketplace/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/flagsmith-platform" target="_blank">こちらをクリック</a>してください。

@@ -1,9 +1,7 @@
 ---
-title: API テストのエラー
-kind: documentation
 description: API テストのエラーの詳細な説明
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: ブログ
   text: Datadog Synthetic モニタリングの紹介
 - link: /synthetics/
@@ -12,13 +10,15 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: Documentation
   text: ブラウザーテストの設定
+kind: documentation
+title: API テストのエラー
 ---
 
 ## SSL エラー
 
 SSL エラーは、API テストの実行時に発生する可能性のあるエラーです。SSL テストでのアサーションエラーとは異なり、どの種類の API テストでも起こる可能性があります。
 
-{{< img src="synthetics/api_tests/ssl-self-signed-error.png" alt="SSL の自己署名エラー"  style="width:60%;" >}}
+{{< img src="synthetics/api_tests/ssl-self-signed-error.png" alt="SSL の自己署名エラー" style="width:60%;" >}}
 
 | エラー                                | 説明                                                                                                                                                              |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

@@ -7,6 +7,10 @@ description: Utilisez OpsGenie comme canal de notification pour les alertes et l
   événements Datadog.
 doc_link: https://docs.datadoghq.com/integrations/opsgenie/
 draft: false
+further_reading:
+- link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#opsgenie-integration
+  tag: Blog
+  text: Utiliser les intégrations avec le Service Catalog
 git_integration_title: opsgenie
 has_logo: true
 integration_id: ''
@@ -58,17 +62,21 @@ Utilisez `@opsgenie` pour créer des alertes :
 
 L'intégration OpsGenie n'inclut aucune métrique.
 
-### Events
+### Événements
 
 L'intégration OpsGenie n'inclut aucun événement.
 
-### Service Checks
+### Checks de service
 
 L'intégration OpsGenie n'inclut aucun check de service.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.opsgenie.com/settings/integration/integration-list
 [2]: https://app.datadoghq.com/organization-settings/api-keys

@@ -36,11 +36,11 @@ title: GitLab パイプラインでトレースを設定する
 
 - **Infrastructure metric correlation**: セルフホスティングの GitLab ランナーのために、パイプラインを[インフラストラクチャーホストメトリクス][14]に関連付ける
 
-- **Custom spans**: カスタムスパンを構成する
+- **Custom pre-defined tags**: 生成されたすべてのパイプライン、ステージ、ジョブスパンに[カスタムタグ][10]を構成する
 
-- **Custom pre-defined tags**: ランタイムに[カスタムタグ][10]とメトリクスを構成する
+- **Custom tags and metrics at runtime**: ランタイムの[カスタムタグ][13]とメトリクスを構成する
 
-- **Parameters**: カスタム `env` または `service` [パラメーター][13]を設定する
+- **Parameters**: カスタム `env` または `service` パラメーターを設定する
 
 - **Pipeline failure reasons**: [エラーメッセージ][15]からパイプラインの障害理由を特定する
 
@@ -151,9 +151,12 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 `?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`
 
+#### Datadog Teams と統合する
+パイプラインに関連付けられたチームの表示とフィルタリングを行うには、カスタムタグとして `team:<your-team>` を追加します。カスタムタグ名は、[Datadog Teams][16] のチームハンドルと正確に一致している必要があります。
+
 ## Datadog でパイプラインデータを視覚化する
 
-インテグレーションが正常に構成されたら、パイプラインが終了した後、[Pipelines][4] ページと [Pipeline Executions][5] ページにデータが入力されます。
+インテグレーションが正常に構成された後、パイプラインが終了すると、[Pipelines][4] ページと [Pipeline Executions][5] ページにデータが表示されます。
 
 **注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
 
@@ -176,13 +179,15 @@ kubectl exec -it <task-runner-pod-name> -- \
 {{< img src="ci/partial_retries_facet_panel.png" alt="Partial Pipeline ファセットが展開され、値 Retry が選択されたファセットパネル、Partial Retry ファセットが展開され、値 true が選択されたファセットパネル" style="width:40%;">}}
 
 
-### インフラストラクチャーメトリクスの相関
+### インフラストラクチャーメトリクスとジョブの相関付け
 
 セルフホスティングの GitLab ランナーを使っている場合、ジョブとそれを実行しているインフラストラクチャーを関連付けることができます。この機能を使うには、GitLab ランナーに `host:<hostname>` という形式のタグが必要です。タグは、[新しいランナーを登録する][6]際に追加することができます。既存のランナーでは、ランナーの `config.toml` を更新することでタグを追加します。または、UI から **Settings > CI/CD > Runners** に移動して、該当するランナーを編集することでタグを追加します。
 
 これらのステップの後、CI Visibility は各ジョブにホスト名を追加します。メトリクスを見るには、トレースビューでジョブスパンをクリックします。ドロワーに、ホストメトリクスを含む **Infrastructure** という新しいタブが表示されます。
 
-### パイプライン失敗時のエラーメッセージ
+### パイプライン失敗時のエラーメッセージの表示
+
+エラーメッセージは GitLab のバージョン 15.2.0 以降でサポートされています。
 
 GitLab パイプラインの実行に失敗した場合、特定のパイプライン実行内の `Errors` タブの下の各エラーは、GitLab からのエラータイプに関連するメッセージを表示します。
 
@@ -226,24 +231,25 @@ GitLab パイプラインの実行に失敗した場合、特定のパイプラ�
 <!-- | ---------- | ---------- | ---------- | -->
 <!-- | :---        |    :----:   |          ---: | -->
 
-## ジョブログ収集を有効にする (ベータ版)
+## ジョブログ収集を有効にする
 
 以下の GitLab バージョンは、ジョブログの収集をサポートしています。
+
 * GitLab.com (SaaS)
-* GitLab >= 14.8 (セルフホスティング) [ジョブログを格納するオブジェクトストレージ][7]を使用している場合のみ
+* GitLab >= 14.8 (セルフホスティング) [ジョブログを格納するためにオブジェクトストレージ][7]を使用している場合のみ
 
 ジョブログの収集を有効にするには
 
-1. GitLab セルフホストまたは GitLab.com アカウントで `datadog_integration_logs_collection` [機能フラグ][8]を有効化します。これにより、Datadog インテグレーションにある `Enable logs collection` オプションが表示されます。
-2. `Enable logs collection` オプションを有効にし、変更を保存します。
+1. GitLab セルフホスティングまたは GitLab.com アカウントで `datadog_integration_logs_collection` [機能フラグ][8]を有効にします。これにより、[Pipeline Setup ページ][17]の **Enable job logs collection** チェックボックスが表示されるようになります。
+2. **Enable job logs collection** をクリックし、**Save changes** をクリックします。
 
-ジョブログは [Logs][9] 製品に収集され、CI Visibility 内で GitLab パイプラインと自動的に相関が取られます。
+ジョブログは[ログ管理][9]で収集され、CI Visibility で GitLab パイプラインと自動的に相関付けられます。1 GiB を超えるログファイルは切り捨てられます。
 
 <div class="alert alert-info"><strong>注</strong>: Logs は、CI Visibility とは別課金となります。</div>
 
-1GiB を超えるログファイルは切り捨てられます。
+GitLab インテグレーションから収集されたジョブログの処理についての詳細は、[プロセッサーのドキュメント][18]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -256,9 +262,12 @@ GitLab パイプラインの実行に失敗した場合、特定のパイプラ�
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [9]: /ja/logs/
-[10]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#setting-custom-tags
-[11]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#enable-job-log-collection-beta
-[13]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#integrating-through-webhooks
-[14]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#infrastructure-metric-correlation
-[15]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#error-messages-for-pipeline-failures
+[10]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
+[11]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
+[12]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[13]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[14]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
+[15]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
+[16]: /ja/account_management/teams/
+[17]: https://app.datadoghq.com/ci/setup/pipeline?provider=gitlab
+[18]: /ja/logs/log_configuration/processors/

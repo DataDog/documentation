@@ -26,12 +26,19 @@ title: ログ収集のトラブルシューティングガイド
 
 ## ポート 10516 のアウトバウンドトラフィックがブロックされる
 
-Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
+Datadog Agent は、ポート 10516 を使って TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
 
-手動で接続をテストするには、次の Telnet または OpenSSL コマンドを実行します (ポート 10514 でも動作しますが、安全性は劣ります)。
+OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、接続を手動でテストすることができます。OpenSSL の場合は、以下のコマンドを実行します。
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
-* `telnet intake.logs.datadoghq.com 10514`
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+GnuTLS の場合、以下のコマンドを実行します。
+
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
+```
 
 さらに、次のようなログを送信します。
 
@@ -39,7 +46,7 @@ Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信し
 <API_KEY> これはテストメッセージです
 ```
 
-- ポート 10514 または 10516 を開くことを選択できない場合は、`datadog.yaml` に次の設定を追加して、Datadog Agent がログを転送するよう構成することができます。
+- ポート 10516 を開くことを選択できない場合は、`datadog.yaml` に次の設定を追加して、Datadog Agent がログを転送するよう構成することができます。
 
 ```yaml
 logs_config:
@@ -72,10 +79,10 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
 - Access is denied. (アクセスが拒否されました。)
 - Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable. (パターン `<path/to/filename>` に一致するファイルが見つかりませんでした。そのサブディレクトリがすべて実行可能かどうか確認してください。)
 
-エラーを修正するには、Datadog Agent ユーザーにログファイルおよびサブディレクトリへの読み取り、書き込み、実行権限を与えます。
+エラーを修正するには、Datadog Agent ユーザーにログファイルおよびサブディレクトリへの読み取りおよび実行権限を与えます。
 
 {{< tabs >}}
-{{% tab "Linux と MacOS" %}}
+{{% tab "Linux" %}}
 1. ファイルアクセス許可の詳細情報を取得するには、`namei` コマンドを実行します。
    ```
    > namei -m /path/to/log/file
@@ -101,7 +108,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
 
 **注**: これらの権限は、ログローテーション構成で正しく設定されていることを確認してください。そうしないと、次のログローテーション時に、Datadog Agent の読み取り権限が失われる可能性があります。Agent がファイルへの読み取りアクセス権を持つように、ログローテーション構成で権限を `644` として設定します。
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Windows (cmd)" %}}
 1. ファイルの権限についてのより詳しい情報を得るには、ログフォルダ上で `icacls` コマンドを使用します。
@@ -162,7 +169,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
    ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Windows (PowerShell)" %}}
 
@@ -206,7 +213,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
    ```
 
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -246,7 +253,15 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 ## 予期せぬログの欠落
 
-ログが [Datadog Live Tail][11] に表示されることをチェックします。Live Tail に表示される場合は、インデックス構成ページで、いずれかの[除外フィルター][12]がログと一致していないかどうかをチェックしてください。
+[Datadog Live Tail][11] にログが表示されるか確認します。
+
+Live Tail に表示される場合は、インデックス構成ページで、ログと一致する [除外フィルター][12]がないか確認してください。
+Live Tail に表示されない場合、タイムスタンプが 18 時間以上過去のものであれば、ドロップされた可能性があります。`datadog.estimated_usage.logs.drop_count` メトリクスで、どの `service` と `source` が影響を受けているかを確認できます。
+
+## ログの切り捨て
+
+1MB を超えるログは切り捨てられます。どの `service` と `source` が影響を受けているかは `datadog.estimated_usage.logs.truncated_count` と `datadog.estimated_usage.logs.truncated_bytes` メトリクスで確認できます。
+
 
 ## その他の参考資料
 
@@ -254,9 +269,9 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 [1]: /ja/logs/
 [2]: /ja/help/
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [4]: /ja/agent/logs/log_transport?tab=https#enforce-a-specific-transport
-[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [7]: /ja/integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide/

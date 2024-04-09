@@ -89,7 +89,7 @@ steps:
 
 **注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
 
-### 部分的およびダウンストリームパイプライン
+### 部分的およびダウンストリームパイプラインを表示する
 
 **Pipeline Executions** のページでは、検索バーで以下のフィルターを使用することができます。
 
@@ -115,5 +115,5 @@ steps:
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/buildkite/#partial-and-downstream-pipelines
+[5]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
 [6]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux

@@ -24,8 +24,6 @@ author:
   vendor_id: agentil-software
 categories:
 - marketplace
-- cloud
-- monitoring
 - sap
 dependencies: []
 display_on_public_website: true
@@ -40,7 +38,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: agentil_software_sap_businessobjects
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -57,12 +54,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
   - Category::SAP
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Surveillez vos systèmes SAP BusinessObjects
   media:

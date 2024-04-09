@@ -22,30 +22,38 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
+You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
 
 {{% appsec-getstarted %}}
-- One of the [supported APM tracing integrations][1].
-- [CGO][2] is enabled in your build environment, along with the C library headers and the C toolchain for your compilation target. For detailed instructions, see [Enabling CGO][3]
+- Your service is [supported][2].
 
-## Get started
+## Enabling threat detection
+### Get started
 
-1. **Update your program's dependencies** with the latest version of the Datadog Go library (version 1.36.0 or later):
+1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later):
 
    ```console
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
-   For information about which language and framework versions are supported by the library, see [Compatibility][4].
 
-2. **Recompile your program** and enable ASM and CGO:
+2. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of Go libraries and frameworks.
+   A list of these packages can be found in the [compatibility requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each integration.
+
+3. **Recompile your program** with ASM enabled:
    ```console
-   $ env CGO_ENABLED=1 go build -v -tags appsec my-program
+   $ go build -v -tags appsec my-program
    ```
 
-3. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+   **Notes**:
+   - The Go build tag `appsec` is not necessary if CGO is enabled with `CGO_ENABLED=1`.
+   - Datadog WAF needs the following shared libraries on Linux: `libc.so.6` and `libpthread.so.0`.
+   - When using the build tag `appsec` and CGO is disabled, the produced binary is still linked dynamically to these libraries.
+
+4. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
    ```console
    $ env DD_APPSEC_ENABLED=true ./my-program
    ```
+
    Or one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
@@ -84,7 +92,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your application's ECS task definition JSON file, by adding this in the environment section:
 
@@ -104,13 +112,11 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 {{% appsec-getstarted-2 %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=go#supported-frameworks
-[2]: https://github.com/golang/go/wiki/cgo
-[3]: /security/application_security/setup_and_configure/?code-lang=go#enabling-cgo
-[4]: /security/application_security/setup_and_configure/?code-lang=go#compatibility
+[1]: /security/application_security/enabling/compatibility/go/#web-framework-compatibility
+[2]: /security/application_security/enabling/compatibility/go

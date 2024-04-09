@@ -10,11 +10,17 @@ further_reading:
       text: 'Service Catalog'
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
+{{< /site-region >}}
+
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Java libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [APM enabled with the Java Agent v1.9.0 or later][2]
+* [APM enabled with the Java Agent][2]
+  * Kafka and RabbitMQ: v1.9.0 or later
+  * Amazon SQS: v1.27.0 or later
 
 ### Installation
 
@@ -31,6 +37,11 @@ As an alternative, you can set the `-Ddd.data.streams.enabled=true` system prope
 ```bash
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
 ```
+### Supported libraries
+Data Streams Monitoring supports the [confluent-kafka library][3].
+
+### Monitoring SQS pipelines
+Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
 ## Further Reading
 
@@ -38,3 +49,5 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar p
 
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/java/
+[3]: https://pypi.org/project/confluent-kafka/
+[4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html

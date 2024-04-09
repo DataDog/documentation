@@ -3,7 +3,7 @@ app_id: purefb
 app_uuid: 50ae3c61-a87d-44ee-9917-df981184ff8a
 assets:
   dashboards:
-    purefb_overview: dashboards/purefb_overview.json
+    purefb_overview: assets/dashboards/purefb_overview.json
   integration:
     configuration:
       spec: assets/configuration/spec.yaml
@@ -22,8 +22,8 @@ author:
   sales_email: sales@purestorage.com
   support_email: pure-observability@purestorage.com
 categories:
-- os system
 - data store
+- OS & システム
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefb/README.md
 display_on_public_website: true
@@ -31,27 +31,26 @@ draft: false
 git_integration_title: purefb
 integration_id: purefb
 integration_title: Pure Storage FlashBlade
-integration_version: 1.0.1
+integration_version: 1.0.2
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: purefb
-oauth: {}
 public_title: Pure Storage FlashBlade
 short_description: Pure Storage FlashBlade のパフォーマンスと利用状況を監視
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::OS System
   - Category::Data Store
+  - Category::OS & System
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Pure Storage FlashBlade のパフォーマンスと利用状況を監視
   media:
@@ -98,7 +97,8 @@ tile:
 
 #### ホスト
 
-ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefb==1.0.0` を実行します。
+ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefb==1.0.2` を実行します。
+
 
 ### コンフィギュレーション
 

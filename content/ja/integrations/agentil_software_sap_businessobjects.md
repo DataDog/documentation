@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
@@ -24,8 +26,6 @@ author:
   vendor_id: agentil-software
 categories:
 - マーケットプレイス
-- cloud
-- モニタリング
 - sap
 dependencies: []
 display_on_public_website: true
@@ -40,7 +40,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: agentil_software_sap_businessobjects
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -57,12 +56,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
   - Category::SAP
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: SAP ビジネスオブジェクトシステムの監視
   media:

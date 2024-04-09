@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - network device monitoring
 aliases:
 - /ja/network_performance_monitoring/devices/
 description: ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化。
@@ -26,9 +29,13 @@ kind: documentation
 title: ネットワークデバイスモニタリング
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">ネットワークデバイスモニタリングはこのサイトではサポートされていません。</div>
+{{< /site-region >}}
+
 ## 概要
 
-{{< vimeo 673243317 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
 
 <br/>
 
@@ -38,7 +45,7 @@ title: ネットワークデバイスモニタリング
 
 1. Datadog Agent をインストールします (通常、監視対象デバイスではないサーバーにインストールします)。
 2. [個々のデバイスの監視][1]または[デバイスのオートディスカバリー][2]のいずれかで、SNMP インテグレーションを構成します。
-3. ネットワークデバイスの探索ページで、ネットワークインフラストラクチャー全体の監視を開始します。
+3. [ネットワークデバイス][7]ページで、ネットワークインフラストラクチャー全体の監視を開始します。
 4. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
     - [監視対象のデバイス一覧][3]
     - [すべてのインターフェイスのパフォーマンス全体][4]
@@ -84,9 +91,10 @@ title: ネットワークデバイスモニタリング
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/network_monitoring/devices/setup/#monitoring-individual-devices
-[2]: /ja/network_monitoring/devices/setup/#autodiscovery
+[1]: /ja/network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
+[2]: /ja/network_monitoring/devices/snmp_metrics/#autodiscovery
 [3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
 [4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[5]: /ja/monitors/create/types/metric/
+[5]: /ja/monitors/types/metric/
 [6]: /ja/network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
+[7]: https://app.datadoghq.com/devices

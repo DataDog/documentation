@@ -26,6 +26,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 - ログの収集
 dependencies:
@@ -40,21 +41,21 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: Scylla
-oauth: {}
 public_title: Scylla
 short_description: クラスターのリソース、レイテンシー、健全性などを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Data Store
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: クラスターのリソース、レイテンシー、健全性などを追跡
   media: []

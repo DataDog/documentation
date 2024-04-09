@@ -13,6 +13,12 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
   tag: 'Blog'
   text: 'Best practices for writing incident postmortems'
+- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+  tag: "blog"
+  text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -21,7 +27,7 @@ Notebooks combine graphs and text in a linear, cell-based format. They help you 
 
 ## Getting started
 
-1. Build a [new notebook][1], from the main navigation **Notebooks > New Notebook**.
+1. From the [Notebook List][1] page, click **+ New Notebook**.
 
 2. Click the **Save Notebook** button. </br>
   **Note**: A new notebook is not saved by default.
@@ -62,15 +68,13 @@ Click on the cog icon in the upper right of a notebook to see sharing options. N
 
 To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting.
 
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Google Docs" style="width:100%;">}}
-
 ### Import or export notebook JSON
 
 Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON.
 
 ### Link to individual cells
 
-Copy the URL for a specific cell by clicking **Link directly to cell** in the cell's **Share** menu. Direct linking is available for both visualization and Markdown cells.
+To copy the URL for a specific cell, click the cell's **Share** menu and select **Link directly to cell**. Direct linking is available for both visualization and Markdown cells.
 
 When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
 
@@ -78,7 +82,7 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 
 {{< img src="notebooks/notebook_list.png" alt="notebook list previewing the cell types of a selected notebook" style="width:100%;">}}
 
-The [Notebook List][2] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
+The [Notebook List][1] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
 
 * **Your Notebooks**: Notebooks created by you.
 * **All Notebooks**: All Notebooks in your organization.
@@ -87,7 +91,10 @@ The [Notebook List][2] allows you to view and search previously created notebook
 Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#view-mode), hover over the notebook and click **Open notebook in view mode** on the right.
 
 ## Template gallery
-From the [Template Gallery][3], see ready-to-use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
+From the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
+
+## Version history
+From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][3].
 
 ## Notebook configuration
 
@@ -177,7 +184,7 @@ Use granular access controls to limit the [roles][17] that may edit a particular
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles that may edit the notebook.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
@@ -194,16 +201,16 @@ To restore general access to a notebook with restricted access, follow the steps
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/notebook
-[2]: https://app.datadoghq.com/notebook/list
-[3]: https://app.datadoghq.com/notebook/template-gallery
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://app.datadoghq.com/notebook/template-gallery
+[3]: /notebooks/guide/version_history
 [4]: /dashboards/template_variables/
 [5]: https://daringfireball.net/projects/markdown/
 [6]: https://mermaid.js.org/
 [7]: /dashboards/widgets/timeseries/
 [8]: /dashboards/widgets/top_list/
 [9]: /dashboards/widgets/table/
-[10]: /dashboards/widgets/heat_map/
+[10]: /dashboards/widgets/heatmap/
 [11]: /dashboards/widgets/distribution/
 [12]: /dashboards/widgets/list/
 [13]: /dashboards/widgets/query_value/

@@ -26,17 +26,23 @@ further_reading:
 - link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
+- link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
+  tag: "Blog"
+  text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 
 ## Overview
 
-To create a new log detection rule in Datadog, hover over **Security**, select **Detection Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a log detection rule in Datadog, navigate to the [Detection Rules page][1] and click **New Rule**.
 
 ## Rule Type
 
 For Cloud SIEM (Security Information and Event Management), select **Log Detection** to analyze ingested logs in real-time.
 
-## Choose a detection method
+## Detection methods
 
 ### Threshold
 
@@ -54,6 +60,10 @@ When configuring a specific threshold isn't an option, you can define an anomaly
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
 
+### Third Party
+
+Third Party allows you to forward alerts from an outside vendor or application. You can update the rule with suppression queries and who to notify when a signal is generated.
+
 ## Define a search query
 
 {{< tabs >}}
@@ -67,13 +77,9 @@ Construct a search query using the same logic as a [log explorer search][1].
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
-Add additional queries with the Add Query button.
+Click **Add Query** to add additional queries.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
-
-#### Advanced options
-
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
+**Note**: The query applies to all ingested logs.
 
 #### Joining queries
 
@@ -87,7 +93,7 @@ The Detection Rules join the logs together using a group by value. The group by 
 
 The Detection Rule cases join these queries together based on their group by value. The group by attribute is typically the same attribute because the value must be the same for the case to be met. If a group by value doesn't exist, the case will never be met. A Security Signal is generated for each unique group by value when a case is matched.
 
-{{< img src="security/security_monitoring/detection_rules/set_rule_case3.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:55%;" >}}
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
 
 In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
 
@@ -102,7 +108,7 @@ In this example, when greater than five failed logins and a successful login exi
 
 Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 #### Learned value
 
@@ -114,14 +120,12 @@ For example, create a query for successful user authentication and set **Detect 
 
 You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
-#### Advanced options
-
-Click the **Advanced** option to add queries that will **Only trigger a signal when** a value is met, or **Never trigger a signal** when a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under `Never Trigger A Signal`.
-
 [1]: /logs/search_syntax/
 {{% /tab %}}
 
 {{% tab "Anomaly" %}}
+
+### Search query
 
 Construct a search query using the same logic as a log explorer search.
 
@@ -129,7 +133,7 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 
 Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
-**Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 {{% /tab %}}
 
@@ -155,13 +159,21 @@ When selected, signals are suppressed for the first 24 hours. In that time, Data
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
-#### Advanced options
-
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
-
-
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
+{{% /tab %}}
+
+{{% tab "Third Party" %}}
+
+### Root query
+
+Construct a search query using the same logic as a [log explorer search][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
+
+Click **Add Query** to add additional queries.
+
+**Note**: The query applies to all ingested logs.
+
+[1]: /logs/search_syntax/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -176,9 +188,9 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 Enable **Create rules cases with the Then operator** if you want to trigger a signal for the example: If query A occurs and then query B occurs. The `then` operator can only be used on a single rule case.
 
-All rule cases are evaluated as case statements. Thus, the first case to match generates the signal. Click and drag your rule cases to manipulate their ordering. An example rules case is `a > 3`.
+All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering. 
 
-A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section.
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule case for query `a` is `a > 3`.
 
 **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
@@ -186,11 +198,11 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
-{{% cloud-siem-rule-time-windows %}}
+{{% security-rule-time-windows %}}
 
 Click **Add Case** to add additional cases.
 
@@ -204,7 +216,7 @@ Click **Add Case** to add additional cases.
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Forget value
 
@@ -222,7 +234,7 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
@@ -240,11 +252,29 @@ The impossible travel detection method does not require setting a rule case.
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
-{{% cloud-siem-rule-time-windows %}}
+{{% security-rule-time-windows %}}
+
+{{% /tab %}}
+
+{{% tab "Third Party" %}}
+
+### Trigger
+
+All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering. 
+
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule case for query `a` is `a > 3`.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+Click **Add Case** to add additional cases.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -264,7 +294,17 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 ## Say what's happening
 
-{{% cloud-siem-rule-say-whats-happening %}}
+{{% security-rule-say-whats-happening %}}
+
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
+
+**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
+
+## Suppression rules
+
+Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
+
+Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
 
 ## Rule deprecation
 
@@ -274,14 +314,12 @@ The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
-    - [Rule editor][4] for that specific rule
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][4] in the UI.
+    - [Rule editor][2] for that specific rule
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][2] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/variables/
-[2]: /security/notifications/variables/#template-variables
-[3]: /security/default_rules/#cat-cloud-siem-log-detection
-[4]: /security/detection_rules/#rule-and-generated-signal-options
+[1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /security/detection_rules/#clone-a-rule

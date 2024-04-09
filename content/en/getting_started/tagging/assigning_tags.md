@@ -95,8 +95,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /getting_started/integrations/
-[2]: /agent/guide/agent-configuration-files/
-[3]: /getting_started/tagging/#defining-tags
+[2]: /agent/configuration/agent-configuration-files/
+[3]: /getting_started/tagging/#define-tags
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -137,8 +137,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /getting_started/integrations/
-[2]: /agent/guide/agent-configuration-files/
-[3]: /getting_started/tagging/#defining-tags
+[2]: /agent/configuration/agent-configuration-files/
+[3]: /getting_started/tagging/#define-tags
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -264,31 +264,32 @@ The span metadata above is invalid since the value of `key` cannot reference a s
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/host_add_tags.png" alt="Host map with an host details opened highlighting Add Tags button" style="width:80%;">}}
+
 
 [1]: /infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. Once you have added tags, ensure they are visible in the UI before attempting to add more tags.
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="Infrastructure List with an Infrastructure details panel opened highlighting Add Tags button" style="width:80%;">}}
+
 
 [1]: /infrastructure/
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes.
+From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes. For more information, see the [Manage Monitors documentation][2].
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags" style="width:80%;">}}
+When creating a monitor, assign monitor tags under step 4 *Say what's happening* or *Notify your Team*:
 
-When creating a monitor, assign monitor tags under step 4 *Say what's happening*:
+{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:80%;" >}}
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" style="width:80%;">}}
-
-[1]: /monitors/manage/
+[1]: https://app.datadoghq.com/monitors/manage
+[2]: /monitors/manage/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
@@ -400,7 +401,7 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/#defining-tags
+[1]: /getting_started/tagging/#define-tags
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /integrations/#cat-cloud
 [4]: /getting_started/agent/#setup

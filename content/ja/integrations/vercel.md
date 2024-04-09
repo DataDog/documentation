@@ -21,7 +21,11 @@ author:
   name: Datadog
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
-categories: []
+categories:
+- クラウド
+- 構成 & デプロイ
+- ネットワーク
+- プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
 display_on_public_website: true
@@ -34,19 +38,22 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: vercel
-oauth: {}
 public_title: Vercel
 short_description: Vercel で実行中のサーバーレスアプリケーションを監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Network
+  - Category::Provisioning
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Vercel で実行中のサーバーレスアプリケーションを監視する
   media: []

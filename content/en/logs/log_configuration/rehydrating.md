@@ -13,7 +13,7 @@ Log Rehydration* enables you to capture log events from customer-owned storage-o
 
 ## Historical views
 
-With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. 
+With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently.
 
 To create a historical view:
 
@@ -43,7 +43,7 @@ If you download historical views as a CSV, the data is limited to the last 90 da
 
 8. (Optional) **Notify** trigger notifications on rehydration completion through [integrations][6] with the @handle syntax.
 
-{{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive"  style="width:75%;">}}
+{{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive" style="width:75%;">}}
 
 **Note**: The query is applied _after_ the files matching the time period are downloaded from your archive. To reduce your cloud data transfer cost, reduce the selected date range.
 
@@ -95,7 +95,7 @@ Historical views stay in Datadog until they have exceeded the selected retention
 
 One hour later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true"  width="75%" >}}
+{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
 
 ### Viewing deleted historical views
 
@@ -114,10 +114,7 @@ An external archive must be configured in order to rehydrate data from it. [Foll
 Datadog requires the permission to read from your archives in order to rehydrate content from them. This permission can be changed at any time.
 
 {{< tabs >}}
-{{% tab "AWS S3" %}}
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
-{{< /site-region >}}
+{{% tab "Amazon S3" %}}
 
 In order to rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
 
@@ -151,7 +148,7 @@ In order to rehydrate log events from your archives, Datadog uses the IAM Role i
 
 Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. Once you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
-{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives"  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" style="width:75%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon_web_services/?tab=allpermissions#installation
@@ -162,7 +159,7 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
 
-{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role"  style="width:75%;">}}
+{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role" style="width:75%;">}}
 
 
 [1]: /logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
@@ -170,9 +167,9 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [GCP IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
+In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
 
-{{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role"  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}

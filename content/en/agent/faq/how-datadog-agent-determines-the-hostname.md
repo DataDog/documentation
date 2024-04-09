@@ -34,6 +34,8 @@ The canonical hostname is chosen according to the following rules. The first mat
 
 If the name is recognized as a common non-unique name (for example, `localhost.localdomain`), the current rule fails and passes through to the next.
 
+See [Hostname detection logic][5] for details on how the Agent determines the hostname.
+
 ### AWS hosts
 
 When pulling information on your AWS hosts from the [Datadog API][3], the following attributes display based on availability:
@@ -52,7 +54,7 @@ The names collected by the Agent (detailed above) are added as aliases for the c
 
 See the list of all hosts in your account from the [Infrastructure List][4]. The aliases associated with each host are available in the inspect panel, which is accessed by clicking the **Inspect** button while hovering over a host row:
 
-{{< img src="agent/faq/host_aliases.png" alt="Host aliases"  >}}
+{{< img src="agent/faq/host_aliases.png" alt="Host aliases" >}}
 
 **Note**: These aliases are not available for searching or filtering. They are available only in the inspect panel mentioned above.
 
@@ -73,7 +75,7 @@ When upgrading from Agent v5 to Agent v6, there might be a difference in the hos
 
 #### Determine if you're affected
 
-Starting with v6.3.0, the Agent logs the warning below if you’re affected by the change:
+Starting with v6.3.0, the Agent logs the warning below if you're affected by the change:
 ```text
 DEPRECATION NOTICE: The agent resolved your hostname as <HOSTNAME>. However in a future version, it will be resolved as <FQDN> by default. To enable the future behavior, please enable the `hostname_fqdn` flag in the configuration.
 ```
@@ -91,7 +93,7 @@ If you're affected by this change, Datadog recommends taking the following actio
 
 * **Upgrading from Agent v5 to Agent v < 6.3**: Hardcode your hostname in the [Agent's main configuration][2] file.
 * **Upgrading from Agent v5 to Agent >= v6.3**: Enable the `hostname_fqdn` option in the [Agent's main configuration][2] file. This ensures that you keep the same hostname.
-* **Upgrading from Agent v5 to Agent v6 (a future version which uses the fqdn by default)**: you don’t need to take any action.
+* **Upgrading from Agent v5 to Agent v6 (a future version which uses the fqdn by default)**: you don't need to take any action.
 * If you want to ensure the current default behavior of Agent v6 is preserved when you upgrade the Agent in the future, set `hostname_fqdn` to `false`. That said, Datadog recommends you switch `hostname_fqdn` to `true` whenever possible.
 
 ### Windows
@@ -115,16 +117,17 @@ By default, Agent v6 uses the instance's hostname provided by GCE. This matches 
 If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to false, and the hostname of the Agent is not hardcoded in `datadog.conf`/`datadog.yaml`, the reported hostname on Datadog changes from the GCE instance `name` to the full GCE instance `hostname` (which includes the GCE project id).
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme"  >}}
+{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /agent/guide/agent-commands/#agent-status-and-information
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-commands/#agent-status-and-information
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /api/v1/hosts/
 [4]: https://app.datadoghq.com/infrastructure
+[5]: https://github.com/DataDog/datadog-agent/tree/main/pkg/util/hostname

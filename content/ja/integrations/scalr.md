@@ -22,9 +22,9 @@ author:
   sales_email: sales@scalr.com
   support_email: support@scalr.com
 categories:
-- orchestration
-- コラボレーション
+- 自動化
 - 構成 & デプロイ
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/scalr/README.md
 display_on_public_website: true
@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: scalr
-oauth: {}
 public_title: Scalr
 short_description: Scalr は、Terraform Automation and COllaboration (TACO) 製品です。
 supported_os:
@@ -47,13 +46,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Automation
+  - Category::Configuration & Deployment
+  - Category::Orchestration
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Orchestration
-  - Category::Collaboration
-  - Category::Configuration & Deployment
-  - Offering::Integration
   configuration: README.md#Setup
   description: Scalr は、Terraform Automation and COllaboration (TACO) 製品です。
   media:
@@ -76,7 +75,7 @@ Scalr [インテグレーション][1]は、キューの実行、キューの状
 ## セットアップ
 Scalr インテグレーションは [Datadog Agent][3] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog Agent v7.21 または v6.21 以降の場合、以下の手順に従ってホストに Scalr インテグレーションをインストールします。Datadog Agent 以前のバージョンでインストールする場合は、[コミュニティインテグレーションを利用する][4]を参照してください。
 
@@ -112,7 +111,7 @@ Scalr は、実行結果をイベントとして[イベントエクスプロー�
 
 ヘルプが必要ですか？[Datadog サポート][13]または [Scalr サポート][14]にお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 - [Scalr の顧客向けドキュメント][15]
 - [Scalr Datadog インテグレーションドキュメント][16]

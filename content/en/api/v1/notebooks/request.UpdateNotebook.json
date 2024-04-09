@@ -41,7 +41,7 @@
           "type": "notebook_cells"
         }
       ],
-      "name": "Example-Update_a_notebook_returns_OK_response-updated",
+      "name": "Example-Notebook-updated",
       "status": "published",
       "time": {
         "live_span": "1h"

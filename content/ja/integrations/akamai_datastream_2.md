@@ -17,10 +17,12 @@ assets:
     source_type_name: Akamai DataStream 2
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Datadog
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
-categories: []
+categories:
+- キャッシュ
+- ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/akamai_datastream_2/README.md
 display_on_public_website: true
@@ -33,19 +35,20 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: akamai_datastream_2
-oauth: {}
 public_title: Akamai DataStream 2
 short_description: Akamai DataStream のログを Datadog に送信
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Caching
+  - Category::Log Collection
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Akamai DataStream のログを Datadog に送信
   media: []
@@ -68,7 +71,7 @@ Akamai DataStream 2 のログとメトリクスを表示するためのプリセ
 
 ### コンフィギュレーション
 
-Akamai DataStream 2 が Datadog にログを送信するよう構成するには、[Akamai techdocs サイト上の以下の説明](https://techdocs.akamai.com/datastream2/docs/stream-datadog)に従って、ログソースを `akamai.datastream` に設定することを確認します。
+Akamai DataStream 2 が Datadog にログを送信するよう構成するには、[Akamai techdocs サイト上の以下の説明](https://techdocs.akamai.com/datastream2/docs/stream-datadog)に従って、ログソースを `akamai.datastream` に、ログフォーマットを `JSON` に設定することを確認します。
 
 ### 検証
 

@@ -1,8 +1,11 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: prophetstor-federatorai-license
 app_uuid: 965e6142-3b99-4999-a7c6-09a00775e511
 assets:
   integration:
+    auto_install: false
     configuration:
       spec: ''
     events:
@@ -13,6 +16,7 @@ assets:
       prefix: federatorai.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10187
     source_type_name: Federator.ai.license
 author:
   homepage: https://www.prophetstor.com/
@@ -22,8 +26,10 @@ author:
   vendor_id: prophetstor
 categories:
 - containers
-- orchestration
+- kubernetes
 - マーケットプレイス
+- orchestration
+- ai/ml
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -37,7 +43,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: prophetstor_federatorai
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -51,37 +56,39 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Containers
-  - Category::Orchestration
+  - Category::Kubernetes
   - Category::Marketplace
+  - Category::Orchestration
+  - Category::AI/ML
   - Offering::Software License
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Kubernetes アプリケーションを最適化するための Federator.ai ライセンス
   media:
   - caption: ProphetStor Federator.ai クラスター概要ダッシュボードは、Kubernetes クラスターやノードのリソース使用量の予測価と推奨値、および過去の使用量を表示します。
-    image_url: assets/images/Federator_ai_Datadog_Cluster_Overview.png
+    image_url: images/Federator_ai_Datadog_Cluster_Overview.png
     media_type: image
   - caption: ProphetStor Federator.ai アプリケーション概要ダッシュボードは、アプリケーションごとに CPU とメモリの使用量の予測値と推奨値を表示します。
-    image_url: assets/images/Federator_ai_Datadog_Application_Overview.png
+    image_url: images/Federator_ai_Datadog_Application_Overview.png
     media_type: image
   - caption: ProphetStor Federator.ai Kafka 概要ダッシュボードは、Kafka のコンシューマーレプリカのオートスケールに関する使用情報と推奨事項を表示します。
-    image_url: assets/images/Federator_ai_Datadog_Kafka_Overview.png
+    image_url: images/Federator_ai_Datadog_Kafka_Overview.png
     media_type: image
   - caption: ProphetStor Federator.ai コスト分析概要ダッシュボードでは、Kubernetes クラスターの導入コストと、パブリッククラウドのサービスプロバイダーで導入した場合のクラスターコンフィギュレーションや推定コスト/節約額の推奨事項を示します。
-    image_url: assets/images/Federator_ai_Datadog_Cost_Analysis_Overview.png
+    image_url: images/Federator_ai_Datadog_Cost_Analysis_Overview.png
     media_type: image
   - caption: Federator.ai ダッシュボードには、Kubernetes や VM のクラスターやアプリケーションのワークロード予測とリソースの推奨値が表示されます。
-    image_url: assets/images/Federator_ai_Dashboard.png
+    image_url: images/Federator_ai_Dashboard.png
     media_type: image
   - caption: Federator.ai は、クラスター、ノード、ネームスペース、アプリケーション、コントローラーの予測とリソースの推奨値を提供します。
-    image_url: assets/images/Federator_ai_Workload_Prediction.png
+    image_url: images/Federator_ai_Workload_Prediction.png
     media_type: image
   - caption: Federator.ai は、クラスターのワークロード予測に基づいて、異なるパブリッククラウドプロバイダーに対して最もコスト効率の良いクラスターコンフィギュレーションを推奨します。
-    image_url: assets/images/Federator_ai_Multicloud_Cost_Analysis.png
+    image_url: images/Federator_ai_Multicloud_Cost_Analysis.png
     media_type: image
   - caption: Federator.ai は、個々のネームスペースのコスト傾向を分析・予測します。
-    image_url: assets/images/Federator_ai_Cost_Allocation.png
+    image_url: images/Federator_ai_Cost_Allocation.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -89,6 +96,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -105,7 +113,7 @@ ProphetStor Federator.ai ライセンスを使用すると、AI ベースのソ�
 
 この Federator.ai ライセンスとは別に、すぐに使用できるダッシュボードと推奨モニターを備えた公式の [Datadog インテグレーション][9]を利用できます。Federator.ai の詳細については、[ProphetStor Federator.ai 機能デモ][2]ビデオをご覧ください。
 
-## サポート
+## Agent
 
 サポートやリクエストについては、[ProphetStor サポート](mailto:support@prophetstor.com)にお問い合わせください。
 

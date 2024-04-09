@@ -8,10 +8,8 @@ author:
   sales_email: sales@apptrail.com
   support_email: support@apptrail.com
 categories:
-- セキュリティ
 - ログの収集
-- モニタリング
-- アラート設定
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md
 display_on_public_website: true
@@ -24,23 +22,20 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: apptrail
-oauth: {}
 public_title: Apptrail
 short_description: Apptrail を使用して、すべての SaaS 監査ログを監視、分析、および警告する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
   - Category::Log Collection
-  - Category::Monitoring
-  - Category::Alerting
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Apptrail を使用して、すべての SaaS 監査ログを監視、分析、および警告する
   media:
@@ -67,6 +62,7 @@ tile:
   title: Apptrail
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -77,7 +73,7 @@ Apptrail の監査イベントストリーミング機能 ([_トレイル_][2]) 
 
 Apptrail と Datadog のインテグレーションにより、SaaS の監査ログを Apptrail から Datadog にリアルタイムで継続的にエクスポートすることができるようになります。Datadog を使用して、SaaS 監査ログの分析、アーカイブ、監視、警告を行うことができます。
 
-## セットアップ
+## 計画と使用
 
 前提条件として、SaaS ベンダーから Apptrail にサインアップしている必要があります。
 
@@ -104,13 +100,13 @@ Apptrail の監査ログを Datadog で表示するには
 
 詳しくは、[Apptrail Datadog 配信ドキュメント][7]をお読みください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### ログの収集
+### 収集データ
 
 Datadog を宛先とする Apptrail の[トレイル][2]は、構成された[トレイルルール][8]にマッチしたすべてのログを Datadog に継続的に送信します。Apptrail の監査ログのフォーマットについては、[イベントフォーマット][9]を参照してください。
 
-## サポート
+## Agent
 
 ヘルプが必要ですか？[Datadog サポート][10]または [Apptrail サポート][11]にご連絡ください。
 

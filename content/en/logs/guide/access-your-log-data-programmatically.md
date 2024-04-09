@@ -437,8 +437,8 @@ The `from` and `to` parameters can be:
 ```javascript
 {
   "filter": {
-    "from": "now",
-    "to": "now-1h"
+    "from": "now-1h",
+    "to": "now"
   }
 }
 ```
@@ -553,4 +553,4 @@ In the response, the next two results, `joe` with 500 `pageviews` and `chris` wi
 [2]: /account_management/api-app-keys/#api-keys
 [3]: /account_management/api-app-keys/#application-keys
 [4]: https://curl.haxx.se/download.html
-[5]: /account_management/rbac/permissions/?tab=ui#log-data-access
+[5]: /logs/explorer/search_syntax/

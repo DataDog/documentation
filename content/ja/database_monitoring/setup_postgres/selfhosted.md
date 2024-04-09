@@ -8,11 +8,11 @@ kind: documentation
 title: セルフホストの Postgres のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に視覚化します。
 
 Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリを収集します。Postgres データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
@@ -23,41 +23,42 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 ## はじめに
 
 サポート対象の PostgreSQL バージョン
-: 9.6、10、11、12、13、14
+: 9.6, 10, 11, 12, 13, 14, 15
 
 前提条件
-: Postgres の追加提供モジュールがインストールされている必要があります。ほとんどのインストールでは、これはデフォルトで含まれていますが、あまり一般的でないインストールでは、お使いのバージョンの [`postgresql-contrib` パッケージ][1]の追加インストールが必要になる場合があります。
+: Postgres の追加供給モジュールがインストールされている必要があります。ほとんどのインストールでは、これはデフォルトで含まれていますが、一般的でない設定でインストールされている場合、お使いのバージョンの [`postgresql-contrib` パッケージ][1]の追加インストールが必要になる場合があります。
 
 サポート対象の Agent バージョン
 : 7.36.1+
 
 パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
+: データベースモニタリングのデフォルトの Agent 構成は保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][2]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
-: Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースでは、`127.0.0.1` またはソケットを使用することをお勧めします。Agent をプロキシ、ロードバランサー、また `pgbouncer` などのコネクションプーラーを経由してデータベースに接続しないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
+: Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースでは、`127.0.0.1` またはソケットを使用することをお勧めします。Agent をプロキシ、ロードバランサー、または `pgbouncer` などのコネクションプーラーを経由させないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
 
 データセキュリティへの配慮
-: Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][3]を参照してください。
+: Agent がデータベースから収集するデータとその安全性については、[機密情報][3]を参照してください。
 
 ## Postgres 設定を構成する
 
-`postgresql.conf` に以下の[パラメーター][4]を構成し、**サーバーを再起動**すると設定が有効になります。これらのパラメーターの詳細については、[Postgres ドキュメント][5]を参照してください。
+`postgresql.conf` ファイルに以下の[パラメーター][4]を構成し、**サーバーを再起動**すると設定が有効になります。これらのパラメーターの詳細については、[Postgres ドキュメント][5]を参照してください。
 
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
 | `shared_preload_libraries` | `pg_stat_statements` | `postgresql.queries.*` メトリクスに対して必要です。[pg_stat_statements][5] 拡張機能を使用して、クエリメトリクスの収集を可能にします。 |
-| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` および `pg_stat_statements` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
-| `pg_stat_statements.track` | `ALL` | オプションです。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
-| `pg_stat_statements.max` | `10000` | オプションです。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
+| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
+| `pg_stat_statements.track` | `ALL` | オプション。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
+| `pg_stat_statements.max` | `10000` | オプション。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
+| `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN のようなユーティリティコマンドを無効にします。この値を `off` にすると、SELECT、UPDATE、DELETE などのクエリのみが追跡されます。 |
 | `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
 ## Agent にアクセスを付与する
 
-Datadog Agent が統計やクエリを収集するためには、データベース サーバーへの読み取り専用のアクセスが必要となります。
+Datadog Agent は、統計やクエリを収集するためにデータベース サーバーへの読み取り専用のアクセスを必要とします。
 
-Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ]を Agentで実行する必要がある場合のみ別のデータベースを選択してください[6]。
+Postgres がレプリケートされている場合、以下の SQL コマンドはクラスタ内の**プライマリ**データベースサーバー（ライター）で実行する必要があります。Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[特定のデータに対するカスタムクエリ][6]を Agent で実行する必要がある場合のみ、別のデータベースを選択してください。
 
 選択したデータベースに、スーパーユーザー (または十分な権限を持つ他のユーザー) として接続します。例えば、選択したデータベースが `postgres` である場合は、次のように実行して [psql][7] を使用する `postgres` ユーザーとして接続します。
 
@@ -72,6 +73,27 @@ CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
 {{< tabs >}}
+
+{{% tab "Postgres ≥ 15" %}}
+
+`datadog` ユーザーに関連テーブルに対する権限を与えます。
+
+```SQL
+ALTER ROLE datadog INHERIT;
+```
+
+**すべてのデータベース**に以下のスキーマを作成します。
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{{% /tab %}}
+
 {{% tab "Postgres ≥ 10" %}}
 
 **すべてのデータベース**に以下のスキーマを作成します。
@@ -113,7 +135,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-**注意**: 追加のテーブルへの問い合わせを必要とするカスタムメトリクスを生成する場合は、それらのテーブルに対する `SELECT` 権限を `datadog` ユーザーに付与する必要があります。例: `grant SELECT on <TABLE_NAME> to datadog;`。詳細は [PostgreSQL カスタムメトリクス収集の説明][6]を参照してください。
+<div class="alert alert-info">追加のテーブルをクエリする必要があるデータ収集またはカスタムメトリクスでは、それらのテーブルの <code>SELECT</code> 権限を <code>datadog</code> ユーザーに付与する必要がある場合があります。例: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>。詳細は、<a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL カスタムメトリクス収集</a>を参照してください。</div>
 
 Agent が実行計画を収集できるように、**すべてのデータベース**に関数を作成します。
 
@@ -246,7 +268,7 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
    ```
 2. 詳細な期間メトリクスを収集し、Datadog インターフェースで検索可能にするには、ステートメント自体を使用してインラインで構成する必要があります。上記の例と推奨コンフィギュレーションとの違いについては、以下を参照してください。また、`log_statement` オプションと `log_duration` オプションの両方がコメントアウトされているので注意してください。このトピックに関する議論は[こちら][12]をご覧ください。
 
- この構成はすべてのステートメントをログしますが、出力を特定の期間を持つものに減らすには、`log_min_duration_statement` の値を目的の最小期間（ミリ秒単位）に設定します（完全な SQL ステートメントのログ記録が組織のプライバシー要件に準拠していることを確認してください）。
+   この構成はすべてのステートメントをログしますが、出力を特定の期間を持つものに減らすには、`log_min_duration_statement` の値を目的の最小期間（ミリ秒単位）に設定します（完全な SQL ステートメントのログ記録が組織のプライバシー要件に準拠していることを確認してください）。
    ```conf
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
                                        # and their durations, > 0 logs only
@@ -272,12 +294,15 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
        #    name: new_log_start_with_date
    ```
-      `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][9] を参照してください。
+   `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル postgres.d/conf.yaml][9] を参照してください。
 5. [Agent を再起動します][10]。
 
 ### 検証
 
 [Agent の status サブコマンドを実行][13]し、Checks セクションで `postgres` を探します。または、[データベース][14]のページを参照してください。
+
+## Agent の構成例
+{{% dbm-postgres-agent-config-examples %}}
 
 ## トラブルシューティング
 
@@ -295,11 +320,11 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
 [6]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html
-[8]: https://app.datadoghq.com/account/settings#agent
+[8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[10]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-[13]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[13]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
 [15]: /ja/database_monitoring/troubleshooting/?tab=postgres

@@ -29,7 +29,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
@@ -38,12 +37,11 @@ draft: false
 git_integration_title: gearmand
 integration_id: gearman
 integration_title: Gearman
-integration_version: 2.3.0
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gearmand
-oauth: {}
 public_title: Gearman
 short_description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
 supported_os:
@@ -52,10 +50,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::処理
-  - Category::ログの収集
   configuration: README.md#Setup
   description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
   media: []
@@ -76,7 +73,7 @@ Gearman のメトリクスを収集して、以下のことができます。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Gearman チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -167,7 +164,7 @@ Gearman チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/

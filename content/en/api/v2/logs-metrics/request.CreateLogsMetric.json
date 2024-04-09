@@ -1,6 +1,6 @@
 {
   "data": {
-    "id": "ExampleCreatealogbasedmetricreturnsOKresponse",
+    "id": "ExampleLogsMetric",
     "type": "logs_metrics",
     "attributes": {
       "compute": {

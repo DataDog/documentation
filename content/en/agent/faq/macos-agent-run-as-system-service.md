@@ -62,6 +62,6 @@ The Datadog Agent service is managed with `launchctl`. After the above installat
 | Enable Agent service          | `sudo launchctl enable system/com.datadoghq.agent && sudo launchctl load /Library/LaunchDaemons/com.datadoghq.agent.plist`|
 
 
-Disabling the Agent prevents the `list`, `start`, and `stop` commands from working, and prevents the Agent service from being started on reboot. 
+Disabling the Agent prevents the `list`, `start`, and `stop` commands from working, and prevents the Agent service from being started on reboot.
 
-[1]: https://app.datadoghq.com/account/settings#agent/mac
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=macos

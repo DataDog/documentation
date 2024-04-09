@@ -22,18 +22,19 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor the security of your Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor the security of your Python apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
-1. **Update your Datadog Python library package** to at least version 1.2.2 (at least version 1.5.0 for Risk Management vulnerability detection features). Run the following:
+1. **Update your Datadog Python library package** to at least version 1.2.2 (at least version 1.5.0 for Software Composition Analysis detection features). Run the following:
    ```shell
    pip install --upgrade ddtrace
    ```
 
-   For information about which language and framework versions are supported by the library, see the [Compatibility][1] section of the ASM Setup and Configure documentation.
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
 2. **Enable ASM when starting the Python application**.
 
@@ -78,7 +79,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    ```
 
    {{% /tab %}}
-   {{% tab "AWS ECS" %}}
+   {{% tab "Amazon ECS" %}}
 
    Update your ECS task definition JSON file by adding the following in the environment section:
 
@@ -105,10 +106,10 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 {{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=python#compatibility
+[1]: /security/application_security/enabling/compatibility/python

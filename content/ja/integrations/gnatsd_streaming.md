@@ -16,11 +16,11 @@ assets:
     source_type_name: Gnatsd streaming
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: dev@goldstar.com
   support_email: dev@goldstar.com
 categories:
-- monitoring
+- network
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/README.md
 display_on_public_website: true
@@ -33,20 +33,19 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gnatsd_streaming
-oauth: {}
 public_title: Gnatsd Streaming
 short_description: NATS サーバーストリーミング
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::モニタリング
+  - Category::ネットワーク
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: NATS サーバーストリーミング
   media: []

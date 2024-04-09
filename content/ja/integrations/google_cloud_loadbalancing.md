@@ -1,6 +1,7 @@
 ---
 categories:
 - cloud
+- 構成 & デプロイ
 - google cloud
 - ログの収集
 dependencies: []

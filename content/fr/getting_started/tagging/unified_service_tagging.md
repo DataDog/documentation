@@ -1,6 +1,4 @@
 ---
-aliases:
-- /fr/getting_started/tagging/unified_service_tagging
 further_reading:
 - link: /getting_started/tagging/using_tags
   tag: Documentation
@@ -16,13 +14,14 @@ title: Tagging de service unifié
 ---
 
 ## Présentation
+
 Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois [tags réservés][1] : `env`, `service` et `version`.
 
 Avec ces trois tags, vous pouvez :
 
-- déterminer l'impact d'un déploiement grâce à des métriques de trace et de conteneur filtrées par version ;
-- explorer facilement vos traces, métriques et logs à l'aide de tags cohérents ;
-- consulter les données de service en fonction de l'environnement ou de la version de manière unifiée sur le site Datadog.
+- Déterminer l'impact d'un déploiement grâce à des métriques de trace et de conteneur filtrées par version
+- Explorer facilement vos traces, métriques et logs à l'aide de tags cohérents
+- Consulter les données de service en fonction de l'environnement ou de la version de manière unifiée
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Tagging de service unifié" video=true >}}
 
@@ -48,7 +47,7 @@ Avec ces trois tags, vous pouvez :
 
 - Vous devez maîtriser la configuration de tags pour pouvoir utiliser le tagging de service unifié. En cas de doute, consultez les sections [Débuter avec les tags][1] et [Assigner des tags][5] avant de procéder à la configuration.
 
-## Procédure à suivre
+## Configuration
 
 Pour commencer la configuration du tagging de service unifié, choisissez votre environnement :
 
@@ -65,12 +64,14 @@ Pour configurer le tagging de service unifié dans un environnement conteneuris�
 
 2. Si vous utilisez [Docker][2], assurez-vous que l'Agent peut accéder au [socket Docker][7] de votre conteneur. Cela permet à l'Agent de détecter les variables d'environnement et de les mapper avec les tags standard.
 
-4. Configurez votre environnement en suivant la procédure de configuration complète ou partielle détaillée ci-dessous.
+3. Configurez votre environnement en fonction de votre service d'orchestration de conteneurs en suivant la procédure de configuration complète ou partielle détaillée ci-dessous.
 
-#### Procédure à suivre
+#### Configuration
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
+
+Si vous avez déployé l'Agent de cluster Datadog avec le [contrôleur d'admission][1] activé, le contrôleur d'admission modifie les manifestes de pod et injecte l'ensemble des variables d'environnement requises (en fonction des conditions configurées). Dans ce cas, vous n'avez pas besoin de configurer manuellement les variables d'environnement `DD_` dans les manifestes de pod. Pour en savoir plus, consultez la [documentation dédiée au contrôleur d'admission][1].
 
 ##### Configuration complète
 
@@ -122,7 +123,7 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>"
 ```
-Ces étiquettes couvrent les métriques de processeur, de mémoire, de réseau et de disque de Kubernetes au niveau du pod, et peuvent être utilisées pour injecter `DD_ENV`, `DD_SERVICE` et `DD_VERSION` dans le conteneur de votre service via l'[API Downward de Kubernetes][1].
+Ces étiquettes couvrent les métriques de processeur, de mémoire, de réseau et de disque de Kubernetes au niveau du pod, et peuvent être utilisées pour injecter `DD_ENV`, `DD_SERVICE` et `DD_VERSION` dans le conteneur de votre service via l'[API Downward de Kubernetes][2].
 
 Si vous avez plusieurs conteneurs par pod, vous pouvez spécifier des étiquettes standard par conteneur :
 
@@ -134,9 +135,9 @@ tags.datadoghq.com/<nom-conteneur>.version
 
 ###### Métriques State
 
-Pour configurer des [métriques Kubernetes State][2], procédez comme suit :
+Pour configurer des [métriques Kubernetes State][3], procédez comme suit :
 
-1. Définissez `join_standard_tags` sur `true` dans votre [fichier de configuration][3].
+1. Définissez `join_standard_tags` sur `true` dans votre fichier de configuration. Consultez cet [exemple de fichier de configuration][4] pour connaître l'emplacement de la ligne.
 
 2. Ajoutez les mêmes étiquettes standard à l'ensemble d'étiquettes pour la ressource parent, par exemple `Deployment`.
 
@@ -159,7 +160,7 @@ Pour configurer des [métriques Kubernetes State][2], procédez comme suit :
 
 ###### Traceur de l'APM et client StatsD
 
-Pour configurer les variables d'environnement du [traceur de l'APM][4] et du [client StatsD][5], utilisez l'[API Downward de Kubernetes][1] en suivant le format ci-dessous :
+Pour configurer les variables d'environnement du [traceur APM][5] et du [client StatsD][6], utilisez l'[API Downward de Kubernetes][2] en suivant le format ci-dessous :
 
 ```yaml
 containers:
@@ -179,11 +180,13 @@ containers:
               fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-[1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[2]: /fr/agent/kubernetes/data_collected/#kube-state-metrics
-[3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
-[4]: /fr/tracing/send_traces/
-[5]: /fr/integrations/statsd/
+
+[1]: /fr/agent/cluster_agent/admission_controller/
+[2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
+[3]: /fr/agent/kubernetes/data_collected/#kube-state-metrics
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
+[5]: /fr/tracing/send_traces/
+[6]: /fr/integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -252,13 +255,12 @@ Définissez les variables d'environnement `DD_ENV`, `DD_SERVICE` et `DD_VERSION`
     "name": "DD_VERSION",
     "value": "<VERSION>"
   }
-
+],
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
   "com.datadoghq.tags.service": "<SERVICE>",
   "com.datadoghq.tags.version": "<VERSION>"
-  }
-]
+}
 ```
 
 ##### Configuration partielle
@@ -278,73 +280,95 @@ Si votre service n'a pas besoin des variables d'environnement Datadog (par exemp
 
 ### Environnement non conteneurisé
 
-Selon la façon dont vous créez et déployez les binaires ou les exécutables de vos services, plusieurs options peuvent s'offrir à vous pour définir les variables d'environnement. Étant donné que vous pouvez exécuter un ou plusieurs services par host, il est conseillé de limiter ces variables d'environnement à un seul processus.
+Selon la façon dont vous créez et déployez les binaires ou les exécutables de vos services, plusieurs options peuvent s'offrir à vous pour définir les variables d'environnement. Étant donné que vous pouvez exécuter un ou plusieurs services par host, Datadog vous conseille de limiter ces variables d'environnement à un seul processus.
 
-Afin de former un point de configuration unique pour l'ensemble des données de télémétrie émises directement depuis le runtime de votre service pour les [traces][8], [logs][9] et [métriques StatsD][10], vous pouvez :
+Afin de former un point de configuration unique pour l'ensemble des données de télémétrie émises directement depuis le runtime de vos services pour les [traces][8], les [logs][9], les [ressources RUM][10], les [tests Synthetic][11], les [métriques StatsD][12] ou les métriques système, vous pouvez :
 
 1. Exporter les variables d'environnement dans la commande de votre exécutable :
 
-    `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
+   ```
+   DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
+   ```
 
-2. Ou utiliser [Chef][11], [Ansible][12] ou un autre outil d'orchestration pour ajouter les variables d'environnement `DD` au fichier de configuration systemd ou initd d'un service. De cette façon, le processus du service a accès à ces variables une fois lancé.
+2. Ou utiliser [Chef][13], [Ansible][14] ou un autre outil d'orchestration pour ajouter les variables d'environnement `DD` au fichier de configuration systemd ou initd d'un service. Le processus du service aura accès à ces variables une fois lancé.
 
-{{< tabs >}}
-{{% tab "Traces" %}}
+   {{< tabs >}}
+   {{% tab "Traces" %}}
 
-Lors de la configuration de vos traces pour le tagging de service unifié :
+   Lors de la configuration de vos traces pour le tagging de service unifié :
 
-1. Configurez le [Traceur de l'APM][1] avec `DD_ENV` pour que la définition de `env` soit plus proche de l'application qui génère les traces. Cette méthode permet au tag `env` de provenir automatiquement d'un tag dans les métadonnées de span.
+   1. Configurez le [Traceur de l'APM][1] avec `DD_ENV` pour que la définition de `env` soit plus proche de l'application qui génère les traces. Cette méthode permet au tag `env` de provenir automatiquement d'un tag dans les métadonnées de span.
 
-2. Configurez des spans avec `DD_VERSION` pour ajouter un tag version à toutes les spans relevant du service qui appartient au traceur (généralement `DD_SERVICE`). Ainsi, si votre service crée des spans avec le nom d'un service externe, ces spans ne reçoivent pas de tag `version`.
+   2. Configurez des spans avec `DD_VERSION` pour ajouter un tag version à toutes les spans relevant du service qui appartient au traceur (généralement `DD_SERVICE`). Ainsi, si votre service crée des spans avec le nom d'un service externe, ces spans ne reçoivent pas de tag `version`.
 
-    Tant que le tag version figure dans les spans, il est ajouté aux métriques de trace générées à partir de ces spans. Le tag version peut être ajouté manuellement dans le code ou automatiquement par le traceur APM. Une fois les spans configurées, elles sont utilisées par APM et les [clients DogStatsd][2] pour appliquer les tags `env`, `service` et `version` aux données de trace et aux métriques StatsD. S'il est activé, le traceur APM injecte également les valeurs de ces variables dans vos logs.
+      Tant que le tag version figure dans les spans, il est ajouté aux métriques de trace générées à partir de ces spans. Le tag version peut être ajouté manuellement dans le code ou automatiquement par le traceur APM. Une fois les spans configurées, elles sont utilisées par APM et les [clients DogStatsd][2] pour appliquer les tags `env`, `service` et `version` aux données de trace et aux métriques StatsD. S'il est activé, le traceur APM injecte également les valeurs de ces variables dans vos logs.
 
-    **Remarque** : il ne peut y avoir qu'**un seul service par span**. Les métriques de trace sont généralement associées à un seul service également. Toutefois, si un service différent est défini dans les tags de vos hosts, ce tag service configuré apparaît dans toutes les métriques de trace émises par ce host.
+      **Remarque** : il ne peut y avoir qu'**un seul service par span**. Les métriques de trace sont généralement associées à un seul service également. Toutefois, si un service différent est défini dans les tags de vos hosts, ce tag service configuré apparaît dans toutes les métriques de trace émises par ce host.
 
 [1]: /fr/tracing/setup/
 [2]: /fr/developers/dogstatsd/
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Logs" %}}
+   {{% tab "Logs" %}}
 
-Si vous [associez vos logs à vos traces][1], activez l'injection automatique dans les logs si cette fonctionnalité est prise en charge par votre traceur d'APM. Le traceur d'APM injecte alors automatiquement les tags `env`, `service` et `version` dans vos logs, éliminant ainsi le besoin de configurer manuellement ces champs ailleurs. 
+   Si vous [associez vos logs à vos traces][1], activez l'injection automatique dans les logs si cette fonctionnalité est prise en charge par votre traceur d'APM. Le traceur d'APM injecte alors automatiquement les tags `env`, `service` et `version` dans vos logs, éliminant ainsi le besoin de configurer manuellement ces champs ailleurs. 
 
-**Remarque** : le traceur PHP ne prend pas actuellement en charge la configuration du tagging de service unifié pour les logs.
+   **Remarque** : le traceur PHP ne prend pas actuellement en charge la configuration du tagging de service unifié pour les logs.
 
-[1]: /fr/tracing/connect_logs_and_traces/
-{{% /tab %}}
+[1]: /fr/tracing/other_telemetry/connect_logs_and_traces/
+   {{% /tab %}}
 
-{{% tab "Métriques custom" %}}
+   {{% tab "RUM et Session Replay" %}}
 
-Les tags sont ajoutés en mode append-only pour les [métriques custom statsd][1]. Par exemple, si vous avez deux valeurs différentes pour `env`, les métriques sont taguées avec les deux environnements. L'ordre dans lequel un tag remplace un autre du même nom est aléatoire.
+   Si vous [associez vos données RUM à vos traces][1], spécifiez l'application Browser dans le champ `service`, définissez l'environnement dans le champ `env` et énumérez les versions dans le champ `version` de votre fichier d'initialisation. 
 
-Si votre service a accès à `DD_ENV`, `DD_SERVICE` et `DD_VERSION`, alors le client DogStatsD ajoute automatiquement les tags correspondants à vos métriques custom.
+   Lorsque vous [créez une application RUM][2], confirmez les noms `env` et `service`.
 
-**Remarque** : les clients Datadog DogStatsD pour .NET et PHP ne prennent pas encore en charge cette fonctionnalité.
+
+[1]: /fr/real_user_monitoring/connect_rum_and_traces/
+[2]: /fr/real_user_monitoring/browser/#setup
+   {{% /tab %}}
+
+   {{% tab "Synthetics" %}}
+
+   Si vous [associez vos tests Browser Synthetic à vos traces][1], spécifiez l'URL à laquelle envoyer les en-têtes dans la section **APM Integration for Browser Tests** de la [page Integration Settings][2]. 
+
+   Vous pouvez utiliser le caractère `*` comme wildcard, par exemple : `https://*.datadoghq.com`.
+
+[1]: /fr/synthetics/apm/
+[2]: https://app.datadoghq.com/synthetics/settings/integrations
+   {{% /tab %}}
+
+   {{% tab "Métriques custom" %}}
+
+   Les tags sont ajoutés en mode append-only pour les [métriques custom StatsD][1]. Par exemple, si vous avez deux valeurs différentes pour `env`, les métriques sont taguées avec les deux environnements. L'ordre dans lequel un tag remplace un autre du même nom est aléatoire.
+
+   Si votre service a accès à `DD_ENV`, `DD_SERVICE` et `DD_VERSION`, alors le client DogStatsD ajoute automatiquement les tags correspondants à vos métriques custom.
+
+   **Remarque** : les clients Datadog DogStatsD pour .NET et PHP ne prennent pas en charge cette fonctionnalité.
 
 [1]: /fr/metrics/
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Métriques système" %}}
+   {{% tab "Métriques système" %}}
 
-Les tags `env` et `service` peuvent également être ajoutés aux métriques de votre infrastructure.
+   Vous pouvez ajouter les tags `env` et `service` à vos métriques d'infrastructure. Dans les environnements non conteneurisés, la configuration du tagging des métriques de service se fait au niveau de l'Agent.
 
-La configuration du tagging des métriques de service est plus proche de l'Agent dans les environnements non conteneurisés.
-Étant donné que cette configuration ne change pas à chaque fois que le processus d'un service est invoqué, l'ajout du tag `version` à la configuration est déconseillé.
+   Étant donné que cette configuration ne change pas à chaque invocation du processus d'un service, l'ajout du tag `version` n'est pas recommandé.
 
-##### Service unique par host
+#### Service unique par host
 
 Définissez la configuration suivante dans le [fichier de configuration principal][1] de l'Agent :
 
 ```yaml
 env: <ENV>
 tags:
-    - service:<SERVICE>
+  - service:<SERVICE>
 ```
 
 Avec cette configuration, les tags `env` et `service` resteront cohérents pour toutes les données émises par l'Agent.
 
-##### Plusieurs services par host
+#### Plusieurs services par host
 
 Définissez la configuration suivante dans le [fichier de configuration principal][1] de l'Agent :
 
@@ -352,7 +376,7 @@ Définissez la configuration suivante dans le [fichier de configuration principa
 env: <ENV>
 ```
 
-Pour obtenir des tags `service` uniques sur les métriques de processeur, de mémoire et d'E/S disque au niveau du processus, vous pouvez configurer un [check de processus][2] :
+Pour obtenir des tags `service` uniques sur les métriques de processeur, de mémoire et d'E/S disque au niveau du processus, configurez un [check de processus][2] dans le dossier de configuration de l'Agent (par exemple, dans le fichier `process.d/conf.yaml` du dossier `conf.d`) :
 
 ```yaml
 init_config:
@@ -371,18 +395,15 @@ instances:
 
 [1]: /fr/agent/guide/agent-configuration-files
 [2]: /fr/integrations/process
-{{% /tab %}}
-{{< /tabs >}}
+    {{% /tab %}}
+    {{< /tabs >}}
 
 ### Environnement sans serveur
 
-#### Fonctions Lambda AWS
-
-Découvrez comment [associer vos données de télémétrie Lambda à l'aide de tags][13].
+Pour en savoir plus sur les fonctions AWS Lambda, découvrez comment [associer vos données de télémétrie Lambda à l'aide de tags][15].
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /fr/getting_started/tagging/
 [2]: /fr/agent/docker/integrations/?tab=docker
@@ -393,7 +414,9 @@ Découvrez comment [associer vos données de télémétrie Lambda à l'aide de t
 [7]: /fr/agent/docker/?tab=standard#optional-collection-agents
 [8]: /fr/getting_started/tracing/
 [9]: /fr/getting_started/logs/
-[10]: /fr/integrations/statsd/
-[11]: https://www.chef.io/
-[12]: https://www.ansible.com/
-[13]: /fr/serverless/configuration/#connect-telemetry-using-tags
+[10]: /fr/real_user_monitoring/connect_rum_and_traces/
+[11]: /fr/getting_started/synthetics/
+[12]: /fr/integrations/statsd/
+[13]: https://www.chef.io/
+[14]: https://www.ansible.com/
+[15]: /fr/serverless/configuration/#connect-telemetry-using-tags

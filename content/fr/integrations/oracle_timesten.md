@@ -22,9 +22,10 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- caching
+- data store
 - marketplace
 - oracle
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +39,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: oracle_timesten
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -48,18 +48,19 @@ pricing:
   tag: host
   unit_label: Base de données Oracle TimesTen
   unit_price: 500
-public_title: Intégration Oracle TimesTen
+public_title: Oracle TimesTen
 short_description: Surveillez les performances de vos bases de données Oracle TimesTen
 supported_os:
 - linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
+  - Category::Caching
+  - Category::Data Store
   - Category::Marketplace
   - Category::Oracle
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Surveillez les performances de vos bases de données Oracle TimesTen
   media:
@@ -81,7 +82,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Oracle TimesTen
+  title: Oracle TimesTen
   uninstallation: README.md#Uninstallation
 ---
 

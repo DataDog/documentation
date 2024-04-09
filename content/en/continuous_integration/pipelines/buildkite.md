@@ -10,9 +10,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and metrics"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
 {{< site-region region="gov" >}}
@@ -23,11 +23,13 @@ further_reading:
 
 - **Partial pipelines**: View [partially retried][5] and downstream pipeline executions
 
+- **Infrastructure metric correlation**: Correlate jobs to [infrastructure host metrics][8] for Buildkite agents
+
 - **Manual steps**: View manually triggered pipelines
 
 - **Queue time**: View amount of time pipeline jobs sit in the queue before processing
 
-- **Custom tags and metrics at runtime**: Configure [custom tags][6] and metrics at runtime
+- **Custom tags and measures at runtime**: Configure [custom tags][6] and measures at runtime
 
 ## Configure the Datadog integration
 
@@ -42,7 +44,7 @@ The steps to activate the Datadog integration for [Buildkite][1] are:
    * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
 3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
 
-### Setting custom tags
+### Set custom tags
 
 Custom tags can be added to Buildkite traces by using the `buildkite-agent meta-data set` command.
 Any metadata tags with a key starting with `dd_tags.` are added to the job and pipeline spans. These
@@ -69,7 +71,7 @@ The resulting pipeline looks as follows:
 
 {{< img src="ci/buildkite-custom-tags.png" alt="Buildkite pipeline trace with custom tags" style="width:100%;">}}
 
-Any metadata with a key starting with `dd-metrics.` and containing a numerical value will be set as
+Any metadata with a key starting with `dd-measures.` and containing a numerical value will be set as
 a metric tag that can be used to create numerical measures. You can use the `buildkite-agent meta-data set`
 command to create such tags. This can be used for example to measure the binary size in a pipeline:
 
@@ -77,7 +79,7 @@ command to create such tags. This can be used for example to measure the binary 
 steps:
   - commands:
     - go build -o dst/binary .
-    - ls -l dst/binary | awk '{print \$5}' | tr -d '\n' | buildkite-agent meta-data set "dd_metrics.binary_size"
+    - ls -l dst/binary | awk '{print \$5}' | tr -d '\n' | buildkite-agent meta-data set "dd_measures.binary_size"
     label: Go build
 ```
 
@@ -93,7 +95,12 @@ The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
-### Partial and downstream pipelines
+### Correlate infrastructure metrics to jobs
+
+If you are using Buildkite agents, you can correlate jobs with the infrastructure that is running them.
+For this feature to work, install the [Datadog Agent][7] in the hosts running the Buildkite agents.
+
+### View partial and downstream pipelines
 
 In the **Pipeline Executions** page, you can use the filters below in the search bar:
 
@@ -119,5 +126,7 @@ These filters can also be applied through the facet panel on the left hand side 
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#partial-and-downstream-pipelines
-[6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
+[6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[7]: /agent/
+[8]: /continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs

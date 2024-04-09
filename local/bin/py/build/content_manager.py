@@ -200,13 +200,13 @@ def extract_sourced_and_cached_content_from_pull_config(self, configuration):
                     ]
                     content_temp["globs"] = content["globs"]
 
-                    if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules", "workflows"):
+                    if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules", "workflows", "marketplace-integrations"):
                         content_temp["options"] = content["options"]
 
                     self.list_of_sourced_contents.append(content_temp)
                 else:
                     output_content = content.get('options', {}).get('output_content', True)
-                    
+
                     if output_content != False:
                         self.list_of_cached_contents.append(content)
 
@@ -232,11 +232,11 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 def download_and_extract_cached_files_from_s3():
     s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/latest-cached.tar.gz'
-    artifact_download_response = requests.get(s3_url, stream=True)
-
-    with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
+    r = requests.get(s3_url)
+    with open('./latest-cached.tar.gz', 'wb') as f:
+        f.write(r.content)
+    with tarfile.open("./latest-cached.tar.gz", "r:gz") as artifact_tarfile:
         artifact_tarfile.extractall('temp')
-        artifact_tarfile.close()
 
 
 def download_cached_content_into_repo(self):
@@ -244,33 +244,41 @@ def download_cached_content_into_repo(self):
 
     for content in self.list_of_cached_contents:
         action = content.get('action', '')
-        destination = ''
+        final_file_destination = ''
 
         if action == 'pull-and-push-file':
-            dest_path = content.get('options', {}).get('dest_path')
-            dest_file_name = content.get('options', {}).get('file_name')
-            full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
+            destination_path = content.get('options', {}).get('dest_path')
+            destination_base_path = content.get('options', {}).get('base_path')
+            destination_file_name = content.get('options', {}).get('file_name')
 
-            if dest_file_name.endswith('.md'):
-                os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
+            # we need this solution for single-sourced files that don't belong under content/ dir
+            # please use base_path = '' under options in pull_config for these cases.
+            if destination_base_path is not None and destination_base_path == '':
+                destination_path = destination_path.lstrip('/')
+                full_dest_path = f'{destination_path}{destination_file_name}'
+            else:
+                full_dest_path = f'{self.relative_en_content_path}{destination_path}{destination_file_name}'
+
+            if destination_file_name.endswith('.md'):
                 print(f'Copying {full_dest_path} from cache')
+                os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
                 shutil.copy(f'temp/{full_dest_path}', full_dest_path)
         elif action == 'pull-and-push-folder':
-            destination = content.get('options', {}).get('dest_dir', '')
+            final_file_destination = content.get('options', {}).get('dest_dir', '')
         elif action in ('workflows', 'security-rules'):
-            destination = content.get('options', {}).get('dest_path', '')
+            final_file_destination = content.get('options', {}).get('dest_path', '')
         elif action not in ('integrations', 'marketplace-integrations', 'npm-integrations'):
             raise ValueError(f'Action {action} unsupported, cannot copy from cache.')
 
-        if destination != '':
-            print(f'Copying {self.relative_en_content_path}{destination} from cache')
-            shutil.copytree(f'temp/{self.relative_en_content_path}{destination}', f'{self.relative_en_content_path}{destination}', dirs_exist_ok=True)
+        if final_file_destination != '':
+            print(f'Copying {self.relative_en_content_path}{final_file_destination} from cache')
+            shutil.copytree(f'temp/{self.relative_en_content_path}{final_file_destination}', f'{self.relative_en_content_path}{final_file_destination}', dirs_exist_ok=True)
 
     # Integrations are handled separately for now (there is active work underway to improve this)
     if self.cache_enabled:
         print('Copying integrations from cache...')
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
-        
+
         # Copying generated data files
         if os.path.isdir('temp/data'):
             print('Copying generated data from cache...')

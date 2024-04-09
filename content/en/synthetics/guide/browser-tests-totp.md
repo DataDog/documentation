@@ -1,16 +1,16 @@
 ---
-title: TOTPs For Multi-Factor Authentication (MFA) In Browser Tests
+title: Use Time-based One-time Passwords (TOTPs) For Multi-Factor Authentication (MFA) In Browser Tests
 kind: guide
 further_reading:
-   - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
-     tag: 'Blog'
-     text: 'Introducing multi-factor authentication in Datadog Synthetic tests'
-   - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
-     tag: 'Documentation'
-     text: 'Learn more about global variables'
-   - link: 'synthetics/browser_tests/actions/'
-     tag: 'Documentation'
-     text: 'Learn more about browser test steps'
+  - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
+    tag: 'Blog'
+    text: 'Introducing multi-factor authentication in Datadog Synthetic tests'
+  - link: '/synthetics/guide/browser-tests-passkeys'
+    tag: 'Documentation'
+    text: 'Learn about Passkeys in browser tests'
+  - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
+    tag: 'Documentation'
+    text: 'Learn more about global variables'
  
 ---
 
@@ -18,7 +18,7 @@ further_reading:
 
 Multi-factor authentication methods such as TFA and MFA help protect your applications against unauthorized access, however, these methods can make testing features more difficult.
 
-Datadog Synthetic MFA global variables allow you to test your application’s TOTP-based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
+Datadog Synthetic MFA global variables allow you to test your application's TOTP-based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
 
 ## Store your secret key or QR code in a global variable
 
@@ -30,13 +30,11 @@ Create a global variable where you enter a secret key or upload a QR code from y
 5. Enter the **Secret Key** to your variable or upload a QR code image.
 6. Click **+ Generate** to create a TOTP. You can copy the generated TOTP with the **Copy** icon.
 7. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
-<div class="alert alert-warning">
-RBAC restrict access to global variables is in beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>  
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
 ## Use TOTP in your Synthetic tests
-You can use the secret key or QR code stored in a global variable across all your Synthetic tests. When creating a [browser test][2], inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
+You can use the secret key or QR code stored in a global variable across all your Synthetic tests. When creating a [browser test][2], inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application's authentication workflow.
 
 {{< img src="synthetics/guide/browser-tests-totp/mfa-token-totp.mp4" alt="Recording a TOTP validation" video="true" >}}
 

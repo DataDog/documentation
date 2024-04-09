@@ -1,33 +1,52 @@
 ---
+app_id: upsc
+app_uuid: 4681a41f-efdc-4d22-b573-06e101b9cf24
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: upsc.battery.charge
+      metadata_path: metadata.csv
+      prefix: upsc.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: UPSC
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Community
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md
-display_name: UPSC
+display_on_public_website: true
 draft: false
 git_integration_title: upsc
-guid: f14607ca-0e30-4c7f-9564-fbdb46ca3030
 integration_id: upsc
 integration_title: UPSC
 integration_version: 1.0.1
 is_public: true
 kind: インテグレーション
-maintainer: '@platinummonkey'
-manifest_version: 1.0.0
-metric_prefix: upsc.
-metric_to_check: upsc.battery.charge
+manifest_version: 2.0.0
 name: upsc
 public_title: UPSC
 short_description: UPS バッテリーの UPSC 統計コレクター
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::OS とシステム
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: UPS バッテリーの UPSC 統計コレクター
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: UPSC
 ---
 
 

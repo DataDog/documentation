@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is also installed in a container. 
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is also installed in a container.
 
 For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, the application and Agent on cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
@@ -30,7 +30,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 ### Prerequisites
 
 - A Datadog account and [organization API key][3]
-- Git 
+- Git
 - Docker
 - Curl
 
@@ -44,7 +44,7 @@ git clone https://github.com/DataDog/apm-tutorial-java-host.git
 
 The repository contains a multi-service Java application pre-configured to be run within Docker containers. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files are located in the `docker` directory.
 
-This tutorial uses the `all-docker-compose.yaml` file, which builds containers for both the application and the Datadog Agent. 
+This tutorial uses the `all-docker-compose.yaml` file, which builds containers for both the application and the Datadog Agent.
 
 In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications, either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
@@ -64,7 +64,7 @@ docker-compose -f all-docker-compose.yaml build notes
 docker-compose -f all-docker-compose.yaml up notes
 {{< /code-block >}}
 
-   You can verify that it's running by viewing the running containers with the `docker ps` command. 
+   You can verify that it's running by viewing the running containers with the `docker ps` command.
 
 3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in an in-memory H2 database running on the same container. Send it a few commands:
 
@@ -101,7 +101,7 @@ Now that you have a working Java application, configure it to enable tracing.
 1. Add the Java tracing package to your project. Because the Agent runs in a container, ensure that the Dockerfiles are configured properly, and there is no need to install anything. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -124,7 +124,7 @@ Now that you have a working Java application, configure it to enable tracing.
        - DD_VERSION=0.0.1
    ```
 
-4. You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set in the Dockerfile. This allows you also to get Docker metrics once your application is running. 
+4. You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set in the Dockerfile. This allows you also to get Docker metrics once your application is running.
 
    ```yaml
      labels:
@@ -151,7 +151,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
        volumes:
          - /var/run/docker.sock:/var/run/docker.sock
          - /proc/:/host/proc/:ro
-         - /sys/fs/cgroup:/host/sys/fs/cgroup:ro 
+         - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
    ```
 
 3. Uncomment the `depends_on` fields for `datadog-agent` in the `notes` container.
@@ -161,7 +161,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
    notes:
      container_name: notes
      restart: always
-     build: 
+     build:
        context: ../
        dockerfile: notes/dockerfile.notes.maven
      ports:
@@ -220,9 +220,9 @@ If you don't see traces after several minutes, clear any filter in the Traces Se
 
 ### Examine a trace
 
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
 The flame graph for a `POST` trace looks something like this:
 
@@ -234,11 +234,11 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library uses Java’s built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That’s because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
+Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That's because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
 
 ## Add manual instrumentation to the Java application
 
@@ -279,7 +279,7 @@ The following steps walk you through adding annotations to the code to trace som
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
@@ -291,7 +291,7 @@ The following steps walk you through adding annotations to the code to trace som
             span.setTag(Tags.ERROR, true);
             span.setTag(DDTags.ERROR_MSG, e.getMessage());
             span.setTag(DDTags.ERROR_TYPE, e.getClass().getName());
-            
+
             final StringWriter errorString = new StringWriter();
             e.printStackTrace(new PrintWriter(errorString));
             span.setTag(DDTags.ERROR_STACK, errorString.toString());
@@ -314,7 +314,7 @@ The following steps walk you through adding annotations to the code to trace som
 8. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
-   
+
    Note the higher level of detail in the stack trace now that the `getAll` function has custom tracing.
 
    The `privateMethod` around which you created a manual span now shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
@@ -323,14 +323,14 @@ For more information, read [Custom Instrumentation][12].
 
 ## Add a second application to see distributed traces
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
 
 The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
 1. Configure the calendar app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
@@ -347,7 +347,7 @@ The sample project includes a second application called `calendar` that returns 
      calendar:
        container_name: calendar
        restart: always
-       build: 
+       build:
          context: ../
          dockerfile: calendar/dockerfile.calendar.maven
        labels:

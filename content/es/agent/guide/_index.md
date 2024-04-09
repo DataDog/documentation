@@ -1,4 +1,9 @@
 ---
+cascade:
+  algolia:
+    category: Guía
+    rank: 20
+    subcategory: Guías del Agent
 disable_toc: true
 kind: guía
 private: true
@@ -55,5 +60,5 @@ title: Guías del Agent
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery en el Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Uso básico del Agent de Kubernetes en el Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}
-    {{< nextlink href="agent/guide/upgrade-to-agent-v6" >}}Actualizar al Datadog Agent v6{{< /nextlink >}}
+    {{< nextlink href="agent/guide/upgrade-to-agent-v6" >}}Actualizar al Datadog Agent v6{{< /nextlink >}}
 {{< /whatsnext >}}

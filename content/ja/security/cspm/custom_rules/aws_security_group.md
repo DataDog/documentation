@@ -25,7 +25,7 @@ disable_edit: true
    - `from_port`<br>
     **タイプ**: `INT32`<br>
     **プロバイダー名**: `FromPort`<br>
-    **説明**: TCP および UDP プロトコルのポート範囲の開始位置、またはICMP/ICMPv6 タイプ番号。<code>-1</code> を指定すると、すべての ICMP/ICMPv6 タイプを示します。すべての ICMP/ICMPv6 タイプを指定する場合は、すべてのコードを指定する必要があります。<br>
+    **説明**: プロトコルが TCP または UDP の場合、ポート範囲の最初です。プロトコルが ICMP または ICMPv6 の場合、タイプ番号です。値 -1 は、すべての ICMP/ICMPv6 タイプを示します。すべての ICMP/ICMPv6 タイプを指定する場合、すべての ICMP/ICMPv6 コードを指定する必要があります。<br>
    - `ip_protocol`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `IpProtocol`<br>
@@ -69,7 +69,7 @@ disable_edit: true
    - `to_port`<br>
     **タイプ**: `INT32`<br>
     **プロバイダー名**: `ToPort`<br>
-    **説明**: TCP および UDP プロトコルのポート範囲の終了位置、またはICMP/ICMPv6 コード。<code>-1</code> を指定すると、すべての ICMP/ICMPv6 コードを示します。すべての ICMP/ICMPv6 タイプを指定する場合は、すべてのコードを指定する必要があります。<br>
+    **説明**: プロトコルが TCP または UDP の場合、ポート範囲の最後です。プロトコルが ICMP または ICMPv6 の場合、コードです。値 -1 は、すべての ICMP/ICMPv6 コードを示します。すべての ICMP/ICMPv6 タイプを指定する場合、すべての ICMP/ICMPv6 コードを指定する必要があります。<br>
    - `user_id_group_pairs`<br>
     **タイプ**: `UNORDERED_LIST_STRUCT`<br>
     **プロバイダー名**: `UserIdGroupPairs`<br>
@@ -109,7 +109,7 @@ disable_edit: true
    - `from_port`<br>
     **タイプ**: `INT32`<br>
     **プロバイダー名**: `FromPort`<br>
-    **説明**: TCP および UDP プロトコルのポート範囲の開始位置、またはICMP/ICMPv6 タイプ番号。<code>-1</code> を指定すると、すべての ICMP/ICMPv6 タイプを示します。すべての ICMP/ICMPv6 タイプを指定する場合は、すべてのコードを指定する必要があります。<br>
+    **説明**: プロトコルが TCP または UDP の場合、ポート範囲の最初です。プロトコルが ICMP または ICMPv6 の場合、タイプ番号です。値 -1 は、すべての ICMP/ICMPv6 タイプを示します。すべての ICMP/ICMPv6 タイプを指定する場合、すべての ICMP/ICMPv6 コードを指定する必要があります。<br>
    - `ip_protocol`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `IpProtocol`<br>
@@ -153,7 +153,7 @@ disable_edit: true
    - `to_port`<br>
     **タイプ**: `INT32`<br>
     **プロバイダー名**: `ToPort`<br>
-    **説明**: TCP および UDP プロトコルのポート範囲の終了位置、またはICMP/ICMPv6 コード。<code>-1</code> を指定すると、すべての ICMP/ICMPv6 コードを示します。すべての ICMP/ICMPv6 タイプを指定する場合は、すべてのコードを指定する必要があります。<br>
+    **説明**: プロトコルが TCP または UDP の場合、ポート範囲の最後です。プロトコルが ICMP または ICMPv6 の場合、コードです。値 -1 は、すべての ICMP/ICMPv6 コードを示します。すべての ICMP/ICMPv6 タイプを指定する場合、すべての ICMP/ICMPv6 コードを指定する必要があります。<br>
    - `user_id_group_pairs`<br>
     **タイプ**: `UNORDERED_LIST_STRUCT`<br>
     **プロバイダー名**: `UserIdGroupPairs`<br>

@@ -9,7 +9,12 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/?tab=sqlserver"
   tag: "Documentation"
   text: "Troubleshoot Common Issues"
-
+- link: "https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/"
+  tag: "Blog"
+  text: "Strategize your Azure migration for SQL workloads with Datadog"
+- link: "https://www.datadoghq.com/blog/datadog-monitoring-always-on/"
+  tag: "Blog"
+  text: "Monitor your AlwaysOn availability groups with Datadog Database Monitoring"
 
 ---
 
@@ -21,13 +26,13 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 
 Do the following steps to enable Database Monitoring with your database:
 
-1. [Grant the Agent access to the database](#grant-the-agent-access)
-2. [Install the Agent](#install-the-agent)
+1. [Grant the Agent access](#grant-the-agent-access)
+1. [Install the Agent](#install-the-agent)
 
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019
+: 2012, 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -46,6 +51,10 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 {{% /tab %}}
 {{% tab "SQL Server 2012" %}}
@@ -55,6 +64,10 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 Create the `datadog` user in each additional application database:

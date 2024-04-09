@@ -102,7 +102,7 @@ Get insights into the performance or the adoption of a given team's scope by usi
    - Errors by service
    - Page views by service
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page.jpg" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
 ### Teams own UI components
 
@@ -119,11 +119,11 @@ Components are tracked using custom actions [mentioned above][10]:
 
 [1]: /real_user_monitoring/explorer/
 [2]: /real_user_monitoring/browser/#setup
-[3]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [4]: /real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [5]: /real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
 [6]: /real_user_monitoring/browser/monitoring_page_performance/#overview
 [7]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
-[8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
 [10]: #track-components-in-web-pages

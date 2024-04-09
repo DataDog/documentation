@@ -3,7 +3,7 @@
 {{ $dot := . }}
 {{ $scratch := .Scratch }}
 
-<!-- From data file -->
+<!-- From imported files -->
 {{ $list := sort .Pages }}
 
 <!-- build filters -->
@@ -16,7 +16,14 @@
     {{ end }}
 {{ end }}
 
-<h1 id="pagetitle">{{ .Title }}</h1>
+<div class="row">
+  <div class="col-12 order-1">
+      <h1 id="pagetitle">{{ .Title }}</h1>
+  </div>
+  <div class="col-12">
+      {{ partial "breadcrumbs.html" . }}
+  </div>
+</div>
 
 {{ .Content }}
 <form id="rules">

@@ -27,7 +27,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- provisioning
+- configuration & deployment
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
 display_on_public_website: true
@@ -40,20 +40,19 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nomad
-oauth: {}
 public_title: Nomad
 short_description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::構成 & デプロイ
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::プロビジョニング
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
   media: []

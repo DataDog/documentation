@@ -3,9 +3,11 @@ title: Datadog Windows Agent User
 kind: guide
 aliases:
   - /agent/faq/windows-agent-ddagent-user/
+algolia:
+  tags: ['windows agent user', 'windows user','ddagentuser', 'group policy']
 ---
 
-Starting with release `6.11.0`, the Core and APM/Trace components of the Windows Agent run under a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
+Starting with release `6.11.0`, the core and APM/trace components of the Windows Agent run under a dedicated user account, instead of running under the `LOCAL_SYSTEM` account, as was the case on prior versions. If enabled, the Live Process component still runs under the `LOCAL_SYSTEM` account.
 
 The Agent installer creates a new account by default (`ddagentuser`) but it can also use a user-supplied account.
 The account is assigned to the following groups during installation:
@@ -33,7 +35,7 @@ Additionally the following security policies are applied to the account during i
 
 If no user account is specified on the command line, the installer attempts to create a local user account named `ddagentuser` with a randomly generated password.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
 To specify the optional USERNAME and PASSWORD on the command line pass the following properties to the `msiexec` command (Remove the bracket `<>` characters from the username and password placeholders):
 
@@ -45,7 +47,7 @@ msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWOR
 
 **Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
 
-**Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
+**Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitor Users and Event Log Readers groups.
 
 **Note**: The user cannot be specified in the installer UI. Use the command line to pass the `DDAGENTUSER_NAME` and other parameters. They are taken into account, even in a UI install.
 
@@ -62,7 +64,7 @@ On domain joined machines, the Agent installer can use a user supplied account, 
 
 If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
@@ -85,8 +87,7 @@ When installing the Agent on a domain controller, there is no notion of local us
 
 If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. A password must be specified for the installation to succeed.
 
-If the specified user account is from a parent domain, the installer uses that user account.
-If the user account doesn't exist, it creates the user account in the child domain (the domain that the controller is joined to). The installer never creates a user account in the parent domain.
+If the specified user account is from a parent domain, the installer uses that user account. Ensure there exists a user account in the parent domain before installation, as the installer never creates a user account in the parent domain.
 
 ##### Read-only domain controllers
 
@@ -94,7 +95,7 @@ The installer can use only an existing domain account when installing on a read-
 
 ### Installation with Chef
 
-If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent’s configuration files have the correct permissions
+If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent's configuration files have the correct permissions
 
 ## Upgrade
 
@@ -117,9 +118,9 @@ For example, if the directory check is monitoring a directory that has specific 
 
 ### JMX-based integrations
 
-The change to `ddagentuser` affects your JMX-based integrations if the Agent’s JMXFetch is configured to connect to the monitored JVMs through the Attach API, for example if:
+The change to `ddagentuser` affects your JMX-based integrations if the Agent's JMXFetch is configured to connect to the monitored JVMs through the Attach API, for example if:
 
-1. You’re using a JMX-based integration, such as:
+1. You're using a JMX-based integration, such as:
    * [ActiveMQ][2]
    * [ActiveMQ_XML][3]
    * [Cassandra][4]
@@ -129,13 +130,13 @@ The change to `ddagentuser` affects your JMX-based integrations if the Agent’s
    * [Tomcat][8]
    * [Kafka][9]
 
-2. **AND** you’ve configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
+2. **AND** you've configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
 
-If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX documentation][5].
+If you're using the Attach API, the change in user context means that the Agent's JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX documentation][5].
 
 ### Process check
 
-In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users’ processes. This causes the following options of the check to not work:
+In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users' processes. This causes the following options of the check to not work:
 
 * `exact_match` when set to `false`
 * `user`, which allows selecting processes that belong to a specific user
@@ -151,7 +152,7 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 
 ## Security logs channel
 
-If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Reader Group to collect logs from the Security logs channel:
+If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Readers Group to collect logs from the Security logs channel:
 
 1. Open Run with *Windows+R* hotkeys, type `compmgmt.msc`.
 2. Navigate to *System Tools* -> *Local Users and Groups* -> *Groups*.

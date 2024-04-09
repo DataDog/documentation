@@ -1,16 +1,22 @@
 ---
+cascade:
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: Guides d'utilisation de la surveillance sans serveur
 disable_toc: true
 kind: guide
 private: true
 title: Guides d'utilisation de la surveillance sans serveur
 ---
 
-## Surveiller vos applications sans serveur
+## Guides généraux sur la surveillance sans serveur
 
 {{< whatsnext desc="Meilleures pratiques pour la surveillance de vos applications sans serveur" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Bénéficier d'une visibilité accrue sur les ressources appelant des fonctions Lambda{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/insights" >}}Insights Serverless{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_warnings" >}}Avertissements de la surveillance sans serveur{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_tagging" >}}Tagging de fonctions sans serveur{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Configuration de l'Agent sans serveur{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Effectuer l'installation avec le Forwarder Datadog

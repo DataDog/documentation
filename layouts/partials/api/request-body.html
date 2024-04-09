@@ -18,7 +18,7 @@
 
   <div class="tab-content">
       {{ range $contentType, $content := $body.content }}
-          {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
+          {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json") (hasPrefix $contentType "multipart/form-data")) -}}
               {{ range $itemKey, $schema := $content }}
                   {{ if eq $itemKey "schema" }}
                       <!-- Get Json and HTML -->
@@ -97,51 +97,46 @@
                           </div>
                           <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid | lower }}-{{ $version }}-request-example">
                               <div class="code-snippet-wrapper">
-                                  <div class="code-snippet">
 
-                                      {{ $fileNonExistCount := 0 }}
-                                      {{ $fileCount := 0 }}
-                                      {{ with (index $codeExampleLookup $operationid) }}
-                                        {{ $fileCount = len . }}
-                                        <div class="example-accordion" id="accordion-{{ $operationid | lower }}-{{ $version }}-json">
+                                {{ $fileNonExistCount := 0 }}
+                                {{ $fileCount := 0 }}
+                                {{ with (index $codeExampleLookup $operationid) }}
+                                  {{ $fileCount = len . }}
+                                  <div class="example-accordion" id="accordion-{{ $operationid | lower }}-{{ $version }}-json">
 
-                                        {{ range $i, $item := . | first 3 }}
+                                  {{ range $i, $item := . | first 3 }}
 
-                                            {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
-                                            <div class="card">
-                                              {{ if gt $fileCount 1 }}
-                                              <div class="card-header p-0">
-                                                <h5 class="m-0">
-                                                  <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-bs-toggle="collapse" data-bs-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
-                                                    {{ $item.description }}
-                                                  </button>
-                                                </h5>
-                                              </div>
-                                              {{ end }}
-                                              <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-json">
-                                                <div class="card-body p-0 code-snippet">
-                                                    <div class="code-button-wrapper position-absolute">
-                                                        <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-                                                    </div>
-                                                    {{ range . }}
-                                                      {{ (highlight (.Content) "json" "") }}
-                                                    {{ end }}
-                                                </div>
-                                              </div>
-                                            </div>
-                                            {{ else }}
-                                              {{ $fileNonExistCount = add $fileNonExistCount 1 }}
-                                            {{ end }}
-                                        {{ end }}
-
+                                      {{ with $resourcePage.Resources.Match (printf "request.%s%s.json" $operationid $item.suffix ) }}
+                                      <div class="card">
+                                        {{ if gt $fileCount 1 }}
+                                        <div class="card-header p-0">
+                                          <h5 class="m-0">
+                                            <button class="btn btn-link {{if gt $i 0}}collapsed{{ end}}" data-bs-toggle="collapse" data-bs-target="#{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" aria-expanded="true" aria-controls="collapseOne">
+                                              {{ $item.description }}
+                                            </button>
+                                          </h5>
                                         </div>
+                                        {{ end }}
+                                        <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-json">
+                                          <div class="card-body p-0 append-copy-btn">
+                                              {{ range . }}
+                                                {{ (highlight (.Content) "json" "") }}
+                                              {{ end }}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {{ else }}
+                                        {{ $fileNonExistCount = add $fileNonExistCount 1 }}
                                       {{ end }}
-
-                                      {{ if or (eq $fileNonExistCount $fileCount) (not (index $codeExampleLookup $operationid)) }}
-                                          {{ print $json | safeHTML }}
-                                      {{ end }}
+                                  {{ end }}
 
                                   </div>
+                                {{ end }}
+
+                                {{ if or (eq $fileNonExistCount $fileCount) (not (index $codeExampleLookup $operationid)) }}
+                                    {{ print $json | safeHTML }}
+                                {{ end }}
+
                               </div>
                           </div>
                       </div>

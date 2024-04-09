@@ -32,7 +32,7 @@ For more information about default and custom roles, how to create custom roles,
 1. Navigate to the monitor editing page by creating a new monitor or editing an existing one.
 2. At the bottom of the form, specify which roles, in addition to the creator, are allowed to edit the monitor.
 
-{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor"  >}}
+{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" >}}
 
 For more information, see [Monitors Permissions][1].
 
@@ -128,15 +128,13 @@ Before Datadog released the feature allowing restriction of monitor editing to s
 
 {{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC Locked Monitor" style="width:70%;">}}
 
-Locked monitors are deprecated. Datadog recommends using the role restriction option, which gives you more flexibility to define the users allowed to edit monitors.
-
-Your organization may have existing locked monitors. Datadog still supports locked monitors. Editing of locked monitors is restricted to users with the [Datadog Admin Role][2] and the monitor's creator.
+Locked monitors are deprecated and are no longer supported. Instead, use the role restriction option, which gives you more flexibility to define which users are allowed to edit monitors.
 
 The sections below describe how to migrate from the locked mechanism to restricted roles, depending on the way you manage your monitors.
 
 ### API
 
-Although deprecated, the `locked` parameter corresponding to the above mentioned locked mechanism is still supported. This means you can progressively update the definition of your monitors managed through API or Terraform to stop using `locked` and start using `restricted_roles` (parameter attached with the new role restriction option).
+The `locked` parameter corresponding to the above mentioned locking mechanism is no longer supported. This means you must update the definition of your monitors managed through API or Terraform to stop using `locked` and start using `restricted_roles` (parameter attached with the new role restriction option).
 
 For more information on how to update your monitors' definitions, see [Edit a monitor API endpoint][3] and [Monitor API Options][4].
 
@@ -145,7 +143,7 @@ For more information on how to update your monitors' definitions, see [Edit a mo
 All new monitors created from the UI use the `restricted_roles` parameter. 
 All monitors also display the role restriction option regardless of the underlying mechanism:
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor" >}}
 
 Datadog updates existing monitor definitions from the old locked mechanism to the new role restriction one whenever a monitor is saved.
 
@@ -157,7 +155,7 @@ You are a user with the [Datadog Admin Role][2] or are the creator of the monito
 
 ```
 This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
-If there is no specific change you want to apply to this monitor’s permissions, click Save. If you want to update this monitor’s permissions, read this doc.
+If there is no specific change you want to apply to this monitor's permissions, click Save. If you want to update this monitor's permissions, read this doc.
 ```
 
 On save, your monitor's definition will be updated to all roles with Admin permissions.
@@ -193,7 +191,7 @@ This monitor is locked. Reach out to a user with the [Datadog Admin Role][2] or 
 
 You edit a non locked monitor and see the following option:
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor" >}}
 
 You have different ways to handle this option depending on the changes you are willing to make on your monitor:
 

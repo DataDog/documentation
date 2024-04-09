@@ -5,7 +5,7 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
       text: 'Introduction to Incident Management'
-    - link: '/monitors/incident_management/datadog_clipboard'
+    - link: '/service_management/incident_management/datadog_clipboard'
       tag: 'Documentation'
       text: 'Datadog Clipboard'
     - link: 'https://www.youtube.com/watch?v=QIambwILy_M'
@@ -14,23 +14,32 @@ further_reading:
     - link: '/monitors/incident_management'
       tag: 'Documentation'
       text: 'Incident Management'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to improve your Incident Management'
     - link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
       tag: 'Blog'
       text: 'Incident Management with Datadog'
-    - link: '/monitors/incident_management/notification_rules'
+    - link: '/service_management/incident_management/incident_settings'
       tag: 'Documentation'
       text: 'Notification Rules'
     - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
       tag: 'Documentation'
       text: 'Slack integration with incidents'
+    - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
+      tag: 'Blog'
+      text: 'More efficient pair programming with Datadog CoScreen'
     - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
       tag: 'Blog'
       text: 'Best practices for writing incident postmortems'
+    - link: 'https://www.datadoghq.com/blog/how-datadog-manages-incidents/'
+      tag: 'Blog'
+      text: 'How we manage incidents at Datadog'
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Overview
 
@@ -46,11 +55,11 @@ This guide walks you through using the Datadog site for declaring an incident, u
 
 This guide describes using the [Datadog Clipboard][2] to declare an incident. Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
 
-1. In the Datadog menu on the left-hand side, go to **Dashboard** > **Dashboard lists** and select **System - Metrics**.
+1. In Datadog, navigate to [**Dashboard List**][15] and select **System - Metrics**.
 2. Hover over one of the graphs and copy it to the Clipboard with one of the following commands:
     - **Ctrl**/**Cmd** + **C**
     - Click the **Export** icon on the graph and select **Copy**.
-3. In the Datadog menu on the left-hand side, go to **Monitors** > **Manage Monitors** and select **[Auto] Clock in sync with NTP**.
+3. In the Datadog menu on the left-hand side, go to [**Monitors** > **Monitors List**][16] and select **[Auto] Clock in sync with NTP**.
 4. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**.
 5. In the Clipboard, click **Add current page** to add the monitor to the Clipboard.
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="Copy to Clipboard" responsive="true" style="width:100%;">}}
@@ -90,7 +99,7 @@ In the _Overview_ section, you can update incident fields and customer impact as
 To update the severity level and root cause:
 1. Click the _Severity_ dropdown and select **SEV-3**.
 2. Under _What happened_, select **Monitor** in the _Detection Method_ dropdown (Unknown is selected), because you were first alerted by a monitor on the issue.
-1. Add to the _Why it happened_ field: `TEST: Host is running out 3f memory.`
+1. Add to the _Why it happened_ field: `TEST: Host is running out of memory.`
 4. Click **Save** to update the properties.
     From Slack, you can also update the title, severity, or status of an ongoing issue using the `/datadog incident update` command.
 
@@ -127,7 +136,7 @@ You can add any Slack comment in the incident channel to the timeline so that yo
  In the _Remediation_ section, you can keep track of documents and tasks for investigating the issue or for post-incident remediation tasks.
 
 1. Click the **Remediation** tab.
-2. Click the the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][7]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
+2. Click the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][7]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
 3. Add a task by adding a description of a task in the _Incident Tasks_ box, for example: `Run the steps in the notebook.`
 4. Click **Create Task**.
 5. Click **Assign To** and assign yourself the task.
@@ -171,7 +180,7 @@ If there are follow-up tasks that you and your team need to complete to ensure t
 
 Datadog Incident Management can be customized with different severity and status levels, based on your organization's needs, and also include additional information such as APM services and teams related to the incident. For more information, see this [section][9] of the Incident Management page.
 
-You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Notification Rules][10] documentation.
+You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Incident Settings][10] documentation.
 
 To customize Incident Management, go to the [incident settings page][11]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click **Get Started**). Then on the top, click **Settings**.
 
@@ -181,23 +190,25 @@ The [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google
 
 You can also declare and edit incidents and quickly communicate to your teams through integrations with Slack, Zoom, and many more.
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
   
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/slack/
-[2]: /monitors/incident_management/datadog_clipboard
+[2]: /service_management/incident_management/datadog_clipboard
 [3]: /notebooks/#overview
-[4]: /monitors/incident_management/#from-a-graph
-[5]: /monitors/incident_management/#from-a-monitor
+[4]: /service_management/incident_management/#from-a-graph
+[5]: /service_management/incident_management/#from-a-monitor
 [6]: /api/latest/incidents/#create-an-incident
 [7]: https://app.datadoghq.com/notebook/list
 [8]: https://app.datadoghq.com/incidents/settings#Messages
-[9]: /monitors/incident_management/#status-levels
-[10]: /monitors/incident_management/notification_rules
+[9]: /service_management/incident_management/#status-levels
+[10]: /service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /mobile/
+[12]: /service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/monitors/manage

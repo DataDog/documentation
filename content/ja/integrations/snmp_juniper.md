@@ -15,9 +15,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- notification
 - ネットワーク
+- notification
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_juniper/README.md
@@ -31,23 +30,21 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp_juniper
-oauth: {}
 public_title: Juniper Networks
 short_description: Juniper のネットワークデバイスからメトリクスを収集します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Notification
   - Category::Network
+  - Category::Notification
   - Category::SNMP
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Juniper のネットワークデバイスからメトリクスを収集します。
   media: []

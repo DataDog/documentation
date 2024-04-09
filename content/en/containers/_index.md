@@ -6,6 +6,11 @@ further_reading:
     - link: "https://www.datadoghq.com/container-report/"
       tag: "Datadog Research"
       text: "Datadog's Annual State of Containers Report"
+algolia:
+  tags: ['containers']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview

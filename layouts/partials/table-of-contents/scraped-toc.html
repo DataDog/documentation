@@ -1,0 +1,34 @@
+{{/*  
+    TOC that is able to render markdown headers nested in `site-region` shortcodes.
+    This is an alternative solution to changing site-region shortcodes across docs to use md shortcode syntax ({{% %}}) 
+*/}}
+<nav id="TableOfContents">
+    <ul>
+    {{ $headers_html := (findRE `<h([2-3]).*?>.*<\/h[2-3]>` .Content) }}
+    {{ $prev_h_level := 3 }}
+    {{ $level_nested := 0 }}
+    {{ range $i, $header := $headers_html }}
+      {{ $heading_info := split (replaceRE `<h([2-3]).*?id=\"(.*)\".*?>(.*)<\/h[2-3]>` "$1,$2,$3" $header) "," }}
+
+      {{ $h_level := (index $heading_info 0) }}
+      {{ $h_id := (index $heading_info 1) }}
+      {{ $h_title := (index $heading_info 2) }}
+
+      {{ if gt $h_level $prev_h_level }}
+          <ul>
+          {{ $level_nested = $prev_h_level }}
+      {{ else if le $h_level $level_nested }}
+          </li></ul>
+          {{ $level_nested = 0 }}
+      {{ else if ne $i 0 }}
+          </li>
+      {{ end }}
+
+      <li>
+        {{/* href values are encoded here. we are decoding the uri in table-of-contents.js   */}}
+        <a href="#{{ $h_id }}">{{ $h_title | safeHTML }}</a>
+
+      {{ $prev_h_level = $h_level }}
+    {{ end }}
+    </ul>
+</nav>

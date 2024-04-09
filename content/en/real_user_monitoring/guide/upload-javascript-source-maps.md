@@ -18,7 +18,16 @@ If your front-end JavaScript source code is minified, upload your source maps to
 
 ## Instrument your code
 
-Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. Also, ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50MB**.
+Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. 
+
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **300** MB.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50** MB.
+{{< /site-region >}}
+</div>
 
 See the following configurations for popular JavaScript bundlers.
 
@@ -75,7 +84,14 @@ See the following example:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the 50MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.</div>
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **300** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **50** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+{{< /site-region >}}
+</div>
 
 ## Upload your source maps
 
@@ -97,7 +113,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov" >}}
+{{< site-region region="eu,us3,us5,gov,ap1" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
@@ -115,13 +131,15 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
 
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+
 The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events and browser logs. For more information on how to setup these tags, refer to the [Browser RUM SDK initialization documentation][2] or [Browser Logs Collection documentation][3].
 
 <div class="alert alert-info">If you have defined multiple services in your RUM application, run the CI command as many times as there are services, even if you have one set of sourcemaps for the entire RUM application.</div>
 
 By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the JavaScript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
-Only source maps with the `.js.map` extension work to correctly unminify stack traces.  Source maps with other extensions such as `.mjs.map` are accepted but do not unminify stack traces.
+Only source maps with the `.js.map` extension work to correctly unminify stack traces. Source maps with other extensions such as `.mjs.map` are accepted but do not unminify stack traces.
 
 <div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>.</div>
 

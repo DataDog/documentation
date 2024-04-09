@@ -62,7 +62,7 @@ Datadog Trace Agent (APM) はデフォルトで有効になっています。特
 
 {{% /site-region %}}
 
-{{% site-region region="us,us5,eu,gov" %}}
+{{% site-region region="us,us5,eu,gov,ap1" %}}
 
 ##### ログ収集の有効化
 
@@ -108,7 +108,7 @@ Agent バージョン 6.12 以降では、ビルドパックで[プロキシ構�
 
 接続の確立に失敗し、ログ収集が開始されない場合、[イベントエクスプローラー][9]にこのようなイベントが表示されます。これらのイベントを追跡するモニターを設定し、誤構成された Buildpack がデプロイされたときに通知されるようにします。
 
-{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="Datadog で Log endpoint cannot be reached - Log collection not started というタイトルのイベントと、TCP 接続が確立できなかったというメッセージが表示される"  >}}
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="Datadog で Log endpoint cannot be reached - Log collection not started というタイトルのイベントと、TCP 接続が確立できなかったというメッセージが表示される" >}}
 
 ### タグ
 

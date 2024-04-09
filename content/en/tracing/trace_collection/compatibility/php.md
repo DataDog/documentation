@@ -33,7 +33,7 @@ When these versions are no longer supported by their maintainers, Datadog APM fo
 | <span id="support-eol">End-of-life (EOL)</span>        |  No support. The version can still be used but no bug fixes are provided.                                                                                                  |
 
 
-PHP APM supports the following PHP versions:
+PHP APM supports the following PHP versions (both ZTS and NTS):
 
 <div class="alert alert-info">
 <strong>Note:</strong>
@@ -46,6 +46,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 
 | PHP Version    | Support level                         | Package version |
 |:---------------|:--------------------------------------|:----------------|
+| 8.3.x          | Beta (until the official PHP release) | > `0.93.0+`     |
 | 8.2.x          | General Availability                  | > `0.82.0+`     |
 | 8.1.x          | General Availability                  | > `0.66.0+`     |
 | 8.0.x          | General Availability                  | > `0.52.0+`     |
@@ -71,12 +72,13 @@ PHP APM supports the following SAPI's:
 
 PHP APM supports the following architectures:
 
-| Processor architectures                   | Support level         | Package version                        |
-| ------------------------------------------|-----------------------|----------------------------------------|
-| Linux GNU amd64 (`x86-64-linux-gnu`)      | [GA](#support-ga)     | All                                    |
-| Linux MUSL amd64 (`x86-64-linux-musl`)    | [GA](#support-ga)     | All                                    |
-| Linux GNU arm64 (`aarch64-linux-gnu`)     | [GA](#support-ga)     | > `0.78.0`                             |
-| Linux MUSL arm64 (`aarch64-linux-musl`)   | [GA](#support-ga)     | > `0.78.0`                             |
+| Processor architectures                 | Support level     | Package version | Support Type               |
+|-----------------------------------------|-------------------|---------------|----------------------------|
+| Linux GNU amd64 (`x86-64-linux-gnu`)    | [GA](#support-ga) | All           | All supported PHP versions |
+| Linux MUSL amd64 (`x86-64-linux-musl`)  | [GA](#support-ga) | All           | All supported PHP versions |
+| Linux GNU arm64 (`aarch64-linux-gnu`)   | [GA](#support-ga) | > `0.78.0`    | All supported PHP versions |
+| Linux MUSL arm64 (`aarch64-linux-musl`) | [GA](#support-ga) | > `0.78.0`    | All supported PHP versions |
+| Windows amd64 (`x86_64-windows`)        | [GA](#support-ga) | > `0.98.0`    | PHP 7.2+                   |
 
 ### Integrations
 
@@ -92,39 +94,41 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 **Web frameworks**:
 
-| Module         | Versions             | Support Type               | Instrumentation level           |
-|:-------------- |:---------------------|:---------------------------|:--------------------------------|
-| CakePHP        | 2.x                  | All supported PHP versions | Framework-level instrumentation |
-| CodeIgniter    | 2.x                  | PHP 7+                     | Framework-level instrumentation |
-| CodeIgniter    | 3.x                  | PHP 7+                     | Generic web tracing             |
-| Drupal         |                      | All supported PHP versions | Generic web tracing             |
-| FuelPHP        | 1.1                  | PHP 7+                     | Generic web tracing             |
-| Laravel        | 4.2, 5.x, 6.x        | All supported PHP versions | Framework-level instrumentation |
-| Laravel 8      | 8.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
-| Lumen          |   5.2+                 | All supported PHP versions | Framework-level instrumentation |
-| Magento        | 1, 2                 | All supported PHP versions | Generic web tracing             |
-| Neos Flow      | 1.1                  | All supported PHP versions | Generic web tracing             |
-| Phalcon        | 1.3, 3.4             | All supported PHP versions | Generic web tracing             |
-| RoadRunner     | 2.x                  | All supported PHP versions | Framework-level instrumentationq |
-| Slim           | 2.x, 3.x, 4.x        | All supported PHP versions | Framework-level instrumentation |
-| Symfony        | 3.3, 3.4, 4.x, 5.x, 6.x | All supported PHP versions | Framework-level instrumentation |
-| WordPress      | 4.x, 5.x             | PHP 7+                     | Framework-level instrumentation |
-| Yii            | 1.1, 2.0             | All supported PHP versions | Framework-level instrumentation |
-| Zend Framework | 1.12                 | All supported PHP versions | Framework-level instrumentation |
-| Zend Framework | 2.x                  | All supported PHP versions | Generic web tracing             |
+| Module         | Versions                                | Support Type               | Instrumentation level           |
+|:---------------|:----------------------------------------|:---------------------------|:--------------------------------|
+| CakePHP        | 2.x, 3.x, 4.x, 5.x                      | All supported PHP versions | Framework-level instrumentation |
+| CodeIgniter    | 2.x, 3.x                                | PHP 7+                     | Framework-level instrumentation |
+| Drupal         |                                         | All supported PHP versions | Framework-level instrumentation |
+| FuelPHP        | 1.1                                     | PHP 7+                     | Generic web tracing             |
+| Laminas        |                                         | All supported PHP versions | Framework-level instrumentation |
+| Laravel        | 4.2, 5.x, 6.x                           | All supported PHP versions | Framework-level instrumentation |
+| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
+| Lumen          | 5.2+                                    | All supported PHP versions | Framework-level instrumentation |
+| Magento        | 1                                       | All supported PHP versions | Generic web tracing             |
+| Magento        | 2                                       | PHP 7+                     | Framework-level instrumentation |
+| Neos Flow      | 1.1                                     | All supported PHP versions | Generic web tracing             |
+| Phalcon        | 1.3, 3.4                                | All supported PHP versions | Generic web tracing             |
+| RoadRunner     | 2.x                                     | All supported PHP versions | Framework-level instrumentation |
+| Slim           | 2.x, 3.x, 4.x                           | All supported PHP versions | Framework-level instrumentation |
+| Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | All supported PHP versions | Framework-level instrumentation |
+| WordPress      | 4.x, 5.x, 6.x                           | PHP 7+                     | Framework-level instrumentation |
+| Yii            | 1.1, 2.0                                | All supported PHP versions | Framework-level instrumentation |
+| Zend Framework | 1.12, 1.21                              | All supported PHP versions | Framework-level instrumentation |
+| Zend Framework | 2.x                                     | All supported PHP versions | Generic web tracing             |
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
 
-Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks.  To request support for additional span metadata and framework internals, contact our awesome [support team][3].
+Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
 #### CLI library compatibility
 
 Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
 
-| Module          | Versions | Support Type    |
-|:----------------|:---------|:----------------|
-| CakePHP Console | 2.x      | Fully Supported |
-| Laravel Artisan | 5.x      | Fully Supported |
+| Module          | Versions            | Support Type    |
+|:----------------|:--------------------|:----------------|
+| CakePHP Console | 2.x                 | Fully Supported |
+| Laravel Artisan | 5.x, 8.x, 9.x, 10.x | Fully Supported |
+| Symfony CLI     | 4.x, 5.x, 6.x       | Fully Supported |
 
 To request support for additional CLI libraries, contact our awesome [support team][3].
 
@@ -135,22 +139,26 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Amazon RDS (using PDO or MySQLi)                                        | *(Any Supported PHP)*      | Fully Supported |
 | Elasticsearch                                                           | 1+                         | Fully Supported |
 | Eloquent                                                                | Laravel supported versions | Fully Supported |
+| Laravel Queues                                                          | Laravel supported versions | Fully Supported |
+| Memcache                                                                | *(Any Supported PHP)*      | Fully Supported |
 | Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB - via [mongo][4] extension                                      | 1.4.x                      | Fully Supported |
 | MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
-| PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Any Supported PHP)*      | Fully Supported |
+| PDO                                                                     | *(Any Supported PHP)*      | Fully Supported |
 | PhpRedis                                                                | 3, 4, 5                    | PHP 7, 8        |
 | Predis                                                                  | 1.1                        | Fully Supported |
+| SQLSRV                                                                  | *(Any Supported PHP)*      | Fully Supported |
 
 To request support for additional datastores, contact our awesome [support team][3].
 
 #### Library compatibility
 
-| Module     | Versions              | Support Type    |
-|:-----------|:----------------------|:----------------|
-| Curl       | *(Any Supported PHP)* | Fully Supported |
-| Guzzle     | 5.x                   | Fully Supported |
-| Guzzle     | 6.x                   | Fully Supported |
+| Module                                                    | Versions              | Support Type    |
+|:----------------------------------------------------------|:----------------------|:----------------|
+| [php-amqplib][10] | 2.x, 3.x              | PHP 7.1+        |
+| Curl                                                      | *(Any Supported PHP)* | Fully Supported |
+| Guzzle                                                    | 5.x, 6.x, 7.x         | Fully Supported |
+
 
 To request support for additional libraries, contact our awesome [support team][3].
 
@@ -164,7 +172,7 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 ### PCNTL
 
-Datadog does not offer support for tracing processes forked using [pcntl][7]. When a call to `pcntl_fork` is detected, tracing is disabled in the forked process. The main process can still be traced.
+Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
 
 If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
@@ -180,3 +188,5 @@ If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is ins
 [6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
+[9]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
+[10]: https://github.com/php-amqplib/php-amqplib

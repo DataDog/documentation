@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
       tag: 'Pypi'
       text: 'API Docs'
+    - link: "/tracing/trace_collection/trace_context_propagation/python/"
+      tag: "Documentation"
+      text: "Propagating trace context"
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
@@ -33,24 +36,24 @@ Enable debug logging in the tracer.
 It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][1] documentation for recommendations on how to configure these environment variables.
 
 `DD_ENV`
-: Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][3]. Available in version 0.38+.
+: Set the application's environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][3]. Available in version 0.38+.
 
 `DD_SERVICE`
 : The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][4]). Available in version 0.38+.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `Datadog`<br>
+: **Default**: `tracecontext,Datadog`<br>
 Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`Datadog`)<br>
-Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is static and unrelated to the order of values given. For example: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` produces the same behavior as `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,B3`.
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
+Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 `DD_SERVICE_MAPPING`
 : Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
 
 `DD_VERSION`
-: Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
+: Set the application's version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
 
 `DD_TRACE_SAMPLE_RATE`
 : Enable trace volume control
@@ -71,7 +74,7 @@ For more information, see [Ingestion Mechanisms][5].<br>
 
 
 `DD_TAGS`
-: A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
+: A list of default tags to be added to every span and profile, for example: `layer:api,team:intake,key:value`. Available in version 0.38+.
 
 `DD_TRACE_HEADER_TAGS`
 : **Default**: `null`<br>
@@ -119,4 +122,4 @@ Enable [connecting logs and trace injection][6].
 [4]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports

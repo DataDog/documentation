@@ -42,7 +42,7 @@ The example below demonstrates the creation of a browser test that maps a user's
 2. In the top right corner, click **New Test** > **[Browser Test][3]**.
 3. Define your browser test:
 
-    - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
+    - Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
     - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
       In this example, no specific advanced option is needed.
     - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
@@ -82,7 +82,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 Design your alert message and add an email address you want your test to send alerts to.
 
-{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true"  >}}
+{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true" >}}
 
 You can also use [notifications integrations][6] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][7].
 
@@ -110,7 +110,7 @@ The example below demonstrates how to map a user journey from adding an item to 
 
 It is important to finish your browser test with an **Assertion** to ensure your application resulted in the expected state after the defined user journey.
 
-{{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true"  >}}
+{{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true" >}}
 
 The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you receive an email notification when the test fails and recovers.
 
@@ -122,7 +122,7 @@ To troubleshoot a [failed test][10], select a failed test result and review the 
 
 In the example below, the test failed as the result of a server timeout.
 
-{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure" video="true"  >}}
+{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure" video="true" >}}
 
 Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the **Traces** tab.
 

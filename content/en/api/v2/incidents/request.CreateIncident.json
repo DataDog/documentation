@@ -2,7 +2,7 @@
   "data": {
     "type": "incidents",
     "attributes": {
-      "title": "Example-Create_an_incident_returns_CREATED_response",
+      "title": "Example-Incident",
       "customer_impacted": false,
       "fields": {
         "state": {

@@ -3,7 +3,7 @@
   "data": {
     "type": "sensitive_data_scanner_rule",
     "attributes": {
-      "name": "Example-Create_Scanning_Rule_returns_OK_response",
+      "name": "Example-Sensitive-Data-Scanner",
       "pattern": "pattern",
       "namespaces": [
         "admin"
@@ -17,7 +17,14 @@
       "tags": [
         "sensitive_data:true"
       ],
-      "is_enabled": true
+      "is_enabled": true,
+      "priority": 1,
+      "included_keyword_configuration": {
+        "keywords": [
+          "credit card"
+        ],
+        "character_count": 35
+      }
     },
     "relationships": {
       "group": {

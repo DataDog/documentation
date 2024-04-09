@@ -1,5 +1,5 @@
 ---
-title: Using Synthetic Metrics in Monitors
+title: Use Estimated Usage Metrics
 kind: guide
 description: Learn how to use general Synthetic metrics in monitors. 
 further_reading:
@@ -35,7 +35,7 @@ This guide demonstrates how to set up a metric monitor using a general metric su
 
 1. To create a metric monitor, navigate to [Monitors > New Monitor][4] and click **Metric**. 
 
-2. Select a detection method to customize your monitor’s alerting conditions. For this example, you can create a threshold alert metric monitor.
+2. Select a detection method to customize your monitor's alerting conditions. For this example, you can create a threshold alert metric monitor.
 
    Threshold Alert
    : An alert is triggered whenever a metric crosses a threshold.

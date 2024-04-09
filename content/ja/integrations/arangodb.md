@@ -27,6 +27,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 - ログの収集
 dependencies:
@@ -36,26 +37,26 @@ draft: false
 git_integration_title: arangodb
 integration_id: arangodb
 integration_title: ArangoDB
-integration_version: 1.3.0
+integration_version: 1.4.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: arangodb
-oauth: {}
 public_title: ArangoDB
 short_description: ArangoDB の構成に関するメトリックスを追跡します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Data Store
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ArangoDB の構成に関するメトリックスを追跡します。
   media: []

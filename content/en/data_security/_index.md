@@ -14,15 +14,18 @@ further_reading:
 - link: "/tracing/configure_data_security/"
   tag: "Documentation"
   text: "Tracing Data Security"
-- link: "/real_user_monitoring/browser/modifying_data_and_context/"
+- link: "/data_security/real_user_monitoring/"
   tag: "Documentation"
   text: "RUM Data Security"
-- link: "/real_user_monitoring/session_replay/privacy_options"
+- link: "/real_user_monitoring/session_replay/browser/privacy_options"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
-- link: "/account_management/org_settings/sensitive_data_detection/"
+- link: "/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 <div class="alert alert-info">This page is about the tools and security for protecting data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
@@ -41,13 +44,13 @@ Data in motion through Datadog provided tools is protected with TLS and HSTS. Da
 
 The Agent is the main channel for data getting from your systems to Datadog. [Read all about data security measures in the Agent][4]. 
 
-To learn how to avoid storing secrets in plaintext in the Agent’s configuration files, see [Secrets Management][5].
+To learn how to avoid storing secrets in plaintext in the Agent's configuration files, see [Secrets Management][5].
 
 ### Third party services integrations
 
 The integrations for some third party services are configured directly in Datadog and might require you to provide credentials to allow Datadog to connect to the service on your behalf. The credentials you provide are encrypted and stored by Datadog in a secure credential datastore. 
 
-All data through these integrations is encrypted when at-rest in Datadog’s systems and encrypted in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within the third party services are limited to only what is necessary. Anomalous behavior detection tools continuously monitor for unauthorized access. Datadog employee access for maintenance purposes is limited to a select subset of engineers.
+All data through these integrations is encrypted when at-rest in Datadog's systems and encrypted in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within the third party services are limited to only what is necessary. Anomalous behavior detection tools continuously monitor for unauthorized access. Datadog employee access for maintenance purposes is limited to a select subset of engineers.
 
 ### Cloud integrations
 
@@ -59,7 +62,7 @@ Due to their sensitive nature, additional security measures are implemented, whe
 
 ## Measures you can implement to reduce your data risk
 
-Datadog’s purpose is to gather observability information from many sources around your infrastructure and services and to bring it together in one place for you to analyze and investigate. This involves you sending a wide range of types of data content to Datadog’s servers. Most of the data gathered for the intended use of the Datadog products has little chance of containing private or personal data. For the data that may contain unnecessary private or personal data, we provide instructions, tools, and recommendations to enable you to strip out, obfuscate, and otherwise reduce the inclusion of private or personal data in the data shared with Datadog.
+Datadog's purpose is to gather observability information from many sources around your infrastructure and services and to bring it together in one place for you to analyze and investigate. This involves you sending a wide range of types of data content to Datadog's servers. Most of the data gathered for the intended use of the Datadog products has little chance of containing private or personal data. For the data that may contain unnecessary private or personal data, we provide instructions, tools, and recommendations to enable you to strip out, obfuscate, and otherwise reduce the inclusion of private or personal data in the data shared with Datadog.
 
 ### Sensitive Data Scanner
 
@@ -75,7 +78,7 @@ A key approach to reducing risk around logs data security is access control. Rea
 
 ### Live processes and containers
 
-To prevent leaking sensitive data when you’re monitoring live processes and live containers, Datadog provides some default sensitive keyword scrubbing in process arguments and in Helm charts. You can obfuscate additional sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][16], and add to the container scrubbing word list by using the [`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` environment variable][17].
+To prevent leaking sensitive data when you're monitoring live processes and live containers, Datadog provides some default sensitive keyword scrubbing in process arguments and in Helm charts. You can obfuscate additional sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][16], and add to the container scrubbing word list by using the [`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` environment variable][17].
 
 ### APM and other tracing library based products
 
@@ -98,7 +101,7 @@ Synthetic testing simulates requests and business transactions from testing loca
 
 ### RUM & Session Replay
 
-You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you’re collecting. Read [Modifying RUM Data and Context][21] for details.
+You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you're collecting. Read [Modifying RUM Data and Context][21] for details.
  
 Session Replay privacy options default to protecting end-user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22].
 
@@ -108,7 +111,7 @@ The Database Monitoring Agent obfuscates all query bind parameters sent to the D
 
 ## Other sources of potentially sensitive data 
 
-In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things.  We recommend not including private or personal information in the text you are sending.  Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
+In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things. We recommend not including private or personal information in the text you are sending. Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
 
 Metadata and tags
 : Metadata consists primarily of [tags][24] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
@@ -143,12 +146,12 @@ Continuous Integration pipelines and tests
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /developers/dogstatsd/
 [4]: /data_security/agent/
-[5]: /agent/guide/secrets-management/
+[5]: /agent/configuration/secrets-management/
 [6]: /integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /integrations/azure/
 [9]: /integrations/google_cloud_platform/
-[10]: /account_management/org_settings/sensitive_data_detection/
+[10]: /sensitive_data_scanner/
 [11]: /data_security/logs/
 [12]: /logs/guide/control-sensitive-logs-data/
 [13]: /agent/logs/advanced_log_collection
@@ -159,8 +162,8 @@ Continuous Integration pipelines and tests
 [18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
-[21]: /real_user_monitoring/browser/modifying_data_and_context/
-[22]: /real_user_monitoring/session_replay/privacy_options
+[21]: /real_user_monitoring/browser/advanced_configuration/
+[22]: /real_user_monitoring/session_replay/browser/privacy_options
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
 [25]: /tracing/glossary/

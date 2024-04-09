@@ -1,6 +1,7 @@
 ---
 categories:
 - cloud
+- data store
 - google cloud
 - ログの収集
 dependencies: []

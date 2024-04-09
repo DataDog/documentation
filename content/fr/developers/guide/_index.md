@@ -1,4 +1,10 @@
 ---
+cascade:
+  algolia:
+    category: Guide
+    rank: 20
+    subcategory: Guides du développeur
+disable_toc: true
 kind: guide
 private: true
 title: Guides du développeur

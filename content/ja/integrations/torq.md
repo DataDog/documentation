@@ -5,6 +5,7 @@ assets:
   dashboards:
     Torq: assets/dashboards/torq_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: torq.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10231
     source_type_name: Torq
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,10 +24,9 @@ author:
   support_email: support@torq.io
 categories:
 - 自動化
+- notifications
 - orchestration
-- notification
-- コラボレーション
-- security
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/torq/README.md
 display_on_public_website: true
@@ -38,24 +39,22 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: torq
-oauth: {}
 public_title: Torq
 short_description: セキュリティチームとオペレーションチームのためのノーコード自動化
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Automation
+  - Category::Notifications
   - Category::Orchestration
-  - Category::Notification
-  - Category::Collaboration
   - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: セキュリティチームとオペレーションチームのためのノーコード自動化
   media: []
@@ -64,13 +63,14 @@ tile:
   title: Torq
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 [Torq][1] のインテグレーションでは、Datadog のアラートに対応してワークフローをトリガーし、アラートのリッチ化を実現します。そして、Torq ワークフローから Datadog のイベントストリームや Torq 専用ダッシュボードに直接イベントを送り返すことができます。
 
-## セットアップ
+## 計画と使用
 
 このインテグレーションを設定するには、アクティブな [Torq アカウント][2]と、そのアカウント所有者のロールが必要です。また、Datadog の適切な管理者権限も必要となります。
 
@@ -169,21 +169,21 @@ API キーを作成した後、後でアクセスできなくなるので、コ�
 
 2. `Datadog-<monitor_type>` のような意味のあるインテグレーション名を入力し、**Add** をクリックします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Torq インテグレーションは、メトリクスを提供しません。
 
-### イベント
+### ヘルプ
 
 Torq インテグレーションでは、Datadog ポストイベントステップを使用して Torq ワークフローから Datadog のイベントストリームにイベントを送信することができます。このステップをプレイブックと併用し、問題の軽減に成功した場合や実行に失敗した場合に Datadog に通知したり、加工したアラートデータを Datadog に返送することもできます。
 
-### サービスのチェック
+### ヘルプ
 
 Torq インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

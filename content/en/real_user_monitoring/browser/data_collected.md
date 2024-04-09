@@ -12,7 +12,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Introducing Datadog Real User Monitoring"
-- link: "/real_user_monitoring/browser/modifying_data_and_context"
+- link: "/real_user_monitoring/browser/advanced_configuration"
   tag: "Documentation"
   text: "Modifying RUM data and adding context"
 - link: "/real_user_monitoring/explorer/"
@@ -23,7 +23,7 @@ further_reading:
   text: "Apply visualizations on your events"
 - link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
-  text: "Datadog Standard Attributes"
+  text: "Datadog standard attributes"
 ---
 
 ## Overview
@@ -45,7 +45,6 @@ The following diagram illustrates the RUM event hierarchy:
 
 {{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;border:none" >}}
 
-
 ## Default attributes
 
 Each of these event types has the following attributes attached by default, so you can use them regardless of the RUM event type being queried.
@@ -56,6 +55,7 @@ Each of these event types has the following attributes attached by default, so y
 |------------------|--------|-----------------------------|
 | `type`     | string | The type of the event (for example, `view` or `resource`).             |
 | `application.id` | string | The Datadog application ID generated when you create a RUM application. |
+| `application.name` | string | The name of your Datadog application. |
 | `service`     | string | A service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking][1].             |
 
 ### View attributes
@@ -85,6 +85,17 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`  | string | The device brand as reported by the device (User-Agent HTTP header).  |
 | `device.model`   | string | The device model as reported by the device (User-Agent HTTP header).   |
 | `device.name` | string | The device name as reported by the device (User-Agent HTTP header). |
+
+### Connectivity
+
+The following network-related attributes are attached automatically to all events collected by Datadog:
+
+| Attribute name                       | Type   | Description                                                                                                               |
+|--------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
+| `connectivity.status`                | string | Status of device network reachability (`connected` or `not connected`).                                       |
+| `connectivity.interfaces`            | array  | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).                   |
+| `connectivity.effective_type`        | string | [Effective connection type][18], reflecting the measured network performance (`slow-2g`, `2g`, `3g`, or `4g`). |
+
 
 ### Operating system
 
@@ -118,10 +129,10 @@ In addition to default attributes, you can add user-related data to all RUM even
 ### Feature flag attributes
 
 {{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Feature Flag Tracking is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
+<a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
 {{< /callout >}}
 
-You can [enrich your RUM event data with feature flags][6] to get visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user’s performance. 
+You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
 
 ## Event-specific metrics and attributes
 
@@ -160,14 +171,20 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 
 ### View timing metrics
 
+**Note**: View timing metrics include time that a page is open in the background.
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                       |
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered.                                                                                                |
-| `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
+| `view.largest_contentful_paint_target_selector` | string (CSS selector) | CSS Selector of the element corresponding to the largest contentful paint.                                                                                     |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                             |
+| `view.first_input_delay_target_selector`      | string (CSS selector) | CSS selector of the first element the user interacted with.                                                                                                                |
+| `view.interaction_to_next_paint`| number (ns) | Longest duration between a user's interaction with the page and the next paint.                                                                                                                              |
+| `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where `0` means that no shifts are happening.                                                                               |
+| `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from Monitoring Page Performance][9].                                                                             |
 | `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][10].                               |
 | `view.dom_interactive`          | number (ns) | Time until the parser finishes its work on the main document. [More info from the MDN documentation][11].                                                                                                         |
@@ -196,20 +213,19 @@ Detailed network timing data for the loading of an application's resources are c
 
 ### Resource attributes
 
-| Attribute                      | Type   | Description                                                                             |
-|--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `resource.type`                | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`).           |
-| `resource.method`                | string | The HTTP method (for example `POST` or `GET`).           |
-| `resource.status_code`             | number | The response status code.                                                               |
-| `resource.url`                     | string | The resource URL.                                                                       |
-| `resource.url_host`        | string | The host part of the URL.                                                          |
-| `resource.url_path`        | string | The path part of the URL.                                                          |
-| `resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
-| `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                            |
-| `resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
-| `resource.provider.domain`      | string | The resource provider domain.                                            |
-| `resource.provider.type`      | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                                            |
-
+| Attribute                  | Type   | Description                                                                                          |
+|----------------------------|--------|------------------------------------------------------------------------------------------------------|
+| `resource.type`            | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`). |
+| `resource.method`          | string | The HTTP method (for example `POST` or `GET`).                                                       |
+| `resource.status_code`     | number | The response status code (available for fetch/XHR resources only).                                   |
+| `resource.url`             | string | The resource URL.                                                                                    |
+| `resource.url_host`        | string | The host part of the URL.                                                                            |
+| `resource.url_path`        | string | The path part of the URL.                                                                            |
+| `resource.url_query`       | object | The query string parts of the URL decomposed as query params key/value attributes.                   |
+| `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                                        |
+| `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                                    |
+| `resource.provider.domain` | string | The resource provider domain.                                                                        |
+| `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                |
 
 ### Long task timing metrics
 
@@ -217,16 +233,14 @@ Detailed network timing data for the loading of an application's resources are c
 |------------|--------|----------------------------|
 | `long_task.duration` | number | Duration of the long task. |
 
-
 ### Error attributes
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.source`  | string | Where the error originates from (for example, `console` or `network`).     |
+| `error.source`  | string | Where the error originates from (for example, `console`). See [Error sources][19].   |
 | `error.type`    | string | The error type (or error code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
-
 
 #### Source errors
 
@@ -236,13 +250,11 @@ Source errors include code-level information about the error. For more informati
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                   |
 
-
-
 ### Action timing metrics
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][16]. |
+| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [Tracking User Actions documentation][16]. |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
 | `action.resource.count`         | number      | Count of all resources collected for this action. |
 | `action.error.count`      | number      | Count of all errors collected for this action.|
@@ -266,15 +278,25 @@ Source errors include code-level information about the error. For more informati
 | `action.frustration.type:rage_click`  | string | The rage clicks detected by the RUM Browser SDK.              |
 | `action.frustration.type:error_click` | string | The error clicks detected by the RUM Browser SDK.             |
 
+### UTM attributes
+
+| Field                | Type   | Description                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `view.url_query.utm_source`     | string | The parameter in the URL tracking the source of traffic. |
+| `view.url_query.utm_medium`        | string | The parameter in the URL tracking the channel where the traffic is coming from.    |
+| `view.url_query.utm_campaign`  | string | The paramter in the URL identifying the specific marketing campaign tied to that view.              |
+| `view.url_query.utm_content`  | string | The paramter in the URL identifying the specific element a user clicked within a marketing campaign.           |
+| `view.url_query.utm_term` | string | The parameter in the URL tracking the keyword a user searched to trigger a given campaign.             |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 [3]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 [4]: /data_security/real_user_monitoring/#ip-address
-[5]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
+[5]: /real_user_monitoring/browser/advanced_configuration/#user-sessions
 [6]: /real_user_monitoring/guide/setup-feature-flag-data-collection
 [7]: /data_security/real_user_monitoring/#ip-address
 [8]: /synthetics/browser_tests/
@@ -285,5 +307,7 @@ Source errors include code-level information about the error. For more informati
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
+[16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
 [17]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[18]: https://developer.mozilla.org/en-US/docs/Glossary/Effective_connection_type
+[19]: /real_user_monitoring/browser/collecting_browser_errors#error-sources

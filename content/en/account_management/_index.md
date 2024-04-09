@@ -5,6 +5,9 @@ description: "Manage your Datadog account and organization"
 aliases:
     - /guides/billing
     - /account_management/settings
+cascade:
+    algolia:
+        rank: 70
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
@@ -24,12 +27,23 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ### Preferences
 
-You can set your timezone, desktop notifications, and email subscriptions from the [**Preferences** tab][3] within the **Personal Settings** page. Under email subscriptions, you have access to the following reports:
+{{% site-region region="us,us3,us5,eu,ap1" %}}
+You can set your timezone, desktop notifications, and email subscriptions from the [**Preferences** tab][1] within the **Personal Settings** page. Under email subscriptions, you have access to the following reports:
 
 * Daily Digest
 * Weekly Digest
 
 If you are unsure if an email digest is relevant to you, view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to quickly unsubscribe from all email subscriptions.
+
+[1]: https://app.datadoghq.com/account/preferences
+{{% /site-region %}}
+
+{{% site-region region="gov" %}}
+
+You can set your timezone and desktop notifications from the [**Preferences** tab][1] within the **Personal Settings** page.
+
+[1]: https://app.datadoghq.com/account/preferences
+{{% /site-region %}}
 
 ### Organizations
 
@@ -54,15 +68,15 @@ The **Application Keys** tab in **Personal Settings** allows you to manage your 
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
 
-To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you’ve set at the OS level.
+To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you've set at the OS level.
 
 ## Connecting to GitHub
 
 If you have installed the [GitHub integration][9] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
 
-## Deleting your account
+## Disabling your organization's account
 
-To delete your Datadog account completely, contact [Datadog support][10].
+To disable your Datadog organization account, contact [Datadog support][10].
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "label": "Link label",
+      "url": "https://example.com",
+      "position": 0
+    },
+    "type": "team_links"
+  }
+}

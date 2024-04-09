@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview
 
-{{< img src="logs/processing/processors/processing_overview.png" alt="Processors" >}}
-
 A processor executes within a [Pipeline][1] to complete a data-structuring action and generate attributes to enrich your logs.
 
-In [log configuration settings][1], configure processors such as the [Grok parser](#grok-parser) or [date remapper](#remapper), to help extract, create, and remap attributes to enrich your logs and enhance faceted search.
+{{< img src="logs/log_configuration/processor/processor_overview.png" alt="Processors" style="width:100%" >}}
+
+In [log configuration settings][1], you can configure processors such as the [Grok parser](#grok-parser) or [date remapper](#remapper) to help extract, create, and remap attributes to enrich your logs and enhance faceted search.
 
 **Notes**:
 
@@ -37,9 +37,9 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Grok processor in the [Datadog Log configuration page][1]:
+Define the Grok processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/parser.png" alt="Parser" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/grok_parser.png" alt="Grok Parser" style="width:80%;" >}}
 
 Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
 
@@ -66,13 +66,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 
 | Parameter            | Type             | Required | Description                                             |
 |----------------------|------------------|----------|---------------------------------------------------------|
-| `type`               | String           | yes      | Type of the processor.                                  |
-| `name`               | String           | no       | Name of the processor.                                  |
-| `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
-| `source`             | String           | yes      | Name of the log attribute to parse, default: `message`. |
-| `samples`            | Array of Strings | no       | List of (up to 5) sample logs for this grok parser.     |
-| `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
-| `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
+| `type`               | String           | Yes      | Type of the processor.                                  |
+| `name`               | String           | No       | Name of the processor.                                  |
+| `is_enabled`         | Boolean          | No       | If the processors is enabled or not. Default: `false`.  |
+| `source`             | String           | Yes      | Name of the log attribute to parse. Default: `message`. |
+| `samples`            | Array of strings | No       | List of (up to 5) sample logs for this grok parser.     |
+| `grok.support_rules` | String           | Yes      | List of Support rules for your grok parser.             |
+| `grok.match_rules`   | String           | Yes      | List of Match rules for your grok parser.               |
 
 
 [1]: /api/v1/logs-pipelines/
@@ -100,20 +100,21 @@ If your logs don't have a timestamp that conforms to the formats listed above, u
 
 To see how a custom date and time format can be parsed in Datadog, see [Parsing dates][3].
 
-**Note**:
+**Notes**:
 
-* **Log events can be submitted up to 18h in the past and 2h in the future**.
+* Log events can be submitted up to 18 hours in the past and two hours in the future.
+* As of ISO 8601-1:2019, the basic format is `T[hh][mm][ss]` and the extended format is `T[hh]:[mm]:[ss]`. Earlier versions omitted the T (representing time) in both formats.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
-* If multiple log date remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+* If multiple log date remapper processors are applied to a given log within the pipeline, the last one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the log date remapper processor in the [Datadog Log configuration page][1]:
+Define the log date remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/log_date_remapper.png" alt="Define a date attribute"  style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/date_remapper.png" alt="Define a date attribute" style="width:80%;" >}}
 
-{{< img src="logs/processing/processors/log_date_remapper_example.png" alt="Date and time in the Log Explorer side panel"  style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/date_remapper_example.png" alt="Date and time in the Log Explorer side panel" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -132,10 +133,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log date remap
 
 | Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                |
+| `type`       | String           | Yes      | Type of the processor.                                |
 | `name`       | String           | no       | Name of the processor.                                |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
-| `sources`    | Array of Strings | yes      | Array of source attributes.                           |
+| `is_enabled` | Boolean          | no       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | Yes      | Array of source attributes.                           |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -161,14 +162,14 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
-**Note**: If multiple log status remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+**Note**: If multiple log status remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the log status remapper processor in the [Datadog Log configuration page][1]:
+Define the log status remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Log severity in the Log Explorer" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/severity_remapper.png" alt="Log severity remapping" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -187,10 +188,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log status rem
 
 | Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                |
-| `name`       | String           | no       | Name of the processor.                                |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
-| `sources`    | Array of Strings | yes      | Array of source attributes.                           |
+| `type`       | String           | Yes      | Type of the processor.                                |
+| `name`       | String           | No       | Name of the processor.                                |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | Yes      | Array of source attributes.                           |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -200,14 +201,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log status rem
 
 The service remapper processor assigns one or more attributes to your logs as the official service.
 
-**Note**: If multiple service remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+**Note**: If multiple service remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the log service remapper processor in the [Datadog Log configuration page][1]:
+Define the log service remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Service Remapper Processor tile"  style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/service_remapper.png" alt="Service remapper processor" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -226,10 +227,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log service re
 
 | Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                |
-| `name`       | String           | no       | Name of the processor.                                |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
-| `sources`    | Array of Strings | yes      | Array of source attributes.                           |
+| `type`       | String           | Yes      | Type of the processor.                                |
+| `name`       | String           | No       | Name of the processor.                                |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | Yes      | Array of source attributes.                           |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -243,14 +244,14 @@ Use the log message remapper processor to define one or more attributes as the o
 
 To define message attributes, first use the [string builder processor](#string-builder-processor) to create a new string attribute for each of the attributes you want to use. Then, use the log message remapper to remap the string attributes as the message.
 
-**Note**: If multiple log message remapper processors are applied to a given log, only the first one (according to the pipeline order) is taken into account.
+**Note**: If multiple log message remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the log message remapper processor in the [Datadog Log configuration page][1]:
+Define the log message remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/message_processor.png" alt="Message Processor"  style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/message_processor.png" alt="Message processor" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -269,10 +270,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 | Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                |
-| `name`       | String           | no       | Name of the processor.                                |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
-| `sources`    | Array of Strings | yes      | Array of source attributes, default: `msg`            |
+| `type`       | String           | Yes      | Type of the processor.                                |
+| `name`       | String           | No       | Name of the processor.                                |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | Yes      | Array of source attributes. Default: `msg`.            |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -282,7 +283,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:50%;">}}
+{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:60%;">}}
 
 Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
 
@@ -293,9 +294,9 @@ If the target of the remapper is an attribute, the remapper can also try to cast
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the remapper processor in the [Datadog Log configuration page][1]. For example, remap `user` to `user.firstname`.
+Define the remapper processor on the [**Pipelines** page][1]. For example, remap `user` to `user.firstname`.
 
-{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Attribute Remapper Processor tile"  style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/remapper.png" alt="Attribute remapper processor" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -320,16 +321,16 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 
 | Parameter              | Type             | Required | Description                                                                    |
 |------------------------|------------------|----------|--------------------------------------------------------------------------------|
-| `type`                 | String           | yes      | Type of the processor.                                                         |
-| `name`                 | String           | no       | Name of the processor.                                                         |
-| `is_enabled`           | Boolean          | no       | If the processors is enabled or not, default: `false`                          |
-| `source_type`          | String           | no       | Defines if the sources are from log `attribute` or `tag`, default: `attribute` |
-| `sources`              | Array of Strings | yes      | Array of source attributes or tags                                             |
-| `target`               | String           | yes      | Final attribute or tag name to remap the sources to.                           |
-| `target_type`          | String           | no       | Defines if the target is a log `attribute` or a `tag`, default: `attribute`    |
-| `target_format`        | String           | no       | Defines if the attribute value should be cast to another type. possible value: `auto`, `string`, `long`  or `integer`, default: `auto`. When set to `auto`, no cast is applied.  |
-| `preserve_source`      | Boolean          | no       | Remove or preserve the remapped source element, default: `false`               |
-| `override_on_conflict` | Boolean          | no       | Override or not the target element if already set, default: `false`            |
+| `type`                 | String           | Yes      | Type of the processor.                                                         |
+| `name`                 | String           | No      | Name of the processor.                                                         |
+| `is_enabled`           | Boolean          | No      | If the processors is enabled or not. Default: `false`.                          |
+| `source_type`          | String           | No      | Defines if the sources are from log `attribute` or `tag`. Default: `attribute`. |
+| `sources`              | Array of strings | Yes      | Array of source attributes or tags                                             |
+| `target`               | String           | Yes      | Final attribute or tag name to remap the sources to.                           |
+| `target_type`          | String           | No      | Defines if the target is a log `attribute` or a `tag`. Default: `attribute`.    |
+| `target_format`        | String           | No      | Defines if the attribute value should be cast to another type. Possible values: `auto`, `string`, or `integer`. Default: `auto`. When set to `auto`, no cast is applied.  |
+| `preserve_source`      | Boolean          | No      | Remove or preserve the remapped source element. Default: `false`.               |
+| `override_on_conflict` | Boolean          | No      | Override or not the target element if already set. Default: `false`.            |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -339,14 +340,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 
 The URL parser processor extracts query parameters and other important parameters from a URL. When setup, the following attributes are produced:
 
-{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor" style="width:80%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the URL parser processor in the [Datadog Log configuration page][1]:
+Define the URL parser processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/url_processor_tile.png" alt="Url Processor Tile"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor Tile" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -364,11 +365,11 @@ Define the URL parser processor in the [Datadog Log configuration page][1]:
 
 | Parameter    | Type             | Required | Description                                                                                                          |
 |--------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                                                                               |
-| `name`       | String           | no       | Name of the processor.                                                                                               |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `http.url`                                                                      |
-| `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `http.url_details` |
+| `type`       | String           | Yes      | Type of the processor.                                                                                               |
+| `name`       | String           | No       | Name of the processor.                                                                                               |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `http.url`.                                                                      |
+| `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `http.url_details`. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -377,16 +378,16 @@ Define the URL parser processor in the [Datadog Log configuration page][1]:
 
 The user-agent parser processor takes a `useragent` attribute and extracts OS, browser, device, and other user data. When set up, the following attributes are produced:
 
-{{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor"  style="width:80%;">}}
+{{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor" style="width:80%;">}}
 
 **Note**: If your logs contain encoded user-agents (for example, IIS logs), configure this Processor to **decode the URL** before parsing it.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the user-agent processor in the [Datadog Log configuration page][1]:
+Define the user-agent processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Useragent Processor tile"  style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/useragent_processor.png" alt="Useragent Processor tile" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -407,12 +408,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following user-agent par
 
 | Parameter    | Type             | Required | Description                                                                                                                 |
 |--------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                                                                                      |
-| `name`       | String           | no       | Name of the processor.                                                                                                      |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`.                                                                      |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `http.useragent`.                                                                      |
-| `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `http.useragent_details`. |
-| `is_encoded` | Boolean          | no       | Define if the source attribute is url encoded or not, default: `false`.                                                     |
+| `type`       | String           | Yes      | Type of the processor.                                                                                                      |
+| `name`       | String           | No       | Name of the processor.                                                                                                      |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                      |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `http.useragent`.                                                                      |
+| `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `http.useragent_details`. |
+| `is_encoded` | Boolean          | No       | Define if the source attribute is url encoded or not. Default: `false`.                                                     |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -422,7 +423,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following user-agent par
 
 Use the category processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query. Then, use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
-**Note**:
+**Notes**:
 
 * The syntax of the query is the one in the [Logs Explorer][6] search bar. This query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
@@ -432,13 +433,13 @@ Use the category processor to add a new attribute (without spaces or special cha
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the category processor in the [Datadog Log configuration page][1]. For example, to categorize your web access logs based on the status code range value (`"OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...`) add this processor:
+Define the category processor on the [**Pipelines** page][1]. For example, to categorize your web access logs based on the status code range value (`"OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...`) add this processor:
 
-{{< img src="logs/processing/processors/category_processor.png" alt="category processor"  style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/category_processor.png" alt="category processor" style="width:80%;" >}}
 
 This processor produces the following result:
 
-{{< img src="logs/processing/processors/category_processor_result.png" alt="category processor result"  style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/category_processor_result.png" alt="category processor result" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -461,11 +462,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following category proce
 
 | Parameter    | Type            | Required | Description                                                                                                |
 |--------------|-----------------|----------|------------------------------------------------------------------------------------------------------------|
-| `type`       | String          | yes      | Type of the processor.                                                                                     |
-| `name`       | String          | no       | Name of the processor.                                                                                     |
-| `is_enabled` | Boolean         | no       | If the processors is enabled or not, default: `false`                                                      |
-| `categories` | Array of Object | yes      | Array of filters to match or not a log and their corresponding `name` to assign a custom value to the log. |
-| `target`     | String          | yes      | Name of the target attribute which value is defined by the matching category.                              |
+| `type`       | String          | Yes      | Type of the processor.                                                                                     |
+| `name`       | String          | No       | Name of the processor.                                                                                     |
+| `is_enabled` | Boolean         | No       | If the processors is enabled or not. Default: `false`                                                      |
+| `categories` | Array of Object | Yes      | Array of filters to match or not a log and their corresponding `name` to assign a custom value to the log. |
+| `target`     | String          | Yes      | Name of the target attribute which value is defined by the matching category.                              |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -479,10 +480,9 @@ A arithmetic processor formula can use parentheses and basic arithmetic operator
 
 By default, a calculation is skipped if an attribute is missing. Select *Replace missing attribute by 0* to automatically populate missing attribute values with 0 to ensure that the calculation is done.
 
-**Note**: An attribute may be listed as missing if it is not found in the log attributes, or if it cannot be converted to a number.
-
 **Notes**:
 
+* An attribute may be listed as missing if it is not found in the log attributes, or if it cannot be converted to a number.
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
@@ -491,9 +491,9 @@ By default, a calculation is skipped if an attribute is missing. Select *Replace
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the arithmetic processor in the [Datadog Log configuration page][1]:
+Define the arithmetic processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/arithmetic_processor.png" alt="Arithmetic Processor"  style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/arithmetic_processor.png" alt="Arithmetic Processor" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -514,12 +514,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following arithmetic pro
 
 | Parameter            | Type    | Required | Description                                                                                                                                  |
 |----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | String  | yes      | Type of the processor.                                                                                                                       |
-| `name`               | String  | no       | Name of the processor.                                                                                                                       |
-| `is_enabled`         | Boolean | no       | If the processors is enabled or not, default: `false`.                                                                                       |
-| `expression`         | String  | yes      | Arithmetic operation between one or more log attributes.                                                                                     |
-| `target`             | String  | yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                  |
-| `is_replace_missing` | Boolean | no       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
+| `type`               | String  | Yes      | Type of the processor.                                                                                                                       |
+| `name`               | String  | No       | Name of the processor.                                                                                                                       |
+| `is_enabled`         | Boolean | No       | If the processors is enabled or not. Default: `false`.                                                                                       |
+| `expression`         | String  | Yes      | Arithmetic operation between one or more log attributes.                                                                                     |
+| `target`             | String  | Yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                  |
+| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -541,9 +541,9 @@ The template is defined by both raw text and blocks with the syntax `%{attribute
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the string builder processor on the [Datadog log configuration page][1]:
+Define the string builder processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="String builder processor" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/stringbuilder_processor.png" alt="String builder processor" style="width:80%;">}}
 
 With the following log, use the template `Request %{http.method} %{http.url} was answered with response %{http.status_code}` to returns a result. For example:
 
@@ -563,22 +563,25 @@ With the following log, use the template `Request %{http.method} %{http.url} was
 }
 ```
 
+Returns the following:
+
 ```text
 Request GET https://app.datadoghq.com/users was answered with response 200
 ```
 
-**Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array. For example, adding the block `%{array_ids}` returns:
+**Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array. 
 
-    ```text
-    123,456,789
-    ```
+* For example, adding the block `%{array_ids}` returns:
 
-    Whereas `%{array_users}` does not return anything because it is a list of objects.
-    However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
+   ```text
+   123,456,789
+   ```
 
-    ```text
-    John,Jack
-    ```
+* `%{array_users}` does not return anything because it is a list of objects. However, `%{array_users.first_name}` returns a list of `first_name`s contained in the array:
+
+  ```text
+  John,Jack
+  ```
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -604,7 +607,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following string builder
 | `is_enabled`         | Boolean | No       | If the processor is enabled or not, defaults to `false`.                                                                                          |
 | `template`           | String  | Yes      | A formula with one or more attributes and raw text.                                                                                               |
 | `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                               |
-| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false` (default), skips the operation for missing attributes. |
+| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false`, skips the operation for missing attributes. Default: `false`. |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -617,13 +620,13 @@ The geoIP parser takes an IP address attribute and extracts continent, country, 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP Processor"  style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/geoip_processor.png" alt="GeoIP Processor" style="width:80%;">}}
 
 Most elements contain a `name` and `iso_code` (or `code` for continent) attribute. `subdivision` is the first level of subdivision that the country uses such as "States" for the United States or "Departments" for France.
 
 For example, the geoIP parser extracts location from the `network.client.ip` attribute and stores it into the `network.client.geoip` attribute:
 
-{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP example"  style="width:60%;">}}
+{{< img src="logs/log_configuration/processor/geoip_example_blurred.png" alt="GeoIP example" style="width:60%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -642,11 +645,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following geoIP parser J
 
 | Parameter    | Type             | Required | Description                                                                                                               |
 |--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                                                                                    |
-| `name`       | String           | no       | Name of the processor.                                                                                                    |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                     |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `network.client.ip`                                                                  |
-| `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip`  |
+| `type`       | String           | Yes      | Type of the processor.                                                                                                    |
+| `name`       | String           | No       | Name of the processor.                                                                                                    |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                     |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `network.client.ip`.                                                                  |
+| `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `network.client.geoip`.  |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -654,27 +657,31 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following geoIP parser J
 
 ## Lookup processor
 
-Use the lookup processor to define a mapping between a log attribute and a human readable value saved in a [Reference Table (beta)][7] or the processors mapping table.
+Use the lookup processor to define a mapping between a log attribute and a human readable value saved in a [Reference Table][7] or the processors mapping table.
 
-For example, you can use the lookup processor to map an internal service ID into a human readable service name.
-
-Alternatively, you can use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
+For example, you can use the lookup processor to map an internal service ID into a human readable service name. Alternatively, you can use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
 {{< tabs >}}
 {{% tab "UI" %}}
-
-{{< img src="logs/processing/processors/lookup_processor.png" alt="Lookup processor"  style="width:80%;">}}
 
 The lookup processor performs the following actions:
 
 * Looks if the current log contains the source attribute.
 * Checks if the source attribute value exists in the mapping table.
   * If it does, creates the target attribute with the corresponding value in the table.
-  * Optionally, if it does not find the value in the mapping table, creates a target attribute with the filled default value.
+  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the **Manual Mapping** tab. 
+    
+    {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="Lookup processor" style="width:80%;">}}
 
-You can fill the mapping table by selecting a Reference Table, by manually entering a list of `source_key,target_value` pairs, or by uploading a CSV file.
+    The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform. However, Reference Tables support larger file sizes.
 
-The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform, however, Reference Tables support larger file sizes.
+  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the value of the reference table. You can select a value for a [Reference Table][101] on the **Reference Table** tab.
+   
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" 
+    style="width:80%;">}}
+
+
+[101]: /integrations/guide/reference-tables/
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -695,13 +702,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following lookup process
 
 | Parameter        | Type             | Required | Description                                                                                                                                                              |
 |------------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`           | String           | yes      | Type of the processor.                                                                                                                                                   |
-| `name`           | String           | no       | Name of the processor.                                                                                                                                                   |
-| `is_enabled`     | Boolean          | yes      | If the processor is enabled or not. Default: `false`                                                                                                                     |
-| `source`         | String           | yes      | Source attribute used to perform the lookup.                                                                                                                             |
-| `target`         | String           | yes      | Name of the attribute that contains the corresponding value in the mapping list or the `default_lookup` if not found in the mapping list.                                |
-| `lookup_table`   | Array of strings | yes      | Mapping table of values for the source attribute and their associated target attribute values, formatted as [ "source_key1,target_value1", "source_key2,target_value2" ] |
-| `default_lookup` | String           | no       | Value to set the target attribute if the source value is not found in the list.                                                                                          |
+| `type`           | String           | Yes      | Type of the processor.                                                                                                                                                   |
+| `name`           | String           | No       | Name of the processor.                                                                                                                                                   |
+| `is_enabled`     | Boolean          | Yes      | If the processor is enabled or not. Default: `false`.                                                                                                                     |
+| `source`         | String           | Yes      | Source attribute used to perform the lookup.                                                                                                                             |
+| `target`         | String           | Yes      | Name of the attribute that contains the corresponding value in the mapping list or the `default_lookup` if not found in the mapping list.                                |
+| `lookup_table`   | Array of strings | Yes      | Mapping table of values for the source attribute and their associated target attribute values, formatted as [ "source_key1,target_value1", "source_key2,target_value2" ]. |
+| `default_lookup` | String           | No       | Value to set the target attribute if the source value is not found in the list.                                                                                          |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -718,9 +725,9 @@ There are two ways to improve correlation between application traces and logs:
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the trace remapper processor in the [Datadog Log configuration page][1]. Enter the Trace ID attribute path in the processor tile as follows:
+Define the trace remapper processor on the [**Pipelines** page][1]. Enter the Trace ID attribute path in the processor tile as follows:
 
-{{< img src="logs/processing/processors/trace_processor.png" alt="Trace ID processor"  style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/trace_processor.png" alt="Trace ID processor" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -739,14 +746,16 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper
 
 | Parameter    | Type             | Required | Description                                            |
 |--------------|------------------|----------|--------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                 |
-| `name`       | String           | no       | Name of the processor.                                 |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`. |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `dd.trace_id`.    |
+| `type`       | String           | Yes      | Type of the processor.                                 |
+| `name`       | String           | No       | Name of the processor.                                 |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `dd.trace_id`.    |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
 
 ## Further Reading
 

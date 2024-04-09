@@ -121,7 +121,7 @@ Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8
 
 #### Managed logs
 
-Even if debug mode isn’t enabled, the managed logs contain errors from connection refused issues:
+Even if debug mode isn't enabled, the managed logs contain errors from connection refused issues:
 
 ```
 { MachineName: ".", Process: "[114 sample-web-app]", AppDomain: "[1 sample-web-app]", TracerVersion: "1.28.2.0" }
@@ -172,7 +172,7 @@ APM Agent
 ```
 
 ## Troubleshooting the connection problem
-Whether it’s the tracing library or the Datadog Agent displaying the error, there are a few ways to troubleshoot.
+Whether it's the tracing library or the Datadog Agent displaying the error, there are a few ways to troubleshoot.
 
 ### Host-based setups
 
@@ -181,8 +181,8 @@ If your application and the Datadog Agent are not containerized, the application
 If the Datadog Agent shows that APM is not listening, check for port conflicts with port 8126, which is what the APM component of the Datadog Agent uses by default.
 
 If you cannot isolate the root cause, [contact Datadog Support][4] with:
-- Information about the environment in which you’re deploying the application and Datadog Agent.
-- If you are using proxies, information about how they’ve been configured.
+- Information about the environment in which you're deploying the application and Datadog Agent.
+- If you are using proxies, information about how they've been configured.
 - If you are trying to change the default port from 8126 to another port, information about that port.
 - A [Datadog Agent flare][5].
 
@@ -190,11 +190,11 @@ If you cannot isolate the root cause, [contact Datadog Support][4] with:
 
 #### Check network configuration
 
-In containerized setups, submitting traces to `localhost` or `127.0.0.1` is often incorrect since the Datadog Agent is also containerized and located elsewhere. **Note**: AWS ECS on Fargate and AWS EKS on Fargate are exceptions to this rule.
+In containerized setups, submitting traces to `localhost` or `127.0.0.1` is often incorrect since the Datadog Agent is also containerized and located elsewhere. **Note**: Amazon ECS on Fargate and AWS EKS on Fargate are exceptions to this rule.
 
 Determine if the networking between the application and the Datadog Agent matches what is needed for that configuration.
 
-In particular, check to make sure that the Datadog Agent has access to port `8126` (or to the port you have defined) and that your application is able to direct traces to the Datadog Agent’s location.
+In particular, check to make sure that the Datadog Agent has access to port `8126` (or to the port you have defined) and that your application is able to direct traces to the Datadog Agent's location.
 To do so, you can run the following command from the application container, replacing the `{agent_ip}` and `{agent_port}` variables:
 
 ```
@@ -213,8 +213,8 @@ See the table below for example setups. Some require setting up additional netwo
 
 | Setup   | `DD_AGENT_HOST`  |
 |---------|------------------|
-| [AWS ECS on EC2][7] | Evaluate to Amazon’s EC2 metadata endpoint |
-| [AWS ECS on Fargate][8] | Do not set `DD_AGENT_HOST` |
+| [Amazon ECS on EC2][7] | Evaluate to Amazon's EC2 metadata endpoint |
+| [Amazon ECS on Fargate][8] | Do not set `DD_AGENT_HOST` |
 | [AWS EKS on Fargate][9] | Do not set `DD_AGENT_HOST` |
 | [AWS Elastic Beanstalk - Single Container][10] | Gateway IP (usually `172.17.0.1`) |
 | [AWS Elastic Beanstalk - Multiple Containers][11] | Link pointing to the Datadog Agent container name |
@@ -223,7 +223,7 @@ See the table below for example setups. Some require setting up additional netwo
 | [Datadog Agent and Application Docker Containers][17] | Datadog Agent container |
 
 
-**Note about web servers**: If the `agent_url` section in the [tracer startup logs][1] has a mismatch against the `DD_AGENT_HOST` environment variable that was passed in, review how environment variables are cascaded for that specific server. For example, in PHP, there’s an additional setting to ensure that [Apache][18] or [Nginx][19] pick up the `DD_AGENT_HOST` environment variable correctly.
+**Note about web servers**: If the `agent_url` section in the [tracer startup logs][1] has a mismatch against the `DD_AGENT_HOST` environment variable that was passed in, review how environment variables are cascaded for that specific server. For example, in PHP, there's an additional setting to ensure that [Apache][18] or [Nginx][19] pick up the `DD_AGENT_HOST` environment variable correctly.
 
 If your tracing library is sending traces correctly based on your setup, then proceed to the next step.
 
@@ -254,9 +254,9 @@ APM Agent
     Default priority sampling rate: 100.0%
 ```
 
-If the configuration is correct, but you’re still seeing connection errors, [contact Datadog Support][4] with:
-- Information about the environment in which you’re deploying the application and Datadog Agent.
-- If you’re using proxies, information about how they’ve been configured.
+If the configuration is correct, but you're still seeing connection errors, [contact Datadog Support][4] with:
+- Information about the environment in which you're deploying the application and Datadog Agent.
+- If you're using proxies, information about how they've been configured.
 - Any configuration files used to set up the application and the Datadog Agent.
 - Startup logs or tracer debug logs outlining the connection error.
 - A Datadog [Agent flare][5]. For dedicated containers, send the flare from the [dedicated Trace Agent container][20].
@@ -264,7 +264,7 @@ If the configuration is correct, but you’re still seeing connection errors, [c
 
 [1]: /tracing/troubleshooting/tracer_startup_logs/
 [2]: /tracing/troubleshooting/tracer_debug_logs/
-[3]: /agent/guide/agent-commands/#agent-information
+[3]: /agent/configuration/agent-commands/#agent-information
 [4]: /help/
 [5]: /agent/troubleshooting/send_a_flare/
 [6]: https://app.datadoghq.com/apm/service-setup

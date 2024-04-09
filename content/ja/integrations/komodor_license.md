@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: komodor-komodor
 app_uuid: d62310ba-c7a8-4c5b-ab9f-60bb46527f1b
 assets: {}
@@ -9,6 +11,10 @@ author:
   support_email: support@komodor.com
   vendor_id: komodor
 categories:
+- 構成 & デプロイ
+- コンテナ
+- 問題追跡
+- kubernetes
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -20,10 +26,9 @@ integration_version: ''
 is_public: true
 kind: integration
 legal_terms:
-  eula: assets/Terms of Use.pdf
+  eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: komodor_license
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -37,16 +42,20 @@ public_title: Komodor
 short_description: Kubernetes トラブルシューティングプラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
+  - Category::Containers
+  - Category::Issue Tracking
+  - Category::Kubernetes
   - Category::Marketplace
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Kubernetes トラブルシューティングプラットフォーム
   media:
@@ -71,6 +80,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -79,7 +89,7 @@ Komodor は、K8s スタック全体の変更を追跡し、その波及効果�
 
 Datadog マーケットプレイスでのご提供には、Komodor プラットフォームへのアクセスが含まれています。すでに Komodor をご利用で、インスタンスを Datadog に接続する必要があるお客様は、[インテグレーションをセットアップ][1]してください。
 
-## サポート
+## Agent
 Komodor では、お客様の成功に必要なツールと情報の提供をお約束します。そのため、必要なときに必要なサポートを受けられるよう、以下のとおり複数の方法をご用意しています。Komodor アプリケーション内（右下のお問い合わせボタン）からメッセージを送信、ドキュメントで必要な情報を見つける、あるいは [support@komodor.com](mailto:support@komodor.com) までメールを送信しサポートチケットを作成してください。
 
 

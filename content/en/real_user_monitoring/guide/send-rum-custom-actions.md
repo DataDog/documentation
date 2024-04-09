@@ -13,13 +13,13 @@ further_reading:
 ---
 ## Overview
 
-Real User Monitoring [automatically collects actions][1] on your web application. You can collect additional events and timings such as form completions and business transactions. 
+Real User Monitoring [automatically collects actions][1] on your web application. You can collect additional events and timings such as form completions and business transactions.
 
 Custom RUM actions allow you to monitor interesting events with all the relevant context attached. For example, the Datadog Browser SDK can collect a user's checkout information (such as the number of items within the cart, the list of items, and how much value the cart items are worth) when they click the checkout button on an e-commerce website.
 
 ## Instrument your code
 
-Create a RUM action using the `addAction` API. Give your action a name and attach context attributes in the form of a JavaScript object. 
+Create a RUM action using the `addAction` API. Give your action a name and attach context attributes in the form of a JavaScript object.
 
 The following example creates a `checkout` action with details about the user cart when the user clicks on the checkout button.
 
@@ -44,25 +44,25 @@ Ensure that you wrap the API call with the `onReady` callback:
 
 ```javascript
 function onCheckoutButtonClick(cart) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addAction('checkout', {
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.addAction('checkout', {
             'value': cart.value, // for example, 42.12
             'items': cart.items, // for example, ['tomato', 'strawberries']
         })
-    })    
+    })
 }
 ```
 
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-Ensure that you check for `DD_RUM` before the API call:
+Ensure that you check for `window.DD_RUM` before the API call:
 
 ```javascript
-window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
+window.DD_RUM && window.DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 
 function onCheckoutButtonClick(cart) {
-    window.DD_RUM && DD_RUM.addAction('checkout', {
+    window.DD_RUM && window.DD_RUM.addAction('checkout', {
         'value': cart.value, // for example, 42.12
         'items': cart.items, // for example, ['tomato', 'strawberries']
     })
@@ -78,13 +78,13 @@ All RUM context such as current page view information, geoIP data, and browser i
 
 After deploying the code that creates your custom actions, they appear in the **Actions** tab of the [RUM Explorer][3].
 
-To filter on your custom actions, use the `Action Target Name` attribute: `@action.target.name:<ACTION_NAME>`. 
+To filter on your custom actions, use the `Action Target Name` attribute: `@action.target.name:<ACTION_NAME>`.
 
 The example below uses the following filter: `@action.target.name:checkout`.
 
 {{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="Create a facet for custom RUM actions" video=true style="width:100%;">}}
 
-After clicking on an action, a side panel with metadata appears. You can find your action attributes in the **Custom Attributes** section and create facets or measures for these attributes by clicking on them. 
+After clicking on an action, a side panel with metadata appears. You can find your action attributes in the **Custom Attributes** section and create facets or measures for these attributes by clicking on them.
 
 Use facets for distinctive values (IDs) and measures for quantitative values such as timings and latency. For example, create a facet for the cart items and a measure for the cart value.
 
@@ -100,6 +100,6 @@ The following example displays the average cart value per country in the last tw
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/?tab=useraction#automatic-collection-of-actions
-[2]: /real_user_monitoring/browser/modifying_data_and_context/#replace-global-context
+[1]: /real_user_monitoring/browser/data_collected/?tab=useraction#action-attributes
+[2]: /real_user_monitoring/browser/advanced_configuration/#replace-global-context
 [3]: /real_user_monitoring/explorer

@@ -1,0 +1,154 @@
+guides:
+- desc: Recopila eventos y métricas de tus hosts que envían datos a Datadog.
+  link: getting_started/agent/
+  link_text: Empezando con el Agent
+  title: Instalar el Agent
+- desc: Recopila métricas, trazas y logs con más de 700 integraciones de serie para
+    enviar a Datadog.
+  link: getting_started/integrations/
+  link_text: Empezando con las integraciones
+  title: Configurar integraciones
+- desc: Visualiza los datos recopilados en Datadog y crea dashboards, alertas, monitores
+    y más.
+  link: getting_started/application/
+  link_text: Empezando en Datadog
+  title: Empezar a usar la aplicación
+heading: ¡Te damos la bienvenida a la documentación de Datadog!
+nav_sections:
+- nav_section:
+  - name: Plataforma
+  - navtiles:
+    - desc: Instalar y configurar el Agent para recopilar y enviar datos
+      icon: agent-fill
+      link: agent/
+      title: Agent
+    - desc: Recopilar datos sobre tus aplicaciones, servicios y sistemas
+      icon: integrations
+      link: integrations/
+      title: Integraciones
+    - desc: Canalizar tus métricas, logs y trazas de OpenTelemetry a Datadog
+      icon: open-telemetry
+      link: opentelemetry/
+      title: OpenTelemetry
+    - desc: Visualizar, analizar y generar información clave sobre tus datos
+      icon: dashboard
+      link: dashboards/
+      title: Dashboards
+    - desc: Supervisar tus hosts, contenedores, procesos y funciones serverless
+      icon: host-map
+      link: infrastructure/
+      title: Infrastructure (Infraestructura)
+    - desc: Dar seguimiento a los cambios y alertas en tus aplicaciones e infraestructura
+      icon: events
+      link: events/
+      title: Events (Eventos)
+    - desc: Explorar, buscar y crear distribuciones para tus métricas
+      icon: metric
+      link: metrics/
+      title: Métricas
+    - desc: Crear, editar y gestionar tus monitores y notificaciones
+      icon: monitor
+      link: monitors/
+      title: Alertar
+    - desc: Explorar dashboards de rendimiento listos para usar y trazas distribuidas
+      icon: apm
+      link: tracing/
+      title: APM
+    - desc: Comparar snapshots de rendimiento e investigar cuellos de botella
+      icon: profiling-1
+      link: profiler/
+      title: Continuous Profiler
+    - desc: Procesar, monitorizar y archivar tus logs ingeridos
+      icon: log
+      link: logs/
+      title: Log Management
+    - desc: Detectar amenazas y configuraciones incorrectas en tus aplicaciones e
+        infraestructura
+      icon: security-platform
+      link: security/
+      title: Seguridad
+    - desc: Garantizar el tiempo de actividad, avisar de problemas regionales y probar
+        el rendimiento de aplicaciones
+      icon: synthetics
+      link: synthetics/
+      title: Synthetic Monitoring
+    - desc: Hacer tests de un extremo a otro y de integración sin código con proveedores
+        de CI/CD
+      icon: continuous-testing
+      link: continuous_testing/
+      title: Tests continuos
+    - desc: Registrar, observar y analizar la experiencia del uso de tus aplicaciones
+      icon: rum
+      link: real_user_monitoring/
+      title: Real User Monitoring
+    - desc: Usar objetos etiquetados para recopilar y generar gráficos de datos sobre
+        el tráfico de tu red
+      icon: la red
+      link: network_monitoring/
+      title: Monitorización de redes
+    - desc: Detectar y resolver problemas de rendimiento en tus aplicaciones serverless
+      icon: serverless
+      link: serverless/
+      title: Serverless
+    - desc: Ver alertas de Datadog, incidentes y más en tu dispositivo móvil
+      icon: mobile
+      link: mobile/
+      title: Aplicación móvil
+    - desc: Detectar y mostrar anomalías de la aplicación e infraestructura
+      icon: watchdog
+      link: watchdog/
+      title: Datadog Watchdog
+    - desc: Ver métricas de tests, resultados de compilación y ejecuciones de pipeline
+        para tu canalización de CI
+      icon: ci
+      link: continuous_integration/
+      title: CI Visibility
+    - desc: Controla tu gasto en la nube con observabilidad unificada y datos de costes
+      icon: cloud-cost-management
+      link: cloud_cost_management/
+      title: Gestión de costes en la nube
+    - desc: Explorar dashboards enriquecidos, métricas de consultas y ejemplos de
+        consultas
+      icon: database-2
+      link: database_monitoring/
+      title: Monitorización de bases de datos
+    - desc: Gestionar y monitorizar tus pipelines de telemetría
+      icon: pipelines
+      link: observability_pipelines/
+      title: Pipelines de observabilidad
+    - desc: Descubrir, asignar y monitorizar servicios sin cambiar el código
+      icon: usm
+      link: universal_service_monitoring/
+      title: Universal Service Monitoring
+- nav_section:
+  - name: Configuración
+  - navtiles:
+    - desc: Probar la API de Datadog
+      icon: api
+      link: api/latest/
+      title: API
+    - desc: Acceder a la configuración y la facturación basadas en la organización
+      icon: cog-2
+      link: account_management/
+      title: Gestión de cuentas
+    - desc: Descubrir cómo Datadog protege tus datos
+      icon: security-lock
+      link: data_security/
+      title: Seguridad de los datos
+    - desc: Desarrollar en la plataforma Datadog
+      icon: dev-code
+      link: developers/
+      title: Desarrolladores
+popular_searches:
+- link: api/
+  title: documentación de API
+  weight: 10
+- link: getting_started/agent/
+  title: instalación del Agent
+  weight: 20
+- link: logs/log_collection/
+  title: recopilación de logs
+  weight: 30
+- link: integrations/
+  title: configuración de integraciones
+  weight: 40

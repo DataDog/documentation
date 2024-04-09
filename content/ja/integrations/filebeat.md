@@ -16,11 +16,11 @@ assets:
     source_type_name: Filebeat
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: jean@tripping.com
   support_email: jean@tripping.com
 categories:
-- os system
+- os & system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/filebeat/README.md
 display_on_public_website: true
@@ -28,25 +28,24 @@ draft: false
 git_integration_title: filebeat
 integration_id: filebeat
 integration_title: Filebeat
-integration_version: 1.2.0
+integration_version: 1.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: filebeat
-oauth: {}
 public_title: Filebeat
 short_description: 軽量ログシッパー
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::OS とシステム
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS システム
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 軽量ログシッパー
   media: []

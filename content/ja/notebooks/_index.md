@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/graphing/notebooks/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/
   tag: ブログ
@@ -11,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+  tag: blog
+  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
 kind: documentation
 title: ノートブック
 ---
@@ -87,7 +93,10 @@ title: ノートブック
 任意のノートブックのプレビューアイコンにカーソルを合わせると、ウィジェットタイプや Markdown を含むコンテンツのプレビューが表示されます。[ビューモード](#view-mode)でノートブックを開くには、ノートブックにカーソルを合わせ、右側にある **Open notebook in view mode** をクリックします。
 
 ## テンプレートギャラリー
-[テンプレートギャラリー][3]では、インシデントレスポンスのポストモーテムやインシデントレポートなど、新しいノートブックを作成するためにすぐに使えるテンプレートが紹介されています。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
+[テンプレートギャラリー][3]では、新しいノートブックを作成するための、すぐに使えるテンプレートが紹介されています。テンプレートには、インシデントレスポンスのポストモーテム、インシデントレポート、SLO 仕様が含まれます。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
+
+## バージョン履歴
+ノートブックから ** Configure** アイコンをクリックし、**Version history** をクリックすると、バージョン履歴のサイドパネルが表示されます。ノートブックのバージョン履歴をプレビューしたり、復元したり、複製したりすることができます。詳しくは、[バージョン履歴ガイド][4]を参照してください。
 
 ## ノートブックの構成
 
@@ -129,7 +138,7 @@ title: ノートブック
 
 ### テンプレート変数
 
-ノートブックはテンプレート変数をサポートしています。テンプレート変数の値を追加・選択することで、視覚化した内容を動的にスコープすることができます。詳しくは、[テンプレート変数][4]を参照してください。
+ノートブックはテンプレート変数をサポートしています。テンプレート変数の値を追加・選択することで、視覚化した内容を動的にスコープすることができます。詳しくは、[テンプレート変数][5]を参照してください。
 
 ### セルの構成
 
@@ -153,19 +162,42 @@ title: ノートブック
 
 #### コンテンツの種類
 
-ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][5] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][15] でフォーマットされたダイアグラムもサポートしています。
+ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][6] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][7] でフォーマットされたダイアグラムもサポートしています。
 
 ノートブック内のグラフは、Datadog のすべてのデータソースに対応しています（メトリクス、ログイベント、インデックス化されたスパン、ライブプロセス、ネットワークトラフィック、RUM イベント、プロファイリングのメトリクス、セキュリティシグナルなど）。グラフは、Datadog のクエリエディターで作成します。ノートブックは以下に対応しています。
 
-* [時系列][6]
-* [トップリスト][7]
-* [テーブル][8]
-* [ヒートマップ][9]
-* [ディストリビューション][10]
-* [リスト][11]
-* [クエリ値][12]
-* [ファネル][13]
-* [パイ][14]
+* [時系列][8]
+* [トップリスト][9]
+* [Table][10]
+* [ヒートマップ][11]
+* [ディストリビューション][12]
+* [リスト][13]
+* [クエリ値][14]
+* [ファネル][15]
+* [パイ][16]
+* [SLO サマリー][17]
+
+### 編集アクセス権の制限
+
+デフォルトでは、すべてのユーザーがノートブックにフルアクセスできます。
+
+きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][18]を制限することができます。
+1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
+1. **Permissions** を選択します。
+1. **Restrict Access** をクリックします。
+1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
+1. ドロップダウンを使用して、ノートブックを編集できる 1 つまたは複数のロール、チーム、ユーザーを選択します。
+1. **Add** をクリックします。
+1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
+1. **Save** をクリックします。
+
+**注:** ノートブックの編集アクセス権を維持するために、保存する前に、少なくとも 1 つのロールのメンバーであることを含めることがシステムから要求されます。
+
+アクセスが制限されたノートブックに一般的なアクセスを戻すには、次の手順に従います。
+1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
+1. **Permissions** を選択します。
+1. **Restore Full Access** をクリックします。
+1. **保存**をクリックします。
 
 ## その他の参考資料
 
@@ -174,15 +206,18 @@ title: ノートブック
 [1]: https://app.datadoghq.com/notebook
 [2]: https://app.datadoghq.com/notebook/list
 [3]: https://app.datadoghq.com/notebook/template-gallery
-[4]: /ja/dashboards/template_variables/
-[5]: https://daringfireball.net/projects/markdown/
-[6]: /ja/dashboards/widgets/timeseries/
-[7]: /ja/dashboards/widgets/top_list/
-[8]: /ja/dashboards/widgets/table/
-[9]: /ja/dashboards/widgets/heat_map/
-[10]: /ja/dashboards/widgets/distribution/
-[11]: /ja/dashboards/widgets/list/
-[12]: /ja/dashboards/widgets/query_value/
-[13]: /ja/dashboards/widgets/funnel/
-[14]: /ja/dashboards/widgets/pie_chart/
-[15]: https://mermaid.js.org/
+[4]: /ja/notebooks/guide/version_history
+[5]: /ja/dashboards/template_variables/
+[6]: https://daringfireball.net/projects/markdown/
+[7]: https://mermaid.js.org/
+[8]: /ja/dashboards/widgets/timeseries/
+[9]: /ja/dashboards/widgets/top_list/
+[10]: /ja/dashboards/widgets/table/
+[11]: /ja/dashboards/widgets/heatmap/
+[12]: /ja/dashboards/widgets/distribution/
+[13]: /ja/dashboards/widgets/list/
+[14]: /ja/dashboards/widgets/query_value/
+[15]: /ja/dashboards/widgets/funnel/
+[16]: /ja/dashboards/widgets/pie_chart/
+[17]: /ja/dashboards/widgets/slo/
+[18]: /ja/account_management/rbac/

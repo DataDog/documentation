@@ -2,7 +2,7 @@
 title: Signal Correlation Rules
 type: documentation
 aliases:
- - security_platform/cloud_siem/signal_correlation_rules
+ - /security_platform/cloud_siem/signal_correlation_rules
 further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
@@ -23,7 +23,7 @@ As another example, you can create a signal by combining these two rules:
 
 And use the `expired account ID` attribute to correlate the two rules.
 
-You can correlate log detection rules, as well as log detection rules with Cloud Workload Security and Application Security Management rules.
+You can correlate log detection rules, as well as log detection rules with Cloud Security Management Threats and Application Security Management rules.
 
 ## Create a Signal Correlation rule
 
@@ -33,7 +33,7 @@ Navigate to [Detection Rules][1] and click **+ New Rule**. In the *Select a rule
 
 1. Select a rule for **Rule a**. Click the pencil icon to rename the rule. Use the **correlated by** dropdown to define the correlating attribute. You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows) for more information about the sliding window.
 
-2. Select a rule for **Rule b** in the second Rule editor’s dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for **Rule a**.
+2. Select a rule for **Rule b** in the second Rule editor's dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for **Rule a**.
 
 ### Set rule cases
 
@@ -51,11 +51,11 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 #### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 #### Time windows
 
-{{% cloud-siem-rule-time-windows %}}
+{{% security-rule-time-windows %}}
 
 Click **Add Case** to add additional cases.
 
@@ -63,7 +63,11 @@ Click **Add Case** to add additional cases.
 
 ### Say what's happening
 
-{{% cloud-siem-rule-say-whats-happening %}}
+{{% security-rule-say-whats-happening %}}
+
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
+
+**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
 ## Further reading
 

@@ -1,17 +1,16 @@
 ---
-title: Datadog Forwarder を使用する - Python
 kind: ガイド
+title: Datadog Forwarder を使用した Python サーバーレスアプリケーションのインスツルメンテーション
 ---
-Datadog Serverless の新規ユーザーには、Datadog で[すぐに使用可能な Lambda 機能][1]を使用することをおすすめします。ただし、Lambda で提供される機能の前に Datadog Forwarder を使用して Datadog Serverless をセットアップしてある場合は、インスタンスを維持するためこのガイドをご利用ください。
+## 概要
 
-## 必須セットアップ
+<div class="alert alert-warning">
+Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/python">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
+</div>
 
-未構成の場合:
+## 前提条件
 
-- [AWS インテグレーション][2]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。
-- AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][3]をインストールします。
-
-[AWS インテグレーション][2]と [Datadog Forwarder][3] をインストールしたら、手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+[Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
 ## コンフィギュレーション
 
@@ -54,14 +53,14 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="python" >}} --forwarder "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
 ```
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog CLI でインスツルメントするには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog CLI でインスツルメントするには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加する必要があります。
 
 [CLI のドキュメント][4]に詳細と追加のパラメーターがあります。
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -210,13 +209,13 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
         }
     }
     ```
-1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python27`、`Python36`、`Python37`、`Python38` のいずれかを使用できます。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
+1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。利用可能な `RUNTIME` オプションは {{< latest-lambda-layer-version layer="python-versions" >}} です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加します。
 
@@ -226,7 +225,6 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][3]。
-
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
@@ -266,7 +264,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
     def index():
         return {'hello': 'world'}
     ```
-1. Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][2]に追加します。
+
+1. Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加します。
 
 ### サブスクライブ
 
@@ -275,11 +274,10 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 1. [まだの場合は、Datadog Forwarder をインストールします][3]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][4]。
 
-
 [1]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
-[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -322,27 +320,28 @@ pip install datadog-lambda
 
 Datadog Lambda ライブラリは、レイヤー (推奨) または Python パッケージとしてインストールできます。
 
-`datadog-lambda` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。例: datadog-lambda v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致。
+`datadog-lambda` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。たとえば、datadog-lambda v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致します。
 
 #### レイヤーの使用
 
 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
 
 ```
-# 通常のリージョンの場合
+# us、us3、us5、ap1、eu リージョンの場合
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # 米国政府リージョンの場合
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-使用できる `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
+利用可能な `RUNTIME` オプションは {{< latest-lambda-layer-version layer="python-versions" >}} です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 ```
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][2]に追加する必要があります。
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][9]に追加する必要があります。
+
 
 #### パッケージの使用
 
@@ -373,23 +372,23 @@ pip install datadog-lambda -t ./
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
 [4]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
 [5]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [6]: https://pypi.org/project/datadog-lambda/
 [7]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{< /tabs >}}
 
 ### タグ
 
-これはオプションですが、Datadog は、[統合サービスタグ付けのドキュメント][4]に従って、サーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることを強くお勧めします。
+オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][2]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることをお勧めします。
 
 ## 確認
 
-以上の方法で関数を構成すると、[Serverless Homepage][5] でメトリクス、ログ、トレースを確認できるようになります。
+以上の方法で関数を構成すると、[Serverless Homepage][3] でメトリクス、ログ、トレースを確認できるようになります。
 
 ## カスタムビジネスロジックの監視
 
@@ -430,17 +429,15 @@ def get_message():
     return 'Hello from serverless!'
 ```
 
-カスタムメトリクス送信の詳細については、[ここ][6]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][7]の Datadog APM ドキュメントを参照してください。
+カスタムメトリクス送信の詳細については、[ここ][4]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][5]の Datadog APM ドキュメントを参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/serverless/installation
-[2]: /ja/integrations/amazon_web_services/
-[3]: /ja/serverless/forwarder
-[4]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[5]: https://app.datadoghq.com/functions
-[6]: /ja/serverless/custom_metrics?tab=python
-[7]: /ja/tracing/custom_instrumentation/python/
+[1]: /ja/serverless/forwarder
+[2]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[3]: https://app.datadoghq.com/functions
+[4]: /ja/serverless/custom_metrics?tab=python
+[5]: /ja/tracing/custom_instrumentation/python/

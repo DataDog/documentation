@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/tracing/universal_service_monitoring/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: GitHub
@@ -34,7 +37,7 @@ title: ユニバーサル サービス モニタリング
 必要な Agent のバージョン
 : ユニバーサルサービスモニタリングでは、コンテナ化されたサービスと共にインストールされる Datadog Agent のバージョンが 6.40 または 7.40 以上であることが必要です。
 
-コンテナ化されたサービスは、以下のサポートされたプラットフォームのいずれかで実行されている必要があります。
+サービスは、以下のサポートされたプラットフォームのいずれかで実行されている必要があります。
 : Linux Kernel 4.14 以上<br/>
 CentOS または RHEL 8.0 以上
 
@@ -54,6 +57,7 @@ HTTPS (OpenSSL)
 
 - Linux の場合:
     - サービスがコンテナで動作していること。
+    - コンテナ化されていないサービスについては、[こちらの説明](#support-for-non-containerized-services)を参照してください。
 - Windows で IIS を使用する場合:
     - サービスが仮想マシンで動作していること。
 - Datadog Agent がサービスと共にインストールされていること。トレースライブラリのインストールは必要_ありません_。
@@ -82,6 +86,34 @@ providers:
   gke:
     cos: true
 ```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+[Datadog Agent][1] でユニバーサルサービスモニタリングを有効にするには、`datadog-agent.yaml` マニフェストを更新します。`DatadogAgent` リソースで `spec.features.usm.enabled` を `true` に設定します。
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+        apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+        appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     features:
+       usm:
+         enabled: true
+   ```
+
+**注:** Datadog Operator v1.0.0 以降が必要です。
+
+[1]: https://github.com/DataDog/datadog-operator
 
 {{% /tab %}}
 {{% tab "Helm を使用しない Kubernetes" %}}
@@ -161,8 +193,6 @@ providers:
              value: 'true'
            - name: DD_SYSPROBE_SOCKET
              value: /var/run/sysprobe/sysprobe.sock
-           - name: HOST_PROC
-             value: /host/proc
          resources: {}
          volumeMounts:
            - name: procdir
@@ -315,7 +345,6 @@ docker run --cgroupns host \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
--e HOST_PROC=/host/root/proc \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -340,13 +369,11 @@ services:
   datadog:
     ...
     environment:
-     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
-     - HOST_PROC: '/host/proc'
+     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED='true'
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
      - /proc/:/host/proc/:ro
      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
@@ -695,7 +722,7 @@ OS のイメージが Ubuntu や Debian の場合は、`environment` の後に�
 * AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。また、ENI および EC2 のメトリクス収集を有効にする必要があります。
 
 次に、各ロードバランサーに以下のタグを追加します。
-```shell
+```conf
 ENV=<env>
 SERVICE=<service>
 ```
@@ -708,7 +735,8 @@ SERVICE=<service>
 
 **IIS 上で動作するサービスの場合:**
 
-1. ネットワークドライバーコンポーネントを有効にして、[Datadog Agent][1] (バージョン 6.41 または 7.41 以降) をインストールします。インストール中、`msiexec` コマンドに `ADDLOCAL="MainApplication,NPM"` を渡すか、UI から Agent のインストールを実行するときに **Network Performance Monitoring** を選択します。
+1. [Datadog Agent][1] (バージョン 6.41 または 7.41 以降) をネットワークカーネルデバイスドライバーコンポーネントを有効にしてインストールします。
+   [非推奨] _(バージョン 7.44 以前)_ インストール時に `ADDLOCAL="MainApplication,NPM"` を `msiexec` コマンドに渡すか、Agent のインストールを GUI で実行する際に "Network Performance Monitoring" を選択します。
 
 2. `C:\ProgramData\Datadog\system-probe.yaml` を編集し、有効フラグを `true` に設定します。
 
@@ -746,6 +774,35 @@ Agent を構成した後、サービスカタログにサービスが表示さ�
 
 - `universal.http.*` メトリクスを使用して、[モニター][4]、[ダッシュボード][5]、[SLO][6] を作成します。
 
+### コンテナ化されていないサービスのサポート
+
+<div class="alert alert-info">
+ユニバーサルサービスモニタリングは、Linux 仮想マシン上でベアメタルで動作するサービスをモニタリングするための*ベータ版*で利用可能です。
+</div>
+
+バージョン 7.42 以上の Agent が必要です。
+
+{{< tabs >}}
+{{% tab "コンフィギュレーションファイル" %}}
+
+`system-probe.yaml` に以下の構成を追加します。
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  process_service_inference:
+    enabled: true
+```
+
+{{% /tab %}}
+{{% tab "環境変数" %}}
+
+```conf
+DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### パスの除外と置換
 
@@ -787,7 +844,7 @@ network_config:
 {{% tab "環境変数" %}}
 次のエントリーを追加します。
 
-```shell
+```conf
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}
@@ -803,4 +860,4 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [3]: /ja/tracing/service_catalog/
 [4]: /ja/monitors/types/apm/?tab=apmmetrics
 [5]: /ja/dashboards/
-[6]: /ja/monitors/service_level_objectives/metric/
+[6]: /ja/service_management/service_level_objectives/metric/

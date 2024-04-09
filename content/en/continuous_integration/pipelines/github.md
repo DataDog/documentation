@@ -10,9 +10,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and metrics"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
     - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
       tag: "blog"
       text: "Monitor your GitHub Actions workflows with Datadog CI Visibility"
@@ -26,15 +26,24 @@ further_reading:
 - **Supported GitHub versions**:
   - GitHub.com (SaaS)
   - GitHub Enterprise Server (GHES) 3.5.0 or newer
+
+- **Running pipelines**: View pipeline executions that are running
+
 - **Partial pipelines**: View partially retried and downstream pipeline executions
 
 - **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
 
-- **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime for pipeline spans
+- **Infrastructure metric correlation**: [Correlate infrastructure metrics][11] to pipeline jobs for self-hosted GitHub runners
 
-## Configuring the Datadog integration
+- **Custom tags and measures at runtime**: Configure custom tags and measures at runtime
 
-### Configuring a GitHub App
+- **Queue time**: View amount of time workflow jobs sit in the queue before processing
+
+- **Approval wait time**: View amount of time workflow runs and workflow jobs wait for manual approvals
+
+## Configure the Datadog integration
+
+### Configure a GitHub App
 
 The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. If you already have an app, you can
 skip to the next section.
@@ -72,7 +81,7 @@ Immediately after toggling logs collection, workflow job logs are forwarded to D
 
 Log files larger than 1GiB are truncated.
 
-### Infrastructure metric correlation
+### Correlate infrastructure metrics to jobs
 
 If you are using self-hosted GitHub runners, you can correlate jobs to the host that is running them. To do this, make sure the GitHub runner name
 matches the hostname of the machine it is running on. CI Visibility uses this to link to
@@ -85,7 +94,7 @@ The [Pipelines][7] and [Pipeline Executions][8] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
-## Disabling GitHub Actions tracing
+## Disable GitHub Actions tracing
 
 To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
 workflow job and workflow run events. To remove the events:
@@ -109,3 +118,4 @@ workflow job and workflow run events. To remove the events:
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
 [10]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#enable-log-collection
+[11]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs

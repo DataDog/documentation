@@ -20,11 +20,11 @@ Count of APM Events per second received by the Agent
 
 `datadog.trace_agent.events.max_eps.max_rate`
 : **Type**: Gauge<br>
-Same as the Agent config’s max_events_per_second parameter.
+Same as the Agent config's max_events_per_second parameter.
 
 `datadog.trace_agent.events.max_eps.reached_max`
 : **Type**: Gauge<br>
-Is set to `1` every time max_events_per_second is reached, otherwise it’s `0`.
+Is set to `1` every time max_events_per_second is reached, otherwise it's `0`.
 
 `datadog.trace_agent.events.max_eps.sample_rate`
 : **Type**: Gauge<br>
@@ -42,9 +42,13 @@ Increment by one every 10 seconds.
 : **Type**: Count<br>
 Number of spans having malformed fields that had to be altered in order for the system to accept them
 
-`datadog.trace_agent.obfuscations`
+`datadog.trace_agent.obfuscation.sql_cache.hits`
 : **Type**: Count<br>
-Increment by one every time an SQL obfuscation happens.
+Number of GET calls where a value was found for the corresponding key.
+
+`datadog.trace_agent.obfuscation.sql_cache.misses`
+: **Type**: Count<br>
+Number of GET calls where a value was not found for the corresponding key.
 
 `datadog.trace_agent.panic`
 : **Type**: Gauge<br>
@@ -72,7 +76,7 @@ Number of times the Agent killed itself due to excessive memory use (150% of max
 
 `datadog.trace_agent.receiver.out_chan_fill`
 : **Type**: Gauge<br>
-Internal metric. Percentage of fill on the receiver’s output channel.
+Internal metric. Percentage of fill on the receiver's output channel.
 
 `datadog.trace_agent.receiver.payload_accepted`
 : **Type**: Count<br>
@@ -81,10 +85,6 @@ Number of payloads accepted by the Agent.
 `datadog.trace_agent.receiver.payload_refused`
 : **Type**: Count<br>
 Number of payloads rejected by the receiver because of the sampling.
-
-`datadog.trace_agent.receiver.ratelimit`
-: **Type**: Gauge<br>
-If lower than `1`, it means payloads are being refused due to high resource usage (cpu or memory).
 
 `datadog.trace_agent.receiver.spans_dropped`
 : **Type**: Count<br>
@@ -121,10 +121,6 @@ Traces processed by priority sampler that have the priority tag.
 `datadog.trace_agent.receiver.traces_received`
 : **Type**: Count<br>
 Number of traces received and accepted.
-
-`datadog.trace_agent.service_writer.services`
-: **Type**: Count<br>
-Number of services flushed.
 
 `datadog.trace_agent.started`
 : **Type**: Count<br>
@@ -174,10 +170,6 @@ Number of stats buckets flushed.
 : **Type**: Count<br>
 Number of bytes sent (calculated after Gzip).
 
-`datadog.trace_agent.trace_writer.bytes_estimated`
-: **Type**: Count<br>
-Number of bytes estimated by Agent internal algorithm.
-
 `datadog.trace_agent.trace_writer.bytes_uncompressed `
 : **Type**: Count<br>
 Number of bytes sent (calculated before Gzip).
@@ -213,10 +205,6 @@ Number of events processed.
 `datadog.trace_agent.trace_writer.flush_duration`
 : **Type**: Gauge<br>
 Time it took to flush a payload to the Datadog API.
-
-`datadog.trace_agent.trace_writer.payloads`
-: **Type**: Count<br>
-Number of payloads processed.
 
 `datadog.trace_agent.trace_writer.payloads`
 : **Type**: Count<br>

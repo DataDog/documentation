@@ -5,6 +5,7 @@ assets:
   dashboards:
     LambdaTest: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,21 +15,22 @@ assets:
       prefix: lambdatest.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10243
     source_type_name: LambdaTest
   logs:
     source: lambdatest
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: LambdaTest
   sales_email: prateeksaini@lambdatest.com
   support_email: prateeksaini@lambdatest.com
 categories:
-- 問題追跡
 - 自動化
-- テスト
-- クラウド
-- コラボレーション
 - コンテナ
+- インシデント
+- 問題追跡
+- テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md
 display_on_public_website: true
@@ -41,33 +43,33 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: lambdatest
-oauth: {}
 public_title: LambdaTest
 short_description: 最も強力な自動テストプラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Issue Tracking
   - Category::Automation
-  - Category::Testing
-  - Category::Cloud
-  - Category::Collaboration
   - Category::Containers
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Testing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 最も強力な自動テストプラットフォーム
   media: []
   overview: README.md#Overview
   support: README.md#Support
   title: LambdaTest
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -87,23 +89,27 @@ LambdaTest でできることは以下の通りです。
 - 24 時間 365 日のチャットサポートで、いつでもヘルプを受けることができます。
 - プラットフォームへの生涯無料アクセス、自動化テスト 100 分無料。
 
-## セットアップ
+## 計画と使用
 
 構成はすべて LambdaTest ダッシュボード上で行われます。[LambdaTest-Datadog インテグレーション][1]セットアップドキュメントを参照してください。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 LambdaTest を使用して Datadog でインシデントを追跡する方法を紹介します。
 
-1. LambdaTest の Web サイトで、LambdaTest のアカウントにログインします。
-2. メニューバーから設定を選択します。
-3. 設定の下にあるインテグレーションをクリックします。
-4. Datadog を統合するには、Push to Datadog の隣にある install をクリックします。
-5. [Datadog API とアプリケーションキー][2]を入力します。
-6. 確認メールが送信されます。メールに記載されているインテグレーション内容を確認します。
-7. Datadog が LambdaTest アカウントと統合されたら、バグのログを取り、クロスブラウザテストを開始します。
+1. LambdaTest の Login ページから LambdaTest インテグレーションの認可を開始するには、**Connect Accounts** をクリックします。
+2. LambdaTest の Web サイトで LambdaTest のアカウントにログインすると、Datadog の認可ページにリダイレクトされます。
+3. **Authorize** をクリックし、インテグレーションを完了します。
+4. インテグレーション構成が完了すると、確認メールが送信されます。
+5. Datadog が LambdaTest アカウントと統合されたら、バグのログを取り、クロスブラウザテストを開始します。
 
-## サポート
+## アンインストール
+
+このインテグレーションをアンインストールすると、それまでの認可はすべて取り消されます。
+
+さらに、このインテグレーションに関連するすべての API キーが無効になっていることを、[API キー管理ページ][2]でインテグレーション名を検索して確認してください。
+
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから LambdaTest にお問い合わせください。
 
@@ -112,4 +118,4 @@ LambdaTest を使用して Datadog でインシデントを追跡する方法を
 Web サイト: https://www.lambdatest.com/
 
 [1]: https://www.lambdatest.com/support/docs/datadog-integration/
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[2]: https://app.datadoghq.com/organization-settings/api-keys?filter=LambdaTest

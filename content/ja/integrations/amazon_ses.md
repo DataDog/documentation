@@ -2,9 +2,8 @@
 aliases:
 - /ja/integrations/awsses/
 categories:
-- cloud
-- Collaboration
 - aws
+- cloud
 - log collection
 dependencies: []
 description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
@@ -12,27 +11,28 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_ses/
 draft: false
 git_integration_title: amazon_ses
 has_logo: true
-integration_id: amazon-ses
-integration_title: Amazon SES
+integration_id: ''
+integration_title: Amazon Simple Email Service (SES)
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_ses
-public_title: Datadog-Amazon SES インテグレーション
+public_title: Datadog-Amazon Simple Email Service (SES) インテグレーション
 short_description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Simple Email Service (SES) は、費用効率の高いアウトバウンド専用のメール送信サービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての SES メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -46,9 +46,9 @@ Amazon Simple Email Service (SES) は、費用効率の高いアウトバウン�
 
     詳細については、AWS ウェブサイト上の [SES ポリシー][4]を参照してください。
 
-3. [Datadog - AWS SES インテグレーション][5]をインストールします。
+3. [Datadog - Amazon Simple Email Service (SES) インテグレーション][5]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -58,29 +58,29 @@ Amazon SES から S3 バケットまたは CloudWatch のいずれかにログ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon SES ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon SES ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
     - [CloudWatch ロググループに手動トリガーを追加][8]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_ses" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS SES インテグレーションには、イベントは含まれません。
+Amazon Simple Email Service (SES) インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS SES インテグレーションには、サービスのチェック機能は含まれません。
+Amazon Simple Email Service (SES) インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
@@ -89,7 +89,7 @@ AWS SES インテグレーションには、サービスのチェック機能は
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/ses/latest/dg/control-user-access.html
 [5]: https://app.datadoghq.com/integrations/amazon-ses
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ses/amazon_ses_metadata.csv

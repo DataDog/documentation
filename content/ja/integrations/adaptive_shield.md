@@ -17,7 +17,6 @@ author:
   sales_email: info@adaptive-shield.com
   support_email: support@adaptive-shield.com
 categories:
-- アラート設定
 - クラウド
 - セキュリティ
 dependencies:
@@ -36,18 +35,17 @@ public_title: Adaptive Shield
 short_description: SaaS のポスチャアラートの追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Alerting
   - Category::Cloud
   - Category::Security
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: SaaS のポスチャアラートの追跡
   media:

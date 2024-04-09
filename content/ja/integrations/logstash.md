@@ -16,7 +16,7 @@ assets:
     source_type_name: Logstash
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: ervansetiawan@gmail.com
   support_email: ervansetiawan@gmail.com
 categories:
@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: logstash
-oauth: {}
 public_title: Logstash
 short_description: Logstash インスタンスからランタイムメトリクスを収集して監視
 supported_os:

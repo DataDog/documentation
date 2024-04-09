@@ -12,18 +12,17 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 ## Infrastructure monitoring
 
 * A **host** is a physical or virtual operating system instance. Each hour, Datadog records the number of unique hosts you are monitoring in the Infrastructure service.
-  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
+  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
 * A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
 * A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
-* A **serverless function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). Datadog charges based on the total number of Lambda function invocations in a month.
-* An AWS **Fargate task** is a collection of containers setup through AWS’s ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
+* An AWS **Fargate task** is a collection of containers setup through AWS's ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
 
 ## APM
 
 * If an application running on a host (defined in [Infrastructure monitoring](#infrastructure-monitoring)) generates traces and submits them to the Datadog SaaS application, Datadog counts that host as one **APM host**.
-  * On a high watermark plan (HWMP), the hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
+  * On a high watermark plan (HWMP), the hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the ninth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
 * An **Ingested Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested into Datadog APM.
@@ -33,7 +32,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## Database Monitoring
 
 * Datadog records the number of unique database hosts you are monitoring with Datadog Database Monitoring each hour.
-  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
+  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * Datadog charges based on the total number of configured [normalized queries][6] being tracked at any given time.
 
@@ -55,7 +54,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## Network Performance Monitoring
 
 * Datadog records the number of **Network Performance Monitoring** (NPM) hosts you are concurrently monitoring with the Datadog NPM service once per hour.
-  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth-highest measurement.
+  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
 * Additionally, Datadog measures the total number of flows used by all NPM hosts per month. A **flow** is a record of traffic sent and received between a source (IP:Port) and destination (IP:Port), as measured over a five-minute time period.
 
 ## Real User Monitoring
@@ -67,7 +66,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## Continuous Profiler
 
 * Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour.
-  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).
+  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
   * Each host is allowed up to four profiled containers for free. Containers over this are priced at $2 per container.
     **Note**: This allotment is aggregated across all hosts so if you have four containers on average across all your hosts, you are not charged as if you have more on a host-by-host basis.
 * Datadog measures the total number of containers that are being profiled. A container is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Continuous Profiler service. Datadog charges monthly based on the fractional hours of monitored containers. For Continuous Profiler, Datadog only counts the containers that are running the Continuous Profiler service towards the total monitored container count.

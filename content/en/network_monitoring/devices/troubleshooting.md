@@ -9,6 +9,10 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Use the information below for troubleshooting Datadog Network Device Monitoring. If you need additional help, contact [Datadog support][1].
@@ -39,7 +43,7 @@ Datadog uses SNMP to discover devices. During discovery, the SNMP port (default 
 
 #### Does Datadog do MIB certification? Do I need to send you all my MIBs? How do I convert my MIBs with Python?
 
-The Datadog Agent is MIB-less, meaning you don’t need to do anything with your MIBs. All metrics collected with Datadog device profiles automatically work without the MIB.
+The Datadog Agent is MIB-less, meaning you don't need to do anything with your MIBs. All metrics collected with Datadog device profiles automatically work without the MIB.
 
 To add metrics or a custom configuration, list the MIB name, table name, table OID, symbol, and symbol OID, for example:
 
@@ -67,12 +71,12 @@ If you send a feature request, Datadog support needs a `snmpwalk` from the reque
 snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 ```
 
-#### Why am I only seeing one metric collected for my networks and it’s the number of devices collected at zero?
+#### Why am I only seeing one metric collected for my networks and it's the number of devices collected at zero?
 
 1. Try loosening ACLs/firewall rules for your devices.
 2. Run `snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6` from the host your Agent is running on. If you get a timeout without any response, there is likely something blocking the Datadog Agent from collecting metrics from your device.
 
-#### What do I do if Datadog supports a vendor or device type but my specific model isn’t supported? 
+#### What do I do if Datadog supports a vendor or device type but my specific model isn't supported? 
 
 - Contact [Datadog support][1] to put in a request to support your specific model.
 - Extend your profiles to support additional `sysobjectid` values. 

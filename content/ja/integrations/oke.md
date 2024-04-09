@@ -3,11 +3,13 @@ app_id: oke
 app_uuid: c3361861-32be-4ed4-a138-d68b85b8d88b
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10255
     source_type_name: Oracle Container Engine for Kubernetes - OKE
 author:
   homepage: https://www.datadoghq.com
@@ -15,8 +17,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- コンテナ
+- kubernetes
 - oracle
-- containers
 - orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oke/README.md
@@ -30,22 +33,22 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: oke
-oauth: {}
 public_title: Oracle Container Engine for Kubernetes
 short_description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Oracle
   - Category::Containers
+  - Category::Kubernetes
+  - Category::Oracle
   - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
   media: []
@@ -54,20 +57,21 @@ tile:
   title: Oracle Container Engine for Kubernetes
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) は、Oracle Cloud 上でコンテナ化されたアプリケーションをデプロイして実行するための、フルマネージド Kubernetes サービスです。Datadog は、OKE によって管理される Kubernetes クラスターに対する包括的な可視性を提供します。Datadog のインテグレーションを有効にすると、Kubernetes インフラストラクチャーの表示、ライブ・プロセスの監視、すべてのポッドとコンテナからの主要メトリクスの追跡を 1 箇所で行うことができます。
 
-## セットアップ
+## 計画と使用
 
 Datadog は既に Kubernetes と統合されているため、すぐに OKE を監視することができます。Kubernetes クラスターで実行中の Agent を OKE に移行する予定がある場合に、Datadog でクラスターの監視を続行できます。
 
 さらに、OKE ノードプールもサポートされています。
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 

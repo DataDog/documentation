@@ -103,7 +103,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 : `(1, hello)`
 
 `curl -X GET 'localhost:8080/notes'`
-: `{”1”, "hello"}`
+: `{"1", "hello"}`
 
 `curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
 : `(1, UpdatedNote)`
@@ -415,7 +415,7 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [2]: /tracing/trace_collection/dd_libraries/python/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/python/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /getting_started/site/
 [7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer
@@ -424,5 +424,5 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/python/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[14]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[15]: /agent/configuration/agent-configuration-files/?tab=agentv6v7

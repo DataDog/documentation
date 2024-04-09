@@ -11,9 +11,6 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
 ---
 
 Starting with version 6.0, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport.
@@ -42,21 +39,30 @@ To enable the Agent DogStatsD UDS:
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. Edit the [Agent's main configuration file][1] to set `dogstatsd_socket` to the path where DogStatsD should create its listening socket:
+1. Create a socket file for DogStatsD to use as a listening socket. For example:
+   ```shell
+   sudo mkdir -p /var/run/datadog/
+   ```
+1. Ensure that the `dd-agent` user has read and write permissions to the socket file:
+   ```shell
+   sudo chown dd-agent:dd-agent /var/run/datadog/
+   ```
+1. Edit the [Agent's main configuration file][1]:
+   1. Set `use_dogstatsd` to `true`.
+   1. Set `dogstatsd_socket` to the path where DogStatsD should create its listening socket:
+      
+      ```yaml
+      ## @param dogstatsd_socket - string - optional - default: ""
+      ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
+      ## Set to a valid and existing filesystem path to enable.
+      #
+      dogstatsd_socket: '/var/run/datadog/dsd.socket'
+      ```
+1. [Restart your Agent][2].
 
-    ```yaml
-    ## @param dogstatsd_socket - string - optional - default: ""
-    ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
-    ## Set to a valid and existing filesystem path to enable.
-    #
-    dogstatsd_socket: '/var/run/datadog/dsd.socket'
-    ```
 
-2. [Restart your Agent][2].
-
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -189,9 +195,9 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 3. [Restart your Agent][3].
 
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /getting_started/tagging/assigning_tags/#environment-variables
-[3]: /agent/guide/agent-commands/
+[3]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 

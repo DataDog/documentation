@@ -34,7 +34,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kong/README.md
@@ -43,26 +42,24 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 2.3.0
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kong
-oauth: {}
 public_title: Kong
 short_description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
   media: []
@@ -81,7 +78,7 @@ Agent の Kong チェックは、合計リクエスト数、応答コード数�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Kong チェックは [Datadog Agent][4] パッケージに含まれています。Kong サーバーに追加でインストールする必要はありません。
 
@@ -213,6 +210,6 @@ Kong チェックには、イベントは含まれません。
 [1]: https://docs.konghq.com/hub/kong-inc/datadog/
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://www.datadoghq.com/blog/monitor-kong-datadog
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/help/

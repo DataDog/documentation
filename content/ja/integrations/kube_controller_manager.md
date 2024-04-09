@@ -5,6 +5,7 @@ assets:
   dashboards:
     kube_controller_manager: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: kube_controller_manager.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10055
     source_type_name: Kubernetes Controller Manager
 author:
   homepage: https://www.datadoghq.com
@@ -22,8 +24,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- オーケストレーション
 - コンテナ
+- kubernetes
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md
 display_on_public_website: true
@@ -31,26 +34,26 @@ draft: false
 git_integration_title: kube_controller_manager
 integration_id: kube-controller-manager
 integration_title: Kubernetes Controller Manager
-integration_version: 4.3.0
+integration_version: 5.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_controller_manager
-oauth: {}
 public_title: Kubernetes Controller Manager
 short_description: Kubernetes Controller Manager の監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
   - Category::Containers
+  - Category::Kubernetes
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Kubernetes Controller Manager の監視
   media: []
@@ -59,6 +62,7 @@ tile:
   title: Kubernetes Controller Manager
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Kube Controller Manager ダッシュボード][1]
@@ -69,14 +73,14 @@ tile:
 
 **注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Kubernetes Controller Manager チェックは [Datadog Agent][3] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. kube_controller_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kube_controller_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kube_controller_manager.d/conf.yam][4] を参照してください。
 
@@ -91,27 +95,27 @@ Kubernetes Controller Manager チェックは [Datadog Agent][3] パッケージ
 
 [Agent の `status` サブコマンドを実行][6]し、Checks セクションで `kube_controller_manager` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
 
-### イベント
+### ヘルプ
 
 Kubernetes Controller Manager チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "kube_controller_manager" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_controller_manager/images/screenshot.png
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/datadog_checks/kube_controller_manager/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

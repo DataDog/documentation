@@ -11,6 +11,9 @@ further_reading:
 - link: /tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースを調査する
+- link: /tracing/trace_collection/trace_context_propagation/go/
+  tag: Documentation
+  text: トレースコンテキストの伝搬
 kind: documentation
 title: Go トレーシングライブラリの構成
 type: multi-code-lang
@@ -91,7 +94,7 @@ DogStatsD メトリクス送信のためのデフォルトのトレース Agent 
 
 `DD_TAGS`
 : **デフォルト**: [] <br>
-すべてのスパンとプロファイルに追加されるデフォルトタグのリスト。タグはカンマやスペースで区切ることができます。例えば、 `layer:api,team:intake` や `layer:api team:intake` などです。
+すべてのスパンとプロファイルに追加されるデフォルトタグのリスト。タグはカンマやスペースで区切ることができます。例えば、 `layer:api,team:intake,key:value` や `layer:api team:intake key:value` などです。
 
 `DD_TRACE_STARTUP_LOGS`
 : **デフォルト**: `true` <br>
@@ -110,40 +113,21 @@ Web フレームワークとライブラリインスツルメンテーション�
 構成により、サービス名を動的に変更することができます。サービス名はカンマやスペースで区切ることができ、例えば `mysql:mysql-service-name,postgres:postgres-service-name`、`mysql:mysql-service-name postgres:postgres-service-name` のようにすることができます。
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: **デフォルト**: `false` <br>
+: **デフォルト**: `true` <br>
 Datadog は、製品の改良のため、[システムの環境・診断情報][6]を収集することがあります。false の場合、このテレメトリーデータは収集されません。
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : **デフォルト**: `false` <br>
 HTTP リクエストスパンの関連 IP ヘッダーからクライアント IP の収集を可能にします。
-バージョン 1.47.0 で追加されました 
+バージョン 1.47.0 で追加されました
+
 
 ## APM 環境名の構成
 
-[APM 環境名][7]は、[Agent 内][8] またはトレーサーの [WithEnv][3] スタートオプションを使用して構成できます。
+[APM 環境名][7]は、[Agent 内][8]またはトレーサーの [WithEnv][3] スタートオプションを使用して構成できます。
 
-## 分散型トレーシングのためのトレースコンテキストの伝搬
 
-Datadog APM トレーサーは、分散型トレーシングのために [B3][9] や [W3C][14] のヘッダーの抽出と挿入をサポートしています。
-
-分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。`tracecontext`、`Datadog`、[`B3`][9]、`B3 single header` のスタイルがサポートされています。
-
-- 環境変数 `DD_PROPAGATION_STYLE_INJECT=tracecontext,B3` を用いて挿入スタイルを構成する
-- 環境変数 `DD_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` を用いて抽出スタイルを構成する
-- 環境変数 `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` を用いて挿入スタイルと抽出スタイルの両方を構成する
-
-これらの環境変数の値は、挿入または抽出が有効になっているヘッダースタイルのコンマ区切りリストです。デフォルトでは、`tracecontext,Datadog` スタイルが有効になっています。
-
-トレースコンテキストの伝搬を無効にするには、環境変数の値を `none` に設定します。
-- 環境変数 `DD_PROPAGATION_STYLE_INJECT=none` を用いて挿入スタイルを無効にする
-- 環境変数 `DD_PROPAGATION_STYLE_EXTRACT=none` を用いて抽出スタイルを無効にする
-- 環境変数 `DD_PROPAGATION_STYLE=none` を使って、すべてのトレースコンテキストの伝搬を無効にします (挿入と抽出の両方)。
-
-複数の環境変数が設定されている場合、 `DD_PROPAGATION_STYLE_INJECT` と `DD_PROPAGATION_STYLE_EXTRACT` は `DD_PROPAGATION_STYLE` で指定した値をオーバーライドします。
-
-複数の抽出スタイルが有効な場合、それらのスタイルが指定されている順序で抽出が試行されます。最初に正常に抽出された値が使用されます。
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

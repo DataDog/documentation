@@ -24,6 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - cloud
+- network
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md
 display_on_public_website: true
@@ -31,25 +32,25 @@ draft: false
 git_integration_title: vsphere
 integration_id: vsphere
 integration_title: vSphere
-integration_version: 6.2.0
+integration_version: 6.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: vsphere
-oauth: {}
 public_title: vSphere
 short_description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::クラウド
+  - Category::ネットワーク
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
   media: []
@@ -121,18 +122,12 @@ collect_per_instance_filters:
 
 このチェックは vCenter イベントマネージャーでイベントを監視し、それを Datadog に送信します。以下のイベントタイプを送信します。
 
-- AlarmStatusChangedEvent:Gray
+- AlarmStatusChangedEvent
 - VmBeingHotMigratedEvent
 - VmReconfiguredEvent
 - VmPoweredOnEvent
 - VmMigratedEvent
-- TaskEvent: パワーオンの初期化
-- TaskEvent: 仮想マシンのパワーオフ
-- TaskEvent: 仮想マシンのパワーオン
-- TaskEvent: 仮想マシンの再構成
-- TaskEvent: 仮想マシンの再配置
-- TaskEvent: 仮想マシンの一時停止
-- TaskEvent: 仮想マシンの移行
+- TaskEvent
 - VmMessageEvent
 - VmSuspendedEvent
 - VmPoweredOffEvent

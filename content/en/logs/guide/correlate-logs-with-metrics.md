@@ -26,7 +26,7 @@ To correlate logs and metrics in the [Log Explorer][4]:
 1. Click on any log under the **Content** column. This expands a panel with detailed information about the log.
 2. Click on the **Metrics** tab within the panel.
 
-{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.jpg" alt="Log Explorer Metrics"  >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.jpg" alt="Log Explorer Metrics" >}}
 
 ## Dashboards
 
@@ -59,5 +59,5 @@ To correlate logs and metrics on the [Metrics Explorer][7] page:
 [3]: /metrics/explorer/
 [4]: https://app.datadoghq.com/logs
 [5]: https://app.datadoghq.com/dashboard/lists
-[6]: /dashboards/#graph-menu
+[6]: /dashboards/widgets/#graph-menu
 [7]: https://app.datadoghq.com/metric/explorer

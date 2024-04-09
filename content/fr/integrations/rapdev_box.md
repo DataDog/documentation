@@ -23,10 +23,11 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- marketplace
 - cloud
 - log collection
+- marketplace
 - metrics
+- notification
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,7 +41,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_box
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -50,23 +50,24 @@ pricing:
   tag: user_login
   unit_label: Utilisateurs enregistrés Box
   unit_price: 1
-public_title: Intégration Box
+public_title: Box
 short_description: Surveillez vos utilisateurs et votre stockage dans Box Enterprise
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
   - Category::Log Collection
+  - Category::Marketplace
   - Category::Metrics
+  - Category::Notification
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Surveillez vos utilisateurs et votre stockage dans Box Enterprise
   media:
@@ -87,7 +88,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Box
+  title: Box
   uninstallation: README.md#Uninstallation
 ---
 

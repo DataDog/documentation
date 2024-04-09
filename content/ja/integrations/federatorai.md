@@ -31,6 +31,7 @@ author:
   support_email: support@prophetstor.com
 categories:
 - コンテナ
+- kubernetes
 - orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
@@ -44,7 +45,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: federatorai
-oauth: {}
 public_title: Federator.ai
 short_description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
 supported_os:
@@ -52,9 +52,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Containers
+  - Category::Kubernetes
   - Category::Orchestration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
   media: []

@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "from": "now-15m",
+        "query": "service:python*",
+        "to": "now"
+      },
+      "options": {
+        "timezone": "GMT"
+      },
+      "page": {
+        "limit": 2
+      },
+      "sort": "timestamp"
+    },
+    "type": "search_request"
+  }
+}

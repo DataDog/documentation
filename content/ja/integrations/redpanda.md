@@ -24,9 +24,8 @@ author:
   sales_email: support@vectorized.io
   support_email: support@vectorized.io
 categories:
-- 処理
-- メッセージング
 - ログの収集
+- メッセージング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
 display_on_public_website: true
@@ -34,27 +33,25 @@ draft: false
 git_integration_title: redpanda
 integration_id: redpanda
 integration_title: Redpanda
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: redpanda
-oauth: {}
 public_title: Redpanda
 short_description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
-  - Category::Messaging
   - Category::Log Collection
+  - Category::Messaging
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
   media: []
@@ -72,7 +69,7 @@ Datadog と [Redpanda][1] を接続し、主要なメトリクスを表示した
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Redpanda インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][3]を参照してください。

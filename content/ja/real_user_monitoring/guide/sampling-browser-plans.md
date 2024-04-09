@@ -23,8 +23,10 @@ title: Browser RUM および Browser RUM & セッションリプレイのサン�
 この機能を使用するには、Datadog ブラウザ SDK v3.0.0+ が必要です。
 
 <blockquote class="alert alert-info">
-Datadog ブラウザ SDK v4.20.0 では、<code>sessionReplaySampleRate</code> 初期化パラメーターが導入され、<code>premiumSampleRate</code> と <code>replaySampleRate</code> 初期化パラメーターは非推奨となりました。
+Datadog Browser SDK v4.20.0 では、<code>premiumSampleRate</code> と <code>replaySampleRate</code> 初期化パラメーターを非推奨とし、<code>sessionReplaySampleRate</code> 初期化パラメーターを導入しました。
 </blockquote>
+<blockquote class="alert alert-info">
+Datadog Browser SDK v5.0.0 では、<code>sessionReplaySampleRate</code> 初期化パラメーターのデフォルト値は `0` です。SDK の以前のバージョンは `100` を使用します。</blockquote>
 
 セッションが作成されると、RUM はそのセッションを次のいずれかとして追跡します。
 
@@ -34,7 +36,7 @@ Datadog ブラウザ SDK v4.20.0 では、<code>sessionReplaySampleRate</code> �
 セッションの追跡方法を制御するために、2 つの初期化パラメーターが利用可能です。
 
 - `sessionSampleRate` は、追跡されるセッション全体の割合を制御します。デフォルトは `100%` で、すべてのセッションが追跡されます。
-- `sessionReplaySampleRate` は、全体のサンプルレートの**後に**適用され、Browser RUM & セッションリプレイとして追跡されるセッションの割合を制御します。デフォルトは `100%` で、すべてのセッションがデフォルトで Browser RUM & セッションリプレイとして追跡されます。
+- `sessionReplaySampleRate` は、全体のサンプルレートの**後に**適用され、Browser RUM & セッションリプレイとして追跡されるセッションの割合を制御します。デフォルトは `0` で、セッションはデフォルトで Browser RUM & セッションリプレイとして追跡されません。
 
 セッションの 100% を Browser RUM として追跡する場合
 

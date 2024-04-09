@@ -13,9 +13,13 @@ assets:
       check: calico.felix.active.local_endpoints
       metadata_path: metadata.csv
       prefix: calico.
+    process_signatures:
+    - calico-node
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Calico
+  logs:
+    source: calico
   monitors:
     '[calico] monitor dataplane failures': ./assets/monitors/dataplane_failures.json
     '[calico] monitor ipsets error': ./assets/monitors/ipset_error.json
@@ -27,10 +31,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- ログの収集
 - メトリクス
 - ネットワーク
-- security
-- ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/calico/README.md
 display_on_public_website: true
@@ -38,28 +41,26 @@ draft: false
 git_integration_title: calico
 integration_id: calico
 integration_title: calico
-integration_version: 1.1.0
+integration_version: 1.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: calico
-oauth: {}
 public_title: calico
 short_description: Calico は、コンテナ向けのネットワーク & ネットワークセキュリティソリューションです。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Log Collection
   - Category::Metrics
   - Category::Network
-  - Category::Security
-  - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Calico は、コンテナ向けのネットワーク & ネットワークセキュリティソリューションです。
   media: []
@@ -125,7 +126,7 @@ Calico チェックは [Datadog Agent][2] パッケージに含まれていま�
    minikube を使用していない場合は、`felix-metrics-svc` が外部 IP を持っているかを確認してください。サービスが外部 IP を持っていない場合は、`kubectl edit svc` を使用して、そのタイプを `ClusterIP` から `LoadBalancer` に変更してください。
 
 
-### コンフィギュレーション
+### 構成
 
 ホストで実行中の Agent でこのチェックを構成する場合は、手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
@@ -166,7 +167,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -214,9 +215,16 @@ Calico インテグレーションには、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog での Calico モニタリング][6]
+
 
 [1]: https://www.tigera.io/project-calico/
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.projectcalico.org/maintenance/monitor/monitor-component-metrics
+[3]: https://docs.tigera.io/calico/3.25/operations/monitor/monitor-component-metrics
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.datadoghq.com/blog/monitor-calico-with-datadog/

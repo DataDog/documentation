@@ -22,7 +22,7 @@ type: multi-code-lang
 
 ## サポートされている .NET フレームワークのランタイム
 
-.NET トレーサーは、以下の .NET Framework バージョンでの自動およびカスタムインスツルメンテーションに対応しています。また、[.NET Core][2] にも対応しています。
+.NET トレーサーは、以下の .NET Framework バージョンでの自動およびカスタムインスツルメンテーションに対応しています。また、[.NET Core][2] にも対応しています。.NET トレーサーは、部分信頼環境で実行されるコードをサポートしません。
 
 | .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン             | Datadog サポート終了 |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- | ------------------- |
@@ -63,6 +63,7 @@ type: multi-code-lang
 | ASP.NET (Web Forms を含む)   | 組み込み                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
+| AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
 | AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |

@@ -32,7 +32,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: oom_kill
-oauth: {}
 public_title: OOM Killer
 short_description: システムまたはcgroupによる OOM killer プロセスの追跡。
 supported_os:
@@ -75,8 +74,8 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: OOM Kill チェックが動作するためにはKernel バージョン 4.11 以降が必要です。
-また、Windows、Container-Optimized OS、バージョン 8 以前の CentOS/RHEL はサポートされません。
+**注**: OOM Kill チェックが動作するためには カーネルバージョン 4.11 以降が必要です。
+また、Windows およびバージョン 8 よりも前の CentOS/RHEL はサポートされません。
 
 ### コンフィギュレーション
 
@@ -91,9 +90,63 @@ yum install -y kernel-devel-$(uname -r)
 
 3. [Agent を再起動します][3]。
 
+### Docker でのコンフィギュレーション
+
+上記に従い `system-probe.yaml` および `oom_kill.d/conf.yaml` をマウントすることに加え、以下の構成を行います。
+
+1. 以下のボリュームを Agent コンテナにマウントします。
+
+    ```
+    -v /sys/kernel/debug:/sys/kernel/debug 
+    -v /lib/modules:/lib/modules 
+    -v /usr/src:/usr/src
+    ```
+
+2. BPF の動作を有効にするために、以下の権限を追加します。
+
+    ```
+    --privileged
+    ```
+
+   カーネルバージョン 5.8 からは、`--privileged` パラメーターを `--cap-add CAP_BPF` に置き換えることができます。 
+
+*注**: Docker Swarm では `--privileged` モードはサポートされていません。
+
+
 ### Helm のインテグレーション
 
 [Datadog Helm チャート][4]を使用し、`values.yaml` ファイルで `datadog.systemProbe` と `datadog.systemProbe.enableOOMKill` のパラメータが有効であることを確認します。
+
+### Operator (v1.0.0+) による構成
+
+DatadogAgent マニフェストで `features.oomKill.enabled` パラメーターを設定します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    oomKill:
+      enabled: true
+```
+
+**注**: COS (Container Optimized OS) を使用する場合は、ノード Agent で `src` ボリュームをオーバーライドしてください。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    oomKill:
+      enabled: true
+  override:
+    nodeAgent:
+      volumes: 
+      - emptyDir: {}
+        name: src
+```
 
 ### 検証
 
@@ -115,7 +168,7 @@ OOM Killer チェックでは、強制終了されたプロセス ID とプロ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example

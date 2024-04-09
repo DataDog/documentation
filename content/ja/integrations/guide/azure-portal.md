@@ -6,6 +6,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-datadog-partnership
   tag: ブログ
   text: Microsoft とのパートナーシップにより、Datadog を Azure Portal でネイティブに利用可能に
+- link: https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/
+  tag: ブログ
+  text: Datadog でエンタープライズ規模の Azure 環境の監視を数分で可能にします
 kind: ガイド
 title: Azure Native インテグレーションの管理
 ---
@@ -14,9 +17,10 @@ title: Azure Native インテグレーションの管理
   本ガイドは、Datadog リソースと Azure Native のインテグレーションを管理するためのものです。
 </div>
 
-このガイドは、Datadog リソースを使用して Azure ポータルで Azure と Datadog のインテグレーションを管理するためのものです。Azure の Datadog リソースは、Datadog オーガニゼーションと Azure サブスクリプションの間の接続を表します。このガイドに進む前に、Azure で [Datadog リソースを作成][1]してください。
+このガイドは、Datadog リソースを使用して Azure ポータルで Azure と Datadog のインテグレーションを管理するためのものです。Azure の Datadog リソースは、Datadog 組織と Azure 環境の間の接続を表します。Datadog リソースは、監視したい数のサブスクリプションをリンクするように構成することができます。このガイドに進む前に、Azure で [Datadog リソースを作成][1]してください。
 
 Datadog リソースを使用すると、関連付けられた Azure サブスクリプション内で以下を管理できます。
+- Datadog リソースのスコープを表示または変更し、監視するサブスクリプションを含める
 - Azure メトリクスとプラットフォームログのコレクションを構成します
 - メトリクスとログを送信する Azure リソースを確認します
 - API キーを表示し、Datadog リソース Agent のデプロイのキーのデフォルトを設定します
@@ -37,7 +41,7 @@ Datadog リソースを使用すると、関連付けられた Azure サブス�
 
 ### 重要な情報
 
-概要ページには、リソースグループ名、場所 (地域)、サブスクリプション、タグ、Datadog オーガニゼーションリンク、ステータス、料金プラン、請求期間など、Datadog リソースに関する重要な情報が表示されます。
+概要ページには、リソースグループ名、場所 (地域)、サブスクリプション、タグ、Datadog 組織リンク、ステータス、料金プラン、請求期間など、Datadog リソースに関する重要な情報が表示されます。
 
 **注**: SSO が有効になっている場合、Datadog オーガニゼーションリンクは SAML リンクです。Datadog オーガニゼーションが Azure マーケットプレイスで作成された場合は、このリンクを初めて使用するときにパスワードを設定します。
 
@@ -80,7 +84,7 @@ Azure Marketplace を通じて請求される Datadog オーガニゼーショ�
 - 削除された Datadog リソースが関連する Datadog オーガニゼーションにマップされた唯一の Datadog リソースである場合、ログとメトリクスは Datadog に送信されなくなり、Azure を介した Datadog のすべての請求が停止します。アカウントの次のステップを確認するために Datadog サポートがご連絡します。
 - 関連する Datadog オーガニゼーションにマップされた追加の Datadog リソースがある場合、Datadog リソースを削除すると、関連する Azure サブスクリプションのログとメトリクスの送信のみが停止します。
 
-Datadog オーガニゼーションが Azure Marketplace を通じて請求されない場合、Datadog リソースを削除すると、その Azure サブスクリプションのインテグレーションが削除されるだけです。
+Datadog 組織が Azure Marketplace を通じて請求**されない**場合、Datadog リソースを削除すると、その Azure サブスクリプションのインテグレーションが削除されるだけです。
 
 ### Change plan
 
@@ -91,6 +95,18 @@ Datadog の請求プランを変更するには、概要ページで **Change Pl
 ポータルは、プライベートオファーなど、テナントで利用可能なすべての Datadog プランを取得します。適切なプランを選択し、**Change Plan** をクリックします。
 
 ## Datadog org configurations
+
+### 監視対象サブスクリプション
+
+左サイドバーの **Monitored Subscriptions** を選択し、Datadog リソースのスコープを表示または変更します。現在監視しているサブスクリプションのリストが表示されます。このビューを使用して、Datadog リソースのスコープを構成し、必要な数のサブスクリプションを監視します。Datadog リソースを持つサブスクリプションは、スコープに含まれている必要があります。
+
+{{< img src="integrations/guide/azure_portal/azure-portal-multiple-subscriptions.png" alt="Azure ポータルの Datadog リソースで、Datadog 組織の構成セクションで Monitored Subscriptions が選択され、2 つのサブスクリプションが表示されています" responsive="true" style="width:100%;">}}
+
+   - サブスクリプションをモニターに追加するには、`+ Add Subscriptions` をクリックします。利用可能なサブスクリプションのリストには、`Owner` ロールが割り当てられているサブスクリプションのみが含まれています。監視したいサブスクリプションを選択し、`Add` をクリックします。
+   - Datadog で監視しているサブスクリプションを削除するには、削除したいサブスクリプションを選択し、`Remove Subscriptions` をクリックします。サブスクリプションを削除できるのは、`Owner` ロールを持つユーザーのみです。
+
+**注**: 同じ設定 (ホストフィルターやログ収集ルールなど) は、スコープ内のすべてのサブスクリプションで適用されます。異なるサブスクリプションに異なる設定を適用するには、異なる Datadog リソースを作成します。
+
 ### Metrics and logs
 
 左サイドバーの **Metrics and logs** を選択すると、メトリクスとログの構成ルールを変更することができます。リソースが追加されたり、タグが変更されたりすると、すべてのルールがサブスクリプション全体に動的に適用されます。
@@ -98,7 +114,7 @@ Datadog の請求プランを変更するには、概要ページで **Change Pl
 メトリクスまたはログの構成設定の変更は、数分以内に有効になります。
 
 #### メトリクスの収集
-デフォルトでは、Datadog はサブスクリプション内のすべての Azure リソースのメトリクスを自動的に収集します。
+デフォルトでは、Datadog はリンクされたサブスクリプション内のすべての Azure リソースのメトリクスを自動的に収集します。
 
 オプションで、リソースにアタッチされた Azure タグを使用して、Azure VM および App Service Plans のメトリクス収集を制限します。
 
@@ -127,7 +143,7 @@ Datadog リソースを使用して Azure から Datadog に出力できるロ�
 
 Azure リソースログは、[データプレーン][3]における Azure リソースの運用に関するインサイトを提供します。たとえば、Key Vault からシークレットを取得する、データベースへのリクエストを作成する、などはデータプレーンの運用です。リソースログのコンテンツは、Azure のサービスおよびリソースタイプにより異なります。
 
-Azure リソースログを Datadog に送信するには、**Send Azure resource logs for all defined resources** を選択します。Azure リソースログの種類は、[Azure 監視リソースログのカテゴリー][4]に一覧があります。このオプションが有効な場合、サブスクリプションで作成された新しいリソースを含むすべてのリソースログが Datadog に送信されます。
+Azure リソースログを Datadog に送信するには、**Send Azure resource logs for all defined resources** を選択します。Azure リソースログの種類は、[Azure 監視リソースログのカテゴリー][4]に一覧があります。このオプションが有効な場合、リンクされたサブスクリプションで作成された新しいリソースを含むすべてのリソースログが Datadog に送信されます。
 
 オプションで、Azure リソースタグを使用して Datadog にログを送信する Azure リソースを絞り込むことができます。
 
@@ -244,7 +260,7 @@ Azure ポータルは、API キーの読み取り専用ビューを提供しま�
 
 Azure Datadog インテグレーションにより、Datadog Agent を VM またはアプリサービスにインストールできます。デフォルトのキーが選択されていない場合、Datadog Agent のインストールは失敗します。
 
-### クラウドセキュリティポスチャ管理
+### Cloud Security Posture Management
 
 左サイドバーの `Cloud Security Posture Management` を選択し、[Cloud Security Posture Management][8] の構成を行います。
 
@@ -254,7 +270,7 @@ Azure Datadog インテグレーションにより、Datadog Agent を VM また
 
 {{< img src="integrations/guide/azure_portal/enable-CSPM.png" alt="Settings タブで Cloud Security Posture Management を選択した Azure Portal のページ" responsive="true" style="width:100%;">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

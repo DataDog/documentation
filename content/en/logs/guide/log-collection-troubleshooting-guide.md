@@ -26,12 +26,19 @@ Changes in the configuration of the `datadog-agent` won't be taken into account 
 
 ## Outbound traffic on port 10516 is blocked
 
-The Datadog Agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
+The Datadog Agent sends its logs to Datadog over TCP using port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
-Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For OpenSSL, run the following command:
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
-* `telnet intake.logs.datadoghq.com 10514`
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+For GnuTLS, run the following command:
+
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
+```
 
 And then by sending a log like the following:
 
@@ -39,7 +46,7 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-- If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
+- If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
 
 ```yaml
 logs_config:
@@ -72,10 +79,10 @@ If the Agent does not have the correct permissions, you might see one of the fol
 - Access is denied.
 - Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable.
 
-To fix the error, give the Datadog Agent user read, write, and execute permissions to the log file and subdirectories.
+To fix the error, give the Datadog Agent user read and execute permissions to the log file and subdirectories.
 
 {{< tabs >}}
-{{% tab "Linux and MacOS" %}}
+{{% tab "Linux" %}}
 1. Run the `namei` command to obtain more information about the file permissions:
    ```
    > namei -m /path/to/log/file
@@ -233,7 +240,7 @@ These are a few of the common configuration issues that are worth triple-checkin
 There might be an error in the logs that would explain the issue. Run the following command to check for errors:
 
 ```shell
-sudo cat /var/log/datadog/agent.log | grep ERROR
+sudo grep -i error /var/log/datadog/agent.log
 ```
 
 ## Docker environment
@@ -246,7 +253,15 @@ See the [Lambda Log Collection Troubleshooting Guide][10]
 
 ## Unexpectedly dropping logs
 
-Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+Check if logs appear in the [Datadog Live Tail][11].
+
+If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+If they do not appear in the Live Tail, they might have been dropped if their timestamp was further than 18 hours in the past. You can check which `service` and `source` may be impacted with the `datadog.estimated_usage.logs.drop_count` metric.
+
+## Truncated logs
+
+Logs above 1MB are truncated. You can check which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
+
 
 ## Further Reading
 
@@ -254,9 +269,9 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 
 [1]: /logs/
 [2]: /help/
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 [4]: /agent/logs/log_transport?tab=https#enforce-a-specific-transport
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /logs/guide/docker-logs-collection-troubleshooting-guide/

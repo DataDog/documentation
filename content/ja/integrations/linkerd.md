@@ -13,6 +13,8 @@ assets:
       check: linkerd.prometheus.health
       metadata_path: metadata.csv
       prefix: linkerd.
+    process_signatures:
+    - linkerd
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Linkerd
@@ -22,8 +24,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
-- autodiscovery
+- configuration & deployment
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md
@@ -32,27 +33,25 @@ draft: false
 git_integration_title: linkerd
 integration_id: linkerd
 integration_title: Linkerd
-integration_version: 3.3.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: linkerd
-oauth: {}
 public_title: Linkerd
 short_description: linkerd からメトリクスを取得してサービス健全性を監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
-  - Category::オートディスカバリー
+  - Category::構成 & デプロイ
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: linkerd からメトリクスを取得してサービス健全性を監視
   media: []
@@ -65,7 +64,13 @@ tile:
 
 ## 概要
 
-このチェックは、[Linkerd][1] から分散型システムの可観測性メトリクスを収集します。
+[Linkerd][1] は、CNCF のステータスを持つ、軽量かつ強力なオープンソースのサービスメッシュです。Linkerd は、安全で信頼性が高く、観測可能なクラウドネイティブアプリケーションを作成するために必要なツールを提供します。最小限の構成で、アプリケーションを変更することなく、Linkerd は、
+- 相互 TLS を使用して、すべてのクラスター上の TCP 通信を透過的に保護します。
+- レイテンシーを考慮したロードバランシング、リクエストの再試行、タイムアウト、ブルーグリーンデプロイメントを追加し、アプリケーションの回復力を維持します。
+- メッシュ化された各ワークロードの成功率、レイテンシー、リクエスト量を追跡することにより、プラットフォームの健全性を評価します。
+
+このインテグレーションは、アプリケーションの成功率、レイテンシー、飽和状態など、Linkerd のメトリクスを Datadog に送信します。
+
 
 ## セットアップ
 
@@ -149,7 +154,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 Linkerd v1 については、メトリクスの説明は [finagle メトリクスガイド][5]、Linkerd が公開するメトリクスの例は[こちらの gist][6] を参照してください。
 
-**注**: Linkerd の構成によっては、一部のメトリクスが Linkerd から公開されない場合があります。
+**注**: Linkerd は Prometheus ベースのインテグレーションです。Linkerd の構成によっては、一部のメトリクスが Linkerd によって公開されない場合があります。curl の出力にメトリクスが存在しない場合、Datadog Agent はその特定のメトリクスを収集することができません。
 
 現在の構成で公開されるメトリクスをリストするには、次のコマンドを実行します。
 
@@ -163,6 +168,7 @@ curl <linkerd_prometheus_endpoint>
 
 [デフォルトコンフィギュレーション][7]内の例に従ってください。
 
+
 ### サービスのチェック
 {{< get-service-checks-from-git "linkerd" >}}
 
@@ -174,7 +180,7 @@ curl <linkerd_prometheus_endpoint>
 
 
 [1]: https://linkerd.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://github.com/DataDog/integrations-core/blob/master/linkerd/metadata.csv
 [5]: https://twitter.github.io/finagle/guide/Metrics.html

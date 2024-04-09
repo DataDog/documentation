@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/docker-logging/"
   tag: "Blog"
   text: "Docker Logging Best Practices"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
 <div class="alert alert-info">Datadog recommends using <b>STDOUT/STDERR</b> to collect container logs.</div>
@@ -116,7 +119,7 @@ and mount it into `/conf.d/`. The file name can be anything:
 -v <absolute path>/logs.yaml:/conf.d/logs.yaml
 ```
 
-Your Agent’s Docker installation command should look like this:
+Your Agent's Docker installation command should look like this:
 
 ```
 docker run -d --name datadog-agent \
@@ -162,4 +165,4 @@ Logs Agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7

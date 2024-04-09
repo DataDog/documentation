@@ -31,7 +31,7 @@ further_reading:
 
 ## Overview
 
-API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in eight subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`). [Multistep API tests][2] enable you to run HTTP tests in sequence to monitor the uptime of key journeys at the API level.
+API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in eight subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`). [Multistep API tests][2] enable you to run API tests in sequence to monitor the uptime of key journeys at the API level.
 
 ## Create a single API test
 
@@ -48,7 +48,7 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 3. Select the `HTTP` request type.
 4. Define your request:
 
-    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
+    - Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
     - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
     
       **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
@@ -70,7 +70,7 @@ In this example, three default assertions populate after triggering the sample t
 
 Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click **New Assertion** to define a new assertion from scratch. 
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true"  >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true" >}}
 
 ### Select locations 
 
@@ -112,7 +112,7 @@ When you're ready to save your test configuration and monitor, click **Create**.
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="Overview of a Mulistep Synthetics API Test" style="width:100%;" >}}
 
-Similar to [HTTP tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application or service.
+Similar to [API tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application or service.
 
 The example test below demonstrates the creation of a multistep API test that monitors the addition of an item to a cart. This test contains three steps: 
 
@@ -221,3 +221,4 @@ With Datadog's [APM integration with Synthetic Monitoring][14], access the root 
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
 [13]: /synthetics/guide/synthetic-test-monitors
 [14]: /synthetics/apm/
+[15]: /synthetics/api_tests/grpc_tests

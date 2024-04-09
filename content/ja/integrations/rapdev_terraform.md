@@ -1,10 +1,13 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-terraform
 app_uuid: d7240832-9c24-4fc0-9a02-916bc57882c1
 assets:
   dashboards:
     RapDev Terraform Dashboard: assets/dashboards/rapdev_terraform_overview.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +18,7 @@ assets:
       prefix: rapdev.terraform.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10193
     source_type_name: RapDev Terraform
   logs: {}
 author:
@@ -24,6 +28,8 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- 構成 & デプロイ
+- developer tools
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -38,27 +44,29 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_terraform
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
   product_id: terraform
   short_description: このインテグレーションの定額料金
   unit_price: 100
-public_title: Terraform インテグレーション
+public_title: Terraform
 short_description: terraform アカウントと失敗した実行を監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
   - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: terraform アカウントと失敗した実行を監視する
   media:
@@ -67,21 +75,22 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Terraform インテグレーション
+  title: Terraform
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 Terraform とのインテグレーションにより、組織は Terraform のアカウントをアクティブに監視し、その動作状況や使用頻度をよりよく理解することができます。このインテグレーションはさらに権限の監査も提供します。
 
-### ダッシュボード  
+### ライブラリ
 
 1. RapDev Terraform ダッシュボード
 
-## サポート
+## Agent
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io

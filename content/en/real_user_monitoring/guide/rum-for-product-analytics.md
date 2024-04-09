@@ -9,7 +9,7 @@ further_reading:
 - link: '/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn how to visualize your RUM data'
-- link: '/real_user_monitoring/frustration_signals'
+- link: '/real_user_monitoring/browser/frustration_signals/'
   tag: 'Documentation'
   text: 'Learn about frustration signals'
 - link: '/real_user_monitoring/session_replay'
@@ -28,23 +28,23 @@ This guide discusses several use cases to enrich your RUM & Session Replay data 
 
 ## Setup
 
-Once you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([iOS][3] and [Android][4]) data with attributes to customize the data according to your use case. For example, adding contextual information allows you to [identify sessions that are tied to specific users][4].
+After you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([iOS][3] and [Android][4]) data with attributes to customize the data according to your use case. For example, adding contextual information allows you to [identify sessions that are tied to specific users][4].
 
 ## Monitor page traffic and feature usage
 
 If you are interested in learning what buttons your users click on the most, you can track page traffic and the usage of buttons in your application. 
 
-1. Navigate to the [RUM Explorer][5] and select **Actions** from the dropdown menu next to the search query. 
+1. In the [RUM Explorer][5], select **Actions** from the dropdown menu next to the search query. 
 2. Enter `@view.name:/cart` in the search query and select the **Top List** visualization type.
 3. In the `by` field of the `Group into fields` section above, select **Action Name** from the group dropdown.
 
 This example displays the top actions on Shopist's `/cart` page.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-2.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
 
 To investigate which users are clicking on these buttons, modify the search query by selecting the **Table** visualization type and clicking **+** to add another `group` field for `@user.name`.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-3.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
 ## Analyze the conversion rate of core workflows
 
@@ -80,7 +80,7 @@ The side panel contains detailed information about the load time of an individua
 
 This query searches for top pages where at least two frustration signals have occurred.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query.png" alt="Search query for views containing more than two frustration signals in the RUM Explorer" style="width:90%;" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query-1.png" alt="Search query for views containing more than two frustration signals in the RUM Explorer" style="width:90%;" >}}
 
 In addition to analyzing top views, you also want to investigate the buttons and elements that users are expressing frustration with. 
 
@@ -91,7 +91,7 @@ In addition to analyzing top views, you also want to investigate the buttons and
 
 This query lists anytime a user expresses any type of frustration signal and counts the unique actions where frustration occurred.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search-3.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
 
 ## Watch the user experience in Session Replay
 
@@ -99,7 +99,7 @@ You can visually watch the impact that poor user experiences have on your users.
 
 In a funnel visualization, you can access the **Funnel Analysis** side panel and click **Sample Replay Session** on sessions where users continued onto another step or dropped off.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay.mp4" alt="The Funnel Analysis side panel contains links to Session Replay" width=90%; video="true" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay-2.mp4" alt="The Funnel Analysis side panel contains links to Session Replay" width=90%; video="true" >}}
 
 With Session Replay, you can identify what parts of your product are confusing to users and need improving in order to drive up conversion. 
 
@@ -123,15 +123,15 @@ This powerpack provides graphs about usage by country, actions on a view, and ac
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/
-[2]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
-[3]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#enrich-user-sessions
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#enrich-user-sessions
 [4]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
-[6]: /real_user_monitoring/funnel_analysis/
+[6]: /real_user_monitoring/product_analytics/funnel_analysis
 [7]: /real_user_monitoring/explorer/saved_views/
 [8]: /real_user_monitoring/explorer/export/
 [9]: /real_user_monitoring/error_tracking/
-[10]: /real_user_monitoring/frustration_signals/
-[11]: /real_user_monitoring/session_replay/
+[10]: /real_user_monitoring/browser/frustration_signals/
+[11]: /real_user_monitoring/session_replay/browser/
 [12]: /dashboards/guide/powerpacks-best-practices/
 [13]: https://app.datadoghq.com/dashboard/lists

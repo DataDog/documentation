@@ -15,11 +15,11 @@ assets:
     source_type_name: Redis Sentinel
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os system
+- os & system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md
 display_on_public_website: true
@@ -27,25 +27,24 @@ draft: false
 git_integration_title: redis_sentinel
 integration_id: redis-sentinel
 integration_title: Redis Sentinel
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: redis_sentinel
-oauth: {}
 public_title: Redis Sentinel
 short_description: Redis Sentinel は Redis に高可用性を提供します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::OS とシステム
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS システム
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Redis Sentinel は Redis に高可用性を提供します。
   media: []

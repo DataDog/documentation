@@ -46,7 +46,7 @@ https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/
 
 #### 成功レスポンス
 
-ユーザーがアクセスリクエストの許可に成功した場合、アプリケーションは[認可コードを取得](#Obtain-an-authorization-code)し、クエリコンポーネントに `site` パラメーターと同様に認可 `code` を指定してリダイレクト URI にユーザーをリダイレクトさせます。
+ユーザーがアクセスリクエストの許可に成功した場合、アプリケーションは[認可コードを取得](#obtain-an-authorization-code)し、クエリコンポーネントに `site` パラメーターと同様に認可 `code` を指定してリダイレクト URI にユーザーをリダイレクトさせます。
 
 #### エラーレスポンス
 

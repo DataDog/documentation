@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Trace data tends to be repetitive. A problem in your application is rarely identified in only one trace and no others. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms repeatedly in multiple traces. Consequently, there’s usually no need for you to collect every single trace for a service or endpoint, or every span within a trace. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems, while cutting down the noise and managing costs.
+Trace data tends to be repetitive. A problem in your application is rarely identified in only one trace and no others. For high throughput services, particularly for incidents that require your attention, an issue shows symptoms repeatedly in multiple traces. Consequently, there's usually no need for you to collect every single trace for a service or endpoint, or every span within a trace. Datadog APM [ingestion control mechanisms][1] help you keep the visibility that you need to troubleshoot problems, while cutting down the noise and managing costs.
 
 Ingestion mechanisms are configurations within the Datadog Agent and Datadog tracing libraries. If you are using OpenTelemetry SDKs to instrument your applications, read [Ingestion Sampling with OpenTelemetry][2].
 
@@ -26,11 +26,11 @@ To identify which ingestion mechanisms are currently used in your Datadog enviro
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/ingestion_control_page.png" alt="Ingestion Control Page" style="width:90%;" >}}
 
-The table gives insights on ingested volumes *by service*. The Configuration column provides a first indication of the current set up. It shows: 
+The table gives insights on ingested volumes *by service*. The Configuration column provides a first indication of the current set up. It shows:
 - `AUTOMATIC` if the sampling rate calculated in the Datadog Agent is applied to the traces that start from the service. Read more about the specifics of [Datadog Agent ingestion logic][5].
 - `CONFIGURED` if a custom trace sampling rate configured in the tracing library is applied to the traces that start from the service.
 
-Click on services to see details about what sampling decision makers (for example Agent or tracing library, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services. 
+Click on services to see details about what sampling decision makers (for example Agent or tracing library, rules or sample rates) are used for each service, as well as what [ingestion sampling mechanisms][1] are leveraged for ingested spans' services.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Service Ingestion Summary" style="width:90%;" >}}
 
@@ -58,13 +58,13 @@ You can also override the default Agent sampling rate by configuring the samplin
 
 #### Configuring head-based sampling
 
-Default sampling rates are calculated to target 10 complete traces per second, per Agent. This is a *target* number of traces and is the result of averaging traces over a period of time. It is *not* a hard limit, and traffic spikes can cause significantly more traces to be sent to Datadog for short periods of time. 
+Default sampling rates are calculated to target 10 complete traces per second, per Agent. This is a *target* number of traces and is the result of averaging traces over a period of time. It is *not* a hard limit, and traffic spikes can cause significantly more traces to be sent to Datadog for short periods of time.
 
 You can increase or decrease this target by configuring the Datadog Agent parameter `max_traces_per_second` or the environment variable `DD_APM_MAX_TPS`. Read more about [head-based sampling ingestion mechanisms][5].
 
 **Note:** Changing an Agent configuration impacts the percentage sampling rates for *all services* reporting traces to this Datadog Agent.
 
-For most scenarios, this Agent-level configuration stays within the allotted quota, provides enough visibility into your application's performance, and helps you make appropriate decisions for your business. 
+For most scenarios, this Agent-level configuration stays within the allotted quota, provides enough visibility into your application's performance, and helps you make appropriate decisions for your business.
 
 ### Keeping more traces for specific services or resources
 
@@ -72,18 +72,18 @@ If some services and requests are critical to your business, you want higher vis
 
 #### Solution: Sampling rules
 
-By default, sampling rates are calculated to target 10 traces per second per Datadog Agent. You can override the default calculated sampling rate by configuring [sampling rules][6] in the tracing library. 
+By default, sampling rates are calculated to target 10 traces per second per Datadog Agent. You can override the default calculated sampling rate by configuring [sampling rules][6] in the tracing library.
 
 You can configure sampling rules by service. For traces that start from the rule's specified service, the defined percentage sampling rate is applied instead of the Agent's default sampling rate.
 
 #### Configuring a sampling rule
 
-You can configure sampling rules by setting the environment variable `DD_TRACE_SAMPLING_RULES`. 
+You can configure sampling rules by setting the environment variable `DD_TRACE_SAMPLING_RULES`.
 
 For example, to send 20 percent of the traces for the service named `my-service`:
 
 ```
-DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
+DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 Read more about [sampling rules ingestion mechanisms][6].
@@ -94,11 +94,13 @@ Traces with error spans are often symptoms of system failures. Keeping a higher 
 
 #### Solution: Error sampling rate
 
-In addition to head-based sampled traces, you can increase the error sampling rate so that each Agent keeps additional error spans even if the related traces are not kept by head-based sampling. 
+In addition to head-based sampled traces, you can increase the error sampling rate so that each Agent keeps additional error spans even if the related traces are not kept by head-based sampling.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Error Sampling" style="width:100%;" >}}
 
-**Note:** Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
+**Notes:**
+- Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
+- Starting with **Datadog Agent 6/7.41.0 and higher**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` can be set to include spans dropped by tracing library rules or `manual.drop`. More details can be found in the [Error traces section of the Ingestion Mechanisms doc][9].
 
 #### Configuring error sampling
 
@@ -112,9 +114,9 @@ Traced database calls can represent a large amount of ingested data while the ap
 
 #### Solution: Sampling rules for traces with database calls
 
-To reduce the span volume created by tracing database calls, configure the sampling at the head of the trace. 
+To reduce the span volume created by tracing database calls, configure the sampling at the head of the trace.
 
-Database services rarely start a trace. Usually, client database spans are children of an instrumented backend service span. 
+Database services rarely start a trace. Usually, client database spans are children of an instrumented backend service span.
 
 To know **which services start database traces**, use the `Top Sampling Decision Makers` top list graph on the ingestion control page [Service Ingestion Summary][7]. Configuring head-based sampling for these specific services reduces the volume of ingested database spans, while making sure that no incomplete traces are ingested. The distributed traces are either kept or dropped altogether.
 
@@ -126,23 +128,23 @@ For instance, for the traced database calls of `web-store-mongo`, traces origina
 
 Refer to the [sampling rule configuration section](#configuring-a-sampling-rule) for more information about sampling rules syntax.
 
-The backend service `web-store` is calling a Mongo database multiple times per trace, and it's creating a lot of unwanted span volume: 
+The backend service `web-store` is calling a Mongo database multiple times per trace, and it's creating a lot of unwanted span volume:
 
 - Configure a **trace sampling rule** for the backend service `web-store`, ensuring 10 percent of entire traces are kept, including Mongo spans.
 
   ```
-  DD_TRACE_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 0.1}]
+  DD_TRACE_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 0.1}]'
   ```
 
-- Optionally, if you want to keep all the `web-store` spans, configure a **single span sampling rule** to keep 100 percent of the spans for the backend service `web-store`. This sampling does not ingest any database call spans outside of the 10 percent identified above. 
+- Optionally, if you want to keep all the `web-store` spans, configure a **single span sampling rule** to keep 100 percent of the spans for the backend service `web-store`. This sampling does not ingest any database call spans outside of the 10 percent identified above.
 
   ```
-  DD_SPAN_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 1}]
+  DD_SPAN_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 1}]'
   ```
 
   **Note**: Configuring a single span sampling rule is especially useful if you are using [span-based metrics][8], which are derived from ingested spans.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling.png" alt="Database spans sampling" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling3.png" alt="Database spans sampling" style="width:100%;" >}}
 
 
 ## Further Reading
@@ -157,3 +159,4 @@ The backend service `web-store` is calling a Mongo database multiple times per t
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
 [7]: /tracing/trace_pipeline/ingestion_controls/#service-ingestion-summary
 [8]: /tracing/trace_pipeline/generate_metrics/
+[9]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java#error-and-rare-traces

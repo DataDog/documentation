@@ -28,6 +28,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- caching
 - data store
 - log collection
 dependencies:
@@ -37,26 +38,26 @@ draft: false
 git_integration_title: solr
 integration_id: solr
 integration_title: Solr
-integration_version: 1.11.1
+integration_version: 1.12.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: solr
-oauth: {}
 public_title: Solr
 short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::キャッシュ
   - Category::データストア
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
   media: []
@@ -75,7 +76,7 @@ Solr チェックは、Solr クラスターの状態とパフォーマンスを�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Solr チェックは [Datadog Agent][2] パッケージに含まれています。Solr ノードに追加でインストールする必要はありません。
 
@@ -313,6 +314,6 @@ attribute:
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/solr/images/solrgraph.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/integrations/java/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

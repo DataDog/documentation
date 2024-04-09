@@ -8,7 +8,7 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against threats with Datadog Application Security Management"
-- link: "/security/application_security/setup_and_configure/"
+- link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Other setup considerations and configuration options"
 ---
@@ -17,15 +17,29 @@ further_reading:
 
 Instrument your services and track user activity to detect and block bad actors.
 
-Add authenticated user information on traces to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
+[Add authenticated user information on traces](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
-Track user logins to detect account takeovers with out-of-the-box detection rules, and to ultimately block attackers.
+[Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
-Track additional business logic and create your own detection rules to prevent business logic abuse.
+<div class="alert alert-info">
+<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, read <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+</div>
+
+The custom user activity for which out-of-the-box detection rules are available are as follow:
+
+| Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
+|------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthorized activity detected][5] |
+| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
+| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
+| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
+| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
+| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
+| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP][10]                                                                                                        |
 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
-You can [add custom tags to your root span][1], or use the instrumentation functions described below. 
+You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -33,15 +47,17 @@ You can [add custom tags to your root span][1], or use the instrumentation funct
 
 Use the Java tracer's API for adding custom tags to a root span and add user information so that you can monitor authenticated requests in the application.
 
-User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
 
 **Note**: Check that you have added [necessary dependencies to your application][1].
 
 The example below shows how to obtain the root span, add the relevant user monitoring tags, and enable user blocking capability:
 
 ```java
-import datadog.trace.api.GlobalTracer;
-import datadog.appsec.api.Blocking;
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+import datadog.appsec.api.blocking.Blocking;
+import datadog.trace.api.interceptor.MutableSpan;
 
 // Get the active span
 final Span span = GlobalTracer.get().activeSpan();
@@ -61,7 +77,6 @@ Blocking
     .forUser("d131dd02c56eec4")
     .blockIfMatch();
 ```
-
 
 [1]: /tracing/trace_collection/compatibility/java/#setup
 {{< /programming-lang >}}
@@ -162,7 +177,7 @@ Datadog::Kit::Identity.set_user(
 
 If `Datadog::Kit::Identity.set_user` does not meet your needs, you can use `set_tag` instead.
 
-User monitoring tags are applied on the trace and start with the prefix `usr.` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+User monitoring tags are applied on the trace and start with the prefix `usr.` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
 
 The example below shows how to obtain the active trace and add relevant user monitoring tags:
 
@@ -196,25 +211,28 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-Use the PHP tracer's API for adding custom tags to a root span, and add user information so that you can monitor authenticated requests in the application.
+The PHP tracer provides the `\DDTrace\set_user()` function, which allows you to monitor and block authenticated requests.
 
-User monitoring tags are applied to the `meta` section of the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+`\DDTrace\set_user()` adds the relevant user tags and metadata to the trace and automatically performs user blocking.
 
-The example below shows how to obtain the root span and add the relevant user monitoring tags:
+The following example shows how to set user monitoring tags and enable user blocking:
 
 ```php
 <?php
-$rootSpan = \DDTrace\root_span();
+// Blocking is performed internally through the set_user call.
+\DDTrace\set_user(
+    // A unique identifier of the user is required.
+    '123456789',
 
- // Required unique identifier of the user.
-$rootSpan->meta['usr.id'] = ‘123456789’;
-
-// All other fields are optional.
-$rootSpan->meta['usr.name'] = ‘Jean Example’;
-$rootSpan->meta['usr.email'] = ‘jean.example@example.com’;
-$rootSpan->meta['usr.session_id'] = ‘987654321’;
-$rootSpan->meta['usr.role'] = ‘admin’;
-$rootSpan->meta['usr.scope'] = ‘read:message, write:files’;
+    // All other fields are optional.
+    [
+        'name' =>  'Jean Example',
+        'email' => 'jean.example@example.com',
+        'session_id' => '987654321',
+        'role' => 'admin',
+        'scope' => 'read:message, write:files',
+    ]
+);
 ?>
 ```
 
@@ -266,28 +284,19 @@ Monitor authenticated requests by adding user information to the trace with the 
 This example shows how to set user monitoring tags and enable user blocking capability:
 
 ```python
-from ddtrace.appsec.trace_utils import should_block_user
-from ddtrace.appsec.trace_utils import block_request
-from ddtrace.appsec.trace_utils import block_request_if_user_blocked
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
 # Call set_user() to trace the currently authenticated user id
 user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
-# Call is_user_blocked() to possibly block the authenticated user when in the denylist
-if should_block_user(user_id):
-    block_request()
-# Also the utility function that checks and blocks if needed:
-block_request_if_user_blocked(tracer, user_id)
-    block_request()
 ```
 
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
-## Adding user events (login success, login failure, any business logic) to traces
+## Adding business logic information (login success, login failure, any business logic) to traces
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
@@ -333,7 +342,7 @@ public class LoginController {
         // this is where you get User based on userId/password credentials
         User user = checkLogin(userId, password);
 
-        // if function returns null - user doesn’t exist
+        // if function returns null - user doesn't exist
         boolean userExists = (user != null);
         Map<String, String> metadata = new HashMap<>();
         if (userExists != null) {
@@ -521,7 +530,7 @@ trace = Datadog::Tracing.active_trace
 # if the user id exists
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: true)
 
-# if the user id doesn’t exist
+# if the user id doesn't exist
 Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', user_exists: false)
 ```
 {{% /tab %}}
@@ -564,7 +573,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Custom business logic" %}}
 ```php
 <?php
-\datadog\appsec\track_custom_event(‘users.signup’, [‘id’ => $id, 'email' => $email]);
+\datadog\appsec\track_custom_event('users.signup', ['id' => $id, 'email' => $email]);
 ?>
 ```
 {{% /tab %}}
@@ -658,6 +667,7 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 {{% /tab %}}
 
 {{% tab "Custom business logic" %}}
+
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
@@ -673,8 +683,60 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< /programming-lang-wrapper >}}
 
+### Tracking business logic information without modifying the code
+
+If your service has ASM enabled and [Remote Configuraton][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
+
+To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
+
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the ASM homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
+
+This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to ASM. If you don't need the condition, you may set a broad condition to match everything.
+
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
+
+Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
+
+
+[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
+
+## Automatic user activity event tracking
+
+When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
+
+The events that can be automatically detected are:
+
+- `users.login.success`
+- `users.login.failure`
+- `users.signup`
+
+### Automatic user activity event tracking mode
+
+Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
+
+In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+
+In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+
+To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
+
+**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+
+## Disabling automatic user activity event tracking
+
+If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/
+[3]: /tracing/trace_collection/custom_instrumentation/
+[4]: /security/default_rules/bl-rate-limiting/
+[5]: /security/default_rules/bl-privilege-violation-user/
+[6]: /security/default_rules/appsec-ato-groupby-ip/
+[7]: /security/default_rules/bl-signup-ratelimit/
+[8]: /security/default_rules/bl-account-deletion-ratelimit/
+[9]: /security/default_rules/bl-password-reset/
+[10]: /security/default_rules/bl-payment-failures/
+[11]: https://guid.one/guid

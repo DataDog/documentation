@@ -33,9 +33,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
 - caching
+- data store
 - log collection
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md
 display_on_public_website: true
@@ -43,27 +44,27 @@ draft: false
 git_integration_title: redisdb
 integration_id: redis
 integration_title: Redis
-integration_version: 4.5.2
+integration_version: 4.8.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: redisdb
-oauth: {}
 public_title: Redis
 short_description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::データストア
   - Category::キャッシュ
+  - Category::データストア
   - Category::ログの収集
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
   media: []
@@ -471,6 +472,6 @@ Redis チェックには、イベントは含まれません。
 - [Redis パフォーマンスメトリクスの監視方法][3]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics

@@ -8,10 +8,10 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
-    - link: 'profiler/profiler_troubleshooting'
+      text: 'Learn more about available profile visualizations'
+    - link: 'profiler/profiler_troubleshooting/python'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 aliases:
@@ -22,8 +22,9 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires Python 2.7+ and Agent version [7.20.2][2]+ or
-[6.20.2][3]+.
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
+The Datadog Profiler requires Python 2.7+.
 
 The following profiling features are available depending on your Python version. For more details, read [Profile Types][7]:
 
@@ -39,12 +40,14 @@ The installation requires pip version 18 or above.
 
 The following profiling features are available in the following minimum versions of the `dd-trace-py` library:
 
-|      Feature         | Required `dd-trace-py` version          |
-|----------------------|-----------------------------------------|
-| [Code Hotspots][12]        | 0.44.0+                       |
-| [Endpoint Profiling][13]            | 0.54.0+                       |
+| Feature                  | Required `dd-trace-py` version |
+|--------------------------|--------------------------------|
+| [Code Hotspots][12]      | 0.44.0+                        |
+| [Endpoint Profiling][13] | 0.54.0+                        |
 
 ## Installation
+
+Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 Install `ddtrace`, which provides both tracing and profiling functionalities:
 
@@ -126,11 +129,12 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [4]: https://app.datadoghq.com/profiling
 [5]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
 [6]: /getting_started/profiler/
 [7]: /profiler/profile_types/?code-lang=python
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

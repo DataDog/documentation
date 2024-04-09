@@ -5,13 +5,13 @@ title: 課金
 
 ## 概要
 
-課金サイクルは、いつサインアップしたかに関係なく月初から始まります。最初の月は、実際のサインアップ日に基づいて日割り計算されます。
+課金サイクルは、いつサインアップしたかに関係なく月初から始まります。最初の月 (UTC) は、実際のサインアップ日に基づいて日割り計算されます。
 
 Datadog は、ホストとカスタムメトリクスの数を毎時間測定します。ホストの課金対象数は、この下位 99% の時間の最大数として月末に計算されます。上位 1% を除外することで、使用量の短期急上昇が課金額に影響しないようにしています。カスタムメトリクスの課金対象数は、その月のカスタムメトリクスの時間平均として計算されます。Datadog で[使用量][1]を確認できます。請求ページは Datadog の管理者権限を有するユーザーのみアクセス可能です。
 
 ### ホスト
 
-ホストとは、Datadog で監視する実際のまたはバーチャルの OS インスタンスで、サーバー、VM、ノード（Kubernetes の場合）、または App Service Plan インスタンス（Azure App Service の場合）などがあります。Datadog Agent がインストールされているすべてのインスタンスのほか、Datadog インテグレーションを使用して監視されているすべての AWS EC2、GCP、Azure、vSphere VM がホストになり得ます。Agent がインストールされている EC2 または VM は、1 つのインスタンスとしてカウントされます (二重課金されません)。
+ホストとは、Datadog で監視する実際のまたは仮想の OS インスタンスで、サーバー、VM、ノード (Kubernetes の場合)、App Service Plan インスタンス (Azure App Service の場合)、または  Heroku dyno (Heroku プラットフォームの場合)  などがあります。Datadog Agent がインストールされているすべてのインスタンスのほか、Datadog インテグレーションを使用して監視されているすべての Amazon EC2、Google Cloud、Azure、vSphere VM がホストになり得ます。Agent がインストールされている EC2 や VM は、1 つのインスタンスとしてカウントされます (二重課金はありません)。
 
 報告を行っていないホスト ([インフラストラクチャーリスト][2]でステータスが `???`) は、課金の対象になりません。そのようなホストが[インフラストラクチャーリスト][2]から除外されるまで、最大 2 時間かかることがあります。Datadog は、これらのホスト (有料アカウント) の履歴データを保持します。ホスト名またはタグがわかれば、メトリクスをダッシュボードでグラフ化できます。
 
@@ -94,7 +94,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 {{< whatsnext desc="課金に関するトピック:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}料金{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_details/" >}}使用料の詳細{{< /nextlink >}}
+    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}使用量の詳細{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}使用量のメトリクス{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}クレジットカード{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}カスタムメトリクス{{< /nextlink >}}
@@ -102,7 +102,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
     {{< nextlink href="account_management/billing/log_management/" >}}ログ管理{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (分散型トレーシング & 継続的プロファイリング){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}サーバーレス{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}RUM とセッションリプレイ{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}リアルユーザーモニタリング{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba インテグレーション{{< /nextlink >}}

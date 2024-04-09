@@ -3,6 +3,7 @@ app_id: gremlin
 app_uuid: 451a4863-1767-4c11-8831-d196ae4643d0
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: gremlin.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10031
     source_type_name: Gremlin
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,7 +21,6 @@ author:
   sales_email: support@gremlin.com
   support_email: support@gremlin.com
 categories:
-- コラボレーション
 - 問題追跡
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
@@ -33,21 +34,19 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gremlin
-oauth: {}
 public_title: Gremlin
 short_description: Gremlin で発生したイベントを Datadog に送信
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Collaboration
   - Category::Issue Tracking
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Gremlin で発生したイベントを Datadog に送信
   media: []
@@ -56,6 +55,7 @@ tile:
   title: Gremlin
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,9 +69,9 @@ Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog の�
 
 ![スナップショット][3]
 
-## セットアップ
+## 計画と使用
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 このインテグレーションを有効にするには、Gremlin に Datadog API キーを渡す必要があります。それには、[インテグレーションページ][4]で、**Datadog** の行にある **Add** ボタンをクリックします。**Datadog API キー**の入力を求められます。キーを入力すると、インテグレーションが初期化されます。
 
@@ -79,23 +79,23 @@ Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog の�
 
 これで、このインテグレーションからのイベントが[イベントストリーム][2]に表示されるようになります。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Gremlin インテグレーションは、メトリクスを提供しません。
 
-### イベント
+### ヘルプ
 
 Gremlin で攻撃が開始または停止されると、Gremlin インテグレーションがイベントを [Datadog のイベントストリーム][4]に送信します。
 
-### サービスのチェック
+### ヘルプ
 
 Gremlin インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

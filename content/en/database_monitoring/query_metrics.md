@@ -12,6 +12,12 @@ further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
   text: "MySQL integration"
+- link: "/integrations/sqlserver/"
+  tag: "Documentation"
+  text: "SQL Server integration"
+- link: "/integrations/oracle/"
+  tag: "Documentation"
+  text: "Oracle integration"  
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -52,7 +58,7 @@ On the left side of the view are lists of facets for filtering the list of queri
 
 - **Core**: Services, hosts, environments.
 - **Database**: Postgres has `database` and `user` facets. MySQL has `schema` facets.
-- **Infrastructure** Traditional Datadog infrastructure tags collected by the Agent.
+- **Infrastructure**: Traditional Datadog infrastructure tags collected by the Agent.
 
 Select or clear facets to find the list of queries you're interested in.
 
@@ -74,11 +80,12 @@ To see a complete list of metrics collected, see the integration Data Collected 
 The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
 - **Postgres**: `postgresql.queries.*`
-
+- **SQL Server**: `sqlserver.queries.*`
+- **Oracle**: `oracle.queries.*`
 
 ## Query details page
 
-When you click a query in the the Query Metrics list, the Query Details page for that query opens. The top of the page shows the full text of the [normalized query][4], and a list of all tags associated with the query. The list of tags is the union of all tags from each host that the query runs on. Browse the list to see information such as what server the query is running on:
+When you click a query in the Query Metrics list, the Query Details page for that query opens. The top of the page shows the full text of the [normalized query][4], and a list of all tags associated with the query. The list of tags is the union of all tags from each host that the query runs on. Browse the list to see information such as what server the query is running on:
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="Tags list for a query" style="width:100%;">}}
 
@@ -116,7 +123,7 @@ The **Hosts Running This Query** tab lists the hosts that run this query, with a
 
 ## Database Monitoring dashboards
 
-For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the **Dashboards** link at to top of the page. Use the out-of-the-box dashboards, or clone and customize them to suit your needs.
+For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the **Dashboards** link at the top of the page. Use the out-of-the-box dashboards, or clone and customize them to suit your needs.
 
 ## Further Reading
 

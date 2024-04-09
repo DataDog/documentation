@@ -16,9 +16,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- notification
 - ネットワーク
+- notification
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_hewlett_packard_enterprise/README.md
@@ -32,7 +31,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: snmp_hewlett_packard_enterprise
-oauth: {}
 public_title: Hewlett-Packard Enterprise
 short_description: Hewlett-Packard Enterprise のネットワークデバイスから SNMP メトリクスを収集します。
 supported_os:
@@ -42,13 +40,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Network
+  - Category::Notification
+  - Category::SNMP
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Monitoring
-  - Category::Notification
-  - Category::Network
-  - Category::SNMP
   configuration: README.md#Setup
   description: Hewlett-Packard Enterprise のネットワークデバイスから SNMP メトリクスを収集します。
   media: []

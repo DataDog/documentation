@@ -26,14 +26,15 @@ You can monitor application security for PHP apps running in host-based or conta
 
 {{% appsec-getstarted %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Install the latest Datadog PHP library** by downloading and running the installer:
    ```shell
    wget https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php -O datadog-setup.php
    php datadog-setup.php --php-bin all --enable-appsec
    ```
-   For information about which language and framework versions are supported by the library, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
 2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling ASM, you can optionally enable it after by setting the following environment variable:
    {{< tabs >}}
@@ -92,10 +93,10 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{% appsec-getstarted-2-canary %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=php#compatibility
+[1]: /security/application_security/enabling/compatibility/php

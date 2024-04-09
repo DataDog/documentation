@@ -5,7 +5,7 @@ kind: ドキュメント
 title: APM 接続エラー
 ---
 
-トレーシングライブラリを搭載したアプリケーションが Datadog Agent に到達できない場合は、アプリケーションログと一緒に表示される[トレーサー起動ログ][1]や[トレーサーデバッグログ][2]に接続エラーがないかを確認してください。
+トレーシングライブラリを使用しているアプリケーションが Datadog Agent に到達できない場合は、アプリケーションログと一緒に表示される[トレーサー起動ログ][1]や[トレーサーデバッグログ][2]で接続エラーがないかを確認してください。
 
 ## APM 接続の問題を示唆するエラー
 
@@ -176,12 +176,12 @@ APM Agent
 
 ### ホストベースの設定
 
-アプリケーションと Datadog Agent がコンテナ化されていない場合、トレーシングライブラリを備えたアプリケーションはトレースを `localhost:8126` または `127.0.0.1:8126` に送信しようとします。これらは Datadog Agent がリッスンを行っている場所を示します。
+アプリケーションと Datadog Agent がコンテナ化されていない場合、トレーシングライブラリを使用しているアプリケーションはトレースを `localhost:8126` または `127.0.0.1:8126` に送信しようとしているはずです。これらは Datadog Agent がリッスンしている場所を示します。
 
 Datadog Agent が APM をリッスンしていない旨が表示された場合は、Datadog Agent の APM コンポーネントがデフォルトで使用しているポート 8126 とポートが競合していないかを確認します。
 
 根本的な原因を特定できない場合は、次の情報をご準備の上で [Datadog サポート][4]までご連絡ください。
-- アプリケーションと Datadog Agent を配置する環境についての情報。
+- アプリケーションと Datadog Agent をデプロイする環境についての情報。
 - プロキシを使用している場合は、その構成方法に関する情報。
 - デフォルトのポートを 8126 から別のポートに変更しようとしている場合は、そのポートに関する情報。
 - [Datadog Agent フレア][5]。
@@ -190,11 +190,18 @@ Datadog Agent が APM をリッスンしていない旨が表示された場合�
 
 #### ネットワークコンフィギュレーションを確認する
 
-コンテナ化された設定では、トレースを `localhost` または `127.0.0.1` に送信しても、Datadog Agent もコンテナ化されていて別の場所にあるため正しく動作しない場合があります。**注意**: AWS ECS on Fargate および AWS EKS on Fargate にはこのルールは適用されません。
+コンテナ化された設定では、トレースを `localhost` または `127.0.0.1` に送信しても、Datadog Agent もコンテナ化されていて別の場所にあるため正しく動作しない場合があります。**注意**: Amazon ECS on Fargate および AWS EKS on Fargate にはこのルールは適用されません。
 
-アプリケーションと Datadog Agent 間のネットワークが、そのコンフィギュレーションに必要なものと一致しているかどうかを判断します。
+アプリケーションと Datadog Agent 間のネットワークが、その構成に必要なものと一致しているかどうかを判断します。
 
 特に、Datadog Agent がポート `8126` にアクセスできること、およびアプリケーションが Datadog Agent のある場所にトレースを誘導できることを確認してください。
+確認を行うには、次のコマンドの変数 `{agent_ip}` と `{agent_port}` を置き換えて、アプリケーションコンテナから実行します。
+
+```
+curl -X GET http://{agent_ip}:{agent_port}/info
+```
+
+このコマンドが失敗した場合、コンテナは Agent にアクセスできません。この問題の原因を探るには、次のセクションを参照してください。
 
 まずは、[APM アプリ内設定についてのドキュメント][6]を参照してください。
 
@@ -206,17 +213,17 @@ Datadog Agent が APM をリッスンしていない旨が表示された場合�
 
 | セットアップ   | `DD_AGENT_HOST`  |
 |---------|------------------|
-| [AWS ECS on EC2][7] | Amazon の EC2 メタデータエンドポイントを評価する  |
-| [AWS ECS on Fargate][8] | `DD_AGENT_HOST` は設定しないこと |
+| [Amazon ECS on EC2][7] | Amazon の EC2 メタデータエンドポイントを評価する  |
+| [Amazon ECS on Fargate][8] | `DD_AGENT_HOST` は設定しないこと |
 | [AWS EKS on Fargate][9] | `DD_AGENT_HOST` は設定しないこと |
 | [AWS Elastic Beanstalk - 単一コンテナ][10] | ゲートウェイの IP (通常は `172.17.0.1`) |
 | [AWS Elastic Beanstalk - 複数コンテナ][11] | Datadog Agent のコンテナ名を示すリンク |
-| [Kubernetes][12] | 1) [Unix ドメインソケット][20]、2) [`status.hostIP`][13] を手動で追加、3) [Admission Controller][14] 経由 |
-| [AWS EKS (Fargate 以外)][15] | 1) [Unix ドメインソケット][20]、2) [`status.hostIP`][13] を手動で追加、3) [Admission Controller][14] 経由 |
-| [Datadog Agent およびアプリケーションの Docker コンテナ][16] | Datadog Agent コンテナ |
+| [Kubernetes][12] | 1) [Unix ドメインソケット][13]、2) [`status.hostIP`][14] を手動で追加、または 3) [Admission Controller][15] 経由。TCP を使用している場合は、コンテナに適用される[ネットワークポリシー][21]を確認します。 |
+| [AWS EKS (Fargate 以外)][16] | 1) [Unix ドメインソケット][13]、2) [`status.hostIP`][14] を手動で追加、3) [Admission Controller][15] 経由 |
+| [Datadog Agent およびアプリケーションの Docker コンテナ][17] | Datadog Agent コンテナ |
 
 
-**Webサーバに関する注意点**: [トレーサー起動ログ][1]の `agent_url` セクションで、渡された環境変数 `DD_AGENT_HOST` との不一致がある場合、その特定のサーバーで環境変数がどのようにカスケードされているかを確認してください。例えば、PHP では、[Apache][17] や [Nginx][18] が環境変数 `DD_AGENT_HOST` を正しく取得するための追加設定があります。
+**Webサーバに関する注意点**: [トレーサー起動ログ][1]の `agent_url` セクションで、渡された環境変数 `DD_AGENT_HOST` との不一致がある場合、その特定のサーバーで環境変数がどのようにカスケードされているかを確認してください。例えば、PHP では、[Apache][18] や [Nginx][19] が環境変数 `DD_AGENT_HOST` を正しく取得するための追加設定があります。
 
 トレースライブラリが設定に基づいて正しくトレースを送信していることを確認したら、次のステップに進みます。
 
@@ -248,16 +255,16 @@ APM Agent
 ```
 
 コンフィギュレーションが正しくても接続エラーが発生する場合は、次の情報をご準備の上で [Datadog サポートまでご連絡][4]ください。
-- アプリケーションと Datadog Agent を配置する環境についての情報。
+- アプリケーションと Datadog Agent をデプロイする環境についての情報。
 - プロキシを使用している場合は、その構成方法に関する情報。
 - アプリケーションと Datadog Agent の設定に使用されたすべてのコンフィギュレーションファイル。
 - 接続エラーの概要が記載された起動ログまたはトレーサーデバッグログ。
-- Datadog [Agent フレア][5]。専用コンテナの場合は、[Trace Agent 専用コンテナ][19]からフレアを送信します。
+- Datadog [Agent フレア][5]。専用コンテナの場合は、[Trace Agent 専用コンテナ][20]からフレアを送信します。
 
 
 [1]: /ja/tracing/troubleshooting/tracer_startup_logs/
 [2]: /ja/tracing/troubleshooting/tracer_debug_logs/
-[3]: /ja/agent/guide/agent-commands/#agent-information
+[3]: /ja/agent/configuration/agent-commands/#agent-information
 [4]: /ja/help/
 [5]: /ja/agent/troubleshooting/send_a_flare/
 [6]: https://app.datadoghq.com/apm/service-setup
@@ -267,11 +274,12 @@ APM Agent
 [10]: /ja/integrations/amazon_elasticbeanstalk/?tab=singlecontainer#trace-collection
 [11]: /ja/integrations/amazon_elasticbeanstalk/?tab=multiplecontainers#trace-collection
 [12]: /ja/agent/kubernetes/apm/
-[13]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[14]: /ja/agent/cluster_agent/admission_controller/
-[15]: /ja/integrations/amazon_eks/#setup
-[16]: /ja/agent/docker/apm/#tracing-from-other-containers
-[17]: /ja/tracing/setup_overview/setup/php/?tab=containers#apache
-[18]: /ja/tracing/setup_overview/setup/php/?tab=containers#nginx
-[19]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
-[20]: /ja/containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
+[13]: /ja/containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
+[14]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
+[15]: /ja/agent/cluster_agent/admission_controller/
+[16]: /ja/integrations/amazon_eks/#setup
+[17]: /ja/agent/docker/apm/#tracing-from-other-containers
+[18]: /ja/tracing/trace_collection/dd_libraries/php/?tab=containers#apache
+[19]: /ja/tracing/trace_collection/dd_libraries/php/?tab=containers#nginx
+[20]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
+[21]: https://kubernetes.io/docs/concepts/services-networking/network-policies/

@@ -7,15 +7,12 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
-  tag: GitHub
-  text: Datadog CI モニターによるパイプラインアラートの構成
 - link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
   tag: GitHub
   text: Datadog CI モニターによるパイプラインアラートの構成
@@ -56,13 +53,13 @@ Datadog で [CI モニター][2]を作成するには、メインナビゲーシ
 3. CI パイプラインのイベント数、ファセット、またはメジャーのモニタリングを選択します。
     * **CI Pipeline event count**: 検索バーを使用し (任意)、ファセットまたはメジャーは選択**しません**。選択されたタイムフレームで Datadog が CI パイプラインイベント数を評価し、それをしきい値の条件と比較します。
     * **Dimension**: ディメンション (質的ファセット) を選択し、そのファセットの `Unique value count` に対してアラートを表示します。
-    * **Measure**: CI Pipeline ファセットの数値に対してアラートを出すためのメジャー (定量ファセット) を選択します (メトリクスモニターに似ています)。集計方法 (`min`、`avg`、`sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
+    * **Measure**: CI Pipeline メジャーの数値に対してアラートを出すためのメジャー (定量ファセット) を選択します (メトリクスモニターに似ています)。集計方法 (`min`、`avg`、`sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
 4. 複数のディメンションで CI パイプラインイベントをグループ化する (オプション):
     * クエリに一致するすべての CI パイプラインイベントは、最大 4 つのファセットの値に基づいてグループに集約されます。
 5. アラート設定のグループ化方法を構成します（任意）:
    * クエリに `group by` が含まれる場合、グループパラメーターに従い、複数のアラートを各ソースに適用します。アラートイベントは、設定された条件を満たすと各グループに生成されます。たとえば、クエリを `@ci.pipeline.name` でグループ化すると、エラーの数が多い場合に CI パイプラインごとに個別のアラートを受信することができます。
 
-{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="パイプライン名でグループ化されるよう設定される CI Status:Error のクエリ" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="テスト名でグループ化されるよう設定される CI Status:Error のクエリ" style="width:100%;" >}}
 
 #### 数式と関数の使用
 
@@ -83,7 +80,7 @@ Datadog で [CI モニター][2]を作成するには、メインナビゲーシ
 1. 共通モニタータイプ: (オプション) **New Flaky Test**、**Test Failures**、**Test Performance** 共通モニタータイプごとにテンプレートクエリを提供し、カスタマイズすることが可能です。この機能の詳細については、[新しい不安定なテストの追跡](#track-new-flaky-tests)を参照してください。
 2. CI Test エクスプローラーの検索と同じロジックで検索クエリを作成します。たとえば、`myapp` というテストサービスの `main` ブランチに対して失敗したテストを検索するには、クエリ `@test.status:fail @git.branch:main @test.service:myapp` を使用します。
 3. CI Test のイベント数、ファセット、またはメジャーのモニタリングを選択します。
-    * **CI Test event count**: 検索バーを使用し (任意)、ファセットまたはメジャーは選択**しません**。選択されたタイムフレームで Datadog が CI パイプラインイベント数を評価し、それをしきい値の条件と比較します。
+    * **CI Test event count**: 検索バーを使用し (任意)、ファセットまたはメジャーは選択**しません**。選択されたタイムフレームで Datadog が CI パイプラインテストイベント数を評価し、それをしきい値の条件と比較します。
     * **Dimension**: ディメンション (質的ファセット) を選択し、そのファセットの `Unique value count` に対してアラートを表示します。
     * **Measure**: CI Pipeline ファセットの数値に対してアラートを出すためのメジャー (定量ファセット) を選択します (メトリクスモニターに似ています)。集計方法 (`min`、`avg`、`sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
 4. 複数のディメンションで CI Test イベントをグループ化する (オプション):
@@ -157,7 +154,7 @@ CI テストまたはパイプラインモニターがトリガーされると�
 | グループ化された Multi-Alert 数        | 最大 10 個のサンプル。                    |
 | グループ化されていない Simple-Alert メジャー   | 最大 10 個のサンプル。                    |
 | グループ化された Simple-Alert メジャー     | 最大 10 個のファセット値またはメジャー値。    |
-| グループ化された Multi-Alert 数        | 最大 10 個のファセット値またはメジャー値。    |
+| グループ化された Multi-Alert メジャー        | 最大 10 個のファセット値またはメジャー値。    |
 
 これらの通知の送信に、Slack、Jira、webhooks、Microsoft Teams、Pagerduty、電子メールを使用することができます。**注**: サンプルはリカバリ通知には表示されません。
 
@@ -166,10 +163,10 @@ CI テストまたはパイプラインモニターがトリガーされると�
 #### サンプル例
 
 アラート通知に CI テスト 10 サンプルのテーブルを含めます。
-{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="CI テストサンプルトップ 10"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="CI テストサンプルトップ 10" style="width:60%;" >}}
 
 アラート通知に CI パイプライン 10 サンプルのテーブルを含めます。
-{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="CI テストサンプルトップ 10"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="CI Pipeline サンプルトップ 10" style="width:60%;" >}}
 
 #### データがない時の通知行動
 
@@ -211,7 +208,7 @@ CI テストまたはパイプラインモニターがトリガーされると�
 
 [1]: /ja/continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: /ja/monitors/create/configuration/#advanced-alert-conditions
+[3]: /ja/monitors/configuration/#advanced-alert-conditions
 [4]: /ja/monitors/notify/
 [5]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [6]: https://docs.datadoghq.com/ja/continuous_integration/guides/flaky_test_management/
