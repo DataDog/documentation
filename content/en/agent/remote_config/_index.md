@@ -109,7 +109,7 @@ To enable Remote Configuration:
 
 3. On the [Remote Configuration][8] page, enable Remote Configuration. This enables Datadog components across your organization to receive configurations from Datadog.
 **Note:** Beginning April 8, 2024, Remote Configuration is on-by-default for:
-* New sub-organizations created by existing Datadog customers who already have enabled RC at the master organization level and where they are creating new sub-organizations in the same Datadog site as their master organization.
+* New child organizations that are created by existing Datadog customers who already have enabled Remote Configuration at the parent organization level **and** are in the same Datadog site as their parent organization.
 * Organizations created by new Datadog customers.
   
 To opt-out of Remote Configuration use, see the [opt-out section][23].
