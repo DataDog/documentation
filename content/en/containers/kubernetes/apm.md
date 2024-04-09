@@ -21,6 +21,10 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
+{{< learning-center-callout header="Try Introduction to Monitoring Kubernetes in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about monitoring Kubernetes with Datadog.
+{{< /learning-center-callout >}}
+
 This page describes how to set up and configure [Application Performance Monitoring (APM)][10] for your Kubernetes application.
 
 {{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The tracer sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}

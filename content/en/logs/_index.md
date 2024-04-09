@@ -88,6 +88,11 @@ Start exploring your ingested logs in the [Log Explorer][1].
 - [Patterns][11]: Spot log patterns by clustering your indexed logs together.
 - [Saved Views][12]: Use saved views to automatically configure your Log Explorer.
 
+
+{{< learning-center-callout header="Try Introduction to Log Management in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about Datadog Log Management.
+{{< /learning-center-callout >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
