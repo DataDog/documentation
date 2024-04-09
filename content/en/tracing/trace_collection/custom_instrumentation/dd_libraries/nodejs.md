@@ -213,7 +213,7 @@ app.get('/make-sandwich', async (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#wrap
 {{% /tab %}}
 
 {{% tab "Wrapper" %}}
