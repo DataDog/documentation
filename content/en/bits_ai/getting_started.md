@@ -35,7 +35,7 @@ Where available, the feature can be accessed by typing a space into the search b
 
 ### On the mobile app
 
-{{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with BitsAI" style="width:40%;" >}}
+{{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 Click Bits AI on the mobile app to access the same querying features available on the browser.
 
