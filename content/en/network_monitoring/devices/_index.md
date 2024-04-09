@@ -114,7 +114,7 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 | [Juniper Networks][210] | [_juniper.yaml][81] <br>[juniper-ex.yaml][82] <br>[_juniper-junos-generic.yaml][83] <br>[juniper-mx.yaml][84]
 | Linksys | [linksys.yaml][87] <br> |
 | McAfee | [mcafee-web-gateway.yaml][88] <br> |
-| [Meraki][7] | [meraki-cloud-controller.yaml][89] <br>[meraki.yaml][89] <br> |
+| [Meraki][7] | [meraki-cloud-controller.yaml][89] <br>[meraki.yaml][90] <br> |
 | Mikrotik | [mikrotik-router.yaml][91] <br> |
 | Nasuni | [nasuni-filer.yaml][92] <br> |
 | NEC | [nec-univerge.yaml][93] <br> |
@@ -125,7 +125,7 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 | Opengear | [_opengear.yaml][98] <br> |
 | [Palo Alto Networks][222] | [palo-alto.yaml][100] <br>[_palo-alto.yaml][101] <br> |
 | Peplink | [peplink.yaml][102] <br> |
-| [pfSense][33] | [pf-sense.yaml][103] <br> |
+| [pfSense][212] | [pf-sense.yaml][103] <br> |
 | Raritan | [raritan-dominion.yaml][104] <br> |
 | Riverbed | [riverbed.yaml][105] <br> |
 | Ruckus | [ruckus.yaml][106] <br> |
