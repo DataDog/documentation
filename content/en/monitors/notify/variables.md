@@ -423,6 +423,8 @@ Use template variables to customize your monitor notifications. The built-in var
 
  `{{first_triggered_at}}` is set when the monitor group goes from `OK` to a non-`OK` state or when a new group appears in a non-`OK` state. `{{last_triggered_at}}` gets set when the monitor group goes to a non-`OK` state independently from its previous state (including `WARN` → `CRIT`, `CRIT` → `WARN`, etc.). `{{last_triggered_at}}` additionally is set when a new group appears in a non-`OK` state. The difference is that `{{last_triggered_at}}` is independent from its previous state.
 
+ {{< img src="monitors/notifications/triggered_variables.png" alt="Showing difference between first_triggered and last_triggered" style="width:90%;">}}
+
 ### Evaluation
 
 Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][6].
