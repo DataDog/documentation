@@ -29,6 +29,8 @@ further_reading:
 Join the Event Management beta to correlate Datadog and third party alerts, change events into actionable insights, centralize investigations, and manage critical issues faster as a team. Read the <a href="https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#event-management">announcement</a> to learn more.
 {{< /callout >}}
 
+{{< img src="service_management/events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
+
 ## Overview
 
 Ingest, enrich and normalize, and correlate (see public beta) your events from any source into actionable insights. Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations. Event Management can also ingest events from any sources, including alert events from third parties, change requests, deployments, configuration changes.
@@ -42,6 +44,8 @@ More than 100 Datadog integrations support events collection, including [Kuberne
      {{< nextlink href="/service_management/events/pipelines_and_processors/overview/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
     {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
     {{< nextlink href="/service_management/events/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
+    {{< nextlink href="/service_management/events/correlation/" >}}<u>Correlation</u> - reduce alert fatigure and the number of tickets/notifictions you recieve {{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 ## Further Reading

@@ -1875,11 +1875,21 @@ main:
     identifier: event_correlation
     parent: events
     weight: 5
-  - name: Pattern-based
-    url: service_management/events/correlation/pattern
-    identifier: event_correlation_pattern
+  - name: Configurate Correlation
+    url: service_management/events/correlation/configuration
+    identifier: event_correlation_configure
     parent: event_correlation
     weight: 501
+  - name: Traging & Notifying
+    url: service_management/events/correlation/triage_and_notify
+    identifier: event_correlation_triage_and_notify
+    parent: event_correlation
+    weight: 502    
+  - name: Analytics
+    url: service_management/events/correlation/analytics
+    identifier: event_correlation_analytics
+    parent: event_correlation
+    weight: 503       
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
