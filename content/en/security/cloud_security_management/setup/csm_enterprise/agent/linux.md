@@ -48,7 +48,7 @@ compliance_config:
   host_benchmarks:
     enabled: true
 
-# Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
+# Vulnerabilities are evaluated and scanned against your containers and hosts every hour.
 sbom:
   enabled: true
   container_image:
