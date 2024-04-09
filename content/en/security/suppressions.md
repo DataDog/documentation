@@ -60,7 +60,7 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 
 ## Migrate legacy suppression queries to suppression rules
 
-<div class="alert alert-warning"> All suppression queries for detection rules are being automatically migrated to <a href="https://docs.datadoghq.com/security/suppressions/"> suppression rules </a>. Your suppression queries will now use the log suppression option in suppression rules. This process will complete by the end of April.</div>
+<div class="alert alert-warning"> All suppression queries for detection rules are being automatically migrated to <a href="https://docs.datadoghq.com/security/suppressions/"> suppression rules </a>. Your suppression queries will now use the log suppression option in suppression rules. This process will be completed by the end of April 2024.</div>
 
 Migrate your detection rules's legacy **Suppression Queries** to the new **Suppression Rules**. 
 
