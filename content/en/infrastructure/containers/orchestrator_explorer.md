@@ -161,7 +161,7 @@ There are multiple types of terms available:
 | **Annotations**: Extracted from [a resource's metadata][26]. They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
 | **Metrics**: Added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **String matching**: Supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannot specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
-| **Fields**: Extracted from [a resource's metadata][27]. | `field#metadata.creationTimestamp:>=4wk<br>field#metadata.deletionTimestamp:<=1hr` |
+| **Fields**: Extracted from [a resource's metadata][27]. | `field#metadata.creationTimestamp:>=4wk`<br>`field#metadata.deletionTimestamp:<=1hr` |
 
 >  ***Note**: You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
 
