@@ -57,7 +57,7 @@ The generic profile collects metrics for all devices not supported by a vendor p
 
 ### SD-WAN
 
-Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for select vendors. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to inter-connect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. 
+Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for select vendors. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. 
 
 Datadog supports the following vendors for SD-WAN network monitoring:
 
@@ -66,7 +66,9 @@ Datadog supports the following vendors for SD-WAN network monitoring:
 
 ### Vendor profiles
 
-The following vendor devices are supported with dedicated profiles. If a vendor/device type is supported but the specific model isn't supported, reference the [FAQ page][6] to learn how to customize your own `yaml` profile, or create new [profiles][9] to start monitoring new device models. 
+The following vendor devices are supported with dedicated profiles. If a vendor or device type is supported, but the specific model isn't supported, you can:
+  - customize your own YAML profile (see the [NDM troubleshooting FAQ page][6] for guidance)
+  - create new [profiles][9] to start monitoring new device models
 
 | Vendor | Config files |
 | ---  | ----------- |
@@ -101,14 +103,14 @@ The following vendor devices are supported with dedicated profiles. If a vendor/
 | Extreme Networks | [extreme-switching.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/extreme-switching.yaml) <br> |
 | [F5](/integrations/snmp_f5/) | [f5-big-ip.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/f5-big-ip.yaml) <br> |
 | Fireeye | [fireeye.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fireeye.yaml) <br> |
-| [Fortinet](integrations/snmp_fortinet/) | [fortinet.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet.yaml) <br>[fortinet-fortigate.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet-fortigate.yaml) <br> |
+| [Fortinet](https://docs.datadoghq.com/integrations/snmp_fortinet/) | [fortinet.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet.yaml) <br>[fortinet-fortigate.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet-fortigate.yaml) <br> |
 | Gigamon | [gigamon.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/gigamon.yaml) <br> |
 | [HP](integrations/snmp_hewlett_packard_enterprise/) | [hp-ilo4.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/hp-ilo4.yaml) <br>[_hp.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_hp.yaml) <br>[hpe-proliant.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/hpe-proliant.yaml) <br> |
 | Huawei | [_huawei.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_huawei.yaml) <br> |
 | iXsystems | [ixsystems-truenas.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ixsystems-truenas.yaml) <br> |
 | IBM | [ibm.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ibm.yaml) <br> |
 | Infinera | [infinera-coriant-groove.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infinera-coriant-groove.yaml) <br> |
-| [Infoblox](integrations/rapdev_infoblox/) | [infoblox-ipam.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infoblox-ipam.yaml) <br> |
+| [Infoblox](https://docs.datadoghq.com/integrations/rapdev_infoblox/) | [infoblox-ipam.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infoblox-ipam.yaml) <br> |
 | [Juniper Networks](/integrations/snmp_juniper/) | [_juniper.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_juniper.yaml) <br>[juniper-ex.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-ex.yaml) <br>[_juniper-junos-generic.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_juniper-junos-generic.yaml) <br>[juniper-mx.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-mx.yaml) <br>[juniper-srx.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-srx.yaml) <br> |
 | Kyocera | [kyocera-printer.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/kyocera-printer.yaml) <br> |
 | Linksys | [linksys.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/linksys.yaml) <br> |
@@ -122,7 +124,7 @@ The following vendor devices are supported with dedicated profiles. If a vendor/
 | Nvidia | [nvidia.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nvidia.yaml) <br> |
 | Omron | [omron-cj-ethernet-ip.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/omron-cj-ethernet-ip.yaml) <br> |
 | Opengear | [_opengear.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_opengear.yaml) <br> |
-| [Palo Alto Networks](integrations/pan_firewall/) | [palo-alto.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto.yaml) <br>[_palo-alto.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_palo-alto.yaml) <br> |
+| [Palo Alto Networks](https://docs.datadoghq.com/integrations/pan_firewall/) | [palo-alto.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto.yaml) <br>[_palo-alto.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_palo-alto.yaml) <br> |
 | Peplink | [peplink.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/peplink.yaml) <br> |
 | [pfSense](/integrations/crest_data_systems_pfsense/) | [pf-sense.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/pf-sense.yaml) <br> |
 | Raritan | [raritan-dominion.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/raritan-dominion.yaml) <br> |
