@@ -25,4 +25,7 @@
     ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
+See [Update Existing Pipelines][602] if you want to make changes to your pipeline's configuration.
+
 [601]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
+[602]: /observability_pipelines/update_existing_pipelines

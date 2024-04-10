@@ -13,3 +13,7 @@
 1. Select the VPC and subnet you want to use to install the Worker.
 1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+
+See [Update Existing Pipelines][7001] if you want to make changes to your pipeline's configuration.
+
+[7001]: /observability_pipelines/update_existing_pipelines

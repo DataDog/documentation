@@ -14,3 +14,7 @@
     -p 8282:8088 datadog/observability-pipelines-worker run
     ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+
+See [Update Existing Pipelines][8001] if you want to make changes to your pipeline's configuration.
+
+[8001]: /observability_pipelines/update_existing_pipelines

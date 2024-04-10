@@ -25,4 +25,7 @@
     ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
+See [Update Existing Pipelines][702] if you want to make changes to your pipeline's configuration.
+
 [701]: /resources/yaml/observability_pipelines/v2/setup/azure_aks.yaml
+[702]: /observability_pipelines/update_existing_pipelines
