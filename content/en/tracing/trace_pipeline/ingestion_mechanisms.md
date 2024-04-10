@@ -229,8 +229,10 @@ set DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
 Read more about sampling controls in the [.NET tracing library documentation][1].
+Read more about [configuring environment variables for .NET][2].
 
-[1]: /tracing/trace_collection/dd_libraries/dotnet-core
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core?tab=registryeditor#configuring-process-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
