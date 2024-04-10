@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "description": "This rule suppresses low-severity signals in staging environments.",
+      "enabled": true,
+      "expiration_date": 1703187336000,
+      "name": "Example-Security-Monitoring",
+      "rule_query": "type:log_detection source:cloudtrail",
+      "data_exclusion_query": "account_id:12345"
+    },
+    "type": "suppressions"
+  }
+}
