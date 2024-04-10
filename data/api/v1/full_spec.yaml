@@ -90,6 +90,12 @@ components:
             description: Regions to exclude.
             type: string
           type: array
+        extended_resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects additional attributes and configuration
+            information about the resources in your AWS account. Required for `cspm_resource_collection`.
+          example: true
+          type: boolean
         filter_tags:
           description: 'The array of EC2 tags (in the form `key:value`) defines a
             filter that Datadog uses when collecting metrics from EC2.
@@ -128,8 +134,9 @@ components:
           type: boolean
         resource_collection_enabled:
           default: false
-          description: Whether Datadog collects a standard set of resources from your
-            AWS account.
+          deprecated: true
+          description: Deprecated in favor of 'extended_resource_collection_enabled'.
+            Whether Datadog collects a standard set of resources from your AWS account.
           example: true
           type: boolean
         role_name:
@@ -24596,9 +24603,9 @@ paths:
             value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
               {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
               true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
-              \ ],\n  \"filter_tags\": [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\":
-              [\n      \"$KEY:$VALUE\"\n  ],\n  \"metrics_collection_enabled\": false,\n
-              \ \"resource_collection_enabled\": true,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+              \ ],\n  \"extended_resource_collection_enabled\": true,\n  \"filter_tags\":
+              [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\": [\n      \"$KEY:$VALUE\"\n
+              \ ],\n  \"metrics_collection_enabled\": false,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
           step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-undo:
