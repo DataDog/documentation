@@ -71,7 +71,7 @@ receivers:
 
 The JMX Receiver has the following requirements:
 - JRE is available on the host in which you are running the collector.
-- The JMX Metric Gatherer JAR is available on the host in which you are running the collector. You can Download the most recent release of the JMX Metric Gatherer JAR [here][1].
+- The JMX Metric Gatherer JAR is available on the host where you are running the collector. You can download the most recent release of the JMX Metric Gatherer JAR from the [opentelemetry-java-contrib releases page][1].
 
 Add the following in the Collector configuration:
 
