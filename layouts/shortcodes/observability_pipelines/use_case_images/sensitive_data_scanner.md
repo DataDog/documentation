@@ -1,1 +1,0 @@
-<img src="/images/observability_pipelines/use_cases/sds.png" alt="The log sources, processors, and destinations available for the sensitive data scanner use case" width="100%" style="center">

@@ -1,1 +1,0 @@
-<img src="/images/observability_pipelines/processors/general_processors.png" alt="The log sources, processors, and destinations available for the archive logs to Datadog Archives use case" width="40%" style="center">

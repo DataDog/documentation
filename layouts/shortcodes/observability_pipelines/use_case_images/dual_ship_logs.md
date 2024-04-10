@@ -1,1 +1,0 @@
-<img src="/images/observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for the dual ship logs use case" width="100%" style="center">

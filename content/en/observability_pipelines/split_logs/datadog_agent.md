@@ -8,7 +8,7 @@ disable_toc: false
 
 Configure your Datadog Agent to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
 
-{{% observability_pipelines/use_case_images/split_logs %}}
+{{< img src="observability_pipelines/use_cases/split_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -68,7 +68,7 @@ Enter the following information based on your selected logs destination.
 
 {{% observability_pipelines/processors/intro %}}
 
-{{% observability_pipelines/processor_images/general_processors %}}
+{{< img src="observability_pipelines/processors/general_processors.png" alt="The log processors available" width="40%" style="center" >}}
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
