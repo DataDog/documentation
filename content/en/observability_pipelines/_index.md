@@ -2,6 +2,19 @@
 title: Observability Pipelines
 kind: documentation
 disable_toc: false
+further_reading:
+- link: "/logs/log_collection/"
+  tag: "documentation"
+  text: "Log collection and integrations"
+- link: "data_security/logs/"
+  tag: "documentation"
+  text: "Log Management data security"
+- link: "/sensitive_data_scanner/"
+  tag: "documentation"
+  text: "Sensitive Data Scanner"
+- link: "/agent/configuration/dual-shipping/#yaml-configuration"
+  tag: "documentation"
+  text: "Dual shipping with Observability Pipelines"
 ---
 
 {{< site-region region="gov" >}}
@@ -26,13 +39,6 @@ The Observability Pipelines Worker is the software that runs in your infrastruct
 
 The Datadog UI provides a control plane to manage your Observability Pipelines Workers. You can build and edit pipelines, deploy pipeline changes to your Workers, and monitor your pipelines to evaluate the health of your pipelines.
 
-The following sources are available:
-
-- Datadog Agent
-- Splunk HTTP Event Collector (HEC)
-- Splunk Heavy and Universal Forwarders (TCP)
-- Sumo Logic Hosted Collector
-
 ## Get started
 
 1. Navigate to [Observability Pipelines][1].
@@ -43,6 +49,10 @@ The following sources are available:
     - [Archive logs to Datadog Archives][5]
     - [Sensitive data redaction][6]
 1. Enable monitors.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/log_volume_control/
