@@ -39,7 +39,7 @@ jobs:
               echo "Currently returning ${status}"
               sleep 30
             fi
-            if [[ $i -eq 15 && ! (" ${SUCCESS_CODES[@]} " =~ " ${status} ") ]]; then
+            if [[ $i -eq 30 && ! (" ${SUCCESS_CODES[@]} " =~ " ${status} ") ]]; then
               echo "Preview site returned ${status} for 15 minutes, there may be an issue with the preview site build"
               exit 1
             fi
