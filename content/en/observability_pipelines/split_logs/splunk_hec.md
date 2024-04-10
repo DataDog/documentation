@@ -8,6 +8,8 @@ disable_toc: false
 
 Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker and then to different destinations based on your use case.
 
+{{% observability_pipelines/use_case_images/split_logs %}}
+
 This document walks you through the following setup steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)

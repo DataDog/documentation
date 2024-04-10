@@ -1,0 +1,1 @@
+<img src="/images/observability_pipelines/use_cases/log_volume_control.png" alt="Alt text" width="100%" style="center">
