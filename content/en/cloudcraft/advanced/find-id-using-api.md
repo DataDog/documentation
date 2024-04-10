@@ -12,7 +12,7 @@ Currently, the Cloudcraft UI doesn't expose the ID of your AWS or Azure accounts
 Before you begin, make sure you have the following:
 
 - A Cloudcraft user with the [Owner or Administrator role][1].
-- An active [Cloudcraft Pro subscription][2].
+- A [Cloudcraft Pro subscription][2].
 - A Unix-like environment, such as Linux, macOS, or WSL on Windows with cURL and [jq][3] installed.
 - A basic understanding of the command-line interface.
 - A basic understanding of how to use APIs.
