@@ -411,6 +411,13 @@ components:
       required: true
       schema:
         type: string
+    ReportID:
+      description: The ID of the report job.
+      in: path
+      name: report_id
+      required: true
+      schema:
+        type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `notebook`, `security-rule`, `slo`.'
@@ -16780,6 +16787,74 @@ components:
       type: string
       x-enum-varnames:
       - SAML_ASSERTION_ATTRIBUTES
+    SLOReportInterval:
+      description: The frequency at which report data is to be generated.
+      enum:
+      - weekly
+      - monthly
+      example: weekly
+      type: string
+      x-enum-varnames:
+      - WEEKLY
+      - MONTHLY
+    SLOReportPostResponse:
+      description: The SLO report response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOReportPostResponseData'
+      type: object
+    SLOReportPostResponseData:
+      description: The data portion of the SLO report response.
+      properties:
+        id:
+          description: The ID of the report job.
+          example: dc8d92aa-e0af-11ee-af21-1feeaccaa3a3
+          type: string
+        type:
+          description: The type of ID.
+          example: report_id
+          type: string
+      type: object
+    SLOReportStatus:
+      description: The status of the SLO report job.
+      enum:
+      - in_progress
+      - completed
+      - completed_with_errors
+      - failed
+      example: completed
+      type: string
+      x-enum-varnames:
+      - IN_PROGRESS
+      - COMPLETED
+      - COMPLETED_WITH_ERRORS
+      - FAILED
+    SLOReportStatusGetResponse:
+      description: The SLO report status response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOReportStatusGetResponseData'
+      type: object
+    SLOReportStatusGetResponseAttributes:
+      description: The attributes portion of the SLO report status response.
+      properties:
+        status:
+          $ref: '#/components/schemas/SLOReportStatus'
+      type: object
+    SLOReportStatusGetResponseData:
+      description: The data portion of the SLO report status response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SLOReportStatusGetResponseAttributes'
+        id:
+          description: The ID of the report job.
+          example: dc8d92aa-e0af-11ee-af21-1feeaccaa3a3
+          type: string
+        type:
+          description: The type of ID.
+          example: report_id
+          type: string
+      type: object
     ScalarColumn:
       description: A single column in a scalar query response.
       oneOf:
@@ -18413,6 +18488,13 @@ components:
           type: integer
         creator:
           $ref: '#/components/schemas/SecurityMonitoringUser'
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
@@ -18461,6 +18543,13 @@ components:
       description: Object containing the attributes of the suppression rule to be
         created.
       properties:
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
@@ -18486,15 +18575,14 @@ components:
           type: string
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
-            matches this query, it is suppressed and is not triggered . Same syntax
-            as the queries to search signals in the signal explorer.
+            matches this query, it is suppressed and is not triggered. It uses the
+            same syntax as the queries to search signals in the Signals Explorer.
           example: env:staging status:low
           type: string
       required:
       - name
       - enabled
       - rule_query
-      - suppression_query
       type: object
     SecurityMonitoringSuppressionCreateData:
       description: Object for a single suppression rule.
@@ -18538,6 +18626,13 @@ components:
     SecurityMonitoringSuppressionUpdateAttributes:
       description: The suppression rule properties to be updated.
       properties:
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
@@ -20423,6 +20518,53 @@ components:
       - channel_id
       - channel_name
       - redirect_url
+      type: object
+    SloReportCreateRequest:
+      description: The SLO report request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/SloReportCreateRequestData'
+      required:
+      - data
+      type: object
+    SloReportCreateRequestAttributes:
+      description: The attributes portion of the SLO report request.
+      properties:
+        from_ts:
+          description: The `from` timestamp for the report in epoch seconds.
+          example: 1690901870
+          format: int64
+          type: integer
+        interval:
+          $ref: '#/components/schemas/SLOReportInterval'
+        query:
+          description: The query string used to filter SLO results. Some examples
+            of queries include `service:<service-name>` and `slo-name`.
+          example: slo_type:metric
+          type: string
+        timezone:
+          description: The timezone used to determine the start and end of each interval.
+            For example, weekly intervals start at 12am on Sunday in the specified
+            timezone.
+          example: America/New_York
+          type: string
+        to_ts:
+          description: The `to` timestamp for the report in epoch seconds.
+          example: 1706803070
+          format: int64
+          type: integer
+      required:
+      - query
+      - from_ts
+      - to_ts
+      type: object
+    SloReportCreateRequestData:
+      description: The data portion of the SLO report request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SloReportCreateRequestAttributes'
+      required:
+      - attributes
       type: object
     SortDirection:
       default: desc
@@ -35884,6 +36026,167 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
+  /api/v2/slo/report:
+    post:
+      description: 'Create a job to generate an SLO report. The report job is processed
+        asynchronously and eventually results in a CSV report being available for
+        download.
+
+
+        Check the status of the job and download the CSV report using the returned
+        `report_id`.'
+      operationId: CreateSLOReportJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SloReportCreateRequest'
+        description: Create SLO report job request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOReportPostResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
+      summary: Create a new SLO report
+      tags:
+      - Service Level Objectives
+      x-codegen-request-body-name: body
+      x-given:
+        report:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"query\": \"slo_type:metric
+              \\\"SLO Reporting Test\\\"\",\n      \"interval\": \"monthly\",\n      \"from_ts\":
+              {{ timestamp(\"now - 21d\") }},\n      \"to_ts\":  {{ timestamp(\"now\")
+              }}\n    }\n  }\n}"
+          step: there is a valid "report" in the system
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This feature is in private beta. To request access, use
+        the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
+        docs.'
+  /api/v2/slo/report/{report_id}/download:
+    get:
+      description: 'Download an SLO report. This can only be performed after the report
+        job has completed.
+
+
+        Reports are not guaranteed to exist indefinitely. Datadog recommends that
+        you download the report as soon as it is available.'
+      operationId: GetSLOReport
+      parameters:
+      - $ref: '#/components/parameters/ReportID'
+      responses:
+        '200':
+          content:
+            text/csv:
+              schema:
+                type: string
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
+      summary: Get SLO report
+      tags:
+      - Service Level Objectives
+      x-menu-order: 3
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This feature is in private beta. To request access, use
+        the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
+        docs.'
+  /api/v2/slo/report/{report_id}/status:
+    get:
+      description: Get the status of the SLO report job.
+      operationId: GetSLOReportJobStatus
+      parameters:
+      - $ref: '#/components/parameters/ReportID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOReportStatusGetResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
+      summary: Get SLO report status
+      tags:
+      - Service Level Objectives
+      x-menu-order: 2
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This feature is in private beta. To request access, use
+        the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
+        docs.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
@@ -38546,6 +38849,18 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
+
+    (SLOs) are a key part of the site reliability engineering toolkit.
+
+    SLOs provide a framework for defining clear targets around application performance,
+
+    which ultimately help teams provide a consistent customer experience,
+
+    balance feature development with platform stability,
+
+    and improve communication with internal and external users.'
+  name: Service Level Objectives
 - description: 'API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards)
     for more information.
 

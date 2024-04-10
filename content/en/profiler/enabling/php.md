@@ -73,10 +73,11 @@ To begin profiling applications:
 4. Configure the profiler using config mode through the `datadog-setup.php`:
 
     ```
-    # `datadog.profiling_enabled` is not required for v0.82.0+.
-    php datadog-setup.php config set -d datadog.profiling.    enabled=1
+    # `datadog.profiling.enabled` is not required for v0.82.0+.
+    php datadog-setup.php config set -d datadog.profiling.enabled=1
 
-    php datadog-setup.php config set -d datadog.service=app-name     \
+    php datadog-setup.php config set \
+      -d datadog.service=app-name \
       -d datadog.env=prod \
       -d datadog.version=1.3.2
 
