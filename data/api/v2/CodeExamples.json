@@ -996,6 +996,13 @@
       "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
     }
   ],
+  "CreateSLOReportJob": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Create a new SLO report returns \"OK\" response"
+    }
+  ],
   "CreateScorecardRule": [
     {
       "group": "service_scorecards",
