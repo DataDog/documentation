@@ -848,6 +848,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a suppression rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3192265332",
+      "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
     }
   ],
   "SearchSecurityMonitoringSignals": [

@@ -18488,6 +18488,13 @@ components:
           type: integer
         creator:
           $ref: '#/components/schemas/SecurityMonitoringUser'
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
@@ -18536,6 +18543,13 @@ components:
       description: Object containing the attributes of the suppression rule to be
         created.
       properties:
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
@@ -18561,15 +18575,14 @@ components:
           type: string
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
-            matches this query, it is suppressed and is not triggered . Same syntax
-            as the queries to search signals in the signal explorer.
+            matches this query, it is suppressed and is not triggered. It uses the
+            same syntax as the queries to search signals in the Signals Explorer.
           example: env:staging status:low
           type: string
       required:
       - name
       - enabled
       - rule_query
-      - suppression_query
       type: object
     SecurityMonitoringSuppressionCreateData:
       description: Object for a single suppression rule.
@@ -18613,6 +18626,13 @@ components:
     SecurityMonitoringSuppressionUpdateAttributes:
       description: The suppression rule properties to be updated.
       properties:
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
