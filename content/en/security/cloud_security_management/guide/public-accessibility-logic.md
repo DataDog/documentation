@@ -202,15 +202,15 @@ An [SQS Queue][32] (`aws_sqs_queue`) is considered publicly accessible if:
 
 See [Amazon SQS security best practices][33] for more information about public SQS queues.
 
-### Amazon Lambda Function
+### AWS Lambda function
 
-A [Lambda Function][58] (`aws_lambda_function`) is considered publicly accessible if:
+A [Lambda function][58] (`aws_lambda_function`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
 |The function has a policy that allows any principal (`principal_policy` or `principal_aws`) set to `"*"`. |This setting makes the function accessible to everyone in the world or to any authenticated AWS user.|
 
-See [Best practices for working with AWS Lambda Function][59] for more information about public Lambda functions.
+See [Best practices for working with AWS Lambda function][59] for more information about public Lambda functions.
 
 ## Azure public accessibility logic by resource
 
