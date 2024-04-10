@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
           path: repo
@@ -28,7 +28,7 @@ jobs:
         run: |
           URL="https://docs-staging.datadoghq.com/${{steps.extract_branch.outputs.branch}}"
           SUCCESS_CODES=("200" "302" "304")
-          for i in {1..15}
+          for i in {1..30}
           do
             status=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
             if [[ " ${SUCCESS_CODES[@]} " =~ " ${status} " ]]; then
@@ -37,16 +37,16 @@ jobs:
             else
               echo "Waiting for preview site to return 200 || 302 || 304..."
               echo "Currently returning ${status}"
-              sleep 60
+              sleep 30
             fi
-            if [[ $i -eq 15 && ! (" ${SUCCESS_CODES[@]} " =~ " ${status} ") ]]; then
+            if [[ $i -eq 30 && ! (" ${SUCCESS_CODES[@]} " =~ " ${status} ") ]]; then
               echo "Preview site returned ${status} for 15 minutes, there may be an issue with the preview site build"
               exit 1
             fi
           done
 
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.11.0
+        uses: DataDog/synthetics-ci-github-action@v1.3.0
         env:
           CI_COMMIT_REF_NAME: ${{steps.extract_branch.outputs.branch}}
         with:
