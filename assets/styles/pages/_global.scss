@@ -1038,6 +1038,12 @@ dl {
     }
 }
 
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1336px !important;
+    }
+}
+
 //@include media-breakpoint-up(xs) { ... }
 @media (max-width: 575px) {
     html {
