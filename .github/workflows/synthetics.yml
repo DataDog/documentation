@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
           path: repo
@@ -46,7 +46,7 @@ jobs:
           done
 
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.11.0
+        uses: DataDog/synthetics-ci-github-action@v1.3.0
         env:
           CI_COMMIT_REF_NAME: ${{steps.extract_branch.outputs.branch}}
         with:
