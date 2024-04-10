@@ -22,7 +22,8 @@ The RUM Browser SDK supports all modern desktop and mobile browsers including IE
 
 To set up RUM Browser Monitoring, create a RUM application:
 
-1. In Datadog, navigate to the [**RUM Applications** page][1] and click the **New Application** button.
+1. In Datadog, navigate to the [**Digital Experience** > **Add an Application** page][1] and select the JavaScript (JS) application type.
+   - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Browser Data Collected][2].
    - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
    - Choose the installation type for the RUM Browser SDK: [npm](#npm), or a hosted version ([CDN async](#cdn-async) or [CDN sync](#cdn-sync)).
    - Define the environment name and service name for your application to use unified service tagging for [RUM & Session Replay][19]. Set a version number for your deployed application in the initialization snippet. For more information, see [Tagging](#tagging).
