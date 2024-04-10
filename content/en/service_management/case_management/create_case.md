@@ -13,7 +13,7 @@ Cases can be created [manually](#manual-case-creation), [automatically](#automat
 
 ## Manual case creation
 
-{{< img src="/service_management/case_management/create/manual_case_creation.png" alt="Case Management page with the New Case modal opened to create a case manually" style="width:100%;" >}}
+{{< img src="/service_management/case_management/create/manual_case_creation_cropped.png" alt="Case Management page with the New Case modal opened to create a case manually" style="width:100%;" >}}
 
 On the [Case Management page][1], click **New Case**.
 1. Select a project to create the case in. A case can only belong to a single project. 

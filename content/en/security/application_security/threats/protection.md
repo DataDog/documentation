@@ -16,7 +16,7 @@ Application Security Management (ASM) Protect enables you to slow down attacks a
 
 ## Prerequisites 
 
-To leveraging protection capabilities for your service:
+To use protection capabilities with your service:
 
 - [Update your Datadog Agent][3] to at least version 7.41.1.
 - [Enable ASM][1].
@@ -101,7 +101,7 @@ You can also optionally redirect attackers to a custom deny page and away from y
 
 Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and security traces from In-App WAF.
 
-As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > Application Security > Protection > [Global Settings][16]** and toggle **Protection mode** to off.
+As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > Application Security > Protection > [Protection Settings][16]** and toggle **Allow Request Blocking** to off.
 
 ## Further reading
 

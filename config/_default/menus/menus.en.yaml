@@ -630,6 +630,11 @@ main:
     identifier: otel_batch_memory
     parent: otel_collector_configuration
     weight: 3038
+  - name: Kafka Metrics
+    url: opentelemetry/integrations/kafka_metrics/
+    identifier: otel_gs_kafka_metrics
+    parent: otel_integrations
+    weight: 3039
   - name: Schema and Semantics
     url: opentelemetry/schema_semantics/
     identifier: otel_schema
@@ -715,6 +720,10 @@ main:
     identifier: otel_guides_delta_temporality
     parent: otel_guides
     weight: 803
+  - name: Sending Data from OpenTelemetry Demo
+    url: /opentelemetry/guide/otel_demo_to_datadog/
+    parent: otel_guides
+    weight: 804
   - name: Developers
     url: developers/
     pre: dev-code
@@ -1115,12 +1124,33 @@ main:
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
     weight: 5
+  - name: Bits AI
+    url: bits_ai/
+    pre: bits-ai
+    identifier: bits_ai
+    parent: platform_heading
+    weight: 20000
+  - name: Getting Started
+    url: bits_ai/getting_started
+    identifier: bits_ai_getting_started
+    parent: bits_ai
+    weight: 1
+  - name: Managing Incidents
+    url: bits_ai/managing_incidents
+    identifier: bits_ai_managing_incidents
+    parent: bits_ai
+    weight: 2
+  - name: Natural Language Querying
+    url: bits_ai/query_examples
+    identifier: bits_ai_natural_language_querying
+    parent: bits_ai
+    weight: 3
   - name: Dashboards
     url: dashboards/
     pre: dashboard
     identifier: dashboards
     parent: platform_heading
-    weight: 20000
+    weight: 30000
   - name: Configure
     identifier: dashboards_configure
     url: dashboards/configure/
@@ -1241,7 +1271,7 @@ main:
     identifier: infrastructure
     pre: host-map
     parent: platform_heading
-    weight: 30000
+    weight: 40000
   - name: Host and Container Maps
     url: infrastructure/hostmap/
     parent: infrastructure
@@ -1302,7 +1332,7 @@ main:
     identifier: metrics_top_level
     pre: metric
     parent: platform_heading
-    weight: 40000
+    weight: 50000
   - name: Custom Metrics
     url: metrics/custom_metrics/
     parent: metrics_top_level
@@ -1393,7 +1423,7 @@ main:
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 50000
+    weight: 60000
   - name: Guides
     url: notebooks/guide
     parent: notebooks
@@ -1404,7 +1434,7 @@ main:
     pre: monitor
     identifier: alerting
     parent: platform_heading
-    weight: 60000
+    weight: 70000
   - name: Configure Monitors
     url: monitors/configuration/
     parent: alerting
@@ -1585,7 +1615,7 @@ main:
     pre: service-catalog
     parent: platform_heading
     identifier: service_catalog
-    weight: 70000
+    weight: 80000
   - name: Browsing
     url: service_catalog/browsing
     parent: service_catalog
@@ -1636,7 +1666,7 @@ main:
     pre: api-catalog
     parent: platform_heading
     identifier: api_catalog
-    weight: 80000
+    weight: 90000
   - name: Exploring APIs
     url: /api_catalog/explore_apis/
     identifier: api_catalog_explore
@@ -1682,7 +1712,7 @@ main:
     pre: error-tracking
     parent: platform_heading
     identifier: error_tracking
-    weight: 90000
+    weight: 100000
   - name: Explorer
     url: error_tracking/explorer
     parent: error_tracking
@@ -1745,71 +1775,121 @@ main:
     identifier: event_ingest
     parent: events
     weight: 1
+  - name: Pipelines and Processors
+    url: service_management/events/pipelines_and_processors/overview
+    identifier: overview
+    parent: events
+    weight: 2
+  - name: Arithmetic Processor
+    url: service_management/events/pipelines_and_processors/arithmetic_processor
+    identifier: arithmetic_processor
+    parent: overview
+    weight: 201
+  - name: Date Remapper
+    url: service_management/events/pipelines_and_processors/date_remapper
+    identifier: date_remapper
+    parent: overview
+    weight: 202
+  - name: Category Processor
+    url: service_management/events/pipelines_and_processors/category_processor
+    identifier: category_processor
+    parent: overview
+    weight: 203
+  - name: Grok Parser
+    url: service_management/events/pipelines_and_processors/grok_parser
+    identifier: grok_parser
+    parent: overview
+    weight: 204
+  - name: Lookup Processor
+    url: service_management/events/pipelines_and_processors/lookup_processor
+    identifier: lookup_processor
+    parent: overview
+    weight: 205
+  - name: Remapper
+    url: service_management/events/pipelines_and_processors/remapper
+    identifier: remapper
+    parent: overview
+    weight: 206
+  - name: Service Remapper
+    url: service_management/events/pipelines_and_processors/service_remapper
+    identifier: service_remapper
+    parent: overview
+    weight: 207
+  - name: Status Remapper
+    url: service_management/events/pipelines_and_processors/status_remapper
+    identifier: status_remapper
+    parent: overview
+    weight: 208
+  - name: String Builder Processor
+    url: service_management/events/pipelines_and_processors/string_builder_processor
+    identifier: string_builder_processor
+    parent: overview
+    weight: 209
   - name: Explorer
     url: service_management/events/explorer/
     identifier: events_explorer
     parent: events
-    weight: 2
+    weight: 3
   - name: Searching
     url: service_management/events/explorer/searching
     identifier: events_explorer_searching
     parent: events_explorer
-    weight: 201
+    weight: 301
   - name: Navigate the Explorer
     url: service_management/events/explorer/navigate
     identifier: events_explorer_navigate
     parent: events_explorer
-    weight: 202
+    weight: 302
   - name: Customization
     url: service_management/events/explorer/customization
     identifier: events_explorer_customization
     parent: events_explorer
-    weight: 203
+    weight: 303
   - name: Facets
     url: service_management/events/explorer/facets
     identifier: events_explorer_facets
     parent: events_explorer
-    weight: 204
+    weight: 304
   - name: Attributes
     url: service_management/events/explorer/attributes
     identifier: events_explorer_attributes
     parent: events_explorer
-    weight: 205
+    weight: 305
   - name: Notifications
     url: service_management/events/explorer/notifications
     identifier: event_explorer_notifications
     parent: events_explorer
-    weight: 206
+    weight: 306
   - name: Analytics
     url: service_management/events/explorer/analytics
     identifier: event_explorer_analytics
     parent: events_explorer
-    weight: 207
+    weight: 307
   - name: Saved Views
     url: service_management/events/explorer/saved_views
     identifier: event_explorer_saved_views
     parent: events_explorer
-    weight: 208
+    weight: 308
   - name: Using Events
     url: service_management/events/usage/
     identifier: event_usage
     parent: events
-    weight: 3
+    weight: 4
   - name: Correlation
     url: service_management/events/correlation/
     identifier: event_correlation
     parent: events
-    weight: 4
+    weight: 5
   - name: Pattern-based
     url: service_management/events/correlation/pattern
     identifier: event_correlation_pattern
     parent: event_correlation
-    weight: 401
+    weight: 501
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
     parent: events
-    weight: 5
+    weight: 10
   - name: Case Management
     url: service_management/case_management/
     pre: case-management
@@ -2685,7 +2765,7 @@ main:
     identifier: tracing_error_tracking_explorer
     weight: 1001
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=apm
+    url: error_tracking/custom_grouping
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
     weight: 1002
@@ -3905,7 +3985,7 @@ main:
     parent: log_management_error_tracking
     weight: 603
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=logs
+    url: error_tracking/custom_grouping
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
@@ -4132,6 +4212,11 @@ main:
     parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
     weight: 102
+  - name: Kubernetes Security Posture Management
+    url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/kspm
+    parent: cspm_frameworks_benchmarks
+    identifier: cspm_kspm
+    weight: 103
   - name: Explore Misconfigurations
     url: /security/cloud_security_management/misconfigurations/findings
     parent: cspm
@@ -4958,7 +5043,7 @@ main:
     identifier: rum_error_tracking_mobile
     weight: 1103
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=rum
+    url: error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
     weight: 1104
@@ -5113,6 +5198,11 @@ main:
     url: account_management/teams/
     parent: account_management
     weight: 7
+  - name: Team Management
+    identifier: account_management_teams_management
+    url: account_management/teams/manage/
+    parent: account_management_teams
+    weight: 701
   - name: Multi-Factor Authentication
     identifier: account_management_mfa
     url: account_management/multi-factor_authentication/
@@ -5153,6 +5243,10 @@ main:
     url: account_management/billing/
     parent: account_management
     weight: 11
+  - name: Product Allotments
+    url: account_management/billing/product_allotments
+    parent: account_management_billing
+    weight: 5
   - name: Multi-org Accounts
     identifier: account_management_multi_org_accounts
     url: account_management/multi_organization/
@@ -7793,6 +7887,45 @@ api:
     url: /api/latest/service-level-objectives/
     identifier: service-level-objectives
     generated: true
+  - name: Get SLO report status
+    url: '#get-slo-report-status'
+    identifier: service-level-objectives-get-slo-report-status
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSLOReportJobStatus
+      unstable:
+        - v2
+      order: 2
+  - name: Get SLO report
+    url: '#get-slo-report'
+    identifier: service-level-objectives-get-slo-report
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSLOReport
+      unstable:
+        - v2
+      order: 3
+  - name: Create a new SLO report
+    url: '#create-a-new-slo-report'
+    identifier: service-level-objectives-create-a-new-slo-report
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSLOReportJob
+      unstable:
+        - v2
+      order: 1
   - name: Get an SLO's history
     url: '#get-an-slos-history'
     identifier: service-level-objectives-get-an-slos-history

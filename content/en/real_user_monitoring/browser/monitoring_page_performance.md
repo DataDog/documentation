@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-RUM view events collect extensive performance metrics for every page view. Monitor your application's pageviews and explore performance metrics in dashboards and the RUM Explorer.
+RUM view events collect extensive performance metrics for every pageview. Monitor your application's pageviews and explore performance metrics in dashboards and the RUM Explorer.
 
 {{< img src="real_user_monitoring/browser/waterfall-4.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
 
