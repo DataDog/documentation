@@ -14,6 +14,8 @@ As your infrastructure and applications grow, so does your log volume and the co
 - Dedupe: Drop duplicate copies of your logs, for example, due to retries because of network issues.
 - Remap: Add, drop, or rename a field in your logs.
 
+{{< img src="observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
+
 Select a log source to get started:
 
 - [Splunk HTTP Event Collector (HEC)][1]
