@@ -14,7 +14,7 @@ further_reading:
 <div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Datadog uses a graph processing framework to map relationships between cloud resources to determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework. 
+Datadog uses a graph processing framework to map relationships between cloud resources to determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework.
 
 For more information on network reachability, see the [AWS documentation][34] and the [AWS Network Reachability Analyser][35]. Currently, the `Is Publicly Accessible` facet is only available for AWS resources.
 
@@ -37,7 +37,7 @@ The following diagrams show how related resources are used to determine whether 
 
 {{< img src="security/cloud_security_management/guide/public_accessibility_relationships_gcp.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility for Google Cloud" width="50%">}}
 
-## AWS public accessibility logic by resource 
+## AWS public accessibility logic by resource
 
 ### Amazon S3 bucket
 
@@ -152,7 +152,7 @@ See [Authorize inbound traffic for your Linux instances][19] for more informatio
 
 ### Amazon Elasticsearch Domain
 
-An [Elasticsearch Domain][22] (`aws_elasticsearch_domain`) is considered publicly accessible if: 
+An [Elasticsearch Domain][22] (`aws_elasticsearch_domain`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -169,7 +169,7 @@ A [Machine Image][25] (`aws_ami`) is considered publicly accessible if:
 |It is customer-owned, which means it does not have an aliased owner (either `amazon` or `aws-marketplace` in the account field).|Public AMIs owned by verified providers (either Amazon or verified partners) have an aliased owner, which appears as `amazon` or `aws-marketplace` in the account field. See [Find a shared AMI][26] in the AWS docs.|
 |Its image is set to `public`, meaning that the launch permissions for the image are public.|By modifying the `launchPermission` property of an AMI, you can make the AMI public (which grants launch permissions to all AWS accounts), or share it with only the AWS accounts that you specify.|
 
-See [Make an AMI public][27] for an explanation of how to make an AMI public or private. 
+See [Make an AMI public][27] for an explanation of how to make an AMI public or private.
 
 ### Amazon EBS snapshots
 
@@ -201,6 +201,16 @@ An [SQS queue][32] (`aws_sqs_queue`) is considered publicly accessible if:
 |The queue has a policy that allows any principal (principal set to `"*"`) to perform actions unconditionally (`statement_has_condition` set to `false`).|This setting makes the queue accessible to everyone in the world or to any authenticated AWS user.|
 
 See [Amazon SQS security best practices][33] for more information about public SQS queues.
+
+### AWS Lambda function
+
+A [Lambda function][58] (`aws_lambda_function`) is considered publicly accessible if:
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|The function has a policy that allows any principal (`principal_policy` or `principal_aws`) set to `"*"`. |This setting makes the function accessible to everyone in the world or to any authenticated AWS user.|
+
+See [Best practices for working with AWS Lambda function][59] for more information about public Lambda functions.
 
 ## Azure public accessibility logic by resource
 
@@ -250,6 +260,17 @@ A Storage blob container (`azure_storage_blob_container`) is considered publicly
 |The storage blob container is part of a storage account that does not explicitly block public access. | When a Storage Account doesn't explicitly block public access, Storage Blob Containers inside it can be made public. |
 
 To learn more about disallowing blob public access on Azure Storage accounts, see [Choose to allow or disallow blob public access on Azure Storage accounts][46].
+
+### Azure Kubernetes Service (AKS) cluster
+
+An [AKS cluster][60] (`azure_aks_cluster`) is considered publicly accessible if:
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|`enable_private_cluster` is set to `false` in the cluster's configuration.|This setting makes the cluster publicly accessible when combined with an open public CIDR. |
+|The cluster's `authorized_ip_ranges` contains an open CIDR block (`"0.0.0.0/0"`) or is unset.|An open CIDR block means anyone on the internet can access the endpoint.|
+
+See [AKS best practices][61] for more information on public AKS clusters.
 
 ## Google Cloud Public accessibility logic by resource
 
@@ -359,3 +380,7 @@ Explore more information about making storage buckets public [here][57].
 [55]: https://cloud.google.com/storage/docs/public-access-prevention
 [56]: https://cloud.google.com/iam/docs/understanding-roles#cloud-storage-roles
 [57]: https://cloud.google.com/storage/docs/access-control/making-data-public
+[58]: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+[59]: https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html
+[60]: https://learn.microsoft.com/en-us/azure/aks/intro-kubernetes
+[61]: https://learn.microsoft.com/en-us/azure/aks/best-practices
