@@ -289,7 +289,7 @@ Timestamp: 2024-01-22 15:51:24.218 +0000 UTC
 Value: 25
 ```
 
-## Example App
+## Example app
 
 Please refer to the following [example application][6] which demonstrates the configurations discussed in this documentation. This example application comprises of a producer, consumer, broker and zookeeper instance. It demonstrates using the kafka metrics receiver, JMX Receiver and/or JMX Metrics Gatherer.
 
