@@ -151,6 +151,26 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
+[2]: /network_monitoring/devices/snmp_metrics/#autodiscovery
+[3]: https://app.datadoghq.com/devices
+[4]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
+[5]: https://app.datadoghq.com/dash/integration/30417/interface-performance
+[6]: /monitors/types/metric/
+[7]: /integrations/meraki/
+[8]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
+[9]: /network_monitoring/devices/profiles/
+[10]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com.yaml
+[11]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/tp-link.yaml
+[12]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/a10.yaml
+[13]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/alcatel-lucent.yaml
+[14]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/anue.yaml
+[15]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc.yaml
+[16]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/apc_ups.yaml
+[17]: https://docs.datadoghq.com/integrations/snmp_arista/
+[18]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/arista.yaml
+[19]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_arista.yaml
+[20]: https://docs.datadoghq.com/integrations/snmp_aruba/
 [21]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-switch.yaml
 [22]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_aruba-base.yaml
 [23]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-access-point.yaml
@@ -229,7 +249,6 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [96]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nvidia.yaml
 [97]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/omron-cj-ethernet-ip.yaml
 [98]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_opengear.yaml
-[222]:https://docs.datadoghq.com/integrations/pan_firewall/
 [100]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto.yaml 
 [101]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_palo-alto.yaml
 [102]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/peplink.yaml
@@ -252,26 +271,6 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [119]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/western-digital-mycloud-ex2-ultra.yaml
 [120]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zebra-printer.yaml
 [121]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zyxel-switch.yaml
-[1]: /network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
-[2]: /network_monitoring/devices/snmp_metrics/#autodiscovery
-[3]: https://app.datadoghq.com/devices
-[4]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
-[5]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[6]: /monitors/types/metric/
-[7]: /integrations/meraki/
-[8]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
-[9]: /network_monitoring/devices/profiles/
-[10]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com.yaml
-[11]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/tp-link.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/a10.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/alcatel-lucent.yaml
-[14]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/anue.yaml
-[15]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc.yaml
-[16]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/apc_ups.yaml
-[17]: https://docs.datadoghq.com/integrations/snmp_arista/
-[18]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/arista.yaml
-[19]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_arista.yaml
-[20]: https://docs.datadoghq.com/integrations/snmp_aruba/
 [200]: https://docs.datadoghq.com/integrations/crest_data_systems_barracuda_waf/
 [201]: https://docs.datadoghq.com/integrations/snmp_chatsworth_products/
 [202]: https://docs.datadoghq.com/integrations/snmp_cisco/
@@ -285,3 +284,4 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [210]: https://docs.datadoghq.com/integrations/snmp_juniper/
 [211]: https://docs.datadoghq.com/integrations/pan_firewall/
 [212]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
+[222]:https://docs.datadoghq.com/integrations/pan_firewall/
