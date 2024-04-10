@@ -630,6 +630,11 @@ main:
     identifier: otel_batch_memory
     parent: otel_collector_configuration
     weight: 3038
+  - name: Kafka Metrics
+    url: opentelemetry/integrations/kafka_metrics/
+    identifier: otel_gs_kafka_metrics
+    parent: otel_integrations
+    weight: 3039
   - name: Schema and Semantics
     url: opentelemetry/schema_semantics/
     identifier: otel_schema
