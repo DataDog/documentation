@@ -411,10 +411,10 @@ Use template variables to customize your monitor notifications. The built-in var
 | `{{warn_recovery_threshold}}`        | The value that recovered the monitor from its `WARN` state.                   |
 | `{{ok_threshold}}`                   | The value that recovered the Service Check monitor.                           |
 | `{{comparator}}`                     | The relational value set in the monitor's alert conditions.                   |
-| `{{first_triggered_at}}`<br>*See note below*         | The UTC date and time when the monitor first triggered.                       |
-| `{{first_triggered_at_epoch}}`<br>*See note below*   | The UTC date and time when the monitor first triggered in epoch milliseconds. |
-| `{{last_triggered_at}}`<br>*See note below*          | The UTC date and time when the monitor last triggered.                        |
-| `{{last_triggered_at_epoch}}`<br>*See note below*    | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
+| `{{first_triggered_at}}`<br>*See section below*         | The UTC date and time when the monitor first triggered.                       |
+| `{{first_triggered_at_epoch}}`<br>*See section below*   | The UTC date and time when the monitor first triggered in epoch milliseconds. |
+| `{{last_triggered_at}}`<br>*See section below*          | The UTC date and time when the monitor last triggered.                        |
+| `{{last_triggered_at_epoch}}`<br>*See section below*    | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
 | `{{triggered_duration_sec}}`         | The number of seconds the monitor has been in a triggered state.              |
 
 ### Triggered variables
@@ -424,6 +424,15 @@ Use template variables to customize your monitor notifications. The built-in var
  `{{first_triggered_at}}` is set when the monitor group goes from `OK` to a non-`OK` state or when a new group appears in a non-`OK` state. `{{last_triggered_at}}` gets set when the monitor group goes to a non-`OK` state independently from its previous state (including `WARN` → `CRIT`, `CRIT` → `WARN`, etc.). `{{last_triggered_at}}` additionally is set when a new group appears in a non-`OK` state. The difference is that `{{last_triggered_at}}` is independent from its previous state.
 
  {{< img src="monitors/notifications/triggered_variables.png" alt="Showing difference between first_triggered and last_triggered" style="width:90%;">}}
+
+**Example**: When the monitor transitions from `OK` → `WARN`, the values of `{{first_triggered_at}}` and `{{last_triggered_at}}` will both have timestamp A. The table below shows the other values until the monitor recovers.
+
+| Transition         | `{{first_triggered_at}}` Timestamp           | `{{last_triggered_at}}` Timestamp            |
+|------------------  |--------------------------------------------  |--------------------------------------------  |
+| `OK` → `WARN`      | A                                            | A                                            |
+| `WARN` → `CRIT`    | A                                            | B                                            |
+| `CRIT` → `NO DATA` | A                                            | C                                            |
+| `NO DATA` → `OK`   | A                                            | C                                            |
 
 ### Evaluation
 
