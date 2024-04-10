@@ -291,7 +291,7 @@ Value: 25
 
 ## Example app
 
-Please refer to the following [example application][6] which demonstrates the configurations discussed in this documentation. This example application comprises of a producer, consumer, broker and zookeeper instance. It demonstrates using the kafka metrics receiver, JMX Receiver and/or JMX Metrics Gatherer.
+Please see the following [example application][6] which demonstrates the configurations discussed in this documentation. This example application is comprised of a producer, consumer, broker and zookeeper instance. It demonstrates using the Kafka metrics receiver, JMX Receiver and/or JMX Metrics Gatherer.
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkametricsreceiver
