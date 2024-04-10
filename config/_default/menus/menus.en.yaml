@@ -7899,7 +7899,7 @@ api:
         - GetSLOReportJobStatus
       unstable:
         - v2
-      order: 2
+      order: 102
   - name: Get SLO report
     url: '#get-slo-report'
     identifier: service-level-objectives-get-slo-report
@@ -7912,7 +7912,7 @@ api:
         - GetSLOReport
       unstable:
         - v2
-      order: 3
+      order: 103
   - name: Create a new SLO report
     url: '#create-a-new-slo-report'
     identifier: service-level-objectives-create-a-new-slo-report
@@ -7925,7 +7925,7 @@ api:
         - CreateSLOReportJob
       unstable:
         - v2
-      order: 1
+      order: 101
   - name: Get an SLO's history
     url: '#get-an-slos-history'
     identifier: service-level-objectives-get-an-slos-history

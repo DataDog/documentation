@@ -36082,7 +36082,7 @@ paths:
               {{ timestamp(\"now - 21d\") }},\n      \"to_ts\":  {{ timestamp(\"now\")
               }}\n    }\n  }\n}"
           step: there is a valid "report" in the system
-      x-menu-order: 1
+      x-menu-order: 101
       x-undo:
         type: safe
       x-unstable: '**Note**: This feature is in private beta. To request access, use
@@ -36134,7 +36134,7 @@ paths:
       summary: Get SLO report
       tags:
       - Service Level Objectives
-      x-menu-order: 3
+      x-menu-order: 103
       x-undo:
         type: safe
       x-unstable: '**Note**: This feature is in private beta. To request access, use
@@ -36181,7 +36181,7 @@ paths:
       summary: Get SLO report status
       tags:
       - Service Level Objectives
-      x-menu-order: 2
+      x-menu-order: 102
       x-undo:
         type: safe
       x-unstable: '**Note**: This feature is in private beta. To request access, use
