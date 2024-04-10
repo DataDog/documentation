@@ -9,6 +9,8 @@ To avoid these issues, Cloudcraft recommends that you use the **Filtered layout*
 
 Building smaller diagrams makes managing them much easier. It also gives viewers more control over how they ingest information.
 
+<div class="alert alert-info">If you are using Cloudcraft's New Live Experience, see this documentation: <a href="https://docs.datadoghq.com/cloudcraft/getting-started/crafting-better-diagrams/" title="Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering">Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering</a>.</div>
+
 ## Search patterns
 
 {{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/search-patterns.png" alt="Search patterns being used in Cloudcraft." responsive="true" style="width:100%;">}}
