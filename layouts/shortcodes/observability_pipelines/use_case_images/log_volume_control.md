@@ -1,1 +1,1 @@
-<img src="/images/observability_pipelines/use_cases/log_volume_control.png" alt="Alt text" width="100%" style="center">
+<img src="/images/observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for the log volume control use case" width="100%" style="center">

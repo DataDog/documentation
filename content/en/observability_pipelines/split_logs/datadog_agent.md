@@ -68,6 +68,8 @@ Enter the following information based on your selected logs destination.
 
 {{% observability_pipelines/processors/intro %}}
 
+{{% observability_pipelines/processor_images/general_processors %}}
+
 {{% observability_pipelines/processors/filter_syntax %}}
 
 {{% observability_pipelines/processors/add_processors %}}

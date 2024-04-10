@@ -1,1 +1,1 @@
-<img src="/images/observability_pipelines/use_cases/archive_logs.png" alt="Alt text" width="100%" style="center">
+<img src="/images/observability_pipelines/use_cases/archive_logs.png" alt="The log sources, processors, and destinations available for the archive logs to Datadog Archives use case" width="100%" style="center">
