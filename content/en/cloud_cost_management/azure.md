@@ -56,7 +56,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-   If you are using the [Improved exports experience][8], then select the following Export details:
+   If you are using the [improved exports experience][8], then select the following Export details:
     - Type of data: **Cost and usage details (actual)** THEN **Cost and usage details (amortized)**
     - Dataset version: **2020-01-01**
     - Frequency: **Daily export of month-to-date costs**
