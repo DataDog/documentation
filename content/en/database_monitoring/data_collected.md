@@ -22,6 +22,7 @@ The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
 - **Postgres**: `postgresql.queries.*`
 - **SQL Server**: `sqlserver.queries.*`
+- **Oracle**: `oracle.queries.*`
 
 ## Normalized queries
 

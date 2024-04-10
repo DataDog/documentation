@@ -24,9 +24,7 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 
 The Datadog Profiler requires at least PHP 7.1, on 64-bit Linux.
 
-The following are **not** supported:
-- PHP ZTS builds
-- PHP debug builds
+PHP ZTS builds are supported since `dd-trace-php` version 0.99+, while PHP debug builds are **not** supported.
 
 {{< tabs >}}
 {{% tab "GNU C Linux" %}}
@@ -75,16 +73,17 @@ To begin profiling applications:
 4. Configure the profiler using config mode through the `datadog-setup.php`:
 
     ```
-    # `datadog.profiling_enabled` is not required for v0.82.0+.
-    php datadog-setup.php config set -d datadog.profiling.    enabled=1
-    
-    php datadog-setup.php config set -d datadog.service=app-name     \
+    # `datadog.profiling.enabled` is not required for v0.82.0+.
+    php datadog-setup.php config set -d datadog.profiling.enabled=1
+
+    php datadog-setup.php config set \
+      -d datadog.service=app-name \
       -d datadog.env=prod \
       -d datadog.version=1.3.2
-    
+
     php hello.php
     ```
-    
+
     Apache, PHP-FPM and other servers require a restart after changing the INI
 settings.
 

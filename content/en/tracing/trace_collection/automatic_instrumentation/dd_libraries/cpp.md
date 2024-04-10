@@ -179,9 +179,9 @@ If needed, configure the tracing library to send application performance telemet
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup/envoy/
-[2]: /tracing/setup/nginx/
-[3]: /tracing/compatibility_requirements/cpp
+[1]: /tracing/trace_collection/proxy_setup/?tab=envoy
+[2]: /tracing/trace_collection/proxy_setup/?tab=nginx
+[3]: /tracing/trace_collection/compatibility/cpp/
 [4]: https://app.datadoghq.com/apm/service-setup
 [5]: /tracing/trace_collection/library_config/cpp/
 [6]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

@@ -12242,7 +12242,7 @@ components:
         interval:
           default: null
           description: If the type of the metric is rate or count, define the corresponding
-            interval.
+            interval in seconds.
           example: 20
           format: int64
           nullable: true
@@ -16100,6 +16100,11 @@ components:
           maximum: 65535
           minimum: 1
           type: integer
+        files:
+          description: Files to be used as part of the request in the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsTestRequestBodyFile'
+          type: array
         follow_redirects:
           description: Specifies whether or not the request follows redirects.
           type: boolean
@@ -16166,6 +16171,32 @@ components:
           example: https://example.com
           type: string
       type: object
+    SyntheticsTestRequestBodyFile:
+      description: Object describing a file to be used as part of the request in the
+        test.
+      properties:
+        bucketKey:
+          description: Bucket key of the file.
+          type: string
+        content:
+          description: Content of the file.
+          maxLength: 3145728
+          type: string
+        name:
+          description: Name of the file.
+          maxLength: 1500
+          type: string
+        size:
+          description: Size of the file.
+          format: int64
+          maximum: 3145728
+          minimum: 1
+          type: integer
+        type:
+          description: Type of the file.
+          maxLength: 1500
+          type: string
+      type: object
     SyntheticsTestRequestBodyType:
       description: Type of the request body.
       enum:
@@ -16175,6 +16206,8 @@ components:
       - text/html
       - application/x-www-form-urlencoded
       - graphql
+      - application/octet-stream
+      - multipart/form-data
       example: text/plain
       type: string
       x-enum-varnames:
@@ -16184,6 +16217,8 @@ components:
       - TEXT_HTML
       - APPLICATION_X_WWW_FORM_URLENCODED
       - GRAPHQL
+      - APPLICATION_OCTET_STREAM
+      - MULTIPART_FORM_DATA
     SyntheticsTestRequestCertificate:
       description: Client certificate to use when performing the test request.
       properties:

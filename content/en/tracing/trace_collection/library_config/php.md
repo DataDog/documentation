@@ -608,7 +608,7 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[3]: /tracing/setup/nginx/#nginx-and-fastcgi
+[3]: /tracing/trace_collection/proxy_setup/?tab=nginx
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/
