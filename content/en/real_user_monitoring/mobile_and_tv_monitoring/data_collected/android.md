@@ -42,7 +42,8 @@ During initialization, the RUM Android SDK creates a view called "ApplicationLau
 
 The ApplicationLaunch view includes any logs, actions, and resources created before your first call to `startView`. Use the duration of this view to determine time to first view. This view has an action, `application_start`, with a duration equal to the amount of time from process start until the call to `applicationDidBecomeActive`.
 
-In cases where Android decides to [prewarm your application][4], the ApplicationLaunch view instead starts when the RUM Android SDK is initialized, and the `application_start` event does not have a duration.
+- In *Android 7.0* and above, this view captures the period before any application code is executed (right before `Application.onCreate`) and when the first RUM event is recorded.
+- In versions before * Android 7.0*, the view captures the period between the `RumFeature` class loads and when the first RUM event is recorded.
 
 ## Default attributes
 
