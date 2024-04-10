@@ -12,8 +12,9 @@ concurrency:
 # 1. Set ACTIVE_FREEZE to "true".
 # 2. Change codefreeze-check-unfrozen to codefreeze-check-YYYYmmdd format `echo "check-$(date -u +'%Y%m%d')"`.
 # 3. Push the changes to the Github repo and open a PR.
-# 4. In the Github repo settings, add codefreeze-check-YYYYmmdd as a required status check for the master branch.
-# 5. Merge the PR.
+# 4. Merge the PR.
+# 5. In the Github repo settings, add codefreeze-check-YYYYmmdd as a required status check for the master branch.
+
 
 ### To disable a freeze:
 # 1. Set ACTIVE_FREEZE to "false".
@@ -34,13 +35,13 @@ on:
       - master
 
 env:
-  ACTIVE_FREEZE: "true"
+  ACTIVE_FREEZE: "false"
   # toggle to true like below to enable + change the job unique name and add a required branch protection!
   # ACTIVE_FREEZE: "true"
 
 jobs:
   # during an unfrozen state leave as the unfrozen name so it is more obvious
-  codefreeze-check-20240410:
+  codefreeze-check-unfrozen:
   # NOTE: update this date for every new freeze, update the protected branches to require the new name
   # codefreeze-check-incident-19254:
     runs-on: ubuntu-latest
