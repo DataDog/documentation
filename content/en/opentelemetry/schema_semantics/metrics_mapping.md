@@ -148,7 +148,7 @@ The following table shows what Datadog container metric names are associated wit
 | jvm.gc.collections.elapsed{name:Copy && name:PS Scavenge && name:ParNew && name:G1 Young Generation} | jvm.gc.min&&_collection_time | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge |
 | jvm.gc.collections.elapsed{name:MarkSweepCompact && name:PS MarkSweep &&name:ConcurrentMarkSweep &&name:G1 Mixed Generation && G1 Old Generation && Shenandoah Cycles && ZGC} | jvm.gc.major_collection_time | JMX Receiver / JMX Metrics Gatherer {target_system:jvm} | Compute rate per second and submitted as Gauge
 
-**Note:** In Datadog `-` gets translated to `_`. For 8 of the metrics above (the ones prepended by `otel.`), this means that the OTel metric name and the DD metric name are the same (e.g. `kafka.producer.request-rate` and `kafka.producer.request_rate`). In order to avoid double counting for these metrics, we then prepend the OTel metric with `otel.`.
+**Note:** In Datadog `-` gets translated to `_`. For the metrics prepended by `otel.`, this means that the OTel metric name and the Datadog metric name are the same (for example, `kafka.producer.request-rate` and `kafka.producer.request_rate`). In order to avoid double counting for these metrics, the OTel metric is then prepended with `otel.`.
 
 ## Further reading
 
