@@ -116,7 +116,7 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
-{{% tab "Remap" %}}
+{{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
 
