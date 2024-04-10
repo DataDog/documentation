@@ -75,6 +75,10 @@ Create [search queries and visualizations][11] for your Synthetic test runs or b
 
 After you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][14] in your CI/CD pipelines. See [Testing Local and Staging Environments][17] to use Continuous Testing in environments that are not publicly available or production, for example, running tests against your local development environment or a staging environment within a private network. Then, start exploring details about your batch runs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
 
+{{< learning-center-callout header="Synthetic tests in a CI/CD Pipeline in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn how to incorporate Datadog's synthetic tests into a CI/CD pipeline.
+{{< /learning-center-callout >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
