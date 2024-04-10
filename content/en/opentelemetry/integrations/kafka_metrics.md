@@ -20,7 +20,7 @@ The [Kafka metrics receiver][1], [JMX Receiver][2]/ [JMX Metrics Gatherer][3] al
 Please note that the [JMX Receiver][2] and [JMX Metrics Gatherer][3] should be considered as replacements. They collect the same set of metrics ([JMX Receiver][2] launches the [JMX Metrics Gatherer][3]).
 
 
-## Kafka Metrics Receiver
+## Kafka metrics receiver
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -40,7 +40,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-The kafka metrics receiver needs to be used in a collector in `deployment` mode with a single replica. This ensures that the same metric is not collected multiple times. The collector in deployment mode can then leverage the Datadog Exporter to export the metrics directly to Datadog, or leverage the OTLP exporter to forward the metrics to another collector instance. 
+The Kafka metrics receiver needs to be used in a collector in `deployment` mode with a single replica. This ensures that the same metric is not collected multiple times. The collector in deployment mode can then leverage the Datadog Exporter to export the metrics directly to Datadog, or leverage the OTLP exporter to forward the metrics to another collector instance. 
 
 Add the following lines to `values.yaml`:
 ```yaml
@@ -64,13 +64,13 @@ receivers:
 
 {{< /tabs >}}
 
-## JMX Receiver
+## JMX receiver
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
 The JMX Receiver has the following requirements:
-- JRE is available on the host in which you are running the collector.
+- JRE is available on the host where you are running the collector.
 - The JMX Metric Gatherer JAR is available on the host where you are running the collector. You can download the most recent release of the JMX Metric Gatherer JAR from the [opentelemetry-java-contrib releases page][1].
 
 Add the following in the Collector configuration:
@@ -101,7 +101,7 @@ The JMX receiver needs to be used in a collector in `deployment` mode with a sin
 
 The JMX Receiver has the following requirements:
 - JRE is available on the host in which you are running the collector.
-- The JMX Metric Gatherer JAR is available on the host in which you are running the collector. You can Download the most recent release of the JMX Metric Gatherer JAR [here][1].
+- The JMX Metric Gatherer JAR is available on the host in which you are running the collector. You can download the most recent release of the JMX Metric Gatherer JAR [here][1].
 
 Because the OTel collector default image does not meet the requirements above, a custom image needs to be built. Please refer to the Dockerfile below for an example image that contains the collector binary, JRE, and JMX Metrics Gatherer Jar.
 
@@ -236,11 +236,11 @@ CMD ["-Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://kafka:1099/jmxrmi", \
 
 {{< /tabs >}}
 
-## Log Collection
+## Log collection
 
 See [Log Collection][4] for instructions on how to collect logs using the OpenTelemetry Collector.
 
-In order to appear in the OOTB Kafka Dashboard, the kafka logs need to be tagged with `source:kafka`. In order to do so, you can use an attributes processor:
+To appear in the out-of-the-box Kafka Dashboard, the Kafka logs need to be tagged with `source:kafka`. To do this, use an attributes processor:
 
 ```yaml
 processors:
@@ -251,7 +251,7 @@ processors:
         action: insert
 ```
 
-In order to ensure this attribute only gets added to your kafka logs, you can use [include/exclude filtering][8] of the attributes processor.
+In order to ensure this attribute only gets added to your Kafka logs, use [include/exclude filtering][8] of the attributes processor.
 
 ## Data collected
 
