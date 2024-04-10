@@ -15,7 +15,7 @@ OTel Kafka Metrics Remapping is in public alpha. It is available in versions >= 
 
 {{< img src="/opentelemetry/collector_exporter/kafka_metrics.png" alt="OpenTelemetry Kafka metrics in OOTB Kafka dashboard" style="width:100%;" >}}
 
-The [kafka metrics receiver][1], [JMX Receiver][2]/ [JMX Metrics Gatherer][3] allow collecting kafka metrics and access to the out of the box [Kafka Dashboard][7] "Kafka, Zookeeper and Kafka Consumer Overview". 
+The [Kafka metrics receiver][1], [JMX Receiver][2]/ [JMX Metrics Gatherer][3] allow collecting Kafka metrics and access to the out of the box [Kafka Dashboard][7], "Kafka, Zookeeper and Kafka Consumer Overview". 
 
 Please note the the [JMX Receiver][2] and [JMX Metrics Gatherer][3] should be considered as replacements. They collect the same set of metrics ([JMX Receiver][2] launches the [JMX Metrics Gatherer][3]).
 
