@@ -99,7 +99,7 @@ The following table shows what Datadog container metric names are associated wit
 
 ## Kafka metrics
 
-| OpenTelemetry Metric | DD Metric | Source | Transform done DD Metric |
+| OpenTelemetry Metric | Datadog Metric | Source | Transform done on Datadog Metric |
 |---|---|---|---|
 | otel.kafka.producer.request-rate | kafka.producer.request_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
 | otel.kafka.producer.response-rate | kafka.producer.response_rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka-producer} | |
