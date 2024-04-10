@@ -14,10 +14,6 @@ algolia:
 <div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< learning-center-callout header="Detect, prioritize, and remediate cloud security risks with Datadog CSM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/csm-misconfigurations">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn how secure your cloud environments with CSM misconfigurations.
-{{< /learning-center-callout >}}
-
 Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
 
 ## Detect misconfigurations across your cloud resources
@@ -57,6 +53,10 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 {{< img src="security/cspm/misconfigurations_explorer.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
 
 ## Get started
+
+{{< learning-center-callout header="Detect, prioritize, and remediate cloud security risks with Datadog CSM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/csm-misconfigurations">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn how secure your cloud environments with CSM misconfigurations.
+{{< /learning-center-callout >}}
 
 {{< whatsnext >}}
   {{< nextlink href="/security/cloud_security_management/setup">}}Complete setup and configuration{{< /nextlink >}}
