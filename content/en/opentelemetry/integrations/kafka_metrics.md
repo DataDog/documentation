@@ -206,7 +206,7 @@ java -jar -Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://{KAFKA_CONSUMER_J
 
 The JMX Metric Gatherer is intended to be run as an uber jar and configured with properties from the command line. 
 
-In order to deploy this in kubernetes, you will need to build an image which contains JRE and the JMX Metrics Gatherer Jar. Please refer to the Dockerfile below for an example image that contains JRE and JMX Metrics Gatherer Jar.
+In order to deploy this in Kubernetes, you need to build an image which contains JRE and the JMX Metrics Gatherer Jar. Please see the Dockerfile below for an example image that contains JRE and JMX Metrics Gatherer Jar.
 
 Dockerfile:
 ```Dockerfile
