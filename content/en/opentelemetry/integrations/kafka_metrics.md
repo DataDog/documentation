@@ -103,7 +103,7 @@ The JMX Receiver has the following requirements:
 - JRE is available on the host in which you are running the collector.
 - The JMX Metric Gatherer JAR is available on the host in which you are running the collector. You can Download the most recent release of the JMX Metric Gatherer JAR [here][1].
 
-Because the OTel collector default image does not meet the requirements above, a custom image needs to be built. Please refer to the Dockerfile below for an example image that contains the collector binary, JRE and JMX Metrics Gatherer Jar.
+Because the OTel collector default image does not meet the requirements above, a custom image needs to be built. Please refer to the Dockerfile below for an example image that contains the collector binary, JRE, and JMX Metrics Gatherer Jar.
 
 Dockerfile:
 ```Dockerfile
