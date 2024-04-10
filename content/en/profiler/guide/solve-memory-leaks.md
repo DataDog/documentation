@@ -40,7 +40,7 @@ For now, the workflow needs:
 ## How to get started?
 
 1. Go to *APM -> Service Page* on the service you want to investigate
-2. Click on the tab *Memory Leak*:
+2. Click on the tab *Memory Leaks*:
 {{< img src="profiler/guide-memory-leak/service-page-memory-leak-entrypoint.png" alt="Memory Leak workflow entrypoint in the Service Page" style="width:100%;" >}}
 3. Follow the steps
 
