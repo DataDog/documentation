@@ -22,7 +22,7 @@ further_reading:
 ---
 
 {{< learning-center-callout header="Try Introduction to Monitoring Kubernetes in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about monitoring Kubernetes with Datadog.
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Start these hands-on labs to get up to speed with the metrics, logs, and APM traces that are specific to Kubernetes.
 {{< /learning-center-callout >}}
 
 This page describes how to set up and configure [Application Performance Monitoring (APM)][10] for your Kubernetes application.

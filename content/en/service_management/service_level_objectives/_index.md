@@ -227,7 +227,7 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 ## SLO widgets
 
 {{< learning-center-callout header="Try Create Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about building Dashboards to track SLOs.
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
 {{< /learning-center-callout >}}
 
 After creating your SLO, you can visualize the data through Dashboards and widgets. 

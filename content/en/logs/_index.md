@@ -90,7 +90,7 @@ Start exploring your ingested logs in the [Log Explorer][1].
 
 
 {{< learning-center-callout header="Try Introduction to Log Management in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn more about Datadog Log Management.
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about log collection, querying, analytics, metrics, monitoring, processing, storage, and access control.
 {{< /learning-center-callout >}}
 
 ## Further Reading
