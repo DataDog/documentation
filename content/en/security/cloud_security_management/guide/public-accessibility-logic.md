@@ -210,7 +210,7 @@ A [Lambda function][58] (`aws_lambda_function`) is considered publicly accessibl
 |--------------|-----------------|
 |The function has a policy that allows any principal (`principal_policy` or `principal_aws`) set to `"*"`. |This setting makes the function accessible to everyone in the world or to any authenticated AWS user.|
 
-See [Best practices for working with AWS Lambda function][59] for more information about public Lambda functions.
+See [Best practices for working with AWS Lambda functions][59] for more information about public Lambda functions.
 
 ## Azure public accessibility logic by resource
 
