@@ -89,7 +89,7 @@ Similar to the graphs on the Service page, Requests and Errors graphs show an ov
 
 {{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="Deployment Comparison Graphs" style="width:100%;">}}
 
-If [Continuous Profiler is enabled][5], you will also see comparisons of key performance metrics, such as CPU Time or Allocated Memory, broken down per APM resource. From there, you can pivot to the [Profile Comparison Page][6]:
+If [Continuous Profiler is enabled][5], you also see comparisons of key performance metrics, such as CPU Time or Allocated Memory, broken down per APM resource. From there, you can pivot to the [Profile Comparison Page][6]:
 
 {{< img src="tracing/deployment_tracking/DeploymentTrackingProfileComparison.png" alt="Deployment Profiling Comparison Graphs" style="width:100%;">}}
 
