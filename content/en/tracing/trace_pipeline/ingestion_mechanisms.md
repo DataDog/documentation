@@ -220,8 +220,8 @@ For .NET applications, set a global sampling rate for the library using the `DD_
 For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
-set DD_TRACE_SAMPLE_RATE=0.1
-set DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
+export DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
 <div class="alert alert-info"><strong>Beta</strong>: Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
