@@ -23,8 +23,8 @@ main:
   - name: Security
     identifier: security_platform_heading
     weight: 8000000
-  - name: UX Monitoring
-    identifier: ux_monitoring_heading
+  - name: Digital Experience
+    identifier: digital_experience_heading
     weight: 9000000
   - name: Administration
     identifier: administration_heading
@@ -4442,7 +4442,7 @@ main:
     url: synthetics/
     pre: synthetics
     identifier: synthetics
-    parent: ux_monitoring_heading
+    parent: digital_experience_heading
     weight: 50000
   - name: API Tests
     url: synthetics/api_tests/
@@ -4628,7 +4628,7 @@ main:
     url: continuous_testing/
     pre: continuous-testing
     identifier: continuous_testing
-    parent: ux_monitoring_heading
+    parent: digital_experience_heading
     weight: 60000
   - name: Local and Staging Environments
     url: /continuous_testing/environments
@@ -4702,7 +4702,7 @@ main:
     weight: 6
   - name: Mobile Application Testing
     url: mobile_app_testing/
-    parent: ux_monitoring_heading
+    parent: digital_experience_heading
     identifier: mobile_app_testing
     pre: mobile
     weight: 70000
@@ -4735,7 +4735,7 @@ main:
     url: real_user_monitoring/
     pre: rum
     identifier: rum
-    parent: ux_monitoring_heading
+    parent: digital_experience_heading
     weight: 40000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
