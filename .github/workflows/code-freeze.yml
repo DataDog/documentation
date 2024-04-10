@@ -34,13 +34,13 @@ on:
       - master
 
 env:
-  ACTIVE_FREEZE: "false"
+  ACTIVE_FREEZE: "true"
   # toggle to true like below to enable + change the job unique name and add a required branch protection!
   # ACTIVE_FREEZE: "true"
 
 jobs:
   # during an unfrozen state leave as the unfrozen name so it is more obvious
-  codefreeze-check-unfrozen:
+  codefreeze-check-20240410:
   # NOTE: update this date for every new freeze, update the protected branches to require the new name
   # codefreeze-check-incident-19254:
     runs-on: ubuntu-latest
