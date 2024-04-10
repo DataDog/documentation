@@ -36,7 +36,7 @@ To clone a rule:
 
 1. Find the rule you want to copy by doing one of the following:
    - Navigate to the [**Misconfigurations Rules**][1] page. Select a rule you want to copy to open its details page.
-   - Navigate to the [**Misconfigurations Explorer**][2]. Select a misconfiguration to open its details, then select **Edit Rule** from the **Rule** menu.
+   - Navigate to the [**Misconfigurations Explorer**][2]. Select a misconfiguration to open its details, then select **Edit Rule**.
 2. Make any changes you want for your new rule.
 3. Scroll to the bottom of the details page and click **Clone Rule**.
 
