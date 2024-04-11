@@ -423,7 +423,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
  `{{first_triggered_at}}` is set when the monitor group goes from `OK` to a non-`OK` state or when a new group appears in a non-`OK` state. `{{last_triggered_at}}` gets set when the monitor group goes to a non-`OK` state independently from its previous state (including `WARN` → `ALERT`, `ALERT` → `WARN`). Additionally, `{{last_triggered_at}}` is set when a new group appears in a non-`OK` state. The difference is that `{{last_triggered_at}}` is independent from its previous state.
 
- {{< img src="monitors/notifications/triggered_variables.png" alt="Showing difference between first_triggered and last_triggered" style="width:90%;">}}
+ {{< img src="monitors/notifications/triggered_variables.png" alt="Showing four transitions with timestamps A: 1419 OK to WARN, B: 1427 WARN to ALERT, C: 1445 ALERT to NO DATA, D: 1449 NO DATA to OK" style="width:90%;">}}
 
 **Example**: When the monitor transitions from `OK` → `WARN`, the values of `{{first_triggered_at}}` and `{{last_triggered_at}}` both have timestamp A. The table below shows the values until the monitor recovers.
 
