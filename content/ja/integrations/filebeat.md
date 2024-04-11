@@ -3,6 +3,7 @@ app_id: filebeat
 app_uuid: 50405147-1148-405a-9d81-ea48be4f613b
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: filebeat.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10127
     source_type_name: Filebeat
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -54,6 +56,7 @@ tile:
   title: Filebeat
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -63,11 +66,11 @@ Filebeat サービスからメトリクスをリアルタイムに取得して�
 - Filebeat の状態を視覚化および監視できます。
 - Filebeat のフェイルオーバーとイベントの通知を受けることができます。
 
-## セットアップ
+## 計画と使用
 
 Filebeat チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Filebeat チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -79,7 +82,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Filebeat チ�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Filebeat の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `filebeat.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル filebeat.d/conf.yaml][5] を参照してください。
 
@@ -89,26 +92,26 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Filebeat チ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `filebeat` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "filebeat" >}}
 
 
-### イベント
+### ヘルプ
 
 Filebeat チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "filebeat" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

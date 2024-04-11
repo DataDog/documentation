@@ -162,10 +162,11 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM iOS Monitoring][1].
 
-2. Enable `Trace`:
+2. Enable `RUM` with the `urlSessionTracking` option and `firstPartyHostsTracing` parameter:
     ```swift
-    Trace.enable(
-        with: .init(
+    RUM.enable(
+        with: RUM.Configuration(
+            applicationID: "<rum application id>",
             urlSessionTracking: .init(
                 firstPartyHostsTracing: .trace(
                     hosts: [
@@ -204,8 +205,9 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
      To keep 100% of backend traces:
     ```swift
-    Trace.enable(
-        with: .init(
+    RUM.enable(
+        with: RUM.Configuration(
+            applicationID: "<rum application id>",
             urlSessionTracking: .init(
                 firstPartyHostsTracing: .trace(
                     hosts: [
@@ -405,10 +407,11 @@ RUM supports several propagator types to connect resources with backends that ar
 
 1. Set up RUM to connect with APM as described above.
 
-2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hostsWithHeaders:sampleRate:)` as follows:
+2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hosts:sampleRate:)` as follows:
     ```swift
-      Trace.enable(
-          with: .init(
+      RUM.enable(
+          with: RUM.Configuration(
+              applicationID: "<rum application id>",
               urlSessionTracking: .init(
                   firstPartyHostsTracing: .traceWithHeaders(
                       hostsWithHeaders: [

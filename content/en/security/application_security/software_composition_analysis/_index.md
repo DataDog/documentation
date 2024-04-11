@@ -101,7 +101,7 @@ Code Analysis is in public beta.
 
 Software Composition Analysis contains additional capabilities to allow you to scan for vulnerabilities in your CI pipelines by using [Code Analysis][9]. With SCA for Code Analysis, you can identify vulnerable open source libraries that have been imported into your codebase.
 
-To configure vulnerabilities in your CI pipelines, navigate to [Security -> Configuration -> Application Security -> Setup][12].
+To configure vulnerabilities in your CI pipelines, navigate to [Security -> Application Security -> Settings][12].
 
 Click **Get Started** to enable Software Composition Analysis for static analysis in source code, and select and configure your CI/CD provider.
 

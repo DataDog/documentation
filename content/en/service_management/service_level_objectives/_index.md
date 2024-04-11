@@ -30,8 +30,6 @@ further_reading:
   text: "Create and manage SLOs with Terraform"
 ---
 
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/382481078/rendition/1080p/file.mp4?loc=external&signature=f5a81ca1c44d9c1c2cfcbd23c2b6b4f89914027ff344fb0a9f8dc6b9a1d141aa" poster="/images/poster/slo.png" >}}
-
 {{< jqmath-vanilla >}}
 
 <br />
@@ -288,7 +286,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 
 The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view.png" alt="SLO calendar view" >}}
+{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO calendar view" >}}
 
 ## SLO CSV export
 
