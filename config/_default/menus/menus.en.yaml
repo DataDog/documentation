@@ -1870,7 +1870,7 @@ main:
     identifier: event_correlation
     parent: events
     weight: 4
-  - name: Configurate Correlation
+  - name: Configuration
     url: service_management/events/correlation/configuration
     identifier: event_correlation_configure
     parent: event_correlation
