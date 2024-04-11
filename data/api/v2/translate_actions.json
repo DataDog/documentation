@@ -72,7 +72,7 @@
     "summary": "List all APM retention filters"
   },
   "CreateApmRetentionFilter": {
-    "description": "Create a retention filter to index spans in your organization.\nReturns the retention filter definition when the request is successful.",
+    "description": "Create a retention filter to index spans in your organization.\nReturns the retention filter definition when the request is successful.\n\nDefault filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor cannot be created.",
     "summary": "Create a retention filter",
     "request_description": "The definition of the new retention filter.",
     "request_schema_description": "The body of the retention filter to be created."
@@ -84,7 +84,7 @@
     "request_schema_description": "A list of retention filters to reorder."
   },
   "DeleteApmRetentionFilter": {
-    "description": "Delete a specific retention filter from your organization.",
+    "description": "Delete a specific retention filter from your organization.\n\nDefault filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor cannot be deleted.",
     "summary": "Delete a retention filter"
   },
   "GetApmRetentionFilter": {
@@ -92,7 +92,7 @@
     "summary": "Get a given APM retention filter"
   },
   "UpdateApmRetentionFilter": {
-    "description": "Update a retention filter from your organization.",
+    "description": "Update a retention filter from your organization.\n\nDefault filters (filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor) cannot be renamed or removed.",
     "summary": "Update a retention filter",
     "request_description": "The updated definition of the retention filter.",
     "request_schema_description": "The body of the retention filter to be updated."
