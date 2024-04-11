@@ -46,13 +46,25 @@ Project handles can be used in monitors to automatically create cases. In the mo
 1. For case status and priority, select which values they map to on the Jira side. 
 1. Save changes.
 
+**Note**: A case can only be synced with one external resource at a time, per project. To enable Jira syncing, ServiceNow automatic creation and syncing must be disabled.
+
 ### ServiceNow
 
 1. Configure the ServiceNow integration by following the [ITOM and ITSM setup instructions][2]. 
 1. In Case Management project settings, enable ServiceNow for manual ServiceNow incident creation from the project. 
 1. Select a ServiceNow instance and assignment group. 
 1. You can opt into the automatic creation of a ServiceNow incident for each case created in the project.
+1. For the following attributes—status, comments—select one of the options below:
+  | Option     | Description    | 
+  | ---  | ----------- | 
+  |Once to ServiceNow at case creation|The field syncs from Case Management to ServiceNow only at the time the case is created. Subsequent changes are not reflected on either side.|
+  |All updates to ServiceNow |Changes in Case Management are reflected in ServiceNow, but changes in ServiceNow are not reflected in Case Management.|
+  |Two-way sync|Changes in Case Management are reflected in ServiceNow, and vice versa|
+  |Don't sync|The field does not sync to ServiceNow.|
+1. Select ServiceNow state values that Case Management status values should map to.
 1. Save changes.
+
+**Note**: A case can only be synced with one external resource at a time, per project. To enable ServiceNow syncing, Jira automatic creation and syncing must be disabled.
 
 ## Further Reading
 
