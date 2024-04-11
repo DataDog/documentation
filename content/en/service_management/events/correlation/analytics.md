@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Keep track of how your teams workload is doing by charting and creating dashboards for Events/Alerts and Cases. 
+Keep track of your teams' workload by charting and creating dashboards for events, alerts, and cases. 
 
 
 ## Case Metrics
