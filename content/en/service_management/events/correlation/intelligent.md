@@ -23,7 +23,7 @@ To get started:
 
 Create the views to represent how you like your team to triage, for instance, perhaps one for the database team, and another for the mobile. 
 
-### Reciving your first case
+## Reciving your first case
 
 When you navigate to Case Management you will see a project called **Event Management - Intelligent Correlation** within it is where you see the views which you created before, and also the cases. 
 
