@@ -56,10 +56,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-  If you are using the [improved exports experience][8], then select the following Export details:
-   - Type of data: **Cost and usage details (actual)** THEN **Cost and usage details (amortized)**
-   - Dataset version: **2020-01-01**
-   - Frequency: **Daily export of month-to-date costs**
+At this time, there is no support for creating cost exports using the [improved exports experience][8].
+To disable it, deselect the "Exports (preview)" option in the Cost Management labs [preview features][9].
 
 5. Choose a storage account, container, and directory for the exports.
     - **Note:** Do not use special characters like `.` in these fields.
@@ -152,3 +150,4 @@ You can create historical data in your storage account using the [Microsoft API]
 [6]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
 [7]: https://support.microsoft.com
 [8]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
+[9]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-preview-features-cost-management-labs#explore-preview-features
