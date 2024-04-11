@@ -25,10 +25,6 @@ further_reading:
 <div class="alert alert-warning">Event Management is not supported for this site.</div>
 {{< /site-region >}}
 
-{{< callout url="https://app.datadoghq.com/event/configuration/quick-start" btn_hidden="false" header="Join the Beta!">}}
-Join the Event Management beta to correlate Datadog and third party alerts, change events into actionable insights, centralize investigations, and manage critical issues faster as a team. Read the <a href="https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#event-management">announcement</a> to learn more.
-{{< /callout >}}
-
 {{< img src="service_management/events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
 
 ## Overview
