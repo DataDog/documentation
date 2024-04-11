@@ -12,6 +12,9 @@ further_reading:
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about supported frameworks and industry benchmarks"
+- link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
+  tag: "Blog"
+  text: "Secure your Windows workloads with Datadog Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}

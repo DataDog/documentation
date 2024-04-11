@@ -60,7 +60,8 @@ The following Datadog tracing libraries are supported:
 Datadog uses the distributed tracing protocol and sets up the following HTTP headers:
 
 
-
+{{< tabs >}}
+{{% tab "Datadog" %}}
 `x-datadog-trace-id`
 : Generated from the Synthetic Monitoring backend. Allows Datadog to link the trace with the test result.
 
@@ -70,11 +71,23 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-origin: synthetics`
 : To identify generated traces from your API tests. Spans from these traces are tagged with `ingestion_reason:synthetics`.
 
-`x-datadog-origin: synthetics-browser` 
+`x-datadog-origin: synthetics-browser`
 : To identify generated traces from your Browser tests. These traces are tagged with `ingestion_reason:synthetics-browser`.
 
 `x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
+{{% /tab %}}
+{{% tab "W3C Trace Context" %}}
+`traceparent: [version]-[trace id]-[parent id]-[trace flags]`
+: `version`: The specification assumes version is set to `00`.
+: `trace id`: 128 bits trace ID, hexadecimal on 32 characters. The source trace ID is 64 bits to maintain compatibility with APM.
+: `parent id`: 64 bits span ID, hexadecimal on 16 characters.
+: `trace flags`: Sampled (`01`) or not sampled (`00`)
+
+**Example**:
+: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+{{% /tab %}}
+{{< /tabs >}}
 
 ### How long are traces retained?
 

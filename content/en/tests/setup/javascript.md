@@ -733,6 +733,9 @@ Jest's [test.concurrent][17] is not supported.
 ### Jest's `--forceExit`
 Jest's [--forceExit][21] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
+### Mocha's `--exit`
+Mocha's [--exit][22] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
+
 ## Best practices
 
 Follow these practices to take full advantage of the testing framework and CI Visibility.
@@ -797,3 +800,4 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: /getting_started/tagging/unified_service_tagging
 [21]: https://jestjs.io/docs/cli#--forceexit
+[22]: https://mochajs.org/#-exit
