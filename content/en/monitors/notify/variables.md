@@ -427,7 +427,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
 **Example**: When the monitor transitions from `OK` → `WARN`, the values of `{{first_triggered_at}}` and `{{last_triggered_at}}` both have timestamp A. The table below shows the values until the monitor recovers.
 
-| Transition         | first_triggered_at Timestamp     | last_triggered_at Timestamp      | triggered_duration_sec           |
+| Transition         | first_triggered_at     | last_triggered_at      | triggered_duration_sec           |
 |------------------  |--------------------------------  |--------------------------------  |--------------------------------  |
 | `OK` → `WARN`      | A                                | A                                | 0                                |
 | `WARN` → `ALERT`   | A                                | B                                | B - A                            |
