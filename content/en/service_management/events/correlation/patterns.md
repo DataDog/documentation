@@ -28,10 +28,7 @@ To create or adjust a pattern-based correlation:
    
    Add grouping tags
    : in addition to grouping by out-of-the-box tags like `Service` or `Env`, you can also group by a custom tag.
-1. Under **Advanced correlation logic**:
-   
-
-1.  You can specify the minimum number of correlated events it takes to create a case and update the timeframe
+1. Under **Advanced correlation logic**, you can specify the minimum number of correlated events it takes to create a case and update the timeframe.
 
     **Timeframe explanation**
 
