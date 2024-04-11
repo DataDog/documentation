@@ -17,7 +17,7 @@ Keep track of your teams' workload by charting and creating dashboards for event
 {{< img src="service_management/events/correlation/case_analytics.png" alt="Configure case analytics" style="width:100%;" >}}
 
 
-You can query these analytics in a variety of graph widgets in both Dashboards and Notebooks to analyze team productivity and identify patterns in issues. To get started choose Cases in the data source dropdown, when you go to add a new widget. 
+You can query Case analytics in a variety of graph widgets to analyze team productivity and identify patterns in issues. Display analytic graphs on both Dashboards and Notebooks. To get started, in the widget configuration, select **Cases** in the data source dropdown under the *Graph your data* section. 
 
 The following widgets support Case Analytics:
 
