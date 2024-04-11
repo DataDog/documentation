@@ -1728,6 +1728,11 @@ main:
     parent: error_tracking
     identifier: error_tracking_suspect_commits
     weight: 3
+  - name: Include Markdown Test
+    url: error_tracking/shortcode_example
+    parent: error_tracking
+    identifier: error_tracking_include_markdown
+    weight: 4
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
