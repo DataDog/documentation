@@ -98,7 +98,7 @@ For installation steps, see the [Agent installation instructions][8].
 
 Download the wallet zip file from the Oracle Cloud and unzip it.
 
-Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
+Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][11] for all available configuration options.
 
 **Note:** The configuration subdirectory for the Agent releases below `7.53.0` is `oracle-dbm.d`.
 
