@@ -21,7 +21,6 @@ To get started:
 
 {{< img src="service_management/events/correlation/intelligent/intelligent_config.png" alt="Configure intelligent correlation" style="width:100%;" >}}
 
-Create the views to represent how you like your team to triage, for instance, perhaps one for the database team, and another for the mobile. 
 
 ## Reciving your first case
 
