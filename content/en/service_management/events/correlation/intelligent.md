@@ -11,7 +11,7 @@ further_reading:
 Join the Intelligent correlation beta which uses a ML modeling approach, where based on the underlying telemetry gathered within Datadog, and other heuristics, we automatically correlate on your behalf, without the need for any configuration. 
 {{< /callout >}}
 
-### Preview Intelligent Correlation
+## Preview Intelligent Correlation
 
 To get started:
 1. Navigate to the [Correlation][1] page. 
