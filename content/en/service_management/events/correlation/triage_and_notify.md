@@ -26,7 +26,11 @@ With correlated events, you can configure one notification for a group. So, inst
 
 **Ticketing**
 
-On the Project Settings page, configure the Integrations you want your projects to send notifications to. Today we support both **ServiceNow** and **Jira** manual and automatic ticket creating with bi-directional syncing. For setup instructions, see the [Case Management Settings][3] documentation.
+On the Project Settings page, configure the Integrations you want your projects to send notifications to. Datadog supports the following integrations with manual and automatic ticket creation, and bi-directional syncing:
+- ServiceNow
+- Jira
+
+For setup instructions, see the [Case Management Settings][3] documentation.
 
 ## Notifications
 
