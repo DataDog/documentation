@@ -18,7 +18,7 @@ To investigate a case:
 1. From the case Overview, click **Investigation**
 1. Under the *Correlations* section, you can see a list of alerts and events. 
 1. Click into any of the alerts or events to view all related metrics and logs in context of the alert.
-1. (Optional) Select any alerts or events you want to remove that are not related to the case. Click the event to open a side panel detailing related logs and metrics. Troubleshoot issues with all the related data pulled into one page.
+1. (Optional) Select any alerts or events you want to remove that are not related to the case.
 1. Under the *Related Metrics* section, compare all related metrics or group by tags.
 
 
