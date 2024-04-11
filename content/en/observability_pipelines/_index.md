@@ -27,6 +27,8 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 ## Overview
 
+{{< img src="observability_pipelines/op_marketecture_04122024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+
 Observability Pipelines allows you to collect, process, and route logs in your own infrastructure. It comes with out-of-the-box templates so that you can easily build and deploy pipelines. The templates are purpose-built for the following use cases:
 
 - Log volume control: Cut down on your log volume before it leaves your infrastructure or network.
