@@ -37,3 +37,6 @@ Intelligent Corelation will generate cases automatically once it finds related a
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/event/correlation
+[2]: https://app.datadoghq.com/cases
