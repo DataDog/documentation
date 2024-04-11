@@ -38,9 +38,11 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 ##### QR code
 
-1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
+1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Log in to Mobile App** button of the organization you are currently logged into. This pops up a QR code.
     {{< img src="service_management/mobile/link-device.png" alt="Link mobile device" style="width:80%;">}}
-2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. The org UDID is automatically inserted into the login screen.
+2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. You will be automatically logged in.
+
+**Note**: If you click the **Log in to Mobile App** button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen but you will still have to authenticate.
 
 ##### Manual entry
 
