@@ -59,3 +59,5 @@ Use this data to preview the impact of your correlations and understand the expe
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/event/correlation
