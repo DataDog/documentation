@@ -14,8 +14,8 @@ further_reading:
 
 We offer two types of correltions, pattern-based and intelligent (private beta). 
 
-- Pattern-based you control how the events/alerts are correlated, though the information available within them. 
-- Intelligent uses a ML modeling approach, where based on the underlying telemetry gathered within Datadog, and other heuristics, we automatically correlate on your behalf, without the need for any configuration. 
+- **Pattern-based**: you control how the events/alerts are correlated, though the information available within them. 
+- **Intelligent (Private beta)**: uses a ML modeling approach, where Datadog automatically correlates on your behalf, without the need for any configuration. 
 
 
 ### Configure Correlation
