@@ -50,11 +50,16 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
 4. Select the following Export details:
-    - Metric: **Actual Cost (usage and purchases)** THEN  **Amortized Cost (usage and purchases)**
+    - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
 
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
+
+  If you are using the [improved exports experience][8], then select the following Export details:
+   - Type of data: **Cost and usage details (actual)** THEN **Cost and usage details (amortized)**
+   - Dataset version: **2020-01-01**
+   - Frequency: **Daily export of month-to-date costs**
 
 5. Choose a storage account, container, and directory for the exports.
     - **Note:** Do not use special characters like `.` in these fields.
@@ -127,7 +132,7 @@ You can visualize your ingested data using the following cost types:
 | `azure.cost.discounted.ondemand` | Cost based on the list rate provided by Azure, after privately negotiated discounts. To get the true on-demand cost, divide this metric by (1 - <negotiated_discount>). For example if you have a 5% flat rate discount across all Azure products, taking this metric and dividing by .95 (1-.05) provides the true on-demand price.|
 
 ### Cost and observability correlation
-Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog adds the `name` tag on cost data for top Azure products to simplify correlating observability and cost metrics. 
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog adds the `name` tag on cost data for top Azure products to simplify correlating observability and cost metrics.
 
 For example, to view cost and utilization for each Azure VM, you can make a table with `azure.cost.amortized` and `azure.vm.network_in_total` (or any other VM metric) and group by `name`. Or, to see Storage usage and costs side by side, you can filter into `metercategory:Storage` and graph `azure.storage.transactions` and `azure.cost.amortized` grouped by `name`.
 
@@ -146,3 +151,4 @@ You can create historical data in your storage account using the [Microsoft API]
 [5]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
 [6]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
 [7]: https://support.microsoft.com
+[8]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
