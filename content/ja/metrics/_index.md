@@ -30,7 +30,7 @@ Datadog のメトリクスとその有用性についてご紹介します。こ
 {{< /whatsnext >}}
 
 {{< whatsnext desc="カスタムメトリクスのボリュームとコストの把握と管理" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics without LimitsTM を使用して、タグと集計構成を通じてカスタムメトリクスのボリュームを制御する方法を学びます。{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics without Limits™ を使用して、タグと集計構成を通じてカスタムメトリクスのボリュームを制御する方法を学びます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 概要
