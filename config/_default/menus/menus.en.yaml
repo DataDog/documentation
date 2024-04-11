@@ -1771,7 +1771,7 @@ main:
     parent: events
     weight: 1
   - name: Pipelines and Processors
-    url: service_management/events/pipelines_and_processors/overview
+    url: service_management/events/pipelines_and_processors/
     identifier: overview
     parent: events
     weight: 2
