@@ -30,7 +30,7 @@ On the Project Settings page, configure the Integrations you want your projects 
 
 ## Notifications
 
-Views in case management group cases based on a configured query. You can set up a notification when a case matching this query is created. Today we support, **Pagerduty**, **Email**, **Webhook**, **Microsoft Teams**, **Slack**. To learn how to create a view, see the [Case Management Views][4] documentation.
+In case management, _views_ group cases based on a configured query. You can set up a notification when a case matching this query is created. Datadog supports, **Pagerduty**, **Email**, **Webhook**, **Microsoft Teams**, and **Slack**. To learn how to create a view, see the [Case Management Views][4] documentation.
 
 **Note**: You need to reconfigure underlying monitors to remove multiple notifications. Grouping monitor events does not mute individual notifications.
 
