@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: AWS WAF
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_waf
 public_title: Datadog-AWS WAF 통합

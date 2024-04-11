@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: Amazon Data Firehose
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_firehose
 public_title: Datadog-Amazon Data Firehose 통합

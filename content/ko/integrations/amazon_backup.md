@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: AWS 백업
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_backup
 public_title: Datadog-AWS 백업 통합

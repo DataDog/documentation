@@ -18,7 +18,7 @@ integration_id: ''
 integration_title: Amazon ElastiCache
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_elasticache
 public_title: Datadog-Amazon ElastiCache 통합

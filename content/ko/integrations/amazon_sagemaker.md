@@ -19,7 +19,7 @@ integration_id: ''
 integration_title: Amazon SageMaker
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_sagemaker
 public_title: Datadog-Amazon SageMaker 통합

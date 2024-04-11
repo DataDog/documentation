@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon 심플 워크플로우 서비스
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_swf
 public_title: Datadog-Amazon 심플 워크플로우 서비스 통합

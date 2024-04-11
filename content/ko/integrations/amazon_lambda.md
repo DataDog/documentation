@@ -27,7 +27,7 @@ integration_id: amazon-lambda
 integration_title: AWS 람다
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_lambda
 public_title: Datadog-AWS 람다 통합

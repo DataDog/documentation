@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Amazon Lex
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_lex
 public_title: Datadog-Amazon Lex 통합

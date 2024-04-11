@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: AWS Shield
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_shield
 public_title: Datadog-AWS Shield 통합

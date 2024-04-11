@@ -19,7 +19,7 @@ integration_id: ''
 integration_title: Amazon MQ
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: '1.0'
 name: amazon_mq
 public_title: Datadog-Amazon MQ 통합

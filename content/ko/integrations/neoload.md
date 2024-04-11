@@ -35,7 +35,7 @@ integration_id: neoload
 integration_title: NeoLoad
 integration_version: ''
 is_public: true
-kind: 통합
+kind: documentation
 manifest_version: 2.0.0
 name: neoload
 public_title: NeoLoad
