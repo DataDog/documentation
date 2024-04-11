@@ -55,7 +55,6 @@ Use this data to preview the impact of your correlations and understand the expe
 1. (Optional) Add a tag to resulting cases.
 1. Click **Save and Activate** to activate this pattern and group events into cases.
 
-[1]: https://app.datadoghq.com/event/correlation
 
 ## Further Reading
 
