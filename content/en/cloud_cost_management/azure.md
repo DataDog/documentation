@@ -56,8 +56,10 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-  At this time, there is no support for creating billing exports using the [improved exports experience][8].
-  To disable it, deselect the "Exports (preview)" option in the Cost Management labs [preview features][9].
+<div class="alert alert-warning">
+At this time, there is no support for creating billing exports using the [improved exports experience][8].
+To disable it, deselect the "Exports (preview)" option in the Cost Management labs [preview features][9].
+</div>
 
 5. Choose a storage account, container, and directory for the exports.
     - **Note:** Do not use special characters like `.` in these fields.
