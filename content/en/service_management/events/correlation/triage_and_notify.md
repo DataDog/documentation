@@ -28,7 +28,7 @@ With correlated events, you can configure one notification for a group. So, inst
 
 On the Project Settings page, configure the Integrations you want your projects to send notifications to. Today we support both **ServiceNow** and **Jira** manual and automatic ticket creating with bi-directional syncing. For setup instructions, see the [Case Management Settings][3] documentation.
 
-**Notifications**
+## Notifications
 
 Views in case management group cases based on a configured query. You can set up a notification when a case matching this query is created. Today we support, **Pagerduty**, **Email**, **Webhook**, **Microsoft Teams**, **Slack**. To learn how to create a view, see the [Case Management Views][4] documentation.
 
