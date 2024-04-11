@@ -4,6 +4,7 @@ kind: Documentation
 aliases:
   - /observability_pipelines/production_deployment_overview/aggregator_architecture
   - /observability_pipelines/aggregator_architecture/
+  - /observability_pipelines/architecture/
 ---
 
 {{< site-region region="gov" >}}
