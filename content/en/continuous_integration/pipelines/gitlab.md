@@ -190,7 +190,7 @@ These filters can also be applied through the facet panel on the left hand side 
 
 If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
 For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
-[registering a new runner][6]. For existing runners
+[registering a new runner][6]. For existing runners:
 
 {{< tabs >}}
 {{% tab "GitLab &gt;&equals; 15.8" %}}
