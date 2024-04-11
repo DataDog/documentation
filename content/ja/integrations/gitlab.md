@@ -194,7 +194,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "gitlab" >}}
 
 
-### ヘルプ
+### イベント
 
 GitLab チェックには、イベントは含まれません。
 
