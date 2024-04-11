@@ -13,7 +13,10 @@ Join the Intelligent correlation beta which uses a ML modeling approach, where b
 
 ### Preview Intelligent Correlation
 
-Once you have joined the beta, to get started first navigate to the [Correlation][1] page. From there you will be able to start previewing the intelligent correlalations which would have been created from your organization.
+To get started:
+1. Navigate to the [Correlation][1] page. 
+1. From there you can preview the intelligent correlations that are created from your organization.
+1. Create and customize your views to represent how you like specific teams to triage. For instance, one view for the database team, and another for the mobile team.
 
 
 {{< img src="service_management/events/correlation/intelligent/intelligent_config.png" alt="Configure intelligent correlation" style="width:100%;" >}}
