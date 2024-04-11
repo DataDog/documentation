@@ -57,7 +57,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
 <div class="alert alert-warning">
-At this time, there is no support for creating billing exports using the [improved exports experience][8].
+At this time, there is no support for creating cost exports using the [improved exports experience][8].
 To disable it, deselect the "Exports (preview)" option in the Cost Management labs [preview features][9].
 </div>
 
