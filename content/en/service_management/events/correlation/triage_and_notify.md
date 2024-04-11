@@ -24,7 +24,7 @@ From the [Correlation][1], find the pattern you want to analyze and click **Tria
 
 With correlated events, you can configure one notification for a group. So, instead of having 20 notifications and 20 potential issues to investigate, you have one single case and one notification. Combine all your alerts in the Case Management Projects page. There are a few ways to group notifications in Case Management:
 
-**Ticketing**
+### Ticketing
 
 On the Project Settings page, configure the Integrations you want your projects to send notifications to. Datadog supports the following integrations with manual and automatic ticket creation, and bi-directional syncing:
 - ServiceNow
