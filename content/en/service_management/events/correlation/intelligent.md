@@ -10,7 +10,9 @@ further_reading:
 {{< callout url="http://d-sh.io/eventmanagement" btn_hidden="false" header="Join the Beta!">}}
 Join the Intelligent correlation beta which uses a ML modeling approach, where based on the underlying telemetry gathered within Datadog, and other heuristics, we automatically correlate on your behalf, without the need for any configuration. 
 {{< /callout >}}
+## Overview
 
+Intelligent Correlation uses a Machine Learning modeling approach. It automatically correlates on your behalf, using underlying telemetry gathered within Datadog, and other heuristics.
 ## Preview Intelligent Correlation
 
 To get started:
