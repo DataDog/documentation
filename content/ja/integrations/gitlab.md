@@ -198,7 +198,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 GitLab チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 {{< get-service-checks-from-git "gitlab" >}}
  `gitlab.readiness.*` のサービスチェックについての詳細は、公式の [GitLab ドキュメント][6]に記載されています。
 
