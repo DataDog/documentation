@@ -90,7 +90,7 @@ For example, to send 20% of the traces for the service named `my-service`:
 java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
-export DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 The service name value is case sensitive and must match the case of the actual service name.
@@ -109,8 +109,8 @@ For Python applications, set a global sampling rate in the library using the `DD
 For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
-@env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
+export DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
@@ -125,7 +125,7 @@ For Ruby applications, set a global sampling rate for the library using the `DD_
 For example, to send 10% of the traces:
 
 ```
-@env DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLE_RATE=0.1
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
@@ -140,8 +140,16 @@ For Go applications, set a global sampling rate for the library using the `DD_TR
 For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
 
 ```
-@env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+export DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+```
+
+Starting from version [v1.60.0][2], for Go applications, set by-resource and by-tags sampling rules with the `DD_TRACE_SAMPLING_RULES` environment variable.
+For example, to send 1% of the traces for the resource `GET api/list_documents` and 10% of the rest of the traces:
+
+```
+export DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLING_RULES='[{"resource": `GET api/list_documents`, "sample_rate": 0.01}]'
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
@@ -149,6 +157,7 @@ Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT`
 Read more about sampling controls in the [Go tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/go
+[2]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
 {{% /tab %}}
 {{% tab "Node.js" %}}
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
@@ -180,8 +189,8 @@ For PHP applications, set a global sampling rate for the library using the `DD_T
 For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
-@env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+export DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
 Read more about sampling controls in the [PHP tracing library documentation][1].
@@ -197,8 +206,8 @@ Starting in version version `1.3.2`, the Datadog C++ library supports the follow
 For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
-@env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+export DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
 C++ does not provide integrations for out-of-the-box instrumentation, but it's used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][1].
@@ -211,17 +220,19 @@ For .NET applications, set a global sampling rate for the library using the `DD_
 For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
-@env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+export DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
 <div class="alert alert-info"><strong>Beta</strong>: Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [.NET tracing library documentation][1].
+Read more about sampling controls in the [.NET tracing library documentation][1].\
+Read more about [configuring environment variables for .NET][2].
 
-[1]: /tracing/trace_collection/dd_libraries/dotnet-core
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core?tab=registryeditor#configuring-process-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -665,11 +676,19 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
+Starting from version [v1.60.0][3], for Go applications, set by-resource and by-tags **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service for the resource `POST /api/create_issue`, for the tag `priority` with value `high`:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"resource": "POST /api/create_issue", "tags": { "priority":"high" }, "sample_rate":1.0}]
+```
 
 Read more about sampling controls in the [Go tracing library documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
 [2]: /tracing/trace_collection/dd_libraries/go
+[3]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
 {{% /tab %}}
 {{% tab "Node.js" %}}
 For Node.js applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
@@ -779,7 +798,7 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [4]: /tracing/glossary/#trace-root-span
 [5]: /tracing/trace_pipeline/ingestion_controls/
 [6]: /tracing/trace_pipeline/generate_metrics/
-[7]: /real_user_monitoring/connect_rum_and_traces/
+[7]: /real_user_monitoring/platform/connect_rum_and_traces/
 [8]: https://github.com/DataDog/browser-sdk/releases/tag/v4.30.0
 [9]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
 [10]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0

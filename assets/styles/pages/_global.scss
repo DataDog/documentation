@@ -58,7 +58,11 @@ body {
         position: relative;
     }
 }
-
+.chroma {
+    max-height: 350px;
+    overflow-wrap: break-word;
+    white-space: inherit;
+}
 .greyside {
     position: absolute;
     height: 100%;
@@ -801,6 +805,7 @@ table,
     margin-bottom: 20px;
     border: 1px solid $ddgray;
     font-size: 16px;
+    table-layout: fixed;
     &:lang(ja) {
         font-size: 15px;
         line-height: 24px;
@@ -1030,6 +1035,12 @@ dl {
     }
     .container__content {
         max-width: 1440px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1336px !important;
     }
 }
 

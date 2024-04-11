@@ -1,9 +1,10 @@
 ---
 categories:
-- provisioning
-- orchestration
+- automation
 - configuration & deployment
 - log collection
+- orchestration
+- provisioning
 dependencies: []
 description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
 doc_link: https://docs.datadoghq.com/integrations/ansible/
@@ -22,6 +23,7 @@ short_description: 失敗したタスクを追跡し、イベントストリー�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/ansible/ansibledashboard.png" alt="Ansible ダッシュボード" popup="true">}}
 
 ## 概要
@@ -80,7 +82,7 @@ Ansible インテグレーションには、サービスのチェック機能は
 
 [1]: https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring
 [2]: https://github.com/datadog/ansible-datadog-callback
-[3]: https://app.datadoghq.com/account/settings#agent/ansible
+[3]: https://app.datadoghq.com/account/settings/agent/latest?platform=ansible
 [4]: https://github.com/DataDog/ansible-datadog#example-playbooks
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/ansible/ansible_metadata.csv
 [6]: https://docs.datadoghq.com/ja/help/

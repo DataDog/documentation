@@ -22,7 +22,8 @@ The RUM Browser SDK supports all modern desktop and mobile browsers including IE
 
 To set up RUM Browser Monitoring, create a RUM application:
 
-1. In Datadog, navigate to the [**RUM Applications** page][1] and click the **New Application** button.
+1. In Datadog, navigate to the [**Digital Experience** > **Add an Application** page][1] and select the JavaScript (JS) application type.
+   - By default, automatic user data collection is enabled. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Browser Data Collected][2].
    - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
    - Choose the installation type for the RUM Browser SDK: [npm](#npm), or a hosted version ([CDN async](#cdn-async) or [CDN sync](#cdn-sync)).
    - Define the environment name and service name for your application to use unified service tagging for [RUM & Session Replay][19]. Set a version number for your deployed application in the initialization snippet. For more information, see [Tagging](#tagging).
@@ -1730,6 +1731,12 @@ The application's environment, for example: prod, pre-prod, and staging. Follows
 **Type**: String<br/>
 The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][15].
 
+`trackingConsent`
+: Optional<br/>
+**Type**: `"granted"` or `"not-granted"`<br/>
+**Default**: `"granted"`<br/>
+Set the initial user tracking consent state. See [User Tracking Consent][27].
+
 `trackViewsManually`
 : Optional<br/>
 **Type**: Boolean<br/>
@@ -1949,7 +1956,7 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/data_collected/
-[3]: /real_user_monitoring/dashboards/
+[3]: /real_user_monitoring/platform/dashboards/
 [4]: https://www.npmjs.com/package/@datadog/browser-rum
 [5]: /account_management/api-app-keys/#client-tokens
 [6]: /real_user_monitoring/browser/tracking_user_actions
@@ -1958,18 +1965,19 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [9]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[12]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[12]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [13]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
 [14]: /getting_started/site/
 [15]: /getting_started/tagging/#define-tags
 [16]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
-[17]: /real_user_monitoring/session_replay/
-[18]: /real_user_monitoring/session_replay/privacy_options
+[17]: /real_user_monitoring/session_replay/browser/
+[18]: /real_user_monitoring/session_replay/browser/privacy_options
 [19]: /getting_started/tagging/using_tags
-[20]: /real_user_monitoring/frustration_signals/
+[20]: /real_user_monitoring/browser/frustration_signals/
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
 [22]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [24]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[26]: /real_user_monitoring/session_replay/#usage
+[26]: /real_user_monitoring/session_replay/browser/#usage
+[27]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent

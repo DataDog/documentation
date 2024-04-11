@@ -44,12 +44,11 @@ draft: false
 git_integration_title: mysql
 integration_id: mysql
 integration_title: MySQL
-integration_version: 10.3.0
+integration_version: 11.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mysql
-oauth: {}
 public_title: MySQL
 short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
 supported_os:

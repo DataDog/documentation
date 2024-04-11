@@ -7,6 +7,9 @@ aliases:
 - /ja/agent/kubernetes/dogstatsd
 description: データタイプ、タグ付けなど、DogStatsD の機能の概要
 further_reading:
+- link: integrations/node
+  tag: ドキュメント
+  text: NodeJS インテグレーションを利用して NodeJS 用の DogStatsD を有効にします
 - link: developers/dogstatsd
   tag: ドキュメント
   text: DogStatsD 入門
@@ -53,7 +56,7 @@ DogStatsD は、データを受け取ると共に、_フラッシュ間隔_と�
 
 DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有効になっています。このポートを変更する必要がない場合は、[コードで DogStatsD をセットアップする](#code)方法を直接参照してください。
 
-### エージェント
+### Agent
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
@@ -78,9 +81,9 @@ DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有
 2. [Agent を再起動します][3]。
 
 
-[1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /ja/developers/dogstatsd/unix_socket/
-[3]: /ja/agent/guide/agent-commands/
+[3]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "コンテナ Agent" %}}
 
@@ -304,8 +307,11 @@ Java DataDog StatsD Client は maven central とともに配布され、[Maven �
 
 {{< programming-lang lang=".NET" >}}
 
-- [NuGet からパッケージ][1]を取得してインストールします。
+Nuget CLI を使用してパッケージを直接インストールするか、[NuGet から PackageReference][1] を取得します。
 
+```shell
+dotnet add package DogStatsD-CSharp-Client
+```
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 {{< /programming-lang >}}
@@ -554,13 +560,13 @@ DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能�
 
 {{< whatsnext desc="">}}
     {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}DogStatsD でメトリクスを Datadog に送信します。{{< /nextlink >}}
-    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD でサービスチェックを Datadog に送信します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 DogStatsD が使用するデータグラム形式についてさらに理解を深めたい場合、または独自の Datadog ライブラリを開発したい場合は、[データグラムとシェルの使用][9]を参照してください。ここでは、メトリクスとイベントをコマンドラインから直接送信する方法についても説明しています。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -569,7 +575,7 @@ DogStatsD が使用するデータグラム形式についてさらに理解を�
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /ja/metrics/custom_metrics/
-[6]: /ja/events/guides/dogstatsd/
+[6]: /ja/service_management/events/guides/dogstatsd/
 [7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /ja/getting_started/tagging/unified_service_tagging
 [9]: /ja/developers/dogstatsd/datagram_shell/

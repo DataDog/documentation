@@ -43,9 +43,9 @@ affinity:
 ## This example configuration avoids cross-availability-zone costs where possible.
 ## NOTE: If using the Quickstart use case, this load balancer will not be receiving
 ## inbound traffic because our Quickstart data source is a sample syslog generator.
-## However, we will still provision this load balancer so that it can be used 
-## once you update your configuration with a real data source. 
-## 
+## However, we will still provision this load balancer so that it can be used
+## once you update your configuration with a real data source.
+##
 ## In the meantime, beware of cost implications of running this LB!
 service:
   enabled: true
@@ -97,12 +97,6 @@ pipelineConfig:
   ## SINKS: Data output destinations
   ## console: Print JSON-formatted events to the console
   ## datadog: Ship logs to Datadog Logs
-  ##
-  ## This buffer configuration is split into 144GB buffers for both of the console and Datadog sinks.
-  ##
-  ## This should work for the vast majority of OP Worker deployments and should rarely
-  ## need to be adjusted. If you do change it, be sure to update the size of the persistence
-  ## block above.
   sinks:
     print_syslog:
       type: console
@@ -117,7 +111,9 @@ pipelineConfig:
       default_api_key: "${DD_API_KEY}"
       site: "${DD_SITE}"
       compression: gzip
-      buffer:
-          type: disk
-          max_size: 154618822656
-          
+      ## We've omitted the disk buffer to simplify quickstart setup.
+      ## Consider re-enabling and configuring before deploying to production environments.
+      ## The disk buffer size is currently set to 144GB.
+      #buffer:
+      #    type: disk
+      #    max_size: 154618822656

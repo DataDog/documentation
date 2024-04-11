@@ -7,7 +7,7 @@ code_lang_weight: 30
 aliases:
   - /continuous_integration/setup_tests/python
   - /continuous_integration/tests/python
-  - continuous_integration/tests/setup/python
+  - /continuous_integration/tests/setup/python
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -41,7 +41,7 @@ Supported test frameworks:
 
 | Test Framework | Version |
 |---|---|
-| `pytest` | >= 3.0.0 |
+| `pytest` | >= 3.0.0 <= 7.0.0 |
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
@@ -70,7 +70,7 @@ Install the Python tracer by running:
 pip install -U ddtrace
 {{< /code-block >}}
 
-For more information, see the [Python tracer installation documentation][4].
+For more information, see the [Python tracer installation documentation][1].
 
 ## Instrumenting your tests
 
@@ -104,11 +104,11 @@ def test_simple_case(ddspan):
     # ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Python custom instrumentation documentation.
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-Just like tags, to add custom metrics to your tests, use the current active span:
+Just like tags, to add custom measures to your tests, use the current active span:
 
 ```python
 from ddtrace import tracer
@@ -120,11 +120,10 @@ def test_simple_case(ddspan):
     # test continues normally
     # ...
 ```
-Read more about custom metrics in the [Add Custom Metrics Guide][7].
+Read more about custom measures in the [Add Custom Measures Guide][2].
 
-[5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
-[7]: /continuous_integration/guides/add_custom_metrics/?tab=python
-
+[1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
+[2]: /tests/guides/add_custom_measures/?tab=python
 {{% /tab %}}
 
 {{% tab "pytest-benchmark" %}}
@@ -166,7 +165,68 @@ def test_will_pass(self):
 assert True
 {{< /code-block >}}
 
-#### Known limitations
+{{% /tab %}}
+
+{{< /tabs >}}
+
+## Configuration settings
+
+The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
+
+`DD_SERVICE`
+: Name of the service or library under test.<br/>
+**Environment variable**: `DD_SERVICE`<br/>
+**Default**: `pytest`<br/>
+**Example**: `my-python-app`
+
+`DD_ENV`
+: Name of the environment where tests are being run.<br/>
+**Environment variable**: `DD_ENV`<br/>
+**Default**: `none`<br/>
+**Examples**: `local`, `ci`
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][2].
+
+The following environment variable can be used to configure the location of the Datadog Agent:
+
+`DD_TRACE_AGENT_URL`
+: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
+**Default**: `http://localhost:8126`
+
+All other [Datadog Tracer configuration][3] options can also be used.
+
+## Collecting Git metadata
+
+{{% ci-git-metadata %}}
+
+## Known limitations
+
+{{< tabs >}}
+
+{{% tab "pytest" %}}
+
+Plugins for `pytest` that alter test execution may cause unexpected behavior.
+
+### Parallelization
+
+Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
+
+The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
+
+### Test ordering
+
+Plugins that change the ordering of test execution (such as [`pytest-randomly`][3]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
+
+The overall count of test events (and their correctness) remain unaffected.
+
+
+[1]: https://pypi.org/project/pytest-xdist/
+[2]: https://pypi.org/project/pytest-forked/
+[3]: https://pypi.org/project/pytest-randomly/
+
+{{% /tab %}}
+
+{{% tab "unittest" %}}
 
 In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
 
@@ -176,42 +236,11 @@ Datadog recommends you use up to one process at a time to prevent affecting test
 
 {{< /tabs >}}
 
-## Configuration settings
-
-The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
-
-`ddtrace.config.service`
-: Name of the service or library under test.<br/>
-**Environment variable**: `DD_SERVICE`<br/>
-**Default**: `pytest`<br/>
-**Example**: `my-python-app`
-
-`ddtrace.config.env`
-: Name of the environment where tests are being run.<br/>
-**Environment variable**: `DD_ENV`<br/>
-**Default**: `none`<br/>
-**Examples**: `local`, `ci`
-
-The following environment variable can be used to configure the location of the Datadog Agent:
-
-`DD_TRACE_AGENT_URL`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
-**Default**: `http://localhost:8126`
-
-All other [Datadog Tracer configuration][6] options can also be used.
-
-## Collecting Git metadata
-
-{{% ci-git-metadata %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /tracing/trace_collection/dd_libraries/python/
-[5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
-[6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
-[7]: /continuous_integration/guides/add_custom_metrics/?tab=python
+[1]: /tracing/trace_collection/dd_libraries/python/
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /tracing/trace_collection/library_config/python/?tab=containers#configuration

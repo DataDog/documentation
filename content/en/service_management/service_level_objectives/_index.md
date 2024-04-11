@@ -30,8 +30,6 @@ further_reading:
   text: "Create and manage SLOs with Terraform"
 ---
 
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/382481078/rendition/1080p/file.mp4?loc=external&signature=f5a81ca1c44d9c1c2cfcbd23c2b6b4f89914027ff344fb0a9f8dc6b9a1d141aa" poster="/images/poster/slo.png" >}}
-
 {{< jqmath-vanilla >}}
 
 <br />
@@ -284,11 +282,38 @@ To access SLO status corrections in the UI:
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
 
-## SLO Calendar View
+## SLO calendar view
 
 The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
-{{< img src="service_management/service_level_objectives/calendar-view-slo.png" alt="SLO calendar view" >}}
+{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO calendar view" >}}
+
+## SLO CSV export
+
+{{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="Try Out the SLO CSV Export Feature">}}
+The CSV Export feature is in Private Beta. Complete the form to request access.
+{{< /callout >}}
+
+The SLO CSV Export feature is available on the [SLO status page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data.
+
+**Notes:**
+
+- The SLOs that are exported are based on your search query.
+- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO ID and name will be in the CSV (not the SLO’s status history data).
+- There is a limit of 1000 SLOs per export.
+
+{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO calendar view" >}}
+
+The following time windows are available for the CSV export:
+
+- **Weekly:** The SLO statuses are based on calendar-aligned weeks (Sunday 12am - Saturday 11:59pm)
+- **Monthly:** The SLO statuses are based on calendar-aligned months (First day of the month 12am - last day of the month 11:59pm)
+
+These times are based on the user's timezone setting in Datadog.
+
+The SLO statuses are calculated based on the SLO type:
+- **Metric-based SLOs:** Percent of good events out of total events for the time window
+- **Time Slice SLOs:** Percent of good minutes out of total minutes for the time window
 
 ## Further Reading
 

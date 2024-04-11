@@ -81,14 +81,6 @@ Click **Add Query** to add additional queries.
 
 **Note**: The query applies to all ingested logs.
 
-## Exclude benign activity with suppression queries
-
-<div class="alert alert-warning"> <a href="https://docs.datadoghq.com/security/suppressions/"> Suppression rules</a> are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024. See <a href="https://docs.datadoghq.com/security/suppressions/#migrate-legacy-suppression-queries-to-suppression-rules">Migrate legacy suppression queries to suppression rules</a> for more information. </div>
-
-In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
-
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
-
 #### Joining queries
 
 Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
@@ -127,12 +119,6 @@ Select the value or values to detect, the learning duration, and, optionally, de
 For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
 
 You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
-
-## Exclude benign activity with suppression queries
-
-In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
-
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -173,12 +159,6 @@ When selected, signals are suppressed for the first 24 hours. In that time, Data
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
-## Exclude benign activity with suppression queries
-
-In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
-
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
-
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
 {{% /tab %}}
@@ -192,12 +172,6 @@ Construct a search query using the same logic as a [log explorer search][1]. The
 Click **Add Query** to add additional queries.
 
 **Note**: The query applies to all ingested logs.
-
-## Exclude benign activity with suppression queries
-
-In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
-
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -325,6 +299,12 @@ The severity decrement is applied to signals with an environment tag starting wi
 Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
 
 **Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
+
+## Suppression rules
+
+Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
+
+Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
 
 ## Rule deprecation
 

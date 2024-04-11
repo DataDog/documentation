@@ -36,7 +36,9 @@ Use the cost summary to:
 - Filter and group costs by product or sub-organization
 - View cumulative day-over-day costs
 
-Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Because the costs are a prediction, the amount may differ from your finalized monthly cost.
+### Projected Costs (parent organization)
+
+Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Projected end-of-month costs may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
 
 ### Cost Summary (parent organization)
 

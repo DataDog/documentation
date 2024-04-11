@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "client_email": "Test-252bf553ef04b351@example.com",
+      "cloud_run_revision_filters": [
+        "merp:derp"
+      ]
+    },
+    "id": "d291291f-12c2-22g4-j290-123456678897",
+    "type": "gcp_service_account"
+  }
+}

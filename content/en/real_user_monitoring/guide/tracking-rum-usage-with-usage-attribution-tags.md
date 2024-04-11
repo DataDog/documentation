@@ -23,7 +23,7 @@ As an example, this guide walks through how to track RUM usage by department.
 
 Categories for usage are determined by tags. Before setting up your RUM usage attribution, make sure that the tags you want to use are configured on the Usage Attribution page. Click **Edit tags**, then select the tags that you want to use to view usage and click **Save**. In this example, we've added "department" as a tag.
 
-{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-1.jpeg" alt="Check your tags on the Usage Attribution page" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-4.jpeg" alt="Check your tags on the Usage Attribution page" style="width:100%;">}}
 
 ### Add tags to your RUM sessions
 Once your usage attribution tags have been configured, you can tag your RUM sessions with them. 
@@ -49,9 +49,9 @@ RumMonitor.shared().addAttribute(forKey: "department", value: "marketing")
 Once you've deployed this step, new RUM sessions are tracked according to the tags you added.
 
 ## View RUM usage
-The newly tagged sessions are displayed on the [Usage Attribution][3] page. Now when you review the Estimated RUM Sessions column, you can see the number of sessions by department.
+The newly tagged sessions are displayed on the [Usage Attribution][3] page. When you review the RUM with Session Replay Sessions and RUM Sessions columns, you can see the number of sessions by department.
 
-{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-2.jpeg" alt="View RUM usage by department" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-3.png" alt="View RUM usage by department" style="width:100%;">}}
 
 Usage information is also available through the [`GetHourlyUsageAttribution`][4] endpoint.
 

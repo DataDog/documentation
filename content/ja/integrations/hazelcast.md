@@ -5,6 +5,7 @@ assets:
   dashboards:
     Hazelcast Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
       prefix: hazelcast.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10095
     source_type_name: Hazelcast
   logs:
     source: hazelcast
@@ -26,7 +28,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - キャッシュ
 - ログの収集
 dependencies:
@@ -36,12 +38,11 @@ draft: false
 git_integration_title: hazelcast
 integration_id: hazelcast
 integration_title: Hazelcast
-integration_version: 2.1.0
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: hazelcast
-oauth: {}
 public_title: Hazelcast
 short_description: Hazelcast メンバーと管理センターを監視します。
 supported_os:
@@ -54,7 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Caching
   - Category::Log Collection
   configuration: README.md#Setup
@@ -65,27 +66,28 @@ tile:
   title: Hazelcast
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは [Hazelcast][1] v4.0+ を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Hazelcast チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -100,7 +102,7 @@ Hazelcast チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 2. [Agent を再起動します][4]。
 
-##### ログの収集
+##### 収集データ
 
 1. Hazelcast は数々の多様な[ロギングアダプター][5]をサポートします。これは、`log4j2.properties` ファイルの例です。
 
@@ -177,7 +179,7 @@ Hazelcast チェックは [Datadog Agent][2] パッケージに含まれてい�
 [6]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
 [7]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -185,7 +187,7 @@ Hazelcast チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
@@ -216,23 +218,23 @@ JMXFetch
       status : OK
 ```
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "hazelcast" >}}
 
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "hazelcast" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 
 [1]: https://hazelcast.org
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

@@ -278,7 +278,6 @@ Fill in variables accordingly:
 
 4. Replace `<API_KEY>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, use `DD_API_KEY` instead of `DD_API_KEY_SECRET_ARN` and set the value to your Datadog API key in plaintext.
 
-5. Replace `<LAMBDA_HANDLER>` with your original handler. For example, `myfunc.handler`.
 
 #### Full example
 
@@ -290,11 +289,10 @@ resource "aws_lambda_function" "lambda" {
   # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
 
   layers = [
-    "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-dotnet:9",
-    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
+    "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}",
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}"
   ]
 
-  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
 
   environment {
     variables = {

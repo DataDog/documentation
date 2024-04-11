@@ -13,12 +13,16 @@ further_reading:
   text: "Learn about advanced options in mobile tests"
 ---
 
-{{< site-region region="us3,us5,gov,eu,ap1" >}}
+{{< site-region region="us,us5,eu" >}}
+<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
+{{< /site-region >}}
+
+{{< site-region region="us3,ap1" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">Mobile Application Testing is in limited availability and is only supported for the Datadog US1 site.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
  
 
@@ -89,13 +93,13 @@ In addition to automatically recording steps based on your device interactions, 
 
 Interacting with elements with a tap on your mobile application records a step.
 
-{{< img src="mobile_app_testing/tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/tap.mp4" alt="Recording a tap step in a mobile test" video=true >}}
 
 #### Double tap
 
 Interacting with elements with a double tap on your mobile application records a step.
 
-{{< img src="mobile_app_testing/double_tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/double_tap.mp4" alt="Recording a double tap step in a mobile test" video=true >}}
 
 #### Type text
 
