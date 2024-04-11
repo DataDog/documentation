@@ -1,7 +1,7 @@
 ---
 title: Best Practices for Scaling Observability Pipelines
 kind: Documentation
-aliases:
+
 ---
 
 {{< site-region region="gov" >}}

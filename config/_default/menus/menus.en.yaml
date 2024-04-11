@@ -3713,9 +3713,9 @@ main:
     identifier: observability_pipelines_update_existing_pipelines
     weight: 6
   - name: Best Practices for Scaling Observability Pipelines
-    url: observability_pipelines/best_practice_for_scaling_observability_pipelines/
+    url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
     parent: observability_pipelines
-    identifier: observability_pipelines_best_practice_for_scaling_observability_pipelines
+    identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
     weight: 7
   - name: Log Management
     url: logs/
