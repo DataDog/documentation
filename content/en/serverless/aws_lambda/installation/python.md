@@ -236,7 +236,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     **Note**: If you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
 
-4. Configure the Datadog site, API key, and tracing
+4. Configure the Datadog site, API key, and tracing in your Dockerfile
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
