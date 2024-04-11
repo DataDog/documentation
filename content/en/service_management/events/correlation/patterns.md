@@ -38,7 +38,7 @@ To create or adjust a pattern-based correlation:
     Deduplicate events for those alerts for
     : The max duration current alerts which have been correlated, and continue to flap or have not resolved will be reviewed for, before opening new case....
 
-    {{< img src="service_management/events/correlation/pattern/timeframe.png" alt="timeframe explanation" style="width:90%;" >}}
+    {{< img src="service_management/events/correlation/pattern/timeframe.png" alt="correlation timeframe explanation, see how alerts fold into a case" style="width:90%;" >}}
 
 
 ## Preview pattern output
