@@ -118,7 +118,7 @@ For installation steps, see the [Agent installation instructions][1].
 
 ### Configure the Agent
 
-Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][4] for all available configuration options.
+Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][4] for all available configuration options.
 
 {{< tabs >}}
 {{% tab "Multi-tenant" %}}

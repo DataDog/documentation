@@ -202,7 +202,7 @@ The configuration subdirectory for the Agent releases between `7.50.1` and `7.52
 1. Copy the configuration file from the subdirectory `oracle.d` to `oracle-dbm.d`, for example:
 
 ```shell
-cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
+cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml
 ```
 
 2. Rename the following configuration parameters if you are using them:
