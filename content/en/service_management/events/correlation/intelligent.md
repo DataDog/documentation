@@ -30,7 +30,6 @@ Intelligent Corelation will generate cases automatically once it finds related a
 {{< img src="service_management/events/correlation/intelligent/intelligent_correlation.png" alt="intelligent correlation case" style="width:100%;" >}}
 
 
-[1]: https://app.datadoghq.com/event/correlation
 
 
 ## Further Reading
