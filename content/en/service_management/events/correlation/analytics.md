@@ -33,7 +33,7 @@ The following widgets support Case Analytics:
 
 ## Event Metrics
 
-Find out where your probmatic alerts are coming from by breaking down by source, host, service, etc and also learn about if your operational load has been increasing or decreasing over time
+Break down event metrics by source, host, service, and more. Find out where your problematic alerts are coming from and learn if your operational load is increasing or decreasing over time.
 
 {{< img src="service_management/events/correlation/event_analytics.png" alt="Configure event analytics" style="width:100%;" >}}
 
