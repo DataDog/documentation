@@ -8,7 +8,7 @@
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public && npx hugo mod clean",
         "docker:start": "/usr/local/bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --bind 0.0.0.0",
-        "start": "./node_modules/.bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --verbose --poll 2s",
+        "start": "./node_modules/.bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --poll 2s",
         "prebuild": "rimraf public && npx hugo mod clean",
         "build": "yarn run prebuild && yarn run build:hugo",
         "build:preview": "yarn run build:hugo:preview",
