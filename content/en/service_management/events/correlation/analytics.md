@@ -37,4 +37,8 @@ Find out where your probmatic alerts are coming from by breaking down by source,
 
 {{< img src="service_management/events/correlation/event_analytics.png" alt="Configure event analytics" style="width:100%;" >}}
 
-To get started choose Events in the data source dropdown, when you go to add a new widget. 
+To get started, in the widget configuration, select **Events** in the data source dropdown under the *Graph your data* section. 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
