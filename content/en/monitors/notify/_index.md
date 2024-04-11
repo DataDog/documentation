@@ -42,67 +42,6 @@ Steps to free up disk space:
 4. Remove duplicate files
 ```
 
-### Tags
-
-Add tags to your monitor. Monitor tags are different from metric tags. They are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][6].
-
-{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
-
-### Renotify
-
-Enable monitor renotification (optional) to remind your team that a problem is not solved.
-
-  {{< img src="monitors/notifications/renotify_options.png" alt="Enable renotify" style="width:90%;" >}}
-
-Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
-
-For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
-**Note:** [Attribute and tag variables][7] in the renotification are populated with the data available to the monitor during the time period of the renotification.
-
-If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
-
-
-The escalation message can be added in the following ways:
-
-* In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *Renotification message* field in the `Notify your team` section.
-* With the `escalation_message` attribute in the API.
-
-If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
-
-1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
-2. Send the escalation message to a subset of groups.
-
-Learn how to configure your monitors for those use cases in the [example section][8].
-
-### Priority
-
-Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
-To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5.
-
-For example, you can set different priorities for `alert` and `warning` notifications:
-
-```
-{{#is_alert}}
-{{override_priority 'P1'}}
- ...
-{{/is_alert}}
-
-{{#is_warning}}
-{{override_priority 'P4'}}
-...
-{{/is_warning}}
-```
-
-## Notify your team
-
-Use the **Notify your team** section to:
-- Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
-- Trigger a workflow or create a workflow from a monitor.
-- Add a case to your monitor.
-
-{{< img src="/monitors/notifications/notification-options.png" alt="You can send notification to your team, trigger a workflow, or add a case to your monitor" style="width:90%;">}}
-
 ### Notifications
 
 Use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
@@ -162,6 +101,42 @@ The options are:
 
 **Note**: Depending on the integration, some content may not be displayed by default.
 
+### Metadata
+
+Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tags are different from metric tags. They are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][6]. Datadog Teams allows you to set a layer of ownership to this monitor. Thanks to this metadata, you can easily view all the monitors linked to your team. To learn more, see [Datadog Teams][21].
+
+{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
+
+### Renotify
+
+Enable monitor renotification (optional) to remind your team that a problem is not solved.
+
+  {{< img src="monitors/notifications/renotify_options.png" alt="Enable renotify" style="width:90%;" >}}
+
+Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
+
+For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
+**Note:** [Attribute and tag variables][7] in the renotification are populated with the data available to the monitor during the time period of the renotification.
+
+If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
+
+
+The escalation message can be added in the following ways:
+
+* In the `{{#is_renotify}}` block in the original notification message (recommended).
+* In the *Renotification message* field in the `Notify your team` section.
+* With the `escalation_message` attribute in the API.
+
+If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
+
+1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
+2. Send the escalation message to a subset of groups.
+
+Learn how to configure your monitors for those use cases in the [example section][8].
+
+
+## Define permissions and audit notifications
+
 ### Modifications
 
 An [event][12] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
@@ -220,7 +195,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
-[6]: /monitors/settings/
+[6]: /monitors/settings/#tag-policies
 [7]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [8]: /monitors/notify/variables/?tab=is_renotify#examples
 [9]: /service_management/workflows/
@@ -235,3 +210,4 @@ Message variables auto-populate with a randomly selected group based on the scop
 [18]: /monitors/types
 [19]: /monitors/guide/recovery-thresholds/
 [20]: /account_management/teams/#send-notifications-to-a-specific-communication-channel
+[21]: /account_management/teams/
