@@ -108,7 +108,7 @@ return true
 
 작업을 사용해 적절한 옵션을 선택할 수 있습니다. 예를 들어 탐색 메뉴에서 옵션을 선택하여 각기 다른 페이지로 이동하고 메뉴가 Shadow DOM에서 렌더링되도록 하려면 `tab` 키를 사용해 해당 옵션으로 이동한 다음 `enter` 키를 클릭해 옵션을 선택합니다. 
 
-{{< img src="synthetics/guide/browser-tests-using-shadow-dom/using-tab-keys-for-shadow-dom.mp4" alt="탭 키를 사용해 브라우저 테스트에서 Shadow DOM"을 활용하는 방법" video=true >}}
+{{< img src="synthetics/guide/browser-tests-using-shadow-dom/using-tab-keys-for-shadow-dom.mp4" alt="탭 키를 사용해 브라우저 테스트에서 Shadow DOM을 활용하는 방법" video=true >}}
 
 ## 참고 자료
 
