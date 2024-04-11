@@ -7,7 +7,7 @@ further_reading:
   text: "Learn about triaging and notifiying on cases"
 ---
 
-To get you started Datadog automatically suggests [pattern-based correlations][1] based on your environment. Click any of the recommendations to open the configuration for the recommended pattern. Configuration fields are pre-populated.
+To get you started, Datadog automatically suggests [pattern-based correlations][1] according to your environment. Click any of the recommendations to open the configuration for the recommended pattern. Configuration fields are pre-populated.
 
 {{< img src="service_management/events/correlation/pattern/recommended_patterns_preview.png" alt="Correlation recommended patterns with the preview panel showing potential cases the pattern would create" style="width:100%;" >}}
 
