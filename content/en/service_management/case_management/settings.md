@@ -59,7 +59,7 @@ Project handles can be used in monitors to automatically create cases. In the mo
   | ---  | ----------- | 
   |Once to ServiceNow at case creation|The field syncs from Case Management to ServiceNow only at the time the case is created. Subsequent changes are not reflected on either side.|
   |All updates to ServiceNow |Changes in Case Management are reflected in ServiceNow, but changes in ServiceNow are not reflected in Case Management.|
-  |Two-way sync|Changes in Case Management are reflected in ServiceNow, and vice versa|
+  |Two-way sync|Changes in Case Management are reflected in ServiceNow, and vice versa.|
   |Don't sync|The field does not sync to ServiceNow.|
 1. Select ServiceNow state values that Case Management status values should map to.
 1. Save changes.
