@@ -44,7 +44,7 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 Select up to three different time windows from the following:
 - **Rolling time windows**: 7, 30, or 90 days
 - **Calendar time windows**: week to date, previous week, month to date, or previous month
-- **Global time**: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 15 months of historical info for metric-based and Time Slice SLOs and up to 3 months for monitor-based SLOs. 
+- **Global time**: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 15 months of historical info for metric-based and Time Slice SLOs, and up to 3 months for monitor-based SLOs. 
   
   **Note:** To display an error budget and color-code your `Global time` SLO status value as green or red, you need to specify an SLO target. If the SLO input target is not specified, only the SLO status is shown, and the font color remains gray.
 
@@ -63,8 +63,6 @@ If you are visualizing an SLO with multiple groups or a monitor-based SLO with m
   - `Overall`: displays the overall SLO status percentages and targets
   - `Monitors`: displays a table of status percentages for each monitor
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
-
-**Note:** For monitor-based SLOs, you can only use the `Overall` view mode when the `Global Time` time window option is selected. 
 
 When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
 - The groups are sorted by ascending status in the smallest time window by default. After adding the widget to a dashboard, you have the ability to sort by status for any of the configured time windows through the widget UI.
