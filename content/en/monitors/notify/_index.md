@@ -103,7 +103,7 @@ The options are:
 
 ### Metadata
 
-Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tags are different from metric tags. They are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][10]. Datadog Teams allows you to set a layer of ownership to this monitor. Thanks to this metadata, you can easily view all the monitors linked to your team. To learn more, see [Datadog Teams][11].
+Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tag--which are different from metric tags--are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][10]. Datadog Teams allows you to set a layer of ownership to this monitor and view all the monitors linked to your team. To learn more, see [Datadog Teams][11].
 
 {{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
 
