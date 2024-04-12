@@ -263,6 +263,6 @@ In the task definition, replace the "workload" container with the following:
 [4]: /security/cloud_security_management/setup/csm_enterprise
 [5]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [6]: https://aws.amazon.com/console
-[7]: /resources/json/datadog-agent-ecs-fargate.json
+[7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs
