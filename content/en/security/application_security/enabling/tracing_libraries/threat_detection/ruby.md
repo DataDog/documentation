@@ -7,6 +7,7 @@ code_lang_weight: 30
 aliases:
   - /security_platform/application_security/getting_started/ruby
   - /security/application_security/getting_started/ruby
+  - /security/application_security/enabling/ruby
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -14,7 +15,7 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-rb'
       tag: 'GitHub'
       text: 'Ruby Datadog library source code'
-    - link: "/security/default_rules/#cat-application-security"
+    - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"

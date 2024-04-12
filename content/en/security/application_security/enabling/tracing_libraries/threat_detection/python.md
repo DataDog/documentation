@@ -7,6 +7,7 @@ code_lang_weight: 50
 aliases:
   - /security_platform/application_security/getting_started/python
   - /security/application_security/getting_started/python
+  - /security/application_security/enabling/python
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -14,7 +15,7 @@ further_reading:
     - link: 'https://github.com/DataDog/dd-trace-py'
       tag: 'GitHub'
       text: 'Python Datadog library source code'
-    - link: "/security/default_rules/#cat-application-security"
+    - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"
