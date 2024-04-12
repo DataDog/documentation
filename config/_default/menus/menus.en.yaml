@@ -4313,46 +4313,40 @@ main:
     parent: appsec_getting_started
     identifier: appsec_compat
     weight: 201
-  - name: Java
-    url: security/application_security/enabling/java/
+  - name: Using Single Step Instrumentation
+    url: security/application_security/enabling/single_step/
     parent: appsec_getting_started
-    identifier: appsec_java
+    identifier: appsec_enabling_single_step
     weight: 202
-  - name: .NET
-    url: security/application_security/enabling/dotnet/
+  - name: Threat Detection and Protection
+    url: security/application_security/enabling/single_step/threat_detection/
+    parent: appsec_enabling_single_step
+    identifier: appsec_enabling_single_step_threats
+    weight: 2101
+  - name: Code Security
+    url: security/application_security/enabling/single_step/code_security/
+    parent: appsec_enabling_single_step
+    identifier: appsec_enabling_single_step_code
+    weight: 2102
+  - name: Using Datadog Tracing libraries
+    url: security/application_security/enabling/tracing_libraries/
     parent: appsec_getting_started
-    identifier: appsec_dotnet
+    identifier: appsec_enabling_tracing_libraries
     weight: 203
-  - name: Go
-    url: security/application_security/enabling/go/
-    parent: appsec_getting_started
-    identifier: appsec_go
-    weight: 204
-  - name: Ruby
-    url: security/application_security/enabling/ruby/
-    parent: appsec_getting_started
-    identifier: appsec_ruby
-    weight: 205
-  - name: PHP
-    url: security/application_security/enabling/php/
-    parent: appsec_getting_started
-    identifier: appsec_php
-    weight: 206
-  - name: NodeJS
-    url: security/application_security/enabling/nodejs/
-    parent: appsec_getting_started
-    identifier: appsec_nodejs
-    weight: 207
-  - name: Python
-    url: security/application_security/enabling/python/
-    parent: appsec_getting_started
-    identifier: appsec_python
-    weight: 208
-  - name: Serverless
+  - name: Threat Detection and Protection
+    url: security/application_security/enabling/tracing_libraries/threat_detection/
+    parent: appsec_enabling_tracing_libraries
+    identifier: appsec_enabling_tracing_libraries_threats
+    weight: 2101
+  - name: Code Security
+    url: security/application_security/enabling/tracing_libraries/code_security/
+    parent: appsec_enabling_tracing_libraries
+    identifier: appsec_enabling_tracing_libraries_code
+  - name: Enabling ASM for Serverless
     url: security/application_security/enabling/serverless/
     parent: appsec_getting_started
-    identifier: appsec_serverless
-    weight: 209
+    identifier: appsec_enabling_serverless
+    weight: 204
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
@@ -7899,7 +7893,7 @@ api:
         - GetSLOReportJobStatus
       unstable:
         - v2
-      order: 2
+      order: 102
   - name: Get SLO report
     url: '#get-slo-report'
     identifier: service-level-objectives-get-slo-report
@@ -7912,7 +7906,7 @@ api:
         - GetSLOReport
       unstable:
         - v2
-      order: 3
+      order: 103
   - name: Create a new SLO report
     url: '#create-a-new-slo-report'
     identifier: service-level-objectives-create-a-new-slo-report
@@ -7925,7 +7919,7 @@ api:
         - CreateSLOReportJob
       unstable:
         - v2
-      order: 1
+      order: 101
   - name: Get an SLO's history
     url: '#get-an-slos-history'
     identifier: service-level-objectives-get-an-slos-history

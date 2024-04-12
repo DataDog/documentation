@@ -1,16 +1,13 @@
 ---
 title: Enabling ASM for Serverless
 kind: documentation
-code_lang: serverless
-type: multi-code-lang
-code_lang_weight: 90
 aliases:
   - /security/application_security/getting_started/serverless
 further_reading:
     - link: "/security/application_security/how-appsec-works/"
       tag: "Documentation"
       text: "How Application Security Works"
-    - link: "/security/default_rules/#cat-application-security"
+    - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"

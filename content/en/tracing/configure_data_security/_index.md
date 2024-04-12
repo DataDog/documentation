@@ -386,7 +386,7 @@ apm_config:
     remove_stack_traces: true # default false
 ```
 
-This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOVE_STACK_TRACES=false`.
+This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOVE_STACK_TRACES=true`.
 
 {{% /tab %}}
 {{< /tabs >}}

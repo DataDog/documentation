@@ -16278,6 +16278,7 @@ components:
       - spans-sampling-processor
       - spans-errors-sampling-processor
       - spans-appsec-sampling-processor
+      example: spans-sampling-processor
       type: string
       x-enum-varnames:
       - SPANS_SAMPLING_PROCESSOR
@@ -16394,11 +16395,42 @@ components:
       type: string
       x-enum-varnames:
       - SPANS_SAMPLING_PROCESSOR
+    RetentionFilterUpdateAttributes:
+      description: The object describing the configuration of the retention filter
+        to create/update.
+      properties:
+        enabled:
+          description: Enable/Disable the retention filter.
+          example: true
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/SpansFilterCreate'
+        filter_type:
+          $ref: '#/components/schemas/RetentionFilterAllType'
+        name:
+          description: The name of the retention filter.
+          example: my retention filter
+          type: string
+        rate:
+          description: 'Sample rate to apply to spans going through this retention
+            filter,
+
+            a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      required:
+      - name
+      - filter
+      - enabled
+      - filter_type
+      - rate
+      type: object
     RetentionFilterUpdateData:
       description: The body of the retention filter to be updated.
       properties:
         attributes:
-          $ref: '#/components/schemas/RetentionFilterCreateAttributes'
+          $ref: '#/components/schemas/RetentionFilterUpdateAttributes'
         id:
           description: The ID of the retention filter.
           example: retention-filter-id
@@ -23561,7 +23593,11 @@ paths:
     post:
       description: 'Create a retention filter to index spans in your organization.
 
-        Returns the retention filter definition when the request is successful.'
+        Returns the retention filter definition when the request is successful.
+
+
+        Default filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor
+        cannot be created.'
       operationId: CreateApmRetentionFilter
       requestBody:
         content:
@@ -23636,7 +23672,11 @@ paths:
         type: idempotent
   /api/v2/apm/config/retention-filters/{filter_id}:
     delete:
-      description: Delete a specific retention filter from your organization.
+      description: 'Delete a specific retention filter from your organization.
+
+
+        Default filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor
+        cannot be deleted.'
       operationId: DeleteApmRetentionFilter
       parameters:
       - $ref: '#/components/parameters/RetentionFilterIdParam'
@@ -23680,7 +23720,11 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Update a retention filter from your organization.
+      description: 'Update a retention filter from your organization.
+
+
+        Default filters (filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor)
+        cannot be renamed or removed.'
       operationId: UpdateApmRetentionFilter
       parameters:
       - $ref: '#/components/parameters/RetentionFilterIdParam'
@@ -36082,7 +36126,7 @@ paths:
               {{ timestamp(\"now - 21d\") }},\n      \"to_ts\":  {{ timestamp(\"now\")
               }}\n    }\n  }\n}"
           step: there is a valid "report" in the system
-      x-menu-order: 1
+      x-menu-order: 101
       x-undo:
         type: safe
       x-unstable: '**Note**: This feature is in private beta. To request access, use
@@ -36134,7 +36178,7 @@ paths:
       summary: Get SLO report
       tags:
       - Service Level Objectives
-      x-menu-order: 3
+      x-menu-order: 103
       x-undo:
         type: safe
       x-unstable: '**Note**: This feature is in private beta. To request access, use
@@ -36181,7 +36225,7 @@ paths:
       summary: Get SLO report status
       tags:
       - Service Level Objectives
-      x-menu-order: 2
+      x-menu-order: 102
       x-undo:
         type: safe
       x-unstable: '**Note**: This feature is in private beta. To request access, use

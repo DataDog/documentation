@@ -17,6 +17,7 @@ further_reading:
 
 {{< whatsnext desc="Guides" >}}
     {{< nextlink href="/profiler/guide/isolate-outliers-in-monolithic-services/" >}}Isolate Outliers in Monolithic Services{{< /nextlink >}}
+    {{< nextlink href="/profiler/guide/solve-memory-leaks/" >}}Solve Memory Leaks with Profiling{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
