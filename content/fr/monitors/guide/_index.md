@@ -12,7 +12,7 @@ title: Guides sur les monitors
 
 {{< whatsnext desc="Alertes, downtimes et messages :" >}}
     {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}Dépanner les alertes de monitor{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Évaluer des template variables{< /nextlink >}}
+    {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Évaluer des template variables{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Surveillance de plages{{< /nextlink >}}
     {{< nextlink href="/monitors/guide/scoping_downtimes" >}}Limiter la portée des downtimes{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}Alerte en cas d'absence de changement d'une valeur{{< /nextlink >}}
