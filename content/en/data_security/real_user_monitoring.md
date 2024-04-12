@@ -22,6 +22,20 @@ further_reading:
 
 ## Overview
 Real User Monitoring (RUM) provides controls for implementing privacy requirements and ensuring organizations of any scale do not expose sensitive or personal information. Data is stored on Datadog-managed cloud instances and encrypted at rest. The default behaviors and configurable options described on this page are designed to protect end user privacy and prevent sensitive organizational information from being collected. Learn more about [Privacy at Datadog][13].
+
+## Shared responsibility
+
+The responsibility of keeping user data secure is shared between Datadog and developers who leverage the RUM SDKs.
+
+Datadog is responsible for:
+
+- Providing a reliable product that handles data securely when it is transmitted to and stored on the Datadog platform.
+- Ensuring that security issues are identified in accordance with internal policies.
+
+Developers are responsible for:
+- Leveraging configuration values and data privacy options as provided by Datadog.
+- Ensuring the integrity of code within their environments.
+
 ## Compliance frameworks
 RUM can be configured for compliance with many standards and regulatory frameworks, including, but not limited to:
 
