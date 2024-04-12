@@ -43,8 +43,8 @@ Security Inbox also takes the following detected risks into consideration when d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/default_rules/?category=cat-csm-security-issues#all
-[2]: /security/misconfigurations/
-[3]: /security/identity_risks/
+[2]: /security/cloud_security_management/misconfigurations/
+[3]: /security/cloud_security_management/identity_risks/
 [4]: /security/application_security/software_composition_analysis
 [5]: /security/application_security/code_security
 [6]: /security/cloud_security_management/guide/public-accessibility-logic/

@@ -22,6 +22,8 @@ further_reading:
 ## Compatibility
 
 - **Partial pipelines**: View partially retried executions
+- **Running pipelines**: View pipeline executions that are running
+    - **Note**: AWS CodePipeline running pipelines don't have Git information until they have finished.
 
 ## Configure the Datadog integration
 

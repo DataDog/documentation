@@ -90,6 +90,12 @@ components:
             description: Regions to exclude.
             type: string
           type: array
+        extended_resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects additional attributes and configuration
+            information about the resources in your AWS account. Required for `cspm_resource_collection`.
+          example: true
+          type: boolean
         filter_tags:
           description: 'The array of EC2 tags (in the form `key:value`) defines a
             filter that Datadog uses when collecting metrics from EC2.
@@ -128,8 +134,9 @@ components:
           type: boolean
         resource_collection_enabled:
           default: false
-          description: Whether Datadog collects a standard set of resources from your
-            AWS account.
+          deprecated: true
+          description: Deprecated in favor of 'extended_resource_collection_enabled'.
+            Whether Datadog collects a standard set of resources from your AWS account.
           example: true
           type: boolean
         role_name:
@@ -4209,6 +4216,7 @@ components:
       - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
+      - incident_management_monthly_active_users_usage
       - indexed_spans_usage
       - infra_host_usage
       - ingested_logs_bytes_usage
@@ -4230,6 +4238,7 @@ components:
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - obs_pipelines_vcpu_usage
+      - online_archive_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
@@ -4277,6 +4286,7 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
       - INDEXED_SPANS_USAGE
       - INFRA_HOST_USAGE
       - INGESTED_LOGS_BYTES_USAGE
@@ -4298,6 +4308,7 @@ components:
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - OBS_PIPELINE_VCPU_USAGE
+      - ONLINE_ARCHIVE_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
@@ -7162,8 +7173,13 @@ components:
           nullable: true
           type: integer
         renotify_statuses:
-          description: The types of monitor statuses for which re-notification messages
+          description: 'The types of monitor statuses for which re-notification messages
             are sent.
+
+            Default: **null** if `renotify_interval` is **null**.
+
+            If `renotify_interval` is set, defaults to renotify on `Alert` and `No
+            Data`.'
           items:
             $ref: '#/components/schemas/MonitorRenotifyStatusType'
           nullable: true
@@ -7915,6 +7931,8 @@ components:
       - fargate_percentage
       - functions_usage
       - functions_percentage
+      - incident_management_monthly_active_users_usage
+      - incident_management_monthly_active_users_percentage
       - infra_host_usage
       - infra_host_percentage
       - invocations_usage
@@ -7931,6 +7949,8 @@ components:
       - obs_pipeline_bytes_percentage
       - obs_pipelines_vcpu_usage
       - obs_pipelines_vcpu_percentage
+      - online_archive_usage
+      - online_archive_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
@@ -8046,6 +8066,8 @@ components:
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_PERCENTAGE
       - INFRA_HOST_USAGE
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
@@ -8062,6 +8084,8 @@ components:
       - OBS_PIPELINE_BYTES_PERCENTAGE
       - OBS_PIPELINES_VCPU_USAGE
       - OBS_PIPELINES_VCPU_PERCENTAGE
+      - ONLINE_ARCHIVE_USAGE
+      - ONLINE_ARCHIVE_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
@@ -8385,6 +8409,15 @@ components:
           description: The Lambda function usage by tag(s).
           format: double
           type: number
+        incident_management_monthly_active_users_percentage:
+          description: The percentage of Incident Management monthly active users
+            usage by tag(s).
+          format: double
+          type: number
+        incident_management_monthly_active_users_usage:
+          description: The Incident Management monthly active users usage by tag(s).
+          format: double
+          type: number
         indexed_spans_percentage:
           description: The percentage of APM Indexed Spans usage by tag(s).
           format: double
@@ -8562,6 +8595,14 @@ components:
           type: number
         obs_pipelines_vcpu_usage:
           description: The observability pipeline per core usage by tag(s).
+          format: double
+          type: number
+        online_archive_percentage:
+          description: The percentage of online archive usage by tag(s).
+          format: double
+          type: number
+        online_archive_usage:
+          description: The online archive usage by tag(s).
           format: double
           type: number
         profiled_container_percentage:
@@ -11440,7 +11481,8 @@ components:
       description: 'The time-slice condition, composed of 3 parts: 1. the metric timeseries
         query, 2. the comparator,
 
-        and 3. the threshold.'
+        and 3. the threshold. Optionally, a fourth part, the query interval, can be
+        provided.'
       example:
         comparator: <
         query:
@@ -11459,6 +11501,8 @@ components:
           $ref: '#/components/schemas/SLOTimeSliceComparator'
         query:
           $ref: '#/components/schemas/SLOTimeSliceQuery'
+        query_interval_seconds:
+          $ref: '#/components/schemas/SLOTimeSliceInterval'
         threshold:
           description: The threshold value to which each SLI value will be compared.
           example: 5
@@ -11469,6 +11513,22 @@ components:
       - threshold
       - query
       type: object
+    SLOTimeSliceInterval:
+      description: 'The interval used when querying data, which defines the size of
+        a time slice.
+
+        Two values are allowed: 60 (1 minute) and 300 (5 minutes).
+
+        If not provided, the value defaults to 300 (5 minutes).'
+      enum:
+      - 60
+      - 300
+      example: 300
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE_MINUTE
+      - FIVE_MINUTES
     SLOTimeSliceQuery:
       description: The queries and formula used to calculate the SLI value.
       example:
@@ -12189,7 +12249,7 @@ components:
         interval:
           default: null
           description: If the type of the metric is rate or count, define the corresponding
-            interval.
+            interval in seconds.
           example: 20
           format: int64
           nullable: true
@@ -16047,6 +16107,11 @@ components:
           maximum: 65535
           minimum: 1
           type: integer
+        files:
+          description: Files to be used as part of the request in the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsTestRequestBodyFile'
+          type: array
         follow_redirects:
           description: Specifies whether or not the request follows redirects.
           type: boolean
@@ -16113,6 +16178,32 @@ components:
           example: https://example.com
           type: string
       type: object
+    SyntheticsTestRequestBodyFile:
+      description: Object describing a file to be used as part of the request in the
+        test.
+      properties:
+        bucketKey:
+          description: Bucket key of the file.
+          type: string
+        content:
+          description: Content of the file.
+          maxLength: 3145728
+          type: string
+        name:
+          description: Name of the file.
+          maxLength: 1500
+          type: string
+        size:
+          description: Size of the file.
+          format: int64
+          maximum: 3145728
+          minimum: 1
+          type: integer
+        type:
+          description: Type of the file.
+          maxLength: 1500
+          type: string
+      type: object
     SyntheticsTestRequestBodyType:
       description: Type of the request body.
       enum:
@@ -16122,6 +16213,8 @@ components:
       - text/html
       - application/x-www-form-urlencoded
       - graphql
+      - application/octet-stream
+      - multipart/form-data
       example: text/plain
       type: string
       x-enum-varnames:
@@ -16131,6 +16224,8 @@ components:
       - TEXT_HTML
       - APPLICATION_X_WWW_FORM_URLENCODED
       - GRAPHQL
+      - APPLICATION_OCTET_STREAM
+      - MULTIPART_FORM_DATA
     SyntheticsTestRequestCertificate:
       description: Client certificate to use when performing the test request.
       properties:
@@ -24508,9 +24603,9 @@ paths:
             value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
               {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
               true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
-              \ ],\n  \"filter_tags\": [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\":
-              [\n      \"$KEY:$VALUE\"\n  ],\n  \"metrics_collection_enabled\": false,\n
-              \ \"resource_collection_enabled\": true,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+              \ ],\n  \"extended_resource_collection_enabled\": true,\n  \"filter_tags\":
+              [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\": [\n      \"$KEY:$VALUE\"\n
+              \ ],\n  \"metrics_collection_enabled\": false,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
           step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-undo:

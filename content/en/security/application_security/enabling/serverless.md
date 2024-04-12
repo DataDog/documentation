@@ -16,6 +16,9 @@ further_reading:
     - link: "/security/application_security/threats/"
       tag: "Documentation"
       text: "Application Threat Management"
+    - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
+      tag: "Blog"
+      text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>

@@ -33,7 +33,7 @@ algolia:
 
 Issues from RUM errors include the stack trace, user session timelines, and metadata—including user location, version, and any custom attributes you included in your crash reports.
 
-Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for RUM, navigate to [**UX Monitoring** > **Error Tracking**][1].
+Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for RUM, navigate to [**Digital Experience** > **Error Tracking**][1].
 
 ## Setup
 

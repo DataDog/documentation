@@ -171,25 +171,83 @@ docker run -d --name dd-agent \
 
 {{% tab "Kubernetes" %}}
 
-You can enable APM by installing the Agent with the Datadog Helm chart. This deploys the Datadog Agent across all nodes in your Linux-based Kubernetes cluster with a DaemonSet.
+You can enable APM by installing the Agent with either:
 
-**Note**: Single step instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.
+- Datadog Operator
+- Datadog Helm chart
+
+<div class="alert alert-info">Single Step Instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.</div>
 
 ### Requirements
 
-- Make sure you have [Helm][13] installed.
+- Kubernetes v1.20+
+- [`Helm`][1] for deploying the Datadog Operator.
+- [`Kubectl` CLI][2] for installing the Datadog Agent.
 
-### Installation
+{{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
+Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
 
-To enable single step instrumentation with Helm:
+To enable Single Step Instrumentation with the Datadog Operator:
+
+1. Install the [Datadog Operator][36] v1.5.0+ with Helm:
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm install my-datadog-operator datadog/datadog-operator
+   ```
+2. Create a Kubernetes secret to store your Datadog [API key][3]:
+   ```shell
+   kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
+   ```
+3. Create `datadog-agent.yaml` with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       site: <DATADOG_SITE>
+       tags:
+         - env:<AGENT_ENV>
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+     features:
+       apm:
+         instrumentation:
+           enabled: true  
+   ```
+   Replace `<DATADOG_SITE>` with your [Datadog site][6] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
+
+      <div class="alert alert-info">
+      Here you can also optionally configure the following:
+      <ul>
+         <li><a href="#enabling-or-disabling-instrumentation-for-namespaces">Enabling or disabling instrumentation for namespaces.</a></li>
+         <li><a href="#specifying-tracing-library-versions">Specifying tracing library versions.</a></li>
+         <li><a href="/tracing/trace_collection/library_injection_local/">Choosing specific pod specifications.</a></li>
+      </ul>
+   </div>
+
+4. Run the following command:
+   ```shell
+   kubectl apply -f /path/to/your/datadog-agent.yaml
+   ```
+5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
+{{< /collapse-content >}} 
+
+{{< collapse-content title="Installing with Helm" level="h4" >}}
+Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
+
+To enable Single Step Instrumentation with Helm:
 
 1. Add the Helm Datadog repo:
-   ```bash
+   ```shell
     helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
 2. Create a Kubernetes secret to store your Datadog [API key][10]:
-   ```bash
+   ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```
 3. Create `datadog-values.yaml` and add the following configuration:
@@ -197,28 +255,31 @@ To enable single step instrumentation with Helm:
    datadog:
     apiKeyExistingSecret: datadog-secret
     site: <DATADOG_SITE>
+    tags:
+         - env:<AGENT_ENV>
     apm:
       instrumentation:
          enabled: true
    ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][12].
+   Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
    <div class="alert alert-info">
       Here you can also optionally configure the following:
       <ul>
          <li><a href="#enabling-or-disabling-instrumentation-for-namespaces">Enabling or disabling instrumentation for namespaces.</a></li>
          <li><a href="#specifying-tracing-library-versions">Specifying tracing library versions.</a></li>
-         <li><a href="#env-k8">Tagging observability data by environment.</a></li>
-         <li><a href="https://docs.datadoghq.com/tracing/trace_collection/library_injection_local/">Choosing specific pod specifications.</a></li>
+         <li><a href="/tracing/trace_collection/library_injection_local/">Choosing specific pod specifications.</a></li>
       </ul>
    </div>
 
 
 4. Run the following command:
-   ```bash
+   ```shell
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
    ```
-5. Do a rolling restart on your applications for instrumentation to take effect.
+5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
+
+{{< /collapse-content >}} 
 
 
 [7]: https://v3.helm.sh/docs/intro/install/
@@ -229,36 +290,69 @@ To enable single step instrumentation with Helm:
 [12]: /getting_started/site
 [13]: https://v3.helm.sh/docs/intro/install/
 [14]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[36]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 
 ### Enabling or disabling instrumentation for namespaces
 
-You can choose to selectively instrument specific namespaces or choose to not instrument them.
+You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enabledNamespaces or disabledNamespaces, not both.
 
-To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=6-9" >}}
-      datadog:
-        apiKeyExistingSecret: datadog-secret
-        site: <DATADOG_SITE>
-        apm:
-          instrumentation:
-            enabled:true
-            enabledNamespaces: # Add namespaces to instrument
-               - namespace_1
-               - namespace_2
- {{< /highlight >}}
+The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
-To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=7-9" >}}
-   datadog:
-     apiKeyExistingSecret: datadog-secret
-     site: <DATADOG_SITE>
+{{< collapse-content title="Datadog Operator" level="h4" >}}
+
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-agent.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   features:
      apm:
        instrumentation:
-         enabled: true
+         enabled: true 
+         enabledNamespaces: # Add namespaces to instrument
+           - default
+           - applications
+{{< /highlight >}}
+
+To disable instrumentation for specific namespaces, add `disabledNamespaces` configuration to `datadog-agent.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   features:
+     apm:
+       instrumentation:
+         enabled: true 
          disabledNamespaces: # Add namespaces to not instrument
+           - default
+           - applications
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Helm" level="h4" >}}
+
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-values.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   datadog:
+      apm:
+        instrumentation:
+          enabled: true
+          enabledNamespaces: # Add namespaces to instrument
+             - namespace_1
+             - namespace_2
+{{< /highlight >}}
+
+To disable instrumentation for specific namespaces, add `disabledNamespaces` configuration to `datadog-values.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   datadog:
+      apm:
+        instrumentation:
+          enabled: true
+          disabledNamespaces: # Add namespaces to not instrument
             - namespace_1
             - namespace_2
 {{< /highlight >}}
+
+{{< /collapse-content >}}
 
 ### Specifying tracing library versions
 
@@ -315,12 +409,14 @@ spec:
 
 If you don't inject tracing libraries from the pod spec, you can specify tracing libraries for the entire cluster with Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only the specified libraries and versions are injected.
 
-For example, to instrument .NET, Python, and Javascript applications, add the following configuration to your `datadog-values.yaml` file:
+The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
-{{< highlight yaml "hl_lines=7-12" >}}
-   datadog:
-     apiKeyExistingSecret: datadog-secret
-     site: <DATADOG_SITE>
+{{< collapse-content title="Datadog Operator" level="h4" >}}
+
+For example, to instrument .NET, Python, and JavaScript applications, add the following configuration to your `datadog-agent.yaml` file:
+
+{{< highlight yaml "hl_lines=5-8" >}}
+   features:
      apm:
        instrumentation:
          enabled: true
@@ -329,6 +425,26 @@ For example, to instrument .NET, Python, and Javascript applications, add the fo
             python: v1.20.6
             js: v4.17.0
 {{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Helm" level="h4" >}}
+
+For example, to instrument .NET, Python, and JavaScript applications, add the following configuration to your `datadog-values.yaml` file:
+
+{{< highlight yaml "hl_lines=5-8" >}}
+   datadog:
+     apm:
+       instrumentation:
+         enabled: true
+         libVersions: # Add any libraries and versions you want to set
+            dotnet: v2.46.0
+            python: v1.20.6
+            js: v4.17.0
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
 
 #### Container registries
 
@@ -348,22 +464,12 @@ You can pull the tracing library from a different registry by changing it to `do
 
 For instructions on changing your container registry, see [Changing Your Container Registry][30].
 
-### Tagging observability data by environment {#env-k8}
-
-Automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `env:staging` to associate your observability data with `staging`.
-
-For example, add the following configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=4-5" >}}
-   datadog:
-     apiKeyExistingSecret: datadog-secret
-     site: <DATADOG_SITE>
-     tags:
-         - env:staging
-     apm:
-       instrumentation:
-         enabled: true
-{{< /highlight >}}
-
+[1]: https://helm.sh/
+[2]: https://kubernetes.io/docs/tasks/tools/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /getting_started/site/
+[5]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
+[6]: /getting_started/site
 [15]: http://gcr.io/datadoghq/dd-lib-java-init
 [16]: http://hub.docker.com/r/datadog/dd-lib-java-init
 [17]: http://gallery.ecr.aws/datadog/dd-lib-java-init
@@ -429,13 +535,12 @@ Run the following commands and restart the service to stop injecting the library
            admission.datadoghq.com/enabled: "false"
    ```
 2. Apply the configuration:
-   ```bash
+   ```shell
    kubectl apply -f /path/to/your/deployment.yaml
    ```
 3. Restart the services you want to remove instrumentation for.
 
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ### Removing APM for all services on the infrastructure
@@ -469,15 +574,41 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{% tab "Kubernetes" %}}
 
-1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
+The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
+
+{{< collapse-content title="Datadog Operator" level="h4" >}}
+
+1. Set `instrumentation.enabled=false` in `datadog-agent.yaml`:
+   ```yaml
+   features:
+     apm:
+       instrumentation:
+         enabled: false
+   ```
+
+2. Deploy the Datadog Agent with the updated configuration file:
+   ```shell
+   kubectl apply -f /path/to/your/datadog-agent.yaml
+   ```
+{{< /collapse-content >}}
+
+{{< collapse-content title="Helm" level="h4" >}}
+
+1. Set `instrumentation.enabled=false` in `datadog-values.yaml`:
+   ```yaml
+   datadog:
+     apm:
+       instrumentation:
+         enabled: false
+   ```
+
 2. Run the following command:
-   ```bash
+   ```shell
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
    ```
-3. Restart your services.
+{{< /collapse-content >}}
 
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ## Further reading
