@@ -63,7 +63,9 @@ import { datadogRum } from '@datadog/browser-rum'
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>', // see https://docs.datadoghq.com/getting_started/site/
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
+  site: '<DATADOG_SITE>',
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
@@ -86,7 +88,9 @@ import { datadogRum } from '@datadog/browser-rum'
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>', // see https://docs.datadoghq.com/getting_started/site/
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
+  site: '<DATADOG_SITE>',
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
@@ -110,7 +114,9 @@ import { datadogRum } from '@datadog/browser-rum'
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>', // see https://docs.datadoghq.com/getting_started/site/
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
+  site: '<DATADOG_SITE>',
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
@@ -134,7 +140,9 @@ import { datadogRum } from '@datadog/browser-rum'
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>', // see https://docs.datadoghq.com/getting_started/site/
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
+  site: '<DATADOG_SITE>',
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
@@ -156,7 +164,9 @@ import { datadogRum } from '@datadog/browser-rum'
 datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>', // see https://docs.datadoghq.com/getting_started/site/
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
+  site: '<DATADOG_SITE>',
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
@@ -190,7 +200,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -216,7 +228,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ap1.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -242,7 +256,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -268,7 +284,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -294,7 +312,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -320,7 +340,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -352,7 +374,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -379,7 +403,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ap1.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -406,7 +432,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -433,7 +461,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -460,7 +490,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -487,7 +519,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -520,7 +554,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -547,7 +583,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ap1.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -574,7 +612,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -601,7 +641,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -628,7 +670,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -655,7 +699,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -688,7 +734,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -713,7 +761,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ap1.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -738,7 +788,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -763,7 +815,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -788,7 +842,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -813,7 +869,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -844,7 +902,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -869,7 +929,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ap1.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -894,7 +956,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -919,7 +983,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -944,7 +1010,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -969,7 +1037,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com', // see https://docs.datadoghq.com/getting_started/site/
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -1004,6 +1074,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1025,6 +1097,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1046,6 +1120,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1067,6 +1143,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1088,6 +1166,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1109,6 +1189,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1136,6 +1218,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1159,6 +1243,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1182,6 +1268,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1205,6 +1293,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1228,6 +1318,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1251,6 +1343,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1280,6 +1374,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1303,6 +1399,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1326,6 +1424,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1349,6 +1449,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1372,6 +1474,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1395,6 +1499,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1424,6 +1530,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1445,6 +1553,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1466,6 +1576,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1487,6 +1599,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1508,6 +1622,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1529,6 +1645,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1556,6 +1674,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1577,6 +1697,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ap1.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1598,6 +1720,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'datadoghq.eu',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1619,6 +1743,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us3.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1640,6 +1766,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'us5.datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
@@ -1661,6 +1789,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
       site: 'ddog-gov.com',
       //  service: 'my-web-application',
       //  env: 'production',
