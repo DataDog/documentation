@@ -45,7 +45,7 @@ Recommendations are run on a daily basis, and are automatically refreshed in you
 
 Datadog scans your cloud environment to identify and surface orphaned resources that can be removed. 
 
-Low Utilization EC2 Instances
+Unused EC2 Instances
 : EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. 
 
 Unattached EBS Volumes
@@ -57,7 +57,7 @@ Unused EBS Volumes
 Unused RDS Instances
 : RDS instances with 0 database connections and 0 replica lag.
 
-Incomplete S3 Multipart Uploads
+Abandoned S3 Multipart Uploads
 : Incomplete multipart uploads (requires [Storage Lens metrics][6]).
 
 Unused Redshift Cluster
@@ -84,7 +84,7 @@ Unused Network Elastic Load Balancer
 Unused NAT Gateway
 : A NAT Gateway that has no bytes sent out. 
 
-Unused Elastic IP Address
+Idle Elastic IP Address
 : Elastic IP addresses with idle charges in your AWS cost and usage report.
 
 Application Load Balancer (ELB)
@@ -107,7 +107,7 @@ I01 EBS Volumes
 
 Datadog identifies individual resources that are under-utilized or over-provisioned, which you can consider adjusting the size and configuration to reduce your costs and improve the performance of your resources.
 
-Overprovisioned EC2 instances
+Downsize EC2 instances
 : EC2 instances not in an auto-scaling group, with less than 50% CPU and memory utilization.
 
 
