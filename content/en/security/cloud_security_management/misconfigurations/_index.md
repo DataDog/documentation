@@ -54,8 +54,8 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 
 ## Get started
 
-{{< learning-center-callout header="Detect, prioritize, and remediate cloud security risks with Datadog CSM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/csm-misconfigurations">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to learn how to secure your cloud environments with CSM misconfigurations.
+{{< learning-center-callout header="Try Detect, Prioritize, and Remediate Cloud Security Risks with Datadog CSM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/csm-misconfigurations">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to learn how to secure your cloud environments with CSM misconfigurations.
 {{< /learning-center-callout >}}
 
 {{< whatsnext >}}

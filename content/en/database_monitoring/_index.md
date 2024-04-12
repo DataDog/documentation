@@ -104,8 +104,8 @@ On the [Databases page][1], you can assess the health and activity of your datab
 
 ## Further Reading
 
-{{< learning-center-callout header="Monitoring a Postgres database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll today to identify inefficiencies and optimize your Postgres database.
+{{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to identify inefficiencies and optimize your Postgres database.
 {{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
