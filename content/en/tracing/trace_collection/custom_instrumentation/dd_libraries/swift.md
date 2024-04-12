@@ -2,9 +2,6 @@
 title: Swift Custom Instrumentation with Datadog Library
 kind: documentation
 description: 'Manually instrument your Swift applications to send custom traces to Datadog.'
-code_lang: swift
-type: multi-code-lang
-code_lang_weight: 100
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'

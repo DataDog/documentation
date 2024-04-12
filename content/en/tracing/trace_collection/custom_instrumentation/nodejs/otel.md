@@ -2,11 +2,12 @@
 title: Custom Instrumentation of Node.js Applications with the OpenTelemetry API
 kind: documentation
 description: 'Instrument your Node.js application with OpenTelemetry API to send traces to Datadog.'
-code_lang: nodejs
+code_lang: otel
 type: multi-code-lang
-code_lang_weight: 40
+code_lang_weight: 2
 aliases:
 - /tracing/trace_collection/otel_instrumentation/nodejs/
+- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

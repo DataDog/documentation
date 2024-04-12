@@ -2,9 +2,6 @@
 title: Elixir Custom Instrumentation with Datadog Library
 kind: documentation
 description: 'Manually instrument your Elixir applications to send custom traces to Datadog.'
-code_lang: elixir
-type: multi-code-lang
-code_lang_weight: 110
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'

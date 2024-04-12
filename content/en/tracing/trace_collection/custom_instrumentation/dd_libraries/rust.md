@@ -2,9 +2,6 @@
 title: Rust Custom Instrumentation with Datadog Library
 kind: documentation
 description: 'Manually instrument your Rust applications to send custom traces to Datadog.'
-code_lang: rust
-type: multi-code-lang
-code_lang_weight: 90
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'

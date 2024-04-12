@@ -1,5 +1,5 @@
 ---
-title: Java Custom Instrumentation with Datadog Library
+title: Custom Instrumentation of Java Applications with the Datadog Tracing Library
 kind: documentation
 aliases:
     - /tracing/opentracing/java
@@ -21,10 +21,6 @@ further_reading:
 ---
 
 This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
-
-<div class="alert alert-info">
-To learn about using the OpenTelemetry API, read <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/java/">Custom Instrumentation with the OpenTelemetry API</a>.
-</div>
 
 ## Adding tags
 

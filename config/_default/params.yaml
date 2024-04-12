@@ -111,6 +111,7 @@ code_language_ids:
     elixir: "Elixir"
     rust: "Rust"
     dd-lib: "Datadog Library"
+    otel: "OpenTelemetry API"
 branch: ""
 
 signupclass: sign-up-trigger

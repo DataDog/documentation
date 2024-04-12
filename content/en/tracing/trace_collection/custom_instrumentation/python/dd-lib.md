@@ -1,5 +1,5 @@
 ---
-title: Python Custom Instrumentation with Datadog Library
+title: Custom Instrumentation of Python Applications with the Datadog Tracing Library
 kind: documentation
 aliases:
     - /tracing/opentracing/python
@@ -7,10 +7,11 @@ aliases:
     - /tracing/custom_instrumentation/python
     - /tracing/setup_overview/custom_instrumentation/python
     - /tracing/trace_collection/custom_instrumentation/python
+    - /tracing/trace_collection/custom_instrumentation/dd_libraries/python
 description: 'Manually instrument your Python application to send custom traces to Datadog.'
-code_lang: python
+code_lang: dd-lib
 type: multi-code-lang
-code_lang_weight: 10
+code_lang_weight: 1
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
