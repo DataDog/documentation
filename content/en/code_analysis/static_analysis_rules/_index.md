@@ -172,7 +172,7 @@ cascade:
         cta_url: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
       - title: JetBrains Plugin
         icon: jetbrains
-        subtitle: Identify code vulnerabilities directly in JetBrains products (such as IntelliJ)
+        subtitle: Identify code vulnerabilities directly in</br>JetBrains products
         cta_title: Download Plugin
         cta_url: https://plugins.jetbrains.com/plugin/19495-datadog
     footer:
