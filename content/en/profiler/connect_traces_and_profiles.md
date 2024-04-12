@@ -322,13 +322,25 @@ With endpoint profiling you can:
 
 {{< img src="profiler/endpoint_agg.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
 
-### Track the endpoints that consume the most resources
+### Surface code that impacted your production latency
+
+In the APM Service page, use the information in the **Profiling** tab to correlate a latency or throughput change to a code performance change.
+
+In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
+
+```java
+Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
+```
+
+{{< img src="profiler/apm_service_page_pivot_to_contention_comparison.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
+
+### Track endpoints that consume the most resources
 
 It is valuable to track top endpoints that are consuming valuable resources such as CPU and wall time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service.
 
-The following image shows that `GET /store_history` is periodically impacting this service by consuming 20% of its CPU:
+The following image shows that `GET /store_history` is periodically impacting this service by consuming 20% of its CPU and 50% of its allocated memory:
 
-{{< img src="profiler/endpoint_metric.png" alt="Graphing top endpoints in terms of resource consumption" >}}
+{{< img src="profiler/apm_endpoint_metric.png" alt="Graphing top endpoints in terms of resource consumption" >}}
 
 ### Track average resource consumption per request
 

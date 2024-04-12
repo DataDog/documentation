@@ -27,14 +27,34 @@ The Bits menu is available for the following Cloudcraft components:
 
 **From AWS:**
 
+- Cloudfront.
+- DocumentDB.
+- DynamoDB.
+- EBS.
 - EC2.
-- RDS.
+- EKS Cluster.
 - ELB/ALB.
+- Elasticache.
 - Lambda.
+- NAT Gateway.
+- OpenSearch.
+- RDS.
+- Redshift.
+- S3.
+- SNS Topic.
+- SQS.
+- VPC Endpoint.
 
 **From Azure:**
 
-- Virtual Machines.
+- AKS Cluster.
+- Database for MySQL.
+- Database for PostgreSQL.
+- Function App.
+- Managed Disk.
+- SQL Database.
+- Virtual Machine.
+- Web App.
 
 Support for additional components is coming soon.
 
