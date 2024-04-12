@@ -7,6 +7,7 @@ code_lang_weight: 40
 aliases:
   - /security_platform/application_security/getting_started/php
   - /security/application_security/getting_started/php
+  - /security/application_security/enabling/php
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"

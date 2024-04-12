@@ -7,6 +7,7 @@ code_lang_weight: 10
 aliases:
   - /security_platform/application_security/getting_started/dotnet
   - /security/application_security/getting_started/dotnet
+  - /security/application_security/enabling/dotnet/
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
