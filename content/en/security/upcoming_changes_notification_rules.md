@@ -21,24 +21,24 @@ Currently, notifications for [CSM Misconfigurations][2] can only be configured f
 
 {{< img src="security/csm/notification_rules_old_workflow.png" alt="Diagram that shows the current workflow for enabling notifications for CSM Misconfigurations" width="80%">}}
 
-As part of the upcoming changes to notification rules, you will no longer be required to enable signals in order to generate notifications. The new workflow is shown in the following diagram:
+As part of the upcoming changes to notification rules, you are no longer required to enable signals in order to generate notifications. The new workflow is shown in the following diagram:
 
 **New workflow**:
 
 {{< img src="security/csm/notification_rules_new_workflow.png" alt="Diagram that shows the new workflow for enabling notifications for CSM Misconfigurations" width="100%">}}
 
-This change will have the following impact on how notifications are generated for CSM Misconfigurations:
+This change has the following impact on how notifications are generated for CSM Misconfigurations:
 
 1. You will now be able to specify misconfiguration as a source type when creating notification rules.
-2. Signals will no longer be generated for CSM Misconfigurations. This also means that notifications can no longer be enabled for individual detection rules.
+2. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled for individual detection rules.
 
-<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule will result in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel.</div>
+<div class="alert alert-warning">Due to this change in behavior, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel.</div>
 
 3. Support for CSM Misconfigurations signals will be deprecated in late 2024. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
 ## Notification rules source types selector
 
-When you create a notification rule, you will now be required to choose between two different source types: Vulnerability or Threat (Signal).
+When you create a notification rule, you are now required to choose between two different source types: Vulnerability or Threat (Signal).
 
 - A vulnerability represents a potential security flaw in your infrastructure.
 - A threat (signal) represents suspicious activity that poses an active threat against your infrastructure.
