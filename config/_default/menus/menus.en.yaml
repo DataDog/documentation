@@ -2374,45 +2374,50 @@ main:
     weight: 8
   - name: Cloud Cost
     url: cloud_cost_management/
-    identifier: cloud_cost_top_level
+    identifier: cloud_cost
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 30000
   - name: AWS
     url: cloud_cost_management/aws
-    parent: cloud_cost_top_level
-    identifier: ccm_aws
+    parent: cloud_cost
+    identifier: cloud_cost_aws
     weight: 1
   - name: Azure
     url: cloud_cost_management/azure
-    parent: cloud_cost_top_level
-    identifier: ccm_azure
+    parent: cloud_cost
+    identifier: cloud_cost_azure
     weight: 2
   - name: Google Cloud
     url: cloud_cost_management/google_cloud
-    parent: cloud_cost_top_level
-    identifier: ccm_google_cloud
+    parent: cloud_cost
+    identifier: cloud_cost_google_cloud
     weight: 3
   - name: Custom Costs
     url: cloud_cost_management/custom
-    parent: cloud_cost_top_level
-    identifier: ccm_custom
+    parent: cloud_cost
+    identifier: cloud_cost_custom
     weight: 4
   - name: SaaS Cost Integrations
     url: cloud_cost_management/saas_costs
-    parent: cloud_cost_top_level
-    identifier: ccm_saas_cost_integrations
+    parent: cloud_cost
+    identifier: cloud_cost_saas_cost_integrations
     weight: 5
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
-    parent: cloud_cost_top_level
-    identifier: tag_pipelines
+    parent: cloud_cost
+    identifier: cloud_cost_tag_pipelines
     weight: 6
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
-    parent: cloud_cost_top_level
-    identifier: container_cost_allocation
+    parent: cloud_cost
+    identifier: cloud_cost_container_cost_allocation
     weight: 7
+  - name: Cost Recommendations
+    url: cloud_cost_management/recommendations
+    parent: cloud_cost
+    identifier: cloud_cost_recommendations
+    weight: 8
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
