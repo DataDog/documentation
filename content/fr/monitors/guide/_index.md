@@ -50,5 +50,5 @@ title: Guides sur les monitors
     {{< nextlink href="/monitors/guide/custom_schedules" >}}Ajouter des calendriers custom pour personnaliser la fréquence d'évaluation de monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Surveillance des métriques arithmétiques et creuses{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() dans les évaluations de monitors{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitor_aggregators" >}}Monitor aggregators (en anglais){{< /nextlink >}
+    {{< nextlink href="monitors/guide/monitor_aggregators" >}}Monitor aggregators (en anglais){{< /nextlink >}}
 {{< /whatsnext >}}
