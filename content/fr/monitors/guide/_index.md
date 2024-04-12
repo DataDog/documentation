@@ -24,7 +24,6 @@ title: Guides sur les monitors
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Modifier la configuration des alertes avec un statut No Data pour les monitors basés sur des métriques{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Empêcher des monitors de générer des alertes pendant un downtime{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Limiter le bagottement des alertes{{< /nextlink >}}
-{{< /whatsnext >}}
     {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Surveiller les métriques creuses{{< /nextlink >}}
     {{< nextlink href="monitors/guide/best-practices-for-live-process-monitoring" >}}Best practices for Live Process Monitoring (en anglais){{< /nextlink >}}
 {{< /whatsnext >}}
