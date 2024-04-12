@@ -42,7 +42,7 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
     {{< img src="service_management/mobile/link-device.png" alt="Link mobile device" style="width:80%;">}}
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. You will be automatically logged in.
 
-**Note**: If you click the **Log in to Mobile App** button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen. You will still have to provide authenticate using your standard method.
+**Note**: If you click the **Log in to Mobile App** button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen. You still have to provide authentication using your standard method.
 
 ##### Manual entry
 
