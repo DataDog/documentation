@@ -22,7 +22,10 @@ Notifications are a key component of monitors that keep your team informed of is
 
 ## Notify your team
 
-Use this section to set the notifications sent to your team.
+Use the **Notify your team** section to:
+- Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
+- Trigger a workflow or create a workflow from a monitor.
+- Add a case to your monitor.
 
 ### Title
 
