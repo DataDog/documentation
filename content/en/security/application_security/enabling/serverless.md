@@ -991,8 +991,6 @@ To see Application Security Management threat detection in action, send known at
    ```
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
 
-{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
