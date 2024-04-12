@@ -54,7 +54,7 @@
                   </ul>
                 </nav>
               {{ else }}
-                {{ if in .RawContent "{{< site-region" }}
+                {{ if or (in .RawContent "{{< site-region") (in .RawContent "{{< include-markdown") }}
                   {{ partial "table-of-contents/scraped-toc.html" . }}
                 {{ else }}
                   {{ .TableOfContents }}
