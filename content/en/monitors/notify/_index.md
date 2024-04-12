@@ -59,14 +59,14 @@ Disk space is low @ops-team@company.com
 
 #### Teams
 
-If a notification channel is set, you can route notifications to a specific Team. Monitor alerts targeting @team-handle are redirected to the selected communication channel. For more information on setting a notification channel to your Team, see the [Teams][20] documentation.
+If a notification channel is set, you can route notifications to a specific Team. Monitor alerts targeting @team-handle are redirected to the selected communication channel. For more information on setting a notification channel to your Team, see the [Teams][6] documentation.
 
 #### Integrations
 
 {{% notifications-integrations %}}
 
 ### Workflows
-You can trigger a [workflow automation][9] or create a new workflow from a monitor.
+You can trigger a [workflow automation][7] or create a new workflow from a monitor.
 
 **To add an existing workflow to a monitor**:
 1. In the message section, add the full workflow mention name:
@@ -75,14 +75,14 @@ You can trigger a [workflow automation][9] or create a new workflow from a monit
 
 1. Alternatively, click **Add Workflow** and search for it in the drop-down menu.
 
-For more information on triggering a workflow, see [Trigger a workflow][10].
+For more information on triggering a workflow, see [Trigger a workflow][8].
 
 **To create a workflow**:
 1. Click **Add Worklfow**.
 1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
-For more information on building a workflow, see [Build workflows][11].
+For more information on building a workflow, see [Build workflows][9].
 
 ### Toggle additional content
 
@@ -103,7 +103,7 @@ The options are:
 
 ### Metadata
 
-Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tags are different from metric tags. They are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][6]. Datadog Teams allows you to set a layer of ownership to this monitor. Thanks to this metadata, you can easily view all the monitors linked to your team. To learn more, see [Datadog Teams][21].
+Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tags are different from metric tags. They are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][10]. Datadog Teams allows you to set a layer of ownership to this monitor. Thanks to this metadata, you can easily view all the monitors linked to your team. To learn more, see [Datadog Teams][11].
 
 {{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
 
@@ -116,7 +116,7 @@ Enable monitor renotification (optional) to remind your team that a problem is n
 Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
 
 For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
-**Note:** [Attribute and tag variables][7] in the renotification are populated with the data available to the monitor during the time period of the renotification.
+**Note:** [Attribute and tag variables][12] in the renotification are populated with the data available to the monitor during the time period of the renotification.
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
 
@@ -132,22 +132,22 @@ If you use the `{{#is_renotify}}` block, the original notification message is al
 1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
 2. Send the escalation message to a subset of groups.
 
-Learn how to configure your monitors for those use cases in the [example section][8].
+Learn how to configure your monitors for those use cases in the [example section][13].
 
 
 ## Define permissions and audit notifications
 
 ### Modifications
 
-An [event][12] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
+An [event][14] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
 
 ### Permissions
 
 All users can read all monitors, regardless of the role they are associated with.
 
-By default, only users attached to roles with the [Monitors Write permission][13] can edit monitors. [Datadog Admin Role and Datadog Standard Role][14] have the Monitors Write permission by default. If your organization uses [Custom Roles][15], other custom roles may have the Monitors Write permission.
+By default, only users attached to roles with the [Monitors Write permission][15] can edit monitors. [Datadog Admin Role and Datadog Standard Role][16] have the Monitors Write permission by default. If your organization uses [Custom Roles][17], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a list of [roles][16] allowed to edit it. The monitor's creator can always edit the monitor.
+You can further restrict your monitor by specifying a list of [roles][18] allowed to edit it. The monitor's creator can always edit the monitor.
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
@@ -155,17 +155,17 @@ Editing includes any updates to the monitor configuration, deleting the monitor,
 
 **Note**: The limitations are applied both in the UI and API.
 
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][17].
+For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][19].
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][18]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][20]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][19] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][21] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -195,19 +195,19 @@ Message variables auto-populate with a randomly selected group based on the scop
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
-[6]: /monitors/settings/#tag-policies
-[7]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[8]: /monitors/notify/variables/?tab=is_renotify#examples
-[9]: /service_management/workflows/
-[10]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
-[11]: /service_management/workflows/build/
-[12]: /events/
-[13]: /account_management/rbac/permissions/#monitors
-[14]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[15]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[16]: /account_management/rbac/?tab=datadogapplication
-[17]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[18]: /monitors/types
-[19]: /monitors/guide/recovery-thresholds/
-[20]: /account_management/teams/#send-notifications-to-a-specific-communication-channel
-[21]: /account_management/teams/
+[6]: /account_management/teams/#send-notifications-to-a-specific-communication-channel
+[7]: /service_management/workflows/
+[8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
+[9]: /service_management/workflows/build/
+[10]: /monitors/settings/#tag-policies
+[11]: /account_management/teams/
+[12]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
+[13]: /monitors/notify/variables/?tab=is_renotify#examples
+[14]: /events/
+[15]: /account_management/rbac/permissions/#monitors
+[16]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[17]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[18]: /account_management/rbac/?tab=datadogapplication
+[19]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[20]: /monitors/types
+[21]: /monitors/guide/recovery-thresholds/
