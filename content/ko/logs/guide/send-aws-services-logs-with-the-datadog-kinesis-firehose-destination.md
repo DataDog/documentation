@@ -32,7 +32,7 @@ Datadog에서는 Amazon Data Firehose와 함께 Datadog 대상을 사용할 때 
 1. 선택 사항으로, AWS의 Amazon Kinesis 데이터 스트림 개발자 가이드의 [데이터 스트림 생성하기][1] 섹션을 사용하여 새로운 Kinesis 데이터 스트림을 생성합니다. 스트림에 `DatadogLogStream`과 같이 해당 스트림을 설명하는 이름을 지정합니다.
 2. [Amazon Data Firehose][2]로 이동합니다.  
 3. **Create Firehose stream**을 클릭합니다.
-   a. 소스 설정하기: 
+   a. 소스를 설정합니다: 
       - 로그가 Kinesis Data Stream에서 나오는 경우 `Amazon Kinesis Data Streams`
       - 로그가 클라우드와치(CloudWatch) 로그 그룹에서 직접 수신되는 경우 `Direct PUT`
 
@@ -68,7 +68,7 @@ CloudWatch Logs는 사용 중인 접근 방식에 따라 Kinesis Data Stream 또
 
 ### IAM 역할 및 정책 생성하기
 
-IAM 역할 및 권한 정책을 생성하여 클라우드와치(CloudWatch) 로그가Kinesis 스트림에 데이터를 입력할 수 있도록 설정합니다.
+IAM 역할 및 권한 정책을 생성하여 클라우드와치(CloudWatch) 로그가 Kinesis 스트림에 데이터를 입력할 수 있도록 설정합니다.
   1. 이 역할의 **Trust relationships**에서 `logs.amazonaws.com` 또는 `logs.<region>.amazonaws.com`이 서비스 주체로 설정되어 있는지 확인하세요. 예를 들어:
 
 ```
@@ -127,13 +127,13 @@ AWS CLI를 사용한 설정 예시를 보려면 [Kinesis Data Streams를 사용�
 
 AWS 콘솔을 통해 구독 필터를 생성하려면 다음 단계를 따르세요.
 
-1. [클라우드와치(CloudWatch)][1]의 로그 그룹에서 **구독 필터** 탭을 클릭한 후 **생성하기**를 클릭합니다.
+1. [클라우드와치(CloudWatch)][1]의 로그 그룹에서 **Subscription filters** 탭을 클릭한 후 **Create**를 클릭합니다.
    - Kinesis Data Stream을 통해 로그를 전송하는 경우 `Create Kinesis subscription filter`를 선택합니다.
    - 로그 그룹에서 Amazon Data Firehose 전송 스트림으로 직접 로그를 전송하는 경우 `Create Amazon Data Firehose subscription filter`를 선택합니다.
 
 2. 해당되는 경우 데이터 스트림 또는 Firehose 전송 스트림, 이전에 생성한 [IAM 역할](#create-an-iam-role-and-policy)을 선택합니다.
 
-3. 구독 필터의 이름을 입력한 후 **스트리밍 시작**을 클릭합니다.
+3. 구독 필터의 이름을 입력한 후 **Start streaming**을 클릭합니다.
 
 **중요 참고사항**: [Amazon 클라우드와치(CloudWatch) 로그 API 참조][3]에 명시된 대로, 구독 필터의 대상은 로그 그룹과 동일한 계정에 위치해야 합니다.
 
