@@ -7,6 +7,7 @@ type: multi-code-lang
 code_lang_weight: 2
 aliases:
 - /tracing/trace_collection/otel_instrumentation/java/
+- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/java
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

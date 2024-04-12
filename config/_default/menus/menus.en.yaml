@@ -676,10 +676,40 @@ main:
     parent: otel_interoperability
     weight: 602
   - name: Custom Instrumentation
-    url: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    url: /opentelemetry/interoperability/custom_instrumentation/
     identifier: otel_instrumentation
     parent: otel_interoperability
     weight: 603
+  - name: Java
+    url: /opentelemetry/interoperability/custom_instrumentation/java/
+    identifier: otel_instrumentation_java
+    parent: otel_instrumentation
+    weight: 6031
+  - name: Python
+    url: /opentelemetry/interoperability/custom_instrumentation/python/
+    identifier: otel_instrumentation_python
+    parent: otel_instrumentation
+    weight: 6032
+  - name: Go
+    url: /opentelemetry/interoperability/custom_instrumentation/go/
+    identifier: otel_instrumentation_go
+    parent: otel_instrumentation
+    weight: 6033
+  - name: Node.js
+    url: /opentelemetry/interoperability/custom_instrumentation/nodejs/
+    identifier: otel_instrumentation_nodejs
+    parent: otel_instrumentation
+    weight: 6034
+  - name: PHP
+    url: /opentelemetry/interoperability/custom_instrumentation/php/
+    identifier: otel_instrumentation_php
+    parent: otel_instrumentation
+    weight: 6035
+  - name: .NET
+    url: /opentelemetry/interoperability/custom_instrumentation/dotnet/
+    identifier: otel_instrumentation_dotnet
+    parent: otel_instrumentation
+    weight: 6036
   - name: Correlate RUM and Traces
     url: /real_user_monitoring/platform/connect_rum_and_traces/#opentelemetry-support
     identifier: otel_rum
