@@ -13,11 +13,11 @@ title: 계정 관리
 <div class="alert alert-warning">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
 {{< /site-region >}}
 
-## Personal settings
+## 개인 설정
 
 Datadog의 개인 설정 페이지를 사용하면 조직에서 다른 사람들에게 어떻게 표시되는지를 관리하고, 조직을 전환하거나 떠날 수 있습니다. 알림 설정 역시 관리할 수 있습니다.
 
-### Profile
+### 프로필
 
 사용자의 프로필은 조직에 소속된 다른 사람들이 Datadog에서 어떻게 알아보는지를 결정합니다. 이름, 이메일 주소, 직함을 여기에서 설정하거나 갱신하세요.
 
@@ -25,7 +25,7 @@ Datadog의 개인 설정 페이지를 사용하면 조직에서 다른 사람들
 
 Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 주소는 Google 계정으로 설정되며 Datadog에서 편집할 수 **없습니다**. Google 이메일 주소를 변경하려면 [Google 설명서][2]를 참조하세요.
 
-### Preferences
+### 선호 사항
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 **Personal Settings** 페이지 내 [**Preferences** 탭][1]에서 시간대, 데스크톱 알림 및 이메일 구독을 설정할 수 있습니다. 이메일 구독을 통해 다음 보고서에 액세스할 수 있습니다.
@@ -45,7 +45,7 @@ Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 �
 [1]: https://app.datadoghq.com/account/preferences
 {{% /site-region %}}
 
-### Organizations
+### 조직
 
 **Personal Settings**의 **Organizations** 페이지는 사용자가 소속된 모든 조직을 목록으로 보여줍니다. 이 페이지에서 조직 간에 전환하거나, 왼쪽 내비게이션의 계정 메뉴 위에 커서를 올리세요.
 
