@@ -123,7 +123,7 @@ The instructions below walk through a basic, initial setup using the Azure Porta
 
 #### Create an Azure Event Hub
 
-##### Create a new Event Hubs namespace
+##### Create an Event Hubs namespace
 
 If you already have an Event Hubs namespace configured with an Event Hub connection string, skip to [Add an Event Hub to your Event Hubs namespace](#add-an-event-hub-to-your-event-hubs-namespace).
 
@@ -152,7 +152,7 @@ See the [Azure Event Hubs Quickstart][201] for additional information.
 
 #### Create the Datadog-Azure function
 
-##### Create a new function app
+##### Create a function app
 
 If you already have a function app configured with an Event Hub connection string, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-event-hub-trigger-template).
 
@@ -283,7 +283,7 @@ Datadog recommends using the Event Hub setup for Azure log collection. However, 
 2. Set up the Datadog-Azure Function to forward logs from Blob Storage using the instructions below.
 3. Configure your Azure App Services to [forward their logs to Blob Storage][306].
 
-##### Create a new function app
+##### Create a function app
 
 If you already have a function app configured for this purpose, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
 
