@@ -49,6 +49,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    - The Go build tag `appsec` is not necessary if CGO is enabled with `CGO_ENABLED=1`.
    - Datadog WAF needs the following shared libraries on Linux: `libc.so.6` and `libpthread.so.0`.
    - When using the build tag `appsec` and CGO is disabled, the produced binary is still linked dynamically to these libraries.
+   - The Go build tag `datadog.no_waf` can be used in any situation where the requirements above are a hinderance to disable ASM at build time.
 
 4. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
    ```console
