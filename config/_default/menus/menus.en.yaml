@@ -2849,6 +2849,16 @@ main:
     identifier: tracing_troubleshooting_quantization
     parent: tracing_troubleshooting
     weight: 1310
+  - name: LLM Observability
+    url: tracing/llm_observability/
+    parent: tracing
+    identifier: tracing_llm
+    weight: 14
+  - name: Nested Page Example
+    url: tracing/llm_observability/nested_page_example
+    parent: tracing_llm
+    identifier: tracing_llm_nested_page
+    weight: 1401
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1
