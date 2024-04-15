@@ -38,7 +38,7 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
+1. In the Datadog site, hover over **Digital Experience** and select **Settings** > [**Private Locations][5]**. 
 2. Click **Add Private Location**.
 3. Fill out your private location details. Only `Name` and `API key` fields are mandatory.
 4. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
@@ -101,7 +101,7 @@ Use your new private location just like a managed location in your Synthetic tes
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
-[5]: https://app.datadoghq.com/synthetics/list
+[5]: https://app.datadoghq.com/synthetics/settings/private-locations
 [6]: /synthetics/private_locations/configuration/#configuration-options
 [7]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
 [8]: /getting_started/synthetics/api_test#create-a-multistep-api-test

@@ -2556,6 +2556,45 @@ api:
   name: "서비스 수준 목표(S\bLO)"
   url: /api/latest/service-level-objectives/
 - generated: true
+  identifier: service-level-objectives-get-slo-report-status
+  name: SLO 보고서 상태 가져오기
+  params:
+    operationids:
+    - GetSLOReportJobStatus
+    order: 102
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: service-level-objectives
+  url: '#get-slo-report-status'
+- generated: true
+  identifier: service-level-objectives-get-slo-report
+  name: SLO 보고서 가져오기
+  params:
+    operationids:
+    - GetSLOReport
+    order: 103
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: service-level-objectives
+  url: '#get-slo-report'
+- generated: true
+  identifier: service-level-objectives-create-a-new-slo-report
+  name: 새 SLO 보고서 만들기
+  params:
+    operationids:
+    - CreateSLOReportJob
+    order: 101
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: service-level-objectives
+  url: '#create-a-new-slo-report'
+- generated: true
   identifier: service-level-objectives-get-an-slos-history
   name: SLO 기록 가져오기
   params:
@@ -2689,7 +2728,7 @@ api:
     unstable: []
     versions:
     - v1
-  parent: slack-integration
+  parent: synthetics
   url: '#update-a-slack-integration-channel'
 - generated: true
   identifier: slack-integration-get-a-slack-integration-channel
@@ -2725,7 +2764,7 @@ api:
     unstable: []
     versions:
     - v1
-  parent: synthetics
+  parent: slack-integration
   url: '#create-a-slack-integration-channel'
 - generated: true
   identifier: slack-integration-get-all-channels-in-a-slack-integration
@@ -3057,7 +3096,7 @@ api:
     unstable: []
     versions:
     - v1
-  parent: synthetics
+  parent: 태그
   url: '#create-a-browser-test'
 - generated: true
   identifier: synthetics-edit-an-api-test
@@ -3069,7 +3108,7 @@ api:
     unstable: []
     versions:
     - v1
-  parent: synthetics
+  parent: 태그
   url: '#edit-an-api-test'
 - generated: true
   identifier: synthetics-get-an-api-test
@@ -3093,7 +3132,7 @@ api:
     unstable: []
     versions:
     - v1
-  parent: 태그
+  parent: synthetics
   url: '#create-an-api-test'
 - generated: true
   identifier: 태그
@@ -3141,7 +3180,7 @@ api:
     unstable: []
     versions:
     - v1
-  parent: 태그
+  parent: synthetics
   url: '#edit-a-private-location'
 - generated: true
   identifier: synthetics-get-a-private-location
@@ -7128,8 +7167,8 @@ main:
 - identifier: security_platform_heading
   name: 보안
   weight: 8000000
-- identifier: ux_monitoring_heading
-  name: UX 모니터링
+- identifier: digital_experience_heading
+  name: 디지털 경험
   weight: 9000000
 - identifier: administration_heading
   name: 관리
@@ -7735,6 +7774,11 @@ main:
   parent: otel_collector_configuration
   url: opentelemetry/collector_exporter/collector_batch_memory/
   weight: 3038
+- identifier: otel_gs_kafka_metrics
+  name: Kafka 메트릭
+  parent: otel_integrations
+  url: opentelemetry/integrations/kafka_metrics/
+  weight: 3039
 - identifier: otel_schema
   name: 스키마 및 시맨틱
   parent: opentelemetry_top_level
@@ -7820,6 +7864,10 @@ main:
   parent: otel_guides
   url: opentelemetry/guide/otlp_delta_temporality/
   weight: 803
+- name: OpenTelemetry 데모에서 데이터 보내기
+  parent: otel_guides
+  url: /opentelemetry/guide/otel_demo_to_datadog/
+  weight: 804
 - identifier: dev_tools
   name: 개발자
   parent: essentials_heading
@@ -8220,12 +8268,33 @@ main:
   parent: watchdog_top_level
   url: watchdog/faulty_deployment_detection/
   weight: 5
+- identifier: bits_ai
+  name: Bits AI
+  parent: platform_heading
+  pre: bits-ai
+  url: bits_ai/
+  weight: 20000
+- identifier: bits_ai_getting_started
+  name: 시작하기
+  parent: bits_ai
+  url: bits_ai/getting_started
+  weight: 1
+- identifier: bits_ai_managing_incidents
+  name: 인시던트 관리
+  parent: bits_ai
+  url: bits_ai/managing_incidents
+  weight: 2
+- identifier: bits_ai_natural_language_querying
+  name: 자연어 쿼리
+  parent: bits_ai
+  url: bits_ai/query_examples
+  weight: 3
 - identifier: dashboards
   name: 대시보드
   parent: platform_heading
   pre: dashboard
   url: dashboards/
-  weight: 20000
+  weight: 30000
 - identifier: dashboards_configure
   name: 설정
   parent: dashboards
@@ -8346,7 +8415,7 @@ main:
   parent: platform_heading
   pre: host-map
   url: infrastructure/
-  weight: 30000
+  weight: 40000
 - identifier: infrastructure_host_map
   name: 호스트 및 컨테이너 맵
   parent: infrastructure
@@ -8407,7 +8476,7 @@ main:
   parent: platform_heading
   pre: metric
   url: metrics/
-  weight: 40000
+  weight: 50000
 - identifier: metrics_custom_metrics
   name: 커스텀 메트릭
   parent: metrics_top_level
@@ -8498,7 +8567,7 @@ main:
   parent: platform_heading
   pre: monitor
   url: notebooks/
-  weight: 50000
+  weight: 60000
 - identifier: notebooks_guide
   name: 가이드
   parent: notebooks
@@ -8509,7 +8578,7 @@ main:
   parent: platform_heading
   pre: monitor
   url: monitors/
-  weight: 60000
+  weight: 70000
 - identifier: monitor_configuration
   name: 모니터 설정하기
   parent: alerting
@@ -8690,7 +8759,7 @@ main:
   parent: platform_heading
   pre: service-catalog
   url: service_catalog/
-  weight: 70000
+  weight: 80000
 - identifier: service_catalog_browse
   name: 브라우징
   parent: service_catalog
@@ -8741,7 +8810,7 @@ main:
   parent: platform_heading
   pre: api-catalog
   url: /api_catalog/
-  weight: 80000
+  weight: 90000
 - identifier: api_catalog_explore
   name: API 탐색하기
   parent: api_catalog
@@ -8787,7 +8856,7 @@ main:
   parent: platform_heading
   pre: error-tracking
   url: error_tracking/
-  weight: 90000
+  weight: 100000
 - identifier: error_tracking_explorer
   name: 탐색기
   parent: error_tracking
@@ -8850,61 +8919,121 @@ main:
   parent: events
   url: service_management/events/ingest/
   weight: 1
+- identifier: overview
+  name: 파이프라인 및 프로세서
+  parent: events
+  url: service_management/events/pipelines_and_processors/overview
+  weight: 2
+- identifier: arithmetic_processor
+  name: 산술 프로세서
+  parent: overview
+  url: service_management/events/pipelines_and_processors/arithmetic_processor
+  weight: 201
+- identifier: date_remapper
+  name: 데이터 리매퍼
+  parent: overview
+  url: service_management/events/pipelines_and_processors/date_remapper
+  weight: 202
+- identifier: category_processor
+  name: 카테고리 프로세서
+  parent: overview
+  url: service_management/events/pipelines_and_processors/category_processor
+  weight: 203
+- identifier: grok_parser
+  name: Grok 파서
+  parent: overview
+  url: service_management/events/pipelines_and_processors/grok_parser
+  weight: 204
+- identifier: lookup_processor
+  name: 룩업 프로세서
+  parent: overview
+  url: service_management/events/pipelines_and_processors/lookup_processor
+  weight: 205
+- identifier: remapper
+  name: 리매퍼
+  parent: overview
+  url: service_management/events/pipelines_and_processors/remapper
+  weight: 206
+- identifier: service_remapper
+  name: 서비스 리매퍼
+  parent: overview
+  url: service_management/events/pipelines_and_processors/service_remapper
+  weight: 207
+- identifier: status_remapper
+  name: 상태 리매퍼
+  parent: overview
+  url: service_management/events/pipelines_and_processors/status_remapper
+  weight: 208
+- identifier: string_builder_processor
+  name: 스트링 빌더 프로세서
+  parent: overview
+  url: service_management/events/pipelines_and_processors/string_builder_processor
+  weight: 209
 - identifier: events_explorer
   name: 탐색기
   parent: events
   url: service_management/events/explorer/
-  weight: 2
+  weight: 3
 - identifier: events_explorer_searching
   name: 검색
   parent: events_explorer
   url: service_management/events/explorer/searching
-  weight: 201
+  weight: 301
 - identifier: events_explorer_navigate
   name: 탐색기 살펴보기
   parent: events_explorer
   url: service_management/events/explorer/navigate
-  weight: 202
+  weight: 302
 - identifier: events_explorer_customization
   name: 맞춤 설정
   parent: events_explorer
   url: service_management/events/explorer/customization
-  weight: 203
+  weight: 303
 - identifier: events_explorer_facets
   name: 패싯
   parent: events_explorer
   url: service_management/events/explorer/facets
-  weight: 204
+  weight: 304
 - identifier: events_explorer_attributes
   name: 속성
   parent: events_explorer
   url: service_management/events/explorer/attributes
-  weight: 205
+  weight: 305
 - identifier: event_explorer_notifications
   name: 알림
   parent: events_explorer
   url: service_management/events/explorer/notifications
-  weight: 206
+  weight: 306
 - identifier: event_explorer_analytics
   name: 분석
   parent: events_explorer
   url: service_management/events/explorer/analytics
-  weight: 207
+  weight: 307
 - identifier: event_explorer_saved_views
   name: 저장된 뷰
   parent: events_explorer
   url: service_management/events/explorer/saved_views
-  weight: 208
+  weight: 308
 - identifier: event_usage
   name: 이벤트 사용하기
   parent: events
   url: service_management/events/usage/
-  weight: 3
+  weight: 4
+- identifier: event_correlation
+  name: 상관관계
+  parent: events
+  url: service_management/events/correlation/
+  weight: 5
+- identifier: event_correlation_pattern
+  name: 패턴 기반
+  parent: event_correlation
+  url: service_management/events/correlation/pattern
+  weight: 501
 - identifier: events_guides
   name: 가이드
   parent: events
   url: service_management/events/guides/
-  weight: 4
+  weight: 10
 - identifier: case_management
   name: 사례 관리
   parent: service_management_heading
@@ -9782,7 +9911,7 @@ main:
 - identifier: tracing_error_tracking_custom_grouping
   name: 커스텀 그룹화
   parent: tracing_error_tracking
-  url: error_tracking/custom_grouping?tab=apm
+  url: error_tracking/custom_grouping
   weight: 1002
 - identifier: tracing_error_tracking_suspect_commits
   name: 의심스러운 커밋 확인
@@ -10863,7 +10992,7 @@ main:
   url: logs/log_configuration/pipeline_scanner/
   weight: 204
 - identifier: log_configuration_attributes_and_aliasing
-  name: 속성 및 별칭
+  name: 속성과 별칭
   parent: log_configuration
   url: logs/log_configuration/attributes_naming_convention/
   weight: 205
@@ -11002,7 +11131,7 @@ main:
 - identifier: log_management_error_tracking_custom_grouping
   name: 커스텀 그룹화
   parent: log_management_error_tracking
-  url: error_tracking/custom_grouping?tab=logs
+  url: error_tracking/custom_grouping
   weight: 604
 - identifier: log_management_error_tracking_manage_data_collection
   name: 데이터 수집 관리
@@ -11200,47 +11329,52 @@ main:
 - identifier: cspm
   name: 설정 오류
   parent: csm
-  url: security/misconfigurations/
+  url: security/cloud_security_management/misconfigurations/
   weight: 3
 - identifier: cspm_detection_rules
   name: 규정 준수 규칙 관리
   parent: cspm
-  url: security/misconfigurations/compliance_rules
+  url: security/cloud_security_management/misconfigurations/compliance_rules
   weight: 301
 - identifier: cspm_custom_rules
   name: 커스텀 규칙 생성
   parent: cspm
-  url: security/misconfigurations/custom_rules
+  url: security/cloud_security_management/misconfigurations/custom_rules
   weight: 302
 - identifier: cspm_frameworks_benchmarks
   name: 규정 준수 상태 관리
   parent: cspm
-  url: security/misconfigurations/frameworks_and_benchmarks
+  url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
   weight: 303
 - identifier: cspm_custom_frameworks
   name: 커스텀 프레임워크 생성
   parent: cspm_frameworks_benchmarks
-  url: security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
+  url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks
   weight: 101
 - identifier: cspm_supported_frameworks
   name: 지원되는 프레임워크
   parent: cspm_frameworks_benchmarks
-  url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+  url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks
   weight: 102
+- identifier: cspm_kspm
+  name: Kubernetes 보안 상태 관리
+  parent: cspm_frameworks_benchmarks
+  url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/kspm
+  weight: 103
 - identifier: cspm_findings_explorer
   name: 설정 오류 살펴보기
   parent: cspm
-  url: /security/misconfigurations/findings
+  url: /security/cloud_security_management/misconfigurations/findings
   weight: 305
 - identifier: cspm_export_misconfigurations
   name: 내보내기 오설정
   parent: cspm_findings_explorer
-  url: /security/misconfigurations/findings/export_misconfigurations
+  url: /security/cloud_security_management/misconfigurations/findings/export_misconfigurations
   weight: 101
 - identifier: signals
   name: 신호 탐색기
   parent: cspm
-  url: /security/misconfigurations/signals_explorer/
+  url: /security/cloud_security_management/misconfigurations/signals_explorer/
   weight: 306
 - identifier: csm_identity_risks
   name: 신원 위험
@@ -11450,7 +11584,7 @@ main:
   weight: 10
 - identifier: synthetics
   name: 합성 모니터링
-  parent: ux_monitoring_heading
+  parent: digital_experience_heading
   pre: synthetics
   url: synthetics/
   weight: 50000
@@ -11636,7 +11770,7 @@ main:
   weight: 14
 - identifier: continuous_testing
   name: 지속적 테스트
-  parent: ux_monitoring_heading
+  parent: digital_experience_heading
   pre: continuous-testing
   url: continuous_testing/
   weight: 60000
@@ -11712,7 +11846,7 @@ main:
   weight: 6
 - identifier: mobile_app_testing
   name: 모바일 애플리케이션 테스팅
-  parent: ux_monitoring_heading
+  parent: digital_experience_heading
   pre: mobile
   url: mobile_app_testing/
   weight: 70000
@@ -11743,7 +11877,7 @@ main:
   weight: 2
 - identifier: rum
   name: 실제 사용자 모니터링(RUM)
-  parent: ux_monitoring_heading
+  parent: digital_experience_heading
   pre: rum
   url: real_user_monitoring/
   weight: 40000
@@ -12055,7 +12189,7 @@ main:
 - identifier: rum_error_tracking_custom_grouping
   name: 커스텀 그룹화
   parent: rum_error_tracking
-  url: error_tracking/custom_grouping?tab=rum
+  url: error_tracking/custom_grouping
   weight: 1104
 - identifier: rum_error_tracking_suspect_commits
   name: 의심스러운 커밋 확인
@@ -12208,6 +12342,11 @@ main:
   parent: account_management
   url: account_management/teams/
   weight: 7
+- identifier: account_management_teams_management
+  name: 팀 관리
+  parent: account_management_teams
+  url: account_management/teams/manage/
+  weight: 701
 - identifier: account_management_mfa
   name: 멀티 팩터 인증
   parent: account_management
@@ -12244,10 +12383,14 @@ main:
   url: account_management/plan_and_usage/usage_details/
   weight: 1002
 - identifier: account_management_billing
-  name: 빌링
+  name: 청구
   parent: account_management
   url: account_management/billing/
   weight: 11
+- name: 제품 할당
+  parent: account_management_billing
+  url: account_management/billing/product_allotments
+  weight: 5
 - identifier: account_management_multi_org_accounts
   name: 여러 조직 계정
   parent: account_management

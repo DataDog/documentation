@@ -118,7 +118,9 @@ For installation steps, see the [Agent installation instructions][1].
 
 ### Configure the Agent
 
-Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][4] for all available configuration options.
+Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][4] for all available configuration options.
+
+**Note:** The configuration subdirectory for the Agent releases below `7.53.0` is `oracle-dbm.d`.
 
 {{< tabs >}}
 {{% tab "Multi-tenant" %}}
@@ -170,7 +172,7 @@ On the Integrations page in Datadog, install the [Oracle integration][7] for you
 
 ### Validate the setup
 
-[Run the Agent's status subcommand][8] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Dashboard][2] and [Databases][3] page in Datadog to get started.
+[Run the Agent's status subcommand][8] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][2] and [Databases][3] page in Datadog to get started.
 
 ## Custom queries
 
@@ -181,7 +183,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [3]: https://app.datadoghq.com/databases
-[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [5]: /database_monitoring/data_collected/#sensitive-information
 [6]: /agent/basic_agent_usage#agent-overhead
 [7]: https://app.datadoghq.com/integrations/oracle
