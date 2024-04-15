@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Starting [Go 1.21][1], Go compiler supports Profile-Guided Optimization (PGO).
+Starting [Go 1.21][1], the Go compiler supports Profile-Guided Optimization (PGO).
 
-PGO enables additional optimizations on code identified as hot by profiles of production workloads. This is compatible with [Datadog Go Continuous Profiler][2] and can be used for production builds.
+PGO enables additional optimizations on code identified as hot by CPU profiles of production workloads. This is compatible with [Datadog Go Continuous Profiler][2] and can be used for production builds.
 
 ## How does it work?
 

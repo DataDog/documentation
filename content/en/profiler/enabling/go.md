@@ -123,7 +123,7 @@ To add detailed C function call information to CPU profiles, you may opt to use 
 
 ## Save 2 to 14% CPU in production with PGO
 
-Starting [Go 1.21][14], Go compiler supports Profile-Guided Optimization (PGO). PGO enables additional optimizations on code identified as hot by profiles of production workloads. This is compatible with Datadog Go Continuous Profiler and can be used for production builds.
+Starting [Go 1.21][14], the Go compiler supports Profile-Guided Optimization (PGO). PGO enables additional optimizations on code identified as hot by CPU profiles of production workloads. This is compatible with Datadog Go Continuous Profiler and can be used for production builds.
 
 Follow [this guide][15] to set it up.
 
