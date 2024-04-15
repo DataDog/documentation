@@ -26,8 +26,6 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 {{% appsec-getstarted %}}
 
-{{% appsec-getstarted-with-rc %}}
-
 ## Enabling code security vulnerability detection
 If your service runs a [tracing library version that supports code security vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
