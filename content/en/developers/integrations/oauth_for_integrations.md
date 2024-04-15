@@ -115,7 +115,7 @@ To start the publishing process in the [Developer Platform][4]:
 
 2. Under the Integration Publishing section, follow the steps to add your OAuth information to use below within your pull request. 
 
-3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, copy the `app_uuid` value under Intergration Publishing section and paste this within your manifest.json file under the `app_uuid` field. 
+3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, copy the `app_uuid` value under the Integration Publishing section and paste this within your manifest.json file under the `app_uuid` field. 
 
 Once an OAuth client is submitted for publishing, the team is notified. When your pull request is approved by all required parties and is ready to be merged, at that point your OAuth client gets published as well. Your integration tile is then published to your sandbox account (_not_ for all customers), and your OAuth client can then be authorized by any Datadog organization (not only your Sandbox organization).
 
