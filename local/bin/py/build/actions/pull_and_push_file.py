@@ -45,8 +45,8 @@ def pull_and_push_file(content, content_dir):
 
         # If options include front params, then the H1 title of the source file is striped
         # and the options front params are inlined
-        if "front_matters" in content["options"]:
-            new_yml.update(content["options"]["front_matters"])
+        if "front_matters" in content["options"] or f.name.endswith('.md'):
+            new_yml.update(content["options"].get("front_matters", {}))
             front_matter = yaml.dump(new_yml, default_flow_style=False).strip()
             # remove h1 if exists
             file_content = re.sub(re.compile(r"^#{1}(?!#)(.*)", re.MULTILINE), "", txt, count=1)
