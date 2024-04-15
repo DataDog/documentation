@@ -49,19 +49,19 @@ SCA currently supports scanning the following languages and technologies for vul
 
 SCA performs scans by looking at the libraries contained in your lockfiles. Below are the supported lockfiles:
 
-| Package Manager | Lockfile             |
-|-----------------|----------------------|
-| C# (.NET)       | `packages.lock.json` |
-| Go (mod)        | `go.mod`             |
-| JVM (Gradle)    | `gradle.lockfile`    |
-| JVM (Maven)     | N/A                  |
-| Node.js (npm)   | `package-lock.json`  |
-| Node.js (pnpm)  | `pnpm-lock.yaml`     |
-| Node.js (yarn)  | `yarn.lock`          |
-| PHP (composer)  | `composer.lock`      |
-| Python (pip)    | `requirements.txt, Pipfile.lock`       |
-| Python (poetry) | `poetry.lock`        |
-| Ruby (bundler)  | `Gemfile.lock`       |
+| Package Manager | Lockfile                                 |
+|-----------------|------------------------------------------|
+| C# (.NET)       | `packages.lock.json`                     |
+| Go (mod)        | `go.mod`                                 |
+| JVM (Gradle)    | `gradle.lockfile`                        |
+| JVM (Maven)     | N/A                                      |
+| Node.js (npm)   | `package-lock.json`                      |
+| Node.js (pnpm)  | `pnpm-lock.yaml`                         |
+| Node.js (yarn)  | `yarn.lock`                              |
+| PHP (composer)  | `composer.lock`                          |
+| Python (pip)    | `requirements.txt`, `Pipfile.lock`       |
+| Python (poetry) | `poetry.lock`                            |
+| Ruby (bundler)  | `Gemfile.lock`                           |
 
 ## Integrations
 
