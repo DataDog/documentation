@@ -27,10 +27,6 @@ If you aren't using supported library instrumentation (see [library compatibilit
 
 You may also want to extend the functionality of the `ddtrace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
 
-<div class="alert alert-info">
-To learn about using the OpenTelemetry API, read <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/java/">Custom Instrumentation with the OpenTelemetry API</a>.
-</div>
-
 ## Creating spans
 
 The `ddtrace` library creates spans automatically with `ddtrace-run` for [many libraries and frameworks][1]. However, you may want to gain visibility into your own code and this is achieved by using spans.
