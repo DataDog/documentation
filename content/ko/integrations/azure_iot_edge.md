@@ -182,7 +182,7 @@ Agent가 디바이스에 배포되면 [Agent의 상태 하위 명령을 실행][
 
 Azure IoT Edge는 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 {{< get-service-checks-from-git "azure_iot_edge" >}}
 
 
