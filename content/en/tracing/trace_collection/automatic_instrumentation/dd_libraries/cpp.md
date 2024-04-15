@@ -25,7 +25,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as <a href="/tracing/setup/envoy/">Envoy</a> and <a href="/tracing/setup/nginx/">Nginx</a>.
+  <strong>Note:</strong> C++ does not provide integrations for automatic instrumentation, but it's used by Proxy tracing such as <a href="/tracing/setup/envoy/">Envoy</a> and <a href="/tracing/setup/nginx/">Nginx</a>.
 </div>
 
 ## Compatibility requirements
