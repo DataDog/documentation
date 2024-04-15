@@ -146,6 +146,8 @@ java \
 
    **Note**: Only JFR based profiling is supported for the GraalVM native-image applications. None of the 'DDPROF'
    related configuration options is effective.
+
+[13]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -353,4 +355,3 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [10]: /getting_started/profiler/
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [12]: /profiler/enabling/supported_versions/
-[13]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
