@@ -289,7 +289,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
 <div class="alert alert-warning"><strong>Warning</strong>: Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
-This means that the storage must not have network restrictions. Datadog servers will be accessing the storage
+This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
 1. Enable the `datadog_integration_logs_collection` [feature flag][1] in your GitLab. This allows you to see the **Enable job logs collection** checkbox in the GitLab integration under **Settings > Integrations > Datadog**.
