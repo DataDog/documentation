@@ -46,6 +46,7 @@ function addCopyButton (fencedLangs) {
 // EVENT FUNCTION for copy functionality
 function copyCode ({currentTarget}, btn){
     const code = getCode(currentTarget)
+    console.log('CODE', code)
     // Create a range object
     const range = document.createRange();
     // Select the node

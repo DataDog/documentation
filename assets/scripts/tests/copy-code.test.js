@@ -1,5 +1,6 @@
 import * as cc from '../components/copy-code';
 
+
 describe('initCopyCode', () => {
     it('should add copy button to specified languages of fenced code blocks in markdown', () => {
         document.body.innerHTML = `
@@ -56,69 +57,32 @@ describe('initCopyCode', () => {
     })
 
 
-    // it('should copy code to clipboard when copy button is clicked', () => {
-        
-    //     document.body.innerHTML = `
-    //     <div class="highlight">
-    //         <pre><code>some code</code></pre>
-    //         <div class="code-button-wrapper position-absolute">
-    //             <button class="btn text-primary js-copy-button">Copy</button>
-    //         </div>
-    //     </div>
-    //     `;
-        
-    //     const highlight = document.querySelector('.highlight');
-    //     const copyBtn = document.querySelector('.js-copy-button');
-    //     const code = document.querySelector('code');
-        
-    //     // mock closest method
-    //     const mockClosest = jest.fn(() => {
-    //         querySelector: jest.fn(() => code)
-    //     });
-
-    //     // mock previousElementSibling property
-    //     Object.defineProperty(Element.prototype, 'previousElementSibling', {
-    //         get() {
-    //             return highlight;
-    //         }
-    //     });
-
-    //     // mock navigator.clipboard.writeText
-    //     Object.assign(navigator, {
-    //         clipboard: {
-    //             writeText: jest.fn((text) => {
-    //                 Promise.resolve()
-    //             })
-    //         }
-    //     });
-
-    //     Object.assign(document, {
-    //         createRange: jest.fn(() => ({
-    //             selectNode: jest.fn()
-    //         }))
-    //     });
-
-    //     // spyOn document methods: `closest` and `previousElementSibling`
-    //     jest.spyOn(Element.prototype, 'closest').mockImplementation(mockClosest);
-    //     jest.spyOn(Element.prototype, 'previousElementSibling', 'get')
-
-    //     // spyOn getCode function
-    //     jest.spyOn(cc, 'getCode').mockImplementation(() => code);
-
-    //     // spyOn createRange method
-    //     const createRangeSpy = jest.spyOn(document, "createRange")
-        
-    //     // spyOn writeText method
-    //     const writeTextSpy = jest.spyOn(navigator.clipboard, 'writeText');
-    //     cc.copyCode({currentTarget: copyBtn}, copyBtn);
-        
-    //     expect(createRangeSpy).toHaveBeenCalled();
-    //     expect(createRangeSpy).toHaveBeenCalledWith(code);
-        
-    //     expect(writeTextSpy).toHaveBeenCalled();
-    //     expect(writeTextSpy).toHaveBeenCalledWith(code.innerText);
-
-    //     // cleanup
-    //     jest.restoreAllMocks();
-    // })
+    it('should get code snippet text for markdown fenced code blocks', () => {
+        document.body.innerHTML = `
+            <div class="highlight code-snippet">
+                <pre><code>some code</code></pre>
+                <button>a copy button</button>
+            </div>
+        `;
+        const code = document.querySelector('code');
+        const btn = document.querySelector('button');
+        expect(cc.getCode(btn)).toBe(code);
+    })
+    
+    it('should get code snippet text for try-rule modal', () => {
+        document.body.innerHTML = `
+            <div class="highlight">
+                <table>
+                    <tr>
+                        <td><code>some code not returned</code></td>
+                        <td><code>some code returned</code></td>
+                    </tr>
+                </table>
+            </div>
+            <button>a copy button</button>
+        `;
+        const code = document.querySelector('td:last-child code');
+        const btn = document.querySelector('button');
+        expect(cc.getCode(btn)).toBe(code);
+    })
 })
