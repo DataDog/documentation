@@ -1,5 +1,5 @@
 ---
-title: Elixir Custom Instrumentation using Datadog API
+title: Custom Instrumentation for Elixir
 kind: documentation
 description: 'Manually instrument your Elixir applications to send custom traces to Datadog.'
 further_reading:

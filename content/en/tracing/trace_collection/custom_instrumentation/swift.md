@@ -1,5 +1,5 @@
 ---
-title: Swift Custom Instrumentation using Datadog API
+title: Custom Instrumentation for Swift
 kind: documentation
 description: 'Manually instrument your Swift applications to send custom traces to Datadog.'
 further_reading:

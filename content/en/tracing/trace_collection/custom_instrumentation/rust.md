@@ -1,5 +1,5 @@
 ---
-title: Rust Custom Instrumentation using Datadog API
+title: Custom Instrumentation for Rust
 kind: documentation
 description: 'Manually instrument your Rust applications to send custom traces to Datadog.'
 further_reading:
