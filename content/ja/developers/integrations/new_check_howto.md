@@ -6,7 +6,7 @@ aliases:
 - /ja/guides/new_integration/
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/new_check_howto.md
-kind: documentation
+
 title: Agent インテグレーションの作成
 ---
 ## 概要

@@ -1,12 +1,12 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/oauth_for_integrations.md
-kind: documentation
+
 title: OAuth pour les intégrations
 ---
 {{< callout btn_hidden="true" >}}
   La plateforme de développement Datadog est encore en version bêta. Si vous n'y avez pas accès, envoyez un e-mail à l'adresse apps@datadoghq.com.
-{{< /callout >}} 
+{{< /callout >}}
 
 ## Présentation
 
@@ -16,7 +16,7 @@ Pour en savoir plus sur l'implémentation du protocole OAuth de Datadog, consult
 
 ## Utiliser OAuth dans une intégration
 
-OAuth permet aux clients de Datadog d'autoriser facilement des plateformes tierces à accéder à leurs données sans risque, et ce sans avoir à saisir leurs clés d'API ou d'application. Vous pouvez utiliser OAuth avec des intégrations existantes, ou le configurer dans le cadre du développement de nouvelles intégrations.  
+OAuth permet aux clients de Datadog d'autoriser facilement des plateformes tierces à accéder à leurs données sans risque, et ce sans avoir à saisir leurs clés d'API ou d'application. Vous pouvez utiliser OAuth avec des intégrations existantes, ou le configurer dans le cadre du développement de nouvelles intégrations.
 
 Lors de la création d'une intégration avec OAuth, vous pouvez sélectionner les contextes précis des données auxquels votre application doit accéder et le client peut autoriser l'accès aux contextes granulaires que vous avez demandés. Même si les contextes facultatifs ne sont pas pris en charge, l'application peut accéder à tous les contextes demandés par une intégration dès lors qu'un client l'autorise.
 

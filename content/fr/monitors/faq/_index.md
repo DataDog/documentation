@@ -1,7 +1,7 @@
 ---
 cascade:
 - private: true
-kind: faq
+
 title: FAQ sur les monitors
 ---
 

@@ -6,7 +6,7 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: Prise en charge d'OpenTelemetry dans Datadog
-kind: guide
+
 title: Générer des métriques de temporalité delta avec OpenTelemetry
 ---
 
@@ -150,13 +150,13 @@ import io.opentelemetry.sdk.metrics.export.PeriodicMetricReader;
 
 public final class Main {
   public static void main(String[] args) throws InterruptedException {
-    OtlpHttpMetricExporter exporter = 
+    OtlpHttpMetricExporter exporter =
         OtlpHttpMetricExporter.builder()
         .setAggregationTemporalitySelector(
             AggregationTemporalitySelector.deltaPreferred())
         .build();
 
-    MetricReader reader = 
+    MetricReader reader =
         PeriodicMetricReader.builder(exporter).build();
 
     MeterProvider provider = SdkMeterProvider.builder()
@@ -165,7 +165,7 @@ public final class Main {
 
     Meter meter = provider.get("my-meter");
 
-    LongCounter counter = 
+    LongCounter counter =
         meter.counterBuilder("example.counter").build();
 
     for (int i = 0; i < 150; i++) {

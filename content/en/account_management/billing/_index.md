@@ -1,6 +1,6 @@
 ---
 title: Billing
-kind: documentation
+
 ---
 
 ## Overview
@@ -41,17 +41,17 @@ Alternately, roles with Billing Read (`billing_read`) and Billing Edit (`billing
 
 ### Managing your payment method
 
-The [**Payment Method**][9] section contains details on your payment options. 
+The [**Payment Method**][9] section contains details on your payment options.
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:90%;" >}}
 
-**Edit Payment** provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa. 
+**Edit Payment** provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa.
 
 {{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Payment settings on the Plan page" style="width:90%;" >}}
 
 ### Managing your billing contact details
 
-You can view your billing contact details on the [**Billing Contact Details**][9] section. 
+You can view your billing contact details on the [**Billing Contact Details**][9] section.
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:90%;" >}}
 

@@ -1,6 +1,6 @@
 ---
 title: Client Authentication against the API server and kubelet
-kind: faq
+
 ---
 
 By default the Agent authenticates against the API server and kubelet with its service account bearer token. If you want to specify its path, set the options below. If X509 client certificates are set, either for the kubelet or API server, they are used instead. The recommended way to [expose these files][1] to the Agent is by using [Kubernetes Secrets][2].

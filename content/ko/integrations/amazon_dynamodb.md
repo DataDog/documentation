@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon DynamoDB
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_dynamodb
 public_title: Datadog-Amazon DynamoDB 통합
@@ -58,7 +58,7 @@ AWS CloudTrail에서 [트레일을 생성][6]한 다음 기록을 작성할 S3 �
 
 #### Datadog에 로그 보내기
 
-1. 아직 설정하지 않았다면 AWS 계정에서 [Datadog 포워더 람다 함수][7]를 설정하세요. 
+1. 아직 설정하지 않았다면 AWS 계정에서 [Datadog 포워더 람다 함수][7]를 설정하세요.
 2. 설정한 후에는 Datadog Forwarder Lambda 함수로 이동하세요. Function Overview 섹션에서 **Add Trigger**를 클릭합니다.
 3. 트리거 설정에 대해 **S3** 트리거를 선택합니다.
 4. Amazon DynamoDB가 포함된 S3 버킷을 선택합니다.

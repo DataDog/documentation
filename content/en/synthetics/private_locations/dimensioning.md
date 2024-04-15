@@ -1,6 +1,6 @@
 ---
 title: Dimensioning Private Locations
-kind: documentation
+
 description: Dimensioning requirements for your containerized private locations.
 further_reading:
 - link: "/synthetics/private_locations/monitoring"
@@ -10,7 +10,7 @@ further_reading:
 
 <div class="alert alert-info">The dimensioning recommendations are for the containerized private location.</div>
 
-## Overview 
+## Overview
 
 Private locations can run [API][1], [multistep API][2], and [browser tests][3]. Browser tests are more resource intensive than API and multistep API tests. One private location can also run several types of tests.
 
@@ -36,7 +36,7 @@ For more information, see [Advanced configuration][4].
 
 ### Define your total hardware requirements
 
-Once you know which test type you want to execute and the maximum number of test runs you want to execute in parallel, define the total hardware requirements for your private location.  
+Once you know which test type you want to execute and the maximum number of test runs you want to execute in parallel, define the total hardware requirements for your private location.
 
 The base requirement for CPU is 150mCores and for memory, is 150 MiB.
 
@@ -57,9 +57,9 @@ Once you have determined the [total requirements for your private location](#def
 To assign all resources to a single worker, run one container for a private location with a configuration file.
 1. Set the [`concurrency` parameter][4] to `maximum number of test runs that can be executed in parallel on your private location`.
 2. Assign your [total private location resource requirements](#define-your-total-hardware-requirements) to your unique container.
-  
+
 To distribute resources across multiple workers, run multiple containers for a private location with a configuration file.
- 
+
  1. Set the [`concurrency` parameter][4] to `maximum number of test runs that can be executed on your private location / number of workers associated with your private location`.
  2. Assign `total private location resource requirements / number of workers` resources to every private location container.
 
@@ -68,9 +68,9 @@ For example, Datadog recommends ~ 8 cores CPU, ~ 10GiB memory, and ~ 5GiB disk f
 
 #### Queueing mechanism
 
-When multiple workers are associated with a private location, each worker requests a couple test runs, which depend on the [`concurrency` parameter][4] and on the number of additional test runs that can be assigned.   
+When multiple workers are associated with a private location, each worker requests a couple test runs, which depend on the [`concurrency` parameter][4] and on the number of additional test runs that can be assigned.
 
-For example, ten tests are scheduled to run simultaneously on a private location that has two workers running. If Worker 1 is running two tests, Worker 1 can request three additional tests to run. If Worker 2 is not running any tests, Worker 2 can request the five following tests. 
+For example, ten tests are scheduled to run simultaneously on a private location that has two workers running. If Worker 1 is running two tests, Worker 1 can request three additional tests to run. If Worker 2 is not running any tests, Worker 2 can request the five following tests.
 
 The remaining two tests can be requested by whichever worker has finished running its test first (any worker that has available slots).
 

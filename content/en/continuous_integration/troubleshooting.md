@@ -1,6 +1,6 @@
 ---
 title: CI Visibility Troubleshooting
-kind: documentation
+
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"
@@ -43,7 +43,7 @@ Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong co
 
 #### Delivery of webhook events is not guaranteed by CI providers
 
-Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished. 
+Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished.
 
 #### Maximum duration for a pipeline execution
 

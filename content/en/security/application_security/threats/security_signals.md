@@ -1,6 +1,6 @@
 ---
 title: Investigate Security Signals
-kind: documentation
+
 further_reading:
   - link: "/security/default_rules/?category=cat-application-security#cat-application-security"
     tag: "Documentation"
@@ -43,11 +43,11 @@ You can triage a signal by assigning it to a user for further investigation. The
 Use [Case Management][6] to track, triage, and investigate security signals.
 
 1. On the [Signals Explorer][2] page, select a security signal.
-2. On the signal side panel, select the **Create a case** dropdown. Select **Create a new case**, or **Add to an existing case** to add the signal to an existing case. 
+2. On the signal side panel, select the **Create a case** dropdown. Select **Create a new case**, or **Add to an existing case** to add the signal to an existing case.
 3. Enter a title and optional description.
 4. Click **Create Case**.
 
-## Declare an incident 
+## Declare an incident
 
 Use [Incident Management][4] to create an incident for a security signal.
 
@@ -58,10 +58,10 @@ Use [Incident Management][4] to create an incident for a security signal.
 
 ## Run a workflow
 
-Use [Workflow Automation][5] to manually trigger a workflow for a security signal. 
+Use [Workflow Automation][5] to manually trigger a workflow for a security signal.
 
 1. On the [Signals Explorer][2] page, select a security signal.
-2. Scroll down to the **What is Workflow Automation** section. 
+2. Scroll down to the **What is Workflow Automation** section.
 3. Click **Run Workflow**.
 4. On the workflow modal, select the workflow you want to run. Depending on the workflow, you may be required to enter additional input parameters.
 5. Click **Run**.

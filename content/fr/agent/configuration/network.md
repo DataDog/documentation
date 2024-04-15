@@ -24,7 +24,7 @@ further_reading:
 - link: service_catalog
   tag: Documentation
   text: Recueillir vos traces
-kind: guide
+
 title: Trafic réseau
 ---
 

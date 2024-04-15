@@ -5,7 +5,7 @@ aliases:
 - /fr/serverless/libraries_integrations/forwarder/
 dependencies:
 - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
-kind: documentation
+
 title: Forwarder Datadog
 ---
 
@@ -40,7 +40,7 @@ Une fois installé, vous pouvez abonner le Forwarder à des sources de logs, tel
 5. [Configurez des déclencheurs sur le Forwarder installé](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#configurer-des-declencheurs).
 6. Répétez les étapes précédents dans une autre région si vous opérez dans plusieurs régions AWS.
 
-**Remarque :** si vous aviez déjà activé votre intégration AWS à l'aide du [modèle CloudFormation suivant](https://github.com/DataDog/cloudformation-template/tree/master/aws) depuis la page de l'intégration AWS dans Datadog, votre compte devrait déjà bénéficier d'une fonction Forwarder Lambda Datadog.  
+**Remarque :** si vous aviez déjà activé votre intégration AWS à l'aide du [modèle CloudFormation suivant](https://github.com/DataDog/cloudformation-template/tree/master/aws) depuis la page de l'intégration AWS dans Datadog, votre compte devrait déjà bénéficier d'une fonction Forwarder Lambda Datadog.
 **Remarque :** le bloc de code de la fonction Lambda du Forwarder Datadog est vide, la logique étant implémentée via une couche Lambda.
 
 <!-- xxz tab xxx -->
@@ -361,7 +361,7 @@ Les règles de filtrage sont appliquées à l'intégralité du log au format JSO
 
 Voici des exemples d'expressions régulières pouvant être utilisées pour filtrer les logs :
 
-- Inclure (ou exclure) les logs de la plateforme Lambda : `"(START|END) RequestId:\s`. Remarque : le caractère `"` initial est requis pour inclure le début du message de log, qui est dans un blob JSON (`{"message": "START RequestId...."}`). Datadog vous conseille de conserver les logs `REPORT`, car ils sont utilisés pour renseigner la liste des invocations dans les vues des fonctions sans serveur. 
+- Inclure (ou exclure) les logs de la plateforme Lambda : `"(START|END) RequestId:\s`. Remarque : le caractère `"` initial est requis pour inclure le début du message de log, qui est dans un blob JSON (`{"message": "START RequestId...."}`). Datadog vous conseille de conserver les logs `REPORT`, car ils sont utilisés pour renseigner la liste des invocations dans les vues des fonctions sans serveur.
 - Pour inclure uniquement les messages d'erreur CloudTrail : `errorMessage`
 - Pour inclure uniquement les logs contenant un code d'erreur HTTP 4XX ou 5XX : `\b[4|5][0-9][0-9]\b`
 - Pour inclure uniquement les logs CloudWatch pour lesquels le champ `message` contient une paire key/value au format JSON spécifique : `\\"awsRegion\\":\\"us-east-1\\"`

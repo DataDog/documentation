@@ -1,6 +1,6 @@
 ---
 title: Usage Attribution
-kind: documentation
+
 aliases:
     - /account_management/billing/advanced_usage_reporting/
     - /account_management/billing/custom_usage_reporitng/
@@ -24,7 +24,7 @@ Administrators or users with the Usage Read permission can access the Usage Attr
 - Summarizes usage at the end of each month and visualizes usage over time broken out by tags.
 - Generates month-to-date and hourly CSV files.
 
-This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users, CI Pipeline and Test Users, Parallel Testing Slots, and Audit Trail. 
+This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users, CI Pipeline and Test Users, Parallel Testing Slots, and Audit Trail.
 
 ## Getting started
 
@@ -54,8 +54,8 @@ Monthly reports are updated daily and provide a month-to-date aggregation of usa
 
 - Data for specific products, tags, and organizations can be selected using the facet selector.
 - Data can be grouped and ungrouped by the tag keys selected.
-- Value and Percentage options are available for table display. 
-- Data shown on the table can be edited to include select products. 
+- Value and Percentage options are available for table display.
+- Data shown on the table can be edited to include select products.
 - If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 - Previous months' reports are accessible through the time selector.
 - Reports are downloadable in CSV format. These CSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks. Percentages are calculated on a per-organization basis.
@@ -96,7 +96,7 @@ A timeseries of Usage Attribution data can be viewed by clicking on "Track Usage
 
 ## Cost attribution
 
-For direct billing customers, month-end cost attribution reports are generated at the end of each billing cycle to enable monthly chargeback and cost allocation processes. 
+For direct billing customers, month-end cost attribution reports are generated at the end of each billing cycle to enable monthly chargeback and cost allocation processes.
 - Cost data for the preceding month is available no later than the 19th of the current month.
 - Cost attribution data is not currently available in GovCloud datacenters
 - Monthly Cost Attribution data is [available with the API][4]

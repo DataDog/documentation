@@ -1,6 +1,6 @@
 ---
-title: Enhancing Developer Workflows with Datadog 
-kind: documentation
+title: Enhancing Developer Workflows with Datadog
+
 description: Learn how to use Datadog Test Visibility with additional Datadog features to accelerate your development process.
 aliases:
 - /continuous_integration/guides/developer_workflows
@@ -27,7 +27,7 @@ further_reading:
 
 [Test Visibility][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
 
-- [Create and open GitHub issues](#create-and-open-github-issues) 
+- [Create and open GitHub issues](#create-and-open-github-issues)
 - [Create Jira issues through Case Management](#create-jira-issues)
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
 - [Enable test summaries in GitHub Pull Request comments](#test-summaries-in-github-pull-requests)
@@ -42,17 +42,17 @@ With Test Visibility, you can create and open pre-filled GitHub issues with rele
 
 You can create pre-filled GitHub issues from three areas within Test Visibility:
 
-- [Commit Overview page (from the **Commits** table)](#commit-overview) 
+- [Commit Overview page (from the **Commits** table)](#commit-overview)
 - [Branch Overview page](#branch-overview)
 - [Test Details side panel](#test-details-view)
 
 #### Commit Overview
 
-The overview page for any commit can be discovered through a particular branch or from within any particular test. 
+The overview page for any commit can be discovered through a particular branch or from within any particular test.
 
 {{< img src="ci/github_issues_commit_overview_updated.png" alt="Datadog GitHub issues preview" style="width:100%;">}}
 
-From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Open issue in GitHub**. 
+From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Open issue in GitHub**.
 
 #### Branch Overview
 From this page, click on any row in the **Flaky Tests** table and select **Open issue in GitHub**.
@@ -60,11 +60,11 @@ From this page, click on any row in the **Flaky Tests** table and select **Open 
 {{< img src="ci/github_issues_flaky_test_updated.png" alt="Datadog GitHub issues flaky tests table preview" style="width:100%;">}}
 
 #### Test Details View
-From within a specific test run, click the **Actions** button and select **Open issue in GitHub**. 
+From within a specific test run, click the **Actions** button and select **Open issue in GitHub**.
 
 {{< img src="ci/github_issues_detail_light.png" alt="Datadog GitHub issues test detail view preview" style="width:100%;">}}
 
-You also have the option to copy an issue description in Markdown for pasting test details elsewhere. The Markdown description contains information such as the test execution link, service, branch, commit, author, and error. 
+You also have the option to copy an issue description in Markdown for pasting test details elsewhere. The Markdown description contains information such as the test execution link, service, branch, commit, author, and error.
 
 {{< img src="ci/github_issues_markdown.png" alt="Copy issue description in Markdown format for GitHub issues" style="width:50%;">}}
 
@@ -74,7 +74,7 @@ Below is what a pre-filled GitHub issue might look like:
 
 ## Create Jira issues
 
-With [Case Management][8], you can create and open pre-filled Jira issues that contain relevant context related to your tests, as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests. 
+With [Case Management][8], you can create and open pre-filled Jira issues that contain relevant context related to your tests, as well as deep links back to Datadog for more streamlined debugging workflows. Creating issues directly from Test Visibility can help you track and maintain accountability for test failures and flaky tests.
 
 When you update the status of a Jira issue, the status in Case Management updates and reflects the latest case status.
 
@@ -82,7 +82,7 @@ When you update the status of a Jira issue, the status in Case Management update
 
 After you have [set up the Jira integration][7], you can create cases from three areas within Test Visibility:
 
-- [Commit Overview page (from the **Commits** table)](#commit-overview-1) 
+- [Commit Overview page (from the **Commits** table)](#commit-overview-1)
 - [Flaky Tests section](#branch-overview-1)
 - [Test Runs side panel](#test-runs-view)
 
@@ -90,11 +90,11 @@ You can manually create a Jira issue from a case in [Case Management][9] by clic
 
 ### Commit Overview
 
-The overview page for any commit can be discovered through a particular branch or from within any particular test. 
+The overview page for any commit can be discovered through a particular branch or from within any particular test.
 
 {{< img src="continuous_integration/case_failed_test.png" alt="Create a Case Management issue in the Commit Overview page" style="width:100%;">}}
 
-From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Create case**. 
+From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select **Create case**.
 
 #### Branch Overview
 From this page, click on any row in the **Flaky Tests** table and select **Create case**.
@@ -102,7 +102,7 @@ From this page, click on any row in the **Flaky Tests** table and select **Creat
 {{< img src="continuous_integration/case_flaky_test.png" alt="Create a Case Management issue in the Flaky Tests list" style="width:100%;">}}
 
 #### Test Runs View
-From within a specific test run, click the **Actions** button and select **Create case**. 
+From within a specific test run, click the **Actions** button and select **Create case**.
 
 {{< img src="continuous_integration/case_test_runs.png" alt="Create a Case Management issue in the Test Runs side panel" style="width:100%;">}}
 
@@ -122,7 +122,7 @@ The order of options in this dropdown changes depending on the language your tes
 - Visual Studio Code is prioritized for JavaScript and Python-based tests
 
 ### Installing IDE plugins
-IDE plugins and extensions are required to view your test in your IDE. 
+IDE plugins and extensions are required to view your test in your IDE.
 - If you do not have the VS Code extension installed, click **View in VS Code** to open the extension directly in VS Code for installation.
 - If you do not have the IntelliJ plugin installed, click **View in IntelliJ** to get the extension installation. Compatible Datadog versions can be found on the [Plugin Versions page][2].
 

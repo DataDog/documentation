@@ -4,7 +4,7 @@ further_reading:
 - link: /synthetics/private_locations/monitoring
   tag: Documentation
   text: Surveiller vos emplacements privés
-kind: documentation
+
 title: Dimensionner vos emplacements privés
 ---
 

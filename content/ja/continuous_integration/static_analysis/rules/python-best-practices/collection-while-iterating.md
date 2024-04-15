@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 反復処理中に辞書を変更しない
 ---
 ## メタデータ

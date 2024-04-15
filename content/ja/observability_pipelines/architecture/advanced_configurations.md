@@ -1,5 +1,5 @@
 ---
-kind: Documentation
+
 title: 高度なコンフィギュレーション
 ---
 

@@ -1,7 +1,7 @@
 ---
 aliases:
 - /es/agent/faq/agent-downgrade
-kind: faq
+
 title: Cambiar a una versión principal anterior del Agent
 ---
 

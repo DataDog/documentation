@@ -13,7 +13,7 @@ further_reading:
 - link: /containers/guide/clustercheckrunners
   tag: ドキュメント
   text: クラスターチェックランナー
-kind: documentation
+
 title: クラスターチェック
 ---
 

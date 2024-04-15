@@ -23,7 +23,7 @@ guid: f7a5a40f-f73c-465a-be8f-b2b371c706a2
 integration_id: spark
 integration_title: Spark
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: spark.
@@ -191,7 +191,7 @@ Documentation, liens et articles supplémentaires utiles :
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: 
+[6]:
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
 [9]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html

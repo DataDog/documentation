@@ -4,7 +4,7 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentation
   text: Intégration Postgres basique
-kind: documentation
+
 title: Configuration de Database Monitoring pour Postgres avec une gestion sur Amazon RDS
 ---
 

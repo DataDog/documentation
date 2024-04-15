@@ -1,7 +1,7 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/legacy.md
-kind: documentation
+
 title: Ancien Agent v5
 ---
 Cette documentation explique comment créer un check d'Agent pour l'Agent Datadog v5, qui a été remplacé par l'Agent v6. Il est encore possible d'écrire vos propres checks locaux pour la v5, mais aucune nouvelle intégration n'est envisagée en amont. Pour en savoir plus sur la création d'intégrations pour l'Agent v6, consultez la section [Créer une intégration][1].

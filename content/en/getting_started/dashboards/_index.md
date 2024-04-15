@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Dashboards
-kind: documentation
+
 further_reading:
   - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
     tag: "Blog"
@@ -22,12 +22,12 @@ further_reading:
     text: "Monitors, SLOs, notifications, downtimes, and incidents"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
-    text: "Join an interactive session on better visualizations with Dashboards"  
+    text: "Join an interactive session on better visualizations with Dashboards"
 ---
 
 ## Overview
 
-The key to getting started with dashboards is knowing what kind of questions you ask yourself regularly. What are common issues your customers face? When a problem occurs, what questions help you find a solution? 
+The key to getting started with dashboards is knowing what kind of questions you ask yourself regularly. What are common issues your customers face? When a problem occurs, what questions help you find a solution?
 
 Creating a good dashboard is about bringing the answers to these questions to the surface. Also, it is important not to cram all of those thoughts into the same dashboard. Creating separate dashboards to pinpoint different issues can help you quickly find your answers.
 
@@ -49,17 +49,17 @@ Dashboards can also help you track down persistent problems and fix them. _Troub
 
 Datadog provides many out-of-the-box dashboards for features and integrations. For the infrastructure you monitor, check out the out-of-the-box dashboards that are provided with Datadog:
 
-1. Go to **Dashboards > Dashboards list** and search for the name of an integration you have added, for example `Redis`, or a feature you use, such as `RUM`. 
+1. Go to **Dashboards > Dashboards list** and search for the name of an integration you have added, for example `Redis`, or a feature you use, such as `RUM`.
 2. Browse the search results for dashboards marked *Preset* and see if at least some of the graphs show the answers you're looking for.
 3. Explore the links in the out-of-the-box dashboard's title dropdown to find more information about how people are using them.
 
 ## Start by reusing other dashboards
 
-A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
+A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer:
 
 1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Configuration Actions menu (the Configure button on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
   {{< img src="getting_started/dashboards/configure_clone_dashboard.png" alt="Clone dashboard option in the Configuration Actions menu" style="width:100%;" >}}
-2. Edit the clone by opening it and clicking **Edit widgets**. 
+2. Edit the clone by opening it and clicking **Edit widgets**.
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
 5. Copy in widgets you like from other dashboards by hovering over the widget and typing `Command + C` (`Ctrl + C` on Windows). Paste it into your dashboard by opening the dashboard and typing `Command + V` (`Ctrl + V` on Windows).
@@ -67,13 +67,13 @@ A common way to start a dashboard is by encountering a similar dashboard already
 
 ## Learn more about metrics
 
-Through integrations, Datadog collects [metrics][2] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][3] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
+Through integrations, Datadog collects [metrics][2] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][3] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs.
 
 For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][4] section of the Amazon S3 integration README to see its description: `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
 
 ## Add widgets and refine what they show
 
-After you've selected a few metrics to add to your dashboard, experiment with various [widget types][5], [queries][6], [functions][7], and [aggregation approaches][8], to display the data in ways that best answer the questions you have. 
+After you've selected a few metrics to add to your dashboard, experiment with various [widget types][5], [queries][6], [functions][7], and [aggregation approaches][8], to display the data in ways that best answer the questions you have.
 
 By specifying Template variables, you can make one dashboard answer questions for a selection of scenarios. For example, you can create a time graph that shows latency metrics for whichever data center geography the user selects from the dashboard's variables dropdown, or for all of them together. For more information, see [Template Variables][9].
 
@@ -104,10 +104,10 @@ Move graphs around so they create a flow for the work you do or conversations yo
 There are two ways to create links from a dashboard to any target URL:
 
  - Add a Notes and Links widget, which can contain Markdown formatted text, including links. The widget editor includes Markdown formatting tips.
- - Create a Custom link from a widget's Settings (gear) menu. Custom links can interpolate variables and template variables, so that the link changes according to what the user has selected when they click, taking them to exactly the right place for analyzing data or taking corrective action. 
+ - Create a Custom link from a widget's Settings (gear) menu. Custom links can interpolate variables and template variables, so that the link changes according to what the user has selected when they click, taking them to exactly the right place for analyzing data or taking corrective action.
      {{< img src="getting_started/dashboards/opening_custom_link.mp4" alt="Opening a custom link" video=true >}}
 
-## What's next 
+## What's next
 
 ### Share your dashboards outside of the Datadog site
 
@@ -123,7 +123,7 @@ Because all widgets and dashboards are represented as JSON, you can programmatic
 
 ### View Dashboards from the Datadog Mobile App
 
-View your dashboards on your mobile device with the [Datadog Mobile App][16], available on the [Apple App Store][17] and [Google Play Store][18]. 
+View your dashboards on your mobile device with the [Datadog Mobile App][16], available on the [Apple App Store][17] and [Google Play Store][18].
 
 The mobile app enables you to view and search all of the dashboards that you have access to in your Datadog organization, and filter them using the same template variables used in the Datadog web app.
 

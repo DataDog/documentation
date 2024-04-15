@@ -17,7 +17,7 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: En savoir plus sur les monitors de test Synthetic
-kind: documentation
+
 title: Tests ICMP
 ---
 
@@ -54,7 +54,7 @@ Les assertions définissent un résultat de test escompté. Cliquez sur **Test U
 | packet received | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Nombre entier_        |
 | network hops    | - |`is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Nombre entier_        |
 
-Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **New Assertion** ou en sélectionnant directement l'aperçu de la réponse : 
+Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **New Assertion** ou en sélectionnant directement l'aperçu de la réponse :
 
 {{< img src="synthetics/api_tests/icmp_assertion.png" alt="Définir des assertions pour déterminer la réussite ou l'échec de votre test ICMP" style="width:90%;" >}}
 
@@ -66,7 +66,7 @@ Si un test contient une assertion sur le corps de la réponse et que le délai d
 
 Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test ICMP. Les tests ICMP peuvent être exécutés depuis des emplacements gérés et des [emplacements privés][1], selon que vous souhaitez déclencher vos pings ICMP à l'extérieur ou au sein de votre réseau.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Indiquer la fréquence du test
 
@@ -139,7 +139,7 @@ Pour créer une variable locale, cliquez sur **Create Local Variable** en haut �
 `{{ date(n unit, format) }}`
 : Génère une date dans l'un des formats acceptés de Datadog. Sa valeur correspond à la date UTC d'initiation du test + ou - `n` unités.
 
-`{{ timestamp(n, unit) }}` 
+`{{ timestamp(n, unit) }}`
 : Génère un timestamp dans l'une des unités acceptées de Datadog. Sa valeur correspond au timestamp UTC d'initiation du test +/-  `n` unités.
 
 Pour obfusquer les valeurs des variables locales dans les résultats des tests, sélectionnez **Hide and obfuscate variable value**. Une fois la chaîne de la variable définie, cliquez sur **Add Variable**.

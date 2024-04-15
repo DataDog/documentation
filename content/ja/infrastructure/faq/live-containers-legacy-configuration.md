@@ -5,7 +5,7 @@ further_reading:
 - link: /infrastructure/containers
   tag: Documentation
   text: コンテナビュー
-kind: faq
+
 title: ライブコンテナのレガシー構成
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Prometheus and OpenMetrics metrics collection
-kind: documentation
+
 aliases:
     - /getting_started/prometheus
     - /getting_started/integrations/prometheus
@@ -131,7 +131,7 @@ For a full list of available parameters for instances, including `namespace` and
    {{% tab "Kubernetes (AD v2)" %}}
 
    **Note:** AD Annotations v2 was introduced in Datadog Agent version 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
-   
+
    ```yaml
      # (...)
     spec:

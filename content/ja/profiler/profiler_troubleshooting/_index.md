@@ -5,7 +5,7 @@ further_reading:
 - link: /tracing/troubleshooting
   tag: Documentation
   text: APM トラブルシューティング
-kind: documentation
+
 title: プロファイラのトラブルシューティング
 type: multi-code-lang
 ---

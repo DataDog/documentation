@@ -1,6 +1,6 @@
 ---
 title: Enable SSO
-kind: documentation
+
 ---
 
 Enabling Single Sign-On (SSO) for your account allows you to simplify authentication and login access to Cloudcraft.

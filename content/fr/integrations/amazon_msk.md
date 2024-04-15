@@ -18,7 +18,7 @@ integration_id: amazon-msk
 integration_title: Amazon Managed Streaming for Apache Kafka
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_msk
 public_title: Intégration Datadog/Amazon Managed Streaming for Apache Kafka
@@ -52,7 +52,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord l'[intégration Amazon We
 
 Configurez Amazon MSK de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
-**Remarques** : 
+**Remarques** :
 - Si vous stockez vos logs dans un compartiment S3, assurez-vous que `amazon_msk` est défini en tant que _Target prefix_.
 - Si vous stockez vos logs dans un groupe de logs CloudWatch, assurez-vous que son nom contient la sous-chaîne `msk`.
 

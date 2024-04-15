@@ -1,7 +1,7 @@
 ---
 description: Postgres データベースでのデータベースモニタリングの設定
 disable_sidebar: true
-kind: documentation
+
 title: Postgres の設定
 ---
 

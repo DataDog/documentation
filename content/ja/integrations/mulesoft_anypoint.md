@@ -49,7 +49,7 @@ integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/EULA - IO Connect Services.pdf
 manifest_version: 2.0.0
@@ -121,7 +121,7 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 ### ** Mule アプリケーションに必要な可観測性**
 
-#### オペレーション (_インフラストラクチャー、API、アラート、リソース割り当てダッシュボード_) 
+#### オペレーション (_インフラストラクチャー、API、アラート、リソース割り当てダッシュボード_)
 
 - Mule サーバー、アプリケーション、API、その他の IT インフラストラクチャーの状態を監視します
 - Mule インフラストラクチャーに関するアラートを受信して視覚化します
@@ -133,7 +133,7 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_allocation.png" alt="オペレーション: リソースの割り当てと使用状況のダッシュボード" >}}
 
-#### 開発 (_最適化ダッシュボード_) 
+#### 開発 (_最適化ダッシュボード_)
 
 - Mule アプリケーションのメモリ、CPU、ネットワークの問題をすばやく特定します
 - Mule アプリケーションのボトルネックを見つけて、パフォーマンスを最適化します
@@ -141,7 +141,7 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_dev_optimization.png" alt="開発: 最適化ダッシュボード" >}}
 
-#### エグゼクティブ (_コスト最適化とダウンタイムのダッシュボード_) 
+#### エグゼクティブ (_コスト最適化とダウンタイムのダッシュボード_)
 
 - 使用済みおよび未使用のリソースに基づいて ROI を分析、予測します
 - Mule 投資のシステムアップタイムを可視化します
@@ -152,9 +152,9 @@ Datadog Mule® インテグレーションは、MuleSoft 製品からメトリ�
 
 - CloudHub とオンプレミスのスタンドアロンサーバーの両方の Mule ランタイム
 - Anypoint API Manager と API Analytics
-- Anypoint Exchange 
-- Anypoint Access Management 
-- Object Store v2 
+- Anypoint Exchange
+- Anypoint Access Management
+- Object Store v2
 
 ### **Datadog Mule 4 コネクタを使用して Mule アプリケーションをインスツルメントします**
 

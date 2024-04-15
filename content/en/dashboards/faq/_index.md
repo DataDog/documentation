@@ -1,7 +1,7 @@
 ---
 title: Graphing FAQ
-kind: faq
-cascade: 
+
+cascade:
   - private: true
 aliases:
     - /graphing/faq/how-to-merge-screenboards

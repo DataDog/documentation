@@ -1,6 +1,6 @@
 ---
 title: Enabling CSM Enterprise on Linux
-kind: documentation
+
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 80 # a number that represents relative weight. 
@@ -16,7 +16,7 @@ You can also use the [Agent install script][5] to automatically enable CSM Misco
 DD_COMPLIANCE_CONFIG_ENABLED=true DD_RUNTIME_SECURITY_CONFIG_ENABLED=true DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-**Notes**: 
+**Notes**:
 
 - By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and `system-probe.yaml` files need to be updated.
 - If you use the Agent install script to enable CSM Misconfigurations and CSM Threats, you must still manually update the `datadog.yaml` file to enable `host_benchmarks` for CSM Misconfigurations, and `sbom` and `container_image` for CSM Vulnerabilities.

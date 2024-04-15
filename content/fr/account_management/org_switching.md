@@ -1,6 +1,6 @@
 ---
 title: Passer d'une organisation à une autre
-kind: documentation
+
 ---
 Si vous appartenez à plusieurs organisations Datadog, le sélecteur d'organisation en bas à gauche de la barre de navigation vous permet de changer d'organisation. Vous pouvez également afficher toutes vos organisations et passer d'une organisation à une autre depuis l'onglet **Organizations** de la page **Personal Settings**.
 

@@ -1,6 +1,6 @@
 ---
 title: Advanced Configurations
-kind: Documentation
+
 ---
 
 {{< site-region region="gov" >}}

@@ -21,7 +21,7 @@ integration_id: nvidia-jetson
 integration_title: Nvidia Jetson
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: nvidia.jetson.
@@ -63,7 +63,7 @@ Lancez la [sous-commande status de l'Agent][5] et cherchez `jetson` dans la sect
 {{< get-metrics-from-git "nvidia_jetson" >}}
 
 
-Certaines métriques sont uniquement transmises lorsque `use_sudo` est défini sur true : 
+Certaines métriques sont uniquement transmises lorsque `use_sudo` est défini sur true :
 - `nvidia.jetson.iram.used`
 - `nvidia.jetson.iram.total`
 - `nvidia.jetson.iram.lfb`

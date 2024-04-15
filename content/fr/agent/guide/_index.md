@@ -5,7 +5,7 @@ cascade:
     rank: 70
     subcategory: Guides de l'Agent
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides de l'Agent
 ---

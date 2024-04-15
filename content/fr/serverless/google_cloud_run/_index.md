@@ -3,7 +3,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: Blog
   text: Recueillir des traces, logs et métriques custom à partir de services Cloud Run
-kind: documentation
+
 title: Google Cloud Run
 ---
 
@@ -17,7 +17,7 @@ Assurez-vous de posséder une [clé d'API Datadog][6] et d'utiliser un langage d
 
 ## Instrumenter votre application
 
-Vous pouvez instrumenter votre application de deux façons : avec [Dockerfile](#dockerfile) ou avec un [buildpack](#buildpack). 
+Vous pouvez instrumenter votre application de deux façons : avec [Dockerfile](#dockerfile) ou avec un [buildpack](#buildpack).
 
 ### Dockerfile
 

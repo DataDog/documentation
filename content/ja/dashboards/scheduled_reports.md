@@ -13,7 +13,7 @@ further_reading:
   tag: ラーニングセンター
   text: ダッシュボードをより効果的に活用する
 is_public: true
-kind: documentation
+
 title: スケジュールされたレポート
 ---
 

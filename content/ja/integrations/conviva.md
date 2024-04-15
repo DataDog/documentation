@@ -11,7 +11,7 @@ integration_id: ''
 integration_title: Conviva
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: conviva
 public_title: Datadog-Conviva インテグレーション
@@ -39,7 +39,7 @@ Datadog の [Conviva インテグレーションタイル][1]を使用して、�
 5. **Add New** をクリックしてその後の手順に従い、さらに _MetricLens_ を追加します。
 6. **Add New Credentials** ボタンを使用して、追加の Conviva 認証方法でこのステップを繰り返します。
 
-### ダッシュボード  
+### ダッシュボード
 インテグレーションの構成後、すぐに使える Conviva ダッシュボードを使用して MetricLens メトリクスの概要を取得します。デフォルトでは、すべての MetricLens で収集されたすべてのメトリクスが表示されます。
 
 {{< img src="integrations/conviva/conviva_dashboard.png" alt="Conviva インテグレーションのすぐに使えるダッシュボード" popup="true" style="width:100%" >}}

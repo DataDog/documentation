@@ -1,6 +1,6 @@
 ---
 title: "WAF Component"
-kind: documentation
+
 ---
 ## Overview
 

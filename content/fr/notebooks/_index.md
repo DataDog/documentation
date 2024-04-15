@@ -18,7 +18,7 @@ further_reading:
   tag: blog
   text: Automatiser les tâches de sécurité courantes et anticiper les menaces avec
     les workflows Datadog et Cloud SIEM
-kind: documentation
+
 title: Notebooks
 ---
 
@@ -151,7 +151,7 @@ Cliquez sur **More options** dans l'éditeur intégré d'un widget pour modifier
 
 #### Options de disposition
 
-Depuis une cellule de notebook, cliquez sur **Edit** pour afficher sa configuration et y apporter des modifications. Il est également possible d'afficher les options de disposition disponibles. La liste des options varie selon le type de contenu de la cellule. Elle comprend les options suivantes : 
+Depuis une cellule de notebook, cliquez sur **Edit** pour afficher sa configuration et y apporter des modifications. Il est également possible d'afficher les options de disposition disponibles. La liste des options varie selon le type de contenu de la cellule. Elle comprend les options suivantes :
 
 * **Graph size** : sélectionnez la taille du graphique parmi `XS`, `S`, `M` (par défaut), `L` et `XL`.
 * **Graph legend** : décochez cette case pour masquer la légende. Les légendes sont automatiquement désactivées pour les graphiques `XS` et `S`.

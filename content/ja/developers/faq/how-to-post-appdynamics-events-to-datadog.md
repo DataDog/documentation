@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: AppDynamics のイベントを Datadog に投稿する
 ---
 

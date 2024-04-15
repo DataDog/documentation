@@ -1,6 +1,6 @@
 ---
 title: Create a Strong Password and Protect Your Data
-kind: documentation
+
 ---
 
 Creating and maintaining strong, unique passwords, is a fundamental part of keeping your data safe anywhere on the internet.

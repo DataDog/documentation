@@ -15,7 +15,7 @@ further_reading:
 - link: /synthetics/identify_synthetics_bots
   tag: Documentation
   text: Apprendre à identifier les bots Synthetic pour les tests API
-kind: documentation
+
 title: Débuter avec les tests Browser
 ---
 
@@ -29,7 +29,7 @@ Ces tests permettent de vérifier que vos utilisateurs peuvent effectuer les **t
 
 ## Créer un test Browser
 
-L'exemple ci-dessous montre comment créer un test Browser qui reflète les étapes d'un parcours utilisateur allant de l'ajout d'un article au panier jusqu'à la validation du paiement. 
+L'exemple ci-dessous montre comment créer un test Browser qui reflète les étapes d'un parcours utilisateur allant de l'ajout d'un article au panier jusqu'à la validation du paiement.
 
 {{< img src="getting_started/synthetics/browser-test-1.png" alt="Test Browser représentant chaque étape d'un parcours utilisateur" style="width:100%;" >}}
 ### Configurer les détails de votre test
@@ -42,7 +42,7 @@ L'exemple ci-dessous montre comment créer un test Browser qui reflète les éta
     - Sélectionnez **Advanced Options** pour définir des options de requête personnalisées, des certificats, des identifiants d'authentification, etc.
       Pour cet exemple, aucune option avancée n'est requise.
     - Donnez un nom à votre test et ajoutez-y des tags, comme `env:prod` et `app:shopist`. Les tags vous permettent d'organiser votre collection de tests et d'accéder rapidement à ceux qui vous intéressent sur la page d'accueil.
-    - Choisissez les navigateurs et appareils sur lesquels vous souhaitez exécuter votre test. 
+    - Choisissez les navigateurs et appareils sur lesquels vous souhaitez exécuter votre test.
 
 #### Sélectionner des emplacements
 
@@ -87,11 +87,11 @@ Lorsque vous êtes prêt à enregistrer votre test, cliquez sur **Save Details &
 
 ### Créer un enregistrement
 
-Une fois la configuration de votre test enregistrée, Datadog vous invite à télécharger et à installer l'extension Chrome [Datadog test recorder][8]. 
+Une fois la configuration de votre test enregistrée, Datadog vous invite à télécharger et à installer l'extension Chrome [Datadog test recorder][8].
 
 Une fois que vous avez installé l'extension, cliquez sur **Start Recording** pour commencer à enregistrer les étapes de votre test.
 
-Parcourez la page affichée dans l'iframe visible à droite de la page de l'outil d'enregistrement. Lorsque vous sélectionnez une div, une image ou toute autre zone de la page, Datadog enregistre et crée l'étape associée dans le test Browser. 
+Parcourez la page affichée dans l'iframe visible à droite de la page de l'outil d'enregistrement. Lorsque vous sélectionnez une div, une image ou toute autre zone de la page, Datadog enregistre et crée l'étape associée dans le test Browser.
 
 Pour terminer l'enregistrement des étapes de votre test, cliquez sur **Stop Recording**.
 
@@ -100,7 +100,7 @@ L'exemple ci-dessous montre comment enregistrer les étapes d'un parcours utilis
 1. Accédez à l'une des sections du site donné en exemple, telles que **Chairs**, puis sélectionnez **Add to cart**.
 2. Cliquez sur **Cart**, puis sur **Checkout**.
 3. Sous **Add New**, sélectionnez **Assertion**, puis cliquez sur **Test that some text is present on the active page**.
-4. Pour vérifier que le message « Thank you! » s'affiche après le paiement, saisissez `Thank you!` dans le champ **Value**. 
+4. Pour vérifier que le message « Thank you! » s'affiche après le paiement, saisissez `Thank you!` dans le champ **Value**.
 5. Appuyez sur **Save & Quit**.
 
 Il est important de terminer votre test Browser par une **assertion** pour confirmer la bonne exécution du parcours utilisateur défini dans votre application.
@@ -113,7 +113,7 @@ Il est important de terminer votre test Browser par une **assertion** pour confi
 
 La page de détails d'un **test Browser** affiche un aperçu de la configuration de votre test, l'uptime global et par emplacement, des graphiques illustrant le délai avant interactivité et la durée du test, des exemples de résultats d'échec ou de réussite, et la liste de tous les résultats de test. En fonction de la durée de votre test, vous devrez peut-être attendre quelques minutes pour que les premiers résultats de test soient disponibles.
 
-Pour identifier la cause de l'[échec d'un test][9], sélectionnez un résultat d'échec et examinez les captures d'écran jusqu'à l'étape ayant provoqué l'échec. Vous pouvez également examiner les **[erreurs et avertissements][10]** potentiels, les **[ressources][11]** et les **[signaux Web essentiels][12]** pour diagnostiquer le problème. 
+Pour identifier la cause de l'[échec d'un test][9], sélectionnez un résultat d'échec et examinez les captures d'écran jusqu'à l'étape ayant provoqué l'échec. Vous pouvez également examiner les **[erreurs et avertissements][10]** potentiels, les **[ressources][11]** et les **[signaux Web essentiels][12]** pour diagnostiquer le problème.
 
 Dans l'exemple ci-dessous, le test a échoué car le serveur a mis trop de temps à répondre.
 

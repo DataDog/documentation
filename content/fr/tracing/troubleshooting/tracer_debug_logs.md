@@ -3,7 +3,7 @@ further_reading:
 - link: /tracing/troubleshooting/connection_errors/
   tag: Documentation
   text: Résoudre les erreurs de connexion APM
-kind: Documentation
+
 title: Logs de debugging du traceur
 ---
 
@@ -36,10 +36,10 @@ Les étapes à suivre pour activer le mode debugging dans le traceur Python Data
 
 1. Pour activer le mode debugging : `DD_TRACE_DEBUG=true`
 
-2. Pour transmettre les logs de debugging vers un fichier de log, définissez `DD_TRACE_LOG_FILE` avec le nom du fichier dans lequel les logs du traceur doivent être écrits en fonction de votre répertoire de travail actuel. Par exemple, `DD_TRACE_LOG_FILE=ddtrace_logs.log`. 
+2. Pour transmettre les logs de debugging vers un fichier de log, définissez `DD_TRACE_LOG_FILE` avec le nom du fichier dans lequel les logs du traceur doivent être écrits en fonction de votre répertoire de travail actuel. Par exemple, `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
    Par défaut, la taille du fichier est de 15728640 octets (environ 15 Mo) et un fichier de sauvegarde est créé. Pour augmenter la taille par défaut du fichier de log, spécifiez la taille en octets à l'aide du paramètre `DD_TRACE_LOG_FILE_SIZE_BYTES`.
 
-3. Pour transmettre les logs vers la console avec une application **Python 2**, configurez `logging.basicConfig()` ou un paramètre similaire. Les logs sont automatiquement envoyés vers la console pour les applications **Python 3**. 
+3. Pour transmettre les logs vers la console avec une application **Python 2**, configurez `logging.basicConfig()` ou un paramètre similaire. Les logs sont automatiquement envoyés vers la console pour les applications **Python 3**.
 
 
 ### Scénario 2 : ddtrace 1.0.x à 1.2.x
@@ -111,7 +111,7 @@ func main() {
 
 {{< programming-lang lang="nodejs" >}}
 
-Pour activer le mode debugging pour le traceur Node.js Datadog, utilisez la variable d'environnement `DD_TRACE_DEBUG=true`. 
+Pour activer le mode debugging pour le traceur Node.js Datadog, utilisez la variable d'environnement `DD_TRACE_DEBUG=true`.
 
 **Remarque** : pour les versions antérieures à 2.X, vous pouvez activer le mode debugging par programmation lors de l'initialisation du traceur. Cette fonctionnalité n'est toutefois plus possible avec les nouvelles versions.
 

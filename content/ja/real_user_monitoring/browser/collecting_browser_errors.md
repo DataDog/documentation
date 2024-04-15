@@ -15,7 +15,7 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボード
-kind: documentation
+
 title: ブラウザエラーの収集
 ---
 ## 概要
@@ -241,7 +241,7 @@ class ErrorBoundary extends React.Component {
 
 2. [`Access-Control-Allow-Origin`][10] HTTP レスポンスヘッダーを構成します。
 
-    - すべてのオリジンがリソースを取得できるようになる `Access-Control-Allow-Origin: *` 
+    - すべてのオリジンがリソースを取得できるようになる `Access-Control-Allow-Origin: *`
     - 許可された 1 つのオリジンを指定する `Access-Control-Allow-Origin: example.com`。サーバーが複数のオリジンのクライアントをサポートする場合、リクエストを行う特定のクライアントのオリジンを返さなければなりません。
 
 ## その他の参考資料

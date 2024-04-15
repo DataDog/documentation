@@ -3,7 +3,7 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentation
   text: Postgres インテグレーション
-kind: faq
+
 title: Postgres カスタムメトリクスの収集
 ---
 

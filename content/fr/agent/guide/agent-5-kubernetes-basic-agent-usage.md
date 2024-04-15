@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/agent/faq/agent-5-kubernetes-basic-agent-usage
-kind: guide
+
 private: true
 title: Utilisation de base de l'Agent Kubernetes dans l'Agent v5
 ---
@@ -29,7 +29,7 @@ Vous pouvez également vous contenter d'[exécuter l'Agent Datadog sur votre hos
 
 #### Installation sur un conteneur
 
-Grâce à Kubernetes, vous pouvez tirer profit des DaemonSets pour déployer automatiquement l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce aux nodeSelectors). 
+Grâce à Kubernetes, vous pouvez tirer profit des DaemonSets pour déployer automatiquement l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce aux nodeSelectors).
 
 *Si vous ne pouvez pas utiliser de DaemonSets pour votre cluster Kubernetes, [installez l'Agent Datadog][4] en tant que déploiement sur chaque nœud Kubernetes.*
 

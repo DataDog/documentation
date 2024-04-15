@@ -1,6 +1,6 @@
 ---
 title: Event Timeline Widget
-kind: documentation
+
 description: "Display your Event Stream Timeline in a widget."
 private: true
 aliases:

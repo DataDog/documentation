@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Rotation des clés GPG RPM
 ---
 

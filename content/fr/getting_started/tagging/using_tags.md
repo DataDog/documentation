@@ -1,6 +1,6 @@
 ---
 title: Utiliser les tags
-kind: documentation
+
 aliases:
   - /fr/tagging/using_tags/
 further_reading:
@@ -50,7 +50,7 @@ Utilisez `IN` ou `NOT IN` pour filtrer rapidement une métrique en fonction de t
 
 {{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="Filtre booléen avec IN/NOT IN" style="width:80%;">}}
 
-Pour créer un groupe agrégé à l'aide de tags, saisissez la clé du tag dans la zone de texte **avg by**. Par exemple, si vous disposez d'un graphique de séries temporelles présentant une métrique taguée avec la clé `service`, comme `service:coffee-house`, saisissez `service` dans la zone de texte **avg by** pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour l'ensemble des sources qui partagent la valeur de tag `service`. 
+Pour créer un groupe agrégé à l'aide de tags, saisissez la clé du tag dans la zone de texte **avg by**. Par exemple, si vous disposez d'un graphique de séries temporelles présentant une métrique taguée avec la clé `service`, comme `service:coffee-house`, saisissez `service` dans la zone de texte **avg by** pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour l'ensemble des sources qui partagent la valeur de tag `service`.
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="Tags dans des dashboards avec la zone de texte avg by" style="width:80%;">}}
 

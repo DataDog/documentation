@@ -1,11 +1,11 @@
 ---
 title: Docker Deprecation in Kubernetes
-kind: documentation
+
 aliases:
  - /agent/guide/docker-deprecation
 ---
 
-Kubernetes is deprecating Docker as a runtime starting after version 1.20, and some cloud providers have deprecated Docker in their images. 
+Kubernetes is deprecating Docker as a runtime starting after version 1.20, and some cloud providers have deprecated Docker in their images.
 
 - AKS 1.19 [deprecated Docker and uses containerd by default][1].
 

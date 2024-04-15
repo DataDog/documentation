@@ -1,6 +1,6 @@
 ---
 title: "Surveillance de HCP\_Consul avec Datadog"
-kind: guide
+
 further_reading:
   - link: /integrations/consul/
     tag: Documentation

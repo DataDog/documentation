@@ -1,6 +1,6 @@
 ---
 title: Code Security
-kind: documentation
+
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
@@ -15,7 +15,7 @@ Datadog code security vulnerability detection scans for code vulnerabilities in 
 
 {{< img src="/security/application_security/code_security/asm_code_vulnerabilities_2.png" alt="Software Composition Analysis (SCA) explorer page showing code security vulnerabilities." style="width:100%;" >}}
 
-## Enabling code security vulnerability detection 
+## Enabling code security vulnerability detection
 
 To enable code security vulnerability detection capability, set the `DD_IAST_ENABLED` environment variable to `true` in your application configuration, and restart your service.
 
@@ -35,7 +35,7 @@ The available code security vulnerability types include the following:
 - Cookie without SameSite Flag
 - Unvalidated Redirect
 
-### Disabling code security vulnerability detection 
+### Disabling code security vulnerability detection
 
 To disable code security vulnerability detection capability, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
 

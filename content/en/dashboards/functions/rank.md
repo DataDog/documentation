@@ -1,6 +1,6 @@
 ---
 title: Rank
-kind: documentation
+
 aliases:
     - /graphing/functions/rank/
 ---

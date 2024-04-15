@@ -12,7 +12,7 @@ further_reading:
 - link: /security/detection_rules/
   tag: Documentation
   text: Explorer les règles de détection
-kind: documentation
+
 title: Notifications
 ---
 

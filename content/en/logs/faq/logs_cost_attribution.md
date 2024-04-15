@@ -1,6 +1,6 @@
 ---
 title: Logs Cost Attribution
-kind: faq
+
 further_reading:
 - link: "/logs/log_configuration/logs_to_metrics/"
   tag: "Documentation"
@@ -20,8 +20,8 @@ Datadog provides log usage information through the [Log Estimated Usage dashboar
 This guide walks you through the steps on how to create custom metrics and a dashboard to see your log cost attribution for different teams. You can also use this process for other attributes, such as departments, projects, products, regions, and so on.
 
 1. [Configure custom tags](#configure-custom-tags).
-2. [Generate custom log metrics](#generate-custom-logs-metrics) with those tags. 
-3. [Create widgets in a dashboard](#create-a-dashboard-using-the-custom-logs-metrics) for the custom log metrics. 
+2. [Generate custom log metrics](#generate-custom-logs-metrics) with those tags.
+3. [Create widgets in a dashboard](#create-a-dashboard-using-the-custom-logs-metrics) for the custom log metrics.
 
 {{< img src="logs/faq/logs_cost_attribution/cost_attribution_dashboard.png" alt="A dashboard showing table widgets for usage and cost broken down by teams for ingestion, Sensitive Data Scanner, seven days indexing, and 15 days indexing. " style="width:85%" >}}
 
@@ -49,7 +49,7 @@ However, if you need to configure the tag during ingestion, follow these steps t
 1. [Create a new `team` attribute](#create-a-new-team-attribute).
 2. [Create a remapper to convert the `team` attribute to a tag](#create-a-remapper-to-convert-the-team-attribute-to-a-tag).
 
-You can use this process to create the attributes you want for breaking down your log usage (for example, by departments, products, regions, and so forth). 
+You can use this process to create the attributes you want for breaking down your log usage (for example, by departments, products, regions, and so forth).
 
 #### Create a new `team` attribute
 
@@ -60,8 +60,8 @@ Use a [Category Processor][6] to create a new `team` attribute for your logs.
 3. Enter a name for the processor. For example, "Create team attribute".
 4. Enter `team` in the **Set target category attribute** field. This creates a `team` attribute.
 5. In the **Populate category** section, add a category for each team. For example, to add the tag `team:service_a` to log events that match `service:a` and `env:prod`:
-      a. Enter `service:a` and `env:prod` in the **All events that match** field.  
-      b. Enter `service_a` in the **Appear under the value name** field.  
+      a. Enter `service:a` and `env:prod` in the **All events that match** field.
+      b. Enter `service_a` in the **Appear under the value name** field.
       c. Click **Add**.
 6. Add the other teams as separate categories.
 7. Click **Create**.
@@ -108,15 +108,15 @@ Use a [Category Processor][6] to create a new `index_name` attribute for identif
 3. Enter a name for the processor. For example, "Create index_name attribute".
 4. Enter **index_name** in the **Set target category attribute** field. This creates an `index_name` attribute.
 5. Add a category for each index. For example, if you have an index named `retention-7` for all logs tagged with `env:staging`:
-    {{< img src="logs/faq/logs_cost_attribution/indexes_configuration.png" alt="The indexes list showing the filter query, retention period, and whether online archives is enabled for the retention-30, retention-15, retention-7, and demo indexes" >}} 
-Then, in the **Populate category** section:  
-      a. Enter `env:staging` in the **All events that match** field.  
-      b. Enter `retention-7` in the **Appear under the value name** field.  
+    {{< img src="logs/faq/logs_cost_attribution/indexes_configuration.png" alt="The indexes list showing the filter query, retention period, and whether online archives is enabled for the retention-30, retention-15, retention-7, and demo indexes" >}}
+Then, in the **Populate category** section:
+      a. Enter `env:staging` in the **All events that match** field.
+      b. Enter `retention-7` in the **Appear under the value name** field.
       c. Click **Add**
 6. Add the other indexes as separate categories.
 7. Click **Create**.
 
-{{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="The category processor form fill in with data to create an index_name attribute" style="width:75%" >}} 
+{{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="The category processor form fill in with data to create an index_name attribute" style="width:75%" >}}
 
 #### Create a new `retention_period` attribute
 
@@ -126,14 +126,14 @@ Use a [Category Processor][6] to create a new `retention_period` attribute to as
 2. Select **Category Processor** for the processor type.
 3. Enter a name for the processor. For example, "Create retention_period attribute".
 4. Enter `retention_period` in the **Set target category attribute** field. This creates a `retention_period` attribute.
-5. Add a category for each retention period. For example, if you have a 7-day retention index named `retention-7`, then in the **Populate category** section:  
-      a. Enter `@index_name:(retention-7)` in the **All events that match** field.  
-      b. Enter `7` in the **Appear under the value name** field.  
+5. Add a category for each retention period. For example, if you have a 7-day retention index named `retention-7`, then in the **Populate category** section:
+      a. Enter `@index_name:(retention-7)` in the **All events that match** field.
+      b. Enter `7` in the **Appear under the value name** field.
       c. Click **Add**
 6. Add the other retention periods as separate categories.
 7. Click **Create**.
 
-{{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="The category processor form fill in with data to create a retention_period attribute" style="width:75%" >}} 
+{{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="The category processor form fill in with data to create a retention_period attribute" style="width:75%" >}}
 
 #### Create a remapper to convert the `retention_period` attribute to a tag
 
@@ -164,13 +164,13 @@ Use a [Category Processor][6] to create a new `online_archives` attribute to ind
 2. Select **Category Processor** for the processor type.
 3. Enter a name for the processor. For example, "Create online_archives attribute". This creates an `online_archives` attribute.
 4. In the **Populate category** section, add two categories:
-      <br> In the **first category**, the value `true` is assigned to all indexes with Online Archives enabled. For example, if logs in the index named `retention-30` go into Online Archives:  
-      a. Enter `@index_name:(retention-30)` in the **All events that match** field.  
-      b. Enter `true` in the **Appear under the value name** field.  
+      <br> In the **first category**, the value `true` is assigned to all indexes with Online Archives enabled. For example, if logs in the index named `retention-30` go into Online Archives:
+      a. Enter `@index_name:(retention-30)` in the **All events that match** field.
+      b. Enter `true` in the **Appear under the value name** field.
       c. Click **Add**
-      <br> In the **second category**, the value `false` is assigned to all other indexes.  
-      a. Enter `*` in the **All events that match** field.  
-      b. Enter `false` in the **Appear under the value name** field.   
+      <br> In the **second category**, the value `false` is assigned to all other indexes.
+      a. Enter `*` in the **All events that match** field.
+      b. Enter `false` in the **Appear under the value name** field.
       c. Click **Add**
 5. Click **Create**.
 
@@ -202,14 +202,14 @@ The `sds` tag indicates whether or not your logs have been scanned by the Sensit
 For the Sensitive Data Scanner, billed usage is based on the volume of logs scanned, so it matches a scanning group, not a scanning rule. Therefore, you need to create a proxy scanning rule in each scanning group with a regex to match all logs. This ensures that all scanned logs are tagged.
 
 1. Go to the [Sensitive Data Scanner][8].
-2. In each scanning group:  
-      a. Click **Add Scanning Rule**.  
-      b. Enter `.` in the **Define Regex to match** field to match all logs.  
-      c. Select **Entire Event** in the **Scan the entire event or a portion of it** field.  
-      d. Enter `sds:true` in the **Add tags** field.  
-      e. Leave **Define action on match** on **No action**.  
-      f. Enter a name for the scanning rule. For example, "Create sds tag".  
-      g. Click **Create**.  
+2. In each scanning group:
+      a. Click **Add Scanning Rule**.
+      b. Enter `.` in the **Define Regex to match** field to match all logs.
+      c. Select **Entire Event** in the **Scan the entire event or a portion of it** field.
+      d. Enter `sds:true` in the **Add tags** field.
+      e. Leave **Define action on match** on **No action**.
+      f. Enter a name for the scanning rule. For example, "Create sds tag".
+      g. Click **Create**.
 
 ## Generate custom logs metrics
 
@@ -226,7 +226,7 @@ When setting up custom metrics, the tags in the `group by` field are the dimensi
 - `datadog_is_excluded` indicates whether the log is rejected by an exclusion filter in the routed index.
 - All the custom tags you have configured above (`team`, `retention_period`, `online_archives`, and `sds`).
 
-See [Generate a log-based metric][9] for instructions on generating the metrics. 
+See [Generate a log-based metric][9] for instructions on generating the metrics.
 
 <div class="alert alert-info">It is crucial that you ensure all relevant tags are included in the metric's dimensions because updating a metric's configuration (such as changing the query filters, dimensions, and so on) is not retroactively applied to logs that have already been ingested.</div>
 
@@ -256,11 +256,11 @@ To create a new dashboard:
 
 Datadog recommends that you configure the table widget for Log Ingestion in the following way:
 
-1. In the dashboard, click **Add Widgets**. 
+1. In the dashboard, click **Add Widgets**.
 2. Select the **Table** widget.
 3. In the **Metrics** field, select the **bytes** count metric that you generated earlier to count the number of bytes ingested.
 4. Select the **sum by** field and add the `team` tag to show the usage in bytes by team. You can also add other tags for your different cost buckets, for example, the `host` tag to see usage by host.
-5. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for Log Ingestion`.  
+5. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for Log Ingestion`.
       **Note**: If your contractual price per gigabyte changes, you need to update the formula manually.
 6. Click **Save**.
 
@@ -272,13 +272,13 @@ Datadog recommends that you configure the table widget for Log Ingestion in the 
 
 Datadog recommends that you configure the table widget for the Sensitive Data Scanner in the following way:
 
-1. In the dashboard, click **Add Widgets**. 
+1. In the dashboard, click **Add Widgets**.
 2. Select the **Table** widget.
 3. In the **Metrics** field, select the **bytes** count metric that you generated earlier to count the number of bytes ingested.
 4. In the **from** field, enter `sds:true` to filter only for logs that have been scanned by the Sensitive Data Scanner.
 5. Select the **sum by** field and add the `team` tag to show the usage in bytes by team. You can also add other tags for your different cost buckets.
-6. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for the Sensitive Data Scanner`.  
-      **Note**: If your contractual price per gigabyte changes, you need to update the formula manually. 
+6. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for the Sensitive Data Scanner`.
+      **Note**: If your contractual price per gigabyte changes, you need to update the formula manually.
 7. Click **Save**.
 
 {{< img src="logs/faq/logs_cost_attribution/sds_metric_widget.png" alt="The widget edit form showing the data filled in for Sensitive Data Scanner logs usage" style="width:75%" >}}
@@ -292,12 +292,12 @@ Since indexing is charged based on the number of days the logs are retained, cre
 
 Datadog recommends that you configure the table widget for Log Indexing in the following way:
 
-1. In the dashboard, click **Add Widgets**. 
+1. In the dashboard, click **Add Widgets**.
 2. Select the **Table** widget.
 3. Select the **events** count metric that you generated earlier to count the number of events ingested.
-4. In the **from** field, add the following:  
-      a. `datadog_index:*` to filter to only logs that have been routed to indexes.  
-      b. `datadog_is_excluded:false` to filter to only logs that have not matched any exclusion filter.  
+4. In the **from** field, add the following:
+      a. `datadog_index:*` to filter to only logs that have been routed to indexes.
+      b. `datadog_is_excluded:false` to filter to only logs that have not matched any exclusion filter.
       c. `retention_period:7` to filter to only logs that are retained for 7 days. You don't need to add this tag if you have the same retention period for all your indexes and therefore did not set up this tag earlier. If you have additional `retention_period` tags, create a separate widget for each one.
 5. Select the **sum by** field, and add the `team` tag to show the usage in events, by team. You can also add other tags for your different cost buckets.
 6. Add the following formula to convert usage into costs: `Usage in millions of events` * `Unit cost for 7 days of retention`. If your contractual price per million of events changes, you need to update the formula manually.
@@ -316,21 +316,21 @@ When Online Archives is enabled for an index, logs are duplicated and go into bo
 1. Exclusion filters, logs are indexed only if they pass through exclusion filters.
 2. Online Archives directly.
 
-Therefore, exclusion filters do not apply to logs that go into the Online Archives. 
+Therefore, exclusion filters do not apply to logs that go into the Online Archives.
 
 {{< img src="logs/faq/logs_cost_attribution/exclusion_filters_online_archives.png" alt="The Online Archive index showing a pipeline for exclusion filters and a pipeline for Online Archives" style="width:75%" >}}
 
 Based on that information, Datadog recommends that you configure the table widget for Online Archives in the following way:
 
-1. In the dashboard, click **Add Widgets**. 
+1. In the dashboard, click **Add Widgets**.
 2. Select the **Table** widget.
 3. In the **Metrics** field, select the **events** count metric you generated earlier that counts the number of events ingested.
-4. In the **from** field, add the following:  
-      - `datadog_index:*` to filter to only logs that have been routed to indexes.  
-      - `online_archives:true` to filter to only logs that have also been routed to Online Archives.  
+4. In the **from** field, add the following:
+      - `datadog_index:*` to filter to only logs that have been routed to indexes.
+      - `online_archives:true` to filter to only logs that have also been routed to Online Archives.
 5. Select the **sum by** field and add the `team` tag to show the usage in events by team. You can also add tags for different cost buckets.
-6. Add the following formula to convert usage into cost: `Usage in millions of events` * `Unit cost for Online Archives`.  
-      **Note**: If your contractual price per million of events changes, you need to update the formula manually.  
+6. Add the following formula to convert usage into cost: `Usage in millions of events` * `Unit cost for Online Archives`.
+      **Note**: If your contractual price per million of events changes, you need to update the formula manually.
 7. Click **Save**.
 
 {{< img src="logs/faq/logs_cost_attribution/online_archives_metric_widget.png" alt="The widget edit form showing the data filled in for online archives usage" style="width:75%" >}}
@@ -339,7 +339,7 @@ Based on that information, Datadog recommends that you configure the table widge
 
 You can aggregate all products into a single widget to get visibility into the total usage and costs. Datadog recommends that you configure the table widget in the following way:
 
-1. In the dashboard, click **Add Widgets**. 
+1. In the dashboard, click **Add Widgets**.
 2. Select the **Table** widget.
 3. Add all queries and formulas created in the other widgets to this widget:
     - [Log Ingestion](#create-a-widget-for-log-ingestion-usage)

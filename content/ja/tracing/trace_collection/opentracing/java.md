@@ -5,7 +5,7 @@ aliases:
 code_lang: java
 code_lang_weight: 0
 description: Java のための OpenTracing インスツルメンテーション
-kind: documentation
+
 title: Java OpenTracing インスツルメンテーション
 type: multi-code-lang
 ---

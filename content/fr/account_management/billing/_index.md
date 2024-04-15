@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Facturation
 ---
 
@@ -51,7 +51,7 @@ Cliquez sur **Edit Payment** pour afficher les options de gestion des moyens de 
 
 ### Gérer vos coordonnées de facturation
 
-Vous pouvez consulter vos coordonnées de facturation depuis la section [**Billing Contact Details**][9]. 
+Vous pouvez consulter vos coordonnées de facturation depuis la section [**Billing Contact Details**][9].
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Section Billing Contact Details sur la page de l'abonnement" style="width:90%;" >}}
 

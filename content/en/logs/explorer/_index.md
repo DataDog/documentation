@@ -1,6 +1,6 @@
 ---
 title: Log Explorer
-kind: documentation
+
 description: 'Search through all of your logs and perform Log Analytics'
 aliases:
     - /logs/explore
@@ -22,7 +22,7 @@ further_reading:
       text: 'Add a Log Explorer url to your clipboard'
     - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
       tag: "Blog"
-      text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"  
+      text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"
 ---
 
 ## Overview
@@ -41,19 +41,19 @@ The [**Log Explorer**][1] is your home base for log troubleshooting and explorat
 
 ## Analyze
 
-**Group** your queried logs into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information. 
+**Group** your queried logs into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information.
 
 To start identifying patterns and aggregating logs by subsets of events, see [Log Analytics][6].
 
 ## Visualize
 
-**Visualize** the outcome of your filters and aggregations to better understand your logs and gather decisive information. For example, you can view your logs in a list to organize your log data into columns, or in a timeseries graph to measure your log data over time. 
+**Visualize** the outcome of your filters and aggregations to better understand your logs and gather decisive information. For example, you can view your logs in a list to organize your log data into columns, or in a timeseries graph to measure your log data over time.
 
 To start visualizing log data in the Log Explorer, see [Log Visualizations][7].
 
 ## Export
 
-You can also **export** your Log Explorer view to reuse it later or in different contexts. 
+You can also **export** your Log Explorer view to reuse it later or in different contexts.
 
 To learn how to export your log queries and visualizations, see [Export Logs][8].
 

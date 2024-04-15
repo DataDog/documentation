@@ -1,6 +1,6 @@
 ---
 title: Custom Instrumentation of Java Applications with the OpenTelemetry API
-kind: documentation
+
 description: 'Instrument your Java application with OpenTelemetry API to send traces to Datadog.'
 code_lang: java
 type: multi-code-lang

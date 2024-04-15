@@ -1,6 +1,6 @@
 ---
 title: Account Management
-kind: guide
+
 ---
 
 {{< whatsnext desc="General:" >}}

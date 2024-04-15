@@ -1,6 +1,6 @@
 ---
 title: Serverless Monitoring for AWS Lambda
-kind: documentation
+
 further_reading:
 - link: '/serverless/configuration/'
   tag: 'Documentation'

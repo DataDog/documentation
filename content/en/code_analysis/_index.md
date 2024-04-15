@@ -1,6 +1,6 @@
 ---
 title: Code Analysis
-kind: documentation
+
 description: Learn how to use Datadog Code Analysis to address maintainability issues, bugs, and security vulnerabilities in development to prevent customer impact.
 is_beta: true
 further_reading:
@@ -33,13 +33,13 @@ Code Analysis is in public beta.
 
 ## Overview
 
-Code Analysis is composed of the [Static Analysis][1] and [Software Composition Analysis (SCA)][2] products. 
+Code Analysis is composed of the [Static Analysis][1] and [Software Composition Analysis (SCA)][2] products.
 
 Static Analysis
 : Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact users.
 
-Software Composition Analysis 
-: Scans the open source libraries that are imported into your repositories for known vulnerabilities. 
+Software Composition Analysis
+: Scans the open source libraries that are imported into your repositories for known vulnerabilities.
 
 Once you have configured Code Analysis, you can head to the [Code Analysis page][9] to see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories. The summarized results will always be for the latest commit on the default branch of each repository to ensure you are seeing all the existing problems on each repository that you may want to triage and fix.
 
@@ -76,7 +76,7 @@ Manage the full list of libraries detected by SCA that have imported into your c
 {{% /tab %}}
 {{< /tabs >}}
 
-With Static Analysis, you can receive automated feedback on poor coding practices and security vulnerabilities on the code you write directly in an IDE such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
+With Static Analysis, you can receive automated feedback on poor coding practices and security vulnerabilities on the code you write directly in an IDE such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5].
 
 ## Set up Code Analysis on your repository
 
@@ -100,7 +100,7 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
 
 </br>
 
-## Set up the GitHub integration 
+## Set up the GitHub integration
 
 You must configure a GitHub App using the [GitHub integration tile][7] and set up the [source code integration][8] to see the offending code snippets as part of the Static Analysis results in the Datadog UI.
 

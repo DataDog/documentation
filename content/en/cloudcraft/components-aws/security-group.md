@@ -1,6 +1,6 @@
 ---
 title: "Security Group Component"
-kind: documentation
+
 ---
 ## Overview
 

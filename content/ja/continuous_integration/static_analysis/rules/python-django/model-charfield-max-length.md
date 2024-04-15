@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: Charfield には常に max_length を指定する
 ---
 ## メタデータ

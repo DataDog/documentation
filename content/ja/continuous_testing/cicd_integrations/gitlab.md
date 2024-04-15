@@ -9,7 +9,7 @@ further_reading:
 - link: /continuous_integration/pipelines/gitlab/
   tag: ドキュメント
   text: GitLab パイプラインでトレースを設定する
-kind: documentation
+
 title: GitLab
 ---
 
@@ -33,11 +33,11 @@ Continuous Testing テストを [GitLab パイプライン][2]にインテグレ
 ### テスト ID を使ったテストの実行
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --public-id xtf-w5p-z5n --public-id eif-van-tu7
 {{< /code-block >}}
@@ -45,11 +45,11 @@ synthetic-tests:
 ### タグを使ったテストの実行
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests'
 {{< /code-block >}}
@@ -59,11 +59,11 @@ synthetic-tests:
 もし、CI/CD 環境に固有のテストユーザーやデータがある場合は、`-v` コマンドでこれらの変数をオーバーライドすることができます。詳しくは、NPM パッケージ `datadog-ci` の [Synthetics コマンド](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics)を参照してください。
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests' -v PASSWORD="$PASSWORD"
 {{< /code-block >}}
@@ -75,11 +75,11 @@ synthetic-tests:
 カスタム `config.json` ファイルをパイプラインリポジトリに追加し、パイプラインの構成でアクセスします。
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --config synthetics_global.json -f synthetic_test.json
 {{< /code-block >}}

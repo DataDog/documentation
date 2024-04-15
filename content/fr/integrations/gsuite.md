@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Google Workspace
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: gsuite
 public_title: Intégration Datadog/Google Workspace
@@ -48,7 +48,7 @@ Suivez les instructions de la section [API Reports : prérequis][1] du SDK Admi
 
 **Remarque** : certaines habilitations OAuth peuvent être requises pour la configuration. Consultez la section [Autoriser les requêtes][2] du SDK Admin Google Workspace (en anglais).
 
-Pour configurer l'intégration Datadog/Google Workspace, cliquez sur le bouton *Connect a new Google Workspace domain* dans votre [carré d'intégration Datadog/Google Workspace][3] et autorisez Datadog à accéder à l'API Admin Google Workspace. 
+Pour configurer l'intégration Datadog/Google Workspace, cliquez sur le bouton *Connect a new Google Workspace domain* dans votre [carré d'intégration Datadog/Google Workspace][3] et autorisez Datadog à accéder à l'API Admin Google Workspace.
 
 ## Données collectées
 ### Logs

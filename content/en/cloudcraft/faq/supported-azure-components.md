@@ -1,6 +1,6 @@
 ---
 title: Which Azure components are supported?
-kind: faq
+
 ---
 
 Cloudcraft supports the following Microsoft Azure components:

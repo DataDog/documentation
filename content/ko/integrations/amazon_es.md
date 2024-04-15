@@ -32,7 +32,7 @@ integration_id: amazon-es
 integration_title: Amazon OpenSearch Service
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: amazon_es
 public_title: Amazon OpenSearch Service
@@ -63,7 +63,7 @@ Amazon OpenSearch Service는 AWS Cloud에서 OpenSearch 클러스터를 손쉽�
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정합니다. 
+이미 하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정합니다.
 
 ### 메트릭 수집
 

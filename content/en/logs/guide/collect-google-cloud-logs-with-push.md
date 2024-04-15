@@ -1,6 +1,6 @@
 ---
 title: Collect Google Cloud Logs with a Pub/Sub Push Subscription
-kind: documentation
+
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -45,7 +45,7 @@ The [Google Cloud Platform integration][4] is successfully installed.
 
 1. In the [Cloud Pub/Sub console][5], select **Subscriptions** in the left hand navigation. Click **Create Subscription**.
 2. Create a subscription ID and select the topic you previously created.
-3. Select the `Push` method and enter the following command, replacing `<DATADOG_API_KEY>` with the value of a valid [Datadog API key][7]: 
+3. Select the `Push` method and enter the following command, replacing `<DATADOG_API_KEY>` with the value of a valid [Datadog API key][7]:
 ```
 https://gcp-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&dd-protocol=gcp
 ```

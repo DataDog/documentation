@@ -1,6 +1,6 @@
 ---
 title: Metrics Summary
-kind: documentation
+
 description: "Consult the full list of metrics reporting to Datadog."
 aliases:
   - /graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
@@ -16,13 +16,13 @@ further_reading:
 
 ## Overview
 
-The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
+The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week.
 
 Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
 {{< img src="metrics/summary/tag_advancedfiltering3.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
 
-Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
+Tag filtering supports boolean and wildcard syntax so that you can quickly identify:
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
 * Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
 
@@ -33,7 +33,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 - **Configuration**: Metrics with tag configurations
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
-- **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
+- **Historical Metrics**: Metrics that have historical metrics ingestion enabled
 - **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
@@ -42,8 +42,8 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 {{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
-## Configuration of multiple metrics 
-There are two buttons that allow you to configure multiple metrics at a time: 
+## Configuration of multiple metrics
+There are two buttons that allow you to configure multiple metrics at a time:
 
 {{< img src="metrics/summary/configurationbuttons2.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
 
@@ -58,7 +58,7 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 ## Metric details sidepanel
 
-Click on any metric name to display its details sidepanel for more information regarding the metric's metadata and tags: 
+Click on any metric name to display its details sidepanel for more information regarding the metric's metadata and tags:
 
 {{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
 
@@ -142,18 +142,18 @@ For any particular tag key, you can:
 
 {{< img src="metrics/summary/related_assets_dashboards.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
 
-To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
+To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric.
 
 1. Scroll to the bottom of the metric's details side panel to the "Related Assets" section.
 2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally leverage the search bar to validate specific assets.
-   
+
 
 ## Metrics without Limits™
-Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
+Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes.
 
 **Note:** Metrics without Limits™ is only available for custom metrics.
 
-You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel. 
+You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel.
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
 
@@ -165,13 +165,13 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 **Note**: The cardinality estimator requires the metric to be older than 48 hours.
 
-### Queryable tags 
+### Queryable tags
 
-Once your metric has been configured with Metrics without Limits™, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
+Once your metric has been configured with Metrics without Limits™, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume.
 
 ### Optimize your metric with aggregations in Advanced Mode
 
-For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits™. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
+For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits™. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below:
 
 - Configured counts/rates are queryable with time/space aggregations of `SUM`
 - Configured gauges are queryable in time/space aggregations of `AVG`

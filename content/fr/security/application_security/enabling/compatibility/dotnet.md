@@ -1,7 +1,7 @@
 ---
 code_lang: dotnet
 code_lang_weight: 10
-kind: documentation
+
 title: Exigences de compatibilité .NET
 type: multi-code-lang
 ---
@@ -50,7 +50,7 @@ Les fonctionnalités ASM suivantes sont prises en charge dans la bibliothèque .
 
 La version minimale du traceur pour profiter de toutes les fonctionnalités ASM avec .NET est la 2.26.0.
 
-**Remarque** : la protection contre les menaces nécessite d'activer la [Configuration à distance][3], qui est incluse dans la version minimale du traceur indiquée.  
+**Remarque** : la protection contre les menaces nécessite d'activer la [Configuration à distance][3], qui est incluse dans la version minimale du traceur indiquée.
 
 [1]: /fr/tracing/trace_collection/compatibility/dotnet-core/
 [2]: /fr/tracing/trace_collection/compatibility/dotnet-framework/

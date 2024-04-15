@@ -1,6 +1,6 @@
 ---
 title: Setting up APM with Kubernetes Service
-kind: guide
+
 further_reading:
 - link: "/containers/kubernetes/apm/"
   tag: "Documentation"
@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-In Kubernetes, Datadog tracers can send data to the Datadog Agent in three ways: Unix Domain Socket (UDS), host IP, or a Kubernetes service. Each option ensures that when an application pod sends APM data, the data arrives at a Datadog Agent pod on the same node. This strategy is meant to properly balance traffic and ensure the correct tagging of your data. Datadog recommends that you use UDS to send data. 
+In Kubernetes, Datadog tracers can send data to the Datadog Agent in three ways: Unix Domain Socket (UDS), host IP, or a Kubernetes service. Each option ensures that when an application pod sends APM data, the data arrives at a Datadog Agent pod on the same node. This strategy is meant to properly balance traffic and ensure the correct tagging of your data. Datadog recommends that you use UDS to send data.
 
-However, if the `hostPath` volumes required for UDS (and the `hostPort` ports required for using host IP) are not available, you can use a Kubernetes service as an alternative option. 
+However, if the `hostPath` volumes required for UDS (and the `hostPort` ports required for using host IP) are not available, you can use a Kubernetes service as an alternative option.
 
 This guide describes how to configure using a Kubernetes service to send data to the Datadog Agent.
 
@@ -32,7 +32,7 @@ If you installed the Datadog Agent by using the Datadog [Helm chart][3] or [Data
 datadog:
   apm:
     portEnabled: true
-```    
+```
 
 {{% /tab %}}
 {{% tab "Operator" %}}
@@ -65,7 +65,7 @@ clusterAgent:
   admissionController:
     enabled: true
     configMode: service
-```    
+```
 
 {{% /tab %}}
 {{% tab "Operator" %}}
@@ -88,7 +88,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** In mixed node (Linux/Windows) environments, the Cluster Agent and its Admission Controller are relative to the Linux deployment. This may inject the wrong environment variables for the service connectivity in the Windows pods. 
+**Note:** In mixed node (Linux/Windows) environments, the Cluster Agent and its Admission Controller are relative to the Linux deployment. This may inject the wrong environment variables for the service connectivity in the Windows pods.
 
 ### Manual configuration
 For manual configuration, set the environment variable `DD_AGENT_HOST` within your pod manifest, with a value of `<SERVICE_NAME>.<SERVICE_NAMESPACE>.svc.cluster.local`.

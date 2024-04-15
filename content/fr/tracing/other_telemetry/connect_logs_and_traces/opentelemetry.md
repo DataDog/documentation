@@ -19,7 +19,7 @@ further_reading:
   tag: Guide
   text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre
     produits.
-kind: documentation
+
 title: Associer vos traces OpenTelemetry à vos logs
 type: multi-code-lang
 ---
@@ -46,14 +46,14 @@ from opentelemetry import trace
 class CustomDatadogLogProcessor(object):
     def __call__(self, logger, method_name, event_dict):
         # Un exemple de contexte de trace au format Datadog ajouté aux logs
-        # depuis https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129 
+        # depuis https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129
         current_span = trace.get_current_span()
 
         if current_span is not None:
             event_dict['dd.trace_id'] = str(current_span.context.trace_id & 0xFFFFFFFFFFFFFFFF)
             event_dict['dd.span_id'] = str(current_span.context.span_id)
 
-        return event_dict        
+        return event_dict
 # ##########
 
 # ########## app.py
@@ -197,8 +197,8 @@ module.exports = winston.createLogger({
 // ...
 // initialize your tracer
 // ...
-// 
-const logger = require('./logger') 
+//
+const logger = require('./logger')
 //
 // utiliser le logger dans votre application
 logger.info("Exemple de ligne de log avec des informations de corrélation des traces")

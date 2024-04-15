@@ -1,6 +1,6 @@
 ---
 title: User Monitoring and Protection
-kind: documentation
+
 aliases:
   - /security_platform/application_security/add-user-info
   - /security/application_security/add-user-info
@@ -39,7 +39,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
-You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
+You can [add custom tags to your root span][3], or use the instrumentation functions described below.
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -127,7 +127,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // The user must be blocked by aborting the request handler asap.
     // The blocking response is automatically handled and sent by the appsec middleware.
-    return 
+    return
   }
 }
 ```
@@ -301,7 +301,7 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track user events. 
+Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -389,7 +389,7 @@ public class LoginController {
 
 {{< programming-lang lang="dotnet" >}}
 
-Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track user events. 
+Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -454,7 +454,7 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events. 
+Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -482,7 +482,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
-  metadata := /* optional extra event metadata */ 
+  metadata := /* optional extra event metadata */
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
 ```
@@ -649,8 +649,8 @@ The following examples show how to track login events or custom events (using si
 from ddtrace.appsec.trace_utils import track_user_login_success_event
 from ddtrace import tracer
 metadata = {"custom": "customvalue"}
-# name, email, scope, role, session_id and propagate are optional arguments which 
-# default to None except propagate that defaults to True. They'll be 
+# name, email, scope, role, session_id and propagate are optional arguments which
+# default to None except propagate that defaults to True. They'll be
 # passed to the set_user() function
 track_user_login_success_event(tracer, "userid", metadata)
 ```

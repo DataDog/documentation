@@ -16,7 +16,7 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging without Limits*
-kind: documentation
+
 title: Collecte de logs avancée
 ---
 

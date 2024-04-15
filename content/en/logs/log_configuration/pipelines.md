@@ -1,6 +1,6 @@
 ---
 title: Pipelines
-kind: documentation
+
 description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/pipelines/
@@ -212,7 +212,7 @@ It's also possible to copy an integration pipeline using the clone button.
 
 ### Processors
 
-A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API. 
+A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API.
 
 See [Parsing dates][10] for more information about parsing a custom date and time format and for information on the `timezone` parameter, which is needed if your timestamps are not in UTC.
 

@@ -11,7 +11,7 @@ further_reading:
 - link: account_management/scim/okta
   tag: 설명서
   text: Okta로 SCIM 설정
-kind: documentation
+
 title: SCIM을 이용한 사용자 프로비저닝
 ---
 
@@ -30,7 +30,7 @@ Datadog은 Azure Active Directory (Azure AD) 및 Okta ID 공급자와 함께 SCI
 - [Azure AD][2]
 - [Okta][3]
 
-### 전제 조건 
+### 전제 조건
 
 Datadog으로 SCIM을 사용하려면 엔터프라이즈 계정이 필요합니다.
 

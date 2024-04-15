@@ -34,7 +34,7 @@ integration_id: amazon-kafka
 integration_title: Amazon MSK (Agent)
 integration_version: 3.2.3
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: amazon_kafka
 public_title: Amazon MSK (Agent)
@@ -66,7 +66,7 @@ tile:
 
 Amazon Managed Streaming for Apache Kafka (MSK) est un service entièrement géré qui vous permet de créer et d'exécuter facilement des applications qui utilisent Apache Kafka pour traiter les données en streaming.
 
-Vous pouvez recueillir des métriques à partir de cette intégration de deux façons : avec l'[Agent Datadog](#configuration) ou avec un [crawler][1] qui récupère les métriques à partir de CloudWatch. 
+Vous pouvez recueillir des métriques à partir de cette intégration de deux façons : avec l'[Agent Datadog](#configuration) ou avec un [crawler][1] qui récupère les métriques à partir de CloudWatch.
 
 ## Configuration
 

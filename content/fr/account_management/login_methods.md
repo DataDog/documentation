@@ -1,12 +1,12 @@
 ---
-kind: documentation
+
 title: Configurer les méthodes de connexion
 ---
 
 Les méthodes de connexion déterminent la manière dont les utilisateurs s'authentifient et se connectent à leur organisation Datadog. Pour activer ou désactiver les méthodes de connexion par défaut, vous devez disposer d'un des éléments suivants :
 
 - Le rôle Admin Datadog
-- L'autorisation de gestion de l'organisation (`org_management`) 
+- L'autorisation de gestion de l'organisation (`org_management`)
 
 Lorsqu'une méthode de connexion est activée par défaut, tous les utilisateurs dont l'accès n'a pas été explicitement interdit ([à l'aide d'un contournement de méthode de connexion][1]) peuvent utiliser la méthode de connexion en question pour accéder à Datadog. Leur nom d'utilisateur (à savoir leur adresse e-mail) doit simplement correspondre à l'utilisateur invité à rejoindre l'organisation.
 

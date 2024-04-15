@@ -4,7 +4,7 @@ further_reading:
   tag: よくあるご質問
   text: 外部ログシッパーを経由して Datadog にログを送信するには？
 is_beta: true
-kind: faq
+
 title: ディストリビューションメトリクスワークフローの更新についてのよくあるご質問
 ---
 

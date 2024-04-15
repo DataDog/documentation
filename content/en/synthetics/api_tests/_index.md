@@ -1,6 +1,6 @@
 ---
 title: API Tests
-kind: documentation
+
 description: Simulate requests on your public and internal services
 aliases:
   - /synthetics/uptime_check
@@ -31,7 +31,7 @@ further_reading:
 
 ## Overview
 
-API tests help you **proactively monitor** your most important services so they are available anytime and from anywhere. 
+API tests help you **proactively monitor** your most important services so they are available anytime and from anywhere.
 
 Launch requests on the different network layers of your systems with these subtypes:
 

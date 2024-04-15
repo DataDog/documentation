@@ -19,7 +19,7 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: ドキュメント
   text: Datadog Cluster Agent のトラブルシューティング
-kind: documentation
+
 title: Cluster Agent のカスタムメトリクスと外部メトリクスによるオートスケーリング
 ---
 
@@ -278,7 +278,7 @@ Cluster Agent をセットアップして、 `DatadogMetric` が作成された�
 #### DatadogMetric を使った HPA の例
 `nginx-requests` という名前の `DatadogMetric` を使用する HPA。両方のオブジェクトがネームスペース `nginx-demo` にあると想定。
 
-`apiVersion: autoscaling/v2` を使用する場合: 
+`apiVersion: autoscaling/v2` を使用する場合:
 
 ```yaml
 apiVersion: autoscaling/v2

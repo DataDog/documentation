@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: インポートするモジュールは、1 つのインポートステートメントにつき 1 つだけ
 ---
 ## メタデータ

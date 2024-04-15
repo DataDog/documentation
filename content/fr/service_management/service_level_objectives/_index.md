@@ -22,7 +22,7 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive sur la création de monitors et de SLO
     efficaces
-kind: documentation
+
 title: Service Level Objectives
 ---
 
@@ -65,7 +65,7 @@ Après avoir défini le SLO, sélectionnez-le dans la [liste des SLO][1] afin d'
 
 **Exemple :** si vous créez un SLO basé sur des monitors pour suivre la latence par zone de disponibilité, cette vue affiche les pourcentages de statut et la marge d'erreur restante pour le SLO global ainsi que pour chaque zone de disponibilité individuelle suivie par le SLO.
 
-**Remarque** : la marge d'erreur restante est affichée sous la forme de pourcentage, et est calculée à partir de la formule suivante : 
+**Remarque** : la marge d'erreur restante est affichée sous la forme de pourcentage, et est calculée à partir de la formule suivante :
 
 $$\text"marge d'erreur restante" = 100 * {\text"statut actuel" - \text" cible"} / { 100 - \text"cible"}$$
 
@@ -263,7 +263,7 @@ Pour effectuer des corrections de statut SLO dans l'interface, procédez comme s
 1. Créez un SLO ou cliquez sur un SLO existant.
 2. Accédez au volet latéral des détails du SLO.
 3. Sous l'icône en forme d'engrenage, sélectionnez l'option **Correct Status** afin d'ouvrir le menu de création **Status Corrections**.
-4. Choisissez l'option `One-Time` ou `Recurring` dans la section **Select the Time Correction Window**, puis saisissez la période à corriger. 
+4. Choisissez l'option `One-Time` ou `Recurring` dans la section **Select the Time Correction Window**, puis saisissez la période à corriger.
 5. Sélectionnez un **type de correction**.
 6. Ajoutez si besoin des **notes**.
 7. Cliquez sur **Apply Correction**.

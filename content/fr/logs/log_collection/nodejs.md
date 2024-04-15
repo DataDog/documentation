@@ -1,6 +1,6 @@
 ---
 title: Collecte de logs avec NodeJS
-kind: documentation
+
 aliases:
   - /fr/logs/languages/nodejs
 further_reading:
@@ -22,7 +22,7 @@ further_reading:
 ---
 ## Configurer votre logger
 
-Utilisez [Winston][1] pour la création de logs depuis votre application NodeJS afin de profiter de toutes les fonctionnalités dont vous avez besoin pour élaborer votre stratégie de journalisation. 
+Utilisez [Winston][1] pour la création de logs depuis votre application NodeJS afin de profiter de toutes les fonctionnalités dont vous avez besoin pour élaborer votre stratégie de journalisation.
 
 Winston est disponible via [NPM][2]. Pour démarrer, vous devez ajouter la dépendance à votre code :
 

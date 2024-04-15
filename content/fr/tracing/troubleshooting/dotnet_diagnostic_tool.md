@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Utiliser l'outil de diagnostic .NET pour le dépannage
 ---
 
@@ -20,9 +20,9 @@ Installez l'outil via l'une des méthodes suivantes :
 
 ## Diagnostics de processus
 
-Les diagnostics de processus permettent d'identifier le problème pour la plupart des applications. 
+Les diagnostics de processus permettent d'identifier le problème pour la plupart des applications.
 
-1. Assurez-vous que l'application est en cours d'exécution, puis récupérez son identifiant de processus (pid). 
+1. Assurez-vous que l'application est en cours d'exécution, puis récupérez son identifiant de processus (pid).
 
    Pour récupérer le pid d'un processus Windows, ouvrez le Gestionnaire des tâches, sélectionnez l'onglet **Détails** et repérez la colonne PID. Vous pouvez également exécuter la commande `tasklist /FI "IMAGENAME eq target.exe"`, où `target.exe` correspond au nom du processus.
 

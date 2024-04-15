@@ -23,7 +23,7 @@ further_reading:
 - link: /glossary/#tail
   tag: Glossaire
   text: Entrée du glossaire pour le terme « tail »
-kind: documentation
+
 title: Collecte de logs avec PHP
 ---
 
@@ -336,7 +336,7 @@ Suivez les étapes ci-dessous pour ajouter un contexte variable à vos logs à l
               arguments:  [ @session ]
               tags:
                   - { name: monolog.processor, method: processRecord }
-    ``` 
+    ```
 
 3. [Diffusez](#configurer-l-agent-datadog) le fichier JSON généré à Datadog.
 
@@ -375,7 +375,7 @@ Ajoutez ce qui suit pour intégrer Monolog à votre framework :
   return $r;
 ```
 
-Configurez ensuite votre logger pour Monolog. 
+Configurez ensuite votre logger pour Monolog.
 
 {{< tabs >}}
 {{% tab "Symfony v2+/v3+" %}}

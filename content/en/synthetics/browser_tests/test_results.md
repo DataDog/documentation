@@ -1,7 +1,7 @@
 ---
 title: Browser Test Results
-kind: documentation
-description: View Synthetic browser test results and compare successful or failed sample runs to test runs. 
+
+description: View Synthetic browser test results and compare successful or failed sample runs to test runs.
 aliases:
  - "/synthetics/apm/browser_tests"
 further_reading:
@@ -24,7 +24,7 @@ Test runs appear in a test details page after a Synthetic test executes. [Sample
 
 In the **Properties** section, you can see the test ID, test creation and edit date, a list of tags, test priority, and a link to an out-of-the-box Synthetic [browser test dashboard][11].
 
-**Overview** 
+**Overview**
 : This section describes the test URL, number of locations, number of devices, test interval, and the number of test steps, including custom steps.
 
 **Monitor**
@@ -39,7 +39,7 @@ In the **History** section, you can see three graphs:
 
 - The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][20] configured for a test.
 - The **Time-to-interactive by location and device** graph displays the amount of time until a page can be interacted with in seconds. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
-- The **Test duration by location and device** graph displays the amount of time in minutes each location and device takes to complete in a given time interval. 
+- The **Test duration by location and device** graph displays the amount of time in minutes each location and device takes to complete in a given time interval.
 
 {{< img src="synthetics/browser_tests/history.png" alt="The History and Sample Runs section in the Test Details page" style="width=80%" >}}
 
@@ -88,7 +88,7 @@ Every executed test step contains a screenshot of the step action, a link to the
 
 ### Page performance
 
-Synthetic Monitoring includes two [Core Web Vital metrics][6] ([Largest Contentful Paint][2] and [Cumulative Layout Shift][3]) as lab metrics and displays them as pills to the right of each step URL. 
+Synthetic Monitoring includes two [Core Web Vital metrics][6] ([Largest Contentful Paint][2] and [Cumulative Layout Shift][3]) as lab metrics and displays them as pills to the right of each step URL.
 
 {{< img src="synthetics/browser_tests/test_results/page_performance_lab_metrics.png" alt="Synthetic lab metrics" style="width:100%" >}}
 
@@ -104,7 +104,7 @@ The error type is logged when the browser test interacts with the page. It corre
 
 ### Resources
 
-Click the **Resources** pill to access the **Resources** tab and examine the combination of requests and assets, including the total step duration time under **Fully Loaded** and the CDN provider serving the resources. 
+Click the **Resources** pill to access the **Resources** tab and examine the combination of requests and assets, including the total step duration time under **Fully Loaded** and the CDN provider serving the resources.
 
 {{< img src="synthetics/browser_tests/test_results/resources_pill.png" alt="Resources pill" style="width:100%" >}}
 
@@ -112,11 +112,11 @@ You can filter resources by type and search by name in the search bar. The maxim
 
 {{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel" style="width:100%" >}}
 
-Relative Time 
+Relative Time
 : The resource duration over the total interaction time.
 
 CDN
-: The CDN provider that served the resource. Hover over a CDN provider's icon to see the raw cache status.  
+: The CDN provider that served the resource. Hover over a CDN provider's icon to see the raw cache status.
 Datadog detects Akamai, Cloudflare, Fastly, Amazon Cloudfront, Netlify, Google Cloud CDN, Imperva, and Sucuri.
 
 Resource
@@ -142,7 +142,7 @@ Size
 
 ### Backend traces
 
-Click the **Traces** pill to access the **Traces** tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 
+Click the **Traces** pill to access the **Traces** tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8].
 
 For more information about cross-product correlation, see the [Ease Troubleshooting With Cross-Product Correlation][21] guide.
 
@@ -160,7 +160,7 @@ To help during the investigation, click **Compare Screenshots** to receive side-
 **Note**: Comparison is performed between two test runs with the same version, start URL, device, browser, and run type (scheduled, manual trigger, CI/CD). If there is no successful prior run with the same parameters, no comparison is offered.
 ### Common browser test errors
 
-`Element located but it's invisible` 
+`Element located but it's invisible`
 : The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.
 
 `Cannot locate element`

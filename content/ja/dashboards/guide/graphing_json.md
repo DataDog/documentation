@@ -13,7 +13,7 @@ further_reading:
 - link: /dashboards/widgets/
   tag: Documentation
   text: ウィジェット
-kind: documentation
+
 title: JSON を使用したグラフ作成
 ---
 
@@ -21,7 +21,7 @@ title: JSON を使用したグラフ作成
 
 {{< img src="/dashboards/graphing_json/json_editor.png" alt="JSON エディターで時系列ウィジェットを構成する様子" style="width:100%;" >}}
 
-[GUI グラフエディター][6]に加え、ダッシュボードウィジェットでは JSON エディターを使用して視覚化を構成することができます。JSON エディターに表示されるスキーマは、Dashboard API のリクエスト本文のスキーマを反映しています。JSON のパラメーターおよび必須フィールドの詳細については、[ダッシュボード API のドキュメント][2]を参照してください。 
+[GUI グラフエディター][6]に加え、ダッシュボードウィジェットでは JSON エディターを使用して視覚化を構成することができます。JSON エディターに表示されるスキーマは、Dashboard API のリクエスト本文のスキーマを反映しています。JSON のパラメーターおよび必須フィールドの詳細については、[ダッシュボード API のドキュメント][2]を参照してください。
 
 ## ウィジェット JSON スキーマ
 

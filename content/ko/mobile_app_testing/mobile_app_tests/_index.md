@@ -12,7 +12,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-maintenance-best-practices/
   tag: 블로그
   text: 엔드 투 엔드 테스트 유지 관리 모범 사례
-kind: documentation
+
 title: 모바일 앱 테스트
 ---
 
@@ -126,7 +126,7 @@ Datadog은 테스트 오류를 방지하기 위해 일련의 로케이터를 활
 }
 ```
 
-그런 다음 `$ datadog-ci synthetics run-tests --config synthetics-ci.config`을 실행합니다. 
+그런 다음 `$ datadog-ci synthetics run-tests --config synthetics-ci.config`을 실행합니다.
 
 자세한 내용은 [연속적인 테스트 및 CI/CD][1]를 참조하세요.
 
@@ -136,7 +136,7 @@ Datadog은 테스트 오류를 방지하기 위해 일련의 로케이터를 활
 
 [커스텀 역할 기능][9]을 사용하는 경우 `synthetics_read` 및 `synthetics_write` 권한을 포함하는 모든 커스텀 역할에 사용자를 추가합니다.
 
-### 액세스 제한 
+### 액세스 제한
 
 계정에서 [커스텀 역할][10]을 사용하는 고객은 액세스 제한이 가능합니다.
 

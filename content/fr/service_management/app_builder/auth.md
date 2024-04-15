@@ -1,6 +1,6 @@
 ---
 description: Accès et authentification pour App Builder
-kind: documentation
+
 title: Accès et authentification
 ---
 
@@ -24,7 +24,7 @@ Pour en savoir plus sur la configuration des identifiants, consultez la section 
 
 ### Accès général aux applications et connexions
 
-Utilisez le [contrôle d'accès à base de rôles (RBAC)][4] pour gérer l'accès à vos applications et à vos connexions. 
+Utilisez le [contrôle d'accès à base de rôles (RBAC)][4] pour gérer l'accès à vos applications et à vos connexions.
 
 Les autorisations générales `apps_run`, `apps_write` ou encore `connections_read` s'appliquent aux applications.
 

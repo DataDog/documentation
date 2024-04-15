@@ -1,6 +1,6 @@
 ---
 title: The same color is used twice in my graph!
-kind: faq
+
 aliases:
     - /graphing/faq/the-same-color-is-used-twice-in-my-graph
 ---

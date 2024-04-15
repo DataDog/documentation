@@ -1,6 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Amazon EMR
-kind: documentation
+
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -9,7 +9,7 @@ further_reading:
 
 {{< callout url="https://forms.gle/PZUoEgtBsH6qM62MA" >}}
 Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
+{{< /callout >}}
 
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
@@ -24,8 +24,8 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
 ### Store your Datadog API key in AWS Secrets Manager
 1. Take note of your [Datadog API key][1].
-1. In [AWS Secrets Manager][2], choose **Store a new secret**. 
-   - Under **Secret type**, select **Other type of secret**. 
+1. In [AWS Secrets Manager][2], choose **Store a new secret**.
+   - Under **Secret type**, select **Other type of secret**.
    - Under **Key/value pairs**, add your Datadog API key as a key-value pair, where the key is `dd_api_key`.
       {{< img src="data_jobs/emr/key_value.png" alt="AWS Secrets Manager, Store a new secret. A section titled 'Key/value pairs'. On the left, a text box containing 'dd_api_key'. On the right, a text box containing a redacted API key." style="width:80%;" >}}
    - Then, click **Next**.
@@ -43,7 +43,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    {{< img src="data_jobs/emr/add_bootstrap_action.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
    - For **Name**, give your bootstrap action a name. You can use `datadog_agent`.
    - For **Script location**, enter the path to where you stored the init script in S3.
-   - For **Arguments**, enter two arguments separated by a space: your Datadog site, and the name of the secret in which you stored your Datadog API key. 
+   - For **Arguments**, enter two arguments separated by a space: your Datadog site, and the name of the secret in which you stored your Datadog API key.
       Example:
       ```text
       {{< region-param key="dd_site" code="true" >}} datadog/dd_api_key
@@ -56,12 +56,12 @@ When your cluster is created, this bootstrap action installs the Datadog Agent a
 
 1. In your [Amazon EMR console][4], open the summary page for your newly created cluster. Take note of your cluster's **IAM role for instance profile**.
 
-   Alternatively, you can also find this value by running: 
+   Alternatively, you can also find this value by running:
    ```shell
    aws emr describe-cluster --cluster-id <YOUR_CLUSTER_ID>
    ```
    Look for `Ec2InstanceAttributes.IamInstanceProfile` in the output.
-1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar. 
+1. In your [AWS IAM console][5], click on **Access management** > **Roles** in the left navigation bar.
 1. Click on the instance profile you saw in the previous step.
 1. On the next page, under the **Permissions** tab, find the **Permissions policies** section. Click on **Add permissions** > **Create inline policy**.
 1. On the **Specify permissions** page, find the **Select a service** section. Under **Service**, select **Secrets Manager**.

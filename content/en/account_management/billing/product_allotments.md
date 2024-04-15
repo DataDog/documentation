@@ -1,6 +1,6 @@
 ---
 title: Product Allotments
-kind: documentation
+
 ---
 
 Allotments provide additional usage that comes with subscriptions to select parent products. They grant a certain amount of usage for a child product as part of the account's committed and on-demand usage of the parent product.
@@ -18,7 +18,7 @@ In order to invoice billable usage, included usage is first subtracted. Allotmen
 
 For example, an account can have a total Ingested Spans usage of 150 GB. From this, 140 GB is billable usage. If there is a prior commitment of 50 GB and an allotment of 30 GB, this 80 GB of usage is classified as included usage and subtracted from the 140 GB of billable usage. The remaining 60 GB of usage is classified as on-demand usage.
 
-- To view total usage and billable usage, see the **All** and **Billable** tabs within the [**Plan and Usage** page][2] in Datadog. 
+- To view total usage and billable usage, see the **All** and **Billable** tabs within the [**Plan and Usage** page][2] in Datadog.
 - To view commitments, refer to your contract.
 
 ## Calculating included usage
@@ -30,9 +30,9 @@ Total included usage is made up of the **commitment for the product, and the sum
 
 ### On-demand option
 
-The allotment usage of a product can be computed according to the organization's on-demand metering option. Organizations can opt for a **monthly or hourly** on-demand option. Refer to your contract for information on your metering option. 
+The allotment usage of a product can be computed according to the organization's on-demand metering option. Organizations can opt for a **monthly or hourly** on-demand option. Refer to your contract for information on your metering option.
 
-By default, the on-demand option is set at the subscription level and applies to all products except for the following, which support a single default on-demand option: 
+By default, the on-demand option is set at the subscription level and applies to all products except for the following, which support a single default on-demand option:
 
 | Product                                         | Default option |
 |-------------------------------------------------|----------------|
@@ -54,20 +54,20 @@ If an organization's billable usage of the parent product exceeds their commitme
 For example, if an organization with a monthly on-demand option is committed to 5 APM Pro Hosts, they have a default Ingested Spans allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. If they use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional _spans_ usage, since their Ingested Spans allotment increases to 900 GB. The 100 GB remainder is not applicable in the following month.
 
 ## Usage aggregation function
-Aggregation functions are used to convert the hourly billable usage into a monthly usage value that can be used for billing. Each product can have up to two usage aggregation functions (one for each possible on-demand option). The available aggregation functions include sum, average, maximum, and high watermark plan (HWMP). 
+Aggregation functions are used to convert the hourly billable usage into a monthly usage value that can be used for billing. Each product can have up to two usage aggregation functions (one for each possible on-demand option). The available aggregation functions include sum, average, maximum, and high watermark plan (HWMP).
 
 - **Sum:** This is the sum of total usage volume over all hours in the month. Usage is calculated every hour as included usage is compared with billable usage of each distinct instance of product usage. At the end of the month, on-demand usage is added up for each hour in the month.
 - **Average:** On a monthly on-demand option, this is the average usage across all hours in the month. On-demand usage for the month is derived by subtracting total included usage from the average usage for the month.
 
     On an hourly on-demand option, usage is metered each hour, then the total included usage is subtracted from the metered usage each hour to get the on-demand usage for each hour. At the end of the month, the average is calculated by summing on-demand usage across all hours and dividing by the number of hours in the month.
 - **Maximum:** This is the maximum usage over all intervals across a given time period, usually monthly.
-- **High watermark plan (HWMP):** The billable count of hosts is calculated at the end of the month using the maximum count of the lower 99 percent of usage for those hours. Datadog excludes the top 1% to reduce the impact of spikes in usage on your bill. 
+- **High watermark plan (HWMP):** The billable count of hosts is calculated at the end of the month using the maximum count of the lower 99 percent of usage for those hours. Datadog excludes the top 1% to reduce the impact of spikes in usage on your bill.
 
 See [Usage aggregation functions for allotments](#usage-aggregation-functions-for-allotments) for individual product details.
 
 ## Calculating on-demand usage
 
-On-demand usage refers to usage accrued beyond the sum of committed and allotted usage. To calculate on-demand usage, subtract **included usage** (that is, committed and allotted usages) from **billable usage**. 
+On-demand usage refers to usage accrued beyond the sum of committed and allotted usage. To calculate on-demand usage, subtract **included usage** (that is, committed and allotted usages) from **billable usage**.
 
 The on-demand option determines how frequently on-demand usage is calculated. For the monthly on-demand option, on-demand usage is calculated at the end of each month. For the hourly on-demand option, on-demand usage is calculated each hour and the total on-demand usage to be billed at the end of the month is the aggregate of hourly on-demand usage across all hours in the month. On-demand usage is billed at an on-demand rate. See [Datadog Pricing][1].
 
@@ -95,7 +95,7 @@ See [Usage aggregation function](#usage-aggregation-function).
 
 #### Monthly on-demand option
 
-An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested Spans commitment per month over a period of three months. Their usage is as follows (with derived values in *italics*): 
+An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested Spans commitment per month over a period of three months. Their usage is as follows (with derived values in *italics*):
 
 | Month | APM host commitment | APM host usage | Allotment for Ingested Spans | Included usage for Ingested Spans | Billable usage for Ingested Spans | On-demand usage for Ingested Spans |
 |-----|--------|--------|-----------|-----------|---------|---|
@@ -103,7 +103,7 @@ An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested
 | 2  | 10  | 15 | *2250 GB*  | *2350 GB* | 2000 GB  | *0 GB*      |
 | 3 | 10   | 10   | *1500 GB*  | *1600 GB*  | 1600 GB | *0 GB*  |
 
-For a monthly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 150 GB. 
+For a monthly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 150 GB.
 
 In **Month 1**, the organization was committed to 10 APM hosts but only used 5. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(5, 10) * 150 GB = 1500 GB allotment of Ingested Spans`. Their included usage for Ingested Spans was the sum of their commitment and allotment: `1500 GB + 100 GB = 1600 GB`. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their billable usage and allotment: `maximum(0, 2000 – 1600) = 400 GB`.
 
@@ -113,7 +113,7 @@ In **Month 3**, the organization was committed to 10 APM hosts, and they used 10
 
 #### Hourly on-demand option
 
-An organization has a monthly commit of 10 APM Pro Hosts and 0.3 GB Ingested Spans commitment per month over a period of a month. Their usage is as follows: 
+An organization has a monthly commit of 10 APM Pro Hosts and 0.3 GB Ingested Spans commitment per month over a period of a month. Their usage is as follows:
 
 | Timestamp    | APM host commitment | APM host usage | Ingested spans allotment | Ingested spans usage | On-demand ingested spans usage |
 |--------------|---------------------|----------------|--------------------------|----------------------|--------------------------------|
@@ -129,7 +129,7 @@ In **Hour 2**, the organization was committed to 10 APM hosts but used 15. Their
 
 In **Hour 3**, the organization was committed to 10 APM hosts and used 10. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(10,10) * 0.2054 GB = 2.054 GB / hour`. Their on-demand usage for the hour is the maximum of 0 and the difference between their billable usage and their allotted usage: `maximum(0, 2.054 – 2.054) = 0 GB`.
 
-Since the default usage aggregation function for Ingested Spans is sum, usage is summed over all hours in the month to get the total on-demand usage for the month. If this organization only had 3 hours of Ingested Spans usage over the month, their total monthly usage would be 0: `4452 + 0 + 0 = 0.446 GB`. 
+Since the default usage aggregation function for Ingested Spans is sum, usage is summed over all hours in the month to get the total on-demand usage for the month. If this organization only had 3 hours of Ingested Spans usage over the month, their total monthly usage would be 0: `4452 + 0 + 0 = 0.446 GB`.
 
 Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Spans. Thus, their monthly on-demand usage is the maximum of 0 and the difference between their monthly usage and commitment: `maximum(0, 0.446 – 0.3) = 0.146 GB`.
 
@@ -145,10 +145,10 @@ Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Sp
 | Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |   N/A   | Sum  |
 | Profiled Containers | APM Enterprise, Continuous Profiler    |   N/A        | Sum   |
 | Profiled Hosts        | APM Enterprise       | HWMP   | Sum     |
-| CI Indexed Spans    | CI Visibility         | Sum     | Sum   |      
-| Test Indexed Spans    | Test Visibility         | Sum   | Sum   |               
+| CI Indexed Spans    | CI Visibility         | Sum     | Sum   |
+| Test Indexed Spans    | Test Visibility         | Sum   | Sum   |
 | APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, </br> Legacy - Serverless Invocations, </br> Legacy - Serverless Functions, Fargate Task (APM Pro), </br> Fargate Task (APM Enterprise) | Sum | Sum |
-| APM Ingested Spans | APM, APM Pro, APM Enterprise </br> Serverless APM, Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
+| APM Ingested Spans | APM, APM Pro, APM Enterprise </br> Serverless APM, Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum |
 | DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
 | Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
 | CSPM Workflow Executions | Cloud Security Management Pro, Cloud Security Management Enterprise | Sum | Sum |

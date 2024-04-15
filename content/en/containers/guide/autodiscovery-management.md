@@ -1,6 +1,6 @@
 ---
 title: Container Discovery Management
-kind: guide
+
 aliases:
  - /agent/autodiscovery/management
  - /agent/kubernetes/management

@@ -6,7 +6,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知
-kind: documentation
+
 title: モニタータグポリシー
 ---
 

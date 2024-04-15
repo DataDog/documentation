@@ -1,6 +1,6 @@
 ---
 title: Host and Container Maps
-kind: documentation
+
 aliases:
   - /graphing/infrastructure/hostmap/
   - /infrastructure/containermap/
@@ -40,7 +40,7 @@ For example, if you tag your hosts by the environment they are in, you can filte
 
 ### Group
 
-Use the **Group** input box to spatially arrange your hosts/containers into groups. Any host/container in a group shares the tag or tags you group by.  
+Use the **Group** input box to spatially arrange your hosts/containers into groups. Any host/container in a group shares the tag or tags you group by.
 
 For example, you can group your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts are further subdivided into groups: first by availability zone and then by instance type, as seen below.
 
@@ -48,9 +48,9 @@ For example, you can group your hosts by AWS availability zone. If you add a sec
 
 ### Fill and size
 
-By default, the color of each host is set to represent the percentage of CPU usage on that host/container, where the color ranges from green (0% utilized) to orange (100% utilized). You can select different metrics from **Fill** selector.  
+By default, the color of each host is set to represent the percentage of CPU usage on that host/container, where the color ranges from green (0% utilized) to orange (100% utilized). You can select different metrics from **Fill** selector.
 
-Infrastructure Maps can also communicate an additional, optional metric with the size of the hexagon or rectangle. You can select this metric from the **Size** selector. 
+Infrastructure Maps can also communicate an additional, optional metric with the size of the hexagon or rectangle. You can select this metric from the **Size** selector.
 
 **Note**: The CPU Utilization metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog Agent, or directly by AWS or vSphere.
 
@@ -95,9 +95,9 @@ Data in the Host Map is refreshed about once a minute—unless you are continuou
 
 ### Resource optimization
 
-If you are an AWS user, you probably use a variety of instance types. Some instances are optimized for memory, some for compute, some are small, some are big.  
+If you are an AWS user, you probably use a variety of instance types. Some instances are optimized for memory, some for compute, some are small, some are big.
 
-If you want to reduce your AWS spend, you might start by figuring out what the expensive instances are used for. First, group by `instance-type` and then group by `role` or `name`. Take a look at your expensive instance types, such as **c3.8xlarge**. Are there any host roles whose CPU is underutilized? If so, zoom in to individual hosts and see whether all that computational power has been needed in the last several months, or whether this group of hosts is a candidate for migrating to a cheaper instance type.  
+If you want to reduce your AWS spend, you might start by figuring out what the expensive instances are used for. First, group by `instance-type` and then group by `role` or `name`. Take a look at your expensive instance types, such as **c3.8xlarge**. Are there any host roles whose CPU is underutilized? If so, zoom in to individual hosts and see whether all that computational power has been needed in the last several months, or whether this group of hosts is a candidate for migrating to a cheaper instance type.
 
 Below is a subset of Datadog's infrastructure. As you can see, **c3.2xlarge** instances are heavily loaded.
 
@@ -109,7 +109,7 @@ If you click on the c3.2xlarge group and then sub-group by role (shown below), y
 
 ### Availability zone placement
 
-Host Maps enable you to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. 
+Host Maps enable you to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing.
 
 In the example seen below, there is an uneven distribution of hosts with `role:daniels` across availability zones. (Daniels is the name of an internal application.)
 
@@ -117,8 +117,8 @@ In the example seen below, there is an uneven distribution of hosts with `role:d
 
 ### Problem investigation
 
-Imagine you are having a problem in production. Maybe the CPUs on some of your hosts are pegged, which is causing long response times. Host Maps can help you quickly see whether there is anything different about the loaded and not-loaded hosts. You can rapidly group by dimensions you would like to investigate, and visually determine whether the problem servers belong to a certain group.  
-For example, you can group by AZ, region, instance type, image, or any tags that you use within your system. 
+Imagine you are having a problem in production. Maybe the CPUs on some of your hosts are pegged, which is causing long response times. Host Maps can help you quickly see whether there is anything different about the loaded and not-loaded hosts. You can rapidly group by dimensions you would like to investigate, and visually determine whether the problem servers belong to a certain group.
+For example, you can group by AZ, region, instance type, image, or any tags that you use within your system.
 
 In the screenshot below, some hosts have much less usable memory than others, despite being part of the same cluster. Grouping by machine image reveals that there were two different images in use, and one of them is overloaded.
 

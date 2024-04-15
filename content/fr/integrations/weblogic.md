@@ -29,7 +29,7 @@ integration_id: weblogic
 integration_title: WebLogic
 integration_version: 1.1.1
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: weblogic.
@@ -130,7 +130,7 @@ Le check WebLogic est inclus avec le package de l'[Agent Datadog][2]. Vous n'ave
 
 ### Collecte de logs
 
-1. Par défaut, les services de journalisation de WebLogic reposent sur une implémentation basée sur les API de logging Java. Dupliquez et modifiez la [pipeline d'intégration][12] si vous utilisez un autre format. 
+1. Par défaut, les services de journalisation de WebLogic reposent sur une implémentation basée sur les API de logging Java. Dupliquez et modifiez la [pipeline d'intégration][12] si vous utilisez un autre format.
 
 2. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
    ```yaml
@@ -164,7 +164,7 @@ Le check WebLogic est inclus avec le package de l'[Agent Datadog][2]. Vous n'ave
           name: new_log_start_with_date
           pattern: (\####)?<\w{3} (0?[1-9]|[12][0-9]|3[01]), \d{4}
     - type: file
-      path: <DOMAIN_DIR>/servers/*/logs/access.log 
+      path: <DOMAIN_DIR>/servers/*/logs/access.log
       source: weblogic
       service: http-access
       log_processing_rules:

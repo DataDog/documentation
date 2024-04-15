@@ -1,6 +1,6 @@
 ---
 title: Tracing ECS Applications
-kind: Documentation
+
 aliases:
   - /agent/amazon_ecs/apm
 further_reading:
@@ -100,7 +100,7 @@ The [Amazon's ECS container metadata file][1] allows discovery of the private IP
 {{< code-block lang="curl" >}}
 cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{< /code-block >}}
-    
+
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-metadata.html#metadata-file-format
 {{% /tab %}}
 {{< /tabs >}}

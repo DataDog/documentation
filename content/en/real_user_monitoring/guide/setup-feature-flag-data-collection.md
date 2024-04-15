@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Feature Flag Data in RUM
-kind: guide
+
 beta: true
 description: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog
 aliases:
@@ -556,12 +556,12 @@ Initialize Statsig's SDK with `statsig.initialize`.
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
     {userID: '<USER ID>'},
-    {     
+    {
         gateEvaluationCallback: (key, value) => {
             datadogRum.addFeatureFlagEvaluation(key, value);
         }
     }
-    ); 
+    );
    ```
 
 [1]: https://docs.statsig.com/client/jsClientSDK

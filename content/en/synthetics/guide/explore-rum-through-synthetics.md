@@ -1,7 +1,7 @@
 ---
 title: Explore A Preview of RUM Features In Synthetics
-kind: documentation
-description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost. 
+
+description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost.
 aliases:
 further_reading:
 - link: "https://docs.datadoghq.com/synthetics/browser_tests/"
@@ -20,7 +20,7 @@ Synthetic browser tests embed the Real User Monitoring SDK, allowing you to expl
 
 - [Session Replay][1] for all tests. You can access additional context beyond screenshots available for each step and [Browser Dev Tools][2].
 - The session in the [RUM Explorer][3].
-- Aggregated errors across your different steps, tests, and test runs with [Error Tracking][4]. You can scope the error impact and prioritize fixing the most severe issues. 
+- Aggregated errors across your different steps, tests, and test runs with [Error Tracking][4]. You can scope the error impact and prioritize fixing the most severe issues.
 - Extra resources and timing information from RUM including additional search and monitor capabilities.
 
 ## Allow Synthetic data on RUM applications
@@ -28,12 +28,12 @@ Synthetic browser tests embed the Real User Monitoring SDK, allowing you to expl
 <div class="alert alert-warning">
 If the target application is already instrumented with RUM, you should not enable RUM data collection within the synthetic test configuration as this can result in unexpected behavior.</div>
 
-In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. 
+In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs.
 
 1. Navigate to **Digital Experience** > **Settings** (under Synthetic Monitoring & Testing) > [**Integration Settings**][5].
 2. Under **Synthetic Data RUM Collection**, click **Enable Synthetic RUM data collection** to enable Datadog to collect RUM data from your test runs.
 3. Click **Save RUM Data Collection**.
-4. Under **Synthetic Data RUM Applications**, select a default RUM application suggested in the Browser Test Recorder from the dropdown menu. 
+4. Under **Synthetic Data RUM Applications**, select a default RUM application suggested in the Browser Test Recorder from the dropdown menu.
 5. Click **Save RUM Data Applications**.
 
 Optionally, click `Synthetic Tests Default` and select another RUM application from the dropdown menu. This application is displayed in the browser test recording.
@@ -42,11 +42,11 @@ For more information, see [Synthetic Monitoring Settings][6].
 
 ## Synthetics to RUM Explorer
 
-Navigate to your [list of browser tests][7] and click on a sample test run. 
+Navigate to your [list of browser tests][7] and click on a sample test run.
 
 {{< img src="synthetics/guide/rum_in_synthetics/browser_test_step_side_panel.png" alt="Test Step Details Side Panel" style="width:100%;" >}}
 
-The step details side panel appears with `This Synthetic test generated data in Real User Monitoring` and includes the session ID and the **Go to the View in RUM** button. 
+The step details side panel appears with `This Synthetic test generated data in Real User Monitoring` and includes the session ID and the **Go to the View in RUM** button.
 
 {{< img src="synthetics/guide/rum_in_synthetics/generated_rum_data.png" alt="Synthetics Explorer" style="width:80%;" >}}
 
@@ -54,7 +54,7 @@ To see this test step's errors, resources, and performance data in the [RUM Expl
 
 ## RUM Explorer to Synthetics
 
-In the RUM Explorer, navigate to your [list of sessions][8] and click on a session with a replay available. 
+In the RUM Explorer, navigate to your [list of sessions][8] and click on a session with a replay available.
 
 {{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="Sessions Details Side Panel" style="width:100%;" >}}
 

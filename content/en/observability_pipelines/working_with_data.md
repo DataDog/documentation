@@ -1,6 +1,6 @@
 ---
 title: Working with Data
-kind: Documentation
+
 aliases:
   - /integrations/observability_pipelines/working_with_data/
 further_reading:
@@ -106,7 +106,7 @@ Sampling, reducing, filtering, and aggregating are common transforms to reduce t
 - [Sample events][4] based on supplied criteria and at a configurable rate.
 - [Reduce and collapse][5] multiple events into a single event.
 - Remove unnecessary fields.
-- [Deduplicate][6] events. 
+- [Deduplicate][6] events.
 - [Filter events][7] based on a set of conditions.
 - [Aggregate multiple metric events][8] into a single metric event based on a defined interval window.
 

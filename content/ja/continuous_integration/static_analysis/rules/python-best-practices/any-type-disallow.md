@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: Any タイプを使用しない
 ---
 ## メタデータ

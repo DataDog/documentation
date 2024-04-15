@@ -1,6 +1,6 @@
 ---
 title: SaaS Cost Integrations
-kind: documentation
+
 is_beta: true
 private: true
 disable_toc: false
@@ -38,7 +38,7 @@ SaaS Cost Integrations allow you to send cost data *directly from your providers
 
 To use SaaS Cost Integrations, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.
 
-Navigate to [**Cloud Costs** > **Settings** > **Accounts**][8] and click on the provider you want to integrate. 
+Navigate to [**Cloud Costs** > **Settings** > **Accounts**][8] and click on the provider you want to integrate.
 
 {{< img src="cloud_cost/cloud_and_saas_accounts_2.png" alt="Integrate with Fastly, Confluent, or Snowflake." style="width:80%" >}}
 
@@ -90,7 +90,7 @@ Navigate to [**Cloud Costs** > **Settings** > **Accounts**][8] and click on the 
     ```
 
 2. Configure the key-value pair authentication.
-   
+
    - Generate a private key by following the [official Snowflake documentation][101].
    - Generate a public key by following the [official Snowflake documentation][102].
    - Assign the public key to the user created in Step 1 by following the [official Snowflake documentation][103].

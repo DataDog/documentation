@@ -1,6 +1,6 @@
 ---
 description: Dépannage de la solution Database Monitoring pour SQL Server
-kind: documentation
+
 title: Dépannage de la solution Database Monitoring pour SQL Server
 ---
 

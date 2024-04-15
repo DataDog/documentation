@@ -1,6 +1,6 @@
 ---
 title: Build custom reports using Log Analytics API
-kind: guide
+
 further_reading:
 - link: "/logs/explorer/analytics/?tab=timeseries#overview"
   tag: "Documentation"
@@ -10,7 +10,7 @@ further_reading:
   text: "Syntax for Log Analytics API"
 - link: "/logs/guide/collect-multiple-logs-with-pagination/?tab=v1api"
   tag: "Documentation"
-  text: "Collect multiple logs with Pagination" 
+  text: "Collect multiple logs with Pagination"
 ---
 
 
@@ -23,7 +23,7 @@ The following examples are covered in this guide:
 * [Getting counts](#getting-counts)
 * [Getting stats](#getting-stats)
 * [Getting percentiles](#getting-percentiles)
-* [Multiple group-bys, unique counts, and metrics](#multiple-group-bys-unique-counts-and-metrics) 
+* [Multiple group-bys, unique counts, and metrics](#multiple-group-bys-unique-counts-and-metrics)
 * [Pagination](#pagination)
 
 ## Prerequisites
@@ -230,7 +230,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"status",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"avg",
                "metric":"@http.response_time"
@@ -307,7 +307,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"sum",
                "metric":"@http.response_time"
@@ -375,7 +375,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"min",
                "metric":"@http.response_time"
@@ -443,7 +443,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"max",
                "metric":"@http.response_time"
@@ -513,7 +513,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"pc99",
                "metric":"@http.response_time"
@@ -772,7 +772,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 
 ```
-To paginate and access the next set of results, use `page` option and set the `cursor` value to the `after` value from the previous call. 
+To paginate and access the next set of results, use `page` option and set the `cursor` value to the `after` value from the previous call.
 
 **API call:**
 ```bash

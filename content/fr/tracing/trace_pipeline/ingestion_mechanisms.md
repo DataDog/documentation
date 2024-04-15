@@ -13,7 +13,7 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentation
   text: Métriques d'utilisation
-kind: documentation
+
 title: Mécanismes d'ingestion
 ---
 
@@ -59,7 +59,7 @@ Définissez le taux de traces par seconde cible de l'Agent dans son fichier de c
 @env DD_APM_MAX_TPS - entier - facultatif - valeur par défaut : 10
 ```
 
-**Remarques** : 
+**Remarques** :
 - Les paramètres configurés à distance prévalent sur les configurations locales, à savoir les variables d'environnement et le fichier de configuration `datadog.yaml`.
 - Pour les applications PHP, utilisez plutôt les règles définies par l'utilisateur de la bibliothèque de tracing.
 - Le taux d'échantillonnage des traces par seconde défini dans l'Agent s'applique uniquement aux bibliothèques de tracing Datadog autres que PHP. Il n'a aucun effet sur les autres bibliothèques de tracing, comme les SDK OpenTelemetry.
@@ -246,7 +246,7 @@ L'échantillonneur error intercepte des traces qui contiennent des spans d'erreu
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Échantillonnage error" style="width:100%;" >}}
 
-**Remarques** : 
+**Remarques** :
 1. Définissez le paramètre sur `0` pour désactiver l'échantillonneur error.
 2. L'échantillonneur error capture des traces locales avec des spans d'erreur au niveau de l'Agent. Si la trace est distribuée, il est impossible de garantir l'envoi de la trace complète à Datadog.
 3. Par défaut, les spans rejetées par les règles des bibliothèques de tracing ou par une logique personnalisée telle que `manual.drop` ne sont **pas évaluées** par l'échantillonneur error.

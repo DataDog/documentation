@@ -1,6 +1,6 @@
 ---
 title: React Native Log Collection
-kind: documentation
+
 description: Collect logs from your React Native Mobile applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -43,7 +43,7 @@ Then install the added pod:
 
    Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
 
-2. Initialize the library with your application context, tracking consent, and the [Datadog client token][2] and Application ID generated when you create a RUM application in the Datadog UI (see [Getting Started with React Native RUM Collection][6] for more information). For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the `dd-sdk-reactnative` library, as they would be exposed client-side in the mobile application. For more information about setting up a client token, see the [client token documentation][2]. 
+2. Initialize the library with your application context, tracking consent, and the [Datadog client token][2] and Application ID generated when you create a RUM application in the Datadog UI (see [Getting Started with React Native RUM Collection][6] for more information). For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the `dd-sdk-reactnative` library, as they would be exposed client-side in the mobile application. For more information about setting up a client token, see the [client token documentation][2].
 {{< site-region region="us" >}}
 ```js
 import {
@@ -155,7 +155,7 @@ config.site = 'AP1';
 ```
 {{< /site-region >}}
 
-   
+
 3. Import the React Native logger:
 
    ```javascript
@@ -172,7 +172,7 @@ config.site = 'AP1';
     ```
 
     **Note**: All logging methods can have a context object with custom attributes.
-   
+
 ## Batch collection
 
 All the logs are first stored on the local device in batches. Each batch follows the intake specification. They are sent as soon as network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.

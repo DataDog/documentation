@@ -14,7 +14,7 @@ further_reading:
 - link: /account_management/billing/usage_attribution
   tag: Documentation
   text: 使用属性のセットアップ
-kind: documentation
+
 title: マルチオーガニゼーションアカウントの管理
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Agent Transport for Logs
-kind: documentation
+
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: "agent/logs/advanced_log_collection/#filter-logs"
@@ -34,7 +34,7 @@ To check which transport is used by the Agent, run the [Agent status command][1]
 
 **Notes**:
 
-* For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+. 
+* For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+.
 * Always enforce a specific transport (either TCP or HTTPS) when using a proxy to forwards logs to Datadog
 
 ## Enforce a specific transport

@@ -1,18 +1,18 @@
 ---
 title: Why is my "Save" button disabled when configuring metrics tags?
-kind: faq
+
 is_beta: false
 ---
-It is possible for a proposed configuration to result in an indexed custom metrics volume that is larger than the original ingested volume. The "Save" button is intentionally disabled in infrequent scenarios where it is more cost effective to leave a metric entirely unconfigured without using Metrics without Limits™. 
+It is possible for a proposed configuration to result in an indexed custom metrics volume that is larger than the original ingested volume. The "Save" button is intentionally disabled in infrequent scenarios where it is more cost effective to leave a metric entirely unconfigured without using Metrics without Limits™.
 
-Using [Metrics without Limits™][1], you can continue sending Datadog your originally submitted volume of metrics with no code-level changes, and define a tag configuration to keep only a smaller subset of custom metrics to index. 
+Using [Metrics without Limits™][1], you can continue sending Datadog your originally submitted volume of metrics with no code-level changes, and define a tag configuration to keep only a smaller subset of custom metrics to index.
 
-By using Metrics without Limits™, your original raw metrics data must be recombined and re-aggregated, and stored against that smaller volume of indexed custom metrics in order to preserve mathematically accurate query results. Therefore, for each of the remaining indexed custom metrics, Datadog stores your specified number of time/space aggregations. 
+By using Metrics without Limits™, your original raw metrics data must be recombined and re-aggregated, and stored against that smaller volume of indexed custom metrics in order to preserve mathematically accurate query results. Therefore, for each of the remaining indexed custom metrics, Datadog stores your specified number of time/space aggregations.
 
 The resulting number of indexed custom metrics for your Metrics without Limits™ configuration is (`the number of remaining tag value combinations`—specified by your tag configuration) x (`the number of time/space aggregations`—specified by the Customize Aggregations section)
 
 **Example**
-Suppose you want to use Metrics without Limits™ to reduce the cardinality of the `shopist.basket.size` metric. 
+Suppose you want to use Metrics without Limits™ to reduce the cardinality of the `shopist.basket.size` metric.
 
 {{< img src="metrics/faq/all-tags.jpg" alt="All Tags Configuration">}}
 

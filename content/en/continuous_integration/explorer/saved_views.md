@@ -1,6 +1,6 @@
 ---
 title: Saved Views
-kind: documentation
+
 further_reading:
 - link: "/continuous_integration/explorer/search_syntax/"
   tag: "Documentation"
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Saved views allow you to save the state of the [CI Visibility Explorer][2] ([**Pipeline Executions**][3] and [**Test Runs** pages][1]) and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [CI Visibility Explorer][2] ([**Pipeline Executions**][3] and [**Test Runs** pages][1]) and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range.
 
 Saved views can keep track of your:
 
@@ -55,7 +55,7 @@ You can:
 
 ## Default views
 
-You can set a saved view to be your default landing page in the [CI Visibility Explorer][2]. Default views are set per user and have no impact on your organization. 
+You can set a saved view to be your default landing page in the [CI Visibility Explorer][2]. Default views are set per user and have no impact on your organization.
 
 Temporarily override your default saved view by completing an action in the UI or opening links in the Explorer that embeds a different configuration.
 

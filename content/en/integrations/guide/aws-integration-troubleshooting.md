@@ -1,6 +1,6 @@
 ---
 title: AWS Integration Troubleshooting
-kind: guide
+
 description: "Troubleshooting steps for the Datadog AWS Integration"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
@@ -67,7 +67,7 @@ The AWS API supports disabling IMDSv1, which the Agent uses by default. If this 
 
 IMDSv2, in its default configuration, refuses connections with an IP hop count greater than one, that is, connections that have passed through an IP gateway. This can cause problems when the Agent is running in a container with a network other than the host's network, as the runtime forwards the container's traffic through a virtual IP gateway. This is common in ECS deployments. The following options may remedy this issue:
 
- * [Increase the maximum hop count to at least `2`][8]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well. 
+ * [Increase the maximum hop count to at least `2`][8]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well.
  * Use the hostname discovered by cloud-init, by [setting `providers.eks.ec2.useHostnameFromFile` to true][9].
  * Run the Agent in the host UTS namespace, by [setting `agents.useHostNetwork` to true][10].
 

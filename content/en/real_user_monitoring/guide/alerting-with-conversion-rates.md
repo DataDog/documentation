@@ -1,6 +1,6 @@
 ---
 title: Alerting With Conversion Rates
-kind: guide
+
 description: Guide for creating alerts on conversion rates.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -22,7 +22,7 @@ In the **Define steps for measuring conversion** section, create some steps from
 
 ## Export the conversion rate graph
 
-The funnel displays the overall conversion and dropoff rates, the number of converted or dropoff sessions, and the percentage of converted or dropoff sessions.  
+The funnel displays the overall conversion and dropoff rates, the number of converted or dropoff sessions, and the percentage of converted or dropoff sessions.
 
 Click the **Save to Dashboard** button and select an existing dashboard from the dropdown menu to export the graph to. Optionally, click **New Dashboard** to create a dashboard.
 

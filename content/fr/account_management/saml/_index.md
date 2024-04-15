@@ -5,7 +5,7 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: Configurer des équipes et organisations avec plusieurs comptes
-kind: documentation
+
 title: Authentification unique avec SAML
 ---
 {{< site-region region="gov" >}}
@@ -16,7 +16,7 @@ title: Authentification unique avec SAML
 
 En configurant [SAML (Security Assertion Markup Language)][1] pour votre compte Datadog, vos collègues et vous-même pourrez vous connecter à Datadog à l'aide des identifiants stockés dans Active Directory, LDAP ou tout autre magasin d'identités de votre organisation configuré avec un fournisseur d'identité SAML.
 
-**Remarques** : 
+**Remarques** :
 
 - Si SAML n'est pas activé sur votre compte Datadog, contactez l'[assistance][2] pour l'activer.
 - Cette documentation part du principe que vous disposez déjà d'un fournisseur d'identité SAML (IdP). Si vous n'avez pas d'IdP SAML, sachez que plusieurs offrent des intégrations avec Datadog, tels que [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7] et [SafeNet][8].

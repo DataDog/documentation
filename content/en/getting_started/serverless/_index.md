@@ -1,6 +1,6 @@
 ---
 title: Getting Started with AWS Lambda Serverless Monitoring
-kind: documentation
+
 
 further_reading:
     - link: '/agent/basic_agent_usage/'
@@ -20,7 +20,7 @@ This guide makes use of a serverless [sample app][2] that you can launch with on
 ### Install the sample app
 
 1. [Launch the CloudFormation Stack][3]. This link brings you to a **Create stack** page in CloudFormation.
-2. Enter your [Datadog API key][4] and [Datadog site][5] ({{< region-param key="dd_site" code="true" >}}). 
+2. Enter your [Datadog API key][4] and [Datadog site][5] ({{< region-param key="dd_site" code="true" >}}).
 
   {{< img src="getting_started/serverless/aws_create_stack.png" alt="Close-up of two functions" style="width:80%;">}}
 
@@ -93,13 +93,13 @@ Click on your function to see more details regarding invocations and recent depl
 
 {{< img src="getting_started/serverless/details_error.png" alt="Close-up of two functions" style="width:80%;">}}
 
-The detailed view, as shown above, contains three graphs. You can set these to display any available metric; by default, they show three [enhanced Lambda metrics][10]: invocations, errors, and duration. 
+The detailed view, as shown above, contains three graphs. You can set these to display any available metric; by default, they show three [enhanced Lambda metrics][10]: invocations, errors, and duration.
 
 Datadog generates enhanced Lambda metrics out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags. You can also view the default [enhanced Lambda metrics dashboard][11].
 
 
 ### Invocations
-The **Invocations** tab displays your function's latest invocations. 
+The **Invocations** tab displays your function's latest invocations.
 
 Each invocation is associated with a trace. Click on **Open Trace** to see the trace for each invocation:
 
@@ -126,7 +126,7 @@ Underneath, you can also examine your Lambda request and response payloads. Data
 
 ### Logs
 
-The serverless sample app has logs enabled by default. You can see each function's logs under its **Logs** tab. 
+The serverless sample app has logs enabled by default. You can see each function's logs under its **Logs** tab.
 
 {{< img src="getting_started/serverless/dd_logs_view.png" alt="Close-up of two functions" style="width:80%;">}}
 

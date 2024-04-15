@@ -1,6 +1,6 @@
 ---
 title: Deprecation notice for TLS version < 1.2
-kind: guide
+
 ---
 
 
@@ -42,7 +42,7 @@ When installed with the [source install script][4], the Agent v5 relies on the s
 
 To determine if your system's Python supports TLS v1.2 (and therefore if the source-installed Agent supports TLS v1.2), run this command from a system shell:
 
-`python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"` 
+`python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"`
 
 This command outputs `TLS 1.2` if TLS v1.2 is supported, and an older TLS version or an error otherwise. If TLS v1.2 is not supported, upgrade your system's Python and OpenSSL or upgrade the Agent to v7.
 
@@ -81,7 +81,7 @@ If your application runs on Java 1.6 prior to update 111, or earlier, TLS 1.1 an
 
 ### .NET
 
-If you are using a built-in .NET client, read the Microsoft guide on [how to upgrade to TLS v1.2 across various versions of .NET framework][6]. 
+If you are using a built-in .NET client, read the Microsoft guide on [how to upgrade to TLS v1.2 across various versions of .NET framework][6].
 
 ### Powershell
 

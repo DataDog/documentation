@@ -25,7 +25,7 @@ further_reading:
 - link: /glossary/#tail
   tag: 送信 - API
   text: 用語集の "tail" の項目
-kind: documentation
+
 title: ログ収集の高度な構成
 ---
 
@@ -220,7 +220,7 @@ Docker 環境では、フィルターを適用するログの送信元のコン�
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例:
 
 ```yaml
 apiVersion: apps/v1
@@ -288,7 +288,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例:
 
 ```yaml
  labels:
@@ -312,7 +312,7 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例:
 
 ```yaml
 apiVersion: apps/v1
@@ -396,7 +396,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例:
 
 ```yaml
  labels:
@@ -415,7 +415,7 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例:
 
 ```yaml
 apiVersion: apps/v1
@@ -507,7 +507,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例:
 
 ```yaml
  labels:

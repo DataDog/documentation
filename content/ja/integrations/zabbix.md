@@ -30,7 +30,7 @@ integration_id: zabbix
 integration_title: zabbix
 integration_version: 1.1.1
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: zabbix
 public_title: zabbix
@@ -109,7 +109,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 
 
 3. **Name** を `Datadog` に、**Type** を `Webhook` に設定し、次のコードを **Script** として入力します。
-``` 
+```
     try {
         Zabbix.Log(4, '[datadog webhook] received value=' + value);
 

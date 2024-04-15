@@ -4,7 +4,7 @@ further_reading:
 - link: /observability_pipelines/monitoring/
   tag: 설명서
   text: 파이프라인 상태 모니터링
-kind: documentation
+
 title: 트러블슈팅
 ---
 
@@ -34,7 +34,7 @@ OP Worker가 수집하는 내부 로그에 대한 자세한 내용이 필요한 
 
 OP Worker v1.4.0+를 사용하면 소스, 변환 및 싱크를 통과하는 데이터에 `tap`할 수 있으므로 파이프라인의 각 컴포넌트를 통해 처리되는 원시 데이터를 볼 수 있습니다.
 
-### 옵저버빌리티 파이프라인 작업자 API 사용 
+### 옵저버빌리티 파이프라인 작업자 API 사용
 
 옵저버빌리티 파이프라인 작업자 API를 사용하면  `tap` 명령을 사용하여 작업자 프로세스와 상호 작용할 수 있습니다. [설정 가이드][2]에 제공된 Helm 차트를 사용하는 경우 API가 이미 활성화되어 있으며, 그렇지 않은 경우 환경 변수 `DD_OP_API_ENABLED`가 `true`로 설정되어 있는지 확인하세요. 이렇게 설정하면 CLI가 `tap`에 대해 예상하는 대로 API가 `localhost` 및 포트 `8686`를 수신합니다.
 

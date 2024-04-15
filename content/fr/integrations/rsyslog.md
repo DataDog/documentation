@@ -12,7 +12,7 @@ has_logo: true
 integration_id: rsyslog
 integration_title: rsyslog
 is_public: true
-kind: integration
+
 name: rsyslog
 public_title: Intégration Datadog/Rsyslog
 short_description: Configurez Rsyslog pour rassembler les logs de votre host, de vos
@@ -172,7 +172,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
    - Si vous avez spécifié un hostname dans `datadog.conf` ou `datadog.yaml`, remplacez la valeur `%HOSTNAME%` dans `rsyslog.conf` de façon à ce qu'elle corresponde à votre hostname.
    - Si vous n'avez défini aucun hostname dans `datadog.conf` ou `datadog.yaml`, vous n'avez rien à modifier.
 
-6. Pour tirer le meilleur parti de vos logs dans Datadog, définissez la source des logs. 
+6. Pour tirer le meilleur parti de vos logs dans Datadog, définissez la source des logs.
    - Si vous [transférez vos logs à l'Agent Datadog][1], vous pouvez définir la source dans le fichier de configuration de l'Agent.
    - Si vous ne transférez pas vos logs à l'Agent Datadog, créez un fichier de configuration séparé pour chaque source dans `/etc/rsyslog.d/` :
 
@@ -281,7 +281,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
    - Si vous avez spécifié un hostname dans `datadog.conf` ou `datadog.yaml`, remplacez la valeur `%HOSTNAME%` dans `rsyslog.conf` de façon à ce qu'elle corresponde à votre hostname.
    - Si vous n'avez défini aucun hostname dans `datadog.conf` ou `datadog.yaml`, vous n'avez rien à modifier.
 
-6. Pour tirer le meilleur parti de vos logs dans Datadog, définissez la source des logs. 
+6. Pour tirer le meilleur parti de vos logs dans Datadog, définissez la source des logs.
    - Si vous [transférez vos logs à l'Agent Datadog][1], vous pouvez définir la source dans le fichier de configuration de l'Agent.
    - Si vous ne transférez pas vos logs à l'Agent Datadog, créez un fichier de configuration séparé pour chaque source dans `/etc/rsyslog.d/` :
 

@@ -14,7 +14,7 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging without Limits*
-kind: documentation
+
 title: Archives de Logs
 ---
 
@@ -46,7 +46,7 @@ Ce guide décrit la marche à suivre pour configurer une archive afin de transf�
 <div class="alert alert-warning">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
 {{< /site-region >}}
 
-Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte AWS associé à votre compartiment S3. 
+Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte AWS associé à votre compartiment S3.
 
 * En général, il est nécessaire de créer un rôle pouvant être utilisé par Datadog pour l'intégration à AWS S3.
 * Pour les comptes AWS GovCloud ou China uniquement, utilisez les clés d'accès comme alternative à la délégation de rôles.
@@ -191,7 +191,7 @@ Ajoutez le rôle **Storage Object Admin** sous **Storage**.
 
 Accédez à la [page Archives][4] dans l'application Datadog et sélectionnez l'option **Add a new archive** en bas de la page.
 
-**Remarques :** 
+**Remarques :**
 * Seuls les utilisateurs de Datadog bénéficiant de l'[autorisation logs_write_archive][3] peuvent effectuer cette étape ainsi que la suivante.
 * Pour archiver des logs dans Stockage Blob Azure, une inscription d'application est requise. Consultez les instructions disponibles à la [section relative à l'intégration Azure][5] et définissez le site en haut à droite de la page sur « US ». Les inscriptions d'application créées exclusivement à des fins d'archivage nécessitent le rôle « Storage Blob Data Contributor ». Si votre compartiment de stockage est inclus dans un abonnement surveillé via une ressource Datadog, un avertissement s'affiche pour vous prévenir que l'inscription d'application est superflue. Vous pouvez ignorer cet avertissement.
 
@@ -360,7 +360,7 @@ Datadog prend également en charge le chiffrement côté serveur à l'aide d'un 
 
 Dès que vos paramètres d'archivage ont été correctement configurés sur votre compte Datadog, vos pipelines de traitement commencent à enrichir tous les logs ingérés par Datadog. Ceux-ci sont ensuite transmis à votre archive.
 
-Une fois vos paramètres d'archivage créés ou modifiés, il est parfois nécessaire d'attendre quelques minutes avant la prochaine tentative d'importation des archives. Les logs sont importés vers les archives toutes les 15 minutes. Par conséquent, **attendez 15 minutes** avant de vérifier que les archives sont bien importées vers votre compartiment de stockage depuis votre compte Datadog. Si l'archive est toujours en attente passé ce délai, vérifiez vos filtres d'inclusion pour vous assurer que la requête est valide et qu'elle renvoie les événements de log dans la vue [Live Tail][11]. 
+Une fois vos paramètres d'archivage créés ou modifiés, il est parfois nécessaire d'attendre quelques minutes avant la prochaine tentative d'importation des archives. Les logs sont importés vers les archives toutes les 15 minutes. Par conséquent, **attendez 15 minutes** avant de vérifier que les archives sont bien importées vers votre compartiment de stockage depuis votre compte Datadog. Si l'archive est toujours en attente passé ce délai, vérifiez vos filtres d'inclusion pour vous assurer que la requête est valide et qu'elle renvoie les événements de log dans la vue [Live Tail][11].
 
 Si Datadog détecte un problème de configuration, l'archive correspondante est mise en évidence dans la page de configuration. Cliquez sur l'icône d'erreur pour afficher les mesures à prendre pour corriger ce problème.
 

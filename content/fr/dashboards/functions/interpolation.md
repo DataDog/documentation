@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/graphing/functions/interpolation/
-kind: documentation
+
 title: Interpolation
 ---
 

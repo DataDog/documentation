@@ -1,7 +1,7 @@
 ---
 code_lang: nodejs
 code_lang_weight: 50
-kind: documentation
+
 title: Node.js 互換性要件
 type: multi-code-lang
 ---
@@ -27,10 +27,10 @@ Node.js でサポートされるすべての ASM 機能を得るためのトレ�
 |タイプ | 脅威検知のサポート | OSSの脆弱性管理のサポート |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
+| Kubernetes    | {{< X >}}         | {{< X >}}                 |
 | AWS ECS       | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         | beta                      |   
+| AWS Lambda    | {{< X >}}         | beta                      |
 
 ## 言語とフレームワークの互換性
 

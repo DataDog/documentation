@@ -13,7 +13,7 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentation
   text: Gérer les monitors
-kind: documentation
+
 title: Notifications
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Use Estimated Usage Metrics
-kind: guide
-description: Learn how to use general Synthetic metrics in monitors. 
+
+description: Learn how to use general Synthetic metrics in monitors.
 further_reading:
 - link: "/monitors/types/metric/"
   tag: "Documentation"
@@ -24,16 +24,16 @@ With metric monitors, you can accomplish the following:
 
 - Monitor the total response time
 - Scope on specific HTTP timings such as DNS, the DNS resolution, and TCP connection
-- Access tags added to metrics coming from Synthetic tests 
+- Access tags added to metrics coming from Synthetic tests
 
-This guide demonstrates how to set up a metric monitor using a general metric such as `synthetics.test_runs`. 
+This guide demonstrates how to set up a metric monitor using a general metric such as `synthetics.test_runs`.
 
 ## Create a metric monitor
 
 
 {{< img src="synthetics/guide/using-synthetic-metrics/metric-monitor-setup.png" alt="Example metric monitor that alerts when too many tests are failing in CI" style="width:95%;" >}}
 
-1. To create a metric monitor, navigate to [Monitors > New Monitor][4] and click **Metric**. 
+1. To create a metric monitor, navigate to [Monitors > New Monitor][4] and click **Metric**.
 
 2. Select a detection method to customize your monitor's alerting conditions. For this example, you can create a threshold alert metric monitor.
 

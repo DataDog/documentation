@@ -11,7 +11,7 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: ドキュメント
   text: データ収集をコンテナのサブセットのみに制限
-kind: documentation
+
 title: Docker タグの抽出
 ---
 

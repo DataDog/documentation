@@ -1,6 +1,6 @@
 ---
 title: How to investigate a log parsing issue
-kind: faq
+
 further_reading:
 - link: "/logs/faq/log-parsing-best-practice/"
   tag: "FAQ"
@@ -76,7 +76,7 @@ Before troubleshooting your parser, read the Datadog log [processors][1] and [pa
     * `%{notSpace:http.useragent:nullIf("-")}`
 
     The first thing to check is the matcher (as a reminder, a matcher describes what element the rule expects such as integer, notSpace, regex, ...). Here, it expects `notSpace`. But the useragent contains spaces and even specific characters. Therefore `notSpace` is not going to work here.
-    
+
     The matcher to use is: regex("[^\\\"]*")
 
     In other situation it might be the rule expecting an "integer" whereas the values are double so the matcher should be changed to "number".

@@ -19,7 +19,7 @@ integration_id: prometheus
 integration_title: Prometheus (ancienne version)
 integration_version: 3.3.1
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: prometheus
@@ -101,7 +101,7 @@ Vous pouvez faire en sorte que les alertes Prometheus Alertmanager soient envoy√
 ```
 receivers:
 - name: datadog
-  webhook_configs: 
+  webhook_configs:
   - send_resolved: true
     url: https://app.datadoghq.com/intake/webhook/prometheus?api_key=<CL√â_API_DATADOG>
 route:

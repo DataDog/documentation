@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Tracing
-kind: documentation
+
 aliases:
     - /getting_started/tracing/distributed-tracing
 further_reading:

@@ -5,7 +5,7 @@ cascade:
     rank: 20
     subcategory: Guides d'utilisation de la solution Database Monitoring
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides d'utilisation de la solution Database Monitoring
 ---

@@ -20,14 +20,14 @@ further_reading:
 - link: /continuous_testing/testing_tunnel
   tag: Documentation
   text: En savoir plus sur le Tunnel de test en continu
-kind: documentation
+
 title: Configuration des tests continus et du CI/CD
 ---
 <div class="alert alert-info">Cette page explique comment configurer des tests continus dans vos pipelines d'intégration continue (CI) et de livraison continue (CD). Si vous souhaitez intégrer vos métriques et données de CI/CD dans des dashboards Datadog, consultez plutôt la section <a href="https://docs.datadoghq.com/continuous_integration/" target="_blank">CI Visibility</a>.</div>
 
 ## Présentation
 
-Utilisez le [package NPM `@datadog-ci`][1] pour exécuter des tests continus directement dans votre pipeline de CI/CD. Vous pouvez automatiquement interrompre un build, bloquer un déploiement ou restaurer un déploiement lorsqu'un test Browser Synthetic détecte une régression. 
+Utilisez le [package NPM `@datadog-ci`][1] pour exécuter des tests continus directement dans votre pipeline de CI/CD. Vous pouvez automatiquement interrompre un build, bloquer un déploiement ou restaurer un déploiement lorsqu'un test Browser Synthetic détecte une régression.
 
 Pour configurer l'URL de départ de votre test, définissez une `startUrl` dans l'objet de votre test. Créez votre propre URL de départ en utilisant une partie de l'URL de départ d'origine de votre test et incluez des variables d'environnement.
 
@@ -178,7 +178,7 @@ Exemple :
 
 ### Options de ligne de commande
 
-Si l'organisation utilise un sous-domaine personnalisé pour accéder à Datadog, celui-ci doit être défini dans la variable d'environnement `DATADOG_SUBDOMAIN` ou dans le fichier de configuration globale sous la clé `subdomain` afin d'afficher correctement l'URL des résultats des tests. 
+Si l'organisation utilise un sous-domaine personnalisé pour accéder à Datadog, celui-ci doit être défini dans la variable d'environnement `DATADOG_SUBDOMAIN` ou dans le fichier de configuration globale sous la clé `subdomain` afin d'afficher correctement l'URL des résultats des tests.
 
 Par exemple, si l'URL utilisée pour accéder à Datadog est `myorg.datadoghq.com`, définissez la variable d'environnement sur `myorg` :
 
@@ -202,7 +202,7 @@ Par exemple :
 {
   "apiKey": "<CLÉ_API_DATADOG>",
   "appKey": "<CLÉ_APPLICATION_DATADOG>",
-  "datadogSite": "datadoghq.com", // Vous pouvez utiliser un autre site Datadog parmi ceux indiqués sur https://docs.datadoghq.com/getting_started/site/. Par défaut, les requêtes sont envoyées à Datadog US1. 
+  "datadogSite": "datadoghq.com", // Vous pouvez utiliser un autre site Datadog parmi ceux indiqués sur https://docs.datadoghq.com/getting_started/site/. Par défaut, les requêtes sont envoyées à Datadog US1.
   "failOnCriticalErrors": true,
   "failOnMissingTests": true,
   "failOnTimeout": true,
@@ -456,7 +456,7 @@ Vous pouvez également consulter les résultats des tests directement dans vos p
     * location: 30019
       ⎋ total duration: 32.6 ms - result url: https://app.datadoghq.com/synthetics/details/2cj-h3c-39x?resultId=122140688175981634
       x GET - https://www.datadoghq.com
-        [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}] 
+        [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}]
   error Command failed with exit code 1.
   info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```
@@ -477,7 +477,7 @@ datadog-ci synthetics upload-application              \
 --mobileApplicationVersionFilePath example/test.apk \
 --versionName 'example 1.0'                           \
 --latest
-```   
+```
 
 Vous pouvez également utiliser ces options dans un fichier de configuration :
 ```

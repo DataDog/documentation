@@ -7,7 +7,7 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: ドキュメント
   text: カスタムリンク
-kind: documentation
+
 title: ウィジェット
 ---
 
@@ -17,13 +17,13 @@ title: ウィジェット
 
 ### グラフ
 {{< whatsnext desc="Datadog 製品のデータをグラフ化する汎用ウィジェット: ">}}
-    {{< nextlink href="/dashboards/widgets/change" 
+    {{< nextlink href="/dashboards/widgets/change"
         img="dashboards/widgets/icons/change_light_large.png">}} 変化 {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
         img="dashboards/widgets/icons/distribution_light_large.png">}} ディストリビューション{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/funnel"
         img="dashboards/widgets/icons/funnel_light_large.png">}} ファネル{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/geomap" 
+    {{< nextlink href="/dashboards/widgets/geomap"
         img="dashboards/widgets/icons/geomap_light_large.png">}} ジオマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map"
         img="dashboards/widgets/icons/heatmap_light_large.png">}} ヒートマップ{{< /nextlink >}}
@@ -53,13 +53,13 @@ title: ウィジェット
 
 ### アノテーションと埋め込み
 {{< whatsnext desc="ダッシュボードを視覚的に構成し、注釈を付けるための装飾ウィジェット: ">}}
-    {{< nextlink href="/dashboards/widgets/free_text" 
+    {{< nextlink href="/dashboards/widgets/free_text"
         img="dashboards/widgets/icons/free-text_light_large.png">}} フリーテキスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" 
+    {{< nextlink href="/dashboards/widgets/iframe"
         img="dashboards/widgets/icons/iframe_light_large.png">}} Iframe{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" 
+    {{< nextlink href="/dashboards/widgets/image"
         img="dashboards/widgets/icons/image_light_large.png">}} 画像{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/note" 
+    {{< nextlink href="/dashboards/widgets/note"
         img="dashboards/widgets/icons/notes_light_large.png">}} 注意事項とリンク{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -71,33 +71,33 @@ title: ウィジェット
 
 ### アラートと対応
 {{< whatsnext desc="モニタリング情報を表示するサマリーウィジェット: ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" 
+    {{< nextlink href="/dashboards/widgets/alert_graph"
         img="dashboards/widgets/icons/alert-graph_light_large.png">}} アラートグラフ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" 
+    {{< nextlink href="/dashboards/widgets/alert_value"
         img="dashboards/widgets/icons/alert-value_light_large.png">}}アラート値{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" 
+    {{< nextlink href="/dashboards/widgets/check_status"
         img="dashboards/widgets/icons/check-status_light_large.png">}} チェックステータス{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" 
+    {{< nextlink href="/dashboards/widgets/monitor_summary"
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} モニターサマリー{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/run_workflow" 
+    {{< nextlink href="/dashboards/widgets/run_workflow"
 img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### アーキテクチャ
 {{< whatsnext desc="インフラストラクチャーとアーキテクチャーのデータを視覚化します。 ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
+    {{< nextlink href="/dashboards/widgets/hostmap"
         img="dashboards/widgets/icons/host-map_light_large.png">}} ホストマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
+    {{< nextlink href="/dashboards/widgets/topology_map"
         img="dashboards/widgets/icons/service-map_light_large.png">}} トポロジーマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
+    {{< nextlink href="/dashboards/widgets/service_summary"
         img="dashboards/widgets/icons/service-summary_light_large.png">}} サービスサマリー{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### パフォーマンスと信頼性
 {{< whatsnext desc="サイトの信頼性の視覚化: ">}}
-    {{< nextlink href="/dashboards/widgets/slo" 
+    {{< nextlink href="/dashboards/widgets/slo"
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} サービスレベル目標 (SLO) サマリー{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" 
+    {{< nextlink href="/dashboards/widgets/slo_list"
         img="dashboards/widgets/icons/slo-list_light_large.png">}} サービスレベル目標 (SLO) リスト{{< /nextlink >}}
 {{< /whatsnext >}}
 

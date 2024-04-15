@@ -6,7 +6,7 @@ further_reading:
 - link: /dashboards/
   tag: Documentation
   text: Visualiser vos données pour mieux les comprendre
-kind: documentation
+
 title: Unités des métriques
 ---
 

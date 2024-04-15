@@ -1,6 +1,6 @@
 ---
 title: Observability Pipelines
-kind: Documentation
+
 aliases:
   - /integrations/observability_pipelines/
 further_reading:

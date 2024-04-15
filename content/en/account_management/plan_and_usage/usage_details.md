@@ -1,6 +1,6 @@
 ---
 title: Usage Details
-kind: documentation
+
 aliases:
   - /account_management/billing/usage_details/
 ---
@@ -22,7 +22,7 @@ Certain product tabs also contain additional tools:
 
 ## Month-to-date summary
 
-This section summarizes your month-to-date usage. In the "All" tab, view your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs, and any other part of the platform you've used during the month. 
+This section summarizes your month-to-date usage. In the "All" tab, view your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs, and any other part of the platform you've used during the month.
 
 {{< img src="account_management/billing/usage-details-v2-01.png" alt="Usage Summary - All tab" >}}
 
@@ -67,18 +67,18 @@ Month-to-date usage of each product is calculated as follows:
 
 ## Usage trends
 
-The [Usage Trends][5] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
+The [Usage Trends][5] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product.
 
 {{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs page in the Datadog application with Download as CSV option highlighted" style="width:100%; align:left" >}}
 
-For products with subtypes, each category is distinguished on the graph for that product. 
+For products with subtypes, each category is distinguished on the graph for that product.
 
 {{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Usage summary with infrastructure tab selected and multiple graphs for infrastructure usage subtypes such as infra hosts, agent hosts, and containers" style="width:100%; align:left" >}}
 
 More detailed product subtype graphs can be found on each product's tab. For example, a breakdown by host type is available on the Infrastructure tab.
 
 {{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Usage trends section of the Infrastructure tab with Infra Hosts graph containing Agent hosts and AWS hosts, Indexed Logs graph containing Daily Indexed Live Logs and Cumulative Indexed Live Logs" style="width:100%; align:left" >}}
- 
+
 Cumulative usage over time is available for sum-based products.
 
 {{< img src="account_management/billing/CumulativeUsageLine.png" alt="Graphs for Ingested Spans and Indexed Spans, each plotting data for the daily and cumulative sums of their respective spans" style="width:100%; align:left" >}}
@@ -87,11 +87,11 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 {{< img src="account_management/billing/TimeGranularity.png" alt="Time intervals on usage graphs" style="width:100%; align:left" >}}
 
-The dashed `Committed` line shows commitments per product, without any allowances (such as Custom Metrics or Containers). 
+The dashed `Committed` line shows commitments per product, without any allowances (such as Custom Metrics or Containers).
 
 {{< img src="account_management/billing/CommittedLine.png" alt="Committed usage line on APM Hosts graph configured with the value 10" style="width:100%; align:left" >}}
 
- 
+
 
 ## Top custom metrics
 

@@ -1,7 +1,7 @@
 ---
 dependencies:
   - https://github.com/DataDog/datadog-formula/blob/main/README.md
-kind: documentation
+
 title: SaltStack
 ---
 La formule SaltStack pour Datadog sert à installer l'Agent Datadog ainsi que les intégrations reposant sur l'Agent (checks). Pour en savoir plus sur les formules SaltStack, consultez les [instructions d'utilisation et d'installation des formules Sallt][1].
@@ -42,7 +42,7 @@ service salt-master restart
 
 #### Option 2
 
-Vous pouvez également cloner la formule Datadog sur votre nœud salt-master : 
+Vous pouvez également cloner la formule Datadog sur votre nœud salt-master :
 
 ```shell
 mkdir -p /srv/formulas && cd /srv/formulas
@@ -96,7 +96,7 @@ La configuration de la formule doit être écrite dans la clé `datadog` du fich
 
 Sous `config`, ajoutez les options de configuration à écrire dans le fichier de configuration de l'Agent des minions (`datadog.yaml` pour les Agents v6 et v7, `datadog.conf` pour l'Agent v5).
 
-Selon la version de l'Agent installée, plusieurs options peuvent être définies : 
+Selon la version de l'Agent installée, plusieurs options peuvent être définies :
 
 - Agents v6 et v7 : toutes les options prises en charge par le fichier de configuration de l'Agent sont prises en charge.
 - Agent v5 : seule l'option `api_key` est prise en charge.

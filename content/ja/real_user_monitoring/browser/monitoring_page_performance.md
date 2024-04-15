@@ -18,7 +18,7 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボードについて
-kind: documentation
+
 title: ページのパフォーマンスの監視
 ---
 
@@ -180,7 +180,7 @@ document.addEventListener("scroll", function handler() {
 
 ```javascript
 document.addEventListener("scroll", function handler() {
-    //1 度だけトリガーするよう、イベントリスナーを削除 
+    //1 度だけトリガーするよう、イベントリスナーを削除
     document.removeEventListener("scroll", handler);
 
     const timing = Date.now()

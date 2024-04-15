@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-kind: documentation
+
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
@@ -44,10 +44,10 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches.
 
 Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
- 
+
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Migrating to 2.0.0

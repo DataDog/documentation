@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Guide de dépannage pour la collecte de logs Docker
 ---
 
@@ -187,7 +187,7 @@ Si vous ne pouvez pas ouvrir le port 10516, vous pouvez configurer l'Agent Datad
 
 ## L'Agent n'envoie pas les logs issus de conteneurs pour lesquels une grande quantité de logs persistants est conservée (> 1 Go)
 
-Le daemon Docker peut rencontrer des problèmes de performances lorsqu'il essaie de récupérer les logs de conteneurs pour lesquels des fichiers de logs volumineux sont déjà stockés sur le disque. Cela peut engendrer des timeouts de lecture lorsque l'Agent Datadog récupère les logs des conteneurs à partir du daemon Docker. 
+Le daemon Docker peut rencontrer des problèmes de performances lorsqu'il essaie de récupérer les logs de conteneurs pour lesquels des fichiers de logs volumineux sont déjà stockés sur le disque. Cela peut engendrer des timeouts de lecture lorsque l'Agent Datadog récupère les logs des conteneurs à partir du daemon Docker.
 
 Dans ce cas, l'Agent Datadog envoie un log contenant le message `Restarting reader after a read timeout` pour un conteneur donné toutes les 30 secondes, et il arrête d'envoyer les logs issus de ce conteneur.
 

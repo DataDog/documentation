@@ -31,7 +31,7 @@ integration_id: zabbix
 integration_title: zabbix
 integration_version: 1.1.1
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: zabbix
 public_title: zabbix
@@ -113,7 +113,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 
 
 3. Définissez **Name** sur `Datadog`, **Type** sur `Webhook` et **Script** sur le code suivant :
-``` 
+```
     try {
         Zabbix.Log(4, '[datadog webhook] received value=' + value);
 

@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 本番コードで assert を使用しない
 ---
 ## メタデータ

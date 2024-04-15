@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/serverless/troubleshooting/connect_invoking_resources/
-kind: guide
+
 title: Bénéficier d'une visibilité accrue sur les ressources appelant des fonctions
   Lambda
 ---
@@ -18,7 +18,7 @@ Pour instrumenter pour la première fois vos fonctions Lambda, suivez les [instr
 
 Les ressources gérées sont automatiquement connectées à vos fonctions AWS Lambda si toutes les affirmations suivantes se vérifient :
 - Vos fonctions sont rédigées avec un runtime Lambda Node.js ou Python.
-- La solution APM est configurée sur vos fonctions [avec l'intégration X-Ray Datadog][2] et la [bibliothèque Lambda Datadog est configurée de façon à enrichir les segments AWS X-RAY][3], **OU** la solution APM est configurée sur vos fonctions avec les [bibliothèques de tracing Datadog][2] (`dd-trace`). 
+- La solution APM est configurée sur vos fonctions [avec l'intégration X-Ray Datadog][2] et la [bibliothèque Lambda Datadog est configurée de façon à enrichir les segments AWS X-RAY][3], **OU** la solution APM est configurée sur vos fonctions avec les [bibliothèques de tracing Datadog][2] (`dd-trace`).
 - La ressource gérée appelant votre fonction correspond à l'un des éléments suivants : API Gateway, SQS, SNS, EventBridge, Kinesis, DynamoDB ou S3.
 - Vos fonctions sont instrumentées avec une version récente de la bibliothèque Lambda Datadog (>= `v3.46.0` pour Node, >= `v28` pour Python).
 

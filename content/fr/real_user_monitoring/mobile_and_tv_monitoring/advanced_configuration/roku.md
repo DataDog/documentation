@@ -10,7 +10,7 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explorer la solution RUM de Datadog
-kind: documentation
+
 title: Configuration avancée de RUM pour Roku
 type: multi-code-lang
 ---
@@ -26,7 +26,7 @@ Si vous n'avez pas encore configuré le SDK, consultez les [instructions de conf
 
 ### `roUrlTransfer`
 
-Les requêtes réseau effectuées directement avec un nœud `roUrlTransfer` doivent être suivies. 
+Les requêtes réseau effectuées directement avec un nœud `roUrlTransfer` doivent être suivies.
 
 Pour les *requêtes synchrones*, utilisez le wrapper `datadogroku_DdUrlTransfer` de Datadog afin de suivre automatiquement la ressource. Ce wrapper prend en charge la plupart des fonctionnalités du composant `roUrlTransfer`, mais aucun élément lié aux appels réseau asynchrones.
 
@@ -85,7 +85,7 @@ end sub
 
 Lorsque vous utilisez un nœud  `Video` ou `Audio` pour diffuser du contenu multimédia, vous pouvez transmettre à Datadog tous les `roSystemLogEvent` que vous recevez comme suit :
 
-```brightscript 
+```brightscript
     sysLog = CreateObject("roSystemLog")
     sysLog.setMessagePort(m.port)
     sysLog.enableType("http.error")

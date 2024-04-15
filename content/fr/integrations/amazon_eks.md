@@ -31,7 +31,7 @@ integration_id: amazon-eks
 integration_title: Amazon-EKS
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: amazon_eks
 public_title: Amazon-EKS
@@ -73,7 +73,7 @@ Amazon Elastic Kubernetes Service (EKS) est un service Kubernetes géré qui per
 
 ## Implémentation
 
-Datadog s'intègre déjà à Kubernetes et à AWS, ce qui en fait la solution idéale pour surveiller EKS. Si vous exécutez l'Agent dans un cluster Kubernetes et que vous souhaitez migrer vers EKS, vous pouvez continuer à surveiller votre cluster avec Datadog. 
+Datadog s'intègre déjà à Kubernetes et à AWS, ce qui en fait la solution idéale pour surveiller EKS. Si vous exécutez l'Agent dans un cluster Kubernetes et que vous souhaitez migrer vers EKS, vous pouvez continuer à surveiller votre cluster avec Datadog.
 
 De plus, les [groupes de nœuds gérés Amazon EKS][2] et le service [Amazon EKS sur AWS Outposts][3] sont pris en charge.
 

@@ -1,6 +1,6 @@
 ---
 title: "What are Datadog's password requirements?"
-kind: faq
+
 ---
 
 Datadog password requirements are:

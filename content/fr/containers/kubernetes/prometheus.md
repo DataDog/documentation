@@ -24,7 +24,7 @@ further_reading:
 - link: /integrations/guide/prometheus-metrics/
   tag: Documentation
   text: Mappage de métriques Prometheus avec des métriques Datadog
-kind: documentation
+
 title: Collecte de métriques Prometheus et OpenMetrics avec Kubernetes
 ---
 
@@ -256,7 +256,7 @@ Si l'Agent de cluster est activé, à l'intérieur de son manifeste `cluster-age
 - name: DD_PROMETHEUS_SCRAPE_ENABLED
   value: "true"
 - name: DD_PROMETHEUS_SCRAPE_SERVICE_ENDPOINTS
-  value: "true" 
+  value: "true"
 ```
 
 {{% /tab %}}
@@ -289,7 +289,7 @@ La configuration Autodiscovery peut reposer sur des noms de conteneur, des annot
 
 `kubernetes_annotations` contient deux maps d'annotations permettant de définir les règles de découverte : `include` et `exclude`.
 
-**Remarque** : dans la configuration de l'Agent Datadog, `kubernetes_annotations` a par défaut la valeur suivante : 
+**Remarque** : dans la configuration de l'Agent Datadog, `kubernetes_annotations` a par défaut la valeur suivante :
 
 ```yaml
 kubernetes_annotations:
@@ -339,7 +339,7 @@ La configuration Autodiscovery peut reposer sur des noms de conteneur, des annot
 
 `kubernetes_annotations` contient deux maps d'annotations permettant de définir les règles de découverte : `include` et `exclude`.
 
-**Remarque** : dans la configuration de l'Agent Datadog, `kubernetes_annotations` a par défaut la valeur suivante : 
+**Remarque** : dans la configuration de l'Agent Datadog, `kubernetes_annotations` a par défaut la valeur suivante :
 
 ```yaml
 - name: DD_PROMETHEUS_SCRAPE_CHECKS

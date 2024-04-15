@@ -14,7 +14,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/default-privacy-session-replay/
   tag: ブログ
   text: セッションリプレイのデフォルトプライバシー設定によるユーザーデータの難読化
-kind: documentation
+
 title: リアルユーザーモニタリングのデータセキュリティ
 ---
 
@@ -26,7 +26,7 @@ title: リアルユーザーモニタリングのデータセキュリティ
 RUM は、多くの規格や規制の枠組みに準拠するように構成することができます。以下が含まれますが、これらに限定されるものではありません。
 
 - GDPR
-- HIPAA 
+- HIPAA
 - ISO
 - CCPA/CPRA
 

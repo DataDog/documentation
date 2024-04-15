@@ -7,7 +7,7 @@ further_reading:
 - link: /integrations/guide/cloud-metric-delay/
   tag: Guide
   text: Délai de réception des métriques cloud
-kind: guide
+
 title: Pourquoi installer l'Agent Datadog sur mes instances cloud ?
 ---
 
@@ -17,7 +17,7 @@ Si vous utilisez AWS, Azure, GCP ou un autre fournisseur de métriques cloud, l'
 
 * **Métriques exposées** : par défaut, Datadog active plus de 50 métriques. Il est possible d'ajouter des métriques supplémentaires grâce à des intégrations Datadog liées à différentes applications.
 
-* **Intégrations** : ces outils permettent de renforcer facilement les capacités de l'Agent Datadog, afin de ne pas analyser uniquement les métriques natives. Surveillez l'intégrité d'applications, l'utilisation de processus, etc. 
+* **Intégrations** : ces outils permettent de renforcer facilement les capacités de l'Agent Datadog, afin de ne pas analyser uniquement les métriques natives. Surveillez l'intégrité d'applications, l'utilisation de processus, etc.
 
 * **Métriques custom avec DogStatsD** : utilisez le client StatsD intégré conjointement à l'Agent Datadog afin d'envoyer des métriques custom à partir de votre application. Vous pourrez ainsi mettre en corrélation les performances de votre application, les comportements de vos utilisateurs et l'activité de votre système.
 

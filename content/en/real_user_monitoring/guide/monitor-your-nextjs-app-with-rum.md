@@ -1,6 +1,6 @@
 ---
 title: Monitor Your Next.js App With RUM
-kind: guide
+
 description: Guide for monitoring Next.js applications with RUM.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -39,9 +39,9 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    {{< code-block lang="javascript" filename="datadog-init.tsx" disable_copy="false" collapsible="true" >}}
    // Necessary if using App Router to ensure this file runs on the client
    "use client";
-    
+
     import { datadogRum } from "@datadog/browser-rum";
-    
+
     datadogRum.init({
       applicationId: "<YOUR_APPLICATION_ID>",
       clientToken: "<CLIENT_TOKEN>",
@@ -61,14 +61,14 @@ Follow the steps below to set up Datadog RUM browser monitoring.
         { match: "https://example.com/api/", propagatorTypes: ["tracecontext"] },
       ],
     });
-    
+
     export default function DatadogInit() {
       // Render nothing - this component is only included so that the init code
       // above will run client-side
       return null;
     }
    {{< /code-block >}}
-   
+
    {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
     import DatadogInit from "@/components/datadog-init";
 

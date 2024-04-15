@@ -8,7 +8,7 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
   tag: Terraform
   text: Créer et gérer des variables globales Synthetic avec Terraform
-kind: documentation
+
 title: Étapes des tests Browser
 ---
 
@@ -201,7 +201,7 @@ Ajoutez une étape **Press Key** pour simuler le fait que l'utilisateur appuie s
 * Entrée
 * Touches fléchées (haut, bas, droite et gauche)
 * Tabulation (en dehors d'un formulaire)
-* Échap 
+* Échap
 * Retour arrière
 
 Pour appuyer sur des touches qui ne sont pas enregistrées automatiquement, indiquez les valeurs des touches pertinentes dans le champ **Value**.
@@ -257,7 +257,7 @@ Vous pouvez sélectionner l'un des builtins disponibles suivants :
 `{{ date(n unit, format) }}`
 : Génère une date dans l'un des formats acceptés de Datadog. Sa valeur correspond à la date UTC d'initiation du test + ou - `n` unités.
 
-`{{ timestamp(n, unit) }}` 
+`{{ timestamp(n, unit) }}`
 : Génère un timestamp dans l'une des unités acceptées de Datadog. Sa valeur correspond au timestamp UTC d'initiation du test + ou -  `n` unités.
 
 Pour obfusquer les valeurs des variables locales dans les résultats des tests, sélectionnez **Hide and obfuscate variable value**. Une fois la chaîne de la variable définie, cliquez sur **Add Variable**.

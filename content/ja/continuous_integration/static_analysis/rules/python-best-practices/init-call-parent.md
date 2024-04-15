@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: super() を使って親コンストラクタを呼び出す
 ---
 ## メタデータ

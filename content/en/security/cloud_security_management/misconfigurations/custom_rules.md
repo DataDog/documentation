@@ -1,6 +1,6 @@
 ---
 title: Create Custom Rules
-kind: documentation
+
 aliases:
   - /security/cspm/custom_rules
   - /security/misconfigurations/custom_rules
@@ -28,7 +28,7 @@ cascade:
 ## Overview
 
 To extend the rules being applied to your environment to evaluate your security posture, you can clone compliance rules and edit the copies, and you can create your own rules from scratch.
-To view the list of the available resource types for your custom rules, see [Cloud Resources Schema][8]. 
+To view the list of the available resource types for your custom rules, see [Cloud Resources Schema][8].
 
 ## Cloning rules
 

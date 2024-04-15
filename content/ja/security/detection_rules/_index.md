@@ -17,7 +17,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/impossible-travel-detection-rules/
   tag: ブログ
   text: 不可能な旅行検出ルールで不審なログイン行為を検出する
-kind: documentation
+
 title: 検出ルール
 ---
 

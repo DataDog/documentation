@@ -1,6 +1,6 @@
 ---
 title: Workflow Automation
-kind: documentation
+
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']

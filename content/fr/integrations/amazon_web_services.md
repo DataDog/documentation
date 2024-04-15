@@ -28,7 +28,7 @@ integration_id: amazon-web-services
 integration_title: AWS
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_web_services
 public_title: Intégration Datadog/AWS
@@ -61,16 +61,16 @@ Choisissez l'une des méthodes suivantes pour intégrer vos comptes AWS dans Dat
 
 ### Configuration automatique
 
-  * **CloudFormation (idéal pour se lancer rapidement)**  
+  * **CloudFormation (idéal pour se lancer rapidement)**
       Pour configurer l'intégration AWS avec CloudFormation, consultez le [guide de prise en main d'AWS][1].
 
-  * **Terraform**  
+  * **Terraform**
       Pour configurer l'intégration AWS avec Terraform, consultez la section [Intégration AWS avec Terraform][4].
 
-  * **Control Tower**  
+  * **Control Tower**
       Pour configurer l'intégration AWS lors du provisionnement d'un nouveau compte AWS avec la fonction [Account Factory de Control Tower][5], consultez le [guide de configuration de Control Tower][6] (en anglais).
 
-  * **Configuration avec plusieurs comptes pour les organisations AWS**  
+  * **Configuration avec plusieurs comptes pour les organisations AWS**
       Pour configurer l'intégration AWS avec plusieurs comptes au sein d'une organisation AWS, consultez le [guide dédié][7].
 
 ### Méthode manuelle
@@ -78,7 +78,7 @@ Choisissez l'une des méthodes suivantes pour intégrer vos comptes AWS dans Dat
    * **Délégation des rôles**
       Pour configurer l'intégration AWS manuellement avec la délégation des rôles, consultez le [guide de configuration manuelle][8].
 
-   * **Clés d'accès (régions GovCloud ou Chine uniquement)**  
+   * **Clés d'accès (régions GovCloud ou Chine uniquement)**
       Pour configurer l'intégration AWS avec les clés d'accès, consultez le [guide de configuration manuelle][9].
 
 {{% aws-permissions %}}
@@ -134,7 +134,7 @@ Pour ajouter la solution Cloud Security Posture Management à une intégration A
 
 Vous pouvez envoyer des alarmes AWS CloudWatch à l'Events Explorer Datadog de deux façons différentes :
 
-- Récupération d'alarmes : cette fonctionnalité est fournie par défaut avec l'intégration AWS et permet de récupérer les alarmes liées aux métriques par l'intermédiaire de l'API [DescribeAlarmHistory][18]. Si vous utilisez cette méthode, vos alarmes sont classées sous la source d'événements `Amazon Web Services`. **Remarque** : le crawler ne récupère pas les alarmes composites. 
+- Récupération d'alarmes : cette fonctionnalité est fournie par défaut avec l'intégration AWS et permet de récupérer les alarmes liées aux métriques par l'intermédiaire de l'API [DescribeAlarmHistory][18]. Si vous utilisez cette méthode, vos alarmes sont classées sous la source d'événements `Amazon Web Services`. **Remarque** : le crawler ne récupère pas les alarmes composites.
 - Rubrique SNS : pour visualiser toutes vos alarmes AWS CloudWatch dans votre Events Explorer, abonnez les alarmes à une rubrique SNS, puis transférez les messages SNS à Datadog. Pour découvrir comment recevoir des messages SNS en tant qu'événements dans Datadog, consultez la rubrique [Recevoir les messages de SNS][19]. Si vous utilisez cette méthode, vos alarmes sont classées sous la source d'événements `Amazon SNS`.
 
 ## Données collectées

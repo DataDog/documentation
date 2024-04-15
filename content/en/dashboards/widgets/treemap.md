@@ -1,6 +1,6 @@
 ---
 title: Treemap Widget
-kind: documentation
+
 widget_type: treemap
 description: "Graph proportions of one or more datasets"
 aliases:
@@ -20,7 +20,7 @@ The treemap widget allows you to display proportions of one or more datasets. Th
 
 ## Configuration
 
-1. Select from the available data sources. 
+1. Select from the available data sources.
 2. Configure the query, see the following resources for more information:
     * Metrics: See the [querying ][1] documentation to configure a metric query.
     * Events: See the [log search][2] documentation to configure a log event query.

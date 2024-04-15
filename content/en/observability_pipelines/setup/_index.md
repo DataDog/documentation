@@ -1,6 +1,6 @@
 ---
 title: Set Up the Observability Pipelines Worker
-kind: documentation
+
 type: multi-code-lang
 aliases:
   - /getting_started/observability_pipelines/
@@ -70,7 +70,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 1. Download the [sample pipeline configuration file][2]. This configuration emits demo data, parses and structures the data, and then sends them to the console and Datadog. See [Configurations][3] for more information about the source, transform, and sink used in the sample configuration.
 
 2. Run the following command to start the Observability Pipelines Worker with Docker:
-    
+
     ```shell
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
@@ -205,7 +205,7 @@ Install the Worker with the one-line install script or manually.
 5. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host.
 
 6. Start the Worker:
-    
+
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -228,7 +228,7 @@ Install the Worker with the one-line install script or manually.
 2. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 3. Run the following command to start the Worker:
-    
+
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -283,7 +283,7 @@ Install the Worker with the one-line install script or manually.
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 
-1. Download the the [sample configuration][1]. 
+1. Download the the [sample configuration][1].
 1. Set up the Worker module in your existing Terraform using the sample configuration. Make sure to update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment in the configuration. Also,update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
 
 See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.

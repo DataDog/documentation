@@ -1,6 +1,6 @@
 ---
 title: Getting Started with API Tests
-kind: documentation
+
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
@@ -48,11 +48,11 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 3. Select the `HTTP` request type.
 4. Define your request:
 
-    - Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
-    - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
-    
-      **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
-    
+    - Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`.
+    - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.
+
+      **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.
+
       In this example, no specific advanced option is needed.
     - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
 
@@ -68,11 +68,11 @@ In this example, three default assertions populate after triggering the sample t
 
 {{< img src="getting_started/synthetics/assertions-example-2.png" alt="Default assertions" style="width:100%;">}}
 
-Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click **New Assertion** to define a new assertion from scratch. 
+Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click **New Assertion** to define a new assertion from scratch.
 
 {{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true" >}}
 
-### Select locations 
+### Select locations
 
 Select one or more **Managed Locations** or **Private Locations** to run your test from. {{% managed-locations %}}
 
@@ -82,7 +82,7 @@ The Shopist application is publicly available at `https://www.shopist.io/`, so y
 
 Select the frequency at which you want your test to execute. You can leave the default frequency of 1 minute.
 
-In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][9]. 
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][9].
 
 ### Define alert conditions
 
@@ -104,38 +104,38 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 Design your alert message and add any email address you want your test to send alerts to. You can also use [notifications integrations][10] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][11].
 
-When you're ready to save your test configuration and monitor, click **Create**. 
+When you're ready to save your test configuration and monitor, click **Create**.
 
 ## Create a multistep API test
 
-[Multistep API tests][2] allow you to monitor key business transactions at the API level. 
+[Multistep API tests][2] allow you to monitor key business transactions at the API level.
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="Overview of a Mulistep Synthetics API Test" style="width:100%;" >}}
 
 Similar to [API tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application or service.
 
-The example test below demonstrates the creation of a multistep API test that monitors the addition of an item to a cart. This test contains three steps: 
+The example test below demonstrates the creation of a multistep API test that monitors the addition of an item to a cart. This test contains three steps:
 
 - Getting a cart
 - Getting a product
 - Adding the product to the cart
 
-If you don't know which API endpoints to create your multistep API test on, use the example endpoints below. 
+If you don't know which API endpoints to create your multistep API test on, use the example endpoints below.
 
-To create a new multistep API test, click **New Test** > **[Multistep API test][12]**. Add a test name such as `Add product to cart`, include tags, and select locations. 
+To create a new multistep API test, click **New Test** > **[Multistep API test][12]**. Add a test name such as `Add product to cart`, include tags, and select locations.
 
 ### Get a cart
 
-1. In **Define steps**, click **Create Your First Step**. 
+1. In **Define steps**, click **Create Your First Step**.
 2. Add a name to your step, for example: `Get a cart`.
-3. Specify the HTTP method and the URL you want to query. You can enter `POST` and `https://api.shopist.io/carts`. 
+3. Specify the HTTP method and the URL you want to query. You can enter `POST` and `https://api.shopist.io/carts`.
 4. Click **Test URL**. This creates a cart item in the Shopist application's backend.
 5. Leave the default assertions or modify them.
-6. Optionally, define execution parameters. 
+6. Optionally, define execution parameters.
 
-    Selecting **Continue with test if this step fails** is helpful to ensure a whole endpoint collection is tested or to ensure the last cleanup step is executed, regardless of previous steps' success or failure. The **Retry** step feature is handy in situations where you know your API endpoint may take some time before responding. 
-    
-    In this example, no specific execution parameter is needed. 
+    Selecting **Continue with test if this step fails** is helpful to ensure a whole endpoint collection is tested or to ensure the last cleanup step is executed, regardless of previous steps' success or failure. The **Retry** step feature is handy in situations where you know your API endpoint may take some time before responding.
+
+    In this example, no specific execution parameter is needed.
 
 7. To create a variable out of the value of the cart ID located at the end of the `location` header:
     - Click **Extract a variable from response content**.
@@ -149,10 +149,10 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
 9. When you're done creating this test step, click **Save Step**.
 
 ### Get a product
-   
+
 1. In **Define another step**, click **Add Another Step**. By default, you can create up to ten steps.
 2. Add a name to your step, for example: `Get a product`.
-3. Specify the HTTP method and the URL you want to query. Here, you can add: `GET` and `https://api.shopist.io/products.json`. 
+3. Specify the HTTP method and the URL you want to query. Here, you can add: `GET` and `https://api.shopist.io/products.json`.
 4. Click **Test URL**. This retrieves a list of products available in the Shopist application.
 5. Leave the default assertions or modify them.
 6. Optionally, define execution parameters. In this example, no specific execution parameter is needed.
@@ -168,9 +168,9 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
 
 1. Click **Add Another Step** to add the final step, the addition of a product into your cart.
 2. Add a name to your step, for example: `Add product to cart`.
-3. Specify the HTTP method and the URL you want to query. Here, you can add: `POST` and  `https://api.shopist.io/add_item.json`. 
+3. Specify the HTTP method and the URL you want to query. Here, you can add: `POST` and  `https://api.shopist.io/add_item.json`.
 4. In the **Request Body** tab, choose the `application/json` body type and insert the following:
-        
+
     {{< code-block lang="java" disable_copy="true" collapsible="true" >}}
     {
       "cart_item": {
@@ -179,9 +179,9 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
         "quantity": 1
       },
       "cart_id": "{{ CART_ID }}"
-    } 
+    }
     {{< /code-block >}}
-        
+
 5. Click **Test URL**. This adds the product you extracted in Step 2 to the cart you created in Step 1 and returns a checkout URL.
 6. In **Add assertions (optional)**, click **Response Body** and click the `url` key to have your test assert that the journey finished with a response containing the checkout URL.
 7. No execution parameters and variable extractions are needed in this last step.
@@ -189,7 +189,7 @@ To create a new multistep API test, click **New Test** > **[Multistep API test][
 
 {{< img src="getting_started/synthetics/defined-steps.png" alt="Created test steps" style="width:100%;" >}}
 
-You can then configure the rest of your test conditions such as test frequency and alerting conditions, and the test monitor. When you're ready to save your test configuration and monitor, click **Create**. 
+You can then configure the rest of your test conditions such as test frequency and alerting conditions, and the test monitor. When you're ready to save your test configuration and monitor, click **Create**.
 
 For more information, see [Using Synthetic Test Monitors][13].
 

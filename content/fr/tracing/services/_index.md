@@ -4,14 +4,14 @@ further_reading:
 - link: getting_started/tagging/unified_service_tagging/
   tag: Documentation
   text: En savoir plus sur le tagging de service unifié et les tags réservés
-kind: documentation
+
 title: Observabilité des services
 ---
 
 {{< img src="tracing/apm_lifecycle/stats_pipeline.png" style="width:65%; background:none; border:none; box-shadow:none;" alt="Pipeline des statistiques sur un service" >}}
 
 
-Visualisez les données de vos spans et traces sous l'angle de vos services afin de simplifier le dépannage, de hiérarchiser les niveaux d'attention, de générer des alertes en cas de problème et d'atteindre plus facilement vos objectifs opérationnels. 
+Visualisez les données de vos spans et traces sous l'angle de vos services afin de simplifier le dépannage, de hiérarchiser les niveaux d'attention, de générer des alertes en cas de problème et d'atteindre plus facilement vos objectifs opérationnels.
 
 {{< img src="tracing/visualization/service_list.png" alt="liste des services" >}}
 

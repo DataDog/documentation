@@ -1,6 +1,6 @@
 ---
 title: Monitor Settings
-kind: documentation
+
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

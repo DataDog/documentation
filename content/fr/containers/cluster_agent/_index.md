@@ -22,7 +22,7 @@ further_reading:
 - link: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting
   tag: Github
   text: Dépanner l'Agent de cluster Datadog
-kind: documentation
+
 title: Agent de cluster pour Kubernetes
 ---
 

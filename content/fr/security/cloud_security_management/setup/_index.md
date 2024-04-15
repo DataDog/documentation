@@ -35,7 +35,7 @@ further_reading:
   tag: Blog
   text: Intercepter les attaques au niveau de la couche réseau grâce à la détection
     des menaces basées sur le DNS
-kind: documentation
+
 title: Configurer Cloud Security Management
 ---
 
@@ -68,7 +68,7 @@ CSM est disponible en trois formules : [CSM Enterprise][1], [CSM Pro][2] et [CS
     </tr>
 </table>
 
-**Remarques** : 
+**Remarques** :
 
 - Vous pouvez à tout moment activer des fonctionnalités non comprises dans votre formule en suivant les instructions sur la [page Configuration de CSM][4].
 - Les produits CSM Identity Risks et CSM Vulnerabilities sont en version bêta. Pour les configurer, consultez les sections [Cloud Security Management Identity Risks][5] et [Configurer Cloud Security Management Vulnerabilities][6].

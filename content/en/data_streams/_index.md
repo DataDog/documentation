@@ -1,6 +1,6 @@
 ---
 title: Data Streams Monitoring
-kind: documentation
+
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
@@ -54,7 +54,7 @@ To get started, follow the installation instructions to configure services with 
 | .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
 | Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
 | Go | All (with [manual instrumentation][1]) |
-  
+
 
 ## Explore Data Streams Monitoring
 
@@ -86,7 +86,7 @@ Slowdowns caused by high consumer lag or stale messages can lead to cascading fa
 
 {{< img src="data_streams/dsm_kafka_lag.png" alt="Datadog Data Streams Monitoring Kafka Lag" style="width:100%;" >}}
 
-Through Data Stream Monitoring's out-of-the-box recommended monitors, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
+Through Data Stream Monitoring's out-of-the-box recommended monitors, you can setup monitors on metrics like consumer lag, throughput, and latency in one click.
 
 {{< img src="data_streams/dsm_recommended.png" alt="Datadog Data Streams Monitoring Recommended Monitors" style="width:100%;" >}}
 
@@ -100,10 +100,10 @@ By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect 
 
 {{< img src="data_streams/data_streams_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
-### Quickly pivot to identify root causes in infrastructure, logs, or traces 
+### Quickly pivot to identify root causes in infrastructure, logs, or traces
 
 Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra**, **Logs** or **Traces** tabs to further troubleshoot why pathway latency or consumer lag has increased.
-  
+
 {{< img src="data_streams/data_streams_infra.jpg" alt="Datadog Data Streams Monitoring Infra tab" style="width:100%;" >}}
 
 ## Further Reading

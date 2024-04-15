@@ -16,7 +16,7 @@ further_reading:
 - link: developers/libraries
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-kind: documentation
+
 title: Types de métriques
 ---
 
@@ -100,7 +100,7 @@ Si vous envoyez `X` valeurs pour la métrique HISTOGRAM `<NOM_MÉTRIQUE>` duran
 : Représente la médiane des `X` valeurs transmises lors de l'intervalle.<br>
 **Type stocké dans Datadog** : GAUGE
 
-`<NOM_MÉTRIQUE>.95percentile` 
+`<NOM_MÉTRIQUE>.95percentile`
 : Représente le 95 centile des `X` valeurs transmises lors de l'intervalle.<br>
 **Type stocké dans Datadog** : GAUGE
 

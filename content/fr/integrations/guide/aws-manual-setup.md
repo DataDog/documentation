@@ -37,7 +37,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
   tag: Blog
   text: Bonnes pratiques en matière de tagging pour votre infrastructure et vos applications
-kind: guide
+
 title: Guide de configuration manuelle d'AWS
 ---
 
@@ -55,14 +55,14 @@ Pour configurer manuellement l'intégration AWS, créez une stratégie IAM et un
 ### Générer un ID externe
 
 1. Sur la [page de configuration de l'intégration AWS][1], cliquez sur **Add AWS Account** puis sélectionnez **Manually**.
-2. Sélectionnez `Role Delegation` pour le type dʼaccès et copiez `AWS External ID`. Pour en savoir plus sur lʼID externe, lisez le [guide dʼutilisation dʼIAM][2].  
+2. Sélectionnez `Role Delegation` pour le type dʼaccès et copiez `AWS External ID`. Pour en savoir plus sur lʼID externe, lisez le [guide dʼutilisation dʼIAM][2].
   **Remarque** : lʼID externe reste disponible et nʼest pas régénéré pendant 48 heures, sauf sʼil a été explicitement modifié par un utilisateur ou si un autre compte AWS est ajouté à Datadog pendant cette période. Vous pouvez revenir à la page **Add New AWS Account** pendant cette période pour terminer le processus dʼajout de compte sans modifier lʼID externe.
 
 ### Stratégie IAM AWS pour Datadog
 Créez une stratégie IAM dédiée au rôle Datadog dans votre compte AWS en lui accordant les [autorisations nécessaires](#strategie-iam-de-l-integration-aws) pour profiter de chaque intégration AWS proposée par Datadog. Ces autorisations seront susceptibles de changer si d'autres composants sont ajoutés à une intégration.
 
 3. Créez une nouvelle stratégie dans la [console IAM][3] d'AWS.
-4. Sélectionnez lʼonglet **JSON**. Collez les [stratégies dʼautorisations](#strategie-iam-de-l-integration-aws) dans la zone de texte.  
+4. Sélectionnez lʼonglet **JSON**. Collez les [stratégies dʼautorisations](#strategie-iam-de-l-integration-aws) dans la zone de texte.
   **Remarque** : vous pouvez aussi choisir dʼajouter des éléments de [Condition][7] à la stratégie IAM. Des conditions peuvent par exemple être utilisées pour [limiter la surveillance à certaines régions][8].
 5. Cliquez sur **Next: Tags** et **Next: Review**.
 6. Nommez la stratégie `DatadogIntegrationPolicy` ou utilisez le nom de votre choix, et saisissez une description pertinente.

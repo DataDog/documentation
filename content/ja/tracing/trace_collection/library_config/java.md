@@ -11,7 +11,7 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/java/
   tag: Documentation
   text: ヘッダーを使ったトレースコンテキストの伝搬
-kind: documentation
+
 title: Java トレーシングライブラリの構成
 type: multi-code-lang
 ---
@@ -151,7 +151,7 @@ Datadog Agent とのネットワークインタラクションのタイムアウ
 **例**: `aws.service`<br>
 対応するスパンタグで特定されるよう、スパンに関連付けられたサービス名の名前を変更するために使われます
 
-`dd.trace.db.client.split-by-instance` 
+`dd.trace.db.client.split-by-instance`
 : **環境変数**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
 **デフォルト**: `false`<br>
 `true` に設定すると、db スパンにインスタンス名がサービス名として割り当てられます
@@ -263,7 +263,7 @@ JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使
 **デフォルト**: `false`<br>
 デフォルトでは、Hystrix のグループ、コマンド、サーキット状態のタグは有効になっていません。このプロパティにより有効になります。
 
-`dd.trace.servlet.async-timeout.error` 
+`dd.trace.servlet.async-timeout.error`
 : **環境変数**: `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` <br>
 **デフォルト**: `true`<br>
 デフォルトでは、長時間実行されている非同期リクエストはエラーとしてマークされます。この値を false に設定すると、すべてのタイムアウトを成功したリクエストとしてマークできます。

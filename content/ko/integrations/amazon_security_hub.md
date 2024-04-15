@@ -13,7 +13,7 @@ integration_id: amazon-security-hub
 integration_title: AWS Security Hub
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_security_hub
 public_title: Datadog-AWS Security Hub 통합
@@ -24,7 +24,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
-AWS Security Hub는 AWS의 보안 상태에 대한 종합적인 보기를 제공하며 업계의 보안 표준과 모범 사례와 비교해 사용자 환경을 점검할 수 있도록 지원합니다. 
+AWS Security Hub는 AWS의 보안 상태에 대한 종합적인 보기를 제공하며 업계의 보안 표준과 모범 사례와 비교해 사용자 환경을 점검할 수 있도록 지원합니다.
 
 이 통합은 Datadog에서 모든 AWS Security Hub 로그를 확인할 수 있도록 해줍니다.
 

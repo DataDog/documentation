@@ -1,7 +1,7 @@
 ---
 description: Découvrez comment vous lancer ainsi que les décisions clés à prendre
   dès le début.
-kind: documentation
+
 private: true
 title: Préparation du terrain
 ---
@@ -26,7 +26,7 @@ En tant que prestataire de services, vous devez d'abord déterminer comment vous
 
 ### Organisation unique ou compte multi-organisations
 
-Datadog offre la possibilité de gérer plusieurs organisations enfant à partir d'une seule organisation parent. Ce modèle de déploiement est généralement privilégié par les prestataires de services gérés, car il permet d'empêcher que les clients aient accès aux données des autres. Dans une structure multi-organisations, une organisation enfant est créée pour chaque client, et le client a uniquement accès à sa propre organisation enfant. 
+Datadog offre la possibilité de gérer plusieurs organisations enfant à partir d'une seule organisation parent. Ce modèle de déploiement est généralement privilégié par les prestataires de services gérés, car il permet d'empêcher que les clients aient accès aux données des autres. Dans une structure multi-organisations, une organisation enfant est créée pour chaque client, et le client a uniquement accès à sa propre organisation enfant.
 
 Optez pour une organisation unique si vous ne comptez pas donner à vos clients accès à Datadog et que vous n'avez pas besoin de séparer les données de chaque client.
 
@@ -42,7 +42,7 @@ Datadog vous déconseille de séparer vos ressources de développement, de test 
 
 Si vous gérez un vaste nombre d'organisations, utilisez la fonctionnalité de sous-domaines personnalisés pour améliorer votre expérience Datadog.
 
-Par défaut, l'accès aux différentes organisations Datadog se fait via les pages [https://app.datadoghq.com][2] et [https://app.datadoghq.eu][3]. Toutefois, vous pouvez configurer des sous-domaines personnalisés afin de définir une URL unique pour chaque sous-organisation. Exemple : `https://compte-a.datadoghq.com`. 
+Par défaut, l'accès aux différentes organisations Datadog se fait via les pages [https://app.datadoghq.com][2] et [https://app.datadoghq.eu][3]. Toutefois, vous pouvez configurer des sous-domaines personnalisés afin de définir une URL unique pour chaque sous-organisation. Exemple : `https://compte-a.datadoghq.com`.
 
 Pour en savoir plus, consultez la section [Sous-domaines personnalisés][4].
 

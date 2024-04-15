@@ -1,6 +1,6 @@
 ---
 title: Enabling the .NET Profiler
-kind: Documentation
+
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 60

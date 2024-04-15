@@ -1,6 +1,6 @@
 ---
 title: Cloud Security Management Identity Risks
-kind: documentation
+
 aliases:
   - /security/identity_risks/
 further_reading:

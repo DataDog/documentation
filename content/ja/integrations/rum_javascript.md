@@ -20,7 +20,7 @@ integration_id: rum-javascript
 integration_title: JavaScript
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: rum_javascript
 public_title: JavaScript
@@ -94,7 +94,7 @@ JavaScript インテグレーションには、サービスのチェック機能
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

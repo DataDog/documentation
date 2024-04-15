@@ -1,6 +1,6 @@
 ---
 title: How to Monitor UTM Campaigns in RUM
-kind: guide
+
 description: Learn how to use RUM & Session Replay to monitor the performance of UTM campaigns.
 ---
 

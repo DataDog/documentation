@@ -1,6 +1,6 @@
 ---
 title: Search RUM Events
-kind: documentation
+
 further_reading:
 - link: "/real_user_monitoring/explorer/group/"
   tag: "Documentation"
@@ -27,7 +27,7 @@ While RUM automatically captures events, you can also capture your own events. A
 | Resource   | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a webpage. It includes detailed loading timing information.                                                                                                                          |
 | Long Task  | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                                |
 
-To search through your RUM events, select an event type from the dropdown menu to the left of the search bar. 
+To search through your RUM events, select an event type from the dropdown menu to the left of the search bar.
 
 {{< img src="real_user_monitoring/explorer/search/rum-explorer-search-4.png" alt="RUM Explorer" style="width:100%;">}}
 
@@ -43,7 +43,7 @@ For more information about searching for RUM events and using time frames, see [
 
 ## Setup facets and measures
 
-All RUM events contain attributes, which are automatically collected by the RUM SDKs, and your custom attributes, which are displayed on the [event side panel][7]. 
+All RUM events contain attributes, which are automatically collected by the RUM SDKs, and your custom attributes, which are displayed on the [event side panel][7].
 
 While most automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to be able to access them in your search and [visualizations][8].
 
@@ -79,7 +79,7 @@ The value of this attribute is stored across all new RUM events. You can access 
 
 {{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Edit a measure" style="width:40%;">}}
 
-Every measure has a unit that is displayed in a column of the [RUM Explorer][9] and in [your visualizations][8]. 
+Every measure has a unit that is displayed in a column of the [RUM Explorer][9] and in [your visualizations][8].
 
 ## Search for facets
 

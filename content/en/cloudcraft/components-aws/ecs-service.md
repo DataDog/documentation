@@ -1,6 +1,6 @@
 ---
 title: "ECS Service Component"
-kind: documentation
+
 ---
 ## Overview
 

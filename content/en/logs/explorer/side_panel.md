@@ -1,6 +1,6 @@
 ---
 title: Log Side Panel
-kind: documentation
+
 description: 'Search through all of your logs and perform log analytics'
 aliases:
     - /logs/explorer/sidepanel

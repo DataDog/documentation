@@ -1,6 +1,6 @@
 ---
 title: Set Up Observability Pipelines to Send Logs in Datadog-Rehydratable Format to Amazon S3 and Datadog
-kind: Documentation
+
 further_reading:
   - link: "/observability_pipelines/production_deployment_overview/"
     tag: "Documentation"
@@ -190,7 +190,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    
+
     Replace these placeholders with the following information:
     - `<API_KEY>` with your Datadog API key.
     - `<PIPELINES_ID>` with your Observability Pipelines configuration ID.
@@ -199,7 +199,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     - `<AWS_BUCKET_NAME>` with the name of the S3 bucket storing the logs.
     - `<BUCKET_AWS_REGION>` with the [AWS region][3] of the target service.
     - `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in step 1.
-  
+
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/archives/pipeline.yaml
 [3]: https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints
@@ -208,10 +208,10 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 1. Download the [Helm chart values file][1] for AWS EKS.
 
 2. In the Helm chart, replace these placeholders with the following information:
-    - `datadog.apiKey` with your Datadog API key. 
+    - `datadog.apiKey` with your Datadog API key.
     - `datadog.pipelineId` with your Observability Pipelines configuration ID.
-    - `site` with {{< region-param key="dd_site" code="true" >}}. 
-    - `${DD_ARCHIVES_SERVICE_ACCOUNT}` in `serviceAccount.name` with the service account name. 
+    - `site` with {{< region-param key="dd_site" code="true" >}}.
+    - `${DD_ARCHIVES_SERVICE_ACCOUNT}` in `serviceAccount.name` with the service account name.
     - `${DD_ARCHIVES_BUCKET}` in `pipelineConfig.sinks.datadog_archives` with the name of the S3 bucket storing the logs.
     - `${DD_ARCHIVES_SERVICE_ACCOUNT}` in `pipelineConfig.sinks.datadog_archives` with the [AWS region][2] of the target service.
 
@@ -330,7 +330,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 
-1. Download the the [sample configuration][1]. 
+1. Download the the [sample configuration][1].
 1. Set up the Worker module in your existing Terraform using the sample configuration. Make sure to update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment in the configuration. Also, update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
 
 [1]: /resources/yaml/observability_pipelines/archives/terraform_opw_archives.tf

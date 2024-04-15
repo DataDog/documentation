@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Webhook インテグレーションを利用して Trello カードを作成する
 ---
 

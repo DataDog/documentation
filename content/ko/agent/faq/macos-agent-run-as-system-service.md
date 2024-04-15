@@ -3,7 +3,7 @@ further_reading:
 - link: /agent/
   tag: 설명서
   text: Datadog 에이전트에 대해 자세히 알아보기
-kind: faq
+
 title: MacOS에서 에이전트를 시스템 서비스로 실행하도록 설정하려면 어떻게 해야 하나요?
 ---
 

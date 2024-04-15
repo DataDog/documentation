@@ -1,6 +1,6 @@
 ---
 title: Android Log Collection
-kind: documentation
+
 description: Collect logs from your Android applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
@@ -337,15 +337,15 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
     logger.e("An error was met!")
     logger.wtf("What a Terrible Failure!")
     ```
-   
+
 6. Exceptions caught can be sent with a message:
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       try { 
-           doSomething() 
+       try {
+           doSomething()
        } catch (e: IOException) {
-           logger.e("Error while doing something", e) 
+           logger.e("Error while doing something", e)
        }
    ```
    {{% /tab %}}

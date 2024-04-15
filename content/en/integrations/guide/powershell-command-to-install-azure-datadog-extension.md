@@ -1,6 +1,6 @@
 ---
 title: Commands to install the Azure Datadog Extension
-kind: guide
+
 aliases:
   - "/integrations/faq/powershell-command-to-install-azure-datadog-extension"
 further_reading:

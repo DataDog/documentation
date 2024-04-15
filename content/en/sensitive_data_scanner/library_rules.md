@@ -1,6 +1,6 @@
 ---
 title: Library Rules
-kind: documentation
+
 further_reading:
     - link: "/sensitive_data_scanner/"
       tag: "Documentation"
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. 
+The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
 {{< whatsnext desc="The library rules are organized into the following categories:">}}
   {{< nextlink href="/sensitive_data_scanner/library_rules#secrets-and-credentials">}}Secrets and credentials{{< /nextlink >}}
@@ -22,9 +22,9 @@ These rules can also be viewed in Datadog:
 
 1. Navigate to [Sensitive Data Scanner][1].
 1. Click **Scanning Rules Library** on the top right side of the page.
-1. To add rules from the library to a scanning group:   
-  a. Select the rules you want to add.   
-  b. Click **Add Rules to Scanning Group**.   
+1. To add rules from the library to a scanning group:
+  a. Select the rules you want to add.
+  b. Click **Add Rules to Scanning Group**.
   c. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup
 
 ## Secrets and credentials

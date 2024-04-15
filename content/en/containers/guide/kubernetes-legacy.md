@@ -1,6 +1,6 @@
 ---
 title: Legacy Kubernetes versions
-kind: guide
+
 aliases:
     - /agent/kubernetes/legacy
     - /agent/faq/kubernetes-legacy

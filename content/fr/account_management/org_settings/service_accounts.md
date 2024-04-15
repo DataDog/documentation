@@ -3,7 +3,7 @@ further_reading:
 - link: https://docs.datadoghq.com/api/latest/service-accounts/
   tag: Documentation
   text: Références sur les API de comptes de service
-kind: documentation
+
 title: Comptes de service
 ---
 
@@ -15,7 +15,7 @@ Imaginons qu'un employé de votre entreprise configure un script automatisé pou
 
 ## Navigation
 
-Les comptes de service existent dans les [paramètres de l'organisation][1]. 
+Les comptes de service existent dans les [paramètres de l'organisation][1].
 
 Pour accéder aux comptes de service dans l'IU :
 
@@ -51,7 +51,7 @@ Contrairement aux adresses e-mail des utilisateurs de Datadog, celles pour les c
 
 ### Modifier un compte de service
 
-Pour modifier un compte de service, cliquez sur lʼun d'entre eux dans la liste des comptes de service. 
+Pour modifier un compte de service, cliquez sur lʼun d'entre eux dans la liste des comptes de service.
 
 1. Dans le volet latéral, cliquez sur **Edit** à côté du nom du compte de service. Une boîte de dialogue s'affiche alors.
 2. Modifiez tous les champs de votre choix. Vous pouvez modifier le nom, l'adresse e-mail, le statut et les rôles.
@@ -67,7 +67,7 @@ Pour créer une nouvelle clé d'application, suivez les étapes ci-dessous :
 
 - Cliquez sur **New Key**. Une boîte de dialogue s'affiche alors.
 - Attribuez un nom descriptif à la clé.
-- Cliquez sur **Create Key**. 
+- Cliquez sur **Create Key**.
 
 La boîte de dialogue est actualisée, ce qui permet d'afficher la clé. Copiez et collez la clé à l'emplacement de votre choix. Une fois que vous avez fermé la boîte de dialogue, vous ne pouvez plus récupérer la valeur de la clé.
 

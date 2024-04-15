@@ -1,6 +1,6 @@
 ---
 title: Enabling CSM Pro for Cloud Accounts
-kind: documentation
+
 ---
 
 Use the following instructions to enable [CSM Misconfigurations][1] for your cloud accounts. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].

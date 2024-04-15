@@ -5,7 +5,7 @@ further_reading:
 - link: /observability_pipelines/guide/custom-metrics-governance
   tag: Documentation
   text: Utiliser des pipelines d'observabilité pour contrôler vos métriques custom
-kind: documentation
+
 title: Facturation des métriques custom
 ---
 
@@ -15,7 +15,7 @@ Si une métrique n'est pas envoyée depuis l'une des [plus de {{< translate key=
 
 Le nombre de métriques custom mensuelles facturables (qui est indiqué sur la page Usage) est calculé à partir de la formule suivante : Total de métriques custom distinctes pour chaque heure d'un mois donné / nombre d'heures du mois. Cette formule permet d'obtenir une moyenne mensuelle.
 
-Les utilisateurs de Metrics without Limits™ peuvent consulter les volumes mensuels facturables pour les métriques custom _ingérées_ et _indexées_ sur leur page Usage. En savoir plus sur les métriques custom ingérées et indexées et sur la solution [Metrics without Limits™][3]. 
+Les utilisateurs de Metrics without Limits™ peuvent consulter les volumes mensuels facturables pour les métriques custom _ingérées_ et _indexées_ sur leur page Usage. En savoir plus sur les métriques custom ingérées et indexées et sur la solution [Metrics without Limits™][3].
 
 ## Calcul du nombre de métriques custom
 
@@ -77,7 +77,7 @@ Pour connaître la température en Floride, vous pouvez combiner les métriques 
 
 ### Configurer des tags et des agrégations avec Metrics without Limits™
 
-La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][3] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary. 
+La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][3] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary.
 
 - **Ingested Custom Metrics** : le volume initial de métriques custom basé sur tous les tags ingérés (qui ont été envoyés par le code).
 - **Indexed Custom Metrics** : le volume de métriques custom pouvant être interrogées sur la plateforme Datadog (en fonction des configurations Metrics without Limits™).
@@ -111,7 +111,7 @@ Par défaut, Datadog stocke la combinaison des agrégations les plus souvent int
 
 - Les métriques count/rate configurées peuvent être interrogées à l'aide d'agrégations temporelles/spatiales de type `SUM`.
 
-Vous pouvez ajouter d'autres agrégations en cas de besoin. Le nombre de métriques custom indexées dépend du nombre d'agrégations activées. 
+Vous pouvez ajouter d'autres agrégations en cas de besoin. Le nombre de métriques custom indexées dépend du nombre d'agrégations activées.
 
 En savoir plus sur [Metrics without Limits™][3].
 
@@ -162,7 +162,7 @@ Pour connaître la température en Floride, vous pouvez combiner les métriques 
 
 ### Configurer des tags et des agrégations avec Metrics without Limits™
 
-La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][3] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary. 
+La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][3] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary.
 
 - **Ingested Custom Metrics** : le volume initial de métriques custom basé sur tous les tags ingérés (qui ont été envoyés par le code).
 - **Indexed Custom Metrics** : le volume de métriques custom pouvant être interrogées sur la plateforme Datadog (en fonction des configurations Metrics without Limits™).
@@ -186,7 +186,7 @@ Pour les métriques configurées avec Metrics without Limits™ (des tags/agrég
 
 Par défaut, Datadog stocke de la façon suivante la combinaison des agrégations les plus souvent interrogées en fonction du type de métrique afin d'assurer la précision mathématique de la requête associée à la métrique que vous avez configurée :
 
-- Les métriques gauge configurées peuvent être interrogées à l'aide d'agrégations temporelles/spatiales de type `AVG/AVG`. 
+- Les métriques gauge configurées peuvent être interrogées à l'aide d'agrégations temporelles/spatiales de type `AVG/AVG`.
 
 Vous pouvez ajouter d'autres agrégations en cas de besoin. Le nombre de métriques custom indexées dépend du nombre d'agrégations activées.
 
@@ -244,7 +244,7 @@ Le tableau ci-dessous résume l'impact de l'ajout d'agrégations par centile pou
 
 ### Configurer des tags avec Metrics without Limits™
 
-La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][3] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary. 
+La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][3] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary.
 
 - **Ingested Custom Metrics** : le volume initial de métriques custom basé sur tous les tags ingérés (qui ont été envoyés par le code).
 - **Indexed Custom Metrics** : le volume de métriques custom pouvant être interrogées sur la plateforme Datadog (en fonction des configurations Metrics without Limits™).
@@ -285,7 +285,7 @@ En savoir plus sur [Metrics without Limits™][2].
 
 Les administrateurs (c'est-à-dire les utilisateurs disposant du rôle [Admin de Datadog][5]) peuvent consulter le nombre moyen mensuel de métriques custom **ingérées** et **indexées** par heure. Le tableau des principales métriques custom affiche également le nombre moyen de métriques custom **indexées** sur la [page des détails d'utilisation][6]. Consultez la documentation sur les [détails d'utilisation][7] pour en savoir plus.
 
-Pour suivre en temps réel le nombre de métriques custom associées à un nom de métrique donné, accédez à la [page Résumé des métriques][8] et cliquez sur le nom de métrique souhaité. Vous pouvez visualiser le nombre de métriques custom **ingérées** et **indexées** dans le volet latéral des détails de la métrique. 
+Pour suivre en temps réel le nombre de métriques custom associées à un nom de métrique donné, accédez à la [page Résumé des métriques][8] et cliquez sur le nom de métrique souhaité. Vous pouvez visualiser le nombre de métriques custom **ingérées** et **indexées** dans le volet latéral des détails de la métrique.
 {{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Volet latéral affichant le résumé des métriques" style="width:80%;">}}
 
 

@@ -1,6 +1,6 @@
 ---
 title: Identify Synthetic Bots
-kind: documentation
+
 description: Identify incoming Synthetic requests
 aliases:
 - /synthetics/identify_synthetics_bots
@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Some parts of your systems may not be available to robots without the appropriate identification. You may also want to avoid collecting analytics from Datadog robots. 
+Some parts of your systems may not be available to robots without the appropriate identification. You may also want to avoid collecting analytics from Datadog robots.
 
 Try a combination of the following methods to detect Datadog's Synthetic Monitoring robots.
 
@@ -33,7 +33,7 @@ Use the **Synthetic Monitoring IP ranges** corresponding to each Datadog managed
 https://ip-ranges.{{< region-param key="dd_site" >}}/synthetics.json
 ```
 
-The listed IPs use the Classless Inter-Domain Routing (CIDR) notation and may require conversion to IPv4 address ranges before use. Except in the case of new managed locations IPs, the listed IPs rarely change. 
+The listed IPs use the Classless Inter-Domain Routing (CIDR) notation and may require conversion to IPv4 address ranges before use. Except in the case of new managed locations IPs, the listed IPs rarely change.
 
 If you want to be alerted when the listed IPs change, create an API test on the endpoint above with a JSONPath assertion such as `$.synthetics['prefixes_ipv4_by_location']['aws:ap-northeast-1'].length`.
 
@@ -97,7 +97,7 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 }
 ```
 
-If you use the browser variable to identify Synthetic bots on Firefox, Datadog cannot guarantee that the browser variable is set before your code executes. 
+If you use the browser variable to identify Synthetic bots on Firefox, Datadog cannot guarantee that the browser variable is set before your code executes.
 
 ## Cookies
 

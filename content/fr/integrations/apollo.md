@@ -21,7 +21,7 @@ integration_id: apollo
 integration_title: Apollo
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: sachin@apollographql.com
 manifest_version: 1.0.0
 metric_prefix: apollo.
@@ -57,7 +57,7 @@ Studio transfère les métriques suivantes à Datadog :
   - `apollo.operations.latency.max`
   - `apollo.operations.latency.avg`
 
-Ces métriques sont agrégées selon des intervalles de 60 secondes et taguées avec le nom de l'opération GraphQL, au format `operation:<nom-requête>`. Les signatures de requêtes uniques avec le même nom d'opération sont fusionnées, et les requêtes sans nom d'opération sont ignorées. 
+Ces métriques sont agrégées selon des intervalles de 60 secondes et taguées avec le nom de l'opération GraphQL, au format `operation:<nom-requête>`. Les signatures de requêtes uniques avec le même nom d'opération sont fusionnées, et les requêtes sans nom d'opération sont ignorées.
 
 Ces métriques sont également taguées avec l'ID de graphique Studio, `graph:<id-graphique>`, et le nom de la variante associée, `variant:<nom-variante>`. Ainsi, plusieurs graphiques Studio peuvent envoyer des données au même compte Datadog. Si vous n'avez pas défini de nom de variante, la valeur `current` est utilisée.
 

@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-kind: documentation
+
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/troubleshooting/"
   tag: "OpenTelemetry"
@@ -15,7 +15,7 @@ When deploying in Kubernetes, if the hostname reported by Datadog does not match
 
 To troubleshoot, make sure your application deployment and Collector are configured correctly.
 
-Configure the `k8s.pod.ip` attribute for your application deployment: 
+Configure the `k8s.pod.ip` attribute for your application deployment:
 
 ```yaml
 env:

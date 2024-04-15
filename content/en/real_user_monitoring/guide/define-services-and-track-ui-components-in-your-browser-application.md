@@ -1,6 +1,6 @@
 ---
 title: Define Services And Track UI Components In Your Browser Application
-kind: guide
+
 disable_toc: false
 further_reading:
 - link: "/real_user_monitoring/browser/"

@@ -10,7 +10,7 @@ further_reading:
 - link: /mobile_app_testing/mobile_app_tests/advanced_options
   tag: Documentation
   text: En savoir plus sur les options avancées des tests mobiles
-kind: documentation
+
 title: Étapes des tests d'application mobile
 ---
 
@@ -25,7 +25,7 @@ title: Étapes des tests d'application mobile
 
 ## Présentation
 
-Les étapes représentent des interactions ou assertions enregistrées individuellement à exécuter dans votre test. Pour définir une étape, cliquez sur **Start Recording** et interagissez avec l'appareil comme vous le feriez en temps normal. Vous pouvez également créer manuellement une étape en cliquant sur **Assertions** ou sur **Special Actions**. 
+Les étapes représentent des interactions ou assertions enregistrées individuellement à exécuter dans votre test. Pour définir une étape, cliquez sur **Start Recording** et interagissez avec l'appareil comme vous le feriez en temps normal. Vous pouvez également créer manuellement une étape en cliquant sur **Assertions** ou sur **Special Actions**.
 
 ## Lancer un appareil
 

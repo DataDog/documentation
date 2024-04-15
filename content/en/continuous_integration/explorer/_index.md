@@ -1,6 +1,6 @@
 ---
 title: Continuous Integration Visibility Explorer
-kind: documentation
+
 description: Learn about the CI Visibility Explorer for test runs and pipeline executions.
 further_reading:
   - link: "/continuous_integration/pipelines/"

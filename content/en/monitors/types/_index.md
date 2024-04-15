@@ -1,6 +1,6 @@
 ---
 title: Monitor Types
-kind: documentation
+
 description: "Monitor Types"
 aliases:
   - /monitors/monitor_types/

@@ -1,6 +1,6 @@
 ---
 title: Datadog Windows Agent User
-kind: guide
+
 aliases:
   - /agent/faq/windows-agent-ddagent-user/
 algolia:

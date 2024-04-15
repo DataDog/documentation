@@ -17,7 +17,7 @@ further_reading:
   tag: Blog
   text: Détecter les checks de qualité ayant échoué avec Datadog et les règles de
     protection de déploiement de GitHub
-kind: guide
+
 title: Contrôler la progression de vos déploiements GitHub Actions grâce aux monitors
   Datadog
 ---
@@ -58,8 +58,8 @@ Suivez [ces instructions][3] pour créer et configurer un monitor Datadog afin d
 Vous pouvez utiliser plusieurs monitors distincts pour effectuer des contrôles de qualité. Toutefois Datadog vous recommande plutôt d'utiliser des [monitors composite][4], car ils vous permettent de contrôler la progression de déploiements basés sur plusieurs signaux à l'aide d'un seul monitor. Pour en savoir plus, consultez la section [Types de monitors][5].
 
 Vous devez appliquer les tags suivants à l'ensemble des monitors qui serviront à créer des murs de qualité :
-- `git_env` 
-- `git_repo` 
+- `git_env`
+- `git_repo`
 
 Le tag `git_repo` doit contenir le nom du propriétaire du référentiel au format `<PROPRIÉTAIRE>/<RÉFÉRENTIEL>`. Exemple : `Datadog/my-repo`.
 
@@ -80,10 +80,10 @@ Pour vérifier le niveau d'utilisation du processeur et/ou de la mémoire de vot
 [1]: /fr/integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [2]: /fr/integrations/github/
 [3]: /fr/monitors/configuration/?tab=thresholdalert
-[4]: /fr/monitors/types/composite/ 
+[4]: /fr/monitors/types/composite/
 [5]: /fr/monitors/types/
 [6]: /fr/monitors/settings/
 [7]: /fr/monitors/types/apm/?tab=apmmetrics
-[8]: /fr/monitors/types/integration/?tab=checkalert 
+[8]: /fr/monitors/types/integration/?tab=checkalert
 [9]: /fr/monitors/types/metric/?tab=threshold
 [10]: https://github.blog/2023-04-20-announcing-github-actions-deployment-protection-rules-now-in-public-beta/

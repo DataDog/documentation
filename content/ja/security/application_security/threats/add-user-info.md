@@ -9,7 +9,7 @@ further_reading:
 - link: /security/application_security/threats/library_configuration/
   tag: ドキュメント
   text: その他のセットアップに関する注意と構成オプション
-kind: documentation
+
 title: ユーザーモニタリングと保護
 ---
 
@@ -123,7 +123,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // 早急にリクエストハンドラーを中止して、ユーザーをブロックする必要があります。
     // ブロック応答は、appsec ミドルウェアによって自動的に処理され、送信されます。
-    return 
+    return
   }
 }
 ```
@@ -478,7 +478,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* 指定されたユーザー ID が存在するかどうか */
-  metadata := /* オプションの追加イベントメタデータ */ 
+  metadata := /* オプションの追加イベントメタデータ */
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
 ```

@@ -1,6 +1,6 @@
 ---
 title: Cluster Check Runners
-kind: documentation
+
 aliases:
 - /agent/cluster_agent/clusterchecksrunner
 - /containers/cluster_agent/clusterchecksrunner
@@ -16,7 +16,7 @@ further_reading:
   text: "Cluster Checks"
 ---
 
-The Cluster Agent can dispatch out two types of checks: [endpoint checks][1] and [cluster checks][2]. The checks are slightly different. 
+The Cluster Agent can dispatch out two types of checks: [endpoint checks][1] and [cluster checks][2]. The checks are slightly different.
 
 Endpoint checks are dispatched specifically to the regular Datadog Agent on the same node as the application pod endpoints. Executing endpoint checks on the same node as the application endpoint allows proper tagging of the metrics.
 

@@ -1,6 +1,6 @@
 ---
 title: "Nouveautés de l'Agent\_v6"
-kind: faq
+
 aliases:
   - /fr/agent/faq/agent-v6-changes
 further_reading:
@@ -178,7 +178,7 @@ Dans les anciennes versions, les logs étaient écrits dans différents fichiers
 
 ## Interface
 
-L'interface de ligne de commande pour l'Agent v6 est basée sur un système de sous-commandes. Pour consulter la liste des sous-commandes disponibles, exécutez ce qui suit : 
+L'interface de ligne de commande pour l'Agent v6 est basée sur un système de sous-commandes. Pour consulter la liste des sous-commandes disponibles, exécutez ce qui suit :
 ```shell
 <BINAIRE_AGENT> --help
 ```

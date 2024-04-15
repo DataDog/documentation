@@ -1,6 +1,6 @@
 ---
 title: Cloud Resources Schema Reference
-kind: documentation
+
 type: schema
 aliases:
   - /security_platform/cspm/custom_rules/schema

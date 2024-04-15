@@ -16,7 +16,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
   tag: Blog
   text: 'DRUIDS : l''acronyme qui définit la conception chez Datadog'
-kind: documentation
+
 title: Débuter avec Datadog
 ---
 

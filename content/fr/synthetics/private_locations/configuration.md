@@ -7,7 +7,7 @@ further_reading:
 - link: synthetics/private_locations/dimensioning
   tag: Documentation
   text: Dimensionner vos emplacements privés
-kind: documentation
+
 title: Configuration des emplacements privés
 ---
 

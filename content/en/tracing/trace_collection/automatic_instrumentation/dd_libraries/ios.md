@@ -1,6 +1,6 @@
 ---
 title: Tracing iOS Applications
-kind: documentation
+
 aliases:
 - /tracing/setup_overview/setup/ios/
 - /tracing/setup/ios/

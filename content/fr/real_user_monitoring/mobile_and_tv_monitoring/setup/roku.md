@@ -16,7 +16,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
   tag: Blog
   text: Surveiller vos canaux Roku avec la solution RUM de Datadog
-kind: documentation
+
 title: Configuration de la surveillance des canaux Roku avec RUM
 type: multi-code-lang
 ---
@@ -62,7 +62,7 @@ Vérifiez que vous disposez bien d'un sous-dossier `roku_modules/datadogroku` da
 
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Créer une application RUM pour Roku dans Datadog" style="width:90%;">}}
 
-Pour assurer la sécurité de vos données, vous devez utiliser un token client. Si vous vous contentez d'utiliser des [clés d'API Datadog][5] pour configurer la bibliothèque `dd-sdk-roku`, ces clés seront exposées côté client dans le code BrightScript du canal Roku. 
+Pour assurer la sécurité de vos données, vous devez utiliser un token client. Si vous vous contentez d'utiliser des [clés d'API Datadog][5] pour configurer la bibliothèque `dd-sdk-roku`, ces clés seront exposées côté client dans le code BrightScript du canal Roku.
 
 Pour en savoir plus sur la configuration d'un token client, consultez [la documentation à ce sujet][6].
 
@@ -195,7 +195,7 @@ Les actions RUM représentent les interactions de vos utilisateurs avec votre c
 
 ```brightscript
     targetName = "playButton" ' le nom du nœud SG avec lequel l'utilisateur a interagi
-    actionType = "click" ' le type d'interaction, doit correspondre à « click », « back » ou « custom » 
+    actionType = "click" ' le type d'interaction, doit correspondre à « click », « back » ou « custom »
     m.global.datadogRumAgent.callfunc("addAction", { target: targetName, type: actionType})
 ```
 

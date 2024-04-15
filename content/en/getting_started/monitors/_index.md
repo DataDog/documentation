@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Monitors
-kind: documentation
+
 aliases:
   - /getting_started/application/monitors
 further_reading:
@@ -25,7 +25,7 @@ further_reading:
 
 With Datadog alerting, you have the ability to create monitors that actively check metrics, integration availability, network endpoints, and more. Use monitors to draw attention to the systems that require observation, inspection, and intervention.
 
-This page is an introduction to monitors and outlines instructions for setting up a metric monitor. A [metric monitor][1] provides alerts and notifications if a specific metric is above or below a certain threshold. For example, a metric monitor can alert you when disk space is low. 
+This page is an introduction to monitors and outlines instructions for setting up a metric monitor. A [metric monitor][1] provides alerts and notifications if a specific metric is above or below a certain threshold. For example, a metric monitor can alert you when disk space is low.
 
 This guide covers:
 - Monitor creation and configuration
@@ -48,7 +48,7 @@ To create a monitor, navigate to **[Monitors > New Monitor > Metric][5]**.
 The main components of monitor configuration are:
 - **Detection method**: How are you measuring what will be alerted on? Are you concerned about a metric value crossing a threshold, a change in a value crossing a threshold, an anomalous value, or something else?
 - **Define the metric**: What value are you monitoring to alert? The disk space in your system? The number of errors encountered for logins?
-- **Alert conditions**: When does an engineer need to be woken up? 
+- **Alert conditions**: When does an engineer need to be woken up?
 - **Notification**: What information needs to be in the alert?
 
 ### Choose the detection method

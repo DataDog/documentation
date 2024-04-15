@@ -4,7 +4,7 @@ aliases:
 cascade:
 - private: true
 disable_sidebar: true
-kind: faq
+
 title: Agent のよくあるご質問
 ---
 

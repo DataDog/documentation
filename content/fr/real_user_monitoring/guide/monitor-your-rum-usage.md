@@ -11,13 +11,13 @@ further_reading:
 - link: /monitors/
   tag: Documentation
   text: En savoir plus sur les monitors
-kind: guide
+
 title: Surveiller votre utilisation du RUM
 ---
 
 ## Présentation
 
-Le but de ce guide est dʼexpliquer comment surveiller votre utilisation du RUM avec : 
+Le but de ce guide est dʼexpliquer comment surveiller votre utilisation du RUM avec :
 
 - La métrique relative à lʼestimation de votre utilisation du RUM
 - Les évènements du RUM stockés via votre compte
@@ -32,9 +32,9 @@ Cette métrique est gratuite et disponible pendant 15 mois.
 
 Par défaut, vous pouvez utiliser la [métrique][1] `datadog.estimated_usage.rum.sessions` pour surveiller le nombre de sessions dʼutilisateurs avec les informations suivantes :
 
-- ID dʼapplication : identifie lʼapplication disponible sur la page **Présentation de l'application** 
+- ID dʼapplication : identifie lʼapplication disponible sur la page **Présentation de l'application**
 - Service : contexte au sein dʼune application RUM appartenant à une certaine équipe.
-- Source : le langage de programmation ou le cadre d'application utilisé. 
+- Source : le langage de programmation ou le cadre d'application utilisé.
 - SKU : l'abonnement payant comprenant la session.
 
 ### Le suivi du nombre de sessions pour une application
@@ -44,7 +44,7 @@ Pour suivre le nombre de sessions générées par une application RUM, accédez 
 1. Cliquez sur **+ Add Widgets** pour ouvrir le volet latéral relatif aux widgets et aux apps.
 2. Sélectionnez **Timeseries** sous **Graphs**.
 3. Dans la section **Graph your data**, sélectionnez **Metrics** et `datadog.estimated_usage.rum.sessions` dans les menus déroulants.
-4. Dans la clause `from`, sélectionnez lʼID dʼapplication que vous souhaitez suivre. LʼID dʼapplication du RUM est disponible à la page **Présentation de lʼapplication** qui lui est dédiée. 
+4. Dans la clause `from`, sélectionnez lʼID dʼapplication que vous souhaitez suivre. LʼID dʼapplication du RUM est disponible à la page **Présentation de lʼapplication** qui lui est dédiée.
 5. Définissez vos préférences en matière dʼaffichage et saisissez un nom pour votre graphique.
 6. Cliquez sur **Save**.
 
@@ -55,7 +55,7 @@ Pour suivre le nombre de sessions facturées dans le cadre dʼun SKU de RUM, acc
 1. Cliquez sur **+ Add Widgets** pour ouvrir le volet latéral relatif aux widgets et aux apps
 2. Sélectionnez **Timeseries** sous **Graphs**.
 3. Dans la section **Graph your data**, sélectionnez **Metrics** et `datadog.estimated_usage.rum.sessions` dans les menus déroulants.
-4. Dans la clause `sum`, sélectionnez le tag `sku` dans le menu déroulant 
+4. Dans la clause `sum`, sélectionnez le tag `sku` dans le menu déroulant
 5. Définissez vos préférences en matière dʼaffichage et saisissez un nom pour votre graphique.
 6. Cliquez sur **Save**.
 

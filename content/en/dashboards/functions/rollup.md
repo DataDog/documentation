@@ -1,6 +1,6 @@
 ---
 title: Rollup
-kind: documentation
+
 aliases:
     - /graphing/functions/rollup/
 ---
@@ -10,7 +10,7 @@ Every metric query is inherently aggregated. However, appending the `.rollup()` 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
 
-To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor: 
+To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor:
 
 {{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
 
@@ -62,7 +62,7 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
 
 For more details about how to use `.as_count()` and `.as_rate()` see the [Visualize StatsD metrics][3] blog post, or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
 
-## Rollup with calendar aligned queries 
+## Rollup with calendar aligned queries
 
 {{< img src="dashboards/functions/rollup/calendar_aligned_queries.png" alt="calendar_aligned_queries" style="width:100%;" >}}
 

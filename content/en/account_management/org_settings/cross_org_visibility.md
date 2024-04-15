@@ -1,13 +1,13 @@
 ---
 title: Cross-Organization Visibility
-kind: documentation
+
 private: true
 is_beta: true
 ---
 
 {{< callout url="#" header="false" btn_hidden="true">}}
   Cross-organization visibility is in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in the feature, reach out to your Technical Account Manager or Customer Success Manager.
-{{< /callout >}} 
+{{< /callout >}}
 
 
 ## Overview
@@ -16,8 +16,8 @@ Some companies rely on multiple Datadog [organizations][1]  to isolate data for 
 
 Cross-organization visibility allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
 
-This document explains: 
-- What cross-organization visibility [enables](#capabilities) 
+This document explains:
+- What cross-organization visibility [enables](#capabilities)
 - How to [expose](#create-a-connection) data across organizations
 - How to create a [Dashboard and Notebook widget](#create-a-widget-with-cross-organization-data) with data from other organizations
 
@@ -133,7 +133,7 @@ The `cross_org_uuids` parameter is optional. If you omit `cross_org_uuids`, the 
 }
 {{< /highlight >}}
 
-Note the `cross_org_uuids` parameter in the JSON widget definition payload. 
+Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 - This parameter is optional. If omitted, the query runs on the organization on which the widget is defined.
 - Use the organization identifier, which you can recover from the [Organizations endpoint][9], to identify the organization on which the query runs.
 - Though this parameter accepts an array, the array must contain only one element. Adding multiple elements to the `cross_org_uuids` array results in a 400 error.

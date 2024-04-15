@@ -1,6 +1,6 @@
 ---
 title: Metrics Types
-kind: documentation
+
 aliases:
     - /developers/metrics/counts/
     - /developers/metrics/distributions/
@@ -102,7 +102,7 @@ If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time in
 : Represents the median of those `X` values in the time interval.<br>
 **Datadog In-App Type**: GAUGE
 
-`<METRIC_NAME>.95percentile` 
+`<METRIC_NAME>.95percentile`
 : Represents the 95th percentile of those `X` values in the time interval.<br>
 **Datadog In-App Type**: GAUGE
 

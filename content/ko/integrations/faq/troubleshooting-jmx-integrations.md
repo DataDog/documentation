@@ -3,7 +3,7 @@ further_reading:
 - link: /integrations/java/
   tag: 설명서
   text: Java 통합
-kind: faq
+
 title: JMX 통합 트러블슈팅
 ---
 
@@ -30,7 +30,7 @@ java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l l
   * `/var/log/datadog/jmxfetch.log` 내용
   * YAML 통합 복사본.
 * `ps aux | grep jmxfetch` 출력
-* `sudo -u dd-agent datadog-agent jmx list everything -l debug` 출력(`--flare` 추가에는 버전 6.26.x/7.26.x 플레어 출력 포함). 
+* `sudo -u dd-agent datadog-agent jmx list everything -l debug` 출력(`--flare` 추가에는 버전 6.26.x/7.26.x 플레어 출력 포함).
 
 [1]: /ko/agent/troubleshooting/send_a_flare/?tab=agentv6v7
 [2]: /ko/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
@@ -69,13 +69,13 @@ java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l l
 
 **참조**:
 
-- 기본적으로 이와 같은 명령은 구성된 JMX 점검 모두에서 실행됩니다. 특정 점검에서만 실행되도록 명령을 제한하려면 `--checks`를 사용하세요. 다음 예를 참고하세요. 
+- 기본적으로 이와 같은 명령은 구성된 JMX 점검 모두에서 실행됩니다. 특정 점검에서만 실행되도록 명령을 제한하려면 `--checks`를 사용하세요. 다음 예를 참고하세요.
 
   ```shell
   sudo -u dd-agent datadog-agent jmx list collected --checks tomcat
   ```
 
-- 에이전트 v6.26.+/ v7.26+의 경우, `--flare`는 위 명령의 출력을 `/var/log/datadog/jmxinfo/` 아래에 쓰며, 플레어에 포함됩니다. 
+- 에이전트 v6.26.+/ v7.26+의 경우, `--flare`는 위 명령의 출력을 `/var/log/datadog/jmxinfo/` 아래에 쓰며, 플레어에 포함됩니다.
 
   ```shell
   sudo -u dd-agent datadog-agent jmx list everything -l debug --flare

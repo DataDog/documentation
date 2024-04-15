@@ -14,7 +14,7 @@ integration_id: ''
 integration_title: Amazon FSx
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_fsx
 public_title: Datadog-Amazon FSx 통합
@@ -38,7 +38,7 @@ Amazon FSx는 완전 관리형 서비스로, NetApp ONTAP, OpenZFS, Windows File
 ### 메트릭 수집
 
 1. [AWS 통합 페이지][2]에서 `FSx`가 `Metric Collection` 탭 아래 활성화되어 있는지 확인하세요.
-2. Amazon FSx 메트릭을 수집하려면 [Datadog IAM 정책][3]에 해당 권한을 추가합니다. 
+2. Amazon FSx 메트릭을 수집하려면 [Datadog IAM 정책][3]에 해당 권한을 추가합니다.
 
     | AWS 권한                          | 설명                                                                                                                                                                                                                                             |
     | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -57,7 +57,7 @@ Amazon FSx는 완전 관리형 서비스로, NetApp ONTAP, OpenZFS, Windows File
 2. 이미 하지 않은 경우 [Datadog 로그 수집 AWS 람다 함수][4](버전 3.35.0 이상)를 설정하세요.
 3. 람다 함수가 설치되면 AWS 콘솔의 `/aws/fsx/windows` 클라우드와치(CloudWatch) 로그 그룹에서 수동으로 트리거를 추가할 수 있습니다.
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="CloudWatch 로그 그룹" popup="true" style="width:70%;">}}
-   해당되는 클라우드와치(CloudWatch) 로그 그룹을 선택하고 필터 이름(또는 필터를 빈 상태로 둠)과 트리거를 차례로 추가합니다. 
+   해당되는 클라우드와치(CloudWatch) 로그 그룹을 선택하고 필터 이름(또는 필터를 빈 상태로 둠)과 트리거를 차례로 추가합니다.
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="CloudWatch 트리거" popup="true" style="width:70%;">}}
 4. [Datadog 로그 섹션][6]으로 이동해 로그 탐색을 시작해보세요!
 
@@ -66,7 +66,7 @@ Amazon FSx는 완전 관리형 서비스로, NetApp ONTAP, OpenZFS, Windows File
 
 #### FSx API 정책
 
-Amazon FSx는 사용자, 역할, AWS 서비스별로 모든 FSx 작업을 모두 추적하는 AWS CloudTrail과 통합되어 있습니다. 
+Amazon FSx는 사용자, 역할, AWS 서비스별로 모든 FSx 작업을 모두 추적하는 AWS CloudTrail과 통합되어 있습니다.
 Datadog의 [CloudTrail 통합][9]을 활성화해 AWS 계정에서 모든 FSx API 호출을 모니터링하세요.
 
 ### 메트릭

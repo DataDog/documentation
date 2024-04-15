@@ -1,6 +1,6 @@
 ---
 title: Datadog Service Catalog
-kind: documentation
+
 aliases:
   - /tracing/faq/service_catalog/
   - /tracing/services/services_list/
@@ -45,7 +45,7 @@ algolia:
 
 ## Overview
 
-Datadog [Service Catalog][1] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, cost allocation, and much more. It makes it easy for organizations to achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. 
+Datadog [Service Catalog][1] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, cost allocation, and much more. It makes it easy for organizations to achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place.
 
 ### Use cases
 
@@ -53,7 +53,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 - Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries.
 - As you instrument more applications across your environments, they are automatically added to the Service Catalog.
 
-#### Dependencies mapping and management 
+#### Dependencies mapping and management
 - Document and track all of your upstream and downstream dependencies automatically with application telemetries collected by APM, USM, and RUM.
 - Manually declare dependency relationships across components (available through [metadata schema v3.0][8]).
 - Understand and assess performance impacts across teams and services.
@@ -63,12 +63,12 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 - Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
 - Understanding trends and identifying inefficiencies in the costs related to your services.
 
-#### Knowledge sharing 
+#### Knowledge sharing
 - Locate information without navigating through numerous repos, channels, or documentation pages.
 - Save time searching for runbooks or wiki pages when onboarding new team members.
 - Leverage real-time, automatically-generated topology maps to understand system architecture.
 
-#### Evaluate monitoring coverage  
+#### Evaluate monitoring coverage
 - Detecting which services aren’t reporting observability data or having that data monitored.
 - Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
 - Spotting issues like missing SLOs, monitors, or services without ownership.
@@ -125,7 +125,7 @@ The type of the service can be one of:
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 
 ### Updating service type and language
-With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
+With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them.
 
 ## Changing service color
 

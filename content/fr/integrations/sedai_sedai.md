@@ -24,7 +24,7 @@ integration_id: sedai-sedai-license
 integration_title: Sedai
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -100,7 +100,7 @@ tile:
 
 ## Présentation
 
-Sedai est une plateforme cloud autonome qui gère de façon proactive des environnements de production, afin d'éviter tout problème, de gagner en disponibilité, d'améliorer les performances et de réduire les coûts liés au cloud. Cet outil de SRE détecte, hiérarchise et analyse à votre place les données de surveillance, afin de modifier de façon autonome et sécurisée les environnements de production sans appliquer le moindre seuil. 
+Sedai est une plateforme cloud autonome qui gère de façon proactive des environnements de production, afin d'éviter tout problème, de gagner en disponibilité, d'améliorer les performances et de réduire les coûts liés au cloud. Cet outil de SRE détecte, hiérarchise et analyse à votre place les données de surveillance, afin de modifier de façon autonome et sécurisée les environnements de production sans appliquer le moindre seuil.
 
 Associez la licence logicielle de Sedai à l'intégration Datadog pour recevoir dans la plateforme Datadog des notifications à propos des mesures prises de façon autonome par Sedai dans vos environnements de production.
 

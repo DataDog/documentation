@@ -1,7 +1,7 @@
 ---
 code_lang: ruby
 code_lang_weight: 30
-kind: documentation
+
 title: Exigences de compatibilité Ruby
 type: multi-code-lang
 ---
@@ -19,7 +19,7 @@ Ces versions sont prises en charge sur les architectures suivantes :
 - Alpine Linux (musl) x86-64, aarch64
 - macOS (Darwin) x86-64, arm64
 
-Vous pouvez surveiller la sécurité de vos applications Ruby exécutées dans Docker, Kubernetes, AWS ECS et AWS Fargate. 
+Vous pouvez surveiller la sécurité de vos applications Ruby exécutées dans Docker, Kubernetes, AWS ECS et AWS Fargate.
 
 ### Frameworks pris en charge
 

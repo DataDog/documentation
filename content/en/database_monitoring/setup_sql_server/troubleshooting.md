@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting DBM Setup for SQL Server
-kind: documentation
+
 description: Troubleshoot Database Monitoring setup for SQL Server
 ---
 

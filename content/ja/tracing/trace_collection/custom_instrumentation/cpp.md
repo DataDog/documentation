@@ -13,7 +13,7 @@ further_reading:
 - link: tracing/visualization/
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
-kind: documentation
+
 title: Datadog ライブラリを使った C++ カスタムインスツルメンテーション
 type: multi-code-lang
 ---

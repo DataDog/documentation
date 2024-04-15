@@ -1,6 +1,6 @@
 ---
 title: Getting Started with AWS
-kind: documentation
+
 further_reading:
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'
@@ -107,13 +107,13 @@ Before getting started, ensure you have the following prerequisites:
 
 2. Go to the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
 
-3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
-    a. Select the AWS regions to integrate with.  
-    b. Add your Datadog [API key][9].  
-    c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
+3. Configure the integration's settings under the **Automatically using CloudFormation** option.
+    a. Select the AWS regions to integrate with.
+    b. Add your Datadog [API key][9].
+    c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].
     d. Optionally, enable [Cloud Security Management Misconfigurations][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
-5. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
+5. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
 
 6. Check the required boxes from AWS and click **Create stack**. This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.

@@ -1,6 +1,6 @@
 ---
 title: Mobile App Test Steps
-kind: documentation
+
 description: Learn how to automatically record and manually set steps in a mobile test recording.
 aliases:
 - /mobile_testing/mobile_app_tests/steps
@@ -24,19 +24,19 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
- 
+
 
 ## Overview
 
-Steps represent individually recorded interactions or assertions that you want to execute in your test. To define a step, click **Start Recording** and interact with the device as you would normally, or create a step manually by clicking **Assertions** or **Special Actions**. 
+Steps represent individually recorded interactions or assertions that you want to execute in your test. To define a step, click **Start Recording** and interact with the device as you would normally, or create a step manually by clicking **Assertions** or **Special Actions**.
 
 ## Launch a device
 
-To start recording and adding steps, select a device to launch a mobile app test from the dropdown menu and click **Launch Device**. 
+To start recording and adding steps, select a device to launch a mobile app test from the dropdown menu and click **Launch Device**.
 
 {{< img src="mobile_app_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:60%" >}}
 
-Select **Show only available devices. Available devices load faster** to see the most available devices for shorter testing wait times. 
+Select **Show only available devices. Available devices load faster** to see the most available devices for shorter testing wait times.
 
 ### Notifications
 
@@ -67,7 +67,7 @@ To create a step, select an assertion type:
 
 #### Test an element's content
 
-Create this assertion step to have your mobile app test select a page element and check if it contains a specific value. 
+Create this assertion step to have your mobile app test select a page element and check if it contains a specific value.
 
 {{% /tab %}}
 {{% tab "Test Active Screen Content" %}}
@@ -85,7 +85,7 @@ Create this assertion step to have your mobile app test confirm that the text yo
 
 ### Special actions
 
-In addition to automatically recording steps based on your device interactions, you can also manually create steps by clicking **Special Actions**. 
+In addition to automatically recording steps based on your device interactions, you can also manually create steps by clicking **Special Actions**.
 
 {{< img src="mobile_app_testing/special_actions.png" alt="Choose an action type to add an assertion step" style="width:60%;" >}}
 
@@ -111,7 +111,7 @@ To see all available variables on manually added steps, type `{{` in the input f
 
 {{< img src="mobile_app_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:25%" >}}
 
-To use a variable on automatically recorded steps, add a step name and specify the variable value to input the variable value while recording. 
+To use a variable on automatically recorded steps, add a step name and specify the variable value to input the variable value while recording.
 
 #### Scroll
 
@@ -159,7 +159,7 @@ To use an existing mobile app test as a subtest, click **Subtest**, select a mob
 
 {{< img src="mobile_app_testing/example_subtest.png" alt="Select a mobile test to add as a subtest" style="width:60%" >}}
 
-In order to override variables from subtests in parent tests, ensure the variables created at the parent test level have the same names as the variables present in the subtest. A variable always uses the value that was first assigned to it. 
+In order to override variables from subtests in parent tests, ensure the variables created at the parent test level have the same names as the variables present in the subtest. A variable always uses the value that was first assigned to it.
 
 For more information about advanced options for subtests, see [Advanced Options for Mobile App Test Steps][5].
 
@@ -167,9 +167,9 @@ If it does not make sense for you to run your subtest independently, you can pau
 
 ## Manage step order
 
-Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
+Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps.
 
-1. Hover over a recorded test step and click the **Set Cursor** icon. A blue line appears above your test step. 
+1. Hover over a recorded test step and click the **Set Cursor** icon. A blue line appears above your test step.
 2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
 3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
 

@@ -1,6 +1,6 @@
 ---
 title: Connect RUM and Traces
-kind: documentation
+
 aliases:
 - /real_user_monitoring/connect_rum_and_traces
 further_reading:
@@ -463,10 +463,10 @@ RUM supports several propagator types to connect resources with backends that ar
     const config = new DatadogProviderConfiguration(
         // ...
     );
-    config.firstPartyHosts = [{ 
-        match: "example.com", 
+    config.firstPartyHosts = [{
+        match: "example.com",
         propagatorTypes: [
-            PropagatorType.TRACECONTEXT, 
+            PropagatorType.TRACECONTEXT,
             PropagatorType.DATADOG
         ]
     }];

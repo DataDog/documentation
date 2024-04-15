@@ -1,6 +1,6 @@
 ---
 title: "Internet Gateway Component"
-kind: documentation
+
 ---
 ## Overview
 

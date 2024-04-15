@@ -1,6 +1,6 @@
 ---
 title: OTLP Metrics Types
-kind: documentation
+
 further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'
@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-The Datadog Agent and the OpenTelemetry Collector Datadog exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications. 
+The Datadog Agent and the OpenTelemetry Collector Datadog exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications.
 
 The following OTLP metric types can be ingested by the Datadog Agent and the OpenTelemetry Collector Datadog exporter:
 - Sums
@@ -61,7 +61,7 @@ The default mapping is as follows:
 
 An OTLP Gauge represents a sampled value at a given time. Only the last value on a given time window is included in the OTLP metrics.
 
-OTLP Gauges are mapped to Datadog Gauges, since they do not provide an aggregation semantic. Both integer and floating-point Gauge data points are mapped to floating point numbers in the Datadog format. 
+OTLP Gauges are mapped to Datadog Gauges, since they do not provide an aggregation semantic. Both integer and floating-point Gauge data points are mapped to floating point numbers in the Datadog format.
 
 {{% /tab %}}
 {{% tab "Histogram" %}}

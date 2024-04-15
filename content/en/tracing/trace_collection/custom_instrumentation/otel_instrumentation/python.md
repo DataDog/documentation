@@ -1,6 +1,6 @@
 ---
 title: Custom Instrumentation of Python Applications with the OpenTelemetry API
-kind: documentation
+
 description: 'Instrument your Python application with OpenTelemetry API to send traces to Datadog.'
 code_lang: python
 type: multi-code-lang
@@ -27,8 +27,8 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 | Feature                               | Support notes                       |
 |---------------------------------------|---------------------------------------|
-| [OpenTelemetry Context propagation][1]         | [W3C Trace Context and Datadog header formats][9] are enabled by default. | 
-| [Span processors][2]                  | Unsupported                                          | 
+| [OpenTelemetry Context propagation][1]         | [W3C Trace Context and Datadog header formats][9] are enabled by default. |
+| [Span processors][2]                  | Unsupported                                          |
 | [Span Exporters][3]                   | Unsupported                                            |
 | Trace/span [ID generators][4]         | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].  |
 

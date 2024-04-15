@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Dépannage des logs
 ---
 

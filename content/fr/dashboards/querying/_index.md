@@ -6,7 +6,7 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/building-better-dashboards
   tag: Centre d'apprentissage
   text: Améliorer vos dashboards
-kind: documentation
+
 title: Requêtes
 ---
 
@@ -46,7 +46,7 @@ Sélectionnez votre visualisation à partir des [widgets][3] disponibles.
 
 ### Définir la métrique
 
-Choisissez la métrique à représenter en la recherchant ou en la sélectionnant dans la liste déroulante à côté de **Metric**. Si vous ne savez pas quelle métrique utiliser, la liste déroulante de métriques fournit des informations supplémentaires, y compris `unit`, `type`, `interval`, `description`, `tags` et le nombre de `tag values`. 
+Choisissez la métrique à représenter en la recherchant ou en la sélectionnant dans la liste déroulante à côté de **Metric**. Si vous ne savez pas quelle métrique utiliser, la liste déroulante de métriques fournit des informations supplémentaires, y compris `unit`, `type`, `interval`, `description`, `tags` et le nombre de `tag values`.
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:100%;">}}
 
@@ -175,10 +175,10 @@ status:error / status:info
 **Remarque** : les formules ne sont pas représentées par des lettres. Vous ne pouvez donc pas effectuer d'opérations arithmétiques entre plusieurs formules.
 
 #### Minimum ou maximum entre deux requêtes
-Voici un exemple utilisant l'opérateur `max` pour trouver l'utilisation maximale du processeur entre deux zones de disponibilité.  
+Voici un exemple utilisant l'opérateur `max` pour trouver l'utilisation maximale du processeur entre deux zones de disponibilité.
 
 ```text
-max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
 ```
 
 {{< img src="dashboards/querying/minmax_metrics_example.png" alt="Exemple de formule pour 'max' affichant la valeur maximale entre deux requêtes de métriques" style="width:75%;" >}}

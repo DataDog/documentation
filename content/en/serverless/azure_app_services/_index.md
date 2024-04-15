@@ -1,6 +1,6 @@
 ---
 title: Monitoring Azure App Service
-kind: documentation
+
 aliases:
   - /infrastructure/serverless/azure_app_services/
 further_reading:
@@ -34,7 +34,7 @@ Datadog provides monitoring capabilities for all Azure App Service resource type
 
 Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
 
-| OS | Runtime |App Type|Status|Documentation| 
+| OS | Runtime |App Type|Status|Documentation|
 |----|---------|-----|----|--------------|
 |Windows|.NET|Function App & Web App|GA|[Windows .NET setup][7]|
 |Windows|Java|Web App|GA|[Windows Java setup][8]|

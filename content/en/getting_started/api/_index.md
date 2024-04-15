@@ -1,6 +1,6 @@
 ---
 title: Using Postman with Datadog APIs
-kind: documentation
+
 aliases:
     - /developers/faq/using-postman-with-datadog-apis
     - /getting_started/using-postman-with-datadog-apis
@@ -69,7 +69,7 @@ Follow these steps to set up your environment:
 {{< img src="getting_started/postman/collection_variables.png" alt="The Datadog API Collection with api_key and application_key collection variables configured" style="width:100%;">}}
 
 #### Switch the API endpoint
- 
+
 If you are accessing a Datadog site other than `https://api.datadoghq.com`, you need to switch the Postman collection to access a different endpoint URL.
 
 Follow these steps to update the instance to your selected site ({{< region-param key="dd_site_name" >}}):

@@ -1,6 +1,6 @@
 ---
 title: Regression
-kind: documentation
+
 aliases:
     - /graphing/functions/regression/
 ---

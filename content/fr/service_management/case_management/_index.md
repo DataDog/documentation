@@ -10,7 +10,7 @@ further_reading:
   tag: blog
   text: Automatiser les tâches de sécurité courantes et anticiper les menaces avec
     les workflows Datadog et Cloud SIEM
-kind: documentation
+
 title: Case Management
 ---
 
@@ -55,7 +55,7 @@ Cliquez sur un problème Error Tracking pour ouvrir le volet latéral correspond
 Depuis un workflow existant ou lors de la création d'un workflow, ajoutez une étape dans le [créateur de workflow][4], recherchez « case management », puis sélectionnez **Create Case** ou **Update the status from a Case**.
 
 ### Case Management
-Sur la page [Case Management][1], cliquez sur le bouton **New Case** pour ajouter un nouveau cas. 
+Sur la page [Case Management][1], cliquez sur le bouton **New Case** pour ajouter un nouveau cas.
 
 ## Pour aller plus loin
 

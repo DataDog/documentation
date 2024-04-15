@@ -3,7 +3,7 @@ further_reading:
 - link: /integrations/guide/jmx_integrations/
   tag: ドキュメント
   text: どのインテグレーションで Jmxfetch が使われていますか？
-kind: faq
+
 title: Log4Shell によるリモートコード実行リスクの軽減
 ---
 

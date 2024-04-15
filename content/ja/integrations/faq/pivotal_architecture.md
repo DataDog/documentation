@@ -7,7 +7,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/pivotal_pks/
   tag: ドキュメント
   text: Pivotal Container Service
-kind: faq
+
 title: Datadog VMware Tanzu Application Service インテグレーションアーキテクチャ
 ---
 

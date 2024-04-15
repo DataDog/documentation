@@ -1,6 +1,6 @@
 ---
 title: Agent Environment Variables
-kind: guide
+
 further_reading:
   - link: "/agent/docker/#environment-variables"
     tag: "Documentation"
@@ -63,7 +63,7 @@ In general, use the following rules:
 - Not all `datadog.yaml` options are available with environment variables. See [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
 
 - Component-specific environment variables not listed in [config.go][4] may also be supported.
- 
+
   - **APM Trace Agent**
 
       - [Docker APM Agent Environment Variables][5]

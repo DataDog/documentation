@@ -5,7 +5,7 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: Documentation
   text: Instrumenter des applications Node.js
-kind: documentation
+
 title: Tracing Lambda Node.js et compatibilité de Webpack
 ---
 
@@ -45,7 +45,7 @@ Les bibliothèques de tracing Datadog (`dd-trace`) ne sont malheureusement pas c
             - datadog-lambda-js
         packagerOptions:
           scripts:
-            # optional, only needed when they are included as transitive dependencies 
+            # optional, only needed when they are included as transitive dependencies
             - rm -rf node_modules/datadog-lambda-js node_modules/dd-trace
     ```
 

@@ -26,7 +26,7 @@ integration_id: nagios
 integration_title: Nagios
 integration_version: 1.11.0
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: nagios.
@@ -57,7 +57,7 @@ Ce check surveille les logs de votre serveur Nagios et envoie des événements s
 - Checks de service passifs
 - Downtimes de hosts et de services
 
-Ce check peut également envoyer des données de performance Nagios à Datadog sous la forme de métriques. 
+Ce check peut également envoyer des données de performance Nagios à Datadog sous la forme de métriques.
 
 ## Configuration
 

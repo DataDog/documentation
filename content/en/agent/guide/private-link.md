@@ -1,6 +1,6 @@
 ---
 title: Connect to Datadog over AWS PrivateLink
-kind: guide
+
 further_reading:
     - link: '/agent/logs'
       tag: 'Documentation'
@@ -167,8 +167,8 @@ Use the list below to map service and DNS name to different parts of Datadog:
   | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code>     |
   | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.{{< region-param key="dd_site" >}}</code>                 |
 
-  You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following command: 
-  
+  You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following command:
+
   ```bash
   aws ec2 describe-vpc-endpoint-services --service-names <service-name>`
   ```

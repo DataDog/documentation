@@ -11,7 +11,7 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング CI
-kind: documentation
+
 title: Jenkins パイプラインでトレースを設定する
 ---
 
@@ -55,7 +55,7 @@ Jenkins コントローラと Datadog Agent が Kubernetes クラスターにデ
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-1. Agent のコンフィギュレーションファイル `datadog.yaml` に `logs_enabled: true` を追加するか、`DD_LOGS_ENABLED=true` 環境変数を設定します。　 
+1. Agent のコンフィギュレーションファイル `datadog.yaml` に `logs_enabled: true` を追加するか、`DD_LOGS_ENABLED=true` 環境変数を設定します。　
 
 2. `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` に以下の内容のファイルを作成します。`service` が以前に提供された CI インスタンス名と一致することを確認してください。
 
@@ -73,7 +73,7 @@ Jenkins コントローラと Datadog Agent が Kubernetes クラスターにデ
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. Agent のコンフィギュレーションファイル `datadog.yaml` に `logs_enabled: true` を追加するか、`DD_LOGS_ENABLED=true` 環境変数を設定します。　 
+1. Agent のコンフィギュレーションファイル `datadog.yaml` に `logs_enabled: true` を追加するか、`DD_LOGS_ENABLED=true` 環境変数を設定します。　
 
 2. `%ProgramData%\Datadog\conf.d\jenkins.d\conf.yaml` に以下の内容のファイルを作成します。`service` が以前に提供された CI インスタンス名と一致することを確認してください。
 
@@ -91,7 +91,7 @@ Jenkins コントローラと Datadog Agent が Kubernetes クラスターにデ
 {{% /tab %}}
 
 {{% tab "macOS" %}}
-1. Agent のコンフィギュレーションファイル `datadog.yaml` に `logs_enabled: true` を追加するか、`DD_LOGS_ENABLED=true` 環境変数を設定します。　 
+1. Agent のコンフィギュレーションファイル `datadog.yaml` に `logs_enabled: true` を追加するか、`DD_LOGS_ENABLED=true` 環境変数を設定します。　
 
 2. `~/.datadog-agent/conf.d/jenkins.d/conf.yaml` に以下の内容のファイルを作成します。`service` が以前に提供された CI インスタンス名と一致することを確認してください。
 

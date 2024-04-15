@@ -1,6 +1,6 @@
 ---
 title: Incident Settings
-kind: documentation
+
 description: Configure and customize your Incident Management experience
 aliases:
 - /monitors/incident_management/notification_rules
@@ -24,7 +24,7 @@ Use severity level settings to:
 1. Define your most critical severity as `SEV-0` or `SEV-1` (defaults to `SEV-1`).
 2. Customize the sub-labels of your severities (**Defaults:** Critical, High, Moderate, Low, Minor)
 3. Customize the descriptions of your severities.
-4. Add or delete severities from the bottom of your list, with a minimum of three and a maximum of ten. 
+4. Add or delete severities from the bottom of your list, with a minimum of three and a maximum of ten.
 
 **Note**: If you attempt to delete a severity that is referenced in a notification rule, you are prompted to confirm your decision. Choosing to proceed disables the impacted notification rules as they are no longer valid. Deleting a severity or changing the starting severity does not automatically update any [Incident Management Analytics][2] queries.
 
@@ -92,7 +92,7 @@ This feature is in open beta.
 
 The responder types settings provide you with the ability to create custom roles to [assign to your incident responders][11] and to specify if those roles are meant to be held by one person or multiple people per incident. These roles are unrelated to the [Role Based Access Control (RBAC)][12] system. Responder types allow your responders to understand what their responsibilities are in an incident based on the definitions of your own incident response process. By default there are two roles:
 
-1. `Incident Commander` - The individual responsible for leading the response team 
+1. `Incident Commander` - The individual responsible for leading the response team
 2. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
 
 **Note:** The `Incident Commander` responder type appears in Incident Settings so that you may customize its description. `Incident Commander` cannot be deleted as a responder type, nor can its name or status as a `One person role` be changed. The `Responder` role is a generic fallback role if a responder is not otherwise assigned a different role, and does not appear in Incident Settings.
@@ -119,8 +119,8 @@ Configure either of these settings to use any Slack or Microsoft Teams workspace
 <div class="alert alert-info">Datadog recommends you keep your prefix short as Slack enforces an 80 character limit in channel names. </div>
 
 Changing your channel name template does not rename any existing incident channels. The new name template only applies going forward. By default, dedicated incident channels use `incident-{public_id}` as their name template. Add additional title options to add clarity to slack channels:
-- The `incident` prefix can be changed to any string composed of *lowercase* letters, numbers, and dashes. 
-- Click the **Incident ID** checkbox to prevent duplicate channel names. 
+- The `incident` prefix can be changed to any string composed of *lowercase* letters, numbers, and dashes.
+- Click the **Incident ID** checkbox to prevent duplicate channel names.
 - Click the **Title of Incident** checkbox to enable the Datadog Slack App to automatically rename the channel if an incident's title changes.
 
 #### Slack features
@@ -188,7 +188,7 @@ To create a postmortem template:
 1. Click the **+ New Postmortem Template** button
 2. Give the template a name
 3. Write the template's content (available template variables are listed to the right of the textbox)
-4. (Optional) Set the template as the default 
+4. (Optional) Set the template as the default
 5. Click **Save**
 
 [1]: https://app.datadoghq.com/incidents/settings

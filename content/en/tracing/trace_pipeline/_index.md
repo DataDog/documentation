@@ -1,6 +1,6 @@
 ---
 title: The Trace Pipeline
-kind: documentation
+
 aliases:
     - /tracing/ingestion/
     - /tracing/trace_ingestion/

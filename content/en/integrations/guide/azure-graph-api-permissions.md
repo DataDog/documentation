@@ -1,6 +1,6 @@
 ---
 title: Microsoft Graph API Permissions for Monitoring Azure
-kind: guide
+
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
@@ -14,16 +14,16 @@ To fetch Azure app registration details, the [Datadog-Azure integration][1] requ
 ## Setup
 
 1. In your Azure portal, go to the **App registrations** page. Click on the app registration you want to modify.
-2. In the left sidebar, under the _Manage_ section, click on **API permissions**. 
+2. In the left sidebar, under the _Manage_ section, click on **API permissions**.
 3. Click **+ Add a permission**.
 4. In the panel that opens, select **Microsoft Graph**.
-5. On the next page, select **Application permissions**. Then, under _Select permissions_, search for and enable each of the following permissions. 
+5. On the next page, select **Application permissions**. Then, under _Select permissions_, search for and enable each of the following permissions.
    - `Application.Read.All`
    - `Directory.Read.All`
    - `Group.Read.All`
    - `Policy.Read.All`
    - `User.Read.All`
-     
+
    Click the checkbox on the left, and click the **Add permissions** button at the bottom to add each permission.
    {{< img src="integrations/guide/azure-graph-api-permissions/permission-select-1.png" alt="Panel for adding Microsoft Graph API permissions. 'Application permissions' is selected. Under the 'Select permissions' section, a user has typed in 'Application.Read.All'. In the section below, under 'Application (1)', the Application.Read.All permission appears next to a selected checkbox.">}}
 

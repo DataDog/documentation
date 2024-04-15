@@ -1,6 +1,6 @@
 ---
 title: Facets
-kind: Documentation
+
 further_reading:
 - link: "service_management/events/explorer/attributes"
   tag: "Documentation"

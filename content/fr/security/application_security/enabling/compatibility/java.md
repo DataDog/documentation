@@ -1,7 +1,7 @@
 ---
 code_lang: java
 code_lang_weight: 0
-kind: documentation
+
 title: Exigences de compatibilité Java
 type: multi-code-lang
 ---
@@ -16,9 +16,9 @@ La bibliothèque Datadog prend en charge l'environnement Java JRE 1.8 et version
 - macOS (Darwin) x86, x86-64
 - Windows (msvc) x86, x86-64
 
-Datadog ne prend pas officiellement en charge les versions de Java en accès anticipé. 
+Datadog ne prend pas officiellement en charge les versions de Java en accès anticipé.
 
-Vous pouvez surveiller la sécurité de vos applications Java exécutées dans Docker, Kubernetes, AWS ECS et AWS Fargate. 
+Vous pouvez surveiller la sécurité de vos applications Java exécutées dans Docker, Kubernetes, AWS ECS et AWS Fargate.
 
 ### Frameworks pris en charge
 

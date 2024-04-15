@@ -3,7 +3,7 @@ further_reading:
 - link: /integrations/guide/jmx_integrations/
   tag: Documentation
   text: Quelles intégrations utilisent Jmxfetch ?
-kind: faq
+
 title: Réduire les risques d'exécution de code à distance via la faille de sécurité
   Log4Shell
 ---

@@ -6,7 +6,7 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: Documentation
   text: Recueillir des logs Heroku
-kind: guide
+
 title: Instrumenter une application Ruby on Rails sur Heroku avec Datadog
 ---
 
@@ -80,7 +80,7 @@ heroku labs:enable runtime-dyno-metadata -a $APPNAME
 # Définir le hostname dans Datadog sur appname.dynotype.dynonumber pour garantir la continuité des métriques
 heroku config:add DD_DYNO_HOST=true
 
-# Définir le site Datadog (par exemple, us5.datadoghq.com) 
+# Définir le site Datadog (par exemple, us5.datadoghq.com)
 heroku config:add DD_SITE=$DD_SITE
 
 # Ajouter ce buildpack et définir la clé d'API Datadog
@@ -151,7 +151,7 @@ Migrating to CreateWidgets (20140707111715)
 
 Vous pouvez alors visualiser l'endpoint `/widgets` de votre application qui utilise cette base de données.
 
-Pour activer l'intégration Datadog/Postgres, récupérez les identifiants de connexion à la base de données depuis Heroku. Exécutez la commande suivante à partir du terminal `psql` : 
+Pour activer l'intégration Datadog/Postgres, récupérez les identifiants de connexion à la base de données depuis Heroku. Exécutez la commande suivante à partir du terminal `psql` :
 
 ```shell
 heroku pg:credentials:url DATABASE -a $APPNAME

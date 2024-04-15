@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: Documentation
   text: Appliquer des visualisations sur vos événements
-kind: documentation
+
 title: Rechercher des événements RUM
 ---
 
@@ -69,7 +69,7 @@ La valeur de cet attribut est stockée pour l'ensemble des nouveaux événements
 
 {{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Modifier une mesure" style="width:40%;">}}
 
-Chaque mesure possède une unité qui est affichée dans une colonne du [RUM Explorer][9] et de [vos visualisations][8]. 
+Chaque mesure possède une unité qui est affichée dans une colonne du [RUM Explorer][9] et de [vos visualisations][8].
 
 ## Rechercher des facettes
 

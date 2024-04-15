@@ -1,6 +1,6 @@
 ---
 title: Tests DNS
-kind: documentation
+
 description: Surveiller les délais de résolution et de correspondance de vos enregistrements DNS
 aliases:
   - /fr/synthetics/dns_test
@@ -122,7 +122,7 @@ Vous pouvez créer des variables locales en cliquant sur **Create Local Variable
 `{{ date(n, format) }}`
 : Génère une date dans l'un des formats acceptés. Sa valeur correspond à la date d'initiation du test + `n` jours.
 
-`{{ timestamp(n, unit) }}` 
+`{{ timestamp(n, unit) }}`
 : Génère un timestamp dans l'une des unités acceptées. Sa valeur correspond au timestamp d'initiation du test +/-  `n` unités choisies.
 
 ### Utiliser des variables
@@ -145,7 +145,7 @@ Voici la liste des erreurs concernées :
 `DNS`
 : L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée, ou configuration des entrées DNS incorrecte.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).
 
 `TIMEOUT`
@@ -156,7 +156,7 @@ Voici la liste des erreurs concernées :
 
 ## Autorisations
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin Datadog et Standard Datadog][10] peuvent créer, modifier et supprimer des tests DNS Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][10]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Admin Datadog et Standard Datadog][10] peuvent créer, modifier et supprimer des tests DNS Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][10].
 
 Si vous avez accès aux [rôles personnalisés][11], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write`.
 

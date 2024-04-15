@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/agent/faq/heroku-troubleshooting/
-kind: guide
+
 title: Dépannage du buildpack Datadog-Heroku
 ---
 

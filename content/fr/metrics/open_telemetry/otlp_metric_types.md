@@ -11,7 +11,7 @@ further_reading:
 - link: /opentelemetry/guide/otlp_delta_temporality/
   tag: Guide
   text: Générer des métriques de temporalité delta avec OpenTelemetry
-kind: documentation
+
 title: Types de métriques OTLP
 ---
 
@@ -74,7 +74,7 @@ Les correspondances par défaut sont les suivantes :
 1. Les Histograms delta sont transmis en tant que distributions Datadog. [Consultez la documentation sur les distributions][1] pour découvrir les agrégations disponibles.
 2. Dans le cas des métriques Histogram cumulatives, le delta entre les points consécutifs est calculé et transmis à Datadog en tant que distribution. Vous pouvez utiliser la [fonction arithmétique `cumsum`][2] ou des agrégations individuelles pour récupérer la valeur dans la charge utile OTLP.
 
-**Remarque** : dans OTLP, les métriques histogram sont mappées aux métriques de distribution. En raison du processus d'envoi de ces données par OTLP, les agrégations max, min et percentile représentent des valeurs approximatives et ne sont pas le résultat de calculs précis. 
+**Remarque** : dans OTLP, les métriques histogram sont mappées aux métriques de distribution. En raison du processus d'envoi de ces données par OTLP, les agrégations max, min et percentile représentent des valeurs approximatives et ne sont pas le résultat de calculs précis.
 
 L'Agent Datadog et l'exportateur Datadog pour le Collector OpenTelemetry permettent de changer l'exportation des métriques Histogram dans la sous-section `histogram`.
 - Si le `mode` est défini sur `counters`, les métriques suivantes sont générées :

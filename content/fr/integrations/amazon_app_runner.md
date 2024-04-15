@@ -14,7 +14,7 @@ integration_id: amazon-app-runner
 integration_title: "AWS\_App\_Runner"
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_app_runner
 public_title: "Intégration Datadog/AWS\_App\_Runner"
@@ -39,7 +39,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 2. Installez l'[intégration Datadog/AWS App Runner][3].
 
 ### Collecte de logs
-Vous pouvez transmettre deux types de logs à Datadog depuis vos applications gérées par AWS App Runner. Ces logs sont envoyés à CloudWatch dans deux groupes différents. Le premier rassemble les logs de service. Il enregistre tous les logs de l'activité du cycle de vie de votre service App Runner, comme les builds et les déploiements de votre application. Le deuxième groupe regroupe les logs d'application qui contiennent les sorties du code de l'application en cours d'exécution. 
+Vous pouvez transmettre deux types de logs à Datadog depuis vos applications gérées par AWS App Runner. Ces logs sont envoyés à CloudWatch dans deux groupes différents. Le premier rassemble les logs de service. Il enregistre tous les logs de l'activité du cycle de vie de votre service App Runner, comme les builds et les déploiements de votre application. Le deuxième groupe regroupe les logs d'application qui contiennent les sorties du code de l'application en cours d'exécution.
 
 #### Envoyer des logs à Datadog
 

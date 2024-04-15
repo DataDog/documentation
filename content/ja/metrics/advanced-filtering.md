@@ -16,7 +16,7 @@ further_reading:
 - link: /dashboards/functions/exclusion/
   tag: Documentation
   text: 除外関数
-kind: documentation
+
 title: 高度なフィルタリング
 ---
 
@@ -71,7 +71,7 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ## ワイルドカードでフィルタリングされたクエリ
 
 タグ値のプレフィックスとサフィックスのワイルドカードマッチングがサポートされています。
--  `pod_name: web-*` 
+-  `pod_name: web-*`
 -  `cluster:*-trace`
 
 **注**: 同じフィルターでのプレフィックスとサフィックスのワイルドカードマッチングはサポートされていません。

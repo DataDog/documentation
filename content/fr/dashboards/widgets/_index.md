@@ -7,7 +7,7 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: Documentation
   text: Liens personnalisés
-kind: documentation
+
 title: Widgets
 ---
 
@@ -17,13 +17,13 @@ Les widgets représentent les éléments constitutifs de vos dashboards. Ils vou
 
 ### Graphiques
 {{< whatsnext desc="Widgets généraux permettant de représenter les données des produits Datadog : ">}}
-    {{< nextlink href="/dashboards/widgets/change" 
+    {{< nextlink href="/dashboards/widgets/change"
         img="dashboards/widgets/icons/change_light_large.png">}}Évolution{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
         img="dashboards/widgets/icons/distribution_light_large.png">}}Distribution{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/funnel"
         img="dashboards/widgets/icons/funnel_light_large.png">}}Entonnoir{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/geomap" 
+    {{< nextlink href="/dashboards/widgets/geomap"
         img="dashboards/widgets/icons/geomap_light_large.png">}}Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map"
         img="dashboards/widgets/icons/heatmap_light_large.png">}}Carte thermique{{< /nextlink >}}
@@ -55,13 +55,13 @@ Les widgets représentent les éléments constitutifs de vos dashboards. Ils vou
 
 ### Annotations et embeds
 {{< whatsnext desc="Widgets décoratifs permettant de structurer visuellement les dashboards et d'y ajouter des annotations : ">}}
-    {{< nextlink href="/dashboards/widgets/free_text" 
+    {{< nextlink href="/dashboards/widgets/free_text"
         img="dashboards/widgets/icons/free-text_light_large.png">}}Texte libre{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" 
+    {{< nextlink href="/dashboards/widgets/iframe"
         img="dashboards/widgets/icons/iframe_light_large.png">}}iframe{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" 
+    {{< nextlink href="/dashboards/widgets/image"
         img="dashboards/widgets/icons/image_light_large.png">}}Image{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/note" 
+    {{< nextlink href="/dashboards/widgets/note"
         img="dashboards/widgets/icons/notes_light_large.png">}}Notes et liens{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -73,25 +73,25 @@ Les widgets représentent les éléments constitutifs de vos dashboards. Ils vou
 
 ### Alertes et réponse
 {{< whatsnext desc="Widgets de synthèse permettant d'afficher des données de surveillance : ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" 
+    {{< nextlink href="/dashboards/widgets/alert_graph"
         img="dashboards/widgets/icons/alert-graph_light_large.png">}} Graphique des alertes{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" 
+    {{< nextlink href="/dashboards/widgets/alert_value"
         img="dashboards/widgets/icons/alert-value_light_large.png">}}Valeur d'alerte{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" 
+    {{< nextlink href="/dashboards/widgets/check_status"
         img="dashboards/widgets/icons/check-status_light_large.png">}} Statut de check{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" 
+    {{< nextlink href="/dashboards/widgets/monitor_summary"
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} Résumé des monitors{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/run_workflow" 
+    {{< nextlink href="/dashboards/widgets/run_workflow"
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Exécuter un workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Architecture
 {{< whatsnext desc="Visualisez des données sur votre infrastructure et architecture : ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
+    {{< nextlink href="/dashboards/widgets/hostmap"
         img="dashboards/widgets/icons/host-map_light_large.png">}}Hostmap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
+    {{< nextlink href="/dashboards/widgets/topology_map"
         img="dashboards/widgets/icons/service-map_light_large.png">}}Carte de topologie{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
+    {{< nextlink href="/dashboards/widgets/service_summary"
         img="dashboards/widgets/icons/service-summary_light_large.png">}}Résumé de service{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -99,9 +99,9 @@ Les widgets représentent les éléments constitutifs de vos dashboards. Ils vou
 {{< whatsnext desc="Visualisations sur la fiabilité des sites : ">}}
     {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
         img="dashboards/widgets/icons/profiling_flame_graph.svg">}} Flamegraph de profiling{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" 
+    {{< nextlink href="/dashboards/widgets/slo"
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} Résumé des SLO{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" 
+    {{< nextlink href="/dashboards/widgets/slo_list"
         img="dashboards/widgets/icons/slo-list_light_large.png">}} Liste de SLO{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -1,6 +1,6 @@
 ---
 disable_toc: true
-kind: documentation
+
 private: true
 title: SLO ガイド
 ---

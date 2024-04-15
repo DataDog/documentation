@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Détection du hostname dans les conteneurs
 ---
 

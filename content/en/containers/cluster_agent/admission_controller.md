@@ -1,6 +1,6 @@
 ---
 title: Datadog Admission Controller
-kind: documentation
+
 aliases:
 - /agent/cluster_agent/admission_controller
 further_reading:

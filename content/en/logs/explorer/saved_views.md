@@ -1,6 +1,6 @@
 ---
 title: Saved Views
-kind: documentation
+
 description: 'Use Saved Views to automatically configure your Log Explorer.'
 further_reading:
     - link: 'logs/explorer/analytics'
@@ -21,7 +21,7 @@ Troubleshooting is contextual, and Saved Views make it easier for you and your t
 
 Technically, a Saved View keeps track of:
 
-- A [search query][3] along with its time range. **Note**: Saved View is meant to track live time ranges (such as past hour, or past week) and fixed time ranges are converted as such on save. 
+- A [search query][3] along with its time range. **Note**: Saved View is meant to track live time ranges (such as past hour, or past week) and fixed time ranges are converted as such on save.
 - A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties).
 - A [selected subset of facets][1] to be displayed in the facet list.
 

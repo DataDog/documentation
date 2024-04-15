@@ -1,7 +1,7 @@
 ---
 title: Use Authentication In API And Multistep API Tests
-kind: guide
-description: Learn how to ensure your Synthetic API and multistep API tests can log in to your applications. 
+
+description: Learn how to ensure your Synthetic API and multistep API tests can log in to your applications.
 further_reading:
 - link: '/data_security/synthetics'
   tag: 'Documentation'
@@ -22,9 +22,9 @@ This guide discusses the various authentication protocols available for Syntheti
 
 ## Authentication methods
 
-If your endpoint requires authentication, you can add your credentials when [creating an API][4] or [multistep API test][5]. API and multistep API tests support the following authentication protocols: Basic Access Authentication, Digest Access Authentication, OAuth2.0, NTLM, AWS Sigv4, and client certificates. 
+If your endpoint requires authentication, you can add your credentials when [creating an API][4] or [multistep API test][5]. API and multistep API tests support the following authentication protocols: Basic Access Authentication, Digest Access Authentication, OAuth2.0, NTLM, AWS Sigv4, and client certificates.
 
-In the **Define the request** section, click **Advanced Options** > **Authentication** and select an authentication method: 
+In the **Define the request** section, click **Advanced Options** > **Authentication** and select an authentication method:
 
 {{< tabs >}}
 {{% tab "Basic Access" %}}
@@ -65,7 +65,7 @@ Click **AWS Signature**, enter an Access Key ID and Secret Access Key, and optio
 {{% /tab %}}
 {{% tab "Client Certificate" %}}
 
-Click **Upload File** to upload a private key file and a certificate file. Client 
+Click **Upload File** to upload a private key file and a certificate file. Client
 Certificate authentication is supported in [HTTP tests][1], [multistep API tests][2], [SSL tests][3], and [gRPC tests][4].
 
 [1]: /synthetics/api_tests/http_tests/

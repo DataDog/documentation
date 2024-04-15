@@ -1,6 +1,6 @@
 ---
 title: Instrumenting Go Serverless Applications Using the Datadog Forwarder
-kind: guide
+
 ---
 ## Overview
 
@@ -12,8 +12,8 @@ If you are a new user of Datadog Serverless, follow the <a href="/serverless/ins
 
 If not already configured:
 
-- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
-- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS.
+- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
@@ -125,7 +125,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
     time.Now(), // Timestamp, must be within last 20 mins
     "product:latte", "order:online" // Associated tags
   )
-  
+
   req, err := http.NewRequest("GET", "http://example.com/status")
 
   // Add the datadog distributed tracing headers

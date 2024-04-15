@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Salesforce
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: salesforce
 public_title: Salesforce
@@ -65,12 +65,12 @@ La liste des événements pris en charge est disponible dans la section **Platfo
 
     {{< img src="integrations/salesforce/salesforce-1.png" alt="L'écran confirmant que l'organisation Salesforce a été configurée sur Datadog" popup="true" style="width:90%" >}}
 
-4. Cliquez sur **Save**. Vous êtes alors invité à vous connecter à votre compte Salesforce et à accorder les autorisations d'accès à Datadog. 
+4. Cliquez sur **Save**. Vous êtes alors invité à vous connecter à votre compte Salesforce et à accorder les autorisations d'accès à Datadog.
 5. Une fois le processus de connexion terminé, retournez sur le [carré d'intégration Salesforce][9] dans Datadog. Votre organisation inclut des tags par défaut prêts à l'emploi.
 
     {{< img src="integrations/salesforce/salesforce-default-tags.png" alt="L'écran confirmant que l'organisation Salesforce a été configurée sur Datadog" popup="true" style="width:90%" >}}
 
-6. Sélectionnez les tags que vous souhaitez utiliser et cliquez sur **Connect**. 
+6. Sélectionnez les tags que vous souhaitez utiliser et cliquez sur **Connect**.
 7. Répétez ces étapes pour connecter vos autres organisations. Vous devez avoir accès aux organisations que vous souhaitez ajouter.
 
 **Remarque** : un tag par défaut est ajouté à votre ID d'organisation Salesforce. Vous pouvez néanmoins [modifier les tags][10] afin d'afficher des informations plus pertinentes pour votre entreprise.

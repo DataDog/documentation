@@ -33,7 +33,7 @@ guid: d51c342e-7a02-4611-a47f-1e8eade5735c
 integration_id: mongodb
 integration_title: MongoDB
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: mongodb.
@@ -340,9 +340,9 @@ metadata:
     ad.datadoghq.com/mongo.instances: |
       [
         {
-          "hosts": ["%%host%%:%%port%%"], 
-          "username": "datadog", 
-          "password": "<MOTDEPASSEUNIQUE>", 
+          "hosts": ["%%host%%:%%port%%"],
+          "username": "datadog",
+          "password": "<MOTDEPASSEUNIQUE>",
           "database": "<BASEDEDONNÉES>"
         }
       ]

@@ -1,6 +1,6 @@
 ---
 title: Service Scorecards
-kind: documentation
+
 aliases:
   - /tracing/service_catalog/scorecards
 further_reading:
@@ -8,8 +8,8 @@ further_reading:
   tag: "Documentation"
   text: "Service Catalog"
 - link: /api/latest/service-scorecards/
-  tag: "Documentation" 
-  text: "Service Scorecards API" 
+  tag: "Documentation"
+  text: "Service Scorecards API"
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
   text: "Prioritize and promote service observability best practices with Service Scorecards"
@@ -18,7 +18,7 @@ further_reading:
   text: "Formalize best practices with custom Scorecards"
 - link: "/continuous_integration/dora_metrics/"
   tag: "Documentation"
-  text: "Track DORA Metrics with Datadog" 
+  text: "Track DORA Metrics with Datadog"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -38,23 +38,23 @@ You can select the rules used to populate the Scorecards, and you can generate r
 To select which of the out-of-the-box rules are evaluated for each of the default scorecards:
 
 1. Open the [Scorecards page][8] in Service Catalog.
-2. Enable or disable rules to customize how the scores are calculated. 
+2. Enable or disable rules to customize how the scores are calculated.
 3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
 
 {{< img src="/tracing/service_catalog/scorecards-setup.png" alt="Service Scorecards setup page" style="width:90%;" >}}
 
 ### Creating custom rules
 
-To add custom rules to your Scorecards dashboard using the [Scorecards API][10]: 
+To add custom rules to your Scorecards dashboard using the [Scorecards API][10]:
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
 2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
 3. View an overview of outcomes in the Scorecards dashboard.
 
-After initial setup, rules can also be enabled or disabled through the API. 
+After initial setup, rules can also be enabled or disabled through the API.
 
 
-To add custom rules to your Scorecards dashboard using the Scorecards UI: 
+To add custom rules to your Scorecards dashboard using the Scorecards UI:
 
 1. Click **Create Rule** on the Scorecards page.
 2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
@@ -71,24 +71,24 @@ After the default scorecards are set up, the Scorecards page in the Service Cata
 
 The production readiness score for all services (unless otherwise indicated) is based on these rules:
 
-Have any SLOs defined 
+Have any SLOs defined
 : [Service Level Objectives (SLOs)][2] provide a framework for defining clear targets around application performance, which helps you provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
 
 Have any monitors defined
 : Monitors reduce downtime by helping your team quickly react to issues in your environment. Review [recommended monitors][3].
 
 Specified on-call
-: Improve the on-call experience for everyone by establishing clear ownership of your services. This gives your on-call engineers the correct point of contact during incidents, reducing the time it takes to resolve your incidents. 
+: Improve the on-call experience for everyone by establishing clear ownership of your services. This gives your on-call engineers the correct point of contact during incidents, reducing the time it takes to resolve your incidents.
 
 Last deployment occurred within the last 3 months
-: For services monitored by APM or USM.	Agile development practices give you the ability to quickly address user feedback and pivot to developing the most important functionality for your end users. 
+: For services monitored by APM or USM.	Agile development practices give you the ability to quickly address user feedback and pivot to developing the most important functionality for your end users.
 
 ### Observability best practices
 
 The Observability best practices score is based on the following rules:
 
 Deployment tracking is active
-: For services monitored by APM or USM. [Ensure smooth rollouts by implementing a version tag with Unified Service Tagging][4]. As you roll out new versions of your functionality, Datadog captures and alerts on differences between the versions in error rates, number of requests, and more. This can help you understand when to roll back to previous versions to improve end user experience. 
+: For services monitored by APM or USM. [Ensure smooth rollouts by implementing a version tag with Unified Service Tagging][4]. As you roll out new versions of your functionality, Datadog captures and alerts on differences between the versions in error rates, number of requests, and more. This can help you understand when to roll back to previous versions to improve end user experience.
 
 Logs correlation is active
 : For APM services, evaluated based on the past hour of logs detected. [Correlation between APM and Logs][5] improves the speed of troubleshooting for end users, saving you time during incidents and outages.
@@ -98,7 +98,7 @@ Logs correlation is active
 The Ownership and documentation score is based on the following rules:
 
 Team defined
-: Defining a Team makes it easier for your on-call staff to know which team to escalate to in case a service they are not familiar with is the root cause of an issue. 
+: Defining a Team makes it easier for your on-call staff to know which team to escalate to in case a service they are not familiar with is the root cause of an issue.
 
 Contacts defined
 : Defining contacts reduces the time it takes for your on-call staff to escalate to the owner of another service, helping you recover your services faster from outages and incidents.
@@ -113,13 +113,13 @@ Any docs defined
 
 Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect pass-fail conditions and are automatically evaluated once per day. A service's score against custom rules is based on outcomes sent using the Scorecards API. To exclude a particular custom rule from a service's score calculation, set its outcome to `skip` in the Scorecards API.
 
-Individual rules may have restrictions based on data availability. For example, deployment-related rules rely on the availability of version tags through APM [Unified Service Tagging][7]. 
+Individual rules may have restrictions based on data availability. For example, deployment-related rules rely on the availability of version tags through APM [Unified Service Tagging][7].
 
 Each rule lists a score for the percentage of services that are passing. Each scorecard has an overall score percentage that totals how many services are passing, across all rules—**not** how many services are passing all rules. Skipped and disabled rules are not included in this calculation.
 
 ## View service-level details and scores
 
-The scorecard summary is accessible on the [**Explore** page][1] in the Service Catalog under the **Scorecards** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each. 
+The scorecard summary is accessible on the [**Explore** page][1] in the Service Catalog under the **Scorecards** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each.
 
 Click **View Details** from the scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the scorecards, the rules, and that service's pass-fail score for each rule.
 
@@ -129,25 +129,25 @@ Click **View Details** from the scorecard, or open the service details side pane
 Scorecard reports are in private beta. Join the beta by requesting access.
 {{< /callout >}}
 
-You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][9], which runs at a scheduled time. 
+You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][9], which runs at a scheduled time.
 
 <div class="alert alert-warning">Running this Workflow may impact your billing. Read the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">pricing page</a> for more information</div>
 
 To create a Report:
 
-1. Click **Create Report** on the Scorecards page. 
-2. Choose whether to include all defined services across your organization or a specific team's services. 
+1. Click **Create Report** on the Scorecards page.
+2. Choose whether to include all defined services across your organization or a specific team's services.
 3. Set the date, time, and frequency at which you want to receive these reports.
-4. Set the Slack workspace and channel where the reports should be sent. The selected channel must be public and have the Datadog Slack app installed. 
+4. Set the Slack workspace and channel where the reports should be sent. The selected channel must be public and have the Datadog Slack app installed.
 5. Click **Enable this Workflow**.
 
-Using this information, Datadog sends you reports on the highest and lowest scoring rules, services, and teams. 
+Using this information, Datadog sends you reports on the highest and lowest scoring rules, services, and teams.
 
 {{< img src="/tracing/service_catalog/scorecard-reports.png" alt="Scorecard reports creation modal showing how to create report for all services" style="width:90%;" >}}
 
 
 ### Managing Scorecard reports
-To edit or delete a Workflow, click **Manage Reports** on the Scorecards page and select the Workflow. Make edits to the Workflow or delete it using the Settings menu. 
+To edit or delete a Workflow, click **Manage Reports** on the Scorecards page and select the Workflow. Make edits to the Workflow or delete it using the Settings menu.
 
 
 ## Further reading

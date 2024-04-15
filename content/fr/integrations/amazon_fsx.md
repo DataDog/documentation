@@ -14,7 +14,7 @@ integration_id: amazon-fsx
 integration_title: "Amazon\_FSx"
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_fsx
 public_title: "Intégration Datadog/Amazon\_FSx"
@@ -64,7 +64,7 @@ Pour surveiller tous les accès utilisateur à des fichiers, dossiers et partage
 
 #### Activité de l'API FSx
 
-Amazon FSx est intégré à AWS CloudTrail, qui surveille chaque action FSx effectuée par un utilisateur, un rôle ou un service AWS. 
+Amazon FSx est intégré à AWS CloudTrail, qui surveille chaque action FSx effectuée par un utilisateur, un rôle ou un service AWS.
 Activez l'[intégration CloudTrail][9] de Datadog pour surveiller tous les appels d'API FSx dans votre compte AWS.
 
 ### Métriques

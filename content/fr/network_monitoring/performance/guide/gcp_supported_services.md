@@ -1,6 +1,6 @@
 ---
 title: Services pris en charge avec NPM GCP
-kind: guide
+
 npm_provider: gcp
 further_reading:
   - link: "https://www.datadoghq.com/blog/network-performance-monitoring"

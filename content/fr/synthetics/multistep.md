@@ -17,7 +17,7 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Créer et gérer des tests API Synthetic à plusieurs étapes avec Terraform
-kind: documentation
+
 title: Tests API à plusieurs étapes
 ---
 
@@ -237,7 +237,7 @@ Vous pouvez créer des variables locales en cliquant sur **Create Local Variable
 `{{ date(n, format) }}`
 : Génère une date dans l'un des formats acceptés. Sa valeur correspond à la date d'initiation du test + `n` jours.
 
-`{{ timestamp(n, unit) }}` 
+`{{ timestamp(n, unit) }}`
 : Génère un timestamp dans l'une des unités acceptées. Sa valeur correspond au timestamp d'initiation du test +/-  `n` unités choisies.
 
 ### Utiliser des variables
@@ -261,7 +261,7 @@ Un test est considéré comme `FAILED` si une étape ne répond pas à une ou pl
 `DNS`
 : L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée ou configuration des entrées DNS incorrecte.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).
 
 `SSL`
@@ -273,12 +273,12 @@ Un test est considéré comme `FAILED` si une étape ne répond pas à une ou pl
   Pour chaque requête, seules les étapes terminées sont affichées dans la cascade réseau. Par exemple, si rien d'autre que `Total response time` ne s'affiche, cela signifie que l'expiration est survenue durant la résolution DNS.
   - Le message `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indique que la durée de la requête et des assertions a atteint la durée maximale (60,5 secondes).
 
-`MALFORMED_RESPONSE` 
+`MALFORMED_RESPONSE`
 : Le serveur à distance a répondu avec une charge utile non conforme aux spécifications HTTP.
 
 ## Autorisations
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][16] peuvent créer, modifier et supprimer des tests API Synthetic à plusieurs étapes. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][16]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][16] peuvent créer, modifier et supprimer des tests API Synthetic à plusieurs étapes. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][16].
 
 Si vous utilisez la [fonctionnalités de rôle personnalisé][17], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write` pour la surveillance Synthetic.
 

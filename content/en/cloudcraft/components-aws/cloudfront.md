@@ -1,6 +1,6 @@
 ---
 title: "CloudFront Component"
-kind: documentation
+
 ---
 ## Overview
 

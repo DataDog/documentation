@@ -1,6 +1,6 @@
 ---
 title: "Keyspaces Component"
-kind: documentation
+
 ---
 ## Overview
 

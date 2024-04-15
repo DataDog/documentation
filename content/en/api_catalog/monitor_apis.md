@@ -1,6 +1,6 @@
 ---
 title: Monitoring APIs
-kind: documentation
+
 is_beta: true
 further_reading:
 - link: "/tracing/api_catalog/get_started/"
@@ -32,7 +32,7 @@ After you have [registered your endpoints][1] and [assigned team ownership][2], 
 
 ## Alerting on endpoints that deviate from expected performance
 
-You can set up monitors to alert you if something causes your endpoints to perform unexpectedly (like occasionally slow performance), to report outlier data (like extremely slow performance or rare errors), or to achieve metrics beyond a desired threshold (high error rates). 
+You can set up monitors to alert you if something causes your endpoints to perform unexpectedly (like occasionally slow performance), to report outlier data (like extremely slow performance or rare errors), or to achieve metrics beyond a desired threshold (high error rates).
 
 The latest monitor status is displayed in the **Explorer** where you can see more information about why a monitor is alerting and how to address it. You can also determine if you should launch an investigation by clicking through to view the monitors.
 
@@ -42,7 +42,7 @@ You can also create a monitor on **Latency** or **Error rate** directly from API
 
 ## Tracking and improving API test coverage
 
-Using synthetic API tests, you can set up automated scheduled tests of your endpoints that alert you if the tests fail so you can diagnose and fix the problem. 
+Using synthetic API tests, you can set up automated scheduled tests of your endpoints that alert you if the tests fail so you can diagnose and fix the problem.
 
 The **API TESTS** column on the Explorer page shows you which of your endpoints have tests and if any of them are failing. If tests are failing, the test status to investigate further.
 

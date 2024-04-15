@@ -3,7 +3,7 @@ further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentation
   text: Page de contrôle de l'ingestion
-kind: guide
+
 title: Contrôle du volume d'ingestion avec le tracing distribué d'APM
 ---
 
@@ -74,7 +74,7 @@ La colonne **Configuration** indique si des règles d'échantillonnage ont été
 
 Pour diminuer le volume d'ingestion au niveau de l'Agent, configurez `DD_APM_MAX_TPS` (valeur par défaut : `10`) afin de réduire la part du volume d'échantillonnage en amont. Pour en savoir plus, consultez la documentation relative au [mécanisme d'échantillonnage par défaut][6].
 
-En outre, pour réduire le volume de traces [error][8] et [rare][9], procédez comme suit : 
+En outre, pour réduire le volume de traces [error][8] et [rare][9], procédez comme suit :
 - Configurez `DD_APM_ERROR_TPS` pour diminuer la part de l'échantillonnage d'erreurs.
 - Définissez `DD_APM_DISABLE_RARE_SAMPLER` sur true pour interrompre l'échantillonnage de traces rare.
 

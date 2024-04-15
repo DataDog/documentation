@@ -1,6 +1,6 @@
 ---
 title: Windows Containers Issues
-kind: documentation
+
 further_reading:
 - link: "/agent/docker/?tab=windows"
   tag: "Documentation"
@@ -40,7 +40,7 @@ Live processes do not appear in containers (except for the Datadog Agent).
 
 ### Mixed clusters (Linux + Windows)
 
-The recommended way of deploying the Datadog Agent on a mixed cluster is to perform two installations of the Helm chart with different `targetSystem`s. 
+The recommended way of deploying the Datadog Agent on a mixed cluster is to perform two installations of the Helm chart with different `targetSystem`s.
 
 The Datadog Agent uses a `nodeSelector` to automatically select Linux or Windows nodes based on `targetSystem`.
 

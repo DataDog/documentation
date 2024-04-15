@@ -6,7 +6,7 @@ further_reading:
 - link: /cloud_siem/explorer/
   tag: Documentation
   text: En savoir plus sur le Security Signals Explorer
-kind: documentation
+
 title: Investigator
 ---
 
@@ -28,11 +28,11 @@ L'outil Investigator de Cloud SIEM offre une interface graphique qui vous permet
 
 ## Visualiser et enquêter sur l'activité
 
-1. Accédez à **Security** > **Cloud SIEM** et cliquez sur l'[onglet **Investigator**][1]. 
+1. Accédez à **Security** > **Cloud SIEM** et cliquez sur l'[onglet **Investigator**][1].
 
 2. Sélectionnez un type d'entité dans le menu déroulant du champ **In**.
 
-3. Sélectionnez une entité ou saisissez un nom d'entité spécifique dans le champ **Investigate** pour afficher un graphique des activités associées à l'entité. Pour l'entité **Assumed Role**, sélectionnez un `AccessKeyID` ou saisissez un `AccessKeyID` dans le champ **for**. 
+3. Sélectionnez une entité ou saisissez un nom d'entité spécifique dans le champ **Investigate** pour afficher un graphique des activités associées à l'entité. Pour l'entité **Assumed Role**, sélectionnez un `AccessKeyID` ou saisissez un `AccessKeyID` dans le champ **for**.
 
 4. Cliquez sur un nœud et sélectionnez **Show list of logs** ou **View in Log Explorer** pour afficher les logs associés. Si vous cliquez sur le nœud d'un service, cliquez sur **Investigate service** afin de basculer vers la vue Investigator de ce service. Utilisez le menu déroulant **and filter by** afin de filtrer en fonction des actions.
 

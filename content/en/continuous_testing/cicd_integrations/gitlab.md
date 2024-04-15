@@ -1,6 +1,6 @@
 ---
 title: GitLab
-kind: documentation
+
 description: Configure your GitLab instance to run Continuous Testing tests in your CI/CD pipelines.
 aliases:
   - /synthetics/cicd_integrations/gitlab
@@ -33,11 +33,11 @@ For more information, see [CI/CD Integrations Configuration][4].
 ### Run tests using test IDs
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --public-id xtf-w5p-z5n --public-id eif-van-tu7
 {{< /code-block >}}
@@ -45,11 +45,11 @@ synthetic-tests:
 ### Run tests using tags
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests'
 {{< /code-block >}}
@@ -59,11 +59,11 @@ synthetic-tests:
 If you have different test users or data specific to your CI/CD environment, you can override these variables with the `-v` command. For more information, see the Synthetics command](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics) in the `datadog-ci` NPM package.
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests' -v PASSWORD="$PASSWORD"
 {{< /code-block >}}
@@ -75,11 +75,11 @@ synthetic-tests:
 Add a custom `config.json` file to your pipeline repository and access it in your pipeline configuration.
 
 {{< code-block lang="yaml" >}}
-stages: 
+stages:
   - test
 synthetic-tests:
   stage: test
-  script: 
+  script:
     - npm install -g @datadog/datadog-ci
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --config synthetics_global.json -f synthetic_test.json
 {{< /code-block >}}

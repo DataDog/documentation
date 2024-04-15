@@ -1,6 +1,6 @@
 ---
 title: Schema and Semantics
-kind: documentation
+
 further_reading:
 - link: "/opentelemetry/interoperability/"
   tag: "Documentation"

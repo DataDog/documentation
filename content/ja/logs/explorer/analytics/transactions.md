@@ -7,7 +7,7 @@ further_reading:
 - link: logs/explorer/analytics
   tag: Documentation
   text: ログの分析方法
-kind: documentation
+
 title: ログをトランザクションにグループ化する
 ---
 

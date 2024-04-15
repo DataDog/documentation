@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Live Process Monitoring
-kind: Guide
+
 ---
 
 ## Overview
@@ -24,7 +24,7 @@ Example workflow:
 
 1. Navigate to the [**Monitors > New Monitor > Live Process**][4] page.
 
-2. Add tags to the monitor in the **by tags** field. 
+2. Add tags to the monitor in the **by tags** field.
     - For example, use `command:puma` to monitor processes associated with the `puma` command.
 
 {{< img src="monitors/monitor_types/process/tag-scoped-process-monitor.png" alt="A live process monitor that has been scoped using a tag" style="width:100%;" >}}
@@ -33,7 +33,7 @@ Example workflow:
 
 {{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt="A live process monitor that has been scoped using text search" style="width:100%;" >}}
 
-4. If your monitor's scope still exceeds a few thousand processes total across all monitor groups, use additional tags to break it into multiple monitors. 
+4. If your monitor's scope still exceeds a few thousand processes total across all monitor groups, use additional tags to break it into multiple monitors.
     - For example, you can use the `env` tag to create separate monitors for `prod` and `staging`.
 
 ### Choosing a time frame

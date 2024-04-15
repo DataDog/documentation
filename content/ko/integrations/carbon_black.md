@@ -11,7 +11,7 @@ has_logo: true
 integration_id: carbonblack
 integration_title: Carbon Black
 is_public: true
-kind: integration
+
 name: carbon_black
 public_title: Datadog-Carbon Black 통합
 short_description: Carbon Black 디펜스 로그 수집
@@ -34,8 +34,8 @@ Carbon Black은 Carbon Black 이벤트 포워더(Forwarder)를 생성하는 데 
 #### 설정
 
 1. [Datadog 포워더(Forwarder)를 설치][2]합니다.
-2. [AWS 관리 콘솔에서 버킷을 생성][3]하여 이벤트로 전달합니다. 
-3. [Carbon Black 포워더(Forwarder)가 데이터를 기록할 수 있도록 S3 버킷을 설정][4]합니다. 
+2. [AWS 관리 콘솔에서 버킷을 생성][3]하여 이벤트로 전달합니다.
+3. [Carbon Black 포워더(Forwarder)가 데이터를 기록할 수 있도록 S3 버킷을 설정][4]합니다.
    - **중요**: S3 버킷의 접두사(prefix) 앞에 이벤트 CB가 들어오는 `carbon-black` 키워드가 반드시 있어야 합니다. 해당 키워드가 있어야만 Datadog가 로그의 소스를 올바르게 인식할 수 있습니다.
 5. [Carbon Black 클라우드 콘솔에서 접근 수준을 생성][5]합니다.
 6. [Carbon Black 클라우드 콘솔에서 API 키를 생성][6]합니다.

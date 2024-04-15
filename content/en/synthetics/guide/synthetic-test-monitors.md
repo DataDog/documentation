@@ -1,7 +1,7 @@
 ---
 title: Use Synthetic Test Monitors
-kind: guide
-description: Learn about Synthetic monitors created with your Synthetic tests. 
+
+description: Learn about Synthetic monitors created with your Synthetic tests.
 further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
@@ -28,7 +28,7 @@ Create a monitor in the **Configure the monitor for this test** section to send 
 
 {{< img src="synthetics/guide/synthetics_test_monitors/configure_the_monitor_for_this_test.png" alt="Creating a monitor in your Synthetic test" style="width:90%;">}}
 
-Customize the monitor name to search for it on the [**Manage Monitors**][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state. 
+Customize the monitor name to search for it on the [**Manage Monitors**][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state.
 
 The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][4].
 
@@ -36,7 +36,7 @@ If you have multiple layers of notifications (for example, notifying more teams 
 
 ## Tailor monitor notifications
 
-Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. To notify Team B only on subsequent alerts after the first alert, surround the notification to Team B with `{{#is_renotify}}` and `{{/is_renotify}`. Use [conditional variables][3] to further characterize the notification message based on monitor attributes. 
+Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. To notify Team B only on subsequent alerts after the first alert, surround the notification to Team B with `{{#is_renotify}}` and `{{/is_renotify}`. Use [conditional variables][3] to further characterize the notification message based on monitor attributes.
 
 {{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle.png" alt="Select the amount of time for the alerting monitor to renotify" style="width:90%;">}}
 

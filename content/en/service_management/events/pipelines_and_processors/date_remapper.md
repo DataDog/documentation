@@ -1,6 +1,6 @@
 ---
 title: Date Remapper
-kind: Documentation
+
 
 ---
 
@@ -28,6 +28,6 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 * As of ISO 8601-1:2019, the basic format is `T[hh][mm][ss]` and the extended format is `T[hh]:[mm]:[ss]`. Earlier versions omitted the T (representing time) in both formats.
 * If multiple  date remapper processors are applied to a given pipeline, the last one (according to the pipeline's order) is taken into account.
 
-Example date remapper processor  
+Example date remapper processor
 
 {{< img src="logs/log_configuration/processor/date_remapper.png" alt="Define a date attribute" style="width:80%;" >}}

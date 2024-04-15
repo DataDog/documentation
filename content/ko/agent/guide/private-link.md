@@ -6,7 +6,7 @@ further_reading:
 - link: /integrations/amazon_web_services/#log-collection
   tag: 설명서
   text: AWS 서비스에서 로그 수집
-kind: guide
+
 title: AWS PrivateLink를 통해 Datadog에 연결
 ---
 
@@ -226,7 +226,7 @@ DNS가 올바르게 확인되나 `port 443` 연결에 실패하는 경우 VPC �
 
     이 설정은 AWS PrivateLink 및 Datadog 에이전트를 사용해 Datadog에 로그를 보낼 때 필요하며, Lambda 확장에는 필요하지 않습니다. 자세한 내용은 [Agent 로그 수집][9]을 참고하세요.
 
-2. Lambda 확장이 환경 변수 `DD_API_KEY_SECRET_ARN`로 지정된 ARN을 사용하여 AWS Secrets Manager에서 Datadog API 키를 로드하는 경우, [Secrets Manager용 VPC 엔드포인트 생성][10]을 해야합니다. 
+2. Lambda 확장이 환경 변수 `DD_API_KEY_SECRET_ARN`로 지정된 ARN을 사용하여 AWS Secrets Manager에서 Datadog API 키를 로드하는 경우, [Secrets Manager용 VPC 엔드포인트 생성][10]을 해야합니다.
 
 3. [ Agent를 다시 시작][7]합니다.
 

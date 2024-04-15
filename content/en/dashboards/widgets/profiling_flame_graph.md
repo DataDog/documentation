@@ -1,6 +1,6 @@
 ---
 title: Profiling Flame Graph Widget
-kind: documentation
+
 description: "Graph a breakdown of top consuming lines of code (CPU, Memory, ...)"
 widget_type: "flame_graph"
 further_reading:
@@ -16,10 +16,10 @@ further_reading:
 
 {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph.png" alt="Profiling Flame Graph" >}}
 
-The [profiling flame graph visualization][1] represents a breakdown of top consuming lines of code such as CPU and Memory. Add this widget to visualize stack traces of your profiled applications and accurately identify frequent resource requests. 
+The [profiling flame graph visualization][1] represents a breakdown of top consuming lines of code such as CPU and Memory. Add this widget to visualize stack traces of your profiled applications and accurately identify frequent resource requests.
 
 ## Setup
- 
+
  {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config.png" alt="Graph your data section in the profiling flame graph widget configuration" style="width:100%;" >}}
 
 ### Configuration

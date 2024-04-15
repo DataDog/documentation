@@ -1,6 +1,6 @@
 ---
 title: Advanced Configuration for Postgres Database Monitoring
-kind: documentation
+
 description: Advanced Configuration for Postgres Database Monitoring
 
 ---

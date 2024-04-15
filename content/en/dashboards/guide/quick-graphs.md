@@ -1,11 +1,11 @@
 ---
 title: Quick Graphs
-kind: documentation
+
 ---
 
 ## Overview
 
-You can use Quick Graphs to graph your data from anywhere in Datadog. 
+You can use Quick Graphs to graph your data from anywhere in Datadog.
 
 Open the Quick Graphs editor with any of the following:
 
@@ -27,14 +27,14 @@ To query metrics, follow this process outlined in [Dashboard Querying][1]:
 4. [Apply additional functions][4].
 
 ### Graphing events
-This section provides a brief overview of querying event platform data sources such as [Logs][5], [APM][6], [RUM][7], [Security][8], [Events][9], [CI Pipelines][10], [CI Tests][11], and [Findings][12]. Choose the event data source using the dropdown which is defaulted to **Metrics**. 
+This section provides a brief overview of querying event platform data sources such as [Logs][5], [APM][6], [RUM][7], [Security][8], [Events][9], [CI Pipelines][10], [CI Tests][11], and [Findings][12]. Choose the event data source using the dropdown which is defaulted to **Metrics**.
 
 To query event data, follow this process:
-1. **Filter:** Narrow down, broaden, or shift your focus on the subset of data of current interest. The top field allows you to input a search query mixing key:value and full-text search. 
+1. **Filter:** Narrow down, broaden, or shift your focus on the subset of data of current interest. The top field allows you to input a search query mixing key:value and full-text search.
 
 {{< img src="dashboards/guide/quick_graph_event_filter.png" alt="event filtering" style="width:80%;">}}
 
-2. **Choose the measure or facet:** Measure lets you choose the aggregation function whereas facet displays the unique count. 
+2. **Choose the measure or facet:** Measure lets you choose the aggregation function whereas facet displays the unique count.
 
 {{< img src="dashboards/guide/quick_graph_event_measure.png" alt="choosing measure" style="width:80%;">}}
 

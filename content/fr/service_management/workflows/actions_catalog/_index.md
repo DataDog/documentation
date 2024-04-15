@@ -9,7 +9,7 @@ cascade:
   type: actioncatalog
 disable_sidebar: false
 disable_toc: true
-kind: documentation
+
 title: Catalogue des actions
 type: actioncatalog
 ---
@@ -22,7 +22,7 @@ La solution Workflow Automation Datadog vous permet d'effectuer des actions sur
 
 En plus des actions de workflow répertoriées ci-dessous, cette solution vous permet d'accomplir ce qui suit :
 - Tirer profit de l'[action HTTP][1] pour envoyer une requête vers n'importe quel endpoint
-- Implémenter des [actions de transformation de données][2] pour effectuer des opérations requises sur les données transitant par votre workflow 
+- Implémenter des [actions de transformation de données][2] pour effectuer des opérations requises sur les données transitant par votre workflow
 - Utiliser des [actions logiques][3] pour contrôler le chemin d'exécution entre les étapes de votre workflow
 
 Pour en savoir plus sur la création de workflows, consultez la section [Créer des workflows][4].

@@ -22,7 +22,7 @@ integration_id: rum-cypress
 integration_title: Cypress
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: rum_cypress
 public_title: Cypress
@@ -86,7 +86,7 @@ Cypress インテグレーションには、サービスのチェック機能は
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

@@ -12,7 +12,7 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentation
   text: En savoir plus sur les emplacements privés
-kind: documentation
+
 title: Débuter avec les emplacements privés
 ---
 
@@ -46,7 +46,7 @@ Les résultats des tests de vos emplacements privés s'affichent de la même fa�
 
    Pour gagner du temps, vous pouvez installer Docker sur une machine virtuelle telle que [Vagrant Ubuntu 22.04][11].
 
-2. Sur le site Datadog, passez votre curseur sur **[UX Monitoring][5]** et sélectionnez **Settings** > **Private Locations**. 
+2. Sur le site Datadog, passez votre curseur sur **[UX Monitoring][5]** et sélectionnez **Settings** > **Private Locations**.
 3. Cliquez sur **Add Private Location**.
 4. Renseignez les détails de votre emplacement privé. Seuls les champs `Name` et `API key` sont requis. Si vous configurez un emplacement privé pour Windows, cochez la case **This is a Windows Private Location**.
 5. Cliquez sur **Save Location and Generate Configuration File** pour générer le fichier de configuration associé à votre emplacement privé sur votre worker.
@@ -57,7 +57,7 @@ Les résultats des tests de vos emplacements privés s'affichent de la même fa�
    Pour en savoir plus, consultez la rubrique [Options de configuration][6] et la section [Exécuter des tests Synthetic à partir d'emplacements privés][7].
 7. Copiez et collez le fichier de configuration de votre emplacement privé dans votre répertoire de travail.
 
-    **Remarque** : le fichier de configuration contient des secrets pour l'authentification de l'emplacement privé, le déchiffrement des configurations des tests et le chiffrement des résultats des tests. Comme Datadog ne conserve pas les secrets, veillez à les stocker localement avant de quitter le formulaire de création **Private Locations**. **Vous aurez à nouveau besoin de ces secrets pour ajouter d'autres workers à votre emplacement privé**. 
+    **Remarque** : le fichier de configuration contient des secrets pour l'authentification de l'emplacement privé, le déchiffrement des configurations des tests et le chiffrement des résultats des tests. Comme Datadog ne conserve pas les secrets, veillez à les stocker localement avant de quitter le formulaire de création **Private Locations**. **Vous aurez à nouveau besoin de ces secrets pour ajouter d'autres workers à votre emplacement privé**.
 8. Pour commencer l'installation, cliquez sur **View Installation Instructions**.
 9. Suivez les instructions d'installation en fonction de l'environnement dans lequel vous souhaitez exécuter le worker d'emplacement privé.
 10. Par exemple, pour Docker, lancez votre worker en tant que conteneur autonome à l'aide de la commande `run` Docker et de votre fichier de configuration :

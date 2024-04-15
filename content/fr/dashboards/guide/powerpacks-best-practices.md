@@ -6,7 +6,7 @@ further_reading:
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: Guide
   text: Pratiques recommandées pour conserver des dashboards pertinents
-kind: guide
+
 title: Diffuser l'expertise des créateurs de graphiques avec les powerpacks
 ---
 
@@ -76,7 +76,7 @@ Les powerpacks sont particulièrement utiles lorsqu'ils peuvent être personnali
 
 Le menu de création d'un powerpack suggère des variables à ajouter à votre pack selon les filtres couramment utilisés qui apparaissent dans les requêtes. Passez votre curseur sur n'importe quelle variable suggérée pour identifier les graphiques affectés par celle-ci. Pour ajouter une variable qui n'a pas été suggérée, modifiez vos graphiques directement dans le dashboard de manière à utiliser la variable souhaitée en tant que filtre ou variable de modèle.
 
-Modifiez les noms des variables pour indiquer aux autres utilisateurs comment les utiliser. Dans l'exemple ci-dessous, la variable `@appsec.type` a été renommée `AttackType` afin de clarifier l'entrée attendue. 
+Modifiez les noms des variables pour indiquer aux autres utilisateurs comment les utiliser. Dans l'exemple ci-dessous, la variable `@appsec.type` a été renommée `AttackType` afin de clarifier l'entrée attendue.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/create_powerpack.png" alt="L'écran de création de powerpack. Sur la gauche figurent les champs « Powerpack Title » et « Group Title » (contenant tous deux la mention « Application Security Overview »), la section « Add Tags » configurée avec les tags « security » et « app », ainsi que plusieurs variables configurées dans la section « Add Variables », notamment l'attribut @appsec.type nommé AttackType. Sous cette section figure une autre intitulée « Add Common Filters as Variables » accompagnée de plusieurs options, dont le filtre @appsec.category:attack_attempt surligné. Plusieurs graphiques sont affichés à droite ; trois d'entre eux sont surlignés avec une couleur identique à celle appliquée au filtre @appsec.category:attack_attempt à gauche" style="width:100%;" >}}
 

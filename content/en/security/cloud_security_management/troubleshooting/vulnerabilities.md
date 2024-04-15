@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Cloud Security Management Vulnerabilities
-kind: documentation
+
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
@@ -35,7 +35,7 @@ Ensure all the prerequisites are met for CSM Vulnerabilities:
 CSM Vulnerabilities is **not** available for the following environments:
 
   - Windows
-  - AWS Fargate 
+  - AWS Fargate
   - CRI-O runtime
   - podman runtime
 
@@ -50,7 +50,7 @@ The resulting error appears as:
 Error: failed to check current disk usage: not enough disk space to safely collect sbom, 192108482560 available, 1073741824000 required
 ```
 
-Workaround: 
+Workaround:
 
 - Increase the available disk space to at least 1 GB. If your images are larger than 1 GB, increase your disk space accordingly.
 - If all of your images are smaller than 1 GB, you can decrease the default Agent request disk space with the environment variable: `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` (default value 1GB).
@@ -74,7 +74,7 @@ The workaround for this issue is to set the configuration option `discard_unpack
     -  `datadog.agent.sbom_attempts`: Tracks sbom collection attempts by `source` and `type`.
     -  `datadog.agent.sbom_generation_duration`: Measures the time that it takes to generate SBOMs in seconds.
     -  `datadog.agent.sbom_errors`: Number of sbom failures by `source`, `type`, and `reason`.
-    -  `datadog.agent.export_size`: The size of the archive written on disk. 
+    -  `datadog.agent.export_size`: The size of the archive written on disk.
 
 ## Further Reading
 

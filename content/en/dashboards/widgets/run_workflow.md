@@ -1,6 +1,6 @@
 ---
 title: Run Workflow Widget
-kind: documentation
+
 widget_type: run_workflow
 disable_toc: false
 further_reading:

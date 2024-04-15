@@ -1,6 +1,6 @@
 ---
 title: Utilisation de base de l'Agent pour Fedora
-kind: documentation
+
 platform: Fedora
 aliases:
   - /fr/guides/basic_agent_usage/fedora/

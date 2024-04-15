@@ -1,9 +1,9 @@
 ---
-kind: faq
+
 title: Mon bean correspond à mon intégration JMX, mais aucune donnée n'est collectée !
 ---
 
-Vous ne parvenez pas à configurer votre intégration JMX ? Voici quelques articles utiles pour vous aider : 
+Vous ne parvenez pas à configurer votre intégration JMX ? Voici quelques articles utiles pour vous aider :
 
 * [Dépannage de l'intégration JMX][1]
 * [Afficher les données JMX dans jConsole et configurer votre jmx.yaml pour les recueillir][2]

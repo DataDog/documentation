@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: ブログ
   text: Datadog クリップボードでデータを楽に検索
-kind: documentation
+
 title: Datadog クリップボード
 ---
 

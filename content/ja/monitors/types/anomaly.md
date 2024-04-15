@@ -17,7 +17,7 @@ further_reading:
 - link: dashboards/functions/algorithms/#anomalies
   tag: ドキュメント
   text: 異常関数
-kind: documentation
+
 title: 異常検知モニター
 ---
 
@@ -63,19 +63,19 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="Anomaly monitor configuration ページの Advanced Options メニューで、アジャイルアルゴリズムによる異常検出と予測データからの異常 2 乖離を 1 週間ごとの季節性で行い、サマータイムを適用し、ロールアップ間隔を 60 秒に設定した場合" style="width:80%;">}}
 
 
-偏差 
+偏差
 : 灰色の帯の幅。[異常検知関数][3]で使用される範囲のパラメータに相当。
 
 アルゴリズム
 : [異常検知アルゴリズム](#anomaly-detection-algorithms) (`basic`、`agile`、`robust`)。
 
-季節性 
+季節性
 : メトリクスを分析する `agile` または `robust` アルゴリズムの[季節性](#seasonality) (`hourly`、`daily`、`weekly`) サイクル。
 
 夏時間
 :  `agile` または `robust` の異常検知で季節性に `weekly` または `daily` を使用する場合に利用可能。詳細については、[異常検知とタイムゾーン][4]を参照。
 
-rollup  
+rollup
 : [rollup の間隔][5]。
 
 しきい値

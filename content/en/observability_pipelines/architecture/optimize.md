@@ -1,6 +1,6 @@
 ---
 title: Optimizing the Instance
-kind: Documentation
+
 ---
 
 {{< site-region region="gov" >}}

@@ -1,6 +1,6 @@
 ---
 title: Real User Monitoring Data Security
-kind: documentation
+
 aliases:
     - /real_user_monitoring/security/
 further_reading:
@@ -40,7 +40,7 @@ Developers are responsible for:
 RUM can be configured for compliance with many standards and regulatory frameworks, including, but not limited to:
 
 - GDPR
-- HIPAA 
+- HIPAA
 - ISO
 - CCPA/CPRA
 
@@ -65,7 +65,7 @@ Because the client token is only used to send data to Datadog, there is no risk 
 - Automatically [filtering out bots][19] when capturing RUM data
 
 #### Authenticated proxy
-One method of using the client token to filter out bots is an authenticated proxy. In this method, a placeholder string is substituted for the `clientToken` when initializing the Datadog RUM Browser SDK. The proxy knows the real client token, but the end user does not. 
+One method of using the client token to filter out bots is an authenticated proxy. In this method, a placeholder string is substituted for the `clientToken` when initializing the Datadog RUM Browser SDK. The proxy knows the real client token, but the end user does not.
 
 The proxy is configured to check for valid user information before passing the session data to Datadog, thereby confirming that a real user is signed in and transmitting traffic to be monitored. When receiving traffic, the proxy verifies that the data includes the placeholder string and replaces it with the real `clientToken` before forwarding the data to Datadog.
 

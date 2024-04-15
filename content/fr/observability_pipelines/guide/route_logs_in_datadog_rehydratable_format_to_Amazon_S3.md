@@ -10,7 +10,7 @@ further_reading:
 - link: /logs/log_configuration/rehydrating/
   tag: Documentation
   text: En savoir plus sur la réintégration des archives de logs
-kind: documentation
+
 title: Acheminer des logs dans un format réintégrable à Datadog vers Amazon S3
 ---
 
@@ -30,7 +30,7 @@ Consultez la [tarification AWS][1] pour connaître les frais de transfert de don
 [1]: https://aws.amazon.com/s3/pricing/
 {{< /site-region >}}
 
-1. Accédez aux [compartiments Amazon S3][2]. 
+1. Accédez aux [compartiments Amazon S3][2].
 1. Cliquez sur **Create bucket**.
 1. Saisissez un nom décrivant votre compartiment.
 1. Assurez-vous que votre compartiment n'est pas accessible au public.
@@ -210,14 +210,14 @@ Remplacez les paramètres `${DD_ARCHIVES_BUCKET}` et $`{DD_ARCHIVES_REGION}` en 
 ### Interface utilisateur de création de pipeline
 
 1. Accédez à votre [pipeline][8].
-1. (Facultatif) Ajoutez une transformation de remappage pour taguer tous les logs envoyés à la destination `datadog_archives`.   
-  a. Cliquez sur **Edit** puis sur **Add More** dans le carré **Add Transforms**.  
-  b. Cliquez sur le carré **Remap**.  
-  c. Saisissez un nom décrivant le composant.  
-  d. Dans le champ **Inputs**, sélectionnez la source à connecter à cette destination.  
-  e. Ajoutez `.sender = "observability_pipelines_worker"` dans la section **Source**.  
-  f. Cliquez sur **Save**.  
-  g. Revenez à votre pipeline. 
+1. (Facultatif) Ajoutez une transformation de remappage pour taguer tous les logs envoyés à la destination `datadog_archives`.
+  a. Cliquez sur **Edit** puis sur **Add More** dans le carré **Add Transforms**.
+  b. Cliquez sur le carré **Remap**.
+  c. Saisissez un nom décrivant le composant.
+  d. Dans le champ **Inputs**, sélectionnez la source à connecter à cette destination.
+  e. Ajoutez `.sender = "observability_pipelines_worker"` dans la section **Source**.
+  f. Cliquez sur **Save**.
+  g. Revenez à votre pipeline.
 1. Cliquez sur **Edit**.
 1. Cliquez sur **Add More** dans le carré **Add Destination**.
 1. Cliquez sur le carré **Datadog Archives**.

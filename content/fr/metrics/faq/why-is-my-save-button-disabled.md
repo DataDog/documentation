@@ -1,6 +1,6 @@
 ---
 is_beta: false
-kind: faq
+
 title: Pourquoi mon bouton « Save » est-il grisé lorsque je configure des tags de
   métriques ?
 ---
@@ -13,7 +13,7 @@ Si vous utilisez Metrics without Limits™, vos données de métriques brutes 
 Le nombre de métriques custom indexées obtenues pour votre configuration Metrics without Limits™ est calculé comme suit : (`nombre de combinaisons de valeurs de tag restantes` spécifié par votre configuration de tags) X (`nombre d'agrégations temporelles/spatiales` spécifié dans la section Customize Aggregations)
 
 **Exemple**
-Supposons que vous souhaitiez utiliser Metrics without Limits™ pour réduire la cardinalité de la métrique `shopist.basket.size`. 
+Supposons que vous souhaitiez utiliser Metrics without Limits™ pour réduire la cardinalité de la métrique `shopist.basket.size`.
 
 {{< img src="metrics/faq/all-tags.jpg" alt="Configuration « All tags »">}}
 

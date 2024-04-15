@@ -3,7 +3,7 @@ aliases:
 - /ja/agent/faq/how-can-i-change-the-hostname/
 comments: <!–– オリジナルのフローチャートは lucidchart にあります。リンクは Trello を検索するか、Grant にお尋ねください。
   ––>
-kind: faq
+
 title: Datadog が Agent ホスト名を決定する方法
 ---
 

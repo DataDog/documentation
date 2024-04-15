@@ -1,6 +1,6 @@
 ---
 title: Logs Troubleshooting
-kind: documentation
+
 ---
 
 If you experience unexpected behavior with Datadog Logs, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
@@ -26,11 +26,11 @@ If you are unable to convert the timestamp of JSON logs to a [recognized date fo
 
 2. In **Pipelines**, hover over **Preprocessing for JSON logs**, and click the pencil icon.
 
-3. Remove `timestamp` from the reserved attribute mapping list. The attribute is not being parsed as the official timestamp of the log during preprocessing. 
+3. Remove `timestamp` from the reserved attribute mapping list. The attribute is not being parsed as the official timestamp of the log during preprocessing.
 
 {{< img src="logs/troubleshooting/preprocessing_json_timestamp.png" alt="The preprocessing for JSON logs configuration box with the date attributes, which includes timestamp by default" style="width:90%" >}}
 
-2. Set up the [arithmetic processor][5] so that the formula multiples your timestamp by 1000 to convert it to milliseconds. The formula's result is a new attribute. 
+2. Set up the [arithmetic processor][5] so that the formula multiples your timestamp by 1000 to convert it to milliseconds. The formula's result is a new attribute.
 
 3. Set up the [log date remapper][6] to use the new attribute as the official timestamp.
 

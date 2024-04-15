@@ -1,6 +1,6 @@
 ---
 title: SLO List Widget
-kind: documentation
+
 widget_type: slo_list
 description: "Display a list of SLOs"
 aliases:
@@ -10,7 +10,7 @@ further_reading:
   text: "Track the status of all your SLOs in Datadog"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
-  text: "Building Dashboards using JSON" 
+  text: "Building Dashboards using JSON"
 ---
 
 SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service.
@@ -26,7 +26,7 @@ The SLO List widget displays a subset of SLOs over their primary time window. Al
 ### Configuration
 
 1. Add an SLO List widget to a dashboard.
-2. Use tags to filter the list of SLOs (such as `service:foo, env:prod`). Template variables are supported. 
+2. Use tags to filter the list of SLOs (such as `service:foo, env:prod`). Template variables are supported.
 3. Choose the maximum number of SLOs to display (the default is 100) and sort by either status or error budget.
 4. Optionally, give the widget a title.
 

@@ -11,7 +11,7 @@ code_lang: ruby
 code_lang_weight: 15
 dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md
-kind: documentation
+
 title: Tracer des applications Ruby
 type: multi-code-lang
 ---
@@ -1886,7 +1886,7 @@ end
 
 ### RSpec
 
-Lorsque vous utilisez le framework de test `rspec`, l'intégration RSpec trace toutes les exécutions d'exemples et de groupes d'exemples 
+Lorsque vous utilisez le framework de test `rspec`, l'intégration RSpec trace toutes les exécutions d'exemples et de groupes d'exemples
 
 Pour activer votre intégration, utilisez la méthode `Datadog.configure` :
 

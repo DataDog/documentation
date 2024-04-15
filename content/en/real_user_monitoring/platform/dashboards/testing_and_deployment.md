@@ -1,6 +1,6 @@
 ---
 title: Testing and Deployment Dashboards
-kind: documentation
+
 description: Learn about the out-of-the-box RUM testing and deployment dashboards.
 aliases:
 - '/real_user_monitoring/dashboards/testing_coverage'
@@ -20,13 +20,13 @@ further_reading:
 ## Testing coverage
 
 
-The [Synthetics & RUM application testing coverage dashboard][1] uses data collected from [RUM][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
+The [Synthetics & RUM application testing coverage dashboard][1] uses data collected from [RUM][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application.
 
 You can use this dashboard to answer the following questions:
 
 - What is and what is not being tested in your application?
 - How do you identify the most popular sections of your application to continuously monitor?
-- How do you find the most popular user actions in your application to add browser test coverage? 
+- How do you find the most popular user actions in your application to add browser test coverage?
 
 It shows:
 
@@ -45,7 +45,7 @@ The RUM Web App Deployment Tracking dashboard helps you identify when a recent d
 
 - **Core web vitals**:
   For all views, three browser performance metrics are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance metrics, such as Load Time, are also available.
-- **Errors**: 
+- **Errors**:
   See a count of errors, percentage of views with errors, and explore ongoing issues.
 - **Browser performance metrics**:
   Compare performance metrics like loading time, sessions, errors, and load times across different services and versions.
@@ -60,7 +60,7 @@ To use deployment tracking, make sure to specify an app version when you initial
 
 This dashboard shows:
 
-- **Crashes**: 
+- **Crashes**:
   Review crash count by version, crash rate by version, and explore ongoing crashes.
 - **Errors**:
   Review error count by version, error rate by version, and explore ongoing errors.

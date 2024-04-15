@@ -1,6 +1,6 @@
 ---
 title: Optimiser la rétention des processus
-kind: documentation
+
 aliases:
   - /fr/infrastructure/process/generate_process_metrics/
   - /fr/processes/processing/process_to_metrics/

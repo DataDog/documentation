@@ -1,6 +1,6 @@
 ---
 title: Node.js Compatibility Requirements
-kind: documentation
+
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50

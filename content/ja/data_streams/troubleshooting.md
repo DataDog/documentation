@@ -1,6 +1,6 @@
 ---
 description: データストリームモニタリングのトラブルシューティング
-kind: documentation
+
 title: データストリームモニタリングのトラブルシューティング
 ---
 
@@ -50,7 +50,7 @@ Queue タブにメトリクスを入力するためには、セルフホスト�
 * Confluent Cloud: DSM でインスツルメンテーションしたクラスターに [Confluent Cloud インテグレーション][10]が設定されていれば、クラスターの情報は DSM に自動的に伝播されます。
 * Confluent Platform: 上記のセルフホスティング Kafka と同様に、`kafka_cluster` タグを Agent の構成に追加する必要があります。
 
-[1]: /ja/data_streams/#setup  
+[1]: /ja/data_streams/#setup
 [2]: /ja/data_streams/go/
 [3]: https://github.com/DataDog/dd-trace-java/blob/76f25aedf70254cb04d55eedbed6e12921c6e509/dd-trace-api/src/main/java/datadog/trace/api/experimental/DataStreamsCheckpointer.java#L25
 [4]: /ja/data_streams/#setup
@@ -58,5 +58,5 @@ Queue タブにメトリクスを入力するためには、セルフホスト�
 [6]: /ja/integrations/rabbitmq/?tab=host
 [7]: /ja/integrations/kafka/?tab=host
 [8]: /ja/help/
-[9]: https://docs.datadoghq.com/ja/integrations/amazon_msk/ 
+[9]: https://docs.datadoghq.com/ja/integrations/amazon_msk/
 [10]: https://docs.datadoghq.com/ja/integrations/confluent_cloud/

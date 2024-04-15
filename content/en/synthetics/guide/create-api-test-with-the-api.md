@@ -1,6 +1,6 @@
 ---
 title: Create An API Test With The API
-kind: guide
+
 further_reading:
 - link: "/api/latest/synthetics/"
   tag: "API"
@@ -17,7 +17,7 @@ further_reading:
 
 This guide contains examples of configuration files and links to [Terraform][2] resources you can use to create API tests, as well as associated synthetics resources such as global variables.
 
-   - If you're using the API, see the [JSON configuration examples](#json-configuration) 
+   - If you're using the API, see the [JSON configuration examples](#json-configuration)
    - If you're using the Python client, see the [Python client example](#python-client)
    - If you're using Terraform, see the [Terraform example](#terraform)
 
@@ -470,7 +470,7 @@ configuration = Configuration(
 
 ### API tests
 
-The [synthetic test resource][7], with `type` set to `api`, can be used to create and manage your API tests through Terraform. 
+The [synthetic test resource][7], with `type` set to `api`, can be used to create and manage your API tests through Terraform.
 
 ### Private locations
 

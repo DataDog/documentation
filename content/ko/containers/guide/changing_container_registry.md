@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ko/agent/guide/changing_container_registry
-kind: guide
+
 title: 컨테이너 레지스트리 변경하기
 ---
 
@@ -27,7 +27,7 @@ GCR 또는 ECR 레지스트리에서 가져오는 것은 Docker Hub에서 가져
 
 컨테이너 레지스트리를 업데이트하려면 새 레지스트리에 대해 pull 명령을 실행합니다. 다양한 컨테이너 레지스트리에 대한 Docker 풀 명령을 보려면 [Docker 문서 페이지 개요][1]의 예를 참조하세요.
 
-## Helm 차트를 사용하는 Kubernetes 
+## Helm 차트를 사용하는 Kubernetes
 
 Kubernetes(GKE, EKS, AKS 및 OpenShift 포함)에서 Datadog helm 차트를 사용하여 Datadog Agent(또는 Datadog  Cluster Agent)를 배포하는 동안 컨테이너 레지스트리를 업데이트하려면 다른 레지스트리를 지정하도록 `values.yaml`을 업데이트하세요.
 
@@ -39,14 +39,14 @@ Kubernetes(GKE, EKS, AKS 및 OpenShift 포함)에서 Datadog helm 차트를 사�
     ```
 2. `values.yaml`에서 `agents.image.repository`, `clusterAgent.image.repository`, `clusterChecksRunner.image.repository`에 대한 오버라이드를 제거하세요.
 
-### Datadog Helm 차트 < v2.7.0 
+### Datadog Helm 차트 < v2.7.0
 
 리포지토리를 `gcr.io`로 변경하세요.
 
 ```yaml
 agents:
   image:
-    repository: gcr.io/datadoghq/agent  
+    repository: gcr.io/datadoghq/agent
 
 clusterAgent:
   image:
@@ -59,7 +59,7 @@ clusterChecksRunner:
 
 Datadog Helm 차트 사용에 대한 자세한 내용은 [Datadog Kubernetes 문서][2] 및 예시 [`values.yaml`][3] 파일을 참조하세요.
 
-## Datadog Operator를 사용하는 Kubernetes 
+## Datadog Operator를 사용하는 Kubernetes
 
 Datadog Operator를 사용하여 Datadog Agent (또는 Datadog Cluster Agent)를 배포하는 동안 레지스트리를 업데이트하려면:
 

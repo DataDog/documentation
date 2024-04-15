@@ -7,7 +7,7 @@ further_reading:
   tag: Blog
   text: Surveiller des périphériques SNMP avec Datadog
 is_beta: true
-kind: documentation
+
 title: Carte de topologie des périphériques réseau
 ---
 

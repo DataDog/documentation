@@ -1,6 +1,6 @@
 ---
 title: Tickets Freshservice avec des webhooks
-kind: guide
+
 author: Trevor Veralrud
 further_reading:
   - link: /integrations/webhooks/
@@ -42,7 +42,7 @@ Saisissez une nouvelle charge utile de ticket au format JSON. L'exemple suivant 
 **Remarques** :
 
 * Les valeurs telles que `$EVENT_TITLE` sont des variables utilisées par l'intégration Webhooks. Pour obtenir la liste complète de ces variables ainsi que leur signification, consultez le carré d'intégration Webhooks ou la [documentation sur l'intégration Webhooks][3].
-* Saisissez manuellement une adresse e-mail dans le champ d'e-mail au lieu d'utiliser la variable `$EMAIL` : cette dernière est uniquement renseignée lorsque le webhook est mentionné dans un commentaire du *flux d'événements* et ne peut pas être utilisée dans les *alertes de monitor*. 
+* Saisissez manuellement une adresse e-mail dans le champ d'e-mail au lieu d'utiliser la variable `$EMAIL` : cette dernière est uniquement renseignée lorsque le webhook est mentionné dans un commentaire du *flux d'événements* et ne peut pas être utilisée dans les *alertes de monitor*.
 * Le champ `description` de la charge utile prend en charge le code HTML. La variable `$EVENT_MSG` génère le message de votre monitor au format Markdown, qui n'est pas pris en charge par l'API de Freshservice. Utilisez donc `$TEXT_ONLY_MSG` à la place, avec un snapshot de graphique.
 * Les champs `status` et `priority` sont des nombres mappés à différentes valeurs. Pour afficher ces valeurs, consultez [l'endpoint de ticket de Freshservice][2].
 

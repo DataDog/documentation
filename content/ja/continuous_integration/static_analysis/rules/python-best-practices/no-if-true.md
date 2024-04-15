@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 条件において True と比較しない
 ---
 ## メタデータ

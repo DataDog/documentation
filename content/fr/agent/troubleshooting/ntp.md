@@ -1,6 +1,6 @@
 ---
 title: Problèmes liés au protocole NTP
-kind: documentation
+
 aliases:
   - /fr/agent/faq/network-time-protocol-ntp-offset-issues
 ---

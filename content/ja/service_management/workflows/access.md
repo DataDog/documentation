@@ -19,7 +19,7 @@ further_reading:
 - link: /service_management/workflows/actions_catalog
   tag: ドキュメント
   text: ワークフローアクションの一覧を見る
-kind: documentation
+
 title: アクセス・認証
 ---
 
@@ -50,7 +50,7 @@ title: アクセス・認証
 1. **Create a service account** をクリックします。
 1. サービスアカウントのユーザーのロールを選択します。
 1. サービスアカウントを保存するには、**Create** をクリックします。
-1. ワークフローを保存して、変更を適用します。 
+1. ワークフローを保存して、変更を適用します。
 
 ワークフローを実行する際、ワークフローアクションで定義された接続をサービスアカウントユーザーが解決します。そのため、サービスアカウントユーザーは `connections_resolve` 権限を必要とします。Datadog Admin Role と Datadog Standard Role は、`connections_resolve` 権限を含んでいます。
 

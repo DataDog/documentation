@@ -1,6 +1,6 @@
 ---
 title: iOS Log Collection
-kind: documentation
+
 description: Collect logs from your iOS applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
@@ -71,7 +71,7 @@ DatadogLogs.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code. 
+2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code.
 
 For more information about setting up a client token, see the [client token documentation][2].
 
@@ -88,7 +88,7 @@ Datadog.initialize(
 		clientToken: "<client token>",
 		env: "<environment>",
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -123,7 +123,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .eu1,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -159,7 +159,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .us3,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -197,7 +197,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .us5,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -235,7 +235,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .us1_fed,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -273,7 +273,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .ap1,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -313,7 +313,7 @@ The SDK changes its behavior according to the new value. For example, if the cur
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6]. The cache directory cannot be read by any other app installed on the device.
 
-When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level. 
+When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level.
 
 {{< tabs >}}
 {{% tab "Swift" %}}

@@ -16,7 +16,7 @@ further_reading:
 - link: /dashboards/widgets/
   tag: Documentation
   text: ダッシュボードのウィジェットについて
-kind: documentation
+
 title: ダッシュボードの共有
 ---
 

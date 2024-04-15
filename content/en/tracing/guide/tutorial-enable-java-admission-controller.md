@@ -1,6 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Java Application with the Admission Controller
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tags: Documentation
@@ -53,7 +53,7 @@ git clone https://github.com/DataDog/springblog.git
 
 The repository contains a multi-service Java application pre-configured to be run within Docker and Kubernetes. The sample app is a basic Spring app using REST.
 
-## Start and run the sample application 
+## Start and run the sample application
 
 1. Switch to to the `/k8s` subdirectory in the springblog repo:
    {{< code-block lang="shell" >}}
@@ -75,7 +75,7 @@ kubectl get pods{{< /code-block >}}
     springfront-797b78d6db-p5c84               1/1     Terminating   0               2m41s
     ```
 
-    The service is started and listens on port 8080. It exposes an `/upstream` endpoint. 
+    The service is started and listens on port 8080. It exposes an `/upstream` endpoint.
 
 4. Check that communication takes place by running the following curl command:
    {{< code-block lang="shell" >}}

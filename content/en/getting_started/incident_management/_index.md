@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Incident Management
-kind: documentation
+
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
@@ -72,19 +72,19 @@ This guide describes using the [Datadog Clipboard][2] to declare an incident. Us
 | Severity Level           | Set to **Unknown** since it's unclear whether customers are being impacted and how related services are being impacted. See the in-app description of what each severity level means and follow your team's guidelines.                                                                                |
 | Incident Commander       | Leave this assigned to you. In an actual incident this would be assigned to the leader of the incident investigation. You or others can update who the incident commander is as the incident investigation progresses.                                                                                 |
 | Notifications            | Leave blank because this is only a test, and you don't want to alert anyone else or another service. For an actual incident, add people and services that should be notified to help with the investigation and remediation. You can send these notifications to Slack and PagerDuty as well. |
-| Notes & Links            | Add information to support the reason you are declaring the incident. These can be graphs, logs, or other key visuals. The graph and the monitor you selected is already included but you can add additional signals. For example, copy and paste the URL for this guide.   
+| Notes & Links            | Add information to support the reason you are declaring the incident. These can be graphs, logs, or other key visuals. The graph and the monitor you selected is already included but you can add additional signals. For example, copy and paste the URL for this guide.
 9. Click **Declare Incident** to create the incident.
    You can also declare an incident from a [graph][4], [monitor][5], or the [incidents API][6]. For APM users, you can click the incidents icon on any APM graph to declare an incident.
 As part of the Slack integration, you can also use the `/datadog incident` shortcut to declare an incident and set the title, severity, and customer impact.
 10. Click **Slack Channel** on the incident's page to go to the incident's Slack channel.
-   
+
 A new Slack channel dedicated to the incident is automatically created for any new incident, so that you can consolidate communication with your team and begin troubleshooting. If your organization's Slack integration is set up to update a global incident channel, then the channel is updated with the new incident.
 
 In this example, you are the only one added to the new incident channel. When you add people or services in _Notifications_ for an actual incident, all recipients are automatically added to the incident channel.
 
 If you don't have the Slack integration enabled, click **Add Chat** to add the link to the chat service you are using to discuss the incident.
 
-Click **Add Video Call** to add a link to the call where discussions about the incident are happening. 
+Click **Add Video Call** to add a link to the call where discussions about the incident are happening.
 
 ### Troubleshooting and updating the incident
 
@@ -191,7 +191,7 @@ The [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google
 You can also declare and edit incidents and quickly communicate to your teams through integrations with Slack, Zoom, and many more.
 
 {{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
-  
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -3,7 +3,7 @@ aliases:
 - /ja/integrations/faq/gathering-kubernetes-events
 - /ja/agent/kubernetes/event_collection
 - /ja/agent/kubernetes/configuration
-kind: documentation
+
 title: Kubernetes 上の Datadog Agent のさらなる構成
 ---
 
@@ -73,7 +73,7 @@ datadog:
   collectEvents: true
 clusterAgent:
   enabled: true
-  rbac: 
+  rbac:
     create: true
 ```
 
@@ -284,7 +284,7 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-  clusterAgentTokenSecret: 
+  clusterAgentTokenSecret:
     secretName: <SECRET_NAME>
     keyName: <KEY_NAME>
 ```
@@ -700,5 +700,5 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 [20]: https://app.datadoghq.com/orchestration/overview
 [21]: /ja/infrastructure/containers/orchestrator_explorer
 [22]: /ja/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
-[23]: /ja/infrastructure/process/ 
+[23]: /ja/infrastructure/process/
 [24]: /ja/account_management/api-app-keys/#application-keys

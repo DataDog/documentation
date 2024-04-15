@@ -17,7 +17,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/
   tag: Blog
   text: Surveiller des API gRPC avec la surveillance Synthetic Datadog
-kind: documentation
+
 title: Checks de santé GRPC
 ---
 ## Présentation
@@ -172,7 +172,7 @@ Voici la liste des erreurs concernées :
 
 ## Autorisations
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][12] peuvent créer, modifier et supprimer des tests de check de santé gRPC Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][12]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][12] peuvent créer, modifier et supprimer des tests de check de santé gRPC Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][12].
 
 Si vous utilisez des [rôles personnalisés][13], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write`.
 

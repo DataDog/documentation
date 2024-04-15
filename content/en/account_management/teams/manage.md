@@ -1,6 +1,6 @@
 ---
 title: Team Management
-kind: documentation
+
 ---
 
 ## Team membership

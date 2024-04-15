@@ -14,7 +14,7 @@ further_reading:
   tag: Blog
   text: Surveiller vos groupes de disponibilité AlwaysOn avec la solution Database
     Monitoring Datadog
-kind: documentation
+
 title: Configuration de Database Monitoring pour SQL Server auto-hébergé
 ---
 

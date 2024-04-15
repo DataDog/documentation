@@ -3,7 +3,7 @@ aliases:
 - /fr/tracing/trace_search_and_analytics/agent_trace_search/
 - /fr/tracing/app_analytics/agent_trace_search/
 - /fr/tracing/guide/app_analytics_agent_configuration/
-kind: Documentation
+
 title: Configurer App Analytics avec l'Agent
 ---
 

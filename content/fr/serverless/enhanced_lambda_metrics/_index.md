@@ -2,7 +2,7 @@
 aliases:
 - /fr/serverless/real-time-enhanced-metrics
 - /fr/serverless/real_time_enhanced_metrics
-kind: documentation
+
 title: Métriques Lambda optimisées
 ---
 
@@ -19,7 +19,7 @@ Les métriques Lambda optimisées vous offrent des informations plus détaillée
 Les métriques Lambda optimisées en temps réel suivantes sont disponibles. Elles reçoivent les tags `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` et `runtime`. Ces métriques sont de type [distribution][2], et vous pouvez les interroger à l'aide des agrégations `count`, `min`, `max`, `sum` et `avg`.
 
 
-`aws.lambda.enhanced.invocations`     
+`aws.lambda.enhanced.invocations`
 : Mesure le nombre de fois qu'une fonction est appelée en réponse à un événement ou à une invocation d'un appel API.
 
 `aws.lambda.enhanced.errors`

@@ -18,7 +18,7 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: Découvrir comment explorer vos logs
-kind: documentation
+
 title: Guide de configuration d'AWS pour Cloud SIEM
 ---
 

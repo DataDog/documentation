@@ -17,7 +17,7 @@ integration_id: amazon-sns
 integration_title: Amazon SNS
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_sns
 public_title: Intégration Datadog/Amazon SNS

@@ -38,7 +38,7 @@ integration_id: amazon-api-gateway
 integration_title: Amazon API Gateway
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: amazon_api_gateway
 public_title: Amazon API Gateway 통합
@@ -92,7 +92,7 @@ AWS에서 검색된 각 메트릭에는 호스트 이름, 보안 그룹 등을 �
 API Gateway 로깅 활성화 방법:
 
 1. AWS 콘솔에서 API Gateway로 이동하세요.
-2. 원하는 API를 선택하고 Stages 섹션으로 이동하세요. 
+2. 원하는 API를 선택하고 Stages 섹션으로 이동하세요.
 3. **Logs** 탭에서 **Enable CloudWatch Logs**와 **Enable Access Logging**을 활성화하세요.
 4. `INFO` 레벨을 선택하여 모든 요청이 있는지 확인하세요.
 5. **CloudWatch Group** 이름이 `api-gateway`로 시작하는지 확인하세요.

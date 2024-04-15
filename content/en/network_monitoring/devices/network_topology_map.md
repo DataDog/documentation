@@ -1,6 +1,6 @@
 ---
 title: Network Device Topology Map
-kind: documentation
+
 is_beta: true
 further_reading:
 - link: "/network_monitoring/devices/data"

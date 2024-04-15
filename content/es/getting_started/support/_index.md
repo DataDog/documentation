@@ -3,7 +3,7 @@ further_reading:
 - link: https://docs.datadoghq.com/agent/troubleshooting/
   tag: Documentación
   text: Solucionar problemas del Agent
-kind: documentation
+
 title: Empezando con el soporte de Datadog
 ---
 
@@ -23,7 +23,7 @@ Para que la resolución de tu problema sea lo más eficaz posible, prepárate pa
 
    - Nombre de la organización (si tienes acceso a [más de una][2])
    - [Sitio de Datadog][3]
-   - Enlaces a páginas para mostrar el problema en tu cuenta de Datadog 
+   - Enlaces a páginas para mostrar el problema en tu cuenta de Datadog
    - Capturas o grabaciones de pantalla del comportamiento en cuestión
    - Medidas que pueden adoptarse para reproducir el problema
    - Si el problema está relacionado con el funcionamiento del Datadog Agent, un [flare del Agent][4]
@@ -52,7 +52,7 @@ Cuando se abre un nuevo chat, se te pregunta si tienes una pregunta **técnica**
    - Si tienes preguntas técnicas, se te dirigirá al primer ingeniero de soporte técnico disponible. Esto es ideal para cualquier pregunta que tengas sobre el uso o la configuración de Datadog.
    - Si tienes preguntas sobre ventas, se te dirigirá al primer representante del equipo de ventas de Datadog disponible, que podrá responder a tus preguntas sobre facturación y gestión de cuentas.
 
-**Nota**: Para cuestiones urgentes, es mejor si te pones en contacto a través de un ticket de soporte e indicas por qué tu solicitud es urgente. De este modo, los responsables del soporte podrán dirigir tu caso al experto adecuado de forma inmediata. 
+**Nota**: Para cuestiones urgentes, es mejor si te pones en contacto a través de un ticket de soporte e indicas por qué tu solicitud es urgente. De este modo, los responsables del soporte podrán dirigir tu caso al experto adecuado de forma inmediata.
 
 ### Prácticas recomendadas para cuestiones técnicas
 
@@ -60,7 +60,7 @@ Asegúrate de cumplir con la mayor cantidad posible de [requisitos previos](#pre
 
 ### Seguimiento
 
-Cuando se cierra el chat, se crea automáticamente un ticket de soporte. Si el problema se resolvió en el chat, se puede cerrar el ticket. 
+Cuando se cierra el chat, se crea automáticamente un ticket de soporte. Si el problema se resolvió en el chat, se puede cerrar el ticket.
 
 Si se requiere una investigación adicional, el ticket que contiene la totalidad de los detalles y el contexto proporcionado durante el chat se dirige a los expertos en las áreas apropiadas. Utiliza el ticket para seguir comunicándote con el equipo de soporte de Datadog.
 

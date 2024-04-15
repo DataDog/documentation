@@ -1,6 +1,6 @@
 ---
 title: Amazon ECS Log Collection
-kind: documentation
+
 aliases:
   - /agent/amazon_ecs/logs
 further_reading:

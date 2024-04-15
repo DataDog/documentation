@@ -13,7 +13,7 @@ further_reading:
 - link: profiler/profiler_troubleshooting/java
   tag: Documentation
   text: Résoudre les problèmes rencontrés en utilisant le profileur
-kind: Documentation
+
 title: Activer le profileur Java
 type: multi-code-lang
 ---
@@ -154,7 +154,7 @@ Pour les utilisateurs de JDK Mission Control (JMC), l'événement d'échantillon
 
 #### Paramètres sous Linux
 
-Le moteur CPU fonctionne sur la plupart des systèmes. Toutefois, si la valeur de `/proc/sys/kernel/perf_event_paranoid` est définie sur `3`, le profileur ne peut pas utiliser d'événement de performance pour planifier l'échantillonnage du CPU. Le moteur doit alors avoir recours à `itimer`, ce qui dégrade la qualité du profiling. Utilisez la commande suivante pour définir `/proc/sys/kernel/perf_event_paranoid` sur `2` ou sur une valeur inférieure : 
+Le moteur CPU fonctionne sur la plupart des systèmes. Toutefois, si la valeur de `/proc/sys/kernel/perf_event_paranoid` est définie sur `3`, le profileur ne peut pas utiliser d'événement de performance pour planifier l'échantillonnage du CPU. Le moteur doit alors avoir recours à `itimer`, ce qui dégrade la qualité du profiling. Utilisez la commande suivante pour définir `/proc/sys/kernel/perf_event_paranoid` sur `2` ou sur une valeur inférieure :
 
 ```
 sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'

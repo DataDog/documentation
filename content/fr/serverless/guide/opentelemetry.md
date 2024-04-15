@@ -3,7 +3,7 @@ further_reading:
 - link: /opentelemetry/
   tag: Documentation
   text: OpenTelemetry dans Datadog
-kind: documentation
+
 title: Surveillance sans serveur et OpenTelemetry
 ---
 

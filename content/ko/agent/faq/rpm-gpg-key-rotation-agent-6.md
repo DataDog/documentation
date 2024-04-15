@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: RPM GPG 키 회전
 ---
 

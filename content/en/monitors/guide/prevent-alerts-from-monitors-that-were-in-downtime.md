@@ -1,6 +1,6 @@
 ---
 title: Prevent alerts from Monitors that were in downtime
-kind: guide
+
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
@@ -16,8 +16,8 @@ aliases:
 - /monitors/faq/i-have-a-downtime-scheduled-on-my-monitor-why-did-it-still-alert/
 ---
 
-When a group is [downtimed][1] and transitions from **`OK`** to one of a **`ALERT`**, **`WARNING`**, or **`NO DATA`** state, this event is suppressed from notifying you. 
-When this downtime ends or is cancelled, this allows both re-notify events (if configured) and recovery events to then be sent. 
+When a group is [downtimed][1] and transitions from **`OK`** to one of a **`ALERT`**, **`WARNING`**, or **`NO DATA`** state, this event is suppressed from notifying you.
+When this downtime ends or is cancelled, this allows both re-notify events (if configured) and recovery events to then be sent.
 
 An option is to resolve the monitor prior to cancelling the downtime to suppress recovery notifications. However, any groups that were in a non-**`OK`** state could switch back to their previous state, resulting in another notification.
 

@@ -13,7 +13,7 @@ further_reading:
 - link: https://dtdg.co/d22op
   tag: Centre d'apprentissage
   text: Traitement en local sécurisé à l'aide de pipelines d'observabilité
-kind: Documentation
+
 title: Configurer des pipelines d'observabilité dans Datadog
 ---
 
@@ -80,7 +80,7 @@ Consultez la section [Meilleures pratiques pour l'architecture de l'agrégateur 
 
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-Pour exécuter le worker sur vos nœuds Kubernetes, vous devez disposer au minimum de deux nœuds avec un processeur et 512 Mo de mémoire RAM disponibles. Datadog vous conseille de créer un pool de nœuds distinct pour les workers, ce qui correspond également à la configuration conseillée pour les déploiements en production. 
+Pour exécuter le worker sur vos nœuds Kubernetes, vous devez disposer au minimum de deux nœuds avec un processeur et 512 Mo de mémoire RAM disponibles. Datadog vous conseille de créer un pool de nœuds distinct pour les workers, ce qui correspond également à la configuration conseillée pour les déploiements en production.
 
 Consultez la section [Meilleures pratiques pour l'architecture de l'agrégateur OPW][1] pour connaître les exigences au niveau production.
 

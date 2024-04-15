@@ -3,7 +3,7 @@ aliases:
 - /fr/tracing/trace_collection/admission_controller/
 - /fr/tracing/trace_collection/library_injection/
 description: Injecter des bibliothèques d'instrumentation dans des applications
-kind: documentation
+
 title: Injecter des bibliothèques localement
 ---
 
@@ -191,7 +191,7 @@ L'instrumentation commence également à envoyer des données de télémétrie �
 
 ### Résolution des problèmes d'installation
 
-Si le lancement du pod de l'application échoue, exécutez `kubectl logs <my-pod> --all-containers` pour afficher les logs afin de déterminer si vous rencontrez l'un des problèmes connus ci-dessous. 
+Si le lancement du pod de l'application échoue, exécutez `kubectl logs <my-pod> --all-containers` pour afficher les logs afin de déterminer si vous rencontrez l'un des problèmes connus ci-dessous.
 
 #### Problèmes d'installation .NET
 ##### `dotnet: error while loading shared libraries: libc.musl-x86_64.so.1: cannot open shared object file: No such file or directory`
@@ -334,8 +334,8 @@ Les valeurs des variables d'environnement remplacent les paramètres du fichier 
 
 ### Fichier de configuration
 
-| Nom de la propriété | Description | Valeur par défaut | Valeurs valides | 
-| --------- | ----------- | ------------- | ----------- | 
+| Nom de la propriété | Description | Valeur par défaut | Valeurs valides |
+| --------- | ----------- | ------------- | ----------- |
 |`log_level`  | Le niveau de journalisation|`off`|`off`, `debug`, `info`, `warn`, `error`|
 |`output_paths`|L'emplacement où sont enregistrés les logs|`stderr`|`stderr` ou une URL de type `file://`|
 |`env`|L'environnement par défaut attribué au processus|aucune|non applicable|
@@ -360,7 +360,7 @@ Les variables d'environnement suivantes permettent de configurer l'injection de 
 Chacun des champs du fichier de configuration correspond à une variable d'environnement. Les variables d'environnement sont lues à partir de l'environnement du processus en cours de lancement et affectent uniquement ce processus.
 
 |Propriété du fichier de configuration|Variable d'environnement|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
 |`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
 |`env`|`DD_ENV`|
@@ -381,7 +381,7 @@ Par défaut, les paramètres suivants sont activés au sein d'un processus instr
 Vous pouvez modifier ces paramètres pour l'ensemble des processus instrumentés. Pour ce faire, définissez la propriété `config_sources` dans le fichier de configuration. Pour modifier les paramètres pour un seul processus, définissez la variable d'environnement `DD_CONFIG_SOURCES` du processus. Voici les paramètres autorisés pour les sources de configuration :
 
 |Nom de la source de configuration|Utilité|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`BASIC`|Applique la configuration spécifiée plus haut. Si aucune source de configuration n'est spécifiée, celle-ci est utilisée par défaut.|
 |`LOCAL:CHEMIN`|Applique la configuration au chemin spécifié dans le système de fichiers local. Le format du fichier de configuration est décrit plus bas. Exemple : `LOCAL:/opt/config/my_process_config.yaml`.|
 |`BLOB:URL`| Applique la configuration au chemin spécifié dans un stockage d'objet compatible avec S3. L'URL de connexion et le format du fichier de configuration sont décrits plus bas. Exemple : `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1`. |
@@ -578,7 +578,7 @@ DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_A
 
 ## Installer uniquement l'injection de bibliothèque
 
-**Prérequis** : 
+**Prérequis** :
 - Un host exécutant Linux
 - Une installation récente de l'[Agent Datadog v7][1]
 - [Docker Engine][2]
@@ -967,7 +967,7 @@ runtime_metrics_enabled: true
 
 ## Configurer l'Agent
 
-Dans le fichier Docker Compose qui lance vos conteneurs, utilisez les paramètres suivants pour l'Agent., en définissant en toute sécurité votre propre clé d'API Datadog pour `${DD_API_KEY}` 
+Dans le fichier Docker Compose qui lance vos conteneurs, utilisez les paramètres suivants pour l'Agent., en définissant en toute sécurité votre propre clé d'API Datadog pour `${DD_API_KEY}`
 
 ```yaml
   dd-agent:

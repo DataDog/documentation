@@ -10,7 +10,7 @@ further_reading:
 - link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
   tag: Meilleures pratiques
   text: Créer des dashboards d'intégration efficaces
-kind: documentation
+
 title: Développeurs
 ---
 

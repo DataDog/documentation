@@ -10,7 +10,7 @@ has_logo: true
 integration_id: amazon-cloudhsm
 integration_title: AWS CloudHSM
 is_public: true
-kind: integration
+
 name: amazon_cloudhsm
 public_title: Datadog-AWS Cloudhsm 통합
 short_description: Datadog 조직에서 HSM 감사 로그 모으기
@@ -34,7 +34,7 @@ CloudHSM에는 기본값으로 감사 로그가 활성화되어 있습니다.
 
 1. 아직 설정하지 않았다면 AWS 계정에서 [Datadog Forwarder Lambda 함수][1]를 설정하세요.
 2. 설정한 후에는 Datadog Forwarder Lambda 함수로 이동하세요. Function Overview 섹션에서 **Add Trigger**를 클릭합니다.
-3. Trigger Configuration에서 **CloudWatch Logs** 트리거를 선택하세요. 
+3. Trigger Configuration에서 **CloudWatch Logs** 트리거를 선택하세요.
 4. 내 CloudHSM 로그를 포함하고 있는 CloudWatch 로그 그룹을 선택하세요.
 5. 필터 이름을 입력하세요.
 6. **Add**를 클릭해 Lambda에 트리거를 추가합니다.

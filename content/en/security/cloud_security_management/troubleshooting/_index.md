@@ -1,6 +1,6 @@
 ---
 title: Cloud Security Management Troubleshooting
-kind: documentation
+
 disable_toc: true
 ---
 

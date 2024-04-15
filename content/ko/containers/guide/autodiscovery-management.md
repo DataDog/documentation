@@ -7,7 +7,7 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: 설명서
   text: 자동탐지 통합 템플릿 만들기 & 불러오기
-kind: guide
+
 title: 컨테이너 탐지 관리
 ---
 
@@ -46,7 +46,7 @@ Agent의 검색 규칙을 조정하여 메트릭 및 로그 수집을 제한할 
 각 포함사항 또는 제외사항은 공백으로 구분된 정규식 문자열 목록으로 정의됩니다. 이름(`name`), 이미지 이름(`image`) 또는 Kubernetes 네임스페이스(`kube_namespace`)를 기준으로 컨테이너를 포함하거나 제외할 수 있습니다.
 
 #### 예시
-`dd-agent` 이름이 있는 컨테이너를 제외하려면: 
+`dd-agent` 이름이 있는 컨테이너를 제외하려면:
 
 ```
 DD_CONTAINER_EXCLUDE = "name:^dd-agent$"
@@ -156,7 +156,7 @@ docker run -e DD_CONTAINER_EXCLUDE=image:<IMAGE_NAME> ...
 
 Datadog Agent는 기본적으로 Kubernetes 및 OpenShift 일시 중지 컨테이너를 제외합니다. 이렇게 하면 메트릭이 수집되지 않고 청구 가능한 컨테이너로 계산되지 않습니다. 컨테이너 카운트 메트릭에서는 여전히 `kubernetes.containers.running` 및 `docker.containers.running`와 같이 간주됩니다.
 
-이 동작을 비활성화하고 일시 중지 컨테이너 모니터링을 포함하려면: 
+이 동작을 비활성화하고 일시 중지 컨테이너 모니터링을 포함하려면:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}

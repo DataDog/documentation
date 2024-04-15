@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: RasberryPI에서 에이전트 배포하기
 ---
 

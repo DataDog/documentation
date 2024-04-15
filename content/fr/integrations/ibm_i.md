@@ -23,7 +23,7 @@ integration_id: ibm-i
 integration_title: IBM i
 integration_version: 1.4.0
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: ibm_i.
@@ -56,7 +56,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 #### Pilote ODBC
 
-Le check IBM  i utilise le pilote ODBC IBM i pour se connecter à distance au host IBM i. 
+Le check IBM  i utilise le pilote ODBC IBM i pour se connecter à distance au host IBM i.
 
 Téléchargez le pilote à partir de la page [IBM i Access - Client Solutions][4]. Cliquez sur `Downloads for IBM i Access Client Solutions` et connectez-vous pour accéder à la page des téléchargements.
 

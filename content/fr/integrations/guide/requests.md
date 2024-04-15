@@ -1,6 +1,6 @@
 ---
 title: Demander des intégrations Datadog
-kind: guide
+
 further_reading:
   - link: developers/integrations/new_check_howto
     tag: Documentation

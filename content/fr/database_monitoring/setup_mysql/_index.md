@@ -1,7 +1,7 @@
 ---
 description: Configuration de Database Monitoring sur une base de données MySQL
 disable_sidebar: true
-kind: documentation
+
 title: Configuration de MySQL
 ---
 

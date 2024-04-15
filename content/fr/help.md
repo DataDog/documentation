@@ -1,6 +1,6 @@
 ---
 title: Aide
-kind: documentation
+
 customclass: help
 ---
 

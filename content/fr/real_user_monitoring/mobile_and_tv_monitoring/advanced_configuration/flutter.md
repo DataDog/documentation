@@ -19,7 +19,7 @@ further_reading:
   tag: Blog
   text: Surveiller les performances de votre application Flutter avec la solution
     Mobile RUM Datadog
-kind: documentation
+
 title: Configuration avancée de RUM pour Flutter
 type: multi-code-lang
 ---

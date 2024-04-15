@@ -1,6 +1,6 @@
 ---
 title: Grouping Logs Into Patterns
-kind: documentation
+
 description: 'Group queried logs into patterns.'
 further_reading:
 - link: 'logs/explorer/'
@@ -32,15 +32,15 @@ Patterns support the [List][1] visualization. Clicking a pattern in the list ope
 
 ## Pattern Inspector
 
-Use the Pattern Inspector to get a visual breakdown of the underlying values of a log pattern's aggregation based on your search query. 
+Use the Pattern Inspector to get a visual breakdown of the underlying values of a log pattern's aggregation based on your search query.
 
 {{< img src="logs/explorer/group/pattern_inspector_values.png" alt="The distribution of values graph showing a bar graph of the values" style="width:90%;" >}}
 
 For example, if you are investigating an issue, you could see how many hosts are involved or what regions or data centers are impacted.
 
 1. Navigate to the [Log Explorer][3].
-2. Click **Patterns** in the **Group into** section. In the list of patterns, the aggregate values in the message section are highlighted in yellow. Hover over an aggregate value to get a preview of the visual distribution of its values. 
-3. Click on an aggregate value to open the log pattern's side panel and see more details in the **Pattern Inspector** tab. 
+2. Click **Patterns** in the **Group into** section. In the list of patterns, the aggregate values in the message section are highlighted in yellow. Hover over an aggregate value to get a preview of the visual distribution of its values.
+3. Click on an aggregate value to open the log pattern's side panel and see more details in the **Pattern Inspector** tab.
 
 {{< img src="logs/explorer/group/pattern_inspector_panel_1.png" alt="The pattern panel showing the Pattern Inspector tab" style="width:90%;" >}}
 

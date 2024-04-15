@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Facturation des fonctions sans serveur
 ---
 
@@ -29,7 +29,7 @@ Pour utiliser l'API afin de contrôler les fonctions AWS Lambda surveillées pa
 
 Datadog accepte une liste de tags séparés par des virgules, au format `key:value`. Cette liste définit le filtre utilisé lors de la collecte de métriques à partir du service AWS associé. Ces paires `key:value` permettent à la fois d'inclure et d'exclure des tags. Pour exclure des tags, ajoutez le signe `!` avant la clé des tags. Il est également possible d'utiliser des wildcards, comme `?` (pour un seul caractère) et `*` (pour plusieurs caractères).
 
-Le filtre exclut uniquement les ressources qui ne comportent aucun des tags autorisés, à savoir lorsque la liste des tags autorisés constitue une condition « OR ». 
+Le filtre exclut uniquement les ressources qui ne comportent aucun des tags autorisés, à savoir lorsque la liste des tags autorisés constitue une condition « OR ».
 
 Exemple : `datadog:monitored,env:production`
 
@@ -45,7 +45,7 @@ Ce filtre recueille uniquement les instances EC2 qui contiennent le tag `datadog
 
 Datadog propose une [extension Lambda][14] ainsi que plusieurs couches Lambda permettant de tracer et de surveiller vos fonctions selon votre runtime. Les fonctions actives qui sont instrumentées et surveillées à l'aide de ces bibliothèques contribuent à l'utilisation facturée, même lorsque l'intégration AWS est désactivée.
 
-Datadog fournit plusieurs outils afin de gérer l'installation et la configuration de ces bibliothèques. Ils permettent de faire évoluer et d'automatiser l'installation ou la gestion des bibliothèques Lambda Datadog. Pour en savoir plus, consultez la section [Installer la surveillance sans serveur pour AWS Lambda][15]. 
+Datadog fournit plusieurs outils afin de gérer l'installation et la configuration de ces bibliothèques. Ils permettent de faire évoluer et d'automatiser l'installation ou la gestion des bibliothèques Lambda Datadog. Pour en savoir plus, consultez la section [Installer la surveillance sans serveur pour AWS Lambda][15].
 
 ## Définition d'une fonction active
 

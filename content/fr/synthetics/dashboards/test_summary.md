@@ -3,7 +3,7 @@ further_reading:
 - link: /synthetics/ci_results_explorer
   tag: Documentation
   text: En savoir plus sur l'explorateur de résultats CI
-kind: documentation
+
 title: Dashboard Résumé des tests Synthetic
 ---
 

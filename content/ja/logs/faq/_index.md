@@ -3,7 +3,7 @@ aliases:
 - /ja/logs/faq/instance-initialization-error-while-sending-logs-from-datadog-agent/
 cascade:
 - private: true
-kind: faq
+
 title: ログに関するよくあるご質問
 ---
 

@@ -15,7 +15,7 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentation
   text: Explorer vos services, ressources et traces
-kind: documentation
+
 title: Tracer des applications Java
 type: multi-code-lang
 ---

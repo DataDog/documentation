@@ -1,6 +1,6 @@
 ---
 title: RUM React Native Data Collected
-kind: documentation
+
 description: Learn about the data collected by React Native Monitoring.
 code_lang: reactnative
 type: multi-code-lang
@@ -21,7 +21,7 @@ further_reading:
 The Datadog React Native SDK for RUM generates events with associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in the RUM Explorer.
 
 Most React Native Monitoring data is collected by native Datadog iOS and Android SDKs for RUM, and is retained for the same periods of time.
-    
+
 * For iOS event-specific metrics and attributes, see [RUM iOS Data Collected][1].
 * For Android event-specific metrics and attributes, see [RUM Android Data Collected][2].
 

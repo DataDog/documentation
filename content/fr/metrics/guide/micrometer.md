@@ -6,7 +6,7 @@ further_reading:
 - link: https://micrometer.io/docs/registry/prometheus
   tag: Micrometer
   text: Micrometer Prometheus
-kind: Guide
+
 title: Envoyer des métriques avec Micrometer
 ---
 
@@ -26,7 +26,7 @@ L'ingestion avec le protocole OpenTelemetry (OTLP) par l'Agent Datadog vous perm
 
 ## Prometheus et OpenMetrics
 
-Utilisez les intégrations Prometheus ou OpenMetrics pour envoyer les métriques de votre application à Datadog. 
+Utilisez les intégrations Prometheus ou OpenMetrics pour envoyer les métriques de votre application à Datadog.
 
 {{< whatsnext desc="Consultez la configuration détaillée dans la documentation suivante :" >}}
     {{< nextlink href="/integrations/guide/prometheus-host-collection/#presentation" >}}Collecte de métriques Prometheus et OpenMetrics à partir d'un host{{< /nextlink >}}

@@ -7,7 +7,7 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/dd-201
   tag: Centre d'apprentissage
   text: 'Formation Datadog : Devenir un utilisateur expérimenté'
-kind: documentation
+
 title: Débuter avec les sites Datadog
 ---
 

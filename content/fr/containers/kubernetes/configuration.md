@@ -3,7 +3,7 @@ aliases:
 - /fr/integrations/faq/gathering-kubernetes-events
 - /fr/agent/kubernetes/event_collection
 - /fr/agent/kubernetes/configuration
-kind: documentation
+
 title: Configuration avancée de l'Agent Datadog sur Kubernetes
 ---
 
@@ -73,7 +73,7 @@ datadog:
   collectEvents: true
 clusterAgent:
   enabled: true
-  rbac: 
+  rbac:
     create: true
 ```
 
@@ -284,7 +284,7 @@ spec:
     credentials:
       apiKey: <CLÉ_API_DATADOG>
       appKey: <CLÉ_APPLICATION_DATADOG>
-  clusterAgentTokenSecret: 
+  clusterAgentTokenSecret:
     secretName: <NOM_SECRET>
     keyName: <NOM_CLÉ>
 ```
@@ -700,5 +700,5 @@ Vous pouvez ajouter d'autres écouteurs et fournisseurs de configuration à l'ai
 [20]: https://app.datadoghq.com/orchestration/overview
 [21]: /fr/infrastructure/containers/orchestrator_explorer
 [22]: /fr/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
-[23]: /fr/infrastructure/process/ 
+[23]: /fr/infrastructure/process/
 [24]: /fr/account_management/api-app-keys/#application-keys

@@ -1,6 +1,6 @@
 ---
 title: Incident Details Page
-kind: documentation
+
 description: Manage the context and work for an incident
 aliases:
 - /monitors/incident_management/incident_details
@@ -24,7 +24,7 @@ After you've moved an incident to the resolved status, an option appears in the 
 
 ## Incident details overview section
 
-Use the Overview section to specify an incident's properties and define customer impact. 
+Use the Overview section to specify an incident's properties and define customer impact.
 
 By default, all incidents have the following properties:
 
@@ -62,7 +62,7 @@ In addition to housing your property fields, the Overview section also provides 
 
 {{< img src="/service_management/incidents/incident_details/incident_details_timeline.png" alt="Incident details Timeline view showing progression of a case escalated to an incident" style="width:100%;">}}
 
-The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made. 
+The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made.
 
 ### Content types
 
@@ -84,16 +84,16 @@ By default, timeline cells are sorted in `oldest first` order, but this can be c
 
 ## Remediation section
 
-Use the Remediation section to store any documents or resources that are relevant to the remediation process of an incident, as well as to track key tasks for the remediation process. 
+Use the Remediation section to store any documents or resources that are relevant to the remediation process of an incident, as well as to track key tasks for the remediation process.
 
 Documents can be added by pasting the document URL and giving the link a human-readable name for quick access.
 
-Incident tasks are created directly in the Remediation section, as well as through Datadog's [Slack integration][12]. 
+Incident tasks are created directly in the Remediation section, as well as through Datadog's [Slack integration][12].
 
-From the Remediation section, type the description of your task in the creation text box. To assign a task to a Datadog user, type `@` in the description text box, or use the `Assignees` column after the task has been created. An incident task can have more than one assignee. After a task has been created, it can also be assigned a due date. 
+From the Remediation section, type the description of your task in the creation text box. To assign a task to a Datadog user, type `@` in the description text box, or use the `Assignees` column after the task has been created. An incident task can have more than one assignee. After a task has been created, it can also be assigned a due date.
 
 As work for different tasks is finished, individual tasks can be marked as completed by clicking the checkbox to the left of the task's description. If you have a large number of tasks, you can filter them down by searching for key words or by hiding completed tasks from view.
-  
+
 ## Response Team section
 
 <div class="alert alert-warning">
@@ -104,12 +104,12 @@ This feature is in open beta.
 
 In the Response Team section, you can form your response team by adding other users and assigning them roles to carry out in the process of resolving an incident. The two default responder types provided by Datadog are:
 
-1. `Incident Commander` - The individual responsible for leading the response team 
+1. `Incident Commander` - The individual responsible for leading the response team
 3. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
 
 If you wish to create custom responder roles, you can do so in the [Incident Settings for Responder Types][13]. This allows you to create new responder types with custom names and descriptions. It also allows you to choose if a responder type should be a one person role or a multi person role.
-  
-**Note:** These roles are unrelated to those found in the [Role Based Access Control (RBAC)][14] system. RBAC roles control a user's permissions to access certain features in Datadog. The Responder Types system in Incident Management does not change a user's permissions in any capacity. It is instead about inviting responders to your incidents and giving them documented roles in your response process for visibility. 
+
+**Note:** These roles are unrelated to those found in the [Role Based Access Control (RBAC)][14] system. RBAC roles control a user's permissions to access certain features in Datadog. The Responder Types system in Incident Management does not change a user's permissions in any capacity. It is instead about inviting responders to your incidents and giving them documented roles in your response process for visibility.
 
 If you add an individual as a responder, they are notified through the email associated with their Datadog account. Anyone is able to change the role of a responder, but you can only remove an individual from an incident's Response Team if they have the general `Responder` role assigned and have no activity in the incident. If there is already an `Incident Commander` assigned to an incident, assigning another individual as the `Incident Commander` transfers that role over to them. The previous `Incident Commander` is reassigned the general `Responder` role. A similar reassignment happens whenever you reassign one of your custom one person roles.
 
@@ -122,12 +122,12 @@ The Response Team list also saves the date and time when an individual was origi
 All stakeholder notifications for an incident are consolidated in the Notifications section.
 You can manually create, save as draft, and send notifications directly from this page. Automated notifications sent by [Notification Rules][15] for the incident in question are also listed in this section.
 
-To create a manual notification: 
+To create a manual notification:
 
 1. Click the **+ New Notification** button in the top right of the section.
 2. Enter your desired recipients. These can be any notification handles supported by Datadog including emails, Slack channels, PagerDuty handles, webhooks, and more.
 3. Select a [Message Template][16].
-4. Edit the title and message of your notification as necessary using Markdown and any supported incident template variable by typing `{{`. 
+4. Edit the title and message of your notification as necessary using Markdown and any supported incident template variable by typing `{{`.
    - Template variables are based on the properties of an incident. Before a message is sent, all template variables are replaced by the corresponding value of the referenced property that is available to the message when it was sent.
 5. Use the `{{incident.created}}` variable to customize your message timezone. This template variable will display the option to set your variable time zone.
 6. Send your notification or save it as a draft.
@@ -136,9 +136,9 @@ The Notifications section is separated into lists: Drafts and Sent.
 
 Both lists display:
 
-1. The (intended) recipients of a notification 
+1. The (intended) recipients of a notification
 2. The contents of the notification's message and any renotification messages that were sent
-3. When the notification was last updated 
+3. When the notification was last updated
 4. The original author of the notification
 
 The Sent list also displays if a notification was manually or automatically sent by a notification rule. If the notification was automated, the rule that triggered the notification is displayed.

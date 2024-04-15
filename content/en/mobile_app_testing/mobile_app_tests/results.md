@@ -1,6 +1,6 @@
 ---
 title: Mobile App Test Results
-kind: documentation
+
 description: View Synthetic mobile app test results and compare successful or failed sample runs to test runs.
 aliases:
 - /mobile_testing/mobile_app_tests/results

@@ -5,7 +5,7 @@ further_reading:
 - link: /agent/
   tag: Documentation
   text: En savoir plus sur l'Agent Datadog
-kind: guide
+
 title: Désinstaller l'Agent
 ---
 
@@ -186,7 +186,7 @@ Pour supprimer l'Agent et tous ses fichiers de configuration :
 ```shell
 sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
-sudo rm -rf ~/.datadog-agent/** # pour supprimer les liens symboliques non fonctionnels 
+sudo rm -rf ~/.datadog-agent/** # pour supprimer les liens symboliques non fonctionnels
 ```
 
 Si vous avez exécuté les commandes d'installation facultatives pour que l'Agent se lance au démarrage, exécutez les commandes suivantes pour finaliser la désinstallation :

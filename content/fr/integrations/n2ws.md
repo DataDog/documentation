@@ -28,7 +28,7 @@ integration_id: n2ws
 integration_title: N2WS
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: eliad.eini@n2ws.com
 manifest_version: 1.0.0
 metric_prefix: cpm_metric.
@@ -82,7 +82,7 @@ Votre instance N2WS Backup and Recovery prend en charge la surveillance des sauv
               Vous pouvez sélectionner un utilisateur spécifique ou toute l'instance N2WS.
 
 
-5.  Accéder aux dashboards N2WS 
+5.  Accéder aux dashboards N2WS
     - Dans les [intégrations Datadog][3], recherchez le carré `N2WS` et installez-le.
     - Cinq dashboard sont alors ajoutés à votre compte :
     N2WSBackup&Recovery-Graphicalversion, N2WSBackup&Recovery-Graphicalversion-areas et N2WSBackup&Recovery-EntitiesSpecificDashboard pour la version 3.2.1 de N2WS Backup & Recovery.

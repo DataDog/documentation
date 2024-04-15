@@ -1,8 +1,8 @@
 ---
 title: Continuous Testing and CI/CD
-kind: documentation
+
 description: Run Continuous Testing tests on-demand or at predefined intervals in your CI/CD pipelines.
-aliases: 
+aliases:
   - /synthetics/ci
   - /synthetics/cicd_testing
   - /synthetics/cicd_integrations
@@ -36,9 +36,9 @@ In addition to running tests at predefined intervals, you can reuse your Datadog
 
 Use Continuous Testing and CI/CD to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes, or a new release is freshly cut. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
 
-This functionality reduces time spent fixing issues in production by proactively catching bugs and regressions earlier in the process, allowing your engineering teams to focus on non-urgent work instead. 
+This functionality reduces time spent fixing issues in production by proactively catching bugs and regressions earlier in the process, allowing your engineering teams to focus on non-urgent work instead.
 
-To get started, see [Integrations](#integrations) and [use the API](#use-the-api) or the [open-source CLI package](#use-the-cli). 
+To get started, see [Integrations](#integrations) and [use the API](#use-the-api) or the [open-source CLI package](#use-the-cli).
 
 ## Integrations
 

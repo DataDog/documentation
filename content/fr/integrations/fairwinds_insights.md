@@ -38,7 +38,7 @@ integration_id: fairwinds-insights
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -177,7 +177,7 @@ Fairwinds Insights n'inclut aucun check de service.
 
 Pour obtenir de l'aide ou transmettre une demande, contactez Fairwinds aux coordonnées suivantes :
 
-- Téléphone : +1 617-202-3659 
+- Téléphone : +1 617-202-3659
 - E-mail : [sales@fairwinds.com][2]
 
 ### Questions fréquentes

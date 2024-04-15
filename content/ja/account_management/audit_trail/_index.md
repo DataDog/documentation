@@ -14,7 +14,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/audit-trail-best-practices/
   tag: ブログ
   text: 監査証跡で重要な Datadog のアセットと構成を監視する
-kind: documentation
+
 title: Datadog Audit Trail（監査証跡）
 ---
 
@@ -94,7 +94,7 @@ Datadog 監査証跡を有効にするには、[オーガニゼーションの�
 
 Views パネルの保存ビューエントリからは、いつでも以下のアクションが可能です。
 
-* 保存ビューを**ロード**または**リロード** 
+* 保存ビューを**ロード**または**リロード**
 * 現在のビューのコンフィギュレーションで保存ビューを**更新**。
 * 保存ビューの**名前を変更**または**削除**。
 * ショートリンクを使用して保存ビューを**共有**。

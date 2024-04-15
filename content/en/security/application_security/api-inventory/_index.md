@@ -1,6 +1,6 @@
 ---
 title: API Security Inventory
-kind: documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
@@ -85,7 +85,7 @@ The matching occurs within your application, and none of the sensitive data is s
 | Mastercard card number                            | `payment`        | `card`            |
 | VISA card number                                  | `payment`        | `card`            |
 | IBAN bank account number                          | `payment`        | `iban`            |
- 
+
 ### Publicly accessible
 
 Datadog marks an endpoint as public if the client IP address is outside these ranges:

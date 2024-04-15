@@ -1,6 +1,6 @@
 ---
 title: APM Billing
-kind: documentation
+
 aliases:
 - /account_management/billing/profiler/
 - /account_management/billing/apm_distributed_tracing/
@@ -19,7 +19,7 @@ APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM give
 | [Indexed span][5] | $1.70 per million Indexed Spans per month | Billed when usage is in excess of Indexed Spans included with every APM host | An Indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed with retention filters or legacy Analyzed Spans to the Datadog APM service at the end of the month. [More APM pricing information.][5]                                                                                          |
 | [Ingested span][5] | $.10 per GB Ingested Spans per month | Billed when usage is in excess of Ingested Spans included with every APM host | An Ingested span is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested to Datadog at the end of the month. [More APM pricing information.][5]                                                                                          |
 
-**Notes**:  
+**Notes**:
    - If you're using a non-Fargate container based environment, you get billed for the underlying host deploying the Datadog Agent.
    - One profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled. For instance, a DNS service container that is NOT profiled, running concurrently with your application container that IS profiled, is not counted towards the four profiler containers allotment.
    - [Universal Service Monitoring][15] is included in all APM tiers (APM, APM Pro, APM Enterprise) at no additional cost.
@@ -50,7 +50,7 @@ Using five APM hosts and sending 30 million Indexed Spans, with 900 GB of total 
 | Ingested Spans | 900 GB          | 750 GB included with 5 APM hosts. $.10 per GB for additional 150 GB of Ingested Spans.                                                                                 | 150 * $.10      | $15                  |
 | Total          |            |                                                                                                 | $155 + $42.50 + $15 | **$212.50 per month** |
 
-### APM Pro Hosts, indexed spans, and extra ingested spans 
+### APM Pro Hosts, indexed spans, and extra ingested spans
 
 Using five APM Pro hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans.
 
@@ -84,7 +84,7 @@ Using five APM hosts, sending 20 million Indexed Spans, and have deployed APM on
 
 ### APM Enterprise Hosts, services, containers, and indexed spans
 
-APM Enterprise for service 1 running on container 1, service 2 running on container 2. Both Containers are running on one host and are sending 20 million Indexed Spans on App Analytics. 
+APM Enterprise for service 1 running on container 1, service 2 running on container 2. Both Containers are running on one host and are sending 20 million Indexed Spans on App Analytics.
 
 | Billable Unit  | Quantity   | Price                                                                                          | Formula      | Subtotal             |
 |----------------|------------|------------------------------------------------------------------------------------------------|--------------|----------------------|
@@ -107,7 +107,7 @@ App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 
 
 ### APM Enterprise Hosts with Kubernetes nodes and indexed spans
 
-APM Enterprise for apps with a Datadog Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed Spans. 10 of these worker nodes have eight pods each with one container per pod, the other 10 have two pods each with one container per pod. 
+APM Enterprise for apps with a Datadog Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed Spans. 10 of these worker nodes have eight pods each with one container per pod, the other 10 have two pods each with one container per pod.
 
 | Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|

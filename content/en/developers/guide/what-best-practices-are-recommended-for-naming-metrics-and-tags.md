@@ -1,6 +1,6 @@
 ---
 title: What best practices are recommended for naming metrics and tags?
-kind: faq
+
 further_reading:
 - link: "/metrics/"
   tag: "Documentation"

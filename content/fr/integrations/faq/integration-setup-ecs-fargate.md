@@ -9,7 +9,7 @@ further_reading:
 - link: /agent/docker/integrations/
   tag: Documentation
   text: Autodiscovery
-kind: faq
+
 title: Configuration d'intégration pour ECS Fargate
 ---
 

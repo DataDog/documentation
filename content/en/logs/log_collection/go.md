@@ -1,6 +1,6 @@
 ---
 title: Go Log Collection
-kind: documentation
+
 aliases:
   - /logs/languages/go
 further_reading:
@@ -24,7 +24,7 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 - link: "/glossary/#tail"
   tag: Glossary
-  text: 'Glossary entry for "tail"'  
+  text: 'Glossary entry for "tail"'
 ---
 
 To send your Go logs to Datadog, log to a file and then [tail][11] that file with your Datadog Agent. You can use the following setup with [logrus][1], an open source logging library.
@@ -70,7 +70,7 @@ func main() {
 
     // log an event with logrus
     log.WithFields(log.Fields{"string": "foo", "int": 1, "float": 1.1 }).Info("My first event from golang to stdout")
-    
+
   // for metadata, a common pattern is to reuse fields between logging statements by reusing
   contextualizedLog := log.WithFields(log.Fields{
     "hostname": "staging-1",

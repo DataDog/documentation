@@ -12,7 +12,7 @@ further_reading:
 - link: /agent/proxy/#variables-d-environnement
   tag: Documentation
   text: Variables d'environnement de proxy
-kind: guide
+
 title: Variables d'environnement de l'Agent
 ---
 

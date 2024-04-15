@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Datadog 포워더(Forwarder)를 사용한 루비(Ruby) 서버리스 애플리케이션 계측
 ---
 
@@ -180,7 +180,7 @@ RUN bundle install
 
 ### 설정하다
 
-Datadog 애플리케이션 성능 모니터링(APM)을 활성화하고 Datadog 람다 라이브러리에서 제공하는 래퍼(wrapper)를 사용해 람다 핸들러 함수를 래핑합니다. 
+Datadog 애플리케이션 성능 모니터링(APM)을 활성화하고 Datadog 람다 라이브러리에서 제공하는 래퍼(wrapper)를 사용해 람다 핸들러 함수를 래핑합니다.
 
 ```ruby
 require 'datadog/lambda'

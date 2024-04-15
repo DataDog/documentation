@@ -1,6 +1,6 @@
 ---
 title: ベータ関数
-kind: documentation
+
 aliases:
   - /ja/graphing/functions/beta/
 ---

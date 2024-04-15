@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/tracing/faq/trace-agent-from-source/
-kind: guide
+
 title: Installer l'Agent de trace depuis les sources
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "ECR Repository Component"
-kind: documentation
+
 ---
 ## Overview
 

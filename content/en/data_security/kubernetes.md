@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Data Security
-kind: documentation
+
 further_reading:
 - link: "/data_security/"
   tag: "Documentation"
@@ -17,7 +17,7 @@ In the context of Kubernetes security, a balance is essential between the princi
 ## Common violations of security standards
 
 ### Restricted Security Level in Kubernetes Pod Security Admission
-The Restricted pod security standard is the most strict security standard level enforced by the built in admission controller. It's intended to enforce pod security best practices at the cost of compatibility and functionality. Intended use cases include applications that process sensitive financial information and PII. 
+The Restricted pod security standard is the most strict security standard level enforced by the built in admission controller. It's intended to enforce pod security best practices at the cost of compatibility and functionality. Intended use cases include applications that process sensitive financial information and PII.
 
 Running the Datadog Agent with the restricted pod standards would prevent the agent from accessing the data required to be useful and is not recommended.
 
@@ -58,6 +58,6 @@ The Datadog Agent's default configuration is designed to be highly compatible wi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/unix_socket/?tab=host 
-[2]: /containers/kubernetes/apm/ 
+[1]: /developers/dogstatsd/unix_socket/?tab=host
+[2]: /containers/kubernetes/apm/
 [3]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted

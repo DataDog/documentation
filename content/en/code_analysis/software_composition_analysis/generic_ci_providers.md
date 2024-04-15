@@ -1,6 +1,6 @@
 ---
 title: Generic CI Providers
-kind: documentation
+
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 is_beta: true
 further_reading:
@@ -21,7 +21,7 @@ Code Analysis is in public beta.
 
 ## Overview
 
-If you don't use GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
+If you don't use GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform.
 
 Prerequisites:
 

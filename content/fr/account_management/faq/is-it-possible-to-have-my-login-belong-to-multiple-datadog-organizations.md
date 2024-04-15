@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Est-il possible d'associer mon compte à plusieurs organisations Datadog ?
 ---
 

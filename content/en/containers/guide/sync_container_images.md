@@ -1,6 +1,6 @@
 ---
 title: Synchronize Datadog's images with a private registry
-kind: guide
+
 aliases:
  - /agent/guide/sync_container_images
 ---

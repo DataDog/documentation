@@ -1,6 +1,6 @@
 ---
 title: Set up Orchestrator Explorer with DaemonSet
-kind: faq
+
 further_reading:
 - link: "/infrastructure/containers"
   tag: "Documentation"
@@ -135,7 +135,7 @@ This page contains instructions for setting up the Orchestrator Explorer using a
      Acceptable values for `collectors` are `<collector_name>` (e.g "cronjobs") or `<apigroup_and_version>/<collector_name>` (e.g. "batch/v1/cronjobs"). For CRDs, only `<apigroup_and_version>/<collector_name>` is accepted.
 
      Mount it to Cluster agent container.
-   
+
      ```yaml
      containers:
        - name: cluster-agent
@@ -151,7 +151,7 @@ This page contains instructions for setting up the Orchestrator Explorer using a
            name: orchestrator-config
            items:
            - key: orchestrator.yaml
-             path: orchestrator.yaml    
+             path: orchestrator.yaml
      ```
 
 In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case, add the following options in the `env` section of both the Cluster Agent and the Process Agent:

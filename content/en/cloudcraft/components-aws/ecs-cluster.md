@@ -1,6 +1,6 @@
 ---
 title: "ECS Cluster Component"
-kind: documentation
+
 ---
 ## Overview
 

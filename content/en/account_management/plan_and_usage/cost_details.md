@@ -1,6 +1,6 @@
 ---
 title: Cost Details
-kind: documentation
+
 further_reading:
 - link: "https://docs.datadoghq.com/account_management/billing/"
   tag: "Documentation"
@@ -38,11 +38,11 @@ Use the cost summary to:
 
 ### Projected Costs (parent organization)
 
-Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Projected end-of-month costs may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
+Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Projected end-of-month costs may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost.
 
 ### Cost Summary (parent organization)
 
-The cost summary functionality changes according to your Datadog usage as a single organization or a multi-organization. As a multi-organization, you can view estimated and projected costs for the parent organization and each sub-organization. 
+The cost summary functionality changes according to your Datadog usage as a single organization or a multi-organization. As a multi-organization, you can view estimated and projected costs for the parent organization and each sub-organization.
 
 {{< img src="account_management/plan_and_usage/multi-org-estimated-projected-cost-summary.png" alt="Screenshot of the Cost Summary for a parent organization, showing the overall month to date cost, projected cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
@@ -60,7 +60,7 @@ To download the data as a comma separated value file, click **Download as CSV**.
 - **Projected**: Data is available for the current month.
 - **Estimated MTD**: Data is available from the first of the month to the current date. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
 - **Historical**: Data is available after month close, which is approximately 16 days after the end of the month.
-  
+
 To query estimated cost data through the API, see [Get estimated cost across your account][3]. To query projected cost data through the API, see [Get projected cost across your account][6].
 
 ### Cost Summary (sub-organization)

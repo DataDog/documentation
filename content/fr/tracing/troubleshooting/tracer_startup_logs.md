@@ -3,7 +3,7 @@ further_reading:
 - link: /tracing/troubleshooting/connection_errors/
   tag: Documentation
   text: Dépanner des erreurs de connexion APM
-kind: Documentation
+
 title: Logs de lancement du traceur
 ---
 ## Logs de lancement
@@ -14,7 +14,7 @@ Selon leurs conventions et la sécurité d'accès à `Stdout` (ou équivalent), 
 
 Les logs `CONFIGURATION` représentent les paramètres appliqués à votre traceur au format JSON. Dans le cas des langages pour lesquels un check de connectivité de l'Agent est effectué, la configuration JSON comprend également une clé `agent_error` indiquant si l'Agent est disponible ou non.
 
-Les entrées de log `DIAGNOSTICS` sont générées, pour les langages qui les prennent en charge, lorsque le traceur rencontre une erreur pendant le lancement de l'application. Si des lignes de log `DIAGNOSTICS` s'affichent, vérifiez bien sur le log en question que les paramètres et les configurations sont correctement appliqués.  
+Les entrées de log `DIAGNOSTICS` sont générées, pour les langages qui les prennent en charge, lorsque le traceur rencontre une erreur pendant le lancement de l'application. Si des lignes de log `DIAGNOSTICS` s'affichent, vérifiez bien sur le log en question que les paramètres et les configurations sont correctement appliqués. 
 
 Si vous ne voyez aucun log, assurez-vous que les logs de votre application ne sont pas désactivés et que le niveau de log est défini sur `INFO` ou un niveau supérieur.
 

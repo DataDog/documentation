@@ -14,7 +14,7 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Utilisation avancée
-kind: documentation
+
 title: Configurer la bibliothèque de tracing PHP
 type: multi-code-lang
 ---
@@ -263,7 +263,7 @@ Nombre maximal de spans à échantillonner par seconde. Tous les processus au se
 `DD_TRACE_SPANS_LIMIT`
 : **INI** : `datadog.trace.spans_limit`<br>
 **Valeur par défaut** : `1000`<br>
-Nombre maximum de spans générées dans une trace. Lorsque cette limite est atteinte, les spans ne sont plus générées. Si vous augmentez la limite, la quantité de mémoire utilisée par une trace en attente s'accroît, et peut potentiellement atteindre la quantité de mémoire maximale autorisée par PHP. Il est possible d'augmenter la quantité de mémoire maximale autorisée avec le paramètre système INI `memory_limit` de PHP. 
+Nombre maximum de spans générées dans une trace. Lorsque cette limite est atteinte, les spans ne sont plus générées. Si vous augmentez la limite, la quantité de mémoire utilisée par une trace en attente s'accroît, et peut potentiellement atteindre la quantité de mémoire maximale autorisée par PHP. Il est possible d'augmenter la quantité de mémoire maximale autorisée avec le paramètre système INI `memory_limit` de PHP.
 
 `DD_SPAN_SAMPLING_RULES`
 : **INI** : `datadog.span_sampling_rules`<br>
@@ -300,7 +300,7 @@ L'en-tête IP à utiliser pour la collecte de l'adresse IP client, par exemple 
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI** : `datadog.trace.obfuscation_query_string_regexp`<br>
-**Valeur par défaut** : 
+**Valeur par défaut** :
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```

@@ -1,7 +1,7 @@
 ---
 title: Monitor An Application That Requires Authentication With Browser Tests
-kind: guide
-description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
+
+description: Learn how to ensure your Synthetic browser tests can log in to your applications.
 further_reading:
   - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
     tag: 'Blog'
@@ -17,7 +17,7 @@ further_reading:
     text: 'Learn about browser test steps'
 ---
 
-## Overview 
+## Overview
 
 <div class="alert alert-info">If you are interested in testing applications sitting behind MFA, visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send feedback</a> to help Datadog work on the systems that matter the most to your teams.</div>
 
@@ -79,7 +79,7 @@ The second way to ensure that your Datadog Browser tests can login into your app
 - Cookies
 - Basic Auth, Digest Auth, or NTLM credentials
 
-These configuration options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
+These configuration options are set at every test execution and apply to every step of your browser test at execution time, not recording time.
 
 You can manually apply these configured headers, cookies, and credentials on the page you are recording from and then record steps your test performs post-login. By default, the browser test automatically passes through authentication with your specified headers, cookies, and/or credentials at execution time and then goes through all recorded steps.
 

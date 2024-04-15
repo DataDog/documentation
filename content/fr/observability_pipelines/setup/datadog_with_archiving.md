@@ -7,7 +7,7 @@ further_reading:
 - link: https://dtdg.co/d22op
   tag: Centre d'apprentissage
   text: Traitement en local sécurisé à l'aide de pipelines d'observabilité
-kind: Documentation
+
 title: Configurer des pipelines d'observabilité pour envoyer des logs dans un format
   réintégrable à Datadog vers Amazon S3 et Datadog
 ---
@@ -209,7 +209,7 @@ L'image Docker du worker de pipelines d'observabilité est disponible sur Docker
     - `datadog.apiKey` par votre clé d'API Datadog.
     - `datadog.pipelineId` par votre ID de configuration de pipeline d'observabilité.
     - `site` par {{< region-param key="dd_site" code="true" >}}.
-    - `${DD_ARCHIVES_SERVICE_ACCOUNT}` dans `serviceAccount.name` par le nom du compte de service. 
+    - `${DD_ARCHIVES_SERVICE_ACCOUNT}` dans `serviceAccount.name` par le nom du compte de service.
     - `${DD_ARCHIVES_BUCKET}` dans `pipelineConfig.sinks.datadog_archives` par le nom du compartiment S3 utilisé pour le stockage des logs.
     - `${DD_ARCHIVES_SERVICE_ACCOUNT}` dans `pipelineConfig.sinks.datadog_archives` par la [région AWS][2] du service cible.
 

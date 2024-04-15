@@ -1,6 +1,6 @@
 ---
 title: Monitor Kiosk Sessions Using RUM
-kind: guide
+
 description: Guide for monitoring kiosk sessions with RUM.
 further_reading:
 - link: '/real_user_monitoring/platform/dashboards/'
@@ -20,7 +20,7 @@ If a user is identified within the session, you may want to clear user informati
 
 ### Browser
 
-This feature requires RUM Browser SDK version >= v4.37.0. See installation instructions [here][6]. 
+This feature requires RUM Browser SDK version >= v4.37.0. See installation instructions [here][6].
 
 The `stopSession()` method differs depending on your installation method.
 
@@ -62,7 +62,7 @@ The `stopSession()` method differs depending on your mobile SDK framework.
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-This feature requires RUM iOS SDK version >= 1.18.0. See installation instructions [here][1]. 
+This feature requires RUM iOS SDK version >= 1.18.0. See installation instructions [here][1].
 
 ```swift
 // SDK v1
@@ -77,7 +77,7 @@ RUMMonitor.shared().stopSession()
 {{% /tab %}}
 {{% tab "Android" %}}
 
-This feature requires RUM Android SDK version >= 1.19.0. See installation instructions [here][1]. 
+This feature requires RUM Android SDK version >= 1.19.0. See installation instructions [here][1].
 
 ```kotlin
 GlobalRum.get().stopSession()

@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Check basé sur le statut Windows
 ---
 Ce guide décrit le processus de création d'un check basé sur le statut Windows.

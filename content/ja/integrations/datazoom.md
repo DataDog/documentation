@@ -33,7 +33,7 @@ integration_id: datazoom
 integration_title: Datazoom
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: datazoom
 public_title: Datazoom
@@ -78,7 +78,7 @@ Datazoom インテグレーションは、Datadog にログを出力します。
 
 - Datazoom Datadog Connector の構成方法の詳細については、Datazoom のインテグレーション[ドキュメント][1]をご覧ください。
 
-### ダッシュボード  
+### ダッシュボード
 
 [Datazoom ログダッシュボード][3]をご覧ください。
 

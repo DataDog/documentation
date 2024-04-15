@@ -1,6 +1,6 @@
 ---
 title: Single Step APM Instrumentation (Beta)
-kind: documentation
+
 is_beta: true
 aliases:
 - /tracing/trace_collection/single-step-apm
@@ -216,7 +216,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
      features:
        apm:
          instrumentation:
-           enabled: true  
+           enabled: true
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][6] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -234,7 +234,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
@@ -279,7 +279,7 @@ To enable Single Step Instrumentation with Helm:
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 
 [7]: https://v3.helm.sh/docs/intro/install/
@@ -306,7 +306,7 @@ To enable instrumentation for specific namespaces, add `enabledNamespaces` confi
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          enabledNamespaces: # Add namespaces to instrument
            - default
            - applications
@@ -318,7 +318,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
    features:
      apm:
        instrumentation:
-         enabled: true 
+         enabled: true
          disabledNamespaces: # Add namespaces to not instrument
            - default
            - applications

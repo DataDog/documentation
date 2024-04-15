@@ -18,7 +18,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: ブログ
   text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
-kind: documentation
+
 title: 属性とエイリアス設定
 ---
 
@@ -115,13 +115,13 @@ title: 属性とエイリアス設定
 
 以下は、ネットワーク通信で使用される IP アドレスの位置情報に関連する属性です。すべてのフィールドに `network.client.geoip` または `network.destination.geoip` というプレフィックスが付きます。
 
-`network.client.geoip.country.name` 
+`network.client.geoip.country.name`
 : タイプ: `string` <br> 国の名前。
 
-`network.client.geoip.country.iso_code` 
+`network.client.geoip.country.iso_code`
 : タイプ: `string` <br> 国の [ISO コード][13] (例えば、アメリカなら `US`、フランスなら `FR`)。
 
-`network.client.geoip.continent.code` 
+`network.client.geoip.continent.code`
 : タイプ: `string` <br> 大陸の ISO コード (`EU`、`AS`、`NA`、`AF`、`AN`、`SA`、`OC`)。
 
 `network.client.geoip.continent.name`

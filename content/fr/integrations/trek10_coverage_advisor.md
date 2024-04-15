@@ -40,7 +40,7 @@ integration_id: trek10-coverage-advisor
 integration_title: AWS Coverage Advisor par Trek10
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -86,7 +86,7 @@ Le dashboard affiche un compte-rendu de la surveillance de votre compte Datadog 
 *Vous avez une demande particulière concernant cet outil Datadog, vous recherchez des services gérés 24/7 pour AWS avec une plateforme basée sur Datadog, ou vous souhaitez faire appel à notre expertise relative à AWS ou Datadog ? Contactez notre [service commercial](https://trek10.com/contact) et laissez-nous vous proposer une solution adaptée à vos besoins*
 
 ### Métriques
-* Toutes les 24 h, Trek10 transmet la métrique trek10.coverage.aws_metric_count, qui peut être utilisée pour vérifier le nombre de métriques qui sont actuellement ingérées dans votre compte Datadog mais qui n'ont pas de monitor correspondant. La métrique aura le tag `metric_type`, qui peut être filtré en fonction des valeurs `all_metrics`, `metrics_monitored` et `monitoring_recommendations`. 
+* Toutes les 24 h, Trek10 transmet la métrique trek10.coverage.aws_metric_count, qui peut être utilisée pour vérifier le nombre de métriques qui sont actuellement ingérées dans votre compte Datadog mais qui n'ont pas de monitor correspondant. La métrique aura le tag `metric_type`, qui peut être filtré en fonction des valeurs `all_metrics`, `metrics_monitored` et `monitoring_recommendations`.
 
 
 ### Événements
@@ -103,7 +103,7 @@ Le dashboard affiche un compte-rendu de la surveillance de votre compte Datadog 
 Cette intégration est principalement utilisée pour identifier rapidement les métriques AWS qui n'ont pas de monitor correspondant dans votre compte. Vous pouvez consulter le dashboard toutes les semaines et générer un rapport, ou configurer les monitors pour recevoir une alerte quotidienne si vous préférez.
 
 ### À propos du développeur
-* Trek10 
+* Trek10
 * Portrait : Nous sommes de véritables gourous de la technologie et des créateurs dans l'âme. Utilisateurs de longue date d'AWS et de Datadog, nous avons aidé de nombreuses entreprises à adopter ces solutions en proposant des services professionnels et des formations. Nous faisons principalement appel à Datadog dans le cadre de nos services gérés pour AWS. Nous nous sommes basés sur un outil interne qui nous prévient lorsque nous devons ajouter des monitors aux comptes d'un de nos clients, puis nous l'avons modifié afin de le proposer au plus grand nombre.
 * Site Web : trek10.com
 

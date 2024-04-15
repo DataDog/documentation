@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value
-kind: faq
+
 title: 以前の値から現在の値への変化率をグラフ化するにはどうすればいいですか？
 ---
 

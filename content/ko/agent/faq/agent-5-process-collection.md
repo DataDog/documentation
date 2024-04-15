@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 private: true
 title: 에이전트 v5를 사용한 프로세스 수집
 ---

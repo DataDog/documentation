@@ -31,7 +31,7 @@ integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
 integration_version: 3.3.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: cloud_foundry_api
 public_title: Cloud Foundry API
@@ -69,7 +69,7 @@ tile:
 
 ### 설치
 
-Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니다. 
+Cloud Foundry API 점검은 [Datadog 에이전트][3] 패키지에 포함됩니다.
 서버에 추가 설치할 필요가 없습니다.
 
 ### 설정

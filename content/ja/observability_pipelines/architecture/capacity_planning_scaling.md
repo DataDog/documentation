@@ -1,5 +1,5 @@
 ---
-kind: Documentation
+
 title: キャパシティプランニングとスケーリング
 ---
 

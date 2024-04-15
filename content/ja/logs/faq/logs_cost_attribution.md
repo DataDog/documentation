@@ -9,7 +9,7 @@ further_reading:
 - link: /dashboards/widgets/table/
   tag: ドキュメント
   text: テーブルウィジェットについて
-kind: faq
+
 title: ログコスト属性
 ---
 
@@ -60,8 +60,8 @@ Datadog では、これらの[タグ付け方法][5]のいずれかを使用し�
 3. プロセッサーの名前を入力します。例えば、"Create team attribute" となります。
 4. **Set target category attribute** フィールドに `team` と入力します。これで `team` 属性が作成されます。
 5. **Populate category** セクションで、各チームにカテゴリーを追加します。例えば、`service:a` と `env:prod` に一致するイベントをログに記録するために `team:service_a` というタグを追加するには
-      a. **All events that match** フィールドに `service:a` と `env:prod` を入力します。 
-      b. **Appear under the value name** フィールドに `service_a` を入力します。 
+      a. **All events that match** フィールドに `service:a` と `env:prod` を入力します。
+      b. **Appear under the value name** フィールドに `service_a` を入力します。
       c. **Add** をクリックします。
 6. 他のチームを別のカテゴリーとして追加します。
 7.  **作成**をクリックします。
@@ -108,15 +108,15 @@ Datadog では、以下の方法で `retention_period` タグを構成するこ�
 3. プロセッサーの名前を入力します。例えば、"Create index_name attribute" となります。
 4. **Set target category attribute** フィールドに **index_name** と入力します。これで `index_name` 属性が作成されます。
 5. 各インデックスにカテゴリーを追加します。例えば、`env:staging` とタグ付けされたすべてのログに対して、`retention-7` という名前のインデックスがある場合:
-    {{< img src="logs/faq/logs_cost_attribution/indexes_configuration.png" alt="フィルタークエリ、保持期間、retention-30、retention-15、retention-7、demo インデックスでオンラインアーカイブが有効かどうかを示すインデックスリスト" >}} 
+    {{< img src="logs/faq/logs_cost_attribution/indexes_configuration.png" alt="フィルタークエリ、保持期間、retention-30、retention-15、retention-7、demo インデックスでオンラインアーカイブが有効かどうかを示すインデックスリスト" >}}
 次に、**Populate category** セクションで、
-      a. **All events that match** フィールドに `env:staging` を入力します。 
-      b. **Appear under the value name** フィールドに `retention-7` を入力します。 
+      a. **All events that match** フィールドに `env:staging` を入力します。
+      b. **Appear under the value name** フィールドに `retention-7` を入力します。
       c. **Add** をクリックします。
 6. 他のインデックスを別のカテゴリーとして追加します。
 7.  **作成**をクリックします。
 
-{{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="カテゴリープロセッサーのフォームにデータを入力し、index_name 属性を作成します" style="width:75%" >}} 
+{{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="カテゴリープロセッサーのフォームにデータを入力し、index_name 属性を作成します" style="width:75%" >}}
 
 #### 新しい `retention_period` 属性を作成する
 
@@ -127,13 +127,13 @@ Datadog では、以下の方法で `retention_period` タグを構成するこ�
 3. プロセッサーの名前を入力します。例えば、"Create retention_period attribute" となります。
 4. **Set target category attribute** フィールドに `retention_period` と入力します。これで `retention_period` 属性が作成されます。
 5. 保持期間ごとにカテゴリーを追加します。例えば、`retention-7`という 7 日間の保持インデックスがある場合、**Populate category** セクションに、
-      a. **All events that match** フィールドに `@index_name:(retention-7)` を入力します。 
-      b. **Appear under the value name** フィールドに `7` を入力します。 
+      a. **All events that match** フィールドに `@index_name:(retention-7)` を入力します。
+      b. **Appear under the value name** フィールドに `7` を入力します。
       c. **Add** をクリックします。
 6. 他の保持期間を別のカテゴリーとして追加します。
 7. **作成**をクリックします。
 
-{{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="カテゴリープロセッサーのフォームにデータを入力し、retention_period 属性を作成します" style="width:75%" >}} 
+{{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="カテゴリープロセッサーのフォームにデータを入力し、retention_period 属性を作成します" style="width:75%" >}}
 
 #### `retention_period` 属性をタグに変換するリマッパーを作成する
 
@@ -165,11 +165,11 @@ Datadog では、以下の方法で `online_archive` タグを構成すること
 3. プロセッサーの名前を入力します。例えば、"Create online_archives attribute" と入力します。これは `online_archives` 属性を作成します。
 4. **Populate category** セクションに、2 つのカテゴリーを追加します。
       <br> **最初のカテゴリー**では、オンライン アーカイブが有効になっているすべてのインデックスに値 `true` が割り当てられます。例えば、`retention-30` という名前のインデックスのログがオンラインアーカイブに入る場合、
-      a. **All events that match** フィールドに `@index_name:(retention-30)` を入力します。 
-      b. **Appear under the value name** フィールドに `true` を入力します。 
+      a. **All events that match** フィールドに `@index_name:(retention-30)` を入力します。
+      b. **Appear under the value name** フィールドに `true` を入力します。
       c. **Add** をクリックします。
-      <br> **2 番目のカテゴリー**では、他のすべてのインデックスに `false` という値が割り当てられています。 
-      a. **All events that match** フィールドに `*` を入力します。 
+      <br> **2 番目のカテゴリー**では、他のすべてのインデックスに `false` という値が割り当てられています。
+      a. **All events that match** フィールドに `*` を入力します。
       b. **Appear under the value name** フィールドに `false` を入力します。
       c. **Add** をクリックします。
 5. **作成**をクリックします。
@@ -204,11 +204,11 @@ Datadog では、[Datadog API エンドポイント][7]を使用して、構成�
 1. [機密データスキャナー][8]に進みます。
 2. 各スキャングループで
       a. **Add Scanning Rule** をクリックします。
-      b. すべてのログに一致させるには、**Define Regex to match** フィールドに `.` を入力します。 
-      c. **Scan the entire event or a part of it** フィールドで、**Entire Event** を選択します。 
-      d. **Add tags** フィールドに `sds:true` を入力します。 
+      b. すべてのログに一致させるには、**Define Regex to match** フィールドに `.` を入力します。
+      c. **Scan the entire event or a part of it** フィールドで、**Entire Event** を選択します。
+      d. **Add tags** フィールドに `sds:true` を入力します。
       e. **Define action on match** を **No action** のままにします。
-      f. スキャンルールの名前を入力します。例えば、"Create sds tag" となります。 
+      f. スキャンルールの名前を入力します。例えば、"Create sds tag" となります。
       g. **Create** をクリックします。
 
 ## カスタムログメトリクスを生成する
@@ -296,8 +296,8 @@ Datadog では、ログインデックス化のテーブルウィジェットを
 2. **Table** ウィジェットを選択します。
 3. 先ほど生成した **events** カウントメトリクスを選択し、取り込んだイベント数をカウントします。
 4. **from** フィールドに、以下を追加します。
-      a. `datadog_index:*` でインデックスにルーティングされたログのみをフィルターにかけます。 
-      b. `datadog_is_excluded:false` でどの除外フィルターにも一致しないログだけをフィルターにかけます。 
+      a. `datadog_index:*` でインデックスにルーティングされたログのみをフィルターにかけます。
+      b. `datadog_is_excluded:false` でどの除外フィルターにも一致しないログだけをフィルターにかけます。
       c. `retention_period:7` で 7 日間保持されるログのみにフィルターをかけます。すべてのインデックスに同じ保持期間を設定しているため、このタグを以前に設定しなかった場合は、このタグを追加する必要はありません。他にも `retention_period` タグがある場合は、それぞれ別のウィジェットを作成してください。
 5. **sum by** フィールドを選択し、`team` タグを追加すると、チームごとの使用量をイベント単位で表示することができます。また、コストバケットごとに他のタグを追加することもできます。
 6. 使用量をコストに変換するために、式 `Usage in millions of events` * `Unit cost for 7 days of retention` を追加します。100 万イベントあたりの契約価格が変更された場合は、計算式を手動で更新する必要があります。
@@ -326,8 +326,8 @@ Datadog では、ログインデックス化のテーブルウィジェットを
 2. **Table** ウィジェットを選択します。
 3. **Metrics** フィールドで、先ほど生成した取り込みイベント数をカウントする **events** カウントメトリクスを選択します。
 4. **from** フィールドに、以下を追加します。
-      - `datadog_index:*` でインデックスにルーティングされたログのみをフィルターにかけます。 
-      - `online_archives:true` でオンラインアーカイブにルーティングされたログのみをフィルターにかけます。 
+      - `datadog_index:*` でインデックスにルーティングされたログのみをフィルターにかけます。
+      - `online_archives:true` でオンラインアーカイブにルーティングされたログのみをフィルターにかけます。
 5. **sum by** フィールドを選択し、`team` タグを追加すると、チームごとの使用量をイベント単位で表示することができます。また、コストバケットごとにタグを追加することもできます。
 6. 使用量をコストに変換するために、式 `Usage in millions of events` * `Unit cost for Online Archives` を追加します。
    **注**: イベント 100 万件あたりの契約価格が変更された場合、計算式を手動で更新する必要があります。

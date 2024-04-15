@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: JBoss EAP 7 と Datadog の JMX 経由のモニタリング
 ---
 

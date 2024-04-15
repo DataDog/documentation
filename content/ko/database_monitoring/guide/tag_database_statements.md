@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: SQL 구문 태깅
 ---
 {{< site-region region="gov" >}}
@@ -32,10 +32,10 @@ SQL 구문 실행을 지원하는 데이터베이스 API를 사용해 봅니다.
 전체 예시:
 ```go
 import (
-    "database/sql"      
+    "database/sql"
 )
 
-func main() {   
+func main() {
     db, err := sql.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
     if err != nil {
         log.Fatal(err)

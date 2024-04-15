@@ -3,7 +3,7 @@ aliases:
 - /ko/integrations/faq/gathering-kubernetes-events
 - /ko/agent/kubernetes/event_collection
 - /ko/agent/kubernetes/event_collection
-kind: documentation
+
 title: Kubernetes에서 Datadog Agent 추가 설정
 ---
 
@@ -70,7 +70,7 @@ Helm에서 APM은 UDS 또는 Windows로 명명된 파이프를 통해 **기본�
 ```yaml
 datadog:
   apm:
-    socketEnabled: true    
+    socketEnabled: true
 ```
 
 {{% /tab %}}
@@ -113,7 +113,7 @@ datadog:
   collectEvents: true
 clusterAgent:
   enabled: true
-  rbac: 
+  rbac:
     create: true
 ```
 
@@ -216,7 +216,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-다음 설정을 사용하여 `datadog-values.yaml`을 업데이트하세요. 
+다음 설정을 사용하여 `datadog-values.yaml`을 업데이트하세요.
 
 ```yaml
 datadog:
@@ -265,7 +265,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-다음 설정을 사용하여 `datadog-values.yaml`을 업데이트하세요. 
+다음 설정을 사용하여 `datadog-values.yaml`을 업데이트하세요.
 
 ```yaml
 datadog:
@@ -324,7 +324,7 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-  clusterAgentTokenSecret: 
+  clusterAgentTokenSecret:
     secretName: <SECRET_NAME>
     keyName: <KEY_NAME>
 ```
@@ -496,7 +496,7 @@ Datadog Operator 및 Helm 차트는 **기본적으로 Datadog의 [Orchestrator E
 
 Orchestrator Explorer는 기본적으로 Datadog Operator에서 활성화됩니다.
 
-인증을 위해 `datadog-agent.yaml`에서 `features.orchestratorExplorer.enabled` 파라미터가 `true`로 설정되어 있는지 확인하세요.  
+인증을 위해 `datadog-agent.yaml`에서 `features.orchestratorExplorer.enabled` 파라미터가 `true`로 설정되어 있는지 확인하세요.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -705,7 +705,7 @@ datadog:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-다음 설정을 사용하여 `datadog-agent.yaml`을 업데이트하세요. 
+다음 설정을 사용하여 `datadog-agent.yaml`을 업데이트하세요.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -728,7 +728,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-다음 설정을 사용하여 `datadog-values.yaml`을 업데이트하세요. 
+다음 설정을 사용하여 `datadog-values.yaml`을 업데이트하세요.
 
 ```yaml
 clusterAgent:
@@ -790,6 +790,6 @@ Agent v6.4.0(및 Trace Agent를 위한 v6.5.0)으로 시작하여 Agent 프록�
 [20]: https://app.datadoghq.com/orchestration/overview
 [21]: /ko/infrastructure/containers/orchestrator_explorer
 [22]: /ko/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
-[23]: /ko/infrastructure/process/ 
+[23]: /ko/infrastructure/process/
 [24]: /ko/account_management/api-app-keys/#application-keys
 [25]: /ko/integrations/kubernetes_state_core/

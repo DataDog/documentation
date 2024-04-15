@@ -1,6 +1,6 @@
 ---
 title: Trace and Span ID Formats
-kind: guide
+
 aliases:
   - /tracing/faq/span_and_trace_id_format/
 further_reading:
@@ -13,7 +13,7 @@ further_reading:
 
 This page details Datadog tracing library support for trace and span IDs.
 
-- **Generated IDs**: By default, all tracing libraries generate 128-bit trace IDs and 64-bit span IDs.  
+- **Generated IDs**: By default, all tracing libraries generate 128-bit trace IDs and 64-bit span IDs.
 - **Accepted IDs**: Datadog accepts 128-bit or 64-bit trace IDs, and 64-bit span IDs.
 
 ## 128-bit trace IDs
@@ -21,13 +21,13 @@ This page details Datadog tracing library support for trace and span IDs.
 128-bit trace IDs are generated and accepted by default in the latest versions of Datadog tracing libraries:
 
 - [Node.js][1]
-- [Java][2]   
-- [Go][3]     
-- [Python][4] 
-- [Ruby][5]   
-- [.NET][6]   
-- [PHP][7]    
-- [C++][8]   
+- [Java][2]
+- [Go][3]
+- [Python][4]
+- [Ruby][5]
+- [.NET][6]
+- [PHP][7]
+- [C++][8]
 
 ## 64-bit trace and span IDs
 

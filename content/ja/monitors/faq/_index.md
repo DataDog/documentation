@@ -1,7 +1,7 @@
 ---
 cascade:
 - private: true
-kind: faq
+
 title: モニターに関するよくある質問
 ---
 

@@ -29,7 +29,7 @@ integration_id: coredns
 integration_title: CoreDNS
 integration_version: 2.2.0
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: coredns.
@@ -78,7 +78,7 @@ LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:91
 Pour activer l'ancienne version du check (OpenMetricsBaseCheckV1), remplacez `openmetrics_endpoint` par `prometheus_url` :
 
 ```yaml
-LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]' 
+LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
 ```
 
 **Remarques** :
@@ -122,7 +122,7 @@ metadata:
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
+          "openmetrics_endpoint": "http://%%host%%:9153/metrics",
           "tags": ["dns-pod:%%host%%"]
         }
       ]
@@ -139,7 +139,7 @@ Pour activer l'ancienne version du check (OpenMetricsBaseCheckV1), remplacez `op
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "prometheus_url": "http://%%host%%:9153/metrics", 
+          "prometheus_url": "http://%%host%%:9153/metrics",
           "tags": ["dns-pod:%%host%%"]
         }
       ]

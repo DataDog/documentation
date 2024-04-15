@@ -1,6 +1,6 @@
 ---
 title: Validating Service Definition YAMLs
-kind: guide
+
 aliases:
   - /tracing/service_catalog/guides/validating-service-definition
 further_reading:
@@ -18,31 +18,31 @@ further_reading:
   text: "Manage Service Catalog entries with the Service Definition JSON Schema"
 ---
 
-## Overview 
+## Overview
 
-Service Catalog uses service definition schemas to store and display metadata about your services. These schemas follow the JSON Schema specification, so you can validate your metadata as you edit it. This validation is important, because a mistake in a service definition file could cause you to create a service 
-with invalid data or introduce an error into the metadata of an existing service. 
+Service Catalog uses service definition schemas to store and display metadata about your services. These schemas follow the JSON Schema specification, so you can validate your metadata as you edit it. This validation is important, because a mistake in a service definition file could cause you to create a service
+with invalid data or introduce an error into the metadata of an existing service.
 
-To prevent this, there are two ways for you to validate your service definition files: 
+To prevent this, there are two ways for you to validate your service definition files:
 
 ## Create the service definition in-app
 
-To validate your service definition file in-app: 
+To validate your service definition file in-app:
 
 1. Navigate to the [Service Catalog Setup & Config page][1].
 2. Click **Create a New Entry**.
 3. Select the **Code** tab.
 4. Paste the schema content.
 
-Built-in validation mechanisms prevent you from sending incorrect metadata into Service Catalog. 
+Built-in validation mechanisms prevent you from sending incorrect metadata into Service Catalog.
 
 {{< img src="tracing/service_catalog/service_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
 
 ## Validate with an IDE extension
 
-The Datadog service definition schema is available in the open source [JSON Schema Store][2], where [many IDEs][3] can automatically retrieve it. 
-With it, your IDE validates the data as you edit the file, provided file name is `service.datadog.yaml`. 
-Validation messages allow you to correct issues before sending data to the Service Catalog.  
+The Datadog service definition schema is available in the open source [JSON Schema Store][2], where [many IDEs][3] can automatically retrieve it.
+With it, your IDE validates the data as you edit the file, provided file name is `service.datadog.yaml`.
+Validation messages allow you to correct issues before sending data to the Service Catalog.
 
 {{< img src="tracing/service_catalog/service-definition-data-validation.mp4" alt="IDE showing real-time validation messages for service definition files." video="true" >}}
 

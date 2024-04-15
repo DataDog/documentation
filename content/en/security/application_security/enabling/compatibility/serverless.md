@@ -1,6 +1,6 @@
 ---
-title: Serverless Compatibility Requirements 
-kind: documentation
+title: Serverless Compatibility Requirements
+
 code_lang: serverless
 type: multi-code-lang
 code_lang_weight: 90
@@ -12,7 +12,7 @@ ASM provides serverless capability for the following platforms and libraries:
 
 ## AWS Lambda
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
-  
+
 |Type           	| Threat Detection	|  Software Composition Analysis (SCA)	| Code Security 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
 | Java  		| {{< X >}}         	| 	                			|						|
@@ -39,17 +39,17 @@ Node.js
 : If you are bundling using webpack or esbuild, [follow the specific bundler instructions][4].
 
 Python
-: 
+:
 
 Java
 : To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`), Java 11 (`java11`) or Java 17 (`java17`) runtimes with at least 1024MB of memory.
 : If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
 
 Go
-: 
+:
 
 .NET
-: 
+:
 
 
 ## Google Cloud Run
@@ -57,7 +57,7 @@ Go
 <div class="alert alert-info">Google Cloud Run support for ASM serverless is in beta</a>.</div>
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
-   
+
 |Type           	| Threat Detection	|  Vulnerability Management for OSS	| Vulnerability Management for Code-Level 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
 | Java  		| beta         	| beta	                			|						|
@@ -74,7 +74,7 @@ Go
 Only *web applications* are supported. Azure Functions are not supported with ASM.
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
-   
+
 |Type       | OS			     |Threat Detection	|  Vulnerability Management for OSS	 | Vulnerability Management for Code-Level 	|
 |-----------|--------------------|------------------|------------------------------------|------------------------------------------|
 | Java  	| Windows, Linux	 | {{< X >}}    	| {{< X >}}	                         | beta			                            |

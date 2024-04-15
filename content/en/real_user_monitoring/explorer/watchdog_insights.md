@@ -1,6 +1,6 @@
 ---
 title: Watchdog Insights for RUM
-kind: documentation
+
 description: 'Learn how to investigate issues in your RUM applications with Watchdog Insights.'
 further_reading:
 - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Datadog Real User Monitoring (RUM) offers Watchdog Insights to help you navigate to the root cause of problems with contextual insights in the RUM Explorer. Watchdog Insights complement your expertise and instincts by recommending outliers and potential performance bottlenecks impacting a subset of users. 
+Datadog Real User Monitoring (RUM) offers Watchdog Insights to help you navigate to the root cause of problems with contextual insights in the RUM Explorer. Watchdog Insights complement your expertise and instincts by recommending outliers and potential performance bottlenecks impacting a subset of users.
 
 For more information, see [Watchdog Insights][1].
 
@@ -29,11 +29,11 @@ The pink Watchdog Insights banner appears in the [RUM Explorer][2] and displays 
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/overview.png" alt="Watchdog Insights banner cards in the RUM Explorer" style="width:100%;" >}}
 
-Click on an [error](#error-outliers) or [latency outlier](#latency-outliers) to interact with the visualizations embedded in the side panel and find views from the list of impacted events. Click **View all** to see all outstanding error outliers in a side panel. 
+Click on an [error](#error-outliers) or [latency outlier](#latency-outliers) to interact with the visualizations embedded in the side panel and find views from the list of impacted events. Click **View all** to see all outstanding error outliers in a side panel.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card-3.png" alt="Error Outlier banner card and side panel card view in the RUM Explorer" style="width:100%;" >}}
 
-Hover over a card in the banner and click **Filter on Insight** to add the anomalous insight behavior to your search query. For example, you can hone in on a particular view path or a specific continent like `North America`. 
+Hover over a card in the banner and click **Filter on Insight** to add the anomalous insight behavior to your search query. For example, you can hone in on a particular view path or a specific continent like `North America`.
 
 Click **View in Analytics** to automatically set the `Group into fields` formulas and select the `Visualize as` type under the search query to reflect the card's outlier behavior. For example, you can create a timeseries graph about an unusually high error rate on a Synthetic test by using the `synthetics.test_id` in a search formula and export it into a monitor or dashboard.
 
@@ -62,7 +62,7 @@ In the **banner card** view, you can see:
 * The field name
 * The performance metric value containing the field and the baseline for the rest of the data
 
-In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
+In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 

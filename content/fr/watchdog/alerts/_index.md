@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Alertes Watchdog
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: データベースモニタリングセットアップのトラブルシューティング
-kind: documentation
+
 title: データベースモニタリングのトラブルシューティング
 ---
 {{< site-region region="gov" >}}

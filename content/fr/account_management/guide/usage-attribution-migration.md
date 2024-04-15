@@ -3,7 +3,7 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Paramètres de formule et d'utilisation
-kind: guide
+
 title: Passer de la v1 à la v2 des API d'attribution de l'utilisation
 ---
 

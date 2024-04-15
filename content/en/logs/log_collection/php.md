@@ -1,6 +1,6 @@
 ---
 title: PHP Log Collection
-kind: documentation
+
 aliases:
   - /logs/languages/php
 further_reading:
@@ -24,7 +24,7 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 - link: "/glossary/#tail"
   tag: Glossary
-  text: 'Glossary entry for "tail"'  
+  text: 'Glossary entry for "tail"'
 ---
 
 ## Overview
@@ -336,7 +336,7 @@ Follow these steps to add variable context in your logs using a session processo
               arguments:  [ @session ]
               tags:
                   - { name: monolog.processor, method: processRecord }
-    ``` 
+    ```
 
 3. [Stream](#configure-the-datadog-agent) the generated JSON file to Datadog.
 
@@ -506,7 +506,7 @@ class AppServiceProvider extends ServiceProvider
 {{% /tab %}}
 {{% tab "Silex" %}}
 
-Add the following: 
+Add the following:
 
 ```php
 <?php
@@ -521,7 +521,7 @@ Add the following:
 {{% /tab %}}
 {{% tab "Lumen" %}}
 
-Add the following: 
+Add the following:
 
 ```php
 <?php

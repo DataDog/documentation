@@ -27,7 +27,7 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: Documentation
   text: Créer un monitor Error Tracking
-kind: documentation
+
 title: Error Tracking pour les applications Web et mobiles
 ---
 
@@ -63,7 +63,7 @@ La solution Error Tracking regroupe automatiquement les plantages recueillis dep
 
 {{< img src="real_user_monitoring/error_tracking/issue-panel-2.png" alt="Error Tracking Explorer pour RUM affichant les problèmes associés aux rapports de crash dans vos applications Web et mobiles" style="width:100%;" >}}
 
-Cliquez sur un problème pour visualiser les informations de debugging telles que la stack trace, les sessions utilisateur et les métadonnées, y compris l'emplacement de l'utilisateur, la version et les attributs personnalisés inclus dans vos rapports de crash. 
+Cliquez sur un problème pour visualiser les informations de debugging telles que la stack trace, les sessions utilisateur et les métadonnées, y compris l'emplacement de l'utilisateur, la version et les attributs personnalisés inclus dans vos rapports de crash.
 
 ## Pour aller plus loin
 

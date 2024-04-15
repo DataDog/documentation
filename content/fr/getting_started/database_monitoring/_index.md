@@ -13,7 +13,7 @@ further_reading:
   tag: Validation des bases
   text: Prenez part à une session interactive pour améliorer la surveillance de vos
     bases de données avec Database Monitoring
-kind: documentation
+
 title: Prise en main de la solution Database Monitoring
 ---
 
@@ -39,7 +39,7 @@ Poursuivez votre lecture pour configurer la solution Database Monitoring Datado
 
 Vous devez au préalable disposer d'un [compte Datadog][1].
 
-Pour exécuter l'exemple d'application, vous avez besoin d'une machine dotée de [GNU Make][2] et de [Docker][3]. Notez également votre [clé d'API][4] Datadog. 
+Pour exécuter l'exemple d'application, vous avez besoin d'une machine dotée de [GNU Make][2] et de [Docker][3]. Notez également votre [clé d'API][4] Datadog.
 
 ### Installer l'exemple d'application
 
@@ -127,7 +127,7 @@ Observez les activités, l'utilisation des ressources et d'autres valeurs de la 
 
 Pour accéder aux dashboards, procédez comme suit :
 
-1. Cliquez sur **APM > Databases** dans l'interface pour accéder à Database Monitoring. 
+1. Cliquez sur **APM > Databases** dans l'interface pour accéder à Database Monitoring.
 
 2. Sélectionnez l'onglet **Dashboards** et choisissez le dashboard de votre choix.
 

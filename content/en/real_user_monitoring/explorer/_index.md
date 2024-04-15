@@ -1,6 +1,6 @@
 ---
 title: RUM Explorer
-kind: documentation
+
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
@@ -39,15 +39,15 @@ Search and filter your RUM events by typing in the search bar and selecting a vi
 
 ## Group
 
-Group the RUM events you have queried into higher-level entities that may help you derive or consolidate information about an issue. To identify event patterns and aggregate events by subsets, see [Group RUM Events][2]. 
+Group the RUM events you have queried into higher-level entities that may help you derive or consolidate information about an issue. To identify event patterns and aggregate events by subsets, see [Group RUM Events][2].
 
-To start creating queries and using facets, see [Search Syntax][3]. 
+To start creating queries and using facets, see [Search Syntax][3].
 
-## Visualize 
+## Visualize
 
-Select a visualization for your filters and aggregations that displays your RUM events in a helpful perspective for you to uncover decisive information. 
+Select a visualization for your filters and aggregations that displays your RUM events in a helpful perspective for you to uncover decisive information.
 
-For example, you can view RUM events in a list, organize RUM data into columns, and see RUM data in a timeseries graph that displays your RUM telemetry over time. 
+For example, you can view RUM events in a list, organize RUM data into columns, and see RUM data in a timeseries graph that displays your RUM telemetry over time.
 
 To start visualizing RUM data in the RUM Explorer, see [Create RUM Visualizations][4].
 

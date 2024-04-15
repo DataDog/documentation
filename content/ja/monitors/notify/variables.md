@@ -13,7 +13,7 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentation
   text: モニターの管理
-kind: documentation
+
 title: 変数
 ---
 
@@ -419,7 +419,7 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 {{local_time 'last_triggered_at' 'Asia/Tokyo'}}
 ```
 
-結果は、ISO 8601 形式 `yyyy-MM-dd HH:mm:ss±HH:mm` で表示されます。例: `2021-05-31 23:43:27+09:00`。 
+結果は、ISO 8601 形式 `yyyy-MM-dd HH:mm:ss±HH:mm` で表示されます。例: `2021-05-31 23:43:27+09:00`。
 利用可能なタイムゾーンの値については、[tz データベースのタイムゾーンリスト][7]で、TZ データベース名の列をご参照ください。
 
 ## 高度な検索

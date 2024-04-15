@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon Elastic Block Store
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_ebs
 public_title: Datadog-Amazon Elastic Block Store 통합
@@ -82,7 +82,7 @@ Amazon EBS에는 서비스 점검이 포함되지 않았습니다.
 
 ## 참고 자료
 
-- [Amazon EBS 모니터링을 위한 핵심 메트릭][10] 
+- [Amazon EBS 모니터링을 위한 핵심 메트릭][10]
 - [아마존 EBS 메트릭 수집 생성] [11]
 - [Datadog를 통한 Amazon EBS 모니터링][12]
 

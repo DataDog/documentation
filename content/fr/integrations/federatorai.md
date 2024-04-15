@@ -26,7 +26,7 @@ integration_id: federatorai
 integration_title: Federator.ai
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: support@prophetstor.com
 manifest_version: 1.0.0
 metric_prefix: federatorai.
@@ -236,7 +236,7 @@ Pour en savoir plus sur Federator.ai, consultez les vidéos de [démonstration d
    Default login credential is admin/admin
 
    Also, you can start to apply alamedascaler CR for the target you would like to monitor.
-   Review administration guide for further details. 
+   Review administration guide for further details.
    ========================================
    ========================================
    You can now access Federatorai REST API through https://<YOUR IP>:31011
@@ -267,7 +267,7 @@ Pour en savoir plus sur Federator.ai, consultez les vidéos de [démonstration d
     - Lancez l'interface graphique Federator.ai, accédez à Configuration -> Clusters, puis cliquez sur Add Cluster.
     - Saisissez la clé d'API et la clé d'application.
 
-    ![Fenêtre Add Cluster][10] 
+    ![Fenêtre Add Cluster][10]
 
 3. Pour en savoir plus, consultez le [guide d'installation et de configuration de Federator.ai][11] ainsi que le [guide d'utilisation][12] (en anglais).
 

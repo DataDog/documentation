@@ -8,7 +8,7 @@ further_reading:
   tag: Documentation
   text: En savoir plus sur le suivi des erreurs pour les services backend
 is_beta: true
-kind: documentation
+
 private: true
 title: Contexte d'exécution pour le suivi des erreurs
 ---

@@ -6,7 +6,7 @@ aliases:
 - /fr/security/cloud_workload_security/backend/
 - /fr/security/threats/security_profiles
 - /fr/security/threats/runtime_anomaly_detection
-kind: documentation
+
 title: Cloud Security Management Threats
 ---
 
@@ -29,7 +29,7 @@ CSM Threats tire parti de l'Agent Datadog pour surveiller votre environnement.
 
 CSM Threats intègre plus de 50 règles de détection prêtes à l'emploi qui sont mises à jour par une équipe d'experts en sécurité. Les règles détectent les risques majeurs afin que vous puissiez immédiatement prendre les mesures adéquates. Le règles d'expression de l'Agent définissent les activités de workload devant être analysées, tandis que les règles de détection backend analysent les activités et identifient les techniques d'attaque ainsi que d'autres comportements à risque.
 
-Utilisez la [configuration à distance][7] pour déployer automatiquement les nouvelles règles et celles mises à jour dans l'Agent. [Personnalisez les règles][5] en définissant la manière dont chaque règle surveille l'activité des processus, du réseau et des fichiers, [créez des règles sur mesure][6] et [configurez des notifications en temps réel](#configurer-des-notifications-en-temps-reel) 
+Utilisez la [configuration à distance][7] pour déployer automatiquement les nouvelles règles et celles mises à jour dans l'Agent. [Personnalisez les règles][5] en définissant la manière dont chaque règle surveille l'activité des processus, du réseau et des fichiers, [créez des règles sur mesure][6] et [configurez des notifications en temps réel](#configurer-des-notifications-en-temps-reel)
 
 {{< img src="security/cws/threats_detection_rules.png" alt="Règles de détection de CSM Threats das l'application Datadog" width="100%">}}
 

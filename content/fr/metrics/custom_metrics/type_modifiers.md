@@ -11,7 +11,7 @@ further_reading:
 - link: /developers/community/libraries/
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-kind: documentation
+
 title: Modificateurs de type de métriques
 ---
 
@@ -105,7 +105,7 @@ Ainsi, les données envoyées avant le changement de type pour `app.requests.ser
 
 Si vous ne souhaitez pas perdre les données historiques envoyées en tant que type `GAUGE`, créez un nom de métrique avec le nouveau type, en laissant le type de requête `app.requests.served` inchangé.
 
-**Remarque** : pour le check de l'Agent, `self.increment` ne calcule pas le delta pour un accroissement uniforme de counter, mais signale la valeur transmise lors du check. Pour envoyer la valeur delta pour un accroissement uniforme de counter, utilisez `self.monotonic_count`. 
+**Remarque** : pour le check de l'Agent, `self.increment` ne calcule pas le delta pour un accroissement uniforme de counter, mais signale la valeur transmise lors du check. Pour envoyer la valeur delta pour un accroissement uniforme de counter, utilisez `self.monotonic_count`.
 
 [1]: /fr/metrics/types/
 [2]: /fr/metrics/introduction/#time-aggregation

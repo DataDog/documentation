@@ -15,7 +15,7 @@ further_reading:
 - link: https://dtdg.co/d22op
   tag: ラーニングセンター
   text: 観測可能性パイプラインによる安心・安全なローカル処理
-kind: documentation
+
 title: 観測可能性パイプラインワーカーの設定
 type: multi-code-lang
 ---

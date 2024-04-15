@@ -1,6 +1,6 @@
 ---
 title: Connect an Amazon EKS Cluster with Cloudcraft
-kind: documentation
+
 ---
 
 By scanning your Amazon EKS clusters, Cloudcraft allows you to generate system architecture diagrams to help visualize your deployed workloads and pods.

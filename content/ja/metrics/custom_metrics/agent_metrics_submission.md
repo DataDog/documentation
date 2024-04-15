@@ -6,7 +6,7 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: ドキュメント
   text: Agent カスタムチェックの書き方
-kind: documentation
+
 title: "メトリクスの送信: \bカスタム Agent チェック"
 ---
 
@@ -113,7 +113,7 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 
 この関数は、チェック間隔の間に発生したヒストグラムメトリクスのサンプルを送信します。チェックの実行中に複数回呼び出すことができます。各サンプルは、このメトリクスの値セットの統計的分布に追加されます。
 
-**注**: 生成されるすべてのメトリクス集計は、`RATE` メトリクスタイプとして保存される `<METRIC_NAME>.count` を除き、`GAUGE` メトリクスタイプとして Datadog に保存されます。 
+**注**: 生成されるすべてのメトリクス集計は、`RATE` メトリクスタイプとして保存される `<METRIC_NAME>.count` を除き、`GAUGE` メトリクスタイプとして Datadog に保存されます。
 
 関数テンプレート：
 

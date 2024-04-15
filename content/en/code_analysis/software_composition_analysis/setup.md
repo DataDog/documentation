@@ -1,6 +1,6 @@
 ---
 title: Setting Up Software Composition Analysis
-kind: documentation
+
 description: Learn how to set up Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
 is_beta: true
 further_reading:
@@ -33,7 +33,7 @@ Code Analysis is in public beta.
 
 ## Overview
 
-To use Datadog Software Composition Analysis (SCA) in CI, you only need to set it up in its own dedicated job. 
+To use Datadog Software Composition Analysis (SCA) in CI, you only need to set it up in its own dedicated job.
 
 ## Enable Software Composition Analysis
 

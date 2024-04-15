@@ -1,6 +1,6 @@
 ---
 title: Context Links
-kind: guide
+
 further_reading:
 - link: '/dashboards/widgets'
   tag: 'Documentation'
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Dashboards collect data from multiple sources and display this data as visualizations. 
+Dashboards collect data from multiple sources and display this data as visualizations.
 
 You can attach dashboards to [monitor notifications][1], use them as screenboards to observe key technical or business indicators, or reference them in [runbooks][2] to provide additional context. With Dashboards, you can see snapshots of the current state of your platform as well as interactions, so you can preemptively see issues and analyze them more deeply in specialized pages.
 
@@ -29,12 +29,12 @@ Context links bridge dashboard widgets with other pages in Datadog, as well as t
 Users with [edit permissions][3] to dashboards can configure which links are accessible in the link list.
 
 ### Default context links
- 
+
  {{< img src="dashboards/guide/context_links/default-links.png" alt="Default links" style="width:75%;" >}}
 
-By default, the widget menu displays links to your host, [traces][4], and [logs][5]—along with links that correspond to the widget's data sources. For example, the menu displays a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click **More Related Data Actions** to see additional links in the dropdown menu. 
+By default, the widget menu displays links to your host, [traces][4], and [logs][5]—along with links that correspond to the widget's data sources. For example, the menu displays a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click **More Related Data Actions** to see additional links in the dropdown menu.
 
-The widget contains links to the following pages:  
+The widget contains links to the following pages:
 
 | Link           | Description                                                                           |
 |----------------|---------------------------------------------------------------------------------------|
@@ -48,7 +48,7 @@ The widget contains links to the following pages:
 
 When applicable, context links embed:
 
-* A **filter** that combines the widget filter(s) with template variables (if any) and, for grouped-by queries, the one series users click on. 
+* A **filter** that combines the widget filter(s) with template variables (if any) and, for grouped-by queries, the one series users click on.
 * A **time range**. For timeseries and heatmap widgets, the time range corresponds to the time bucket for the data point. For other widgets, the time range is the full widget time range.
 
 
@@ -67,7 +67,7 @@ To define custom links or override the default links, specify the link name in t
 
 Available variable types for context links include:
 
-* **Time range variables** `{{timestamp_start}}` and `{{timestamp_end}}`. These variables correspond to the time range of the widget. 
+* **Time range variables** `{{timestamp_start}}` and `{{timestamp_end}}`. These variables correspond to the time range of the widget.
 * **Query variables** (`{{@MerchantTier}}` and `{{@MerchantTier.value}}` in the example above). These variables are for widgets with grouped queries, and identify the specific group a user clicks on.
 * **Dashboard template variables** (`{{$env}}` and `{{$env.value}}` in the example above). These variables identify the current value in use for the template variable when user clicks.
 * **`{{tags}}`**, the default combination of all the variables above.
@@ -110,7 +110,7 @@ The example above displays a link with a query parameter, `status:error source:n
 
 This section contains examples that demonstrate how you can take advantage of context links to integrate your dashboards into your workflows.
 
-### Dashboards links to a customer support solution 
+### Dashboards links to a customer support solution
 
 The following example explains how to create a link from a user in a dashboard to their corresponding Zendesk user page.
 
@@ -150,7 +150,7 @@ The following example explains how to create a link from a host in a dashboard w
 
 Your platform is hosted on [Amazon EC2][19] instances, and the procedures to upscale and downscale your platform are mostly manual.
 
-You have a dashboard where you've consolidated key health metrics for your infrastructure in Datadog. 
+You have a dashboard where you've consolidated key health metrics for your infrastructure in Datadog.
 
 To accelerate this operations workflow, you would like a direct connection between this dashboard and your [AWS Console][20]—for example, to upgrade from `t2.micro` to `t2.large`.
 
@@ -169,7 +169,7 @@ If your platforms runs on multiple regions, your widget configuration depends on
 
 {{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 Query" style="width:90%;" >}}
 
-* If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **template** variable. 
+* If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **template** variable.
 
 {{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 Query" style="width:90%;" >}}
 
@@ -191,7 +191,7 @@ The following example explains how to create a link from a RUM event in a dashbo
 
 You monitor your corporate website with Datadog. You may use [RUM][17] to understand your users and [Logs][21] to [oversee your API Gateways][22] from a more technical perspective.
 
-Your frontend engineers typically use dashboards with high-level RUM insights. You API Gateways team maintains a [Saved View][23] in the Log Explorer, which is a fine-tuned perspective that the frontend monitoring team relies on to monitor information that is relevant to them. 
+Your frontend engineers typically use dashboards with high-level RUM insights. You API Gateways team maintains a [Saved View][23] in the Log Explorer, which is a fine-tuned perspective that the frontend monitoring team relies on to monitor information that is relevant to them.
 
 {{< img src="dashboards/guide/context_links/logs-saved-view_result.jpg" alt="Logs Saved View result" style="width:90%;" >}}
 
@@ -199,7 +199,7 @@ To accelerate this troubleshooting workflow, the frontend monitoring teams would
 
 #### Approach to Saved Views
 
-[Saved Views][23] define the default query, visualization, and configuration options in the Log Explorer. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes the Log Explorer URL under the hood. 
+[Saved Views][23] define the default query, visualization, and configuration options in the Log Explorer. A typical saved view link is `https://app.datadoghq.com/logs?saved_view=305130`, which encodes the Log Explorer URL under the hood.
 
 You can append the saved view's short link to override any parameter in the resulting Log Explorer URL.
 
@@ -221,7 +221,7 @@ For a RUM dashboard widget displaying insights per session IP and for specific c
 
 #### Result
 
-As the API Gateways team updates the saved view to account for the latest updates on incoming logs, the context link remains up-to-date. 
+As the API Gateways team updates the saved view to account for the latest updates on incoming logs, the context link remains up-to-date.
 
 Remapping the IP address creates a context link that connects your RUM events with corresponding logs.
 
@@ -231,13 +231,13 @@ The following example explains how to configure multiple variables and condition
 
 #### Context
 
-Add context links to investigate specific logs or conditions. 
-- You have multiple tag values with the same context (for example, `env:production OR env:prod`). 
+Add context links to investigate specific logs or conditions.
+- You have multiple tag values with the same context (for example, `env:production OR env:prod`).
 - You want to filter down logs to multiple conditions (for example, `env:prod AND service:backend`)
 
 #### Approach
 
-After you select the template variables you want to troubleshoot, the context link configuration takes those template variables and inserts them into the query. **Note**: The syntax and the parenthesis enclosure impacts the query. 
+After you select the template variables you want to troubleshoot, the context link configuration takes those template variables and inserts them into the query. **Note**: The syntax and the parenthesis enclosure impacts the query.
 
 For example, if you want to configure a context link with `service:backend` AND (`env:production` OR `env:prod`), use the following configuration:
 

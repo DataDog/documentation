@@ -43,7 +43,7 @@ integration_id: weblogic
 integration_title: WebLogic
 integration_version: 1.3.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: weblogic
 public_title: WebLogic
@@ -195,7 +195,7 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
           name: new_log_start_with_date
           pattern: (\####)?<\w{3} (0?[1-9]|[12][0-9]|3[01]), \d{4}
     - type: file
-      path: <DOMAIN_DIR>/servers/*/logs/access.log 
+      path: <DOMAIN_DIR>/servers/*/logs/access.log
       source: weblogic
       service: http-access
       log_processing_rules:

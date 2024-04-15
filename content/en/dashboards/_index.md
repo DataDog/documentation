@@ -1,6 +1,6 @@
 ---
 title: Dashboards
-kind: documentation
+
 aliases:
     - /guides/templating/
     - /graphing/dashboards/
@@ -69,7 +69,7 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page 
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
-Dashboards 
+Dashboards
 : A grid-based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views which update in real time, and can represent fixed points in the past. They have a maximum width of 12 grid squares and also work well for debugging.
 
 Timeboards

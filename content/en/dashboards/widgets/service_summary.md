@@ -1,6 +1,6 @@
 ---
 title: Service Summary Widget
-kind: documentation
+
 description: "Displays the graphs of a chosen service in a dashboard widget."
 widget_type: "trace_service"
 aliases:

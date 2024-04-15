@@ -9,13 +9,13 @@ further_reading:
 - link: /monitors/notify/#autorisations
   tag: Documentation
   text: En savoir plus sur la création de monitors restreints via l'interface
-kind: guide
+
 title: Configuration du RBAC pour les monitors
 ---
 
 ## Présentation
 
-Les monitors envoient des alertes à vos équipes lorsque vos systèmes rencontrent des problèmes potentiels. Il est important de vous assurer que seuls les utilisateurs autorisés peuvent modifier vos monitors, afin d'éviter tout changement accidentel de leur configuration. 
+Les monitors envoient des alertes à vos équipes lorsque vos systèmes rencontrent des problèmes potentiels. Il est important de vous assurer que seuls les utilisateurs autorisés peuvent modifier vos monitors, afin d'éviter tout changement accidentel de leur configuration.
 
 Pour gérer en toute sécurité chacun de vos monitors, vous pouvez octroyer uniquement à certains rôles des autorisations de modification.
 
@@ -155,7 +155,7 @@ Les instructions ci-dessous vous permettent de déterminer la procédure à suiv
 Si le créateur ou un utilisateur disposant du [rôle Admin Datadog][2] modifie un monitor verrouillé, l'avertissement suivant s'affiche :
 
 ```
-This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
+This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions.
 If there is no specific change you want to apply to this monitor’s permissions, click Save. If you want to update this monitor’s permissions, read this doc.
 ```
 

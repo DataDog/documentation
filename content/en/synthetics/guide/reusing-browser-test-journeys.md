@@ -1,6 +1,6 @@
 ---
 title: Reuse Browser Test Journeys Across Your Test Suite
-kind: guide
+
 further_reading:
     - link: 'synthetics/browser_tests'
       tag: 'Documentation'
@@ -30,7 +30,7 @@ Browser test subtests allow you to reuse your journeys among your test suite, wh
 
 ## Create and reuse a login subtest
 
-If monitoring your application involves first logging into it, a best practice is to create a single test that contains all your login steps, and have other tests reuse that login test as a subtest. 
+If monitoring your application involves first logging into it, a best practice is to create a single test that contains all your login steps, and have other tests reuse that login test as a subtest.
 
 To create a login test and use it as a subtest in the rest of your test suite:
 
@@ -42,7 +42,7 @@ To create a login test and use it as a subtest in the rest of your test suite:
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration.png" alt="Configuring the parent test" >}}
 
-3. When recording test B, click **Subtest** and select the login test A. 
+3. When recording test B, click **Subtest** and select the login test A.
 
   {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_subtest.mp4" alt="Including subtest in parent test" video="true" width="100%">}}
 

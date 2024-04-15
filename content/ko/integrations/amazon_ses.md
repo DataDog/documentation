@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: 'Amazon SES(Simple Email Service) '
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_ses
 public_title: Datadog-Amazon SES(Simple Email Service) 통합
@@ -38,8 +38,8 @@ Amazon SES(Simple Email Service)는 비용 효율적인 아웃바운드 전용 �
 
 ### 메트릭 수집
 
-1. [AWS 통합 페이지][2]에서 `SES`가 `Metric Collection` 탭 아래 활성화되어 있는지 확인하세요. 
-2. Amazon SES 메트릭을 수집하려면 [Datadog IAM 정책][3]에 해당 권한을 추가합니다. 
+1. [AWS 통합 페이지][2]에서 `SES`가 `Metric Collection` 탭 아래 활성화되어 있는지 확인하세요.
+2. Amazon SES 메트릭을 수집하려면 [Datadog IAM 정책][3]에 해당 권한을 추가합니다.
 
     - `ses:GetSendQuota`: 전송 쿼터에 대한 메트릭을 추가합니다.
     - `ses:GetSendStatistics`: 전송 통계에 대한 메트릭을 추가합니다.

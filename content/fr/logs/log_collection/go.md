@@ -1,6 +1,6 @@
 ---
 title: Collecte de logs Go
-kind: documentation
+
 aliases:
   - /fr/logs/languages/go
 further_reading:

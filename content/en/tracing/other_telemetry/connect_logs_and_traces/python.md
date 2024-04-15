@@ -1,6 +1,6 @@
 ---
 title: Correlating Python Logs and Traces
-kind: documentation
+
 description: "Connect your Python logs and traces to correlate them in Datadog."
 code_lang: python
 type: multi-code-lang
@@ -37,7 +37,7 @@ To correlate your [traces][1] with your logs, complete the following steps:
 #### Step 1 - Activate automatic instrumentation
 
 Activate automatic instrumentation using one of the following options:
- 
+
 Option 1: [Library Injection][5]:
   1. Set the environment variable `DD_LOGS_INJECTION=true` in the application `deployment/manifest` file.
   2. Follow the instructions in [Library Injection][5] to set up tracing.
@@ -46,7 +46,7 @@ Option 2: `ddtrace-run`:
   1. Set the environment variable `DD_LOGS_INJECTION=true` in the environment where the application is running.
   2. Import **ddtrace** into the application.
   3. Run the application with `ddtrace-run` (for example, `ddtrace-run python appname.py`).
-     
+
 Option 3: `patch`:
   1. Import **ddtrace** into the application.
   2. Add `ddtrace.patch(logging=True)` to the start of the application code.

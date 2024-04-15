@@ -1,6 +1,6 @@
 ---
 title: Send Amazon EKS Fargate Logs with Amazon Data Firehose
-kind: guide
+
 further_reading:
 - link: https://docs.datadoghq.com/logs/log_configuration/processors/
   tag: Documentation

@@ -3,7 +3,7 @@ aliases:
 - /ja/guides/billing
 - /ja/account_management/settings
 description: Datadog アカウントと組織を管理する
-kind: documentation
+
 title: アカウントの管理
 ---
 {{< site-region region="gov" >}}

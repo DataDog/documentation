@@ -8,7 +8,7 @@ further_reading:
 - link: /agent/faq/how-datadog-agent-determines-the-hostname/
   tag: Documentación
   text: ¿Cómo determina Datadog el nombre de host del Agent?
-kind: faq
+
 title: Cambios en el Agent v6
 ---
 

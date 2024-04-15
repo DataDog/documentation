@@ -1,6 +1,6 @@
 ---
 title: De la requête au graphique
-kind: documentation
+
 aliases:
   - /fr/dashboards/faq/query-to-the-graph
 ---
@@ -46,7 +46,7 @@ Il faut alors agréger les données de ces sources afin d'obtenir une métrique 
 
 [Cliquez ici pour obtenir plus d'informations sur les séries temporelles et la cardinalité des tags][4].
 
-**Paramètre impliqué : contexte**  
+**Paramètre impliqué : contexte**
 Vous pouvez utiliser plusieurs tags, p. ex. `{host:moby, device:udev}`, si vous souhaitez récupérer les données correspondant aux deux tags.
 
 ## Effectuer l'agrégation temporelle

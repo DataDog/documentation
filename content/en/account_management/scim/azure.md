@@ -1,6 +1,6 @@
 ---
 title: Configure SCIM with Azure Active Directory
-kind: documentation
+
 algolia:
   tags: ["scim", "identity provider", "IdP", "Azure AD"]
 ---

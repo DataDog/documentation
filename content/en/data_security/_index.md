@@ -1,6 +1,6 @@
 ---
 title: Reducing Data Related Risks
-kind: documentation
+
 further_reading:
 - link: "/data_security/logs/"
   tag: "Documentation"
@@ -36,19 +36,19 @@ You may also wish to review the information available at [Datadog Security][1] a
 
 ## How data gets from you to Datadog
 
-Datadog allows you to send data to Datadog in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, Real User Monitoring SDKs and tracing libraries generate data based on your application and services code and send it to Datadog. 
+Datadog allows you to send data to Datadog in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, Real User Monitoring SDKs and tracing libraries generate data based on your application and services code and send it to Datadog.
 
 Data in motion through Datadog provided tools is protected with TLS and HSTS. Data stored by Datadog is protected by encryption, access controls, and authentication. For specifics, read more at [Datadog Security][1].
 
 ### The Datadog Agent
 
-The Agent is the main channel for data getting from your systems to Datadog. [Read all about data security measures in the Agent][4]. 
+The Agent is the main channel for data getting from your systems to Datadog. [Read all about data security measures in the Agent][4].
 
 To learn how to avoid storing secrets in plaintext in the Agent's configuration files, see [Secrets Management][5].
 
 ### Third party services integrations
 
-The integrations for some third party services are configured directly in Datadog and might require you to provide credentials to allow Datadog to connect to the service on your behalf. The credentials you provide are encrypted and stored by Datadog in a secure credential datastore. 
+The integrations for some third party services are configured directly in Datadog and might require you to provide credentials to allow Datadog to connect to the service on your behalf. The credentials you provide are encrypted and stored by Datadog in a secure credential datastore.
 
 All data through these integrations is encrypted when at-rest in Datadog's systems and encrypted in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within the third party services are limited to only what is necessary. Anomalous behavior detection tools continuously monitor for unauthorized access. Datadog employee access for maintenance purposes is limited to a select subset of engineers.
 
@@ -70,7 +70,7 @@ Sensitive Data Scanner is a stream-based, pattern matching service that you can 
 
 ### Logs Management
 
-Logs are records produced by your systems and services and the activities that happen within them. Read about logs data security considerations, including information about how you can filter and obfuscate logs data in [Log Management Data Security][11]. 
+Logs are records produced by your systems and services and the activities that happen within them. Read about logs data security considerations, including information about how you can filter and obfuscate logs data in [Log Management Data Security][11].
 
 Dive deep into controlling logs data with the [Controlling sensitive logs data][12] guide and [Agent Advanced Configuration for Logs][13].
 
@@ -102,28 +102,28 @@ Synthetic testing simulates requests and business transactions from testing loca
 ### RUM & Session Replay
 
 You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you're collecting. Read [Modifying RUM Data and Context][21] for details.
- 
+
 Session Replay privacy options default to protecting end-user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22].
 
 ### Database Monitoring
 
 The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans. To read about mitigating risk for other types of data involved in database performance monitoring, read [Database Monitoring Data Collected][23].
 
-## Other sources of potentially sensitive data 
+## Other sources of potentially sensitive data
 
 In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things. We recommend not including private or personal information in the text you are sending. Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
 
 Metadata and tags
-: Metadata consists primarily of [tags][24] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
+: Metadata consists primarily of [tags][24] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information.
 
 Dashboards, notebooks, alerts, monitors, alerts, incidents, SLOs
-: The text descriptions, titles, and names you give the things you create in Datadog are data. 
+: The text descriptions, titles, and names you give the things you create in Datadog are data.
 
 Metrics
 : Metrics, including infrastructure metrics and metrics generated from integrations and other ingested data such as logs, traces, RUM, and synthetic tests, are timeseries used to populate graphs. They usually have associated tags.
 
 APM data
-: APM data includes services, resources, profiles, traces, and spans, along with associated tags. Read [the APM Glossary][25] for an explanation about each. 
+: APM data includes services, resources, profiles, traces, and spans, along with associated tags. Read [the APM Glossary][25] for an explanation about each.
 
 Database query signatures
 : Database monitoring data consists of metrics and samples, along with their associated tags, collected by the Agent and used to track historical performance of normalized queries. The granularity of this data is defined by its normalized query signature and unique host identifier. All query parameters are obfuscated and discarded from collected samples before being sent to Datadog.

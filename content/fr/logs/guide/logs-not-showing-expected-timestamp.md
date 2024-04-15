@@ -11,7 +11,7 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: Comment étudier un problème de parsing de log ?
-kind: guide
+
 title: Timestamp incorrect dans les logs
 ---
 
@@ -48,7 +48,7 @@ Ajoutez une règle de parsing comme suit :
 
 ```
 MyParsingRule %{date("yyyy-MM-dd HH:mm:ss z"):date} \| %{word:severity} \| \(%{notSpace:logger.name}:%{integer:logger.line}[^)]*\) \|.*
-``` 
+```
 
 Vous obtenez la sortie suivante pour l'extraction de `MyParsingRule` :
 

@@ -12,7 +12,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Vérifier le statut de votre monitor
-kind: documentation
+
 title: Log Monitors
 ---
 
@@ -59,13 +59,13 @@ Pour créer un [log monitor][3] dans Datadog, utilisez la navigation principale�
 
 Définissez la condition `below 1` pour recevoir une notification lorsque les groupes correspondant à une requête spécifique ont tous arrêté d'envoyer des logs. Vous serez ainsi alerté lorsqu'aucun log ne correspond à la requête du monitor sur un intervalle de temps donné pour tous les groupes d'agrégation.
 
-Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en utilisant une condition `below`, l'alerte se déclenche **uniquement** s'il existe des logs pour un groupe donné et que le nombre est inférieur au seuil, ou s'il n'y a aucun log pour **tous** les groupes.  
+Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en utilisant une condition `below`, l'alerte se déclenche **uniquement** s'il existe des logs pour un groupe donné et que le nombre est inférieur au seuil, ou s'il n'y a aucun log pour **tous** les groupes.
 
 **Exemples** :
 
 * Le monitor suivant se déclenche uniquement s'il n'y a aucun log pour tous les services :
   {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Monitor Below réparti par service" style="width:60%;" >}}
-* Le monitor suivant se déclenche s'il n'y a aucun log pour le service `backend` :  
+* Le monitor suivant se déclenche s'il n'y a aucun log pour le service `backend` :
   {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Monitor Below pour le service backend" style="width:60%;" >}}
 
 #### Conditions d'alerte avancées

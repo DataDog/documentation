@@ -22,7 +22,7 @@ integration_id: google-cloud-run
 integration_title: Google Cloud Run
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: google_cloud_run
 public_title: Datadog-Google Cloud Run 통합
@@ -66,7 +66,7 @@ Google Cloud Run 로그는 Google Cloud Logging으로 수집되어 Cloud Pub/Sub
 #### 직접 로깅
 Cloud Run 서비스에서 Datadog에 직접 애플리케이션을 로깅하는 방법은 [서버리스 문서][3]를 참조하세요.
 
-### 트레이싱 
+### 트레이싱
 
 완전 관리형 Google Cloud Run에 대한 전문적인 Agent 설정 지침은 [서버리스 문서][3]에서 확인하세요.
 

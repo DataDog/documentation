@@ -1,6 +1,6 @@
 ---
 title: Setting Up Database Monitoring for Self-Hosted Oracle
-kind: documentation
+
 description: Install and configure Database Monitoring for Self-Hosted Oracle
 further_reading:
 - link: "/integrations/oracle/"

@@ -1,12 +1,12 @@
 ---
 title: Go Custom Instrumentation with Datadog Library
-kind: documentation
+
 aliases:
     - /tracing/opentracing/go
     - /tracing/manual_instrumentation/go
     - /tracing/custom_instrumentation/go
     - /tracing/setup_overview/custom_instrumentation/go
-    - /tracing/trace_collection/custom_instrumentation/go    
+    - /tracing/trace_collection/custom_instrumentation/go
 description: 'Instrument your code with the Datadog Go APM tracer.'
 code_lang: go
 type: multi-code-lang

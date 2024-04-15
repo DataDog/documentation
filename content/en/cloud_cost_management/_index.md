@@ -1,6 +1,6 @@
 ---
 title: Cloud Cost Management
-kind: documentation
+
 aliases:
   - /infrastructure/cloud_cost_management
   - /integrations/cloudability
@@ -51,7 +51,7 @@ Datadog ingests your cloud cost data and transforms it into queryable metrics. I
 Visualize infrastructure spend alongside related utilization metrics to spot potential inefficiencies and savings opportunities:
 
 - Add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
-  
+
 {{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:60%;" >}}
 
 - Export a timeseries graph of costs data using the [Metrics API][1].

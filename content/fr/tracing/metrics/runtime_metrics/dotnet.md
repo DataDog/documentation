@@ -18,14 +18,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
   tag: GitHub
   text: Surveiller les métriques runtime .NET avec Datadog
-kind: documentation
+
 title: Métriques runtime .NET
 type: multi-code-lang
 ---
 
 ## Métriques runtime compatibles
 
-- .NET Framework 4.6.1+ 
+- .NET Framework 4.6.1+
 - .NET Core 3.1
 - .NET 5
 - .NET 6

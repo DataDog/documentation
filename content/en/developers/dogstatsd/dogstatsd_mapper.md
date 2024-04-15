@@ -1,6 +1,6 @@
 ---
 title: DogStatsD Mapper
-kind: documentation
+
 description: Convert parts of statsd metric names to tags using mapping rules in DogStatsD.
 further_reading:
     - link: 'developers/dogstatsd'

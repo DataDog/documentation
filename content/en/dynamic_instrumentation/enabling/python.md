@@ -1,6 +1,6 @@
 ---
 title: Enable Dynamic Instrumentation for Python
-kind: Documentation
+
 aliases:
     - /tracing/dynamic_instrumentation/enabling/python/
 is_beta: false

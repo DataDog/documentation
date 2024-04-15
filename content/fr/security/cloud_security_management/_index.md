@@ -30,7 +30,7 @@ further_reading:
   tag: GitHub
   text: Pratiques de sécurité recommandées pour les applications dans des environnements
     cloud natifs
-kind: documentation
+
 title: Cloud Security Management
 ---
 

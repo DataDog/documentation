@@ -1,6 +1,6 @@
 ---
 title: Configure Monitors
-kind: documentation
+
 description: Describes the monitor creation page.
 aliases:
   - /monitors/create/configuration
@@ -92,7 +92,7 @@ By default, evaluation frequencies depend on the [evaluation window](#evaluation
 | 24 hours <= window < 48 hours   | 10 minutes            |
 | window >= 48 hours              | 30 minutes            |
 
-The evaluation frequency can also be configured so that the alerting condition of the monitor is checked on a daily, weekly, or monthly basis. In this configuration, the evaluation frequency is no longer dependent on the evaluation window, but on the configured schedule. 
+The evaluation frequency can also be configured so that the alerting condition of the monitor is checked on a daily, weekly, or monthly basis. In this configuration, the evaluation frequency is no longer dependent on the evaluation window, but on the configured schedule.
 
 For more information, see the guide on how to [Customize monitor evaluation frequencies][4].
 

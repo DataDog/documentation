@@ -26,7 +26,7 @@ integration_id: tidb
 integration_title: TiDB
 integration_version: 2.1.0
 is_public: true
-kind: integration
+
 maintainer: xuyifan02@pingcap.com
 manifest_version: 1.0.0
 metric_prefix: tidb_cluster
@@ -53,7 +53,7 @@ Associez le cluster [TiDB][1] à Datadog pour :
 
 > **Remarque** :
 >
-> - Pour que cette intégration fonctionne, TiDB 4.0 ou ultérieur est requis. 
+> - Pour que cette intégration fonctionne, TiDB 4.0 ou ultérieur est requis.
 > - Pour intégrer TiDB Cloud, consultez la [documentation à ce sujet][2].
 
 ## Configuration

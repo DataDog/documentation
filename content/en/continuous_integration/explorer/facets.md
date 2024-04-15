@@ -1,6 +1,6 @@
 ---
 title: Test Run or Pipeline Execution Facets
-kind: documentation
+
 description: 'Trace Facets and Facet Panel'
 further_reading:
 - link: 'continuous_integration/explorer/'

@@ -13,7 +13,7 @@ integration_id: azure-dbformariadb
 integration_title: Microsoft Azure Database pour MariaDB
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: azure_db_pour_mariadb
 public_title: Intégration Datadog/Microsoft Azure Database pour MariaDB
@@ -27,7 +27,7 @@ Azure Database pour MariaDB offre une version communautaire complètement manag
 
 Recueillez des métriques d'Azure Database pour MariaDB pour :
 
-- Visualiser les performances de vos bases de données MariaDB 
+- Visualiser les performances de vos bases de données MariaDB
 - Corréler les performances de vos bases de données MariaDB avec vos applications
 
 ## Implémentation

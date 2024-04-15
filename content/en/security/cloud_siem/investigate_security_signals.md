@@ -1,6 +1,6 @@
 ---
 title: Investigate Security Signals
-kind: documentation
+
 disable_toc: false
 further_reading:
   - link: "/cloud_siem/detection_rules/"
@@ -19,7 +19,7 @@ You must have the `Security Signals Write` permission to modify a security signa
 
 ## View signals by status in the Signal Explorer
 
-In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, to view all signals with a `HIGH` or `CRITICAL` severity that are in the `open` or `under review` triage state, do one of the following: 
+In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, to view all signals with a `HIGH` or `CRITICAL` severity that are in the `open` or `under review` triage state, do one of the following:
 
 - In the facet panel's **Severity** section, select **Critical**, **High**, and **Medium**. In the **Signal State** section, make sure only **open** and **under_reviewed** are selected.
 - In the search bar, enter `status:(high OR critical OR medium) @workflow.triage.state:(open OR under_review)`.

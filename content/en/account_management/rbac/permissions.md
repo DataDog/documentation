@@ -1,6 +1,6 @@
 ---
 title: Datadog Role Permissions
-kind: documentation
+
 aliases:
   - /account_management/faq/managing-global-role-permissions
 disable_toc: true
@@ -29,7 +29,7 @@ By default, existing users are associated with one of the three out-of-the-box r
 - Datadog Standard
 - Datadog Read Only
 
-All users with one of these roles can read all data types, except for [individually read-restricted][1] resources. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage. 
+All users with one of these roles can read all data types, except for [individually read-restricted][1] resources. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage.
 
 ### Custom roles
 
@@ -39,7 +39,7 @@ Create a custom role to combine permissions into new roles. A custom role gives 
 
 ## Permissions list
 
-The following table lists the name, description, and default role for all available permissions in Datadog. Each asset type has corresponding read and write permissions. 
+The following table lists the name, description, and default role for all available permissions in Datadog. Each asset type has corresponding read and write permissions.
 
 Each out-of-the-box role inherits all of the permissions from the less powerful roles. Therefore, the Datadog Standard role has all of the permissions listed in the table with Datadog Read Only as the default role. Additionally, the Datadog Admin role contains all of the permissions from both the Datadog Standard and the Datadog Read Only role.
 

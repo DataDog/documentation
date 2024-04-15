@@ -1,6 +1,6 @@
 ---
 title: RUM Roku Data Collected
-kind: documentation
+
 code_lang: roku
 type: multi-code-lang
 code_lang_weight: 50
@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-The RUM Roku SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+The RUM Roku SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics.
 
-Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). 
+Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
+There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
 
 | Event Type | Retention | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ---------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -103,9 +103,9 @@ You can enable [tracking user info][5] globally to collect and apply user attrib
 | `usr.email`    | string | Email of the user.      |
 
 
-## Event-specific metrics and attributes 
+## Event-specific metrics and attributes
 
-Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics.
 
 ### Session metrics
 
@@ -146,7 +146,7 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.action.count`    | number      | Count of all actions collected for this view.                                |
 | `view.is_active`       | boolean     | Indicates whether the view corresponding to this event is considered active. |
 
-### View attributes      
+### View attributes
 
 | Attribute name | Type   | Description                                               |
 | -------------- | ------ | --------------------------------------------------------- |
@@ -194,7 +194,7 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.issue_id` | string | The stack trace or complementary information about the error.                     |
 
 
-### Network errors 
+### Network errors
 
 Network errors include information about failing HTTP requests. The following facets are also collected:
 
@@ -227,7 +227,7 @@ Network errors include information about failing HTTP requests. The following fa
 
 ## Data Storage
 
-Before data is uploaded to Datadog, it is stored in cleartext in your channel's [cache directory][6], meaning that this data can't be read by other applications. Note that the OS can evict the data at any time, which could result in data loss in some rare cases. 
+Before data is uploaded to Datadog, it is stored in cleartext in your channel's [cache directory][6], meaning that this data can't be read by other applications. Note that the OS can evict the data at any time, which could result in data loss in some rare cases.
 
 ## Further Reading
 

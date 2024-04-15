@@ -1,6 +1,6 @@
 ---
 title: RPM GPG Key Rotation
-kind: faq
+
 ---
 
 <div class="alert alert-warning">

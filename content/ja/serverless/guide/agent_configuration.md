@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: サーバーレス Agent の構成
 ---
 

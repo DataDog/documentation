@@ -3,7 +3,7 @@ further_reading:
 - link: /synthetics/search/
   tag: ドキュメント
   text: Synthetic テストを検索・管理する方法を説明します
-kind: documentation
+
 title: 保存ビュー
 ---
 
@@ -15,7 +15,7 @@ title: 保存ビュー
 
 ## 保存ビューの作成
 
-保存ビューにアクセスするには、[Synthetic Tests ページ][1]の **Synthetic Monitoring & Continuous Testing** の左にある **> Views** を展開します。保存ビューを作成するには、Synthetic テストを検索し、**+ Create a New Saved View** をクリックします。 
+保存ビューにアクセスするには、[Synthetic Tests ページ][1]の **Synthetic Monitoring & Continuous Testing** の左にある **> Views** を展開します。保存ビューを作成するには、Synthetic テストを検索し、**+ Create a New Saved View** をクリックします。
 
 {{< img src="synthetics/search/create_a_new_saved_view.png" alt="Synthetic Tests ページで新規の保存ビューを作成する" style="width:100%" >}}
 

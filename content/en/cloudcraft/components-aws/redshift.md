@@ -1,6 +1,6 @@
 ---
 title: "Redshift Component"
-kind: documentation
+
 ---
 ## Overview
 

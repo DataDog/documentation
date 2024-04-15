@@ -1,6 +1,6 @@
 ---
 title: Synthetic Test Summary Dashboard
-kind: documentation
+
 further_reading:
 - link: '/continuous_testing/explorer/'
   tag: 'Documentation'

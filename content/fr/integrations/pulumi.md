@@ -25,7 +25,7 @@ integration_id: pulumi
 integration_title: Pulumi
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: team@pulumi.com
 manifest_version: 1.0.0
 metric_prefix: pulumi.
@@ -80,7 +80,7 @@ pulumi config set datadog:apiKey XXXXXXXXXXXXXX --secret && pulumi config set da
 
 4. Exécutez `pulumi new` pour initialiser un répertoire de projet pour votre pile d'infrastructure et suivez la [documentation sur l'API][5] (en anglais) pour définir des métriques, des monitors, des dashboards ou d'autres ressources.
 
-5. Une fois vos ressources cloud définies dans le code, exécutez `pulumi up` pour créer les nouvelles ressources définies dans votre programme Pulumi. 
+5. Une fois vos ressources cloud définies dans le code, exécutez `pulumi up` pour créer les nouvelles ressources définies dans votre programme Pulumi.
 
 ## Données collectées
 

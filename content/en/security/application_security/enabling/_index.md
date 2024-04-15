@@ -1,6 +1,6 @@
 ---
 title: Enabling ASM
-kind: documentation
+
 type: multi-code-lang
 aliases:
   - /security_platform/application_security/getting_started/

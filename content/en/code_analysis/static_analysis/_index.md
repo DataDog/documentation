@@ -1,6 +1,6 @@
 ---
 title: Static Analysis
-kind: documentation
+
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
@@ -71,17 +71,17 @@ Static Analysis currently supports scanning the following languages and technolo
 
 ## Search and filter results
 
-After you configure your CI pipelines to run the Datadog Static Analyzer, violations are summarized per repository on the [Code Analysis page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Analysis. 
+After you configure your CI pipelines to run the Datadog Static Analyzer, violations are summarized per repository on the [Code Analysis page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Analysis.
 
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
 
-To filter your results, use the facets to the left of the list, or search. 
+To filter your results, use the facets to the left of the list, or search.
 
 Every row represents a violation. Each violation is associated with the specific commit and branch that is selected in the filters at the top of the page (by default the latest commit on the default branch of the repository you are viewing).
 
 Click on a violation to open a side panel that contains information about the scope of the violation and where it originated.
-{{< img src="code_analysis/static_analysis/static-analysis-violation.png" alt="Side panel for a static analysis violation" style="width:80%;">}} 
+{{< img src="code_analysis/static_analysis/static-analysis-violation.png" alt="Side panel for a static analysis violation" style="width:80%;">}}
 
 The content of the violation is shown in tabs:
 

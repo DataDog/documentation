@@ -1,6 +1,6 @@
 ---
 title: Group Widget
-kind: documentation
+
 widget_type: group
 description: "Group your widgets together in a dashboard widget."
 aliases:

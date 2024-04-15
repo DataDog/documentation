@@ -23,7 +23,7 @@ further_reading:
 - link: /agent/docker/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: documentation
+
 title: Docker ログの収集
 ---
 
@@ -35,7 +35,7 @@ Datadog Agent 6 以降は、コンテナからログを収集します。2 通�
 
 - ご使用の環境が**すべて**のログを `stdout`/`stderr` に書き込む場合は、[コンテナ化された Agent](?tab=containerized-agent#installation) のインストールに従ってください。
 
-- コンテナ化された Agent をデプロイできず、コンテナが**すべて**のログを `stdout`/`stderr` に書き込む場合は、[ホスト Agent](?tab=hostagent#installation) のインストールに従って、Agent コンフィギュレーションファイル内でコンテナ化されたログを有効にします。 
+- コンテナ化された Agent をデプロイできず、コンテナが**すべて**のログを `stdout`/`stderr` に書き込む場合は、[ホスト Agent](?tab=hostagent#installation) のインストールに従って、Agent コンフィギュレーションファイル内でコンテナ化されたログを有効にします。
 
 - コンテナがログをファイルに書き込む場合 (ログを `stdout`/`stderr` に部分的にのみ書き込み、ログをファイルに書き込むか、ログをファイルに完全に書き込む)、[カスタムログ収集を使用するホスト Agent](?tab=hostagentwithcustomlogging#installation) のインストールまたは[コンテナ化された Agent](?tab=containerized-agent#installation) のインストール手順に従い、[オートディスカバリーコンフィギュレーションの例があるファイルからのログ収集](?tab=logcollectionfromfile#examples)を確認します。
 
@@ -113,22 +113,22 @@ docker run -d --name datadog-agent \
 
 ログ収集に関連するコマンド：
 
-`-e DD_LOGS_ENABLED=true`                                     
+`-e DD_LOGS_ENABLED=true`
 : `true` に設定すると、ログ収集が有効になります。これで、Agent はコンフィギュレーションファイルにあるログインストラクションを探します。
 
-`-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`                
+`-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`
 : すべてのコンテナに対してログ収集を有効化するログコンフィギュレーションを追加します。
 
-`-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
+`-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`
 : 再起動中またはネットワーク障害発生時のコンテナログの紛失を回避します。このディレクトリで各コンテナについて収集されたログの最終行がホスト上に保存されます。
 
-`-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`                
+`-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`
 : Datadog Agent がそれ自身のログとメトリクスを収集および送信することを回避します。Datadog Agent のログまたはメトリクスを収集する場合はこのパラメーターを削除してください。このパラメーター値は正規表現をサポートしています。
 
-`-v /var/run/docker.sock:/var/run/docker.sock:ro`             
+`-v /var/run/docker.sock:/var/run/docker.sock:ro`
 : Docker daemon に接続してコンテナを探し、Docker ソケットから `stdout/stderr` を収集します。
 
-`-v /var/lib/docker/containers:/var/lib/docker/containers:ro` 
+`-v /var/lib/docker/containers:/var/lib/docker/containers:ro`
 : ファイルからコンテナログを収集します。Datadog Agent 6.27.0/7.27.0 以降で利用可能です。
 
 

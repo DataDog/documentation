@@ -1,6 +1,6 @@
 ---
 title: RUM Usage Dashboard
-kind: documentation
+
 aliases:
   - '/real_user_monitoring/dashboards/frustration_signals_dashboard'
   - '/real_user_monitoring/dashboards/user_sessions_dashboard'
@@ -53,7 +53,7 @@ For more information about the data displayed, see our documentation for each pl
 
 The RUM User Demographics dashboard gives you insight into geographic adoption of your application.
 
-- **Global Data**: 
+- **Global Data**:
   Get a global view of your users and see which countries, regions, and cities use your application the most.
 - **Compare Continents and Compare Countries**:
   See how your users experience your application differently based on their continent and country.

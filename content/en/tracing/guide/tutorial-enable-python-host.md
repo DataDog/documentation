@@ -1,6 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Python Application on the Same Host as the Datadog Agent
-kind: guide
+
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tags: Documentation
@@ -270,7 +270,7 @@ The sample project includes a second application called `calendar_app` that retu
    DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
    ddtrace-run python -m calendar_app.app
    ```
-   
+
    {{% /tab %}}
    {{< /tabs >}}
 

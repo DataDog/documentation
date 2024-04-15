@@ -1,6 +1,6 @@
 ---
 title: Send Azure Logs with the Datadog Resource
-kind: documentation
+
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -19,13 +19,13 @@ Use this guide to set up and manage logging directly from your Azure subscriptio
 
 **Note**: The Datadog resource in Azure is only available to Datadog organizations on the Datadog US3 site. If you are using any other [Datadog site][5], see the [Send Azure Logs to Datadog][6] guide for configuration options.
 
-## Activity logs 
+## Activity logs
 
 Provide insight into the operations on your resources at the [control plane][1]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (`PUT`, `POST`, `DELETE`).
 
 To send activity logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the activity logs are sent to Datadog.
 
-## Azure resource logs 
+## Azure resource logs
 
 Provide insight into operations taken on Azure resources at the [data plane][1]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
 
@@ -43,7 +43,7 @@ For example, the screenshot below shows a tag rule where only those virtual mach
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource3.png" alt="Azure US3 create a Datadog resource logs" responsive="true" style="width:90%;">}}
 
-## Azure Active Directory (Azure AD) logs 
+## Azure Active Directory (Azure AD) logs
 
 Azure AD logs contain the history of sign-in activity and an audit trail of changes made in Azure AD for a particular tenant. To send these logs to Datadog, first complete the process to create a Datadog resource. Once you have a Datadog resource in Azure, follow the setup steps in the [Datadog in the Azure Portal][3] guide.
 

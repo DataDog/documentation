@@ -1,6 +1,6 @@
 ---
 title: Geomap Widget
-kind: documentation
+
 widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/
@@ -34,7 +34,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   **Note**: Support for data sources varies based on the visualization layer you select.
   {{< tabs >}}
   {{% tab "Regions" %}}
-  |  Data source    | Notes    | 
+  |  Data source    | Notes    |
   | --------------  | -------- |
   |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
   |Metric   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying documentation][5] to configure a metric query.|
@@ -53,7 +53,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 
   {{% tab "Points" %}}
   |  Data source | Notes |
-  | -----------  | ----- | 
+  | -----------  | ----- |
   |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query. |
   |RUM   | See the [RUM documentation][4] to configure a RUM query. |
 

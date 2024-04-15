@@ -23,7 +23,7 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Créer et gérer des tests Browser Synthetic avec Terraform
-kind: documentation
+
 title: Tests Browser
 ---
 
@@ -102,7 +102,7 @@ Définissez la configuration de votre test Browser.
    - Dimensions d'un petit appareil mobile : 320 x 550 pixels.
 6. Sélectionnez des **managed and private locations** : sélectionnez des emplacements dans le monde gérés par Datadog ou créez des [emplacements privés][1] pour lancer votre test Browser à partir d'emplacements personnalisés ou de réseaux privés.
 
-   {{% managed-locations %}} 
+   {{% managed-locations %}}
 
    Vous pouvez également utiliser le [Tunnel de test en continu][15] pour déclencher des tests sur votre environnement de développement local ou au sein de votre pipeline CI/CD pour tester des environnements internes.
 
@@ -129,7 +129,7 @@ Pour créer une variable locale, cliquez sur **Create Local Variable** en haut �
 `{{ date(n unit, format) }}`
 : Génère une date dans l'un des formats acceptés de Datadog. Sa valeur correspond à la date UTC d'initiation du test + ou - `n` unités.
 
-`{{ timestamp(n, unit) }}` 
+`{{ timestamp(n, unit) }}`
 : Génère un timestamp dans l'une des unités acceptées de Datadog. Sa valeur correspond au timestamp UTC d'initiation du test + ou -  `n` unités.
 
 Pour obfusquer les valeurs des variables locales dans les résultats des tests, sélectionnez **Hide and obfuscate variable value**. Une fois la chaîne de la variable définie, cliquez sur **Add Variable**.
@@ -200,7 +200,7 @@ Vous pouvez passer à un autre onglet lors de l'enregistrement d'un test Browser
 
 ## Autorisations
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin et Standard Datadog][13] peuvent créer, modifier et supprimer des tests Browser Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][13]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Admin et Standard Datadog][13] peuvent créer, modifier et supprimer des tests Browser Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][13].
 
 Si vous utilisez des [rôles personnalisés][13], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write`.
 

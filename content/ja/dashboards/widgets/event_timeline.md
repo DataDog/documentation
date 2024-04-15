@@ -2,7 +2,7 @@
 aliases:
 - /ja/graphing/widgets/event_timeline/
 description: イベントストリームのタイムラインをウィジェットに表示する
-kind: documentation
+
 private: true
 title: イベントタイムラインウィジェット
 ---

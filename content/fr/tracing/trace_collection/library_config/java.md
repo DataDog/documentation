@@ -8,7 +8,7 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentation
   text: Explorer vos services, ressources et traces
-kind: documentation
+
 title: Configurer la bibliothèque de tracing Java
 type: multi-code-lang
 ---
@@ -139,7 +139,7 @@ Définit le nombre de spans partielles à partir duquel celles-ci doivent être 
 **Exemple** : `aws.service`<br>
 Utilisé pour renommer le service associé aux spans à identifier avec le tag de span correspondant.
 
-`dd.trace.db.client.split-by-instance` 
+`dd.trace.db.client.split-by-instance`
 : **Variable d'environnement** : `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
 **Valeur par défaut** : `false`<br>
 Lorsque cette option est définie sur `true`, les spans de base de données reçoivent le nom de l'instance en tant que nom du service.
@@ -231,7 +231,7 @@ Par défaut, le client de tracing détecte si un GlobalTracer est en cours de ch
 **Valeur par défaut** : `false`<br>
 Par défaut, les tags associés au groupe, à la commande et au statut du circuit Hystrix sont désactivés. Cette option permet de les activer.
 
-`dd.trace.servlet.async-timeout.error` 
+`dd.trace.servlet.async-timeout.error`
 : **Variable d'environnement** : `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` <br>
 **Valeur par défaut** : `true`<br>
 Par défaut, les requêtes asynchrones à exécution longue sont considérées comme des erreurs. Lorsque cette valeur est définie sur false, toutes les requêtes ayant expiré sont considérées comme réussies.

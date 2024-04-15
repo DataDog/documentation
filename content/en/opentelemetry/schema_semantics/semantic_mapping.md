@@ -1,6 +1,6 @@
 ---
 title: OpenTelemetry Semantic Conventions and Datadog Conventions
-kind: documentation
+
 aliases:
 - /opentelemetry/guide/semantic_mapping/
 further_reading:
@@ -36,7 +36,7 @@ For more information, see [Unified Service Tagging][2].
 | `container.image.name` | `image_name` |
 | `container.image.tag` | `image_tag` |
 
-Read more about [Containers semantic conventions in the OpenTelemetry documentation][3]. 
+Read more about [Containers semantic conventions in the OpenTelemetry documentation][3].
 
 Additional cloud provider-specific attributes are also mapped.
 

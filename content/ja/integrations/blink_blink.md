@@ -32,7 +32,7 @@ integration_id: blink-blink
 integration_title: Blink
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: ./assets/eula.pdf
 manifest_version: 2.0.0

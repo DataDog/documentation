@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-kind: guide
+
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
@@ -25,7 +25,7 @@ Some responses from Bits AI include a **suggestions** button. Clicking it displa
 
 ### In a search bar
 
-Some Datadog search bars support natural language querying. 
+Some Datadog search bars support natural language querying.
 
 {{< img src="bits_ai/getting_started/ai-enabled-search-bar.png" alt="Search bar with natural language querying enabled" style="width:90%;">}}
 

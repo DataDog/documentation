@@ -1,6 +1,6 @@
 ---
 title: Réutiliser des parcours de test Browser pour toute votre collection de tests
-kind: guide
+
 further_reading:
   - link: synthetics/browser_tests
     tag: Documentation
@@ -20,7 +20,7 @@ Il peut s'avérer utile de réutiliser un parcours dans plusieurs autres tests. 
 * Si vous souhaitez surveiller les fonctionnalités de votre application dans plusieurs environnements distincts, vous pouvez créer des tests pour votre environnement de production, puis les réutiliser en tant que sous-tests pour d'autres environnements (dev ou staging, par exemple).
 * Si l'exécution de vos tests crée des objets de base de données, vous pouvez créer des tests qui nettoient votre environnement de test, puis les utiliser en tant que sous-tests pour effectuer systématiquement un nettoyage au début ou à la fin de vos tests.
 
-Grâce aux sous-tests des tests Browser, vous pouvez réutiliser vos parcours pour toute votre collection de tests afin de bénéficier de différents avantages : 
+Grâce aux sous-tests des tests Browser, vous pouvez réutiliser vos parcours pour toute votre collection de tests afin de bénéficier de différents avantages :
 * **La création de tests est plus rapide.** Si vous avez créé un test de connexion, vous pouvez l'appeler en tant que sous-test au début de l'ensemble de votre collection de tests, plutôt que d'enregistrer les mêmes étapes de connexion pour chacun de vos tests.
 * **Vos tests sont plus facilement à comprendre**. En effet, les blocs créés permettent aux utilisateurs d'assimiler plus rapidement le fonctionnement des tests.
 * **La modification des tests est simplifiée**. Si votre procédure évolue, une seule modification est requise. Vous n'avez pas besoin de changer chacun de vos tests.

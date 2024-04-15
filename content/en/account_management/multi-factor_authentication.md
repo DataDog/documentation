@@ -1,6 +1,6 @@
 ---
 title: Multi-Factor Authentication (MFA)
-kind: documentation
+
 ---
 
 ## Overview
@@ -40,7 +40,7 @@ The multi-factor authentication section lists any configured authenticator apps.
 
 ## View a user's MFA status
 
-To view if a user has MFA configured or not, you can filter on the Users table. The MFA status is also available on the user details panel. 
+To view if a user has MFA configured or not, you can filter on the Users table. The MFA status is also available on the user details panel.
 
 {{< img src="account_management/multi-factor-authentication-status.png" alt="View of the MFA status on the user detail page, example shows the user has MFA configured" style="width:90%;" >}}
 

@@ -18,7 +18,7 @@ integration_id: amazon-cloudtrail
 integration_title: AWS CloudTrail
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_cloudtrail
 public_title: Intégration Datadog/AWS CloudTrail
@@ -115,35 +115,35 @@ L'intégration AWS CloudTrail crée de nombreux événements basés sur le jour
 
 Voici la liste des événements CloudTrail qui peuvent avoir une priorité normale (afin de s'afficher dans l'Events Explorer sous le filtre par défaut) :
 
-* apigateway 
-* autoscaling 
-* cloudformation 
-* cloudfront 
-* cloudsearch 
-* cloudtrail 
-* codedeploy 
-* codepipeline 
-* config 
-* datapipeline  
-* ds 
-* ec2 
-* ecs 
-* elasticache 
-* elasticbeanstalk 
-* elasticfilesystem 
-* elasticloadbalancing 
-* elasticmapreduce 
-* iam 
-* kinesis 
-* lambda 
-* monitoring 
-* opsworks 
-* rds 
-* redshift 
-* route53 
-* s3 
-* ses 
-* signin 
+* apigateway
+* autoscaling
+* cloudformation
+* cloudfront
+* cloudsearch
+* cloudtrail
+* codedeploy
+* codepipeline
+* config
+* datapipeline
+* ds
+* ec2
+* ecs
+* elasticache
+* elasticbeanstalk
+* elasticfilesystem
+* elasticloadbalancing
+* elasticmapreduce
+* iam
+* kinesis
+* lambda
+* monitoring
+* opsworks
+* rds
+* redshift
+* route53
+* s3
+* ses
+* signin
 * ssm
 
 ### Aide

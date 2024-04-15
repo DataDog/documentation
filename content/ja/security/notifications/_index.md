@@ -11,7 +11,7 @@ further_reading:
 - link: /security/detection_rules/
   tag: ドキュメント
   text: セキュリティ検出ルールについて
-kind: documentation
+
 title: 通知
 ---
 

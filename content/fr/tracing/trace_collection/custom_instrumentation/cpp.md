@@ -14,7 +14,7 @@ further_reading:
 - link: tracing/visualization/
   tag: Documentation
   text: Explorer vos services, ressources et traces
-kind: documentation
+
 title: Instrumentation personnalisée C++
 type: multi-code-lang
 ---
@@ -80,7 +80,7 @@ span->SetTag("error.type", "errno");
 
 Lorsque vous ajoutez l'un des tags `error.msg`, `error.stack` ou `error.type`, `error` est défini sur `true`.
 
-Pour qu'une span ne comporte plus d'erreur, définissez le tag `error` sur `false`. Cela supprime les tags `error.msg`, `error.stack` et `error.type` précédemment définis. 
+Pour qu'une span ne comporte plus d'erreur, définissez le tag `error` sur `false`. Cela supprime les tags `error.msg`, `error.stack` et `error.type` précédemment définis.
 
 ```cpp
 // Supprimer les informations associées à cette span

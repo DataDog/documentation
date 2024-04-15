@@ -7,7 +7,7 @@ further_reading:
 - link: logs/explorer
   tag: Documentation
   text: Apprendre à explorer vos logs
-kind: documentation
+
 title: Collecte de logs iOS
 ---
 ## Présentation
@@ -56,7 +56,7 @@ La bibliothèque `dd-sdk-ios` prend en charge toutes les versions d'iOS à parti
    {{% /tab %}}
    {{< /tabs >}}
 
-2. Initialisez la bibliothèque avec le contexte de votre application et votre [token client Datadog][2]. Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-ios`, car elles risqueraient d'être exposées côté client dans le bytecode de l'IPA de l'application iOS. 
+2. Initialisez la bibliothèque avec le contexte de votre application et votre [token client Datadog][2]. Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-ios`, car elles risqueraient d'être exposées côté client dans le bytecode de l'IPA de l'application iOS.
 
    Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][2].
 

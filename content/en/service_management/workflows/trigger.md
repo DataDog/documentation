@@ -1,6 +1,6 @@
 ---
 title: Trigger a workflow
-kind: documentation
+
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
@@ -128,7 +128,7 @@ Each time the Notification Rule fires, it triggers a workflow run.
 You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 1. Click **Run Workflow** at the top of the Security Signal panel.
-1. In the search modal, enter the name of the workflow you want to run. Select the workflow. 
+1. In the search modal, enter the name of the workflow you want to run. Select the workflow.
 1. If your workflow requires input parameters, enter the values as required. You can copy the values from the Signal object JSON displayed next to the input parameters, and paste them into the parameter fields.
 1. Click **Run**.
 1. You can see the workflow run status in the **Workflow** section of the Security Signal.

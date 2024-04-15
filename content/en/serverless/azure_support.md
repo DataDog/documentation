@@ -1,6 +1,6 @@
 ---
 title: Support for Azure App Services
-kind: faq
+
 description: "Datadog support for Azure App Services"
 ---
 
@@ -126,7 +126,7 @@ description: "Datadog support for Azure App Services"
     </tr>
 </table>
 
-### Linux 
+### Linux
 
 <table>
     <tr>

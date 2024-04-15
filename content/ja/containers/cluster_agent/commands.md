@@ -17,7 +17,7 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: ドキュメント
   text: Datadog Cluster Agent のトラブルシューティング
-kind: documentation
+
 title: Cluster Agent のコマンドとオプション
 ---
 
@@ -25,7 +25,7 @@ title: Cluster Agent のコマンドとオプション
 
 Datadog Cluster Agent には次のコマンドがあります。
 
-`datadog-cluster-agent status`              
+`datadog-cluster-agent status`
 : Agent のコンポーネントの概要と健全性を示します。
 
 `datadog-cluster-agent metamap <NODE_NAME>`
@@ -38,7 +38,7 @@ Datadog Cluster Agent には次のコマンドがあります。
 
 次の環境変数がサポートされています。
 
-`DD_API_KEY`                                  
+`DD_API_KEY`
 : [Datadog API キー][1]。
 
 `DD_HOSTNAME`
@@ -77,7 +77,7 @@ Cluster Agent が公開される Kubernetes サービスの名前。デフォル
 
 API サーバーと通信しているクライアントのタイムアウト (秒単位)。デフォルトは `60` 秒です。
 
-`DD_METRICS_PORT`                              
+`DD_METRICS_PORT`
 : Datadog Cluster Agent のメトリクスを公開するポート。デフォルトはポート `5000` です。
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`

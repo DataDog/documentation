@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Glossaire du Sans serveur
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Threat Overview
-kind: documentation
-aliases:  
+
+aliases:
 ---
 
 {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the ASM Threat Overview page"  >}}
@@ -38,7 +38,7 @@ Geographic Overview
 ### Using the Powerpacks
 
 When adding a Widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the right-hand drawer. Filter on `tag:threat_overview` or type *Threat Overview* in the search box.
- 
+
 Each section in the Threat Overview page corresponds to a dedicated Powerpack.
 
 {{< img src="security/application_security/threats/appsec-threat-overview-powerpacks.png" alt="Screenshot of the new dashboard page with the Powerpacks drawer open, filtering on tag:threat_overview"  >}}

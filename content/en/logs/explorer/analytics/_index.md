@@ -1,6 +1,6 @@
 ---
 title: Log Analytics
-kind: documentation
+
 description: 'Group queried logs into fields, patterns, and transactions, and create multiple search queries, formulas, and functions for in-depth analysis.'
 aliases:
     - /logs/explorer/group
@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. 
+Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events.
 
 {{< whatsnext desc="In order to expose this information, you can group your logs into:" >}}
     {{< nextlink href="logs/explorer/analytics/#fields" >}}Fields{{< /nextlink >}}
@@ -40,7 +40,7 @@ Aggregations are supported for **indexed logs only**. If you need to perform agg
 
 ## Group logs by fields
 
-When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the query search values. 
+When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the query search values.
 
 On top of these aggregates, you can extract the following measures:
 
@@ -52,7 +52,7 @@ Individual logs with multiple query search values belong to that many aggregates
 
 ### Visualize log groups
 
-The **Fields** aggregation supports one dimension for the [Top List][4] visualization, and up to four dimensions for the [Timeseries][5], [Table][6], [Tree Map][7], and [Pie Chart][8] visualizations. 
+The **Fields** aggregation supports one dimension for the [Top List][4] visualization, and up to four dimensions for the [Timeseries][5], [Table][6], [Tree Map][7], and [Pie Chart][8] visualizations.
 
 When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 

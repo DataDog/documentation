@@ -1,6 +1,6 @@
 ---
 title: "Availability Zone Component"
-kind: documentation
+
 ---
 ## Overview
 

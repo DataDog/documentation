@@ -1,6 +1,6 @@
 ---
 title: Synthetic Monitoring Troubleshooting
-kind: documentation
+
 description: Troubleshoot common Synthetic Monitoring issues.
 further_reading:
 - link: "/synthetics/"
@@ -33,11 +33,11 @@ If you see a sudden spike or overall increase in your API test [timing metrics][
 
 #### The website is not loading in the iframe
 
-After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. 
+After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe.
 
 Or, if you are unable to login to your website when recording in the iframe recorder, this could mean that your application has a request that is blocked.
 
-Try opening your website in a pop-up window by clicking **Open in Popup** to record your user journey.  
+Try opening your website in a pop-up window by clicking **Open in Popup** to record your user journey.
 
 #### Some applications load in the iframe but some do not
 
@@ -45,7 +45,7 @@ This means your applications and environments have different restrictions, which
 
 #### The "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner appears at the top of the iframe
 
-This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop-up or change your URL to an `https` one to start recording on the page. 
+This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop-up or change your URL to an `https` one to start recording on the page.
 
 {{< img src="synthetics/http_iframe.png" alt="HTTP in iframe" style="width:100%;" >}}
 
@@ -61,7 +61,7 @@ If that happens, ensure the [Datadog extension][5] has the permissions to read a
 
 #### I'm unable to record steps on my application
 
-Your Chrome browser might have some policies preventing the extension from performing the recording as expected. 
+Your Chrome browser might have some policies preventing the extension from performing the recording as expected.
 
 To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][6].
 
@@ -73,7 +73,7 @@ To be able to record your steps without logging out from your application, just 
 
 {{< img src="synthetics/incognito_mode.mp4" alt="Using Incognito Mode Browser Tests" video="true" width="100%" >}}
 
-**Opening a pop-up window in incognito mode** allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. 
+**Opening a pop-up window in incognito mode** allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data.
 
 This incognito pop-up window ignores your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
@@ -81,13 +81,13 @@ This incognito pop-up window ignores your previous browser history including coo
 
 #### My mobile small or tablet browser test results keep failing
 
-If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a different architecture when running from a `Tablet` or a `Mobile Small`.  
+If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a different architecture when running from a `Tablet` or a `Mobile Small`.
 
 This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
 
 {{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
 
-For these types of cases, Datadog recommends creating **separate `Mobile Small` or `Tablet` specific tests** where the recorded steps match the viewport your test is set to at runtime.  
+For these types of cases, Datadog recommends creating **separate `Mobile Small` or `Tablet` specific tests** where the recorded steps match the viewport your test is set to at runtime.
 
 To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Small` or `Tablet` in the recorder dropdown before hitting the **Start Recording** button.
 
@@ -101,7 +101,7 @@ One of your browser test steps is showing a `None or multiple elements detected`
 
 {{< img src="synthetics/step_warning.png" alt="User locator step warning" style="width:100%;" >}}
 
-This means that the user locator defined for that step is either targeting several elements, or none of them, consequently preventing the Browser test from knowing which element needs to be interacted with.   
+This means that the user locator defined for that step is either targeting several elements, or none of them, consequently preventing the Browser test from knowing which element needs to be interacted with.
 
 To fix it, go edit your recording, open the advanced options of the step that is having the issue, go to the page the step is testing, and click on `Test`. This highlights the located element or prints an error message. You can then go ahead and fix your user locator to have it match a single element of the page:
 
@@ -121,14 +121,14 @@ If one of your Synthetic tests is throwing a 401, it most likely means that it i
   * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][7] or [Browser test][8].
   * **Token based authentication**: extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser test][10] requiring the authentication token.
   * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser test][8].
-  
+
 * Is this endpoint using **query parameters for authentication** (for example, do you need to add a specific API key in your URL parameters?)
 
 * Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][11].
 
 ### Forbidden errors
 
-If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header. This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
+If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header. This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.
 
 Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][11] are allowed as traffic sources by your firewalls.
 
@@ -145,7 +145,7 @@ Synthetic tests by default do not [renotify][12]. This means that if you add you
 
 This could uncover a resource exhaustion issue on your private location workers. Make sure your private location workers are provisioned with [sufficient memory resources][101].
 
-### My tests are sometimes slower to execute 
+### My tests are sometimes slower to execute
 
 This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location workers are provisioned with [sufficient CPU resources][101].
 
@@ -203,7 +203,7 @@ The Synthetics Private Location Worker now runs under the **Local Service** acco
 
 First, ensure that you are logged in on the machine where the Synthetics Private Location Windows Service is installed, and you have the permissions to create scheduled tasks on the machine.
 
-If the Synthetics Private Location Worker crashes, add a scheduled task in Windows that runs a PowerShell script to restart the application if it stops running. This ensures that a private location is restarted after a crash. 
+If the Synthetics Private Location Worker crashes, add a scheduled task in Windows that runs a PowerShell script to restart the application if it stops running. This ensures that a private location is restarted after a crash.
 
 If you provided a configuration file when installing the application, a Windows service called `Datadog Synthetics Private Location` starts automatically after installation. To verify this, ensure that you can see the service running in the **Services** tool. This Windows service restarts the private location automatically.
 

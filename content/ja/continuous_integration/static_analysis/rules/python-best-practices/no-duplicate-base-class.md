@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: ベースクラスを一度だけ使用する
 ---
 ## メタデータ

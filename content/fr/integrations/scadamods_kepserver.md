@@ -42,7 +42,7 @@ integration_id: scadamods-kepserver
 integration_title: ScadaMods Kepserver
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -140,7 +140,7 @@ Logs : le check Kepserver enregistre le message d'erreur suivant dans les logs�
 
 Recommandations :
 - Vérifiez que les diagnostics système sont activés dans Kepserver.
-- Accédez à la page des propriétés du projet Kepserver et sélectionnez l'onglet OPC-UA. Vérifiez que l'option `Log diagnostics` est définie sur `Yes`. 
+- Accédez à la page des propriétés du projet Kepserver et sélectionnez l'onglet OPC-UA. Vérifiez que l'option `Log diagnostics` est définie sur `Yes`.
 
 
 

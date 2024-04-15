@@ -1,6 +1,6 @@
 ---
 title: "SNS Topic Component"
-kind: documentation
+
 ---
 ## Overview
 

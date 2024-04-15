@@ -3,7 +3,7 @@ further_reading:
 - link: /watchdog/#root-cause-analysis-for-apm-beta
   tag: 설명서
   text: 애플리케이션 성능 모니터링(APM)에 대한 Watchdog 근본 원인 분석
-kind: faq
+
 title: 표시되지 않는 근본 원인
 ---
 

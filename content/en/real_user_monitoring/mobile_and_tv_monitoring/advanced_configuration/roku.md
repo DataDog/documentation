@@ -1,6 +1,6 @@
 ---
 title: RUM Roku Advanced Configuration
-kind: documentation
+
 code_lang: roku
 type: multi-code-lang
 code_lang_weight: 50
@@ -20,13 +20,13 @@ further_reading:
 
 ## Overview
 
-If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Roku RUM setup documentation][2]. 
+If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Roku RUM setup documentation][2].
 
 ## Track RUM Resources
 
 ### `roUrlTransfer`
 
-Network requests made directly with a `roUrlTransfer` node must be tracked. 
+Network requests made directly with a `roUrlTransfer` node must be tracked.
 
 For *synchronous requests*, you can use Datadog's `datadogroku_DdUrlTransfer` wrapper to track the resource automatically. This wrapper supports most features of the `roUrlTransfer` component, but does not support anything related to async network calls.
 
@@ -52,7 +52,7 @@ sub performRequest()
     timer = CreateObject("roTimespan")
     timer.Mark()
     request.AsyncGetToString()
-    
+
     while (true)
         msg = wait(1000, m.port)
         if (msg <> invalid)
@@ -83,9 +83,9 @@ end sub
 
 ### Streaming resources
 
-Whenever you use a `Video` or an `Audio` node to stream media, you can forward all `roSystemLogEvent` you receive to Datadog as follows: 
+Whenever you use a `Video` or an `Audio` node to stream media, you can forward all `roSystemLogEvent` you receive to Datadog as follows:
 
-```brightscript 
+```brightscript
     sysLog = CreateObject("roSystemLog")
     sysLog.setMessagePort(m.port)
     sysLog.enableType("http.error")

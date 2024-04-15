@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Data Streams Monitoring for Go のセットアップ
 ---
 

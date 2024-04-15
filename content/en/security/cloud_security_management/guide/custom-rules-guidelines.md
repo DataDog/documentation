@@ -1,6 +1,6 @@
 ---
 title: Guidelines for Writing Custom CSM Threats Rules
-kind: guide
+
 further_reading:
 - link: "/security/threats/workload_security_rules"
   tag: "Documentation"
@@ -26,7 +26,7 @@ To ensure that your policy is evaluated in-kernel for maximum efficiency, always
 
 ## Wildcards
 
-Use wildcards (`*`) carefully. For example, never use `open.file.path =~ "*/myfile"`. If you must use wildcards prefixing directories, at least two levels are required: `open.file.path =~ "*/mydir/myfile")`. 
+Use wildcards (`*`) carefully. For example, never use `open.file.path =~ "*/myfile"`. If you must use wildcards prefixing directories, at least two levels are required: `open.file.path =~ "*/mydir/myfile")`.
 
 **Note**: You must append a tilde (`~`) to the [operator][2] when using wildcards.
 

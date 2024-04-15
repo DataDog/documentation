@@ -1,6 +1,6 @@
 ---
 title: Split Graph Widget
-kind: documentation
+
 widget_type: split_group
 further_reading:
 - link: "/dashboards/guide/graphing_json/"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-A split graph allows you to break down a query across multiple tag values to identify outliers and patterns. Use this feature to investigate metrics performance across multiple facets, compare events across multiple tags, or create dynamic visualizations. 
+A split graph allows you to break down a query across multiple tag values to identify outliers and patterns. Use this feature to investigate metrics performance across multiple facets, compare events across multiple tags, or create dynamic visualizations.
 
 ## Setup
 
@@ -27,9 +27,9 @@ You can also create a split graph by taking an existing widget and splitting it 
 - Open a widget in full screen mode by selecting either the edit or expand icons from the widget control options, then click on the **Split Graph** tab.
 - Open the context menu of a widget on your dashboard and select **Split Graph**.
 
-From the **Split Graph** tab, you can configure how your graph is split, set the limit on the number of graphs, and configure the order.  
+From the **Split Graph** tab, you can configure how your graph is split, set the limit on the number of graphs, and configure the order.
 1. Make configuration changes to the split by editing the split dimension, number of graphs displayed, or editing display options. Fore more information on the configuration options, see the [Configuration](#configuration) section.
-2. Click **Save to Dashboard** to create a new split graph widget at the bottom of your dashboard. Your original widget remains unchanged on your dashboard. 
+2. Click **Save to Dashboard** to create a new split graph widget at the bottom of your dashboard. Your original widget remains unchanged on your dashboard.
 
 ### Create a split graph from elsewhere in Datadog
 
@@ -39,7 +39,7 @@ Whenever a split across multiple values is displayed in the app, you can export 
 
 ## Configuration
 
-If you create a split graph from scratch or edit an existing split graph on your dashboard, you have the option to configure the graph as well as the split. 
+If you create a split graph from scratch or edit an existing split graph on your dashboard, you have the option to configure the graph as well as the split.
 
 The split graph editor is composed of two separate sections: [**Edit Graph**](#edit-graph) and [**Split Graph**](#edit-split). To add a widget title, update the text input at the top of the editor.
 
@@ -49,11 +49,11 @@ The split graph editor is composed of two separate sections: [**Edit Graph**](#e
 
 ### Edit graph
 
-Configure your graph query before splitting. Choose any visualization type that supports splitting and make changes to how the graphs are displayed. You can also create your query from scratch, just like in the standard query editor experience. 
+Configure your graph query before splitting. Choose any visualization type that supports splitting and make changes to how the graphs are displayed. You can also create your query from scratch, just like in the standard query editor experience.
 
 For more information on the individual configuration for these visualizations, see the respective documentation for supported widgets on the [Widgets][1] page.
 
-Your changes are immediately reflected in the split graphs at the bottom of the split graph editor modal.  
+Your changes are immediately reflected in the split graphs at the bottom of the split graph editor modal.
 
 {{< img src="dashboards/widgets/split_graph/split_graph_editor.png" alt="Split graph editor displays graph query configuration and split graph configuration options" style="width:100%;" >}}
 
@@ -61,8 +61,8 @@ Your changes are immediately reflected in the split graphs at the bottom of the 
 
 There are several inputs that allow you to configure how to split the graph as well as split-specific display options.
 
-| Configuration input | Description    | 
-| ---  | ----------- | 
+| Configuration input | Description    |
+| ---  | ----------- |
 | One graph per | This dropdown defines the dimension to split your original graph on. |
 | Limit to | Option to specify the number of graphs to display and which values should be selected. By default, the split graph widget dynamically selects values with highest average values. |
 | Sort by | Choose a metric or an attribute/facet to sort your graphs by. Selecting **custom** lets you manually select tags to display. |

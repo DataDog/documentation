@@ -1,6 +1,6 @@
 ---
 title: Agent Data Security
-kind: documentation
+
 description: "Datadog Agent Security measures"
 aliases:
     - /agent/security/
@@ -43,7 +43,7 @@ For example, to verify an .msi file named `ddagent-cli-7.49.1.msi`:
 Get-AuthenticodeSignature ddagent-cli-7.49.1.msi | fl
 {{< /code-block >}}
 
-If the output of the command is `A certificate chain could not be built to a trusted root authority`, the machine may need a DigiCert root CA update. 
+If the output of the command is `A certificate chain could not be built to a trusted root authority`, the machine may need a DigiCert root CA update.
 
 ## Information security
 

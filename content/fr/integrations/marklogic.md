@@ -29,7 +29,7 @@ integration_id: marklogic
 integration_title: MarkLogic
 integration_version: 3.1.0
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: marklogic.
@@ -88,7 +88,7 @@ Le check MarkLogic est inclus avec le package de l'[Agent Datadog][3]. Vous n'av
 3. Exécutez la requête, en remplaçant `<USER>` et `<PASSWORD>` par le nom d'utilisateur et le mot de passe utilisés par l'Agent Datadog :
     ```
     xquery version "1.0-ml";
-    import module namespace sec="http://marklogic.com/xdmp/security" at 
+    import module namespace sec="http://marklogic.com/xdmp/security" at
         "/MarkLogic/security.xqy";
 
     sec:create-user(

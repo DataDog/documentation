@@ -15,17 +15,17 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Learn how to develop on the Datadog platform
-kind: documentation
+
 title: Create an Agent Integration
 description: Learn how to develop and publish a Datadog Agent integration.
 ---
 ## Overview
 
-This page walks Technology Partners through how to create a Datadog Agent integration, which you can list as out-of-the-box on the [Integrations page][23], or for a price on the [Marketplace page][24]. 
+This page walks Technology Partners through how to create a Datadog Agent integration, which you can list as out-of-the-box on the [Integrations page][23], or for a price on the [Marketplace page][24].
 
 ## Agent-based integrations
 
-Agent-based integrations use the [Datadog Agent][17] to submit data through checks written by the developer. Checks can emit [metrics][34], [events][18], and [service checks][25] into a customer's Datadog account. The Agent itself can submit [logs][26] as well, but that is configured outside of the check. 
+Agent-based integrations use the [Datadog Agent][17] to submit data through checks written by the developer. Checks can emit [metrics][34], [events][18], and [service checks][25] into a customer's Datadog account. The Agent itself can submit [logs][26] as well, but that is configured outside of the check.
 
 The implementation code for these integrations is hosted by Datadog. Agent integrations are best suited for collecting data from systems or applications that live in a local area network (LAN) or virtual private cloud (VPC). Creating an Agent integration requires you to publish and deploy your solution as a Python wheel (`.whl`).
 
@@ -33,7 +33,7 @@ You can include out-of-the-box assets such as [monitors][27], [dashboards][28], 
 
 ## Development process
 
-The process to build an Agent-based integration looks like this: 
+The process to build an Agent-based integration looks like this:
 
 1. Once you've been accepted to the [Datadog Partner Network][32], you will meet with the Datadog Technology Partner team to discuss your offering and use cases.
 2. Request a Datadog sandbox account for development through the Datadog Partner Network portal.
@@ -41,7 +41,7 @@ The process to build an Agent-based integration looks like this:
 4. Test your integration in your Datadog sandbox account.
 5. Once your development work is tested and complete, populate your tile assets by providing information like setup instructions, images, support information, and more that will make up your integration tile that's displayed on the **Integrations** or **Marketplace** page.
 6. Once your pull request is submitted and approved, the Datadog Technology Partner team will schedule a demo for a final review of your integration.
-7. You will have the option of testing the tile and integration in your Datadog sandbox account before publishing, or immediately publishing the integration for all customers.  
+7. You will have the option of testing the tile and integration in your Datadog sandbox account before publishing, or immediately publishing the integration for all customers.
 
 ## Prerequisites
 
@@ -59,12 +59,12 @@ The required Datadog Agent integration development tools include the following:
 To build an out-of-the-box integration:
 
 Create a `dd` directory:
-   
+
 ```shell
 mkdir $HOME/dd && cd $HOME/dd
 ```
 
-   The Datadog Development Toolkit expects you to work in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps. 
+   The Datadog Development Toolkit expects you to work in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps.
 
 1. Fork the [`integrations-extras` repository][101].
 
@@ -153,9 +153,9 @@ Once you have installed the Agent Integration Developer Tool, configure it for t
 
 ## Create your integration
 
-Once you've downloaded Docker, installed an appropriate version of Python, and prepared your development environment, you can start creating an Agent-based integration. 
+Once you've downloaded Docker, installed an appropriate version of Python, and prepared your development environment, you can start creating an Agent-based integration.
 
-The following instructions use an example integration called `Awesome`. Follow along using the code from Awesome, or replace Awesome with your own code, as well as the name of your integration within the commands. For example, use `ddev create <your-integration-name>` instead of `ddev create Awesome`. 
+The following instructions use an example integration called `Awesome`. Follow along using the code from Awesome, or replace Awesome with your own code, as well as the name of your integration within the commands. For example, use `ddev create <your-integration-name>` instead of `ddev create Awesome`.
 
 ### Create scaffolding for your integration
 
@@ -178,7 +178,7 @@ The `ddev create` command runs an interactive tool that creates the basic file a
 
 ## Write an Agent check
 
-At the core of each Agent-based integration is an *Agent Check* that periodically collects information and sends it to Datadog. 
+At the core of each Agent-based integration is an *Agent Check* that periodically collects information and sends it to Datadog.
 
 [Checks][30] inherit their logic from the `AgentCheck` base class and have the following requirements:
 
@@ -191,7 +191,7 @@ At the core of each Agent-based integration is an *Agent Check* that periodicall
 
 ### Implement check logic
 
-For Awesome, the Agent Check is composed of a [service check][25] named `awesome.search` that searches for a string on a web page. It results in `OK` if the string is present, `WARNING` if the page is accessible but the string was not found, and `CRITICAL` if the page is inaccessible. 
+For Awesome, the Agent Check is composed of a [service check][25] named `awesome.search` that searches for a string on a web page. It results in `OK` if the string is present, `WARNING` if the page is accessible but the string was not found, and `CRITICAL` if the page is inaccessible.
 
 To learn how to submit metrics with your Agent Check, see [Custom Agent Check][7].
 
@@ -246,7 +246,7 @@ There are two types of tests:
 
 ### Write a unit test
 
-The first part of the `check` method for Awesome retrieves and verifies two elements from the configuration file. This is a good candidate for a unit test. 
+The first part of the `check` method for Awesome retrieves and verifies two elements from the configuration file. This is a good candidate for a unit test.
 
 Open the file at `awesome/tests/test_awesome.py` and replace the contents with the following:
 
@@ -394,7 +394,7 @@ For more information about the `README.md` and `manifest.json` files, see [Creat
 
 The `pyproject.toml` file provides the metadata that is used to package and build the wheel. The wheel contains the files necessary for the functioning of the integration itself, which includes the Agent Check, configuration example file, and artifacts generated during the wheel build.
 
-All additional elements, including the metadata files, are not meant to be contained within the wheel, and are used elsewhere by the Datadog platform and ecosystem. 
+All additional elements, including the metadata files, are not meant to be contained within the wheel, and are used elsewhere by the Datadog platform and ecosystem.
 
 To learn more about Python packaging, see [Packaging Python Projects][16].
 
@@ -421,7 +421,7 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 
 <details>
   <summary>Agent <code>v6.11</code> or earlier</summary>
-  
+
   ```ps
   & "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration install -w /path/to/wheel.whl
   ```
@@ -430,7 +430,7 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 
 <details open>
   <summary>Agent<code>v6.12</code> or later</summary>
-  
+
   ```ps
   & "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" integration install -w /path/to/wheel.whl
   ```
@@ -441,22 +441,22 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 Once you have created your Agent-based integration, see the [Create a tile][20] documentation for information on populating the remaining [required assets][31] that appear on your integration tile, and opening a pull request.
 
 ## Update your integration
-To update your integration, edit the relevant files and open a new pull request to your integration's directory in the [`integrations-extras`][21] or [`marketplace`][22] repository. 
+To update your integration, edit the relevant files and open a new pull request to your integration's directory in the [`integrations-extras`][21] or [`marketplace`][22] repository.
 
 * If you are editing or adding new integration code, a version bump is required.
 
-* If you are editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is not needed. 
+* If you are editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is not needed.
 
-After making updates to assets such as dashboards and recommended monitors, or non-code files such as `README.md` and `manifest.json`, no further action is needed from the developer after the corresponding pull requests have been merged. These changes will show up for the customer without any action on their end. 
+After making updates to assets such as dashboards and recommended monitors, or non-code files such as `README.md` and `manifest.json`, no further action is needed from the developer after the corresponding pull requests have been merged. These changes will show up for the customer without any action on their end.
 
-### Bumping an integration version 
+### Bumping an integration version
 In addition to any code changes, the following is required when bumping an integration version:
 1. Update `__about__.py` to reflect the new version number. This file can be found in your integration's directory under `/datadog_checks/<your_check_name>/__about__.py`.
 2. Add an entry to the CHANGELOG.md file that adheres to the following format:
    ```
    ## Version Number / Date
 
-   ***Added***: 
+   ***Added***:
 
    * New feature
    * New feature

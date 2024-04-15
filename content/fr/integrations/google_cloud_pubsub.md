@@ -16,7 +16,7 @@ integration_id: google-cloud-pubsub
 integration_title: Google Pub/Sub
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: google_cloud_pubsub
 public_title: Intégration Datadog/Google Pub/Sub
@@ -25,7 +25,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Google Cloud Pub/Sub apporte au cloud la flexibilité et la fiabilité des middlewares orientés message d'entreprise. 
+Google Cloud Pub/Sub apporte au cloud la flexibilité et la fiabilité des middlewares orientés message d'entreprise.
 
 Recueillez des métriques de Google Pub/Sub pour :
 

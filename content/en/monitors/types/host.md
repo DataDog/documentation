@@ -1,6 +1,6 @@
 ---
 title: Host Monitor
-kind: documentation
+
 description: "Check if one or more hosts are reporting to Datadog"
 aliases:
     - /monitors/monitor_types/host

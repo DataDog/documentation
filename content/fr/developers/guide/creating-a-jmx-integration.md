@@ -1,6 +1,6 @@
 ---
 title: Créer une intégration JMX
-kind: guide
+
 ---
 Ce guide décrit la création d'une intégration JMX à l'aide du [kit de développement][1].
 
@@ -39,7 +39,7 @@ Modifiez le fichier `metrics.yaml` afin de définir les filtres pour recueillir 
 
 Consultez l'[intégration JMX][5] pour en savoir plus sur le format des filtres de métriques.
 
-Les [scénarios de test JMXFetch][6] fournissent des exemples d'utilisation des filtres de métriques.  
+Les [scénarios de test JMXFetch][6] fournissent des exemples d'utilisation des filtres de métriques.
 
 Exemple de fichier `metrics.yaml` :
 

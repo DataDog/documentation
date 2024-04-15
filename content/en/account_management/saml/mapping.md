@@ -1,6 +1,6 @@
 ---
 title: SAML Group Mapping
-kind: documentation
+
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"

@@ -10,7 +10,7 @@ further_reading:
 - link: agent/
   tag: ドキュメント
   text: Datadog Agent をインストールする
-kind: documentation
+
 title: プライベート ロケーション モニタリング
 ---
 

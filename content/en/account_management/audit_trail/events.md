@@ -1,6 +1,6 @@
 ---
 title: Audit Trail Events
-kind: documentation
+
 aliases:
     - /account_management/audit_trail_events/
 further_reading:

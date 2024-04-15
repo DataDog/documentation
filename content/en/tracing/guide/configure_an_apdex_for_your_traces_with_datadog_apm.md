@@ -1,6 +1,6 @@
 ---
 title: Configure Apdex score by service
-kind: documentation
+
 aliases:
     - /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
     - /tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm
@@ -33,7 +33,7 @@ Apdex thresholds must be set by administrators, per service, before Apdex scores
 
 ## Set your Apdex for your traces
 
-To visualize your web application or service Apdex: 
+To visualize your web application or service Apdex:
 
 1. On the [Service Catalog][3], click into a web service. On the upper right-hand graph, select Apdex instead of Latency. If you don't see this option, check that you have clicked into a web service:
 

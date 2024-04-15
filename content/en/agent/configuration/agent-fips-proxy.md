@@ -1,6 +1,6 @@
 ---
 title: Datadog FIPS Compliance
-kind: Guide
+
 disable_toc: false
 alias:
 - /agent/guide/agent-fips-proxy

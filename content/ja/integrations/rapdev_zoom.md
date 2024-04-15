@@ -46,7 +46,7 @@ integration_id: rapdev-zoom
 integration_title: Zoom
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -111,7 +111,7 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 1. Zoom Room に問題があります
 2. Zoom Room のコンポーネントに問題があります
 
-### ダッシュボード  
+### ダッシュボード
 
 1. RapDev Zoom ミーティング概要
 2. RapDev Zoom Rooms ダッシュボード

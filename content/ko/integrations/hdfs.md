@@ -1,7 +1,7 @@
 ---
 integration_title: Hdfs
 is_public: true
-kind: integration
+
 short_description: 클러스터 디스크 사용, 볼륨 실패, 데드 DataNodes 추적 more.
 ---
 
@@ -14,7 +14,7 @@ short_description: 클러스터 디스크 사용, 볼륨 실패, 데드 DataNode
 
 각 HDFS DataNodes에서 디스크 사용과 실패한 볼륨을 추적하세요. 이 에이전트 점검에서는 이와 같은 메트릭은 물론 블록과 캐시 관련 메트릭도 수집합니다.
 
-예전 투인원 점검(hdfs) 말고 이 점검(hdfs_datanode)과 그에 대응하는 점검(hdfs_namenode)을 사용하세요. 이전 점검은 이제 사용되지 않습니다. 
+예전 투인원 점검(hdfs) 말고 이 점검(hdfs_datanode)과 그에 대응하는 점검(hdfs_namenode)을 사용하세요. 이전 점검은 이제 사용되지 않습니다.
 
 ## 구성
 
@@ -135,7 +135,7 @@ HDFS-datanode 점검에는 이벤트가 포함되지 않습니다.
 
 주 HDFS NameNodes_와_ 대기 HDFS NameNodes를 모니터링하면 클러스터가 위험한 상태가 될 때 이를 알 수 있습니다. 즉, NameNode가 하나만 남아 있을 때나 클러스터 용량을 추가해야 할 때 등을 알 수 있습니다. 이 에이전트 점검은 남은 용량, 손상되거나 누락된 블록, 데드 DataNodes, 파일 시스템 로드, 적게 복제된 블록, 총 볼륨 실패 수(전체 DataNodes에서) 등과 같은 메트릭을 수집합니다.
 
-예전 투인원 점검(hdfs) 말고 이 점검(hdfs_namenode)과 그에 대응하는 점검(hdfs_datanode)을 사용하세요. 이전 점검은 이제 사용되지 않습니다. 
+예전 투인원 점검(hdfs) 말고 이 점검(hdfs_namenode)과 그에 대응하는 점검(hdfs_datanode)을 사용하세요. 이전 점검은 이제 사용되지 않습니다.
 
 ## 구성
 

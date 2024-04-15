@@ -1,6 +1,6 @@
 ---
 title: Roku Crash Reporting and Error Tracking
-kind: documentation
+
 description: Set up Error Tracking for your Roku channels.
 aliases:
 - /real_user_monitoring/error_tracking/roku
@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the RUM Roku SDK. 
+Error Tracking processes errors collected from the RUM Roku SDK.
 
 Enable Roku Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
 

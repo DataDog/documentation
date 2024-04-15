@@ -1,6 +1,6 @@
 ---
 title: Utilisation de base de l'Agent pour macOS
-kind: documentation
+
 platform: OS X
 os: osx
 aliases:

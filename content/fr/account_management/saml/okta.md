@@ -1,6 +1,6 @@
 ---
 title: Configurer Okta en tant que fournisseur d'identité SAML
-kind: documentation
+
 aliases:
   - /fr/account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
 further_reading:

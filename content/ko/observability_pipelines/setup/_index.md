@@ -15,7 +15,7 @@ further_reading:
 - link: https://dtdg.co/d22op
   tag: 학습 센터
   text: 옵저버빌리티 파이프라인을 통한 안전한 로컬 처리
-kind: documentation
+
 title: 옵저버빌리티 파이프라인 작업자 설정
 type: multi-code-lang
 ---
@@ -41,7 +41,7 @@ type: multi-code-lang
 
 {{% op-deployment-modes %}}
 
-## 필수 구성 요소 
+## 필수 구성 요소
 
 옵저버빌리티 파이프라인 작업자를 설치하려면 다음이 필요합니다:
 
@@ -305,9 +305,9 @@ sources:
     multiple_outputs: true
 
 transforms:
-  ## Datadog Agent는 기본적으로 태그를 쉼표로 구분된 값 목록으로 인코딩하며, 
+  ## Datadog Agent는 기본적으로 태그를 쉼표로 구분된 값 목록으로 인코딩하며,
   ## 이 값은 `.ddtags` 문자열에 저장됩니다. 이러한 태그로 작업하고 필터링하려면
-  ## 해당 문자열을 보다 구조화된 데이터로 
+  ## 해당 문자열을 보다 구조화된 데이터로
   ## 파싱해야 합니다.
   logs_parse_ddtags:
     type: remap
@@ -327,7 +327,7 @@ transforms:
 
   ## 이는 태그가 설정된 자체 리맵 (또는 다른 변환) 단계를 위한 플레이스홀더입니다.
   ## Datadog은 이러한 태그 할당을 권장합니다.
-  ## 이 태그는 어떤 데이터가 OP로 이동되었고 
+  ## 이 태그는 어떤 데이터가 OP로 이동되었고
   ## 어떤 데이터가 아직 이동되어야 하는지를 보여줍니다.
   LOGS_YOUR_STEPS:
     type: remap
@@ -338,7 +338,7 @@ transforms:
       .ddtags.opw_aggregator = get_hostname!()
 
   ## 로그 인테이크에 데이터를 보내기 전에
-  ## Agent가 직접 보내는 것처럼 보이도록 
+  ## Agent가 직접 보내는 것처럼 보이도록
   ## 태그를 예상 형식으로 다시 인코딩해야 합니다.
   logs_finish_ddtags:
     type: remap

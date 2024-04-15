@@ -11,7 +11,7 @@ further_reading:
   tag: 설명서
   text: 소스 코드 통합에 대해 알아봅니다.
 is_beta: true
-kind: documentation
+
 title: Visual Studio Code를 위한 Datadog 확장 기능
 ---
 
@@ -24,7 +24,7 @@ title: Visual Studio Code를 위한 Datadog 확장 기능
 **Code Insights** 보기를 통해 다음과 같은 정보를 얻을 수 있습니다:
 - [Error Tracking][10]에서 발생하는 문제
 - 애플리케이션 보안 관리에 의한 [Vulnerability][11] 보고서
-- CI Visibility에 의해 감지된 [불안정한 테스트][12] 
+- CI Visibility에 의해 감지된 [불안정한 테스트][12]
 - [Watchdog Insights][13]의 프로파일링 인사이트
 
 **Synthetic 테스트**를 통해 다음을 수행할 수 있습니다:

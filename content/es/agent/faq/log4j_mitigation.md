@@ -3,7 +3,7 @@ further_reading:
 - link: /integrations/guide/jmx_integrations/
   tag: Documentación
   text: ¿Qué integraciones usan JMXFetch?
-kind: faq
+
 title: Mitigar el riesgo de ejecución remota del código debido a Log4Shell
 ---
 

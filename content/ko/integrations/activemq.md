@@ -47,7 +47,7 @@ integration_id: activemq
 integration_title: ActiveMQ
 integration_version: 3.1.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: activemq
 public_title: ActiveMQ
@@ -101,7 +101,7 @@ ActiveMQ 점검으로 브로커와 큐, 프로듀서, 컨슈머 등을 위해 �
 호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
 
 1. **ActiveMQ 서버에 [JMX Remote가 활성화][1]되어 있는지 확인합니다.**
-2. 에이전트를 설정하여 ActiveMQ에 연결합니다.  [Agent 설정 디렉터리][2] 루트의 `conf.d/` 폴더에서 `activemq.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 설정 옵션을 확인하려면 [sample mysql.d/conf.yaml][3]을 참조합니다. 기본 수집 메트릭 목록을 보려면 [`metrics.yaml` 파일][4]을 확인하세요. 
+2. 에이전트를 설정하여 ActiveMQ에 연결합니다.  [Agent 설정 디렉터리][2] 루트의 `conf.d/` 폴더에서 `activemq.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 설정 옵션을 확인하려면 [sample mysql.d/conf.yaml][3]을 참조합니다. 기본 수집 메트릭 목록을 보려면 [`metrics.yaml` 파일][4]을 확인하세요.
 
    ```yaml
    init_config:

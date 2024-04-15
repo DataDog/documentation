@@ -1,6 +1,6 @@
 ---
 title: Mapping OpenTelemetry Semantic Conventions to Hostnames
-kind: documentation
+
 further_reading:
 - link: "/opentelemetry/"
   tag: "Documentation"
@@ -78,18 +78,18 @@ To get the cluster name, the following conventions are checked:
 
 ### `host.id` and `host.name`
 
-If none of the above conventions are present, the `host.id` and `host.name` attributes are used as-is to determine the hostname. 
+If none of the above conventions are present, the `host.id` and `host.name` attributes are used as-is to determine the hostname.
 
 **Note:** The OpenTelemetry specification allows `host.id` and `host.name` to have values that may not match those used by other Datadog products in a given environment. If using multiple Datadog products to monitor the same host, you may have to override the hostname using `datadog.host.name` to ensure consistency.
 
 ## Fallback hostname logic
 
-If no valid host names are found, the behavior varies depending on the ingestion path. 
+If no valid host names are found, the behavior varies depending on the ingestion path.
 
 {{< tabs >}}
 {{% tab "Datadog Exporter" %}}
 
-The fallback hostname logic is used. This logic generates a hostname for the machine where 
+The fallback hostname logic is used. This logic generates a hostname for the machine where
 the Datadog Exporter is running, which is compatible with the rest of Datadog products, by checking the following sources:
 
 1. The `hostname` field in the Datadog Exporter configuration.

@@ -17,7 +17,7 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: Documentation
   text: Dépannage
-kind: documentation
+
 title: Explorer les métriques de requête
 ---
 

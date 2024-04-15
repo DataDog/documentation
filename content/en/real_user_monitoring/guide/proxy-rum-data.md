@@ -1,6 +1,6 @@
 ---
 title: Proxy Your Browser RUM Data
-kind: guide
+
 aliases:
   - /real_user_monitoring/faq/proxy_rum_data/
 further_reading:
@@ -26,7 +26,7 @@ To successfully forward a request to Datadog, your proxy must
 <ul>
 <li>For security reasons, remove any HTTP headers that potentially contain sensitive information, such as the <code>cookie</code> header.</li>
 <li>The request body can contain binary data and should not be converted to a string. Make sure your proxy implementation forwards the raw body without conversion.</li>
-<li>Make sure your proxy implementation does not allow a malicious actor to send requests to a different server (ex: https://browser-intake-datadoghq.com.malicious.com).</li>  
+<li>Make sure your proxy implementation does not allow a malicious actor to send requests to a different server (ex: https://browser-intake-datadoghq.com.malicious.com).</li>
 </ul>
 </div>
 

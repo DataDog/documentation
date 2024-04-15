@@ -1,6 +1,6 @@
 ---
 title: Solve Memory Leaks with Profiling
-kind: guide
+
 further_reading:
 - link: "/profiler"
   tag: "Documentation"

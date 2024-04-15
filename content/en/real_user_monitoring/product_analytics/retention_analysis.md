@@ -1,6 +1,6 @@
 ---
 title: Retention Analysis
-kind: documentation
+
 aliases:
 - /real_user_monitoring/retention_analysis
 ---
@@ -29,14 +29,14 @@ To build a retention graph, navigate to **[Digital Experience > Product Analytic
     - If your initial event is an action, you can add any [action facets][3] or context facets.
 
 ### 2. Optionally, define the return event
-The return event defaults to a repeat of the original event. To use a different return event: 
+The return event defaults to a repeat of the original event. To use a different return event:
 
 1. Change **Repeated the original event** to **Experienced a different event**.
 2. Select the view or action to act as the return event.
 3. Optionally, add any desired filter criteria, such as the user's operating system.
 
 ## Analyze the graph
-For insights on user retention week over week, read each row of the graph horizontally from left to right. 
+For insights on user retention week over week, read each row of the graph horizontally from left to right.
 
 You can click on an individual diagram cell to view a list of users, and export the list as a CSV:
 

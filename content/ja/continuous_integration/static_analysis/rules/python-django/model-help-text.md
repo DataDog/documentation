@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: モデルの列をドキュメント化するために help_text を使用する
 ---
 ## メタデータ

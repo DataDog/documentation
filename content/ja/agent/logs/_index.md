@@ -16,7 +16,7 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: ドキュメント
   text: グローバルな処理ルール
-kind: documentation
+
 title: ホスト Agent ログの収集
 ---
 

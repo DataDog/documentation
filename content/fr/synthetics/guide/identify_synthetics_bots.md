@@ -15,7 +15,7 @@ further_reading:
 - link: /synthetics/api_tests/
   tag: Documentation
   text: Configurer un test API
-kind: documentation
+
 title: Identifier les bots Synthetic
 ---
 
@@ -97,7 +97,7 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 }
 ```
 
-Si vous utilisez la variable browser pour identifier des bots Synthetic sur Firefox, Datadog nʼest pas en mesure de garantir quʼelle soit définie avant lʼexécution de votre code. 
+Si vous utilisez la variable browser pour identifier des bots Synthetic sur Firefox, Datadog nʼest pas en mesure de garantir quʼelle soit définie avant lʼexécution de votre code.
 
 ## Cookies
 

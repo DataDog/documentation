@@ -1,6 +1,6 @@
 ---
 title: Install the Datadog Agent on Kubernetes
-kind: documentation
+
 aliases:
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm
@@ -133,7 +133,7 @@ Using the Datadog Operator requires the following prerequisites:
 1. Create an empty `datadog-values.yaml` file. Any parameters not specified in this file default to those set in [`values.yaml`][14].
 
 2. Create a Kubernetes Secret to store your Datadog [API key][3] and [app key][15]:
-   
+
    ```bash
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY --from-literal app-key=$DD_APP_KEY
    ```

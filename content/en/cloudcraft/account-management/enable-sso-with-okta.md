@@ -1,6 +1,6 @@
 ---
 title: Enable SSO with Okta
-kind: guide
+
 ---
 
 Enabling Single Sign-On (SSO) with Okta as your identity provider allows you to simplify authentication and login access to Cloudcraft.
@@ -25,7 +25,7 @@ For general information on using SSO with Cloudcraft, check out [Enable SSO in Y
 3. Log in to Okta as an administrator.
 4. Click **Application**.
 5. Click **Add Application**, then click **Create New App**.
-6. Select **SAML 2.0** as the sign on method and click **Create**. 
+6. Select **SAML 2.0** as the sign on method and click **Create**.
 7. Enter **Cloudcraft** as the name of the application and leave the remaining values as-is.
 8. Click **Next**.
 
@@ -49,7 +49,7 @@ For general information on using SSO with Cloudcraft, check out [Enable SSO in Y
 
 {{< img src="cloudcraft/account-management/enable-sso-with-okta/upload-metadata.png" alt="Successfully configured SAML Single Sign-On status with identity provider URL visible in security settings interface." responsive="true" style="width:80%;">}}
 
-15. Toggle the **SAML Single Sign-On is enabled** option. 
+15. Toggle the **SAML Single Sign-On is enabled** option.
 16. If you prefer to have your users access Cloudcraft only via your identity provider, enable the **Strict mode** option.
 
 [1]: /cloudcraft/account-management/enable-sso-with-azure-ad/

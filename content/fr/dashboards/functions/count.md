@@ -1,6 +1,6 @@
 ---
 title: Nombre de valeurs
-kind: documentation
+
 aliases:
   - /fr/graphing/functions/count/
 ---

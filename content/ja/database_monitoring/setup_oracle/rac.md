@@ -4,7 +4,7 @@ further_reading:
 - link: /integrations/oracle/
   tag: Documentation
   text: Basic Oracle インテグレーション
-kind: documentation
+
 title: Oracle RAC のデータベースモニタリングの設定
 ---
 

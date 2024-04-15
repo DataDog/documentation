@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Docker Hub
 ---
 

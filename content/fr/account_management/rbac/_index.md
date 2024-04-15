@@ -22,7 +22,7 @@ further_reading:
   tag: Blog
   text: Concevoir une stratégie de conformité, gouvernance et transparence pour toutes
     vos équipes avec le journal d'audit Datadog
-kind: documentation
+
 title: Contrôle d'accès à base de rôles (RBAC)
 ---
 
@@ -52,7 +52,7 @@ Les rôles personnalisés offrent à votre organisation la possibilité de crée
 
 ### Activer les rôles personnalisés
 
-1. Accédez aux [Paramètres d'organisation][9]. 
+1. Accédez aux [Paramètres d'organisation][9].
 2. À gauche de la page, sélectionnez **Roles**.
 3. Cliquez sur l'icône en forme d'engrenage en haut à droite. La fenêtre contextuelle Custom Roles s'affiche alors.
 4. Dans la fenêtre contextuelle Custom Roles, cliquez sur **Enable** pour activer la fonctionnalité.

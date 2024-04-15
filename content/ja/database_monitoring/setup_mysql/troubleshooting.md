@@ -1,6 +1,6 @@
 ---
 description: データベースモニタリングセットアップのトラブルシューティング
-kind: documentation
+
 title: MySQL のデータベースモニタリングセットアップのトラブルシューティング
 ---
 {{< site-region region="gov" >}}
@@ -101,7 +101,7 @@ performance-schema-consumer-events-statements-history-long=ON
 このオプションは、すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。これをオンにすると、頻度の低いクエリの実行内容をキャプチャできる可能性が高くなります。
 
 #### 実行計画プロシージャの欠落 {#explain-plan-procedure-missing}
-Agent は `datadog.explain_statement(...)` というプロシージャが `datadog` スキーマに存在することを必要とします。`datadog` スキーマの作成の詳細については、[セットアップ手順][1]を参照してください。 
+Agent は `datadog.explain_statement(...)` というプロシージャが `datadog` スキーマに存在することを必要とします。`datadog` スキーマの作成の詳細については、[セットアップ手順][1]を参照してください。
 
 Agent が説明プランを収集できるようにするには、`explain_statement` プロシージャを作成します。
 

@@ -11,7 +11,7 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_tags_and_metrics/
   tag: Documentation
   text: カスタムタグとメトリクスを追加してパイプラインの可視性を拡張する
-kind: documentation
+
 title: Azure パイプラインでトレースを設定する
 ---
 
@@ -25,7 +25,7 @@ title: Azure パイプラインでトレースを設定する
 
 ## Datadog インテグレーションの構成
 
-[Azure Pipelines][1] の Datadog インテグレーションは、[サービスフック][2]を使って Datadog にデータを送信することで動作します。 
+[Azure Pipelines][1] の Datadog インテグレーションは、[サービスフック][2]を使って Datadog にデータを送信することで動作します。
 
 1. Azure Marketplace から [Datadog CI Visibility][8] の拡張機能をインストールします。
 

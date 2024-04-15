@@ -28,7 +28,7 @@ integration_id: jfrog-platform
 integration_title: Plateforme JFrog
 integration_version: 1.0.0
 is_public: true
-kind: integration
+
 maintainer: integrations@jfrog.com
 manifest_version: 1.0.0
 metric_prefix: jfrog.
@@ -146,9 +146,9 @@ Grâce à l'intégration de l'API de métriques de JFrog Artifactory et Xray, vo
     * `dd_source` correspond au nom de l'intégration de log dans vos logs. Ce paramètre permet de déclencher la configuration automatique de l'intégration dans Datadog.
     * `include_tag_key` est défini sur false par défaut. Définissez ce paramètre sur true pour ajouter le tag `fluentd` dans l'enregistrement JSON.
 
-4. Activez l'intégration en exécutant `td-agent` sur les instances `artifactory` et `xray` : 
+4. Activez l'intégration en exécutant `td-agent` sur les instances `artifactory` et `xray` :
 
-    ``` 
+    ```
     td-agent
     ```
 
@@ -169,7 +169,7 @@ Grâce à l'intégration de l'API de métriques de JFrog Artifactory et Xray, vo
 
     Ces valeurs remplacent la configuration indiquée ci-dessous.
     ```text
-    ARTIFACTORY_HOST_NAME_OR_IP   -> IP address or DNS of Artifactory 
+    ARTIFACTORY_HOST_NAME_OR_IP   -> IP address or DNS of Artifactory
     ARTIFACTORY_ADMIN_TOKEN       -> Admin token for Artifactory
     XRAY_ADMIN_TOKEN              -> Admin token for Xray
     ```

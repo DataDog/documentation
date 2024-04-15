@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/agent/faq/downgrade-datadog-agent
-kind: faq
+
 title: Agent を以前のマイナーバージョンにダウングレードする
 ---
 

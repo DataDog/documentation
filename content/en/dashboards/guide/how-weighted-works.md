@@ -1,6 +1,6 @@
 ---
 title: How does weighted() work?
-kind: guide
+
 disable_toc: false
 further_reading:
 - link: "/dashboards/functions/smoothing"
@@ -8,10 +8,10 @@ further_reading:
   text: "Smoothing"
 ---
 
-Every metrics query has a standard order of evaluation (see the [Anatomy of a query][1] for a quick review). For example, the following query is calculated as follows: 
+Every metrics query has a standard order of evaluation (see the [Anatomy of a query][1] for a quick review). For example, the following query is calculated as follows:
 `sum:kubernetes.cpu.requests{*} by {kube_container_name}.rollup(avg, 10)`
 
-1. Time aggregation -- Sum the values for each timeseries (defined by a unique tag value combination) in time for each 10s rollup time interval. The number of unique tag value combinations is determined by the most volatile / high granularity tag, let's say `container_id`, on this metric. 
+1. Time aggregation -- Sum the values for each timeseries (defined by a unique tag value combination) in time for each 10s rollup time interval. The number of unique tag value combinations is determined by the most volatile / high granularity tag, let's say `container_id`, on this metric.
 2. Then, per `kube_container_name` (space aggregation), take the sum of all averaged values as a single representative value. The summed values for each `kube_container_name` is dependent upon the number of unique `container_id`s there are for each rollup interval.
 
 The `weighted()` function accounts for the short lifespan of the `container_id` tag values when summing by `kube_container_name` for this gauge metric.
@@ -20,11 +20,11 @@ The `weighted()` function accounts for the short lifespan of the `container_id` 
 Consider this query with the following assumptions: <br>
 `sum:kubernetes_state.pod.uptime{*} by {version}.rollup(avg, 10)`
 
-- The gauge metric's submission interval is defined at 10 seconds. 
+- The gauge metric's submission interval is defined at 10 seconds.
 - A datapoint is graphed every 60 seconds in time.
 - There is a Kubernetes pod with 2 versions at any given time. Each version is labeled with an app and there is only ever 1 version per app.
 
-The raw data over 60 seconds could resemble: 
+The raw data over 60 seconds could resemble:
 
 | Time                 | 0s  |  10s |  20s |  30s |  40s |  50s |
 | ---                  | --  | ---  | ---  | ---  |  --- |  --- |
@@ -37,7 +37,7 @@ The raw data over 60 seconds could resemble:
 
 
 1. _Time Aggregation -- Rolling up data_
-With time aggregation, we're rolling up data either `avg` (without weighted) or the proposed `weighted` average: 
+With time aggregation, we're rolling up data either `avg` (without weighted) or the proposed `weighted` average:
 | Time aggregation   | .rollup(avg) | With .weighted() |
 | ----------------   | ------------ | ---------------- |
 | `app:a`, `version:1` | 12           | 2.0              |
@@ -47,8 +47,8 @@ With time aggregation, we're rolling up data either `avg` (without weighted) or 
 | `app:e`, `version:2` | 16           | 8.0              |
 | `app:f`, `version:2` | 18           | 6.0              |
 
-2. _Space Aggregation_ 
-Finally, the metric is aggregated by version to get the final values below: 
+2. _Space Aggregation_
+Finally, the metric is aggregated by version to get the final values below:
 | Space aggregation by version | .rollup(avg) | With .weighted() |
 | ------------------------   | ------------ | ---------------- |
 | `version:1`                  | 36           | 12               |

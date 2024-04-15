@@ -1,6 +1,6 @@
 ---
 title: Tracing Node.js Applications
-kind: documentation
+
 aliases:
     - /tracing/nodejs/
     - /tracing/languages/nodejs/
@@ -111,12 +111,12 @@ configuration of the tracer.
 Bundlers crawl all of the `require()` calls that an application makes to files on disk. It replaces the `require()` calls with custom code and combines all of the resulting JavaScript into one "bundled" file. When a built-in module is loaded, such as `require('fs')`, that call can then remain the same in the resulting bundle.
 
 APM tools like `dd-trace` stop working at this point. They can continue to intercept the calls for built-in modules but don't intercept calls to third party libraries. This means that when you bundle a `dd-trace` app with a bundler it is likely to capture information about disk access (through `fs`) and outbound HTTP requests (through `http`), but omit calls to third party libraries. For example:
-- Extracting incoming request route information for the `express` framework. 
+- Extracting incoming request route information for the `express` framework.
 - Showing which query is run for the `mysql` database client.
 
 A common workaround is to treat all third party modules that the APM needs to instrument as being "external" to the bundler. With this setting the instrumented modules remain on disk and continue to be loaded with `require()` while the non-instrumented modules are bundled. However, this results in a build with many extraneous files and starts to defeat the purpose of bundling.
 
-Datadog recommends you have custom-built bundler plugins. These plugins are able to instruct the bundler on how to behave, inject intermediary code and intercept the "translated" `require()` calls. As a result, more packages are included in the bundled JavaScript file. 
+Datadog recommends you have custom-built bundler plugins. These plugins are able to instruct the bundler on how to behave, inject intermediary code and intercept the "translated" `require()` calls. As a result, more packages are included in the bundled JavaScript file.
 
 **Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
 

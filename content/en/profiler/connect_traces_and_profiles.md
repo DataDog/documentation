@@ -1,6 +1,6 @@
 ---
 title: Investigate Slow Traces or Endpoints
-kind: Documentation
+
 further_reading:
     - link: 'tracing'
       tag: 'Documentation'
@@ -27,7 +27,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS. 
+Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS.
 The feature is not available on Windows.
 
 For manually instrumented code, continuous profiler requires scope activation of spans:

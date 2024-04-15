@@ -1,6 +1,6 @@
 ---
 title: Adding Metadata
-kind: documentation
+
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
@@ -23,7 +23,7 @@ You can add metadata to existing Service Catalog entries through the Datadog UI,
 
 ## Metadata structure and supported versions
 
-Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services. 
+Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services.
 
 There are three supported versions of the schema:
 
@@ -37,10 +37,10 @@ For more information about the latest updates, see the schemas on GitHub.
 {{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
 {{< /callout >}}
 
-### Metadata Schema v3.0 (beta) 
+### Metadata Schema v3.0 (beta)
 The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][16].
 
-#### New features in v3.0 
+#### New features in v3.0
 ##### Analysis units
 Beyond services, you can organize your systems using various components such as applications, services, queues, and datastores. This holistic view supports better analysis and management.
 
@@ -128,7 +128,7 @@ datadog:
       - fp2
 {{< /code-block >}}
 
-#### Example entity definition (`kind:service`, `kind:datastore`, `kind:queue`) 
+#### Example entity definition (`kind:service`, `kind:datastore`, `kind:queue`)
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -379,7 +379,7 @@ integrations:
 External Resources (Optional)
 {{< /code-block >}}
 
-## Add metadata from the Datadog UI 
+## Add metadata from the Datadog UI
 
 If your service is listed in Service Catalog and already has metadata associated with it, the original source is listed in the **Metadata Source** column on the **Ownership** view. Return to that source to make any updates you need to make.
 
@@ -403,7 +403,7 @@ If the service has not been assigned any service definition metadata, or if the 
 
 Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
 
-To install the GitHub integration, navigate to the [integration tile][7] and click **Link GitHub Account** in the **Repo Configuration** tab. 
+To install the GitHub integration, navigate to the [integration tile][7] and click **Link GitHub Account** in the **Repo Configuration** tab.
 
 #### Service definition YAML files
 
@@ -415,9 +415,9 @@ When the GitHub integration is set up for your service definitions, an **Edit in
 
 {{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in Github button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
 
-After you update the YAML files for your repositories, your changes propagate to the Service Catalog. 
+After you update the YAML files for your repositories, your changes propagate to the Service Catalog.
 
-To prevent accidental overwriting, create and modify your service definition files with either the GitHub integration or the [Service Definition API endpoints][3]. Updating the same service using both the GitHub and the API may result in unintended overwriting.  
+To prevent accidental overwriting, create and modify your service definition files with either the GitHub integration or the [Service Definition API endpoints][3]. Updating the same service using both the GitHub and the API may result in unintended overwriting.
 
 ### Automate service definition updates with Terraform
 
@@ -427,11 +427,11 @@ For more information, see the [Datadog Provider documentation][9].
 
 ### Open-source metadata provider
 
-As an alternative to the GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider][12]. 
+As an alternative to the GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider][12].
 
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
 
-## Build custom extensions 
+## Build custom extensions
 
 The `extensions` field is supported in all versions including v2. You can incorporate this custom field into deployment processes to standardize and codify best practices.
 

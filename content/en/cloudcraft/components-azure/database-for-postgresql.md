@@ -1,6 +1,6 @@
 ---
 title: "Database for PostgreSQL Component"
-kind: documentation
+
 ---
 
 ## Overview

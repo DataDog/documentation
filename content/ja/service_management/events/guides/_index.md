@@ -16,7 +16,7 @@ further_reading:
 - link: /monitors/types/event/
   tag: Documentation
   text: イベントモニター
-kind: documentation
+
 private: true
 title: イベントガイド
 ---

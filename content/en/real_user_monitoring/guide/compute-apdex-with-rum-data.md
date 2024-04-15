@@ -1,6 +1,6 @@
 ---
 title: Compute Apdex And Custom Performance Indicators With RUM Data
-kind: guide
+
 description: Guide for computing your Apdex score and custom performance indicators with RUM data
 further_reading:
     - link: '/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm'
@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Datadog collects Real User Monitoring (RUM) events from browser and mobile RUM SDKs that you can use to build a quick graph and compute performance indicator metrics such as Apdex. 
+Datadog collects Real User Monitoring (RUM) events from browser and mobile RUM SDKs that you can use to build a quick graph and compute performance indicator metrics such as Apdex.
 
 To compute your Apdex score, you can use service monitoring from APM or user monitoring data from the RUM SDKs. This guide provides instructions on computing Apdex for an application with RUM data and the **Query Value** widget in a [Quick Graph][1].
 
@@ -48,7 +48,7 @@ The example below calculates an Apdex score using the Largest Contentful Paint p
 4. Under **Select a visualization**, click **Query Value**. A query value widget appears.
 5. In the time frame selector, select **Past 1 Day**. By default, the widget displays in Global Time.
 6. Enter a name for your graph, such as `Apdex Score`.
-7. Optionally, export or copy and paste the quick graph to a dashboard or notebook, or click **Export** > **New Dashboard** to create a dashboard with this quick graph. 
+7. Optionally, export or copy and paste the quick graph to a dashboard or notebook, or click **Export** > **New Dashboard** to create a dashboard with this quick graph.
 
 #### Query A
 
@@ -140,7 +140,7 @@ Click the copy icon on the right hand corner to copy the quick graph JSON to you
 
 ## Additional visualizations and Apdex scores
 
-In the example above, the Apdex score is relevant to the View RUM events and Largest Contentful Paint performance metric.  
+In the example above, the Apdex score is relevant to the View RUM events and Largest Contentful Paint performance metric.
 
 You can also calculate other Apdex scores with the following methods:
 

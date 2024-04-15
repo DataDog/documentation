@@ -1,6 +1,6 @@
 ---
 title: Distributed Tracing with AWS Lambda Serverless Applications
-kind: documentation
+
 aliases:
   - /tracing/serverless_functions
   - /tracing/setup_overview/serverless_functions/
@@ -84,7 +84,7 @@ The Datadog Lambda Library and tracing libraries for Go support:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Go][9] libraries.
 
-For Go serverless applications, Datadog recommends installing [Datadog's tracing libraries][5]. 
+For Go serverless applications, Datadog recommends installing [Datadog's tracing libraries][5].
 
 *Looking to trace through serverless resources not listed above? [Open a feature request][7].*
 
@@ -121,7 +121,7 @@ Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. 
 
 <div class="alert alert-info">During the beta period, profiling is available at no additional cost.</div>
 
-Datadog's [Continuous Profiler][27] is available in beta for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`. 
+Datadog's [Continuous Profiler][27] is available in beta for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 The Continuous Profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
@@ -324,7 +324,7 @@ ddlambda.WrapFunction(handler, cfg)
 {{% /tab %}}
 {{< /tabs >}}
 
-## Sending traces to Datadog with the X-Ray Integration 
+## Sending traces to Datadog with the X-Ray Integration
 
 If you are already tracing your serverless application with X-Ray and want to continue using X-Ray, you can [install the AWS X-Ray integration][2] to send traces from X-Ray to Datadog.
 

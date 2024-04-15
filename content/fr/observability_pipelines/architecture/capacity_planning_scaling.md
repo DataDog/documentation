@@ -1,5 +1,5 @@
 ---
-kind: Documentation
+
 title: Planification et dimensionnement des capacités
 ---
 
@@ -53,7 +53,7 @@ L'équilibrage des charges côté client n'est pas recommandé. Ce sont alors le
 
 ##### Types de répartiteurs de charge
 
-Datadog recommande l'utilisation de répartiteurs de charge de type L4 (layer 4, ou répartiteurs de charge réseau) étant donné qu'ils prennent en charge les protocoles du worker de pipelines d'observabilité (TCP, UDP et HTTP). Même si vous envoyez exclusivement du trafic HTTP (L7), Datadog recommande les répartiteurs de charge L4 en raison de leurs bonnes performances et de leur simplicité. 
+Datadog recommande l'utilisation de répartiteurs de charge de type L4 (layer 4, ou répartiteurs de charge réseau) étant donné qu'ils prennent en charge les protocoles du worker de pipelines d'observabilité (TCP, UDP et HTTP). Même si vous envoyez exclusivement du trafic HTTP (L7), Datadog recommande les répartiteurs de charge L4 en raison de leurs bonnes performances et de leur simplicité.
 
 | Fournisseur de cloud| Recommandation                                                |
 | ------------- | --------------------------------------------------------------|

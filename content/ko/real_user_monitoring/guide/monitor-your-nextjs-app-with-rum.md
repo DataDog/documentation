@@ -4,7 +4,7 @@ further_reading:
 - link: /monitors/create/types/real_user_monitoring/
   tag: 설명서
   text: RUM 모니터에 대해 알아보기
-kind: guide
+
 title: RUM을 사용하여 Next.js 앱 모니터링
 ---
 

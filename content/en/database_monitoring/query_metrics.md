@@ -1,6 +1,6 @@
 ---
 title: Exploring Query Metrics
-kind: documentation
+
 description: Explore and dig into your database and query performance metrics
 further_reading:
 - link: "/database_monitoring/"
@@ -17,7 +17,7 @@ further_reading:
   text: "SQL Server integration"
 - link: "/integrations/oracle/"
   tag: "Documentation"
-  text: "Oracle integration"  
+  text: "Oracle integration"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"

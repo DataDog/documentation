@@ -23,7 +23,7 @@ integration_id: ''
 integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_elasticbeanstalk
 public_title: Datadog-AWS Elastic Beanstalk 통합
@@ -90,7 +90,7 @@ process_config:
 
 #### 트레이스 수집
 
-애플리케이션이 컨테이너화되지 않았고 Datadog 에이전트가 `99datadog.config`로 설정된 경우, 애플리케이션이 [트레이싱 라이브러리 설정][8]으로 계측되었다면 추가 설정 없이 트레이싱이 활성화된 것입니다. 
+애플리케이션이 컨테이너화되지 않았고 Datadog 에이전트가 `99datadog.config`로 설정된 경우, 애플리케이션이 [트레이싱 라이브러리 설정][8]으로 계측되었다면 추가 설정 없이 트레이싱이 활성화된 것입니다.
 
 
 
@@ -229,7 +229,7 @@ func main() {
 
 다수의 도커 컨테이너에 대해 컨테이너화된 Datadog 에이전트와 `Dockerrun.aws.json`란 이름의 파일을 사용해 도커를 모니터링할 수 있습니다.
 
-`Dockerrun.aws.json` 파일은 Elastic Beanstalk입니다. 즉, 특정 JSON 파일로 Elastic Beanstalk 애플리케이션으로 도커(Docker) 컨테이너 세트를 배포하는 방법을 설명합니다. 이 파일을 멀티컨테이너 도커 환경에 사용할 수 있습니다. `Dockerrun.aws.json`은 환경 내 각 컨테이너 인스턴스에 컨테이너를 배포하는 방법을 설명합니다. 또한 마운트할 컨테이너에 대한 호스트 인스턴스에서 데이터 볼륨을 생성하는 방법을 설명합니다. 
+`Dockerrun.aws.json` 파일은 Elastic Beanstalk입니다. 즉, 특정 JSON 파일로 Elastic Beanstalk 애플리케이션으로 도커(Docker) 컨테이너 세트를 배포하는 방법을 설명합니다. 이 파일을 멀티컨테이너 도커 환경에 사용할 수 있습니다. `Dockerrun.aws.json`은 환경 내 각 컨테이너 인스턴스에 컨테이너를 배포하는 방법을 설명합니다. 또한 마운트할 컨테이너에 대한 호스트 인스턴스에서 데이터 볼륨을 생성하는 방법을 설명합니다.
 
 `Dockerrun.aws.json` 파일은 단일 아카이브에서 추가적인 소스 코드를 사용해 압축하거나 자체적으로 사용할 수 있습니다. `Dockerrun.aws.json`로 아카이브된 소스 코드는 컨테이너 인스턴스로 배포되며 `/var/app/current/` 디렉터리에서 액세스할 수 있습니다. 설정의 `volumes` 섹션을 사용해 인스턴스에서 실행되는 컨테이너의 마운트 지점을 제공합니다. 또한 내장 컨테이너 정의의 `mountPoints` 섹션을 활용해 컨테이너에 대해 마운트합니다.
 
@@ -346,7 +346,7 @@ func main() {
 #### 다수의 도커 컨테이너
 
 1. 애플리케이션과 동일한 `Dockerrun.aws.json`에서 `datadog/agent` 이미지를 사용해 Datadog 에이전트 컨테이너를 추가합니다. 다음을 추가합니다.
-    - `portMappings` 섹션에서 `containerPort` 8126을 사용해 `hostPort` 8126을 추가합니다. 
+    - `portMappings` 섹션에서 `containerPort` 8126을 사용해 `hostPort` 8126을 추가합니다.
     - `environment` 섹션에서 `DD_APM_ENABLED` 및 `DD_APM_NON_LOCAL_TRAFFIC`을 `true`로 설정합니다.
 2. [트레이싱 라이브러리 설정][14]으로 계측된 애플리케이션 컨테이너 아래에서 다음을 추가합니다.
     - `environment` 섹션 아래에서 `DD_AGENT_HOST`로 불리는 환경 변수를 Datadog 에이전트 컨테이너 이름에 추가합니다.

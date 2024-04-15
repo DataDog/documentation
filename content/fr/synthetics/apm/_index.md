@@ -11,7 +11,7 @@ further_reading:
   tag: Guide
   text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre
     produits.
-kind: documentation
+
 title: APM Synthetic
 ---
 
@@ -70,7 +70,7 @@ Datadog utilise un protocole de tracing distribué et configure les en-têtes HT
 `x-datadog-origin: synthetics`
 : Permet de s'assurer que les traces générées à partir des tests API [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas-de-l-apm).
 
-`x-datadog-origin: synthetics-browser` 
+`x-datadog-origin: synthetics-browser`
 : Permet de s'assurer que les traces générées à partir des tests Browser [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas-de-l-apm).
 
 `x-datadog-sampling-priority: 1`

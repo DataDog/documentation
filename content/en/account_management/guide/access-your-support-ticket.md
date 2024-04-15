@@ -1,6 +1,6 @@
 ---
 title: Access Your Support Ticket
-kind: documentation
+
 aliases:
   - /developers/faq/access-your-support-ticket
   - /account_management/faq/access-your-support-ticket
@@ -8,7 +8,7 @@ aliases:
 
 ## Creating a support ticket
 
-To create a new support ticket, click on the appropriate Site link and click **Submit a request** to fill out a ticket form. 
+To create a new support ticket, click on the appropriate Site link and click **Submit a request** to fill out a ticket form.
 
 {{< whatsnext desc="Support page by Datadog site:">}}
     {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1 {{< /nextlink >}}
@@ -22,9 +22,9 @@ You can also access this form through Datadog from the [help page][2], from the 
 ## Accessing existing tickets
 
 If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:
-1. From the Support page click **Sign in** on the top right. 
+1. From the Support page click **Sign in** on the top right.
 
-2. If this is your first time signing into your Datadog Zendesk account, click the link by **New to your Datadog Zendesk account? Sign up**. 
+2. If this is your first time signing into your Datadog Zendesk account, click the link by **New to your Datadog Zendesk account? Sign up**.
 
 3. If you have previously emailed Datadog support, click **Emailed us for support? Get a password** and enter the same email address you used to contact Datadog support.
 

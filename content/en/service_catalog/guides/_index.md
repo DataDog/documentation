@@ -1,6 +1,6 @@
 ---
 title: Service Catalog Guides
-kind: guide
+
 private: true
 aliases:
   - /tracing/service_catalog/guides/
@@ -8,7 +8,7 @@ aliases:
 
 
 {{< whatsnext desc="Using the Service Catalog:" >}}
-    {{< nextlink href="/service_catalog/guides/best-practices/" >}}Best Practices 
+    {{< nextlink href="/service_catalog/guides/best-practices/" >}}Best Practices
     {{< /nextlink >}}
     {{< nextlink href="tracing/service_catalog/guides/understanding-service-configuration" >}}Understanding Your Service Configuration{{< /nextlink >}}
     {{< nextlink href="tracing/service_catalog/guides/validating-service-definition" >}}Validating Service Definition YAMLs{{< /nextlink >}}

@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/agent/faq/agent-downgrade
-kind: faq
+
 title: Agent を以前のメジャーバージョンにダウングレードする
 ---
 

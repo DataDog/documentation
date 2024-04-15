@@ -6,7 +6,7 @@ further_reading:
 - link: /service_management/events/explorer/
   tag: Documentation
   text: Trier les événements avec l'Events Explorer
-kind: Documentation
+
 title: Utiliser des événements
 ---
 

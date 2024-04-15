@@ -3,7 +3,7 @@ further_reading:
 - link: /infrastructure/containers
   tag: Documentation
   text: コンテナビュー
-kind: faq
+
 title: DaemonSet で Orchestrator Explorer を設定する
 ---
 
@@ -21,7 +21,7 @@ DaemonSet を使用した Orchestrator Explorer のセットアップ方法を�
 2. 以下の RBAC アクセス許可を使用して、Cluster Agent ClusterRole を設定します。
 
    特に `apps` および `batch` apiGroups の場合は、ライブコンテナに　
-   一般的な Kubernetes リソース (``pods`、`services`、 
+   一般的な Kubernetes リソース (``pods`、`services`、
    `nodes` など) を収集する権限が必要です。これは、[Cluster
    Agent のセットアップ][2]に従っていれば、すでに RBAC にあります。ない場合は、
    追加されていることを確認してください (`deployments`、`replicasets` の後):
@@ -140,7 +140,7 @@ DaemonSet を使用した Orchestrator Explorer のセットアップ方法を�
            name: orchestrator-config
            items:
            - key: orchestrator.yaml
-             path: orchestrator.yaml    
+             path: orchestrator.yaml
      ```
 
 一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告が表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、Cluster Agent と Process Agent の両方の `env` セクションに以下のオプションを追加します。

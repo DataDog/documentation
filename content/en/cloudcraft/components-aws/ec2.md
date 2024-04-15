@@ -1,6 +1,6 @@
 ---
 title: "EC2 Component"
-kind: guide
+
 ---
 ## Overview
 

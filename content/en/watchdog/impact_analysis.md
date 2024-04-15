@@ -1,7 +1,7 @@
 ---
 title: Watchdog Impact Analysis
-kind: documentation
-description: Discover performance issues in your application impacting end users with Watchdog Impact Analysis.  
+
+description: Discover performance issues in your application impacting end users with Watchdog Impact Analysis.
 further_reading:
 - link: "https://www.datadoghq.com/blog/watchdog-impact-analysis/"
   tag: "Blog"
@@ -16,13 +16,13 @@ further_reading:
 
 ## Overview
 
-Whenever Watchdog finds an APM anomaly, it simultaneously analyzes a variety of latency and error metrics that are submitted from the RUM SDKs to evaluate if the anomaly is adversely impacting any web or mobile pages visited by your users. 
+Whenever Watchdog finds an APM anomaly, it simultaneously analyzes a variety of latency and error metrics that are submitted from the RUM SDKs to evaluate if the anomaly is adversely impacting any web or mobile pages visited by your users.
 
 If Watchdog determines that the end-user experience is impacted, it provides a summary of the impacts in Watchdog APM Alert. This includes:
 
 - A list of impacted RUM views
 - An estimated number of impacted users
-- A link to the list of impacted users, so that you can reach out to them, if needed. 
+- A link to the list of impacted users, so that you can reach out to them, if needed.
 
 {{< img src="watchdog/watchdog_impact_analysis.mp4" alt="A user hovering over the users and views pills to show more information about the users impacted and the number of views impacted" video=true >}}
 

@@ -12,7 +12,7 @@ further_reading:
 - link: logs/explorer/visualize
   tag: ドキュメント
   text: ログからビジュアライゼーションを作成する
-kind: documentation
+
 title: ログのエクスポート
 ---
 

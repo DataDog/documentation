@@ -1,6 +1,6 @@
 ---
 title: Cloud SIEM Guides
-kind: guide
+
 aliases:
   - /security_monitoring/guide/
   - /security_platform/guide/

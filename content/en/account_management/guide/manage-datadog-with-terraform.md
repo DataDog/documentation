@@ -1,6 +1,6 @@
 ---
 title: Manage Datadog with Terraform
-kind: guide
+
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"
@@ -46,7 +46,7 @@ See the [Teams page][13] for more information.
 
 ### Service accounts
 
-The [service account][14] resource provides a non-interactive account that can be used to own [service account application keys][15] and other resources that are shared across your teams. 
+The [service account][14] resource provides a non-interactive account that can be used to own [service account application keys][15] and other resources that are shared across your teams.
 
 The [service account data source][25] can be used to retrieve information about existing service accounts for use in other resources.
 

@@ -21,7 +21,7 @@ further_reading:
 - link: /api/v1/synthetics/#creer-un-test
   tag: Documentation relative à l'API
   text: Créer un test Synthetic par programmation
-kind: documentation
+
 title: Débuter avec les tests API
 ---
 
@@ -124,9 +124,9 @@ Pour créer un test API à plusieurs étapes, cliquez sur **New Test** > **[Mul
 
 ### Création d'un panier
 
-1. Dans **Define steps**, cliquez sur **Create Your First Step**. 
+1. Dans **Define steps**, cliquez sur **Create Your First Step**.
 2. Attribuez un nom à votre étape, par exemple `Création d'un panier`.
-3. Indiquez la méthode HTTP et l'URL à interroger. Saisissez par exemple `POST` et `https://api.shopist.io/carts`. 
+3. Indiquez la méthode HTTP et l'URL à interroger. Saisissez par exemple `POST` et `https://api.shopist.io/carts`.
 4. Cliquez sur **Test URL**. Cela crée un panier dans le backend de l'application Shopist.
 5. Conservez les assertions par défaut ou modifiez-les.
 6. Vous avez également la possibilité de définir des paramètres d'exécution.
@@ -177,7 +177,7 @@ Pour créer un test API à plusieurs étapes, cliquez sur **New Test** > **[Mul
         "quantity": 1
       },
       "cart_id": "{{ CART_ID }}"
-    } 
+    }
     {{< /code-block >}}
 
 5. Cliquez sur **Test URL**. Cela ajoute le produit extrait lors de l'étape 2 au panier créé lors de l'étape 1 et renvoie une URL de paiement.

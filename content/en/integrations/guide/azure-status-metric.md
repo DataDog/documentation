@@ -1,6 +1,6 @@
 ---
 title: Azure Status and Count Metrics
-kind: guide
+
 aliases:
   - /integrations/faq/azure-vm-status-is-not-reporting
   - /integrations/faq/azure-status-metric
@@ -30,7 +30,7 @@ Use the `azure.*.count` metric to:
 - Create monitors to alert you about the status of different Azure resources.
 
 **Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This does not affect monitors or widgets scoped to a specific status.
-You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using `.fill(null)`. 
+You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using `.fill(null)`.
 
 For most resource types, the possible statuses are:
 

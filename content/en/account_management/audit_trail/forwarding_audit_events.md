@@ -1,6 +1,6 @@
 ---
 title: Forwarding Audit Events to Custom Destinations
-kind: documentation
+
 disable_toc: false
 further_reading:
 - link: "/account_management/audit_trail/"
@@ -44,7 +44,7 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
     - Basic Authentication: Provide the username and password for the account to which you want to send logs.
     - Request Header: Provide the header name and value. For example, if you use the Authorization header and the username for the account to which you want to send logs is `myaccount` and the password is `mypassword`:
         - Enter `Authorization` for the **Header Name**.
-        - The header value is in the format of `Basic username:password`, where `username:password` is encoded in base64. For this example, the header value is `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
+        - The header value is in the format of `Basic username:password`, where `username:password` is encoded in base64. For this example, the header value is `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`.
   9. Click **Save**.
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
@@ -71,7 +71,7 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.
 
    b. The name of the destination index where you want to send the logs.
-   
+
    c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
 
 8. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.

@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Consulter les données d'utilisation de l'APM et configurer des alertes
 ---
 

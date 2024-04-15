@@ -1,6 +1,6 @@
 ---
 title: "Parsing de log\_: bonnes pratiques à adopter"
-kind: guide
+
 aliases:
   - /fr/logs/faq/log-parsing-best-practice
 further_reading:
@@ -22,11 +22,11 @@ Cet article décrit comment procéder au parsing d'un log à partir du log du Co
 2017-10-12 08:54:44 UTC | INFO | dd.collector | checks.collector(collector.py:530) | Finished run #1780. Collection time: 4.06s. Emit time: 0.01s
 ```
 
-1. **Ajoutez toujours en commentaire à votre règle l'exemple de log sur lequel vous travaillez** :  
+1. **Ajoutez toujours en commentaire à votre règle l'exemple de log sur lequel vous travaillez** :
     {{< img src="logs/faq/parsing_best_practice_1.png" alt="bonne_pratique_parsing_1"  >}}
     Il est possible de tester votre règle de parsing dans un exemple de log. Cet exemple simplifie la rédaction initiale de la règle et peut s'avérer utile si jamais vous cherchez à résoudre un problème ou à prendre en charge un nouveau format de log.
 
-2. **Pour que le parsing ne cible qu'un seul attribut, utilisez l'astérisque (*) ** :  
+2. **Pour que le parsing ne cible qu'un seul attribut, utilisez l'astérisque (*) ** :
     vous n'avez pas besoin de rédiger une règle de parsing du premier coup. Vérifiez un par un les attributs de votre règle en ajoutant un astérisque `.*` à la fin de la règle. Cela vous permet d'obtenir un résultat pour tout contenu suivant la fin de votre règle.
     Ici, vous voulez par exemple parser la date du log, peu importe ce qui suit. Créez la règle ci-dessous :
     {{< img src="logs/faq/parsing_best_practice_2.png" alt="bonne_pratique_parsing_2" >}}

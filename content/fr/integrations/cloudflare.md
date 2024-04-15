@@ -12,7 +12,7 @@ integration_id: cloudflare
 integration_title: Cloudflare
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 monitors:
   '[Cloudflare] Abnormal bandwidth being sent for zone: {{zone_name.name}}': assets/monitors/bandwidth.json
@@ -34,7 +34,7 @@ Associez Datadog à votre compte Cloudflare pour consulter vos métriques relati
 
 ## Configuration
 
-Avant de commencer, vous avez besoin d'un [compte Datadog][1] doté d'une [clé API][2]. Vous devez également avoir accès à [Cloudflare Logpush][3], ce qui nécessite un compte Enterprise. 
+Avant de commencer, vous avez besoin d'un [compte Datadog][1] doté d'une [clé API][2]. Vous devez également avoir accès à [Cloudflare Logpush][3], ce qui nécessite un compte Enterprise.
 
 Lorsque vous utilisez un token d'API Cloudflare, assurez-vous qu'il dispose des autorisations **Zone** > **Zone** > **Read** et **Zone** > **Analytics** > **Read**.
 
@@ -104,7 +104,7 @@ Grâce à son service Logpush, Cloudflare vous permet de transmettre des logs di
 
     Notez la valeur d'`id`. Dans l'exemple précédent, elle est de `100`.
 
-2. Activez la tâche. Utilisez l'ID de tâche renvoyé dans la réponse et envoyez `{"enabled": true}` dans le corps de la requête. 
+2. Activez la tâche. Utilisez l'ID de tâche renvoyé dans la réponse et envoyez `{"enabled": true}` dans le corps de la requête.
 
     **Exemple de requête** :
 
@@ -137,7 +137,7 @@ Grâce à son service Logpush, Cloudflare vous permet de transmettre des logs di
 #### Dashboard Cloudflare
 
 1. Une fois que vous avez connecté un service à la section Logpush du dashboard Cloudflare, sélectionnez l'ensemble de données, les champs de données, puis la destination Datadog.
-2. Sous **Enter destination information**, saisissez l'endpoint d'URL Datadog : 
+2. Sous **Enter destination information**, saisissez l'endpoint d'URL Datadog :
 
     ```
     http-intake.logs.{{< region-param key="dd_site" >}}/v1/input?ddsource=cloudflare

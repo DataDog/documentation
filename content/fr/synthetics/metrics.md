@@ -1,6 +1,6 @@
 ---
 title: Métriques de la surveillance Synthetic
-kind: documentation
+
 description: Ces métriques sont générées par les tests de surveillance Synthetic.
 further_reading:
   - link: /synthetics/guide/api_test_timing_variations/

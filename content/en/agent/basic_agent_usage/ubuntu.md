@@ -1,6 +1,6 @@
 ---
 title: Basic Agent Usage for Ubuntu
-kind: documentation
+
 platform: Ubuntu
 aliases:
     - /guides/basic_agent_usage/ubuntu/
@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Ubuntu. 
+This page outlines the basic features of the Datadog Agent for Ubuntu.
 
 To install the Agent, see the [installation instructions][1]. Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 

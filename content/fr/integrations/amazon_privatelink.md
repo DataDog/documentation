@@ -13,7 +13,7 @@ integration_id: amazon-privatelink
 integration_title: Amazon PrivateLink
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_privatelink
 public_title: Intégration Datadog/Amazon PrivateLink
@@ -28,7 +28,7 @@ AWS PrivateLink fournit une connectivité privée entre les VPC, les services AW
 
 Activez cette intégration pour surveiller la santé et les performances de vos endpoints de VPC ou de vos services d'endpoint avec Datadog.
 
-**Important :** si vous souhaitez envoyer des données de télémétrie à Datadog via PrivateLink, suivez [ces instructions][1]. 
+**Important :** si vous souhaitez envoyer des données de télémétrie à Datadog via PrivateLink, suivez [ces instructions][1].
 
 ## Configuration
 

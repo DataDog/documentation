@@ -1,6 +1,6 @@
 ---
 title: Advanced Filtering
-kind: documentation
+
 description: Filter your data to narrow the scope of metrics returned.
 further_reading:
   - link: "/metrics/explorer/"
@@ -22,13 +22,13 @@ further_reading:
 
 ## Overview
 
-When using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the **from** field to the right of the metric. 
+When using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the **from** field to the right of the metric.
 
 You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax][1] documentation for configuration.
 
-## Boolean filtered queries 
+## Boolean filtered queries
 
-The following syntax is supported for Boolean filtered metric queries: 
+The following syntax is supported for Boolean filtered metric queries:
 
 - `!`
 - `,`
@@ -44,7 +44,7 @@ When including or excluding multiple tags:
 
 For more information on tags, see the [Getting Started With Using Tags][2] guide.
 
-**Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_: 
+**Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_:
 `avg:mymetric{env:prod AND !region:us-east}`
 
 ### Boolean filtered query examples
@@ -68,10 +68,10 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 {{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="Boolean example NOT IN" style="width:100%;" >}}
 
-## Wildcard filtered queries 
+## Wildcard filtered queries
 
-Prefix, suffix, and substring wildcard tag filtering are supported: 
--  `pod_name: web-*` 
+Prefix, suffix, and substring wildcard tag filtering are supported:
+-  `pod_name: web-*`
 -  `cluster:*-trace`
 -  `node:*-prod-*`
 
@@ -97,7 +97,7 @@ avg:system.disk.utilized{region:*east*} by {region}
 
 ## Exclusion functions
 
-Add an [exclusion function][3] to your query to: 
+Add an [exclusion function][3] to your query to:
 - Exclude N/A values.
 - Apply a minimum or maximum value to metrics that meet the threshold.
 - Exclude values that are above or below threshold values.

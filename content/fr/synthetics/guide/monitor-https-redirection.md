@@ -1,6 +1,6 @@
 ---
 title: Surveillance de la redirection HTTPS des requêtes HTTP
-kind: guide
+
 further_reading:
   - link: /synthetics/api_tests/http_tests
     tag: Documentation
@@ -22,7 +22,7 @@ Pour surveiller la redirection HTTPS de votre trafic HTTP, procédez comme suit�
     - Définissez l'assertion sur l'en-tête `location` en cliquant dessus dans l'aperçu de réponse. Par exemple, dans la section **Headers**, l'en-tête `location` pour `http://datadoghq.com` est `https://datadoghq.com`.
 
     {{< img src="synthetics/guide/monitor-https-redirections/location-header-https.png" alt="En-tête location dans l'aperçu de réponse" style="width:100%;" >}}
-    - Il est également possible de définir une assertion sur le corps de la réponse. Pour ce faire, cliquez sur **+ New Assertion**, sélectionnez `body` `contains` et collez `"https:"===window.location.protocol` dans le champ de texte. 
+    - Il est également possible de définir une assertion sur le corps de la réponse. Pour ce faire, cliquez sur **+ New Assertion**, sélectionnez `body` `contains` et collez `"https:"===window.location.protocol` dans le champ de texte.
     {{< img src="synthetics/guide/monitor-https-redirections/https-assertion.png" alt="Définir votre assertion" style="width:100%;" >}}
 
 Terminez le processus de création de test, puis enregistrez votre test HTTP.

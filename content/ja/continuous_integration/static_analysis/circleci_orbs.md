@@ -2,7 +2,7 @@
 dependencies:
 - https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md
 description: Datadog と CircleCI を使用して、CI パイプラインで Static Analysis ジョブを実行します。
-kind: documentation
+
 title: Static Analysis と CircleCI Orbs
 ---
 [![CircleCI Build Status](https://circleci.com/gh/DataDog/datadog-static-analyzer-circleci-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/DataDog/datadog-static-analyzer-circleci-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/datadog/datadog-static-analyzer-circleci-orb.svg)](https://circleci.com/developer/orbs/orb/datadog/datadog-static-analyzer-circleci-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/DataDog/datadog-static-analyzer-circleci-orb/main/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
@@ -75,7 +75,7 @@ workflows:
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `service` | 結果をタグ付けしたいサービス。                                                                                | はい     |                 |
 | `env`     | 結果をタグ付けしたい環境。Datadog は、この入力値として `ci` を使用することを推奨します。                 | ✕    | `none`          |
-| `site`    | 情報を送信する [Datadog サイト][4]。                                                                                 | ✕    | `datadoghq.com` | 
+| `site`    | 情報を送信する [Datadog サイト][4]。                                                                                 | ✕    | `datadoghq.com` |
 
 [1]: https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project
 [2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys

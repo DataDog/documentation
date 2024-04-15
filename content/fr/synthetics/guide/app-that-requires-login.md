@@ -13,7 +13,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: Blog
   text: Pratiques recommandées pour la création de tests de bout en bout
-kind: guide
+
 title: Exécuter des tests sur une application nécessitant une authentification
 ---
 

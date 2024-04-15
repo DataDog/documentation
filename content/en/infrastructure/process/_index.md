@@ -1,6 +1,6 @@
 ---
 title: Live Processes
-kind: documentation
+
 aliases:
     - /guides/process
     - /graphing/infrastructure/process/

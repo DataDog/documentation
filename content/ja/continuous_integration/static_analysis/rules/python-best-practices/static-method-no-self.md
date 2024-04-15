@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 静的メソッドのパラメーターとして self を使用しない
 ---
 ## メタデータ

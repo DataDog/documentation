@@ -6,7 +6,7 @@ further_reading:
 - link: /integrations/
   tag: ドキュメント
   text: Datadog インテグレーションの一覧を見る
-kind: documentation
+
 title: インテグレーション入門
 ---
 

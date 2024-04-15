@@ -1,6 +1,6 @@
 ---
 title: Injecting Libraries Locally
-kind: documentation
+
 description: "Inject instrumentation libraries into applications"
 aliases:
  - /tracing/trace_collection/admission_controller/
@@ -272,7 +272,7 @@ If the host does not yet have a Datadog Agent installed, or if you want to upgra
 DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language:
 
 ```shell
 DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
@@ -282,7 +282,7 @@ Exit and open a new shell to use the injection library.
 
 ## Install only library injection
 
-**Requirements**: 
+**Requirements**:
 - A host running Linux.
 - A recent [Datadog Agent v7][1] installation.
 
@@ -320,11 +320,11 @@ remote_configuration:
 # END LD PRELOAD CONFIG
 ```
 
-If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
+If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent.
 
 ## Next steps
 
-If you haven't already, install your app and any supporting languages or libraries it requires. 
+If you haven't already, install your app and any supporting languages or libraries it requires.
 
 When an app that is written in a supported language is launched, it is automatically injected with tracing enabled.
 
@@ -338,8 +338,8 @@ Values in environment variables override settings in the configuration file on a
 
 ### Configuration file
 
-| Property name | Purpose | Default value | Valid values | 
-| --------- | ----------- | ------------- | ----------- | 
+| Property name | Purpose | Default value | Valid values |
+| --------- | ----------- | ------------- | ----------- |
 |`log_level`  | The logging level|`off`|`off`, `debug`, `info`, `warn`, `error`|
 |`output_paths`|The location where log output is written|`stderr`|`stderr` or a `file://` URL|
 |`env`|The default environment assigned to a process|none|n/a|
@@ -361,10 +361,10 @@ config_sources: BASIC
 
 The following environment variables configure library injection. You can pass these in by `export` through the command line (`export DD_CONFIG_SOURCES=BASIC`), shell configuration, or launch command.
 
-Each of the fields in the config file corresponds to an environment variable. This environment variable is read from the environment of the process that’s being launched and affects only the process currently being launched. 
+Each of the fields in the config file corresponds to an environment variable. This environment variable is read from the environment of the process that’s being launched and affects only the process currently being launched.
 
 |Config file property|Environment Variable|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
 |`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
 |`env`|`DD_ENV`|
@@ -385,14 +385,14 @@ By default, the following settings are enabled in an instrumented process:
 You can change these settings for all instrumented processes by setting the `config_sources` property in the configuration file or for a single process by setting the `DD_CONFIG_SOURCES` environment variable for the process. The valid settings for config sources are:
 
 |Configuration Source Name|Meaning|
-| --------- | ----------- |  
+| --------- | ----------- |
 |`BASIC`|Apply the configurations specified above. If no configuration source is specified, this is the default.|
 |`LOCAL:PATH`|Apply the configuration at the specified path on the local file system. The format of the configuration file is described below. Example: `LOCAL:/opt/config/my_process_config.yaml`|
 |`BLOB:URL`| Apply the configuration at the specified path in an S3-compatible object store. The connection URL and the format of the configuration file are described below. Example: `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1` |
 
 The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
 
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration:
 
 ```yaml
 DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
@@ -573,7 +573,7 @@ If the host does not yet have a Datadog Agent installed, or if you want to upgra
 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language:
 
 ```shell
 DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
@@ -581,7 +581,7 @@ DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_A
 
 ## Install only library injection
 
-**Requirements**: 
+**Requirements**:
 - A host running Linux.
 - A recent [Datadog Agent v7][1] installation.
 - [Docker Engine][2].
@@ -618,7 +618,7 @@ remote_configuration:
 # END LD PRELOAD CONFIG
 ```
 
-If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
+If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent.
 
 
 ## Configure Docker injection {#configure-docker-injection-2}
@@ -839,7 +839,7 @@ config_sources: BASIC
 
 The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
 
-Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration:
 
 ```yaml
 config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
@@ -1030,7 +1030,7 @@ To stop producing traces for a specific service, run the following commands and 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
 
    ```shell
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
@@ -1041,7 +1041,7 @@ To stop producing traces for a specific service, run the following commands and 
 
 {{% tab "Agent and app in separate containers" %}}
 
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
    ```shell
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false
    ```

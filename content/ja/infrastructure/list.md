@@ -12,7 +12,7 @@ further_reading:
 - link: /infrastructure/process/
   tag: ドキュメント
   text: ライブプロセスモニタリング
-kind: documentation
+
 title: インフラストラクチャーリスト
 ---
 
@@ -48,7 +48,7 @@ Load 15
 Apps
 : ホストのメトリクスをレポートする Datadog インテグレーション。
 
-Operating System 
+Operating System
 : 追跡対象のオペレーティングシステム
 
 Cloud Platform
@@ -93,7 +93,7 @@ Agent は、ホスト詳細パネルの `Agent Configuration` セクションに
 
 Agent 構成は、機密情報が取り除かれ、コンフィギュレーションファイルや環境変数を使って設定した構成のみが含まれます。構成の変更は 10 分ごとに更新されます。
 
-この機能は、Agent バージョン 7.47.0/6.47.0 以降でデフォルトで有効になっています。 
+この機能は、Agent バージョン 7.47.0/6.47.0 以降でデフォルトで有効になっています。
 
 
 この動作を変更するには、[Agent コンフィギュレーションファイル][6]の `inventories_configuration_enabled` の値を `true` に設定すると構成が送信され、`false` に設定すると無効になります。

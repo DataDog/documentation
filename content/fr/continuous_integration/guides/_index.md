@@ -5,7 +5,7 @@ cascade:
     rank: 20
     subcategory: Guides sur CI Visibility
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides sur CI Visibility
 ---

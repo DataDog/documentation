@@ -98,7 +98,7 @@ integration_id: rapdev-snmp-profiles
 integration_title: Profils SNMP
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -221,9 +221,9 @@ Vous trouverez ci-dessous la liste des périphériques actuellement pris en char
 ## Assistance
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez RapDev.io aux coordonnées suivantes :
 
- - E-mail : datadog-engineering@rapdev.io 
+ - E-mail : datadog-engineering@rapdev.io
  - Chat : [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - Téléphone : 855-857-0222 
+ - Téléphone : 855-857-0222
 
 ---
 Développé avec ❤️  à Boston

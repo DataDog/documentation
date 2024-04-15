@@ -22,7 +22,7 @@ integration_id: rum-react-native
 integration_title: React Native
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: rum_react_native
 public_title: React Native
@@ -103,7 +103,7 @@ React Native インテグレーションには、サービスのチェック機�
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

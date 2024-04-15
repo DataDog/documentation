@@ -2,7 +2,7 @@
 aliases:
 - /ja/agent/faq/upgrade-to-agent-v6
 - /ja/agent/guide/upgrade-to-agent-v6
-kind: documentation
+
 title: Datadog Agent v6 へのアップグレード
 ---
 

@@ -21,7 +21,7 @@ further_reading:
 - link: /agent/guide/docker-deprecation
   tag: Documentation
   text: Dépréciation du runtime Docker dans Kubernetes
-kind: documentation
+
 title: Kubernetes
 ---
 

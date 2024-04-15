@@ -1,6 +1,6 @@
 ---
 title: Set up Tracing on a GitLab Pipeline
-kind: documentation
+
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:

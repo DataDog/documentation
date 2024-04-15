@@ -32,7 +32,7 @@ integration_id: cisco-aci
 integration_title: CiscoACI
 integration_version: 2.2.1
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: cisco_aci
 public_title: CiscoACI
@@ -161,7 +161,7 @@ S'il vous manque des métriques `cisco_aci.tenant.*`, vous pouvez exécuter le s
 
 Remplacez les valeurs `apic_url`, `apic_username` et `apic_password` par celles de votre configuration, puis saisissez l'URL du locataire pour `apic_url`.
 
-Vérifiez que la sortie obtenue après avoir utilisé cURL sur l'endpoint correspond à l'une des métriques recueillies dans `datadog_checks/cisco_aci/aci_metrics.py`. Si aucune des statistiques ne correspond, cela signifie que l'endpoint ne génère pas de statistiques pouvant être recueillies par l'intégration. 
+Vérifiez que la sortie obtenue après avoir utilisé cURL sur l'endpoint correspond à l'une des métriques recueillies dans `datadog_checks/cisco_aci/aci_metrics.py`. Si aucune des statistiques ne correspond, cela signifie que l'endpoint ne génère pas de statistiques pouvant être recueillies par l'intégration.
 
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].

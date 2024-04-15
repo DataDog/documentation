@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Envoyer des événements AppDynamics dans Datadog
 ---
 

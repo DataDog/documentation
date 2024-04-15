@@ -1,7 +1,7 @@
 ---
 code_lang: java
 code_lang_weight: 0
-kind: documentation
+
 title: Java 互換性要件
 type: multi-code-lang
 ---
@@ -25,10 +25,10 @@ Java でサポートされるすべての ASM 機能を得るためのトレー�
 |タイプ           | Threat Detection のサポート |  OSS の脆弱性管理のサポート |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
+| Kubernetes    | {{< X >}}         | {{< X >}}                 |
 | AWS ECS       | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |   
+| AWS Lambda    | {{< X >}}         |                           |
 | Azure App Service | {{< X >}}     | {{< X >}}                 |
 
 **注**: Azure App Service は **Web アプリケーションでのみ**サポートされています。ASM は Azure Functions をサポートしていません。

@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/observability_pipelines/production_deployment_overview/aggregator_architecture
-kind: Documentation
+
 title: OPW アグリゲーターアーキテクチャのベストプラクティス
 ---
 

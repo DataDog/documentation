@@ -1,6 +1,6 @@
 ---
 title: Widget iframe
-kind: documentation
+
 description: Ajoutez un iframe à vos dashboards Datadog.
 aliases:
   - /fr/graphing/widgets/iframe/

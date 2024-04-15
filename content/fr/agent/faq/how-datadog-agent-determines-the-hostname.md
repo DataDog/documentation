@@ -3,7 +3,7 @@ aliases:
 - /fr/agent/faq/how-can-i-change-the-hostname/
 comments: <!–– Original flowchart is in lucidchart. Search Trello for link or ask
   Grant. ––>
-kind: faq
+
 title: Comment le hostname de l'Agent est-il déterminé par Datadog ?
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: Filtrer la liste des monitors à l'aide d'une recherche à facettes
-kind: documentation
+
 title: Rechercher des monitors
 ---
 
@@ -71,7 +71,7 @@ Les vues enregistrées vous permettent d'accéder rapidement à des vues prédé
 
 {{< img src="monitors/manage_monitor/overview.jpg" alt="Sélection de vues enregistrées" style="width:90%;" >}}
 
-Tous les membres de votre organisation peuvent accéder aux vues enregistrées. Techniquement, une vue enregistrée permet de surveiller :  
+Tous les membres de votre organisation peuvent accéder aux vues enregistrées. Techniquement, une vue enregistrée permet de surveiller :
 
 - La requête de recherche
 

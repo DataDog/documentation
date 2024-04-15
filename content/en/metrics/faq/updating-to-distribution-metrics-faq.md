@@ -1,6 +1,6 @@
 ---
 title: Update to Distribution Metrics Workflow FAQ
-kind: faq
+
 is_beta: true
 further_reading:
 - link: "/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers/"
@@ -12,7 +12,7 @@ further_reading:
 
 Datadog has released a new pipeline for calculating globally accurate percentiles for your distribution metrics --- this unlocks more query functionality and an easier configuration workflow for distributions.
 
-## How does this new pipeline for Distributions affect me? 
+## How does this new pipeline for Distributions affect me?
 
 - **Unlocks new query functionalities:**
   - Accurate percentiles in time for any historical timeframe (such as the past day, week, or month).
@@ -30,7 +30,7 @@ Datadog has released a new pipeline for calculating globally accurate percentile
 | Distribution with percentile aggregations | Queryable by `count`, `sum`, `min`, `max`, `p50`,  `p75`,  `p90`, `p95`, and `p99`. | 10 for each tag value combination emitted in your data |
 
 
-## How can I configure tags on my Distribution metric? 
+## How can I configure tags on my Distribution metric?
 
 {{< img src="metrics/faq/sketch-db-migration-faq/configure-tags.png" alt="Configure tags">}}
 
@@ -38,7 +38,7 @@ Click the **Manage Tags** button to configure which tags are queryable on a part
 
 {{< img src="metrics/faq/sketch-db-migration-faq/manage-tags.png" alt="Manage tags">}}
 
-## How can I add percentiles to my Distribution metric? 
+## How can I add percentiles to my Distribution metric?
 
 Click **Edit** and select **Include** to include percentile aggregations on the same queryable tags defined on your baseline distribution.
 

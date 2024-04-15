@@ -1,6 +1,6 @@
 ---
 title: Events with DogStatsD
-kind: guide
+
 description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
 - /developers/events/dogstatsd/
@@ -125,25 +125,25 @@ public class DogStatsdClient {
 
 {{< programming-lang lang=".NET" >}}
 ```csharp
-using StatsdClient;	
+using StatsdClient;
 
-public class DogStatsdClient	
-{	
-    public static void Main()	
-    {	
-        var dogstatsdConfig = new StatsdConfig	
-        {	
-            StatsdServerName = "127.0.0.1",	
-            StatsdPort = 8125,	
-        };	
+public class DogStatsdClient
+{
+    public static void Main()
+    {
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
 
-        using (var dogStatsdService = new DogStatsdService())	
-        {	
+        using (var dogStatsdService = new DogStatsdService())
+        {
             if (!dogStatsdService.Configure(dogstatsdConfig))
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
-            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" });	
-        }	
-    }	
+            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" });
+        }
+    }
 }
 ```
 {{< /programming-lang >}}

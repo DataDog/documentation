@@ -1,6 +1,6 @@
 ---
 title: "NAT Gateway Component"
-kind: documentation
+
 ---
 ## Overview
 

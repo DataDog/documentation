@@ -1,6 +1,6 @@
 ---
 title: Jenkins
-kind: documentation
+
 description: Configure your Jenkins instance to run Continuous Testing tests in your CI/CD pipelines.
 aliases:
   - /synthetics/cicd_integrations/jenkins

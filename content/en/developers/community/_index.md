@@ -1,6 +1,6 @@
 ---
 title: Community
-kind: documentation
+
 aliases:
    - /developers/office_hours/
    - /developers/community/office_hours/

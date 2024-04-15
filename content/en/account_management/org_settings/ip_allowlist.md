@@ -1,6 +1,6 @@
 ---
 title: IP Allowlist
-kind: documentation
+
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}
@@ -13,7 +13,7 @@ The IP allowlist feature is available for customers on an enterprise plan only. 
 
 The IP allowlist controls which networks can be used to access your data in Datadog. By limiting allowed networks, you can protect your resources from data exfiltration and insider threats.
 
-When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowlist can access the Datadog API and UI. 
+When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowlist can access the Datadog API and UI.
 
 ### Blocked and allowed resources
 
@@ -71,22 +71,22 @@ To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
 {{< img src="account_management/org_settings/add_ip.png" alt="Screenshot showing a dialog box titled Add IP to allowlist" >}}
 
-1. Click the **Add IP** button at the top right of the page. 
+1. Click the **Add IP** button at the top right of the page.
 1. Enter a valid IP address or CIDR range.
 1. Optionally, add a note, for example, to remind yourself why you are allowing access to certain addresses.
 1. Click **Confirm**.
 
 ### Edit IP addresses or CIDR ranges
 
-1. In the IP allowlist table, hover over the row you wish to edit. 
-1. Click the pencil (**Edit**) icon. 
+1. In the IP allowlist table, hover over the row you wish to edit.
+1. Click the pencil (**Edit**) icon.
 1. Change the descriptive **Note** text.
 1. Click **Confirm**.
 
 ### Delete IP addresses or CIDR ranges
 
-1. In the IP allowlist table, hover over the row you wish to delete. 
-1. Click the trash can (**Delete**) icon and confirm you want to delete it. 
+1. In the IP allowlist table, hover over the row you wish to delete.
+1. Click the trash can (**Delete**) icon and confirm you want to delete it.
 
 ## Managing the IP allowlist programmatically
 

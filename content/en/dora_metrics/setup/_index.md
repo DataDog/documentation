@@ -1,6 +1,6 @@
 ---
 title: Set up DORA Metrics
-kind: documentation
+
 aliases:
 - /continuous_integration/dora_metrics/setup/
 ---

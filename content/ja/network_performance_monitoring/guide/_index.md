@@ -1,6 +1,6 @@
 ---
 title: ネットワークパフォーマンスモニタリングガイド
-kind: guide
+
 private: true
 cascade:
     algolia:

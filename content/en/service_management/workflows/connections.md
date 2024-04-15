@@ -1,6 +1,6 @@
 ---
 title: Connections
-kind: documentation
+
 description: Workflow connections
 further_reading:
 - link: "/getting_started/workflow_automation/"

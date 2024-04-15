@@ -2,7 +2,7 @@
 aliases:
 - /fr/account_management/billing/advanced_usage_reporting/
 - /fr/account_management/billing/custom_usage_reporitng/
-kind: documentation
+
 title: Attribution de l'utilisation
 ---
 
@@ -17,7 +17,7 @@ Les administrateurs peuvent accéder à l'onglet Usage Attribution à partir de 
 - Consulter la répartition de l'utilisation en fonction des différentes clés de tag et ajouter ou modifier de nouvelles clés (jusqu'à trois clés de tag)
 - Créer des fichiers `.tsv` (valeurs séparées par des tabulations) quotidiens pour la plupart des types d'utilisation
 - Consulter un résumé de l'utilisation à la fin de chaque mois
-- Visualiser des données dans l'IU et les télécharger au format `.tsv`. 
+- Visualiser des données dans l'IU et les télécharger au format `.tsv`.
 
 **Remarque** : les types de ressources suivants ne sont pas pris en charge par cet outil.
 
@@ -32,7 +32,7 @@ Les administrateurs peuvent accéder à l'onglet Usage Attribution à partir de 
 
 ### Prise en main
 
-Pour commencer à recevoir des données quotidiennes, un administrateur doit créer un rapport depuis l'interface utilisateur. 
+Pour commencer à recevoir des données quotidiennes, un administrateur doit créer un rapport depuis l'interface utilisateur.
 
 {{< img src="account_management/billing/advanced-usage-reporting-01.png" alt="Prise en main" >}}
 
@@ -46,7 +46,7 @@ La section **Applied Tags** vous permet d'effectuer plusieurs opérations :
 - Une fois les tags configurés, vous devez attendre 24 heures pour que le premier rapport soit généré.
 - Les rapports sont régulièrement générés.
 - Si vous modifiez des tags, le nouveau rapport tient compte de vos changements. Cependant, les rapports précédents conservent les anciens tags.
-- Les rapports mensuels englobent l'ensemble de tags le plus récent. Si vous modifiez les tags au milieu du mois, les pourcentages d'utilisation risquent de ne pas correspondre. 
+- Les rapports mensuels englobent l'ensemble de tags le plus récent. Si vous modifiez les tags au milieu du mois, les pourcentages d'utilisation risquent de ne pas correspondre.
 
 ### Attribution de l'utilisation mensuelle
 
@@ -57,7 +57,7 @@ Dès que la création de rapports est lancée, ces derniers sont mis à jour quo
 - Cliquez sur une clé de tag pour afficher ses données dans le tableau.
 - Si vous avez activé les comptes multi-org, l'utilisation est résumée pour toutes les organisations Datadog du compte parent.
 - Utilisez le sélecteur d'intervalle pour accéder aux rapports des mois précédents.
-- Les rapports mensuels ne sont générés qu'à la fin du mois. Chaque rapport mensuel est disponible le deuxième jour du mois suivant. 
+- Les rapports mensuels ne sont générés qu'à la fin du mois. Chaque rapport mensuel est disponible le deuxième jour du mois suivant.
 - Utilisez l'option Export Current View pour télécharger des rapports. Les rapports `.tsv` incluent les valeurs et pourcentages d'utilisation, afin de simplifier l'attribution des ressources et la rétrofacturation.
 
 Les données mensuelles peuvent également être récupérées à l'aide de l'API publique de l'outil. Consultez la [documentation sur l'endpoint d'API][1] pour en savoir plus.

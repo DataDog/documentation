@@ -1,6 +1,6 @@
 ---
 title: Build Apps
-kind: documentation
+
 aliases:
 - /app_builder/build
 disable_toc: false

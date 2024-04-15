@@ -17,7 +17,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: Blog
   text: Surveiller vos applications Web Linux sur Azure App Service avec Datadog
-kind: documentation
+
 title: DogStatsD
 ---
 
@@ -169,7 +169,7 @@ Grâce à ce manifeste, un pod exécutant votre application peut transmettre des
 
 La détection de l'origine est prise en charge par l'Agent 6.10.0 et les versions ultérieures. Elle permet à DogStatsD de détecter la provenance des métriques de conteneur et de taguer automatiquement les métriques. Lorsque ce mode est activé, toutes les métriques transmises via UDP reçoivent les mêmes tags de pod que les métriques Autodiscovery.
 
-**Remarques** : 
+**Remarques** :
 
 * La détection de l'origine via UDP utilise l'ID de pod en tant qu'ID d'entité. Les tags au niveau des conteneurs ne sont donc pas émis.
 * Comme alternative à UDP, vous pouvez utiliser des [sockets de domaine Unix][5].

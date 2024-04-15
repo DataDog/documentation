@@ -1,6 +1,6 @@
 ---
 title: "Données recueillies par la solution Database\_Monitoring"
-kind: documentation
+
 description: "Informations concernant les données recueillies par la solution Database\_Monitoring."
 further_reading: null
 ---

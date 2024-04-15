@@ -1,6 +1,6 @@
 ---
 title: Search Syntax
-kind: documentation
+
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -35,7 +35,7 @@ Use the search bar's autocomplete functionality to complete your queries with ex
 
 Searching on a facet value that contains special characters requires escaping or double quotes. The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` requires escaping with the `\` character.
 
-The same logic is applied to spaces within views facet names. Views facets should not contain spaces, but if they do, spaces must be escaped. 
+The same logic is applied to spaces within views facet names. Views facets should not contain spaces, but if they do, spaces must be escaped.
 
 For example, if a facet is named `user.first name`, perform a facet search by escaping the space: `@user.first\ name:myvalue`.
 

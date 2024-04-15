@@ -17,7 +17,7 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: 高度な使用方法
-kind: documentation
+
 title: PHP トレーシングライブラリの構成
 type: multi-code-lang
 ---
@@ -39,7 +39,7 @@ php-fpm を使用する Apache の場合、`www.conf` コンフィギュレー�
 ; DD_AGENT_HOST として PHP プロセスへ渡す例
 env[DD_AGENT_HOST] = $SOME_ENV
 ; 値 'my-app' を DD_SERVICE として PHP
-; プロセスへ渡す例 
+; プロセスへ渡す例
 env[DD_SERVICE] = my-app
 ; または同等の INI 設定を使用
 php_value datadog.service my-app```
@@ -66,7 +66,7 @@ NGINX の場合、php-fpm の `www.conf` ファイルの `env` ディレクテ�
 ; DD_AGENT_HOST として PHP プロセスへ渡す例
 env[DD_AGENT_HOST] = $SOME_ENV
 ; 値 'my-app' を DD_SERVICE として PHP
-; プロセスへ渡す例 
+; プロセスへ渡す例
 env[DD_SERVICE] = my-app
 ; または同等の INI 設定を使用
 php_value[datadog.service] = my-app
@@ -347,7 +347,7 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
-**デフォルト**: 
+**デフォルト**:
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
@@ -449,7 +449,7 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 自動正規化ではカバーされないシナリオには、次の 2 つのクラスがあります。
 
   - 正規化するパスフラグメントには再現可能なパターンがあり、URL の任意の部分で存在できます（上記の例では `id<number>`）。このシナリオは、次の `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` 設定でカバーされます。
-  - 何でもパスフラグメントになれますが、前のパスフラグメントは値が正規化されるべきことを示します。たとえば `/cities/new-york` は、`new-york` は都市名のため正規化する必要があることが分かります。このシナリオは以下の設定でカバーされます `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`、 `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`（それぞれ、受信リクエストと発信リクエスト）。 
+  - 何でもパスフラグメントになれますが、前のパスフラグメントは値が正規化されるべきことを示します。たとえば `/cities/new-york` は、`new-york` は都市名のため正規化する必要があることが分かります。このシナリオは以下の設定でカバーされます `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`、 `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`（それぞれ、受信リクエストと発信リクエスト）。
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 

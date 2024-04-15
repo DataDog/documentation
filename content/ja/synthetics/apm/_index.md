@@ -10,7 +10,7 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
-kind: documentation
+
 title: Synthetic APM
 ---
 
@@ -69,7 +69,7 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 `x-datadog-origin: synthetics`
 : API テストによって生成されたトレースが [APM クオータに影響しない](#how-are-apm-quotas-affected) ようにします。
 
-`x-datadog-origin: synthetics-browser` 
+`x-datadog-origin: synthetics-browser`
 : ブラウザテストによって生成されたトレースが [APM クオータに影響しない](#how-are-apm-quotas-affected) ようにします。
 
 `x-datadog-sampling-priority: 1`

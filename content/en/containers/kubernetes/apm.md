@@ -1,6 +1,6 @@
 ---
 title: Kubernetes APM - Trace Collection
-kind: documentation
+
 aliases:
     - /agent/kubernetes/apm
 further_reading:
@@ -74,7 +74,7 @@ To verify, ensure that `datadog.apm.socketEnabled` is set to `true` in your `val
 ```yaml
 datadog:
   apm:
-    socketEnabled: true    
+    socketEnabled: true
 ```
 
 The default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values.

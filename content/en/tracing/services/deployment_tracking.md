@@ -1,6 +1,6 @@
 ---
 title: Deployment  Tracking
-kind: documentation
+
 description: 'Use Datadog to track your deployments through version tags'
 aliases:
     - /tracing/version_tracking
@@ -40,7 +40,7 @@ Requests and Errors widgets can both be exported to dashboards and monitors.
 
 ## Using version tags for automatic faulty deployment detection
 
-Configuring your services with the `version` tag enables [Automatic Faulty Deployment Detection][4]. 
+Configuring your services with the `version` tag enables [Automatic Faulty Deployment Detection][4].
 
 You can set up a monitor to get automatically notified on all potentially faulty deployments. To do so, navigate to the New Monitors page and choose Events, and include `tags:deployment_analysis` in the search query defining the monitor.
 
@@ -188,7 +188,7 @@ You can search for profiles that correspond to a particular version. You can als
 
 ## The time between deployments metric
 
-Every time a new deployment of a service is detected, Deployment Tracking calculates a value for the `time_between_deployments` metric, calculated as the duration in seconds between the new deployment and the deployment of the most recent version prior to that. 
+Every time a new deployment of a service is detected, Deployment Tracking calculates a value for the `time_between_deployments` metric, calculated as the duration in seconds between the new deployment and the deployment of the most recent version prior to that.
 
 ### Metric definition
 
@@ -212,7 +212,7 @@ Time between deployments
 : `datadog.service.time_between_deployments{env: prod, cluster_name: dev-shopist} = 10`
 
 
-If you deploy version X at time = 20 on cluster `dev-shopist`, version Y at time = 30 on cluster `us-staging`, and version Y again at time = 45 on cluster `dev-shopist`, the `max` value of the metric `datadog.service.time_between_deployments` for any cluster is 25 (the time of the most recent Y minus the last X): 
+If you deploy version X at time = 20 on cluster `dev-shopist`, version Y at time = 30 on cluster `us-staging`, and version Y again at time = 45 on cluster `dev-shopist`, the `max` value of the metric `datadog.service.time_between_deployments` for any cluster is 25 (the time of the most recent Y minus the last X):
 
 Time = 20
 : `{service: foo, env: staging, cluster-name: dev-shopist, version: X}`

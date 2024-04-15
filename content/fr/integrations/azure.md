@@ -46,7 +46,7 @@ integration_id: azure
 integration_title: Microsoft Azure
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 monitors:
   '[Azure] Integration Errors': assets/monitors/integration_errors.json
@@ -61,7 +61,7 @@ version: '1.0'
 
 L'intégration Azure de Datadog permet de recueillir des métriques et des logs à partir de votre environnement Azure. Les options de configuration disponibles varient selon le site Datadog que votre organisation utilise :
 
-**Tous les sites** : tous les sites Datadog peuvent utiliser le processus d'inscription d'application afin de mettre en place la collecte des métriques. Ils peuvent également tous configurer un Event Hub de façon à envoyer les logs de la plateforme Azure.  
+**Tous les sites** : tous les sites Datadog peuvent utiliser le processus d'inscription d'application afin de mettre en place la collecte des métriques. Ils peuvent également tous configurer un Event Hub de façon à envoyer les logs de la plateforme Azure.
 **US3 :** si votre organisation utilise le site Datadog US3, vous pouvez tirer profit de l'intégration native Azure pour simplifier la gestion et la collecte des données de votre environnement Azure. Nous vous recommandons d'utiliser dès que possible cette méthode. Il vous suffit de configurer une ressource Datadog dans Azure afin d'associer vos abonnements Azure à votre organisation Datadog. Il n'est alors pas nécessaire d'utiliser le processus d'inscription d'application pour la collecte des métriques ni de configurer un Event Hub pour l'envoi des logs.
 
 {{< site-region region="us,eu,us5,gov" >}}
@@ -276,7 +276,7 @@ azure role assignment create --objectId <ID_OBJET> --roleName "Monitoring Reader
 ##### Créer l'inscription d'application
 
 1. Sous **Azure Active Directory**, accédez à **App Registrations** et cliquez sur **New application registration** :
-2. Saisissez les informations suivantes et cliquez sur le bouton **Create**. Le nom et l'URL de connexion ne sont pas utilisés et sont seulement requis dans le cadre du processus de configuration. 
+2. Saisissez les informations suivantes et cliquez sur le bouton **Create**. Le nom et l'URL de connexion ne sont pas utilisés et sont seulement requis dans le cadre du processus de configuration.
 
     - Name : `Datadog Auth`
     - Supported Account Types : `Accounts in this organizational directory only (Datadog)`
@@ -413,7 +413,7 @@ Vous pouvez également [afficher le contenu du script][2].
 
 {{< code-block lang="powershell" filename="Logs d'activité Étape 2" >}}
 
-./activity_logs_deploy.ps1 -ApiKey <clé_api> -SubscriptionId <id_abonnement> 
+./activity_logs_deploy.ps1 -ApiKey <clé_api> -SubscriptionId <id_abonnement>
 
 {{< /code-block >}}
 
@@ -438,7 +438,7 @@ Vous pouvez également [afficher le contenu du script][4].
 
 {{< code-block lang="powershell" filename="Logs de plateforme Étape 2" >}}
 
-./resource_deploy.ps1 -ApiKey <clé_api> -SubscriptionId <id_abonnement> 
+./resource_deploy.ps1 -ApiKey <clé_api> -SubscriptionId <id_abonnement>
 
 {{< /code-block >}}
 
@@ -519,7 +519,7 @@ Créez une application de fonctions ou utilisez une application de fonctions exi
 Ajoutez une nouvelle fonction à votre application de fonctions en utilisant le modèle de déclencheur Event Hub.
 
 1. Sélectionnez une application de fonctions nouvelle ou existante dans la liste des applications de fonctions.
-2. Sélectionnez **Functions** dans le menu de fonctions et cliquez sur **Create**. 
+2. Sélectionnez **Functions** dans le menu de fonctions et cliquez sur **Create**.
 3. Sélectionnez un [déclencheur Event Hub Azure][2] dans le menu de modèles.
 4. Sous **Event Hub connection**, sélectionnez votre espace de nommage et votre Event Hub.
 5. Cliquez sur **Create**.
@@ -529,15 +529,15 @@ Pointez votre déclencheur Event Hub vers Datadog.
 1. Sélectionnez votre nouveau déclencheur Event Hub dans la vue des fonctions.
 2. Cliquez sur **Code + Test** dans le menu latéral pour les développeurs.
 3. Ajoutez le [code de la fonction Datadog/Azure][4] à votre fichier index.js.
-4. Ajoutez votre clé d'API en créant une variable d'environnement `DD_API_KEY` dans l'onglet de configuration de votre application de fonctions, ou copiez-la dans le code de la fonction en remplaçant `<CLÉ_API_DATADOG>` à la ligne 22.  
+4. Ajoutez votre clé d'API en créant une variable d'environnement `DD_API_KEY` dans l'onglet de configuration de votre application de fonctions, ou copiez-la dans le code de la fonction en remplaçant `<CLÉ_API_DATADOG>` à la ligne 22.
 5. Si vous n'utilisez pas le site Datadog US1, définissez votre [site Datadog][5] avec une variable d'environnement `DD_SITE` dans l'onglet de configuration de votre application de fonctions, ou copiez le paramètre de site dans le code de la fonction à la ligne 23.
 6. Enregistrez la fonction.
-7. Cliquez sur **Integration**, puis sur **Azure Event Hubs** sous le déclencheur et vérifiez les paramètres suivants :  
-    a. Event Parameter Name doit être défini sur `eventHubMessages`.  
-    b. Event Hub Cardinality doit être défini sur `Many`.  
-    c. Event Hub Data Type doit être vide.  
+7. Cliquez sur **Integration**, puis sur **Azure Event Hubs** sous le déclencheur et vérifiez les paramètres suivants :
+    a. Event Parameter Name doit être défini sur `eventHubMessages`.
+    b. Event Hub Cardinality doit être défini sur `Many`.
+    c. Event Hub Data Type doit être vide.
 8. Cliquez sur **Save**.
-9. Vérifiez que votre configuration est valide en exécutant la fonction et en recherchant le message de test dans le [Log Explorer de Datadog][6].  
+9. Vérifiez que votre configuration est valide en exécutant la fonction et en recherchant le message de test dans le [Log Explorer de Datadog][6].
 **Remarque** : l'événement de log de test doit être dans un format JSON valide.
 
 #### Logs d'activité
@@ -588,7 +588,7 @@ Pour recueillir des logs à partir de l'ensemble de vos Azure App Services, suiv
 Si vous n'avez jamais utilisé de fonction Azure, consultez l'article [Bien démarrer avec Azure Functions][7] pour découvrir comment créer votre première fonction.
 
 1. Dans le [portail Azure][2], accédez à la vue d'ensemble **Function Apps** et cliquez sur **Create**.
-2. Sélectionnez un abonnement, un groupe de ressources et une région, puis nommez vos applications de fonctions. 
+2. Sélectionnez un abonnement, un groupe de ressources et une région, puis nommez vos applications de fonctions.
 3. Définissez **Publish sur Code, Runtime stack sur Node.js et Version sur 16 LTS**.
 4. Sélectionnez le système d'exploitation **Windows** et un type de plan.
 5. Cliquez sur **Next:Hosting**.
@@ -919,7 +919,7 @@ Suivez les étapes ci-dessous pour configurer une application d'entreprise :
 
 L'archivage de logs dans Stockage Blob Azure nécessite une inscription d'application même si vous utilisez l'intégration native Azure. Pour archiver des logs dans Stockage Blob Azure, choisissez `US` dans le menu `site` disponible à droite de cette page de documentation et suivez les instructions pour configurer l'intégration à l'aide d'une inscription d'application. Il n'est pas nécessaire d'attribuer le rôle `Monitoring Reader` aux inscriptions d'application créées à des fins d'archivage.
 
-Après avoir configuré une inscription d'application, vous pouvez [créer une archive de logs][48] à enregistrer dans Stockage Blob Azure. 
+Après avoir configuré une inscription d'application, vous pouvez [créer une archive de logs][48] à enregistrer dans Stockage Blob Azure.
 
 **Remarque** : si votre compartiment de stockage se trouve dans un abonnement surveillé via l'intégration native Azure, un avertissement indique dans le carré d'intégration Azure que l'inscription d'application est redondante. Vous pouvez ignorer cet avertissement.
 

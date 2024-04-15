@@ -1,6 +1,6 @@
 ---
 title: How to set up RBAC for Monitors
-kind: guide
+
 further_reading:
 - link: "/account_management/rbac/permissions/#monitors"
   tag: "Documentation"
@@ -84,7 +84,7 @@ curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
 }
 ```
 
-Use the [Create][2] or [Edit a monitor][3] API endpoint and the `restricted_roles` parameter to restrict monitor editing to a specific set of roles and to the monitor's creator. 
+Use the [Create][2] or [Edit a monitor][3] API endpoint and the `restricted_roles` parameter to restrict monitor editing to a specific set of roles and to the monitor's creator.
 
 **Note:** You can specify one or multiple role UUIDs. Setting `restricted_roles` to `null` allows monitor editing for all users with [Monitor Write permissions][4].
 
@@ -124,7 +124,7 @@ For more information, see [Roles][5] and [Monitors API Reference][6] .
 
 ## Migrate monitors from locked to restricted roles
 
-Before Datadog released the feature allowing restriction of monitor editing to specific roles, monitors could be locked. Only the creator and users with the [Datadog Admin Role][2] can edit a locked monitor. 
+Before Datadog released the feature allowing restriction of monitor editing to specific roles, monitors could be locked. Only the creator and users with the [Datadog Admin Role][2] can edit a locked monitor.
 
 {{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC Locked Monitor" style="width:70%;">}}
 
@@ -140,7 +140,7 @@ For more information on how to update your monitors' definitions, see [Edit a mo
 
 ### UI
 
-All new monitors created from the UI use the `restricted_roles` parameter. 
+All new monitors created from the UI use the `restricted_roles` parameter.
 All monitors also display the role restriction option regardless of the underlying mechanism:
 
 {{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor" >}}
@@ -154,7 +154,7 @@ Below are some instructions to help you determine how to proceed in case you nee
 You are a user with the [Datadog Admin Role][2] or are the creator of the monitor. You edit a locked monitor and see the following warning:
 
 ```
-This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
+This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions.
 If there is no specific change you want to apply to this monitor's permissions, click Save. If you want to update this monitor's permissions, read this doc.
 ```
 
@@ -174,7 +174,7 @@ Save the monitor, causing Datadog to migrate it to restricted roles. Reopen the 
 **3. You want your monitor to be restricted to some roles, but not to all roles with Admin permissions**
 
 In the **Restrict editing of this monitor to** dropdown menu, select the roles that can modify this monitor. Save the monitor. Monitor is restricted only to the roles you selected.
-  
+
 #### Locked monitors (`locked:true`) edited by non creator or user without Datadog Admin Role
 
 You are a user without the [Datadog Admin Role][2] and are not the creator of the monitor. You edit a locked monitor and see the following warning:

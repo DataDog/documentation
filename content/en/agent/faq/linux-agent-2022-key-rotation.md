@@ -1,6 +1,6 @@
 ---
 title: 2022 Linux Agent Key Rotation
-kind: guide
+
 private: true
 aliases:
   - /agent/guide/linux-agent-2022-key-rotation

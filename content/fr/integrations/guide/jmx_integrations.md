@@ -4,7 +4,7 @@ further_reading:
   tag: Documentation
   text: Réduire les risques d'exécution de code à distance via la faille de sécurité
     Log4Shell
-kind: guide
+
 title: Quelles intégrations utilisent Jmxfetch ?
 ---
 

@@ -19,7 +19,7 @@ integration_id: ''
 integration_title: ServiceNow
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: servicenow
 public_title: Intégration Datadog/ServiceNow
@@ -56,7 +56,7 @@ Types d'éléments de configuration pris en charge :
 * Serveur
 * Amazon RDS
 
-Les remarques ci-dessous s'appliquent uniquement si vous avez déjà configuré l'intégration pour ServiceNow ITOM/ITSM : 
+Les remarques ci-dessous s'appliquent uniquement si vous avez déjà configuré l'intégration pour ServiceNow ITOM/ITSM :
 
 * Le Service Graph Connector n'utilise pas les valeurs `Target table` et `Custom table` provenant du carré de configuration. Vous pouvez enregistrer l'intégration avec les valeurs Target table par défaut.
 * Le même utilisateur ITOM/ITSM peut être utilisé pour le Service Graph Connector en accordant à cet utilisateur le rôle cmdb_import_api_admin, comme décrit dans les instructions de configuration du Service Graph Connector.
@@ -211,7 +211,7 @@ answer = (function transformEntry(source)
     var additional_info = JSON.parse(source.additional_info);
     return additional_info.custom_my_field;
 })(source);
-``` 
+```
 
 ### Définir plusieurs mappages
 

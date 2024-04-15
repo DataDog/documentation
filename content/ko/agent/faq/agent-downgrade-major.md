@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ko/agent/faq/agent-downgrade
-kind: faq
+
 title: 에이전트를 이전 주 버전으로 다운그레이드
 ---
 
@@ -174,7 +174,7 @@ DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 {{% /tab %}}
 {{% tab "윈도우즈(Windows)" %}}
 
-최신 5.x 버전의 에이전트 설치 관리자 패키지를 실행하면 
+최신 5.x 버전의 에이전트 설치 관리자 패키지를 실행하면
 [Datadog 에이전트 통합 페이지][1]에서 지침을 확인할 수 있습니다.
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows

@@ -3,7 +3,7 @@ aliases:
 - /ja/libraries/
 - /ja/developers/faq/monitoring-akka/
 - /ja/developers/libraries/
-kind: documentation
+
 title: ライブラリ
 ---
 

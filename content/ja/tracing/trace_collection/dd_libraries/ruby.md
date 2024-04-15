@@ -11,7 +11,7 @@ code_lang: ruby
 code_lang_weight: 15
 dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md
-kind: documentation
+
 title: Ruby アプリケーションのトレース
 type: multi-code-lang
 ---
@@ -696,14 +696,14 @@ Datadog.configure do |c|
   # ActiveRecord で Rails を使用している場合にのみ使用できます。
   c.tracing.instrument :active_record, describes: :secondary_database, service_name: 'secondary-db'
 
-  # 構成パターンをブロック。 
+  # 構成パターンをブロック。
   c.tracing.instrument :active_record, describes: :secondary_database do |second_db|
     second_db.service_name = 'secondary-db'
   end
 
   # 次の接続設定の接続文字列:
   # adapter、username、host、port、database
-  # 他のフィールドは無視。  
+  # 他のフィールドは無視。
   c.tracing.instrument :active_record, describes: 'mysql2://root@127.0.0.1:3306/mysql', service_name: 'secondary-db'
 
   # 次の接続設定のハッシュ
@@ -738,7 +738,7 @@ Datadog.configure do |c|
   #
   # `describe` 構成に複数の一致がある場合、最新のものを適用。
   # この場合、アダプター `mysql` とデータベース `reports` の両方の接続は
-  # `service_name: 'mysql-db'` ではなく `service_name: 'reports-db'` と構成。 
+  # `service_name: 'mysql-db'` ではなく `service_name: 'reports-db'` と構成。
   c.tracing.instrument :active_record, describes: { adapter: 'mysql2', database:  'reports'}, service_name: 'reports-db'
 end
 ```

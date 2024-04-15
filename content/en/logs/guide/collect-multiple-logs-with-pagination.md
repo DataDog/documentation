@@ -1,6 +1,6 @@
 ---
 title: Collect multiple logs with Pagination
-kind: guide
+
 further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
@@ -105,15 +105,15 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
-                  "limit":50   
+                  "limit":50
         }
 }'
 ```
@@ -138,7 +138,7 @@ Example result:
   }
 }
 ```
-The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. 
+The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`.
 
 To see next page of your logs, continue to resend your query but include the `cursor` parameter where it takes the `after` value from the previous call. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
 
@@ -148,16 +148,16 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
                   "cursor": "eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0",
-                  "limit": 50   
+                  "limit": 50
         }
 }'
 ```

@@ -1,6 +1,6 @@
 ---
 title: Deployment Design and Principles
-kind: Documentation
+
 ---
 
 {{< site-region region="gov" >}}
@@ -9,7 +9,7 @@ kind: Documentation
 
 ## Overview
 
-When you start deploying Observability Pipelines Worker into your infrastructure, you may run into questions such as: 
+When you start deploying Observability Pipelines Worker into your infrastructure, you may run into questions such as:
 
 - Where should the Observability Pipelines Worker be deployed within the network?
 - How should the data be collected?
@@ -55,7 +55,7 @@ Your pipeline begins with data collection. Your services and systems generate da
 
 ### Choosing agents
 
-You should choose the agent that optimizes your engineering team's ability to monitor their systems. Therefore, integrate Observability Pipelines Worker with the best agent for the job and deploy the Observability Pipelines Worker on separate nodes as an aggregator. 
+You should choose the agent that optimizes your engineering team's ability to monitor their systems. Therefore, integrate Observability Pipelines Worker with the best agent for the job and deploy the Observability Pipelines Worker on separate nodes as an aggregator.
 
 For example, Datadog [Network Performance Monitoring][4] integrates the Datadog Agent with vendor-specific systems and produces vendor-specific data. Therefore, the Datadog Agent should collect the data and send it directly to Datadog, since the data is not a supported data type in the Observability Pipelines Worker.
 
@@ -77,7 +77,7 @@ You can use Observability Pipelines Worker to process data[*](#support). However
 
 #### Remote processing
 
-For remote processing, the Observability Pipelines Worker can be deployed on separate nodes as an aggregator. 
+For remote processing, the Observability Pipelines Worker can be deployed on separate nodes as an aggregator.
 
 {{< img src="observability_pipelines/production_deployment_overview/aggregator_role.png" alt="A diagram showing an Observability Pipelines Worker aggregator containing multiple Workers that are receiving data from the network load balancer and sending data to different sinks" style="width:100%;" >}}
 
@@ -87,7 +87,7 @@ See [Aggregator Architecture][5] for more details.
 
 ## Buffering data
 
-Where and how you buffer your data can also affect the efficiency of your pipeline. 
+Where and how you buffer your data can also affect the efficiency of your pipeline.
 
 ### Choosing where to buffer data
 

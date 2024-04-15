@@ -8,13 +8,13 @@ further_reading:
 - link: /logs/log_collection/javascript/
   tag: Documentation
   text: Découvrir comment utiliser le SDK Browser Datadog pour les logs
-kind: documentation
+
 title: Surveillance Browser avec RUM
 ---
 
 ## Présentation
 
-La solution Real User Monitoring (RUM) de Datadog vous permet de visualiser et d'analyser les performances en temps réel et les parcours des utilisateurs de votre application. Pour recueillir des événements, ajoutez le SDK Browser RUM à votre application Browser et définissez des paramètres d'initialisation pour configurer les données recueillies. 
+La solution Real User Monitoring (RUM) de Datadog vous permet de visualiser et d'analyser les performances en temps réel et les parcours des utilisateurs de votre application. Pour recueillir des événements, ajoutez le SDK Browser RUM à votre application Browser et définissez des paramètres d'initialisation pour configurer les données recueillies.
 
 ## Implémentation
 

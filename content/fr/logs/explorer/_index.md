@@ -21,7 +21,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
   tag: Blog
   text: Envoyer des logs de flux Amazon VPS à Amazon Kinesis Data Firehose et Datadog
-kind: documentation
+
 title: Log Explorer
 ---
 
@@ -41,13 +41,13 @@ Accédez au [**Log Explorer**][1] pour débuter vos diagnostics et plonger au c�
 
 ## Analyser
 
-**Regroupez** vos logs interrogés au sein d'entités de plus haut niveau, telles que des champs, patterns et transactions, afin de déduire ou de consolider des informations. 
+**Regroupez** vos logs interrogés au sein d'entités de plus haut niveau, telles que des champs, patterns et transactions, afin de déduire ou de consolider des informations.
 
 Pour commencer à identifier des patterns et à agréger les logs par sous-ensembles d'événements, consultez la section [Analyse de logs][6].
 
 ## Visualiser les données
 
-**Visualisez** les résultats de vos filtres et agrégations pour mieux comprendre vos logs et obtenir des informations clés. Vous pouvez par exemple consulter vos logs sous forme de liste afin d'organiser les données dans des colonnes, ou sous forme de graphique de série temporelle pour mesurer l'évolution de vos données. 
+**Visualisez** les résultats de vos filtres et agrégations pour mieux comprendre vos logs et obtenir des informations clés. Vous pouvez par exemple consulter vos logs sous forme de liste afin d'organiser les données dans des colonnes, ou sous forme de graphique de série temporelle pour mesurer l'évolution de vos données.
 
 Pour commencer à visualiser vos données de log dans le Log Explorer, consultez la section [Visualisations de log][7].
 

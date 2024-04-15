@@ -1,6 +1,6 @@
 ---
 title: Java Compatibility Requirements
-kind: documentation
+
 description: 'Compatibility Requirements for the Java tracer'
 code_lang: java
 type: multi-code-lang
@@ -370,10 +370,10 @@ Older native-image buildpack versions expose the following option: `USE_NATIVE_I
 When this option is `false`, exceptions like the following can occur:
 
 ```text
-Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError: 
-com.oracle.graal.pointsto.constraints.UnsupportedFeatureException: 
-No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap 
-as this class should be initialized at image runtime. To see how this object got 
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError:
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException:
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap
+as this class should be initialized at image runtime. To see how this object got
 instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
 ```
 

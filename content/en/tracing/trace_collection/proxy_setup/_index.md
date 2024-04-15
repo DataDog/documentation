@@ -1,6 +1,6 @@
 ---
 title: Tracing a Proxy
-kind: documentation
+
 further_reading:
 - link: "/tracing/glossary/"
   tag: "Use the APM UI"

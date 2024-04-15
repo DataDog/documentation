@@ -1,6 +1,6 @@
 ---
 title: Visualize
-kind: documentation
+
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -20,7 +20,7 @@ Lists are paginated results of events and are ideal when individual results matt
 The information you search for is displayed in columns. You can manage the following:
 
 - The table with available interactions on the first row. You can sort, rearrange, and remove columns.
-- The facet panel on the left or the RUM [event side panel][2] on the right. You can add a column for a field. 
+- The facet panel on the left or the RUM [event side panel][2] on the right. You can add a column for a field.
 
 By default, RUM events in the list visualization are organized by timestamp, with the most recent events listed first. You can sort events in any way you want, such as with facets. Surface RUM events with the lowest or highest value for a measure first, then sort your events lexicographically for the unique value of a facet. This orders a column according to the facet.
 
@@ -30,9 +30,9 @@ The RUM events table configuration is stored with additional elements of your tr
 
 ### List widget
 
-The [List Widget on dashboards][8] shows individual events for a given data source, including RUM data. You can use the list widget to view any RUM events on a dashboard, like all errors on a particular page for example. 
+The [List Widget on dashboards][8] shows individual events for a given data source, including RUM data. You can use the list widget to view any RUM events on a dashboard, like all errors on a particular page for example.
 
-In addition to dashboards, the list widget can be used in Notebooks as well, allowing you to add RUM events as part of reports and investigations. 
+In addition to dashboards, the list widget can be used in Notebooks as well, allowing you to add RUM events as part of reports and investigations.
 
 ## Timeseries
 
@@ -70,11 +70,11 @@ Visualize the top values from up to three [facets][5] according to your chosen [
 
 ## Distributions
 
-You can display the distribution of measure attributes over the selected time frame to see the values fluctuate. 
+You can display the distribution of measure attributes over the selected time frame to see the values fluctuate.
 
 {{< img src="real_user_monitoring/explorer/visualize/distribution-2.png" alt="Distribution graph in the RUM Explorer" style="width:90%;">}}
 
-The distribution graph displays the distribution of the Largest Contentful Paint that measures the user experience of the Shopist landing page. 
+The distribution graph displays the distribution of the Largest Contentful Paint that measures the user experience of the Shopist landing page.
 
 ## Geomaps
 
@@ -107,7 +107,7 @@ For all visualizations besides the [funnel](#funnels), select a section of the g
 
 For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
 
-For the remaining visualization options, click on the graph and click **View events** to see a list of events that correspond to your selection. 
+For the remaining visualization options, click on the graph and click **View events** to see a list of events that correspond to your selection.
 
 ## Further Reading
 

@@ -12,7 +12,7 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-kind: documentation
+
 title: プロセッサー
 ---
 
@@ -677,7 +677,7 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 
   * オプションとして、マッピングテーブルで値が見つからない場合は、リファレンステーブルの値でターゲット属性を作成します。[Reference Table][101] の値は、**Reference Table** タブで選択できます。
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー" 
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー"
     style="width:80%;">}}
 
 

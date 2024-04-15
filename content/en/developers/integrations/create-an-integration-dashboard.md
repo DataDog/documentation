@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Create an Integration Dashboard
 description: Learn how to create an integration dashboard.
 further_reading:
@@ -19,7 +19,7 @@ To create a Datadog integration, see [Create an Agent Integration][2].
 
 ### Create a dashboard
 
-In Datadog, navigate to [**Dashboards** > **Dashboard List**][12] and click **+ New Dashboard**. 
+In Datadog, navigate to [**Dashboards** > **Dashboard List**][12] and click **+ New Dashboard**.
 
 {{< img src="dashboards/create_dashboard.png" alt="Create a dashboard for your integration" width="80%">}}
 
@@ -46,7 +46,7 @@ Save this file to your integration's `assets/dashboards` folder. Add the asset t
 - Ensure you have installed the [Datadog Agent Integration Developer tool][103] (`ddev`).
 - Ensure you have set an `api_key` and `app_key` for the organization that contains your dashboard in the [`ddev` configuration file][101].
 
-Run the [`ddev meta dash export` command][102] with the `--extras` or `-e` flag to export the dashboard definition: 
+Run the [`ddev meta dash export` command][102] with the `--extras` or `-e` flag to export the dashboard definition:
 
 ```shell
 ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
@@ -54,7 +54,7 @@ ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
 
 Name the file according to your dashboard title.
 
-This command adds the dashboard definition to your integration's `manifest.json` file. You can find the dashboard JSON file in your integration's `assets/dashboards` folder. 
+This command adds the dashboard definition to your integration's `manifest.json` file. You can find the dashboard JSON file in your integration's `assets/dashboards` folder.
 
 **Note:** The dashboard is available at the following address `/dash/integration/<DASHBOARD_KEY>` in each region. The `<DASHBOARD_KEY>` matches what is in your dashboard's `manifest.json` file. You can swap this value when you want to add a link to another dashboard inside your dashboard.
 
@@ -112,7 +112,7 @@ An integration dashboard should adhere to the following visual style guidelines:
    {{% tab "1280 pixels" %}}
 
    {{< img src="developers/create-an-integration-dashboard/qa-widths.png" alt="An example of a dashboard at 1280 pixels" width="80%">}}
-   
+
    {{% /tab %}}
    {{% tab "2560 pixels" %}}
 
@@ -124,7 +124,7 @@ An integration dashboard should adhere to the following visual style guidelines:
 ### Widgets and grouping
 
 -  Research the metrics supported by the integration and consider grouping them in relevant categories. Important metrics that are key to the performance and the overview of the integration should be at the top.
-   
+
    Go from macro to micro levels within the system
    : For a database integration's dashboard, for example, you can group node metrics in one group, index metrics in the next group, and shard metrics in the third group.
 
@@ -141,18 +141,18 @@ An integration dashboard should adhere to the following visual style guidelines:
 -  Timeseries widgets should be at least four columns wide in order not to appear squashed on smaller displays.
 
 -  Stream widgets should be at least six columns wide, or half the dashboard width, for readability. Place them at the end of a dashboard so they don't trap scrolling. It's useful to put stream widgets in a group by themselves so they can be collapsed. Add an event stream only if the service monitored by the dashboard is reporting events. Use `sources:service_name`.
-   
+
    {{< img src="developers/create-an-integration-dashboard/stream-widgets.png" alt="An example of a stream widget in a dashboard" width="100%">}}
 
 -  Try using a mix of widget types and sizes. Explore visualizations and formatting options until you're confident your dashboard is as clear as it can be. Sometimes a whole dashboard of timeseries is okay, but other times variety can improve legibility. The most commonly used metric widgets are [timeseries][4], [query values][5], and [tables][6]. Ensure query value widgets have a timeseries background (for example, "bars") instead of being blank. For more information on the available widget types, see the [list of supported dashboard widgets][7].
 
 -  Try to make the left and right halves of your dashboard symmetrical in high density mode. Users with large monitors see your dashboard in high density mode by default, so it's important that group relationships make sense, and that the dashboard looks good. You can adjust group heights to achieve this, and move groups between the left and right halves.
-    
+
    {{< tabs >}}
    {{% tab "Perfectly symmetrical" %}}
 
    {{< img src="developers/create-an-integration-dashboard/symmetrical-dashboard.png" alt="An example of a symmetrical dashboard" width="100%">}}
-   
+
    {{% /tab %}}
    {{% tab "Close enough" %}}
 
@@ -161,14 +161,14 @@ An integration dashboard should adhere to the following visual style guidelines:
    {{% /tab %}}
    {{< /tabs >}}
 
--  [Template variables][8] allow you to dynamically filter one or more widgets in a dashboard. Template variables must be universal, customized based on the type on integration technology, and accessible by any user or account using the monitored service. 
+-  [Template variables][8] allow you to dynamically filter one or more widgets in a dashboard. Template variables must be universal, customized based on the type on integration technology, and accessible by any user or account using the monitored service.
 
    | Type of integration technology | Typical template variable |
    | - | - |
    | Database | Shards |
    | Data Streaming | Consumer |
    | ML Model Serving | Model |
-   
+
    Ensure all relevant graphs are listening to the relevant template variable filters. **Note**: Adding `*=scope` as a template variable is useful as users can access all of their own tags.
 
 ### Copy
@@ -210,7 +210,7 @@ An integration dashboard should adhere to the following visual style guidelines:
     {{< img src="developers/create-an-integration-dashboard/well-named-legends.png" alt="An example of legends in a dashboard" width="100%">}}
 
 -  If you want users to compare two graphs side-by-side, make sure their x-axes align. If one graph is showing a legend and the other isn't, the x-axes won't align. Make sure they both show a legend or both do not.
-   
+
    {{< img src="developers/create-an-integration-dashboard/x-axes-alignment.png" alt="An example of misaligned x-axes in a dashboard" width="100%">}}
 
 -  For timeseries, base the display type on the type of metric.

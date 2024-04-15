@@ -1,5 +1,5 @@
 ---
-kind: Documentation
+
 title: Principes et méthodologie de déploiement
 ---
 
@@ -93,7 +93,7 @@ L'efficacité de votre pipeline dépend également de l'endroit où vous mettez 
 
 Les données doivent être mises en mémoire tampon juste avant d'atteindre vos destinations, et chaque destination doit posséder son propre buffer isolé afin de profiter des avantages suivants :
 
-1. Chaque destination peut configurer son buffer afin qu'il respecte les conditions du récepteur. Consultez la section [Choisir comment mettre les données en mémoire tampon](#choisir-comment-mettre-les-donnees-en-memoire-tampon) 
+1. Chaque destination peut configurer son buffer afin qu'il respecte les conditions du récepteur. Consultez la section [Choisir comment mettre les données en mémoire tampon](#choisir-comment-mettre-les-donnees-en-memoire-tampon)
 2. Isoler les buffers pour chaque destination permet d'éviter qu'une destination défectueuse interrompe l'ensemble du pipeline jusqu'à ce que le buffer atteigne la capacité configurée.
 
 Ce sont les raisons pour lesquelles le worker des pipelines d'observabilité associe les buffers à ses récepteurs.

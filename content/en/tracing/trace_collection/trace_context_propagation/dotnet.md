@@ -1,6 +1,6 @@
 ---
 title: Propagating .NET Trace Context
-kind: documentation
+
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 80
@@ -32,7 +32,7 @@ You can use the following environment variables to configure injection and extra
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. If multiple extraction styles are enabled, the extraction attempt is completed in the order of configured styles, and uses the first successful extracted value.
 
-**Notes**: 
+**Notes**:
 
 - Starting from version [2.22.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.22.0), the default injection style is `tracecontext, Datadog`, so the W3C Trace Context is used, followed by the Datadog headers. Prior to version 2.22.0, only the `Datadog` injection style is enabled.
 - Starting from version [2.42.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.42.0), when multiple extractors are specified, the `DD_TRACE_PROPAGATION_EXTRACT_FIRST=true` configuration specifies whether context extraction should exit immediately upon detecting the first valid `tracecontext`. The default value is `false`.

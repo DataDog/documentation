@@ -23,7 +23,7 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive sur l'amélioration des visualisations
     avec des dashboards
-kind: documentation
+
 title: Débuter avec les dashboards
 ---
 
@@ -61,7 +61,7 @@ Pour créer un dashboard, il est notamment possible de trouver un dashboard simi
 
 1. Dupliquez-le en ouvrant le dashboard et en sélectionnant **Clone dashboard** à partir du menu des paramètres (l'icône d'exportation sur le côté droit). Cette action crée une copie distincte du dashboard ; les modifications que vous apporterez au dashboard copié n'affecteront pas le widget source.
   {{< img src="/getting_started/dashboards/clone_dashboard.png" alt="Option de duplication d'un dashboard dans le menu déroulant" style="width:100%;" >}}
-2. Modifiez le doublon en l'ouvrant et en cliquant sur **Edit widgets**. 
+2. Modifiez le doublon en l'ouvrant et en cliquant sur **Edit widgets**.
 3. Supprimez les widgets dont vous n'avez pas besoin en sélectionnant **Delete** à partir du menu des paramètres du widget.
 4. Réorganisez les widgets selon vos besoins. Chaque widget ou groupe de widgets peut être déplacé vers un autre endroit du dashboard à l'aide d'un glisser-déposer.
 5. Copiez les widgets qui vous intéressent à partir d'autres dashboards en survolant le widget et en appuyant sur `Command + C` (`Ctrl + C` sur Windows). Collez-les dans votre dashboard en ouvrant le dashboard et en appuyant sur `Command + V` (`Ctrl + V` sur Windows).

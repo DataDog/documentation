@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Recueillir des logs Heroku
 ---
 
@@ -11,7 +11,7 @@ Heroku propose trois types de logs :
 * `System Logs` : messages concernant les actions prises par l'infrastructure de la plateforme Heroku au nom de votre application.
 * `API Logs` : actions d'administration effectuées par vous et par les autres développeurs travaillant sur votre application
 
-Les [drains HTTP/S de Heroku][1] mettent en mémoire tampon les messages de log et envoient ces messages par lots vers un endpoint HTTPS via une requête POST.  
+Les [drains HTTP/S de Heroku][1] mettent en mémoire tampon les messages de log et envoient ces messages par lots vers un endpoint HTTPS via une requête POST.
 Le corps POST comprend les messages au format Syslog, tramés selon la méthode de comptage d'octets du protocole TCP Syslog.
 L'API HTTP Datadog implémente et interprète le standard Logplex défini par l'en-tête de contenu `application/logplex-1`.
 

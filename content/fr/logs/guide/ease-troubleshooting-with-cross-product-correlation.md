@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Diagnostics simplifiés grâce à la mise en corrélation entre produits
 ---
 
@@ -29,7 +29,7 @@ Lorsque vos utilisateurs rencontrent des erreurs ou souffrent d'une latence éle
 
 La mise en corrélation de vos logs avec vos traces réduit la nécessité d'employer [des stratégies d'échantillonnage agressives, sans perdre la cohérence au niveau des entités][2], grâce à l'identifiant `trace_id`.
 
-La [mise en corrélation des logs d'application](correler-des-logs-d-application) vous permet de bénéficier d'une visibilité complète sur toute votre pile. Toutefois, dans certaines situations, il est nécessaire d'étendre la corrélation à d'autres ressources de votre pile. Cliquez sur les liens ci-dessous pour accéder à la configuration de votre choix, selon vos besoins : 
+La [mise en corrélation des logs d'application](correler-des-logs-d-application) vous permet de bénéficier d'une visibilité complète sur toute votre pile. Toutefois, dans certaines situations, il est nécessaire d'étendre la corrélation à d'autres ressources de votre pile. Cliquez sur les liens ci-dessous pour accéder à la configuration de votre choix, selon vos besoins :
 
 * [Corréler des logs de proxy](#correler-des-logs-de-proxy)
 * [Corréler des logs de base de données](#correler-des-logs-de-base-de-donnees)

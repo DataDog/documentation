@@ -17,7 +17,7 @@ integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: oracle_cloud_infrastructure
 public_title: Intégration Oracle Cloud Infrastructure/Datadog
@@ -53,7 +53,7 @@ Les instructions ci-dessous utilisent le portail OCI pour configurer l'intégrat
 2. Sélectionnez votre compartiment et cliquez sur **Create Log Group**. Un volet latéral s'ouvre alors.
 3. Attribuez le nom `data_log_group` au groupe de logs et, si vous le souhaitez, ajoutez une description et des tags.
 4. Cliquez sur **Create** pour configurer votre nouveau groupe de logs.
-5. Sous **Resources**, cliquez sur **Logs**.  
+5. Sous **Resources**, cliquez sur **Logs**.
 6. Cliquez sur **Create custom log** ou sur **Enable service log** selon vos besoins.
 7. Cliquez sur **Enable Log** pour créer un log OCI.
 

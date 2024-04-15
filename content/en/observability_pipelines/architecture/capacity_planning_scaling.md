@@ -1,6 +1,6 @@
 ---
 title: Capacity Planning and Scaling
-kind: Documentation
+
 ---
 
 {{< site-region region="gov" >}}
@@ -53,7 +53,7 @@ Client-side load balancing is not recommended. Client-side load balancing refers
 
 ##### Load balancer types
 
-Datadog recommends Layer 4 (L4) load balancers (network load balancers) since they support Observability Pipelines Worker's protocols (TCP, UDP, and HTTP). Even if you're exclusively sending HTTP traffic (Layer 7), Datadog recommends L4 load balancers for their performance and simplicity. 
+Datadog recommends Layer 4 (L4) load balancers (network load balancers) since they support Observability Pipelines Worker's protocols (TCP, UDP, and HTTP). Even if you're exclusively sending HTTP traffic (Layer 7), Datadog recommends L4 load balancers for their performance and simplicity.
 
 | Cloud Provider| Recommendation                                                |
 | ------------- | --------------------------------------------------------------|

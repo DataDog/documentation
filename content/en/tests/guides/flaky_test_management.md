@@ -1,6 +1,6 @@
 ---
 title: Flaky Test Management
-kind: guide
+
 aliases:
 - /continuous_integration/guides/find_flaky_tests/
 - /continuous_integration/guides/flaky_test_management/
@@ -10,7 +10,7 @@ further_reading:
   text: "Learn about Test Visibility"
 - link: "https://www.datadoghq.com/knowledge-center/flaky-tests/"
   tag: "Knowledge Center"
-  text: "Flaky Tests Overview" 
+  text: "Flaky Tests Overview"
 ---
 
 {{< site-region region="gov" >}}
@@ -23,7 +23,7 @@ A [flaky test][1] is a test that exhibit both a passing and failing status acros
 
 Flaky tests introduce risk and unpredictability into your CI system and end product. When people have to remember which tests are flaky, they lose trust in their test results, and a tremendous amount of time and resources are wasted on pipeline retries.
 
-For each branch, the list shows the number of new flaky tests introduced by the commit, the number of flaky commits, total test time, and the branch's latest commit details. 
+For each branch, the list shows the number of new flaky tests introduced by the commit, the number of flaky commits, total test time, and the branch's latest commit details.
 
 Use the following information to help prioritize flaky tests:
 

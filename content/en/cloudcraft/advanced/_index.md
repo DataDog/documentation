@@ -1,6 +1,6 @@
 ---
 title: Advanced
-kind: guide
+
 ---
 
 {{< whatsnext desc="General:" >}}

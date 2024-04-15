@@ -1,6 +1,6 @@
 ---
 title: Libraries
-kind: documentation
+
 aliases:
    - /libraries/
    - /developers/faq/monitoring-akka/

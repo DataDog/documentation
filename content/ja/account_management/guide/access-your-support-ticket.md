@@ -2,7 +2,7 @@
 aliases:
 - /ja/developers/faq/access-your-support-ticket
 - /ja/account_management/faq/access-your-support-ticket
-kind: documentation
+
 title: サポートチケットにアクセスする
 ---
 

@@ -9,7 +9,7 @@ dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md']
 integration_title: AWS CloudHSM
 is_public: true
-kind: integration
+
 name: amazon_cloudhsm
 public_title: Datadog-AWS Cloudhsm Integration
 short_description: Gather your HSM audit logs in your Datadog organization.
@@ -33,7 +33,7 @@ Audit logs are enabled by default for CloudHSM.
 #### Send your logs to Datadog
 
 1. If you haven't already, set up the [Datadog Forwarder Lambda function][1] in your AWS account.
-2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**. 
+2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**.
 3. Select the **CloudWatch Logs** trigger for the Trigger Configuration.
 4. Select the CloudWatch log group that contains your CloudHSM logs.
 5. Enter a name for the filter.

@@ -17,7 +17,7 @@ further_reading:
   tag: App
   text: クイックスタートガイド
 is_beta: true
-kind: documentation
+
 title: イベント管理
 ---
 

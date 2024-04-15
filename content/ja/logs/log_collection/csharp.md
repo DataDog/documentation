@@ -26,7 +26,7 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: documentation
+
 title: C# ログ収集
 ---
 
@@ -69,7 +69,7 @@ var log = new LoggerConfiguration()  // using Serilog;
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
 
     // Serilog.Formatting.Compact; の使用
-    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")  
+    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
 
     .CreateLogger();
 

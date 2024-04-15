@@ -1,6 +1,6 @@
 ---
 title: Application Threat Management
-kind: documentation
+
 further_reading:
 - link: "/security/application_security/threats/add-user-info/"
   tag: "Documentation"

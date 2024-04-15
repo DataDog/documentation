@@ -32,7 +32,7 @@ integration_id: eks-fargate
 integration_title: Amazon EKS sur AWS Fargate
 integration_version: 3.1.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: eks_fargate
 public_title: Amazon EKS sur AWS Fargate
@@ -227,7 +227,7 @@ Les tâches Fargate que vous souhaitez surveiller doivent pouvoir accéder au to
 
 Il existe deux solutions pour garantir l'accès du token :
 
-* Codez en dur la valeur du token (avec `clusterAgent.token` dans Helm ou avec `credentials.token` dans l'Operator Datadog). Cette approche est simple, mais moins sécurisée. 
+* Codez en dur la valeur du token (avec `clusterAgent.token` dans Helm ou avec `credentials.token` dans l'Operator Datadog). Cette approche est simple, mais moins sécurisée.
 * Créez manuellement un secret (avec `clusterAgent.tokenExistingSecret` dans Helm ; cette option n'est pas disponible pour l'Operator Datadog) et répliquez-le dans tous les espaces de nommage où les tâches Farfate doivent être surveillées. Cette solution est plus sécurisée, mais nécessite des opérations supplémentaires.
 
 Si le cluster EKS exécute seulement des workloads Fargate, un déploiement autonome de l'Agent de cluster est nécessaire. Comme décrit ci-dessus, vous devez également choisir l'une des deux options pour que le token soit accessible.

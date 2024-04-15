@@ -1,7 +1,7 @@
 ---
 description: MySQL 데이터베이스에서 데이터베이스 모니터링 설정
 disable_sidebar: true
-kind: documentation
+
 title: MySQL 설정
 ---
 
@@ -9,7 +9,7 @@ title: MySQL 설정
 해당 사이트에서는 데이터베이스 모니터링이 지원되지 않습니다
 {{< /site-region >}}
 
-### 지원되는 MySQL 버전 
+### 지원되는 MySQL 버전
 
 |  | 자체 호스팅 | Amazon RDS | Amazon Aurora | 26GB 이상의 RAM을 갖춘 Google Cloud SQL | Azure |
 |--|------------|---------|------------|------------------|---------|

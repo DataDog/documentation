@@ -15,7 +15,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: ブログ
   text: Datadog NPM が Consul ネットワーキングに対応
-kind: documentation
+
 title: ネットワークパフォーマンスモニタリングのセットアップ
 ---
 
@@ -192,7 +192,7 @@ Windows ホストのネットワークパフォーマンスモニタリングを
     ```
 3. [Agent を再起動します][2]。
 
-   PowerShell (`powershell.exe`) の場合: 
+   PowerShell (`powershell.exe`) の場合:
     ```shell
     restart-service -f datadogagent
     ```

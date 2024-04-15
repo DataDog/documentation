@@ -19,7 +19,7 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location
   tag: Terraform
   text: Créer et gérer des emplacements privés Synthetic avec Terraform
-kind: documentation
+
 title: Exécuter des tests Synthetic à partir d'emplacements privés
 ---
 
@@ -54,7 +54,7 @@ Les emplacements privés correspondent à des conteneurs Docker installables sur
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Les emplacements privés sont des services Windows vous permettant dʼeffectuer des installations nʼimporte où au sein de votre réseau privé à lʼaide dʼun [fichier MSI][101]. Exécutez ce fichier à partir de la machine virtuelle ou physique sur laquelle vous souhaitez installer lʼemplacement privé. 
+Les emplacements privés sont des services Windows vous permettant dʼeffectuer des installations nʼimporte où au sein de votre réseau privé à lʼaide dʼun [fichier MSI][101]. Exécutez ce fichier à partir de la machine virtuelle ou physique sur laquelle vous souhaitez installer lʼemplacement privé.
 
 Les exigences liées à cette machine sont indiquées dans le tableau ci-dessous. Les scripts PowerShell doivent être activés sur la machine sur laquelle vous installez le worker de lʼemplacement privé.
 
@@ -66,7 +66,7 @@ Les exigences liées à cette machine sont indiquées dans le tableau ci-dessous
 
 **Remarque** : pour que Windows Private Locations exécute des tests de navigateurs, ces derniers (comme Chrome, Edge ou Firefox) doivent être installés sur lʼordinateur Windows.
 
-Vous devez installer la version 4.7.2 ou ultérieure de .NET sur votre ordinateur avant de pouvoir utiliser le programme dʼinstallation de MSI. 
+Vous devez installer la version 4.7.2 ou ultérieure de .NET sur votre ordinateur avant de pouvoir utiliser le programme dʼinstallation de MSI.
 
 {{< site-region region="gov" >}}
 
@@ -163,7 +163,7 @@ Remplissez les détails de votre emplacement privé :
 3. Choisissez l'une de vos **clés d'API** existantes. La sélection d'une clé d'API est nécessaire pour autoriser les communications entre votre emplacement privé et Datadog. Si vous ne possédez aucune clé d'API, cliquez sur **Generate API key** pour en créer une sur la page dédiée. Seuls les champs `Name` et `API key` sont requis.
 4. Définissez les autorisations d'accès pour votre emplacement privé, puis cliquez sur **Save Location and Generate Configuration File**. Datadog crée alors votre emplacement privé et génère le fichier de configuration associé.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Ajouter des détails à un emplacement privé" style="width:85%;">}} 
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Ajouter des détails à un emplacement privé" style="width:85%;">}}
 
 ### Configurer votre emplacement privé
 
@@ -493,7 +493,7 @@ Créez une définition de tâche Fargate correspondant à celle indiquée ci-des
 {{% /tab %}}
 {{% tab "Windows via GUI" %}}
 
-1. Téléchargez le [fichier `datadog-synthetics-worker-<version>.amd64.msi`][101] et exécutez-le depuis la machine sur laquelle vous souhaitez installer lʼemplacement privé. 
+1. Téléchargez le [fichier `datadog-synthetics-worker-<version>.amd64.msi`][101] et exécutez-le depuis la machine sur laquelle vous souhaitez installer lʼemplacement privé.
 1. Cliquez sur **Next** sur la page dʼaccueil, lisez le texte de lʼEULA et acceptez les conditions dʼutilisation. Cliquez sur **Next**.
 1. Changez lʼemplacement de lʼinstallation de lʼapplication ou conservez les réglages par défaut. Cliquez sur **Next**.
 1. Pour configurer votre emplacement privé Windows, vous pouvez :
@@ -522,7 +522,7 @@ Créez une définition de tâche Fargate correspondant à celle indiquée ci-des
    Verbosité des logs
    : indique la verbosité de la console et du logging de fichiers pour le worker de lʼemplacement privé Synthetics.
 
-1. Cliquez sur **Next** et **Install** pour lancer le processus dʼinstallation. 
+1. Cliquez sur **Next** et **Install** pour lancer le processus dʼinstallation.
 
 Une fois que le processus est terminé, cliquez sur **Finish** dans la page signalant la fin de lʼinstallation.
 
@@ -534,7 +534,7 @@ Une fois que le processus est terminé, cliquez sur **Finish** dans la page sign
 {{% /tab %}}
 {{% tab "Windows via CLI" %}}
 
-1. Téléchargez le [fichier `datadog-synthetics-worker-<version>.amd64.msi`][101] et exécutez-le depuis la machine sur laquelle vous souhaitez installer lʼemplacement privé. 
+1. Téléchargez le [fichier `datadog-synthetics-worker-<version>.amd64.msi`][101] et exécutez-le depuis la machine sur laquelle vous souhaitez installer lʼemplacement privé.
 2. Exécutez lʼune des commandes suivantes dans le répertoire où vous avez téléchargé le programme dʼinstallation :
 
    - Dans un terminal PowerShell :
@@ -569,7 +569,7 @@ Dʼautres paramètres peuvent être ajoutés :
 
 Ajoutez une sonde d'activité ou de disponibilité pour permettre à votre orchestrateur de vérifier que les workers fonctionnent correctement.
 
-Pour les sondes de disponibilité, vous aurez besoin d'activer les status probes d'emplacement privé sur le port `8080` dans le déploiement de votre emplacement privé. Pour en savoir plus, consultez la section [Configuration des emplacements privés][5]. 
+Pour les sondes de disponibilité, vous aurez besoin d'activer les status probes d'emplacement privé sur le port `8080` dans le déploiement de votre emplacement privé. Pour en savoir plus, consultez la section [Configuration des emplacements privés][5].
 
 {{< tabs >}}
 
@@ -802,7 +802,7 @@ Pour mettre à niveau un emplacement privé existant, cliquez sur lʼicône **Ge
 {{< img src="synthetics/private_locations/pl_edit_config.png" alt="Accéder au workflow de configuration pour un emplacement privé" style="width:90%;" >}}
 
 Exécutez ensuite la [commande de configuration correspondant à votre environnement](#installer-votre-emplacement-privé
-) pour obtenir la dernière version de lʼimage de lʼemplacement privé. 
+) pour obtenir la dernière version de lʼimage de lʼemplacement privé.
 
 **Remarque** : si vous utilisez `docker run` pour lancer votre image dʼemplacement privé et si vous avez déjà installé lʼimage dʼemplacement privé à lʼaide du tag `latest`, assurez-vous dʼajouter le tag `--pull=always` to the `docker run` command to make sure the newest version is pulled rather than relying on the cached version of the image that may exist locally with the same `latest`.
 

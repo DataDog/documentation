@@ -1,6 +1,6 @@
 ---
 title: RUM & Session Replay Billing
-kind: documentation
+
 further_reading:
 - link: "/real_user_monitoring/"
   tag: "Documentation"

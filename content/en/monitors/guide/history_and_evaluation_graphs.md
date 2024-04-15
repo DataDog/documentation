@@ -1,6 +1,6 @@
 ---
 title: Monitor History and Evaluation Graphs
-kind: Guide
+
 disable_toc: false
 further_reading:
 - link: "monitors/manage/status/"
@@ -44,9 +44,9 @@ Typically, the two graphs are not visualizing the same data point values. In add
 
 ### as_count() metrics
 
-Queries with `as_count` metrics in the formula, use a different evaluation path. The evaluation applies any aggregation before the formula. For example if you are using `A / B` and both are using the `as_count` evaluation path, it would be evaluated as: 
+Queries with `as_count` metrics in the formula, use a different evaluation path. The evaluation applies any aggregation before the formula. For example if you are using `A / B` and both are using the `as_count` evaluation path, it would be evaluated as:
 ```
-(1+2+3+4+5) / (10+10+10+10+10) 
+(1+2+3+4+5) / (10+10+10+10+10)
 ```
 
 For more information, see the [as_count() in Monitor Evaluations][2] guide.

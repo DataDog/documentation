@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Cluster and Endpoint Checks
-kind: documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
@@ -10,7 +10,7 @@ further_reading:
   text: "Running Cluster Checks with Autodiscovery"
 - link: "/containers/cluster_agent/endpointschecks/"
   tag: "Documentation"
-  text: "Running Endpoint Checks with Autodiscovery"  
+  text: "Running Endpoint Checks with Autodiscovery"
 ---
 
 ## Cluster checks

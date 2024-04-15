@@ -1,6 +1,6 @@
 ---
 title: Ruby Custom Instrumentation with Datadog Library
-kind: documentation
+
 aliases:
     - /tracing/opentracing/ruby
     - /tracing/manual_instrumentation/ruby
@@ -35,7 +35,7 @@ Add custom tags to your spans corresponding to any dynamic value within your app
 
 {{< tabs >}}
 {{% tab "Active Span" %}}
-Access the current active [span][1] from any method within your code. 
+Access the current active [span][1] from any method within your code.
 
 **Note**: If the method is called and there is no active span, `active_span` is `nil`.
 
@@ -255,7 +255,7 @@ Datadog::Tracing.before_flush do |trace|
   trace.spans.each do |span|
     originalPrice = span.get_tag('order.price'))
     discount = span.get_tag('order.discount'))
-    
+
     # Set a tag from a calculation from other tags
     if (originalPrice != nil && discount != nil)
       span.set_tag('order.value', originalPrice - discount)

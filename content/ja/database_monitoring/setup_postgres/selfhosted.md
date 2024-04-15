@@ -4,7 +4,7 @@ further_reading:
 - link: /integrations/postgres/
   tag: ドキュメント
   text: Postgres インテグレーションの基本
-kind: documentation
+
 title: セルフホストの Postgres のデータベースモニタリングの設定
 ---
 

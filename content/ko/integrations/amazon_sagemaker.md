@@ -19,7 +19,7 @@ integration_id: ''
 integration_title: Amazon SageMaker
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_sagemaker
 public_title: Datadog-Amazon SageMaker 통합
@@ -56,7 +56,7 @@ Amazon SageMaker를 설정하여 S3 버킷 또는 클라우드와치(CloudWatch)
 #### Datadog에 로그 전송
 
 1. 이미 하지 않은 경우 [Datadog 로그 수집 AWS 람다 함수][4]를 설정하세요.
-2. 람다 함수가 설치되면 AWS 콘솔에서 Amazon SageMaker 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 대해 수동으로 트리거를 추가합니다. 
+2. 람다 함수가 설치되면 AWS 콘솔에서 Amazon SageMaker 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 대해 수동으로 트리거를 추가합니다.
 
     - [S3 버킷에서 직접 트리거 추가][5]
     - [클라우드와치(CloudWatch) 로그 그룹에 수동 트리거 추가][6]

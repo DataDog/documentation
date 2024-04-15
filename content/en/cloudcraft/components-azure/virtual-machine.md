@@ -1,6 +1,6 @@
 ---
 title: "Virtual machine Component"
-kind: documentation
+
 ---
 
 ## Overview

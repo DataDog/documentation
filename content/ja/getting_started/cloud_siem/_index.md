@@ -35,7 +35,7 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog の Security Labs でセキュリティ関連のトピックを読む
-kind: documentation
+
 title: Cloud SIEM の概要
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Monitoring Sparse Metrics
-kind: guide
+
 further_reading:
 - link: "/api/latest/monitors/#edit-a-monitor"
   tag: "Documentation"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Monitors that report data infrequently, can have unexpected results and queries may not evaluate as intended. There are tools and behaviors that you can use to ensure a monitor's settings are appropriate for your data and expected evaluations. 
+Monitors that report data infrequently, can have unexpected results and queries may not evaluate as intended. There are tools and behaviors that you can use to ensure a monitor's settings are appropriate for your data and expected evaluations.
 
 This guide covers the following ways of troubleshooting and configuring monitors with sparse data:
 - [Determine if you have sparse metrics](#how-to-determine-whether-you-have-a-sparse-metric)
@@ -34,7 +34,7 @@ But when the **Bars** style is applied, it looks like this:
 
 {{< img src="monitors/guide/sparse_metrics/bar_graph_sparse.png" alt="Same data as the Metric Line graph above, except with bars for each datapoint, highlighting gaps in between bars of sparse metrics" style="width:90%;" >}}
 
-With the bar graph display, you can visualize the gaps between datapoints more clearly. 
+With the bar graph display, you can visualize the gaps between datapoints more clearly.
 
 If the graph editor does not have multiple options to change the graph style, you can apply the function `default_zero()` to the metric, which helps reveal the gaps in data. For more information on this function, see the [Interpolation][2] documentation.
 
@@ -48,7 +48,7 @@ Is this a [metric][3], [change][4], [anomaly][5], [forecast][6], or [outlier][7]
 * If you are using the **avg by** aggregator, consider adding an [interpolation function][2] like `default_zero()` to ensure the gaps in the metric are evaluated as zero.
 * If you are using arithmetic in your query, take a look at [Monitor Arithmetic and Sparse Metrics][8] for some further guidance.
 
-## Event-based monitor 
+## Event-based monitor
 
 Is this a [log][9], [event][10], [audit trail][11], or [error tracking][12] monitor? Look at the following:
 

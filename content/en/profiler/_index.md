@@ -1,6 +1,6 @@
 ---
 title: Continuous Profiler
-kind: Documentation
+
 aliases:
     - /tracing/profiling/
     - /tracing/profiler/
@@ -61,7 +61,7 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 ## Explore Datadog profiler
 
-After you configure your application to send profiles to Datadog, start getting insights into your code performance.  
+After you configure your application to send profiles to Datadog, start getting insights into your code performance.
 
 By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
 
@@ -91,7 +91,7 @@ Application processes that have both [APM distributed tracing][3] and continuous
 
 ### Find changes in performance by comparing profiles
 
-Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by. 
+Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by.
 
 ## Further Reading
 

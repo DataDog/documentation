@@ -9,7 +9,7 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Recueillir vos traces
-kind: documentation
+
 title: Agent avec un proxy TCP pour l'envoi de logs
 ---
 
@@ -212,7 +212,7 @@ backend datadog-logs
 Téléchargez le certificat avec la commande suivante :
 
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-* `yum install ca-certificates` (CentOS, Redhat) 
+* `yum install ca-certificates` (CentOS, Redhat)
 
 Si le téléchargement fonctionne, le fichier est stocké à l'emplacement suivant pour CentOS et Redhat : `/etc/ssl/certs/ca-bundle.crt`.
 

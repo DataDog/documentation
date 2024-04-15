@@ -10,7 +10,7 @@ aliases:
 - /ja/agent/apm/
 - /ja/tracing/setup_overview/
 description: Datadog APM の開始
-kind: documentation
+
 title: Datadog へのトレースの送信
 ---
 

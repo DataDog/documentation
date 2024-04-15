@@ -1,6 +1,6 @@
 ---
 title: Datadog Agent Manager pour Windows
-kind: guide
+
 further_reading:
   - link: /agent/basic_agent_usage/windows/
     tag: Documentation

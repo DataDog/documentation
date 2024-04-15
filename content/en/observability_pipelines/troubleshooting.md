@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-kind: documentation
+
 disable_toc: false
 further_reading:
   - link: "/observability_pipelines/monitoring/"

@@ -10,7 +10,7 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: Documentation
   text: Configurer un test Browser
-kind: documentation
+
 title: Erreurs de test API
 ---
 

@@ -6,7 +6,7 @@ further_reading:
 - link: /service_management/workflows/actions_catalog/
   tag: Documentation
   text: Catalogue des actions
-kind: documentation
+
 title: Créer des applications
 ---
 
@@ -146,7 +146,7 @@ Dans le tableau, la colonne **User** est préremplie avec un avatar et le nom d'
 
 ### Requêtes
 
-Les requêtes vous permettent d'alimenter votre application en données issues des API Datadog ou d'une intégration prise en charge. Elles reçoivent les entrées d'autres requêtes ou de composants d'interface utilisateur, et renvoient des sorties qui seront utilisées à leur tour dans d'autres requêtes ou composants d'interface utilisateur. 
+Les requêtes vous permettent d'alimenter votre application en données issues des API Datadog ou d'une intégration prise en charge. Elles reçoivent les entrées d'autres requêtes ou de composants d'interface utilisateur, et renvoient des sorties qui seront utilisées à leur tour dans d'autres requêtes ou composants d'interface utilisateur.
 
 Pour ajouter une requête, cliquez sur l'icône plus (**+**) dans la section **Queries**, puis recherchez une requête à ajouter à votre application. Une fois la requête ajoutée, elle apparaît dans la liste des requêtes au-dessus de l'éditeur de requêtes. Cliquez sur des requêtes et faites glisser votre curseur pour les réorganiser. Sélectionnez une requête pour la configurer.
 

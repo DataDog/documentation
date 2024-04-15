@@ -1,6 +1,6 @@
 ---
 title: Change Overlays
-kind: documentation
+
 description: Overlay your change events on graphs to correlate performance anomalies with changes in your application
 further_reading:
 - link: "/tracing/services/deployment_tracking/"
@@ -35,11 +35,11 @@ View the moment a change occurs in the context of your Datadog observability dat
 
 ## Overlay changes on graphs
 
-To get started, click **Show Overlays** in the upper right corner of your dashboard. 
+To get started, click **Show Overlays** in the upper right corner of your dashboard.
 
 {{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Overlays button on dashboard header" style="width:100%;">}}
 
-Overlays automatically appear on timeseries graphs filtered with the `service` tag for services configured with `version` tags. To enable deployments in your APM services, [add version tags to your configuration][1]. 
+Overlays automatically appear on timeseries graphs filtered with the `service` tag for services configured with `version` tags. To enable deployments in your APM services, [add version tags to your configuration][1].
 
 Click on any event overlay to open a side panel with more information and [analyze the impact of your change](#analyze-the-impact-of-your-change).
 
@@ -47,7 +47,7 @@ Click on any event overlay to open a side panel with more information and [analy
 Use the toggle in the overlays panel to only show [faulty deployments][2] that could be impacting your metrics.
 
 ### Override automatic detection
-Override the automatic service detection by using the search bar to find the service of interest. 
+Override the automatic service detection by using the search bar to find the service of interest.
 
 ## Analyze the impact of your change
 Click on any overlay on your graph to open a change analysis page, allowing you to understand the status and impact of you change.
@@ -70,7 +70,7 @@ For APM deployments, overlays appear on timeseries graphs that:
 2. Have the `service` set up with the `version` tag
 
 ### What are deployments scoped to?
-For APM deployments, an `env` must be specified. If you have an `env` or `datacenter` template variable set in your dashboard, deployments are filtered to match the selection. Otherwise, the `env` defaults to `prod`. 
+For APM deployments, an `env` must be specified. If you have an `env` or `datacenter` template variable set in your dashboard, deployments are filtered to match the selection. Otherwise, the `env` defaults to `prod`.
 
 ## Further Reading
 

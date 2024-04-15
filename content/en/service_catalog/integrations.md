@@ -1,6 +1,6 @@
 ---
 title: Using Integrations with Service Catalog
-kind: documentation
+
 aliases:
   - /tracing/service_catalog/integrations
 further_reading:
@@ -19,7 +19,7 @@ further_reading:
 PagerDuty and OpsGenie integrations for Service Catalog are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
-  
+
 ## Overview
 
 When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Service Catalog][9]. You can also use autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).

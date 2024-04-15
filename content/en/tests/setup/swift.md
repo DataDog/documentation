@@ -1,6 +1,6 @@
 ---
 title: Swift Tests
-kind: documentation
+
 code_lang: swift
 type: multi-code-lang
 code_lang_weight: 50

@@ -4,7 +4,7 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentation
   text: Intégation Postgres basique
-kind: documentation
+
 title: Configuration de Database Monitoring pour Postgres auto-hébergé
 ---
 

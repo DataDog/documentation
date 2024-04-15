@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: AWS 백업
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_backup
 public_title: Datadog-AWS 백업 통합
@@ -24,7 +24,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
-AWS 백업은 AWS 서비스 및 하이브리드 워크로드 전반에서 데이터 보호를 
+AWS 백업은 AWS 서비스 및 하이브리드 워크로드 전반에서 데이터 보호를
 중앙화하고 자동화합니다.
 
 이 통합을 활성화하여 Datadog에서 백업 메트릭을 참조하세요.

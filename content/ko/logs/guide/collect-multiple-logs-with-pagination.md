@@ -15,7 +15,7 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: 설명서
   text: 무제한 로깅*
-kind: guide
+
 title: 페이지네이션으로 여러 로그 수집
 ---
 
@@ -92,7 +92,7 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
 
 로그의 모든 페이지를 보려면 `startAt` 파라미터가 이전 호출에서 `nextLogId` 값을 가져오는 쿼리를 계속해서 다시 보내세요. `nextLogId`가 `null`을 반환하면 쿼리와 관련된 모든 로그 페이지가 반환된 것입니다.
 
-**참고**: 페이지네이션 결과를 더 효과적으로 제어하려면 `now` 키워드를 사용하지 말고, 절대 `time` 파라미터를 사용하세요. 
+**참고**: 페이지네이션 결과를 더 효과적으로 제어하려면 `now` 키워드를 사용하지 말고, 절대 `time` 파라미터를 사용하세요.
 
 {{% /tab %}}
 
@@ -105,15 +105,15 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
-                  "limit":50   
+                  "limit":50
         }
 }'
 ```
@@ -138,7 +138,7 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
   }
 }
 ```
-`data` 파라미터는 로그 개체의 배열이며 쿼리에서 `limit` 파라미터로 정의된 로그를 최대한 많이 포함합니다. 이 파라미터는 기본적으로 `50`이지만 최대 `1000`까지 설정할 수 있습니다. 
+`data` 파라미터는 로그 개체의 배열이며 쿼리에서 `limit` 파라미터로 정의된 로그를 최대한 많이 포함합니다. 이 파라미터는 기본적으로 `50`이지만 최대 `1000`까지 설정할 수 있습니다.
 
 로그의 다음 페이지를 보려면 계속해서 쿼리를 다시 보내되 이전 호출에서 `after` 값을 가져오는 `cursor` 파라미터를 포함하세요. `data`가 `null`을 반환하면 쿼리와 관련된 모든 로그 페이지가 반환된 것입니다.
 
@@ -148,16 +148,16 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
                   "cursor": "eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0",
-                  "limit": 50   
+                  "limit": 50
         }
 }'
 ```

@@ -1,6 +1,6 @@
 ---
 title: Browser Crash Reporting and Error Tracking
-kind: documentation
+
 aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 further_reading:
@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the browser by the RUM Browser SDK. Whenever a [source][1], [custom][2], or [report][3] error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
+Error Tracking processes errors collected from the browser by the RUM Browser SDK. Whenever a [source][1], [custom][2], or [report][3] error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
 
 Your crash reports appear in [**Error Tracking**][4].
 
@@ -31,9 +31,9 @@ If you have not set up the Browser SDK yet, follow the [in-app setup instruction
 
 ## Link errors with your source code
 
-In addition to sending source maps, the [Datadog CLI][10] reports Git information such as the commit hash, repository URL, and a list of tracked file paths in the code repository. 
+In addition to sending source maps, the [Datadog CLI][10] reports Git information such as the commit hash, repository URL, and a list of tracked file paths in the code repository.
 
-Error Tracking and RUM can use this information to correlate errors with your source code, allowing you to pivot from any stack trace frame to the related line of code in [GitHub][11], [GitLab][12] and [Bitbucket][13]. 
+Error Tracking and RUM can use this information to correlate errors with your source code, allowing you to pivot from any stack trace frame to the related line of code in [GitHub][11], [GitLab][12] and [Bitbucket][13].
 
 {{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.mp4" alt="Link from a stack frame to the source code" video=true >}}
 

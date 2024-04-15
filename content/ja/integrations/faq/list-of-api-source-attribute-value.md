@@ -1,6 +1,6 @@
 ---
 disable_toc: true
-kind: faq
+
 private: true
 title: API ソース属性
 ---

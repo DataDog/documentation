@@ -30,7 +30,7 @@ further_reading:
   tag: Blog
   text: Pourquoi les actions GitHub sont indispensables pour le catalogue des services
     Datadog
-kind: documentation
+
 title: Enquêter sur un service
 ---
 
@@ -52,7 +52,7 @@ Lorsque vous cliquez sur un service, un volet latéral comportant deux principal
 - **Définition de service** dans YAML avec un lien vers le code source du service.
 - Une service map interactive affichant les services en amont et en aval de ce service.
 - **Dashboards définis et associés**, avec la liste des dashboards prédéfinis et recommandés par Watchdog, le cas échéant.
-- **Scorecards du service**, avec un snapshot des scores du service et le timestamp de la dernière évaluation. 
+- **Scorecards du service**, avec un snapshot des scores du service et le timestamp de la dernière évaluation.
 - **Bêta : configuration des bibliothèques actives** pour les services Java et .NET. Avec la dernière version de l'Agent et la fonctionnalité de [configuration à distance][1] activée sur celui-ci, vous pouvez ajuster le [taux d'échantillonnage des traces][3] (entre 0.0 et 1.0), activer l'[injection de logs][2] pour mettre en corrélation les données des traces et des logs, et définir l'application de tags d'en-tête HTTP à toutes les traces envoyées à Datadog à partir de ce service. Dans l'onglet « Setup Guidance », en regard de **Active Library Configuration**, cliquez sur **Edit** pour modifier ces paramètres et les appliquer directement sans avoir à redémarrer le service.
 
   {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Options de configuration du service dans l'IU de Datadog" style="width:80%;" >}}

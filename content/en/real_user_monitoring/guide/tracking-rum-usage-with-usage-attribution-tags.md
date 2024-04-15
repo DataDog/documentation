@@ -1,6 +1,6 @@
 ---
 title: Track RUM Usage with Usage Attribution Tags
-kind: guide
+
 beta: true
 description: Learn how to track RUM usage with custom attribution tags
 aliases:
@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-The [Usage Attribution][1] page provides information and functionality related to data usage and usage types. By default, the data usage can be viewed and filtered by broader categories such as product, organization, or tag keys. This guide describes how to configure RUM usage attribution so it can be viewed by custom categories on the Usage Attribution page (accurate to +/- 20% of the actual value). This can help you track RUM sessions and costs for different departments, products, or other categories, instead of viewing a single aggregate number. 
+The [Usage Attribution][1] page provides information and functionality related to data usage and usage types. By default, the data usage can be viewed and filtered by broader categories such as product, organization, or tag keys. This guide describes how to configure RUM usage attribution so it can be viewed by custom categories on the Usage Attribution page (accurate to +/- 20% of the actual value). This can help you track RUM sessions and costs for different departments, products, or other categories, instead of viewing a single aggregate number.
 
 As an example, this guide walks through how to track RUM usage by department.
 
@@ -26,9 +26,9 @@ Categories for usage are determined by tags. Before setting up your RUM usage at
 {{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-4.jpeg" alt="Check your tags on the Usage Attribution page" style="width:100%;">}}
 
 ### Add tags to your RUM sessions
-Once your usage attribution tags have been configured, you can tag your RUM sessions with them. 
+Once your usage attribution tags have been configured, you can tag your RUM sessions with them.
 
-To set tags for **browser sessions**, set the RUM global context at the start of the session (right after calling `datadogRum.init`) using the [`setGlobalContextProperty`][2] method. For example, here's how we would tag sessions so they can be tracked for the marketing department: 
+To set tags for **browser sessions**, set the RUM global context at the start of the session (right after calling `datadogRum.init`) using the [`setGlobalContextProperty`][2] method. For example, here's how we would tag sessions so they can be tracked for the marketing department:
 
 ```javascript
 datadogRum.setGlobalContextProperty('department', 'marketing');

@@ -9,7 +9,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
   tag: Blog
   text: En savoir plus sur Autodiscovery
-kind: documentation
+
 title: Tagging de service unifié
 ---
 
@@ -311,7 +311,7 @@ Afin de former un point de configuration unique pour l'ensemble des données de 
 
    {{% tab "Logs" %}}
 
-   Si vous [associez vos logs à vos traces][1], activez l'injection automatique dans les logs si cette fonctionnalité est prise en charge par votre traceur d'APM. Le traceur d'APM injecte alors automatiquement les tags `env`, `service` et `version` dans vos logs, éliminant ainsi le besoin de configurer manuellement ces champs ailleurs. 
+   Si vous [associez vos logs à vos traces][1], activez l'injection automatique dans les logs si cette fonctionnalité est prise en charge par votre traceur d'APM. Le traceur d'APM injecte alors automatiquement les tags `env`, `service` et `version` dans vos logs, éliminant ainsi le besoin de configurer manuellement ces champs ailleurs.
 
    **Remarque** : le traceur PHP ne prend pas actuellement en charge la configuration du tagging de service unifié pour les logs.
 
@@ -320,7 +320,7 @@ Afin de former un point de configuration unique pour l'ensemble des données de 
 
    {{% tab "RUM et Session Replay" %}}
 
-   Si vous [associez vos données RUM à vos traces][1], spécifiez l'application Browser dans le champ `service`, définissez l'environnement dans le champ `env` et énumérez les versions dans le champ `version` de votre fichier d'initialisation. 
+   Si vous [associez vos données RUM à vos traces][1], spécifiez l'application Browser dans le champ `service`, définissez l'environnement dans le champ `env` et énumérez les versions dans le champ `version` de votre fichier d'initialisation.
 
    Lorsque vous [créez une application RUM][2], confirmez les noms `env` et `service`.
 
@@ -331,7 +331,7 @@ Afin de former un point de configuration unique pour l'ensemble des données de 
 
    {{% tab "Synthetics" %}}
 
-   Si vous [associez vos tests Browser Synthetic à vos traces][1], spécifiez l'URL à laquelle envoyer les en-têtes dans la section **APM Integration for Browser Tests** de la [page Integration Settings][2]. 
+   Si vous [associez vos tests Browser Synthetic à vos traces][1], spécifiez l'URL à laquelle envoyer les en-têtes dans la section **APM Integration for Browser Tests** de la [page Integration Settings][2].
 
    Vous pouvez utiliser le caractère `*` comme wildcard, par exemple : `https://*.datadoghq.com`.
 

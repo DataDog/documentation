@@ -1,6 +1,6 @@
 ---
 title: Custom Detection Rules
-kind: documentation
+
 aliases:
   - /security_platform/application_security/custom_rules
   - /security/application_security/custom_rules
@@ -38,7 +38,7 @@ ASM offers out of the box rules to detect business logic abuse (for example, res
 
 Recent Datadog Tracing Libraries attempt to detect and send user login and signup events automatically without needing to modify the code. If needed, you can [opt out of the automatic user activity event tracking][8].
 
-You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic. 
+You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic.
 
 See the section below to see how to configure your rules.
 

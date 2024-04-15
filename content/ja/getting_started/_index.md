@@ -11,7 +11,7 @@ further_reading:
 - link: https://learn.datadoghq.com/
   tag: ラーニングセンター
   text: Datadog を始めるためのコースを受講する
-kind: documentation
+
 title: はじめに
 ---
 

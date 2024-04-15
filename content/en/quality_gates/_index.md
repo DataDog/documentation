@@ -1,6 +1,6 @@
 ---
 title: Quality Gates
-kind: documentation
+
 description: Learn how to use Quality Gates to enable your team to control what code makes it to production.
 is_beta: true
 further_reading:
@@ -28,7 +28,7 @@ Quality Gates is in public beta.
 
 ## Overview
 
-Quality Gates allows you to gate your workflows based on signals in Datadog. 
+Quality Gates allows you to gate your workflows based on signals in Datadog.
 Use Quality Gates to:
 
 * Create rules that can block your workflows by using data in Datadog.
@@ -41,7 +41,7 @@ With Quality Gates, you have control over what is merged into the default branch
 
 You can create rules to block code from being merged if it introduces new [flaky tests][1], code security violations, or issues that wouldn't normally fail your CI/CD pipelines and end up deployed to production.
 
-To create Quality Gate rules, see the [Setup documentation][2]. 
+To create Quality Gate rules, see the [Setup documentation][2].
 
 ## Search rules
 

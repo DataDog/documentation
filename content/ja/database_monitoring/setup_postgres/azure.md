@@ -4,7 +4,7 @@ further_reading:
 - link: /integrations/postgres/
   tag: ドキュメント
   text: Postgres インテグレーションの基本
-kind: documentation
+
 title: Azure Database for PostgreSQL のデータベースモニタリングの設定
 ---
 
@@ -44,7 +44,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 ## Postgres 設定を構成する
 
-[Server パラメーター][4]で以下の[パラメーター][3]を構成し、**サーバーを再起動する**と設定が反映されます。 
+[Server パラメーター][4]で以下の[パラメーター][3]を構成し、**サーバーを再起動する**と設定が反映されます。
 
 {{< tabs >}}
 {{% tab "Single Server" %}}

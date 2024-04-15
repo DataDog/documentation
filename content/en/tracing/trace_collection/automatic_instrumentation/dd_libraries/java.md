@@ -1,6 +1,6 @@
 ---
 title: Tracing Java Applications
-kind: documentation
+
 aliases:
     - /tracing/java
     - /tracing/languages/java

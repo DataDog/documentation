@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Manual Setup Guide
-kind: guide
+
 description: "Steps for manually setting up the Datadog Azure integration"
 further_reading:
 - link: "https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
@@ -154,7 +154,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 5. Click **Next**.
 
-6. Select the _Create new_ option in **Service principal type**. 
+6. Select the _Create new_ option in **Service principal type**.
 7. Click the **Change selection** link in **Service principal**.
 A form to create a new app registration is displayed:
 
@@ -295,7 +295,7 @@ To install the Agent based on operating system or CI and CD tool, see the [Datad
 
 {{% tab "AKS Cluster Extension" %}}
 
-The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension: 
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension:
 
 1. Go to your AKS cluster in the Azure portal.
 2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.

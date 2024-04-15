@@ -1,6 +1,6 @@
 ---
 title: Serverless Agent configuration
-kind: documentation
+
 ---
 
 ## Overview

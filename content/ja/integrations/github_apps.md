@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: GitHub アプリ
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: github_apps
 public_title: Datadog-GitHub アプリのインテグレーション
@@ -66,7 +66,7 @@ GitHub アプリがインテグレーションタイルに表示されます。�
 
 ### 監査ログ
 
-監査ログは、GitHub の組織全体のすべてのアクティビティとイベントを網羅します。アプリケーションのインストール時に、**Organization Administration** 権限で読み取りアクセスを許可します。 
+監査ログは、GitHub の組織全体のすべてのアクティビティとイベントを網羅します。アプリケーションのインストール時に、**Organization Administration** 権限で読み取りアクセスを許可します。
 これにより、アプリケーションは GitHub の監査ストリームを GitHub 組織に代わってログとして収集し始めます。
 
 監査ログの収集を停止するには、GitHub Apps のインテグレーションタイルの **Telemetery** タブで該当する組織を探し、**Audit Log collection** を切り替えてください。

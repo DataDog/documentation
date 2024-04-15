@@ -1,9 +1,9 @@
 ---
 title: Set up Two-Factor Authentication
-kind: documentation
+
 ---
 
-Two-factor authentication (2FA) provides an extra layer of security for your account. When you enable 2FA, your Cloudcraft account can only be accessed on devices you trust. 
+Two-factor authentication (2FA) provides an extra layer of security for your account. When you enable 2FA, your Cloudcraft account can only be accessed on devices you trust.
 
 After setting up 2FA, you will log in to your account in two steps:
 
@@ -16,7 +16,7 @@ After setting up 2FA, you will log in to your account in two steps:
 ## Enable 2FA
 
 1. Download an authenticator app such as Google Authenticator or [Authy][1] for your phone.
-2. Log in to your Cloudcraft account. 
+2. Log in to your Cloudcraft account.
 3. Click the **Account** icon and select **User settings**.
 4. Click **Manage MFA**. The 2FA barcode is displayed.
 5. Open the authenticator app on your phone and scan the barcode.

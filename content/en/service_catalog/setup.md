@@ -1,6 +1,6 @@
 ---
 title: Adding Entries to Service Catalog
-kind: documentation
+
 aliases:
   - /tracing/service_catalog/setup
 further_reading:
@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Datadog Service Catalog is a centralized hub for your development teams to discover and understand critical components in your runtime envrionments. If you are using products that provide application performance telemetries such as APM, USM, and RUM, you can take advantage of the auto-discovery feature. If not, you can create your Service Catalog based on your existing knowledge base (with open-source solutions like Backstage or managed solutions like ServiceNow) or create entries from `service` tags from other Datadog products like infrastructure monitoring and Log Management. 
+Datadog Service Catalog is a centralized hub for your development teams to discover and understand critical components in your runtime envrionments. If you are using products that provide application performance telemetries such as APM, USM, and RUM, you can take advantage of the auto-discovery feature. If not, you can create your Service Catalog based on your existing knowledge base (with open-source solutions like Backstage or managed solutions like ServiceNow) or create entries from `service` tags from other Datadog products like infrastructure monitoring and Log Management.
 
 ## Automatic service discovery
 
@@ -33,11 +33,11 @@ Datadog Service Catalog includes both eBPF-based autodiscovery with [Universal S
 Datadog automatically discovers the dependencies of instrumented services, including databases or third-party APIs, even if the dependency hasn't been instrumented. The Service Catalog lists these as separate entries. To differentiate auto-detected components from instrumented services, you can request access to the private beta for inferred services.
 {{< /callout >}}
 
-## Create user-defined services 
+## Create user-defined services
 
-To add your own services to Service Catalog, you can either manually add them by creating Service Definitions through the API or GitHub integration or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using `service.datadog.yaml` files. 
+To add your own services to Service Catalog, you can either manually add them by creating Service Definitions through the API or GitHub integration or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using `service.datadog.yaml` files.
 
-To create a user-defined service, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
+To create a user-defined service, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example:
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -69,13 +69,13 @@ You can register multiple services in one YAML file by separating each definitio
 
 ## Import data from other sources
 
-### Backstage 
+### Backstage
 
 {{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
-If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
+If you already have data or services registered in Backstage, you can import these services into Datadog directly.
 
-If you use API or Terraform, replace the YAMLs in your requests. 
+If you use API or Terraform, replace the YAMLs in your requests.
 
 If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][15] located at the root folder of a repo.
 

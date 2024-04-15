@@ -1,6 +1,6 @@
 ---
 title: Access Control
-kind: documentation
+
 aliases:
     - /guides/rbac
     - /account_management/rbac/role_api
@@ -60,7 +60,7 @@ The custom roles feature gives your organization the ability to create new roles
 
 ### Enable custom roles
 
-1. Navigate to [Organization Settings][9]. 
+1. Navigate to [Organization Settings][9].
 2. On the left side of the page, select **Roles**.
 3. Click the gear in the upper right corner. The Custom Roles pop-up appears.
 4. In the Custom Roles pop-up, click **Enable**.

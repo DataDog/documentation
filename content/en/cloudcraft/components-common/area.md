@@ -1,6 +1,6 @@
 ---
 title: "Area Component"
-kind: documentation
+
 ---
 ## Overview
 

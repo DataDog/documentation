@@ -1,6 +1,6 @@
 ---
 title: Watchdog Alerts
-kind: documentation
+
 ---
 
 ## Overview
@@ -31,7 +31,7 @@ In addition to repeating the information in the alert overview card, the **Overv
 * **Monitors**: Lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 
 Additionally, Watchdog suggests one or more monitors you can create to notify you if the anomaly happens again. These monitors do not exist yet, so the table lists their status as `suggested`. Click **Enable Monitor** to enable the suggested monitor for your organization. A series of icons pops up allowing you to open, edit, clone, mute, or delete the new monitor.
- 
+
 ## Watchdog Alert Explorer
 
 You can use the time range, search bar, or facets to filter your Watchdog Alerts feed.
@@ -40,7 +40,7 @@ You can use the time range, search bar, or facets to filter your Watchdog Alerts
 * **Search bar**: Enter text in the **Filter alerts** search box to search over alert titles.
 * **Facets**: The left side of the Watchdog Alerts feed contains the search facets below. Check the corresponding boxes to filter your alerts by facet.
 
-Available facets: 
+Available facets:
 
 | All Alerts Group    | Description                                                                     |
 |---------------------|---------------------------------------------------------------------------------|
@@ -83,8 +83,8 @@ A `severe` anomaly is defined as:
 
 #### Required data history
 
-Watchdog requires some data to establish a baseline of expected behavior. For log anomalies, the minimum history is 24 hours. 
-Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history. 
+Watchdog requires some data to establish a baseline of expected behavior. For log anomalies, the minimum history is 24 hours.
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 #### Disabling log anomaly detection
 
@@ -103,11 +103,11 @@ Watchdog scans all services and resources to look for anomalies on the following
   * Latency
   * Hits (request rate)
 
-Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
+Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored.
 
 #### Required data history
 
-Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks.
 Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 {{% /tab %}}
@@ -129,10 +129,10 @@ Watchdog looks at infrastructure metrics from the following integrations:
     * [RDS][10]
     * [ECS][11]
     * [Lambda][12]
-   
+
 #### Required data history
 
-Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks.
 Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 [1]: /integrations/system/
@@ -167,7 +167,7 @@ Watchdog Alerts appear in the following places within Datadog:
 * The [Watchdog Alert Explorer][1]
 * On any individual [APM Service Page][3]
 * In the [Service Catalog][7]
-* In the [Watchdog Insights panel][8], available on all explorers 
+* In the [Watchdog Insights panel][8], available on all explorers
 
 ### Watchdog binoculars on APM pages
 

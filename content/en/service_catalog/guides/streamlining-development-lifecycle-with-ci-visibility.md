@@ -1,6 +1,6 @@
 ---
 title: Streamlining the Development Lifecycle with CI Visibility
-kind: guide
+
 aliases:
   - /tracing/service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
 further_reading:
@@ -14,7 +14,7 @@ further_reading:
 
 In the Delivery view in Service Catalog, you can view CI pipeline and static analysis results associated to your services.
 
-By default, your service is associated to [CI pipeline(s)][4] through repository URL. 
+By default, your service is associated to [CI pipeline(s)][4] through repository URL.
 You can edit the pipelines associated with each service by modifying the `ci-pipeline-fingerprints` field in your [service metadata][5].
 
 To add or remove a pipeline associated to your service, click `Edit Metadata` in your service page, and go to Software Delivery. Please note that this is only available for [Service Catalog schema v2.2][7].

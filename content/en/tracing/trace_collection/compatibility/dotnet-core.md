@@ -1,6 +1,6 @@
 ---
 title: .NET Core Compatibility Requirements
-kind: documentation
+
 description: 'Compatibility Requirements for the .NET tracer'
 aliases:
   - /tracing/compatibility_requirements/dotnet-core

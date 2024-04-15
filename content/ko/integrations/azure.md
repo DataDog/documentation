@@ -65,7 +65,7 @@ integration_id: azure
 integration_title: Microsoft Azure
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 monitors:
   '[Azure App Gateway] Backend Hosts': assets/monitors/app_gateway_backend_hosts.json
@@ -169,26 +169,26 @@ Datadog의 Azure 통합은 <a href="https://docs.microsoft.com/en-us/azure/azure
 
 ### 자동
 
-_모든 사이트:_  
+_모든 사이트:_
 Azure에서 표준 Datadog 통합을 자동 설정하는 방법을 확인하려면 [표준 Azure 통합 프로그래밍 관리 가이드][50]를 참조하세요. Terraform 또는 Azure CLI로 통합을 설정하고, Datadog Azure VM 확장 프로그램으로 Datadog 에이전트를 Azure에 기본 배포하고, 자동 스크립트를 실행하여 로그 수집을 활성화합니다.
 
-_US3:_  
+_US3:_
 Azure의 Datadog 리소스를 사용하여 Terraform으로 Datadog Azure Native 통합을 설정하는 방법에 대한 지침을 확인하려면 [Azure Native 통합 프로그래밍 관리 지침][51]을 참조하세요.
 
 ### 수동
 
-_모든 사이트:_  
+_모든 사이트:_
 Azure 포털 또는 CLI를 통해 Azure로 Datadog 통합을 수동으로 설정하는 방법, VM 확장 프로그램 또는 AKS 클러스터 확장 프로그램을 사용하여 Azure에 Datadog 에이전트를 직접 배포하는 방법에 대해 확인하려면 [표준 Azure 통합 수동 설정 지침][52]을 참조하세요.
 
-_US3:_  
+_US3:_
 Datadog으로 Azure Native 통합을 수동으로 설정하는 방법을 확인하려면 [Azure Native 통합 수동 설정 지침][53]을 참조하세요. 본 지침에는 VM 확장 프로그램 또는 AKS 클러스터 확장 프로그램을 사용하여 Azure에 Datadog 에이전트를 직접 배포하여 Azure에서 Datadog 리소스를 생성하는 방법과 SSO(single sign-on) 옵션 설정 방법이 포함됩니다.
 
 ## 로그 수집
 
-_모든 사이트:_  
+_모든 사이트:_
 Azure 로그를 Datadog에 전송하는 방법을 확인하려면 [Datadog에 Azure 로그 전송하기][54] 지침을 참조하세요. Datadog-Azure 함수와 Azure 이벤트 허브를 통해 로그 수집 프로세스를 자동 또는 수동으로 설정할 수 있습니다. Azure Blob 스토리지 함수로 모든 Azure 앱 서비스에서 로그를 수집할 수도 있습니다.
 
-_US3:_  
+_US3:_
 구독 레벨, Azure 리소스, Azure Active Directory 로그를 Datadog으로 전송하는 방법을 확인하려면 [Datadog 리소스로 Azure 로그 전송][55] 지침을 참조하세요.
 
 ## 수집한 데이터

@@ -1,7 +1,7 @@
 ---
 title: Dogshell
 description: "Use Datadog's API from Terminal or Shell"
-kind: guide
+
 aliases:
   - /developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
 ---

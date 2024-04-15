@@ -1,6 +1,6 @@
 ---
 title: Teams
-kind: documentation
+
 ---
 
 ## Overview
@@ -29,7 +29,7 @@ Access the team directory page from [Organization Settings][1] or by navigating 
 
 ### Modify team
 
-1. On the [team directory page][1], click the team you wish to modify. The [team detail page][3] appears. 
+1. On the [team directory page][1], click the team you wish to modify. The [team detail page][3] appears.
 1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
 1. Select the item you wish to modify.
 1. Make your changes, then click **Save**.
@@ -54,13 +54,13 @@ If you have teams with existing members, picking the SAML strict option override
 
 ## Team handle
 
-A team handle links teams to Datadog resources. Team handles appear in search bars and facets in the format `team:<team-handle>` or `teams:<team-handle>`. 
+A team handle links teams to Datadog resources. Team handles appear in search bars and facets in the format `team:<team-handle>` or `teams:<team-handle>`.
 
 To find a team handle:
 1. Click the team's name in the team directory page. A side panel appears with team details.
-1. Look for the **handle** field at the top of the panel. 
+1. Look for the **handle** field at the top of the panel.
 
-To associate a resource with a defined team, a Team must exist in Datadog with a matching team handle. When you click on a resource associated with a defined team, a small window appears with the team handle and additional information. Defined teams provide additional functionality such as the Team filter below. 
+To associate a resource with a defined team, a Team must exist in Datadog with a matching team handle. When you click on a resource associated with a defined team, a small window appears with the team handle and additional information. Defined teams provide additional functionality such as the Team filter below.
 
 Team handles that aren't associated with a defined team in Datadog behave similarly to tags. Convert any undefined team handles to defined teams to take advantage of Teams features.
 
@@ -76,11 +76,11 @@ Datadog supports associating the following resources with team handles:
 - [Service Level Objectives][10]
 - Synthetic Tests, Global Variables, Private Locations
 
-### Send notifications to a specific communication channel 
+### Send notifications to a specific communication channel
 
-Add a notification channel to your Team to route alerts to communication channels such as Slack or Microsoft Teams. Monitor alerts targeting `@team-<handle>` are redirected to the selected channel. 
+Add a notification channel to your Team to route alerts to communication channels such as Slack or Microsoft Teams. Monitor alerts targeting `@team-<handle>` are redirected to the selected channel.
 
-1. On the [team directory page][1], click the team you wish to modify. 
+1. On the [team directory page][1], click the team you wish to modify.
 1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
 1. Select **Notifications**.
 1. Add a channel, then click **Save**.
@@ -89,7 +89,7 @@ Add a notification channel to your Team to route alerts to communication channel
 
 The team filter tailors a user's experiences across Datadog to content associated with their teams.
 
-The team filter appears in two places in each list view: 
+The team filter appears in two places in each list view:
 - A list of search facets at the top left
 - A search term in the search bar
 

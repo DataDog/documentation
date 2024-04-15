@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Amazon SNS(Simple Notification Service)
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_sns
 public_title: Datadog-Amazon SNS(Simple Notification Service) 통합
@@ -42,7 +42,7 @@ version: '1.0'
 
 ### 메트릭 수집
 
-1. [AWS 통합 페이지][2]의 `Metric Collection` 탭 아래 `SNS`가 활성화되어 있는지 확인하세요. 
+1. [AWS 통합 페이지][2]의 `Metric Collection` 탭 아래 `SNS`가 활성화되어 있는지 확인하세요.
 
 2. Amazon SNS 메트릭을 수집하려면 다음 권한을 [Datadog IAM 정책][3]에 추가합니다. 자세한 정보는 AWS 웹사이트에서 [SNS 정책][4]을 참조하세요.
 

@@ -18,7 +18,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-streams-monitoring-apm-integration/
   tag: ブログ
   text: Datadog Data Streams Monitoring で APM から直接ストリーミングデータパイプラインをトラブルシューティングする
-kind: documentation
+
 title: データストリーム モニタリング
 ---
 

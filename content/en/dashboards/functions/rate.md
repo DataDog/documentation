@@ -1,6 +1,6 @@
 ---
 title: Rate
-kind: documentation
+
 aliases:
     - /graphing/functions/rate/
 further_reading:

@@ -2,7 +2,7 @@
 aliases:
 - /ja/agent/cluster_agent/build
 - /ja/containers/cluster_agent/build
-kind: faq
+
 title: Datadog Cluster Agent の構築
 ---
 

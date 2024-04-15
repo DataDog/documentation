@@ -1,6 +1,6 @@
 ---
 title: Manage Data Collection
-kind: documentation
+
 is_beta: true
 private: true
 description: Learn how to control costs in Error Tracking.
@@ -22,7 +22,7 @@ You can define what data is included in Error Tracking in two ways:
 1. [Rules](#rules-inclusion)
 2. [Rate Limits](#rate-limits)
 
-You can configure both rules and rate limits on the [**Logs** > **Error Tracking** > **Settings**][1] page. 
+You can configure both rules and rate limits on the [**Logs** > **Error Tracking** > **Settings**][1] page.
 
 ## Rules
 
@@ -58,7 +58,7 @@ To add a rule (inclusion filter):
 
 ### Add a nested exclusion filter to a rule
 
-1. Expand the rule for which you want to add an exclusion filter. 
+1. Expand the rule for which you want to add an exclusion filter.
 1. Click **Add Exclusion Filter**.
     {{< img src="logs/error_tracking/filters.png" alt="Expand a rule to see the Add Exclusion Filter option." style="width:70%;">}}
 1. Enter a name in the **Name** field.
@@ -87,7 +87,7 @@ A `Rate limit applied` event is generated when the rate limit is reached. See th
 
 ## Monitoring usage
 
-You can monitor your Error Tracking usage by setting up monitors and alerts for the `datadog.estimated_usage.error_tracking.logs.events` metric, which tracks the number of ingested error logs. 
+You can monitor your Error Tracking usage by setting up monitors and alerts for the `datadog.estimated_usage.error_tracking.logs.events` metric, which tracks the number of ingested error logs.
 
 This metric is available by default at no additional cost, and its data is retained for 15 months.
 

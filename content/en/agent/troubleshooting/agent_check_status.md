@@ -1,6 +1,6 @@
 ---
 title: Agent Check Status
-kind: documentation
+
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
   tag: "Agent Troubleshooting"

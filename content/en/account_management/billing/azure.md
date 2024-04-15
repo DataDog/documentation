@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Billing
-kind: documentation
+
 ---
 
 ## Overview
@@ -40,4 +40,4 @@ For billing questions, contact your [Customer Success][3] Manager.
 [3]: /infrastructure/
 [4]: /account_management/billing/custom_metrics/?tab=countrate
 [5]: /integrations/azure#configuration
-[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported 
+[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported

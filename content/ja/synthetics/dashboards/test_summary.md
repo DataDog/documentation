@@ -3,7 +3,7 @@ further_reading:
 - link: /synthetics/ci_results_explorer
   tag: ドキュメント
   text: CI Results Explorer について学ぶ
-kind: documentation
+
 title: Synthetic テストサマリーダッシュボード
 ---
 

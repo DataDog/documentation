@@ -10,7 +10,7 @@ further_reading:
 - link: tracing/trace_collection/dd_libraries/java
   tag: ドキュメント
   text: アプリケーションのインスツルメンテーション
-kind: documentation
+
 title: Java 互換性要件
 type: multi-code-lang
 ---
@@ -213,7 +213,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | Hibernate         | 3.5+     | 完全対応 | `hibernate`、`hibernate-core`                  |
 | Hystrix           | 1.4+     | 完全対応 | `hystrix`                                      |
 | JSP Rendering     | 2.3+     | 完全対応 | `jsp`、`jsp-render`、`jsp-compile`             |
-| JUnit             | 4.1+、5.3+ | 完全対応 | `junit`、`junit-4`、`junit-5`                 |       
+| JUnit             | 4.1+、5.3+ | 完全対応 | `junit`、`junit-4`、`junit-5`                 |
 | プロジェクトリアクタ   | 3.1+     | 完全対応 | `reactor-core`                                 |
 | Quartz            | 2.x      | 完全対応 | `quartz`                                       |
 | RxJava            | 2.x      | 完全対応 | `rxjava`                                       |

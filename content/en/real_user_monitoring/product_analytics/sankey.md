@@ -1,6 +1,6 @@
 ---
 title: Sankey Diagram
-kind: documentation
+
 ---
 
 {{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}

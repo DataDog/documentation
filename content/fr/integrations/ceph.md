@@ -26,7 +26,7 @@ guid: 8a60c34f-ecde-4269-bcae-636e6cbce98f
 integration_id: ceph
 integration_title: Ceph
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: ceph.
@@ -72,7 +72,7 @@ instances:
     use_sudo: true # uniquement si le binaire ceph doit utiliser sudo sur vos nœuds
 ```
 
-Si vous avez activé `use_sudo`, ajoutez une ligne semblable à ce qui suit dans votre fichier `sudoers` : 
+Si vous avez activé `use_sudo`, ajoutez une ligne semblable à ce qui suit dans votre fichier `sudoers` :
 
 ```text
 dd-agent ALL=(ALL) NOPASSWD:/chemin/vers/votre/ceph

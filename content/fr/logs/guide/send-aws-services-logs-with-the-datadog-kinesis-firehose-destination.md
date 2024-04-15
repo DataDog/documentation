@@ -12,7 +12,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
   tag: GitHub
   text: Envoyer des logs de flux Amazon VPS à Amazon Kinesis Data Firehose et Datadog
-kind: documentation
+
 title: Envoyer des logs de services AWS avec la destination Datadog pour Kinesis Firehose
 ---
 
@@ -35,7 +35,7 @@ Datadog vous conseille d'utiliser un flux de données Kinesis en tant qu'entrée
       - `Amazon Kinesis Data Streams` si vos logs proviennent d'un flux de données Kinesis
       - `Direct PUT` si vos logs proviennent directement d'un groupe de logs CloudWatch
 
-   b. Définissez la destination `Datadog`.  
+   b. Définissez la destination `Datadog`.
    c. Attribuez un nom au flux de diffusion.
    d. Sous **Destination settings**, choisissez l'URL de l'endpoint HTTP `Datadog logs` pour votre [site Datadog][5].
    e. Collez votre clé d'API dans le champ **API key**. Vous pouvez consulter votre clé d'API ou en créer une depuis la [page Datadog dédiée][3].
@@ -62,7 +62,7 @@ Vous pouvez également personnaliser ce modèle CloudFormation et l'installer à
 
 ## Envoyer des logs AWS à votre flux Kinesis
 
-Abonnez votre nouveau flux Kinesis aux groupes de logs CloudWatch que vous souhaitez intégrer à Datadog. Vous pouvez consulter la colonne **Subscriptions** de la [page d'index des groupes de logs][1] pour vérifier les abonnements actuels à vos groupes de logs. Il est possible de créer un abonnement à partir de l'API ou de la console AWS, comme décrit ci-dessous. 
+Abonnez votre nouveau flux Kinesis aux groupes de logs CloudWatch que vous souhaitez intégrer à Datadog. Vous pouvez consulter la colonne **Subscriptions** de la [page d'index des groupes de logs][1] pour vérifier les abonnements actuels à vos groupes de logs. Il est possible de créer un abonnement à partir de l'API ou de la console AWS, comme décrit ci-dessous.
    **Remarque** : chaque groupe de logs CloudWatch peut uniquement avoir deux abonnements.
 
 ### Créer un rôle IAM et une stratégie
@@ -104,7 +104,7 @@ Consultez la colonne **Subscriptions** de la page d'index des groupes de logs [C
 
 ### Rechercher des logs AWS Kinesis dans Datadog
 
-Une fois votre flux de diffusion Amazon Kinesis configuré, vous pouvez analyser les logs abonnés à votre flux de diffusion dans Datadog. 
+Une fois votre flux de diffusion Amazon Kinesis configuré, vous pouvez analyser les logs abonnés à votre flux de diffusion dans Datadog.
 
 Pour consulter tous les logs correspondant à un ARN :
 

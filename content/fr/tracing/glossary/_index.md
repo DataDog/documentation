@@ -19,7 +19,7 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentation
   text: Comprendre comment lire une trace Datadog
-kind: documentation
+
 title: Termes et concepts de l'APM
 ---
 
@@ -71,7 +71,7 @@ Vous ne voyez pas les endpoints HTTP attendus sur la page Service ? Dans l'APM,
 
 ## Ressources
 
-Les ressources représentent un domaine particulier d'une application client. Il s'agit généralement d'un endpoint web instrumenté, d'une requête de base de données ou d'une tâche en arrière-plan. Pour un service Web, ces ressources peuvent être des endpoints web dynamiques regroupés sous un nom de span tel que `web.request`. Pour un service de base de données, il peut s'agir de requêtes de base de données portant le nom de span `db.query`. Par exemple, le service `web-store` possède des ressources automatiquement instrumentées (endpoints web) qui gèrent les paiements, les mises à jour de panier, les ajouts d'articles, etc. Le nom d'une ressource peut correspondre à la méthode ou route HTTP, par exemple `GET /productpage` ou `ShoppingCartController#checkout`. 
+Les ressources représentent un domaine particulier d'une application client. Il s'agit généralement d'un endpoint web instrumenté, d'une requête de base de données ou d'une tâche en arrière-plan. Pour un service Web, ces ressources peuvent être des endpoints web dynamiques regroupés sous un nom de span tel que `web.request`. Pour un service de base de données, il peut s'agir de requêtes de base de données portant le nom de span `db.query`. Par exemple, le service `web-store` possède des ressources automatiquement instrumentées (endpoints web) qui gèrent les paiements, les mises à jour de panier, les ajouts d'articles, etc. Le nom d'une ressource peut correspondre à la méthode ou route HTTP, par exemple `GET /productpage` ou `ShoppingCartController#checkout`.
 
 Chaque ressource possède sa propre [page Ressource][7] qui affiche les [métriques de trace](#metriques-de-trace) associées à chaque endpoint spécifique. Les métriques de trace peuvent être utilisées comme n'importe quelle autre métrique Datadog : elles peuvent être exportées vers un dashboard ou utilisées pour créer des monitors. La page Ressource affiche également le widget Résumé des spans avec une vue agrégée des [spans](#spans) pour toutes les [traces](#trace), les distributions de latences des requêtes et les traces indiquant les requêtes adressées à cet endpoint.
 
@@ -185,7 +185,7 @@ Une fois qu'un tag a été ajouté à une span, recherchez et interrogez ce tag 
 
 Certaines [métriques d'application de tracing][15] possèdent les tags `sublayer_service` et `sublayer_type`, qui vous permettent de calculer la durée d'exécution d'un service spécifique au sein d'une trace.
 
-Les métriques de sous-couche ne sont disponibles que si un service possède des dépendances en aval. 
+Les métriques de sous-couche ne sont disponibles que si un service possède des dépendances en aval.
 
 ## Durée d'exécution
 
@@ -193,7 +193,7 @@ La durée d'exécution est calculée à partir de la durée d'activité d'une sp
 
 {{< img src="tracing/visualization/execution-time1.png" style="width:50%;" alt="Durée d'exécution" >}}
 
-Lorsque des spans enfant sont exécutées simultanément, la durée d'exécution est obtenue en divisant le temps partagé entre plusieurs spans par le nombre de spans simultanément actives. Dans l'image suivante, les spans 2 et 3 sont exécutées simultanément (elles sont toutes les deux les spans enfant de la span 1) et les durées se chevauchent donc. Ainsi, la durée d'exécution de la span 2 est égale à $\D2 ÷ 2 + \D3$, tandis que celle de la span 3 est égale à $\D2 ÷ 2$.  
+Lorsque des spans enfant sont exécutées simultanément, la durée d'exécution est obtenue en divisant le temps partagé entre plusieurs spans par le nombre de spans simultanément actives. Dans l'image suivante, les spans 2 et 3 sont exécutées simultanément (elles sont toutes les deux les spans enfant de la span 1) et les durées se chevauchent donc. Ainsi, la durée d'exécution de la span 2 est égale à $\D2 ÷ 2 + \D3$, tandis que celle de la span 3 est égale à $\D2 ÷ 2$.
 
 {{< img src="tracing/visualization/execution-time2.png" style="width:50%;" alt="Durée d'exécution pour les tâches simultanées" >}}
 

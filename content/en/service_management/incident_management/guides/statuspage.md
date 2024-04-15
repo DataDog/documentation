@@ -1,6 +1,6 @@
 ---
 title: Integrate Statuspage with Datadog Incident Management
-kind: Guide
+
 disable_toc: false
 further_reading:
 - link: "integrations/statuspage/"
@@ -30,14 +30,14 @@ Install the integration through the [Statuspage Integration tile][1]. For more i
 
 ## Setup
 
-1. In the [Integration Settings page][3], find the Statuspage integration. 
+1. In the [Integration Settings page][3], find the Statuspage integration.
 1. Toggle **Enable Statuspage incident creation**.
 
 ## Add a Statuspage incident
 
 1. In the [Incidents page][4], open an existing incident.
 1. At the top of the incident page, click **Add a Statuspage incident**.
-1. Enter all the required fields, which include Select a Statuspage, Incident name, and Incident status. You can also specify which Statuspage components are affected. 
+1. Enter all the required fields, which include Select a Statuspage, Incident name, and Incident status. You can also specify which Statuspage components are affected.
 
 {{< img src="service_management/incidents/guide/statuspage/add_update_statuspage_form.png" alt="Form to add or update a Statuspage incident, including required fields for Select a Statuspage, Incident name, and Incident status" style="width:70%;" >}}
 

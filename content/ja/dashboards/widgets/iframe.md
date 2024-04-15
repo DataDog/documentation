@@ -1,6 +1,6 @@
 ---
 title: Iframe ウィジェット
-kind: documentation
+
 description: Datadog のダッシュボードに iframe を含める
 aliases:
   - /ja/graphing/widgets/iframe/

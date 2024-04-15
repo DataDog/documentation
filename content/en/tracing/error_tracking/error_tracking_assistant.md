@@ -1,6 +1,6 @@
 ---
 title: Error Tracking Assistant
-kind: documentation
+
 is_beta: true
 private: true
 description: Learn about the Error Tracking Assistant.
@@ -19,7 +19,7 @@ Error Tracking Assistant for APM Error Tracking is in private beta. To request a
 
 ## Overview
 
-The Error Tracking Assistant in APM Error Tracking provides a summary of your errors and helps you solve them with suggested test cases and fixes. 
+The Error Tracking Assistant in APM Error Tracking provides a summary of your errors and helps you solve them with suggested test cases and fixes.
 
 {{< img src="tracing/error_tracking/error_tracking_assistant.mp4" video="true" alt="Error Tracking Explorer Executional Context" style="width:100%" >}}
 

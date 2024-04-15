@@ -1,6 +1,6 @@
 ---
 title: Search and Manage Synthetic Tests
-kind: documentation
+
 description: Learn how to search and manage your Synthetic tests.
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-You can access, [search](#search-for-tests), and [manage](#manage-tests) all of your tests on the [Synthetic Tests page][1]. 
+You can access, [search](#search-for-tests), and [manage](#manage-tests) all of your tests on the [Synthetic Tests page][1].
 
 {{< img src="synthetics/search/synthetic_tests_page_2.png" alt="Synthetic Monitoring Tests page" style="width:100%" >}}
 
@@ -35,7 +35,7 @@ By using [facets](#facets-and-tags), you can accomplish the following actions:
 
 ### Facets and tags
 
-The **Synthetics Filters** panel on the left lists default facets you can use to search for your tests. 
+The **Synthetics Filters** panel on the left lists default facets you can use to search for your tests.
 
 The default facets include the following:
 
@@ -51,7 +51,7 @@ The default facets include the following:
 | `Env`          | The environment the Synthetic test is running on.                             |
 | `CI/CD Execution Rule` | The status of the test run: `Blocking`, `Non-blocking`, or `Skipped`. |
 
-The **Tags** panel below **Synthetic Filters** lists several default tags you can use to identify your tests. 
+The **Tags** panel below **Synthetic Filters** lists several default tags you can use to identify your tests.
 
 The default tags include the following:
 
@@ -67,7 +67,7 @@ For more information, see [Using Tags][4].
 
 Search for tests by clicking on the facets to the left or by writing your own custom query in the search bar. As you edit the query, your search results update in real time.
 
-When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch in the search bar to select and deselect the facets on the left. 
+When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch in the search bar to select and deselect the facets on the left.
 
 * **Search on free text**: Enter your text in the search bar to search on a test name.
 * **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click on an additional value's checkbox. You can also add the additional value with an `OR` Boolean operator and wrap the values using quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
@@ -84,7 +84,7 @@ To search on a type of Synthetics test, select the test type under the **Type** 
 
 ### Bulk actions
 
-Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1] and clicking **Edit Tags**, **Run Tests Now**, or **Delete**. 
+Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1] and clicking **Edit Tags**, **Run Tests Now**, or **Delete**.
 
 {{< img src="synthetics/search/edit_tags_2.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
 

@@ -1,6 +1,6 @@
 ---
 title: Widget Tableau
-kind: documentation
+
 widget_type: query_table
 aliases:
   - /fr/graphing/widgets/table/

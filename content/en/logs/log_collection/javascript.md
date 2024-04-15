@@ -1,6 +1,6 @@
 ---
 title: Browser Log Collection
-kind: documentation
+
 aliases:
   - /logs/log_collection/web_browser
 algolia:

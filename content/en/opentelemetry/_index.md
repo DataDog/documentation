@@ -1,6 +1,6 @@
 ---
 title: OpenTelemetry in Datadog
-kind: Documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -10,7 +10,7 @@ further_reading:
   text: "Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context"
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
-  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter 
+  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter
 - link: "https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/"
   tag: "Blog"
   text: "Forward logs from the OpenTelemetry Collector with the Datadog Exporter"

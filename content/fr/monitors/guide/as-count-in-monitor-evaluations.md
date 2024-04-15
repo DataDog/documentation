@@ -1,6 +1,6 @@
 ---
 title: as_count() dans les évaluations de monitors
-kind: guide
+
 aliases:
   - /monitors/guide/as-count-monitor-evaluation
 ---

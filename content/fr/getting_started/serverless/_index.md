@@ -7,7 +7,7 @@ further_reading:
   tag: Validation des bases
   text: Prenez part à une session interactive pour en savoir plus sur la surveillance
     sans serveur
-kind: documentation
+
 title: Débuter avec la surveillance sans serveur AWS Lambda
 ---
 
@@ -20,7 +20,7 @@ Dans ce guide, nous vous présentons un [prototype d'application][2] sans serveu
 ### Installer le prototype d'application
 
 1. [Lancez la stack CloudFormation][3]. Ce lien vous redirige vers la page **Create stack** dans CloudFormation.
-2. Ajoutez votre [clé d'API Datadog][4] et votre [site Datadog][5] ({{< region-param key="dd_site" code="true" >}}). 
+2. Ajoutez votre [clé d'API Datadog][4] et votre [site Datadog][5] ({{< region-param key="dd_site" code="true" >}}).
 
   {{< img src="getting_started/serverless/aws_create_stack.png" alt="Gros plan sur deux fonctions" style="width:80%;">}}
 

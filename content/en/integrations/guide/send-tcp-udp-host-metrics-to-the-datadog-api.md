@@ -1,6 +1,6 @@
 ---
 title: Send TCP/UDP host metrics to the Datadog API
-kind: guide
+
 aliases:
   - /integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api
 ---
@@ -19,7 +19,7 @@ A more proper way to do this would be to send metrics and events using DogStatsD
 
 You retrieve from this:
 
-* TCP: 
+* TCP:
 
 ||||
 |:---|:---|:---|
@@ -30,7 +30,7 @@ You retrieve from this:
 |Alloc|   TCP sockets allocated  |  ( All type for example, ESTABLISH, CLOSE_WAIT, TIME_WAIT, etc)|
 |mem| total memory for TCP socket | integer (KiloBytes)|
 
-* UDP: 
+* UDP:
 
 ||||
 |:---|:---|:---|

@@ -15,7 +15,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
   tag: ブログ
   text: Datadog を支えるデザインシステム、DRUIDS
-kind: documentation
+
 title: Datadog の開始
 ---
 
@@ -86,7 +86,7 @@ Datadog サイトのナビゲーションは、ブラウザの幅に応じて変
 
 イベントエクスプローラーでは、ファセットや検索クエリでイベントをフィルタリングします。イベントを属性でグループ化またはフィルタリングし、[イベント分析][11]でグラフィカルに表現します。
 
-## ダッシュボード  
+## ダッシュボード
 
 {{< img src="getting_started/dashboard.png" alt="ダッシュボード" >}}
 

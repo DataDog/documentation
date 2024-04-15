@@ -1,6 +1,6 @@
 ---
 title: Datadog Plugin for JetBrains IDEs
-kind: documentation
+
 disable_toc: false
 is_beta: true
 further_reading:
@@ -185,7 +185,7 @@ The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog
 <div class="alert alert-info">This feature has two prerequisites: (1) Source Code Integration is configured for your service and (2) the JetBrains Toolbox is installed on your development machine.</div>
 
 ## Static Analysis
-The Datadog plugin runs [Static Analysis][13] rules on your source files as you edit them. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
+The Datadog plugin runs [Static Analysis][13] rules on your source files as you edit them. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes.
 
 Static Analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][14]. For file types belonging to supported languages, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
 

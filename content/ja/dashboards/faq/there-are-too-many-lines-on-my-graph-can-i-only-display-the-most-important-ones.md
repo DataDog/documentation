@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/graphing/faq/there-are-too-many-lines-on-my-graph-can-i-only-display-the-most-important-ones
-kind: faq
+
 title: グラフの線が多すぎるのですが、最も重要なものだけを表示することはできますか？
 ---
 

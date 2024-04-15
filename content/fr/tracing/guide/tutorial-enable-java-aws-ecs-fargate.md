@@ -15,7 +15,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-java
   tags: GitHub
   text: Référentiel du code open source de la bibliothèque de tracing
-kind: guide
+
 title: 'Tutoriel : Activer le tracing pour une application Java sur Amazon ECS avec
   Fargate'
 ---
@@ -385,7 +385,7 @@ Si aucune trace ne s'affiche après quelques minutes, effacez les filtres actifs
 
 Sur la page Traces, cliquez sur une trace `POST /notes`. Cela affiche un flamegraph décrivant la durée de chaque span ainsi que les autres spans présentes avant la finalisation d'une span. La barre située en haut du graphique représente la span que vous avez sélectionnée sur l'écran précédent (dans le cas présent, le point d'entrée initial dans l'application notes).
 
-La largeur d'une barre indique la durée totale de la span. Une barre moins large représente une span finalisée pendant le cycle de vie d'une barre plus large. 
+La largeur d'une barre indique la durée totale de la span. Une barre moins large représente une span finalisée pendant le cycle de vie d'une barre plus large.
 
 Sur le Trace Explorer, cliquez sur l'une des requêtes `GET` pour afficher un flamegraph similaire à ce qui suit :
 

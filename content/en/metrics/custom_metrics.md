@@ -1,6 +1,6 @@
 ---
 title: Custom Metrics
-kind: documentation
+
 aliases:
   - /guides/metrics/
   - /metrictypes/

@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 文字列の連結を避ける
 ---
 ## メタデータ

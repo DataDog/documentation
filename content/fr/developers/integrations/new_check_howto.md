@@ -6,7 +6,7 @@ aliases:
 - /fr/guides/new_integration/
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/new_check_howto.md
-kind: documentation
+
 title: Créer une intégration pour l'Agent
 ---
 ## Présentation

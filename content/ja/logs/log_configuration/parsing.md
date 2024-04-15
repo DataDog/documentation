@@ -16,7 +16,7 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: ドキュメント
   text: Datadog でインデックス化するログの量を制御する
-kind: documentation
+
 title: パース
 ---
 
@@ -69,7 +69,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 {{< tabs >}}
 {{% tab "マッチャー" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])` 
+`date("pattern"[, "timezoneId"[, "localeId"]])`
 : 指定されたパターンを持つ日付に一致してパースし、Unix タイムスタンプを生成します。[日付マッチャーの例を参照してください](#parsing-dates)。
 
 `regex("pattern")`

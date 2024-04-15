@@ -1,6 +1,6 @@
 ---
 title: Tagging SQL Statements
-kind: guide
+
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
@@ -37,10 +37,10 @@ Separate multiple tags with commas:
 Full example:
 ```go
 import (
-	"database/sql"		
+	"database/sql"
 )
 
-func main() {	
+func main() {
 	db, err := sql.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
 	if err != nil {
 		log.Fatal(err)

@@ -1,6 +1,6 @@
 ---
 title: Indexes
-kind: documentation
+
 description: Control the volume of logs indexed by Datadog
 aliases:
   - /logs/dynamic_volume_control
@@ -49,12 +49,12 @@ Use the "New Index" button to create a new index. There is a maximum number of i
 
 ### Delete indexes
 
-To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with both `Logs delete data` and `User manage access` permissions can use this option. 
+To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with both `Logs delete data` and `User manage access` permissions can use this option.
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
 <div class="alert alert-warning">
-You cannot recreate an index with the same name as the deleted one. 
+You cannot recreate an index with the same name as the deleted one.
 </div>
 
 **Note:** The deleted index will no longer accept new incoming logs. The logs in the deleted index are no longer available for querying. After all logs have aged out according to the applicable retention period, the index will no longer show up in the Index page.
@@ -78,7 +78,7 @@ But because your logs are not all and equally valuable, exclusion filters contro
 To add an exclusion filter:
 
 1. Navigate to [Log Indexes][11].
-2. Expand the pipeline for which you want to add an exclusion filter. 
+2. Expand the pipeline for which you want to add an exclusion filter.
 3. Click **Add an Exclusion Filter**.
 
 Exclusion filters are defined by a query, a sampling rule, and an active/inactive toggle:

@@ -17,7 +17,7 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: Documentation
   text: Attribuer des tags à toutes les données envoyées par un conteneur
-kind: documentation
+
 title: Collecte de traces APM avec Kubernetes
 ---
 
@@ -207,7 +207,7 @@ kind: Deployment
 ```
 
 ### Configurer les traceurs de votre application pour générer des traces
-Après avoir configuré votre Agent Datadog de façon à ce qu'il recueille des traces et transmis aux pods de votre application l'*emplacement* vers lequel envoyer les traces, installez le traceur Datadog sur votre application afin de générer des traces. Une fois cette étape terminée, le traceur envoie les traces vers l'endpoint `DD_AGENT_HOST` (pour `IP:Port`) ou `DD_TRACE_AGENT_URL` (pour un socket de domaine Unix), selon le cas. 
+Après avoir configuré votre Agent Datadog de façon à ce qu'il recueille des traces et transmis aux pods de votre application l'*emplacement* vers lequel envoyer les traces, installez le traceur Datadog sur votre application afin de générer des traces. Une fois cette étape terminée, le traceur envoie les traces vers l'endpoint `DD_AGENT_HOST` (pour `IP:Port`) ou `DD_TRACE_AGENT_URL` (pour un socket de domaine Unix), selon le cas.
 
 {{% /tab %}}
 
@@ -232,7 +232,7 @@ kind: Deployment
 **Remarque** : pour cette configuration, vous devez configurer l'Agent pour qu'il accepte les traces via TCP.
 
 ### Configurer les traceurs de votre application pour générer des traces
-Après avoir configuré votre Agent Datadog de façon à ce qu'il recueille des traces et transmis aux pods de votre application l'*emplacement* vers lequel envoyer les traces, installez le traceur Datadog sur votre application afin de générer des traces. Une fois cette étape terminée, le traceur envoie automatiquement les traces vers l'endpoint `DD_AGENT_HOST` (pour `IP:Port`) ou `DD_TRACE_AGENT_URL` (pour un socket de domaine Unix), selon le cas. 
+Après avoir configuré votre Agent Datadog de façon à ce qu'il recueille des traces et transmis aux pods de votre application l'*emplacement* vers lequel envoyer les traces, installez le traceur Datadog sur votre application afin de générer des traces. Une fois cette étape terminée, le traceur envoie automatiquement les traces vers l'endpoint `DD_AGENT_HOST` (pour `IP:Port`) ou `DD_TRACE_AGENT_URL` (pour un socket de domaine Unix), selon le cas.
 
 [1]: /fr/agent/cluster_agent/admission_controller/
 {{% /tab %}}

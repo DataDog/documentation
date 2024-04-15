@@ -1,6 +1,6 @@
 ---
 title: High Availability and Disaster Recovery
-kind: Documentation
+
 ---
 
 {{< site-region region="gov" >}}

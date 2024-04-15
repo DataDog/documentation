@@ -1,6 +1,6 @@
 ---
 title: Kubernetes log collection
-kind: documentation
+
 aliases:
   - /agent/kubernetes/log
 further_reading:
@@ -32,7 +32,7 @@ The Docker API is optimized to get logs from one container at a time. When there
 
 ## Log collection
 
-Before you start collecting application logs, ensure that you are running the Datadog Agent in your Kubernetes cluster. 
+Before you start collecting application logs, ensure that you are running the Datadog Agent in your Kubernetes cluster.
 
 To configure log collection using a DaemonSet, see [DaemonSet Log Collection][9]. Otherwise, follow the instructions below:
 
@@ -160,7 +160,7 @@ The schema for `<LOG_CONFIG>` depends on the integration. You can find this sche
 {{% tab "Kubernetes Pod Annotations" %}}
 With Autodiscovery, the Agent automatically searches all pod annotations for integration templates.
 
-To apply a specific configuration to a given container, Autodiscovery identifies containers by name, **not** image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`. 
+To apply a specific configuration to a given container, Autodiscovery identifies containers by name, **not** image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
 
 <div class="alert alert-info">
 If you define your Kubernetes pods <i>directly</i> (with <code>kind:Pod</code>), add each pod's annotations in its <code>metadata</code> section, as shown in the following sections.
@@ -210,7 +210,7 @@ spec:
 
 {{% tab "Key-value store" %}}
 
-Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources. 
+Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources.
 
 To use a key-value store, configure it in the Agent `datadog.yaml` configuration file and mount this file inside the containerized Agent. Alternatively, pass your key-value store as environment variables to the containerized Agent.
 
@@ -294,7 +294,7 @@ metadata:
             }
           ]
         }
-      }  
+      }
     ad.datadoghq.com/redis.logs: '[{"source": "redis","service": "<YOUR_APP_NAME>","tags": ["env:prod"]}]'
   labels:
     name: redis

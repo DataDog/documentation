@@ -1,6 +1,6 @@
 ---
 title: Go Compatibility Requirements
-kind: documentation
+
 description: 'Compatibility Requirements for the Go tracer'
 aliases:
   - /tracing/compatibility_requirements/go
@@ -18,7 +18,7 @@ further_reading:
 
 The Go Datadog Trace library is open source. View the [GitHub repository][1] for more information.
 
-The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][3]. Older versions may function, but no support is provided by default. For special requests, [contact support][4]. 
+The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][3]. Older versions may function, but no support is provided by default. For special requests, [contact support][4].
 
 ### Requirements
 

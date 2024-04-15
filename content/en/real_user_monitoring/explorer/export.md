@@ -1,6 +1,6 @@
 ---
 title: Export RUM Events and Graphs
-kind: documentation
+
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-You can use your RUM query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search RUM Events endpoint][1]. 
+You can use your RUM query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search RUM Events endpoint][1].
 
 ## Export the search query or visualization
 

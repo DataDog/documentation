@@ -7,7 +7,7 @@ further_reading:
 - link: developers/libraries
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-kind: documentation
+
 title: Envoyer des quantités importantes de métriques
 ---
 
@@ -17,11 +17,11 @@ Lorsque DogStatsD est utilisé pour transmettre un volume important de métrique
 
 - Utilisation intensive du processeur par l'Agent
 - Datagrammes/métriques perdus
-- Erreurs (UDS) renvoyées par la bibliothèque client DogStatsD 
+- Erreurs (UDS) renvoyées par la bibliothèque client DogStatsD
 
 Dans la plupart des cas, ces inconvénients peuvent être atténués en ajustant certaines options de configuration décrites ci-dessous.
 
-## Conseils généraux 
+## Conseils généraux
 
 ### Utiliser des clients officiels Datadog
 
@@ -444,7 +444,7 @@ Le nombre d'octets perdus par le client DogStatsD.
 : **Type de métrique** : count<br>
 Le nombre de datagrammes envoyés à l'Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Type de métrique** : count<br>
 Le nombre de datagrammes perdus par le client DogStatsD.
 
@@ -487,7 +487,7 @@ Le nombre d'octets perdus par le client DogStatsD.
 : **Type de métrique** : count<br>
 Le nombre de datagrammes envoyés à l'Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Type de métrique** : count<br>
 Le nombre de datagrammes perdus par le client DogStatsD.
 
@@ -557,7 +557,7 @@ Le nombre de datagrammes perdus car la liste d'attente du client DogStatsD étai
 : **Type de métrique** : count<br>
 Le nombre de datagrammes perdus en raison d'une erreur lors de l'écriture sur Datadog causée par une expiration ou un problème réseau.
 
-`datadog.dogstatsd.client.metric_dropped_on_receive` 
+`datadog.dogstatsd.client.metric_dropped_on_receive`
 : **Type de métrique** : count<br>
 Le nombre de métriques perdues car le canal de réception interne était plein (lors de l'utilisation de `WithChannelMode()`). Proposé depuis la version 3.6.0 du client Go lorsque `WithChannelMode()` est activé.
 
@@ -612,7 +612,7 @@ Le nombre de datagrammes envoyés à l'Agent.
 : **Type de métrique** : count<br>
 Le nombre de datagrammes perdus par le client DogStatsD.
 
-`datadog.dogstatsd.client.packets_dropped_queue` 
+`datadog.dogstatsd.client.packets_dropped_queue`
 : **Type de métrique** : count<br>
 Le nombre de datagrammes perdus car la liste d'attente du client DogStatsD était pleine.
 
@@ -671,7 +671,7 @@ Le nombre d'octets perdus par le client DogStatsD.
 : **Type de métrique** : count<br>
 Le nombre de datagrammes envoyés à l'Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Type de métrique** : count<br>
 Le nombre de datagrammes perdus par le client DogStatsD.
 

@@ -20,7 +20,7 @@ integration_id: auth0
 integration_title: Auth0
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: auth0.
@@ -62,7 +62,7 @@ En configurant des seuils, les équipes de sécurité peuvent mettre en place de
 
 ## Configuration
 
-L'intégralité de la configuration s'effectue sur le [dashboard Auth0][1]. 
+L'intégralité de la configuration s'effectue sur le [dashboard Auth0][1].
 
 1. Connectez-vous au [dashboard Auth0][1].
 2. Accédez à **Logs** > **Streams**.

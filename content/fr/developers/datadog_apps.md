@@ -6,7 +6,7 @@ further_reading:
 - link: https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md
   tag: Github
   text: Modèle de programmation
-kind: documentation
+
 title: Apps Datadog
 ---
 
@@ -64,7 +64,7 @@ Consultez le [Guide d'utilisation de la plateforme de développement][3] (en ang
 
 <img style="max-width:80%" alt="Bouton Enable UI Extensions de l'interface de modification d'App" src="https://user-images.githubusercontent.com/17037651/163401958-153f6c80-d7ba-4b47-a40d-1cf08913602d.png">
 
-Une fois cette vue chargée, cliquez sur le bouton **Enable UI Extensions**. 
+Une fois cette vue chargée, cliquez sur le bouton **Enable UI Extensions**.
 
 2. D'autres options pour votre App s'affichent alors.
 

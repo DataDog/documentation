@@ -24,7 +24,7 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: Documentation
   text: Découvrir comment configurer un test Browser
-kind: documentation
+
 title: Tests continus et CI/CD
 ---
 

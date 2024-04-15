@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Trello 카드를 생성할 때 웹후크 통합 사용
 ---
 
@@ -28,7 +28,7 @@ Trello에 로그인해 [Trello 앱 키와 토큰][3]을 가져옵니다.
 
 ## Trello 목록 지정
 
-목록에서 카드를 추가하고 싶은 카드를 클릭합니다. URL에 `.json`을 추가하고 해당 URL로 이동합니다. 
+목록에서 카드를 추가하고 싶은 카드를 클릭합니다. URL에 `.json`을 추가하고 해당 URL로 이동합니다.
 {{< img src="developers/faq/card_url.png" alt="card_url" >}}
 
 이동한 페이지에서 `idList` 값을 찾습니다:
@@ -61,7 +61,7 @@ Trello에 로그인해 [Trello 앱 키와 토큰][3]을 가져옵니다.
 * **desc**: 카드 설명
 * **key**: 애플리케이션 키
 * **token**: 토큰 키
-* **pos**: 목록에서 카드의 상대적 위치 
+* **pos**: 목록에서 카드의 상대적 위치
 * **idList**: 목록 ID
 
 다음은 완료된 설정의 예시입니다:

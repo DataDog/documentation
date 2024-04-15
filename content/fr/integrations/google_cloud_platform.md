@@ -33,7 +33,7 @@ integration_id: google-cloud-platform
 integration_title: Google Cloud Platform
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: google_cloud_platform
 public_title: Intégration Datadog/Google Cloud Platform
@@ -189,12 +189,12 @@ Référez-vous à la documentation de Google relative à la [création et la ges
 
 ### Collecte de logs
 
-Transférez des logs de vos services Google Cloud à Datadog à lʼaide de [Dataflow de Google Cloud][46] et du [modèle Datadog][47]. Cette méthode permet à la fois la compression et la mise en lot dʼévénements avant leur transfert vers Datadog. Suivez les instructions de cette section pour :   
+Transférez des logs de vos services Google Cloud à Datadog à lʼaide de [Dataflow de Google Cloud][46] et du [modèle Datadog][47]. Cette méthode permet à la fois la compression et la mise en lot dʼévénements avant leur transfert vers Datadog. Suivez les instructions de cette section pour :
 
-[1](#1-creer-une-rubrique-et-un-abonnement-pubsub-cloud). Créez une [rubrique][48] Pub/Sub et des [abonnements pull][49] pour recevoir des logs provenant dʼun récepteur de log configuré  
-[2](#2-creer-un-compte-de-service-de-worker-dataflow-personnalisé). Créez un compte de service de worker dataflow personnalisé afin de fournir [le minimum de privilèges][50] aux workers de vos pipelines Dataflow  
-[3](#3-exporter-des-logs-depuis-la-rubrique-pubsub-de-google-cloud). Créez un [récepteur de log][51] pour publier des logs dans la rubrique Pub/Sub  
-[4](#4-creer-et-executer-la-tache-dataflow). Créez une tâche Dataflow à lʼaide du [modèle Datadog][47] pour diffuser des logs à partir de lʼabonnement Pub/Sub auprès de Datadog  
+[1](#1-creer-une-rubrique-et-un-abonnement-pubsub-cloud). Créez une [rubrique][48] Pub/Sub et des [abonnements pull][49] pour recevoir des logs provenant dʼun récepteur de log configuré
+[2](#2-creer-un-compte-de-service-de-worker-dataflow-personnalisé). Créez un compte de service de worker dataflow personnalisé afin de fournir [le minimum de privilèges][50] aux workers de vos pipelines Dataflow
+[3](#3-exporter-des-logs-depuis-la-rubrique-pubsub-de-google-cloud). Créez un [récepteur de log][51] pour publier des logs dans la rubrique Pub/Sub
+[4](#4-creer-et-executer-la-tache-dataflow). Créez une tâche Dataflow à lʼaide du [modèle Datadog][47] pour diffuser des logs à partir de lʼabonnement Pub/Sub auprès de Datadog
 
 Vous bénéficiez dʼun contrôle total sur les logs qui sont envoyés à Datadog via les filtres de logs que vous créez dans le récepteur de log, y compris les logs GCE et GKE. Référez-vous à la [page relative au langage des requêtes de création de logs][52] de Google pour en savoir plus sur la rédaction de filtres.
 
@@ -216,7 +216,7 @@ La documentation relative à lʼabonnement <strong>Push</strong> sert uniquement
 
 #### 1. Créer une rubrique et un abonnement Cloud Pub/Sub
 
-1. Accédez à la [console Cloud Pub/Sub][55] et créez une nouvelle rubrique et un nouveau topic. Sélectionnez lʼoption **Add a default subscription** pour simplifier la configuration. 
+1. Accédez à la [console Cloud Pub/Sub][55] et créez une nouvelle rubrique et un nouveau topic. Sélectionnez lʼoption **Add a default subscription** pour simplifier la configuration.
 
    **Remarque** : vous pouvez aussi configurer un [abonnement Cloud Pub/Sub][56] manuellement avec le type de livraison **Pull**. Si vous créez manuellement votre abonnement Pub/Sub, ne cochez **pas** la case `Enable dead lettering`. Pour en savoir plus, référez-vous à la section [Fonctionnalités Pub/Sub non prises en charge][57].
 
@@ -224,7 +224,7 @@ La documentation relative à lʼabonnement <strong>Push</strong> sert uniquement
 
 2. Donnez un nom clair à ce sujet, comme `export-logs-to-datadog`, et cliquez sur *Create*.
 
-3. Créez un autre sujet et un autre abonnement par défaut pour gérer tous les messages de logs rejetés par lʼAPI Datadog. Le nom de ce sujet est utilisé dans le modèle Dataflow Datadog, où il fait partie de la configuration du chemin pour le [paramètre de modèle][58] `outputDeadletterTopic`. Une fois que vous avez inspecté et corrigé tous les problèmes des messages dʼéchec, renvoyez-les au sujet `export-logs-to-datadog` dʼorigine en exécutant une tâche [Modèle Pub/Sub vers Pub/Sub][59]. 
+3. Créez un autre sujet et un autre abonnement par défaut pour gérer tous les messages de logs rejetés par lʼAPI Datadog. Le nom de ce sujet est utilisé dans le modèle Dataflow Datadog, où il fait partie de la configuration du chemin pour le [paramètre de modèle][58] `outputDeadletterTopic`. Une fois que vous avez inspecté et corrigé tous les problèmes des messages dʼéchec, renvoyez-les au sujet `export-logs-to-datadog` dʼorigine en exécutant une tâche [Modèle Pub/Sub vers Pub/Sub][59].
 
 4. Datadog recommande de créer un secret dans [Secret Manager][60] avec la valeur de votre clé dʼAPI Datadog valide, afin de lʼutiliser plus tard dans le modèle Dataflow Datadog.
 
@@ -273,9 +273,9 @@ Par défaut, les workers de pipelines Dataflow utilisent le [compte de service C
 
 1. Accédez à la page [Créer une tâche à partir d'un modèle][73] dans la console Google Cloud.
 2. Donnez un nom à la tâche et sélectionnez un endpoint régional Dataflow.
-3. Sélectionnez `Pub/Sub to Datadog` dans la liste déroulante **Dataflow template**, et la section **Required parameters** apparaît.  
-   a. Sélectionnez l'abonnement en entrée dans la liste déroulante **Pub/Sub input subscription**.  
-   b. Saisissez les informations suivantes dans le champ **Datadog logs API URL** : 
+3. Sélectionnez `Pub/Sub to Datadog` dans la liste déroulante **Dataflow template**, et la section **Required parameters** apparaît.
+   a. Sélectionnez l'abonnement en entrée dans la liste déroulante **Pub/Sub input subscription**.
+   b. Saisissez les informations suivantes dans le champ **Datadog logs API URL** :
 
    ```shell
    https://{{< region-param key="http_endpoint" code="true" >}}
@@ -283,21 +283,21 @@ Par défaut, les workers de pipelines Dataflow utilisent le [compte de service C
    ```
    **Remarque** : assurez-vous que le sélecteur de site Datadog à droite de la page est défini sur votre [site Datadog][67] avant de copier l'URL ci-dessus.
 
-   c. Sélectionnez le sujet créé pour recevoir les échecs de messages dans la liste déroulante **Output deadletter Pub/Sub topic**.  
-   d. Indiquez un chemin d'accès pour les fichiers temporaires dans votre compartiement de stockage dans le champ **Temporary location**.  
+   c. Sélectionnez le sujet créé pour recevoir les échecs de messages dans la liste déroulante **Output deadletter Pub/Sub topic**.
+   d. Indiquez un chemin d'accès pour les fichiers temporaires dans votre compartiement de stockage dans le champ **Temporary location**.
 
-{{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Paramètres requis dans le modèle Dataflow Datadog" style="width:80%;">}}  
+{{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Paramètres requis dans le modèle Dataflow Datadog" style="width:80%;">}}
 
-4. Si vous avez créé un secret dans Secret Manager avec la valeur de votre clé API Datadog comme indiqué dans [étape 1](#1-creer-une-rubrique-et-un-abonnement-pubsub-cloud)), entrez le **nom de la ressource** du secret dans le champ **Google Cloud Secret Manager ID**.  
+4. Si vous avez créé un secret dans Secret Manager avec la valeur de votre clé API Datadog comme indiqué dans [étape 1](#1-creer-une-rubrique-et-un-abonnement-pubsub-cloud)), entrez le **nom de la ressource** du secret dans le champ **Google Cloud Secret Manager ID**.
 
-{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Paramètres facultatifs dans le modèle Dataflow Datadog avec les champs de lʼID de Secret Manager dans Google Cloud et la source de la clé dʼAPI transmise mis en évidence" style="width:80%;">}}  
+{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Paramètres facultatifs dans le modèle Dataflow Datadog avec les champs de lʼID de Secret Manager dans Google Cloud et la source de la clé dʼAPI transmise mis en évidence" style="width:80%;">}}
 
 Consultez la section [Paramètres de modèle][58] dans le modèle Dataflow pour en savoir plus sur lʼutilisation des autres options disponibles :
 
    - `apiKeySource=KMS` avec `apiKeyKMSEncryptionKey` défini sur votre clé dʼID de [Cloud KMS][74] et `apiKey` défini sur la clé dʼAPI chiffrée
    - **Non conseillé** : `apiKeySource=PLAINTEXT` avec `apiKey` défini sur la clé dʼAPI en texte brut
 
-5. Si vous avez créé un compte service de worker personnalisé, sélectionnez-le dans le menu déroulant **Service account email**.  
+5. Si vous avez créé un compte service de worker personnalisé, sélectionnez-le dans le menu déroulant **Service account email**.
 
 {{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="Paramètres facultatifs dans le modèle Dataflow Datadog avec le menu déroulant de lʼe-mail du compte de service mis en évidence" style="width:80%;">}}
 

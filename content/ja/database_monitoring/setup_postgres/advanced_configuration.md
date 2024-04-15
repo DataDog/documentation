@@ -1,6 +1,6 @@
 ---
 title: Postgres データベースモニタリングの高度なコンフィギュレーション
-kind: documentation
+
 description: Postgres データベースモニタリングの高度なコンフィギュレーション
 
 ---
@@ -52,6 +52,6 @@ Datadog Agent のデータベースインスタンスコンフィギュレーシ
 instances:
   - dbm: true
     ...
-    query_samples:        
+    query_samples:
         collection_interval: 0.1
 ```

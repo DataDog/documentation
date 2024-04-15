@@ -1,6 +1,6 @@
 ---
 title: Managing the Azure Native Integration
-kind: guide
+
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
@@ -102,7 +102,7 @@ Select **Monitored Subscriptions** in the left sidebar to view or modify the sco
 
 {{< img src="integrations/guide/azure_portal/azure-portal-multiple-subscriptions.png" alt="The Datadog resource in the Azure portal with Monitored Subscriptions selected in the Datadog organization configurations section and two subscriptions displayed" responsive="true" style="width:100%;">}}
 
-   - To add subscriptions to monitor, click `+ Add Subscriptions`. The list of subscriptions available only includes subscriptions to which you have the `Owner` role assigned. Select the subscriptions you wish to monitor and click `Add`. 
+   - To add subscriptions to monitor, click `+ Add Subscriptions`. The list of subscriptions available only includes subscriptions to which you have the `Owner` role assigned. Select the subscriptions you wish to monitor and click `Add`.
    - To remove subscriptions from being monitored with Datadog, select the subscriptions you wish to remove and click `Remove Subscriptions`. Only users with the `Owner` role can remove subscriptions.
 
 **Note**: The same settings (such as host filters and log collection rules) are applied across all subscriptions in scope. To apply different settings to different subscriptions, create different Datadog resources.
@@ -116,13 +116,13 @@ Changes to metric or log configuration settings should take effect within a few 
 #### Metric collection
 By default, Datadog automatically collects metrics for all Azure resources within any linked subscriptions.
 
-Optionally, limit metric collection for Azure VMs and App Service Plans using Azure tags attached to your resources. 
+Optionally, limit metric collection for Azure VMs and App Service Plans using Azure tags attached to your resources.
 
 ##### Tag rules for sending metrics
- 
- * Virtual machines, virtual machine scale sets, and App Service Plans with `include` tags send metrics to Datadog.  
- * Virtual machines, virtual machine scale sets, and App Service Plans with `exclude` tags don't send metrics to Datadog.  
- * If there's a conflict between inclusion and exclusion rules, exclusion takes priority.  
+
+ * Virtual machines, virtual machine scale sets, and App Service Plans with `include` tags send metrics to Datadog.
+ * Virtual machines, virtual machine scale sets, and App Service Plans with `exclude` tags don't send metrics to Datadog.
+ * If there's a conflict between inclusion and exclusion rules, exclusion takes priority.
  * There is no option to limit metric collection for other resource types.
 
 #### Log collection
@@ -209,10 +209,10 @@ For each VM, the following information is displayed:
 
 #### Install
 
-You can install the Datadog Agent directly in Azure with the VM Extension. To install the Datadog Agent: 
+You can install the Datadog Agent directly in Azure with the VM Extension. To install the Datadog Agent:
 
 1. Select the appropriate VM.
-2. Click **Install Extension**. 
+2. Click **Install Extension**.
 3. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
 ##### Uninstall
@@ -227,11 +227,11 @@ If the Agent was installed using a different method, you cannot use the Datadog 
 {{% /tab %}}
 {{% tab "AKS Cluster Extension" %}}
 
-The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. 
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools.
 
 #### Install
 
-To install the Datadog Agent with the AKS Cluster Extension: 
+To install the Datadog Agent with the AKS Cluster Extension:
 
 1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
 2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.

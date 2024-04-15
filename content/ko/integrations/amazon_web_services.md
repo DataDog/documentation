@@ -27,7 +27,7 @@ integration_id: amazon-web-services
 integration_title: AWS
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_web_services
 public_title: Datadog-AWS 통합
@@ -57,13 +57,13 @@ Datadog의 Amazon Web Services 통합은 [90일 이상의 AWS 서비스][3] 기�
 
 ### 자동
 
-  * **CloudFormation(빠른 시작을 위한 권장 사항)**  
+  * **CloudFormation(빠른 시작을 위한 권장 사항)**
     CloudFormation을 사용한 AWS 통합을 설정하려면 [AWS 시작하기 가이드][1]를 참조하세요.
 
-  * **Terraform**  
+  * **Terraform**
     Terraform를 사용해 AWS 통합을 설정하려면 [Terraform을 사용한 AWS 통합][4]을 참조하세요.
 
-  * **Control Tower**  
+  * **Control Tower**
     [Control Tower Account Factory][5]를 사용해 새로운 AWS 계정을 프로비저닝할 때 AWS 통합을 설정하려면 [Control Tower 설정 가이드][6]를 참조하세요.
 
   * **AWS 조직을 위한 다계정 설정**
@@ -92,7 +92,7 @@ Datadog US1-FED 사이트를 사용하는 경우 이 통합은 액세스 키로 
 Datadog로 AWS 서비스 로그를 전송하는 방법에는 두 가지가 있습니다.
 
 - [Amazon Data Firehose 목적지][11]: Amazon Data Firehose 전송 스트림에서 Datadog에 로그를 전달하는 데 Datadog 목적지를 사용하세요. 클라우드와치(CloudWatch)에서 매우 많은 로그를 전송할 때 이 접근 방식이 권장됩니다.
-- [포워더(Forwarder) 람다 함수][12]: Datadog의 포워더(Forwarder) 람다 함수를 배포합니다. 해당 함수는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 구독되어 로그를 Datadog에 전달합니다. 또한 Datadog는 Amazon Data Firehose에 직접 데이터를 스트림할 수 없는 기타 리소스나 S3에서 로그를 전송하는 경우 이 접근 방식을 사용할 것을 권장합니다. 
+- [포워더(Forwarder) 람다 함수][12]: Datadog의 포워더(Forwarder) 람다 함수를 배포합니다. 해당 함수는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 구독되어 로그를 Datadog에 전달합니다. 또한 Datadog는 Amazon Data Firehose에 직접 데이터를 스트림할 수 없는 기타 리소스나 S3에서 로그를 전송하는 경우 이 접근 방식을 사용할 것을 권장합니다.
 
 ## 메트릭 수집
 
@@ -111,7 +111,7 @@ Datadog로 AWS 메트릭을 전송하는 방법은 두 가지가 있습니다.
 
 <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection" target="_blank">리소스 수집</a>을 사용하고, AWS 관리형 <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">SecurityAudit 정책</a>을 Datadog IAM 역할을 추가합니다.
 
-**참고**: 리소스 수집을 활성화했지만 Datadog IAM 역할에 추가된 AWS Security Audit Policy가 없는 경우 Datadog의 AWS 통합 타일에 경고 메시지가 표시됩니다. 
+**참고**: 리소스 수집을 활성화했지만 Datadog IAM 역할에 추가된 AWS Security Audit Policy가 없는 경우 Datadog의 AWS 통합 타일에 경고 메시지가 표시됩니다.
 
 ### 클라우드 보안 관리
 
@@ -123,12 +123,12 @@ AWS 계정에 대해 설정된 AWS 통합이 없는 경우 위에서 [설정 프
 
 Cloud Security Management를 기존 AWS 통합에 추가하려면, 아래 단계를 따라 리소스 수집을 활성화하세요.
 
-1. 자동 **or** 수동 단계를 사용해 Datadog IAM 역할에 필수 권한을 제공하세요. 
+1. 자동 **or** 수동 단계를 사용해 Datadog IAM 역할에 필수 권한을 제공하세요.
 
    **자동** - CloudFormation 템플릿을 업데이트하세요.
    a. CloudFormation 콘솔에서 Datadog 통합을 설치하고 `Update`를 선택하는 데 사용한 메인 스택을 찾습니다.
     b. `Replace current template`을 선택합니다.
-    c. `Amazon S3 URL`를 선택한 다음 `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml`을 입력하고  `Next`를 클릭합니다. 
+    c. `Amazon S3 URL`를 선택한 다음 `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml`을 입력하고  `Next`를 클릭합니다.
     d. `CloudSecurityPostureManagementPermissions`을  `true` 로 선택한 다음 `Next`를 클릭하되 `Review` 페이지에 도달할 때까지 기타 기존 파라미터를 수정하지 않습니다. 여기에서 변경 사항 설정 미리 보기를 확인할 수 있습니다.
     e. 아래에서 두 가지 확인 사항에 확인 표시하고 `Update stack`을 클릭합니다.
 
@@ -210,7 +210,7 @@ AWS 통합을 통해 다음의 태그가 수집됩니다. **참조**: 일부 태
 
 ## 트러블슈팅
 
-[AWS 통합 트러블슈팅 가이드][62]를 참조해 AWS 통합과 관련된 문제를 해결하세요. 
+[AWS 통합 트러블슈팅 가이드][62]를 참조해 AWS 통합과 관련된 문제를 해결하세요.
 
 ## 참고 자료
 

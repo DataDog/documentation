@@ -5,7 +5,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog
   text: Surveiller des périphériques SNMP avec Datadog
-kind: documentation
+
 title: Dépannage du Network Device Monitoring
 ---
 
@@ -75,7 +75,7 @@ snmpwalk -O bentU -v 2c -c <CHAÎNE_COMMUNITY> <ADRESSE_IP>:<PORT> 1.3.6
 #### Que faire si Datadog prend en charge un fournisseur ou un type de périphérique, mais pas le modèle spécifique qui m'intéresse ?
 
 - Contactez l'[assistance Datadog][1] pour demander la prise en charge de votre modèle.
-- Complétez vos profils de façon à prendre en charge des valeurs `sysobjectid` supplémentaires. 
+- Complétez vos profils de façon à prendre en charge des valeurs `sysobjectid` supplémentaires.
     Par exemple, si vous souhaitez surveiller un autre type de Cisco CSR, vous pouvez modifier directement le profil ISR pour indiquer un autre `sysobjectid`, comme indiqué ci-dessous :
 
     ```

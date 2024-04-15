@@ -1,6 +1,6 @@
 ---
 description: ファセット検索でモニターのリストを絞り込み
-kind: documentation
+
 title: モニターの検索
 ---
 

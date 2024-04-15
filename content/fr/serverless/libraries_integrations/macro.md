@@ -3,7 +3,7 @@ aliases:
   - /fr/serverless/serverless_integrations/macro/
 dependencies:
   - https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md
-kind: documentation
+
 title: Macro Serverless Datadog
 ---
 ![build_sans_serveur](https://github.com/DataDog/datadog-cloudformation-macro/workflows/build_serverless/badge.svg)
@@ -128,7 +128,7 @@ Resources:
 
 ### Message d'erreur : 'logGroupNamePrefix' failed to satisfy constraint…
 
-L'option `forwarderArn` ne fonctionne pas lorsque `FunctionName` contient des fonctions CloudFormation, telles que `!Sub`. Dans ce cas, la macro n'a pas accès au nom réel de la fonction (CloudFormation exécute les fonctions après les transformations). Par conséquent, elle ne peut pas créer de groupes de logs ni de filtres d'abonnement pour vos fonctions. 
+L'option `forwarderArn` ne fonctionne pas lorsque `FunctionName` contient des fonctions CloudFormation, telles que `!Sub`. Dans ce cas, la macro n'a pas accès au nom réel de la fonction (CloudFormation exécute les fonctions après les transformations). Par conséquent, elle ne peut pas créer de groupes de logs ni de filtres d'abonnement pour vos fonctions.
 
 Supprimez le paramètre `forwarderArn` du modèle SAM ou du code source CDK, et définissez plutôt les filtres d'abonnement à l'aide de la ressource [AWS::Logs::SubscriptionFilter][7] comme indiqué ci-dessous.
 

@@ -4,7 +4,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/amazon_web_services/
   tag: Intégration
   text: Intégration AWS
-kind: guide
+
 title: Dépannage de l'intégration AWS
 ---
 

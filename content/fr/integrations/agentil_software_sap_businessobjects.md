@@ -33,7 +33,7 @@ integration_id: agentil-software-sap-businessobjects
 integration_title: SAP BusinessObjects
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -99,7 +99,7 @@ Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez AGEN
 *Si vous êtes à la recherche d'un partenaire de confiance pour des intégrations spécifiques avec SAP ou d'autres plateformes, vous êtes au bon endroit. Contactez-nous !*
 
 ---
-Ce produit a été conçu et développé à Genève, en Suisse. 
+Ce produit a été conçu et développé à Genève, en Suisse.
 
 
 ---

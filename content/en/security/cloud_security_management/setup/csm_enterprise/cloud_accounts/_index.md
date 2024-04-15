@@ -1,6 +1,6 @@
 ---
 title: Enabling CSM Enterprise for Cloud Accounts
-kind: documentation
+
 ---
 
 Use the following instructions to enable [CSM Misconfigurations][2] and [CSM Identity Risks][3] for your cloud accounts. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][9].
@@ -42,9 +42,9 @@ Enable AWS CloudTrail logging so that logs are sent to a S3 bucket.
 
 1. Click **Create trail** on the [CloudTrail dashboard][19].
 2. Enter a name for your trail.
-3. Create a new S3 bucket or use an existing S3 bucket to store the CloudTrail logs. 
+3. Create a new S3 bucket or use an existing S3 bucket to store the CloudTrail logs.
 4. Create a new AWS KMS key or use an existing AWS KMS key. Click **Next**.
-5. Leave the event type with the default management read and write events, or choose additional event types you want to send to Datadog. 
+5. Leave the event type with the default management read and write events, or choose additional event types you want to send to Datadog.
 6. Click **Next**.
 7. Review and click **Create trail**.
 
@@ -55,7 +55,7 @@ Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail lo
 1. Go to the [Datadog Forwarder Lambda][20] that was created during the AWS integration set up.
 2. Click **Add trigger**.
 3. Select **S3** for the trigger.
-4. Select the S3 bucket you are using to collect AWS CloudTrail logs. 
+4. Select the S3 bucket you are using to collect AWS CloudTrail logs.
 5. For Event type, select **All object create events**.
 6. Click **Add**.
 7. See CloudTrail logs in Datadog's [Log Explorer][21].

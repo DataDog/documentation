@@ -1,6 +1,6 @@
 ---
 title: Ingest Amazon S3 Logs with the Observability Pipelines Worker
-kind: guide
+
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The [Observability Pipelines Worker][1] can ingest logs from many different sources. If you have an Amazon S3 bucket that is receiving logs from an external system, such as AWS CloudTrail or CloudWatch, you can configure the Worker to ingest those logs. The setup uses Observability Pipelines Worker's Amazon S3 source, which requires configuring an Amazon SQS queue to receive event notifications from the S3 bucket. The event notification then informs the Worker to collect the new log events in the S3 bucket. 
+The [Observability Pipelines Worker][1] can ingest logs from many different sources. If you have an Amazon S3 bucket that is receiving logs from an external system, such as AWS CloudTrail or CloudWatch, you can configure the Worker to ingest those logs. The setup uses Observability Pipelines Worker's Amazon S3 source, which requires configuring an Amazon SQS queue to receive event notifications from the S3 bucket. The event notification then informs the Worker to collect the new log events in the S3 bucket.
 
 This guide walks you through the following steps:
 
@@ -83,7 +83,7 @@ Create a separate IAM role for the Worker so that only the necessary permissions
 1. Go to the [AWS IAM console][6].
 2. In the navigation pane, click **Roles**.
 3. Click **Create role**.
-4. Select the trusted entity type to which the role is attached. 
+4. Select the trusted entity type to which the role is attached.
 5. Click **Next**.
 6. Click **Create policy**.
 7. Click the **JSON** tab. Copy and paste in the minimal permissions that must be attached to the role:
@@ -118,9 +118,9 @@ Apply the role to the running Observability Pipelines process. You can do this b
 
 ## Configure the Worker to receive notifications from the SQS queue
 
-1. Use the below source configuration example to set up the Worker to:  
-      a. Receive the SQS event notifications.   
-      b. Read the associated logs in the S3 bucket.  
+1. Use the below source configuration example to set up the Worker to:
+      a. Receive the SQS event notifications.
+      b. Read the associated logs in the S3 bucket.
       c. Emit the logs to the console.
     ```yaml
         sources:
@@ -134,7 +134,7 @@ Apply the role to the running Observability Pipelines process. You can do this b
 
 See [Amazon S3 source documentation][7] for more options.
 
-With the Amazon S3 source set up, you can now add [transforms][8] to manipulate the data and [sinks][9] to output the logs to destinations based on your use case. See [Configurations][3] for more information on sources, transforms, and sinks. 
+With the Amazon S3 source set up, you can now add [transforms][8] to manipulate the data and [sinks][9] to output the logs to destinations based on your use case. See [Configurations][3] for more information on sources, transforms, and sinks.
 
 ## Configure the Worker to separate batched Amazon S3 log events
 

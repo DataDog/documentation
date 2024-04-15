@@ -1,7 +1,7 @@
 ---
 description: Feuille de route pour la formation des nouveaux fournisseurs de services
   gérés au processus d'ingénierie commerciale de Datadog
-kind: documentation
+
 private: true
 title: Guide de formation aux processus de vente pour les partenaires
 ---
@@ -75,7 +75,7 @@ Si vous avez suivi les formations recommandées décrites ci-dessus, vous êtes 
 - Démonstration de la valeur ajoutée
 - Configuration, prix et devis
 
-Si vous avez des questions pendant votre parcours de formation, contactez-nous à l'adresse partner-support@datadoghq.com 
+Si vous avez des questions pendant votre parcours de formation, contactez-nous à l'adresse partner-support@datadoghq.com
 
 [1]: https://partners.datadoghq.com/
 [2]: https://learn.datadoghq.com/bundles/dd-fundamentals

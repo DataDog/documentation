@@ -10,7 +10,7 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
   text: Apprendre à utiliser des tags dans Datadog
-kind: documentation
+
 title: Assigner des tags
 ---
 
@@ -362,7 +362,7 @@ Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:e
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
 ```
 
-Grâce au tag `domain:example.com`, vous pouvez calculer le total des vues de pages pour l'ensemble des hosts : 
+Grâce au tag `domain:example.com`, vous pouvez calculer le total des vues de pages pour l'ensemble des hosts :
 
 ```text
 sum:page.views{domain:example.com}

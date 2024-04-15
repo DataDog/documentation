@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Session Replay
-kind: documentation
+
 further_reading:
     - link: '/real_user_monitoring/session_replay/browser'
       tag: 'Documentation'
@@ -29,12 +29,12 @@ This page walks you through getting started with Session Replay in Datadog. If y
 
 ## Configure Session Replays
 
-Session Replay is available for browser applications and mobile apps. The examples in this guide demonstrate using Session Replay with a browser app. 
+Session Replay is available for browser applications and mobile apps. The examples in this guide demonstrate using Session Replay with a browser app.
 
 To start collecting data for Session Replay:
 
 1. Set up [Datadog RUM Browser Monitoring][7] by creating a RUM application (ensure you toggle **Session Replay Enabled** to access replay recordings).
-2. Generate a **Client Token**. 
+2. Generate a **Client Token**.
 3. Initialize the RUM Browser SDK by inserting the configuration code generated when you create the RUM application into your application source.
 
 Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
@@ -57,7 +57,7 @@ Maybe you've created a [Saved View][6] that shows you all sessions that contain 
 
 ## Examine a user journey
 
-The session replay looks like a video on the left, with standard video navigation tools. Start the replay from the beginning by clicking play, and watch everything that a particular user did. 
+The session replay looks like a video on the left, with standard video navigation tools. Start the replay from the beginning by clicking play, and watch everything that a particular user did.
 
 The **User Journey** is an event timeline on the right side of the page. You can navigate to any moment in the user journey by clicking on an event in the list. You can also track all the actions and errors occurring for each view by clicking **Session Breakdown**.
 
@@ -80,7 +80,7 @@ From the Details page, you can expand the waterfall view for more detailed infor
 
 ## Troubleshoot using Developer Tools
 
-Open Session Replay's [browser developer tools][8] to explore your application's performance, console logs, errors, and application or user attributes associated with the current replay. 
+Open Session Replay's [browser developer tools][8] to explore your application's performance, console logs, errors, and application or user attributes associated with the current replay.
 
 {{< img src="/getting_started/session_replay/dev-tools.png" alt="Dev tools console" style="width:100%" >}}
 
@@ -90,13 +90,13 @@ Session Replay integrates with your application's metrics, traces, and logs to g
 
 ### Investigating request performance with APM traces
 
-The [APM traces][9] associated with a session replay give you end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience. Having full-stack traces can be helpful if you're unsure whether an error is occurring on the frontend or backend of your application. 
+The [APM traces][9] associated with a session replay give you end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience. Having full-stack traces can be helpful if you're unsure whether an error is occurring on the frontend or backend of your application.
 
 Select a replay with traces to view the browser request, as well as all the backend dependencies and services called upon to fulfill the request in a specific page.
 
 {{< img src="/getting_started/session_replay/traces-view.png" alt="Traces panel" style="width:100%" >}}
 
-Select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace. 
+Select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace.
 
 {{< img src="/getting_started/session_replay/APM.png" alt="APM page with more detailed information" style="width:100%" >}}
 

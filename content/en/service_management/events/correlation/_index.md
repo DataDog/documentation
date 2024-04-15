@@ -1,6 +1,6 @@
 ---
 title: Correlation
-kind: Documentation
+
 disable_toc: false
 further_reading:
 - link: "service_management/events/"
@@ -15,9 +15,9 @@ algolia:
 
 ## Overview
 
-Event Correlation groups events based on their relationships or on user-defined configurations to reduce the number of notifications and issues identified from the environment. Use correlation patterns and cases to: 
-* Reduce alert fatigue 
-* Reduce the number of tickets and notifications you receive 
+Event Correlation groups events based on their relationships or on user-defined configurations to reduce the number of notifications and issues identified from the environment. Use correlation patterns and cases to:
+* Reduce alert fatigue
+* Reduce the number of tickets and notifications you receive
 * Have all affected teams to be aware of a single issue instead of working in silos
 
 ## Configure correlations
@@ -38,7 +38,7 @@ Datadog automatically suggests correlation patterns based on your environment. C
 
 ## View patterns
 
-View all your configured patterns in the [Correlation page][1]. Get a high level overview of each pattern's time window, how it's grouped, the ratio of events to cases, compression percentage, and the date the pattern was last updated. From the table you can: 
+View all your configured patterns in the [Correlation page][1]. Get a high level overview of each pattern's time window, how it's grouped, the ratio of events to cases, compression percentage, and the date the pattern was last updated. From the table you can:
 - Sort by last updated to see patterns that were updated most recently
 - View related cases
 - Toggle to activate or disable a pattern
@@ -53,7 +53,7 @@ Event Management correlates related events and automatically consolidates them i
 From the [Correlation][1], find the pattern you want to analyze and click **Triage Cases** at the end of the same row. You can also click **View All Cases** at the top of the page to view all cases with correlated events in [Case Management][2]. To investigate a case:
 1. Open the case you are investigating.
 1. From the case Overview, click **Investigation** or **Investigate Correlations and Related Metrics**.
-1. Under the *Correlations* section, you can see a list of alerts and events. 
+1. Under the *Correlations* section, you can see a list of alerts and events.
 1. (Optional) Select any alerts or events you want to remove that are not related to the case. Click the event to open a side panel detailing related logs and metrics. Troubleshoot issues with all the related data pulled into one page.
 1. Under the *Related Metrics* section, compare all related metrics or group by tags.
 

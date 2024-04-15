@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics
-kind: guide
+
 title: Les métriques des machines virtuelles Azure n'apparaissent pas dans l'application
 ---
 

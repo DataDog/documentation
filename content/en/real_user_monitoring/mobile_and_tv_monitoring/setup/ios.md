@@ -1,6 +1,6 @@
 ---
 title: RUM iOS and tvOS Monitoring Setup
-kind: documentation
+
 beta: true
 description: "Collect RUM data from your iOS and tvOS applications."
 aliases:

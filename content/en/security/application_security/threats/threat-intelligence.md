@@ -1,6 +1,6 @@
 ---
 title: Threat Intelligence
-kind: documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-threat-intelligence/"
   tag: "Blog"
@@ -30,11 +30,11 @@ Datadog recommends _against_ the following:
 
 To search for all traces flagged by a specific source, use the following query with the source name:
 
-    @threat_intel.results.source.name:<SOURCE_NAME> 
+    @threat_intel.results.source.name:<SOURCE_NAME>
 
 To query for all traces containing threat intelligence from any source, use the following query:
 
-    @appsec.threat_intel:true 
+    @appsec.threat_intel:true
 
 <div class="alert alert-info">
 The query <code>@appsec.threat_intel:true</code> in the ASM traces tab is not equivalent to <code>@threat_intel.indicators_matched:*</code>. The <code>@threat_intel.indicators_matched:*</code> query contains values for every threat intelligence match, but the overall trace may not be resurfaced in ASM if there is no attack present and the source does not match one of the sources mentioned in the <strong>Which sources are surfaced in ASM</strong> section.

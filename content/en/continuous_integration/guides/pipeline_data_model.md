@@ -1,6 +1,6 @@
 ---
-title: Pipeline Data Model And Execution Types 
-kind: guide
+title: Pipeline Data Model And Execution Types
+
 description: Learn how Pipelines are modeled and what execution types are supported by CI Visibility.
 further_reading:
   - link: "/continuous_integration/pipelines"
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports. 
+This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports.
 
 This guide applies to pipelines created using the [public CI Visibility Pipelines API][3]. Integrations with other CI providers may vary.
 
@@ -55,17 +55,17 @@ After the completion of each component, a payload must be sent to Datadog with a
 
 ### Full retries
 
-Full retries of a pipeline must have different pipeline unique IDs. 
+Full retries of a pipeline must have different pipeline unique IDs.
 
 In the public API endpoint, you can populate the `previous_attempt` field to link to previous retries. Retries are treated as separate pipeline executions in Datadog, and the start and end time should only encompass that retry.
 
 ### Partial retries
 
-When retrying a subset of jobs within a pipeline, you must send a new pipeline event with a new pipeline unique ID. The payload for any new jobs must be linked to the new pipeline unique ID. To link them to the previous retry, add the `previous_attempt` field. 
+When retrying a subset of jobs within a pipeline, you must send a new pipeline event with a new pipeline unique ID. The payload for any new jobs must be linked to the new pipeline unique ID. To link them to the previous retry, add the `previous_attempt` field.
 
 Partial retries are treated as separate pipelines as well. The start and end time must not include the time of the original retry. For a partial retry, do not send payloads for jobs that ran in the previous attempt. Also, set the `partial_retry` field to `true` on partial retries to exclude them from aggregation when calculating run times.
 
-For example, a pipeline named `P` has three different jobs, namely `J1`, `J2`, and `J3`, executed sequentially. In the first run of `P`, only `J1` and `J2` are executed, and `J2` fails. 
+For example, a pipeline named `P` has three different jobs, namely `J1`, `J2`, and `J3`, executed sequentially. In the first run of `P`, only `J1` and `J2` are executed, and `J2` fails.
 
 Therefore, you need to send a total of three payloads:
 
@@ -73,7 +73,7 @@ Therefore, you need to send a total of three payloads:
 2. Job payload for `J2`, with ID `J2_1` and pipeline ID `P_1`.
 3. Pipeline payload for `P`, with ID `P_1`.
 
-Suppose there is a partial retry of the pipeline starting from `J2`, where all the remaining jobs succeed. 
+Suppose there is a partial retry of the pipeline starting from `J2`, where all the remaining jobs succeed.
 
 You need to send three additional payloads:
 
@@ -85,7 +85,7 @@ The actual values of the IDs are not important. What matters is that they are co
 
 ### Blocked pipelines
 
-If a pipeline is indefinitely blocked due to requiring manual intervention, a pipeline event payload must be sent as soon as the pipeline reaches the blocked state. The pipeline status must be set to `blocked`. 
+If a pipeline is indefinitely blocked due to requiring manual intervention, a pipeline event payload must be sent as soon as the pipeline reaches the blocked state. The pipeline status must be set to `blocked`.
 
 {{< img src="ci/pipeline-blocked-pipeline-execution.png" alt="Flow of a blocked pipeline execution" style="width:100%;">}}
 

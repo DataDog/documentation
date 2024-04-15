@@ -1,6 +1,6 @@
 ---
 title: Quality Gates Explorer
-kind: documentation
+
 description: Learn about the Quality Gates Explorer for quality gates and rule executions.
 further_reading:
   - link: "/quality_gates/"
@@ -26,8 +26,8 @@ The Quality Gates Explorer allows you to [search and filter](#search-and-filter)
 {{< tabs >}}
 {{% tab "Gates" %}}
 
-Navigate to [**CI** > **Quality Gate Executions**][101] to see your Quality Gates. 
-  
+Navigate to [**CI** > **Quality Gate Executions**][101] to see your Quality Gates.
+
 {{< img src="/quality_gates/explorer/gates.png" text="Quality Gate rules page" style="width:100%" >}}
 
 The **Quality Gates** panel on the left lists default facets you can use to search for your gates.
@@ -69,7 +69,7 @@ The **Quality Gates** panel on the left lists default facets you can use to sear
 
 ## Rule executions details
 
-You can see aggregated data about rule executions over the selected time frame. Use the search field and facets to filter the list to show the executions you want to investigate. 
+You can see aggregated data about rule executions over the selected time frame. Use the search field and facets to filter the list to show the executions you want to investigate.
 
 ### Rule execution data
 

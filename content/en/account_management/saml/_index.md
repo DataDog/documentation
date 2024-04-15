@@ -1,6 +1,6 @@
 ---
 title: Single Sign On With SAML
-kind: documentation
+
 aliases:
   - /guides/saml
 further_reading:
@@ -18,7 +18,7 @@ algolia:
 
 Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization's Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
-**Notes**: 
+**Notes**:
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 - If you don't have SAML enabled on your Datadog account, reach out to [support][1] to enable it.
@@ -70,8 +70,8 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 5. After you upload the IdP metadata and configure your IdP, enable SAML in Datadog by clicking the **Upload and Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable" >}}
-    
-6. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default. 
+
+6. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default.
 
 7. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 

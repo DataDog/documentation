@@ -1,6 +1,6 @@
 ---
 title: "Quelles sont les bonnes pratiques à adopter pour nommer les métriques et les tags\_?"
-kind: faq
+
 further_reading:
   - link: /metrics/
     tag: Documentation

@@ -1,6 +1,6 @@
 ---
 title: OpenTelemetry Metrics Mapping
-kind: documentation
+
 aliases:
 - /opentelemetry/guide/metrics_mapping/
 further_reading:
@@ -22,7 +22,7 @@ The following diagram shows the process of mapping the metrics from OpenTelemetr
 
 ## Use of the `otel` prefix
 
-To differentiate the metrics captured by the `hostmetrics` receiver from Datadog Agent, we add a prefix, `otel`, for metrics collected by the collector. If a metric name starts with `system.` or `process.`, `otel.` is prepended to the metric name. Monitoring the same infrastructure artifact using both Agent and Collector is not recommended. 
+To differentiate the metrics captured by the `hostmetrics` receiver from Datadog Agent, we add a prefix, `otel`, for metrics collected by the collector. If a metric name starts with `system.` or `process.`, `otel.` is prepended to the metric name. Monitoring the same infrastructure artifact using both Agent and Collector is not recommended.
 
 <div class="alert alert-info">Datadog is evaluating ways to improve the OTLP metric experience, including potentially deprecating this <code>otel</code> prefix. If you have feedback related to this, reach out your account team to provide your input.</div>
 
@@ -36,7 +36,7 @@ The metrics, mapped to Datadog metrics, are used in the following views:
 - [Host default dashboards][7]
 - [APM Trace view Host info][8]
 
-**Note**: To correlate trace and host metrics, configure [Universal Service Monitoring attributes][3] for each service, and set the `host.name` resource attribute to the corresponding underlying host for both service and collector instances. 
+**Note**: To correlate trace and host metrics, configure [Universal Service Monitoring attributes][3] for each service, and set the `host.name` resource attribute to the corresponding underlying host for both service and collector instances.
 
 The following table shows which Datadog host metric names are associated with corresponding OpenTelemetry host metric names, and, if applicable, what math is applied to the OTel host metric to transform it to Datadog units during the mapping.
 
@@ -65,10 +65,10 @@ The Docker Stats receiver generates container metrics for the OpenTelemetry Coll
 - [Containers Overview default dashboard][9]
 - [APM Trace view][10] with container metrics
 
-**Note**: To correlate trace and container metrics, configure [Universal Service Monitoring attributes][3] for each service, and set the following resource attributes for each service: 
-  - `k8s.container.name` 
-  - `k8s.pod.name` 
-  - `container.name` 
+**Note**: To correlate trace and container metrics, configure [Universal Service Monitoring attributes][3] for each service, and set the following resource attributes for each service:
+  - `k8s.container.name`
+  - `k8s.pod.name`
+  - `container.name`
   - `container.id`
 
   Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][4].
@@ -115,8 +115,8 @@ The following table shows what Datadog container metric names are associated wit
 | kafka.purgatory.size{type:fetch} | kafka.request.fetch_request_purgatory.size | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
 | kafka.partition.under_replicated | kafka.replication.under_replicated_partitions | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
 | kafka.isr.operation.count{operation:shrink} | kafka.replication.isr_shrinks.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
-| kafka.isr.operation.count{operation:expand} | kafka.replication.isr_expands.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge | 
-| kafka.leader.election.rate | kafka.replication.leader_elections.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge | 
+| kafka.isr.operation.count{operation:expand} | kafka.replication.isr_expands.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
+| kafka.leader.election.rate | kafka.replication.leader_elections.rate | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | Compute rate per second and submitted as Gauge |
 | kafka.partition.offline | kafka.replication.offline_partitions_count | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
 | kafka.request.time.avg{type:produce} | kafka.request.produce.time.avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |
 | kafka.request.time.avg{type:fetchconsumer} | kafka.request.fetch_consumer.time.avg | JMX Receiver / JMX Metrics Gatherer {target_system:kafka} | |

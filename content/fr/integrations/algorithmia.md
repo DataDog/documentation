@@ -22,7 +22,7 @@ integration_id: algorithmia
 integration_title: Algorithmia
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: support@algorithmia.io
 manifest_version: 1.0.0
 metric_prefix: algorithmia.
@@ -53,7 +53,7 @@ Cette intégration vous permet de diffuser, depuis Algorithmia vers Kafka puis v
 1. À partir de votre instance Algorithmia, configurez Algorithmia Insights pour qu'il se connecte à
    un broker Kafka (externe à Algorithmia).
 
-2. Consultez le [référentiel integrations d'Algorithmia][3]. 
+2. Consultez le [référentiel integrations d'Algorithmia][3].
    pour installer, configurer et lancer le service de transfert de message Datadog utilisé
    dans cette intégration. Celui-ci transfère les métriques d'une rubrique Kafka vers
    l'API des métriques dans Datadog.

@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Datadog에 AppDynamics 이벤트 게시
 ---
 

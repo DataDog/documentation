@@ -37,7 +37,7 @@ integration_id: trek10-coverage-advisor
 integration_title: Trek10 AWS Coverage Advisor
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -109,7 +109,7 @@ Coverage Advisor は Datadog アカウントの重要な AWS CloudWatch メト�
 このインテグレーションでは、アカウントで保有する AWS メトリクスのうち、対応するモニターがないものをすばやく確認することができます。毎週ダッシュボードにチェックインしてレポートを生成したり、モニターをセットアップして毎日アラートを送信したりと、使いやすい方法で運用することができます。
 
 ### ベンダー情報
-* Trek10 
+* Trek10
 * 会社紹介: Trek10 はテクノロジーとシステム構築を心から愛するメンバーの集まりです。AWS と Datadog を長年活用してきた経験から、これまで多くの企業の専門サービスの導入やトレーニングを支援してきました。社内では主に、AWS 向け管理型サービスのツールとして Datadog を使用しています。クライアントのアカウントにモニターを追加する必要がある場合に通知を送信する内部ツールを、お客様が使いやすいよう変更して提供しています。
 * ウェブサイト: trek10.com
 

@@ -1,6 +1,6 @@
 ---
 title: Checks custom
-kind: documentation
+
 description: Configurer un check custom avec Datadog
 ---
 ## Présentation

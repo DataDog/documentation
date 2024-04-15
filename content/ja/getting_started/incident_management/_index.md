@@ -30,7 +30,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
-kind: documentation
+
 title: Incident Management の概要
 ---
 

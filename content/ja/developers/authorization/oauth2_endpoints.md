@@ -4,12 +4,12 @@ further_reading:
 - link: /developers/authorization/
   tag: Documentation
   text: OAuth2 認可について
-kind: documentation
+
 title: OAuth2 認可エンドポイントリファレンス
 ---
 {{< callout btn_hidden="true" >}}
   Datadog Developer Platform は現在ベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
-{{< /callout >}} 
+{{< /callout >}}
 
 ## 概要
 
@@ -144,7 +144,7 @@ curl -X POST \
 curl -X POST \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     -d 'client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&token=$TOKEN_TO_REVOKE' \
-    "https://api.datadoghq.com/oauth2/v1/revoke" \ 
+    "https://api.datadoghq.com/oauth2/v1/revoke" \
 ```
 
 #### 成功レスポンス

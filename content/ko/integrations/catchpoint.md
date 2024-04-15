@@ -33,7 +33,7 @@ integration_id: catchpoint
 integration_title: Catchpoint
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: catchpoint
 public_title: Catchpoint
@@ -61,9 +61,9 @@ Catchpoint는 최적의 사용자 경험을 제공하기 위한 강력한 기능
 
 Catchpoint와 Datadog에서 다음을 수행할 수 있습니다.
 
--   이벤트 스트림에서 종합적인 알림 설정 
+-   이벤트 스트림에서 종합적인 알림 설정
 -   Catchpoint 포털의 분석 차트로 바로 연결되는 링크
--   간편한 필터링을 위한 알림 유형 태그 
+-   간편한 필터링을 위한 알림 유형 태그
 
 {{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint 이벤트" popup="true">}}
 
@@ -824,7 +824,7 @@ Catchpoint 알림를 스트림으로 가져오려면 Catchpoint 포털에 로그
 {{< get-metrics-from-git "catchpoint" >}}
 
 
-### 이벤트 
+### 이벤트
 
 Catchpoint 통합은 Catchpoint 이벤트를 Datadog 이벤트 스트림으로 푸시합니다.
 

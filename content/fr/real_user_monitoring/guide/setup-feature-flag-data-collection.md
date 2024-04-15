@@ -11,7 +11,7 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualiser vos données RUM dans le RUM Explorer
-kind: guide
+
 title: Débuter avec les données des feature flags dans RUM
 ---
 
@@ -557,12 +557,12 @@ Le suivi des feature flags est disponible dans le SDK Browser RUM. Pour obtenir 
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
     {userID: '<USER ID>'},
-    {     
+    {
         gateEvaluationCallback: (key, value) => {
             datadogRum.addFeatureFlagEvaluation(key, value);
         }
     }
-    ); 
+    );
    ```
 
 [1]: https://docs.statsig.com/client/jsClientSDK

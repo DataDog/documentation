@@ -8,7 +8,7 @@ further_reading:
   tag: Documentation
   text: Continuous Testing Tunnel について
 is_beta: true
-kind: documentation
+
 title: Visual Studio Code の Datadog 拡張機能
 ---
 

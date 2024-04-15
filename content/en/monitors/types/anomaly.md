@@ -1,6 +1,6 @@
 ---
 title: Anomaly Monitor
-kind: documentation
+
 aliases:
     - /guides/anomalies
     - /monitors/monitor_types/anomaly
@@ -56,7 +56,7 @@ Trigger window
 : How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
 
 Recovery window
-: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the **Recovery Window** to the same value as the **Trigger Window**. 
+: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the **Recovery Window** to the same value as the **Trigger Window**.
 
 **Note**: The range of accepted values for the **Recovery Window** depends on the **Trigger Window** and the **Alert Threshold** to ensure the monitor can't both satisfy the recovery and the alert condition at the same time.
 Example:

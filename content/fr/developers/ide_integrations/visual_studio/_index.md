@@ -6,7 +6,7 @@ further_reading:
   tag: Documentation
   text: Premiers pas avec le profileur en continu
 is_beta: true
-kind: documentation
+
 title: Extension Datadog pour Visual Studio
 ---
 

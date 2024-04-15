@@ -4,13 +4,13 @@ further_reading:
 - link: /developers/authorization/oauth2_endpoints
   tag: ドキュメント
   text: OAuth 2.0 認可エンドポイントの使用方法について
-kind: documentation
+
 title: Datadog の OAuth2
 ---
 
 {{< callout btn_hidden="true" >}}
   Datadog Developer Platform はベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
-{{< /callout >}} 
+{{< /callout >}}
 
 ## 概要
 

@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 表現に問題がないかコメントをチェックする
 ---
 ## メタデータ
@@ -29,13 +29,13 @@ title: 表現に問題がないかコメントをチェックする
 def filter_names(names):
     pass
 
-# 彼女はコードをチェックする必要があります 
+# 彼女はコードをチェックする必要があります
 def new_function_from_helen():
     pass
 
 
 class Foo:
-    # 彼はコードをチェックする必要があります 
+    # 彼はコードをチェックする必要があります
     def new_function_from_joe():
         pass
 ```

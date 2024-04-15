@@ -1,6 +1,6 @@
 ---
 title: Understand How Synthetic Test Retries Determine Monitor Status
-kind: guide
+
 description: Learn how a Synthetic test retry affects the associated monitor status.
 further_reading:
 - link: "/synthetics/guide/synthetic-test-monitors/"
@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-To reduce alert fatigue, Synthetic tests can be retried when a test run fails. If you have configured a test to be retried on failures, this is a _fast retry_. 
+To reduce alert fatigue, Synthetic tests can be retried when a test run fails. If you have configured a test to be retried on failures, this is a _fast retry_.
 
 With a fast retry, Datadog runs a Synthetic test multiple times before transitioning the test's monitor to alert and sending you a notification. For more information about monitors associated with your Synthetic tests, see [Use Synthetic Test Monitors][3].
 
@@ -30,13 +30,13 @@ Local Group Evaluation
 Total Group Evaluation
 : Evaluation of the test status.
 
-A run that is still failing after it has reached the maximum number of retries is considered final, and this final result is taken into account in the total group evaluation. 
+A run that is still failing after it has reached the maximum number of retries is considered final, and this final result is taken into account in the total group evaluation.
 
 ## Retries that overlap with other test runs
 
-In this example, a Synthetic test is scheduled to run every three minutes, and has a retry configured to a maximum of two times with a delay of two minutes.  
+In this example, a Synthetic test is scheduled to run every three minutes, and has a retry configured to a maximum of two times with a delay of two minutes.
 
-The evaluation only takes the final retry into account for the total group evaluation. 
+The evaluation only takes the final retry into account for the total group evaluation.
 
 When all retries fail:
 

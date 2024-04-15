@@ -21,7 +21,7 @@ integration_id: openshift
 integration_title: OpenShift
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: openshift.
@@ -51,12 +51,12 @@ Pour installer l'Agent, consultez les [instructions d'installation de l'Agent][2
 ### Configuration
 
 
-Si vous déployez l'Agent Datadog en utilisant l'une des méthodes présentées dans les instructions d'installation ci-dessus, vous devez inclure les contraintes de contexte de sécurité (Security Context Constraints ou SCC) pour que l'Agent recueille des données. Suivez les instructions ci-dessous en fonction de votre déploiement. 
+Si vous déployez l'Agent Datadog en utilisant l'une des méthodes présentées dans les instructions d'installation ci-dessus, vous devez inclure les contraintes de contexte de sécurité (Security Context Constraints ou SCC) pour que l'Agent recueille des données. Suivez les instructions ci-dessous en fonction de votre déploiement.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Les SCC peuvent être appliquées directement dans le fichier `values.yaml` de votre Agent Datadog. Ajouter le bloc suivant sous la section `agents:` dans le fichier. 
+Les SCC peuvent être appliquées directement dans le fichier `values.yaml` de votre Agent Datadog. Ajouter le bloc suivant sous la section `agents:` dans le fichier.
 
 ```yaml
 ...
@@ -98,7 +98,7 @@ En fonction de vos besoins et des [contraintes de sécurité][1] de votre cluste
 
 [1]: https://docs.openshift.com/enterprise/3.0/admin_guide/manage_scc.html
 {{% /tab %}}
-{{< /tabs >}} 
+{{< /tabs >}}
 
 #### Collecte de logs
 

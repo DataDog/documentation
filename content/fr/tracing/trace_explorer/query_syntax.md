@@ -32,7 +32,7 @@ further_reading:
 - link: /tracing/services/resource_page/
   tag: Documentation
   text: Plonger au cœur des traces et des performances de vos ressources
-kind: documentation
+
 title: Syntaxe de requête
 ---
 
@@ -110,7 +110,7 @@ Par exemple, pour rechercher les traces qui contiennent `user=AliceMartin` dans 
 
 `@url:*user\=AliceMartin*`
 
-La même logique s'applique aux espaces dans les attributs de trace. Les attributs de trace ne sont pas supposés contenir d'espaces, mais s'ils en ont, les espaces doivent être précédées du caractère d'échappement. 
+La même logique s'applique aux espaces dans les attributs de trace. Les attributs de trace ne sont pas supposés contenir d'espaces, mais s'ils en ont, les espaces doivent être précédées du caractère d'échappement.
 Si un attribut est appelé `user.first name`, effectuez une recherche sur cet attribut en ajoutant un caractère d'échappement devant l'espace :
 
 `@user.first\ name:mavaleur`

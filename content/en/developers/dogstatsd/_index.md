@@ -1,6 +1,6 @@
 ---
 title: DogStatsD
-kind: documentation
+
 description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
     - /guides/dogstatsd/
@@ -131,7 +131,7 @@ To start collecting your StatsD metrics, you need to bind the DogStatsD port to 
      This enables your applications to send metrics with DogStatsD on port `8125` on whichever node they happen to be running.
 
      **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][2], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, see the Kubernetes documentation: [HostPort services do not work][3].
-     
+
      **Note**: For an Operator deployment, configure the host port with `agent.config.hostPort`.
 
 2. Enable DogStatsD non local traffic to allow StatsD data collection, set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` in your `datadog-agent.yaml` manifest:
@@ -171,7 +171,7 @@ With this, any pod running your application is able to send DogStatsD metrics wi
 
 Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
 
-**Notes**: 
+**Notes**:
 
 * Origin detection with UDP uses the pod ID as the entity ID, so container-level tags are not emitted.
 * An alternative to UDP is [Unix Domain Sockets][5].
@@ -535,7 +535,7 @@ For more information, search the Java DogStatsD [package][1] for the NonBlocking
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| Parameter     | Type            | Default     | Description                                                                                                                                                                                          
+| Parameter     | Type            | Default     | Description
           |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `host`        | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` or `DD_DOGSTATSD_URL` environment variable.                                                               |

@@ -1,6 +1,6 @@
 ---
 title: Writing Custom Rules with Rego
-kind: guide
+
 aliases:
   - /security_platform/cloud_security_management/guide/writing_rego_rules/
 further_reading:
@@ -19,7 +19,7 @@ is_beta: true
 
 ## Overview
 
-Open Policy Agent (OPA) provides [Rego][1], an open source policy language with versatile resource inspection features for determining cloud security posture. In Datadog, you can write custom rules with Rego to control the security of your infrastructure. 
+Open Policy Agent (OPA) provides [Rego][1], an open source policy language with versatile resource inspection features for determining cloud security posture. In Datadog, you can write custom rules with Rego to control the security of your infrastructure.
 
 ## The template module
 
@@ -54,7 +54,7 @@ Take a close look at each part of this module to understand how it works.
 
 ### Import statements
 
-The first line contains the declaration `package datadog`. A [package][4] groups Rego modules into a single namespace, allowing modules to be imported safely. Currently, importing user modules is not a feature of custom rules. All posture management rules are grouped under the `datadog` namespace. For your results to be returned properly, group your rules under the `package datadog` namespace. 
+The first line contains the declaration `package datadog`. A [package][4] groups Rego modules into a single namespace, allowing modules to be imported safely. Currently, importing user modules is not a feature of custom rules. All posture management rules are grouped under the `datadog` namespace. For your results to be returned properly, group your rules under the `package datadog` namespace.
 
 ```python
 import future.keywords.contains
@@ -84,7 +84,7 @@ eval(resource) = "skip" if {
 }
 ```
 
-The rule evaluates the resource, and provides the outcome as a string depending on the state of the resource. You can change the order of `pass`, `fail`, and `skip` according to your needs. The rule above has `fail` as a default, if `skip_me` and `should_pass` are false or nonexistent in your resource. Alternatively, you can make `pass` the default: 
+The rule evaluates the resource, and provides the outcome as a string depending on the state of the resource. You can change the order of `pass`, `fail`, and `skip` according to your needs. The rule above has `fail` as a default, if `skip_me` and `should_pass` are false or nonexistent in your resource. Alternatively, you can make `pass` the default:
 
 ```python
 eval(resource) = "skip" if {
@@ -126,7 +126,7 @@ The template helps you start writing custom rules. You aren't required to follow
 ]
 ```
 
-## More complex rules 
+## More complex rules
 
 The above rule example evaluates basic true or false flags like `should_pass` in your resource. Consider a rule that expresses a logical `OR`, for example:
 
@@ -152,7 +152,7 @@ eval(resource) = "skip" if {
 }
 ```
 
-This skips the resource if it has no `port` attribute, and fails it if it falls within one of the two "bad" ranges. 
+This skips the resource if it has no `port` attribute, and fails it if it falls within one of the two "bad" ranges.
 
 Sometimes you want to examine more than one resource type in your rule. To do this, you can select some related resource types in the dropdown under **Advanced Rule Options**. You can then access the arrays of related resources through `input.resources.related_resource_type`, replacing `related_resource_type` with whatever related resource you would like to access.
 
@@ -174,7 +174,7 @@ results contains result if {
 }
 ```
 
-This rule determines whether there are any instances of `gcp_iam_service_account_key` that are user managed and match to a `gcp_iam_service_account` (the resource selected as the main resource type). If the service account has a key that is user managed, it produces a `fail` result. The `eval` rule is executed on every service account, and loops through every service account key to find one that matches the account, resulting in a complexity of `O(MxN)`, where M is the number of service accounts and N is the number of service account keys. 
+This rule determines whether there are any instances of `gcp_iam_service_account_key` that are user managed and match to a `gcp_iam_service_account` (the resource selected as the main resource type). If the service account has a key that is user managed, it produces a `fail` result. The `eval` rule is executed on every service account, and loops through every service account key to find one that matches the account, resulting in a complexity of `O(MxN)`, where M is the number of service accounts and N is the number of service account keys.
 
 To improve the time complexity significantly, build a [set][10] of key parents that are user managed with a [set comprehension][11]:
 

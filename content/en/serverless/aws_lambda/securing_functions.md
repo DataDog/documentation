@@ -1,6 +1,6 @@
 ---
 title: Securing Functions
-kind: documentation
+
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
@@ -14,7 +14,7 @@ further_reading:
 
 ASM secures functions written in Python, Node, Go, Java, and .NET. Because ASM is built on top of Serverless APM, you can set it up by adding an environment variable.
 
-ASM supports over 130 event rules across major threats such as injection attacks, cross-site scripting, security scanner, local file inclusion, and more. 
+ASM supports over 130 event rules across major threats such as injection attacks, cross-site scripting, security scanner, local file inclusion, and more.
 
 You can [get started managing threats to your functions with ASM][3] today.
 

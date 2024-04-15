@@ -1,14 +1,14 @@
 ---
 title: Fine-tuning CSM Threats Security Signals
-kind: guide
+
 aliases:
   - /security_platform/cloud_workload_security/guide/tuning-rules/
   - /security_platform/cloud_security_management/guide/tuning-rules/
 ---
 
-## Overview	
+## Overview
 
-Cloud Security Management Threats (CSM Threats) monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
+Cloud Security Management Threats (CSM Threats) monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise.
 
 This guide provides considerations for best practices and steps for fine-tuning signal suppression.
 
@@ -72,13 +72,13 @@ Common keys:
   - `@process.parent.executable.path`
   - `@process.user`
 - File:
-  - `@file.path` 
+  - `@file.path`
   - `@file.inode`
   - `@file.mode`
 
 To determine an actual malicious activity while inspecting a signal, validate if the context in which the process is accessing and modifying the file is expected. To avoid suppressing intended behaviors on files across all of your infrastructure, you should always have a combination that gathers all relevant context information from the common keys listed above.
 
-Example combination: 
+Example combination:
   - `@process.args`
   - `@process.executable.path`
   - `@process.user`
@@ -128,9 +128,9 @@ Common keys:
   - `@file.inode`
   - `@file.mode`
 
-Defining a combination for this type of activity is similar to file or process activities, with some additional specificity tied to the system call used for the attack. 
+Defining a combination for this type of activity is similar to file or process activities, with some additional specificity tied to the system call used for the attack.
 
-For example the Dirty Pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system leveraging this attack, it makes sense to suppress noise created from root users running expected processes. 
+For example the Dirty Pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system leveraging this attack, it makes sense to suppress noise created from root users running expected processes.
 - `@process.executable.user`
 - `@process.executable.uid`
 
@@ -138,9 +138,9 @@ Additionally you might notice that signals are created even when some of your ma
 
 ## Adding a suppression from the signal
 
-When you are in the process of investigating a potential threat reported by CSM Threats detection rules, you can encounter some signals that alert on known benign behaviors that are specific to your environment.  
+When you are in the process of investigating a potential threat reported by CSM Threats detection rules, you can encounter some signals that alert on known benign behaviors that are specific to your environment.
 
-Consider a Java process utility exploitation. An attacker intentionally targets vulnerabilities in your application code that runs Java processes. This kind of attack entails persistent access to your application by spawning its own Java shell utility. 
+Consider a Java process utility exploitation. An attacker intentionally targets vulnerabilities in your application code that runs Java processes. This kind of attack entails persistent access to your application by spawning its own Java shell utility.
 
 In some cases, CSM Threats rules might also detect expected activity, for example from your security team running a pentest session to evaluate the robustness of your applications. In this case, you can evaluate the accuracy of alerts reported and suppress noise.
 
@@ -169,9 +169,9 @@ For additional granularity, the following attributes provide information about p
 
 Signals surface relevant context within security alerts. Although event data can be leveraged for suppression filters, the observability data that the detection rule is built on may offer a better tuning candidate.
 
-In CSM Threats, the runtime Agent logs are generated from collected kernel events. You can preview the logs from the signal side-panel without context switching. 
+In CSM Threats, the runtime Agent logs are generated from collected kernel events. You can preview the logs from the signal side-panel without context switching.
 
-1. Go to your chosen signal details side-panel and click the Events tab. 
+1. Go to your chosen signal details side-panel and click the Events tab.
 2. Click **View in Log Explorer** to navigate to Log Management, which displays the full list of logs that instigate this signal.
    Because there can be many logs, the signal side-panel combines these logs and their shared attributes into a JSON structure.
 3. Go back to the Event tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.

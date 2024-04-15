@@ -1,6 +1,6 @@
 ---
 title: View and Alert on APM Usage
-kind: documentation
+
 ---
 
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
@@ -17,7 +17,7 @@ If you are an admin of your account, you can view your account usage using the [
 | Ingested Spans     | Shows the sum of Ingested Bytes from spans ingested in the current month.                      |
 | Indexed Spans      | Shows the sum of Indexed Spans indexed in the current month.                                   |
 
-Each APM host and APM Fargate task grants you an allotment of ingested and indexed volume: 
+Each APM host and APM Fargate task grants you an allotment of ingested and indexed volume:
 - Ingested spans: 150 GB ingested spans per APM host and 10 GB ingested spans per APM Fargate task.
 - Indexed spans: 1M indexed spans per APM host and 65k spans indexed spans per APM Fargate task.
 
@@ -30,7 +30,7 @@ To ensure that your ingested spans usage remains within the allocation that APM 
 1. Create a [metric monitor][8].
 2. Enter `datadog.estimated_usage.apm.ingested_bytes`for the metric query.
 3. Define the monitor's evaluation window to `current month (MTD)`. This ensures that the monitor is looking at the month-to-date usage. Read more about cumulative time windows in the [monitors][9] documentation.
-4. Define the **Alert threshold** and an optional **Warning threshold** to alert when the ingested volume reaches 80% or 90% of your allotment. 
+4. Define the **Alert threshold** and an optional **Warning threshold** to alert when the ingested volume reaches 80% or 90% of your allotment.
 5. Enter a name for the monitor. Define the notification to send an alert to your team when the ingested volumes are too high.
 
 {{< img src="account_management/billing/monitor_usage_apm.png" alt="A metric monitor configuration page showing the datadog.estimated_usage.apm.ingested_bytes as the metric query" width="80%" >}}

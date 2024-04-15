@@ -1,6 +1,6 @@
 ---
 title: Gestion des fenêtres contextuelles lors des tests Browser
-kind: guide
+
 further_reading:
   - link: https://www.datadoghq.com/blog/browser-tests/
     tag: Blog

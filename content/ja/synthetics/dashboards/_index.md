@@ -10,7 +10,7 @@ further_reading:
 - link: /continuous_testing/explorer/saved_views
   tag: ドキュメント
   text: 保存ビューについて
-kind: documentation
+
 title: Synthetic ダッシュボード
 ---
 

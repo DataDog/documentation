@@ -12,7 +12,7 @@ further_reading:
 - link: /dashboards/guide/slo_graph_query
   tag: Documentation
   text: メトリクスベースの SLO クエリをスコープする
-kind: documentation
+
 title: SLO サマリーウィジェット
 ---
 

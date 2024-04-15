@@ -9,7 +9,7 @@ further_reading:
 - link: /agent/docker/integrations/
   tag: ドキュメント
   text: オートディスカバリー
-kind: faq
+
 title: ECS Fargate のインテグレーションセットアップ
 ---
 

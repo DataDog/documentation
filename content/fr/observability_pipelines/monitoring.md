@@ -1,6 +1,6 @@
 ---
 disable_toc: false
-kind: documentation
+
 title: Surveillance
 ---
 

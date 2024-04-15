@@ -1,6 +1,6 @@
 ---
 title: Azure Native Integration Programmatic Management Guide
-kind: guide
+
 description: "Steps for programmatically managing the Azure Native integration with Datadog"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
@@ -19,7 +19,7 @@ The Azure Native integration uses the Datadog resource in Azure to streamline ma
 
 ## Setup
 
-**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to. 
+**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to.
 
 ### Terraform
 

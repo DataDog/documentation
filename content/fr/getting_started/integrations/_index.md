@@ -6,7 +6,7 @@ further_reading:
 - link: /integrations/
   tag: Documentation
   text: Afficher la liste des intégrations Datadog
-kind: documentation
+
 title: Présentation des intégrations
 ---
 

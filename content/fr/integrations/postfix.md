@@ -26,7 +26,7 @@ integration_id: postfix
 integration_title: Postfix
 integration_version: 1.12.0
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: postfix.
@@ -86,7 +86,7 @@ Vous pouvez également configurer l'agent de façon à le faire utiliser une com
 
    instances:
      ## @param directory - string - optional - default: /var/spool/postfix
-     ## Path to the postfix directory. The directory option is required if `postqueue: false` is set. For more 
+     ## Path to the postfix directory. The directory option is required if `postqueue: false` is set. For more
      ## information see https://docs.datadoghq.com/integrations/postfix/#using-sudo.
      #
      - directory: /var/spool/postfix

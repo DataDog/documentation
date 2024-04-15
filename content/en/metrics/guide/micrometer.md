@@ -1,6 +1,6 @@
 ---
 title: Send metrics with Micrometer
-kind: Guide
+
 further_reading:
 - link: "https://docs.micrometer.io/micrometer/reference/implementations/otlp.html"
   tag: "Micrometer"
@@ -26,7 +26,7 @@ OpenTelemetry Protocol (OTLP) Ingestion by the Datadog Agent allows you to take 
 
 ## Prometheus and OpenMetrics
 
-Use the Prometheus or OpenMetrics integrations to send your application metrics to Datadog. 
+Use the Prometheus or OpenMetrics integrations to send your application metrics to Datadog.
 
 {{< whatsnext desc="See the configuration outlined in the following documentation:" >}}
     {{< nextlink href="/integrations/guide/prometheus-host-collection/#overview" >}}Prometheus and OpenMetrics metrics collection from a host{{< /nextlink >}}

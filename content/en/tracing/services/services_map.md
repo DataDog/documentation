@@ -1,6 +1,6 @@
 ---
 title: Service Map
-kind: documentation
+
 description: "The Service Map visualizes data that is being collected by Datadog APM."
 aliases:
   - /tracing/servicemap
@@ -31,11 +31,11 @@ The Service Map provides an overview of your services and their health. This cut
 
 ## Identifying a service's dependencies
 
-The service map provides a complete picture of a service's dependencies, including those in different environments. For example, even if your service is only deployed in environment `prod`, the map reveals its connections to services in `staging` (and other environments). 
+The service map provides a complete picture of a service's dependencies, including those in different environments. For example, even if your service is only deployed in environment `prod`, the map reveals its connections to services in `staging` (and other environments).
 
 ## Grouping by Team or Application
 
-The Service Map can be grouped by team or application to create a clear picture of service ownership and application dependencies. This is particularly useful as it enables visualization of complex microservice architecture on a more granular level to help organizations quickly reach the information they need. 
+The Service Map can be grouped by team or application to create a clear picture of service ownership and application dependencies. This is particularly useful as it enables visualization of complex microservice architecture on a more granular level to help organizations quickly reach the information they need.
 
 ## Filtering versus changing scopes
 

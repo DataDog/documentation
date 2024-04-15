@@ -3,7 +3,7 @@ aliases:
 - /fr/logs/historical-views
 - /fr/logs/archives/rehydrating/
 description: Enregistrez des événements de log depuis vos archives dans Datadog.
-kind: Documentation
+
 title: Réintégration à partir des archives
 ---
 

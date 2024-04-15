@@ -1,6 +1,6 @@
 ---
 title: Opérations arithmétiques
-kind: documentation
+
 aliases:
   - /fr/graphing/functions/arithmetic/
 ---

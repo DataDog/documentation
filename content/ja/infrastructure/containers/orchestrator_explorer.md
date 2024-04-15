@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: オーケストレータエクスプローラー
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Basic Agent Usage for CentOS (and Rocky/Alma Linux)
-kind: documentation
+
 platform: CentOS
 aliases:
     - /guides/basic_agent_usage/centos/

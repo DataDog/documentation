@@ -21,7 +21,7 @@ guid: 9d110885-cbdf-44e5-83b8-7a6514724e98
 integration_id: logstash
 integration_title: Logstash
 is_public: true
-kind: integration
+
 maintainer: ervansetiawan@gmail.com
 manifest_version: 1.0.0
 metric_prefix: logstash.
@@ -135,7 +135,7 @@ Pour tirer pleinement parti de vos logs dans Datadog, il est important de leur a
 
 ##### Source
 
-Configurez un filtre Logstash pour définir la source (nom d'intégration Datadog) sur vos logs. 
+Configurez un filtre Logstash pour définir la source (nom d'intégration Datadog) sur vos logs.
 
 ```conf
 filter {

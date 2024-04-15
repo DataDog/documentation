@@ -1,6 +1,6 @@
 ---
 title: Python Log Collection
-kind: documentation
+
 aliases:
   - /logs/languages/python
 further_reading:
@@ -21,7 +21,7 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 - link: "/glossary/#tail"
   tag: Glossary
-  text: 'Glossary entry for "tail"'  
+  text: 'Glossary entry for "tail"'
 ---
 
 ## Overview
@@ -47,7 +47,7 @@ See the setup examples for the following logging libraries:
 
 Once [log collection][7] is enabled, set up [custom log collection][8] to tail your log files and send them to Datadog by doing the following:
 
-1. Create a `python.d/` folder in the `conf.d/` Agent configuration directory. 
+1. Create a `python.d/` folder in the `conf.d/` Agent configuration directory.
 2. Create a file `conf.yaml` in the `conf.d/python.d/` directory with the following content:
     ```yaml
     init_config:

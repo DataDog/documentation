@@ -1,6 +1,6 @@
 ---
 title: Understand the Difference Between the Agent Host and the Tracer Host
-kind: guide
+
 ---
 
 ## Overview
@@ -37,7 +37,7 @@ Python | - | `DD_TRACE_REPORT_HOSTNAME`
 PHP | `datadog.trace.report_hostname` | `DD_TRACE_REPORT_HOSTNAME`
 Java |  `dd.trace.report-hostname` | `DD_TRACE_REPORT_HOSTNAME`
 
-### When does APM use host information? 
+### When does APM use host information?
 
 APM uses host information when you create [retention filters][2], generate [metrics from spans][3], or create [sensitive data scanner rules][4] using host tag filters in queries. For example, host tag filters like `availability-zone` and `cluster-name` are enriched from the Datadog Agent host information.
 

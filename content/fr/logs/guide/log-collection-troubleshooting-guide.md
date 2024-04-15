@@ -1,6 +1,6 @@
 ---
 title: Dépannage pour la collecte de logs
-kind: guide
+
 aliases:
   - /fr/logs/faq/log-collection-troubleshooting-guide
 further_reading:

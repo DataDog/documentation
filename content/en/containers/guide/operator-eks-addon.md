@@ -1,6 +1,6 @@
 ---
 title: Installing the Datadog Agent on Amazon EKS with the Datadog Operator add-on
-kind: guide
+
 aliases:
  - /agent/guide/operator-eks-addon
 further_reading:

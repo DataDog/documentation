@@ -1,6 +1,6 @@
 ---
 title: RUM Analytics
-kind: documentation
+
 description: ""
 aliases:
   - /real_user_monitoring/rum_analytics
@@ -32,7 +32,7 @@ With RUM Analytics visualizations, you can:
 
 ## Build a query
 
-In [RUM Analytics][1], customize your display by adding facets and measures to your search query. 
+In [RUM Analytics][1], customize your display by adding facets and measures to your search query.
 
 1. Choose a measure or facet to graph. A measure lets you choose the aggregation function, whereas a facet displays the unique count.
 

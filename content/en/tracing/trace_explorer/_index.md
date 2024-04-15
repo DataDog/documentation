@@ -1,6 +1,6 @@
 ---
 title: Trace Explorer
-kind: documentation
+
 aliases:
     - /tracing/tracing_without_limits/
     - /tracing/livesearch/
@@ -129,7 +129,7 @@ All spans indexed by custom retention filters *and* the intelligent retention fi
 
 All spans indexed by custom retention filters or the intelligent retention filter are available to be searched when using trace analytics.
 
-From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. 
+From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold.
 
 **Note**: Spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards, notebooks, and from trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 

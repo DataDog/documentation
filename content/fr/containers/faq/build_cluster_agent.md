@@ -2,7 +2,7 @@
 aliases:
 - /fr/agent/cluster_agent/build
 - /fr/containers/cluster_agent/build
-kind: faq
+
 title: Créer l'image de l'Agent de cluster Datadog
 ---
 

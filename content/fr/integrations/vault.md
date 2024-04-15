@@ -30,7 +30,7 @@ guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault
 integration_title: Vault
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: vault.
@@ -64,7 +64,7 @@ Le check Vault est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez d
 
      **Remarque** : pour recueillir des métriques, l'endpoint `/sys/metrics` requiert Vault 1.1.0 ou ultérieur.
 
-    **Pour utiliser un token client Vault**, suivez l'exemple ci-dessous reposant sur la méthode d'authentification JWT. Vous pouvez toutefois utiliser d'autres [méthodes d'authentification][5]. 
+    **Pour utiliser un token client Vault**, suivez l'exemple ci-dessous reposant sur la méthode d'authentification JWT. Vous pouvez toutefois utiliser d'autres [méthodes d'authentification][5].
 
 L'intégration Vault nécessite la configuration suivante :
 

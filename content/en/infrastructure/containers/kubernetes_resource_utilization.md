@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Resource Utilization
-kind: documentation
+
 aliases:
 - /infrastructure/containers/kubernetes_resources
 further_reading:
@@ -61,7 +61,7 @@ The individual pod or container graphs help you identify outliers that may impac
 
 Idle CPU and memory are necessary to ensure that your application has room to grow without pods being immediately throttled or killed.
 
-Too much idle CPU and memory can result in unnecessarily higher costs, but the alternative creates the risk of performance and reliability degradation if resource usage increases. 
+Too much idle CPU and memory can result in unnecessarily higher costs, but the alternative creates the risk of performance and reliability degradation if resource usage increases.
 
 To help find this balance, adjust the graphs to look at a longer timespan, and avoid making resource sizing decisions based on the most recent usage only. These metrics are standard Kubernetes metrics, so you can query them like all Datadog metrics—for example, for the last 15 months, at full resolution if needed.
 

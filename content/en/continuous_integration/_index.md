@@ -1,6 +1,6 @@
 ---
 title: Continuous Integration Visibility
-kind: documentation
+
 aliases:
   - /ci
 further_reading:
@@ -46,11 +46,11 @@ Datadog Continuous Integration (CI) Visibility unifies information about CI test
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
-CI Visibility enables developers to identify the reasons behind a test or pipeline failure, monitor trends in test suite execution times, and see the effect that a given commit has on the pipeline. Further, it also provides build engineers with visibility into cross-organization CI health and trends in pipeline performance over time. 
+CI Visibility enables developers to identify the reasons behind a test or pipeline failure, monitor trends in test suite execution times, and see the effect that a given commit has on the pipeline. Further, it also provides build engineers with visibility into cross-organization CI health and trends in pipeline performance over time.
 
 ## Improve test reliability and create traces
 
-CI Visibility helps you troubleshoot test failures and broken builds by connecting the most important development outages to the commits that caused them. You can instrument your tests and generate traces from your testing frameworks as they execute in CI. 
+CI Visibility helps you troubleshoot test failures and broken builds by connecting the most important development outages to the commits that caused them. You can instrument your tests and generate traces from your testing frameworks as they execute in CI.
 
 ## Increase efficiency through seamless integrations
 

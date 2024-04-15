@@ -1,6 +1,6 @@
 ---
 title: Heatmaps
-kind: documentation
+
 description: Heatmaps are a type of visualization allowing you to see where users click on your website.
 aliases:
 - /real_user_monitoring/heatmaps
@@ -88,7 +88,7 @@ After understanding analytics, the next step is to understand the action in the 
 
 ### I am looking at a heatmap for a given view, but it's showing me an unexpected page.
 
-Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
+Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function.
 
 ### The view that I selected is not showing the initial content.
 
@@ -100,9 +100,9 @@ Heatmaps are generated with Session Replay data. Datadog's intelligent algorithm
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-hidden-elements.png" alt="Hidden elements in the action list on a heatmap." style="width:60%;">}}
 
-The tooltip on the icon says **element is not visible**. This means that the element is a common action on your page, but it's not displayed on the background in the heatmap. To see that element, you can click **Choose Background** in the bottom right corner to switch the background of your heatmap to one where that element is present. 
+The tooltip on the icon says **element is not visible**. This means that the element is a common action on your page, but it's not displayed on the background in the heatmap. To see that element, you can click **Choose Background** in the bottom right corner to switch the background of your heatmap to one where that element is present.
 
-### After attempting to create a heatmap, I see a "No Replay Data" state appear. 
+### After attempting to create a heatmap, I see a "No Replay Data" state appear.
 
 This means that Datadog could not find any Session Replays to use as a heatmap background that matches the current search filters. If you just started to record sessions with the [Browser SDK][2], it may also take a few minutes for the Session Replay to be available for viewing.
 
@@ -112,7 +112,7 @@ This means that Datadog was not able to match any user actions with the current 
 
 - Your application is not using the latest SDK version (>= 4.20.0).
 - RUM actions are not enabled. Learn how to [track user interactions][7].
-- Your page has recently changed drastically. 
+- Your page has recently changed drastically.
 
 ### All of the user information on the page is empty.
 

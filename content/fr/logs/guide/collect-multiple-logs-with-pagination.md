@@ -1,6 +1,6 @@
 ---
 title: Collecter plusieurs logs avec Pagination
-kind: guide
+
 further_reading:
   - link: /logs/log_configuration/processors
     tag: Documentation
@@ -104,15 +104,15 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 -H "DD-API-KEY: ${CLÉ_API_CLIENT_DD}" \
 -H "DD-APPLICATION-KEY: ${CLÉ_APP_CLIENT_DD}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
-                  "limit":50   
+                  "limit":50
         }
 }'
 ```
@@ -137,7 +137,7 @@ Exemple de résultat :
   }
 }
 ```
-Le paramètre `data` est un tableau d'objets Log qui peut contenir autant de logs que la limite définie via le paramètre `limit` dans votre requête. Cette limite est définie sur `50` par défaut, mais il est possible de la rehausser jusqu'à `1000`. 
+Le paramètre `data` est un tableau d'objets Log qui peut contenir autant de logs que la limite définie via le paramètre `limit` dans votre requête. Cette limite est définie sur `50` par défaut, mais il est possible de la rehausser jusqu'à `1000`.
 
 Pour voir la page suivante de vos logs, continuez à renvoyer votre requête avec le paramètre `cursor` défini sur la valeur `after` de l'appel précédent. Lorsque `data` renvoie `null`, cela signifie que vous avez renvoyé toutes les pages de logs associées à votre requête.
 
@@ -147,16 +147,16 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 -H "DD-API-KEY: ${CLÉ_API_CLIENT_DD}" \
 -H "DD-APPLICATION-KEY: ${CLÉ_APP_CLIENT_DD}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
                   "cursor": "eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0",
-                  "limit": 50   
+                  "limit": 50
         }
 }'
 ```

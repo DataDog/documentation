@@ -1,6 +1,6 @@
 ---
 title: Interoperability of OpenTelemetry API and Datadog instrumented traces
-kind: documentation
+
 aliases:
   - /opentelemetry/guide/otel_api_tracing_interoperability/
 further_reading:
@@ -15,7 +15,7 @@ further_reading:
 
 ## Custom instrumentation with the OpenTelemetry API
 
-Datadog tracing libraries provide an implementation of the [OpenTelemetry API][1] for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. 
+Datadog tracing libraries provide an implementation of the [OpenTelemetry API][1] for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products.
 
 By [instrumenting your code with OpenTelemetry API][2]:
 
@@ -34,7 +34,7 @@ This context propagation style allows Datadog tracers to operate in the same app
 
 ## 128-bit trace IDs
 
-W3C traces implicitly contain 128-bit trace IDs, rather than the 64-bit trace IDs that Datadog traces have historically used. The latest Datadog tracing libraries default configuration uses the setting `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED=True` so that they also produce trace data with 128-bit trace IDs. 
+W3C traces implicitly contain 128-bit trace IDs, rather than the 64-bit trace IDs that Datadog traces have historically used. The latest Datadog tracing libraries default configuration uses the setting `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED=True` so that they also produce trace data with 128-bit trace IDs.
 
 Following the [W3C Trace Context recommendations][9], Datadog 128-bit trace IDs have randomness in the lower-order 64 bits. This restriction provides backward compatibility for systems that intermix libraries that generate 64-bit trace IDs with newer ones that support 128-bit IDs. In such systems, spans with the full 128-bit trace ID and spans with the truncated lower-order 64-bit trace ID can arrive at the backend and be treated as matching and part of the same trace.
 

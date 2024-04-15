@@ -4,7 +4,7 @@ aliases:
 - /fr/workflows/setup
 description: Connexions des workflows
 disable_toc: false
-kind: documentation
+
 title: Connexions
 ---
 
@@ -34,7 +34,7 @@ Si l'intégration que vous devez configurer n'est pas répertoriée ci-dessus, c
 
 Les connexions de workflow viennent enrichir les intégrations que vous avez installées en vous permettant de contrôler l'authentification des étapes des workflows. Utilisez les identifiants de connexion pour authentifier une [action générique][8] ou toute action pour laquelle le carré d'intégration ne propose pas de système d'authentification. Pour obtenir la liste des intégrations qui utilisent le carré d'intégration pour l'authentification, consultez la rubrique [Identifiants dans les carrés d'intégration](#identifiants-dans-les-carres-d-integration). Les identifiants de connexion ne peuvent être utilisés que dans la solution Workflow Automation.
 
-Les connexions sont utiles pour un grand nombre de cas d'utilisation : 
+Les connexions sont utiles pour un grand nombre de cas d'utilisation :
 - L'intégration dont vous avez besoin n'est pas disponible en tant que connexion intégrée.
 - Vous souhaitez authentifier une action personnalisée, par exemple pour utiliser une action HTTP avec votre propre service.
 - Une intégration ne prend pas en charge les autorisations requises, notamment les accès en écriture sur AWS.

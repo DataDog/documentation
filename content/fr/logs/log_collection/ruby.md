@@ -14,7 +14,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-rails-application-logs/
   tag: Blog
   text: Comment recueillir, personnaliser et gérer les logs d'applications Rails
-kind: documentation
+
 title: Collecte de logs avec Ruby
 ---
 
@@ -175,7 +175,7 @@ Envoyez des informations de configuration supplémentaires à Grape :
 
 ```ruby
 use GrapeLogging::Middleware::RequestLogger,
-      instrumentation_key: 'grape', 
+      instrumentation_key: 'grape',
       include: [ GrapeLogging::Loggers::Response.new,
                  GrapeLogging::Loggers::FilterParameters.new ]
 ```

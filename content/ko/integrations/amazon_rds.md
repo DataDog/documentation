@@ -29,7 +29,7 @@ integration_id: amazon-rds
 integration_title: Amazon RDS
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 monitors:
   rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
@@ -99,9 +99,9 @@ RDS 인스턴스를 모니터링하는 옵션에는 Standard, Enhanced, Native �
 {{% /tab %}}
 {{% tab "Enhanced" %}}
 
-**Instance Actions**에서 **Modify**를 선택하여 인스턴스 생성 중 또는 이후에 RDS 인스턴스에 대한 향상된 모니터링을 활성화합니다. Monitoring Granularity에 대해서는 `15`를 권장합니다. 
+**Instance Actions**에서 **Modify**를 선택하여 인스턴스 생성 중 또는 이후에 RDS 인스턴스에 대한 향상된 모니터링을 활성화합니다. Monitoring Granularity에 대해서는 `15`를 권장합니다.
 
-다음 지침에서는 KMS 및 Lambda 관리 콘솔을 사용하여 RDS Enhanced Monitoring Lambda 함수에만 사용할 수 있는 Datadog API 키의 암호화된 버전을 생성합니다. [Log Forwarder][1]와 같은 다른 Lambda의 암호화된 API 키가 이미 있는 경우 [Lambda 함수의 README][2]에서 다른 옵션을 참조하세요. 
+다음 지침에서는 KMS 및 Lambda 관리 콘솔을 사용하여 RDS Enhanced Monitoring Lambda 함수에만 사용할 수 있는 Datadog API 키의 암호화된 버전을 생성합니다. [Log Forwarder][1]와 같은 다른 Lambda의 암호화된 API 키가 이미 있는 경우 [Lambda 함수의 README][2]에서 다른 옵션을 참조하세요.
 
 #### KMS 키 생성
 
@@ -109,14 +109,14 @@ RDS 인스턴스를 모니터링하는 옵션에는 Standard, Enhanced, Native �
 2. **Customer managed keys**로 이동합니다.
 3. **Create Key**를 선택합니다.
 4. `lambda-datadog-key`와 같은 키의 별칭을 입력합니다. _참고: 별칭은 aws로 시작할 수 없습니다. aws로 시작하는 별칭은 사용자의 계정에서 AWS 관리형 CMKs를 나타내기 위해 Amazon Web Services에서 예약한 것입니다._
-5. 이 키를 관리할 수 있는 사람을 정하기 위해 적절한 관리자를 추가하세요. 
+5. 이 키를 관리할 수 있는 사람을 정하기 위해 적절한 관리자를 추가하세요.
 6. 역할을 추가할 필요는 없습니다.
 7. KMS 키를 저장합니다.
 
 #### Lambda 함수 생성
 
 1. Lambda 관리 콘솔에서 새 Lambda 함수를 생성합니다. **Lambda 함수는 생성된 KMS 키와 같은 리전에 있어야 합니다.**
-2. `Serverless Application Repository`를 선택하고, `Datadog-RDS-Enhanced`를 검색 후 선택하세요. 
+2. `Serverless Application Repository`를 선택하고, `Datadog-RDS-Enhanced`를 검색 후 선택하세요.
 3. 애플리케이션에 고유한 이름을 지정합니다.
 4. `KMSKeyId` 파라미터의 이전 섹션에서 생성한 키의 Id를 붙여넣고 배포합니다.
 5. 애플리케이션이 배포되면, 새로 생성된 Lambda 함수를 엽니다("Resource" 아래의 함수 클릭).
@@ -172,7 +172,7 @@ Lambda 함수에 대한 테스트 버튼을 클릭하면 다음 오류가 발생
 
     | AWS 권한            | 설명                        |
     | ------------------------- | ------------------------------------ |
-    | `rds:DescribeDBInstances` | 태그를 추가할 RDS 인스턴스를 설명합니다.  | 
+    | `rds:DescribeDBInstances` | 태그를 추가할 RDS 인스턴스를 설명합니다.  |
     | `rds:ListTagsForResource` | RDS 인스턴스에 커스텀 태그를 추가합니다.    |
     | `rds:DescribeEvents`     | RDS 데이터베이스와 관련된 이벤트를 추가합니다. |
 
@@ -300,7 +300,7 @@ MySQL, MariaDB 및 Postgres 로그를 Amazon 클라우드와치(CloudWatch)로 �
 
 AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일한 태그가 할당됩니다, 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않습니다.
 
-### 이벤트 
+### 이벤트
 
 Amazon RDS 통합에는 DB 인스턴스, 보안 그룹, 스냅샷 및 파라미터 그룹과 관련된 이벤트가 포함됩니다. 아래 이벤트 예시를 참조하세요.
 

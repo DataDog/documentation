@@ -4,7 +4,7 @@ aliases:
 - /fr/tracing/trace_ingestion/
 - /fr/tracing/trace_retention_and_ingestion/
 description: Découvrir comment contrôler l'ingestion des spans
-kind: documentation
+
 title: Pipeline de traces
 ---
 

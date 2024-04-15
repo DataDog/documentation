@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Security Posture Management
-kind: documentation
+
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"

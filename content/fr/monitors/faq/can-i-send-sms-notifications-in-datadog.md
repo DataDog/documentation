@@ -6,7 +6,7 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
-kind: faq
+
 title: Puis-je envoyer des notifications par SMS dans Datadog ?
 ---
 

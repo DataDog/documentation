@@ -1,6 +1,6 @@
 ---
 title: Enabling ASM Code Security using single step instrumentation
-kind: documentation
+
 ---
 
 <div class="alert alert-info">Enabling ASM code security using single step instrumentation is in beta.</div>
@@ -155,7 +155,7 @@ For example:
 docker run -d --name dd-agent \
   -e DD_API_KEY=${YOUR_DD_API_KEY} \
   -e DD_APM_ENABLED=true \
-  -e DD_IAST_ENABLED=true \ 
+  -e DD_IAST_ENABLED=true \
   -e DD_ENV=staging \
   -e DD_APM_NON_LOCAL_TRAFFIC=true \
   -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \

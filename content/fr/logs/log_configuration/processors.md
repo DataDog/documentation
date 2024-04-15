@@ -12,7 +12,7 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: Apprendre à explorer vos logs
-kind: documentation
+
 title: Processeurs
 ---
 
@@ -281,7 +281,7 @@ Utilisez l'[endpoint de l'API de pipeline de logs Datadog][1] avec la charge uti
 
 ## Remappeur
 
-Le processeur effectue un remappage de n'importe quel attribut ou tag source vers un autre attribut ou tag cible. Vous pouvez par exemple remapper `user` vers `firstname` pour cibler vos logs dans le Log Explorer : 
+Le processeur effectue un remappage de n'importe quel attribut ou tag source vers un autre attribut ou tag cible. Vous pouvez par exemple remapper `user` vers `firstname` pour cibler vos logs dans le Log Explorer :
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribut après remappage" style="width:60%;">}}
 
@@ -670,7 +670,7 @@ Le processeur de correspondances effectue les opérations suivantes :
 * Il vérifie si le log actuel contient l'attribut source.
 * Il vérifie si l'attribut source est présent dans la table de mappage.
   * S'il est présent, le processeur crée l'attribut source avec la valeur correspondante dans la table.
-  * S'il ne parvient pas à trouver la valeur dans la table de mappage, il crée un attribut cible avec la valeur par défaut définie dans le champ `fallbackValue` (facultatif). Vous pouvez saisir manuellement une liste de paires `source_key,target_value` pairs ou importer un fichier CSV dans l'onglet **Manual Mapping**. 
+  * S'il ne parvient pas à trouver la valeur dans la table de mappage, il crée un attribut cible avec la valeur par défaut définie dans le champ `fallbackValue` (facultatif). Vous pouvez saisir manuellement une liste de paires `source_key,target_value` pairs ou importer un fichier CSV dans l'onglet **Manual Mapping**.
 
     {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="Processeur de correspondances" style="width:80%;">}}
 
@@ -678,7 +678,7 @@ Le processeur de correspondances effectue les opérations suivantes :
 
   * Si le processeur ne parvient pas à trouver la valeur dans la table de mappage, il crée un attribut cible avec la valeur de la table de référence (facultatif). Vous pouvez sélectionner une valeur pour une [table de référence][101] dans l'onglet **Reference Table**.
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Processeur de correspondances" 
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Processeur de correspondances"
     style="width:80%;">}}
 
 

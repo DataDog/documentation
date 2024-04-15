@@ -1,6 +1,6 @@
 ---
 title: "Cache for Redis Component"
-kind: documentation
+
 ---
 
 ## Overview

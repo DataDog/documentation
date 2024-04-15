@@ -1,6 +1,6 @@
 ---
 title: Symbol Database
-kind: documentation
+
 is_beta: true
 private: true
 further_reading:
@@ -19,7 +19,7 @@ Interested in an improved user experience when creating Dynamic Instrumentation 
 
 ## Overview
 
-Symbol Database enhances the user experience of [Dynamic Instrumentation][1]  by adding IDE-like features like search and autocomplete. 
+Symbol Database enhances the user experience of [Dynamic Instrumentation][1]  by adding IDE-like features like search and autocomplete.
 
 Symbol Database uploads nonsensitive symbols and metadata from your application to Datadog. The uploaded data includes the names of classes, methods, arguments, fields, and local variables, along with related metadata, like line numbers.
 

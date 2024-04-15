@@ -1,6 +1,6 @@
 ---
 title: .NET Custom Instrumentation with Datadog Library
-kind: documentation
+
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 80

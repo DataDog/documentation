@@ -1,6 +1,6 @@
 ---
 description: Documentation pour les partenaires Datadog
-kind: documentation
+
 private: true
 title: Partenaires
 ---

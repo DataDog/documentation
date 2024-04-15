@@ -1,6 +1,6 @@
 ---
 title: Serverless Monitoring for AWS Step Functions
-kind: documentation
+
 further_reading:
 - link: "/serverless/step_functions/installation"
   tag: "Documentation"
@@ -22,7 +22,7 @@ AWS Step Functions is a serverless orchestration service that lets developers cr
 {{< img src="serverless/step_functions/overview1.png" alt="An AWS Step Function oveview tab." style="width:100%;" >}}
 
 ### Monitor the overall health of Step Functions in the Serverless view
-The Serverless view shows key metrics for your Step Functions in one place to easily provide a snapshot of the health of your Step Functions. You can access a detailed view of each Step Function to see all associated metrics, logs, and traces within a certain time frame and set monitors for problematic executions. 
+The Serverless view shows key metrics for your Step Functions in one place to easily provide a snapshot of the health of your Step Functions. You can access a detailed view of each Step Function to see all associated metrics, logs, and traces within a certain time frame and set monitors for problematic executions.
 
 {{< img src="serverless/step_functions/overview2.png" alt="An AWS Step Function visualization with span tags." style="width:100%;" >}}
 

@@ -41,7 +41,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-opentracing-cpp
   tag: ソースコード
   text: Datadog OpenTracing C++ クライアント
-kind: documentation
+
 title: プロキシのトレース
 ---
 
@@ -467,7 +467,7 @@ JSON 構成は `opentracing_load_tracer` の引数として渡されるファイ
 
 Datadog トレーシングを有効化するには、ConfigMap を作成または編集して `enable-opentracing: "true"` と、トレースの送信先となる `datadog-collector-host` に設定します。
 ConfigMap 名は Ingress-NGINX Controller コンテナのコマンドライン引数により明示的に引用し、`--configmap=$(POD_NAMESPACE)/nginx-configuration` をデフォルトに設定します。
-ingress-nginx が Helm チャートからインストールされた場合は、この ConfigMap の名前は `Release-Name-nginx-ingress-controller` となります。 
+ingress-nginx が Helm チャートからインストールされた場合は、この ConfigMap の名前は `Release-Name-nginx-ingress-controller` となります。
 
 Ingress コントローラーは `nginx.conf` と `/etc/nginx/opentracing.json` 双方のファイルを管理します。すべての `location` ブロックでトレーシングが有効化されます。
 

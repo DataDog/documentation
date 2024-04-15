@@ -12,7 +12,7 @@ further_reading:
 - link: /continuous_testing/explorer/saved_views
   tag: Documentation
   text: En savoir plus sur les vues enregistrées
-kind: documentation
+
 title: Dashboards Synthetic
 ---
 

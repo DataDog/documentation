@@ -1,6 +1,6 @@
 ---
 title: Correlating OpenTelemetry Traces and Logs
-kind: documentation
+
 description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
 code_lang: opentelemetry
 type: multi-code-lang
@@ -24,7 +24,7 @@ further_reading:
 
 Connecting OpenTelemetry language SDK logs and traces within Datadog is similar to connecting [Datadog SDK logs and traces][1], with a few additional steps:
 
-1. OpenTelemetry `TraceId` and `SpanId` properties differ from Datadog conventions. Therefore it's necessary to translate `TraceId` and `SpanId` from their OpenTelemetry formats ([a 128bit unsigned int and 64bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string, respectively][2]) into their Datadog Formats([a 64bit unsigned int][3]). 
+1. OpenTelemetry `TraceId` and `SpanId` properties differ from Datadog conventions. Therefore it's necessary to translate `TraceId` and `SpanId` from their OpenTelemetry formats ([a 128bit unsigned int and 64bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string, respectively][2]) into their Datadog Formats([a 64bit unsigned int][3]).
 
 2. Ensure your logs are sent as JSON, because your language level logs must be turned into Datadog attributes for trace-log correlation to work.
 
@@ -42,7 +42,7 @@ from opentelemetry import trace
 class CustomDatadogLogProcessor(object):
     def __call__(self, logger, method_name, event_dict):
         # An example of adding datadog formatted trace context to logs
-        # from: https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129 
+        # from: https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129
         current_span = trace.get_current_span()
         if not current_span.is_recording():
             return event_dict
@@ -52,7 +52,7 @@ class CustomDatadogLogProcessor(object):
             event_dict["dd.trace_id"] = str(context.trace_id & 0xFFFFFFFFFFFFFFFF)
             event_dict["dd.span_id"] = str(context.span_id)
 
-        return event_dict        
+        return event_dict
 # ##########
 
 # ########## app.py
@@ -116,8 +116,8 @@ module.exports = winston.createLogger({
 // ...
 // initialize your tracer
 // ...
-// 
-const logger = require('./logger') 
+//
+const logger = require('./logger')
 //
 // use the logger in your application
 logger.info("Example log line with trace correlation info")
@@ -140,10 +140,10 @@ logger.progname = 'multivac'
 original_formatter = Logger::Formatter.new
 logger.formatter  = proc do |severity, datetime, progname, msg|
   current_span = OpenTelemetry::Trace.current_span(OpenTelemetry::Context.current).context
-  
+
   dd_trace_id = current_span.trace_id.unpack1('H*')[16, 16].to_i(16).to_s
   dd_span_id = current_span.span_id.unpack1('H*').to_i(16).to_s
-  
+
   if current_span
     "#{{datetime: datetime, progname: progname, severity: severity, msg: msg, 'dd.trace_id': dd_trace_id, 'dd.span_id': dd_span_id}.to_json}\n"
   else
@@ -164,7 +164,7 @@ logger.info("Example log line with trace correlation info")
 
 {{% tab "Java" %}}
 
-To manually correlate your traces with your logs, first enable the [openTelemetry-java-instrumentation Logger MDC Instrumentation][1]. Then, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses [Spring Boot and Logback][2]. For other logging libraries, it may be more appropriate to [modify the Datadog SDK examples][3]. 
+To manually correlate your traces with your logs, first enable the [openTelemetry-java-instrumentation Logger MDC Instrumentation][1]. Then, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses [Spring Boot and Logback][2]. For other logging libraries, it may be more appropriate to [modify the Datadog SDK examples][3].
 
 ```java
 String traceIdValue = Span.current().getSpanContext().getTraceId();

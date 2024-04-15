@@ -1,6 +1,6 @@
 ---
 title: Scale Graphing Expertise with Powerpacks
-kind: guide
+
 further_reading:
 - link: "/dashboards/widgets/powerpack"
   tag: "Documentation"
@@ -26,7 +26,7 @@ Powerpacks are either preset (created by Datadog) or custom (created by a user).
 
 - Preset Powerpacks provide out-of-the-box views for common monitoring patterns like performance metrics or feature usage. They are often linked to a specific product or integration (like `RUM Page Views`) and are maintained by Datadog.
 - Anyone with dashboard write permissions can create custom Powerpacks to help users share and standardize internal best practices. Updates to custom Powerpacks are synced to all its Powerpack instances, so you don't have to make individual updates across multiple dashboards.
- 
+
 This guide addresses best practices for creating and sharing custom Powerpacks.
 
 ## When do custom Powerpacks help?
@@ -40,7 +40,7 @@ This ownership model fosters standardization across your teams and provides a sc
 
 ## Best practices for creating a Powerpack
 
-A well-constructed Powerpack can speed up an organization's adoption of new monitoring patterns, like adding security observability to all existing application teams' dashboards. Build a clear, self-contained Powerpack to ensure dashboard owners get the most from your content while minimizing issues or questions. 
+A well-constructed Powerpack can speed up an organization's adoption of new monitoring patterns, like adding security observability to all existing application teams' dashboards. Build a clear, self-contained Powerpack to ensure dashboard owners get the most from your content while minimizing issues or questions.
 
 ### Build self-explanatory content
 
@@ -72,7 +72,7 @@ Descriptions are limited to 80 characters. A good description provides a brief s
 
 Use tags to specify key technologies or search phrases for a specific pack (for example, `aws`, `k8s`, `app`). Use plain strings to describe the content of the packs; avoid putting `key:value` pairs in the tag field directly. Tags are limited to 80 characters.
 
-To search Powerpacks by tag in the widget tray, use `tag:search_string` syntax. 
+To search Powerpacks by tag in the widget tray, use `tag:search_string` syntax.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/powerpack_tag_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with tag:security" style="width:60%;" >}}
 
@@ -82,7 +82,7 @@ Powerpacks are most useful when they can be customized by each team into their r
 
 The Powerpack creation modal suggests variables to add to your pack based on common filters that appear in queries. Hover over any suggested variable to see which graphs it affects. To add a variable that is not suggested, modify your graphs directly in the dashboard to use the desired variable as a filter or as a template variable.
 
-Modify the names of variables to clarify how others should use them. In the example below, `@appsec.type` is renamed `AttackType` to clarify the expected input. 
+Modify the names of variables to clarify how others should use them. In the example below, `@appsec.type` is renamed `AttackType` to clarify the expected input.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/create_powerpack.png" alt="The Create Powerpack screen. Along the left, it shows Powerpack Title, and Group Title ,both entered as Application Security Overview, the Add Tags section configured with security and app, and several variables configured in the Add Variables section, including the attribute @appsec.type showing AttackType entered as its name. Below that is a section showing Add Common Filters as Variables, with several options shown and the @appsec.category:attack_attempt filter highlighted. There are several graphs along the right, and three of them are highlighted in the same color as the @appsec.category:attack_attempt filter on the left" style="width:100%;" >}}
 
@@ -103,7 +103,7 @@ By default, edit permissions for Powerpacks are restricted to the author. Editin
 
 ### Spread the word
 
-Once your Powerpack is created, let your organization know about it. Communicating about your pack both announces the pack and provides a channel for any questions. Share the name of your Powerpack with your organization through communication channels like email or messaging platforms, specify who the pack is intended for, and describe where you expect it to appear. 
+Once your Powerpack is created, let your organization know about it. Communicating about your pack both announces the pack and provides a channel for any questions. Share the name of your Powerpack with your organization through communication channels like email or messaging platforms, specify who the pack is intended for, and describe where you expect it to appear.
 
 ## Further Reading
 

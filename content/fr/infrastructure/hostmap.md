@@ -9,7 +9,7 @@ further_reading:
 - link: /infrastructure/process/
   tag: Graphiques
   text: Découvrir ce qui se passe à tous les niveaux de votre système
-kind: documentation
+
 title: Hostmap
 ---
 
@@ -68,9 +68,9 @@ Cliquez sur le nom d'une intégration pour afficher un dashboard condensé des m
 
 ### Formes et couleurs
 
-Par défaut, la couleur de chaque host est définie de façon à représenter le pourcentage d'utilisation du CPU sur ce host. Elle varie du vert (0 % d'utilisation) au orange (100 % d'utilisation). Vous pouvez sélectionner différentes métriques à partir du sélecteur `Fill by`.  
+Par défaut, la couleur de chaque host est définie de façon à représenter le pourcentage d'utilisation du CPU sur ce host. Elle varie du vert (0 % d'utilisation) au orange (100 % d'utilisation). Vous pouvez sélectionner différentes métriques à partir du sélecteur `Fill by`.
 
-Les hostmaps peuvent également communiquer d'autres métriques facultatives avec la taille de l'hexagone. Pour ce faire, utilisez le sélecteur `Size by`. 
+Les hostmaps peuvent également communiquer d'autres métriques facultatives avec la taille de l'hexagone. Pour ce faire, utilisez le sélecteur `Size by`.
 
 **Remarque** : la métrique « % CPU utilized » utilise la mesure la plus fiable et récente de l'utilisation du processeur, qu'elle soit évaluée par l'Agent Datadog ou directement par AWS ou vSphere.
 
@@ -86,8 +86,8 @@ Les données de la hostmap sont actualisées toutes les minutes environ, sauf si
 
 ### Optimisation des ressources
 
-Si vous êtes un utilisateur AWS, vous utilisez sans doute différents types d'instances. Certaines instances sont optimisées pour la mémoire, d'autres pour le calcul ; il y en a des petites et des grandes.  
-Si vous souhaitez réduire vos dépenses AWS, vous pouvez commencer par déterminer à quoi servent les instances les plus coûteuses. Commencez par les regrouper par `instance-type`, puis par `role` ou par `name`. Observez les types d'instances coûteuses, comme **c3.8xlarge**. Certains rôles de host affichent-ils une utilisation insuffisante de leur processeur ? Si c'est le cas, zoomez sur les hosts individuels pour voir si toute cette puissance informatique s'est avérée nécessaire au cours des derniers mois, ou si ce groupe de hosts pourrait être migré vers un type d'instance moins onéreux.  
+Si vous êtes un utilisateur AWS, vous utilisez sans doute différents types d'instances. Certaines instances sont optimisées pour la mémoire, d'autres pour le calcul ; il y en a des petites et des grandes.
+Si vous souhaitez réduire vos dépenses AWS, vous pouvez commencer par déterminer à quoi servent les instances les plus coûteuses. Commencez par les regrouper par `instance-type`, puis par `role` ou par `name`. Observez les types d'instances coûteuses, comme **c3.8xlarge**. Certains rôles de host affichent-ils une utilisation insuffisante de leur processeur ? Si c'est le cas, zoomez sur les hosts individuels pour voir si toute cette puissance informatique s'est avérée nécessaire au cours des derniers mois, ou si ce groupe de hosts pourrait être migré vers un type d'instance moins onéreux.
 
 Vous trouverez ci-dessous un sous-ensemble de l'infrastructure de Datadog. Comme vous pouvez le constater, les instances **c3.2xlarge** présentent une charge particulièrement élevée.
 
@@ -107,7 +107,7 @@ Dans l'exemple ci-dessous, la distribution des hosts est inégale avec `role:dan
 
 ### Résolution de problèmes
 
-Imaginez que vous rencontrez un problème en production. Par exemple, les processeurs de certains de vos hosts sont encombrés, résultat : les temps de réponse sont longs. Les hostmaps peuvent vous aider à visualiser rapidement s'il y a une différence entre les hosts chargés et non chargés. Vous pouvez les regrouper par dimension que vous souhaitez étudier et déterminer visuellement si les serveurs posant problème appartiennent à un certain groupe.  
+Imaginez que vous rencontrez un problème en production. Par exemple, les processeurs de certains de vos hosts sont encombrés, résultat : les temps de réponse sont longs. Les hostmaps peuvent vous aider à visualiser rapidement s'il y a une différence entre les hosts chargés et non chargés. Vous pouvez les regrouper par dimension que vous souhaitez étudier et déterminer visuellement si les serveurs posant problème appartiennent à un certain groupe.
 Ainsi, vous pouvez procéder à un regroupement selon une zone de disponibilité, une région, un type d'instance, une image ou n'importe quel tag utilisé au sein de votre système.
 
 La capture d'écran ci-dessous illustre un problème récent rencontré par Datadog. Certains hosts disposent de beaucoup moins de mémoire utilisable que d'autres, bien qu'ils fassent partie du même cluster. Le regroupement par image de machine nous montre que deux images différentes ont été utilisées, et que l'une d'entre elles est surchargée.

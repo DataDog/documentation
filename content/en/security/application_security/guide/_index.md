@@ -1,6 +1,6 @@
 ---
 title: Application Security Management Guides
-kind: guide
+
 private: true
 disable_toc: true
 ---

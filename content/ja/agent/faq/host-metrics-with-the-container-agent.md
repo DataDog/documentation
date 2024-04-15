@@ -5,7 +5,7 @@ further_reading:
 - link: /agent/docker/
   tag: Documentation
   text: Datadog Docker Agent の詳細
-kind: faq
+
 title: Container Agent によるホストメトリクス
 ---
 

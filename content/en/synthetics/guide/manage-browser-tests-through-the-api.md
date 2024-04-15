@@ -1,6 +1,6 @@
 ---
 title: Manage Your Browser Tests Programmatically
-kind: guide
+
 further_reading:
 - link: '/api/latest/synthetics'
   tag: 'API'
@@ -23,7 +23,7 @@ Datadog recommends creating your browser tests in the Datadog UI first and retri
 
 1. [Create a browser test][2] and [save a recording][3].
 2. Use the [Get the list of all tests endpoint][4] to retrieve the list of all Synthetics tests.
-3. Filter on `type: browser` and retrieve the `public_ids` of the browser tests you want to manage with the API. 
+3. Filter on `type: browser` and retrieve the `public_ids` of the browser tests you want to manage with the API.
 4. Use the [Get a browser test endpoint][5] to retrieve the configuration files of every browser test.
 
 You can store the browser test configuration files for later usage or use them to duplicate, update, and delete your browser tests programmatically.
@@ -34,7 +34,7 @@ You can use the [Datadog Terraform provider][6] to create and manage browser tes
 
 ### Browser tests
 
-The [synthetic test resource][8], with `type` set to `browser`, can be used to create and manage your browser tests through Terraform. 
+The [synthetic test resource][8], with `type` set to `browser`, can be used to create and manage your browser tests through Terraform.
 
 ### Private locations
 

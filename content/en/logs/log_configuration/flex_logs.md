@@ -1,6 +1,6 @@
 ---
 title: Flex Logs
-kind: documentation
+
 description: Cost effective live query capabilities over long term retention of Logs
 aliases:
   - /logs/log_configuration/flex_log/
@@ -48,7 +48,7 @@ Configure Flex Tier in the [Logs Index Configuration][2] page:
 
 {{< img src="logs/log_configuration/flex_logging/flex_toggle_search.png" alt="Enable Flex Logging on the Log Explorer page by toggling the option" style="width:100%;" >}}
 
-In the Log Explorer, toggle the **Include Flex Indexes** option to include Flex index logs in your search query results. Find this option next to the time picker. 
+In the Log Explorer, toggle the **Include Flex Indexes** option to include Flex index logs in your search query results. Find this option next to the time picker.
 
 [Search][3] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
 

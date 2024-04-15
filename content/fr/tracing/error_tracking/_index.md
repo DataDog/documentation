@@ -18,7 +18,7 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: Documentation
   text: Créer un monitor de suivi des erreurs
-kind: documentation
+
 title: Suivi des erreurs pour les services backend
 ---
 
@@ -50,7 +50,7 @@ La fonctionnalité de suivi des erreurs calcule une empreinte pour chaque span d
 
 ## Examiner des problèmes pour commencer le dépannage ou le debugging
 
-Le suivi des erreurs regroupe automatiquement les erreurs recueillies depuis vos services backend sous forme de catégories dans l'[Error Tracking Explorer][3]. 
+Le suivi des erreurs regroupe automatiquement les erreurs recueillies depuis vos services backend sous forme de catégories dans l'[Error Tracking Explorer][3].
 
 Cliquez sur un problème pour afficher un résumé de l'erreur, la distribution des spans concernées, les stack traces les plus récentes et les plus pertinentes, les tags de span, les tags de host, les tags de conteneur et les métriques.
 

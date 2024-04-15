@@ -1,6 +1,6 @@
 ---
 title: RUM Roku Channel Monitoring Setup
-kind: documentation
+
 aliases:
     - /real_user_monitoring/roku/
 code_lang: roku
@@ -50,7 +50,7 @@ ropm install datadog-roku
 
 ### Setup manually
 
-If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][2] zip archive, 
+If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][2] zip archive,
 and unzipping it in your project's root folder.
 
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
@@ -63,7 +63,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code. 
+To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code.
 
 For more information about setting up a client token, see the [Client Token documentation][6].
 
@@ -196,7 +196,7 @@ RUM Actions represent the interactions your users have with your channel. You ca
 
 ```brightscript
     targetName = "playButton" ' the name of the SG Node the user interacted with
-    actionType = "click" ' the type of interaction, should be one of "click", "back", or "custom" 
+    actionType = "click" ' the type of interaction, should be one of "click", "back", or "custom"
     m.global.datadogRumAgent.callfunc("addAction", { target: targetName, type: actionType})
 ```
 

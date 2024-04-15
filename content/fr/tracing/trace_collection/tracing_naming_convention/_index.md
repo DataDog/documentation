@@ -9,7 +9,7 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: Documentation
   text: Apprendre à explorer vos traces
-kind: documentation
+
 title: Sémantique des tags de span
 ---
 

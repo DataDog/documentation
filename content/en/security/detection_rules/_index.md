@@ -1,6 +1,6 @@
 ---
 title: Detection Rules
-kind: documentation
+
 aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
@@ -144,7 +144,7 @@ The rule deprecation process is as follows:
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
     - Misconfigurations side panel (CSM Misconfigurations only)
-    - [Rule editor][15] for that specific rule 
+    - [Rule editor][15] for that specific rule
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#clone-a-rule) in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 

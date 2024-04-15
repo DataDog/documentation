@@ -1,6 +1,6 @@
 ---
 title: Upcoming Changes to Security Notification Rules
-kind: documentation
+
 is_beta: true
 further_reading:
 - link: "/security/notifications/rules/"
@@ -59,6 +59,6 @@ To migrate notifications that are configured for individual detection rules:
 [1]: /security/notifications/rules/
 [2]: /security/misconfigurations
 [3]: https://app.datadoghq.com/security/configuration/compliance/rules
-[4]: /security/cloud_security_management/ 
+[4]: /security/cloud_security_management/
 [5]: /security/application_security/
 [6]: /security/cloud_siem/

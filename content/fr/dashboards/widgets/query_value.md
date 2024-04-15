@@ -1,6 +1,6 @@
 ---
 title: Widget Valeur de requête
-kind: documentation
+
 description: Afficher une valeur agrégée pour une requête de métrique donnée
 aliases:
   - /fr/graphing/widgets/query_value/
@@ -14,7 +14,7 @@ further_reading:
 ---
 Les valeurs de requête affichent la valeur actuelle d'une requête de métrique, d'APM ou de log donnée. Elles disposent d'une mise en forme conditionnelle (comme un arrière-plan vert/jaune/rouge) pour indiquer si la valeur figure dans la plage attendue. Les valeurs affichées par une valeur de requête ne représentent pas nécessairement une mesure instantanée.
 
-Le widget peut afficher la dernière valeur transmise, ou une agrégation calculée à partir de toutes les valeurs de requête de l'intervalle. Ces visualisations offrent un aperçu limité mais explicite de votre requête d'infrastructure. 
+Le widget peut afficher la dernière valeur transmise, ou une agrégation calculée à partir de toutes les valeurs de requête de l'intervalle. Ces visualisations offrent un aperçu limité mais explicite de votre requête d'infrastructure.
 
 {{< img src="dashboards/widgets/query_value/query_value1.png" alt="Widget Valeur de requête" >}}
 

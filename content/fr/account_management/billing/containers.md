@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Facturation des conteneurs
 ---
 

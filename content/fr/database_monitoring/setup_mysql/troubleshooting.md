@@ -1,6 +1,6 @@
 ---
 description: Dépannage de la solution Database Monitoring
-kind: documentation
+
 title: Dépannage de la solution Database Monitoring pour MySQL
 ---
 {{< site-region region="us5,gov" >}}

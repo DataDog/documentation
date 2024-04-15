@@ -4,7 +4,7 @@ further_reading:
 - link: /observability_pipelines/monitoring/
   tag: Documentation
   text: Surveiller l'intégrité de vos pipelines
-kind: documentation
+
 title: Dépannage
 ---
 

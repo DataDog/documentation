@@ -16,7 +16,7 @@ integration_id: amazon-direct-connect
 integration_title: Amazon Direct Connect
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_directconnect
 public_title: "Intégration Datadog/Amazon\_Direct\_Connect"

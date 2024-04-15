@@ -1,6 +1,6 @@
 ---
 title: Software Composition Analysis
-kind: documentation
+
 aliases:
   - /security/application_security/risk_management/
   - /security/application_security/vulnerability_management/
@@ -16,10 +16,10 @@ further_reading:
   text: "Setup Software Composition Analysis on your CI pipelines"
 - link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
   tag: "Blog"
-  text: "Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis" 
+  text: "Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis"
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
-  text: "Enhance application security in production with Application Vulnerability Management"  
+  text: "Enhance application security in production with Application Vulnerability Management"
 - link: "https://securitylabs.datadoghq.com/articles/guarddog-identify-malicious-pypi-packages/"
   tag: "Blog"
   text: "Finding malicious PyPI packages through static code analysis: Meet GuardDog"
@@ -33,7 +33,7 @@ algolia:
 
 ## Overview
 
-Datadog Software Composition Analysis (SCA) helps you leverage open source with confidence. The capabilities of SCA include vulnerability detection, business risk (library inventory and licensing information), and quality evaluation of the open source libraries in your services. 
+Datadog Software Composition Analysis (SCA) helps you leverage open source with confidence. The capabilities of SCA include vulnerability detection, business risk (library inventory and licensing information), and quality evaluation of the open source libraries in your services.
 
 What makes Datadog SCA unique is its end-to-end coverage of your software development lifecycle: from the code that your developers commit, to the production applications already running in your Datadog deployment.
 
@@ -48,28 +48,28 @@ Check [ASM Compatibility][6] to see if your service is supported.
 
 The Datadog SCA Library Inventory helps you understand the list of libraries and its versions that compose your application. To access the Library Explorer, navigate to [**Security** > **Application Security** > **Catalog** > **Libraries**][8].
 
-Since Datadog SCA covers your software development lifecycle end-to-end, the libraries are detected throughout the entire lifecycle of the application. The library inventory contains everything you need to know about the libraries, including name and version, and other risk aspects such as licenses and quality aspects. 
+Since Datadog SCA covers your software development lifecycle end-to-end, the libraries are detected throughout the entire lifecycle of the application. The library inventory contains everything you need to know about the libraries, including name and version, and other risk aspects such as licenses and quality aspects.
 
 {{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="Software Composition Analysis (SCA) library explorer page showing library vulnerabilities grouped by library." style="width:100%;" >}}
 
 ## Explore and manage SCA vulnerabilities
 
-The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA and reports security vulnerabilities associated with them. 
+The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA and reports security vulnerabilities associated with them.
 
-Datadog SCA leverages two techniques to analyze your services: 
+Datadog SCA leverages two techniques to analyze your services:
 
 - Static code analysis in your repositories (static point of view)
 - Runtime analysis in your deployed services (runtime point of view)
 
 Combining both techniques monitors open source libraries end-to-end, from the code repository commit (static point of view), to the applications running in production (runtime point of view).
 
-To switch to the code repository commit point of view, select **Static**. The static view shows vulnerabilities from the _source code_ in your repositories. 
+To switch to the code repository commit point of view, select **Static**. The static view shows vulnerabilities from the _source code_ in your repositories.
 
 To switch to the _real-time_ point of view for the applications already running, select **Runtime**. The runtime view is the live view of the services monitored by Datadog.
 
 {{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
-Select a specific vulnerability to see its details, including the affected services, severity breakdown score, and recommended remediation steps. 
+Select a specific vulnerability to see its details, including the affected services, severity breakdown score, and recommended remediation steps.
 
 On the Details Explorer for a vulnerability, you can view impacted infrastructure. This view gives you better insights to your overall attack exposure.
 
@@ -93,7 +93,7 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 
 {{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
 
-## Configure Code Analysis 
+## Configure Code Analysis
 
 {{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
 Code Analysis is in public beta.

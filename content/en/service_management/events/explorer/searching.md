@@ -1,6 +1,6 @@
 ---
 title: Search Syntax
-kind: Documentation
+
 further_reading:
 - link: "logs/explorer/search_syntax"
   tag: "Documentation"

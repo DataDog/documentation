@@ -15,7 +15,7 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Créer et gérer des tests avec Terraform
-kind: documentation
+
 title: Paramètres des tests continus
 ---
 
@@ -29,7 +29,7 @@ Par défaut, seul un test peut être exécuté à la fois. Pour modifier ce comp
 
 ## Parallélisation
 
-Les tests parallèles sont des tests exécutés simultanément au sein de vos pipelines d'intégration continue et de livraison continue (CI/CD). 
+Les tests parallèles sont des tests exécutés simultanément au sein de vos pipelines d'intégration continue et de livraison continue (CI/CD).
 
 {{< img src="continuous_testing/continuous_testing_parallelization.png" alt="Définir la parallélisation pour les tests continus" style="width:100%;">}}
 
@@ -41,14 +41,14 @@ Vous pourrez ainsi :
 
 ### Configurer la parallélisation
 
-1. Sous **Set your preferences**, sélectionnez l'option **Parallelization**. 
+1. Sous **Set your preferences**, sélectionnez l'option **Parallelization**.
 2. Personnalisez la parallélisation en fonction du nombre de tests que vous souhaitez exécuter en parallèle.
 3. Cliquez sur **Save Selection**.
 4. Confirmez votre sélection.
 
 ## Autorisations
 
-Afin de personnaliser la parallélisation des tests continus, vous devez disposer de l'autorisation `billing_edit`. 
+Afin de personnaliser la parallélisation des tests continus, vous devez disposer de l'autorisation `billing_edit`.
 
 Dans le cas contraire, l'erreur suivante s'affiche : `You're missing edit permission for Continuous Testing settings. You can run 15 tests in parallel. To increase this value, reach out to your administrator admin.email@datadoghq.com`
 

@@ -1,6 +1,6 @@
 ---
 title: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
-kind: guide
+
 further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: "3\_minutes"

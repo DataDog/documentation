@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Software Composition Analysis
-kind: documentation
+
 aliases:
 - /getting_started/application_security/vulnerability_management
 further_reading:
@@ -33,21 +33,21 @@ This guide walks you through best practices for getting your team up and running
 
 ## Phase 1: Enable
 1. Check [ASM Compatibility][2] to see if your service is supported.
-2. Enable Software Composition Analysis on your services. 
+2. Enable Software Composition Analysis on your services.
    - Navigate to [**Security -> Application Security -> Settings -> Quick Start Guide**][4].
    - Expand **Enable Vulnerability Detection**.
    - Click **Start Activation**.
    - Choose services to secure with ASM.
 
    OR
-   
+
    - Navigate to [**Security -> Application Security -> Settings -> Setup**][9].
    - To enable Software Composition Analysis for static analysis in source code, in **Software Composition Analysis**, click **Get Started**.
      - In **SCA static analysis in source code**, click **See Instructions**.
      - In **SCA runtime analysis in running services**, click **Select Services**.
 
 ## Phase 2: Identify
-1. **Identify Vulnerabilities**: Navigate to [**Security -> Application Security -> Vulnerabilities**][5].  
+1. **Identify Vulnerabilities**: Navigate to [**Security -> Application Security -> Vulnerabilities**][5].
    - Sort by `Status`, `Vulnerability Source`, and `Severity`.
    - To switch to the code repository commit point of view, click on the **static** button. To switch to the real-time point of view to the applications already running, click on the **runtime** button.
 
@@ -56,12 +56,12 @@ This guide walks you through best practices for getting your team up and running
    Each vulnerability has its own status to help prioritize and manage findings:
 
    | Status         | Description                                                                                   |
-   | -------------- | ----------------------------------------------------------------------------------------------| 
+   | -------------- | ----------------------------------------------------------------------------------------------|
    |  Open          |  The vulnerability has been detected by Datadog.                                              |
    |  In Progress   |  A user has marked the vulnerability as In Progress, but Datadog still detects it.            |
    |  Muted         |  A user has ignored the vulnerability, making it no longer visible on the Open list, but Datadog still detects it. |
    |  Remediated    |  A user has marked the vulnerability as resolved, but Datadog still sees the vulnerability.   |
-   |  Auto-Closed   |  The vulnerability is no longer detected by Datadog.                                          |                              
+   |  Auto-Closed   |  The vulnerability is no longer detected by Datadog.                                          |
 
    **Note**: Remediated and Auto-Closed vulnerabilities re-open if the vulnerability is detected again by Datadog.
 
@@ -83,14 +83,14 @@ This guide walks you through best practices for getting your team up and running
 
       Severities are scored by the following:
       | CVSS Score    | Qualitative Rating
-      | --------------| -------------------|  
+      | --------------| -------------------|
       |   `0.0`         | None                |
       |   `0.1 - 3.9`   | Low                 |
       |   `4.0 - 6.9`   | Medium              |
       |   `7.0 – 8.9`   | High                |
       |   `9.0 – 10.0`  | Critical            |
 
-4. Optionally, download the Software Bill of Materials (SBOM) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the SBOM under the [libraries tab][8]. 
+4. Optionally, download the Software Bill of Materials (SBOM) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the SBOM under the [libraries tab][8].
 
 ## Phase 3: Remediate
 1. **Prioritize Response and Remediate**: While on the [Vulnerability Explorer][5], take action:

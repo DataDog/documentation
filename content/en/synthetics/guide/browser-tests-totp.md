@@ -1,6 +1,6 @@
 ---
 title: Use Time-based One-time Passwords (TOTPs) For Multi-Factor Authentication (MFA) In Browser Tests
-kind: guide
+
 further_reading:
   - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
     tag: 'Blog'
@@ -11,7 +11,7 @@ further_reading:
   - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
     tag: 'Documentation'
     text: 'Learn more about global variables'
- 
+
 ---
 
 ## Overview
@@ -41,8 +41,8 @@ You can use the secret key or QR code stored in a global variable across all you
 To use TOTP in your [browser tests][2]:
 
 1. Import your global variable.
-2. When recording your test, click the **Hand** icon to generate a TOTP. 
-3. In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step. 
+2. When recording your test, click the **Hand** icon to generate a TOTP.
+3. In your test browser application, click in a field to paste the TOTP. Injecting the computed code into your test creates another test step.
 4. After recording your test steps, click **Save & Launch Test**.
 
 ## Further Reading

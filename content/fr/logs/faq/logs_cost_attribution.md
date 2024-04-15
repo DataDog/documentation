@@ -9,7 +9,7 @@ further_reading:
 - link: /dashboards/widgets/table/
   tag: Documentation
   text: En savoir plus sur le widget Tableau
-kind: faq
+
 title: Attribution des coûts des logs
 ---
 
@@ -60,8 +60,8 @@ Utilisez un [processeur de catégories] [6] pour créer un attribut `team` pour 
 3. Nommez le processeur, par exemple : "Créer un attribut team".
 4. Saisissez `team` dans le champ **Set target category attribute** pour créer un attribut `team`.
 5. Dans la section **Populate category**, ajoutez une catégorie pour chaque équipe. Par exemple, pour ajouter le tag `team:service_a` aux événements de log qui correspondent à `service:a` et `env:prod` :
-      a. Saisissez `service:a` et `env:prod` dans le champ **All events that match**.  
-      b. Saisissez `service_a` dans le champ **Appear under the value name**.  
+      a. Saisissez `service:a` et `env:prod` dans le champ **All events that match**.
+      b. Saisissez `service_a` dans le champ **Appear under the value name**.
       c. Cliquez sur **Add**.
 6. Ajoutez les autres équipes en tant que catégories distinctes.
 7.  Cliquez sur **Create**.
@@ -109,14 +109,14 @@ Utilisez un [processeur de catégories][6] pour créer un attribut `index_name` 
 4. Saisissez **index_name** dans le champ **Set target category attribute** pour créer un attribut `index_name`.
 5. Ajoutez une catégorie pour chaque index. Par exemple, si vous avez un index nommé `retention-7` pour tous les logs associés au tag `env:staging` :
    {{< img src="logs/faq/logs_cost_attribution/indexes_configuration.png" alt="Liste des index montrant la requête de filtre, la période de rétention et si Online Archives est activé pour les index retention-30, retention-15, retention-7 et demo" >}}
-Ensuite, procédez comme suit dans la section **Populate category** :  
-      a. Saisissez `env:staging` dans le champ **All events that match**. 
-      b. Saisissez `retention-7` dans le champ **Appear under the value name**.  
+Ensuite, procédez comme suit dans la section **Populate category** :
+      a. Saisissez `env:staging` dans le champ **All events that match**.
+      b. Saisissez `retention-7` dans le champ **Appear under the value name**.
       c. Cliquez sur **Add**.
 6. Ajoutez les autres index en tant que catégories distinctes.
 7.  Cliquez sur **Create**.
 
-{{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="Formulaire du processeur de catégories affichant les données renseignées pour créer un attribut index_name" style="width:75%" >}} 
+{{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="Formulaire du processeur de catégories affichant les données renseignées pour créer un attribut index_name" style="width:75%" >}}
 
 #### Créer un attribut `retention_period`
 
@@ -126,14 +126,14 @@ Utilisez un [processeur de catégories][6] pour créer un attribut `retention_pe
 2. Sélectionnez le type de processeur **Category Processor**.
 3. Nommez le processeur, par exemple : "Créer un attribut retention_period".
 4. Saisissez `retention_period` dans le champ **Set target category attribute** pour créer un attribut `retention_period`.
-5. Ajoutez une catégorie pour chaque période de rétention. Par exemple, pour un index avec une période de rétention de 7 jours nommé `retention-7`, procédez comme suit dans la section **Populate category** :  
-      a. Saisissez `@index_name:(retention-7)` dans le champ **All events that match**.  
-      b. Saisissez `7` dans le champ **Appear under the value name**.  
+5. Ajoutez une catégorie pour chaque période de rétention. Par exemple, pour un index avec une période de rétention de 7 jours nommé `retention-7`, procédez comme suit dans la section **Populate category** :
+      a. Saisissez `@index_name:(retention-7)` dans le champ **All events that match**.
+      b. Saisissez `7` dans le champ **Appear under the value name**.
       c. Cliquez sur **Add**.
 6. Ajoutez les autres périodes de rétention en tant que catégories distinctes.
 7. Cliquez sur **Create**.
 
-{{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="Formulaire du processeur de catégories affichant les données renseignées pour créer un attribut retention_period" style="width:75%" >}} 
+{{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="Formulaire du processeur de catégories affichant les données renseignées pour créer un attribut retention_period" style="width:75%" >}}
 
 #### Créer un remappeur pour convertir l'attribut `retention_period` en tag
 
@@ -164,13 +164,13 @@ Utilisez un [processeur de catégories][6] pour créer un nouvel attribut `onlin
 2. Sélectionnez le type de processeur **Category Processor**.
 3. Nommez le processeur, par exemple : "Créer l'attribut online_archives" pour créer un attribut `online_archives`.
 4. Dans la section **Populate category**, ajoutez deux catégories :
-      <br> Dans la **première catégorie**, la valeur `true` est attribuée à tous les index où Online Archives est activé. Par exemple, si les logs de l'index nommé `retention-30` sont transférés vers Online Archives :  
-      a. Saisissez `@index_name:(retention-30)` dans le champ **All events that match**.  
-      b. Saisissez `true` dans le champ **Appear under the value name**.  
+      <br> Dans la **première catégorie**, la valeur `true` est attribuée à tous les index où Online Archives est activé. Par exemple, si les logs de l'index nommé `retention-30` sont transférés vers Online Archives :
+      a. Saisissez `@index_name:(retention-30)` dans le champ **All events that match**.
+      b. Saisissez `true` dans le champ **Appear under the value name**.
       c. Cliquez sur **Add**.
-      <br> Dans la **deuxième catégorie**, la valeur `false` est attribuée à tous les autres index.  
-      a. Saisissez `*` dans le champ **All events that match**.  
-      b. Saisissez `false` dans le champ **Appear under the value name**.  
+      <br> Dans la **deuxième catégorie**, la valeur `false` est attribuée à tous les autres index.
+      a. Saisissez `*` dans le champ **All events that match**.
+      b. Saisissez `false` dans le champ **Appear under the value name**.
       c. Cliquez sur **Add**.
 5. Cliquez sur **Create**.
 
@@ -203,12 +203,12 @@ L'utilisation du scanner de données sensibles est facturée en fonction du volu
 
 1. Accédez au [scanner de données sensibles][8].
 2. Dans chaque groupe d'analyse :
-      a. Cliquez sur **Add Scanning Rule**.  
+      a. Cliquez sur **Add Scanning Rule**.
       b. Saisissez `.` dans le champ **Define Regex to match** pour faire correspondre tous les logs.
       c. Sélectionnez **Entire Event** dans le champ **Scan the entire event or a portion of it**.
       d. Saisissez `sds:true` dans le champ **Add tags**.
-      e. Laissez le champ **Define action on match** sur **No action**.  
-      f. Nommez la règle d'analyse, par exemple : "Créer un tag sds".  
+      e. Laissez le champ **Define action on match** sur **No action**.
+      f. Nommez la règle d'analyse, par exemple : "Créer un tag sds".
       g. Cliquez sur **Create**.
 
 ## Générer des métriques de logs custom
@@ -256,7 +256,7 @@ Pour créer un dashboard :
 
 Pour l'ingestion des logs, Datadog vous recommande de configurer le widget Tableau comme suit :
 
-1. Dans le dashboard, cliquez sur **Add Widgets**. 
+1. Dans le dashboard, cliquez sur **Add Widgets**.
 2. Sélectionnez le widget **Table**.
 3. Dans le champ **Metrics**, sélectionnez la métrique count **bytes** que vous avez générée précédemment pour compter le nombre d'octets ingérés.
 4. Sélectionnez le champ **sum by** et ajoutez le tag `team` pour afficher l'utilisation en octets et par équipe. Vous pouvez également ajouter d'autres tags pour vos autres unités de coûts, comme le tag `host` pour afficher l'utilisation par host.
@@ -272,7 +272,7 @@ Pour l'ingestion des logs, Datadog vous recommande de configurer le widget Table
 
 Pour le scanner de données sensibles, Datadog vous recommande de configurer le widget Tableau comme suit :
 
-1. Dans le dashboard, cliquez sur **Add Widgets**. 
+1. Dans le dashboard, cliquez sur **Add Widgets**.
 2. Sélectionnez le widget **Table**.
 3. Dans le champ **Metrics**, sélectionnez la métrique count **bytes** que vous avez générée précédemment pour compter le nombre d'octets ingérés.
 4. Dans le champ **from**, saisissez `sds:true` pour ne garder que les logs qui ont été analysés par le scanner de données sensibles.
@@ -292,11 +292,11 @@ Pour le scanner de données sensibles, Datadog vous recommande de configurer le 
 
 Pour l'indexation des logs, Datadog vous recommande de configurer le widget Tableau comme suit :
 
-1. Dans le dashboard, cliquez sur **Add Widgets**. 
+1. Dans le dashboard, cliquez sur **Add Widgets**.
 2. Sélectionnez le widget **Table**.
 3. Sélectionnez la métrique count **events** que vous avez générée précédemment pour compter le nombre d'événements ingérés.
 4. Dans le champ **from**, ajoutez ce qui suit :
-      a. `datadog_index:*` pour ne garder que les logs acheminés vers des index.  
+      a. `datadog_index:*` pour ne garder que les logs acheminés vers des index.
       b. `datadog_is_excluded:false` pour ne garder que les logs qui ne correspondent à aucun filtre d'exclusion.
       c. `retention_period:7` pour ne garder que les logs conservés pendant 7 jours. Si vous utilisez la même période de rétention pour tous vos index, inutile d'ajouter ce tag, car il n'a pas été configuré. Si vous avez d'autres tags `retention_period`, créez un widget pour chacun d'entre eux.
 5. Sélectionnez le champ **sum by** et ajoutez le tag `team` pour afficher l'utilisation sous forme d'événements et par équipe. Vous pouvez également ajouter d'autres tags pour vos autres unités de coûts.
@@ -316,20 +316,20 @@ Lorsque Online Archives est activé pour un index, les logs sont dupliqués et s
 1. les filtres d'exclusion (les logs ne sont indexés que s'ils passent par des filtres d'exclusion) ; et
 2. Online Archives directement.
 
-Par conséquent, les filtres d'exclusion ne s'appliquent pas aux logs transférés vers Online Archives. 
+Par conséquent, les filtres d'exclusion ne s'appliquent pas aux logs transférés vers Online Archives.
 
 {{< img src="logs/faq/logs_cost_attribution/exclusion_filters_online_archives.png" alt="Index Online Archives affichant un pipeline pour les filtres d'exclusion et un pipeline pour Online Archives" style="width:75%" >}}
 
 Sur la base de ces informations, Datadog vous recommande de configurer le widget Tableau pour Online Archives comme suit :
 
-1. Dans le dashboard, cliquez sur **Add Widgets**. 
+1. Dans le dashboard, cliquez sur **Add Widgets**.
 2. Sélectionnez le widget **Table**.
 3. Dans le champ **Metrics**, sélectionnez la métrique count **events** que vous avez générée précédemment pour compter le nombre d'événements ingérés.
 4. Dans le champ **from**, ajoutez ce qui suit :
-      - `datadog_index:*` pour ne garder que les logs acheminés vers des index.  
-      - `online_archives:true` pour ne garder que les logs acheminés vers Online Archives.  
+      - `datadog_index:*` pour ne garder que les logs acheminés vers des index.
+      - `online_archives:true` pour ne garder que les logs acheminés vers Online Archives.
 5. Sélectionnez le champ **sum by** et ajoutez le tag `team` pour afficher l'utilisation sous forme d'événements et par équipe. Vous pouvez également ajouter d'autres tags pour vos autres unités de coûts.
-6. Ajoutez la formule suivante pour convertir l'utilisation en coûts : `Usage in millions of events` * `Unit cost for Online Archives`. 
+6. Ajoutez la formule suivante pour convertir l'utilisation en coûts : `Usage in millions of events` * `Unit cost for Online Archives`.
       **Remarque** : si votre prix contractuel par million d'événements change, vous devez modifier vous-même la formule.
 7. Cliquez sur **Save**.
 
@@ -339,7 +339,7 @@ Sur la base de ces informations, Datadog vous recommande de configurer le widget
 
 Vous pouvez regrouper tous les produits dans un seul widget pour afficher l'utilisation et les coûts totaux. Datadog vous recommande de configurer le widget Tableau comme suit :
 
-1. Dans le dashboard, cliquez sur **Add Widgets**. 
+1. Dans le dashboard, cliquez sur **Add Widgets**.
 2. Sélectionnez le widget **Table**.
 3. Ajoutez dans ce widget toutes les requêtes et formules créées dans les autres widgets :
     - [Ingestion des logs](#creer-un-widget-pour-l-utilisation-de-l-ingestion-des-logs)

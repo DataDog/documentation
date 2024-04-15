@@ -15,7 +15,7 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: モニター通知
-kind: documentation
+
 title: ダウンタイム
 ---
 

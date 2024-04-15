@@ -1,6 +1,6 @@
 ---
 title: Facturation de l'intégration vSphere
-kind: documentation
+
 ---
 ## Présentation
 

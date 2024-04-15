@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
   tag: Documentation
   text: Collecter plusieurs logs avec la Pagination
-kind: guide
+
 title: Créer des rapports personnalisés à l'aide de l'API Log Analytics
 ---
 
@@ -23,7 +23,7 @@ Les exemples suivants sont abordés dans ce guide :
 * [Obtenir des nombres](#obtenir-des-nombres)
 * [Obtenir des statistiques](#obtenir-des-statistiques)
 * [Obtenir des centiles](#obtenir-des-centiles)
-* [Regroupements multiples, nombres uniques et métriques](#regroupements-multiples-nombres-uniques-et-metriques) 
+* [Regroupements multiples, nombres uniques et métriques](#regroupements-multiples-nombres-uniques-et-metriques)
 * [Pagination](#pagination)
 
 ## Prérequis
@@ -230,7 +230,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"status",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"avg",
                "metric":"@http.response_time"
@@ -307,7 +307,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"sum",
                "metric":"@http.response_time"
@@ -375,7 +375,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"min",
                "metric":"@http.response_time"
@@ -443,7 +443,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"max",
                "metric":"@http.response_time"
@@ -513,7 +513,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
            "type":"facet",
            "facet":"service",
            "sort":{
-               "order":"desc",    
+               "order":"desc",
                "type": "measure",
                "aggregation":"pc99",
                "metric":"@http.response_time"

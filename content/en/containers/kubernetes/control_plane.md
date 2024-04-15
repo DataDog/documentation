@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Control Plane Monitoring
-kind: documentation
+
 aliases:
 - /agent/kubernetes/control_plane
 further_reading:
@@ -158,7 +158,7 @@ data:
 
 #### Insecure ports
 
-If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration. 
+If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration.
 
 #### Secure ports
 

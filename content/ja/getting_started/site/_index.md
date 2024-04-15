@@ -7,7 +7,7 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/dd-201
   tag: ラーニングセンター
   text: 'Datadog 201: パワーユーザーになるために'
-kind: documentation
+
 title: Datadog サイトの概要
 ---
 

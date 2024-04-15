@@ -10,7 +10,7 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
   text: Pourquoi installer l'Agent Datadog sur mes instances cloud ?
-kind: documentation
+
 title: Débuter avec l'Agent
 ---
 
@@ -93,11 +93,11 @@ L'Agent recueille des données sur les hosts toutes les 15 secondes, afin que v
 
 1. Créez un [compte Datadog][15].
 
-2. Notez votre [clé d'API Datadog][16] afin de pouvoir y accéder facilement. 
+2. Notez votre [clé d'API Datadog][16] afin de pouvoir y accéder facilement.
 
 3. Ouvrez l'interface Datadog.
 
-**Remarque** : l'exemple de ce guide repose sur le système d'exploitation Ubuntu. Référez-vous à la page [Utilisation de base de l'Agent][17] pour consulter la liste complète des plateformes prises en charge. 
+**Remarque** : l'exemple de ce guide repose sur le système d'exploitation Ubuntu. Référez-vous à la page [Utilisation de base de l'Agent][17] pour consulter la liste complète des plateformes prises en charge.
 
 ### Installation
 
@@ -180,7 +180,7 @@ Vous pouvez apporter des modifications aux fichiers de configuration d'Agent afi
 
 Les tags fournissent une couche de métadonnées supplémentaire pour vos métriques et événements. Ils vous permettent de filtrer et de comparer vos données au sein de visualisations Datadog. Lorsque des données sont envoyées à Datadog à partir de plusieurs hosts, l'ajout de tags vous permet d'afficher uniquement les données les plus pertinentes.
 
-Par exemple, imaginons que vos données soient recueillies à partir de plusieurs équipes et que vous souhaitiez afficher uniquement celles de l'équipe alpha. Si vous ajoutez aux hosts pertinents les tags `team:alpha` ou `team:bravo`, vous pouvez appliquer à vos métriques un filtre basé sur le tag `team:alpha`, afin de n'afficher que les données de cette équipe. Consultez la section [Débuter avec les tags][22] pour en savoir plus sur l'ajout de tags à vos données. 
+Par exemple, imaginons que vos données soient recueillies à partir de plusieurs équipes et que vous souhaitiez afficher uniquement celles de l'équipe alpha. Si vous ajoutez aux hosts pertinents les tags `team:alpha` ou `team:bravo`, vous pouvez appliquer à vos métriques un filtre basé sur le tag `team:alpha`, afin de n'afficher que les données de cette équipe. Consultez la section [Débuter avec les tags][22] pour en savoir plus sur l'ajout de tags à vos données.
 
 1. Accédez au [fichier de configuration principal][23] de votre Agent. Sous Ubuntu, il est situé à l'emplacement `/etc/datadog-agent/datadog.yaml`.
 

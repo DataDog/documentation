@@ -12,7 +12,7 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
   text: 使用量メトリクス
-kind: documentation
+
 title: 取り込みのメカニズム
 ---
 
@@ -58,7 +58,7 @@ Agent のメインコンフィギュレーションファイル (`datadog.yaml`)
 @env DD_APM_MAX_TPS - 整数 - オプション - デフォルト: 10
 ```
 
-**注**: 
+**注**:
 - リモートで構成されたパラメーターは、ローカルでの構成 (環境変数や `datadog.yaml` の構成) よりも優先されます。
 - PHP アプリケーションの場合は、代わりにトレーシングライブラリのユーザー定義ルールを使用してください。
 - Agent で設定した traces-per-second サンプリングレートは、PHP 以外の Datadog トレースライブラリにのみ適用されます。OpenTelemetry SDK など他のトレースライブラリには影響を与えません。
@@ -245,7 +245,7 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="エラーサンプリング" style="width:100%;" >}}
 
-**注**: 
+**注**:
 1. エラーサンプラーを無効にするには、このパラメーターを `0` に設定します。
 2. エラーサンプラーは、Agent レベルのエラースパンを持つローカルトレースをキャプチャします。トレースが分散されている場合、完全なトレースが Datadog に送信される保証はありません。
 3. デフォルトでは、トレーシングライブラリのルールや `manual.drop` などのカスタムロジックによってドロップされたスパンは、エラーサンプラーでは**除外**されます。

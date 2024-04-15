@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Mettre à niveau l'instrumentation des fonctions Lambda Java
 ---
 

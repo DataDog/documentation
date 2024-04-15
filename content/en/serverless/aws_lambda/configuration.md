@@ -1,6 +1,6 @@
 ---
 title: Configure Serverless Monitoring for AWS Lambda
-kind: documentation
+
 further_reading:
   - link: '/serverless/installation/'
     tag: 'Documentation'
@@ -47,7 +47,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 
 ## Enable Threat Detection to observe attack attempts
 
-Get alerted on attackers targeting your serverless applications and respond quickly. 
+Get alerted on attackers targeting your serverless applications and respond quickly.
 
 To get started, first ensure that you have [tracing enabled][43] for your functions.
 
@@ -371,7 +371,7 @@ To scrub trace attributes for data security, see [Configure the Datadog Agent or
 
 ## Enable/disable trace collection
 
-Trace collection through the Datadog Lambda extension is enabled by default. 
+Trace collection through the Datadog Lambda extension is enabled by default.
 
 If you want to start collecting traces from your Lambda functions, apply the configurations below:
 
@@ -502,7 +502,7 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 ## Link errors to your source code
 
-[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories. 
+[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories.
 
 For instructions on setting up the source code integration on your serverless applications, see the [Embed Git information in your build artifacts section][101].
 

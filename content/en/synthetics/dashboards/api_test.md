@@ -1,6 +1,6 @@
 ---
 title: Synthetic API Test Performance Dashboard
-kind: documentation
+
 further_reading:
 - link: '/continuous_testing/explorer/'
   tag: 'Documentation'
@@ -16,7 +16,7 @@ The [API test performance dashboard][1] provides insights about your entire stac
   {{< img src="synthetics/dashboards/api_test_performance_dashboard_2_2024.png" alt="Out-of-the-box Synthetics API test performance dashboard" style="width:100%" >}}
 
 - **Events**: View events triggered for all of your API tests and filter for specific tests using the template variables at the top of the dashboard.
-  
+
   {{< img src="synthetics/dashboards/api_test_performance_events_2_2024.png" alt="Events section of the Synthetics API test performance dashboard" style="width:100%" >}}
 
 

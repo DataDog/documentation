@@ -1,6 +1,6 @@
 ---
 title: "SNS Subscriptions Component"
-kind: documentation
+
 ---
 ## Overview
 

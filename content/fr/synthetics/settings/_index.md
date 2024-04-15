@@ -28,7 +28,7 @@ further_reading:
   tag: Documentation
   text: Mots de passe à usage unique basés sur le temps (TOTP) pour l'authentification
     multifacteur dans des tests Browser
-kind: documentation
+
 title: Paramètres de la surveillance Synthetic
 ---
 
@@ -73,7 +73,7 @@ Une fois les tags associés sélectionnés, cliquez sur **Save Default Tags**.
 
 ### Autorisations
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][11] peuvent accéder à la page **Paramètres par défaut** de la surveillance Synthetic. Pour que votre utilisateur puisse consulter la page **Paramètres par défaut**, vous devez donc lui accorder l'un de ces deux [rôles par défaut][11]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][11] peuvent accéder à la page **Paramètres par défaut** de la surveillance Synthetic. Pour que votre utilisateur puisse consulter la page **Paramètres par défaut**, vous devez donc lui accorder l'un de ces deux [rôles par défaut][11].
 
 Si vous utilisez des [rôles personnalisés][12], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_default_settings_read` et `synthetics_default_settings_write`.
 
@@ -160,7 +160,7 @@ Les valeurs des variables sont mises à jour lors de chaque exécution du test �
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 {{% /tab %}}
 
-{{% tab "Token MFA" %}}  
+{{% tab "Token MFA" %}}
 
 Pour générer et utiliser un TOTP dans vos tests, créez une variable globale et ajoutez-y une clé de secret ou importez un code QR fourni par votre fournisseur d'authentification.
 
@@ -209,7 +209,7 @@ Si vous utilisez des [rôles personnalisés][12], ajoutez votre utilisateur à u
 
 Les clients qui ont configuré des [rôles personnalisés][11] sur leur compte peuvent utiliser la fonctionnalité de restriction d'accès. Si vous utilisez des [rôles personnalisés][12], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_global_variable_read` et `synthetics_global_variable_write`.
 
-Vous pouvez faire en sorte que certains rôles au sein de votre organisation ne puissent pas accéder à une variable globale. Lors de la création d'une variable globale, choisissez les rôles (en plus des utilisateurs) disposant des autorisations de lecture/écriture sur votre variable globale dans **Permissions settings**. 
+Vous pouvez faire en sorte que certains rôles au sein de votre organisation ne puissent pas accéder à une variable globale. Lors de la création d'une variable globale, choisissez les rôles (en plus des utilisateurs) disposant des autorisations de lecture/écriture sur votre variable globale dans **Permissions settings**.
 
 {{< img src="synthetics/settings/restrict_access_1.png" alt="Restreindre l'accès à une variable globale" style="width:100%;" >}}
 
@@ -219,7 +219,7 @@ Vous pouvez faire en sorte que certains rôles au sein de votre organisation ne 
 
 ### Intégration APM pour les tests Browser
 
-Autorisez des URL pour inclure des en-têtes d'intégration APM dans ces URL. Les en-têtes d'intégration APM de Datadog permettent à Datadog d'associer des tests Browser à APM. 
+Autorisez des URL pour inclure des en-têtes d'intégration APM dans ces URL. Les en-têtes d'intégration APM de Datadog permettent à Datadog d'associer des tests Browser à APM.
 
 Pour définir les endpoints vers lesquels vous souhaitez envoyer les en-têtes APM, saisissez des URL dans le champ **Value**. Si les endpoints sont tracés et autorisés, les résultats de votre test Browser sont automatiquement associés à la trace correspondante.
 

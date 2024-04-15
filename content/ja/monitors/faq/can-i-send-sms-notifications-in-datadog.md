@@ -6,7 +6,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-kind: faq
+
 title: Datadog で SMS 通知を送信することはできますか？
 ---
 

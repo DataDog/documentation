@@ -41,7 +41,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-dotnet
   tag: GitHub
   text: Code source
-kind: documentation
+
 title: Tracer des applications .NET Core
 type: multi-code-lang
 ---

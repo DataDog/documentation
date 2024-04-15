@@ -1,6 +1,6 @@
 ---
 title: Configuring Database Monitoring for Amazon Aurora DB Clusters
-kind: guide
+
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}

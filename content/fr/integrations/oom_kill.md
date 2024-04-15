@@ -29,7 +29,7 @@ integration_id: oom-kill
 integration_title: OOM Kill
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: oom_kill
 public_title: OOM Kill
@@ -98,8 +98,8 @@ En plus de monter `system-probe.yaml` et `oom_kill.d/conf.yaml` tel qu'indiqué 
 1. Montez les volumes suivants sur le conteneur de l'Agent :
 
     ```
-    -v /sys/kernel/debug:/sys/kernel/debug 
-    -v /lib/modules:/lib/modules 
+    -v /sys/kernel/debug:/sys/kernel/debug
+    -v /lib/modules:/lib/modules
     -v /usr/src:/usr/src
     ```
 
@@ -144,7 +144,7 @@ spec:
       enabled: true
   override:
     nodeAgent:
-      volumes: 
+      volumes:
       - emptyDir: {}
         name: src
 ```

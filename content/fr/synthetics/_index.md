@@ -35,7 +35,7 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive pour améliorer vos capacités de testing
     Synthetic
-kind: documentation
+
 title: Surveillance Synthetic
 ---
 
@@ -51,7 +51,7 @@ Vous pouvez créer des tests Synthetic dans l'[application Datadog][1], avec l'[
 
 ## Configurer des tests API et API à plusieurs étapes
 
-Les tests API vous permettent de lancer des requêtes [individuelles][4] ou des [chaînes][5] de requêtes afin d'effectuer des vérifications sur vos systèmes essentiels à différents niveaux du réseau : [test HTTP][6], [test SSL][7], [test DNS][8], [test WebSocket][9], [test TCP][10], [test UDP test][11], [test ICMP][12] et [test gRPC][13]. 
+Les tests API vous permettent de lancer des requêtes [individuelles][4] ou des [chaînes][5] de requêtes afin d'effectuer des vérifications sur vos systèmes essentiels à différents niveaux du réseau : [test HTTP][6], [test SSL][7], [test DNS][8], [test WebSocket][9], [test TCP][10], [test UDP test][11], [test ICMP][12] et [test gRPC][13].
 
 {{< img src="synthetics/api_test.png" alt="Tests API" style="width:100%;">}}
 
@@ -81,13 +81,13 @@ Datadog vous permet d'[intégrer vos tests Synthetic à vos traces APM][16] pour
 
 ## Accéder aux dashboards prêts à l'emploi
 
-Utilisez les [dashboards Synthetic prêts à l'emploi][17] pour analyser les données de performance liées à vos tests API, tests API à plusieurs étapes, tests Browser et emplacements privés, ainsi qu'aux événements Datadog. 
+Utilisez les [dashboards Synthetic prêts à l'emploi][17] pour analyser les données de performance liées à vos tests API, tests API à plusieurs étapes, tests Browser et emplacements privés, ainsi qu'aux événements Datadog.
 
 {{< img src="synthetics/test_summary_dashboard.png" alt="Dashboard de résumé des tests" style="width:100%;">}}
 
 ## Utiliser l'Explorateur de surveillance Synthetic et de tests en continu
 
-Créez des [requêtes de recherche et des visualisations][20] pour vos exécutions de tests Synthetic ou vos lots de tests exécutés dans des pipelines CI/CD. 
+Créez des [requêtes de recherche et des visualisations][20] pour vos exécutions de tests Synthetic ou vos lots de tests exécutés dans des pipelines CI/CD.
 
 {{< img src="continuous_testing/explorer_ci_batches.png" alt="Explorateur de tests en continu" style="width:100%;">}}
 

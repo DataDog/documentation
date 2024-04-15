@@ -1,6 +1,6 @@
 ---
 title: Dual Shipping
-kind: guide
+
 aliases:
 - /agent/guide/dual-shipping
 further_reading:
@@ -170,7 +170,7 @@ agents:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.datadoghq.com":
-        - apikey2 
+        - apikey2
 
 clusterAgent:
 ...
@@ -178,7 +178,7 @@ clusterAgent:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.ddog-gov.com":
-        - apikey2 
+        - apikey2
 ```
 
 

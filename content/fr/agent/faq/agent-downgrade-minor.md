@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/agent/faq/downgrade-datadog-agent
-kind: faq
+
 title: Rétrograder lʼAgent vers une version mineure antérieure
 ---
 

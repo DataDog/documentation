@@ -1,6 +1,6 @@
 ---
 title: Custom Time Frames
-kind: guide
+
 ---
 
 ## Overview

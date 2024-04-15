@@ -6,7 +6,7 @@ further_reading:
   tag: 설명서
   text: 지속적인 프로파일러 시작하기
 is_beta: true
-kind: documentation
+
 title: Visual Studio를 위한 Datadog 확장 기능
 ---
 
@@ -22,7 +22,7 @@ Visual Studio용 Datadog 확장 기능은 실시간 통합 가시성 데이터�
 
 - [오류 추적][5]의 문제
 - 애플리케이션 보안 관리의 [취약성][6] 보고서
-- [Watchdog 인사이트][7]의 프로파일링 인사이트 
+- [Watchdog 인사이트][7]의 프로파일링 인사이트
 
 **지속적인 프로파일러**는 다음과 같은 코드라인을 강조하여 지연 시간을 줄이고 클라우드 비용을 절감할 수 있도록 도와줍니다:
 
@@ -43,7 +43,7 @@ Visual Studio용 Datadog 확장 기능은 실시간 통합 가시성 데이터�
 ### 확장 기능 다운로드 및 설치
 
 1. Visual Studio에서 **Extensions** > **Manage Extensions**로 이동합니다.
-2. `Datadog`를 검색합니다. 
+2. `Datadog`를 검색합니다.
 3. **Download**를 클릭합니다.
 4. Visual Studio를 재시작합니다.
 
@@ -63,9 +63,9 @@ Visual Studio용 Datadog 확장 기능은 실시간 통합 가시성 데이터�
 4. .NET 솔루션과 관련된 서비스를 선택합니다.
 5. .NET 솔루션 파일을 저장합니다.
 
-## 피드백 
+## 피드백
 
-확장 기능에 대한 피드백을 보내주세요! 저희 [토론 포럼][1]에 제공하거나 `team-ide-integration@datadoghq.com`에 이메일을 보내실 수 있습니다. 
+확장 기능에 대한 피드백을 보내주세요! 저희 [토론 포럼][1]에 제공하거나 `team-ide-integration@datadoghq.com`에 이메일을 보내실 수 있습니다.
 
 ## 참고 자료
 

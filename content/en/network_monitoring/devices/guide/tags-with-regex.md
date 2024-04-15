@@ -1,6 +1,6 @@
 ---
 title: NDM Tags with Regex
-kind: guide
+
 aliases:
     - /network_performance_monitoring/devices/guide/tags-with-regex/
 further_reading:

@@ -1,6 +1,6 @@
 ---
 title: Azure App Service - Linux Code
-kind: documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
   tag: "Blog"

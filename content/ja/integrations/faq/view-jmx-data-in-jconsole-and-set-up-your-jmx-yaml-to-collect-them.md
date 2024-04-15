@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/easy-jmx-discovery-browsing-open-source-agent/
   tag: ブログ
   text: オープンソース Agent で JMX を簡単に検出し、参照する
-kind: faq
+
 title: jConsole の JMX データを表示し、収集するように jmx.yaml をセットアップするには
 ---
 

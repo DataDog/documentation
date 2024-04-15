@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 可能な限りコンビニエンスインポートを使用する
 ---
 ## メタデータ

@@ -18,7 +18,7 @@ further_reading:
 - link: /api/v1/monitors/
   tag: Documentation
   text: API Monitors Datadog
-kind: documentation
+
 title: Alertes
 ---
 

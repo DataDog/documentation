@@ -11,7 +11,7 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
   text: Dépannage CI
-kind: documentation
+
 title: Configurer le tracing sur un pipeline Jenkins
 ---
 

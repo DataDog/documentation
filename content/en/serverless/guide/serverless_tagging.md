@@ -1,6 +1,6 @@
 ---
 title: Serverless Tagging
-kind: guide
+
 further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/#aws-lambda-functions"
   tag: "Documentation"
@@ -27,7 +27,7 @@ With these tags, you can:
 
 To tag your serverless application with `env`, `service` and `version`, see the [unified service tagging documentation][1].
 
-**Notes**: 
+**Notes**:
 
 - Lambda function names should adhere to [Datadog's tagging convention][2]. This ties all of your function's traces, logs, and metrics together seamlessly.
 - [Enhanced Lambda metrics][5] do not pick up tags applied to your AWS Lambda function. Use the `DD_TAGS` environment variable instead.
@@ -40,7 +40,7 @@ By default, AWS Lambda functions are tagged with `env:none` in Datadog. Add your
 
 ### The service tag
 
-Add the `service` tag in order to group related Lambda functions into a service. 
+Add the `service` tag in order to group related Lambda functions into a service.
 
 The default behavior for new Datadog customers is for all Lambda functions to be grouped under the `aws.lambda` service, and represented as a single node on the Service map. Tag your functions by service to override this.
 

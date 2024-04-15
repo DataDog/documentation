@@ -1,6 +1,6 @@
 ---
 title: Use Community and Marketplace Integrations
-kind: guide
+
 aliases:
   - /agent/guide/community-integrations-installation-with-docker-agent
 further_reading:

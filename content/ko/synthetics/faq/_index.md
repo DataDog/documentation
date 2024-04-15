@@ -1,7 +1,7 @@
 ---
 cascade:
 - private: true
-kind: faq
+
 title: 신서틱 모니터링 FAQ
 ---
 

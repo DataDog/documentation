@@ -1,6 +1,6 @@
 ---
 title: "RDS Component"
-kind: documentation
+
 ---
 ## Overview
 

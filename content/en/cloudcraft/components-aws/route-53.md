@@ -1,6 +1,6 @@
 ---
 title: "Route 53 Component"
-kind: documentation
+
 ---
 ## Overview
 

@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting the Java Profiler
-kind: Documentation
+
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10

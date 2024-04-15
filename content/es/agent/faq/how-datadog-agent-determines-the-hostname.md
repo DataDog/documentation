@@ -3,7 +3,7 @@ aliases:
 - /es/agent/faq/how-can-i-change-the-hostname/
 comments: <!–– El diagrama de flujo original se encuentra en Lucidchart. Busca el
   enlace en Trello o pregunta a Grant. ––>
-kind: faq
+
 title: ¿Cómo determina Datadog el nombre de host del Agent?
 ---
 

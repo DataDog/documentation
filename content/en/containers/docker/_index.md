@@ -1,6 +1,6 @@
 ---
 title: Docker Agent for Docker, containerd, and Podman
-kind: documentation
+
 aliases:
   - /guides/basic_agent_usage/docker/
   - /agent/docker

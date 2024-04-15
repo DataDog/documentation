@@ -1,6 +1,6 @@
 ---
 title: Mobile Session Replay Privacy Options
-kind: documentation
+
 description: Configure privacy options for Mobile Session Replay.
 aliases:
 further_reading:
@@ -71,7 +71,7 @@ By default, the `mask` setting is enabled for all data. With this setting enable
 
 ### Mask only input elements
 
-With the `mask user input` setting enabled, any input field is replaced with anonymized text. 
+With the `mask user input` setting enabled, any input field is replaced with anonymized text.
 
 {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-user-input-2.png" alt="What your application screen may resemble when user input fields are masked." style="width:50%;">}}
 
@@ -91,7 +91,7 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-   
+
    // mask only input elements
     SessionReplay.enable(
         with: SessionReplay.Configuration(
@@ -144,7 +144,7 @@ With the `allow` setting enabled, all text is revealed.
 
 ## How and what data is masked
 
-This section describes how the Datadog recorder handles masking based on data type and how that data is defined. 
+This section describes how the Datadog recorder handles masking based on data type and how that data is defined.
 ### Text masking strategies
 
 Depending on how you've configured your privacy settings, the type of text, and sensitivity of data, Datadog's masking rules apply different strategies to different types of text fields.

@@ -19,7 +19,7 @@ integration_id: ''
 integration_title: Amazon VPC
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_vpc
 public_title: Intégration Datadog/Amazon VPC
@@ -63,7 +63,7 @@ Il est recommandé d'utiliser Kinesis Data Firehose, car cette approche repré
 #### Activer la journalisation de logs de flux VPC
 
 1. Dans la console AWS, accédez au VPC que vous souhaitez surveiller.
-2. Accédez à l'onglet **Flow logs**. 
+2. Accédez à l'onglet **Flow logs**.
 3. Cliquez sur **Create flow log**.
 4. Sélectionnez le filtre `All` pour afficher les connexions acceptées et refusées.
 5. Sélectionnez le type de destination de votre choix (Kinesis Data Firehose, compartiment S3 ou groupe de logs CloudWatch) pour les logs.

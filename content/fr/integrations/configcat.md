@@ -18,7 +18,7 @@ integration_id: configcat
 integration_title: ConfigCat
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: developer@configcat.com
 manifest_version: 1.0.0
 name: configcat
@@ -43,7 +43,7 @@ Cette intégration permet de s'assurer que chaque modification des paramètres d
 
 1. [Souscrivez une offre Datadog][5].
 2. Récupérez une [clé d'API Datadog][6].
-    ![Événement Datadog][7] 
+    ![Événement Datadog][7]
 4. Accédez à l'onglet [integrations][8] du dashboard ConfigCat.
 5. Cliquez sur le bouton _CONNECT_ de Datadog, et entrez votre clé d'API Datadog.
 6. C'est tout ! Modifiez vos feature flags comme bon vous semble et vérifiez vos événements dans Datadog.

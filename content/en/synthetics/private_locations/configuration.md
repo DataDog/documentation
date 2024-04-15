@@ -1,6 +1,6 @@
 ---
 title: Private Locations Configuration
-kind: documentation
+
 description: Configure your private locations.
 further_reading:
 - link: "getting_started/synthetics/private_location"
@@ -118,14 +118,14 @@ Access key for Datadog API authentication.
 `--secretAccessKey`
 : **Type**: String <br>
 **Default**: `none`<br>
-Secret access key for Datadog API authentication.  
+Secret access key for Datadog API authentication.
 
 `--datadogApiKey`
 : **Type**: String <br>
 **Default**: `none`<br>
-Datadog API key to send browser tests artifacts (such as screenshots).  
- 
-`--privateKey`      
+Datadog API key to send browser tests artifacts (such as screenshots).
+
+`--privateKey`
 : **Type**: Array <br>
 **Default**: `none`<br>
 Private key used to decrypt test configurations.
@@ -209,7 +209,7 @@ All variables imported this way are obfuscated.
 : **Type**: String <br>
 Overrides variables used in tests running on the Private Location with environment variables. It requires the environment variables to be imported in the containerized environment.
 With Docker, for example, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
-All variables imported this way are obfuscated. 
+All variables imported this way are obfuscated.
 
 `--allowedIPRanges`
 : **Type**: Array of Strings <br>

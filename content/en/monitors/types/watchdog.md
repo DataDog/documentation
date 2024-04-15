@@ -1,6 +1,6 @@
 ---
 title: Watchdog Monitor
-kind: documentation
+
 description: "Algorithmically detects application and infrastructure issues."
 aliases:
 - /monitors/monitor_types/watchdog

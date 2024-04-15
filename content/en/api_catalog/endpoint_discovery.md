@@ -1,6 +1,6 @@
 ---
 title: Discovering Endpoints from APM
-kind: documentation
+
 is_beta: true
 further_reading:
 - link: "/tracing/api_catalog/"
@@ -11,7 +11,7 @@ aliases:
 ---
 
 ## Overview
-If a service has a supported tracer installed, the API Catalog is automatically populated with all endpoints discovered from this service. 
+If a service has a supported tracer installed, the API Catalog is automatically populated with all endpoints discovered from this service.
 
 To check for compatibility issues, click **Learn More** in the app, then select **Troubleshoot**.
 {{< img src="tracing/api_catalog/api-catalog-discovery-learn-more.png" alt="ALT TEXT" style="width:30%;text-align: left;" >}}

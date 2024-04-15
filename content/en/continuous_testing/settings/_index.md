@@ -1,6 +1,6 @@
 ---
 title: Continuous Testing Settings
-kind: documentation
+
 further_reading:
 - link: "/continuous_testing/cicd_integrations"
   tag: "Documentation"
@@ -33,7 +33,7 @@ By default, all your tests running in CI/CD pipelines run sequentially (one afte
 
 ## Parallelization
 
-Parallel tests are tests that run simultaneously in your [continuous integration and continuous delivery (CI/CD) pipelines][4]. 
+Parallel tests are tests that run simultaneously in your [continuous integration and continuous delivery (CI/CD) pipelines][4].
 
 {{< img src="continuous_testing/parallelization_explained.png" alt="A diagram that explains the benefits of parallelization vs. sequential test runs" style="width:100%;">}}
 
@@ -45,7 +45,7 @@ This ensures you can:
 
 ### Estimate parallelization
 
-Click **Estimate Parallelization** to see how many tests Datadog recommends running in parallel based on your [Continuous Testing metrics][3]. 
+Click **Estimate Parallelization** to see how many tests Datadog recommends running in parallel based on your [Continuous Testing metrics][3].
 
 {{< img src="continuous_testing/estimated_parallelization.png" alt="Completing the Estimate Parallelization wizard in Continuous Testing Settings" style="width:60%;">}}
 
@@ -55,7 +55,7 @@ $$\text"estimated parallelization" = {\text"average numbers of tests per CI batc
 
 ### Set parallelization
 
-1. Under **Set your preferences**, select the **Parallelization** option. 
+1. Under **Set your preferences**, select the **Parallelization** option.
 2. Customize the parallelization you need based on how many tests you want to run in parallel.
 3. Click **Save Selection**.
 4. Confirm your selection.
@@ -64,7 +64,7 @@ $$\text"estimated parallelization" = {\text"average numbers of tests per CI batc
 
 ## Permissions
 
-In order to customize the parallelization for Continuous Testing, you must have the `billing_edit` permission. 
+In order to customize the parallelization for Continuous Testing, you must have the `billing_edit` permission.
 
 Otherwise, the following error displays: `You're missing edit permission for Continuous Testing settings. You can run your tests with a parallelization of X (up to X tests running at the same time at a given point during your CI). To increase this value, reach out to your administrator admin.email@datadoghq.com`.
 

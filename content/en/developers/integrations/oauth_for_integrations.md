@@ -1,13 +1,13 @@
 ---
 aliases:
 - /developers/integrations/oauth_for_data_integrations/
-kind: documentation
+
 title: OAuth for Integrations
 description: Use OAuth to authenticate integrations.
 ---
 {{< callout btn_hidden="true" >}}
   The Datadog Developer Platform is in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
+{{< /callout >}}
 
 ## Overview
 
@@ -99,7 +99,7 @@ In order to publish an OAuth client, you first need to open a pull request for y
 As a part of your pull request, complete the following steps:
 
 1. Update your README file with an `## Uninstallation` section under `## Setup` that includes the following instructions (along with any custom instructions you would like to add):
-       - Once this integration has been uninstalled, any previous authorizations are revoked. 
+       - Once this integration has been uninstalled, any previous authorizations are revoked.
        - Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][10].
 2. Update your `manifest.json` file to reference this new `## Uninstallation` section. This reference should appear directly beneath the support field:
        - ```

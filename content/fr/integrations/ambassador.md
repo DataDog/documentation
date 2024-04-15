@@ -20,7 +20,7 @@ integration_id: ambassador
 integration_title: Ambassador API Gateway
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: hello@datawire.io
 manifest_version: 1.0.0
 metric_prefix: envoy.
@@ -55,7 +55,7 @@ Activez DogStatsD via le DaemonSet de votre Agent et définissez la variable d'e
 ```
 name: STATSD_HOST
 valueFrom:
-  fieldRef:    
+  fieldRef:
     fieldPath: status.hostIP
 ```
 

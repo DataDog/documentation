@@ -1,6 +1,6 @@
 ---
 title: Further Configure the Datadog Agent on Kubernetes
-kind: documentation
+
 aliases:
     - /integrations/faq/gathering-kubernetes-events
     - /agent/kubernetes/event_collection
@@ -70,7 +70,7 @@ To verify, ensure that `datadog.apm.socketEnabled` is set to `true` in your `val
 ```yaml
 datadog:
   apm:
-    socketEnabled: true    
+    socketEnabled: true
 ```
 
 {{% /tab %}}
@@ -80,7 +80,7 @@ For more information, see [Kubernetes Trace Collection][16].
 
 ## Enable Kubernetes event collection
 
-Use the [Datadog Cluster Agent][2] to collect Kubernetes events. 
+Use the [Datadog Cluster Agent][2] to collect Kubernetes events.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -113,7 +113,7 @@ datadog:
   collectEvents: true
 clusterAgent:
   enabled: true
-  rbac: 
+  rbac:
     create: true
 ```
 
@@ -295,7 +295,7 @@ The Datadog Operator v1.0.0+ and Helm chart v2.7.0+ **enable the Cluster Agent b
 
 The Datadog Operator v1.0.0+ enables the Cluster Agent by default. The Operator creates the necessary RBACs and deploys the Cluster Agent. Both Agents use the same API key.
 
-The Operator automatically generates a random token in a Kubernetes `Secret` to be shared by the Datadog Agent and Cluster Agent for secure communication. 
+The Operator automatically generates a random token in a Kubernetes `Secret` to be shared by the Datadog Agent and Cluster Agent for secure communication.
 
 You can manually specify this token in the `global.clusterAgentToken` field in your `datadog-agent.yaml`:
 
@@ -324,7 +324,7 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    clusterAgentTokenSecret: 
+    clusterAgentTokenSecret:
       secretName: <SECRET_NAME>
       keyName: <KEY_NAME>
 ```
@@ -349,7 +349,7 @@ clusterAgent:
   enabled: true
 ```
 
-Helm automatically generates a random token in a Kubernetes `Secret` to be shared by the Datadog Agent and Cluster Agent for secure communication. 
+Helm automatically generates a random token in a Kubernetes `Secret` to be shared by the Datadog Agent and Cluster Agent for secure communication.
 
 You can manually specify this token in the `clusterAgent.token` field in your `datadog-agent.yaml`:
 
@@ -436,7 +436,7 @@ To make use of Datadog's [Container Explorer][3], enable the Process Agent. The 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Datadog Operator enables the Process Agent by default. 
+The Datadog Operator enables the Process Agent by default.
 
 For verification, ensure that `features.liveContainerCollection.enabled` is set to `true` in your `datadog-agent.yaml`:
 
@@ -494,7 +494,7 @@ The Datadog Operator and Helm chart **enable Datadog's [Orchestrator Explorer][2
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Orchestrator Explorer is enabled in the Datadog Operator by default. 
+The Orchestrator Explorer is enabled in the Datadog Operator by default.
 
 For verification, ensure that the `features.orchestratorExplorer.enabled` parameter is set to `true` in your `datadog-agent.yaml`:
 
@@ -558,7 +558,7 @@ For a complete list of configuration fields for the Datadog Operator, see the [O
 
 [1]: /getting_started/
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
-[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md 
+[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
 {{% /tab %}}
 {{% tab "Helm" %}}
 |  Helm | Description |
@@ -598,7 +598,7 @@ The containerized Datadog Agent can be configured by using environment variables
 ### Examples
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-When using the Datadog Operator, you can set additional environment variables in `override` for a component with `[key].env []object`, or for a container with `[key].containers.[key].env []object`. The following keys are supported: 
+When using the Datadog Operator, you can set additional environment variables in `override` for a component with `[key].env []object`, or for a container with `[key].containers.[key].env []object`. The following keys are supported:
 
 - `nodeAgent`
 - `clusterAgent`
@@ -858,7 +858,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [20]: https://app.datadoghq.com/orchestration/overview
 [21]: /infrastructure/containers/orchestrator_explorer
 [22]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
-[23]: /infrastructure/process/ 
+[23]: /infrastructure/process/
 [24]: /account_management/api-app-keys/#application-keys
 [25]: /integrations/kubernetes_state_core/
 [26]: /containers/docker/?tab=standard#environment-variables

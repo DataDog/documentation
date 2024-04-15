@@ -1,6 +1,6 @@
 ---
 title: Example Natural Language Queries
-kind: guide
+
 disable_toc: false
 further_reading:
 - link: "bits_ai/"
@@ -18,7 +18,7 @@ further_reading:
 
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
 Natural language querying is in private beta. Fill out this form to join the wait list.
-{{< /beta-callout >}} 
+{{< /beta-callout >}}
 
 Bits AI enables natural language querying for service health and ownership of your services, and allows for retrieval of related Datadog resources. You can inquire about on-call personnel, dashboards, service status, and dependencies using natural language questions. In this guide, see example queries for:
 - [Logs](#logs)

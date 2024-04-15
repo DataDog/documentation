@@ -1,6 +1,6 @@
 ---
 title: Azure Troubleshooting
-kind: guide
+
 aliases:
   - /integrations/faq/azure-troubleshooting
 further_reading:
@@ -29,7 +29,7 @@ For other missing metrics, contact [Datadog support][3] with the following infor
 - dimensions
 - resource group
 - resource name
-- subscription ID or subscription name 
+- subscription ID or subscription name
 
 Attach a screenshot of a graph from Azure Monitor that shows a graph of the metric. **Important**: Graph 1-minute data points in the screenshot.
 
@@ -52,7 +52,7 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
 If you have Azure resources with the same resource name as one of the default parameters, it can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. Datadog recommends renaming the default parameter with a unique name that does not already exist within your environment.
 
-For example, use the -EventhubName flag to change the default name of the Eventhub resource, if you already possess an Eventhub named `datadog-eventhub`. 
+For example, use the -EventhubName flag to change the default name of the Eventhub resource, if you already possess an Eventhub named `datadog-eventhub`.
 
 {{< code-block lang="powershell" filename="Example" >}}
 
@@ -60,15 +60,15 @@ For example, use the -EventhubName flag to change the default name of the Eventh
 
 {{< /code-block >}}
 
-**Note:** Navigate to the [Optional Parameters][4] section to find the list of configurable parameters. 
+**Note:** Navigate to the [Optional Parameters][4] section to find the list of configurable parameters.
 
-**Note:** If you are re-running the script due to this failure, it is also advised that you remove the entire resource group to create a fresh execution. 
+**Note:** If you are re-running the script due to this failure, it is also advised that you remove the entire resource group to create a fresh execution.
 
 ### Unregistered resource provider
 
 If your script execution is failing due to the error **The subscription is not registered to use namespace 'Microsoft.EventHub'**:
 
-Azure has resource providers for each of its services, for example: `Microsoft.EventHub` for the Azure EventHub. If your Azure subscription is not registered to a required resource provider the script fails. You can fix this issue by registering with the resource provider. Run this command in CloudShell. 
+Azure has resource providers for each of its services, for example: `Microsoft.EventHub` for the Azure EventHub. If your Azure subscription is not registered to a required resource provider the script fails. You can fix this issue by registering with the resource provider. Run this command in CloudShell.
 
 {{< code-block lang="powershell" filename="Example" >}}
 
@@ -78,7 +78,7 @@ az provider register --namespace Microsoft.EventHub
 
 ### Exceeding log quota
 
-Did you install the script successfully, but you are still not seeing activity/platform logs within the Logs Explorer? 
+Did you install the script successfully, but you are still not seeing activity/platform logs within the Logs Explorer?
 
 Ensure that you have not exceeded your [daily quota][5] for log retention.
 

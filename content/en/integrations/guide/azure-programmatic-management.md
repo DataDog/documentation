@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Programmatic Management Guide
-kind: guide
+
 description: "Steps for programmatically managing the Azure integration with Datadog"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"

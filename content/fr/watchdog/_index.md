@@ -28,7 +28,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-impact-analysis/
   tag: Blog
   text: Mesurer l'impact utilisateur avec l'analyse de l'impact Watchdog
-kind: Documentation
+
 title: Datadog WatchdogTM
 ---
 

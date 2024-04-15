@@ -1,6 +1,6 @@
 ---
 title: Help! My Password email never came through!
-kind: faq
+
 ---
 
 When a new user creates an account, your login email (or "handle") defaults to your email address. This can cause some confusion when a user wants to update their email.
@@ -17,7 +17,7 @@ Enter your email address using the password reset link:
 
 `http://{{< region-param key="dd_full_site" >}}/account/forgot_password`
 
-If you have confirmed your email address is correct and you still have not received your password reset email, check your spam and filtered emails.  
+If you have confirmed your email address is correct and you still have not received your password reset email, check your spam and filtered emails.
 
 Once you have confirmed that you have not received your email, contact [Datadog support][1].
 

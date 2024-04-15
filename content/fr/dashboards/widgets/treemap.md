@@ -10,7 +10,7 @@ further_reading:
 - link: /dashboards/widgets/pie_chart/
   tag: Documentation
   text: Widget Graphique circulaire
-kind: documentation
+
 title: Widget Treemap
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Functions
-kind: documentation
+
 aliases:
   - /examples/
   - /examples/aws-metrics/
@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Functions can modify how the results of a metric query are returned for visualizations. Most functions are applied after the results of the metric query are returned, but functions can also change the parameters before the query is made. 
+Functions can modify how the results of a metric query are returned for visualizations. Most functions are applied after the results of the metric query are returned, but functions can also change the parameters before the query is made.
 
 For example, the Rollup function changes the time aggregation of a query before the results are returned. Alternatively, arithmetic functions apply changes to the returned results of the metric query. See the [Metrics][3] page to learn more about querying metrics. To learn more about the different functions, see the [function types](#function-types).
 

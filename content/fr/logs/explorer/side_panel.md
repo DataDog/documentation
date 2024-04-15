@@ -1,6 +1,6 @@
 ---
 title: Volet latéral des logs
-kind: documentation
+
 description: Effectuer des recherches et des analyses sur l'ensemble de vos logs
 aliases:
   - /fr/logs/explorer/sidepanel

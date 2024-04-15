@@ -1,6 +1,6 @@
 ---
 title: High CPU or Memory Consumption
-kind: documentation
+
 disable_toc: false
 further_reading:
 - link: "/agent/troubleshooting/send_a_flare/"

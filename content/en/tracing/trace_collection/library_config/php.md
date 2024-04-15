@@ -1,6 +1,6 @@
 ---
 title: Configuring the PHP Tracing Library
-kind: documentation
+
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40

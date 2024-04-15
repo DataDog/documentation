@@ -1,6 +1,6 @@
 ---
 title: Check OpenMetrics personnalisé
-kind: documentation
+
 further_reading:
   - link: /agent/kubernetes/prometheus
     tag: Documentation
@@ -160,7 +160,7 @@ class KongCheck(OpenMetricsBaseCheckV2):
 
 #### Implémenter la méthode de check
 
-Si vous souhaitez implémenter d'autres fonctionnalités, remplacez la fonction `check()`. 
+Si vous souhaitez implémenter d'autres fonctionnalités, remplacez la fonction `check()`.
 
 Depuis `instance`, utilisez `endpoint`, qui correspond à l'endpoint de métriques Prometheus ou OpenMetrics à partir duquel les métriques sont récupérées :
 

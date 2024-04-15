@@ -1,6 +1,6 @@
 ---
 title: Creating Custom Detection Rules
-kind: documentation
+
 further_reading:
 - link: "/security/threats/setup"
   tag: "Documentation"

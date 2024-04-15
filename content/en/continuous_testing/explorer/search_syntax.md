@@ -1,6 +1,6 @@
 ---
 title: Search Syntax
-kind: documentation
+
 description: Learn how to create a search query in the Synthetic Monitoring & Continuous Testing Explorer.
 aliases:
   - /synthetics/explorer/search_syntax
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-A query is composed of terms and operators. 
+A query is composed of terms and operators.
 
 There are two types of terms:
 

@@ -1,6 +1,6 @@
 ---
 title: Ease Troubleshooting With Cross-Product Correlation
-kind: guide
+
 further_reading:
 - link: '/getting_started/tagging/unified_service_tagging/'
   tag: 'Documentation'
@@ -196,11 +196,11 @@ The APM integration with RUM & Session Replay allows you to see your frontend an
 
 #### How?
 
-You can access RUM views in the [Trace Explorer][14] and APM traces in the [RUM Explorer][15]. For more information, see [Connect RUM and Traces][16]. 
+You can access RUM views in the [Trace Explorer][14] and APM traces in the [RUM Explorer][15]. For more information, see [Connect RUM and Traces][16].
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:100%;" >}}
 
-There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the **Traces** tab. 
+There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the **Traces** tab.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/rum-action-server-logs.png" alt="Logs in a RUM action trace preview" style="width:100%;" >}}
 
@@ -216,7 +216,7 @@ Having network-related specifics from your test, in addition to backend, infrast
 
 #### How?
 
-After enabling APM on your application's endpoint, you can access APM traces in the [Synthetic Monitoring & Continuous Testing page][18]. 
+After enabling APM on your application's endpoint, you can access APM traces in the [Synthetic Monitoring & Continuous Testing page][18].
 
 For more information, see [Connect Synthetic Tests and Traces][19].
 

@@ -1,6 +1,6 @@
 ---
 title: Enable Symbol Database for Java
-kind: Documentation
+
 is_beta: true
 private: true
 code_lang: java
@@ -23,8 +23,8 @@ Interested in an improved user experience when creating Dynamic Instrumentation 
 
 To run your service with Dynamic Instrumentation enabled, and additionally enable Symbol Database uploads:
 
-1. Set the `-Ddd.symbol.database.upload.enabled` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` environment variable to `true`. 
-2. Set the `-Ddd.symbol.database.includes` flag or the `DD_SYMBOL_DATABASE_INCLUDES` environment variable to your package prefix (for example, `com.datadoghq`). The setting expects a comma-separated list, so you can add multiple prefixes. 
+1. Set the `-Ddd.symbol.database.upload.enabled` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` environment variable to `true`.
+2. Set the `-Ddd.symbol.database.includes` flag or the `DD_SYMBOL_DATABASE_INCLUDES` environment variable to your package prefix (for example, `com.datadoghq`). The setting expects a comma-separated list, so you can add multiple prefixes.
 3. Specify the `dd.service` and `dd.version` [Unified Service Tags][5].
 
 {{< tabs >}}

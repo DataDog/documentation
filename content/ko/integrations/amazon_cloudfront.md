@@ -17,7 +17,7 @@ integration_id: ''
 integration_title: Amazon CloudFront
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_cloudfront
 public_title: Datadog-Amazon CloudFront 통합
@@ -86,7 +86,7 @@ AWS Services 로그를 수집하는 방법에 관한 자세한 정보는 [Datado
 
 {{< img src="integrations/amazon_cloudfront/cloudfront_logging_3.png" alt="CloudFront 로깅 3" popup="true" style="width:70%;">}}
 
-Datadog는 이 기본 설정을 유지하고 다음 커스텀 파싱 규칙을 추가하여 모든 필드가 활성화된 로그를 자동으로 처리할 것을 권장합니다. 
+Datadog는 이 기본 설정을 유지하고 다음 커스텀 파싱 규칙을 추가하여 모든 필드가 활성화된 로그를 자동으로 처리할 것을 권장합니다.
 
 [파이프라인 페이지][1]로 이동하고, Amazon CloudFront를 검색하고 [grok 파서 프로세서를 편집하거나 생성하고][7] *고급 설정*에서 다음 도움말 규칙을 추가합니다.
 

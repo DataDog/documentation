@@ -1,6 +1,6 @@
 ---
 title: Amazon ECS
-kind: documentation
+
 aliases:
   - /agent/amazon_ecs/
 further_reading:
@@ -48,7 +48,7 @@ If you don't have a working EC2 Container Service cluster configured, review the
 
 ### Create an ECS task
 
-The Task Definition launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this Task Definition and redeploy the Daemon Service as needed. You can configure the Task Definition using either the [AWS CLI tools][9] or using the Amazon Web Console. 
+The Task Definition launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this Task Definition and redeploy the Daemon Service as needed. You can configure the Task Definition using either the [AWS CLI tools][9] or using the Amazon Web Console.
 
 The following sample is a minimal configuration for core infrastructure monitoring. However, additional Task Definition samples with various features enabled are provided in the [Setup additional Agent features](#setup-additional-agent-features) section if you want to use those instead.
 
@@ -56,11 +56,11 @@ The following sample is a minimal configuration for core infrastructure monitori
 
 1. For Linux containers, download [datadog-agent-ecs.json][20]
     1. If you are using an original Amazon Linux 1 AMI use [datadog-agent-ecs1.json][21]
-    2. If you are using Windows use [datadog-agent-ecs-win.json][22] 
+    2. If you are using Windows use [datadog-agent-ecs-win.json][22]
 
 2. Edit your base Task Definition file
     1. Set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][14] for your account.
-    2. Set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} 
+    2. Set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}}
 
         **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) and do not set this, it results in an invalid API key message. Use the [documentation site selector][13] to see documentation appropriate for the site you're using.
 

@@ -1,6 +1,6 @@
 ---
 title: Android Crash Reporting and Error Tracking
-kind: documentation
+
 description: Set up Error Tracking for your Android applications.
 aliases:
     - /real_user_monitoring/error_tracking/android
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the RUM Android SDK. 
+Error Tracking processes errors collected from the RUM Android SDK.
 
 Enable Android Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
 
@@ -35,7 +35,7 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 
 1. Add the latest version of the [RUM Android SDK][4] to your Gradle dependencies.
 2. Configure your application's `env` and `variant` when [initializing the SDK][5].
-3. Run the Gradle task to upload your Proguard/R8 mapping file to Datadog in order to access deobfuscated stack traces. 
+3. Run the Gradle task to upload your Proguard/R8 mapping file to Datadog in order to access deobfuscated stack traces.
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
@@ -57,7 +57,7 @@ For any given error, you can access the file path, line number, and a code snipp
 
 2. [Create a dedicated Datadog API key][2] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
 3. Optionally, configure the plugin to upload files to the EU region by configuring the plugin in your `build.gradle` script:
-   
+
    ```groovy
    datadog {
        site = "EU1"
@@ -65,7 +65,7 @@ For any given error, you can access the file path, line number, and a code snipp
    ```
 
 4. Run the upload task after your obfuscated APK builds:
-    
+
    ```bash
    ./gradlew uploadMappingRelease
    ```
@@ -96,7 +96,7 @@ For any given error, you can access the file path, line number, and a code snipp
    ```
 
 4. Run the upload task after your obfuscated APK builds:
-   
+
    ```bash
    ./gradlew uploadMappingRelease
    ```

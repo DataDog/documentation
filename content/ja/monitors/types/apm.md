@@ -16,7 +16,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-kind: documentation
+
 title: APM モニター
 ---
 
@@ -47,7 +47,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 
 メトリクスがしきい値を超えるとアラートがトリガーされます。
 
-* `Requests per second`、`Errors per second`、`Apdex`、`Error rate`、`Avg latency`、`p50 latency`、`p75 latency`、`p90 latency`、または `p99 latency` 
+* `Requests per second`、`Errors per second`、`Apdex`、`Error rate`、`Avg latency`、`p50 latency`、`p75 latency`、`p90 latency`、または `p99 latency`
 * が `above`、`above or equal to`、`below`、または `below or equal to` の時にアラートを作成
 * アラートのしきい値 `<数値>`
 * 警告のしきい値 `<数値>`

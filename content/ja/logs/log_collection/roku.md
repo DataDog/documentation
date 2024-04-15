@@ -7,7 +7,7 @@ further_reading:
 - link: logs/explorer
   tag: Documentation
   text: ログの調査方法
-kind: documentation
+
 title: Roku ログ収集
 ---
 
@@ -148,7 +148,7 @@ title: Roku ログ収集
 
    ```brightscript
    ' 0 = none; 1 = error; 2 = warning; 3 = info; 4 = verbose;
-   m.globalNode.addFields({ datadogVerbosity: 2 }) 
+   m.globalNode.addFields({ datadogVerbosity: 2 })
    ```
 
 4. 次のいずれかの関数で、カスタムログエントリを Datadog に直接送信します。
@@ -171,8 +171,8 @@ title: Roku ログ収集
 
    ```brightscript
     m.global.datadogLogsAgent.callfunc(
-        "logInfo", 
-        "Video started", 
+        "logInfo",
+        "Video started",
         { video_id: 42, video_type: "advert"}
     )
    ```

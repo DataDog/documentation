@@ -1,6 +1,6 @@
 ---
 title: Monitoring Resource Performance
-kind: documentation
+
 further_reading:
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"

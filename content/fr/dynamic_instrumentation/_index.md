@@ -18,7 +18,7 @@ further_reading:
   tag: Documentation
   text: En savoir plus sur les métriques
 is_beta: true
-kind: documentation
+
 private: true
 title: Instrumentation dynamique
 ---
@@ -84,7 +84,7 @@ En activant l'option `Capture method parameters and local variables` sur la sond
 - local variables
 - class fields
 - the call stack
-- exceptions 
+- exceptions
 Les valeurs enregistrées sont visibles dans l'interface Datadog.
 
 Étant donné que l'enregistrement de ces données nécessite beaucoup de ressources, cette option n'est activée que sur l'une des instances de votre service qui correspondent aux paramètres d'environnement et de version de la sonde. Les sondes concernées sont limitées à une exécution par seconde.

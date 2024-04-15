@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 関数は 100 行以下でなければならない
 ---
 ## メタデータ

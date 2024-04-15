@@ -1,6 +1,6 @@
 ---
 title: Uploading JUnit test report files to Datadog
-kind: documentation
+
 code_lang: junit_xml
 type: multi-code-lang
 code_lang_weight: 60

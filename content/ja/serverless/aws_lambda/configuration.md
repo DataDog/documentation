@@ -15,7 +15,7 @@ further_reading:
 - link: /integrations/github
   tag: Documentation
   text: Datadog GitHub インテグレーション
-kind: documentation
+
 title: AWS Lambda のためのサーバーレスモニタリングの構成
 ---
 

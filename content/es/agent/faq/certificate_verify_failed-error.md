@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Error CERTIFICATE_VERIFY_FAILED
 ---
 
@@ -53,7 +53,7 @@ rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-Para todos los demás usuarios del Agent `<= 5.11`, los pasos son: 
+Para todos los demás usuarios del Agent `<= 5.11`, los pasos son:
 
 ```shell
 rm "C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem"

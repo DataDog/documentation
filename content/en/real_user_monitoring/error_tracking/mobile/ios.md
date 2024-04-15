@@ -1,6 +1,6 @@
 ---
 title: iOS Crash Reporting and Error Tracking
-kind: documentation
+
 aliases:
 - /real_user_monitoring/ios/crash_reporting/
 - /real_user_monitoring/error_tracking/ios
@@ -28,7 +28,7 @@ Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports
  - Symbolicated iOS crash reports
  - Trend analysis with iOS error tracking
 
-In order to symbolicate your stack traces, find and upload your .dSYM files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
+In order to symbolicate your stack traces, find and upload your .dSYM files to Datadog. Then, verify your configuration by running a test crash and restarting your application.
 
 Your crash reports appear in [**Error Tracking**][8].
 
@@ -36,9 +36,9 @@ Your crash reports appear in [**Error Tracking**][8].
 
 If you have not set up the iOS SDK yet, follow the [in-app setup instructions][1] or see the [iOS RUM setup documentation][2].
 
-### Add Crash Reporting 
+### Add Crash Reporting
 
-To enable Crash Reporting, make sure to also enable [RUM][2] and, or [Logs][9]. Then, add the package according to your dependency manager and update your initialize snippet.  
+To enable Crash Reporting, make sure to also enable [RUM][2] and, or [Logs][9]. Then, add the package according to your dependency manager and update your initialize snippet.
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -93,7 +93,7 @@ Datadog.initialize(
     clientToken: "<client token>",
     env: "<environment>",
     service: "<service name>"
-  ), 
+  ),
   trackingConsent: trackingConsent
 )
 
@@ -106,9 +106,9 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 ### Find your dSYM file
 
-Every iOS application produces .dSYM files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of .dSYM files. 
+Every iOS application produces .dSYM files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of .dSYM files.
 
-Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine. 
+Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine.
 
 | Bitcode Enabled | Description |
 |---|---|
@@ -137,7 +137,7 @@ npx @datadog/datadog-ci dsyms upload appDsyms.zip
 npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 ```
 
-**Note**: To configure the tool using the EU endpoint, set the `DATADOG_SITE` environment variable to `datadoghq.eu`. To override the full URL for the intake endpoint, define the `DATADOG_DSYM_INTAKE_URL` environment variable. 
+**Note**: To configure the tool using the EU endpoint, set the `DATADOG_SITE` environment variable to `datadoghq.eu`. To override the full URL for the intake endpoint, define the `DATADOG_DSYM_INTAKE_URL` environment variable.
 
 Alternatively, if you use Fastlane or GitHub Actions in your workflows, you can leverage these integrations instead of `datadog-ci`:
 
@@ -204,7 +204,7 @@ dSYM files are limited to **500** MB.
 
 ## Verify crash reports
 
-To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
+To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog.
 
 1. Run your application on an iOS simulator or a real device. Ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the iOS SDK does.
 2. Execute the code containing the crash:

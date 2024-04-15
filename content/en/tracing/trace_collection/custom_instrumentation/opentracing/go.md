@@ -1,6 +1,6 @@
 ---
 title: Go OpenTracing Instrumentation
-kind: documentation
+
 aliases:
 - /tracing/setup_overview/open_standards/go
 - /tracing/trace_collection/open_standards/go

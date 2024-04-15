@@ -1,10 +1,10 @@
 ---
 title: Impact of the CircleCI Security Incident on the Datadog Agent
-kind: faq
+
 ---
 <details>
   <summary><strong>Page changelog</strong></summary>
-  
+
   <table>
     <tr>
         <td><strong>Date</strong></td>

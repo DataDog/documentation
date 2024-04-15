@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Mobile Session Replay
-kind: documentation
+
 description: How to troubleshoot Mobile Session Replay.
 aliases:
 further_reading:
@@ -42,8 +42,8 @@ When sessions are 1 nanosecond long, Datadog is unable to process the record, so
 ### I need to account for mobile app consent when collecting mobile session replays
 Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. Upon starting the SDK, a tracking consent value needs to be set to one of the following:
 
-- If the value is **not granted**, then no data is ever written on disk. 
-- If the value is **pending**, the data is written in a temporary folder which cannot be uploaded to Datadog. 
+- If the value is **not granted**, then no data is ever written on disk.
+- If the value is **pending**, the data is written in a temporary folder which cannot be uploaded to Datadog.
 - If the value is **granted**, data is written in an "upload" folder, which is processed in the background, and eventually uploaded to Datadog.
 
 At any time during the lifetime of the host app, it's possible to change the tracking consent. When the consent changes from pending to granted, the data in the temporary folder is moved to the "upload" folder.

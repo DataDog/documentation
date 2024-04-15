@@ -1,6 +1,6 @@
 ---
 title: Tracing .NET Core Applications
-kind: documentation
+
 aliases:
   - /tracing/dotnet-core
   - /tracing/languages/dotnet-core

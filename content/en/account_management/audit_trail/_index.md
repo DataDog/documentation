@@ -1,6 +1,6 @@
 ---
 title: Datadog Audit Trail
-kind: documentation
+
 aliases:
     - /account_management/audit_logs/
 further_reading:
@@ -60,7 +60,7 @@ To see who enabled Audit Trail:
 
 
 ### Permissions
-Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer. 
+Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer.
 
 ### Archiving
 

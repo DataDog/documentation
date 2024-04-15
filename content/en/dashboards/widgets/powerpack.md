@@ -1,6 +1,6 @@
 ---
 title: Powerpack Widget
-kind: Documentation
+
 disable_toc: false
 further_reading:
 - link: "/dashboards/guide/powerpacks-best-practices/"
@@ -27,14 +27,14 @@ Powerpacks are templated groups of widgets that scale graphing expertise as reus
 
 ### Creating a Powerpack
 
-Create a Powerpack from an existing group on a dashboard: 
+Create a Powerpack from an existing group on a dashboard:
 
 {{< img src="dashboards/widgets/powerpack/group_header_icons.png" alt="Dashboard group header icons highting the Save as Powerpack icon option" style="width:80%;" >}}
 
-1. From a dashboard group's header, click the "Save as Powerpack" icon. 
-1. Fill out details to make the Powerpack discoverable to your organization. 
+1. From a dashboard group's header, click the "Save as Powerpack" icon.
+1. Fill out details to make the Powerpack discoverable to your organization.
 1. Add tags under "Add Search Categories" to organize your Powerpacks. This allows team members to find the correct Powerpack to add to their dashboard.
-1. Choose which filters should be configurable for the users of the Powerpack. 
+1. Choose which filters should be configurable for the users of the Powerpack.
 
 **Note**: After creating a Powerpack, the original group is replaced with an instance of the Powerpack.
 
@@ -64,16 +64,16 @@ To make changes to the Powerpack Details:
 After you create a Powerpack, you can add an instance of that Powerpack to multiple dashboards.
 
 To add a Powerpack instance to the dashboard:
-1. Click the "Powerpacks" tab of the widget tray to find available Powerpacks. You can search with text as well as the predefined tags. 
+1. Click the "Powerpacks" tab of the widget tray to find available Powerpacks. You can search with text as well as the predefined tags.
 1. Click the desired Powerpack to add to your dashboard to open the configuration for the Powerpack instance.
 1. Select filter values and how the filters are controlled.
     * Powerpack filters - the selected value applies to widgets inside the Powerpack instance.
     * Dashboard filters - controlled by dashboard template variables.
-1. Click **Confirm**. 
+1. Click **Confirm**.
 
 ### Customizing a Powerpack instance
 
-Changes to a Powerpack instance **do not** apply to other Powerpack instances in other dashboards. 
+Changes to a Powerpack instance **do not** apply to other Powerpack instances in other dashboards.
 
 To customize Powerpack instances displayed on your dashboard:
 1. Click the kebab menu on the instance header.

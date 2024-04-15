@@ -1,6 +1,6 @@
 ---
 title: Basic Agent Usage for Windows
-kind: documentation
+
 description: "Basic functionality of the Datadog Agent on the Windows platform."
 platform: Windows
 aliases:
@@ -71,9 +71,9 @@ start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADO
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
 
-#### Installation Configuration Options 
+#### Installation Configuration Options
 
-Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).  
+Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).
 
 
 | Variable                                    | Type    | Description                                                                                                                                                                                                                         |
@@ -96,7 +96,7 @@ Each of the following configuration options can be added as a property to the co
 
 ### More Agent configuration options
 
-Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. 
+Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows.
 
 **Note**: If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
 

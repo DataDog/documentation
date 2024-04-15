@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Cloud SIEM
-kind: documentation
+
 aliases:
     - /cloud-siem/getting_started/
     - /security_monitoring/getting_started/
@@ -107,7 +107,7 @@ After the index is moved to the first index position, review the settings and st
 
 ## Phase 4: Customization
 
-1. Set up [suppression rules][23] to reduce noise. 
+1. Set up [suppression rules][23] to reduce noise.
 2. Create [custom detection rules][24]. Review [Best Practices for Creating Detection Rules][25].
 
 ## Further Reading

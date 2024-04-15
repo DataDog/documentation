@@ -3,7 +3,7 @@ aliases:
 - /fr/serverless/serverless_integrations/plugin
 dependencies:
 - https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md
-kind: documentation
+
 title: Plug-in Serverless Framework Datadog
 ---
 ![build](https://github.com/DataDog/serverless-plugin-datadog/workflows/build/badge.svg)
@@ -137,7 +137,7 @@ Il existe sept monitors recommandés avec des valeurs par défaut prédéfinies.
 
 #### Activer et configurer un monitor sans serveur recommandé
 
-Pour créer un monitor sans serveur recommandé, vous devez utiliser son ID. Attention : vous devez également définir les paramètres `DATADOG_API_KEY` et `DATADOG_APP_KEY` dans votre environnement. 
+Pour créer un monitor sans serveur recommandé, vous devez utiliser son ID. Attention : vous devez également définir les paramètres `DATADOG_API_KEY` et `DATADOG_APP_KEY` dans votre environnement.
 
 Si vous souhaitez configurer davantage de paramètres pour un monitor recommandé, définissez leur valeur sous l'ID du monitor sans serveur. Les paramètres qui ne sont pas spécifiés à cet endroit seront définis sur la valeur recommandée par défaut. Le paramètre `query` pour les monitors recommandés ne peut pas être modifié directement. Il prend donc la valeur par défaut, comme les autres paramètres non spécifiés. Toutefois, vous pouvez modifier la valeur seuil de `query` en la redéfinissant dans le paramètre `options`. Pour supprimer un monitor, retirez-le du modèle `serverless.yml`. Pour en savoir plus sur la définition des paramètres de monitor, consultez la documentation relative aux [API Monitors de Datadog](https://docs.datadoghq.com/api/latest/monitors/#creer-un-monitor).
 

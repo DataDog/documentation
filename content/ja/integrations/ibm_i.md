@@ -34,7 +34,7 @@ integration_id: ibm-i
 integration_title: IBM i
 integration_version: 2.1.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: ibm_i
 public_title: IBM i

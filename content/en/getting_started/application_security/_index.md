@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Application Security Management
-kind: documentation
+
 aliases:
 - /security/security_monitoring/getting_started/
 further_reading:
@@ -95,7 +95,7 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
 ## Reports and notifications
 
 1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
-3. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
+3. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days.
 
 
 Interested in best practices to go further? View the [in-product Quickstart Guide.][19]

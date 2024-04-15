@@ -19,7 +19,7 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Datadog プラットフォームで開発する方法について
-kind: documentation
+
 title: インテグレーションの構築
 ---
 ## 概要

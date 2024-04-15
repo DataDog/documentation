@@ -1,6 +1,6 @@
 ---
 title: Session Replay Playlists
-kind: documentation
+
 description: Learn how to create and use Playlists for organizing Session Replays.
 aliases:
 further_reading:
@@ -50,7 +50,7 @@ Your team can use playlists in many different ways. Here are some ideas to get s
 
 - After you spot an error in one session, you can find other sessions where that error pattern exists and group them together
 - As you update your UI, you can create playlists for sessions where users may have gotten lost in a new flow
-- To bookmark groups of sessions that have unique behavior, like a rage click on a revenue generating button, you can write a query in RUM and save all associated sessions in a playlist 
+- To bookmark groups of sessions that have unique behavior, like a rage click on a revenue generating button, you can write a query in RUM and save all associated sessions in a playlist
 
 ## Troubleshooting
 

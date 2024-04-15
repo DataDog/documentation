@@ -19,7 +19,7 @@ guid: d70f5c68-873d-436e-bddb-dbb3e107e3b5
 integration_id: wmi
 integration_title: WMI Check
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: wmi.
@@ -103,7 +103,7 @@ Chaque requête WMI a deux options obligatoires, `class` et `metrics`, ainsi que
 - `class` est le nom de la classe WMI, par exemple `Win32_OperatingSystem` ou `Win32_PerfFormattedData_PerfProc_Process`. De nombreux noms de classe standard sont disponibles dans la [documentation MSDN][7]. Les classes `Win32_FormattedData_*` fournissent par défaut de nombreux compteurs de performances utiles.
 
 - `metrics` est la liste des métriques que vous souhaitez capturer, chaque élément de la
-  liste étant un ensemble `[<NOM_PROPRIÉTÉ_WMI>, <NOM_MÉTRIQUE>, <TYPE_MÉTRIQUE>]` : 
+  liste étant un ensemble `[<NOM_PROPRIÉTÉ_WMI>, <NOM_MÉTRIQUE>, <TYPE_MÉTRIQUE>]` :
 
   - `<NOM_PROPRIÉTÉ_WMI>` ressemble à `NumberOfUsers` ou `ThreadCount`. Les propriétés standard sont également disponibles dans la documentation MSDN pour chaque classe.
   - `<NOM_MÉTRIQUE>` est le nom que vous souhaitez voir apparaître dans Datadog.
@@ -138,7 +138,7 @@ Le paramètre `[IDProcess, Win32_Process, Handle, CommandLine]` applique à chaq
 
 #### Collecte de métriques
 
-Le check WMI peut potentiellement générer des [métriques custom][9], ce qui peut avoir une incidence sur votre [facture][11]. 
+Le check WMI peut potentiellement générer des [métriques custom][9], ce qui peut avoir une incidence sur votre [facture][11].
 
 ### Validation
 

@@ -9,7 +9,7 @@ further_reading:
 - link: /notebooks/
   tag: ドキュメント
   text: ノートブック
-kind: documentation
+
 title: リストウィジェット
 ---
 

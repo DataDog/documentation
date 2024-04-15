@@ -1,6 +1,6 @@
 ---
 title: Docker Log Collection Troubleshooting Guide
-kind: documentation
+
 ---
 
 There are a number of common issues that can get in the way when sending new container logs to Datadog with the Container Agent or with a locally installed Host Agent. If you experience issues sending new logs to Datadog, this guide helps you troubleshoot. If you continue to have trouble, [contact our support team][1] for further assistance.
@@ -89,7 +89,7 @@ This status means that the Agent is unable to find a log file for a given contai
 
 If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver](#your-containers-are-not-using-the-json-logging-driver).
 
-**Note:** When you install the Agent on the host, the Agent does not have permission to access `/var/lib/docker/containers`. Therefore, the Agent collects logs from the Docker socket when it is installed on the host. 
+**Note:** When you install the Agent on the host, the Agent does not have permission to access `/var/lib/docker/containers`. Therefore, the Agent collects logs from the Docker socket when it is installed on the host.
 
 
 ### Status: pending
@@ -187,7 +187,7 @@ Docker's default is the json-file logging driver so the Container Agent tries to
 
 ## Agent doesn't send logs from containers that have persisted a large volume of logs (> 1GB)
 
-The Docker daemon can have performances issues while it is trying to retrieve logs for containers for which it has already stored large logs files on disk. This could lead to read timeouts when the Datadog Agent is gathering the containers' logs from the Docker daemon. 
+The Docker daemon can have performances issues while it is trying to retrieve logs for containers for which it has already stored large logs files on disk. This could lead to read timeouts when the Datadog Agent is gathering the containers' logs from the Docker daemon.
 
 When it occurs, the Datadog Agent outputs a log containing `Restarting reader after a read timeout` for a given container every 30 seconds and stops sending logs from that container while it is actually logging messages.
 

@@ -1,6 +1,6 @@
 ---
 title: Connection Issues with the SQL Server Integration
-kind: guide
+
 aliases:
   - /integrations/faq/connection-issues-with-the-sql-server-integration
 ---

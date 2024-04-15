@@ -19,7 +19,7 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Terraform による Synthetic Multistep API テストの作成と管理
-kind: documentation
+
 title: Multistep API テスト
 ---
 
@@ -50,7 +50,7 @@ Multistep API テストは、Datadog [管理ロケーション](#select-location
 
 Multistep API テストの**ロケーション**を選択します。Multistep API テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、管理ロケーションと[プライベートロケーション][5]の両方から実行できます。
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### ステップを定義する
 
@@ -237,10 +237,10 @@ Multistep API テストは次の頻度で実行できます。
 `{{ uuid }}`
 : バージョン 4 の UUID (Universally unique identifier) を生成します。
 
-`{{ date(n unit, format) }}` 
+`{{ date(n unit, format) }}`
 : テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
 
-`{{ timestamp(n, unit) }}` 
+`{{ timestamp(n, unit) }}`
 : テストが + または - `n` 単位で開始された UTC タイムスタンプに対応する値を使用して、Datadog の許容される単位のいずれかでタイムスタンプを生成します。
 
 テスト結果のローカル変数値を難読化するには、**Hide and obfuscate variable value** を選択します。変数文字列を定義したら、**Add Variable** をクリックします。
@@ -266,7 +266,7 @@ HTTP テストの URL、高度なオプション、およびアサーション�
 `DNS`
 : テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
@@ -278,7 +278,7 @@ HTTP テストの URL、高度なオプション、およびアサーション�
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、リクエストとアサーションの時間が最大時間 (60.5s) に達したことを示しています。
 
-`MALFORMED_RESPONSE` 
+`MALFORMED_RESPONSE`
 : リモートサーバーが HTTP 仕様に準拠していないペイロードで応答しました。
 
 ## アクセス許可

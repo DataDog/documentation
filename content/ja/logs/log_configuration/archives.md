@@ -17,7 +17,7 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging without Limits* について
-kind: documentation
+
 title: ログアーカイブ
 ---
 
@@ -197,7 +197,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 [Log Forwarding ページ][5]に移動し、**Archives** タブで **Add a new archive** を選択します。
 
-**注:** 
+**注:**
 * [`logs_write_archive` 権限][3]のある Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
 * Azure Blob Storage へのログのアーカイブには、App Registration が必要です。[Azure インテグレーションページ][6]の手順を参照し、ドキュメントページの右側にある「サイト」を「US」に設定してください。アーカイブ目的で作成された App Registration は、"Storage Blob Data Contributor" ロールのみが必要です。ストレージバケットが Datadog Resource を通じて監視されているサブスクリプションにある場合、App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
 * バケットでネットワークアクセスを特定の IP に制限している場合は、[IP 範囲リスト][4]から Webhook の IP を許可リストに追加してください。

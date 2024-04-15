@@ -1,6 +1,6 @@
 ---
 title: Manually install and configure the Datadog Agent on Kubernetes with DaemonSet
-kind: documentation
+
 further_reading:
 - link: "/containers/kubernetes/installation"
   tag: "Documentation"
@@ -254,7 +254,7 @@ Alternatively, to collect the Kubernetes events from a Node Agent, set the envir
 
 ## Environment variables
 
-The following is the list of environment variables available for the Datadog Agent using a DaemonSet. 
+The following is the list of environment variables available for the Datadog Agent using a DaemonSet.
 
 ### Global options
 

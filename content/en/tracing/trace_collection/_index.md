@@ -1,6 +1,6 @@
 ---
 title: Application Instrumentation
-kind: documentation
+
 description: "Get Started with Datadog APM"
 aliases:
     - /tracing/setup
@@ -23,7 +23,7 @@ further_reading:
 
 To get started with Datadog APM, you need to follow these key steps:
 
-1. Install and configure the Datadog Agent.  
+1. Install and configure the Datadog Agent.
 2. Instrument your application.
 
 <div class="alert alert-info"><strong>Simplify your setup!</strong> Install the Agent and instrument your application in one step with <a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a>.</div>

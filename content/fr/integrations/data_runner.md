@@ -17,7 +17,7 @@ integration_id: data-runner
 integration_title: Data Runner
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: data_runner
 public_title: Data Runner
@@ -50,9 +50,9 @@ tile:
 
 ## Présentation
 
-Dans le jeu Data Runner, votre personnage sillonne l'environnement d'une bibliothèque à la recherche d'une métrique précise définie par le joueur. Lorsqu'il la trouve, la valeur de la métrique est ajoutée au score du joueur. Vous pouvez ajouter Data Runner à vos dashboards Datadog sous la forme d'un widget. 
+Dans le jeu Data Runner, votre personnage sillonne l'environnement d'une bibliothèque à la recherche d'une métrique précise définie par le joueur. Lorsqu'il la trouve, la valeur de la métrique est ajoutée au score du joueur. Vous pouvez ajouter Data Runner à vos dashboards Datadog sous la forme d'un widget.
 
-Cette extension repose sur les [Apps Datadog][1], qui permettent d'intégrer à l'interface utilisateur du contenu tiers qui n'est pas pris en charge nativement. Si vous souhaitez enrichir votre expérience Datadog avec de nouvelles fonctionnalités utiles ou amusantes, vous pouvez [concevoir votre propre app ou jeu][1]. 
+Cette extension repose sur les [Apps Datadog][1], qui permettent d'intégrer à l'interface utilisateur du contenu tiers qui n'est pas pris en charge nativement. Si vous souhaitez enrichir votre expérience Datadog avec de nouvelles fonctionnalités utiles ou amusantes, vous pouvez [concevoir votre propre app ou jeu][1].
 
 Pour en savoir plus sur Data Runner, consultez le référentiel GitHub [stuartlangridge/data-runner][2].
 

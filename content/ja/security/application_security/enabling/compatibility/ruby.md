@@ -1,7 +1,7 @@
 ---
 code_lang: ruby
 code_lang_weight: 30
-kind: documentation
+
 title: Ruby 互換性要件
 type: multi-code-lang
 ---
@@ -25,10 +25,10 @@ Ruby でサポートされるすべての ASM 機能を得るためのトレー�
 |タイプ | 脅威検知のサポート | OSSの脆弱性管理のサポート |
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  |  |
-| Kubernetes | {{< X >}}  | | 
+| Kubernetes | {{< X >}}  | |
 | AWS ECS | {{< X >}}  | |
 | AWS Fargate | {{< X >}}  | |
-| AWS Lambda |  | | 
+| AWS Lambda |  | |
 
 ## 言語とフレームワークの互換性
 

@@ -1,6 +1,6 @@
 ---
 title: Monitor Status
-kind: documentation
+
 description: "Get an overview of your monitor status over time"
 aliases:
 - /monitors/monitor_status/
@@ -95,7 +95,7 @@ The status graph shows you the dimensions you configured for your alerts, not th
 
 To scope down the **Status & History** view to specific groups, use the filter field and enter the attributes you want to filter by. The group filter syntax follows the same principles of the [Monitor Search query][30]. Some best practices to follow:
 
-- Filters are case sensitive, `env:prod` and `env:Prod` do not return the same monitor groups. Datadog recommends practicing uniformity in tags. For more information, see [Getting Started with Tags][31]. 
+- Filters are case sensitive, `env:prod` and `env:Prod` do not return the same monitor groups. Datadog recommends practicing uniformity in tags. For more information, see [Getting Started with Tags][31].
 - Queries automatically append a wildcard. To apply specific filters, surround your query with double quotes (`"`).
   For example, take the following query which does not use double quotes:
   ```
@@ -107,7 +107,7 @@ To scope down the **Status & History** view to specific groups, use the filter f
   availability-zone:us-central1-a,instance-type:*,name:gke-demo-12
   ```
 
-  Surrounding the query with double quotes returns the expected group: 
+  Surrounding the query with double quotes returns the expected group:
   `"availability-zone:us-central1-a,instance-type:*,name:gke-demo-1"`
 
 #### Investigate a Monitor in a Notebook
@@ -137,7 +137,7 @@ The history graph shows the collected data aligned with the status graph. It sho
 
 The evaluation graph is specific to the monitor. It uses the same query logic as the history graph, however it is scoped to the timeframe bracket on the history graph. It has a fixed, zoomed window that corresponds to your monitor [evaluation window][9] to ensure the displayed points are aggregated correctly. For example, if the monitor is configured to evaluate the average of the query over the last 15 minutes, each datapoint in the evaluation graph shows the aggregate value of the metric for the previous 15 minute evaluation window.
 
-This graph shows the results from the raw data points of a metric applied against the evaluation conditions you configure in the monitor. This visualization is different from the History graph because it's showing the value of the data after it has gone through the monitor query. 
+This graph shows the results from the raw data points of a metric applied against the evaluation conditions you configure in the monitor. This visualization is different from the History graph because it's showing the value of the data after it has gone through the monitor query.
 
 {{< img src="monitors/monitor_status/status_monitor_history.mp4" alt="status monitor history" video="true" width="100%" >}}
 
@@ -152,7 +152,7 @@ Audit Trail automatically captures monitor changes for all monitor types and cre
  - The previous monitor configuration
  - The current monitor configuration
  - The user that made the change
- 
+
  For more information, see the [Audit Trail][11] documentation and read the [Audit Trail best practices][12] blog.
 
 Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the dropdown next to: *If this monitor is modified, notify monitor creator and alert recipients.*.

@@ -1,11 +1,11 @@
 ---
 title: AWS Integration Multi-Account setup for AWS Organizations
-kind: guide
+
 description: "Steps for setting up the Datadog AWS Integration for an AWS Organization"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/"
   tag: "Guide"
-  text: "Troubleshooting the AWS integration" 
+  text: "Troubleshooting the AWS integration"
 - link: "https://www.datadoghq.com/blog/aws-monitoring/"
   tag: "Blog"
   text: "Key metrics for AWS monitoring"
@@ -47,11 +47,11 @@ The Datadog CloudFormation StackSet performs the following steps:
 
 To get started, go to the [AWS Integration configuration page][1] in Datadog and click on **Add AWS Account(s)** -> **Add Multiple AWS Accounts** -> **CloudFormation StackSet**.
 
-Click **Launch CloudFormation StackSet**. This opens the AWS Console and loads a new CloudFormation StackSet. Keep the default choice of `Service-managed permissions` on AWS.  
-  
+Click **Launch CloudFormation StackSet**. This opens the AWS Console and loads a new CloudFormation StackSet. Keep the default choice of `Service-managed permissions` on AWS.
+
 Follow the steps below on the AWS console to create and deploy your StackSet:
 
-1. **Choose a Template**  
+1. **Choose a Template**
 Copy the Template URL from the Datadog AWS integration configuration page to use in the `Specify Template` parameter in the StackSet.
 
 
@@ -59,11 +59,11 @@ Copy the Template URL from the Datadog AWS integration configuration page to use
     - Select your Datadog API key on Datadog AWS integration configuration page and use it in the `DatadogApiKey` parameter in the StackSet.
     - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
-    - *Optionally:*  
-        a. Enable [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
+    - *Optionally:*
+        a. Enable [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
         b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [CSM Misconfigurations][5] specific use cases.
 
-3. **Configure StackSet options**  
+3. **Configure StackSet options**
 Keep the **Execution configuration** option as `Inactive` so the StackSet performs one operation at a time.
 
 4. **Set deployment options**
@@ -72,12 +72,12 @@ Keep the **Execution configuration** option as `Inactive` so the StackSet perfor
 
     - Keep `Automatic deployment` enabled in order to automatically deploy the Datadog AWS Integration in new accounts that are added to the Organization or OU.
 
-    - Under **Specify regions**, select a single region in which you'd like to deploy the integration in each AWS account.   
-      **NOTE**: The StackSet creates global IAM resources that are not region specific. If multiple regions are selected in this step, the deployment fails. 
+    - Under **Specify regions**, select a single region in which you'd like to deploy the integration in each AWS account.
+      **NOTE**: The StackSet creates global IAM resources that are not region specific. If multiple regions are selected in this step, the deployment fails.
 
     - Set the default settings under **Deployment options** to be sequential, so StackSets operations are deployed into one region at a time.
 
-5. **Review**  
+5. **Review**
     Go to the **Review** page and click **Submit**. This launches the creation process for the Datadog StackSet. This could take several minutes depending on how many accounts need to be integrated. Ensure that the StackSet successfully creates all resources before proceeding.
 
     After the stacks are created, go back to the AWS integration config page in Datadog and click **Done**. It may take a few minutes to see metrics and events reporting from your newly integrated AWS accounts.
@@ -93,7 +93,7 @@ The StackSet does not set up log forwarding in the AWS accounts. To set up logs,
 
 ## Uninstall AWS Integration
 
-To uninstall the AWS integration from all AWS accounts and regions in an Organization, first delete all StackInstances and then the StackSet. Follow the steps outlined in [Delete a stack set][7] to delete the created StackInstances and StackSet. 
+To uninstall the AWS integration from all AWS accounts and regions in an Organization, first delete all StackInstances and then the StackSet. Follow the steps outlined in [Delete a stack set][7] to delete the created StackInstances and StackSet.
 
 ## Further Reading
 

@@ -1,6 +1,6 @@
 ---
 title: Funnel Analysis
-kind: documentation
+
 disable_toc: false
 aliases:
 - /real_user_monitoring/funnel_analysis
@@ -55,7 +55,7 @@ For high level trends, you can see the end-to-end conversion rate for your entir
 
 The **Performance** section allows you to understand if poor performance could have affected conversion. You can view a graph with a correlation between the load time of that page and the conversion rate and also see if any issues (detected by [Error Tracking][7]) occurred on that page.
 
-The **User Behavior** section allows you to compare the average frustration count (from [frustration signals][3]) with the conversion rate, and further analyze the frustration signals detected from individual actions. Next to this section is a chart showing the conversion and drop off rate for specific countries, allowing you to understand if geographic region plays a role in a user converting. 
+The **User Behavior** section allows you to compare the average frustration count (from [frustration signals][3]) with the conversion rate, and further analyze the frustration signals detected from individual actions. Next to this section is a chart showing the conversion and drop off rate for specific countries, allowing you to understand if geographic region plays a role in a user converting.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-user-behavior.jpg" alt="User behavior section within funnel analysis" style="width:90%;" >}}
 

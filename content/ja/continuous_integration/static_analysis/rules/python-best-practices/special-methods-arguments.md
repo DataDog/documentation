@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 特別なメソッドが正しい引数を持つようにする
 ---
 ## メタデータ

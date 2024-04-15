@@ -13,7 +13,7 @@ further_reading:
   tag: Blog
   text: Suivez et améliorez les performances de vos pipelines de données en streaming
     avec la solution Data Streams Monitoring de Datadog
-kind: documentation
+
 title: Data Streams Monitoring
 ---
 

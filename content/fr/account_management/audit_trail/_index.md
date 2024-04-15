@@ -16,7 +16,7 @@ further_reading:
   tag: Blog
   text: Surveiller des ressources et configurations essentielles Datadog grâce au
     journal d'audit
-kind: documentation
+
 title: Journal d'audit Datadog
 ---
 
@@ -162,13 +162,13 @@ Créez des dashboards pour apporter de nouveaux éléments de contexte visuels �
 
 ## Créer un rapport planifié
 
-Avec la fonctionnalité de journal d'audit Datadog, vous pouvez planifier l'envoi régulier d'e-mails contenant des vues d'analyse d'audit. Ces rapports facilitent la surveillance continue de l'utilisation de la plateforme Datadog. Par exemple, vous pouvez choisir de recevoir un rapport hebdomadaire portant sur le nombre de connexions d'utilisateurs Datadog uniques par pays. Cette requête vous permet de surveiller les activités de connexion anormales ou de recevoir automatiquement des statistiques d'utilisation. 
+Avec la fonctionnalité de journal d'audit Datadog, vous pouvez planifier l'envoi régulier d'e-mails contenant des vues d'analyse d'audit. Ces rapports facilitent la surveillance continue de l'utilisation de la plateforme Datadog. Par exemple, vous pouvez choisir de recevoir un rapport hebdomadaire portant sur le nombre de connexions d'utilisateurs Datadog uniques par pays. Cette requête vous permet de surveiller les activités de connexion anormales ou de recevoir automatiquement des statistiques d'utilisation.
 
 Pour exporter une requête d'analyse d'audit sous la forme d'un rapport, créez une série temporelle, une top list ou une requête de table, puis cliquez sur **More...** > **Export as scheduled report** pour commencer l'exportation de cette requête et l'envoi de rapports planifiés.
 
 {{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Option « Export as scheduled report » du menu déroulant More…" style="width:90%;" >}}
 
-1. Attribuez un nom au dashboard, qui est créé à l'aide du widget de requête. Un dashboard est créé pour chaque rapport planifié. Vous pouvez faire référence à ces dashboards, puis les modifier plus tard si vous avez besoin de changer le contenu du rapport ou son calendrier de publication. 
+1. Attribuez un nom au dashboard, qui est créé à l'aide du widget de requête. Un dashboard est créé pour chaque rapport planifié. Vous pouvez faire référence à ces dashboards, puis les modifier plus tard si vous avez besoin de changer le contenu du rapport ou son calendrier de publication.
 2. Pour planifier l'envoi des courriels contenant le rapport, personnalisez la fréquence du rapport et la période.
 3. Ajoutez les destinataires de votre choix.
 4. Ajoutez, si vous le souhaitez, un message personnalisé supplémentaire à inclure dans l'e-mail du rapport.

@@ -1,6 +1,6 @@
 ---
 title: "EKS Cluster Component"
-kind: documentation
+
 ---
 ## Overview
 

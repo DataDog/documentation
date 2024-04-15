@@ -1,6 +1,6 @@
 ---
 title: ログサイドパネル
-kind: documentation
+
 description: すべてのログを検索し、ログ分析を実行します
 aliases:
   - /ja/logs/explorer/sidepanel

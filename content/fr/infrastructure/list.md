@@ -12,7 +12,7 @@ further_reading:
 - link: /infrastructure/process/
   tag: Documentation
   text: Surveillance des live processes
-kind: documentation
+
 title: Liste des infrastructures
 ---
 
@@ -48,7 +48,7 @@ Load 15
 Apps
 : Les intégrations Datadog transmettant des métriques à partir du host.
 
-Operating System 
+Operating System
 : Le système d'exploitation surveillé.
 
 Cloud Platform

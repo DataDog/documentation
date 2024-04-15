@@ -1,6 +1,6 @@
 ---
 title: Suppressions
-kind: documentation
+
 disable_toc: false
 further_reading:
 - link: "security/detection_rules/"
@@ -55,14 +55,14 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 1. Select the detection rules you want to apply this suppression to. You can select multiple detection rules.
 1. In the **Add Suppression Query** section, you have the option to enter suppression queries so that a signal is not generated when the values are met. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input the log query: `@user.username:john.doe`.
 {{< img src="security/security_monitoring/suppressions/suppression_query.png" alt="The add suppression query with the query @user.username:john.doe" style="width:65%;" >}}
-  Suppression rule queries are based on **signal attributes**. 
+  Suppression rule queries are based on **signal attributes**.
 1. Additionally, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
 
 ## Migrate legacy suppression queries to suppression rules
 
 <div class="alert alert-warning"> All suppression queries for detection rules are being automatically migrated to <a href="https://docs.datadoghq.com/security/suppressions/"> suppression rules </a>. Your suppression queries will now use the log suppression option in suppression rules. This process will be completed by the end of April 2024.</div>
 
-Migrate your detection rules's legacy **Suppression Queries** to the new **Suppression Rules**. 
+Migrate your detection rules's legacy **Suppression Queries** to the new **Suppression Rules**.
 
 {{< img src="security/security_monitoring/suppressions/detection_rule_migration.png" alt="The add suppression query with the query @user.username:john.doe" style="width:75%;" >}}
 
@@ -74,7 +74,7 @@ To see a list of rules using the legacy suppression query and to migrate them:
 1. In the detection rule editor, scroll down to the legacy **Suppression Queries** section and review the information.
 1. In the **Suppression Rules** section, fill in the information based on what is in the legacy **Suppression Queries** section.
 1. Repeat steps 2 to 5 for each detection rule using legacy suppression queries.
-  
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

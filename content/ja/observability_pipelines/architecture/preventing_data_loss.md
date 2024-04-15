@@ -1,5 +1,5 @@
 ---
-kind: Documentation
+
 title: データ損失の防止
 ---
 

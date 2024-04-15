@@ -3,7 +3,7 @@ aliases:
 - /ja/account_management/billing/profiler/
 - /ja/account_management/billing/apm_distributed_tracing/
 - /ja/account_management/billing/apm_tracing_profiling/
-kind: documentation
+
 title: APM 料金
 ---
 
@@ -19,7 +19,7 @@ APM は、APM、APM Pro、APM Enterprise の 3 つの階層で提供されてい
 | [Indexed span][5] | Indexed Span 100 万件あたり 1.70 ドル / 月 | すべての APM ホストで使用される Indexed Span の数が超過すると料金が発生 | Indexed Span は、スタック内の個々のサービスに対する個別のリクエストです。保持フィルターを使用してインデックス化されたスパンまたは Datadog APM サービスに送信された レガシー Analyzed Span の合計数に基づき月末に課金されます。[APM の料金について詳しくはこちら。][5]                                                                                          |
 | [Ingested span][5] | Ingested Span 1 GB あたり 0.1 ドル / 月 | すべての APM ホストで使用される Ingested Span の数が超過すると料金が発生 | Ingested Span は、スタック内の個々のサービスに対する個別のリクエストです。Datadog に取り込まれたスパンのギガバイトの総数に基づき月末に課金されます。[APM の料金について詳しくはこちら][5]                                                                                          |
 
-**注**:  
+**注**:
    - Fargate 以外のコンテナベースの環境を使用している場合、Datadog Agent をデプロイしている基盤となるホストの料金が発生します。
    - 1 つのプロファイルされたコンテナは、Continuous Profiler サービスを実行しているコンテナです。これには、プロファイルされていないコンテナは含まれません。たとえば、プロファイルされていないアプリケーションコンテナと同時に実行されている、プロファイルされていない DNS サービスコンテナは、4 つのプロファイラーコンテナの割り当てにカウントされません。
    - [ユニバーサルサービスモニタリング][15]は、すべての APM 階層 (APM、APM Pro、APM Enterprise) に追加費用なしで含まれています。

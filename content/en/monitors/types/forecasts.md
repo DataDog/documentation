@@ -1,6 +1,6 @@
 ---
 title: Forecasts Monitor
-kind: documentation
+
 aliases:
 - /guides/forecasts/
 - /monitors/monitor_types/forecasts

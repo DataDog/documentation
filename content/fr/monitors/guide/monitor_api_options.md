@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Options de l'API Monitor
 ---
 
@@ -34,7 +34,7 @@ title: Options de l'API Monitor
 - **`locked`** : une valeur booléenne indiquant si le créateur ou les utilisateurs disposant de l'autorisation Org Management (`org_management`) sont capables de modifier ce monitor. Valeur par défaut : **False**. **Obsolète : utilisez plutôt `restricted_roles`.**
 - **`restricted_roles`** : un tableau répertoriant les UUID des rôles autorisés à modifier le monitor. Il est notamment possible de modifier la configuration du monitor, de supprimer le monitor et de désactiver ses notifications pendant la durée souhaitée. Les UUID de rôle sont récupérés depuis l'[API Roles][1]. L'option `restricted_roles` remplace `locked`.
 
-**Remarque** : il est inutile de définir à la fois le paramètre `locked` et le paramètre `restricted_roles` pour un seul monitor. Si vous définissez ces deux paramètres, seul le paramètre le plus restrictif est appliqué. Tout rôle défini dans `restricted_roles` est considéré comme plus restrictif que le paramètre `locked:true`. 
+**Remarque** : il est inutile de définir à la fois le paramètre `locked` et le paramètre `restricted_roles` pour un seul monitor. Si vous définissez ces deux paramètres, seul le paramètre le plus restrictif est appliqué. Tout rôle défini dans `restricted_roles` est considéré comme plus restrictif que le paramètre `locked:true`.
 
 Les exemples suivants décrivent les interactions entre les paramètres `locked` et `restricted_roles` :
 - Lorsque les paramètres `locked:false` et `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]` sont définis pour un monitor, le paramètre `restricted_roles` est appliqué.

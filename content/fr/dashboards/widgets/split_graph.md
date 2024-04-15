@@ -3,7 +3,7 @@ further_reading:
 - link: /dashboards/guide/graphing_json/
   tag: Guide
   text: Créer des dashboards avec JSON
-kind: documentation
+
 title: Widget Graphique scindé
 widget_type: split_group
 ---
@@ -27,7 +27,7 @@ Vous pouvez également créer un graphique scindé en fractionnant un widget exi
 - Ouvrez un widget en mode plein écran en sélectionnant l'icône de modification ou d'agrandissement depuis les options de contrôle du widget, puis cliquez sur l'onglet **Split Graph**.
 - Ouvrez le menu contextuel d'un widget sur votre dashboard, puis sélectionnez **Split Graph**.
 
-Depuis l'onglet **Split Graph**, vous pouvez configurer le mode de fractionnement de votre graphique, définir la limite du nombre de graphiques affichés, et préciser leur ordre d'affichage. 
+Depuis l'onglet **Split Graph**, vous pouvez configurer le mode de fractionnement de votre graphique, définir la limite du nombre de graphiques affichés, et préciser leur ordre d'affichage.
 1. Vous pouvez modifier la configuration du fractionnement en ajustant la dimension fractionnée, le nombre de graphiques affichés et les options d'affichage. Pour en savoir plus sur les options de configuration, consultez la section [Configuration](#configuration).
 2. Cliquez sur **Save to Dashboard** pour créer un widget Graphique scindé en bas de votre dashboard. Aucune modification ne sera apportée au widget d'origine de votre dashboard.
 
@@ -53,7 +53,7 @@ Configurez la requête de votre graphique avant de procéder au fractionnement. 
 
 Pour en savoir plus sur la configuration de chacune de ces visualisations, consultez la documentation relative aux widgets pris en charge sur la page [Widgets][1].
 
-Les modifications que vous apportez apparaissent immédiatement dans les graphiques scindés, en bas de la fenêtre de l'éditeur.  
+Les modifications que vous apportez apparaissent immédiatement dans les graphiques scindés, en bas de la fenêtre de l'éditeur.
 
 {{< img src="dashboards/widgets/split_graph/split_graph_editor.png" alt="L'éditeur de graphique scindé affichant les options de configuration de la requête et du fractionnement" style="width:100%;" >}}
 
@@ -61,8 +61,8 @@ Les modifications que vous apportez apparaissent immédiatement dans les graphiq
 
 Vous pouvez modifier le mode de fractionnement du graphique via plusieurs options de configuration, ainsi que certains paramètres propres au fractionnement choisi.
 
-| Option de configuration | Description    | 
-| ---  | ----------- | 
+| Option de configuration | Description    |
+| ---  | ----------- |
 | One graph per | Ce menu déroulant définit la dimension utilisée pour le fractionnement de votre graphique d'origine. |
 | Limit to | Cette option permet de spécifier le nombre de graphiques à afficher ainsi que les valeurs à sélectionner. Par défaut, le widget Graphique scindé sélectionne automatiquement les valeurs moyennes les plus élevées. |
 | Sort by | Choisissez de trier vos graphiques en fonction d'une métrique ou d'un attribut/une facette. Pour choisir manuellement les tags à afficher, sélectionnez **custom**. |

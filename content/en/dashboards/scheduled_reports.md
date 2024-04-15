@@ -1,12 +1,12 @@
 ---
 title: Scheduled Reports
-kind: documentation
+
 disable_toc: false
 is_public: true
 further_reading:
   - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
     tag: "Blog"
-    text: "Share Datadog dashboards securely with anyone" 
+    text: "Share Datadog dashboards securely with anyone"
   - link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
     tag: "Blog"
     text: "Use associated template variables to refine your dashboards"
@@ -55,9 +55,9 @@ In the configuration modal that opens, set a schedule for the report to determin
 
 ### Add recipients
 
-Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the **X** that appears next to it.   
+Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the **X** that appears next to it.
 
-**Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations. 
+**Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations.
 
 {{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:100%;" >}}
 
@@ -65,12 +65,12 @@ Add recipients to your report by entering their email addresses. The email assoc
 
 Finally, customize the report to provide recipients with more context or a tailored view. The optional description appears at the top of each report to provide more context on the dashboard.
 
-Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard's defaults. 
+Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard's defaults.
 
 To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
 
 ## Managing reports
-A single dashboard can have multiple scheduled reports with different settings, for example, to support different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, open the **Share** menu and select **Configure Reports**. 
+A single dashboard can have multiple scheduled reports with different settings, for example, to support different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, open the **Share** menu and select **Configure Reports**.
 
 {{< img src="dashboards/scheduled_reports/configure_reports.png" alt="A view of the option to configure reports in the dashboard Share menu" style="width:50%;" >}}
 
@@ -82,7 +82,7 @@ From the configuration modal that opens, you can pause an existing report or cre
 
 Only users with the **Dashboard Report Write** permission can generate a report. This permission is turned on by default for Admins and off for all other roles.
 
-Images generated in reports show all data regardless of granular read restrictions. Datadog recommends limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn about managing roles and permissions, see [User Management][17]. 
+Images generated in reports show all data regardless of granular read restrictions. Datadog recommends limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn about managing roles and permissions, see [User Management][17].
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:100%;" >}}
 

@@ -1,6 +1,6 @@
 ---
 title: Getting Started with the Datadog Operator
-kind: documentation
+
 further_reading:
   - link: '/containers/datadog_operator'
     tag: 'documentation'

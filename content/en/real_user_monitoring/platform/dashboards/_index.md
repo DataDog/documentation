@@ -1,6 +1,6 @@
 ---
 title: RUM Dashboards
-kind: documentation
+
 description: Use out-of-the-box RUM dashboards to learn more about your application's data and performance.
 aliases:
 - /real_user_monitoring/dashboards
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-When you create a RUM application, Datadog [collects data][1] and generates dashboards about your application's performance, errors, resources, and user sessions. 
+When you create a RUM application, Datadog [collects data][1] and generates dashboards about your application's performance, errors, resources, and user sessions.
 
 {{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Application Overview page" style="width:90%;" >}}
 
@@ -43,7 +43,7 @@ To explore individual events, click on a graph and click **View RUM events**. Th
 
 ### Customize dashboards
 
-To clone your RUM dashboards, click the **Settings** icon and select **Clone dashboard**. To add more widgets, powerpacks, or apps, scroll down to the bottom and click the **+** icon. 
+To clone your RUM dashboards, click the **Settings** icon and select **Clone dashboard**. To add more widgets, powerpacks, or apps, scroll down to the bottom and click the **+** icon.
 
 You can also modify the template variables and create a [saved view][6].
 

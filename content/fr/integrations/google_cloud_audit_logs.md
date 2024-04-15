@@ -14,7 +14,7 @@ integration_id: google-cloud-audit-logs
 integration_title: Dashboard des logs d'audit Datadog/Google
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: google_cloud_audit_logs
 public_title: Intégration du dashboard des logs d'audit Datadog/Google
@@ -24,7 +24,7 @@ version: '1.0'
 
 ## Présentation
 
-La surveillance des logs d'audit GCP vous permet de déterminer l'identité des utilisateurs qui accèdent à une ressource donnée, la méthode utilisée et le statut d'autorisation d'un tel accès. 
+La surveillance des logs d'audit GCP vous permet de déterminer l'identité des utilisateurs qui accèdent à une ressource donnée, la méthode utilisée et le statut d'autorisation d'un tel accès.
 
 Il existe trois types de logs d'audit.
 * **Journaux d'audit d'événements système** : ces logs sont enregistrés par défaut par GCP. Ils contiennent des entrées associées aux actions Google Cloud qui modifient la configuration des ressources. Les journaux d'audit d'événements système sont générés par les systèmes Google : ils ne sont pas créés à la suite d'une action utilisateur directe.

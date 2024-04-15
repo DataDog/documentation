@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: カスタム組織ランディングページ
 ---
 

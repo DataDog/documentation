@@ -1,6 +1,6 @@
 ---
 title: Trace Metrics
-kind: documentation
+
 further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'
@@ -49,7 +49,7 @@ With the following definitions:
 : The name of the metric (examples: `hits`, `errors`, `apdex`, `duration`). See the section below.
 
 `<TAGS>`
-: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, and Datadog Agent tags (including the host and second primary tag). 
+: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, and Datadog Agent tags (including the host and second primary tag).
 **Note:** Other tags set on spans are not available as tags on traces metrics.
 
 ## Metric suffix

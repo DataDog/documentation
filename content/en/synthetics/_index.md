@@ -1,6 +1,6 @@
 ---
 title: Synthetic Monitoring
-kind: documentation
+
 description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
 disable_sidebar: true
 aliases:
@@ -41,7 +41,7 @@ cascade:
 
 <br/>
 
-Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes. 
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes.
 
 **Computing SLOs** on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience.
 
@@ -49,7 +49,7 @@ You can create Synthetic tests in the [Datadog application][1], with the [API][2
 
 ## Set up API tests and multistep API tests
 
-API tests allow you to launch [single][4] or [chained][5] requests to perform verifications on your key systems at various network levels: [HTTP test][6], [SSL test][7], [DNS test][8], [WebSocket test][9], [TCP test][10], [UDP test][11], [ICMP test][12], and [gRPC test][13]. 
+API tests allow you to launch [single][4] or [chained][5] requests to perform verifications on your key systems at various network levels: [HTTP test][6], [SSL test][7], [DNS test][8], [WebSocket test][9], [TCP test][10], [UDP test][11], [ICMP test][12], and [gRPC test][13].
 
 {{< img src="synthetics/api_test.png" alt="API tests" style="width:100%;">}}
 
@@ -79,13 +79,13 @@ Use the [integration between Synthetic tests and APM traces][16] to find the roo
 
 ## Access out-of-the-box dashboards
 
-Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetic dashboards][17]. 
+Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetic dashboards][17].
 
 {{< img src="synthetics/dashboards/test_dashboard.png" alt="Synthetic Monitoring & Continuous Testing Summary Dashboard" style="width:100%;">}}
 
 ## Use the Synthetic Monitoring & Continuous Testing Explorer
 
-Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
+Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines.
 
 {{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 

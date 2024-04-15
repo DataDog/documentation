@@ -1,6 +1,6 @@
 ---
 title: Static Analysis Setup
-kind: documentation
+
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
@@ -29,9 +29,9 @@ Code Analysis is in public beta.
 
 To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory and specify which rulesets you want to include for your programming language(s).
 
-{{< img src="code_analysis/static_analysis/apply_python_rulesets.png" alt="Copy and paste the Code Quality and Security rulesets from the available options for Python on the Code Analysis Setup page" style="width:100%;">}} 
+{{< img src="code_analysis/static_analysis/apply_python_rulesets.png" alt="Copy and paste the Code Quality and Security rulesets from the available options for Python on the Code Analysis Setup page" style="width:100%;">}}
 
-Select one or multiple programming languages and choose which rulesets you want to copy and use on the [Code Analysis Setup page][1]. 
+Select one or multiple programming languages and choose which rulesets you want to copy and use on the [Code Analysis Setup page][1].
 
 ## Add a Static Analysis YAML file to your project
 
@@ -64,7 +64,7 @@ You can include the following **rule** options in the `static-analysis.datadog.y
 The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
 
 * To set a value for the whole repository, you can specify it as a string.
-* To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree. 
+* To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree.
 
 The full structure of the `static-analysis.datadog.yml` file is as follows:
 
@@ -150,14 +150,14 @@ only:
   - "src/main"
   - "src/tests"
   - "**/*.py"
-# Do not analyze third-party or generated files 
+# Do not analyze third-party or generated files
 ignore:
   - "lib/third_party"
   - "**/*.generated.py"
   - "**/*.pb.py"
 ```
 
-## Set up the GitHub integration 
+## Set up the GitHub integration
 
 You must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see the offending code snippets as part of the Static Analysis results in the Datadog UI.
 
@@ -184,7 +184,7 @@ To upload a SARIF report:
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
 2. Optionally, set a [`DD_SITE` variable][7] (this default to `datadoghq.com`).
 3. Install the `datadog-ci` utility:
-   
+
    ```bash
    npm install -g @datadog/datadog-ci
    ```
@@ -201,7 +201,7 @@ To upload a SARIF report:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/setup/code-analysis
-[2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif 
+[2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [3]: /developers/ide_integrations/idea/#static-analysis
 [4]: /account_management/api-app-keys/
 [6]: /code_analysis/static_analysis_rules

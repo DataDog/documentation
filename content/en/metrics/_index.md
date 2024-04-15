@@ -1,6 +1,6 @@
 ---
 title: Metrics
-kind: documentation
+
 aliases:
   - /graphing/metrics/
   - /metrics/introduction/
@@ -11,7 +11,7 @@ cascade:
         rank: 70
         tags: ["submit metrics", "metrics submission"]
 ---
-This is an introduction to Metrics in Datadog and why they're useful. This section includes the following topics: 
+This is an introduction to Metrics in Datadog and why they're useful. This section includes the following topics:
 
 {{< whatsnext desc="Submit metrics to Datadog" >}}
     {{< nextlink href="/metrics/custom_metrics">}}<u>Submit Custom Metrics</u> - Learn what custom metrics are and how to submit them.{{< /nextlink >}}
@@ -107,7 +107,7 @@ This line graph plots latency (in milliseconds) experienced by users on the y-ax
 
 #### Additional visualizations
 
-Datadog offers a variety of visualization options to help users easily graph and display their metrics. 
+Datadog offers a variety of visualization options to help users easily graph and display their metrics.
 
 A metric query consists of the same two evaluation steps to start: time aggregation and space aggregation. See the [anatomy of a metric query][6] for more information.
 

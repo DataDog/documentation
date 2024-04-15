@@ -1,6 +1,6 @@
 ---
 title: Sensitive Data Scanner
-kind: documentation
+
 aliases:
     - /logs/log_configuration/sensitive_data_detection
     - /account_management/org_settings/sensitive_data_detection
@@ -102,7 +102,7 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define regex** field. Enter sample data in the **Regex tester** field to verify that your regex pattern is valid.   
+1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define regex** field. Enter sample data in the **Regex tester** field to verify that your regex pattern is valid.
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions

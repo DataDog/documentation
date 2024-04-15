@@ -10,12 +10,12 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: Documentation
   text: Service Map
-kind: documentation
+
 title: Widget Topology Map
 widget_type: topology_map
 ---
 
-Le widget Topology Map vous permet de visualiser les sources de données et leurs relations pour mieux comprendre le flux des données dans votre architecture. 
+Le widget Topology Map vous permet de visualiser les sources de données et leurs relations pour mieux comprendre le flux des données dans votre architecture.
 
 ## Configuration
 

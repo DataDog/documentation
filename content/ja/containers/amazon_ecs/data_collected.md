@@ -11,7 +11,7 @@ further_reading:
 - link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentation
   text: ECS メトリクスの収集
-kind: documentation
+
 title: Amazon ECS データ収集
 ---
 

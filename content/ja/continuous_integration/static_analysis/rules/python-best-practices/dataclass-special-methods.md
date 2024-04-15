@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: データクラスで特別なメソッドを使用しない
 ---
 ## メタデータ

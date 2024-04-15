@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Page d'accueil personnalisée pour une organisation
 ---
 

@@ -24,7 +24,7 @@ further_reading:
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
-kind: integration
+
 name: vmware_tanzu_application_service
 newhlevel: true
 public_title: Intégration Datadog/VMware Tanzu Application Service (Pivotal Cloud
@@ -36,7 +36,7 @@ updated_for_agent: 6.0
 
 ## Présentation
 
-Tous les déploiements VMware Tanzu Application Service (anciennement Pivotal Cloud Foundry, voir l'[annonce de VMware][1] pour en savoir plus) peuvent envoyer des métriques et des événements à Datadog. Vous pouvez surveiller la santé et la disponibilité de tous les nœuds des déploiements, suivre les tâches qu'ils exécutent, recueillir les métriques provenant de Loggregator Firehose, et plus encore. 
+Tous les déploiements VMware Tanzu Application Service (anciennement Pivotal Cloud Foundry, voir l'[annonce de VMware][1] pour en savoir plus) peuvent envoyer des métriques et des événements à Datadog. Vous pouvez surveiller la santé et la disponibilité de tous les nœuds des déploiements, suivre les tâches qu'ils exécutent, recueillir les métriques provenant de Loggregator Firehose, et plus encore.
 
 Pour une expérience optimale, poursuivez votre lecture afin de configurer automatiquement la surveillance via Tanzu Ops Manager pour votre application sur VMware Tanzu Application Service et votre cluster VMware Tanzu Application Service. Pour configurer manuellement la surveillance, consultez les instructions du [guide de configuration manuelle de VMware Tanzu Application Service][2].
 

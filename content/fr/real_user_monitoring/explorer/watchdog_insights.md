@@ -10,7 +10,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-mobile-rum/
   tag: Blog
   text: Améliorer l'expérience utilisateur mobile avec la solution Mobile RUM Datadog
-kind: documentation
+
 title: Watchdog Insights pour RUM
 ---
 

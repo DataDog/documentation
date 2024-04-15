@@ -1,6 +1,6 @@
 ---
 title: Log Facets
-kind: documentation
+
 description: 'Log Facets and Facet Panel'
 aliases:
     - /logs/facets
@@ -31,7 +31,7 @@ Facets are user-defined tags and attributes from your indexed logs. They are mea
 
 Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][30], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][30], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15].
 
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 

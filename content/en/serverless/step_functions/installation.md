@@ -1,6 +1,6 @@
 ---
 title: Install Serverless Monitoring for AWS Step Functions
-kind: documentation
+
 further_reading:
     - link: '/serverless/configuration/'
       tag: 'Documentation'
@@ -106,7 +106,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
      **Note**: Log Autosubscription requires your Lambda Forwarder and Step Function to be in the same region.
 
    - **Manual**
-     1. Ensure that your log group name has the prefix `/aws/vendedlogs/states`. 
+     1. Ensure that your log group name has the prefix `/aws/vendedlogs/states`.
      2. Open your AWS console and go to your Datadog Lambda Forwarder. In the *Function overview* section, click on *Add trigger*.
      3. Under *Add trigger*, in the *Trigger configuration* section, use the *Select a source* dropdown to select `CloudWatch Logs`.
      4. Under *Log group*, select the log group for your state machine. For example, `/aws/vendedlogs/states/my-state-machine`.
@@ -117,7 +117,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
 4. Enable tracing on your Step Function by adding a `DD_TRACE_ENABLED` tag. Set the value to `true`.
 5. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>` and `service:<SERVICE_NAME>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name.
-6. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following: 
+6. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following:
 
    ```json
    "Parameters": {

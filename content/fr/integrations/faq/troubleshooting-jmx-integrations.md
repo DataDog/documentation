@@ -3,7 +3,7 @@ further_reading:
 - link: /integrations/java/
   tag: Documentation
   text: Intégration de Java
-kind: faq
+
 title: Dépannage pour les intégrations JMX
 ---
 

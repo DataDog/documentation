@@ -1,6 +1,6 @@
 ---
 title: Network Performance Monitoring Setup
-kind: documentation
+
 description: Collect your Network Data with the Agent.
 aliases:
     - /network_performance_monitoring/installation/

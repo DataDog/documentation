@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: APM で不要なリソースを無視する
 ---
 
@@ -197,7 +197,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
-Datadog Agent コンテナの環境変数のリストに、以下の例のようなパターンで `DD_APM_IGNORE_RESOURCES` を追加します。Docker Compose には、独自の[変数の置換][1]機能があり、`$` などの特殊文字を使用する場合に考慮する必要があります。 
+Datadog Agent コンテナの環境変数のリストに、以下の例のようなパターンで `DD_APM_IGNORE_RESOURCES` を追加します。Docker Compose には、独自の[変数の置換][1]機能があり、`$` などの特殊文字を使用する場合に考慮する必要があります。
 
 {{< code-block lang="yaml" >}}
     environment:

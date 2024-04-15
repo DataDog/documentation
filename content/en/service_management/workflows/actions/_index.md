@@ -1,6 +1,6 @@
 ---
 title: Actions
-kind: documentation
+
 disable_toc: false
 disable_sidebar: false
 type: documentation

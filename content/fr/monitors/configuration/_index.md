@@ -12,7 +12,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentation
   text: Statut des monitors
-kind: documentation
+
 title: Configurer des monitors
 ---
 
@@ -273,11 +273,11 @@ L'option `Simple Alert` agrège vos données pour toutes les sources de transmis
 
 #### Alerte multiple
 
-Le mode `Multi Alert` applique l'alerte à chaque source en fonction des paramètres de votre groupe. Vous recevez une alerte pour **chaque groupe** qui répond aux conditions définies. Par exemple, une requête qui évalue une métrique de capacité peut être regroupée par `host` et par `device` pour recevoir une alerte distincte pour chaque appareil de host qui manque d'espace disque.  
+Le mode `Multi Alert` applique l'alerte à chaque source en fonction des paramètres de votre groupe. Vous recevez une alerte pour **chaque groupe** qui répond aux conditions définies. Par exemple, une requête qui évalue une métrique de capacité peut être regroupée par `host` et par `device` pour recevoir une alerte distincte pour chaque appareil de host qui manque d'espace disque.
 
 Personnalisez les dimensions en fonction desquelles les alertes doivent se déclencher afin de réduire les notifications inutiles et de vous concentrer sur les requêtes réellement importantes. Si vous regroupez votre requête par `host` et `device` mais que vous souhaitez uniquement recevoir une alerte lorsque l'attribut `host` atteint le seuil, supprimez l'attribut `device` de vos options d'alertes multiples pour réduire le nombre de notifications envoyées.
 
-**Remarque** : si votre métrique dispose uniquement du tag `host` sans tag `device`, elle ne sera pas détectée par le monitor. Les métriques qui disposent à la fois des tags `host` et `device` tags seront détectées par le monitor. 
+**Remarque** : si votre métrique dispose uniquement du tag `host` sans tag `device`, elle ne sera pas détectée par le monitor. Les métriques qui disposent à la fois des tags `host` et `device` tags seront détectées par le monitor.
 
 Si vous avez configuré des tags ou des dimensions dans votre requête, ces valeurs sont disponibles pour chaque groupe évalué dans l'alerte multiple afin d'ajouter des informations de contexte dynamiques dans les notifications. Consultez la section [Variables d'attribut et de tag][8] pour découvrir comment utiliser les valeurs de tag dans le message de notification.
 

@@ -10,7 +10,7 @@ further_reading:
 - link: /continuous_integration/setup_pipelines/jenkins/
   tag: Documentation
   text: Configurer le tracing sur un pipeline Jenkins
-kind: documentation
+
 title: Jenkins
 ---
 
@@ -18,7 +18,7 @@ title: Jenkins
 
 Ajoutez des tests Continuous Testing à votre environnement Jenkins.
 
-Datadog vous conseille d'échanger avec vos équipes SRE et Infrastructure afin d'identifier une solution qui s'adapte à votre architecture Jenkins existante et personnalise une installation de façon à répondre à vos besoins métier. 
+Datadog vous conseille d'échanger avec vos équipes SRE et Infrastructure afin d'identifier une solution qui s'adapte à votre architecture Jenkins existante et personnalise une installation de façon à répondre à vos besoins métier.
 
 ## Configuration
 

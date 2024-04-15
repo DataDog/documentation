@@ -1,6 +1,6 @@
 ---
 title: Watchdog Insights
-kind: documentation
+
 description: View anomalies and outliers that match your search query with Watchdog Insights.
 further_reading:
 - link: "/logs/explorer/watchdog_insights/"
@@ -153,7 +153,7 @@ In the banner card view, you can see:
   * The name of the impacted service
   * The number of threads impacted
   * The potential CPU savings (and estimated cost savings)
-    
+
 {{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Contention" style="width:50%;">}}
 
 In the full side panel, you can see instructions on how to resolve the lock contention:
@@ -202,7 +202,7 @@ Find the databases impacted by one or multiple outliers by using the Insight car
 
 {{< img src="watchdog/side_panel_dbm_insights.png" alt="Carousel to filter the Databases with Insights" style="width:100%;">}}
 
-An overlay is then set on the databases, with pink pills highlighting the different Insights and giving more information about what happened. 
+An overlay is then set on the databases, with pink pills highlighting the different Insights and giving more information about what happened.
 
 {{< img src="watchdog/overlay_database_insight.png" alt="Watchdog insight overlay on the database to highlight what is happening" style="width:100%;">}}
 

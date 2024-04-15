@@ -1,6 +1,6 @@
 ---
 title: Datadog Extension for Visual Studio
-kind: documentation
+
 is_beta: true
 further_reading:
 - link: "/getting_started/profiler/"
@@ -11,7 +11,7 @@ further_reading:
   text: "Learn about Source Code Integration"
 - link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
   tag: "External Site"
-  text: "Visual Studio Marketplace"  
+  text: "Visual Studio Marketplace"
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"

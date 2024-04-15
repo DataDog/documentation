@@ -26,13 +26,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: blog
   text: Conseils à suivre pour effectuer des tests continus avec Datadog
-kind: documentation
+
 title: Tests continus
 ---
 
 <div class="alert alert-info">Cette page explique comment exécuter des tests continus dans vos pipelines CI/CD. Si vous souhaitez consulter vos métriques et dashboards CI/CD, consultez plutôt la section <a href="/continuous_integration/" target="_blank">CI Visibility.</a></div>
 
-La solution de test en continu Datadog propose un ensemble d'outils conçus pour automatiser les tests logiciels sur l'ensemble du cycle de vie d'un produit. En offrant des tests de bout en bout fiables et sans code, ainsi que des intégrations pratiques avec les [fournisseurs de CI][1] et les outils de collaboration populaires, cette solution vous aide à accélérer le développement de vos applications et à déployer des fonctionnalités de haute qualité plus rapidement. 
+La solution de test en continu Datadog propose un ensemble d'outils conçus pour automatiser les tests logiciels sur l'ensemble du cycle de vie d'un produit. En offrant des tests de bout en bout fiables et sans code, ainsi que des intégrations pratiques avec les [fournisseurs de CI][1] et les outils de collaboration populaires, cette solution vous aide à accélérer le développement de vos applications et à déployer des fonctionnalités de haute qualité plus rapidement.
 
 ## Testez rapidement et facilement
 
@@ -49,7 +49,7 @@ Au lieu d'implémenter du code de test, vous pouvez utiliser les [tests sans cod
 
 ## Augmentez votre efficacité grâce aux intégrations pratiques
 
-Accélérez le développement de votre application en réalisant vos tests et vos dépannages sur une seule et même plateforme. Faites votre choix parmi les fournisseurs de CI et les outils de collaboration suivants, tels que Slack ou Jira, pour fusionner vos workflows et tout faire depuis une seule interface. 
+Accélérez le développement de votre application en réalisant vos tests et vos dépannages sur une seule et même plateforme. Faites votre choix parmi les fournisseurs de CI et les outils de collaboration suivants, tels que Slack ou Jira, pour fusionner vos workflows et tout faire depuis une seule interface.
 
 {{< partial name="continuous_testing/ct-getting-started.html" >}}
 
@@ -65,7 +65,7 @@ En exécutant vos tests dans une plateforme de surveillance unifiée, vous serez
 
 ## Utiliser l'explorateur de surveillance Synthetic et de tests en continu
 
-Créez des [requêtes de recherche et des visualisations][11] pour vos exécutions de test Synthetic ou vos lots de tests exécutés dans des pipelines CI/CD. 
+Créez des [requêtes de recherche et des visualisations][11] pour vos exécutions de test Synthetic ou vos lots de tests exécutés dans des pipelines CI/CD.
 
 {{< img src="continuous_testing/explorer_ci_batches.png" alt="Explorateur de tests continus" style="width:100%;">}}
 

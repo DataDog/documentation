@@ -6,7 +6,7 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: Documentation
   text: Node.js アプリケーションのインスツルメンテーション
-kind: documentation
+
 title: Node.js Lambda トレースとバンドラーの互換性
 ---
 
@@ -55,7 +55,7 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
             - dd-trace
         packagerOptions:
           scripts:
-            # Optional, only needed when they are included as transitive dependencies 
+            # Optional, only needed when they are included as transitive dependencies
             - rm -rf node_modules/datadog-lambda-js node_modules/dd-trace
     ```
 
@@ -95,7 +95,7 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
     ```yaml
     custom:
       esbuild:
-        exclude: 
+        exclude:
           # aws-sdk is needed because it is the default value for `exclude`
           - aws-sdk
           - datadog-lambda-js

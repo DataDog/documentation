@@ -3,7 +3,7 @@ further_reading:
 - link: /synthetics/search/
   tag: Documentation
   text: Découvrir comment rechercher et gérer vos tests Synthetic
-kind: documentation
+
 title: Vues enregistrées
 ---
 
@@ -15,7 +15,7 @@ Les vues enregistrées vous permettent également de partager des configurations
 
 ## Créer une vue enregistrée
 
-Pour accéder à vos vues enregistrées, développez **> Views** à gauche de **Synthetic Monitoring & Continuous Testing**, dans la [page des tests Synthetic][1]. Pour créer une vue enregistrée, effectuez une recherche dans vos tests Synthetic et cliquez sur **+ Create a New Saved View**. 
+Pour accéder à vos vues enregistrées, développez **> Views** à gauche de **Synthetic Monitoring & Continuous Testing**, dans la [page des tests Synthetic][1]. Pour créer une vue enregistrée, effectuez une recherche dans vos tests Synthetic et cliquez sur **+ Create a New Saved View**.
 
 {{< img src="synthetics/search/create_a_new_saved_view.png" alt="Créer une vue enregistrée dans la page des tests Synthetic" style="width:100%" >}}
 

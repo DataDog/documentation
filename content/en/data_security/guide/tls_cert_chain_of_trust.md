@@ -1,6 +1,6 @@
 ---
 title: Changes to Datadog's TLS certificate chain of trust
-kind: guide
+
 ---
 
 ## Overview

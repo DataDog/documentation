@@ -9,7 +9,7 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: Dépannage de l'Agent
   text: Dépannage de l'Agent
-kind: documentation
+
 title: Problèmes avec les conteneurs Windows
 ---
 
@@ -79,7 +79,7 @@ existingClusterAgent:
 datadog-crds:
   crds:
     datadogMetrics: false
-# Désactiver le déploiement de kube-state-metrics 
+# Désactiver le déploiement de kube-state-metrics
 datadog:
   kubeStateMetricsEnabled: false
 ```

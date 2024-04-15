@@ -8,7 +8,7 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualiser vos données RUM dans le RUM Explorer
-kind: guide
+
 private: true
 title: Envoyer des actions RUM personnalisées
 ---

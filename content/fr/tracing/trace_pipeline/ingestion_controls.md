@@ -14,7 +14,7 @@ further_reading:
 - link: /tracing/trace_pipeline/metrics/
   tag: Documentation
   text: Métriques d'utilisation
-kind: documentation
+
 title: Paramètres d'ingestion
 ---
 
@@ -79,7 +79,7 @@ Ingested Bytes/s
 : Le nombre moyen d'octets ingérés toutes les secondes par Datadog pour le service au cours de la derrière heure.
 
 Downstream Bytes/s
-: Le nombre moyen d'octets ingérés par seconde pour les *décisions d'ingestion prises au niveau du service*. Cela inclut les octets de toutes les spans enfant en aval qui suivent la décision prise en amont de la trace, ainsi que les spans interceptées par le [service d'échantillonnage de traces d'erreur][5], le [service d'échantillonnage de traces rares][6] et le mécanisme [App Analytics][7]. 
+: Le nombre moyen d'octets ingérés par seconde pour les *décisions d'ingestion prises au niveau du service*. Cela inclut les octets de toutes les spans enfant en aval qui suivent la décision prise en amont de la trace, ainsi que les spans interceptées par le [service d'échantillonnage de traces d'erreur][5], le [service d'échantillonnage de traces rares][6] et le mécanisme [App Analytics][7].
 
 Traffic Breakdown
 : Une analyse détaillée du trafic échantillonné et du trafic non échantillonné pour les traces initiées par le service. Consultez la section [Analyse du trafic](#analyse-du-trafic) pour en savoir plus.

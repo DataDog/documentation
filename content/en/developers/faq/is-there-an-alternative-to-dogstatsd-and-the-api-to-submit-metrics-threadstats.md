@@ -1,6 +1,6 @@
 ---
 title: Submit Metrics to Datadog with Threadstats
-kind: faq
+
 further_reading:
 - link: "https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/"
   tag: "Github"
@@ -60,7 +60,7 @@ Next, every datapoint in the same `roll_up_interval` (5 seconds) gets the same t
 
 `{09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1}`
 
-Finally, data is aggregated by timestamp. The following 4 values are then submitted to Datadog: 
+Finally, data is aggregated by timestamp. The following 4 values are then submitted to Datadog:
 `{09:30:10, 1}, {10:00:00, 3}, {10:00:05,2}`
 
 For more information, see the [Threadstats aggregation][6] documentation.

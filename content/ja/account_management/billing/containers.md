@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: コンテナの請求
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Best Practices for OPW Aggregator Architecture
-kind: Documentation
+
 aliases:
   - /observability_pipelines/production_deployment_overview/aggregator_architecture
   - /observability_pipelines/aggregator_architecture/
@@ -24,7 +24,7 @@ Deploy Observability Pipelines Worker into your infrastructure, like any other s
 
 This guide walks you through the recommended aggregator architecture for new Observability Pipelines Worker users. Specifically, these topics include:
 
-- [Optimizing the instance][3] so you can horizontally scale the Observability Pipelines Worker aggregator. 
+- [Optimizing the instance][3] so you can horizontally scale the Observability Pipelines Worker aggregator.
 - Starting points to estimate your resource capacity for [capacity planning and scaling][4] the Observability Pipelines Worker.
 - Determining your [network topology and configurations][5] for the Observability Pipelines Worker.
 - Achieving [high durability][6] and [high availability](#high-availability).

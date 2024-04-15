@@ -1,6 +1,6 @@
 ---
 title: Setting Up Database Monitoring for Aurora managed MySQL
-kind: documentation
+
 description: Install and configure Database Monitoring for MySQL managed on Aurora.
 further_reading:
 - link: "/integrations/mysql/"
@@ -186,7 +186,7 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-        
+
     # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'

@@ -1,6 +1,6 @@
 ---
 title: "VPC Endpoint Component"
-kind: documentation
+
 ---
 ## Overview
 

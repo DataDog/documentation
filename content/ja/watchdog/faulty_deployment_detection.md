@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: デプロイメント不良の自動検出
 ---
 

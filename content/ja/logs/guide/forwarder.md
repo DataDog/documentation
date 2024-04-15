@@ -5,7 +5,7 @@ aliases:
 - /ja/serverless/libraries_integrations/forwarder/
 dependencies:
 - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
-kind: documentation
+
 title: Datadog Forwarder
 ---
 
@@ -129,7 +129,7 @@ class SampleRegistry
 7. S3 バケットを作成し、環境変数 `DD_S3_BUCKET_NAME` をバケット名に設定します。また、このバケットに `s3:GetObject`、`s3:PutObject`、`s3:ListBucket`、`s3:DeleteObject` 権限を Lambda 実行ロールに提供します。このバケットは、異なるタグキャッシュ (Lambda、S3、Step Function、Log Group) の保存に使用されます。さらに、このバケットは、転送の例外が発生した場合に、未転送のイベントを保存するために使用されます。
 8. 環境変数 `DD_STORE_FAILED_EVENTS` を `true` に設定して、フォワーダーがイベントデータも S3 バケットに保存するようにします。ログ、メトリクス、トレースをインテークに送信する際に例外が発生した場合、フォワーダーは関連データを S3 バケットに保存します。カスタム呼び出し、つまり `retry` キーワードが空でない文字列に設定されたイベントを受信した場合 (手動でトリガー可能 - 下記参照)、フォワーダーは保存されたイベントの送信を再試行します。成功した場合、バケット内のストレージをクリアします。
 
-```bash 
+```bash
 aws lambda invoke --function-name <function-name> --payload '{"retry":"true"}' out
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: Agent Flare
-kind: documentation
+
 aliases:
   - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:

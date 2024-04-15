@@ -11,7 +11,7 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: documentación
   text: Integraciones personalizadas
-kind: faq
+
 title: Recopilación de logs con el socket de Docker
 ---
 

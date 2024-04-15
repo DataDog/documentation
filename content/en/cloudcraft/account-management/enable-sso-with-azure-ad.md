@@ -1,6 +1,6 @@
 ---
 title: Enable SSO with Azure AD
-kind: guide
+
 ---
 
 Enabling Single Sign-On (SSO) with Azure AD as your identity provider allows you to simplify authentication and login access to Cloudcraft.
@@ -28,7 +28,7 @@ For more general information on using SSO with Cloudcraft, check out [Enable SSO
 6. Click **New application** and select **Non-gallery application**.
 7. Enter **Cloudcraft** as the name of the application, then click **Add**.
 
-Next, configure the SAML integration using the details provided by Cloudcraft. 
+Next, configure the SAML integration using the details provided by Cloudcraft.
 
 1. In the **Getting started** section, select **Set up single sign on**, then click **SAML**.
 2. Under the **Basic SAML Configuration** section, click **Edit**.

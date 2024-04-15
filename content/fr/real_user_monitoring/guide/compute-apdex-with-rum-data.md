@@ -1,6 +1,6 @@
 ---
 title: Calculer votre score Apdex et des indicateurs de performance personnalisés avec les données RUM
-kind: guide
+
 description: Guide pour calculer votre score Apdex et des indicateurs de performance personnalisés avec les données RUM
 further_reading:
   - link: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm

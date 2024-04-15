@@ -1,6 +1,6 @@
 ---
 title: Quality Gates Explorer Search Syntax
-kind: documentation
+
 description: Search all of your quality gates or rule executions.
 further_reading:
 - link: "/quality_gates/search"
@@ -39,7 +39,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ## Search on attributes and tags
 
-You are not required to define a facet in order to search on attributes and tags. To search on a specific attribute, add `@` to specify you are searching on an attribute. Attributes searches are case sensitive. Use free text search to get case insensitive results. 
+You are not required to define a facet in order to search on attributes and tags. To search on a specific attribute, add `@` to specify you are searching on an attribute. Attributes searches are case sensitive. Use free text search to get case insensitive results.
 
 For example, if you are interested in the `git.repository.name` attribute and you want to filter on the value `Datadog/documentation`, use `@git.repository.name:DataDog/documentation`.
 

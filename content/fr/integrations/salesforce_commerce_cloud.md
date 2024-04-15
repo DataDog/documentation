@@ -25,7 +25,7 @@ integration_id: salesforce-commerce-cloud
 integration_title: Salesforce Commerce Cloud
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: salesforce_commerce_cloud
 public_title: Salesforce Commerce Cloud
@@ -63,14 +63,14 @@ Pour configurer Salesforce Commerce Cloud de sorte que Datadog ait accès aux do
 3. Dans votre interface Business Manager, sous **Administration >  Organization >  WebDAV Client Permissions**, ajoutez le code JSON suivant. Veillez à insérer l'identifiant de votre client à l'endroit prévu à cet effet.
 
 ```json
-{  
-   "clients":[  
-      {  
+{
+   "clients":[
+      {
          "client_id":"<identifiant-de-votre-client>",
-         "permissions":[  
-            {  
+         "permissions":[
+            {
                "path":"/logs",
-               "operations":[  
+               "operations":[
                   "read"
                ]
             }
@@ -88,7 +88,7 @@ Pour configurer Salesforce Commerce Cloud de sorte que Datadog ait accès aux do
 
 #### Résultats
 
-Patientez dix minutes le temps que les [logs][1] soient transmis depuis la source `salesforce.commerce.cloud`. 
+Patientez dix minutes le temps que les [logs][1] soient transmis depuis la source `salesforce.commerce.cloud`.
 
 Le Log Center de SFCC ne présente pas les données de log de la même manière que Datadog. Par exemple, certains logs d'erreurs contenant de longues stack traces sont divisés en deux événements de log dans le Log Center de SFCC, tandis que les détails des stack traces sont omis dans Datadog. Les deux systèmes n'indiquent par conséquent pas le même nombre total d'événements de log.
 
@@ -100,7 +100,7 @@ L'intégration Salesforce Commerce Cloud n'inclut aucune métrique.
 
 ### Logs
 
-L'intégration Salesforce Commerce Cloud collecte les logs via une connexion WebDAV avec votre instance Commerce Cloud. 
+L'intégration Salesforce Commerce Cloud collecte les logs via une connexion WebDAV avec votre instance Commerce Cloud.
 
 ### Checks de service
 

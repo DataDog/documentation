@@ -1,6 +1,6 @@
 ---
 title: Autoscaling with Cluster Agent Custom & External Metrics
-kind: documentation
+
 aliases:
 - /agent/guide/cluster-agent-custom-metrics-server
 - /agent/cluster_agent/external_metrics

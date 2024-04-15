@@ -1,6 +1,6 @@
 ---
 title: Instrumenting Ruby Serverless Applications
-kind: documentation
+
 further_reading:
 - link: 'serverless/datadog_lambda_library/ruby'
   tag: 'Documentation'

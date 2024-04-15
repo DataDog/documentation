@@ -1,6 +1,6 @@
 ---
 title: Advanced Options for Mobile App Test Steps
-kind: documentation
+
 description: Configure advanced options for Mobile Test Steps
 aliases:
 - /mobile_testing/mobile_app_tests/advanced_options
@@ -33,17 +33,17 @@ further_reading:
 
 ## Overview
 
-This page describes advanced options for Synthetic mobile app tests. 
+This page describes advanced options for Synthetic mobile app tests.
 
 ## Locate an element
 
 ### Datadog algorithm
 
-To ensure that your mobile app test does not validate an unexpected change to your mobile application's UI, use [assertions][1] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
+To ensure that your mobile app test does not validate an unexpected change to your mobile application's UI, use [assertions][1] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey.
 
 ### User specified locator
 
-By default, mobile app tests use the Datadog locator system. When a test searches for a specific element to interact with (for example, a checkout button), instead of looking at an element with a specific XPath or a specific CSS selector, the test uses several different points of reference to locate the element (for example, XPath, text, classes, and nearby elements). 
+By default, mobile app tests use the Datadog locator system. When a test searches for a specific element to interact with (for example, a checkout button), instead of looking at an element with a specific XPath or a specific CSS selector, the test uses several different points of reference to locate the element (for example, XPath, text, classes, and nearby elements).
 
 These points of reference become a set of locators, each of which uniquely define the element. You should only use custom selectors in edge cases because the Datadog locator system enables tests to be self-maintaining.
 
@@ -67,7 +67,7 @@ Optionally, click **Consider entire test as failed if this step fails** to ensur
 
 ## Prevent screenshot capture
 
-You can prevent a step screenshot from being captured at test execution by clicking **Do not capture screenshot for this step**. 
+You can prevent a step screenshot from being captured at test execution by clicking **Do not capture screenshot for this step**.
 
 {{< img src="mobile_app_testing/no_screenshots.png" alt="Do not capture a screenshot for this test step" style="width:50%" >}}
 

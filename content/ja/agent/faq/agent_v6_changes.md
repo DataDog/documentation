@@ -1,6 +1,6 @@
 ---
 title: Agent v6 の変更点
-kind: faq
+
 aliases:
   - /ja/agent/faq/agent-v6-changes
 further_reading:
@@ -331,7 +331,7 @@ process_config:
 
 Agent v6 では、Docker バージョン 1.12.1 以降がサポートされています。
 
-Docker チェックは、Agent の内部アーキテクチャを利用するために Go で書き直されました。したがって、Python バージョン (`docker_daemon`) は非推奨になりました。 
+Docker チェックは、Agent の内部アーキテクチャを利用するために Go で書き直されました。したがって、Python バージョン (`docker_daemon`) は非推奨になりました。
 
 新しいチェックの名前は `docker` です。[Agent インポートコマンド](?tab=agent#configuration)は、レガシーの `docker_daemon.yaml` コンフィギュレーションから設定をインポートします。以下を除くすべての機能が移植されています。
 

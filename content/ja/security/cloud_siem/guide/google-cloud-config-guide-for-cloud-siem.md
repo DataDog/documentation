@@ -15,7 +15,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/visualize-google-cloud-activity-cloud-siem-investigator/
   tag: ブログ
   text: Datadog Cloud SIEM Investigator で Google Cloud 環境のアクティビティを視覚化する
-kind: documentation
+
 title: Cloud SIEM のための Google Cloud 構成ガイド
 ---
 
@@ -140,7 +140,7 @@ Dataflow パイプラインワーカーは、デフォルトの挙動として�
 1. リージョンエンドポイントを選択します。
 1. **Dataflow template** ドロップダウンメニューで、**Pub/Sub to Datadog** を選択します。
 1. **Required Parameters** セクションで以下の設定を行います。
-      a. **Pub/Sub input subscription** ドロップダウンメニューで、先ほど新規の [Pub/Sub システム](#create-a-google-cloud-publishsubscription-pubsub-system)を作成した際に作成されたデフォルトのサブスクリプションを選択します。  
+      a. **Pub/Sub input subscription** ドロップダウンメニューで、先ほど新規の [Pub/Sub システム](#create-a-google-cloud-publishsubscription-pubsub-system)を作成した際に作成されたデフォルトのサブスクリプションを選択します。
       b. **Datadog Logs API URL** フィールドに以下の値を入力します。
       ```
       https://{{< region-param key="http_endpoint" code="true" >}}
@@ -148,11 +148,11 @@ Dataflow パイプラインワーカーは、デフォルトの挙動として�
       **注**: 上記の URL をコピーする前に、このドキュメントページの右側にある Datadog サイトセレクタがご利用の [Datadog サイト][8]に設定されていることを確認してください。
       c. **Output deadletter Pub/Sub topic** フィールドで、Datadog API により拒否されたメッセージを受信するために先ほど作成した[追加のトピック](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic)を選択します。
       d. **Temporary location** フィールドで、ストレージバケット内の一時ファイルのパスを指定します。
-1. 先ほど Datadog API キー値用の [シークレットを Secret Manager で作成](#create-a-secret-in-secret-manager)した場合:  
+1. 先ほど Datadog API キー値用の [シークレットを Secret Manager で作成](#create-a-secret-in-secret-manager)した場合:
     a. **Optional Parameters** をクリックすると、追加のフィールドが表示されます。
-    b. **Google Cloud Secret Manager ID** フィールドにシークレットのリソース名を入力します。  
-        リソース名を取得するには、[Secret Manager][8] のリソースに移動して、シークレットをクリックします。**Action** の下の 3 つのドットをクリックして、**Copy resource name** を選択します。  
-    c. **Source of the API key passed** フィールドに `SECRET_MANAGER` と入力します。  
+    b. **Google Cloud Secret Manager ID** フィールドにシークレットのリソース名を入力します。
+        リソース名を取得するには、[Secret Manager][8] のリソースに移動して、シークレットをクリックします。**Action** の下の 3 つのドットをクリックして、**Copy resource name** を選択します。
+    c. **Source of the API key passed** フィールドに `SECRET_MANAGER` と入力します。
 1. Datadog API キー値用のシークレットを使用していない場合:
     - **推奨**:
         - `Source of API key passed` を `KMS` に設定します。

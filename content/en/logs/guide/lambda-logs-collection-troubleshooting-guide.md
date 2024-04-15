@@ -1,6 +1,6 @@
 ---
 title: Lambda Function Log Collection Troubleshooting Guide
-kind: documentation
+
 further_reading:
     - link: "https://www.datadoghq.com/blog/aws-lambda-telemetry-api/"
       tag: "Blog"
@@ -13,7 +13,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 1. Navigate to the [Log Explorer's Live Tail view][2].
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
-    * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][3]. 
+    * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][3].
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
 3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][4] set up. These filters are filtering out your logs.
 4. If you don't see the logs in the Live Tail, the logs are not reaching Datadog.
@@ -28,7 +28,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
     {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab" style="width:80%;" >}}
 
-3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function: 
+3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function:
     * invocations
     * errors
     * logs
@@ -38,7 +38,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 ### Viewing Lambda metrics in Datadog
 
-If you have enabled AWS Lambda metrics, you can view metrics related to Lambda invocations and errors within Datadog. The following metrics are all tagged with the `functionname` tag: 
+If you have enabled AWS Lambda metrics, you can view metrics related to Lambda invocations and errors within Datadog. The following metrics are all tagged with the `functionname` tag:
 
 | Metric                        | Description                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|

@@ -1,6 +1,6 @@
 ---
 title: Top List Widget
-kind: documentation
+
 widget_type: "toplist"
 aliases:
     - /graphing/widgets/top_list/
@@ -28,7 +28,7 @@ The top list visualization enables you to display a list of tag values with the 
     * Metric: See the [querying][1] documentation to configure a metric query.
     * Non-metric data sources: See the [Trace search documentation][2] or [Log search documentation][3] to configure an event query.
 
-2. Optional: see additional [graph display](#graph-display) configurations. 
+2. Optional: see additional [graph display](#graph-display) configurations.
 
 ### Options
 
@@ -39,7 +39,7 @@ Configure the optional Display Mode features to add context to your top list vis
 * Display multiple stacked groups to show a break down of each dimension in your query. **Stacked** is enabled by default. You can switch to **Flat**.
 * Select **Relative** display mode to show values as a percent of the total or **Absolute** display mode to show the raw count of data you are querying.</br>
    **Note**: Relative display is only available for count data, such as count metrics or log events.
-* Configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. 
+* Configure conditional formatting in **Visual Formatting Rules** depending on your entries' values.
 
 #### Context links
 

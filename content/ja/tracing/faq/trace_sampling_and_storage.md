@@ -21,7 +21,7 @@ further_reading:
   tag: ドキュメント
   text: Datadog トレースの読み方を理解する
 is_beta: true
-kind: documentation
+
 title: トレースのサンプリングと保存
 ---
 

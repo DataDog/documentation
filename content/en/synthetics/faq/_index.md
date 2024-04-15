@@ -1,7 +1,7 @@
 ---
 title: Synthetic Monitoring FAQ
-kind: faq
-cascade: 
+
+cascade:
   - private: true
 ---
 

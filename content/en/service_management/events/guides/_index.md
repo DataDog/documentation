@@ -1,6 +1,6 @@
 ---
 title: Events Guides
-kind: documentation
+
 private: true
 disable_toc: true
 aliases:
@@ -21,7 +21,7 @@ cascade:
         subcategory: Events Guides
 ---
 
-An event represents any record of activity noteworthy for engineers (devs, ops, and security). 
+An event represents any record of activity noteworthy for engineers (devs, ops, and security).
 
 {{< whatsnext desc="Send your custom events to Datadog:">}}
     {{< nextlink href="/service_management/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}

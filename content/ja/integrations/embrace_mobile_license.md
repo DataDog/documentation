@@ -22,7 +22,7 @@ integration_id: embrace-mobile-license
 integration_title: Embrace モバイルライセンス
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -130,7 +130,7 @@ Datadog から、Embrace プラットフォーム内のモバイル体験を最�
 ## Agent
 サポートやご質問は、以下のチャンネルから Embrace にお問い合わせください。
 
-メール: [datadogsupport@embrace.io][4] 
+メール: [datadogsupport@embrace.io][4]
 
 ### その他の参考資料
 

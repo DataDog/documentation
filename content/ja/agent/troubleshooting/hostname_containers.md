@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: コンテナでのホスト名検出
 ---
 

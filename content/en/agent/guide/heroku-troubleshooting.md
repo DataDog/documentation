@@ -1,6 +1,6 @@
 ---
 title: Datadog-Heroku Buildpack troubleshooting
-kind: guide
+
 aliases:
   - /agent/faq/heroku-troubleshooting/
 ---

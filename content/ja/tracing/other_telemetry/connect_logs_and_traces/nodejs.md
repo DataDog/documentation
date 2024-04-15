@@ -17,7 +17,7 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
-kind: documentation
+
 title: Node.js ログとトレースの接続
 type: multi-code-lang
 ---

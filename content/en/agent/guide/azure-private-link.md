@@ -1,6 +1,6 @@
 ---
 title: Connect to Datadog over Azure Private Link
-kind: guide
+
 ---
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}
@@ -56,7 +56,7 @@ You can configure Azure Private Link to expose a private IP address for each Dat
    - For **Name**, enter `*`.
    - For **Type**, select **A - Address record**.
    - For **IP address**, enter the IP address you noted at the end of the previous section.
-   
+
    Select **OK** to finish.
 
 ## Published services

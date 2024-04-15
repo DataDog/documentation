@@ -1,6 +1,6 @@
 ---
 title: Upgrade the RUM Browser SDK
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'

@@ -1,6 +1,6 @@
 ---
 title: RUM Performance Overview Dashboards
-kind: documentation
+
 aliases:
 - '/real_user_monitoring/dashboards/performance_overview_dashboard/'
 - '/real_user_monitoring/dashboards/resources_dashboard'
@@ -20,7 +20,7 @@ further_reading:
 
 The web app performance dashboard offers a bird's-eye view of RUM web applications. It shows:
 
-- **Core web vitals**: 
+- **Core web vitals**:
   For all views, three browser performance metrics are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance metrics, such as Load Time, are also available.
 - **XHR and Fetch requests and resources**:
   For all views, identify bottlenecks when your application loads.

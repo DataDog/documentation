@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/log_configuration/pipelines
   tag: ドキュメント
   text: ログパイプラインについて
-kind: documentation
+
 title: カスタム宛先へのログの転送
 ---
 
@@ -77,7 +77,7 @@ title: カスタム宛先へのログの転送
 6. 宛先の名前を入力します。
 7. **Configure Destination** セクションで、以下の内容を入力します。
     a. ログを送信するエンドポイント。エンドポイントは `https://` で始まらなければなりません。Elasticsearch のエンドポイント例: `https://<your_account>.us-central1.gcp.cloud.es.io`
-    b. ログを送信する宛先インデックスの名前。 
+    b. ログを送信する宛先インデックスの名前。
     c. オプションで、新しいインデックスを作成する頻度を示すインデックスローテーションを選択します。`No Rotation`、`Every Hour`、`Every Day`、`Every Week`、または `Every Month` です。デフォルトは `No Rotation` です。
 8. **Configure Authentication** セクションで、Elasticsearch アカウントのユーザー名とパスワードを入力します。
 9. **保存**をクリックします。

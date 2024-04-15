@@ -1,6 +1,6 @@
 ---
-title: Node.js Lambda Tracing and Bundlers Compatibility 
-kind: documentation
+title: Node.js Lambda Tracing and Bundlers Compatibility
+
 further_reading:
 - link: '/serverless/installation/nodejs'
   tag: 'Documentation'
@@ -65,7 +65,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
             - dd-trace
         packagerOptions:
           scripts:
-            # Optional, only needed when they are included as transitive dependencies 
+            # Optional, only needed when they are included as transitive dependencies
             - rm -rf node_modules/datadog-lambda-js node_modules/dd-trace
     ```
 
@@ -88,9 +88,9 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
 1. Follow the [installation instructions for Node.js][3] and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
 2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
 3. Mark your dependencies as [externals][7]. This tells the bundler to exclude them from the output bundle; instead, they are packaged in `node_modules`.
-    
+
     **esbuild.config.js**
-    
+
     ```javascript
     const esbuild = require('esbuild');
 
@@ -108,7 +108,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     ```yaml
     custom:
       esbuild:
-        exclude: 
+        exclude:
           # @aws-sdk for the AWS SDK v3
           - @aws-sdk
           # aws-sdk for the AWS SDK v2
@@ -123,7 +123,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     ```javascript
     // plugins.js
     const { nodeExternalsPlugin } = require('esbuild-node-externals')
-    
+
     module.exports = [nodeExternalsPlugin()]
     ```
 

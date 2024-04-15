@@ -1,6 +1,6 @@
 ---
 title: Python Version Management
-kind: guide
+
 further_reading:
 - link: "/agent/versions/upgrade_to_agent_v7/"
   tag: "Documentation"
@@ -44,7 +44,7 @@ This is an Agent-wide configuration option. **All Python checks launched by an A
 
 ### Container Agent
 
-Datadog provides Agent container images for Python 2 and Python 3. 
+Datadog provides Agent container images for Python 2 and Python 3.
 
 * Image tags starting with `6.`, like `6.34.0` or `6.34.0-jmx`, are images containing the Python 2 runtime.
 * Image tags starting with `7.`, like `7.34.0` or `7.34.0-jmx`, are images containing the Python 3 runtime.

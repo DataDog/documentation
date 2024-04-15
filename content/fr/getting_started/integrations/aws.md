@@ -27,7 +27,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: Blog
   text: Surveiller vos instances EC2 basées sur Graviton3 avec Datadog
-kind: documentation
+
 title: Débuter avec AWS
 ---
 
@@ -109,7 +109,7 @@ Avant de commencer, vérifiez que vous disposez des ressources suivantes :
 
 3. Configurez les paramètres de l'intégration sous l'option **Automatically using CloudFormation**.
     a. Sélectionnez les régions AWS pour lesquelles vous souhaitez configurer l'intégration.
-    b. Ajoutez votre [clé d'API][9] Datadog.  
+    b. Ajoutez votre [clé d'API][9] Datadog.
     c. Si vous le souhaitez, envoyez des logs et d'autres données à Datadog via la [fonction Lambda du Forwarder Datadog][1].
     d. Vous avez également la possibilité d'activer la solution [Cloud Security Posture Management][54] (CSPM) afin d'analyser votre environnement cloud, vos hosts et vos conteneurs dans le but de détecter les problèmes de configuration et les risques de sécurité.
 
@@ -188,7 +188,7 @@ Pour être informé en cas de comportement indésirable ou inattendu dans votre 
 
 ### Serverless
 
-Vous pouvez unifier les métriques, traces et logs provenant de vos fonctions AWS Lambda exécutant des applications sans serveur dans Datadog. Consultez la section [Informatique sans serveur][42] pour découvrir comment instrumenter votre application, installer des [bibliothèques et intégrations sans serveur][43], implémenter le [tracing distribué avec des applications sans serveur][44] et [corriger les problèmes de surveillance sans serveur][45]. 
+Vous pouvez unifier les métriques, traces et logs provenant de vos fonctions AWS Lambda exécutant des applications sans serveur dans Datadog. Consultez la section [Informatique sans serveur][42] pour découvrir comment instrumenter votre application, installer des [bibliothèques et intégrations sans serveur][43], implémenter le [tracing distribué avec des applications sans serveur][44] et [corriger les problèmes de surveillance sans serveur][45].
 
 ### APM
 Pour bénéficier d'analyses encore plus détaillées et récupérer des données supplémentaires à partir de vos applications et services AWS, activez la collecte de traces distribuées depuis l'intégration [AWS X-Ray][46] ou depuis un host sur lequel se trouve l'Agent Datadog avec [APM][47]. Consultez ensuite la rubrique [Explorer la solution APM Datadog][48] pour découvrir comment exploiter pleinement ces données afin d'obtenir des informations exploitables sur les performances de votre application.

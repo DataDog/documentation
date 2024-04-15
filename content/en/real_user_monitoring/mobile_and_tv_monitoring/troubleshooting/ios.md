@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-kind: documentation
+
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
     tag: "Github"

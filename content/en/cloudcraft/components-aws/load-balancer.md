@@ -1,6 +1,6 @@
 ---
 title: "Load Balancer Component"
-kind: documentation
+
 ---
 ## Overview
 

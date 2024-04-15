@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Admission Controller
-kind: documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"
@@ -22,10 +22,10 @@ This page provides troubleshooting for the Datadog Cluster Agent's [Admission Co
 ### Update pre-existing pods
 Admission Controller responds to the creation of new pods within your Kubernetes cluster: at pod creation, the Cluster Agent receives a request from Kubernetes and responds with the details of what changes (if any) to make to the pod.
 
-Therefore, **Admission Controller does not mutate existing pods within your cluster**. If you recently enabled the Admission Controller or made other environmental changes, delete your existing pod and let Kubernetes recreate it. This ensures that Admission Controller updates your pod. 
+Therefore, **Admission Controller does not mutate existing pods within your cluster**. If you recently enabled the Admission Controller or made other environmental changes, delete your existing pod and let Kubernetes recreate it. This ensures that Admission Controller updates your pod.
 
 ### Labels and annotations
-The Cluster Agent responds to labels and annotations on the created pod—**not** the workload (Deployment, DaemonSet, CronJob, etc.) that created that pod. Ensure that your pod template references this accordingly. 
+The Cluster Agent responds to labels and annotations on the created pod—**not** the workload (Deployment, DaemonSet, CronJob, etc.) that created that pod. Ensure that your pod template references this accordingly.
 
 For example, the following template sets the [label for APM configuration][2] and the [annotation for library injection][3]:
 
@@ -35,7 +35,7 @@ kind: Deployment
 metadata:
   name: example-deployment
 spec:
-  #(...)  
+  #(...)
   template:
     metadata:
       labels:
@@ -78,7 +78,7 @@ Refer to the [Kubernetes Distributions][17] for more configuration details regar
 
 #### OpenShift
 
-OpenShift has `SecurityContextConstraints` (SCCs) that are required to deploy pods with extra permissions, such as a `volume` with a `hostPath`. Datadog components are deployed with SCCs to allow activity specific to Datadog pods, but Datadog does not create SCCs for other pods. 
+OpenShift has `SecurityContextConstraints` (SCCs) that are required to deploy pods with extra permissions, such as a `volume` with a `hostPath`. Datadog components are deployed with SCCs to allow activity specific to Datadog pods, but Datadog does not create SCCs for other pods.
 
 If you are using OpenShift, use `hostip` mode. The following configuration enables `hostip` mode:
 
@@ -127,7 +127,7 @@ Your output resembles the following:
 ...
 Admission Controller
 ====================
-  
+
     Webhooks info
     -------------
       MutatingWebhookConfigurations name: datadog-webhook
@@ -150,7 +150,7 @@ Admission Controller
         Object selector: &LabelSelector{MatchLabels:map[string]string{admission.datadoghq.com/enabled: true,},MatchExpressions:[]LabelSelectorRequirement{},}
         Rule 1: Operations: [CREATE] - APIGroups: [] - APIVersions: [v1] - Resources: [pods]
         Service: default/datadog-admission-controller - Port: 443 - Path: /injecttags
-  
+
     Secret info
     -----------
     Secret name: webhook-certificate
@@ -210,7 +210,7 @@ datadog:
 <TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:176 in processNextWorkItem) | Webhook datadog-webhook reconciled successfully
 ```
 
-If do not see that the `datadog-webhook` webhook has been reconciled successfully, ensure that you have correctly enabled Admission Controller according to the [configuration instructions][1]. 
+If do not see that the `datadog-webhook` webhook has been reconciled successfully, ensure that you have correctly enabled Admission Controller according to the [configuration instructions][1].
 
 ### Validate injection
 
@@ -265,7 +265,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Set `flavor` to `kubernetes` to create a `NetworkPolicy` resource. 
+Set `flavor` to `kubernetes` to create a `NetworkPolicy` resource.
 
 Alternatively, for Cilium-based environments, set `flavor` to `cilium` to create a `CiliumNetworkPolicy` resource.
 
@@ -299,7 +299,7 @@ E0908 <TIMESTAMP> 10 dispatcher.go:206] failed calling webhook "datadog.webhook.
 
 These failures are relative to a Cluster Agent deployed in the `default` namespace; the DNS name adjusts relative to the namespace used.
 
-You may also see failures for the other Admission Controller webhooks, such as `datadog.webhook.tags` and `datadodg.webhook.config`. 
+You may also see failures for the other Admission Controller webhooks, such as `datadog.webhook.tags` and `datadodg.webhook.config`.
 
 **Note:** EKS often generates two log streams within the CloudWatch log group for the cluster. Be sure to check both for these types of logs.
 

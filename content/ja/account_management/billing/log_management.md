@@ -1,6 +1,6 @@
 ---
 title: ログ管理の請求
-kind: documentation
+
 ---
 ## 料金
 

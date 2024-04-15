@@ -1,6 +1,6 @@
 ---
 title: Why does zooming out a timeframe also smooth out my graphs?
-kind: guide
+
 further_reading:
 - link: "/metrics/types/"
   tag: "Documentation"

@@ -1,6 +1,6 @@
 ---
 title: Container Troubleshooting
-kind: documentation
+
 description: Troubleshooting containers-related issues
 further_reading:
 - link: "/containers/troubleshooting/duplicate_hosts"
@@ -12,13 +12,13 @@ This page provides troubleshooting information for container monitoring.
 
 
 There are three methods of deploying the Agent:
-1. As a [**container in a runtime**][1] 
+1. As a [**container in a runtime**][1]
 
 2. In a **cloud environment**, such as [Amazon ECS][2], [Fargate in an Amazon ECS environment][3], or [Amazon EKS][4]
 
 3. In a [Kubernetes environment][16]
 
-These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance. 
+These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance.
 
 For details on Agent release updates or changes, refer to Datadog's [release notes][7].
 
@@ -34,7 +34,7 @@ Verify that the following are true:
 
 - The metrics endpoint is exposed and is open for the Agent to reach.
 
-- There are no proxies or firewalls that might impede the Agent from accessing the endpoint. 
+- There are no proxies or firewalls that might impede the Agent from accessing the endpoint.
 
 - Agent has [Autodiscovery][10] enabled.
 
@@ -43,7 +43,7 @@ Verify that the following are true:
 
 There are two [environment variables][8] that can effect whether logs are collected and from which containers:
 
-- Set `DD_LOGS_ENABLED` to `true` to collect logs. 
+- Set `DD_LOGS_ENABLED` to `true` to collect logs.
 - Additionally, set `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true` to collect all logs from all containers.
 
 To exclude logs (and other features) from collection, see the [Container Discovery Management guide][11].
@@ -85,8 +85,8 @@ Ensure that your IAM policy is updated.
 
   - [ECS][12]: Ensure that the log router is attached to the container from which you would like to collect logs.
 
-  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Amazon Data Firehose][14]. Using Amazon Data Firehose to collect logs requires the successful implementation of the Amazon Data Firehose delivery stream, as well as some command line tools. 
- 
+  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Amazon Data Firehose][14]. Using Amazon Data Firehose to collect logs requires the successful implementation of the Amazon Data Firehose delivery stream, as well as some command line tools.
+
 
 ## Kubernetes
 
@@ -100,20 +100,20 @@ Then, in your node Agent Pod, run the `agent status` command and review the resu
 
 On managed services such as Azure Kubernetes Service (AKS) and Google Kubernetes Engine (GKE), the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, or `etcd` checks in these environments.
 
- 
+
 
 # Troubleshooting data requested by Datadog support
 
 After you open a support ticket, you may be asked for the following types of information:
 
-### Agent Flare 
+### Agent Flare
 
 You can use the [`flare`][15] command to send troubleshooting information to Datadog support.
 
 **Node Agent flare**
 
 ```
-$ kubectl exec <AGENT_POD_NAME> -it agent flare <CASE_ID> 
+$ kubectl exec <AGENT_POD_NAME> -it agent flare <CASE_ID>
 ```
 
 **Cluster Agent flare**
@@ -121,27 +121,27 @@ $ kubectl exec <AGENT_POD_NAME> -it agent flare <CASE_ID>
 ```
 $ kubectl exec <CLUSTER_AGENT_POD_NAME> -it agent flare <CASE_ID>
 ```
- 
 
-### Describe Pod output 
 
-This provides the team with insight on how the node or Cluster Agent was deployed, what the most recent events were for the pod, and if some qualities (such as custom tags) were injected and applied to host metrics. The `> <FILENAME>.yaml` section of the command creates a file output that can be sent to Datadog support as an attachment: 
+### Describe Pod output
+
+This provides the team with insight on how the node or Cluster Agent was deployed, what the most recent events were for the pod, and if some qualities (such as custom tags) were injected and applied to host metrics. The `> <FILENAME>.yaml` section of the command creates a file output that can be sent to Datadog support as an attachment:
 
 ```
 $ kubectl describe pod <POD_NAME> > <FILENAME>.yaml
 ```
 
-### Manifest/deployment 
+### Manifest/deployment
 
-This is the file used to deploy the Agent in your environment. It informs Datadog of the tags configured, whether logs were enabled, and if certain containers are defined to be ignored. 
+This is the file used to deploy the Agent in your environment. It informs Datadog of the tags configured, whether logs were enabled, and if certain containers are defined to be ignored.
 
 In the case of deploying the Agent in a runtime environment, send Support the command line used to deploy the Agent.
 
 The three most common deployment methods are: Helm chart, DaemonSet, and Operator.
 
-### cURL output 
+### cURL output
 
-If you are experiencing missing or inaccurate metrics, Datadog support may ask for the result of a cURL output of the node Agent trying to reach the metric endpoint. This is done by running the command from inside the Agent container, and can inform support if the Agent has access to the metrics. **Note**: This is not possible in a Fargate or managed services: 
+If you are experiencing missing or inaccurate metrics, Datadog support may ask for the result of a cURL output of the node Agent trying to reach the metric endpoint. This is done by running the command from inside the Agent container, and can inform support if the Agent has access to the metrics. **Note**: This is not possible in a Fargate or managed services:
 
 ```
 $ kubectl exec -it <AGENT_POD_NAME> curl -k -v ""<METRIC_ENDPOINT>""

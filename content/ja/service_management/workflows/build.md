@@ -6,7 +6,7 @@ further_reading:
 - link: /service_management/workflows/actions_catalog
   tag: Documentation
   text: アクションカタログで利用可能なアクションを参照する
-kind: documentation
+
 title: ワークフローの構築
 ---
 
@@ -165,7 +165,7 @@ Datadog の [**Workflow Automation** ページ][1]からワークフローを作
 1. **Error Handling & Retries** セクションの横にある **+** アイコンをクリックします。
 1. **Interval** と **Max retries** の値を調整します。
 1. オプションで、[フォールバックステップを追加](#add-a-fallback)します。
-1. ワークフローを保存して、変更を適用します。 
+1. ワークフローを保存して、変更を適用します。
 
 {{< img src="service_management/workflows/error-handling1.png" alt="エラー処理と再試行のセクション" style="width:100%;" >}}
 

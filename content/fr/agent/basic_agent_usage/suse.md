@@ -11,7 +11,7 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Recueillir vos traces
-kind: documentation
+
 platform: SUSE
 title: Utilisation basique de l'Agent pour SUSE
 ---

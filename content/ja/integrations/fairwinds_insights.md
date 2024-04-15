@@ -40,7 +40,7 @@ integration_id: fairwinds-insights
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -162,7 +162,7 @@ Fairwinds Insights にサービスのチェックは含まれません。
 
 サポートまたはリクエストをご希望の場合は、以下のチャンネルから Fairwinds にお問い合わせください。
 
-- 電話: +1 617-202-3659 
+- 電話: +1 617-202-3659
 - メール: [sales@fairwinds.com][2]
 
 ### よくある質問

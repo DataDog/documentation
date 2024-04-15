@@ -1,6 +1,6 @@
 ---
 title: Database Monitoring Monitor
-kind: documentation
+
 ---
 
 
@@ -82,7 +82,7 @@ This monitor detects whether the number of waiting queries has exceeded a given 
 #### Build the monitoring query
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
-1. In the **Common monitor types** box, click **Waiting Queries**. 
+1. In the **Common monitor types** box, click **Waiting Queries**.
 
 #### Set the alert threshold
 
@@ -95,7 +95,7 @@ This monitor detects whether the number of waiting queries has exceeded a given 
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-Waiting queries on {{host.name}} have exceeded {{threshold}} 
+Waiting queries on {{host.name}} have exceeded {{threshold}}
 with a value of {{value}}.
 {{/is_alert}}
 
@@ -134,12 +134,12 @@ This monitor detects whether the number of long-running queries has exceeded a g
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-The number of queries with a duration of >30s has exceeded 
+The number of queries with a duration of >30s has exceeded
 {{threshold}} on {{host.name}} with a value of {{value}}.
 {{/is_alert}}
 
 {{#is_recovery}}
-The number of queries with a duration of >30s on {{host.name}}, 
+The number of queries with a duration of >30s on {{host.name}},
 which exceeded {{threshold}}, has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
@@ -170,7 +170,7 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
     - Change **Query Samples** to **Explain Plans**.
     - Change __*__ to **Explain Plan Cost (@db.plan.cost)**. Typing "cost" into the field populates the autocomplete options.
     - Change **(everything)** to **Host (host)**.
-1. Click the **∑** button and type **rollup** to populate the autocomplete suggestions. Choose **moving_rollup**. 
+1. Click the **∑** button and type **rollup** to populate the autocomplete suggestions. Choose **moving_rollup**.
 
 #### Build the second monitoring query
 
@@ -181,7 +181,7 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
 #### Set the alert threshold
 
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the typical cost variation from week to week.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the difference in explain-plan cost stays below `8000` on the chart, you might set **alert threshold** to `9000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3]. 
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the difference in explain-plan cost stays below `8000` on the chart, you might set **alert threshold** to `9000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 
 #### Configure notifications
@@ -189,7 +189,7 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-The daily average explain-plan cost on {{host.name}} has increased by at least {{threshold}} 
+The daily average explain-plan cost on {{host.name}} has increased by at least {{threshold}}
 versus one week ago, with a value of {{value}}.
 {{/is_alert}}
 

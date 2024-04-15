@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/tracing/troubleshooting/apm_rate_limits
-kind: Documentation
+
 title: Agent 率制限
 ---
 

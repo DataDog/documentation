@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Database Monitoring
-kind: documentation
+
 further_reading:
     - link: '/database_monitoring/'
       tag: 'Documentation'

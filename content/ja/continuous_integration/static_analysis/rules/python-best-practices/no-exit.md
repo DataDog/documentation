@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: exit() を使用しない
 ---
 ## メタデータ

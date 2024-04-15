@@ -1,8 +1,8 @@
 ---
 title: Synthetic Monitoring Guides
-kind: guide
+
 aliases:
-  - /synthetics/faq/uptime-check-internal-website/ 
+  - /synthetics/faq/uptime-check-internal-website/
 private: true
 disable_toc: true
 cascade:

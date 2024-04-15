@@ -44,7 +44,7 @@ integration_id: airflow
 integration_title: Airflow
 integration_version: 5.0.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: airflow
 public_title: Airflow
@@ -127,7 +127,7 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
    [scheduler]
    statsd_on = True
    # Hostname or IP of server running the Datadog Agent
-   statsd_host = localhost  
+   statsd_host = localhost
    # DogStatsD port configured in the Datadog Agent
    statsd_port = 8125
    statsd_prefix = airflow
@@ -254,13 +254,13 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
          - match: 'airflow\.ti\.start\.(.+)\.(\w+)'
            match_type: regex
            name: airflow.ti.start
-           tags: 
+           tags:
              dagid: "$1"
              taskid: "$2"
          - match: 'airflow\.ti\.finish\.(\w+)\.(.+)\.(\w+)'
            name: airflow.ti.finish
            match_type: regex
-           tags: 
+           tags:
              dagid: "$1"
              taskid: "$2"
              state: "$3"
@@ -375,7 +375,7 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
 
 **참고**: Airflow가 보고하는 StatsD 메트릭 존재 여부는 사용하는 Airflow Executor 종류에 따라 달라집니다. 예를 들어 `KubernetesExecutor`[5]의 경우 `airflow.ti_failures/successes`, `airflow.operator_failures/successes`, `airflow.dag.task.duration`이 보고되지 않습니다.
 
-**참고**: Airflow에 사용되는 환경 변수가 버전에 따라 다를 수 있습니다. 예를 들어 Airflow `2.0.0`에서는 환경 변수 `AIRFLOW__METRICS__STATSD_HOST`를 활용하지만 Airflow `1.10.15`에서는 `AIRFLOW__SCHEDULER__STATSD_HOST`를 사용합니다. 
+**참고**: Airflow에 사용되는 환경 변수가 버전에 따라 다를 수 있습니다. 예를 들어 Airflow `2.0.0`에서는 환경 변수 `AIRFLOW__METRICS__STATSD_HOST`를 활용하지만 Airflow `1.10.15`에서는 `AIRFLOW__SCHEDULER__STATSD_HOST`를 사용합니다.
 
 쿠버네티스 배포의 경우 다음 환경 변수를 사용해 Airflow StatsD 구성을 활성화할 수 있습니다.
   ```yaml
@@ -395,7 +395,7 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
 
 그러면 StatsD 트래픽이 수신 준비가 된 상태로 Airflow 컨테이너에서 Datadog 에이전트로 이동합니다. 마지막으로 실행할 단계는 Datadog 에이전트를 적합한 `dogstatsd_mapper_profiles`로 업데이트하는 것입니다. 그러려면 [호스트 설치][7]에 있는 `dogstatsd_mapper_profiles`를 복사해 `datadog.yaml` 파일에 붙여 넣으세요. 또는 환경 변수 `DD_DOGSTATSD_MAPPER_PROFILES`에서 동급의 JSON 구성을 사용해 Datadog 에이전트를 배포하세요. 쿠버네티스의 경우 동급 환경 변수 표기는 다음과 같습니다.
   ```yaml
-  env: 
+  env:
     - name: DD_DOGSTATSD_MAPPER_PROFILES
       value: >
         [{"prefix":"airflow.","name":"airflow","mappings":[{"name":"airflow.job.start","match":"airflow.*_start","tags":{"job_name":"$1"}},{"name":"airflow.job.end","match":"airflow.*_end","tags":{"job_name":"$1"}},{"name":"airflow.job.heartbeat.failure","match":"airflow.*_heartbeat_failure","tags":{"job_name":"$1"}},{"name":"airflow.operator_failures","match":"airflow.operator_failures_*","tags":{"operator_name":"$1"}},{"name":"airflow.operator_successes","match":"airflow.operator_successes_*","tags":{"operator_name":"$1"}},{"match_type":"regex","name":"airflow.dag_processing.last_runtime","match":"airflow\\.dag_processing\\.last_runtime\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dag_processing.last_run.seconds_ago","match":"airflow\\.dag_processing\\.last_run\\.seconds_ago\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dag.loading_duration","match":"airflow\\.dag\\.loading-duration\\.(.*)","tags":{"dag_file":"$1"}},{"name":"airflow.dagrun.first_task_scheduling_delay","match":"airflow.dagrun.*.first_task_scheduling_delay","tags":{"dag_id":"$1"}},{"name":"airflow.pool.open_slots","match":"airflow.pool.open_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.queued_slots","match":"airflow.pool.queued_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.running_slots","match":"airflow.pool.running_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.used_slots","match":"airflow.pool.used_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.starving_tasks","match":"airflow.pool.starving_tasks.*","tags":{"pool_name":"$1"}},{"match_type":"regex","name":"airflow.dagrun.dependency_check","match":"airflow\\.dagrun\\.dependency-check\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dag.task.duration","match":"airflow\\.dag\\.(.*)\\.([^.]*)\\.duration","tags":{"dag_id":"$1","task_id":"$2"}},{"match_type":"regex","name":"airflow.dag_processing.last_duration","match":"airflow\\.dag_processing\\.last_duration\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dagrun.duration.success","match":"airflow\\.dagrun\\.duration\\.success\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dagrun.duration.failed","match":"airflow\\.dagrun\\.duration\\.failed\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dagrun.schedule_delay","match":"airflow\\.dagrun\\.schedule_delay\\.(.*)","tags":{"dag_id":"$1"}},{"name":"airflow.scheduler.tasks.running","match":"airflow.scheduler.tasks.running"},{"name":"airflow.scheduler.tasks.starving","match":"airflow.scheduler.tasks.starving"},{"name":"airflow.sla_email_notification_failure","match":"airflow.sla_email_notification_failure"},{"match_type":"regex","name":"airflow.dag.task_removed","match":"airflow\\.task_removed_from_dag\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dag.task_restored","match":"airflow\\.task_restored_to_dag\\.(.*)","tags":{"dag_id":"$1"}},{"name":"airflow.task.instance_created","match":"airflow.task_instance_created-*","tags":{"task_class":"$1"}},{"name":"airflow.ti.start","match":"airflow.ti.start.*.*","tags":{"dag_id":"$1","task_id":"$2"}},{"name":"airflow.ti.finish","match":"airflow.ti.finish.*.*.*","tags":{"dag_id":"$1","state":"$3","task_id":"$2"}}]}]

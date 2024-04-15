@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Database Monitoring
-kind: documentation
+
 description: Troubleshoot Database Monitoring setup
 
 ---
@@ -41,8 +41,8 @@ telnet dbm-metrics-intake.datadoghq.com 443
 telnet dbquery-intake.datadoghq.com 443
 ```
 
-2. Test posting an empty payload with an invalid API key on both DBM endpoints. 
-These commands should fail with HTTP code `403: Forbidden`. 
+2. Test posting an empty payload with an invalid API key on both DBM endpoints.
+These commands should fail with HTTP code `403: Forbidden`.
 
 ```
 curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \

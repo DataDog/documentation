@@ -9,13 +9,13 @@ further_reading:
 - link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: Documentation
   text: 複数組織アカウントの管理
-kind: documentation
+
 title: コスト詳細
 ---
 
 {{< callout url="http://docs.datadoghq.com/help/">}}
   Estimated Cost Summary と Cost Chargebacks はベータ版です。アクセスをリクエストし、お客様の組織がサポートされていることを確認するには、アカウント担当者またはサポートにお問い合わせください。
-{{< /callout >}} 
+{{< /callout >}}
 
 ## 概要
 

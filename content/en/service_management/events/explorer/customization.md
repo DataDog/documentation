@@ -1,6 +1,6 @@
 ---
 title: Customization
-kind: Documentation
+
 ---
 
 Customize your Events Explorer to fit your visualization and analyzing needs.

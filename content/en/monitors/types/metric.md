@@ -1,6 +1,6 @@
 ---
 title: Metric Monitor
-kind: documentation
+
 description: "Compare values of a metric with a user defined threshold"
 aliases:
 - /monitors/monitor_types/metric

@@ -1,6 +1,6 @@
 ---
 title: Configure
-kind: Documentation
+
 disable_toc: false
 further_reading:
 - link: "/dashboards/"
@@ -27,7 +27,7 @@ From an individual dashboard, hover over the dashboard title to view and edit da
 Update Markdown-supported dashboard descriptions or associate [teams][1] with a dashboard:
 
 1. Hover the dashboard title. A dropdown panel opens.
-1. Click on the dashboard title or description to edit them. 
+1. Click on the dashboard title or description to edit them.
 1. Click the check button, to change the title.
 1. Select up to 5 teams from the **Teams** dropdown.
 1. (Optional) Add `[[suggested_dashboards]]` inside the dashboard description for a list of suggested dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other dashboards.

@@ -1,6 +1,6 @@
 ---
 title: NPM Google Cloud Supported Services
-kind: guide
+
 npm_provider: gcp
 further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'

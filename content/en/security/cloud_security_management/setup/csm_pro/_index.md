@@ -1,6 +1,6 @@
 ---
 title: Setting up CSM Pro
-kind: documentation
+
 further_reading:
   - link: "/security/cloud_security_management/setup"
     tag: "Documentation"

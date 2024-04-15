@@ -1,6 +1,6 @@
 ---
 title: Sending large volumes of metrics
-kind: documentation
+
 description: 'Optimizing DogStatsD for high throughput'
 further_reading:
     - link: 'developers/dogstatsd'
@@ -446,7 +446,7 @@ The number of bytes dropped by the DogStatsD client.
 : **Metric type**: count<br>
 The number of datagrams successfully sent to the Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Metric type**: count<br>
 The number of datagrams dropped by the DogStatsD client.
 
@@ -489,7 +489,7 @@ The number of bytes dropped by the DogStatsD client.
 : **Metric type**: count<br>
 The number of datagrams successfully sent to the Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Metric type**: count<br>
 The number of datagrams dropped by the DogStatsD client.
 
@@ -559,7 +559,7 @@ The number of datagrams dropped because the DogStatsD client queue was full.
 : **Metric type**: count<br>
 The number of datagrams dropped because of an error while writing to Datadog due to network timeout or error.
 
-`datadog.dogstatsd.client.metric_dropped_on_receive` 
+`datadog.dogstatsd.client.metric_dropped_on_receive`
 : **Metric type**: count<br>
 The number of metrics dropped because the internal receiving channel is full (when using `WithChannelMode()`). Starting
 with v3.6.0 of the Go client when `WithChannelMode()` is enabled.
@@ -618,7 +618,7 @@ The number of datagrams successfully sent to the Agent.
 : **Metric type**: count<br>
 The number of datagrams dropped by the DogStatsD client.
 
-`datadog.dogstatsd.client.packets_dropped_queue` 
+`datadog.dogstatsd.client.packets_dropped_queue`
 : **Metric type**: count<br>
 The number of datagrams dropped because the DogStatsD client queue was full.
 
@@ -679,7 +679,7 @@ The number of bytes dropped by the DogStatsD client.
 : **Metric type**: count<br>
 The number of datagrams successfully sent to the Agent.
 
-`datadog.dogstatsd.client.packets_dropped` 
+`datadog.dogstatsd.client.packets_dropped`
 : **Metric type**: count<br>
 The number of datagrams dropped by the DogStatsD client.
 

@@ -1,6 +1,6 @@
 ---
 title: Saved Views
-kind: documentation
+
 further_reading:
 - link: "/continuous_testing/explorer/search_syntax/"
   tag: "Documentation"
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Saved views allow you to save the state of the [Synthetic Monitoring & Continuous Testing Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [Synthetic Monitoring & Continuous Testing Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range.
 
 Saved views can keep track of your:
 
@@ -38,7 +38,7 @@ You can:
 
 ## Default views
 
-You can set a saved view to be your default landing page in the [Synthetic Monitoring & Continuous Testing Explorer][2]. Default views are set per user and have no impact on your organization. 
+You can set a saved view to be your default landing page in the [Synthetic Monitoring & Continuous Testing Explorer][2]. Default views are set per user and have no impact on your organization.
 
 {{< img src="continuous_testing/saved_view.png" alt="Saved Views in the Synthetic Monitoring & Continuous Testing Explorer" width="100%" >}}
 

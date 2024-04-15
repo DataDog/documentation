@@ -3,7 +3,7 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: ログの調査方法
-kind: documentation
+
 title: Datadog リソースによる Azure ログの送信
 ---
 
@@ -25,7 +25,7 @@ title: Datadog リソースによる Azure ログの送信
 
 アクティビティログを Datadog に送信するには、**Send subscription activity logs** を選択します。このオプションを有効にしない場合、アクティビティログは Datadog に送信されません。
 
-## Azure リソースログ 
+## Azure リソースログ
 
 [データプレーン][1]における Azure リソースの運用に関するインサイトを提供します。たとえば、Key Vault からシークレットを取得する、データベースへのリクエストを作成する、などはデータプレーンの運用です。リソースログのコンテンツは、Azure のサービスおよびリソースタイプにより異なります。
 

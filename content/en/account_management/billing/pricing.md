@@ -1,6 +1,6 @@
 ---
 title: Pricing
-kind: documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/pricing"
   tag: "Pricing"

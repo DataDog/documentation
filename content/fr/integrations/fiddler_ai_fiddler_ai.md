@@ -21,7 +21,7 @@ integration_id: fiddler-ai-license
 integration_title: Fiddler AI
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/fiddler-msa.pdf
 manifest_version: 2.0.0
@@ -83,19 +83,19 @@ tile:
 ## Présentation
 Fiddler est une entreprise pionnière dans la gestion des performances des modèles (MPM) pour une intelligence artificielle responsable. L'environnement unifié de la plateforme Fiddler offre un langage commun, des commandes centralisées et des informations actionnables permettant d'opérationnaliser le ML et l'IA en toute confiance. Les capacités de surveillance des modèles, d'explainable AI, d'analyse et d'équité répondent aux défis uniques que pose le développement de systèmes MLOps internes stables et sécurisés à grande échelle.
 
-Fiddler offre une intégration prête à l'emploi permettant aux métriques des modèles calculées par Fiddler d'être visibles dans Datadog. Les ingénieurs ML peuvent ainsi assurer la santé de leurs systèmes de ML sans basculer d'une application à l'autre en visualisant les métriques des modèles depuis Datadog. 
+Fiddler offre une intégration prête à l'emploi permettant aux métriques des modèles calculées par Fiddler d'être visibles dans Datadog. Les ingénieurs ML peuvent ainsi assurer la santé de leurs systèmes de ML sans basculer d'une application à l'autre en visualisant les métriques des modèles depuis Datadog.
 
-Lorsque des problèmes liés aux performances d'un modèle sont détectés dans Datadog, les techniciens ML peuvent accéder à Fiddler pour récupérer des informations approfondies sur le modèle et effectuer une analyse poussée de la cause fondamentale. Les ingénieurs ML peuvent tirer parti des alertes ainsi que des outils d'analyse pour identifier et résoudre les anomalies ayant un impact négatif sur les activités de l'entreprise et profiter de modèles hautement performants afin d'améliorer les résultats commerciaux. 
+Lorsque des problèmes liés aux performances d'un modèle sont détectés dans Datadog, les techniciens ML peuvent accéder à Fiddler pour récupérer des informations approfondies sur le modèle et effectuer une analyse poussée de la cause fondamentale. Les ingénieurs ML peuvent tirer parti des alertes ainsi que des outils d'analyse pour identifier et résoudre les anomalies ayant un impact négatif sur les activités de l'entreprise et profiter de modèles hautement performants afin d'améliorer les résultats commerciaux.
 
 Cette offre donne accès à la plateforme MPM de Fiddler et correspond à la [formule Lite](https://www.fiddler.ai/pricing) de Fiddler. Si une formule supérieure vous intéresse, merci de nous contacter. En outre, si vous êtes déjà client Fiddler et que vous avez besoin de connecter votre instance à Datadog, configurez l'[intégration Fiddler](/integrations/fiddler).
 
 ## Assistance
 
-Chez Fiddler, nous avons à cœur de vous aider à profiter de modèles hautement performants et à développer une IA responsable. Nous vous offrons les outils et les informations dont vous avez besoin pour mener à bien vos projets de ML. 
+Chez Fiddler, nous avons à cœur de vous aider à profiter de modèles hautement performants et à développer une IA responsable. Nous vous offrons les outils et les informations dont vous avez besoin pour mener à bien vos projets de ML.
 
 Vous trouverez ci-dessous des moyens d'obtenir de l'aide de la part de Fiddler :
 
-* Consultez la [documentation de Datadog](/integrations/fiddler/) pour découvrir comment configurer l'intégration Fiddler pour Datadog. 
+* Consultez la [documentation de Datadog](/integrations/fiddler/) pour découvrir comment configurer l'intégration Fiddler pour Datadog.
 * Explorez la [documentation produit de Fiddler](https://docs.fiddler.ai/docs) pour voir une présentation du produit, des guides d'utilisation et des instructions détaillées afin d'utiliser Fiddler.
 * Échangez avec d'autres experts dans les domaines du ML et de Fiddler dans la [communauté Slack de Fiddler](http://fiddler-community.slack.com).
 * Contactez l'[assistance Fiddler](https://fiddlerlabs.zendesk.com/hc/en-us) directement.

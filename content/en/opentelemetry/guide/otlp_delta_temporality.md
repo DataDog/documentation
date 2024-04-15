@@ -1,6 +1,6 @@
 ---
 title: Producing Delta Temporality Metrics with OpenTelemetry
-kind: guide
+
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The OpenTelemetry protocol (OTLP) sends [several metric types][1], some of which can have either *delta* or *cumulative* [aggregation temporality][2]. Datadog works best with delta aggregation temporality for monotonic sums, histograms, and exponential histograms. 
+The OpenTelemetry protocol (OTLP) sends [several metric types][1], some of which can have either *delta* or *cumulative* [aggregation temporality][2]. Datadog works best with delta aggregation temporality for monotonic sums, histograms, and exponential histograms.
 
 This guide describes the implications of using cumulative aggregation temporality instead, and how to select which aggregation temporality to export your metrics with, either in the OpenTelemetry SDK or by using the [OpenTelemetry Collector `cumulativetodelta` processor][3].
 
@@ -22,7 +22,7 @@ If you opt to send OTLP monotonic sums, histograms, or exponential histograms wi
 
 - Your deployment is stateful, so you need to send all points on a timeseries to the same Datadog Agent or Datadog exporter. This affects how you scale your OpenTelemetry Collector deployments.
 - Datadog might not send the first point it receives from a given timeseries if it cannot ensure this point is the true start of the timeseries. This may lead to missing points upon restarts.
-- The minimum and maximum cannot be recovered for cumulative OTLP Histograms; they may be missing or approximated depending on the histograms export mode. 
+- The minimum and maximum cannot be recovered for cumulative OTLP Histograms; they may be missing or approximated depending on the histograms export mode.
 
 ## Configuring your OpenTelemetry SDK
 
@@ -179,13 +179,13 @@ import io.opentelemetry.sdk.metrics.export.PeriodicMetricReader;
 
 public final class Main {
   public static void main(String[] args) throws InterruptedException {
-    OtlpHttpMetricExporter exporter = 
+    OtlpHttpMetricExporter exporter =
 		OtlpHttpMetricExporter.builder()
         .setAggregationTemporalitySelector(
 			AggregationTemporalitySelector.deltaPreferred())
         .build();
 
-    MetricReader reader = 
+    MetricReader reader =
 		PeriodicMetricReader.builder(exporter).build();
 
     MeterProvider provider = SdkMeterProvider.builder()
@@ -194,7 +194,7 @@ public final class Main {
 
     Meter meter = provider.get("my-meter");
 
-    LongCounter counter = 
+    LongCounter counter =
 		meter.counterBuilder("example.counter").build();
 
     for (int i = 0; i < 150; i++) {

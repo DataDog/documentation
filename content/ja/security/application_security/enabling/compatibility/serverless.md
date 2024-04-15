@@ -1,7 +1,7 @@
 ---
 code_lang: サーバーレス
 code_lang_weight: 90
-kind: documentation
+
 title: サーバーレス互換性要件
 type: multi-code-lang
 ---
@@ -25,17 +25,17 @@ Node.js
 : webpack や esbuild を使ってバンドルしている場合は、[特定のバンドラーの指示に従ってください][4]。
 
 Python
-: 
+:
 
 Java
 : 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用し、少なくとも 1024MB のメモリを搭載している必要があります。
 : Datadog Lambda レイヤーの `dd-trace-java:4` (またはそれ以前) と `Datadog-Extension:24` (またはそれ以前) を使用する場合、[Java Lambda 関数のインスツルメンテーションのアップグレード][3]の手順に従ってください。
 
 Go
-: 
+:
 
 .NET
-: 
+:
 
 ### ASM の機能
 以下の ASM 機能は、Lambda 関数ではサポートされていません。

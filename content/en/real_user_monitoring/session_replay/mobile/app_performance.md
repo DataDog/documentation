@@ -1,6 +1,6 @@
 ---
 title: How Mobile Session Replay Impacts App Performance
-kind: documentation
+
 description: Performance benchmarking for Mobile Session Replay.
 aliases:
 further_reading:

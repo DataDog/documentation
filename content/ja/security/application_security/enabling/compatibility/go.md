@@ -1,7 +1,7 @@
 ---
 code_lang: go
 code_lang_weight: 20
-kind: documentation
+
 title: Go 互換性要件
 type: multi-code-lang
 ---
@@ -25,10 +25,10 @@ Go でサポートされるすべての ASM 機能を得るためのトレーサ
 |タイプ | Threat Detection のサポート | OSS の脆弱性管理のサポート |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
+| Kubernetes    | {{< X >}}         | {{< X >}}                 |
 | AWS ECS       | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |  
+| AWS Lambda    | {{< X >}}         |                           |
 
 ## 言語とフレームワークの互換性
 

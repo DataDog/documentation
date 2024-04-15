@@ -14,7 +14,7 @@ further_reading:
 - link: /tracing/troubleshooting/agent_apm_metrics/
   tag: ドキュメント
   text: Datadog Agent によって送信された APM メトリクス
-kind: documentation
+
 title: APM トラブルシューティング
 ---
 
@@ -129,7 +129,7 @@ Datadog では、サービス名を変更することでインスツルメンテ
 
    Datadog Agent フレアにより Datadog Agent 内で起きていること (例えば、トレースが拒否または不正な形式にされているか) を確認できます。これはトレースが Datadog Agent に到達していない場合は役に立ちませんが、問題の原因やメトリクスの不一致を特定することはできます。
 
-    ログのレベルを `debug` または `trace` モードに調節する場合は、この操作によりログの量が劇的に増加し、システムリソースの消費量 (主に長期的なストレージスペースの増加) が見込まれることを考慮してください。Datadog は、この操作は一時的なトラブルシューティング目的のみで行い、完了後はレベルを `info` に戻すことを推奨します。 
+    ログのレベルを `debug` または `trace` モードに調節する場合は、この操作によりログの量が劇的に増加し、システムリソースの消費量 (主に長期的なストレージスペースの増加) が見込まれることを考慮してください。Datadog は、この操作は一時的なトラブルシューティング目的のみで行い、完了後はレベルを `info` に戻すことを推奨します。
 
     **注**: Datadog Agent v7.19+ および Datadog Helm チャートの[最新版][9]、または Datadog Agent とトレース Agent が別コンテナにある状況で DaemonSet をご利用の場合は、トレース Agent からフレアを取得するために `datadog.yaml` に `log_level: DEBUG` または `log_level: TRACE` を設定した状態で以下のコマンドを実行する必要があります。
 

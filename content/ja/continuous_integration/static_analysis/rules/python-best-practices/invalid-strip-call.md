@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: strip() 引数に重複文字を指定してはならない
 ---
 ## メタデータ

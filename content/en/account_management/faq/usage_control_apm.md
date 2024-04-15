@@ -1,6 +1,6 @@
 ---
 title: Estimate and Control APM Usage
-kind: documentation
+
 ---
 
 <div class="alert alert-danger">

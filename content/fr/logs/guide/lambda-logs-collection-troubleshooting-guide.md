@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Guide de dépannage pour la collecte de logs de la fonction Lambda
 ---
 
@@ -9,7 +9,7 @@ Si vous ne voyez aucun log transmis depuis une fonction Lambda du Forwarder Data
 
 1. Accédez à la [vue Live Tail du Log Explorer][2].
 2. Dans la barre de recherche, utilisez un filtre pour limiter la vue Live Tail aux logs provenant de votre fonction Lambda. Voici des requêtes de recherche courantes :
-    * Filtrage par source : la source est souvent définie sur `source:lambda`, `source:aws` ou `source:cloudwatch`, mais vous pouvez trouver d'autres sources possibles dans la fonction `parse_event_source` de la [fonction Lambda][3]. 
+    * Filtrage par source : la source est souvent définie sur `source:lambda`, `source:aws` ou `source:cloudwatch`, mais vous pouvez trouver d'autres sources possibles dans la fonction `parse_event_source` de la [fonction Lambda][3].
     * Filtrage par nom de forwarder : la fonction Lambda ajoute un tag `forwardername` à tous les logs qu'elle renvoie. Vous pouvez filtrer ce tag en recherchant `forwardername:*` ou `forwardername:<NOM_FONCTION_FORWARDER>`.
 3. Si vous voyez les logs dans la vue Live Tail mais pas dans le Log Explorer, cela signifie que certains [filtres d'exclusion][4] sont définis dans votre index de log. Ces derniers filtrent vos logs.
 4. Si vous ne voyez pas les logs dans la vue Live Tail, c'est qu'ils ne parviennent pas à Datadog.

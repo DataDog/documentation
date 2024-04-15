@@ -23,7 +23,7 @@ further_reading:
   tag: Blog
   text: Appliquer aux composants Datadog des mises à jour en temps réel grâce à la
     configuration à distance
-kind: documentation
+
 title: Configuration à distance
 ---
 
@@ -103,7 +103,7 @@ Datadog a mis en place les mécanismes suivants pour protéger la confidentialit
 
 ### Prérequis
 
-- L'Agent Datadog version `7.41.1` (`7.42.0` pour le taux d'échantillonnage APM, `7.43.0` pour l'instrumentation à distance APM) ou une version ultérieure doit être installé sur vos hosts ou conteneurs. 
+- L'Agent Datadog version `7.41.1` (`7.42.0` pour le taux d'échantillonnage APM, `7.43.0` pour l'instrumentation à distance APM) ou une version ultérieure doit être installé sur vos hosts ou conteneurs.
 - Pour les solutions Datadog reposant sur des bibliothèques de tracing, vous devez également mettre à niveau ces bibliothèques afin d'utiliser une version compatible avec la configuration à distance. Pour les fonctionnalités de protection et d'activation en un seul clic d'ASM, consultez les [exigences de compatibilité d'ASM][6]. Pour l'instrumentation dynamique, consultez les [prérequis de l'instrumentation Dynamique][20].
 
 ### Configuration
@@ -121,7 +121,7 @@ Pour activer la configuration à distance :
    {{<img src="agent/remote_config/RC_Key_updated.png" alt="Propriétés d'une clé d'API avec le bouton d'activation de la fonctionnalité de configuration à distance." width="90%" style="center">}}
 
 5. Mettez à jour le fichier de configuration de votre Agent :
-**Remarque** : cette étape est uniquement requise pour les versions 7.46.0 et antérieures de l'Agent. Depuis la version 7.47.0 de l'Agent, le paramètre `remote_configuration.enabled` est par défaut défini sur `true`. 
+**Remarque** : cette étape est uniquement requise pour les versions 7.46.0 et antérieures de l'Agent. Depuis la version 7.47.0 de l'Agent, le paramètre `remote_configuration.enabled` est par défaut défini sur `true`.
 
 {{< tabs >}}
 {{% tab "Fichier de configuration YAML" %}}
@@ -130,7 +130,7 @@ Ajoutez les lignes suivantes à votre fichier de configuration YAML, en spécifi
 api_key: xxx
 remote_configuration:
   enabled: true
-``` 
+```
 
 {{% /tab %}}
 {{% tab "Variable d'environnement" %}}
@@ -154,12 +154,12 @@ datadog:
 {{< /tabs >}}
 
 
-6. Redémarrez votre Agent pour que les modifications soient appliquées. 
+6. Redémarrez votre Agent pour que les modifications soient appliquées.
 
 Une fois ces étapes effectuées, votre Agent demande à récupérer ses configurations auprès de Datadog et les fonctionnalités qui utilisent la configuration à distance sont activées :
 - Les [règles CSM Threats par défaut de l'Agent][9] se mettent automatiquement à jour dès leur publication.
 - L'[instrumentation Datadog à distance][2] est activée.
-- Les [taux d'échantillonnage APM au niveau de l'Agent][10] sont appliqués.  
+- Les [taux d'échantillonnage APM au niveau de l'Agent][10] sont appliqués.
 - L'[instrumentation dynamique][11] est activée.
 - [L'activation en un clic d'ASM, le blocage des IP et les mises à jour des schémas d'attaque][12] sont activés.
 
@@ -167,7 +167,7 @@ Une fois ces étapes effectuées, votre Agent demande à récupérer ses configu
 
 ### Journal d'audit Datadog
 
-Utilisez le [journal d'audit Datadog][13] pour surveiller les accès à votre organisation et les événements associés à la configuration à distance. Le journal d'audit permet à vos administrateurs et à vos équipes de sécurité de surveiller les créations, les suppressions et les modifications de clés d'application et de clés d'API Datadog. Une fois le journal d'audit configuré, vous pourrez visualiser les événements liés aux fonctionnalités configurables à distance et savoir qui est à l'origine de chaque changement. Le journal d'audit vous permet de reconstituer des séquences d'événements et de surveiller de près l'utilisation de la fonctionnalité de configuration à distance. 
+Utilisez le [journal d'audit Datadog][13] pour surveiller les accès à votre organisation et les événements associés à la configuration à distance. Le journal d'audit permet à vos administrateurs et à vos équipes de sécurité de surveiller les créations, les suppressions et les modifications de clés d'application et de clés d'API Datadog. Une fois le journal d'audit configuré, vous pourrez visualiser les événements liés aux fonctionnalités configurables à distance et savoir qui est à l'origine de chaque changement. Le journal d'audit vous permet de reconstituer des séquences d'événements et de surveiller de près l'utilisation de la fonctionnalité de configuration à distance.
 
 ### Monitors
 
@@ -179,9 +179,9 @@ Suivez les consignes de dépannage suivantes en cas de problème avec la configu
 
 ### Redémarrer l'Agent
 
-Une fois la configuration de l'Agent mise à jour dans le fichier [`datadog.yaml`][16], redémarrez l'Agent pour appliquer cette modification. 
+Une fois la configuration de l'Agent mise à jour dans le fichier [`datadog.yaml`][16], redémarrez l'Agent pour appliquer cette modification.
 
-### Assurez-vous que les endpoints utilisés par la fonctionnalité de configuration à distance sont accessibles depuis votre environnement.   
+### Assurez-vous que les endpoints utilisés par la fonctionnalité de configuration à distance sont accessibles depuis votre environnement.
 
 Pour utiliser la configuration à distance, l'Agent et le worker des pipelines d'observabilité déployés dans votre environnement doivent communiquer avec les [endpoints][17] Datadog dédiés à la fonctionnalité. Assurez-vous que les requêtes HTTPS sortantes ont accès à ces endpoints depuis votre environnement. Si vous avez configuré un proxy entre Datadog et votre environnement, mettez à jour vos [paramètres de proxy][18] afin d'intégrer les endpoints de la configuration à distance.
 
@@ -201,11 +201,11 @@ Consultez l'[interface de configuration à distance][8] pour mieux comprendre le
 
   | Statut           | Rôle                                      |
   |------------------|--------------------------------------------------|
-  | CONNECTED      | L'Agent déployé dans votre environnement parvient à atteindre Datadog, ainsi qu'à s'authentifier et à obtenir les autorisations auprès de Datadog. Il s'agit du statut idéal pour vos Agents utilisant la configuration à distance.                                               |    
-  | ERROR          | L'Agent déployé dans votre environnement parvient à atteindre Datadog, mais n'arrive pas à s'authentifier ni à obtenir les autorisations auprès de Datadog pour les opérations de configuration à distance. Ce problème est probablement causé par le fait que l'Agent utilise une clé d'API sur laquelle la configuration à distance n'a pas été activée. Pour le corriger, activez la fonctionnalité de configuration à distance sur la clé d'API utilisée par l'Agent.                                                 | 
+  | CONNECTED      | L'Agent déployé dans votre environnement parvient à atteindre Datadog, ainsi qu'à s'authentifier et à obtenir les autorisations auprès de Datadog. Il s'agit du statut idéal pour vos Agents utilisant la configuration à distance.                                               |
+  | ERROR          | L'Agent déployé dans votre environnement parvient à atteindre Datadog, mais n'arrive pas à s'authentifier ni à obtenir les autorisations auprès de Datadog pour les opérations de configuration à distance. Ce problème est probablement causé par le fait que l'Agent utilise une clé d'API sur laquelle la configuration à distance n'a pas été activée. Pour le corriger, activez la fonctionnalité de configuration à distance sur la clé d'API utilisée par l'Agent.                                                 |
   | CONNECTION ERROR        |   Le paramètre `remote_config.enabled` est défini sur true dans le fichier de configuration `datadog.yaml` de l'Agent déployé dans votre environnement. Toutefois, l'Agent ne parvient pas à trouver le service de configuration à distance. Ce problème est probablement causé par le fait que l'Agent ne parvient pas à atteindre les [endpoints][17] de configuration à distance. Pour le corriger, autorisez l'accès HTTPS sortant aux endpoints de configuration à distance depuis votre environnement. Ce statut s'affiche uniquement lorsque vous utilisez une version `7.45.0` ou ultérieure de l'Agent.
-  | DISABLED       |   Le paramètre `remote_config.enabled` est défini sur false dans le fichier de configuration `datadog.yaml` de l'Agent déployé dans votre environnement. Définissez `remote_config.enabled` sur true pour activer la configuration à distance sur l'Agent. Ce statut s'affiche uniquement lorsque vous utilisez une version `7.45.0` ou ultérieure de l'Agent. | 
-  | NOT CONNECTED       | L'Agent est introuvable dans le service de configuration à distance. Le paramètre `remote_config.enabled` peut être défini sur true ou false dans son fichier de configuration `datadog.yaml`. Consultez la configuration de votre Agent local ou vos paramètres de proxy. Ce statut s'affiche uniquement lorsque vous utilisez une version de l'Agent ultérieure à la `7.41.1` mais inférieure à la `7.45.0`.            | 
+  | DISABLED       |   Le paramètre `remote_config.enabled` est défini sur false dans le fichier de configuration `datadog.yaml` de l'Agent déployé dans votre environnement. Définissez `remote_config.enabled` sur true pour activer la configuration à distance sur l'Agent. Ce statut s'affiche uniquement lorsque vous utilisez une version `7.45.0` ou ultérieure de l'Agent. |
+  | NOT CONNECTED       | L'Agent est introuvable dans le service de configuration à distance. Le paramètre `remote_config.enabled` peut être défini sur true ou false dans son fichier de configuration `datadog.yaml`. Consultez la configuration de votre Agent local ou vos paramètres de proxy. Ce statut s'affiche uniquement lorsque vous utilisez une version de l'Agent ultérieure à la `7.41.1` mais inférieure à la `7.45.0`.            |
   | UNSUPPORTED AGENT   | Vous utilisez une version de l'Agent qui n'est pas compatible avec la configuration à distance. Pour corriger ce problème, installez la dernière version disponible de l'Agent. |
 
 ## Désactiver la configuration à distance au niveau de l'Agent
@@ -225,7 +225,7 @@ Définissez le paramètre `remote_configuration.enabled` sur `false` au lieu de 
 ```yaml
 remote_configuration:
   enabled: false
-``` 
+```
 
 {{% /tab %}}
 {{% tab "Variable d'environnement" %}}

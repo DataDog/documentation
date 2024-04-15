@@ -1,6 +1,6 @@
 ---
 title: Understanding the RUM Event Hierarchy
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This guide walks through the different [types of data][1] that RUM collects and describes the hierarchy of each event type. 
+This guide walks through the different [types of data][1] that RUM collects and describes the hierarchy of each event type.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-session-hierarchy-overview.png" alt="Diagram of the RUM event hierarchy, displaying a single session containing multiple views." style="width:50%;">}}
 
@@ -28,13 +28,13 @@ To list all sessions from a specific user, select **Sessions** from the event ty
 Each session is automatically associated with a unique `session.id`.
 
 ## Views
-Within a session, a view event is created each time a user navigates to a page (Browser RUM) or to a screen or screen segment (Mobile RUM) of an application. 
+Within a session, a view event is created each time a user navigates to a page (Browser RUM) or to a screen or screen segment (Mobile RUM) of an application.
 
 Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the image below.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.png" alt="RUM views." style="width:80%;">}}
 
-Similarly to the `session.id`, each view automatically has a unique `view.id` connected to it. 
+Similarly to the `session.id`, each view automatically has a unique `view.id` connected to it.
 
 ### Actions, errors, resources, and long tasks
 
@@ -42,7 +42,7 @@ Within views, the SDK creates more granular events that all fall along the same 
 
 ### Actions
 
-Actions represent user activity on a page. In browsers, all click actions are automatically collected. On mobile, all taps, swipes, and scrolls are collected. Beyond these default actions, you can also send [custom actions][5], such as form completion and business transactions. 
+Actions represent user activity on a page. In browsers, all click actions are automatically collected. On mobile, all taps, swipes, and scrolls are collected. Beyond these default actions, you can also send [custom actions][5], such as form completion and business transactions.
 
 #### Sample search: Top list of actions leading to an error
 
@@ -63,7 +63,7 @@ This example displays a query that searches within the errors event to view all 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="Sample search of all crashes that occurred on a page." style="width:80%;">}}
 
 ### Resources
-Resources are collected from views and include external requests from your application to a network provider, things like XHR, JS loading, images, or fonts, for example. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view. 
+Resources are collected from views and include external requests from your application to a network provider, things like XHR, JS loading, images, or fonts, for example. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view.
 
 #### Sample search: A list of all images loaded on the `/cart` view filtered by image size
 
@@ -90,7 +90,7 @@ If you aren't seeing data after writing a query, confirm that the event selector
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-data-now-appears.png" alt="Example of updating a query by using the view and time frame selectors." style="width:80%;">}}
 
-### Querying an event type that is nested in a different event type 
+### Querying an event type that is nested in a different event type
 
 When querying for specific actions, you can use the parent event type, but not one at equal or lower level. For example, actions are nested underneath views, and actions and errors are at the same level in the hierarchical chain. This means you can query for all actions and errors that happened on a given page, but not for all actions that had a specific error type.
 

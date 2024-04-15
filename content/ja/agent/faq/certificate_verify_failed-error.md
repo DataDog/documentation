@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: CERTIFICATE_VERIFY_FAILED エラー
 ---
 

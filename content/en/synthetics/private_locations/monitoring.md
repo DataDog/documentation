@@ -1,6 +1,6 @@
 ---
 title: Private Location Monitoring
-kind: documentation
+
 description: Monitor your private locations
 further_reading:
 - link: "getting_started/synthetics/private_location"
@@ -20,9 +20,9 @@ With private locations, you have a set of out-of-the-box [metrics][1] to keep tr
 
 {{<img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location monitor list" style="width:100%;">}}
 
-In [**Synthetics Settings**][2], the **Private Locations** tab displays your private locations along with their reporting status and monitor status. 
+In [**Synthetics Settings**][2], the **Private Locations** tab displays your private locations along with their reporting status and monitor status.
 
-When you click on a private location, a panel containing **Health** and **Metadata** details appears. The table in the **Health** tab displays all reporting workers and the image version they are running. You can get a sense of how many workers you need to pull for the new image version. 
+When you click on a private location, a panel containing **Health** and **Metadata** details appears. The table in the **Health** tab displays all reporting workers and the image version they are running. You can get a sense of how many workers you need to pull for the new image version.
 
 In **Monitors**, you can see status warnings such as `ALERT` when something is going wrong with your private location. For example, the private location stops reporting, the private location becomes under-provisioned, or the private location worker runs an outdated image version.
 
@@ -44,7 +44,7 @@ Monitors in the **Monitors** tab either have a group that corresponds to your pr
 
 ## Monitor your private locations with the Datadog Agent
 
-In addition to the out-of-the-box private location metrics, Datadog recommends installing the [Datadog Agent][7] alongside your private location. 
+In addition to the out-of-the-box private location metrics, Datadog recommends installing the [Datadog Agent][7] alongside your private location.
 
 The [Datadog Agent][7] enables in-depth visibility of your private locations by providing health metrics for the underlying workers (such as memory usage, limits, CPU, and disk). You can create a graph using these metrics and set an alert for low resources.
 

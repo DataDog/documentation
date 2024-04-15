@@ -1,6 +1,6 @@
 ---
 title: Trace Queries Source Data
-kind: guide
+
 further_reading:
     - link: "/tracing/trace_explorer/trace_queries/"
       tag: "Documentation"
@@ -8,14 +8,14 @@ further_reading:
 ---
 
 ## Overview
- 
+
 With Trace Queries, you can find entire traces based on the properties of multiple spans and the relationships between those spans within the structure of the trace. To learn more, read the [Trace Queries documentation][1].
 
 {{< img src="tracing/trace_queries/trace_queries.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Queries UI" >}}
 
 ## How Trace Queries source data
 
-Datadog uses the [Intelligent Retention Filter][6] to index data for Trace Queries. It does so by performing: 
+Datadog uses the [Intelligent Retention Filter][6] to index data for Trace Queries. It does so by performing:
 
 - [Flat sampling](#1-flat-sampling): A uniform 1% sample of ingested spans.
 - [Diversity sampling](#diversity-sampling): A representative, diverse selection of traces to keep visibility over each environment, service, operation, and resource.

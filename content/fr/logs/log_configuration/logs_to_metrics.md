@@ -1,6 +1,6 @@
 ---
 title: Générer des métriques à partir de logs ingérés
-kind: documentation
+
 aliases:
   - /fr/logs/processing/logs_to_metrics/
   - /fr/logs/logs_to_metrics/
@@ -34,7 +34,7 @@ Vous pouvez également créer des métriques à partir d'une recherche Analytics
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Créer une métrique basée sur des logs"  style="width:80%;">}}
 
 1. **Saisissez une requête pour filtrer le flux de logs** : la syntaxe de la requête est la même que pour la [recherche du Log Explorer][6]. Seuls les logs ingérés avec un timestamp ne dépassant pas les 20 dernières minutes sont pris en compte lors de l'agrégation.
-2. **Sélectionnez le champ que vous souhaitez surveiller** : choisissez `*` pour obtenir le nombre total de logs qui correspondent à votre requête, ou saisissez un attribut de log (p. ex., `@network.bytes_written`) pour agréger une valeur numérique et créer sa métrique agrégée correspondante (`count`, `min`, `max`, `sum` et `avg`). Si la facette d'attribut de log est une [mesure][7], la valeur de la métrique correspond à la valeur de l'attribut de log. 
+2. **Sélectionnez le champ que vous souhaitez surveiller** : choisissez `*` pour obtenir le nombre total de logs qui correspondent à votre requête, ou saisissez un attribut de log (p. ex., `@network.bytes_written`) pour agréger une valeur numérique et créer sa métrique agrégée correspondante (`count`, `min`, `max`, `sum` et `avg`). Si la facette d'attribut de log est une [mesure][7], la valeur de la métrique correspond à la valeur de l'attribut de log.
 3. **Ajoutez des dimensions en fonction desquelles effectuer le regroupement avec `group by`** : par défaut, aucun tag n'est appliqué aux métriques générées à partir de logs, sauf si vous avez explicitement choisi d'en ajouter. Toute dimension d'attribut ou de tag présente dans vos logs (par exemple, `@network.bytes_written`, `env`) peut être utilisée pour créer des [tags][8] de métrique. Les noms des tags de métrique correspondent au nom de l'attribut ou du tag à leur origine, sans le caractère « @ ». Les métriques basées sur des logs sont considérées comme des [métriques custom][9]. Évitez d'effectuer des regroupements à partir d'attributs sans restriction ou présentant une cardinalité extrêmement élevée, tels que des timestamps, des ID utilisateur, des ID de requête ou des ID de session, pour éviter une hausse conséquente de vos coûts. Consultez la page relative à la [sécurité des logs][10] pour en savoir plus sur l'utilisation de cette fonctionnalité pour les clients soumis à la loi HIPAA.
 4. **Ajoutez des agrégations en centiles** : pour les métriques de distribution, vous pouvez générer les centiles p50, p75, p90, p95, et p99. Les métriques en centiles sont également considérées comme des métriques custom, et sont [facturées comme telles][11].
 5. **Donnez un nom à votre métrique** : les noms de métriques basées sur des logs doivent suivre la [convention de nommage des métriques][12].

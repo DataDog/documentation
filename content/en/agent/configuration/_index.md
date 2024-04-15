@@ -1,6 +1,6 @@
 ---
 title: Agent Configuration
-kind: documentation
+
 disable_toc: false
 aliases:
 - /agent/config

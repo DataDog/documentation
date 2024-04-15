@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Rotación de claves GPG en paquetes RPM
 ---
 

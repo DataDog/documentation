@@ -1,6 +1,6 @@
 ---
 title: Use Multiple Instances of the Mobile SDK
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -55,8 +55,8 @@ import DatadogLogs
 import DatadogTrace
 
 let core = Datadog.initialize(
-    with: configuration, 
-    trackingConsent: trackingConsent, 
+    with: configuration,
+    trackingConsent: trackingConsent,
     instanceName: "my-instance"
 )
 

@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Service Catalog
-kind: documentation
+
 further_reading:
     - link: '/service_catalog/'
       tag: 'Documentation'
@@ -29,19 +29,19 @@ This page walks you through getting started with Service Catalog in Datadog.
 
 ## Prerequisites
 
-If you have not already, create a [Datadog account][1]. 
+If you have not already, create a [Datadog account][1].
 
 ## Adding entries to Service Catalog
 
 ### Automatically detected services
 
-Service Catalog automatically discovers services based on application performance telemetries such as [APM][2], [USM][3], and [RUM][4]. The integration with APM enables Datadog to routinely discover new services at the same frequency as your traces are collected. With USM, the Datadog Agent connects to your eBPF-compatible hosts. USM automatically detects the services running on this infrastructure and tags them using [unified service tagging][5]. 
+Service Catalog automatically discovers services based on application performance telemetries such as [APM][2], [USM][3], and [RUM][4]. The integration with APM enables Datadog to routinely discover new services at the same frequency as your traces are collected. With USM, the Datadog Agent connects to your eBPF-compatible hosts. USM automatically detects the services running on this infrastructure and tags them using [unified service tagging][5].
 
 ### User-defined services
 
 If you are not using these products, you can manually declare services as entries in the `service.definition.yaml` registry. The definitions in this file include all the metadata that the catalog uses to file your services. These can be created and updated programmatically using an internal API or with a configuration management service like Terraform. You should include this file in your version control and regularly update it whenever new resources are added to your environment.
 
-The following example represents a `shopping-cart` service from an e-commerce application. It includes important metadata about the service, such as its owning team, languages used, runbook link, and code repository. 
+The following example represents a `shopping-cart` service from an e-commerce application. It includes important metadata about the service, such as its owning team, languages used, runbook link, and code repository.
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 schema-version: v2.2
@@ -108,41 +108,41 @@ extensions:
 
 You can also use any existing knowledge sources your organization maintains, such as Configuration Management Database (CMDB) tables (through [Datadog's ServiceNow integration][6]) and spreadsheets, to populate your Service Catalog. Datadog also has an [integration with Backstage][7] that allows you to import any data or services registered here into Datadog directly.
 
-Finally, you can also create entries from `service` tags in other Datadog products like Infrastructure Monitoring and Log Management. 
+Finally, you can also create entries from `service` tags in other Datadog products like Infrastructure Monitoring and Log Management.
 
 {{< img src="/getting_started/service_catalog/import_entries.jpeg" alt="Import Entries tab in the Service Catalog setup and configuration section" style="width:90%;" >}}
 
 ## Managing metadata in Service Catalog
 
-After you create these initial entries in your Service Catalog, it is important to keep the catalog updated consistently so that it remains effective. Service definition files should exist within your team's version control to make it easier to reference new deployments and other changes to the services where an update may be required. 
+After you create these initial entries in your Service Catalog, it is important to keep the catalog updated consistently so that it remains effective. Service definition files should exist within your team's version control to make it easier to reference new deployments and other changes to the services where an update may be required.
 
-You can also automate the management of your service metadata by configuring a [GitHub action][8]. This will also allow you to ensure that teams are declaring services in a way that meets your standards, such as requiring all of your production services to have valid runbook links. 
+You can also automate the management of your service metadata by configuring a [GitHub action][8]. This will also allow you to ensure that teams are declaring services in a way that meets your standards, such as requiring all of your production services to have valid runbook links.
 
-If your organization has an existing registry of ownership, including internal systems like [Backstage][9] or a spreadsheet, a central team can schedule updates to service definition files using [API calls][10]. 
+If your organization has an existing registry of ownership, including internal systems like [Backstage][9] or a spreadsheet, a central team can schedule updates to service definition files using [API calls][10].
 
 ### Connect telemetry from across your monitoring stack
 
 Connect monitoring data from the rest of your observability platform to improve the utility of your catalog.
 
-With [unified service tagging][5], you can use the `service` tag to cross-reference service entities in the Service Catalog across all Datadog products. These tags can help enrich your service entities with metadata, metrics, and other context sources like Infrastructure Monitoring, RUM, Log Management, Software Delivery, and Security. 
+With [unified service tagging][5], you can use the `service` tag to cross-reference service entities in the Service Catalog across all Datadog products. These tags can help enrich your service entities with metadata, metrics, and other context sources like Infrastructure Monitoring, RUM, Log Management, Software Delivery, and Security.
 
 Application performance telemetry from Universal Service Monitoring and APM also provide out-of-the-box dependency mapping for your system ecosystem, so you can see how components interact with each other in all your runtime environments.
 
 ## Enriching your Service Catalog
 
-After services are populated in the catalog, you can enrich your service definitions with additional context to make them more useful. This could include adding key pieces of service metadata to your `service.definition.yaml` files such as: 
+After services are populated in the catalog, you can enrich your service definitions with additional context to make them more useful. This could include adding key pieces of service metadata to your `service.definition.yaml` files such as:
 
 - Team
 - On-call engineer
-- Contact channel 
+- Contact channel
 - Documentation links
 - Last deployed version
-- Code repositories 
+- Code repositories
 - Runbook links
 - Library dependencies and their versions
 - Relevant dashboards
 
-Service Catalog uses service definition schemas to store and display this metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. There are currently [four supported schemas][11]: v2, v2.1, v2.2, and v3. 
+Service Catalog uses service definition schemas to store and display this metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. There are currently [four supported schemas][11]: v2, v2.1, v2.2, and v3.
 
 ## Using Service Catalog Scorecards
 
@@ -156,11 +156,11 @@ Service Catalog uses service definition schemas to store and display this metada
 
 Datadog Scorecards include 10 out-of-the-box rules across observability practices, ownership tagging, and production readiness checkpoints. You can also define your own custom rules. For example, you could create a scorecard that contains a set of rules that map to the steps in your security review process, so that you can quickly audit whether each of your services is compliant. These rules might include checks related to CVE analysis, RBAC configuration, or other security parameters.
 
-To add custom rules to your Scorecards dashboard: 
+To add custom rules to your Scorecards dashboard:
 
 1. Click **Create Rule** on the Scorecards page.
-2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team. 
-3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the [Scorecards API][13] `/scorecard/outcomes/batch` endpoint. 
+2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
+3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the [Scorecards API][13] `/scorecard/outcomes/batch` endpoint.
 4. View an overview of outcomes in the Scorecards dashboard.
 
 {{< img src="/getting_started/service_catalog/create_rule.jpeg" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}

@@ -1,6 +1,6 @@
 ---
 title: RUM iOS Data Collected
-kind: documentation
+
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The RUM iOS SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+The RUM iOS SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics.
 
 Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
@@ -211,7 +211,7 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.stack`    | string | The stack trace or complementary information about the error.                    |
 | `error.issue_id` | string | The stack trace or complementary information about the error.                    |
 
-### Network errors 
+### Network errors
 
 Network errors include information about failing HTTP requests. The following facets are also collected:
 

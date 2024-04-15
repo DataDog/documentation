@@ -14,13 +14,13 @@ further_reading:
   tag: ドキュメント
   text: エラー追跡モニターを作成する
 is_beta: true
-kind: documentation
+
 title: ログのエラー追跡
 ---
 
 {{< callout btn_hidden="true" >}}
   ログのエラー追跡はベータ版です。
-{{< /callout >}} 
+{{< /callout >}}
 
 ## 概要
 

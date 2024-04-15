@@ -1,6 +1,6 @@
 ---
 title: Connect Session Replay To Your Third-Party Tools
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/session_replay/browser/'
   tag: 'Documentation'
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Session Replay provides visual insights to complement user analytics data. If you are using third-party tools for customer experience, website analytics, and more, you can connect them to Session Replay. This guide walks you through how to access the Session Replay URL to use in integrations, live from the browser where the session is taking place. 
+Session Replay provides visual insights to complement user analytics data. If you are using third-party tools for customer experience, website analytics, and more, you can connect them to Session Replay. This guide walks you through how to access the Session Replay URL to use in integrations, live from the browser where the session is taking place.
 
 ## Use cases
 

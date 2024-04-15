@@ -1,6 +1,6 @@
 ---
 title: Facturation des intégrations Azure
-kind: documentation
+
 ---
 ## Présentation
 

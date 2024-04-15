@@ -33,7 +33,7 @@ integration_id: google-cloud-platform
 integration_title: Google Cloud Platform
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: google_cloud_platform
 public_title: Datadog-Google Cloud Platform Integration
@@ -167,7 +167,7 @@ Datadog의 Google Cloud 통합을 설정하여 Google Cloud 서비스에서 메�
    * Folder Admin
    * Organization Admin
 2. Google Cloud 콘솔에서, **IAM** 페이지로 이동합니다.
-3. 프로젝트, 폴더, 또는 조직을 선택합니다. 
+3. 프로젝트, 폴더, 또는 조직을 선택합니다.
 4. 아직 리소스에 대한 다른 역할이 없는 주 구성원에게 역할을 부여하려면  **Grant Access**를 클릭한 다음 앞서 만든 서비스 계정의 이메일을 입력합니다.
 5. 다음 역할을 할당합니다.
    * Compute Viewer
@@ -176,7 +176,7 @@ Datadog의 Google Cloud 통합을 설정하여 Google Cloud 서비스에서 메�
    **참고**: 브라우저 역할은 서비스 계정의 기본 프로젝트에만 필요합니다.
 6. **Save**를 클릭합니다.
 
-#### 설정 
+#### 설정
 
 선택적으로 특정 프로젝트의 드롭다운 메뉴 아래에 있는 **Limit Metric Collection** 텍스트 상자에 태그를 입력하여 Datadog으로 가져오는 GCE 인스턴스를 제한할 수 있습니다. 정의된 태그 중 하나와 일치하는 호스트만 Datadog으로 가져옵니다. 와일드카드(단일 문자의 경우`?`, 다중 문자의 경우 `*`)를 사용하여 여러 호스트를 일치시키거나 를 사용하여 특정 호스트를 제외할 수 있습니다. 이 예에는 `c1*` 크기의 모든 인스턴스가 포함되지만 스테이징 호스트는 제외됩니다.
 
@@ -272,7 +272,7 @@ Dataflow 파이프라인 작업자의 기본 동작은 프로젝트의 모든 �
 2. 작업 이름을 지정하고 Dataflow 리저널 엔드포인트를 선택합니다.
 3. **Dataflow template** 드롭다운에서 `Pub/Sub to Datadog`을 선택하면 **Required parameters** 섹션이 나타납니다.
    a. **Pub/Sub input subscription** 드롭다운에서 인풋 서브스크립션을 선택합니다.
-   b. **Datadog Logs API URL** 필드에 다읍을 입력합니다:  
+   b. **Datadog Logs API URL** 필드에 다읍을 입력합니다:
 
    ```shell
    https://{{< region-param key="http_endpoint" code="true" >}}
@@ -283,15 +283,15 @@ Dataflow 파이프라인 작업자의 기본 동작은 프로젝트의 모든 �
    c. **Output deadletter Pub/Sub topic** 드롭다운에서 메시지 오류를 수신하기 위해 생성된 주제를 선택합니다.
    d. **Temporary location** 필드에 저장소 버킷의 임시 파일 경로를 지정합니다.
 
-{{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Datadog Dataflow 템플릿의 필수 파라미터" style="width:80%;">}}  
+{{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Datadog Dataflow 템플릿의 필수 파라미터" style="width:80%;">}}
 
 4. [1단계](#1-create-a-cloud-pubsub-topic-and-subscription)에서 언급한 대로 Datadog API 키 값을 사용하여 Secret Manager에서 비밀을 생성한 경우 **Google Cloud Secret Manager ID** 필드에서 해당 비밀의 **리소스 이름**을 입력하세요.
 
-{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Datadog Dataflow 템플릿의 선택적 파라미터(Google Cloud Secret Manager ID 및 전달된 API 키의 소스 필드가 모두 강조 표시됨)." style="width:80%;">}}  
+{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Datadog Dataflow 템플릿의 선택적 파라미터(Google Cloud Secret Manager ID 및 전달된 API 키의 소스 필드가 모두 강조 표시됨)." style="width:80%;">}}
 
 사용 가능한 다른 옵션 사용에 대한 자세한 내용은 Dataflow 템플릿의 [템플릿 파라미터][57]를 참조하세요.
 
-   - `apiKeyKMSEncryptionKey`와 함께 `apiKeySource=KMS`를  [Cloud KMS][73] 키 ID로 설정하고 `apiKey`를 암호화된 API 키로 설정 
+   - `apiKeyKMSEncryptionKey`와 함께 `apiKeySource=KMS`를  [Cloud KMS][73] 키 ID로 설정하고 `apiKey`를 암호화된 API 키로 설정
    - **권장하지 않음**: `apiKey`와 `apiKeySource=PLAINTEXT`가 플레인 텍스트 API 키로 설정된 경우
 
 5. 커스텀 작업자 서비스 계정을 만든 경우 **Service account email** 드롭다운에서 해당 계정을 선택합니다.

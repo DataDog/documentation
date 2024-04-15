@@ -1,6 +1,6 @@
 ---
 title: Status Remapper
-kind: Documentation
+
 
 ---
 
@@ -24,6 +24,6 @@ Each incoming status value is mapped as follows:
 
 **Note**: If multiple event status remapper processors are applied to a given event within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
-Example status remapper 
+Example status remapper
 
 {{< img src="logs/log_configuration/processor/severity_remapper.png" alt="Log severity remapping" style="width:60%;" >}}

@@ -1,6 +1,6 @@
 ---
 title: Cloud SIEM
-kind: documentation
+
 aliases:
   - /security_monitoring/
   - /security_platform/cloud_siem/security_home/

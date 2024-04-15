@@ -10,7 +10,7 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explorer la solution RUM de Datadog
-kind: documentation
+
 title: Configuration avancée de RUM pour Android
 type: multi-code-lang
 ---
@@ -60,7 +60,7 @@ En plus des attributs RUM par défaut, vous pouvez tirer profit de l'API `addTim
    ```kotlin
       fun onHeroImageLoaded() {
             GlobalRumMonitor.get().addTiming("hero_image")
-      } 
+      }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -83,7 +83,7 @@ Remarque : le type d'action doit correspondre à « custom », « click »,
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       fun onUserInteraction() { 
+       fun onUserInteraction() {
             GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
        }
    ```
@@ -147,7 +147,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 
 En plus du [suivi automatique des ressources][6], vous pouvez effectuer le suivi de ressources personnalisées spécifiques (comme les requêtes réseau et l'API de fournisseur tiers) avec des méthodes (telles que `GET` et `POST`), et charger la ressource avec `RumMonitor#startResource`. Arrêtez le suivi avec `RumMonitor#stopResource` une fois le chargement terminé ou avec `RumMonitor#stopResourceWithError` si une erreur survient lors du chargement de la ressource.
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
        fun loadResource() {
@@ -157,7 +157,7 @@ En plus du [suivi automatique des ressources][6], vous pouvez effectuer le suivi
               GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
             } catch (e: Exception) {
               GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
-            } 
+            }
        }
    ```
 {{% /tab %}}
@@ -230,36 +230,36 @@ Le suivi des widgets n'est pas effectué automatiquement avec le SDK. Pour envoy
 
 Les méthodes suivantes peuvent être utilisées dans `Configuration.Builder` lors de la création de la configuration Datadog pour initialiser la bibliothèque :
 
-`setFirstPartyHosts()` 
+`setFirstPartyHosts()`
 : Définit les hosts pour lesquels le tracing est activé et dont les ressources RUM sont considérées comme `first-party`. **Remarque** : si vous définissez des types d'en-têtes de tracing personnalisés dans la configuration Datadog, et que vous utilisez un traceur enregistré avec `GlobalTracer`, vérifiez que ces types d'en-têtes de tracing sont également définis pour le traceur utilisé.
 
-`useSite(DatadogSite)` 
+`useSite(DatadogSite)`
 : Envoie les données cibles vers les sites EU1, US1, US3, US5, US1_FED et AP1.
 
 Les méthodes suivantes peuvent être utilisées dans `RumConfiguration.Builder` lors de la création de la configuration RUM pour activer la fonctionnalité RUM :
 
-`trackUserInteractions(Array<ViewAttributesProvider>)` 
+`trackUserInteractions(Array<ViewAttributesProvider>)`
 : Permet d'effectuer le suivi d'interactions utilisateur (appui sur l'écran, défilement ou balayage). Ce paramètre vous permet aussi d'ajouter des attributs personnalisés aux événements d'action RUM en fonction du widget avec lequel l'utilisateur a interagi.
 
-`useViewTrackingStrategy(strategy)` 
+`useViewTrackingStrategy(strategy)`
 : Définit la stratégie de suivi des vues utilisée. En fonction de l'architecture de votre application, vous pouvez choisir l'une des implémentations de [`ViewTrackingStrategy`][4] ou implémenter votre propre stratégie.
 
-`trackLongTasks(durationThreshold)` 
+`trackLongTasks(durationThreshold)`
 : Permet d'effectuer le suivi des tâches qui durent plus de `durationThreshold` sur le thread principal en tant que tâches longues dans Datadog.
 
-`setBatchSize([SMALL|MEDIUM|LARGE])` 
+`setBatchSize([SMALL|MEDIUM|LARGE])`
 : Définit la taille des lots individuels pour les requêtes envoyées à Datadog.
 
-`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
+`setUploadFrequency([FREQUENT|AVERAGE|RARE])`
 : Définit la fréquence des requêtes effectuées vers les endpoints Datadog (si des requêtes sont disponibles).
 
-`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
+`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])`
 : Définit la fréquence souhaitée pour la collecte des signaux mobiles.
 
-`setSessionSampleRate(<sampleRate>)` 
+`setSessionSampleRate(<sampleRate>)`
 : Définit le taux d'échantillonnage des sessions RUM. La valeur 0 signifie qu'aucun événement RUM n'est envoyé, tandis que la valeur 100 signifie que toutes les sessions sont conservées.
 
-`setXxxEventMapper()` 
+`setXxxEventMapper()`
 : Définit les rappels de nettoyage de données pour les vues, actions, ressources et erreurs.
 
 
@@ -273,7 +273,7 @@ Pour effectuer un suivi automatique de vos vues (comme les activités et les fra
 `FragmentViewTrackingStrategy`
 : Chaque fragment dans votre application est considéré comme une vue distincte.
 
-`MixedViewTrackingStrategy` 
+`MixedViewTrackingStrategy`
 : Chaque activité ou fragment dans votre application est considéré comme une vue distincte.
 
 `NavigationViewTrackingStrategy`
@@ -317,7 +317,7 @@ Pour la stratégie `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy
                 override fun getViewName(component: Activity): String? = null
             })
         )
-        .build()  
+        .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}

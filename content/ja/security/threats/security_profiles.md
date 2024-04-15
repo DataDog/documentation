@@ -8,7 +8,7 @@ further_reading:
 - link: /security/threats/workload_security_rules
   tag: ドキュメント
   text: CSM Threats 検出ルールの管理
-kind: documentation
+
 title: Workload Security Profiles
 ---
 

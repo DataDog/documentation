@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Serverless Monitoring for AWS Step Functions
-kind: documentation
+
 ---
 
 ## I cannot see any traces
@@ -15,7 +15,7 @@ kind: documentation
 - Enable `DEBUG` logs on the Datadog Lambda Forwarder by setting the environment variable `DD_LOG_LEVEL` to `debug`.
 
 ### Verify that logs are searchable on Live Search and have DD_TRACE_ENABLED tag
-In Datadog, go to [**Logs > Live Tail**][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times. If you need to upgrade Datadog Lambda Forwarder from an older version, check that after the upgrade, the Forwarder has the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag set to `true`. If the upgraded Forwarder does not have the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag, your Forwarder may not be upgraded correctly. 
+In Datadog, go to [**Logs > Live Tail**][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times. If you need to upgrade Datadog Lambda Forwarder from an older version, check that after the upgrade, the Forwarder has the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag set to `true`. If the upgraded Forwarder does not have the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag, your Forwarder may not be upgraded correctly.
 
 If the Forwarder and state machine tags are set up correctly with the previous steps, the logs are tagged with `DD_TRACE_EANBLED:true`.
 
@@ -45,7 +45,7 @@ Please enable the `Include execution data` option on the state machine's logging
 
 ## Customized way to deploy Datadog Lambda Forwarder
 If you are using your customized way to deploy Datadog Lambda Forwarder, here are some tips that can help you debug enabling Step Functions tracing:
-- On the forwarder, set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`. 
+- On the forwarder, set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`.
 - To enable Step Functions trace generation on the Datadog backend, the Datadog-Forwarder layer version must be greater than 31. This version is able to fetch state machine tags, including the required `DD_TRACE_ENABLED` tag.
 - The IAM role for the forwarder should have `tags:getResources` permission.
 - Set up a subscription filter on your state machine CloudWatch log group to the Datadog forwarder.

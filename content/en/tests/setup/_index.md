@@ -1,6 +1,6 @@
 ---
 title: Configure Test Visibility
-kind: documentation
+
 type: multi-code-lang
 aliases:
 - /continuous_integration/tests/setup/

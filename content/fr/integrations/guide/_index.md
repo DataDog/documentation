@@ -5,14 +5,14 @@ cascade:
     rank: 20
     subcategory: Guides sur les intégrations
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides sur les intégrations
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}
     {{< nextlink href="integrations/guide/requests" tag=" documentation" >}}Demander des intégrations Datadog{{< /nextlink >}}
-    {{< nextlink href="/integrations/guide/reference-tables/" tag=" Documentation" >}}Ajouter des métadonnées personnalisées grâce aux tables de référence{{< /nextlink >}}   
+    {{< nextlink href="/integrations/guide/reference-tables/" tag=" Documentation" >}}Ajouter des métadonnées personnalisées grâce aux tables de référence{{< /nextlink >}}
     {{< nextlink href="integrations/guide/source-code-integration" tag=" Documentation" >}}Intégration du code source de Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-metric-delay" tag=" cloud" >}}Délai de réception des métriques cloud{{< /nextlink >}}
     {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag=" Windows" >}}Ajouter des fichiers de logs d'événements à la classe WMI `Win32_NTLogEvent`{{< /nextlink >}}
@@ -25,7 +25,7 @@ title: Guides sur les intégrations
     {{< nextlink href="integrations/guide/hcp-consul" tag=" Consul" >}}Surveillance de HCP Consul avec Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag=" kafka" >}}Échec de la récupération du stub RMIServer par l'Agent{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag=" network" >}}Envoyer des métriques de host TCP/UDP à l'API Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}OID compatibles et couramment utilisés pour SNMP{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}OID compatibles et couramment utilisés pour SNMP{{< /nextlink >}}
     {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}Gestion des versions pour les intégrations basées sur OpenMetrics{{< /nextlink >}} {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Configuration manuelle de Pivotal Cloud Foundry{{< /nextlink >}} {{< /whatsnext >}}
 
 {{< whatsnext desc="Guides AWS :" >}}

@@ -1,6 +1,6 @@
 ---
 title: Comparer la latence d'un service avec celle de la semaine précédente
-kind: guide
+
 further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: "3\_minutes"

@@ -15,7 +15,7 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: メトリクスの可能性を最大限に引き出すインタラクティブなセッションに参加できます
-kind: documentation
+
 title: Metrics without Limits™
 ---
 
@@ -59,7 +59,7 @@ Agent やコードレベルの変更を必要とせず、いつでも集計の�
 タグと集計を構成することで、どのカスタムメトリクスをクエリできるかを制御でき、最終的にカスタムメトリクスの請求対象数を減らすことができます。Metrics without Limits™ は、インジェストコストとインデキシングコストを分離します。Datadog に全てのデータを送り続けることができ (全てインジェストされます)、Datadog プラットフォームでクエリ可能にするタグの許可リストを指定することができます。Datadog が構成したメトリクスにインジェストするデータ量と、インデックスを作成した残りのデータ量が異なる場合、Usage ページや Metrics Summary ページに 2 つの異なるボリュームが表示されることがあります。
 
 - **Ingested Custom Metrics**: 取り込まれたすべてのタグに基づくカスタムメトリクスの元々の量。
-- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without Limits™ のコンフィギュレーションに基づく) 
+- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without Limits™ のコンフィギュレーションに基づく)
 
 **注: 構成されたメトリクスのみが、Ingested custom metrics ボリュームに寄与します。**Metrics without Limits™ でメトリクスが構成されていない場合、そのインデックスされたカスタムメトリクスボリュームに対してのみ課金されます。
 

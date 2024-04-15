@@ -1,6 +1,6 @@
 ---
 title: Metrics Explorer
-kind: documentation
+
 description: "Explore all of your metrics and perform analytics."
 aliases:
   - /graphing/metrics/explorer/
@@ -11,7 +11,7 @@ further_reading:
   - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
-    
+
 ---
 
 ## Overview
@@ -47,7 +47,7 @@ The possible options are:
 
 ### Functions and formulas
 
-You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation. 
+You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation.
 
 ### Export
 

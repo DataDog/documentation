@@ -1,6 +1,6 @@
 ---
 title: Ruby on Rails Log Collection
-kind: documentation
+
 aliases:
   - /logs/languages/ruby
 further_reading:
@@ -21,7 +21,7 @@ further_reading:
   text: "How to manage log files using logrotate"
 - link: "/glossary/#tail"
   tag: Glossary
-  text: 'Glossary entry for "tail"'  
+  text: 'Glossary entry for "tail"'
 ---
 
 ## Overview
@@ -147,7 +147,7 @@ end
 
 Once [log collection is enabled][3], do the following to set up [custom log collection][4] to tail your log files and send them to Datadog.
 
-1. Create a `ruby.d/` folder in the `conf.d/` [Agent configuration directory][5]. 
+1. Create a `ruby.d/` folder in the `conf.d/` [Agent configuration directory][5].
 2. Create a `conf.yaml` file in `ruby.d/` with the following content:
     ```yaml
       logs:

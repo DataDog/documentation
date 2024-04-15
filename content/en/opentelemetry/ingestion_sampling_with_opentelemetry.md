@@ -1,6 +1,6 @@
 ---
 title: Ingestion Sampling with OpenTelemetry
-kind: documentation
+
 aliases:
   - /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 further_reading:
@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-If your applications and services are instrumented with OpenTelemetry libraries, you can: 
+If your applications and services are instrumented with OpenTelemetry libraries, you can:
 - Send traces to the **[OpenTelemetry Collector][1]**, and use the Datadog exporter to forward them to Datadog.
 - Send traces to the **[Datadog Agent OTLP ingest][3]**, which forwards them to Datadog.
 
@@ -31,16 +31,16 @@ Both APM metrics and distributed traces are useful for you to monitor your appli
 
 ### Why sampling is useful
 
-The Datadog tracing libraries, the Datadog Agent, the OpenTelemetry SDKs, and the OpenTelemetry Collector all provide sampling capabilities because for most services, ingesting 100% of the traces is unnecessary in order to gain visibility into the health of your applications. 
+The Datadog tracing libraries, the Datadog Agent, the OpenTelemetry SDKs, and the OpenTelemetry Collector all provide sampling capabilities because for most services, ingesting 100% of the traces is unnecessary in order to gain visibility into the health of your applications.
 
-Configuring sampling rates before sending traces to Datadog allows you to: 
+Configuring sampling rates before sending traces to Datadog allows you to:
 - Ingest the data that is most relevant to your business and your observability goals.
 - Reduce network costs by avoiding sending unused trace data to the Datadog platform.
 - Control and manage your overall costs.
 
 ## Reducing your ingestion volume
 
-With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry collector: 
+With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry collector:
 - **Head-based Sampling** in the OpenTelemetry SDKs
 - **Tail-based Sampling** in the OpenTelemetry Collector
 
@@ -88,7 +88,7 @@ In the above example, 50% of traces are captured.
 
 **Note**: Probabilistic sampler properties ensure that only complete traces are ingested, assuming you use the same sampling percentage across all Agents.
 
-The probabilistic sampler ignores spans for which the sampling priority is already set at the SDK level. Additionally, spans not caught by the probabilistic sampler might still be captured by the Datadog Agent's [error and rare samplers][12], ensuring a higher representation of errors and rare endpoint traces in the ingested dataset. 
+The probabilistic sampler ignores spans for which the sampling priority is already set at the SDK level. Additionally, spans not caught by the probabilistic sampler might still be captured by the Datadog Agent's [error and rare samplers][12], ensuring a higher representation of errors and rare endpoint traces in the ingested dataset.
 
 ## Monitor ingested volumes from Datadog UI
 

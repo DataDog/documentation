@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/graphing/functions/arithmetic/
-kind: documentation
+
 title: 算術演算
 ---
 
@@ -11,7 +11,7 @@ title: 算術演算
 | :----    | :-------                                | :---------              |
 | `abs()`  | メトリクスの絶対値をグラフ化します。 | `abs(<METRIC_NAME>{*})` |
 
-変換するのは、この正弦波時系列 `sin{*}` です。 
+変換するのは、この正弦波時系列 `sin{*}` です。
 
 {{< img src="dashboards/functions/arithmetic/sinus.png" alt="Sinus 関数" style="width:80%;">}}
 

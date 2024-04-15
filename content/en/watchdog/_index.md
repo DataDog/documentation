@@ -1,6 +1,6 @@
 ---
 title: Datadog Watchdog™
-kind: Documentation
+
 description: Automatically detect potential application and infrastructure issues
 aliases:
   - /tracing/watchdog
@@ -34,7 +34,7 @@ cascade:
 ---
 ## Overview
 
-Watchdog is Datadog's AI engine, providing you with automated alerts, insights, and root cause analyses that draw from observability data across the entire Datadog platform. Watchdog continuously monitors your infrastructure and calls attention to the signals that matter most, helping you to detect, troubleshoot, and resolve issues. 
+Watchdog is Datadog's AI engine, providing you with automated alerts, insights, and root cause analyses that draw from observability data across the entire Datadog platform. Watchdog continuously monitors your infrastructure and calls attention to the signals that matter most, helping you to detect, troubleshoot, and resolve issues.
 
 All Watchdog features come built-in, and do not require setup.
 

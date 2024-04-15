@@ -1,6 +1,6 @@
 ---
 title: Enhanced metrics for AWS Step Functions
-kind: documentation
+
 ---
 
 Datadog generates enhanced metrics for AWS Step Functions, similarly to [enhanced metrics for AWS Lambda][1]. Enhanced Step Functions metrics are distinguished by being in the `aws.states.enhanced.*` namespace.

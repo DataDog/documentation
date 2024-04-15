@@ -1,6 +1,6 @@
 ---
 title: Custom Instrumentation
-kind: documentation
+
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
@@ -58,7 +58,7 @@ Datadog tracing libraries provide an implementation of the OpenTelemetry API for
 
 {{% tab "OpenTracing" %}}
 
-If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
+If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported.
 
 {{< partial name="apm/apm-opentracing-custom.html" >}}
 

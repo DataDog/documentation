@@ -6,7 +6,7 @@ further_reading:
 - link: /tracing/service_catalog/
   tag: Documentation
   text: Service Catalog
-kind: documentation
+
 title: Configurer Data Streams Monitoring pour Java
 ---
 

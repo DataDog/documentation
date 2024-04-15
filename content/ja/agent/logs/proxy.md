@@ -9,7 +9,7 @@ further_reading:
 - link: /tracing/
   tag: ドキュメント
   text: トレースの収集
-kind: documentation
+
 title: TCP Agent のログ用プロキシ
 ---
 
@@ -212,7 +212,7 @@ backend datadog-logs
 次のコマンドで証明書をダウンロードしてください:
 
 * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-* `yum install ca-certificates` (CentOS、Redhat) 
+* `yum install ca-certificates` (CentOS、Redhat)
 
 成功した場合、CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にあります。
 

@@ -11,7 +11,7 @@ further_reading:
   tag: 外部サイト
   text: JetBrains Toolbox について説明します。
 is_beta: true
-kind: documentation
+
 title: IntelliJ プラットフォーム用 Datadog プラグイン
 ---
 

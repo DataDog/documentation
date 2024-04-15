@@ -1,6 +1,6 @@
 ---
 title: Cluster Agent for Kubernetes
-kind: documentation
+
 aliases:
 - /agent/kubernetes/cluster/
 - /agent/cluster_agent/

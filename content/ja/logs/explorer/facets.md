@@ -15,7 +15,7 @@ further_reading:
 - link: logs/explorer/saved_views
   tag: ドキュメント
   text: ログエクスプローラーの自動構成
-kind: documentation
+
 title: ログファセット
 ---
 

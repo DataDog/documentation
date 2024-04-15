@@ -2,7 +2,7 @@
 cascade:
 - private: true
 disable_sidebar: true
-kind: faq
+
 title: 컨테이너 FAQ
 ---
 

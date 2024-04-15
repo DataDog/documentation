@@ -8,7 +8,7 @@ further_reading:
 - link: tracing/trace_explorer/search
   tag: Documentation
   text: Rechercher des spans
-kind: documentation
+
 title: Trace Explorer
 ---
 
@@ -129,7 +129,7 @@ Toutes les spans indexées par des filtres de rétention personnalisés *et* le 
 
 Toutes les spans indexées par des filtres de rétention personnalisés ou par le filtre de rétention intelligent peuvent être recherchées via l'analyse de traces.
 
-Lorsque la vue sous forme de Série temporelle est activée, exportez votre requête vers un [dashboard][1], un [monitor][2] ou un [notebook][3] pour effectuer une analyse plus poussée ou pour recevoir automatiquement une alerte lorsqu'un nombre agrégé de spans dépasse un certain seuil. 
+Lorsque la vue sous forme de Série temporelle est activée, exportez votre requête vers un [dashboard][1], un [monitor][2] ou un [notebook][3] pour effectuer une analyse plus poussée ou pour recevoir automatiquement une alerte lorsqu'un nombre agrégé de spans dépasse un certain seuil.
 
 **Remarque** : les spans indexées par le filtre de rétention intelligent sont exclues des requêtes APM qui apparaissent dans les dashboards et les notebooks, ainsi que des évaluations de monitor d'analyse de traces. Pour en savoir plus, consultez la section [Rétention des traces][4].
 

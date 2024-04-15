@@ -20,7 +20,7 @@ integration_id: komodor
 integration_title: Komodor Automation
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: Komodor Terms of use.pdf
 manifest_version: 2.0.0
@@ -78,7 +78,7 @@ tile:
 
 Komodor vous permet de surveiller les modifications effectuées sur l'ensemble de votre pile Kubernetes, d'analyser leurs répercussions et d'obtenir le contexte dont vous avez besoin pour résoudre les problèmes de manière efficace et autonome. Ce service vous offre la possibilité de visualiser l'historique de vos déploiements Kubernetes avec des informations utiles comme les modifications effectuées, le code déployé et l'auteur de ce code. Vous pouvez également visualiser les données issues de Git, des config maps, de votre infrastructure, des alertes et d'autres outils tels que Datadog depuis une interface facile à comprendre.
 
-Grâce à cette intégration, vous pouvez associer des métriques Datadog à des liens de déploiement dynamiques et ainsi accéder directement aux dashboards pertinents. Résultat : vous pouvez résoudre les problèmes liés à vos microservices en tenant compte du contexte, des connexions et des dépendances de service que Datadog considère comme pertinents. 
+Grâce à cette intégration, vous pouvez associer des métriques Datadog à des liens de déploiement dynamiques et ainsi accéder directement aux dashboards pertinents. Résultat : vous pouvez résoudre les problèmes liés à vos microservices en tenant compte du contexte, des connexions et des dépendances de service que Datadog considère comme pertinents.
 
 ## Configuration
 

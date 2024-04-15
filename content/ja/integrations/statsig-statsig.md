@@ -34,7 +34,7 @@ integration_id: statsig-statsig
 integration_title: Statsig
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -115,7 +115,7 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Statsig サポートにお問い合わせください。
 
-- メール: [support@statsig.com][4] 
+- メール: [support@statsig.com][4]
 - サポート: [Statsig][5]
 
 ### その他の参考資料

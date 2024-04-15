@@ -1,6 +1,6 @@
 ---
 title: Handle Pop-Ups In Browser Tests
-kind: guide
+
 further_reading:
   - link: 'https://www.datadoghq.com/blog/browser-tests/'
     tag: 'Blog'
@@ -19,7 +19,7 @@ This guide describes how to manage pop-ups such as modals or application windows
 
 Synthetic browser tests automatically handle [JavaScript modals][1]:
 
- - `alert` modals are immediately dismissed for OK. 
+ - `alert` modals are immediately dismissed for OK.
  - `prompt` modals are filled with `Lorem Ipsum` for tests on Google Chrome or Microsoft Edge.
  - `confirm` modals that ask for confirmation are accepted.
 
@@ -33,7 +33,7 @@ For basic authentication pop-ups, specify the associated credentials in your bro
 
 ### Anchored pop-ups
 
-If a pop-up appears at a specific point of your journey, you can record a step to close it and allow this step to fail using the [corresponding option][3]. This way, your test knows how to behave in case a pop-up appears. If the pop-up does not show up, the step fails without causing the whole test to fail. 
+If a pop-up appears at a specific point of your journey, you can record a step to close it and allow this step to fail using the [corresponding option][3]. This way, your test knows how to behave in case a pop-up appears. If the pop-up does not show up, the step fails without causing the whole test to fail.
 
 {{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Allow step to fail to handle pop-up" style="width:60%" >}}
 

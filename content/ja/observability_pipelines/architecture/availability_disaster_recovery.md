@@ -1,5 +1,5 @@
 ---
-kind: Documentation
+
 title: 高可用性と災害復旧
 ---
 

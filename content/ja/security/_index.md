@@ -37,7 +37,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/
   tag: ブログ
   text: クラウドネイティブインフラストラクチャーにおけるデータセキュリティのベストプラクティス
-kind: documentation
+
 title: Datadog Security
 ---
 

@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: GitHub Apps
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: github_apps
 public_title: Intégration Datadog/GitHub Apps
@@ -26,7 +26,7 @@ version: '1.0'
 
 ## Présentation
 
-Associez Datadog à GitHub Apps pour activer les autorisations pour vos référentiels et consulter des extraits de code dans vos erreurs. Vous pouvez également afficher des liens vers les pull requests et problèmes GitHub dans des notebooks et chronologies d'incident de Datadog. 
+Associez Datadog à GitHub Apps pour activer les autorisations pour vos référentiels et consulter des extraits de code dans vos erreurs. Vous pouvez également afficher des liens vers les pull requests et problèmes GitHub dans des notebooks et chronologies d'incident de Datadog.
 
 ## Configuration
 

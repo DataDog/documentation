@@ -1,6 +1,6 @@
 ---
 title: Upload JavaScript Source Maps
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/error_tracking'
   tag: 'Documentation'
@@ -18,7 +18,7 @@ If your front-end JavaScript source code is minified, upload your source maps to
 
 ## Instrument your code
 
-Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. 
+Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute.
 
 <div class="alert alert-warning">
 {{< site-region region="us,us3,us5,eu" >}}

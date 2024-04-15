@@ -9,7 +9,7 @@ further_reading:
 - link: /dashboards/widgets/table/
   tag: 설명서
   text: 테이블 위젯에 대해 알아보기
-kind: faq
+
 title: 로그 비용 어트리뷰션
 ---
 
@@ -61,7 +61,7 @@ Datadog에서는 이러한 [태그 지정 방법][5] 중 하나를 사용하여 
 4. **Set target category attribute** 필드에 `team`을 입력합니다. 이렇게 하면 `team` 속성이 생성됩니다.
 5. **Populate category** 섹션에서 각 팀에 대한 카테고리를 추가합니다. 예를 들어, `service:a` 및 `env:prod`와 일치하는 로그 이벤트에 `team:service_a` 태그를 추가합니다.
       a. **All events that match** 필드에서 `service:a` 및 `env:prod`를 입력합니다.
-      b. **Appear under the value name** 필드에서 `service_a`를 입력합니다. 
+      b. **Appear under the value name** 필드에서 `service_a`를 입력합니다.
       c. **Add**를 클릭합니다.
 6. 다른 팀을 별도의 카테고리로 추가합니다.
 7. **Create**를 클릭합니다.
@@ -79,15 +79,15 @@ Datadog에서는 이러한 [태그 지정 방법][5] 중 하나를 사용하여 
 
 {{< img src="logs/faq/logs_cost_attribution/team_remapper.png" alt="팀 리매퍼를 생성하기 위해 입력된 모든 데이터를 보여주는 리매퍼 생성 양식" style="width:75%" >}}
 
-## 커스텀 태그 설정하기 
+## 커스텀 태그 설정하기
 
 커스텀 태그를 생성하면 커스텀 로그 사용량 메트릭을 사용 사례와 관련된 카테고리로 구성할 수 있습니다. 이 예에서는 다음 태그를 생성합니다.
 
-- `retention_period`: Datadog 인덱스에 로그가 보관되는 일수를 나타냅니다. 
+- `retention_period`: Datadog 인덱스에 로그가 보관되는 일수를 나타냅니다.
 - `online_archives`: 로그가 온라인 아카이브로 라우팅되었는지 여부를 나타냅니다.
 - `sds`: 민감한 데이터 스캐너가 로그를 검사했는지 여부를 나타냅니다.
 
-### `retention_period` 태그 만들기 
+### `retention_period` 태그 만들기
 
 Datadog에서는 인덱스의 보관 기간이 모두 동일한 경우에도 <code>retention_period</code> 태그를 설정할 것을 권장합니다. 이렇게 하면 여러 보관 기간을 사용할 때 모든 로그에 해당 보관 기간 태그가 지정됩니다.
 
@@ -108,17 +108,17 @@ Datadog은 다음과 같은 방법으로 `retention_period` 태그를 설정할 
 3. 프로세서의 이름을 입력합니다. 예: "Create index_name attribute"
 4. **Set target category attribute** 필드에 **index_name**을 입력합니다. 이렇게 하면 `index_name` 속성이 생성됩니다.
 5. 각 인덱스에 대한 카테고리를 추가합니다. 예를 들어, `env:staging` 태그가 지정된 모든 로그에 대해 `retention-7`로 이름이 지정된 인덱스가 있는 경우:
-    {{< img src="logs/faq/logs_cost_attribution/indexes_configuration.png" alt="필터 쿼리, 보관 기간, 보관-30, 보관-15, 보관-7 및 데모 인덱스에 대한 온라인 아카이브 활성화 여부를 보여주는 인덱스 목록" >}} 
+    {{< img src="logs/faq/logs_cost_attribution/indexes_configuration.png" alt="필터 쿼리, 보관 기간, 보관-30, 보관-15, 보관-7 및 데모 인덱스에 대한 온라인 아카이브 활성화 여부를 보여주는 인덱스 목록" >}}
 **Populate category** 섹션에서 다음을 수행합니다.
-      a. **All events that match** 필드에서 `env:staging`을 입력합니다.  
-      b. **Appear under the value name** 필드에서 `retention-7`을 입력합니다.  
+      a. **All events that match** 필드에서 `env:staging`을 입력합니다.
+      b. **Appear under the value name** 필드에서 `retention-7`을 입력합니다.
       c. **Add**를 클릭합니다.
 6. 다른 인덱스를 별도의 카테고리로 추가합니다.
 7. **Create**를 클릭합니다.
 
-{{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="카테고리 프로세서 양식은 index_name 속성을 생성하기 위해 데이터를 입력합니다." style="width:75%" >}} 
+{{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="카테고리 프로세서 양식은 index_name 속성을 생성하기 위해 데이터를 입력합니다." style="width:75%" >}}
 
-#### 새 `retention_period` 속성 만들기 
+#### 새 `retention_period` 속성 만들기
 
 [Category Processor][6]를 사용하여 인덱스를 보관 기간과 연결하는 새 `retention_period` 속성을 만듭니다.
 
@@ -133,7 +133,7 @@ Datadog은 다음과 같은 방법으로 `retention_period` 태그를 설정할 
 6. 다른 보관 기간을 별도의 카테고리로 추가합니다.
 7. **Create**를 클릭합니다.
 
-{{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="카테고리 프로세서 양식에 데이터를 입력하여 retention_period 속성을 생성합니다." style="width:75%" >}} 
+{{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="카테고리 프로세서 양식에 데이터를 입력하여 retention_period 속성을 생성합니다." style="width:75%" >}}
 
 #### `retention_period` 속성을 태그로 변환하는 리매퍼 만들기
 
@@ -163,12 +163,12 @@ Datadog은 다음과 같은 방법으로 `online_archive` 태그를 설정할 �
 1. 이전에 생성한 파이프라인으로 이동하여 *Add processor**를 클릭합니다.
 2. 프로세서 유형에 대해 **Category Processor**를 선택합니다.
 3. 프로세서의 이름을 입력합니다. 예를 들어, "Create online_archives attribute". 이렇게 하면 `online_archives` 속성이 생성됩니다.
-4. **Populate category** 섹션에서 두 카테고리를 추가합니다. 
+4. **Populate category** 섹션에서 두 카테고리를 추가합니다.
       <br>  **첫 번째 카테고리**에서는 온라인 아카이브가 활성화된 모든 인덱스에 `true` 값이 할당됩니다. 예를 들어, `retention-30`로 이름이 지정된 인덱스의 로그가 온라인 아카이브로 이동하는 경우:
       a. **All events that match** 필드에 `@index_name:(retention-30)`을 입력합니다.
       b. **Appear under the value name** 필드에 `true`를 입력합니다.
       c. **Add**를 클릭합니다.
-      <br> **두 번째 카테고리에서** 다른 모든 인덱스에 `false` 값이 할당됩니다. 
+      <br> **두 번째 카테고리에서** 다른 모든 인덱스에 `false` 값이 할당됩니다.
       a. **All events that match** 필드에 `*`을 입력합니다.
       b. **Appear under the value name** 필드에 `false`를 입력합니다.
       c. **Add**를 클릭합니다.
@@ -203,13 +203,13 @@ Datadog은 [Datadog API 엔드포인트][7]를 통해 프로세스를 자동화�
 
 1. [Sensitive Data Scanner][8]로 이동합니다.
 2. 각 스캐닝 그룹에서:
-      a. **Add Scanning Rule**을 클릭합니다.  
+      a. **Add Scanning Rule**을 클릭합니다.
       b. 모든 로그를 일치시키려면 **Define Regex to match** 필드에 `.`를 입력합니다.
       c. **Scan the entire event or a portion of it** 필드에서 **Entire Event**를 선택합니다.
       d. **Add tags** 필드에서 `sds:true`를 입력합니다.
       e. **Define action on match**를 **No action**으로 둡니다.
       f. 스캔 규칙 이름을 입력합니다. 예: "Create sds tag"
-      g. **Create**를 클릭합니다.  
+      g. **Create**를 클릭합니다.
 
 ## 커스텀 로그 메트릭 생성
 
@@ -234,7 +234,7 @@ Datadog은 예상 사용량을 확인할 수 있도록 [로그 사용량 메트�
 
 {{< img src="logs/faq/logs_cost_attribution/events_injected_metric.png" alt="메트릭 이름으로 log.estimated.usage.ingested_events를 표시하고 언급된 태그가 있는 필드별 그룹을 표시하는 새로운 메트릭 양식" style="width:75%" >}}
 
-## 커스텀 로그 메트릭으로 대시보드 만들기 
+## 커스텀 로그 메트릭으로 대시보드 만들기
 
 Datadog에서 생성된 커스텀 로그 메트릭을 사용하는 방법에는 여러 가지가 있습니다. 대시보드에 메트릭을 표시하고, 알림을 받고, 노트북에서 사용하고, Metrics Explorer에서 쿼리하는 등 다양한 방법으로 사용할 수 있습니다.
 
@@ -277,7 +277,7 @@ Datadog은 민감한 데이터 스캐너용 테이블 위젯을 다음과 같이
 3. 수집된 바이트 수를 계산하기 위해 **Metrics** 필드에서 이전에 생성한 **bytes** 카운트 메트릭을 선택합니다.
 4. **from** 필드에서 `sds:true`를 입력하여 민감한 데이터 스캐너에서 검사한 로그만 필터링합니다.
 5. **sum by** 필드를 선택하고 `team` 태그를 추가하여 팀별 사용량을 바이트 단위로 표시합니다. 다양한 비용 버킷에 대해 다른 태그를 추가할 수도 있습니다.
-6. 사용량을 비용으로 변환하려면 다음 공식을 추가하세요: `Usage in gigabytes` * `Unit cost for the Sensitive Data Scanner`.  
+6. 사용량을 비용으로 변환하려면 다음 공식을 추가하세요: `Usage in gigabytes` * `Unit cost for the Sensitive Data Scanner`.
    **참고**: 기가바이트당 계약 가격이 변경되면 공식을 수동으로 업데이트해야 합니다.
 7. **Save**를 클릭합니다.
 
@@ -296,8 +296,8 @@ Datadog은 로그 인덱싱용 테이블 위젯을 다음과 같이 설정할 �
 2. **Table** 위젯을 선택합니다.
 3. 수집된 이벤트 수를 계산하려면 이전에 생성한 **events** 카운트 메트릭을 선택합니다.
 4. **from** 필드에서 다음을 추가합니다.
-      a. 인덱스로 라우팅된 로그만 필터링하려면 `datadog_index:*` 
-      b. 제외 필터와 일치하지 않는 로그만 필터링하려면 `datadog_is_excluded:false` 
+      a. 인덱스로 라우팅된 로그만 필터링하려면 `datadog_index:*`
+      b. 제외 필터와 일치하지 않는 로그만 필터링하려면 `datadog_is_excluded:false`
       c. `retention_period:7`는 7일 동안 보관되는 로그만 필터링합니다. 모든 인덱스의 보관 기간이 동일하여 이전에 이 태그를 설정하지 않은 경우에는 이 태그를 추가할 필요가 없습니다. 추가적인 `retention_period` 태그가 있는 경우 각 태그에 대해 별도의 위젯을 생성하세요.
 5. **sum by** 필드를 선택하고 `team` 태그를 추가해 팀별 이벤트 사용량을 표시합니다. 다양한 비용 버킷에 대해 다른 태그를 추가할 수도 있습니다.
 6. 사용량을 비용으로 변환하려면 다음 공식을 추가하세요. `Usage in millions of events` * `Unit cost for 7 days of retention`. 백만 건의 이벤트당 계약 가격이 변경되면 공식을 수동으로 업데이트해야 합니다.
@@ -326,7 +326,7 @@ Datadog은 로그 인덱싱용 테이블 위젯을 다음과 같이 설정할 �
 2. **Table** 위젯을 선택합니다.
 3. 수집된 이벤트 수를 계산하기 위해 **Metrics** 필드에서 이전에 생성한 **events** 카운트 메트릭을 선택합니다.
 4. **from** 필드에서 다음을 추가합니다.
-      - 인덱스로 라우팅된 로그만 필터링하려면 `datadog_index:*` 
+      - 인덱스로 라우팅된 로그만 필터링하려면 `datadog_index:*`
       - 온라인 아카이브로 라우팅된 로그만 필터링하려면 `online_archives:true`
 
 5. **sum by** 필드를 선택하고 `team` 태그를 추가해 팀별 이벤트 사용량을 표시합니다. 다양한 비용 버킷에 대해 다른 태그를 추가할 수도 있습니다.

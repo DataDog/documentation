@@ -10,7 +10,7 @@ further_reading:
 - link: /tracing/trace_collection/dd_libraries/
   tag: Documentation
   text: Ajouter la bibliothèque de tracing Datadog
-kind: Guide
+
 private: true
 title: Nouvelle page Service et services déduits
 ---
@@ -263,7 +263,7 @@ Pour activer la carte des dépendances, ajoutez les variables d'environnement su
 
 #### Mappage des services homologues
 *Remarque** : les paires `key:value` sont sensibles à la casse.
-Datadog utilise un schéma d'attribution de nom par défaut pour les services déduits. Si vous le souhaitez, vous pouvez associer des valeurs spécifiques à des services homologues via la variable d'environnement `DD_TRACE_PEER_SERVICE_MAPPING`. Cette dernière accepte une liste de paires key/value séparée par des virgules. 
+Datadog utilise un schéma d'attribution de nom par défaut pour les services déduits. Si vous le souhaitez, vous pouvez associer des valeurs spécifiques à des services homologues via la variable d'environnement `DD_TRACE_PEER_SERVICE_MAPPING`. Cette dernière accepte une liste de paires key/value séparée par des virgules.
 
 À titre d'exemple, vous pouvez utiliser la configuration suivante si vous utilisez des variables d'environnement et souhaitez remplacer le nom du service homologue `10.0.32.3` par `my-service` :
 
@@ -283,7 +283,7 @@ afin de définir la valeur `peer.service` pour toutes les spans Dalli.
 
 ### Migration du nom de service global par défaut
 
-L'activation de la variable d'environnement `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` permet d'améliorer la manière dont les connexions entre services et les services dédiés sont représentés dans les visualisations Datadog, et ce sur l'ensemble des intégrations et langages de bibliothèque de tracing prises en charge. 
+L'activation de la variable d'environnement `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` permet d'améliorer la manière dont les connexions entre services et les services dédiés sont représentés dans les visualisations Datadog, et ce sur l'ensemble des intégrations et langages de bibliothèque de tracing prises en charge.
 
 Auparavant, certaines bibliothèques de tracing incluaient le nom de l'intégration associée dans le tagging des noms de service. Par exemple, .NET tagguait les appels gRPC au format `service:<SERVICE_DD>-grpc-client` tandis que Python les tagguait au format `service:grpc-client`. Lorsque cette nouvelle option est activée, toutes les bibliothèques de tracing prises en charge ajoutent aux spans des services en aval le tag du nom du service appelant, `service:<SERVICE_DD>`, et fournissent ainsi un _nom de service global par défaut_.
 

@@ -1,6 +1,6 @@
 ---
 title: Infrastructure List
-kind: documentation
+
 aliases:
   - /hostnames
   - /graphing/infrastructure/list/
@@ -48,7 +48,7 @@ Load 15
 Apps
 : The Datadog integrations reporting metrics for the host.
 
-Operating System 
+Operating System
 : The tracked operating system.
 
 Cloud Platform

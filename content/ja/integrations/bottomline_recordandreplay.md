@@ -34,7 +34,7 @@ integration_id: bottomline-recordandreplay
 integration_title: 'Bottomline の Record and Replay: Mainframe'
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: bottomline_recordandreplay
 public_title: 'Bottomline の Record and Replay: Mainframe'
@@ -85,7 +85,7 @@ Bottomline の Mainframe Record and Replay ソリューションは、ネット�
 
 このチェックによって提供されるメトリクスのリストについては、[metadata.csv][1] を参照してください。
 
-### ダッシュボード  
+### ダッシュボード
 
 **Bottomline Record and Replay 概要**: このダッシュボードでは、どのようなリソースが使用されているか、リソースのパフォーマンス、ユーザーアクティビティ、セキュリティイベント、システムモニターを可視化することができます。
 

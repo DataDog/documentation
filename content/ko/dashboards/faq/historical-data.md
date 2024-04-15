@@ -4,7 +4,7 @@ aliases:
 - /ko/graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed/
 - /ko/agent/faq/i-stopped-my-agent-but-i-m-still-seeing-the-host/
 - /ko/graphing/faq/historical-data
-kind: faq
+
 title: 과거 데이터
 ---
 

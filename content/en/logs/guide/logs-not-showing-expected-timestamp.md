@@ -1,6 +1,6 @@
 ---
 title: Logs Not Showing the Expected Timestamp
-kind: guide
+
 aliases:
   - /logs/faq/why-do-my-logs-not-have-the-expected-timestamp
 further_reading:
@@ -34,8 +34,8 @@ If your raw logs are not showing the expected timestamp in Datadog, [extract](#e
 #### Extract the timestamp value with a parser
 
 1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
-2. Click **Add Processor**. 
-3. Select **Grok Parser** for the processor type. 
+2. Click **Add Processor**.
+3. Select **Grok Parser** for the processor type.
 4. Use the [date() matcher][3] to extract the date and pass it into a custom date attribute. See the below example, as well as [parsing dates examples][4], for details.
 
 For a log example like this:
@@ -48,7 +48,7 @@ Add a parsing rule like:
 
 ```
 MyParsingRule %{date("yyyy-MM-dd HH:mm:ss z"):date} \| %{word:severity} \| \(%{notSpace:logger.name}:%{integer:logger.line}[^)]*\) \|.*
-``` 
+```
 
 The output for `MyParsingRule`'s extraction:
 
@@ -70,7 +70,7 @@ The `date` attribute stores the `mytimestamp` value.
 Add a [Log Date Remapper][5] to make sure that the value of the `date` attribute overrides the current log timestamp.
 
 1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
-2. Click **Add Processor**. 
+2. Click **Add Processor**.
 3. Select **Date remapper** as the processor type.
 4. Enter a name for the processor.
 5. Add **date** to the Set date attribute(s) section.
@@ -84,18 +84,18 @@ The following log generated at `06:01:03 EST`, which correspond to `11:01:03 UTC
 
 ## JSON logs
 
-JSON logs are automatically parsed in Datadog. The log `date` attribute is a [reserved attribute][6], so it goes through preprocessing operations for JSON logs. 
+JSON logs are automatically parsed in Datadog. The log `date` attribute is a [reserved attribute][6], so it goes through preprocessing operations for JSON logs.
 
 In the below example, the actual timestamp of the log is the value of the `mytimestamp` attribute and not the log timestamp `Dec 13, 2017 at 14:16:45.158`.
 
 {{< img src="logs/guide/log_timestamp_6.png" alt="Log panel showing the log timestamp which is different from the mytimestamp attribute value in the message" style="width:50%;">}}
 
 ### Supported date formats
-        
+
 To make sure the `mytimestamp` attribute value overrides the current log timestamp being shown, you must add it as a date attribute.
-        
-1. Go to your [Logs Pipeline][2]. 
-2. Hover over Preprocessing for JSON Logs, and click the pencil icon. 
+
+1. Go to your [Logs Pipeline][2].
+2. Hover over Preprocessing for JSON Logs, and click the pencil icon.
 3. Add `mytimestamp` to the list of date attributes. The date remapper looks for each of the reserved attributes in the order they are listed. To ensure the date comes from the `mytimestamp` attribute, place it first in the list.
 4. Click **Save**.
 
@@ -107,11 +107,11 @@ If a different date format is being used, see [Custom date format](#custom-date-
 
 ### Custom date format
 
-If the date format is not supported by the remapper by default, you can parse the date using a [Grok parser][5] and then convert it to a supported format. 
+If the date format is not supported by the remapper by default, you can parse the date using a [Grok parser][5] and then convert it to a supported format.
 
 1. Go to the [Pipeline][2] that is processing the logs. If you do not have a Pipeline configured for those logs yet, create a new Pipeline for it.
-2. Click **Add Processor**. 
-3. Select **Grok Parser** for the processor type. 
+2. Click **Add Processor**.
+3. Select **Grok Parser** for the processor type.
 4. Define the parsing rule based on your date format. See these [parsing dates examples][4] for details.
 5. In the Advanced Settings section, add `mytimestamp` to the `Extract from` section so that this parser is applied only to the custom `mytimestamp` attribute.
 6. Click **Create**.

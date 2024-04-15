@@ -1,7 +1,7 @@
 ---
 aliases:
 - /es/agent/faq/downgrade-datadog-agent
-kind: faq
+
 title: Cambiar a una versión secundaria anterior del Agent
 ---
 

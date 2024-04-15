@@ -5,7 +5,7 @@ further_reading:
 - link: /synthetics/ci_results_explorer
   tag: Documentation
   text: En savoir plus sur l'explorateur de résultats CI
-kind: documentation
+
 title: Dashboard Performances des tests Browser Synthetic
 ---
 
@@ -14,7 +14,7 @@ title: Dashboard Performances des tests Browser Synthetic
 Le [dashboard Performances des tests Browser][1] offre des informations sur les tests Browser exécutés, les navigateurs, les performances Web et les événements. Il affiche les données suivantes :
 
 - **Analyse des tests Browser Synthetic** : visualisez les détails des taux de réussite par type de navigateur, une liste des alertes de test Browser, ainsi que la durée moyenne des tests par type de navigateur et emplacement.
-- **Performances Web des tests Synthetic** : si vous avez activé la fonctionnalité Datadog RUM, utilisez l'[intégration RUM][2] pour examiner les signaux Web essentiels et obtenir une liste de ressources de test de fournisseurs tiers.  
+- **Performances Web des tests Synthetic** : si vous avez activé la fonctionnalité Datadog RUM, utilisez l'[intégration RUM][2] pour examiner les signaux Web essentiels et obtenir une liste de ressources de test de fournisseurs tiers.
 - **Événements** : explorez les événements notables issus de vos alertes de test Synthetic.
 
 Cliquez sur l'icône Watchdog rose pour ouvrir le volet latéral [**Watchdog Insights**][3] et analyser les anomalies notables liées aux performances de votre application ou les alertes de monitor qui se sont déclenchées.

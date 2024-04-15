@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ko/agent/faq/downgrade-datadog-agent
-kind: faq
+
 title: 에이전트를 이전 마이너 버전으로 다운그레이드
 ---
 

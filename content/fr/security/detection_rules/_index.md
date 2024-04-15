@@ -18,7 +18,7 @@ further_reading:
   tag: Blog
   text: Détecter les activités de connexion suspectes grâce aux règles de détection
     de voyage impossible
-kind: documentation
+
 title: Règles de détection
 ---
 
@@ -128,7 +128,7 @@ Pour exporter la copie d'une règle au format JSON, cliquez sur l'icône des tro
 
 Toutes les règles de détection font régulièrement l'objet de contrôles afin de garantir la pertinence de leurs signaux. Lorsqu'une règle est considérée comme obsolète, elle est remplacée par une nouvelle version.
 
-Le processus d'obsolescence des règles suit les étapes suivantes : 
+Le processus d'obsolescence des règles suit les étapes suivantes :
 
 1. Un avertissement avec la date d'obsolescence est ajouté à la règle. Cet avertissement s'affiche à différents endroits de l'interface :
     - Dans la section **Rule Details > Playbook** du volet latéral des signaux

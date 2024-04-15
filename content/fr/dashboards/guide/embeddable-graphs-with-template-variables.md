@@ -6,11 +6,11 @@ further_reading:
 - link: /dashboards/sharing/
   tag: Documentation
   text: Graphiques partagés
-kind: guide
+
 title: Graphiques intégrés avec variables de modèle
 ---
 
-Les graphiques intégrables créés via lʼAPI acceptent les variables de modèles. Ci-dessous, un exemple illustre lʼutilisation de Python pour la requête `avg:system.cpu.user{$var}`. Dans cet exemple, `$var` est la variable de modèle. **Remarque** : cette méthode ne fonctionne que pour les graphiques dotés dʼune visualisation des séries temporelles.  
+Les graphiques intégrables créés via lʼAPI acceptent les variables de modèles. Ci-dessous, un exemple illustre lʼutilisation de Python pour la requête `avg:system.cpu.user{$var}`. Dans cet exemple, `$var` est la variable de modèle. **Remarque** : cette méthode ne fonctionne que pour les graphiques dotés dʼune visualisation des séries temporelles.
 
 ```python
 from datadog import initialize, api
@@ -67,7 +67,7 @@ Affichez le graphique intégré sur un site web en utilisant le HTML dans lʼobj
 
 {{< img src="dashboards/guide/embeddable_graph01.png" alt="Graphique intégré sans filtre" >}}
 
-Utilisez la variable de modèle pour modifier le graphique en mettant à jour lʼURL de lʼiframe afin de définir un filtre. Dans le HTML ci-dessous, `*` est remplacé par `host:embed-graph-test`. 
+Utilisez la variable de modèle pour modifier le graphique en mettant à jour lʼURL de lʼiframe afin de définir un filtre. Dans le HTML ci-dessous, `*` est remplacé par `host:embed-graph-test`.
 
 ```html
 <iframe src="https://app.datadoghq.com/graph/embed?token=<EMBED_TOKEN>&height=300&width=600&legend=false&var=host:embed-graph-test" width="600" height="300" frameBorder="0"></iframe>

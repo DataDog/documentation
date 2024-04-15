@@ -1,6 +1,6 @@
 ---
 title: プロセスの保持を増やす
-kind: documentation
+
 aliases:
   - /ja/infrastructure/process/generate_process_metrics/
   - /ja/processes/processing/process_to_metrics/

@@ -17,7 +17,7 @@ integration_id: amazon-ec2
 integration_title: Amazon EC2
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 monitors:
   ec2_cpu_utilization: assets/monitors/ec2_cpu_utilization.json
@@ -56,7 +56,7 @@ Amazon EC2(Amazon Elastic Compute Cloud)는 클라우드에서 조정 가능한 
 
 3. [Datadog - Amazon EC2 통합][5]을 설치합니다.
 
-**참고**: Datadog를 통해 EC2 인스턴스의 하위 집합을 모니터링하려면 `datadog:true`와 같은 AWS 태그를 EC2 인스턴스에 할당합니다. 그런 다음 [Datadog AWS 통합 페이지][2]의 **메트릭 수집** 탭의 **특정 리소스로 메트릭 수집 제한**에 해당 태그를 지정합니다. 
+**참고**: Datadog를 통해 EC2 인스턴스의 하위 집합을 모니터링하려면 `datadog:true`와 같은 AWS 태그를 EC2 인스턴스에 할당합니다. 그런 다음 [Datadog AWS 통합 페이지][2]의 **메트릭 수집** 탭의 **특정 리소스로 메트릭 수집 제한**에 해당 태그를 지정합니다.
 
 #### EC2 자동 음소거
 
@@ -140,9 +140,9 @@ Datadog 미국 사이트에 있는 경우 `us-east-1` 등 `runCommand` 아래서
 
 AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일한 태그가 할당됩니다, 호스트 이름, 보안 그룹 등을 포함하되 이에 국한되지 않습니다.
 
-**참고**: 
+**참고**:
    - `aws.ec2.instance_age`는 기본적으로 Datadog - EC2 통합에서 수집되지 않습니다. [Datadog 지원][21]에 문의하여 이 메트릭 수집을 활성화하세요.
-   - `aws.ec2.host_ok`는 기본적으로 수집됩니다. Amazon EC2 통합 메트릭 수집을 비활성화한 경우에도 인프라스트럭처 목록에 예기치 않은 호스트가 나타날 수 있습니다. 원치 않는 호스트를 필터링하려면 `datadog:true` 등 AWS 태그를 해당 EC2 인스턴스에 할당합니다. 그런 다음 [Datadog AWS 통합 페이지][2]의 **메트릭 수집** 탭의 **메트릭 수집을 특정 리소스로 제한**에서 해당 태그를 지정합니다. 
+   - `aws.ec2.host_ok`는 기본적으로 수집됩니다. Amazon EC2 통합 메트릭 수집을 비활성화한 경우에도 인프라스트럭처 목록에 예기치 않은 호스트가 나타날 수 있습니다. 원치 않는 호스트를 필터링하려면 `datadog:true` 등 AWS 태그를 해당 EC2 인스턴스에 할당합니다. 그런 다음 [Datadog AWS 통합 페이지][2]의 **메트릭 수집** 탭의 **메트릭 수집을 특정 리소스로 제한**에서 해당 태그를 지정합니다.
 
 ### 서비스 검사
 {{< get-service-checks-from-git "amazon_ec2" >}}

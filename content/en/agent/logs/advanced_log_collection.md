@@ -1,6 +1,6 @@
 ---
 title: Advanced Log Collection Configurations
-kind: documentation
+
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: "/logs/guide/how-to-set-up-only-logs/"
@@ -468,7 +468,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### Automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically. 
+With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically.
 
 Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
 

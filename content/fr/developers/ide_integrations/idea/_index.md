@@ -11,7 +11,7 @@ further_reading:
   tag: Site externe
   text: En savoir plus sur JetBrains Toolbox
 is_beta: true
-kind: documentation
+
 title: Plug-in Datadog pour la plateforme IntelliJ
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Estimated Usage Metrics
-kind: documentation
+
 ---
 
 ## Overview

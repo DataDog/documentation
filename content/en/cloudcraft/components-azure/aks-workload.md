@@ -1,6 +1,6 @@
 ---
 title: "AKS Workload Component"
-kind: documentation
+
 ---
 
 ## Overview

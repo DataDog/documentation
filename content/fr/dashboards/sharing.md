@@ -1,6 +1,6 @@
 ---
 title: Partage de dashboards
-kind: documentation
+
 aliases:
   - /fr/graphing/faq/is-there-a-way-to-share-graphs
   - /fr/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs

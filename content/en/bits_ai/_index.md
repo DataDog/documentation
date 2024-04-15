@@ -1,6 +1,6 @@
 ---
 title: Bits AI
-kind: documentation
+
 disable_toc: false
 private: false
 is_beta: true
@@ -26,7 +26,7 @@ For detailed setup and usage instructions, see the [Getting Started][1] document
 
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
 Natural language querying is in private beta. Fill out this form to join the wait list.
-{{< /beta-callout >}} 
+{{< /beta-callout >}}
 
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
 
@@ -42,7 +42,7 @@ For more example query syntax, see the [Example Natural Language Queries][2] gui
 
 ### Streamline incident management
 
-Within [Datadog Incident Management][3], Bits AI can help you 
+Within [Datadog Incident Management][3], Bits AI can help you
 
 - **Stay informed:** Get an up-to-date summary of the incident when you join an incident Slack channel.
 - **Engage responders:** Page on-call teams with PagerDuty with Slack queries like "`@DataDog` Page the team that owns example-service."

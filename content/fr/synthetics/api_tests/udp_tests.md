@@ -14,7 +14,7 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: En savoir plus sur les monitors de test Synthetic
-kind: documentation
+
 title: Tests UDP
 ---
 ## Présentation
@@ -64,7 +64,7 @@ Si un test contient une assertion sur le corps de la réponse et que le délai d
 
 Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test UDP. Les tests UDP peuvent être exécutés depuis des emplacements gérés et des [emplacements privés][1], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Indiquer la fréquence du test
 
@@ -136,7 +136,7 @@ Voici la liste des erreurs concernées :
 `DNS`
 : L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée, ou configuration des entrées DNS incorrecte.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).
 
 `TIMEOUT`
@@ -147,7 +147,7 @@ Voici la liste des erreurs concernées :
 
 ## Autorisations
 
-Par défaut, seuls les utilisateurs disposant des rôles Admin ou Standard Datadog peuvent créer, modifier et supprimer des tests UDP Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][9]. 
+Par défaut, seuls les utilisateurs disposant des rôles Admin ou Standard Datadog peuvent créer, modifier et supprimer des tests UDP Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][9].
 
 Si vous utilisez des [rôles personnalisés][10], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write`.
 

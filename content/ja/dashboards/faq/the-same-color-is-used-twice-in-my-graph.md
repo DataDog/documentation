@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/graphing/faq/the-same-color-is-used-twice-in-my-graph
-kind: faq
+
 title: グラフで同じ色が 2 回使われています！
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Excluding Logs from Error Tracking
-kind: documentation
+
 disable_toc: false
 ---
 
@@ -8,7 +8,7 @@ disable_toc: false
 
 {{< img src="logs/error_tracking/exclusion_filters.png" alt="Exclusion filters list" style="width:100%" >}}
 
-Exclusion filters prevent Error Tracking from processing logs matching a given query, lowering issue volume and reducing noise. 
+Exclusion filters prevent Error Tracking from processing logs matching a given query, lowering issue volume and reducing noise.
 
 For example, you can use an exclusion filter to ignore logs from the staging environment (see [Filter setup](#filter-setup)).
 

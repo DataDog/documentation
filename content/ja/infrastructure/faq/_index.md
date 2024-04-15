@@ -1,7 +1,7 @@
 ---
 cascade:
 - private: true
-kind: faq
+
 title: インフラストラクチャーに関するよくあるご質問
 ---
 

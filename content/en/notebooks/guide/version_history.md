@@ -1,6 +1,6 @@
 ---
 title: Version History for Notebooks
-kind: documentation
+
 disable_toc: false
 further_reading:
 - link: "/notebooks/"
@@ -18,9 +18,9 @@ further_reading:
 Version History automatically tracks changes made to your notebooks and saves previous versions so you can see exactly what was changed and by whom. You can view previous versions, restore your notebook to any saved version, or clone a version to create a new notebook.
 
 ## Prerequisites
-All notebooks have a default 30 days retention of version history. In order to see any previous versions, an edit must be made within the last 30 days. 
+All notebooks have a default 30 days retention of version history. In order to see any previous versions, an edit must be made within the last 30 days.
 
-With [Audit Trail][1] enabled, the version history is extended from 30 days to 90 days. After enabling Audit Trail, you are able to see any edits made between 30 to 90 days ago on all existing notebooks. 
+With [Audit Trail][1] enabled, the version history is extended from 30 days to 90 days. After enabling Audit Trail, you are able to see any edits made between 30 to 90 days ago on all existing notebooks.
 
 ## View versions
 From a notebook, click the **Configure** icon and click **Version History** to open the Version History side panel. If there are no edits within the retention period, the Version History option is disabled.
@@ -45,7 +45,7 @@ There are two ways you can restore your notebook to a previous version.
 - From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Restore this version**.
 - When the Version History side panel opens up, a button appears at the top of the page to **Restore this version**.
 
-Restoring a version updates the notebook to that version for all users and a new entry is added to the version history showing the restore. This does not overwrite the history of your changes, so you are still able preview and restore to any versions within your retention period. 
+Restoring a version updates the notebook to that version for all users and a new entry is added to the version history showing the restore. This does not overwrite the history of your changes, so you are still able preview and restore to any versions within your retention period.
 
 ## Clone a version
 If you do not want to change your current notebook but you'd like to create a copy of a previous version, you can create a clone from any version in your version history. From the Version History side panel after you choose the version you want to make a copy of, click the kebab menu to the right of a user profile and select **Clone**.

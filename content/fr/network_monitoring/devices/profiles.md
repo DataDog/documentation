@@ -1,6 +1,6 @@
 ---
 title: Profils NDM
-kind: documentation
+
 aliases:
   - /fr/network_performance_monitoring/devices/profiles/
 further_reading:

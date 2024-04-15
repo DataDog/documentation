@@ -1,6 +1,6 @@
 ---
 title: RUM Browser Data Collected
-kind: documentation
+
 aliases:
   - /real_user_monitoring/data_collected/
   - /real_user_monitoring/data_collected/view/

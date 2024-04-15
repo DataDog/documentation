@@ -19,7 +19,7 @@ further_reading:
 - link: developers/libraries
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-kind: documentation
+
 title: メトリクスタイプ
 ---
 
@@ -103,7 +103,7 @@ HISTOGRAM メトリクス送信タイプは、ある時間間隔の Agent 側で
 : 時間間隔内の `X` 個の値の中央値を表します。<br>
 **Datadog In-App Type**: GAUGE
 
-`<METRIC_NAME>.95percentile` 
+`<METRIC_NAME>.95percentile`
 : 時間間隔内の `X` 個の値の 95 パーセンタイルを表します。<br>
 **Datadog In-App Type**: GAUGE
 

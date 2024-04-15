@@ -1,6 +1,6 @@
 ---
 title: RUM Android Data Collected
-kind: documentation
+
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10
@@ -17,11 +17,11 @@ further_reading:
 
 ## Overview
 
-The RUM Android SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+The RUM Android SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics.
 
-Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). 
+Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
+There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -111,9 +111,9 @@ You can enable [tracking user info][5] globally to collect and apply user attrib
 | `usr.email` | string | Email of the user. |
 
 
-## Event-specific metrics and attributes 
+## Event-specific metrics and attributes
 
-Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
+Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics.
 
 ### Session metrics
 
@@ -124,7 +124,7 @@ Metrics are quantifiable values that can be used for measurements related to the
 | `session.error.count`      | number      | Count of all errors collected for this session.  |
 | `session.resource.count`         | number      | Count of all resources collected for this session. |
 | `session.action.count`      | number      | Count of all actions collected for this session. |
-| `session.long_task.count`      | number      | Count of all long tasks collected for this session. 
+| `session.long_task.count`      | number      | Count of all long tasks collected for this session.
 
 ### Session attributes
 
@@ -154,13 +154,13 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.action.count`      | number      | Count of all actions collected for this view.                                        |
 | `view.is_active`      |    boolean   | Indicates whether the view corresponding to this event is considered active.            |
 
-### View attributes      
+### View attributes
 
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Unique ID of the initial view corresponding to the event.                                                                      |
 | `view.url`                     | string | Canonical name of the class corresponding to the event.                                                           |
-| `view.name` | string | Customizable name of the view corresponding to the event. |                                                                                 
+| `view.name` | string | Customizable name of the view corresponding to the event. |
 
 ### Resource metrics
 
@@ -202,7 +202,7 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.issue_id`   | string | The stack trace or complementary information about the error.     |
 
 
-### Network errors 
+### Network errors
 
 Network errors include information about failing HTTP requests. The following facets are also collected:
 
@@ -239,7 +239,7 @@ Before data is uploaded to Datadog, it is stored in cleartext in your applicatio
 
 ## Direct Boot mode support
 
-If your application supports [Direct Boot mode][7], note that data captured before the device 
+If your application supports [Direct Boot mode][7], note that data captured before the device
 is unlocked won't be captured, since the credential encrypted storage won't be available yet.
 
 ## Further Reading

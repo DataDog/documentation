@@ -1,7 +1,7 @@
 ---
 code_lang: go
 code_lang_weight: 20
-kind: documentation
+
 title: Exigences de compatibilité Go
 type: multi-code-lang
 ---
@@ -42,7 +42,7 @@ Les fonctionnalités ASM suivantes sont prises en charge dans la bibliothèque G
 
 La version minimale du traceur pour profiter de toutes les fonctionnalités ASM avec Go est la 1.48.0.
 
-**Remarque** : la protection contre les menaces nécessite d'activer la fonctionnalité [Remote Configuration][8], qui est incluse dans la version minimale du traceur indiquée.  
+**Remarque** : la protection contre les menaces nécessite d'activer la fonctionnalité [Remote Configuration][8], qui est incluse dans la version minimale du traceur indiquée.
 
 <div class="alert alert-info">Si vous souhaitez demander la prise en charge d'une fonctionnalité ou d'un framework Go, contactez-nous ! Remplissez <a href="https://forms.gle/gHrxGQMEnAobukfn7">ce court formulaire pour nous communiquer les détails</a>.</div>
 

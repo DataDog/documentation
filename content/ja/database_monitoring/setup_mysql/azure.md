@@ -4,7 +4,7 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: 基本的な MySQL インテグレーション
-kind: documentation
+
 title: Azure Database for MySQL のデータベースモニタリングの設定
 ---
 

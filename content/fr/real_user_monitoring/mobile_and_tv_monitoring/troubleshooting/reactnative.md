@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Service Real User Monitoring (RUM) de Datadog
-kind: documentation
+
 title: Dépannage
 ---
 
@@ -75,7 +75,7 @@ L'examen des logs natifs peut vous aider à mieux cerner la nature du problème.
 
 Vous pouvez appliquer le filtre « DATADOG » aux logs et rechercher des erreurs.
 
-S'il s'avère que vous envoyez bien des événements, vous devriez voir les logs suivants : 
+S'il s'avère que vous envoyez bien des événements, vous devriez voir les logs suivants :
 
 ```
 [DATADOG SDK] 🐶 → 10:02:47.398 [DEBUG] ⏳ (rum) Uploading batch...

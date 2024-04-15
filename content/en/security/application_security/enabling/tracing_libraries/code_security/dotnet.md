@@ -1,6 +1,6 @@
 ---
 title: Enabling ASM for .NET
-kind: documentation
+
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
@@ -47,7 +47,7 @@ To leverage code security vulnerability detection capabilities for your service:
 Or one of the following methods, depending on where your application runs:
 
  {{< tabs >}}
-{{% tab "Windows-Self-Hosted" %}} 
+{{% tab "Windows-Self-Hosted" %}}
 
 In a Windows console:
 
@@ -60,7 +60,7 @@ dotnet.exe example.dll
 ```
 {{% /tab %}}
 
-{{% tab "IIS" %}} 
+{{% tab "IIS" %}}
 
 Run the following PowerShell command as administrator to configure the necessary environment variables in the registry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment` and restart IIS.
 
@@ -73,7 +73,7 @@ net start w3svc
 {{% /tab %}}
 
 
-{{% tab "Linux" %}} 
+{{% tab "Linux" %}}
 
 Add the following to your application configuration:
 
@@ -82,7 +82,7 @@ DD_IAST_ENABLED=true
 ```
 {{% /tab %}}
 
-{{% tab "Docker CLI" %}} 
+{{% tab "Docker CLI" %}}
 
 Update your configuration container for APM by adding the following argument in your docker run command:
 
@@ -91,7 +91,7 @@ docker run -d --name app -e DD_IAST_ENABLED=true company/app:latest
 ```
 {{% /tab %}}
 
-{{% tab "Dockerfile" %}} 
+{{% tab "Dockerfile" %}}
 
 Add the following environment variable value to your container Dockerfile:
 
@@ -100,7 +100,7 @@ ENV DD_IAST_ENABLED=true
 ```
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}} 
+{{% tab "Kubernetes" %}}
 
 Update your deployment configuration file for APM and add the ASM environment variable:
 
@@ -114,10 +114,10 @@ spec:
           env:
             - name: DD_IAST_ENABLED
               value: "true"
-``` 
+```
 {{% /tab %}}
 
-{{% tab "AWS ECS" %}} 
+{{% tab "AWS ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -132,7 +132,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ```
 {{% /tab %}}
 
-{{% tab "AWS Fargate" %}} 
+{{% tab "AWS Fargate" %}}
 
 Add the following line to your container Dockerfile:
 

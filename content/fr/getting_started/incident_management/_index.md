@@ -33,7 +33,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
   tag: Blog
   text: Comment Datadog gère ses incidents
-kind: documentation
+
 title: Débuter avec Incident Management
 ---
 
@@ -72,7 +72,7 @@ Ce guide repose sur l'utilisation du [presse-papiers Datadog][2] pour déclarer 
 | Severity Level           | Le niveau de gravité est défini sur **Unknown**, car on ne sait pas encore quel est l'impact sur les clients ni sur les services connexes. Consultez la description de chaque niveau de gravité dans l'application et suivez les directives de votre équipe.                                                                                |
 | Incident Commander       | Laissez votre nom. Dans le cas d'un véritable incident, celui-ci serait alors assigné à la personne responsable de l'enquête. L'Incident Commander peut être modifié à mesure que l'enquête avance.                                                                                 |
 | Notifications            | Laissez ce champ vide : comme il ne s'agit que d'un test, il n'est pas nécessaire d'alerter une autre personne ou un autre service. Dans le cas d'un véritable incident, ajoutez les personnes et les services à prévenir pour faciliter les phases d'enquête et de remédiation. Vous pouvez envoyer ces notifications via Slack ou PagerDuty. |
-| Notes & Links            | Ajoutez des informations appuyant la raison pour laquelle vous déclarez l'incident. Il peut s'agir de graphiques, de logs ou de tout visuel clé. Le graphique et le monitor que vous avez sélectionnés sont déjà inclus, mais vous pouvez ajouter des signaux supplémentaires. Par exemple, copiez et collez l'URL de ce guide.   
+| Notes & Links            | Ajoutez des informations appuyant la raison pour laquelle vous déclarez l'incident. Il peut s'agir de graphiques, de logs ou de tout visuel clé. Le graphique et le monitor que vous avez sélectionnés sont déjà inclus, mais vous pouvez ajouter des signaux supplémentaires. Par exemple, copiez et collez l'URL de ce guide.
 9. Cliquez sur **Declare Incident** pour créer l'incident.
    Vous pouvez également déclarer un incident depuis un [graphique][4], un [monitor][5] ou l'[API d'incidents][6]. Si vous utilisez APM, vous pouvez cliquer sur l'icône des incidents sur n'importe quel graphique APM pour déclarer un incident.
 Avec l'intégration Slack, vous pouvez également utiliser le raccourci `/datadog incident` pour déclarer un incident et définir le titre, la gravité et l'impact sur les clients.

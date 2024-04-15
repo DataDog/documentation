@@ -1,6 +1,6 @@
 ---
 title: Oups, une erreur s'est produite…
-kind: documentation
+
 private: true
 ---
 

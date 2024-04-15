@@ -8,7 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
-kind: guide
+
 title: Alerte en cas d'absence de changement d'une valeur
 ---
 

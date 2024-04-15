@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Microsoft Teams
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: microsoft_teams
 public_title: Intégration Datadog/Microsoft Teams
@@ -93,7 +93,7 @@ Pour associer vos comptes depuis Microsoft Teams :
 
 4. Le bot Datadog vous donnera alors les instructions à suivre pour associer vos comptes. Cliquez sur **Connect Datadog Account**.
 5. Le bot Datadog vous enverra ensuite un message avec un lien pour associer vos comptes. Cliquez sur le lien et suivez les instructions.
-6. Vous serez alors redirigé vers le [carré d'intégration Microsoft Teams][1]. 
+6. Vous serez alors redirigé vers le [carré d'intégration Microsoft Teams][1].
 7. Créez une clé d'application en cliquant sur le bouton **Create** du message affiché sur le [carré d'intégration Microsoft Teams][1].
 
 

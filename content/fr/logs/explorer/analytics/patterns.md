@@ -7,7 +7,7 @@ further_reading:
 - link: logs/explorer/analytics
   tag: Documentation
   text: Apprendre à analyser vos logs
-kind: documentation
+
 title: Regrouper des logs en patterns
 ---
 
@@ -36,8 +36,8 @@ Lʼinspecteur de pattern vous permet de profiter dʼune analyse visuelle des val
 Par exemple, si vous analysez un problème, vous pouvez voir le nombre de hosts impliqués ou les régions ou centres de données qui sont impactés.
 
 1. Accédez au [Log Explorer][3].
-2. Cliquez sur **Patterns** dans la section **Group into**. Dans la liste des patterns, les valeurs agrégées dans la section des messages sont indiquées en jaune. Passez sur une valeur agrégée pour obtenir un aperçu de la distribution visuelle de ses valeurs. 
-3. Cliquez sur une valeur agrégée pour ouvrir le volet latéral du pattern du log et afficher plus de détails dans lʼonglet **Pattern Inspector**. 
+2. Cliquez sur **Patterns** dans la section **Group into**. Dans la liste des patterns, les valeurs agrégées dans la section des messages sont indiquées en jaune. Passez sur une valeur agrégée pour obtenir un aperçu de la distribution visuelle de ses valeurs.
+3. Cliquez sur une valeur agrégée pour ouvrir le volet latéral du pattern du log et afficher plus de détails dans lʼonglet **Pattern Inspector**.
 
 {{< img src="logs/explorer/group/pattern_inspector_panel_1.png" alt="Le volet du pattern affichant lʼonglet de lʼinspecteur de pattern" style="width:90%;" >}}
 

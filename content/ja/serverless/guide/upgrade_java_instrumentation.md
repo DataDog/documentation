@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Java Lambda 関数のインスツルメンテーションのアップグレード
 ---
 

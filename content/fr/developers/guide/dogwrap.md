@@ -1,7 +1,7 @@
 ---
 title: Dogwrap
 description: Appeler des commandes et générer des événements à partir des résultats avec Dogwrap
-kind: guide
+
 aliases:
   - /fr/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
 ---

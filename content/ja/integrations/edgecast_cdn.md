@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Edgecast
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: edgecast_cdn
 public_title: Datadog-Edgecast インテグレーション
@@ -32,7 +32,7 @@ Edgecast は、エッジコンピューティング、アプリケーション�
 
 ## 計画と使用
 
-### Edgecast クライアントの作成 
+### Edgecast クライアントの作成
 
 1. [Edgecast VDMS アカウント][1]にログインし、**Clients** タブに移動します。
 2. **Create New Client** をクリックすると、New Client モーダルが表示されます。

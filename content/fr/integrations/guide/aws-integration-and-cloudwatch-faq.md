@@ -2,7 +2,7 @@
 aliases:
 - /fr/integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
 - /fr/integrations/faq/aws-integration-and-cloudwatch-faq
-kind: guide
+
 title: FAQ sur l'intégration AWS et CloudWatch
 ---
 
@@ -34,7 +34,7 @@ Vous pouvez surveiller votre utilisation de l'API CloudWatch avec l'[intégratio
 
 ### Comment réduire le délai de réception de mes métriques CloudWatch dans Datadog ?
 
-Par défaut, Datadog recueille les métriques AWS toutes les 10 minutes. Consultez la section [Délai de réception des métriques cloud][4] pour en savoir plus. Si vous souhaitez réduire cette latence, contactez l'[assistance Datadog][5] pour obtenir de l'aide. Pour que les métriques CloudWatch parviennent à Datadog avec une latence de 2 à 3 minutes seulement, nous vous conseillons d'utiliser les [Flux de métriques AWS CloudWatch avec Amazon Kinesis Data Firehose][6]. 
+Par défaut, Datadog recueille les métriques AWS toutes les 10 minutes. Consultez la section [Délai de réception des métriques cloud][4] pour en savoir plus. Si vous souhaitez réduire cette latence, contactez l'[assistance Datadog][5] pour obtenir de l'aide. Pour que les métriques CloudWatch parviennent à Datadog avec une latence de 2 à 3 minutes seulement, nous vous conseillons d'utiliser les [Flux de métriques AWS CloudWatch avec Amazon Kinesis Data Firehose][6].
 
 
 ### Pourquoi seules les valeurs moyennes de mes métriques AWS/CloudWatch custom sont-elles visibles ?

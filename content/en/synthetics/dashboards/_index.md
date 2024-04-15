@@ -1,7 +1,7 @@
 ---
 title: Synthetic Dashboards
-kind: documentation
-description: Explore out-of-the-box Synthetic dashboards to learn more about your Synthetic tests.  
+
+description: Explore out-of-the-box Synthetic dashboards to learn more about your Synthetic tests.
 further_reading:
 - link: '/synthetics/'
   tag: 'Documentation'
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-When you create a Synthetic test, Datadog [collects data][1] and generates dashboards about your stack, browser applications, or overall tests' performance, private locations, and events. 
+When you create a Synthetic test, Datadog [collects data][1] and generates dashboards about your stack, browser applications, or overall tests' performance, private locations, and events.
 
 Access your Synthetic dashboards by filtering for `Synthetics` in the search query of the [**Dashboard List**][2] or by clicking on the dropdown menu under [**Dashboards**][3] on the [Synthetic Monitoring & Continuous Testing page][4].
 
@@ -34,7 +34,7 @@ You can clone [dashboards][5] and customize them by team, environment, or region
 
 ### Edit template variables
 
-The generated Synthetic dashboards automatically contain a set of default template variables. Use the template variable dropdown menus to narrow the data shown in the dashboard. For example, you can filter for a specific browser type with the `Browser` template variable. For more information, see the [Template Variables][7] documentation. To clone your Synthetic dashboard, click the **Clone** button next to the **Configure** icon. 
+The generated Synthetic dashboards automatically contain a set of default template variables. Use the template variable dropdown menus to narrow the data shown in the dashboard. For example, you can filter for a specific browser type with the `Browser` template variable. For more information, see the [Template Variables][7] documentation. To clone your Synthetic dashboard, click the **Clone** button next to the **Configure** icon.
 
 {{< img src="synthetics/dashboards/clone.png" alt="Clone a dashboard" style="width:100%;">}}
 
@@ -44,7 +44,7 @@ The Synthetic dashboard has a default view which you can adjust. Click the **Edi
 
 ### Create a saved view
 
-Once you are done editing, click **Done** and select **Save selections as view** from the left hand dropdown menu. 
+Once you are done editing, click **Done** and select **Save selections as view** from the left hand dropdown menu.
 
 {{< img src="synthetics/dashboards/saved_view.png" alt="Create a saved view in a Synthetic dashboard" style="width:60%;">}}
 

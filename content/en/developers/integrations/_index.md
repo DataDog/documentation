@@ -17,17 +17,17 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Learn how to develop on the Datadog platform
-kind: documentation
+
 title: Build an Integration
 ---
 ## Overview
 
-This page walks you through how Technology Partners can [build an integration](#create-a-datadog-integration) using the [Datadog Agent][11] or the [Datadog API][12], and list their offering on the **Integrations** or **Marketplace** page. 
+This page walks you through how Technology Partners can [build an integration](#create-a-datadog-integration) using the [Datadog Agent][11] or the [Datadog API][12], and list their offering on the **Integrations** or **Marketplace** page.
 
 {{< tabs >}}
 {{% tab "Integrations" %}}
 
-The [Integrations page][101] includes integrations built by both Datadog and our Technology Partners, available at _no cost_ to Datadog customers. 
+The [Integrations page][101] includes integrations built by both Datadog and our Technology Partners, available at _no cost_ to Datadog customers.
 
 {{< img src="developers/integrations/integrations_overview.png" alt="The Datadog Integrations page" style="width:100%;" >}}
 
@@ -52,13 +52,13 @@ By creating an integration, you can achieve the following benefits:
 Correlate your data with user observability data
 : Leverage Datadog to increase the value of your platform by allowing customers to see the data from your platform alongside the rest of their technology stack.
 
-Decrease mean-time-to-resolution (MTTR) for customers 
-: When a customer's account is enriched with data from an integration, they are able to see a broader view of their entire stack, allowing them to debug and remediate issues more quickly. 
+Decrease mean-time-to-resolution (MTTR) for customers
+: When a customer's account is enriched with data from an integration, they are able to see a broader view of their entire stack, allowing them to debug and remediate issues more quickly.
 
-Increase adoption and visibility 
+Increase adoption and visibility
 : Ensuring native functionality for Datadog reduces friction to adoption, and displaying a tile on the [Integrations page][10] or the [Marketplace page][17] provides key visibility to all of Datadog's customers.
 
-## Get started 
+## Get started
 
 ### Join the Datadog partner network
 
@@ -66,7 +66,7 @@ Before listing an integration on Datadog, first apply to the [Datadog Partner Ne
 
 ### Request a sandbox account
 
-All Technology Partners can request a dedicated Datadog sandbox account to help develop their integration. This sandbox account has a free license that you can use to send in data, build out dashboards, and more. 
+All Technology Partners can request a dedicated Datadog sandbox account to help develop their integration. This sandbox account has a free license that you can use to send in data, build out dashboards, and more.
 
 <div class="alert alert-info">If you are already a member of a Datadog organization (including a trial org), you may need to switch to your newly created sandbox. For more information, see the <a href="https://docs.datadoghq.com/account_management/org_switching/">Account Management documentation</a>.</div>
 
@@ -96,13 +96,13 @@ As the author of the integration, you are responsible for maintaining the code a
 
 ### Agent-based integrations
 
-Agent-based integrations use the [Datadog Agent][11] to submit data through checks written by Technology Partners. The implementation code for these integrations is hosted by Datadog. 
+Agent-based integrations use the [Datadog Agent][11] to submit data through checks written by Technology Partners. The implementation code for these integrations is hosted by Datadog.
 
 Agent integrations are best suited for collecting data from systems or applications that live in a local area network (LAN) or virtual private cloud (VPC). [Creating an Agent integration][2] requires you to publish and deploy your solution as a Python wheel (`.whl`).
 
 ### API-based integrations
 
-API-based integrations can submit telemetry—such as metrics, traces, logs, and more—from external platforms using the [Datadog API][12]. Customers can then visualize and correlate this data alongside data from the rest of their stack, allowing them to quickly analyze and remediate issues. API-based integrations may also read data out of Datadog once customers [authorize access using OAuth][13]. 
+API-based integrations can submit telemetry—such as metrics, traces, logs, and more—from external platforms using the [Datadog API][12]. Customers can then visualize and correlate this data alongside data from the rest of their stack, allowing them to quickly analyze and remediate issues. API-based integrations may also read data out of Datadog once customers [authorize access using OAuth][13].
 
 Technology Partners write and host the implementation code that makes up the integration. [Creating an API integration][1] works well for Technology Partners building a connector between Datadog and another SaaS platform.
 

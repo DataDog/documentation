@@ -21,7 +21,7 @@ integration_id: hcp-vault
 integration_title: "HCP\_Vault"
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: hcp_vault.
@@ -70,10 +70,10 @@ Pour activer la diffusion de métriques :
 
    ![Choisir un fournisseur][5]
 
-5. Cliquez sur Save. 
+5. Cliquez sur Save.
 **Remarque** : HCP Vault prend en charge la diffusion de métriques vers un seul endpoint de métriques à la fois.
 
-6. Accédez à Datadog, puis activez l'intégration en cliquant sur Install dans le carré d'intégration. Cette opération permet d'installer un dashboard HCP Vault avec des widgets qui tirent le meilleur parti de vos données de télémétrie HCP Vault. Pour consulter ce dashboard, recherchez « HCP Vault Overview » dans la liste de dashboards. 
+6. Accédez à Datadog, puis activez l'intégration en cliquant sur Install dans le carré d'intégration. Cette opération permet d'installer un dashboard HCP Vault avec des widgets qui tirent le meilleur parti de vos données de télémétrie HCP Vault. Pour consulter ce dashboard, recherchez « HCP Vault Overview » dans la liste de dashboards.
 
 ## Données collectées
 

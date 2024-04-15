@@ -1,6 +1,6 @@
 ---
 title: Calculated Fields
-kind: documentation
+
 disable_toc: false
 private: true
 ---

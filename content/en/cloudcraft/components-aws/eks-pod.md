@@ -1,6 +1,6 @@
 ---
 title: "EKS Pod Component"
-kind: documentation
+
 ---
 ## Overview
 

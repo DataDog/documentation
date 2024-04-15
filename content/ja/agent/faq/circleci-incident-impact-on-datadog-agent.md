@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: CircleCI セキュリティインシデントによる Datadog Agent への影響について
 ---
 <details>

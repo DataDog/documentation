@@ -4,7 +4,7 @@ further_reading:
 - link: /containers/troubleshooting/duplicate_hosts
   tag: Documentation
   text: AWS (EC2 または EKS) 上の Kubernetes によるホストの重複
-kind: documentation
+
 title: コンテナのトラブルシューティング
 ---
 
@@ -113,7 +113,7 @@ Azure Kubernetes Service (AKS) や Google Kubernetes Engine (GKE) などのマ�
 **ノード Agent フレア**
 
 ```
-$ kubectl exec <AGENT_POD_NAME> -it agent flare <CASE_ID> 
+$ kubectl exec <AGENT_POD_NAME> -it agent flare <CASE_ID>
 ```
 
 **Cluster Agent フレア**

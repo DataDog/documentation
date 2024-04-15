@@ -1,6 +1,6 @@
 ---
 title: Agent v6 Changes
-kind: faq
+
 aliases:
  - /agent/faq/agent-v6-changes
 further_reading:

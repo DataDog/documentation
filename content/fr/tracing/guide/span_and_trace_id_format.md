@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/tracing/faq/span_and_trace_id_format/
-kind: guide
+
 title: Formats des ID de trace et de span
 ---
 {{< jqmath-vanilla >}}

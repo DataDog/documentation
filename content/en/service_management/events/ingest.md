@@ -1,6 +1,6 @@
 ---
 title: Send Events to Datadog
-kind: Documentation
+
 ---
 
 ## Standard events

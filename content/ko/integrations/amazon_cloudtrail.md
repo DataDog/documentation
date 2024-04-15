@@ -17,7 +17,7 @@ integration_id: amazon-cloudtrail
 integration_title: AWS CloudTrail
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_cloudtrail
 public_title: Datadog-AWS CloudTrail 통합
@@ -43,7 +43,7 @@ AWS CloudTrail은 AWS 계정에 대한 감사 트레일을 제공합니다. Data
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정합니다. 
+이미 하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정합니다.
 
 ### 이벤트 수집
 
@@ -113,35 +113,35 @@ AWS CloudTrail 통합은 AWS CloudTrail 감사 트레일을 기준으로 각기 
 
 일반 우선순위로 설정될 수 있는 CloudTrail 이벤트(기본 필터 아래 이벤트 탐색기에 표시됨):
 
-* apigateway 
-* autoscaling 
-* cloudformation 
-* cloudfront 
-* cloudsearch 
-* cloudtrail 
-* codedeploy 
-* codepipeline 
-* config 
-* datapipeline  
-* ds 
-* ec2 
-* ecs 
-* elasticache 
-* elasticbeanstalk 
-* elasticfilesystem 
-* elasticloadbalancing 
-* elasticmapreduce 
-* iam 
-* kinesis 
-* lambda 
-* monitoring 
-* opsworks 
-* rds 
-* redshift 
-* route53 
-* s3 
-* ses 
-* signin 
+* apigateway
+* autoscaling
+* cloudformation
+* cloudfront
+* cloudsearch
+* cloudtrail
+* codedeploy
+* codepipeline
+* config
+* datapipeline
+* ds
+* ec2
+* ecs
+* elasticache
+* elasticbeanstalk
+* elasticfilesystem
+* elasticloadbalancing
+* elasticmapreduce
+* iam
+* kinesis
+* lambda
+* monitoring
+* opsworks
+* rds
+* redshift
+* route53
+* s3
+* ses
+* signin
 * ssm
 
 ### 서비스 검사

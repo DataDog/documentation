@@ -1,6 +1,6 @@
 ---
 title: Containers View
-kind: documentation
+
 aliases:
   - /guides/livecontainers
   - /graphing/infrastructure/livecontainers/
@@ -52,7 +52,7 @@ For example:
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-The Datadog Operator enables the Process Agent by default. 
+The Datadog Operator enables the Process Agent by default.
 
 For verification, ensure that `features.liveContainerCollection.enabled` is set to `true` in your `datadog-agent.yaml`:
 

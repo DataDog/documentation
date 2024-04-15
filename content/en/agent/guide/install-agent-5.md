@@ -1,6 +1,6 @@
 ---
 title: Install Datadog Agent 5
-kind: Guide
+
 further_reading:
 - link: "/agent/basic_agent_usage/"
   tag: "Documentation"
@@ -248,7 +248,7 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
 1. Update your local YUM repo and install the Agent:
    ```shell
    sudo yum makecache
-   sudo yum remove datadog-agent-base 
+   sudo yum remove datadog-agent-base
    sudo yum install datadog-agent
    ```
 1. Copy the example config into place. Replace `MY_API_KEY` with your Datadog API key:
@@ -819,7 +819,7 @@ node "elastic-node1.mydomain.com" {
 
    - If you're not using Berkshelf, install the cookbook in to your repository using Knife:
      ```shell
-     knife cookbook site install datadog 
+     knife cookbook site install datadog
      ```
 
 1. Set the Datadog-specific attributes in either a role, environment, or another recipe. Replace `MY_API_KEY` with your Datadog API key:
@@ -834,7 +834,7 @@ node "elastic-node1.mydomain.com" {
    berks upload
    # or
    knife cookbook upload datadog
-   knife cookbook list | grep datadog && 
+   knife cookbook list | grep datadog &&
    echo -e "e[0;32mdatadog cookbook - OKe[0m" ||
    echo -e "e[0;31mmissing datadog cookbook - OKe[0m"
    ```
@@ -877,7 +877,7 @@ The following instructions add the Datadog formula to the base Salt environment.
    ```shell
    systemctl restart salt-master
    ```
-   or 
+   or
    ```shell
    service salt-master restart
    ```
@@ -934,7 +934,7 @@ The following instructions add the Datadog formula to the base Salt environment.
            instances:
              - directory: "/srv/pillar"
                name: "pillars"
-   ```         
+   ```
 
 Refer to the formula [Github repository][1] for logs configuration, check examples, and advanced use cases.
 <!-- vale Datadog.inclusive = YES -->
@@ -950,7 +950,7 @@ Refer to the formula [Github repository][1] for logs configuration, check exampl
 Use the one-step source install script. Replace `MY_API_KEY` with your Datadog API key:
 ```shell
 DD_API_KEY=MY_API_KEY sh -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/setup_agent.sh)"
-``` 
+```
 
 The script installs the Agent in its own self-contained sandbox located at `~/.datadog-agent`.
 

@@ -1,6 +1,6 @@
 ---
 title: "AKS Pod Component"
-kind: documentation
+
 ---
 
 ## Overview

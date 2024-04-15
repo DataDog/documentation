@@ -1,6 +1,6 @@
 ---
 title: APM
-kind: documentation
+
 description: Instrument your code to improve performance
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=APM"
@@ -20,7 +20,7 @@ further_reading:
     text: "Manage API performance, security, and ownership with Datadog API Catalog"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
-    text: "Join an interactive session to boost your APM understanding"  
+    text: "Join an interactive session to boost your APM understanding"
 
 aliases:
   - /tracing/faq/terminology

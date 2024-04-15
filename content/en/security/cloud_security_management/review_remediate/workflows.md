@@ -1,6 +1,6 @@
 ---
 title: Automate Security Workflows with Workflow Automation
-kind: documentation
+
 further_reading:
   - link: "/security/cloud_security_management"
     tag: "Documentation"
@@ -108,7 +108,7 @@ Next, add the JavaScript Data Transformation Function action to the canvas and c
     - **Channel**: The channel to send the Slack message to.
     - **Message text**: The text that appears in the Slack message. For example:
     {{< code-block lang="text" >}}
-    S3 bucket `{{ Steps.Get_security_finding.resource }}` successfully blocked. AWS API response: 
+    S3 bucket `{{ Steps.Get_security_finding.resource }}` successfully blocked. AWS API response:
     ```{{ Steps.Block_public_access }}```
 
     The issue will be marked as fixed the next time the resource is scanned, which can take up to one hour.

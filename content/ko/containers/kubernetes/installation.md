@@ -13,7 +13,7 @@ further_reading:
 - link: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading
   tag: GitHub
   text: Datadog Helm 업그레이드하기
-kind: documentation
+
 title: Kubernetes에 Datadog Agent 설치하기
 ---
 
@@ -202,7 +202,7 @@ helm delete my-datadog-operator
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-`<RELEASE_NAME>` 디플로이먼트를 제거/삭제하려면: 
+`<RELEASE_NAME>` 디플로이먼트를 제거/삭제하려면:
 
 ```bash
 helm uninstall <RELEASE_NAME>

@@ -3,7 +3,7 @@ aliases:
 - /ja/serverless/serverless_integrations
 - /ja/serverless/datadog_lambda_library/
 - /ja/serverless/libraries_integrations/library/
-kind: documentation
+
 title: サーバーレスライブラリとインテグレーション
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Compatibility Requirements
-kind: documentation
+
 type: multi-code-lang
 description:
 further_reading:

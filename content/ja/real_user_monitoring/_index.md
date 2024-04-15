@@ -48,7 +48,7 @@ further_reading:
 - link: /real_user_monitoring/browser/data_collected/
   tag: Documentation
   text: 収集された RUM ブラウザデータ
-kind: documentation
+
 title: RUM & セッションリプレイ
 ---
 

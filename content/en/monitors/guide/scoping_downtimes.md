@@ -1,6 +1,6 @@
 ---
 title: Scoping Downtime
-kind: Guide
+
 disable_toc: false
 further_reading:
 - link: "/monitors/downtimes"

@@ -11,7 +11,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-mobile-widgets/
   tag: ブログ
   text: Datadog モバイルダッシュボードウィジェットで、オンコールエクスペリエンスを改善
-kind: documentation
+
 title: Datadog モバイルアプリ
 ---
 
@@ -63,7 +63,7 @@ SAML でログインしようとしているときにエラーが発生し続け
 
 **注:** モニター、通知、または保存済みビューの設定または編集は、[Datadog ウェブアプリ][7]で行う必要があります。ウェブアプリで設定されたすべてのモニターがモバイルアプリで表示されます。詳細については、[モニターの作成][8]を参照してください。
 
-## ダッシュボード  
+## ダッシュボード
 
 {{< img src="service_management/mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ダッシュボードページ">}}
 

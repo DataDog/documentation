@@ -1,6 +1,6 @@
 ---
 title: Agent Resource Usage by APM
-kind: Documentation
+
 ---
 
 
@@ -10,7 +10,7 @@ The Agent buffers unprocessed payloads in memory, so throttling the Agent proces
 
 ## Detect out-of-CPU
 
-To monitor CPU usage and detect oncoming out-of-CPU issues, compare the [maximum CPU percentage][1] configured for the Agent to the `datadog.trace_agent.cpu_percent` metric. The `datadog.trace_agent.cpu_percent` metric is CPU usage in terms of percentage of a core. For example, a value of `50` is half a core, or `200` is two cores. 
+To monitor CPU usage and detect oncoming out-of-CPU issues, compare the [maximum CPU percentage][1] configured for the Agent to the `datadog.trace_agent.cpu_percent` metric. The `datadog.trace_agent.cpu_percent` metric is CPU usage in terms of percentage of a core. For example, a value of `50` is half a core, or `200` is two cores.
 
 See the full list of [Agent APM metrics][2].
 

@@ -12,7 +12,7 @@ further_reading:
   tag: Documentation
   text: Découvrir comment gérer les fenêtres contextuelles dont l'affichage n'est
     pas prévu
-kind: guide
+
 title: Utiliser des assertions JavaScript personnalisées dans des tests Browser
 ---
 
@@ -39,7 +39,7 @@ Pour vérifier que des éléments ne sont *pas* sur la page et renvoyer le nombr
 var element = document.querySelectorAll("<SÉLECTEURS>");
 if ( element.length > 0 ){
     console.error(element.length+"  "+"éléments existent");
-} 
+}
 return element.length === 0;
 {{< /code-block >}}
 

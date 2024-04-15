@@ -1,6 +1,6 @@
 ---
 title: Azure App Service - Linux Container
-kind: documentation
+
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"

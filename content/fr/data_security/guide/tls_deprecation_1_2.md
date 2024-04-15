@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Avis d'abandon des versions de TLS antérieures à la 1.2
 ---
 
@@ -42,7 +42,7 @@ Lorsqu'il est installé avec le [script d'installation source][4], l'Agent v5 r
 
 Pour déterminer si la version de Python de votre système prend en charge la version 1.2 de TLS (et donc si l'Agent installé depuis les sources prend en charge la version 1.2 de TLS), exécutez cette commande à partir d'un shell système :
 
-`python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"` 
+`python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"`
 
 Cette commande renvoie `TLS 1.2` si la version 1.2 de TLS est prise en charge. Si ce n'est pas le cas, une version antérieure de TLS ou un message d'erreur est renvoyé. Si la version 1.2 de TLS n'est pas prise en charge, mettez à niveau la version de Python et d'OpenSSL de votre système ou installez l'Agent v7.
 

@@ -1,7 +1,7 @@
 ---
 title: Monitor FAQ
-kind: faq
-cascade: 
+
+cascade:
   - private: true
 ---
 

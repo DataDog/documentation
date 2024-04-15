@@ -1,6 +1,6 @@
 ---
 title: Getting Integrations Working
-kind: documentation
+
 aliases:
     - /integrations/faq/issues-getting-integrations-working
 further_reading:

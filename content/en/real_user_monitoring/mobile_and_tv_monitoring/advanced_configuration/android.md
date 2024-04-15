@@ -1,6 +1,6 @@
 ---
 title: RUM Android Advanced Configuration
-kind: documentation
+
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10
@@ -16,7 +16,7 @@ further_reading:
 ---
 ## Overview
 
-If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Android RUM setup documentation][2]. 
+If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Android RUM setup documentation][2].
 
 ## Enrich user sessions
 
@@ -44,7 +44,7 @@ In addition to [tracking views automatically][4], you can also track specific di
        public void onResume() {
             GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes);
        }
-       
+
        public void onPause() {
             GlobalRumMonitor.get().stopView(viewKey, viewAttributes);
        }
@@ -60,7 +60,7 @@ In addition to RUM's default attributes, you can measure where your application 
    ```kotlin
       fun onHeroImageLoaded() {
             GlobalRumMonitor.get().addTiming("hero_image")
-      } 
+      }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -72,7 +72,7 @@ In addition to RUM's default attributes, you can measure where your application 
 {{% /tab %}}
 {{< /tabs >}}
 
-Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][10] before graphing it in RUM analytics or in dashboards. 
+Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][10] before graphing it in RUM analytics or in dashboards.
 
 ### Custom Actions
 
@@ -83,7 +83,7 @@ Note the action type should be one of the following: "custom", "click", "tap", "
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       fun onUserInteraction() { 
+       fun onUserInteraction() {
             GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
        }
    ```
@@ -135,7 +135,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
             String attrName = "headers." + key.toLowerCase(Locale.US);
             result.put(attrName, headers.values(key).get(0));
         }
-        
+
         return result;
     }
 }
@@ -147,7 +147,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 
 In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
        fun loadResource() {
@@ -157,7 +157,7 @@ In addition to [tracking resources automatically][6], you can also track specifi
               GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
             } catch (e: Exception) {
               GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
-            } 
+            }
        }
    ```
 {{% /tab %}}
@@ -222,7 +222,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 ```
 
 ## Track widgets
- 
+
 Widgets are not automatically tracked with the SDK. To send UI interactions from your widgets manually, call the Datadog API. [See example][7].
 
 
@@ -230,39 +230,39 @@ Widgets are not automatically tracked with the SDK. To send UI interactions from
 
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
-`setFirstPartyHosts()` 
+`setFirstPartyHosts()`
 : Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
-`useSite(DatadogSite)` 
+`useSite(DatadogSite)`
 : Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
- 
+
 You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM feature:
 
-`trackUserInteractions(Array<ViewAttributesProvider>)` 
+`trackUserInteractions(Array<ViewAttributesProvider>)`
 : Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
 
-`useViewTrackingStrategy(strategy)` 
+`useViewTrackingStrategy(strategy)`
 : Defines the strategy used to track views. Depending on your application's architecture, you can choose one of several implementations of [`ViewTrackingStrategy`][4] or implement your own.
 
-`trackLongTasks(durationThreshold)` 
+`trackLongTasks(durationThreshold)`
 : Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog.
 
-`setBatchSize([SMALL|MEDIUM|LARGE])` 
+`setBatchSize([SMALL|MEDIUM|LARGE])`
 : Defines the individual batch size for requests sent to Datadog.
 
-`setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
+`setUploadFrequency([FREQUENT|AVERAGE|RARE])`
 : Defines the frequency for requests made to Datadog endpoints (if requests are available).
 
-`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
+`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])`
 : Sets the preferred frequency for collecting mobile vitals.
 
-`setSessionSampleRate(<sampleRate>)` 
+`setSessionSampleRate(<sampleRate>)`
 : Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
-`setXxxEventMapper()` 
+`setXxxEventMapper()`
 : Sets the data scrubbing callbacks for views, actions, resources, and errors.
 
- 
+
 ### Automatically track views
 
 To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
@@ -273,7 +273,7 @@ To automatically track your views (such as activities and fragments), provide a 
 `FragmentViewTrackingStrategy`
 : Every fragment in your application is considered a distinct view.
 
-`MixedViewTrackingStrategy` 
+`MixedViewTrackingStrategy`
 : Every activity or fragment in your application is considered a distinct view.
 
 `NavigationViewTrackingStrategy`
@@ -299,7 +299,7 @@ For instance, to set each fragment as a distinct view, use the following configu
 {{% /tab %}}
 {{< /tabs >}}
 
-   
+
 For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedViewTrackingStrategy`, you can filter which `Fragment` or `Activity` is tracked as a RUM View by providing a `ComponentPredicate` implementation in the constructor:
 
 {{< tabs >}}
@@ -317,7 +317,7 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
                 override fun getViewName(component: Activity): String? = null
             })
         )
-        .build()  
+        .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -342,7 +342,7 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
 {{% /tab %}}
 {{< /tabs >}}
 
-   
+
 **Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
 
 
@@ -454,7 +454,7 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 {{< /tabs >}}
 
    When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
-     
+
    | Event type    | Attribute key      | Description                                     |
    |---------------|--------------------|-------------------------------------------------|
    | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
@@ -481,7 +481,7 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    |               | `view.referrer`       | URL that linked to the initial view of the page. |
    |               | `view.url`            | URL of the view.                                 |
    |               | `view.name`           | Name of the view.                                |
-   
+
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
 ## Sample RUM sessions

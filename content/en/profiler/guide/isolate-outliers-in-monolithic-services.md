@@ -1,6 +1,6 @@
 ---
 title: Isolate Outliers in Monolithic Services
-kind: guide
+
 further_reading:
 - link: "/profiler"
   tag: "Documentation"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-When investigating the performance of a monolithic application--that is, a single service that has multiple uses--you usually need to find which parts of the code base are using the most resources. The APM Service page showing top endpoints might be a logical first place to look, but the data there is focused on the number of requests and their duration, not the impact those requests have on compute resources available on your backend. 
+When investigating the performance of a monolithic application--that is, a single service that has multiple uses--you usually need to find which parts of the code base are using the most resources. The APM Service page showing top endpoints might be a logical first place to look, but the data there is focused on the number of requests and their duration, not the impact those requests have on compute resources available on your backend.
 
 Instead, use the Continuous Profiler to filter flame graphs by endpoint usage. This allows you to identify the top resource-consuming endpoints and examine which functions use the most resources for each particular endpoint.
 
@@ -24,7 +24,7 @@ The first step in a performance investigation is to identify anomalies in resour
 
 {{< img src="profiler/guide-monolithic-outliers/1-outliers-monolith-cpu-usage.png" alt="" style="width:100%;" >}}
 
-This doesn't provide the exact root cause, but you can see anomalous peaks in CPU usage. 
+This doesn't provide the exact root cause, but you can see anomalous peaks in CPU usage.
 
 Select the **Show - Avg of** dropdown (highlighted in the previous image) and change the graph to show `CPU Cores for Top Endpoints` instead. This graph shows how different parts of the application contribute to the overall CPU utilization:
 
@@ -44,7 +44,7 @@ To determine the cause of increased CPU usage each time `GET /store_history` is 
 
 {{< img src="profiler/guide-monolithic-outliers/4-outliers-monolith-flame-graph.png" alt="Your image description" style="width:100%;" >}}
 
-To better understand why the `GET /store_history` endpoint is using more CPU, refer to the table highlighted in the previous image, where the endpoint is second from the top. Select that row to focus the flame graph on the CPU utilization caused by the `GET /store_history` endpoint. 
+To better understand why the `GET /store_history` endpoint is using more CPU, refer to the table highlighted in the previous image, where the endpoint is second from the top. Select that row to focus the flame graph on the CPU utilization caused by the `GET /store_history` endpoint.
 
 Because you are investigating resource usage per request, also change the value in the dropdown at top of the table to `CPU Time per Endpoint Call`. This shows the average resource usage per call to that endpoint instead of the average resource usage per minute.
 
@@ -52,7 +52,7 @@ Because you are investigating resource usage per request, also change the value 
 
 With the graph displaying data for the correct time and endpoint, you should have enough data to determine what is causing the spike in CPU utilization. If you're still uncertain, you can compare the flame graph for the spike with a time when utilization was more acceptable.
 
-To see if there are differences in which methods are using a lot of CPU time between a spike and normal usage, click **Compare** (next to the search field) and select `Previous 15 minutes`. This opens the Comparison view. 
+To see if there are differences in which methods are using a lot of CPU time between a spike and normal usage, click **Compare** (next to the search field) and select `Previous 15 minutes`. This opens the Comparison view.
 
 The view shows two graphs, labeled **A** and **B**, each representing a time range for CPU utilization per `GET /store_history` call. Adjust the time selector for **A** so that it is scoped to a period with low CPU utilization per call:
 
@@ -68,7 +68,7 @@ Fix that bug and verify that the spikes go away, using the timeseries graphs dis
 
 There are other attributes available in the profiler. For example, you can filter and group a flame graph by operation names, rather than by functions or threads. For monolithic applications, this can more clearly identify CPU-intensive resources, even if they are shared between endpoints.
 
-The APM `Trace operation` attribute lets you filter and group a flame graph with the same granularity as the traces for the selected endpoints. This is a good balance between the high granularity of threads or methods, and the low granularity of entire endpoints. To isolate operations, select `Trace Operation` from the **CPU time by** dropdown: 
+The APM `Trace operation` attribute lets you filter and group a flame graph with the same granularity as the traces for the selected endpoints. This is a good balance between the high granularity of threads or methods, and the low granularity of entire endpoints. To isolate operations, select `Trace Operation` from the **CPU time by** dropdown:
 
 {{< img src="profiler/guide-monolithic-outliers/7-outliers-monolith-trace-operation.png" alt="Your image description" style="width:100%;" >}}
 

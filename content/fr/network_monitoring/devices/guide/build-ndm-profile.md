@@ -1,6 +1,6 @@
 ---
 title: Créer un profil NDM
-kind: guide
+
 aliases:
   - /fr/network_performance_monitoring/devices/guide/build-ndm-profile
 further_reading:

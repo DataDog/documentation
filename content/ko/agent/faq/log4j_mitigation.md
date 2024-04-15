@@ -3,7 +3,7 @@ further_reading:
 - link: /integrations/guide/jmx_integrations/
   tag: 설명서
   text: 어떤 통합에서 Jmxfetch를 사용합니까?
-kind: faq
+
 title: Log4Shell로 인한 원격 코드 실행 위험 완화
 ---
 

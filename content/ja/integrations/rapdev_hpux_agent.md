@@ -31,7 +31,7 @@ integration_id: rapdev-hpux-agent
 integration_title: HP-UX Agent
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -84,9 +84,9 @@ HP-UX Agent は、ネイティブ Agent と同じ URL とポートを使用し�
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
- - メール: support@rapdev.io 
+ - メール: support@rapdev.io
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222 
+ - 電話: 855-857-0222
 
 ---
 ボストンより ❤️ を込めて

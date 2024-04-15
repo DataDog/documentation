@@ -1,6 +1,6 @@
 ---
 title: Automate Snapshots of Cloud Accounts via the Cloudcraft API
-kind: guide
+
 ---
 
 ## Overview

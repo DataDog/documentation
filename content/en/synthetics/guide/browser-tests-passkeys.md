@@ -1,7 +1,7 @@
 ---
 title: Use Passkeys (FIDO2) In Browser Tests
-kind: guide
-description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
+
+description: Learn how to ensure your Synthetic browser tests can log in to your applications.
 further_reading:
   - link: '/synthetics/guide/app-that-requires-login/'
     tag: 'Documentation'
@@ -29,13 +29,13 @@ Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global var
 ## Use passkeys in your Synthetic browser tests
 <div class="alert alert-warning">Synthetic Monitoring supports passkeys in browser tests for Chrome and Edge.</div>
 
-When [creating a browser test][3], complete your application's passkeys registration and authentication flow using the passkeys stored in your virtual authenticator global variable. 
+When [creating a browser test][3], complete your application's passkeys registration and authentication flow using the passkeys stored in your virtual authenticator global variable.
 
 ### Test a registration flow
 
 To test a registration flow using passkeys in your [browser tests][3]:
 
-1. [Import your Virtual Authenticator global variable][5] into your test. 
+1. [Import your Virtual Authenticator global variable][5] into your test.
 2. Navigate to the page to register your passkey. When recording your test, Datadog automatically generates and stores a new passkey by using the imported virtual authenticator global variable.
 3. After recording your test steps, click **Save & Launch Test**.
 
@@ -48,7 +48,7 @@ You can either:
 - Complete the registration flow from within the recorder, but without recording the registration steps, or
 - Create a test that embeds both steps for the registration and login flows.
 
-1. [Import your virtual authenticator global variable][5]. 
+1. [Import your virtual authenticator global variable][5].
 2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically logs in using the passkey previously registered on the web application with the selected virtual authenticator.
 3. After recording your test steps, click **Save & Launch Test**.
 

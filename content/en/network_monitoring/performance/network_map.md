@@ -1,6 +1,6 @@
 ---
 title: Network Map
-kind: documentation
+
 description: Map your Network data across all your tags.
 aliases:
     - /network_performance_monitoring/network_map/
@@ -80,7 +80,7 @@ For complex networks, the map's query editor includes additional grouping fields
 
 Clustering adds an additional dimension for grouping the nodes in the map. Large maps are automatically clustered to improve load time and readability of the map. To view the nodes within a cluster, click the cluster to expand it. To collapse the cluster, click the gray area surrounding the nodes.
 
-A red border around a cluster indicates that at least one alerting monitor carries a tag that matches the tag by which the nodes are grouped. For example, if the map is grouped by service, then the map looks for monitors with the tag `service:<nodeName>`. If the monitor is in an alert state, the map outlines any clusters containing `<nodeName>` in red.  
+A red border around a cluster indicates that at least one alerting monitor carries a tag that matches the tag by which the nodes are grouped. For example, if the map is grouped by service, then the map looks for monitors with the tag `service:<nodeName>`. If the monitor is in an alert state, the map outlines any clusters containing `<nodeName>` in red.
 
 {{< img src="network_performance_monitoring/network_map/expanded_network_cluster.png" alt="expanded network cluster map view" >}}
 

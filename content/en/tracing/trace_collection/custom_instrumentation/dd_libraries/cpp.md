@@ -1,6 +1,6 @@
 ---
 title: C++ Custom Instrumentation with Datadog Library
-kind: documentation
+
 aliases:
     - /tracing/manual_instrumentation/cpp
     - /tracing/custom_instrumentation/cpp

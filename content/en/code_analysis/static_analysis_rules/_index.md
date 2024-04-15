@@ -1,6 +1,6 @@
 ---
 title: Static Analysis Rules
-kind: documentation
+
 description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
@@ -117,7 +117,7 @@ rulesets:
     title: "Good practices for data science with pandas"
     description: |
       A set of rules to check that pandas code is used appropriately.
-      
+
        - Ensures `import` declarations follow coding guidelines.
        - Avoid deprecated code and methods.
        - Avoid inefficient code whenever possible.
@@ -125,7 +125,7 @@ rulesets:
     title: "Ensure your Python code is safe and secure"
     description: |
       Rules focused on finding security and vulnerability issues in your Python code, including those found in the OWASP10 and SANS25.
-       
+
        - Use of bad encryption and hashing protocols
        - Lack of access control
        - Security misconfiguration

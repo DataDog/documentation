@@ -39,7 +39,7 @@ integration_id: arangodb
 integration_title: ArangoDB
 integration_version: 1.4.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: arangodb
 public_title: ArangoDB
@@ -118,7 +118,7 @@ ArangoDB インスタンスからログを収集するには、まず ArangoDB �
 ...
 
 [log]
-file = /var/log/arangodb3/arangod.log 
+file = /var/log/arangodb3/arangod.log
 
 ...
 ```

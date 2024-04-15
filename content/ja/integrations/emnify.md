@@ -39,7 +39,7 @@ integration_id: emnify
 integration_title: EMnify
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: emnify
 public_title: EMnify
@@ -87,7 +87,7 @@ Datadog-EMnify インテグレーションを使用して、IoT EMnify デバイ
 使用パターンは人によって異なるため、モニターに特定のケースを反映させるには、作業量に応じた境界線と感度を定義する必要があります。
 詳細については、[予測値モニター][3]と[異常モニター][4]のドキュメントをお読みください。
 
-### ダッシュボード  
+### ダッシュボード
 
 [ダッシュボード][5]で時間帯を選択し、表示されるデータにフィルターをかけることができます。
 

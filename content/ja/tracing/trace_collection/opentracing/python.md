@@ -5,7 +5,7 @@ aliases:
 code_lang: python
 code_lang_weight: 10
 description: Python のための OpenTracing インスツルメンテーション
-kind: documentation
+
 title: Python OpenTracing インスツルメンテーション
 type: multi-code-lang
 ---

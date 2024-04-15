@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Private Locations
-kind: documentation
+
 further_reading:
     - link: 'https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/'
       tag: 'Blog'
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Private locations allow you to **monitor internal-facing applications** or private URLs that aren't accessible from the public internet. 
+Private locations allow you to **monitor internal-facing applications** or private URLs that aren't accessible from the public internet.
 
 {{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
 
@@ -30,27 +30,27 @@ You can also use private locations to:
 
 Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the docker image on [Google Container Registry][2] or download the [Windows installer][13].
 
-Once you've created and installed your private location, you can assign [Synthetic tests][3] to your private location just like you would with a managed location. 
+Once you've created and installed your private location, you can assign [Synthetic tests][3] to your private location just like you would with a managed location.
 
-Your private locations test results display identically to your managed location test results. 
+Your private locations test results display identically to your managed location test results.
 
 {{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign a Synthetic test to private locations" style="width:100%;">}}
 
 ## Create your private location
 
-1. In the Datadog site, hover over **Digital Experience** and select **Settings** > [**Private Locations][5]**. 
+1. In the Datadog site, hover over **Digital Experience** and select **Settings** > [**Private Locations][5]**.
 2. Click **Add Private Location**.
 3. Fill out your private location details. Only `Name` and `API key` fields are mandatory.
-4. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
-5. Depending on where you installed your private location, you may need to input additional parameters to your configuration file: 
-    - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
-    - If you want to block reserved IPs, toggle **Block reserved IPs** and enter the IP ranges. 
+4. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker.
+5. Depending on where you installed your private location, you may need to input additional parameters to your configuration file:
+    - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`.
+    - If you want to block reserved IPs, toggle **Block reserved IPs** and enter the IP ranges.
 
-    For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
+    For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7].
 
 6. Copy and paste your private location configuration file to your working directory.
 
-    **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the **Private Locations** creation form. **You need to be able to reference the secrets again in order to add more workers to your private location**. 
+    **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the **Private Locations** creation form. **You need to be able to reference the secrets again in order to add more workers to your private location**.
 7. When you are ready, click **View Installation Instructions**.
 8. Follow the installation instructions based on the environment you want to run the Private Location worker in.
 9. If you are using Docker, launch your worker as a standalone container using the Docker `run` command and your configuration file:
@@ -58,11 +58,11 @@ Your private locations test results display identically to your managed location
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
-    
+
     This command starts a Docker container and prepares your private location to run tests. Datadog recommends running the container in detached mode with proper restart policy.
 
     <div class="alert alert-info">You can use another container runtime such as Podman. For more information, see the <a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=podman#install-your-private-location">Private Locations documentation</a>.</div>
-    
+
     If you are using Windows, [run the Synthetics Private Location Installer with a GUI][12] or run the `msiexec` command on the command line inside the directory where you downloaded the installer:
 
     ```shell

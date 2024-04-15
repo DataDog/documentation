@@ -3,7 +3,7 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentation
   text: Paramètres de formule et d'utilisation
-kind: guide
+
 title: Passer de la version 1 à la version 2 des API d'utilisation horaire
 ---
 
@@ -243,7 +243,7 @@ ENDPOINT | FAMILLE DE PRODUITS
 : `host_count`
 
 `<url_de_base>/api/v1/usage/ingested-spans` | ingested_spans
-: `ingested_events_bytes` 
+: `ingested_events_bytes`
 
 `<url_de_base>/api/v1/usage/incident-management` | incident_management
 : `monthly_active_users`

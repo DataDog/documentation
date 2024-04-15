@@ -15,7 +15,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-php
   tags: GitHub
   text: Référentiel du code open source de la bibliothèque de tracing
-kind: guide
+
 title: 'Tutoriel : Activer le tracing pour une application Python et lʼAgent Datadog
   dans des conteneurs'
 ---
@@ -60,7 +60,7 @@ docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
 docker-compose -f docker/containers/exercise/docker-compose.yaml up db notes_app
 {{< /code-block >}}
 
-   Lʼapplication est prête à être utilisée lorsque le résultat suivant sʼaffiche dans le terminal : 
+   Lʼapplication est prête à être utilisée lorsque le résultat suivant sʼaffiche dans le terminal :
 
    ```
    notes          |  * Debug mode: on
@@ -126,7 +126,7 @@ Maintenant que vous disposez d'une application Python fonctionnelle, configurez-
 2. Dans lʼapplication de note Dockerfile, `docker/containers/exercise/Dockerfile.notes`, changez la ligne de commande qui lance lʼapplication afin dʼutiliser le package `ddtrace` :
 
    ```
-   # Run the application with Datadog 
+   # Run the application with Datadog
    CMD ["ddtrace-run", "python", "-m", "notes_app.app"]
    ```
 
@@ -140,7 +140,7 @@ Maintenant que vous disposez d'une application Python fonctionnelle, configurez-
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Ajoutez les étiquettes Docker qui correspondent aux tags de service unifié. Cela vous permet également dʼobtenir des métriques Docker une fois que votre application est exécutée. 
+4. Ajoutez les étiquettes Docker qui correspondent aux tags de service unifié. Cela vous permet également dʼobtenir des métriques Docker une fois que votre application est exécutée.
 
    ```
    LABEL com.datadoghq.tags.service="notes"
@@ -163,8 +163,8 @@ Ajoutez le conteneur de l'Agent dans la section services du fichier `docker/cont
           - DD_API_KEY=<DD_API_KEY>
           - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appropriate for your org
           - DD_APM_ENABLED=true    # Enable APM
-       volumes: 
-          - /var/run/docker.sock:/var/run/docker.sock:ro 
+       volumes:
+          - /var/run/docker.sock:/var/run/docker.sock:ro
           - /proc/:/host/proc/:ro
           - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
    ```
@@ -229,7 +229,7 @@ Une trace `GET /notes` ressemble à ceci :
 
 L'instrumentation automatique est une fonctionnalité pratique, mais il se peut que vous ayez besoin de spans plus précises. L'API Python DD Trace de Datadog vous permet de spécifier des spans au sein de votre code à l'aide d'annotations ou de code.
 
-Les étapes suivantes décrivent comment ajouter des annotations au code pour tracer des exemples de méthodes. 
+Les étapes suivantes décrivent comment ajouter des annotations au code pour tracer des exemples de méthodes.
 
 1. Ouvrez `notes_app/notes_helper.py`.
 2. Ajoutez l'importation suivante :
@@ -263,13 +263,13 @@ Pour ens avoir plus, consultez la section [Instrumentation personnalisée][12].
 
 ## Ajouter une deuxième application pour voir ses traces distribuées
 
-Le tracing d'une seule application est un excellent début. Toutefois, le tracing sert surtout à voir la façon dont les requêtes circulent dans vos services. On appelle ceci le _tracing distribué_. 
+Le tracing d'une seule application est un excellent début. Toutefois, le tracing sert surtout à voir la façon dont les requêtes circulent dans vos services. On appelle ceci le _tracing distribué_.
 
 L'exemple de projet comprend une deuxième application, appelée `calendar_app`, qui renvoie une date aléatoire lorsqu'elle est appelée. L'endpoint `POST` dans l'application Notes possède un deuxième paramètre de requête appelé `add_date`. Lorsque la valeur est `y`, Notes appelle l'application de calendrier pour obtenir une date à ajouter à la note.
 
 1. Configurez l'app de calendrier pour le tracing en ajoutant `dd_trace` à la commande de démarrage dans le Dockerfile, comme vous l'avez déjà fait pour l'app de notes. Ouvrez `docker/containers/exercise/Dockerfile.calendar` et mettez à jour la ligne de commande comme suit :
    ```
-   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
+   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"]
    ```
 
 3. Appliquez des tags de service unifié, comme nous l'avons déjà fait pour l'app de notes. Ajoutez les variables d'environnement suivantes dans le fichier `Dockerfile.calendar` :
@@ -280,7 +280,7 @@ L'exemple de projet comprend une deuxième application, appelée `calendar_app`,
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Une fois encore, ajoutez les étiquettes Docker qui correspondent aux tags de service unifié. Cela vous permet également dʼobtenir des métriques Docker une fois que votre application est exécutée. 
+4. Une fois encore, ajoutez les étiquettes Docker qui correspondent aux tags de service unifié. Cela vous permet également dʼobtenir des métriques Docker une fois que votre application est exécutée.
 
    ```
    LABEL com.datadoghq.tags.service="calendar"
@@ -322,7 +322,7 @@ L'exemple de projet comprend une deuxième application, appelée `calendar_app`,
 
 Vous pouvez ajouter de l'instrumentation personnalisée à l'aide de code. Imaginons que vous souhaitiez instrumenter davantage le service de calendrier pour mieux voir la trace :
 
-1. Ouvrez `notes_app/notes_logic.py`. 
+1. Ouvrez `notes_app/notes_logic.py`.
 2. Ajoutez l'importation suivante
 
    ```python

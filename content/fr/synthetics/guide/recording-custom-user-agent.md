@@ -1,6 +1,6 @@
 ---
 title: Enregistrer des étapes avec un user-agent personnalisé
-kind: documentation
+
 description: Enregistrer des étapes de test Browser avec une chaîne user-agent personnalisée
 further_reading:
   - link: /synthetics/browser_tests/actions
@@ -19,7 +19,7 @@ Certaines pages sont configurées pour s'afficher d'une certaine façon lorsqu'u
 5. Accédez à l'onglet **Network conditions** et désactivez l'option **Select automatically**.
 6. Choisissez **Custom** et saisissez la chaîne `User-Agent` que vous souhaitez utiliser.
 
-**Remarque :** vous pouvez remplacer la [chaîne `User-Agent` par défaut][1] au moment de l'exécution en l'ajoutant en tant qu'en-tête dans la configuration de votre test. 
+**Remarque :** vous pouvez remplacer la [chaîne `User-Agent` par défaut][1] au moment de l'exécution en l'ajoutant en tant qu'en-tête dans la configuration de votre test.
 
 ## Pour aller plus loin
 

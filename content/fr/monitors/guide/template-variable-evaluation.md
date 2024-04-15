@@ -1,6 +1,6 @@
 ---
 title: Évaluer des template variables
-kind: guide
+
 ---
 Dans les messages de notification de monitor, vous pouvez modifier la sortie des template variables à l'aide de la syntaxe `eval`, qui permet d'effectuer plusieurs opérations et fonctions mathématiques différentes sur des template variables présentant une valeur numérique.
 

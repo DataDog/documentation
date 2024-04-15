@@ -24,7 +24,7 @@ further_reading:
   tag: Blog
   text: Surveiller et résoudre des problèmes de performance réseau avec des interruptions
     SNMP
-kind: documentation
+
 title: Network Device Monitoring
 ---
 

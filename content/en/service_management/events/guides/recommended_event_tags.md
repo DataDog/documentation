@@ -1,6 +1,6 @@
 ---
 title: Best Practices For Tagging Events
-kind: guide
+
 description: Learn about recommended event tags and how to add them.
 aliases:
 - /events/guides/recommended_event_tags

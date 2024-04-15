@@ -18,7 +18,7 @@ further_reading:
   tag: Blog
   text: Utilisez la résolution DNS pour surveiller les endpoints externes et les endpoints
     cloud
-kind: documentation
+
 title: Surveillance DNS
 ---
 
@@ -64,7 +64,7 @@ Cet exemple montre tous les flux entre les pods dans la zone de disponibilité d
 
 ## Métriques
 
-Vos métriques de DNS sont affichées dans les graphiques et le tableau associé. 
+Vos métriques de DNS sont affichées dans les graphiques et le tableau associé.
 
 **Remarque** : les données sont recueillies toutes les 30 secondes, agrégées dans des compartiments de 5 minutes et conservées pendant 14 jours.
 

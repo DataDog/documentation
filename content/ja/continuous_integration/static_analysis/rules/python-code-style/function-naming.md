@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 関数名とパラメーターには snake_case を使用する
 ---
 ## メタデータ

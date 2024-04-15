@@ -1,6 +1,6 @@
 ---
 title: Platform
-kind: documentation
+
 description: Learn how to leverage Datadog platform capabilities to maximize RUM capabilities.
 further_reading:
 - link: '/real_user_monitoring/explorer'
@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Once you've started collecting data for your RUM applications, you can leverage Datadog platform capabilities to visualize, monitor, and analyze data across RUM and the rest of your connected stack. 
+Once you've started collecting data for your RUM applications, you can leverage Datadog platform capabilities to visualize, monitor, and analyze data across RUM and the rest of your connected stack.
 
 ## Create dashboards
 Use [dashboards][1] to track, analyze, and display key performance and usage metrics.

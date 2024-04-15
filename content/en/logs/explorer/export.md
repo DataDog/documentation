@@ -1,6 +1,6 @@
 ---
 title: Export Logs
-kind: documentation
+
 description: 'Export your Log Explorer view to reuse it later or in different contexts.'
 aliases:
     - /logs/export

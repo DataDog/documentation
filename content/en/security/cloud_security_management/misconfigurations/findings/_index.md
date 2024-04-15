@@ -1,6 +1,6 @@
 ---
 title: Explore Misconfigurations
-kind: documentation
+
 aliases:
   - /security_platform/findings
   - /security_platform/cspm/findings

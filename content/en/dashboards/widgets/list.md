@@ -1,6 +1,6 @@
 ---
 title: List Widget
-kind: documentation
+
 widget_type: list_stream
 further_reading:
 - link: "/dashboards/graphing_json/"

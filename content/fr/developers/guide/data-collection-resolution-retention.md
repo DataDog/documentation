@@ -2,7 +2,7 @@
 aliases:
 - /fr/developers/faq/data-collection-resolution-retention/
 disable_sidebar: true
-kind: guide
+
 title: Collecte, résolution et rétention des données Datadog
 ---
 

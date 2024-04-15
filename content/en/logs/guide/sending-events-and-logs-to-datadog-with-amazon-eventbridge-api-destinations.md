@@ -1,6 +1,6 @@
 ---
 title: Sending Events and Logs to Datadog with Amazon EventBridge API Destinations
-kind: guide
+
 further_reading:
 - link: "https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog"
   tag: "Blog"
@@ -34,11 +34,11 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
 
 ## Troubleshooting
 
-To see more details about the payloads sent to Datadog and to view the response of the API endpoints, set up an Amazon SQS queue:  
+To see more details about the payloads sent to Datadog and to view the response of the API endpoints, set up an Amazon SQS queue:
 1. Create a queue in [Amazon SQS][14].
 2. Go to the [EventBridge rule][15] that you created in the [Configuration](#configuration) section.
 3. Select the **Targets** tab and click **Edit**.
-4. Expand the **Additional settings** section. 
+4. Expand the **Additional settings** section.
 4. In the *Dead-letter queue* section, choose **Select an Amazon SQS queue in the current AWS account to use as the dead-letter queue**.
 5. Select the SQS queue that you just created.
 6. Update the rule.

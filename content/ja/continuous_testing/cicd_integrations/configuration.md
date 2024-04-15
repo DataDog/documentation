@@ -17,7 +17,7 @@ further_reading:
 - link: /continuous_testing/testing_tunnel
   tag: ドキュメント
   text: Continuous Testing Tunnel について
-kind: documentation
+
 title: Continuous Testing と CI/CD の構成
 ---
 <div class="alert alert-info">このページでは、継続的インテグレーション (CI) と継続的デリバリー (CD) のパイプラインの Continuous Testing テストの構成について説明します。CI のメトリクスやデータを Datadog のダッシュボードに取り込みたい場合は、<a href="https://docs.datadoghq.com/continuous_integration/" target="_blank">CI Visibility</a> のセクションを参照してください。</div>
@@ -131,7 +131,7 @@ yarn add --dev @datadog/datadog-ci
 
 **注**: `host` と `port` のキーは必須引数で、 `protocol` のキーは定義されていない場合、デフォルトで `http` になります。
 
-例: 
+例:
 
 ```json
 {
@@ -450,7 +450,7 @@ CI バッチの結果は、[Synthetic Monitoring と Continuous Testing Explorer
     * location: 30019
       ⎋ total duration: 32.6 ms - result url: https://app.datadoghq.com/synthetics/details/2cj-h3c-39x?resultId=122140688175981634
       x GET - https://www.datadoghq.com
-        [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}] 
+        [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}]
   error Command failed with exit code 1.
   info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```
@@ -471,7 +471,7 @@ datadog-ci synthetics upload-application              \
 --mobileApplicationVersionFilePath example/test.apk \
 --versionName 'example 1.0'                           \
 --latest
-```   
+```
 
 これらのオプションは、コンフィギュレーションファイルで渡すこともできます
 ```

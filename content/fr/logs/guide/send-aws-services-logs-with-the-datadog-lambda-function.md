@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: Apprendre à traiter vos logs
-kind: documentation
+
 title: Envoyer des logs de services AWS avec la fonction Lambda Datadog
 ---
 
@@ -123,7 +123,7 @@ Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda
     | `logs:DeleteSubscriptionFilter`                             | Supprime un déclencheur Lambda basé sur des événements de log CloudWatch.                       |
     | `logs:DescribeSubscriptionFilters`                          | Répertorie les filtres d'abonnement pour le groupe de logs spécifié.                  |
 
-3. Sur la [page de l'intégration AWS][44], sélectionnez le compte AWS à partir duquel recueillir les logs, puis cliquez sur l'onglet **Log Collection**.  
+3. Sur la [page de l'intégration AWS][44], sélectionnez le compte AWS à partir duquel recueillir les logs, puis cliquez sur l'onglet **Log Collection**.
    {{< img src="logs/aws/aws_log_setup_step1.png" alt="Onglet Log Collection de la page de l'intégration AWS pour un compte AWS spécifique avec des instructions d'envoi de logs de services AWS et une zone de texte permettant d'abonner automatiquement la fonction Lambda du Forwarder en saisissant l'ARN de la fonction Lambda du Forwarder" popup="true" style="width:90%;" >}}
 4. Saisissez l'ARN du Lambda créé à la section précédente, puis cliquez sur **Add**.
 5. Sélectionnez les services à partir desquels vous souhaitez recueillir des logs, puis cliquez sur **Save**. Pour arrêter la collecte de logs d'un service spécifique, désélectionnez la source associée.

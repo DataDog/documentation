@@ -16,7 +16,7 @@ further_reading:
 - link: /dashboards/functions/exclusion/
   tag: Documentation
   text: Fonctions d'exclusion
-kind: documentation
+
 title: Filtrage avancé
 ---
 
@@ -44,7 +44,7 @@ Lorsque vous souhaitez inclure ou exclure plusieurs tags :
 
 Pour en savoir plus sur les tags, consultez le guide [Débuter avec les tags][2].
 
-**Remarque :** il n'est pas possible de combiner des symboles booléens (`!`, `,`) avec des opérateurs fonctionnels (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). La requête suivante est considérée comme _non valide_ : 
+**Remarque :** il n'est pas possible de combiner des symboles booléens (`!`, `,`) avec des opérateurs fonctionnels (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). La requête suivante est considérée comme _non valide_ :
 `avg:mymetric{env:prod AND !region:us-east}`
 
 ### Exemples de requête avec un filtre basé sur des booléens
@@ -71,7 +71,7 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ## Requêtes avec des filtres basés sur des wildcards
 
 Vous pouvez utiliser un wildcard afin d'inclure plusieurs valeurs de préfixe et de suffixe pour vos tags :
--  `pod_name: web-*` 
+-  `pod_name: web-*`
 -  `cluster:*-trace`
 
 **Remarque** : il n'est pas possible d'utiliser un wildcard afin d'inclure plusieurs valeurs de préfixe et de suffixe.

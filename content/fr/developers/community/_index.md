@@ -1,6 +1,6 @@
 ---
 title: Communauté
-kind: documentation
+
 ---
 
 Nous tenons à remercier notre incroyable communauté open source. Sans vous, tout cela ne serait pas possible.

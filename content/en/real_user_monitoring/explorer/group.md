@@ -1,6 +1,6 @@
 ---
 title: Group RUM Events
-kind: documentation
+
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Real User Monitoring (RUM) events are valuable both individually and collectively. The search query contains information to aggregate a subset of events. 
+Real User Monitoring (RUM) events are valuable both individually and collectively. The search query contains information to aggregate a subset of events.
 
 {{< img src="real_user_monitoring/explorer/group_into_fields-2.png" alt="Group into fields section of the Search query" style="width:100%;" >}}
 

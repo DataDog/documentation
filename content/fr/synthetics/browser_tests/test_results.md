@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
   tag: Blog
   text: Surveiller les signaux Web essentiels avec la surveillance Synthetic
-kind: documentation
+
 title: Résultats de tests Browser
 ---
 
@@ -77,7 +77,7 @@ Un maximum de 8 erreurs peuvent être affichées, par exemple 2 `network` + 6�
 
 ### Ressources
 
-Une ressource correspond à une combinaison de requêtes et d'assets. 
+Une ressource correspond à une combinaison de requêtes et d'assets.
 
 {{< img src="synthetics/browser_tests/resources_panel.png" alt="Volet Resources"  >}}
 
@@ -91,7 +91,7 @@ Resource
 : L'URL de la ressource.
 
 CDN
-: Le fournisseur CDN à l'origine de la ressource. Lorsque vous passez le curseur sur cette valeur, le statut du cache brut s'affiche.  
+: Le fournisseur CDN à l'origine de la ressource. Lorsque vous passez le curseur sur cette valeur, le statut du cache brut s'affiche.
 Datadog détecte les fournisseurs Akamai, Cloudflare, Fastly, Amazon Cloudfront, Netlify, Google Cloud CDN, Imperva et Sucuri.
 
 Type
@@ -103,7 +103,7 @@ Status
 Duration
 : Le temps nécessaire pour effectuer la requête.
 
-% Total Time 
+% Total Time
 : La durée de la ressource par rapport à la durée totale de l'interaction.
 
 Size
@@ -131,7 +131,7 @@ Un résultat de test est considéré comme un échec (`FAILED`) s'il ne respecte
 
 Voici la liste des erreurs les plus courantes pour les tests Browser :
 
-`Element located but it's invisible` 
+`Element located but it's invisible`
 : L'élément est présent sur la page, mais il n'est pas possible de cliquer dessus (parce qu'un autre élément est superposé par-dessus, par exemple).
 
 `Cannot locate element`

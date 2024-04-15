@@ -19,7 +19,7 @@ integration_id: ''
 integration_title: Amazon VPC
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_vpc
 public_title: Datadog-Amazon VPC 통합
@@ -40,7 +40,7 @@ Amazon Virtual Private Cloud(Amazon VPC)로 가상 네트워크에서 AWS 리소
 
 ### 메트릭 수집
 
-논-`aws.vpc.flowlogs.*` Amazon VPC을 수집하는데 추가 단계가 필요하지 않습니다. `aws.vpc.flowlogs.*` 접두사가 붙은 메트릭은  [Datadog VPC 플로우 로그][2] 통합으로 생성됩니다. 플로우 로그 메트릭을 수집하려면 하단의 [로그 수집](#log-collection) 섹션을 확인하세요. 
+논-`aws.vpc.flowlogs.*` Amazon VPC을 수집하는데 추가 단계가 필요하지 않습니다. `aws.vpc.flowlogs.*` 접두사가 붙은 메트릭은  [Datadog VPC 플로우 로그][2] 통합으로 생성됩니다. 플로우 로그 메트릭을 수집하려면 하단의 [로그 수집](#log-collection) 섹션을 확인하세요.
 
 `aws.vpc.subnet.*` 메트릭의 경우 [Datadog 지원 팀][3]에 문의하여 계정에서 해당 메트릭을 수집할 수 있습니다.
 
@@ -64,7 +64,7 @@ Datadog에 전송하기 전 먼저 VPC 플로우 로그를 중간 대상에 전�
 #### VPC 플로우 로깅 활성화
 
 1. AWS 콘솔에서 모니터링하려는 VPC로 이동합니다.
-2. **플로우 로그** 탭 로 이동합니다. 
+2. **플로우 로그** 탭 로 이동합니다.
 3. **플로우 로그 생성**을 클릭합니다.
 4. `All` 필터를 선택하면 승인된 연결과 거부된 연결을 모두 확인할 수 있습니다.
 5. 로그용 대상 유형(Kinesis Data Firehose, S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹)을 선택합니다.
@@ -81,7 +81,7 @@ S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹을 대상으로 �
 2. 설정한 후에는 Datadog Forwarder Lambda 함수로 이동하세요. Function Overview 섹션에서 **Add Trigger**를 클릭합니다.
 3. **S3** 또는 **클라우드와치(CloudWatch) 로그** 트리거를 선택하여 트리거를 설정합니다.
 4. VPC 로그가 포함된 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹을 선택합니다.
-5. S3의 경우 이벤트 유형은 `All object create events`로 둡니다. 
+5. S3의 경우 이벤트 유형은 `All object create events`로 둡니다.
 6. **Add**를 클릭해 Lambda에 트리거를 추가합니다.
 
 [로그 익스플로러][7]로 이동하여 로그 탐색을 시작합니다.

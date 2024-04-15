@@ -3,7 +3,7 @@ further_reading:
 - link: /data_security/
   tag: 설명서
   text: Datadog에 제출된 주요 데이터 카테고리 검토
-kind: documentation
+
 title: 쿠버네티스(Kubernetes) 데이터 보안
 ---
 
@@ -45,7 +45,7 @@ hostPath 볼륨은 보안 문제가 될 수 있지만, 호스트 수준 모니�
 | `passwd`           | 읽기 전용으로 마운트됨. Process Agent가 프로세스를 사용자와 연결하는 데 사용함. |
 | `runtimesocketdir` | 읽기 전용으로 마운트됨. 컨테이너 메트릭 수집에 사용됨. |
 
-### 컨테이너를 루트 사용자로 실행 
+### 컨테이너를 루트 사용자로 실행
 쿠버네티스(Kubernetes) 환경에서 컨테이너는 모든 Linux 사용자로 실행할 수 있는 유연성이 있습니다. 컨테이너 런타임 보안 기능이 몇 가지 제약을 제공하더라도 컨테이너를 루트 사용자로 실행하면 여전히 컨테이너 브레이크아웃의 위험이 높아질 수 있습니다. 따라서 모범 사례를 준수하고 컨테이너, 특히 일반 워크로드용 컨테이너는 UID 0이 아닌 사용자로 실행하는 것이 좋습니다.
 
 Datadog Agent의 기본 설정은 표준 kubelet 및 컨테이너 소켓 구성과 호환성이 높도록 설계되었으며 컨테이너 내에서 루트 사용자로 실행됩니다. 이 기본 설정은 호환성을 극대화하기 위해 선택됩니다. Agent를 루트 사용자가 아닌 사용자로 실행하도록 설정할 수도 있지만 일부 통합이 제대로 작동하려면 기본 호스트의 설정에 대한 특별 고려 사항과 업데이트가 필요할 수 있습니다. 여기에는 다음이 포함됩니다:
@@ -59,6 +59,6 @@ Datadog Agent의 기본 설정은 표준 kubelet 및 컨테이너 소켓 구성�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/developers/dogstatsd/unix_socket/?tab=host 
-[2]: /ko/containers/kubernetes/apm/ 
+[1]: /ko/developers/dogstatsd/unix_socket/?tab=host
+[2]: /ko/containers/kubernetes/apm/
 [3]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted

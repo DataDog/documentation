@@ -1,6 +1,6 @@
 ---
 title: Collect Heroku logs
-kind: guide
+
 ---
 
 Heroku provides 3 types of logs:
@@ -25,8 +25,8 @@ heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/a
 * Replace `<DD_API_KEY>` with your [Datadog API Key][2].
 * Replace `<ENV>` with your application's [environment][3].
 * Replace `<APPLICATION_NAME>` and `<SERVICE>` with your application name.
-* Replace `<HOST>` with the desired hostname.  
-**Notes**:  
+* Replace `<HOST>` with the desired hostname.
+**Notes**:
    - Per the [host section][4], metrics and traces set the default hostname to the dyno name. It is not possible to dynamically set the dyno name as the hostname for logs. Use the `dyno` and `dynotype` tags to correlate between metrics, traces, and logs.
    - The buildpack automatically adds the tags `dyno` (which represent the dyno name, such as `web.1`), and `dynotype` (the type of dyno, such as `run` or `web`). See the [Getting Started with Tags][3] guide for more information.
 

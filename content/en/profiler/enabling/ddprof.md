@@ -1,6 +1,6 @@
 ---
 title: Enabling the Native Profiler for Compiled Languages
-kind: Documentation
+
 code_lang: ddprof
 type: multi-code-lang
 code_lang_weight: 90
@@ -125,7 +125,7 @@ The library exposes a C API.
    ```cpp
    #include <stdlib.h>
    #include "dd_profiling.h"
-  
+
    int foo(void) {
      int n = 0;
      for (int i = 0; i < 1000; i++) {
@@ -133,7 +133,7 @@ The library exposes a C API.
      }
      return n;
    }
-  
+
    int main(void) {
      // Initialize and start the Datadog profiler. Uses agent defaults if not
      // specified
@@ -141,7 +141,7 @@ The library exposes a C API.
      setenv("DD_SERVICE", "c_testservice", 1);
      setenv("DD_VERSION", "1.0.3", 1);
      ddprof_start_profiling();
-  
+
      // Do some work
      for (int i = 0; i < 1e6; i++) {
        foo();

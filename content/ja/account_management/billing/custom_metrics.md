@@ -4,7 +4,7 @@ algolia:
   - カスタムメトリクスの請求
 aliases:
 - /ja/integrations/faq/what-standard-integrations-emit-custom-metrics/
-kind: documentation
+
 title: カスタムメトリクスの課金
 ---
 
@@ -79,7 +79,7 @@ Florida の気温を入手するには、次のようにカスタムメトリク
 カスタムメトリクスのボリュームは、[Metrics without LimitsTM][3] を使用してタグと集計を構成することによって影響を受ける可能性があります。Metrics without LimitsTM は、インジェストコストとインデキシングコストを切り離すので、Datadog に全てのデータを送り続けることができ (全てインジェストされます)、Datadog プラットフォームでクエリ可能に残しておきたいタグの許可リストを指定することができます。Datadog が構成したメトリクスにインジェストするデータ量は、インデックスを作成した残りのデータ量とは異なるため、Usage ページと Metrics Summary ページには 2 つの異なるボリュームが表示されます。
 
 - **Ingested Custom Metrics**: インジェストされたすべてのタグに基づくカスタムメトリクスの元となる量 (コード経由で送信されます)。
-- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく) 
+- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく)
 
 **注: 構成されたメトリクスのみが、Ingested custom metrics ボリュームに寄与します。**Metrics without LimitsTM でメトリクスが構成されていない場合、そのインデックスされたカスタムメトリクスボリュームに対してのみ課金されます。
 
@@ -164,7 +164,7 @@ Florida の気温を入手するには、次のようにカスタムメトリク
 カスタムメトリクスのボリュームは、[Metrics without LimitsTM][4] を使用してタグと集計を構成することによって影響を受ける可能性があります。Metrics without LimitsTM は、インジェストコストとインデキシングコストを切り離すので、Datadog に全てのデータを送り続けることができ (全てインジェストされます)、Datadog プラットフォームでクエリ可能に残しておきたいタグの許可リストを指定することができます。Datadog が構成したメトリクスにインジェストするデータ量は、インデックスを作成した残りのデータ量とは異なるため、Usage ページと Metrics Summary ページには 2 つの異なるボリュームが表示されます。
 
 - **Ingested Custom Metrics**: インジェストされたすべてのタグに基づくカスタムメトリクスの元となる量 (コード経由で送信されます)。
-- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく) 
+- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく)
 
 **注: 構成されたメトリクスのみが、Ingested custom metrics ボリュームに寄与します。**Metrics without LimitsTM でメトリクスが構成されていない場合、そのインデックスされたカスタムメトリクスボリュームに対してのみ課金されます。
 
@@ -246,7 +246,7 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 カスタムメトリクスのボリュームは、[Metrics without LimitsTM][2] を使用してタグと集計を構成することによって影響を受ける可能性があります。Metrics without LimitsTM は、インジェストコストとインデキシングコストを切り離すので、Datadog に全てのデータを送り続けることができ (全てインジェストされます)、Datadog プラットフォームでクエリ可能に残しておきたいタグの許可リストを指定することができます。Datadog が構成したメトリクスにインジェストするデータ量は、インデックスを作成した残りのデータ量とは異なるため、Usage ページと Metrics Summary ページには 2 つの異なるボリュームが表示されます。
 
 - **Ingested Custom Metrics**: インジェストされたすべてのタグに基づくカスタムメトリクスの元となる量 (コード経由で送信されます)。
-- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく) 
+- **Indexed Custom Metrics**: Datadog プラットフォームでクエリ可能なカスタムメトリクスの量 (Metrics without LimitsTM のコンフィギュレーションに基づく)
 
 **注: 構成されたメトリクスのみが、Ingested custom metrics ボリュームに寄与します。**Metrics without LimitsTM でメトリクスが構成されていない場合、そのインデックスされたカスタムメトリクスボリュームに対してのみ課金されます。
 

@@ -9,7 +9,7 @@ further_reading:
 - link: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
   tag: Documentation
   text: Profil AWS Fargate
-kind: guide
+
 title: Envoyer des logs AWS EKS Fargate avec Kinesis Data Firehose
 ---
 

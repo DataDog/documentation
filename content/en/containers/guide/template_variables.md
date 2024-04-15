@@ -1,6 +1,6 @@
 ---
 title: Autodiscovery Template Variables
-kind: guide
+
 aliases:
  - /agent/autodiscovery/template_variables
  - /agent/faq/template_variables

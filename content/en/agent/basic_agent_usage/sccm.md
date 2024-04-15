@@ -1,7 +1,7 @@
 ---
 title: SCCM
 description: "SCCM (Systems Center Configuration Manager)"
-kind: Documentation
+
 disable_toc: false
 further_reading:
 - link: "/logs/"

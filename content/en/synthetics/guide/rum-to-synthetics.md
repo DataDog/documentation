@@ -1,6 +1,6 @@
 ---
 title: Generate Synthetic Browser Tests From Session Replay
-kind: guide
+
 further_reading:
   - link: 'https://www.datadoghq.com/blog/create-browser-tests-from-datadog-rum-session-replay/'
     tag: 'Blog'
@@ -24,13 +24,13 @@ You can create Synthetic browser tests from your session replays in RUM to track
 
 ## Generate a test from a session replay
 
-Navigate to the [RUM Explorer][3] and select a session with an available [Session Replay][4] that you want to create a browser test from. Click **Generate Synthetic Browser Test** above the event timeline. 
+Navigate to the [RUM Explorer][3] and select a session with an available [Session Replay][4] that you want to create a browser test from. Click **Generate Synthetic Browser Test** above the event timeline.
 
 {{< img src="synthetics/guide/rum_to_synthetics/test_recording.png" alt="A user session in the RUM Explorer" style="width:100%" >}}
 
-This automatically clones the events captured within a session replay, such as user clicks and page loads, into individual steps for a new browser test. 
+This automatically clones the events captured within a session replay, such as user clicks and page loads, into individual steps for a new browser test.
 
-For example, in the following screenshot, the generated browser test cloned a user's session on the shopping page, including them navigating to it and clicking the **Add to cart** button. 
+For example, in the following screenshot, the generated browser test cloned a user's session on the shopping page, including them navigating to it and clicking the **Add to cart** button.
 
 {{< img src="synthetics/guide/rum_to_synthetics/example_test.png" alt="Browser test recorder filled automatically with RUM data" style="width:100%" >}}
 

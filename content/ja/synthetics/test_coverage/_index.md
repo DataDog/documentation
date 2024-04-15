@@ -15,7 +15,7 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
   text: セッションリプレイについて
-kind: documentation
+
 title: テストカバレッジ
 ---
 
@@ -43,7 +43,7 @@ Test Coverage ページでは、以下の情報が表示されます。
 2. [カスタムアクション][4]は、ユニークで、生成されたアクションと比較してより正確なカバレッジ結果を提供するものです。生成されたアクションをテストカバレッジ分析に含める場合は、**All Actions** を選択します。
 3. 以下のセクションで提示される情報を検証することで、テストカバレッジのギャップを特定します。
 
-   **Test Coverage Overview** 
+   **Test Coverage Overview**
    : ユーザーセッション数、ブラウザテスト数、テスト中のアクションの割合、実際のユーザーインタラクション数で重み付けされたテスト中のアクションの割合、およびトップビューのリストが表示されます。
 
    **Untested Actions**

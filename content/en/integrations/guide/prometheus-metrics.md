@@ -1,6 +1,6 @@
 ---
 title: Mapping Prometheus Metrics to Datadog Metrics
-kind: guide
+
 aliases:
   - /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
@@ -31,12 +31,12 @@ For more information, see [OpenMetrics Metric Types][2] and [Datadog Metric Type
 {{% tab "Latest Version" %}}
 
 
-| Metric Type | OpenMetrics | Datadog | 
+| Metric Type | OpenMetrics | Datadog |
 | --- | --- | --- |
 | [counter][110] | `counter` | `count` |
 | [gauge][111] | `gauge` | `gauge` |
 | [histogram][112] | `_count`, `_sum`, `_bucket` | The `_count`, `_sum`, and `_bucket` values of the histogram are each mapped to Datadog's `count` type and include a `.count`, `.sum`, and `.bucket` suffix, respectively. |
-| [summary][113] | `_count`, `_sum`, `_created` | The `_count` and `_sum` values are mapped to Datadog's `count` type and include a `.count` and `.sum` suffix in their name, respectively. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix. | 
+| [summary][113] | `_count`, `_sum`, `_created` | The `_count` and `_sum` values are mapped to Datadog's `count` type and include a `.count` and `.sum` suffix in their name, respectively. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix. |
 
 ### Histogram
 

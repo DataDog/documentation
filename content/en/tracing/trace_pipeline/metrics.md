@@ -1,6 +1,6 @@
 ---
 title: Usage Metrics
-kind: documentation
+
 aliases:
     - /tracing/trace_retention_and_ingestion/usage_metrics/
     - /tracing/trace_retention/usage_metrics/

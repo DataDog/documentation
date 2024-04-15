@@ -8,7 +8,7 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: 複数のアカウントを持つチームとオーガニゼーションの構成
-kind: documentation
+
 title: SAML を使用したシングルサインオン
 ---
 {{< site-region region="gov" >}}
@@ -19,7 +19,7 @@ title: SAML を使用したシングルサインオン
 
 Datadog アカウントに対して [SAML (Security Assertion Markup Language)][1] を構成すると、あなたとあなたのチームの全員が、SAML イデンティティプロバイダーで構成されたあなたの組織の Active Directory、LDAP、または他の ID ストアに保存された資格情報を使って Datadog にログインできるようになります。
 
-**注**: 
+**注**:
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 - Datadog アカウントで SAML が有効化されていない場合は、[サポートチーム][1]に有効化を依頼してください。

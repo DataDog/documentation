@@ -1,6 +1,6 @@
 ---
 title: Product Analytics
-kind: documentation
+
 description: Product Analytics help you understand your application usage at a glance.
 further_reading:
 - link: "/real_user_monitoring/explorer/"

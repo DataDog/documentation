@@ -3,7 +3,7 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentation
   text: En savoir plus sur les tests Browser
-kind: guide
+
 title: Utiliser un shadow DOM dans vos tests Browser
 ---
 
@@ -81,7 +81,7 @@ return true
 
 ### Cliquer sur un élément
 
-Pour déclencher un clic sur un élément affiché dans un shadow DOM, identifiez l'élément en question et exécutez `.click()` dessus. 
+Pour déclencher un clic sur un élément affiché dans un shadow DOM, identifiez l'élément en question et exécutez `.click()` dessus.
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/validate-trigger-click.png" alt="Valider un clic déclenché sur un élément affiché dans un shadow DOM" style="width:90%;" >}}
 

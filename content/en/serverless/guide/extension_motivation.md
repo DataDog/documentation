@@ -1,6 +1,6 @@
 ---
 title: Deciding to migrate to the Datadog Lambda extension
-kind: guide
+
 further_reading:
   - link: '/serverless/configuration/#migrate-to-the-datadog-lambda-extension'
     tag: 'Documentation'
@@ -13,7 +13,7 @@ AWS Lambda extensions run within the Lambda execution environment, alongside you
 
 If you configured [Datadog Serverless][2] before the introduction of the Datadog Lambda extension, you are likely using the [Datadog Forwarder][3] to submit custom metrics, enhanced metrics, traces, and logs.
 
-There are some key differences between the Lambda extension and the Forwarder. This page describes the various reasons you may or may not choose to migrate from the Forwarder to the Lambda extension. 
+There are some key differences between the Lambda extension and the Forwarder. This page describes the various reasons you may or may not choose to migrate from the Forwarder to the Lambda extension.
 
 ### Differences in functionality
 

@@ -1,6 +1,6 @@
 ---
 title: Changing Your Container Registry
-kind: guide
+
 aliases:
  - /agent/guide/changing_container_registry
 ---

@@ -45,7 +45,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-dotnet
   tag: GitHub
   text: 소스 코드
-kind: documentation
+
 title: .NET 프레임워크 애플리케이션 추적
 type: multi-code-lang
 ---

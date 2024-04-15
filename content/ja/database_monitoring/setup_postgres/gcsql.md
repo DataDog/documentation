@@ -4,7 +4,7 @@ further_reading:
 - link: /integrations/postgres/
   tag: ドキュメント
   text: Postgres インテグレーションの基本
-kind: documentation
+
 title: Google Cloud SQL マネージド Postgres のデータベースモニタリングの設定
 ---
 

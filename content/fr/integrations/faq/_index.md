@@ -10,7 +10,7 @@ aliases:
 - /fr/integrations/faq/snmp
 cascade:
 - private: true
-kind: faq
+
 title: FAQ sur les intégrations
 ---
 

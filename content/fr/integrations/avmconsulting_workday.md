@@ -45,7 +45,7 @@ integration_id: avmconsulting-workday
 integration_title: Workday
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -106,7 +106,7 @@ Cette intégration tire profit de l'API Workday pour recueillir des logs relatif
 
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez AVM Consulting aux coordonnées suivantes :
 
- - E-mail : integrations@avmconsulting.net 
+ - E-mail : integrations@avmconsulting.net
  - Téléphone : 855 286-0555
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview

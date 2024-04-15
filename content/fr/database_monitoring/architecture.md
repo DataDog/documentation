@@ -10,7 +10,7 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: Documentation
   text: Dépannage
-kind: documentation
+
 title: Architectures pour la configuration de Database Monitoring
 ---
 

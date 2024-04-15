@@ -1,6 +1,6 @@
 ---
 title: Azure App Service - Windows Code
-kind: documentation
+
 aliases:
   - /infrastructure/serverless/azure_app_services/
 further_reading:
@@ -253,7 +253,7 @@ Datadog's Azure App Service Node.js extension supports Azure App Service Web App
 
 ### Installation
 
-1. Configure the [Datadog-Azure integration][1] to monitor your Azure Web App. To verify, check that your Web App is counted in the `azure.app_service.count` metric in Datadog. 
+1. Configure the [Datadog-Azure integration][1] to monitor your Azure Web App. To verify, check that your Web App is counted in the `azure.app_service.count` metric in Datadog.
 
 2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure Web App you wish to instrument with Datadog.
 
@@ -275,7 +275,7 @@ Datadog's Azure App Service Node.js extension supports Azure App Service Web App
 
    <div class="alert alert-info">To avoid downtime, use <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-best-practices#use-deployment-slots">deployment slots</a>. You can create a workflow that uses the <a href="https://github.com/marketplace/actions/azure-cli-action">GitHub Action for Azure CLI</a>. See the sample <a href="/resources/yaml/serverless/aas-workflow-windows.yaml">GitHub workflow</a>.</div>
 8. On the **Extensions** page, select the **Node Datadog APM** extension.
-9. Accept the legal terms, select **OK**, and wait for the installation to complete. 
+9. Accept the legal terms, select **OK**, and wait for the installation to complete.
 10. **Start** your application.
     {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Start" >}}
 

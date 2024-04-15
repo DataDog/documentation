@@ -1,6 +1,6 @@
 ---
 title: Autodiscovery avec l'Agent v5
-kind: guide
+
 private: true
 aliases:
   - /fr/agent/faq/agent-5-autodiscovery

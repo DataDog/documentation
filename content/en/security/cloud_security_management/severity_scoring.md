@@ -1,6 +1,6 @@
 ---
 title: Severity Scoring
-kind: documentation
+
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
@@ -26,7 +26,7 @@ The likelihood component is made up of two subcomponents:
 * **Attack vector**: The means through which a misconfiguration can be exploited.
 * **Accessibility**: If the resource is publicly accessible or not.
 
-#### Attack vector 
+#### Attack vector
 
 The attack vector is determined by the following criteria:
 
@@ -85,7 +85,7 @@ To explain how the framework is used here are a few examples.
 
 #### Example 1: SNS Topic should have access restrictions set for subscription
 
-The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination gives anyone the ability to subscribe to the SNS topic and receive its notifications. 
+The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination gives anyone the ability to subscribe to the SNS topic and receive its notifications.
 
 Using the CSM severity scoring framework, the rule would be scored as follows:
 

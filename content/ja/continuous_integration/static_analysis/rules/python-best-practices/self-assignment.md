@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 自分自身に割り当てない
 ---
 ## メタデータ

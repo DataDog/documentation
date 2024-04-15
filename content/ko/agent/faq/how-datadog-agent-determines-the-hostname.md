@@ -2,7 +2,7 @@
 aliases:
 - /ko/agent/faq/how-can-i-change-the-hostname/
 comments: <!– 원본 순서도가 루시드차트에 있습니다. Trello를 검색하여 링크를 찾거나 Grant에게 문의하세요.––>
-kind: faq
+
 title: Datadog에서는 에이전트 호스트 이름을 어떻게 결정하나요?
 ---
 

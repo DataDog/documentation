@@ -1,6 +1,6 @@
 ---
 title: Métriques custom à partir d'applications sans serveur
-kind: documentation
+
 ---
 ## Présentation
 
@@ -27,7 +27,7 @@ Vous pouvez également générer des métriques à partir de l'ensemble des span
 
 Datadog recommande d'utiliser l'[extension Lambda Datadog][1] pour envoyer des métriques custom depuis des runtimes Lambda compatibles.
 
-1. Suivez les [instructions d'installation générales de la surveillance sans serveur][6] pour votre runtime Lambda. 
+1. Suivez les [instructions d'installation générales de la surveillance sans serveur][6] pour votre runtime Lambda.
 1. Si vous ne souhaitez pas recueillir de traces depuis votre fonction Lambda, définissez la variable d'environnement `DD_TRACE_ENABLED` sur `false`.
 1. Si vous ne souhaitez pas recueillir de logs depuis votre fonction Lambda, définissez la variable d'environnement `DD_SERVERLESS_LOGS_ENABLED` sur `false`.
 1. Importez et utilisez la fonction auxiliaire depuis la bibliothèque Lambda Datadog, par exemple `lambda_metric` ou `sendDistributionMetric`, pour envoyer vos métriques custom à partir de l'[exemple de code](#exemple-de-code-pour-l-envoi-de-metriques-custom).

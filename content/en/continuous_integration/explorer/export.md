@@ -1,6 +1,6 @@
 ---
-title: Export Test Runs or Pipeline Executions 
-kind: documentation
+title: Export Test Runs or Pipeline Executions
+
 further_reading:
 - link: "/continuous_integration/search/"
   tag: "Documentation"
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-You can use your CI Visibility search query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search CI Visibility Tests][1] or [Search CI Visibility Pipelines endpoint][2]. 
+You can use your CI Visibility search query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search CI Visibility Tests][1] or [Search CI Visibility Pipelines endpoint][2].
 
 ## Export the search query or visualization
 

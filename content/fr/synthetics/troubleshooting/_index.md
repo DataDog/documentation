@@ -13,7 +13,7 @@ further_reading:
 - link: /synthetics/private_locations/
   tag: Documentation
   text: Timeboards
-kind: documentation
+
 title: Dépannage de la surveillance Synthetic
 ---
 
@@ -33,11 +33,11 @@ Si vous observez un changement soudain ou une augmentation globale des [métriqu
 
 #### Le site Web ne se charge pas dans l'iframe
 
-Après avoir téléchargé l'[extension Datadog][4], vous ne parvenez pas à afficher votre site Web dans l'iframe sur la droite de l'enregistreur de votre test Browser. Le message `Your website does not support being loaded through an iframe.` est affiché dans l'iframe. Cette erreur peut survenir lorsque certains réglages de votre application empêchent son ouverture dans l'iframe. 
+Après avoir téléchargé l'[extension Datadog][4], vous ne parvenez pas à afficher votre site Web dans l'iframe sur la droite de l'enregistreur de votre test Browser. Le message `Your website does not support being loaded through an iframe.` est affiché dans l'iframe. Cette erreur peut survenir lorsque certains réglages de votre application empêchent son ouverture dans l'iframe.
 
 Ou alors, si vous ne parvenez pas à vous connecter à votre site Web lorsque vous enregistrez du contenu dans l'enregistreur de l'iframe, il se peut qu'une requête de votre application soit bloquée.
 
-Essayez d'ouvrir votre site Web dans une fenêtre contextuelle en cliquant sur **Open in Popup** pour enregistrer votre parcours utilisateur.  
+Essayez d'ouvrir votre site Web dans une fenêtre contextuelle en cliquant sur **Open in Popup** pour enregistrer votre parcours utilisateur.
 
 #### Seules certaines applications se chargent dans l'iframe
 
@@ -203,7 +203,7 @@ Le worker dʼemplacement privé Synthetics s'exécute désormais dans le compte 
 
 Tout d'abord, assurez-vous que vous êtes connecté à l'ordinateur sur lequel le service Windows Emplacement privé Synthetics est installé et que vous disposez des autorisations nécessaires pour créer des tâches planifiées sur cet ordinateur.
 
-Si le worker dʼemplacement privé Synthetics tombe en panne, ajoutez une tâche planifiée dans Windows qui exécute un script PowerShell pour redémarrer l'application si elle cesse de fonctionner. Cela permet de s'assurer qu'un emplacement privé est redémarré après une panne. 
+Si le worker dʼemplacement privé Synthetics tombe en panne, ajoutez une tâche planifiée dans Windows qui exécute un script PowerShell pour redémarrer l'application si elle cesse de fonctionner. Cela permet de s'assurer qu'un emplacement privé est redémarré après une panne.
 
 Si vous avez fourni un fichier de configuration lors de l'installation de l'application, un service Windows appelé `Datadog Synthetics Private Location` démarre automatiquement après l'installation. Pour le vérifier, assurez-vous que vous pouvez voir le service fonctionner dans l'outil **Services**. Ce service Windows redémarre automatiquement lʼemplacement privé.
 

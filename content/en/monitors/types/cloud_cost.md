@@ -1,6 +1,6 @@
 ---
 title: Cloud Cost Monitor
-kind: documentation
+
 description: "Monitor costs associated with cloud platforms."
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
@@ -47,7 +47,7 @@ Choose between a **Compare Costs Over Time** or a **Set Daily Cost Threshold** m
 
 ## Specify which costs to track
 
-Any cost type or metric reporting to Datadog is available for monitors. You can use custom metrics or observability metrics alongside a cost metric to monitor unit economics. For more information, see the [Cloud Cost Management][1] page. Use the editor to define the cost types or exports. 
+Any cost type or metric reporting to Datadog is available for monitors. You can use custom metrics or observability metrics alongside a cost metric to monitor unit economics. For more information, see the [Cloud Cost Management][1] page. Use the editor to define the cost types or exports.
 
 | Step                              | Required | Default              | Example             |
 |-----------------------------------|----------|----------------------|---------------------|
@@ -60,7 +60,7 @@ Any cost type or metric reporting to Datadog is available for monitors. You can 
 
 ## Set alert conditions
 
-If the cost monitor type is **Cost Threshold**, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.  
+If the cost monitor type is **Cost Threshold**, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.
 
 If the cost monitor type is **Cost Changes**, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a **Percentage Change** or set to **Dollar Amount**.
 

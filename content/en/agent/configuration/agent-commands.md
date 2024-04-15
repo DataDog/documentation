@@ -1,6 +1,6 @@
 ---
 title: Agent Commands
-kind: guide
+
 aliases:
     - /agent/faq/agent-status-and-information
     - /agent/faq/start-stop-restart-the-datadog-agent

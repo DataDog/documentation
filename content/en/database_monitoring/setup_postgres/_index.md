@@ -1,6 +1,6 @@
 ---
 title: Setting up Postgres
-kind: documentation
+
 description: Setting up Database Monitoring on a Postgres database
 disable_sidebar: true
 ---

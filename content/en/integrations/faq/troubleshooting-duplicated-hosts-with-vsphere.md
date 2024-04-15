@@ -1,11 +1,11 @@
 ---
 title: Troubleshooting duplicated hosts with vSphere
-kind: faq
+
 ---
 
 ## Duplicated hosts issue context
 
-The [vSphere integration][1] is configured to crawl into the different resources of a vCenter, such as VMs or ESXi. The integration flags the VMs and ESXi as separate hosts, and they appear in your [Infrastructure List][2] as `<vsphere-hostname>`.  
+The [vSphere integration][1] is configured to crawl into the different resources of a vCenter, such as VMs or ESXi. The integration flags the VMs and ESXi as separate hosts, and they appear in your [Infrastructure List][2] as `<vsphere-hostname>`.
 Inside a vCenter, a guest VM can run an Agent. This Agent submits metrics and attaches `<guest-hostname>` metadata to them. A host appears in the Infrastructure List as `<guest-hostname>`.
 Depending on the vSphere integration configuration and the guest Agent configuration, `<vsphere-hostname>` and `<guest-hostname>` can be different. For example, `<vsphere-hostname>` can be a Fully Qualified Domain Name (FQDN) and `<guest-hostname>` a Short Name. In this case, a single VM can appear twice in the Infrastructure List.
 

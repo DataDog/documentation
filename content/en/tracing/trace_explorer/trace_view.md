@@ -1,6 +1,6 @@
 ---
 title: Trace View
-kind: documentation
+
 aliases:
 - /tracing/visualization/trace/
 further_reading:
@@ -97,14 +97,14 @@ Hover over a service to highlight its parent and children, and click on it to fo
 
 ## More information
 
-The height-adjustable bottom of the Trace View shows selected span and trace information. 
+The height-adjustable bottom of the Trace View shows selected span and trace information.
 
 The span header contains service, operation, and resource names of the selected span as well as latency information. Pivot to other parts of the platform or narrow down your [Trace Explorer][5] search by clicking on the naming pill.
 
 {{< img src="tracing/trace_view/span_header.png" alt="Span header" style="width:90%;">}}
 
 {{< tabs >}}
-{{% tab "Span Info" %}} 
+{{% tab "Span Info" %}}
 
 See all span metadata, including custom tags. Click on a span tag to update the search query in the Trace Explorer or copy the tag's value to the clipboard.
 
@@ -138,7 +138,7 @@ See logs related to your service at the time of the trace. When you hover over a
 {{% /tab %}}
 {{% tab "Processes" %}}
 
-Click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. You can analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the [Live Processes page][1]. To view span-specific processes, enable [process collection][2]. Related processes are not currently supported for serverless and browser traces. 
+Click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. You can analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the [Live Processes page][1]. To view span-specific processes, enable [process collection][2]. Related processes are not currently supported for serverless and browser traces.
 
 {{< img src="tracing/trace_view/processes_tab.png" alt="Processes tab" style="width:90%;">}}
 

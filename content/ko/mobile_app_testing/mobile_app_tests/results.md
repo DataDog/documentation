@@ -9,7 +9,7 @@ further_reading:
 - link: /service_management/events/explorer
   tag: 설명서
   text: 이벤트 탐색기에 대해 알아보기
-kind: documentation
+
 title: 모바일 앱 테스트 결과
 ---
 

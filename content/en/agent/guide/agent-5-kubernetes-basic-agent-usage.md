@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Basic Agent Usage in Agent v5
-kind: guide
+
 private: true
 aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage

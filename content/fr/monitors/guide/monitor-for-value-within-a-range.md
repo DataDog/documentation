@@ -1,6 +1,6 @@
 ---
 title: Surveillance de plages
-kind: guide
+
 ---
 ## Présentation
 

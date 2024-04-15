@@ -1,6 +1,6 @@
 ---
 title: "Function App Component"
-kind: documentation
+
 ---
 
 ## Overview

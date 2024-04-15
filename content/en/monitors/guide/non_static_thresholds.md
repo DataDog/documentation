@@ -1,6 +1,6 @@
 ---
 title: How to monitor non-static thresholds
-kind: Guide
+
 further_reading:
 - link: "/monitors/types/composite/"
   tag: "Documentation"
@@ -17,15 +17,15 @@ A typical metric monitor triggers an alert if a single metric goes above a speci
 Watchdog powered monitors (namely [anomaly][1] and [outlier][2]) are particularly useful when there isn't an explicit definition of your metric being off-track. However, when possible, you should use regular monitors with tailored alert conditions to maximize precision and minimize time-to-alert for your specific use case.
 
 This guide covers common use cases for alerting on non-static thresholds:
-  - [Alert on a metric that goes off track outside of **seasonal variations**](#seasonal-threshold) 
+  - [Alert on a metric that goes off track outside of **seasonal variations**](#seasonal-threshold)
   - [Alert based on the value of another **reference** metric](#reference-threshold)
 
 ## Seasonal threshold
 
 ### Context
 
-You are the team lead in charge of an e-commerce website. You want to: 
-- receive alerts on unexpectedly low traffic on your home page 
+You are the team lead in charge of an e-commerce website. You want to:
+- receive alerts on unexpectedly low traffic on your home page
 - capture more localized incidents like the ones affecting public internet providers
 - cover for unknown failure scenarios
 
@@ -37,13 +37,13 @@ Your website's traffic varies from night to day, and from weekday to weekend. Th
 
 Your team measures the number of connections on your NGINX web server using the [`nginx.requests.total_count`][3] metric.
 
-The **request** consists of 3 parts: 
+The **request** consists of 3 parts:
 1. A query to get the current number of requests.
 2. A query to get the number of requests at the same time a week before.
 3. "Formula" queries that calculate the ratio between the first two queries.
 
 Then, decide on the time aggregation:
-- You choose the timeframe. The bigger the timeframe, the more data it evaluates to detect an anomaly. Larger timeframes can also result in more monitor alerts, so start with 1 hour, then adjust to your needs. 
+- You choose the timeframe. The bigger the timeframe, the more data it evaluates to detect an anomaly. Larger timeframes can also result in more monitor alerts, so start with 1 hour, then adjust to your needs.
 - You choose the aggregation. Since it's a count metric performing a ratio, `average` (or `sum`) is a natural choice.
 
 The threshold displayed in the screenshot below has been configured to 0.9 to allow for a 10% difference between the value of the first query (current) and the second query (week before).
@@ -169,7 +169,7 @@ The second monitor calculates the error rate. Create a query on the number of er
 
 #### Composite monitor
 
-The last monitor is a Composite monitor, which sends an alert only if the two preceding monitors are also both in an **ALERT** state. 
+The last monitor is a Composite monitor, which sends an alert only if the two preceding monitors are also both in an **ALERT** state.
 
 {{< img src="monitors/guide/non_static_thresholds/reference_composite_monitor_config.png" alt="Example composite monitor configuration showing boolean logic to alert if both monitors are in ALERT state" style="width:100%;" >}}
 

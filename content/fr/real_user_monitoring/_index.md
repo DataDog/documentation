@@ -40,7 +40,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/hybrid-app-monitoring/
   tag: Blog
   text: Surveiller vos applications mobiles hybrides avec Datadog
-kind: documentation
+
 title: RUM et Session Replay
 ---
 
@@ -48,7 +48,7 @@ title: RUM et Session Replay
 
 ## En quoi consiste la solution Real User Monitoring ?
 
-Le service *Real User Monitoring (RUM)* de Datadog vous offre une visibilité de bout en bout sur les activités et l'expérience en temps réel de chaque utilisateur. Cette solution de surveillance d'applications Web et mobiles répond à quatre besoins différents : 
+Le service *Real User Monitoring (RUM)* de Datadog vous offre une visibilité de bout en bout sur les activités et l'expérience en temps réel de chaque utilisateur. Cette solution de surveillance d'applications Web et mobiles répond à quatre besoins différents :
 
 * **Mesure des performances** : suivez les performances des pages Web, des écrans d'applications mobiles, des actions utilisateur, des requêtes réseau, ainsi que de votre code frontend.
 * **Gestion des erreurs** : surveillez les bugs et problèmes en cours et suivez leur évolution et leurs versions.

@@ -15,7 +15,7 @@ integration_id: ''
 integration_title: Slack
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: slack
 public_title: Intégration Datadog/Slack
@@ -83,7 +83,7 @@ Vous pouvez modifier les monitors à envoyer à partir de l'application Slack de
 Déclarez un nouvel incident à partir de l'application Slack avec :
 
 ```
-/datadog incident 
+/datadog incident
 ```
 
 Tous les utilisateurs de votre organisation Slack peuvent déclarer un incident, même s'ils n'ont pas accès à Datadog.
@@ -129,7 +129,7 @@ Ouvrez l'app Slack, puis définissez le canal dans lequel vous souhaitez publier
 
 Grâce aux actions Slack et aux commandes `/datadog`, vous pouvez créer et gérer des tâches d'incident directement depuis Slack. Les commandes de tâche d'incident doivent être utilisées dans un canal d'incident.
 
-**Actions Slack** : 
+**Actions Slack** :
 Vous pouvez créer des tâches à l'aide des actions Slack. Pour ce faire, passez le curseur sur un message envoyé dans un canal d'incident. Cliquez ensuite sur l'icône représentant trois points située à droite du message, puis sur Add Task to Incident.
 
 **Commandes disponibles** :
@@ -250,7 +250,7 @@ L'intégration Slack n'inclut aucun check de service.
 
 ## Autorisations
 
-L'app Datadog pour Slack nécessite les portées OAuth suivantes. Pour en savoir plus, consultez la [documentation relative aux portées d'autorisations Slack][4] (en anglais). 
+L'app Datadog pour Slack nécessite les portées OAuth suivantes. Pour en savoir plus, consultez la [documentation relative aux portées d'autorisations Slack][4] (en anglais).
 
 ### Portées des tokens du bot
 

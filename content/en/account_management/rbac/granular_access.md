@@ -1,6 +1,6 @@
 ---
 title: Granular Access Control
-kind: documentation
+
 ---
 ## Manage access to individual resources
 

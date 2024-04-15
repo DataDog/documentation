@@ -1,6 +1,6 @@
 ---
 title: Profiler Troubleshooting
-kind: documentation
+
 type: multi-code-lang
 further_reading:
     - link: '/tracing/troubleshooting'

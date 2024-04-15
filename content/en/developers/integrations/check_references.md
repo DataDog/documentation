@@ -11,16 +11,16 @@ further_reading:
 - link: /developers/integrations/oauth_for_integrations/
   tag: Documentation
   text: Learn about using OAuth for integrations
-kind: documentation
+
 title: Integration Assets Reference
 ---
 ## Overview
 
-This page walks you through the files that you need to populate in order to create an offering on the [**Integrations** page][12] or the [**Marketplace** page][9]. 
+This page walks you through the files that you need to populate in order to create an offering on the [**Integrations** page][12] or the [**Marketplace** page][9].
 
 ## Configuration file
 
-When preparing a new integration, you must include an example configuration that contains the necessary options and reasonable defaults. The example configuration file—which in this case, is located at `<CHECK_NAME>/datadog_checks/<CHECK_NAME>/data/conf.yaml.example`—has two top-level elements: `init_config` and `instances`. 
+When preparing a new integration, you must include an example configuration that contains the necessary options and reasonable defaults. The example configuration file—which in this case, is located at `<CHECK_NAME>/datadog_checks/<CHECK_NAME>/data/conf.yaml.example`—has two top-level elements: `init_config` and `instances`.
 
 The configuration under `init_config` is applied to the integration globally, and is used in every instantiation of the integration, whereas anything within `instances` is specific to a given instantiation.
 
@@ -44,7 +44,7 @@ Configuration blocks follow a few guidelines:
 
 ### `@param` specification
 
-You can use the `@param` command to describe configuration blocks and provide documentation for your configuration. 
+You can use the `@param` command to describe configuration blocks and provide documentation for your configuration.
 
 `@param` is implemented using one of the following forms:
 
@@ -89,7 +89,7 @@ Every offering on the [**Integrations** page][4] or the [**Marketplace** page][1
 
 You can set multiple categories and define submitted or queried data types for the integration using the `classifier_tags` parameter.
 
-You can find the complete list of classifier tags for the `manifest.json` file below: 
+You can find the complete list of classifier tags for the `manifest.json` file below:
 
 {{% integration_categories %}}
 
@@ -97,7 +97,7 @@ You can find the complete list of classifier tags for the `manifest.json` file b
 
 The `service_check.json` file describes the service checks made by the integration.
 
-You can find the complete list of mandatory attributes for the `service_checks.json` file below: 
+You can find the complete list of mandatory attributes for the `service_checks.json` file below:
 
 | Attribute       | Description                                                                                                                |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -114,7 +114,7 @@ You can find the complete list of mandatory attributes for the `service_checks.j
 
 The `metadata.csv` file describes all of the metrics that can be collected by the integration.
 
-You can find the complete list of mandatory and optional attributes for the `metadata.csv` file below: 
+You can find the complete list of mandatory and optional attributes for the `metadata.csv` file below:
 
 | Column name     | Mandatory or Optional | Description                                                                                                                                                                                                                                                                                                                             |
 | --------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

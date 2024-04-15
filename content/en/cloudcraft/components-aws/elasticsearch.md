@@ -1,6 +1,6 @@
 ---
 title: "Elasticsearch Component"
-kind: documentation
+
 ---
 ## Overview
 

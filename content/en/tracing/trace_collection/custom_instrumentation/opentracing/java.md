@@ -1,6 +1,6 @@
 ---
 title: Java OpenTracing Instrumentation
-kind: documentation
+
 aliases:
 - /tracing/setup_overview/open_standards/java
 - /tracing/trace_collection/open_standards/java
@@ -77,9 +77,9 @@ public class Application {
 }
 ```
 
-Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface. Consult the [Javadoc][2] for a full listing. 
+Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface. Consult the [Javadoc][2] for a full listing.
 
-**Note:** Never add `dd-java-agent` to your classpath. Doing so can cause unexpected behavior. 
+**Note:** Never add `dd-java-agent` to your classpath. Doing so can cause unexpected behavior.
 
 ## Asynchronous traces
 

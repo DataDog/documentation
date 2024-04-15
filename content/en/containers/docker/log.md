@@ -1,6 +1,6 @@
 ---
 title: Docker Log collection
-kind: documentation
+
 aliases:
     - /logs/docker
     - /logs/languages/docker
@@ -113,22 +113,22 @@ It is recommended that you pick the latest version of the Datadog Agent. Consult
 
 The commands related to log collection are:
 
-`-e DD_LOGS_ENABLED=true`                                     
+`-e DD_LOGS_ENABLED=true`
 : Enables log collection when set to `true`. The Agent looks for log instructions in configuration files.
 
-`-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`                
+`-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`
 : Adds a log configuration that enables log collection for all containers.
 
-`-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`         
+`-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`
 : To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host.
 
-`-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`                
+`-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`
 : Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics. This parameter value supports regular expressions.
 
-`-v /var/run/docker.sock:/var/run/docker.sock:ro`             
+`-v /var/run/docker.sock:/var/run/docker.sock:ro`
 : To connect to the Docker daemon to discover containers and collect `stdout/stderr` from the Docker socket.
 
-`-v /var/lib/docker/containers:/var/lib/docker/containers:ro` 
+`-v /var/lib/docker/containers:/var/lib/docker/containers:ro`
 : To collect containers logs from files. Available in the Datadog Agent 6.27.0/7.27.0+
 
 **Note**: If using Docker Compose, the value for `DD_CONTAINER_EXCLUDE` must not be quoted. Configure the environment variable in your docker-compose.yaml file like the example below:
@@ -156,7 +156,7 @@ environment:
     logs_config:
         container_collect_all: true
     ```
-3. **Windows 10 Only**: The Datadog Agent user must be a member of the `docker-users` group in order to have permissions to work with Docker containers. Run `net localgroup docker-users "ddagentuser" /ADD` from your Administrator command prompt or follow the [Docker User Group][2] configuration steps.  
+3. **Windows 10 Only**: The Datadog Agent user must be a member of the `docker-users` group in order to have permissions to work with Docker containers. Run `net localgroup docker-users "ddagentuser" /ADD` from your Administrator command prompt or follow the [Docker User Group][2] configuration steps.
 4. [Restart the Agent][3] to see all of your container logs in Datadog.
 
 [1]: /agent/basic_agent_usage/
@@ -180,7 +180,7 @@ environment:
 
 3. [Restart the Agent][4] to see all of your container logs in Datadog.
 
-**Note**: In order for the Agent to collect logs produced by a container with a custom log configuration, the logs must be written to a volume accessible from the host. It is recommended that container logs be written to `stdout` and `stderr` so that they can be collected automatically. 
+**Note**: In order for the Agent to collect logs produced by a container with a custom log configuration, the logs must be written to a volume accessible from the host. It is recommended that container logs be written to `stdout` and `stderr` so that they can be collected automatically.
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
@@ -334,7 +334,7 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 
 Docker container log collection from a file is an alternative to collection over the Docker socket. File based collection offers better performance than socket based collection.
 
-In versions 7.27.0/6.27.0+, you can configure the Agent to collect Docker container logs from a file. In versions 6.33.0+/7.33.0+, the Agent collects Docker container logs from a file by default. 
+In versions 7.27.0/6.27.0+, you can configure the Agent to collect Docker container logs from a file. In versions 6.33.0+/7.33.0+, the Agent collects Docker container logs from a file by default.
 
 File based collection requires the directory storing Docker container logs to be exposed to the Agent in the following location: `/var/lib/docker/containers` (`c:\programdata\docker\containers` on Windows). See the [Docker logs collection troubleshooting guide][10] for more information.
 

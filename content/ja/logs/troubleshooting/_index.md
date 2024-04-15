@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Logs のトラブルシューティング
 ---
 

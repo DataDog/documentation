@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: データベースモニタリングモニター
 ---
 
@@ -95,7 +95,7 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 1. **Notify your team** の下に、通知メッセージを書きます。詳細な手順については、[通知][4]を参照してください。このテキストはメッセージ本文に使用できます。
 {{< code-block lang="text" >}}
 {{#is_alert}}
-{{host.name}} で待機クエリが {{value}} の値で 
+{{host.name}} で待機クエリが {{value}} の値で
 {{threshold}} を超えました。
 {{/is_alert}}
 
@@ -133,7 +133,7 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 1. **Notify your team** の下に、通知メッセージを書きます。詳細な手順については、[通知][4]を参照してください。このテキストはメッセージ本文に使用できます。
 {{< code-block lang="text" >}}
 {{#is_alert}}
-{{host.name}} で継続時間が 30 秒を超えるクエリの数が 
+{{host.name}} で継続時間が 30 秒を超えるクエリの数が
 {{value}} の値で {{threshold}} を超えました。
 {{/is_alert}}
 

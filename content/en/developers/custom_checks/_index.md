@@ -1,10 +1,10 @@
 ---
 title: Custom Checks
-kind: documentation
+
 description: Setting up a custom check with Datadog
 ---
 
-## Overview 
+## Overview
 
 Custom checks, also known as custom Agent checks, enable you to collect metrics and other data from your custom systems or applications and send them to Datadog. By creating and configuring a new check file in your `conf.d` directory, you can configure the Datadog Agent to collect data emitted from your application. Custom checks are considered low effort compared to writing a Datadog integration. They impact your billing because Metrics emitted through custom checks are considered custom metrics, which have a cost associated depending on your subscription plan.
 

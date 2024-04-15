@@ -1,6 +1,6 @@
 ---
 title: Log Management Billing
-kind: documentation
+
 ---
 
 ## Pricing

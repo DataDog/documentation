@@ -1,6 +1,6 @@
 ---
 title: Cloud Foundry Setup Guide
-kind: guide
+
 description: "Steps for setting up the Cloud Foundry Integration"
 aliases:
 - /integrations/guide/pivotal-cloud-foundry-manual-setup
@@ -209,7 +209,7 @@ Click on any host to zoom in, then click **system** within its hexagon to make s
 
 #### Collect CAPI metadata and Cluster Agent tags in Cloud Foundry containers
 
-For Datadog Agent versions `7.40.1` and later, you can collect CAPI metadata and Datadog Cluster Agent (DCA) tags from Cloud Foundry containers. Application labels and annotations are present in the application logs, metrics, and traces. 
+For Datadog Agent versions `7.40.1` and later, you can collect CAPI metadata and Datadog Cluster Agent (DCA) tags from Cloud Foundry containers. Application labels and annotations are present in the application logs, metrics, and traces.
 
 ### Install the Datadog Cluster Agent (DCA) BOSH release
 
@@ -236,7 +236,7 @@ jobs:
   release: datadog-cluster-agent
   properties:
     cluster_agent:
-      token: <TOKEN>  # 32 or more characters in length 
+      token: <TOKEN>  # 32 or more characters in length
       bbs_poll_interval: 10
       warmup_duration: 5
       log_level: INFO
@@ -259,7 +259,7 @@ This DNS alias is specified in the [`cluster_agent.address`](https://bosh.io/job
 jobs:
 - name: datadog-agent
   release: datadog-agent
-  properties: 
+  properties:
     ...
     cluster_agent:
       address: <DNS_NAME>
@@ -284,7 +284,7 @@ The JSON object should be a dictionary associating a service name to its Autodis
 }
 ```
 
-For services bound to the application, the `<SERVICE_NAME>` should be the name of the service as it appears in the `cf services` command output. For services running inside the application, the `<SERVICE_NAME>` can be anything.  
+For services bound to the application, the `<SERVICE_NAME>` should be the name of the service as it appears in the `cf services` command output. For services running inside the application, the `<SERVICE_NAME>` can be anything.
 
 The `variables` key is used only for bound services to resolve template variables inside the configuration template, and must contain the JSON path of the desired value for the `VCAP_SERVICES` environment variable. You can inspect this with the `cf env <APPLICATION_NAME>` command.
 

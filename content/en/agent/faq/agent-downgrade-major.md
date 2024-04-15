@@ -1,6 +1,6 @@
 ---
 title: Downgrade the Agent to a prior major version
-kind: faq
+
 aliases:
 - /agent/faq/agent-downgrade
 ---

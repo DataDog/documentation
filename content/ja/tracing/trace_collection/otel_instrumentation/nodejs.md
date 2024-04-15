@@ -6,7 +6,7 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentation
   text: サービス、リソース、トレースの詳細
-kind: documentation
+
 title: OpenTelemetry API を使った Node.js アプリケーションのカスタムインスツルメンテーション
 type: multi-code-lang
 ---
@@ -23,8 +23,8 @@ type: multi-code-lang
 
 | 機能                               | サポートノート                       |
 |---------------------------------------|--------------------------------------|
-| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
-| [スパンプロセッサー][2]                  | 非サポート                                          | 
+| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 |
+| [スパンプロセッサー][2]                  | 非サポート                                          |
 | [スパンエクスポーター][3]                   | 非サポート                                            |
 | トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
 

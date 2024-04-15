@@ -1,6 +1,6 @@
 ---
 title: Monitor-based SLOs
-kind: documentation
+
 description: "Use Monitors to define the Service Level Objective"
 aliases:
 - /monitors/service_level_objectives/monitor/
@@ -76,8 +76,8 @@ Select **Save & Exit** to save your new SLO.
 {{< img src="service_management/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated" >}}
 
 Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected:
-- If specific groups have been selected (up to 20), the SLO status is calculated with only those groups. The UI displays all selected groups. 
-- If no specific groups are selected, the SLO status is calculated across *all* groups. The UI displays all underlying groups of the SLO. 
+- If specific groups have been selected (up to 20), the SLO status is calculated with only those groups. The UI displays all selected groups.
+- If no specific groups are selected, the SLO status is calculated across *all* groups. The UI displays all underlying groups of the SLO.
 
 **Note:** For monitor-based SLOs with groups, all groups can be displayed for any SLOs containing up to 5,000 groups. For SLOs containing more than 5,000 groups, the SLO is calculated based on all groups but no groups are displayed in the UI.
 

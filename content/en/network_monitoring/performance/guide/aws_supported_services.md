@@ -1,6 +1,6 @@
 ---
 title: NPM AWS Supported Services
-kind: guide
+
 npm_provider: aws
 further_reading:
   - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'

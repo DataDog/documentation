@@ -1,7 +1,7 @@
 ---
 cascade:
 - private: true
-kind: faq
+
 title: Synthetic モニタリングに関するよくある質問
 ---
 

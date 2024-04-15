@@ -12,7 +12,7 @@ further_reading:
 - link: /tracing/
   tag: ドキュメント
   text: トレースの収集
-kind: documentation
+
 title: Agent へのカスタム Python パッケージの追加
 ---
 

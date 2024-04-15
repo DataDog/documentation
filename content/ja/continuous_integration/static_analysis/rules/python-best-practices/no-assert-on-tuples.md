@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: タプルにアサートしない
 ---
 ## メタデータ

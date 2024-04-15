@@ -3,7 +3,7 @@ aliases:
 - /fr/tracing/visualization/search/
 - /fr/tracing/trace_search_and_analytics/
 - /fr/tracing/advanced_usage/
-kind: documentation
+
 title: App Analytics
 ---
 

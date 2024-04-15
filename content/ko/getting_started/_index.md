@@ -11,7 +11,7 @@ further_reading:
 - link: https://learn.datadoghq.com/
   tag: 학습 센터
   text: Datadog 시작을 위한 코스 수강하기
-kind: documentation
+
 title: 시작하기
 ---
 

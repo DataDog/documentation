@@ -1,6 +1,6 @@
 ---
 title: Route Logs in Datadog-Rehydratable Format to Amazon S3
-kind: documentation
+
 disable_toc: false
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
@@ -50,7 +50,7 @@ See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage c
 [1]: https://aws.amazon.com/s3/pricing/
 {{< /site-region >}}
 
-1. Navigate to [Amazon S3 buckets][2]. 
+1. Navigate to [Amazon S3 buckets][2].
 1. Click **Create bucket**.
 1. Enter a descriptive name for your bucket.
 1. Do not make your bucket publicly readable.
@@ -230,14 +230,14 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 ### Pipeline builder UI
 
 1. Navigate to your [Pipeline][8].
-1. (Optional) Add a remap transform to tag all logs going to `datadog_archives`.   
-  a. Click **Edit** and then **Add More** in the **Add Transforms.  
-  b. Click the **Remap** tile.  
-  c. Enter a descriptive name for the component.  
-  d. In the **Inputs** field, select the source to connect this destination to.  
-  e. Add `.sender = "observability_pipelines_worker"` in the **Source** section.  
-  f. Click **Save**.  
-  g. Navigate back to your pipeline. 
+1. (Optional) Add a remap transform to tag all logs going to `datadog_archives`.
+  a. Click **Edit** and then **Add More** in the **Add Transforms.
+  b. Click the **Remap** tile.
+  c. Enter a descriptive name for the component.
+  d. In the **Inputs** field, select the source to connect this destination to.
+  e. Add `.sender = "observability_pipelines_worker"` in the **Source** section.
+  f. Click **Save**.
+  g. Navigate back to your pipeline.
 1. Click **Edit**.
 1. Click **Add More** in the **Add Destination** tile.
 1. Click the **Datadog Archives** tile.

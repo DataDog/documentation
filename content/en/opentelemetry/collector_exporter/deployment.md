@@ -1,6 +1,6 @@
 ---
 title: Deployment
-kind: documentation
+
 further_reading:
 - link: "/opentelemetry/collector_exporter/configuration/"
   tag: "Documentation"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Downloading the collector
 
-To run the OpenTelemetry Collector along with the Datadog Exporter, download the latest release of the [OpenTelemetry Collector Contrib distribution][3]. 
+To run the OpenTelemetry Collector along with the Datadog Exporter, download the latest release of the [OpenTelemetry Collector Contrib distribution][3].
 
 ## Running the collector
 
@@ -117,7 +117,7 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
    ```
 
    This ensures that [Kubernetes Attributes Processor][4] which is used in [the config map][5] is able to extract the necessary metadata to attach to traces. There are additional [roles][6] that need to be set to allow access to this metadata. [The example][1] is complete, ready to use, and has the correct roles set up.
-  
+
 3. Provide your [application container][7]. To configure your application container, ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][8]:
 
    ```yaml
@@ -182,7 +182,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
    ```
 
    This ensures that [Kubernetes Attributes Processor][4] which is used in [the config map][5] is able to extract the necessary metadata to attach to traces. There are additional [roles][6] that need to be set to allow access to this metadata. [The example][1] is complete, ready to use, and has the correct roles set up.
-  
+
 3. Provide your [application container][7]. To configure your application container, ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][8]:
 
    ```yaml
@@ -226,7 +226,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
    # ...
    ```
 
-   This ensures that each Agent forwards its data through the OTLP protocol to the Collector Gateway. 
+   This ensures that each Agent forwards its data through the OTLP protocol to the Collector Gateway.
 
 6. Replace `GATEWAY_HOSTNAME` with the address of your OpenTelemetry Collector Gateway.
 
@@ -274,7 +274,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
 To use the OpenTelemetry Operator, follow the [official documentation for deploying the OpenTelemetry Operator][1]. As described there, deploy the certificate manager in addition to the Operator.
 
 Configure the Operator using one of the OpenTelemetry Collector standard Kubernetes configurations:
-* [DaemonSet deployment][2] - Use the DaemonSet deployment if you want to ensure you receive host metrics. 
+* [DaemonSet deployment][2] - Use the DaemonSet deployment if you want to ensure you receive host metrics.
 * [Gateway deployment][3]
 
 

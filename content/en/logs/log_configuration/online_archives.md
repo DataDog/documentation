@@ -1,6 +1,6 @@
 ---
 title: Online Archives
-kind: documentation
+
 description: Cost effective live query capabilities over long term retention of Logs
 private: true
 further_reading:
@@ -52,7 +52,7 @@ Select Online Archives from the dropdown in the Logs Explorer to begin searching
 
 [Search][4] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
 
-**Notes**: 
+**Notes**:
 - You cannot export online archive logs to Dashboards, Notebooks, or Monitors.
 - The Transactions and Patterns view is not available for Online Archives.
 

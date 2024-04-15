@@ -6,7 +6,7 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentation
   text: サービスレベル目標の概要
-kind: documentation
+
 title: エラー予算アラート
 ---
 
@@ -52,7 +52,7 @@ resource "datadog_monitor" "metric-based-slo" {
     type  = "slo alert"
 
     query = <<EOT
-    error_budget("slo_id").over("time_window") > 75 
+    error_budget("slo_id").over("time_window") > 75
     EOT
 
     message = "Example monitor message"

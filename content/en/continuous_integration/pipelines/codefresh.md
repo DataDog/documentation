@@ -1,6 +1,6 @@
 ---
 title: Set up Tracing on Codefresh Pipelines
-kind: documentation
+
 aliases:
   - /continuous_integration/setup_pipelines/codefresh
 further_reading:
@@ -22,7 +22,7 @@ further_reading:
 
 - **Manual steps**: View manually triggered pipelines
 
-- **Parameters**: Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered 
+- **Parameters**: Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered
 
 - **Pipeline failure reasons**: Identify pipeline failure reasons from error messages
 

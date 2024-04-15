@@ -1,6 +1,6 @@
 ---
 title: Logs Show Info Status For Warnings Or Errors
-kind: guide
+
 aliases:
   - /logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors
 further_reading:
@@ -37,7 +37,7 @@ Use a Grok parser to define a rule with the [`word()` matcher][1] and extract th
 1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
 2. Click **Add Processor**.
 3. Select **Grok Parser** for the processor type.
-4. Use the [`word()` matcher][1] to extract the status and pass it into a custom `log_status` attribute. 
+4. Use the [`word()` matcher][1] to extract the status and pass it into a custom `log_status` attribute.
 
 For example, the log may look like:
 
@@ -80,7 +80,7 @@ Modifications of a pipeline impacts new logs only because all the processing is 
 
 ## JSON logs
 
-JSON logs are automatically parsed in Datadog. Because the log `status` attribute is a [reserved attribute][4], it goes through pre-processing operations for JSON logs. 
+JSON logs are automatically parsed in Datadog. Because the log `status` attribute is a [reserved attribute][4], it goes through pre-processing operations for JSON logs.
 
 In this example, the actual status of the log is the value of the `logger_severity` attribute, not the default `INFO` log status.
 
@@ -97,7 +97,7 @@ To make sure the `logger_severity` attribute value overrides the default log sta
 
 Modifications of a pipeline impacts new logs only because all the processing is done in the ingestion process. New logs are correctly configured with the `logger_severity` attribute value.
 
-In order for the remapping to work, you must adhere to the status formats specified in the [Processors documentation][3]. 
+In order for the remapping to work, you must adhere to the status formats specified in the [Processors documentation][3].
 
 ## Further Reading
 

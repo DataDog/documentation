@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/guide/
   tag: Guide
   text: Guides supplémentaires sur la journalisation avec Datadog
-kind: Documentation
+
 title: Log Configuration
 ---
 

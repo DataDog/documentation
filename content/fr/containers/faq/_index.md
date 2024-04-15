@@ -2,7 +2,7 @@
 cascade:
 - private: true
 disable_sidebar: true
-kind: faq
+
 title: Questions fréquentes sur les conteneurs
 ---
 

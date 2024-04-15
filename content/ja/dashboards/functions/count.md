@@ -1,6 +1,6 @@
 ---
 title: カウント
-kind: documentation
+
 aliases:
   - /ja/graphing/functions/count/
 ---

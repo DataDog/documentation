@@ -1,6 +1,6 @@
 ---
 title: Managing Multiple-Organization Accounts
-kind: documentation
+
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
@@ -23,13 +23,13 @@ further_reading:
 
 ## Overview
 
-It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by managed service providers that have customers which should not have access to each others' data. 
+It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by managed service providers that have customers which should not have access to each others' data.
 
 The multi-organization account feature is not enabled by default. Contact [Datadog support][1] to have it enabled.
 
 ## Capabilities
 
-Users can be added to the parent-organization and multiple child-organizations. Users switch between organizations from the [user account settings menu][2]. 
+Users can be added to the parent-organization and multiple child-organizations. Users switch between organizations from the [user account settings menu][2].
 
 Organizations within a parent organization do not have access to each other's data. To enable cross-organization metric queries, see [cross-organization visibility][3].
 

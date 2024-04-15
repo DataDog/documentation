@@ -14,7 +14,7 @@ further_reading:
 - link: tracing/visualization/
   tag: Documentation
   text: Explore your services, resources, and traces
-kind: documentation
+
 title: Tracing Android Applications
 ---
 Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android-trace` client-side tracing library][2] and leverage the following features:
@@ -310,7 +310,7 @@ dependencies {
 val tracer = AndroidTracer.Builder().build()
 GlobalTracer.registerIfAbsent(tracer)
 ```
-{{% /tab %}} 
+{{% /tab %}}
 {{% tab "Java" %}}
 ```java
 AndroidTracer tracer = new AndroidTracer.Builder().build();
@@ -321,7 +321,7 @@ GlobalTracer.registerIfAbsent(tracer);
 
 4. (Optional) - Set the partial flush threshold. You can optimize the workload of the SDK if you create a lot of spans in your application, or on the contrary very few of them. The library waits until the number of finished spans gets above the threshold to write them on disk. A value of `1` writes each span as soon as its finished.
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
 
 ```kotlin
@@ -343,7 +343,7 @@ AndroidTracer tracer = new AndroidTracer.Builder()
 
 5. Start a custom span using the following method:
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
 val tracer = GlobalTracer.get()
@@ -412,7 +412,7 @@ try {
                 // Do something ...
             } finally {
                 innerScope.close();
-            }   
+            }
         } catch(Throwable e) {
             AndroidTracer.logThrowable(childSpan, e);
         } finally {
@@ -483,7 +483,7 @@ try {
 ```
 {{% /tab %}}
     {{< /tabs >}}
-   
+
 8. (Optional) To manually distribute traces between your environments, for example frontend to backend:
 
    a. Inject tracer context in the client request.
@@ -494,12 +494,12 @@ try {
 val tracer = GlobalTracer.get()
 val span = tracer.buildSpan("<SPAN_NAME>").start()
 val tracedRequestBuilder = Request.Builder()
-tracer.inject(span.context(), Format.Builtin.TEXT_MAP_INJECT,         
-        TextMapInject { key, value -> 
-            tracedRequestBuilder.addHeader(key, value) 
+tracer.inject(span.context(), Format.Builtin.TEXT_MAP_INJECT,
+        TextMapInject { key, value ->
+            tracedRequestBuilder.addHeader(key, value)
         }
 )
-val request = tracedRequestBuilder.build() 
+val request = tracedRequestBuilder.build()
 // Dispatch the request and finish the span after.
 ```
 {{% /tab %}}
@@ -512,7 +512,7 @@ tracer.inject(
         span.context(),
         Format.Builtin.TEXT_MAP_INJECT,
         new TextMapInject() {
-            @Override 
+            @Override
             public void put(String key, String value) {
                 tracedRequestBuilder.addHeader(key, value);
             }
@@ -528,18 +528,18 @@ Request request = tracedRequestBuilder.build();
    {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val tracer = GlobalTracer.get() 
+val tracer = GlobalTracer.get()
 val extractedContext = tracer.extract(
-        Format.Builtin.TEXT_MAP_EXTRACT, 
-        TextMapExtract { 
+        Format.Builtin.TEXT_MAP_EXTRACT,
+        TextMapExtract {
             request.headers().toMultimap()
             .map { it.key to it.value.joinToString(";") }
                     .toMap()
                     .entrySet()
                     .iterator()
             }
-        ) 
-val serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedContext).start()      
+        )
+val serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedContext).start()
 ```
    {{% /tab %}}
    {{% tab "Java" %}}
@@ -548,8 +548,8 @@ Tracer tracer = GlobalTracer.get();
 SpanContext extractedContext = tracer.extract(
         Format.Builtin.TEXT_MAP_EXTRACT,
         new TextMapExtract() {
-            @Override 
-            public Iterator<Map.Entry<String, String>> iterator() {                 
+            @Override
+            public Iterator<Map.Entry<String, String>> iterator() {
                 return request.headers().toMultimap()
                   .entrySet()
                   .stream()
@@ -595,13 +595,13 @@ AndroidTracer.logErrorMessage(span, message)
 
 11. If you need to modify some attributes in your Span events before batching you can do so by providing an implementation of `SpanEventMapper` when enabling Trace feature:
 
-{{< tabs >}} 
+{{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val traceConfig = TraceConfiguration.Builder() 
-        // ...  
+val traceConfig = TraceConfiguration.Builder()
+        // ...
         .setEventMapper(spanEventMapper)
-        .build()    
+        .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -609,7 +609,7 @@ val traceConfig = TraceConfiguration.Builder()
 TraceConfiguration config = new TraceConfiguration.Builder()
         // ...
         .setEventMapper(spanEventMapper)
-        .build();    
+        .build();
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -684,7 +684,7 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val okHttpClient = OkHttpClient.Builder() 
+val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(
             DatadogInterceptor(listOf("example.com", "example.eu"), traceSampler = RateBasedSampler(20f))
         )
@@ -693,7 +693,7 @@ val okHttpClient = OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-OkHttpClient okHttpClient =  new OkHttpClient.Builder() 
+OkHttpClient okHttpClient =  new OkHttpClient.Builder()
         .addInterceptor(
                 new DatadogInterceptor(Arrays.asList("example.com", "example.eu"), RateBasedSampler(20f))
         )
@@ -711,7 +711,7 @@ The interceptor tracks requests at the application level. You can also add a `Tr
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val tracedHosts = listOf("example.com", "example.eu") 
+val tracedHosts = listOf("example.com", "example.eu")
 val okHttpClient =  OkHttpClient.Builder()
         .addInterceptor(DatadogInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
         .addNetworkInterceptor(TracingInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
@@ -720,7 +720,7 @@ val okHttpClient =  OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu"); 
+final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
 final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
         .addInterceptor(new DatadogInterceptor(tracedHosts, RateBasedSampler(20f)))
         .addNetworkInterceptor(new TracingInterceptor(tracedHosts, RateBasedSampler(20f)))
@@ -760,7 +760,7 @@ Request request = OkHttpRequestExtKt
 ### RxJava
 
 To provide a continuous trace inside a RxJava stream you need to follow the steps below:
-1. Add the [OpenTracing for RxJava][8] dependency into your project and follow the **Readme** file 
+1. Add the [OpenTracing for RxJava][8] dependency into your project and follow the **Readme** file
    for instructions. For example for a continuous trace you just have to add:
    ```kotlin
    TracingRxJava3Utils.enableTracing(GlobalTracer.get())
@@ -772,9 +772,9 @@ To provide a continuous trace inside a RxJava stream you need to follow the step
 {{% tab "Kotlin" %}}
 ```kotlin
 var spanScope: Scope? = null
-Single.fromSupplier { } 
+Single.fromSupplier { }
         .subscribeOn(Schedulers.io())
-        .map {  
+        .map {
             val span = GlobalTracer.get().buildSpan("<YOUR_OP_NAME>").start()
             // ...
             span.finish()
@@ -825,7 +825,7 @@ Single.fromSupplier({})
 ```
 {{% /tab %}}
 {{< /tabs >}}
-  
+
 ### RxJava + Retrofit
 For a continuous trace inside a RxJava stream that uses Retrofit for the network requests:
 1. Configure the [Datadog Interceptor](#okhttp)
@@ -860,7 +860,7 @@ new Retrofit.Builder()
 var spanScope: Scope? = null
 remoteDataSource.getData(query)
     .subscribeOn(Schedulers.io())
-    .map { // ... } 
+    .map { // ... }
     .doOnSuccess {
         localDataSource.persistData(it)
     }
@@ -891,7 +891,7 @@ remoteDataSource.getData(query)
         Scope spanScope = GlobalTracer.get().scopeManager().activate(span);
         scopeStorage.set(spanScope);
     })
-    .doFinally(() -> { 
+    .doFinally(() -> {
         final Span activeSpan = GlobalTracer.get().scopeManager().activeSpan();
         if (activeSpan != null) {
             activeSpan.finish();

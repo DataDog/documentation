@@ -29,7 +29,7 @@ integration_id: databricks
 integration_title: Databricks
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: databricks.
@@ -81,7 +81,7 @@ Installez l'Agent Datadog sur le nœud driver du cluster. Il s'agit d'une versio
 Une fois le script `datadog-install-driver-only.sh` créé, ajoutez le chemin du script init sur la [page de configuration du cluster][2].
 
 ```shell script
-%python 
+%python
 
 dbutils.fs.put("dbfs:/<init-script-folder>/datadog-install-driver-only.sh","""
 #!/bin/bash
@@ -123,7 +123,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     sleep 2
   done
 
-  hostip=\$(hostname -I | xargs)  
+  hostip=\$(hostname -I | xargs)
 
   # ÉCRIRE LE FICHIER DE CONFIGURATION POUR L'INTÉGRATION SPARK AVEC LES MÉTRIQUES STRUCTURED STREAMING ACTIVÉES ET LA CONFIGURATION DES LOGS
   # MODIFIER CE QUI SUIT POUR INCLURE D'AUTRES OPTIONS DE spark.d/conf.yaml.example
@@ -161,12 +161,12 @@ fi
 [2]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
 {{% /tab %}}
 {{% tab "Tous les nœuds" %}}
-##### Installer l'Agent Datadog sur les nœuds worker et driver 
+##### Installer l'Agent Datadog sur les nœuds worker et driver
 
 Une fois le script `datadog-install-driver-workers.sh` créé, ajoutez le chemin du script init sur la [page de configuration du cluster][1].
 
 ```shell script
-%python 
+%python
 
 dbutils.fs.put("dbfs:/<init-script-folder>/datadog-install-driver-workers.sh","""
 #!/bin/bash
@@ -182,7 +182,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
   # CONFIGURER LES TAGS DE HOST POUR LE CLUSTER
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
-  # INSTALLER LA DERNIÈRE VERSION DE L'AGENT DATADOG 7 POUR LES NŒUDS DRIVER ET WORKER 
+  # INSTALLER LA DERNIÈRE VERSION DE L'AGENT DATADOG 7 POUR LES NŒUDS DRIVER ET WORKER
   DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
   # ATTENDRE QUE L'AGENT DATADOG SOIT INSTALLÉ
@@ -227,7 +227,7 @@ else
   # CONFIGURER LES TAGS DE HOST POUR LES WORKERS
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:worker"
 
-  # INSTALLER LA DERNIÈRE VERSION DE L'AGENT DATADOG 7 SUR LES NŒUDS DRIVER ET WORKER 
+  # INSTALLER LA DERNIÈRE VERSION DE L'AGENT DATADOG 7 SUR LES NŒUDS DRIVER ET WORKER
   DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
 fi
@@ -252,7 +252,7 @@ Une fois le script `datadog-install-job-driver-mode.sh` créé, ajoutez le chemi
 
 
 ```shell script
-%python 
+%python
 
 dbutils.fs.put("dbfs:/<init-script-folder>/datadog-install-job-driver-mode.sh","""
 #!/bin/bash
@@ -279,7 +279,7 @@ if [ \$DB_IS_DRIVER ]; then
     fi
     sleep 2
   done
-  echo "Agent Datadog installé"  
+  echo "Agent Datadog installé"
 
   # ACTIVER LES LOGS DANS datadog.yaml POUR RECUEILLIR LES LOGS DU DRIVER
   echo "logs_enabled: true" >> /etc/datadog-agent/datadog.yaml

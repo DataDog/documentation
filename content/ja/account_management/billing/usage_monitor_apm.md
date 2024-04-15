@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: APM 使用量の表示とアラート
 ---
 

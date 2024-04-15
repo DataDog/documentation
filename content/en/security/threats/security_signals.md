@@ -1,6 +1,6 @@
 ---
 title: Investigate Security Signals
-kind: documentation
+
 disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
@@ -43,11 +43,11 @@ You can triage a signal by assigning it to a user for further investigation. The
 Use [Case Management][6] to track, triage, and investigate security signals.
 
 1. On the [Signals Explorer][4], select a security signal.
-2. On the signal side panel, click the **Escalate Investigation** dropdown menu and select **Create a case**. Alternatively, select **Add to an existing case** to add the signal to an existing case. 
+2. On the signal side panel, click the **Escalate Investigation** dropdown menu and select **Create a case**. Alternatively, select **Add to an existing case** to add the signal to an existing case.
 3. Enter a title and optional description.
 4. Click **Create Case**.
 
-## Declare an incident 
+## Declare an incident
 
 Use [Incident Management][5] to create an incident for a security signal.
 

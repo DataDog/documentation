@@ -1,6 +1,6 @@
 ---
 title: Topology Map Widget
-kind: documentation
+
 description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
 widget_type: "topology_map"
 aliases:
@@ -14,7 +14,7 @@ further_reading:
   text: "Service Map"
 ---
 
-The Topology Map widget displays a visualization of data sources and their relationships to help understand how data flows through your architecture. 
+The Topology Map widget displays a visualization of data sources and their relationships to help understand how data flows through your architecture.
 
 ## Setup
 

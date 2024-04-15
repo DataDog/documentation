@@ -1,6 +1,6 @@
 ---
 title: "Block Component"
-kind: documentation
+
 ---
 ## Overview
 

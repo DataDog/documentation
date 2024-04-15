@@ -1,6 +1,6 @@
 ---
 title: Preventing Data Loss
-kind: Documentation
+
 ---
 
 {{< site-region region="gov" >}}

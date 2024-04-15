@@ -11,7 +11,7 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: documentation
   text: カスタムインテグレーション
-kind: faq
+
 title: Docker ソケットによるログ収集
 ---
 

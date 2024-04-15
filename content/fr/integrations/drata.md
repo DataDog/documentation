@@ -29,7 +29,7 @@ integration_id: drata-integration
 integration_title: Drata
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: drata
 public_title: Drata
@@ -75,7 +75,7 @@ Pour configurer cette intégration, vous devez disposer d'un [compte Drata][2] a
 2. Nous vous conseillons de créer un compte de service dans Datadog et de lui appliquer le rôle Read-Only Datadog afin d'accorder des autorisations limitées à cette connexion.
 3. Accédez à vos paramètres d'organisation pour [créer une clé d'API][4] dans Datadog. Attribuez un nom descriptif à la clé d'API, comme `Drata`.
 4. Copiez et enregistrez votre clé d'API.
-5. Depuis vos paramètres d'organisation, [créez une clé d'application][5]. 
+5. Depuis vos paramètres d'organisation, [créez une clé d'application][5].
 6. Copiez et enregistrez votre clé d'application.
 7. Collez votre clé d'API et votre clé d'application dans le menu de connexion Drafta pour Datadog.
 8. Drafta procédera alors à la synchronisation des données utilisateur et des données de configuration via l'API de Datadog. La plateforme vous notifiera en cas d'échec d'un monitor de conformité.

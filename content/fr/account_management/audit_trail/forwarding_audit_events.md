@@ -4,7 +4,7 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: Documentation
   text: En savoir plus sur le journal d'audit
-kind: documentation
+
 title: Transmettre des événements d'audit à des destinations personnalisées
 ---
 
@@ -44,7 +44,7 @@ La fonctionnalité de transmission d'événements d'audit vous permet d'envoyer 
     - Authentification basique : spécifiez le nom d'utilisateur et le mot de passe du compte vers lequel vous souhaitez envoyer les logs.
     - En-tête de la requête : spécifiez le nom de l'en-tête et la valeur associée. À titre d'exemple, si vous utilisez l'en-tête Authorization et que le nom d'utilisateur ainsi que le mot de passe du compte vers lequel vous souhaitez envoyer les logs sont respectivement `myaccount` et `mypassword`, procédez comme suit :
         - Saisissez  `Authorization` pour **Header Name**.
-        - La valeur de l'en-tête est au format `Basic username:password`, avec `username:password` encodé en base64. Pour cet exemple, nous prenons comme valeur d'en-tête Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
+        - La valeur de l'en-tête est au format `Basic username:password`, avec `username:password` encodé en base64. Pour cet exemple, nous prenons comme valeur d'en-tête Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`.
   9. Cliquez sur **Save**.
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/

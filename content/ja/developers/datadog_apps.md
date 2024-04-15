@@ -8,10 +8,10 @@ further_reading:
 - link: https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md
   tag: Github
   text: プログラミングモデル
-kind: documentation
+
 title: Datadog Apps
 ---
-## ベータ版に参加しよう 
+## ベータ版に参加しよう
 Datadog アプリは現在ベータ版ですが、簡単にアクセスをリクエストすることができます。[このフォーム][5]を使用して、今すぐリクエストを送信してください。承認されると、ご自身や組織のため、または素晴らしい Datadog アプリが流通する Datadog コミュニティ全体に公開するために、創造的なアプリの開発を始めることができます。
 
 ## アプリとは？
@@ -55,7 +55,7 @@ Datadog アプリは、開発者がカスタムダッシュボードウィジェ
 
 ### アプリを Developer Platform に追加する
 
-1. [**Integrations** > **Developer Platform**][4] に移動して、**+ New App** をクリックします。 
+1. [**Integrations** > **Developer Platform**][4] に移動して、**+ New App** をクリックします。
    <img style="max-width:80%" alt="Add a new app to the developer platform" src="https://user-images.githubusercontent.com/228230/137548671-c0c64c2e-e3cd-494b-990c-8dc8a90d4800.png">
 
 1. アプリケーションの一意の名前を入力します。

@@ -2,7 +2,7 @@
 aliases:
 - /fr/graphing/faq/timeboard-api-doc
 - /fr/graphing/guide/timeboard-api-doc
-kind: guide
+
 title: API Timeboard
 ---
 

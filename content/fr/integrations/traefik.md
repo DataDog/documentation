@@ -20,7 +20,7 @@ integration_id: traefik
 integration_title: Traefik
 integration_version: 1.0.0
 is_public: true
-kind: integration
+
 maintainer: '@renaudhager'
 manifest_version: 1.0.0
 metric_prefix: traefik.
@@ -125,11 +125,11 @@ Par défaut, les [logs Traefik][5] sont envoyés à stdout. Nous vous déconseil
 
 #### À propos de la v1
 
-Pour en savoir plus sur la v1, consultez la [documentation de Traefik][1]. Pour en savoir plus sur les modifications apportées entre la v1 et la v2, consultez le [guide de migration de Traefik][2]. 
+Pour en savoir plus sur la v1, consultez la [documentation de Traefik][1]. Pour en savoir plus sur les modifications apportées entre la v1 et la v2, consultez le [guide de migration de Traefik][2].
 
 #### Collecte de métriques
 
-1. Pour recueillir des [métriques][2] Traefik, ouvrez le fichier `traefik.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. 
+1. Pour recueillir des [métriques][2] Traefik, ouvrez le fichier `traefik.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3].
 
 2. Ajoutez cette configuration à votre fichier `traefik.d/conf.yaml` pour commencer à recueillir vos [métriques][2] :
 

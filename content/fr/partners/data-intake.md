@@ -1,7 +1,7 @@
 ---
 description: Commencez à transmettre vos données à Datadog et découvrez les exigences
   que doivent respecter vos environnements et ceux de vos clients.
-kind: documentation
+
 private: true
 title: Ingestion de données
 ---

@@ -1,6 +1,6 @@
 ---
 title: Programmatically Access Log Data Using the Logs Search API
-kind: guide
+
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
@@ -457,7 +457,7 @@ The timezone can be specified both as an offset (for example, "UTC+03:00") or a 
 
 ### Pagination
 
-To retrieve a log list longer than the `1000` [logs limit](#limit-the-number-of-results-retrieved), use the pagination feature. 
+To retrieve a log list longer than the `1000` [logs limit](#limit-the-number-of-results-retrieved), use the pagination feature.
 
 The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter is `50` by default, but can be set up to `1000`.
 

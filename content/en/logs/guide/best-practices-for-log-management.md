@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Log Management
-kind: guide
+
 aliases:
     - /logs/guide/logs-monitors-on-volumes/
 further_reading:
@@ -37,7 +37,7 @@ This guide also goes through how to monitor your log usage by:
 
 ### Set up multiple indexes for log segmentation
 
-Set up multiple indexes if you want to segment your logs for different retention periods or daily quotas, usage monitoring, and billing. 
+Set up multiple indexes if you want to segment your logs for different retention periods or daily quotas, usage monitoring, and billing.
 
 For example, if you have logs that only need to be retained for 7 days, while other logs need to be retained for 30 days, use multiple indexes to separate out the logs by the two retention periods.
 
@@ -57,7 +57,7 @@ Setting daily quotas on your indexes can help prevent billing overages when new 
 
 If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
 
-#### Set up max scan size to manage expensive rehydrations 
+#### Set up max scan size to manage expensive rehydrations
 
 Set a limit on the volume of logs that can be rehydrated at one time. When setting up an archive, you can define the maximum volume of log data that can be scanned for Rehydration. See [Define maximum scan size][4] for more information.
 
@@ -114,7 +114,7 @@ Create an anomaly detection monitor to alert on any unexpected log indexing spik
 
     1. [Check Log patterns for this service](https://app.datadoghq.com/logs/patterns?from_ts=1582549794112&live=true&to_ts=1582550694112&query=service%3A{{service.name}})
     2. [Add an exclusion filter on the noisy pattern](https://app.datadoghq.com/logs/pipelines/indexes)
-    ``` 
+    ```
 7. Click **Create**.
 
 ### Alert when an indexed log volume passes a specified threshold
@@ -126,7 +126,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
 3. Click the down arrow next to **Download as CSV** and select **Create monitor**.
 4. Add tags (for example, `host, `services, and so on) to the **group by** field.
 5. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
-6. Add a notification title, for example: 
+6. Add a notification title, for example:
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
@@ -138,7 +138,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
 
 #### Alert on indexed logs volume since the beginning of the month
 
-Leverage the `datadog.estimated_usage.logs.ingested_events` metric filtered on `datadog_is_excluded:false` to only count indexed logs and the [metric monitor cumulative window][28] to monitor the count since the beginning of the month. 
+Leverage the `datadog.estimated_usage.logs.ingested_events` metric filtered on `datadog_is_excluded:false` to only count indexed logs and the [metric monitor cumulative window][28] to monitor the count since the beginning of the month.
 
 {{< img src="logs/guide/monthly_usage_monitor.png" alt="Setup a monitor to alert for the count of indexed logs since the beginning of the month" style="width:70%;">}}
 
@@ -146,13 +146,13 @@ Leverage the `datadog.estimated_usage.logs.ingested_events` metric filtered on `
 
 [Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. If an index has a daily quota, Datadog recommends that you set the [monitor that notifies on that index's volume](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
 
-An event is generated when the daily quota is reached. By default, these events have the `datadog_index` tag with the index name. Therefore, when this event has been generated, you can [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor. 
+An event is generated when the daily quota is reached. By default, these events have the `datadog_index` tag with the index name. Therefore, when this event has been generated, you can [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor.
 
 To set up a monitor to alert when the daily quota is reached for an index:
 
 1. Navigate to [Monitors > New Monitor][13] and click **Event**.
 2. Enter: `source:datadog "daily quota reached"` in the **Define the search query** section.
-3. Add `datadog_index(datadog_index)` to the **group by** field. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
+3. Add `datadog_index(datadog_index)` to the **group by** field. The `datadog_index(datadog_index)` tag is only available when an event has already been generated.
 4. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
 5. Add a notification title and message in the **Notify your team** section.The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
 6. Click **Save**.
@@ -181,7 +181,7 @@ Even if you use exclusion filters, you can still visualize trends and anomalies 
 
 ### Enable Sensitive Data Scanner for Personally Identifiable Information (PII) detection
 
-If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][23] on how to set up scanning rules to determine what data to scan. 
+If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][23] on how to set up scanning rules to determine what data to scan.
 
 **Note**: [Sensitive Data Scanner][24] is a separate billable product.
 

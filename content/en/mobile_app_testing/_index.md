@@ -1,6 +1,6 @@
 ---
 title: Mobile Application Testing and Monitoring
-kind: documentation
+
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
 aliases:
 - /mobile_testing
@@ -49,7 +49,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 ## Use the Synthetic Monitoring & Continuous Testing Explorer
 
-Create [search queries and visualizations][5] for your Synthetic test runs or batches of tests running in CI/CD pipelines in the [Synthetic Monitoring & Continuous Testing Explorer][6]. 
+Create [search queries and visualizations][5] for your Synthetic test runs or batches of tests running in CI/CD pipelines in the [Synthetic Monitoring & Continuous Testing Explorer][6].
 
 {{< img src="mobile_app_testing/explorer_mobile_test_runs.png" alt="Mobile App Test Runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
 

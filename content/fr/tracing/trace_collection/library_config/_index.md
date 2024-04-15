@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Configurer la bibliothèque de tracing de Datadog
 type: multi-code-lang
 ---

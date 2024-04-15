@@ -13,7 +13,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-maintenance-best-practices/
   tag: Blog
   text: Pratiques recommandées pour la gestion de tests de bout en bout
-kind: documentation
+
 title: Tests d'application mobile
 ---
 
@@ -47,7 +47,7 @@ Lorsque le test d'application mobile se termine sans échouer, il recalcule les 
 
 Définissez la configuration de votre test d'application mobile.
 
-1. Sélectionnez une application mobile dans le menu déroulant. Si vous ne disposez pas encore d'applications mobiles, créez-en une depuis la [liste des applications][2] en suivant les instructions de la [section Paramètres de Mobile Application Testing][3]. 
+1. Sélectionnez une application mobile dans le menu déroulant. Si vous ne disposez pas encore d'applications mobiles, créez-en une depuis la [liste des applications][2] en suivant les instructions de la [section Paramètres de Mobile Application Testing][3].
 2. Sélectionnez une **version** ou cliquez sur **Always run the latest version** pour utiliser la version la plus récente de votre application mobile lors de chaque exécution de votre test.
 3. Attribuez un **nom** à votre test.
 4. Sélectionnez des **tags d'environnement et des tags supplémentaires** associés à votre test. Utilisez le format `<KEY>:<VALUE>` pour filtrer une valeur `<VALUE>` pour une clé `<KEY>` donnée.

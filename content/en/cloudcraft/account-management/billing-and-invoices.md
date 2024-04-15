@@ -1,6 +1,6 @@
 ---
 title: Billing and invoices
-kind: guide
+
 ---
 
 As an Account Owner, you can make changes to your subscription and payment methods at any time.
@@ -14,7 +14,7 @@ As an Account Owner, you can make changes to your subscription and payment metho
 
 1. Navigate to **User** > **Subscription settings**.
 2. To view, download, or print receipts for past payments, click **Billing history**.
-3. To configure receipts to be emailed to you each month, or include additional billing information, such as your company address or VAT ID, click **Receipt settings**. 
+3. To configure receipts to be emailed to you each month, or include additional billing information, such as your company address or VAT ID, click **Receipt settings**.
 
 <div class="alert alert-info">
   <p>You can use this template to improve your receipts.</p>

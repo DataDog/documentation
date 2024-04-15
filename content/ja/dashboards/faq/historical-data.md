@@ -4,7 +4,7 @@ aliases:
 - /ja/graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed/
 - /ja/agent/faq/i-stopped-my-agent-but-i-m-still-seeing-the-host/
 - /ja/graphing/faq/historical-data
-kind: faq
+
 title: 履歴データ
 ---
 

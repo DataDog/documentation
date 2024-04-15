@@ -1,6 +1,6 @@
 ---
 title: Notebooks
-kind: documentation
+
 aliases:
   - /graphing/notebooks/
 further_reading:
@@ -32,7 +32,7 @@ Notebooks combine graphs and text in a linear, cell-based format. They help you 
 2. Click the **Save Notebook** button. </br>
   **Note**: A new notebook is not saved by default.
 
-3. Add new cells to your notebook with [supported graph and text content](#types-of-content). 
+3. Add new cells to your notebook with [supported graph and text content](#types-of-content).
 
 4. [Configure cells](#cell-configuration).
 
@@ -144,7 +144,7 @@ To add cells, use the **+** button that appears to the left of the cell, or sele
 
 #### Edit options
 
-Click on **More options** in the inline editor of a widget to edit widget options. Add details like event overlays, markers, and y-axis controls. 
+Click on **More options** in the inline editor of a widget to edit widget options. Add details like event overlays, markers, and y-axis controls.
 
 #### Layout options
 
@@ -189,7 +189,7 @@ Use granular access controls to limit the [roles][17] that may edit a particular
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
 
-**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
+**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving.
 
 To restore general access to a notebook with restricted access, follow the steps below:
 1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.

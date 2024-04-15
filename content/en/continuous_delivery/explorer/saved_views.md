@@ -1,6 +1,6 @@
 ---
 title: Saved Views
-kind: documentation
+
 descriptions: Learn how to create and share saved views in the CD Visibility Explorer.
 further_reading:
 - link: "/continuous_delivery/explorer/search_syntax/"
@@ -18,7 +18,7 @@ CD Visibility is in private beta. To request access, complete the form.
 
 ## Overview
 
-Saved views allow you to save the state of the [CD Visibility Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [CD Visibility Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range.
 
 Saved views can keep track of your:
 
@@ -51,7 +51,7 @@ You can:
 
 ## Default views
 
-You can set a saved view to be your default landing page in the [CD Visibility Explorer][2]. Default views are set per user and have no impact on your organization. 
+You can set a saved view to be your default landing page in the [CD Visibility Explorer][2]. Default views are set per user and have no impact on your organization.
 
 {{< img src="continuous_delivery/explorer/default_view.png" alt="Default view in the CD Visibility Explorer" width="100%" >}}
 

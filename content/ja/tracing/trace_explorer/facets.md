@@ -4,7 +4,7 @@ further_reading:
 - link: tracing/trace_explorer/
   tag: ドキュメント
   text: トレースエクスプローラーについて
-kind: documentation
+
 title: スパンファセット
 ---
 

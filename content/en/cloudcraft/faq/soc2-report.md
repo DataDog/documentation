@@ -1,6 +1,6 @@
 ---
 title: Do you have a SOC2 report?
-kind: faq
+
 ---
 
 Yes, we do.

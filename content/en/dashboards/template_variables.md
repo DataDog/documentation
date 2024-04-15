@@ -1,6 +1,6 @@
 ---
 title: Template Variables
-kind: documentation
+
 aliases:
     - /graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to dynamically filter one or more widgets in a dashboard. You can build saved views from your template variable selections to organize and navigate your visualizations through the dropdown selections. 
+Template variables allow you to dynamically filter one or more widgets in a dashboard. You can build saved views from your template variable selections to organize and navigate your visualizations through the dropdown selections.
 
 A template variable is defined by:
 
@@ -42,7 +42,7 @@ A template variable is defined by:
 ## Add a template variable
 
 To add a template variable in a dashboard:
-1. Click **Add Variables**. 
+1. Click **Add Variables**.
 1. If template variables are already defined, hover over the dashboard header and click the **Edit** button to enter edit mode.
 1. In edit mode, click the **+ (plus)** icon to create a new template variable.
 1. (Optional) After selecting a tag, click the **+ Configure Dropdown Values** button to rename the variable and set default or available values.
@@ -77,7 +77,7 @@ Click on the **Saved Views** dropdown menu to the left of the template variables
 
 {{< img src="dashboards/template_variables/saved_views_dropdown_options.png" alt="Saved views dropdown options to set selected template variables as the default view or a saved view" style="width:90%;" >}}
 
-To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu. Enter a unique name for the view and click **Save**. 
+To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu. Enter a unique name for the view and click **Save**.
 
 Your saved view appears in the dropdown menu. Click on the view to retrieve your previously saved template variable values.
 
@@ -91,7 +91,7 @@ To modify the **Default view**, click on the pencil icon and update the template
 
 ## Usage
 
-Template variables are used in widgets and event overlays. 
+Template variables are used in widgets and event overlays.
 
 ### Logs, APM, and RUM queries
 
@@ -103,7 +103,7 @@ On log, APM, and RUM widgets, you can use wildcards in the middle of a value (fo
 
 ### Widgets
 
-When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you configure the `environment` template variable, the `$environment` option is available as a dynamic variable in the widget. 
+When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you configure the `environment` template variable, the `$environment` option is available as a dynamic variable in the widget.
 
 {{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="Template variable can be set dynamically in widgets" style="width:100%;">}}
 

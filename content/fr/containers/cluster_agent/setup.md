@@ -20,7 +20,7 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: Documentation
   text: Dépanner l'Agent de cluster Datadog
-kind: documentation
+
 title: Configurer l'Agent de cluster Datadog
 ---
 
@@ -269,7 +269,7 @@ existingClusterAgent:
 datadog-crds:
   crds:
     datadogMetrics: false
-# Désactiver le déploiement de kube-state-metrics 
+# Désactiver le déploiement de kube-state-metrics
 datadog:
   kubeStateMetricsEnabled: false
 ```

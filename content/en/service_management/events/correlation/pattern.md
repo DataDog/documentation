@@ -1,6 +1,6 @@
 ---
 title: Pattern-based
-kind: Documentation
+
 further_reading:
 - link: "service_management/events/correlation/"
   tag: "Documentation"
@@ -16,25 +16,25 @@ Configure pattern-based correlations to apply custom logic and group events to y
 To create a pattern-based correlation:
 1. Navigate to [Correlation][1].
 1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens a pattern configuration page.
-1. From the dropdown menu, select the alerting sources you want to correlate events for. 
+1. From the dropdown menu, select the alerting sources you want to correlate events for.
 
 ### Advanced settings (optional)
 1. Click **Show Advanced Settings**.
 1. You can add non-alerting sources and add grouping tags to correlate events.
-   
+
    Non-alerting source
    : is any event that is available in your Event Explorer as an event, but does not have an associated monitor or alert.
-   
+
    Add grouping tags
    : in addition to grouping by out-of-the-box tags like `Service` or `Env`, you can also group by a custom tag.
 1. Under *Advanced correlation logic*:
     - Specify the minimum number of correlated events it takes to create a case.
-    - Set the time frame you want to correlate and deduplicate events based on your correlation pattern. 
+    - Set the time frame you want to correlate and deduplicate events based on your correlation pattern.
 
 
 ## Preview pattern output
 
-Preview the possible patterns and cases your configuration would potentially create. The preview panel displays the total number of ingested events, how many events would alert, and how many cases would be created based on the configuration. 
+Preview the possible patterns and cases your configuration would potentially create. The preview panel displays the total number of ingested events, how many events would alert, and how many cases would be created based on the configuration.
 
 Use this data to preview the impact of your correlations and understand the expected output of a pattern.
 

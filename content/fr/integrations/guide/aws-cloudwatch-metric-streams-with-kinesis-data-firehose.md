@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/
   tag: Blog
   text: Recueillez des métriques Amazon CloudWatch à l'aide des flux de métriques.
-kind: guide
+
 title: Flux de métriques AWS CloudWatch avec Kinesis Data Firehose
 ---
 {{< site-region region="us3,us5,gov" >}}
@@ -100,13 +100,13 @@ Si vous souhaitez configurer les flux de métriques à l'aide de la console AWS,
        - Sélectionnez `Datadog`.
        - Sélectionnez l'URL de l'endpoint de métriques correspondant à votre site Datadog, `Datadog metrics - US` ou `Datadog metrics - EU`.
     - **API key** : saisissez votre [clé d'API Datadog][1].
-    - **Retry duration :** saisissez `60 seconds`.  
+    - **Retry duration :** saisissez `60 seconds`.
     - **S3 backup bucket :** sélectionnez `Failed data only` et choisissez le compartiment S3 de votre choix pour la sauvegarde.
-    - Conditions de mise en mémoire tampon de l'**endpoint HTTP** :  
+    - Conditions de mise en mémoire tampon de l'**endpoint HTTP** :
        - Saisissez `4MB` pour la taille du tampon et `60 seconds` pour l'intervalle.
     - Conditions de mise en mémoire tampon **S3** :
        - Saisissez `4MB` pour la taille du tampon et `60 seconds` pour l'intervalle.
-    - **S3 compression and encryption :** sélectionnez `GZIP`.  
+    - **S3 compression and encryption :** sélectionnez `GZIP`.
     - Sous **Advanced settings**, activez **Amazon CloudWatch error logging**.
 2. Suivez les étapes suivantes pour créer votre [flux de métriques CloudWatch][2] :
 3. Précisez si vous voulez diffuser toutes les métriques CloudWatch ou seulement certains espaces de nommage spécifiques.

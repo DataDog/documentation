@@ -15,7 +15,7 @@ further_reading:
 - link: /data_security/synthetics/
   tag: Documentation
   text: En savoir plus sur la sécurité des données liées à la surveillance Synthetic
-kind: documentation
+
 title: Options avancées pour les étapes des tests d'application mobile
 ---
 

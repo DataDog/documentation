@@ -12,7 +12,7 @@ further_reading:
 - link: /logs/logs_to_metrics/
   tag: Documentation
   text: Découvrir comment générer des métriques à partir de logs ingérés
-kind: guide
+
 title: Guide de la fonctionnalité Logging without Limits™
 ---
 
@@ -20,7 +20,7 @@ title: Guide de la fonctionnalité Logging without Limits™
 
 ## Présentation
 
-Les applications cloud peuvent générer des millions de logs par minute. Toutefois, selon votre situation, ces logs ne sont pas tous utiles. Pour cette raison, la fonctionnalité [Logging without Limits™][1] vous offre une flexibilité accrue en séparant [le processus d'ingestion du processus indexation des logs][2]. 
+Les applications cloud peuvent générer des millions de logs par minute. Toutefois, selon votre situation, ces logs ne sont pas tous utiles. Pour cette raison, la fonctionnalité [Logging without Limits™][1] vous offre une flexibilité accrue en séparant [le processus d'ingestion du processus indexation des logs][2].
 
 Ce guide identifie les principaux composants de la fonctionnalité Logging without Limits™ tels que les [patterns](#2-identifier-les-patterns-de-journalisation-volumineuse), les [filtres d'exclusion](#3-creer-un-filtre-d-exclusion-de-pattern-de-log), les [métriques custom basées sur des logs](#4-generer-des-metriques-pour-effectuer-un-suivi-des-logs-exclus) et les [monitors](#creer-un-monitor-de-detection-d-anomalie), qui peuvent améliorer l'organisation de votre vue Log Explorer et optimiser la surveillance de vos KPI au fil du temps.
 
@@ -45,7 +45,7 @@ Votre service avec la plus forte journalisation comporte de nombreux logs, qui n
 
 Maintenant que vous savez lequel de vos statut de service génère le plus de logs, passez à la [vue Patterns][4], située en regard du graphique, à haut à gauche du Log Explorer. Vous pourrez ainsi visualiser automatiquement vos patterns de log pour le contexte sélectionné.
 
-Un contexte est constitué d'un intervalle et d'une requête de recherche. Les principales caractéristiques de chaque pattern sont détaillées, afin de comprendre rapidement ses particularités. Un petit graphique représente le volume de ses logs au sein d'un calendrier approximatif. Cette visualisation vous permet d'identifier ce qui distingue votre pattern des autres patterns. Les éléments de logs qui varient au sein du pattern sont mis en évidence pour identifier facilement les différences entre chaque ligne de log. 
+Un contexte est constitué d'un intervalle et d'une requête de recherche. Les principales caractéristiques de chaque pattern sont détaillées, afin de comprendre rapidement ses particularités. Un petit graphique représente le volume de ses logs au sein d'un calendrier approximatif. Cette visualisation vous permet d'identifier ce qui distingue votre pattern des autres patterns. Les éléments de logs qui varient au sein du pattern sont mis en évidence pour identifier facilement les différences entre chaque ligne de log.
 
 Cliquez sur le pattern de log à exclure pour afficher un échantillon de logs sous-jacents.
 
@@ -66,7 +66,7 @@ Le volet de contexte des patterns répertorie toutes les instances (tous les év
 
 {{< img src="logs/guide/getting-started-lwl/exclusion_filter_new.mp4" alt="Filtre d'exclusion" video=true style="width:100%;">}}
 
-**Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion. 
+**Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion.
 
 Dans cet exemple, le pattern `response code from ses 200` pour le service `email-api-py` et le statut `INFO` est exclu à l'aide d'un filtre exclusion. En supprimant les patterns de journalisation volumineuse comme celui-ci de votre vue Log Explorer, vous pourrez réduire les données parasites et identifier vos problèmes plus facilement. Sachez cependant que ces logs sont **uniquement** retirés de l'indexation. Ils sont toujours ingérés et consultables dans la vue [Live Tail][5]. Ils peuvent également être envoyés vers les [archives de logs][6] ou utilisés pour [générer des métriques][7].
 

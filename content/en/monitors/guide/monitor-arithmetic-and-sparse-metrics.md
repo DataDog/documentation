@@ -1,6 +1,6 @@
 ---
 title: Monitor Arithmetic and Sparse Metrics
-kind: guide
+
 ---
 
 ## Overview

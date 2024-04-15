@@ -12,7 +12,7 @@ integration_id: ''
 integration_title: Webhooks
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: webhooks
 public_title: Intégration Datadog/Webhooks
@@ -112,7 +112,7 @@ $ID
 
 $INCIDENT_ATTACHMENTS
 : Liste d'objets JSON comportant les pièces jointes de l'incident, notamment les analyses post-mortem et les documents associés.<br />
-**Exemple** : `[{"attachment_type": "postmortem", "attachment": {"url": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]` 
+**Exemple** : `[{"attachment_type": "postmortem", "attachment": {"url": "https://app.datadoghq.com/notebook/123","title": "Postmortem IR-1"}}]`
 
 $INCIDENT_COMMANDER
 : Objet JSON comportant le handle, l'uuid, le nom, l'adresse e-mail et l'icône du responsable de l'incident.
@@ -214,7 +214,7 @@ $SNAPSHOT
 $SYNTHETICS_TEST_NAME
 : Nom du test Synthetic.
 
-$SYNTHETICS_FIRST_FAILING_STEP_NAME 
+$SYNTHETICS_FIRST_FAILING_STEP_NAME
 : Nom de la première étape qui échoue du test Synthetic.
 
 $SYNTHETICS_SUMMARY

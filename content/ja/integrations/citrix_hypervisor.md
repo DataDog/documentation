@@ -38,7 +38,7 @@ integration_id: citrix-hypervisor
 integration_title: Citrix Hypervisor
 integration_version: 3.2.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: citrix_hypervisor
 public_title: Citrix Hypervisor
@@ -77,7 +77,7 @@ tile:
 ### インフラストラクチャーリスト
 
 Citrix Hypervisor チェックは、[Datadog Agent][3] のパッケージに含まれています。
-サーバーに追加でインストールする必要はありません。 
+サーバーに追加でインストールする必要はありません。
 Citrix Hypervisor を監視する推奨方法は、各ハイパーバイザーに 1 つの Datadog Agent をインストールすることです。
 
 #### Datadog ユーザー

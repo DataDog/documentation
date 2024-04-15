@@ -23,7 +23,7 @@ integration_id: ''
 integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_elasticbeanstalk
 public_title: Intégration Datadog/AWS Elastic Beanstalk
@@ -371,7 +371,7 @@ Vous trouverez un exemple ci-dessous :
              "name": "DD_APM_NON_LOCAL_TRAFFIC",
              "value": "true"
           },
-         # toute autre variable d'environnement requise 
+         # toute autre variable d'environnement requise
       ],
       "portMappings": [
         {

@@ -10,7 +10,7 @@ aliases:
 - /ko/integrations/faq/snmp
 cascade:
 - private: true
-kind: faq
+
 title: FAQ 통합
 ---
 

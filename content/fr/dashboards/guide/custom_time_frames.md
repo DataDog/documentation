@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Intervalles personnalisés
 ---
 

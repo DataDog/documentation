@@ -23,7 +23,7 @@ integration_id: snmp-juniper
 integration_title: Juniper Networks
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_to_check:
@@ -51,7 +51,7 @@ Pour en savoir plus sur les métriques surveillées, consultez la section [Donn�
 
 ## Configuration
 
-Pour installer et configurer l'intégration SNMP, consultez la documentation relative à la fonction [Network Device Monitoring][2] 
+Pour installer et configurer l'intégration SNMP, consultez la documentation relative à la fonction [Network Device Monitoring][2]
 
 ## Données collectées
 

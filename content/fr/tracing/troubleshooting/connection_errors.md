@@ -1,11 +1,11 @@
 ---
 aliases:
 - /fr/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
-kind: Documentation
+
 title: Erreurs de connexion APM
 ---
 
-Si l'application utilisant la bibliothèque de tracing ne parvient pas à communiquer avec l'Agent Datadog, consultez les [logs de lancement du traceur][1] ou les [logs de debugging du traceur][2], qui se trouvent dans les logs de votre application, pour vérifier s'ils comportent des erreurs de connexion. 
+Si l'application utilisant la bibliothèque de tracing ne parvient pas à communiquer avec l'Agent Datadog, consultez les [logs de lancement du traceur][1] ou les [logs de debugging du traceur][2], qui se trouvent dans les logs de votre application, pour vérifier s'ils comportent des erreurs de connexion.
 
 ## Erreurs indiquant un problème de connexion APM
 

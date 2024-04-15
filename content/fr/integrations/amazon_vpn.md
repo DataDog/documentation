@@ -14,7 +14,7 @@ integration_id: amazon-vpn
 integration_title: "Amazon\_VPN"
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_vpn
 public_title: "Intégration Datadog/Amazon\_VPN"

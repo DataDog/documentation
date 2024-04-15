@@ -8,7 +8,7 @@ further_reading:
 - link: /observability_pipelines/vector_configurations/
   tag: Documentation
   text: En savoir plus sur les configurations Vector
-kind: guide
+
 title: Contrôler le volume et la taille des logs
 ---
 
@@ -93,7 +93,7 @@ transforms:
     type: filter
     inputs:
       - my-source-or-transform-id
-    condition: 
+    condition:
       type: "vrl"
       source: ".status == 500"
 ```
@@ -149,7 +149,7 @@ transforms:
     type: sample
     inputs:
       - my-source-or-transform-id
-    exclude: 
+    exclude:
        type: "datadog_search"
        source: "*stack"
     rate: 10
@@ -202,7 +202,7 @@ Vous pouvez générer quatre types de métriques différents :
 - Des métriques counter, qui permettent de compter le nombre de logs contenant un tag spécifique. Vous pouvez incrémenter un compte ou le réinitialiser.
 - Des métriques de distribution, qui représentent la distribution des valeurs échantillonnées. Ces métriques sont particulièrement utiles pour créer des synthèses et des histogrammes.
 - Des métriques gauge, qui représentent une seule valeur numérique qui augmente ou diminue de façon arbitraire. Ces métriques vous permettent de surveiller des valeurs qui évoluent constamment.
-- Des métriques set, qui rassemblent des valeurs uniques au sein d'un tableau. Ces métriques servent par exemple à recueillir des adresses IP uniques.  
+- Des métriques set, qui rassemblent des valeurs uniques au sein d'un tableau. Ces métriques servent par exemple à recueillir des adresses IP uniques.
 
 L'exemple de configuration suivant permet de générer une métrique `counter`. L'option `metrics` définit les paires key/value ajoutées à l'événement.
 

@@ -1,6 +1,6 @@
 ---
 title: Error Budget Alerts
-kind: documentation
+
 description: "Use Monitors to alert off of the error budget consumption of an SLO"
 aliases:
 - /monitors/service_level_objectives/error_budget/
@@ -16,7 +16,7 @@ SLO error budget alerts are threshold based and notify you when a certain percen
 
 **Note:** Error budget alerts are available for the following SLO types:
 
-- [Metric-based SLOs][1], 
+- [Metric-based SLOs][1],
 - [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
 - [Time Slice SLOs][8]
 
@@ -54,9 +54,9 @@ In addition, SLO error budget alerts can also be created using the [datadog_moni
 resource "datadog_monitor" "metric-based-slo" {
     name = "SLO Error Budget Alert Example"
     type  = "slo alert"
-    
+
     query = <<EOT
-    error_budget("slo_id").over("time_window") > 75 
+    error_budget("slo_id").over("time_window") > 75
     EOT
 
     message = "Example monitor message"

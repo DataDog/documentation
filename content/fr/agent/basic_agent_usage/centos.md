@@ -1,6 +1,6 @@
 ---
 title: Utilisation de base de l'Agent pour CentOS
-kind: documentation
+
 platform: CentOS
 aliases:
   - /fr/guides/basic_agent_usage/centos/

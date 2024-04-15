@@ -17,7 +17,7 @@ further_reading:
 - link: https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services
   tag: 料金
   text: Azure App Service APM 価格設定
-kind: documentation
+
 title: Azure App Service のモニタリング
 ---
 
@@ -34,7 +34,7 @@ Datadog では Azure App Service に属するすべてのリソースタイプ�
 
 Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure App Service のワークロードランタイムの監視機能を追加提供します。
 
-| OS | ランタイム |アプリタイプ|ステータス|Documentation| 
+| OS | ランタイム |アプリタイプ|ステータス|Documentation|
 |----|---------|-----|----|--------------|
 |Windows|.NET|関数アプリと Web アプリ|GA|[Windows .NET のセットアップ][7]|
 |Windows|Java|関数アプリと Web アプリ|beta|[Windows Java のセットアップ][8]|

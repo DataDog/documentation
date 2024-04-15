@@ -27,7 +27,7 @@ further_reading:
 - link: /synthetics/guide/browser-tests-totp
   tag: ドキュメント
   text: ブラウザテストにおける多要素認証 (MFA) 用 TOTP
-kind: documentation
+
 title: Synthetic モニタリングの設定
 ---
 
@@ -82,7 +82,7 @@ Datadog で管理されるすべての場所と、ご使用のアカウントで
 
 ### ブラウザテスト用の APM インテグレーション
 
-Datadog の APM インテグレーションヘッダーにより、Datadog はブラウザテストと APM を関連付けることができます。 
+Datadog の APM インテグレーションヘッダーにより、Datadog はブラウザテストと APM を関連付けることができます。
 
 APM ヘッダーを送信するエンドポイントを定義するには、**Value** リストに URL を追加します。エンドポイントがトレースされ、許可されている場合、ブラウザテストの結果は自動的にその対応するトレースに結びつけられます。
 
@@ -159,7 +159,7 @@ APM ヘッダーを送信するエンドポイントを定義するには、**Va
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 {{% /tab %}}
 
-{{% tab "MFA Token" %}}  
+{{% tab "MFA Token" %}}
 
 TOTP を生成しテストで使用するには、シークレットキーを入植する場所にグローバル変数を作成するか、認証プロバイダーからの QR コードをアップロードします。
 

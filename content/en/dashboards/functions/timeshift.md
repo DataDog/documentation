@@ -1,6 +1,6 @@
 ---
 title: Timeshift
-kind: documentation
+
 aliases:
     - /graphing/functions/timeshift/
 further_reading:

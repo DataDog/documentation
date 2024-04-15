@@ -1,6 +1,6 @@
 ---
 title: Utilisation de base de l'Agent pour Ubuntu
-kind: documentation
+
 platform: Ubuntu
 aliases:
   - /fr/guides/basic_agent_usage/ubuntu/

@@ -1,6 +1,6 @@
 ---
 title: Use WMI to Collect More SQL Server Performance Metrics
-kind: guide
+
 aliases:
     - /integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
 ---
@@ -12,9 +12,9 @@ In these cases, you might consider our [WMI check][4] as an additional source of
 For example, we've had some users employ our WMI check with the following configuration to collect a gauge metric for the number of failed jobs in their SQL Server:
 
 ```yaml
-init_config: 
+init_config:
 
-instances: 
+instances:
     - class: Win32_PerfRawData_SQLSERVERAGENT_SQLAgentJobs
       metrics:
         - [Failedjobs, sqlserver.failed_jobs, gauge]

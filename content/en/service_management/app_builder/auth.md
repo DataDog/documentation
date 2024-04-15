@@ -1,6 +1,6 @@
 ---
 title: Access and Authentication
-kind: documentation
+
 description: Access and authentication for App builder
 ---
 
@@ -28,7 +28,7 @@ For more information on configuring credentials, see [Connections][2]. App Build
 
 ### Permissions and access control
 
-Use [role-based access control (RBAC)][4] to control access to your apps and connections. 
+Use [role-based access control (RBAC)][4] to control access to your apps and connections.
 
 The coarse permissions that apply to apps include Apps View, Apps Write, and Connections Read.
 

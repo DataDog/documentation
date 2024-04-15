@@ -1,6 +1,6 @@
 ---
 title: Sending Incident Events for DORA Metrics
-kind: documentation
+
 description: Learn how to send incident events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/incidents

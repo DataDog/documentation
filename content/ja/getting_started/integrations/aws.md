@@ -27,7 +27,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: ブログ
   text: Datadog で Graviton3 搭載の EC2 インスタンスを監視する
-kind: documentation
+
 title: AWS の概要
 ---
 
@@ -108,9 +108,9 @@ title: AWS の概要
 2. Datadog の [AWS インテグレーション構成ページ][8]に移動し、**Add AWS Account** をクリックします。
 
 3. **Automatically using CloudFormation** のオプションで、インテグレーションの設定を行います。
-    a. インテグレーションする AWS リージョンを選択します。 
-    b. Datadog [API キー][9]を追加します。 
-    c. オプションで、[Datadog Forwarder Lambda][1] でログなどを Datadog に送ります。 
+    a. インテグレーションする AWS リージョンを選択します。
+    b. Datadog [API キー][9]を追加します。
+    c. オプションで、[Datadog Forwarder Lambda][1] でログなどを Datadog に送ります。
     d. 必要に応じて、[Cloud Security Management Misconfigurations][54] を有効にして、クラウド環境、ホスト、コンテナをスキャンして、誤構成やセキュリティリスクを検出します。
 
 5. **Launch CloudFormation Template** をクリックします。これで AWS コンソールが開き、CloudFormation スタックがロードされます。すべてのパラメーターは、事前の Datadog フォームでの選択に基づいて入力されているため、必要な場合以外は編集する必要はありません。

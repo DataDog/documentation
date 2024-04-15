@@ -1,6 +1,6 @@
 ---
 title: Set Up Observability Pipelines in Datadog
-kind: Documentation
+
 aliases:
   - /agent/vector_aggregation/
   - /integrations/observability_pipelines/integrate_vector_with_datadog/
@@ -83,7 +83,7 @@ See [Best Practices for OPW Aggregator Architecture][4] for production-level req
 
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512 MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments. 
+To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512 MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
 See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
 
@@ -139,7 +139,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       datadog/observability-pipelines-worker run
     ```
     Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
-  
+
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
@@ -293,7 +293,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 
-1. Download the the [sample configuration][1]. 
+1. Download the the [sample configuration][1].
 1. Set up the Worker module in your existing Terraform using the sample configuration. Make sure to update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment in the configuration. Also, update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
 
 [1]: /resources/yaml/observability_pipelines/datadog/terraform_opw_datadog.tf
@@ -316,11 +316,11 @@ To install the Worker in your AWS Account, use the CloudFormation template to cr
   5. Fill in the parameters for the CloudFormation template. A few require special attention:
 
       * For `APIKey` and `PipelineID`, provide the key and ID that you gathered earlier in the Prerequisites section.
-    
+
       * For the `VPCID` and `SubnetIDs`, provide the subnets and VPC you chose earlier.
 
       * All other parameters are set to reasonable defaults for a Worker deployment but you can adjust them for your use case as needed.
-  
+
   6. Click **Next**.
 
   7. Review and make sure the parameters are as expected. Click the necessary permissions checkboxes for IAM, and click **Submit** to create the Stack.

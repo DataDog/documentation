@@ -1,6 +1,6 @@
 ---
 title: Logs RBAC Permissions
-kind: guide
+
 further_reading:
 - link: "/logs/guide/logs-rbac"
   tag: "Documentation"

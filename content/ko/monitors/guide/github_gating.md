@@ -15,7 +15,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: 블로그
   text: GitHub 배포 보호 규칙 및 Datadog으로 실패한 품질 검사 감지
-kind: guide
+
 title: Datadog 모니터로 GitHub Actions 배포 게이팅하기
 ---
 
@@ -48,15 +48,15 @@ Datadog에 자동으로 연결되는 GitHub 애플리케이션을 생성하려�
 3. 애플리케이션의 **Subscribe to events**에서 **Deployment protection rule**에 대한 체크박스를 클릭합니다.
 4. 리포지토리에서 **Settings**를 클릭하고 **Code and Automation** 섹션에서 **Environments**를 클릭합니다. **Deployment Protection Rules**에서 Datadog 통합과 연결된 GitHub 애플리케이션을 활성화합니다.
 
-## 배포를 게이팅하는 모니터 만들기 
+## 배포를 게이팅하는 모니터 만들기
 
 [본 지침][3]에 따라 GitHub Actions 배포 게이팅에 사용할 Datadog 모니터를 만들고 설정합니다.
 
 품질 검사를 위해 여러 개의 개별 모니터를 사용할 수 있지만, 하나의 모니터로 두 개 이상의 신호를 기반으로 배포를 게이팅할 수 있으므로 [복합 모니터][4]를 사용할 것을 권장합니다. 자세한 내용은 [모니터 유형][5]을 참조하세요.
 
 품질 게이팅에 사용할 모든 모니터에는 다음과 같은 적절한 태그를 반드시 지정해야 합니다.
-- `git_env` 
-- `git_repo` 
+- `git_env`
+- `git_repo`
 
 `git_repo` 태그에는 리포지토리 소유자 이름이 `Datadog/my-repo`와 같은 `<OWNER>/<REPO>` 형식으로 포함되어야 합니다.
 
@@ -77,10 +77,10 @@ Datadog에 자동으로 연결되는 GitHub 애플리케이션을 생성하려�
 [1]: /ko/integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [2]: /ko/integrations/github/
 [3]: /ko/monitors/configuration/?tab=thresholdalert
-[4]: /ko/monitors/types/composite/ 
+[4]: /ko/monitors/types/composite/
 [5]: /ko/monitors/types/
 [6]: /ko/monitors/settings/
 [7]: /ko/monitors/types/apm/?tab=apmmetrics
-[8]: /ko/monitors/types/integration/?tab=checkalert 
+[8]: /ko/monitors/types/integration/?tab=checkalert
 [9]: /ko/monitors/types/metric/?tab=threshold
 [10]: https://github.blog/2023-04-20-announcing-github-actions-deployment-protection-rules-now-in-public-beta/

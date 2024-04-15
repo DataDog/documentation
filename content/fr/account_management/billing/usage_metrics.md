@@ -1,5 +1,5 @@
 ---
-kind: documentation
+
 title: Métriques d'estimation d'utilisation
 ---
 
@@ -12,7 +12,7 @@ Datadog calcule quasiment en temps réel une estimation de votre utilisation act
 * Envoyer des [alertes de monitor][4] en cas de pics ou de chutes d'utilisation
 * Évaluer quasiment en temps réel l'impact potentiel des modifications de code sur votre utilisation
 
-**Remarque** : ces métriques d'utilisation constituent des estimations qui ne correspondent pas toujours à l'utilisation facturable, puisqu'elles sont fournies quasiment en temps réel. En moyenne, une différence de 10 à 20 % est constatée entre l'utilisation estimée et l'utilisation facturable. En raison du mode de calcul de ces estimations, la marge d'erreur est plus importante pour une utilisation peu intense. 
+**Remarque** : ces métriques d'utilisation constituent des estimations qui ne correspondent pas toujours à l'utilisation facturable, puisqu'elles sont fournies quasiment en temps réel. En moyenne, une différence de 10 à 20 % est constatée entre l'utilisation estimée et l'utilisation facturable. En raison du mode de calcul de ces estimations, la marge d'erreur est plus importante pour une utilisation peu intense.
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Exemple de dashboard" >}}
 

@@ -1,6 +1,6 @@
 ---
 title: Enabling CSM Enterprise on the Agent
-kind: documentation
+
 type: multi-code-lang
 ---
 

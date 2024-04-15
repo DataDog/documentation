@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: SolarWinds
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: solarwinds
 public_title: Intégration Datadog/SolarWinds
@@ -60,7 +60,7 @@ Pour créer une action de déclenchement dans SolarWinds :
 3. Répétez cette procédure pour Assign Action > Assign Reset Action en utilisant l'action de réinitialisation « Envoyer une alerte à Datadog ».
 
 ### Body to post de l'action de déclenchement
-``` 
+```
 {
     "acknowledged": "${N=Alerting;M=Acknowledged}",
     "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
@@ -80,10 +80,10 @@ Pour créer une action de déclenchement dans SolarWinds :
     "object_type": "${N=Alerting;M=ObjectType}",
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}"
 }
-``` 
+```
 
 ### Body to post de l'action de réinitialisation
-``` 
+```
 {
     "acknowledged": "${N=Alerting;M=Acknowledged}",
     "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
@@ -104,7 +104,7 @@ Pour créer une action de déclenchement dans SolarWinds :
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}",
     "reset": "true"
 }
-``` 
+```
 
 ## Données collectées
 

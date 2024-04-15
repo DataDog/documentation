@@ -1,6 +1,6 @@
 ---
 title: Notes and Links Widget
-kind: documentation
+
 widget_type: note
 description: "Display text in a dashboard widget."
 aliases:
@@ -11,14 +11,14 @@ further_reading:
   text: "Learn how to build dashboards using JSON"
 ---
 
-The **Notes & Links** widget is similar to the [free text widget][1] but contains more formatting and display options. 
+The **Notes & Links** widget is similar to the [free text widget][1] but contains more formatting and display options.
 
 **Note**: The Notes & Links widget does not support inline HTML.
 
 ## Setup
 
 1. Enter the text you want to display. Markdown is supported.
-2. Select a preset template or customize the display options. 
+2. Select a preset template or customize the display options.
 3. Select a text size and the widget's background color.
 4. To adjust the position of the text, click on the **Alignment** buttons. To not include padding, click **No Padding**.
 5. To include a pointer, click **Show Pointer** and select a position from the dropdown menu.

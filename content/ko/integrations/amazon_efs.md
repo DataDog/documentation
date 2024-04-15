@@ -17,7 +17,7 @@ integration_id: ''
 integration_title: Amazon Elastic File System
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_efs
 public_title: Datadog-Amazon Elastic File System 통합
@@ -41,7 +41,7 @@ Amazon EFS는 AWS 람다 함수 또는 Amazon EC2 인스턴스와 함께 사용�
 ### 메트릭 수집
 
 1. [AWS 통합 페이지][2]에서 `EFS`이 `Metric Collection` 탭 아래에서 활성화되어 있는지 확인하세요.
-2. Amazon EFS 메트릭을 수집하려면 [Datadog IAM 정책][3]에 해당 권한을 추가합니다. 
+2. Amazon EFS 메트릭을 수집하려면 [Datadog IAM 정책][3]에 해당 권한을 추가합니다.
 
     - `elasticfilesystem:DescribeTags`: 파일 시스템에 적용된 커스텀 태그를 받습니다.
     - `elasticfilesystem:DescribeFileSystems`: 활성 파일 시스템 목록을 제공합니다.

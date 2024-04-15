@@ -3,7 +3,7 @@ further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: Documentation
   text: Upgrade vers l'Agent v7
-kind: guide
+
 title: Gestion des versions de Python
 ---
 
@@ -171,7 +171,7 @@ spec:
         tag: 7.33.0
 ```
 
-**Remarque** : Datadog vous recommande de ne pas définir `*.image.tag`. Laissez plutôt l'Operator Datadog mettre automatiquement à jour le tag pour une image de l'Agent 7. 
+**Remarque** : Datadog vous recommande de ne pas définir `*.image.tag`. Laissez plutôt l'Operator Datadog mettre automatiquement à jour le tag pour une image de l'Agent 7.
 
 Si vous devez utiliser une image JMX de l'Agent, vous pouvez la définir sans utiliser `*.image.tag` pour l'Agent :
 

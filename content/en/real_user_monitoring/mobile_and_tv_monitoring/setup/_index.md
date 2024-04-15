@@ -1,6 +1,6 @@
 ---
 title: Mobile and TV Monitoring Setup
-kind: documentation
+
 type: multi-code-lang
 ---
 

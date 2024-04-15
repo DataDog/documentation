@@ -3,7 +3,7 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: Documentation
   text: Configurer le scanner de données sensibles
-kind: documentation
+
 title: Règles de bibliothèque
 ---
 
@@ -24,7 +24,7 @@ Vous pouvez consulter ces règles dans Datadog :
 1. Cliquez sur **Scanning Rules Library** en haut à droite de la page.
 1. Pour ajouter des règles à un groupe d'analyse à partir de la bibliothèque, procédez comme suit :
   a. Sélectionnez les règles à ajouter.
-  b. Cliquez sur **Add Rules to Scanning Group**.   
+  b. Cliquez sur **Add Rules to Scanning Group**.
   c. Suivez les étapes indiquées dans la rubrique [Configurer le scanner de données sensibles][2] pour terminer la configuration.
 
 ## Secrets et identifiants

@@ -1,6 +1,6 @@
 ---
 title: "Managed Disk Component"
-kind: documentation
+
 ---
 
 ## Overview

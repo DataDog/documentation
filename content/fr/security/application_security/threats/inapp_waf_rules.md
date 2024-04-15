@@ -15,7 +15,7 @@ further_reading:
   tag: Documentation
   text: Résoudre les problèmes courants rencontrés avec la solution Application Security
     Management de Datadog
-kind: documentation
+
 title: Règles WAF In-App
 ---
 
@@ -23,9 +23,9 @@ title: Règles WAF In-App
 
 Lorsque la solution Application Security Management (ASM) est activée, la bibliothèque de tracing Datadog surveille en permanence l'ensemble des services Web et des requêtes API afin de détecter toute activité suspecte.
 
-Une _règle WAF In-App_ permet de spécifier des conditions afin de définir ce que la bibliothèque doit considérer comme une activité suspecte lors d'une requête entrante. La bibliothèque de tracing Datadog intègre des centaines de règles WAF In-App ASM prêtes à l'emploi, qui sont utilisées pour afficher les requêtes suspectes dans le Trace Explorer et dans les règles de détection par défaut. 
+Une _règle WAF In-App_ permet de spécifier des conditions afin de définir ce que la bibliothèque doit considérer comme une activité suspecte lors d'une requête entrante. La bibliothèque de tracing Datadog intègre des centaines de règles WAF In-App ASM prêtes à l'emploi, qui sont utilisées pour afficher les requêtes suspectes dans le Trace Explorer et dans les règles de détection par défaut.
 
-Vous pouvez ajouter d'autres règles WAF In-App sans mettre à jour la bibliothèque de tracing. 
+Vous pouvez ajouter d'autres règles WAF In-App sans mettre à jour la bibliothèque de tracing.
 
 ## Structure d'une règle WAF In-App ASM
 

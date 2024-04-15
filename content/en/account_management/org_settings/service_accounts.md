@@ -1,6 +1,6 @@
 ---
 title: Service Accounts
-kind: documentation
+
 further_reading:
     - link: "https://docs.datadoghq.com/api/latest/service-accounts/"
       tag: "Documentation"
@@ -15,7 +15,7 @@ Suppose an employee at your company sets up an automated script to send requests
 
 ## Navigation
 
-Service accounts exist in [Organization Settings][1]. 
+Service accounts exist in [Organization Settings][1].
 
 To access service accounts in the UI:
 
@@ -30,7 +30,7 @@ By default, the Service Accounts page shows only active service accounts. To inc
 
 Use the search box at the top of the page to filter service accounts. The filter searches name, email, and role fields.
 
-Click on an account to access a detailed side panel view with the following information: 
+Click on an account to access a detailed side panel view with the following information:
 
 - Status (active or disabled)
 - Created and last modified dates
@@ -51,7 +51,7 @@ Unlike the email addresses for Datadog users, service account email addresses do
 
 ### Edit service account
 
-To modify a service account, click on one in the service accounts list. 
+To modify a service account, click on one in the service accounts list.
 
 1. In the side panel, click **Edit** next to the service account name. A dialog box appears.
 2. Update any fields you would like to change. You can edit the name, email address, status, and roles.
@@ -67,7 +67,7 @@ To create a new application key, follow the steps below:
 
 - Click **New Key**. A dialog box appears.
 - Give the key a descriptive name.
-- Click **Create Key**. 
+- Click **Create Key**.
 
 The dialog box refreshes, showing you the key. Copy and paste the key into your desired location. After you close the dialog box, you cannot retrieve the value of the key.
 

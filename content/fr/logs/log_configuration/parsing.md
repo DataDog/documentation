@@ -1,6 +1,6 @@
 ---
 title: Parsing
-kind: documentation
+
 description: Parser vos logs à l'aide du processeur Grok
 aliases:
   - /fr/logs/parsing/
@@ -69,7 +69,7 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 {{< tabs >}}
 {{% tab "Matchers" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])` 
+`date("pattern"[, "timezoneId"[, "localeId"]])`
 : Renvoie une date correspondant au pattern et la parse pour générer un timestamp Unix. [Voir les exemples de matcher de date](#parser-des-dates).
 
 `regex("pattern")`
@@ -386,7 +386,7 @@ Les formats de fuseaux horaires pris en charge sont les suivants :
 
 * `GMT`, `UTC`, `UT` ou `Z`
 * `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` ou `-hhmmss`. La plage la plus étendue prise en charge est de +18:00 à -18:00 (inclus).
-* Fuseaux horaires commençant par `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` ou `UT-`. La plage la plus étendue prise en charge est de +18:00 à -18:00 (inclus). 
+* Fuseaux horaires commençant par `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` ou `UT-`. La plage la plus étendue prise en charge est de +18:00 à -18:00 (inclus).
 * Les identifiants de fuseaux horaires sont extraits de la base de données TZ. Pour en savoir plus, consultez les [noms de la base de données TZ][2].
 
 **Remarque** : le parsing d'une date ne définit **pas** sa valeur comme la date officielle du log. Pour cela, utilisez le [remappeur de dates de log][3] dans un processeur ultérieur.

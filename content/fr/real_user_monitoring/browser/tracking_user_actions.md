@@ -12,7 +12,7 @@ further_reading:
 - link: /real_user_monitoring/dashboards/
   tag: Documentation
   text: En savoir plus sur les dashboards RUM
-kind: documentation
+
 title: Suivi des actions utilisateur
 ---
 
@@ -42,7 +42,7 @@ Le SDK Browser RUM surveille automatiquement les clics. Une action de clic est c
 
 ## Métriques de durée des actions
 
-Pour obtenir des informations sur les attributs par défaut pour tous les types d'événements RUM, consultez la section [Données RUM recueillies (Browser)][3]. 
+Pour obtenir des informations sur les attributs par défaut pour tous les types d'événements RUM, consultez la section [Données RUM recueillies (Browser)][3].
 
 | Métrique    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -101,7 +101,7 @@ Lorsqu'un élément comprend les deux attributs, `data-dd-action-name` est prior
 
 ## Envoyer des actions personnalisées
 
-Pour optimiser la collecte des interactions utilisateur, envoyez vos actions personnalisées à l'aide de l'API `addAction`. Ces actions personnalisées envoient des informations liées à un événement qui se produit pendant un parcours utilisateur. 
+Pour optimiser la collecte des interactions utilisateur, envoyez vos actions personnalisées à l'aide de l'API `addAction`. Ces actions personnalisées envoient des informations liées à un événement qui se produit pendant un parcours utilisateur.
 
 Pour en savoir plus, consultez la section [Envoyer des actions RUM personnalisées][5].
 

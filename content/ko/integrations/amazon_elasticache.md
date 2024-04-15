@@ -18,7 +18,7 @@ integration_id: ''
 integration_title: Amazon ElastiCache
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_elasticache
 public_title: Datadog-Amazon ElastiCache 통합
@@ -35,7 +35,7 @@ version: '1.0'
 
 ## 설정
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][3]을 설정합니다. 
+이미 하지 않은 경우 먼저 [Amazon Web Services 통합][3]을 설정합니다.
 
 ### Datadog 에이전트 없는 설치
 

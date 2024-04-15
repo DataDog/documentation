@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting Custom Metrics Server and HPA
-kind: documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"

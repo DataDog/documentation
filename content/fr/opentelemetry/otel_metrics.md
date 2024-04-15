@@ -9,7 +9,7 @@ further_reading:
   tag: GitHub
   text: Envoyer des métriques et des traces depuis le Collector OpenTelemetry vers
     Datadog via l'exportateur Datadog
-kind: documentation
+
 title: Envoyer des métriques depuis OpenTelemetry vers Datadog
 ---
 
@@ -37,7 +37,7 @@ Il existe deux façons d'envoyer des métriques OTel à Datadog : via l'Agent D
 
 {{< img src="metrics/otel/datadog_exporter.png" alt="Bibliothèque d'instrumentation de l'application, intégrations cloud et autres solutions de surveillance (par ex. Prometheus) -> exportateur Datadog dans le Collector OTel -> Datadog" style="width:100%;">}}
 
-Cette méthode facilite la collecte de données de télémétries depuis des sources autres que les SDK OTel (telles que d'autres bibliothèques, Prometheus, etc.), ainsi que leur transmission vers d'autres plateformes. 
+Cette méthode facilite la collecte de données de télémétries depuis des sources autres que les SDK OTel (telles que d'autres bibliothèques, Prometheus, etc.), ainsi que leur transmission vers d'autres plateformes.
 
 #### Configuration
 
@@ -93,11 +93,11 @@ Si vous souhaitez utiliser le Collector OTel tout en tirant parti de l'ensemble 
      otlp:
          protocols:
              grpc:
-               # Set to different port from Datadog Agent OTLP ingest 
+               # Set to different port from Datadog Agent OTLP ingest
                # Point your instrumented application to port '5317' if using gRPC.
-               endpoint: "0.0.0.0:5317" 
+               endpoint: "0.0.0.0:5317"
              http:
-               # Set to different port from Datadog Agent OTLP ingest 
+               # Set to different port from Datadog Agent OTLP ingest
                # Point your instrumented application to port '5318' if using HTTP.
                endpoint: "0.0.0.0:5318"
 

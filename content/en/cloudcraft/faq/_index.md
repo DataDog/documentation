@@ -1,6 +1,6 @@
 ---
 title: FAQ
-kind: guide
+
 ---
 
 {{< whatsnext desc="General:" >}}

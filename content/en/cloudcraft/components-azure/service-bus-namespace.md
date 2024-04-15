@@ -1,6 +1,6 @@
 ---
 title: "Service bus namespace Component"
-kind: documentation
+
 ---
 
 ## Overview

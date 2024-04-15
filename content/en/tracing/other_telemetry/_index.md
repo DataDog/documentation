@@ -1,6 +1,6 @@
 ---
 title: Correlate APM Data with Other Telemetry
-kind: documentation
+
 description: Learn how to connect APM data with telemetry collected by additional Datadog products.
 further_reading:
   - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
@@ -28,7 +28,7 @@ Inject trace IDs into logs, and leverage unified service tagging to find the exa
 
 ## Correlate RUM and traces
 
-Correlate data collected in front end views with trace and spans on the back end by [Connecting RUM and Traces][2]. Pinpoint issues anywhere in your stack and understand what your users are experiencing. 
+Correlate data collected in front end views with trace and spans on the back end by [Connecting RUM and Traces][2]. Pinpoint issues anywhere in your stack and understand what your users are experiencing.
 
 {{< img src="tracing/index/RumTraces.png" alt="Connect RUM sessions and traces" style="width:100%;">}}
 
@@ -40,7 +40,7 @@ Follow the data from failing synthetic tests directly through to the root causes
 
 ## Correlate profiles and traces
 
-Performance data for application code that has both tracing and profiling enabled is automatically correlated, letting you move between the two types of analysis to troubleshoot and problem solve. You can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues. Similarly, you can debug slow and resource-consuming endpoints directly in the Profiling UI. 
+Performance data for application code that has both tracing and profiling enabled is automatically correlated, letting you move between the two types of analysis to troubleshoot and problem solve. You can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues. Similarly, you can debug slow and resource-consuming endpoints directly in the Profiling UI.
 
 Read [Investigate Slow Traces or Endpoints][5] for more information.
 

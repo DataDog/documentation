@@ -1,6 +1,6 @@
 ---
 title: RUM SwiftUI
-kind: documentation
+
 beta: true
 description: "Use RUM to instrument your SwiftUI applications."
 aliases:
@@ -29,9 +29,9 @@ further_reading:
 
 ## Overview
 
-The Datadog iOS SDK for RUM allows you to instrument views and actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+The Datadog iOS SDK for RUM allows you to instrument views and actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
-Support for SwiftUI was introduced in the SDK [v1.9.0][1]. 
+Support for SwiftUI was introduced in the SDK [v1.9.0][1].
 
 ## Setup
 

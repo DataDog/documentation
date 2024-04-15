@@ -36,7 +36,7 @@ integration_id: teradata
 integration_title: Teradata
 integration_version: 1.1.0
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: teradata
 public_title: Teradata
@@ -100,7 +100,7 @@ CREATE USER "datadog" AS PASSWORD="<PASSWORD>";
 任意ですが、強くお勧めします。読み取り専用で監視するために指定された `datadog` ユーザーに新規または既存のロールを付与します。
 
 ```shell
-GRANT "<READ_ONLY_ROLE>" TO "datadog"; 
+GRANT "<READ_ONLY_ROLE>" TO "datadog";
 ```
 
 Teradata システムは、デフォルトでほとんどの [Data Dictionary ビュー][12]で PUBLIC に `SELECT` 権限を付与しています。すべての Teradata Database ユーザーは `PUBLIC` 権限を持ちます。

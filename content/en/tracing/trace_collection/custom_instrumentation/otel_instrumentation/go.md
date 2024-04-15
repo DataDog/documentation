@@ -1,6 +1,6 @@
 ---
 title: Custom Instrumentation of Go Applications with the OpenTelemetry API
-kind: documentation
+
 description: 'Instrument your Go application with OpenTelemetry API to send traces to Datadog'
 code_lang: go
 type: multi-code-lang
@@ -71,7 +71,7 @@ The following OpenTelemetry features are implemented in the Datadog library as n
    ```go
    otel.SetTracerProvider(provider)
    ```
-   
+
 7. Run your application.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.

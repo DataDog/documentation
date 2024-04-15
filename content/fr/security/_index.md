@@ -45,7 +45,7 @@ further_reading:
   tag: Blog
   text: Meilleures pratiques en matière de sécurité des données au sein d'une infrastructure
     cloud native
-kind: documentation
+
 title: Plateforme de sécurité Datadog
 ---
 

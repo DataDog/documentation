@@ -1,6 +1,6 @@
 ---
 title: Surveillance de votre utilisation de Synthetics
-kind: guide
+
 further_reading:
   - link: /synthetics/api_tests
     tag: Documentation
@@ -27,7 +27,7 @@ Pour visualiser votre utilisation Synthetics ou recevoir des alertes à ce sujet
 
 * [Tests Browser][4] : `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
 
-Pour optimiser vos requêtes, précisez le contexte de ces métriques ou regroupez-les en fonction des tags associés à votre test, comme `team` ou `application`. 
+Pour optimiser vos requêtes, précisez le contexte de ces métriques ou regroupez-les en fonction des tags associés à votre test, comme `team` ou `application`.
 
 Vous pouvez comparer ces métriques à des seuils statiques, représenter graphiquement ces valeurs et utiliser des algorithmes d'apprentissage automatique pour la [détection des anomalies][5] ou les [prévisions][6], afin de ne pas recevoir d'alertes en cas d'augmentation attendue de l'utilisation.
 

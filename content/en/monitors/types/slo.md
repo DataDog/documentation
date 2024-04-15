@@ -1,6 +1,6 @@
 ---
 title: SLO Alerts
-kind: documentation
+
 aliases :
   - /monitors/create/types/slo/
 further_reading:
@@ -40,7 +40,7 @@ Two types of alerts are available:
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
-In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables: 
+In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables:
 
 | Variable   | Description   |
 | ---------- | ------------- |

@@ -1,6 +1,6 @@
 ---
 title: Expo Crash Reporting and Error Tracking
-kind: documentation
+
 description: Capture Expo crash reports in Datadog.
 aliases:
 - /real_user_monitoring/error_tracking/expo

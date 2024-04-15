@@ -1,6 +1,6 @@
 ---
 title: RUM React Native Advanced Configuration
-kind: documentation
+
 description: Learn about advanced configuration options for your React Native setup.
 code_lang: reactnative
 type: multi-code-lang

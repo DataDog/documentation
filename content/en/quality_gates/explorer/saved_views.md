@@ -1,6 +1,6 @@
 ---
 title: Saved Views
-kind: documentation
+
 further_reading:
 - link: "/quality_gates/explorer/search_syntax/"
   tag: "Documentation"
@@ -17,12 +17,12 @@ Quality Gates is in public beta.
 
 ## Overview
 
-Saved views allow you to save the state of the [Quality Gates Explorer][2] on the [**Quality Gate Executions** page][1] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [Quality Gates Explorer][2] on the [**Quality Gate Executions** page][1] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range.
 
 Saved views can keep track of your:
 
 - Quality Gate executions and rule executions
-- Search queries 
+- Search queries
 - Column sort order
 - Live time range (such as the past hour or the past week)
 - Visualizations (such as a timeseries, top list, table, or funnel graph)
@@ -50,7 +50,7 @@ You can:
 
 ## Default views
 
-You can set a saved view to be your default landing page in the [Quality Gates Explorer][2]. Default views are set per-user and have no impact on your organization. 
+You can set a saved view to be your default landing page in the [Quality Gates Explorer][2]. Default views are set per-user and have no impact on your organization.
 
 {{< img src="quality_gates/explorer/default_view.png" text="Set a default view in the Quality Gates Explorer" style="width:100%" >}}
 

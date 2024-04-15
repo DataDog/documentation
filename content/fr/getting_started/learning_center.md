@@ -1,6 +1,6 @@
 ---
 title: Centre d'apprentissage Datadog
-kind: documentation
+
 aliases:
   - /fr/video-categories/
   - /fr/video-categories/datadog-101/

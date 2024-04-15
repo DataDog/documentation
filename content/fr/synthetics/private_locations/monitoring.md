@@ -1,6 +1,6 @@
 ---
 title: Surveillance des emplacements privés
-kind: documentation
+
 description: Surveiller vos emplacements privés
 further_reading:
   - link: getting_started/synthetics/private_location

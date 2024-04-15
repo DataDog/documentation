@@ -1,6 +1,6 @@
 ---
 title: "Web app Component"
-kind: documentation
+
 ---
 
 ## Overview

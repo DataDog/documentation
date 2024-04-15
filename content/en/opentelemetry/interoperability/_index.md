@@ -1,6 +1,6 @@
 ---
 title: Interoperability with Datadog and OpenTelemetry
-kind: documentation
+
 further_reading:
     - link: '/opentelemetry/schema_semantics/'
       tag: 'Documentation'

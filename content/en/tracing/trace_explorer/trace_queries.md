@@ -1,6 +1,6 @@
 ---
 title: Trace Queries
-kind: documentation
+
 description: "Trace Queries"
 is_beta: true
 aliases:
@@ -27,7 +27,7 @@ With structure-based trace querying, you can answer questions such as:
 - Which traces include a dependency between two services (`service A` has a downstream call to `service B`)?
 - What API endpoints are affected by my erroring backend service?
 
-Use Trace Queries to accelerate your investigations and find relevant traces. 
+Use Trace Queries to accelerate your investigations and find relevant traces.
 ## Trace query editor
 
 {{< img src="tracing/trace_queries/trace_query_editor.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Query editor" >}}
@@ -91,7 +91,7 @@ Hover on the Latency Breakdown to get a sense of where (in which services) time 
 
 ## Analytics
 
-Select one of the other visualizations, such as `Timeseries`, `Top List`, or `Table` to aggregate results over time, grouped by one or multiple dimensions. Read [Span Visualizations][2] for more information on the aggregation options. 
+Select one of the other visualizations, such as `Timeseries`, `Top List`, or `Table` to aggregate results over time, grouped by one or multiple dimensions. Read [Span Visualizations][2] for more information on the aggregation options.
 
 In addition to those aggregation options, you must also select which span query (`a`, `b`, `c`, and so on) you want to aggregate the spans from. Select the query that matches the spans from which you're using the tags and attributes in the aggregation options.
 

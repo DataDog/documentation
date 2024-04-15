@@ -1,6 +1,6 @@
 ---
 title: Span Visualizations
-kind: documentation
+
 description: 'View spans in a list, or aggregate spans into timeseries, top lists and more.'
 further_reading:
     - link: 'tracing/trace_explorer/'
@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Visualizations define how the queried span data is displayed. Select relevant visualizations to surface valuable information, such as a **list** for individual events, or as **timeseries** or **top lists** for aggregates. 
+Visualizations define how the queried span data is displayed. Select relevant visualizations to surface valuable information, such as a **list** for individual events, or as **timeseries** or **top lists** for aggregates.
 
 ## List view
 

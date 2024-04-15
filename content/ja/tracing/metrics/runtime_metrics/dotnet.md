@@ -17,14 +17,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
   tag: GitHub
   text: Datadog を使用した .NET ランタイムメトリクスの監視
-kind: documentation
+
 title: .NET ランタイムメトリクス
 type: multi-code-lang
 ---
 
 ## ランタイムメトリクスの互換性
 
-- .NET Framework 4.6.1+ 
+- .NET Framework 4.6.1+
 - .NET Core 3.1
 - .NET 5
 - .NET 6

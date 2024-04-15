@@ -10,7 +10,7 @@ further_reading:
 - link: /metrics/distributions/
   tag: ドキュメント
   text: ディストリビューションメトリクス
-kind: documentation
+
 title: メトリクスの概要
 ---
 
@@ -150,7 +150,7 @@ Metrics without Limits™ は、Agent やコードレベルの変更を必要と
 
 **注**: カーディナリティ推定機能では、メトリクスが 48 時間より古い必要があります。
 
-### クエリ可能なタグ 
+### クエリ可能なタグ
 
 メトリクスが Metrics without Limits™ で構成されると、どのタグが Queryable のままか、つまり _Indexed Custom Metrics_ のボリュームに寄与するタグを表示することができます。また、_Ingested Custom Metrics_ のボリュームに寄与する、最初に送信されインジェストされたすべてのタグにトグルバックすることができます。
 

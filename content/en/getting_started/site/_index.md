@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Datadog Sites
-kind: documentation
+
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/dd-201'
   tag: 'Learning Center'

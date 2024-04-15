@@ -1,6 +1,6 @@
 ---
 title: Monitor Website Uptime With SLOs
-kind: guide
+
 aliases:
     - /graphing/guide/uptime-percentage-widget
     - /dashboards/guide/uptime-percentage-widget
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. 
+Maintaining service level agreements with external or internal customers often requires measuring uptime percentage.
 
 This guide shows you how to achieve that using Datadog [Synthetic Monitoring][1] and the [SLO widget][2] with an example website, `http://example.com/`.
 

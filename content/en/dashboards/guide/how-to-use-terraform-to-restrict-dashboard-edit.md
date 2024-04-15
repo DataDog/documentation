@@ -1,6 +1,6 @@
 ---
 title: How to use Terraform to restrict the editing of a dashboard
-kind: guide
+
 aliases:
   - /dashboards/faq/how-to-use-terraform-to-restrict-dashboards
   - /dashboards/guide/how-to-use-terraform-to-restrict-dashboards
@@ -51,7 +51,7 @@ resource "datadog_restriction_policy" "example" {
 
 Role IDs can be retrieved from the [Roles API][2], [Roles UI][5], or by using the role ID defined in Terraform for [datadog_role][3] resources.
 
-Org ID can be obtained from the [GET /api/v2/current_user API][4] request. Find it in the `data.relationships.org.data.id` field. 
+Org ID can be obtained from the [GET /api/v2/current_user API][4] request. Find it in the `data.relationships.org.data.id` field.
 
 
 

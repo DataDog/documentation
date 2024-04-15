@@ -5,7 +5,7 @@ further_reading:
 - link: /agent/docker/
   tag: 설명서
   text: Datadog Docker 에이전트에 대해 자세히 알아보기
-kind: faq
+
 title: 컨테이너 에이전트를 사용한 호스트 메트릭
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Graphing with JSON
-kind: documentation
+
 aliases:
 - /graphingjson/
 - /graphing/miscellaneous/graphingjson
@@ -21,7 +21,7 @@ further_reading:
 
 {{< img src="/dashboards/graphing_json/json_editor.png" alt="Configure a timeseries widget with the JSON editor" style="width:100%;" >}}
 
-In addition to the [GUI graph editor][6], you can use the JSON editor in your dashboard widgets to configure your visualizations. The schema displayed in the JSON editor mirrors the request body schema of the Dashboard API. For more information on the JSON parameters and required fields see the [Dashboard API documentation][2]. 
+In addition to the [GUI graph editor][6], you can use the JSON editor in your dashboard widgets to configure your visualizations. The schema displayed in the JSON editor mirrors the request body schema of the Dashboard API. For more information on the JSON parameters and required fields see the [Dashboard API documentation][2].
 
 ## Widget JSON schema
 

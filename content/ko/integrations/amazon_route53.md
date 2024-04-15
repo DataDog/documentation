@@ -17,7 +17,7 @@ integration_id: ''
 integration_title: Amazon Route 53
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_route53
 public_title: Datadog-Amazon Route 53 통합
@@ -61,7 +61,7 @@ Amazon Route 53을 설정하여 Route 53에서 수신하는 쿼리에 대한 다
 - 요청된 도메인 또는 하위 도메인
 - 요청의 날짜 및 시간
 - DNS 레코드 유형(A 또는 AAAA)
-- DNS 쿼리에 해당하는 Route 53 에지 위치 
+- DNS 쿼리에 해당하는 Route 53 에지 위치
 - NoError 또는 ServFail 등 DNS 응답 코드
 - VPC를 위한 Resolver 쿼리 로그
 

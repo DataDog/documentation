@@ -1,6 +1,6 @@
 ---
 title: Multistep API Tests
-kind: documentation
+
 description: Chain requests to monitor sophisticated transactions on your key services.
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
@@ -50,7 +50,7 @@ Multistep API tests can run from Datadog [managed](#select-locations) and [priva
 
 Select the **Locations** for your Multistep API test. Multistep API tests can run from both managed and [private locations][5] depending on your preference for running the test from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Define steps
 
@@ -64,7 +64,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
 1. **Name** your step.
 2. Choose a request type: HTTP or gRPC.
-   
+
    {{< tabs >}}
    {{% tab "HTTP" %}}
 
@@ -84,7 +84,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
 #### Add execution parameters
 
-Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. 
+Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource.
 
 In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
@@ -143,7 +143,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 `DNS`
 : DNS entry not found for the test URL. Possible causes include a misconfigured test URL or a wrong configuration in your DNS entries.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
@@ -151,7 +151,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (10 minutes).
 
@@ -167,7 +167,7 @@ If you are using the [custom role feature][18], add your user to any custom role
 
 Access restriction is available for customers using [custom roles][19] on their accounts.
 
-You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
+You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test.
 
 {{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 

@@ -1,6 +1,6 @@
 ---
 title: Autodiscovery Troubleshooting
-kind: documentation
+
 aliases:
   - /agent/autodiscovery/troubleshooting
 further_reading:

@@ -27,7 +27,7 @@ integration_id: gke
 integration_title: Google Kubernetes Engine, Agent
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: gke
 public_title: Google Kubernetes Engine, Agent インテグレーション
@@ -141,7 +141,7 @@ $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" 
 
   構成可能な値の一覧は、[Datadog `helm-charts` リポジトリ][1]を参照してください。
 
-#### ダッシュボード  
+#### ダッシュボード
 
 [Admission Controller][2] を Autopilot で使用するには、Admission Controller の [`configMode`][3] を `service` または `hostip` に設定します。
 

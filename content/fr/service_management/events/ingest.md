@@ -1,5 +1,5 @@
 ---
-kind: Documentation
+
 title: Envoyer des événements à Datadog
 ---
 

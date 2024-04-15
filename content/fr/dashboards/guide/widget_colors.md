@@ -1,9 +1,9 @@
 ---
-kind: guide
+
 title: Sélectionner des couleurs appropriées pour vos graphiques
 ---
 
-Dans les graphiques Datadog, l'utilisation de couleurs est la principale façon de distinguer les différentes séries de données. En sélectionnant les couleurs appropriées pour vos graphiques, les membres de votre équipe pourront analyser les données qui y figurent, tirer des conclusions et résoudre les problèmes efficacement. 
+Dans les graphiques Datadog, l'utilisation de couleurs est la principale façon de distinguer les différentes séries de données. En sélectionnant les couleurs appropriées pour vos graphiques, les membres de votre équipe pourront analyser les données qui y figurent, tirer des conclusions et résoudre les problèmes efficacement.
 
 {{< img src="dashboards/guide/colors/colors_top.png" alt="Sous Graph your data, l'utilisateur sélectionne l'une des palettes de couleurs disponibles." style="width:90%;" >}}
 
@@ -17,7 +17,7 @@ Les palettes catégorielles sont optimales pour différencier des données qui n
 
 #### Classic
 
-La palette Classic par défaut utilise un ensemble de six couleurs différentes optimisées pour améliorer la lisibilité. Les couleurs attribuées aux séries se répètent si le nombre de séries est supérieur à six. Des couleurs distinctes sont attribuées aux séries adjacentes. 
+La palette Classic par défaut utilise un ensemble de six couleurs différentes optimisées pour améliorer la lisibilité. Les couleurs attribuées aux séries se répètent si le nombre de séries est supérieur à six. Des couleurs distinctes sont attribuées aux séries adjacentes.
 
 La palette de couleurs Classic prend en charge l'accessibilité visuelle.
 
@@ -38,7 +38,7 @@ Pour un petit sous-ensemble de tags compatibles, Datadog est en mesure d'identif
 
 ### Palettes divergentes
 
-Utilisez une palette divergente lorsque vous devez mettre en avant l'écart entre des valeurs au sein d'un ensemble de données. Les palettes divergentes sont idéales pour les données qui présentent un ordre et un point médian naturels. Exemple : l'évolution de l'utilisation de la mémoire, de -100 % à +100 %, avec un point médian naturel à 0 %. 
+Utilisez une palette divergente lorsque vous devez mettre en avant l'écart entre des valeurs au sein d'un ensemble de données. Les palettes divergentes sont idéales pour les données qui présentent un ordre et un point médian naturels. Exemple : l'évolution de l'utilisation de la mémoire, de -100 % à +100 %, avec un point médian naturel à 0 %.
 
 Deux options sont disponibles pour les palettes divergentes : Cool (vert et bleu) ou Warm (interpolation entre les couleurs jaune et orange).
 

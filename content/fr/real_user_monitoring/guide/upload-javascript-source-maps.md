@@ -6,13 +6,13 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: Visualiser vos données de suivi des erreurs dans l'Explorateur
-kind: guide
+
 title: Importer des source maps JavaScript
 ---
 
 ## Présentation
 
-Si votre code source JavaScript frontend est minifié, importez vos source maps dans Datadog pour désobfusquer vos différentes stack traces. Pour une erreur donnée, vous avez accès au chemin du fichier, au numéro de ligne ainsi qu'à un extrait de code pour chaque frame de la stack trace associée. Datadog peut également associer des stack frames à votre code source dans votre référentiel. 
+Si votre code source JavaScript frontend est minifié, importez vos source maps dans Datadog pour désobfusquer vos différentes stack traces. Pour une erreur donnée, vous avez accès au chemin du fichier, au numéro de ligne ainsi qu'à un extrait de code pour chaque frame de la stack trace associée. Datadog peut également associer des stack frames à votre code source dans votre référentiel.
 
 <div class="alert alert-info">Seules les erreurs recueillies par la solution <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> peuvent être déminifiées.</div>
 

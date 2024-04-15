@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: JMX 통합과 일치하는 Bean이 있는데 수집에 아무것도 보이지 않습니다.
 ---
 
@@ -11,9 +11,9 @@ JMX 통합을 설정하는 데 문제가 있나요? 다음 설명서를 읽고 �
 * [복합 유형 JMX 속성 수집하기][4]
 * [Windows에서 JMX 명령을 실행하는 방법][5]
 
-위 설명서에 안내된 대로 바르게 설정했고, *또* 내 메트릭이 ([상태 명령][1]이 *아닌*) [에이전트 로그 파일][6]에 나타난다면, 사용 중인 `metric_type`에 문제가 있을 가능성이 큽니다. 
+위 설명서에 안내된 대로 바르게 설정했고, *또* 내 메트릭이 ([상태 명령][1]이 *아닌*) [에이전트 로그 파일][6]에 나타난다면, 사용 중인 `metric_type`에 문제가 있을 가능성이 큽니다.
 
-다음은 `list_matching_attributes.log` 파일 출력입니다. 
+다음은 `list_matching_attributes.log` 파일 출력입니다.
 
 ```text
 Matching: 0/350. Bean name: Hadoop:service=HBase,name=Master,sub=Server - Attribute name: tag.isActiveMaster  - Attribute type: java.lang.String

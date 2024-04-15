@@ -1,6 +1,6 @@
 ---
 title: Error Tracking Monitor
-kind: documentation
+
 description: Learn about the Error Tracking monitor type.
 aliases :
   - /monitors/create/types/error_tracking/
@@ -41,7 +41,7 @@ To create an Error Tracking monitor in Datadog, navigate to [**Monitors** > **Ne
 
 There are two types of alerting conditions you can configure your Error Tracking monitor with:
 
-| Alerting&nbsp;condition     | Description    | 
+| Alerting&nbsp;condition     | Description    |
 | ---  | ----------- |
 |Count| Alert on issues with a high number of errors. For example, alert for your service whenever more than 500 occurrences of your error happen. |
 |New Issue| Triggers when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|

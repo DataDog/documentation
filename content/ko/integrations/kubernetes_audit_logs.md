@@ -20,7 +20,7 @@ has_logo: true
 integration_id: kubernetes-audit-logs
 integration_title: Kubernetes 감사 로그
 is_public: true
-kind: integration
+
 name: kubernetes_audit_logs
 public_title: Datadog-Kubernetes 감사 로그
 short_description: 'Kubernetes 클러스터 내부 추적 '
@@ -45,7 +45,7 @@ Kubernetes 감사 로그 통합을 사용하면 권한 문제를 진단하고, �
 
 Kubernetes 감사 로그 설정에 대한 자세한 내용은 [Kubernetes 감사][3]를 참조하세요.
 
-Kubernetes에서 감사 로그를 활성화하려면 
+Kubernetes에서 감사 로그를 활성화하려면
 
 1. Kubernetes에서는 감사 로그가 기본적으로 비활성화되어 있습니다. API 서버 설정에서 이를 활성화하려면 감사 정책 파일 경로를 지정하세요.
 

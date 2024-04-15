@@ -1,6 +1,6 @@
 ---
 title: OpenTelemetry Guides and Resources
-kind: guide
+
 private: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Timestream Component"
-kind: documentation
+
 ---
 ## Overview
 

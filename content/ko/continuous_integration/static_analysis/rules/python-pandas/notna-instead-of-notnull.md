@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: notnull보다 notna 선호
 ---
 ## 메타데이터

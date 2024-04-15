@@ -25,7 +25,7 @@ integration_id: salesforce-commerce-cloud
 integration_title: Salesforce Commerce Cloud
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: salesforce_commerce_cloud
 public_title: Salesforce Commerce Cloud
@@ -63,14 +63,14 @@ Datadog がログデータをインポートするためのアクセスを Sales
 3. Business Manager インターフェイスの **Administration > Organization > WebDAV Client Permissions** の下に、以下の JSON を追加します。適切な場所にクライアント ID を挿入していることを確認してください。
 
 ```json
-{  
-   "clients":[  
-      {  
+{
+   "clients":[
+      {
          "client_id":"<your-client-id-here>",
-         "permissions":[  
-            {  
+         "permissions":[
+            {
                "path":"/logs",
-               "operations":[  
+               "operations":[
                   "read"
                ]
             }

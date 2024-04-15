@@ -11,7 +11,7 @@ further_reading:
   tag: Documentation
   text: Éléments supplémentaires à prendre en compte lors de la configuration et autres
     options de configuration
-kind: documentation
+
 title: Surveillance et protection des utilisateurs
 ---
 
@@ -41,7 +41,7 @@ Les activités des utilisateurs pour lesquelles des règles de détection prête
 
 ## Ajouter les informations des utilisateurs authentifiés aux traces et activer la fonctionnalité de blocage des utilisateurs
 
-Vous pouvez [ajouter des tags personnalisés à votre span racine][3] ou utiliser les fonctions d'instrumentation décrites ci-dessous. 
+Vous pouvez [ajouter des tags personnalisés à votre span racine][3] ou utiliser les fonctions d'instrumentation décrites ci-dessous.
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -129,7 +129,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "mon-uid") != nil {
     // L'utilisateur doit être bloqué en annulant immédiatement l'exécution du gestionnaire de requêtes.
     // La réponse de blocage est automatiquement gérée et envoyée par le middleware appsec.
-    return 
+    return
   }
 }
 ```
@@ -303,7 +303,7 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="une_portée
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-Depuis la version 1.8.0 de dd-trace-java, l'API du traceur Java permet de surveiller les événements utilisateur. 
+Depuis la version 1.8.0 de dd-trace-java, l'API du traceur Java permet de surveiller les événements utilisateur.
 
 Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 
@@ -391,7 +391,7 @@ public class LoginController {
 
 {{< programming-lang lang="dotnet" >}}
 
-Depuis la version 2.23.0 de dd-trace-dotnet, l'API du traceur .NET permet de surveiller les événements utilisateur. 
+Depuis la version 2.23.0 de dd-trace-dotnet, l'API du traceur .NET permet de surveiller les événements utilisateur.
 
 Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 
@@ -456,7 +456,7 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Depuis la version 1.47.0 de dd-trace-go, l'API du traceur Go permet de surveiller les événements utilisateur. 
+Depuis la version 1.47.0 de dd-trace-go, l'API du traceur Go permet de surveiller les événements utilisateur.
 
 Les exemples suivants montrent comment surveiller les événements de connexion ou des événements personnalisés (comme ici, les inscriptions).
 
@@ -484,7 +484,7 @@ import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* indique si l'ID de l'utilisateur transmis existe ou non */
-  metadata := /* métadonnées d'événement supplémentaires facultatives */ 
+  metadata := /* métadonnées d'événement supplémentaires facultatives */
   appsec.TrackUserLoginFailureEvent(r.Context(), "mon-uid", exists, metadata)
 }
 ```
@@ -651,8 +651,8 @@ Les exemples suivants montrent comment surveiller les événements de connexion 
 from ddtrace.appsec.trace_utils import track_user_login_success_event
 from ddtrace import tracer
 metadata = {"perso": "valeurperso"}
-# name, email, scope, role, session_id et propagate sont des arguments facultatifs 
-# dont la valeur pas défaut est None, sauf propagate dont la valeur par défaut est 
+# name, email, scope, role, session_id et propagate sont des arguments facultatifs
+# dont la valeur pas défaut est None, sauf propagate dont la valeur par défaut est
 # True. Ils seront transmis à la fonction set_user()
 track_user_login_success_event(tracer, "userid", metadata)
 ```

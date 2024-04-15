@@ -1,6 +1,6 @@
 ---
 title: Partner Sales Enablement Guide
-kind: documentation
+
 description: "A training roadmap for a new MSP to be ready to lead a Datadog sales engineering process"
 private: true
 ---
@@ -33,7 +33,7 @@ The course helps you to:
 
 Once you have completed the Datadog Sales Certification and are familiar with the Datadog basics, you should get your Demo Certification.
 
-When you are ready, contact partner-support@datadoghq.com to receive an invitation to the DPN Demo org used for delivering the Datadog demo. After you've received your invitation, proceed to the 
+When you are ready, contact partner-support@datadoghq.com to receive an invitation to the DPN Demo org used for delivering the Datadog demo. After you've received your invitation, proceed to the
 <a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>.
 
 {{<img src="partners/portal_demo_go.png" alt="Partner Portal Demo Certification" style="max-width: 367px">}}
@@ -49,7 +49,7 @@ After giving a technical demo, you'll work with the customer to develop an initi
 This course:
 - Explains the basics behind Datadog core products
 - Addresses the market positioning of each product
-- Describes customer success 
+- Describes customer success
 - Helps you position individual product offerings
 
 To guide a customer through a successful proof of value engagement, you need deeper product knowledge. Get started with the [Datadog Fundamentals Learning Path][2] offered by the Datadog Learning Center. The Learning Center courses include hands-on labs and deepen your technical understanding of how Datadog works.
@@ -75,7 +75,7 @@ If you have gone through the recommended training outlined above, you're ready t
 - Proof of Value
 - Configure, Price, Quote
 
-Should you have any questions during your journey, contact partner-support@datadoghq.com 
+Should you have any questions during your journey, contact partner-support@datadoghq.com
 
 [1]: https://partners.datadoghq.com/
 [2]: https://learn.datadoghq.com/bundles/dd-fundamentals

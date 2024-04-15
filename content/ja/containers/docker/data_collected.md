@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/agent/docker/data_collected
-kind: documentation
+
 title: Docker の収集データ
 ---
 

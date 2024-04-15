@@ -1,6 +1,6 @@
 ---
 title: Use Custom JavaScript Assertions In Browser Tests
-kind: guide
+
 description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
 - link: '/synthetics/browser_tests/actions/'
@@ -22,7 +22,7 @@ To create an assertion using custom JavaScript:
 
 1. Click **Assertion** and select **Test your UI with custom JavaScript**.
 2. Write the body of your assertion.
-3. Optionally, select a target element in the UI. 
+3. Optionally, select a target element in the UI.
 4. Click **Apply**.
 
 For more information about assertions, see [Browser Test Steps][2].
@@ -37,7 +37,7 @@ To verify that elements are *not* on the page and return the number of elements 
 var element = document.querySelectorAll("<SELECTORS>");
 if ( element.length > 0 ){
     console.error(element.length+"  "+"elements exist");
-} 
+}
 return element.length === 0;
 {{< /code-block >}}
 
@@ -67,7 +67,7 @@ return true
 
 ## Assert on text contained in a rendered PDF
 
-You can use an external library to test the content of a rendered PDF. 
+You can use an external library to test the content of a rendered PDF.
 
 To load external libraries, use a promise in the body assertion:
 

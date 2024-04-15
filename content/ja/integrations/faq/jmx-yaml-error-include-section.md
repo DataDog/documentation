@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: jmx.yaml エラー、Include Section
 ---
 

@@ -18,7 +18,7 @@ integration_id: amazon-trusted-advisor
 integration_title: "Amazon\_Trusted\_Advisor"
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_trusted_advisor
 public_title: "Intégration Datadog/Amazon\_Trusted\_Advisor"

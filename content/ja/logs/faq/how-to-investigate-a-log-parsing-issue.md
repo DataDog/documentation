@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/log_configuration/parsing
   tag: Documentation
   text: パースの詳細
-kind: faq
+
 title: ログのパースに関する問題を調査する方法
 ---
 

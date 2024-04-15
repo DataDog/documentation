@@ -1,6 +1,6 @@
 ---
 title: Latest and Legacy Versioning For OpenMetrics-based Integrations
-kind: guide
+
 description: Learn about the difference between the latest (V2) and legacy (V1) versions of OpenMetrics-based integrations.
 ---
 
@@ -16,7 +16,7 @@ Legacy
 
 ## Mode-dependent metrics
 
-Integrations with `latest` and `legacy` modes may produce different subsets of metrics, indicated in the documentation and in-app metric descriptions as OpenMetrics V2 (`latest`) and OpenMetrics V1 (`legacy`). 
+Integrations with `latest` and `legacy` modes may produce different subsets of metrics, indicated in the documentation and in-app metric descriptions as OpenMetrics V2 (`latest`) and OpenMetrics V1 (`legacy`).
 
 In `latest` mode, metrics are submitted more accurately by default and behave closer to Prometheus metric types. For example, Prometheus metrics ending in  `_count` and `_sum` are submitted as `monotonic_count` by default.
 
@@ -33,7 +33,7 @@ While it may vary for each OpenMetrics-based integration, you can enable the `la
 
 <div class="alert alert-info">Datadog avoids introducing breaking changes to integrations as much as possible, so customers can update the Datadog Agent without needing to make large configuration changes. This commitment to backwards compatibility makes it difficult to address existing design issues in the configuration and default behavior.</div>
 
-Since the OpenMetrics format is commonly used to export metrics, many integrations are based on it. These integrations share a set of configuration options and default behavior. Datadog is committed to providing an improved experience in the `latest` version, and maintaining the original experience in the `legacy` version.  
+Since the OpenMetrics format is commonly used to export metrics, many integrations are based on it. These integrations share a set of configuration options and default behavior. Datadog is committed to providing an improved experience in the `latest` version, and maintaining the original experience in the `legacy` version.
 
 For more information, see the appropriate OpenMetrics-based integration documentation.
 

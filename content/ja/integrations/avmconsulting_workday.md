@@ -40,7 +40,7 @@ integration_id: avmconsulting-workday
 integration_title: Workday
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -112,8 +112,8 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AVM Consulting にお問い合わせください。
 
- - メール: [integrations@avmconsulting.net][6] 
- - 電話: 855-AVM-0555 
+ - メール: [integrations@avmconsulting.net][6]
+ - 電話: 855-AVM-0555
 
 ### その他の参考資料
 

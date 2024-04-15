@@ -1,6 +1,6 @@
 ---
 title: Mobile Session Replay Setup and Configuration
-kind: documentation
+
 description: Setting up and configuring Mobile Session Replay.
 aliases:
 further_reading:
@@ -45,7 +45,7 @@ To set up Mobile Session Replay for Android:
    {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     // in case you need material extension support
-    .addExtensionSupport(MaterialExtensionSupport()) 
+    .addExtensionSupport(MaterialExtensionSupport())
     .build()
    SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}

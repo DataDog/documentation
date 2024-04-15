@@ -2,7 +2,7 @@
 aliases:
 - /fr/dashboards/faq/how-to-use-terraform-to-restrict-dashboards
 - /fr/dashboards/guide/how-to-use-terraform-to-restrict-dashboards
-kind: guide
+
 title: Utiliser Terraform pour restreindre la modification d'un dashboard
 ---
 

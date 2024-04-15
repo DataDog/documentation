@@ -1,6 +1,6 @@
 ---
 title: Service Check Monitor
-kind: documentation
+
 description: "Monitor status of arbitrary service checks."
 aliases :
     - /monitors/monitor_types/custom_check
@@ -78,7 +78,7 @@ To set up a cluster alert:
 1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
 
 2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
-    
+
 {{% /tab %}}
 {{< /tabs >}}
 

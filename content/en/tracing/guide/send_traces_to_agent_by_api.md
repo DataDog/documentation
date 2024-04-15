@@ -1,6 +1,6 @@
 ---
 title: Send traces to the Agent by API
-kind: guide
+
 further_reading:
   - link: '/tracing/'
     tag: 'Documentation'

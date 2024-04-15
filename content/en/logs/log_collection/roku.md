@@ -1,6 +1,6 @@
 ---
 title: Roku Log Collection
-kind: documentation
+
 description: Collect logs from your Roku channel.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
@@ -34,7 +34,7 @@ Send logs to Datadog from your Roku channel with [Datadog's `dd-sdk-roku` loggin
     ropm install datadog-roku
     ```
 
-2. Initialize the library with your [Datadog client token][2] and Application ID generated when you create a new RUM application in the Datadog UI (see [Getting Started with Roku RUM Collection][6] for more information). For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-roku` library as they would be exposed client-side in the Roku channel's package. 
+2. Initialize the library with your [Datadog client token][2] and Application ID generated when you create a new RUM application in the Datadog UI (see [Getting Started with Roku RUM Collection][6] for more information). For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-roku` library as they would be exposed client-side in the Roku channel's package.
 
    For more information about setting up a client token, see the [client token documentation][2].
 
@@ -148,7 +148,7 @@ Send logs to Datadog from your Roku channel with [Datadog's `dd-sdk-roku` loggin
 
    ```brightscript
    ' 0 = none; 1 = error; 2 = warning; 3 = info; 4 = verbose;
-   m.globalNode.addFields({ datadogVerbosity: 2 }) 
+   m.globalNode.addFields({ datadogVerbosity: 2 })
    ```
 
 4. Send a custom log entry directly to Datadog with one of the following functions:
@@ -165,14 +165,14 @@ Send logs to Datadog from your Roku channel with [Datadog's `dd-sdk-roku` loggin
     m.global.datadogLogsAgent.callfunc("logAlert", msg, {})
     m.global.datadogLogsAgent.callfunc("logEmergency", msg, {})
     ```
-   
+
 
 5. (Optional) Provide an Associative Array alongside your log message to add attributes to the emitted log. Each entry of the AssocArray is added as an attribute.
 
    ```brightscript
     m.global.datadogLogsAgent.callfunc(
-        "logInfo", 
-        "Video started", 
+        "logInfo",
+        "Video started",
         { video_id: 42, video_type: "advert"}
     )
    ```

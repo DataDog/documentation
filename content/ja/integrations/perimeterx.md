@@ -34,7 +34,7 @@ integration_id: perimeterx
 integration_title: PerimeterX
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: perimeterx
 public_title: PerimeterX
@@ -68,7 +68,7 @@ tile:
 
 ## 計画と使用
 
-すべてのコンフィギュレーションは PerimeterX 側で行われます。サードパーティインテグレーションについて詳しくは、[PerimeterX のドキュメント][2]を参照してください。 
+すべてのコンフィギュレーションは PerimeterX 側で行われます。サードパーティインテグレーションについて詳しくは、[PerimeterX のドキュメント][2]を参照してください。
 
 ### インフラストラクチャーリスト
 

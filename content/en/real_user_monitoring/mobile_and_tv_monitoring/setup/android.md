@@ -1,6 +1,6 @@
 ---
 title: RUM Android and Android TV Monitoring Setup
-kind: documentation
+
 aliases:
     - /real_user_monitoring/android/
 code_lang: android
@@ -49,7 +49,7 @@ android {
     //(...)
 }
 dependencies {
-    implementation "com.datadoghq:dd-sdk-android-rum:x.x.x" 
+    implementation "com.datadoghq:dd-sdk-android-rum:x.x.x"
     //(...)
 }
 
@@ -64,7 +64,7 @@ dependencies {
 
    {{< img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code. 
+To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the Datadog SDK, they would be exposed client-side in the Android application's APK byte code.
 
 For more information about setting up a client token, see the [Client Token documentation][4].
 
@@ -293,7 +293,7 @@ public class SampleApplication extends Application {
 {{< /tabs >}}
 {{< /site-region >}}
 
-The initialization credentials require your application's variant name and uses the value of `BuildConfig.FLAVOR`. With the variant, RUM can match the errors reported from your application with the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string. 
+The initialization credentials require your application's variant name and uses the value of `BuildConfig.FLAVOR`. With the variant, RUM can match the errors reported from your application with the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated RUM error stack traces. For more information, see the [Track Android Errors][8].
 
@@ -363,7 +363,7 @@ You can also add an `EventListener` for the `OkHttpClient` to [automatically tra
 
 ### Track background events
 
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
+You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
 
 Add the following snippet during RUM configuration:
 

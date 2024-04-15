@@ -6,7 +6,7 @@ aliases:
 - /ja/dashboards/faq/why-is-a-counter-metric-being-displayed-as-a-decimal-value/
 cascade:
 - private: true
-kind: faq
+
 title: グラフ作成に関する FAQ
 ---
 

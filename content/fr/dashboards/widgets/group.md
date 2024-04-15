@@ -1,6 +1,6 @@
 ---
 title: Widget Groupe
-kind: documentation
+
 description: Regroupez vos widgets dans un timeboard.
 aliases:
   - /fr/graphing/widgets/group/

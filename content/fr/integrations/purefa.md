@@ -33,7 +33,7 @@ integration_id: purefa
 integration_title: Pure Storage FlashArray
 integration_version: 1.0.1
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: purefa
 public_title: Pure Storage FlashArray
@@ -104,7 +104,7 @@ Remarque : la version de l'intégration est indiquée dans le [CHANGELOG.md][5]
 ### Configuration
 
 1. Créez un utilisateur local sur votre baie FlashArray avec un rôle en lecture seule, puis générez un token d'API pour cet utilisateur.
-   ![Générer une clé d'API][6] 
+   ![Générer une clé d'API][6]
 2. Ajoutez le bloc de configuration suivant au fichier `purefa.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance PureFA. Consultez le fichier d'exemple [purefa.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
 
 **Remarque** : lors de la création de votre fichier de configuration, vous devez impérativement utiliser l'endpoint `/array`.

@@ -1,6 +1,6 @@
 ---
 title: "SQS Component"
-kind: documentation
+
 ---
 ## Overview
 

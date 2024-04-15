@@ -1,13 +1,13 @@
 ---
 title: HAProxy in multi-process mode
-kind: faq
+
 ---
 
 When using the HAProxy in multi process mode, each process has its own memory area and therefore has its own statistics.
 
 {{< img src="integrations/faq/haproxy_config_multi_process.png" alt="HAProxy config multi process" style="width:30%;">}}
 
-This implies that each process needs to have a dedicated socket or endpoint for giving access to its statistics.  
+This implies that each process needs to have a dedicated socket or endpoint for giving access to its statistics.
 Accordingly, in the Datadog configuration file for HAProxy, **each socket or endpoint has to be declared as an instance**.
 
 {{< img src="integrations/faq/haproxy_multi_process_agent_conf.png" alt="HAProxy multiprocess configuration" style="width:50%;">}}

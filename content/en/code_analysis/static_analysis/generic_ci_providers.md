@@ -1,6 +1,6 @@
 ---
 title: Generic CI Providers
-kind: documentation
+
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 is_beta: true
 further_reading:
@@ -21,7 +21,7 @@ Code Analysis is in public beta.
 
 ## Overview
 
-If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
+If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform.
 
 Prerequisites:
 
@@ -70,7 +70,7 @@ Add the following to your CI pipeline:
 export DD_SITE="datadoghq.com"
 
 # Install dependencies
-npm install -g @datadog/datadog-ci 
+npm install -g @datadog/datadog-ci
 
 # Download the latest Datadog static analyzer:
 # https://github.com/DataDog/datadog-static-analyzer/releases

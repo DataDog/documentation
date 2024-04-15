@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: 到達不可能なコードを避ける
 ---
 ## メタデータ

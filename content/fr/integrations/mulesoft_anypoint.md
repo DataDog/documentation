@@ -49,7 +49,7 @@ integration_id: ioconnect-mulesoft-anypoint
 integration_title: Mule®
 integration_version: ''
 is_public: true
-kind: integration
+
 legal_terms:
   eula: assets/EULA - IO Connect Services.pdf
 manifest_version: 2.0.0
@@ -123,7 +123,7 @@ Vous pouvez utiliser ces métriques pour tirer parti des dashboards et monitors 
 
 ### **La visibilité dont vous avez besoin sur vos applications Mule**
 
-#### Opérations (_Dashboards dédiés à l'infrastructure, aux API, aux alertes et à l'allocation des ressources_) 
+#### Opérations (_Dashboards dédiés à l'infrastructure, aux API, aux alertes et à l'allocation des ressources_)
 
 - Surveillez la santé de vos serveurs, API et applications Mule ainsi que d'autres composants de votre infrastructure IT
 - Recevez et visualisez des alertes sur votre infrastructure Mule
@@ -135,7 +135,7 @@ Vous pouvez utiliser ces métriques pour tirer parti des dashboards et monitors 
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_ops_allocation.png" alt="Dashboard Operations: Resources allocation and usage" >}}
 
-#### Développement (_Dashboard d'optimisation_) 
+#### Développement (_Dashboard d'optimisation_)
 
 - Identifiez rapidement les problèmes liés à la mémoire, au CPU et au réseau au sein de vos applications Mule
 - Identifiez les goulots d'étranglement dans vos applications Mule pour optimiser ses performances
@@ -143,7 +143,7 @@ Vous pouvez utiliser ces métriques pour tirer parti des dashboards et monitors 
 
 {{< img src="marketplace/mulesoft_anypoint/images/dmi_dev_optimization.png" alt="Dashboard Development: Optimizations" >}}
 
-#### Direction (_Dashboard d'optimisation des coûts et d'analyse des downtimes_) 
+#### Direction (_Dashboard d'optimisation des coûts et d'analyse des downtimes_)
 
 - Analysez et anticipez votre retour sur investissement en fonction des ressources utilisées et non utilisées
 - Visualisez des données sur l'uptime système de votre investissement Mule
@@ -154,9 +154,9 @@ Vous pouvez utiliser ces métriques pour tirer parti des dashboards et monitors 
 
 - Runtime Mule pour serveurs CloudHub et serveurs physiques autonomes
 - Anypoint API Manager et API Analytics
-- Anypoint Exchange 
-- Anypoint Access Management 
-- Object Store v2 
+- Anypoint Exchange
+- Anypoint Access Management
+- Object Store v2
 
 ### **Instrumentez vos applications Mule avec le connecteur Datadog pour Mule 4**
 

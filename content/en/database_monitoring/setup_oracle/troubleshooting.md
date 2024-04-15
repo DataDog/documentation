@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting DBM Setup for Oracle
-kind: documentation
+
 description: Troubleshoot Database Monitoring setup for Oracle
 ---
 

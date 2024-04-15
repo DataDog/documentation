@@ -1,6 +1,6 @@
 ---
 title: Alerting With RUM Data
-kind: guide
+
 description: Guide for creating alerts on RUM events.
 further_reading:
 - link: '/real_user_monitoring/platform/dashboards/'
@@ -34,7 +34,7 @@ You can export search queries from the [RUM Explorer][2] to a monitor to retain 
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/export-to-monitor-3.mp4" alt="Export button to the right hand corner of the RUM Explorer" video="true" style="width:100%;" >}}
 
-The example above is a search query for a RUM monitor configured for images that are larger than 1Mb. Large images may reduce your application's performance. 
+The example above is a search query for a RUM monitor configured for images that are larger than 1Mb. Large images may reduce your application's performance.
 
 Click the **Export** button to export your search query to a pre-configured RUM monitor. For more information, see [Export RUM Events][4].
 
@@ -50,7 +50,7 @@ The following examples highlight use cases for alerting with your RUM data.
 
 With RUM's [global context][6], you can enrich your RUM events with business-specific attributes such as the purchase amount for each user.
 
-Assuming that most users of the example application spend between $800 to $1000, this example shows a RUM monitor configured to spot deviations in users' spending patterns week by week. 
+Assuming that most users of the example application spend between $800 to $1000, this example shows a RUM monitor configured to spot deviations in users' spending patterns week by week.
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/revenue-dips-example-monitor.png" alt="RUM Monitor for revenue dips" style="width:100%;" >}}
 
@@ -71,7 +71,7 @@ This example shows a RUM monitor for the error rate of the `/cart` page on a sam
 Real User Monitoring measures, calculates, and scores application performance as [Core Web Vitals][7] and [Mobile Vitals][8]. For example, Largest Contentful Paint (LCP) measures loading performance and is benchmarked at 2.5 seconds when the page starts loading.
 
 This example shows a RUM monitor for the LCP of the `/cart` page on a sample Shop.ist application.
- 
+
 {{< img src="real_user_monitoring/guide/alerting-with-rum/high-largest-contentful-paint-example-monitor.png" alt="RUM monitor for high Largest Contentful Paint" style="width:100%;" >}}
 
 This example monitor warns when the LCP takes 2 seconds to load and alerts when the LCP takes longer than 2.5 seconds to load.

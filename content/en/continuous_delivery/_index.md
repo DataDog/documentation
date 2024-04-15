@@ -1,6 +1,6 @@
 ---
 title: Continuous Delivery Visibility
-kind: documentation
+
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"

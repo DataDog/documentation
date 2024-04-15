@@ -27,7 +27,7 @@ integration_id: oke
 integration_title: Oracle Container Engine for Kubernetes
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: oke
 public_title: Oracle Container Engine for Kubernetes
@@ -61,7 +61,7 @@ Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) est un service
 
 ## Configuration
 
-Datadog s'intègre déjà à Kubernetes, ce qui en fait la solution idéale pour surveiller OKE. Si vous exécutez l'Agent dans un cluster Kubernetes et que vous souhaitez migrer vers OKE, vous pouvez continuer à surveiller votre cluster avec Datadog. 
+Datadog s'intègre déjà à Kubernetes, ce qui en fait la solution idéale pour surveiller OKE. Si vous exécutez l'Agent dans un cluster Kubernetes et que vous souhaitez migrer vers OKE, vous pouvez continuer à surveiller votre cluster avec Datadog.
 
 De plus, les pools de nœuds OKE sont pris en charge.
 

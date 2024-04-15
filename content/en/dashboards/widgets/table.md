@@ -1,6 +1,6 @@
 ---
 title: Table Widget
-kind: documentation
+
 widget_type: "query_table"
 aliases:
 - /graphing/widgets/table/

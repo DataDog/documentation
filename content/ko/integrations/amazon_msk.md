@@ -17,7 +17,7 @@ integration_id: ''
 integration_title: Amazon Managed Streaming for Apache Kafka(MSK)
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_msk
 public_title: Datadog-Amazon Managed Streaming for Apache Kafka(MSK) 통합
@@ -38,7 +38,7 @@ Datadog에서 CloudWatch에서 수집한 메트릭을 보려면 Amazon MSK 크�
 
 ### 설치
 
-아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정하세요. 
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정하세요.
 
 ### 메트릭 수집
 
@@ -52,7 +52,7 @@ Datadog에서 CloudWatch에서 수집한 메트릭을 보려면 Amazon MSK 크�
 
 S3 버킷이나 CloudWatch로 로그를 전송하도록 Amazon MSK를 구성하세요.
 
-**참고**: 
+**참고**:
 - S3 버킷에 로깅하는 경우 `amazon_msk`가 _Target prefix_로 지정되어야 합니다.
 - CloudWatch 로그 그룹에 로깅하는 경우 하위 스트링에 `msk`를 포함해야 합니다.
 

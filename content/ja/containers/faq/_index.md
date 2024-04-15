@@ -2,7 +2,7 @@
 cascade:
 - private: true
 disable_sidebar: true
-kind: faq
+
 title: コンテナに関するよくあるご質問
 ---
 

@@ -14,7 +14,7 @@ further_reading:
 - link: /tracing/troubleshooting/agent_apm_metrics/
   tag: Documentation
   text: Métriques APM envoyées par l'Agent Datadog
-kind: documentation
+
 title: Dépannage d'APM
 ---
 

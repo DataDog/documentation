@@ -23,7 +23,7 @@ integration_id: snmp-dell
 integration_title: Dell Inc.
 integration_version: ''
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_to_check:
@@ -51,7 +51,7 @@ Pour obtenir la liste complète de toutes les métriques recueillies à partir d
 
 ## Configuration
 
-Pour installer et configurer l'intégration SNMP, consultez la documentation relative à la fonction [Network Device Monitoring][2] 
+Pour installer et configurer l'intégration SNMP, consultez la documentation relative à la fonction [Network Device Monitoring][2]
 
 ## Données collectées
 

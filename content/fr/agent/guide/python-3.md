@@ -6,7 +6,7 @@ further_reading:
 - link: /agent/guide/agent-v6-python-3/
   tag: Documentation
   text: Utiliser Python 3 avec l'Agent v6 de Datadog
-kind: guide
+
 title: Migration de checks custom vers Python 3
 ---
 
@@ -58,7 +58,7 @@ Après avoir résolu les problèmes de compatibilité, la même commande ne renv
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
-$ 
+$
 ```
 
 Bien que `pylint` détecte tout problème susceptible d'empêcher l'interpréteur Python 3 d'exécuter du code, il ne peut pas vérifier la validité logique. Une fois les modifications de code effectuées, veillez à exécuter le check et à valider la sortie.

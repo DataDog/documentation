@@ -21,7 +21,7 @@ further_reading:
 - link: tracing/
   tag: Utilisation avancée
   text: Utilisation avancée
-kind: documentation
+
 title: Tracer des applications Python
 type: multi-code-lang
 ---

@@ -24,7 +24,7 @@ guid: 4813a514-e9a4-4f28-9b83-b4221b51b18b
 integration_id: snowflake
 integration_title: Snowflake
 is_public: true
-kind: integration
+
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: snowflake.
@@ -40,7 +40,7 @@ supported_os:
 ---
 ## Présentation
 
-Ce check permet de surveiller [Snowflake][1] via l'Agent Datadog. Snowflake est un entrepôt de données analytique fourni en tant que SaaS et s'exécute entièrement sur une infrastructure cloud. 
+Ce check permet de surveiller [Snowflake][1] via l'Agent Datadog. Snowflake est un entrepôt de données analytique fourni en tant que SaaS et s'exécute entièrement sur une infrastructure cloud.
 Cette intégration permet de surveiller l'utilisation des crédits, la facturation, le stockage, l'historique des requêtes et bien plus encore.
 
 <div class="alert alert-info"><bold>REMARQUE : les métriques sont collectées par le biais de requêtes envoyées à Snowflake. Les requêtes transmises par l'intégration Datadog sont facturables par Snowflake.</bold></div>
@@ -144,7 +144,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
         min_collection_interval: 3600
     ```
 
-    <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour. 
+    <div class="alert alert-info">By default, the <code>min_collection_interval</code> is 1 hour.
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
@@ -156,7 +156,7 @@ Snowflake recommande de définir des [variables d'environnement pour configurer 
 
 Vous pouvez également définir `proxy_host`, `proxy_port`, `proxy_user` et `proxy_password` sous `init_config` dans le fichier [snowflake.d/conf.yaml][4].
 
-**REMARQUE** : Snowflake met automatiquement en forme les configurations de proxy et définit [les variables d'environnement de proxy standard][7]. 
+**REMARQUE** : Snowflake met automatiquement en forme les configurations de proxy et définit [les variables d'environnement de proxy standard][7].
 Ces variables influent sur l'ensemble des requêtes provenant des intégrations, y compris les services d'orchestration comme Docker, ECS et Kubernetes.
 
 ### Requêtes personnalisées Snowflake

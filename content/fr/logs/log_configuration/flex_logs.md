@@ -13,7 +13,7 @@ further_reading:
 - link: /logs/log_configuration/archives
   tag: Documentation
   text: Archives de logs
-kind: documentation
+
 title: Flex Logs
 ---
 
@@ -25,7 +25,7 @@ L'accès à la solution Flex Logs est actuellement limité, mais vous pouvez ut
 
 Flex Logs dissocie le stockage et l'interrogation des logs. Cela vous permet de stocker tous vos logs et de choisir librement les cas d'utilisation qui vous intéressent. Vous pouvez conserver des logs volumineux pendant de longues périodes et stocker tous vos logs dans Datadog, pour tous les cas d'utilisation et budgets.
 
-Les équipes de sécurité, de conformité et d'ingénierie ont régulièrement besoin d'interroger des logs couvrant une large période de temps. Les failles de sécurité sont généralement détectées des semaines, voire des mois, après les incidents. De plus, la révision et l'audit de la conformité juridique impliquent parfois l'utilisation de logs enregistrés il y a plus d'un an. Les équipes de sécurité ne sont pas les seules à devoir analyser des données à long terme. En effet, il arrive que les équipes d'ingénierie effectuent des analyses d'une année à une autre à partir de données avec une forte cardinalité, par exemple des millions d'entités telles que des utilisateurs, des hosts et des adresses IP. À cette fin, il est plus efficace de travailler à partir des logs plutôt qu'avec des métriques. 
+Les équipes de sécurité, de conformité et d'ingénierie ont régulièrement besoin d'interroger des logs couvrant une large période de temps. Les failles de sécurité sont généralement détectées des semaines, voire des mois, après les incidents. De plus, la révision et l'audit de la conformité juridique impliquent parfois l'utilisation de logs enregistrés il y a plus d'un an. Les équipes de sécurité ne sont pas les seules à devoir analyser des données à long terme. En effet, il arrive que les équipes d'ingénierie effectuent des analyses d'une année à une autre à partir de données avec une forte cardinalité, par exemple des millions d'entités telles que des utilisateurs, des hosts et des adresses IP. À cette fin, il est plus efficace de travailler à partir des logs plutôt qu'avec des métriques.
 
 Cette présentation met en avant les fonctionnalités principales du stockage de niveau Flex, les différences entre les options de stockage Standard et Flex pour les données de vos logs, ainsi que les cas d'utilisation du stockage de niveau Flex.
 
@@ -49,7 +49,7 @@ Configurez le niveau Flex sur la page [Logs Index Configuration][2] :
 
 {{< img src="logs/log_configuration/flex_logging/flex_toggle_search.png" alt="Activer la journalisation Flex sur la page Log Explorer" style="width:100%;" >}}
 
-Dans le Log Explorer, activez l'option **Include Flex Indexes** pour inclure les logs des index Flex dans vos résultats de recherche. Cette option est affichée à côté du sélecteur d'intervalle. 
+Dans le Log Explorer, activez l'option **Include Flex Indexes** pour inclure les logs des index Flex dans vos résultats de recherche. Cette option est affichée à côté du sélecteur d'intervalle.
 
 [Effectuez une recherche][3] en saisissant votre requête dans la barre de recherche ou en sélectionnant la facette correspondante dans le volet des facettes.
 

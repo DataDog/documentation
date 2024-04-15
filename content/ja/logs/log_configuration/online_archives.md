@@ -11,7 +11,7 @@ further_reading:
   tag: ブログ
   text: Online Archives による履歴ログ解析・調査
 is_beta: true
-kind: documentation
+
 private: true
 title: Online Archives
 ---
@@ -51,7 +51,7 @@ Online Archives は、Log インデックスごとに設定されています。
 
 [検索][4]は、検索バーにクエリを入力するか、ファセットパネルで該当するファセットを選択することで行います。
 
-**注**: 
+**注**:
 - オンラインアーカイブのログは、ダッシュボード、ノートブック、モニターへはエクスポートできません。
 - 「トランザクション」および「パターン」のビューは、オンラインアーカイブでは利用できません。
 

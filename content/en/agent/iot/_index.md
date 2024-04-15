@@ -1,6 +1,6 @@
 ---
 title: IoT Agent
-kind: documentation
+
 further_reading:
   - link: "/getting_started/agent/"
     tag: "Documentation"

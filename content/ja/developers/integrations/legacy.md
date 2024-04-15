@@ -1,7 +1,7 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/legacy.md
-kind: documentation
+
 title: レガシー Agent v5
 ---
 Datadog Agent v5 は既に Agent v6 に置き換えられていますが、このドキュメントでは、v5 に対応した Agent チェックの作成方法を説明します。引き続き v5 で独自のローカルチェックを書くことはできますが、v5 用の新しいインテグレーションはアップストリームと見なされません。Agent v6 用のインテグレーションの作成の詳細については、[新しいインテグレーションの設定][1]を参照してください。

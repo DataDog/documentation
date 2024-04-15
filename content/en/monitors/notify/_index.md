@@ -1,6 +1,6 @@
 ---
 title: Notifications
-kind: documentation
+
 aliases:
   - /monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message
   - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
@@ -23,7 +23,7 @@ Notifications are a key component of monitors that keep your team informed of is
 ## Notify your team
 
 Use the **Notify your team** section to:
-- Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
+- Send notifications to your team through email, Slack, PagerDuty, and other integrations.
 - Trigger a workflow or create a workflow from a monitor.
 - Add a case to your monitor.
 

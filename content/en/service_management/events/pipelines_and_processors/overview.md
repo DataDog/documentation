@@ -1,23 +1,23 @@
 ---
 title: Pipelines and Processors
-kind: Documentation
+
 
 ---
 
-## Overview 
+## Overview
 
-Event Management offers the ability to add additional processing to an event with Pipelines and Processors. 
+Event Management offers the ability to add additional processing to an event with Pipelines and Processors.
 
 
-### Common Uses Cases 
+### Common Uses Cases
 - Enrich your events with additonal information from your CMDB
 - Standardize the tags on the events
-- Create new tags from the content within the events 
+- Create new tags from the content within the events
 
 
 ### Getting Started
 
-To get started you first need to create an Pipeline, which allows you to filter to the events that your interested in, for example a source or maybe a tag. Once you created a Pipeline you can then add Processors. The Processors available are: 
+To get started you first need to create an Pipeline, which allows you to filter to the events that your interested in, for example a source or maybe a tag. Once you created a Pipeline you can then add Processors. The Processors available are:
 
 - [Arithmetic Processor][1]
 - [Date Remapper][2]

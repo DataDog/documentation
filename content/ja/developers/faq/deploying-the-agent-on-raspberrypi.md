@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Agent を RaspberryPI にデプロイする
 ---
 

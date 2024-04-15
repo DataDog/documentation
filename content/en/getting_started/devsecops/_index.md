@@ -1,6 +1,6 @@
 ---
 title: Getting Started with the DevSecOps Bundles
-kind: documentation
+
 ---
 
 This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.
@@ -202,7 +202,7 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 - [Host and Container Maps][12]: Visualize your hosts and containers
 - [Live Containers][13]: Gain real-time visibility into all containers across your environment
 - [Live Processes][14]: Gain real-time visibility into the process running on your infrastructure
-- [Serverless][2]: Gain full visibility into all of the managed services that power your serverless 
+- [Serverless][2]: Gain full visibility into all of the managed services that power your serverless
 - [Watchdog][15]: Automatically detect potential application and infrastructure issues
 - [Cloud Security Management][16]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 

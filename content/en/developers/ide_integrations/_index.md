@@ -1,6 +1,6 @@
 ---
 title: IDE Integrations
-kind: Documentation
+
 description: Learn how to set up Datadog IDE integrations.
 disable_toc: false
 ---

@@ -1,6 +1,6 @@
 ---
 title: Creating a JMX integration
-kind: guide
+
 ---
 
 This guide describes the creation of a JMX integration using the [Developer Toolkit][1].
@@ -40,7 +40,7 @@ Edit the `metrics.yaml` to define the filters for collecting metrics.
 
 See the [JMX integration][5] for details on the metrics filters format.
 
-[JMXFetch test cases][6] provide examples of how metrics filters work.  
+[JMXFetch test cases][6] provide examples of how metrics filters work.
 
 Example of `metrics.yaml`:
 

@@ -23,7 +23,7 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
-kind: documentation
+
 title: PHP ログ収集
 ---
 
@@ -335,7 +335,7 @@ Monolog のプリプロセッサーには、単純なコールバックで、設
               arguments:  [ @session ]
               tags:
                   - { name: monolog.processor, method: processRecord }
-    ``` 
+    ```
 
 3. 生成された JSON ファイルを Datadog に[ストリーミング](#configure-the-datadog-agent)します。
 

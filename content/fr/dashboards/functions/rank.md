@@ -1,6 +1,6 @@
 ---
 title: Rang
-kind: documentation
+
 aliases:
   - /fr/graphing/functions/rank/
 ---
@@ -29,7 +29,7 @@ La fonction `top()` comprend trois paramètres :
 
 * `ORDRE` : l'ordre des résultats. Valeurs autorisées :
     - `asc` : classe les résultats dans l'ordre croissant.
-    - `desc` : classe les résultats dans l'ordre décroissant. 
+    - `desc` : classe les résultats dans l'ordre décroissant.
 
 La méthode `top()` offre également des fonctions de commodité de la forme suivante, qui prennent toutes comme argument une seule liste de série :
 

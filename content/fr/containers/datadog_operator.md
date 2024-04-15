@@ -12,11 +12,11 @@ further_reading:
 - link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
   tag: GitHub
   text: 'Operator Datadog : configuration'
-kind: documentation
+
 title: Operator Datadog
 ---
 
-L'[Operator Datadog][1] est un [Operator Kubernetes][2] open source qui vous permet de déployer et de configurer l'Agent Datadog dans un environnement Kubernetes. 
+L'[Operator Datadog][1] est un [Operator Kubernetes][2] open source qui vous permet de déployer et de configurer l'Agent Datadog dans un environnement Kubernetes.
 
 Grâce à cet Operator, une seule définition de ressource personnalisée (ou CRD) est nécessaire pour déployer l'Agent de nœud, l'[Agent de cluster][3] et l'[exécuteur de checks de cluster][4]. L'Operator transmet les données relatives au statut, à la santé et aux erreurs du déploiement dans le statut de sa CRD. Dans la mesure où l'Operator utilise des options de configuration de niveau supérieur, il réduit les éventuels problèmes de configuration.
 
@@ -41,9 +41,9 @@ Datadog prend totalement en charge l'utilisation d'un DaemonSet pour le déploie
 
 ## Utilisation
 
-Consultez le guide [Débuter avec l'Operator Datadog][6] pour savoir comment utiliser l'Operator pour déployer l'Agent Datadog. 
+Consultez le guide [Débuter avec l'Operator Datadog][6] pour savoir comment utiliser l'Operator pour déployer l'Agent Datadog.
 
-Pour connaître toutes les options d'installation et de configuration, consultez les pages d'[installation][7] et de [configuration][8] détaillées dans le référentiel [`datadog-operator`][1]. 
+Pour connaître toutes les options d'installation et de configuration, consultez les pages d'[installation][7] et de [configuration][8] détaillées dans le référentiel [`datadog-operator`][1].
 
 ## Pour aller plus loin
 

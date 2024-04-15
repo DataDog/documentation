@@ -1,6 +1,6 @@
 ---
 title: Smoothing
-kind: documentation
+
 aliases:
     - /graphing/functions/smoothing/
 ---
@@ -121,20 +121,20 @@ Note: The span value is the number of data points. So `median_7()` uses the last
 
 Note: The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
 
-## Weighted 
-<div class="alert alert-info">Weighted() is only available when querying `SUM BY` on gauge type metrics.</div> 
+## Weighted
+<div class="alert alert-info">Weighted() is only available when querying `SUM BY` on gauge type metrics.</div>
 
 | Function       | Description                                                           | Example                        |
 | :----          | :-------                                                              | :---------                     |
 | `weighted()`   | Automatically removes noise while preserving the proper weight of transient tags. | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
 
-The `weighted()` function accounts for the short-lived lifespan of transient, churning tag values when summing gauge metrics in space to prevent artificial spikes. 
+The `weighted()` function accounts for the short-lived lifespan of transient, churning tag values when summing gauge metrics in space to prevent artificial spikes.
 
-This function is automatically appended to queries on gauge metrics if both of the following conditions are met: 
+This function is automatically appended to queries on gauge metrics if both of the following conditions are met:
 1. The metric has a regular, consistent submission interval that is also specified on Metrics Summary
 2. The metric is aggregated with `SUM by` (for example, `sum: mygaugemetric{*}`)
 
-Here is an example graph of the original query with inaccurate spikes (in purple) and the query with the properly weighted calculation (in green): 
+Here is an example graph of the original query with inaccurate spikes (in purple) and the query with the properly weighted calculation (in green):
 
 {{< img src="dashboards/functions/smoothing/weighted.png" alt="Example graph comparing queries with and without the weighted modifier" style="width:80%;">}}
 

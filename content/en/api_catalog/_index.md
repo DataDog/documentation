@@ -1,6 +1,6 @@
 ---
 title: Datadog API Catalog
-kind: documentation
+
 is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
@@ -35,7 +35,7 @@ Datadog API Catalog is in beta.
 
 ## Overview
 
-API Catalog provides a single view and entry point for exploring the performance, reliability, and ownership of all your API endpoints in one place. It's a central place where your whole company can find up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
+API Catalog provides a single view and entry point for exploring the performance, reliability, and ownership of all your API endpoints in one place. It's a central place where your whole company can find up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs).
 
 Monitor your mission-critical, API-driven business features, standardize and validate API performance expectations, and alert when performance deviates from them.
 
@@ -99,13 +99,13 @@ API
 API endpoint
 : The address of a resource (URL) of a server or a service that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint is responsible for making the API call response.<br /><br/>
 API Catalog displays API endpoints as the HTTP method (for example, `GET`), the URL path (for example, `/payment/{shop_id}/purchase`), and the name of the service this resource serves (for example, `Payments`).<br /><br/>
-API Catalog in **beta** supports only **HTTP** endpoints. 
+API Catalog in **beta** supports only **HTTP** endpoints.
 
 Public APIs
 : Customer-facing API endpoints that are accessible from the internet.
 
 Private APIs
-: Also called internal APIs. These are only for internal use in an organization and are used mainly for backend service communication. These are the most common type of API. 
+: Also called internal APIs. These are only for internal use in an organization and are used mainly for backend service communication. These are the most common type of API.
 
 Partner APIs
 : Also called third-party APIs. These are another organization's public endpoints that your organization uses to provide your services (for example, Stripe, Google, and Facebook).

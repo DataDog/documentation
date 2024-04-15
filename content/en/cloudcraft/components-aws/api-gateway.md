@@ -1,6 +1,6 @@
 ---
 title: "API Gateway Component"
-kind: documentation
+
 ---
 ## Overview
 

@@ -16,7 +16,7 @@ further_reading:
 - link: /security/application_security/threats/
   tag: Documentation
   text: Application Threat Management
-kind: documentation
+
 title: サーバーレスの ASM を有効にする
 type: multi-code-lang
 ---

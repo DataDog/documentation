@@ -21,7 +21,7 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Laboratorios de seguridad
   text: Investigación sobre seguridad, informes, consejos y vídeos de Datadog
-kind: documentation
+
 title: Empezando con Software Composition Analysis
 ---
 
@@ -34,7 +34,7 @@ Esta guía te mostrará las prácticas recomendadas para poner en marcha tu equi
 
 ## Fase 1: Habilitar
 1. Verifica la [Compatibilidad con ASM][2] para ver si tu servicio es compatible.
-2. Habilita Software Composition Analysis en tus servicios. 
+2. Habilita Software Composition Analysis en tus servicios.
    - Dirígete a [**Security (Seguridad) -> Configuration (Configuración) -> Application Security (Seguridad de la aplicación) -> Quick Start Guide (Guía de inicio rápido)**][4].
    - Expande **Enable Vulnerability Detection** (Habilitar la detección de vulnerabilidades).
    - Haz clic en **Start Activation** (Iniciar activación).
@@ -53,7 +53,7 @@ Esta guía te mostrará las prácticas recomendadas para poner en marcha tu equi
    {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Página de configuración de Software Composition Analysis." style="width:100%;" >}}
 
 ## Fase 2: Identificar
-1. **Identificar vulnerabilidades**: dirígete a [**Security (Seguridad) -> Application Security (Seguridad de la aplicación) -> Vulnerabilities (Vulnerabilidades)**][5]. 
+1. **Identificar vulnerabilidades**: dirígete a [**Security (Seguridad) -> Application Security (Seguridad de la aplicación) -> Vulnerabilities (Vulnerabilidades)**][5].
    - Ordena por `Status`, `Vulnerability Source` y `Severity`.
    - Para cambiar al punto de vista de confirmación del repositorio de código, haz clic en el botón **static** (estático). Para cambiar al punto de vista en tiempo real de las aplicaciones que ya se están ejecutando, haz clic en el botón **runtime** (tiempo de ejecución).
 
@@ -62,12 +62,12 @@ Esta guía te mostrará las prácticas recomendadas para poner en marcha tu equi
    Cada vulnerabilidad tiene su propio estado para ayudar a priorizar y gestionar los hallazgos:
 
    | Estado         | Descripción                                                                                   |
-   | -------------- | ----------------------------------------------------------------------------------------------| 
+   | -------------- | ----------------------------------------------------------------------------------------------|
    |  Open (Abierta)          |  Datadog ha detectado la vulnerabilidad.                                              |
    |  In Progress (En curso)   |  Un usuario ha marcado la vulnerabilidad como En curso, pero Datadog la sigue detectando.            |
    |  Muted (Silenciada)         |  Un usuario ha ignorado la vulnerabilidad, por lo que ya no se puede ver en la lista de Abierta, pero Datadog aún la detecta. |
    |  Remediated (Corregida)    |  Un usuario ha marcado la vulnerabilidad como resuelta, pero Datadog todavía la puede ver.   |
-   |  Auto-Closed (Cerrada automáticamente)   |  Datadog ya no detecta la vulnerabilidad.                                          |                              
+   |  Auto-Closed (Cerrada automáticamente)   |  Datadog ya no detecta la vulnerabilidad.                                          |
 
    **Nota**: Las vulnerabilidades Remediated (Corregidas) y Auto-Closed (Cerradas automáticamente) se vuelven a abrir si Datadog detecta la vulnerabilidad de nuevo.
 
@@ -89,14 +89,14 @@ Esta guía te mostrará las prácticas recomendadas para poner en marcha tu equi
 
       La gravedad se puntúa de la siguiente manera:
       | Puntuación CVSS    | Calificación cualitativa
-      | --------------| -------------------|  
+      | --------------| -------------------|
       |   `0.0`         | Ninguno                |
       |   `0.1 - 3.9`   | Bajo                 |
       |   `4.0 - 6.9`   | Medio              |
       |   `7.0 – 8.9`   | Alto                |
       |   `9.0 – 10.0`  | Crítico            |
 
-4. De manera opcional, descarga la lista de materiales de software (SBOM) para tu servicio. Mientras visualizas los detalles de una vulnerabilidad, haz clic en [View in Service Catalog][6] (Ver en catálogo de servicios). Desde aquí puedes dirijirte a la [Vista de seguridad][7] de tu servicio y descargar la SBOM en la [pestaña bibliotecas][8]. 
+4. De manera opcional, descarga la lista de materiales de software (SBOM) para tu servicio. Mientras visualizas los detalles de una vulnerabilidad, haz clic en [View in Service Catalog][6] (Ver en catálogo de servicios). Desde aquí puedes dirijirte a la [Vista de seguridad][7] de tu servicio y descargar la SBOM en la [pestaña bibliotecas][8].
 
 ## Fase 3: Corregir
 1. **Priorizar la respuesta y corregir**: mientras estés en el [Explorador de vulnerabilidades][5], toma medidas:

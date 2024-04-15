@@ -20,7 +20,7 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: ドキュメント
   text: Datadog トレースの読み方を理解する
-kind: documentation
+
 title: トレースビュー
 ---
 
@@ -105,7 +105,7 @@ title: トレースビュー
 {{< img src="tracing/trace_view/span_header.png" alt="スパンヘッダー" style="width:90%;">}}
 
 {{< tabs >}}
-{{% tab "スパン情報" %}} 
+{{% tab "スパン情報" %}}
 
 カスタムタグを含む、すべてのスパンのメタデータを表示します。スパンタグをクリックして、トレースエクスプローラーで検索クエリを更新するか、タグの値をクリップボードにコピーします。
 

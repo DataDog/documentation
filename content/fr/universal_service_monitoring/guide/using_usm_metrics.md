@@ -12,13 +12,13 @@ further_reading:
 - link: /tracing/metrics
   tag: Documentation
   text: En savoir plus sur les métriques APM
-kind: guide
+
 title: Utiliser vos métriques USM dans des monitors, des SLO et des dashboards
 ---
 
 ## Présentation
 
-La solution [Universal Service Monitoring][1] permet de découvrir les services qui utilisent des tags de conteneur populaires (tels que `app`, `short_image` ou `kube_deployment`) et de générer des entrées dans le [Service Catalog][2] pour ces services. 
+La solution [Universal Service Monitoring][1] permet de découvrir les services qui utilisent des tags de conteneur populaires (tels que `app`, `short_image` ou `kube_deployment`) et de générer des entrées dans le [Service Catalog][2] pour ces services.
 
 Dans Datadog, vous pouvez accéder à des métriques de requêtes, d'erreurs et de durée pour le trafic entrant et sortant de tous les services découverts avec Universal Service Monitoring. Ces métriques de santé des services peuvent ensuite être utilisées pour créer des alertes, [suivre les déploiements][11] et définir des [Service Level Objectives (SLO)][3] afin d'obtenir une visibilité étendue sur tous les services exécutés au sein de votre infrastructure.
 
@@ -109,7 +109,7 @@ Pour en savoir plus, consultez la [documentation dédiée aux Service Level Obje
 
 ### Accéder à un dashboard défini
 
-Le [Service Catalog][2] identifie les dashboards définis dans votre fichier de définition de service et les répertorie sur l'onglet **Dashboards**. Cliquez sur **Manage Dashboards** pour accéder à la définition de service et la modifier directement dans GitHub. 
+Le [Service Catalog][2] identifie les dashboards définis dans votre fichier de définition de service et les répertorie sur l'onglet **Dashboards**. Cliquez sur **Manage Dashboards** pour accéder à la définition de service et la modifier directement dans GitHub.
 
 {{< img src="universal_service_monitoring/guide/manage_dashboards.png" alt="Bouton Manage Dashboards sur l'onglet Dashboards d'un service dans le Service Catalog" style="width:90%;" >}}
 

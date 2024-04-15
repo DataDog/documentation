@@ -1,6 +1,6 @@
 ---
 title: Log collection with Docker socket
-kind: faq
+
 aliases:
  - /agent/faq/kubernetes-docker-socket-log-collection
 further_reading:
@@ -20,7 +20,7 @@ The Datadog Agent has two ways to collect logs: from Kubernetes log files, or fr
 * Docker is not the runtime, **or**
 * More than 10 containers are used on each node
 
-The Docker API is optimized to get logs from one container at a time. When there are many containers in the same node, collecting logs through the Docker socket may consume more resources than collecting logs through Kubernetes log files. 
+The Docker API is optimized to get logs from one container at a time. When there are many containers in the same node, collecting logs through the Docker socket may consume more resources than collecting logs through Kubernetes log files.
 
 This page discusses log collection with the Docker socket. To use Kubernetes log files, see [Kubernetes log collection][1].
 

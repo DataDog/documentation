@@ -21,7 +21,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
   tag: GitHub
   text: Configurer des alertes de pipeline avec les monitors CI Datadog
-kind: documentation
+
 title: Continuous Integration Visibility
 ---
 
@@ -49,7 +49,7 @@ Pour les ingénieurs build, la page Pipelines comprend :
 - un aperçu de la santé de l'ensemble du système de build, avec des statistiques agrégées pour les exécutions de pipelines et les branches ;
 - Une vue permettant de détecter et de résoudre rapidement les problèmes immédiats et urgents, comme les pipelines défectueux mis en production ;
 - des informations sur l'exécution globale de chaque pipeline, ainsi que les résultats obtenus et les tendances détectées ;
-- une analyse détaillée du temps consacré à chaque tâche de chaque étape de build, afin de concentrer vos efforts là où ils feront une réelle différence. 
+- une analyse détaillée du temps consacré à chaque tâche de chaque étape de build, afin de concentrer vos efforts là où ils feront une réelle différence.
 
 Les données sur les pipelines de CI peuvent être présentées dans des [dashboards][1] et des [notebooks][2]. Les ingénieurs build peuvent donc personnaliser leurs visualisations sur l'évolution des tâches prioritaires et des tendances CI.
 

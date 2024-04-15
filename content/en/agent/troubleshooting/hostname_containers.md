@@ -1,6 +1,6 @@
 ---
 title: Hostname Detection in Containers
-kind: documentation
+
 ---
 
 Many features in Datadog rely on the Agent to provide an accurate hostname for monitored hosts. While this is straightforward when the Agent runs directly on a host, the hostname resolution process is different when the Agent runs in a containerized environment.
@@ -23,7 +23,7 @@ On Kubernetes, a hostname error usually means the Agent cannot access at least o
 
 Some Kubernetes distributions require a dedicated configuration, so verify that your setup is aligned with our [recommended Kubernetes setup][1].
 
-### Accessing the Kubelet API 
+### Accessing the Kubelet API
 
 Make sure the Agent can access the Kubelet API. When it can, the Agent prints this log:
 ```

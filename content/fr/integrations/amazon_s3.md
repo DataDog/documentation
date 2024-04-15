@@ -18,7 +18,7 @@ integration_id: amazon-s3
 integration_title: Amazon S3
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: amazon_s3
 public_title: Intégration Datadog/Amazon S3
@@ -68,7 +68,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][8] dans votre compte AWS. 
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][8] dans votre compte AWS.
 2. Une fois la fonction Lambda installée, vous pouvez recueillir vos logs d'accès S3 de deux façons :
 
     - Solution automatique : les logs S3 sont automatiquement gérés si vous accordez les autorisations nécessaires à Datadog. Consultez la section [Configurer automatiquement des déclencheurs][9] pour en savoir plus sur la configuration de la collecte automatique des logs sur la fonction Lambda du Forwarder Datadog.

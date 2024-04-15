@@ -9,14 +9,14 @@ further_reading:
 - link: /logs/search_syntax/
   tag: Documentation
   text: En savoir plus sur la syntaxe de l'API Logs Search
-kind: guide
+
 title: Programmation de l'accès aux données de log à l'aide de l'API Logs Search
 ---
 
 
 ## Présentation
 
-Utilisez l'[API Logs Search][1] pour programmer l'accès à vos données de log et l'exécution de vos requêtes. 
+Utilisez l'[API Logs Search][1] pour programmer l'accès à vos données de log et l'exécution de vos requêtes.
 
 Les scénarios suivants sont abordés dans ce guide :
 

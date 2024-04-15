@@ -1,6 +1,6 @@
 ---
 title: Search Test Runs
-kind: documentation
+
 description: Examine all of your test runs and troubleshoot failing test results.
 further_reading:
 - link: '/continuous_testing/explorer'
@@ -15,7 +15,7 @@ After selecting a time frame from the dropdown menu on the top right, you can se
 You can use facets to accomplish the following actions:
 
 - Observe the latest test runs that required retries.
-- Aggregate failed API test runs by HTTP status code and plot trends. 
+- Aggregate failed API test runs by HTTP status code and plot trends.
 
 ## Explore facets
 

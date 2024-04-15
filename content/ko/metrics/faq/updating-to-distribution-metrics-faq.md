@@ -4,7 +4,7 @@ further_reading:
   tag: FAQ
   text: 외부 로그 전달자를 통해 Datadog에 어떻게 로그를 전송할 수 있나요?
 is_beta: true
-kind: faq
+
 title: 분포 메트릭 업데이트 워크플로 FAQ
 ---
 

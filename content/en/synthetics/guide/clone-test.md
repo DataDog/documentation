@@ -1,6 +1,6 @@
 ---
 title: Clone Your Synthetic Tests
-kind: guide
+
 aliases:
   - /synthetics/faq/clone-test/
 further_reading:
@@ -15,7 +15,7 @@ To clone a Synthetics test, use the UI or API endpoints.
 
 ## Use the UI
 
-1. In a Synthetics test, click the **Gear** icon on the right.  
+1. In a Synthetics test, click the **Gear** icon on the right.
 2. Click **Clone** in the dropdown menu.
 
 {{< img src="synthetics/faq/clone-test.mp4" alt="Cloning your Synthetic tests" video="true" width="90%" >}}

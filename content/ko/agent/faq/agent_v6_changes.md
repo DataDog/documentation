@@ -8,7 +8,7 @@ further_reading:
 - link: /agent/faq/how-datadog-agent-determines-the-hostname/
   tag: 설명서
   text: Datadog에서 Agent 호스트네임을 결정하는 방법
-kind: faq
+
 title: Agent v6 변경 사항
 ---
 

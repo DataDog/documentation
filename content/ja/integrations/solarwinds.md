@@ -12,7 +12,7 @@ integration_id: ''
 integration_title: SolarWinds
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: solarwinds
 public_title: Datadog-SolarWinds インテグレーション
@@ -59,7 +59,7 @@ SolarWinds で新規トリガーアクションを作成します:
 3. Send Alert to Datadog - Reset アクションを使い、Assign Action > Assign Reset Action を繰り返します
 
 ### 投稿するトリガーアクション本文
-``` 
+```
 {
     "acknowledged": "${N=Alerting;M=Acknowledged}",
     "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
@@ -79,10 +79,10 @@ SolarWinds で新規トリガーアクションを作成します:
     "object_type": "${N=Alerting;M=ObjectType}",
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}"
 }
-``` 
+```
 
 ### 投稿するリセットアクション本文
-``` 
+```
 {
     "acknowledged": "${N=Alerting;M=Acknowledged}",
     "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
@@ -103,7 +103,7 @@ SolarWinds で新規トリガーアクションを作成します:
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}",
     "reset": "true"
 }
-``` 
+```
 
 ## リアルユーザーモニタリング
 

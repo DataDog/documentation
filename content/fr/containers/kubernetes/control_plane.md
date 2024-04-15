@@ -20,7 +20,7 @@ further_reading:
 - link: /agent/kubernetes/tag
   tag: Documentation
   text: Attribuer des tags à toutes les données envoyées par un conteneur
-kind: documentation
+
 title: Surveillance du plan de contrôle Kubernetes
 ---
 
@@ -40,7 +40,7 @@ Grâce aux intégrations Datadog pour le [serveur d'API][1], [Etcd][2], [Control
 
 ## Kubernetes avec Kubeadm {#Kubeadm}
 
-Les configurations suivantes ont été testées pour Kubernetes `v1.18+`. 
+Les configurations suivantes ont été testées pour Kubernetes `v1.18+`.
 
 ### Serveur d'API
 
@@ -618,7 +618,7 @@ La version 2.5 de Rancher se base sur [PushProx][9] pour exposer les endpoints 
 ### Prérequis
 
 1. Installez l'Agent Datadog avec le [chart rancher-monitoring][10].
-2. Les daemonsets `pushprox` sont déployés avec `rancher-monitoring` et s'exécutent dans l'espace de nommage `cattle-monitoring-system`. 
+2. Les daemonsets `pushprox` sont déployés avec `rancher-monitoring` et s'exécutent dans l'espace de nommage `cattle-monitoring-system`.
 
 ### Serveur d'API
 

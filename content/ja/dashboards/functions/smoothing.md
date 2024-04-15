@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/graphing/functions/smoothing/
-kind: documentation
+
 title: スムーシング
 ---
 
@@ -87,7 +87,7 @@ title: スムーシング
 
 {{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20" style="width:80%;">}}
 
-## 中央値 
+## 中央値
 
 ### 中央値 3
 
@@ -121,8 +121,8 @@ title: スムーシング
 
 注: スパン値はデータポイントの数です。したがって、`median_9()` は、最後の 9 つのデータポイントを使用して中央値を計算します。
 
-## Weighted 
-<div class="alert alert-info">Weighted() は、ゲージタイプのメトリクスで `SUM BY` をクエリする場合にのみ使用できます。</div> 
+## Weighted
+<div class="alert alert-info">Weighted() は、ゲージタイプのメトリクスで `SUM BY` をクエリする場合にのみ使用できます。</div>
 
 | 関数       | 説明                                                           | 例                        |
 | :----          | :-------                                                              | :---------                     |

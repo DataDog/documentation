@@ -1,5 +1,5 @@
 ---
-kind: faq
+
 title: Circle CI 보안 인시던트가 Datadog 에이전트에 미치는 영향
 ---
 <details>
@@ -72,7 +72,7 @@ title: Circle CI 보안 인시던트가 Datadog 에이전트에 미치는 영향
    $ rpm -q gpg-pubkey-4172a230-55dd14f6
    ```
 
-   명령이 성공적으로 실행되고 `gpg-pubkey-4172a230-55dd14f6`를 인쇄하면 **호스트가 키를 신뢰하고 작업을 요청합니다**. 0이 아닌 코드로 종료하고 `package gpg-pubkey-4172a230-55dd14f6 is not installed`와 같은 메시지가 출력되며 명령이 실패하면 **호스트는 RPM 데이터베이스의 키를 신뢰하지 않습니다**. 
+   명령이 성공적으로 실행되고 `gpg-pubkey-4172a230-55dd14f6`를 인쇄하면 **호스트가 키를 신뢰하고 작업을 요청합니다**. 0이 아닌 코드로 종료하고 `package gpg-pubkey-4172a230-55dd14f6 is not installed`와 같은 메시지가 출력되며 명령이 실패하면 **호스트는 RPM 데이터베이스의 키를 신뢰하지 않습니다**.
 
 2. Datadog 레포 파일을 점검합니다. 파일의 기본 위치는 다음과 같습니다.
 

@@ -38,7 +38,7 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive sur l'amélioration des visualisations
     avec des dashboards
-kind: documentation
+
 title: Dashboards
 ---
 
@@ -73,7 +73,7 @@ Pour créer un dashboard, cliquez sur **+New Dashboard** sur la page [Dashboard 
 
 {{< img src="dashboards/create-dashboard.png" alt="Ajout d'un nouveau dashboard" style="width:70%;">}}
 
-Dashboards 
+Dashboards
 : ils sont disposés au sein d'une grille qui peut inclure un vaste choix d'objets, tels que des images, des graphiques et des logs. Ils servent généralement à visualiser les statuts de vos services et à mettre en récit vos données. Ils peuvent être mis à jour en temps réel et représenter des points fixes historiques. Leur grille peut inclure jusqu'à 12 carrés. Ils s'avèrent également très utiles pour le debugging.
 
 Timeboards

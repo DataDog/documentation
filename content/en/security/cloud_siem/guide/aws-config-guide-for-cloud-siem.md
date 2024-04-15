@@ -1,6 +1,6 @@
 ---
 title: AWS Configuration Guide for Cloud SIEM
-kind: documentation
+
 further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
@@ -43,22 +43,22 @@ This guide walks you through the following steps so that you can start detecting
 3. Select the AWS Region where the CloudFormation stack will be launched.
 4. Select or create the Datadog API Key used to send data from your AWS account to Datadog.
 5. Select **Yes** for *Send Logs to Datadog*. This sets up the Datadog Lambda Forwarder to be used later for sending AWS CloudTrail logs to Datadog.
-6. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack with the parameters filled in based on your selections in the prior Datadog form. 
+6. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack with the parameters filled in based on your selections in the prior Datadog form.
 
-    **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account. 
+    **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
 
 7. Check the required boxes from AWS and click **Create stack**.
 8. After the CloudFormation stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
 
 See [Getting Started with AWS][3] for more information about Datadog's AWS integration and CloudFormation template. See [AWS manual setup instructions][4] if you need to set up the AWS integration manually.
 
-## Enable AWS CloudTrail logging 
+## Enable AWS CloudTrail logging
 
 Enable AWS CloudTrail logging so that logs are sent to a S3 bucket. If you already have this setup, skip to [Send AWS CloudTrail logs to Datadog](#send-aws-cloudtrail-logs-to-datadog).
 
 1. Click **Create trail** on the [CloudTrail dashboard][5].
 2. Enter in the name for your trail.
-3. Create a new S3 bucket or use an existing S3 bucket to store the CloudTrail logs. 
+3. Create a new S3 bucket or use an existing S3 bucket to store the CloudTrail logs.
 4. Create a new AWS KMS key or use an existing AWS KMS key. Click **Next**.
 5. Leave the event type with the default management read and write events, or choose additional event types you want to send to Datadog. Click **Next**.
 6. Review and click **Create trail**.
@@ -70,12 +70,12 @@ Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail lo
 1. Go to the [Datadog Forwarder Lambda][6] that was created during the AWS integration set up.
 2. Click **Add trigger**.
 3. Select **S3** for the trigger.
-4. Select the S3 bucket you are using to collect AWS CloudTrail logs. 
+4. Select the S3 bucket you are using to collect AWS CloudTrail logs.
 5. For Event type, select **All object create events**.
 6. Click **Add**.
 7. See CloudTrail logs in Datadog's [Log Explorer][7].
 
-See [Log Explorer][8] for more information on how to search and filter, group, and visualize your logs. 
+See [Log Explorer][8] for more information on how to search and filter, group, and visualize your logs.
 
 ## Use Cloud SIEM to triage Security Signals
 

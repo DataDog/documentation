@@ -11,7 +11,7 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: 설명서
   text: 커스텀 통합
-kind: faq
+
 title: Docker 소켓을 사용한 로그 수집
 ---
 

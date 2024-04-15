@@ -1,6 +1,6 @@
 ---
 title: Configurations
-kind: Documentation
+
 aliases:
   - /integrations/observability_pipelines/vector_configurations/
   - /observability_pipelines/vector_configurations/

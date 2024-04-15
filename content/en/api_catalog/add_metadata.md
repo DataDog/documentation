@@ -1,6 +1,6 @@
 ---
 title: Adding Metadata to APIs
-kind: documentation
+
 is_beta: true
 further_reading:
 - link: "/tracing/service_catalog/"
@@ -17,7 +17,7 @@ You can add metadata to APIs through the Datadog UI or API, or use automated pip
 
 ## Metadata structure and supported versions
 
-API Catalog supports OpenAPI 2 and 3 as the format for defining APIs. 
+API Catalog supports OpenAPI 2 and 3 as the format for defining APIs.
 
 Datadog supports custom OpenAPI fields to help manage metadata:
 - **API owner**: Add the following to the top level of the OpenAPI file:

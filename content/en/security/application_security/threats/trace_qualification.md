@@ -1,7 +1,7 @@
 ---
 title: Trace Qualification
-kind: documentation
-aliases:  
+
+aliases:
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

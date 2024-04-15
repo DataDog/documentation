@@ -1,6 +1,6 @@
 ---
 title: Run Tests On Applications Using A Shadow DOM
-kind: guide
+
 further_reading:
     - link: '/synthetics/browser_tests'
       tag: 'Documentation'
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Shadow Document Object Model (DOM) API is a web component that allows an encapsulated DOM tree to attach to an HTML element. The [shadow DOM][1] is self-contained and stays isolated from the main document's DOM. 
+The Shadow Document Object Model (DOM) API is a web component that allows an encapsulated DOM tree to attach to an HTML element. The [shadow DOM][1] is self-contained and stays isolated from the main document's DOM.
 
 You may use a shadow DOM for the following use cases:
 
@@ -27,7 +27,7 @@ Depending on the [encapsulation mode][2] and the step objective, leverage browse
 
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/open-shadow-dom.png" alt="Open Shadow DOM" style="width:50%;" >}}
 
-In `open` mode, normal assertions are unavailable. You can use JavaScript assertions to interact with and validate elements rendered in a shadow DOM with the `Element.shadowRoot` property. 
+In `open` mode, normal assertions are unavailable. You can use JavaScript assertions to interact with and validate elements rendered in a shadow DOM with the `Element.shadowRoot` property.
 
 ### Assert text presence
 
@@ -48,17 +48,17 @@ For example, the following code snippet validates the text "TODO" rendered in an
 ```
 // find element to which the Shadow DOM is attached:
 let element = document.querySelector("body > editable-list")
- 
+
 // use the shadowRoot property to locate the <h3> element in the Shadow DOM:
 let shadowDomElement = element.shadowRoot.querySelector("div > h3")
- 
+
 // check textContent of the Shadow DOM element:
 return shadowDomElement.textContent.includes("TODO")
 ```
 
 ### Enter text into input fields
 
-When text input fields are rendered in the main document's DOM tree, the Datadog browser test recorder automatically records inputted values and creates a [Type Text][3] test step. 
+When text input fields are rendered in the main document's DOM tree, the Datadog browser test recorder automatically records inputted values and creates a [Type Text][3] test step.
 
 When working with input fields rendered in a shadow DOM, the recorder may be unable to capture a complete set of reference points to the element, causing the step to fail on test runs. As a workaround for entering text into a text input field rendered in a shadow DOM, add a JavaScript assertion that locates the respective `<input>` element and sets the `value` field.
 
@@ -69,13 +69,13 @@ For example, the following code snippet adds the text "Item added with JS assert
 ```js
 // find element to which the Shadow DOM is attached:
 let element = document.querySelector("body > editable-list")
- 
+
 // use the shadowRoot property to locate the <input> element in the Shadow DOM:
 let shadowDomInput = element.shadowRoot.querySelector("input")
- 
+
 // set the value property of the <input> element:
 shadowDomInput.value = "Item added with JS assertion"
- 
+
 return true
 ```
 
@@ -90,13 +90,13 @@ For example, the following code snippet triggers a click on a button element.
 ```
 // find element to which the Shadow DOM is attached:
 let element = document.querySelector("body > editable-list")
- 
+
 // use the shadowRoot property to locate the <button> element in the Shadow DOM:
 let shadowDomButton = element.shadowRoot.querySelector("button.editable-list-add-item")
- 
+
 // trigger a click on the button:
 shadowDomButton.click()
- 
+
 return true
 ```
 

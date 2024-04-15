@@ -18,7 +18,7 @@ integration_id: amazon-ec2
 integration_title: Amazon EC2
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 monitors:
   ec2_cpu_utilization: assets/monitors/ec2_cpu_utilization.json
@@ -142,7 +142,7 @@ Utilisez l'[Agent Datadog][18] ou un autre [shipper de logs][19] pour envoyer vo
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
-**Remarques** : 
+**Remarques** :
    - La métrique `aws.ec2.instance_age` n'est pas recueillie par défaut avec l'intégration Datadog/EC2. Contactez l'[assistance Datadog][21] pour activer la collecte de cette métrique.
    - La métrique `aws.ec2.host_ok` est recueillie par défaut, même si vous désactivez la collecte de métriques pour l'intégration Amazon EC2. Elle peut entraîner l'affichage de hosts inattendus dans la liste d'infrastructure. Pour masquer ces hosts, appliquez un tag AWS, comme `datadog:true`, à ces instances EC2. Ajoutez ensuite ce tag dans la zone de texte **Limit metric collection to specific resources** de l'onglet **Metric Collection** sur la [page de votre intégration Datadog/AWS][2].
 

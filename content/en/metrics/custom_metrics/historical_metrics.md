@@ -1,6 +1,6 @@
 ---
 title: Historical Metrics Ingestion
-kind: documentation
+
 further_reading:
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
   tag: "Blog"
@@ -29,7 +29,7 @@ For example, your metric (`exampleMetricA`) emits a value to Datadog at 1:00 PM 
 
 With Historical Metrics Ingestion enabled, if you submit multiple values with the same timestamp and same tag-value combination to Datadog, Datadog preserves the most recently submitted value. That is, If within the same timestamp, you submit a metric with a value of X, and also send that metric with a value of Y, whichever value is the most recently submitted will be preserved.
 
-You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.  
+You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.
 
 **Note**: Historical Metrics Ingestion is not available for distribution metrics.
 
@@ -57,7 +57,7 @@ You can enable Historical Metrics Ingestion for multiple metrics at once, rather
 
 After enabling Historical Metrics Ingestion, you can submit metric values with historical timestamps through the [API](#api) or through the [Agent](#agent).
 
-### API 
+### API
 
 With the API, you can submit metric values with historical timestamps in the payload (as long as the metric name has already been enabled to accept historical metrics through the user interface described above).
 
@@ -142,7 +142,7 @@ public class Example {
                         .points(
                             Collections.singletonList(
                                 new MetricPoint()
-                            
+
                                     //Add historical timestamp here
                                     .timestamp(OffsetDateTime.now().toInstant().getEpochSecond())
                                     //***********************
@@ -191,7 +191,7 @@ func main() {
 				Metric: "system.load.1",
 				Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
 				Points: []datadogV2.MetricPoint{
-					{   
+					{
                         //Add historical timestamp here
 						Timestamp: datadog.PtrInt64(time.Now().Unix()),
                         //***********************
@@ -240,9 +240,9 @@ body = DatadogAPIClient::V2::MetricPayload.new({
       points: [
         DatadogAPIClient::V2::MetricPoint.new({
 
-          #Add historical timestamp here  
+          #Add historical timestamp here
           timestamp: Time.now.to_i,
-          #***********************  
+          #***********************
 
           value: 0.7,
         }),

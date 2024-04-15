@@ -1,6 +1,6 @@
 ---
 title: AWS Lambda metrics
-kind: documentation
+
 aliases:
   - /serverless/custom_metrics
   - /serverless/enhanced_lambda_metrics
@@ -8,7 +8,7 @@ aliases:
   - /serverless/real_time_enhanced_metrics
 ---
 
-This page discusses metrics for monitoring serverless applications on AWS Lambda. 
+This page discusses metrics for monitoring serverless applications on AWS Lambda.
 
 After you [install Serverless Monitoring for AWS Lambda][1], Datadog generates [enhanced metrics](#enhanced-lambda-metrics) from your Lambda runtime. You can also [submit custom metrics](#submit-custom-metrics) to Datadog from your Lambda functions.
 
@@ -34,7 +34,7 @@ Datadog generates enhanced Lambda metrics from your Lambda runtime out-of-the-bo
 
 Enhanced Lambda metrics are in addition to the default [Lambda metrics][6] enabled with the AWS Lambda integration. Enhanced metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace. You can view these metrics on the [Enhanced Lambda Metrics default dashboard][7].
 
-The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags. 
+The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags.
 
 These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations.
 
@@ -400,9 +400,9 @@ For example:
 
 #### Submitting many data points
 
-Using the Forwarder to submit many data points for the same metric and the same set of tags (for example, inside a big `for`-loop) may impact Lambda performance and CloudWatch cost. 
+Using the Forwarder to submit many data points for the same metric and the same set of tags (for example, inside a big `for`-loop) may impact Lambda performance and CloudWatch cost.
 
-You can aggregate the data points in your application to avoid the overhead. 
+You can aggregate the data points in your application to avoid the overhead.
 
 For example, in Python:
 

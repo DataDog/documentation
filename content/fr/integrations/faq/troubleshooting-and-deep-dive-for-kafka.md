@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/producer-and-consumer-metrics-don-t-appear-in-my-datadog-application
-kind: faq
+
 title: Dépannage et analyse approfondie pour Kafka
 ---
 

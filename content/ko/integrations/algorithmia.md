@@ -36,7 +36,7 @@ integration_id: algorithmia
 integration_title: Algorithmia
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: 2.0.0
 name: algorithmia
 public_title: Algorithmia
@@ -68,14 +68,14 @@ tile:
 
 ![Datadog 내의 Algorithmia Insights][2]
 
-Algorithmia Insights는 Algorithmia Enterprise 기능으로, 기계 학습 모델을 계측, 
+Algorithmia Insights는 Algorithmia Enterprise 기능으로, 기계 학습 모델을 계측,
 측정, 모니터할 수 있는 메트릭 파이프라인을 제공합니다. 기계 학습 분야 모니터링
- 추론 관련 메트릭 사용 사례에는 모델 드리프트, 
-데이터 드리프트, 모델 바이어스 등이 
+ 추론 관련 메트릭 사용 사례에는 모델 드리프트,
+데이터 드리프트, 모델 바이어스 등이
 있습니다.
 
-이 통합을 이용하면 작동 메트릭은 물론, 사용자 정의, 추론 관련 
-메트릭을 Algorithmia에서 Kafka로, 또 Datadog 메트릭 API로 스트림할 
+이 통합을 이용하면 작동 메트릭은 물론, 사용자 정의, 추론 관련
+메트릭을 Algorithmia에서 Kafka로, 또 Datadog 메트릭 API로 스트림할
 수 있습니다.
 
 ## 설정

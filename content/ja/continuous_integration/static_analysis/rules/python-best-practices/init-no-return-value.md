@@ -1,7 +1,7 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
+
 title: __init__ 関数でリターンしない
 ---
 ## メタデータ

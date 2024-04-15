@@ -1,6 +1,6 @@
 ---
 title: Node.js Log Collection
-kind: documentation
+
 aliases:
   - /logs/languages/nodejs
 further_reading:
@@ -21,7 +21,7 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 - link: "/glossary/#tail"
   tag: Glossary
-  text: 'Glossary entry for "tail"'  
+  text: 'Glossary entry for "tail"'
 ---
 
 

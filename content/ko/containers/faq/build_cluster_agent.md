@@ -2,7 +2,7 @@
 aliases:
 - /ko/agent/cluster_agent/build
 - /ko/containers/cluster_agent/build
-kind: faq
+
 title: Datadog 클러스터 에이전트 빌드
 ---
 

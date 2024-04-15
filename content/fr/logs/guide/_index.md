@@ -5,7 +5,7 @@ cascade:
     rank: 20
     subcategory: Guides sur les logs
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides sur les logs
 ---
@@ -25,7 +25,7 @@ title: Guides sur les logs
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Envoyer des événements et des logs à Datadog à l'aide des destinations API d'Amazon EventBridge{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Configurer le Forwarder Lambda Datadog{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Envoyer des logs Azure à Datadog{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Envoyer des logs Azure avec la ressource Datadog{{< /nextlink >}}    
+    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Envoyer des logs Azure avec la ressource Datadog{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Recueillir des logs Heroku{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Envoyer des logs de services AWS avec la fonction Lambda Datadog{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Dépannage pour la collecte de logs{{< /nextlink >}}
@@ -36,7 +36,7 @@ title: Guides sur les logs
     {{< nextlink href="logs/guide/increase-number-of-log-files-tailed" >}}Augmenter le nombre de fichiers de log suivis par l'Agent{{< /nextlink >}}
     {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}Utiliser l'Agent de conteneur pour suivre des logs provenant du host{{< /nextlink >}}
     {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}Pratiques à suivre pour ne perdre aucun log{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}Envoyer des logs à partir d'un fichier de log personnalisé avec une élévation des autorisations de lecture{{< /nextlink >}}   
+    {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}Envoyer des logs à partir d'un fichier de log personnalisé avec une élévation des autorisations de lecture{{< /nextlink >}}
     {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Envoyer des logs AWS EKS Fargate avec Kinesis Data Firehose{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -48,7 +48,7 @@ title: Guides sur les logs
     {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}Règles de nettoyage de logs couramment utilisées{{< /nextlink >}}
     {{< nextlink href="/logs/guide/logs-not-showing-expected-timestamp" >}}Timestamp incorrect dans les logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/remap-custom-severity-to-official-log-status" >}}Remapper des valeurs de gravité personnalisées pour le statut officiel des logs{{< /nextlink >}}
-    {{< nextlink href="logs/guide/logs-show-info-status-for-warnings-or-errors" >}}Logs avec un statut Info en cas d'avertissement ou d'erreur{{< /nextlink >}} 
+    {{< nextlink href="logs/guide/logs-show-info-status-for-warnings-or-errors" >}}Logs avec un statut Info en cas d'avertissement ou d'erreur{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

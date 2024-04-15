@@ -10,7 +10,7 @@ further_reading:
 - link: /metrics/distributions/
   tag: Documentation
   text: Distributions de métriques
-kind: documentation
+
 title: Metrics Summary
 ---
 
@@ -43,7 +43,7 @@ Vous pouvez configurer plusieurs métriques à la fois à l'aide de deux boutons
 
 * **Configure Tags** : cette option vous permet de configurer des tags pour plusieurs métriques custom partageant un espace de nommage commun à l'aide de la solution Metrics without Limits™.
 
-{{< img src="metrics/summary/bulkconfig.mp4" alt="Configuration groupée de tags pour les métriques" video=true style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig.mp4" alt="Configuration groupée de tags pour les métriques" video=true style="width:75%;">}}
 
 ## Volet latéral d'une métrique
 

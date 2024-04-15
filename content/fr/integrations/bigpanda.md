@@ -14,7 +14,7 @@ integration_id: ''
 integration_title: BigPanda
 integration_version: ''
 is_public: true
-kind: integration
+
 manifest_version: '1.0'
 name: bigpanda
 public_title: Intégration Datadog/BigPanda
@@ -47,7 +47,7 @@ Pour installer l'intégration BigPanda, accédez à son [carré d'intégration][
 
 ### Utilisation
 
-La plateforme BigPanda crée des incidents lorsqu'elle commence à recevoir des événements de Datadog. Les incidents conservent des informations pertinentes telles que le nom du monitor qui a été déclenché et la condition à l'origine de l'alerte. 
+La plateforme BigPanda crée des incidents lorsqu'elle commence à recevoir des événements de Datadog. Les incidents conservent des informations pertinentes telles que le nom du monitor qui a été déclenché et la condition à l'origine de l'alerte.
 Le statut des incidents peut évoluer (de Active à Resolved) en fonction des transitions dont font l'objet les monitors. Pour interrompre l'envoi d'alertes de Datadog à BigPanda, désinstallez simplement l'intégration depuis son carré.
 
 ## Données collectées
