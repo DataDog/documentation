@@ -23,8 +23,8 @@ main:
   - name: Security
     identifier: security_platform_heading
     weight: 8000000
-  - name: UX Monitoring
-    identifier: ux_monitoring_heading
+  - name: Digital Experience
+    identifier: digital_experience_heading
     weight: 9000000
   - name: Administration
     identifier: administration_heading
@@ -630,6 +630,11 @@ main:
     identifier: otel_batch_memory
     parent: otel_collector_configuration
     weight: 3038
+  - name: Kafka Metrics
+    url: opentelemetry/integrations/kafka_metrics/
+    identifier: otel_gs_kafka_metrics
+    parent: otel_integrations
+    weight: 3039
   - name: Schema and Semantics
     url: opentelemetry/schema_semantics/
     identifier: otel_schema
@@ -715,6 +720,10 @@ main:
     identifier: otel_guides_delta_temporality
     parent: otel_guides
     weight: 803
+  - name: Sending Data from OpenTelemetry Demo
+    url: /opentelemetry/guide/otel_demo_to_datadog/
+    parent: otel_guides
+    weight: 804
   - name: Developers
     url: developers/
     pre: dev-code
@@ -1115,12 +1124,33 @@ main:
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
     weight: 5
+  - name: Bits AI
+    url: bits_ai/
+    pre: bits-ai
+    identifier: bits_ai
+    parent: platform_heading
+    weight: 20000
+  - name: Getting Started
+    url: bits_ai/getting_started
+    identifier: bits_ai_getting_started
+    parent: bits_ai
+    weight: 1
+  - name: Managing Incidents
+    url: bits_ai/managing_incidents
+    identifier: bits_ai_managing_incidents
+    parent: bits_ai
+    weight: 2
+  - name: Natural Language Querying
+    url: bits_ai/query_examples
+    identifier: bits_ai_natural_language_querying
+    parent: bits_ai
+    weight: 3
   - name: Dashboards
     url: dashboards/
     pre: dashboard
     identifier: dashboards
     parent: platform_heading
-    weight: 20000
+    weight: 30000
   - name: Configure
     identifier: dashboards_configure
     url: dashboards/configure/
@@ -1241,7 +1271,7 @@ main:
     identifier: infrastructure
     pre: host-map
     parent: platform_heading
-    weight: 30000
+    weight: 40000
   - name: Host and Container Maps
     url: infrastructure/hostmap/
     parent: infrastructure
@@ -1302,7 +1332,7 @@ main:
     identifier: metrics_top_level
     pre: metric
     parent: platform_heading
-    weight: 40000
+    weight: 50000
   - name: Custom Metrics
     url: metrics/custom_metrics/
     parent: metrics_top_level
@@ -1393,7 +1423,7 @@ main:
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 50000
+    weight: 60000
   - name: Guides
     url: notebooks/guide
     parent: notebooks
@@ -1404,7 +1434,7 @@ main:
     pre: monitor
     identifier: alerting
     parent: platform_heading
-    weight: 60000
+    weight: 70000
   - name: Configure Monitors
     url: monitors/configuration/
     parent: alerting
@@ -1585,7 +1615,7 @@ main:
     pre: service-catalog
     parent: platform_heading
     identifier: service_catalog
-    weight: 70000
+    weight: 80000
   - name: Browsing
     url: service_catalog/browsing
     parent: service_catalog
@@ -1636,7 +1666,7 @@ main:
     pre: api-catalog
     parent: platform_heading
     identifier: api_catalog
-    weight: 80000
+    weight: 90000
   - name: Exploring APIs
     url: /api_catalog/explore_apis/
     identifier: api_catalog_explore
@@ -1682,7 +1712,7 @@ main:
     pre: error-tracking
     parent: platform_heading
     identifier: error_tracking
-    weight: 90000
+    weight: 100000
   - name: Explorer
     url: error_tracking/explorer
     parent: error_tracking
@@ -2344,45 +2374,50 @@ main:
     weight: 8
   - name: Cloud Cost
     url: cloud_cost_management/
-    identifier: cloud_cost_top_level
+    identifier: cloud_cost
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 30000
   - name: AWS
     url: cloud_cost_management/aws
-    parent: cloud_cost_top_level
-    identifier: ccm_aws
+    parent: cloud_cost
+    identifier: cloud_cost_aws
     weight: 1
   - name: Azure
     url: cloud_cost_management/azure
-    parent: cloud_cost_top_level
-    identifier: ccm_azure
+    parent: cloud_cost
+    identifier: cloud_cost_azure
     weight: 2
   - name: Google Cloud
     url: cloud_cost_management/google_cloud
-    parent: cloud_cost_top_level
-    identifier: ccm_google_cloud
+    parent: cloud_cost
+    identifier: cloud_cost_google_cloud
     weight: 3
   - name: Custom Costs
     url: cloud_cost_management/custom
-    parent: cloud_cost_top_level
-    identifier: ccm_custom
+    parent: cloud_cost
+    identifier: cloud_cost_custom
     weight: 4
   - name: SaaS Cost Integrations
     url: cloud_cost_management/saas_costs
-    parent: cloud_cost_top_level
-    identifier: ccm_saas_cost_integrations
+    parent: cloud_cost
+    identifier: cloud_cost_saas_cost_integrations
     weight: 5
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
-    parent: cloud_cost_top_level
-    identifier: tag_pipelines
+    parent: cloud_cost
+    identifier: cloud_cost_tag_pipelines
     weight: 6
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
-    parent: cloud_cost_top_level
-    identifier: container_cost_allocation
+    parent: cloud_cost
+    identifier: cloud_cost_container_cost_allocation
     weight: 7
+  - name: Cost Recommendations
+    url: cloud_cost_management/recommendations
+    parent: cloud_cost
+    identifier: cloud_cost_recommendations
+    weight: 8
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -2735,7 +2770,7 @@ main:
     identifier: tracing_error_tracking_explorer
     weight: 1001
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=apm
+    url: error_tracking/custom_grouping
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
     weight: 1002
@@ -3545,6 +3580,11 @@ main:
     parent: code_analysis
     identifier: code_analysis_github_prs
     weight: 4
+  - name: Troubleshooting
+    url: code_analysis/troubleshooting
+    parent: code_analysis
+    identifier: code_analysis_troubleshooting
+    weight: 5
   - name: Quality Gates
     url: quality_gates/
     pre: ci
@@ -3965,7 +4005,7 @@ main:
     parent: log_management_error_tracking
     weight: 603
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=logs
+    url: error_tracking/custom_grouping
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
@@ -4293,46 +4333,40 @@ main:
     parent: appsec_getting_started
     identifier: appsec_compat
     weight: 201
-  - name: Java
-    url: security/application_security/enabling/java/
+  - name: Using Single Step Instrumentation
+    url: security/application_security/enabling/single_step/
     parent: appsec_getting_started
-    identifier: appsec_java
+    identifier: appsec_enabling_single_step
     weight: 202
-  - name: .NET
-    url: security/application_security/enabling/dotnet/
+  - name: Threat Detection and Protection
+    url: security/application_security/enabling/single_step/threat_detection/
+    parent: appsec_enabling_single_step
+    identifier: appsec_enabling_single_step_threats
+    weight: 2101
+  - name: Code Security
+    url: security/application_security/enabling/single_step/code_security/
+    parent: appsec_enabling_single_step
+    identifier: appsec_enabling_single_step_code
+    weight: 2102
+  - name: Using Datadog Tracing libraries
+    url: security/application_security/enabling/tracing_libraries/
     parent: appsec_getting_started
-    identifier: appsec_dotnet
+    identifier: appsec_enabling_tracing_libraries
     weight: 203
-  - name: Go
-    url: security/application_security/enabling/go/
-    parent: appsec_getting_started
-    identifier: appsec_go
-    weight: 204
-  - name: Ruby
-    url: security/application_security/enabling/ruby/
-    parent: appsec_getting_started
-    identifier: appsec_ruby
-    weight: 205
-  - name: PHP
-    url: security/application_security/enabling/php/
-    parent: appsec_getting_started
-    identifier: appsec_php
-    weight: 206
-  - name: NodeJS
-    url: security/application_security/enabling/nodejs/
-    parent: appsec_getting_started
-    identifier: appsec_nodejs
-    weight: 207
-  - name: Python
-    url: security/application_security/enabling/python/
-    parent: appsec_getting_started
-    identifier: appsec_python
-    weight: 208
-  - name: Serverless
+  - name: Threat Detection and Protection
+    url: security/application_security/enabling/tracing_libraries/threat_detection/
+    parent: appsec_enabling_tracing_libraries
+    identifier: appsec_enabling_tracing_libraries_threats
+    weight: 2101
+  - name: Code Security
+    url: security/application_security/enabling/tracing_libraries/code_security/
+    parent: appsec_enabling_tracing_libraries
+    identifier: appsec_enabling_tracing_libraries_code
+  - name: Enabling ASM for Serverless
     url: security/application_security/enabling/serverless/
     parent: appsec_getting_started
-    identifier: appsec_serverless
-    weight: 209
+    identifier: appsec_enabling_serverless
+    weight: 204
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
@@ -4422,7 +4456,7 @@ main:
     url: synthetics/
     pre: synthetics
     identifier: synthetics
-    parent: ux_monitoring_heading
+    parent: digital_experience_heading
     weight: 50000
   - name: API Tests
     url: synthetics/api_tests/
@@ -4608,7 +4642,7 @@ main:
     url: continuous_testing/
     pre: continuous-testing
     identifier: continuous_testing
-    parent: ux_monitoring_heading
+    parent: digital_experience_heading
     weight: 60000
   - name: Local and Staging Environments
     url: /continuous_testing/environments
@@ -4682,7 +4716,7 @@ main:
     weight: 6
   - name: Mobile Application Testing
     url: mobile_app_testing/
-    parent: ux_monitoring_heading
+    parent: digital_experience_heading
     identifier: mobile_app_testing
     pre: mobile
     weight: 70000
@@ -4715,7 +4749,7 @@ main:
     url: real_user_monitoring/
     pre: rum
     identifier: rum
-    parent: ux_monitoring_heading
+    parent: digital_experience_heading
     weight: 40000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
@@ -5023,7 +5057,7 @@ main:
     identifier: rum_error_tracking_mobile
     weight: 1103
   - name: Custom Grouping
-    url: error_tracking/custom_grouping?tab=rum
+    url: error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
     weight: 1104
@@ -5178,6 +5212,11 @@ main:
     url: account_management/teams/
     parent: account_management
     weight: 7
+  - name: Team Management
+    identifier: account_management_teams_management
+    url: account_management/teams/manage/
+    parent: account_management_teams
+    weight: 701
   - name: Multi-Factor Authentication
     identifier: account_management_mfa
     url: account_management/multi-factor_authentication/
@@ -7862,6 +7901,45 @@ api:
     url: /api/latest/service-level-objectives/
     identifier: service-level-objectives
     generated: true
+  - name: Get SLO report status
+    url: '#get-slo-report-status'
+    identifier: service-level-objectives-get-slo-report-status
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSLOReportJobStatus
+      unstable:
+        - v2
+      order: 102
+  - name: Get SLO report
+    url: '#get-slo-report'
+    identifier: service-level-objectives-get-slo-report
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSLOReport
+      unstable:
+        - v2
+      order: 103
+  - name: Create a new SLO report
+    url: '#create-a-new-slo-report'
+    identifier: service-level-objectives-create-a-new-slo-report
+    parent: service-level-objectives
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSLOReportJob
+      unstable:
+        - v2
+      order: 101
   - name: Get an SLO's history
     url: '#get-an-slos-history'
     identifier: service-level-objectives-get-an-slos-history

@@ -37,7 +37,7 @@ Images are tagged based on semantic versioning, with each new version receiving 
 
 * `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
 * `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
-* `latest`, `latest-apline`: use these to follow the latest version release, which may include breaking changes
+* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
