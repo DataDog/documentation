@@ -56,7 +56,7 @@ Enable monitor renotification (optional) to remind your team that a problem is n
 
 Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
 
-For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert. By default, the renotifications will stop 30 hours after the first alert.
+For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert. By default, the renotifications stop 30 hours after the first alert.
 **Note:** [Attribute and tag variables][7] in the renotification are populated with the data available to the monitor during the time period of the renotification.
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
