@@ -19,31 +19,35 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
-This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-agentless) and [Agent-based](#install-the-datadog-agent-optional) installation. Agentless mode is recommended; for instrastructure metric correlation, use the Agent-based mode.
+## Overview
 
-- **Supported Jenkins versions**:
-  - Jenkins >= 2.346.1
+[Jenkins][19] is an automation server with continuous integration and delivery features. With its plugin architecture, Jenkins can be customized to fit any CI/CD need and automates all aspects of project development, testing, and deployment.
 
-- **Manual steps**: View manually triggered pipelines
+Set up tracing in Jenkins to collect data across various stages of your pipeline executions, identify performance bottlenecks, resolve operational challenges, and refine your deployment processes.
 
-- **Queue time**: View amount of time pipeline jobs wait in the queue before processing
+### Compatibility
 
-- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Manual steps][20] | Manual steps | View manually triggered pipelines. |
+| [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][10]. |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for Jenkins workers. |
+| [Custom spans][26] | Custom spans | Configure custom spans for your pipelines. |
+| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][12] to all generated pipeline, stages, and job spans. |
+| [Custom tags][22] [and measures at runtime][23] | Custom tags and measures at runtime | Configure [custom tags and measures][12] at runtime. |
+| [Parameters][24] | Parameters | Set custom parameters (such as the default branch name or Git information) when a pipeline is triggered. |
+| [Pipeline failure reasons][25] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 
-- **Infrastructure metric correlation**: Correlate pipelines to [infrastructure host metrics][11] for Jenkins workers
+The following Jenkins versions are supported:
 
-- **Custom spans**: Configure custom spans
+- Jenkins >= 2.346.1
 
-- **Custom pre-defined tags**: Configure [custom tags][12] and measures at runtime
-
-- **Parameters**: Set custom parameters such as default branch name and Git information
-
-- **Pipeline failure reasons**: Identify pipeline failure reasons
+This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-agentless) and [Agent-based](#install-the-datadog-agent-optional) installation. Agentless mode is recommended; for infrastructure metric correlation, use the Agent-based mode.
 
 ## Install the Datadog Jenkins plugin (agentless)
 
-Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
+Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or later:
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
 2. In the [Update Center][4] on the **Available** tab, search for `Datadog Plugin`.
@@ -1142,7 +1146,7 @@ For pipelines that spin up a Docker container to execute tests, you can only con
 
 ### Enable with the Jenkins configuration UI
 
-UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or newer.
+UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or later.
 
 This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
 For these pipelines use declarative configuration with the `datadog` step (described in the next section).
@@ -1159,7 +1163,7 @@ To enable Test Visibility via UI do the following:
 
 ### Enable with the `datadog` pipeline step
 
-This configuration option is available in Datadog Jenkins plugin v5.6.2 or newer.
+This configuration option is available in Datadog Jenkins plugin v5.6.2 or later.
 
 In declarative pipelines, add the step to a top-level `options` block like so:
 
@@ -1557,3 +1561,12 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [16]: /continuous_integration/tests/
 [17]: /continuous_integration/tests/setup/
 [18]: /tracing/trace_collection/library_config/
+[19]: https://www.jenkins.io/
+[20]: /glossary/#manual-step
+[21]: /glossary/#queue-time
+[22]: /glossary/#custom-tag
+[23]: /glossary/#custom-measure
+[24]: /glossary/#parameter
+[25]: /glossary/#pipeline-failure
+[26]: /glossary/#custom-span
+

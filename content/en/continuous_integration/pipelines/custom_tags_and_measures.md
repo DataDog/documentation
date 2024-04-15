@@ -17,12 +17,15 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+## Overview
+
 The custom tags and measures commands provide a way to add user-defined text and numerical tags to your CI Visibility
 pipeline traces.
+
 These tags can be used to create facets (string value tags) or measures (numerical value tags). Facets and measures
 can then be used to search, graph, or monitor the pipelines.
 
-## Compatibility
+### Compatibility
 
 Custom tags and measures work with the following CI providers:
 

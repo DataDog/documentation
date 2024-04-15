@@ -21,7 +21,7 @@ Custom commands provide a way to trace individual commands in your CI pipelines,
 
 Custom commands work with the following CI providers:
 
-- Jenkins with Datadog plugin >= v3.2.0
+- Jenkins with the Datadog plugin >= v3.2.0
 - CircleCI
 
 ## Install the Datadog CI CLI

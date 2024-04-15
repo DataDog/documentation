@@ -19,32 +19,31 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Supported GitLab versions**:
-  - GitLab.com (SaaS)
-  - GitLab >= 14.1 (self-hosted)
-  - GitLab >= 13.7.0 (self-hosted) by enabling the `datadog_ci_integration` feature flag
+[GitLab][19] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling you to deploy applications quickly and securely.
 
-- **Running pipelines**: View pipeline executions that are running
+Set up tracing in GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
 
-- **Partial pipelines**: View [partially retried][11] and downstream pipeline executions
+### Compatibility
 
-- **Manual steps**: View manually triggered pipelines
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][20] | Partial pipelines | View partially retried pipeline executions. |
+| [Manual steps][21] | Manual steps | View manually triggered pipelines. |
+| [Queue time][22] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][12]. |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
+| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
+| [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
+| [Parameters][17] | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
+| [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
 
-- **Queue time**: View amount of time pipeline jobs wait in the queue before processing
+The following GitLab versions are supported:
 
-- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][12]
-
-- **Infrastructure metric correlation**: Correlate pipelines to [infrastructure host metrics][14] for self-hosted GitLab runners
-
-- **Custom pre-defined tags**: Configure [custom tags][10] to all generated pipeline, stages, and job spans
-
-- **Custom tags and measures at runtime**: Configure [custom tags][13] and measures at runtime
-
-- **Parameters**: Set custom `env` or `service` parameters
-
-- **Pipeline failure reasons**: Identify pipeline failure reasons from [error messages][15]
+- GitLab.com (SaaS)
+- GitLab >= 14.1 (self-hosted)
+- GitLab >= 13.7.0 (self-hosted) with the `datadog_ci_integration` feature flag enabled
 
 ## Configure the Datadog integration
 
@@ -318,3 +317,7 @@ The storage must not have network restrictions, such as an IP range allowlist.</
 [16]: /account_management/teams/
 [17]: /logs/log_configuration/processors/
 [18]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[19]: https://about.gitlab.com/
+[20]: /glossary/#partial-retry
+[21]: /glossary/#manual-step
+[22]: /glossary/#queue-time

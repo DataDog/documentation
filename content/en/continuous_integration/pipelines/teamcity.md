@@ -16,15 +16,23 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Supported TeamCity versions**: 2021.2 or later
+[TeamCity][1] is a continuous integration and delivery server that optimizes and automates software development processes.
 
-- **Partial retries**: View partially retried pipeline executions
+Set up tracing in TeamCity to collect data about your pipeline executions, debug performance bottlenecks, address operational issues, and optimize your development workflows.
 
-- **Queue time**: View amount of time pipeline jobs sit in the queue before processing
+### Compatibility
 
-- **Pipeline failure reasons**: Identify pipeline failure reasons from error messages
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][14] | Partial retries | View manually triggered pipelines. |
+| [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+
+The following TeamCity versions are supported: 
+
+- TeamCity >= 2021.2 or later
 
 ## Configure the Datadog integration
 
@@ -102,3 +110,6 @@ Check these logs to get additional context on any issues with the plugin.
 [11]: https://www.jetbrains.com/help/teamcity/vcs-root.html
 [12]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
 [13]: https://www.jetbrains.com/help/teamcity/configuring-vcs-triggers.html#Trigger+build+on+changes+in+snapshot+dependencies
+[14]: /glossary/#partial-retry
+[15]: /glossary/#queue-time
+[16]: /glossary/#pipeline-failure
