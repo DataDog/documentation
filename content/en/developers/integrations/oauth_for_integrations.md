@@ -111,7 +111,7 @@ As a part of your pull request, complete the following steps:
 
 To start the publishing process in the [Developer Platform][4]:
 
-1. Navigate to the **Publishing** tab under **General**. At the top of this tab, you receive your published client ID and secret. The OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
+1. Navigate to the **Publishing** tab under **General**. At the top of this tab, you receive your published client ID and secret. Your OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
 
 2. Under the Integration Publishing section, follow the steps to add your OAuth information to use below within your pull request. 
 
