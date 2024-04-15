@@ -6,7 +6,7 @@ kind: documentation
 ## I cannot see any traces
 
 ### Verify that your Step Function is configured to send all logs
-- Ensure that the `DD_TRACE_ENABLED` environment variable is set to `true`.
+- Ensure that the `DD_TRACE_ENABLED` environment variable is set to `true` on the step function in your AWS console.
 - In your AWS console, open your Step Function's logging tab. Ensure that _Log level_ is set to `ALL`, and that _Include execution data_ is selected.
 - Ensure that the CloudWatch log group (also found on the logging tab) has a subscription filter to the Datadog Lambda Forwarder in the same region.
 
