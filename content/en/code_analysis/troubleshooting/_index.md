@@ -20,11 +20,11 @@ If you experience issues setting up or configuring Datadog Code Analysis, use th
 
 ## Static Analysis
 
-For issues with the Datadog Static Analyzer, include the following information in a bug report to Support as well as your customer success manager.
+For issues with the Datadog Static Analyzer, include the following information in a bug report to Support as well as your Customer Success Manager.
 
 - Your `static-analysis.datadog.yml` file
 - The output of your static analysis tool (such as a CLI) that is run locally or in a CI/CD pipeline
-- The SARIF file produced (if there are any and are available)
+- The SARIF file produced (if there are any available)
 - The URL of your repository (public or private)
 - The name of the branch you ran the analysis on
 - The exact command line used to run the Datadog Static Analyzer
@@ -47,13 +47,13 @@ If you are experiencing issues unrelated to performance or if the Datadog Static
 
 ## Software Composition Analysis
 
-For issues with Datadog Software Composition Analysis, include the following information in a bug report to Support as well as your customer success manager.
+For issues with Datadog Software Composition Analysis, include the following information in a bug report to Support as well as your Customer Success Manager.
 
 - The output of your SCA tool (such as CLI) that is run locally or in a CI/CD pipeline
 - The SBOM file produced (if there are any available)
 - The URL of your repository (public or private)
 - The name of the branch you ran the analysis on
-- The list of dependency files in your repository (e.g. package-lock.json, requirements.txt, pom.xml)
+- The list of dependency files in your repository (such as `package-lock.json`, `requirements.txt`, or `pom.xml`)
 
 ## Further reading
 
