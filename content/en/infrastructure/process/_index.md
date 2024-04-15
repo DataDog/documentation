@@ -32,7 +32,7 @@ Live Processes is included in the Enterprise plan. For all other plans, contact 
 
 ## Introduction
 
-Datadog's Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
+Datadog's Live Processes gives you real-time visibility into the processes running on your infrastructure. Use Live Processes to:
 
 * View all of your running processes in one place
 * Break down the resource consumption on your hosts and containers at the process level

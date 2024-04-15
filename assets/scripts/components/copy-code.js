@@ -24,8 +24,9 @@ function addCopyButton () {
     const highlights = document.querySelectorAll("div.highlight")
 
     highlights.forEach(highlightEl => {
-        const codeLang = highlightEl.querySelector('[data-lang]').dataset.lang
-        const isNestedInAppendableContainer = highlightEl.parentElement.classList.contains('append-copy-btn') //  
+        const dl = highlightEl.querySelector('[data-lang]');
+        const codeLang = dl ? dl.dataset.lang : "";
+        const isNestedInAppendableContainer = highlightEl.parentElement.classList.contains('append-copy-btn') //
         const isFencedCodeExample = [...fencedLang].includes(codeLang) // markdown fenced code block
 
         const shouldAddCopyBtn = isFencedCodeExample || isNestedInAppendableContainer

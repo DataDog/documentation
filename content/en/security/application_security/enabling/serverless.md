@@ -1,16 +1,13 @@
 ---
 title: Enabling ASM for Serverless
 kind: documentation
-code_lang: serverless
-type: multi-code-lang
-code_lang_weight: 90
 aliases:
   - /security/application_security/getting_started/serverless
 further_reading:
     - link: "/security/application_security/how-appsec-works/"
       tag: "Documentation"
       text: "How Application Security Works"
-    - link: "/security/default_rules/#cat-application-security"
+    - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"
@@ -19,6 +16,9 @@ further_reading:
     - link: "/security/application_security/threats/"
       tag: "Documentation"
       text: "Application Threat Management"
+    - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
+      tag: "Blog"
+      text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>
@@ -990,8 +990,6 @@ To see Application Security Management threat detection in action, send known at
    curl -H 'My-ASM-Test-Header: acunetix-product' https://your-function-url/existing-route
    ```
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
-
-{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ## Further reading
 

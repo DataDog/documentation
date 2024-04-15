@@ -33,7 +33,7 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) Linux system utility installed.
+You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) system utility installed.
 This utility is available on the software repositories of most Linux distributions. For example:
 
 - The `pkg-config` package is available for [Homebrew](https://formulae.brew.sh/formula/pkg-config), and [Debian](https://packages.debian.org/search?keywords=pkg-config)- and [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config)-based Linux
@@ -42,16 +42,19 @@ This utility is available on the software repositories of most Linux distributio
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
+[Single Step Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/) is not supported for Linux hosts, VMs, or Docker.
+Single Step Instrumentation is supported for Kubernetes (using the Datadog Helm chart), but you need to manually set the `DD_PROFILING_ENABLED=true` environment variable to enable profiling.
+
 ## Installation
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][3]+.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 2. Add the `ddtrace` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.15'
+    gem 'ddtrace', '~> 1.21'
     ```
 
     If you're running a version of `ddtrace` older than 1.15.0, add the `google-protobuf` gem (version ~> 3.0) as a dependency.
@@ -87,21 +90,23 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Add the `ddtracerb exec` command to your Ruby application start command:
+4. Add the `ddprofrb exec` command to your Ruby application start command:
 
     ```shell
-    bundle exec ddtracerb exec ruby myapp.rb
+    bundle exec ddprofrb exec ruby myapp.rb
     ```
 
     Rails example:
 
     ```shell
-    bundle exec ddtracerb exec bin/rails s
+    bundle exec ddprofrb exec bin/rails s
     ```
+
+    If you're running a version of `ddtrace` older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
 
     **Note**
 
-    If starting the application via `ddtracerb exec` is not an option (eg. when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point such as `config.ru` for a web application:
+    If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
 
     ```ruby
     require 'datadog/profiling/preload'

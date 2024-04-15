@@ -9,6 +9,10 @@ kind: 설명서
 title: NDM 트러블슈팅
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">네트워크 기기 모니터링은 이 사이트에서 지원되지 않습니다.</div>
+{{< /site-region >}}
+
 ## 개요
 
 Datadog 네트워크 장치 모니터링 문제를 해결하려면 아래 정보를 활용하세요. 추가적인 도움이 필요한 경우 [Datadog 지원팀][1]에 문의하세요.

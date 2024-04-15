@@ -61,7 +61,7 @@
       // Determines table-row display
       // Compares search values and filter values against attributes info (dataset)
       const datasetArr = dataset.split(';')
-      const productValues = datasetArr[0].replaceAll('icon-', '').replace('log', 'logs')
+      const productValues = datasetArr[0].replaceAll('icon-', '').replace('log', 'log management')
       const searchValues = this.searchValue.split(' ')
 
       const containsFilteredValue = productValues.includes(this.filterValue) // checks product attrs in dataset
@@ -109,7 +109,7 @@
                 {{ range $idx, $el := .product_source }}
                   {{ if in . "icon-"}}
                     {{ $product := (substr . 5) }}
-                    {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" (cond (eq $product "log") (printf "%ss" $product) $product) )}}
+                    {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" ((cond (eq $product "log") (printf "%s management" $product) $product) | upper) )}}
 
                   {{ else if in (slice "android" "ios" "flutter" "roku") . }}
                     {{/*  Local partial */}}
@@ -118,13 +118,13 @@
                     {{/*  Get integration logos for android, ios, roku, and flutter  */}}
                     {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") . "avatar" }}
                     {{ if $int_logo }}
-                      <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}" title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"/>
+                      <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}" title='{{ (printf "rum %s" .) | upper }}' data-bs-toggle="tooltip" data-bs-placement="top"/>
                     {{ end }}
                   {{ else if eq . "browser" }}
                     {{/*  Local partial */}}
                     {{ partial "throw-error" (dict "ctx_product_source" $ctx_product_source "ctx_file_path" $ctx.File.Path) }}
 
-                    {{ partial "icon" (dict "name" . "size" "18px" "color" "#7c3eb9" "title" .)}}
+                    {{ partial "icon" (dict "name" . "size" "18px" "color" "#7c3eb9" "title" ((printf "rum %s" .) | upper))}}
 
                   {{ end }}
                 {{ end }}
@@ -152,18 +152,35 @@
             :class="(filterValue === 'all' || !filterValue) && 'active'"
             data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button>
         {{ end }}
-        {{ $sortedProduct := (split (replaceRE `icon-` "" (delimit $products " ")) " ") | sort }}
-        {{ range $sortedProduct }}
-            {{ $product := cond (eq . "log") (printf "%ss" .) .}}
+
+        {{/*  Transform Product Names  */}}
+        {{ $filterScratch := newScratch }}
+        {{ $sortedProduct := slice }}
+        {{ range $products }}
+          {{ $icon_name := replaceRE `icon-` "" . }}
+          {{ $product_name := $icon_name }}
+          {{ if in (slice "android" "ios" "flutter" "roku" "browser") $icon_name }}
+            {{ $product_name = (printf "RUM %s" $icon_name) }}
+          {{ else if eq $icon_name "log" }}
+            {{ $product_name = (printf "%s management" $icon_name) }}
+          {{ end }}
+          
+          {{ $filterScratch.SetInMap "productMap" $product_name $icon_name }}
+          {{ $sortedProduct = $sortedProduct | append $product_name }}
+        {{ end }}
+
+        {{ range $sortedProduct | sort }}
+            {{ $icon_name := index ($filterScratch.Get "productMap") .}}
+
             <button
-            @click="filterValue = '{{ $product }}'; pushState()"
+            @click="filterValue = '{{ $icon_name }}'; pushState()"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             :class="($el.dataset.filter === filterValue) && 'active'"
-            data-filter="{{ $product }}"
+            data-filter="{{ $icon_name }}"
             >
-              {{/*  Local partial  */}}
-              <span>{{partial "get-icon" (dict "name" . "ctx" $ctx)}}</span>
-              {{ cond (in (slice "android" "ios" "flutter" "roku" "browser") . ) (printf "RUM %s" (. | upper)) ($product | upper)}}
+              {{/*  Local Partial  */}}
+              <span>{{partial "get-icon" (dict "name" $icon_name "ctx" $ctx)}}</span>
+              {{ . | upper }}
             </button>
         {{ end }}
       </div>

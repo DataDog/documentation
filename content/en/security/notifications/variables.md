@@ -10,7 +10,19 @@ further_reading:
 - link: "/security/notifications/"
   tag: "Documentation"
   text: "Learn more about Security notifications"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -22,17 +34,21 @@ Use template variables to inject dynamic context from triggered logs or traces d
 
 The following variables are available:
 
-| Variable              | Description                                                                                   |
-| --------------------- | --------------------------------------------------------------------------------------------- |
-| `{{severity}}`        | The severity of the triggering rule case (integer, 0-4).                                      |
-| `{{timestamp}}`       | Time the signal was created. For example, `Mon Jan 01 00:00:00 UTC 1970`.                     |
-| `{{timestamp_epoch}}` | Time the signal was created, in milliseconds since midnight, January 1, 1970.                 |
-| `{{first_seen}}`      | Time the signal was first seen. For example, `Mon Jan 01 00:00:00 UTC 1970`.                  |
-| `{{first_seen_epoch}}`| Time the signal was first seen, in milliseconds since midnight, January 1, 1970.              |
-| `{{last_seen}}`       | Time the signal was most recently triggered. For example, `Mon Jan 01 00:00:00 UTC 1970`.     |
-| `{{last_seen_epoch}}` | Time the signal was most recently triggered, in milliseconds, since midnight, January 1, 1970.|
-| `{{rule_name}}`       | Name of the associated rule.                                                                  |
-| `{{case_name}}`       | Name of the triggering rule case.                                                             |
+| Variable                                           | Description                                                                                   |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `{{severity}}`                                     | The severity of the triggering rule case (integer, 0-4).                                      |
+| `{{timestamp}}`                                    | Time the signal was created. For example, `Mon Jan 01 00:00:00 UTC 1970`.                     |
+| `{{timestamp_epoch}}`                              | Time the signal was created, in milliseconds since midnight, January 1, 1970.                 |
+| `{{first_seen}}`                                   | Time the signal was first seen. For example, `Mon Jan 01 00:00:00 UTC 1970`.                  |
+| `{{first_seen_epoch}}`                             | Time the signal was first seen, in milliseconds since midnight, January 1, 1970.              |
+| `{{last_seen}}`                                    | Time the signal was most recently triggered. For example, `Mon Jan 01 00:00:00 UTC 1970`.     |
+| `{{last_seen_epoch}}`                              | Time the signal was most recently triggered, in milliseconds, since midnight, January 1, 1970.|
+| `{{rule_name}}`                                    | Name of the associated rule.                                                                  |
+| `{{case_name}}`                                    | Name of the triggering rule case.                                                             |
+| `{{events_matched}}`                               | Number of events that have matched the associated rule.                                       |
+| `{{events_matched_per_query.<name_of_the_query>}}` | Number of events that have matched the associated rule query `<name_of_the_query>`.           |
+
+When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview tab of the signal's side panel.
 
 ### Dynamic links
 

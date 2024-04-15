@@ -584,68 +584,6 @@ To use the OpenTelemetry Operator:
 [3]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesgateway#4-run-the-collector
 
 {{% /tab %}}
-
-{{% tab "Alongside the Agent" %}}
-
-To use the OpenTelemetry Collector alongside the Datadog Agent:
-
-1. Set up an additional DaemonSet to ensure that the Datadog Agent runs on each host alongside the previously set up [OpenTelemetry Collector DaemonSet][1]. For information, read [the docs about deploying the Datadog Agent in Kubernetes][2].
-
-2. Enable [OTLP ingestion in the Datadog Agent][3].
-
-3. Now that the Datadog Agent is ready to receive OTLP traces, logs, and metrics, change your [OpenTelemetry Collector DaemonSet][1] to use the [OTLP exporter][4] instead of the Datadog Exporter by adding the following configuration to [your config map][5]:
-
-   ```yaml
-   # ...
-   exporters:
-     otlp:
-       endpoint: "${HOST_IP}:4317"
-       tls:
-         insecure: true
-   # ...
-   ```
-
-4. Make sure that the `HOST_IP` environment variable is provided [in the DaemonSet][6]:
-
-   ```yaml
-   # ...
-           env:
-           - name: HOST_IP
-             valueFrom:
-               fieldRef:
-                 fieldPath: status.hostIP
-   # ...
-   ```
-
-5. Make sure that the [service pipelines][7] are using OTLP:
-
-   ```yaml
-   # ...
-       service:
-         pipelines:
-           metrics:
-             receivers: [otlp]
-             processors: [resourcedetection, k8sattributes, batch]
-             exporters: [otlp]
-           traces:
-             receivers: [otlp]
-             processors: [resourcedetection, k8sattributes, batch]
-             exporters: [otlp]
-   # ...
-   ```
-
-   In this case, don't use the `hostmetrics` receiver because those metrics will be emitted by the Datadog Agent.
-
-[1]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesdaemonset#4-run-the-collector
-[2]: /containers/kubernetes/
-[3]: /opentelemetry/otlp_ingest_in_the_agent/?tab=kubernetesdaemonset#enabling-otlp-ingestion-on-the-datadog-agent
-[4]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlpexporter/README.md#otlp-grpc-exporter
-[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L15
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L33
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L30-L39
-
-{{% /tab %}}
-
 {{< /tabs >}}
 
 
@@ -654,16 +592,10 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
 If you are using the Datadog Exporter to also send OpenTelemetry traces to Datadog, use the `trace_parser` operator to extract the `trace_id` from each trace and add it to the associated logs. Datadog automatically correlates the related logs and traces. See [Connect OpenTelemetry Traces and Logs][18] for more information.
 
 {{< img src="logs/log_collection/logs_traces_correlation.png" alt="The trace panel showing a list of logs correlated with the trace" style="width:70%;">}}
-### Host name resolution
 
-The host name that OpenTelemetry signals are tagged with is obtained based on the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+### Hostname resolution
 
-1. From [resource attributes][19], for example `host.name` (many others are supported).
-2. The `hostname` field in the exporter configuration.
-3. Cloud provider API.
-4. Kubernetes host name.
-5. Fully qualified domain name.
-6. Operating system host name.
+See [Mapping OpenTelemetry Semantic Conventions to Hostnames][28] to understand how the hostname is resolved.
 
 ## Deployment-based limitations
 
@@ -748,3 +680,4 @@ The minimum required OpenTelemetry Collector version that supports this feature 
 [25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
 [26]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=service#service-attribute
 [27]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
+[28]: /opentelemetry/schema_semantics/hostname/
