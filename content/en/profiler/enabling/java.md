@@ -97,12 +97,13 @@ To begin profiling applications:
 {{% /tab %}}
 {{< /tabs >}}
 
-     **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
+   **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
 3. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
-{{< tabs >}}
-{{% tab "Invoke your service" %}}
-{{< collapse-content title="Command arguments" level="h4" >}}
+   {{< tabs >}}
+{{% tab "Command arguments" %}}
+
+Invoke your service:
 ```diff
 java \
     -javaagent:dd-java-agent.jar \
@@ -113,8 +114,10 @@ java \
     -XX:FlightRecorderOptions=stackdepth=256 \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
-{{< /collapse-content >}}
-{{< collapse-content title="Environment variables" level="h4" >}}
+
+{{% /tab %}}
+{{% tab "Environment variables" %}}
+
 ```diff
 export DD_SERVICE=<YOUR_SERVICE>
 export DD_ENV=<YOUR_ENV>
@@ -125,31 +128,33 @@ java \
     -XX:FlightRecorderOptions=stackdepth=256 \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
-{{< /collapse-content >}}
 
-    **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
-
-   ```shell
-   # Good:
-   java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
-   # Bad:
-   java -jar my-service.jar -javaagent:dd-java-agent.jar ...
-   ```
 {{% /tab %}}
-{{% tab "Build and run native-image" %}}
-   Follow the [Tracer Setup Instructions][13] to build your native image with the Datadog Java Profiler.
+{{< /tabs >}}
 
-   When the service binary is built you can use environment variables to enable and configure the Datadog Java Profiler.
+{{< collapse-content title="Build and run native-image" level="h4" >}}
+
+Follow the [Tracer Setup Instructions][13] to build your native image with the Datadog Java Profiler.
+
+When the service binary is built you can use environment variables to enable and configure the Datadog Java Profiler.
+
    ```shell
    DD_PROFILING_ENABLED=true DD_PROFILING_DIRECTALLOCATION_ENABLED=true ./my_service
    ```
 
    **Note**: Only JFR based profiling is supported for the GraalVM native-image applications. None of the 'DDPROF'
-   related configuration options is effective.
+related configuration options is effective.
 
-[13]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
-{{% /tab %}}
-{{< /tabs >}}
+{{< /collapse-content >}}
+
+   **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
+
+    ```shell
+    # Good:
+    java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
+    # Bad:
+    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
+    ```
 
 4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][7].
 
@@ -355,3 +360,4 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [10]: /getting_started/profiler/
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [12]: /profiler/enabling/supported_versions/
+[13]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
