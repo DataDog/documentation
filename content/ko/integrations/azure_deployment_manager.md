@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Microsoft Azure Deployment Manager
 integration_version: ''
 is_public: true
-kind: 통합
+kind: integration
 manifest_version: '1.0'
 name: azure_deployment_manager
 public_title: Datadog-Microsoft Azure Deployment Manager

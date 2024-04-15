@@ -26,17 +26,18 @@ short_description: Cloud Run for Anthos クラスターからメトリクスお
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google Cloud Run for Anthos は、ハイブリッドおよびマルチクラウド環境のための柔軟なサーバーレス開発プラットフォームです。Cloud Run for Anthos は、[Knative][1] サービスをフルサポートする、Google のマネージドサービスです。フルマネージドの Google Cloud をご利用の場合は、[Google Cloud Run ドキュメント][2]をご参照ください。
 
 Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud Run for Anthos からメトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
 ### メトリクスの収集
 
-#### インストール
+#### インフラストラクチャーリスト
 
 [Google Cloud Platform インテグレーション][3]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -46,10 +47,10 @@ Workload Identity を有効にしていない場合、Knative メトリクスの
 
 セットアップの詳しい手順については、[Google Cloud Workload Identity][4] をご覧ください。
 
-### ログの収集
+### 収集データ
 
-Google Cloud Run for Anthos は、[サービスログ][5]も公開します。
-Google Cloud Run のログは、Google Cloud Logging を使用して収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。Cloud Pub/Sub をまだセットアップしていない場合は、[HTTP プッシュフォワーダーを使用してセットアップ][6]してください。
+Google Cloud Run for Anthos は[サービスログ][5]も公開します。
+Google Cloud Run のログは Google Cloud Logging で収集し、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信することができます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][6]。
 
 これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
@@ -70,25 +71,25 @@ Google Cloud Run のログは、Google Cloud Logging を使用して収集され
 
 ポッドで環境変数を受信しないようにするには、`admission.datadoghq.com/enabled: "false"` ラベルを追加します。これは `mutateUnlabelled: true` を設定している場合でも機能します。詳細については、[Datadog Admission Controller][8] のドキュメントを参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "google_cloud_run_for_anthos" >}}
 
 
-### イベント
+### ヘルプ
 
 Google Cloud Run for Anthos インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Google Cloud Run for Anthos インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
