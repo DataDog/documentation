@@ -99,7 +99,7 @@ nav_sections:
         link: universal_service_monitoring/
         icon: usm
         desc: Discover, map, and monitor services without changing code
-      - title: Digital Experience
+      - title: Synthetic Monitoring
         link: synthetics/
         icon: synthetics
         desc: Ensure uptime, flag regional issues, and test application performance
