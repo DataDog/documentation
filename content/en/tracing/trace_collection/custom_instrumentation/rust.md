@@ -1,7 +1,7 @@
 ---
-title: Swift Custom Instrumentation with Datadog Library
+title: Rust Custom Instrumentation using Datadog API
 kind: documentation
-description: 'Manually instrument your Swift applications to send custom traces to Datadog.'
+description: 'Manually instrument your Rust applications to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
@@ -11,7 +11,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-Datadog supports custom instrumentation for Swift applications when you use the [OpenTelemetry SDK][1].
+Datadog supports custom instrumentation for Rust applications when you use the [OpenTelemetry SDK][1].
 
 ## Further Reading
 

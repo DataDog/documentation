@@ -2611,17 +2611,17 @@ main:
     identifier: custom_instrumentation_dotnet
     weight: 2028
   - name: Rust
-    url: tracing/trace_collection/custom_instrumentation/dd_libraries/rust
+    url: tracing/trace_collection/custom_instrumentation/rust
     parent: custom_instrumentation
     identifier: custom_instrumentation_rust
     weight: 2029
   - name: Swift
-    url: tracing/trace_collection/custom_instrumentation/dd_libraries/swift
+    url: tracing/trace_collection/custom_instrumentation/swift
     parent: custom_instrumentation
     identifier: custom_instrumentation_ios
     weight: 2030
   - name: Elixir
-    url: tracing/trace_collection/custom_instrumentation/dd_libraries/elixir
+    url: tracing/trace_collection/custom_instrumentation/elixir
     parent: custom_instrumentation
     identifier: custom_instrumentation_elixir
     weight: 2031
