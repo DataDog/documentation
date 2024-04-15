@@ -47,7 +47,7 @@ cascade:
 description: Rassembler des données de tous vos systèmes, toutes vos applications
   et tous vos services
 disable_sidebar: true
-kind: documentation
+
 title: Intégrations
 ---
 

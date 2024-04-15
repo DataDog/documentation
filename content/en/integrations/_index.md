@@ -1,6 +1,6 @@
 ---
 title: Integrations
-kind: documentation
+
 disable_sidebar: true
 aliases:
     - /integrations/verisign_openhybrid/
@@ -12,46 +12,46 @@ aliases:
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
-    path: /integrations/akamai_datastream_2.md
+    path: /integrations/akamai_datastream_2
   aliases:
     - /integrations/akamai_datastream
 - _target:
-    path: /integrations/azure.md
+    path: /integrations/azure
   algolia:
     rank: 80
     category: Documentation
     subcategory: Integrations
     tags: ['azure', 'microsoft azure']
 - _target:
-    path: /integrations/kubernetes_state_core.md
+    path: /integrations/kubernetes_state_core
   algolia:
     rank: 60
     category: Documentation
     subcategory: Integrations
     tags: ['ksm']
 - _target:
-    path: /integrations/google_cloud_platform.md
+    path: /integrations/google_cloud_platform
   algolia:
     rank: 80
     category: Documentation
     subcategory: Integrations
     tags: ['gcp', 'google cloud platform']
 - _target:
-    path: /integrations/amazon_web_services.md
+    path: /integrations/amazon_web_services
   algolia:
     rank: 80
     category: Documentation
     subcategory: Integrations
     tags: ['aws', 'amazon web services']
 - _target:
-    path: /integrations/eks_fargate.md
+    path: /integrations/eks_fargate
   algolia:
     rank: 60
     category: Documentation
     subcategory: Integrations
     tags: ['eks logging']
 - _target:
-    path: /integrations/win32_event_log.md
+    path: /integrations/win32_event_log
   aliases:
     - /integrations/eventviewer/
   algolia:
@@ -60,39 +60,39 @@ cascade:
     subcategory: Integrations
     tags: ['event viewer']
 - _target:
-    path: /integrations/lambdatest_license.md
+    path: /integrations/lambdatest_license
   aliases:
     - /integrations/lambdatest_software_license/
 - _target:
-    path: /integrations/mongo.md
+    path: /integrations/mongo
   aliases:
     - /integrations/mongodb/
 - _target:
-    path: /integrations/rapdev_validator.md
+    path: /integrations/rapdev_validator
   aliases:
     - /integrations/rapdev_dashboard_widget_pack/
 - _target:
-    path: /integrations/wmi_check.md
+    path: /integrations/wmi_check
   aliases:
     - /integrations/wmi/
 - _target:
-    path: /integrations/jfrog_platform_self_hosted.md
+    path: /integrations/jfrog_platform_self_hosted
   aliases:
     - /integrations/jfrog_platform/
 - _target:
-    path: /integrations/komodor_license.md
+    path: /integrations/komodor_license
   aliases:
     - /integrations/komodor_komodor/
 - _target:
-    path: /integrations/shoreline_license.md
+    path: /integrations/shoreline_license
   aliases:
     - /integrations/shoreline_software_license/
 - _target:
-    path: /integrations/stormforge_license.md
+    path: /integrations/stormforge_license
   aliases:
     - /integrations/stormforge_stormforge_license/
 - _target:
-    path: /integrations/feed.md
+    path: /integrations/feed
   aliases:
     - /integrations/rss/
 ---
