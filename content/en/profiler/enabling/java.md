@@ -132,7 +132,7 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< collapse-content title="Build and run native-image" level="h4" >}}
+{{% collapse-content title="Build and run native-image" level="h4" %}}
 
 Follow the [Tracer Setup Instructions][13] to build your native image with the Datadog Java Profiler.
 
@@ -145,7 +145,7 @@ When the service binary is built you can use environment variables to enable and
    **Note**: Only JFR based profiling is supported for the GraalVM native-image applications. None of the 'DDPROF'
 related configuration options is effective.
 
-{{< /collapse-content >}}
+{{% /collapse-content %}}
 
    **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
 
