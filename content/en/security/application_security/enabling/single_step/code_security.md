@@ -9,7 +9,7 @@ kind: documentation
 ## Requirements
 
 - **Minimum Agent version 7.53.0**
-- **Languages and architectures**: Single step ASM instrumentation for code security only supports tracing Java, Node.js, python (private beta), and .NET Core services on `x86_64` and `arm64` architectures.
+- **Languages and architectures**: Single step ASM instrumentation for code security only supports tracing Java, Node.js, Python (private beta), and .NET Core services on `x86_64` and `arm64` architectures.
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ## Enabling in one step
