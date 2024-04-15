@@ -142,7 +142,6 @@ def security_rules(content, content_dir):
             parsed_title = re.sub(r"\[.+\]\s?(.*)", "\\1", data.get('name', ''), 0, re.MULTILINE)
             page_data = {
                 "title": parsed_title,
-                "kind": "documentation",
                 "type": "security_rules",
                 "disable_edit": True,
                 "default_rule_id": data.get('defaultRuleId', '').strip(),

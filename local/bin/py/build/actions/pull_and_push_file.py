@@ -36,6 +36,9 @@ def pull_and_push_file(content, content_dir):
             new_yml = yaml.safe_load(fm)
         elif len(split) == 1:
             txt = split[0]
+        kind = new_yml.get('kind', '')
+        if kind and kind not in ("home", "page", "section", "taxonomy", "term"):
+            del new_yml['kind']
 
         # replace html comments with shortcodes
         txt = replace_comments(txt)

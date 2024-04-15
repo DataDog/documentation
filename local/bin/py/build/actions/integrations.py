@@ -723,7 +723,7 @@ class Integrations:
         if manifest_json and "/dogweb/" not in file_name:
             if not manifest_json["display_on_public_website"]:
                 display_on_public = False
-        
+
         if not marketplace and display_on_public:
             try:
                 result = source_comment + format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
@@ -750,7 +750,7 @@ class Integrations:
                 else:
                     result = source_comment + updated_markdown
         else:
-            print(f'Skipping markdown for: {file_name}')            
+            print(f'Skipping markdown for: {file_name}')
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:
@@ -888,7 +888,6 @@ class Integrations:
                 ]
                 item = matches[0] if len(matches) > 0 else []
             if item:
-                item["kind"] = "integration"
                 item["integration_title"] = (
                     item
                     .get("public_title", "")
@@ -926,7 +925,7 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({**extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
