@@ -54,7 +54,7 @@ SCA performs scans by looking at the libraries contained in your lockfiles. Belo
 | C# (.NET)       | `packages.lock.json`                     |
 | Go (mod)        | `go.mod`                                 |
 | JVM (Gradle)    | `gradle.lockfile`                        |
-| JVM (Maven)     | N/A                                      |
+| JVM (Maven)     | `pom.xml`                                |
 | Node.js (npm)   | `package-lock.json`                      |
 | Node.js (pnpm)  | `pnpm-lock.yaml`                         |
 | Node.js (yarn)  | `yarn.lock`                              |
