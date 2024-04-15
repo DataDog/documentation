@@ -59,7 +59,7 @@ SCA performs scans by looking at the libraries contained in your lockfiles. Belo
 | Node.js (pnpm)  | `pnpm-lock.yaml`     |
 | Node.js (yarn)  | `yarn.lock`          |
 | PHP (composer)  | `composer.lock`      |
-| Python (pip)    | `Pipfile.lock`       |
+| Python (pip)    | `requirements.txt, Pipfile.lock`       |
 | Python (poetry) | `poetry.lock`        |
 | Ruby (bundler)  | `Gemfile.lock`       |
 
