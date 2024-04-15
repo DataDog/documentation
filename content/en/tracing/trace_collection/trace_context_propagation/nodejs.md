@@ -24,7 +24,7 @@ The Node.js Tracer supports the following styles:
 - W3C Trace Context: `tracecontext`
 - B3 Single Header: `B3 single header`
 
-The default setting for both injection and extraction style is `Datadog,tracecontext`.
+The default setting for both injection and extraction style is `datadog,tracecontext`.
 
 For more information about the context propagation settings, read [Node.js Tracing Library Configuration][1].
 
