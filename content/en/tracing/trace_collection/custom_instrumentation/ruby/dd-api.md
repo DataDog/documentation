@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation of Ruby Applications with the Datadog Tracing Library
+title: Ruby Custom Instrumentation using Datadog API
 kind: documentation
 aliases:
     - /tracing/opentracing/ruby
@@ -9,7 +9,7 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/ruby
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/ruby
 description: 'Manually instrument your Ruby application to send custom traces to Datadog.'
-code_lang: dd-lib
+code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
 further_reading:

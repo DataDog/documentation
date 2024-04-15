@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation of .NET Applications with the OpenTelemetry API
+title: .NET Custom Instrumentation using OpenTelemetry API
 kind: documentation
 code_lang: otel
 type: multi-code-lang

@@ -2571,42 +2571,42 @@ main:
     identifier: custom_instrumentation
     weight: 202
   - name: Java
-    url: tracing/trace_collection/custom_instrumentation/java/dd-lib
+    url: tracing/trace_collection/custom_instrumentation/java/dd-api
     parent: custom_instrumentation
     identifier: custom_instrumentation_java
     weight: 2021
   - name: Python
-    url: tracing/trace_collection/custom_instrumentation/python/dd-lib
+    url: tracing/trace_collection/custom_instrumentation/python/dd-api
     parent: custom_instrumentation
     identifier: custom_instrumentation_python
     weight: 2022
   - name: Ruby
-    url: tracing/trace_collection/custom_instrumentation/ruby/dd-lib
+    url: tracing/trace_collection/custom_instrumentation/ruby/dd-api
     parent: custom_instrumentation
     identifier: custom_instrumentation_ruby
     weight: 2023
   - name: Go
-    url: tracing/trace_collection/custom_instrumentation/go/dd-lib
+    url: tracing/trace_collection/custom_instrumentation/go/dd-api
     parent: custom_instrumentation
     identifier: custom_instrumentation_go
     weight: 2024
   - name: Node.js
-    url: tracing/trace_collection/custom_instrumentation/nodejs/dd-lib
+    url: tracing/trace_collection/custom_instrumentation/nodejs/dd-api
     parent: custom_instrumentation
     identifier: custom_instrumentation_nodejs
     weight: 2025
   - name: PHP
-    url: tracing/trace_collection/custom_instrumentation/php/dd-lib
+    url: tracing/trace_collection/custom_instrumentation/php/dd-api
     parent: custom_instrumentation
     identifier: custom_instrumentation_php
     weight: 2026
   - name: C++
-    url: tracing/trace_collection/custom_instrumentation/cpp/dd-lib
+    url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
     parent: custom_instrumentation
     identifier: custom_instrumentation_cpp
     weight: 2027
   - name: .NET
-    url: tracing/trace_collection/custom_instrumentation/dotnet/dd-lib
+    url: tracing/trace_collection/custom_instrumentation/dotnet/dd-api
     parent: custom_instrumentation
     identifier: custom_instrumentation_dotnet
     weight: 2028

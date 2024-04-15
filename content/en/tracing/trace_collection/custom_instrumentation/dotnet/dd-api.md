@@ -1,7 +1,7 @@
 ---
-title: Custom Instrumentation of .NET Applications with the Datadog Tracing Library
+title: .NET Custom Instrumentation using Datadog API
 kind: documentation
-code_lang: dd-lib
+code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
 aliases:

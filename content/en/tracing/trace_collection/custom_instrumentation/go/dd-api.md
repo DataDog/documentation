@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation of Go Applications with the Datadog Tracing Library
+title: Go Custom Instrumentation using Datadog API
 kind: documentation
 aliases:
     - /tracing/opentracing/go
@@ -9,7 +9,7 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/go
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/go
 description: 'Instrument your code with the Datadog Go APM tracer.'
-code_lang: dd-lib
+code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
 further_reading:

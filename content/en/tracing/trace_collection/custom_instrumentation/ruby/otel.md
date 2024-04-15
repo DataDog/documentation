@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation of Ruby Applications with the OpenTelemetry API
+title: Ruby Custom Instrumentation using OpenTelemetry API
 kind: documentation
 description: 'Instrument your Ruby application with OpenTelemetry API to send traces to Datadog.'
 code_lang: otel

@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation of Java Applications with the Datadog Tracing Library
+title: Java Custom Instrumentation using Datadog API
 kind: documentation
 aliases:
     - /tracing/opentracing/java
@@ -9,7 +9,7 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/java
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/java
 description: 'Instrument your code with the Datadog Java APM tracer.'
-code_lang: dd-lib
+code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
 further_reading:

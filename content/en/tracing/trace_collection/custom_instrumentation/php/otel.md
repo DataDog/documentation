@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation of PHP Applications with the OpenTelemetry API
+title: PHP Custom Instrumentation using OpenTelemetry API
 kind: documentation
 description: 'Instrument your PHP application with OpenTelemetry API to send traces to Datadog.'
 code_lang: otel

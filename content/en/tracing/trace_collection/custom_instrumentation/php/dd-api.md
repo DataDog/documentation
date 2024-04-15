@@ -1,5 +1,5 @@
 ---
-title: Custom Instrumentation of PHP Applications with the Datadog Tracing Library
+title: PHP Custom Instrumentation using Datadog API
 kind: documentation
 aliases:
     - /tracing/manual_instrumentation/php
@@ -9,7 +9,7 @@ aliases:
     - /tracing/trace_collection/custom_instrumentation/php
     - /tracing/trace_collection/custom_instrumentation/dd_libraries/php
 description: 'Manually instrument your PHP application to send custom traces to Datadog.'
-code_lang: dd-lib
+code_lang: dd-api
 code_lang_weight: 1
 type: multi-code-lang
 further_reading:

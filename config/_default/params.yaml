@@ -110,7 +110,7 @@ code_language_ids:
     ecs_ec2: "ECS EC2"
     elixir: "Elixir"
     rust: "Rust"
-    dd-lib: "Datadog Library"
+    dd-api: "Datadog API"
     otel: "OpenTelemetry API"
 branch: ""
 
