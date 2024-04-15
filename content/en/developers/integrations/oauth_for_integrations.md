@@ -111,11 +111,11 @@ As a part of your pull request, complete the following steps:
 
 To start the publishing process in the [Developer Platform][4]:
 
-1. Navigate to the **Publishing** tab under **General**. In Step 1 of the publishing flow, you receive your published client ID and secret. The OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
+1. Navigate to the **Publishing** tab under **General**. At the top of this tab, you receive your published client ID and secret. The OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
 
-2. In Step 2, you can enter additional information about your integration and see the published `app_uuid` to use below.
+2. Under the Integration Publishing section, follow the steps to add your OAuth information to use below within your pull request. 
 
-3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, use the `app_uuid` value from step 2 in the `app_uuid` field of the `manifest.json` file. If the `app_uuid` values do not align, your application does not publish correctly. If you have an **existing integration**, there is no need to update the `app_uuid`.
+3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, copy the `app_uuid` value under Intergration Publishing section and paste this within your manifest.json file under the `app_uuid` field. 
 
 Once an OAuth client is submitted for publishing, the team is notified. When your pull request is approved by all required parties and is ready to be merged, at that point your OAuth client gets published as well. Your integration tile is then published to your sandbox account (_not_ for all customers), and your OAuth client can then be authorized by any Datadog organization (not only your Sandbox organization).
 
