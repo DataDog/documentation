@@ -143,7 +143,7 @@ When the service binary is built you can use environment variables to enable and
    ```
 
    **Note**: Only JFR based profiling is supported for the GraalVM native-image applications. None of the 'DDPROF'
-related configuration options is effective.
+related configuration options are effective.
 
 {{% /collapse-content %}}
 
