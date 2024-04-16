@@ -98,13 +98,13 @@ If you are using app [flavors][7] in Flutter, you will need to set the name of t
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --flavor my_flavor
 ```
 
-The Datadog SDK will automatically detect the version number of your application specified in your `pubspec.yaml` up to but not including the build number. If you are using build numbers as part of the version in your application and need to upload symbols for each build, you will need to add the version to [DatadogConfiguration.version][9]. You can then pass this to the `--version` parameter of the `datadog-ci` command:
+The Datadog SDK automatically detects the version number of your application specified in your `pubspec.yaml` up to but not including the build number. If you are using build numbers as part of the version in your application and need to upload symbols for each build, you need to add the version to [DatadogConfiguration.version][9]. You can then pass this to the `--version` parameter of the `datadog-ci` command:
 
 ```sh
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --version 1.2.3+22
 ```
 
-Note that Datadog uses tags for versions which do not allow `+`. All tooling automatically replaces `+` with `-` so that the version tags are searchable in Datadog.
+**Note**: Datadog uses tags for versions that do not allow `+`. All tooling automatically replaces `+` with `-` so that the version tags are searchable in Datadog.
 
 ## Further reading
 

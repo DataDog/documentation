@@ -41,7 +41,11 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ## Upload your mapping file
 
+ Uploading a source map is a way to enable the browser to reconstruct the original source and present the reconstructed original in a debugger.
+
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+
+To upload your mapping file:
 
 {{< tabs >}}
 {{% tab "US" %}}
