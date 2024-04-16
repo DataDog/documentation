@@ -33,7 +33,7 @@ Code Analysis is in public beta.
 
 ## Overview
 
-Code Analysis is composed of the [Static Analysis][1] and [Software Composition Analysis (SCA)][2] products. 
+Code Analysis is composed of the [Static Analysis][1] and [Software Composition Analysis (SCA)][2] scan types. 
 
 Static Analysis
 : Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact users.
