@@ -35,7 +35,7 @@ You can link your app to template variables anywhere that supports template expr
 **Note**: If you want to leave an element (such as a search field) blank by default, you can set the default value as an empty string `""` or `undefined`.
 
 {{< code-block lang="json" disable_copy="false" collapsible="false" >}}
-${self.options?.find(o => o.includes(dashboard.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.value)) || '<DEFAULT_VALUE>'}
+${self.options?.find(o => o.includes(global.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.value)) || '<DEFAULT_VALUE>'}
 {{< /code-block >}}
 
 ### Scope your app dynamically
