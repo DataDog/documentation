@@ -37,7 +37,7 @@ More than 100 Datadog integrations support events collection, including [Kuberne
 
 {{< whatsnext desc="Event Management features:">}}
     {{< nextlink href="/service_management/events/ingest/" >}}<u>Ingest events</u> - Learn how to send events to Datadog{{< /nextlink >}}
-     {{< nextlink href="/service_management/events/pipelines_and_processors/overview/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
+     {{< nextlink href="/service_management/events/pipelines_and_processors/#overview/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
     {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
     {{< nextlink href="/service_management/events/guides/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
     {{< nextlink href="/service_management/events/correlation/" >}}<u>Correlation</u> - reduce alert fatigure and the number of tickets/notifictions you recieve {{< /nextlink >}}
