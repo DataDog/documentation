@@ -142,7 +142,7 @@ When the service binary is built you can use environment variables to enable and
    DD_PROFILING_ENABLED=true DD_PROFILING_DIRECTALLOCATION_ENABLED=true ./my_service
    ```
 
-   **Note**: Only JFR based profiling is supported for the GraalVM native-image applications. None of the 'DDPROF'
+   **Note**: Only JFR based profiling is supported for the GraalVM native-image applications. None of the <code>DDPROF</code>
 related configuration options are effective.
 
 {{% /collapse-content %}}
