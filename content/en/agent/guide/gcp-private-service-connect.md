@@ -59,9 +59,9 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
    - Under **IPv4 Address**, enter the IP address that was displayed at the end of the previous section.
 
 ### Additional required steps for metrics and traces
-There are two Datadog Intake Services that are subdomains of the (`agent.us5.datadoghq.com`{{< region-param key="dd_site" code="true" >}}) domain. Because of this, the Private Hosted Zone is slightly different from other intakes.
+There are two Datadog Intake Services that are subdomains of the (`agent.`{{< region-param key="dd_site" code="true" >}}) domain. Because of this, the Private Hosted Zone is slightly different from other intakes.
 
-You will need to create a Private Zone for (`agent.us5.datadoghq.com`{{< region-param key="dd_site" code="true" >}}), as outlined in the [Create a DNS Zone](#create-a-dns-zone-1) section. Then add the three records below.
+You will need to create a Private Zone for (`agent.`{{< region-param key="dd_site" code="true" >}}), as outlined in the [Create a DNS Zone](#create-a-dns-zone-1) section. Then add the three records below.
 
 | DNS name | Resource record type | IPv4 address |
 | -------- |----------------------| ------------ |
@@ -69,7 +69,7 @@ You will need to create a Private Zone for (`agent.us5.datadoghq.com`{{< region-
 | `*`      | A                    | IP address for your metrics endpoint |
 | `trace`  | A                    | IP address for your traces endpoint |
 
-**Note**: this zone requires a wildcard (*) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form  (`<version>-app.agent.us5.datadoghq.com`{{< region-param key="dd_site" code="true" >}}).
+**Note**: this zone requires a wildcard (*) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form  (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
 
 ### Validation
 
