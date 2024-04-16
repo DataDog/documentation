@@ -125,7 +125,7 @@ To disable Web View Tracking:
 WebViewTracking.disable(webView: webView)
 ```
 
-`allowedHosts` will match the given hosts and their subdomain. No regular expression is allowed.
+`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
