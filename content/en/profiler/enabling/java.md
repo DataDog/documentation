@@ -147,7 +147,7 @@ related configuration options are effective.
 
 {{% /collapse-content %}}
 
-   **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
+   **Note**: The `-javaagent` argument needs to be before `-jar`. This adds it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
 
     ```shell
     # Good:
