@@ -23,7 +23,7 @@ OAuth support is required for all partner-built SaaS integrations that directly 
 
 When building an integration with OAuth, you should only select the scopes to which your application needs access. Once a customer consents to authorize your integration, all listed scopes will become available to your application via a token.
 
-You can include OAuth in a new integration, or add it to an existing integration, on the [Marketplace][2] or [Integrations][3] page by following the steps below. For existing integrations, note that there's no need to change your `app_uuid` in the `manifest.json`. 
+You can include OAuth in a new integration (or add it to an existing integration) on the [Marketplace][2] or [Integrations][3] page by following the steps below. For existing integrations, note that there's no need to change your `app_uuid` in the `manifest.json`. 
 
 ### Create an app from a template
 
