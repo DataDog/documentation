@@ -216,7 +216,7 @@ cascade:
   banner: 
     title: "<span>Seamless integrations.</span> Try Datadog Code Analysis"
     link:
-      name: Datadog Static Analysis
+      name: Datadog Code Analysis
       url: https://www.datadoghq.com/code-analysis/
 
 
