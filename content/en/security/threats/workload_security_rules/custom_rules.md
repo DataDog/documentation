@@ -107,7 +107,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
 After you upload the new default policy file to the Agent, navigate to the [**Rules**][3] page.
 
-1. On the [**Detection Rules**][3] page, click **New Rule**.
+1. On the [**Threat Detection Rules**][3] page, click **New Rule**.
 2. Select **Workload Security** under **Rule types**. Select a detection method such as **Threshold** or **New Value**.
 3. Configure a new CSM Threats rule. A rule can have multiple rule cases combined with boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
 
@@ -130,6 +130,6 @@ To disable a default Agent rule, navigate to the [**Agent Configuration**][6] pa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: https://app.datadoghq.com/security/configuration/rules?product=cws
+[3]: https://app.datadoghq.com/security/configuration/workload/rules
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules

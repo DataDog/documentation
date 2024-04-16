@@ -7820,6 +7820,10 @@ main:
   parent: serverless_aws_lambda
   url: opentelemetry/guide/otlp_delta_temporality/
   weight: 803
+- name: Envoyer des données depuis OpenTelemetry Demo
+  parent: serverless_aws_lambda
+  url: /opentelemetry/guide/otel_demo_to_datadog/
+  weight: 804
 - identifier: account_management_saml
   name: Aide
   parent: account_management_saml
@@ -7952,7 +7956,7 @@ main:
   url: help/
   weight: 5
 - identifier: account_management_saml
-  name: Aide
+  name: Checks de service
   parent: account_management_saml
   url: help/
   weight: 6
@@ -8363,7 +8367,7 @@ main:
   url: monitors/types/anomaly/
   weight: 3
 - identifier: monitor_types
-  name: Dépannage de la solution Browser
+  name: Configuration
   parent: monitor_types
   url: monitors/types/apm/
   weight: 301
@@ -8403,7 +8407,7 @@ main:
   url: monitors/types/event/
   weight: 501
 - identifier: monitors_manage
-  name: Analyse d'entonnoirs
+  name: Métriques
   parent: tracing_dd_libraries
   pre: metric
   url: monitors/types/forecasts/
@@ -8850,61 +8854,121 @@ main:
   parent: tracing_otel_inst
   url: tracing/trace_collection/library_config/python/
   weight: 1
+- identifier: présentation
+  name: Pipelines et processeurs
+  parent: tracing_otel_inst
+  url: service_management/events/pipelines_and_processors/overview
+  weight: 2
+- identifier: arithmetic_processor
+  name: Processeur arithmétique
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/arithmetic_processor
+  weight: 201
+- identifier: date_remapper
+  name: Remappeur de dates
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/date_remapper
+  weight: 202
+- identifier: category_processor
+  name: Processeur de catégories
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/category_processor
+  weight: 203
+- identifier: grok_parser
+  name: Parser Grok
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/grok_parser
+  weight: 204
+- identifier: lookup_processor
+  name: Processeur de correspondances
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/lookup_processor
+  weight: 205
+- identifier: remappeur
+  name: Remappeur
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/remapper
+  weight: 206
+- identifier: service_remapper
+  name: Remappeur de services
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/service_remapper
+  weight: 207
+- identifier: status_remapper
+  name: Remappeur de statuts
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/status_remapper
+  weight: 208
+- identifier: string_builder_processor
+  name: Processeur de générateur de chaînes
+  parent: présentation
+  url: service_management/events/pipelines_and_processors/string_builder_processor
+  weight: 209
 - identifier: tracing_otel_inst
   name: Active Directory
   parent: tracing_otel_inst
   url: tracing/trace_collection/library_config/ruby/
-  weight: 2
+  weight: 3
 - identifier: tracing_library_config_go
   name: Go
   parent: tracing_otel_inst
   url: tracing/trace_collection/library_config/go/
-  weight: 201
+  weight: 301
 - identifier: tracing_library_config_nodejs
   name: NodeJS
   parent: tracing_otel_inst
   url: tracing/trace_collection/library_config/nodejs/
-  weight: 202
+  weight: 302
 - identifier: tracing_library_config_php
   name: PHP
   parent: tracing_otel_inst
   url: tracing/trace_collection/library_config/php/
-  weight: 203
+  weight: 303
 - identifier: tracing_library_config_cpp
   name: Configuration
   parent: tracing_otel_inst
   url: tracing/trace_collection/library_config/cpp/
-  weight: 204
+  weight: 304
 - identifier: tracing_library_config_dotnet_core
   name: .NET Core
   parent: tracing_otel_inst
   url: tracing/trace_collection/library_config/dotnet-core/
-  weight: 205
+  weight: 305
 - identifier: tracing_library_config_dotnet_framework
   name: Section Notifications
   parent: tracing_otel_inst
   url: tracing/trace_collection/library_config/dotnet-framework/
-  weight: 206
+  weight: 306
 - identifier: tracing_otel_inst
   name: Règles de détection par défaut
   parent: tracing_otel_inst
   url: tracing/trace_collection/otel_instrumentation/
-  weight: 207
+  weight: 307
 - identifier: tracing_otel_inst_java
   name: Page d'accueil personnalisée pour une organisation
   parent: tracing_otel_inst
   url: tracing/trace_collection/otel_instrumentation/java/
-  weight: 208
+  weight: 308
 - identifier: tracing_otel_inst_python
   name: Python
   parent: tracing_otel_inst
   url: tracing/trace_collection/otel_instrumentation/python/
-  weight: 3
+  weight: 4
+- identifier: event_correlation
+  name: Corrélation
+  parent: tracing_otel_inst
+  url: service_management/events/correlation/
+  weight: 5
+- identifier: event_correlation_pattern
+  name: Basé sur les patterns
+  parent: event_correlation
+  url: service_management/events/correlation/pattern
+  weight: 501
 - identifier: tracing_otel_inst_ruby
   name: Aide
   parent: tracing_otel_inst
   url: tracing/trace_collection/otel_instrumentation/ruby/
-  weight: 4
+  weight: 10
 - identifier: tracing_otel_inst_go
   name: Go
   parent: tracing_open_standards
@@ -9077,7 +9141,7 @@ main:
   url: containers/kubernetes/control_plane/
   weight: 101
 - identifier: containers_kubernetes_data_collected
-  name: APM
+  name: Collecte de logs
   parent: containers_kubernetes_prometheus
   url: containers/kubernetes/data_collected/
   weight: 102
@@ -9097,7 +9161,7 @@ main:
   url: containers/cluster_agent/setup/
   weight: 105
 - identifier: cluster_agent_commands
-  name: Real User Monitoring
+  name: Données collectées
   parent: containers_kubernetes_prometheus
   url: containers/cluster_agent/commands/
   weight: 106
@@ -9127,7 +9191,7 @@ main:
   url: containers/amazon_ecs/
   weight: 204
 - identifier: containers_amazon_ecs_apm
-  name: APM
+  name: Collecte de logs
   parent: containers_kubernetes_tag
   url: containers/amazon_ecs/apm/
   weight: 205
@@ -9202,7 +9266,7 @@ main:
   url: opentelemetry/runtime_metrics
   weight: 401
 - identifier: otel_runtime_metrics_java
-  name: APM
+  name: Collecte de logs
   parent: otel_ingest_agent
   url: opentelemetry/runtime_metrics/java
   weight: 402
@@ -9500,7 +9564,7 @@ main:
   url: data_security/synthetics/
   weight: 305
 - identifier: account_management_saml
-  name: Real User Monitoring
+  name: Données collectées
   parent: data_security
   url: data_security/real_user_monitoring/
   weight: 306
@@ -9782,7 +9846,7 @@ main:
 - identifier: ci_python
   name: Tracing
   parent: ci_java
-  url: error_tracking/custom_grouping?tab=apm
+  url: error_tracking/custom_grouping
   weight: 1002
 - identifier: ci_ruby
   name: Clés d'API et d'application
@@ -10142,7 +10206,7 @@ main:
   url: observability_pipelines/reference/sources/
   weight: 6
 - identifier: observability_pipelines
-  name: Real User Monitoring
+  name: Données collectées
   parent: log_configuration
   url: observability_pipelines/reference/transforms/
   weight: 7
@@ -11002,7 +11066,7 @@ main:
 - identifier: appsec_compat_ruby
   name: Tracing
   parent: appsec_compat
-  url: error_tracking/custom_grouping?tab=logs
+  url: error_tracking/custom_grouping
   weight: 604
 - identifier: appsec_compat_php
   name: PHP
@@ -11200,47 +11264,52 @@ main:
 - identifier: continuous_testing_cicd_integrations
   name: Guides
   parent: synthetics
-  url: synthetics/guide/
+  url: security/cloud_security_management/misconfigurations/
   weight: 3
 - identifier: continuous_testing
   name: Gérer les règles de conformité
   parent: continuous_testing_cicd_integrations
-  url: synthetics/troubleshooting/
+  url: security/cloud_security_management/misconfigurations/compliance_rules
   weight: 301
 - identifier: continuous_testing_cicd_integrations
   name: Créer des règles personnalisées
   parent: continuous_testing_cicd_integrations
-  url: continuous_testing/
+  url: security/cloud_security_management/misconfigurations/custom_rules
   weight: 302
 - identifier: continuous_testing_cicd_integrations
   name: Gérer la posture de conformité
   parent: continuous_testing_cicd_integrations
-  url: continuous_testing/cicd_integrations
+  url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
   weight: 303
 - identifier: cspm_custom_frameworks
   name: Créer des frameworks personnalisés
   parent: continuous_testing_cicd_integrations
-  url: security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
+  url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks
   weight: 101
 - identifier: continuous_testing
   name: Configuration
   parent: continuous_testing_cicd_integrations
-  url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+  url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks
   weight: 102
+- identifier: cspm_kspm
+  name: Kubernetes Security Posture Management
+  parent: continuous_testing_cicd_integrations
+  url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/kspm
+  weight: 103
 - identifier: continuous_testing
   name: Explorer les erreurs de configuration
   parent: continuous_testing_cicd_integrations
-  url: /continuous_testing/cicd_integrations/azure_devops_extension
+  url: /security/cloud_security_management/misconfigurations/findings
   weight: 305
 - identifier: cspm_export_misconfigurations
   name: Exporter les erreurs de configuration
   parent: continuous_testing
-  url: /security/misconfigurations/findings/export_misconfigurations
+  url: /security/cloud_security_management/misconfigurations/findings/export_misconfigurations
   weight: 101
 - identifier: continuous_testing
   name: CircleCI Orb
   parent: continuous_testing_cicd_integrations
-  url: /continuous_testing/cicd_integrations/circleci_orb
+  url: /security/cloud_security_management/misconfigurations/signals_explorer/
   weight: 306
 - identifier: ux_monitoring_heading
   name: GitHub Actions
@@ -11530,7 +11599,7 @@ main:
   url: real_user_monitoring/session_replay/developer_tools
   weight: 4
 - identifier: rum_heatmaps
-  name: Dépannage de la solution Browser
+  name: Configuration
   parent: rum_session_replay_developer_tools
   url: real_user_monitoring/session_replay/troubleshooting
   weight: 401
@@ -11615,7 +11684,7 @@ main:
   url: real_user_monitoring/explorer/watchdog_insights/
   weight: 10
 - identifier: rum_funnel_analysis
-  name: Analyse d'entonnoirs
+  name: Métriques
   parent: rum
   url: real_user_monitoring/funnel_analysis
   weight: 11
@@ -11661,7 +11730,7 @@ main:
   url: real_user_monitoring/error_tracking/explorer/
   weight: 2
 - identifier: rum_error_tracking_browser
-  name: Dépannage de la solution Browser
+  name: Configuration
   parent: rum_error_tracking_explorer
   url: real_user_monitoring/error_tracking/browser/
   weight: 201
@@ -11701,7 +11770,7 @@ main:
   url: real_user_monitoring/guide/
   weight: 4
 - identifier: rum_error_tracking_roku
-  name: Analyse d'entonnoirs
+  name: Métriques
   parent: rum_error_tracking
   url: real_user_monitoring/funnel_analysis
   weight: 5
@@ -11753,7 +11822,7 @@ main:
   url: network_monitoring/devices
   weight: 1
 - identifier: npm_guides
-  name: Real User Monitoring
+  name: Données collectées
   parent: npm_guides
   url: network_monitoring/devices/snmp_metrics
   weight: 101
@@ -11818,7 +11887,7 @@ main:
   url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
   weight: 203
 - identifier: dev_tools_integrations
-  name: Real User Monitoring
+  name: Données collectées
   parent: ndm_guide
   url: developers/integrations/log_integration/
   weight: 204
@@ -11998,7 +12067,7 @@ main:
   url: account_management/users/
   weight: 704
 - identifier: account_management
-  name: Aide
+  name: Événements
   parent: account_management
   url: account_management/login_methods/
   weight: 705
@@ -12055,7 +12124,7 @@ main:
 - identifier: account_management
   name: Tracing
   parent: account_management_saml
-  url: error_tracking/custom_grouping?tab=rum
+  url: error_tracking/custom_grouping
   weight: 1104
 - identifier: account_management
   name: Clés d'API et d'application
@@ -12208,6 +12277,11 @@ main:
   parent: account_management_saml
   url: help/
   weight: 7
+- identifier: account_management_teams_management
+  name: Gestion d'équipe
+  parent: account_management_rbac
+  url: account_management/teams/manage/
+  weight: 701
 - identifier: account_management_rbac
   name: Aide
   parent: account_management_saml
@@ -12219,7 +12293,7 @@ main:
   url: help/
   weight: 9
 - identifier: account_management_rbac
-  name: Aide
+  name: Événements
   parent: account_management_rbac
   url: help/
   weight: 901
@@ -12248,6 +12322,10 @@ main:
   parent: account_management_saml
   url: help/
   weight: 11
+- name: Quota du produit
+  parent: account_management_rbac
+  url: account_management/billing/product_allotments
+  weight: 5
 - identifier: account_management_rbac
   name: Aide
   parent: account_management_saml

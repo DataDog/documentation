@@ -75,17 +75,25 @@ Watchdog이 특히 `severe`라고 식별한 로그 이상 상태는 [Watchdog �
 `severe` 이상은 다음과 같이 정의됩니다.
 
 * 오류 로그 포함
-* 최소 10분 이상 지속 (일시적 오류는 배제할 목적)
-* 상당히 크게 증가한 경우(약간 증가한 경우는 배제할 목적)
+* 최소 10분 동안 지속(일시적인 오류를 방지하기 위해).
+* 큰 폭의 증가(작은 증가를 피하기 위해).
+* 낮은 `noise` 점수 (특정 서비스에 대한 많은 경고 발생을 방지하기 위해). `noise` 점수는 서비스 수준에서 다음과 같이 계산됩니다.
+    * 오류 패턴의 수를 살펴봅니다(높을수록 노이즈가 더 심함).
+    * 패턴이 서로 얼마나 가까운지 계산합니다(가까울수록 노이즈가 더 심함).
 
 #### 필수 데이터 기록
 
 Watchdog이 예상 동작의 기준을 설정하려면 몇 가지 데이터가 필요합니다. 로그 이상 상태의 경우 최소 기록 내역은 24시간입니다. 
 Watchdog은 필수 최소 기록이 확보되면 이상 징후을 찾기 시작하며, 기록량이 증가할수록 Watchdog의 성능이 향상됩니다. 6주분의 기록 내역이 존재할 때 성능은 최적화됩니다.
 
+#### 로그 이상 감지 비활성화
+
+로그 이상 감지를 비활성화하려면 [Log Management 파이프라인 페이지][4]로 이동하여  Log Anomalies 토글을 클릭합니다.
+
 [1]: https://app.datadoghq.com/watchdog
 [2]: /ko/monitors/types/watchdog/
 [3]: /ko/watchdog/insights?tab=logmanagement#explore-insights
+[4]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "APM" %}}
 
@@ -154,7 +162,7 @@ Watchdog은 파워 모니터링 및 대시보드와 동일한 시즌 알고리�
 
 ## Watchdog 경고를 확인할 수 있는 곳
 
-Watchdog 경고는 Datadog 사이트 내의 다음 세 위치에 표시됩니다.
+Watchdog Alerts는 Datadog 내의 다음 위치에 나타납니다.
 
 * [Watchdog 경고 익스플로러][1]
 * 개별 [APM 서비스 페이지][3]

@@ -34,22 +34,17 @@ This guide walks you through best practices for getting your team up and running
 ## Phase 1: Enable
 1. Check [ASM Compatibility][2] to see if your service is supported.
 2. Enable Software Composition Analysis on your services. 
-   - Navigate to [**Security -> Configuration -> Application Security -> Quick Start Guide**][4].
+   - Navigate to [**Security -> Application Security -> Settings -> Quick Start Guide**][4].
    - Expand **Enable Vulnerability Detection**.
    - Click **Start Activation**.
    - Choose services to secure with ASM.
 
    OR
    
-   - Navigate to [**Security -> Configuration -> Application Security -> Setup**][9].
-   - Click **Get Started** to enable Software Composition Analysis for static analysis in source code.
-   - Select and configure your CI/CD provider.
-   - Click **Get Started** to enable Software Composition Analysis for runtime analysis in running services.
-   - Choose services to secure with ASM.
-   - Click **Get Started** to enable Software Composition Analysis for code security.
-   - Select your programming language, and restart your services.
-
-   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
+   - Navigate to [**Security -> Application Security -> Settings -> Setup**][9].
+   - To enable Software Composition Analysis for static analysis in source code, in **Software Composition Analysis**, click **Get Started**.
+     - In **SCA static analysis in source code**, click **See Instructions**.
+     - In **SCA runtime analysis in running services**, click **Select Services**.
 
 ## Phase 2: Identify
 1. **Identify Vulnerabilities**: Navigate to [**Security -> Application Security -> Vulnerabilities**][5].  

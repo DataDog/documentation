@@ -55,11 +55,11 @@ En esta guía, te enseñaremos a utilizar el sitio de Datadog para declarar una 
 
 Esta guía explica cómo utilizar el [Clipboard de Datadog][2] para declarar una incidencia. El Clipboard permite recopilar información de distintas fuentes, como gráficos, monitores, dashboards completos o [notebooks][3]. De este modo, podrás aportar la máxima información posible al declarar una incidencia.
 
-1. En el menú de Datadog de la izquierda, dirígete a **Dashboard** > **Dashboard lists** (Dashboard > Listas de dashboards) y selecciona **System - Metrics** (Sistema - Métricas).
+1. En Datadog, navega hasta [**Dashboard List**][15] (Lista de dashboards) y selecciona **System - Metrics** (Sistema - Métricas).
 2. Pasa el cursor sobre uno de los gráficos y cópialo en el Clipboard con uno de los siguientes comandos:
     - **Ctrl**/**Cmd** + **C**
     - Haz clic en el icono **Export** (Exportar) del gráfico y selecciona **Copy** (Copiar).
-3. En el menú de Datadog de la izquierda, dirígete a *Monitors** > **Manage Monitors** (Monitores > Gestionar monitores) y selecciona **[Auto] Clock in sync with NTP** (Reloj automático sincronizado con el NTP).
+3. En el menú Datadog de la izquierda, ve a [**Monitors** > **Monitors List**][16] (Monitores > Lista de monitores) y selecciona  **[Auto] Clock in sync with NTP** (Autorreloj sincronizado con NTP).
 4. Abre el Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**.
 5. En el Clipboard, haz clic en **Add current page** (Añadir la página actual) para añadir el monitor al Clipboard.
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="Copiar en el Clipboard" responsive="true" style="width:100%;">}}
@@ -68,21 +68,21 @@ Esta guía explica cómo utilizar el [Clipboard de Datadog][2] para declarar una
 8. Describe el problema:
 |                          |                                                                                                                                                                                                                                                                                                        |
 |--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Título                    | Utiliza las convenciones de nomenclatura que tu equipo estime oportunas para los títulos de las incidencias. Dado que no se trata de una incidencia real, puedes incluir la palabra `TEST` para dejar en claro que se trata de una prueba. Ejemplo: `[TEST] My incident test`                                                                      |
+| Título                    | Utiliza las convenciones de nomenclatura que tu equipo estime oportunas para los títulos de las incidencias. Dado que no se trata de una incidencia real, puedes incluir la palabra `TEST` para dejar en claro que es una prueba. Ejemplo: `[TEST] My incident test`                                                                      |
 | Gravedad           | Selecciona la opción **Unknown** (Desconocida), ya que no está claro si esto afecta a los clientes ni cuál está siendo el impacto en los servicios relacionados. Consulta el significado de cada nivel de gravedad en la descripción de la aplicación y sigue las directrices de tu equipo.                                                                                |
-| Responsable de la incidencia       | Déjala asignada a tu nombre. Si se tratara de una incidencia real, se asignaría a la persona a cargo de su investigación. Según avance la investigación de la incidencia, tú u otras personas podréis actualizar quién es su responsable.                                                                                 |
-| Notificaciones            | Deja este campo en blanco porque esto es solo una prueba, así que no es necesario enviar una alerta a nadie más ni a ningún otro servicio. Cuando se trate de una incidencia real, añade a las personas y a los servicios a los que se debe informar para que colaboren en la investigación y la búsqueda de soluciones. Si lo deseas, también puedes enviar estas notificaciones a Slack y PagerDuty. |
+| Responsable de la incidencia       | Déjala asignada a tu nombre. Si se tratara de una incidencia real, se asignaría a la persona a cargo de su investigación. Según avance la investigación de la incidencia, otras personas o tú podréis actualizar quién es su responsable.                                                                                 |
+| Notificaciones            | Deja este campo en blanco porque esto es solo una prueba, así que no es necesario enviar una alerta a nadie más ni a ningún otro servicio. Cuando se trate de una incidencia real, añade a las personas y los servicios a los que se debe informar para que colaboren en la investigación y la búsqueda de soluciones. Si lo deseas, también puedes enviar estas notificaciones a Slack y PagerDuty. |
 | Notas y enlaces            | Añade información para reflejar los motivos por los que declaras la incidencia. Pueden ser gráficos, logs u otros elementos visuales clave. El gráfico y el monitor que has seleccionado ya están incluidos, pero puedes añadir señales adicionales. Por ejemplo, copia y pega la URL de esta guía.
 9. Haz clic en **Declare Incident** (Declarar incidencia) para crear la incidencia.
    Además, se puede declarar una incidencia desde un [gráfico][4], un [monitor][5] o la [API de incidencias][6]. En el caso de los usuarios de APM, basta con hacer clic en el icono de incidencias de cualquier gráfico de APM para declarar una incidencia.
 Gracias a la integración de Slack, también puedes utilizar el atajo `/datadog incident` para declarar una incidencia y establecer el título, la gravedad y el impacto causado al cliente.
 10. Haz clic en **Slack Channel** (Canal de Slack), en la página de la incidencia, para acceder a su canal de Slack.
 
-Con cada nueva incidencia, se creará automáticamente un nuevo canal de Slack específico para la incidencia, lo que simplificará las comunicaciones con el equipo para comenzar a solucionar los problemas. Si la integración de Slack de tu organización está configurada para actualizar la incidencia en un canal general, este se actualizará con la nueva incidencia.
+Con cada nueva incidencia, se creará automáticamente un nuevo canal de Slack específico para simplificar las comunicaciones con el equipo y comenzar a solucionar los problemas. Si la integración de Slack de tu organización está configurada para actualizar la incidencia en un canal general, este se actualizará con la nueva incidencia.
 
 En este ejemplo, eres la única persona que se ha añadido al nuevo canal de la incidencia. En una incidencia real, al incluir personas o servicios en _Notifications_ (Notificaciones), se añadirán todos los destinatarios al canal de la incidencia de forma automática.
 
-Si no has habilitado la integración de Slack, haz clic en **Add Chat** (Añadir chat) para añadir el enlace al servicio de chat que estés utilizando para tratar la incidencia.
+Si no has activado la integración de Slack, haz clic en **Add Chat** (Añadir chat) para añadir el enlace al servicio de chat que estés utilizando para abordar la incidencia.
 
 Haz clic en **Add Video Call** (Añadir videollamada) para añadir un enlace a la llamada en la que se está tratando la incidencia.
 
@@ -92,7 +92,7 @@ La página de la incidencia tiene cuatro secciones principales: _Overview_ (Info
 
 #### Información general
 
-**Situación:** Tras investigar un poco, descubres que la causa principal es un host que se está quedando sin memoria. Además, te informan que esto afecta a un pequeño subconjunto de clientes y notas que las páginas se cargan con lentitud. La primera notificación de un cliente llegó hace 15 minutos. Se trata de una incidencia SEV-3 (nivel de gravedad: 3).
+**Situación:** Tras investigar un poco, descubres que la causa principal es un host que se está quedando sin memoria. Además, te informan de que esto afecta a un pequeño subconjunto de clientes y observas que las páginas se cargan con lentitud. La primera notificación de un cliente llegó hace 15 minutos. Se trata de una incidencia SEV-3 (nivel de gravedad: 3).
 
 En la sección _Overview_ (Información general), puedes actualizar los campos de la incidencia y el impacto en el cliente a medida que avanza la investigación.
 
@@ -133,16 +133,16 @@ Para poder unificar las comunicaciones importantes relacionadas con la investiga
 
 **Situación**: Hay un notebook sobre cómo tratar este tipo de problemas, donde se recogen las tareas que hay que realizar para solucionarlos.
 
- En la sección _Remediation_ (Solución), se puede hacer un seguimiento de los documentos y las tareas relacionadas con la investigación de la incidencia o con las medidas correctivas posteriores a la incidencia.
+ En la sección _Remediation_ (Solución), se puede hacer un seguimiento de las tareas y documentos relacionados con la investigación de la incidencia o con las medidas correctivas posteriores.
 
 1. Haz clic en la pestaña **Remediation** (Solución).
-2. Haz clic en el icono más `+` en el cuadro _Documents_ (Documentos) y añade un enlace a un [notebook de Datadog][7]. Todas las actualizaciones de la sección _Documentos_ se añaden a la línea de tiempo como un tipo de _Incident Update_ (Actualización de incidencia).
-3. Para añadir una tarea, basta con introducir la descripción de la misma en el recuadro _Incident Tasks_ (Tareas de la incidencia). Ejemplo: `Run the steps in the notebook.`
+2. Haz clic en el icono `+` en el cuadro _Documents_ (Documentos) y añade un enlace a un [notebook de Datadog][7]. Todas las actualizaciones de la sección _Documents_ se añaden a la línea de tiempo como un tipo de _Incident Update_ (Actualización de incidencia).
+3. Para añadir una tarea, basta con introducir su descripción en el recuadro _Incident Tasks_ (Tareas de la incidencia). Ejemplo: `Run the steps in the notebook.`
 4. Haz clic en **Create Task** (Crear tarea).
-5. Haz clic en **Assign To** (Asignar a) y asígnatela a ti mismo.
+5. Haz clic en **Assign To** (Asignar a) y asígnatela a ti.
 6. Haz clic en *Set Due Date** (Configurar fecha de vencimiento) y pon la fecha de hoy.
-    Todas las adiciones y modificaciones de tareas se registrarán en la _Timeline_ (Cronología).
-    También puedes añadir tareas posteriores a la incidencia en la sección _Remediation_ (Solución) para realizar un seguimiento de las mismas.
+    Todas las adiciones y modificaciones de tareas se registrarán en _Timeline_ (Cronología).
+    También puedes añadir tareas posteriores a la incidencia en la sección _Remediation_ (Solución) para llevar un seguimiento.
 
 #### Notificaciones
 
@@ -159,34 +159,34 @@ En la sección _Notifications_ (Notificaciones), puedes enviar una notificación
 6. Añádete a ti mismo en el campo _Recipients_ (Destinatarios).
 7. Haz clic en **Send** (Enviar).
     Deberías recibir un correo electrónico con el mensaje.
-    Puedes crear [plantillas de mensajes][8] personalizadas. Las plantillas se pueden agrupar gracias al campo _Category_ (Categoría).
+    Puedes crear [plantillas de mensajes][8] personalizadas. Las plantillas se pueden agrupar mediante el campo _Category_ (Categoría).
 
 ### Resolución e informe retrospectivo
 
 **Situación:** Se confirma que el problema ya no afecta a los clientes y que has resuelto la incidencia. El equipo quiere un informe retrospectivo para ver qué ha fallado.
 
 1. Dirígete a la sección _Overview_ (Información general).
-3. Cambia el estado de _STABLE_ (Estable) a _RESOLVED_ (Resuelto) para que la incidencia deje de estar activa. También puedes modificar la fecha y la hora si la incidencia ya no afectaba a los clientes antes de que esta se resolviera.
+3. Cambia el estado de _STABLE_ (Estable) a _RESOLVED_ (Resuelto) para que la incidencia deje de estar activa. También puedes modificar la fecha y la hora si la incidencia dejó de afectar a los clientes antes de resolverse.
 7. El botón _Generate Postmortem_ (Generar informe retrospectivo) aparecerá en la parte superior de la página cuando el estado de una incidencia se haya configurado como resuelto.
 8. Desde la sección de cronología, selecciona **Marked as Important** (Marcado como importante) para que solo se añadan al informe retrospectivo los eventos _importantes_.
 9. Haz clic en **Generate** (Generar).
 
-El informe retrospectivo se genera como un notebook de Datadog e incluye los eventos de la cronología y los recursos a los que se hizo referencia durante la investigación y la fase de búsqueda de soluciones. De este modo, resulta más fácil revisar y documentar con mayor detalle la causa del problema y se puede determinar cómo evitarlo en el futuro. El notebook de Datadog es compatible con la colaboración en tiempo real, así que tú y tu equipo podéis editarlo al mismo tiempo.
+El informe retrospectivo se genera como un notebook de Datadog e incluye los eventos de la cronología y los recursos a los que se hizo referencia durante la investigación y la fase de búsqueda de soluciones. De este modo, resulta más fácil revisar y documentar con mayor detalle la causa del problema y se puede determinar cómo evitarlo en el futuro. El notebook de Datadog es compatible con la colaboración en tiempo real, así que tu equipo y tú podéis editarlo al mismo tiempo.
 
-Si es necesario que se realicen tareas de seguimiento para garantizar que el problema no vuelva a producirse, añádelas y síguelas en la sección _Incident Tasks_ (Tareas de la incidencia) de la sección Remediation (Solución).
+Si es necesario hacer tareas de seguimiento para garantizar que el problema no se repita, añádelas para tenerlas bajo control en la sección _Incident Tasks_ (Tareas de la incidencia) de la sección Remediation (Solución).
 
 {{< img src="getting_started/incident_management/generate_postmortem.png" alt="Generate Postmortem (Generar informe retrospectivo)" responsive="true" style="width:80%;">}}
 ## Personalizar el flujo de trabajo de la gestión de incidencias
 
 Según las necesidades de tu organización, la gestión de incidencias de Datadog puede personalizarse con diferentes niveles de gravedad y estado, e incluye información adicional, como los servicios de APM y los equipos relacionados con la incidencia. Para obtener más información, consulta esta [sección][9] de la página de Gestión de incidencias.
 
-También puedes configurar reglas de notificación para notificar automáticamente a personas concretas o a servicios en función del nivel de gravedad de una incidencia. Para obtener más información, consulta la documentación [Configuración de incidencias][10].
+También puedes configurar reglas de notificación para avisar automáticamente a personas o servicios concretos según el nivel de gravedad de una incidencia. Para obtener más información, consulta la documentación [Configuración de incidencias][10].
 
-Para personalizar la gestión de incidencias, dirígete a la [página de configuración de incidencias][11]. En el menú de Datadog de la izquierda, dirígete a **Monitors** > **Incidents** (Monitores > Incidencias); si aparece una pantalla de bienvenida a la gestión de incidencias, haz clic en **Get Started** (Comenzar). A continuación, en la parte superior, haz clic en **Settings** (Configuración).
+Para personalizar la gestión de incidencias, visita la [página de configuración de incidencias][11]. En el menú de Datadog de la izquierda, dirígete a **Monitors** > **Incidents** (Monitores > Incidencias); si aparece una pantalla de bienvenida a la gestión de incidencias, haz clic en **Get Started** (Comenzar). A continuación, en la parte superior, haz clic en **Settings** (Configuración).
 
 ## Crear y gestionar incidencias desde un dispositivo móvil
 
-La [aplicación móvil de Datadog][12], disponible en el [App Store de Apple][13] y en [Google Play][14], permite a los usuarios crear, ver, buscar y filtrar todas las incidencias a las que tienes acceso en tu cuenta de Datadog desde dicha aplicación. La finalidad es garantizar una respuesta y resolución rápidas sin necesidad de abrir el portátil.
+La [aplicación móvil de Datadog][12], disponible en el [App Store de Apple][13] y en [Google Play][14], permite a los usuarios crear, ver, buscar y filtrar todas las incidencias a las que tienes acceso en la aplicación con tu cuenta de Datadog. La finalidad es garantizar una respuesta y resolución rápidas sin necesidad de abrir el portátil.
 
 Asimismo, puedes declarar y editar incidencias y comunicarte rápidamente con tus equipos gracias a las integraciones con Slack, Zoom y muchas otras herramientas.
 
@@ -210,3 +210,5 @@ Asimismo, puedes declarar y editar incidencias y comunicarte rápidamente con tu
 [12]: /es/service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/monitors/manage

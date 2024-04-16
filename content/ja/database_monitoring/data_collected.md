@@ -4,7 +4,7 @@ further_reading: null
 kind: documentation
 title: データベースモニタリングの収集データ
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -19,8 +19,9 @@ title: データベースモニタリングの収集データ
 
 データベースモニタリングビューに使用されるメトリクスは、主に次のとおりです。
 - **MySQL**: `mysql.queries.*`
-- **Postrgres**: `postgresql.queries.*`
+- **Postgres**: `postgresql.queries.*`
 - **SQL Server**: `sqlserver.queries.*`
+- **Oracle**: `oracle.queries.*`
 
 ## 正規化クエリ
 
@@ -84,4 +85,4 @@ _その他のクエリ_ とは、上位 200 件に表れなかったすべての
 [1]: /ja/dashboards/
 [2]: /ja/monitors/
 [3]: /ja/notebooks/
-[4]: /ja/security/logs/
+[4]: /ja/data_security/logs/
