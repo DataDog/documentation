@@ -11,7 +11,7 @@ description: Use OAuth to authenticate integrations.
 
 ## Overview
 
-OAuth enables Datadog customers to easily and securely authorize third-party access to their Datadog organization. This authorization allows integrations to push data into Datadog or pull data out from Datadog without the need for customers to input API or app keys anywhere. For example, a user can consent to provide an on-call notification tool read access to their Datadog organization's monitors.
+OAuth enables Datadog customers to securely authorize third-party access to their Datadog organization. This authorization allows integrations to push data into Datadog or pull data out from Datadog without the need for customers to input API or app keys anywhere. For example, a user can consent to provide an on-call notification tool with read access to their Datadog organization's monitors.
 
 For more information on Datadog's OAuth implementation, see the [Datadog OAuth2 documentation][1].
 
@@ -21,7 +21,7 @@ OAuth support is required for all partner-built SaaS integrations that directly 
 
 ## Build an integration with OAuth
 
-When building an integration with OAuth, you should only select the scopes to which your application needs access. Once a customer consents to authorize your integration, all listed scopes will become available to your application via a token.
+When building an integration with OAuth, you should only select the scopes to which your application needs access. After a customer consents to authorize your integration, all listed scopes become available to your application through a token.
 
 You can include OAuth in a new integration (or add it to an existing integration) on the [Marketplace][2] or [Integrations][3] page by following the steps below. For existing integrations, note that there's no need to change your `app_uuid` in the `manifest.json`. 
 
