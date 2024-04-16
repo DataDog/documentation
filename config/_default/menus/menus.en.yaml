@@ -4523,9 +4523,9 @@ main:
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
     weight: 303
-  - name: Multi-factor authentication methods 
-    identifier: synthetics_browser_tests_toto_mfa
-    url: synthetics/browser_tests/browser-tests-totp
+  - name: Authentication in Browser Tests 
+    identifier: synthetics_browser_tests_authentication
+    url: synthetics/browser_tests/app-that-requires-login
     parent: synthetics_browser_tests
     weight: 303
   - name: Private Locations
