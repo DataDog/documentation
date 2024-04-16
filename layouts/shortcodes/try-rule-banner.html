@@ -4,7 +4,7 @@
     <div class="try-rule-content h-100">
         <div class="info d-flex align-items-center">
             <div class="avatars">
-                {{ $avatars := slice "github" "circleci" "vscode" }}
+                {{ $avatars := slice "github" "vscode" }}
                 {{ range $avatars }}
                     {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar" "fallback" "cloud") . "avatar" }}
                     {{ if $int_logo }}
