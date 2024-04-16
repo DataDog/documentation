@@ -1,0 +1,25 @@
+{{ $ctx := . }}
+{{ $banner := $ctx.Page.Params.banner}}
+<div class="try-rule-banner">
+    <div class="try-rule-content h-100">
+        <div class="info d-flex align-items-center">
+            <div class="avatars">
+                {{ $avatars := slice "github" "vscode" }}
+                {{ range $avatars }}
+                    {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar" "fallback" "cloud") . "avatar" }}
+                    {{ if $int_logo }}
+                    <img src="{{ $int_logo }}" height="20" width="20" alt="{{ $int_logo }}">
+                    {{end}}
+                {{end}}
+                {{/*  temporarily here until Druids makes a jetbrains logo available  */}}
+                <img src="{{$ctx.Site.Params.img_url}}images/icons/jetbrains.png" width="20" height="20" alt="jetbrains">
+            </div>
+            <p class="m-0">{{$banner.title | safeHTML}}</p>
+        </div>
+        <div class="external-link d-flex align-items-center position-relative">
+            <span href="/code-analysis">{{$banner.link.name}}</span>
+            {{ partial "icon" (dict "name" "external-link" "size" "12px" "color" "#006BC2") }}
+            <a class="stretched-link" href="{{$banner.link.url}}"></a>
+        </div>
+    </div>
+</div>
