@@ -1,6 +1,8 @@
 ---
 title: Use Time-based One-time Passwords (TOTPs) For Multi-Factor Authentication (MFA) In Browser Tests
 kind: guide
+aliases:
+ - /synthetics/guide/browser_tests_toto
 further_reading:
   - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'
     tag: 'Blog'
