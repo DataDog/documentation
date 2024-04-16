@@ -153,7 +153,7 @@ webViewController = WebViewController()
 ```
 
 Note that `JavaScriptMode.unrestricted` is required for tracking to work on Android.
-`allowedHosts` will match the given hosts and their subdomain. No regular expression is allowed.
+`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
 
 [1]: https://pub.dev/packages/webview_flutter
