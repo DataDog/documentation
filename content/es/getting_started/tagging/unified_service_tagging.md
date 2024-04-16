@@ -123,7 +123,7 @@ template:
 
 ###### Métricas a nivel del pod
 
-Para configurar métricas a nivel del pod, añade las siguientes etiquetas (labels) estándar (`tags.datadoghq.com`) a las especificaciones del pod de una implementación, de StatefulSet o de una tarea:
+Para configurar métricas a nivel del pod, añade las siguientes etiquetas (labels) estándar (`tags.datadoghq.com`) a las especificaciones del pod de una implementación, StatefulSet o tarea:
 
 ```yaml
 template:
@@ -133,9 +133,9 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>"
 ```
-Estas etiquetas (labels) cubren la CPU, la memoria, la red y las métricas de disco de Kubernetes a nivel del pod, y pueden utilizarse para introducir `DD_ENV`, `DD_SERVICE` y `DD_VERSION` en el contenedor de tu servicio a través de la [API descendente de Kubernetes][2].
+Estas etiquetas abarcan la CPU, la memoria, la red y las métricas de disco de Kubernetes a nivel del pod, y pueden utilizarse para introducir `DD_ENV`, `DD_SERVICE` y `DD_VERSION` en el contenedor de tu servicio a través de la [API descendente de Kubernetes][2].
 
-Si tienes varios contenedores en cada pod, podrás especificar etiquetas (labels) estándar según el contenedor:
+Si tienes varios contenedores en cada pod, podrás especificar etiquetas estándar según el contenedor:
 
 ```yaml
 tags.datadoghq.com/<container-name>.env
@@ -149,7 +149,7 @@ Para configurar [métricas de estado de Kubernetes][3]:
 
 1. Establece `join_standard_tags` como `true` en tu archivo de configuración. Consulta este [archivo de configuración de ejemplo][4] para conocer la localización de los ajustes.
 
-2. Añade las mismas etiquetas (labels) estándar a la colección de etiquetas (labels) del recurso superior. Por ejemplo: `Deployment`.
+2. Añade las mismas etiquetas estándar a la colección de etiquetas del recurso superior. Por ejemplo: `Deployment`.
 
   ```yaml
   apiVersion: apps/v1
