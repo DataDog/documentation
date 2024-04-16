@@ -100,7 +100,7 @@ DatadogWebViewTracking.xcframework
      WebViewTracking.enable(webView, allowedHosts)
    ```
 
-`allowedHosts` will match the given hosts and their subdomain. No regular expression is allowed.
+`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
 [2]: /real_user_monitoring/android/?tab=kotlin#setup
