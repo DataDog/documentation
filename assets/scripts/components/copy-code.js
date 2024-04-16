@@ -83,4 +83,4 @@ function updateCopyBtnText(btn){
 initCopyCode()
 
 // Export the functions for testing
-module.exports = {initCopyCode, getCode, addCopyButton, updateCopyBtnText}
+module.exports = {initCopyCode, getCode, copyCode, addCopyButton, updateCopyBtnText}

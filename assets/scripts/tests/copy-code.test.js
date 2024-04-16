@@ -98,4 +98,28 @@ describe('initCopyCode', () => {
         cc.updateCopyBtnText(btn);
         expect(btn.textContent).toBe('Copied!');
     })
+
+
+    it('should copy code snippet text to clipboard with the writeText method', () => {
+        document.body.innerHTML = `
+            <div class="highlight code-snippet">
+                <pre><code>some code</code></pre>
+                <button class="js-copy-button">Copy</button>
+            </div>
+        `;
+        const btn = document.querySelector('.js-copy-button');
+        
+        const clipboardMock = {
+            writeText: jest.fn(() => Promise.resolve())
+        };
+        Object.defineProperty(document, 'createRange', {
+            value: jest.fn(() => ({
+                selectNode: jest.fn(),
+            }))
+        })
+        navigator.clipboard = clipboardMock;
+        
+        cc.copyCode(btn);
+        expect(clipboardMock.writeText).toHaveBeenCalledTimes(1);
+    })
 })
