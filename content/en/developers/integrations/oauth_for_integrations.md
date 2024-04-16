@@ -17,7 +17,7 @@ For more information on Datadog's OAuth implementation, see the [Datadog OAuth2 
 
 ## When to use OAuth in an integration
 
-OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints] [12]. OAuth does not apply to software deployed on-premises or to Datadog Agent checks. 
+OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints][12]. OAuth does not apply to software deployed on-premises or to Datadog Agent checks. 
 
 ## Build an integration with OAuth
 
