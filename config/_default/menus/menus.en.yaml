@@ -4080,6 +4080,11 @@ main:
     parent: security_platform
     identifier: security_audit_trail
     weight: 6
+  - name: Account Takeover Protection
+    url: security/account_takeover_protection
+    parent: security_platform
+    identifier: security_ato_protection
+    weight: 7
   - name: Cloud SIEM
     url: security/cloud_siem/
     pre: siem
@@ -4441,12 +4446,12 @@ main:
     url: security/application_security/guide/
     parent: application_security
     identifier: appsec_guides
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 10
+    weight: 11
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
