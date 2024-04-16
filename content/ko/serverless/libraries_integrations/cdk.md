@@ -14,11 +14,14 @@ AWS CDK를 사용하여 서버리스 애플리케이션을 배포할 수 있도�
 
 CDK 라이브러리는 다음과 같은 방법으로 서버리스 애플리케이션에서 메트릭, 트레이스 및 로그 수집을 자동으로 설정합니다:
 
-- [파이썬(Python)][1], [Node.js][2] 및 [자바(Java)][15]의 람다 함수를 위한 Datadog 람다 레이어를 설치 및 설정합니다.
+-  [.NET][19], [자바(Java)][15], [Node.js][2] 및 [파이썬(Python)][1] 람다 함수에 대해 Datadog 레이어를 설치하고 설정합니다.
 - 람다 기능/함수에서 트레이스 및 커스텀 메트릭 수집을 활성화합니다.
 - Datadog 포워더(Forwarder)에서 람다 및 비 람다 로그 그룹에 대한 구독을 관리합니다.
 
 ## AWS CDK v1 vs AWS CDK v2
+
+**경고**: `AWS CDK v1`에 대한 지원이 종료되어 더 이상 `datadog-cdk-constructs`는 업데이트를 수신하지 않습니다. `AWS CDK v2`로 업그레이드하여 ([공식 마이그레이션 가이드](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html)) `datadog-cdk-constructs-v2` 사용으로 전환할 것을 강력히 권장합니다.
+
 Datadog CDK Constructs에는 두 개의 개별 버전인 `datadog-cdk-constructs`와 `datadog-cdk-constructs-v2`가 있습니다. 이들은 각각 `AWS CDK v1`및 `AWS CDK v2`와 함께 작동하도록 설계되었습니다.
 
 - `datadog-cdk-constructs-v2`는 Node >= 14가 필요하며, `datadog-cdk-constructs`는 Node >= 12를 지원합니다.
@@ -30,7 +33,7 @@ Datadog CDK Constructs에는 두 개의 개별 버전인 `datadog-cdk-constructs
 AWS CDK v2와 함께 사용하는 경우:
 ```
 yarn add --dev datadog-cdk-constructs-v2
-# or
+# 또는
 npm install datadog-cdk-constructs-v2 --save-dev
 ```
 
@@ -57,7 +60,7 @@ pip install datadog-cdk-constructs
 
 `Datadog CDK Construct Library`에는 피어 종속성이 있으므로 패키지 관리자의 출력에 주의하세요.
 
-## 사용법
+## 사용량
 
 ### AWS CDK
 
@@ -73,6 +76,7 @@ const datadog = new Datadog(this, "Datadog", {
   nodeLayerVersion: <LAYER_VERSION>,
   pythonLayerVersion: <LAYER_VERSION>,
   javaLayerVersion: <LAYER_VERSION>,
+  dotnetLayerVersion: <LAYER_VERSION>
   addLayers: <BOOLEAN>,
   extensionLayerVersion: "<EXTENSION_VERSION>",
   forwarderArn: "<FORWARDER_ARN>",
@@ -112,15 +116,15 @@ datadog.addForwarderToNonLambdaLogGroups([<LOG_GROUPS>])
 <details>
   <summary>datadog-cdk version satisfied, but Datadog Github Integration NOT installed</summary>
 
-  If the Datadog Github Integration is not installed, you need to import the `datadog-ci` package and manually upload your Git metadata to Datadog.
-  We recommend you do this where your CDK Stack is initialized.
+Datadog Github 통합이 설치되어 있지 않은 경우, `datadog-ci` 패키지를 가져와서 수동으로 Git 메타데이터를 Datadog에 업로드해야 합니다.
+CDK Stack이 초기화된 곳에서 이 작업을 수행하는 것이 좋습니다.
 
   ```typescript
   const app = new cdk.App();
 
-  // Make sure to add @datadog/datadog-ci via your package manager
+  // 패키지 관리자를 통해 @datadog/datadog-ci를 추가해야 합니다.
   const datadogCi = require("@datadog/datadog-ci");
-  // Manually uploading Git metadata to Datadog.
+  // Datadog에 수동으로 Git 메타데이터 업로드하기
   datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
   const app = new cdk.App();
@@ -132,22 +136,22 @@ datadog.addForwarderToNonLambdaLogGroups([<LOG_GROUPS>])
 <details>
   <summary>datadog-cdk version NOT satisfied</summary>
 
-  Change your initialization function as follows (note: we're changing this to pass just the `gitHash` value to the CDK):
+초기화 함수를 다음과 같이 변경합니다(참고: `gitHash` 값만 CDK에 전달하도록 변경 중입니다):
 
   ```typescript
   async function main() {
-    // Make sure to add @datadog/datadog-ci via your package manager
+    // 패키지 관리자를 통해 @datadog/datadog-ci를 추가해야 합니다.
     const datadogCi = require("@datadog/datadog-ci");
     const [, gitHash] = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
     const app = new cdk.App();
-    // Pass in the hash to the ExampleStack constructor
+    // ExampleStack 컨스트럭터에 해시를 전달합니다.
     new ExampleStack(app, "ExampleStack", {}, gitHash);
   }
   ```
-  Ensure you call this function to initialize your stack.
+ 이 함수를 호출하여 스택을 초기화해야 합니다.
 
-  In your stack constructor, change to add an optional `gitHash` parameter, and call `addGitCommitMetadata()`:
+스택 컨스트럭터에서 부수적인 `gitHash` 파라미터를 추가하도록 변경하고 `addGitCommitMetadata()`를 호출합니다:
 
   ```typescript
   export class ExampleStack extends cdk.Stack {
@@ -168,10 +172,11 @@ _참고_: 설명서는 npm 패키지 파라미터를 사용하지만 PyPI 패키
 
 | npm 패키지 파라미터 | PyPI 패키지 파라미터 | 설명 |
 | --- | --- | --- |
-| `addLayers` | `add_layers` | Lambda 레이어를 추가할지 또는 사용자가 자신의 레이어를 가져올 것으로 예상할지 여부입니다. 기본값은 true입니다. true인 경우 람다 라이브러리 버전 변수도 필요합니다. false인 경우 함수의 배포 패키지에 Datadog 람다 라이브러리를 포함해야 합니다. |
-| `pythonLayerVersion` | `python_layer_version` | 설치할 Python Lambda 레이어의 버전(예: 21)입니다. Python으로 작성된 Lambda 함수를 하나 이상 배포하는 경우 에 필요하며 `addLayers`는 true입니다. 최신 버전 번호는 [여기][5]에서 찾을 수 있습니다. |
-| `nodeLayerVersion` | `node_layer_version` | 설치할  Node.js Lambda 레이어의 버전(예: 29)입니다. Node.js로 작성된 Lambda 함수를 하나 이상 배포하는 경우 에 필요하며 `addLayers`는 true입니다. 최신 버전 번호는 [여기][6]에서 찾을 수 있습니다. |
-| `javaLayerVersion` | `java_layer_version` | 설치할 Java 레이어의 버전(예: 8)입니다. Java로 작성된 Lambda 함수를 하나 이상 배포하는 경우에 필요하며 `addLayers`는 true여야 합니다. 최신 버전 번호는 [서버리스 Java 설치 설명서][15]에서 확인할 수 있습니다. **참고**: Datadog 컨스트럭트가 Java 함수를 올바르게 계측하려면 `extensionLayerVersion >= 25`와 `javaLayerVersion >= 5`가 필요합니다. |
+| `addLayers` | `add_layers` | 람다 레이어를 추가할지 또는 사용자가 자체적인 레이어를 가져올지 여부입니다. 기본값은 `true`입니다. `true`면 람다 라이브러리 버전 변수도 필요합니다. `false`면 함수의 배포 패키지에 Datadog 람다 라이브러리를 표시해야 합니다. |
+| `pythonLayerVersion` | `python_layer_version` | `83` 등 설치할 파이썬(Python) 람다 레이어 버전입니다. 하나 이상의 람다 함수를 파이썬(Python)에서 작성하여 배포하고 `addLayers`가 참인 경우 필요합니다. [여기][5]서 최신 버전을 찾으세요. |
+| `nodeLayerVersion` | `node_layer_version` | `100` 등 설치할 Node.js 람바 레이어 버전입니다. Node.js로 작성된 하나 이상의 람다 함수를 배포하고 `addLayers`가 `true`인 경우 필요합니다. [여기][6]에서 최신 버전 번호를 찾으세요. |
+| `javaLayerVersion` | `java_layer_version` | `8` 등 설치할 자바(Java) 레이어 버전입니다. 자바로 작성된 하나 이상의 람다 함수를 배포하고 `addLayers`가 `true`인 경우 필요합니다. [서버리스 자바 설치 설명서][15]에서 최신 버전 번호를 찾으세요. **참고**: `extensionLayerVersion >= 25` 및 `javaLayerVersion >= 5`는 Datadog 컨스트럭트가 자바 함수를 제대로 계측하는 데 필요합니다. |
+| `dotnetLayerVersion` | `dotnet_layer_version` | `13` 등 설치할 .NET 레이어 버전입니다. .NET으로 작성된 하나 이상의 람다 함수를 배포하고 `addLayers`가 `true`인 경우 필요합니다. [여기][18]에서 최신 버전 번호를 찾으세요. |
 | `extensionLayerVersion` | `extension_layer_version` | 설치할 Datadog Lambda 확장 레이어의 버전(예: 5)입니다. `extensionLayerVersion`가 설정된 경우 `apiKey`(암호화된 경우에는 `apiKMSKey` 또는 `apiKeySecretArn`)도 설정해야 합니다. 활성화되면 람다 함수 로그 그룹이 포워더(Forwarder)에 등록되지 않습니다. 람다 확장에 대한 자세한 내용은 [여기][12]에서 확인하세요. |
 | `forwarderArn` | `forwarder_arn` | 설정되면 플러그인이 자동으로 Datadog 포워더(Forwarder)를 함수의 로그 그룹에 등록합니다. `extensionLayerVersion`가 설정되어 있으면 `forwarderArn`는 설정하지 마세요. |
 | `createForwarderPermissions` | `createForwarderPermissions` | `true`로 설정하면 로그 그룹별로 Datadog 포워더(Forwarder)에 대한 람다 권한을 생성합니다. Datadog 포워더(Forwarder)에는 기본적으로 설정된 권한이 있기 때문에 대부분의 사용 용도에서는 이 권한이 필요하지 않습니다. |
@@ -191,17 +196,17 @@ _참고_: 설명서는 npm 패키지 파라미터를 사용하지만 PyPI 패키
 | `service` | `service` | `extensionLayerVersion`과 함께 설정하면 `DD_SERVICE` 환경 변수가 제공된 값으로 모든 람다 함수에 추가됩니다. `forwarderArn`와 함께 설정하면 제공된 값으로 모든 람다 함수에 `service` 태그가 추가됩니다. |
 | `version` | `version` | `extensionLayerVersion`과 함께 설정하면 `DD_VERSION` 환경 변수가 제공된 값으로 모든 람다 함수에 추가됩니다. `forwarderArn`와 함께 설정하면 제공된 값으로 모든 람다 함수에 `version` 태그가 추가됩니다. |
 | `tags` | `tags` | 키:값 쌍을 단일 문자열로써 쉼표로 구분한 목록입니다. `extensionLayerVersion`와 함께 설정하면 `DD_TAGS` 환경 변수가 제공된 값으로 모든 람다 함수에 추가됩니다. `forwarderArn`와 함께 설정하면 cdk는 문자열을 구문 분석하고 각 키:값 쌍을 모든 람다 함수에 태그로 설정합니다. |
-| `enableColdStartTracing`      | `enable_cold_start_tracing` | 콜드 스타트 추적을 비활성화하려면 `false`로 설정합니다. NodeJS 및 파이썬(Python)에서 사용됩니다. 기본값은 `true`입니다. |
+| `enableColdStartTracing`      | `enable_cold_start_tracing` | `false`로 설정하여 콜드 스타트 추적을 비활성화합니다. Node.js 및 파이썬(Python)에서 사용됩니다. 기본값은 `true`입니다. |
 | `coldStartTraceMinDuration`   | `min_cold_start_trace_duration` | 콜드 스타트 추적을 통해 추적할 모듈 로드 이벤트의 최소 지속 시간 (밀리초)을 설정합니다. 번호. 기본값은`3` 입니다. |
 | `coldStartTraceSkipLibs`      | `cold_start_trace_skip_libs`| (선택 사항) 쉼표로 구분된 라이브러리 목록에 대한 콜드 스타트 스팬 생성을 건너뛸 수 있습니다. 깊이를 제한하거나 알려진 라이브러리를 건너뛸 때 유용합니다. 기본값은 런타임에 따라 다릅니다. |
-| `enableProfiling`             | `enable_profiling` | `true`로 설정해 Datadog Continuous Profiler를 활성화합니다. NodeJS 및 파이썬(Python)용은 베타 버전에서 지원됩니다. 기본값은 `false`입니다. |
-| `encodeAuthorizerContext`     |`encode_authorizer_context` | 람다 인증자에 대해 `true`로 설정하면 추적 컨텍스트가 전파를 위해 응답으로 인코딩됩니다. NodeJS 및 파이썬(Python)에서 지원됩니다. 기본값은 `true`입니다. |
-| `decodeAuthorizerContext`     |`decode_authorizer_context` | 람다 인증자를 통해 인증된 람다에 대해 `true`로 설정하면 인코딩된 추적 컨텍스트를 구문 분석하여 사용합니다 (있는 경우). NodeJS 및 파이썬(Python)에서 지원됩니다. 기본값은 `true`입니다.                         |
-| `apmFlushDeadline` | 시간 초과가 발생하기 전에 스팬을 제출할 시점을 밀리초 단위로 결정하는 데 사용됩니다. AWS 람다 호출의 남은 시간이 설정된 값보다 작으면 추적기는 현재 활성 스팬과 완료된 모든 스팬을 제출하려고 시도합니다. NodeJS 및 파이썬(Python)에서 지원됩니다. 기본값은 `100`밀리초입니다. |
+| `enableProfiling`             | `enable_profiling` | `true`를 사용해 Datadog 지속성 프로파일러를 활성화합니다. Node.js 및 파이썬(Python) 베타에서 지원됩니다. 기본값은 `false`입니다. |
+| `encodeAuthorizerContext`     |`encode_authorizer_context` | 람다 권한 부여자에 대해 `true`로 설정되면 트레이싱 컨텍스트가 전파를 위해 응답을 인코딩합니다. Node.js 및 파이썬(Python)에서 지원됩니다. 기본값은 `true`입니다. |
+| `decodeAuthorizerContext`     |`decode_authorizer_context` | 람다 권한 부여자를 통해 권한이 부여된 람다에 대해 `true`로 설정되면 파싱하고 인코딩된 트레이싱 컨텍스트(발견된 경우)를 사용합니다. Node.js 및 파이썬(Python)에서 지원됩니다. 기본값은 `true`입니다.                         |
+| `apmFlushDeadline` | `apm_flush_deadline` | 타임아웃이 발생하기 전 스팬을 제출할 시점을 결정하는 데 사용됩니다. AWS 람다 호출에서 남은 시간이 설정된 값 미만인 경우, 트레이서는 현재 활성 스팬과 모든 완료 스팬을 제출하려 시도합니다. Node.js 및 파이썬(Python)에서 지원됩니다. 기본값은 `100`밀리초입니다. |
 | `redirectHandler` | `redirect_handler` | `false`로 설정하면 Datadog 람다 라이브러리의 핸들러로 리디렉션 핸들러를 건너뜁니다. Datadog 람다 확장으로만 계측할 때 유용합니다. 기본값은 `true`입니다. |
 
 **참고**: 위의 파라미터를 사용하면 해당 함수 수준 `DD_XXX` 환경 변수를 재정의할 수 있습니다.
-### 추적하기
+### 트레이싱 
 
 람다 함수에서 X-Ray  추적을 활성화합니다. 자세한 내용은 [CDK 설명서][9]를 참조하세요.
 
@@ -234,6 +239,7 @@ class RootStack extends cdk.Stack {
       nodeLayerVersion: <LAYER_VERSION>,
       pythonLayerVersion: <LAYER_VERSION>,
       javaLayerVersion: <LAYER_VERSION>,
+      dotnetLayerVersion: <LAYER-VERSION>,
       addLayers: <BOOLEAN>,
       forwarderArn: "<FORWARDER_ARN>",
       flushMetricsToLogs: <BOOLEAN>,
@@ -259,6 +265,7 @@ class NestedStack extends cdk.NestedStack {
       nodeLayerVersion: <LAYER_VERSION>,
       pythonLayerVersion: <LAYER_VERSION>,
       javaLayerVersion: <LAYER_VERSION>,
+      dotnetLayerVersion: <LAYER-VERSION>,
       addLayers: <BOOLEAN>,
       forwarderArn: "<FORWARDER_ARN>",
       flushMetricsToLogs: <BOOLEAN>,
@@ -286,7 +293,7 @@ class NestedStack extends cdk.NestedStack {
 
 람다 실행 역할에 지정된 암호에 대한 읽기 권한을 자동으로 부여하려면 Datadog 컨스트럭트를 초기화할 때 `apiKeySecretArn`대신 `apiKeySecret`을 전달합니다.
 
-```
+```typescript
 const { Secret } = require('aws-cdk-lib/aws-secretsmanager');
 
 const secret = Secret.fromSecretPartialArn(this, 'DatadogApiKeySecret', 'arn:aws:secretsmanager:us-west-1:123:secret:DATADOG_API_KEY');
@@ -302,7 +309,7 @@ const datadog = new Datadog(this, 'Datadog', {
 
 ## 작동 방식
 
-Datadog CDK 컨스트럭트는 람다 함수 목록을 가져와서 [자바(Java)][15], [Node.js][2] 및 [파이썬(Python)][1]용 람다 레이어를 함수에 연결하여 Datadog 람다 라이브러리를 설치합니다. 필요한 코드 변경 없이 람다 라이브러리를 초기화하는 교체 핸들러로 리디렉션됩니다. Datadog CDK construct에 추가된 추가 컨스트럭트는 각 람다 함수 아래의 해당 환경 변수로 변환됩니다(해당되는 경우/필요한 경우).
+Datadog CDK 컨스트럭트는 람다 함수 목록을 가져와 [.NET][19], [자바][15], [Node.js][2] 및  [파이썬][1]에 대한 람다 레이어를 함수에 추가하여 Datadog 람다 라이브러리를 설치합니다. 필수 코드 변경 없이 람다 라이브러리를 초기화하는 대체 핸들러로 리디렉션됩니다. Datadog CDK 컨스트럭트에 추가된 추가 설정은 또한 각 람다 함수의 해당 환경 변수입니다(해당 경우/필요 시).
 
 람다 함수 기반 로그 그룹은 `addLambdaFunctions` 메소드에 의해 자동으로 처리되지만 컨스트럭트에는 선택한 추가 로그 그룹에 포워더(Forwarder)를 등록하는 추가 함수`addForwarderToNonLambdaLogGroups`이 있습니다.
 
@@ -323,7 +330,7 @@ Datadog CDK 컨스트럭트는 람다 함수 목록을 가져와서 [자바(Java
 
 `v1`및 `v2` Datadog CDK Construct 라이브러리는 모두 Projen을 사용하여 `package.json`, `.gitignore`, `.npmignore` 등의 프로젝트 설정 파일을 유지 관리합니다. 대부분의 설정 파일은 읽기 전용 권한을 통해 Projen에 의해 보호됩니다. 이러한 파일을 변경하려면 `v1` 또는 `v2` 폴더 내에서 `.projenrc.js` 파일을 편집한 다음 `npx projen`(`v1` 또는 `v2`를 실행한 상태에서)을 실행하여 새 변경 사항을 통합합니다. 자세한 내용은 [Projen][13]에서 확인하세요.
 
-## 오프닝 이슈
+## 이슈 열기
 
 이 패키지와 관련된 버그가 발견되면 알려주시기 바랍니다. 새 이슈를 열기 전에 기존 이슈를 검색하여 중복을 피하세요.
 
@@ -384,3 +391,5 @@ DD_CONSTRUCT_DEBUG_LOGS=true npx cdk --app lib/sample/index.js synth --quiet
 [15]: https://docs.datadoghq.com/ko/serverless/installation/java/?tab=awscdk
 [16]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_secretsmanager.ISecret.html
 [17]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_secretsmanager.ISecret.html#grantwbrreadgrantee-versionstages
+[18]: https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases
+[19]: https://docs.datadoghq.com/ko/serverless/aws_lambda/installation/dotnet

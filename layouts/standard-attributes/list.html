@@ -152,18 +152,35 @@
             :class="(filterValue === 'all' || !filterValue) && 'active'"
             data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button>
         {{ end }}
-        {{ $sortedProduct := (split (replaceRE `icon-` "" (delimit $products " ")) " ") | sort }}
-        {{ range $sortedProduct }}
-            {{ $product := cond (eq . "log") (printf "%s management" .) .}}
+
+        {{/*  Transform Product Names  */}}
+        {{ $filterScratch := newScratch }}
+        {{ $sortedProduct := slice }}
+        {{ range $products }}
+          {{ $icon_name := replaceRE `icon-` "" . }}
+          {{ $product_name := $icon_name }}
+          {{ if in (slice "android" "ios" "flutter" "roku" "browser") $icon_name }}
+            {{ $product_name = (printf "RUM %s" $icon_name) }}
+          {{ else if eq $icon_name "log" }}
+            {{ $product_name = (printf "%s management" $icon_name) }}
+          {{ end }}
+          
+          {{ $filterScratch.SetInMap "productMap" $product_name $icon_name }}
+          {{ $sortedProduct = $sortedProduct | append $product_name }}
+        {{ end }}
+
+        {{ range $sortedProduct | sort }}
+            {{ $icon_name := index ($filterScratch.Get "productMap") .}}
+
             <button
-            @click="filterValue = '{{ $product }}'; pushState()"
+            @click="filterValue = '{{ $icon_name }}'; pushState()"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             :class="($el.dataset.filter === filterValue) && 'active'"
-            data-filter="{{ $product }}"
+            data-filter="{{ $icon_name }}"
             >
-              {{/*  Local partial  */}}
-              <span>{{partial "get-icon" (dict "name" . "ctx" $ctx)}}</span>
-              {{ cond (in (slice "android" "ios" "flutter" "roku" "browser") . ) (printf "RUM %s" (. | upper)) ($product | upper)}}
+              {{/*  Local Partial  */}}
+              <span>{{partial "get-icon" (dict "name" $icon_name "ctx" $ctx)}}</span>
+              {{ . | upper }}
             </button>
         {{ end }}
       </div>

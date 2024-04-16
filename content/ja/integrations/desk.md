@@ -21,47 +21,51 @@ team: web-integrations
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-Desk を Datadog に接続すると、以下のことが可能です。
+Desk を Datadog に接続すると、Salesforce サポートケースのデータをすぐに使えるダッシュボードで表示することができます。ダッシュボードでは以下のことが可能です。
 
-- イベントストリームで新しいケースイベントを受信できます。
+- イベントストリームで新しいケースイベントをテールできます
 - ユーザーおよびステータス別にケース統計を可視化できます。
 - サポートチケットの傾向と DevOps の問題を並べて表示できます。
 
-## セットアップ
+詳細については、[Salesforce Desk インテグレーションを利用して、サポートを情報面で一致させる][1]をご覧ください。
 
-### コンフィギュレーション
+## 計画と使用
 
-Desk アカウントから、Settings -> API -> My Applications ページで、API アプリケーションを追加します (管理者権限が必要な場合があります)。
-以下のようにフォームに入力します。最後の 2 つの URL フィールドは空白にしておきます。Desk がアプリケーションキー、アプリケーションシークレット、API アクセストークン、API アクセストークンシークレットを生成します。
+### ブラウザトラブルシューティング
+
+Desk アカウントから、Settings -> API -> My Applications ページで API アプリケーションを追加します (管理者特権が必要な場合があります)。
+
+後者の 2 つの URL フィールドは空白のまま、図のようにフォームに入力します。Desk はアプリケーションキー、アプリケーションシークレット、API アクセストークン、API アクセストークンシークレットを生成します。
 
 {{< img src="integrations/desk/desk_config.png" alt="Desk コンフィグ" popup="true">}}
 
-次に、Datadog アカウントから、対応する情報を [Desk タイル][1]、および会社固有の Desk ドメイン名を入力します。インストールボタンを押すと、設定が完了します。
+次に、Datadog アカウントから、対応する情報を [Desk タイル][2]、および会社固有の Desk ドメイン名を入力します。インストールボタンを押すと、設定が完了します。
 
-インストール後、`desk.*` メトリクスをカスタムダッシュボードで選択し、所定の [Desk ダッシュボード][2]で表示できます。詳しくは、[Salesforce Desk インテグレーションと同じページでサポートを維持][3]をご参照ください。
+インストール後、カスタムダッシュボードで `desk.*` メトリクスを選択するか、提供されている [Desk ダッシュボード][3]で表示することができます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "desk" >}}
 
 
-### イベント
+### ヘルプ
 
 Desk インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Desk インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/desk
-[2]: https://app.datadoghq.com/screen/integration/desk
-[3]: https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration
+[1]: https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration
+[2]: https://app.datadoghq.com/integrations/desk
+[3]: https://app.datadoghq.com/screen/integration/desk
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/desk/desk_metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

@@ -65,7 +65,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-On **Windows**, use the path `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
+On **Windows**, use the path `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
 
 [1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}

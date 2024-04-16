@@ -69,11 +69,10 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 ## 와일드카드 필터링된 쿼리
 
-태그 값 접두사 및 접미사 와일드카드 매칭이 지원됩니다.
+접두사, 접미사 및 하위 문자열 와일드카드 태그 필터링이 지원됩니다.
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
-
-**참고**: 동일한 필터의 접두사 및 접미사 와일드카드 매칭은 지원되지 않습니다.
+-  `node:*-prod-*`
 
 ### 와일드카드 필터링된 쿼리 예시
 
@@ -81,12 +80,19 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_suffix.png" alt="접미사로 사용된 와일드카드" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_suffix_example.png" alt="접미사로 사용되는 와일드카드" style="width:100%;" >}}
+
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_prefix.png" alt="접두사로 사용된 와일드카드" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_prefix_example.png" alt="접두사로 사용되는 와일드카드" style="width:100%;" >}}
+
+```
+avg:system.disk.utilized{region:*east*} by {region}
+```
+
+{{< img src="metrics/advanced-filtering/wildcard_infix.png" alt="삽입사로 사용되는 와일드카드" style="width:100%;" >}}
 
 ## 제외 함수
 

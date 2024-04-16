@@ -43,6 +43,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
     tag: "Blog"
     text: "Detect malware in your containers with Datadog Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/security-posture-csm/"
+    tag: "Blog"
+    text: "Report on changes to your security posture with Cloud Security Management"
 algolia:
   tags: ['inbox']
 cascade:
@@ -93,7 +96,7 @@ Receive a weekly summary of Cloud Security Management activity over the past wee
 
 ## Next steps
 
-To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
+To get started with CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
 
 ## Further reading
 
@@ -101,7 +104,7 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 
 [1]: /security/threats/
 [2]: /security/cloud_security_management/misconfigurations/
-[3]: https://app.datadoghq.com/security/configuration
+[3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/security/csm
 [5]: /glossary/#posture-score
 [6]: /security/notifications/
