@@ -210,16 +210,21 @@ main:
     url: getting_started/workflow_automation/
     parent: getting_started
     weight: 24
+  - name: CI Visibility
+    identifier: getting_started_ci_visibility
+    url: getting_started/ci_visibility/
+    parent: getting_started
+    weight: 25
   - name: Learning Center
     identifier: getting_started_learning_center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 25
+    weight: 26
   - name: Support
     identifier: getting_started_support
     url: getting_started/support/
     parent: getting_started
-    weight: 26
+    weight: 27
   - name: Glossary
     url: glossary/
     pre: features
