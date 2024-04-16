@@ -114,9 +114,21 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
+4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `all` by default).
+
+_Example_: If you set the `traceSampleRate` to 20% in the Browser SDK:
+- When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
+
+{{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all.png" alt="traceContextInjection set to all" style="width:90%;">}}
+
+- When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side, based on the tracing library head-based sampling [configuration][2] (backend sample rate set to 40% in the example below).
+
+{{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
+
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
 [1]: /real_user_monitoring/browser/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
