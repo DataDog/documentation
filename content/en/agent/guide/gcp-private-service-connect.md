@@ -17,9 +17,9 @@ further_reading:
 {{% site-region region="us5" %}}
 [Google Cloud Private Service Connect][1] (PSC) allows you to send telemetry to Datadog without using the public internet.
 
-Datadog exposes some of its data intake services in Google Cloud as Private Service Connect [_published services_][2], as seen in the [table of published services](#published-services). 
+Datadog exposes some of its data intake services in Google Cloud as Private Service Connect [_published services_][2], as seen in the [table of published services](#published-services).
 
-You can configure a PSC endpoint to expose a private IP address for each Datadog intake service. This IP address routes traffic to the Datadog backend. You can then configure a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed. 
+You can configure a PSC endpoint to expose a private IP address for each Datadog intake service. This IP address routes traffic to the Datadog backend. You can then configure a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed.
 
 {{< img src="agent/guide/psc/gcp-psc-overview-1.png" alt="Google Cloud Private Service Connect schema. On the left, a 'Customer VPC' box contains Datadog Agents sending data to a PSC endpoint. On the right, a 'Datadog VPC' box contains a service attachment in communication with Datadog services. The endpoint in the 'Customer VPC' box connects to the service attachment in the 'Datadog VPC' box through the Google Cloud backbone. " >}}
 
@@ -30,7 +30,7 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
 1. In your Google Cloud console, navigate to **Network services** > **Private Service Connect**.
 2. Go to the **Endpoints** section. Click on **Connect endpoint**.
    {{< img src="agent/guide/psc/connect-endpoint.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
-   
+
    - Under **Target**, select _Published service_.
    - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
    - For **Endpoint name**, enter a unique identifier to use for this endpoint. You can use `datadog-<SERVICE>`. For example: `datadog-metrics`.
@@ -59,36 +59,23 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
    - Under **IPv4 Address**, enter the IP address that was displayed at the end of the previous section.
 
 ### Additional required steps for metrics and traces
+There are two Datadog Intake Services that are subdomains of the (`agent.us5.datadoghq.com`{{< region-param key="dd_site" code="true" >}}) domain. Because of this, the Private Hosted Zone is slightly different from other intakes.
 
-To set up DNS for the metrics or traces endpoint (`metrics.agent.`{{< region-param key="dd_site" code="true" >}} or `trace.agent.`{{< region-param key="dd_site" code="true" >}}), you must create additional `A` records.
-This is because Datadog Agents submit telemetry using a versioned endpoint of the form `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}. 
-
-#### Metrics endpoint
-
-After completing the setup steps for the metrics endpoint, follow the [connect an endpoint](#connect-an-endpoint) steps for the _traces_ endpoint. Take note of the IP address of this endpoint.
-
-Then, in the DNS zone you created for the metrics endpoint, add the following two records:
+You will need to create a Private Zone for (`agent.us5.datadoghq.com`{{< region-param key="dd_site" code="true" >}}), as outlined in the [Create a DNS Zone](#create-a-dns-zone-1) section. Then add the three records below.
 
 | DNS name | Resource record type | IPv4 address |
-| -------- | -------------------- | ------------ |
+| -------- |----------------------| ------------ |
+| `(apex)` | A                    | IP address for your metrics endpoint |
 | `*`      | A                    | IP address for your metrics endpoint |
 | `trace`  | A                    | IP address for your traces endpoint |
 
-#### Traces endpoint
-
-After completing the setup steps for the traces endpoint, follow the [connect an endpoint](#connect-an-endpoint) steps for the _metrics_ endpoint. Take note of the IP address of this endpoint.
-
-Then, in the DNS zone you created for the traces endpoint, add the following two records:
-
-| DNS name | Resource record type | IPv4 address |
-| -------- | -------------------- | ------------ |
-| `*`      | A                    | IP address for your traces endpoint |
-| `metrics`  | A                    | IP address for your metrics endpoint |
+**Note**: this zone requires a wildcard (*) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form  (`<version>-app.agent.us5.datadoghq.com`{{< region-param key="dd_site" code="true" >}}).
 
 ### Validation
 
 To verify your configuration, SSH into one of your local nodes and run a `dig` command similar to the following:
 
+_Verify that that the wildcard is routing to the metrics endpoint_
 ```shell
 > dig +noall +answer 7-49-0-app.agent.us5.datadoghq.com
 ```
@@ -96,6 +83,15 @@ To verify your configuration, SSH into one of your local nodes and run a `dig` c
 The response resembles:
 ```
 7-49-0-app.agent.us5.datadoghq.com. 300 IN A        10.1.0.4
+```
+
+_Verify that the trace subdomain is routing to the traces endpoint_
+```shell
+> dig +noall +answer trace.agent.us5.datadoghq.com
+```
+The response resembles:
+```
+trace.agent.us5.datadoghq.com. 300 IN  A       10.1.0.9
 ```
 
 Ensure that the IP address in the response matches the one associated with your PSC target.
@@ -106,11 +102,11 @@ Ensure that the IP address in the response matches the one associated with your 
 | Logs (Agent)           | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-logs-agent-intake-psc` | `agent-http-intake.logs.us5.datadoghq.com` |
 | Logs (User HTTP Intake) | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-logs-intake-psc` | `http-intake.logs.us5.datadoghq.com` |
 | API | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-api-psc` | `api.us5.datadoghq.com` |
-| Metrics | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-metrics-agent-psc` | `metrics.agent.us5.datadoghq.com` |
+| Metrics | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-metrics-agent-psc` | `agent.us5.datadoghq.com` |
 | Containers | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-orchestrator-psc` | `orchestrator.us5.datadoghq.com` |
 | Process | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-process-psc` | `process.us5.datadoghq.com` |
 | Profiling | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-logs-http-profile-psc` | `intake.profile.us5.datadoghq.com` |
-| Traces | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-trace-edge-psc` | `trace.agent.us5.datadoghq.com` |
+| Traces | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-trace-edge-psc` | `agent.us5.datadoghq.com` |
 | Database Monitoring | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-dbm-metrics-psc` | `dbm-metrics-intake.us5.datadoghq.com` |
 | Remote Configuration | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-fleet-psc` | `config.us5.datadoghq.com` |
 
@@ -124,9 +120,9 @@ Ensure that the IP address in the response matches the one associated with your 
 {{% site-region region="eu" %}}
 [Private Service Connect][1] (PSC) allows you to send telemetry to Datadog without using the public internet.
 
-Datadog exposes some of its data intake services in Google Cloud Platform as PSC [_published services_][2], as seen in the [table of published services](#published-services). 
+Datadog exposes some of its data intake services in Google Cloud Platform as PSC [_published services_][2], as seen in the [table of published services](#published-services).
 
-You can configure a PSC endpoint to expose a private IP address for each Datadog intake service. This IP address routes traffic to the Datadog backend. You can then configure a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed. 
+You can configure a PSC endpoint to expose a private IP address for each Datadog intake service. This IP address routes traffic to the Datadog backend. You can then configure a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed.
 
 {{< img src="agent/guide/psc/gcp-psc-overview-1.png" alt="Google Cloud Private Service Connect schema. On the left, a 'Customer VPC' box contains Datadog Agents sending data to a PSC endpoint. On the right, a 'Datadog VPC' box contains a service attachment in communication with Datadog services. The PSC endpoint in the 'Customer VPC' box connects to the service attachment in the 'Datadog VPC' box through the Google Cloud backbone. " >}}
 
@@ -137,7 +133,7 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
 1. In your GCP console, navigate to **Network services** > **Private Service Connect**.
 2. Go to the **Endpoints** section. Click on **Connect endpoint**.
    {{< img src="agent/guide/psc/connect-endpoint-eu.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
-   
+
    - Under **Target**, select _Published service_.
    - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
    - For **Endpoint name**, enter a unique identifier to use for this endpoint. You can use `datadog-<SERVICE>`. For example: `datadog-metrics`.
@@ -168,7 +164,7 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
 ### Additional required steps for metrics and traces
 
 To set up DNS for the metrics or traces endpoint (`metrics.agent.`{{< region-param key="dd_site" code="true" >}} or `trace.agent.`{{< region-param key="dd_site" code="true" >}}), you must create additional `A` records.
-This is because Datadog Agents submit telemetry using a versioned endpoint of the form `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}. 
+This is because Datadog Agents submit telemetry using a versioned endpoint of the form `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}.
 
 #### Metrics endpoint
 
