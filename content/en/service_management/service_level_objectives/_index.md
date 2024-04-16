@@ -226,6 +226,10 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 ## SLO widgets
 
+{{< learning-center-callout header="Try Create Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
+{{< /learning-center-callout >}}
+
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
   - Use the SLO Summary widget to visualize the status of a single SLO.
   - Use the SLO List widget to visualize a set of SLOs
@@ -286,7 +290,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 
 The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view.png" alt="SLO calendar view" >}}
+{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO calendar view" >}}
 
 ## SLO CSV export
 

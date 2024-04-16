@@ -16,6 +16,18 @@ algolia:
 
 Datadog offers different sites throughout the world. Each site is completely independent, and you cannot share data across sites. Each site gives you benefits (for example, government security regulations) or allows you to store your data in specific locations around the world.
 
+## Shared responsibility
+
+The responsibility of keeping user data secure is shared between Datadog and developers who leverage Datadog products.
+
+Datadog is responsible for:
+- Providing a reliable product that handles data securely when it is transmitted to and stored on the Datadog platform.
+- Ensuring that security issues are identified in accordance with internal policies.
+
+Developers are responsible for:
+- Leveraging configuration values and data privacy options as provided by Datadog.
+- Ensuring the integrity of code within their environments.
+
 ## Access the Datadog site
 
 You can identify which site you are on by matching your Datadog website URL to the site URL in the table below.

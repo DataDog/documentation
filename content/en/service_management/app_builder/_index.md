@@ -43,16 +43,6 @@ Below are a few examples of what App Builder apps can do:
 
 {{< img src="/service_management/app_builder/app-builder-blueprints-1.png" alt="App blueprints" style="width:100%;" >}}
 
-## Get started faster with AI
-
-{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
-AI functionality for App Builder is opt-in.
-{{< /callout >}}
-
-If you're not sure where to start, describe your app to the App Builder AI and let it create a starter app for you.
-
-{{< img src="/service_management/app_builder/app-builder-ai.png" alt="Generate a starter app with AI" style="width:100%;" >}}
-
 ## Take action directly from dashboards
 
 Use your apps from the Apps page, or access them independently from dashboards. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.

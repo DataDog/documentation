@@ -1,0 +1,63 @@
+.cta-button {
+    background: linear-gradient(90deg, #2F24A7 0%, #B034B0 100%),
+    linear-gradient(270deg, #A533AF 0%, #3725A8 100%);    
+    border: 1px solid white !important;   
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.try-rule-banner {
+    background: linear-gradient(90deg, #5C30A0 0%, #006BC2 100%);
+    min-height: 54px;
+    padding: 1px;
+    border-radius: 4px;
+    .try-rule-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: white;
+        padding: 16px;
+        border-radius: 3px;
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+        .info {
+            column-gap: 24px;
+            @media (max-width: 768px) {
+                flex-direction: column;
+                p {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            @media (max-width: 576px) {
+                p {
+                    width: 190px;
+                }
+            }
+            .avatars {
+                display: flex;
+                column-gap: 12px;
+            }
+            p > span{
+                font-weight: 600;
+            }
+        }
+        .external-link {
+            span {
+                text-decoration: none;
+                color: #006BC2;
+                font-weight: 500;
+                font-size: 14px;
+            }
+            i {
+                margin-left: 4px;
+                line-height: 0;
+                position: relative;
+                top: 1px;
+                cursor: pointer;
+            }
+        }
+    }
+}

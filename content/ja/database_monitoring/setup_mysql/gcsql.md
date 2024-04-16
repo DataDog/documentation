@@ -35,7 +35,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
-: Agent は、できれば Google Cloud コンソールで提供される IP アドレスを介して、監視対象のホストに直接接続する必要があります。Agent をプロキシ、ロードバランサー、コネクションプーラーを経由してデータベースに接続しないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
+: Datadog Agent は、監視対象のホストにできれば Google Cloud コンソールで提供されている IP アドレスを通じて直接接続する必要があります。Agent は、プロキシ、ロードバランサー、またはコネクションプーラーを介してデータベースに接続すべきではありません。Agent が実行中に異なるホストに接続すると (フェイルオーバーやロードバランシングなどの場合)、Agent は 2 つのホスト間で統計情報の差を計算し、不正確なメトリクスを生成します。
 
 データセキュリティへの配慮
 : Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
@@ -75,7 +75,19 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{% tab "MySQL 5.6" %}}
+
+`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL ≥ 5.7" %}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
@@ -83,18 +95,6 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-{{% tab "MySQL 5.6 & 5.7" %}}
-
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -209,9 +209,9 @@ instances:
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -264,7 +264,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
 
 [1]: /ja/agent/docker/integrations/?tab=docker
 [2]: /ja/agent/faq/template_variables/
-[3]: /ja/agent/guide/secrets-management
+[3]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -362,7 +362,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/guide/secrets-management
+[4]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -391,8 +391,8 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 [1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://app.datadoghq.com/account/settings/agent/latest
+[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: /ja/integrations/google_cloudsql
 [8]: /ja/database_monitoring/troubleshooting/?tab=mysql
