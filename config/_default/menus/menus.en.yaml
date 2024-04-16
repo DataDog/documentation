@@ -1880,7 +1880,7 @@ main:
     identifier: event_correlation_configure
     parent: event_correlation
     weight: 401
-  - name: Traging & Notifying
+  - name: Triaging & Notifying
     url: service_management/events/correlation/triage_and_notify
     identifier: event_correlation_triage_and_notify
     parent: event_correlation
