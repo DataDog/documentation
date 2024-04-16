@@ -1,5 +1,5 @@
 ---
-title: Configurate Correlation
+title: Configuration
 kind: Documentation
 further_reading:
 - link: "service_management/events/correlation/triage_and_notify"
