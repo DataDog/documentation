@@ -1,5 +1,5 @@
 ---
-title: Save 2 to 14% CPU in Production with Go Profile-Guided Optimization
+title: Go - Save 2 to 14% CPU in Production with Profile-Guided Optimization
 kind: guide
 further_reading:
 - link: "/profiler"
@@ -40,7 +40,7 @@ To enable PGO using the `datadog-pgo` tool:
 3. Run `datadog-pgo` before your build step.  
    For example, for a service `foo` that runs in `prod` and has its main package in `./cmd/foo`, you should add this step:
 
-   ```shell
+   ```
    go run github.com/DataDog/datadog-pgo@latest 'service:foo env:prod' ./cmd/foo/default.pgo
    ```
 
