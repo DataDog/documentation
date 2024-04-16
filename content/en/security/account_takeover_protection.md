@@ -14,13 +14,13 @@ further_reading:
   text: "Application Security Management Guides"
 ---
 
-ASM provides Account takeover (ATO) protection to detect and mitigate account takeover attacks.
+ASM provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
 
 ATO protection has the following benefits:
 
 * Block attackers and disable users.
 * Identify targeted and compromised users.
-* Differentiates existing users from non-existing users.
+* Differentiate existing users from non-existing users.
 * Cluster attackers into logical groups for mitigation.
 
 ## Account takeover protection overview
@@ -36,12 +36,12 @@ The following tables lists the *attacker motivation by business*:
 
 ## Attacker strategies
 
-Attacks use publicly-available automated tools to compromise a user's account credentials. The sophistication and scale of these tools have varying capabilities.
+Attacks use publicly available automated tools to compromise a user's account credentials. The sophistication and scale of these tools have varying capabilities.
 
 Here are some common strategies:
 
 Credential stuffing
-: An automated cyberattack where stolen account credentials (usernames, email addresses, passwords, etc.) are used to gain unauthorized access to user accounts. Access is gained through large scale automated login requests directed against a web application.
+: An automated cyberattack where stolen account credentials (usernames, email addresses, passwords, and so on) are used to gain unauthorized access to user accounts. Access is gained through large scale automated login requests directed against a web application.
 : Credential stuffing relies on credential dumps.
 
 Credential dumps
@@ -69,19 +69,19 @@ Effective ATO detection and prevention requires the following:
 
 The following user activity events are used for ATO tracking.
 
-| Enrichment              | Auto-instrumented | Use Case                                     |
+| Enrichment              | Auto-instrumented | Use case                                     |
 |-------------------------|-------------------|----------------------------------------------|
 | `users.login.success`     | True              | Account takeover detection rule requirement       |
 | `users.login.failure`     | True              | Account takeover detection rule requirement       |
 | `users.exists`            | False             | Signal review and determining if attack is targeted |
 | `user.password_reset`     | False             | Detection rule requirement to identify user enumeration through password reset |
 
-For steps on enabling tracking for events that are not automatically instrumented, go to User [Monitoring and Protection][1].
+For steps on enabling tracking for events that are not automatically instrumented, go to [User Monitoring and Protection][1].
 
 For the latest list of relevant detections and instrumentation requirements, go to [Detection Rules][2] page.
 
 
-[Automatic instrumentation][3] is a Datadog capability that automatically identifies user login success and failure for most authentication implementations. For the best efficacy, we recommended that applications are additionally instrumented for all recommended enrichments, such as `users.exists`.
+[Automatic instrumentation][3] is a Datadog capability that automatically identifies user login success and failure for most authentication implementations. We recommend that applications are additionally instrumented for all recommended enrichments, such as `users.exists`.
 
 You are not limited to how Datadog defines these enrichments. Many platform products opt to add additional enrichments, such as identifying the customer organization or user role.
 
@@ -123,7 +123,7 @@ Review the following best practices to help you detect and mitigate account take
 
 ### Develop an incident response plan
 
-Review the follow sections to help you develop an incident response plan.
+Review the following sections to help you develop an incident response plan.
 
 #### Do you use authenticated scanners?
 
@@ -151,15 +151,15 @@ For example, you might *not* expect customers to authenticate with your consumer
 
 Nevertheless, if your customers source entirely from Mobile ISPs, you might have an impact to legitimate traffic if you block those ISPs.
 
-Consider who your customers are, and their account name structure?
+Consider who your customers are, and their account name structure.
 
-Do your customers match these attributes: 
+Do your customers match these attributes?
 
 1. Employees with an expected ID format such as integers, corporate domains, or combinations of numbers and text.
 2. SaaS customers using domain names associated with the customer company.
 3. Consumers using free providers such as Gmail or Proton Mail.
 
-Understanding your customers account name structure helps you to determine if attacks are targeted or blind attempts at credential stuffing.
+Understanding your customers' account name structure helps you determine if attacks are targeted or blind attempts at credential stuffing.
 
 
 ### Distributed attacks
@@ -170,7 +170,7 @@ Here are three critical components for success in thwarting these attacks:
 
 1. Proper onboarding: Are you configured for blocking with ASM?
 2. Proper configuration: Ensure you have correctly set client IPs and X-Forwarded-For (XFF) HTTP headers.
-3. Internal communication plans: Communication with security teams, services owners, and product leads is critical to understanding the impact of mitigating large scale attacks.
+3. Internal communication plans: Communication with security teams, service owners, and product leads is critical to understanding the impact of mitigating large scale attacks.
 
 <div class="alert alert-info">Responders can identify service owners using the tags in all ASM signals.</div>
 
@@ -205,11 +205,11 @@ Datadog recommends never blocking IP addresses solely based on threat intelligen
 
 Details on IPs, including ownership and threat intelligence, are available in the IP address details. Click on an IP addresses to view these details.
 
-There are two types of proxies frequently seen in distributed account takeovers:
+Two types of proxies are frequently seen in distributed account takeovers:
 
-- Hosting proxies: These are proxies that exist at data centers, and are often the result of a compromised host at that data center. Guidance for interacting with hosting proxies is similar to data centers.
+- Hosting proxies: Proxies that exist at data centers, and are often the result of a compromised host at that data center. Guidance for interacting with hosting proxies is similar to data centers.
 
-- Residential proxies: These are proxies that exist behind residential IPs. Residential proxies are frequently enabled by mobile application SDKs or browser plugins. The user of the SDK or plugin is typically unaware that they are running a proxy. It is common to see benign traffic from IP addresses identified as residential proxies.
+- Residential proxies: Proxies that exist behind residential IPs. Residential proxies are frequently enabled by mobile application SDKs or browser plugins. The user of the SDK or plugin is typically unaware that they are running a proxy. It is common to see benign traffic from IP addresses identified as residential proxies.
 
 #### Mobile ISPs
 
@@ -221,7 +221,7 @@ Exercise caution when blocking Mobile ISPs. Mobile ISPs use [CGNAT][10] and freq
 
 Use attacker attributes to target response actions.
 
-Datadog clusters attackers using attacker similarity and identifies the attributes of those attackers. Responders can use custom rules to block the attributes of persistent attackers.
+Datadog clusters attackers by the similarity of their attributes. Responders can use custom rules to block the attributes of persistent attackers.
 
 
 ### Protection
