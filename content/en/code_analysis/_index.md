@@ -117,4 +117,3 @@ You must configure a GitHub App using the [GitHub integration tile][7] and set u
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [8]: /integrations/guide/source-code-integration
 [9]: https://app.datadoghq.com/ci/code-analysis
-[9]: /security/application_security/software_composition_analysis
