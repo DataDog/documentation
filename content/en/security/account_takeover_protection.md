@@ -74,7 +74,7 @@ The following user activity events are used for ATO tracking.
 | `users.login.success`     | True              | Account takeover detection rule requirement       |
 | `users.login.failure`     | True              | Account takeover detection rule requirement       |
 | `users.exists`            | False             | Signal review and determining if attack is targeted |
-| `user.password_reset`     | False             | Detection rule requirement to identify user enumeration through password reset |
+| `users.password_reset`     | False             | Detection rule requirement to identify user enumeration through password reset |
 
 For steps on enabling tracking for events that are not automatically instrumented, go to [User Monitoring and Protection][1].
 
@@ -113,7 +113,7 @@ Individual users can be blocked in **Signals** using **Targeted Users**.
 
 **Traces**
 
-Individual users can be blocked on **Traces** in **User**. Click on any user to show this option.
+Individual users can be blocked on **Traces**, in **User**. Click on any user to show this option.
 
 {{<img src="security/ato/traces_block_user.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
 
@@ -132,7 +132,7 @@ Identify trusted IPs, preventing them from being automatically blocked. This ste
 - Approved scanning sources that attempt to log in.
 - Corporate sites with large numbers of users behind single IP addresses.
 
-To configure trusted IPs, use [Passlist](https://app.datadoghq.com/security/appsec/passlist) and add a `Monitored` entry. Monitored entries are excluded from automated blocking.
+To configure trusted IPs, use [Passlist][12] and add a `Monitored` entry. Monitored entries are excluded from automated blocking.
 
 {{<img src="security/ato/passlist2.png" alt="Monitored passlist" style="width:100%;">}}
 
@@ -155,9 +155,9 @@ Consider who your customers are, and their account name structure.
 
 Do your customers match these attributes?
 
-1. Employees with an expected ID format such as integers, corporate domains, or combinations of numbers and text.
-2. SaaS customers using domain names associated with the customer company.
-3. Consumers using free providers such as Gmail or Proton Mail.
+- Employees with an expected ID format such as integers, corporate domains, or combinations of numbers and text.
+- SaaS customers using domain names associated with the customer company.
+- Consumers using free providers such as Gmail or Proton Mail.
 
 Understanding your customers' account name structure helps you determine if attacks are targeted or blind attempts at credential stuffing.
 
@@ -166,7 +166,7 @@ Understanding your customers' account name structure helps you determine if atta
 
 Blocking advanced distributed attacks is often a business decision because attacks can impact availability, user funds, and legitimate users. 
 
-Here are three critical components for success in thwarting these attacks:
+Here are three critical components for success in mitigating these attacks:
 
 1. Proper onboarding: Are you configured for blocking with ASM?
 2. Proper configuration: Ensure you have correctly set client IPs and X-Forwarded-For (XFF) HTTP headers.
@@ -191,7 +191,7 @@ Use short durations for blocking attackers. 15 minutes or less is recommended. I
 
 #### Data centers
 
-Some attacks are launched using inexpensive virtual private servers (VPS) and hosting providers. Attackers are motivated by how their low cost and automation let them access new IP addresses at the data center.
+Some attacks are launched using inexpensive virtual private servers (VPS) and hosting providers. Attackers are motivated by how their low cost and automation enables access to new IP addresses at the data center.
 
 Many consumer applications have low occurrences of user authentication from data centers, especially low cost data centers and VPS providers. Consider blocking the entire data center or ASN when the network range is small, and not within your expected user authentication behavior.
 
@@ -266,3 +266,4 @@ Consider blocking compromised users in addition to blocking the attacker.
 [9]: https://docs.datadoghq.com/security/threat_intelligence#best-practices-in-threat-intelligence
 [10]: https://en.wikipedia.org/wiki/Carrier-grade_NAT
 [11]: https://app.datadoghq.com/security/appsec/threat
+[12]: https://app.datadoghq.com/security/appsec/passlist
