@@ -85,4 +85,17 @@ describe('initCopyCode', () => {
         const btn = document.querySelector('button');
         expect(cc.getCode(btn)).toBe(code);
     })
+
+
+    it('should update copy button text after copying code snippet', () => {
+        
+        document.body.innerHTML = `
+            <button class="js-copy-button">Copy</button>
+        `;
+
+        const btn = document.querySelector('.js-copy-button');
+        
+        cc.updateCopyBtnText(btn);
+        expect(btn.textContent).toBe('Copied!');
+    })
 })

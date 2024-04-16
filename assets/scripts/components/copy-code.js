@@ -11,7 +11,7 @@ function initCopyCode () {
 
     if (copyButtons.length) {
         copyButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => copyCode(e, btn));
+            btn.addEventListener('click', () => copyCode(btn));
         });
     }
 
@@ -44,9 +44,8 @@ function addCopyButton (fencedLangs) {
 }
 
 // EVENT FUNCTION for copy functionality
-function copyCode ({currentTarget}, btn){
-    const code = getCode(currentTarget)
-    console.log('CODE', code)
+function copyCode (btn){
+    const code = getCode(btn)
     // Create a range object
     const range = document.createRange();
     // Select the node
@@ -55,20 +54,7 @@ function copyCode ({currentTarget}, btn){
     const Clipboard = navigator.clipboard
     // write code snippet text
     Clipboard.writeText(code.innerText).then(() => {
-        if(btn.classList.contains('js-copy-button')){
-            // if copy button clicked, change the button text to "copied" for 1 second
-            btn.textContent = "Copied!";
-            setTimeout(function() {
-                btn.textContent = "Copy"
-            }, 1000)
-        }else{
-            // if copy icon clicked in the try-rule modal, change the tooltip
-            const copyTooltip = Tooltip.getInstance(btn);
-            copyTooltip.setContent({'.tooltip-inner': "Copied!!"});
-            setTimeout(function() {
-                copyTooltip.setContent({'.tooltip-inner': "Copy"});
-            }, 2000)
-        }
+        updateCopyBtnText(btn)
     })
 }
 
@@ -77,7 +63,24 @@ function getCode (btn){
     || btn.previousElementSibling.querySelector('td:last-child code'); // for try-rule modal code examples on the static analysis rule pages
 }
 
+function updateCopyBtnText(btn){
+    if(btn?.classList.contains('js-copy-button')){
+        // if copy button clicked, change the button text to "copied" for 1 second
+        btn.textContent = "Copied!";
+        setTimeout(function() {
+            btn.textContent = "Copy"
+        }, 1000)
+    }else{
+        // if copy icon clicked in the try-rule modal, change the tooltip
+        const copyTooltip = Tooltip.getInstance(btn);
+        copyTooltip.setContent({'.tooltip-inner': "Copied!!"});
+        setTimeout(function() {
+            copyTooltip.setContent({'.tooltip-inner': "Copy"});
+        }, 2000)
+    }
+}
+
 initCopyCode()
 
 // Export the functions for testing
-module.exports = {initCopyCode, getCode, copyCode, addCopyButton}
+module.exports = {initCopyCode, getCode, addCopyButton, updateCopyBtnText}
