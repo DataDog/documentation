@@ -85,6 +85,7 @@ The response resembles:
 7-49-0-app.agent.us5.datadoghq.com. 300 IN A        10.1.0.4
 ```
 
+
 _Verify that the trace subdomain is routing to the traces endpoint_
 ```shell
 > dig +noall +answer trace.agent.us5.datadoghq.com
