@@ -136,7 +136,7 @@ java \
 
 Follow the [Tracer Setup Instructions][13] to build your native image with the Datadog Java Profiler.
 
-When the service binary is built you can use environment variables to enable and configure the Datadog Java Profiler.
+When the service binary is built, you can use environment variables to enable and configure the Datadog Java Profiler:
 
    ```shell
    DD_PROFILING_ENABLED=true DD_PROFILING_DIRECTALLOCATION_ENABLED=true ./my_service
