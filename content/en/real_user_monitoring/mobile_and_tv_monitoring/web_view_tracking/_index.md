@@ -183,7 +183,7 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
    />
    ```
 
-`allowedHosts` will match the given hosts and their subdomain. No regular expression is allowed.
+`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
 [1]: https://github.com/react-native-webview/react-native-webview/blob/master/docs/Getting-Started.md
 
