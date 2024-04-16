@@ -483,7 +483,7 @@ By default, a calculation is skipped if an attribute is missing. Select *Replace
 **Notes**:
 
 * An attribute may be listed as missing if it is not found in the log attributes, or if it cannot be converted to a number.
-* When using the operator `-`, please make sure to add spaces around it as attribute names like `start-time` may contain dashes. For example, formula has to be written as `(endTime - startTime) / 1000` OR `(end-time - start-time) / 1000`.
+* When using the operator `-`, add spaces around it because attribute names like `start-time` may contain dashes. For example, the following formula must include spaces around the `-` operator: `(end-time - start-time) / 1000`.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 * If you need to scale a unit of measure, use the scale filter.
