@@ -40,7 +40,15 @@ If you have not set up the Roku SDK yet, follow the [in-app setup instructions][
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-## Forward errors to Datadog
+## Get deobfuscated stack traces
+
+## Limitations
+
+## Test your implementation
+
+## Additional configuration options
+
+### Forward errors to Datadog
 
 Whenever you perform an operation that might throw an exception, you can forward the error to Datadog by adding the following code snippet:
 

@@ -100,13 +100,15 @@ Datadog.initialize(
 CrashReporting.enable()
 ```
 
-## Symbolicate crash reports
+## Get deobfuscated stack traces
+
+### Symbolicate crash reports
 
 Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .dSYM files, which are generated in your application's build or distribution process.
 
-### Find your dSYM file
+### Find your .dSYM file
 
-Every iOS application produces .dSYM files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of .dSYM files. 
+Every iOS application produces `.dSYM` files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of `.dSYM` files. 
 
 Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine. 
 
@@ -115,17 +117,17 @@ Depending on your setup, you may need to download `.dSYM` files from App Store C
 | Yes | `.dSYM` files are available after [App Store Connect][6] completes processing your application's build. |
 | No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
 
-### Upload your dSYM file
+### Upload your .dSYM file
 
-By uploading your .dSYM file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
+By uploading your `.dSYM` file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
 
 Once your application crashes and you restart the application, the iOS SDK uploads a crash report to Datadog.
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
-#### Datadog CI
+### Use Datadog CI to upload your .dSYM file
 
-You can use the command line tool [@datadog/datadog-ci][5] to upload your dSYM file:
+You can use the command line tool [@datadog/datadog-ci][5] to upload your `.dSYM` file:
 
 ```sh
 export DATADOG_API_KEY="<API KEY>"
@@ -141,9 +143,9 @@ npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 
 Alternatively, if you use Fastlane or GitHub Actions in your workflows, you can leverage these integrations instead of `datadog-ci`:
 
-#### Fastlane Plugin
+### Use Fastlane plugin to upload your .dSYM file
 
-The Datadog plugin helps you upload dSYM files to Datadog from your Fastlane configuration.
+The Fastlane plugin helps you upload `.dSYM` files to Datadog from your Fastlane configuration.
 
 1. Add [`fastlane-plugin-datadog`][3] to your project.
 
@@ -163,7 +165,7 @@ The Datadog plugin helps you upload dSYM files to Datadog from your Fastlane con
 
 For more information, see [`fastlane-plugin-datadog`][3].
 
-#### GitHub Action
+### Use GitHub Actions to upload your .dSYM file
 
 The [Datadog Upload dSYMs GitHub Action][4] allows you to upload your symbols in your GitHub Action jobs:
 
@@ -193,7 +195,7 @@ jobs:
 
 For more information, see [dSYMs commands][7].
 
-### Limitations
+## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 dSYM files are limited to **500** MB.
@@ -202,7 +204,7 @@ dSYM files are limited to **500** MB.
 dSYM files are limited to **500** MB.
 {{< /site-region >}}
 
-## Verify crash reports
+## Test your implementation
 
 To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
 

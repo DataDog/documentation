@@ -49,7 +49,8 @@ DatadogSdk.instance.initialize(configuration);
 
 If your application suffers a fatal crash, after your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
 
-## Upload symbol files to Datadog
+## Get deobfuscated stack traces
+### Upload symbol files to Datadog
 
 Native iOS crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires that you upload .dSYM files, which are generated in your application's build process.
 
@@ -79,7 +80,7 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 
 For a full list of options, see the `datadog-ci` [Flutter Symbols documentation][5].
 
-### Limitations
+## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 Source maps and dSYM files are limited to **500** MB each.
@@ -88,23 +89,27 @@ Source maps and dSYM files are limited to **500** MB each.
 Source maps and dSYM files are limited to **500** MB each.
 {{< /site-region >}}
 
-## Advanced Configuration - Flavors and Build Numbers
+## Test your implementation
+
+## Additional configuration options
+
+### Flavors and build numbers
 
 Datadog uses the combination of the `service-name`, `version`, and `flavor` to locate the correct symbols for deobfuscation. For your crash reports to have complete information, the parameters sent to the `datadog-ci` command and the parameters set in [DatadogConfiguration][6] must match exactly.
 
-If you are using app [flavors][7] in Flutter, you will need to set the name of the flavor in [DatadogConfiguration.flavor][8] since we cannot detect the flavor automatically. You can then pass this to the `--flavor` parameter of the `datadog-ci` command:
+If you are using app [flavors][7] in Flutter, you need to set the name of the flavor in [DatadogConfiguration.flavor][8] since we cannot detect the flavor automatically. You can then pass this to the `--flavor` parameter of the `datadog-ci` command:
 
 ```sh
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --flavor my_flavor
 ```
 
-The Datadog SDK will automatically detect the version number of your application specified in your `pubspec.yaml` up to but not including the build number. If you are using build numbers as part of the version in your application and need to upload symbols for each build, you will need to add the version to [DatadogConfiguration.version][9]. You can then pass this to the `--version` parameter of the `datadog-ci` command:
+The Datadog SDK automatically detects the version number of your application specified in your `pubspec.yaml` up to but not including the build number. If you are using build numbers as part of the version in your application and need to upload symbols for each build, you need to add the version to [DatadogConfiguration.version][9]. You can then pass this to the `--version` parameter of the `datadog-ci` command:
 
 ```sh
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --version 1.2.3+22
 ```
 
-Note that Datadog uses tags for versions which do not allow `+`. All tooling automatically replaces `+` with `-` so that the version tags are searchable in Datadog.
+**Note**: Datadog uses tags for versions which do not allow `+`. All tooling automatically replaces `+` with `-` so that the version tags are searchable in Datadog.
 
 ## Further reading
 

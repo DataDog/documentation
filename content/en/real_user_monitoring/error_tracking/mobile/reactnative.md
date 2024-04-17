@@ -52,7 +52,7 @@ const config = new DdSdkReactNativeConfiguration(
 config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
-## Symbolicate crash reports
+## Get deobfuscated stack traces
 
 In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
 
@@ -65,9 +65,9 @@ To set your project up to send the symbolication files automatically, run `npx d
 
 See the wizard [official documentation][13] for options.
 
-## Passing options for your uploads
+### Passing options for your uploads
 
-### On Android using the `datadog-sourcemaps.gradle` script
+#### Using the `datadog-sourcemaps.gradle` script
 
 To specify a different service name, add the following code to your `android/app/build.gradle` file, before the `apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.gradle"` line:
 
@@ -77,11 +77,11 @@ project.ext.datadog = [
 ]
 ```
 
-### On iOS using the `datadog-ci react-native xcode` command
+#### Using the `datadog-ci react-native xcode` command
 
 Options for the `datadog-ci react-native xcode` command are available on the [command documentation page][12].
 
-### Limitations
+## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 Source maps, mapping files, and dSYM files are limited to **500** MB each.
@@ -142,11 +142,13 @@ const crashApp = () => {
 };
 ```
 
-## Alternatives to `datadog-react-native-wizard`
+## Additional configuration options
+
+### Alternatives to `datadog-react-native-wizard` for symbolication
 
 If using `datadog-react-native-wizard` did not succeed or if you don't want to upload your symbolication files automatically on each release, follow the next steps to symbolicate crash reports.
 
-### Upload JavaScript source maps on iOS builds
+#### Upload JavaScript source maps on iOS builds
 
 You need to install `@datadog/datadog-ci` as a dev dependency to your project:
 
@@ -156,7 +158,7 @@ yarn add -D @datadog/datadog-ci
 npm install --save-dev @datadog/datadog-ci
 ```
 
-#### Automatically on each release build (React Native >= 0.69)
+##### Automatically on each release build (React Native >= 0.69)
 
 Manually uploading your source maps on every release build takes time and is prone to errors. Datadog recommends automatically sending your source maps every time you run a release build.
 
@@ -196,7 +198,7 @@ For the upload to work, you need to provide your Datadog API key. If you use a c
 
 You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SITE` environment variable, or as a `datadogSite` key in your `datadog-ci.json` file.
 
-#### Automatically on each release build (React Native < 0.69)
+##### Automatically on each release build (React Native < 0.69)
 
 Open your `.xcworkspace` with Xcode, then select your project > Build Phases > Bundle React Native code and images. Edit the script to look like the following:
 
@@ -220,7 +222,7 @@ For the upload to work, you need to provide your Datadog API key. If you use a c
 
 You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SITE` environment variable, or as a `datadogSite` key in your `datadog-ci.json` file.
 
-#### Manually on each build
+##### Manually on each build
 
 To output a source map, you need to edit the Xcode build phase "Bundle React Native Code and Images".
 
@@ -254,7 +256,7 @@ export BUNDLE_PATH= # fill with your bundle path
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
 ```
 
-#### Manually on each build (with Hermes for React Native < 0.71)
+##### Manually on each build (with Hermes for React Native < 0.71)
 
 There is a bug in React Native versions up to 0.71 that generates an incorrect source map when using Hermes.
 
@@ -295,9 +297,9 @@ export BUNDLE_PATH= # fill with your bundle path
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
 ```
 
-### Upload JavaScript source maps on Android builds
+#### Upload JavaScript source maps on Android builds
 
-#### Automatically on each release build (React Native >= 0.71)
+##### Automatically on each release build (React Native >= 0.71)
 
 In your `android/app/build.gradle` file, add the following after the `apply plugin: "com.facebook.react"` line:
 
@@ -315,7 +317,7 @@ For the upload to work, you need to provide your Datadog API key. You can specif
 
 You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SITE` environment variable, or as a `datadogSite` key in your `datadog-ci.json` file.
 
-#### Automatically on each release build (React Native < 0.71)
+##### Automatically on each release build (React Native < 0.71)
 
 In your `android/app/build.gradle` file, add the following after the `apply from: "../../node_modules/react-native/react.gradle"` line:
 
@@ -333,7 +335,7 @@ For the upload to work, you need to provide your Datadog API key. You can specif
 
 You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SITE` environment variable, or as a `datadogSite` key in your `datadog-ci.json` file.
 
-#### Manually on each build
+##### Manually on each build
 
 On Android, the source map file is located at `android/app/build/generated/sourcemaps/react/release/index.android.bundle.map`.
 The bundle file location depends on your React Native (RN) and Android Gradle Plugin (AGP) versions:
@@ -360,13 +362,13 @@ export SOURCEMAP_PATH=android/app/build/generated/sourcemaps/react/release/index
 yarn datadog-ci react-native upload --platform android --service $SERVICE --bundle $BUNDLE_PATH --sourcemap $SOURCEMAP_PATH --release-version $VERSION --build-version $BUILD
 ```
 
-### Upload iOS dSYM files
+#### Upload iOS dSYM files
 
-#### Manually on each build
+##### Manually on each build
 
 For more information, see the [iOS Crash Reporting and Error Tracking documentation][4].
 
-### Upload Android Proguard mapping files
+#### Upload Android Proguard mapping files
 
 First, ensure that Proguard minification is enabled on your project. By default, this is not enabled on React Native projects.
 
@@ -374,7 +376,7 @@ For more information, see [the React Native Proguard documentation][5].
 
 If you are still unsure, you can see if running `(cd android && ./gradlew tasks --all) | grep minifyReleaseWithR8` returns anything. If so, minification is enabled.
 
-#### Manually on each build
+##### Manually on each build
 
 In your `android/app/build.gradle` file, add the [latest version of the plugin][15] and configure it **at the top of the file**:
 
@@ -401,7 +403,7 @@ For more information, see the [Datadog Android SDK Gradle Plugin][6].
 
 To run the plugin after a build run `(cd android && ./gradlew app:uploadMappingRelease)`.
 
-#### Automate the upload on each build
+##### Automate the upload on each build
 
 Install the plugin like in the previous step.
 

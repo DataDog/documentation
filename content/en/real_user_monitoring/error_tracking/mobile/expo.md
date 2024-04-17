@@ -54,18 +54,6 @@ yarn add -D @datadog/datadog-ci
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key.
 
-### Add git repository data to your mapping files on Expo Application Services (EAS)
-
-If you are using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files.
-
-```json
-{
-    "cli": {
-        "requireCommit": true
-    }
-}
-```
-
 ### Setting the Datadog site
 
 Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, for example: `datadoghq.eu`. By default, `datadoghq.com` is used.
@@ -80,14 +68,32 @@ Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, 
 | `androidProguardMappingFiles` | `true`  | Enables the uploading of Proguard mapping files to deobfuscate native Android crashes (is only applied if obfuscation is enabled). |
 | `datadogGradlePluginVersion`  | `"1.+"` | Version of `dd-sdk-android-gradle-plugin` used for uploading Proguard mapping files.     |
 
-### Limitations
+## Get deobfuscated stack traces
+
+### Add git repository data to your mapping files on Expo Application Services (EAS)
+
+If you are using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files.
+
+```json
+{
+    "cli": {
+        "requireCommit": true
+    }
+}
+```
+
+## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 Source maps, mapping files, and dSYM files are limited to **500** MB each.
 {{< /site-region >}}
 {{< site-region region="ap1" >}}
-Source maps, mapping files, and dSYM files  are limited to **500** MB each.
+Source maps, mapping files, and dSYM files are limited to **500** MB each.
 {{< /site-region >}}
+
+## Test your implementation
+
+## Additional configuration options
 
 ### Disable file uploads
 
@@ -113,7 +119,7 @@ You can disable some files from uploading by setting the `iosDsyms`, `iosSourcem
 If you want to disable **all file uploads**, remove `expo-datadog` from the list of plugins.
 
 
-### Using with Sentry
+### Using Expo with Datadog and Sentry
 
 Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the sourcemap. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
 
