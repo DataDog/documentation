@@ -1,7 +1,6 @@
 ---
 title: Mobile Crash Reporting
 kind: documentation
-type: multi-code-lang
 description: Set up crash reporting for your mobile applications.
 further_reading:
 - link: /real_user_monitoring/error_tracking/
