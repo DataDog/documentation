@@ -2,7 +2,7 @@
 title: SLO Checklist
 kind: guide
 aliases:
-- /monitors/guide/slo-checklist/
+- /monitors/guide/slo-checklis
 further_reading:
 - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
   tag: 'Blog'
@@ -10,11 +10,11 @@ further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-slo'
   tag: 'Learning Center'
   text: 'Introduction to Service Level Objectives'
+- link: "/service_management/service_level_objectives/guide/slo_types_comparison/"
+  tag: "Documentation"
+  text: "Comparison of Datadog SLO Types"
 ---
 
-<div class="alert alert-info">
-Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> to find a PDF version of this page.
-</div>
 
 ## Getting started
 
