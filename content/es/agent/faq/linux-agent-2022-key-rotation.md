@@ -31,9 +31,9 @@ Tu host confía automáticamente en la nueva clave (no se requiere ninguna acci�
 - Agents contenedorizados (Docker/Kubernetes), cualquier versión
 - Agents de Windows/MacOS, cualquier versión
 
-Además, al instalar el paquete del Agent DEB versiones 6.35.1, v7.35.1 o posteriores en `apt` desde el repositorio `apt.datadoghq.com` se instala la versión 1.1.0 del [paquete `datadog-signing-keys`](#the-datadog-signing-keys-paquete), lo que garantiza automáticamente que tu host confiará en la nueva clave. Si tienes instalada la versión 1.1.0 o posterior de `datadog-signing-keys`, no es necesario realizar ninguna otra acción. Las versiones de `datadog-signing-keys` anteriores a la [versión 1.1.0](#datadog-signing-keys-version-110) no garantizan la plena preparación para la rotación de claves.
+Además, al instalar el paquete DEB de Agent versiones 6.35.1, v7.35.1 o posteriores en `apt` desde el repositorio `apt.datadoghq.com` se instala la versión 1.1.0 del [paquete `datadog-signing-keys`](#the-datadog-signing-keys-paquete), lo que garantiza automáticamente que tu host confiará en la nueva clave. Si tienes instalada la versión 1.1.0 o posterior de `datadog-signing-keys`, no es necesario realizar ninguna otra acción. Las versiones de `datadog-signing-keys` anteriores a la [versión 1.1.0](#datadog-signing-keys-version-110) no garantizan la plena preparación para la rotación de claves.
 
-Si estás instalando el paquete del Agent DEB desde un repositorio diferente o si no estás utilizando `apt` (o una herramienta similar para comprobar las firmas de metadatos del repositorio), tu sistema no necesita conocer las claves de firma de Datadog (no es necesaria ninguna acción adicional). Sin embargo, puedes beneficiarte del [paquete`datadog-signing-keys` ](#the-datadog-signing-keys-package).
+Si estás instalando el paquete DEB de Agent desde un repositorio diferente o si no estás utilizando `apt` (o una herramienta similar para comprobar las firmas de metadatos del repositorio), tu sistema no necesita conocer las claves de firma de Datadog (no es necesaria ninguna acción adicional). Sin embargo, puedes beneficiarte del [paquete`datadog-signing-keys` ](#the-datadog-signing-keys-package).
 
 Si no estás seguro de si un host confía en la nueva clave de firma, puedes [comprobar](#check-if-a-host-trusts-the-new-gpg-key).
 
@@ -135,16 +135,16 @@ Si lo prefieres, comprueba si tu archivo `datadog.repo` contiene `https://keys.d
 
 ## El paquete `datadog-signing-keys`
 
-<div class="alert alert-info"><strong>Nota:</strong> Esta sección solo se aplica a los usuarios del paquete del Agent DEB.</div>
+<div class="alert alert-info"><strong>Nota:</strong> Esta sección solo se aplica a los usuarios del paquete DEB de Agent.</div>
 
 Desde Agent v6.31.0 y v7.31.0, todos los paquetes DEB de Datadog dependen en alguna medida del paquete `datadog-signing-keys`. Desde Agent v6.35.1 y v 7.35.1, todos los paquetes DEB de Datadog dependen del paquete `datadog-signing-keys`, versión `1.1.0` .
 
 Una vez instalado, este paquete:
 
 - Configura las claves APT en el conjunto de claves `/usr/share/keyrings/datadog-archive-keyring.gpg` y, si es necesario, también lo hace en `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg`. **Esto garantiza la confianza en la próxima clave de firma del repositorio de APT.** Para asegurarse de que todo está listo para la siguiente rotación de claves, recomendamos utilizar el paquete [`datadog-signing-keys` versión 1.1.0](#datadog-signing-keys-version-110).
-- Establece una [política `debsig-verify`][12] para los paquetes de Datadog. Esto te permite verificar firmas para paquetes de DEB individuales localmente.
+- Establece una [política `debsig-verify`][12] para los paquetes de Datadog. Esto te permite verificar firmas para paquetes DEB individuales localmente.
 
-Por ejemplo, para verificar que un paquete de DEB descargado localmente ha sido creado y firmado por Datadog, ejecuta el siguiente comando:
+Por ejemplo, para verificar que un paquete DEB descargado localmente ha sido creado y firmado por Datadog, ejecuta el siguiente comando:
 
   ```bash
   $ debsig-verify datadog-dogstatsd_7.34.0-1_amd64.deb
@@ -173,7 +173,7 @@ Las versiones de `datadog-signing-keys` anteriores a la v1.1.0 no gestionan los 
 
 `datadog-signing-keys`, v1.1.0 soluciona este problema creando `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` cuando `/etc/apt/sources.list.d/datadog.list` no contiene la opción `signed-by` adecuada. Esto asegura que el caso anterior también está cubierto.
 
-Los usuarios de [métodos de instalación](#install-methods-that-automatically-trust-the-new-gpg-key) actualizados compatibles que utilicen las fuentes predeterminadas de Datadog siempre tienen configurada la opción `signed-by` adecuada, por lo que no se ven afectados por este problema. Datadog recomienda encarecidamente a todos los demás usuarios que actualicen a `datadog-signing-keys` v1.1.0 para asegurarse de estar preparados para la próxima rotación de claves. La instalación de DEB Agent, versiones 6.35.1, v7.35.1 o posteriores, en `apt` desde el repositorio `apt.datadoghq.com` garantiza la instalación de `datadog-signing-keys` v1.1.0.
+Los usuarios de [métodos de instalación](#install-methods-that-automatically-trust-the-new-gpg-key) actualizados compatibles que utilicen las fuentes predeterminadas de Datadog siempre tienen configurada la opción `signed-by` adecuada, por lo que no se ven afectados por este problema. Datadog recomienda encarecidamente a todos los demás usuarios que actualicen a `datadog-signing-keys` v1.1.0 para asegurarse de estar preparados para la próxima rotación de claves. La instalación de DEB del Agent, versiones 6.35.1, v7.35.1 o posteriores, en `apt` desde el repositorio `apt.datadoghq.com` garantiza la instalación de `datadog-signing-keys` v1.1.0.
 
 ## Impacto en usuarios de Agent v5
 
