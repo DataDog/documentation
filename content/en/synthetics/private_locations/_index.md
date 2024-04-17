@@ -64,7 +64,15 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 | RAM | 4GB minimum. 8GB recommended. |
 | CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
 
+**Note**: For Windows Private Locations to run browser tests, the browsers (for example, Chrome, Edge, or Firefox) must be installed on the Windows computer.
+
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer. 
+
+{{< site-region region="gov" >}}
+
+<div class="alert alert-danger">FIPS compliance is not supported for private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href"="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
+
+{{< /site-region >}}
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
 

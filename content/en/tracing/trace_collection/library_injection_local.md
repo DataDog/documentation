@@ -9,8 +9,6 @@ aliases:
 
 ## Overview
 
-<div class="alert alert-warning">Support for local library injection will be deprecated. To automatically instrument your application, you can use <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation (Beta)</a> or <a href="/tracing/trace_collection/dd_libraries/">Datadog tracing libraries.</a></div>
-
 To automatically instrument your application, you can:
 
 - Use automatic instrumentation with local library injection, as described on this page.
@@ -1107,7 +1105,7 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/library_config/
-[3]: /security/application_security/enabling/java/?tab=kubernetes#get-started
+[3]: /security/application_security/enabling/tracing_libraries/threat_detection/java
 [4]: /profiler/enabling/java/?tab=environmentvariables#installation
 [5]: /tracing/trace_collection/automatic_instrumentation/
 [6]: /tracing/trace_collection/single-step-apm

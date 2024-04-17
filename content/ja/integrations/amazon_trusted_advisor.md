@@ -15,7 +15,7 @@ further_reading:
   text: Datadog で AWS Trusted Advisor のサービス制限チェックを監視する
 git_integration_title: amazon_trusted_advisor
 has_logo: true
-integration_id: amazon-trusted-advisor
+integration_id: ''
 integration_title: AWS Trusted Advisor
 integration_version: ''
 is_public: true

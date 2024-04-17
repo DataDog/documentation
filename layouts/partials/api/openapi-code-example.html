@@ -1,0 +1,56 @@
+<h3 class="mb-2">{{ i18n "code_example" }}</h3>
+<style>
+  .chroma {
+    max-height: 350px;
+    overflow:hidden;
+    overflow-y:scroll;
+  }
+</style>
+<div class="programming-lang-wrapper js-code-snippet-wrapper" style="height: 500px;" >
+  {{ $path := .path }}
+  {{ $pathMethod := .pathMethod }}
+  {{ $summary := .summary }}
+  {{ $page := .page }}
+
+  {{ $payload := "" }}
+  {{ with .pathDetails.requestBody }}
+    {{ $schema := index (index .content "application/json") "schema" }}
+    {{ range $k, $v := $schema.properties }}
+      {{ $payload = printf "%s%s\n" $payload (printf "\"%s\": \"%s\"," $k $v.example) }}
+    {{ end }}
+  {{ end }}
+
+  {{ $codeLangs := slice "curl" "go" "java" "python" "ruby" "javascript"  }}
+  {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}
+
+  {{ range $lang := $codeLangs }}
+  <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang | lower }}" >
+    <div class="code-snippet">
+      <div class="highlight">
+        {{ $noCodeFileExamples := true }}
+        {{- if eq $lang "go" -}}
+          {{ with $page.Resources.Match (print $summary ".go") }}
+            {{ range . }}
+                {{- highlight .Content "golang" -}}
+                {{ $noCodeFileExamples = false }}
+            {{ end }}
+          {{ end }}
+        {{- else if eq $lang "python" -}}
+          {{ with $page.Resources.Match (print $summary ".py") }}
+            {{ range . }}
+                {{- highlight .Content "python" -}}
+                {{ $noCodeFileExamples = false }}
+            {{ end }}
+          {{ end }}
+        {{- end -}}
+
+        {{ if $noCodeFileExamples }}
+          {{- $partialPath := (printf "api/openapi-code-%s.html" ($lang | lower)) -}}
+          {{- partial $partialPath (dict "payload" ($payload | safeHTML) "path" $path "method" $pathMethod ) -}}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  {{ end }}
+
+</div>

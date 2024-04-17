@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_glue/
 draft: false
 git_integration_title: amazon_glue
 has_logo: true
-integration_id: amazon-glue
+integration_id: ''
 integration_title: AWS Glue
 integration_version: ''
 is_public: true

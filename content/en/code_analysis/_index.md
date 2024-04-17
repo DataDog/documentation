@@ -4,6 +4,9 @@ kind: documentation
 description: Learn how to use Datadog Code Analysis to address maintainability issues, bugs, and security vulnerabilities in development to prevent customer impact.
 is_beta: true
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
   text: "Monitor all your CI pipelines with Datadog"
@@ -30,7 +33,7 @@ Code Analysis is in public beta.
 
 ## Overview
 
-Code Analysis is composed of the [Static Analysis][1] and [Software Composition Analysis (SCA)][2] products. 
+Code Analysis is composed of the [Static Analysis][1] and [Software Composition Analysis (SCA)][2] scan types. 
 
 Static Analysis
 : Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact users.
@@ -114,4 +117,3 @@ You must configure a GitHub App using the [GitHub integration tile][7] and set u
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [8]: /integrations/guide/source-code-integration
 [9]: https://app.datadoghq.com/ci/code-analysis
-[9]: /security/application_security/software_composition_analysis

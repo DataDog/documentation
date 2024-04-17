@@ -31,13 +31,16 @@ title: Empezando con los tests de API
 
 ## Información general
 
-Los tests de API **controlan de forma proactiva** que tus **servicios más importantes** estén disponibles en cualquier momento y desde cualquier lugar. Los [tests de API únicos][1] están disponibles en ocho subtipos, que te permiten lanzar peticiones en las diferentes capas de red de tus sistemas (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` y `gRPC`). Los [tests de API multipaso][2] te permiten ejecutar tests HTTP en secuencia para monitorizar el tiempo de actividad de los recorridos clave en la API.
+Las pruebas de API **monitorizan proactivamente** tus **servicios más importantes** para que estén disponibles en cualquier momento y desde cualquier lugar. Las [pruebas de API únicas][1] vienen en ocho subtipos que te permiten iniciar solicitudes en las diferentes capas de red de tus sistemas (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` y `gRPC`). Las [pruebas de API multipaso][2] te permiten ejecutar pruebas de API en secuencia para monitorizar el tiempo de actividad de los recorridos clave a nivel de API.
 
 ## Crear un test de API único
 
 Los tests HTTP monitorizan los endpoints de tu API, y te avisan cuando la latencia de la respuesta es alta o cuando no cumple con alguna de las condiciones que hayas definido, tales como el código de estado HTTP previsto, los encabezados de respuesta o el contenido del cuerpo de la respuesta.
 
 {{< img src="getting_started/synthetics/api-test.png" alt="Información general de un test HTTP de Synthetics" style="width:100%;" >}}
+ 
+ 
+ 
 
 El siguiente ejemplo muestra cómo crear un [test HTTP][3], que es un subtipo de [test de API único][1].
 
@@ -112,7 +115,7 @@ Los [test de API multipaso][2] te permiten monitorizar las transacciones empresa
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="Información general de un test de API multipaso de Synthetics" style="width:100%;" >}}
 
-De forma similar a los [tests HTTP][3], los tests de API multipaso te avisan cuando tus endpoints se vuelven demasiado lentos o no cumplen alguna de las condiciones que has definido. Puedes crear variables a partir de las respuestas de pasos concretos y reintroducir sus valores en pasos posteriores, encadenando los pasos de forma que imiten el comportamiento de tu aplicación o servicio.
+De forma similar a las [pruebas de API][3], las pruebas de API multipaso te avisan cuando tus endpoints se vuelven demasiado lentos o no cumplen alguna de las condiciones que has definido. Puedes crear variables a partir de respuestas de pasos individuales y volver a introducir tus valores en pasos posteriores, encadenando pasos de forma que imiten el comportamiento de tu aplicación o servicio.
 
 El test de ejemplo que puedes ver a continuación muestra cómo se crea un test de API multipaso que monitorice la adición de un elemento a un carrito. Este test consta de tres pasos:
 
@@ -122,7 +125,7 @@ El test de ejemplo que puedes ver a continuación muestra cómo se crea un test 
 
 Si no sabes en qué endpoints de la API crear tu test de API multipaso, utiliza los endpoints de ejemplo que aparecen a continuación.
 
-Para crear un test de API multipaso nuevo, haz clic en **New Test** (Nuevo test) > **[Multistep API test][12]** (Test de API multipaso). Añade un nombre de prueba, como por ejemplo `Add product to cart`, incluye etiquetas (tags) y selecciona localizaciones.
+Para crear un test de API multipaso nuevo, haz clic en **New Test** (Nuevo test) > **[Multistep API test][12]** (Test de API multipaso). Añade un nombre de prueba, como por ejemplo `Añadir un producto al carrito`, incluye etiquetas (tags) y selecciona localizaciones.
 
 ### Obtener un carrito
 
@@ -221,3 +224,4 @@ Consulta la traza (trace) generada a partir de la ejecución del test fallido en
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
 [13]: /es/synthetics/guide/synthetic-test-monitors
 [14]: /es/synthetics/apm/
+[15]: /es/synthetics/api_tests/grpc_tests

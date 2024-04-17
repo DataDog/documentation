@@ -29,6 +29,18 @@ rulesets:
     title: "Follow best practices with using Docker"
     description: |
       Best practices for using Docker.
+  go-best-practices:
+    title: "Best Practices for Go"
+    description: |
+      Rules to make writing Go code faster and easier. From code style to preventing bugs, this ruleset helps developers writing performant, maintainable, and efficient Go code.
+  go-inclusive:
+    title: "Use inclusive language in Go"
+    description: |
+      Check Go code for wording issues.
+  go-security:
+    title: "Ensure your Go code is safe and secure"
+    description: |
+      Detect common security issues (such as SQL injection, XSS, or shell injection) in your Go codebase.
   java-best-practices:
     title: "Follow best practices in Java"
     description: |
@@ -76,7 +88,7 @@ rulesets:
   jsx-react:
     title: "React specific linting rules"
     description: |
-      This plugin exports a `recommended` configuration that enforces React good practices.
+      This plugin exports a `recommended` configuration that enforces React good practices.
   python-best-practices:
     title: "Follow best practices for writing Python code"
     description: |
@@ -121,10 +133,30 @@ rulesets:
        - Hardcoded credentials
        - Shell injection
        - Unsafe deserialization
+  rails-best-practices:
+    title: "Patterns widely adopted by the Ruby on Rails community"
+    description: |
+      Best practices to write Ruby on Rails code.
+  ruby-best-practices:
+    title: "Follow best practices in Ruby"
+    description: |
+      Rules to enforce Ruby best practices.
+  ruby-code-style:
+    title: "Rules to enforce Ruby code style."
+    description: |
+      Code Analysis rules to write Ruby rules that follows established coding standards.
+  ruby-inclusive:
+    title: "Rules for inclusive Ruby code"
+    description: |
+      Write inclusive Ruby code
+  ruby-security:
+    title: "Security rules for Ruby"
+    description: |
+      Rules focused on finding security issues in your Ruby code.
   tsx-react:
     title: "TypeScript React code quality"
     description: |
-      This plugin exports a `recommended` configuration that enforces React good practices.
+      This plugin exports a `recommended` configuration that enforces React good practices.
   typescript-best-practices:
     title: "Follow best practices for writing TypeScript code"
     description: |
@@ -153,6 +185,40 @@ rulesets:
     title: "Identify potential security hotspots in Node"
     description: |
       Rules to identify potential security hotspots in Node. This may include false positives that require further triage.
+
+cascade:
+  modal:
+    title: Try this rule and analyze your code with Datadog Code Analysis
+    top_box: 
+      title: How to use this rule
+      steps:
+        - Create a static-analysis.datadog.yml with the content above at the root of your repository
+        - Use our free IDE integrations or add Code Analysis scans to your CI pipelines
+        - Get feedback on your code
+      footer: For more information, please read the <a href="/code_analysis">Code Analysis documentation</a>
+    bottom_boxes:
+      - title: VS Code Extension
+        icon: vscode
+        subtitle: Identify code vulnerabilities directly in your</br>VS Code editor
+        cta_title: Download Extension
+        cta_url: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
+      - title: JetBrains Plugin
+        icon: jetbrains
+        subtitle: Identify code vulnerabilities directly in</br>JetBrains products
+        cta_title: Download Plugin
+        cta_url: https://plugins.jetbrains.com/plugin/19495-datadog
+    footer:
+      text: Use Datadog Code Analysis to catch code issues at every step of your development process
+      link:
+        name: Datadog Code Analysis
+        url: https://www.datadoghq.com/code-analysis/
+
+  banner: 
+    title: "<span>Seamless integrations.</span> Try Datadog Code Analysis"
+    link:
+      name: Datadog Code Analysis
+      url: https://www.datadoghq.com/code-analysis/
+
 
 further_reading:
   - link: "/code_analysis/"

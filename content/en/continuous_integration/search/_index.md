@@ -1,6 +1,8 @@
 ---
 title: Search and Manage CI Pipelines 
 description: Learn how to search for your CI pipelines.
+aliases:
+- /continuous_integration/explorer/search/
 further_reading:
 - link: "/continuous_integration/explorer"
   tag: "Documentation"

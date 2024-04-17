@@ -10,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
 draft: false
 git_integration_title: amazon_vpn
 has_logo: true
-integration_id: amazon-vpn
+integration_id: ''
 integration_title: AWS VPN
 integration_version: ''
 is_public: true

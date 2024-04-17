@@ -92,9 +92,9 @@ cascade:
   aliases:
     - /integrations/stormforge_stormforge_license/
 - _target:
-    path: /integrations/rss.md
+    path: /integrations/feed.md
   aliases:
-    - /integrations/feed/
+    - /integrations/rss/
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

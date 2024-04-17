@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Explore your testing suite's Synthetic test coverage of RUM browser actions or API endpoints on the **Test Coverage** page.
+Explore your testing suite's Synthetic test coverage of RUM browser actions or API endpoints on the [**Test Coverage** page][1], which you can find under **Digital Experience** > **Synthetic Monitoring & Testing**.
 
 {{< tabs >}}
 {{% tab "Browser Actions" %}}
@@ -93,7 +93,7 @@ Add the most popular sections of your application to a new or existing browser t
 [4]: /synthetics/browser_tests/
 [5]: /real_user_monitoring/guide/send-rum-custom-actions/
 [6]: /synthetics/metrics/
-[7]: /real_user_monitoring/session_replay/
+[7]: /real_user_monitoring/session_replay/browser/
 [8]: https://app.datadoghq.com/rum/explorer/
 [9]: /continuous_testing/
 
@@ -154,3 +154,4 @@ To create a test, click **+ New Test** on the top right of the [Test Coverage pa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://app.datadoghq.com/synthetics/test-coverage/browser

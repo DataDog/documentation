@@ -18,6 +18,7 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | Software Composition Analysis (SCA) |  2.16.0  |
 | Code Security (beta)| 2.42.0  |
 | Automatic user activity event tracking | 2.32.0 |
+| API Security | 2.42.0 |
 
 The minimum tracer version to get all supported ASM capabilities for .NET is 2.42.0.
 

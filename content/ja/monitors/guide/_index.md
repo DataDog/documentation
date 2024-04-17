@@ -14,17 +14,18 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}モニターアラートのトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}テンプレート変数の評価{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}監視範囲{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/suppress-alert-with-downtimes" >}}ダウンタイムによるアラートの抑制{{< /nextlink >}}
-    {{< nextlink href="/monitors/guide/scoping_downtimes" >}}ダウンタイムのスコープ{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide/scoping_downtimes" >}}ダウンタイムの範囲設定{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}数値に変化がない場合のアラート{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}メトリクスモニターのクラスターアラートの作成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}モニターの依存関係の作成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}モニターアラートを CSV にエクスポートする{{< /nextlink >}}
     {{< nextlink href="monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting" >}}特定のタグがレポーティングを停止した場合のアラート設定{{< /nextlink >}}
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}回復のしきい値{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}メトリクスモニターの "No Data" アラートを調整する{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}ダウンタイム中のモニターからアラートが出ないようにする{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}アラートのバタつきを抑える{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}メトリクスモニターにおける "No Data" アラートの調整{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}ダウンタイム中のモニターによるアラートの発生を防ぐ{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}アラートのフラッピングを減少させる{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}スパースメトリクスの監視{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/best-practices-for-live-process-monitoring" >}}ライブプロセスモニタリングのベストプラクティス{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}
@@ -45,7 +46,8 @@ title: モニターガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="クエリ:" >}}
-    {{< nextlink href="/monitors/guide/custom_schedules" >}}カスタムスケジュールを追加して、モニター評価の頻度をカスタマイズ{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}算術演算とスパースメトリクスのモニター{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() モニター評価{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide/custom_schedules" >}}カスタムスケジュールを追加してモニターの評価頻度をカスタマイズする{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}算術演算とスパースメトリクスの監視{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() を使用したモニター評価{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor_aggregators" >}}アグリゲーターの監視{{< /nextlink >}}
 {{< /whatsnext >}}
