@@ -65,9 +65,9 @@ To set your project up to send the symbolication files automatically, run `npx d
 
 See the wizard [official documentation][13] for options.
 
-## Passing options for your uploads
+### Passing options for your uploads
 
-### On Android using the `datadog-sourcemaps.gradle` script
+#### On Android using the `datadog-sourcemaps.gradle` script
 
 To specify a different service name, add the following code to your `android/app/build.gradle` file, before the `apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.gradle"` line:
 
@@ -77,11 +77,11 @@ project.ext.datadog = [
 ]
 ```
 
-### On iOS using the `datadog-ci react-native xcode` command
+#### On iOS using the `datadog-ci react-native xcode` command
 
 Options for the `datadog-ci react-native xcode` command are available on the [command documentation page][12].
 
-### Limitations
+#### Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 Source maps, mapping files, and dSYM files are limited to **500** MB each.
@@ -422,8 +422,11 @@ Inside the loop, add the following snippet:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
+
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/reactnative/
+
+
 [4]: /real_user_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
 [5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
 [6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
@@ -432,6 +435,8 @@ Inside the loop, add the following snippet:
 [10]: https://appcenter.ms/
 [11]: https://www.bitrise.io/
 [12]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+
 [13]: https://github.com/DataDog/datadog-react-native-wizard
+
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
