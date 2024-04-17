@@ -1,12 +1,13 @@
 ---
-title: Custom Instrumentation of Java Applications with the OpenTelemetry API
+title: Java Custom Instrumentation using OpenTelemetry API
 kind: documentation
 description: 'Instrument your Java application with OpenTelemetry API to send traces to Datadog.'
-code_lang: java
+code_lang: otel
 type: multi-code-lang
-code_lang_weight: 0
+code_lang_weight: 2
 aliases:
 - /tracing/trace_collection/otel_instrumentation/java/
+- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/java
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
@@ -80,12 +81,12 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 ```java
 // Add attributes to the current span
 Span currentSpan = Span.current();
-currentSpan.setAttribute("some-key", "some-value");
+currentSpan.setAttributes("some-key", "some-value");
 
 // Add attributes to the local root span
 ContextKey<OtelSpan> localRootSpanKey = ContextKey.named("opentelemetry-traces-local-root-span");
 Span rootSpan = Context.current().get(localRootSpanKey);
-rootSpan.setAttribute("some-key", "some-value");
+rootSpan.setAttributes("some-key", "some-value");
 ```
 
 **Note:** If there isn't a current or local root span, the returned span is invalid, not `null`, and attributes are not set.

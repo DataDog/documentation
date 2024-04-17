@@ -680,8 +680,8 @@ main:
     identifier: otel_propagation
     parent: otel_interoperability
     weight: 602
-  - name: Custom Instrumentation
-    url: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+  - name: OpenTelemetry API Support
+    url: /opentelemetry/interoperability/api_support
     identifier: otel_instrumentation
     parent: otel_interoperability
     weight: 603
@@ -2545,16 +2545,61 @@ main:
     parent: tracing_trace_collection
     identifier: custom_instrumentation
     weight: 202
-  - name: Using Datadog Libraries
-    url: tracing/trace_collection/custom_instrumentation/dd_libraries/
+  - name: Java
+    url: tracing/trace_collection/custom_instrumentation/java/dd-api
     parent: custom_instrumentation
-    identifier: tracing_custom_inst
+    identifier: custom_instrumentation_java
     weight: 2021
-  - name: Using OpenTelemetry APIs
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+  - name: Python
+    url: tracing/trace_collection/custom_instrumentation/python/dd-api
     parent: custom_instrumentation
-    identifier: tracing_otel_inst
+    identifier: custom_instrumentation_python
     weight: 2022
+  - name: Ruby
+    url: tracing/trace_collection/custom_instrumentation/ruby/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_ruby
+    weight: 2023
+  - name: Go
+    url: tracing/trace_collection/custom_instrumentation/go/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_go
+    weight: 2024
+  - name: Node.js
+    url: tracing/trace_collection/custom_instrumentation/nodejs/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_nodejs
+    weight: 2025
+  - name: PHP
+    url: tracing/trace_collection/custom_instrumentation/php/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_php
+    weight: 2026
+  - name: C++
+    url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_cpp
+    weight: 2027
+  - name: .NET
+    url: tracing/trace_collection/custom_instrumentation/dotnet/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_dotnet
+    weight: 2028
+  - name: Rust
+    url: tracing/trace_collection/custom_instrumentation/rust
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_rust
+    weight: 2029
+  - name: Swift
+    url: tracing/trace_collection/custom_instrumentation/swift
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_ios
+    weight: 2030
+  - name: Elixir
+    url: tracing/trace_collection/custom_instrumentation/elixir
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_elixir
+    weight: 2031
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection

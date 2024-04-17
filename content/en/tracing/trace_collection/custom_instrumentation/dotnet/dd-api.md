@@ -1,15 +1,16 @@
 ---
-title: .NET Custom Instrumentation with Datadog Library
+title: .NET Custom Instrumentation using Datadog API
 kind: documentation
-code_lang: dotnet
+code_lang: dd-api
 type: multi-code-lang
-code_lang_weight: 80
+code_lang_weight: 1
 aliases:
     - /tracing/opentracing/dotnet
     - /tracing/manual_instrumentation/dotnet
     - /tracing/custom_instrumentation/dotnet
     - /tracing/setup_overview/custom_instrumentation/dotnet
     - /tracing/trace_collection/custom_instrumentation/dotnet
+    - /tracing/trace_collection/custom_instrumentation/dd_libraries/dotnet
 description: 'Manually instrument your .NET application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'

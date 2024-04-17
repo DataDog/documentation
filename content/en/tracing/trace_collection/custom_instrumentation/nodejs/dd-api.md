@@ -1,5 +1,5 @@
 ---
-title: Node.js Custom Instrumentation with Datadog Library
+title: Node.js Custom Instrumentation using Datadog API
 kind: documentation
 aliases:
     - /tracing/opentracing/nodejs
@@ -7,9 +7,10 @@ aliases:
     - /tracing/custom_instrumentation/nodejs
     - /tracing/setup_overview/custom_instrumentation/nodejs
     - /tracing/trace_collection/custom_instrumentation/nodejs
+    - /tracing/trace_collection/custom_instrumentation/dd_libraries/nodejs
 description: 'Manually instrument your Node.js application to send custom traces to Datadog.'
-code_lang: nodejs
-code_lang_weight: 40
+code_lang: dd-api
+code_lang_weight: 1
 type: multi-code-lang
 further_reading:
     - link: "/tracing/trace_collection/trace_context_propagation/nodejs/"

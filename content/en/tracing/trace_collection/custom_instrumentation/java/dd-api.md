@@ -1,5 +1,5 @@
 ---
-title: Java Custom Instrumentation with Datadog Library
+title: Java Custom Instrumentation using Datadog API
 kind: documentation
 aliases:
     - /tracing/opentracing/java
@@ -7,10 +7,11 @@ aliases:
     - /tracing/custom_instrumentation/java
     - /tracing/setup_overview/custom_instrumentation/java
     - /tracing/trace_collection/custom_instrumentation/java
+    - /tracing/trace_collection/custom_instrumentation/dd_libraries/java
 description: 'Instrument your code with the Datadog Java APM tracer.'
-code_lang: java
+code_lang: dd-api
 type: multi-code-lang
-code_lang_weight: 0
+code_lang_weight: 1
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
@@ -19,11 +20,8 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
-<div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/java/">Java Setup Instructions</a>.
-</div>
 
-This page details common use cases for adding and customizing observability with Datadog APM.
+This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
 
 ## Adding tags
 
@@ -355,3 +353,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [8]: /tracing/trace_collection/trace_context_propagation/java/
 [9]: /tracing/security
 [10]: /tracing/guide/ignoring_apm_resources/
+[11]: /tracing/setup/java/

@@ -1,15 +1,13 @@
 ---
-title: C++ Custom Instrumentation with Datadog Library
+title: C++ Custom Instrumentation using Datadog API
 kind: documentation
 aliases:
     - /tracing/manual_instrumentation/cpp
     - /tracing/custom_instrumentation/cpp
     - /tracing/setup_overview/custom_instrumentation/cpp
     - /tracing/trace_collection/custom_instrumentation/cpp
+    - /tracing/trace_collection/custom_instrumentation/dd_libraries/cpp
 description: 'Manually instrument your C++ application to send custom traces to Datadog.'
-code_lang: cpp
-type: multi-code-lang
-code_lang_weight: 50
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'

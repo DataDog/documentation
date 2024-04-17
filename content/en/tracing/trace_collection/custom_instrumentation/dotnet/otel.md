@@ -1,12 +1,13 @@
 ---
-title: Custom Instrumentation of .NET Applications with the OpenTelemetry API
+title: .NET Custom Instrumentation using OpenTelemetry API
 kind: documentation
-code_lang: dotnet
+code_lang: otel
 type: multi-code-lang
-code_lang_weight: 80
+code_lang_weight: 2
 description: 'Instrument your .NET application with OpenTelemetry API, to send traces to Datadog.'
 aliases:
 - /tracing/trace_collection/otel_instrumentation/dotnet/
+- /tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
