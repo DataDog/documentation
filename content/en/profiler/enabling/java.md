@@ -79,23 +79,23 @@ To begin profiling applications:
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
-{{< tabs >}}
-{{% tab "Wget" %}}
-   ```shell
-   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-   ```
-{{% /tab %}}
-{{% tab "cURL" %}}
-   ```shell
-   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-   ```
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
-   ```dockerfile
-   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
-   ```
-{{% /tab %}}
-{{< /tabs >}}
+   {{< tabs >}}
+   {{% tab "Wget" %}}
+      ```shell
+      wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+      ```
+   {{% /tab %}}
+   {{% tab "cURL" %}}
+      ```shell
+      curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+      ```
+   {{% /tab %}}
+   {{% tab "Dockerfile" %}}
+      ```dockerfile
+      ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+      ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
    **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
@@ -132,7 +132,7 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="Build and run native-image" level="h4" %}}
+{{% collapse-content title="(Optional) Build and run native-image" level="h4" %}}
 
 Follow the [Tracer Setup Instructions][13] to build your native image with the Datadog Java Profiler.
 
@@ -142,19 +142,10 @@ When the service binary is built, you can use environment variables to enable an
    DD_PROFILING_ENABLED=true DD_PROFILING_DIRECTALLOCATION_ENABLED=true ./my_service
    ```
 
-   **Note**: Only JFR based profiling is supported for the GraalVM native-image applications. None of the <code>DDPROF</code>
-related configuration options are effective.
-
+**Note**: Only JFR-based profiling is supported for the GraalVM native-image applications. None of the <code>DDPROF</code> related configuration options are effective.
 {{% /collapse-content %}}
 
-   **Note**: The `-javaagent` argument needs to be before `-jar`. This adds it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
-
-    ```shell
-    # Good:
-    java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
-    # Bad:
-    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
-    ```
+   **Note**: The `-javaagent` argument needs to be before `-jar`. This adds it as a JVM option rather than an application argument. For example, `java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags`. For more information, see the [Oracle documentation][6].
 
 4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][7].
 
