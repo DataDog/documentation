@@ -483,6 +483,13 @@ components:
       required: true
       schema:
         type: string
+    SecurityMonitoringNotificationRuleID:
+      description: The ID of the notification rule.
+      in: path
+      name: notification_rule_id
+      required: true
+      schema:
+        type: string
     SecurityMonitoringRuleID:
       description: The ID of the rule.
       in: path
@@ -17268,6 +17275,17 @@ components:
         meta:
           $ref: '#/components/schemas/SecurityFilterMeta'
       type: object
+    SecurityMonitoringCreator:
+      description: The author of the notification rule.
+      properties:
+        handle:
+          description: The email of the author
+          type: string
+        name:
+          description: The name of the author
+          nullable: true
+          type: string
+      type: object
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -17296,6 +17314,274 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    SecurityMonitoringNotificationRuleCreateAttributes:
+      description: Attributes of a notification rule to be created.
+      properties:
+        enabled:
+          description: Whether the notification rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the notification rule.
+          example: Interesting signals
+          maxLength: 500
+          minLength: 1
+          type: string
+        selectors:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleSelectors'
+        targets:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleTargets'
+      required:
+      - name
+      - enabled
+      - selectors
+      - targets
+      type: object
+    SecurityMonitoringNotificationRuleCreateData:
+      description: Data containing new notification rule attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringNotificationRuleCreateRequest:
+      description: Request body for creating a security monitoring notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleCreateData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringNotificationRuleListResponse:
+      description: List of notification rules.
+      properties:
+        data:
+          description: Array containing the list of notification rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringNotificationRuleResponseData'
+          type: array
+      type: object
+    SecurityMonitoringNotificationRuleResponse:
+      description: The response returned after all notification rules operations,
+        containing the affected notification rule data.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleResponseData'
+      type: object
+    SecurityMonitoringNotificationRuleResponseAttributes:
+      description: Attributes of the notification rule.
+      properties:
+        creation_date:
+          description: Timestamp of creation of the notification rule in milliseconds.
+          format: int64
+          type: integer
+        creator:
+          $ref: '#/components/schemas/SecurityMonitoringCreator'
+        enabled:
+          description: Whether the notification rule is enabled.
+          type: boolean
+        name:
+          description: The name of the notification rule.
+          type: string
+        selectors:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleSelectors'
+        targets:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleTargets'
+        update_date:
+          description: Timestamp of last modification of the notification rule in
+            milliseconds.
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/SecurityMonitoringUpdater'
+        version:
+          description: The version of the rule being updated.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SecurityMonitoringNotificationRuleResponseData:
+      description: Data containing notification rule attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleResponseAttributes'
+        id:
+          description: The unique ID of the notification rule.
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleType'
+      type: object
+    SecurityMonitoringNotificationRuleSelectors:
+      description: Selectors describing the notification rule.
+      properties:
+        attributes:
+          description: Set of rule and signal tags for which a notification will be
+            triggered.
+          example:
+          - test:123
+          - env:prod
+          items:
+            description: Rule or signal tag.
+            type: string
+          type: array
+        implicit_vm_rule_match:
+          description: Whether vulnerability_management rules are matched by default
+            when the selector for rule type is empty.
+          example: false
+          type: boolean
+        migrated:
+          description: True if the notification_rule was created with signal tags/attributes
+            and migrated to an event query and false if it was created with an event
+            query
+          example: false
+          type: boolean
+        query:
+          description: Query for matching the notification_rule against signal content
+          example: (fim:true OR @fim:true)
+          type: string
+        rule_tags:
+          description: Set of rule tags for which a notification will be triggered.
+          example:
+          - test:123
+          items:
+            description: Rule tag.
+            maxLength: 500
+            minLength: 1
+            type: string
+          maxItems: 20
+          type: array
+          uniqueItems: true
+        rule_types:
+          description: Set of signal types (rule types) for which a notification will
+            be triggered.
+          example:
+          - application_security
+          - log_detection
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleTypes'
+          type: array
+          uniqueItems: true
+        severities:
+          description: Set of signal severities (rule case statuses) for which a notification
+            will be triggered.
+          example:
+          - high
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+          type: array
+          uniqueItems: true
+        signal_tags:
+          description: Set of signal tags for which a notification will be triggered.
+          example:
+          - env:prod
+          items:
+            description: Signal tag.
+            maxLength: 500
+            minLength: 1
+            type: string
+          maxItems: 20
+          type: array
+          uniqueItems: true
+        trigger_source:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleTriggerSource'
+      required:
+      - rule_tags
+      - severities
+      - signal_tags
+      - rule_types
+      - attributes
+      - implicit_vm_rule_match
+      type: object
+    SecurityMonitoringNotificationRuleTargets:
+      description: Set of targets to notify.
+      example:
+      - '@slack-test'
+      items:
+        description: Target.
+        maxLength: 500
+        minLength: 1
+        type: string
+      maxItems: 20
+      minItems: 1
+      type: array
+      uniqueItems: true
+    SecurityMonitoringNotificationRuleTriggerSource:
+      description: Specifies the evaluation result (Signal or Finding).
+      enum:
+      - security_signals
+      - security_findings
+      example: security_signals
+      type: string
+      x-enum-varnames:
+      - SECURITY_SIGNALS
+      - SECURITY_FINDINGS
+    SecurityMonitoringNotificationRuleType:
+      default: notification_rules
+      description: The type of the resource. The value should always be `notification_rules`.
+      enum:
+      - notification_rules
+      example: notification_rules
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_RULES
+    SecurityMonitoringNotificationRuleUpdateAttributes:
+      description: Attributes of a notification rule to be updated.
+      properties:
+        enabled:
+          description: Whether the notification rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the notification rule.
+          example: Interesting signals
+          maxLength: 500
+          minLength: 1
+          type: string
+        selectors:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleSelectors'
+        targets:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleTargets'
+        version:
+          description: The version of the rule being updated.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+      - name
+      - enabled
+      - selectors
+      - targets
+      - version
+      type: object
+    SecurityMonitoringNotificationRuleUpdateData:
+      description: Data containing the patch for a notification rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleUpdateAttributes'
+        id:
+          description: The unique ID of the notification rule.
+          example: ntf-prf-001
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringNotificationRuleUpdateRequest:
+      description: Request body for updating a security monitoring notification rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringNotificationRuleUpdateData'
+      required:
+      - data
       type: object
     SecurityMonitoringRuleCase:
       description: Case when signal is generated.
@@ -17671,6 +17957,25 @@ components:
       - WORKLOAD_SECURITY
       - CLOUD_CONFIGURATION
       - APPLICATION_SECURITY
+    SecurityMonitoringRuleTypes:
+      description: Security monitoring rule types.
+      enum:
+      - application_security
+      - log_detection
+      - cloud_configuration
+      - infrastructure_configuration
+      - workload_security
+      - signal_correlation
+      - vulnerability_management
+      type: string
+      x-enum-varnames:
+      - APPLICATION_SECURITY
+      - LOG_DETECTION
+      - CLOUD_CONFIGURATION
+      - INFRASTRUCTURE_CONFIGURATION
+      - WORKLOAD_SECURITY
+      - SIGNAL_CORRELATION
+      - VULNERABILITY_MANAGEMENT
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
@@ -18810,6 +19115,17 @@ components:
           type: string
       required:
       - uuid
+      type: object
+    SecurityMonitoringUpdater:
+      description: The editor of the notification rule.
+      properties:
+        handle:
+          description: The email of the editor
+          type: string
+        name:
+          description: The name of the editor
+          nullable: true
+          type: string
       type: object
     SecurityMonitoringUser:
       description: A user.
@@ -22951,6 +23267,9 @@ components:
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_notification_rules_read: View Notification Rules.
+            security_monitoring_notification_rules_write: Create, edit, and delete
+              Notification Rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -34057,9 +34376,184 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/configuration/notification_rules:
+    get:
+      description: List all notification rules.
+      operationId: ListSecurityMonitoringNotificationRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringNotificationRuleListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_rules_read
+      summary: List notification rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 19
+      x-undo:
+        type: safe
+    post:
+      description: Create a notification rule.
+      operationId: CreateSecurityMonitoringNotificationRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringNotificationRuleCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringNotificationRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_rules_write
+      summary: Create a notification rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        notification_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"notification_rules\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique }}\",\n      \"enabled\": true,\n      \"selectors\":
+              {\n        \"rule_tags\": [\"fim:true\"],\n        \"severities\": [\"high\"],\n
+              \       \"signal_tags\": [],\n        \"rule_types\": [\"log_detection\",
+              \"cloud_configuration\"],\n        \"attributes\": [\"fim:true\"],\n
+              \       \"implicit_vm_rule_match\": false,\n        \"trigger_source\":
+              \"security_signals\"\n      },\n      \"targets\": [\"test\"]\n    }\n
+              \ }\n}"
+          step: there is a valid "notification_rule" in the system
+      x-menu-order: 20
+      x-undo:
+        operationId: DeleteSecurityMonitoringNotificationRule
+        parameters:
+        - name: notification_rule_id
+          source: data.id
+        type: unsafe
+  /api/v2/security_monitoring/configuration/notification_rules/{notification_rule_id}:
+    delete:
+      description: Delete a specific notification rule.
+      operationId: DeleteSecurityMonitoringNotificationRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringNotificationRuleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_rules_write
+      summary: Delete a notification rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 23
+      x-undo:
+        type: idempotent
+    get:
+      description: Get notification rule by ID.
+      operationId: GetSecurityMonitoringNotificationRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringNotificationRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_rules_read
+      summary: Get notification rule by ID
+      tags:
+      - Security Monitoring
+      x-menu-order: 21
+      x-undo:
+        type: safe
+    patch:
+      description: Update a specific notification rule.
+      operationId: EditSecurityMonitoringNotificationRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringNotificationRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringNotificationRuleUpdateRequest'
+        description: Attributes describing the signal update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringNotificationRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_notification_rules_write
+      summary: Update a notification rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 22
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/configuration/security_filters:
     get:
-      description: Get the list of configured security filters with their definitions.
+      description: List all configured security filters with their definitions.
       operationId: ListSecurityFilters
       responses:
         '200':
@@ -34077,7 +34571,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_filters_read
-      summary: Get all security filters
+      summary: List security filters
       tags:
       - Security Monitoring
       x-menu-order: 18
@@ -34416,7 +34910,7 @@ paths:
         type: idempotent
   /api/v2/security_monitoring/rules:
     get:
-      description: List rules.
+      description: List all rules.
       operationId: ListSecurityMonitoringRules
       parameters:
       - $ref: '#/components/parameters/PageSize'
