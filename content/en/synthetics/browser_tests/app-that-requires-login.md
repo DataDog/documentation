@@ -2,6 +2,8 @@
 title: Monitor An Application That Requires Authentication With Browser Tests
 kind: guide
 description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
+aliases:
+  - /synthetics/guide/app-that-requires-login
 further_reading:
   - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
     tag: 'Blog'

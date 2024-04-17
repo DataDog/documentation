@@ -43,6 +43,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
     tag: "Blog"
     text: "Detect malware in your containers with Datadog Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/security-posture-csm/"
+    tag: "Blog"
+    text: "Report on changes to your security posture with Cloud Security Management"
 algolia:
   tags: ['inbox']
 cascade:

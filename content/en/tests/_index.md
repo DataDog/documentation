@@ -52,7 +52,7 @@ cascade:
     {{< nextlink href="tests/containers" >}}Tests running in containers{{< /nextlink >}}
 {{< /whatsnext >}}
 
-In addition to tests, Test Visibility provides visibility over the whole testing phase of your project (except for Ruby).
+In addition to tests, Test Visibility provides visibility over the whole testing phase of your project.
 
 ### Supported features
 
@@ -153,13 +153,9 @@ In order to filter using these configurations tags, [you must create facets for 
 {{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
-If [Intelligent Test Runner][12] is enabled for .NET, Java, JavaScript, or Swift, per test code coverage information, including file names and line numbers covered by each test, are collected from your projects.
-
-When creating a [dashboard][8] or a [notebook][9], you can use test execution data in your search query, which updates the visualization widget options.
-
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][10], click **Create Monitor** to create a [CI Test monitor][11].
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][3], click **Create Monitor** to create a [CI Test monitor][4].
 
 ## Further reading
 
@@ -167,8 +163,5 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 
 [1]: https://app.datadoghq.com/ci/test-services
 [2]: /continuous_integration/explorer/facets/
-[8]: https://app.datadoghq.com/dashboard/lists
-[9]: https://app.datadoghq.com/notebook/list
-[10]: https://app.datadoghq.com/ci/test-runs
-[11]: /monitors/types/ci/
-[12]: /tests/code_coverage/
+[3]: https://app.datadoghq.com/ci/test-runs
+[4]: /monitors/types/ci/

@@ -46,15 +46,20 @@ To use private locations for [Continuous Testing tests][23], you need v1.27.0 or
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.**\***
+
+**\*** **Use and operation of this software is governed by the End User License Agreement available [here][103].**
 
 [101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [102]: https://docs.docker.com/engine/install/
+[103]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Private locations are Windows services that you can install anywhere inside your private network using an [MSI file][101]. Run this file from the virtual or physical machine that you would like to install the private location on. 
+Private locations are Windows services that you can install anywhere inside your private network using an [MSI file][101]. Run this file from the virtual or physical machine that you would like to install the private location on.**\***
+
+**\*** **Use and operation of this software is governed by the End User License Agreement available [here][102].**
 
 This machine's requirements are listed in the table below. PowerShell scripting must be enabled on the machine where you are installing the private location worker.
 
@@ -75,6 +80,7 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 {{< /site-region >}}
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[102]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
 {{< /tabs >}}

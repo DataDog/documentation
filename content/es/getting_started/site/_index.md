@@ -16,7 +16,19 @@ title: Empezando con los sitios de Datadog
 
 ## Información general
 
-Datadog ofrece distintos sitios en todo el mundo. Cada uno es totalmente independiente del resto, y no puedes compartir datos entre ellos. Todos los sitios proporcionan beneficios (por ejemplo, normativas de seguridad del gobierno) o te permiten almacenar tus datos en localizaciones concretas de todo el mundo.
+Datadog ofrece distintos sitios en todo el mundo. Cada uno es totalmente independiente del resto, y no puedes compartir datos entre ellos. Todos los sitios presentan ventajas (por ejemplo, normativas de seguridad del gobierno) o te permiten almacenar tus datos en localizaciones concretas de todo el mundo.
+
+## Responsabilidad compartida
+
+La responsabilidad de mantener seguros los datos de los usuarios es compartida entre Datadog y los desarrolladores que utilizan los productos de Datadog.
+
+Datadog es responsable de:
+- Proporcionar un producto fiable que gestione los datos de forma segura cuando se transmitan a la plataforma Datadog y se almacenen en ella.
+- Garantizar que los problemas de seguridad se identifican de acuerdo con las políticas internas.
+
+Los promotores son responsables de:
+- Aprovechar los valores de configuración y las opciones de privacidad de datos que ofrece Datadog.
+- Garantizar la integridad del código dentro de sus entornos.
 
 ## Acceder al sitio de Datadog
 
@@ -37,7 +49,7 @@ Puedes identificar en qué sitio te encuentras consultando la URL de tu sitio we
 
 ## Dominios SDK
 
-Ve [Endpoints compatibles con dominios de SDK][3].
+Consulta [Endpoints compatibles con dominios de SDK][3].
 
 ## Navega por la documentación de Datadog por sitio.
 
@@ -58,7 +70,7 @@ El objetivo del sitio Datadog for Government (US1-FED) es permitir a las agencia
 
 ## Leer más
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< nombre parcial="whats-next/whats-next.html" >}}
 
 [2]: /es/agent/configuration/dual-shipping/
 [3]: /es/real_user_monitoring/#supported-endpoints-for-sdk-domains
