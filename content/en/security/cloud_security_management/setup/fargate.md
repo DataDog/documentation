@@ -10,7 +10,7 @@ Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS
 
 Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as [100+ out-of-the-box rules][3].
 
-{{< img src="security/csm/csm_fargate_workflow.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="80%">}}
+{{< img src="security/csm/csm_fargate_workflow2.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="100%">}}
 
 ## Prerequisites
 
@@ -20,8 +20,8 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 
 ### Images
 
-* cws-instrumentation: datadog/cws-instrumentation-dev:cws-instrumentation-beta
-* Datadog-agent: datadog/agent:7.52.0-rc.4
+* cws-instrumentation: datadog/cws-instrumentation:latest
+* Datadog-agent: datadog/agent:latest
 
 ## Installation
 
@@ -42,14 +42,16 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     "cpu": "256",
     "memory": "512",
     "networkMode": "awsvpc",
+    "pidMode": "task",
     "requiresCompatibilities": [
         "FARGATE"
     ],
     "containerDefinitions": [
         {
             "name": "cws-instrumentation-init",
-            "image": "datadog/cws-instrumentation-dev:cws-instrumentation-beta",
+            "image": "datadog/cws-instrumentation:latest",
             "essential": false,
+            "user": "0",
             "command": [
                 "/cws-instrumentation",
                 "setup",
@@ -186,7 +188,7 @@ spec:
    spec:
      initContainers:
      - name: cws-instrumentation-init
-       image: datadog/cws-instrumentation-dev:cws-instrumentation-beta
+       image: datadog/cws-instrumentation:latest
        command:
          - "/cws-instrumentation"
          - "setup"
@@ -195,6 +197,8 @@ spec:
        volumeMounts:
          - name: cws-instrumentation-volume
            mountPath: "/cws-instrumentation-volume"
+       securityContext:
+         runAsUser: 0
      containers:
      - name: "<YOUR_APP_NAME>"
        image: "<YOUR_APP_IMAGE>"
@@ -227,6 +231,7 @@ spec:
                fieldPath: spec.nodeName
      volumes:
        - name: cws-instrumentation-volume
+     shareProcessNamespace: true
 {{< /code-block >}}
 
 ## Verify that the Agent is sending events to CSM
@@ -258,6 +263,6 @@ In the task definition, replace the "workload" container with the following:
 [4]: /security/cloud_security_management/setup/csm_enterprise
 [5]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [6]: https://aws.amazon.com/console
-[7]: /resources/json/datadog-agent-ecs-fargate.json
+[7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs

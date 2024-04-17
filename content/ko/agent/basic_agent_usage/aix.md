@@ -14,7 +14,7 @@ title: AIX 에이전트 기본 사용법
 ---
 
 <div class="alert alert-info">
-Datadog Unix 에이전트는 특정 시스템 아키텍처를 위해 개발되고 있으며, 이 에이전트는 Windows, Linux, MacOS 에이전트와 다릅니다.
+Datadog UNIX Agent는 특정 시스템 아키텍처용으로 개발되고 있으며 Windows, Linux 및 MacOS Agents와 동일하지 않습니다.
 </div>
 
 이 페이지에서는 AIX Datadog Unix 에이전트 설치와 설정에 관해 간략히 설명합니다.
@@ -121,7 +121,7 @@ dogstatsd:                        # DogStatsD 구성 옵션
 
 Python 감독자로 에이전트를 실행할 수 있는 기능도 있습니다. 이 도구를 잘 알고 있다면 에이전트 데몬을 관리하는 데 편리할 수 있습니다. 에이전트와 DogStatsD 모두에 항목이 있습니다.
 
-## 삭제
+## 에이전트 설치 제거
 
 설치된 에이전트를 제거하려면 다음 `installp`명령을 실행합니다.
 

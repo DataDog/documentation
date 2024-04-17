@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "name": "Nginx logs (Updated)",
+      "query": "source:nginx",
+      "enabled": false,
+      "forward_tags": false,
+      "forward_tags_restriction_list_type": "BLOCK_LIST"
+    },
+    "type": "custom_destination",
+    "id": "be5d7a69-d0c8-4d4d-8ee8-bba292d98139"
+  }
+}

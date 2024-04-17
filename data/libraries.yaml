@@ -272,6 +272,11 @@ Tracing:
       link: https://github.com/neuecc/DatadogSharp
       notes: Also supports DogStatsD.
       authors: Yoshifumi Kawai
+  - Rust/C++/C:
+    - name: ddprof
+      link: https://github.com/DataDog/ddprof
+      authors: Datadog
+      notes: A profiler for compiled languages.
   - Elixir:
     - name: spandex
       link: https://github.com/zachdaniel/spandex

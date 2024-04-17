@@ -72,7 +72,7 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 
 ### Specify application details in the UI
 
-1. In Datadog, navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][1].
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `react-native` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
@@ -89,8 +89,8 @@ For more information about setting up a client token, see the [Client Token docu
 
 ```js
 import {
-    DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProvider,
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
@@ -115,7 +115,7 @@ config.serviceName = 'com.example.reactnative';
 // Optional: let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
 config.verbosity = SdkVerbosity.WARN;
 
-//Wrap the content of your App component by a DatadogProvider component, passing it your configuration:
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
 export default function App() {
     return (
@@ -134,11 +134,11 @@ export default function App() {
 
 ```js
 import {
-    DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProvider,
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -156,7 +156,15 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-await DdSdkReactNative.initialize(config);
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
+
+export default function App() {
+    return (
+        <DatadogProvider configuration={config}>
+            <Navigation />
+        </DatadogProvider>
+    );
+}
 
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
@@ -167,11 +175,11 @@ await DdSdkReactNative.initialize(config);
 
 ```js
 import {
-    DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProvider,
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -189,8 +197,15 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-await DdSdkReactNative.initialize(config);
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
+export default function App() {
+    return (
+        <DatadogProvider configuration={config}>
+            <Navigation />
+        </DatadogProvider>
+    );
+}
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
 
@@ -200,11 +215,11 @@ await DdSdkReactNative.initialize(config);
 
 ```js
 import {
-    DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProvider,
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -222,8 +237,15 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-await DdSdkReactNative.initialize(config);
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
+export default function App() {
+    return (
+        <DatadogProvider configuration={config}>
+            <Navigation />
+        </DatadogProvider>
+    );
+}
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
 
@@ -233,11 +255,11 @@ await DdSdkReactNative.initialize(config);
 
 ```js
 import {
-    DdSdkReactNative,
-    DdSdkReactNativeConfiguration
+    DatadogProvider,
+    DatadogProviderConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -255,8 +277,15 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-await DdSdkReactNative.initialize(config);
+//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 
+export default function App() {
+    return (
+        <DatadogProvider configuration={config}>
+            <Navigation />
+        </DatadogProvider>
+    );
+}
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
 
@@ -268,10 +297,10 @@ By default, the Datadog React Native SDK reports the `version` as the commercial
 
 If you use an Over The Air (OTA) updates provider like Microsoft's CodePush, you can override this version to indicate which version of your JavaScript code is running.
 
-Datadog recommends using a `versionSuffix` to the `DdSdkReactNativeConfiguration` object:
+Datadog recommends using a `versionSuffix` to the `DatadogProviderConfiguration` object:
 
 ```js
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -303,9 +332,6 @@ You can manually start and stop a view using the following `startView()` and `st
 
 ```js
 import {
-    DdSdkReactNative,
-    DdSdkReactNativeConfiguration,
-    DdLogs,
     DdRum
 } from '@datadog/mobile-react-native';
 
@@ -392,7 +418,7 @@ While in development mode, your application can submit extra events related to t
 To prevent these events from showing in the dashboard, you can disable errors and resources tracking in dev mode using the `__DEV__` flag:
 
 ```js
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
 	CLIENT_TOKEN,
 	ENVIRONMENT,
 	APPLICATION_ID,
