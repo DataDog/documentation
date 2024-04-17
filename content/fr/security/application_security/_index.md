@@ -9,10 +9,10 @@ further_reading:
   text: Fonctionnement d'Application Security Management
 - link: /security/application_security/threats/
   tag: Documentation
-  text: Surveillance et protection contre les menaces
-- link: /security/application_security/risk_management/
+  text: Métriques
+- link: /security/application_security/software_composition_analysis/
   tag: Documentation
-  text: Application Vulnerability Management
+  text: Analyse de la composition dʼun logiciel
 - link: /security/application_security/enabling/#compatibilite
   tag: Documentation
   text: En savoir plus sur les langages et frameworks compatibles
@@ -45,9 +45,13 @@ kind: documentation
 title: Application Security Management
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">La solution Application Security Management n'est pas disponible pour le <a href="/getting_started/site">site Datadog</a> ({{< region-param key="dd_site_name" >}}) que vous avez sélectionné.</div>
+{{< /site-region >}}
+
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="Un volet de signal de sécurité dans Datadog affichant des flux d'attaques et flamegraphs" width="75%">}}
 
-La solution Application Security Management (ASM) de Datadog vous protège contre les attaques ciblant vos applications et cherchant à exploiter des vulnérabilités au niveau du code, telles que la falsification de requête côté serveur (SSRF), l'injection SQL, ka vulnérabilité Log4Shell et les scripts intersites (XSS) réfléchis. Vous pouvez surveiller et renforcer la sécurité des applications s'exécutant dans Docker, Kubernetes et AWS ECS, ainsi que dans AWS Fargate pour les langages pris en charge.
+La solution Application Security Management (ASM) de Datadog vous protège contre les attaques ciblant vos applications et cherchant à exploiter des vulnérabilités au niveau du code, telles que la falsification de requête côté serveur (SSRF), l'injection SQL, ka vulnérabilité Log4Shell et les scripts intersites (XSS) réfléchis. Vous pouvez surveiller et renforcer la sécurité des applications s'exécutant directement sur un serveur, dans Docker, Kubernetes et Amazon ECS, ainsi que dans AWS Fargate pour les langages pris en charge.
 
 ASM tire profit des [bibliothèques de tracing][1] Datadog et de l'[Agent Datadog][2] afin de mettre en évidence les services susceptibles de faire l'objet d'attaques. Une fois cette solution configurée, ses règles de détection intégrées aux applications identifient et neutralisent les menaces dans l'environnement de vos applications, et déclenchent des signaux chaque fois qu'une attaque nuit à votre système de production ou qu'une vulnérabilité est exploitée à partir du code.
 
@@ -57,7 +61,7 @@ Lorsqu'un signal de sécurité est déclenché, vous pouvez réagir rapidement, 
 
 La solution ASM vous permet d'ignorer toutes les traces inutiles et de vous focaliser sur les données importantes pour la sécurité et la protection de votre environnement.
 
-Tant que les vulnérabilités potentielles n'ont pas été entièrement corrigées dans le code de votre application, ASM vous permet de réduire l'impact des attaques en bloquant temporairement ou définitivement les adresses IP malveillantes, le tout d'un simple clic. Cette fonctionnalité est disponible en bêta.
+Tant que les vulnérabilités potentielles n'ont pas été entièrement corrigées dans le code de votre application, ASM vous permet de réduire l'impact des attaques en bloquant temporairement ou définitivement les adresses IP malveillantes, le tout d'un simple clic.
 
 ## Mise en œuvre de la sécurité au niveau des applications dans Datadog
 
@@ -75,7 +79,7 @@ Dans la vue [Security Signals Explorer][6], cliquez sur un signal de sécurité 
 
 ## Étudiez les risques découlant des dépendances et bibliothèques open source en amont
 
-Grâce à la solution [Application Vulnerability Management][8], vous pouvez vérifier si l'intégrité de vos services est compromise par des dépendances à des bibliothèques open source ayant des vulnérabilités connues. Vous pouvez ensuite analyser les informations sur ces vulnérabilités et améliorer la sécurité de votre application en appliquant des conseils de remédiation ou en recherchant d'où proviennent ces vulnérabilités.
+Grâce à la solution [Software Composition Analysis (SCA)][8], vous pouvez vérifier si l'intégrité de vos services est compromise par des dépendances à des bibliothèques open source ayant des vulnérabilités connues. Vous pouvez ensuite analyser les informations sur ces vulnérabilités et améliorer la sécurité de votre application en appliquant des conseils de remédiation ou en recherchant d'où proviennent ces vulnérabilités.
 
 ## Étapes suivantes
 
@@ -84,8 +88,8 @@ Grâce à la solution [Application Vulnerability Management][8], vous pouvez vé
 [1]: /fr/tracing/
 [2]: /fr/agent/
 [3]: /fr/security/application_security/how-appsec-works/
-[4]: /fr/security/default_rules/#cat-application-security
+[4]: /fr/security/default_rules/?category=cat-application-security
 [5]: /fr/security/application_security/enabling/
-[6]: /fr/security/explorer/
+[6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /fr/security/application_security/risk_management/
+[8]: /fr/security/application_security/software_composition_analysis/

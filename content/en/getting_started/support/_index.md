@@ -31,7 +31,7 @@ For the most efficient resolution of an issue, be ready to provide any of the re
 
 ## Chat or support ticket?
 
-Use the table below to determine whether to open a [support ticket][1] or reach out on chat. Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET).
+Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat). 
 
 | Support Ticket                  | Chat        |
 | ------------------------------- | ----------- |
@@ -44,9 +44,11 @@ If you're not sure which option is best, feel free to use either channel to conn
 
 ## Reaching out on chat
 
-To get started, click **Live Chat** on the left panel of your Datadog Account.
+<div class="alert alert-warning">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
 
-{{< img src="getting_started/chat/chat_button.png" alt="The chat button highlighted in Datadog" style="width:80%" >}}
+To get started, click **Support** on the bottom-left corner of the navigation menu.
+
+{{< img src="getting_started/support/support_chat_nav.png" alt="The Support button at the bottom of the app left navigation menu" style="width:40%" >}}
 
 When a new chat is opened, you are asked if you have a **technical** or **sales** question.
    - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.

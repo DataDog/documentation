@@ -1776,7 +1776,7 @@ main:
     parent: events
     weight: 1
   - name: Pipelines and Processors
-    url: service_management/events/pipelines_and_processors/overview
+    url: service_management/events/pipelines_and_processors/
     identifier: overview
     parent: events
     weight: 2
@@ -1870,21 +1870,26 @@ main:
     identifier: event_explorer_saved_views
     parent: events_explorer
     weight: 308
-  - name: Using Events
-    url: service_management/events/usage/
-    identifier: event_usage
-    parent: events
-    weight: 4
   - name: Correlation
     url: service_management/events/correlation/
     identifier: event_correlation
     parent: events
-    weight: 5
-  - name: Pattern-based
-    url: service_management/events/correlation/pattern
-    identifier: event_correlation_pattern
+    weight: 4
+  - name: Configuration
+    url: service_management/events/correlation/configuration
+    identifier: event_correlation_configure
     parent: event_correlation
-    weight: 501
+    weight: 401
+  - name: Triaging & Notifying
+    url: service_management/events/correlation/triage_and_notify
+    identifier: event_correlation_triage_and_notify
+    parent: event_correlation
+    weight: 402    
+  - name: Analytics
+    url: service_management/events/correlation/analytics
+    identifier: event_correlation_analytics
+    parent: event_correlation
+    weight: 403       
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
@@ -3625,6 +3630,11 @@ main:
     parent: code_analysis
     identifier: code_analysis_github_prs
     weight: 4
+  - name: Troubleshooting
+    url: code_analysis/troubleshooting
+    parent: code_analysis
+    identifier: code_analysis_troubleshooting
+    weight: 5
   - name: Quality Gates
     url: quality_gates/
     pre: ci
@@ -4115,6 +4125,11 @@ main:
     parent: security_platform
     identifier: security_audit_trail
     weight: 6
+  - name: Account Takeover Protection
+    url: security/account_takeover_protection
+    parent: security_platform
+    identifier: security_ato_protection
+    weight: 7
   - name: Cloud SIEM
     url: security/cloud_siem/
     pre: siem
@@ -4476,12 +4491,12 @@ main:
     url: security/application_security/guide/
     parent: application_security
     identifier: appsec_guides
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 10
+    weight: 11
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -4558,6 +4573,11 @@ main:
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
     weight: 303
+  - name: Authentication in Browser Tests 
+    identifier: synthetics_browser_tests_authentication
+    url: synthetics/browser_tests/app-that-requires-login
+    parent: synthetics_browser_tests
+    weight: 304
   - name: Private Locations
     url: synthetics/private_locations
     parent: synthetics
