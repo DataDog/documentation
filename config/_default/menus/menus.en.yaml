@@ -3514,16 +3514,21 @@ main:
     parent: dora_metrics
     identifier: dora_metrics_setup
     weight: 1
-  - name: Deployment events
+  - name: Send Deployment Events
     url: dora_metrics/setup/deployments
     parent: dora_metrics_setup
     identifier: dora_metrics_setup_deployments
     weight: 101
-  - name: Incident events
+  - name: Send Incident Events
     url: dora_metrics/setup/incidents
     parent: dora_metrics_setup
     identifier: dora_metrics_setup_incidents
     weight: 102
+  - name: Data Collected
+    url: dora_metrics/data_collected
+    parent: dora_metrics
+    identifier: dora_metrics_data_collected
+    weight: 2
   - name: Code Analysis
     url: code_analysis/
     pre: ci
