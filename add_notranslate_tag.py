@@ -52,7 +52,7 @@ def get_string_collection(string_collection_id, token):
 def iterate_collection(collection):
     for entry in collection['data'][:2]: # Hardcoded to 2 for testing purposes
         string_id = entry['id']
-        key_parts = entry['attributes']['key'].split('.')
+        key_parts = entry['attributes']['key'].split('.') # assumption that key value will be formatted like "main_left.[1].url"
         key_val = key_parts[len(key_parts) - 1]
         if key_val != 'name':
             resp = update_resource_string(string_id, bearer_token)
