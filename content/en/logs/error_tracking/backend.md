@@ -225,7 +225,7 @@ try {
 
 ### PHP
 
-### Monolog (JSON)
+#### Monolog (JSON)
 
 If you have not set up log collection for PHP, see the [PHP Log Collection documentation][12].
 
