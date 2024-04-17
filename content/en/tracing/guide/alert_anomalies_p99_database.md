@@ -29,7 +29,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     Once you choose a [service][5], the next step becomes available for you to set, and a chart appears at the top of the page showing the performance of the metric that the new monitor tracks.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2_cropped.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
 3. **Choose an *Anomaly Alert*** and under the *For* option select p99 latency.
 
@@ -54,7 +54,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
 7. **Switch from the *Edit* tab to the *Status* tab**.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4_cropped.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
     Here you can see the current status of your monitor, mute it, or explore deeper into the specifics of a triggered alert.
 
@@ -62,11 +62,11 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     Here you should **see the new monitor** alongside any other monitor set for the service and suggested monitors that are recommended to set.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5_cropped.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
     As you create monitors you'll find more services, metrics and events to include and more complex conditions to set for these. Each of these monitors is connected to a service and can be accessed from the Service page as well as the [Service Map][9].
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6_cropped.png" alt="Service Map" style="width:90%;">}}
 
     For each service on the map, a green circle means all monitors are quiet, yellow means one or more monitors are sending warnings but none are alerting, red means one or more monitor is alerting and gray means no monitor is set for the service.
 
