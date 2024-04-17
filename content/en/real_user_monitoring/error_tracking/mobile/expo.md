@@ -86,7 +86,7 @@ Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, 
 Source maps, mapping files, and dSYM files are limited to **500** MB each.
 {{< /site-region >}}
 {{< site-region region="ap1" >}}
-Source maps, mapping files, and dSYM files  are limited to **500** MB each.
+Source maps, mapping files, and dSYM files are limited to **500** MB each.
 {{< /site-region >}}
 
 ### Disable file uploads

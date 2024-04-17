@@ -28,7 +28,7 @@ Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports
  - Symbolicated iOS crash reports
  - Trend analysis with iOS error tracking
 
-In order to symbolicate your stack traces, find and upload your .dSYM files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
+In order to symbolicate your stack traces, find and upload your `.dSYM` files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
 
 Your crash reports appear in [**Error Tracking**][8].
 
@@ -102,7 +102,7 @@ CrashReporting.enable()
 
 ## Symbolicate crash reports
 
-Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .dSYM files, which are generated in your application's build or distribution process.
+Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires `.dSYM` files, which are generated in your application's build or distribution process.
 
 ### Find your dSYM file
 
@@ -117,7 +117,7 @@ Depending on your setup, you may need to download `.dSYM` files from App Store C
 
 ### Upload your dSYM file
 
-By uploading your .dSYM file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
+By uploading your `.dSYM` file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
 
 Once your application crashes and you restart the application, the iOS SDK uploads a crash report to Datadog.
 
