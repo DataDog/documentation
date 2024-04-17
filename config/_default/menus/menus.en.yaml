@@ -1884,12 +1884,12 @@ main:
     url: service_management/events/correlation/triage_and_notify
     identifier: event_correlation_triage_and_notify
     parent: event_correlation
-    weight: 402    
+    weight: 402
   - name: Analytics
     url: service_management/events/correlation/analytics
     identifier: event_correlation_analytics
     parent: event_correlation
-    weight: 403       
+    weight: 403
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
@@ -4573,7 +4573,7 @@ main:
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
     weight: 303
-  - name: Authentication in Browser Tests 
+  - name: Authentication in Browser Tests
     identifier: synthetics_browser_tests_authentication
     url: synthetics/browser_tests/app-that-requires-login
     parent: synthetics_browser_tests
@@ -7748,9 +7748,9 @@ api:
         - CreateSecurityFilter
       unstable: []
       order: 17
-  - name: Get all security filters
-    url: '#get-all-security-filters'
-    identifier: security-monitoring-get-all-security-filters
+  - name: List security filters
+    url: '#list-security-filters'
+    identifier: security-monitoring-list-security-filters
     parent: security-monitoring
     generated: true
     params:
@@ -7760,6 +7760,66 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 18
+  - name: Update a notification rule
+    url: '#update-a-notification-rule'
+    identifier: security-monitoring-update-a-notification-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - EditSecurityMonitoringNotificationRule
+      unstable: []
+      order: 22
+  - name: Get notification rule by ID
+    url: '#get-notification-rule-by-id'
+    identifier: security-monitoring-get-notification-rule-by-id
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringNotificationRule
+      unstable: []
+      order: 21
+  - name: Delete a notification rule
+    url: '#delete-a-notification-rule'
+    identifier: security-monitoring-delete-a-notification-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityMonitoringNotificationRule
+      unstable: []
+      order: 23
+  - name: Create a notification rule
+    url: '#create-a-notification-rule'
+    identifier: security-monitoring-create-a-notification-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityMonitoringNotificationRule
+      unstable: []
+      order: 20
+  - name: List notification rules
+    url: '#list-notification-rules'
+    identifier: security-monitoring-list-notification-rules
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringNotificationRules
+      unstable: []
+      order: 19
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding

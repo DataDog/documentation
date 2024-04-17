@@ -1,0 +1,30 @@
+{
+  "data": {
+    "attributes": {
+      "version": 1,
+      "name": "Example-Security-Monitoring",
+      "enabled": false,
+      "selectors": {
+        "attributes": [
+          "fim:true"
+        ],
+        "implicit_vm_rule_match": false,
+        "rule_tags": [
+          "fim:true"
+        ],
+        "severities": [
+          "high"
+        ],
+        "signal_tags": [],
+        "rule_types": [
+          "log_detection",
+          "cloud_configuration"
+        ]
+      },
+      "targets": [
+        "test2"
+      ]
+    },
+    "type": "notification_rules"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "name": "Example-Security-Monitoring",
+      "selectors": {
+        "attributes": [
+          "test:123",
+          "env:prod"
+        ],
+        "implicit_vm_rule_match": false,
+        "rule_tags": [
+          "test:123"
+        ],
+        "rule_types": [
+          "application_security",
+          "log_detection"
+        ],
+        "severities": [
+          "high"
+        ],
+        "signal_tags": [
+          "env:prod"
+        ]
+      },
+      "targets": [
+        "@slack-test"
+      ]
+    },
+    "type": "notification_rules"
+  }
+}

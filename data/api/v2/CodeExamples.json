@@ -836,6 +836,13 @@
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
   ],
+  "CreateSecurityMonitoringNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a notification rule returns \"OK\" response"
+    }
+  ],
   "CreateSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -886,6 +893,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update an existing rule returns \"OK\" response"
+    }
+  ],
+  "EditSecurityMonitoringNotificationRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a notification rule returns \"OK\" response"
     }
   ],
   "UpdateSecurityFilter": [
