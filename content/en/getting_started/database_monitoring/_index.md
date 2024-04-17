@@ -84,7 +84,7 @@ Which query consumes the most database time? To find out, use the Query Metrics 
 
 In addition to identifying slow queries, Datadog Database Monitoring can help you diagnose them. A query's Explain Plan describes the steps that the database takes to resolve the query. View an Explain Plan by clicking on a sample in the Query Samples view.
 
-1. Navigate to the Query Samples view within [Database Monitoring][6] by selecting the **Samples** tab in the UI.
+1. Navigate to the Query Samples view within [Database Monitoring][6] by selecting the **Samples** tab.
 
 2. In the **In** dropdown, select **Explain Plans**. 
 
