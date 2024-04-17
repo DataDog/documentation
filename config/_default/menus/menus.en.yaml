@@ -1884,12 +1884,12 @@ main:
     url: service_management/events/correlation/triage_and_notify
     identifier: event_correlation_triage_and_notify
     parent: event_correlation
-    weight: 402    
+    weight: 402
   - name: Analytics
     url: service_management/events/correlation/analytics
     identifier: event_correlation_analytics
     parent: event_correlation
-    weight: 403       
+    weight: 403
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
@@ -4528,7 +4528,7 @@ main:
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
     weight: 303
-  - name: Authentication in Browser Tests 
+  - name: Authentication in Browser Tests
     identifier: synthetics_browser_tests_authentication
     url: synthetics/browser_tests/app-that-requires-login
     parent: synthetics_browser_tests

@@ -13674,6 +13674,10 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAPIStep'
           type: array
+        variablesFromScript:
+          description: Variables defined from JavaScript code.
+          example: dd.variable.set("FOO", "foo")
+          type: string
       type: object
     SyntheticsAPITestResultData:
       description: Object containing results for your Synthetic API test.

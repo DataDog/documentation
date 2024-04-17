@@ -40,6 +40,7 @@
         "type": "text"
       }
     ],
+    "variablesFromScript": "dd.variable.set(\"FOO\", \"foo\")",
     "request": {
       "certificate": {
         "cert": {
