@@ -31,7 +31,7 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP.
 2. Datadog Agent version 7.46 or later is installed.
-3. If you're using [device autodiscovery][3], enable `snmp_listener.collect_topology: true` in the `datadog.yaml` file.
+3. If you're using [device autodiscovery][3], enable `network_devices.autodiscovery.collect_topology: true` in the `datadog.yaml` file.
 
 ## Investigating devices
 

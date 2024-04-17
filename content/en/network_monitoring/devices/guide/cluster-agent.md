@@ -209,11 +209,9 @@ clusterAgent:
   ## Specify custom contents for the datadog cluster agent config (datadog-cluster.yaml).
   #
   datadog_cluster_yaml:
-    listeners:
-      - name: snmp
 
-    # See here for all `snmp_listener` configs: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-    snmp_listener:
+    # See here for all `network_devices.autodiscovery` configs: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+    autodiscovery:
       workers: 2
       discovery_interval: 10
       configs:
