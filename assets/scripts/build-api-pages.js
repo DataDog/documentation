@@ -17,7 +17,7 @@ const supportedLangs = ['en'];
 const updateMenu = (specData, specs, languages) => {
 
   languages.forEach((language) => {
-    const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/menus.${language}.yaml`, 'utf8'));
+    const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/api.${language}.yaml`, 'utf8'));
 
   // filter out auto generated menu items so we just have hardcoded ones
   const newMenuArray = (currentMenuYaml[`api`] || []).filter((entry => !entry.hasOwnProperty("generated")));
@@ -94,8 +94,8 @@ const updateMenu = (specData, specs, languages) => {
   const newMenuYaml = yaml.dump(currentMenuYaml, {lineWidth: -1});
 
   // save new yaml menu
-  fs.writeFileSync(`./config/_default/menus/menus.${language}.yaml`, newMenuYaml, 'utf8');
-  console.log(`successfully updated ./config/_default/menus/menus.${language}.yaml`);
+  fs.writeFileSync(`./config/_default/menus/api.${language}.yaml`, newMenuYaml, 'utf8');
+  console.log(`successfully updated ./config/_default/menus/api.${language}.yaml`);
   })
 
 
