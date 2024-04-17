@@ -235,7 +235,7 @@ To log a caught exception yourself, you may optionally use:
 try {
     // ...
 } catch (\Exception $e) {
-    Log::error('An error occurred', [
+    $logger->error('An error occurred', [
         'error.message' => $e->getMessage(),
         'error.kind' => get_class($e),
         'error.stack' => $e->getTraceAsString(),
