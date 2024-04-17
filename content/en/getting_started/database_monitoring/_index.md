@@ -47,24 +47,24 @@ The example application starts up the Datadog Agent and a PostgreSQL database in
 Follow these instructions to install the example application on MacOS or Linux.
 
 1. Clone the [repository][5] containing the example application:
-```
-git clone https://github.com/DataDog/dd-database-monitoring-example
-```
+    ```
+    git clone https://github.com/DataDog/dd-database-monitoring-example
+    ```
 
 2. Change to the `dd-database-monitoring-example` directory:
-```
-cd dd-database-monitoring-example
-```
+    ```
+    cd dd-database-monitoring-example
+    ```
 
 3. Set the environment variable `DD_API_KEY` to your Datadog API key:
-```
-export DD_API_KEY=<API_KEY>
-```
+    ```
+    export DD_API_KEY=<API_KEY>
+    ```
 
 4. Start the application:
-```
-make postgres
-```
+    ```
+    make postgres
+    ```
 
 The command continues to run until you stop it by pressing Ctrl + C.
 
@@ -118,11 +118,11 @@ For example, you can see the absolute change in query volume in the past hour by
 
 5. Select `host` in the **Break it down by** dropdown so that the widget aggregates queries by host.
 
-{{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configure change widget for postgres queries metric" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configure change widget for postgres queries metric" style="width:100%;">}}
 
 7. Click the **Save** button. The dashboard shows your new widget.
 
-{{< img src="database_monitoring/dashboard_change_widget.png" alt="Change widget showing query count" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_widget.png" alt="Change widget showing query count" style="width:100%;">}}
 
 ### View out-of-the-box dashboards
 
