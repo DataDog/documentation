@@ -4528,6 +4528,11 @@ main:
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
     weight: 303
+  - name: Authentication in Browser Tests 
+    identifier: synthetics_browser_tests_authentication
+    url: synthetics/browser_tests/app-that-requires-login
+    parent: synthetics_browser_tests
+    weight: 304
   - name: Private Locations
     url: synthetics/private_locations
     parent: synthetics
