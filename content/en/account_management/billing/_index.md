@@ -77,7 +77,7 @@ There are two choices for payment method:
 
 ### Credit card
 
-If you pay by credit card, receipts are available to [Administrators][10] for previous months under [Billing History][11]. For copies of your invoice, email [Datadog billing][11].
+If you pay by credit card, receipts are available to [Administrators][10] for previous months under [Billing History][11]. For copies of your invoice, email [Datadog billing][13].
 
 See [Credit Card Billing][12] for more details.
 
