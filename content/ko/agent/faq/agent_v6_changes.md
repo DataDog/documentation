@@ -90,9 +90,9 @@ sudo -u dd-agent -- datadog-agent import
 | `use_curl_http_client`       |                                                                                                                       |
 | `collect_security_groups`    | 지원 중단되었습니다, [AWS 통합][6]으로 기능을 이용할 수 있습니다.                                                         |
 
-[1]: /ko/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /ko/agent/guide/upgrade-to-agent-v6/
-[3]: /ko/agent/proxy/
+[3]: /ko/agent/configuration/proxy/
 [4]: /ko/integrations/disk/
 [5]: /ko/logs/
 [6]: /ko/integrations/amazon_web_services/
@@ -179,7 +179,7 @@ Agent v5와 Agent v6의 호스트네임 결정 방식은 서로 다릅니다. �
 
 ## 인터페이스
 
-Agent v6의 명령줄 인터페이스는 서브 명령어 기반입니다. 이용 가능한 서브 명령어 목록을 확인하려면 다음을 수행하세요.
+Agent v6 명령줄 인터페이스는 하위 명령 기반입니다. 사용 가능한 하위 명령 목록을 보려면 다음을 실행하세요.
 ```shell
 <AGENT_BINARY> --help
 ```
@@ -351,7 +351,7 @@ Agent v6에서 도커 버전 1.12.1 이상이 지원됩니다.
 [2]: /ko/agent/docker/tag/
 [3]: /ko/agent/guide/autodiscovery-management/
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "쿠버네티스(Kubernetes)" %}}
 
 Agent v6에서 쿠버네티스 버전 1.3 이상이 지원됩니다.
 
@@ -378,7 +378,7 @@ Agent v5는 모든 팟 라벨을 태그로 자동으로 수집했지만 Agent v6
 
 * `label_to_tag_prefix`는 `kubernetes_pod_labels_as_tags`로 대체되었습니다.
 * `container_alias` 태그는 수집되지 않습니다.
-* `kube_replicate_controller`는 레플리케이션 컨트롤러에서 팟을 생성한 경우에만 추가됩니다. 대신 관련된 크리에이터(creator) 태그를(`kube_deployment`나 `kube_daemon_set` 등) 사용해주세요.
+* `kube_replicate_controller`는 복제 컨트롤러에 의해 포드가 생성된 경우에만 추가됩니다. 대신, `kube_deployment` 또는 `kube_daemon_set` 등의 관련 작성자 태그를 사용하세요.
 
 [1]: /ko/integrations/kubelet/
 [2]: /ko/integrations/kube_apiserver_metrics/
@@ -561,12 +561,12 @@ sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/agent/proxy/#using-the-agent-as-a-proxy
+[1]: /ko/agent/configuration/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
 [3]: /ko/agent/guide/dogstream/
 [4]: /ko/integrations/go-metro/
-[5]: /ko/agent/guide/agent-log-files/
-[6]: /ko/agent/guide/agent-commands/
+[5]: /ko/agent/configuration/agent-log-files/
+[6]: /ko/agent/configuration/agent-commands/
 [7]: /ko/getting_started/agent/autodiscovery/
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
 [9]: https://github.com/DataDog/datadog-agent/tree/main/docs/dev/checks

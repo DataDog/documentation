@@ -1,6 +1,8 @@
 ---
 title: Using Events
 kind: Documentation
+aliases:
+- /service_management/events/usage
 further_reading:
 - link: "/logs/log_configuration/processors/"
   tag: "Documentation"
@@ -14,7 +16,7 @@ further_reading:
 
 [Generate metrics][5] with 15-month retention from any event search query to create and monitor historical events and alerts. For more information, see [Event Analytics][6].
 
-{{< img src="service_management/events/usage/generate-metrics.png" alt="Image of metrics with the events search query." >}}
+{{< img src="service_management/events/guides/usage/generate-metrics.png" alt="Image of metrics with the events search query." >}}
 
 ## Examples of what to do with events
 
@@ -24,13 +26,13 @@ Use the [Events Explorer][7] to aggregate and view events coming into Datadog. G
 
 ### Dashboards
 
-{{< img src="service_management/events/usage/events-dashboard.mp4" alt="A graph widget that uses events as the source" video=true >}}
+{{< img src="service_management/events/guides/usage/events-dashboard.mp4" alt="A graph widget that uses events as the source" video=true >}}
 
 You can use events as a data source in [graph widgets][8] to build timeseries, tables, and top list widgets of your event search queries. For example, the [Monitor Notifications Overview][9] dashboard analyzes monitor alert event trends to help you improve your configuration and reduce alert fatigue.
 
 #### Overlays 
 
-{{< img src="service_management/events/usage/event_overlays.png" alt="Option to view event overlays on an example dashboard" style="width:100%;" >}}
+{{< img src="service_management/events/guides/usage/event_overlays.png" alt="Option to view event overlays on an example dashboard" style="width:100%;" >}}
 
 Overlays visualize corresponding events on top of your graphs. Use the Dashboard [Event Overlays][10] feature to identify when a recent change is causing performance issues within your application or services and find the source of the problem. 
 

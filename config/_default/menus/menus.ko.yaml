@@ -9516,47 +9516,52 @@ main:
   parent: serverless
   url: serverless/guide/
   weight: 8
-- identifier: cloud_cost_top_level
+- identifier: cloud_cost
   name: 클라우드 비용
   parent: infrastructure_heading
   pre: cloud-cost-management
   url: cloud_cost_management/
   weight: 30000
-- identifier: ccm_aws
+- identifier: cloud_cost_aws
   name: AWS
-  parent: cloud_cost_top_level
+  parent: cloud_cost
   url: cloud_cost_management/aws
   weight: 1
-- identifier: ccm_azure
+- identifier: cloud_cost_azure
   name: Azure
-  parent: cloud_cost_top_level
+  parent: cloud_cost
   url: cloud_cost_management/azure
   weight: 2
-- identifier: ccm_google_cloud
+- identifier: cloud_cost_google_cloud
   name: Google Cloud
-  parent: cloud_cost_top_level
+  parent: cloud_cost
   url: cloud_cost_management/google_cloud
   weight: 3
-- identifier: ccm_custom
+- identifier: cloud_cost_custom
   name: 커스텀 비용
-  parent: cloud_cost_top_level
+  parent: cloud_cost
   url: cloud_cost_management/custom
   weight: 4
-- identifier: ccm_saas_cost_integrations
+- identifier: cloud_cost_saas_cost_integrations
   name: SaaS 비용 통합
-  parent: cloud_cost_top_level
+  parent: cloud_cost
   url: cloud_cost_management/saas_costs
   weight: 5
-- identifier: tag_pipelines
+- identifier: cloud_cost_tag_pipelines
   name: 태그 파이프라인
-  parent: cloud_cost_top_level
+  parent: cloud_cost
   url: cloud_cost_management/tag_pipelines
   weight: 6
-- identifier: container_cost_allocation
+- identifier: cloud_cost_container_cost_allocation
   name: 컨테이너 비용 할당
-  parent: cloud_cost_top_level
+  parent: cloud_cost
   url: cloud_cost_management/container_cost_allocation
   weight: 7
+- identifier: cloud_cost_recommendations
+  name: 비용 권장 사항
+  parent: cloud_cost
+  url: cloud_cost_management/recommendations
+  weight: 8
 - identifier: nm_parent
   name: 네트워크 모니터링
   parent: infrastructure_heading
@@ -11457,46 +11462,40 @@ main:
   parent: appsec_getting_started
   url: security/application_security/enabling/compatibility/
   weight: 201
-- identifier: appsec_java
-  name: Java
-  parent: appsec_getting_started
-  url: security/application_security/enabling/java/
-  weight: 202
-- identifier: appsec_dotnet
-  name: .NET
-  parent: appsec_getting_started
-  url: security/application_security/enabling/dotnet/
-  weight: 203
-- identifier: appsec_go
+- identifier: appsec_enabling_single_step
   name: Go
   parent: appsec_getting_started
-  url: security/application_security/enabling/go/
-  weight: 204
-- identifier: appsec_ruby
-  name: Ruby
+  url: security/application_security/enabling/single_step/
+  weight: 202
+- identifier: appsec_enabling_single_step_threats
+  name: 위협 탐지 및 보호
+  parent: appsec_enabling_single_step
+  url: security/application_security/enabling/single_step/threat_detection/
+  weight: 2101
+- identifier: appsec_enabling_single_step_code
+  name: 코드 보안
+  parent: appsec_enabling_single_step
+  url: security/application_security/enabling/single_step/code_security/
+  weight: 2102
+- identifier: appsec_enabling_tracing_libraries
+  name: Datadog 트레이싱 라이브러리 사용하기
   parent: appsec_getting_started
-  url: security/application_security/enabling/ruby/
-  weight: 205
-- identifier: appsec_php
-  name: PHP
-  parent: appsec_getting_started
-  url: security/application_security/enabling/php/
-  weight: 206
-- identifier: appsec_nodejs
-  name: NodeJS
-  parent: appsec_getting_started
-  url: security/application_security/enabling/nodejs/
-  weight: 207
-- identifier: appsec_python
-  name: Python
-  parent: appsec_getting_started
-  url: security/application_security/enabling/python/
-  weight: 208
-- identifier: appsec_serverless
-  name: 서버리스
+  url: security/application_security/enabling/tracing_libraries/
+  weight: 203
+- identifier: appsec_enabling_tracing_libraries_threats
+  name: 위협 탐지 및 보호
+  parent: appsec_enabling_tracing_libraries
+  url: security/application_security/enabling/tracing_libraries/threat_detection/
+  weight: 2101
+- identifier: appsec_enabling_tracing_libraries_code
+  name: 코드 보안
+  parent: appsec_enabling_tracing_libraries
+  url: security/application_security/enabling/tracing_libraries/code_security/
+- identifier: appsec_enabling_serverless
+  name: 서버리스에서 ASM 활성화
   parent: appsec_getting_started
   url: security/application_security/enabling/serverless/
-  weight: 209
+  weight: 204
 - identifier: appsec_howitworks
   name: 작동 방식
   parent: application_security

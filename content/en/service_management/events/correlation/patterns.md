@@ -1,19 +1,20 @@
 ---
-title: Pattern-based
+title: Pattern-based Correlation
 kind: Documentation
 further_reading:
-- link: "service_management/events/correlation/"
+- link: "service_management/events/correlation/triage_and_notify"
   tag: "Documentation"
-  text: "Learn about Event Correlation"
+  text: "Learn about triaging and notifiying on cases"
 ---
 
-## Overview
+To get you started, Datadog automatically suggests [pattern-based correlations][1] according to your environment. Click any of the recommendations to open the configuration for the recommended pattern. Configuration fields are pre-populated.
 
-Configure pattern-based correlations to apply custom logic and group events to your specific use case.
+{{< img src="service_management/events/correlation/pattern/recommended_patterns_preview.png" alt="Correlation recommended patterns with the preview panel showing potential cases the pattern would create" style="width:100%;" >}}
 
-## Create a pattern
 
-To create a pattern-based correlation:
+## Adjusting a pattern
+
+To create or adjust a pattern-based correlation:
 1. Navigate to [Correlation][1].
 1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens a pattern configuration page.
 1. From the dropdown menu, select the alerting sources you want to correlate events for. 
@@ -27,9 +28,17 @@ To create a pattern-based correlation:
    
    Add grouping tags
    : in addition to grouping by out-of-the-box tags like `Service` or `Env`, you can also group by a custom tag.
-1. Under *Advanced correlation logic*:
-    - Specify the minimum number of correlated events it takes to create a case.
-    - Set the time frame you want to correlate and deduplicate events based on your correlation pattern. 
+1. Under **Advanced correlation logic**, you can specify the minimum number of correlated events it takes to create a case and update the timeframe.
+
+    **Timeframe explanation**
+
+    Correlate alerts to a case for
+    : The max duration that net new alerts will be added to a case 
+
+    Deduplicate events for those alerts for
+    : The max duration current alerts which have been correlated, and continue to flap or have not resolved will be reviewed for, before opening new case....
+
+    {{< img src="service_management/events/correlation/pattern/timeframe.png" alt="correlation timeframe explanation, see how alerts fold into a case" style="width:90%;" >}}
 
 
 ## Preview pattern output
@@ -46,7 +55,8 @@ Use this data to preview the impact of your correlations and understand the expe
 1. (Optional) Add a tag to resulting cases.
 1. Click **Save and Activate** to activate this pattern and group events into cases.
 
-## Further reading
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
