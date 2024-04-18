@@ -20,7 +20,7 @@ const updateMenu = (specData, specs, languages) => {
     const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/api.${language}.yaml`, 'utf8'));
 
   // filter out auto generated menu items so we just have hardcoded ones
-  const newMenuArray = (currentMenuYaml[`api`] || []).filter((entry => !entry.hasOwnProperty("generated")));
+  const newMenuArray = (currentMenuYaml['menu']['api'] || []).filter((entry => !entry.hasOwnProperty("generated")));
 
   specData.forEach((apiYaml, index) => {
     const apiVersion = specs[index].split('/')[3];
@@ -90,7 +90,7 @@ const updateMenu = (specData, specs, languages) => {
 
 
   // generate new yaml menu
-  currentMenuYaml[`api`] = newMenuArray;
+  currentMenuYaml['menu']['api'] = newMenuArray;
   const newMenuYaml = yaml.dump(currentMenuYaml, {lineWidth: -1});
 
   // save new yaml menu
