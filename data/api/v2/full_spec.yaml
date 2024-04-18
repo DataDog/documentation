@@ -24294,7 +24294,7 @@ paths:
       operationId: SearchCases
       parameters:
       - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageOffset'
+      - $ref: '#/components/parameters/PageNumber'
       - $ref: '#/components/parameters/CaseSortableFieldParameter'
       - description: Search query
         in: query
@@ -24338,7 +24338,7 @@ paths:
       x-menu-order: 1
       x-pagination:
         limitParam: page[size]
-        pageOffsetParam: page[offset]
+        pageParam: page[number]
         resultsPath: data
       x-undo:
         type: safe

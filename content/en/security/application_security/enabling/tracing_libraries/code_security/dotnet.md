@@ -26,8 +26,6 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
 {{% appsec-getstarted %}}
 
-{{% appsec-getstarted-with-rc %}}
-
 
 ## Enabling code security vulnerability detection
 

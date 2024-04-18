@@ -11,15 +11,18 @@ further_reading:
   text: Amazon SQS 통합
 - link: /tracing/service_catalog/
   tag: 설명서
-  text: 리액트 네이티브 모니터링
+  text: 서비스 카탈로그
 - link: https://www.datadoghq.com/blog/data-streams-monitoring/
   tag: 블로그
   text: Datadog 데이터 스트림 모니터링을 통해 스트리밍 데이터 파이프라인의 성능을 추적하고 향상하세요.
 - link: https://www.datadoghq.com/blog/data-streams-monitoring-apm-integration/
   tag: 블로그
   text: 애플리케이션 성능 모니터링(APM)과 Datadog 데이터 스트림 모니터링을 통해 바로 스트리밍 데이터 파이프라인 트러블 슈팅
+- link: https://www.datadoghq.com/blog/data-streams-monitoring-sqs/
+  tag: 블로그
+  text: 데이터 스트림 모니터링으로 SQS 모니터링
 kind: 설명서
-title: 로그 수집 & 통합
+title: 데이터 스트림 모니터링
 ---
 
 
@@ -47,9 +50,9 @@ title: 로그 수집 & 통합
 | 런타임 | 지원되는 기술 |
 |---|----|
 | 자바(Java)/Scala | Kafka(자체 호스팅됨, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
-| Python | Kafka(자체 호스팅됨, Amazon MSK, Confluent Cloud / Platform), Amazon SQS, Amazon Kinesis |
-| .NET | Kafka(자체 호스팅됨, Amazon MSK, Confluent Cloud / Platform), RabbitMQ |
-| .NET | Kafka(자체 호스팅됨, Amazon MSK, Confluent Cloud / Platform) |
+| Python | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), Amazon SQS |
+| .NET | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), RabbitMQ, Amazon SQS |
+| Node.js | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), Amazon SQS |
 | Go | 전체([수동 계측 포함][1]) |
 
 
@@ -70,9 +73,22 @@ title: 로그 수집 & 통합
 
 ### 모든 경로의 엔드투엔드 지연 모니터링
 
-시스템에 존재하는 이벤트의 이동 방식에 따라 **경로** 탭의 다른 경로는 지연을 높일 수 있다. 파이프라인 내 양 지전 사이의 지연 시간을 보면(병목 현상을 파악하고 성능을 최적화할 목적으로 대기, 생산자 및 소비자가 병목현상 문제를 해결하고 성능을 최적화할 수 있다. 경로용 모니터를 손쉽게 생성하여  대시보드로 내보내기합니다.
+이벤트가 시스템을 통과하는 방식에 따라 경로가 다르면 지연 시간이 늘어날 수 있습니다. **Measure** 탭을 사용하면 엔드투엔드 지연 시간 정보에 대한 시작 서비스와 종료 서비스를 선택하여 병목 현상을 식별하고 성능을 최적화할 수 있습니다. 또한 해당 경로에 대한 모니터를 쉽게 만들거나 대시보드로 내보낼 수 있습니다.
+
+{{< img src="data_streams/measure_3.0.mp4" alt="Datadog 데이터 스트림 모니터링 측정" video="true" >}}
+
+또는 **Pathways** 탭에서 선택 서비스와 업스트림 서비스 간의 지연 시간을 확인하세요.
 
 {{< img src="data_streams/data_streams_pathway.jpg" alt="Datadogy 데이터 스트림 모니터링 b" style="width:100%;" >}}
+
+### 이벤트 기반 애플리케이션의 속도 저하에 대한 경고
+높은 소비자 지연율이나 오래된 메시지로 인한 속도 저하로 연속적인 오류가 발생하고 가동 중지 시간이 늘어날 수 있습니다. 기본 경고를 통해 파이프라인에서 병목 현상이 발생하는 위치를 정확히 찾아내고 즉시 대응할 수 있습니다. 보조 메트릭에 대해 Datadog은 [Kafka][4] 및 [SQS][5]와 같은 메시지 대기열 기술에 대한 추가 통합을 제공합니다.
+
+{{< img src="data_streams/dsm_kafka_lag.png" alt="Datadog Data Streams Monitoring Kafka Lag" style="width:100%;" >}}
+
+데이터 스트림 모니터링의 기본 권장 모니터를 통해 한 번의 클릭으로 소비자 지연, 처리량 및 지연 시간과 같은 메트릭에 대한 모니터를 설정할 수 있습니다.
+
+{{< img src="data_streams/dsm_recommended.png" alt="Datadog Data Streams Monitoring 권장 모니터" style="width:100%;" >}}
 
 ### 수신 메시지를 대기열, 서비스 또는 클러스터에 적용
 
@@ -86,7 +102,7 @@ CPU 사용량이 많은 서비스의 높은 지연, Kafka 브로커에서 증가
 
 ### 빠르게 인프라스트럭처, 로그 또는 트레이스의 근본 원인 파악
 
-Datadog는 자동으로 서비스를 지원하는 인프라스트럭처와 관련 로그를 [통합 서비스 태깅][3]을 통해 연결합니다. 그러므로 손쉽게 병목 현상을 확인할 수 있습니다. **인프라** 또는 **로그** 탭을 클릭해 경로 지연 또는 소비자 지연이 늘어난 이유를 확인하여 트러블슈팅합니다. 경로 내 트레이스를 확인하려면 **지연 처리** 탭을 클릭합니다.
+Datadog은 [통합 서비스 태깅][3]을 통해 서비스 및 관련 로그를 지원하는 인프라스트럭처를 자동으로 연결하므로 병목 현상을 쉽게 현지화할 수 있습니다. **Infra**, **Logs** 또는 **Traces** 탭을 클릭하여 경로 지연 시간 또는 소비자 지연이 증가한 이유를 추가로 해결하세요.
 
 {{< img src="data_streams/data_streams_infra.jpg" alt="Datadog 데이터 스트림 모니터링 인프라 탭" style="width:100%;" >}}
 
@@ -97,3 +113,5 @@ Datadog는 자동으로 서비스를 지원하는 인프라스트럭처와 관�
 [1]: /ko/data_streams/go#manual-instrumentation
 [2]: /ko/tracing/service_catalog/
 [3]: /ko/getting_started/tagging/unified_service_tagging
+[4]: /ko/integrations/kafka/
+[5]: /ko/integrations/amazon_sqs/

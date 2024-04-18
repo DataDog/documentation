@@ -985,13 +985,11 @@ Download the [`datadog_wrapper`][8] file from the releases and upload it to your
 
 ## Testing threat detection
 
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][5] attempt:
+To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][5] attempt:
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-function-url/existing-route
+   curl -A 'dd-test-scanner-log' https://your-function-url/existing-route
    ```
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
-
-{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ## Further reading
 

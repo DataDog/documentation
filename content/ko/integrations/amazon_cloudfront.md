@@ -17,7 +17,7 @@ integration_id: ''
 integration_title: Amazon CloudFront
 integration_version: ''
 is_public: true
-kind: integration
+kind: 통합
 manifest_version: '1.0'
 name: amazon_cloudfront
 public_title: Datadog-Amazon CloudFront 통합
@@ -96,9 +96,9 @@ Datadog는 이 기본 설정을 유지하고 다음 커스텀 파싱 규칙을 �
 
 #### Datadog에 로그 전송
 
-실시간 로그는 선택한 Kinesis 데이터 스트림으로 제공되고 [Kinesis Firehose 통합][2]으로 Datadog에 직접 포워딩될 수 있습니다.
+실시간 로그는 선택한 Kinesis Data Stream으로 전달되며 [Amazon Data Firehose 통합][2]을 통해 Datadog에 직접 전달할 수 있습니다.
 
-Amazon Kinesis Data Firehose 등 고객을 설정하여 실시간 로그를 S3 버킷에 전송하고 [Datadog 람다 포워더][3]를 사용해 로그를 Datadog에 전송할 수 있습니다.
+또한 실시간 로그를 S3 버킷으로 보내고 [Datadog Lambda 포워더][3]를 사용하여 로그를 Datadog으로 전송하도록 Amazon Data Firehose와 같은 소비자를 설정할 수도 있습니다.
 
 [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
 [2]: https://docs.datadoghq.com/ko/integrations/amazon_kinesis/
