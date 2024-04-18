@@ -42,7 +42,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
    - For **Name**, give your bootstrap action a name. You can use `datadog_agent`.
-   - For **Script location**, enter the path to where you stored the init script in S3. Alternatively, you can use `s3://dd-data-jobs-monitoring-setup/emr/emr_init_latest.sh` to run the latest init script as your bootstrap action.
+   - For **Script location**, enter the path to where you stored the init script in S3. Alternatively, you can use `s3://dd-data-jobs-monitoring-setup/scripts/emr/emr_init_latest.sh` to run the latest init script as your bootstrap action.
    - For **Arguments**, enter two arguments separated by a space: your Datadog site, and the name of the secret in which you stored your Datadog API key. 
       Example:
       ```text
