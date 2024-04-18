@@ -50,11 +50,17 @@ To get started, follow the installation instructions to configure services with 
 | Runtime | Supported technologies |
 |---|----|
 | Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
-| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
+| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
 | .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
-| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
+| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
 | Go | All (with [manual instrumentation][1]) |
-  
+
+## Configuration at Runtime
+
+To set up Data Streams Monitoring from the Datadog UI without needing to restart your application or service, use [Configuration at Runtime][6]. You will need the following prerequisites.
+* [Datadog Agent][7] 7.41.1 or higher.
+* [Remote Configuration][8] enabled for your Agent.
+* `APM Remote Configuration Read` and `APM Remote Configuration Write` [permissions][9]
 
 ## Explore Data Streams Monitoring
 
@@ -115,3 +121,7 @@ Datadog automatically links the infrastructure powering your services and relate
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /integrations/kafka/
 [5]: /integrations/amazon_sqs/
+[6]: /tracing/trace_collection/runtime_config/
+[7]: /agent/
+[8]: /agent/remote_config/
+[9]: /account_management/rbac/permissions/
