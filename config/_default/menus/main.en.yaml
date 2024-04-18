@@ -681,8 +681,8 @@ menu:
       identifier: otel_propagation
       parent: otel_interoperability
       weight: 602
-    - name: Custom Instrumentation
-      url: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    - name: OpenTelemetry API Support
+      url: /opentelemetry/interoperability/api_support
       identifier: otel_instrumentation
       parent: otel_interoperability
       weight: 603
@@ -1885,12 +1885,12 @@ menu:
       url: service_management/events/correlation/triage_and_notify
       identifier: event_correlation_triage_and_notify
       parent: event_correlation
-      weight: 402    
+      weight: 402
     - name: Analytics
       url: service_management/events/correlation/analytics
       identifier: event_correlation_analytics
       parent: event_correlation
-      weight: 403       
+      weight: 403
     - name: Guides
       url: service_management/events/guides/
       identifier: events_guides
@@ -2546,16 +2546,61 @@ menu:
       parent: tracing_trace_collection
       identifier: custom_instrumentation
       weight: 202
-    - name: Using Datadog Libraries
-      url: tracing/trace_collection/custom_instrumentation/dd_libraries/
+    - name: Java
+      url: tracing/trace_collection/custom_instrumentation/java/dd-api
       parent: custom_instrumentation
-      identifier: tracing_custom_inst
+      identifier: custom_instrumentation_java
       weight: 2021
-    - name: Using OpenTelemetry APIs
-      url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    - name: Python
+      url: tracing/trace_collection/custom_instrumentation/python/dd-api
       parent: custom_instrumentation
-      identifier: tracing_otel_inst
+      identifier: custom_instrumentation_python
       weight: 2022
+    - name: Ruby
+      url: tracing/trace_collection/custom_instrumentation/ruby/dd-api
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_ruby
+      weight: 2023
+    - name: Go
+      url: tracing/trace_collection/custom_instrumentation/go/dd-api
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_go
+      weight: 2024
+    - name: Node.js
+      url: tracing/trace_collection/custom_instrumentation/nodejs/dd-api
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_nodejs
+      weight: 2025
+    - name: PHP
+      url: tracing/trace_collection/custom_instrumentation/php/dd-api
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_php
+      weight: 2026
+    - name: C++
+      url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_cpp
+      weight: 2027
+    - name: .NET
+      url: tracing/trace_collection/custom_instrumentation/dotnet/dd-api
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_dotnet
+      weight: 2028
+    - name: Rust
+      url: tracing/trace_collection/custom_instrumentation/rust
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_rust
+      weight: 2029
+    - name: Swift
+      url: tracing/trace_collection/custom_instrumentation/swift
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_ios
+      weight: 2030
+    - name: Elixir
+      url: tracing/trace_collection/custom_instrumentation/elixir
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_elixir
+      weight: 2031
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -3633,126 +3678,136 @@ menu:
       identifier: observability_pipelines
       parent: log_management_heading
       weight: 10000
-    - name: Setup
-      url: observability_pipelines/setup/
+    - name: Log Volume Control
+      url: observability_pipelines/log_volume_control/
       parent: observability_pipelines
-      identifier: observability_pipelines_setup
+      identifier: observability_pipelines_log_volume_control
       weight: 1
-    - name: Datadog
-      identifier: observability_pipelines_setup_datadog
-      url: observability_pipelines/setup/datadog
-      parent: observability_pipelines_setup
-      weight: 101
-    - name: Datadog with Archiving
-      identifier: observability_pipelines_setup_datadog_with_archiving
-      url: observability_pipelines/setup/datadog_with_archiving
-      parent: observability_pipelines_setup
-      weight: 102
-    - name: Splunk
-      identifier: observability_pipelines_setup_splunk
-      url: observability_pipelines/setup/splunk
-      parent: observability_pipelines_setup
-      weight: 103
-    - name: Deployment
-      url: observability_pipelines/production_deployment_overview/
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/log_volume_control/splunk_hec/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_splunk_hec
+      weight: 1001
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/log_volume_control/splunk_tcp/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_splunk_tcp
+      weight: 1002
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/log_volume_control/sumo_logic_hosted_collector/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
+      weight: 1003
+    - name: Dual Ship Logs
+      url: observability_pipelines/dual_ship_logs/
       parent: observability_pipelines
-      identifier: observability_pipelines_production_deployment_overview
+      identifier: observability_pipelines_dual_ship_logs
       weight: 2
-    - name: Working with Data
-      url: observability_pipelines/working_with_data/
+    - name: Datadog Agent
+      url: observability_pipelines/dual_ship_logs/datadog_agent/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_datadog_agent
+      weight: 2001
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/dual_ship_logs/splunk_hec/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_splunk_hec
+      weight: 2002
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/dual_ship_logs/splunk_tcp/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_splunk_tcp
+      weight: 2003
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
+      weight: 2004
+    - name: Archive Logs
+      url: observability_pipelines/archive_logs/
       parent: observability_pipelines
-      identifier: observability_pipelines_working_with_data
+      identifier: observability_pipelines_archive_logs
       weight: 3
-    - name: Monitoring
-      url: observability_pipelines/monitoring/
+    - name: Datadog Agent
+      url: observability_pipelines/archive_logs/datadog_agent/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_datadog_agent
+      weight: 3001
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/archive_logs/splunk_hec/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_splunk_hec
+      weight: 3002
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/archive_logs/splunk_tcp/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_splunk_tcp
+      weight: 3003
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/archive_logs/sumo_logic_hosted_collector/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_sumo_logic_hosted_collector
+      weight: 3004
+    - name: Split Logs
+      url: observability_pipelines/split_logs/
       parent: observability_pipelines
-      identifier: observability_pipelines_monitoring
+      identifier: observability_pipelines_split_logs
       weight: 4
-    - name: Troubleshooting
-      url: observability_pipelines/troubleshooting/
+    - name: Datadog Agent
+      url: observability_pipelines/split_logs/datadog_agent/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_datadog_agent
+      weight: 4001
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/split_logs/splunk_hec/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_splunk_hec
+      weight: 4002
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/split_logs/splunk_tcp/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_splunk_tcp
+      weight: 4003
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/split_logs/sumo_logic_hosted_collector/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_sumo_logic_hosted_collector
+      weight: 4004
+    - name: Sensitive Data Redaction
+      url: observability_pipelines/sensitive_data_redaction/
       parent: observability_pipelines
-      identifier: observability_pipelines_troubleshooting
+      identifier: observability_pipelines_sensitive_data_redaction
       weight: 5
-    - name: Reference
-      url: observability_pipelines/reference/
+    - name: Datadog Agent
+      url: observability_pipelines/sensitive_data_redaction/datadog_agent/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_datadog_agent
+      weight: 5001
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/sensitive_data_redaction/splunk_hec/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_splunk_hec
+      weight: 5002
+    - name: Splunk Forwarders (TCP)
+      url: observability_pipelines/sensitive_data_redaction/splunk_tcp/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_splunk_tcp
+      weight: 5003
+    - name: Sumo Logic Hosted Collector
+      url: observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_sumo_logic_hosted_collector
+      weight: 5004
+    - name: Update Existing Pipelines
+      url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
-      identifier: observability_pipelines_reference
+      identifier: observability_pipelines_update_existing_pipelines
       weight: 6
-    - name: Configurations
-      url: observability_pipelines/configurations/
-      parent: observability_pipelines_reference
-      identifier: observability_pipelines_vector_configuration
-      weight: 601
-    - identifier: observability_pipelines_reference_sources
-      name: Sources
-      parent: observability_pipelines_vector_configuration
-      url: observability_pipelines/reference/sources/
-      weight: 1
-    - identifier: observability_pipelines_reference_transforms
-      name: Transforms
-      parent: observability_pipelines_vector_configuration
-      url: observability_pipelines/reference/transforms/
-      weight: 2
-    - identifier: observability_pipelines_reference_sinks
-      name: Sinks
-      parent: observability_pipelines_vector_configuration
-      url: observability_pipelines/reference/sinks/
-      weight: 3
-    - name: Datadog Processing Language
-      url: observability_pipelines/reference/processing_language/
-      parent: observability_pipelines_reference
-      identifier: observability_pipelines_reference_processing_language
-      weight: 602
-    - name: Functions
-      url: observability_pipelines/reference/processing_language/functions/
-      parent: observability_pipelines_reference_processing_language
-      identifier: observability_pipelines_reference_processing_language_functions
-      weight: 1
-    - name: Errors
-      url: observability_pipelines/reference/processing_language/errors/
-      parent: observability_pipelines_reference_processing_language
-      identifier: observability_pipelines_reference_processing_language_errors
-      weight: 2
-    - name: Guides
-      url: observability_pipelines/guide/
+    - name: Best Practices for Scaling Observability Pipelines
+      url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines
-      identifier: observability_pipelines_guides
+      identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
       weight: 7
-    - name: Architecture
-      url: observability_pipelines/architecture/
-      parent: observability_pipelines
-      identifier: observability_pipelines_architecture
-      weight: 8
-    - name: Optimizing the Instance
-      url: observability_pipelines/architecture/optimize
-      parent: observability_pipelines_architecture
-      identifier: observability_pipelines_architecture_optimize
-      weight: 801
-    - name: Capacity Planning and Scaling
-      url: observability_pipelines/architecture/capacity_planning_scaling
-      parent: observability_pipelines_architecture
-      identifier: observability_pipelines_architecture_capacity_planning_scaling
-      weight: 802
-    - name: Networking
-      url: observability_pipelines/architecture/networking
-      parent: observability_pipelines_architecture
-      identifier: observability_pipelines_architecture_networking
-      weight: 803
-    - name: Preventing Data Loss
-      url: observability_pipelines/architecture/preventing_data_loss
-      parent: observability_pipelines_architecture
-      identifier: observability_pipelines_architecture_preventing_data_loss
-      weight: 804
-    - name: High Availability and Disaster Recovery
-      url: observability_pipelines/architecture/availability_disaster_recovery
-      parent: observability_pipelines_architecture
-      identifier: observability_pipelines_architecture_availability_disaster_recovery
-      weight: 805
-    - name: Advanced Configurations
-      url: observability_pipelines/architecture/advanced_configurations
-      parent: observability_pipelines_architecture
-      identifier: observability_pipelines_architecture_advanced_configurations
-      weight: 806
     - name: Log Management
       url: logs/
       pre: log
@@ -4529,7 +4584,7 @@ menu:
       url: synthetics/browser_tests/advanced_options
       parent: synthetics_browser_tests
       weight: 303
-    - name: Authentication in Browser Tests 
+    - name: Authentication in Browser Tests
       identifier: synthetics_browser_tests_authentication
       url: synthetics/browser_tests/app-that-requires-login
       parent: synthetics_browser_tests
