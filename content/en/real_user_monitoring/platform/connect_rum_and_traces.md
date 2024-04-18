@@ -376,6 +376,8 @@ The following Datadog tracing libraries are supported:
 
 RUM supports several propagator types to connect resources with backends that are instrumented with OpenTelemetry libraries.
 
+The default injection style is `tracecontext`, `Datadog`.
+
 {{< tabs >}}
 {{% tab "Browser RUM" %}}
 
@@ -463,10 +465,10 @@ RUM supports several propagator types to connect resources with backends that ar
     const config = new DatadogProviderConfiguration(
         // ...
     );
-    config.firstPartyHosts = [{ 
-        match: "example.com", 
+    config.firstPartyHosts = [{
+        match: "example.com",
         propagatorTypes: [
-            PropagatorType.TRACECONTEXT, 
+            PropagatorType.TRACECONTEXT,
             PropagatorType.DATADOG
         ]
     }];
