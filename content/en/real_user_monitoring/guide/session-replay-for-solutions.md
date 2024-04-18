@@ -3,13 +3,13 @@ title: Use Session Replay In Your Technical Support Workflow
 kind: guide
 description: Learn how to adopt RUM & Session Replay in your Solutions or Support organization. 
 further_reading:
-- link: '/real_user_monitoring/connect_rum_and_traces/'
+- link: '/real_user_monitoring/platform/connect_rum_and_traces/'
   tag: 'Documentation'
   text: 'Learn how to connect RUM with APM traces'
-- link: '/real_user_monitoring/session_replay/'
+- link: '/real_user_monitoring/session_replay/browser/'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
-- link: '/real_user_monitoring/session_replay/developer_tools'
+- link: '/real_user_monitoring/session_replay/browser/developer_tools'
   tag: 'Documentation'
   text: 'Learn about Browser Dev Tools'
 ---
@@ -70,7 +70,7 @@ The Frontend team may also be encouraged to implement an error message in the UI
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/
-[2]: /real_user_monitoring/session_replay/developer_tools/
+[1]: /real_user_monitoring/session_replay/browser/
+[2]: /real_user_monitoring/session_replay/browser/developer_tools/
 [3]: /real_user_monitoring/connect_rum_and_traces
 [4]: https://app.datadoghq.com/rum/explorer

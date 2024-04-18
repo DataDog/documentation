@@ -224,7 +224,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
     ```dockerfile
-    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
@@ -236,7 +236,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     **Note**: If you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
 
-4. Configure the Datadog site, API key, and tracing
+4. Configure the Datadog site, API key, and tracing in your Dockerfile
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
@@ -304,7 +304,8 @@ Fill in variables accordingly:
         </tr>
     </table>
 
-   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with `Python37`, `Python38`, or `Python39`.
+   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with one of the following: {{< latest-lambda-layer-version layer="python-versions" >}}.
+
 
 2. Replace `<DATADOG_EXTENSION_ARN>` with the ARN of the appropriate Datadog Lambda Extension for your region and architecture:
 
@@ -351,8 +352,8 @@ resource "aws_lambda_function" "lambda" {
   # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
 
   layers = [
-    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python39:78",
-    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}",
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}"
   ]
 
   handler = "datadog_lambda.handler.handler"
@@ -397,7 +398,7 @@ resource "aws_lambda_function" "lambda" {
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
       ```
 
-      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38`, `Python39`, `Python310`, and `Python311`.
+      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="python-versions" >}}.
 
     - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`.
 

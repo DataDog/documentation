@@ -41,7 +41,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: sedai
-oauth: {}
 public_title: Sedai
 short_description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
 supported_os:

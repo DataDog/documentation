@@ -23,10 +23,6 @@ kind: ドキュメント
 title: Synthetic テストをプライベートロケーションから実行する
 ---
 
-<div class="alert alert-info">
-Windows プライベートロケーションベータ版への追加をご希望の場合は、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にご連絡ください。
-</div>
-
 ## 概要
 
 プライベートロケーションから、**内部用アプリケーションの監視や、パブリックインターネットから接続できないプライベートエンドポイントの監視**を行えます。これは以下にも使用できます。
@@ -35,7 +31,9 @@ Windows プライベートロケーションベータ版への追加をご希望
 * [Continuous Testing および CI/CD][1] を使用して本番環境に新機能をリリースする前に、**内部 CI 環境でアプリケーションパフォーマンスを確認します**。
 * 内部ネットワークの内外両方から**アプリケーションのパフォーマンスを比較します**。
 
-プライベートロケーションは、プライベートネットワーク内のどこにでもインストールできる Docker コンテナとして提供されます。作成してインストールしたら、管理ロケーションと同じように、[Synthetic テスト][2]をプライベートロケーションに割り当てることができます。
+{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Synthetic Monitoring におけるプライベートロケーションの仕組みを示すアーキテクチャ図" style="width:100%;">}}
+
+プライベートロケーションは Docker コンテナまたは Windows サービスとして提供され、プライベートネットワーク内にインストールすることができます。プライベートロケーションを作成してインストールしたら、他のマネージドロケーションと同様に、[Synthetic テスト][2]を割り当てることができます。
 
 プライベートロケーションワーカーは、HTTPS を使用してテストコンフィギュレーションを Datadog のサーバーからプルし、スケジュールまたはオンデマンドでテストを実行して、テスト結果を Datadog のサーバーに返します。次に、管理ロケーションから実行されているテストを視覚化する方法とまったく同じ方法で、プライベートロケーションのテスト結果を視覚化できます。
 
@@ -43,13 +41,35 @@ Windows プライベートロケーションベータ版への追加をご希望
 
 ## 前提条件
 
-### Continuous Testing
-
 [Continuous Testing テスト][23]でプライベートロケーションを使用するには、v1.27.0 以降が必要です。
 
-### Docker
+{{< tabs >}}
+{{% tab "Docker" %}}
 
-プライベートロケーションは、プライベートネットワーク内のどこにでも設置できる Docker コンテナです。プライベートロケーションのワーカーイメージ][3]には、Google Container Registry からアクセスできます。ホスト上に [Dockerエンジン][4]があり、Linux コンテナモードで動作可能であれば、Linux ベースの OS や Windows OS 上で動作させることができます。
+プライベートロケーションは、プライベートネットワーク内のどこにでも設置できる Docker コンテナです。プライベートロケーションのワーカーイメージ][101]には、Google Container Registry からアクセスできます。ホスト上に [Docker エンジン][102]があり、Linux コンテナモードで動作可能であれば、Linux ベースの OS や Windows OS 上で動作させることができます。
+
+[101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
+[102]: https://docs.docker.com/engine/install/
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+プライベートロケーションは、[MSI ファイル][101]を使用してプライベートネットワーク内の任意の場所にインストールできる Windows サービスです。プライベートロケーションをインストールしたい仮想マシンまたは物理マシンからこのファイルを実行します。
+
+このマシンの要件を以下の表に示します。プライベートロケーションワーカーをインストールするマシンでは、PowerShell スクリプトが有効になっている必要があります。
+
+| System | 要件 |
+|---|---|
+| OS | Windows Server 2016、Windows Server 2019、または Windows 10。 |
+| RAM | 最低 4GB。8GB 推奨。 |
+| CPU | 64 ビット対応の Intel または AMD プロセッサー。2.8 GHz 以上のプロセッサーを推奨。 |
+
+MSI インストーラーを使用する前に、コンピューターに .NET バージョン 4.7.2 以降をインストールする必要があります。
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Datadog プライベートロケーションエンドポイント
 
@@ -72,7 +92,7 @@ Windows プライベートロケーションベータ版への追加をご希望
 | ---- | ---------------------------------- | -------------------------------------------------------------- |
 | 443  | `intake.synthetics.datadoghq.eu`   | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
 
-**注**: これらのドメインは、静的 IP アドレスのセットを指しています。これらのアドレスは、https://ip-ranges.datadoghq.eu、具体的には https://ip-ranges.datadoghq.eu/api.json (`api.datadoghq.eu` の場合) および https://ip-ranges.datadoghq.eu/synthetics-private-locations.json (`intake-v2.synthetics.datadoghq.eu` の場合) にあります。
+**注**: これらのドメインは、静的 IP アドレスのセットを指しています。これらのアドレスは https://ip-ranges.datadoghq.eu にあります。
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -120,22 +140,23 @@ Windows プライベートロケーションベータ版への追加をご希望
 
 ## プライベートロケーションを設定する
 
-プライベートロケーションは、**Admin** ロールを持つユーザーのみが作成できます。詳しくは、[権限](#permissions)を参照してください。
+プライベートロケーションは、**Synthetics Private Locations Write** ロールを持つユーザーのみが作成できます。詳しくは、[権限](#permissions)を参照してください。
 
 ### プライベートロケーションを作成する
 
 [**Synthetic Monitoring** > **Settings** > **Private Locations**][22]  に移動し、**Add Private Location** をクリックします。
 
-{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="プライベートロケーションを作成する" style="width:90%;">}}
+{{< img src="synthetics/private_locations/synthetics_pl_add_1.png" alt="プライベートロケーションを作成する" style="width:90%;">}}
 
 プライベートロケーションの詳細を入力します。
 
 1. プライベートロケーションの**名前**および**説明**を指定します。
-2. プライベートロケーションに関連づけたい**タグ**を追加します。Windows でプライベートロケーションを構成する場合は、**This is a Windows Private Location** を選択します。
+2. プライベートロケーションに関連付ける**タグ**を追加します。
 3. 既存の **API キー**を 1 つ選択します。API キーを選択すると、プライベートロケーションと Datadog 間の通信が可能になります。既存の API キーがない場合は、**Generate API key** をクリックして専用ページで作成します。`Name` と `API key` フィールドのみが必須です。
 4. プライベートロケーションのアクセス権を設定し、**Save Location and Generate Configuration File** をクリックします。Datadog はプライベートロケーションを作成し、関連するコンフィギュレーションファイルを生成します。
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="プライベートロケーションに詳細を追加する" style="width:85%;">}}
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="プライベートロケーションに詳細を追加する" style="width:85%;">}} 
+
 ### プライベートロケーションを構成する
 
 生成されたコンフィギュレーションファイルをカスタマイズして、プライベートロケーションを構成します。**ステップ 3** で[プロキシ](#proxy-configuration)や[予約 IP のブロック](#blocking-reserved-ips)などの初期構成パラメーターを追加すると、**ステップ 4** で生成したコンフィギュレーションファイルは自動的に更新されます。
@@ -179,7 +200,7 @@ Datadog はシークレットを保存しないので、**View Installation Inst
 次のコマンドを実行して、コンフィギュレーションファイルをコンテナにマウントすることでプライベートロケーションワーカーを起動します。`<MY_WORKER_CONFIG_FILE_NAME>.json` ファイルはルートホームフォルダーではなく `/etc/docker` 内に格納してください。
 
 ```shell
-docker run --rm -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
+docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
 **注:** 予約済み IP をブロックした場合は、プライベートロケーションコンテナに `NET_ADMIN` [Linux 機能][1]を追加してください。
@@ -462,7 +483,78 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
+{{% tab "GUI 経由の Windows" %}}
 
+1. [`datadog-synthetics-worker-<version>.amd64.msi` ファイル][101]をダウンロードし、プライベートロケーションをインストールしたいマシンからこのファイルを実行します。
+1. ウェルカムページで をクリックし、EULA を読み、利用規約に同意します。**Next** をクリックします。
+1. アプリケーションのインストール先を変更するか、デフォルト設定のままにします。**Next** をクリックします。
+1. Windows のプライベートロケーションを構成するには、以下のいずれかの方法があります。
+   - Datadog Synthetics Private Location Worker の JSON 構成を貼り付けて入力します。このファイルは、[プライベートロケーションの作成][102]時に Datadog が生成します。
+   - Datadog Synthetics Private Location Worker の JSON 構成を含むファイルのパスを参照または入力します。
+   - 空白のままにしておいて、インストール完了後に Windows のコマンドラインプロンプトで `C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=<PathToYourConfiguration>` を実行することができます。
+
+   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Synthetics Private Location Worker ウィザード、MSI インストーラー。'Paste in a JSON configuration' (JSON 構成を貼り付ける) オプションが選択されています。この JSON 構成のテキストフィールドが表示されています。" style="width:80%;" >}}
+
+1. 以下の構成オプションを適用できます。
+
+   {{< img src="synthetics/private_locations/settings.png" alt="Synthetics Private Location Worker ウィザード、MSI インストーラー。ファイアウォールとログの設定が表示されています。" style="width:80%;" >}}
+
+   Apply firewall rules needed by this program to Windows Firewall (このプログラムに必要なファイアウォールルールを Windows ファイアウォールに適用)
+   : インストーラーがインストール時にファイアウォールルールを適用し、アンインストール時に削除できるようにします。
+
+   Apply rules to block reserved IPs in Windows Firewall (Windows ファイアウォールで予約済み IP をブロックするルールを適用)
+   : Chrome、Firefox、Edge (インストールされている場合) のブロックルールを構成し、Windows ファイアウォールで予約済み IP アドレス範囲の送信をブロックするルールを追加します。
+
+   Enable File Logging (ファイルログの有効化)
+   : Synthetics Private Location Worker がインストールディレクトリ内でログファイルを記録できるようにします。
+
+   Log Rotation Days (ログローテーション日数 )
+   : ローカルシステムからログを削除するまでの保存日数を指定します。
+
+   Logging Verbosity (ロギングの冗長性)
+   : Synthetics Private Location Worker のコンソールとファイルロギングの冗長性を指定します。
+
+1. **Next**、**Install** をクリックしてインストールプロセスを開始します。
+
+プロセスが完了したら、インストール完了ページで **Finish** をクリックします。
+
+<div class="alert alert-warning">JSON 構成を入力した場合、Windows サービスはその構成を使用して実行を開始します。構成を入力していない場合は、コマンドプロンプトから <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> を実行するか、<code>スタートメニュー</code>のショートカットを使用して Synthetics Private Location Worker を起動します。</div>
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[102]: https://app.datadoghq.com/synthetics/settings/private-locations
+
+{{% /tab %}}
+{{% tab "CLI 経由の Windows" %}}
+
+1. [`datadog-synthetics-worker-<version>.amd64.msi` ファイル][101]をダウンロードし、プライベートロケーションをインストールしたいマシンからこのファイルを実行します。
+2. インストーラをダウンロードしたディレクトリで、以下のコマンドのいずれかを実行します。
+
+   - PowerShell ターミナルで
+
+     ```powershell
+     Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     ```
+
+   - またはコマンドターミナルで
+
+     ```cmd
+     msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     ```
+
+パラメーターを追加することができます。
+
+| オプションパラメーター | 定義 | 値 | デフォルト値 | タイプ |
+|---|---|---|---|---|
+| APPLYDEFAULTFIREWALLRULES | プログラムに必要なファイアウォールルールを適用します。 | 1 | N/A | 0: 無効<br>1: 有効 |
+| APPLYFIREWALLDEFAULTBLOCKRULES | インストールされている各ブラウザ (Chrome、Edge、Firefox) の予約済み IP アドレスをブロックします。Windows ファイアウォールでは、ループバック接続をブロックすることはできません。 | 0 | N/A | 0: 無効<br>1: 有効 |
+| LOGGING_ENABLED | 有効にすると、これによりファイルログイングが構成されます。これらのログは、インストールディレクトリの logs フォルダに保存されます。 | 0 | `--enableFileLogging` | 0: 無効<br>1: 有効 |
+| LOGGING_VERBOSITY | プログラムのロギングの冗長性を構成します。これはコンソールログとファイルログに影響します。 | これはコンソールログとファイルログに影響します。 | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
+| LOGGING_MAXDAYS | システム上でファイルログを削除する前に保持する日数。無人インストールを実行する場合は、任意の日数を指定できます。 | 7 | `--logFileMaxDays` | 整数 |
+| WORKERCONFIG_FILEPATH | これは Synthetics Private Location Worker JSON 構成ファイルのパスに変更する必要があります。パスにスペースが含まれている場合は、このパスを引用符で囲んでください。 | <None> | `--config` | 文字列 |
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+
+{{% /tab %}}
 {{< /tabs >}}
 
 #### ライブネスプローブとレディネスプローブのセットアップ
@@ -695,15 +787,25 @@ livenessProbe:
 
 {{< /tabs >}}
 
+### プライベートロケーションイメージのアップグレード
+
+既存のプライベートロケーションをアップグレードするには、プライベートロケーションのサイドパネルにある**歯車**アイコンをクリックし、**Installation instructions** をクリックします。
+
+{{< img src="synthetics/private_locations/pl_edit_config.png" alt="プライベートロケーションのセットアップワークフローにアクセスする" style="width:90%;" >}}
+
+次に、[環境に応じた構成コマンド](#install-your-private-location)を実行して、プライベートロケーションイメージの最新バージョンを取得します。
+
+**注**: Private Location のイメージを起動するために `docker run` を使用していて、以前に `latest` タグを使用して Private Location のイメージをインストールしたことがある場合は、同じ `latest` タグでローカルに存在するキャッシュバージョンのイメージに依存するのではなく、最新バージョンがプルされるように `docker run` コマンドに `--pull=always` を追加してください。
+
 ### 内部エンドポイントをテストする
 
-1 つ以上のプライベートロケーションコンテナが Datadog にレポートを開始すると、プライベートロケーションステータスが緑に表示されます。
+少なくとも 1 つのプライベートロケーションワーカーが Datadog にレポートを開始すると、プライベートロケーションのステータスが緑色で表示されます。
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="プライベートロケーションのレポート" style="width:90%;">}}
 
-また、**Settings** ページの Private Locations リストに表示される `REPORTING` ヘルスステータスを見ることができます。
+**Settings** ページのプライベートロケーションリストに `REPORTING` の健全性ステータスと関連するモニターステータスが表示されます。
 
-{{< img src="synthetics/private_locations/pl_monitoring_table_reporting.png" alt="プライベートロケーションのヘルス" style="width:95%;">}}
+{{< img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="プライベートロケーションの健全性ステータスとモニターステータス" style="width:100%;">}}
 
 内部エンドポイントの 1 つで速度テストを起動して最初の内部エンドポイントのテストを開始し、期待される応答が得られるかどうかを確認します。
 
@@ -721,9 +823,9 @@ API、マルチステップ API、またはブラウザテストを作成し、�
 
 ## プライベートロケーションのサイズ変更
 
-1 つのプライベートロケーションに単一のコンフィギュレーションファイルで複数のコンテナを実行できるため、ワーカーを追加または削除することでプライベートロケーションを**水平スケーリング**できます。このとき、`concurrency` パラメーターを必ず設定し、プライベートロケーションで実行するテストのタイプおよび数と一致するワーカーリソースを割り当てます。
+1 つのプライベートロケーションに単一のコンフィギュレーションファイルで複数のワーカーを実行できるため、ワーカーを追加または削除することでプライベートロケーションを**水平スケーリング**できます。このとき、`concurrency` パラメーターを必ず設定し、プライベートロケーションで実行するテストのタイプおよび数と一致するワーカーリソースを割り当てます。
 
-プライベートロケーションコンテナが取り扱うことのできるロードを増加してプライベートロケーションを**垂直にスケーリング**することもできます。同様に、`concurrency` パラメーターを使用して、ワーカーが実行できるテストの最大数を調整し、ワーカーに割り当てられたリソースを必ず更新してください。
+プライベートロケーションワーカーが取り扱うことのできるロードを増加してプライベートロケーションを**垂直にスケーリング**することもできます。同様に、`concurrency` パラメーターを使用して、ワーカーが実行できるテストの最大数を調整し、ワーカーに割り当てられたリソースを必ず更新してください。
 
 詳しくは、[プライベートロケーションのディメンション][18]を参照してください。
 
@@ -735,7 +837,7 @@ API、マルチステップ API、またはブラウザテストを作成し、�
 
 詳しくは、[プライベートロケーションモニタリング][19]を参照してください。
 
-## アクセス許可
+## ヘルプ
 
 デフォルトでは、Datadog Admin ロールを持つユーザーのみが、プライベートロケーションの作成、プライベートロケーションの削除、プライベートロケーションのインストールガイドラインにアクセスすることができます。
 

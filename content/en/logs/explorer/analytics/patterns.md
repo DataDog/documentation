@@ -9,6 +9,9 @@ further_reading:
 - link: 'logs/explorer/analytics'
   tag: 'Documentation'
   text: 'Learn how to analyze your logs'
+- link: 'https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/'
+  tag: 'Blog'
+  text: 'Filter and correlate logs dynamically using Subqueries'
 ---
 
 ## Overview

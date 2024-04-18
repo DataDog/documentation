@@ -26,7 +26,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: splunk
-oauth: {}
 public_title: Splunk
 short_description: Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。
 supported_os: []

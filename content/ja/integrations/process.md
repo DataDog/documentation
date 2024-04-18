@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: プロセス
-oauth: {}
 public_title: プロセス
 short_description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
 supported_os:

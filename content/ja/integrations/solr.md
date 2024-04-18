@@ -43,7 +43,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: solr
-oauth: {}
 public_title: Solr
 short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
 supported_os:

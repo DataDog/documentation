@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: statsd
-oauth: {}
 public_title: StatsD
 short_description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
 supported_os:

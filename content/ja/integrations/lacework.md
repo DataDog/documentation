@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: lacework
-oauth: {}
 public_title: Lacework
 short_description: Lacework は、すべてのクラウド環境に対応するセキュリティプラットフォームです
 supported_os:

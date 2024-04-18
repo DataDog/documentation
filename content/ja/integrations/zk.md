@@ -44,7 +44,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: zk
-oauth: {}
 public_title: ZooKeeper
 short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
 supported_os:

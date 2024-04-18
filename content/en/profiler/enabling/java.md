@@ -74,7 +74,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][4]+ or [6.20.2][5]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][4]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 

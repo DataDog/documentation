@@ -37,7 +37,7 @@ The available code security vulnerability types include the following:
 
 ### Disabling code security vulnerability detection 
 
-To disable code security vulnerability detection capability, remove the `DD_IAST_ENABLED` environment variable from your application configuration, and restart your service.
+To disable code security vulnerability detection capability, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
 
 If you need additional help, contact [Datadog support][1].
 

@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: pingdom_v3
-oauth: {}
 public_title: Pingdom
 short_description: Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照
 supported_os:

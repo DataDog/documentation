@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: grpc_check
-oauth: {}
 public_title: gRPC Health
 short_description: gRPC Health Checking Protocol に基づく gRPC サーバーの監視
 supported_os:

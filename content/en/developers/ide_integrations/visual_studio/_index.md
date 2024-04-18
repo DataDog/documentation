@@ -12,6 +12,9 @@ further_reading:
 - link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
   tag: "External Site"
   text: "Visual Studio Marketplace"  
+- link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
+  tag: "Blog"
+  text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 ---
 
 ## Overview

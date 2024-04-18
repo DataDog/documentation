@@ -56,7 +56,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: postgres
-oauth: {}
 public_title: Postgres
 short_description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
 supported_os:

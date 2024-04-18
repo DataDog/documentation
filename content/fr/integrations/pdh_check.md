@@ -29,7 +29,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: pdh_check
-oauth: {}
 public_title: Check PDH
 short_description: Recueillez et représentez graphiquement des compteurs de performances
   Windows

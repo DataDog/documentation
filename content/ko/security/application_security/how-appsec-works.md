@@ -18,43 +18,39 @@ title: Datadog에서 애플리케이션 보안 관리가 작동하는 방식
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서는 애플리케이션 보안 관리가 지원되지 않습니다.</div>
+<div class="alert alert-warning">애플리케이션 보안 관리는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}}에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 ## 개요
 
-Datadog 애플리케이션 보안 관리(ASM)는 코드 수준 취약점을 악용하거나 애플리케이션의 비즈니스 로직을 남용하는 애플리케이션 수준 공격 및 시스템을 표적으로 삼는 모든 악의적 행위자에 대한 관찰 기능을 제공합니다.
+Datadog 애플리케이션 보안 관리(ASM)는 코드 수준의 취약성과 애플리케이션의 비즈니스 로직을 악용하는 애플리케이션 수준의 공격 및 시스템을 노리는 모든 악의적 공격자에 대한 가시성을 제공합니다.
 
 또한 ASM은 애플리케이션이 런타임에 사용하는 취약한 라이브러리 및 종속성을 통해 애플리케이션에 내장된 위험을 감지합니다.
 
-Datadog APM은 각 애플리케이션 요청에 대해 트레이스라는 정보를 기록합니다. Datadog ASM은 APM과 동일한 트레이스 라이브러리를 사용하여 트래픽을 모니터링합니다. ASM은 알려진 공격 패턴과 일치하는 보안 트레이스를 기반으로 공격 시도에 플래그를 지정하거나 [비즈니스 로직 정보에 태그를 지정][25]합니다. Datadog이 서비스에 영향을 미치는 애플리케이션 공격이나 비즈니스 로직 남용을 감지하면 보안 신호가 자동으로 생성됩니다. 신호는 각 개별 공격 시도를 평가하는 대신 검토할 의미 있는 위협을 식별합니다. 보안 신호 설정에 따라 Slack, 이메일 또는 PagerDuty로부터 알림을 받을 수 있습니다.
+Datadog APM은 각 애플리케이션 요청에 대한 트레이스라는 정보를 기록합니다. Datadog ASM은 APM과 동일한 추적 라이브러리를 사용하여 트래픽을 모니터링합니다. ASM은 알려진 공격 패턴과 일치하는 보안 트레이스를 기반으로 공격 시도에 플래그를 지정하거나 [비즈니스 로직 정보에 태그를 지정][25]합니다. Datadog이 서비스에 영향을 미치는 애플리케이션 공격이나 비즈니스 로직 악용을 감지하면 보안 신호가 자동으로 생성됩니다. 신호는 각 개별 공격 시도를 평가하는 대신 유의미한 위협을 식별합니다. 보안 신호 설정에 따라 Slack, 이메일 또는 PagerDuty로부터 알림을 받을 수 있습니다.
 
-기존 WAF(웹 애플리케이션 방화벽)는 일반적으로 경계에 배포되며 애플리케이션 동작에 대한 컨텍스트가 없습니다. ASM은 애플리케이션에 내장되어 있기 때문에 트레이스 데이터에 액세스할 수 있어 위협을 더욱 효과적으로 찾아내고 분류할 수 있습니다. Datadog ASM은 WAF(웹 애플리케이션 방화벽)와 유사하지만 추가 애플리케이션 컨텍스트를 사용하여 신호 대 잡음비를 높이고 오탐지를 낮추는 알려진 공격 패턴을 활용합니다.
+기존 WAF(웹 애플리케이션 방화벽)는 일반적으로 경계에 배포되며 애플리케이션 동작에 대한 컨텍스트가 없습니다. ASM은 애플리케이션에 내장되어 있어 추적 데이터에 액세스할 수 있으므로 위협을 더욱 효과적으로 찾아내고 분류할 수 있습니다. Datadog ASM은 WAF(웹 애플리케이션 방화벽)와 유사하지만 추가 애플리케이션 컨텍스트를 사용하여 신호 대 잡음비를 높이고 오탐지를 낮추는 알려진 공격 패턴을 활용합니다.
 
 ### 애플리케이션 공격에 노출된 서비스 식별
 
-Datadog ASM [위협 관리][1]는 APM이 이미 수집한 정보를 사용하고 공격 시도가 포함된 트레이스에 플래그를 지정합니다. 애플리케이션 공격에 노출된 서비스는 APM에 포함된 보안 보기([Service Catalog][2], [Service Page][3], [Traces][4])에서 직접 강조 표시됩니다.
+Datadog ASM [위협 관리][1]는 APM이 이미 수집한 정보를 사용하고 공격 시도가 포함된 추적에 플래그를 지정합니다. 애플리케이션 공격에 노출된 서비스는 APM에 포함된 보안 뷰 ([Service Catalog][2], [Service Page][3], [Traces][4])에서 강조 표시됩니다.
 
-APM은 애플리케이션 트래픽 샘플을 수집하므로 서비스를 효과적으로 모니터링하고 보호하려면 트레이스 라이브러리에서 ASM을 활성화해야 합니다.
+APM은 애플리케이션 트래픽 샘플을 수집하므로 서비스를 효과적으로 모니터링하고 보호하려면 추적 라이브러리에서 ASM을 활성화해야 합니다.
 
-Datadog 위협 모니터링 및 탐지는 모든 요청에 ​​대해 클라이언트 IP 주소와 수동으로 추가된 사용자 태그를 수집하여 악의적인 행위자를 식별합니다.
+Datadog 위협 모니터링 및 탐지는 모든 요청에 ​​대해 클라이언트 IP 주소와 수동으로 추가된 사용자 태그를 수집하여 악의적인 공격자를 식별합니다.
 
-<div class="alert alert-info"><strong>베타: 1-클릭 활성화</strong><br>
-<a href="/agent/remote_config/#enabling-remote-configuration">원격 설정이 활성화된 Agent와 이를 지원하는 트레이스 라이브러리 버전</a>으로 서비스가 실행 중인 경우, Agent 또는 트레이스 라이브러리를 추가로 설정하지 않고도 Datadog UI에서 <a href="/security/application_security/enabling/">ASM을 활성화</a> 할 수 있습니다.</div>
-
+<div class="alert alert-info"><strong>1-클릭 활성화</strong><br>
+<a href="/agent/remote_config/#enabling-remote-configuration">원격 설정이 활성화된 Agent와 이를 지원하는 추적 라이브러리 버전</a>으로 서비스가 실행 중인 경우 Agent 또는 추적 라이브러리를 추가로 설정하지 않고도 Datadog UI에서 <a href="/security/application_security/enabling/">ASM을 활성화</a>할 수 있습니다.</div>
 
 ### 취약한 서비스 식별
 
-Datadog [애플리케이션 취약성 관리][5]는 오픈 소스 소프트웨어 라이브러리와 관련되어 알려져 있는 다양한 취약성 데이터 소스 및 Datadog 보안 연구팀이 제공한 정보를 사용합니다. 이를 통해 애플리케이션이 런타임에 의존하는 라이브러리와 잠재적 취약성을 매칭하고 해결 권장 사항을 제시합니다.
-
+Datadog [소프트웨어 구성 분석][5]은 오픈 소스 소프트웨어 라이브러리와 관련된 다양한 알려진 취약성 데이터 소스와 Datadog 보안 연구팀이 제공하는 정보를 사용하여 애플리케이션이 런타임에 의존하는 라이브러리와 잠재적 취약성을 비교하고, 해결책을 제시합니다.
 
 ## 호환성
 
 Datadog ASM이 Datadog 설정과 호환되려면 APM을 활성화하고 [트레이스를 Datadog으로 전송][6]해야 합니다. ASM은 APM에서 사용하는 것과 동일한 라이브러리를 사용하므로 다른 라이브러리를 배포하고 유지 관리할 필요가 없습니다. Datadog ASM을 활성화하는 단계는 런타임 언어에 따라 다릅니다. [ASM 필수 구성 요소][7]에서 해당 언어가 지원되는지 확인하세요.
 
 ### 서버리스 모니터링
-
-<div class="alert alert-info">AWS Lambda에 대한 ASM 지원은 베타 버전입니다. 위협 탐지는 Datadog의 Lambda 확장을 통해 수행됩니다.</div>
 
 AWS Lambda용 Datadog ASM은 사용자의 기능을 표적으로 삼는 공격자에 대해 심층적인 가시성을 제공합니다. 분산 트레이스를 통해 공격에 대한 자세한 컨텍스트를 파악할 수 있으므로 영향을 평가하고 위협을 효과적으로 해결할 수 있습니다.
 
@@ -128,7 +124,7 @@ Datadog ASM에는 [다양한 종류의 공격][14]을 방어하는 데 도움이
 
 Datadog ASM은 오픈 소스 종속성에서 탐지된 취약점에 대해 경고하는 내장 탐지 기능을 제공합니다. 해당 정보에 대한 자세한 내용은 [취약성 탐색기][15]에 표시되어, 심각도, 영향을 받는 서비스, 잠재적으로 취약한 인프라스트럭처 및 복구 지침을 식별하여 표면화된 위험을 해결합니다.
 
-자세한 내용은 [애플리케이션 취약성 관리][5]를 참조하세요.
+자세한 내용은 [소프트웨어 구성 분석][5]을 참조하세요.
 
 ## API 보안
 
@@ -148,7 +144,7 @@ Datadog ASM은 Log4j Log4Shell 공격 페이로드를 식별하고 악성 코드
 [2]: /ko/tracing/service_catalog/#security-view
 [3]: /ko/tracing/services/service_page/#security
 [4]: /ko/tracing/trace_explorer/trace_view/?tab=security#more-information
-[5]: /ko/security/application_security/risk_management/
+[5]: /ko/security/application_security/software_composition_analysis/
 [6]: /ko/tracing/trace_collection/
 [7]: /ko/security/application_security/enabling/#prerequisites
 [8]: /ko/security/application_security/enabling/serverless/

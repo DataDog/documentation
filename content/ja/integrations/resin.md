@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: resin
-oauth: {}
 public_title: Resin
 short_description: Resin 内のスレッドプールと接続プールの設定を追跡
 supported_os:

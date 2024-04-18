@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: snmp_chatsworth_products
-oauth: {}
 public_title: Chatsworth Products
 short_description: Chatsworth Products のネットワークデバイスから SNMP メトリクスを収集します。
 supported_os:

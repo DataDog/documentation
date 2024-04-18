@@ -29,6 +29,11 @@ Using any database API supporting execution of SQL statements, add a comment in 
 /*key='val'*/ SELECT * from FOO
 ```
 
+Separate multiple tags with commas:
+```sql
+/*key1='val1',key2='val2'*/ SELECT * from FOO
+```
+
 Full example:
 ```go
 import (

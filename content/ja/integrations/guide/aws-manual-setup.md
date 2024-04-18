@@ -78,6 +78,9 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 {{< site-region region="ap1" >}}
 10. `Account ID` として、`417141415827` を入力します。これは Datadog のアカウント ID で、Datadog に AWS のデータへのアクセスを許可するものです。
 {{< /site-region >}}
+{{< site-region region="gov" >}}
+10. 統合したい AWS アカウントが GovCloud アカウントである場合は `Account ID` に `065115117704` を、それ以外の場合は `392588925713` を入力します。これは Datadog のアカウント ID で、Datadog に AWS のデータへのアクセスを許可するものです。
+{{< /site-region >}}
 11. **Require external ID** を選択し、[外部 ID を生成する](#generate-an-external-id)セクションでコピーした外部 ID を入力します。
 `Require MFA` を無効にしたままにしてください。詳しくは、AWS のドキュメント、[第三者にお客様の AWS リソースへのアクセスを許可する際の外部 ID の使用方法][2]をご覧ください。
 12. **Next** をクリックします。
@@ -101,27 +104,30 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
 [4]: https://console.aws.amazon.com/iam/home#/roles
-[5]: /ja/security/cspm
+[5]: /ja/security/misconfigurations
 [6]: /ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/
 {{% /tab %}}
 {{% tab "Access keys (GovCloud or China Only)" %}}
 
-## セットアップ
+## 計画と使用
 
 ### AWS
 
 1. AWS のコンソールで、Datadog インテグレーションで使用する IAM ユーザーを[必要な権限](#aws-integration-iam-policy)で作成します。
 2. Datadog インテグレーション IAM ユーザー用のアクセスキーとシークレットキーを生成します。
 
-### Datadog
+### Ruby
 
 3. [AWS インテグレーションタイル][1]で、**Add AWS Account** をクリックし、** Manually** を選択します。
-4. **Access Keys (GovCloud or China Only)** タブを選択します。
+4. **Access Keys (GovCloud or China\* Only)** タブを選択します。
 5. `Account ID`、`AWS Access Key`、`AWS Secret Key` を入力します。GovCloud および中国用のアクセスキーとシークレットキーのみが許可されます。
-6. **保存**をクリックします。
+6. **Save** をクリックします。
 7. データ収集が開始されるまで最大 10 分待ち、すぐに使える <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 概要ダッシュボード</a>を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
 
+ \* _中国本土における (または中国本土内の環境に関連する) Datadog サービスの使用はすべて、当社 Web サイトの[サービス制限地域][10]セクションに掲載されている免責事項に従うものとします。_
+
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
+[2]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{< /tabs >}}
 

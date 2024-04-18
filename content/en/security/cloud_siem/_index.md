@@ -36,7 +36,7 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 
 ## Get started
 
-{{< whatsnext >}}
+{{< whatsnext desc="See the following documents to get started with Cloud SIEM:" >}}
   {{< nextlink href="/getting_started/cloud_siem/">}}Getting started with Cloud SIEM guide{{< /nextlink >}}
   {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/">}}Configure AWS for Cloud SIEM{{< /nextlink >}}
   {{< nextlink href="/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/">}}Configure Google Cloud for Cloud SIEM{{< /nextlink >}}

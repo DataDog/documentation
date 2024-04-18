@@ -38,7 +38,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: signl4
-oauth: {}
 public_title: SIGNL4
 short_description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
 supported_os:

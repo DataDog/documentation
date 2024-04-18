@@ -43,7 +43,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: open_policy_agent
-oauth: {}
 public_title: Open Policy Agent
 short_description: OPA インテグレーション
 supported_os:

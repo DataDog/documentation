@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: lighttpd
-oauth: {}
 public_title: Lighttpd
 short_description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
 supported_os:

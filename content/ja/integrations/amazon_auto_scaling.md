@@ -15,7 +15,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
 draft: false
 git_integration_title: amazon_auto_scaling
 has_logo: true
-integration_id: amazon-auto-scaling
+integration_id: ''
 integration_title: AWS Auto Scaling
 integration_version: ''
 is_public: true

@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: php_opcache
-oauth: {}
 public_title: PHP OPcache
 short_description: PHP OPcache バイトコードキャッシュシステムを監視します。
 supported_os:

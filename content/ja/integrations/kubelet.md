@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kubelet
-oauth: {}
 public_title: Kubelet
 short_description: Kubelet からコンテナ統計を収集。
 supported_os:

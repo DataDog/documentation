@@ -327,9 +327,17 @@ Datadog の [Google Cloud Dataflow インテグレーション][9]を使用し�
 
 メトリクスについては、個別の Google Cloud インテグレーションのページを参照してください。
 
+#### 累積メトリクス
+
+累積メトリクスは、メトリクス名ごとに `.delta` メトリクスを伴って Datadog にインポートされます。累積メトリクスとは、値が時間の経過とともに常に増加するメトリクスです。たとえば、`sent bytes` のメトリクスは累積的である可能性があります。各値は、その時点でサービスによって送信された総バイト数を記録します。デルタ値は、前回の測定からの変化を表します。
+
+例:
+
+ `gcp.gke.container.restart_count` は累積的なメトリクスです。このメトリクスを累積メトリクスとしてインポートする際、Datadog は (累積メトリクスの一部として送信される集計値ではなく) デルタ値を含む `gcp.gke.container.restart_count.delta` メトリクスを追加します。詳細については、[Google Cloud メトリクスの種類][80]を参照してください。
+
 ### ヘルプ
 
-Google Cloud Platform によって生成されたすべてのサービスイベントが [Datadog のイベントエクスプローラー][80]に転送されます。
+Google Cloud Platform によって生成されたすべてのサービスイベントが [Datadog のイベントエクスプローラー][81]に転送されます。
 
 ### ヘルプ
 
@@ -348,11 +356,11 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 
 ### ユーザー定義の _gcp.logging_ メトリクスに不正なメタデータが適用される
 
-非標準の _gcp.logging_ メトリクス ([Datadog に付属するログメトリクス以外のメトリクス][81]など) に適用されるメタデータが Google Cloud Logging と一致しない場合があります。
+非標準の _gcp.logging_ メトリクス ([Datadog に付属するログメトリクス][82]以外のメトリクスなど) に適用されるメタデータが Google Cloud Logging と一致しない場合があります。
 
-このような場合は、メタデータを手動で設定する必要があります。設定するには、[メトリクスサマリーページ][82]に移動し、問題のメトリクスを検索して選択し、メタデータの横にある鉛筆アイコンをクリックします。
+このような場合は、メタデータを手動で設定する必要があります。設定するには、[メトリクスサマリーページ][83]に移動し、問題のメトリクスを検索して選択し、メタデータの横にある鉛筆アイコンをクリックします。
 
-ご不明な点は、[Datadog のサポートチーム][83]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][84]までお問合せください。
 
 ## その他の参考資料
 
@@ -437,7 +445,8 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 [77]: https://docs.datadoghq.com/ja/monitors/types/metric/
 [78]: https://www.datadoghq.com/blog/datadog-recommended-monitors/
 [79]: https://www.datadoghq.com/blog/monitor-dataflow-pipelines-with-datadog/
-[80]: https://app.datadoghq.com/event/stream
-[81]: https://docs.datadoghq.com/ja/integrations/google_stackdriver_logging/#metrics
-[82]: https://app.datadoghq.com/metric/summary
-[83]: https://docs.datadoghq.com/ja/help/
+[80]: https://cloud.google.com/monitoring/api/v3/kinds-and-types
+[81]: https://app.datadoghq.com/event/stream
+[82]: https://docs.datadoghq.com/ja/integrations/google_stackdriver_logging/#metrics
+[83]: https://app.datadoghq.com/metric/summary
+[84]: https://docs.datadoghq.com/ja/help/

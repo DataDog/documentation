@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: backstage
-oauth: {}
 public_title: Backstage
 short_description: Datadog のダッシュボードとグラフを Backstage インスタンスに埋め込むことができます。
 supported_os:

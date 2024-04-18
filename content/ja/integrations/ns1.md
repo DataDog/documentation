@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ns1
-oauth: {}
 public_title: ns1
 short_description: NS1 メトリクスを収集する Datadog インテグレーション
 supported_os:

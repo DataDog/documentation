@@ -40,7 +40,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: pulumi
-oauth: {}
 public_title: Pulumi
 short_description: 好きなプログラミング言語を使って、あらゆるクラウドに対応する Infrastructure as Code を実現
 supported_os:

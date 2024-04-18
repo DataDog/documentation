@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: bind9
-oauth: {}
 public_title: bind9
 short_description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
 supported_os:

@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: snmp_f5
-oauth: {}
 public_title: F5 Networks
 short_description: F5 ネットワークデバイスから SNMP メトリクスを収集
 supported_os:

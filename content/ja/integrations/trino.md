@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: trino
-oauth: {}
 public_title: Trino
 short_description: Trino クラスターのパフォーマンスと使用量を収集する
 supported_os:

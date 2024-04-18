@@ -31,7 +31,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: isdown
-oauth: {}
 public_title: IsDown
 short_description: IsDown permet aux entreprises de surveiller toutes les pages de
   statut tierces depuis un seul endroit

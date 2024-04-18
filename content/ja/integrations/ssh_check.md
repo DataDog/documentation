@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ssh_check
-oauth: {}
 public_title: SSH
 short_description: SSH 接続と SFTP レイテンシーを監視。
 supported_os:

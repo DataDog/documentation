@@ -21,14 +21,14 @@ aliases:
 
 ## Overview
 
-After you have [registered all your endpoints][1] and [assigned team ownership][2], you can start managing and improving them. Use API Catalog to start activities such as:
+After you have [registered your endpoints][1] and [assigned team ownership][2], you can start managing and improving them. Use API Catalog to start activities such as:
 
  - Detecting and investigating APIs that are underperforming.
  - Creating alerts based on key performance metrics such as latency and error rate.
  - Keeping track of an API's reliability in terms of triggered alerts, test results, and security signals.
  - Standardizing API testing and improving test coverage with Synthetic Monitoring.
 
- <div class="alert alert-info">After you have registered endpoints, Datadog starts collecting a new endpoint metric for better monitoring capabilities. It might take a few minutes for the data to display if you try to create a new monitor with this metric.</div>
+ <div class="alert alert-info">After you have registered endpoints, Datadog starts collecting a new endpoint metric for better monitoring capabilities. It might take some time for the metric to display, depending on the traffic of the registered endpoints.</div>
 
 ## Alerting on endpoints that deviate from expected performance
 

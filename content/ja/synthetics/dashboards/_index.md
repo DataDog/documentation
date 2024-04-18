@@ -4,9 +4,12 @@ further_reading:
 - link: /synthetics/
   tag: ドキュメント
   text: Synthetic モニタリングについて
-- link: /synthetics/ci_results_explorer
+- link: /continuous_testing/explorer/
   tag: ドキュメント
-  text: CI Results Explorer について学ぶ
+  text: Synthetic Monitoring & Continuous Testing Explorer について
+- link: /continuous_testing/explorer/saved_views
+  tag: ドキュメント
+  text: 保存ビューについて
 kind: documentation
 title: Synthetic ダッシュボード
 ---
@@ -15,34 +18,37 @@ title: Synthetic ダッシュボード
 
 Synthetic テストを作成すると、Datadog は[データを収集][1]し、スタック、ブラウザアプリケーション、またはテスト全体のパフォーマンス、プライベートロケーション、イベントに関するダッシュボードを生成します。
 
-Synthetic ダッシュボードにアクセスするには、[**Dashboard List**][2] の検索クエリで `Synthetics` をフィルターにかけるか、または [Synthetic モニタリング ホームページ ][4]の [**Dashboards**][3] でドロップダウンメニューをクリックしてください。
+Synthetic ダッシュボードにアクセスするには、[**Dashboard List**][2] の検索クエリで `Synthetics` をフィルターするか、[Synthetic Monitoring & Continuous Testing ページ][4]の [**Dashboards**][3] のドロップダウンメニューをクリックします。
 
-{{< img src="synthetics/dashboards/synthetic_tests_dashboards.png" alt="Synthetic モニタリングダッシュボード" style="width:100%;">}}
+{{< img src="synthetics/dashboards/dashboards_homepage_blurred.png" alt="Synthetic Monitoring & Continuous Testing ホームページの Synthetic Monitoring ダッシュボード" style="width:100%;">}}
 
 {{< whatsnext desc="すぐに使える Synthetic ダッシュボードには、以下のようなものが用意されています。" >}}
   {{< nextlink href="/synthetics/dashboards/api_test" >}}<u>API Test Performance</u>: エンドポイントやサービスを監視します。 {{< /nextlink >}}
   {{< nextlink href="/synthetics/dashboards/browser_test" >}}<u>Browser Test Performance</u>: ブラウザテストの Web パフォーマンス、サードパーティプロバイダーに関する洞察、コア Web バイタルを表示します。 {{< /nextlink >}}
-  {{< nextlink href="/synthetics/dashboards/testing_coverage" >}}<u>Testing Coverage</u>: ブラウザテストのアプリケーションカバレッジを評価し、RUM と Synthetic のデータを使用して追跡するアプリケーションの人気要素を特定します。 {{< /nextlink >}}
-  {{< nextlink href="/synthetics/dashboards/test_summary" >}}<u>Test Summary</u>: 地域、環境、チームごとの Synthetic テストに関する洞察を見ることができます。 {{< /nextlink >}}
+  {{< nextlink href="/synthetics/dashboards/test_summary" >}}<u>Test Overview</u>: 地域、環境、チームごとの Synthetic テストに関する洞察を見ることができます。 {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Synthetic ダッシュボードの操作
+## Synthetic ダッシュボードのカスタマイズ
 
-[ダッシュボード][5]を複製し、テンプレート変数を使ってチーム、環境、地域ごとにカスタマイズすることが可能です。
+[ダッシュボード][5]を複製し、テンプレート変数を使ってチーム、環境、地域ごとにカスタマイズできます。また、ビューをカスタマイズし、複製したダッシュボードの[保存ビュー][6]を作成することもできます。
 
-### テンプレート変数
+### テンプレート変数の編集
 
-生成された Synthetic ダッシュボードには、自動的にデフォルトのテンプレート変数が含まれます。テンプレート変数のドロップダウンメニューを使用すると、ダッシュボードに表示されるデータを絞り込むことができます。例えば、`Browser` テンプレート変数を使えば、特定のブラウザの種類をフィルターにかけることができます。
+生成された Synthetic ダッシュボードには、自動的にデフォルトのテンプレート変数が含まれます。テンプレート変数のドロップダウンメニューを使用すると、ダッシュボードに表示されるデータを絞り込むことができます。例えば、`Browser` テンプレート変数を使えば、特定のブラウザの種類をフィルターにかけることができます。詳細については、[テンプレート変数][7]のドキュメントを参照してください。Synthetic ダッシュボードを複製するには、**Configure** アイコンの隣にある **Clone** ボタンをクリックします。
 
-### 保存済みビュー
+{{< img src="synthetics/dashboards/clone.png" alt="ダッシュボードの複製" style="width:100%;">}}
 
-Synthetic ダッシュボードには、デフォルトのビューがあります。ダッシュボードの表示を調整するには、**Edit** アイコンをクリックし、テンプレート変数をカスタマイズしてください。
+Synthetic ダッシュボードにはデフォルトのビューがあり、これは調整できます。**Edit** アイコンをクリックして編集モードに入り、テンプレート変数をカスタマイズします。
 
-編集が終わったら、** Save** をクリックし、左側のドロップダウンメニューから **Save selections as view** を選択します。保存したビューの名前を入力し、**Save** をクリックします。
+{{< img src="synthetics/dashboards/synthetics_template_variable_edit.png" alt="Synthetic ダッシュボードでテンプレート変数を編集します" style="width:100%;">}}
 
-### ダッシュボードのカスタマイズ
+### 保存ビューの作成
 
-Synthetic ダッシュボードを複製するには、**Settings** アイコンをクリックし、**Clone dashboard** を選択します。ウィジェット、パワーパック、アプリを追加するには、一番下までスクロールして、**+** アイコンをクリックします。
+編集が終わったら、**Done** をクリックし、左側のドロップダウンメニューから **Save selections as view** を選択します。
+
+{{< img src="synthetics/dashboards/saved_view.png" alt="Synthetic ダッシュボードに保存ビューを作成します" style="width:60%;">}}
+
+保存ビューの名前を入力し、**Save** をクリックします。
 
 ## その他の参考資料
 
@@ -53,3 +59,5 @@ Synthetic ダッシュボードを複製するには、**Settings** アイコン
 [3]: https://app.datadoghq.com/synthetics/tests/
 [4]: https://app.datadoghq.com/synthetics/tests
 [5]: /ja/dashboards/
+[6]: /ja/continuous_testing/explorer/saved_views/
+[7]: /ja/dashboards/template_variables/

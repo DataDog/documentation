@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: http_check
-oauth: {}
 public_title: HTTP チェック
 short_description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
 supported_os:

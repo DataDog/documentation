@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: scalr
-oauth: {}
 public_title: Scalr
 short_description: Scalr は、Terraform Automation and COllaboration (TACO) 製品です。
 supported_os:

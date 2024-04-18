@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sidekiq
-oauth: {}
 public_title: Sidekiq
 short_description: Sidekiq ジョブ、キュー、バッチに関するメトリクスを追跡します。
 supported_os:

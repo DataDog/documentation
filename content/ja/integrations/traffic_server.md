@@ -47,12 +47,11 @@ draft: false
 git_integration_title: traffic_server
 integration_id: traffic-server
 integration_title: Traffic Server
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: traffic_server
-oauth: {}
 public_title: Traffic Server
 short_description: 接続、キャッシュ、DNS のメトリクスの監視
 supported_os:

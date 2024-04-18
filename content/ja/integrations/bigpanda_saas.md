@@ -5,6 +5,7 @@ app_id: bigpanda-bigpanda
 app_uuid: 98cf782f-3d6c-4ea8-8e7b-353da5623794
 assets:
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: datadog.marketplace.bigpanda.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10163
     source_type_name: BigPanda SaaS
 author:
   homepage: https://bigpanda.io
@@ -26,7 +28,8 @@ categories:
 - 自動化
 - インシデント
 - マーケットプレイス
-- notification
+- notifications
+- ai/ml
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,7 +43,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: bigpanda_saas
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -63,7 +65,8 @@ tile:
   - Category::Automation
   - Category::Incidents
   - Category::Marketplace
-  - Category::Notification
+  - Category::Notifications
+  - Category::AI/ML
   - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
@@ -71,33 +74,16 @@ tile:
   configuration: README.md#Setup
   description: AIOps によるイベント相関および自動化プラットフォーム
   media:
-  - caption: BigPanda は IT 運用、NOC、DevOps チームが動きの速い IT において IT インシデントや障害を検出、調査、解決できるよう支援します。詳細については、https://www.bigpanda.io
-      をご覧ください。
-    image_url: images/video.png
-    media_type: ビデオ
-    vimeo_id: 619368097
-  - caption: BigPanda の AIOps プラットフォームは DataDog と連携し、ノイズを排除し、インシデントレスポンスを加速させます。
-    image_url: images/bigpanda_dd_benefits.png
-    media_type: image
-  - caption: BigPanda がなければ、複雑な IT 環境はノイズを発生させ、スタッフは貴重な時間を浪費せざるを得なくなります。
-    image_url: images/bigpanda_dd_before.png
-    media_type: image
-  - caption: BigPanda の AIOps プラットフォームは DataDog と連携し、ノイズを排除し、インシデントレスポンスを加速させます。
-    image_url: images/bigpanda_dd_after.png
-    media_type: image
-  - caption: BigPanda Incident Feed -- BigPanda の Incident 360 ビューは、進行中のすべての IT インシデントに対する重要な認識を提供します。
-    image_url: images/BP1.png
-    media_type: image
-  - caption: BigPanda Incident Timeline -- BigPanda の Timeline はインシデントが時間とともにどのように進化しているかを明確に表示します。
-    image_url: images/BP2.png
+  - caption: BigPanda Incident Feed — BigPanda の Feed は、ビュー内のすべてのインシデントがどのように表示され、それらが時間とともにどのように推移するかを表示します。
+    image_url: images/b480d24-Incidents_tab_overview_0.1.png
     media_type: image
   - caption: BigPanda Analytics -- BigPanda の Unified Analytics ダッシュボードは、レポートを提供し、KPI
       を追跡するので、チームは継続的に改善することができます。
-    image_url: images/BP4.png
+    image_url: images/61454f7-The_Unified_Analytics_Tab.png
     media_type: image
-  - caption: BigPanda Analytics 2 -- BigPanda の Unified Analytics ダッシュボードは、レポートを提供し、KPI
-      を追跡するので、チームは継続的に改善することができます。
-    image_url: images/BP5.png
+  - caption: BigPanda Architecture — BigPanda の Architecture では、すべての監視、変更、トポロジーデータを
+      360 度の統一されたビューで見ることができます。
+    image_url: images/958addd-arch.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -105,6 +91,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -116,7 +103,7 @@ BigPanda は、[インフラストラクチャー][5]、[ログ管理][6]、[APM
 
 Datadog マーケットプレイスでのご提供には、BigPanda プラットフォームへのアクセスが含まれています。すでに BigPanda をご利用で、インスタンスを Datadog に接続する必要があるお客様は、[インテグレーションをセットアップ][1]してください。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから BigPanda にお問い合わせください。
 

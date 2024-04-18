@@ -38,6 +38,8 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
 
+**Note**: A metric included on a Dashboard that has not been loaded by a user in the last 30 days would not be considered actively queried.
+
 {{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
 ## Configuration of multiple metrics 
@@ -138,11 +140,7 @@ For any particular tag key, you can:
 
 ## Metrics Related Assets
 
-<div class="alert alert-warning">
-Metrics Related Assets is in public beta.
-</div>
-
-{{< img src="metrics/summary/RelatedAssets.PublicBeta.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
+{{< img src="metrics/summary/related_assets_dashboards.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
 
 To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
 

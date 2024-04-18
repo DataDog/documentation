@@ -4,6 +4,9 @@ kind: documentation
 description: Learn how to use Quality Gates to enable your team to control what code makes it to production.
 is_beta: true
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "/quality_gates/search"
   tag: "Documentation"
   text: "Learn how to search for Quality Gate rules"

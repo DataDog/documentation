@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nfsstat
-oauth: {}
 public_title: Nfsstat
 short_description: nfsstat は nfsiostat-sysstat メトリクスを取得します。
 supported_os:
@@ -45,8 +44,8 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::OS & System
-  - Category::Log Collection
+  - Category::OS とシステム
+  - Category::ログの収集
   configuration: README.md#Setup
   description: nfsstat は nfsiostat-sysstat メトリクスを取得します。
   media: []

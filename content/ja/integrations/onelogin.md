@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: onelogin
-oauth: {}
 public_title: OneLogin
 short_description: OneLogin のイベントログとインテグレーションします。
 supported_os:

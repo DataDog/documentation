@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: torq
-oauth: {}
 public_title: Torq
 short_description: セキュリティチームとオペレーションチームのためのノーコード自動化
 supported_os:

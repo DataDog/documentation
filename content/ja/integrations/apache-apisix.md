@@ -43,7 +43,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: apache-apisix
-oauth: {}
 public_title: Apache APISIX
 short_description: Datadog-APISIX インテグレーション
 supported_os:

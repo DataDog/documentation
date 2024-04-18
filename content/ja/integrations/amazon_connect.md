@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_connect/
 draft: false
 git_integration_title: amazon_connect
 has_logo: true
-integration_id: amazon-connect
+integration_id: ''
 integration_title: Amazon Connect
 integration_version: ''
 is_public: true

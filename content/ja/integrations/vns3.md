@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: vns3
-oauth: {}
 public_title: VNS3
 short_description: アプリケーションの接続とセキュリティのためのクラウドネットワークアプライアンス。
 supported_os:

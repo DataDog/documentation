@@ -11,7 +11,7 @@ aliases:
 
 A frequent issue or pain point can be alert fatigue, or when alerts 'flap' (rapidly switching from an 'ok' to an 'alert' status).
 
-Your individual Datadog alerts with groups [have notification][1] rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
+There is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
 * Re-Evaluate the Alert Threshold Value
     * The easiest way to reduce flapping when the alert <-> ok or state changes are frequent could be to increase/decrease the threshold condition.
@@ -21,7 +21,7 @@ Your individual Datadog alerts with groups [have notification][1] rollups on by 
 * Reframe the query using Functions- rates, moving averages, or time-shift differentials
     * This means, you can compare the difference between a metric stream's values with the values from a week ago and set alert conditions based off the difference
     * A time-shift differential allows you to combine functions and can give a historical view as well. For example:
- abs(system.cpu.system{*} - week_before(system.cpu.system{*}))
+ `abs(system.cpu.system{*} - week_before(system.cpu.system{*}))`
     * If your metric frequently spikes, and those spikes are not inherently indicative of issues, applying a rate or average to it will allow you to set a more meaningful threshold.
 
 * Consider the states of other monitors using Composite alerts
@@ -37,7 +37,6 @@ If the issue is alert routing, [template variables][4] and the separation of **w
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/blog/alert-rollup
 [2]: /monitors/types/anomaly/
 [3]: /monitors/types/outlier/
 [4]: /monitors/notify/variables/?tab=is_alert#template-variables

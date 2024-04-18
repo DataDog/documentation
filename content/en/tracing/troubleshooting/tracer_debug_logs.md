@@ -236,6 +236,22 @@ There are two types of logs that are created in these paths:
 
 To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
+There are two options to route debug tracer logs to a file.
+
+**Option 1:**
+
+With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debug tracer logs:
+
+- **Environment variable**: `DD_TRACE_LOG_FILE`
+
+- **INI**: `datadog.trace.log_file`
+
+**Notes**: 
+  - For details about where to set `DD_TRACE_LOG_FILE`, review [Configuring the PHP Tracing Library][2].
+  - If `DD_TRACE_LOG_FILE` is not specified, logs go to the default PHP error location (See **Option 2** for more details). 
+
+**Option 2:**
+
 You can specify where PHP should put `error_log` messages either at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
 
 If you are using an Apache server, use the `ErrorLog` directive.
@@ -244,6 +260,7 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 
 
 [1]: https://www.php-fig.org/psr/psr-3
+[2]: /tracing/trace_collection/library_config/php/
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
@@ -434,26 +451,26 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 {{< programming-lang lang="php" >}}
 
+**Loading an integration:**
 
-**Generating a span:**
+Note: This log **does not** follow `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive. 
 
 ```text
-[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
 ```
 
+**Span information:**
 
-
-**Attempt to send a trace to the Agent:**
+Available starting in 0.98.0:
 
 ```text
-[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [span] Encoding span <SPAN ID>: trace_id=<TRACE ID>, name='wpdb.query', service='wordpress', resource: '<RESOURCE NAME>', type 'sql' with tags: component='wordpress'; and metrics: -
 ```
 
-
-**Trace successfully sent to the Agent:**
+**Attempting to send traces:**
 
 ```text
-[Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [info] Flushing trace of size 56 to send-queue for http://datadog-agent:8126
 ```
 
 

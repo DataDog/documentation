@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: sendmail
-oauth: {}
 public_title: Sendmail
 short_description: メールキューを監視する Sendmail インテグレーション
 supported_os:

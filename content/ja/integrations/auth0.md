@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: auth0
-oauth: {}
 public_title: Auth0
 short_description: Auth0 イベントを表示し、分析します。
 supported_os:

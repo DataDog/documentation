@@ -32,7 +32,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: datadog_operator
-oauth: {}
 public_title: Datadog Operator
 short_description: Datadog Operator を監視する
 supported_os:

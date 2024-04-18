@@ -78,12 +78,15 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 {{< site-region region="ap1" >}}
 10. `Account ID`로 `417141415827`를 입력합니다. Datadog의 계정 ID이며, Datadog에게 AWS 데이터에 대한 액세스 권한을 부여합니다.
 {{< /site-region >}}
+{{< site-region region="gov" >}}
+10. 통합하려는 AWS 계정이 GovCloud 계정인 경우 `065115117704`를 `Account ID`로 입력하고, 그렇지 않으면 `392588925713`을 입력합니다. 이는 Datadog의 계정 ID이며 Datadog에게 AWS 데이터에 대한 액세스 권한을 부여합니다.
+{{< /site-region >}}
 11. **Require external ID**를 선택하고 [외부 ID 생성](#generate-an-external-id) 섹션에 복사된 외부 ID를 입력합니다.
 `Require MFA`를 사용하지 않도록 설정하세요. 자세한 내용은 [제3자에게 AWS 리소스 액세스 권한 부여 시 외부 ID를 사용하는 방법][2] AWS 설명서를 참조하세요.
-12. **Next**를 클릭합니다.
+12.  **Next**를 클릭합니다.
 13. 정책을 이미 만든 경우 이 페이지에서 정책을 검색하고 선택합니다. 그렇지 않으면 새 창에서 열리는 **Create Policy**를 클릭하고 이전 섹션의 지침을 따릅니다.
 14. (선택 사항)<a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS 보안감사 정책</a>을 역할에 연결하여 [Cloud Security Management Misconfiguration][5]을 사용할 수 있습니다.
-15.  **Next**를 클릭합니다.
+15. **Next**를 클릭합니다.
 16. 적절한 설명과 함께 `DatadogIntegrationRole`와 같은 이름을 지정합니다.
 17. **Create Role**을 클릭합니다.
 
@@ -116,12 +119,15 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 ### Datadog
 
 3. [AWS 통합 타일][1]에서 **Add AWS Account**를 클릭한 다음 **Manually**을 선택합니다.
-4. **Access Keys (GovCloud or China Only)** 탭을 선택하세요.
+4. **Access Keys (GovCloud or China\* Only)** 탭을 선택합니다.
 5. `Account ID`, `AWS Access Key`, `AWS Secret Key`를 입력합니다. GovCloud 및 China에 대한 액세스 및 보안 키만 허용됩니다.
 6. **Save**를 클릭합니다.
-7. 데이터 수집이 시작될 때까지 최대 10분정도 기다린 후 사용할 수 있는 <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 개요 대시보드</a>를 보고 AWS 서비스 및 인프라스트럭처에서 전송된 메트릭을 확인합니다.
+7. 데이터 수집이 시작될 때까지 최대 10분 정도 기다린 후 사용 가능한 <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 개요 대시보드</a>를 통해 AWS 서비스 및 인프라스트럭처에서 전송된 메트릭을 확인합니다.
+
+\* _중국 본토에서(또는 내부 환경과 관련된) Datadog 서비스의 모든 사용에는 당사 웹사이트의 [Restricted Service Locations][2] 섹션에 게시된 면책 조항이 적용됩니다._
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
+[2]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{< /tabs >}}
 

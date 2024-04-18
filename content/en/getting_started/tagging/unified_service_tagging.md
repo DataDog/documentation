@@ -331,7 +331,7 @@ To form a single point of configuration for all telemetry emitted directly from 
    When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
-[1]: /real_user_monitoring/connect_rum_and_traces/
+[1]: /real_user_monitoring/platform/connect_rum_and_traces/
 [2]: /real_user_monitoring/browser/#setup
    {{% /tab %}}
 
@@ -420,7 +420,7 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [7]: /agent/docker/?tab=standard#optional-collection-agents
 [8]: /getting_started/tracing/
 [9]: /getting_started/logs/
-[10]: /real_user_monitoring/connect_rum_and_traces/
+[10]: /real_user_monitoring/platform/connect_rum_and_traces/
 [11]: /getting_started/synthetics/
 [12]: /integrations/statsd/
 [13]: https://www.chef.io/

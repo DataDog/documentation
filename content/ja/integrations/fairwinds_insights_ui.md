@@ -21,7 +21,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: fairwinds_insights_ui
-oauth: {}
 public_title: Fairwinds Insights
 short_description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
 supported_os:

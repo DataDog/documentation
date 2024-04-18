@@ -30,7 +30,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: terraform
-oauth: {}
 public_title: terraform
 short_description: Terraform を使用して Datadog アカウントを管理する
 supported_os:

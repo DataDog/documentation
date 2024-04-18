@@ -2,7 +2,7 @@
 categories:
 - AWS
 - クラウド
-- data store
+- data stores
 - ログの収集
 dependencies: []
 description: AWS Database Migration Service (DMS) のキーメトリクスを追跡します。
@@ -10,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_dms/
 draft: false
 git_integration_title: amazon_dms
 has_logo: true
-integration_id: amazon-dms
+integration_id: ''
 integration_title: AWS Database Migration Service (DMS)
 integration_version: ''
 is_public: true
@@ -22,15 +22,16 @@ short_description: AWS Database Migration Service (DMS) のキーメトリクス
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Database Migration Service (DMS) は、リレーショナルデータベース、データウェアハウス、NoSQL データベースなどの各種データストアの移行を簡単に行えるクラウドサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての DMS メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -39,7 +40,7 @@ AWS Database Migration Service (DMS) は、リレーショナルデータベー�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Database Migration Service` が有効になっていることを確認します。
 2. [Datadog - AWS Database Migration Service (DMS) インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -55,21 +56,21 @@ AWS Database Migration Service から S3 バケットまたは CloudWatch のい
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_dms" >}}
 
 
-### イベント
+### ヘルプ
 
 AWS Database Migration Service (DMS) インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS Database Migration Service (DMS) インテグレーションには、サービスのチェック機能は含まれません。
+AWS Database Migration Service (DMS) インテグレーションには、サービスチェックは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

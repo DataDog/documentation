@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: botprise
-oauth: {}
 public_title: Botprise
 short_description: 生成されたイベントを監視する Botprise インテグレーション
 supported_os:

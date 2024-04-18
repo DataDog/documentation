@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: exim
-oauth: {}
 public_title: Exim
 short_description: メールキューを監視する Exim インテグレーション
 supported_os:

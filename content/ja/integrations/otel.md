@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: otel
-oauth: {}
 public_title: OpenTelemetry
 short_description: OpenTelemetry コレクターからテレメトリーデータを取得
 supported_os:

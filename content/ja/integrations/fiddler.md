@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: fiddler
-oauth: {}
 public_title: Fiddler
 short_description: Fiddler Datadog インテグレーションによる ML システムの可視化
 supported_os:

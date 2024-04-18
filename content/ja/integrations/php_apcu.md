@@ -38,7 +38,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: php_apcu
-oauth: {}
 public_title: PHP APCu
 short_description: PHP APCu のメモリ内データキャッシュを監視します。
 supported_os:

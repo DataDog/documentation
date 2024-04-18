@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: amixr
-oauth: {}
 public_title: Amixr
 short_description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
 supported_os:

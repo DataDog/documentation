@@ -13,7 +13,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_efs/
 draft: false
 git_integration_title: amazon_efs
 has_logo: true
-integration_id: amazon-efs
+integration_id: ''
 integration_title: Amazon Elastic File System
 integration_version: ''
 is_public: true

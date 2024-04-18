@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: squid
-oauth: {}
 public_title: Squid
 short_description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
 supported_os:

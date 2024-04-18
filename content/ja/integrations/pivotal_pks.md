@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: pivotal_pks
-oauth: {}
 public_title: Pivotal Container Service
 short_description: Pivotal のエンタープライズレベル Kubernetes 製品
 supported_os:

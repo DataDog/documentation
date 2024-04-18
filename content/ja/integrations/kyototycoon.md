@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kyototycoon
-oauth: {}
 public_title: Kyoto Tycoon
 short_description: 取得/設定/削除操作の追跡とレプリケーションラグの監視。
 supported_os:

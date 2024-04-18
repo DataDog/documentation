@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: speedtest
-oauth: {}
 public_title: speedtest
 short_description: speedtest-cli を使用して Speedtest の結果を実行します
 supported_os:

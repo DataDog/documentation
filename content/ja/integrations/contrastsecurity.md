@@ -37,7 +37,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: contrastsecurity
-oauth: {}
 public_title: Contrast Security
 short_description: Datadog で Contrast Security から攻撃や脆弱性をチェックする
 supported_os:

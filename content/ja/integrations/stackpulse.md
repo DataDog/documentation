@@ -40,7 +40,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: stackpulse
-oauth: {}
 public_title: StackPulse
 short_description: アラートの応答を自動化し、イベントストリームでプレイブックの実行を追跡します
 supported_os:

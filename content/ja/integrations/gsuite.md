@@ -30,7 +30,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gsuite
-oauth: {}
 public_title: Google Workspace
 short_description: Google Workspace の監査およびセキュリティログを Datadog へインポート
 supported_os: []

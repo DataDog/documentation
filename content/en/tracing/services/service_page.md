@@ -96,7 +96,7 @@ Datadog provides [out-of-the-box graphs][8] for any given Service:
     * The **Latency** by Percentile (Avg/p75/p90/p95/p99/p99.9/Max latency of your traced requests) as a timeseries
     * The **Historical Latency** to compare the Latency distribution with the day and week before
     * The **Latency Distribution** over the selected timeframe
-    * The **Latency** by Status to evaluate the latency impact of an error on traced requests
+    * The **Latency** by Error to evaluate the latency impact of an error on traced requests
     * The **Apdex score** for web services; [learn more about Apdex][9]
 * Error - Choose to display:
     * The **Total amount of errors**
@@ -210,9 +210,17 @@ If runtime metrics are enabled in the tracing client, you'll see a Runtime metri
 {{< img src="tracing/visualization/service/runtime_metrics.png" alt="Runtime Metrics" style="width:90%;">}}
 
 ### Profiling
-You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service. Summary details like versions available and runtime language are at the top. Below are out-of-the-box profiling metrics by version, endpoint, and method to help you identify and debug resource-intensive methods. Click on any graph to view related traces, logs, and other data, or open a flame graph to inspect the code profile. [Learn more about APM and the Continuous Profiler][15]. 
+You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service.
 
-{{< img src="tracing/visualization/service/profiler.jpg" alt="Profiling" style="width:90%;">}}
+Use the information in the **Profiling** tab to correlate a latency and throughput change to a code performance change.
+
+In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
+
+```java
+Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
+```
+
+{{< img src="profiler/apm_service_page_pivot_to_contention_comparison.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
 
 ### Traces
 View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.

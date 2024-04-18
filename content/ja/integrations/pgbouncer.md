@@ -45,7 +45,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: pgbouncer
-oauth: {}
 public_title: PGBouncer
 short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
 supported_os:

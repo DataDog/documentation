@@ -41,7 +41,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: hasura_cloud
-oauth: {}
 public_title: Hasura Cloud
 short_description: Hasura Cloud プロジェクトを監視します
 supported_os:

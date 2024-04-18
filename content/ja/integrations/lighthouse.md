@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: lighthouse
-oauth: {}
 public_title: Lighthouse
 short_description: Google Lighthouse 監査統計
 supported_os:

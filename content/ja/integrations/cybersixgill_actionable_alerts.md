@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cybersixgill_actionable_alerts
-oauth: {}
 public_title: Cybersixgill Actionable Alerts
 short_description: アセットのアクティビティを監視し、脅威の到来をリアルタイムにアラートします
 supported_os:

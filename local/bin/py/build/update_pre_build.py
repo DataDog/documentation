@@ -97,13 +97,9 @@ class Build:
 
             except Exception as e:
                 print(e)
-                if not getenv("CI_COMMIT_REF_NAME"):
-                    print(
-                        "\x1b[33mWARNING\x1b[0m: Unsuccessful processing of {}".format(content))
-                else:
-                    print(
-                        "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
-                    raise ValueError
+                print(
+                    "\x1b[31mERROR\x1b[0m: Unsuccessful processing of {}".format(content))
+                raise ValueError
 
         # Once all the content is processed integrations are merged according to the integration_merge.yaml
         # configuration file. This needs to happen after all content is processed to avoid flacky integration merge

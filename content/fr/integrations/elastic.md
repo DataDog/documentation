@@ -49,7 +49,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: elastic
-oauth: {}
 public_title: Elasticsearch
 short_description: Surveillez le statut global d'un cluster en mesurant l'utilisation
   du tas JVM et une vaste gamme de données.

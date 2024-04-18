@@ -37,7 +37,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mapreduce
-oauth: {}
 public_title: Map Reduce
 short_description: マップのステータスと期間を監視し、タスクを削減。
 supported_os:

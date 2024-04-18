@@ -40,7 +40,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: airflow
-oauth: {}
 public_title: Airflow
 short_description: Surveillez des métriques liées à vos DAG, tâches, pools, exécuteurs,
   etc.

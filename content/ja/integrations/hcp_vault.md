@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: hcp_vault
-oauth: {}
 public_title: HCP Vault
 short_description: HCP Vault のインテグレーションにより、Vault クラスターの概要がわかります。
 supported_os:

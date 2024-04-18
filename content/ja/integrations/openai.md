@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: openai
-oauth: {}
 public_title: OpenAI
 short_description: 'OpenAI 利用の最適化: コスト見積もり、プロンプトサンプリング、パフォーマンスメトリクス。'
 supported_os:

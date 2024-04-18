@@ -22,7 +22,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: devcycle
-oauth: {}
 public_title: DevCycle
 short_description: コード通りに動作する機能フラグ
 supported_os:

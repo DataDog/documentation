@@ -139,7 +139,7 @@ Agent (v7.36.1)
 
 #### イベント
 
-Datadog UI で、イベントマネジメントページ **Service Mgmt > Event Management** に移動します。Agent が起動または再起動すると、Agent は Datadog にイベントを送信します。Agent が正常にインストールされると、以下のメッセージが表示されます。
+Datadog UI で、**Service Mgmt > Event Management** のイベント管理ページにアクセスしてください。Agent が起動または再起動すると、Agent は Datadog にイベントを送信します。Agent が正常にインストールされると、以下のメッセージが表示されます。
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>

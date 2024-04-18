@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: zebrium
-oauth: {}
 public_title: Zebrium RCaaS
 short_description: 問題の根本原因をダッシュボード上で直接発見します
 supported_os:

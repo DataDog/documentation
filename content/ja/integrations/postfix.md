@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: postfix
-oauth: {}
 public_title: Postfix
 short_description: すべての Postfix キューのサイズを監視する。
 supported_os:

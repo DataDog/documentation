@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: configcat
-oauth: {}
 public_title: ConfigCat
 short_description: Datadog により追跡する設定変更イベント
 supported_os:

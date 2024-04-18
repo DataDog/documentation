@@ -40,7 +40,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: insightfinder
-oauth: {}
 public_title: InsightFinder
 short_description: InsightFinder で DataDog からデータを統合して分析
 supported_os:

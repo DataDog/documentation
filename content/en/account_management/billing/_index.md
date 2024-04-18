@@ -35,9 +35,13 @@ For more information about IoT billing, see the [Datadog Pricing page][7].
 
 ## Plan details
 
+To manage your **Payment Method** and view **Subscription Details**, you must be a Datadog Admin user.
+
+Alternately, roles with Billing Read (`billing_read`) and Billing Edit (`billing_edit`) [permissions][8] can access this data.
+
 ### Managing your payment method
 
-The [**Payment Method**][8] section contains details on your payment options. 
+The [**Payment Method**][9] section contains details on your payment options. 
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:90%;" >}}
 
@@ -47,7 +51,7 @@ The [**Payment Method**][8] section contains details on your payment options.
 
 ### Managing your billing contact details
 
-You can view your billing contact details on the [**Billing Contact Details**][8] section. 
+You can view your billing contact details on the [**Billing Contact Details**][9] section. 
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:90%;" >}}
 
@@ -59,7 +63,7 @@ You can view your billing contact details on the [**Billing Contact Details**][8
 
 ### View your subscription details
 
-The [Subscription Details][8] section includes the quantity, contract price, and on-demand price for all committed products.
+The [Subscription Details][9] section includes the quantity, contract price, and on-demand price for all committed products.
 
 {{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage page highlighting Subscription Details section" style="width:90%;" >}}
 
@@ -73,13 +77,13 @@ There are two choices for payment method:
 
 ### Credit card
 
-If you pay by credit card, receipts are available to [Administrators][9] for previous months under [Billing History][10]. For copies of your invoice, email [Datadog billing][11].
+If you pay by credit card, receipts are available to [Administrators][10] for previous months under [Billing History][11]. For copies of your invoice, email [Datadog billing][11].
 
-See [Credit Card Billing][12] for more details.
+See [Credit Card Billing][13] for more details.
 
 ### Invoicing
 
-If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. To request an additional copy, email [Datadog billing][11]. Details on where to remit payment can be found on the invoice.
+If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. To request an additional copy, email [Datadog billing][12]. Details on where to remit payment can be found on the invoice.
 
 ## Contact
 
@@ -119,8 +123,10 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 [5]: /account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
-[8]: https://app.datadoghq.com/billing/plan
-[9]: /account_management/rbac/#datadog-default-roles
-[10]: https://app.datadoghq.com/account/billing_history
-[11]: mailto:billing@datadoghq.com
-[12]: /account_management/billing/credit_card/
+[8]: /account_management/rbac/permissions/#billing-and-usage
+[9]: https://app.datadoghq.com/billing/plan
+[10]: /account_management/rbac/#datadog-default-roles
+[11]: https://app.datadoghq.com/account/billing_history
+[12]: mailto:billing@datadoghq.com
+[13]: /account_management/billing/credit_card/
+

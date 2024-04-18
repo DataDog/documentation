@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_workspaces/
 draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
-integration_id: amazon-workspaces
+integration_id: ''
 integration_title: Amazon WorkSpaces
 integration_version: ''
 is_public: true

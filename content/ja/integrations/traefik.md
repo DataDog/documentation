@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: traefik
-oauth: {}
 public_title: Traefik
 short_description: traefik のメトリクスを収集
 supported_os:

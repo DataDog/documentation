@@ -18,7 +18,7 @@ Click <a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">here</a> t
 
 ## Getting started
 
-1. Navigate to the SLO page: [Monitors › Service Level Objectives][1]
+1. Navigate to the [SLO Manage page][1].
 
 2. Start thinking from the perspective of your user:
 
@@ -100,7 +100,7 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/slo
+[1]: https://app.datadoghq.com/slo/manage
 [2]: https://app.datadoghq.com/monitors#create/metric
 [3]: /metrics
 [4]: /integrations

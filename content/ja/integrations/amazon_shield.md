@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_shield/
 draft: false
 git_integration_title: amazon_shield
 has_logo: true
-integration_id: amazon-shield
+integration_id: ''
 integration_title: AWS Shield
 integration_version: ''
 is_public: true

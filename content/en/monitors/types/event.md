@@ -6,6 +6,9 @@ aliases :
     - /monitors/monitor_types/event
     - /monitors/create/types/event/
 further_reading:
+- link: "/service_management/events/"
+  tag: "Documentation"
+  text: "Event Management Overview"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -19,7 +22,9 @@ further_reading:
 
 ## Overview
 
-Event monitors allow you to alert on events matching a search query.
+Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations and ingest events from sources, including alert events from third parties, change requests, deployments, configuration changes.
+
+Event monitors alert on ingested events that match a search query, allowing you to focus attention on the events that matter most to your team.
 
 ## Monitor creation
 

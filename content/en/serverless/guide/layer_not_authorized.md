@@ -14,7 +14,7 @@ You can verify that a Lambda layer version exists by running `aws lambda get-lay
 For example, to verify the Datadog Extension layer and the Datadog Node.js library layer, run:
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
   --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \

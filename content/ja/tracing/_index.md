@@ -22,9 +22,6 @@ further_reading:
 - link: /tracing/guide/setting_primary_tags_to_scope/
   tag: Documentation
   text: トレースにプライマリタグとセカンダリタグを追加する
-- link: /tracing/guide/add_span_md_and_graph_it/
-  tag: Documentation
-  text: カスタムタグをスパンに追加して、パフォーマンスをフィルタリング、グループ化する
 - link: /tracing/guide/security/
   tag: Documentation
   text: トレースから PII を自動的にスクラブする

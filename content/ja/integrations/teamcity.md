@@ -48,7 +48,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: teamcity
-oauth: {}
 public_title: TeamCity
 short_description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
 supported_os:

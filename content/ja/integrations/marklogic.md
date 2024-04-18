@@ -46,7 +46,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: marklogic
-oauth: {}
 public_title: MarkLogic
 short_description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
 supported_os:

@@ -37,7 +37,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cri
-oauth: {}
 public_title: CRI
 short_description: CRI のすべてのメトリクスを Datadog で追跡
 supported_os:

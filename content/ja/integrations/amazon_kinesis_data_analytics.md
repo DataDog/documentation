@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis_data_analytics/
 draft: false
 git_integration_title: amazon_kinesis_data_analytics
 has_logo: true
-integration_id: amazon-kinesis-data-analytics
+integration_id: ''
 integration_title: Amazon Kinesis Data Analytics
 integration_version: ''
 is_public: true

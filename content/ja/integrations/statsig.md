@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: statsig
-oauth: {}
 public_title: Statsig
 short_description: Datadog で Statsig の変更を監視する
 supported_os:

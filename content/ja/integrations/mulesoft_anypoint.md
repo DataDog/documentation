@@ -54,7 +54,6 @@ legal_terms:
   eula: assets/EULA - IO Connect Services.pdf
 manifest_version: 2.0.0
 name: mulesoft_anypoint
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

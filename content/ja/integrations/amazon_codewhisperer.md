@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_codewhisperer
-oauth: {}
 public_title: Amazon CodeWhisperer
 short_description: Amazon CodeWhisperer は ML を搭載したコード提案サービスです。
 supported_os: []

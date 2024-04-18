@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_firehose/
 draft: false
 git_integration_title: amazon_firehose
 has_logo: true
-integration_id: amazon-firehose
+integration_id: ''
 integration_title: Amazon Kinesis Data Firehose
 integration_version: ''
 is_public: true

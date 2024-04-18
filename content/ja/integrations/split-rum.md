@@ -23,7 +23,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: split-rum
-oauth: {}
 public_title: Split - RUM
 short_description: Split の機能フラグで RUM データをリッチ化する
 supported_os:

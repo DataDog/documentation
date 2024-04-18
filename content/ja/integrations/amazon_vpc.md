@@ -6,7 +6,7 @@ categories:
 - ログの収集
 - ネットワーク
 dependencies: []
-description: AWS VPC ログを収集
+description: Amazon VPC ログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
 draft: false
 further_reading:
@@ -23,27 +23,28 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_vpc
 public_title: Datadog-Amazon VPC インテグレーション
-short_description: AWS VPC ログを収集
+short_description: Amazon VPC ログを収集します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Virtual Private Cloud (Amazon VPC) を使用すると、仮想ネットワーク内で AWS リソースを起動できます。VPC フローログは、VPC 内のネットワークインターフェイスを行き来する IP トラフィックに関する情報をキャプチャできる機能です。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
-`aws.vpc.flowlogs.*` 以外の AWS VPC メトリクスを収集するための追加の手順は必要ありません。`aws.vpc.flowlogs.*` で始まるメトリクスは、[Datadog VPC Flow Logs][2] インテグレーションによって生成されます。フローログメトリクスの収集を有効にする方法については、[ログ収集](#log-collection)セクションを参照してください。
+`aws.vpc.flowlogs.*` 以外の Amazon VPC メトリクスを収集するための追加の手順は必要ありません。`aws.vpc.flowlogs.*` で始まるメトリクスは、[Datadog VPC Flow Logs][2] インテグレーションによって生成されます。フローログメトリクスの収集を有効にする方法については、[ログ収集](#log-collection)セクションを参照してください。
 
 `aws.vpc.subnet.*` メトリクスについては [Datadog サポート][3]にお問い合わせいただき、お使いのアカウントでの収集を有効化してください。
 
-### ログの収集
+### 収集データ
 
 
 #### VPC フローのログの送信先リソースをAWSで探す、または作成する
@@ -87,23 +88,23 @@ S3 バケットまたは CloudWatch のロググループを保存先として�
 
 AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][8]を参照してください。
 
-## 収集データ
+## Datadog Operator
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_vpc" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS VPC インテグレーションには、イベントは含まれません。
+Amazon VPC インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS VPC インテグレーションには、サービスのチェック機能は含まれません。
+Amazon VPC インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

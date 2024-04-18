@@ -23,7 +23,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: docontrol
-oauth: {}
 public_title: DoControl
 short_description: SaaS データセキュリティ - DLP と CASB の最新化による SaaS データの安全性確保
 supported_os:

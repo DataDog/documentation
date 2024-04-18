@@ -28,7 +28,7 @@ title: 호스트 에이전트 로그 수집
 
 호스트에서 실행 중인 에이전트로 로그 수집을 활성화하려면, 에이전트의 [기본 설정 파일][4](`datadog.yaml`)에서 `logs_enabled: false`를 `logs_enabled: true`로 변경합니다.
 
- {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
+{{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
 
 Agent v6.19+/v7.19+부터는 HTTPS 전송이 기본 전송으로 사용됩니다. HTTPS/TCP 전송을 적용하는 방법에 대한 자세한 내용은 [에이전트 전송 설명서][5]를 참조하세요.
 
@@ -55,7 +55,7 @@ Datadog 에이전트 v6는 로그를 수집하여 파일, 네트워크(TCP 또�
 {{< tabs >}}
 {{% tab "Tail files" %}}
 
-`<PATH_LOG_FILE>/<LOG_FILE_NAME>.log`에 저장된 `<APP_NAME>`애플리케이션에서 로그를 수집하려면 [에이전트 설정 디렉토리][3] 루트에서 다음 내용을 포함하여  `<APP_NAME>.d/conf.yaml`파일을 생성하세요:
+`<PATH_LOG_FILE>/<LOG_FILE_NAME>.log`에 저장된 `<APP_NAME>` 애플리케이션에서 로그를 수집하려면 [Agent의 설정 디렉토리][1] 루트에서 다음 내용을 포함하여 `<APP_NAME>.d/conf.yaml` 파일을 생성하세요:
 
 ```yaml
 logs:
@@ -67,7 +67,7 @@ logs:
 
 **Windows**에서는 `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log` 경로를 사용하고 `ddagentuser` 사용자가 로그 파일에 대한 읽기 및 쓰기 권한이 있는지 확인합니다.
 
-[1]: /ko/agent/guide/agent-configuration-files/
+[1]: /ko/agent/configuration/agent-configuration-files/
 {{< /tabs >}}
 
 {{% tab "TCP/UDP" %}}
@@ -88,7 +88,7 @@ Serilog를 사용하는 경우, `Serilog.Sinks.Network`는 UDP로 연결하기 �
 
 **참고**: 에이전트는 원시 문자열, JSON 및 Syslog 형식의 로그를 지원합니다. 로그를 배치로 보내는 경우, 줄 바꿈 문자를 사용하여 로그를 구분하세요. 
 
-[1]: /ko/agent/guide/agent-configuration-files/
+[1]: /ko/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
 
@@ -102,7 +102,7 @@ logs:
 
 컨테이너화된 환경 및 단위 필터링 설정에 대한 자세한 내용은 [journald 통합][2] 문서를 참조하세요.
 
-[1]: /ko/agent/guide/agent-configuration-files/
+[1]: /ko/agent/configuration/agent-configuration-files/
 [2]: /ko/integrations/journald/
 {{% /tab %}}
 {{% tab "Windows Events" %}}
@@ -162,7 +162,7 @@ logs:
 | `exclude_paths`  | 아니요       | `type`이 **파일**이고, `path`가 와일드카드 문자를 포함하는 경우, 로그 수집에서 제외할 일치하는 파일의 목록을 표시합니다. 에이전트 버전 6.18 이상에서 사용할 수 있습니다.                                                                                                                                                                            |
 | `exclude_units`  | 아니요       | `type`이 **journald**인 경우, 제외할 특정 journald 단위의 목록을 표시합니다.                                                                                                                                                                                                                                                                                |
 | `sourcecategory` | 아니요       | 소스 속성이 속한 범주를 정의하는 데 사용되는 속성입니다, 예를 들어:  `source:postgres, sourcecategory:database` 또는 `source: apache, sourcecategory: http_web_access`입니다.                                                                                                                                                                                                                              |
-| `start_position` | 아니요       | `type`이 **파일**인 경우, 에이전트가 파일 읽기를 시작할 위치를 설정합니다. 유효한 값은 `beginning` 및 `end` (기본값: `end`)입니다. `path`에 와일드카드 문자가 포함된 경우, `beginning`이 지원되지 않습니다. _에이전트 v6.19/v7.19에 추가됨_                                                                                                            |
+| `start_position` | 아니요       | `type`이 **file**인 경우 Agent가 파일 읽기를 시작할 위치를 설정합니다. 유효한 값은 `beginning` 및 `end`(기본값: `end`)입니다. `path`에 와일드카드 문자가 포함된 경우 `beginning`은 지원되지 않습니다. _Agent v6.19/v7.19에 추가됨_ `type`이 **journald**인 경우 Agent가 저널 읽기를 시작하는 위치를 설정합니다. 유효한 값은 `beginning`, `end`, `forceBeginning` 및 `forceEnd`(기본값: `end`)입니다. `force` 옵션을 사용하면 Agent는 디스크에 저장된 커서를 무시하고 시작 시 항상 저널의 시작이나 끝부터 읽습니다. _Agent v7.38에 추가됨_                                                                                                          |
 | `encoding`       | 아니요       | `type`이 **파일**인 경우, 에이전트가 파일을 읽을 수 있도록 인코딩을 설정합니다. UTF-16 little-endian은 `utf-16-le`, UTF-16 big-endian은 `utf-16-be`, Shift JIS는 `shift-jis`로 설정합니다. 다른 값으로 설정하면, 에이전트는 파일을 UTF-8로 읽습니다. _`utf-16-le` 및 `utf-16be`는 에이전트 v6.23/v7.23에 추가됨, `shift-jis`는 에이전트 v6.34/v7.34에 추가됨_                                                                                      |
 | `tags`           | 아니요       | 수집된 각 로그에 추가된 태그 목록([태깅에 대해 자세히 알아보기][11]).                                                                                                                                                                                                                                                                             |
 
@@ -170,13 +170,13 @@ logs:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ko/agent/kubernetes/log/
 [3]: /ko/agent/docker/log/
-[4]: /ko/agent/guide/agent-configuration-files/
+[4]: /ko/agent/configuration/agent-configuration-files/
 [5]: /ko/agent/logs/log_transport/
-[6]: /ko/agent/guide/agent-commands/#restart-the-agent
-[7]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[6]: /ko/agent/configuration/agent-commands/#restart-the-agent
+[7]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [8]: /ko/tracing/
 [9]: /ko/getting_started/tagging/unified_service_tagging
 [10]: /ko/metrics/custom_metrics/#overview

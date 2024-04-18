@@ -360,6 +360,8 @@ export DD_RUNTIME_METRICS_ENABLED=true
 dotnet example.dll
 ```
 
+<div class="alert alert-info"> If you are using Alpine Linux, set the <code>CORECLR_PROFILER_PATH</code> environment variable to a path for musl based distributions: <code>linux-musl-x64/</code>.</div>
+
 #### Linux Docker container
 
 To set the required environment variables on a Linux Docker container:

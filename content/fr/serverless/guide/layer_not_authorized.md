@@ -14,7 +14,7 @@ Pour vérifier qu'une version de couche Lambda existe, exécutez `aws lambda get
 Par exemple, pour vérifier la couche d'extension Datadog et la couche de la bibliothèque Node.js Datadog, exécutez ce qui suit :
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
   --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \

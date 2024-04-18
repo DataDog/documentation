@@ -51,7 +51,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kafka
-oauth: {}
 public_title: Kafka
 short_description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
 supported_os:

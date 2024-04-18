@@ -32,6 +32,7 @@ RUM ブラウザモニタリングを設定するには、RUM アプリケーシ
 2. 変更をアプリケーションにデプロイします。実行が開始されると、ユーザーのブラウザから Datadog によってイベントが収集されます。
 3. [収集したデータ][2]を[ダッシュボード][3]で視覚化したり、[RUM エクスプローラー][16]で検索クエリを作成したりします。
 4. (オプション) Web アプリケーションやモバイルアプリケーションからのリクエストを対応するバックエンドのトレースにリンクさせたい場合は、[RUM とトレースを接続する][12]ために `allowedTracingUrls` パラメータで RUM SDK を初期化します。[初期化パラメーター](#initialization-parameters)の完全なリストを参照してください。
+5. サイトで Datadog Content Security Policy (CSP) インテグレーションを使用している場合、追加のセットアップ手順については [CSP ドキュメントの RUM セクション][22]を参照してください。
 
 Datadog がデータの受信を開始するまで、アプリケーションは **RUM Applications** ページに `pending` として表示されます。
 
@@ -46,7 +47,7 @@ CDN 非同期
 CDN 同期
 : この方法は、すべての RUM イベントを収集する場合に推奨されます。RUM ブラウザ SDK は、CDN から同期的に読み込まれるため、最初に SDK を読み込み、すべてのエラー、リソース、ユーザーアクションを収集することができます。この方法は、ページの読み込みパフォーマンスに影響を与える可能性があります。
 
-### npm
+### account_management
 
 [`@datadog/browser-rum`][4]を `package.json` ファイルに追加したら、次のコマンドを実行して初期化します。
 
@@ -1692,7 +1693,7 @@ window.DD_RUM.init({
 })
 ```
 
-## 構成
+## エクスプローラー
 
 ### 初期化パラメーター
 
@@ -1728,6 +1729,12 @@ RUM アプリケーションの ID。
 : オプション<br/>
 **型**: 文字列<br/>
 アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13。[タグの構文要件][15]に従います。
+
+`trackingConsent`
+: オプション<br/>
+**型**: `"granted"` または `"not-granted"`<br/>
+**デフォルト**: `"granted"`<br/>
+ユーザートラッキングに関する同意の初期状態を設定します。[ユーザートラッキングに関する同意][27]を参照してください。
 
 `trackViewsManually`
 : オプション<br/>
@@ -1775,6 +1782,12 @@ RUM ビューの作成を制御します。[デフォルトの RUM ビュー名�
 **デフォルト**: `0`<br/>
 [Browser RUM & セッションリプレイ料金][11]の機能を持つ追跡されたセッションの割合。`100` で全て、`0` でなし。`sessionReplaySampleRate` の詳細については、[サンプリング構成][21]を参照してください。
 
+`startSessionReplayRecordingManually`
+: オプション<br/>
+**型**: ブール値<br/>
+**デフォルト**: `false`<br/>
+セッションリプレイ用にセッションのサンプリングを行う場合、セッションの開始時ではなく、`startSessionReplayRecording()` が呼び出されてから記録を開始します。詳細については、[セッションリプレイの利用][26]を参照してください。
+
 `silentMultipleInit`
 : オプション<br/>
 **型**: ブール値 <br/>
@@ -1813,6 +1826,11 @@ SDK の実行に関するテレメトリーデータ (エラーやデバッグ�
 **型**: 文字列<br/>
 Datadog ブラウザ SDK ワーカー JavaScript ファイルを指す URL。URL は相対でも絶対でも構いませんが、Web アプリケーションと同じオリジンである必要があります。詳細は[コンテンツセキュリティポリシーガイドライン][22]を参照してください。
 
+`compressIntakeRequests`
+: オプション<br/>
+**型**: ブール値<br/>
+**デフォルト**: `false`<br/>Datadog インテークに送信されたリクエストを圧縮して、大量のデータを送信する際の帯域幅の使用量を削減します。圧縮は Worker スレッドで行われます。詳細は[コンテンツセキュリティポリシーガイドライン][22]を参照してください。
+
 `storeContextsAcrossPages`
 : オプション<br/>
 **型**: 文字列<br/>
@@ -1839,11 +1857,17 @@ Logs Browser SDK を使用している場合、一致するコンフィギュレ
 **デフォルト**: `false`<br/>
 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信される RUM イベントが無効になります。
 
-`useCrossSiteSessionCookie`
+`usePartitionedCrossSiteSessionCookie`
 : オプション<br/>
 **型**: ブール値<br/>
 **デフォルト**: `false`<br/>
-安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、RUM ブラウザ SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。
+分割された安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、RUM ブラウザ SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。
+
+`useCrossSiteSessionCookie`
+: オプション - **非推奨**<br/>
+**型**: ブール値<br/>
+**デフォルト**:`false`<br/>
+`usePartitionedCrossSiteSessionCookie` を参照してください。
 
 `allowFallbackToLocalStorage`
 : オプション<br/>
@@ -1929,26 +1953,28 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /ja/real_user_monitoring/data_collected/
-[3]: /ja/real_user_monitoring/dashboards/
+[3]: /ja/real_user_monitoring/platform/dashboards/
 [4]: https://www.npmjs.com/package/@datadog/browser-rum
 [5]: /ja/account_management/api-app-keys/#client-tokens
 [6]: /ja/real_user_monitoring/browser/tracking_user_actions
 [7]: /ja/real_user_monitoring/guide/proxy-rum-data/
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [9]: /ja/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[10]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[10]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[12]: /ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[12]: /ja/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [13]: /ja/real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
 [14]: /ja/getting_started/site/
 [15]: /ja/getting_started/tagging/#define-tags
 [16]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
-[17]: /ja/real_user_monitoring/session_replay/
-[18]: /ja/real_user_monitoring/session_replay/privacy_options
+[17]: /ja/real_user_monitoring/session_replay/browser/
+[18]: /ja/real_user_monitoring/session_replay/browser/privacy_options
 [19]: /ja/getting_started/tagging/using_tags
-[20]: /ja/real_user_monitoring/frustration_signals/
+[20]: /ja/real_user_monitoring/browser/frustration_signals/
 [21]: /ja/real_user_monitoring/guide/sampling-browser-plans/
 [22]: /ja/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [23]: /ja/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
-[24]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/modifying_data_and_context#contexts-life-cycle
+[24]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+[26]: /ja/real_user_monitoring/session_replay/browser/#usage
+[27]: /ja/real_user_monitoring/browser/advanced_configuration/#user-tracking-consent

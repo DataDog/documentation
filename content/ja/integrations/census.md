@@ -19,6 +19,7 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10336
     source_type_name: Census
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.getcensus.com/
   name: Census
@@ -38,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: census
-oauth: {}
 public_title: Census
 short_description: Census 同期のメトリクスとイベントを Datadog に送信します。
 supported_os:

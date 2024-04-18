@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: perimeterx
-oauth: {}
 public_title: PerimeterX
 short_description: PerimeterX のログとメトリクスを Datadog と統合
 supported_os:

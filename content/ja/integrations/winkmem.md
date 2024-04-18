@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: winkmem
-oauth: {}
 public_title: Windows Kernel Memory
 short_description: Windows カーネルのメモリ割り当てを監視します。
 supported_os:

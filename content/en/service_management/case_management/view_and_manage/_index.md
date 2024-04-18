@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
 
 On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. 
 
@@ -60,7 +60,7 @@ To create a custom view:
 
 ## Case details
 
-{{< img src="/service_management/case_management/case_detail_view.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
+{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
 
 The Case Details page acts as the single source of truth on what is going on with the investigation. Each case has the following properties: 
 

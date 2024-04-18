@@ -8,7 +8,7 @@ categories:
     - log collection
 doc_link: /integrations/nxlog/
 aliases:
-    - logs/log_collection/nxlog
+    - /logs/log_collection/nxlog
 has_logo: true
 integration_title: nxlog
 is_public: true

@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: apollo
-oauth: {}
 public_title: Apollo
 short_description: GraphQL インフラストラクチャーのパフォーマンスを監視
 supported_os:

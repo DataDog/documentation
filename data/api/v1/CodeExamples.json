@@ -509,6 +509,11 @@
   "UpdateGCPIntegration": [
     {
       "group": "gcp_integration",
+      "suffix": "_3544259255",
+      "description": "Update a GCP integration cloud run revision filters returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
       "suffix": "",
       "description": "Update a GCP integration returns \"OK\" response"
     }
@@ -775,6 +780,11 @@
       "group": "synthetics",
       "suffix": "_2472747642",
       "description": "Create an API test with WEBSOCKET subtype returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1241981394",
+      "description": "Create an API test with a file payload returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",

@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: zscaler
-oauth: {}
 public_title: Zscaler
 short_description: Zscaler とのインテグレーションにより、クラウドセキュリティログを提供
 supported_os:

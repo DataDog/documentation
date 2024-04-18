@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tcp_check
-oauth: {}
 public_title: TCP チェック
 short_description: リモートホストへの TCP 接続を監視
 supported_os:
@@ -47,7 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Network
+  - Category::ネットワーク
   - Category::Web
   configuration: README.md#Setup
   description: リモートホストへの TCP 接続を監視

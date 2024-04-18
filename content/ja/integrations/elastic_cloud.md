@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: elastic_cloud
-oauth: {}
 public_title: Elastic Cloud
 short_description: Elastic Cloud でホストされている Elasticsearch サービスのメトリクスモニターです。
 supported_os: []

@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: algorithmia
-oauth: {}
 public_title: Algorithmia
 short_description: 本番環境の機械学習モデルのメトリクスを監視
 supported_os:

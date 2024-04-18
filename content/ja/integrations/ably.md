@@ -23,6 +23,7 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10340
     source_type_name: Ably
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://ably.com
   name: Ably
@@ -43,7 +44,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ably
-oauth: {}
 public_title: Ably
 short_description: Ably メトリクスの収集とグラフ化
 supported_os:

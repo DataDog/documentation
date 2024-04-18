@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: rigor
-oauth: {}
 public_title: Rigor
 short_description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
 supported_os:

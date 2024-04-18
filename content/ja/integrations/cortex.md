@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cortex
-oauth: {}
 public_title: Cortex
 short_description: Cortex ダッシュボードから直接 Datadog インシデントを作成
 supported_os:

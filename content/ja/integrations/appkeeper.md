@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: appkeeper
-oauth: {}
 public_title: AppKeeper
 short_description: Datadog からのアラートに基づき Appkeeper でサービスを再起動
 supported_os:

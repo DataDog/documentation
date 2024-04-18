@@ -5,8 +5,8 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 30
 aliases:
-  - continuous_integration/intelligent_test_runner/python/
-  - continuous_integration/intelligent_test_runner/setup/python/
+  - /continuous_integration/intelligent_test_runner/python/
+  - /continuous_integration/intelligent_test_runner/setup/python/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -38,6 +38,18 @@ Intelligent Test Runner is only supported in the following versions and testing 
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
+
+### Required dependencies
+
+The Intelligent Test Runner requires the [`coverage` package][2].
+
+Install the package in your CI test environment by specifying it in the relevant requirements file, for example, or using `pip`:
+
+{{< code-block lang="shell" >}}
+pip install coverage
+{{< /code-block >}}
+
+See [known limitations](#known-limitations) if you are already using the `coverage` package or a plugin like `pytest-cov`.
 
 ## Running tests with the Intelligent Test Runner enabled
 

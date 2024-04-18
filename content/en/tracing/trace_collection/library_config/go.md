@@ -140,6 +140,13 @@ Added in version 1.54.0. Only compatible with the Datadog Agent 7.26.0+.
 Enable client IP collection from relevant IP headers in HTTP request spans.
 Added in version 1.47.0
 
+`DD_TRACE_HEADER_TAGS`
+: **Default**: `null` <br>
+List of comma-separated HTTP headers to be used as span tags. Optionally specify a "mapped" field to rename the request header as a tag. Configuration can be set globally with this environment variable, or at the integration level using the options specified in the [Go documentation][15]. This feature is compatible with [HTTP1][16] headers.<br>
+**Examples:**<br>
+  - Capture request header `my-header`: `"DD_TRACE_HEADER_TAGS=my-header"`
+  - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
+  - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
 
 ## Configure APM environment name
 
@@ -161,3 +168,5 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [9]: https://github.com/openzipkin/b3-propagation
 [13]: /agent/configuration/network/#configure-ports
 [14]: https://github.com/w3c/trace-context
+[15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2

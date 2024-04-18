@@ -9,9 +9,6 @@ further_reading:
 - link: /tracing/guide/apm_dashboard/
   tag: 4 分
   text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-- link: /tracing/guide/add_span_md_and_graph_it/
-  tag: 7 分
-  text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
@@ -74,7 +71,6 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
     マップ上の各サービスの色分けは、緑色はすべてのモニターが正常、黄色は 2 つ以上のモニターで警告があるがアラートはなし、赤は 2 つ以上のモニターでアラートあり、灰色はモニター設定なし、という状態を示しています。
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 

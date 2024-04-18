@@ -31,12 +31,11 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: 外部 DNS
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: external_dns
-oauth: {}
 public_title: 外部 DNS
 short_description: 外部 DNS のすべてのメトリクスを Datadog で追跡
 supported_os:

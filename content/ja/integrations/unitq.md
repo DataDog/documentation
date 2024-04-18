@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: unitq
-oauth: {}
 public_title: unitQ
 short_description: ユーザーの声を品質向上に役立てます。
 supported_os:

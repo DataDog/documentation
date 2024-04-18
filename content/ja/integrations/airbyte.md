@@ -44,7 +44,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: airbyte
-oauth: {}
 public_title: Airbyte
 short_description: Airbyte のデプロイの状態を監視します。
 supported_os:

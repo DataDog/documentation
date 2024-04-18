@@ -12,7 +12,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_waf/
 draft: false
 git_integration_title: amazon_waf
 has_logo: true
-integration_id: amazon-waf
+integration_id: ''
 integration_title: AWS WAF
 integration_version: ''
 is_public: true

@@ -14,6 +14,9 @@ further_reading:
 - link: agent/configuration/proxy
   tag: Documentation
   text: Configuration de l'Agent pour un proxy
+- link: https://www.datadoghq.com/blog/datadog-fips-enabled-agent/
+  tag: Blog
+  text: Surveiller des workloads hautement régulés avec l'Agent FIPS de Datadog
 kind: Guide
 title: Conformité de Datadog à la norme FIPS
 ---

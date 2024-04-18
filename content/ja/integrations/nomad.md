@@ -40,7 +40,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nomad
-oauth: {}
 public_title: Nomad
 short_description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
 supported_os:

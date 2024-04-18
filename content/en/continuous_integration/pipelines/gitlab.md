@@ -10,9 +10,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and metrics"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
 {{< site-region region="gov" >}}
@@ -40,7 +40,7 @@ further_reading:
 
 - **Custom pre-defined tags**: Configure [custom tags][10] to all generated pipeline, stages, and job spans
 
-- **Custom tags and metrics at runtime**: Configure [custom tags][13] and metrics at runtime
+- **Custom tags and measures at runtime**: Configure [custom tags][13] and measures at runtime
 
 - **Parameters**: Set custom `env` or `service` parameters
 
@@ -190,13 +190,23 @@ These filters can also be applied through the facet panel on the left hand side 
 
 If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
 For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
-[registering a new runner][6]. For existing runners, add tags by updating the runner's `config.toml`. Or add tags
+[registering a new runner][6]. For existing runners:
+
+{{< tabs >}}
+{{% tab "GitLab &gt;&equals; 15.8" %}}
+Add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+{{% /tab %}}
+
+{{% tab "GitLab &lt; 15.8" %}}
+Add tags by updating the runner's `config.toml`. Or add tags
 through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+{{% /tab %}}
+{{< /tabs >}}
 
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
 view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 
-<div class="alert alert-info"><strong>Note</strong>: Infrastructure metrics are not supported with autoscaler GitLab runner executors.</div>
+CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
 
 
 ### View error messages for pipeline failures
@@ -268,8 +278,9 @@ To enable collection of job logs:
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 15.3" %}}
-<div class="alert alert-info"><strong>Note</strong>: Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
-The storage must not have network restrictions, such as an IP range allowlist.</div>
+<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+This means that for Datadog servers to access the storage, the storage must not have network restrictions
+The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
 1. Click **Enable job logs collection** checkbox in the GitLab integration under **Settings > Integrations > Datadog**.
 2. Click **Save changes**.
@@ -277,6 +288,10 @@ The storage must not have network restrictions, such as an IP range allowlist.</
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
+<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+This means that for Datadog servers to access the storage, the storage must not have network restrictions
+The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
+
 1. Enable the `datadog_integration_logs_collection` [feature flag][1] in your GitLab. This allows you to see the **Enable job logs collection** checkbox in the GitLab integration under **Settings > Integrations > Datadog**.
 2. Click **Enable job logs collection**.
 3. Click **Save changes**.
@@ -302,8 +317,9 @@ The storage must not have network restrictions, such as an IP range allowlist.</
 [10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
 [12]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
-[13]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[13]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
 [16]: /account_management/teams/
 [17]: /logs/log_configuration/processors/
+[18]: /continuous_integration/guides/infrastructure_metrics_with_gitlab

@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: systemd
-oauth: {}
 public_title: Systemd
 short_description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
 supported_os:

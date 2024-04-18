@@ -27,7 +27,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: pagerduty_ui
-oauth: {}
 public_title: PagerDuty UI
 short_description: Datadog のダッシュボードから PagerDuty のインシデントを監視する
 supported_os:

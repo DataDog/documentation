@@ -209,13 +209,13 @@ More information and additional parameters can be found in the [macro documentat
         }
     }
     ```
-1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
+1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are {{< latest-lambda-layer-version layer="python-versions" >}}. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. If your Lambda function is configured to use code signing, add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1].
 
@@ -334,10 +334,10 @@ arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
+The available `RUNTIME` options are {{< latest-lambda-layer-version layer="python-versions" >}}. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 ```
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][9] before you can add the Datadog Lambda library as a layer.
@@ -384,7 +384,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your function's log g
 
 ### Tag
 
-Although it's optional, Datadog recommends tagging you serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][2].
+Although it's optional, Datadog recommends tagging your serverless applications with the `env`, `service`, and `version` tags following the [unified service tagging documentation][2].
 
 ## Explore
 

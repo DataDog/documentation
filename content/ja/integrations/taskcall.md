@@ -1,7 +1,8 @@
 ---
 app_id: taskcall
 app_uuid: dd54da03-0a8c-4796-aaa6-61eeb04e611b
-assets: {}
+assets:
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://taskcallapp.com
   name: TaskCall
@@ -25,7 +26,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: taskcall
-oauth: {}
 public_title: TaskCall
 short_description: TaskCall による Datadog インシデントの監視と一元化
 supported_os:

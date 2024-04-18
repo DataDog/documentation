@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: jmeter
-oauth: {}
 public_title: JMeter
 short_description: Apache JMeter 用 Datadog プラグイン
 supported_os:

@@ -269,7 +269,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 
 #### Cost and observability correlation
 
-Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top AWS products to simplify correlating observability and cost metrics. 
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top AWS products to simplify correlating observability and cost metrics.
 
 For example, to view cost and utilization for each RDS database, you can make a table with `aws.cost.amortized`, `aws.rds.cpuutilization`, and `aws.rds.freeable_memory` (or any other RDS metric) and group by `dbinstanceidentifier`. Or, to see Lambda usage and costs side by side, you can graph `aws.lambda.concurrent_executions` and `aws.cost.amortized` grouped by `functionname`.
 
@@ -303,7 +303,12 @@ _Requires [container cost allocation][11], and applies only to `shared.resources
 Finally, all of your [tag pipeline][15] rulesets are applied, providing complete cost allocation when infrastructure tagging is not possible.
 
 ## Billing conductor
-Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
+[AWS Billing Conductor][16] is a custom billing service for AWS Marketplace Channel Partners (Partners) and organizations that have chargeback requirements.
+Billing Conductor enables customers to create a second, pro forma version of their costs to share with their customers or account owners.
+Billing rates, credits and fees, and overhead costs can be customized at your discretion. You can also select which accounts to include in the CUR.
+
+_Pro Forma Cost and Usage Reports do not include discounts and taxes, which makes it difficult to compare costs in Datadog to AWS Cost Explorer.
+Additionally, adding accounts to a billing group impacts how Reservations and Savings Plans are shared across AWS accounts._
 
 To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][8]. Ensure the CUR meets [Datadog's requirements][9].
 After the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
@@ -326,3 +331,4 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [13]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
 [15]: https://docs.datadoghq.com/cloud_cost_management/tag_pipelines
+[16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html

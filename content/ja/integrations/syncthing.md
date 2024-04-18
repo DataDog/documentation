@@ -45,7 +45,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: syncthing
-oauth: {}
 public_title: Syncthing
 short_description: Syncthing インスタンスからの全体的な統計情報を追跡
 supported_os:

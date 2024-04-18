@@ -4,6 +4,9 @@ further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
   text: "Setting Up the OpenTelemetry Collector"
+- link: "/opentelemetry/otlp_ingest_in_the_agent/"
+  tag: "Documentation"
+  text: "OTLP Ingestion by the Datadog Agent"
 ---
 
 ## Overview
@@ -186,6 +189,9 @@ Span ID:
 Flags: 0
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/otlp.yaml

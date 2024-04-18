@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nextcloud
-oauth: {}
 public_title: Nextcloud
 short_description: Nextcloud インスタンスからの総合的な統計を追跡
 supported_os:

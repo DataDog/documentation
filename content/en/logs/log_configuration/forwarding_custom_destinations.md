@@ -34,7 +34,7 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 ## Set up log forwarding to custom destinations
 
-1. Add webhook IPs from the [IP ranges list][3] to the allowlist.
+1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
 2. Navigate to [Log Forwarding][4]. Alternatively, go to **Logs** > **Configuration** and click the **Log Forwarding** tab.
 3. Select **Custom Destinations**.
 4. Click **New Destination**.
@@ -107,6 +107,5 @@ On the [Log Forwarding][4] page, hover over the status for a destination to see 
 
 [1]: /logs/log_configuration/pipelines/
 [2]: /account_management/rbac/permissions/?tab=ui#log-management
-[3]: https://ip-ranges.datadoghq.com/
 [4]: https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations
 [5]: /logs/explorer/search_syntax/

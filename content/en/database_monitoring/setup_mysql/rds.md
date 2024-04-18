@@ -322,7 +322,7 @@ spec:
     name: mysql
 ```
 
-The Cluster Agent automatically registers this configuration and begin running the MySQL check.
+The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 

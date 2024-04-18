@@ -22,7 +22,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: apptrail
-oauth: {}
 public_title: Apptrail
 short_description: Apptrail を使用して、すべての SaaS 監査ログを監視、分析、および警告する
 supported_os:

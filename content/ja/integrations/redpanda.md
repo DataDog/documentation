@@ -38,7 +38,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: redpanda
-oauth: {}
 public_title: Redpanda
 short_description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
 supported_os:

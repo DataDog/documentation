@@ -431,4 +431,5 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html
 [18]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#create-and-provide-a-secret-that-contains-your-datadog-api-and-app-keys
-[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html
+[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-profiles.html
+

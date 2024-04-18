@@ -44,7 +44,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: powerdns_recursor
-oauth: {}
 public_title: Power DNS Recursor
 short_description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
 supported_os:

@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: puma
-oauth: {}
 public_title: Puma
 short_description: Ruby および Rack のための高速コンカレントウェブサーバー
 supported_os:

@@ -194,13 +194,13 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
    - **Python**
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
           arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
@@ -210,19 +210,19 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
    - **Node**
        ``` sh
        # Use this format for AWS commercial regions
-         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
 
          # Use this format for AWS GovCloud regions
-         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
          ```
-         `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 런타임 옵션은 `Node12-x`, `Node14-x`, `Node16-x`, `Node18-x`입니다.
+         `<AWS_REGION>`을 `us-east-1`와 같은 유효한 AWS 리전으로 변경하세요. 사용 가능한 RUNTIME 옵션은 {{< latest-lambda-layer-version layer="node-versions" >}}입니다.
 
    - **Java**: Lambda가 배포된 위치에 따라 다음 형식 중 하나의 ARN을 사용해 Lambda 함수의 [레이어를 구성][1]하세요. `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 바꾸세요.
      ```sh
      # In AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:8
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      # In AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      ```
    - **Go**: Go 트레이서는 레이어에 의존하지 않고 일반 Go 모듈입니다. 다음으로 최신 버전으로 업그레이드할 수 있습니다.
      ```sh
@@ -231,24 +231,24 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
    - **.NET**: Lambda가 배포된 위치에 따라 다음 형식 중 하나의 ARN을 사용해 Lambda 함수의 [레이어를 구성][1]하세요. `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 바꾸세요.
      ```sh
      # x86-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:6
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:6
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # x86-based Lambda in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda  in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      ```
 2. 다음 형식 중 하나의 ARN을 사용해 Lambda 함수의 레이어를 구성하여 Datadog Lambda Extension을 설치합니다. `<AWS_REGION>`를 `us-east-1`와 같은 유효 AWS 리전으로 바꾸세요.
    ```sh
    # x86-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:36
+   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:36
+   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    # x86-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    ```
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 {{< /site-region >}}
@@ -258,36 +258,37 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
    - **Python**
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
           ```
-          `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 `RUNTIME` 옵션은 `Python37`, `Python38`, `Python39`, `Python310`, `Python311`입니다.
+         `<AWS_REGION>`을 `us-east-1`와 같은 유효한 AWS 리전으로 변경하세요. 사용 가능한 `RUNTIME` 옵션은 {{< latest-lambda-layer-version layer="python-versions" >}}입니다.
+.
 
    - **Node**
        ``` sh
        # Use this format for AWS commercial regions
-         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
 
          # Use this format for AWS GovCloud regions
-         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
          ```
-         `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 런타임 옵션은 `Node12-x`, `Node14-x`, `Node16-x`, `Node18-x`입니다.
+         `<AWS_REGION>`을 `us-east-1`와 같은 유효한 AWS 리전으로 변경하세요. 사용 가능한 RUNTIME 옵션은 {{< latest-lambda-layer-version layer="node-versions" >}}입니다.
 
 
    - **Java**: Lambda가 배포된 위치에 따라 다음 형식 중 하나의 ARN을 사용해 Lambda 함수의 [레이어를 구성][1]하세요. `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 바꾸세요.
      ```sh
      # In AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:8
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      # In AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      ```
    - **Go**: Go 트레이서는 레이어에 의존하지 않고 일반 Go 모듈입니다. 다음으로 최신 버전으로 업그레이드할 수 있습니다.
      ```sh
@@ -296,24 +297,24 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
    - **.NET**: Lambda가 배포된 위치에 따라 다음 형식 중 하나의 ARN을 사용해 Lambda 함수의 [레이어를 구성][1]하세요. `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 바꾸세요.
      ```sh
      # x86-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:6
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:6
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # x86-based Lambda in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda  in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      ```
 2. 다음 형식 중 하나의 ARN을 사용해 Lambda 함수의 레이어를 구성하여 Datadog Lambda Extension을 설치합니다. `<AWS_REGION>`를 `us-east-1`와 같은 유효 AWS 리전으로 바꾸세요.
    ```sh
    # x86-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:36
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:36
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    # x86-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    ```
 
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
@@ -332,7 +333,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
     - **Python**: 함수 핸들러를 `datadog_lambda.handler.handler`로 설정하세요.
        - 또 환경 변수 `DD_LAMBDA_HANDLER`를 `myfunc.handler`와 같은 원래 핸들러로 설정합니다.
 
-5. 함수를 다시 배포하고 호출합니다. 몇 분 후에 [ASM 화면][3]에 표시됩니다.
+5. 함수를 다시 배포하고 호출합니다. 몇 분 후에 [ASM 보기][3]에 표시됩니다.
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
@@ -380,7 +381,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
    ```
 
-   [수동 트레이서 계측 방법][1]에 안내된 대로 애플리케이션에 바로 Datadog 트레이서 라이브러리를 설치하는 경우에는 이 단계를 건너뛰세요. 
+   [수동 트레이서 계측 방법][1]에 안내된 대로 애플리케이션에 바로 Datadog 트레이서 라이브러리를 설치하는 경우에는 이 단계를 건너뛰세요.
 
 3. (선택사항) Datadog 태그를 추가합니다.
 
@@ -458,7 +459,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ```dockerfile
    RUN pip install --target /dd_tracer/python/ ddtrace
    ```
-   [수동 트레이서 계측 방법][1]에 안내된 대로 애플리케이션에 바로 Datadog 트레이서 라이브러리를 설치하는 경우에는 이 단계를 건너뛰세요. 
+   [수동 트레이서 계측 방법][1]에 안내된 대로 애플리케이션에 바로 Datadog 트레이서 라이브러리를 설치하는 경우에는 이 단계를 건너뛰세요.
 
 3. (선택사항) Datadog 태그를 추가합니다.
    ```dockerfile
@@ -680,7 +681,7 @@ CMD ["dotnet", "helloworld.dll"]
    ```dockerfile
    COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
    ```
-   [수동 트레이서 계측 방법][1]에 안내된 대로 애플리케이션에 바로 Datadog 트레이서 라이브러리를 설치하는 경우에는 이 단계를 건너뛰세요. 
+   [수동 트레이서 계측 방법][1]에 안내된 대로 애플리케이션에 바로 Datadog 트레이서 라이브러리를 설치하는 경우에는 이 단계를 건너뛰세요.
 
 3. (선택사항) Datadog 태그를 추가합니다.
    ```dockerfile
@@ -848,7 +849,7 @@ CMD php-fpm; nginx -g daemon off;
    ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
    RUN php /datadog-setup.php --php-bin=all
    ```
-   [수동 트레이서 계측 방법][1]에 안내된 대로 애플리케이션에 바로 Datadog 트레이서 라이브러리를 설치하는 경우에는 이 단계를 건너뛰세요. 
+   [수동 트레이서 계측 방법][1]에 안내된 대로 애플리케이션에 바로 Datadog 트레이서 라이브러리를 설치하는 경우에는 이 단계를 건너뛰세요.
 
 3. (선택사항) Datadog 태그를 추가합니다.
    ```dockerfile
