@@ -14,17 +14,17 @@ main:
   - name: Application Performance
     identifier: apm_heading
     weight: 5000000
+  - name: Digital Experience
+    identifier: digital_experience_heading
+    weight: 6000000
   - name: Software Delivery
     identifier: software_delivery_heading
-    weight: 6000000
-  - name: Log Management
-    identifier: log_management_heading
     weight: 7000000
   - name: Security
     identifier: security_platform_heading
     weight: 8000000
-  - name: Digital Experience
-    identifier: digital_experience_heading
+  - name: Log Management
+    identifier: log_management_heading
     weight: 9000000
   - name: Administration
     identifier: administration_heading
@@ -1098,7 +1098,7 @@ main:
     identifier: watchdog_top_level
     pre: watchdog
     parent: platform_heading
-    weight: 10000
+    weight: 60000
   - name: Alerts
     url: watchdog/alerts
     identifier: watchdog_alerts
@@ -1129,7 +1129,7 @@ main:
     pre: bits-ai
     identifier: bits_ai
     parent: platform_heading
-    weight: 20000
+    weight: 70000
   - name: Getting Started
     url: bits_ai/getting_started
     identifier: bits_ai_getting_started
@@ -1150,7 +1150,7 @@ main:
     pre: dashboard
     identifier: dashboards
     parent: platform_heading
-    weight: 30000
+    weight: 10000
   - name: Configure
     identifier: dashboards_configure
     url: dashboards/configure/
@@ -1266,164 +1266,12 @@ main:
     parent: dashboards
     identifier: dashboards_guides
     weight: 11
-  - name: Infrastructure
-    url: infrastructure/
-    identifier: infrastructure
-    pre: host-map
-    parent: platform_heading
-    weight: 40000
-  - name: Host and Container Maps
-    url: infrastructure/hostmap/
-    parent: infrastructure
-    weight: 1
-    identifier: infrastructure_host_map
-  - name: Infrastructure List
-    identifier: infrastructure_list
-    url: infrastructure/list/
-    parent: infrastructure
-    weight: 2
-  - name: Containers View
-    url: infrastructure/containers/
-    parent: infrastructure
-    identifier: infrastructure_livecontainers
-    weight: 3
-  - name: Configuration
-    url: infrastructure/containers/configuration
-    parent: infrastructure_livecontainers
-    identifier: infrastructure_livecontainers_configuration
-    weight: 301
-  - name: Container Images View
-    url: infrastructure/containers/container_images
-    parent: infrastructure_livecontainers
-    identifier: infrastructure_livecontainers_container_images
-    weight: 302
-  - name: Orchestrator Explorer
-    url: infrastructure/containers/orchestrator_explorer
-    parent: infrastructure_livecontainers
-    identifier: infrastructure_livecontainers_explorer
-    weight: 303
-  - name: Kubernetes Resource Utilization
-    url: infrastructure/containers/kubernetes_resource_utilization
-    parent: infrastructure_livecontainers
-    identifier: infrastructure_livecontainers_resource_utilization
-    weight: 304
-  - name: Processes View
-    url: infrastructure/process/
-    parent: infrastructure
-    identifier: infrastructure_process
-    weight: 4
-  - name: Increase Process Retention
-    identifier: infrastructure_process_increase_process_retention
-    url: infrastructure/process/increase_process_retention/
-    parent: infrastructure_process
-    weight: 401
-  - name: Resource Catalog
-    url: infrastructure/resource_catalog/
-    parent: infrastructure
-    identifier: infrastructure_resource_catalog
-    weight: 5
-  - name: Cloud Resources Schema
-    url: infrastructure/resource_catalog/schema/
-    parent: infrastructure_resource_catalog
-    identifier: infrastructure_resource_catalog_schema
-    weight: 501
-  - name: Metrics
-    url: metrics/
-    identifier: metrics_top_level
-    pre: metric
-    parent: platform_heading
-    weight: 50000
-  - name: Custom Metrics
-    url: metrics/custom_metrics/
-    parent: metrics_top_level
-    identifier: metrics_custom_metrics
-    weight: 1
-  - name: Metric Type Modifiers
-    url: metrics/custom_metrics/type_modifiers/
-    parent: metrics_custom_metrics
-    identifier: metrics_modifiers
-    weight: 101
-  - name: Historical Metrics Ingestion
-    url: metrics/custom_metrics/historical_metrics/
-    parent: metrics_custom_metrics
-    identifier: metrics_historical_metrics
-    weight: 102
-  - name: 'Submission - Agent Check '
-    url: metrics/custom_metrics/agent_metrics_submission/
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_agent
-    weight: 103
-  - name: Submission - DogStatsD
-    url: metrics/custom_metrics/dogstatsd_metrics_submission/
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_dogstatsd
-    weight: 104
-  - name: Submission - Powershell
-    url: metrics/custom_metrics/powershell_metrics_submission
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_powershell
-    weight: 105
-  - name: 'Submission - API '
-    url: api/latest/metrics/#submit-metrics
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_api
-    weight: 106
-  - name: Send OpenTelemetry Metrics to Datadog
-    url: opentelemetry/otel_metrics/
-    parent: metrics_top_level
-    identifier: metrics_otel
-    weight: 2
-  - name: OTLP Metric Types
-    url: metrics/open_telemetry/otlp_metric_types
-    parent: metrics_otel
-    identifier: metrics_otlp_types
-    weight: 201
-  - name: Metrics Types
-    url: metrics/types/
-    parent: metrics_top_level
-    identifier: metrics_types
-    weight: 3
-  - name: Distributions
-    url: metrics/distributions/
-    parent: metrics_top_level
-    identifier: metrics_distributions
-    weight: 4
-  - name: Explorer
-    url: metrics/explorer/
-    parent: metrics_top_level
-    identifier: metrics_explorer
-    weight: 5
-  - name: Metrics Units
-    identifier: metrics_units
-    url: metrics/units/
-    parent: metrics_explorer
-    weight: 501
-  - name: Summary
-    identifier: metrics_summary
-    url: metrics/summary/
-    parent: metrics_top_level
-    weight: 6
-  - name: Advanced Filtering
-    url: metrics/advanced-filtering/
-    parent: metrics_top_level
-    identifier: metrics_advanced_filtering
-    weight: 7
-  - name: Metrics Without Limits™
-    identifier: metrics_without_limits
-    url: metrics/metrics-without-limits/
-    parent: metrics_top_level
-    weight: 8
-  - name: Guides
-    url: metrics/guide
-    parent: metrics_top_level
-    identifier: metrics_guide
-    weight: 9
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 60000
+    weight: 20000
   - name: Guides
     url: notebooks/guide
     parent: notebooks
@@ -1434,7 +1282,7 @@ main:
     pre: monitor
     identifier: alerting
     parent: platform_heading
-    weight: 70000
+    weight: 30000
   - name: Configure Monitors
     url: monitors/configuration/
     parent: alerting
@@ -1610,6 +1458,210 @@ main:
     weight: 7
     parent: alerting
     identifier: alerting_guide
+  - name: Infrastructure
+    url: infrastructure/
+    identifier: infrastructure
+    pre: host-map
+    parent: platform_heading
+    weight: 40000
+  - name: Host and Container Maps
+    url: infrastructure/hostmap/
+    parent: infrastructure
+    weight: 1
+    identifier: infrastructure_host_map
+  - name: Infrastructure List
+    identifier: infrastructure_list
+    url: infrastructure/list/
+    parent: infrastructure
+    weight: 2
+  - name: Containers View
+    url: infrastructure/containers/
+    parent: infrastructure
+    identifier: infrastructure_livecontainers
+    weight: 3
+  - name: Configuration
+    url: infrastructure/containers/configuration
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_configuration
+    weight: 301
+  - name: Container Images View
+    url: infrastructure/containers/container_images
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_container_images
+    weight: 302
+  - name: Orchestrator Explorer
+    url: infrastructure/containers/orchestrator_explorer
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_explorer
+    weight: 303
+  - name: Kubernetes Resource Utilization
+    url: infrastructure/containers/kubernetes_resource_utilization
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_resource_utilization
+    weight: 304
+  - name: Processes View
+    url: infrastructure/process/
+    parent: infrastructure
+    identifier: infrastructure_process
+    weight: 4
+  - name: Increase Process Retention
+    identifier: infrastructure_process_increase_process_retention
+    url: infrastructure/process/increase_process_retention/
+    parent: infrastructure_process
+    weight: 401
+  - name: Resource Catalog
+    url: infrastructure/resource_catalog/
+    parent: infrastructure
+    identifier: infrastructure_resource_catalog
+    weight: 5
+  - name: Cloud Resources Schema
+    url: infrastructure/resource_catalog/schema/
+    parent: infrastructure_resource_catalog
+    identifier: infrastructure_resource_catalog_schema
+    weight: 501
+  - name: Metrics
+    url: metrics/
+    identifier: metrics_top_level
+    pre: metric
+    parent: platform_heading
+    weight: 50000
+  - name: Custom Metrics
+    url: metrics/custom_metrics/
+    parent: metrics_top_level
+    identifier: metrics_custom_metrics
+    weight: 1
+  - name: Metric Type Modifiers
+    url: metrics/custom_metrics/type_modifiers/
+    parent: metrics_custom_metrics
+    identifier: metrics_modifiers
+    weight: 101
+  - name: Historical Metrics Ingestion
+    url: metrics/custom_metrics/historical_metrics/
+    parent: metrics_custom_metrics
+    identifier: metrics_historical_metrics
+    weight: 102
+  - name: 'Submission - Agent Check '
+    url: metrics/custom_metrics/agent_metrics_submission/
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_agent
+    weight: 103
+  - name: Submission - DogStatsD
+    url: metrics/custom_metrics/dogstatsd_metrics_submission/
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_dogstatsd
+    weight: 104
+  - name: Submission - Powershell
+    url: metrics/custom_metrics/powershell_metrics_submission
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_powershell
+    weight: 105
+  - name: 'Submission - API '
+    url: api/latest/metrics/#submit-metrics
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_api
+    weight: 106
+  - name: Send OpenTelemetry Metrics to Datadog
+    url: opentelemetry/otel_metrics/
+    parent: metrics_top_level
+    identifier: metrics_otel
+    weight: 2
+  - name: OTLP Metric Types
+    url: metrics/open_telemetry/otlp_metric_types
+    parent: metrics_otel
+    identifier: metrics_otlp_types
+    weight: 201
+  - name: Metrics Types
+    url: metrics/types/
+    parent: metrics_top_level
+    identifier: metrics_types
+    weight: 3
+  - name: Distributions
+    url: metrics/distributions/
+    parent: metrics_top_level
+    identifier: metrics_distributions
+    weight: 4
+  - name: Explorer
+    url: metrics/explorer/
+    parent: metrics_top_level
+    identifier: metrics_explorer
+    weight: 5
+  - name: Metrics Units
+    identifier: metrics_units
+    url: metrics/units/
+    parent: metrics_explorer
+    weight: 501
+  - name: Summary
+    identifier: metrics_summary
+    url: metrics/summary/
+    parent: metrics_top_level
+    weight: 6
+  - name: Advanced Filtering
+    url: metrics/advanced-filtering/
+    parent: metrics_top_level
+    identifier: metrics_advanced_filtering
+    weight: 7
+  - name: Metrics Without Limits™
+    identifier: metrics_without_limits
+    url: metrics/metrics-without-limits/
+    parent: metrics_top_level
+    weight: 8
+  - name: Guides
+    url: metrics/guide
+    parent: metrics_top_level
+    identifier: metrics_guide
+    weight: 9
+  - name: Watchdog
+    url: watchdog/
+    identifier: watchdog_top_level
+    pre: watchdog
+    parent: platform_heading
+    weight: 60000
+  - name: Alerts
+    url: watchdog/alerts
+    identifier: watchdog_alerts
+    parent: watchdog_top_level
+    weight: 1
+  - name: Impact Analysis
+    url: watchdog/impact_analysis/
+    identifier: watchdog_impact_analysis
+    parent: watchdog_top_level
+    weight: 2
+  - name: RCA
+    url: watchdog/rca/
+    identifier: watchdog_rca
+    parent: watchdog_top_level
+    weight: 3
+  - name: Insights
+    identifier: watchdog_insights
+    url: watchdog/insights
+    parent: watchdog_top_level
+    weight: 4
+  - name: Faulty Deployment Detection
+    url: watchdog/faulty_deployment_detection/
+    identifier: watchdog_faulty_deployment_detection
+    parent: watchdog_top_level
+    weight: 5
+  - name: Bits AI
+    url: bits_ai/
+    pre: bits-ai
+    identifier: bits_ai
+    parent: platform_heading
+    weight: 70000
+  - name: Getting Started
+    url: bits_ai/getting_started
+    identifier: bits_ai_getting_started
+    parent: bits_ai
+    weight: 1
+  - name: Managing Incidents
+    url: bits_ai/managing_incidents
+    identifier: bits_ai_managing_incidents
+    parent: bits_ai
+    weight: 2
+  - name: Natural Language Querying
+    url: bits_ai/query_examples
+    identifier: bits_ai_natural_language_querying
+    parent: bits_ai
+    weight: 3
   - name: Service Catalog
     url: service_catalog/
     pre: service-catalog
@@ -1764,12 +1816,43 @@ main:
     parent: slos
     identifier: slos_guides
     weight: 6
+  - name: Incident Management
+    url: service_management/incident_management/
+    pre: incidents
+    parent: service_management_heading
+    identifier: incidents
+    weight: 20000
+  - name: Incident Details
+    url: service_management/incident_management/incident_details
+    parent: incidents
+    identifier: incident_details
+    weight: 1
+  - name: Incident Settings
+    url: service_management/incident_management/incident_settings
+    parent: incidents
+    identifier: incidents_settings
+    weight: 2
+  - name: Incident Analytics
+    url: service_management/incident_management/analytics
+    parent: incidents
+    identifier: analytics
+    weight: 3
+  - name: Datadog Clipboard
+    url: service_management/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 4
+  - name: Guides
+    url: service_management/incident_management/guides
+    parent: incidents
+    identifier: incidents_guide
+    weight: 10
   - name: Event Management
     url: service_management/events/
     pre: events
     identifier: events
     parent: service_management_heading
-    weight: 20000
+    weight: 30000
   - name: Ingest Events
     url: service_management/events/ingest/
     identifier: event_ingest
@@ -1900,7 +1983,7 @@ main:
     pre: case-management
     parent: service_management_heading
     identifier: case_management
-    weight: 30000
+    weight: 40000
   - name: Projects
     url: service_management/case_management/projects
     parent: case_management
@@ -1926,37 +2009,6 @@ main:
     parent: case_management
     identifier: case_management_troubleshooting
     weight: 5
-  - name: Incident Management
-    url: service_management/incident_management/
-    pre: incidents
-    parent: service_management_heading
-    identifier: incidents
-    weight: 40000
-  - name: Incident Details
-    url: service_management/incident_management/incident_details
-    parent: incidents
-    identifier: incident_details
-    weight: 1
-  - name: Incident Settings
-    url: service_management/incident_management/incident_settings
-    parent: incidents
-    identifier: incidents_settings
-    weight: 2
-  - name: Incident Analytics
-    url: service_management/incident_management/analytics
-    parent: incidents
-    identifier: analytics
-    weight: 3
-  - name: Datadog Clipboard
-    url: service_management/incident_management/datadog_clipboard
-    parent: incidents
-    identifier: incidents_clipboard
-    weight: 4
-  - name: Guides
-    url: service_management/incident_management/guides
-    parent: incidents
-    identifier: incidents_guide
-    weight: 10
   - name: Mobile Application
     url: service_management/mobile/
     identifier: mobile
@@ -2050,11 +2102,27 @@ main:
     parent: app_builder
     identifier: app_builder_actions_catalog
     weight: 4
+  - name: Universal Service Monitoring
+    url: universal_service_monitoring/
+    pre: usm
+    identifier: usm_parent
+    parent: infrastructure_heading
+    weight: 10000
+  - name: Setup
+    url: universal_service_monitoring/setup/
+    parent: usm_parent
+    identifier: universal_service_monitoring_setup
+    weight: 1
+  - name: Guides
+    url: universal_service_monitoring/guide/
+    parent: usm_parent
+    identifier: universal_service_monitoring_guides
+    weight: 2
   - name: Containers
     url: containers/
     identifier: containers
     parent: infrastructure_heading
-    weight: 10000
+    weight: 20000
     pre: container
   - name: Docker and other runtimes
     url: containers/docker/
@@ -2256,7 +2324,7 @@ main:
     pre: serverless
     identifier: serverless
     parent: infrastructure_heading
-    weight: 20000
+    weight: 30000
   - name: AWS Lambda
     url: serverless/aws_lambda
     parent: serverless
@@ -2377,52 +2445,6 @@ main:
     identifier: serverless_guides
     parent: serverless
     weight: 8
-  - name: Cloud Cost
-    url: cloud_cost_management/
-    identifier: cloud_cost
-    pre: cloud-cost-management
-    parent: infrastructure_heading
-    weight: 30000
-  - name: AWS
-    url: cloud_cost_management/aws
-    parent: cloud_cost
-    identifier: cloud_cost_aws
-    weight: 1
-  - name: Azure
-    url: cloud_cost_management/azure
-    parent: cloud_cost
-    identifier: cloud_cost_azure
-    weight: 2
-  - name: Google Cloud
-    url: cloud_cost_management/google_cloud
-    parent: cloud_cost
-    identifier: cloud_cost_google_cloud
-    weight: 3
-  - name: Custom Costs
-    url: cloud_cost_management/custom
-    parent: cloud_cost
-    identifier: cloud_cost_custom
-    weight: 4
-  - name: SaaS Cost Integrations
-    url: cloud_cost_management/saas_costs
-    parent: cloud_cost
-    identifier: cloud_cost_saas_cost_integrations
-    weight: 5
-  - name: Tag Pipelines
-    url: cloud_cost_management/tag_pipelines
-    parent: cloud_cost
-    identifier: cloud_cost_tag_pipelines
-    weight: 6
-  - name: Container Cost Allocation
-    url: cloud_cost_management/container_cost_allocation
-    parent: cloud_cost
-    identifier: cloud_cost_container_cost_allocation
-    weight: 7
-  - name: Cost Recommendations
-    url: cloud_cost_management/recommendations
-    parent: cloud_cost
-    identifier: cloud_cost_recommendations
-    weight: 8
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -2509,6 +2531,52 @@ main:
     parent: ndm
     identifier: ndm_guide
     weight: 308
+  - name: Cloud Cost
+    url: cloud_cost_management/
+    identifier: cloud_cost
+    pre: cloud-cost-management
+    parent: infrastructure_heading
+    weight: 50000
+  - name: AWS
+    url: cloud_cost_management/aws
+    parent: cloud_cost
+    identifier: cloud_cost_aws
+    weight: 1
+  - name: Azure
+    url: cloud_cost_management/azure
+    parent: cloud_cost
+    identifier: cloud_cost_azure
+    weight: 2
+  - name: Google Cloud
+    url: cloud_cost_management/google_cloud
+    parent: cloud_cost
+    identifier: cloud_cost_google_cloud
+    weight: 3
+  - name: Custom Costs
+    url: cloud_cost_management/custom
+    parent: cloud_cost
+    identifier: cloud_cost_custom
+    weight: 4
+  - name: SaaS Cost Integrations
+    url: cloud_cost_management/saas_costs
+    parent: cloud_cost
+    identifier: cloud_cost_saas_cost_integrations
+    weight: 5
+  - name: Tag Pipelines
+    url: cloud_cost_management/tag_pipelines
+    parent: cloud_cost
+    identifier: cloud_cost_tag_pipelines
+    weight: 6
+  - name: Container Cost Allocation
+    url: cloud_cost_management/container_cost_allocation
+    parent: cloud_cost
+    identifier: cloud_cost_container_cost_allocation
+    weight: 7
+  - name: Cost Recommendations
+    url: cloud_cost_management/recommendations
+    parent: cloud_cost
+    identifier: cloud_cost_recommendations
+    weight: 8
   - name: APM
     url: tracing/
     pre: apm
@@ -3211,22 +3279,6 @@ main:
     parent: dbm
     identifier: dbm_guides
     weight: 12
-  - name: Universal Service Monitoring
-    url: universal_service_monitoring/
-    pre: usm
-    identifier: usm_parent
-    parent: apm_heading
-    weight: 40000
-  - name: Setup
-    url: universal_service_monitoring/setup/
-    parent: usm_parent
-    identifier: universal_service_monitoring_setup
-    weight: 1
-  - name: Guides
-    url: universal_service_monitoring/guide/
-    parent: usm_parent
-    identifier: universal_service_monitoring_guides
-    weight: 2
   - name: Data Streams Monitoring
     url: data_streams/
     pre: datastreams-monitoring
@@ -3360,12 +3412,58 @@ main:
     parent: ci
     identifier: ci_troubleshooting
     weight: 6
+  - name: CD Visibility
+    url: continuous_delivery/
+    pre: ci
+    identifier: cd
+    parent: software_delivery_heading
+    weight: 20000
+  - name: Deployment Visibility
+    url: continuous_delivery/deployments
+    identifier: cd_deployments
+    parent: cd
+    weight: 1
+  - name: Argo CD
+    url: continuous_delivery/deployments/argocd
+    identifier: cd_deployments_argocd
+    parent: cd_deployments
+    weight: 101
+  - name: CI Providers
+    url: continuous_delivery/deployments/ciproviders
+    identifier: cd_deployments_ciproviders
+    parent: cd_deployments
+    weight: 102
+  - name: Search and Manage
+    url: continuous_delivery/search
+    identifier: cd_search
+    parent: cd
+    weight: 2
+  - name: Explorer
+    url: continuous_delivery/explorer
+    identifier: cd_explorer
+    parent: cd
+    weight: 3
+  - name: Search Syntax
+    url: continuous_delivery/explorer/search_syntax
+    identifier: cd_explorer_search_syntax
+    parent: cd_explorer
+    weight: 301
+  - name: Facets
+    url: continuous_delivery/explorer/facets
+    identifier: cd_explorer_facets
+    parent: cd_explorer
+    weight: 302
+  - name: Saved Views
+    url: continuous_delivery/explorer/saved_views
+    identifier: cd_explorer_saved_views
+    parent: cd_explorer
+    weight: 303
   - name: Test Visibility
     url: tests/
     pre: intelligent-test-runner
     parent: software_delivery_heading
     identifier: tests
-    weight: 20000
+    weight: 30000
   - name: Setup
     url: tests/setup/
     parent: tests
@@ -3461,7 +3559,7 @@ main:
     pre: intelligent-test-runner
     parent: software_delivery_heading
     identifier: intelligent_test_runner
-    weight: 30000
+    weight: 40000
   - name: Setup
     url: intelligent_test_runner/setup/
     parent: intelligent_test_runner
@@ -3502,79 +3600,12 @@ main:
     parent: intelligent_test_runner
     identifier: intelligent_test_runner_troubleshooting
     weight: 3
-  - name: CD Visibility
-    url: continuous_delivery/
-    pre: ci
-    identifier: cd
-    parent: software_delivery_heading
-    weight: 40000
-  - name: Deployment Visibility
-    url: continuous_delivery/deployments
-    identifier: cd_deployments
-    parent: cd
-    weight: 1
-  - name: Argo CD
-    url: continuous_delivery/deployments/argocd
-    identifier: cd_deployments_argocd
-    parent: cd_deployments
-    weight: 101
-  - name: CI Providers
-    url: continuous_delivery/deployments/ciproviders
-    identifier: cd_deployments_ciproviders
-    parent: cd_deployments
-    weight: 102
-  - name: Search and Manage
-    url: continuous_delivery/search
-    identifier: cd_search
-    parent: cd
-    weight: 2
-  - name: Explorer
-    url: continuous_delivery/explorer
-    identifier: cd_explorer
-    parent: cd
-    weight: 3
-  - name: Search Syntax
-    url: continuous_delivery/explorer/search_syntax
-    identifier: cd_explorer_search_syntax
-    parent: cd_explorer
-    weight: 301
-  - name: Facets
-    url: continuous_delivery/explorer/facets
-    identifier: cd_explorer_facets
-    parent: cd_explorer
-    weight: 302
-  - name: Saved Views
-    url: continuous_delivery/explorer/saved_views
-    identifier: cd_explorer_saved_views
-    parent: cd_explorer
-    weight: 303
-  - name: DORA Metrics
-    url: dora_metrics/
-    pre: ci
-    parent: software_delivery_heading
-    identifier: dora_metrics
-    weight: 190000
-  - name: Setup
-    url: dora_metrics/setup
-    parent: dora_metrics
-    identifier: dora_metrics_setup
-    weight: 1
-  - name: Deployment events
-    url: dora_metrics/setup/deployments
-    parent: dora_metrics_setup
-    identifier: dora_metrics_setup_deployments
-    weight: 101
-  - name: Incident events
-    url: dora_metrics/setup/incidents
-    parent: dora_metrics_setup
-    identifier: dora_metrics_setup_incidents
-    weight: 102
   - name: Code Analysis
     url: code_analysis/
     pre: ci
     parent: software_delivery_heading
     identifier: code_analysis
-    weight: 200000
+    weight: 50000
   - name: Static Analysis
     url: code_analysis/static_analysis
     parent: code_analysis
@@ -3640,7 +3671,7 @@ main:
     pre: ci
     parent: software_delivery_heading
     identifier: quality_gates
-    weight: 210000
+    weight: 60000
   - name: Setup
     url: quality_gates/setup
     parent: quality_gates
@@ -3671,6 +3702,27 @@ main:
     parent: quality_gates_explorer
     identifier: quality_gates_explorer_saved_views
     weight: 303
+  - name: DORA Metrics
+    url: dora_metrics/
+    pre: ci
+    parent: software_delivery_heading
+    identifier: dora_metrics
+    weight: 70000
+  - name: Setup
+    url: dora_metrics/setup
+    parent: dora_metrics
+    identifier: dora_metrics_setup
+    weight: 1
+  - name: Deployment events
+    url: dora_metrics/setup/deployments
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_deployments
+    weight: 101
+  - name: Incident events
+    url: dora_metrics/setup/incidents
+    parent: dora_metrics_setup
+    identifier: dora_metrics_setup_incidents
+    weight: 102
   - name: Observability Pipelines
     url: observability_pipelines/
     pre: pipelines
