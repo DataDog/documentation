@@ -11,6 +11,10 @@ further_reading:
   text: "Build custom monitoring and remediation tools with the Datadog App Builder"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
 Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}}
@@ -38,16 +42,6 @@ Below are a few examples of what App Builder apps can do:
 - Summarize the progress of each PR in a given repo.
 
 {{< img src="/service_management/app_builder/app-builder-blueprints-1.png" alt="App blueprints" style="width:100%;" >}}
-
-## Get started faster with AI
-
-{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
-AI functionality for App Builder is opt-in.
-{{< /callout >}}
-
-If you're not sure where to start, describe your app to the App Builder AI and let it create a starter app for you.
-
-{{< img src="/service_management/app_builder/app-builder-ai.png" alt="Generate a starter app with AI" style="width:100%;" >}}
 
 ## Take action directly from dashboards
 

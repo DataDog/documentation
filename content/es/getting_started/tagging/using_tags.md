@@ -36,9 +36,9 @@ Para buscar varias tags de forma inclusiva, haz uso de los paréntesis y separa 
 {{< tabs >}}
 {{% tab "Asignación" %}}
 
-Usa las tags para filtrar las métricas que desees reflejar en un [gráfico del dashboard][1] o para crear grupos agregados de métricas que quieras mostrar. Para filtrar las métricas que quieres mostrar, introduce la tag en el campo de texto **from**. Acto seguido, la métrica que hayas elegido se mostrará en todas las fuentes que tengan esa tag asignada (`service:coffee-house` en el ejemplo de abajo).
+Utiliza etiquetas (tags) para filtrar métricas y mostrarlas en un [dashboard gráfico][1], o para crear grupos añadidos de métricas para mostrar. Para filtrar los métricas que se van a mostrar, introduce la etiqueta (tag) en el cuadro de texto **from** (desde). Esta métrica se muestra en todas las fuentes que tienen asignada esa etiqueta (tag) particular (`service:web-store`, en el ejemplo de abajo).
 
-{{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags en el campo de texto from de los dashboards" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboards_tags_example.png" alt="Filtra métricas en dashboards añadiendo una etiqueta (tag) en el campo 'from' (desde). En este ejemplo, la métrica se filtra por 'service:web-store'" style="width:80%;">}}
 
 También se pueden filtrar valores de las tags de forma avanzada con los filtros boleanos. Así pues, se admite la siguiente sintaxis boleana:
 
@@ -50,24 +50,24 @@ También se pueden filtrar valores de las tags de forma avanzada con los filtros
 
 Usa `AND` y `ORs` para consultar una métrica en varias tags concretas:
 
-{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="Filtro boleano con AND/OR" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_advanced_tags_AND_OR.png" alt="Filtro booleano con Y/O" style="width:80%;">}}
 
 Usa `IN` y `NOT IN` para filtrar rápidamente una métrica en función de varias tags concretas:
 
-{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="Filtro boleano con IN/NOT IN" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_advanced_tags_NOT_IN.png" alt="Filtro booleano con EN/NO EN" style="width:80%;">}}
 
-Para crear un grupo agregado mediante tags, introduce el segmento clave de la tag en el campo de texto **avg by**. Por ejemplo, si tienes un gráfico cronológico en el que se refleje una métrica etiquetada con la clave `service`, como `service:coffee-house`, introduce `service` en el campo **avg by** para que se muestre una línea por cada valor de la tag `service`. Cada una de estas líneas representa el valor medio de la métrica en todas las fuentes que comparten el valor de la tag `service`.
+Para crear un grupo añadido utilizando etiquetas (tags), introduce la parte clave de la etiqueta (tag) en el cuadro de texto **avg by**. Por ejemplo, si tienes un gráfico de series temporales que muestra una métrica etiquetada con la clave `service`, como `service:web-store`, introduce `service` en el cuadro de texto **avg by** para mostrar una línea por cada valor de etiqueta (tag) `service`. Cada línea representa el valor promedio de métrica en todas las fuentes que comparten ese valor de etiqueta (tag)`service`.
 
-{{< img src="tagging/using_tags/dashboardtags.png" alt="Tags en el campo de texto avg by de los dashboards" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_group_by_tags.png" alt="Etiquetas (tags) en cuadros de texto avg by de dashboards" style="width:80%;">}}
 
-Las tags también se pueden usar para superponer eventos en el dashboard. El procedimiento es el mismo que en el [Events Explorer][2] (Navegador de eventos).
-Escribe `tags:` seguido de la tag. Los eventos que coincidan entre sí aparecerán en el gráfico como barras verticales superpuestas. En el ejemplo de abajo, se utiliza `tags:service:coffee-house`.
+Las etiquetas (tags) también pueden utilizarse para superponer eventos en el dashboard. Esto funciona de la misma manera que en el [explorador de eventos][2].
+Las coincidencias de eventos se superponen como barras verticales en el gráfico. En el ejemplo siguiente se utiliza `service:web-store`.
 
-{{< img src="tagging/using_tags/dashboardeventtags.png" alt="Superposiciones de eventos en los dashboards" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_event_overlays.png" alt="Utiliza etiquetas (tags) para añadir superposiciones de eventos en dashboards" style="width:80%;">}}
 
 Utiliza las [variables de plantilla][3] para ahorrar tiempo al cambiar la tag **from** en los gráficos de tu dashboard. En el ejemplo de abajo, se usa `service` para representar la clave de la tag `service`. Para usar la variable de plantilla, añade la variable `$service` en el campo de texto **from** de la consulta del gráfico.
 
-{{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="Variables de plantilla del dashboard" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_dynamic_template_variables.png" alt="Variables de plantillas de dashboards" style="width:80%;">}}
 
 [1]: /es/dashboards/
 [2]: /es/events/
@@ -75,17 +75,17 @@ Utiliza las [variables de plantilla][3] para ahorrar tiempo al cambiar la tag **
 {{% /tab %}}
 {{% tab "Ejemplos" %}}
 
-Aquí tienes un ejemplo de tags que usan el editor de gráficos cronológicos. En la primera captura de pantalla, no se ha aplicado ninguna tag, por lo que se puede ver el uso medio de la CPU en todos los hosts:
+Este es un ejemplo de etiquetas (tags) que utilizan el editor de gráficos de series temporales. En la primera captura de pantalla, no se han aplicado etiquetas (tags) y se muestra el uso promedio de CPU en todos los hosts:
 
-{{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_no_tags.png" alt="Editor de gráficos de series temporales sin etiquetas (tags) añadidas" style="width:75%;">}}
 
-En la siguiente, el editor ha aplicado una tag (`region:eastus`) en el campo de texto **from** que permite a Datadog consultar el uso que se hace de la CPU en el este de Estados Unidos. En este caso, se emplea la tag `region` como ejemplo, pero tú podrías usar cualquier tag que se haya enviado a tu plataforma de Datadog, como `application`, `service`, `environment`, etc.
+Luego, el editor se actualiza para incluir una etiqueta (tag) (`region:eastus`) en el cuadro de texto **from** (desde), que permite a Datadog ver el uso de CPU en toda la región este de los EE.UU. Aquí, la etiqueta (tag) `region` se utiliza como ejemplo, pero puedes utilizar cualquier etiqueta (tag) arbitraria que se envíe a tu plataforma Datadog, incluyendo `application`, `service` o `environment`.
 
-{{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_from_tag.png" alt="Editor de gráficos de series temporales filtrado por 'region:us-east-1' tag" style="width:75%;">}}
 
 Por último, se ha usado el segundo campo vacío (el campo de texto **avg by**) para mostrar una línea cronológica independiente por cada `host`. Por tanto, podemos ver la CPU del servidor de todos los hosts activos en el este de Estados Unidos.
 
-{{< img src="tagging/using_tags/Tags_3.png" alt="Tags_3" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_sumby_tag.png" alt="Editor de gráficos de series temporales filtrado por 'region:us-east-1' and grouped by 'host'" style="width:75%;">}}
 
 En caso de necesidad, añade más tags para acotar aún más el contexto; por ejemplo, hosts en `region:eastus` y `env:production`. Las tags pueden usarse en toda la plataforma de Datadog y aplicarse a todos los elementos principales (métricas, trazas y logs).
 
@@ -101,11 +101,11 @@ Para filtrar el [mapa de hosts][4], la [lista de infraestructuras][5], los [cont
 
 En esta sección, usa tags para filtrar o agrupar hosts:
 
-{{< img src="tagging/using_tags/hostmaptags.png" alt="Tags del mapa de hosts" style="width:80%;">}}
+{{< img src="tagging/using_tags/hostmaptags.png" alt="Tags de Mapa de hosts" style="width:80%;">}}
 
 O contenedores:
 
-{{< img src="tagging/using_tags/containermaptags.png" alt="Tags del mapa de contenedores" style="width:80%;">}}
+{{< img src="tagging/using_tags/containermaptags.png" alt="Tags de Mapa de contenedores" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Lista de infraestructuras" %}}
@@ -132,45 +132,22 @@ Estos son los campos de texto para filtrar o agrupar de la página de Live Proce
 
 ## Monitores
 
-{{< tabs >}}
-{{% tab "Gestionar monitores" %}}
+Para filtrar monitores y [tiempos de inactividad de monitores][31] por [etiquetas (tags)][32] asignadas, utiliza las casillas de verificación de barra o faceta. El formato de la barra de búsqueda es `tag:<KEY>:<VALUE>`, por ejemplo: `tag:service:coffee-house`. Para excluir de tu búsqueda monitores con etiquetas (tags) específicas, utiliza `-`, for example: `tag:-service:coffee-house`.
 
-Para filtrar los monitores según sus [tags asignadas][1], puedes usar la barra de búsqueda o las casillas de facetas. El formato de la barra de búsqueda es `tag:<KEY>:<VALUE>`; por ejemplo, `tag:service:coffee-house`. Si deseas excluir de tu búsqueda los monitores que tengan una tag en concreto, usa  `-`, for example: `tag:-service:coffee-house`.
+{{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="Filtra monitores en la barra de búsqueda con etiquetas (tags)" style="width:80%;">}}
 
-{{< img src="tagging/using_tags/managemonitorstags.png" alt="Gestionar tags de monitores" style="width:80%;">}}
+**Nota**: Las etiquetas (tags) de monitores son diferentes y están separadas de las etiquetas (tags) de métricas. Para más información, consulta la documentación sobre [etiquetas (tags) de monitores][30].
 
-Las tags de monitor son diferentes e independientes de las tags de métrica.
-
-[1]: /es/getting_started/tagging/assigning_tags/
-{{% /tab %}}
-
-{{% tab "Nuevo monitor" %}}
-
-Cuando crees un [monitor][1], utiliza tags de métrica en:
-
+Al crear un nuevo monitor, utiliza *etiquetas (tags) de métricas* en:
 * el campo de texto **from** para limitar el contexto del monitor solo a las métricas que tengan esas tags.
-
 * el campo de texto **excluding** para eliminar las métricas correspondientes del contexto del monitor.
-
 * el campo de texto **avg by** para transformar el monitor en un monitor multialerta en cada valor de la tag.
-
-[1]: /es/monitors/types
-{{% /tab %}}
-{{% tab "Gestionar la caída del sistema" %}}
-
-Para filtrar las [caídas del sistema][1] por tag de monitor, escribe el nombre de la tag en la barra de búsqueda. Ejemplo: `service:coffee-house`.
-
-{{< img src="tagging/using_tags/managedowntimetags.png" alt="Gestionar tags de monitores" style="width:80%;">}}
-
-[1]: /es/monitors/notify/downtimes/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Métricas
 
-En [Metrics Explorer][8] (Navegador de métricas), usa tags para filtrar las métricas de tags concretas o para mostrar varios gráficos por clave de tag. El ejemplo de abajo representa de forma gráfica una métrica de `service:coffee-house` y muestra un gráfico para cada `host`.
+Utiliza etiquetas (tags) en el [explorador de métricas][8] para filtrar métricas por etiquetas (tags) o para mostrar múltiples gráficos por clave de etiqueta (tag). En el siguiente ejemplo se representa un gráfico de métrica sobre `service:web-store`.
 
-{{< img src="tagging/using_tags/metricsexplorertags.png" alt="Gestionar tags de monitores" style="width:80%;">}}
+{{< img src="tagging/using_tags/metrics_explorer.png" alt="Gráfico de métrica centrado en una etiqueta (tag) individual" style="width:80%;">}}
 
 ## Integraciones
 
@@ -239,7 +216,7 @@ Obtén más información sobre [cómo crear y gestionar etiquetas (labels)][2] e
 {{< tabs >}}
 {{% tab "Trace Explorer" %}}
 
-En la herramienta [Trace Explorer][1], puedes filtrar las trazas (traces) con tags usando la barra de búsqueda o las casillas de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:coffee-house`. Si deseas realizar una búsqueda avanzada, consulta la sección [Sintaxis de las consultas][2].
+En la herramienta [Trace Explorer][1], puedes filtrar las trazas (traces) con tags usando la barra de búsqueda o las casillas de faceta. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:coffee-house`. Si deseas realizar una búsqueda avanzada, consulta la sección [Sintaxis de las consultas][2].
 
 {{< img src="tagging/using_tags/trace_explorer.png" alt="Tags de Trace Explorer" style="width:80%;">}}
 
@@ -250,7 +227,7 @@ En la herramienta [Trace Explorer][1], puedes filtrar las trazas (traces) con ta
 
 Tras [asignar las tags][1], usa el mapa de servicios para dirigirte a distintas partes de la aplicación haciendo clic en un servicio concreto. En el ejemplo de abajo, puedes consultar los [análisis][2], los [monitores][3], los [logs][4] y el [mapa de hosts][5] filtrados en función de la tag `service:coffee-house`.
 
-{{< img src="tagging/using_tags/servicemaptags.png" alt="Tags del mapa de servicios" style="width:80%;">}}
+{{< img src="tagging/using_tags/servicemaptags.png" alt="Tags de Mapa de servicios" style="width:80%;">}}
 
 [1]: /es/getting_started/tagging/assigning_tags/
 [2]: /es/tracing/app_analytics/search/
@@ -265,7 +242,7 @@ Tras [asignar las tags][1], usa el mapa de servicios para dirigirte a distintas 
 
 Cuando crees un gráfico del [notebook][9], usa tags en el campo de texto **from** para limitar las métricas. Úsalas también en el campo de texto **avg by** para agrupar las métricas. En el ejemplo de abajo, las métricas están limitadas por `service:coffee-house` y agrupadas por `host`.
 
-{{< img src="tagging/using_tags/notebooktags.png" alt="Tags de notebook" style="width:80%;">}}
+{{< img src="tagging/using_tags/notebooktags.png" alt="Tags de Notebook" style="width:80%;">}}
 
 Si quieres excluir tags, edita el texto con `</>` y, a continuación, añade la tag en cuestión en formato `!<KEY>:<VALUE>`. En el ejemplo de abajo, se usa `!service:coffeehouse` para excluir `service:coffeehouse`.
 
@@ -273,12 +250,12 @@ Si quieres excluir tags, edita el texto con `</>` y, a continuación, añade la 
 
 ## Logs
 
-En los apartados de [Search (Búsqueda)][10], [Analytics (Análisis)][11], [Patterns (Patrones)][12] y [Live Tail][13] de los logs, filtra las trazas (traces) con tags usando la barra de búsqueda o las casillas de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:coffee-house`. Si deseas realizar una búsqueda avanzada, consulta la página de [Buscar logs][10].
+En los apartados de [búsqueda (Search)][10], [análisis (Analytics)][11], [patrones (Patterns)][12] y [Live Tail][13] de los logs, filtra las trazas (traces) con tags usando la barra de búsqueda o las casillas de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `service:coffee-house`. Si deseas realizar una búsqueda avanzada, consulta la página de [Buscar logs][10].
 
 {{< tabs >}}
 {{% tab "Búsqueda" %}}
 
-{{< img src="tagging/using_tags/logsearchtags.png" alt="Tags de búsqueda de logs" style="width:80%;">}}
+{{< img src="tagging/using_tags/logsearchtags.png" alt="Tags de Log Search" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Análisis" %}}
@@ -288,7 +265,7 @@ En los apartados de [Search (Búsqueda)][10], [Analytics (Análisis)][11], [Patt
 {{% /tab %}}
 {{% tab "Patrones" %}}
 
-{{< img src="tagging/using_tags/logpatternstags.png" alt="Tags de patrones de logs" style="width:80%;">}}
+{{< img src="tagging/using_tags/logpatternstags.png" alt="Tags de Log Patterns" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Live Tail" %}}
@@ -300,7 +277,7 @@ En los apartados de [Search (Búsqueda)][10], [Analytics (Análisis)][11], [Patt
 
 Las tags también se pueden usar para filtrar un [pipeline][14] de registros. En el ejemplo de abajo, el pipeline filtra los registros en función de la tag `service:coffee-house`.
 
-{{< img src="tagging/using_tags/logpipelinetags.png" alt="Tags de pipelines" style="width:80%;">}}
+{{< img src="tagging/using_tags/logpipelinetags.png" alt="Tags de Pipeline" style="width:80%;">}}
 
 ## RUM y Session Replay
 
@@ -325,18 +302,18 @@ Para filtrar los tests por tags, usa la barra de búsqueda o las casillas de fac
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /es/synthetics/search/
 {{% /tab %}}
-{{% tab "Navegador de resultados de CI" %}}
+{{% tab "Explorer" %}}
 
-El [CI Results Explorer][1] (Navegador de resultados de CI) muestra los resultados de los tests de navegador que se ejecutan en un [pipeline de integración continua (CI)][2].
+El [explorador de monitorización y prueba continua de Synthetic][1] muestra tus ejecuciones y lotes de ejecuciones de tests en un [pipeline CI][2].
 
-Para filtrar las ejecuciones de tests por tags, usa la barra de búsqueda o las casillas de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`; por ejemplo, `@ci.provider.name:github`. Si deseas realizar una búsqueda avanzada, consulta la sección [Buscar y gestionar tests Synthetic][3].
+Para filtrar los tests por etiquetas (tags), utiliza la barra de búsqueda o las casillas de verificación de faceta. El formato de la barra de búsqueda es `<KEY>:<VALUE>`. Por ejemplo: `@ci.provider.name:github`. Para realizar búsquedas avanzadas, consulta [Buscar Lotes de pruebas de búsqueda][3].
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Tags de Synthetics y CI" style="width:80%;">}}
 
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /es/synthetics/cicd_integrations
-[3]: /es/synthetics/search/
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /es/continuous_testing/cicd_integrations
+[3]: /es/continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -363,7 +340,7 @@ Cuando crees un [SLO basado en métricas][1], usa las tags de métrica en las co
 
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Tags del SLO basado en métricas" style="width:80%;">}}
 
-[1]: /es/monitors/service_level_objectives/metric/
+[1]: /es/service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "SLOs basados en monitores" %}}
 
@@ -371,12 +348,41 @@ Cuando crees un [SLO basado en monitores][1] con un solo [monitor agrupado][2], 
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Tags del SLO basado en monitores" style="width:80%;">}}
 
-[1]: /es/monitors/service_level_objectives/monitor/
+[1]: /es/service_management/service_level_objectives/monitor/
 [2]: /es/getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}
 
-## Desarrolladores
+## Monitorización de bases de datos
+
+{{< tabs >}}
+{{% tab "Test Runs" %}}
+
+El [explorador de Visibilidad CI][101] muestra tus pruebas ejecutados en un pipeline CI.
+
+Para filtrar las pruebas por etiquetas (tags), utiliza la barra de búsqueda o las casillas de verificación de faceta. El formato de la barra de búsqueda es `<KEY>:<VALUE>`. Por ejemplo: `@test.status:failed`. Para realizar búsquedas avanzadas, consulta [Buscar y gestionar tests de CI][102].
+
+{{< img src="/continuous_integration/test_runs.png" alt="Ejecuta tests en el explorador de visibilidad de CI" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/test-runs
+[102]: /es/tests/search/
+
+{{% /tab %}}
+{{% tab "Pipeline Executions" %}}
+
+El [explorador de visibilidad CI][101] muestra las ejecuciones de tu pipeline CI.
+
+Para filtrar las ejecuciones de pipeline por etiquetas (tags), utiliza la barra de búsqueda o las casillas de verificación de faceta. El formato de la barra de búsqueda es `<KEY>:<VALUE>`. Por ejemplo: `@ci.provider.name:gitlab`. Para realizar búsquedas avanzadas, consulta [Busca y gestiona pipelines CI][102].
+
+{{< img src="/continuous_integration/pipeline_executions.png" alt="Ejecuciones de pipelines en el explorador de visibilidad CI" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions
+[102]: /es/continuous_testing/explorer/search/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Guías
 
 Las tags pueden usarse de diferentes formas con la [API][17].
 
@@ -402,7 +408,7 @@ Consulta esta lista para encontrar los enlaces a cada una de las siguientes secc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/getting_started/tagging/assigning_tags/
-[2]: /es/events/explorer
+[2]: /es/service_management/events/explorer
 [3]: /es/integrations/
 [4]: /es/infrastructure/hostmap/
 [5]: /es/infrastructure/
@@ -430,3 +436,6 @@ Consulta esta lista para encontrar los enlaces a cada una de las siguientes secc
 [27]: /es/api/v1/service-level-objectives/#create-a-slo-object
 [28]: /es/api/v1/service-level-objectives/#get-a-slos-details
 [29]: /es/api/v1/service-level-objectives/#update-a-slo
+[30]: /es/monitors/manage/#monitor-tags
+[31]: /es/monitors/downtimes/
+[32]: /es/getting_started/tagging/assigning_tags?tab=monitors

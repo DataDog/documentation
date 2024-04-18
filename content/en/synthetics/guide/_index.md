@@ -57,7 +57,6 @@ cascade:
 
 {{< whatsnext desc="Data Security:" >}}
     {{< nextlink href="synthetics/guide/authentication-protocols/" >}}Use authentication in API and multistep API tests{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}Use time-based one-time passwords (TOTPs) for multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-passkeys/" >}}Use passkeys (FIDO2) in browser tests{{< /nextlink >}}
 {{< /whatsnext >}}

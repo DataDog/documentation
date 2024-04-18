@@ -11,7 +11,7 @@ title: CERTIFICATE_VERIFY_FAILED 오류
 
 3.6.x에서 5.32.6까지의 Agent 버전에 만료된 인증서가 포함되어 있어 영향을 받았습니다.
 
-Agent 버전 6.x 및 7.x는 문제가 없으며, 업데이트할 필요가 없습니다.
+에이전트 버전 6.x 및 7.x에는 이상이 없으며 업데이트할 필요가 없습니다.
 
 ### Agent 5.32.7로 업그레이드해 문제 해결하기
 
@@ -71,7 +71,7 @@ restart-service -Force datadogagent
   * 64bit 윈도우즈: `C:\Program Files (x86)\Datadog\Datadog Agent\files\`
   * 32bit 윈도우즈: `C:\Program Files\Datadog\Datadog Agent\files\`
 
-파일 삭제 후에는 윈도우스 서비스 관리자에서 Datadog 서비스를 재시작하세요.
+파일이 제거된 후 Windows Service Manager에서 Datadog 서비스를 재시작합니다.
 
 ### Agent 6 또는 7로 업그레이드해 문제 해결하기
 
@@ -83,7 +83,7 @@ Datadog는 Agent를 최신 상태로 유지하고 최신 버전으로 업데이�
 
 ### SSL로 트래픽 암호화하기
 
-증명서를 삭제해도 SSL로 트래픽을 암호화할 수 있습니다. 증명서는 클라이언트가 사용하기 위한 프리셋이며 SSL 접속의 필수 요건은 아닙니다. Datadog Agent 엔드포인트는 SSL 트래픽만을 받아들입니다.
+인증서를 삭제하는 경우에도 SSL을 사용해 트래픽을 암호화합니다. 인증서는 사용할 수 있도록 클라이언트에 대해 사전 설정되며 SSL과 연결될 필요가 없습니다. Datadog 에이전트 엔드포인트는 SSL 트래픽만 허용합니다.
 
 ### 프록시 또는 curl http 클라이언트를 사용하도록 구성된 윈도우즈 Agent 5.x
 
@@ -111,6 +111,6 @@ restart-service -Force datadogagent
 
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
-[2]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[2]: https://app.datadoghq.com/account/settings/agent/5?platform=overview
 [3]: /ko/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
 [4]: /ko/agent/versions/upgrade_to_agent_v6/?tab=linux

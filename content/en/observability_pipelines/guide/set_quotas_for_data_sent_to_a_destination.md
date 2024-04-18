@@ -205,7 +205,7 @@ sinks:
 [7]: /monitors/notify/
 [8]: /monitors/notify/variables/
 [9]: /monitors/notify/#renotify
-[10]: /monitors/notify/#priority
+[10]: /monitors/notify/#metadata
 [11]: /monitors/notify/#permissions
 [12]: /logs/log_configuration/archives/
 [13]: /observability_pipelines/guide/route_logs_in_datadog_rehydratable_format_to_amazon_s3/

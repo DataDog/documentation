@@ -42,9 +42,11 @@ Static Analysis currently supports scanning the following languages and technolo
 
 - C#
 - Dockerfiles
+- Go
 - Java
 - JavaScript
 - Python
+- Ruby
 - TypeScript
 
 ## Integrations

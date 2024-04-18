@@ -213,10 +213,10 @@ To enable Single Step Instrumentation with the Datadog Operator:
          apiSecret:
            secretName: datadog-secret
            keyName: api-key
-   features:
-     apm:
-       instrumentation:
-         enabled: true  
+     features:
+       apm:
+         instrumentation:
+           enabled: true  
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][6] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
