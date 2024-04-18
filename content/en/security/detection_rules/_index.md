@@ -19,7 +19,19 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/impossible-travel-detection-rules/"
   tag: "Blog"
   text: "Detect suspicious login activity with impossible travel detection rules"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 Detection rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, a security signal is generated. You can view these signals in the [Signals Explorer][16].
 

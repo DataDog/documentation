@@ -680,8 +680,8 @@ main:
     identifier: otel_propagation
     parent: otel_interoperability
     weight: 602
-  - name: Custom Instrumentation
-    url: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+  - name: OpenTelemetry API Support
+    url: /opentelemetry/interoperability/api_support
     identifier: otel_instrumentation
     parent: otel_interoperability
     weight: 603
@@ -1776,7 +1776,7 @@ main:
     parent: events
     weight: 1
   - name: Pipelines and Processors
-    url: service_management/events/pipelines_and_processors/overview
+    url: service_management/events/pipelines_and_processors/
     identifier: overview
     parent: events
     weight: 2
@@ -1870,21 +1870,26 @@ main:
     identifier: event_explorer_saved_views
     parent: events_explorer
     weight: 308
-  - name: Using Events
-    url: service_management/events/usage/
-    identifier: event_usage
-    parent: events
-    weight: 4
   - name: Correlation
     url: service_management/events/correlation/
     identifier: event_correlation
     parent: events
-    weight: 5
-  - name: Pattern-based
-    url: service_management/events/correlation/pattern
-    identifier: event_correlation_pattern
+    weight: 4
+  - name: Configuration
+    url: service_management/events/correlation/configuration
+    identifier: event_correlation_configure
     parent: event_correlation
-    weight: 501
+    weight: 401
+  - name: Triaging & Notifying
+    url: service_management/events/correlation/triage_and_notify
+    identifier: event_correlation_triage_and_notify
+    parent: event_correlation
+    weight: 402
+  - name: Analytics
+    url: service_management/events/correlation/analytics
+    identifier: event_correlation_analytics
+    parent: event_correlation
+    weight: 403
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
@@ -2374,45 +2379,50 @@ main:
     weight: 8
   - name: Cloud Cost
     url: cloud_cost_management/
-    identifier: cloud_cost_top_level
+    identifier: cloud_cost
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 30000
   - name: AWS
     url: cloud_cost_management/aws
-    parent: cloud_cost_top_level
-    identifier: ccm_aws
+    parent: cloud_cost
+    identifier: cloud_cost_aws
     weight: 1
   - name: Azure
     url: cloud_cost_management/azure
-    parent: cloud_cost_top_level
-    identifier: ccm_azure
+    parent: cloud_cost
+    identifier: cloud_cost_azure
     weight: 2
   - name: Google Cloud
     url: cloud_cost_management/google_cloud
-    parent: cloud_cost_top_level
-    identifier: ccm_google_cloud
+    parent: cloud_cost
+    identifier: cloud_cost_google_cloud
     weight: 3
   - name: Custom Costs
     url: cloud_cost_management/custom
-    parent: cloud_cost_top_level
-    identifier: ccm_custom
+    parent: cloud_cost
+    identifier: cloud_cost_custom
     weight: 4
   - name: SaaS Cost Integrations
     url: cloud_cost_management/saas_costs
-    parent: cloud_cost_top_level
-    identifier: ccm_saas_cost_integrations
+    parent: cloud_cost
+    identifier: cloud_cost_saas_cost_integrations
     weight: 5
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
-    parent: cloud_cost_top_level
-    identifier: tag_pipelines
+    parent: cloud_cost
+    identifier: cloud_cost_tag_pipelines
     weight: 6
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
-    parent: cloud_cost_top_level
-    identifier: container_cost_allocation
+    parent: cloud_cost
+    identifier: cloud_cost_container_cost_allocation
     weight: 7
+  - name: Cost Recommendations
+    url: cloud_cost_management/recommendations
+    parent: cloud_cost
+    identifier: cloud_cost_recommendations
+    weight: 8
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -2535,16 +2545,61 @@ main:
     parent: tracing_trace_collection
     identifier: custom_instrumentation
     weight: 202
-  - name: Using Datadog Libraries
-    url: tracing/trace_collection/custom_instrumentation/dd_libraries/
+  - name: Java
+    url: tracing/trace_collection/custom_instrumentation/java/dd-api
     parent: custom_instrumentation
-    identifier: tracing_custom_inst
+    identifier: custom_instrumentation_java
     weight: 2021
-  - name: Using OpenTelemetry APIs
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+  - name: Python
+    url: tracing/trace_collection/custom_instrumentation/python/dd-api
     parent: custom_instrumentation
-    identifier: tracing_otel_inst
+    identifier: custom_instrumentation_python
     weight: 2022
+  - name: Ruby
+    url: tracing/trace_collection/custom_instrumentation/ruby/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_ruby
+    weight: 2023
+  - name: Go
+    url: tracing/trace_collection/custom_instrumentation/go/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_go
+    weight: 2024
+  - name: Node.js
+    url: tracing/trace_collection/custom_instrumentation/nodejs/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_nodejs
+    weight: 2025
+  - name: PHP
+    url: tracing/trace_collection/custom_instrumentation/php/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_php
+    weight: 2026
+  - name: C++
+    url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_cpp
+    weight: 2027
+  - name: .NET
+    url: tracing/trace_collection/custom_instrumentation/dotnet/dd-api
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_dotnet
+    weight: 2028
+  - name: Rust
+    url: tracing/trace_collection/custom_instrumentation/rust
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_rust
+    weight: 2029
+  - name: Swift
+    url: tracing/trace_collection/custom_instrumentation/swift
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_ios
+    weight: 2030
+  - name: Elixir
+    url: tracing/trace_collection/custom_instrumentation/elixir
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_elixir
+    weight: 2031
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
@@ -3575,6 +3630,11 @@ main:
     parent: code_analysis
     identifier: code_analysis_github_prs
     weight: 4
+  - name: Troubleshooting
+    url: code_analysis/troubleshooting
+    parent: code_analysis
+    identifier: code_analysis_troubleshooting
+    weight: 5
   - name: Quality Gates
     url: quality_gates/
     pre: ci
@@ -4065,6 +4125,11 @@ main:
     parent: security_platform
     identifier: security_audit_trail
     weight: 6
+  - name: Account Takeover Protection
+    url: security/account_takeover_protection
+    parent: security_platform
+    identifier: security_ato_protection
+    weight: 7
   - name: Cloud SIEM
     url: security/cloud_siem/
     pre: siem
@@ -4313,46 +4378,40 @@ main:
     parent: appsec_getting_started
     identifier: appsec_compat
     weight: 201
-  - name: Java
-    url: security/application_security/enabling/java/
+  - name: Using Single Step Instrumentation
+    url: security/application_security/enabling/single_step/
     parent: appsec_getting_started
-    identifier: appsec_java
+    identifier: appsec_enabling_single_step
     weight: 202
-  - name: .NET
-    url: security/application_security/enabling/dotnet/
+  - name: Threat Detection and Protection
+    url: security/application_security/enabling/single_step/threat_detection/
+    parent: appsec_enabling_single_step
+    identifier: appsec_enabling_single_step_threats
+    weight: 2101
+  - name: Code Security
+    url: security/application_security/enabling/single_step/code_security/
+    parent: appsec_enabling_single_step
+    identifier: appsec_enabling_single_step_code
+    weight: 2102
+  - name: Using Datadog Tracing libraries
+    url: security/application_security/enabling/tracing_libraries/
     parent: appsec_getting_started
-    identifier: appsec_dotnet
+    identifier: appsec_enabling_tracing_libraries
     weight: 203
-  - name: Go
-    url: security/application_security/enabling/go/
-    parent: appsec_getting_started
-    identifier: appsec_go
-    weight: 204
-  - name: Ruby
-    url: security/application_security/enabling/ruby/
-    parent: appsec_getting_started
-    identifier: appsec_ruby
-    weight: 205
-  - name: PHP
-    url: security/application_security/enabling/php/
-    parent: appsec_getting_started
-    identifier: appsec_php
-    weight: 206
-  - name: NodeJS
-    url: security/application_security/enabling/nodejs/
-    parent: appsec_getting_started
-    identifier: appsec_nodejs
-    weight: 207
-  - name: Python
-    url: security/application_security/enabling/python/
-    parent: appsec_getting_started
-    identifier: appsec_python
-    weight: 208
-  - name: Serverless
+  - name: Threat Detection and Protection
+    url: security/application_security/enabling/tracing_libraries/threat_detection/
+    parent: appsec_enabling_tracing_libraries
+    identifier: appsec_enabling_tracing_libraries_threats
+    weight: 2101
+  - name: Code Security
+    url: security/application_security/enabling/tracing_libraries/code_security/
+    parent: appsec_enabling_tracing_libraries
+    identifier: appsec_enabling_tracing_libraries_code
+  - name: Enabling ASM for Serverless
     url: security/application_security/enabling/serverless/
     parent: appsec_getting_started
-    identifier: appsec_serverless
-    weight: 209
+    identifier: appsec_enabling_serverless
+    weight: 204
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
@@ -4432,12 +4491,12 @@ main:
     url: security/application_security/guide/
     parent: application_security
     identifier: appsec_guides
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 10
+    weight: 11
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -4514,6 +4573,11 @@ main:
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
     weight: 303
+  - name: Authentication in Browser Tests
+    identifier: synthetics_browser_tests_authentication
+    url: synthetics/browser_tests/app-that-requires-login
+    parent: synthetics_browser_tests
+    weight: 304
   - name: Private Locations
     url: synthetics/private_locations
     parent: synthetics
