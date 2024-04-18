@@ -55,7 +55,7 @@ You also have access to helper functions, such as:
 * Most of the [`std` library][5], accessible with `std.*`. For example, to call the function `encodeHex` defined in `<std>/encoding/hex.ts`, use `std.encoding.hex.encodeHex`.
 * Standard JavaScript APIs, such as the [Web Crypto API][6].
 
-_Note: some of these APIs are disabled for security reasons.
+**Note**: some of these APIs are disabled for security reasons.
 
 For example:
 
