@@ -57,7 +57,7 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 To install the Agent with the command line:
 
 1. Download the [Datadog Agent installer][1].
-2. Open Command or Powershell prompt as (**Administrator**
+2. Open Command or Powershell prompt as **Administrator**.
 3. Run one of the following commands inside the directory where you downloaded the installer.
 
 **Command prompt**
