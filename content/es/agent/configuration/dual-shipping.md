@@ -21,7 +21,7 @@ Para ver una lista de destinos de tráfico de red, consulta [Network Traffic (tr
 
 ## Métricas y checks de servicio
 
-Puedes añadir la configuración YAML a tu `datadog.yaml` o inicar el Agent con las variables de entorno adecuadas.
+Puedes añadir la configuración YAML a tu `datadog.yaml` o iniciar el Agent con las variables de entorno adecuadas.
 
 ### Configuración YAML
 
