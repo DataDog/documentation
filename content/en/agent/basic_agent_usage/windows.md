@@ -44,7 +44,7 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 
    <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
-2. Run the installer by opening `datadog-agent-7-latest.amd64.msi` (you will be asked to provide your Administrator credentials).
+2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
