@@ -43,7 +43,16 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Admin Settings** and click the **Compute** tab.
 1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
-1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the init script.
+1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the init script. 
+   
+   Alternatively, you can use a one-line command to download the latest init script and execute it as part of your Databricks global init script.
+
+   Here's an example of a one-line init command that you can use as part of your global init script:
+
+   ```shell
+   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
+   ```
+
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
 1. Click **Add**.
@@ -132,4 +141,4 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 [4]: https://docs.databricks.com/en/security/secrets/index.html
 [6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
-[8]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init.sh
+[8]: https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_1.0.0-beta.sh
