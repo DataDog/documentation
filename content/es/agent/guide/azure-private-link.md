@@ -18,7 +18,7 @@ Puedes configurar Azure Private Link para exponer una dirección IP privada por 
 
 ### Conectar un endpoint
 
-1. En el portal de Azure, ve a **Private Link** (Enlace privado).
+1. En el portal de Azure, ve a **Private Link**.
 2. En el menú de navegación de la izquierda, selecciona **Private endpoints** (Endpoints privados).
 3. Selecciona **Create** (Crear).
 4. En la página **Create a private endpoint** > **Basics** (Crear un endpoint privado > Aspectos básicos), configura:
@@ -48,7 +48,7 @@ Puedes configurar Azure Private Link para exponer una dirección IP privada por 
    - En **Project details** (Detalles del proyecto), selecciona la **Subscription** (Suscripción) y el **Resource group** (Grupo de recursos) desde los que los recursos de producción deben acceder al endpoint privado.
    - En **Instance details** (Detalles de la instancia), en **Name** (Nombre), introduce el nombre de DNS privado que corresponde al servicio de consumo de Datadog que quieres utilizar. Puedes encontrar este nombre servicio en la [tabla de servicios publicados](#published-servicios).
 
-   Selecciona **Review create** (Revisar crear).
+   Selecciona **Review + create** (Revisar + crear).
 4. Revisa tus configuraciones. A continuación, selecciona **Create** (Crear).
 5. Una vez creada la zona DNS privada, selecciónala en lista.
 6. En el panel que se abre, selecciona **+ Record set** (+ Conjunto de registros).
