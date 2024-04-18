@@ -148,7 +148,7 @@ const crashApp = () => {
 
 If using `datadog-react-native-wizard` did not succeed or if you don't want to upload your symbolication files automatically on each release, follow the next steps to symbolicate crash reports.
 
-#### Upload JavaScript source maps on iOS builds
+### Upload JavaScript source maps on iOS builds
 
 You need to install `@datadog/datadog-ci` as a dev dependency to your project:
 
