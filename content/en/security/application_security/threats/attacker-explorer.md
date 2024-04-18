@@ -1,17 +1,22 @@
 ---
 title: Attackers Explorer
 kind: documentation
+disable_toc: false
+further_reading:
+- link: "/security/application_security/threats/protection"
+  tag: "Documentation"
+  text: "Protection"
 ---
 
-This topic describes how to use the Attackers Explorer to investigate and block Flagged IPs.
+This topic describes how to use **Attackers Explorer** to investigate and block Flagged IPs.
 
 ## Overview
 
-Datadog Application Security Management (ASM) identifies attackers using Flagged IPs. Flagged IPs are IPs that have exceeded thresholds for abuse. Customers can pivot, investigate, and take action against the attackers Datadog identifies using [Attackers Explorer][1]. 
+Datadog Application Security Management (ASM) identifies attackers using flagged IPs. Flagged IPs are IPs that have exceeded thresholds for abuse. You can pivot, investigate, and take action against the attackers Datadog identifies using [Attackers Explorer][1]. 
 
 ### How Attackers differs from Signals and Traces
 
-APM Attacks contains the **Signals**, **Traces**, and **Attackers** explorers. Each of the explorers focus on a specific use case:
+APM **Attacks** contains the **Signals**, **Traces**, and **Attackers** explorers. Each of the explorers focus on a specific use case:
 
 - **Traces** are the evidence for business logic events, such as logins, or attack payloads, such as command injection. All ASM traces have an IP address.
 - **Signals** are traces that are correlated into an actionable alert and assigned a severity. Each signal contains multiple traces.
@@ -26,11 +31,11 @@ ASM uses two methods when blocking traffic:
 
 - **Protect:** Automated blocking using ASM Protection configuration.
   Customers should block Attack Tools as their first automated blocking action. {link to this} Blocking Attack Tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
-- **Reactive:** Blocking using Signals or Attackers Explorer in response to observed threats.
+- **Reactive:** Blocking using Signals or Attackers explorer in response to observed threats.
 
 ### Best practices for blocking
 
-1. In the Attackers Explorer time selector, use short durations for blocking IP addresses. Between 15 minutes and 1 hour are recommended. 
+1. In the Attackers explorer time selector, use short durations for blocking IP addresses. Between 15 minutes and 1 hour are recommended. 
 2. Add authorized scanners to monitored passlists to observe activity but prevent blocking.
 3. Identifying load balancers and proxies for correct `X-Forwarded-For` headers.
 4. Block mobile ISPs with caution. These networks might have large numbers of users and mobile devices behind single IP addresses.
@@ -39,7 +44,7 @@ ASM uses two methods when blocking traffic:
 
 To start reviewing attackers, go to [Attackers Explorer][1].
 
-{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view.png" alt="ASM Attacker Explorer"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="ASM Attacker Explorer"  >}}
 
 There are three sections to the Attackers Explorer:
 
@@ -56,37 +61,32 @@ You can filter attackers using the default filters, such as **Flagged Attackers*
 
 To block an individual IP temporarily or permanently, do the following:
 
-1. Select the IP row and use the options in the **Actions** column or the **Block Attackers** option.
+1. Select the IP row and use the options in the **Actions** column or the **Compare and Block** option.
 2. To explore the signals or traces for an IP, select the IP row and select the **Explore Signals** or **Explore Traces** option.
-
-**TODO: Show IP pill screenshot**
 
 ## Block IPs in bulk
 
-You can select multiple IPs and block them temporarily or permanently using the Attackers Explorer's **Block Attackers** option. 
+You can select multiple IPs and block them temporarily or permanently using the Attackers Explorer's **Compare and Block** option. 
 
-**Block Attackers** provides metrics about the IPs to help you block with safety and confidence. For example, **Similarity Overview** and **Activity**, described later in this topic.
+**Compare and Block** provides metrics about the IPs to help you block with safety and confidence. For example, **Similarity Overview** and **Activity**, described later in this topic.
 
-
-**TODO: Show bulk IP actions screenshot**
-
-To investigate and block IPs in bulk, do the following:
+To compare and block IPs in bulk, do the following:
 1. Use the search, facets, and time selector to filter the list of IPs.
 2. Select multiple/all IP rows.
-3. Select the **Block Attackers** option.
-    In the following example, the selected IPs are from the same location and appear to be related. The **Block Attackers** option opens the **Block selected attackers** view, showing metrics and attributes for the selected IP addresses.
+3. Select the **Compare and Block** option.
+    In the following example, the selected IPs are from the same location and appear to be related. The **Compare and Block** option opens the **Block selected attackers** view, showing metrics and attributes for the selected IP addresses.
 
-    {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
+    {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
 
 4. To block attackers, click **Block**.
 
 ## Block selected attackers metrics
 
-When you select the **Block Attackers** option, the **Block selected attackers** view opens, showing metrics and attributes for the selected IP addresses.
+When you select the **Compare and Block** option, the **Block selected attackers** view opens, showing metrics and attributes for the selected IP addresses.
 
-{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
 
-<div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the time selection on the Attacker Explorer.</a></div>
+<div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the time selection on the **Attackers** sxplorer.</a></div>
 
 The **Block selected attackers** view metrics are explained in the following sections.
 
@@ -115,7 +115,7 @@ Users
 
 ### Activity
 
-The time scope for activity is inherited from the time selection on the Attackers Explorer.
+The time scope for activity is inherited from the time selection on the **Attackers** explorer.
 
 #### Signals
 
@@ -131,8 +131,12 @@ Attack traffic is all ASM traces inclusive of business logic.
 
 ### Block
 
-This adds the IP addresses to the Denylist {link} for the specified duration.
+This adds the IP addresses to the [Denylist][2] for the specified duration.
 
+## Add IPs to passlist
 
+To add IPs to your [Passlist][3], select the IP row, select the **Compare and Block** option, and then select **Add to Passlist**.
  
 [1]: https://app.datadoghq.com/security/appsec/attackers
+[2]: https://app.datadoghq.com/security/appsec/denylist
+[3]: https://app.datadoghq.com/security/appsec/passlist
