@@ -1,5 +1,5 @@
 ---
-title: Find Cloud Account or Team ID using our API
+title: Find a Cloud Account or Team ID using our API
 kind: guide
 ---
 
@@ -27,15 +27,15 @@ To find the ID of your cloud account, run the following command:
 
 {{< code-block lang="shell" >}}
 curl \
-  --url 'https://api.cloudcraft.co/${CLOUD}/account' \
+  --url 'https://api.cloudcraft.co/PROVIDER/account' \
   --tlsv1.2 \
   --proto '=https' \
   --compressed \
   --silent \
-  --header "Authorization: Bearer ${API_KEY}" | jq .
+  --header "Authorization: Bearer API_KEY" | jq .
 {{< /code-block >}}
 
-Replace `CLOUD` with `aws` or `azure` and `API_KEY` with your Cloudcraft API key.
+Replace `PROVIDER` with `aws` or `azure` and `API_KEY` with your Cloudcraft API key.
 
 The response should look something like this for AWS:
 
@@ -85,13 +85,13 @@ The `id` field contains the ID of your cloud account.
 
 ## Finding the team ID
 
-Finding the ID of your team is a bit more complicated because Cloudcraft doesn't expose the team ID in the UI or through a simple API call. However, you can still find the team ID by using the Cloudcraft UI in combination with the API.
+Cloudcraft doesn't expose the team ID in the UI or through a simple API call. However, you can still find the team ID by using the Cloudcraft UI in combination with the API.
 
 To find the ID of your team, follow these steps:
 
 1. Open the Cloudcraft UI and create a new empty blueprint.
 2. Click the **Share & Export** button in the top-right corner.
-3. Where it says **Share with a team...**, click the field and select the team or teams you want to get the ID for.
+3. Under **Share with a team...**, click the field and select the team or teams you want to get the ID for.
 
 {{< img src="cloudcraft/advanced/find-id-using-api/share-with-team.mp4" alt="A quick video showing a Cloudcraft user selecting the Datadog and Cloudcraft teams from the Share & Export menu." video="true">}}
 
@@ -101,12 +101,12 @@ To find the ID of your team, follow these steps:
 
 {{< code-block lang="shell" >}}
 curl \
-  --url 'https://api.cloudcraft.co/blueprint/${ID}' \
+  --url 'https://api.cloudcraft.co/blueprint/ID' \
   --tlsv1.2 \
   --proto '=https' \
   --compressed \
   --silent \
-  --header "Authorization: Bearer ${API_KEY}" | jq '.readAccess'
+  --header "Authorization: Bearer API_KEY" | jq '.readAccess'
 {{< /code-block >}}
 
 Replace `ID` with the ID of the blueprint you created and `API_KEY` with your Cloudcraft API key.
