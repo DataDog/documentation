@@ -346,9 +346,9 @@ The following image shows that `GET /store_history` is periodically impacting th
 
 Select `Per endpoint call` to see behavior changes even as traffic shifts over time. This is useful for progressive rollout sanity checks or analyzing daily traffic patterns.
 
-The following example shows that CPU per request doubled for `/GET train`:
+The following example shows that CPU per request increased for `/GET train`:
 
-{{< img src="profiler/endpoint_per_request.png" alt="Troubleshooting a endpoint that started using more resource per request" >}}
+{{< img src="profiler/endpoint_per_request2.mp4" alt="Troubleshooting a endpoint that started using more resource per request" video="true" >}}
 
 ## Further reading
 
