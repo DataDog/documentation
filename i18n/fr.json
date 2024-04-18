@@ -112,7 +112,7 @@
   },
 
   "get_started_free": {
-    "other": "ESSAI GRATUIT"
+    "other": "COMMENCER GRATUITEMENT"
   },
 
   "get_started_free_short": {
@@ -325,8 +325,5 @@
   },
   "source" : {
     "other": "Source"
-  },
-  "try_this_rule" : {
-    "other": "TRY THIS RULE"
   }
 }
