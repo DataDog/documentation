@@ -128,10 +128,11 @@ For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitori
 
 ## Install the Agent
 
-**Because Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host**. There are several options for installing and running the Agent.
+Because Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
+
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
 Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. See the [sample conf file][2] for all available configuration options.
