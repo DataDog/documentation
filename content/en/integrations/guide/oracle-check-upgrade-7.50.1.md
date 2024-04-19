@@ -21,7 +21,7 @@ The [Oracle integration][3] is completely rewritten in [Agent release][2] `7.53.
 
 The configuration in the subdirectory `oracle.d` remains the same.
 
-**Note**: The Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
+**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
 
 The new Oracle check requires more read privileges on system views in the database than the deprecated Oracle integration. Run the `grant` commands for your hosting type prior to upgrading the Agent:
 
