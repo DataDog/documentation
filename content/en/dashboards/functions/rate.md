@@ -55,6 +55,12 @@ Calculates the difference between each interval on a per interval basis. For exa
 |:---------------|:----------------------------------------------|:-------------------------------|
 | `derivative()` | Graph the derivative (diff/dt) of the metric. | `derivative(<METRIC_NAME>{*})` |
 
+## Throughput
+
+| Function       | Description                                                                                                                                        | Example                          |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| `throughput()` | Converts a time series into a rate per second, by dividing each value by the number of seconds in the time bucket to produce the per-second value. | `throughput(<METRIC_NAME>{*})` |
+
 ## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
