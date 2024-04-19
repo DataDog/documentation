@@ -51,7 +51,7 @@ Browser tests simulate a user's journey through your web application beginning a
 
 ### Configure your test details
 
-1. On the Datadog site, hover over **UX Monitoring** and click **Continuous Testing**.
+1. Navigate to [Synthetic Monitoring & Testing][26].
 2. In the top right corner, click **New Test** > **Browser Test**.
 3. Define your browser test:
 
@@ -104,9 +104,9 @@ Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help
 
 ## Examine results in the Synthetic Monitoring and Continuous Testing Explorer
 
-The Synthetic Monitoring and Continuous Testing Explorer allows you to create visualizations and filter [CI batches][22] and [test runs][23] for your Continuous Testing tests. Navigate to **UX Monitoring** > **Continuous Testing**.
+The Synthetic Monitoring and Continuous Testing Explorer allows you to create visualizations and filter [CI batches][22] and [test runs][23] for your Continuous Testing tests.
 
-Select **CI Batches** or **Test Runs** to see results from your CI batches or test runs in the Explorer. Select a CI batch or test from the list to get a more detailed view of the result.
+Navigate to [Synthetic Monitoring & Testing][26], then select **CI Batches** or **Test Runs** to see results from your CI batches or test runs in the Explorer. Select a CI batch or test from the list to get a more detailed view of the result.
 
 {{< img src="continuous_testing/ci_explorer_test_results.png" alt="ci_explorer_test_results" style="width:100%;" >}}
 
@@ -134,7 +134,7 @@ For more information about using facets in your search query, see [Search Test R
 
 By default, Synthetic tests are not parallelized. Parallelization allows you to run multiple tests in your CI/CD pipelines simultaneously. If you want to parallelize your tests, you can use the **Estimate Parallelization** calculator to determine your needs.
 
-Navigate to **UX Monitoring** > **Settings** and click **Parallelization Settings** to locate the calculator.
+Navigate to [Continuous Testing Settings][27] to locate the calculator.
 
 {{< img src="continuous_testing/parallelization_estimate.png" alt="parallelization_estimate" style="width:100%;" >}}
 
@@ -175,3 +175,5 @@ See the [Parallelization documentation][18] for more details.
 [23]: /glossary/?product=synthetic-monitoring#test-run
 [24]: /glossary/?product=synthetic-monitoring#parallelization
 [25]: /account_management/teams/
+[26]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.unhealthy%3Atrue&index=%2A&track=synthetics&viz=stream&from_ts=1713544430419&to_ts=1713548030419&live=true
+[27]: https://app.datadoghq.com/synthetics/settings/continuous-testing
