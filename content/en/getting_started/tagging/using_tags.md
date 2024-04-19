@@ -338,8 +338,6 @@ When creating a [metric-based SLO][1], use metric tags in the SLO's success rati
 * **from** text box to limit the metric scope to only those tags.
 * **sum by** text box to create a grouped metric-based SLO that display a status percentage and remaining error budget for both the overall SLO and for each tag value.
 
-{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Metric-based SLO Tags" style="width:80%;">}}
-
 [1]: /service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
