@@ -378,7 +378,7 @@ Las siguientes opciones y etiquetas (tags) están obsoletas:
 
 * `label_to_tag_prefix` se ha reemplazado por `kubernetes_pod_labels_as_tags`.
 * Las etiquetas `container_alias` no se recopilan.
-* `kube_replicate_controller` solo se añade si el pod ha sido creado por un controlador de replicación. En su lugar, utiliza un etiqueta (tag) creadora relevante como `kube_deployment`, o `kube_daemon_set`.
+* `kube_replicate_controller` solo se añade si el pod ha sido creado por un controlador de replicación. En su lugar, utiliza una etiqueta (tag) creadora relevante como `kube_deployment`, o `kube_daemon_set`.
 
 [1]: /es/integrations/kubelet/
 [2]: /es/integrations/kube_apiserver_metrics/
