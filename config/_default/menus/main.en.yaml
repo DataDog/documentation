@@ -3089,7 +3089,7 @@ menu:
       parent: profiler
       identifier: profiler_guides
       weight: 7
-    - name: Database Monitoring
+    - name: Database Monitoring 1
       url: database_monitoring/
       pre: database-2
       identifier: dbm
@@ -3279,6 +3279,197 @@ menu:
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
+      weight: 12
+    - name: Database Monitoring 2
+      url: database_monitoring_markdoc/
+      pre: database-2
+      identifier: dbm_markdoc
+      parent: apm_heading
+      weight: 30000
+    - name: Setup Architectures
+      url: database_monitoring_markdoc/architecture/
+      parent: dbm_markdoc
+      identifier: dbm_setup_architecture_markdoc
+      weight: 1
+    - name: Setting Up Postgres
+      url: database_monitoring_markdoc/setup_postgres/
+      parent: dbm_markdoc
+      identifier: dbm_setup_postgres_markdoc
+      weight: 2
+    - name: Self-hosted
+      url: database_monitoring_markdoc/setup_postgres/selfhosted
+      parent: dbm_setup_postgres_markdoc
+      identifier: dbm_setup_postgres_selfhosted_markdoc
+      weight: 201
+    - name: RDS
+      url: database_monitoring_markdoc/setup_postgres/rds
+      parent: dbm_setup_postgres_markdoc
+      identifier: dbm_setup_postgres_rds_markdoc
+      weight: 202
+    - name: Aurora
+      url: database_monitoring_markdoc/setup_postgres/aurora
+      parent: dbm_setup_postgres_markdoc
+      identifier: dbm_setup_postgres_aurora_markdoc
+      weight: 203
+    - name: Google Cloud SQL
+      url: database_monitoring_markdoc/setup_postgres/gcsql
+      parent: dbm_setup_postgres_markdoc
+      identifier: dbm_setup_postgres_gcsql_markdoc
+      weight: 204
+    - name: Azure
+      url: database_monitoring_markdoc/setup_postgres/azure
+      parent: dbm_setup_postgres_markdoc
+      identifier: dbm_postgres_azure_markdoc
+      weight: 205
+    - name: Advanced Configuration
+      url: database_monitoring_markdoc/setup_postgres/advanced_configuration
+      parent: dbm_setup_postgres_markdoc
+      identifier: dbm_postgres_advanced_configuration_markdoc
+      weight: 206
+    - name: Troubleshooting
+      url: database_monitoring_markdoc/setup_postgres/troubleshooting/
+      parent: dbm_setup_postgres_markdoc
+      identifier: dbm_troubleshooting_postgres_markdoc
+      weight: 207
+    - name: Setting Up MySQL
+      url: database_monitoring_markdoc/setup_mysql/
+      parent: dbm
+      identifier: dbm_setup_mysql_markdoc
+      weight: 3
+    - name: Self-hosted
+      url: database_monitoring_markdoc/setup_mysql/selfhosted
+      parent: dbm_setup_mysql_markdoc
+      identifier: dbm_setup_mysql_selfhosted_markdoc
+      weight: 301
+    - name: RDS
+      url: database_monitoring_markdoc/setup_mysql/rds
+      parent: dbm_setup_mysql_markdoc
+      identifier: dbm_setup_mysql_rds_markdoc
+      weight: 302
+    - name: Aurora
+      url: database_monitoring_markdoc/setup_mysql/aurora
+      parent: dbm_setup_mysql_markdoc
+      identifier: dbm_setup_mysql_aurora_markdoc
+      weight: 303
+    - name: Google Cloud SQL
+      url: database_monitoring_markdoc/setup_mysql/gcsql
+      parent: dbm_setup_mysql_markdoc
+      identifier: dbm_setup_mysql_gcsql_markdoc
+      weight: 304
+    - name: Azure
+      url: database_monitoring_markdoc/setup_mysql/azure
+      parent: dbm_setup_mysql_markdoc
+      identifier: dbm_mysql_azure_markdoc
+      weight: 305
+    - name: Advanced Configuration
+      url: database_monitoring_markdoc/setup_mysql/advanced_configuration
+      parent: dbm_setup_mysql_markdoc
+      identifier: dbm_mysql_advanced_configuration_markdoc
+      weight: 306
+    - name: Troubleshooting
+      url: database_monitoring_markdoc/setup_mysql/troubleshooting/
+      parent: dbm_setup_mysql_markdoc
+      identifier: dbm_troubleshooting_mysql_markdoc
+      weight: 307
+    - name: Setting Up SQL Server
+      url: database_monitoring_markdoc/setup_sql_server/
+      parent: dbm_markdoc
+      identifier: dbm_setup_sql_server_markdoc
+      weight: 4
+    - name: Self-hosted
+      url: database_monitoring_markdoc/setup_sql_server/selfhosted/
+      parent: dbm_setup_sql_server_markdoc
+      identifier: dbm_setup_sql_server_selfhosted_markdoc
+      weight: 401
+    - name: RDS
+      url: database_monitoring_markdoc/setup_sql_server/rds/
+      parent: dbm_setup_sql_server_markdoc
+      identifier: dbm_setup_sql_server_rds_markdoc
+      weight: 402
+    - name: Azure
+      url: database_monitoring_markdoc/setup_sql_server/azure/
+      parent: dbm_setup_sql_server_markdoc
+      identifier: dbm_setup_sql_server_azure_markdoc
+      weight: 403
+    - name: Google Cloud SQL
+      url: database_monitoring_markdoc/setup_sql_server/gcsql/
+      parent: dbm_setup_sql_server_markdoc
+      identifier: dbm_setup_sql_server_gcsql_markdoc
+      weight: 404
+    - name: Troubleshooting
+      url: database_monitoring_markdoc/setup_sql_server/troubleshooting/
+      parent: dbm_setup_sql_server_markdoc
+      identifier: dbm_troubleshooting_sql_server_markdoc
+      weight: 405
+    - name: Setting Up Oracle
+      url: database_monitoring_markdoc/setup_oracle/
+      parent: dbm_markdoc
+      identifier: dbm_setup_oracle_markdoc
+      weight: 5
+    - name: Self-hosted
+      url: database_monitoring_markdoc/setup_oracle/selfhosted/
+      parent: dbm_setup_oracle_markdoc
+      identifier: dbm_setup_oracle_selfhosted_markdoc
+      weight: 501
+    - name: RDS
+      url: database_monitoring_markdoc/setup_oracle/rds/
+      parent: dbm_setup_oracle_markdoc
+      identifier: dbm_setup_oracle_rds_markdoc
+      weight: 502
+    - name: RAC
+      url: database_monitoring_markdoc/setup_oracle/rac/
+      parent: dbm_setup_oracle_markdoc
+      identifier: dbm_setup_oracle_rac_markdoc
+      weight: 503
+    - name: Exadata
+      url: database_monitoring_markdoc/setup_oracle/exadata/
+      parent: dbm_setup_oracle_markdoc
+      identifier: dbm_setup_oracle_exadata_markdoc
+      weight: 504
+    - name: Autonomous Database
+      url: database_monitoring_markdoc/setup_oracle/autonomous_database/
+      parent: dbm_setup_oracle_markdoc
+      identifier: dbm_setup_oracle_autonomous_database_markdoc
+      weight: 505
+    - name: Troubleshooting
+      url: database_monitoring_markdoc/setup_oracle/troubleshooting/
+      parent: dbm_setup_oracle_markdoc
+      identifier: dbm_troubleshooting_oracle_markdoc
+      weight: 506
+    - name: Connecting DBM and Traces
+      url: database_monitoring_markdoc/connect_dbm_and_apm/
+      parent: dbm_markdoc
+      identifier: dbm_connect_dbm_and_apm_markdoc
+      weight: 6
+    - name: Data Collected
+      url: database_monitoring_markdoc/data_collected
+      parent: dbm_markdoc
+      identifier: dbm_data_collected_markdoc
+      weight: 7
+    - name: Exploring Database Hosts
+      url: database_monitoring_markdoc/database_hosts/
+      parent: dbm_markdoc
+      identifier: dbm_database_hosts_markdoc
+      weight: 8
+    - name: Exploring Query Metrics
+      url: database_monitoring_markdoc/query_metrics/
+      parent: dbm_markdoc
+      identifier: dbm_query_metrics_markdoc
+      weight: 9
+    - name: Exploring Query Samples
+      url: database_monitoring_markdoc/query_samples/
+      parent: dbm_markdoc
+      identifier: dbm_query_samples_markdoc
+      weight: 10
+    - name: Troubleshooting
+      url: database_monitoring_markdoc/troubleshooting/
+      parent: dbm_markdoc
+      identifier: dbm_troubleshooting_markdoc
+      weight: 11
+    - name: Guides
+      url: database_monitoring_markdoc/guide/
+      parent: dbm_markdoc
+      identifier: dbm_guides_markdoc
       weight: 12
     - name: Data Streams Monitoring
       url: data_streams/
