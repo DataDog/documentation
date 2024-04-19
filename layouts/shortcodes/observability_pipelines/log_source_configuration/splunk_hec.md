@@ -16,6 +16,6 @@ curl http://<OPW_HOST>:8088/services/collector/event \
 
 `<DD_OP_DESTINATION_SPLUNK_HEC_TOKEN>` is the HEC token you provided during the [Install your Observability Pipelines Worker](#install-the-observability-pipelines-worker) step.
 
-At this point, your logs should be going to the Worker, processed by the pipeline, and delivered to the Splunk index.
+At this point, your logs should be going to the Worker, processed by the pipeline, and delivered to the configured destination.
 
 [901]: https://docs.splunk.com/Documentation/Splunk/9.2.1/Data/UsetheHTTPEventCollector
