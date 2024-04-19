@@ -87,7 +87,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 {{% /tab %}}
 {{% tab "On a specific cluster" %}}
 
-1. In Databricks, create a init script file in **Workspace** with the following content, jot down the file path.
+1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
    ```bash
    #!/bin/bash
 
