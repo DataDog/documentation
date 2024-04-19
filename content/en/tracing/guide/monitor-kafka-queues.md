@@ -27,7 +27,7 @@ Visualize the performance of your cluster in real time and correlate the perform
 
 [Datadog Data Streams Monitoring][3] provides a standardized method for your teams to measure pipeline health and end-to-end latencies for events traversing your system. The deep visibility offered by Data Streams Monitoring enables you to pinpoint faulty producers, consumers, or queues driving delays and lag in the pipeline. You can discover hard-to-debug pipeline issues such as blocked messages, hot partitions, or offline consumers. And you can collaborate seamlessly across relevant infrastructure or app teams.
 
-{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb.mp4" alt="Data Streams Monitoring Demo" video="true">}}
+{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb2.mp4" alt="Data Streams Monitoring Demo" video="true">}}
 
 ### Distributed traces
 
