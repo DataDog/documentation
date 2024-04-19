@@ -23,16 +23,16 @@ title: Cumplimiento de FIPS de Datadog
 ---
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-warning">El proxy de FIPS de Datadog Agent solo está disponible en la región US1-FED..</a></div>
+<div class="alert alert-warning">El Datadog Agent FIPS Proxy solo está disponible en la región US1-FED..</a></div>
 {{< /site-region >}}
 
-El proxy de FIPS de Datadog Agent garantiza que la comunicación entre Datadog Agent y Datadog utiliza cifrado conforme a FIPS.
+El Datadog Agent FIPS Proxy garantiza que la comunicación entre Datadog Agent y Datadog utiliza cifrado conforme a FIPS.
 
-El proxy de FIPS de Datadog Agent es un componente distribuido por separado que se despliega en el mismo host que el Datadog Agent . El proxy actúa como intermediario entre el consumo de Agent y Datadog. El Agent se comunica con el proxy de FIPS de Datadog Agent, que cifra las cargas útiles utilizando una criptografía validada por FIPS 140-2 y las retransmite a Datadog. El Datadog Agent y el proxy de FIPS de Agent deben configurarse en tándem para comunicarse entre sí.
+El Datadog Agent FIPS Proxy es un componente distribuido por separado que se despliega en el mismo host que el Datadog Agent . El proxy actúa como intermediario entre el consumo de Agent y Datadog. El Agent se comunica con el Datadog Agent FIPS Proxy, que cifra las cargas útiles utilizando una criptografía validada por FIPS 140-2 y las retransmite a Datadog. El Datadog Agent y el Agent FIPS Proxy  deben configurarse en tándem para comunicarse entre sí.
 
 ## Plataformas compatibles y limitaciones
 
-La conformidad de proxy de FIPS de Datadog Agent se basa en el uso del [Cryptographic Module - Certificate #4282 (Módulo criptográfico - Certificado #4282)] validado por FIPS 140-2[1]. Consulta la [security policy (política de seguridad)][2] relacionada para obtener información sobre las restricciones y los entornos operativos validados.
+La conformidad de Datadog Agent FIPS Proxy se basa en el uso del [Cryptographic Module - Certificate #4282 (Módulo criptográfico - Certificado #4282)] validado por FIPS 140-2[1]. Consulta la [security policy (política de seguridad)][2] relacionada para obtener información sobre las restricciones y los entornos operativos validados.
 
 **Es responsabilidad del usuario garantizar que el funcionamiento de entorno cumple con la política de seguridad y las directrices generales de FIPS.**
 
@@ -76,7 +76,7 @@ El proxy de FIPS de Datadog Agent **no** admite lo siguiente:
 
 ### Instalar el Agent en un nuevo host
 
-Para instalar el Datadog Agent con el proxy de FIPS de Datadog Agent, añade `DD_FIPS_MODE=1` a las instrucciones de instalación en un solo paso de la página [Datadog Agent Integration (Integración de Datadog Agent)][1]. Por ejemplo
+Para instalar el Datadog Agent con el Datadog Agent FIPS Proxy, añade `DD_FIPS_MODE=1` a las instrucciones de instalación en un solo paso de la página [Datadog Agent Integration (Integración de Datadog Agent)][1]. Por ejemplo
 
 ```shell
 DD_API_KEY=<DD_API_KEY> \
@@ -88,11 +88,11 @@ bash -c "$(curl -L \
 
 Establecer la variable de entorno `DD_FIPS_MODE` instala el paquete de FIPS junto con el Agent, y configura el Agent para usar el proxy. No hay pasos de configuración adicionales si estás usando este método, pero deberías [verify the installation (verificar la instalación)](#verify-your-installation).
 
-### Añadir el proxy de FIPS de Datadog Agent a un Agent
+### Añadir el Datadog Agent FIPS Proxy a un Agent
 
-Sigue los pasos que se indican a continuación para añadir el proxy de FIPS de Datadog Agent a una instalación existente de Agent.
+Sigue los pasos que se indican a continuación para añadir el Datadog Agent FIPS Proxy a una instalación existente de Agent.
 
-#### Instalar el paquete de proxy de FIPS de Datadog Agent:
+#### Instalar el paquete de Datadog Agent FIPS Proxy:
 
 1. Ejecuta los siguientes comandos para instalar el proxy:
 
@@ -126,7 +126,7 @@ Sigue los pasos que se indican a continuación para añadir el proxy de FIPS de 
 
 #### Configurar el Agent para utilizar el proxy de FIPS de Datadog Agent
 
-El paquete de proxy de FIPS de Datadog Agent viene preconfigurado para su uso con el centro de datos US1-FED. Si estás actualizando un Datadog Agent existente, **debes** configurar el Agent para utilizar el proxy.
+El paquete de Datadog Agent FIPS Proxy viene preconfigurado para su uso con el centro de datos US1-FED. Si estás actualizando un Datadog Agent existente, **debes** configurar el Agent para utilizar el proxy.
 
 Para eso, establece `fips.enabled` en `verdadero` y `fips.https` en `falso` en el [Agent configuration file (archivo de configuración de Agent)][2]:
 
@@ -136,13 +136,13 @@ fips:
   https: false
 ```
 
-La opción `fips` está disponible en las versiones de Agent 7.41 o posteriores. Cuando la configuración está activada, Datadog Agent redirige todas sus comunicaciones a Proxy de FIPS de Datadog Agent para los productos compatibles. Esta configuración ignora las opciones de URL personalizadas, como `dd_url`.
+La opción `fips` está disponible en las versiones de Agent 7.41 o posteriores. Cuando la configuración está activada, Datadog Agent redirige todas sus comunicaciones a Datadog Agent FIPS Proxy para los productos compatibles. Esta configuración ignora las opciones de URL personalizadas, como `dd_url`.
 
-La opción `https` se establece en `falso` porque Agent utiliza HTTP para comunicarse con el proxy. El proxy de FIPS de Datadog Agent se ejecuta en el mismo host que Agent y confía en la seguridad del host para proteger dicha comunicación.
+La opción `https` se establece en `falso` porque Agent utiliza HTTP para comunicarse con el proxy. El Datadog Agent FIPS Proxy se ejecuta en el mismo host que Agent y confía en la seguridad del host para proteger dicha comunicación.
 
 ** La seguridad y el fortalecimiento de host son tu responsabilidad.**
 
-<div class="alert alert-warning">El valor predeterminado de <code>fips.enabled</code> es <code>falso</code> en el Agent. Debe establecerse en <code>verdadero</code> para garantizar que todas las comunicaciones se reenvían a través del Proxy de FIPS de Datadog Agent.<br><br><strong>Si <code>fips.enabled</code> no está establecido en <code>verdadero</code>, el Agent no es compatible con FIPS</strong>.</div>
+<div class="alert alert-warning">El valor predeterminado de <code>fips.enabled</code> es <code>falso</code> en el Agent. Debe establecerse en <code>verdadero</code> para garantizar que todas las comunicaciones se reenvían a través del Datadog Agent FIPS Proxy.<br><br><strong>Si <code>fips.enabled</code> no está establecido en <code>verdadero</code>, el Agent no es compatible con FIPS</strong>.</div>
 
 ### Verifica tu instalación
 
