@@ -20,7 +20,7 @@ The unique user attributes field must be populated. See the [instructions for se
 
 ## Build a graph
 
-To build a retention graph, navigate to **[UX Monitoring > Product Analytics > Retention Analysis][1]**, then follow the steps below.
+To build a retention graph, navigate to **[Digital Experience > Product Analytics > Retention Analysis][1]**, then follow the steps below.
 
 ### 1. Define the initial event
 1. Select the view or action to act as the initial event for defining a group of users.
