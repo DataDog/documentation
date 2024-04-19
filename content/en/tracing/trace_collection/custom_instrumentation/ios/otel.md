@@ -8,8 +8,7 @@ description: 'Instrument your iOS and tvOS application with OpenTelemetry API, t
 aliases:
 - /tracing/trace_collection/otel_instrumentation/ios/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/ios
-fur
-ther_reading:
+further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
