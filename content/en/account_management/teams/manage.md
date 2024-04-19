@@ -20,7 +20,7 @@ You can change which resources are shown and their order on the page.
 
 Customize the look of your team by choosing an emoji avatar and banner. The emoji avatar displays next to the team name in lists across Datadog.
 
-See the following instructions to customize the your team.
+See the following instructions to customize your team.
 
 ### Customize layout
 
