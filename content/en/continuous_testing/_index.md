@@ -47,11 +47,11 @@ With support for multiple protocols, frameworks, and APIs—including gRPC and W
 
 ## Improve test reliability
 
-Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. Gain confidence in your test results by minimizing false positives through self-healing browser tests, mobile app tests, and automatic test retries. To ensure your users have the best experience, you can automate [cross-browser testing][2] and [mobile application testing][16].
+Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. To ensure your users have the best experience, you can automate [cross-browser testing][2] and [mobile application testing][16]. Gain confidence in your test results by minimizing false positives through self-healing browser tests, mobile app tests, and automatic test retries. 
 
 ## Increase efficiency through seamless integrations
 
-Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as Slack or Jira to merge workflows and avoid context switching.
+Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as [Slack][18] or [Jira][19] to merge workflows and avoid context switching.
 
 {{< partial name="continuous_testing/ct-getting-started.html" >}}
 
@@ -95,3 +95,5 @@ After you have configured some [Synthetic tests][4], see the documentation for y
 [15]: /mobile_app_testing/mobile_app_tests
 [16]: /mobile_app_testing/
 [17]: /continuous_testing/environments
+[18]: /integrations/slack/
+[19]: /integrations/jira/

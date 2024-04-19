@@ -5,18 +5,18 @@ further_reading:
 - link: 'https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests in a CI/CD Pipeline'
-- link: '/synthetics/api_tests'
+- link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
+  tag: 'Blog'
+  text: 'Best practices for continuous testing with Datadog'
+- link: 'https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/'
+  tag: 'Blog'
+  text: 'Use Datadog Continuous Testing to release with confidence'
+- link: '/continuous_testing/environments'
   tag: 'Documentation'
-  text: 'Learn more about API tests'
-- link: '/synthetics/multistep'
-  tag: 'Documentation'
-  text: 'Learn more about multistep API tests'
-- link: '/synthetics/browser_tests'
-  tag: 'Documentation'
-  text: 'Learn more about browser tests'
+  text: 'Learn about local and staging environments'
 - link: '/continuous_testing/cicd_integrations'
   tag: 'Documentation'
-  text: 'Learn about running Synthetic tests in a CI pipeline'
+  text: 'Learn about Continuous Testing and CI/CD'
 algolia:
   tags: ["continuous testing"]
 ---
@@ -24,20 +24,22 @@ algolia:
 
 ## Overview
 
-Continuous Testing lets you automatically run and monitor the same [Synthetic tests][1] you've configured in your staging, QA, and pre-production environments to proactively alert your team and block your pipeline deployments should code changes cause testing failures.
+Continuous Testing enables you to automatically run and monitor the same [Synthetic tests][1] you've configured in your [staging, QA, and pre-production environments][14], which proactively alert your team and block your pipeline deployments when code changes cause test failures.
 
-Your codeless tests can:
+Your Continuous Testing tests can:
+
 * [Launch API requests on your systems][2]
 * [Simulate browser scenarios within your web application][3]
 * [Test functionality within your iOS and Android applications][4]
 
-Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Continuous Testing Explorer.][5]
+You can set up [parallelization][24], which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes. Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Continuous Testing Explorer][5]. 
 
-Improve your developer workflow with Continuous Testing:
-* Use the [`datadog-ci` NPM package][6] to run these tests directly in your CI pipeline.
-* Use the [Datadog Synthetics VS Code Integration][7] to run tests in your IDE.
+To improve your developer workflow with Continuous Testing, you can:
 
-Continuous Testing also offers [parallelization][24], which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes.
+* Use the [`datadog-ci` NPM package][6] to run tests directly in your CI pipeline.
+* Use the [Datadog Synthetics VS Code Integration][7] to run tests directly in your IDE.
+
+Continuous Testing accelerates your organization's application development by automating end-to-end testing across the entire software lifecycle. You can run tests in local and staging environments, parallelize test runs, and integrate with CI providers.
 
 ## Prerequisites
 
@@ -64,6 +66,15 @@ Browser tests simulate a user's journey through your web application beginning a
 
 {{< img src="continuous_testing/new_browser_test.png" alt="new_browser_test" style="width:100%;" >}}
 
+## Integrate with a CI provider or collaboration tool
+
+Accelerate your application development by combining testing and troubleshooting in Continuous Testing, streamlining your workflows, and minimizing context switching. 
+
+To integrate with a CI provider or a collaboration tool like [Slack][28] or [Jira][29], see the respective documentation:
+
+{{< partial name="getting_started/continuous_testing/providers.html" >}}
+
+</br>
 
 ## Run your Continuous Testing tests
 
@@ -88,7 +99,7 @@ For more information about running the Synthetics command and using reporters, s
 
 Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help you:
 
-* Use a [Private Location][13] or [Tunnel][14] to accelerate development locally.
+* Use a [private location][13] or [a local environment][14] to accelerate development locally.
 * Run HTTP API tests and browser tests and see their results within VS Code.
 * Test only what matters by executing relevant tests at the same time.
 
@@ -144,7 +155,7 @@ $$\text"estimated parallelization" = {\text"24 tests per CI batch"* \text"2 minu
 
 Once you're done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then, click **Save Selection**.
 
-See the [Parallelization documentation][18] for more details.
+For more information, see the [Parallelization documentation][18].
 
 ## Further Reading
 
@@ -163,7 +174,7 @@ See the [Parallelization documentation][18] for more details.
 [11]: /continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
 [12]: /developers/ide_integrations/vscode/
 [13]: /getting_started/synthetics/private_location/
-[14]: /continuous_testing/
+[14]: /continuous_testing/environments/
 [15]: /continuous_testing/explorer/?tab=testruns#create-a-search-query
 [16]: /continuous_testing/explorer/saved_views/
 [17]: /continuous_testing/explorer/search_runs/
@@ -177,3 +188,5 @@ See the [Parallelization documentation][18] for more details.
 [25]: /account_management/teams/
 [26]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.unhealthy%3Atrue&index=%2A&track=synthetics&viz=stream&from_ts=1713544430419&to_ts=1713548030419&live=true
 [27]: https://app.datadoghq.com/synthetics/settings/continuous-testing
+[28]: /integrations/slack/
+[29]: /integrations/jira/
