@@ -44,9 +44,9 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 Select up to three different time windows from the following:
 - **Rolling time windows**: 7, 30, or 90 days
 - **Calendar time windows**: week to date, previous week, month to date, or previous month
-- **Global time**: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 15 months of historical info for metric-based and Time Slice SLOs, and up to 3 months for monitor-based SLOs. 
+- **Global time**: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 3 months of historical info for monitor-based SLOs. For Time Slice and metric-based SLOs, the supported historical view matches your account's metrics retention duration (by default, this is 15 months).
   
-  **Note:** To display an error budget and color-code your `Global time` SLO status value as green or red, you need to specify an SLO target. If the SLO input target is not specified, only the SLO status is shown, and the font color remains gray.
+**Note:** To display an error budget and color-code your `Global time` SLO status value as green or red, you need to specify an SLO target. If the SLO input target is not specified, only the SLO status is shown, and the font color remains gray.
 
 #### Display preferences
 
