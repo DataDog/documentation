@@ -118,12 +118,12 @@ There are two requirements for calculating Change Lead Time:
 
 ### Breakdown metrics
 
-DataDog also provides the following breakdown metrics, which represent the different stages since the commit was made until it is deployed.
+DataDog also provides the following breakdown metrics, which represent the different stages since the commit is made until it is deployed.
 
 - `dora.time_to_pr_ready`: Time from the commit until the PR is ready for review. This metric is only emitted for commits that were made before the PR is ready for review.
 - `dora.review_time`: Time since the PR is ready for review until it receives the last approval. This metric only emitted for commits that were made before hte PR was approved.
 - `dora.merge_time`: Time since the last approval until the PR is merged.
-- `dora.time_to_deploy`: Time since the PR is merged until it the deployment starts. If a commit does not have an associated PR, we will emit this metric as the time since the commit was made until the deployment starts.
+- `dora.time_to_deploy`: Time since the PR is merged until the deployment starts. If a commit does not have an associated PR, we will emit this metric as the time since the commit was made until the deployment starts.
 - `dora.deploy_time`: Time since the deployment starts until it finishes. We will not emit this metric if there is no deployment duration information.
 
 Note that these metrics are emitted for every commit and not per deployment.
