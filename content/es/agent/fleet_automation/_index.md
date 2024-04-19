@@ -35,7 +35,7 @@ Con la plataforma de automatización de flotas, puedes:
 
 Para acceder a la automatización de flotas, haz clic en **Integrations** > [**Fleet Automation**][1] (Integraciones > Automatización de flotas).
 
-Utiliza la página de automatización de flotas para conocer los hosts no monitorizados, los Agents que deben actualizarse o los Agents que presentan problemas de integración. Para cada Agent, puedes ver:
+Utiliza la página de automatización de flotas para conocer los hosts no monitorizados, los Agents que deben actualizarse o los Agents que presentan problemas de integración. En cada Agent, puedes ver:
 - La versión del Agent 
 - Si el Agent tiene alguna integración no configurada o mal configurada
 - Los servicios que está monitorizando el Agent
@@ -71,8 +71,8 @@ La automatización de flotas está disponible para todos los usuarios de una org
 
 | Permiso | Descripción |
 |--------------|---------------|
-| `API keys read`| Limita los usuarios que pueden visualizar y buscar Agents por clave API. |
-| `Agent flare collection` | Limita los usuarios que pueden enviar flares de forma remota. |
+| `API keys read`| Determina qué usuarios pueden visualizar y buscar Agents por clave API. |
+| `Agent flare collection` | Determina qué usuarios pueden enviar flares de forma remota. |
 
 Para obtener información sobre la configuración de funciones y permisos, consulta [Control de acceso][5].
 
