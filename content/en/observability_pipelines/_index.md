@@ -15,6 +15,21 @@ further_reading:
 - link: "/agent/configuration/dual-shipping/#yaml-configuration"
   tag: "documentation"
   text: "Dual shipping with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
+  tag: "blog"
+  text: "Redact sensitive data from your logs on-prem by using Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-dual-ship-logs/"
+  tag: "blog"
+  text: "Dual ship logs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-log-volume-control/"
+  tag: "blog"
+  text: "Control your log volumes with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-archiving/"
+  tag: "blog"
+  text: "Archive your logs with Observability Pipelines for a simple and affordable migration to Datadog"
+- link: "https://www.datadoghq.com/blog/observability-pipelines/"
+  tag: "blog"
+  text: "Aggregate, process, and route logs easily with Datadog Observability Pipelines"
 ---
 
 {{< site-region region="gov" >}}
