@@ -19,6 +19,7 @@ assets:
     source_type_name: LambdaTest
   logs:
     source: lambdatest
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: LambdaTest

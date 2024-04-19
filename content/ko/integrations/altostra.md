@@ -36,7 +36,7 @@ integration_id: altostra
 integration_title: Altostra
 integration_version: ''
 is_public: true
-kind: 통합
+kind: integration
 manifest_version: 2.0.0
 name: altostra
 public_title: Altostra
