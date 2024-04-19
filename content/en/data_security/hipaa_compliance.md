@@ -17,14 +17,14 @@ The Health Insurance Portability and Accountability Act (HIPAA) is a set of rule
 
 Organizations use cloud-based solutions to manage patient data, which requires adherence to HIPAA regulations. Datadog provides HIPAA compliant observability and ensures compliance with regulatory requirements.
 
-## Set up a HIPAA-compliant Datadog Log Management
+## HIPAA-compliant Log Management
 
-Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog's Log Management Service.
+Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) through Datadog's Log Management Service.
 
-These features are not available to customers who have signed Datadog's BAA:
+The following features are not available to customers who have signed Datadog's BAA:
 
 * Users cannot request support through chat.
-* You cannot [share][5] logs, security signals, or traces from the Datadog explorer.
+* You cannot [share][1] logs, security signals, or traces from the Datadog explorer.
 * Security rules cannot include triggering group-by values in the notification title.
 * Security rules cannot include message template variables.
 * Security rules cannot notify through webhooks.
@@ -35,3 +35,5 @@ If you have any questions about how the Log Management Service satisfies the app
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/explorer/#share-views
