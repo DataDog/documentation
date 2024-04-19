@@ -28,21 +28,38 @@ further_reading:
 - [Teams management](#teams-management-events)
 
 #### Product-Specific Events
-- [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
-- [Application Security Management (ASM)](#application-security-management)
-- [Audit Trail](#audit-trail-events)
-- [CI Visibility](#ci-visibility-events)
-- [Cloud Security Platform](#cloud-security-platform-events)
-- [Dynamic Instrumentation](#dynamic-instrumentation-events)
-- [Error Tracking](#error-tracking-events)
-- [Log Management](#log-management-events)
-- [Metrics](#metrics-events)
-- [Real User Monitoring](#real-user-monitoring-events)
-- [Sensitive Data Scanner](#sensitive-data-scanner-events)
-- [Service Level Objectives](#service-level-objectives-slo-events)
-- [Synthetic Monitoring](#synthetic-monitoring-events)
-- [Reference Tables](#reference-table-events)
-- [Workflows](#workflow-events)
+- [Overview](#overview)
+    - [Platform Events](#platform-events)
+    - [Product-Specific Events](#product-specific-events)
+- [Audit Events](#audit-events)
+  - [Access management events](#access-management-events)
+  - [Agent](#agent)
+  - [API request events](#api-request-events)
+  - [Application Performance Monitoring (APM) events](#application-performance-monitoring-apm-events)
+  - [Application Security Management](#application-security-management)
+  - [Audit Trail events](#audit-trail-events)
+  - [Authentication events](#authentication-events)
+  - [CI Visibility events](#ci-visibility-events)
+  - [Cloud Security Platform events](#cloud-security-platform-events)
+  - [Dashboard events](#dashboard-events)
+  - [Dynamic Instrumentation events](#dynamic-instrumentation-events)
+  - [Error Tracking events](#error-tracking-events)
+  - [Integration events](#integration-events)
+  - [Log Management events](#log-management-events)
+  - [Metrics events](#metrics-events)
+  - [Monitor events](#monitor-events)
+  - [Notebook events](#notebook-events)
+  - [OAuth events](#oauth-events)
+  - [Organization management events](#organization-management-events)
+  - [Real User Monitoring events](#real-user-monitoring-events)
+  - [Security Notification events](#security-notification-events)
+  - [Sensitive Data Scanner events](#sensitive-data-scanner-events)
+  - [Service Level Objectives (SLO) events](#service-level-objectives-slo-events)
+  - [Synthetic Monitoring events](#synthetic-monitoring-events)
+  - [Reference Table events](#reference-table-events)
+  - [Teams Management events](#teams-management-events)
+  - [Workflow events](#workflow-events)
+- [Further Reading](#further-reading)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -224,6 +241,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Token leaked][81] | Datadog has detected leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
 | [Login method override][82] | Datadog has detected a user login method override that is different from the default login methods set for the organization.| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
 | [Unusual login][83] | Datadog has detected a unusual login event.| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
+| [User invited with throwaway email][102] | Datadog has detected that a user with an email from a free or disposable email provider was invited to the organization.| `@evt.name:"Security Notification" @asset.type:user_invite @action:notification` |
 
 ### Sensitive Data Scanner events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -372,3 +390,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [99]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Custom%20Connections%22%20%40asset.type%3Acustom_connection
 [100]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
 [101]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
+[102]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser_invite
