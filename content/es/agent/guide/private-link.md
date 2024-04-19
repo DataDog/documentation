@@ -33,7 +33,7 @@ Sin embargo, para dirigir el tráfico a la oferta PrivateLink de Datadog en {{< 
 {{< tabs >}}
 {{% tab "Conectar desde la misma región" %}}
 
-1. Conecta la consola AWS a la región **{{< region-param key="aws_region" >}}** y crea un endpoint de VPC.
+1. Conecta la consola de AWS a la región **{{< region-param key="aws_region" >}}** y crea un endpoint de VPC.
 
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Crear un endpoint de VPC" style="width:60%;" >}}
 
@@ -106,7 +106,7 @@ Sin embargo, para dirigir el tráfico a la oferta PrivateLink de Datadog en {{< 
 
 ### Interconexión de VPC de Amazon
 
-1. Conecta la consola AWS a la región **{{< region-param key="aws_region" >}}** y crea un endpoint de VPC.
+1. Conecta la consola de AWS a la región **{{< region-param key="aws_region" >}}** y crea un endpoint de VPC.
 
 {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Crear endpoint de VPC" style="width:80%;" >}}
 
@@ -148,9 +148,9 @@ Sin embargo, para dirigir el tráfico a la oferta PrivateLink de Datadog en {{< 
 
 ### Amazon Route53
 
-1. Crea una [zona privada alojada en Route53][3] para cada servicio para el que hayas creado un endpoint PrivateLink de AWS. Adjunta la zona privada alojada a la VPC en {{< region-param key="aws_region" code="true" >}}.
+1. Crea una [zona alojada privada de Route53][3] para cada servicio para el que hayas creado un endpoint PrivateLink de AWS. Adjunta la zona privada alojada a la VPC en {{< region-param key="aws_region" code="true" >}}.
 
-{{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Crear una zona privada alojada en Route53" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Crear una zona alojada privada de Route53" style="width:80%;" >}}
 
 Utiliza el siguiente lista para asignar el servicio y el nombre del DNS a diferentes partes de Datadog:
 
@@ -195,7 +195,7 @@ Esto devuelve <code>metrics.agent.{{< region-param key="dd_site" >}}</code>}}, e
 
 4. Si las VPC se encuentran en diferentes cuentas de AWS, la VPC que contiene el Datadog Agent debe estar autorizada para asociarse con las zonas alojadas privadas de Route53 antes de continuar. Crea una [autorización de asociación para VPC][5] en cada zona alojada privada de Route53 utilizando la región y el ID de la VPC donde se ejecuta el Datadog Agent. Esta opción no está disponible en la consola de AWS y debe configurarse con la CLI, SDK o API de AWS.
 
-5. Edita la zona alojada en Route53 para añadir VPC para otras regiones.
+5. Edita la zona alojada de Route53 para añadir VPC para otras regiones.
 
 {{< img src="agent/guide/private_link/edit-route53-hosted-zone.png" alt="Editar una zona alojada privada de Route53" style="width:80%;" >}}
 
@@ -205,7 +205,7 @@ Esto devuelve <code>metrics.agent.{{< region-param key="dd_site" >}}</code>}}, e
 
 #### Solucionar problemas de resolución y conectividad del DNS
 
-Los nombres del DNS deberían resolverse en direcciones IP contenidas dentro del bloque CIDR de la VPC en la {{< region-param key="aws_region" code="true" >}} y las conexiones al `port 443` deberían funcionar correctamente.
+Los nombres de DNS deberían resolverse en direcciones IP contenidas dentro del bloque CIDR de la VPC en la {{< region-param key="aws_region" code="true" >}} y las conexiones al `port 443` deberían funcionar correctamente.
 
 {{< img src="agent/guide/private_link/successful-setup.png" alt="La conexión con el puerto 443 debería funcionar correctamente" style="width:80%;" >}}
 
