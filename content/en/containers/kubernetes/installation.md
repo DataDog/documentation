@@ -50,7 +50,7 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
    - Manual installation. See [Manually install and configure the Datadog Agent with a DaemonSet][12]
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 <div class="alert alert-info">Requires <a href="https://helm.sh">Helm</a> and the <a href="https://kubernetes.io/docs/tasks/tools/#kubectl">kubectl CLI</a>.</div>
 
 2. **Install the Datadog Operator**
@@ -143,7 +143,7 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
 ### Unprivileged installation
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 To run an unprivileged installation, add the following to `datadog-agent.yaml`:
 
 {{< highlight yaml "hl_lines=13-18" >}}
@@ -217,7 +217,7 @@ If you are deploying the Agent in an AWS environment, Datadog recommend that you
 <div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 To use a different container registry, modify `global.registry` in `datadog-agent.yaml`.
 
@@ -261,7 +261,7 @@ For more information, see [Changing your container registry][17].
 ### Uninstall
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 ```shell
 kubectl delete datadogagent datadog
 helm delete my-datadog-operator
@@ -287,12 +287,13 @@ The [Kubernetes][21] section features an overview of all your Kubernetes resourc
 
 ### Enable features
 
-- **Configure APM**. See [Kubernetes APM - Trace Collection][15].
-- **Configure log collection**. See [Kubernetes log collection][7].
-- **Configure integrations**. See [Integrations & Autodiscovery][5].
-
-### Further configuration
-To collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, or reference the full list of available environment variables, see [Further Kubernetes Configuration][4].
+{{< whatsnext >}}
+  {{< nextlink href="/containers/kubernetes/apm">}}<u>APM for Kubernetes</u>: Set up and configure trace collection for your Kubernetes application.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/log">}}<u>Log collection in Kubernetes</u>: Set up log collection in a Kubernetes environment.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/prometheus">}}<u>Prometheus & OpenMetrics</u>: Collect your exposed Prometheus and OpenMetrics metrics from your application running inside Kubernetes.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>Control plane monitoring</u>: Monitor the Kubernetes API server, controller manager, scheduler, and etcd.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Further Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 
