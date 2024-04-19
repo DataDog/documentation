@@ -71,7 +71,7 @@ restart-service -Force datadogagent
   * 64 ビット Windows: `C:\Program Files (x86)\Datadog\Datadog Agent\files\`
   * 32 ビット Windows: `C:\Program Files\Datadog\Datadog Agent\files\`
 
-ファイルが削除されたら、Windows サービスマネージャーから Datadog サービスを再起動します。
+ファイルが削除された後、Windows サービスマネージャーから Datadog サービスを再起動します。
 
 ### Agent 6 または 7 へのアップグレードによる修正
 

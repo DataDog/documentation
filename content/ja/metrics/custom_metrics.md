@@ -64,6 +64,10 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 
 **注**: Datadog のメトリクス名は大文字と小文字が区別されます。
 
+### メトリクス単位
+
+[メトリクスサマリー][12]を使用してメトリクス単位を設定するか、視覚化のグラフエディタで[単位のオーバーライド][13]機能を使用してカスタムメトリクス単位を設定します。詳細については、[メトリクス単位][14]のドキュメントを参照してください。
+
 ## カスタムメトリクスの送信
 
 {{< whatsnext desc="メトリクスを Datadog に送信する方法は複数あります。">}}
@@ -74,12 +78,11 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog の HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}ログベースのメトリクスを生成する{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}APM スパンベースのメトリクスを生成する{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/add_custom_metrics/" >}}CI Visibility テストベースのメトリクスを生成する{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/generate_metrics/" >}}RUM イベントベースのメトリクスを生成する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}RUM イベントベースのメトリクスを生成する{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}ライブプロセスベースのメトリクスを生成する{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[Datadog 公式/コミュニティ寄稿の API および DogStatsD クライアントライブラリ][12]のいずれかを使用して、カスタムメトリクスを送信することもできます。
+[Datadog 公式/コミュニティ寄稿の API および DogStatsD クライアントライブラリ][15]のいずれかを使用して、カスタムメトリクスを送信することもできます。
 
 **注**: カスタムメトリクスの送信に適用される[固定のレート制限][5]はありません。デフォルトの割り当てを超えた場合は、[Datadog のカスタムメトリクスの課金ポリシー][6]に従って課金されます。
 
@@ -100,4 +103,7 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 [9]: /ja/metrics/types/?tab=rate#metric-types
 [10]: /ja/metrics/types/?tab=count#metric-types
 [11]: /ja/developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
-[12]: /ja/developers/community/libraries/
+[12]: /ja/metrics/summary/#metric-unit
+[13]: /ja/dashboards/guide/unit-override/
+[14]: /ja/metrics/units/
+[15]: /ja/developers/community/libraries/

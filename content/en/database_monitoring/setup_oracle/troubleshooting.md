@@ -19,7 +19,7 @@ Check the connectivity between the Agent and the monitored database by running o
 - `curl <DB_SERVER>:<PORT>`
 - `telnet <DB_SERVER> <PORT>`
 
-It's important to specify the exact values for `<DB_SERVER>` and `<PORT>` that are configured for that instance in the `oracle-dbm` configuration file.
+It's important to specify the exact values for `<DB_SERVER>` and `<PORT>` that are configured for that instance in the `oracle` configuration file.
 
 Using the `telnet` command as an example, the expected output for a correctly configured connection is
 
