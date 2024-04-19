@@ -23,9 +23,10 @@ aliases:
 
 ## Overview
 
+{{< img src="dashboards/scheduled_reports/scheduled_report_email.png" alt="Example of a scheduled report email with a dashboard pdf attachment" style="width:80%;" >}}
+
 Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a high-density PDF attachment. 
 
-{{< img src="dashboards/scheduled_reports/report_email.png" alt="Example of a scheduled report email with a dashboard pdf attachment" style="width:80%;" >}}
 
 ## Schedule a report
 
@@ -43,7 +44,7 @@ Add recipients to your report by entering their email addresses. The email assoc
 
 **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations. 
 
-{{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:100%;" >}}
+{{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:90%;" >}}
 
 ### Customize the report
 
@@ -58,7 +59,7 @@ A single dashboard can have multiple scheduled reports with different settings, 
 
 From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click **Edit**.
 
-{{< img src="dashboards/scheduled_reports/scheduled_reports_configuration_modal.png" alt="The configuration modal for scheduled reports, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a done button" style="width:100%;" >}}
+{{< img src="dashboards/scheduled_reports/scheduled_reports_configuration_modal.png" alt="The configuration modal for scheduled reports, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a done button" style="width:90%;" >}}
 
 ## Permissions
 
@@ -66,13 +67,16 @@ Only users with the **Dashboard Report Write** permission can generate a report.
 
 Images generated in reports show all data regardless of granular read restrictions. Datadog recommends limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn about managing roles and permissions, see [User Management][17]. 
 
-{{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:100%;" >}}
+{{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
 
 Users with the Admin role or **Org Management** permission can enable or disable the scheduled reports feature for an account from the **Settings** tab under [Public Sharing][15] in **Organization Settings**.
 
-{{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:100%;" >}}
+{{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
 ## Supported widget types
+
+{{< img src="dashboards/scheduled_reports/scheduled_report_pdf_2024-04-18.png" alt="Example of a scheduled report pdf file with static view of the widgets" style="width:80%;" >}}
+
 
 The following widget types are supported:
 
