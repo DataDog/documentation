@@ -183,7 +183,7 @@ Utiliza el siguiente lista para asignar el servicio y el nombre del DNS a difere
 
 Esto devuelve <code>metrics.agent.{{< region-param key="dd_site" >}}</code>}}, el nombre de zona alojada privada que necesitas para asociar con la VPC en la que se origina el tráfico del Agent. Al anular este registro, se obtienen todos los nombres de host de consumos relacionados con métricas.
 
-2. Dentro de cada nueva zona alojada privada Route53, crea un registro A con el mismo nombre. Activa la opción **Alias** y, a continuación, en **Route traffic to** (Enrutar el tráfico a**), selecciona **Alias to VPC endpoint** (Alias para endpoint de VPC), **{{< region-param key="aws_region" >}}**, e introduce el nombre del DNS del endpoint de VPC asociado al nombre del DNS.
+2. Dentro de cada nueva zona alojada privada de Route53, crea un registro A con el mismo nombre. Activa la opción **Alias** y, a continuación, en **Route traffic to** (Enrutar el tráfico a**), selecciona **Alias to VPC endpoint** (Alias para endpoint de VPC), **{{< region-param key="aws_region" >}}**, e introduce el nombre del DNS del endpoint de VPC asociado al nombre del DNS.
 
    **Notas**:
       - Para obtener el nombre de tu DNS, consulta la [documentación de la configuración del nombre del DNS privado de los servicios de endpoint][4].
