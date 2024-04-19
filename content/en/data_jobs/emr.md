@@ -39,7 +39,7 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the **Create Cluster** page:
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
-   {{< img src="data_jobs/emr/add_bootstrap_action.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
+   {{< img src="data_jobs/emr/add_bootstrap_action_with_latest_script.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
    - For **Name**, give your bootstrap action a name. You can use `datadog_agent`.
    - For **Script location**, use `s3://dd-data-jobs-monitoring-setup/scripts/emr/emr_init_latest.sh` for the latest init script. Replace the file name with `emr_init_1.0.0.sh` to use the last stable version. 
    - For **Arguments**, enter two arguments separated by a space: your Datadog site, and the name of the secret in which you stored your Datadog API key. 

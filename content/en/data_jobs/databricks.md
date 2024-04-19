@@ -42,7 +42,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
 1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the following script, remembering to replace the placeholders with your parameter values. 
 
-   ```shell
+   ```bash
    #!/bin/bash
 
    # Required parameters
@@ -54,7 +54,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
    bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
    ```
 
-   The script above sets the required parameters and downloads the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in URL with `databricks_init_1.0.0.sh` to use the last stable version.
+   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.0.0.sh` to use the last stable version.
 
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
@@ -87,11 +87,21 @@ Optionally, you can also set other init script parameters and Datadog environmen
 {{% /tab %}}
 {{% tab "On a specific cluster" %}}
 
-1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
+1. In Databricks, create a init script file in **Workspace** with the following content, jot down the file path.
+   ```bash
+   #!/bin/bash
+
+   # Download and run the latest init script
+   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
+   ```
+
+   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.0.0.sh` to use the last stable version.
+
+1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
    {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
-   - Under the **Destination** drop-down, select `S3`.
-   - Under **File path**, enter `s3://dd-data-jobs-monitoring-setup/scripts/databricks/databricks_init_latest.sh` to use the latest init script. Replace the file name with `databricks_init_1.0.0.sh` to pin it to the last stable version.
+   - Under the **Destination** drop-down, select `Workspace`.
+   - Under **Init script path**, enter the path to your init script.
    - Click **Add**.
 
 #### Set the required init script parameters
