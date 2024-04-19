@@ -23,7 +23,7 @@ This document walks you through the following setup steps:
 
 ### Datadog Agent
 
-{{% observability_pipelines/prerequisites/datadog_agent %}}
+{{% observability_pipelines/prerequisites/datadog_agent_destination_only %}}
 
 ## Set up Observability Pipelines
 

@@ -25,7 +25,7 @@ This document walks you through the following steps to set up dual shipping:
 
 ### Datadog Agent
 
-{{% observability_pipelines/prerequisites/datadog_agent %}}
+{{% observability_pipelines/prerequisites/datadog_agent_destination_only %}}
 
 ## Set up Observability Pipelines
 
