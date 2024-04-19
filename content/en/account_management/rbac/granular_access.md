@@ -14,16 +14,16 @@ Use the different principals to control access patterns in your organization and
 
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
-| [AppBuilder] [8]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Connections] [9]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [AppBuilder][8]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Connections][9]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    |                   | {{< X >}}         |                                     |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Powerpacks] [10]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Powerpacks][10]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security rules][5]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][6]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][7]                             |                   | {{< X >}}         |                                     |
-| [Workflows] [11]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Workflows][11]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
 ### Elevate access to individual resources
 
