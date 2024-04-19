@@ -17,10 +17,11 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The custom tags and measures commands provide a way to add user-defined text and numerical tags to your CI Visibility
-pipeline traces.
-These tags can be used to create facets (string value tags) or measures (numerical value tags). Facets and measures
-can then be used to search, graph, or monitor the pipelines.
+## Overview
+
+Use the custom tags and measures commands to add user-defined text and numerical tags to your pipeline traces in [CI Pipeline Visibility][11]. You can use the [`datadog-ci` NPM package][1] to add custom tags to a pipeline trace or a job span, in addition to adding measures to a pipeline trace or a job span. From these custom tags and measures, you can create facets (string value tags) or measures (numerical value tags). 
+
+You can use facets and measures to filter, create visualizations, or create monitors for your pipelines in the [CI Visibility Explorer][10].
 
 ## Compatibility
 
@@ -29,8 +30,8 @@ Custom tags and measures work with the following CI providers:
 - Buildkite
 - CircleCI
 - GitLab (SaaS or self-hosted >= 14.1)
-- GitHub.com (SaaS) **Note:** For adding tags and measures to GitHub jobs, see the [section][6] below.
-- Jenkins **Note:** For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
+- GitHub.com (SaaS): For adding tags and measures to GitHub jobs, see the [section below](#add-tags-and-measures-to-github-jobs).
+- Jenkins: For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
 - Azure DevOps Pipelines
 
 ## Install the Datadog CI CLI
@@ -71,66 +72,66 @@ Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/do
 
 ## Add tags to pipeline traces
 
-Tags can be added to the pipeline span or to the job span. To do this, run:
+Tags can be added to the pipeline span or to the job span.
 
+To do this, run the `tag` command. Replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 {{< code-block lang="shell" >}}
-{{< site-region region="us5,us3,eu,ap1" >}}DATADOG_SITE={{< region-param key="dd_site" code="true" >}} {{< /site-region >}}datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
+DATADOG_SITE=<DD_SITE> datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
-
-{{< site-region region="us5,us3,eu,ap1" >}}
-You must specify the [Datadog site][1] using the environment variable `DATADOG_SITE`.
-
-[1]: /getting_started/site/
 {{< /site-region >}}
 
-The following example adds the tag `team` to the pipeline span:
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
+The following example adds the tag `team` to the pipeline span. Replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
+
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 {{< code-block lang="shell" >}}
-{{< site-region region="us5,us3,eu,ap1" >}}DATADOG_SITE={{< region-param key="dd_site" code="true" >}} {{< /site-region >}}datadog-ci tag --level pipeline --tags team:backend
+DATADOG_SITE=<DD_SITE> datadog-ci tag --level pipeline --tags team:backend
 {{< /code-block >}}
+{{< /site-region >}}
 
-The following example adds the tag `go.version` to the span for the current job:
+The following example adds the tag `go.version` to the span for the current job. Replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 {{< code-block lang="shell" >}}
-{{< site-region region="us5,us3,eu,ap1" >}}DATADOG_SITE={{< region-param key="dd_site" code="true" >}} {{< /site-region >}}datadog-ci tag --level job --tags "go.version:`go version`"
+DATADOG_SITE=<DD_SITE> datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
+{{< /site-region >}}
 
-To create facets from the tags, click the gear icon next to the tag name in the [pipeline executions page][4],
-and then click the **create facet** option.
+To create a facet from a tag, click the Gear icon next to a tag name in the [Pipeline Executions page][4] and click **Create Facet**.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
 ## Add measures to pipeline traces
 
-To add numerical tags to the pipeline span or the job span, run:
+To add numerical tags to the pipeline span or the job span, run the `measure` command. Replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 {{< code-block lang="shell" >}}
-{{< site-region region="us5,us3,eu,ap1" >}}DATADOG_SITE={{< region-param key="dd_site" code="true" >}} {{< /site-region >}}datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
+DATADOG_SITE=<DD_SITE> datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
 {{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
-{{< site-region region="us5,us3,eu,ap1" >}}DATADOG_SITE={{< region-param key="dd_site" code="true" >}} {{< /site-region >}}{{< site-region region="us5,us3,eu,ap1" >}}
-You must specify the [Datadog site][1] using the environment variable `DATADOG_SITE`.
-
-[1]: /getting_started/site/
 {{< /site-region >}}
 
-The following example adds the measure `error_rate` to the pipeline span:
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
+The following example adds the measure `error_rate` to the pipeline span. Replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
+
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 {{< code-block lang="shell" >}}
-{{< site-region region="us5,us3,eu,ap1" >}}DATADOG_SITE={{< region-param key="dd_site" code="true" >}} {{< /site-region >}}datadog-ci measure --level pipeline --measures "error_rate:0.56"
+DATADOG_SITE=<DD_SITE> datadog-ci measure --level pipeline --measures "error_rate:0.56"
 {{< /code-block >}}
+{{< /site-region >}}
 
-The following example adds a measure `binary.size` to the span for the currently running job:
+The following example adds a measure `binary.size` to the span for the currently running job. Replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 {{< code-block lang="shell" >}}
-{{< site-region region="us5,us3,eu,ap1" >}}DATADOG_SITE={{< region-param key="dd_site" code="true" >}} {{< /site-region >}}datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
+DATADOG_SITE=<DD_SITE> datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
 {{< /code-block >}}
+{{< /site-region >}}
 
-To create a measure, click the gear icon next to the measures name in the [pipeline executions page][4]
-and then click the **create measure** option.
+To create a measure, click the Gear icon next to a measures name in the [Pipeline Executions page][4] and click **Create Measure**.
 
 ## Add tags and measures to GitHub jobs
 
@@ -147,8 +148,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci tag ...
     ```
-2. If the [matrix strategy][9] is used, several job names are generated by GitHub by adding the matrix values at the end of the job name,
-within parenthesis. The `DD_GITHUB_JOB_NAME` environment variable should then be conditional on the matrix values:
+2. If the [matrix strategy][9] is used, several job names are generated by GitHub by adding the matrix values at the end of the job name, within parenthesis. The `DD_GITHUB_JOB_NAME` environment variable should then be conditional on the matrix values:
 
     ```yaml
     jobs:
@@ -172,7 +172,9 @@ within parenthesis. The `DD_GITHUB_JOB_NAME` environment variable should then be
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipeline-executions
 [5]: /continuous_integration/pipelines/jenkins?tab=usingui#setting-custom-tags-for-your-pipelines
-[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux#add-tags-and-measures-to-github-jobs
 [7]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_id
 [8]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
 [9]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#using-a-matrix-strategy
+[10]: /continuous_integration/pipelines/explorer
+[11]: /continuous_integration/pipelines/
+[12]: /getting_started/site/
