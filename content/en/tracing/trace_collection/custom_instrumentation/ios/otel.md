@@ -242,6 +242,7 @@ Datadog.verbosityLevel = .debug
 {{% tab "Swift" %}}
 ```swift
 import DatadogTrace
+import OpenTelemetryApi
 
 Trace.enable(
     with: Trace.Configuration(
