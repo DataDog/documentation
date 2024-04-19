@@ -2669,6 +2669,11 @@ menu:
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
       weight: 2031
+    - name: iOS
+      url: tracing/trace_collection/custom_instrumentation/ios
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_elixir
+      weight: 2032
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
