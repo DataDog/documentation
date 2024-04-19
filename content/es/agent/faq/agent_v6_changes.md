@@ -90,9 +90,9 @@ Las siguientes opciones de configuración del Agent han cambiado o han desaparec
 | `use_curl_http_client`       |                                                                                                                       |
 | `collect_security_groups`    | Obsoleta, función disponible con la [integración de AWS][6].                                                         |
 
-[1]: /es/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /es/agent/guide/upgrade-to-agent-v6/
-[3]: /es/agent/proxy/
+[3]: /es/agent/configuration/proxy/
 [4]: /es/integrations/disk/
 [5]: /es/logs/
 [6]: /es/integrations/amazon_web_services/
@@ -179,7 +179,7 @@ Las versiones anteriores logueaban en varios archivos (`collector.log`, `forward
 
 ## Interfaz
 
-La interfaz de línea de comandos del Agent v6 está basada en subcomandos. Para consultar la lista de subcomandos disponibles, ejecuta:
+La interfaz de línea de comandos de Agent v6 se basa en subcomandos. Para ver la lista de subcomandos disponibles, ejecuta:
 ```shell
 <AGENT_BINARY> --help
 ```
@@ -225,9 +225,9 @@ Si el comando del contenedor `service` no está disponible en tu sistema, utiliz
 * En sistemas basados en `upstart`: `sudo start/stop/restart/status datadog-agent`
 * Para sistemas basados en `systemd`: `sudo systemctl start/stop/restart/status datadog-agent`
 
-Si no sabes con seguridad qué sistema de inicio utiliza tu distribución de forma predeterminada, consulta la siguiente tabla:
+Si no sabes con seguridad qué sistema de inicialización utiliza tu distribución de forma predeterminada, consulta la siguiente tabla:
 
-| distribución \ sistema de inicio      | upstart                   | systemd                   | sysvinit                                  | Notas                         |
+| distribución \ sistema de inicialización      | upstart                   | systemd                   | sysvinit                                  | Notas                         |
 |---------------------------------|---------------------------|---------------------------|-------------------------------------------|-------------------------------|
 | Amazon Linux (<= 2017.09)       | <i class="icon-check-bold"></i> |                           |                                           |                               |
 | Amazon Linux 2 (>= 2017.12)     |                           | <i class="icon-check-bold"></i> |                                           |                               |
@@ -378,7 +378,7 @@ Las siguientes opciones y etiquetas (tags) están obsoletas:
 
 * `label_to_tag_prefix` se ha reemplazado por `kubernetes_pod_labels_as_tags`.
 * Las etiquetas `container_alias` no se recopilan.
-* `kube_replicate_controller` solo se añade si el pod se crea mediante un controlador de replicación. En lugar de ello, utiliza la etiqueta de creador correspondiente (`kube_deployment`, `kube_daemon_set`, etc.).
+* `kube_replicate_controller` solo se añade si el pod ha sido creado por un controlador de replicación. En su lugar, utiliza un etiqueta (tag) creadora relevante como `kube_deployment`, o `kube_daemon_set`.
 
 [1]: /es/integrations/kubelet/
 [2]: /es/integrations/kube_apiserver_metrics/
@@ -561,12 +561,12 @@ Del mismo modo, puede que añadieras un paquete PIP para cumplir un requisito de
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/agent/proxy/#using-the-agent-as-a-proxy
+[1]: /es/agent/configuration/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
 [3]: /es/agent/guide/dogstream/
 [4]: /es/integrations/go-metro/
-[5]: /es/agent/guide/agent-log-files/
-[6]: /es/agent/guide/agent-commands/
+[5]: /es/agent/configuration/agent-log-files/
+[6]: /es/agent/configuration/agent-commands/
 [7]: /es/getting_started/agent/autodiscovery/
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
 [9]: https://github.com/DataDog/datadog-agent/tree/main/docs/dev/checks
