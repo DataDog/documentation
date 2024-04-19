@@ -29,7 +29,9 @@ If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app s
 
 ### Add Dart error tracking
 
-If you are using `DatadogSdk.runApp`, then the Datadog Flutter SDK will automatically track and report uncaught Dart exceptions. If you are not using `DatadogSdk.runApp`, you need to setup Dart error tracking manually with the following code before you initialize Datadog:
+If you are using `DatadogSdk.runApp`, then the Datadog Flutter SDK automatically tracks and reports uncaught Dart exceptions.
+
+If you are **not** using `DatadogSdk.runApp`, you need to setup Dart error tracking manually with the following code before you initialize Datadog:
 
 ```dart
 final originalOnError = FlutterError.onError;
@@ -116,7 +118,7 @@ Source maps and dSYM files are limited to **500** MB each.
 To verify your Flutter Crash Reporting and Error Tracking configuration, issue an error in your RUM application and confirm that the error appears in Datadog.
 
 1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
-2. Execute code containing an error or crash, for example
+2. Execute code containing an error or crash. For example:
 
    ```dart
    void throwError() {
@@ -124,7 +126,7 @@ To verify your Flutter Crash Reporting and Error Tracking configuration, issue a
    }
    ```
 
-3. For obfuscated error reports that do not result in a crash, you should be able to verify symbolication and deobfuscation in [**Error Tracking**][8].
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][8].
 4. For crashes, after the crash happens, restart your application and wait for the Flutter SDK to upload the crash report in [**Error Tracking**][8].
 
 ### Flavors and build numbers

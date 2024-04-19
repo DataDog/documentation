@@ -109,7 +109,7 @@ echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 
 If a `build` directory does not already exist, create it first by running `mkdir build`, then run the command above.
 
-## Test your implementation of crash reporting
+## Test your implementation
 
 To make sure your sourcemaps are correctly sent and linked to your application, you can generate crashes with the [`react-native-performance-limiter`][14] package.
 
