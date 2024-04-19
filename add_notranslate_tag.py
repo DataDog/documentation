@@ -1,7 +1,7 @@
 import json
 import requests
 api_url = 'https://rest.api.transifex.com'
-bearer_token = 'your token here' # DO NOT COMMIT
+bearer_token = '' # DO NOT COMMIT
 string_collection_id = 'o:datadog:p:websites-modules:r:config__default_menus_menus_en_yaml' # Hardcoded collection id pointing to menus.en.yamml
 
 # Build payload for updating resource string
@@ -50,7 +50,7 @@ def get_string_collection(string_collection_id, token):
 # Loop through JSON object
 # If key is not 'name', update resource string with notranslate tag
 def iterate_collection(collection):
-    for entry in collection['data'][:2]: # Hardcoded to 2 for testing purposes
+    for entry in collection['data']:
         string_id = entry['id']
         key_parts = entry['attributes']['key'].split('.') # assumption that key value will be formatted like "main_left.[1].url"
         key_val = key_parts[len(key_parts) - 1]
