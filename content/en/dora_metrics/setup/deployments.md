@@ -116,6 +116,18 @@ There are two requirements for calculating Change Lead Time:
 1. Both the Git repository URL and commit SHA are provided when sending deployment events.
 2. Your repository metadata is being [synchronized to Datadog](#synchronize-repository-metadata-to-datadog).
 
+### Breakdown metrics
+
+DataDog also provides the following breakdown metrics, which represent the different stages since the commit was made until it is deployed.
+
+- `dora.time_to_pr_ready`: Time from the commit until the PR is ready for review. This metric is only emitted for commits that were made before the PR is ready for review.
+- `dora.review_time`: Time since the PR is ready for review until it receives the last approval. This metric only emitted for commits that were made before hte PR was approved.
+- `dora.merge_time`: Time since the last approval until the PR is merged.
+- `dora.time_to_deploy`: Time since the PR is merged until it the deployment starts. If a commit does not have an associated PR, we will emit this metric as the time since the commit was made until the deployment starts.
+- `dora.deploy_time`: Time since the deployment starts until it finishes. We will not emit this metric if there is no deployment duration information.
+
+Note that these metrics are emitted for every commit and not per deployment.
+
 ### Synchronize repository metadata to Datadog
 
 <!--
@@ -135,7 +147,7 @@ If the [GitHub integration][1] is not already installed, install it on the [GitH
 
 When configuring the GitHub application:
 1. Select at least **Read** repository permissions for **Contents**.
-2. Subscribe at least to **Push** events.
+2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
 
 To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, under the **Features** tab, the **DORA Metrics: Collect Change Lead Time metric** feature is enabled.
 
