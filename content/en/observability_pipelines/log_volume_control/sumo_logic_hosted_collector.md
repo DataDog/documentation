@@ -24,10 +24,6 @@ This document walks you through the following steps to set up the Observability 
 1. Select the **Log Volume Control** use case to create a new pipeline.
 1. Select **Sumo Logic** as the source.
 
-### Set up the source
-
-{{% observability_pipelines/source_settings/sumo_logic %}}
-
 ### Set up the destination
 
 Enter the following information based on your selected logs destination.
