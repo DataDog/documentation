@@ -47,8 +47,6 @@ From the settings dialog, use the menu to customize the following team settings:
 - Permissions
 - Notifications
 
-After changing a setting, click **Save**.
-
 ## Team membership
 
 To differentiate members of your team, designate them as team managers. In the member list, a "TEAM MANAGER" badge appears next to team managers' names.
