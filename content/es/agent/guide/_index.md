@@ -12,8 +12,8 @@ title: Guías del Agent
 
 {{< whatsnext desc="Guías para la configuración:" >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Variables de entorno del Agent{{< /nextlink >}}
-    {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Instalación del Agent en un servidor con una limitada conectividad a Internet{{< /nextlink >}}
-    {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Configurar Ansible utilizando un rol independiente de Datadog{{< /nextlink >}}
+    {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Instalación del Agent en un servidor con conectividad limitada a Internet{{< /nextlink >}}
+    {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Configurar Ansible utilizando un rol de Datadog independiente{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}¿Cómo desinstalo el Agent?{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-key-rotation-2024" >}}Rotación de claves Linux 2024{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -35,7 +35,7 @@ title: Guías del Agent
 
 {{< whatsnext desc="Integration guides:" >}}
     {{< nextlink href="agent/guide/use-community-integrations" >}}Uso de integraciones comunitarias{{< /nextlink >}}
-    {{< nextlink href="agent/guide/integration-management" >}}Gestión de las integraciones{{< /nextlink >}}
+    {{< nextlink href="agent/guide/integration-management" >}}Gestión de integraciones{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent versioning guides:" >}}
