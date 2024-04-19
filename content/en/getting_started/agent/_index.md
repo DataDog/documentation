@@ -224,13 +224,13 @@ For example, let's say you have data that is collected from different teams and 
    sudo service datadog-agent restart
    ```
 
-5. After a few minutes, go to the [Metrics Summary page][22] again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and whatever personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
+5. After a few minutes, go to the [Metrics Summary page][22] again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and any personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
 
 6. Go to the [Events Explorer page][20] and find the custom tags displayed with the latest Agent Event.
 
 #### Other configuration options
 
-The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, notice that for the `logs_enabled` parameter, it is set to false.
+The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
 
 ```yaml
 ##################################

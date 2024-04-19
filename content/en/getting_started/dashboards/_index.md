@@ -49,7 +49,7 @@ Dashboards can also help you track down persistent problems and fix them. _Troub
 
 Datadog provides many out-of-the-box dashboards for features and integrations. For the infrastructure you monitor, check out the out-of-the-box dashboards that are provided with Datadog:
 
-1. In Datadog, go to the [Dashboards List page][2] and search for the name of an integration you have added, for example `Redis`, or a feature you use, such as `RUM`. 
+1. In Datadog, go to the [Dashboards List page][2] and search for the name of an integration you have added. For example, `Redis`, or a feature you use, such as `RUM`. 
 2. Browse the search results for dashboards marked *Preset* and see if at least some of the graphs show the answers you're looking for.
 3. Explore the links in the out-of-the-box dashboard's title dropdown to find more information about how people are using them.
 
