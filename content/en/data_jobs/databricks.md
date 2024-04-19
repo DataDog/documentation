@@ -91,7 +91,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 1. At the bottom of the page, go to the **Init Scripts** tab.
    {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
    - Under the **Destination** drop-down, select `S3`.
-   - Under **File path**, enter `s3://dd-data-jobs-monitoring-setup/scripts/databricks/databricks_init_latest.sh` to use the latest init script. replace the file name with `databricks_init_1.0.0.sh` to pin it to the last stable version.
+   - Under **File path**, enter `s3://dd-data-jobs-monitoring-setup/scripts/databricks/databricks_init_latest.sh` to use the latest init script. Replace the file name with `databricks_init_1.0.0.sh` to pin it to the last stable version.
    - Click **Add**.
 
 #### Set the required init script parameters
