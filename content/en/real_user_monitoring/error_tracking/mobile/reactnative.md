@@ -148,9 +148,9 @@ const crashApp = () => {
 
 If using `datadog-react-native-wizard` did not succeed or if you don't want to upload your symbolication files automatically on each release, follow the next steps to symbolicate crash reports.
 
-### Upload JavaScript source maps on iOS builds
+#### Upload JavaScript source maps on iOS builds
 
-You need to install `@datadog/datadog-ci` as a dev dependency to your project:
+First, you need to install `@datadog/datadog-ci` as a dev dependency to your project:
 
 ```bash
 yarn add -D @datadog/datadog-ci
@@ -158,7 +158,7 @@ yarn add -D @datadog/datadog-ci
 npm install --save-dev @datadog/datadog-ci
 ```
 
-##### Automatically on each release build (React Native >= 0.69)
+{{% collapse-content title="Automatically on each release build (React Native >= 0.69)" level="h5" %}}
 
 Manually uploading your source maps on every release build takes time and is prone to errors. Datadog recommends automatically sending your source maps every time you run a release build.
 
@@ -198,7 +198,9 @@ For the upload to work, you need to provide your Datadog API key. If you use a c
 
 You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SITE` environment variable, or as a `datadogSite` key in your `datadog-ci.json` file.
 
-##### Automatically on each release build (React Native < 0.69)
+{{% /collapse-content %}}
+
+{{% collapse-content title="Automatically on each release build (React Native < 0.69)" level="h5" %}}
 
 Open your `.xcworkspace` with Xcode, then select your project > Build Phases > Bundle React Native code and images. Edit the script to look like the following:
 
@@ -222,7 +224,9 @@ For the upload to work, you need to provide your Datadog API key. If you use a c
 
 You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SITE` environment variable, or as a `datadogSite` key in your `datadog-ci.json` file.
 
-##### Manually on each build
+{{% /collapse-content %}}
+
+{{% collapse-content title="Manually on each build" level="h5" %}}
 
 To output a source map, you need to edit the Xcode build phase "Bundle React Native Code and Images".
 
@@ -256,7 +260,9 @@ export BUNDLE_PATH= # fill with your bundle path
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
 ```
 
-##### Manually on each build (with Hermes for React Native < 0.71)
+{{% /collapse-content %}}
+
+{{% collapse-content title="Manually on each build (with Hermes for React Native < 0.71)" level="h5" %}}
 
 There is a bug in React Native versions up to 0.71 that generates an incorrect source map when using Hermes.
 
@@ -297,9 +303,11 @@ export BUNDLE_PATH= # fill with your bundle path
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
 ```
 
+{{% /collapse-content %}}
+
 #### Upload JavaScript source maps on Android builds
 
-##### Automatically on each release build (React Native >= 0.71)
+{{% collapse-content title="Automatically on each release build (React Native >= 0.71)" level="h5" %}}
 
 In your `android/app/build.gradle` file, add the following after the `apply plugin: "com.facebook.react"` line:
 
@@ -317,7 +325,9 @@ For the upload to work, you need to provide your Datadog API key. You can specif
 
 You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SITE` environment variable, or as a `datadogSite` key in your `datadog-ci.json` file.
 
-##### Automatically on each release build (React Native < 0.71)
+{{% /collapse-content %}}
+
+{{% collapse-content title="Automatically on each release build (React Native < 0.71)" level="h5" %}}
 
 In your `android/app/build.gradle` file, add the following after the `apply from: "../../node_modules/react-native/react.gradle"` line:
 
@@ -335,7 +345,9 @@ For the upload to work, you need to provide your Datadog API key. You can specif
 
 You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SITE` environment variable, or as a `datadogSite` key in your `datadog-ci.json` file.
 
-##### Manually on each build
+{{% /collapse-content %}}
+
+{{% collapse-content title="Manually on each build" level="h5" %}}
 
 On Android, the source map file is located at `android/app/build/generated/sourcemaps/react/release/index.android.bundle.map`.
 The bundle file location depends on your React Native (RN) and Android Gradle Plugin (AGP) versions:
@@ -362,11 +374,15 @@ export SOURCEMAP_PATH=android/app/build/generated/sourcemaps/react/release/index
 yarn datadog-ci react-native upload --platform android --service $SERVICE --bundle $BUNDLE_PATH --sourcemap $SOURCEMAP_PATH --release-version $VERSION --build-version $BUILD
 ```
 
+{{% /collapse-content %}}
+
 #### Upload iOS dSYM files
 
-##### Manually on each build
+{{% collapse-content title="Manually on each build" level="h5" %}}
 
 For more information, see the [iOS Crash Reporting and Error Tracking documentation][4].
+
+{{% /collapse-content %}}
 
 #### Upload Android Proguard mapping files
 
@@ -376,7 +392,7 @@ For more information, see [the React Native Proguard documentation][5].
 
 If you are still unsure, you can see if running `(cd android && ./gradlew tasks --all) | grep minifyReleaseWithR8` returns anything. If so, minification is enabled.
 
-##### Manually on each build
+{{% collapse-content title="Manually on each build" level="h5" %}}
 
 In your `android/app/build.gradle` file, add the [latest version of the plugin][15] and configure it **at the top of the file**:
 
@@ -403,7 +419,9 @@ For more information, see the [Datadog Android SDK Gradle Plugin][6].
 
 To run the plugin after a build run `(cd android && ./gradlew app:uploadMappingRelease)`.
 
-##### Automate the upload on each build
+{{% /collapse-content %}}
+
+{{% collapse-content title="Automate the upload on each build" level="h5" %}}
 
 Install the plugin like in the previous step.
 
@@ -418,6 +436,8 @@ Inside the loop, add the following snippet:
 ```
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+
+{{% /collapse-content %}}
 
 ## Further reading
 
