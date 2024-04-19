@@ -42,6 +42,17 @@ class Build:
         self.extract_dir = "{0}".format(
             join(self.tempdir, "extracted") + sep
         )
+
+        self.apw_integrations = [
+            {
+                'extract_path': f'{self.extract_dir}/dogweb/integration/akamai_mpulse',
+                'cache_path': 'temp/content/en/integrations/akamai_mpulse.md'
+            },
+            {
+                'extract_path': f'{self.extract_dir}/integrations-extras/ably',
+                'cache_path': 'temp/content/en/integrations/ably.md'
+            }
+        ]
         
 
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
@@ -63,6 +74,13 @@ class Build:
     # downloaded globs from Github.
     def get_list_of_content(self, configuration):
         prepare_content(self, configuration, self.github_token, self.extract_dir)
+
+        # remove integrations that will be sourced from websites-sources/APW
+        for integration in self.apw_integrations:
+            extract_path = integration.get('extract_path', '')
+
+            if os.path.exists(extract_path):
+                shutil.rmtree(extract_path)
 
 
     def build_documentation(self):
@@ -123,7 +141,7 @@ class Build:
             except Exception as err:
                 print(err)
 
-                if os.path.isdir('temp'): shutil.rmtree('temp')
+                # if os.path.isdir('temp'): shutil.rmtree('temp')
 
                 if not getenv("CI_COMMIT_REF_NAME"):
                     print('Downloading cached content failed, documentation is now in degraded mode.')

@@ -87,6 +87,7 @@ def grouped_globs_table(list_of_contents):
     sorted_list_of_contents = sorted(list_of_contents, key=lambda k: k['repo_name'])
     for key, value in groupby(sorted_list_of_contents, lambda k: k['repo_name']):
         grouped_globs = [x['globs'] for x in value]
+        print(grouped_globs)
         data[key] = list(chain.from_iterable(grouped_globs))
     return data
 
@@ -277,6 +278,13 @@ def download_cached_content_into_repo(self):
     # Integrations are handled separately for now (there is active work underway to improve this)
     if self.cache_enabled:
         print('Copying integrations from cache...')
+
+        for integration in self.apw_integrations:
+            cache_path = integration.get('cache_path', '')
+
+            if os.path.isfile(cache_path):
+                os.remove(cache_path)
+
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
 
         # Copying generated data files
@@ -285,5 +293,5 @@ def download_cached_content_into_repo(self):
             shutil.copytree('temp/data', 'data', dirs_exist_ok=True)
 
     # Cleanup temporary dir after cache download complete
-    if os.path.isdir('temp'):
-        shutil.rmtree('temp')
+    # if os.path.isdir('temp'):
+    #     shutil.rmtree('temp')

@@ -87,10 +87,10 @@ module:
      disabled: false
      mounts:
      - source: content/en/integrations/ably.md
-       target: content/integrations/ably-apw.md
+       target: content/integrations/ably.md
        lang: en
      - source: content/en/integrations/akamai_mpulse.md
-       target: content/integrations/akamai_mpulse-apw.md
+       target: content/integrations/akamai_mpulse.md
        lang: en
 
   mounts:
