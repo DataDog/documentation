@@ -35,10 +35,8 @@ Attack Traffic Sources
 
 ### Using powerpacks
 
-When adding a widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the tray. Filter on `tag:threat_overview` or type *Threat Overview* in the search box.
+When adding a widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the tray. Filter on `tag:attack_summary` or type `Attack Summary` in the search box.
  
 Each section in the **Attack Summary** page corresponds to a dedicated powerpack.
-
-{{< img src="security/application_security/threats/appsec-threat-overview-powerpacks.png" alt="Screenshot of the new dashboard page with the Powerpacks drawer open, filtering on tag:threat_overview"  >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
