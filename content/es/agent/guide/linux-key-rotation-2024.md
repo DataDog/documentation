@@ -37,7 +37,7 @@ Si utilizas uno de los siguientes métodos de instalación, tu host confía auto
 - [Módulo Puppet][8], v3.21.0 o posterior (publicado el 5 de julio de 2023)
 - [Fórmula SaltStack][9], v3.6 o posterior (publicado el 10 de agosto de 2023)
 - [Paquete de compilación Heroku][10], v2.11 o posterior (publicado el 15 de junio de 2023)
-- Plantillas de configuración de [Elastic Beanstalk][11] actualizadas a partir del 27 de junio de 2023 (deben contener `source: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh`)
+- Plantillas de configuración de [Elastic Beanstalk][11], actualizadas a partir del 27 de junio de 2023 (deben contener `source: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh`)
 - Agents contenerizados (Docker/Kubernetes), para cualquier versión
 - Agents de Windows/MacOS, para cualquier versión
 
