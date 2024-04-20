@@ -43,9 +43,9 @@ En las versiones 7.21/6.21 del Agent (y posteriores):
 {{% /tab %}}
 {{% tab "Contenerizado" %}}
 
-Para utilizar una integración comunitaria o de Marketplace en un entorno contenerizado debes crear una imagen personalizada que incluya la integración comunitaria que quieras.
+Para utilizar una integración de la comunidad o el mercado en un entorno contenerizado debes crear una imagen personalizada que incluya la integración comunitaria que quieras.
 
-Utiliza el siguiente Dockerfile para crear una versión personalizada del Agent que incluya el `<INTEGRATION_NAME>` de [integrations-extras][2]. Si estás instalando una integración de Marketplace, el `<INTEGRATION_NAME>` está disponible en las instrucciones de configuración.
+Utiliza el siguiente Dockerfile para crear una versión personalizada del Agent que incluya el `<INTEGRATION_NAME>` de [integrations-extras][2]. Si estás instalando una integración del mercado, el `<INTEGRATION_NAME>` está disponible en las instrucciones de configuración.
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
