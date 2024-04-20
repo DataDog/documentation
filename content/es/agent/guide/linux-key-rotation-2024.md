@@ -41,7 +41,7 @@ Si utilizas uno de los siguientes métodos de instalación, tu host confía auto
 - Agents contenerizados (Docker/Kubernetes), para cualquier versión
 - Agents de Windows/MacOS, para cualquier versión
 
-Además, al instalar el paquete DEB del Agent v6.48.0 o v7.48.0 o posterior en `apt` desde el repositorio `apt.datadoghq.com`, se instala la versión 1.3.1 del [`paquete `datadog-signing-keys`](#the-datadog-signing-keys-package). El paquete `datadog-signing-keys` te garantiza automáticamente que tu host confiará en la nueva clave. Si tienes instalada la versión 1.3.1 o posterior de `datadog-signing-keys`, no es necesario realizar ninguna otra acción. Las versiones de `datadog-signing-keys` anteriores a la versión 1.3.1 no garantizan que todo esté listo para la rotación de claves.
+Además, al instalar el paquete DEB del Agent v6.48.0 o v7.48.0 o posterior en `apt` desde el repositorio `apt.datadoghq.com`, se instala la versión 1.3.1 del [`paquete ``datadog-signing-keys``](#the-datadog-signing-keys-package). El paquete ``datadog-signing-keys``te garantiza automáticamente que tu host confiará en la nueva clave. Si tienes una versión 1.31 o posterior de ``datadog-signing-keys``, no necesitas realizar ninguna otra acción. Las versiones de ``datadog-signing-keys`anteriores a la versión 1.3.1 no garantizan que todo esté listo para la rotación de claves.
 
 Si has instalado Observability Pipelines Worker o el rastreador de bibliotecas APM **utilizando los métodos de instalación anteriores**, estos ya vienen con las claves más recientes. No necesitas realizar ninguna otra acción.
 
