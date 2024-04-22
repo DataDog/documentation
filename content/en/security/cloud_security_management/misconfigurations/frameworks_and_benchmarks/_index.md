@@ -52,7 +52,7 @@ Select a rule to view details about the misconfigured resources, the rule descri
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_monitoring/default_rules/
-[2]: /security/cloud_security_management/misconfigurations/supported_frameworks
+[2]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks/
 [11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
 [13]: https://app.datadoghq.com/security/configuration/rules?product=cspm

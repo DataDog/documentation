@@ -19,7 +19,7 @@ further_reading:
 
 ## Search profiles
 
-{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles3.mp4" alt="Search profiles by tags" video=true >}}
 
 Go to **APM -> Profiles** and select a service to view its profiles. Select a profile type to view different resources (for example, CPU, Memory, Exception, and I/O).
 

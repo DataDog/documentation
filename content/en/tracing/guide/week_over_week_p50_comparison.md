@@ -18,7 +18,7 @@ further_reading:
 
 _2 minutes to complete_
 
-{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3.mp4" alt="comparison video" video="true" style="width:90%;">}}
+{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_3_cropped_small.mp4" alt="comparison video" video="true" style="width:90%;">}}
 
 Datadog can show you the latency of your application over time and how it compares to similar moments in previous time frames such as last week or month. This example shows a web server for an e-commerce platform and monitors the latency performance for the server has seen over the past month.
 
@@ -30,13 +30,13 @@ Datadog can show you the latency of your application over time and how it compar
 
     This example uses the `web-store` service because it is stable. Double-check that issues have not appeared over the last month.
 
-    {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="comparison 2" style="width:90%;">}}
+    {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2_cropped.png" alt="comparison 2" style="width:90%;">}}
 
     Click the service to see its Service page, which shows analyses of throughput, latency (including percentile distribution), and errors, a summary of the active Datadog monitors for the service, and a breakdown of the [resources][3] made available by the service.
 
 3. **Find the Latency graph** on the top of the Service page and deselect all the percentiles from the legend leaving only the p50 option, then **Expand the Latency graph** to view the full screen mode where you can conduct a more comprehensive analysis.
 
-{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_s3.png" alt="Full view of latency chart with week-over-week display enabled" style="width:90%;">}}
+{{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_s3_cropped.png" alt="Full view of latency chart with week-over-week display enabled" style="width:90%;">}}
 
     Datadog APM allows you to compare the different percentiles of latency for the service over time but also to view the full distribution of latencies in the Latency Distribution graph below.
 

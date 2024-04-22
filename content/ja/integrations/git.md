@@ -1,24 +1,28 @@
 ---
-"categories":
-- "Source Control"
-"ddtype": "ライブラリ"
-"dependencies": []
-"description": "自己ホスト型 Git サーバーから Datadog へコミットとプルリクエストを送信。"
-"doc_link": "https://docs.datadoghq.com/integrations/git/"
-"draft": false
-"git_integration_title": "git"
-"has_logo": true
-"integration_id": "git"
-"integration_title": "Git"
-"is_public": true
-"kind": "インテグレーション"
-"manifest_version": "1.0"
-"name": "git"
-"public_title": "Datadog-Git インテグレーション"
-"short_description": "自己ホスト型 Git サーバーから Datadog へコミットとプルリクエストを送信。"
-"version": "1.0"
+categories:
+- collaboration
+- developer tools
+- issue tracking
+- source control
+dependencies: []
+description: 自己ホスト型 Git サーバーから Datadog へコミットとプルリクエストを送信。
+doc_link: https://docs.datadoghq.com/integrations/git/
+draft: false
+git_integration_title: git
+has_logo: true
+integration_id: git
+integration_title: Git
+integration_version: ''
+is_public: true
+kind: インテグレーション
+manifest_version: '1.0'
+name: git
+public_title: Datadog-Git インテグレーション
+short_description: 自己ホスト型 Git サーバーから Datadog へコミットとプルリクエストを送信。
+version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/git/git_event.png" alt="Git イベント" popup="true">}}
 
 ## 概要
@@ -57,6 +61,5 @@ Git のコミットを Git サーバーから直接キャプチャして、以�
 
 5. [Datadog-Git インテグレーションをインストール][2]します。
 
-[1]: https://app.datadoghq.com/account/settings#api
-[2]: https://app.datadoghq.com/account/settings#integrations/git
-
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/integrations/git
