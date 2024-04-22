@@ -30,7 +30,7 @@ Set up tracing on Buildkite to optimize your resource usage, reduce overhead, an
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Partial retries][9] | Partial pipelines | View partially retried pipeline executions. |
-| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents. |
 | [Manual steps][12] | Manual steps | View manually triggered pipelines. |
 | [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |

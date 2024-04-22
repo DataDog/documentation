@@ -26,7 +26,7 @@ Set up tracing in TeamCity to collect data about your pipeline executions, debug
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
-| [Partial retries][14] | Partial retries | View manually triggered pipelines. |
+| [Partial retries][14] | Retry build triggers | View partially retried pipeline executions. |
 | [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 
