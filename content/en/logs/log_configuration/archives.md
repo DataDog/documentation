@@ -27,6 +27,8 @@ Configure your Datadog account to forward all the logs ingested—whether [index
 
 {{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
+If you want to route your logs to a storage-optimized archive directly from your environment, see how to [archive your logs with Observability Pipelines][15].
+
 Navigate to the [**Log Forwarding** page][14] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
 1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
@@ -464,3 +466,4 @@ Within the zipped JSON file, each event's content is formatted as follows:
 [12]: /logs/explorer/live_tail/
 [13]: /service_management/events/explorer/
 [14]: https://app.datadoghq.com/logs/pipelines/log-forwarding
+[15]: /observability_pipelines/archive_logs/
