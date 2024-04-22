@@ -48,7 +48,7 @@ The Go toolchain automatically picks up any `default.pgo` file in the main packa
 
 See the [datadog-pgo GitHub repository][4] for more details.
 
-## Check if PGO is enabled
+## Checking if PGO is enabled
 
 To check where PGO is enabled, search for [Go profiles without pgo tag set to true][7]. 
 
