@@ -48,12 +48,19 @@ The Go toolchain automatically picks up any `default.pgo` file in the main packa
 
 See the [datadog-pgo GitHub repository][4] for more details.
 
+## Check if PGO is enabled
+
+To check where PGO is enabled, search for [Go profiles without pgo tag set to true][7]. 
+
+The `pgo` tag was implemented in dd-trace-go 1.61.0, so any profiles prior to this version will not have `pgo:false`.
+
 [1]: https://tip.golang.org/doc/go1.21
 [2]: /profiler/enabling/go
 [3]: https://github.com/golang/go/issues/65532
 [4]: https://github.com/DataDog/datadog-pgo?tab=readme-ov-file#getting-started
 [5]: /account_management/api-app-keys
 [6]: https://go.dev/doc/pgo
+[7]: https://app.datadoghq.com/profiling/explorer?query=runtime%3Ago%20-pgo%3Atrue%20&viz=stream
 
 ## Further reading
 
