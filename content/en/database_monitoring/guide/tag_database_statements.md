@@ -57,7 +57,7 @@ func main() {
 
 ## Explore the tags in DBM
 
-On the [**DBM > Samples**][4] page, filter the **Explain Plans** and **Query Samples** views by custom tag.
+On the [Samples page][4], filter the **Explain Plans** and **Query Samples** views by custom tag.
 
 {{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="Filter explain plans by custom tag.">}}
 
@@ -72,4 +72,4 @@ When you select a query, the custom tags are shown on the **Sample Details** pag
 [1]: /database_monitoring/#getting-started
 [2]: https://google.github.io/sqlcommenter
 [3]: https://github.com/basecamp/marginalia
-[4]: /database_monitoring/query_samples/
+[4]: https://app.datadoghq.com/databases/samples

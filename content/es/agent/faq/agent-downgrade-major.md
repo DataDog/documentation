@@ -12,7 +12,7 @@ title: Cambiar a una versión principal anterior del Agent
 
 En primer lugar, [desinstala la v7 del Agent del sistema][1].
 
-A continuación, si seguiste las instrucciones para [pasar de la v6 a la v7][2], ejecuta el siguiente comando de instalación del Agent para cambiar de la versión 7 a la versión 6 del Agent:
+A continuación, si has seguido las instrucciones para [upgrade from v6 to v7 (actualizar de v6 a v7)][2], ejecuta el siguiente comando de instalación Agent para bajar tu Agent de la versión 7 a la versión 6:
 
 ```shell
 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
@@ -36,13 +36,13 @@ El comando funciona en todas las versiones compatibles de Amazon Linux, CentOS, 
 [1]: /es/agent/guide/how-do-i-uninstall-the-agent/
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
+[4]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
 En primer lugar, [desinstala la v7 del Agent del sistema][1].
 
-A continuación, si seguiste las instrucciones para [pasar de la v6 a la v7][2], ejecuta el comando de instalación del Agent con la variable de entorno `DD_AGENT_MAJOR_VERSION=6` para cambiar de la versión 7 a la versión 6 del Agent:
+A continuación, si has seguido las instrucciones para [upgrade from v6 to v7 (actualizar de v6 a v7)][2], ejecuta el comando de instalación Agent con la variable de entorno `DD_AGENT_MAJOR_VERSION=6` para bajar tu Agent de la versión 7 a la versión 6:
 
 ```shell
 DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
@@ -77,8 +77,9 @@ En esta guía, se asume que actualizaste a la v6 del Agent utilizando la [guía 
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. Si ejecutas Ubuntu 14 o una versión anterior, o Debian 8 o una versión anterior, copia el conjunto de claves en `/etc/apt/trusted.gpg.d`:
@@ -128,7 +129,7 @@ En esta guía, se asume que actualizaste a la v6 del Agent utilizando la [guía 
 
     ```shell
     rm /etc/yum.repos.d/datadog-beta.repo
-    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
     **Nota**: Debido a un [error en dnf][1], utiliza `repo_gpgcheck=0` en lugar de `repo_gpgcheck=1` con RHEL/CentOS 8.1.
@@ -176,7 +177,7 @@ En esta guía, se asume que actualizaste a la v6 del Agent utilizando la [guía 
 Ejecuta el paquete del instalador del Agent para instalar la última versión 5.x; encontrarás las instrucciones
 [en la página de integración del Datadog Agent][1].
 
-[1]: https://app.datadoghq.com/account/settings#agent/windows
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 {{% /tab %}}
 {{% tab "MacOS" %}}
 

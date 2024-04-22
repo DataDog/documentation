@@ -16380,11 +16380,17 @@ components:
       required:
       - data
       type: object
-    RetentionFilterResponse:
+    RetentionFilterCreateResponse:
       description: The retention filters definition.
       properties:
         data:
           $ref: '#/components/schemas/RetentionFilter'
+      type: object
+    RetentionFilterResponse:
+      description: The retention filters definition.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterAll'
       type: object
     RetentionFilterType:
       default: spans-sampling-processor
@@ -23611,7 +23617,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RetentionFilterResponse'
+                $ref: '#/components/schemas/RetentionFilterCreateResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -25796,7 +25802,8 @@ paths:
         end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor
         != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
         := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
-        \ cursor := response.metadata.pagination.next_record_id\nEND\n```"
+        \ cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis
+        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/)."
       operationId: GetMonthlyCostAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -37536,7 +37543,10 @@ paths:
 
         [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)
 
-        instead.'
+        instead.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetCostByOrg
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -37599,7 +37609,10 @@ paths:
 
         and is delayed by up to 72 hours from when it was incurred.
 
-        To access historical costs prior to this, use the `/historical_cost` endpoint.'
+        To access historical costs prior to this, use the `/historical_cost` endpoint.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetEstimatedCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -37687,7 +37700,10 @@ paths:
       description: 'Get historical cost across multi-org and single root-org accounts.
 
         Cost data for a given month becomes available no later than the 16th of the
-        following month.'
+        following month.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetHistoricalCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -38011,7 +38027,8 @@ paths:
         Projected cost data is only available for the current month and becomes available
         around the 12th of the month.
 
-        This endpoint requires the usage_read authorization scope.'
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetProjectedCost
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -38936,8 +38953,6 @@ tags:
     monthly usage across multiple facets of Datadog.
 
     This API is available to all Pro and Enterprise customers.
-
-    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
 
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
