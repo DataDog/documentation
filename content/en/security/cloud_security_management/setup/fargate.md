@@ -42,6 +42,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     "cpu": "256",
     "memory": "512",
     "networkMode": "awsvpc",
+    "pidMode": "task",
     "requiresCompatibilities": [
         "FARGATE"
     ],
@@ -164,6 +165,10 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 
 ## EKS
 
+### AWS EKS Fargate RBAC
+
+Use the following [Agent RBAC deployment instruction][10] before deploying the Agent as a sidecar.
+
 ### Running the Agent as a sidecar
 
 The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with CSM Threats enabled:
@@ -230,6 +235,8 @@ spec:
                fieldPath: spec.nodeName
      volumes:
        - name: cws-instrumentation-volume
+     serviceAccountName: datadog-agent
+     shareProcessNamespace: true
 {{< /code-block >}}
 
 ## Verify that the Agent is sending events to CSM
@@ -261,6 +268,7 @@ In the task definition, replace the "workload" container with the following:
 [4]: /security/cloud_security_management/setup/csm_enterprise
 [5]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [6]: https://aws.amazon.com/console
-[7]: /resources/json/datadog-agent-ecs-fargate.json
+[7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs
+[10]: https://docs.datadoghq.com/integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac

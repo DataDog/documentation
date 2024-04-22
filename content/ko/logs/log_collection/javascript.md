@@ -360,6 +360,7 @@ window.DD_LOGS.init({
 | `forwardReports`           | `"all"` 또는 `"intervention"` `"deprecation"` `"csp_violation"` 어레이 | 아니요       | `[]`            | [보고 API][8]에서 Datadog로 보고서를 전달합니다. `"all"`을 사용해 전체를 전달하거나 보고 유형 어레이를 사용해 하위 집합만 전달합니다.                                       |
 | `sampleRate`               | 숫자                                                                    | 아니요       | `100`           | **지원 중단됨** - `sessionSampleRate` 참조                                                                                                                                             |
 | `sessionSampleRate`        | 숫자                                                                    | 아니요       | `100`           | 추적할 세션 비율: 전체의 경우 `100`, 전체 해제의 경우 `0`. 추적된 세션만 로그를 전송합니다.                                                                                    |
+| `trackingConsent`          | `"granted"` 또는 `"not-granted"`                                            | 아니요       | `"granted"`     | 초기 사용자 추적 동의 상태를 설정합니다. [사용자 추적 동의][15]를 참조하세요.                                                                                                         |
 | `silentMultipleInit`       | 부울 연산자                                                                   | 아니요       |                 | 여러 init을 포함하면서 오류를 기록하는 것을 방지합니다.                                                                                                                                    |
 | `proxy`                    | 문자열                                                                    | 아니요       |                 | 부수적 프록시 URL(예: https://www.proxy.com/path). 자세한 정보는 전체 [프록시 설정 가이드][6]를 참조합니다.                                                                        |
 | `telemetrySampleRate`      | 숫자                                                                    | 아니요       | `20`            | SDK 실행에 대한 텔레메트리 데이터(오류, 디버그 로그)는 잠재적 문제를 감지하고 해결하기 위해 Datadog로 전송됩니다. 이 옵션을 `0`으로 설정해 텔레메트리 수집을 사용 중지합니다. |
@@ -376,7 +377,7 @@ window.DD_LOGS.init({
 | `usePartitionedCrossSiteSessionCookie` | 부울 연산자 | 아니요       | `false` | 파티션된 보안 크로스 사이트 세션 쿠키를 사용합니다. 이를 통해 사이트가 또 다른 iframe에서 로딩될 때 로그 SDK가 실행되도록 할 수 있습니다. `useSecureSessionCookie`를 의미합니다. |
 | `useCrossSiteSessionCookie`            | 부울 연산자 | 아니요       | `false` | **지원 중단됨** `usePartitionedCrossSiteSessionCookie`를 참조합니다.                                                                                                              |
 
-## 가이드
+## 사용법
 
 ### 커스텀 로그
 
@@ -394,7 +395,7 @@ import { datadogLogs } from '@datadog/browser-logs'
 datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
-#### CDN async
+#### CDN 비동기화
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -734,7 +735,7 @@ datadogLogs.createLogger('signupLogger', {
 })
 ```
 
-이제 다음을 사용해 코드의 각기 다른 부분에 사용될 수 있습니다.
+다음을 사용하여 코드의 다른 부분에서 사용할 수 있습니다.
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -743,7 +744,7 @@ const signupLogger = datadogLogs.getLogger('signupLogger')
 signupLogger.info('Test sign up completed')
 ```
 
-#### CDN 비동기화
+##### CDN 비동기화
 
 예를 들어 다른 모든 로거에 정의된 `signupLogger`가 있다고 정의합니다.
 
@@ -757,7 +758,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-이제 다음을 사용해 코드의 각기 다른 부분에 사용될 수 있습니다.
+다음을 사용하여 코드의 다른 부분에서 사용할 수 있습니다.
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -782,7 +783,7 @@ if (window.DD_LOGS) {
 }
 ```
 
-이제 다음을 사용해 코드의 각기 다른 부분에 사용될 수 있습니다.
+다음을 사용하여 코드의 다른 부분에서 사용할 수 있습니다.
 
 ```javascript
 if (window.DD_LOGS) {
@@ -834,7 +835,7 @@ datadogLogs.clearGlobalContext()
 datadogLogs.getGlobalContext() // => {}
 ```
 
-#### CDN 비동기화
+##### CDN 비동기화
 
 CDN 비동기화의 경우 다음을 사용합니다.
 
@@ -922,7 +923,7 @@ datadogLogs.clearUser()
 datadogLogs.getUser() // => {}
 ```
 
-#### CDN 비동기화
+##### CDN 비동기화
 
 CDN 비동기화의 경우 다음을 사용합니다.
 
@@ -1019,7 +1020,7 @@ datadogLogs.setContext("{'env': 'staging'}")
 datadogLogs.setContextProperty('referrer', document.referrer)
 ```
 
-#### CDN 비동기화
+##### CDN 비동기화
 
 CDN 비동기화의 경우 다음을 사용합니다.
 
@@ -1057,7 +1058,7 @@ setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
 
 지정된 수준 이상인 상태의 로그만 전송됩니다.
 
-##### NPM
+#### NPM
 
 NPM의 경우 다음을 사용합니다.
 
@@ -1079,7 +1080,7 @@ window.DD_LOGS.onReady(function () {
 
 *참고**: 초기 API 호출은 `window.DD_LOGS.onReady()` 콜백으로 래핑되어야 합니다. 이를 통해 SDK가 적절하게 로드될 때만 코드가 실행되도록 할 수 있습니다.
 
-##### CDN 동기화
+#### CDN 동기화
 
 CDN 동기화의 경우 다음을 사용합니다.
 
@@ -1101,7 +1102,7 @@ window.DD_LOGS && window.DD_LOGS.logger.setLevel('<LEVEL>')
 setHandler (handler?: 'http' | 'console' | 'silent' | Array<handler>)
 ```
 
-##### NPM
+#### NPM
 
 NPM의 경우 다음을 사용합니다.
 
@@ -1125,7 +1126,7 @@ window.DD_LOGS.onReady(function () {
 
 *참고**: 초기 API 호출은 `window.DD_LOGS.onReady()` 콜백으로 래핑되어야 합니다. 이를 통해 SDK가 적절하게 로드될 때만 코드가 실행되도록 할 수 있습니다.
 
-##### CDN 동기화
+#### CDN 동기화
 
 CDN 동기화의 경우 다음을 사용합니다.
 
@@ -1135,6 +1136,75 @@ window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
 **참고**: `window.DD_LOGS` 검사는 SDK를 사용해 로딩 실패가 발생할 때 문제를 방지합니다.
+
+### 사용자 추적 동의
+
+GDPR, CCPA 및 유사한 규정을 준수하기 위해 Logs Browser SDK를 사용하면 초기화 시 추적 동의 값을 제공할 수 있습니다.
+
+`trackingConsent` 초기화 파라미터는 다음 값 중 하나가 될 수 있습니다.
+
+1. `"granted"`: Logs Browser SDK가 데이터 수집을 시작하고 이를 Datadog으로 보냅니다.
+2. `"not-granted"`: Logs Browser SDK는 데이터를 수집하지 않습니다.
+
+Logs Browser SDK가 초기화된 후 추적 동의 값을 변경하려면 `setTrackingConsent()` API 호출을 사용하세요. Logs Browser SDK는 새 값에 따라 동작을 변경합니다.
+
+* `"granted"`에서 `"not-granted"`로 변경되면 로그 세션이 중지되고 데이터가 더 이상 Datadog으로 전송되지 않습니다.
+* `"not-granted"`에서 `"granted"`로 변경하면 이전 세션이 활성화되지 않은 경우 새 로그 세션이 생성되고 데이터 수집이 재개됩니다.
+
+이 상태는 탭 간에 동기화되지 않으며 탐색 간에 유지되지 않습니다. Logs Browser SDK를 초기화하는 동안 또는 `setTrackingConsent()`를 통해 사용자 결정을 제공하는 것은 사용자의 책임입니다.
+
+`init()`전에 `setTrackingConsent()`를 사용하면 제공된 값이 초기화 파라미터보다 우선합니다.
+
+#### NPM
+
+NPM의 경우 다음을 사용합니다.
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs';
+
+datadogLogs.init({
+    ...,
+    trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', function() {
+    datadogLogs.setTrackingConsent('granted');
+});
+```
+
+#### CDN 비동기화
+
+CDN 비동기화의 경우 다음을 사용합니다.
+
+```javascript
+window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
+        ...,
+        trackingConsent: 'not-granted'
+    });
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_LOGS.onReady(function() {
+        window.DD_LOGS.setTrackingConsent('granted');
+    });
+});
+```
+
+#### CDN 동기화
+
+CDN 동기화의 경우 다음을 사용합니다.
+
+```javascript
+window.DD_LOGS && window.DD_LOGS.init({
+  ...,
+  trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_LOGS && window.DD_LOGS.setTrackingConsent('granted');
+});
+```
 
 ### 내부 컨텍스트 액세스
 
@@ -1146,7 +1216,7 @@ getInternalContext (startTime?: 'number' | undefined)
 
 선택적으로 `startTime` 파라미터를 사용하여 특정 시간의 컨텍스트를 확보할 수 있습니다. 파라미터가 제거된 경우 현재 컨텍스트가 반환됩니다.
 
-##### NPM
+#### NPM
 
 NPM의 경우 다음을 사용합니다.
 
@@ -1166,7 +1236,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-##### CDN 동기화
+#### CDN 동기화
 
 CDN 동기화의 경우 다음을 사용합니다.
 
@@ -1190,3 +1260,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [14]: /ko/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[15]: #user-tracking-consent

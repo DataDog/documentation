@@ -9,13 +9,13 @@ title: Aurora マネージド MySQL のデータベースモニタリングの�
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
+<div class="alert alert-warning">Database Monitoring はこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
 
-データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、実行計画、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
+Database Monitoring は、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、実行計画、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
 
-Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。MySQL データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
+Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。MySQL データベースで Database Monitoring を有効にするには、以下の設定を行ってください。
 
 1. [データベースのパラメーターを構成する](#configure-mysql-settings)
 2. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
@@ -31,14 +31,14 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 7.36.1 以降
 
 パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
-データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
+: Database Monitoring のデフォルトの Agent 構成は保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
+Database Monitoring は、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
-: Agent は、できればインスタンスエンドポイントを介して、監視対象のホストに直接接続する必要があります。Agent をプロキシ、ロードバランサー、コネクションプーラーを経由してデータベースに接続しないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
+: Datadog Agent は、監視対象のホストに直接接続する必要があり、できればインスタンスエンドポイントを通じて行うことが望ましいです。Agent をプロキシ、ロードバランサー、コネクションプーラー、または **Aurora クラスターエンドポイント**を経由してデータベースに接続しないでください。クラスターエンドポイントに接続されている場合、Agent はランダムな 1 つのレプリカからデータを収集し、そのレプリカの可視性だけを提供します。Agent が実行中に異なるホストに接続した場合 (フェイルオーバーやロードバランシングなどの場合)、Agent は 2 つのホスト間の統計の差を計算し、不正確なメトリクスを生成します。
 
 データセキュリティへの配慮
-: Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
+: Agent がデータベースから収集するデータの種類や、そのデータの安全性をどのように保証するかについては、[機密情報][2]をご覧ください。
 
 
 ## MySQL 設定を構成する
@@ -79,30 +79,29 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 Datadog Agent が統計やクエリを収集するためには、データベースへの読み取り専用のアクセスが必要となります。
 
-次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
+次の手順では、`datadog@'%'` を使用して任意のホストからログインする権限を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
-
-`datadog` ユーザーを作成し、基本的な権限を付与します。
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
-ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-
-{{% tab "MySQL 5.6 and 5.7" %}}
+{{% tab "MySQL 5.6" %}}
 
 `datadog` ユーザーを作成し、基本的な権限を付与します。
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL ≥ 5.7" %}}
+
+`datadog` ユーザーを作成し、基本的な権限を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
+ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -173,9 +172,9 @@ Aurora ホストを監視するには、インフラストラクチャーに Dat
 
 ホストで実行されている Agent に対してこのチェックを設定するには (Agent が Aurora データベースから収集するように小さな EC2 インスタンスをプロビジョニングする場合など)
 
-[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mysql.d/conf.yaml` ファイルを編集します。カスタムメトリクスのオプションなど、使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mysql.d/conf.yaml][2] を参照してください。
+[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `mysql.d/conf.yaml` ファイルを編集します。カスタムメトリクスのオプションなど、使用可能なすべての構成オプションについては、[サンプル mysql.d/conf.yaml][2] を参照してください。
 
-MySQL メトリクスを収集するには、`mysql.d/conf.yaml` に次のコンフィギュレーションブロックを追加します。
+MySQL メトリクスを収集するには、`mysql.d/conf.yaml` に次の構成ブロックを追加します。
 
 ```yaml
 init_config:
@@ -199,9 +198,9 @@ instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 [Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -249,7 +248,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOI
 
 
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/guide/secrets-management
+[2]: /ja/agent/configuration/secrets-management
 [3]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -337,7 +336,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/guide/secrets-management
+[4]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -366,7 +365,7 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings/agent/latest
-[6]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /ja/integrations/amazon_rds
 [9]: /ja/database_monitoring/troubleshooting/?tab=mysql
