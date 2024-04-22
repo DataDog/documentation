@@ -131,4 +131,4 @@ If you believe a specific violation is a false positive, you can indicate false 
 [2]: /code_analysis/static_analysis_rules?categories=Security
 [3]: /code_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
 [4]: /integrations/github/
-[5]: https://docs.datadoghq.com/code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
+[5]: /code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
