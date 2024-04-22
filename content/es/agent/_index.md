@@ -48,7 +48,7 @@ Los paquetes también están disponibles para arquitecturas Arm v8 y x86 de 64 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
 <div class="alert alert-info"><p>
-Datadog recomienda actualizar el Datadog Agent con cada versión secundaria y de parche. O, al menos, actualizarlo una vez al mes. </p>
+Datadog recomienda actualizar el Datadog Agent con cada versión secundaria y de parche. O bien, al menos, actualizarlo una vez al mes. </p>
 <p>
 Actualizar a una versión principal del Datadog Agent y mantenerla actualizada es la única forma compatible de obtener las últimas funcionalidades y correcciones del Agent. Sin embargo, el Agent cuenta con actualizaciones frecuentes y puede ser todo un reto gestionarlas a escala empresarial. Esto no significa que debas esperar a las versiones principales para actualizarlo. La frecuencia de actualización adecuada para tu organización depende de la infraestructura y la forma de gestionar la configuración, pero lo aconsejable es que sea mensual.</p>
 <p>
@@ -67,7 +67,7 @@ La numeración de las versiones del Datadog Agent sigue las reglas de <a href="h
   {{< nextlink href="/agent/iot">}}<u>IoT</u>: instala y configura el Datadog IoT Agent, una versión del Datadog Agent optimizada para monitorizar dispositivos IoT y aplicaciones integradas.{{< /nextlink >}}
   {{< nextlink href="/agent/logs">}}<u>Recopilación de logs</u>: habilita y configura la recopilación de logs en el Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/configuration/proxy">}}<u>Proxy</u>: si la configuración de tu red restringe el tráfico saliente, utiliza un proxy para el tráfico del Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/versions/">}}<u>Versiones</u>: Agent 7 es la última versión principal del Datadog Agent. Conoce los cambios entre las versiones principales del Agent y cómo actualizar.{{< /nextlink >}}
+  {{< nextlink href="/agent/versions/">}}<u>Versiones</u>: el Agent 7 es la última versión principal del Datadog Agent. Conoce los cambios entre las versiones principales del Agent y cómo actualizar.{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>Solución de problemas</u>: encuentra información para solucionar problemas relacionados con el Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>Guías</u>: tutoriales paso a paso detallados para utilizar el Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/security">}}<u>Seguridad</u>: información sobre las principales capacidades y características de seguridad disponibles para los clientes que garantizan que su entorno sea seguro.{{< /nextlink >}}

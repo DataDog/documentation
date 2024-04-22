@@ -5430,11 +5430,16 @@ menu:
       url: data_security/pci_compliance/
       parent: data_security
       weight: 7
+    - name: HIPAA Compliance
+      identifier: data_security_hipaa_compliance
+      url: data_security/hipaa_compliance/
+      parent: data_security
+      weight: 8
     - name: Guides
       identifier: data_security_guide
       url: data_security/guide/
       parent: data_security
-      weight: 8
+      weight: 9
     - name: Sensitive Data Scanner
       url: sensitive_data_scanner/
       pre: sensitive-data-scanner

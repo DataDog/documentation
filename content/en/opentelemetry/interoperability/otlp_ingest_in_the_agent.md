@@ -223,33 +223,35 @@ There are many other environment variables and settings supported in the Datadog
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-1. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
+In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable.
 
-   For gRPC:
-   ```
-   env:
-    - name: HOST_IP
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(HOST_IP):4317" # sends to gRPC receiver on port 4317
-   ```
+For gRPC:
+```yaml
+env:
+ - name: HOST_IP
+   valueFrom:
+     fieldRef:
+       fieldPath: status.hostIP
+ - name: OTEL_EXPORTER_OTLP_ENDPOINT
+   value: "http://$(HOST_IP):4317" # sends to gRPC receiver on port 4317
+```
 
-   For HTTP:
-   ```
-   env:
-    - name: HOST_IP
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
-   ```
+For HTTP:
+```yaml
+env:
+ - name: HOST_IP
+   valueFrom:
+     fieldRef:
+       fieldPath: status.hostIP
+ - name: OTEL_EXPORTER_OTLP_ENDPOINT
+   value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
+```
+**Note**: To enrich container tags for custom metrics, set the appropriate resource attributes in the application code where your OTLP metrics are generated. For example, set the `container.id` resource attribute to the pod's UID.
+
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Check the documentation of your OTLP Library. Some of them must send traces to <code>/v1/traces</code> instead of the <code>/</code> root path.</div>
+<div class="alert alert-info">When configuring the endpoint for sending traces, ensure you use the correct path required by your OTLP library. Some libraries expect traces to be sent to the <code>/v1/traces</code> path, while others use the root path <code>/</code>.</div>
 
 ## Out-of-the-box dashboards
 
