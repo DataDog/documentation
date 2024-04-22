@@ -23,17 +23,38 @@ Datadog is able to indicate the filename and line number where the vulnerability
 
 The available code security vulnerability types include the following:
 
-- Weak Cipher
-- Weak Hash
-- SQL injection
-- Path traversal
-- LDAP injection
+- Admin console active
 - Command Injection
-- Server Side Request Forgery (SSRF)
+- Default HTML escape invalid
+- Directory listing leak
+- Hardcoded Password
+- Hardcoded Secrets
+- Header Injection
+- HSTS Header missing
+- Insecure Auth Protocol
 - Insecure Cookie
+- Insecure JSP layout
+- LDAP injection
+- MongoDB Injection
 - Cookie without HttpOnly Flag
 - Cookie without SameSite Flag
+- Path traversal
+- Reflection injection
+- Server Side Request Forgery (SSRF)
+- Session timeout
+- Session Rewriting
+- SQL injection
+- Stacktrace leak
+- Trust Boundary Violation
 - Unvalidated Redirect
+- Verb tampering
+- Weak Cipher
+- Weak Hash
+- Weak Randomness
+- X-Content-Type-Options Header missing
+- X-XSS-Protection Header disabled
+- XPath Injection
+- XSS
 
 ### Disabling code security vulnerability detection 
 
