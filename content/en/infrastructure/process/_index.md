@@ -305,7 +305,7 @@ agents:
         processAgent:
             env:
             - name: DD_STRIP_PROCESS_ARGS
-                value: "true"
+              value: "true"
 ```
 
 {{% /tab %}}
