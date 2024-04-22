@@ -24,7 +24,7 @@ Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do 
 
 ## Activate log collection
 
-Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation.
+Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation. If you want to send logs via other vendors' collectors/forwarders, or you want to pre-process your logging data within your own environment before shipping, see [Observability Pipelines][13].
 
 To enable log collection with an Agent running on your host, change `logs_enabled: false` to `logs_enabled: true` in the Agent's [main configuration file][4] (`datadog.yaml`).
 
@@ -181,4 +181,5 @@ List of all available parameters for log collection:
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /metrics/custom_metrics/#overview
 [11]: /getting_started/tagging/
-[12]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files
+[12]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files'
+[13]: https://docs.datadoghq.com/observability_pipelines/
