@@ -59,7 +59,7 @@ Calculates the difference between each interval on a per interval basis. For exa
 
 | Function       | Description                                                                                                                                        | Example                          |
 |:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
-| `throughput()` | Converts a time series into a rate per second, by dividing each value by the number of seconds in the time bucket to produce the per-second value. | `throughput(<METRIC_NAME>{*})` |
+| `throughput()` | Converts a timeseries into a rate per second, by dividing each value by the number of seconds in the time bucket to produce the per-second value. | `throughput(<METRIC_NAME>{*})` |
 
 ## Other functions
 
