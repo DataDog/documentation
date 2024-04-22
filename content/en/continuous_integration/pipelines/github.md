@@ -22,24 +22,28 @@ further_reading:
 <div class="alert alert-warning">The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.</div>
 {{< /site-region >}}
 
-## Compatibility
-- **Supported GitHub versions**:
-  - GitHub.com (SaaS)
-  - GitHub Enterprise Server (GHES) 3.5.0 or newer
+## Overview
 
-- **Running pipelines**: View pipeline executions that are running
+[GitHub Actions][1] is an automation tool that allows you to build, test, and deploy your code in GitHub. Create workflows that automate every step of your development process, streamlining software updates and enhancing code quality with CI/CD features integrated into your repositories.
 
-- **Partial pipelines**: View partially retried and downstream pipeline executions
+Set up tracing in GitHub Actions to track the execution of your workflows, identify performance bottlenecks,  troubleshoot operational issues, and optimize your deployment processes. 
 
-- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
+### Compatibility
 
-- **Infrastructure metric correlation**: [Correlate infrastructure metrics][11] to pipeline jobs for self-hosted GitHub runners
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Running pipelines][12] | Running pipelines | View pipeline executions that are running. |
+| [Partial retries][13] | Partial pipelines | View partially retried pipeline executions. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for GitHub jobs. |
+| [Custom tags][12] [and measures at runtime][13] | Custom tags and measures at runtime | Configure [custom tags and measures][14] at runtime. |
+| [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Approval wait time][16] | Approval wait time | View the amount of time workflow runs and workflow jobs wait for manual approvals. |
 
-- **Custom tags and measures at runtime**: Configure custom tags and measures at runtime
+The following GitHub versions are supported:
 
-- **Queue time**: View amount of time workflow jobs sit in the queue before processing
-
-- **Approval wait time**: View amount of time workflow runs and workflow jobs wait for manual approvals
+- GitHub.com (SaaS)
+- GitHub Enterprise Server (GHES) 3.5.0 or later
 
 ## Configure the Datadog integration
 
@@ -112,10 +116,15 @@ workflow job and workflow run events. To remove the events:
 [2]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [3]: https://app.datadoghq.com/integrations/github/
 [4]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
-[5]: https://docs.datadoghq.com/logs/
+[5]: /logs/
 [6]: https://app.datadoghq.com/ci/settings
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
-[10]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#enable-log-collection
-[11]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs
+[10]: /continuous_integration/pipelines/github/#enable-log-collection
+[11]: /continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs
+[12]: /glossary/#running-pipeline
+[13]: /glossary/#partial-retry
+[14]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[15]: /glossary/#queue-time
+[16]: /glossary/#approval-wait-time
