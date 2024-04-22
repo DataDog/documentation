@@ -63,12 +63,10 @@ You can optionally provide a version number for the tracing library by placing a
 Available versions are listed in tracer source repositories for each language:
 
 - [Java][7] (`java`)
-- [JavaScript][8] (`js`)
+- [Node.js][8] (`js`)
 - [Python][9] (`python`)
 - [.NET][10] (`dotnet`)
 - [Ruby][11] (`ruby`)
-
-**Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
 
 ### Tagging observability data by environment {#env-linux}
 
@@ -140,12 +138,10 @@ You can optionally provide a version number for the tracing library by placing a
 Available versions are listed in tracer source repositories for each language:
 
 - [Java][8] (`java`)
-- [JavaScript][9] (`js`)
+- [Node.js][9] (`js`)
 - [Python][10] (`python`)
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
-
-**Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
 
 ### Tagging observability data by environment {#env-docker}
 
@@ -382,7 +378,7 @@ To select pods for library injection and specify the library version, use the ap
 | Language   | Pod annotation                                                        |
 |------------|-----------------------------------------------------------------------|
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
-| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
+| Node.js    | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
 | Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
@@ -390,7 +386,7 @@ To select pods for library injection and specify the library version, use the ap
 Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
 
 - [Java][31]
-- [JavaScript][32]
+- [Node.js][32]
 - [Python][33]
 - [.NET][34] (For .NET applications using a musl-based Linux distribution like Alpine, specify a tag with the `-musl` suffix, such as `v2.29.0-musl`.)
 - [Ruby][35]
@@ -423,7 +419,7 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 {{< collapse-content title="Datadog Operator" level="h4" >}}
 
-For example, to instrument .NET, Python, and JavaScript applications, add the following configuration to your `datadog-agent.yaml` file:
+For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-agent.yaml` file:
 
 {{< highlight yaml "hl_lines=5-8" >}}
    features:
@@ -440,7 +436,7 @@ For example, to instrument .NET, Python, and JavaScript applications, add the fo
 
 {{< collapse-content title="Helm" level="h4" >}}
 
-For example, to instrument .NET, Python, and JavaScript applications, add the following configuration to your `datadog-values.yaml` file:
+For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-values.yaml` file:
 
 {{< highlight yaml "hl_lines=5-8" >}}
    datadog:
@@ -463,7 +459,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Am
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][15]   | [hub.docker.com/r/datadog/dd-lib-java-init][16]   | [gallery.ecr.aws/datadog/dd-lib-java-init][17]   |
-| JavaScript | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
+| Node.js  | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
 | .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
 | Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
