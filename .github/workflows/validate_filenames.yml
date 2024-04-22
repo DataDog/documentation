@@ -1,6 +1,9 @@
 name: Validate Filenames
 
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      - 'static/**'
 
 # Stop the current running job if a new push is made to the PR
 concurrency:
