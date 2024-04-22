@@ -33,7 +33,7 @@ El siguiente comando funciona en Amazon Linux, CentOS, Debian, Fedora, Red Hat, 
 
 [1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
+[3]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
