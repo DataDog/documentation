@@ -108,7 +108,7 @@ The two types of fixes are distinguished visually in the UI with different label
 {{< img src="code_analysis/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
 
 ### Ignoring violations
-To ignore a rule globally or by path(s), see [Static Analysis setup page][5]. 
+To ignore a rule globally or by path(s), see [Static Analysis Setup][5]. 
 
 To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Analysis scans.
 
