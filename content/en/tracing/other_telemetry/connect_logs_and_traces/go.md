@@ -47,7 +47,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to third party packages too.
 
-## Injection into Logrus logs
+## Injection into logrus logs
 
 An hook for the logrus package is available to automatically link your log and spans.
 The package is available in the Go tracer.
@@ -64,10 +64,10 @@ import (
 
 func main() {
     // Optional: Change log format to use JSON (Cf. Go Log Collection)
-		logrus.SetFormatter(&logrus.JSONFormatter{})
+    logrus.SetFormatter(&logrus.JSONFormatter{})
 
     // Add Datadog context log hook
-	  logrus.AddHook(&dd_logrus.DDContextLogHook{}) 
+    logrus.AddHook(&dd_logrus.DDContextLogHook{}) 
     
     // ...
 }
