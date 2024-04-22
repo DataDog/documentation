@@ -151,6 +151,14 @@ container_image:
 
 Set up the [AWS integration][4] to begin crawling Container Image metadata from Amazon ECR.
 
+## Configure container images trends view
+
+Image metrics on the container images Trends view are collected from the Live Containers and Image Collection source. The same instructions above will enable the collection of container image metrics.
+
+{{< img src="security/vulnerabilities/container_image_trends.png" alt="The container images trends view highlighting image size, image age, vulnerability and container count metrics" width="100%">}}
+
+With the above sources enabled you can enable the generation of these metrics by toggling the 'Enable Container Image Metric Collection' option in the side panel.
+
 ## Container image tagging
 
 Tag and enrich your container images with arbitrary tags by using [extract labels as tags][6] configuration on the Agent. These tags are then picked by the Container Image check.
