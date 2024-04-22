@@ -17,7 +17,7 @@ further_reading:
 
 Create your own compliance framework by adding a custom tag to the compliance rules you wish to track. This enables you to filter the misconfigurations on the [Misconfigurations issue explorer][1] by the custom tag. You can also clone the **Cloud Security Management - Misconfigurations Overview** dashboard and [configure a template variable][2] for the custom tag to dynamically filter the widgets on the dashboard.
 
-1. On the **Compliance Rules** page, select the rule you wish to add the custom tag to.
+1. On the [**Misconfiguration Rules**][5] page, select the rule you wish to add the custom tag to.
 2. Under **Say what's happening**, navigate to the **Tag resulting misconfigurations with** section and add the `key:value` for the custom tag.
 3. Click **Update Rule**.
 
@@ -34,3 +34,4 @@ Create your own compliance framework by adding a custom tag to the compliance ru
 [2]: /dashboards/template_variables/
 [3]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
 [4]: /api/latest/security-monitoring/#update-an-existing-rule
+[5]: https://app.datadoghq.com/security/configuration/compliance/rules

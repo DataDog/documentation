@@ -9,35 +9,35 @@ title: Empezando con Terraform
 
 ## Información general
 
-Puede utilizar el [Datadog Terraform provider][2] para crear y gestionar mediante programación los recursos de Datadog. Esta guía proporciona una visión general de Empezando con Terraform, con enlaces a recursos de Terraform y tutoriales que abordan casos de uso específicos.
+Puedes utilizar el [proveedor de Datadog Terraform][2] para crear y gestionar mediante programación los recursos de Datadog. Esta guía brinda información general para empezar a utilizar Terraform, con enlaces a recursos de Terraform y tutoriales que abordan casos de uso específicos.
 
 ## Configuración
 
 1. Si aún no lo has hecho, instala [Terraform][1].
-2. Si aún no tienes un archivo Terraform Configuración, lee la [Configuración section][3] de la documentación principal de Terraform para crear un directorio y un archivo Configuración.
-3. Desde el directorio que contiene su Datadog Proveedor Configuración, ejecute `terraform init`.
+2. Si aún no tienes un archivo de configuración de Terraform, lee la [sección de configuración][3] de la documentación principal de Terraform para crear un directorio y un archivo de configuración.
+3. Desde el directorio que contiene tu configuración de proveedor de Datadog, ejecuta `terraform init`.
 
 ## Recursos
 
 ### Integraciones con soluciones en la nube
 
-El [AWS integración recurso][9], [Azure integración recurso][10], y [Google Cloud Project integración recurso][11] puede establecer las conexiones para obtener rápidamente los datos que fluyen en su Datadog cuenta de su [AWS][12], [Azure][13], y [Google Cloud][14] servicios, respectivamente. Si utilizas AWS integración , consulta la guía [AWS integración con Terraform][27] para ver un ejemplo de configuración de integración junto con su rol y permisos IAM asociados.
+El [recurso de integración con AWS][9], el [recurso de integración con Azure][10] y el [recurso de integración con Google Cloud Project][11] pueden establecer las conexiones para obtener rápidamente los datos que fluyen en tu cuenta de Datadog desde los servicios de [AWS][12], [Azure][13] y [Google Cloud][14], respectivamente. Si utilizas la integración con AWS, consulta la guía de [Integración de AWS con Terraform][27] para ver un ejemplo de configuración de integración junto con su rol y permisos IAM asociados.
 
-### logs y métricas
+### Logs y métricas
 
-Consulte la [Guía de gestión de logs y métricas con Terraform][20] para obtener instrucciones sobre la gestión de logs y métricas con Terraform.
+Consulta la [Guía de gestión de logs y métricas con Terraform][20] para obtener instrucciones sobre la gestión de logs y métricas con Terraform.
 
-### Monitors
+### Monitores
 
-Con los datos fluyendo en su cuenta Datadog, implemente [Alertar con Datadog monitors][8] para ser notificado sobre cualquier cambio inesperado o comportamiento anómalo. Utilice el [monitor resource][4] para crear y gestionar sus monitors, o utilice el [monitor JSON resource][5] para utilizar definiciones JSON para sus monitors. Consulte la sección [create a monitor][6] de la documentación principal de Terraform para ver un archivo `monitor.tf` de ejemplo que crea un [Live proceso monitor][7].
+Con los datos que ingresan a tu cuenta de Datadog, implementa [Alertar con monitores de Datadog][8] para ser notificado sobre cualquier cambio inesperado o comportamiento anómalo. Utiliza el [recurso de monitor][4] para crear y gestionar tus monitores, o utiliza el [recurso de monitor de JSON][5] para utilizar definiciones JSON para tus monitores. Consulta la sección [Crear un monitor][6] de la documentación principal de Terraform para ver un archivo `monitor.tf` de ejemplo que crea un [monitor de Live Processes][7].
 
 ### Gestión de cuentas
 
-Consulte la [Guía de gestión de Datadog con Terraform][19] para obtener instrucciones sobre la gestión de su cuenta de Datadog con Terraform.
+Consulta la [Guía de gestión de Datadog con Terraform][19] para obtener instrucciones sobre la gestión de tu cuenta de Datadog con Terraform.
 
 ### Dashboards
 
-Para analizar o mostrar sus datos a un público más amplio, cree [Datadog <txprotected>dashboards</txprotected>][18]. Terraform proporciona el [dashboard resource][15] para esto, o puedes usar el [dashboard JSON resource][16] para crear <txprotected>dashboards</txprotected> con definiciones JSON. También puedes [restringir la edición de un dashboard][17] configurando roles restringidos.
+Para analizar o mostrar tus datos a un público más amplio, crea [Dashboards de Datadog][18]. Terraform brinda el [recurso de dashboard][15] para esto, o puedes usar el [recurso de dashboard de JSON][16] para crear dashboards con definiciones JSON. También puedes [restringir la edición de un dashboard][17] al configurar roles restringidos.
 
 ### Tests Synthetic
 
@@ -46,11 +46,11 @@ Para analizar o mostrar sus datos a un público más amplio, cree [Datadog <txpr
 
 ### Webhooks
 
-Puede enviar solicitudes de API personalizadas y cargas útiles a su propio servicios en respuesta a los datos de su cuenta Datadog con [Webhooks][29]. Esto le permite alertar a su servicio o iniciar acciones automatizadas en su infraestructura. Utiliza el [Webhook resource][30] de Terraform para crear y gestionar tus webhooks con Terraform.
+Puedes enviar solicitudes de API personalizadas y cargas útiles a tus propios servicios en respuesta a los datos de tu cuenta de Datadog con [Webhooks][29]. Esto permite alertar a tus servicios o iniciar acciones automatizadas en tu infraestructura. Utiliza el [recurso de Webhook][30] de Terraform para crear y gestionar tus webhooks con Terraform.
 
-## Vaya más lejos con Terraform
+## Ve más lejos con Terraform
 
-Siga el tutorial [Terraform Datadog Provider][28] para un recorrido detallado de la implementación y gestión de Datadog con Terraform, incluyendo el despliegue de una aplicación de ejemplo Kubernetes con Datadog Agent y la creación de [Sintético tests][31].
+Sigue el tutorial de [proveedor de Terraform Datadog][28] para comprender en detalle la implementación y gestión de Datadog con Terraform, incluyendo el despliegue de una aplicación de ejemplo de Kubernetes con Datadog Agent y la creación de [tests Synthetic][31].
 
 ## Leer más
 

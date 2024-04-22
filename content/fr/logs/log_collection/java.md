@@ -32,7 +32,7 @@ title: Collecte de logs avec Java
 
 Pour envoyer vos logs à Datadog, activez la journalisation au sein d'un fichier et [suivez][14] ce fichier avec l'Agent Datadog.
 
-Les stack traces liées aux logs Java types sont divisées en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine. Par exemple :
+Les stack traces types des logs Java sont divisées en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine. Par exemple :
 
 ```java
 //4 events generated when only one is expected!
@@ -177,6 +177,30 @@ Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format 
 
 [1]: https://github.com/logstash/logstash-logback-encoder
 {{% /tab %}}
+{{% tab "Tinylog" %}}
+
+Créez une configuration de writer JSON sortant vers un fichier en vous basant sur la [documentation officielle de Tinylog][1].
+
+
+Utilisez le format suivant dans un fichier `tinylog.properties` :
+
+```properties
+writer                     = json
+writer.file                = log.json
+writer.format              = LDJSON
+writer.level               = info
+writer.field.level         = level
+writer.field.source        = {class}.{method}()
+writer.field.message       = {message}
+writer.field.dd.trace_id   = {context: dd.trace_id}
+writer.field.dd.span_id    = {context: dd.span_id}
+writer.field.dd.service    = {context: dd.service}
+writer.field.dd.version    = {context: dd.version}
+writer.field.dd.env        = {context: dd.env}
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Ajouter des identifiants de trace à vos logs
@@ -258,6 +282,22 @@ Configurez un file appender dans `logback.xml` :
 ```
 
 {{% /tab %}}
+{{% tab "Tinylog" %}}
+
+Créez une configuration de writer sortant vers un fichier en vous basant sur la [documentation officielle de Tinylog][1].
+
+
+Utilisez le format suivant dans un fichier `tinylog.properties` :
+
+```properties
+writer          = file
+writer.level    = debug
+writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "dd.span_id":{context: dd.span_id}
+writer.file     = log.txt
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Ajouter des identifiants de trace à vos logs
@@ -279,8 +319,8 @@ Une fois la [collecte de logs activée][4], configurez la [collecte de logs pers
     logs:
 
       - type: file
-        path: "/path/to/your/java/log.log"
-        service: java
+        path: "<path_to_your_java_log>.log"
+        service: <service_name>
         source: java
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -473,7 +513,7 @@ Le [parser key/value][13] extrait n'importe quelle expression `<KEY>=<VALUE>` id
 
 Pour enrichir vos événements de log dans Java, vous pouvez réécrire les messages dans votre code et y ajouter des séquences `<KEY>=<VALUE>`.
 
-Par exemple, si vous avez l'événement suivant :
+Par exemple, si vous avez :
 
 ```java
 logger.info("Emitted 1001 messages during the last 93 seconds for customer scope prod30");
@@ -531,9 +571,9 @@ Pour générer ce JSON :
 [3]: /fr/tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /fr/agent/logs/?tab=tailfiles#activate-log-collection
 [5]: /fr/agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /fr/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /fr/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /fr/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[6]: /fr/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
 [9]: /fr/logs/log_configuration/parsing/?tab=matchers
 [10]: /fr/logs/explorer/#overview
 [11]: https://github.com/logstash/logstash-logback-encoder

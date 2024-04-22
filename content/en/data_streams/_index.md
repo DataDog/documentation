@@ -17,6 +17,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring-apm-integration/'
       tag: 'Blog'
       text: 'Troubleshoot streaming data pipelines directly from APM with Datadog Data Streams Monitoring'
+    - link: 'https://www.datadoghq.com/blog/data-streams-monitoring-sqs/'
+      tag: 'Blog'
+      text: 'Monitor SQS with Data Streams Monitoring'
 cascade:
     algolia:
         rank: 70

@@ -96,9 +96,8 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 | Module         | Versions                                | Support Type               | Instrumentation level           |
 |:---------------|:----------------------------------------|:---------------------------|:--------------------------------|
-| CakePHP        | 2.x                                     | All supported PHP versions | Framework-level instrumentation |
-| CodeIgniter    | 2.x                                     | PHP 7+                     | Framework-level instrumentation |
-| CodeIgniter    | 3.x                                     | PHP 7+                     | Generic web tracing             |
+| CakePHP        | 2.x, 3.x, 4.x, 5.x                      | All supported PHP versions | Framework-level instrumentation |
+| CodeIgniter    | 2.x, 3.x                                | PHP 7+                     | Framework-level instrumentation |
 | Drupal         |                                         | All supported PHP versions | Framework-level instrumentation |
 | FuelPHP        | 1.1                                     | PHP 7+                     | Generic web tracing             |
 | Laminas        |                                         | All supported PHP versions | Framework-level instrumentation |

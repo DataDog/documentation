@@ -364,6 +364,12 @@
   "source" : {
     "other": "Source"
   },
+  "legacy": {
+      "other": "Legacy"
+  },
+  "try_this_rule" : {
+    "other": "TRY THIS RULE"
+  },
   "available_for": {
     "other": "Available for"
   }

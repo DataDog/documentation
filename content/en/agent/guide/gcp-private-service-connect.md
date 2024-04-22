@@ -1,5 +1,5 @@
 ---
-title: Connect to Datadog over GCP Private Service Connect
+title: Connect to Datadog over Google Cloud Private Service Connect
 kind: guide
 further_reading:
     - link: '/integrations/google_cloud_platform/'
@@ -15,21 +15,21 @@ further_reading:
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}
-[Private Service Connect][1] (PSC) allows you to send telemetry to Datadog without using the public internet.
+[Google Cloud Private Service Connect][1] (PSC) allows you to send telemetry to Datadog without using the public internet.
 
-Datadog exposes some of its data intake services in Google Cloud Platform as PSC [_published services_][2], as seen in the [table of published services](#published-services). 
+Datadog exposes some of its data intake services in Google Cloud as Private Service Connect [_published services_][2], as seen in the [table of published services](#published-services). 
 
-You can configure a GCP PSC endpoint to expose a private IP address for each Datadog intake service; this IP address routes traffic to the Datadog backend. You can then configures a GCP [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed. 
+You can configure a PSC endpoint to expose a private IP address for each Datadog intake service. This IP address routes traffic to the Datadog backend. You can then configure a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed. 
 
-{{< img src="agent/guide/psc/gcp-psc-overview-1.png" alt="GCP Private Service Connect schema. On the left, a 'Customer VPC' box contains Datadog Agents sending data to a PSC endpoint. On the right, a 'Datadog VPC' box contains a service attachment in communication with Datadog services. The PSC endpoint in the 'Customer VPC' box connects to the service attachment in the 'Datadog VPC' box through the GCP Private Backbone. " >}}
+{{< img src="agent/guide/psc/gcp-psc-overview-1.png" alt="Google Cloud Private Service Connect schema. On the left, a 'Customer VPC' box contains Datadog Agents sending data to a PSC endpoint. On the right, a 'Datadog VPC' box contains a service attachment in communication with Datadog services. The endpoint in the 'Customer VPC' box connects to the service attachment in the 'Datadog VPC' box through the Google Cloud backbone. " >}}
 
 ## Setup
 
 ### Connect an endpoint
 
-1. In your GCP console, navigate to **Network services** > **Private Service Connect**.
+1. In your Google Cloud console, navigate to **Network services** > **Private Service Connect**.
 2. Go to the **Endpoints** section. Click on **Connect endpoint**.
-   {{< img src="agent/guide/psc/connect-endpoint.png" alt="Screenshot of a 'Connect endpoint' page in the GCP console" >}}
+   {{< img src="agent/guide/psc/connect-endpoint.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
    
    - Under **Target**, select _Published service_.
    - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
@@ -41,18 +41,18 @@ You can configure a GCP PSC endpoint to expose a private IP address for each Dat
    **Note**: Datadog exposes PSC producer endpoints from the `us-central1` region. These endpoints support global access, allowing services to connect from any region. However, the forwarding rule must be created in the `us-central1` region.
 
 3. Click **Add endpoint**. Verify that your status is _Accepted_. Take note of the IP address, as this is used in the next section.
-   {{< img src="agent/guide/psc/connect-endpoint-success.png" alt="Screenshot of a success message after adding an endpoint in the GCP console. Includes an IP address" >}}
+   {{< img src="agent/guide/psc/connect-endpoint-success.png" alt="Screenshot of a success message after adding an endpoint in the Google Cloud console. Includes an IP address" >}}
 
 ### Create a DNS zone
-1. In your GCP console, navigate to **Network services** > **Cloud DNS**.
+1. In your Google Cloud console, navigate to **Network services** > **Cloud DNS**.
 2. Click on **Create zone**.
-   {{< img src="agent/guide/psc/create-a-dns-zone.png" alt="Screenshot of a 'Create a DNS zone' page in the GCP console" >}}
+   {{< img src="agent/guide/psc/create-a-dns-zone.png" alt="Screenshot of a 'Create a DNS zone' page in the Google Cloud console" >}}
 
    - Under **Zone type**, select _Private_.
    - For **Zone name**, enter a descriptive name for your zone.
    - For **DNS name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services).
 3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on **Add record set**.
-   {{< img src="agent/guide/psc/create-record.png" alt="Screenshot of the 'Create record set' page in the GCP console." >}}
+   {{< img src="agent/guide/psc/create-record.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
 
    - For **DNS name**, leave the field unmodified.
    - For **Resource record type**, select `A`.
@@ -126,9 +126,9 @@ Ensure that the IP address in the response matches the one associated with your 
 
 Datadog exposes some of its data intake services in Google Cloud Platform as PSC [_published services_][2], as seen in the [table of published services](#published-services). 
 
-You can configure a GCP PSC endpoint to expose a private IP address for each Datadog intake service; this IP address routes traffic to the Datadog backend. You can then configures a GCP [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed. 
+You can configure a PSC endpoint to expose a private IP address for each Datadog intake service. This IP address routes traffic to the Datadog backend. You can then configure a Google Cloud [_Private DNS Zone_][3] to override the DNS names corresponding to the products for each endpoint that is consumed. 
 
-{{< img src="agent/guide/psc/gcp-psc-overview-1.png" alt="GCP Private Service Connect schema. On the left, a 'Customer VPC' box contains Datadog Agents sending data to a PSC endpoint. On the right, a 'Datadog VPC' box contains a service attachment in communication with Datadog services. The PSC endpoint in the 'Customer VPC' box connects to the service attachment in the 'Datadog VPC' box through the GCP Private Backbone. " >}}
+{{< img src="agent/guide/psc/gcp-psc-overview-1.png" alt="Google Cloud Private Service Connect schema. On the left, a 'Customer VPC' box contains Datadog Agents sending data to a PSC endpoint. On the right, a 'Datadog VPC' box contains a service attachment in communication with Datadog services. The PSC endpoint in the 'Customer VPC' box connects to the service attachment in the 'Datadog VPC' box through the Google Cloud backbone. " >}}
 
 ## Setup
 
@@ -136,7 +136,7 @@ You can configure a GCP PSC endpoint to expose a private IP address for each Dat
 
 1. In your GCP console, navigate to **Network services** > **Private Service Connect**.
 2. Go to the **Endpoints** section. Click on **Connect endpoint**.
-   {{< img src="agent/guide/psc/connect-endpoint-eu.png" alt="Screenshot of a 'Connect endpoint' page in the GCP console" >}}
+   {{< img src="agent/guide/psc/connect-endpoint-eu.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
    
    - Under **Target**, select _Published service_.
    - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
@@ -148,18 +148,18 @@ You can configure a GCP PSC endpoint to expose a private IP address for each Dat
    **Note**: Datadog exposes PSC producer endpoints from the `europe-west3` region. These endpoints support global access, allowing services to connect from any region. However, the forwarding rule must be created in the `europe-west3` region.
 
 3. Click **Add endpoint**. Verify that your status is _Accepted_. Take note of the IP address, as this is used in the next section.
-   {{< img src="agent/guide/psc/connect-endpoint-success-eu.png" alt="Screenshot of a success message after adding an endpoint in the GCP console. Includes an IP address" >}}
+   {{< img src="agent/guide/psc/connect-endpoint-success-eu.png" alt="Screenshot of a success message after adding an endpoint in the Google Cloud console. Includes an IP address" >}}
 
 ### Create a DNS zone
-1. In your GCP console, navigate to **Network services** > **Cloud DNS**.
+1. In your Google Cloud console, navigate to **Network services** > **Cloud DNS**.
 2. Click on **Create zone**.
-   {{< img src="agent/guide/psc/create-a-dns-zone-eu.png" alt="Screenshot of a 'Create a DNS zone' page in the GCP console" >}}
+   {{< img src="agent/guide/psc/create-a-dns-zone-eu.png" alt="Screenshot of a 'Create a DNS zone' page in the Google Cloud console" >}}
 
    - Under **Zone type**, select _Private_.
    - For **Zone name**, enter a descriptive name for your zone.
    - For **DNS name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services).
 3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on **Add record set**.
-   {{< img src="agent/guide/psc/create-record-eu.png" alt="Screenshot of the 'Create record set' page in the GCP console." >}}
+   {{< img src="agent/guide/psc/create-record-eu.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
 
    - For **DNS name**, leave the field unmodified.
    - For **Resource record type**, select `A`.

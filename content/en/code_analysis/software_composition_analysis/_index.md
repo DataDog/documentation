@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
   text: "Enhance application security in production with Software Composition Analysis"
+- link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
+  tag: "Blog"
+  text: "Prioritize vulnerability remediation with Datadog SCA"
 - link: "/getting_started/application_security/software_composition_analysis"
   tag: "Documentation"
   text: "Getting Started with Software Composition Analysis"
@@ -39,12 +42,29 @@ SCA can run in CI pipelines by using [Code Analysis][3] and provide runtime moni
 
 SCA currently supports scanning the following languages and technologies for vulnerable libraries:
 
-- C#
+- .NET
 - Go
-- Java
+- JVM
 - Node.js
+- PHP
 - Python
 - Ruby
+
+SCA performs scans by looking at the libraries contained in your lockfiles. Below are the supported lockfiles:
+
+| Package Manager | Lockfile                                 |
+|-----------------|------------------------------------------|
+| C# (.NET)       | `packages.lock.json`                     |
+| Go (mod)        | `go.mod`                                 |
+| JVM (Gradle)    | `gradle.lockfile`                        |
+| JVM (Maven)     | `pom.xml`                                |
+| Node.js (npm)   | `package-lock.json`                      |
+| Node.js (pnpm)  | `pnpm-lock.yaml`                         |
+| Node.js (yarn)  | `yarn.lock`                              |
+| PHP (composer)  | `composer.lock`                          |
+| Python (pip)    | `requirements.txt`, `Pipfile.lock`       |
+| Python (poetry) | `poetry.lock`                            |
+| Ruby (bundler)  | `Gemfile.lock`                           |
 
 ## Integrations
 
