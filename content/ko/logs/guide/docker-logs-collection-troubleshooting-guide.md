@@ -33,7 +33,7 @@ Container Agent 또는 로컬에 설치된 Host Agent를 사용하여 Datadog에
 
 4. 위 예시와 같은 상태가 표시되지만 여전히 로그를 수신하지 못하는 경우 [상태: 오류 없음](#status-no-errors) 섹션을 참조하세요.
 
-## 로그 Agent
+## Logs Agent
 
 ### 상태: 실행되지 않음
 
@@ -198,7 +198,7 @@ logs_config:
   docker_client_read_timeout: 60
 ```
 
-## 호스트 에이전트
+## Host Agent
 ### Docker 그룹의 Agent 사용자
 
 Host Agent를 사용하는 경우 Docker 소켓에서 읽을 수 있는 권한을 가지려면 `dd-agent` 사용자를 Docker 그룹에 추가해야 합니다. `agent.log` 파일에 다음 오류 로그가 표시되는 경우:
