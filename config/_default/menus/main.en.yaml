@@ -4093,7 +4093,7 @@ menu:
       identifier: log_management_error_tracking
       weight: 6
     - name: Error Tracking Explorer
-      url: error_tracking/explorer
+      url: logs/error_tracking/explorer
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_explorer
       weight: 601
@@ -4108,7 +4108,7 @@ menu:
       parent: log_management_error_tracking
       weight: 603
     - name: Custom Grouping
-      url: error_tracking/custom_grouping
+      url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
       weight: 604
@@ -4118,7 +4118,7 @@ menu:
       identifier: log_management_error_tracking_manage_data_collection
       weight: 605
     - name: Identify Suspect Commits
-      url: error_tracking/suspect_commits
+      url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
       weight: 606
@@ -5155,7 +5155,7 @@ menu:
       identifier: rum_error_tracking
       weight: 11
     - name: Explorer
-      url: error_tracking/explorer/
+      url: real_user_monitoring/error_tracking/explorer/
       parent: rum_error_tracking
       identifier: rum_error_tracking_explorer
       weight: 1101
@@ -5170,12 +5170,12 @@ menu:
       identifier: rum_error_tracking_mobile
       weight: 1103
     - name: Custom Grouping
-      url: error_tracking/custom_grouping
+      url: real_user_monitoring/error_tracking/custom_grouping
       parent: rum_error_tracking
       identifier: rum_error_tracking_custom_grouping
       weight: 1104
     - name: Identify Suspect Commits
-      url: error_tracking/suspect_commits
+      url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
       weight: 1105
