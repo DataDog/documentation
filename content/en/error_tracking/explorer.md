@@ -9,7 +9,6 @@ further_reading:
 aliases:
   - /real_user_monitoring/error_tracking/explorer
   - /logs/error_tracking/explorer
-  - /tracing/error_tracking/explorer
 ---
 
 ## Overview
