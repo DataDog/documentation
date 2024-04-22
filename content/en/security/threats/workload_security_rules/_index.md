@@ -19,9 +19,68 @@ further_reading:
   text: "Learn more about Security notification variables"
 ---
 
-With Cloud Security Management Threats (CSM Threats) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of out-of-the-box rules to detect suspicious behavior. CSM Threats rules consist of two different components: [Agent rules](#agent-rules) and [detection rules](#detection-rules).
+This topic explains how Cloud Security Management Threats (CSM Threats) actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
 
-## Agent rules
+## CSM Threats rules construction
+
+CSM Threats rules consist of two different components: Agent rules and Threat detection rules.
+
+- **Agent rules:** [Agent rules][9] are evaluated on the Agent host. CSM Threats first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. Agent expressions use Datadog’s [Security Language (SECL)][2]. 
+  
+  For example, here is the *Agent Configuration rule* expression `cryptominer_args`: 
+
+  ```text
+  exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
+  exec.args in [
+      ~"*stratum+tcp*",
+      ~"*stratum+ssl*",
+      ~"*stratum1+tcp*",
+      ~"*stratum1+ssl*",
+      ~"*stratum2+tcp*",
+      ~"*stratum2+ssl*",
+      ~"*nicehash*",
+      ~"*yespower*"
+  ]
+  ```
+- **Threat Detection rules:** [Threat Detection rules][3] are evaluated on the Datadog cloud (backend). Threat Detection rules are composed of existing Agent Configuration rules and additional expression parameters.
+  
+  Here is the *Threat Detection rule* `Process arguments match cryptocurrency miner`. It uses the Agent Configuration rules, `cryptominer_args` and `windows_cryptominer_process`, identified by `@agent.rule_id`, with additional expression parameters:
+
+  ```text
+  @agent.rule_id:(cryptominer_args || windows_cryptominer_process) 
+  -@process.executable.path:"/usr/bin/grep"
+  ```
+
+### CSM Threats rules pipeline
+
+CSM Threats use the following pipeline when evaluating events:
+
+1. The Agent rules evaluate system activity on the Agent host.
+2. When activity matches an Agent rule expression, the Agent generates a detection event and passes it to the Datadog cloud (backend).
+3. The Datadog cloud evaluates the detection event to see if it matches any Threat Detection rules that use the Agent rule that sent the event.
+4. If there is a match, a signal is generated and displayed in [Signals][8].
+5. Any [Notification Rules][10] that match the severity, detection rule type, tags, and attributes of the signal are triggered.
+
+### Saving resources by design
+
+CSM Threats detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there. 
+
+Datadog solves this problem by keeping the Agent lightweight with only a few rules, and processes most rules using the Threat Detection rules on the Datadog cloud. 
+
+Only when the Agent observes an event that matches its rules does it send a detection to the Datadog cloud. The Datadog cloud then evaluates the detection to determine if it meets its Threat Detection rule expressions. Only if there is a match does the Datadog cloud create a signal.
+
+### Custom rule design
+
+Understanding the dependency Threat Detection rules have on Agent Configuration rules is important when you want to use custom rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
+
+There are two use cases:
+
+- **Create a Threat Detection rule using an existing Agent rule:** If you want to create a Threat Detection rule that uses an existing Agent Configuration rule, then you only need to create a Threat Detection rule that references the Agent Configuration rule and adds any additional expression parameters you need.
+- **Create a Threat Detection rule using a new Agent rule:** If you want to detect an event that the current Agent Configuration rules are not picking up, then you need to create a custom Agent Configuration rule to detect that event, and then create a custom Threat Detection rule that uses the custom Agent Configuration rule.
+
+For a detailed explanation, see [CSM Threats Detection Rules][11]. 
+
+## Agent rules summary
 
 Agent rules contain [Agent expressions](#agent-expressions) that determine which activities the Agent collects. A full set of Agent rules is called a policy. Datadog provides you with several [out-of-the-box Agent rules][6] powered by the default Agent policy.
 
@@ -53,7 +112,7 @@ A process ancestor's filename in CSM Threats is an attribute with the symbol `pr
 
 Putting it all together, the rule expression is `exec.file.path == "/usr/bin/bash"  && (process.ancestors.file.name == "nginx" || process.ancestors.file.name =~ "php*")`.
 
-## Detection rules
+## Detection rules summary
 
 Detection rules run in the Datadog backend after events are sent over as logs. The logs are then evaluated based on patterns of events described in the [detection rules][3]. If the pattern matches a detection rule, a [security signal][8] is generated. Datadog continuously develops new detection rules, which are automatically imported into your account.
 
@@ -69,3 +128,6 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
 [8]: /security/threats/security_signals
+[9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
+[10]: https://app.datadoghq.com/security/configuration/notification-rules
+[11]: https://docs.datadoghq.com/security/threats/workload_security_rules
