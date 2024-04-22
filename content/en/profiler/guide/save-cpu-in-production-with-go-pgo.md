@@ -1,5 +1,5 @@
 ---
-title: Go - Save 2 to 14% CPU in Production with Profile-Guided Optimization
+title: Go - Save up to 15% CPU in Production with Profile-Guided Optimization
 kind: guide
 further_reading:
 - link: "/profiler"
