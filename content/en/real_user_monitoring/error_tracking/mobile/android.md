@@ -185,7 +185,18 @@ datadog {
 
 ## Test your implementation
 
+To verify your Android Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
 
+1. Run your application on an Android emulator or a real device.
+2. Execute code containing an error or crash. For example:
+
+   ```kotlin
+   fun onEvent() {
+       throw RuntimeException("Crash the app")
+   }
+   ```
+
+3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [**Error Tracking**][1].
 
 ## Further Reading
 
