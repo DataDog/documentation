@@ -73,7 +73,7 @@ func main() {
 }
 ```
 
-This will automatically inject the trace id to your logs if you log with the context.
+This automatically injects the trace id to your logs when you log with the context.
 ```go
     // Log with the context
     logrus.WithContext(ctx).Info("Go logs and traces connected!")
