@@ -300,12 +300,12 @@ datadog:
     processAgent:
         enabled: true
         processCollection: true
-    agents:
-        containers:
-            processAgent:
-                env:
-                - name: DD_STRIP_PROCESS_ARGS
-                    value: "true"
+agents:
+    containers:
+        processAgent:
+            env:
+            - name: DD_STRIP_PROCESS_ARGS
+                value: "true"
 ```
 
 {{% /tab %}}
