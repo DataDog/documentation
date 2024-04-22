@@ -155,7 +155,7 @@ Set up the [AWS integration][4] to begin crawling Container Image metadata from 
 
 Image metrics on the container images Trends view are collected from the Live Containers and Image Collection source. The same instructions above will enable the collection of container image metrics.
 
-{{< img src="security/vulnerabilities/container_image_trends.png" alt="The container images trends view highlighting image size, image age, vulnerability and container count metrics" width="100%">}}
+{{< img src="infrastructure/containerimages/container_image_trends.png" alt="The container images trends view highlighting image size, image age, vulnerability and container count metrics" width="100%">}}
 
 With the above sources enabled you can enable the generation of these metrics by toggling the 'Enable Container Image Metric Collection' option in the side panel.
 
