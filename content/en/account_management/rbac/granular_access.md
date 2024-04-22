@@ -13,13 +13,15 @@ Use the different principals to control access patterns in your organization and
 
 
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
+|--------------------------------------------------|-------------------|-------------------|-------------------------------------|
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    |                   | {{< X >}}         |                                     |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Powerpacks][8]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Powerpacks][8]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security rules][5]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][6]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][7]                             |                   | {{< X >}}         |                                     |
+
 ### Elevate access to individual resources
 
 A user with the `user_access_manage` permission can elevate their access to any individual resource that supports restrictions based on team, role, and user or service account. Resources with only role-based access restrictions are not supported. To get access, click the **Elevate Access** button in the granular access control modal.
