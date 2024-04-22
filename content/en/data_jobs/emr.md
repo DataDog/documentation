@@ -38,10 +38,25 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
 When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the **Create Cluster** page:
 
+1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script.
+
+   ```bash
+   #!/bin/bash
+
+   # Expect the first argument to be your Datadog site, second argument to be the AWS secret name for the Datadog API key
+   DD_SITE=$1
+   SECRET_NAME=$2
+
+   # Download and run the latest init script with required positional parameters
+   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/emr/emr_init_latest.sh)" "$DD_SITE" "$SECRET_NAME" || true
+   ```
+
+   The script above downloads and runs the latest init script for Data Jobs Monitoring in EMR with required positional parameters. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.0.0.sh` to use the last stable version.
+
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
-   {{< img src="data_jobs/emr/add_bootstrap_action_with_latest_script.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
+   {{< img src="data_jobs/emr/add_bootstrap_action.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
    - For **Name**, give your bootstrap action a name. You can use `datadog_agent`.
-   - For **Script location**, use `s3://dd-data-jobs-monitoring-setup/scripts/emr/emr_init_latest.sh` for the latest init script. Replace the file name with `emr_init_1.0.0.sh` to use the last stable version. 
+   - For **Script location**, enter the path to where you stored the init script in S3.
    - For **Arguments**, enter two arguments separated by a space: your Datadog site, and the name of the secret in which you stored your Datadog API key. 
       Example:
       ```text
