@@ -60,7 +60,7 @@ Use the following steps to modify the permissions on a specific connection:
 
 1. Navigate to the [App Builder page][5].
 1. Click the **Connections** tab. A list of connections appears.
-1. Hover over the connection you would like to set granular permissions on. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Hover over the connection that you would like to set granular permissions on. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
 1. Select **Restrict Access**.
 1. Select a role from the dropdown menu and click **Add**. The role you selected populates into the bottom of the dialog box.
