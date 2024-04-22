@@ -47,7 +47,7 @@ Below are a few examples of what App Builder apps can do:
 
 You can use your apps from the Apps page or access them directly from within your dashboards. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
 
-{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-1.png" alt="An App embedded in a dashboard" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-1.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
 
 ## Further reading
 
