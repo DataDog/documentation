@@ -32815,7 +32815,10 @@ paths:
         type: safe
   /api/v1/usage/billable-summary:
     get:
-      description: Get billable usage across your account.
+      description: 'Get billable usage across your account.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetUsageBillableSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -34426,7 +34429,10 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get all usage across your account.
+      description: 'Get all usage across your account.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -35636,8 +35642,6 @@ tags:
     monthly usage across multiple facets of Datadog.
 
     This API is available to all Pro and Enterprise customers.
-
-    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
 
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
