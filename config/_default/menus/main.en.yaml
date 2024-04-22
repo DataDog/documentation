@@ -2667,7 +2667,7 @@ menu:
     - name: Swift
       url: tracing/trace_collection/custom_instrumentation/swift
       parent: custom_instrumentation
-      identifier: custom_instrumentation_ios
+      identifier: custom_instrumentation_swift
       weight: 2031
     - name: Elixir
       url: tracing/trace_collection/custom_instrumentation/elixir
