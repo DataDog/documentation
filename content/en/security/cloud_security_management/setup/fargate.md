@@ -257,8 +257,8 @@ In the task definition, replace the "workload" container with the following:
 {{< /code-block >}}
 
 ## Next steps
-If you are still running into an issue, please [open a ticket][10] to our Support team with a `security-agent` flare attached to the latter.
-Please find below the step to create a `security-agent` flare according to your deployment:
+If you are still running into an issue, please [open a ticket][10] to Support with a `security-agent` flare attached to the latter.
+Find below the step to create a `security-agent` flare according to your deployment:
 
 | Platform     | Command                                                                             |
 | --------     | -------                                                                             |
