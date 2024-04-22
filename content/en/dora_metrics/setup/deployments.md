@@ -120,7 +120,7 @@ There are two requirements for calculating Change Lead Time:
 
 DataDog also provides the following breakdown metrics, which represent the different stages since a commit is made until it is deployed.
 
-For computing these metrics, we need to identify the PR associated with the commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
+For computing these metrics, the PR associated with a commit must be identified, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
 
 If a commit does not have an associated PR, only Time to Deploy and Deploy Time are emitted.
 
@@ -150,7 +150,7 @@ If you are using the <code>pull_request</code> trigger, use the alternative meth
 If the [GitHub integration][1] is not already installed, install it on the [GitHub integration tile][2].
 
 When configuring the GitHub application:
-1. Select at least **Read** repository permissions for **Contents**.
+1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
 2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
 
 To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, under the **Features** tab, the **DORA Metrics: Collect Change Lead Time metric** feature is enabled.
