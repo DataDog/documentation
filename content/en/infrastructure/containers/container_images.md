@@ -14,6 +14,9 @@ further_reading:
 - link: "/security/cloud_security_management/troubleshooting/vulnerabilities/"
   tag: "Documentation"
   text: "Troubleshooting Cloud Security Management Vulnerabilities"
+- link: "https://www.datadoghq.com/blog/datadog-container-image-trends-view/"
+  tag: "Blog"
+  text: "Track changes in your containerized infrastructure using Container Image Trends"
 ---
 
 ## Overview
@@ -21,6 +24,10 @@ further_reading:
 The [container images view][1] in Datadog provides key insights into every image used in your environment to help you assess their deployment footprint. It also detects and remediates security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security Management][2] (CSM) to help you streamline your security efforts.
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
+
+The [container image trends view][9] provides high-level insights across all of your images used in your entire containerized infrastructure. Container Image Trends metrics can help you answer key questions about your image posture and deployment footprint across the span of weeks and months.
+
+{{< img src="infrastructure/containerimages/container_image_trends.png" alt="The container images trends view highlighting image size, image age, vulnerabilities and running container count metrics" width="100%">}}
 
 ## Configure container images view
 
@@ -155,9 +162,7 @@ Set up the [AWS integration][4] to begin crawling Container Image metadata from 
 
 Image metrics on the container images Trends view are collected from the Live Containers and Image Collection source. The same instructions above will enable the collection of container image metrics.
 
-{{< img src="infrastructure/containerimages/container_image_trends.png" alt="The container images trends view highlighting image size, image age, vulnerability and container count metrics" width="100%">}}
-
-With the above sources enabled you can enable the generation of these metrics by toggling the 'Enable Container Image Metric Collection' option in the side panel.
+With the Live Containers and Image Collection sources enabled you can turn on the generation of these metrics by opening the 'Container Image Trends Configuration' modal and toggling 'Enable Container Image Metric Collection'.
 
 ## Container image tagging
 
@@ -167,10 +172,11 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/containers/images
+[1]: https://app.datadoghq.com/container-images
 [2]: /security/cloud_security_management
 [3]: /infrastructure/containers/?tab=docker#setup
 [4]: /integrations/amazon_web_services/
 [5]: https://www.cisa.gov/sbom
 [6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [8]: /security/cloud_security_management/vulnerabilities
+[9]: https://app.datadoghq.com/container-images/image-trends
