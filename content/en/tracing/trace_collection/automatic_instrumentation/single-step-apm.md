@@ -16,8 +16,6 @@ further_reading:
 
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
-- **Datadog library compatibility**: [dd-trace-java][37], [dd-trace-py][38], [dd-trace-rb][39], [dd-trace-js][40], and [dd-trace-dotnet][41].
-
 ## Enabling APM on your services in one step
 
 If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
@@ -62,13 +60,13 @@ DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KE
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
-Supported languages include:
+Available versions are listed in tracer source repositories for each language:
 
-- .NET (`dotnet`)
-- Python (`python`)
-- Java (`java`)
-- Node.js (`js`)
-- Ruby (`ruby`)
+- [Java][7] (`java`)
+- [JavaScript][8] (`js`)
+- [Python][9] (`python`)
+- [.NET][10] (`dotnet`)
+- [Ruby][11] (`ruby`)
 
 **Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
 
@@ -87,6 +85,11 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENA
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /tracing/service_catalog/
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
+[7]: https://github.com/DataDog/dd-trace-java/releases
+[8]: https://github.com/DataDog/dd-trace-js/releases
+[9]: https://github.com/DataDog/dd-trace-py/releases
+[10]: https://github.com/DataDog/dd-trace-dotnet/releases
+[11]: https://github.com/DataDog/dd-trace-rb/releases
 
 {{% /tab %}}
 
@@ -134,13 +137,13 @@ DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https:/
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
-Supported languages include:
+Available versions are listed in tracer source repositories for each language:
 
-- .NET (`dotnet`)
-- Python (`python`)
-- Java (`java`)
-- Node.js (`js`)
-- Ruby (`ruby`)
+- [Java][8] (`java`)
+- [JavaScript][9] (`js`)
+- [Python][10] (`python`)
+- [.NET][11] (`dotnet`)
+- [Ruby][12] (`ruby`)
 
 **Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
 
@@ -167,6 +170,11 @@ docker run -d --name dd-agent \
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /tracing/service_catalog/
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
+[8]: https://github.com/DataDog/dd-trace-java/releases
+[9]: https://github.com/DataDog/dd-trace-js/releases
+[10]: https://github.com/DataDog/dd-trace-py/releases
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases
+[12]: https://github.com/DataDog/dd-trace-rb/releases
 
 
 {{% /tab %}}
@@ -379,7 +387,7 @@ To select pods for library injection and specify the library version, use the ap
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
 | Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
-Replace <CONTAINER IMAGE TAG> with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
+Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
 
 - [Java][31]
 - [JavaScript][32]
@@ -619,8 +627,3 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config
-[37]: https://github.com/DataDog/dd-trace-java
-[38]: https://github.com/DataDog/dd-trace-py
-[39]: https://github.com/DataDog/dd-trace-rb
-[40]: https://github.com/DataDog/dd-trace-js
-[41]: https://github.com/DataDog/dd-trace-dotnet
