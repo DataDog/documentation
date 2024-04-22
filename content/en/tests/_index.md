@@ -73,6 +73,7 @@ In addition to tests, Test Visibility provides visibility over the whole testing
 | {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                                                                          | {{< X >}} |                      |                        | {{< X >}} |           | {{< X >}} |                        |
 | {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Flaky Test Retries *" >}}Automatically retries failed flaky tests up to N times to avoid failing the build.{{< /ci-details >}}                                                             |           |       {{< X >}}      |                        |           |           |           |                        |
+| {{< ci-details title="Early flake detection *" >}}Automatically retry new tests to detect flakiness.{{< /ci-details >}}                                                                                   |           |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
 
 \* the feature is opt-in and needs to be enabled in the test service settings UI.
 
