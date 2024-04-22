@@ -16380,11 +16380,17 @@ components:
       required:
       - data
       type: object
-    RetentionFilterResponse:
+    RetentionFilterCreateResponse:
       description: The retention filters definition.
       properties:
         data:
           $ref: '#/components/schemas/RetentionFilter'
+      type: object
+    RetentionFilterResponse:
+      description: The retention filters definition.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterAll'
       type: object
     RetentionFilterType:
       default: spans-sampling-processor
@@ -23611,7 +23617,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RetentionFilterResponse'
+                $ref: '#/components/schemas/RetentionFilterCreateResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'

@@ -13855,6 +13855,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
@@ -13891,6 +13892,45 @@ components:
           type: string
         targetValue:
           description: The path target value to compare to.
+      type: object
+    SyntheticsAssertionJSONSchemaMetaSchema:
+      description: The JSON Schema meta-schema version used in the assertion.
+      enum:
+      - draft-07
+      - draft-06
+      type: string
+      x-enum-varnames:
+      - DRAFT_07
+      - DRAFT_06
+    SyntheticsAssertionJSONSchemaOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesJSONSchema
+      example: validatesJSONSchema
+      type: string
+      x-enum-varnames:
+      - VALIDATES_JSON_SCHEMA
+    SyntheticsAssertionJSONSchemaTarget:
+      description: An assertion for the `validatesJSONSchema` operator.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaOperator'
+        target:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTargetTarget'
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
+    SyntheticsAssertionJSONSchemaTargetTarget:
+      description: Composed target for `validatesJSONSchema` operator.
+      properties:
+        jsonSchema:
+          description: The JSON Schema to assert.
+          type: string
+        metaSchema:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaMetaSchema'
       type: object
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
