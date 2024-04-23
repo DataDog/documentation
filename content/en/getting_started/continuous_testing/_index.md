@@ -32,7 +32,7 @@ Your Continuous Testing tests can:
 * [Simulate browser scenarios within your web application][3]
 * [Test functionality within your iOS and Android applications][4]
 
-You can set up [parallelization][24], which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes. Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Continuous Testing Explorer][5]. 
+You can set up [parallelization][24], which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes. Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Testing Results Explorer][5]. 
 
 To improve your developer workflow with Continuous Testing, you can:
 
@@ -59,7 +59,7 @@ Browser tests simulate a user's journey through your web application beginning a
 
     - Add the URL of the website you want to monitor into the Starting URL field. For this example, enter `https://www.shopist.io`.
     - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. In this example, no specific advanced option is needed.
-    - Name your test and set a Team Tag such as **team-checkout**. Tags allow you to keep your test suite organized and find tests you're interested in through the Synthetic Monitoring & Continuous Testing Explorer.
+    - Name your test and set a Team Tag such as **team-checkout**. Tags allow you to keep your test suite organized and find tests you're interested in through the Synthetic Monitoring & Testing Results Explorer.
     - Choose the browsers and devices to test.
 
 4. Continue [filling out your test details and your recording like you normally would][9].
@@ -141,7 +141,7 @@ To find the ID of your browser test:
 
 For more information about using facets in your search query, see [Search Test Runs][17].
 
-To export your view of the Synthetic Monitoring & Continuous Testing Explorer, click **> Views**. For more information, see [Saved Views][16].
+To export your view of the Synthetic Monitoring & Testing Results Explorer, click **> Views**. For more information, see [Saved Views][16].
 
 ## Set parallelization preferences
 

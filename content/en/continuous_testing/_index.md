@@ -63,9 +63,11 @@ You can use the [Datadog Terraform provider][10] to control test creation and st
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform helps you find the root cause of failed test runs and reduce Mean Time to Resolution (MTTR). You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
+Performing tests in a unified monitoring platform helps you find the root cause of failed test runs and reduce Mean Time to Resolution (MTTR). 
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
+
+You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs in the [Synthetic Monitoring & Testing Results Explorer][11].
 
 ## Examine CI batches in the Synthetic Monitoring & Testing Results Explorer
 
@@ -77,7 +79,7 @@ You can monitor individual test executions and comprehensive batches of tests, a
 
 ## Ready to start?
 
-After you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [`datadog-ci` NPM package][14] in your CI/CD pipelines. See [Testing Local and Staging Environments][17] to use Continuous Testing in environments that are not publicly available or production, for example, running tests against your local development environment or a staging environment within a private network. Then, start exploring details about your batch runs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
+After you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [`datadog-ci` NPM package][14] in your CI/CD pipelines. See [Testing Local and Staging Environments][17] to use Continuous Testing in environments that are not publicly available or production, for example, running tests against your local development environment or a staging environment within a private network. Then, start exploring details about your batch runs in the [Synthetic Monitoring & Testing Results Explorer][11].
 
 {{< learning-center-callout header="Try Synthetic Tests in a CI/CD Pipeline in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline">}}
   The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to learn how to run a Datadog Synthetic test in a CI/CD pipeline.

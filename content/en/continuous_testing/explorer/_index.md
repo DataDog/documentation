@@ -1,5 +1,5 @@
 ---
-title: Synthetic Monitoring & Continuous Testing Explorer
+title: Synthetic Monitoring & Testing Results Explorer
 kind: documentation
 description: Examine CI jobs executing Continuous Testing tests.
 aliases: 
@@ -27,10 +27,10 @@ The [Results Explorer][1] provides visibility into all test runs and CI batches 
 
 {{< tabs >}}
 {{% tab "CI Batches" %}}
-{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Search and manage your CI batches in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Search and manage your CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 {{% /tab %}}
 {{% tab "Test Runs" %}}
-{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -69,7 +69,7 @@ For more information about test runs, see [Search Test Runs][6].
 
 The Results Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
@@ -79,7 +79,7 @@ For more information about test batches, see [Search Test Batches][4].
 
 ## Export
 
-Export your view as a [saved view][9] in the Synthetic Monitoring & Continuous Testing Explorer.
+Export your view as a [saved view][9] in the Synthetic Monitoring & Testing Results Explorer.
 
 ## Further reading
 
