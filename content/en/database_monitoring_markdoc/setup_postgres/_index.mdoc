@@ -5,11 +5,16 @@ description: Setting up Database Monitoring on a Postgres database
 disable_sidebar: true
 ---
 
+<div style="border: 5px solid red; padding: 10px">
+PLACEHOLDER
+<pre>
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
+</pre>
+</div>
 
-### Postgres versions supported
+## Postgres versions supported
 
 |  | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL | Azure |
 |--|------------|---------|------------|------------------|---------|
@@ -22,9 +27,39 @@ disable_sidebar: true
 | Postgres 15 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 16 | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |
 
+## Setup
+
+Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
+
+The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database.
+
+### Before you begin
+
+<!-- Aurora supported PG versions -->
+{% if equals($postgres_host, "aurora") %}
+{% /if %}
+<!-- Azure supported PG versions -->
+{% if equals($postgres_host, "azure") %}
+{% /if %}
+<!-- Google Cloud SQL supported PG versions -->
+{% if equals($postgres_host, "gcp") %}
+{% /if %}
+<!-- RDS supported PG versions -->
+{% if equals($postgres_host, "rds") %}
+{% /if %}
+<!-- Self-hosted supported PG versions -->
+{% if equals($postgres_host, "self-hosted") %}
+{% /if %}
+
+## Setup - OLD
 For setup instructions, select your hosting type:
 
+<div style="border: 5px solid red; padding: 10px">
+PLACEHOLDER
+<pre>
 {{< partial name="dbm/dbm-setup-postgres" >}}
+</pre>
+</div>
 
 <br>
 
