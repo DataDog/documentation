@@ -38,7 +38,7 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
 When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the **Create Cluster** page:
 
-1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script.
+1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script. 
 
    ```bash
    #!/bin/bash
@@ -46,15 +46,15 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    # Set required parameter DD_SITE
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    
-   # Set required parameter DD_API_KEY with Datadog API key. The commands below assumes the API key is stored in AWS Secrets Manager, with the secret name as datadog/dd_api_key and the key as dd_api_key.
-   # ---------------------------------------------------------------------------
-   # Important: Update this if you manage and retrieve your secret differently.
-   # ---------------------------------------------------------------------------
+   # Set required parameter DD_API_KEY with Datadog API key. 
+   # The commands below assumes the API key is stored in AWS Secrets Manager, with the secret name as datadog/dd_api_key and the key as dd_api_key.
+   # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
    SECRET_NAME=datadog/dd_api_key
    DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
 
    # Download and run the latest init script
    DD_SITE=DD_SITE DD_API_KEY=DD_API_KEY bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/emr/emr_init_latest.sh)" || true
+
    ```
 
    The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.0.0.sh` to use the last stable version.
