@@ -35,21 +35,43 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ### Before you begin
 
-<!-- Aurora supported PG versions -->
-{% if equals($postgres_host, "aurora") %}
-{% /if %}
 <!-- Azure supported PG versions -->
 {% if equals($postgres_host, "azure") %}
+Supported PostgreSQL versions
+: 9.6, 10, 11, 12, 13, 14, 15
 {% /if %}
 <!-- Google Cloud SQL supported PG versions -->
 {% if equals($postgres_host, "gcp") %}
+Supported PostgreSQL versions
+: 10, 11, 12, 13, 14, 15
 {% /if %}
-<!-- RDS supported PG versions -->
-{% if equals($postgres_host, "rds") %}
+<!-- Supported PG versions for RDS, self-hosted, and Aurora -->
+{% if or(equals($postgres_host, "rds"), equals($postgres_host, "self-hosted"), equals($postgres_host, "aurora")) %}
+Supported PostgreSQL versions
+: 9.6, 10, 11, 12, 13, 14, 15, 16
 {% /if %}
-<!-- Self-hosted supported PG versions -->
-{% if equals($postgres_host, "self-hosted") %}
+
+Supported Agent versions
+: 7.36.1+
+
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+
+<!-- Every PG host except for Aurora -->
+{% if not(equals($postgres_host, "aurora")) %}
+Proxies, load balancers, and connection poolers
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 {% /if %}
+
+<!-- Aurora only -->
+{% if equals($postgres_host, "aurora") %}
+Proxies, load balancers, and connection poolers
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the **Aurora cluster endpoint**. If connected to the cluster endpoint, the Agent collects data from one random replica, and only provides visibility into that replica. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
+{% /if %}
+
+Data security considerations
+: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Setup - OLD
 For setup instructions, select your hosting type:
@@ -80,3 +102,6 @@ Agent integration overhead tests were run on an Amazon EC2 machine `c5.xlarge` i
 * Memory: ~300 MiB of RAM used (RSS memory)
 * Network bandwidth: ~30 KB/s ▼ | 30 KB/s ▲
 * Agent query overhead on database: ~1% CPU Time
+
+[1]: /agent/basic_agent_usage#agent-overhead
+[2]: /database_monitoring/data_collected/#sensitive-information
