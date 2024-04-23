@@ -13,10 +13,11 @@ title: 데이터베이스 모니터링 지침
 해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
 {{< /site-region >}}
 
-{{< whatsnext desc="일반 지침:" >}}
-    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}데이터베이스 모니터링용 Heroku Postgres 설정{{< /nextlink >}}
-    {{< nextlink href="database_monitoring/guide/tag_database_statements" >}}데이터베이스 구문 태깅{{< /nextlink >}}
+{{< whatsnext desc="일밤 지침:" >}}
+    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}데이터베이스 모니터링을 위한 Heroku Postgres 설정 {{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/tag_database_statements" >}}데이터 베이스 구문 태그 지정{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/managed_authentication" >}}관리 인증으로 연결{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/aurora_autodiscovery" >}}Amazon Aurora DB 클러스터에 대한 데이터베이스 모니터링 설정{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="SQL 서버 가이드:" >}}

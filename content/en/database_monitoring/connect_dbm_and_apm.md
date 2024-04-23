@@ -328,13 +328,24 @@ const tracer = require('dd-trace').init();
 ```
 
 Enable the database monitoring propagation feature using one of the following methods:
-1. Env variable:
-   `DD_DBM_PROPAGATION_MODE=full`
-
-2. Option `dbmPropagationMode` (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
-   ```javascript
-   tracer.init({ dbmPropagationMode: 'full' })
+* Set the following env variable:
    ```
+   DD_DBM_PROPAGATION_MODE=full
+   ```
+
+* Set the tracer to use the `dbmPropagationMode` option (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
+   ```javascript
+   const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
+   ```
+
+* Enable only at the integration level: 
+   ```javascript
+   const tracer = require('dd-trace').init();
+   tracer.use('pg', {
+      dbmPropagationMode: 'full'
+   })
+   ```
+
 
 Full example:
 ```javascript

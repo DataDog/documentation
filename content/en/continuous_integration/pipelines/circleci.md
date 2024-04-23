@@ -22,17 +22,21 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Partial pipelines**: View partial and downstream pipeline executions
+[CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale. 
 
-- **Logs correlation**: Correlate pipeline and job spans to logs and [enable job log collection][10]
+Set up tracing on CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
 
-- **Custom spans**: Configure custom spans
+### Compatibility
 
-- **Custom pre-defined tags**: Set [custom tags][6] to all generated pipeline and job spans
-
-- **Custom tags and measures at runtime**: Configure [custom tags][7] and measures at runtime
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][12] | Partial pipelines | View partially retried pipeline executions. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
+| [Custom spans][13] | Custom spans | Configure custom spans for your pipelines. |
+| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][6] to all generated pipeline and job spans. |
+| [Custom tags][14] [and measures at runtime][15] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
 
 ## Configure the Datadog integration
 
@@ -110,3 +114,7 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [9]: https://raw.githubusercontent.com/DataDog/ci-visibility-circle-ci/main/service_hooks.py
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /integrations/circleci/#setup
+[12]: /glossary/#partial-retry
+[13]: /glossary/#custom-span
+[14]: /glossary/#custom-tag
+[15]: /glossary/#custom-measure

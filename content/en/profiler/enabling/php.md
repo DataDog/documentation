@@ -56,7 +56,7 @@ The following profiling features are available in the following minimum versions
 |---------------------------|------------------------------------------|
 | [Code Hotspots][12]       | 0.71+                                    |
 | [Endpoint Profiling][13]  | 0.79.0+                                  |
-| [Timeline][15]            | beta, 0.89.0+                            |
+| [Timeline][15]            | 0.98.0+ (beta since 0.89.0+)             |
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -73,10 +73,11 @@ To begin profiling applications:
 4. Configure the profiler using config mode through the `datadog-setup.php`:
 
     ```
-    # `datadog.profiling_enabled` is not required for v0.82.0+.
-    php datadog-setup.php config set -d datadog.profiling.    enabled=1
+    # `datadog.profiling.enabled` is not required for v0.82.0+.
+    php datadog-setup.php config set -d datadog.profiling.enabled=1
 
-    php datadog-setup.php config set -d datadog.service=app-name     \
+    php datadog-setup.php config set \
+      -d datadog.service=app-name \
       -d datadog.env=prod \
       -d datadog.version=1.3.2
 

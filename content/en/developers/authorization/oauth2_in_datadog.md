@@ -8,10 +8,6 @@ further_reading:
   text: "Learn how to use the OAuth 2.0 authorization endpoints"
 ---
 
-{{< callout btn_hidden="true" >}}
-  The Datadog Developer Platform is in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
-
 ## Overview
 
 This page provides a step-by-step overview on how to implement the OAuth protocol end-to-end on your application once your **confidential** client is created. 

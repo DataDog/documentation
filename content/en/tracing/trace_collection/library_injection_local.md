@@ -1105,7 +1105,7 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 
 [1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/library_config/
-[3]: /security/application_security/enabling/java/?tab=kubernetes#get-started
+[3]: /security/application_security/enabling/tracing_libraries/threat_detection/java
 [4]: /profiler/enabling/java/?tab=environmentvariables#installation
 [5]: /tracing/trace_collection/automatic_instrumentation/
 [6]: /tracing/trace_collection/single-step-apm

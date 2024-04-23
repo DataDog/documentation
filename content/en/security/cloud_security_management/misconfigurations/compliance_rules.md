@@ -36,7 +36,7 @@ CSM Misconfigurations uses the following rule types to validate the configuratio
 
 To filter the default compliance rules by cloud provider:
 
-1. Navigate to **Security** > **Cloud Security Management** > **Compliance** > **Compliance Rules**.
+1. Navigate to the [**Misconfiguration Rules**][13] page.
 2. Choose one of the following values from the **Tag** facet.
     - **AWS**: cloud_provider:aws
     - **Azure**: cloud_provider:azure
@@ -104,7 +104,7 @@ The rule deprecation process is as follows:
 [5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
 [7]: /security/notifications/
-[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
+[13]: https://app.datadoghq.com/security/configuration/compliance/rules
 [14]: /integrations/slack/
 [15]: /integrations/jira/
 [16]: /integrations/pagerduty

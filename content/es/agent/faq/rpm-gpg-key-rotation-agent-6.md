@@ -4,7 +4,7 @@ title: Rotación de claves GPG en paquetes RPM
 ---
 
 <div class="alert alert-warning">
-Esta página hace referencia a la rotación de claves de 2019. Para más información, consulta la documentación sobre la <a href="/agent/guide/linux-agent-2022-key-rotation">rotación de claves del Agent de Linux de 2022</a>.
+Esta página se refiere a la rotación de claves de 2019. Para la rotación de claves de 2022, consulta la documentación de <a href="/Agent/FAQ/linux-Agent-2022-key-rotation">rotación de claves del Agent de Linux 2022</a>.
 </div>
 
 
@@ -19,7 +19,7 @@ La huella digital de la clave pública asociada es: `A4C0B90D7443CF6E4E8AA341F10
 Si utilizas la última versión de uno de los siguientes métodos de instalación admitidos de forma oficial, tus hosts confiarán en la clave automáticamente y no tendrás que hacer nada más.
 
 * [Página de instalación del Agent][2]
-* [Guía paso a paso de Chef][3]
+* [Cookbook de Chef][3]
 * [Rol de Ansible][4]
 * [Módulo de Puppet][5]
 * [Fórmula SaltStack][6]
@@ -54,10 +54,12 @@ Ejecuta los siguientes comandos en el host:
 
 ```bash
 $ curl -o /tmp/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+$ curl -o /tmp/DATADOG_RPM_KEY_B01082D3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 $ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 $ curl -o /tmp/DATADOG_RPM_KEY_E09422B3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 
 $ rpm --import /tmp/DATADOG_RPM_KEY_CURRENT.public
+$ rpm --import /tmp/DATADOG_RPM_KEY_B01082D3.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -79,6 +81,7 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -94,6 +97,7 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -106,7 +110,7 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
 **Nota**: Este método no funciona en sistemas basados en SUSE. En su lugar, utiliza el [comando de importación](#import-command).
 
 [1]: https://yum.datadoghq.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/chef-datadog
 [4]: https://github.com/DataDog/ansible-datadog
 [5]: https://github.com/DataDog/puppet-datadog-agent
