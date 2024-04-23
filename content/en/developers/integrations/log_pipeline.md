@@ -64,11 +64,10 @@ Logs sent to Datadog are processed in [log pipelines][13] to standardize them fo
 
 To set up a log pipeline:
 
-1. Navigate to [**Logs** > **Pipelines**][3].
-2. Click **+ New Pipeline**.
-3. In the **Filter** field, enter a unique `source` tag that defines the log source for the Technology Partner's logs. For example, `source:okta` for the Okta integration. **Note**: Make sure that logs sent through the integration are tagged with the correct source tags before they are sent to Datadog.
-4. Optionally, add tags and a description.
-5. Click **Create**.
+1. From the [**Pipelines**][3] page, click **+ New Pipeline**.
+1. In the **Filter** field, enter a unique `source` tag that defines the log source for the Technology Partner's logs. For example, `source:okta` for the Okta integration. **Note**: Make sure that logs sent through the integration are tagged with the correct source tags before they are sent to Datadog.
+1. Optionally, add tags and a description.
+1. Click **Create**.
 
 You can add processors within your pipelines to restructure your data and generate attributes.
 
@@ -141,7 +140,7 @@ Exporting your log pipeline includes two YAML files:
 
 Note: Depending on your browser, you may need to adjust your settings to allow file downloads.
 
-Once you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
+After you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
 
 Validations are run automatically in your pull request. 
 
