@@ -53,8 +53,11 @@ Browser tests simulate a user's journey through your web application beginning a
 
 ### Configure your test details
 
-1. Navigate to [Synthetic Monitoring & Testing][26].
+1. Navigate to [**Digital Experience** > **Synthetic Monitoring & Testing** > **New Test**][26].
 2. In the top right corner, click **New Test** > **Browser Test**.
+
+   {{< img src="continuous_testing/new_browser_test.png" alt="new_browser_test" style="width:80%;" >}}
+
 3. Define your browser test:
 
     - Add the URL of the website you want to monitor into the Starting URL field. For this example, enter `https://www.shopist.io`.
@@ -63,8 +66,6 @@ Browser tests simulate a user's journey through your web application beginning a
     - Choose the browsers and devices to test.
 
 4. Continue [filling out your test details and your recording like you normally would][9].
-
-{{< img src="continuous_testing/new_browser_test.png" alt="new_browser_test" style="width:100%;" >}}
 
 ## Integrate with a CI provider or collaboration tool
 
@@ -84,10 +85,10 @@ To improve your development workflow, you can use `datadog-ci` in your CLI as a 
 
 Extend your use of Continuous Testing by using the [`datadog-ci` NPM package][6]. `datadog-ci` lets you execute commands from within your CI/CD scripts to test your application before deployment. You can automate blocking and rolling back changes when tests fail. Read the [`datadog-ci` Configuration page for installation and setup instructions][10].
 
-You can use `datadog-ci` to execute only those tests tagged with specific [Team tags][25]. For example, to run all tests tagged as `team-checkout`:
+You can use `datadog-ci` to execute only those tests tagged with specific [Datadog Teams tags][25]. For example, to run all tests tagged as `team-checkout`:
 
 1. Navigate to your command line.
-2. Run the following:
+2. Run the following command:
 
    ```
    datadog-ci synthetics run-tests -search 'tag:team-checkout' --config global.config.json
@@ -113,29 +114,34 @@ Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help
 4. Set a Start URL.
 5. Run the test.
 
-## Examine results in the Synthetic Monitoring and Continuous Testing Explorer
+## Examine results in the Synthetic Monitoring & Testing Results Explorer
 
-The Synthetic Monitoring and Continuous Testing Explorer allows you to create visualizations and filter [CI batches][22] and [test runs][23] for your Continuous Testing tests.
+The Synthetic Monitoring & Testing Results Explorer allows you to create visualizations and filter [CI batches][22] and [test runs][23] for your Continuous Testing tests.
 
-Navigate to [Synthetic Monitoring & Testing][26], then select **CI Batches** or **Test Runs** to see results from your CI batches or test runs in the Explorer. Select a CI batch or test from the list to get a more detailed view of the result.
+Navigate to [**Digital Experience** > **Synthetic Monitoring & Testing** > **New Test**][26], then select **CI Batches** or **Test Runs** to see results from your CI batches or test runs in the Explorer. Select a CI batch or test from the list to get a more detailed view of the result.
 
-{{< img src="continuous_testing/ci_explorer_test_results.png" alt="ci_explorer_test_results" style="width:100%;" >}}
+{{< tabs >}}
+{{% tab "CI Batches" %}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Search and manage your CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+{{% /tab %}}
+{{% tab "Test Runs" %}}
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Create a search query
 
-Click one of the following out-of-the-box search queries to filter your CI batches or test runs:
-- [All failing tests][19]
-- [Tests which initially failed but are now passing][20]
-- [Unused Tests][21]
+Explore one of the following out-of-the-box search queries to start filtering your CI batches or test runs.
 
-{{< img src="continuous_testing/example_search_queries.png" alt="example-search-queries" style="width:100%;" >}}
+{{< img src="continuous_testing/explorer/search_queries.png" alt="Out-of-the-box search queries in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;" >}}
 
 Optionally, you can create a query to [search your test runs][15]. Using the browser test you created above, locate the Test ID and create a search query using the common test run facets. 
 
-{{< img src="continuous_testing/example_test_id.png" alt="example_test_id" style="width:70%;" >}}
-
 To find the ID of your browser test:
-1. Navigate to the Synthetic Tests page.
+
+{{< img src="continuous_testing/example_test_id.png" alt="The browser test ID highlighted in the Properties section of a test run" style="width:60%;" >}}
+
+1. Navigate to the [**Tests** page][19].
 2. Select a test.
 3. Look for the Test ID in the **Properties** section.
 
@@ -147,9 +153,9 @@ To export your view of the Synthetic Monitoring & Testing Results Explorer, clic
 
 By default, Synthetic tests are not parallelized. Parallelization allows you to run multiple tests in your CI/CD pipelines simultaneously. If you want to parallelize your tests, you can use the **Estimate Parallelization** calculator to determine your needs.
 
-Navigate to [Continuous Testing Settings][27] to locate the calculator.
-
 {{< img src="continuous_testing/parallelization_estimate.png" alt="parallelization_estimate" style="width:100%;" >}}
+
+Navigate to [**Digital Experience** > **Synthetic Monitoring & Testing** > **Settings**][27] to locate the calculator.
 
 For instance, if you have 24 tests per CI batch, each taking 2 minutes to complete, and your target is for all tests to be completed within 4 minutes, you need to run 12 tests in parallel.
 
@@ -181,9 +187,7 @@ For more information, see the [Parallelization documentation][18].
 [16]: /continuous_testing/explorer/saved_views/
 [17]: /continuous_testing/explorer/search_runs/
 [18]: /continuous_testing/settings/#parallelization
-[19]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.httpStatusCode%3A%5B100%20TO%20399%5D%20%40result.result.passed%3Afalse&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=timeseries
-[20]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20%40result.result.initialResultID%3A%2A%20%40result.status%3A0&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=stream
-[21]: https://app.datadoghq.com/synthetics/explorer?query=%40ci.job.name%3A%2A&agg_m=count&agg_q=%40result.test_public_id&cols=&index=%2A&top_n=100&track=synbatch&viz=query_table
+[19]: https://app.datadoghq.com/synthetics/tests
 [22]: /glossary/?product=synthetic-monitoring#test-batch
 [23]: /glossary/?product=synthetic-monitoring#test-run
 [24]: /glossary/?product=synthetic-monitoring#parallelization
