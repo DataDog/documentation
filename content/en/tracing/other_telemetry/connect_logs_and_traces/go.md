@@ -51,7 +51,7 @@ The above example illustrates how to use the span's context in the standard libr
 
 ## Injection into logrus logs
 
-An hook for the logrus package is available to automatically link your log and spans.
+A hook for the logrus package is available to automatically link your log and spans.
 The package is available in the Go tracer.
 
 ```go
