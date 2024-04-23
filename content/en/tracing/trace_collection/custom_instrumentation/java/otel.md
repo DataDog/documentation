@@ -25,9 +25,9 @@ further_reading:
 
 The following OpenTelemetry features implemented in the Datadog library as noted:
 
-| Feature                                           | Support notes                                                                               |
+| OpenTelemetry feature                             | Datadog support notes                                                                               |
 |---------------------------------------------------|---------------------------------------------------------------------------------------------|
-| [OpenTelemetry Context propagation][1]            | [Datadog distributed header format][2] is used instead by default.                          |
+| [Context propagation][1]                          | [Datadog distributed header format][2] is used instead by default.                          |
 | [Span processors][3]                              | Unsupported                                                                                 |
 | [Span Exporters][4]                               | Unsupported                                                                                 |
 | Trace/span [ID generators][5]                     | ID generation is performed by the tracing library, with support for [128-bit trace IDs][6]. |
