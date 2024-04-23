@@ -42,7 +42,7 @@ You can accomplish the following actions:
 
 ## Create a search query
 
-Navigate to [**UX Monitoring** > **Explorer**][1] and click on an out-of-the-box search query to start viewing your test batches or runs and creating visualizations.
+Navigate to [**Digital Experience > Synthetic Monitoring & Testing** > **Continuous Testing**][1] and click on an out-of-the-box search query to start viewing your test batches or runs and creating visualizations.
 
 {{< img src="continuous_testing/explorer_search_query_1.png" alt="Out-of-the-box search queries available in the Explorer" style="width:100%;">}}
 
@@ -69,7 +69,7 @@ For more information about test runs, see [Search Test Runs][6].
 
 The Results Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/ci_execution_side_panel.png" alt="Side panel for a CI batch of test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 

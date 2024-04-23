@@ -39,9 +39,9 @@ Datadog Continuous Testing offers a set of tools that enable you to automate sof
 
 ## Test with ease and speed
 
-Use scalable features such as a codeless [web recorder][2], [mobile app recorder][15], [parallel test runs][3], and built-in multi-location testing to save time and effort for your QA team. You can run your tests sequentially and customize the number of tests you want to run at the same time on the [Settings page][3].
+Use scalable features such as a codeless [web recorder][2], [mobile app recorder][15], [parallel test runs][3], and built-in multi-location testing to save time and effort for your QA team. You can run your tests sequentially and customize the number of tests you want to run at the same time on the [**Settings** page][3].
 
-{{< img src="continuous_testing/continuous_testing_selection.png" alt="Choose between running your tests sequentially and customizing the number of tests you want to run at the same time in the Continuous Testing Settings page" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="Choose between running your tests sequentially and customizing the number of tests you want to run at the same time in the Continuous Testing Settings page" style="width:100%;">}}
 
 With support for multiple protocols, frameworks, and APIs—including gRPC and WebSockets—you can test across every level of your application stack, and [across any pre-production environment][17].
 
@@ -65,7 +65,7 @@ You can use the [Datadog Terraform provider][10] to control test creation and st
 
 Performing tests in a unified monitoring platform helps you find the root cause of failed test runs and reduce Mean Time to Resolution (MTTR). 
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/ci_execution_side_panel.png" alt="CI batches side panel in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs in the [Synthetic Monitoring & Testing Results Explorer][11].
 
@@ -73,7 +73,7 @@ You can obtain the full context for troubleshooting—without switching between 
 
 Create [search queries and visualizations][11] for your Synthetic test runs or batches of tests running in CI/CD pipelines.
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="A list of CI batch results in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 You can monitor individual test executions and comprehensive batches of tests, and access relevant insights for each testing type. 
 

@@ -14,6 +14,8 @@ further_reading:
 
 After selecting a time frame from the dropdown menu on the top right, you can search for batches of CI jobs by clicking on the **CI Batches** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
 
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+
 You can use facets to accomplish the following actions:
 
 - Observe the latest batches of tests running in a CI pipeline.
