@@ -258,7 +258,7 @@ In the task definition, replace the "workload" container with the following:
 
 ## Next steps
 If you are still running into an issue, please [open a ticket][10] to Support with a `security-agent` flare attached to the latter.
-Find below the step to create a `security-agent` flare according to your deployment:
+Use the appropriate command below to create a `security-agent` flare based on your deployment:
 
 | Platform     | Command                                                                             |
 | --------     | -------                                                                             |
