@@ -261,6 +261,17 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
+## Next steps
+If you still have issues with the configuration, please [contact Datadog support][10] for help and attach the `security-agent` flare to the ticket.
+Use the appropriate command below to create a `security-agent` flare based on your deployment:
+
+| Platform     | Command                                                                             |
+| --------     | -------                                                                             |
+| ECS Fargate      | Use the full command `aws ecs execute-command` shared in [ECS Fargate][11] and run `"security-agent flare <CASE_ID>"` |
+| EKS Fargate  | `kubectl exec -it <POD> -c datadog-agent -- security-agent flare <CASE_ID>`   |
+
+
+
 
 [1]: /security/threats/
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
@@ -271,4 +282,6 @@ In the task definition, replace the "workload" container with the following:
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs
-[10]: https://docs.datadoghq.com/integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[10]: /help/
+[11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#ecs-fargate
+
