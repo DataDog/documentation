@@ -159,7 +159,7 @@ Set up the [AWS integration][4] to begin crawling Container Image metadata from 
 
 Use the Container Image Trends Configuration modal and toggle 'Enable Container Image Metric Collection' to turn on the generation of image metrics.
 
-Image metrics are collected from the [Live Containers][10] and [Image Collection][11] sources. Follow the same instructions above to ensure that these collections are enabled across your entire infrastructure and take full advantage of the Trends view.
+Image metrics are collected from the [Live Containers][10] and [Image Check][11] sources. Follow the same instructions above to ensure that these collections are enabled across your entire infrastructure and take full advantage of the Trends view.
 
 {{< img src="infrastructure/containerimages/container_image_trends_configuration_modal.png" alt="The container images trends configuration modal" width="100%">}}
 
