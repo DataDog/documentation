@@ -130,16 +130,18 @@ Click one of the following out-of-the-box search queries to filter your CI batch
 
 {{< img src="continuous_testing/example_search_queries.png" alt="example-search-queries" style="width:100%;" >}}
 
-Optionally, you can create a query to [search your test runs][15]. Using the browser test you created above, locate the Test ID and create a search query using the common test run facets. To find the ID of your browser test:
+Optionally, you can create a query to [search your test runs][15]. Using the browser test you created above, locate the Test ID and create a search query using the common test run facets. 
+
+{{< img src="continuous_testing/example_test_id.png" alt="example_test_id" style="width:70%;" >}}
+
+To find the ID of your browser test:
 1. Navigate to the Synthetic Tests page.
 2. Select a test.
 3. Look for the Test ID in the **Properties** section.
 
-{{< img src="continuous_testing/example_test_id.png" alt="example_test_id" style="width:70%;" >}}
-
-To export your view of the Synthetic Monitoring & Continuous Testing Explorer, click **>Views** and click **Save**. For more information, see [Saved Views][16].
-
 For more information about using facets in your search query, see [Search Test Runs][17].
+
+To export your view of the Synthetic Monitoring & Continuous Testing Explorer, click **> Views**. For more information, see [Saved Views][16].
 
 ## Set parallelization preferences
 
