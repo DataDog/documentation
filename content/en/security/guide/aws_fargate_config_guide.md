@@ -202,6 +202,9 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 - Node.js
 - Python
 
+1. Update to the latest Datadog library (the most recent APM tracing library).
+1. Enable ASM when starting the Python application.
+
 ### Amazon EKS
 
 ?
