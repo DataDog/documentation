@@ -116,7 +116,7 @@ For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] co
 
 Log4j 2 includes a JSON layout.
 
-1. Configure a an appender using the JSON layout in `log4j2.xml`:
+1. Configure an appender using the JSON layout in `log4j2.xml`:
 
     For a file appender:
 
