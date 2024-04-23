@@ -38,7 +38,7 @@ Service checks can be visualized and used in 3 Datadog sections:
 
 ### Check summary
 
-The [Check Summary][1] page lists of all checks reported across your infrastructure in the past day. Select a check to get insights on the status and tags associated with the check.
+The [Check Summary][1] page lists all checks reported across your infrastructure in the past day. Select a check to get insights on the status and tags associated with the check.
 
 {{< img src="developers/service_checks/check_summary.png" alt="Check summary" >}}
 
