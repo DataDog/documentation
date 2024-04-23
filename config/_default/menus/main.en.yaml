@@ -4540,10 +4540,10 @@ menu:
       parent: appsec_threats
       identifier: threats_threat_intelligence
       weight: 709
-    - name: Threat Overview
+    - name: Attack Summary
       url: security/application_security/threats/threat-overview/
       parent: appsec_threats
-      identifier: threats_threat_overview
+      identifier: attack_summary_overview
       weight: 710
     - name: API Security Inventory
       url: security/application_security/api-inventory/
