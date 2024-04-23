@@ -31653,7 +31653,7 @@ paths:
       - Roles
       x-given:
         permission:
-          source: data[0]
+          source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
       x-undo:
