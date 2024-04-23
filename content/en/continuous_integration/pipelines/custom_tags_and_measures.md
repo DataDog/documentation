@@ -82,7 +82,7 @@ To do this, run the `tag` command:
 DATADOG_SITE=datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the tag `team` to the pipeline span.
 
@@ -96,7 +96,7 @@ The following example adds the tag `go.version` to the span for the current job:
 DATADOG_SITE=datadoghq.com datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
 
-To create a facet from a tag, click the Gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
+To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4], and click **Create Facet**.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
@@ -108,7 +108,7 @@ To add numerical tags to the pipeline span or the job span, run the `measure` co
 DATADOG_SITE=datadoghq.com datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the measure `error_rate` to the pipeline span:
 
@@ -135,7 +135,7 @@ To do this, run the `tag` command:
 DATADOG_SITE=us3.datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the tag `team` to the pipeline span.
 
@@ -149,7 +149,7 @@ The following example adds the tag `go.version` to the span for the current job:
 DATADOG_SITE=us3.datadoghq.com datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
 
-To create a facet from a tag, click the Gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
+To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
@@ -161,7 +161,7 @@ To add numerical tags to the pipeline span or the job span, run the `measure` co
 DATADOG_SITE=us3.datadoghq.com datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the measure `error_rate` to the pipeline span:
 
@@ -188,7 +188,7 @@ To do this, run the `tag` command:
 DATADOG_SITE=datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the tag `team` to the pipeline span.
 
@@ -202,7 +202,7 @@ The following example adds the tag `go.version` to the span for the current job:
 DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
 
-To create a facet from a tag, click the Gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
+To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
@@ -214,7 +214,7 @@ To add numerical tags to the pipeline span or the job span, run the `measure` co
 DATADOG_SITE=us5.datadoghq.com datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the measure `error_rate` to the pipeline span:
 
@@ -241,7 +241,7 @@ To do this, run the `tag` command:
 DATADOG_SITE=datadoghq.eu datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the tag `team` to the pipeline span.
 
@@ -255,7 +255,7 @@ The following example adds the tag `go.version` to the span for the current job:
 DATADOG_SITE=datadoghq.eu datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
 
-To create a facet from a tag, click the Gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
+To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
@@ -267,7 +267,7 @@ To add numerical tags to the pipeline span or the job span, run the `measure` co
 DATADOG_SITE=datadoghq.eu datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the measure `error_rate` to the pipeline span:
 
@@ -294,7 +294,7 @@ To do this, run the `tag` command:
 DATADOG_SITE=ap1.datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the tag `team` to the pipeline span.
 
@@ -308,7 +308,7 @@ The following example adds the tag `go.version` to the span for the current job:
 DATADOG_SITE=ap1.datadoghq.com datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
 
-To create a facet from a tag, click the Gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
+To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
@@ -320,7 +320,7 @@ To add numerical tags to the pipeline span or the job span, run the `measure` co
 DATADOG_SITE=ap1.datadoghq.com datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
 {{< /code-block >}}
 
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`, and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
+You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the measure `error_rate` to the pipeline span:
 
@@ -339,7 +339,7 @@ DATADOG_SITE=ap1.datadoghq.com datadog-ci measure --level job --measures "binary
 [12]: /getting_started/site/
 {{< /site-region >}}
 
-To create a measure, click the Gear icon next to a measures name on the [Pipeline Executions page][4] and click **Create Measure**.
+To create a measure, click the gear icon next to a measures name on the [Pipeline Executions page][4] and click **Create Measure**.
 
 ## Add tags and measures to GitHub jobs
 
