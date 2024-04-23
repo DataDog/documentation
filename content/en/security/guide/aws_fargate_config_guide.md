@@ -14,10 +14,6 @@ products:
   icon: app-sec
 ---
 
-{{< product-availability >}}
-
- cws-fargate-td-patcher
-
 This guide walks you through configuring [Amazon Elastic Container Service (Amazon ECS)][1] and [Amazon Elastic Kubernetes Service (Amazon EKS)][2] on AWS Fargate for [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5].
 
 ## Prerequisites
@@ -194,7 +190,8 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 ### Amazon ECS
 
-{{% appsec-getstarted %}}
+- Only threat detection using tracing libraries? (i.e., no single-step instrumentation and no code security.)
+- What is VULNERABILITY MANAGEMENT FOR OSS SUPPORT? https://docs.datadoghq.com/security/application_security/enabling/compatibility/ruby#supported-deployment-types
 
 - Java
 - .NET
@@ -214,6 +211,8 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 AWS Fargate and Related Resources via AWS Cloud Controlplane logs
 
 *Control Plane monitoring*
+
+AWS account logs (not the eks logs)
 
 [1]: /integrations/ecs_fargate/
 [2]: /integrations/eks_fargate/
