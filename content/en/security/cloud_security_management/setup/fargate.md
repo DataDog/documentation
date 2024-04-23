@@ -278,4 +278,4 @@ Use the appropriate command below to create a `security-agent` flare based on yo
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs
 [10]: /help/
-[11]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare/?tab=agentv6v7#ecs-fargate
+[11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#ecs-fargate
