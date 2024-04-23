@@ -3,7 +3,7 @@ title: User Retention
 kind: documentation
 aliases:
 - /real_user_monitoring/retention_analysis
-- /real_user_monitoring/product_analytics/user_retention
+- /real_user_monitoring/product_analytics/retention_analysis
 ---
 
 ## Overview
