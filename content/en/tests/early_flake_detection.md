@@ -53,7 +53,7 @@ Early Flake Detection normally works as follows:
 
 ### Excluded Branches from Early Flake Detection
 
-The Excluded Branches from Early Flake Detection do not execute Early Flake Detection, that is, Early Flake Detection will never retry tests.
+The Excluded Branches will not have any of their tests retried by Early Flake Detection.
 
 Additionally, what Early Flake Detection considers a new test is based on the tests that run in these branches. If a test has run in any of the Excluded Branches from Early Flake Detection, it is **not** considered new anymore.
 
