@@ -30,9 +30,11 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
-| [Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
+| *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
+| **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation][16]. |
 
-**Note**: AWS CodePipeline running pipelines don't have Git information until they have finished.
+*AWS CodePipeline running pipelines don't have Git information until they have finished.\
+**AWS CodePipeline logs correlation is currently only available for AWS CodeBuild actions.
 
 ## Configure the Datadog integration
 
@@ -111,6 +113,10 @@ Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.Pipe
 
 The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. For more information on working with variables, see the [official AWS guide][10].
 
+### Enable log correlation
+
+The AWS CodePipeline integration supports correlating **CodeBuild** job's actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, follow the steps in the general [AWS logs forwarding guide][17].
+
 ## Visualize pipeline data in Datadog
 
 View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after the pipelines finish.
@@ -136,3 +142,5 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 [13]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
 [14]: /glossary/#partial-retry
 [15]: /glossary/#running-pipeline
+[16]: /continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
+[17]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
