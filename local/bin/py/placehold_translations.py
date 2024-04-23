@@ -180,6 +180,7 @@ def create_data_placeholder_file(template, new_glob, lang_as_dir, files_location
 
 def main():
     print("Starting placeholder creation for translations")
+    print("This script is running from the local dir and not the image")
     
     # Set up logger
     root_dir = os.path.abspath(os.sep)
