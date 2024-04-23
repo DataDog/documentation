@@ -28,7 +28,7 @@ This document demonstrates two primary methods for sending traces to Datadog wit
 
 ### Using the OpenTelemetry Collector
 
-With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog using the Datadog Exporter. Here, the Datadog Connector computes [APM trace metrics][4]:
+With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog using the Datadog Exporter. In this scenario, [APM trace metrics][4] are computed by the Datadog Connector:
 
 {{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_collector.png" alt="OpenTelemetry APM Metrics computation using the Collector" style="width:100%;" >}}
 
@@ -62,14 +62,14 @@ To configure head-based sampling, use the [TraceIdRatioBased][5] or [ParentBased
 
 Head-based sampling affects the computation of APM metrics. Only sampled traces are sent to the OpenTelemetry Collector or Datadog Agent, which perform metrics computation.
 
-To get accurate metrics, upscale them using [formulas and functions][7] in Datadog dashboards and monitors, provided that you know the configured sampling rate in the SDK.
+To approximate unsampled metrics from sampled metrics, use [formulas and functions][7] with the sampling rate configured in the SDK.
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
 
 ### Tail-based sampling
 
-At the OpenTelemetry Collector level, you can do _tail-based sampling_, which allows you to define more advanced rules to keep accrued visibility over error or high latency traces.
+At the OpenTelemetry Collector level, you can do _tail-based sampling_, which allows you to define more advanced rules to maintain visibility over traces with errors or high latency.
 
 #### Configuring
 
