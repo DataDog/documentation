@@ -18,13 +18,13 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 
 ## Prerequisites
 
-### CSM
+### Cloud Security Management
 
 - CSM Enterprise or CSM Workload Security with the AWS integration configured
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
-### ASM
+### Application Security Management
 
 - The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 - Datadog APM is configured for your application or service, and traces are being received by Datadog.
@@ -212,7 +212,7 @@ AWS Fargate and Related Resources via AWS Cloud Controlplane logs
 
 *Control Plane monitoring*
 
-AWS account logs (not the eks logs)
+AWS account logs (not the eks logs), CloudTrail
 
 [1]: /integrations/ecs_fargate/
 [2]: /integrations/eks_fargate/
