@@ -22,7 +22,7 @@ The [container images view][1] in Datadog provides key insights into every image
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
-The [container image trends view][9] provides high-level insights across all of your images in your containerized infrastructure. Container Image Trends metrics can help you answer key questions about your security posture and deployment footprint over the span of weeks and months.
+The [container image trends view][9] provides high-level insights across all of your images in your containerized infrastructure. Container image trends metrics can help you answer key questions about your security posture and deployment footprint over the span of weeks and months.
 
 {{< img src="infrastructure/containerimages/container_image_trends.png" alt="The container images trends view highlighting image size, image age, vulnerabilities and running container count metrics" width="100%">}}
 
@@ -157,9 +157,9 @@ Set up the [AWS integration][4] to begin crawling Container Image metadata from 
 
 ## Configure container images trends
 
-Use the Container Image Trends Configuration modal and toggle 'Enable Container Image Metric Collection' to turn on the generation of image metrics.
+Use the container image trends configuration modal and toggle **Enable Container Image Metric Collection** to turn on image metric generation.
 
-Image metrics are collected from the [Live Containers](#live-containers) and [Image Check](#image-collection) sources. Follow the same instructions above to ensure that these collections are enabled across your entire infrastructure and take full advantage of the Trends view.
+Image metrics are collected from the [Live Containers](#live-containers) and [Image Check](#image-collection) sources. Follow the same instructions as above to ensure that these collections are enabled across your entire infrastructure and take full advantage of the trends view.
 
 {{< img src="infrastructure/containerimages/container_image_trends_configuration_modal.png" alt="The container images trends configuration modal" width="100%">}}
 
