@@ -1,7 +1,7 @@
 ---
 title: Early Flake Detection
 kind: documentation
-description: Detect flakiness before it reaches the default branch
+description: Detect flakiness before it impacts your default branch.
 aliases:
 - /continuous_integration/tests/early_flake_detection/
 further_reading:
@@ -23,16 +23,15 @@ Early Flake Detection is in public beta.
 
 ## Overview
 
-Early Flake Detection is Datadog's mechanism to tackle test flakiness. By identifying tests that are newly added and running them multiple times, Datadog can detect flakiness before it reaches the default branch. A study shows that up to [75% of flaky tests][1] can be identified this way.
+Early Flake Detection is Datadog's test flakiness solution. By identifying tests that are newly added and running them multiple times, Datadog can detect flakiness before it reaches the default branch. A study shows that up to [75% of flaky tests][1] can be identified this way.
 
-## How it works
 
 * Datadog's backend automatically stores unique tests for a given test service. These are **known tests**.
 * Before a test session runs, the Datadog library fetches the list of known tests.
 * If a test is in this list, it's executed normally.
-* If a test is **not** in this list, the test is considered **new**, and the Datadog library will automatically retry the test up to 10 times.
+* If a test is **not** in this list, the test is considered **new**, and the Datadog library automatically retries the test up to 10 times.
 
-Running a test multiple times helps detecting potential issues. If any of the test attempts fail, Datadog automatically tags it as flaky. You may then choose to block the merge of the feature branch with a [Quality Gate][2].
+Running a test multiple times helps detect potential issues. If any of the test attempts fail, Datadog automatically tags it as flaky. You can choose to block the merge of the feature branch with a [Quality Gate][2].
 
 ### Why does running a test multiple times help detect issues?
 
@@ -69,7 +68,7 @@ Click on **Configure** in the Early Flake Detection column to see this modal:
 
 {{< img src="continuous_integration/early_flake_detection_configuration_modal.png" alt="Early flake Detection configuration modal.">}}
 
-In this modal you can toggle the status of Early Flake Detection and add a list of [**Excluded Branches from Early Flake Detection**][4] for that test service.
+In this modal, you can toggle the status of Early Flake Detection and add a list of [**Excluded Branches from Early Flake Detection**](#excluded-branches-from-early-flake-detection) for that test service.
 
 ### How to check that new tests are detected
 
@@ -88,21 +87,21 @@ Additionally, retries for this test have the `@test.is_retry` tag set to `true`.
 
 ## Troubleshooting
 
-If you suspect there are issues with Early Flake Detection, go to the [Test Service Settings][6], look for your test service, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
+If you suspect there are issues with Early Flake Detection, go to the [Test Service Settings page][6], look for your test service, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
 
 ### A new test is not being retried
 
 This could be caused by a couple of reasons:
 
-* This test has already run in an excluded branch, such as `staging`, `main` or `preprod`.
-* This test is slower than 5 minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
+* This test has already run in an excluded branch, such as `staging`, `main`, or `preprod`.
+* This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
 
 ### A test was retried that is not new
 
 If the Datadog library can't fetch the full list of known tests, the Datadog library may retry tests that are not new.
 
-There is a mechanism to prevent this error from slowing down the CI pipeline, but if it happens, contact the support team at [Datadog Help][7].
+There is a mechanism to prevent this error from slowing down the CI pipeline, but if it happens, contact [Datadog Support][7].
 
 ## Further Reading
 
@@ -111,7 +110,6 @@ There is a mechanism to prevent this error from slowing down the CI pipeline, bu
 [1]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
 [2]: /quality_gates/
 [3]: /glossary/#flaky-test
-[4]: /tests/early_flake_detection/#excluded-branches-from-early-flake-detection
 [5]: /continuous_integration/tests
 [6]: https://app.datadoghq.com/ci/settings/test-service
 [7]: https://docs.datadoghq.com/help/
