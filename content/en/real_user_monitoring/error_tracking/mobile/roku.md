@@ -40,13 +40,24 @@ If you have not set up the Roku SDK yet, follow the [in-app setup instructions][
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-## Get deobfuscated stack traces
-
 ## Limitations
+
+**Note**: Crash reporting on Roku doesn't yet support stacktraces. 
 
 ## Test your implementation
 
-## Additional configuration options
+To verify your Roku Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
+
+1. Run your application on an Roku device.
+2. Execute code containing a crash. For example:
+
+   ```brightscript
+   sub explodingMethod()
+       x = 1
+       print x.foo
+   ```
+
+3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [**Error Tracking**][1].
 
 ### Forward errors to Datadog
 
