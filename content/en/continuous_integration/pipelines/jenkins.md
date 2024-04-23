@@ -43,7 +43,7 @@ The following Jenkins versions are supported:
 
 - Jenkins >= 2.346.1
 
-This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-agentless) and [Agent-based](#install-the-datadog-agent-optional) installation. Agentless mode is recommended; for infrastructure metric correlation, use the Agent-based mode.
+This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-agentless) and [Agent-based](#install-the-datadog-agent) installation. For infrastructure metric correlation, installing with the Agent-based mode is recommended.
 
 ## Install the Datadog Jenkins plugin (agentless)
 
@@ -649,7 +649,7 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
-## Install the Datadog Agent (optional)
+## Install the Datadog Agent
 
 The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions][14]. Whether you choose to use Agentless mode or the Agent-based mode, you are **required** to use the plugin. 
 
