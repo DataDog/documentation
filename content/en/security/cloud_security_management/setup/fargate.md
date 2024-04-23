@@ -165,6 +165,10 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 
 ## EKS
 
+### AWS EKS Fargate RBAC
+
+Use the following [Agent RBAC deployment instruction][10] before deploying the Agent as a sidecar.
+
 ### Running the Agent as a sidecar
 
 The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with CSM Threats enabled:
@@ -231,6 +235,7 @@ spec:
                fieldPath: spec.nodeName
      volumes:
        - name: cws-instrumentation-volume
+     serviceAccountName: datadog-agent
      shareProcessNamespace: true
 {{< /code-block >}}
 
@@ -279,3 +284,4 @@ Use the appropriate command below to create a `security-agent` flare based on yo
 [9]: https://app.datadoghq.com/logs
 [10]: /help/
 [11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#ecs-fargate
+
