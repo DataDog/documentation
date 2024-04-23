@@ -61,7 +61,7 @@ There are several ways you can configure the Datadog Jenkins plugin.
 #### Configure with the Jenkins configuration UI
 
 {{< tabs >}}
-{{% tab "Agentless (using an API key) - recommended" %}}
+{{% tab "Agentless (using an API key)" %}}
 
 Use this option to make the Jenkins plugin report directly to Datadog without using the Datadog Agent. It requires an API Key.
 
@@ -76,7 +76,7 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 
 {{< img src="ci/jenkins_plugin_agentless_urls_blurred.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 {{% /tab %}}
-{{% tab "Report through the Datadog Agent" %}}
+{{% tab "Report through the Datadog Agent - recommended" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
@@ -96,7 +96,7 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 
 {{< tabs >}}
 
-{{% tab "Agentless (using an API key) - recommended" %}}
+{{% tab "Agentless (using an API key)" %}}
 
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
@@ -215,7 +215,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 {{% /tab %}}
-{{% tab "Report through the Datadog Agent" %}}
+{{% tab "Report through the Datadog Agent - recommended" %}}
 
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
@@ -248,7 +248,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 #### Configure with Groovy
 
 {{< tabs >}}
-{{% tab "Agentless (using an API key) - recommended" %}}
+{{% tab "Agentless (using an API key)" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
@@ -440,7 +440,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     {{% /site-region %}}
 
 {{% /tab %}}
-{{% tab "Report through the Datadog Agent" %}}
+{{% tab "Report through the Datadog Agent - recommended" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
@@ -477,7 +477,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 #### Use environment variables
 
 {{< tabs >}}
-{{% tab "Agentless (using an API key) - recommended" %}}
+{{% tab "Agentless (using an API key)" %}}
 
 1. Set the following environment variables on your Jenkins instance machine:
 
@@ -614,7 +614,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 2. Restart your Jenkins instance.
 {{% /tab %}}
-{{% tab "Report through the Datadog Agent" %}}
+{{% tab "Report through the Datadog Agent - recommended" %}}
 
 1. Set the following environment variables on your Jenkins instance machine:
 
@@ -747,7 +747,7 @@ This is an optional step that enables the collection of job logs. Both Agentless
 
 {{< tabs >}}
 
-{{% tab "Agentless (using an API key) - recommended" %}}
+{{% tab "Agentless (using an API key)" %}}
 
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
@@ -757,7 +757,7 @@ This is an optional step that enables the collection of job logs. Both Agentless
 
 {{% /tab %}}
 
-{{% tab "Report through the Datadog Agent" %}}
+{{% tab "Report through the Datadog Agent - recommended" %}}
 
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
@@ -774,7 +774,7 @@ This is an optional step that enables the collection of job logs. Both Agentless
 
 {{< tabs >}}
 
-{{% tab "Agentless (using an API key) - recommended" %}}
+{{% tab "Agentless (using an API key)" %}}
 
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
@@ -858,7 +858,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 {{% /tab %}}
 
-{{% tab "Report through the Datadog Agent" %}}
+{{% tab "Report through the Datadog Agent - recommended" %}}
 
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
@@ -884,7 +884,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 {{< tabs >}}
 
-{{% tab "Agentless (using an API key) - recommended" %}}
+{{% tab "Agentless (using an API key)" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Update your configuration script to include the following:
@@ -1008,7 +1008,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     {{% /site-region %}}
 {{% /tab %}}
 
-{{% tab "Report through the Datadog Agent" %}}
+{{% tab "Report through the Datadog Agent - recommended" %}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Update your configuration script to include the following:
@@ -1036,7 +1036,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 {{< tabs >}}
 
-{{% tab "Agentless (using an API key) - recommended" %}}
+{{% tab "Agentless (using an API key)" %}}
 
 1. Add the following environment variables on your Jenkins instance machine:
   
@@ -1109,7 +1109,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 {{% /tab %}}
 
-{{% tab "Report through the Datadog Agent" %}}
+{{% tab "Report through the Datadog Agent - recommended" %}}
 
 1. Add the following environment variables on your Jenkins instance machine:
     ```bash
