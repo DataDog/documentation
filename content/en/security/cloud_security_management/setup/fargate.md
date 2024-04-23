@@ -257,7 +257,7 @@ In the task definition, replace the "workload" container with the following:
 {{< /code-block >}}
 
 ## Next steps
-If you are still running into an issue, please [open a ticket][10] to Support with a `security-agent` flare attached to the latter.
+If you still have issues with the configuration, please [contact Datadog support][10] for help and attach the `security-agent` flare to the ticket.
 Use the appropriate command below to create a `security-agent` flare based on your deployment:
 
 | Platform     | Command                                                                             |
