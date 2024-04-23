@@ -65,7 +65,7 @@ La función de roles personalizados ofrece a tu organización la posibilidad de 
 1. Ve a [Organization Settings (parámetros de organización)][9].
 2. En el lado izquierdo de la página, selecciona **Roles**.
 3. Haz clic en el engranaje de la esquina superior derecha. Aparecerá la ventana emergente de Roles personalizados.
-4. En la ventana emergente de Roles personalizados, haz clic en **Activar**.
+4. En la ventana emergente de Roles personalizados, haz clic en **Enable** (Activar).
 
 {{< img src="account_management/rbac/enable_custom_roles.png" alt="Ventana emergente de Roles personalizados con el botón Activar" style="width:90%;">}}
 
