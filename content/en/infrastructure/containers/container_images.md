@@ -25,7 +25,7 @@ The [container images view][1] in Datadog provides key insights into every image
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
-The [container image trends view][9] provides high-level insights across all of your images used in your entire containerized infrastructure. Container Image Trends metrics can help you answer key questions about your image posture and deployment footprint across the span of weeks and months.
+The [container image trends view][9] provides high-level insights across all of your images in your containerized infrastructure. Container Image Trends metrics can help you answer key questions about your image posture and deployment footprint over the span of weeks and months.
 
 {{< img src="infrastructure/containerimages/container_image_trends.png" alt="The container images trends view highlighting image size, image age, vulnerabilities and running container count metrics" width="100%">}}
 
