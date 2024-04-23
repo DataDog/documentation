@@ -21,7 +21,7 @@ This document walks you through the following setup steps:
 
 {{% observability_pipelines/prerequisites/splunk_hec %}}
 
-### Datadog Agent
+### Datadog Log Management
 
 {{% observability_pipelines/prerequisites/datadog_agent_destination_only %}}
 

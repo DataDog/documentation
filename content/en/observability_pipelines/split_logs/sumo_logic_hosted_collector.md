@@ -21,7 +21,7 @@ This document walks you through the following steps:
 
 {{% observability_pipelines/prerequisites/sumo_logic %}}
 
-### Datadog Agent
+### Datadog Log Management
 
 {{% observability_pipelines/prerequisites/datadog_agent_destination_only %}}
 
