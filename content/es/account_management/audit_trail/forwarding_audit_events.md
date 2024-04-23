@@ -30,7 +30,7 @@ El reenvío de eventos de auditorías te permite enviar eventos de auditorías d
 
 1. Si es necesario, añade IP de webhooks de la [lista de rangos IP][1] a la lista de autorizaciones.
 2. Ve a [Configuración de Audit Trail][2].
-3. Haz clic en **Add Destination** (Añadir destino), en la sección **Audit Event Forwarding** (Reenvío de eventos de auditorías).
+3. Haz clic en **Add Destination** (Añadir el destino), en la sección **Audit Event Forwarding** (Reenvío de eventos de auditorías).
 4. Introduce la consulta para filtrar tus eventos de auditorías y reenviarlos. Por ejemplo, añade `@action:login` como consulta para filtrar, si sólo quieres reenviar eventos de inicio de sesión a tu SIEM o destino personalizado. Consulta [Sintaxis de búsqueda][3] para obtener más información.
 5. Seleccione el **Destination Type** (Tipo de destino).
 
@@ -40,7 +40,7 @@ El reenvío de eventos de auditorías te permite enviar eventos de auditorías d
 6. Introduce un nombre para el destino.
 7. En el campo **Define endpoint** (Definir el endpoint), introduce el endpoint al que quieres enviar los logs. El endpoint debe empezar por `https://`.
     - Por ejemplo, si quieres enviar logs a Sumo Logic, consulta la [documentación de configuración de un origen HTTP para logs y métricas][1] a fin de obtener la dirección URL HTTP de origen para enviar datos a su recopilador. Introduce la dirección URL HTTP de origen en el campo **Define endpoint** (Definir el endpoint).
-8. En la sección **Configure Authentication** (Configurar autenticación), selecciona uno de los siguientes tipos de autenticación y proporciona los datos apropiados:
+8. En la sección **Configure Authentication** (Configurar la autenticación), selecciona uno de los siguientes tipos de autenticación y proporciona los datos apropiados:
     - Autenticación básica: Proporciona el nombre de usuario y la contraseña de la cuenta a la que quieres enviar los logs.
     - Encabezado de la solicitud: Proporciona el nombre y el valor del encabezado. Por ejemplo, si utilizas el encabezado Authorization (Autorización) y el nombre de usuario de la cuenta a la que quieres enviar los logs, será `myaccount` y la contraseña `mypassword`:
         - Introduce `Authorization` para el **Header Name** (Nombre del encabezado).
@@ -53,8 +53,8 @@ El reenvío de eventos de auditorías te permite enviar eventos de auditorías d
 {{% tab "Splunk" %}}
 
 6. Introduce un nombre para el destino.
-7. En la sección **Configure Destination** (Configurar destino), introduce el endpoint al que quieres enviar los logs. El endpoint debe empezar por `https://`. Por ejemplo, introduce `https://<your_account>.splunkcloud.com:8088`. **Nota: `/services/collector/event` se añade automáticamente al endpoint.
-8. En la sección **Configure Authentication** (Configurar autenticación), introduce el token HEC Splunk. Consulta [Configurar y utilizar un recopilador de eventos HTTP][1] para obtener más información sobre el token HEC Splunk.
+7. En la sección **Configure Destination** (Configurar el destino), introduce el endpoint al que quieres enviar los logs. El endpoint debe empezar por `https://`. Por ejemplo, introduce `https://<your_account>.splunkcloud.com:8088`. **Nota: `/services/collector/event` se añade automáticamente al endpoint.
+8. En la sección **Configure Authentication** (Configurar la autenticación), introduce el token HEC Splunk. Consulta [Configurar y utilizar un recopilador de eventos HTTP][1] para obtener más información sobre el token HEC Splunk.
 9. Haz clic en **Save** (Guardar).
 
 **Nota**: El [reconocimiento del indizador][2] debe estar deshabilitado.
