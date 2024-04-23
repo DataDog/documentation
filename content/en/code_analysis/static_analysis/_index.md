@@ -71,7 +71,7 @@ Static Analysis currently supports scanning the following languages and technolo
 
 ## Search and filter results
 
-After you configure your CI pipelines to run the Datadog Static Analyzer, violations are summarized per repository on the [Code Analysis page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Analysis. 
+After you configure your CI pipelines to run the Datadog Static Analyzer, violations are summarized per repository on the [**Code Analysis Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Analysis. 
 
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].

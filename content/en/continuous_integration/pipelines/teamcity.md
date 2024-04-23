@@ -9,7 +9,7 @@ further_reading:
     text: "Explore Pipeline Execution Results and Performance"
   - link: "/continuous_integration/troubleshooting/"
     tag: "Documentation"
-    text: "Troubleshooting CI"
+    text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -63,9 +63,9 @@ Alternatively, restart the TeamCity server.
 
 ## Visualize pipeline data in Datadog
 
-View your data on the [Pipelines][3] and [Pipeline Executions][4] pages after the pipelines finish.
+View your data on the [**CI Pipeline List**][3] and [**Executions**][4] pages after the pipelines finish.
 
-**Note**: The Pipelines page only shows data for the [default branch][12] of each repository.
+The **CI Pipeline List** page only shows data for the [default branch][12] of each repository.
 
 ## Configure Git user information
 

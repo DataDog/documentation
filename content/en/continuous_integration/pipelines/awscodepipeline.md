@@ -9,7 +9,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "https://www.datadoghq.com/blog/aws-codepipeline-ci-visibility/"
       tag: "Blog"
       text: "Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility"
@@ -113,9 +113,9 @@ The steps above allow you to add the pipeline execution ID to your CodeBuild act
 
 ## Visualize pipeline data in Datadog
 
-View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after the pipelines finish.
+View your data on the [**CI Pipeline List**][11] and [**Executions**][12] pages after the pipelines finish.
 
-**Note**: The Pipelines page only shows data for the [default branch][13] of each repository.
+The **CI Pipeline List** page only shows data for the [default branch][13] of each repository.
 
 ## Further reading
 

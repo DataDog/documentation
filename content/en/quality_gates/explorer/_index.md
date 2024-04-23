@@ -26,7 +26,7 @@ The Quality Gates Explorer allows you to [search and filter](#search-and-filter)
 {{< tabs >}}
 {{% tab "Gates" %}}
 
-Navigate to [**CI** > **Quality Gate Executions**][101] to see your Quality Gates. 
+Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] to see your Quality Gates. 
   
 {{< img src="/quality_gates/explorer/gates.png" text="Quality Gate rules page" style="width:100%" >}}
 
@@ -52,7 +52,7 @@ Quality Gate data is available in dashboards and notebooks, enabling build engin
 {{% /tab %}}
 {{% tab "Rule Executions" %}}
 
-Navigate to [**CI** > **Quality Gate Executions**][101] to see your Quality Gate rule executions.
+Navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Executions**][101] to see your Quality Gate rule executions.
 
 {{< img src="/quality_gates/explorer/rules.png" text="Quality Gates Rule Executions page" style="width:100%" >}}
 

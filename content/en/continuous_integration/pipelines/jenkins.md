@@ -12,7 +12,7 @@ further_reading:
       text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -1460,9 +1460,9 @@ Lists of included and excluded jobs can contain regular expressions, but not glo
 
 ## Visualize pipeline data in Datadog
 
-Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.
+Once the integration is successfully configured, both the [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page only shows data for the default branch of each repository.
 
 ## Troubleshooting
 

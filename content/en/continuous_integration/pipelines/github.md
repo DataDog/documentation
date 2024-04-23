@@ -9,7 +9,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and measures"
@@ -73,7 +73,8 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 
 ### Enable log collection
 
-The GitHub Actions CI Visibility integration also allows automatically forwarding workflow job logs to the [Logs Product][5].
+The GitHub Actions CI Visibility integration also allows automatically forwarding workflow job logs to [Datadog Log Management][5].
+
 To enable logs, follow these steps:
 
 1. Go to the **[CI Visibility settings][6]** page.
@@ -94,9 +95,9 @@ shown which contains the host metrics.
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][7] and [Pipeline Executions][8] pages populate with data after the pipelines finish.
+The [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after the pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page only shows data for the default branch of each repository.
 
 ## Disable GitHub Actions tracing
 
