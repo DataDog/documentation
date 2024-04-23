@@ -177,7 +177,7 @@ In the **Pipeline Executions** page, you can use the filters below in the search
 : Possible values: `true`, `false`
 
 `Partial Pipeline`
-: Possible values: `retry`, `paused`, `resumed`
+: Possible values: `retry`
 
 {{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
 
