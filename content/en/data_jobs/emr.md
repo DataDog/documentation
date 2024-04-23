@@ -43,25 +43,26 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    ```bash
    #!/bin/bash
 
-   # Expect the first argument to be your Datadog site, second argument to be the AWS secret name for the Datadog API key
-   DD_SITE=$1
-   SECRET_NAME=$2
+   # Set required parameter DD_SITE
+   DD_SITE={{< region-param key="dd_site" code="true" >}}
+   
+   # Set required parameter DD_API_KEY with Datadog API key. The commands below assumes the API key is stored in AWS Secrets Manager, with the secret name as datadog/dd_api_key and the key as dd_api_key.
+   # ---------------------------------------------------------------------------
+   # Important: Update this if you manage and retrieve your secret differently.
+   # ---------------------------------------------------------------------------
+   SECRET_NAME=datadog/dd_api_key
+   DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
 
-   # Download and run the latest init script with required positional parameters
-   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/emr/emr_init_latest.sh)" "$DD_SITE" "$SECRET_NAME" || true
+   # Download and run the latest init script
+   DD_SITE=DD_SITE DD_API_KEY=DD_API_KEY bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/emr/emr_init_latest.sh)" || true
    ```
 
-   The script above downloads and runs the latest init script for Data Jobs Monitoring in EMR with required positional parameters. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.0.0.sh` to use the last stable version.
+   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.0.0.sh` to use the last stable version.
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
    - For **Name**, give your bootstrap action a name. You can use `datadog_agent`.
    - For **Script location**, enter the path to where you stored the init script in S3.
-   - For **Arguments**, enter two arguments separated by a space: your Datadog site, and the name of the secret in which you stored your Datadog API key. 
-      Example:
-      ```text
-      {{< region-param key="dd_site" code="true" >}} datadog/dd_api_key
-      ```
    - Click **Add bootstrap action**.
 
 When your cluster is created, this bootstrap action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
