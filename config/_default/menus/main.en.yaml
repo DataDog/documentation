@@ -4974,10 +4974,10 @@ menu:
       parent: rum_product_analytics
       identifier: rum_funnel_analysis
       weight: 302
-    - name: Retention Analysis
-      url: real_user_monitoring/product_analytics/retention_analysis
+    - name: User Retention
+      url: real_user_monitoring/product_analytics/user_retention
       parent: rum_product_analytics
-      identifier: rum_retention_analysis
+      identifier: rum_user_retention
       weight: 303
     - name: Heatmaps
       url: real_user_monitoring/product_analytics/heatmaps

@@ -1,8 +1,9 @@
 ---
-title: Retention Analysis
+title: User Retention
 kind: documentation
 aliases:
 - /real_user_monitoring/retention_analysis
+- /real_user_monitoring/product_analytics/user_retention
 ---
 
 ## Overview
