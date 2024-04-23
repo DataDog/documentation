@@ -23,7 +23,7 @@ further_reading:
 
 - Datadog Java tracing library `dd-trace-java` version 1.10.0 or greater.
 
-The following OpenTelemetry features implemented in the Datadog library as noted:
+The following OpenTelemetry features are implemented in the Datadog library as noted:
 
 | OpenTelemetry feature                             | Datadog support notes                                                                               |
 |---------------------------------------------------|---------------------------------------------------------------------------------------------|
