@@ -65,8 +65,10 @@ Once Data Streams Monitoring is configured, you can measure the time it usually 
 
 | Metric Name | Notable Tags | Description |
 |---|---|-----|
-| data_streams.latency | `start`, `end`, `env` | End to end latency of a pathway from a specified source to destination service |
+| data_streams.latency | `start`, `end`, `env` | End to end latency of a pathway from a specified source to destination service. |
 | data_streams.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between producer and consumer. Requires Java Agent v1.9.0 or later. |
+| data_streams.payload_size | `consumer_group`, `topic`, `datacenter`, `env` and [the second primary tag][7] | Incoming and outgoing throughput in bytes. |
+
 
 You can also graph and visualize these metrics on any dashboard or notebook:
 
@@ -117,3 +119,4 @@ Datadog automatically links the infrastructure powering your services and relate
 [4]: /integrations/kafka/
 [5]: /integrations/amazon_sqs/
 [6]: /tracing/trace_collection/runtime_config/
+[7]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
