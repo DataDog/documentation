@@ -30,9 +30,9 @@ Early Flake Detection is Datadog's mechanism to tackle test flakiness. By identi
 * Datadog's backend automatically stores unique tests for a given test service. These are **known tests**.
 * Before a test session runs, the Datadog library fetches the list of known tests.
 * If a test is in this list, it's executed normally.
-* If a test is **not** in this list, the Datadog library automatically retries it up to 10 times.
+* If a test is **not** in this list, the test is considered **new**, and the Datadog library will automatically retry the test up to 10 times.
 
-Running a test multiple times helps detecting potential issues. If any of the test attempts fails, Datadog automatically tags it as flaky. You may then choose to block the merge of the feature branch with a [Quality Gate][2].
+Running a test multiple times helps detecting potential issues. If any of the test attempts fail, Datadog automatically tags it as flaky. You may then choose to block the merge of the feature branch with a [Quality Gate][2].
 
 ### Why does running a test multiple times help detect issues?
 
@@ -41,21 +41,21 @@ A [flaky test][3] is a test that both passes and fails for the same commit (same
 
 ### How are known tests defined?
 
-The list of known tests is generated from tests run in default and default-like branches. These are [**Excluded Branches**][4].
+The list of known tests is generated from tests run in default and default-like branches. These are [**Excluded Branches from Early Flake Detection**][4].
 
 Early Flake Detection normally works as follows:
 
 * A developer working in a feature branch writes a new test, commits and pushes the changes.
 * This test is retried automatically for this commit and every new commit in the feature branch, until the branch is merged.
-* After the feature branch is merged, that new test is considered part of the known tests for the test service. That test is not considered new anymore.
+* After the feature branch is merged, that new test is considered part of the known tests for the test service. The test is no longer treated as new.
 
 {{< img src="continuous_integration/early_flake_detection_commits.png" alt="How Early Flake Detection works in your commits.">}}
 
-### Excluded branches
+### Excluded Branches from Early Flake Detection
 
-The excluded branches do not execute Early Flake Detection, that is, no test is ever retried in them.
+The Excluded Branches from Early Flake Detection do not execute Early Flake Detection, that is, Early Flake Detection will never retry tests.
 
-Additionally, what Early Flake Detection considers a new test is based on the tests that run in these branches. If a test has run in any of the excluded branches, it is **not** considered new anymore.
+Additionally, what Early Flake Detection considers a new test is based on the tests that run in these branches. If a test has run in any of the Excluded Branches from Early Flake Detection, it is **not** considered new anymore.
 
 ## Set up a Datadog library
 Before setting up Early Flake Detection, you must configure [Test Visibility][5] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
@@ -69,7 +69,7 @@ Click on **Configure** in the Early Flake Detection column to see this modal:
 
 {{< img src="continuous_integration/early_flake_detection_configuration_modal.png" alt="Early flake Detection configuration modal.">}}
 
-In this modal you can toggle the status of Early Flake Detection and add a list of [**Excluded Branches**][4] for that test service.
+In this modal you can toggle the status of Early Flake Detection and add a list of [**Excluded Branches from Early Flake Detection**][4] for that test service.
 
 ### How to check that new tests are detected
 
@@ -111,7 +111,7 @@ There is a mechanism to prevent this error from slowing down the CI pipeline, bu
 [1]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
 [2]: /quality_gates/
 [3]: /glossary/#flaky-test
-[4]: /tests/early_flake_detection/#excluded-branches
+[4]: /tests/early_flake_detection/#excluded-branches-from-early-flake-detection
 [5]: /continuous_integration/tests
 [6]: https://app.datadoghq.com/ci/settings/test-service
 [7]: https://docs.datadoghq.com/help/
