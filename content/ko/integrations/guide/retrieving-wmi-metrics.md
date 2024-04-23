@@ -219,9 +219,9 @@ Win32_PerfFormattedData_PerfProc_Process의 PoolNonPagedBytes에 대해 보고�
 # 여기에서:
 #
 # - 'link source property'에는 링크 값이 포함됩니다.
-# - 'target class' 링크할 클래스입니다.
-# - 'link target class property' 연결할 대상 클래스 속성입니다.
-# - 'target property' 태그를 지정할 값이 포함됩니다.
+# - 'target class'는 링크할 클래스입니다.
+# - 'link target class property'는 연결할 대상 클래스 속성입니다.
+# - 'target property'에는 태그를 지정할 값이 포함됩니다.
 #
 # WMI 쿼리로 변환됩니다.
 # SELECT 'target property' FROM 'target class'
