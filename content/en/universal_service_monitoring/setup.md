@@ -849,6 +849,46 @@ agents:
 
 {{< /tabs >}}
 
+### HTTP/2 Monitoring
+
+<div class="alert alert-info">
+Universal Service Monitoring is available in <strong>beta</strong> to monitor services behind <a href="https://datatracker.ietf.org/doc/html/rfc7540">HTTP/2</a> and to capture HTTP/2 traffic.
+</div>
+
+Requires Agent version 7.53 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enable_http2_monitoring: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Path exclusion and replacement
 
 Use `http_replace_rules` or `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` to configure the Agent to drop HTTP endpoints that match a regex, or to convert matching endpoints into a different format.
