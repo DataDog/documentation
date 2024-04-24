@@ -34,7 +34,7 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 | **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation][16]. |
 
 *AWS CodePipeline running pipelines don't have Git information until they have finished.\
-**AWS CodePipeline logs correlation is currently only available for AWS CodeBuild actions.
+**AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
 
 ## Configure the Datadog integration
 
