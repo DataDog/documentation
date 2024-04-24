@@ -65,6 +65,9 @@ To trace code running in an asynchronous task, create a new scope within the bac
 
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/opentracing/opentracing-csharp
 [2]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
