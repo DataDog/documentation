@@ -118,6 +118,14 @@ foo = 1
 bar = 2
 ```
 
+You can also use `no-dd-sa` to only ignore a particular rule rather than ignoring all rules. To do so, specific the name of the rule you wish to ignore in your comment using this template: `no-dd-sa:<rule-name>`. For example, in the following Python code snippet, the line `my_foo = 1` will still be analyzed by all rules except for the `javascript-code-style/assignment-name` rule, which will tell the developer to use camelCase instead of snake_case.
+
+```javascript
+#no-dd-sa:javascript-code-style/assignment-name
+my_foo = 1
+myBar = 2
+```
+
 ### Reporting false positives
 If you believe a specific violation is a false positive, you can indicate false positives and tell us why you flagged it. Datadog reviews submissions to improve our rules over time.
 
