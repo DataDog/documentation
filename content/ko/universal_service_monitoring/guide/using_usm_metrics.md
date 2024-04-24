@@ -29,10 +29,10 @@ title: 모니터, SLO 및 대시보드에서 USM 메트릭 사용
 | 메트릭 이름                 | 단위   | 유형         | 설명                                       |
 |-----------------------------|---------|--------------|---------------------------------------------------|
 | universal.http.client       | 초 | 분포 | 아웃바운드 요청의 대기 시간, 카운트, 오류 및 속도.                |
-| universal.http.client.hits  | Hit    | 카운트        | 총 아웃바운드 요청 및 오류 수.                |
+| universal.http.client.hits  | 히트    | 카운트        | 총 아웃바운드 요청 및 오류 수.                |
 | universal.http.client.apdex | 스코어   | 게이지        | 이 서비스에 대한 아웃바운드 요청의 Apdex 스코어.                |
 | universal.http.server       | 초 | 분포 | 인바운드 요청의 대기 시간, 카운트, 오류 및 속도.  |
-| universal.http.server.hits  | 히트    | 계산        | 총 인바운드 요청 및 오류 수.                 |
+| universal.http.server.hits  | 히트    | 카운트        | 총 인바운드 요청 및 오류 수.                 |
 | universal.http.server.apdex | 스코어   | 게이지        | 이 웹 서비스에 대한 Apdex 스코어.             |
 
 APM 메트릭과 달리 오류는 별도의 메트릭이 아닌 `error:true` 태그 아래에서 사용할 수 있습니다.
@@ -67,7 +67,7 @@ USM 메트릭 쿼리 구문은 `trace.*`를 사용하는 [APM 메트릭 쿼리 �
 2. **APM Metrics**을 선택하고 서비스나 리소스의 `env` 및 기타 [기본 태그][14]를 정의합니다. 모니터링할 서비스 또는 리소스를 선택하고 모니터가 쿼리를 평가할 시간 간격을 정의합니다.
 3. **Threshold Alert**를 선택하고 트리거할 모니터에 대해 `Requests per Second`와 같은 USM 메트릭을 선택합니다. 그런 다음 값이 알림 및 경고 임계값 **초과** 또는 **미만**이어야 하는지 정의합니다. 알림 임계값에 대한 값을 입력하고 필요시 경고 임계값에 대한 값도 입력합니다.
 4. 알림 섹션에는 모니터에 대해 미리 채워진 메시지가 포함되어 있습니다. 알림 이름과 메시지를 사용자 정의하고 이 모니터에 대한 권한을 정의합니다.
-5. **생성**을 클릭합니다.
+5. **Create**를 클릭합니다.
 
 {{< img src="universal_service_monitoring/guide/usm_monitor.png" alt="BITSBOUTIQUE용 유니버설 서비스 모니터링 모니터" style="width:100%;" >}}
 
