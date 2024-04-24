@@ -111,7 +111,21 @@ If a `build` directory does not already exist, create it first by running `mkdir
 
 ## Test your implementation
 
-To make sure your sourcemaps are correctly sent and linked to your application, you can generate crashes with the [`react-native-performance-limiter`][14] package.
+To verify your React Native Crash Reporting and Error Tracking configuration, issue an error in your RUM application and confirm that the error appears in Datadog.
+
+1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
+2. Execute code containing an error or crash. For example:
+
+   ```javascript
+   const throwError = () => {
+    throw new Error("My Error")
+   }
+   ```
+
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
+4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
+
+To make sure your sourcemaps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
 
 Install it with yarn or npm then re-install your pods:
 
