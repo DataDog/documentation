@@ -48,12 +48,12 @@ The available code security vulnerability types include the following:
 - Trust boundary violation
 - Unvalidated Redirect
 - Verb tampering
-- Weak Cipher
-- Weak Hash
-- Weak Randomness
-- X-Content-Type-Options Header missing
-- X-XSS-Protection Header disabled
-- XPath Injection
+- Weak cipher
+- Weak hash
+- Weak randomness
+- X-Content-Type-Options header missing
+- X-XSS-Protection header disabled
+- XPath injection
 - XSS
 
 ### Disabling code security vulnerability detection 
