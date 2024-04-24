@@ -110,7 +110,7 @@ The two types of fixes are distinguished visually in the UI with different label
 ### Ignoring violations
 
 #### Ignore for a repository
-Add an ignore rule in your `static-analysis.datadog.yml` file. This example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
+Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
 
 ```
 rulesets:
