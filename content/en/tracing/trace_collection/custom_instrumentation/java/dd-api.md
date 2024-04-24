@@ -200,20 +200,24 @@ Add `@Trace` to methods to have them be traced when running with `dd-java-agent.
 
 Datadog's Trace annotation is provided by the [dd-trace-api dependency][6].
 
-`@Trace` annotations have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `@Trace` annotation to better reflect what is being instrumented. These are the only possible arguments that can be set for the `@Trace` annotation.
+The available arguments for the `@Trace` annotation are:
+
+- `operationName`: Set the operation name for the trace (default: The method's name).
+- `resourceName`: Set the resource name for the trace (default: The same value as `operationName`).
+- `noParent`: Set to `true` to always start a new trace at that method. Supported from v1.22.0+ of `dd-trace-java` (default: `false`).
 
 ```java
 import datadog.trace.api.Trace;
 
 public class SessionManager {
 
-    @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession")
+    @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession", noParent = true)
     public static void saveSession() {
         // your method implementation here
     }
 }
 ```
-Note that through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list [here][7] if you have previously decorated your code.
+**Note**: Through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list in [TraceAnnotationsInstrumentation.java][7] if you have previously decorated your code.
 
 ### Manually creating a new span
 
