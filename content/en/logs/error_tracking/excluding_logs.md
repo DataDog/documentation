@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-{{< img src="logs/error_tracking/exclusion_filters.png" alt="Exclusion filters list" style="width:100%" >}}
+{{< img src="logs/error_tracking/exclusion-filters-2.png" alt="Exclusion filters list" style="width:100%" >}}
 
 Exclusion filters prevent Error Tracking from processing logs matching a given query, lowering issue volume and reducing noise. 
 
@@ -26,13 +26,13 @@ Filters can be reordered in the table by clicking on the right side of each row 
 
 The example described below creates an exclusion filter for logs matching `env:staging`, but the steps are similar for any query.
 
-{{< img src="logs/error_tracking/configured_exclusion_filter.png" alt="Exclusion filter configuration for ignoring staging logs" style="width:100%" >}}
+{{< img src="logs/error_tracking/configured-exclusion-filter-2.png" alt="Exclusion filter configuration for ignoring staging logs" style="width:100%" >}}
 
 1. In Datadog, go to the [Error Tracking Rules page][1].
 1. Expand any rule to show the **Exclusion Filters** list beneath the rule.
 1. Click **Add Exclusion Filter**.
 1. In the **Name** field, enter "Staging logs".
-1. In the **Define exclusion query** field, type "env", then choose the `env` tag from the autocomplete suggestions to view available tag values. Choose `env:staging`.
+1. In the **Define exclusion filter query** field, type "env", then choose the `env` tag from the autocomplete suggestions to view available tag values. Choose `env:staging`.
 1. Wait a moment for the live-tailing exclusion preview to populate, then scan the preview to verify the filter is working as intended.
 1. Click **Save Exclusion Filter**.
 1. View the filter row in the **Exclusion Filters** table to see the percentage of logs affected by the new filter. Hover over the row to edit, deactivate, reorder, or delete the filter, or to view the `env:staging` query result in Logs Explorer.
