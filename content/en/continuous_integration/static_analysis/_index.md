@@ -216,6 +216,29 @@ The two types of fixes are distinguished visually in the UI with different label
 {{< img src="ci/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
 
 ### Ignoring violations
+#### Ignore for a repository
+Add an ignore rule in your `static-analysis.datadog.yml` file. This example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
+
+```
+rulesets:
+  - javascript-express
+    rules:
+      reduce-server-fingerprinting:
+        ignore: "**"
+```
+
+#### Ignore for a file or directory
+Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see [Static Analysis Setup][8]. You can adapt this to use a path (or see our documentation about our configuration file).
+
+```
+rulesets:
+  - javascript-express
+    rules:
+      reduce-server-fingerprinting:
+        ignore: "ad-server/src/app.js"
+```
+
+#### Ignore for a specific instance
 You can ignore a specific instance of a violation by commenting `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Analysis scans.
 
 ```python
@@ -235,3 +258,4 @@ bar = 2
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [6]: /continuous_integration/static_analysis/rules
 [103]: /getting_started/site/
+[8]: https://docs.datadoghq.com/code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
