@@ -1,9 +1,7 @@
 ---
 title: Early Flake Detection
 kind: documentation
-description: Detect flakiness before it impacts your default branch.
-aliases:
-- /continuous_integration/tests/early_flake_detection/
+description: Detect flakiness before it impacts your default branch using Early Flake Detection.
 further_reading:
   - link: "/tests"
     tag: "Documentation"
@@ -110,6 +108,6 @@ There is a mechanism to prevent this error from slowing down the CI pipeline, bu
 [1]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
 [2]: /quality_gates/
 [3]: /glossary/#flaky-test
-[5]: /continuous_integration/tests
+[5]: /tests
 [6]: https://app.datadoghq.com/ci/settings/test-service
-[7]: https://docs.datadoghq.com/help/
+[7]: /help/
