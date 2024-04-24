@@ -23,7 +23,7 @@ title: Gestión de cuentas de varias organizaciones
 
 ## Información general
 
-Es posible gestionar varias organizaciones secundarias desde una cuenta de organización principal. Esta opción la suelen utilizar los proveedores de servicio que tienen clientes que no deben tener acceso a los datos de los demás. 
+Es posible gestionar varias organizaciones secundarias desde la cuenta de una organización principal. Esta opción la suelen utilizar los proveedores de servicio que tienen clientes que no deben tener acceso a los datos de los demás. 
 
 La función de cuentas de varias organizaciones no está activada por defecto. Ponte en contacto con el [servicio de asistencia de Datadog][1] para activarla.
 
@@ -33,7 +33,7 @@ Se pueden añadir usuarios a la organización principal y a varias organizacione
 
 Las organizaciones que están dentro de una organización principal no tienen acceso a los datos de las demás. Para habilitar las consultas de métricas entre organizaciones, consulta la [visibilidad entre organizaciones][3].
 
-La organización principal puede visualizar el uso de cada una de las organizaciones secundarias, lo cual le permite realizar un seguimiento de las tendencias de uso.
+La organización principal puede visualizar el uso de cada una de las organizaciones secundarias, lo que le permite realizar un seguimiento de las tendencias de uso.
 
 La configuración de cuentas, como las direcciones IP incluidas en la lista de permitidas, no se heredan de la organización principal a las secundarias.
 
