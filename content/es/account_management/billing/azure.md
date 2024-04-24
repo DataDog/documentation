@@ -5,7 +5,7 @@ title: Facturación de la integración de Azure
 
 ## Información general
 
-Datadog factura por todas las [máquinas virtuales Azure que se monitorizan en Datadog][1]. Estas máquinas son facturables independientemente de si Datadog Agent está instalado. No se te facturará dos veces si estás ejecutando el Agent en una máquina virtual Azure respaldada por la integración de Azure. Además, Datadog cuenta los nodos en los planes de servicios de aplicaciones de Azure como hosts facturables.
+Datadog factura por todas las [máquinas virtuales Azure que se monitorizan en Datadog][1]. Estas máquinas son facturables independientemente de si Datadog Agent está instalado. No se te facturará dos veces si estás ejecutando el Agent en una máquina virtual Azure respaldada por la integración de Azure. Además, Datadog cuenta los nodos en los planes de Azure App Service como hosts facturables.
 
 **Nota**: Los planes de servicios de aplicaciones compartidas, dinámicas y de nivel gratuito no tienen asociado ningún recuento de nodos y no afectan tu factura de Datadog.
 
