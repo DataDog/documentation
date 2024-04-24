@@ -92,6 +92,8 @@ module:
      - source: content/en/integrations/akamai_mpulse.md
        target: content/integrations/akamai_mpulse.md
        lang: en
+    #  - source: data/images.json
+    #    target: data/integration_logos.json
 
   mounts:
     # default mounts

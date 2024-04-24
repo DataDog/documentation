@@ -283,6 +283,7 @@ def download_cached_content_into_repo(self):
             cache_path = integration.get('cache_path', '')
 
             if os.path.isfile(cache_path):
+                print(f'ignoring APW integrations: {cache_path}')
                 os.remove(cache_path)
 
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
