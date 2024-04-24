@@ -42,7 +42,7 @@ You can accomplish the following actions:
 
 ## Create a search query
 
-Navigate to [**Digital Experience > Synthetic Monitoring & Testing** > **Continuous Testing**][1] and click on an out-of-the-box search query to start viewing your test batches or runs and creating visualizations.
+Navigate to [**Digital Experience > Synthetic Monitoring & Testing** > **Continuous Testing**][1] and click on an out-of-the-box search query to start viewing your test batches or runs and create visualizations.
 
 {{< img src="continuous_testing/explorer_search_query_1.png" alt="Out-of-the-box search queries available in the Explorer" style="width:100%;">}}
 
