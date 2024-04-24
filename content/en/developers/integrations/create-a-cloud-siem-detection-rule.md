@@ -23,7 +23,6 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 1. From **Detection Rules**, [create a new rule][4].
 
-   **Note**: Only threshold based rules are supported.
 
 2. Follow the [best practices](#configuration-best-practices) in this guide to configure your detection rule.
  
