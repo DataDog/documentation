@@ -6,7 +6,8 @@ kind: documentation
 ## I cannot see any traces
 
 ### Verify that your Step Function is configured to send all logs
-- Ensure that the `DD_TRACE_ENABLED` environment variable is set to `true` in your Dockerfile.
+
+- Ensure that the `DD_TRACE_ENABLED` environment variable is set to `true` on the Lambda function in your AWS console.
 - In your AWS console, open your Step Function's logging tab. Ensure that _Log level_ is set to `ALL`, and that _Include execution data_ is selected.
 - Ensure that the CloudWatch log group (also found on the logging tab) has a subscription filter to the Datadog Lambda Forwarder in the same region.
 
@@ -17,7 +18,7 @@ kind: documentation
 ### Verify that logs are searchable on Live Search and have DD_TRACE_ENABLED tag
 In Datadog, go to [**Logs > Live Tail**][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times. If you need to upgrade Datadog Lambda Forwarder from an older version, check that after the upgrade, the Forwarder has the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag set to `true`. If the upgraded Forwarder does not have the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag, your Forwarder may not be upgraded correctly. 
 
-If the Forwarder and state machine tags are set up correctly with the previous steps, the logs are tagged with `DD_TRACE_EANBLED:true`.
+If the Forwarder and state machine tags are set up correctly with the previous steps, the logs are tagged with `DD_TRACE_ENABLED:true`.
 
 #### Search historic logs
 To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, go to **Logs** > **Configuration** and then open the [**Indexes**][4] tab. Click the **New Index** button in the upper right.
