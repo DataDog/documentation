@@ -35,7 +35,7 @@ The available code security vulnerability types include the following:
 - Insecure Cookie
 - Insecure JSP layout
 - LDAP injection
-- MongoDB Injection
+- MongoDB injection
 - Cookie without HttpOnly Flag
 - Cookie without SameSite Flag
 - Path traversal
