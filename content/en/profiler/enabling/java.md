@@ -81,25 +81,31 @@ To begin profiling applications:
 
    {{< tabs >}}
    {{% tab "Wget" %}}
+   
       ```shell
       wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
       ```
+      
    {{% /tab %}}
    {{% tab "cURL" %}}
+   
       ```shell
       curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
       ```
+      
    {{% /tab %}}
    {{% tab "Dockerfile" %}}
+   
       ```dockerfile
       ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
       ```
+      
    {{% /tab %}}
    {{< /tabs >}}
 
    **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
-3. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
+4. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
    {{< tabs >}}
 {{% tab "Command arguments" %}}
 
