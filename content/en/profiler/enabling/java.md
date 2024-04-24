@@ -83,7 +83,7 @@ To begin profiling applications:
    {{% tab "Wget" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-   ``` 
+   ```
    {{% /tab %}}
    {{% tab "cURL" %}}
    ```shell
@@ -93,7 +93,7 @@ To begin profiling applications:
    {{% tab "Dockerfile" %}}
    ```dockerfile
    ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
-   ``` 
+   ```
    {{% /tab %}}
    {{< /tabs >}}
 
