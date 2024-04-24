@@ -10,7 +10,7 @@ Filter query examples:
 - `NOT (status:DEBUG)`: This filters for only logs that do not have status `DEBUG`.
 - `status:OK service:flask-web-app`: This filters for all logs with the status `OK` and originates from your `flask-web-app` service.
     - This query can also be written as: `status:OK AND service:flask-web-app`.
--`host:COMP-A9JNGYK OR host:COMP-J58KAS`: This filter query only matches logs from the labeled hosts.
+- `host:COMP-A9JNGYK OR host:COMP-J58KAS`: This filter query only matches logs from the labeled hosts.
 
 Learn more about writing filter queries in [Datadog's Log Search Syntax][4002].
 
