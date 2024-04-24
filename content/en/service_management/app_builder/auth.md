@@ -27,7 +27,7 @@ For more information on configuring credentials, see [Connections][2]. App Build
 ## App permissions
 
 By default:
-- The author of an app is the only user who has access to the app.
+- While the app is in draft, the author of an app is the only user who has access to the app.
 - After the app is published, the author maintains **Editor** access, while the rest of the author's Datadog organization receives **Viewer** access to the app.
 
 You can expand access to a draft of published app using access control.
