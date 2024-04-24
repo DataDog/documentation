@@ -122,7 +122,7 @@ You can also use `no-dd-sa` to only ignore a particular rule rather than ignorin
 
 `no-dd-sa:<rule-name>`
 
-For example, in the following JavaScript code snippet, the line `my_foo = 1` is analyzed by all rules except for the `javascript-code-style/assignment-name` rule, which tells the developer to use camelCase instead of snake_case.
+For example, in the following JavaScript code snippet, the line `my_foo = 1` is analyzed by all rules except for the `javascript-code-style/assignment-name` rule, which tells the developer to use [camelCase][6] instead of [snake_case][7].
 
 ```javascript
 // no-dd-sa:javascript-code-style/assignment-name
@@ -144,3 +144,5 @@ If you believe a specific violation is a false positive, you can indicate false 
 [3]: /code_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
 [4]: /integrations/github/
 [5]: /code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
+[6]: https://en.wikipedia.org/wiki/Camel_case
+[7]: https://en.wikipedia.org/wiki/Snake_case
