@@ -3476,7 +3476,7 @@ menu:
       weight: 303
     - name: Test Visibility
       url: tests/
-      pre: intelligent-test-runner
+      pre: ci
       parent: software_delivery_heading
       identifier: tests
       weight: 30000
