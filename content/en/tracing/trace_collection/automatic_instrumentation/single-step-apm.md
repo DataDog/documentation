@@ -23,7 +23,7 @@ Single Step Instrumentation for APM installs the Datadog Agent and [instruments]
 
 If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This automatically instruments your application, without any additional installation or configuration steps.
 
-The following examples show how it works with each deployment type.
+The following examples show how it works for each deployment type.
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -38,8 +38,8 @@ For an Ubuntu host:
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
-3. Start a new shell session.
-4. Restart the services on the host or VM.
+2. Start a new shell session.
+3. Restart the services on the host or VM.
 
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
@@ -470,7 +470,7 @@ For instructions on changing your container registry, see [Changing Your Contain
 
 ## Removing Single Step APM instrumentation from your Agent
 
-If you don't want to collect trace data for a particular service, host, VM, or container, complete the follow steps:
+If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
 
 ### Removing instrumentation for specific services
 
