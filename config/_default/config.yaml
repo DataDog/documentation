@@ -86,14 +86,11 @@ module:
    - path: github.com/DataDog/websites-sources
      disabled: false
      mounts:
-     - source: content/en/integrations/ably.md
-       target: content/integrations/ably.md
+     - source: content/en/integrations
+       target: content/integrations
        lang: en
-     - source: content/en/integrations/akamai_mpulse.md
-       target: content/integrations/akamai_mpulse.md
-       lang: en
-    #  - source: data/images.json
-    #    target: data/integration_logos.json
+     - source: data
+       target: data
 
   mounts:
     # default mounts
