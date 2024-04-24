@@ -25,7 +25,7 @@ Accede a la página del directorio de equipos, desde los [parámetros de la orga
 1. Utiliza el menú desplegable para seleccionar a los miembros del equipo.
 1. Haz clic en **Create** (Crear).
 
-**Nota:** Los caracteres permitidos para los nombres de equipos y los nombres de jefes de equipos son `a-z`, `A-Z`, `0-9` y `._-:/`. Sustituye los espacios por guiones bajos.
+**Nota:** Los caracteres permitidos para los nombres de equipos y los nombres de identificadores de equipos son `a-z`, `A-Z`, `0-9` y `._-:/`. Sustituye los espacios por guiones bajos.
 
 ### Modificar el equipo
 
@@ -52,7 +52,7 @@ Todas las fuentes
 
 Si tienes equipos con miembros existentes, al elegir la opción SAML Strict (SAML estricto) se anula la configuración y se eliminan los miembros de esos equipos. Si eliges la opción All Sources (Todos los orígenes), se conservarán los miembros existentes. Para gestionar equipos y miembros de equipos mediante atributos SAML, consulta [Asignar atributos SAML a equipos][3].
 
-## Jefes de equipos
+## Identificador de equipos
 
 Un identificador de equipos sirve para vincular los equipos a los recursos de Datadog. Estos identificadores aparecen en las barras y facetas de búsqueda con el formato `team:<team-handle>` o `teams:<team-handle>`. 
 
