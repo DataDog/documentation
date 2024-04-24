@@ -9,6 +9,9 @@ code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 70
 description: 'OpenTracing instrumentation for .NET'
+further_reading:
+    - link: 'tracing/trace_collection/trace_context_propagation/dotnet/'
+      text: 'Propagating trace context'
 ---
 
 <div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/dotnet/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
