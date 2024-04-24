@@ -42,7 +42,7 @@ The available code security vulnerability types include the following:
 - Reflection injection
 - Server Side Request Forgery (SSRF)
 - Session timeout
-- Session Rewriting
+- Session rewriting
 - SQL injection
 - Stacktrace leak
 - Trust Boundary Violation
