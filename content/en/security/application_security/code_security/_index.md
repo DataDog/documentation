@@ -28,10 +28,10 @@ The available code security vulnerability types include the following:
 - Default HTML escape invalid
 - Directory listing leak
 - Hardcoded Password
-- Hardcoded Secrets
-- Header Injection
-- HSTS Header missing
-- Insecure Auth Protocol
+- Hardcoded secrets
+- Header injection
+- HSTS header missing
+- Insecure auth protocol
 - Insecure Cookie
 - Insecure JSP layout
 - LDAP injection
