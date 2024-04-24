@@ -49,11 +49,7 @@ Connections Read
 
 ### Restrict access to a specific connection
 
-<<<<<<< HEAD
-Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**. By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
-=======
 Set permissions on individual connections to restrict their use or limit modifications. App Builder provides the following permissions for each connection:
->>>>>>> master
 
 Viewer
 : View the connection
@@ -63,6 +59,8 @@ Resolver
 
 Editor
 : Edit, resolve, and view the connection
+
+By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 **Note**: Permission to resolve a connection includes permission to get the connection object assigned to a step and retrieve the secret associated with it.
 
