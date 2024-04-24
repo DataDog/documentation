@@ -28,7 +28,7 @@ Si inicias sesión en Datadog mediante la autenticación de Google, tu cuenta de
 ### Preferencias
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
-Puedes configurar tu zona horaria, tus notificaciones de escritorio y tus suscripciones de correo electrónico desde la [pestaña **Preferences** (Preferencias)][1], en la página **Personal Settings** (Configuración personal). En las suscripciones de correo electrónico, tienes acceso a los siguientes informes:
+Puedes configurar tu zona horaria, tus notificaciones de escritorio y tus suscripciones de correo electrónico desde la [pestaña **Preferences** (Preferencias)][1], en la página **Personal Settings** (Parámetros personales). En las suscripciones de correo electrónico, tienes acceso a los siguientes informes:
 
 * Daily Digest (Resumen diario)
 * Weekly Digest (Resumen semanal)
@@ -40,14 +40,14 @@ Si no sabes si un resumen de correo electrónico es relevante para ti, haz clic 
 
 {{% site-region region="gov" %}}
 
-Puedes configurar tu zona horaria y tus notificaciones de escritorio desde la [pestaña **Preferences** (Preferencias)][1], en la página **Personal Settings** (Configuración personal).
+Puedes configurar tu zona horaria y tus notificaciones de escritorio desde la [pestaña **Preferences** (Preferencias)][1], en la página **Personal Settings** (Parámetros personales).
 
 [1]: https://app.datadoghq.com/account/preferences
 {{% /site-region %}}
 
 ### Organizaciones
 
-La página **Organizations** (Organizaciones) de **Personal Settings** (Configuración personal) muestra todas las organizaciones a las que estás asociado. Puedes cambiar de organización desde esta página o bien pasando el cursor sobre el menú de la cuenta a la izquierda del panel de navegación.
+La página **Organizations** (Organizaciones) de **Personal Settings** (Parámetros personales) muestra todas las organizaciones a las que estás asociado. Puedes cambiar de organización desde esta página o bien pasando el cursor sobre el menú de la cuenta a la izquierda del panel de navegación.
 
 **Nota**: Si abandonas una organización, no podrás volver a unirte a no ser que te invite un administrador de esa organización.
 
@@ -63,7 +63,7 @@ Si eres administrador de una organización, consulta la documentación de refere
 
 ### Seguridad
 
-La pestaña **Application Keys** (Claves de aplicación) en **Personal Settings** (Configuración personal) te permite gestionar tus claves de aplicación. Para copiar una clave, coloca el cursor encima hasta que veas el icono **Copy Key** (Copiar la clave) a la derecha y haz clic en él. También puedes hacer clic en una clave concreta para editar su nombre, ver cuándo fue creada, ver el perfil del propietario de la clave, copiarla o revocarla.
+La pestaña **Application Keys** (Claves de aplicación) en **Personal Settings** (Parámetros personales) te permite gestionar tus claves de aplicación. Para copiar una clave, coloca el cursor encima hasta que veas el icono **Copy Key** (Copiar la clave) a la derecha y haz clic en él. También puedes hacer clic en una clave concreta para editar su nombre, ver cuándo fue creada, ver el perfil del propietario de la clave, copiarla o revocarla.
 ## Aspecto
 
 Puedes utilizar Datadog en modo oscuro. Para hacerlo, coloca el cursor encima de tu avatar, en la barra lateral o pulsa: `Ctrl+Opt+D` / `Ctrl+Alt+D`.
