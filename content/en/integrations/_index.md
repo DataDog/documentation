@@ -99,6 +99,7 @@ cascade:
     path: /integrations/java.md
   aliases:
     - /agent/faq/jmx_integrations/
+    - /agent/faq/docker-jmx/
 - _target:
     path: /integrations/amazon_elb.md
   aliases:
