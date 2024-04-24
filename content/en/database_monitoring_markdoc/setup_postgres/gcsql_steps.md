@@ -54,21 +54,7 @@ Configure the following [parameters][3] in [Database flags][4] and then **restar
 
 ## Grant the Agent access
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
-
-The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
-
-Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
-
- ```bash
- psql -h mydb.example.com -d postgres -U postgres
- ```
-
-Create the `datadog` user:
-
-```SQL
-CREATE USER datadog WITH password '<PASSWORD>';
-```
+{% partial file="./shared/agent-user-creation.mdoc" / %}
 
 Create the following schema **in every database**:
 
@@ -109,24 +95,7 @@ SECURITY DEFINER;
 
 ### Verify
 
-To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
-
-```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
-```
-
-When it prompts for a password, use the password you entered when you created the `datadog` user.
+{% partial file="./shared/agent-permissions-verification.mdoc" /%}
 
 ## Install the Agent
 

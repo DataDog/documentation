@@ -22,24 +22,6 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Install the Agent](#install-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
-## Before you begin
-
-Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16
-
-Supported Agent versions
-: 7.36.1+
-
-Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
-
-Proxies, load balancers, and connection poolers
-: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
-
-Data security considerations
-: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
-
 ## Configure the AWS integration
 
 Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
@@ -60,21 +42,7 @@ Configure the following [parameters][4] in the [DB parameter group][5] and then 
 
 ## Grant the Agent access
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
-
-The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][7].
-
-Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][8] by running:
-
- ```bash
- psql -h mydb.example.com -d postgres -U postgres
- ```
-
-Create the `datadog` user:
-
-```SQL
-CREATE USER datadog WITH password '<PASSWORD>';
-```
+{% partial file="./shared/agent-user-creation.mdoc" / %}
 
 **Note:** IAM authentication is also supported. Please see [the guide][9] on how to configure this for your RDS instance.
 
@@ -168,46 +136,7 @@ SECURITY DEFINER;
 
 ### Verify
 
-To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
-{{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
-
-```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
-```
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
-
-```shell
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_database limit 1;" \
-  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
-  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_activity limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
-psql -h localhost -U datadog postgres -A \
-  -c "select * from pg_stat_statements limit 1;" \
-  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
-  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-When it prompts for a password, use the password you entered when you created the `datadog` user.
+{% partial file="./shared/agent-permissions-verification.mdoc" /%}
 
 ## Install the Agent
 
