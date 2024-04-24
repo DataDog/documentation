@@ -44,8 +44,8 @@ The available code security vulnerability types include the following:
 - Session timeout
 - Session rewriting
 - SQL injection
-- Stacktrace leak
-- Trust Boundary Violation
+- Stack trace leak
+- Trust boundary violation
 - Unvalidated Redirect
 - Verb tampering
 - Weak Cipher
