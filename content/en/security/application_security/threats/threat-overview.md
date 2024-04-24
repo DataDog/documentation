@@ -1,16 +1,14 @@
 ---
-title: Threat Overview
+title: Attack Summary
 kind: documentation
 aliases:  
 ---
 
-{{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the ASM Threat Overview page"  >}}
+{{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the ASM Attack Summary page"  >}}
 
-## Introduction
+The ASM **Attack Summary** provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
 
-The ASM Threat Overview provides an at a glance view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
-
-Each section of Threat Overview focuses on a different aspect of security with supporting information.
+Each section of **Attack Summary** focuses on a different aspect of security with supporting information.
 
 ## Sections
 
@@ -23,24 +21,22 @@ Attack Traffic
 Business Logic
 : This section focuses on fraud and business logic abuse such as account takeover attempts or any custom business logic events tracked by your application.
 
-Geographic Overview
+Attack Traffic Sources
 : A global heatmap indicating the sources of attack traffic, providing a visual representation of threats by region.
 
-## Best Practices
+## Best practices
 
-1. Review trends and adopt a corresponding protection policy to meet your posture needs.
-2. Regularly review the Exposed Services widget to ensure only intended services are accessible and that they have a protection policy that meets your risk profile.
+1. Review trends and adopt a protection policy that meets your posture needs.
+2. Regularly review the **Exposed Services** widget in **Attack Surface Area** to ensure only the correct services are accessible and have a protection policy that meets your risk profile.
 3. Block attack tools and ensure that customer scanners are part of an authorized vulnerability management program.
 4. Monitor business logic for spikes in credential stuffing attacks or risky payment activity.
-5. Use the geographic overview to compare the attack traffic sources with your expected customer locations.
-6. Use [Powerpacks](#using-the-powerpacks) to enhance your own Dashboards with the most relevant information.
+5. Use **Attack Traffic Sources** to compare the attack traffic sources with your expected customer locations.
+6. Use [Powerpacks](#using-powerpacks) to enhance your dashboards with the most relevant information.
 
-### Using the Powerpacks
+### Using powerpacks
 
-When adding a Widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the right-hand drawer. Filter on `tag:threat_overview` or type *Threat Overview* in the search box.
+When adding a widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the tray. Filter on `tag:attack_summary` or type `Attack Summary` in the search box.
  
-Each section in the Threat Overview page corresponds to a dedicated Powerpack.
+Each section in the **Attack Summary** page corresponds to a dedicated powerpack.
 
-{{< img src="security/application_security/threats/appsec-threat-overview-powerpacks.png" alt="Screenshot of the new dashboard page with the Powerpacks drawer open, filtering on tag:threat_overview"  >}}
-
-[1]: /dashboards/
+[1]: https://app.datadoghq.com/dashboard/lists
