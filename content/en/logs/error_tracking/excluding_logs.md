@@ -35,9 +35,9 @@ The example described below creates an exclusion filter for logs matching `env:s
 1. In the **Define exclusion filter query** field, type "env", then choose the `env` tag from the autocomplete suggestions to view available tag values. Choose `env:staging`.
 1. Wait a moment for the live-tailing exclusion preview to populate, then scan the preview to verify the filter is working as intended.
 1. Click **Save Exclusion Filter**.
-1. View the filter row in the **Exclusion Filters** table to see the percentage of logs affected by the new filter. Hover over the row to edit, deactivate, reorder, or delete the filter, or to view the `env:staging` query result in Logs Explorer.
+1. Hover over the row in the **Exclusion Filters** table to edit, reorder, or delete the filter, or to view the `env:staging` query result in Logs Explorer.
 
-{{< img src="logs/error_tracking/hovered_exclusion_filter_row.png" alt="Exclusion filter row with hover menu" style="width:90%" >}}
+{{< img src="logs/error_tracking/hovered-exclusion-filter-row-2.png" alt="Exclusion filter row with hover menu" style="width:90%" >}}
 
 [1]: https://app.datadoghq.com/error-tracking/settings/rules
 [2]: /agent/logs/advanced_log_collection/?tab=configurationfile#filter-logs
