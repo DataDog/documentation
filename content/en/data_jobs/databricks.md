@@ -42,7 +42,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
 1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the following script, remembering to replace the placeholders with your parameter values. 
 
-   ```bash
+   ```shell
    #!/bin/bash
 
    # Required parameters
@@ -88,7 +88,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 {{% tab "On a specific cluster" %}}
 
 1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
-   ```bash
+   ```shell
    #!/bin/bash
 
    # Download and run the latest init script

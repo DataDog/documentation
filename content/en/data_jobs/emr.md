@@ -40,7 +40,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 
 1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script. 
 
-   ```bash
+   ```shell
    #!/bin/bash
 
    # Set required parameter DD_SITE
