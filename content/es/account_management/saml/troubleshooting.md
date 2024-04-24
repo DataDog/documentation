@@ -14,7 +14,7 @@ Esta página proporciona instrucciones para solucionar problemas para errores co
 
 ## Errores comunes
 
-Si te encuentras con un mensaje de error de los lista a continuación, puede haber un problema con tu configuración de asignaciones en Datadog o en la configuración de tu proveedor de identidad (IdP).
+Si te encuentras con un mensaje de error de la lista a continuación, puede haber un problema con tu configuración de asignaciones en Datadog o en la configuración de tu proveedor de identidad (IdP).
 
 - `SAML no está activo para esta org.`
 - `Usuario desconocido Arf.`
@@ -102,7 +102,7 @@ Si tienes problemas para iniciar sesión debido a un error basado en funciones, 
 
 ## Errores del proveedor de identidad (IdP)
 
-Si encuentras un error procedente de tu IdP como Google, Active Directory, Azure, Okta, etc:
+Si encuentras un error procedente de tu IdP como Google, Active Directory, Azure, Okta, etc.:
 
 - Si te encuentras con un problema en la consola de administración de Google, consulta [SAML app error messages (mensajes de error de la aplicación SAML)][10].
 - Si te encuentras con un problema en Active Directory, consulta [Debug SAML-based single sign-on to applications in Azure Active Directory (depuración del inicio de sesión único basado en SAML en aplicaciones en Azure Active Directory)][11].
