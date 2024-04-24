@@ -276,7 +276,7 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 
 _Since: v1.17.0. Requires JDK 11+._
 
-<div class="alert alert-warning">This is an alpha feature, we do not recommand enabling it in production.</a></div>
+<div class="alert alert-warning">This is an alpha feature, it is not recommended to enable this feature in production environments.</a></div>
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
