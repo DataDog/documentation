@@ -33,8 +33,7 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 ## Overview
 
-Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate.
-To send deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. The following attributes are required:
+To send your own deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. The following attributes are required:
 - `started_at`: The time the deployment started.
 - `finished_at`: The time the deployment finished.
 - `service`: The service that was deployed. The provided service must be registered in the [Service Catalog][3] (see [Adding Entries to Service Catalog][4]) with metadata set up (see [Adding Metadata][5]).

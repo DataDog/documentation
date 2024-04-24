@@ -87,7 +87,7 @@ All the metrics contain the following tags when available:
 
 **Note**: The `severity` tag is available for the `dora.incidents_impact` and `dora.time_to_restore` metrics, if provided through the API.
 
-### Deployment and incident events
+### DORA events in Event Management
 
 DORA Metrics also provides individual `deployment`, `incident`, and `incident_finished` events in [Event Management][6] with `source:software_delivery_insights`.
 
