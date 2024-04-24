@@ -118,6 +118,18 @@ foo = 1
 bar = 2
 ```
 
+You can also use `no-dd-sa` to only ignore a particular rule rather than ignoring all rules. To do so, specify the name of the rule you wish to ignore in place of `<rule-name>` using this template: 
+
+`no-dd-sa:<rule-name>`
+
+For example, in the following JavaScript code snippet, the line `my_foo = 1` is analyzed by all rules except for the `javascript-code-style/assignment-name` rule, which tells the developer to use [camelCase][6] instead of [snake_case][7].
+
+```javascript
+// no-dd-sa:javascript-code-style/assignment-name
+my_foo = 1
+myBar = 2
+```
+
 ### Reporting false positives
 If you believe a specific violation is a false positive, you can indicate false positives and tell us why you flagged it. Datadog reviews submissions to improve our rules over time.
 
@@ -132,3 +144,5 @@ If you believe a specific violation is a false positive, you can indicate false 
 [3]: /code_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
 [4]: /integrations/github/
 [5]: /code_analysis/static_analysis/setup#add-a-static-analysis-yaml-file-to-your-project
+[6]: https://en.wikipedia.org/wiki/Camel_case
+[7]: https://en.wikipedia.org/wiki/Snake_case
