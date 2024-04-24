@@ -11,8 +11,12 @@ further_reading:
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to power up your Infrastructure monitoring'
 cascade:
-    algolia:
-        rank: 70
+  algolia:
+    rank: 70
+- _target:
+    path: /infrastructure/resource_catalog/aws_iam_user.md
+  aliases:
+    - /security/cspm/custom_rules/aws_iam_user/
 ---
 
 {{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of host map filtered to Nginx hosts" video="true">}}

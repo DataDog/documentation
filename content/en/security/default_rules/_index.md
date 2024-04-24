@@ -21,6 +21,12 @@ aliases:
   - /security/default_rules/azure-app-service-remote-debugging-enabled/
   - /security/default_rules/cloudtrail-aws-iam-policy-changed/
   - /security/default_rules/cloudtrail-aws-new-aws-account-assumerole/
+  - /security/default_rules/cis-aws-1.5.0-1.10/
+  - /security/default_rules/cis-aws-1.5.0-1.14/
+  - /security/default_rules/cis-aws-1.5.0-2.1.5/
+  - /security/default_rules/cis-gcp-1.3.0-1.4/
+  - /security/default_rules/cis-gcp-1.3.0-1.7/
+  - /security/default_rules/cis-gcp-1.3.0-5.1/
 disable_sidebar: true
 cascade:
   algolia:
