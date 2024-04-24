@@ -23,9 +23,17 @@ Azure DevOps Server is not officially supported.
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Custom tags and measures at runtime**: Configure [custom tags][6] and measures at runtime
+[Azure Pipelines][1] is a continuous integration and delivery service that supports any language, platform, or cloud. 
+
+Set up tracing on Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
+
+### Compatibility
+
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
 
 ## Configure the Datadog integration
 
@@ -109,3 +117,5 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
 [9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
+[10]: /glossary/#custom-tag
+[11]: /glossary/#custom-measure

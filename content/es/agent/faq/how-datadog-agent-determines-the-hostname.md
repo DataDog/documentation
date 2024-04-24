@@ -35,6 +35,8 @@ El nombre de host canónico se elige de acuerdo con las siguientes reglas. Se se
 
 En caso de que el nombre sea reconocido como nombre común no único (por ejemplo, `localhost.localdomain`), la regla que se está aplicando fallará y se pasará a la siguiente.
 
+Consulta [Lógica de detección del nombre de host][5] para obtener más información sobre cómo el Agent determina el nombre de host.
+
 ### Hosts de AWS
 
 Al obtener información sobre tus hosts de AWS de la [API de Datadog][3], se muestran los siguientes atributos según la disponibilidad:
@@ -53,7 +55,7 @@ Los nombres recopilados por el Agent (tal como se detalla con anterioridad) se a
 
 Consulta la lista de todos los hosts de tu cuenta en [Infrastructure List][4] (Lista de infraestructuras). Encontrarás los alias asociados a cada host en el panel de inspección, al que se accede haciendo clic en el botón **Inspect** (Inspeccionar) al pasar el cursor por encima de la fila de un host:
 
-{{< img src="agent/faq/host_aliases.png" alt="Alias de host"  >}}
+{{< img src="agent/faq/host_aliases.png" alt="Host aliases" >}}
 
 **Nota**: Estos alias no se pueden buscar ni filtrar. Solo se puede acceder a ellos a través del panel de inspección anteriormente mencionado.
 
@@ -92,14 +94,14 @@ Si este cambio te afecta, Datadog recomienda que hagas lo siguiente cuando actua
 
 * **Si vas a actualizar el Agent v5 a una versión anterior a la 6.3**: introduce tu nombre de host en el archivo de [configuración principal del Agent][2].
 * **Si vas a actualizar el Agent v5 a la versión 6.3 o posterior**: activa la opción `hostname_fqdn` en el archivo de [configuración principal del Agent][2]. De este modo, tendrás la seguridad de que se mantiene el mismo nombre de host.
-* **Si vas a actualizar el Agent v5 a la v6 (una versión próxima que utilice el FQDN por defecto): no tienes que hacer nada.
+* **Si vas a actualizar el Agent v5 al Agent v6 (una versión próxima que utilice el FQDN por defecto)**: no tienes que hacer nada.
 * Si quieres asegurarte de que el actual comportamiento predeterminado del Agent v6 se mantiene cuando actualices el Agent más adelante, define `hostname_fqdn` como `false`. No obstante, Datadog recomienda definir `hostname_fqdn` como `true` siempre que sea posible.
 
-### Windows
+### recopilación de logs
 
-En el Agent v5, el Agent de Windows enviaba por defecto el nombre de host incompleto. Para preservar la compatibilidad con versiones anteriores, este comportamiento se ha mantenido en el Agent v6. La nueva opción `hostname_fqdn` permanece desactivada de manera predeterminada en Windows, así como en versiones **v6** posteriores.
+En el Agent v5, el Windows Agent enviaba por defecto el nombre de host incompleto. Para preservar la compatibilidad con versiones anteriores, este comportamiento se ha mantenido en el Agent v6. La nueva opción `hostname_fqdn` permanece desactivada de manera predeterminada en Windows, así como en versiones **v6** posteriores.
 
-El Agent de Windows respeta esta opción de configuración desde la versión v6.5. Si se establece `hostname_fqdn` como "true", el Agent de Windows enviará el nombre de host completo.
+El Windows Agent respeta esta opción de configuración desde la versión v6.5. Si se establece `hostname_fqdn` como "true", el Windows Agent enviará el nombre de host completo.
 
 #### Acción recomendada
 
@@ -116,16 +118,17 @@ Como medida predeterminada, el Agent v6 utiliza el nombre de host de la instanc
 Si vas a actualizar el Agent v5 con el parámetro `gce_updated_hostname` sin configurar o configurado como "false", y el nombre de host del Agent no está definido en `datadog.conf`/`datadog.yaml`, el nombre de host enviado a Datadog cambiará de la instancia de GCE `name` a la instancia completa de GCE `hostname` (que incluye el identificador de proyecto de GCE).
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /es/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-{{< img src="agent/faq/agent_hostname.jpeg" alt="Esquema de nombres de host del Agent"  >}}
+{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /es/agent/guide/agent-commands/#agent-status-and-information
-[2]: /es/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /es/agent/configuration/agent-commands/#agent-status-and-information
+[2]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /es/api/v1/hosts/
 [4]: https://app.datadoghq.com/infrastructure
+[5]: https://github.com/DataDog/datadog-agent/tree/main/pkg/util/hostname

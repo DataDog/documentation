@@ -15,6 +15,21 @@ further_reading:
 - link: "/agent/configuration/dual-shipping/#yaml-configuration"
   tag: "documentation"
   text: "Dual shipping with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
+  tag: "blog"
+  text: "Redact sensitive data from your logs on-prem by using Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-dual-ship-logs/"
+  tag: "blog"
+  text: "Dual ship logs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-log-volume-control/"
+  tag: "blog"
+  text: "Control your log volumes with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-archiving/"
+  tag: "blog"
+  text: "Archive your logs with Observability Pipelines for a simple and affordable migration to Datadog"
+- link: "https://www.datadoghq.com/blog/observability-pipelines/"
+  tag: "blog"
+  text: "Aggregate, process, and route logs easily with Datadog Observability Pipelines"
 ---
 
 {{< site-region region="gov" >}}
@@ -27,7 +42,7 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 ## Overview
 
-{{< img src="observability_pipelines/op_marketecture_04122024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/op_marketecture_04182024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
 Observability Pipelines allows you to collect, process, and route logs in your own infrastructure. It comes with out-of-the-box templates so that you can easily build and deploy pipelines. The templates are purpose-built for the following use cases:
 
