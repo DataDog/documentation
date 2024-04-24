@@ -121,7 +121,7 @@ rulesets:
 ```
 
 #### Ignore for a file or directory
-Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see [Static Analysis Setup][5]. You can adapt this to use a path (or see our documentation about our configuration file).
+Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for this file. For more information on how to ignore by path, see [Static Analysis Setup][5].
 
 ```
 rulesets:
