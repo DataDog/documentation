@@ -17,7 +17,7 @@ Consulta los documentos [Configure Auth0 as Identity Provider for Datadog (Confi
 
 `first_name` y `give_name` son los atributos raíz de un usuario Auth0. Solo se pueden configurar al crear con la API de gestión Auth0. Como referencia, consulta [Normalized User Profiles (perfiles de usuarios normalizados)][2].
 
-La sección `user_metadata` del perfil de usuario se utiliza para especificar información adicional, como por ejemplo:
+La sección `user_metadata` del perfil de usuario se utiliza para especificar información adicional, como, por ejemplo:
 
 {{< img src="account_management/saml/auth0_metadata.png" alt="Actualizar esto" >}}
 
