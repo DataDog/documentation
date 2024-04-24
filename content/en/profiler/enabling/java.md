@@ -82,23 +82,23 @@ To begin profiling applications:
    {{< tabs >}}
    {{% tab "Wget" %}}
    
-      ```shell
-      wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-      ```
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
       
    {{% /tab %}}
    {{% tab "cURL" %}}
    
-      ```shell
-      curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-      ```
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
       
    {{% /tab %}}
    {{% tab "Dockerfile" %}}
    
-      ```dockerfile
-      ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
-      ```
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
       
    {{% /tab %}}
    {{< /tabs >}}
