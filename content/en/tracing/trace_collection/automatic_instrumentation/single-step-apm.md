@@ -56,7 +56,7 @@ For an Ubuntu host:
 
 For a Docker Linux container:
 
-1. Install the library injector:
+1. Run the one-line installation command:
    ```shell
    bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
    ```
@@ -329,18 +329,18 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 
 ### Specifying tracing library versions
 
-<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can inject a subset of tracing libraries into your applications.</div>
+<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the tracing libraries you specify.</div>
 
-Specify Datadog tracing libraries and their versions to inject into your applications. You can configure this in two ways, which are applied in the following order of precedence:
+Specify Datadog tracing libraries and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
 
 1. [Specify at the service level](#specifying-at-the-service-level), or
 2. [Specify at the cluster level](#specifying-at-the-cluster-level).
 
-**Default**: If you don't specify any library versions and `apm.instrumentation.enabled=true`, the latest version of all supported tracing libraries are injected.
+**Default**: If you don't specify any library versions and `apm.instrumentation.enabled=true`, applications written in supported languages are automatically instrumented using the latest tracing library versions.
 
 #### Specifying at the service level
 
-To select pods for library injection and specify the library version, use the appropriate annotation for your language within your pod spec:
+To automatically instrument applications in specific pods, add the appropriate language annotation and library version for your application in your pod spec:
 
 | Language   | Pod annotation                                                        |
 |------------|-----------------------------------------------------------------------|
@@ -360,7 +360,7 @@ Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available vers
 
 <div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
 
-For example, to inject a Java library:
+For example, to automatically instrument Java applications:
 
 {{< highlight yaml "hl_lines=10" >}}
 apiVersion: apps/v1
@@ -380,7 +380,7 @@ spec:
 
 #### Specifying at the cluster level
 
-If you don't inject tracing libraries from the pod spec, you can specify tracing libraries for the entire cluster with Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only the specified libraries and versions are injected.
+If you don't enable automatic instrumentation for specific pods using annotations, you can specify which languages to instrument across the entire cluster using the Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only applications written in the specified languages will be instrumented, using the specified library versions.
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
@@ -474,7 +474,7 @@ If you don't want to collect trace data for a particular service, host, VM, or c
 
 ### Removing instrumentation for specific services
 
-Run the following commands and restart the service to stop injecting the library into the service and stop producing traces from that service.
+To remove APM instrumentation and stop sending traces from a specific service, follow these steps:
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -518,7 +518,7 @@ Run the following commands and restart the service to stop injecting the library
 
 ### Removing APM for all services on the infrastructure
 
-To stop producing traces, remove library injectors and restart the infrastructure:
+To stop producing traces, uninstall APM and restart the infrastructure:
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -533,7 +533,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{% tab "Docker" %}}
 
-1. Uninstall local library injection:
+1. Run:
    ```shell
    dd-container-install --uninstall
    ```
