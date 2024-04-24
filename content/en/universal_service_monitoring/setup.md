@@ -851,9 +851,7 @@ agents:
 
 ### HTTP/2 Monitoring
 
-<div class="alert alert-info">
-Universal Service Monitoring is available to capture <a href="https://datatracker.ietf.org/doc/html/rfc7540">HTTP/2</a> traffic.
-</div>
+Universal Service Monitoring is available to capture HTTP/2 traffic.
 
 Requires Agent version 7.53 or greater.
 
