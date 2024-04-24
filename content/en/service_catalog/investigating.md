@@ -40,6 +40,14 @@ Clicking a service opens a side panel with details in two main sections:
 - **Costs information** showing the cloud spend for a service, broken down by resource types.
 - **Pre-production information** regarding your software delivery process, such as the average build duration and success rate of CI pipelines related to your service, along with static analysis results from CI.
 
+## Investigating infrastructure
+From the **Performance** tab, find the service you are investigating. In the *Infrastructure* column, click the resources related to this service to **View in Service Context Map**.
+
+{{< img src="tracing/service_catalog/access_service_context_map.png" alt="Access the Service Context Map from the Service Catalog Performance tab, highlighting the Infrastructure column" style="width:90%;" >}}
+
+The Service Context Map provides an overview of the relationships and dependencies between services and related infrastructure. Use this view to analyze the source of an issue by looking at upstream and downstream services and infrastructure.
+
+
 ## Configuration details 
 - **Setup completeness status** for Datadog products that can collect data for the service.
 - **External libraries used** which includes the ability to download the Software Bill of Materials (SBOM).

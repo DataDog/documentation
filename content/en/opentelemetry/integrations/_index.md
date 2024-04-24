@@ -10,4 +10,5 @@ kind: documentation
     {{< nextlink href="/opentelemetry/integrations/runtime_metrics/" >}}Runtime Metrics{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/collector_health_metrics/" >}}Collector Health Metrics{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/log_collection/" >}}Log Collection{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/integrations/kafka_metrics/" >}}Kafka Metrics{{< /nextlink >}}
 {{< /whatsnext >}}

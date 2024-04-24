@@ -32,9 +32,6 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Install the Datadog Agent on your Databricks cluster(s)
 
-The following init script installs the Datadog Agent on the cluster:
-- [`datadog_databricks_job_monitoring_init.sh`][8]
-
 You can choose to install the Agent globally, or on a specific Databricks cluster.
 
 {{< tabs >}}
@@ -43,7 +40,22 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Admin Settings** and click the **Compute** tab.
 1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
-1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the init script.
+1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the following script, remembering to replace the placeholders with your parameter values. 
+
+   ```shell
+   #!/bin/bash
+
+   # Required parameters
+   export DD_API_KEY=<YOUR API KEY>
+   export DD_SITE=<YOUR DATADOG SITE>
+   export DATABRICKS_WORKSPACE=<YOUR WORKSPACE NAME> 
+
+   # Download and run the latest init script
+   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
+   ```
+
+   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.0.0.sh` to use the last stable version.
+
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
 1. Click **Add**.
@@ -75,8 +87,17 @@ Optionally, you can also set other init script parameters and Datadog environmen
 {{% /tab %}}
 {{% tab "On a specific cluster" %}}
 
-1. Download the init script.
-1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
+1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
+   ```shell
+   #!/bin/bash
+
+   # Download and run the latest init script
+   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
+   ```
+
+   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.0.0.sh` to use the last stable version.
+
+1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
    {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
    - Under the **Destination** drop-down, select `Workspace`.
@@ -132,4 +153,3 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 [4]: https://docs.databricks.com/en/security/secrets/index.html
 [6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
-[8]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init.sh

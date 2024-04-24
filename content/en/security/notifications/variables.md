@@ -10,7 +10,19 @@ further_reading:
 - link: "/security/notifications/"
   tag: "Documentation"
   text: "Learn more about Security notifications"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 ## Overview
 

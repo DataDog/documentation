@@ -7,9 +7,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about OAuth2 Authorization"
 ---
-{{< callout btn_hidden="true" >}}
-  The Datadog Developer Platform is currently in beta. If you don't have access, contact apps@datadoghq.com.
-{{< /callout >}} 
 
 ## Overview
 
