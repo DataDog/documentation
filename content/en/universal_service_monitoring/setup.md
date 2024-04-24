@@ -851,7 +851,7 @@ agents:
 
 ### HTTP/2 Monitoring
 
-Universal Service Monitoring is available to capture HTTP/2 traffic.
+Universal Service Monitoring is available to capture HTTP/2 and gRPC traffic.
 
 Requires Agent version 7.53 or greater.
 
