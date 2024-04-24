@@ -45,7 +45,7 @@ Identificador de nombres
 
 * "urn:oid:1.3.6.1.4.1.5923.1.1.1.6" "Información básica" "Correo electrónico principal"
 
-Además añade:
+Además, añade:
 
 * "urn:oid:2.5.4.4" "Información básica" "Apellido"
 * "urn:oid:2.5.4.42" "Información básica" "Nombre"
