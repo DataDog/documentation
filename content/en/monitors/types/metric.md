@@ -155,7 +155,15 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 
 ## Set alert conditions
 
-Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`, `equal to`, and `not equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
+Trigger when the metric is one of the following:
+- `above`
+- `above or equal to`
+- `below`
+- `below or equal to`
+- `equal to`
+- `not equal to`
+
+If the value is between zero and one, a leading zero is required. For example, `0.3`.
 
 ### Advanced alert conditions
 
