@@ -1,116 +1,131 @@
 ---
 title: Tracing your LLM Applications
 ---
-Tracing your LLM Applications
-Background Concepts
+## Background Concepts
 These terms and concepts will help you break down your application into distinct components to maximize the effectiveness of Datadog's LLM Monitoring product:
 
-Span - a span represents some unit of work your application is performing. Spans have a start time, duration, name, tags, and attributes. Spans can have parents and children.
+- Span - a span represents some unit of work your application is performing. Spans have a start time, duration, name, tags, and attributes. Spans can have parents and children.
 
-Span kind - span kind is a categorization of what kind of work the span is performing in your LLM application. They also determine the appropriate parent-child relationships.
+- Span kind - span kind is a categorization of what kind of work the span is performing in your LLM application. They also determine the appropriate parent-child relationships.
 
-Root span - a root span is the first span in a trace.
-Span Kinds
-Datadog's LLM Observability product currently supports 7 different span kinds. View a summary comparison of all span kinds here.
-LLM Span Kind
+- Root span - a root span is the first span in a trace.
+
+## Span Kinds
+Datadog's LLM Observability product currently supports 7 different span kinds. View a summary comparison of all span kinds here. [TODO: link to table]
+
+### 1. LLM Span Kind
 An LLM span represents an invocation call to an LLM where input and outputs are represented as text.
-Python SDK
+
+#### Python SDK
 You can trace an LLM span by using LLMObs.llm() as a context manager with the following arguments:
 model_name (Required): The name of the invoked LLM.
 name: [default value: "lmm"] The name of the operation. 
 model_provider:  [default value: "custom"] The name of the invoked LLM provider. 
 from ddtrace.llmobs import LLMObs
 
+```py
 def llm_call():
 	with LLMObs.llm(name="invoke_llm", model_name="claude", model_provider="anthropic") as llm_span:
 		completion = ... # user application logic to invoke LLM
 	return completion
+```
+
 Note: if you are using the following LLM providers, you do not need to manually start a span to trace these operations as Datadog's existing integrations automatically trace and annotate the LLM calls:
 OpenAI (Using the OpenAI Python SDK)
 AWS Bedrock (Using boto3/botocore)
 LangChain LLM/Chat Models/Chains (Using LangChain)
-API 
 
-todo
-Workflow Span Kind
+### 2. Workflow Span Kind
 Workflow spans represent any static sequence of operations. We recommend using workflows to group together an LLM call with its supporting contextual operations.
-Python SDK
+
+#### Python SDK
 You can trace a workflow span by using LLMObs.workflow() as a context manager, and optionally specify the name argument with the name of the operation [default value: "workflow"].
 
+```py
 from ddtrace.llmobs import LLMObs
 
 def process_message():
 	with LLMObs.workflow(name="process_message") as workflow_span:
 		... # user application logic
 	return 
-API 
-todo
-Agent Span Kind
+```
+
+### 3. Agent Span Kind
 Agent spans represent a dynamic sequence of operations where an autonomous decision maker determines which operations and tools to execute. Agent spans may have multiple workflow spans as children.
 
 Example: A trace of a series of reasoning steps controlled by a ReAct agent 
 
-Python SDK
+#### Python SDK
 You can trace an agent span by using LLMObs.agent() as a context manager, and optionally specify the name argument with the name of the operation [default value: "agent"].
 
+```py
 from ddtrace.llmobs import LLMObs
 
 def run_agent():
 	with LLMObs.agent(name="react_agent") as agent_span:
 		... # user application logic
 	return 
-API 
-todo
-Tool Span Kind
+```
+
+### 4. Tool Span Kind
 Tool spans represent a standalone step in a workflow or agent that involves a call to an external program or service.
 
 Examples: A call to a web API, a database query
-Python SDK
+
+#### Python SDK
 You can trace a tool span by using LLMObs.tool() as a context manager, and optionally specify the name argument with the name of the operation [default value: "tool"].
 
+```py
 from ddtrace.llmobs import LLMObs
 
 def call_weather_api():
 	with LLMObs.tool(name="get_current_weather") as tool_span:
 		... # user application logic
 	return 
-API 
-todo
-Task Span Kind
+```
+
+### 5. Task Span Kind
 Task spans represent a standalone step in a workflow or agent that does not involve a call to an external service.
 
 Example: A data sanitization step before a prompt is submitted to the LLM
-Python SDK
+
+#### Python SDK
 You can trace a task span by using LLMObs.task() as a context manager and optionally specify the name argument with the name of the operation [default value: "task"].
 
+```py
 from ddtrace.llmobs import LLMObs
 
 def sanitize_input():
 	with LLMObs.task(name="sanitize_input") as task_span:
 		... # user application logic
 	return 
-API 
-todo
-Embedding Span Kind
+```
+
+### 6. Embedding Span Kind
 Embedding spans represent a standalone call to an embedding model or function to create an embedding.
 
 Example: A call to OpenAI's embedding endpoint
-Python SDK
+
+#### Python SDK
+
 You can trace an embedding span by using LLMObs.embedding() as a context manager and optionally specify the name argument with the name of the operation [default value: "embedding"].
 
+```py
 from ddtrace.llmobs import LLMObs
 
 def perform_embedding():
 	with LLMObs.embedding(name="openai_embedding") as embedding_span:
 		... # user application logic
 	return 
-API 
-Retrieval Span Kind
+```
+
+### 7. Retrieval Span Kind
+
 Retrieval spans represent a vector search operation involving a list of documents being returned from an external knowledge base. When used alongside embedding spans, retrieval spans can provide visibility into retrieval augmented generation (RAG) operations.
 
 Example: A similarity search to a vector store to return relevant documents to be used to augment a user prompt for a given topic
 
-Python SDK
+#### Python SDK
 You can trace a retrieval span by using LLMObs.retrieval() as a context manager and optionally specify the name argument with the name of the operation [default value: "retrieval"].
 
 ```py
@@ -122,8 +137,7 @@ def similarity_search():
 	return 
 	```
 
-API 
-
+## Span Kind Comparison Table
 
 | Use Case  | Description | Root span? | Has Children? | Examples |
 |-----------|-------------|------------|---------------|----------|
