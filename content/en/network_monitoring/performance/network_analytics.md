@@ -21,7 +21,11 @@ further_reading:
       text: 'Collect your Network Data with the Datadog Agent.'
 ---
 
-{{< img src="network_performance_monitoring/network_analytics/main_page_npm2.png" alt="Main page" >}}
+## Overview
+
+The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries provide simplified access to run common queries, and provide a snapshot of related metrics to the query so that you can see relevant changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs into a unique combination to provide you with the most relevant insights into your network.
+
+{{< img src="network_performance_monitoring/network_analytics/main_page_npm3.png" alt="Main page" >}}
 
 ## Queries
 
@@ -31,7 +35,7 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
-{{< img src="network_performance_monitoring/network_analytics/context_npm2.png" alt="context" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/context_npm2.png" alt="context" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
