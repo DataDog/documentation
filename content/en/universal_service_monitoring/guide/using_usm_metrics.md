@@ -103,7 +103,7 @@ Optionally, to create an SLO manually using USM metrics:
 
 {{< img src="universal_service_monitoring/guide/usm_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
-For more information, see the [Service Level Objectives documentation][13].
+For more information, see the [Service Level Objectives documentation][17].
 
 ### Access a defined dashboard
 
@@ -133,3 +133,4 @@ For more information, see the [Dashboards documentation][16].
 [14]: /api/latest/service-level-objectives/
 [15]: https://app.datadoghq.com/slo/manage
 [16]: /dashboards
+[17]: /service_management/service_level_objectives/
