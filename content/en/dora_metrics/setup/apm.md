@@ -103,7 +103,7 @@ links:
 
 DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
 
-**Example (schema version v2.2):**
+**Example (schema version v2.2):** 
 
 ```yaml
 extensions:
