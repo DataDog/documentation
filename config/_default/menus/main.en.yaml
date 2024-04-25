@@ -1781,6 +1781,21 @@ menu:
       parent: error_tracking
       identifier: error_tracking_suspect_commits
       weight: 3
+    - name: APM
+      url: error_tracking/apm
+      parent: error_tracking
+      identifier: error_tracking_apm
+      weight: 4
+    - name: Logs
+      url: error_tracking/logs
+      parent: error_tracking
+      identifier: error_tracking_logs
+      weight: 5
+    - name: Real User Monitoring
+      url: error_tracking/rum
+      parent: error_tracking
+      identifier: error_tracking_rum
+      weight: 6
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2884,17 +2899,17 @@ menu:
       identifier: tracing_error_tracking
       weight: 10
     - name: Error Tracking Explorer
-      url: error_tracking/explorer
+      url: tracing/error_tracking/explorer
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
       weight: 1001
     - name: Custom Grouping
-      url: error_tracking/custom_grouping
+      url: tracing/error_tracking/custom_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_custom_grouping
       weight: 1002
     - name: Identify Suspect Commits
-      url: error_tracking/suspect_commits
+      url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
       weight: 1003
@@ -3461,7 +3476,7 @@ menu:
       weight: 303
     - name: Test Visibility
       url: tests/
-      pre: intelligent-test-runner
+      pre: ci
       parent: software_delivery_heading
       identifier: tests
       weight: 30000
@@ -3755,26 +3770,21 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_dual_ship_logs
       weight: 2
-    - name: Datadog Agent
-      url: observability_pipelines/dual_ship_logs/datadog_agent/
-      parent: observability_pipelines_dual_ship_logs
-      identifier: observability_pipelines_dual_ship_logs_datadog_agent
-      weight: 2001
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/dual_ship_logs/splunk_hec/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_hec
-      weight: 2002
+      weight: 2001
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/dual_ship_logs/splunk_tcp/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_tcp
-      weight: 2003
+      weight: 2002
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
-      weight: 2004
+      weight: 2003
     - name: Archive Logs
       url: observability_pipelines/archive_logs/
       parent: observability_pipelines
@@ -4093,7 +4103,7 @@ menu:
       identifier: log_management_error_tracking
       weight: 6
     - name: Error Tracking Explorer
-      url: error_tracking/explorer
+      url: logs/error_tracking/explorer
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_explorer
       weight: 601
@@ -4108,7 +4118,7 @@ menu:
       parent: log_management_error_tracking
       weight: 603
     - name: Custom Grouping
-      url: error_tracking/custom_grouping
+      url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
       weight: 604
@@ -4118,10 +4128,15 @@ menu:
       identifier: log_management_error_tracking_manage_data_collection
       weight: 605
     - name: Identify Suspect Commits
-      url: error_tracking/suspect_commits
+      url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
       weight: 606
+    - name: Exclude Logs
+      url: logs/error_tracking/excluding_logs
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_excluding_logs
+      weight: 607
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -4540,10 +4555,10 @@ menu:
       parent: appsec_threats
       identifier: threats_threat_intelligence
       weight: 709
-    - name: Threat Overview
+    - name: Attack Summary
       url: security/application_security/threats/threat-overview/
       parent: appsec_threats
-      identifier: threats_threat_overview
+      identifier: attack_summary_overview
       weight: 710
     - name: API Security Inventory
       url: security/application_security/api-inventory/
@@ -5155,7 +5170,7 @@ menu:
       identifier: rum_error_tracking
       weight: 11
     - name: Explorer
-      url: error_tracking/explorer/
+      url: real_user_monitoring/error_tracking/explorer/
       parent: rum_error_tracking
       identifier: rum_error_tracking_explorer
       weight: 1101
@@ -5170,12 +5185,12 @@ menu:
       identifier: rum_error_tracking_mobile
       weight: 1103
     - name: Custom Grouping
-      url: error_tracking/custom_grouping
+      url: real_user_monitoring/error_tracking/custom_grouping
       parent: rum_error_tracking
       identifier: rum_error_tracking_custom_grouping
       weight: 1104
     - name: Identify Suspect Commits
-      url: error_tracking/suspect_commits
+      url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
       weight: 1105
