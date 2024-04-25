@@ -79,7 +79,7 @@ Tags can be added to the pipeline span or to the job span.
 To do this, run the `tag` command:
 
 {{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
+datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
