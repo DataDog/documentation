@@ -57,7 +57,7 @@ Since Datadog SCA covers your software development lifecycle end-to-end, the lib
 
 ## Explore and manage SCA vulnerabilities
 
-<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the Software Development Lifecycle (SDLC). Application Security summarizes results found in the default branches of your repositories and in your running services. To view vulnerabilities found in different branches and commits, head to <a href="/code_analysis/software_composition_analysis" target="_blank">Code Analysis</a> for more details.</div>
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Application Security summarizes results found in the default branches of your repositories and in your running services. To view vulnerabilities found in different branches and commits, see <a href="/code_analysis/software_composition_analysis" target="_blank">Code Analysis</a> for more details.</div>
 
 The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA and reports security vulnerabilities associated with them. 
 
