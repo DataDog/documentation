@@ -87,7 +87,6 @@ def grouped_globs_table(list_of_contents):
     sorted_list_of_contents = sorted(list_of_contents, key=lambda k: k['repo_name'])
     for key, value in groupby(sorted_list_of_contents, lambda k: k['repo_name']):
         grouped_globs = [x['globs'] for x in value]
-        print(grouped_globs)
         data[key] = list(chain.from_iterable(grouped_globs))
     return data
 
@@ -294,5 +293,5 @@ def download_cached_content_into_repo(self):
             shutil.copytree('temp/data', 'data', dirs_exist_ok=True)
 
     # Cleanup temporary dir after cache download complete
-    # if os.path.isdir('temp'):
-    #     shutil.rmtree('temp')
+    if os.path.isdir('temp'):
+        shutil.rmtree('temp')
