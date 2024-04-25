@@ -299,7 +299,6 @@ instances:
 
 Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
 
-
 ```yaml
 apiVersion: v1
 kind: Service
@@ -309,6 +308,9 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
+    # All arrays below require an entry for each instance,
+    # or see the next example for a more concise configuration option
+    # for multiple instances
     ad.datadoghq.com/service.check_names: '["mysql"]'
     ad.datadoghq.com/service.init_configs: '[{}]'
     ad.datadoghq.com/service.instances: |
@@ -318,7 +320,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "<UNIQUE_PASSWORD>"
         }
       ]
 spec:
@@ -328,6 +330,38 @@ spec:
     targetPort: 3306
     name: mysql
 ```
+
+A more concise configuration for multiple instances can be written as follows:
+
+```yaml
+apiVersion: v1 
+kind: Service 
+metadata: 
+  annotations: 
+    ad.datadoghq.com/service.checks: | 
+      { 
+        "mysql": { 
+          "instances": [ 
+            { 
+              "dbm":true, 
+              "host":"<AWS_INSTANCE_ENDPOINT>", 
+              "password":"<UNIQUE_PASSWORD>", 
+              "port":3306, 
+              "username":"datadog" 
+            }, 
+            { 
+              "dbm":true, 
+              "host":"<AWS_INSTANCE_ENDPOINT>", 
+              "password":"<UNIQUE_PASSWORD>", 
+              "port":3306, 
+              "username":"datadog" 
+            },
+          ]
+        }
+      }
+```
+
+
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
 
 The Cluster Agent automatically registers this configuration and begins running the MySQL check.
