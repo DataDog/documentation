@@ -38,9 +38,9 @@ Custom tags and measures work with the following CI providers:
 
 Install the [`datadog-ci`][1] (>=v1.15.0) CLI globally using `npm`:
 
-{{< code-block lang="shell" >}}
+```shell
 npm install -g @datadog/datadog-ci
-{{< /code-block >}}
+```
 
 Alternatively, you can try and use the beta [standalone binary][2] if you don't want to use `npm`.
 
@@ -48,25 +48,25 @@ Alternatively, you can try and use the beta [standalone binary][2] if you don't 
 {{% tab "Linux" %}}
 To install the standalone binary on Linux, run:
 
-{{< code-block lang="shell" >}}
+```shell
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
-{{< /code-block >}}
+```
 {{% /tab %}}
 
 {{% tab "MacOS" %}}
 To install the standalone binary on MacOS, run:
 
-{{< code-block lang="shell" >}}
+```shell
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
-{{< /code-block >}}
+```
 {{% /tab %}}
 
 {{% tab "Windows" %}}
 To install the standalone binary on Windows, run:
 
-{{< code-block lang="shell" >}}
+```shell
 Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
-{{< /code-block >}}
+```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -74,27 +74,25 @@ Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/do
 
 Tags can be added to the pipeline span or to the job span. 
 
-{{< site-region region="us" >}}
-
 To do this, run the `tag` command:
 
-{{< code-block lang="shell" >}}
-datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
-{{< /code-block >}}
+```shell
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
+```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the tag `team` to the pipeline span.
 
-{{< code-block lang="shell" >}}
-datadog-ci tag --level pipeline --tags team:backend
-{{< /code-block >}}
+```shell
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag --level pipeline --tags team:backend
+```
 
 The following example adds the tag `go.version` to the span for the current job:
 
-{{< code-block lang="shell" >}}
-datadog-ci tag --level job --tags "go.version:`go version`"
-{{< /code-block >}}
+```shell
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci tag --level job --tags "go.version:`go version`"
+```
 
 To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4], and click **Create Facet**.
 
@@ -104,240 +102,23 @@ To create a facet from a tag, click the gear icon next to a tag name on the [Pip
 
 To add numerical tags to the pipeline span or the job span, run the `measure` command:
 
-{{< code-block lang="shell" >}}
-datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
-{{< /code-block >}}
+```shell
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
+```
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
 
 The following example adds the measure `error_rate` to the pipeline span:
 
-{{< code-block lang="shell" >}}
-datadog-ci measure --level pipeline --measures "error_rate:0.56"
-{{< /code-block >}}
+```shell
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level pipeline --measures "error_rate:0.56"
+```
 
 The following example adds a measure `binary.size` to the span for the currently running job:
 
-{{< code-block lang="shell" >}}
-datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
-{{< /code-block >}}
-
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://app.datadoghq.com/ci/pipeline-executions
-[12]: /getting_started/site/
-
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-
-To do this, run the `tag` command:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us3.datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
-{{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
-
-The following example adds the tag `team` to the pipeline span.
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us3.datadoghq.com datadog-ci tag --level pipeline --tags team:backend
-{{< /code-block >}}
-
-The following example adds the tag `go.version` to the span for the current job:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us3.datadoghq.com datadog-ci tag --level job --tags "go.version:`go version`"
-{{< /code-block >}}
-
-To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
-
-{{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
-
-## Add measures to pipeline traces
-
-To add numerical tags to the pipeline span or the job span, run the `measure` command:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us3.datadoghq.com datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
-{{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
-
-The following example adds the measure `error_rate` to the pipeline span:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us3.datadoghq.com datadog-ci measure --level pipeline --measures "error_rate:0.56"
-{{< /code-block >}}
-
-The following example adds a measure `binary.size` to the span for the currently running job:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us3.datadoghq.com datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
-{{< /code-block >}}
-
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://app.datadoghq.com/ci/pipeline-executions
-[12]: /getting_started/site/
-
-{{< /site-region >}}
-{{< site-region region="us5" >}}
-
-To do this, run the `tag` command:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us5.datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
-{{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
-
-The following example adds the tag `team` to the pipeline span.
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level pipeline --tags team:backend
-{{< /code-block >}}
-
-The following example adds the tag `go.version` to the span for the current job:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level job --tags "go.version:`go version`"
-{{< /code-block >}}
-
-To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
-
-{{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
-
-## Add measures to pipeline traces
-
-To add numerical tags to the pipeline span or the job span, run the `measure` command:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us5.datadoghq.com datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
-{{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
-
-The following example adds the measure `error_rate` to the pipeline span:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us5.datadoghq.com datadog-ci measure --level pipeline --measures "error_rate:0.56"
-{{< /code-block >}}
-
-The following example adds a measure `binary.size` to the span for the currently running job:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=us5.datadoghq.com datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
-{{< /code-block >}}
-
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://app.datadoghq.com/ci/pipeline-executions
-[12]: /getting_started/site/
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-To do this, run the `tag` command:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.eu datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
-{{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
-
-The following example adds the tag `team` to the pipeline span.
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.eu datadog-ci tag --level pipeline --tags team:backend
-{{< /code-block >}}
-
-The following example adds the tag `go.version` to the span for the current job:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.eu datadog-ci tag --level job --tags "go.version:`go version`"
-{{< /code-block >}}
-
-To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
-
-{{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
-
-## Add measures to pipeline traces
-
-To add numerical tags to the pipeline span or the job span, run the `measure` command:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.eu datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
-{{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
-
-The following example adds the measure `error_rate` to the pipeline span:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.eu datadog-ci measure --level pipeline --measures "error_rate:0.56"
-{{< /code-block >}}
-
-The following example adds a measure `binary.size` to the span for the currently running job:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.eu datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
-{{< /code-block >}}
-
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://app.datadoghq.com/ci/pipeline-executions
-[12]: /getting_started/site/
-
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-
-To do this, run the `tag` command:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=ap1.datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
-{{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
-
-The following example adds the tag `team` to the pipeline span.
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=ap1.datadoghq.com datadog-ci tag --level pipeline --tags team:backend
-{{< /code-block >}}
-
-The following example adds the tag `go.version` to the span for the current job:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=ap1.datadoghq.com datadog-ci tag --level job --tags "go.version:`go version`"
-{{< /code-block >}}
-
-To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4] and click **Create Facet**.
-
-{{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
-
-## Add measures to pipeline traces
-
-To add numerical tags to the pipeline span or the job span, run the `measure` command:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=ap1.datadoghq.com datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
-{{< /code-block >}}
-
-You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
-
-The following example adds the measure `error_rate` to the pipeline span:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=ap1.datadoghq.com datadog-ci measure --level pipeline --measures "error_rate:0.56"
-{{< /code-block >}}
-
-The following example adds a measure `binary.size` to the span for the currently running job:
-
-{{< code-block lang="shell" >}}
-DATADOG_SITE=ap1.datadoghq.com datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
-{{< /code-block >}}
-
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://app.datadoghq.com/ci/pipeline-executions
-[12]: /getting_started/site/
-{{< /site-region >}}
+```shell
+DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
+```
 
 To create a measure, click the gear icon next to a measures name on the [Pipeline Executions page][4] and click **Create Measure**.
 
