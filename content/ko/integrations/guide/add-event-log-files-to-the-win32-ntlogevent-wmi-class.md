@@ -1,8 +1,8 @@
 ---
-title: `Win32_NTLogEvent` WMI 클래스에 이벤트 로그 파일 추가
-kind: 가이드
 aliases:
-  - /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
+- /ko/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
+kind: 가이드
+title: Win32_NTLogEvent WMI 클래스에 이벤트 로그 파일 추가
 ---
 
 일부 이벤트 로그만 Win32_NTLogEvent WMI 클래스에 포함됩니다. 이벤트 뷰어 통합은 이러한 클래스의 이벤트만을 수집할 수 있으므로 윈도우즈(Windows) 레지스트리를 수정하여 이 클래스 범위 외의 이벤트 로그를 추가합니다.
@@ -41,4 +41,3 @@ $ Get-WmiObject -Query "Select EventCode,SourceName,TimeGenerated,Type,Insertion
 
 참고: 쿼리를 실행할 때 여전히 이벤트가 없으면 이벤트 뷰어를 확인하여 로그 파일에 이벤트가 있는지 확인하세요. 또한 이벤트 로그가 비활성화되어 있지 않은지, 사용 가능한 최근 이벤트가 있는지 확인하세요.
 {{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_7.png" alt="오른쪽에 작업 목록을 표시하는 윈도우즈(Windows) 이벤트 뷰어. 여기에서 로그를 활성화하라는 메모와 함께 로그 활성화 작업이 강조 표시되어 있습니다." >}}
-
