@@ -46,7 +46,12 @@ Supported PostgreSQL versions
 : 10, 11, 12, 13, 14, 15
 {% /if %}
 <!-- Supported PG versions for RDS, self-hosted, and Aurora -->
-{% if or(equals($postgres_host, "rds"), equals($postgres_host, "self-hosted"), equals($postgres_host, "aurora")) %}
+{% if or(
+    equals($postgres_host, "rds"), 
+    equals($postgres_host, "self-hosted"), 
+    equals($postgres_host, "aurora")
+    ) 
+%}
 Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13, 14, 15, 16
 {% /if %}
@@ -58,7 +63,7 @@ Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
-<!-- Every PG host except for Aurora -->
+<!-- Every host except for Aurora -->
 {% if not(equals($postgres_host, "aurora")) %}
 Proxies, load balancers, and connection poolers
 : The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
@@ -76,6 +81,17 @@ Data security considerations
 ### Setup
 
 Complete the following steps to enable Database Monitoring with your Postgres database:
+
+<!-- Aurora -->
+
+<!-- Azure -->
+
+<!-- Google Cloud SQL -->
+
+<!-- RDS -->
+
+<!-- Self-hosted -->
+
 
 ## Setup - OLD
 For setup instructions, select your hosting type:
