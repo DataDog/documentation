@@ -159,7 +159,12 @@ ignore:
 
 ## Set up the GitHub integration 
 
-You must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see the offending code snippets as part of the Static Analysis results in the Datadog UI.
+You must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see the offending code snippets as part of the Static Analysis results in the Datadog UI. 
+
+When installing the GitHub App, the following permissions are required:
+
+1. `Content: Read` which will allow you to see code snippets displayed in the Datadog UI
+2. `Pull Request: Read & Write` which will allow Datadog to add feedback for violations directly in your pull requests using [PR Comments][11]
 
 ## Configure your CI/CD provider
 
@@ -209,3 +214,4 @@ To upload a SARIF report:
 [8]: https://github.com/DataDog/datadog-ci
 [9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [10]: /integrations/guide/source-code-integration
+[11]: /code_analysis/github_pull_requests/
