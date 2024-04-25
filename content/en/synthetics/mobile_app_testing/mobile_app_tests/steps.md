@@ -4,11 +4,12 @@ kind: documentation
 description: Learn how to automatically record and manually set steps in a mobile test recording.
 aliases:
 - /mobile_testing/mobile_app_tests/steps
+- /mobile_app_testing/mobile_app_tests/steps
 further_reading:
-- link: "/mobile_app_testing/mobile_app_tests/"
+- link: "/synthetics/mobile_app_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
-- link: "/mobile_app_testing/mobile_app_tests/advanced_options"
+- link: "/synthetics/mobile_app_testing/mobile_app_tests/advanced_options"
   tag: "Documentation"
   text: "Learn about advanced options in mobile tests"
 ---
