@@ -29,7 +29,7 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 - The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 - Datadog APM is configured for your application or service, and traces are being received by Datadog.
 
-## CSM
+## Cloud Security Management
 
 ### Amazon ECS
 
@@ -174,6 +174,8 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 
 ### Amazon EKS
 
+To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod with custom RBAC.
+
 #### Set up AWS EKS Fargate RBAC rules
 
 Use the following [Agent RBAC deployment instruction][6] before deploying the Agent as a sidecar.
@@ -186,7 +188,7 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 {{% csm-fargate-eks-sidecar %}}
 
-## ASM
+## Application Security Management
 
 ### Amazon ECS
 
@@ -204,7 +206,9 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 ### Amazon EKS
 
-?
+To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod with custom RBAC.
+
+- Confirm that ASM supports EKS on Fargate.
 
 ## Cloud SIEM
 
