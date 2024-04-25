@@ -51,7 +51,7 @@ Defining and tracking DORA metrics can help you identify areas of improvement fo
 
 ## Set up DORA Metrics
 
-The four DORA Metrics are calculated based on two types of events:
+The four DORA Metrics are calculated based on two types of events: deployments and failures. [Set up your data sources here][8].
 - **Deployment events**: Indicate that a new deployment has occurred for a service in a specific environment.
   Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate.
 - **Incident events**: Indicate that a new issue has occurred for a service in a specific environment.
@@ -109,3 +109,4 @@ The events can be queried and visualized with the [Events Explorer][7].
 [5]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products
 [6]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
 [7]: https://docs.datadoghq.com/service_management/events/explorer/
+[8]: /dora-metrics/setup/_index.md
