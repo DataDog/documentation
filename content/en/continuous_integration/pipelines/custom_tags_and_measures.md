@@ -87,13 +87,13 @@ You must specify a valid [Datadog API key][3] using the environment variable `DA
 The following example adds the tag `team` to the pipeline span.
 
 {{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.com datadog-ci tag --level pipeline --tags team:backend
+datadog-ci tag --level pipeline --tags team:backend
 {{< /code-block >}}
 
 The following example adds the tag `go.version` to the span for the current job:
 
 {{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.com datadog-ci tag --level job --tags "go.version:`go version`"
+datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
 
 To create a facet from a tag, click the gear icon next to a tag name on the [Pipeline Executions page][4], and click **Create Facet**.
@@ -105,7 +105,7 @@ To create a facet from a tag, click the gear icon next to a tag name on the [Pip
 To add numerical tags to the pipeline span or the job span, run the `measure` command:
 
 {{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.com datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
+datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
 {{< /code-block >}}
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
@@ -113,13 +113,13 @@ You must specify a valid [Datadog API key][3] using the environment variable `DA
 The following example adds the measure `error_rate` to the pipeline span:
 
 {{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.com datadog-ci measure --level pipeline --measures "error_rate:0.56"
+datadog-ci measure --level pipeline --measures "error_rate:0.56"
 {{< /code-block >}}
 
 The following example adds a measure `binary.size` to the span for the currently running job:
 
 {{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.com datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
+datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
 {{< /code-block >}}
 
 [3]: https://app.datadoghq.com/organization-settings/api-keys
@@ -185,7 +185,7 @@ DATADOG_SITE=us3.datadoghq.com datadog-ci measure --level job --measures "binary
 To do this, run the `tag` command:
 
 {{< code-block lang="shell" >}}
-DATADOG_SITE=datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
+DATADOG_SITE=us5.datadoghq.com datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY` and the [Datadog site][12] using the environment variable `DATADOG_SITE`.
