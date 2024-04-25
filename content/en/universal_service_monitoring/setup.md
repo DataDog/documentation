@@ -849,9 +849,9 @@ agents:
 
 {{< /tabs >}}
 
-### HTTP/2 Monitoring
+### HTTP/2 monitoring
 
-Universal Service Monitoring is available to capture HTTP/2 and gRPC traffic.
+Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
 
 Requires Agent version 7.53 or greater.
 
@@ -872,7 +872,6 @@ service_monitoring_config:
 DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING=true
 ```
 {{% /tab %}}
-
 {{% tab "Helm" %}}
 
 ```conf
