@@ -14,16 +14,17 @@ Event Management correlates related events and automatically consolidates them i
 From the [Correlation][1] page, find the pattern you want to analyze and click **Triage Cases** at the end of the same row. You can also click **View All Cases** at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
 
 ## Event Management Case
-**Priority**: this is automatically updated to the highest priority of the correlated alert 
-**Attribute**: those are tags from the underline events. you can modify them and it won't get overriden by the engine 
-**Status**: case status is managed by system, user update will get overriden by system. it will auto resolve the case when all of the underline alerts recover
+**Priority**: highest priority of correlated alerts 
+**Attribute**: tags from correlated events. user updates won't get overriden by the engine 
+**Status**: automatically managed by system, user updates will get overriden by system. Case will auto resolve when all of the underline alerts recover and automatically reopen when any alert re-trigger during the maximum alive timewindow
 **Investigation**
 1. From the case Overview, click **Investigation**
-1. Under the *Correlations* section, you can see a list of alerts and events. 
-1. Click into any of the alerts or events to view all related metrics and logs in context of the alert.
-1. (Optional) Select any alerts or events you want to remove that are not related to the case.
-1. Under the *Related Metrics* section, compare all related metrics or group by tags.
+1. Under the *Correlations* section, you can see a list of alerts and events
+1. Click into any of the alerts or events to view all related metrics and logs in context of the alert
+1. (Optional) Select any alerts or events you want to remove that are not related to the case
+1. Under the *Related Metrics* section, compare all related metrics or group by tags
 **Deletion**: select the checkbox on the alert to delete any irrelavant alerts, deleted alerts won't get correlated again
+**Enriched Alerts**: some cases will get automatically enriched with intelligent alerts that Datadog thinks are related based on your infrastructure. enriched alert doesn't impact case attribute, priority and status. 
 
 ## Create a notification or ticket
 
