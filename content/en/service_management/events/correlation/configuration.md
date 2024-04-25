@@ -14,7 +14,7 @@ further_reading:
 
 There are two types of correlations: 
 
-- **Pattern-based**: you control how the events/alerts are correlated, though the information available within them. 
+- **Pattern-based**: you control how the events/alerts are correlated, though the information available within them. Datadog also automatically enriches your pattern based correlation with intelligent alerts powered by ML.
 - **Intelligent (Private beta)**: uses a ML modeling approach, where Datadog automatically correlates on your behalf, without the need for any configuration. 
 
 

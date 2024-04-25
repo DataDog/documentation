@@ -13,14 +13,17 @@ Event Management correlates related events and automatically consolidates them i
 
 From the [Correlation][1] page, find the pattern you want to analyze and click **Triage Cases** at the end of the same row. You can also click **View All Cases** at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
 
-To investigate a case:
-1. Open the case you are investigating.
+## Event Management Case
+**Priority**: this is automatically updated to the highest priority of the correlated alert 
+**Attribute**: those are tags from the underline events. you can modify them and it won't get overriden by the engine 
+**Status**: case status is managed by system, user update will get overriden by system. it will auto resolve the case when all of the underline alerts recover
+**Investigation**
 1. From the case Overview, click **Investigation**
 1. Under the *Correlations* section, you can see a list of alerts and events. 
 1. Click into any of the alerts or events to view all related metrics and logs in context of the alert.
 1. (Optional) Select any alerts or events you want to remove that are not related to the case.
 1. Under the *Related Metrics* section, compare all related metrics or group by tags.
-
+**Deletion**: select the checkbox on the alert to delete any irrelavant alerts, deleted alerts won't get correlated again
 
 ## Create a notification or ticket
 

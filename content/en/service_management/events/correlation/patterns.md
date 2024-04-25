@@ -12,12 +12,21 @@ To get you started, Datadog automatically suggests [pattern-based correlations][
 {{< img src="service_management/events/correlation/pattern/recommended_patterns_preview.png" alt="Correlation recommended patterns with the preview panel showing potential cases the pattern would create" style="width:100%;" >}}
 
 
-## Adjusting a pattern
+## Create a pattern
 
-To create or adjust a pattern-based correlation:
+To create a pattern-based correlation:
 1. Navigate to [Correlation][1].
-1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens a pattern configuration page.
-1. From the dropdown menu, select the alerting sources you want to correlate events for. 
+1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens pattern configuration page with out-of-the-box suggested pattern on the left side , and preview pattern output on the right side. 
+1. You can adjust the suggested pattern by clicking **+ Continue With Pattern**(this will take you to the pre-populated configuration page for additonal adjustment if needed) or choose to create your own by clicking **+ Personalize From Scratch**
+
+### Suggested pattern
+Suggested pattern are recommended based on your commonly used service, environment tags to help get started with event correlation quickly. 
+
+### Configuration
+Once you are at the [correlation configuration page][2]
+1. Select the event source you want to group on from the dropdown
+1. Define the grouping tags. Grouping tags are event facets. see advanced settings section below if you don't find the tag from the dropdown 
+1. To exclude any events from the source defined above, adding filtering event query in **Filter by these events or tags**
 
 ### Advanced settings (optional)
 1. Click **Show Advanced Settings**.
@@ -27,7 +36,7 @@ To create or adjust a pattern-based correlation:
    : is any event that is available in your Event Explorer as an event, but does not have an associated monitor or alert.
    
    Add grouping tags
-   : in addition to grouping by out-of-the-box tags like `Service` or `Env`, you can also group by a custom tag.
+   : to add new grouping tags, this is same as adding new event facet. 
 1. Under **Advanced correlation logic**, you can specify the minimum number of correlated events it takes to create a case and update the timeframe.
 
     **Timeframe explanation**
@@ -36,18 +45,22 @@ To create or adjust a pattern-based correlation:
     : The max duration that net new alerts will be added to a case 
 
     Deduplicate events for those alerts for
-    : The max duration current alerts which have been correlated, and continue to flap or have not resolved will be reviewed for, before opening new case....
+    : The max duration for current alerts which have been correlated, but continue to flap or have not resolved, will be deduped to the alert in the existing case before opening new case
 
+  Events first get deduplicated to alerts based on event aggregation key, alerts get correlated to case based on configuration 
     {{< img src="service_management/events/correlation/pattern/timeframe.png" alt="correlation timeframe explanation, see how alerts fold into a case" style="width:90%;" >}}
+  Check out API or integration page about how to setup aggregation key. Events without aggregation key will be deduped to one single alert within the timeframe
 
 
 ## Preview pattern output
 
-Preview the possible patterns and cases your configuration would potentially create. The preview panel displays the total number of ingested events, how many events would alert, and how many cases would be created based on the configuration. 
+Preview the possible patterns and cases your configuration would potentially create. The preview panel displays the total number of ingested events(limit to the first 1000 events), how many alerts would be deduped from events, and how many cases would be created based on the configuration. 
 
 Use this data to preview the impact of your correlations and understand the expected output of a pattern.
 
 {{< img src="service_management/events/correlation/pattern/preview_pattern_output.png" alt="Configuration for pattern-based correlation highlighting the preview panel; panel shows the number of ingested events that match your configuration, how many of those events alert, how much deduplication would occur, and the number of cases that would result." style="width:100%;" >}}
+
+*notes*: the title in preview case is default to the first alert in correlation. in real event management case, it will be intelligently generated. 
 
 ## Select a Case Management destination
 
@@ -55,9 +68,12 @@ Use this data to preview the impact of your correlations and understand the expe
 1. (Optional) Add a tag to resulting cases.
 1. Click **Save and Activate** to activate this pattern and group events into cases.
 
+## Update existing pattern
+**notes**: Once you update existing pattern, all current live cases will stop processing. New event matches the pattern will create new case. 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/event/correlation
+[2]: https://app.datadoghq.com/event/correlation/new
