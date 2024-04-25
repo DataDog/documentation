@@ -1,5 +1,5 @@
 ---
-title: Block Attackers
+title: Attackers Explorer
 kind: documentation
 disable_toc: false
 further_reading:
@@ -12,7 +12,7 @@ This topic describes how to use **Attackers Explorer** to investigate and block 
 
 ## Overview
 
-Datadog Application Security Management (ASM) identifies attackers using flagged IPs. Flagged IPs are IPs that have exceeded thresholds for abuse. You can pivot, investigate, and take action against the attackers identified using [Attackers Explorer][1]. 
+Datadog Application Security Management (ASM) identifies attackers using flagged IPs. Flagged IPs are IPs that have exceeded thresholds for abuse. You can pivot, investigate, and take action against the attackers Datadog identifies using [Attackers Explorer][1]. 
 
 ### How Attackers differs from Signals and Traces
 
@@ -66,7 +66,7 @@ To block an individual IP temporarily or permanently, do the following:
 
 ## Block IPs in bulk
 
-You can select multiple IPs and block them temporarily or permanently using the Attackers explorer's **Compare and Block** option. 
+You can select multiple IPs and block them temporarily or permanently using the Attackers Explorer's **Compare and Block** option. 
 
 **Compare and Block** provides metrics about the IPs to help you block with safety and confidence. For example, **Similarity Overview** and **Activity**, described later in this topic.
 
@@ -78,15 +78,7 @@ To compare and block IPs in bulk, do the following:
 
     {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
 
-4. In **Blocking Duration**, set a temporary time limit for blocking the selected IPs, or select **Permanently**.
-5. To block attackers, select **Block**.
-
-## Unblock or extend blocking
-
-After you have blocked an IP, the **Actions** column has two actions you can take: 
-
-- **Unblock**: Select this option to unblock the blocked IP.
-- **Extend:** Select this option to extend the time duration of a temporarily blocked IP.
+4. To block attackers, click **Block**.
 
 ## Block selected attackers metrics
 
@@ -94,7 +86,7 @@ When you select the **Compare and Block** option, the **Block selected attackers
 
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
 
-<div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the time selection on the **Attackers** explorer.</a></div>
+<div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the time selection on the **Attackers** sxplorer.</a></div>
 
 The **Block selected attackers** view metrics are explained in the following sections.
 
@@ -104,7 +96,7 @@ Contains the IPs selected from the explorer. Deselecting an IP removes it from t
 
 ### Similarity overview
 
-Each column exists to help block with confidence and safety. The provided attributes are also used by ASM's Attacker Similarity feature.
+Each column exists to help block with confidence and safety. The provided attributes are also used by ASM’s Attacker Similarity feature.
 
 ASNs
 : Autonomous System Numbers. Attacks with large numbers of IP addresses might originate from the same ASN, especially when attacks originate from data centers and cloud IPs.

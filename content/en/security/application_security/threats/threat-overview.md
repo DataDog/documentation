@@ -1,8 +1,7 @@
 ---
 title: Attack Summary
 kind: documentation
-aliases:
-  - /security/application_security/threats/threat-overview
+aliases:  
 ---
 
 {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the ASM Attack Summary page"  >}}
