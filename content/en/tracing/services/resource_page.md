@@ -21,7 +21,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-{{< img src="tracing/visualization/resource/resource-page.png" alt="The APM resource page" >}}
+{{< img src="tracing/visualization/resource/resource-page-cropped.png" alt="The APM resource page" >}}
 
 A resource is a particular action for a given [service][1] (typically an individual endpoint or query). Read more about resources in [Getting Started with APM][2]. For each resource, APM automatically generates a dashboard page covering:
 
