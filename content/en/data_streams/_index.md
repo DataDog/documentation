@@ -55,8 +55,6 @@ To get started, follow the installation instructions to configure services with 
 | Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
 | Go | All (with [manual instrumentation][1]) |
 
-- To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, enable remote configuration for your Agent and use [Configuration at Runtime][6]. 
-
 ## Explore Data Streams Monitoring
 
 ### Measure end-to-end pipeline health with new metrics
