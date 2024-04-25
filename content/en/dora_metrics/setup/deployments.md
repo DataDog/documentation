@@ -117,13 +117,13 @@ There are two requirements for calculating Change Lead Time:
 
 ### Breakdown metrics
 
-Datadog also provides the following breakdown metrics, which represent the different stages since a commit is made until it is deployed.
+Datadog breaks down change lead time into the following metrics, which represent the different stages from commit creation to deployment.
 
-To compute these metrics, the PR associated with a commit must be identified, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
+To compute these metrics, there must be a PR associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
 
 If a commit does not have an associated PR, only Time to Deploy and Deploy Time are available.
 
-- `dora.time_to_pr_ready`: Time from the commit creation until the PR is ready for review. This metric is only available for commits that were made before the PR is ready for review.
+- `dora.time_to_pr_ready`: Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR is ready for review.
 - `dora.review_time`: Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved.
 - `dora.merge_time`: Time from the last approval until the PR is merged.
 - `dora.time_to_deploy`: Time from PR merge to start of deployment. If a commit does not have an associated PR, this metric is calculated as the time from commit creation to start of deployment.
