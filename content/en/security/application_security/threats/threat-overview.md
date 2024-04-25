@@ -6,7 +6,7 @@ aliases:
 
 {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the ASM Attack Summary page"  >}}
 
-The ASM **Attack Summary** provides quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
+The ASM **Attack Summary** provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
 
 Each section of **Attack Summary** focuses on a different aspect of security with supporting information.
 
@@ -31,7 +31,7 @@ Attack Traffic Sources
 3. Block attack tools and ensure that customer scanners are part of an authorized vulnerability management program.
 4. Monitor business logic for spikes in credential stuffing attacks or risky payment activity.
 5. Use **Attack Traffic Sources** to compare the attack traffic sources with your expected customer locations.
-6. Use [Powerpacks](#using-the-powerpacks) to enhance your dashboards with the most relevant information.
+6. Use [Powerpacks](#using-powerpacks) to enhance your dashboards with the most relevant information.
 
 ### Using powerpacks
 

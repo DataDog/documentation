@@ -231,7 +231,7 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 {{< /learning-center-callout >}}
 
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
-  - Use the SLO Summary widget to visualize the status of a single SLO.
+  - Use the SLO Summary widget to visualize the status of a single SLO
   - Use the SLO List widget to visualize a set of SLOs
   - Graph 15 months' worth of metric-based SLO data with the [SLO data source][20] in both timeseries and scalar (query value, top list, table, change) widgets. 
   
