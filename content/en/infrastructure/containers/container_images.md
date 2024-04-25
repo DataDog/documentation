@@ -22,6 +22,10 @@ The [container images view][1] in Datadog provides key insights into every image
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The container images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
+The [container image trends view][9] provides high-level insights across all of your images in your containerized infrastructure. Container image trends metrics can help you answer key questions about your security posture and deployment footprint over the span of weeks and months.
+
+{{< img src="infrastructure/containerimages/container_image_trends.png" alt="The container images trends view highlighting image size, image age, vulnerabilities and running container count metrics" width="100%">}}
+
 ## Configure container images view
 
 Images on the container images view are collected from several different sources (Live Containers, Image Collection, and Amazon ECR). The following instructions describe how to enable images from each of these sources.
@@ -151,6 +155,14 @@ container_image:
 
 Set up the [AWS integration][4] to begin crawling Container Image metadata from Amazon ECR.
 
+## Configure container images trends
+
+Use the container image trends configuration modal and toggle **Enable Container Image Metric Collection** to turn on image metric generation.
+
+Image metrics are collected from the [Live Containers](#live-containers) and [Image Check](#image-collection) sources. Follow the same instructions as above to ensure that these collections are enabled across your entire infrastructure and take full advantage of the trends view.
+
+{{< img src="infrastructure/containerimages/container_image_trends_configuration_modal.png" alt="The container images trends configuration modal" width="100%">}}
+
 ## Container image tagging
 
 Tag and enrich your container images with arbitrary tags by using [extract labels as tags][6] configuration on the Agent. These tags are then picked by the Container Image check.
@@ -159,10 +171,11 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/containers/images
+[1]: https://app.datadoghq.com/container-images
 [2]: /security/cloud_security_management
 [3]: /infrastructure/containers/?tab=docker#setup
 [4]: /integrations/amazon_web_services/
 [5]: https://www.cisa.gov/sbom
 [6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [8]: /security/cloud_security_management/vulnerabilities
+[9]: https://app.datadoghq.com/container-images/image-trends

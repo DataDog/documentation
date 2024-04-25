@@ -185,6 +185,11 @@ The default app name.
 **Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
 
+`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
+: **INI**: `datadog.trace.128_bit_traceid_generation_enabled`<br>
+**Default**: `true`<br>
+When true, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
 **Default**: `0`<br>
@@ -603,7 +608,7 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[3]: /tracing/setup/nginx/#nginx-and-fastcgi
+[3]: /tracing/trace_collection/proxy_setup/?tab=nginx
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/

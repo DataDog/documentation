@@ -21,7 +21,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ## Identify code hotspots in slow traces
 
-{{< img src="profiler/code_hotspots_tab-2.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab shows profiling information for a APM trace span" >}}
 
 ### Prerequisites
 
@@ -179,7 +179,7 @@ Click the plus icon `+` to expand the stack trace to that method **in reverse or
 
 ### Span execution timeline view
 
-{{< img src="profiler/code_hotspots_tab-timeline.mp4" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" video=true >}}
+{{< img src="profiler/code_hotspots_tab-timeline.png" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" >}}
 
 The **Timeline** view surfaces time-based patterns and work distribution over the period of the span.
 
@@ -238,9 +238,9 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 ### Viewing a profile from a trace
 
-{{< img src="profiler/flamegraph_view-1.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
+{{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
 
-For each type from the breakdown, click **View In Full Page** to see the same data opened up in a in a new page . From there you can change visualization to the flame graph.
+For each type from the breakdown, click **Open in Profiling** to see the same data opened up in a new page. From there, you can change the visualization to a flame graph.
 Click the **Focus On** selector to define the scope of the data:
 
 - **Span & Children** scopes the profiling data to the selected span and all descendant spans in the same service.
@@ -320,23 +320,35 @@ With endpoint profiling you can:
 - Isolate the top endpoints responsible for the consumption of valuable resources such as CPU, memory, or exceptions. This is particularly helpful when you are generally trying to optimize your service for performance gains.
 - Understand if third-party code or runtime libraries are the reason for your endpoints being slow or resource-consumption heavy.
 
-{{< img src="profiler/endpoint_agg.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
+{{< img src="profiler/endpoint_agg.png" alt="Troubleshooting a slow endpoint by using endpoint aggregation" >}}
 
-### Track the endpoints that consume the most resources
+### Surface code that impacted your production latency
+
+In the APM Service page, use the information in the **Profiling** tab to correlate a latency or throughput change to a code performance change.
+
+In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
+
+```java
+Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
+```
+
+{{< img src="profiler/apm_service_page_pivot_to_contention_comparison.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
+
+### Track endpoints that consume the most resources
 
 It is valuable to track top endpoints that are consuming valuable resources such as CPU and wall time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service.
 
-The following image shows that `GET /store_history` is periodically impacting this service by consuming 20% of its CPU:
+The following image shows that `GET /store_history` is periodically impacting this service by consuming 20% of its CPU and 50% of its allocated memory:
 
-{{< img src="profiler/endpoint_metric.png" alt="Graphing top endpoints in terms of resource consumption" >}}
+{{< img src="profiler/apm_endpoint_metric.png" alt="Graphing top endpoints in terms of resource consumption" >}}
 
 ### Track average resource consumption per request
 
 Select `Per endpoint call` to see behavior changes even as traffic shifts over time. This is useful for progressive rollout sanity checks or analyzing daily traffic patterns.
 
-The following video shows that CPU per request doubled for `/GET train`:
+The following example shows that CPU per request increased for `/GET train`:
 
-{{< img src="profiler/endpoint_per_request.mp4" alt="Troubleshooting a endpoint that started using more resource per request" video=true >}}
+{{< img src="profiler/endpoint_per_request2.mp4" alt="Troubleshooting a endpoint that started using more resource per request" video="true" >}}
 
 ## Further reading
 

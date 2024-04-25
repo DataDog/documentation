@@ -47,7 +47,7 @@ For security admins or InfoSec teams, audit trail events help with compliance ch
 
 ## Setup
 
-To enable Datadog Audit Trail, navigate to your [Organization Settings][3] and select *Audit Trail Settings* under *Security*. Click the **Enable** button.
+To enable Datadog Audit Trail, navigate to your [Organization Settings][3] and select *Audit Trail Settings* under *COMPLIANCE*. Click the **Enable** button.
 
 {{< img src="account_management/audit_logs/audit_trail_settings.png" alt="The Audit Trail Settings page showing it disabled" style="width:85%;">}}
 

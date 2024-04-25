@@ -16,6 +16,10 @@ further_reading:
 - link: /security/application_security/threats/
   tag: Documentation
   text: Application Threat Management
+- link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
+  tag: Blog
+  text: La plateforme de sécurité Datadog propose davantage de fonctionnalités de
+    conformité et de protection contre les menaces pour Google Cloud
 kind: documentation
 title: Activer ASM pour la surveillance sans serveur
 type: multi-code-lang

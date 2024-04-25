@@ -13,7 +13,7 @@ description: Explore and dig into your database host health and configuration
 
 On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
-{{< img src="database_monitoring/db-list-details-panel.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
+{{< img src="database_monitoring/db-list-details-panel-cropped.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 In addition to a filterable graph of active connections for that host, the host details panel displays the following features.
 

@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
   tag: "Blog"
   text: "React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
+  tag: "Blog"
+  text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
 ---
 
 ## Overview

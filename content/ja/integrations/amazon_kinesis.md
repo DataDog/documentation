@@ -53,9 +53,9 @@ Amazon Kinesis は、膨大な分散型データストリームをリアルタ�
 
 #### ログの有効化
 
-Datadog は、Amazon Kinesis Delivery ストリームのデフォルトの宛先の 1 つです。 AWS は Amazon Kinesis Data Firehose を完全に管理しているため、ストリーミングログ用の追加のインフラストラクチャーや転送構成を維持する必要はありません。
+Datadog は、Amazon Kinesis Data Firehose 配信ストリームのデフォルトの宛先の一つです。AWS が Amazon Kinesis Data Firehose を完全に管理するため、ログのストリーミングに追加のインフラストラクチャーや転送構成を用意する必要はありません。
 
-AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定するか、CloudFormation テンプレートを使用して宛先を自動的に設定できます。
+AWS Firehose コンソールで Amazon Data 配信ストリームを設定するか、CloudFormation テンプレートを使用して宛先を自動的に設定できます。
 
 - [AWS Firehose コンソール][6]
 - [CloudFormation テンプレート][7]
@@ -93,7 +93,7 @@ Amazon Kinesis インテグレーションには、サービスのチェック�
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html
 [5]: https://app.datadoghq.com/integrations/amazon-kinesis
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=amazondatafirehosedeliverystream
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=cloudformationtemplate
 [8]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

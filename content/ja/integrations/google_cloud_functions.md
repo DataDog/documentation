@@ -21,6 +21,7 @@ short_description: 関数実行時間の最小、最大、平均を追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google Cloud Functions は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。
@@ -30,17 +31,17 @@ Google Functions からメトリクスを取得して、以下のことができ
 - 関数のパフォーマンスを視覚化。
 - 関数のパフォーマンスをアプリケーションと関連付け。
 
-## セットアップ
+## 計画と使用
 
 ### メトリクスの収集
 
-#### インストール
+#### インフラストラクチャーリスト
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-### ログの収集
+### 収集データ
 
-Google Cloud Function のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Cloud Function のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
 これが完了したら、Google Cloud Firestore のログを Google Cloud Function から Pub/Sub へエクスポートします。
 
@@ -49,23 +50,23 @@ Google Cloud Function のログは Google Cloud Logging により収集され、
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "google_cloud_functions" >}}
 
 
-### イベント
+### ヘルプ
 
 Google Cloud Functions インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Google Cloud Functions インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection

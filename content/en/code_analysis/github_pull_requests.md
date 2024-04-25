@@ -42,7 +42,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 1. In Datadog, navigate to [**Integrations > GitHub Applications > Add New GitHub Application**][3].
 1. Fill out any required details, such as the GitHub organization name.
-1. Under **Select Features**, check the **Static Analysis: Pull Request Review Comments** box.
+1. Under **Select Features**, check the **Code Analysis: Pull Request Review Comments** box.
 1. Under **Edit Permissions**, verify that the **Pull Requests** permission is set to **Read & Write**.
 1. Click **Create App in GitHub**.
 1. Enter a name for your app, and submit it.
@@ -55,7 +55,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 1. In Datadog, navigate to [**Integrations > GitHub Applications**][5], and search for the GitHub App you want to use for Code Analysis.
 {{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
-1. On the **Features** tab, look at the **Static Analysis: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
+1. On the **Features** tab, look at the **Code Analysis: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
 1. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
 {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
 1. Under the **Subscribe to events** heading, check the **Pull request** box.

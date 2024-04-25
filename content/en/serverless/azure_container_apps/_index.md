@@ -8,7 +8,7 @@ further_reading:
 ---
 
 ## Overview
-Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution, now in beta, for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 ### Prerequisites
 
@@ -20,7 +20,7 @@ You can instrument your application in one of two ways: [Dockerfile](#dockerfile
 
 ### Dockerfile
 
-Datadog publishes new releases of the serverless-init container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
+Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS' ECR, and on Docker Hub:
 
 | hub.docker.com | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
@@ -28,7 +28,7 @@ Datadog publishes new releases of the serverless-init container image to Google�
 
 Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
 
-* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking changes
 * `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
 * `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
@@ -102,7 +102,7 @@ az containerapp up \
 
 ### 3. Results
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to [**Infrastructure > Serverless**][17] to see your serverless metrics and traces.
 
 ## Additional configurations
 
@@ -114,7 +114,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Trace Sampling:**  To manage the APM traced request sampling rate for serverless applications, set the DD_TRACE_SAMPLE_RATE environment variable on the function to a value between 0.000 (no tracing of Container App requests) and 1.000 (trace all Container App requests).
 
-Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration.
+Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
 
 ### Environment Variables
 
@@ -160,3 +160,4 @@ RUN apt-get update && apt-get install -y ca-certificates
 [14]: /tracing/other_telemetry/connect_logs_and_traces/python
 [15]: /tracing/other_telemetry/connect_logs_and_traces/go
 [16]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[17]: https://app.datadoghq.com/functions?cloud=azure&entity_view=container_apps
