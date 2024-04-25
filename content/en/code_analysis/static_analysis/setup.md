@@ -161,10 +161,10 @@ ignore:
 
 You must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see the offending code snippets as part of the Static Analysis results in the Datadog UI. 
 
-When installing the GitHub App, the following permissions are required to enable certain features:
+When installing a GitHub App, the following permissions are required to enable certain features:
 
-1. `Content: Read` which will allow you to see code snippets displayed in the Datadog UI
-2. `Pull Request: Read & Write` which will allow Datadog to add feedback for violations directly in your pull requests using [PR Comments][11]
+- `Content: Read`, which allows you to see code snippets displayed in Datadog
+- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11]
 
 ## Configure your CI/CD provider
 
