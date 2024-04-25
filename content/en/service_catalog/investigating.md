@@ -1,5 +1,5 @@
 ---
-title: Investigating a Service
+title: Investigate a Service
 kind: documentation
 aliases:
   - /tracing/service_catalog/investigating

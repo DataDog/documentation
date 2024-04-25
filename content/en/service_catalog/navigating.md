@@ -1,8 +1,9 @@
 ---
-title: Navigating the Service Catalog
+title: Navigate the Service Catalog
 kind: documentation
 aliases:
   - /tracing/service_catalog/browsing
+  - /service_catalog/browsing
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
@@ -113,10 +114,6 @@ The **Software Delivery tab** provides several ways to assess and improve the pr
 
 To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
 
-## Manage service-related workflows
-
-[Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
-
 ### Find Service Catalog actions
 
 To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][15]. Filter for the actions you need:
@@ -155,5 +152,4 @@ Below is a comprehensive list of actions available for Service Catalog in Datado
 [11]: /cloud_cost_management/tag_pipelines
 [12]: https://app.datadoghq.com/ci/pipelines
 [13]: https://app.datadoghq.com/ci/static-analysis
-[14]: /service_management/workflows/
 [15]: /service_management/workflows/actions_catalog/

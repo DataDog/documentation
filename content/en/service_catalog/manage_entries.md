@@ -1,8 +1,6 @@
 ---
-title: Adding Entries to Service Catalog
+title: Manage Automatically Included Entries
 kind: documentation
-aliases:
-  - /tracing/service_catalog/setup
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"
@@ -21,10 +19,6 @@ further_reading:
   text: "Import Backstage YAML files into Datadog"
 ---
 
-## Overview
-
-Datadog Service Catalog is a centralized hub for your development teams to discover and understand critical components in your runtime envrionments. If you are using products that provide application performance telemetries such as APM, USM, and RUM, you can take advantage of the auto-discovery feature. If not, you can create your Service Catalog based on your existing knowledge base (with open-source solutions like Backstage or managed solutions like ServiceNow) or create entries from `service` tags from other Datadog products like infrastructure monitoring and Log Management. 
-
 ## Automatic service discovery
 
 Datadog Service Catalog includes both eBPF-based autodiscovery with [Universal Service Monitoring][17] and distributed tracing based detection with [APM][18]. RUM applications are included in the Service Catalog as well. If you are using any of these products, your catalog is pre-populated with entries.
@@ -32,6 +26,88 @@ Datadog Service Catalog includes both eBPF-based autodiscovery with [Universal S
 {{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
 Datadog automatically discovers the dependencies of instrumented services, including databases or third-party APIs, even if the dependency hasn't been instrumented. The Service Catalog lists these as separate entries. To differentiate auto-detected components from instrumented services, you can request access to the private beta for inferred services.
 {{< /callout >}}
+
+## Changing service color
+
+Service color is used in trace visualizations. Click the service type icon to change it.
+
+{{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
+
+### Updating service type and language
+With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
+
+### Service Definition Schema (v2.2) (Recommended)
+
+The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][15].
+
+#### Example
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+schema-version: v2.2
+dd-service: shopping-cart
+team: e-commerce
+application: shopping-app
+tier: "1"
+type: web
+languages:
+  - go
+  - python
+contacts:
+  - type: slack
+    contact: https://yourorg.slack.com/archives/e-commerce
+  - type: email
+    contact: ecommerce@example.com
+  - type: microsoft-teams
+    contact: https://teams.microsoft.com/example
+links:
+  - name: Runbook
+    type: runbook
+    url: http://runbook/shopping-cart
+  - name: Source
+    type: repo
+    provider: github
+    url: https://github.com/shopping-cart
+  - name: Deployment
+    type: repo
+    provider: github
+    url: https://github.com/shopping-cart
+  - name: Config
+    type: repo
+    provider: github
+    url: https://github.com/consul-config/shopping-cart
+  - name: E-Commerce Team
+    type: doc
+    provider: wiki
+    url: https://wiki/ecommerce
+  - name: Shopping Cart Architecture
+    type: doc
+    provider: wiki
+    url: https://wiki/ecommerce/shopping-cart
+  - name: Shopping Cart RFC
+    type: doc
+    provider: google doc
+    url: https://doc.google.com/shopping-cart
+tags:
+  - business-unit:retail
+  - cost-center:engineering
+integrations:
+  pagerduty:
+    service-url: https://www.pagerduty.com/service-directory/PSHOPPINGCART
+  opsgenie:
+    service-url: "https://www.opsgenie.com/service/uuid"
+    region: "US"
+ci-pipeline-fingerprints:
+  - id1
+  - id2
+extensions:
+  additionalProperties:
+    customField1: customValue1
+    customField2: customValue2
+{{< /code-block >}}
+
+## Manage service-related workflows
+
+[Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
+
 
 ## Create user-defined services 
 
@@ -67,48 +143,6 @@ External Resources (Optional)
 
 You can register multiple services in one YAML file by separating each definition with three dashes (`---`).
 
-## Import data from other sources
-
-### Backstage 
-
-{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
-
-If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
-
-If you use API or Terraform, replace the YAMLs in your requests. 
-
-If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][15] located at the root folder of a repo.
-
-Upon import, the following occurs:
-- Datadog only recognizes `kind:component` in Backstage YAMLs as services
-- `metadata.name` gets mapped to `dd-service`
-- `metadata.namespace` gets mapped to a custom tag with the format `namespace:${metadata.namespace}`
-- `spec.lifecycle` gets mapped to `lifecycle`
-- `spec.owner` gets mapped to `team`
-- `metadata.links` gets mapped to `links`
-  - The annotation `github.com/project-slug` maps to a link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}`
-- `metadata.description` gets mapped to `description`
-- `spec.system` gets mapped to `application`
-- Other `spec` values get mapped to custom tags
-
-### ServiceNow
-
-You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][16].
-
-## Manual Service Discovery through other Datadog telemetries
-
-To discover additional services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
-
-{{< img src="tracing/service_catalog/import_entries.png" alt="Import Entries tab in the Service Catalog setup and configuration section" style="width:90%;" >}}
-
-After you have imported some entries, they appear in the **Explore** tab. Entries may expire unless you add metadata such as the owner or contacts by [using the API][1] or the [GitHub integration][6].
-
-To remove your imported services from the default **Explore** view, click **Clear Previously Imported Services**. This removes all services that do not have metadata or do not have APM, Universal Service Monitoring (USM), or Real User Monitoring (RUM) telemetry.
-
-{{< img src="tracing/service_catalog/clear_imported_services.png" alt="Confirm the deletion of previously imported services in the Service Catalog setup and configuration section" style="width:90%;" >}}
-
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -119,6 +153,7 @@ To remove your imported services from the default **Explore** view, click **Clea
 [4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /integrations/github/
+[14]: /service_management/workflows/
 [15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
 [16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion
 [17]: https://docs.datadoghq.com/universal_service_monitoring/

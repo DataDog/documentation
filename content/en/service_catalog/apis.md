@@ -1,9 +1,10 @@
 ---
-title: Service Catalog API
+title: Service Catalog APIs
 kind: documentation
 aliases:
   - /tracing/faq/service_definition_api/
   - /tracing/service_catalog/service_definition_api
+  - /service_catalog/service_definition_api
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
@@ -26,15 +27,16 @@ algolia:
 
 ## Overview
 
-For more details about creating, getting, and deleting service definitions, see the [Service Definitions API reference][8].
+- To create, get, and delete service definitions, see the [Service Definitions API reference][1].
+- To create and update service scorecard rules and outcomes, see the [Service Scorecards API reference][2].
+
+
+
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/blog/unified-service-tagging/
-[2]: /tracing/service_catalog/
-[3]: /account_management/api-app-keys/
-[4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
-[7]: https://app.datadoghq.com/services/setup
-[8]: /api/latest/service-definition/
+[1]: /api/latest/service-definition/
+[2]: /api/latest/service-scorecards/
