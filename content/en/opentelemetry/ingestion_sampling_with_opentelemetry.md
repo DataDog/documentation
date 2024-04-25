@@ -28,23 +28,23 @@ This document demonstrates two primary methods for sending traces to Datadog wit
 
 ### Using the OpenTelemetry Collector
 
-With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog using the Datadog Exporter. Here, the Datadog Connector computes [APM trace metrics][4]:
+With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog using the Datadog Exporter. In this scenario, [APM trace metrics][4] are computed by the Datadog Connector:
 
-{{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_collector.png" alt="OTel APM Metrics computation using the Collector" style="width:100%;" >}}
+{{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_collector.png" alt="OpenTelemetry APM Metrics computation using the Collector" style="width:100%;" >}}
 
 Choose this method if you require the advanced processing capabilities of the OpenTelemetry Collector, such as tail-based sampling. To configure the Collector to receive traces, follow the instructions on [OpenTelemetry Collector and Datadog Exporter][16].
 
 ### Using Datadog Agent OTLP ingestion
 
-With this method, the Datadog Agent receives traces directly from OpenTelemetry SDKs using the OTLP protocol. This allows you to send traces to Datadog without running a separate OpenTelemetry Collector service. Here, the Agent computes APM trace metrics:
+With this method, the Datadog Agent receives traces directly from OpenTelemetry SDKs using the OTLP protocol. This allows you to send traces to Datadog without running a separate OpenTelemetry Collector service. In this scenario, APM trace metrics are computed by the Agent:
 
-{{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_agent.png" alt="OTel APM Metrics computation using the Datadog Agent" style="width:100%;" >}}
+{{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_agent.png" alt="OpenTelemetry APM Metrics computation using the Datadog Agent" style="width:100%;" >}}
 
 Choose this method if you prefer a simpler setup without the need for a separate OpenTelemetry Collector service. To configure the Datadog Agent to receive traces using OTLP, follow the instructions on [OTLP Ingestion by the Datadog Agent][15].
 
 ## Reducing ingestion volume
 
-With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry collector: 
+With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry Collector: 
 
 - **Head-based sampling** in the OpenTelemetry SDKs
 - **Tail-based sampling** in the OpenTelemetry Collector
@@ -52,7 +52,7 @@ With OpenTelemetry, you can configure sampling both in the OpenTelemetry librari
 
 ### Head-based sampling
 
-At the SDK level, you can implement _head-based sampling_. This is when the sampling decision is made at the beginning of the trace. This type of sampling is particularly useful for high-throughput applications, when you have a clear understanding of which traces are most important to ingest and want to make sampling decisions early in the tracing process.
+At the SDK level, you can implement _head-based sampling_. This is when the sampling decision is made at the beginning of the trace. This type of sampling is particularly useful for high-throughput applications, where you have a clear understanding of which traces are most important to ingest and want to make sampling decisions early in the tracing process.
 
 #### Configuring
 
@@ -60,24 +60,24 @@ To configure head-based sampling, use the [TraceIdRatioBased][5] or [ParentBased
 
 #### Considerations
 
-Head-based sampling affects the computation of APM metrics because only the sampled traces are sent to the OpenTelemetry Collector or Datadog Agent, and this is where the metrics calculation is done.
+Head-based sampling affects the computation of APM metrics. Only sampled traces are sent to the OpenTelemetry Collector or Datadog Agent, which perform metrics computation.
 
-To get accurate metrics, upscale them using [formulas and functions][7] in Datadog dashboards and monitors, provided that you know the configured sampling rate in the SDK.
+To approximate unsampled metrics from sampled metrics, use [formulas and functions][7] with the sampling rate configured in the SDK.
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
 
 ### Tail-based sampling
 
-At the OpenTelemetry Collector level, you can do _tail-based sampling_, which allows you to define more advanced rules to keep accrued visibility over error or high latency traces.
+At the OpenTelemetry Collector level, you can do _tail-based sampling_, which allows you to define more advanced rules to maintain visibility over traces with errors or high latency.
 
 #### Configuring
 
-To configure tail-based sampling, use the [Tail Sampling Processor][9] and [Probabilistic Sampling Processor][10] to sample traces based on a set of rules at the collector level.
+To configure tail-based sampling, use the [Tail Sampling Processor][9] or [Probabilistic Sampling Processor][10] to sample traces based on a set of rules at the collector level.
 
 #### Considerations
 
-Tail sampling's main limitation is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If the trace is distributed across multiple collector instances, there's a risk that some parts of a trace are dropped whereas some other parts of the same trace are sent to Datadog.
+A limitation of tail-based sampling is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If a trace is distributed across multiple collector instances, and tail-based sampling is used, some parts of that trace may not be sent to Datadog.
 
 To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, use the [Datadog Connector][11].
 
@@ -107,7 +107,7 @@ To configure probabilistic sampling, either:
 
 The probabilistic sampler ignores spans for which the sampling priority is set at the SDK level. Spans not captured by the probabilistic sampler may still be captured by the Datadog Agent's [error and rare samplers][12].
 
-## Monitoring ingested volumes from the Datadog UI
+## Monitoring ingested volumes in Datadog
 
 Use the [APM Estimated Usage dashboard][13] and the `datadog.estimated_usage.apm.ingested_bytes` metric to get visibility into your ingested volumes over a specific time period. Filter the dashboard to specific environments and services to see which services are responsible for the largest shares of the ingested volume.
 
