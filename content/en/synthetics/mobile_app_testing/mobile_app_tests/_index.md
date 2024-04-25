@@ -4,9 +4,8 @@ kind: documentation
 description: Learn how to start monitoring key business flows with mobile app tests.
 aliases:
 - /mobile_testing/mobile_app_tests
-- /mobile_app_testing/mobile_app_tests
 further_reading:
-- link: "/synthetics/mobile_app_testing/settings"
+- link: "/mobile_app_testing/settings"
   tag: "Documentation"
   text: "Learn about mobile test settings"
 - link: "/synthetics/browser_tests"

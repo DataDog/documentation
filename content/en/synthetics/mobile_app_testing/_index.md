@@ -4,15 +4,14 @@ kind: documentation
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
 aliases:
 - /mobile_testing
-- /mobile_app_testing/
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "/synthetics/mobile_app_testing/mobile_app_tests"
+- link: "/mobile_app_testing/mobile_app_tests"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
-- link: "/synthetics/mobile_app_testing/settings"
+- link: "/mobile_app_testing/settings"
   tag: "Documentation"
   text: "Learn how to upload your iOS or Android mobile applications"
 - link: "/continuous_testing/"

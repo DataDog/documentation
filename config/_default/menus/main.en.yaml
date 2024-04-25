@@ -4736,24 +4736,49 @@ menu:
       parent: synthetics_dashboards
       identifier: synthetics_dashboards_test_summary
       weight: 803
+    - name: Mobile Application Testing
+      url: synthetics/mobile_app_testing/
+      parent: synthetics
+      identifier: synthetics_mobile_app_testing
+      weight: 9
+    - name: Mobile App Tests
+      url: synthetics/mobile_app_testing/mobile_app_tests
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_mobile_app_tests
+      weight: 901
+    - name: Test Steps
+      url: synthetics/mobile_app_testing/mobile_app_tests/steps
+      parent: synthetics_mobile_app_testing_mobile_app_tests
+      identifier: synthetics_mobile_app_testing_mobile_app_tests_steps
+      weight: 9101
+    - name: Test Results
+      url: synthetics/mobile_app_testing/mobile_app_tests/results
+      parent: synthetics_mobile_app_testing_mobile_app_tests
+      identifier: synthetics_mobile_app_testing_mobile_app_tests_results
+      weight: 9102
+    - name: Advanced Options for Steps
+      url: synthetics/mobile_app_testing/mobile_app_tests/advanced_options
+      parent: synthetics_mobile_app_testing_mobile_app_tests
+      identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
+      weight: 9103
+    - name: Settings
+      url: synthetics/mobile_app_testing/settings
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_settings
+      weight: 902
     - name: APM Integration
       url: synthetics/apm/
       parent: synthetics
       identifier: synthetics_apm
-      weight: 9
+      weight: 10
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/settings/
       parent: synthetics
-      weight: 10
+      weight: 11
     - name: Metrics
       identifier: synthetics_metrics
       url: synthetics/metrics/
-      parent: synthetics
-      weight: 11
-    - name: Data Security
-      identifier: data_security_synthetics
-      url: data_security/synthetics/
       parent: synthetics
       weight: 12
     - name: Guides
@@ -4766,6 +4791,11 @@ menu:
       parent: synthetics
       identifier: synthetics_troubleshooting
       weight: 14
+    - name: Data Security
+      identifier: data_security_synthetics
+      url: data_security/synthetics/
+      parent: synthetics
+      weight: 15
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
@@ -4842,37 +4872,6 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_troubleshooting
       weight: 6
-    - name: Mobile Application Testing
-      url: mobile_app_testing/
-      parent: digital_experience_heading
-      identifier: mobile_app_testing
-      pre: mobile
-      weight: 70000
-    - name: Mobile App Tests
-      url: /mobile_app_testing/mobile_app_tests
-      parent: mobile_app_testing
-      identifier: mobile_app_testing_mobile_app_tests
-      weight: 1
-    - name: Test Steps
-      url: /mobile_app_testing/mobile_app_tests/steps
-      parent: mobile_app_testing_mobile_app_tests
-      identifier: mobile_app_testing_mobile_app_tests_steps
-      weight: 101
-    - name: Test Results
-      url: /mobile_app_testing/mobile_app_tests/results
-      parent: mobile_app_testing_mobile_app_tests
-      identifier: mobile_app_testing_mobile_app_tests_results
-      weight: 102
-    - name: Advanced Options for Steps
-      url: /mobile_app_testing/mobile_app_tests/advanced_options
-      parent: mobile_app_testing_mobile_app_tests
-      identifier: mobile_app_testing_mobile_app_tests_advanced_options
-      weight: 103
-    - name: Settings
-      url: /mobile_app_testing/settings
-      parent: mobile_app_testing
-      identifier: mobile_app_testing_settings
-      weight: 2
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
