@@ -25,7 +25,7 @@ further_reading:
 
 The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries enable you to run common queries and see snapshots of relevant metrics, so that you can see changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs to provide you with relevant insights into your network.
 
-{{< img src="network_performance_monitoring/network_analytics/main_page_npm3.png" alt="Main page" >}}
+{{< img src="network_performance_monitoring/network_analytics/main_page_npm3.png" alt="Network Analytics landing page under Network Performance" >}}
 
 ## Queries
 
