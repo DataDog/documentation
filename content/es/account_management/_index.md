@@ -47,9 +47,9 @@ Puedes configurar tu zona horaria y tus notificaciones de escritorio desde la [p
 
 ### Organizaciones
 
-La página **Organizations** (Organizaciones) de **Personal Settings** (Parámetros personales) muestra todas las organizaciones a las que estás asociado. Puedes cambiar de organización desde esta página o bien pasando el cursor sobre el menú de la cuenta a la izquierda del panel de navegación.
+La página **Organizations** (Organizaciones) en **Personal Settings** (Parámetros personales) muestra todas las organizaciones a las que te has asociado. Puedes cambiar de organización desde esta página o bien pasando el cursor sobre el menú de la cuenta, a la izquierda del panel de navegación.
 
-**Nota**: Si abandonas una organización, no podrás volver a unirte a no ser que te invite un administrador de esa organización.
+**Nota**: Si abandonas una organización, no podrás volver a unirte, a no ser que te invite un administrador de esa organización.
 
 Para unirte a una organización existente, debe invitarte un administrador. Cuando te invite, recibirás un correo electrónico con el asunto `You've been invited to join <Organization Name>`. Haz clic en el botón **Join Account** (Unirse a la cuenta) del correo electrónico.
 
@@ -63,12 +63,12 @@ Si eres administrador de una organización, consulta la documentación de refere
 
 ### Seguridad
 
-La pestaña **Application Keys** (Claves de aplicación) en **Personal Settings** (Parámetros personales) te permite gestionar tus claves de aplicación. Para copiar una clave, coloca el cursor encima hasta que veas el icono **Copy Key** (Copiar la clave) a la derecha y haz clic en él. También puedes hacer clic en una clave concreta para editar su nombre, ver cuándo fue creada, ver el perfil del propietario de la clave, copiarla o revocarla.
+La pestaña **Application Keys** (Claves de aplicación) en **Personal Settings** (Parámetros personales) te permite gestionar tus claves de aplicación. Para copiar una clave, pasa el cursor sobre ella hasta que veas el icono **Copy Key** (Copiar la clave) a la derecha y haz clic en él. También puedes hacer clic en una clave concreta para editar su nombre, ver cuándo fue creada, ver el perfil del propietario de la clave, copiarla o revocarla.
 ## Aspecto
 
-Puedes utilizar Datadog en modo oscuro. Para hacerlo, coloca el cursor encima de tu avatar, en la barra lateral o pulsa: `Ctrl+Opt+D` / `Ctrl+Alt+D`.
+Puedes utilizar Datadog en modo oscuro. Para hacerlo, pasa el cursor sobre tu avatar en la barra lateral o pulsa: `Ctrl+Opt+D` / `Ctrl+Alt+D`.
 
-Para adaptar el aspecto al de tu ordenador, selecciona la opción *System* (Sistema). Así, el aspecto de Datadog se adaptará automáticamente al tema que hayas definido en el sistema operativo.
+Para adaptar el aspecto al aspecto de tu ordenador, selecciona la opción *System* (Sistema). De esta manera, el aspecto de Datadog se adaptará automáticamente al tema que hayas definido en el sistema operativo.
 
 ## Conectarse a GitHub
 
