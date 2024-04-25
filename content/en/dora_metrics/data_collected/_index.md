@@ -41,7 +41,7 @@ All default metrics contain the following tags if any are available:
 
 **Note**: The `severity` tag is available for `dora.incidents_impact` and `dora.time_to_restore` metrics, if it is provided through the [DORA Metrics API][7].
 
-For more information about using reserved `env`, `service`, and `version` tags, see [Unified Service Tagging][6].
+For more information about using `env`, `service`, and `version` tags, see [Getting Started with Tags][6].
 
 ## Further Reading
 
@@ -52,5 +52,5 @@ For more information about using reserved `env`, `service`, and `version` tags, 
 [3]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [4]: /service_management/events/
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
-[6]: /getting_started/tagging/unified_service_tagging/
+[6]: /getting_started/tagging/
 [7]: /api/latest/dora-metrics/
