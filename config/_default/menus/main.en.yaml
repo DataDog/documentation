@@ -3476,7 +3476,7 @@ menu:
       weight: 303
     - name: Test Visibility
       url: tests/
-      pre: intelligent-test-runner
+      pre: ci
       parent: software_delivery_heading
       identifier: tests
       weight: 30000
@@ -3770,26 +3770,21 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_dual_ship_logs
       weight: 2
-    - name: Datadog Agent
-      url: observability_pipelines/dual_ship_logs/datadog_agent/
-      parent: observability_pipelines_dual_ship_logs
-      identifier: observability_pipelines_dual_ship_logs_datadog_agent
-      weight: 2001
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/dual_ship_logs/splunk_hec/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_hec
-      weight: 2002
+      weight: 2001
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/dual_ship_logs/splunk_tcp/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_tcp
-      weight: 2003
+      weight: 2002
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
-      weight: 2004
+      weight: 2003
     - name: Archive Logs
       url: observability_pipelines/archive_logs/
       parent: observability_pipelines
@@ -4137,6 +4132,11 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
       weight: 606
+    - name: Exclude Logs
+      url: logs/error_tracking/excluding_logs
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_excluding_logs
+      weight: 607
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -4555,10 +4555,10 @@ menu:
       parent: appsec_threats
       identifier: threats_threat_intelligence
       weight: 709
-    - name: Threat Overview
+    - name: Attack Summary
       url: security/application_security/threats/threat-overview/
       parent: appsec_threats
-      identifier: threats_threat_overview
+      identifier: attack_summary_overview
       weight: 710
     - name: API Security Inventory
       url: security/application_security/api-inventory/

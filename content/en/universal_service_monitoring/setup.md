@@ -849,6 +849,43 @@ agents:
 
 {{< /tabs >}}
 
+### HTTP/2 monitoring
+
+Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
+
+Requires Agent version 7.53 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enable_http2_monitoring: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING=true
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Path exclusion and replacement
 
 Use `http_replace_rules` or `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` to configure the Agent to drop HTTP endpoints that match a regex, or to convert matching endpoints into a different format.
