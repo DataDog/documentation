@@ -131,6 +131,8 @@ Displays property and value pairs in JSON format.
 
 ### Checkbox
 
+Checkboxes have the following properties.
+
 #### General
 
 Label
@@ -172,7 +174,7 @@ _optional_
 #### Events
 
 Event
-: **Value**: Change<br>
+: **Value**: change<br>
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
@@ -185,9 +187,87 @@ Displays property and value pairs in JSON format.
 
 ### Container
 
+Containers have the following properties.
+
+#### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
+
 ### Date range picker
 
+Date range pickers have the following properties.
+
+#### General
+
+Default timeframe
+: The default timeframe that the date picker displays.<br>
+**Value**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
+
+#### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Value**: change<br>
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
+
 ### JSON input
+
+#### General
+
+Label
+: The text displayed at the top of the JSON input element.
+
+Default value
+: The default JSON value that the element displays.
+
+#### Appearance
+
+Is Read Only
+: Determines whether the component is read only.<br>
+**Values**: on, off<br>
+_optional_
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
 
 ### Modal
 
