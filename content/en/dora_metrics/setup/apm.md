@@ -41,7 +41,7 @@ For service deployments tracked by APM to contribute to DORA Metrics, the follow
 ## Change lead time
 For service deployments tracked by APM to contribute to Change Lead Time, the following requirement must be met:
 - Your application telemetry is tagged with git information. You can enable this [in APM][4] or see [documentation][5].
-- Your repository metadata is synchronized to Datadog via the GitHub integration. APM Deployment Tracking is not available to customers 
+- Your repository metadata is synchronized to Datadog via the GitHub integration.
 
 For deployments identified via Deployment Tracking, change lead time is computed from time of first commit creation to when that commit is first seen in a new version.
 
