@@ -53,11 +53,11 @@ The visual accessibility preference has five different settings to address color
 
 ### Organizations
 
-The **Organizations** page in **Personal Settings** lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
+The [Organizations tab][12] in **Personal Settings** lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
-To join an existing organization, you must be invited by an administrator. After you are invited, an email is sent with the subject `You've been invited to join <Organization Name>`. Click the **Join Account** button in the email.
+To join an existing organization, you must be invited by an administrator. After you are invited, you are sent an email with the subject "You've been invited to join <Organization Name>". Click the **Join Account** button in the email.
 
 If you are an organization administrator, reference the additional documentation to:
 
@@ -69,7 +69,16 @@ If you are an organization administrator, reference the additional documentation
 
 ### Security
 
-The **Application Keys** tab in **Personal Settings** allows you to manage your application keys. To copy a key, hover over it until the **Copy Key** icon appears to the right, and click on it. You can also click into a specific key to edit its name, view when it was created, view the profile of the key's owner, copy it, or revoke it.
+#### Application Keys
+
+The [Application Keys tab][13] in **Personal Settings** allows you to manage your application keys. To copy a key, hover over it until the **Copy Key** icon appears to the right, and click on it. You can also click into a specific key to edit its name, view when it was created, view the profile of the key's owner, copy it, or revoke it.
+
+#### Apps
+
+The [Apps tab][14] in **Personal Settings** allows you to manage apps that have been installed or created by members of your organization. You can filter apps with a search string, or choose to view only enabled or disabled apps using checkboxes.
+
+When you hover over an app, the option to enable or disable it appears on the right of the app listing.
+
 ## Appearance
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
@@ -95,3 +104,6 @@ To disable your Datadog organization account, contact [Datadog support][10].
 [9]: /integrations/github/
 [10]: /help/
 [11]: https://app.datadoghq.com/personal-settings/profile
+[12]: https://app.datadoghq.com/personal-settings/organizations
+[13]: https://app.datadoghq.com/personal-settings/application-keys
+[14]: https://app.datadoghq.com/personal-settings/apps
