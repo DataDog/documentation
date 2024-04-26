@@ -21,7 +21,7 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 * [Python Tracer][2]
   * Kafka: v1.16.0 or later
   * Amazon SQS and Amazon Kinesis: v1.20.0
-  * RabbitMQ: v2.6.0
+  * RabbitMQ: v2.6.0 or later
 
 ### Installation
 
