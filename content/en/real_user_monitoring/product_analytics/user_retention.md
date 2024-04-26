@@ -1,14 +1,15 @@
 ---
-title: Retention Analysis
+title: User Retention
 kind: documentation
 aliases:
 - /real_user_monitoring/retention_analysis
+- /real_user_monitoring/product_analytics/retention_analysis
 ---
 
 ## Overview
 Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights into overall user satisfaction.
 
-Retention is measured within a given cohort of users that you define. A cohort is a group of users who participate in an initial event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete a return event, such as clicking the same link again or clicking a **Proceed to Payment** button. Only views and actions can act as events.
+User retention is measured within a given cohort of users that you define. A cohort is a group of users who participate in an initial event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete a return event, such as clicking the same link again or clicking a **Proceed to Payment** button. Only views and actions can act as events.
 
 The retention graph displays the percentage of users who completed the return event each week.
 
@@ -20,7 +21,7 @@ The unique user attributes field must be populated. See the [instructions for se
 
 ## Build a graph
 
-To build a retention graph, navigate to **[Digital Experience > Product Analytics > Retention Analysis][1]**, then follow the steps below.
+To build a retention graph, navigate to **[Digital Experience > Product Analytics > Retention Analysis][1]**, which takes you to the **User Retention** page, then follow the steps below.
 
 ### 1. Define the initial event
 1. Select the view or action to act as the initial event for defining a group of users.
@@ -67,9 +68,9 @@ Reading the **Dec 04 2023** row of the above graph from left to right:
 - In **Week 0**, 94% of those 144 users completed the return event.
 - In **Week 1**, 92% of the 144 users completed the return event.
 
-## Retention
+## Data retention
 
-Retention is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a [support ticket][5] to increase retention to 90 days at no additional cost.
+Data retention for this feature is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a [support ticket][5] to increase retention to 90 days at no additional cost.
 
 [1]: https://app.datadoghq.com/rum/retention-analysis
 [2]: /real_user_monitoring/browser/data_collected/#view-attributes
