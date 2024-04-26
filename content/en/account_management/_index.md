@@ -19,7 +19,7 @@ The personal settings pages in Datadog allow you to control how you appear to ot
 
 ### Profile
 
-Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address, and title here.
+Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address, and title from the [Profile tab][11] within the **Personal Settings** page.
 
 To update your picture, create an account on [Gravatar][1] and associate it with your email address.
 
@@ -28,22 +28,28 @@ If you log in to Datadog using Google authentication, your email address is prov
 ### Preferences
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
-You can set your timezone, desktop notifications, and email subscriptions from the [**Preferences** tab][1] within the **Personal Settings** page. Under email subscriptions, you have access to the following reports:
+You can manage your timezone, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the **Personal Settings** page. 
+
+#### Email subscriptions
+
+Under email subscriptions, you have access to the following reports:
 
 * Daily Digest
 * Weekly Digest
 
-If you are unsure if an email digest is relevant to you, view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to quickly unsubscribe from all email subscriptions.
-
-[1]: https://app.datadoghq.com/account/preferences
+If you are unsure if an email digest is relevant to you, you can view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to unsubscribe from all email subscriptions.
 {{% /site-region %}}
+
 
 {{% site-region region="gov" %}}
-
-You can set your timezone and desktop notifications from the [**Preferences** tab][1] within the **Personal Settings** page.
-
-[1]: https://app.datadoghq.com/account/preferences
+You can manage your timezone and visual accessibility preference from the [**Preferences** tab][3] within the **Personal Settings** page.
 {{% /site-region %}}
+
+#### Visual accessibility
+
+The visual accessibility preference has five different settings to address color vision deficiency, low visual acuity, and sensitivity to bright colors. If you opt in to an accessible color setting, Datadog translates all graphs that use the classic color palette to an accessible set of colors catered to your visual needs.
+
+**Note**: Your visual accessibility preference is saved locally in your browser. If you use a different browser or clear your cache, the preference is set to the default setting.
 
 ### Organizations
 
@@ -51,7 +57,7 @@ The **Organizations** page in **Personal Settings** lists all of the organizatio
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
-To join an existing organization, you must be invited by an administrator. Once invited, an email is sent with the subject `You've been invited to join <Organization Name>`. Click the **Join Account** button in the email.
+To join an existing organization, you must be invited by an administrator. After you are invited, an email is sent with the subject `You've been invited to join <Organization Name>`. Click the **Join Account** button in the email.
 
 If you are an organization administrator, reference the additional documentation to:
 
@@ -80,7 +86,7 @@ To disable your Datadog organization account, contact [Datadog support][10].
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en
-[3]: https://app.datadoghq.com/account/preferences
+[3]: https://app.datadoghq.com/personal-settings/preferences
 [4]: /account_management/users/
 [5]: /account_management/saml/
 [6]: /account_management/org_settings/#change-your-organization-name
@@ -88,3 +94,4 @@ To disable your Datadog organization account, contact [Datadog support][10].
 [8]: /account_management/org_settings/
 [9]: /integrations/github/
 [10]: /help/
+[11]: https://app.datadoghq.com/personal-settings/profile
