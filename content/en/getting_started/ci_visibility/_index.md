@@ -42,7 +42,7 @@ To start sending pipeline metrics, see the documentation for one of the followin
 
 </br>
 
-If your CI provider is not supported, you can programmatically send your pipeline events to Datadog using the [CI Visibility Pipelines API][16].
+If your CI provider is not supported, you can programmatically send your pipeline events to Datadog. See the [Send pipeline events to Datadog section](#send-pipeline-events-to-datadog).
 
 Depending on the CI provider(s) of choice, CI Visibility may not support all of the levels in your pipeline (stage, job, step, or command). For more information about how CI Visibility defines a CI pipeline, see the [Terminology section][4].
 
@@ -119,7 +119,7 @@ If you are using [supported providers][11], you can correlate infrastructure met
 
 ## Send pipeline events to Datadog
 
-For other pipeline providers and custom pipelines, you can programmatically send pipeline events to Datadog using the CI Visibility Pipelines API endpoint. For more information, see [Pipeline Data Model and Execution Types][13].
+For other pipeline providers and custom pipelines, you can programmatically send pipeline events to Datadog using the [CI Visibility Pipelines API][16]. For more information, see [Pipeline Data Model and Execution Types][13].
 
 Provide the following Git information (the repository URL, commit SHA, and the author email) of the commit that triggered the pipeline execution in the request.
 
