@@ -20,7 +20,7 @@ algolia:
 
 ## Overview
 
-CI Visibility, or CI Pipeline Visibility, allows you to monitor the health of your CI pipelines and visualize the performance of your pipeline executions as traces, where spans represent the executions of different parts of the pipeline. 
+CI Visibility, or CI Pipeline Visibility, allows you to monitor the health of your CI pipelines and visualize the performance of your pipeline executions as traces, where spans represent the different levels of the pipeline. 
 
 {{< img src="/getting_started/ci_visibility/pipelines_list.png" alt="A list view of your CI pipelines in Datadog CI Visibility" style="width:100%" >}}
 
@@ -28,9 +28,9 @@ You can forward CI job logs and automatically correlate them with your pipelines
 
 You can also use the `datadog-ci` CLI to [trace commands][2] in your pipelines, as well as the [custom tags and measures commands][3] to add user-defined text and numerical tags in your pipeline traces.
 
-CI Visibility provides DevOps and platform engineering organizations with comprehensive monitoring, analytics, and the ability to pinpoint and resolve bottlenecks, optimize resource allocation, and decrease pipeline costs. 
+CI Visibility provides DevOps and platform engineering organizations with comprehensive monitoring, analytics, and the ability to pinpoint and resolve bottlenecks, optimize resource allocation, and decrease CI costs. 
 
-By integrating performance metrics, logs, and alerts, your organization can maintain development speed, improve the reliability of your pipelines, and make data-informed decisions across cloud and self-hosted environments.
+By integrating performance metrics, logs, and alerts, organizations can improve development speed, increase the reliability of their pipelines, and make data-informed decisions across cloud and self-hosted environments.
 
 ## Set up your CI provider
 
@@ -52,11 +52,11 @@ Access your pipelines’ metrics (such as queue times, durations, percentiles, a
 
 {{< img src="/getting_started/ci_visibility/pipelines_dashboard.png" alt="An out-of-the-box dashboard with widgets displaying data collected from your pipelines, jobs, and stages in CI Visibility" style="width:100%" >}}
 
-You can create [dashboards][5] to visualize at which stages failures are happening in your pipelines, or use an [out-of-the-box dashboard][6] containing widgets populated with data collected in CI Visibility to visualize the health and performance of your CI pipelines, jobs, and stages.
+You can create [dashboards][5] to visualize at which points failures are happening in your pipelines, or use an [out-of-the-box dashboard][6] containing widgets populated with data collected in CI Visibility to visualize the health and performance of your CI pipelines, stages, and jobs.
 
 ## Search and manage your CI pipelines
 
-The [**CI Pipeline List** page][7] provides a comprehensive view of the performance and reliability of your CI pipelines, especially on the default branch. Access aggregated statistics, trends, and information about your build stages to identify and resolve issues like failures in production pipelines.
+The [**CI Pipeline List** page][7] provides a comprehensive view of the performance and reliability of your CI pipelines, for the default branch. Access aggregated statistics, trends, and information about your pipelines to identify and resolve issues like failures and regressions.
 
 To enhance troubleshooting and streamline your pipeline management processes, click on a pipeline to access insights, review execution histories, and pivot to logs and related telemetry data. For more information, see [Search and Manage CI Pipelines][8].
 
