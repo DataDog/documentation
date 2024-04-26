@@ -4556,7 +4556,7 @@ menu:
       identifier: threats_threat_intelligence
       weight: 709
     - name: Attack Summary
-      url: security/application_security/threats/threat-overview/
+      url: security/application_security/threats/attack-summary/
       parent: appsec_threats
       identifier: attack_summary_overview
       weight: 710

@@ -2,6 +2,8 @@
 title: Quality Gates Explorer
 kind: documentation
 description: Learn about the Quality Gates Explorer for quality gates and rule executions.
+aliases:
+- /continuous_integration/quality_gates/
 further_reading:
   - link: "/quality_gates/"
     tag: "Documentation"

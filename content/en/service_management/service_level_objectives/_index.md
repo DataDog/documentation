@@ -140,9 +140,9 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 ## Viewing SLOs
 
-Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by context.
+Group your SLOs by *any* tag to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by service, team, user journey, tier, or any other tag set on your SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_group_by.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
+{{< img src="service_management/service_level_objectives/slo_group_by_new.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
 Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
