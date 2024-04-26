@@ -4560,6 +4560,11 @@ menu:
       parent: appsec_threats
       identifier: attack_summary_overview
       weight: 710
+    - name: Attackers Explorer
+      url: security/application_security/threats/attacker-explorer/
+      parent: appsec_threats
+      identifier: threats_attackers
+      weight: 711      
     - name: API Security Inventory
       url: security/application_security/api-inventory/
       parent: application_security
