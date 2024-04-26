@@ -39,6 +39,16 @@ Once you identify a flaky test you want to fix, click on the test to see links t
 
 If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It is added again if it re-exhibits flaky behavior.
 
+### Flaky Tests in Default Branch
+
+The flaky tests table on the Test Branch page for the default branch shows all flaky tests that have exhibited flakiness in the default branch or in any other feature branch that had been merged.
+
+Flaky tests from merged feature branches are found checking which tests have exhibited flakiness up to 5000 previous commits using the Git commit history that the [Test Visibility libraries][4] collect and upload along with the test runs every time the testing phase of a particular commit is executed in your CI build.
+
+Limitations:
+* If you squash or reset + push force commits in your feature branch, flaky tests that have been detected in that branch won't be shown in the default branch as the commit history is altered. 
+* If a flaky test is detected and fixed in the same feature branch, it will appear as flaky test in the default branch as currently we cannot detect that the flaky test has been fixed. However, [you can remove that flaky test from the flaky tests table manually][5]. 
+
 ### New flaky tests
 
 New flaky tests are tests that exhibit flaky behavior and didn't previously exist in the Flaky Tests table for the current branch or default branch of the repository.
@@ -90,3 +100,5 @@ Failed test runs that were known to be flaky as per the definition above are dis
 [1]: /glossary/#flaky-test
 [2]: https://app.datadoghq.com/ci/test-runs
 [3]: https://app.datadoghq.com/ci/test-services?view=branches
+[4]: /tests/#use-ci-tests-data
+[5]: /tests/guides/flaky_test_management/#ignore-new-flaky-tests-detected-by-mistake
