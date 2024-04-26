@@ -69,7 +69,7 @@ If you are an organization administrator, reference the additional documentation
 
 ### Security
 
-#### Application Keys
+#### Application keys
 
 The [Application Keys tab][13] in **Personal Settings** allows you to manage your application keys. To copy a key, hover over it until the **Copy Key** icon appears to the right, and click on it. You can also click into a specific key to edit its name, view when it was created, view the profile of the key's owner, copy it, or revoke it.
 
