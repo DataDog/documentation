@@ -9,7 +9,7 @@ menu:
     url: /api/latest/using-the-api/
     weight: 5
   - identifier: API 범위
-    name: 승인 범위
+    name: 인증 범위
     parent: API 개요
     url: /api/latest/scopes/
     weight: 6
@@ -762,7 +762,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 이벤트
+    parent: embeddable-graphs
     url: '#create-embed'
   - generated: true
     identifier: embeddable-graphs-get-all-embeds
@@ -774,7 +774,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 이벤트
+    parent: embeddable-graphs
     url: '#get-all-embeds'
   - generated: true
     identifier: events
@@ -790,7 +790,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 이벤트
+    parent: events
     url: '#search-events'
   - generated: true
     identifier: events-get-an-event
@@ -1216,7 +1216,7 @@ menu:
     url: '#get-all-api-keys'
   - generated: true
     identifier: logs
-    name: 로그 전송
+    name: 로그
     url: /api/latest/logs/
   - generated: true
     identifier: logs-get-a-list-of-logs
@@ -1418,7 +1418,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 메트릭
+    parent: logs-pipelines
     url: '#update-pipeline-order'
   - generated: true
     identifier: logs-pipelines-get-pipeline-order
@@ -1430,11 +1430,11 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 메트릭
+    parent: logs-pipelines
     url: '#get-pipeline-order'
   - generated: true
-    identifier: metrics
-    name: 메트릭 이름 기준으로 개별 메트릭 볼륨 목록 표시
+    identifier: 메트릭
+    name: 메트릭
     url: /api/latest/metrics/
   - generated: true
     identifier: metrics-query-timeseries-data-across-multiple-products
@@ -1653,7 +1653,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: metrics
+    parent: 메트릭
     url: '#edit-metric-metadata'
   - generated: true
     identifier: metrics-get-metric-metadata
@@ -1665,7 +1665,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: metrics
+    parent: 메트릭
     url: '#get-metric-metadata'
   - generated: true
     identifier: metrics-get-active-metrics-list
@@ -1677,7 +1677,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: metrics
+    parent: 메트릭
     url: '#get-active-metrics-list'
   - generated: true
     identifier: metrics-submit-distribution-points
@@ -1689,7 +1689,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: metrics
+    parent: 메트릭
     url: '#submit-distribution-points'
   - generated: true
     identifier: monitors
@@ -2729,7 +2729,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: slack-integration
     url: '#update-a-slack-integration-channel'
   - generated: true
     identifier: slack-integration-get-a-slack-integration-channel
@@ -3097,7 +3097,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: synthetics
     url: '#create-a-browser-test'
   - generated: true
     identifier: synthetics-edit-an-api-test
@@ -3109,7 +3109,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: synthetics
     url: '#edit-an-api-test'
   - generated: true
     identifier: synthetics-get-an-api-test
@@ -3145,7 +3145,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: synthetics
     url: '#create-a-test'
   - generated: true
     identifier: synthetics-get-the-list-of-all-synthetic-tests
@@ -3209,7 +3209,7 @@ menu:
     url: '#delete-a-private-location'
   - generated: true
     identifier: synthetics-create-a-private-location
-    name: 타임보드
+    name: 프라이빗 위치 생성
     params:
       operationids:
       - CreatePrivateLocation

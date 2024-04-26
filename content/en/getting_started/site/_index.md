@@ -2,9 +2,9 @@
 title: Getting Started with Datadog Sites
 kind: documentation
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/dd-201'
+- link: 'https://learn.datadoghq.com/courses/dashboards-slos'
   tag: 'Learning Center'
-  text: 'Datadog 201: Becoming a Power User'
+  text: 'Create Business-Critical Insights Using Dashboards and SLOs'
 - link: '/agent/configuration/dual-shipping/'
   tag: 'Guide'
   text: 'Dual Shipping'
