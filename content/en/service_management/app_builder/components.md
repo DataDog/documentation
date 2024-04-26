@@ -86,11 +86,11 @@ Callout values have the following properties.
 
 Label
 : The text that displays at the top of the callout element.<br>
-**Value**: expression or string<br>
+**Value**: expression or string
 
 Value
 : The value that the callout highlights.<br>
-**Value**: expression or string<br>
+**Value**: expression or string
 
 Unit
 : The unit associated with the value.<br>
@@ -235,6 +235,8 @@ Displays property and value pairs in JSON format.
 
 ### JSON input
 
+JSON inputs have the following properties.
+
 #### General
 
 Label
@@ -271,19 +273,206 @@ Displays property and value pairs in JSON format.
 
 ### Modal
 
+Modals have the following properties.
+
+#### General
+
+Title
+: The title of the modal.<br>
+**Value**: expression or string
+
+#### Appearance
+
+Size
+: The scale of the modal.<br>
+**Values**: sm, md, lg
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Values**: toggleOpen, close, open
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
+
 ### Number input
+
+Number inputs have the following properties.
+
+Label
+: The text that displays at the top of the number input element.<br>
+**Value**: expression or string
+
+Default value
+: The default value that the app populates in the input box.<br>
+**Value**: number
+
+Placeholder text
+: The text that shows when no value is entered.<br>
+**Value**: expression or string
+
+#### Validation
+
+Min
+: The minimum value the number input accepts.<br>
+**Value**: number
+
+Max
+: The maximum value the number input accepts.<br>
+**Value**: number
+
+#### Appearance
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Values**: on, off<br>
+_optional_
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
+
 
 ### Radio
 
+Radios have the following properties.
+
+#### General
+
+Label
+: The text that displays at the top of the radio element.<br>
+**Value**: expression or string
+
+Options
+: The list of radio button options that a user can select from.<br>
+**Value**: expression or string
+**Example**:<br>
+: {{< code-block lang="json" disable_copy="true">}}${[
+    {
+        "label": "Staging",
+        "value": "staging"
+    },
+    {
+        "label": "Production",
+        "value": "production"
+    }
+]}{{< /code-block >}}
+
+Default value
+: The value that is selected when the radio loads.<br>
+**Value**: expression or string
+
+#### Appearance
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Values**: on, off<br>
+_optional_
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
+
 ### Search
 
+Search elements have the following properties.
+
+#### General
+
+Default value
+: The default value that the app populates in the search box.<br>
+**Value**: expression or string
+
+Placeholder text
+: The text that shows when no value is entered.<br>
+**Value**: expression or string
+
+
+#### Appearance
+
+Size
+: The scale of the search element.<br>
+**Values**: sm, md, lg
+
+Is Loading
+: Shows a loading indicator.<br>
+**Values**: on, off<br>
+_optional_
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Value**: change, submit
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
+
 ### Select
+
+
+
+
+
 
 ### Table
 
 ### Text
 
 ### Text input
+
+
 
 ## Further reading
 
