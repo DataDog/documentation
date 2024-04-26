@@ -19,6 +19,10 @@ To create a pattern-based correlation:
 1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens pattern configuration page with out-of-the-box suggested pattern on the left side , and preview pattern output on the right side. 
 1. You can adjust the suggested pattern by clicking **+ Continue With Pattern**(this will take you to the pre-populated configuration page for additonal adjustment if needed) or choose to create your own by clicking **+ Personalize From Scratch**
 
+Events first get deduplicated to alerts based on event aggregation key, alerts get correlated to case based on configuration 
+{{< img src="service_management/events/correlation/correlation_helper.mp4" alt="Dedupe and correlate events" video=true >}}
+Check out API or integration page about how to setup aggregation key. Events without aggregation key will be deduped to one single alert within the timeframe
+
 ### Suggested pattern
 Suggested pattern are recommended based on your commonly used service, environment tags to help get started with event correlation quickly. 
 
@@ -46,10 +50,6 @@ Once you are at the [correlation configuration page][2]
 
     Deduplicate events for those alerts for
     : The max duration for current alerts which have been correlated, but continue to flap or have not resolved, will be deduped to the alert in the existing case before opening new case
-
-  Events first get deduplicated to alerts based on event aggregation key, alerts get correlated to case based on configuration 
-  {{< img src="service_management/events/correlation/correlation_helper.mp4" alt="Dedupe and correlate events" video=true >}}
-  Check out API or integration page about how to setup aggregation key. Events without aggregation key will be deduped to one single alert within the timeframe
 
 
 ## Preview pattern output
