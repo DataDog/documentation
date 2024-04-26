@@ -108,41 +108,6 @@ extensions:
 
 [Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
-
-## Create user-defined services 
-
-To add your own services to Service Catalog, you can either manually add them by creating Service Definitions through the API or GitHub integration or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using `service.datadog.yaml` files. 
-
-To create a user-defined service, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
-
-#### Example
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
-schema-version: v2.1
-dd-service: my-unmonitored-cron-job
-team: shopist
-contacts:
- - type: slack
-   contact: https://datadogincidents.slack.com/archives/XXXXX
-application: shopist
-description: important cron job for shopist backend
-tier: tier1
-lifecycle: production
-links:
- - name: Common Operations
-   type: runbook
-   url: https://datadoghq.atlassian.net/wiki/
- - name: Disabling Deployments
-   type: runbook
-   url: https://datadoghq.atlassian.net/wiki/
-tags: []
-integrations:
- pagerduty:
-   service-url: https://datadog.pagerduty.com/service-directory/XXXXXXX
-External Resources (Optional)
-{{< /code-block >}}
-
-You can register multiple services in one YAML file by separating each definition with three dashes (`---`).
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

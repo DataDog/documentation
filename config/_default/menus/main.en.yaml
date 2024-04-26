@@ -1720,7 +1720,7 @@ menu:
       identifier: service_catalog_integrations
       weight: 10
     - name: Troubleshooting and Best Practices
-      url: service_catalog/troubleshooting
+      url: service_catalog/guides
       parent: service_catalog
       identifier: troubleshooting_best_practices
       weight: 11
