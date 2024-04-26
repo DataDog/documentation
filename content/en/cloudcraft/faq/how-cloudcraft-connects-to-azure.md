@@ -11,7 +11,7 @@ Here's how the process works:
 2. The results are correlated to reverse engineer your infrastructure into an architecture diagram.
 3. This process is repeated every time you run a scan to ensure your diagram is up-to-date.
 
-The only exception to the read-only rule is when an AKS Cluster is discovered. In this case, you have the option to connect Cloudcraft directly to the cluster via Kubernete's native APIs for complete workload and pod discovery. For more information, see [Connect an Azure AKS Cluster with Cloudcraft][2].
+The only exception to the read-only rule is when an AKS Cluster is discovered. In this case, you have the option to connect Cloudcraft directly to the cluster through Kubernetes' native APIs for complete workload and pod discovery. For more information, see [Connect an Azure AKS Cluster with Cloudcraft][2].
 
 Cloudcraft is committed to ensuring the security of your data and has implemeted rigorous security processes and controls as part of its SOC2 compliance program. To learn more about Cloudcraft's security measures, visit the [security page][3].
 
