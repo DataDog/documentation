@@ -458,7 +458,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ## Install the RDS Integration
 
-To see infrastructure metrics from AWS such as CPU etc alongside the database telemtryin DBM, install the [RDS integration][13] and DBM will correlate automatically (optional).
+To see infrastructure metrics from AWS, such as CPU, alongside the database telemetry in DBM, install the [RDS integration][13] (optional).
 
 ## Troubleshooting
 
