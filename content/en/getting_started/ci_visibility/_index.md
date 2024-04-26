@@ -38,7 +38,7 @@ CI Visibility tracks the performance and results of your CI pipelines, and displ
 
 To start sending pipeline metrics, see the documentation for one of the following CI providers that Datadog supports below.
 
-{{< partial name="getting_started/ci_visibility/providers.html" >}}
+{{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
 
 </br>
 
