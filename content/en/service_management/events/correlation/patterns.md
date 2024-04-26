@@ -48,7 +48,7 @@ Once you are at the [correlation configuration page][2]
     : The max duration for current alerts which have been correlated, but continue to flap or have not resolved, will be deduped to the alert in the existing case before opening new case
 
   Events first get deduplicated to alerts based on event aggregation key, alerts get correlated to case based on configuration 
-    {{< img src="service_management/events/correlation/pattern/timeframe.png" alt="correlation timeframe explanation, see how alerts fold into a case" style="width:90%;" >}}
+  {{< img src="service_management/events/correlation/correlation_helper.mp4" alt="Dedupe and correlate events" video=true >}}
   Check out API or integration page about how to setup aggregation key. Events without aggregation key will be deduped to one single alert within the timeframe
 
 
