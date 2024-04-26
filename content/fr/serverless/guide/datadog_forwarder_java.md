@@ -8,8 +8,6 @@ title: Instrumenter des applications Java sans serveur avec le Forwarder Datadog
 Si vous commencez tout juste à utiliser la surveillance sans serveur Datadog, suivez plutôt les <a href="/serverless/installation/java">instructions d'instrumentation des fonctions Lambda avec l'extension Lambda Datadog</a>. Si vous avez configuré la surveillance sans serveur Datadog avec le Forwarder Datadog avant que les fonctionnalités Lambda clés en main ne soient proposées, consultez ce guide pour gérer votre instance.
 </div>
 
-{{< img src="serverless/java-lambda-tracing.png" alt="Surveiller des fonctions Lambda Java avec Datadog" style="width:100%;">}}
-
 <div class="alert alert-danger">
 Certaines anciennes versions de <code>datadog-lambda-java</code> importent <code>log4j <=2.14.0</code> en tant que dépendance transitive. Les <a href="#mise-a-niveau">instructions de mise à niveau</a> sont indiquées plus loin dans ce guide.
 </div>
@@ -18,9 +16,9 @@ Certaines anciennes versions de <code>datadog-lambda-java</code> importent <code
 
 Pour ingérer des traces AWS Lambda, des métriques optimisées, des métriques custom et des logs, vous devez utiliser la [fonction Lambda du Forwarder Datadog][2].
 
-Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (`java8.al2`), Java 11 (`java11`) ou Java 17 (`java17`).
+Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (`java8.al2`),  Java 11 (`java11`) ou Java 17 (`java17`).
 
-## Procédure à suivre
+## Configuration
 
 ### Installation
 
@@ -107,7 +105,7 @@ Pour créer un monitor Datadog sur les démarrages à froid d'une fonction Lambd
 
 Bien que cette opération soit facultative, Datadog vous recommande d'ajouter les tags réservés `env`, `service` et `version` à vos applications sans serveur. Pour en savoir plus sur les tags réservés, consultez la section [Tagging de service unifié][8].
 
-## Utilisation
+## Explorer les logs
 
 Après avoir configuré votre fonction en suivant la procédure ci-dessus, visualisez vos métriques, logs et traces sur la [page Serverless principale][9].
 
@@ -156,7 +154,8 @@ L'Apache Foundation a annoncé que log4j, une bibliothèque de journalisation J
 
 La dernière version de `datadog-lambda-java` est ![Maven Central][4]. Utilisez cette version (en ignorant le `v` qui la précède) durant la procédure de mise à jour indiquée ci-dessous.
 
-Si vous ne souhaitez pas effectuer de mise à niveau vers `1.4.x`, la version `0.3.x` a également été mise à jour afin d'inclure les derniers patchs de sécurité relatifs à log4j. La dernière version `0.3.x` est disponible dans le [référentiel `datadog-lambda-java`][13].
+Si vous ne souhaitez pas effectuer de mise à niveau vers `1.4.x`, la version `0.3.x` a également été mise à jour afin d'inclure les derniers patchs de sécurité relatifs à log4j.
+La dernière version `0.3.x` est disponible dans le [référentiel `datadog-lambda-java`][13].
 
 La version de la dépendance `datadog-lambda-java` dans votre fonction Lambda est définie dans `pom.xml` (Maven) ou `build.gradle` (Gradle).
 
@@ -196,20 +195,15 @@ Si vous effectuez une mise à niveau depuis la version 0.3.x vers la version 1.4
 
 ```
 arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:dd-trace-java:4
-````
+```
 
-
-
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /fr/serverless/forwarder/
 [3]: /fr/serverless/enhanced_lambda_metrics
 [4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
 [5]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [6]: /fr/serverless/insights#cold-starts
-[7]: /fr/monitors/create/types/metric/?tab=threshold#overview
+[7]: /fr/monitors/types/metric/?tab=threshold#overview
 [8]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [9]: https://app.datadoghq.com/functions
 [10]: /fr/serverless/custom_metrics?tab=java

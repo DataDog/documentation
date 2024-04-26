@@ -18,7 +18,7 @@ further_reading:
 
 _4 minutes to complete_
 
-{{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="dashboard 7" video="true" style="width:90%;">}}
+{{< img src="tracing/guide/apm_dashboard/dashboard_7_cropped.mp4" alt="dashboard 7" video="true" style="width:90%;">}}
 
 Datadog APM allows you to create dashboards based on your business priorities and metrics important to you:
 You can create widgets on these dashboards to keep track of any traditional infrastructure, logs and custom metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
@@ -34,13 +34,13 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
 2. **Find the Total Requests Graph** and click on the `export` button on the top right to choose `Export to Dashboard`. **Click `New Timeboard`**.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_2.png" alt="dashboard 2" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_2_cropped.png" alt="dashboard 2" style="width:90%;">}}
 
 3. **Click on `View Dashboard`** in the success message.
 
     In the new dashboard, the `Hit/error count on service` graph for the `web-store` service is now available. It shows the entire throughput of this service as well as its total amount of errors.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_3.png" alt="dashboard 3" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_3_cropped.png" alt="dashboard 3" style="width:90%;">}}
 
     **Note**: You can click on the pencil icon to edit this graph and see what precise metrics are being used.
 
@@ -86,7 +86,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     This example shows how to query the latency across the example application: breaking it down by merchants on the platform and view the top-10 merchants with highest latency. From the Analytics screen, export the graph to the dashboard and view it there:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_6.mp4" video="true" alt="dashboard 6" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_6_cropped.mp4" video="true" alt="dashboard 6" style="width:90%;">}}
 
 8. **Return to your dashboard**.
 
@@ -96,7 +96,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
 9. **Click on the `Search Events or Logs`** button and add search for a relevant event explorer. **Note**: in this example Ansible is used, your [event explorer][5] might be different.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="dashboard 1" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_1_cropped.png" alt="dashboard 1" style="width:90%;">}}
 
     Here, alongside the view of our dashboard, recent events that have happened (in datadog or in external services like Ansible, Chef, etc.) can be seen such as: deployments, task completions, or monitors alerting. These events can then be correlated to what is happening to the metrics setup in the dashboard.
 
@@ -106,7 +106,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
     In this example a template variable for `Region` is added to see how the dashboard behaves across `us-east1` and `europe-west-4`, out two primary areas of operation.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable.png" alt="Add Variable popover showing field options to add variable name and variable tags" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable_cropped.png" alt="Add Variable popover showing field options to add variable name and variable tags" style="width:90%;">}}
 
     You can now add this template variable to each of the graphs:
 

@@ -758,8 +758,8 @@
   "CreateRole": [
     {
       "group": "roles",
-      "suffix": "",
-      "description": "Create role returns \"OK\" response"
+      "suffix": "_3862893229",
+      "description": "Create role with a permission returns \"OK\" response"
     }
   ],
   "AddPermissionToRole": [
@@ -781,13 +781,6 @@
       "group": "roles",
       "suffix": "",
       "description": "Revoke permission returns \"OK\" response"
-    }
-  ],
-  "UpdateRole": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "Update a role returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalIncidents": [

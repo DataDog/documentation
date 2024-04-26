@@ -102,7 +102,7 @@ After you have [assigned tags][7] at the host and [integration][9] level, start 
 | [Integrations][15]   | Optionally limit metrics for AWS, Google Cloud, and Azure.                                        |
 | [APM][16]            | Filter services, traces, and profiles, or navigate to other areas with the Service Map.           |
 | [RUM & Session Replay][17] | Filter event search, analytics, patterns, replays, and issues with the RUM Explorer.        |
-| [Synthetic Monitoring & Continuous Testing][18]     | Filter and group Synthetic tests or tests running in CI pipelines with the Synthetic Monitoring & Continuous Testing Explorer.   |
+| [Synthetic Monitoring & Continuous Testing][18]     | Filter and group Synthetic tests or tests running in CI pipelines with the Synthetic Monitoring & Testing Results Explorer.   |
 | [Notebooks][19]      | Filter and group metrics on graphs.                                                               |
 | [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines.                                |
 | [SLOs][21]           | Search for SLOs, grouped metric-based SLOs, and grouped monitor-based SLOs.                       |
