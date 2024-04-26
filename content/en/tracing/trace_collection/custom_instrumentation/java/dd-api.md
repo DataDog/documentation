@@ -211,7 +211,7 @@ import datadog.trace.api.Trace;
 
 public class SessionManager {
 
-    @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession", noParent = true)
+    @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession")
     public static void saveSession() {
         // your method implementation here
     }
