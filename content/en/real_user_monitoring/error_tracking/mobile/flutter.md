@@ -69,7 +69,7 @@ final configuration = DatadogConfiguration(
 );
 ```
 
-If your application suffers a fatal crash, after your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
+If your application suffers a fatal crash, the Datadog Flutter SDK uploads a crash report to Datadog *after* your application restarts. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
 
 ## Get deobfuscated stack traces
 

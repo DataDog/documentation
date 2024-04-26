@@ -46,10 +46,12 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ## Test your implementation
 
-To verify your Roku Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
+To verify your Roku Crash Reporting and Error Tracking configuration, you need to trigger a crash in your RUM application and confirm that the error appears in Datadog.
+
+To test your implementation:
 
 1. Run your application on an Roku device.
-2. Execute code containing a crash. For example:
+2. Execute some code containing a crash. For example:
 
    ```brightscript
    sub explodingMethod()

@@ -111,10 +111,12 @@ If a `build` directory does not already exist, create it first by running `mkdir
 
 ## Test your implementation
 
-To verify your React Native Crash Reporting and Error Tracking configuration, issue an error in your RUM application and confirm that the error appears in Datadog.
+To verify your React Native Crash Reporting and Error Tracking configuration, you need to issue an error in your RUM application and confirm that the error appears in Datadog.
+
+To test your implementation:
 
 1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
-2. Execute code containing an error or crash. For example:
+2. Execute some code containing an error or crash. For example:
 
    ```javascript
    const throwError = () => {
