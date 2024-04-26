@@ -1,6 +1,6 @@
 announcement_banner:
   desktop_message: Datadogではじめる モダンなモニタリング
-  external_link: https://www.datadoghq.com/ja/free-datadog-trial/
+  external_link: https://www.datadoghq.com/ja/free-datadog-trial/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-coreplatform-japan-docs-announcement-trial-freetrial-ja
   mobile_message: Datadogではじめる モダンなモニタリング
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 exclude: []
