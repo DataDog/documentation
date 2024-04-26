@@ -152,9 +152,12 @@ Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs ne
 
 ### SLO tags
 
-When you create or edit an SLO, you can add tags for filtering on the [SLO status page][2] or for creating [SLO saved views][17].
+SLO Tags can be used for filtering on the [SLO status page][2], creating [SLO saved views][17], or grouping SLOs to view. Tags can be added to SLOs in the following ways:
 
-Add tags to SLOs in bulk with the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
+- When you create or edit an SLO, you can add tags
+- From the SLO list view, you can add/update tags in bulk using the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list:
+
+{{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="SLO bulk tags" >}}
 
 ### SLO default view
 
