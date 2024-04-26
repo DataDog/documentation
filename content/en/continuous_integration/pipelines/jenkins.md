@@ -1462,7 +1462,7 @@ Lists of included and excluded jobs can contain regular expressions, but not glo
 
 Once the integration is successfully configured, both the [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after pipelines finish.
 
-The **CI Pipeline List** page only shows data for the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Troubleshooting
 

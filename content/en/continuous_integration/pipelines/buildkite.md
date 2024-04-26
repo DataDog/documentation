@@ -97,7 +97,7 @@ In this example, you can use the value of `binary_size` to plot the change in th
 
 The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page only shows data for the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ### Correlate infrastructure metrics to jobs
 

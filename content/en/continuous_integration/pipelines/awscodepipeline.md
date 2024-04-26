@@ -115,7 +115,7 @@ The steps above allow you to add the pipeline execution ID to your CodeBuild act
 
 View your data on the [**CI Pipeline List**][11] and [**Executions**][12] pages after the pipelines finish.
 
-The **CI Pipeline List** page only shows data for the [default branch][13] of each repository.
+The **CI Pipeline List** page shows data for only the [default branch][13] of each repository.
 
 ## Further reading
 

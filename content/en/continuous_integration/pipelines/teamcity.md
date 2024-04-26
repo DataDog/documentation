@@ -65,7 +65,7 @@ Alternatively, restart the TeamCity server.
 
 View your data on the [**CI Pipeline List**][3] and [**Executions**][4] pages after the pipelines finish.
 
-The **CI Pipeline List** page only shows data for the [default branch][12] of each repository.
+The **CI Pipeline List** page shows data for only the [default branch][12] of each repository.
 
 ## Configure Git user information
 

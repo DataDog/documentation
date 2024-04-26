@@ -39,7 +39,7 @@ You can send custom pipelines through HTTP using the [public API endpoint][1]. F
 
 The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines are accepted for processing.
 
-The **CI Pipeline List** page only shows data for the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Further reading
 

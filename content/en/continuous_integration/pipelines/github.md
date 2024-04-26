@@ -97,7 +97,7 @@ shown which contains the host metrics.
 
 The [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page only shows data for the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Disable GitHub Actions tracing
 

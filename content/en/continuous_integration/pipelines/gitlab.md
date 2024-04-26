@@ -162,9 +162,9 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 ## Visualize pipeline data in Datadog
 
-After the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
+Once the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-The Pipelines page only shows data for the default branch of each repository.
+The Pipelines page shows data for only the default branch of each repository.
 
 ### Partial and downstream pipelines
 

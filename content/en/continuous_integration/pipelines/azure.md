@@ -103,7 +103,7 @@ Example for enabling the hooks in specified projects:
 
 The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
 
-The **CI Pipeline List** page only shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Further reading
 
