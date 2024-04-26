@@ -101,7 +101,7 @@ docker run -d --cgroupns host \
               gcr.io/datadoghq/agent:latest
 ```
 
-Where your <DATADOG_SITE> is {{< region-param key="dd_site" code="true" >}} (defaults to datadoghq.com).
+Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1].
 
 #### Origin detection over UDP
