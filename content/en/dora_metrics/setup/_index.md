@@ -3,28 +3,68 @@ title: Set up DORA Metrics
 kind: documentation
 aliases:
 - /continuous_integration/dora_metrics/setup/
+further_reading:
+- link: '/dora_metrics/'
+  tag: 'Documentation'
+  text: 'Learn about DORA Metrics'
 ---
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
 The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
-## Data source configuration
+## Overview
 
-The four DORA Metrics are calculated based on two types of events: deployments and failures. Each event type supports different data sources.
+You can programmatically send deployment and incident events to Datadog using the [DORA Metrics API][1]. 
 
-**Deployment events**: Indicate that a new deployment has occurred for a service in a specific environment.
-  Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate.
-  {{< whatsnext desc="Deployment data sources:" >}}
-    {{< nextlink href="continuous_integration/dora_metrics/setup/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/dora_metrics/setup/deployments" >}}Deployment API or CLI{{< /nextlink >}}
+**Deployment events**
+: Indicate that a new deployment has occurred for a service in a specific environment. 
+
+**Incident events**
+: Indicate that a new issue has occurred for a service in a specific environment.
+
+You also have the option of marking a CI job as a deployment and sending a deployment event to Datadog using the [`datadog-ci` NPM package][2].
+
+**Notes:**
+
+- Deployment and incident events must be sent as soon as possible. Events for which the `finished_at` timestamp is 1 hour older than the current time are not accepted.
+- Deployments or incidents of the same service cannot occur at the same second.
+
+## Setup
+
+{{< whatsnext desc="See the respective documentation to start sending your events to Datadog:" >}}
+    {{< nextlink href="/dora_metrics/deployments" >}}Deployment Events: Indicate that a new deployment has occurred for a service in a specific environment.{{< /nextlink >}}
+    {{< nextlink href="/dora_metrics/incidents" >}}Incident Events: Indicate that a new issue has occurred for a service in a specific environment.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-**Failure events**: Indicate that a new issue has occurred for a service in a specific environment.
-  Failure events are used to compute Change Failure Rate and Mean Time to Restore.
-  {{< whatsnext desc="Failure data sources:">}}
-    {{< nextlink href="continuous_integration/dora_metrics/setup/pagerduty" >}}PagerDuty{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/dora_metrics/setup/incidents" >}}Incident API{{< /nextlink >}}
+## Configure data sources
+
+Each event type supports different data sources.
+
+{{< whatsnext desc="Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate. See the respective documentation to set up a data source for your deployment events:" >}}
+  {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/deployments/" >}}Send a Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
+{{< whatsnext desc="Incident events are used to compute Change Failure Rate and Mean Time to Restore. See the respective documentation to set up a data source for your incident events:">}}
+  {{< nextlink href="/dora_metrics/incidents/pagerduty" >}}PagerDuty{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/incidents/" >}}Send an Incident Event API{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Examine metrics
+
+[DORA Metrics][3] generates metrics from these events, which are available in the [Events Explorer][4], and can be queried programmatically by using the [Query timeseries points][5] and [Query timeseries data across multiple products][6] API endpoints. 
+
+For more information, see the [Data Collected documentation][7].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api/latest/dora-metrics/
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci#usage
+[3]: /dora_metrics/
+[4]: /service_management/events/explorer/
+[5]: /api/latest/metrics/#query-timeseries-points
+[6]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
+[7]: /dora_metrics/data_collected/

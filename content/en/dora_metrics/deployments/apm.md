@@ -64,9 +64,6 @@ The Following tabs were mostly copied from the Source Code Integration docs unti
 https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=github#synchronize-your-repository-metadata
 -->
 
-{{< tabs >}}
-{{% tab "GitHub" %}}
-
 <div class="alert alert-warning">
 GitHub workflows running on <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not currently supported by the GitHub integration.
 If you are using the <code>pull_request</code> trigger, use the alternative method.
@@ -82,7 +79,6 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
-{{% /tab %}}
 
 ### Handling multiple services in the same repository
 
