@@ -36,11 +36,13 @@ By integrating performance metrics, logs, and alerts, your organization can main
 
 CI Visibility tracks the performance and results of your CI pipelines, and displays results after the pipeline finishes. 
 
-To start sending pipeline metrics, see the documentation for one of the following CI providers. 
+To start sending pipeline metrics, see the documentation for one of the following CI providers that Datadog supports below.
 
 {{< partial name="getting_started/ci_visibility/providers.html" >}}
 
 </br>
+
+If your CI provider is not supported, you can programmatically send your pipeline events to Datadog using the [CI Visibility Pipelines API][16].
 
 Depending on the CI provider(s) of choice, CI Visibility may not support all of the levels in your pipeline (stage, job, step, or command). For more information about how CI Visibility defines a CI pipeline, see the [Terminology section][4].
 
@@ -133,7 +135,7 @@ To set up a monitor that alerts on your CI pipeline when the average duration in
 1. Select a common monitor type for CI pipelines to get started, for example: `Long Running Pipeline` to trigger alerts when a pipeline has been running for too long or `Failed Job` to trigger alerts for job failures, or customize your own search query. In this example, enter `@ci.pipeline.name:test_and_deploy_cart` and select the Avg of `Duration (@duration)`.
 1. In the `Evaluate the query over the` section, select **last 1 day**. 
 1. Set the alert conditions to trigger when the evaluated value is **above** the threshold, and specify values for the alert or warning thresholds, such as `Alert threshold > 300000000000`.
-1. Define the monitor's notification.
+1. In the `Notify your team` section, configure your monitor's notification settings.
 1. Set permissions for the monitor.
 1. Click **Create**.
 
@@ -155,4 +157,5 @@ To set up a monitor that alerts on your CI pipeline when the average duration in
 [12]: /continuous_integration/guides/infrastructure_metrics_with_gitlab/
 [13]: /continuous_integration/guides/pipeline_data_model/
 [14]: /monitors/types/ci/?tab=pipelines
-[15]: https://app.datadoghq.com/monitors/create/
+[15]: https://app.datadoghq.com/monitors/create
+[16]: /api/latest/ci-visibility-pipelines/
