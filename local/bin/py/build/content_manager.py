@@ -279,7 +279,7 @@ def download_cached_content_into_repo(self):
         print('Copying integrations from cache...')
 
         for integration in self.apw_integrations:
-            cache_path = integration.get('cache_path', '')
+            cache_path = f"temp/content/en/integrations/{integration}.md"
 
             if os.path.isfile(cache_path):
                 print(f'ignoring APW integrations: {cache_path}')

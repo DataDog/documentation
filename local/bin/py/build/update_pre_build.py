@@ -4,6 +4,7 @@ import sys
 import yaml
 import shutil
 import os
+import glob
 
 from actions.pull_and_push_file import pull_and_push_file
 from actions.pull_and_push_folder import pull_and_push_folder
@@ -44,16 +45,9 @@ class Build:
         )
 
         self.apw_integrations = [
-            {
-                'extract_path': f'{self.extract_dir}/dogweb/integration/akamai_mpulse',
-                'cache_path': 'temp/content/en/integrations/akamai_mpulse.md'
-            },
-            {
-                'extract_path': f'{self.extract_dir}/integrations-extras/ably',
-                'cache_path': 'temp/content/en/integrations/ably.md'
-            }
-        ]
-        
+            'ably',
+            'akamai_mpulse'
+        ]        
 
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
         """
@@ -76,11 +70,13 @@ class Build:
         prepare_content(self, configuration, self.github_token, self.extract_dir)
 
         # remove integrations that will be sourced from websites-sources/APW
+        # this accounts for duplicates from dogweb/other integration repos
         for integration in self.apw_integrations:
-            extract_path = integration.get('extract_path', '')
-
-            if os.path.exists(extract_path):
-                shutil.rmtree(extract_path)
+            integration_glob = f"{self.extract_dir}**/{integration}/"
+            extracted_integration_dirs = glob.glob(integration_glob, recursive=True)
+            
+            for integration_dir in extracted_integration_dirs:
+                shutil.rmtree(integration_dir)
 
 
     def build_documentation(self):
