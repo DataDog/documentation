@@ -1,11 +1,5 @@
 {{ define "main" }}
-    {{ $media := slice }}
-
-    {{ if and (.Params.tile) (.Params.tile.media) }}
-        {{ $media = .Params.tile.media }}
-    {{ else if .Params.media }}
-        {{ $media = .Params.media }}
-    {{ end }}
+    {{ $media := .Params.tile.media | default .Params.media | default "" }}
 
     <div class="row">
         <div class="col-12 order-1">
