@@ -82,8 +82,8 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 ## Getting started
 
 {{< whatsnext desc="Explore what Service Catalog has to offer:" >}}
-    {{< nextlink href="tracing/service_catalog/navigating/" >}}Navigating the Service Catalog{{< /nextlink >}}
-    {{< nextlink href="tracing/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/navigating/" >}}Navigating the Service Catalog{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Role based access and permissions
