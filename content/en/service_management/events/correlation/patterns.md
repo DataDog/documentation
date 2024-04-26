@@ -14,23 +14,23 @@ To get you started, Datadog automatically suggests [pattern-based correlations][
 
 ## Create a pattern
 
-To create a pattern-based correlation:
+To create a pattern:
 1. Navigate to [Correlation][1].
-1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens pattern configuration page with out-of-the-box suggested pattern on the left side , and preview pattern output on the right side. 
-1. You can adjust the suggested pattern by clicking **+ Continue With Pattern**(this will take you to the pre-populated configuration page for additonal adjustment if needed) or choose to create your own by clicking **+ Personalize From Scratch**
+1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens pattern configuration page with out-of-the-box suggested patterns on the left side , and pattern output preview on the right side. 
+1. You can adjust the suggested pattern by clicking **+ Continue With Pattern**(this will take you to the pre-populated configuration page for additonal tuning) or choose to create your own by clicking **+ Personalize From Scratch**
 
 Events first get deduplicated to alerts based on event aggregation key, alerts get correlated to case based on configuration 
 {{< img src="service_management/events/correlation/correlation_helper.mp4" alt="Dedupe and correlate events" video=true >}}
 Check out API or integration page about how to setup aggregation key. Events without aggregation key will be deduped to one single alert within the timeframe
 
 ### Suggested pattern
-Suggested pattern are recommended based on your commonly used service, environment tags to help get started with event correlation quickly. 
+Suggested pattern are recommended based on your commonly used service, environment tags to help you get started with event correlation quickly. 
 
 ### Configuration
-Once you are at the [correlation configuration page][2]
+Once you are on the [correlation configuration page][2]
 1. Select the event source you want to group on from the dropdown
 1. Define the grouping tags. Grouping tags are event facets. see advanced settings section below if you don't find the tag from the dropdown 
-1. To exclude any events from the source defined above, adding filtering event query in **Filter by these events or tags**
+1. To exclude any events from the source defined above, adding event query in **Filter by these events or tags** to filter them out
 
 ### Advanced settings (optional)
 1. Click **Show Advanced Settings**.
@@ -69,7 +69,7 @@ Use this data to preview the impact of your correlations and understand the expe
 1. Click **Save and Activate** to activate this pattern and group events into cases.
 
 ## Update existing pattern
-**notes**: Once you update existing pattern, all current live cases will stop processing. New event matches the pattern will create new case. 
+*notes*: Once you update existing pattern, all current live cases will stop processing. New event matches the pattern will create new case. 
 
 ## Further Reading
 
