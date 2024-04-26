@@ -64,7 +64,7 @@ The four DORA Metrics are calculated based on two types of events:
 
 ## Use DORA Metrics
 
-You can access and visualize your DORA metrics and filter them by team, service, repository, environment, and time period on the [DORA Metrics page][2].
+You can access and visualize your DORA metrics and filter them by team, service, repository, environment, and time period on the [**DORA Metrics** page][2].
 
 Use the information on this page to identify improvements or regressions for each metric, visualize changes, and compare trends over time. DORA metrics can be exported to dashboards or notebooks and be alerted on using [metric monitors][3].
 

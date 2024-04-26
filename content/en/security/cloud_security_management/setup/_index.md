@@ -44,11 +44,11 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_enterprise">CSM Enterprise</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/misconfigurations">Misconfigurations (cloud accounts, Agent, and KSPM)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_pro">CSM Pro</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/cloud_security_management/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/cloud_security_management/misconfigurations">Misconfigurations (cloud accounts and KSPM)</a></li><li style="font-size:16px"><a href="/security/cloud_security_management/vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_cloud_workload_security">CSM Workload Security</a></td>
@@ -68,17 +68,17 @@ The following table summarizes the CSM features available relative to each deplo
 
 <div class="alert alert-info">For more details, click each of the CSM feature headings to review additional requirements for that feature.</div>
 
-| Type          | Agent Required (7.46+) | CSM Misconfigurations | [CSM Threats][8]| [CSM Vulnerabilities][9] | [CSM Identity Risks][10] |
-|---------------|------------------------|-----------------------|-------------|---------------------|--------------------|
-| Docker        | {{< X >}}              | {{< X >}}             | {{< X >}}   |                     |                    |
-| Kubernetes    | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| Linux         | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| Amazon ECS/EKS    | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| AWS Account   |                        | {{< X >}}             |             |                     | {{< X >}}          |
-| Azure Account |                        | {{< X >}}             |             |                     |                    |
-| GCP Account   |                        | {{< X >}}             |             |                     |                    |
-| Windows       | {{< X >}}              |                       |  {{< X >}}  |                     |                    |
-| AWS Fargate ECS/EKS  | {{< X >}}              |                       | beta        |                     |                    |
+| Type                | Agent Required (7.46+) | CSM Misconfigurations | [CSM Threats][8] | [CSM Vulnerabilities][9] | [CSM Identity Risks][10] |
+|---------------------|------------------------|-----------------------|------------------|--------------------------|--------------------------|
+| Docker              | {{< X >}}              | {{< X >}}             | {{< X >}}        |                          |                          |
+| Kubernetes          | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |
+| Linux               | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |
+| Amazon ECS/EKS      | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |
+| AWS Account         |                        | {{< X >}}             |                  |                          | {{< X >}}                |
+| Azure Account       |                        | {{< X >}}             |                  |                          | {{< X >}}                |
+| GCP Account         |                        | {{< X >}}             |                  |                          |                          |
+| Windows             | {{< X >}}              |                       | {{< X >}}        |                          |                          |
+| AWS Fargate ECS/EKS | {{< X >}}              |                       | beta             |                          |                          |
 
 
 The following tables represent additional prerequisites relative to each CSM feature.

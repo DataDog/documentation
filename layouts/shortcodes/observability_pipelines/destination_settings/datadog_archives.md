@@ -1,0 +1,9 @@
+<div class="alert alert-warning">If the Worker is ingesting logs that are not coming from the Datadog Agent and are shipped to an archive using the Observability Pipelines Datadog Archives destination, those logs are not tagged with <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">reserved attributes</a>. In addition, logs rehydrated into Datadog will not have standard attributes mapped. This means that when you rehydrate your logs into Log Management, you may lose Datadog telemetry, the ability to search logs easily, and the benefits of <a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">unified service tagging</a> if you do not structure and remap your logs in Observability Pipelines before routing your logs to an archive.<br><br>For example, say your syslogs are sent to Datadog Archives and those logs have the <code>status</code> tagged as <code>severity</code> instead of the reserved attribute of <code>status</code> and the host tagged as <code>host-name</code> instead of the reserved attribute <code>hostname</code>. When these logs are rehydrated in Datadog, the status for each log is set to <code>info</code> and none of the logs have a hostname tag.
+</div>
+
+1. Enter the S3 bucket name for the S3 bucket you created earlier.
+1. Enter the AWS region the S3 bucket is in.
+1. Enter the key prefix. Prefixes are useful for partitioning objects, such as by creating an object key that stores objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path. A trailing `/` is not automatically added.
+1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu.
+
+Your AWS access key ID and AWS secret access key is set as environment variables when you install the Worker later.

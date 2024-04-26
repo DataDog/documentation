@@ -58,7 +58,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 ## Explore Datadog Database Monitoring
 
-Navigate to Database Monitoring by clicking **[APM > Databases][1]** in the UI.
+Navigate to [Database Monitoring][1] in Datadog.
 
 ### Dig into query performance metrics
 

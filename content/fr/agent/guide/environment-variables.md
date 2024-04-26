@@ -98,7 +98,7 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/getting_started/tagging/unified_service_tagging
 [3]: /fr/agent/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config.go
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
 [5]: https://docs.datadoghq.com/fr/agent/docker/apm/#docker-apm-agent-environment-variables
 [6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/apm.go
 [7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/process.go

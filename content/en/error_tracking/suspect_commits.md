@@ -2,8 +2,6 @@
 title: Suspect Commits
 kind: documentation
 disable_toc: false
-aliases:
-  - /logs/error_tracking/suspect_commits
 ---
 ## Overview
 
@@ -34,13 +32,12 @@ Once the setup requirements are met, suspect commits automatically appear on iss
 
 The Suspect Commits feature requires [Source Code Integration][1]. To enable Source Code Integration:
 
-1. Go to **Integrations** and choose **Link Source Code** in the top navbar.
+1. On the [**Integrations** page][3] in Datadog, choose **Link Source Code** in the top navbar.
 2. Follow the steps to associate a commit with your telemetry and configure your GitHub repository.
-
-{{< img src="tracing/error_tracking/apm_source_code_integration.png" alt="APM Source Code Integration Set Up" style="width:80%" >}}
 
 ### Install the GitHub integration
 Install [the GitHub integration][2], enabling read permissions for pull requests and contents.
 
 [1]: /integrations/guide/source-code-integration
 [2]: /integrations/github/
+[3]: https://app.datadoghq.com/integrations
