@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Tracing
+title: Getting Started with APM
 kind: documentation
 aliases:
     - /getting_started/tracing/distributed-tracing
@@ -20,159 +20,96 @@ further_reading:
 
 ## Overview
 
-Datadog Application Performance Monitoring (APM or tracing) is used to collect [traces][1] from your backend application code. This beginners' guide shows you how to get your first trace into Datadog.
+This guide demonstrates how to configure a sample e-commerce application, Storedog, to send APM data to Datadog. You will instrument the application, run it in a local Kubernetes environment using Minikube, and explore the collected APM data in the Datadog UI.
 
-**Note**: Datadog APM is available for many languages and frameworks. See the documentation on [Instrumenting Your Application][2]
+Follow this guide to:
 
-## Datadog account
+1. Instrument the application with Datadog's Single Step Instrumentation.
+2. Run the application in Minikube to generate APM data.
+3. Explore APM data in the Datadog UI.
 
-If you haven't already, create a [Datadog account][3].
+## Prerequisites
 
-## Datadog Agent
+To complete this guide, you need:
 
-Before installing the Datadog Agent, set up a [Vagrant Ubuntu 22.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
+1. A [Datadog account][link-to-dd-signup].
+2. Your [Datadog API key][link-to-dd-api-key-docs].
+3. The [Storedog][link-to-storedog-repo] sample application.
+  a. Clone the storedog repository:
+  ```shell
+  git clone https://github.com/DataDog/storedog.git
+  ```
+  b. Navigate to the storedog directory:
+  ```shell
+  cd storedog
+  ```
+4. [Minikube][link-to-minikube-install-docs] installed.
 
-```text
-vagrant init ubuntu/jammy64
-vagrant up
-vagrant ssh
-```
+## Instrument the application
 
-To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
+Enable APM with Datadog's Single Step Instrumentation. This installs the Datadog Agent and automatically instruments the Storedog application.
 
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-```
+1. Install the [Datadog Operator][link-to-dd-operator] with Helm:
+  ```shell
+  helm repo add datadog https://helm.datadoghq.com
+  helm install my-datadog-operator datadog/datadog-operator
+  ```
+2. Create a Kubernetes secret with your [Datadog API key][link-to-dd-api-key-docs]:
+  ```shell
+  kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
+  ```
+3. Create a `datadog-agent.yaml` file with the following configuration:
+  ```yaml
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+    features:
+      apm:
+        instrumentation:
+          enabled: true
+  ```
+4. Apply the configuration:
+  ```shell
+  kubectl apply -f datadog-agent.yaml
+  ```
 
-### Validation
+## Run the application
 
-Verify the Agent is running with the [status command][8]:
+Generate observability data by running Storedog in Minikube:
 
-```shell
-sudo datadog-agent status
-```
+1. Start Minikube:
+  ```shell
+  minikube start
+  ```
+2. Apply the Kubernetes manifests:
+  ```shell
+  kubectl apply -f k8s-manifests/
+  ```
+3. Wait for the pods to start running:
+  ```shell
+  kubectl get pods
+  ```
+4. Access Storedog by opening the URL from the following command in your browser:
+  ```shell
+  minikube service storedog-frontend --url
+  ```
+5. Interact with the application to generate observability data.
 
-After a few minutes, verify the Agent is connected to your account by checking the [Infrastructure List][9] in Datadog.
 
-## Datadog APM
+## Explore observability data in Datadog
 
-### Follow the in-app documentation (recommended)
+1. In Datadog, go to **APM** > **Services**. Storedog services are prefixed with storedog-.
+2. Select a service to view its performance metrics, such as latency, throughput, and error rates.
+3. Go to **APM** > **Traces**. Select a trace to see its details, including the flame graph, which helps identify performance bottlenecks.
+4. Explore additional APM features, like [App Analytics][link-to-app-analytics-docs], [Trace Search][link-to-trace-search-docs], and [Watchdog][link-to-watchdog-docs], to gain deeper insights into Storedog's performance.
 
-For the remaining steps, follow the [Quick start instructions][10] within the Datadog site for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (in this case, a host-based deployment).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
-
-
-### Enable APM
-
-For the latest versions of Agent v6 & v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][11]:
-
-```yaml
-# apm_config:
-##   Whether or not the APM Agent should run
-#   enabled: true
-```
-
-And in `trace-agent.log`:
-
-```bash
-# /var/log/datadog/trace-agent.log:
-2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-jammy
-2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
-2019-03-25 20:33:28 INFO (api.go:341) - no data received
-2019-03-25 20:34:18 INFO (service.go:63) - total number of tracked services: 0
-```
-
-### Environment name
-
-For the best experience, it is recommended to use the environment variable `DD_ENV` to configure `env` through your service's tracer.
-
-Additionally, if your tracer has logs injection enabled then the `env` is consistent across traces and logs. Read more about how this works in [Unified Service Tagging][12].
-
-Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`. To learn more about setting `env` for APM, see the [setting primary tags to scope guide][13].
-
-## APM application
-
-### Installation
-
-Before setting up the application, install `pip` then `flask` and `ddtrace` on your Ubuntu VM:
-
-```shell
-sudo apt-get install python-pip
-pip install flask
-pip install ddtrace
-```
-
-### Create
-
-On the Ubuntu VM, create the application `hello.py` with the following content:
-
-```python
-from flask import Flask
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return 'hello world'
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050)
-```
-
-### Run
-
-Run `hello.py` with `ddtrace` which automatically instruments your application in Datadog:
-
-```shell
-export DD_SERVICE=hello
-ddtrace-run python hello.py
-```
-
-You should see a similar output to:
-
-```bash
-* Serving Flask app "hello" (lazy loading)
-  ...
-* Running on http://0.0.0.0:5050/ (Press CTRL+C to quit)
-```
-
-### Test
-
-Test your application and send your traces to Datadog using `curl`. Your application should be running (as shown above). In a separate command prompt run:
-
-```text
-vagrant ssh
-curl http://0.0.0.0:5050/
-```
-
-This outputs:
-
-```text
-hello world
-```
-
-After a few minutes, your trace displays in Datadog under the `hello` service. Check the [Service Catalog][14] or [trace list][15].
-
-{{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
-
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /tracing/#terminology
-[2]: https://docs.datadoghq.com/tracing/setup/
-[3]: https://www.datadoghq.com
-[4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
-[5]: https://www.vagrantup.com/intro/getting-started
-[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /agent/configuration/agent-commands/#agent-information
-[9]: https://app.datadoghq.com/infrastructure
-[10]: https://app.datadoghq.com/apm/service-setup
-[11]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[12]: /getting_started/tagging/unified_service_tagging
-[13]: /tracing/guide/setting_primary_tags_to_scope/
-[14]: https://app.datadoghq.com/services
-[15]: https://app.datadoghq.com/apm/traces
