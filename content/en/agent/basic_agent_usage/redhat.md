@@ -24,11 +24,14 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Red Hat. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for Red Hat and its derivative Oracle Linux. To install the Agent, follow the Agent installation instructions for RedHat. [Datadog Agent Integration][1] documentation.
+
+Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
 ### Supported Versions
+
 #### x86 64-bit
 On the 64-bit x86 architecture, RedHat/CentOS 6 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
 
