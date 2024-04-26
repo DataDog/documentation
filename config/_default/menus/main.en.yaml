@@ -1699,7 +1699,7 @@ menu:
       parent: service_catalog
       identifier: service_catalog_managing_entries
       weight: 6
-    - name: Service Definitions and Support
+    - name: Service Definitions
       url: service_catalog/service_definitions
       parent: service_catalog
       identifier: service_catalog_definitions_versions
