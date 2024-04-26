@@ -21,7 +21,7 @@ The CI Visibility Explorer allows you to [search and filter](#search-and-filter)
 {{< tabs >}}
 {{% tab "Test Runs" %}}
 
-Navigate to [**CI** > **Test Runs**][101] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**.
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**.
 
 {{< img src="/continuous_integration/test_runs.png" text="Test Runs page" style="width:100%" >}}
 
@@ -90,7 +90,7 @@ Test run data is available in [dashboards][102] and [notebooks][103], enabling b
 {{% /tab %}}
 {{% tab "Pipeline Executions" %}}
 
-Navigate to [**CI** > **Pipeline Executions**][101] to see your CI pipeline execution results across the following levels: **Pipeline**, **Stage**, **Job**, **Step**, and **Command**.
+Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] to see your CI pipeline execution results across the following levels: **Pipeline**, **Stage**, **Job**, **Step**, and **Command**.
 
 {{< img src="/continuous_integration/pipeline_executions.png" text="CI Pipeline Executions page" style="width:100%" >}}
 
@@ -117,7 +117,7 @@ Below are three graphs that visualize the durations of your most active pipeline
 
 {{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs for Duration, Errored, and Executions" style="width:100%;">}}
 
-Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
+Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details view).
 
 
 CI pipeline data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
