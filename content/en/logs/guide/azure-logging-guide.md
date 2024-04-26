@@ -190,7 +190,7 @@ See [Getting started with Azure functions][215] for more information.
 
 1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
 2. Add the [Datadog-Azure Function code][204] to the function's `index.js` file.
-3. Add your Datadog API key by through a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 21.  
+3. Add your Datadog API key through a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 21.  
 4. If you're not using the Datadog US1 site, set your [Datadog site][207] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 22.
 5. **Save** the function.
 6. Click **Integration** under the **Developer** side menu.
