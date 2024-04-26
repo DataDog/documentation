@@ -39,7 +39,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar p
 ```
 
 ### One-Click Installation
-To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, enable remote configuration for your Agent and use [Configuration at Runtime][5]. 
+To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, enable remote configuration for your Agent and use [Configuration at Runtime][5]. If your service interacts with a queue, configuring by clicking on the DSM dependency map in the Service Page and follow instructions for `Enable DSM`. 
 
 ### Supported libraries
 Data Streams Monitoring supports the [confluent-kafka library][3].
