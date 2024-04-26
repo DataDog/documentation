@@ -22680,6 +22680,7 @@ components:
       description: Included resources related to the team membership
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Team'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
