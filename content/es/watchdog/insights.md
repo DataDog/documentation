@@ -25,7 +25,7 @@ Para investigar una incidencia es preciso seguir el método de prueba y error. P
 
 En la mayor parte de las funcionalidades de Datadog, Watchdog ofrece dos tipos de información:
 
-- **Anomalías**: Todas las [alertas de Watchdog][11] precalculadas que coinciden con la consulta de búsqueda activa que Watchdog ha encontrado al analizar los datos de tu organización. Consulta la lista completa en el [Explorador de alertas de Watchdog][12].
+- **Anomalías**: Todas las [alertas de Watchdog][11] precalculadas que coinciden con la consulta de búsqueda activa que Watchdog ha encontrado al analizar los datos de tu organización. Consulta la lista completa en el [explorador de alertas de Watchdog][12].
 - **Outliers**: Calculados a partir de los datos de producto que coinciden con la consulta activa, los outliers muestran etiquetas (tags) que aparecen con demasiada frecuencia en algunos tipos de eventos (por ejemplo, errores) o impulsan al alza de algunas métricas continuas (por ejemplo, latencia).
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="Explorador de logs que muestra el banner de Watchdog Insights con cinco anomalías de logs" style="width:100%;" >}}
@@ -44,7 +44,7 @@ El carrusel de Watchdog Insights se encuentra cerca de la parte superior de las 
 - Infraestructura:
     - [Explorador de procesos][7]
     - [Explorador serverless][8]
-    - [Explorador Kubernetes][9]
+    - [Explorador de Kubernetes][9]
 - [Explorador de Real User Monitoring (RUM)][10]
 - [Panel lateral de seguimiento de errores][13]
 
