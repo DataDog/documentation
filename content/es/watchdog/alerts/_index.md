@@ -54,7 +54,7 @@ Facetas disponibles:
 | Usuario final afectado   | (Requiere RUM). Si Watchdog ha encontrado usuarios finales afectados. Consulta [Análisis de los impactos][4] para obtener más información. |
 | Causa original          | (Requiere APM). Si Watchdog ha encontrado la causa original de la anomalía o del fallo crítico. Consulta [Análisis de causas originales][9] para obtener más información. |
 | Equipo                | Equipo propietario de los servicios afectados. Enriquecido a partir del [catálogo de servicios][7].  |
-| Tipos de anomalías de logs    | Muestra únicamente anomalías de logs de este tipo. Los tipos compatibles son los nuevos patrones de logs y los incrementos en patrones de logs existentes.|
+| Tipos de anomalías en logs    | Muestra únicamente anomalías en logs de este tipo. Los tipos compatibles son los nuevos patrones de logs y los incrementos en patrones de logs existentes.|
 | Origen del log          | Muestra únicamente las alertas que contienen logs procedentes de este origen.                           |
 | Estado del log          | Muestra únicamente las alertas que contienen logs con este estado de log.                         |
 
@@ -71,8 +71,8 @@ Estos logs agregados se analizan en busca de comportamientos anómalos, como los
 * Una aparición de logs con un estado de advertencia o de error.
 * Un aumento repentino de logs con un estado de advertencia o de error.
 
-Todas las anomalías de logs se muestran como [informaciones][3] en el explorador de logs, y coinciden con el contexto de búsqueda y con cualquier restricción aplicada a tu rol.
-Las anomalías de logs que Watchdog considera particularmente `severe` se muestran en el [explorador de alertas de Watchdog][1] y pueden ser alertadas configurando un [monitor de logs de Watchdog][2].
+Todas las anomalías en logs se muestran como [informaciones][3] en el explorador de logs, y coinciden con el contexto de búsqueda y con cualquier restricción aplicada a tu rol.
+Las anomalías en logs que Watchdog considera particularmente `severe` se muestran en el [explorador de alertas de Watchdog][1] y pueden ser alertadas configurando un [monitor de logs de Watchdog][2].
 Una anomalía `severe` se define de la siguiente forma:
 
 * Contiene logs con errores.
@@ -84,7 +84,7 @@ Una anomalía `severe` se define de la siguiente forma:
 
 #### Historial de datos requerido
 
-Watchdog requiere algunos datos para establecer una referencia para el comportamiento esperado. En el caso de las anomalías de logs, el historial mínimo es de 24 horas. 
+Watchdog requiere algunos datos para establecer una referencia para el comportamiento esperado. En el caso de las anomalías en logs, el historial mínimo es de 24 horas. 
 Watchdog empieza a encontrar anomalías una vez que dispone del historial mínimo requerido y mejora a medida que crece el historial. Los mejores resultados se obtienen con seis semanas de historial. 
 
 #### Desactivación de la detección de anomalías en logs
