@@ -40,9 +40,9 @@ Los proyectos son útiles aplicaciones de inicio. Cubren casos de uso comunes y 
 1. Para cambiar el nombre y la descripción de la aplicación, haz clic en el nombre de la aplicación.
 1. Cada proyecto viene cargado con datos de demostración. Para personalizar la aplicación, edita la **Connection** (Conexión) de cada consulta.
 1. Para guardar la aplicación, haz clic en **Save as New App** (Guardar como nueva aplicación).
-1. Para obtener una vista previa de la aplicación, haz clic en **Preview** (Vista previa). Haz clic en **Edit** (Editar), desde la pantalla de vista previa, para volver a la vista de configuración.
+1. Para obtener una vista previa de la aplicación, haz clic en **Preview** (Vista previa). Haz clic en **Edit** (Editar), en la pantalla de vista previa, para volver a la vista de configuración.
 1. Cuando termines de modificar la aplicación, haz clic en **Run** (Ejecutar) para realizar un test.
-1. Cuando tu aplicación esté lista para su publicación, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
+1. Cuando tu aplicación esté lista para ser publicada, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
 
 ### Crear una aplicación personalizada
 
@@ -51,9 +51,9 @@ Los proyectos son útiles aplicaciones de inicio. Cubren casos de uso comunes y 
 1. Para añadir un [componente de interfaz de usuario](#app-canvas-and-components) al lienzo de la aplicación, haz clic en el componente en la barra superior o arrástralo al lienzo.
 1. Utiliza [consultas](#queries) para rellenar o interactuar con tu lienzo.
 1. Para guardar la aplicación, haz clic en **Save as New App** (Guardar como nueva aplicación).
-1. Para obtener una vista previa de la aplicación, haz clic en **Preview** (Vista previa). Haz clic en **Edit** (Editar), desde la pantalla de vista previa, para volver a la vista de configuración.
+1. Para obtener una vista previa de la aplicación, haz clic en **Preview** (Vista previa). Haz clic en **Edit** (Editar), en la pantalla de vista previa, para volver a la vista de configuración.
 1. Cuando termines de modificar la aplicación, haz clic en **Run** (Ejecutar) para realizar un test.
-1. Cuando tu aplicación esté lista para su publicación, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
+1. Cuando tu aplicación esté lista para ser publicada, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
 
 ## Personalizar tu aplicación
 
@@ -61,7 +61,7 @@ Las aplicaciones están conformadas por componentes de interfaz de usuario y con
 
 Personalización básica:
 - Para editar **Name**, **Description**, or **Canvas Color** (Nombre, Descripción o Color del lienzo) en tu aplicación, haz clic en el nombre de la aplicación en la parte superior izquierda.
-- Haz clic en el botón **Preview** (Vista previa) para obtener una vista previa de tu aplicación. El modo de vista previa te permite ver la aplicación desde la perspectiva del usuario. Utiliza el modo de vista previa para interactuar con la interfaz de usuario de la aplicación y probar tus consultas. Cuando hayas terminado, haz clic en **Edit** (Editar) para volver al generador de aplicaciones.
+- Haz clic en el botón **Preview** (Vista previa) para obtener una vista previa de tu aplicación. El modo de vista previa te permite ver la aplicación desde la perspectiva del usuario. Utiliza el modo de vista previa para interactuar con la interfaz de usuario de la aplicación y realizar un test de tus consultas. Cuando hayas terminado, haz clic en **Edit** (Editar) para volver al generador de aplicaciones.
 - Para guardar tu aplicación, haz clic en **Save** (Guardar).
 - Cuando tu aplicación esté lista para ser publicada, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
 
