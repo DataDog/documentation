@@ -41,7 +41,7 @@ Para reenviar una invitación en la vista de lista, haz clic en el usuario y se 
 
 ## Editar los roles de un usuario
 
-Sólo los usuarios con el permiso User Access Management (Gestión de acceso de usuarios), por ejemplo, aquellos que tienen rol de administrador en Datadog, pueden modificar el rol de otro usuario.
+Sólo los usuarios con el permiso User Access Management (Gestión de acceso de usuarios), por ejemplo los que tienen un rol de administrador en Datadog, pueden modificar el rol de otro usuario.
 
 Para editar el rol de un usuario:
 
@@ -56,7 +56,7 @@ Para descubrir los roles disponibles y cómo crear roles personalizados, consult
 
 ## Editar los métodos de inicio de sesión de un usuario
 
-Sólo los usuarios con el permiso User Access Management (Gestión de acceso de usuario), por ejemplo, los que tienen un rol de administrador en Datadog, pueden modificar los métodos de inicio de sesión de otros usuarios.
+Sólo los usuarios con el permiso User Access Management (Gestión de acceso de usuarios), por ejemplo los que tienen un rol de administrador en Datadog, pueden modificar los métodos de inicio de sesión de otros usuarios.
 
 Los métodos de inicio de sesión predeterminados de una organización se pueden configurar en la página de métodos de inicio de sesión, desde donde podrás autorizar o no a todos los usuarios de tu organización a utilizar un nombre de usuario o una contraseña de Datadog, a iniciar sesión con Google o para iniciar sesión con SAML. En User Management (Gestión de usuarios) también puedes hacer modificaciones individuales a cada usuario para permitirle utilizar un método de inicio de sesión concreto o varios. Esto puede resultar útil si quieres que todos los usuarios utilicen SAML, pero necesitas que algunos de ellos puedan iniciar sesión con su usuario y contraseña en caso de emergencia.
 
@@ -73,7 +73,7 @@ Para editar los métodos de inicio de sesión de un usuario:
 
 ## Desactivar miembros existentes
 
-Sólo los usuarios con el permiso Access Management (Gestión de acceso), por ejemplo, los que son administradores en Datadog, pueden desactivar miembros. No es posible eliminar usuarios de forma permanente, ya que pueden ser propietarios de dashboards o de monitores, y sus ID de usuario se utilizan para hacer un seguimiento de su acciones. Cuando se desactiva un usuario, las claves de aplicación que haya generado se revocan automáticamente.
+Sólo los usuarios con el permiso Access Management (Gestión de acceso), por ejemplo los que tienen un rol de administrador en Datadog, pueden desactivar miembros. No es posible eliminar usuarios de forma permanente, ya que pueden ser propietarios de dashboards o de monitores, y sus ID de usuario se utilizan para hacer un seguimiento de su acciones. Cuando se desactiva un usuario, las claves de aplicación que haya generado se revocan automáticamente.
 
 1. Accede a la pestaña **Users** (Usuarios) en **Organization Settings** (Parámetros de la organización).
 2. Selecciona **Edit** (Editar) a la derecha del usuario.
