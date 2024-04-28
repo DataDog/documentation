@@ -60,7 +60,7 @@ Resolver (Solucionador)
 Editor
 : Editar, resolver y visualizar la conexión
 
-Por defecto, sólo el autor de la conexión recibe el acceso **Editor**. El autor puede optar por conceder acceso a otros usuarios, funciones o equipos.
+Por defecto, sólo el autor de la conexión recibe el acceso **Editor**. El autor puede optar por conceder acceso a otros usuarios, roles o equipos.
 
 **Nota**: El permiso para resolver una conexión incluye el permiso para asignar el objeto de conexión a un paso y recuperar el secreto asociado a él.
 
@@ -71,7 +71,7 @@ Sigue los siguientes pasos para modificar los permisos de una conexión específ
 1. Pasa el cursor sobre la conexión en la que quieres establecer permisos granulares. A la derecha aparecerán los iconos **Edit**, **Permissions** y **Delete** (Editar, Permisos y Eliminar).
 1. Haz clic en el icono del candado (**Permissions** [Permisos]).
 1. Seleccione **Restrict Access** (Restringir el acceso).
-1. Selecciona una función del menú desplegable y haz clic en **Add** (Añadir). El rol seleccionado aparecerá en la parte inferior del cuadro de diálogo.
+1. Selecciona un rol del menú desplegable y haz clic en **Add** (Añadir). El rol seleccionado aparecerá en la parte inferior del cuadro de diálogo.
 1. Junto al nombre del rol, selecciona el permiso deseado en el menú desplegable.
 1. Si quieres eliminar el acceso a un rol, haz clic en el icono de la papelera situado a la derecha del nombre del rol.
 1. Haz clic en **Save** (Guardar).
@@ -95,7 +95,7 @@ Para restringir el acceso a la aplicación, realiza los siguientes pasos en el l
 1. En el editor de aplicaciones, haz clic en el icono de engranaje (**Settings** [Configuración]).
 1. Selecciona **Permissions** (Permisos) en el menú desplegable.
 1. Selecciona **Restrict Access* (Restringir el acceso).
-1. Selecciona una función en el menú desplegable. Haz clic en **Add** (Añadir). El rol seleccionado aparecerá en la parte inferior del cuadro de diálogo.
+1. Selecciona un rol en el menú desplegable. Haz clic en **Add** (Añadir). El rol seleccionado aparecerá en la parte inferior del cuadro de diálogo.
 1. Junto al nombre del rol, selecciona el permiso deseado en el menú desplegable.
 1. Si quieres eliminar el acceso a un rol, haz clic en el icono de la papelera situado a la derecha del nombre del rol.
 1. Haz clic en **Save** (Guardar).
