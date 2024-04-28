@@ -28,7 +28,7 @@ También puedes activar el monitor haciendo clic en el botón **Suggested Monito
 
 Cada implementación se analiza repetidamente. Para evitar volver a alertar sobre la misma implementación con errores, Datadog recomienda configurar un tiempo de recuperación de 60 minutos para el monitor.
 
-{{< img src="watchdog/faulty_deployment_suggested_monitors_redesigned_cropped.png" alt="Página de servicios de APM service page con el botón de monitores sugerido" >}}
+{{< img src="watchdog/faulty_deployment_suggested_monitors_redesigned_cropped.png" alt="Página de servicios de APM con el botón de monitores sugerido" >}}
 
 ### ¿Por qué una nueva implementación no se ha etiquetado con errores, a pesar de tenerlos?
 
