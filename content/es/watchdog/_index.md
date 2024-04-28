@@ -52,7 +52,7 @@ Watchdog calcula de forma proactiva una referencia del comportamiento esperado e
 
 {{< whatsnext desc="">}}
  {{< nextlink href="/watchdog/alerts">}}<u>Watchdog Alerts</u>: Cómo ver e interpretar las alertas de Watchdog: Qué información proporciona cada alerta, qué cubren las alertas y dónde encontrar las alertas de Watchdog en Datadog.{{< /nextlink >}}
-  {{< nextlink href="/watchdog/faulty_deployment_detection"><u>}}Detección de implementaciones con errores</u>: Cómo encuentra Watchdog implementaciones de código con errores .{{< /nextlink >}}
+  {{< nextlink href="/watchdog/faulty_deployment_detection">}}<u>Detección de implementaciones con errores</u>: Cómo encuentra Watchdog implementaciones de código con errores .{{< /nextlink >}}
 {{< /whatsnext >}}
 
 Para personalizar los algoritmos de Watchdog:
