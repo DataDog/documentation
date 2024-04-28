@@ -11,7 +11,7 @@ title: Configurar el SCIM con Azure Active Directory
 
 Consulta las siguientes instrucciones para sincronizar tus usuarios de Datadog con Azure Active Directory utilizando el SCIM.
 
-Para conocer los requisitos previos, las capacidades y las limitaciones, consulta [SCIM][1].
+Para conocer los requisitos previos, las capacidades y las limitaciones, consulta el [SCIM][1].
 
 ## Añadir Datadog a la galería de aplicaciones Azure AD
 
@@ -31,9 +31,9 @@ Para conocer los requisitos previos, las capacidades y las limitaciones, consult
 3. Abre **Admin Credentials** (Credenciales de administrador).
 4. Completa la sección **Admin Credentials** (Credenciales de administrador) de la siguiente manera:
     - **Tenant URL** (URL del arrendatario): `https://app.datadoghq.com/api/v2/scim`
-    - **Secret Token** (Token secreto): Utiliza una clave de aplicación válida de Datadog. Puedes crear una clave de aplicación en tu [página de parámetros de la organización ][2]. Para mantener un acceso continuo a tus datos, utiliza una clave de aplicación de [cuenta de servicio][3].
+    - **Secret Token** (Token secreto): Utiliza una clave de aplicación de Datadog válida. Puedes crear una clave de aplicación en tu [página de parámetros de la organización][2]. Para mantener un acceso continuo a tus datos, utiliza una clave de aplicación de [cuenta de servicio][3].
 
-{{< img src="/account_management/scim/admin-credentials.png" alt="Pantalla de configuración de las credenciales de administrador de Azure AD">}}
+{{< img src="/account_management/scim/admin-credentials.png" alt="Pantalla de configuración de credenciales de administrador de Azure AD">}}
 
 5. Haz clic en **Test Connection** (Probar conexión) y espera a que aparezca el mensaje que confirma que las credenciales están autorizadas para habilitar el suministro.
 6. Haz clic en **Save** (Guardar). Aparecerá la sección de asignaciones. Consulta la siguiente sección para configurar asignaciones.
