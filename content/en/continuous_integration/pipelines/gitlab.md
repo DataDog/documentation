@@ -9,7 +9,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and measures"
@@ -162,13 +162,13 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 ## Visualize pipeline data in Datadog
 
-After the integration is successfully configured, the [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the pipelines finish.
+Once the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The Pipelines page shows data for only the default branch of each repository.
 
 ### Partial and downstream pipelines
 
-In the **Pipeline Executions** page, you can use the filters below in the search bar:
+On the **Executions** page, you can use the filters below in the search bar:
 
 `Downstream Pipeline`
 : Possible values: `true`, `false`
