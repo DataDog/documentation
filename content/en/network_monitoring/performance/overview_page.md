@@ -10,9 +10,9 @@ further_reading:
 
 ## Overview
 
-The NPM overview page provides a high-level overview of your network, from costly network traffic to DNS health to service top talkers. Use the Overview page to filter network traffic by environment or team with tags, and adjust the time frame for your network data. 
+The [NPM overview page][3] provides a high-level overview of your network, from costly network traffic to DNS health to service top talkers. Use the Overview page to filter network traffic by environment or team with tags, and adjust the time frame for your network data. 
 
-{{< img src="/network_performance_monitoring/overview_page/overview_page.png" alt="The network overview page in Datadog" style="width:90%;">}}
+{{< img src="/network_performance_monitoring/overview_page/overview_page_2.png" alt="The network overview page in Datadog" style="width:100%;">}}
 
 ## External network traffic
 
@@ -48,3 +48,4 @@ The **Identify Top Traffic Sources** section shows traffic across different sour
 
 [1]: /dashboards/widgets/timeseries/
 [2]: /dashboards/widgets/top_list/
+[3]: https://app.datadoghq.com/network/overview
