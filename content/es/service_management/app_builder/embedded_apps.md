@@ -40,7 +40,7 @@ ${self.options?.find(o => o.includes(global.dashboard.templateVariables?.find(v 
 
 ### Contextualizar una aplicación de forma dinámica
 
-Los elementos de la aplicación vinculados a variables de plantilla de dashboard se actualizan al mismo tiempo que los valores de variables de plantilla en el dashboard. Por ejemplo, al seleccionar un valor concreto de `instance_id` a través de la variable de la plantilla desplegable o directamente a partir de un gráfico, el valor de `instance_id` se añade también al filtro de la aplicación, de modo que puedas realizar las acciones necesarias en esa instancia:
+Los elementos de la aplicación vinculados a variables de plantilla de dashboard se actualizan al mismo tiempo que los valores de variables de plantilla en el dashboard. Por ejemplo, al seleccionar un valor concreto de `instance_id` a través de la variable de plantilla desplegable o directamente a partir de un gráfico, el valor de `instance_id` se añade también al filtro de la aplicación, de modo que puedas realizar las acciones necesarias en esa instancia:
 
 {{< img src="service_management/app_builder/embedded_apps/template_variables.mp4" alt="Seleccionar un valor de variable de plantilla de un gráfico" vídeo="true">}}
 
