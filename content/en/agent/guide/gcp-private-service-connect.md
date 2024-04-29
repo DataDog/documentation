@@ -29,7 +29,7 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
 
 1. In your Google Cloud console, navigate to **Network services** > **Private Service Connect**.
 2. Go to the **Endpoints** section. Click on **Connect endpoint**.
-   {{< img src="agent/guide/psc/connect-endpoint.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
+   {{< img src="agent/guide/psc/connect-endpoint1.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
 
    - Under **Target**, select _Published service_.
    - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
@@ -41,18 +41,18 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
    **Note**: Datadog exposes PSC producer endpoints from the `us-central1` region. These endpoints support global access, allowing services to connect from any region. However, the forwarding rule must be created in the `us-central1` region.
 
 3. Click **Add endpoint**. Verify that your status is _Accepted_. Take note of the IP address, as this is used in the next section.
-   {{< img src="agent/guide/psc/connect-endpoint-success.png" alt="Screenshot of a success message after adding an endpoint in the Google Cloud console. Includes an IP address" >}}
+   {{< img src="agent/guide/psc/connect-endpoint-success1.png" alt="Screenshot of a success message after adding an endpoint in the Google Cloud console. Includes an IP address" >}}
 
 ### Create a DNS zone
 1. In your Google Cloud console, navigate to **Network services** > **Cloud DNS**.
 2. Click on **Create zone**.
-   {{< img src="agent/guide/psc/create-a-dns-zone.png" alt="Screenshot of a 'Create a DNS zone' page in the Google Cloud console" >}}
+   {{< img src="agent/guide/psc/create-a-dns-zone1.png" alt="Screenshot of a 'Create a DNS zone' page in the Google Cloud console" >}}
 
    - Under **Zone type**, select _Private_.
    - For **Zone name**, enter a descriptive name for your zone.
    - For **DNS name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services).
 3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on **Add record set**.
-   {{< img src="agent/guide/psc/create-record.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
+   {{< img src="agent/guide/psc/create-record1.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
 
    - For **DNS name**, leave the field unmodified.
    - For **Resource record type**, select `A`.
@@ -69,7 +69,7 @@ Create a Private Zone for (`agent.`{{< region-param key="dd_site" code="true" >}
 | `*`      | A                    | IP address for your metrics endpoint |
 | `trace`  | A                    | IP address for your traces endpoint |
 
-**Note**: this zone requires a wildcard (*) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
+**Note**: this zone requires a wildcard (`*`) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
 
 ### Validation
 
@@ -133,7 +133,7 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
 
 1. In your GCP console, navigate to **Network services** > **Private Service Connect**.
 2. Go to the **Endpoints** section. Click on **Connect endpoint**.
-   {{< img src="agent/guide/psc/connect-endpoint-eu.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
+   {{< img src="agent/guide/psc/connect-endpoint-eu1.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
 
    - Under **Target**, select _Published service_.
    - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
@@ -145,18 +145,18 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
    **Note**: Datadog exposes PSC producer endpoints from the `europe-west3` region. These endpoints support global access, allowing services to connect from any region. However, the forwarding rule must be created in the `europe-west3` region.
 
 3. Click **Add endpoint**. Verify that your status is _Accepted_. Take note of the IP address, as this is used in the next section.
-   {{< img src="agent/guide/psc/connect-endpoint-success-eu.png" alt="Screenshot of a success message after adding an endpoint in the Google Cloud console. Includes an IP address" >}}
+   {{< img src="agent/guide/psc/connect-endpoint-success-eu1.png" alt="Screenshot of a success message after adding an endpoint in the Google Cloud console. Includes an IP address" >}}
 
 ### Create a DNS zone
 1. In your Google Cloud console, navigate to **Network services** > **Cloud DNS**.
 2. Click on **Create zone**.
-   {{< img src="agent/guide/psc/create-a-dns-zone-eu.png" alt="Screenshot of a 'Create a DNS zone' page in the Google Cloud console" >}}
+   {{< img src="agent/guide/psc/create-a-dns-zone-eu1.png" alt="Screenshot of a 'Create a DNS zone' page in the Google Cloud console" >}}
 
    - Under **Zone type**, select _Private_.
    - For **Zone name**, enter a descriptive name for your zone.
    - For **DNS name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services).
 3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on **Add record set**.
-   {{< img src="agent/guide/psc/create-record-eu.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
+   {{< img src="agent/guide/psc/create-record-eu1.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
 
    - For **DNS name**, leave the field unmodified.
    - For **Resource record type**, select `A`.
@@ -174,7 +174,7 @@ Create a Private Zone for (`agent.`{{< region-param key="dd_site" code="true" >}
 | `*`      | A                    | IP address for your metrics endpoint |
 | `trace`  | A                    | IP address for your traces endpoint |
 
-**Note**: this zone requires a wildcard (*) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
+**Note**: this zone requires a wildcard (`*`) record that points to the IP address for your metrics endpoint. This is because Datadog Agents submit telemetry using a versioned endpoint in the form (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}).
 
 ### Validation
 
