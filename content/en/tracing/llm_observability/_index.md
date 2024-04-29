@@ -1,19 +1,20 @@
 ---
 title: LLM Observability
+kind: documentation
 ---
 
-To access LLM Observability, navigate to Infrastructure → LLM Observability in the Datadog UI.
+## Overview
 
-### Prerequisites
-You will need a Datadog API Key before proceeding. Please follow the appropriate setup instructions depending on your use case.
+TODOs:
+- What is this product?
+- What is its value?
 
-You can submit data to Datadog's LLM Observability product in two ways:
-- Using Datadog's Python SDK 
-- Submitting data using the LLM Observability API
+CTA: Learn more on the Tracing an Application page,
+or get started below.
 
+## Getting started
 
-## Contents
-
-This is the LLM Observability index page. It can [link to the nested page][1].
-
-[1]: /tracing/llm_observability/nested_page_example
+TODOs:
+- Prerequisites
+- SDK quickstart
+- Button link to "Tracing an LLM Application"
