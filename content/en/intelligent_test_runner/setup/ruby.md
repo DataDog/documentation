@@ -100,7 +100,7 @@ Examples include:
 * Tests that read data from text files
 * Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
 * Tests that run external processes
-* Tests that use threads or fork process (code coverage does not)
+* Tests that use threads or fork process (code coverage tracks only code executed in main thread)
 
 Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
 
@@ -150,13 +150,21 @@ You can also add this tag to scenario to skip only selected scenario.
 
 ```
 @datadog_itr_unskippable
-Feature: Greetings
+Feature: Unskippable feature
   Scenario: Say greetings
     When the greeter says greetings
     Then I should have heard "greetings"
 
-Feature: Goodbye
+Feature: An unskippable scenario
+
   @datadog_itr_unskippable
+  Scenario: Unskippable scenario
+    When the ITR wants to skip this scenario
+    Then it will never be skipped
+
+  Scenario: Skippable scenario
+    When the ITR wants to skip this scenario
+    Then it will be skipped
 ```
 
 {{% /tab %}}
