@@ -97,7 +97,7 @@ El siguiente ejemplo muestra el cuadro de diálogo **New Connection** (Nueva con
 ### Eliminar una conexión
 
 1. Navega hasta la [connections list (lista de conexiones)][3].
-1. Pasa el cursos sobre la conexión que deseas eliminar. A la derecha aparecen los iconos **Editar**, **Permisos** y **Eliminar**.
+1. Pasa el cursor sobre la conexión que deseas eliminar. A la derecha aparecen los iconos **Editar**, **Permisos** y **Eliminar**.
 1. Haz clic en el icono de la papelera (**Eliminar**). Aparecerá el texto "¿Estás seguro?".
 1. Selecciona **Eliminar**.
 
