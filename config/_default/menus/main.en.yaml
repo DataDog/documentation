@@ -2873,6 +2873,46 @@ menu:
       parent: tracing_services
       identifier: tracing_apm_monitors
       weight: 706
+    - name: LLM Observability
+      url: tracing/llm_observability/
+      parent: tracing
+      identifier: tracing_llm_obs
+      weight: 7
+    - name: Getting Started
+      url: tracing/llm_observability/getting_started/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_getting_started
+      weight: 701
+    - name: Trace an LLM Application
+      url: tracing/llm_observability/trace_an_application/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_trace_an_application
+      weight: 702
+    - name: Exploring LLM Traces
+      url: tracing/llm_observability/exploring_llm_traces/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_exploring_traces
+      weight: 703
+    - name: Levels of Tracing
+      url: tracing/llm_observability/levels_of_tracing/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_levels_of_tracing
+      weight: 704
+    - name: Spans
+      url: tracing/llm_observability/spans/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_spans
+      weight: 705
+    - name: API
+      url: tracing/llm_observability/api/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_api
+      weight: 706
+    - name: Data Collected
+      url: tracing/llm_observability/data_collected/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_data_collected
+      weight: 707
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog

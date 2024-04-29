@@ -1,5 +1,5 @@
 ---
-title: LLM Traces Page
+title: Exploring LLM Traces
 ---
 
 TODO
