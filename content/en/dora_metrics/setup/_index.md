@@ -51,6 +51,8 @@ Each event type supports different data sources.
   {{< nextlink href="/dora_metrics/incidents/" >}}Send an Incident Event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Change lead time
+
 ## Examine metrics
 
 [DORA Metrics][3] generates metrics from these events, which are available in the [Events Explorer][4], and can be queried programmatically by using the [Query timeseries points][5] and [Query timeseries data across multiple products][6] API endpoints. 
