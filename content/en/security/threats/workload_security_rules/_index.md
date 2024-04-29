@@ -23,11 +23,11 @@ This topic explains how Cloud Security Management Threats (CSM Threats) actively
 
 ## CSM Threats rules construction
 
-CSM Threats rules consist of two different components: Agent rules and Threat detection rules.
+CSM Threats rules consist of two different components: Agent rules and threat detection rules.
 
-- **Agent rules:** [Agent rules][9] are evaluated on the Agent host. CSM Threats first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. Agent expressions use Datadog’s [Security Language (SECL)][2]. 
+- **Agent rules:** [Agent rules][9] are evaluated on the Agent host. CSM Threats first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. Agent expressions use Datadog's [Security Language (SECL)][2].<br><br>
   
-  For example, here is the *Agent Configuration rule* expression `cryptominer_args`: 
+  For example, here is the *Agent rule* expression `cryptominer_args`: 
 
   ```text
   exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
@@ -42,9 +42,9 @@ CSM Threats rules consist of two different components: Agent rules and Threat de
       ~"*yespower*"
   ]
   ```
-- **Threat Detection rules:** [Threat Detection rules][3] are evaluated on the Datadog cloud (backend). Threat Detection rules are composed of existing Agent Configuration rules and additional expression parameters.
+- **Threat detection rules:** [Threat detection rules][3] are evaluated on the Datadog backend. Threat detection rules are composed of existing Agent rules and additional expression parameters.<br><br>
   
-  Here is the *Threat Detection rule* `Process arguments match cryptocurrency miner`. It uses the Agent Configuration rules, `cryptominer_args` and `windows_cryptominer_process`, identified by `@agent.rule_id`, with additional expression parameters:
+  Here is the *threat detection rule* `Process arguments match cryptocurrency miner`. It uses the Agent rules, `cryptominer_args` and `windows_cryptominer_process`, identified by `@agent.rule_id`, with additional expression parameters:
 
   ```text
   @agent.rule_id:(cryptominer_args || windows_cryptominer_process) 
@@ -53,11 +53,11 @@ CSM Threats rules consist of two different components: Agent rules and Threat de
 
 ### CSM Threats rules pipeline
 
-CSM Threats use the following pipeline when evaluating events:
+CSM Threats uses the following pipeline when evaluating events:
 
 1. The Agent rules evaluate system activity on the Agent host.
-2. When activity matches an Agent rule expression, the Agent generates a detection event and passes it to the Datadog cloud (backend).
-3. The Datadog cloud evaluates the detection event to see if it matches any Threat Detection rules that use the Agent rule that sent the event.
+2. When activity matches an Agent rule expression, the Agent generates a detection event and passes it to the Datadog backend.
+3. The Datadog backend evaluates the detection event to see if it matches any threat detection rules that use the Agent rule that sent the event.
 4. If there is a match, a signal is generated and displayed in [Signals][8].
 5. Any [Notification Rules][10] that match the severity, detection rule type, tags, and attributes of the signal are triggered.
 
@@ -65,18 +65,18 @@ CSM Threats use the following pipeline when evaluating events:
 
 CSM Threats detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there. 
 
-Datadog solves this problem by keeping the Agent lightweight with only a few rules, and processes most rules using the Threat Detection rules on the Datadog cloud. 
+Datadog solves this problem by keeping the Agent lightweight with only a few rules, and processes most rules using the threat detection rules on the Datadog backend. 
 
-Only when the Agent observes an event that matches its rules does it send a detection to the Datadog cloud. The Datadog cloud then evaluates the detection to determine if it meets its Threat Detection rule expressions. Only if there is a match does the Datadog cloud create a signal.
+Only when the Agent observes an event that matches its rules does it send a detection to the Datadog backend. The Datadog backend then evaluates the detection to determine if it meets its threat detection rule expressions. Only if there is a match does the Datadog backend create a signal.
 
 ### Custom rule design
 
-Understanding the dependency Threat Detection rules have on Agent Configuration rules is important when you want to use custom rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
+Understanding the dependency threat detection rules have on Agent rules is important when you want to use custom rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
 There are two use cases:
 
-- **Create a Threat Detection rule using an existing Agent rule:** If you want to create a Threat Detection rule that uses an existing Agent Configuration rule, then you only need to create a Threat Detection rule that references the Agent Configuration rule and adds any additional expression parameters you need.
-- **Create a Threat Detection rule using a new Agent rule:** If you want to detect an event that the current Agent Configuration rules are not picking up, then you need to create a custom Agent Configuration rule to detect that event, and then create a custom Threat Detection rule that uses the custom Agent Configuration rule.
+- **Create a threat detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, then you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
+- **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, then you need to create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
 
 For a detailed explanation, see [CSM Threats Detection Rules][11]. 
 
