@@ -25,7 +25,7 @@ To create a [Watchdog monitor][2] in Datadog, use the main navigation: *Monitors
 {{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-1.png" alt="Configuring a Watchdog Monitor" style="width:80%;">}}
 
 ## Define your query
-Select the scope to be alerted on by configuring (wildcards are supported):
+Select the scope to be alerted on with the following optional configurations (wildcards are supported):
 
 **1. Predefined selectors**
 * Environment. These values are derived from the `env` tag.
