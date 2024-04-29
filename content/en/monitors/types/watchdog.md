@@ -33,9 +33,9 @@ Select the scope to be alerted on with the following optional configurations (wi
 * Team. These values are derived from the Service Catalog.
 
 **2. Additional scoping**
-* Filter on any additional tag available on the Watchdog event
-* Group By the dimensions you want to [group notifications by][3]
-{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-2.png" alt="Configuring a Watchdog Monitor with advanced settings" style="width:80%;">}}
+* Filter on any additional tag available on the Watchdog event.
+* Group By the dimensions you want to [group notifications by][3].
+{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-2.png" alt="Configuring a Watchdog Monitor with advanced settings" style="width:90%;">}}
 
 After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame.
 
