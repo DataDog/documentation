@@ -1772,7 +1772,7 @@ menu:
       identifier: error_tracking_explorer
       weight: 1
     - name: Default Grouping
-      url: error_tracking/grouping
+      url: error_tracking/default_grouping
       parent: error_tracking
       identifier: error_tracking_default_grouping
       weight: 2
