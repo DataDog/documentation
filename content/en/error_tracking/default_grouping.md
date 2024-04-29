@@ -14,19 +14,18 @@ Each time an error is sent to Datadog, a fingerprint is computed based on the fo
 * error message
 * stack frame (think *file and line number*)
 
-Variables in the attributes such as usernames or ids are removed in order to group errors into issues.
+Variables in the attributes such as usernames or ids are removed to group errors into issues.
 
-The fingerprint is dependent on how the error is captured and the programming language. We are constantly iterating to deliver the best user experience.
+The fingerprint is dependent on how the error is captured and the programming language. It is continuously improved to deliver the best user experience.
 
-**Note**: Different attributes will lead to different issues - there is currently no way to group issues across several services or error types.
-
+**Note**: Different attributes lead to different issues - issues cannot be grouped across services or error types.
 
 
 ## Setup
  
 ### Mobile and frontend applications
 
-Uploading your source maps will allow us to get the right stack frame and deliver a better grouping.
+Upload your source maps to identify the right stack frame and experience a better grouping.
 
 - Web: [Sourcemaps upload][1]
 - Mobile: [Crash reporting][2] 
