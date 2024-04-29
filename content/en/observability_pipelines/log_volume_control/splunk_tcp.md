@@ -33,11 +33,6 @@ This document walks you through the following steps to set up the Observability 
 Enter the following information based on your selected logs destination.
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
-
-{{% observability_pipelines/destination_settings/datadog %}}
-
-{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}

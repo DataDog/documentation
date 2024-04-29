@@ -47,11 +47,11 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 [Trigger mobile app tests][2] from your CI pipeline using [Continuous Testing][3], or [schedule mobile app tests][4] to run at regular intervals and manually trigger mobile app tests on the Datadog site.
 
-## Use the Synthetic Monitoring & Continuous Testing Explorer
+## Use the Synthetic Monitoring & Testing Results Explorer
 
-Create [search queries and visualizations][5] for your Synthetic test runs or batches of tests running in CI/CD pipelines in the [Synthetic Monitoring & Continuous Testing Explorer][6]. 
+Create [search queries and visualizations][5] for your Synthetic test runs or batches of tests running in CI/CD pipelines in the [Synthetic Monitoring & Testing Results Explorer][6]. 
 
-{{< img src="mobile_app_testing/explorer_mobile_test_runs.png" alt="Mobile App Test Runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="mobile_app_testing/explorer_mobile_test_runs.png" alt="Mobile App Test Runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 ## Further reading
 

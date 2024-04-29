@@ -177,7 +177,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Errores en nombres de host de AWS ECS y Docker VM
+## Errores de nombre de hosts de mv Amazon ECS y Docker
 
 Cuando el Agent se ejecuta en Docker en un proveedor de nube, un error en el nombre de host suele indicar que el Agent no puede acceder:
 * a la API de tiempo de ejecución del contenedor;
@@ -188,7 +188,7 @@ Cuando el Agent se ejecuta en Docker en un proveedor de nube, un error en el nom
 Permite que el Agent se conecte al socket de Docker:
 
 {{< tabs >}}
-{{% tab "AWS ECS en EC2" %}}
+{{% tab "Amazon ECS en EC2" %}}
 
 Asegúrate de que el socket de Docker está integrado en tu [definición de tarea][1].
 
