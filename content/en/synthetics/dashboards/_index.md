@@ -8,7 +8,7 @@ further_reading:
   text: 'Learn about Synthetic Monitoring'
 - link: '/continuous_testing/explorer/'
   tag: 'Documentation'
-  text: 'Learn about the Synthetic Monitoring & Continuous Testing Explorer'
+  text: 'Learn about the Synthetic Monitoring & Testing Results Explorer'
 - link: '/continuous_testing/explorer/saved_views'
   tag: 'Documentation'
   text: 'Learn about Saved Views'

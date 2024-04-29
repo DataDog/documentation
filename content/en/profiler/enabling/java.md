@@ -81,19 +81,19 @@ To begin profiling applications:
 
    {{< tabs >}}
    {{% tab "Wget" %}}
-      ```shell
-      wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-      ```
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
    {{% /tab %}}
    {{% tab "cURL" %}}
-      ```shell
-      curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-      ```
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
    {{% /tab %}}
    {{% tab "Dockerfile" %}}
-      ```dockerfile
-      ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
-      ```
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -272,9 +272,11 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 
 {{< /tabs >}}
 
-### Live-heap profiler engine
+### Live-heap profiler engine (alpha)
 
 _Since: v1.17.0. Requires JDK 11+._
+
+<div class="alert alert-warning">This is an alpha feature, it is not recommended to enable this feature in production environments.</a></div>
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.

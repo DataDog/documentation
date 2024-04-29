@@ -16380,11 +16380,17 @@ components:
       required:
       - data
       type: object
-    RetentionFilterResponse:
+    RetentionFilterCreateResponse:
       description: The retention filters definition.
       properties:
         data:
           $ref: '#/components/schemas/RetentionFilter'
+      type: object
+    RetentionFilterResponse:
+      description: The retention filters definition.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterAll'
       type: object
     RetentionFilterType:
       default: spans-sampling-processor
@@ -22674,6 +22680,7 @@ components:
       description: Included resources related to the team membership
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Team'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -23611,7 +23618,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RetentionFilterResponse'
+                $ref: '#/components/schemas/RetentionFilterCreateResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -31647,7 +31654,7 @@ paths:
       - Roles
       x-given:
         permission:
-          source: data[0]
+          source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
       x-undo:
@@ -32314,7 +32321,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all CSM Threats Agent rules
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 3
       x-undo:
         type: safe
@@ -32346,7 +32353,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-given:
         agent_rule:
@@ -32381,7 +32388,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 6
       x-undo:
         type: idempotent
@@ -32406,7 +32413,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 2
       x-undo:
         type: safe
@@ -32443,7 +32450,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 5
       x-undo:
@@ -32472,7 +32479,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the latest CSM Threats policy
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 1
       x-undo:
         type: safe
@@ -32535,11 +32542,11 @@ paths:
 
         Restriction policies can be applied to the following resources:
 
-        - Connections: `connection`
-
         - Dashboards: `dashboard`
 
         - Notebooks: `notebook`
+
+        - Powerpacks: `powerpack`
 
         - Security Rules: `security-rule`
 
@@ -32552,11 +32559,11 @@ paths:
 
         -------------------------|--------------------------
 
-        Connections              | `viewer`, `editor`, `resolver`
-
         Dashboards               | `viewer`, `editor`
 
         Notebooks                | `viewer`, `editor`
+
+        Powerpacks               | `viewer`, `editor`
 
         Security Rules           | `viewer`, `editor`
 
@@ -33905,7 +33912,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the latest Cloud Workload Security policy
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 1
       x-undo:
         type: safe
@@ -33926,7 +33933,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all Cloud Workload Security Agent rules
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 3
       x-undo:
         type: safe
@@ -33957,7 +33964,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-given:
         agent_rule:
@@ -33992,7 +33999,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 6
       x-undo:
         type: idempotent
@@ -34016,7 +34023,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 2
       x-undo:
         type: safe
@@ -34053,7 +34060,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 5
       x-undo:
@@ -38630,10 +38637,6 @@ tags:
     Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
     page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
   name: Cloud Cost Management
-- description: Workload activity security rules for generating events using the Datadog
-    security Agent. See the [Setting up CSM Workload Security page](https://docs.datadoghq.com/security/cloud_security_management/setup/csm_workload_security/)
-    for more information.
-  name: Cloud Workload Security
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
