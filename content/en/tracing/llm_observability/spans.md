@@ -228,6 +228,91 @@ def sanitize_input():
 	return 
 {{< /code-block >}}
 
+## Tracing with function decorators
+
+For each span kind, the LLM Observability Python SDK `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators can be used the same way as their inline counterparts:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow
+
+@workflow(name="process_message", session_id="<SESSION_ID>", ml_app="<ML_APP>")
+def process_message():
+	... # user application logic
+	return
+{{< /code-block >}}
+
+## Annotating a span
+
+The LLM Observability Python SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata. The `LLMObs.annotate()` method accepts the following arguments:
+
+`span` : optional - _Span_ - **default**: the current active span
+<br />The span to annotate. If `span` is not provided (as when using function decorators), the SDK annotates the current active span.
+
+`input_data` : optional - _JSON serializable type or list of dictionaries_ 
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).
+
+`output_data` : optional - _JSON serializable type or list of dictionaries_ 
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a list of dictionaries with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+
+`metadata` : optional - _dictionary_
+<br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input/output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
+
+`tags` : optional - _dictionary_
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on).
+
+### Span annotation example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+def llm_call(prompt):
+	with LLMObs.llm(name="llm_call", model="model_name", model_provider="model_provider") as llm_span:
+		resp = ... # llm call here
+		LLMObs.annotate(
+  			span=llm_span,
+input_data=[{"role": "user", "content": "Hello world!"}],
+output_data=[{"role": "assistant", "content": "How can I help?"}],
+metadata={"temperature": 0, "max_tokens": 200},
+tags={"host": "host_name"},
+)
+	return resp
+
+@workflow(name="process_message")
+def process_message(prompt):
+	resp = llm_call_inline(prompt)
+	LLMObs.annotate(
+span=None,
+input_data="prompt",
+output_data="output",
+tags={"host": "host_name"},
+)
+	return resp
+{{< /code-block >}}
+
+## Manually starting and stopping a span
+
+To persist a span between different contexts or scopes:
+
+1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but inline rather than as a context manager. 
+2. Pass the span object as an argument to other functions.
+3. Stop the span manually with the `span.finish()` method.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def separate_task(workflow_span):
+	... # user application logic 
+	workflow_span.finish()
+	return
+
+def process_message():
+workflow_span = LLMObs.workflow(name="process_message")	
+	... # user application logic
+	separate_task(workflow_span)
+	return
+{{< /code-block >}}
+
 [open-ai-python-sdk]: https://github.com/openai/openai-python
 [boto3]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 [botocore]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
