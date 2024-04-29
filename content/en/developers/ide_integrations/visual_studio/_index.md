@@ -35,6 +35,14 @@ Analyze and improve the performance of your applications with real-time profilin
 
 {{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Code Insights view">}}
 
+## Logs navigation
+
+You can navigate to the [Log Explorer][5] on the Datadog platform directly from your C# source files. Look for the clickable icon preceding message strings from log statements within your source code:
+
+{{< img src="/developers/ide_integrations/visual_studio/logs-navigation.png" alt="A source file showing log lines with clickable icons." style="width:100%;" >}}
+
+Clicking the icon opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
+
 ### Open code in Visual Studio from Datadog
 
 Navigate from Datadog to your source code with one click.
