@@ -75,7 +75,7 @@ Users with the Admin role or **Org Management** permission can enable or disable
 
 ## Supported widget types
 
-{{< img src="dashboards/scheduled_reports/scheduled_report_pdf_2024-04-18.png" alt="Example of a scheduled report pdf file with static view of the widgets" style="width:80%;" >}}
+{{< img src="dashboards/scheduled_reports/pdf_report.png" alt="Example PDF report" style="width:80%;" >}}
 
 
 The following widget types are supported:
