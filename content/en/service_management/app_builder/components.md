@@ -72,6 +72,8 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file
 
+For more information on events, see [Events][1].
+
 #### Inspect data
 
 Displays property and value pairs in JSON format.
@@ -179,6 +181,8 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+For more information on events, see [Events][1].
+
 #### Inspect data
 
 Displays property and value pairs in JSON format.
@@ -227,6 +231,8 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+For more information on events, see [Events][1].
+
 #### Inspect data
 
 Displays property and value pairs in JSON format.
@@ -265,6 +271,8 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+For more information on events, see [Events][1].
+
 #### Inspect data
 
 Displays property and value pairs in JSON format.
@@ -299,6 +307,8 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+For more information on events, see [Events][1].
 
 #### Inspect data
 
@@ -351,6 +361,8 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+For more information on events, see [Events][1].
 
 #### Inspect data
 
@@ -408,6 +420,8 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+For more information on events, see [Events][1].
+
 #### Inspect data
 
 Displays property and value pairs in JSON format.
@@ -452,6 +466,8 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+For more information on events, see [Events][1].
 
 #### Inspect data
 
@@ -515,6 +531,8 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+For more information on events, see [Events][1].
 
 #### Inspect data
 
@@ -631,6 +649,8 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+For more information on events, see [Events][1].
+
 #### Inspect data
 
 Displays property and value pairs in JSON format.
@@ -708,6 +728,8 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+For more information on events, see [Events][1].
+
 #### Inspect data
 
 Displays property and value pairs in JSON format.
@@ -716,3 +738,7 @@ Displays property and value pairs in JSON format.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+
+[1]: /service_management/app_builder/build/#events

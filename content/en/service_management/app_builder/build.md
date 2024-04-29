@@ -73,21 +73,7 @@ Each component features a list of corresponding configuration options that contr
 
 To delete or duplicate a component, select the component and click the three dot ellipsis (*...*) to display the **Delete** or **Duplicate** options.
 
-Available UI components:
-- Button
-- Callout value
-- Checkbox
-- Container
-- Date range picker
-- JSON input
-- Modal
-- Number input
-- Radio
-- Search
-- Select
-- Table
-- Text
-- Text input
+For a list of available UI components and their properties, see [Components][8].
 
 #### Events
 
@@ -207,3 +193,4 @@ To edit an app with JSON, click the cog (**Settings**) icon and select **Switch 
 [5]: /service_management/workflows/connections
 [6]: /service_management/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
+[8]: /service_management/app_builder/components
