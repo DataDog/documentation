@@ -1,5 +1,5 @@
 ---
-title: Attackers Explorer
+title: Attacker Explorer
 kind: documentation
 disable_toc: false
 further_reading:
@@ -7,38 +7,35 @@ further_reading:
   tag: "Documentation"
   text: "Protection"
 ---
-
-This topic describes how to use **Attackers Explorer** to investigate and block Flagged IPs.
+ 
+This topic describes how to use **Attacker Explorer** to investigate and block Flagged Attackers.
 
 ## Overview
 
-Datadog Application Security Management (ASM) identifies attackers using flagged IPs. Flagged IPs are IPs that have exceeded thresholds for abuse. You can pivot, investigate, and take action against the attackers Datadog identifies using [Attackers Explorer][1]. 
+Datadog Application Security Management (ASM) identifies attackers as suspicious and flagged. With Attackers Explorer][1], you can pivot, investigate, and take action against the attackers. 
 
-### How Attackers differs from Signals and Traces
 
-ASM **Attacks** contains the **Signals**, **Traces**, and **Attackers** explorers. Each of the explorers focus on a specific use case:
+### Definitions
+*Suspicious Attackers*: IP addresses that have sent attack traffic in the last 24 hours up to a maximum threshold.
 
-- **Traces** are the evidence for business logic events, such as logins, or attack payloads, such as command injection. All ASM traces have an IP address.
-- **Signals** are traces that are correlated into an actionable alert and assigned a severity. Each signal contains multiple traces.
-- **Attackers** enables you to interact with large numbers of IP addresses and perform the following use cases:
-  - Evaluate an IP across **Signals** and **Traces** and pivot to other explorers.
-  - Drill down into meaningful IP attributes and the history of the IP's interactions with your services.
-  - Block an IP with safety and confidence.
+*Flagged Attackers*: IP addresses that have sent attack traffic, exceeding the threshold of Suspicious Attackers, in the last 24 hours. Flagged Attackers should be blocked.
 
-### Blocking methods
+An IP address cannot be Suspicious and Flagged at the same time.
 
-ASM uses two methods when blocking traffic:
+### How Attacker Explorer differs from Signal and Trace Explorers
 
-- **Protect:** Automated blocking using ASM Protection configuration.
-  Customers should block Attack Tools as their first automated blocking action. {link to this} Blocking Attack Tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
-- **Reactive:** Blocking using Signals or Attackers explorer in response to observed threats.
+ASM **Attacks** contains the **Signal**, **Trace**, and **Attacker** explorers. Each explorer focuses on a specific use case:
 
-### Best practices for blocking
+{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the ASM Attacker Explorer navigation"  >}}
 
-1. In the Attackers explorer time selector, use short durations for blocking IP addresses. Between 15 minutes and 1 hour are recommended. 
-2. Add authorized scanners to monitored passlists to observe activity but prevent blocking.
-3. Identifying load balancers and proxies for correct `X-Forwarded-For` headers.
-4. Block mobile ISPs with caution. These networks might have large numbers of users and mobile devices behind single IP addresses.
+- **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, and search, sort, filter and pivoting to Trace Explorer.
+- **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search, sort, and filter.
+- **Attacker Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
+  - mass actions for attacker analytics and blocking
+  - drill down into the history of any attacker
+  - search, sort, and filter
+  - pivoting to other explorers  
+
 
 ## Explore and filter attackers
 
@@ -46,23 +43,32 @@ To start reviewing attackers, go to [Attackers Explorer][1].
 
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="ASM Attacker Explorer"  >}}
 
-There are three sections to the Attackers Explorer:
+There are two sections to the Attackers Explorer:
 
-1. Metrics, displayed in **Suspicious Attackers** and **Flagged Attackers**. For example, `21 out of 37 IPs`. These are global counts and are not impacted by the explorer's time selection.
-2. Facets, search, and time selector, used to filter rows of attackers.
-3. The list of attackers.
-
-You can filter attackers using the default filters, such as **Flagged Attackers**. And you can further refine your filter using the **Severity**, **Blocking status**, **Attackers**, and other facets. 
+1. Filters and Search for Suspicious and Flagged Attackers and Facets. These enable you to filter traffic by service or attacker attributes. 
+2. The list of attackers.
 
 <div class="alert alert-info"><strong>Flagged Attackers</strong> and <strong>Suspicious Attackers</strong> are mutually exclusive. An IP cannot be grouped in both states at the same time.</a></div>
 
+## Investigate an IP
+Click on any row to view the history and attributes of the IP.
+
+SCREENSHOT 2
+
+### Best practices for blocking with Attacker Explorer
+
+1. Account takeover attacks: Use short durations for blocking IP addresses.
+2. Add authorized scanners to monitored passlists to observe activity but prevent blocking.
+3. Block mobile ISPs with caution. These networks might have large numbers of users and mobile devices behind single IP addresses.
 
 ## Block individual IPs
 
 To block an individual IP temporarily or permanently, do the following:
 
-1. Select the IP row and use the options in the **Actions** column or the **Compare and Block** option.
-2. To explore the signals or traces for an IP, select the IP row and select the **Explore Signals** or **Explore Traces** option.
+1. Click `Block` on the row
+2. Choose a blocking duration
+
+{{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block and IP address with ASM Attacker Explorer"  >}}
 
 ## Block IPs in bulk
 
@@ -71,8 +77,8 @@ You can select multiple IPs and block them temporarily or permanently using the 
 **Compare and Block** provides metrics about the IPs to help you block with safety and confidence. For example, **Similarity Overview** and **Activity**, described later in this topic.
 
 To compare and block IPs in bulk, do the following:
-1. Use the search, facets, and time selector to filter the list of IPs.
-2. Select multiple/all IP rows.
+1. Filter the list of Attackers with a search or facets.
+2. Select multiple IPs
 3. Select the **Compare and Block** option.
     In the following example, the selected IPs are from the same location and appear to be related. The **Compare and Block** option opens the **Block selected attackers** view, showing metrics and attributes for the selected IP addresses.
 
@@ -92,7 +98,7 @@ The **Block selected attackers** view metrics are explained in the following sec
 
 ### Selected IPs
 
-Contains the IPs selected from the explorer. Deselecting an IP removes it from the subsequent sections and **Block** action.
+Contains the IPs selected from the explorer. Deselecting an IP removes it from the metrics sections and **Block** action.
 
 ### Similarity overview
 
@@ -110,12 +116,12 @@ Location
 Domain
 : The owner of the ASN. This is helpful when an organization owns multiple ASNs.
 
-Users
+Users per IP
 : The number of users who have authenticated from the IP. IPs with large numbers of logins might indicate a load balancer or many users from the same location, like a company site.
 
 ### Activity
 
-The time scope for activity is inherited from the time selection on the **Attackers** explorer.
+The time scope for activity is 30 days
 
 #### Signals
 
@@ -125,9 +131,9 @@ The signals associated with the IP addresses over the selected time.
 
 The traces associated with the IP addresses over the selected time. 
 
-Benign traffic is sampled APM traffic, traces without business logic, or attack traffic detections.
+Benign traffic is sampled APM traffic which are traces without business logic or attack traffic detections.
 
-Attack traffic is all ASM traces inclusive of business logic.
+Attack traffic is all ASM traces, inclusive of business logic.
 
 ### Block
 
