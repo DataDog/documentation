@@ -41,7 +41,7 @@ After your selections are made, the graph at the top of the monitor creation pag
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For more instructions on the **Notify your team** section, see the [Notifications][4] page.
 
 ## Further Reading
 
