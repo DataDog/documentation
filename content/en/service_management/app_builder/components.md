@@ -23,7 +23,7 @@ App Builder provides many UI components that you can use when building your apps
 
 ### Button
 
-Buttons have the following properties.
+Button elements have the following properties.
 
 #### General
 
@@ -80,7 +80,7 @@ Displays property and value pairs in JSON format.
 
 ### Callout value
 
-Callout values have the following properties.
+Callout value elements have the following properties.
 
 #### General
 
@@ -131,7 +131,7 @@ Displays property and value pairs in JSON format.
 
 ### Checkbox
 
-Checkboxes have the following properties.
+Checkbox elements have the following properties.
 
 #### General
 
@@ -187,7 +187,7 @@ Displays property and value pairs in JSON format.
 
 ### Container
 
-Containers have the following properties.
+Container elements have the following properties.
 
 #### Appearance
 
@@ -204,7 +204,7 @@ Displays property and value pairs in JSON format.
 
 ### Date range picker
 
-Date range pickers have the following properties.
+Date range picker elements have the following properties.
 
 #### General
 
@@ -235,7 +235,7 @@ Displays property and value pairs in JSON format.
 
 ### JSON input
 
-JSON inputs have the following properties.
+JSON input elements have the following properties.
 
 #### General
 
@@ -273,7 +273,7 @@ Displays property and value pairs in JSON format.
 
 ### Modal
 
-Modals have the following properties.
+Modal elements have the following properties.
 
 #### General
 
@@ -308,7 +308,7 @@ Displays property and value pairs in JSON format.
 
 ### Number input
 
-Number inputs have the following properties.
+Number input elements have the following properties.
 
 Label
 : The text that displays at the top of the number input element.<br>
@@ -361,7 +361,7 @@ Displays property and value pairs in JSON format.
 
 ### Radio
 
-Radios have the following properties.
+Radio elements have the following properties.
 
 #### General
 
@@ -461,17 +461,256 @@ Displays property and value pairs in JSON format.
 
 ### Select
 
+Select elements have the following properties.
 
+#### General
 
+Label
+: The text that displays at the top of the select element.<br>
+**Value**: expression or string
+
+Placeholder text
+: The text that shows when no value is entered.<br>
+**Value**: expression or string
+
+Options
+: The list of select options that a user can select from.<br>
+**Value**: expression or string
+**Example**:<br>
+: {{< code-block lang="json" disable_copy="true">}}${[
+    {
+        "label": "Staging",
+        "value": "staging"
+    },
+    {
+        "label": "Production",
+        "value": "production"
+    }
+]}{{< /code-block >}}
+
+Default value
+: The value that is selected when the select loads.<br>
+**Value**: expression or string
+
+Is Multiselect
+: Determines whether the user can select more than one option at a time.<br>
+**Values**: on, off
+
+#### Appearance
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Values**: on, off<br>
+_optional_
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
 
 
 
 ### Table
 
+Table elements have the following properties.
+
+#### General
+
+Data source
+: The array of objects to display in a table.<br>
+**Values**: query, demo data, components
+
+#### Columns
+
+Each column of data from the data source is represented here and has the following properties:
+
+Label
+: The text that displays at the top of the column.<br>
+**Value**: expression or string
+
+Data path
+: JSON path to access values nested within objects and arrays of a given column.<br>
+**Value**: expression or string
+
+Formatting
+: The type of format that the column will take on.<br>
+**Values**: string, link, status pill, date / time, markdown, tags, percent bar, number, score bar, avatar
+
+Sortable
+: Determines whether the user can sort by the column.<br>
+**Values**: on, off
+
+Some columns have additional properties based on their **Formatting** property.
+
+#### Pagination
+
+Has summary
+: Determines whether to display a pagination summary directly above the table.<br>
+**Values**: on, off
+
+Page size
+: Number of rows per page to display.<br>
+**Value**: number or valid template expression that evaluates to a number
+
+Total count
+: Total number of rows to display in the table.<br>
+**Value**: number or valid template expression that evaluates to a number
+
+Type
+: Determines the type of pagination.<br>
+**Values**: client side, server side
+
+#### Row actions
+
+Adding a row action adds an **Actions** column to the table, which contains user-defined action buttons. These buttons have the following properties:
+
+Label
+: The text that displays on the action button.<br>
+**Value**: expression or string
+
+Primary
+: Designed to call user attention to the most important action(s) for a given page or workflow.<br>
+**Values**: on, off<br>
+_required_
+
+Borderless
+: Removes the border from any button. On hover, it gets a background fill.<br>
+**Values**: on, off<br>
+_required_
+
+Disabled
+: Applies disabled styling and removes interactions.<br>
+**Values**: on, off<br>
+_optional_
+
+Level
+: Controls the color of the button according to its intent.<br>
+**Values**: default, danger, success, warning
+
+Reaction
+: The reaction type the button triggers.
+**Values**: custom, set component state, trigger query, open modal, close modal, open url, download file
+
+#### Appearance
+
+Is Loading
+: Shows a loading indicator.<br>
+**Values**: on, off<br>
+_optional_
+
+Has text wrapping
+: Determines whether cell text wraps.<br>
+**Values**: on, off<br>
+
+Scrollable
+: Determines what ways the table is scrollable in.<br>
+**Values**: both, vertical
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Value**: pageChange, tableRowClick
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
+
 ### Text
+
+Text elements have the following properties.
+
+#### General
+
+Content
+: The content that the text element displays.<br>
+**Value**: expression or string
+
+Content type
+: Determines how to render the text.<br>
+**Values**: plain text, Markdown
+
+#### Appearance
+
+Text alignment
+: Determines the horizontal alignment of the text within the element.<br>
+**Values**: align left, align center, align right
+
+Vertical alignment
+: Determines the vertical alignment of the text within the element.<br>
+**Values**: align top, align center, align bottom
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
+
+
 
 ### Text input
 
+Text input elements have the following properties.
+
+Label
+: The text that displays at the top of the text input element.<br>
+**Value**: expression or string
+
+Default value
+: The value that is selected when the text input loads.<br>
+**Value**: expression or string
+
+Placeholder text
+: The text that shows when no value is entered.<br>
+**Value**: expression or string
+
+#### Appearance
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Values**: on, off<br>
+_optional_
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Values**: on, off<br>
+_optional_
+
+#### Events
+
+Event
+: **Value**: change, submit
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+#### Inspect data
+
+Displays property and value pairs in JSON format.
 
 
 ## Further reading
