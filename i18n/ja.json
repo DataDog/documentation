@@ -364,6 +364,9 @@
   "source" : {
     "other": "ソース"
   },
+  "try_this_rule" : {
+    "other": "TRY THIS RULE"
+  },
   "available_for": {
     "other": "次で利用可能"
   }

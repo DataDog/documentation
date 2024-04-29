@@ -9,7 +9,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "https://www.datadoghq.com/blog/aws-codepipeline-ci-visibility/"
       tag: "Blog"
       text: "Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility"
@@ -19,15 +19,25 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Partial pipelines**: View partially retried executions
-- **Running pipelines**: View pipeline executions that are running
-    - **Note**: AWS CodePipeline running pipelines don't have Git information until they have finished.
+[AWS CodePipeline][1] is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates.
+
+Set up tracing on AWS CodePipeline to collect data about pipeline executions, analyze performance bottlenecks or operational issues, and monitor your deployment workflows.
+
+### Compatibility
+
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
+| [Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
+
+**Note**: AWS CodePipeline running pipelines don't have Git information until they have finished.
 
 ## Configure the Datadog integration
 
 To set up the integration between [AWS CodePipeline][1] and Datadog CI Visibility, create two AWS resources:
+
 1. [API Destination][2]: an HTTP endpoint pointing to Datadog's intake.
 2. [AWS EventBridge Rule][3]: a rule that forwards CodePipeline events to the API Destination.
 
@@ -103,15 +113,13 @@ The steps above allow you to add the pipeline execution ID to your CodeBuild act
 
 ## Visualize pipeline data in Datadog
 
-View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after the pipelines finish.
+View your data on the [**CI Pipeline List**][11] and [**Executions**][12] pages after the pipelines finish.
 
-**Note**: The Pipelines page only shows data for the [default branch][13] of each repository.
+The **CI Pipeline List** page shows data for only the [default branch][13] of each repository.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
 
 [1]: https://aws.amazon.com/codepipeline/
 [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html
@@ -126,3 +134,5 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 [11]: https://app.datadoghq.com/ci/pipelines
 [12]: https://app.datadoghq.com/ci/pipeline-executions
 [13]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
+[14]: /glossary/#partial-retry
+[15]: /glossary/#running-pipeline
