@@ -6,19 +6,17 @@ description: Understand how errors are grouped into issues.
 
 ## Overview
 
-Error Tracking intelligently groups similar errors into issues based on their fingerprint. 
+Error Tracking intelligently groups similar errors into issues based on their fingerprint.
 
-Each time an error is sent to Datadog, a fingerprint is calculated using information available on the error.
-
-Four attributes are extracted to compute the fingerprint:
+Each time an error is sent to Datadog, a fingerprint is computed based on the following attributes of the error:
 * service
 * error type (think *exception class*)
 * error message
 * stack frame (think *file and line number*)
 
-Variable parts such as usernames or ids are removed from attributes in order to group errors into issues.
+Variables in the attributes such as usernames or ids are removed in order to group errors into issues.
 
-The fingerprint is highly dependent on how the error is captured and the programming language. We constantly iterate to deliver the best user experience.
+The fingerprint is dependent on how the error is captured and the programming language. We are constantly iterating to deliver the best user experience.
 
 **Note**: Different attributes will lead to different issues - there is currently no way to group issues across several services or error types.
 
