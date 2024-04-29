@@ -15,6 +15,9 @@ From the [Correlation][1] page, find the pattern you want to analyze and click *
 
 ## Event Management Case
 
+{{< img src="service_management/events/correlation/triage/event_management_case_detail.png" alt="Case detail page - Overview" style="width:100%;" >}}
+
+
 | Feature | Description | 
 | ------  | ----------- | 
 | Priority | highest priority of correlated alerts |
@@ -24,6 +27,8 @@ From the [Correlation][1] page, find the pattern you want to analyze and click *
 | Enriched Alerts | some cases will get automatically enriched with intelligent alerts that Datadog thinks are related based on your infrastructure. Enriched alert do not impact case attribute, priority, and status |
 
 
+For more informatino on Case Management opertaions, see the [Case Management documentation][5].
+
 ### Investigation
 1. From the case Overview, click **Investigation**
 1. Under the *Correlations* section, you can see a list of alerts and events
@@ -31,7 +36,6 @@ From the [Correlation][1] page, find the pattern you want to analyze and click *
 1. (Optional) Select any alerts or events you want to remove that are not related to the case
 1. Under the *Related Metrics* section, compare all related metrics or group by tags
 
-For more informatino on Case Management opertaions, see the [Case Management documentation][5].
 
 ## Create a notification or ticket
 

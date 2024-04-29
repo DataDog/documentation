@@ -23,6 +23,7 @@ After you add the facet, the value of this attribute is stored for all new views
 
 ### Reserved attributes
 Host, Service, Status are part of core Event Attributes. You can not create new facet on service, host and status tag. 
+
 For Datadog monitor events, the first event tag in alphabetic order is used to set the event attribute. For example, for an event with multiple service tags `service:bcd; service:ace`, `service:ace` will be used to set event attribute. 
 
 ## Further reading

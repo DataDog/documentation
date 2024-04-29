@@ -26,6 +26,8 @@ To get started:
 
 ## Receiving your first case
 
+{{< img src="service_management/events/correlation/intelligent/intelligent_project.png" alt="Event Management - Intelligent Correlation" style="width:100%;" >}}
+
 When you navigate to [Case Management][2], find a project called **Event Management - Intelligent Correlation**. From this project, you can see the views you created before and the cases created by Intelligent Correlation. 
 
 Intelligent Correlation generates cases automatically after it finds related alerts:

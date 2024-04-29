@@ -80,5 +80,5 @@ After you update an existing pattern, all live cases will stop processing. New e
 
 [1]: https://app.datadoghq.com/event/correlation
 [2]: https://app.datadoghq.com/event/correlation/new
-[3]: https://app.datadoghq.com/service_management/events/explorer/facets/#create-a-facet
-[4]: https://app.datadoghq.com/service_management/events/explorer/facets
+[3]: /service_management/events/explorer/facets/#create-a-facet
+[4]: /service_management/events/explorer/facets
