@@ -93,6 +93,53 @@ Source maps, mapping files, and dSYM files are limited to **500** MB each.
 
 ## Test your implementation
 
+To verify your Expo Crash Reporting and Error Tracking configuration, you need to issue an error in your RUM application and confirm that the error appears in Datadog.
+
+To test your implementation:
+
+1. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
+2. Execute some code containing an error or crash. For example:
+
+   ```javascript
+   const throwError = () => {
+    throw new Error("My Error")
+   }
+   ```
+
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
+4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
+
+To make sure your sourcemaps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
+
+Install it with yarn or npm then re-install your pods:
+
+```shell
+yarn add react-native-performance-limiter # or npm install react-native-performance-limiter
+(cd ios && pod install)
+```
+
+Crash the JavaScript thread from your app:
+
+```javascript
+import { crashJavascriptThread } from 'react-native-performance-limiter';
+
+const crashApp = () => {
+    crashJavascriptThread('custom error message');
+};
+```
+
+Re-build your application for release to send the new sourcemaps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+
+To test your dSYMs and Proguard mapping files upload, crash the native main thread instead:
+
+```javascript
+import { crashNativeMainThread } from 'react-native-performance-limiter';
+
+const crashApp = () => {
+    crashNativeMainThread('custom error message');
+};
+```
+
 ## Additional configuration options
 
 ### Disable file uploads
