@@ -75,6 +75,10 @@ Synthetic テストの実行や、CI/CD パイプラインで実行されてい�
 
 [Synthetic テスト][4]をいくつか構成したら、お好みの [CI/CD プロバイダー][1]のドキュメントを参照するか、CI/CD パイプラインで [datadog-ci NPM パッケージ][14]を使用します。ローカル環境や、プライベートネットワーク内のステージング環境でテストを実行する場合など、非公開の環境や本番以外の環境で Continuous Testing を使用するには、[ローカル環境およびステージング環境のテスト][17]を参照してください。その後、[Synthetic Monitoring & Continuous Testing Explorer][11] でバッチ実行の詳細について調べ始めます。
 
+{{< learning-center-callout header="ラーニングセンターで CI/CD パイプラインでの Synthetic テストをお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline">}}
+  Datadog ラーニングセンターには、このトピックについて学ぶのに役立つ実践的なコースが満載です。無料で登録して、CI/CD パイプラインで Datadog Synthetic テストを実行する方法を学びましょう。
+{{< /learning-center-callout >}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

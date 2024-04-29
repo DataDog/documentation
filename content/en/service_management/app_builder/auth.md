@@ -26,9 +26,15 @@ For more information on configuring credentials, see [Connections][2]. App Build
 
 ## App permissions
 
+By default:
+- While the app is in draft, the author of an app is the only user who has access to the app.
+- After the app is published, the author maintains **Editor** access, while the rest of the author's Datadog organization receives **Viewer** access to the app.
+
+You can expand access to a draft of published app using access control.
+
 ### Permissions and access control
 
-Use [role-based access control (RBAC)][4] to control access to your apps and connections. 
+Use [role-based access control (RBAC)][4] to control access to your apps and connections.
 
 The coarse permissions that apply to apps include the following:
 
@@ -54,6 +60,8 @@ Resolver
 Editor
 : Edit, resolve, and view the connection
 
+By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
+
 **Note**: Permission to resolve a connection includes permission to get the connection object assigned to a step and retrieve the secret associated with it.
 
 Use the following steps to modify the permissions on a specific connection:
@@ -70,7 +78,11 @@ Use the following steps to modify the permissions on a specific connection:
 
 ### Restrict access to a specific app
 
-Set permissions on each app to restrict modifications to the app. App Builder provides the following permissions for each app:
+Set permissions on each app to restrict modifications to the app. By default:
+- The author of an app is the only user who has access to the app.
+- After the app is published, the author maintains **Editor** access, while the rest of the author's Datadog organization receives **Viewer** access to the app.
+
+App Builder provides the following permissions for each app:
 
 Viewer
 : Run and view the app

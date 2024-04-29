@@ -9,7 +9,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -44,9 +44,9 @@ To set up the Datadog integration for [Codefresh][1]:
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the pipelines finish.
+The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Further reading
 

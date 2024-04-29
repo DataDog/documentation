@@ -75,12 +75,11 @@ The following table summarizes the CSM features available relative to each deplo
 | Linux            | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}               |                           |                     |
 | Amazon ECS/EKS   | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}               |                           |                     |
 | AWS Account      |                        | {{< X >}}             |                  |                         | {{< X >}}                 |  beta               |
-| Azure Account    |                        | {{< X >}}             |                  |                         |                           |                     |
+| Azure Account    |                        | {{< X >}}             |                  |                         | {{< X >}}                         |                     |
 | GCP Account      |                        | {{< X >}}             |                  |                         |                           |                     |
 | Windows          | {{< X >}}              |                       | {{< X >}}        |                         |                           |                     |
 | AWS Fargate ECS/EKS | {{< X >}}           |                       | beta             |                         |                           |                     |
 | Terraform           |                     |                       |                  |                         |                           |  beta               |
-
 
 The following tables represent additional prerequisites relative to each CSM feature.
 

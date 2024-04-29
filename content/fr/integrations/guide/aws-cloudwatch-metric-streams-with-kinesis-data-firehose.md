@@ -138,7 +138,7 @@ Si vous avez configuré la diffusion avec [CloudFormation](?tab=cloudformation#i
 
 Si vous avez configuré la diffusion avec la [Console AWS](?tab=awsconsole#installation) :
 1. Supprimez le flux de métriques CloudWatch lié à votre flux de diffusion.
-2. Supprimez les rôles du compartiment S3, de Firehose et d'IAM associés au flux et toutes les autres ressources créées lors de la configuration du flux.
+2. Supprimez toutes les ressources créées lors de la configuration du flux, y compris les rôles IAM pour S3 et Firehose qui sont associés au flux.
 
 Une fois les ressources supprimées, patientez cinq minutes le temps que Datadog détecte la modification. Pour confirmer la suppression, accédez à l'onglet **Metric Collection** de la [page d'intégration AWS][4] de Datadog et vérifiez que les régions désactivées ne sont pas affichées sous **CloudWatch Metric Streams** pour le compte AWS spécifié.
 
