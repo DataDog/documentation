@@ -16,7 +16,7 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< callout header="false" url="#" btn_hidden="true" >}}Intelligent Test Runner for Ruby in beta.{{< /callout >}}
+{{< beta-callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Ruby in beta.{{< /beta-callout >}}
 
 ## Compatibility
 
