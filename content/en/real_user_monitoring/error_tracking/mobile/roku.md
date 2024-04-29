@@ -42,7 +42,7 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ## Limitations
 
-**Note**: Crash reporting on Roku doesn't yet support stacktraces. 
+Crash reporting on Roku doesn't yet support stacktraces. 
 
 ## Test your implementation
 
