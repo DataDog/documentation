@@ -29,9 +29,9 @@ La función de RCA de Watchdog tiene en cuenta las siguientes fuentes de datos e
 
 {{< img src="watchdog/rca/root_cause_cropped.png" alt="Análisis de causas raíz de Watchdog que muestra la causa raíz, el error crítico y su impacto">}}
 
-Un análisis de causas raíz de Watchdog incluye tres componentes: causa raíz, error crítico e impacto.
+Un análisis de las causas raíz de Watchdog incluye tres componentes: causa raíz, error crítico e impacto.
 
-### Causa raíz
+### Root cause (Causa raíz)
 
 Una causa raíz es un cambio de estado que da lugar a problemas de rendimiento de la aplicación. Entre los posibles cambios de estado se incluyen una diferencia en la disponibilidad de la infraestructura, un pico de tráfico o una implementación de código.
 
