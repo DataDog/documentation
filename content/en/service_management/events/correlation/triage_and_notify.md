@@ -11,7 +11,7 @@ further_reading:
 
 Event Management correlates related events and automatically consolidates them into a single case. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
 
-From the [Correlation][1] page, find the pattern you want to analyze and click **Triage Cases** at the end of the same row. You can also click **View All Cases** at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
+From the [Correlation][1] page, find the pattern you want to analyze and click **Triage Cases** at the end of the same row. You can also click **Case Management** at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
 
 ## Event Management Case
 
@@ -27,7 +27,7 @@ From the [Correlation][1] page, find the pattern you want to analyze and click *
 | Enriched Alerts | some cases will get automatically enriched with intelligent alerts that Datadog thinks are related based on your infrastructure. Enriched alert do not impact case attribute, priority, and status |
 
 
-For more informatino on Case Management opertaions, see the [Case Management documentation][5].
+For more information on Case Management operations, see the [Case Management documentation][5].
 
 ### Investigation
 1. From the case Overview, click **Investigation**

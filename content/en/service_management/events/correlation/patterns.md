@@ -16,12 +16,12 @@ To get you started, Datadog automatically suggests [pattern-based correlations][
 
 To create a pattern:
 1. Navigate to [Correlation][1].
-1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens pattern configuration page that displays out-of-the-box suggested patterns on the left side, and pattern output preview on the right side. 
+1. Click **+ Add a Pattern**, at the top of the Pattern table. This opens a pattern configuration page that displays out-of-the-box suggested patterns on the left side, and a pattern output preview on the right side. 
 1. You can adjust a suggested pattern by clicking **+ Continue With Pattern**. This takes you to the pre-populated configuration page for additional tuning. Or, you can choose to create your own pattern by clicking **+ Personalize From Scratch**
 
 First, events are deduplicated to alert based on event aggregation key. Then, alerts are correlated to a case based on configuration. 
 {{< img src="service_management/events/correlation/correlation_helper.mp4" alt="When events matches defined sources, filter, they get deduplicated to alerts. Alerts are correlated based on grouping attributes, and its events are de-duplicated withint the defined time window before the process repeats in a new case. You can modify these configuration in settings" video=true >}}
-For more information on how to setup the aggregation key, see the API or integration page. Events without an aggregation key are deduped to one single alert within the timeframe.
+For more information on how to sends events with aggregation key, see [send events to datadog][5]. Events without an aggregation key are deduped to one single alert within the timeframe.
 
 ### Suggested patterns
 Suggested patterns are recommended based on your commonly used service and environment tags to help you get started with event correlation quickly. 
@@ -29,7 +29,8 @@ Suggested patterns are recommended based on your commonly used service and envir
 ### Configuration
 From the [correlation configuration page][2]
 1. Select the event source you want to group on from the dropdown.
-1. Define the grouping tags. Grouping tags are event facets. See the [advanced settings section](#advanced-settings-optional) below if you don't see the tag from the dropdown. Please note, facet can be created on both event attribute and tag. Check [facets][4] to learn more. 
+1. Define the grouping tags. Grouping tags are event facets. See the [advanced settings section](#advanced-settings-optional) below if you don't see the tag from the dropdown. 
+**Note**: you can create facets on both event attribute and tag. To learn more, see the [facets][4] documentation. 
 1. To exclude any events from the source defined above, add an event query in **Filter by these events or tags** to filter them out
 
 ### Advanced settings (optional)
@@ -82,3 +83,4 @@ After you update an existing pattern, all live cases will stop processing. New e
 [2]: https://app.datadoghq.com/event/correlation/new
 [3]: /service_management/events/explorer/facets/#create-a-facet
 [4]: /service_management/events/explorer/facets
+[5]: /service_management/events/ingest/
