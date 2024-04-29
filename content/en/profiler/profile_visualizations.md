@@ -92,7 +92,7 @@ Four tabs are below the profile header:
 
 The timeline view is the equivalent of the flame graph, with a distribution over time.
 
-{{< img src="profiler/profiling_viz-timeline.png" alt="A timeline" >}}
+{{< img src="profiler/profiling_viz-timeline2.png" alt="A timeline" >}}
 
 It shows time-based patterns and work distribution over:
 - [The period of a single profile](#single-profile)
