@@ -12,32 +12,33 @@ This topic describes how to use **Attacker Explorer** to investigate and block F
 
 ## Overview
 
-Datadog Application Security Management (ASM) identifies attackers as suspicious and flagged. With Attackers Explorer][1], you can pivot, investigate, and take action against the attackers. 
+Datadog Application Security Management (ASM) identifies attackers as suspicious and flagged. With [Attackers Explorer][1], you can investigate and take action against the attackers. 
 
 
 ### Definitions
 *Suspicious Attackers*: IP addresses that have sent attack traffic in the last 24 hours up to a maximum threshold.
 
-*Flagged Attackers*: IP addresses that have sent attack traffic, exceeding the threshold of Suspicious Attackers, in the last 24 hours. Flagged Attackers should be blocked.
+*Flagged Attackers*: IP addresses that have sent attack traffic, exceeding the threshold of Suspicious Attackers, in the last 24 hours. Flagged Attackers should be reviewed and blocked.
 
-An IP address cannot be Suspicious and Flagged at the same time.
+<div class="alert alert-info"><strong>Flagged Attackers</strong> and <strong>Suspicious Attackers</strong> are mutually exclusive. An IP cannot be in both states at the same time.</a></div>
 
 ### How Attacker Explorer differs from Signal and Trace Explorers
 
-ASM **Attacks** contains the **Signal**, **Trace**, and **Attacker** explorers. Each explorer focuses on a specific use case:
+ASM **Attacks** contains the **Signal**, **Trace**, and **Attacker** explorers. 
 
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the ASM Attacker Explorer navigation"  >}}
 
-- **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, and search, sort, filter and pivoting to Trace Explorer.
-- **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search, sort, and filter.
+Each explorer focuses on a specific use case:
+- **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
+- **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
 - **Attacker Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
   - mass actions for attacker analytics and blocking
   - drill down into the history of any attacker
-  - search, sort, and filter
+  - search
   - pivoting to other explorers  
 
 
-## Explore and filter attackers
+### Explore and filter attackers
 
 To start reviewing attackers, go to [Attackers Explorer][1].
 
@@ -45,15 +46,16 @@ To start reviewing attackers, go to [Attackers Explorer][1].
 
 There are two sections to the Attackers Explorer:
 
-1. Filters and Search for Suspicious and Flagged Attackers and Facets. These enable you to filter traffic by service or attacker attributes. 
-2. The list of attackers.
+1. Facets and search. These enable you to filter traffic by service or attacker attributes. 
+2. The list of attackers with security metrics.
 
-<div class="alert alert-info"><strong>Flagged Attackers</strong> and <strong>Suspicious Attackers</strong> are mutually exclusive. An IP cannot be grouped in both states at the same time.</a></div>
 
-## Investigate an IP
+### Investigate an IP
 Click on any row to view the history and attributes of the IP.
 
-SCREENSHOT 2
+{{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with ASM Attacker Explorer"  >}}
+
+IP's can be blocked or added to the Passlist from the IP drawer.
 
 ### Best practices for blocking with Attacker Explorer
 
@@ -65,10 +67,10 @@ SCREENSHOT 2
 
 To block an individual IP temporarily or permanently, do the following:
 
+{{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block an IP address with ASM Attacker Explorer"  >}}
+
 1. Click `Block` on the row
 2. Choose a blocking duration
-
-{{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block and IP address with ASM Attacker Explorer"  >}}
 
 ## Block IPs in bulk
 
@@ -92,7 +94,7 @@ When you select the **Compare and Block** option, the **Block selected attackers
 
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
 
-<div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the time selection on the **Attackers** sxplorer.</a></div>
+<div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the last 30 days.</a></div>
 
 The **Block selected attackers** view metrics are explained in the following sections.
 
@@ -139,9 +141,6 @@ Attack traffic is all ASM traces, inclusive of business logic.
 
 This adds the IP addresses to the [Denylist][2] for the specified duration.
 
-## Add IPs to passlist
-
-To add IPs to your [Passlist][3], select the IP row, select the **Compare and Block** option, and then select **Add to Passlist**.
  
 [1]: https://app.datadoghq.com/security/appsec/attackers
 [2]: https://app.datadoghq.com/security/appsec/denylist
