@@ -89,4 +89,4 @@ You can export your DORA Metrics data to dashboards or notebooks and create [met
 [5]: /monitors/types/metric/?tab=threshold
 [6]: /monitors/
 [7]: /service_management/events/
-[8]: https://app.datadoghq.com/event/explorer
+[8]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true
