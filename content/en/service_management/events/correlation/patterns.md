@@ -40,7 +40,7 @@ From the [correlation configuration page][2]
    : is any event that is available in your Event Explorer as an event, but does not have an associated monitor or alert.
    
    Add grouping tags
-   : to add new grouping tags, this is same as adding new event facet. 
+   : to add new grouping tags, this is same as adding [new event facet][3]. 
 1. Under **Advanced correlation logic**, you can specify the minimum number of correlated events it takes to create a case and update the timeframe.
 
     **Timeframe explanation**
@@ -80,3 +80,4 @@ After you update an existing pattern, all live cases will stop processing. New e
 
 [1]: https://app.datadoghq.com/event/correlation
 [2]: https://app.datadoghq.com/event/correlation/new
+[3]: https://app.datadoghq.com/service_management/events/explorer/facets/#create-a-facet
