@@ -12,13 +12,13 @@ Each time an error is sent to Datadog, a fingerprint is calculated using informa
 
 Four attributes are extracted to compute the fingerprint:
 * service
-* error type (think "exception class")
+* error type (think *exception class*)
 * error message
-* stack frame (think "file and line number")
+* stack frame (think *file and line number*)
 
 Variable parts such as usernames or ids are removed from attributes in order to group errors into issues.
 
-The fingerprint is highly dependent on how the error is captured and the programming language. We constantly iterate on it to deliver the best user experience.
+The fingerprint is highly dependent on how the error is captured and the programming language. We constantly iterate to deliver the best user experience.
 
 **Note**: Different attributes will lead to different issues - there is currently no way to group issues across several services or error types.
 
@@ -31,8 +31,7 @@ The fingerprint is highly dependent on how the error is captured and the program
 Uploading your source maps will allow us to get the right stack frame and deliver a better grouping.
 
 - Web: [Sourcemaps upload][1]
-- Mobile [Crash reporting][2] 
+- Mobile: [Crash reporting][2] 
 
 [1]: /real_user_monitoring/guide/upload-javascript-source-maps
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/setup
-[3]: /tracing/error_tracking/#use-span-tags-to-track-error-spans
