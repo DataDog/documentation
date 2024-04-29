@@ -67,7 +67,7 @@ By default, profiles are uploaded once a minute. Depending on the language, thes
 
 To view a specific profile, set the **Visualize as** option to **Profile List** and click an item in the list:
 
-{{< img src="profiler/profiling_single-profile.mp4" alt="Select a single profile" video=true >}}
+{{< img src="profiler/profiling_single-profile.png" alt="Select a single profile" >}}
 
 The header contains information associated with your profile, like the service that generated it, or the environment and code version associated to it.
 
