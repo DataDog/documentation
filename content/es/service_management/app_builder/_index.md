@@ -22,7 +22,7 @@ App Builder de Datadog está en fase beta privada. Rellena el formulario para so
 
 App Builder de Datadog es una plataforma de creación de aplicaciones de bajo código. Agiliza el desarrollo de tus herramientas internas con una interfaz de arrastrar y soltar fácil de utilizar y una compatibilidad integrada con JavaScript. App Builder se integra con servicios populares como AWS y GitHub, lo que te permite aprovechar los datos y conectarte de forma fluida con API externas y almacenes de datos. Al integrarse con las capacidades existentes de Datadog, App Builder proporciona un contexto centralizado que te permite tomar medidas preventivas o responder a incidentes en curso, todo desde la misma vista que utilizas para solucionar problemas.
 
-{{< img src="/service_management/app_builder/app-builder.png" alt="Una aplicación en App Builder" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder.png" alt="Aplicación en App Builder" style="width:100%;" >}}
 
 ## Configurar acciones de App Builder
 
@@ -30,9 +30,9 @@ App Builder de Datadog te proporciona un [catálogo de acciones][1] con más de 
 
 {{< img src="/service_management/app_builder/app-builder-actions.png" alt="App Builder de Datadog proporciona un catálogo de acciones con más de 300 acciones en varias integraciones." style="width:100%;" >}}
 
-## Empezar con proyectos
+## Empezar con modelos
 
-Datadog pone a tu disposición flujos preconfigurados en forma de [proyectos][3] listos para utilizar, que te ayudan a empezar.
+Datadog pone a tu disposición flujos preconfigurados en forma de [modelos][3] listos para utilizar, que te ayudan a empezar.
 
 A continuación encontrarás algunos ejemplos de lo que pueden hacer las aplicaciones de App Builder:
 - Identificar las causas más probables de una regresión a partir de una descripción de texto de un incidente y los 150 ingresos más recientes a un repositorio.
@@ -42,13 +42,13 @@ A continuación encontrarás algunos ejemplos de lo que pueden hacer las aplicac
 - Utilizar la integración PagerDuty para ver quién está de guardia en cada equipo de una organización.
 - Resumir el progreso de cada solicitud push (PR) en un repositorio determinado.
 
-{{< img src="/service_management/app_builder/app-builder-blueprints-1.png" alt="Planos de aplicaciones" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-blueprints-1.png" alt="Modelos de aplicaciones" style="width:100%;" >}}
 
 ## Actuar directamente desde dashboards
 
 Puedes utilizar tus aplicaciones desde la página de aplicaciones o acceder a ellas directamente desde tu dashboards. Las aplicaciones de Datadog funcionan como integraciones nativas de dashboards, lo que te permite personalizar y actuar sobre tus datos directamente desde tu dashboard.
 
-{{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="Una aplicación integrada en un dashboard" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="Aplicación integrada en un dashboard" style="width:100%;" >}}
 
 ## Leer más
 
