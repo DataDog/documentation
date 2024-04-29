@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Saved views allow you to save the state of the [CI Visibility Explorer][2] ([**Pipeline Executions**][3] and [**Test Runs** pages][1]) and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [CI Visibility Explorer][2] ([**Executions**][3] and [**Test Runs** pages][1]) and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range. 
 
 Saved views can keep track of your:
 

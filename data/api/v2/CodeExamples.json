@@ -96,6 +96,34 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
+  "CreateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
   "ArchiveCase": [
     {
       "group": "case_management",
@@ -171,34 +199,6 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
-    }
-  ],
-  "CreateCSMThreatsAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
-  "CreateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
-    }
-  ],
-  "UpdateCSMThreatsAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
-  "UpdateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
   "CreateCloudflareAccount": [
