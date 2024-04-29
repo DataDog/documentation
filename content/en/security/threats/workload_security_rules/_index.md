@@ -61,6 +61,10 @@ CSM Threats uses the following pipeline when evaluating events:
 4. If there is a match, a signal is generated and displayed in [Signals][8].
 5. Any [Notification Rules][10] that match the severity, detection rule type, tags, and attributes of the signal are triggered.
 
+The following diagram illustrates this pipeline:
+
+{{< img src="security/cws/threat_detection_pipeline.png" alt="CMS Threats detection pipeline" style="width:100%;" >}}
+
 ### Saving resources by design
 
 CSM Threats detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there. 
