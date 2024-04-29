@@ -23,7 +23,7 @@ aliases:
 
 ## Overview
 
-{{< img src="dashboards/scheduled_reports/scheduled_report_email.png" alt="Example of a scheduled report email with a dashboard pdf attachment" style="width:80%;" >}}
+{{< img src="dashboards/scheduled_reports/report_email.png" alt="Example report email with PDF attachment" style="width:80%;" >}}
 
 Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a high-density PDF attachment. 
 
