@@ -23,6 +23,9 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/articles/guarddog-identify-malicious-pypi-packages/"
   tag: "Blog"
   text: "Finding malicious PyPI packages through static code analysis: Meet GuardDog"
+- link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
+  tag: "Blog"
+  text: "Prioritize vulnerability remediation with Datadog SCA"
 algolia:
   tags: ['Software Composition Analysis', 'Vulnerability Management', 'SCA', 'AVM', 'GuardDog']
 ---

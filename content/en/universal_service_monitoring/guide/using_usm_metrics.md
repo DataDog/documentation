@@ -18,7 +18,7 @@ further_reading:
 
 [Universal Service Monitoring][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Service Catalog][2] for those services. 
 
-You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics are useful for creating alerts, [tracking deployments][11], and getting started with [service level objectives (SLOs)][3] so you can get broad visibility into all services running on your infrastructure. 
+You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics are useful for creating alerts, [tracking deployments][3], and getting started with [service level objectives (SLOs)][4] so you can get broad visibility into all services running on your infrastructure. 
 
 {{< img src="universal_service_monitoring/guide/usm_slo.png" alt="Universal Service Monitoring SLOs for BITSBOUTIQUE" style="width:100%;" >}}
 
@@ -37,11 +37,11 @@ This guide describes how to search for USM metrics such as `universal.http.*` an
 
 Unlike APM metrics, errors are available under the `error:true` tag instead of as a separate metric.
 
-**Note:** The `.hits` metrics have all of your infrastructure tags and are the recommended way to query request and error counts. You can also add [second primary tags][16] to all USM metrics.
+**Note:** The `.hits` metrics have all of your infrastructure tags and are the recommended way to query request and error counts. You can also add [second primary tags][5] to all USM metrics.
 
 ### Metric syntax
 
-The USM metric query syntax differs from the [APM metric query syntax][4], which uses `trace.*`. USM Metrics fall under a single distribution metric name. 
+The USM metric query syntax differs from the [APM metric query syntax][6], which uses `trace.*`. USM Metrics fall under a single distribution metric name. 
 
 For example:
 
@@ -53,40 +53,40 @@ For example:
 | pXX:trace.universal.http.client{*}              | pXX:universal.http.client{*}                         |
 | trace.universal.http.client.apdex{*}            | universal.http.client.apdex{*}                       |
 
-The same translations apply for the `universal.http.server` operation that captures inbound traffic. For more information about distribution metrics, see [DDSketch-based Metrics in APM][12].
+The same translations apply for the `universal.http.server` operation that captures inbound traffic. For more information about distribution metrics, see [DDSketch-based Metrics in APM][7].
 
 ## Usage
 
-Navigate to [**APM** > **Service Catalog**][5], filter by Universal Service Monitoring telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Service Catalog][2].
+Navigate to [**Infrastructure > Universal Service Monitoring**][8], filter by Universal Service Monitoring telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Service Catalog][2].
 
 ### Create a monitor
 
-You can create an [**APM Monitor**][8] to trigger an alert when a USM metric such as `universal.http.client` either crosses a threshold or deviates from an expected pattern.
+You can create an [**APM Monitor**][9] to trigger an alert when a USM metric such as `universal.http.client` either crosses a threshold or deviates from an expected pattern.
 
-1. Navigate to **Monitors** > **New Monitor** and click [**APM**][13].
-2. Select **APM Metrics** and define a service or resource's `env` and any other [primary tags][14]. Select a service or resource to monitor and define time interval for the monitor to evaluate the query over. 
+1. Navigate to [**Monitors > New Monitor**][10] and click [**APM**][9].
+2. Select **APM Metrics** and define a service or resource's `env` and any other [primary tags][11]. Select a service or resource to monitor and define time interval for the monitor to evaluate the query over. 
 3. Select **Threshold Alert** and select a USM metric such as `Requests per Second` for the monitor to trigger on. Then, define if the value should be **above** or **below** the alert and warning thresholds. Enter a value for the alert threshold, and optionally, for the warning threshold.
 4. The notification section contains a prepopulated message for the monitor. Customize the alert name and message and define the permissions for this monitor.
 5. Click **Create**.
 
 {{< img src="universal_service_monitoring/guide/usm_monitor.png" alt="Universal Service Monitoring Monitor for BITSBOUTIQUE" style="width:100%;" >}}
 
-For more information, see the [APM Monitor documentation][6].
+For more information, see the [APM Monitor documentation][12].
 
 ### Create an SLO
 
-You can create an [**SLO**][10] on a per-service basis to ensure you are meeting objectives set by USM metrics and improving availability over time. Datadog recommends [creating an SLO programmatically][9] in order to cover a lot of services. 
+You can create an [**SLO**][13] on a per-service basis to ensure you are meeting objectives set by USM metrics and improving availability over time. Datadog recommends [creating an SLO programmatically][14] to cover a lot of services. 
 
 To create an SLO from the Service Catalog:
 
-1. Navigate to the **Reliability** tab of the [Service Catalog][5].
+1. Navigate to the **Reliability** tab of the [Service Catalog][8].
 2. Under the **SLOs** column, hover over a service and click **+ Create Availability SLO** or **+ Create Latency SLO**.
 
 {{< img src="universal_service_monitoring/guide/service_catalog_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
 Optionally, to create an SLO manually using USM metrics:
  
-1. Navigate to **Service Management** > **SLOs** and click [**New SLO**][15].
+1. Navigate to [**Service Management > SLOs**][15] and click [**New SLO**][13].
 2. Select **Metric Based** and create two queries in the **Good events (numerator)** section:
    
    * Query A: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field. 
@@ -103,7 +103,7 @@ Optionally, to create an SLO manually using USM metrics:
 
 {{< img src="universal_service_monitoring/guide/usm_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
-For more information, see the [Service Level Objectives documentation][10].
+For more information, see the [Service Level Objectives documentation][17].
 
 ### Access a defined dashboard
 
@@ -111,7 +111,7 @@ The [Service Catalog][2] identifies dashboards defined in your service definitio
 
 {{< img src="universal_service_monitoring/guide/manage_dashboards.png" alt="Manage Dashboards button in the Dashboards tab of a service in the Service Catalog" style="width:90%;" >}}
 
-For more information, see the [Dashboards documentation][7].
+For more information, see the [Dashboards documentation][16].
 
 ## Further Reading
 
@@ -119,17 +119,18 @@ For more information, see the [Dashboards documentation][7].
 
 [1]: /universal_service_monitoring
 [2]: /tracing/service_catalog
-[3]: /service_management/service_level_objectives
-[4]: /tracing/metrics/metrics_namespace
-[5]: https://app.datadoghq.com/services
-[6]: /monitors/create/types/apm
-[7]: /dashboards
-[8]: https://app.datadoghq.com/monitors/create/apm
-[9]: /api/latest/service-level-objectives/
-[10]: https://app.datadoghq.com/slo/new
-[11]: /tracing/services/deployment_tracking/
-[12]: /tracing/guide/ddsketch_trace_metrics/
-[13]: https://app.datadoghq.com/monitors/create/apm
-[14]: /metrics/advanced-filtering/
-[15]: https://app.datadoghq.com/slo/new
-[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[3]: /tracing/services/deployment_tracking/
+[4]: /service_management/service_level_objectives
+[5]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[6]: /tracing/metrics/metrics_namespace
+[7]: /tracing/guide/ddsketch_trace_metrics/
+[8]: https://app.datadoghq.com/services
+[9]: https://app.datadoghq.com/monitors/create/apm
+[10]: https://app.datadoghq.com/monitors/create
+[11]: /metrics/advanced-filtering/
+[12]: /monitors/create/types/apm
+[13]: https://app.datadoghq.com/slo/new
+[14]: /api/latest/service-level-objectives/
+[15]: https://app.datadoghq.com/slo/manage
+[16]: /dashboards
+[17]: /service_management/service_level_objectives/
