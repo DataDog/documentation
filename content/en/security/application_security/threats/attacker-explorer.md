@@ -12,7 +12,7 @@ This topic describes how to use **Attacker Explorer** to investigate and block F
 
 ## Overview
 
-Datadog Application Security Management (ASM) identifies attackers as suspicious and flagged. With [Attackers Explorer][1], you can investigate and take action against the attackers. 
+Datadog Application Security Management (ASM) identifies attackers as suspicious and flagged. With [Attacker Explorer][1], you can investigate and take action against the attackers. 
 
 
 ### Definitions
@@ -40,11 +40,11 @@ Each explorer focuses on a specific use case:
 
 ### Explore and filter attackers
 
-To start reviewing attackers, go to [Attackers Explorer][1].
+To start reviewing attackers, go to [Attacker Explorer][1].
 
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="ASM Attacker Explorer"  >}}
 
-There are two sections to the Attackers Explorer:
+There are two sections to the Attacker Explorer:
 
 1. Facets and search. These enable you to filter traffic by service or attacker attributes. 
 2. The list of attackers with security metrics.
@@ -74,7 +74,7 @@ To block an individual IP temporarily or permanently, do the following:
 
 ## Block IPs in bulk
 
-You can select multiple IPs and block them temporarily or permanently using the Attackers Explorer's **Compare and Block** option. 
+You can select multiple IPs and block them temporarily or permanently using the Attacker Explorer's **Compare and Block** option. 
 
 **Compare and Block** provides metrics about the IPs to help you block with safety and confidence. For example, **Similarity Overview** and **Activity**, described later in this topic.
 
