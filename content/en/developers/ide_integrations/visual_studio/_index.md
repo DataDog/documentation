@@ -35,9 +35,9 @@ Analyze and improve the performance of your applications with real-time profilin
 
 {{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Code Insights view">}}
 
-## Logs navigation
+### Logs navigation
 
-You can navigate to the [Log Explorer][5] on the Datadog platform directly from your C# source files. Look for the clickable icon preceding message strings from log statements within your source code:
+You can navigate to the [Log Explorer][18] on the Datadog platform directly from your C# source files. Look for the clickable icon preceding message strings from log statements within your source code:
 
 {{< img src="/developers/ide_integrations/visual_studio/logs-navigation.png" alt="A source file showing log lines with clickable icons." style="width:100%;" >}}
 
@@ -90,3 +90,4 @@ Report a bug, request a new feature, or ask for help on the [Discussion Forum][1
 [15]: https://github.com/DataDog/datadog-for-visual-studio/discussions
 [16]: https://github.com/DataDog/datadog-for-visual-studio/issues
 [17]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
+[18]: https://docs.datadoghq.com/logs/explorer/
