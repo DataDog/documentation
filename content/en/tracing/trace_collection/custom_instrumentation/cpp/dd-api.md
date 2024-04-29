@@ -31,7 +31,7 @@ If you have not yet read the setup instructions, start with the <a href="https:/
   auto root_span = tracer.create_span();
   root_span.set_name("get_ingredients");
   // Set a resource name for the root span.
-  root_span.set_resource("bologna_sandwich");
+  root_span.set_resource_name("bologna_sandwich");
   // Create a child span with the root span as its parent.
   auto child_span = root_span.create_child();
   child_span.set_name("cache_lookup");
@@ -59,12 +59,12 @@ Add tags directly to a span object by calling `Span::set_tag`. For example:
 
 ```cpp
 // Add tags directly to a span by calling `Span::set_tag`
-auto span = tracer->create_span();
+auto span = tracer.create_span();
 span.set_tag("key must be string", "value must also be a string");
 
 // Or, add tags by setting a `SpanConfig`
-datadog::tracing::SpanConfig opt;
-opt.tag.emplace("team", "apm-proxy");
+datadog::tracing::SpanConfig opts;
+opts.tags.emplace("team", "apm-proxy");
 auto span2 = tracer.create_span(opts);
 ```
 
@@ -83,12 +83,14 @@ export DD_TAGS=team:apm-proxy,key:value
 ### Manually
 
 ```cpp
-const datadog::tracing::TracerConfig tracer_config;
-tracer_config.tags.emplace("team", "apm-proxy");
-tracer_config.tags.emplace("apply", "on all spans");
+datadog::tracing::TracerConfig tracer_config;
+tracer_config.tags = {
+  {"team", "apm-proxy"},
+  {"apply", "on all spans"}
+};
 
-const auto validated_config = validate_config(tracer_config);
-auto tracer = datadog::trace::Tracer(*validated_config);
+const auto validated_config = datadog::tracing::finalize_config(tracer_config);
+auto tracer = datadog::tracing::Tracer(*validated_config);
 
 // All new spans will have contains tags defined in `tracer_config.tags`
 auto span = tracer.create_span();

@@ -585,15 +585,16 @@ Manually keep a trace:
 ```cpp
 ...
 #include <datadog/tags.h>
+#include <datadog/trace_segment.h>
+#include <datadog/sampling_priority.h>
 ...
 
-auto tracer = ...
-datadog::tracing::SpanConfig span_cfg;
+dd::SpanConfig span_cfg;
 span_cfg.resource = "operation_name";
 
 auto span = tracer.create_span(span_cfg);
 // Always keep this trace
-span.trace_segment.override_sampling_priority(datadog::tracing::SamplingPriority::USER_KEEP);
+span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_KEEP));
 //method impl follows
 ```
 
@@ -602,15 +603,18 @@ Manually drop a trace:
 ```cpp
 ...
 #include <datadog/tags.h>
+#include <datadog/trace_segment.h>
+#include <datadog/sampling_priority.h>
 ...
 
-auto tracer = ...
-datadog::tracing::SpanConfig span_cfg;
+using namespace dd = datadog::tracing;
+
+dd::SpanConfig span_cfg;
 span_cfg.resource = "operation_name";
 
 auto another_span = tracer.create_span(span_cfg);
 // Always drop this trace
-span.trace_segment.override_sampling_priority(datadog::tracing::SamplingPriority::USER_DROP);
+span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_DROP));
 //method impl follows
 ```
 

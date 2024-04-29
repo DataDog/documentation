@@ -45,7 +45,7 @@ include(FetchContent)
 FetchContent_Declare(
   dd-trace-cpp
   GIT_REPOSITORY https://github.com/DataDog/dd-trace-cpp
-  GIT_TAG        ${DD_TRACE_CPP_COMMIT}"
+  GIT_TAG        v0.2.0
   GIT_SHALLOW    ON
   GIT_PROGRESS   ON
 )
@@ -57,7 +57,7 @@ add_executable(tracer_example tracer_example.cpp)
 
 # Statically link against `dd-trace-cpp`
 # NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
-target_link_libraries(cpp-parametric-http-test dd_trace_cpp-objects)
+target_link_libraries(tracer_example dd_trace_cpp-static)
 ````
 
 ```cpp
@@ -73,7 +73,7 @@ namespace dd = datadog::tracing;
 
 int main() {
   dd::TracerConfig config;
-  config.defaults.service = "my-service";
+  config.service = "my-service";
 
   const auto validated_config = dd::finalize_config(config);
   if (!validated_config) {
@@ -97,7 +97,7 @@ int main() {
 ```
 
 ```bash
-cmake -B build -DDD_TRACE_VERSION=v0.1.12 .
+cmake -B build .
 cmake --build build --target tracer_example -j
 
 ./build/tracer_example
@@ -144,11 +144,14 @@ cmake --install build
 #include <datadog/tracer.h>
 #include <datadog/tracer_config.h>
 
+#include <iostream>
+#include <string>
+
 namespace dd = datadog::tracing;
 
 int main() {
   dd::TracerConfig config;
-  config.defaults.service = "my-service";
+  config.service = "my-service";
 
   const auto validated_config = dd::finalize_config(config);
   if (!validated_config) {
@@ -172,7 +175,7 @@ int main() {
 }
 ```
 
-Link against `libdd_trace_cpp`, making sure the shared library is in `LD_LIBRARY_PATH`.
+Link against `libdd_trace_cpp.so`, making sure the shared library is in `LD_LIBRARY_PATH`.
 
 ````bash
 clang -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
@@ -198,4 +201,3 @@ If needed, configure the tracing library to send application performance telemet
 [4]: https://app.datadoghq.com/apm/service-setup
 [5]: /tracing/trace_collection/library_config/cpp/
 [6]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
-[7]: TODO
