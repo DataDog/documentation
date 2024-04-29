@@ -29,7 +29,7 @@ Suggested patterns are recommended based on your commonly used service and envir
 ### Configuration
 From the [correlation configuration page][2]
 1. Select the event source you want to group on from the dropdown.
-1. Define the grouping tags. Grouping tags are event facets. See the [advanced settings section](#advanced-settings-optional) below if you don't see the tag from the dropdown. Please note, facet can be created on both event attribute and tag. We default to event attribute facet when attribute and tag share the same name. 
+1. Define the grouping tags. Grouping tags are event facets. See the [advanced settings section](#advanced-settings-optional) below if you don't see the tag from the dropdown. Please note, facet can be created on both event attribute and tag. Check [facets][4] to learn more. 
 1. To exclude any events from the source defined above, add an event query in **Filter by these events or tags** to filter them out
 
 ### Advanced settings (optional)
@@ -81,3 +81,4 @@ After you update an existing pattern, all live cases will stop processing. New e
 [1]: https://app.datadoghq.com/event/correlation
 [2]: https://app.datadoghq.com/event/correlation/new
 [3]: https://app.datadoghq.com/service_management/events/explorer/facets/#create-a-facet
+[4]: https://app.datadoghq.com/service_management/events/explorer/facets
