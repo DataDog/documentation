@@ -20,71 +20,70 @@ further_reading:
 
 ## Overview
 
-This guide demonstrates how to configure a sample e-commerce application, Storedog, to send APM data to Datadog. You will instrument the application, run it in a local Kubernetes environment using Minikube, and explore the collected APM data in the Datadog UI.
+Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services.
+
+This guide demonstrates how to send observability data from a sample e-commerce application, Storedog, to Datadog.
 
 Follow this guide to:
 
-1. Instrument the application with Datadog's Single Step Instrumentation.
-2. Run the application in Minikube to generate APM data.
-3. Explore APM data in the Datadog UI.
+1. Instrument the Storedog application.
+2. Run Storedog in a local Kubernetes environment using minikube.
+3. Explore the collected observability data in Datadog.
 
 ## Prerequisites
 
-To complete this guide, you need:
+Before you begin, you first need to:
 
-1. A [Datadog account][link-to-dd-signup].
-2. Your [Datadog API key][link-to-dd-api-key-docs].
-3. The [Storedog][link-to-storedog-repo] sample application.
-  a. Clone the storedog repository:
-  ```shell
-  git clone https://github.com/DataDog/storedog.git
-  ```
-  b. Navigate to the storedog directory:
-  ```shell
-  cd storedog
-  ```
-4. [Minikube][link-to-minikube-install-docs] installed.
+1. Create a [Datadog account][1], if you haven't already.
+1. Install [minikube][2].
+1. Install [Helm][3] to deploy the Datadog Operator.
+1. Install [Kubectl CLI][4] to install the Datadog Agent.
+1. Clone the sample Storedog application:
+   ```shell
+   git clone https://github.com/DataDog/storedog.git
+   ```
 
 ## Instrument the application
 
-Enable APM with Datadog's Single Step Instrumentation. This installs the Datadog Agent and automatically instruments the Storedog application.
+Enable APM with Single Step Instrumentation. This installs the Datadog Agent and automatically instruments the Storedog application.
 
-1. Install the [Datadog Operator][link-to-dd-operator] with Helm:
-  ```shell
-  helm repo add datadog https://helm.datadoghq.com
-  helm install my-datadog-operator datadog/datadog-operator
-  ```
-2. Create a Kubernetes secret with your [Datadog API key][link-to-dd-api-key-docs]:
-  ```shell
-  kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
-  ```
-3. Create a `datadog-agent.yaml` file with the following configuration:
-  ```yaml
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      credentials:
-        apiSecret:
-          secretName: datadog-secret
-          keyName: api-key
-    features:
-      apm:
-        instrumentation:
-          enabled: true
-  ```
-4. Apply the configuration:
-  ```shell
-  kubectl apply -f datadog-agent.yaml
-  ```
+1. Install the [Datadog Operator][5] v1.5.0+ with Helm:
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm install my-datadog-operator datadog/datadog-operator
+   ```
+1. Create a Kubernetes secret to store your Datadog [API key][6]:
+   ```shell
+   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
+   ```
+1. Create a `datadog-agent.yaml` file with the following configuration:
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+     features:
+       apm:
+         instrumentation:
+           enabled: true
+   ```
+1. Apply the configuration:
+   ```shell
+   kubectl apply -f datadog-agent.yaml
+   ```
+1. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
 ## Run the application
 
 Generate observability data by running Storedog in Minikube:
 
-1. Start Minikube:
+1. Start minikube:
   ```shell
   minikube start
   ```
@@ -113,3 +112,8 @@ Generate observability data by running Storedog in Minikube:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.datadoghq.com/free-datadog-trial/
+[2]: https://minikube.sigs.k8s.io/docs/start/
+[3]: https://v3.helm.sh/docs/intro/install/
+[4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
