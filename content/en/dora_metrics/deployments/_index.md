@@ -39,6 +39,10 @@ Deployment events are used to compute Deployment Frequency, Change Lead Time, an
   {{< nextlink href="/dora_metrics/deployments/" >}}Send a Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Calculating Deployment Frequency
+
+Deployment frequency is calculated based on the `dora.deployments.count` metric that is generated and increased with each deployment detected from your selected deployment data source. Frequency is calculated by dividing `dora.deployments.count` over a specific time frame.
+
 ## Calculating Change Lead Time
 
 For a single Git commit, the Change Lead Time (CLT) is calculated as time from the creation of the commit to when the deployment including that commit was executed.
@@ -152,6 +156,9 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 - The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing Change Lead Time.
 - Change Lead Time is not available for the first deployment of a service that includes Git information.
 
+
+## Calculating Change Failure Rate
+Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an incident and a deployment event. 
 
 ## Further Reading
 

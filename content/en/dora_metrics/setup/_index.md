@@ -17,10 +17,10 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 You can programmatically send deployment and incident events to Datadog using the [DORA Metrics API][1]. 
 
-**Deployment events**
+[**Deployment events**][8]
 : Indicate that a new deployment has occurred for a service in a specific environment. 
 
-**Incident events**
+[**Incident events**][9]
 : Indicate that a new issue has occurred for a service in a specific environment.
 
 You also have the option of marking a CI job as a deployment and sending a deployment event to Datadog using the [`datadog-ci` NPM package][2].
@@ -29,13 +29,6 @@ You also have the option of marking a CI job as a deployment and sending a deplo
 
 - Deployment and incident events must be sent as soon as possible. Events for which the `finished_at` timestamp is 1 hour older than the current time are not accepted.
 - Deployments or incidents of the same service cannot occur at the same second.
-
-## Setup
-
-{{< whatsnext desc="See the respective documentation to start sending your events to Datadog:" >}}
-    {{< nextlink href="/dora_metrics/deployments" >}}Deployment Events: Indicate that a new deployment has occurred for a service in a specific environment.{{< /nextlink >}}
-    {{< nextlink href="/dora_metrics/incidents" >}}Incident Events: Indicate that a new issue has occurred for a service in a specific environment.{{< /nextlink >}}
-{{< /whatsnext >}}
 
 ## Configure data sources
 
@@ -50,8 +43,6 @@ Each event type supports different data sources.
   {{< nextlink href="/dora_metrics/incidents/pagerduty" >}}PagerDuty{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/incidents/" >}}Send an Incident Event API{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Change lead time
 
 ## Examine metrics
 
@@ -70,3 +61,5 @@ For more information, see the [Data Collected documentation][7].
 [5]: /api/latest/metrics/#query-timeseries-points
 [6]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [7]: /dora_metrics/data_collected/
+[8]: /dora_metrics/deployments/_index.md
+[9]: /dora_metrics/incidents/_index.md
