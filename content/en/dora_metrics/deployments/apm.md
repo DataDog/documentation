@@ -113,8 +113,7 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 
 ### Limitations
 
-- Change Lead Time for deployments identified via APM Deployment Tracking is only available for GitHub repositories.
-- The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing Change Lead Time.
+- Commits older than 1 month might not be taken into account when computing Change Lead Time.
 - Change Lead Time is not available for the first deployment of a service that includes Git information.
 
 
