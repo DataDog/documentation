@@ -1,6 +1,8 @@
 ---
 title: AWS
 kind: documentation
+aliases:
+- /integrations/awsbilling/
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

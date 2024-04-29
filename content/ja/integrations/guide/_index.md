@@ -23,12 +23,12 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Webhooks を利用した Freshservice のチケット{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hadoop-distributed-file-system-hdfs-integration-error" tag="Hadoop" >}}Hadoop Distributed File System (HDFS) インテグレーションエラー{{< /nextlink >}}
     {{< nextlink href="integrations/guide/hcp-consul" tag="Consul" >}}Datadog を使用した HCP Consul の監視{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag="kafka" >}}Agent  が RMIServer スタブの取得に失敗した{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag="kafka" >}}Agent が RMIServer スタブの取得に失敗した{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag="network" >}}TCP/UDP のホストメトリクスを Datadog API に送信する{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag="snmp" >}}よく使われる SNMP と互換性のある OID{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag="snmp" >}}SNMP で一般的に使用される互換性のある OID{{< /nextlink >}}
     {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}OpenMetrics ベースのインテグレーションのバージョン管理{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry の手動セットアップ{{< /nextlink >}} 
-    {{< nextlink href="integrations/guide/application-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}VMware Tanzu のための Datadog Application Monitoring{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry の手動セットアップ{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/application-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}VMware Tanzu のための Datadog Application Monitoring{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}VMware Tanzu のための Datadog Cluster Monitoring{{< /nextlink >}} 
 {{< /whatsnext >}}
 
@@ -39,7 +39,7 @@ title: インテグレーションガイド
 {{< nextlink href="integrations/guide/aws-manual-setup" tag=" AWS" >}}AWS インテグレーションに関するトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag="AWS" >}}AWS の請求詳細を監視する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag="AWS" >}}エラー: Datadog は sts:AssumeRole を実行する権限がありません{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams と Kinesis Data Firehose{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams と Amazon Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag="AWS" >}}Amazon CloudFormation の使用{{< /nextlink >}}
 {{< nextlink href="integrations/guide/events-from-sns-emails" tag=" AWS" >}}Amazon SNS のメールから Datadog のイベントを作成する{{< /nextlink >}}
 {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag="AWS" >}}AWS インテグレーションと CloudWatch の FAQ{{< /nextlink >}}
@@ -68,10 +68,12 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}Jmxfetch はどのインテグレーションで使われていますか？{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="SQL ガイド" >}}
+{{< whatsnext desc="データベースガイド" >}}
     {{< nextlink href="integrations/guide/collect-more-metrics-from-the-sql-server-integration" tag="SQL Server" >}}SQL Server インテグレーションからより多くのメトリクスを収集する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collect-sql-server-custom-metrics" tag=" SQL Server" >}}SQL Server カスタムメトリクスの収集{{< /nextlink >}}
     {{< nextlink href="integrations/guide/use-wmi-to-collect-more-sql-server-performance-metrics" tag="SQL Server" >}}WMI を使用して、より多くの SQL Server パフォーマンスメトリクスを収集する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/connection-issues-with-the-sql-server-integration" tag="SQL Server" >}}SQL Server とのインテグレーションにおける接続の問題{{< /nextlink >}}
     {{< nextlink href="integrations/guide/mysql-custom-queries" tag="MySQL" >}}MySQL カスタムクエリ{{< /nextlink >}}
+{{< nextlink href="integrations/guide/oracle-check-upgrade-7.50.1" tag=" racle" >}}Agent 7.50.1+ における Oracle インテグレーションの構成{{< /nextlink >}}
+{{< nextlink href="integrations/guide/deprecated-oracle-integration" tag=" Oracle" >}}Agent バージョン 7.50.1 未満における Oracle インテグレーションの構成{{< /nextlink >}}
 {{< /whatsnext >}}

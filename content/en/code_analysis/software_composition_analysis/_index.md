@@ -76,7 +76,7 @@ SCA performs scans by looking at the libraries contained in your lockfiles. Belo
 
 ## Search and filter results
 
-After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [Code Analysis page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library List** results from Software Composition Analysis. 
+After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Analysis Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library List** results from Software Composition Analysis. 
 
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
 * The **Library List** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
