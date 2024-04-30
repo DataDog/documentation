@@ -115,7 +115,7 @@ The steps above allow you to add the pipeline execution ID to your CodeBuild act
 
 ### Enable log correlation
 
-The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see [Enable logging for your AWS service][16] in the AWS log forwarding guide.
+The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see the [AWS log forwarding guide][16].
 
 <div class="alert alert-warning"><strong>Note</strong>: Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
 
@@ -144,5 +144,4 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 [13]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
 [14]: /glossary/#partial-retry
 [15]: /glossary/#running-pipeline
-[16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#enable-logging-for-your-aws-service
-
+[16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
