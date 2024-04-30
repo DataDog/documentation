@@ -23,7 +23,7 @@ If you have not yet read the setup instructions, start with the <a href="https:/
 
 ## Creating spans
 
-### Manually instrument a method
+To manually instrument a method:
 
 ```cpp
 {

@@ -39,6 +39,7 @@ Before you begin, make sure you have already [installed and configured the Agent
 {{< tabs >}}
 
 {{% tab "CMake" %}}
+To integrate the `dd-trace-cpp` library into your C++ project using CMake, follow these steps:
 ````CMake
 include(FetchContent)
 
@@ -59,7 +60,7 @@ add_executable(tracer_example tracer_example.cpp)
 # NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
 target_link_libraries(tracer_example dd_trace_cpp-static)
 ````
-
+Here's an example of how to use the dd-trace-cpp library in your C++ code to create spans and traces:
 ```cpp
 // tracer_example.cpp
 #include <datadog/span_config.h>
@@ -107,7 +108,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 {{% /tab %}}
 
 {{% tab "Manual" %}}
-
+To manually download and install the dd-trace-cpp library, run the following bash script:
 ```bash
 # Requires the "jq" command, which can be installed via
 # the package manager:
@@ -137,7 +138,7 @@ cmake -B build .
 cmake --build build -j
 cmake --install build
 ```
-
+After installing the `dd-trace-cpp` library, you can use it in your C++ code to create spans and traces. Here's an example:
 ```cpp
 // tracer_example.cpp
 #include <datadog/span_config.h>

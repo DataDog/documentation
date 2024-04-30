@@ -91,7 +91,7 @@ Points to a JSON file that contains the span sampling rules. See `DD_SPAN_SAMPLI
 
 `DD_PROPAGATION_STYLE`
 : **Since**: 0.1.0 <br>
-Comma separated list of propagation style(s) to use when extracting and injecting tracing context. <br>
+Comma separated list of propagation styles to use when extracting and injecting tracing context. <br>
 When multiple values are given, the order of matching is based on the order of values.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT` 
@@ -105,7 +105,7 @@ When multiple values are given, the order of matching is based on the order of v
 : **Since**: v0.1.6 <br>
 **Default**: `datadog,tracecontext` <br>
 **Accepted values**: `datadog`, `tracecontext`, `b3` <br>
-Comma separated list of propagation style to use when extracting tracing context. 
+Comma separated list of propagation styles to use when extracting tracing context. 
 When multiple values are given, the order of matching is based on the order of values.
 
 `DD_TRACE_ENABLED`
@@ -133,14 +133,14 @@ If `false`, the tracer will generate legacy 64-bit trace IDs.
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **Since**: 0.1.12 <br>
 **Default**: `true` <br>
-Datadog may collect [environmental and diagnostic information about your system][4] to improve the product. When `false`, telemetry data are not be collected.
+Datadog may collect [environmental and diagnostic information about your system][4] to improve the product. When `false`, telemetry data are not collected.
 
 `DD_REMOTE_CONFIGURATION_ENABLED`
 : **Since**: 0.2.0 <br>
 **Default**: `true` <br>
 Enable the capability that allows to remotely configure and change the behavior of the tracer. <br>
 When `false` this feature is disabled. <br>
-For more information, see [Remote Configuration][5]
+For more information, see [Remote Configuration][5].
 
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
 : **Since**: 0.2.0 <br>

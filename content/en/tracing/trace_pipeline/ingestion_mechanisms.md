@@ -199,7 +199,7 @@ Read more about sampling controls in the [PHP tracing library documentation][1].
 [1]: /tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-Starting in version version [v0.1.0][1], the Datadog C++ library supports the following configurations:
+Starting in [v0.1.0][1], the Datadog C++ library supports the following configurations:
 - Global sampling rate: `DD_TRACE_SAMPLE_RATE` environment variable
 - Sampling rates by service: `DD_TRACE_SAMPLING_RULES` environment variable.
 - Rate limit setting: `DD_TRACE_RATE_LIMIT` environment variable.
