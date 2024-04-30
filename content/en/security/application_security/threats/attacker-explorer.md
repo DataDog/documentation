@@ -24,7 +24,8 @@ Datadog Application Security Management (ASM) identifies attackers as suspicious
 
 ### How Attacker Explorer differs from Signal and Trace Explorers
 
-ASM **Attacks** contains the **Signal**, **Trace**, and **Attacker** explorers. 
+- **Protect:** Automated blocking using ASM Protection configuration. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
+- **Reactive:** Blocking using Signals or Attackers explorer in response to observed threats.
 
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the ASM Attacker Explorer navigation"  >}}
 
