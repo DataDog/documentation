@@ -27,12 +27,6 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 
 [Upload your JavaScript source maps][6] to access unminified stack traces.
 
-## Error Tracking
-
-Error Tracking processes errors collected from the browser by the RUM Browser SDK. Whenever a `source`, `custom` or `report` error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
-
- Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
-
 ## Error sources
 Front-end errors come from several different sources:
 
@@ -42,6 +36,12 @@ Front-end errors come from several different sources:
 - **report**: From the `ReportingObserver` API
 - **source**: From unhandled exceptions or unhandled promise rejections in the source code
 
+## Error Tracking
+
+Error Tracking processes errors collected from the browser by the RUM Browser SDK. Whenever a `source`, `custom` or `report` error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
+
+ Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
+ 
 ## Error attributes
 
 For information about the default attributes for all RUM event types, see [Data Collected][1]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][2].
