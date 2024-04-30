@@ -25,10 +25,7 @@ aliases:
 
 Scheduled reports enable Datadog users to share dashboards as high-density PDFs by email on a recurring basis.
 
-{{< img src="dashboards/scheduled_reports/report_email.png" alt="Example report email with PDF attachment" style="width:90%;" >}}
-
 {{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}
-
 
 ## Schedule a report
 
@@ -48,7 +45,9 @@ Add recipients to your report by entering their email addresses. The email assoc
 
 ### Customize the report
 
-Finally, customize the report to provide recipients with more context or a tailored view. The optional description appears at the top of each report to provide more context on the dashboard.
+Finally, customize the report to provide recipients with more context or a tailored view. The optional description is included in the report email.
+
+{{< img src="dashboards/scheduled_reports/report_email.png" alt="Example report email with PDF attachment" style="width:90%;" >}}
 
 Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard's defaults.
 
