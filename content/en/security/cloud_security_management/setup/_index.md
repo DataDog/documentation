@@ -116,7 +116,7 @@ Vulnerability scanning is supported for hosts and containers running the followi
 
 | OS                       | Supported Versions                                  | Package Managers |
 |--------------------------|-----------------------------------------------------|------------------|
-| Alpine Linux             | 2.2 - 2.7, 3.0 - 3.19 (edge is not supported)       | apk              |
+| Alpine Linux             | 2.2-2.7, 3.0-3.19 (edge is not supported)           | apk              |
 | Wolfi Linux              | N/A                                                 | apk              |
 | Chainguard               | N/A                                                 | apk              |
 | Red Hat Enterprise Linux | 6, 7, 8                                             | dnf/yum/rpm      |
@@ -126,7 +126,7 @@ Vulnerability scanning is supported for hosts and containers running the followi
 | Oracle Linux             | 5, 6, 7, 8                                          | dnf/yum/rpm      |
 | CBL-Mariner              | 1.0, 2.0                                            | dnf/yum/rpm      |
 | Amazon Linux             | 1, 2, 2023                                          | dnf/yum/rpm      |
-| openSUSE Leap            | 42, 15                                              | dnf/yum/rpm      |
+| openSUSE Leap            | 42, 15                                              | zypper/rpm       |
 | SUSE Enterprise Linux    | 11, 12, 15                                          | zypper/rpm       |
 | Photon OS                | 1.0, 2.0, 3.0, 4.0                                  | tndf/yum/rpm     |
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg         |
