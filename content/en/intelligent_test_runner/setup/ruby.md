@@ -4,14 +4,11 @@ kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
-aliases:
-  - /continuous_integration/intelligent_test_runner/ruby/
-  - /continuous_integration/intelligent_test_runner/setup/ruby/
 further_reading:
-    - link: "/continuous_integration/tests"
+    - link: "/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI Visibility"
 ---
@@ -24,15 +21,21 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 * `datadog-ci >= 1.0.0.beta3`
 * `Ruby >= 2.7`
-  * no JRuby support
+  * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
-  * no support for [rails parallel testing][2] as of library version `1.0.0.beta3`
+  * [Rails parallel testing][2] is not supported as of library version `1.0.0.beta3`.
 * `cucumber >= 3.0.0`
 
 ## Setup
 
-### Use the latest version of test visibility library
+### Test Visibility
+
+Prior to setting up Intelligent Test Runner, set up [Test Visibility for Ruby][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+
+{{% ci-itr-activation-instructions %}}
+
+### Use the latest version of a Test Visibility library
 
 Intelligent Test Runner for Ruby is available in `datadog-ci` gem version `1.0.0.beta3` and later.
 
@@ -53,12 +56,6 @@ group :test do
   gem 'datadog-ci', '~> 1.0.0.beta3'
 end
 ```
-
-### Test Visibility
-
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Ruby][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
-
-{{% ci-itr-activation-instructions %}}
 
 ## Run tests with the Intelligent Test Runner enabled
 
@@ -108,8 +105,7 @@ Designating tests as unskippable ensures that the Intelligent Test Runner runs t
 
 {{< tabs >}}
 {{% tab "RSpec" %}}
-To mark RSpec tests as unskippable supply metadata key `datadog_itr_unskippable` with value `true` on any of describe/context/it block
-to mark all tests in this block as unskippable
+To ensure that RSpec tests within a specific block are not skipped, add the metadata key `datadog_itr_unskippable` with the value `true` to any `describe`, `context`, or `it` block. This marks all tests in that block as unskippable.
 
 ```ruby
 # mark the whole file as unskippable
@@ -145,10 +141,11 @@ end
 
 {{% /tab %}}
 {{% tab "Cucumber" %}}
-You can use the `@datadog_itr_unskippable` tag in your feature file to mark it as unskippable. This prevents any of the scenarios defined in the feature file from being skipped by Intelligent Test Runner.
-You can also add this tag to scenario to skip only selected scenario.
+To mark an entire feature file as unskippable in Cucumber, use the `@datadog_itr_unskippable` tag. This prevents the Intelligent Test Runner from skipping any any of the scenarios defined in that feature file.
 
-```
+To make only specific scenarios unskippable, apply this tag directly to the desired scenario.
+
+```ruby
 @datadog_itr_unskippable
 Feature: Unskippable feature
   Scenario: Say greetings
@@ -169,9 +166,7 @@ Feature: An unskippable scenario
 
 {{% /tab %}}
 {{% tab "Minitest" %}}
-You can use the `datadog_itr_unskippable` method to mark a minitest subclass as unskippable.
-If you want to mark specific test as unskippable, supply test methods name in arguments of `datadog_itr_unskippable`
-call.
+To make an entire Minitest subclass unskippable, use the `datadog_itr_unskippable` method. If you want to mark specific tests within the subclass as unskippable, provide the names of these test methods as arguments to the `datadog_itr_unskippable` method call.
 
 ```ruby
 # mark the whole class unskippable
@@ -204,5 +199,5 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/tests/ruby
+[1]: /tests/ruby
 [2]: https://edgeguides.rubyonrails.org/testing.html#parallel-testing
