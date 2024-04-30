@@ -48,6 +48,7 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Upgrade the RUM Mobile SDKs{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Use multiple instances of the Mobile SDK{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}Proxy your Mobile RUM data{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}Monitor hybrid React Native applications{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay:" >}}
