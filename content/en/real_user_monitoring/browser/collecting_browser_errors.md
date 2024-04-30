@@ -1,5 +1,5 @@
 ---
-title: Collecting Browser Errors
+title: Browser Error Tracking
 kind: documentation
 aliases:
 - /real_user_monitoring/error_tracking/browser

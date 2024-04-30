@@ -4909,7 +4909,7 @@ menu:
       parent: rum_browser
       identifier: resource_performance
       weight: 104
-    - name: Collecting Browser Errors
+    - name: Browser Error Tracking
       url: real_user_monitoring/browser/collecting_browser_errors/
       parent: rum_browser
       identifier: collect_errors
