@@ -170,9 +170,11 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 {{% /tab %}}
 {{% tab "Code Hotspots" %}}
 
-View [Code Hotspots][5] to identify lines of code related to performance issues. The values on the left side represent the time spent in that method call during the selected span.
+View [Code Hotspots][1] to identify lines of code related to performance issues. The values on the left side represent the time spent in each method call during the selected span.
 
 {{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab showing time spent in each method for a selected span" style="width:90%;">}}
+
+[1]: /profiler/connected_traces_and_profiles/
 
 {{% /tab %}}
 {{% tab "Span Links (Beta)" %}}
@@ -193,7 +195,6 @@ To learn more about span links and how to add them with custom instrumentation, 
 [2]: /tracing/trace_collection/custom_instrumentation/php#adding-span-links-beta
 [3]: /tracing/trace_collection/otel_instrumentation/java#requirements-and-limitations
 [4]: /tracing/trace_collection/span_links/
-[5]: /profiler/connected_traces_and_profiles/
 
 {{% /tab %}}
 {{< /tabs >}}
