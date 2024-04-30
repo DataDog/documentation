@@ -3611,6 +3611,11 @@ menu:
       parent: intelligent_test_runner_setup
       identifier: intelligent_test_runner_setup_java
       weight: 105
+    - name: Ruby
+      url: intelligent_test_runner/setup/ruby/
+      parent: intelligent_test_runner_setup
+      identifier: intelligent_test_runner_setup_ruby
+      weight: 106
     - name: How It Works
       url: intelligent_test_runner/how_it_works/
       parent: intelligent_test_runner
@@ -4579,7 +4584,7 @@ menu:
       url: security/application_security/threats/attacker-explorer/
       parent: appsec_threats
       identifier: threats_attackers
-      weight: 711      
+      weight: 711
     - name: API Security Inventory
       url: security/application_security/api-inventory/
       parent: application_security
