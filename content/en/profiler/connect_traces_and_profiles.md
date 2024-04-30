@@ -74,9 +74,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
-- upgrade to `dd-trace-js` 5.1.0+, 4.25.0+, or 3.46.0+
-- set `DD_PROFILING_TIMELINE_ENABLED=1`
+The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
