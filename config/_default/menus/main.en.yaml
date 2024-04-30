@@ -4924,11 +4924,6 @@ menu:
       parent: rum_browser
       identifier: rum_frustration_signals
       weight: 107
-    - name: Error Tracking
-      url: real_user_monitoring/error_tracking/browser/
-      parent: rum_browser
-      identifier: rum_browser_error_tracking
-      weight: 108
     - name: Troubleshooting
       url: real_user_monitoring/browser/troubleshooting/
       parent: rum_browser
@@ -5159,11 +5154,6 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_explorer
       weight: 1101
-    - name: Track Browser Errors
-      url: real_user_monitoring/error_tracking/browser/
-      parent: rum_error_tracking
-      identifier: rum_error_tracking_browser
-      weight: 802
     - name: Track Mobile Errors
       url: real_user_monitoring/error_tracking/mobile/
       parent: rum_error_tracking
