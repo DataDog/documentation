@@ -29,8 +29,7 @@ ASM **Attacks** contains the **Signals**, **Traces**, and **Attackers** explorer
 
 ASM uses two methods when blocking traffic:
 
-- **Protect:** Automated blocking using ASM Protection configuration.
-  Customers should block Attack Tools as their first automated blocking action. {link to this} Blocking Attack Tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
+- **Protect:** Automated blocking using ASM Protection configuration. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
 - **Reactive:** Blocking using Signals or Attackers explorer in response to observed threats.
 
 ### Best practices for blocking
