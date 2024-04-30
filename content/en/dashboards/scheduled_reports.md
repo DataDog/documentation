@@ -29,7 +29,9 @@ Scheduled reports enable Datadog users to share dashboards as high-density PDFs 
 
 ## Schedule a report
 
-Create a report from any [grid-based dashboard](https://www.datadoghq.com/blog/datadog-dashboards/) or timeboard. The dashboard must have at least one [supported widget](#supported-widget-types). Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
+Create a report from any [grid-based dashboard](https://www.datadoghq.com/blog/datadog-dashboards/) or timeboard.
+The dashboard must have at least one [supported widget](#unsupported-widget-types).
+Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
 
 {{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:90%;" >}}
 
@@ -62,75 +64,37 @@ From the configuration modal that opens, you can pause an existing report or cre
 
 ## Permissions
 
-Users need the `generate_dashboard_reports` [permission][29] to create and edit report schedules. This permission can be granted by another user with the `user_access_manage` permission and is available by default to users with the `org_management` permission.
+Users need the `generate_dashboard_reports` [permission][permissions] to create and edit report schedules.
+This permission can be granted by another user with the `user_access_manage` permission and is available by default to users with the `org_management` permission.
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
 
-Users with the `org_management` permission can enable or disable the scheduled reports feature for their organization from the **Settings** tab under [Public Sharing][15] in **Organization Settings**.
+Users with the `org_management` permission can enable or disable the scheduled reports feature for their organization from the **Settings** tab under [Public Sharing][public-sharing] in **Organization Settings**.
 
 {{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
-## Supported widget types
+## Unsupported widget types
 
-The following widget types are supported:
-
-- [Alert Graph][18]
-- [Alert Value][19]
-- [Change][1]
-- [Check Status][20]
-- [Distribution][2]
-- [Free Text][21]
-- [Funnel][22]
-- [Geomap][3]
-- [Group][4]
-- [Heatmap][5]
-- [List][23]
-- [Monitor Summary][6]
-- [Notes and Links][7]
-- [Pie Chart][16]
-- [Powerpack][24]
-- [Profiling Flame Graph][25]
-- [Query Value][8]
-- [Scatter Plot][9]
-- [SLO Summary][10]
-- [SLO List][11]
-- [Split Graph][26]
-- [Table][12]
-- [Timeseries][13]
-- [Top List][14]
-- [Topology][27]
-- [Tree Map][28]
+The following widget types are **not** supported:
+- [Embedded App][embedded-app-widget]
+- [Experimental][experimental-widget]
+- [Iframe][iframe-widget]
+- [Image][image-widget]
+- [Hostmap][hostmap-widget]
+- [Run Workflow][run-workflow-widget]
+- [Wildcard][wildcard-widget]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/change/
-[2]: /dashboards/widgets/distribution/
-[3]: /dashboards/widgets/geomap/
-[4]: /dashboards/widgets/group/
-[5]: /dashboards/widgets/heatmap/
-[6]: /dashboards/widgets/monitor_summary/
-[7]: /dashboards/widgets/note/
-[8]: /dashboards/widgets/query_value/
-[9]: /dashboards/widgets/scatter_plot/
-[10]: /dashboards/widgets/slo/
-[11]: /dashboards/widgets/slo_list/
-[12]: /dashboards/widgets/table/
-[13]: /dashboards/widgets/timeseries/
-[14]: /dashboards/widgets/top_list/
-[15]: /account_management/org_settings/#public-sharing
-[16]: /dashboards/widgets/pie_chart/
-[17]: /account_management/users
-[18]: /dashboards/widgets/alert_graph/
-[19]: /dashboards/widgets/alert_value/
-[20]: /dashboards/widgets/check_status/
-[21]: /dashboards/widgets/free_text/
-[22]: /dashboards/widgets/funnel/
-[23]: /dashboards/widgets/list/
-[24]: /dashboards/widgets/powerpack/
-[25]: /dashboards/widgets/profiling_flame_graph/
-[26]: /dashboards/widgets/split_graph/
-[27]: /dashboards/widgets/topology_map/
-[28]: /dashboards/widgets/treemap/
-[29]: /account_management/rbac/permissions/#dashboards
+[embedded-app-widget]: /dashboards/widgets/embedded_app/
+[experimental-widget]: /dashboards/widgets/experimental/
+[iframe-widget]: /dashboards/widgets/iframe/
+[image-widget]: /dashboards/widgets/image/
+[hostmap-widget]: /dashboards/widgets/hostmap/
+[permissions]: /account_management/rbac/permissions/
+[public-sharing]: /account_management/org_settings/#public-sharing
+[run-workflow-widget]: /dashboards/widgets/run_workflow/
+[wildcard-widget]: /dashboards/widgets/wildcard/
+
