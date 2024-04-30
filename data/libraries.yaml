@@ -229,6 +229,17 @@ Classic:
       official: true
       dogstatsd: true
       authors: Datadog
+  - Rust:
+    - name: cadence
+      link: https://docs.rs/cadence/latest/cadence/
+      official: false
+      dogstatsd: true
+      authors: Nick Pillitteri
+    - name: metrics-exporter-statsd
+      link: https://docs.rs/metrics-exporter-statsd/latest/metrics_exporter_statsd/
+      official: false
+      dogstatsd: true
+      authors: GitHub
   - Scala:
     - name: datadog-scala
       link: https://github.com/gphat/datadog-scala
