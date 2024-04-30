@@ -174,7 +174,7 @@ View [Code Hotspots][1] to identify lines of code related to performance issues.
 
 {{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab showing time spent in each method for a selected span" style="width:90%;">}}
 
-[1]: /profiler/connected_traces_and_profiles/
+[1]: /profiler/connect_traces_and_profiles/
 
 {{% /tab %}}
 {{% tab "Span Links (Beta)" %}}
