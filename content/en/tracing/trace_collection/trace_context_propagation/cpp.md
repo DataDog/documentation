@@ -33,13 +33,13 @@ Distributed headers injection and extraction is controlled by configuring inject
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT="datadog,b3"`
 
-The value of the environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
+The value of the environment variable is a comma (or space) separated list of header styles that are enabled for injection. The default injection styles are `datadog,tracecontext`.
 
 #### Extraction styles
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT="datadog,b3"`
 
-The value of the environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
+The value of the environment variable is a comma (or space) separated list of header styles that are enabled for extraction. The default extraction styles are `datadog,tracecontext`.
 
 {{% /tab %}}
 
