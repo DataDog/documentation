@@ -138,7 +138,7 @@ To disable Agentless Scanning in an AWS account, disable scanning for each cloud
 1. On the [Cloud Security Management Setup][10] page, click **Cloud accounts > AWS**.
 1. Click the **Edit scanning** button for the AWS account where you deployed the Agentless scanner.
 1. In the **Agentless Scanning** section, disable scanning for the cloud resources you want to stop monitoring.
-- Click **Done**.
+1. Click **Done**.
  
 ### Uninstalling with CloudFormation
 
