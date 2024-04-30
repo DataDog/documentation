@@ -19,7 +19,7 @@ RUM Events are reported as coming from the same application and the same source 
 - For **errors, resources, and interactions tracking**, the SDKs can work in two ways:
   - Through *auto-instrumentation* - Some React classes and methods are modified to automate this. Auto-instrumentation for JavaScript errors, resources, and interactions can only be started from JavaScript code.
   - Through *manual instrumentation* - For example, if you want to report something you consider an error but is not going to crash the app. 
-- You can share the same instance of the core SDK between native and React Native. This allows you to initialize the native SDK on either the native side or on the React Native side (by calling `DdSdkReactNative.initialize`) and have it initialized for both sides, with events appearing in the same RUM session. React Native uses the default core instance. This means that you can use *manual instrumentation* on both sides, but *auto-instrumentation* is only be activated for the side that the SDK was initialized.
+- You can share the same instance of the core SDK between native and React Native. This allows you to initialize the native SDK on either the native side or on the React Native side (by calling `DdSdkReactNative.initialize`) and have it initialized for both sides, with events appearing in the same RUM session. React Native uses the default core instance. This means that you can use *manual instrumentation* on both sides, but *auto-instrumentation* is only activated for the side that the SDK was initialized.
 - You can only report Datadog RUM events or legs after the initialization, otherwise they are not sent.
 - You cannot change the source attribute of a RUM session - all your RUM events appear under the same source.
 
@@ -122,14 +122,14 @@ implementation "com.datadoghq:dd-sdk-android-trace"
 implementation "com.datadoghq:dd-sdk-android-webview"
 ```
 
-Initialize the SDK on the native side, by using the official documentation for [Android][1].
+Initialize the SDK on the native side. See the official documentation for [Android][1] for instructions.
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialize the SDK on the native side, by using the official documentation for [iOS][1].
+Initialize the SDK on the native side. See the official documentation for [iOS][1] for instructions.
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods
 
@@ -195,10 +195,6 @@ let rumConfiguration = RUM.Configuration(
     uiKitViewsPredicate: RNHybridPredicate(),
 )
 ```
-
-Then, use `@datadog/mobile-react-navigation` to track your views.
-
-If you have enabled ProGuard obfuscation, add rules to prevent obfuscation of the target packages in release builds.
 
 {{% /tab %}}
 {{< /tabs >}}
