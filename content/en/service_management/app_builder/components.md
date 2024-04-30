@@ -391,7 +391,7 @@ Displays property and value pairs in JSON format.
 
 ### Example
 
-To view this component in context, see the [ECS Task Balancer][4] app blueprint.
+To view this component in context, see the [ECS Task Manager][4] app blueprint.
 
 
 
