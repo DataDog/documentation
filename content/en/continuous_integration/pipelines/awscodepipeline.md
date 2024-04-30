@@ -115,7 +115,7 @@ The steps above allow you to add the pipeline execution ID to your CodeBuild act
 
 ### Enable log correlation
 
-The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, follow the steps in the [AWS log forwarding guide][16].
+The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see [Enable logging for your AWS service][16] in the AWS log forwarding guide.
 
 <div class="alert alert-warning"><strong>Note</strong>: Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
 
