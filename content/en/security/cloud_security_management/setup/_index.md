@@ -27,10 +27,6 @@ further_reading:
   text: "Setting up CSM Workload Security"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
