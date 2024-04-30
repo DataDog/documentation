@@ -16,13 +16,16 @@ Datadog Application Security Management (ASM) identifies attackers as suspicious
 
 
 ### Definitions
-*Suspicious Attackers*: IP addresses that have sent attack traffic in the last 24 hours up to a maximum threshold.
 
-*Flagged Attackers*: IP addresses that have sent attack traffic, exceeding the threshold of Suspicious Attackers, in the last 24 hours. Flagged Attackers should be reviewed and blocked.
+- **Suspicious Attackers:** IP addresses that have sent attack traffic in the last 24 hours up to a maximum threshold.
+
+- **Flagged Attackers:** IP addresses that have sent attack traffic, exceeding the threshold of Suspicious Attackers, in the last 24 hours. Flagged Attackers should be reviewed and blocked.
 
 <div class="alert alert-info"><strong>Flagged Attackers</strong> and <strong>Suspicious Attackers</strong> are mutually exclusive. An IP cannot be in both states at the same time.</a></div>
 
-### How Attacker Explorer differs from Signal and Trace Explorers
+### How Attacker Explorer differs from Signal and Trace explorers
+
+To understand the difference between the different explorers, review these approaches:
 
 - **Protect:** Automated blocking using ASM Protection configuration. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
 - **Reactive:** Blocking using Signals or Attackers explorer in response to observed threats.
@@ -30,13 +33,14 @@ Datadog Application Security Management (ASM) identifies attackers as suspicious
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the ASM Attacker Explorer navigation"  >}}
 
 Each explorer focuses on a specific use case:
+
 - **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
 - **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
 - **Attacker Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
-  - mass actions for attacker analytics and blocking
-  - drill down into the history of any attacker
-  - search
-  - pivoting to other explorers  
+  - Bulk actions for attacker analytics and blocking
+  - Drill-down into the history of any attacker
+  - Search
+  - Pivoting to other explorers  
 
 
 ### Explore and filter attackers
@@ -52,11 +56,12 @@ There are two sections to the Attacker Explorer:
 
 
 ### Investigate an IP
+
 Click on any row to view the history and attributes of the IP.
 
 {{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with ASM Attacker Explorer"  >}}
 
-IP's can be blocked or added to the Passlist from the IP drawer.
+IPs can be blocked or added to the Passlist from the IP drawer.
 
 ### Best practices for blocking with Attacker Explorer
 
@@ -70,8 +75,8 @@ To block an individual IP temporarily or permanently, do the following:
 
 {{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block an IP address with ASM Attacker Explorer"  >}}
 
-1. Click `Block` on the row
-2. Choose a blocking duration
+1. Click `Block` on the row.
+2. Choose a blocking duration.
 
 ## Block IPs in bulk
 
@@ -81,8 +86,9 @@ You can select multiple IPs and block them temporarily or permanently using the 
 
 To compare and block IPs in bulk, do the following:
 1. Filter the list of Attackers with a search or facets.
-2. Select multiple IPs
+2. Select multiple IPs.
 3. Select the **Compare and Block** option.
+    
     In the following example, the selected IPs are from the same location and appear to be related. The **Compare and Block** option opens the **Block selected attackers** view, showing metrics and attributes for the selected IP addresses.
 
     {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
@@ -105,7 +111,7 @@ Contains the IPs selected from the explorer. Deselecting an IP removes it from t
 
 ### Similarity overview
 
-Each column exists to help block with confidence and safety. The provided attributes are also used by ASM’s Attacker Similarity feature.
+Each column exists to help block with confidence and safety. The provided attributes are also used by ASM's Attacker Similarity feature.
 
 ASNs
 : Autonomous System Numbers. Attacks with large numbers of IP addresses might originate from the same ASN, especially when attacks originate from data centers and cloud IPs.
@@ -119,12 +125,12 @@ Location
 Domain
 : The owner of the ASN. This is helpful when an organization owns multiple ASNs.
 
-Users per IP
+Users per IPs
 : The number of users who have authenticated from the IP. IPs with large numbers of logins might indicate a load balancer or many users from the same location, like a company site.
 
 ### Activity
 
-The time scope for activity is 30 days
+The time scope for activity is 30 days.
 
 #### Signals
 
