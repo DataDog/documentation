@@ -6,26 +6,22 @@ description: Understand how errors are grouped into issues.
 
 ## Overview
 
-Error Tracking intelligently groups similar errors into issues based on their fingerprint.
+Error Tracking intelligently groups similar errors into issues. This grouping is based on the following error properties:
 
-Each time an error is sent to Datadog, a fingerprint is computed based on the following attributes of the error:
-* service
-* error type (think *exception class*)
-* error message
-* stack frame (think *file and line number*)
+- `service`: the service where the error occurred.
+- `error.type` or `error.kind`: the class of the error.
+- `error.message`: a description of the error.
+- `error.stack`: the file name and the function name of the frame where the error was thrown.
 
-Variables in the attributes such as usernames or ids are removed to group errors into issues.
+If any of those properties differ for two given errors, they will be grouped under different issues. Therefore, Error Tracking cannot group issues across services or error types.
 
-The fingerprint is dependent on how the error is captured and the programming language. It is continuously improved to deliver the best user experience.
+**Note**: Error Tracking removes variables such as versions, ids, dates from these properties to improve the grouping accuracy. 
 
-**Note**: Different attributes lead to different issues - issues cannot be grouped across services or error types.
-
-
-## Setup
+## Special considerations
  
 ### Mobile and frontend applications
 
-Upload your source maps to identify the right stack frame and experience a better grouping.
+Upload your source maps to identify the error stack frame and experience a better grouping.
 
 - Web: [Sourcemaps upload][1]
 - Mobile: [Crash reporting][2] 
