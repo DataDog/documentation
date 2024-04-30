@@ -2,7 +2,7 @@
 further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: Documentación
-  text: Uso básico del Agent para el Agent de Windows
+  text: Uso básico del Agent para el Windows Agent
 kind: guía
 title: Datadog Agent Manager para Windows
 ---
