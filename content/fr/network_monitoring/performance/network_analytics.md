@@ -306,7 +306,7 @@ Le volet latéral fournit des données de télémétrie contextuelle pour vous a
 - des processus lourds monopolisant le processeur ou la mémoire de l'endpoint de destination ;
 - des erreurs d'application dans le code de l'endpoint client.
 
-{{< img src="network_performance_monitoring/network_analytics/npm_sidepanel2.png" alt="Détails d'un flux style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/npm_sidepanel2.png" alt="Détails d'un flux" style="width:80%;">}}
 
 ### Tags communs
 
