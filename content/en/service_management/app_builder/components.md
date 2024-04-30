@@ -491,7 +491,7 @@ Placeholder text
 
 Options
 : The list of select options that a user can select from.<br>
-**Value**: expression or string
+**Value**: expression or string<br>
 **Example**:<br>
 : {{< code-block lang="json" disable_copy="true">}}${[
     {
