@@ -329,7 +329,7 @@ Default value
 **Value**: number
 
 Placeholder text
-: The text that shows when no value is entered.<br>
+: The text that displays when no value is entered.<br>
 **Value**: expression or string
 
 #### Validation
@@ -439,7 +439,7 @@ Default value
 **Value**: expression or string
 
 Placeholder text
-: The text that shows when no value is entered.<br>
+: The text that displays when no value is entered.<br>
 **Value**: expression or string
 
 
@@ -486,7 +486,7 @@ Label
 **Value**: expression or string
 
 Placeholder text
-: The text that shows when no value is entered.<br>
+: The text that displays when no value is entered.<br>
 **Value**: expression or string
 
 Options
@@ -705,7 +705,7 @@ Default value
 **Value**: expression or string
 
 Placeholder text
-: The text that shows when no value is entered.<br>
+: The text that displays when no value is entered.<br>
 **Value**: expression or string
 
 #### Appearance
