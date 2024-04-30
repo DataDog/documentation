@@ -129,15 +129,6 @@ const crashApp = () => {
 ```
 
 Re-build your application for release to send the new sourcemaps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
-
-To test your dSYMs and Proguard mapping files upload, crash the native main thread instead:
-
-```javascript
-import { crashNativeMainThread } from 'react-native-performance-limiter';
-
-const crashApp = () => {
-    crashNativeMainThread('custom error message');
-};
 ```
 
 ## Additional configuration options
