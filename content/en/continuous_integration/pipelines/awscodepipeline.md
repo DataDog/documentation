@@ -144,4 +144,5 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 [13]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
 [14]: /glossary/#partial-retry
 [15]: /glossary/#running-pipeline
-[16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#enable-logging-for-your-aws-service
+
