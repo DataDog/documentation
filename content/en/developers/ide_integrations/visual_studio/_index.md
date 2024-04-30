@@ -90,4 +90,4 @@ Report a bug, request a new feature, or ask for help on the [Discussion Forum][1
 [15]: https://github.com/DataDog/datadog-for-visual-studio/discussions
 [16]: https://github.com/DataDog/datadog-for-visual-studio/issues
 [17]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
-[18]: https://docs.datadoghq.com/logs/explorer/
+[18]: /logs/explorer/
