@@ -3560,16 +3560,21 @@ menu:
       parent: tests
       identifier: tests_swift_tests
       weight: 9
+    - name: Early Flake Detection
+      url: tests/early_flake_detection
+      parent: tests
+      identifier: tests_early_flake_detection
+      weight: 10
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 11
+      weight: 12
     - name: Intelligent Test Runner
       url: intelligent_test_runner/
       pre: intelligent-test-runner
