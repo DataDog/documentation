@@ -13,7 +13,7 @@ Error Tracking intelligently groups similar errors into issues. This grouping is
 - `error.message`: a description of the error.
 - `error.stack`: the file name and the function name of the top-most meaningful *frame*. 
 
-**Note**: The error stack trace is the code path followed by an error between the place it was thrown and the place our instrumentation captured it. Error Tracking evaluates the top-most meaninful stack-frame (the *location* of the error) and uses it to group.
+The error stack trace is the code path followed by an error between the place it was thrown and the place our instrumentation captured it. Error Tracking evaluates the top-most meaninful stack-frame (the *location* of the error) and uses it to group.
 
 
 If any of those properties differ for two given errors, they will be grouped under different issues. Therefore, Error Tracking cannot group issues across services or error types.
