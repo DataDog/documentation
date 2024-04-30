@@ -16,7 +16,7 @@ Datadog Application Security Management (ASM) identifies attackers using flagged
 
 ### How Attackers differs from Signals and Traces
 
-APM **Attacks** contains the **Signals**, **Traces**, and **Attackers** explorers. Each of the explorers focus on a specific use case:
+ASM **Attacks** contains the **Signals**, **Traces**, and **Attackers** explorers. Each of the explorers focus on a specific use case:
 
 - **Traces** are the evidence for business logic events, such as logins, or attack payloads, such as command injection. All ASM traces have an IP address.
 - **Signals** are traces that are correlated into an actionable alert and assigned a severity. Each signal contains multiple traces.
