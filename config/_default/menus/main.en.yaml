@@ -3560,16 +3560,21 @@ menu:
       parent: tests
       identifier: tests_swift_tests
       weight: 9
+    - name: Early Flake Detection
+      url: tests/early_flake_detection
+      parent: tests
+      identifier: tests_early_flake_detection
+      weight: 10
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 11
+      weight: 12
     - name: Intelligent Test Runner
       url: intelligent_test_runner/
       pre: intelligent-test-runner
@@ -4290,6 +4295,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_workload_security
       weight: 10010
+    - name: CSM Agentless Scanning
+      url: security/cloud_security_management/setup/agentless_scanning
+      parent: csm_setup
+      identifier: csm_setup_agentless_scanning
+      weight: 10015
     - name: Agent
       url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
       parent: csm_setup_cloud_workload_security
@@ -4385,16 +4395,21 @@ menu:
       parent: csm
       identifier: vulnerabilities
       weight: 5
+    - name: Agentless  Scanning
+      url: security/cloud_security_management/agentless_scanning
+      parent: csm
+      identifier: csm_agentless
+      weight: 6
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
       identifier: csm_default_rules
-      weight: 6
+      weight: 7
     - name: Review and Remediate
       url: security/cloud_security_management/review_remediate
       parent: csm
       identifier: csm_review_remediate
-      weight: 7
+      weight: 8
     - name: Mute Issues
       url: security/cloud_security_management/review_remediate/mute_issues
       parent: csm_review_remediate
@@ -4414,7 +4429,7 @@ menu:
       url: security/cloud_security_management/severity_scoring/
       parent: csm
       identifier: csm_severity_scoring
-      weight: 10
+      weight: 9
     - name: Guides
       url: security/cloud_security_management/guide/
       parent: csm
@@ -4560,7 +4575,7 @@ menu:
       parent: appsec_threats
       identifier: attack_summary_overview
       weight: 710
-    - name: Attackers Explorer
+    - name: Attacker Explorer
       url: security/application_security/threats/attacker-explorer/
       parent: appsec_threats
       identifier: threats_attackers

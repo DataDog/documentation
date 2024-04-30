@@ -262,6 +262,11 @@ Classic:
       api: true
       authors: Jacob Aronoff
 Tracing:
+  - C++:
+    - name: dd-trace-cpp
+      link: https://github.com/DataDog/dd-trace-cpp
+      official: true
+      authors: Datadog
   - .NET:
     - name: dd-trace-dotnet
       link: https://github.com/DataDog/dd-trace-dotnet
