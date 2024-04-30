@@ -8,7 +8,7 @@ title: Transformación de datos
 <div class="alert alert-warning">La automatización del flujos de trabajo no es compatible con el <a href="/getting_started/site">sitio de Datadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Las acciones **Expression** (Expresión) y **Function** (Función) realizan transformaciones de datos personalizadas dentro de tus flujos de trabajo utilizando JavaScript. Utiliza los valores de cualquier variable de contexto disponible dentro de tu flujo de trabajo como entradas para tus expresiones y funciones JavaScript con la sintaxis `$.Steps.<step_name>.<variable>`. También puedes utilizar `_` para hacer uso de [Lodash][1] en tus acciones de transformación de datos con la misma sintaxis. Por ejemplo, para hacer referencia a la variable de estado (`status`) de la solicitud HTTP desde el paso de solicitud HTTP (`Make_request`), deberías utilizar la siguiente variable de contexto: 
+Las acciones de **Expression** (Expresión) y de **Function** (Función) realizan transformaciones de datos personalizadas dentro de tus flujos de trabajo utilizando JavaScript. Utiliza los valores de cualquier variable de contexto disponible dentro de tu flujo de trabajo como entradas para tus expresiones y funciones JavaScript con la sintaxis `$.Steps.<step_name>.<variable>`. También puedes utilizar `_` para hacer uso de [Lodash][1] en tus acciones de transformación de datos con la misma sintaxis. Por ejemplo, para hacer referencia a la variable de estado (`status`) de la solicitud HTTP desde el paso de solicitud HTTP (`Make_request`), deberías utilizar la siguiente variable de contexto: 
 
 ```
 $.Steps.Make_request.status
