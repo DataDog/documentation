@@ -17,15 +17,15 @@ algolia:
 
 ## Overview
 
-[Intelligent Test Runner][1] allows you to streamline your organization’s test impact analysis by intelligently skipping irrelevant tests based on recent code changes. 
+[Intelligent Test Runner][1] allows you to streamline your organization’s test impact analysis by intelligently excluding irrelevant tests that are not affected by recent code changes.
 
 With [Test Visibility][2], development teams can configure Intelligent Test Runner for their test services, set branches to exclude (such as the default branch), and define files to be tracked (which triggers full runs of all tests when any tracked file changes).
 
-{{< img src="/continuous_integration/itr_test_selection_diagram.png" alt="A Venn diagram of the components for the Intelligent Test Runner: tracked files, excluded branches, and skipped tests" caption="A Venn diagram displaying how Intelligent Test Runner defines a skippable test by using tracked files, excluded branches, and passed tests." style="width:65%" >}}
+{{< img src="/continuous_integration/itr_test_selection_diagram.png" alt="A Venn diagram of the components for the Intelligent Test Runner: tracked files, excluded branches, and skipped tests" caption="A Venn diagram displaying how Intelligent Test Runner defines an excluded test by using tracked files, excluded branches, and passed tests." style="width:65%" >}}
 
 Configure and enable Intelligent Test Runner for your test services to reduce unnecessary testing time, enhance CI test efficiency, and reduce costs, while maintaining the reliability and performance across your CI environments. 
 
-Intelligent Test Runner uses [code coverage data][5] to determine whether or not tests should be skipped. For more information, see [How It Works][10].
+Intelligent Test Runner uses [code coverage data][5] to determine whether or not tests should be skipped. For more information, see [How Intelligent Test Runner Works in Datadog][10].
 
 ## Set up the Intelligent Test Runner
 
@@ -46,7 +46,7 @@ To enable the Intelligent Test Runner:
 
 You must have the `Intelligent Test Runner Activation Write` permission. For more information, see the [Datadog Role Permissions documentation][4].
 
-By disabling Intelligent Test Runner on critical branches (like your default branch), you can ensure comprehensive test coverage, while enabling it to run for feature or development branches allows you to maximize testing efficiency.
+Disabling the Intelligent Test Runner on critical branches (such as your default branch) ensures comprehensive test coverage, whereas enabling it to run on feature or development branches helps maximize testing efficiency.
 
 ## Configure the Intelligent Test Runner
 
@@ -56,7 +56,7 @@ To configure the Intelligent Test Runner:
 
 1. Click the **Status** toggle to enable Intelligent Test Runner. 
 1. Specify any branches to exclude (typically the default branch of a repository). Intelligent Test Runner does not skip tests for these branches.
-1. Specify file directories and files to track (for example, documentation/content/** or domains/shopist/apps/api/BUILD.bazel). Intelligent Test Runner runs all CI tests when any of these tracked files change.
+1. Specify file directories and files to track (for example, `documentation/content/**` or `domains/shopist/apps/api/BUILD.bazel`). Intelligent Test Runner runs all CI tests when any of these tracked files change.
 1. Click **Save Settings**.
 
 {{< img src="/getting_started/intelligent_test_runner/configure_itr.png" alt="Enable the Intelligent Test Runner, provide branches for the Intelligent Test Runner to exclude, and add files for the Intelligent Test Runner to track and run tests when any changes happen" style="width:100%" >}}
@@ -114,7 +114,7 @@ Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] a
 {{% /tab %}}
 {{< /tabs >}}
 
-Use the following out-of-the-box Intelligent Test Runner [facets][9] to customize the search query.
+Use the following out-of-the-box Intelligent Test Runner [facets][9] to customize the search query:
 
 Code Coverage Enabled
 : Indicates whether code coverage tracking was active during the test session.
