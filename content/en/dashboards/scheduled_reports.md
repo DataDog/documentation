@@ -77,7 +77,6 @@ Users with the `org_management` permission can enable or disable the scheduled r
 
 The following widget types are **not** supported:
 - [Embedded App][embedded-app-widget]
-- [Experimental][experimental-widget]
 - [Iframe][iframe-widget]
 - [Image][image-widget]
 - [Hostmap][hostmap-widget]
@@ -89,7 +88,6 @@ The following widget types are **not** supported:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [embedded-app-widget]: /dashboards/widgets/embedded_app/
-[experimental-widget]: /dashboards/widgets/experimental/
 [iframe-widget]: /dashboards/widgets/iframe/
 [image-widget]: /dashboards/widgets/image/
 [hostmap-widget]: /dashboards/widgets/hostmap/
