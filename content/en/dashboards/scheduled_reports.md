@@ -43,7 +43,7 @@ The following widget types are supported:
 - [Pie Chart][16]
 - [Query Value][8]
 - [Scatter Plot][9]
-- [SLO Summary][10]
+- [SLO][10]
 - [SLO List][11]
 - [Table][12]
 - [Timeseries][13]
