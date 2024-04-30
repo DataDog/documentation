@@ -16,7 +16,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-W3C Trace Context propagation is available for all supported languages. The default trace propagation style for all languages is `datadog,tracecontext`. Envoy and nginx proxies use the default of `tracecontext,Datadog`.
+W3C Trace Context propagation is available for all supported languages. The default trace propagation style for all languages is `datadog,tracecontext`. Envoy and nginx proxies use the default of `tracecontext,datadog`.
 
 For more information about each language's configuration options for trace context propagation, see the following pages:
 
