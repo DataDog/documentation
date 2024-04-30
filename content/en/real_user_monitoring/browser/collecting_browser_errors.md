@@ -1,6 +1,9 @@
 ---
 title: Collecting Browser Errors
 kind: documentation
+aliases:
+- /real_user_monitoring/error_tracking/browser
+- /real_user_monitoring/error_tracking/browsertest
 further_reading:
   - link: "/real_user_monitoring/error_tracking/"
     tag: Documentation
@@ -21,6 +24,8 @@ further_reading:
 ## Overview
 
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
+
+[Upload your JavaScript source maps][6] to access unminified stack traces.
 
 ## Error sources
 Front-end errors come from several different sources:
@@ -60,8 +65,6 @@ addError(
     context?: Context
 );
 {{< /code-block >}}
-
-**Note**: The [Error Tracking][4] feature processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -243,6 +246,12 @@ Get visibility into cross-origin scripts by following these two steps:
 
     - `Access-Control-Allow-Origin: *` to allow all origins to fetch the resource.
     - `Access-Control-Allow-Origin: example.com` to specify a single allowed origin. If the server supports clients from multiple origins, it must return the origin for the specific client making the request.
+
+## Error Tracking
+
+Error Tracking processes errors collected from the browser by the RUM Browser SDK. Whenever a `source`, `custom` or `report` error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
+
+ Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
 
 ## Further Reading
 
