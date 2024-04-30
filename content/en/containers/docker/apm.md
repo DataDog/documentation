@@ -83,7 +83,7 @@ Use the following environment variables to configure tracing for the Docker Agen
 
 `DD_SITE`
 : optional - _string_
-<br/>Your [Datadog site][6]. Set this to `{{< region-param key="dd_site" >}}`.
+<br/>Your [Datadog site][7]. Set this to `{{< region-param key="dd_site" >}}`.
 <br/>**Default**: `datadoghq.com`
 
 `DD_APM_ENABLED`                   
@@ -96,7 +96,7 @@ Use the following environment variables to configure tracing for the Docker Agen
 
 `DD_APM_RECEIVER_SOCKET`           
 : optional - _string_
-<br/>To collect your traces through a Unix Domain Sockets, provide the path to the Unix socket. If set, this takes priority over hostname and port configuration. If set, must point to a valid socket file. 
+<br/>To collect your traces through UNIX Domain Sockets, provide the path to the UNIX socket. If set, this takes priority over hostname and port configuration, and must point to a valid socket file. 
 
 `DD_APM_NON_LOCAL_TRAFFIC`         
 : optional - _Boolean_ - **default**: `false`
@@ -108,12 +108,12 @@ Use the following environment variables to configure tracing for the Docker Agen
 
 `DD_APM_CONNECTION_LIMIT`          
 : required - _integer_ - **default**: `2000`
-<br/>Sets the maximum APM connections for a 30 second time window. See [Agent Rate Limits][6].
+<br/>Sets the maximum APM connections for a 30 second time window. See [Agent Rate Limits][6] for more details.
 
 `DD_APM_IGNORE_RESOURCES`          
 : optional - _[string]_ 
 <br/>Provides an exclusion list of resources for the Datadog Agent to ignore. If a trace's resource name matches one or more of the regular expressions on this list, the trace is not sent to Datadog. 
-<br/>Example: `"GET /ignore-me","(GET\|POST)and-also-me"`.                                                                                                                                                                                                                                                                                   
+<br/>Example: `"GET /ignore-me","(GET\|POST) and-also-me"`.                                                                                                                                                                                                                                                                                   
 
 `DD_APM_FILTER_TAGS_REQUIRE`       
 : optional - _object_
@@ -125,7 +125,7 @@ Use the following environment variables to configure tracing for the Docker Agen
 
 `DD_APM_FILTER_TAGS_REJECT`        
 : optional - _object_ 
-<br/>Defines rules for tag-based trace filtering. If a trace has these tags, it is not sent to Datadog. See [Ignoring Unwanted Resources in APM][5]. 
+<br/>Defines rules for tag-based trace filtering. If a trace has these tags, it is not sent to Datadog. See [Ignoring Unwanted Resources in APM][5] for more details. 
 
 `DD_APM_FILTER_TAGS_REGEX_REJECT`  
 : optional - _object_ 
@@ -154,12 +154,6 @@ Use the following environment variables to configure tracing for the Docker Agen
 `DD_LOG_LEVEL`                     
 : optional - _string_ - **default**: `info` 
 <br/>Sets the minimum logging level. Valid options: `trace`, `debug`, `info`, `warn`, `error`, `critical`, and `off`.
-
-
-
-
-
-
 
 ## Tracing from other containers
 
@@ -391,7 +385,7 @@ Refer to the [language-specific APM instrumentation docs][3] for tracer settings
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /tracing/guide/security/#replace-rules
+[2]: /tracing/configure_data_security/#replace-tags
 [3]: /tracing/setup/
 [4]: /agent/proxy
 [5]: /tracing/guide/ignoring_apm_resources/
