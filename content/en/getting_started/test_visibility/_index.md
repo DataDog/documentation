@@ -48,7 +48,7 @@ Access your tests’ metrics (such as executions, duration, distribution of dura
 
 {{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Out-of-the-box Test Visibility dashboard in Datadog" style="width:100%;" >}}
 
-You can create [dashboards][4] to track flaky tests, performance regressions, or test failures are happening in your tests, or use an [out-of-the-box dashboard][5] containing widgets populated with data collected in Test Visibility to visualize the health and performance of your CI test sessions, modules, suites, and tests.
+You can create [dashboards][4] for monitoring flaky tests, performance regressions, and test failures occurring within your tests. Alternatively, you can utilize an [out-of-the-box dashboard][5] containing widgets populated with data collected in Test Visibility to visualize the health and performance of your CI test sessions, modules, suites, and tests.
 
 ## Manage flaky tests
 
@@ -75,7 +75,7 @@ Failure rate
 Trend
 : A visualization that indicates whether a flaky test was fixed or it is still actively flaking.
 
-Test Visibility displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s **Flaky Tests** section.
+Test Visibility displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s **Flaky Tests** section:
 
 New Flaky Test Runs
 : How often new flaky tests are being detected.
