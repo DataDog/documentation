@@ -140,9 +140,9 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 ## Viewing SLOs
 
-Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by context.
+Group your SLOs by *any* tag to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by service, team, user journey, tier, or any other tag set on your SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_group_by.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
+{{< img src="service_management/service_level_objectives/slo_group_by_new.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
 Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
@@ -152,9 +152,12 @@ Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs ne
 
 ### SLO tags
 
-When you create or edit an SLO, you can add tags for filtering on the [SLO status page][2] or for creating [SLO saved views][17].
+SLO tags can be used for filtering on the [SLO status page][2], creating [SLO saved views][17], or grouping SLOs to view. Tags can be added to SLOs in the following ways:
 
-Add tags to SLOs in bulk with the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
+- When you create or edit an SLO, you can add tags
+- From the SLO list view, you can add and update tags in bulk using the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
+
+{{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
 
 ### SLO default view
 
@@ -226,7 +229,7 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 ## SLO widgets
 
-{{< learning-center-callout header="Try Create Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
+{{< learning-center-callout header="Try Creating Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
   Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
 {{< /learning-center-callout >}}
 

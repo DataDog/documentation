@@ -109,7 +109,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
    helm repo add datadog https://helm.datadoghq.com
    helm install my-datadog-operator datadog/datadog-operator
    ```
-2. Create a Kubernetes secret to store your Datadog [API key][3]:
+2. Create a Kubernetes secret to store your Datadog [API key][10]:
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```
@@ -133,7 +133,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
          instrumentation:
            enabled: true  
    ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][6] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
+   Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
 4. Run the following command:
