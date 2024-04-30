@@ -16,7 +16,7 @@ further_reading:
 Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}}
 
-App Builder provides many UI components that you can use when building your apps.
+This page provides a list of UI components that you can use when creating apps in App Builder.
 
 ## Button
 
