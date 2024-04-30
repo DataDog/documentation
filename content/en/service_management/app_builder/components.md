@@ -595,7 +595,7 @@ Data path
 **Value**: expression or string
 
 Formatting
-: The type of format that the column will take on.<br>
+: The type of format that the column takes on.<br>
 **Values**: string, link, status pill, date / time, markdown, tags, percent bar, number, score bar, avatar
 
 Sortable
