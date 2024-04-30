@@ -20,7 +20,7 @@ This page provides a list of UI components that you can use when creating apps i
 
 ## Button
 
-Button elements have the following properties.
+Button components have the following properties.
 
 ### General
 
@@ -75,16 +75,20 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 
 ## Callout value
 
-Callout value elements have the following properties.
+Callout value components have the following properties.
 
 ### General
 
 Label
-: The text that displays at the top of the callout element.<br>
+: The text that displays at the top of the component.<br>
 **Value**: expression or string
 
 Value
@@ -98,7 +102,7 @@ Unit
 ### Style
 
 Style
-: The visual style of the element.<br>
+: The visual style of the component.<br>
 **Values**: default, success, warning, danger, blue, purple, pink, orange, yellow, red, green, gray, vivid blue, vivid purple, vivid pink, vivid orange, vivid yellow, vivid red, vivid green
 
 Size
@@ -126,16 +130,20 @@ _optional_
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [EC2 Instance Manager][3] app blueprint.
+
 
 
 ## Checkbox
 
-Checkbox elements have the following properties.
+Checkbox components have the following properties.
 
 ### General
 
 Label
-: The text that displays at the top of the checkbox element.<br>
+: The text that displays at the top of the component.<br>
 **Value**: expression or string
 
 Options
@@ -184,11 +192,15 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 
 ## Container
 
-Container elements have the following properties.
+Container components have the following properties.
 
 ### Appearance
 
@@ -201,11 +213,15 @@ _optional_
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 
 ## Date range picker
 
-Date range picker elements have the following properties.
+Date range picker components have the following properties.
 
 ### General
 
@@ -234,19 +250,23 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 
 ## JSON input
 
-JSON input elements have the following properties.
+JSON input components have the following properties.
 
 ### General
 
 Label
-: The text displayed at the top of the JSON input element.
+: The text that displays at the top of the component.
 
 Default value
-: The default JSON value that the element displays.
+: The default JSON value that the component displays.
 
 ### Appearance
 
@@ -278,7 +298,7 @@ Displays property and value pairs in JSON format.
 
 ## Modal
 
-Modal elements have the following properties.
+Modal components have the following properties.
 
 ### General
 
@@ -311,14 +331,18 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 
 ## Number input
 
-Number input elements have the following properties.
+Number input components have the following properties.
 
 Label
-: The text that displays at the top of the number input element.<br>
+: The text that displays at the top of the component.<br>
 **Value**: expression or string
 
 Default value
@@ -365,17 +389,21 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [ECS Task Balancer][4] app blueprint.
+
 
 
 
 ## Radio
 
-Radio elements have the following properties.
+Radio components have the following properties.
 
 ### General
 
 Label
-: The text that displays at the top of the radio element.<br>
+: The text that displays at the top of the component.<br>
 **Value**: expression or string
 
 Options
@@ -427,7 +455,7 @@ Displays property and value pairs in JSON format.
 
 ## Search
 
-Search elements have the following properties.
+Search components have the following properties.
 
 ### General
 
@@ -439,11 +467,10 @@ Placeholder text
 : The text that displays when no value is entered.<br>
 **Value**: expression or string
 
-
 ### Appearance
 
 Size
-: The scale of the search element.<br>
+: The scale of the search component.<br>
 **Values**: sm, md, lg
 
 Is Loading
@@ -470,16 +497,20 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [EC2 Instance Manager][3] app blueprint.
+
 
 
 ## Select
 
-Select elements have the following properties.
+Select components have the following properties.
 
 ### General
 
 Label
-: The text that displays at the top of the select element.<br>
+: The text that displays at the top of the component.<br>
 **Value**: expression or string
 
 Placeholder text
@@ -535,11 +566,15 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 
 ## Table
 
-Table elements have the following properties.
+Table components have the following properties.
 
 ### General
 
@@ -652,16 +687,20 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 
 ## Text
 
-Text elements have the following properties.
+Text components have the following properties.
 
 ### General
 
 Content
-: The content that the text element displays.<br>
+: The content that the component displays.<br>
 **Value**: expression or string
 
 Content type
@@ -671,11 +710,11 @@ Content type
 ### Appearance
 
 Text alignment
-: Determines the horizontal alignment of the text within the element.<br>
+: Determines the horizontal alignment of the text within the component.<br>
 **Values**: align left, align center, align right
 
 Vertical alignment
-: Determines the vertical alignment of the text within the element.<br>
+: Determines the vertical alignment of the text within the component.<br>
 **Values**: align top, align center, align bottom
 
 Is Visible
@@ -687,14 +726,18 @@ _optional_
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 
 ## Text input
 
-Text input elements have the following properties.
+Text input components have the following properties.
 
 Label
-: The text that displays at the top of the text input element.<br>
+: The text that displays at the top of the component.<br>
 **Value**: expression or string
 
 Default value
@@ -731,6 +774,10 @@ For more information on events, see [Events][1].
 
 Displays property and value pairs in JSON format.
 
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
 
 ## Further reading
 
@@ -739,3 +786,6 @@ Displays property and value pairs in JSON format.
 
 
 [1]: /service_management/app_builder/build/#events
+[2]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=datadog_metrics_and_monitors&viewMode=preview
+[3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
+[4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
