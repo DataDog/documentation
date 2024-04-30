@@ -137,7 +137,7 @@ Se requiere una URL y un método de solicitud para tu solicitud. Opcionalmente, 
 
 También puedes seleccionar si quieres permitir certificados caducados o seguir redireccionamientos.
 
-### Opciones de respuesta
+### Opciones de respuestas
 
 En **Error on Status** (Error de estado), introduce una lista delimitada por comas de cualquier código de estado sobre el cual devolver un error. Utiliza el menú desplegable **Response Parsing** (Clasificación de respuestas) para anular el método de clasificación de respuestas predeterminado, deducido de los encabezados, y **Response Encoding** (Codificación de respuestas), si el servidor de destino especifica una codificación incorrecta en sus encabezados de respuestas.
 
