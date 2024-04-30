@@ -18,21 +18,18 @@ Datadog App Builder is in private beta. Complete the form to request access.
 
 App Builder provides many UI components that you can use when building your apps.
 
-## Available UI components
-
-
-### Button
+## Button
 
 Button elements have the following properties.
 
-#### General
+### General
 
 Label
 : The text that displays on the button.<br>
 **Value**: expression or string<br>
 _required_
 
-#### Appearance
+### Appearance
 
 Intent
 : Controls the color of the button, with colors representing the purpose of the button.<br>
@@ -64,7 +61,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: click
@@ -74,17 +71,17 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Callout value
+## Callout value
 
 Callout value elements have the following properties.
 
-#### General
+### General
 
 Label
 : The text that displays at the top of the callout element.<br>
@@ -98,7 +95,7 @@ Unit
 : The unit associated with the value.<br>
 **Value**: expression or string
 
-#### Style
+### Style
 
 Style
 : The visual style of the element.<br>
@@ -108,7 +105,7 @@ Size
 : Responsively sizes the metric so that it is proportional to the sizing of the value.<br>
 **Values**: sm, md, lg, xl
 
-#### Appearance
+### Appearance
 
 Is Loading
 : Shows a loading indicator.<br>
@@ -125,17 +122,17 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Checkbox
+## Checkbox
 
 Checkbox elements have the following properties.
 
-#### General
+### General
 
 Label
 : The text that displays at the top of the checkbox element.<br>
@@ -156,7 +153,7 @@ Options
     }
 ]}{{< /code-block >}}
 
-#### Appearance
+### Appearance
 
 Is Multiline
 : Determines whether the checkbox text should wrap onto a new line or be truncated by an ellipsis.<br>
@@ -173,7 +170,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: change<br>
@@ -183,47 +180,47 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Container
+## Container
 
 Container elements have the following properties.
 
-#### Appearance
+### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Values**: on, off<br>
 _optional_
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Date range picker
+## Date range picker
 
 Date range picker elements have the following properties.
 
-#### General
+### General
 
 Default timeframe
 : The default timeframe that the date picker displays.<br>
 **Value**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
 
-#### Appearance
+### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: change<br>
@@ -233,17 +230,17 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### JSON input
+## JSON input
 
 JSON input elements have the following properties.
 
-#### General
+### General
 
 Label
 : The text displayed at the top of the JSON input element.
@@ -251,7 +248,7 @@ Label
 Default value
 : The default JSON value that the element displays.
 
-#### Appearance
+### Appearance
 
 Is Read Only
 : Determines whether the component is read only.<br>
@@ -263,7 +260,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: change
@@ -273,23 +270,23 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Modal
+## Modal
 
 Modal elements have the following properties.
 
-#### General
+### General
 
 Title
 : The title of the modal.<br>
 **Value**: expression or string
 
-#### Appearance
+### Appearance
 
 Size
 : The scale of the modal.<br>
@@ -300,7 +297,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Values**: toggleOpen, close, open
@@ -310,13 +307,13 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Number input
+## Number input
 
 Number input elements have the following properties.
 
@@ -332,7 +329,7 @@ Placeholder text
 : The text that displays when no value is entered.<br>
 **Value**: expression or string
 
-#### Validation
+### Validation
 
 Min
 : The minimum value the number input accepts.<br>
@@ -342,7 +339,7 @@ Max
 : The maximum value the number input accepts.<br>
 **Value**: number
 
-#### Appearance
+### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -354,7 +351,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: change
@@ -364,18 +361,18 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
 
-### Radio
+## Radio
 
 Radio elements have the following properties.
 
-#### General
+### General
 
 Label
 : The text that displays at the top of the radio element.<br>
@@ -400,7 +397,7 @@ Default value
 : The value that is selected when the radio loads.<br>
 **Value**: expression or string
 
-#### Appearance
+### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -412,7 +409,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: change
@@ -422,17 +419,17 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Search
+## Search
 
 Search elements have the following properties.
 
-#### General
+### General
 
 Default value
 : The default value that the app populates in the search box.<br>
@@ -443,7 +440,7 @@ Placeholder text
 **Value**: expression or string
 
 
-#### Appearance
+### Appearance
 
 Size
 : The scale of the search element.<br>
@@ -459,7 +456,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: change, submit
@@ -469,17 +466,17 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Select
+## Select
 
 Select elements have the following properties.
 
-#### General
+### General
 
 Label
 : The text that displays at the top of the select element.<br>
@@ -512,7 +509,7 @@ Is Multiselect
 : Determines whether the user can select more than one option at a time.<br>
 **Values**: on, off
 
-#### Appearance
+### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -524,7 +521,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: change
@@ -534,23 +531,23 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Table
+## Table
 
 Table elements have the following properties.
 
-#### General
+### General
 
 Data source
 : The array of objects to display in a table.<br>
 **Values**: query, demo data, components
 
-#### Columns
+### Columns
 
 Each column of data from the data source is represented here and has the following properties:
 
@@ -572,7 +569,7 @@ Sortable
 
 Some columns have additional properties based on their **Formatting** property.
 
-#### Pagination
+### Pagination
 
 Has summary
 : Determines whether to display a pagination summary directly above the table.<br>
@@ -590,7 +587,7 @@ Type
 : Determines the type of pagination.<br>
 **Values**: client side, server side
 
-#### Row actions
+### Row actions
 
 Adding a row action adds an **Actions** column to the table, which contains user-defined action buttons. These buttons have the following properties:
 
@@ -621,7 +618,7 @@ Reaction
 : The reaction type the button triggers.
 **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file
 
-#### Appearance
+### Appearance
 
 Is Loading
 : Shows a loading indicator.<br>
@@ -641,7 +638,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: pageChange, tableRowClick
@@ -651,17 +648,17 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Text
+## Text
 
 Text elements have the following properties.
 
-#### General
+### General
 
 Content
 : The content that the text element displays.<br>
@@ -671,7 +668,7 @@ Content type
 : Determines how to render the text.<br>
 **Values**: plain text, Markdown
 
-#### Appearance
+### Appearance
 
 Text alignment
 : Determines the horizontal alignment of the text within the element.<br>
@@ -686,13 +683,13 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
 
 
-### Text input
+## Text input
 
 Text input elements have the following properties.
 
@@ -708,7 +705,7 @@ Placeholder text
 : The text that displays when no value is entered.<br>
 **Value**: expression or string
 
-#### Appearance
+### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
@@ -720,7 +717,7 @@ Is Visible
 **Values**: on, off<br>
 _optional_
 
-#### Events
+### Events
 
 Event
 : **Value**: change, submit
@@ -730,7 +727,7 @@ Reaction
 
 For more information on events, see [Events][1].
 
-#### Inspect data
+### Inspect data
 
 Displays property and value pairs in JSON format.
 
