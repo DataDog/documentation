@@ -462,7 +462,7 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-25121683
+  image: registry.ddbuild.io/ci/websites/pa11y-preview:v33194252-5bf41a36
   tags: ["arch:amd64"]
   stage: post-deploy
   cache: []
