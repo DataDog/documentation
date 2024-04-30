@@ -45,7 +45,7 @@ Las fechas relativas **no** se actualizan con el tiempo; se calculan cuando se i
 
 | Formato                                             | Descripción                                                         |
 |----------------------------------------------------|---------------------------------------------------------------------|
-| `N{unidad}`<br> Consulta la lista de unidades aceptadas a continuación | Muestra las últimas N unidades. Por ejemplo, **3 mo** (los últimos 3 meses)|
+| `N{unidad}`<br> Consulta la lista de unidades aceptadas a continuación | Muestra las últimas N unidades. Por ejemplo, **3 mo** (3 m) (los últimos 3 meses)|
 | `hoy`                                            | Muestra el día del calendario actual hasta el presente                     |
 | `ayer`                                        | Muestra el día del calendario anterior completo                             |
 | `este mes`                                       | Muestra el mes del calendario en curso hasta el presente                   |
