@@ -23,16 +23,18 @@ aliases:
 
 ## Overview
 
-{{< img src="dashboards/scheduled_reports/report_email.png" alt="Example report email with PDF attachment" style="width:80%;" >}}
+Scheduled reports enable Datadog users to share dashboards as high-density PDFs by email on a recurring basis.
 
-Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a high-density PDF attachment.
+{{< img src="dashboards/scheduled_reports/report_email.png" alt="Example report email with PDF attachment" style="width:90%;" >}}
+
+{{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example report PDF attachment" style="width:90%;" >}}
 
 
 ## Schedule a report
 
-Dashboards must have a grid or timeboard layout and must have at least one supported widget to send a PDF report. See the list of [supported widget types](#supported-widget-types).
+Create a report from any [grid-based dashboard](https://www.datadoghq.com/blog/datadog-dashboards/) or timeboard. The dashboard must have at least one [supported widget](#supported-widget-types). Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
 
-Create a report from any dashboard with a grid-based or automatic layout. Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
+{{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:90%;" >}}
 
 ### Set a schedule
 
@@ -43,8 +45,6 @@ In the configuration modal that opens, set a schedule for the report to determin
 Add recipients to your report by entering their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the **X** that appears next to it.
 
 **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations.
-
-{{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:90%;" >}}
 
 ### Customize the report
 
@@ -63,20 +63,15 @@ From the configuration modal that opens, you can pause an existing report or cre
 
 ## Permissions
 
-Only users with the **Dashboard Report Write** permission can generate a report. This permission is turned on by default for Admins and off for all other roles.
-
-Images generated in reports show all data regardless of granular read restrictions. Datadog recommends limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn about managing roles and permissions, see [User Management][17].
+Users need the `generate_dashboard_reports` [permission][29] to create and edit report schedules. This permission can be granted by another user with the `user_access_manage` permission and is available by default to users with the `org_management` permission.
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
 
-Users with the Admin role or **Org Management** permission can enable or disable the scheduled reports feature for an account from the **Settings** tab under [Public Sharing][15] in **Organization Settings**.
+Users with the `org_management` permission can enable or disable the scheduled reports feature for an account from the **Settings** tab under [Public Sharing][15] in **Organization Settings**.
 
 {{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
 ## Supported widget types
-
-{{< img src="dashboards/scheduled_reports/report_pdf.png" alt="Example PDF report" style="width:80%;" >}}
-
 
 The following widget types are supported:
 
@@ -139,3 +134,4 @@ The following widget types are supported:
 [26]: /dashboards/widgets/split_graph/
 [27]: /dashboards/widgets/topology_map/
 [28]: /dashboards/widgets/treemap/
+[29]: /account_management/rbac/permissions/#dashboards
