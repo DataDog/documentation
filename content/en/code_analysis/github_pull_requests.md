@@ -68,6 +68,8 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 {{< img src="ci/static-analysis-github-comments.png" alt="Example of a Code Analysis comment on a pull request" style="width:100%;" >}}
 
+1. If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -77,3 +79,4 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 [3]: https://app.datadoghq.com/integrations/github/add
 [4]: https://app.datadoghq.com/ci/settings/static-analysis
 [5]: https://app.datadoghq.com/integrations/github/configuration
+[6]: /code_analysis/static_analysis/github_actions/
