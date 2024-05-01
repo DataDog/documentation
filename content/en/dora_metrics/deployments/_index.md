@@ -31,25 +31,25 @@ further_reading:
 The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
-## Configure Deployment Data Sources 
-Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate. See the respective documentation to set up a data source for your deployment events:
+## Configuring deployment data sources 
+Deployment events are used to compute deployment frequency, change lead time, and change failure rate. See the respective documentation to set up a data source for your deployment events:
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for deployment events:" >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/deployments/" >}}Send a Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Calculating Deployment Frequency
+## Calculating deployment frequency
 
 Deployment frequency is calculated based on the `dora.deployments.count` metric that is generated and increased with each deployment detected from your selected deployment data source. Frequency is calculated by dividing `dora.deployments.count` over a specific time frame.
 
-## Calculating Change Lead Time
+## Calculating change lead time
 
-For a single Git commit, the Change Lead Time (CLT) is calculated as time from the creation of the commit to when the deployment including that commit was executed.
-To calculate the Change Lead Time for a deployment, Datadog runs [`git log`][6] between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it computes the average of the related Change Lead Time values.
+For a single Git commit, the change lead time (CLT) is calculated as time from the creation of the commit to when the deployment including that commit was executed.
+To calculate the change lead time for a deployment, Datadog runs [`git log`][6] between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it computes the average of the related change lead time values.
 Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
-There are two requirements for calculating Change Lead Time:
+There are two requirements for calculating change lead time:
 1. Both the Git repository URL and commit SHA are provided when sending deployment events.
 2. Your repository metadata is being [synchronized to Datadog](#synchronize-repository-metadata-to-datadog).
 
@@ -59,7 +59,7 @@ Datadog breaks down change lead time into the following metrics, which represent
 
 To compute these metrics, there must be a PR associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
 
-If a commit does not have an associated PR, only Time to Deploy and Deploy Time are available.
+If a commit does not have an associated PR, only time to deploy and deploy time metrics are available.
 
 - `dora.time_to_pr_ready`: Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR is ready for review.
 - `dora.review_time`: Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved.
@@ -105,7 +105,7 @@ Run this command in CI for every new commit. If a deployment is executed for a s
 
 <div class="alert alert-warning">
 Do not provide the <code>--no-gitsync</code> option to the <code>datadog-ci git-metadata upload</code> command.
-When that option is included, the commit information is not sent to Datadog and the Change Lead Time metric is not calculated.
+When that option is included, the commit information is not sent to Datadog and the change lead time metric is not calculated.
 </div>
 
 You can validate the correct setup of the command by checking the command output. An example of a correct output is:
@@ -122,7 +122,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 ### Handling multiple services in the same repository
 
-If the source code of multiple services is present in the same repository, further actions are needed to ensure that the Change Lead Time is calculated by taking into account only the commits affecting the specific service being deployed.
+If the source code of multiple services is present in the same repository, further actions are needed to ensure that the change lead time is calculated by taking into account only the commits affecting the specific service being deployed.
 To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5].
 
 If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
@@ -153,11 +153,11 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 
 ### Limitations
 
-- The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing Change Lead Time.
-- Change Lead Time is not available for the first deployment of a service that includes Git information.
+- The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing change lead time.
+- Change lead time is not available for the first deployment of a service that includes Git information.
 
 
-## Calculating Change Failure Rate
+## Calculating change failure rate
 Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an incident and a deployment event. 
 
 ## Further Reading

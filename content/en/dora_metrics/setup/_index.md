@@ -32,12 +32,12 @@ You can programmatically send deployment and incident events to Datadog.
 
 Each event type supports different data sources.
 
-{{< whatsnext desc="Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate. See the respective documentation to set up a data source for your deployment events:" >}}
+{{< whatsnext desc="Deployment events are used to compute deployment frequency, change lead time, and change failure rate. See the respective documentation to set up a data source for your deployment events:" >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/deployments/" >}}Deployment event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Incident events are used to compute Change Failure Rate and Mean Time to Restore. See the respective documentation to set up a data source for your incident events:">}}
+{{< whatsnext desc="Incident events are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your incident events:">}}
   {{< nextlink href="/dora_metrics/incidents/pagerduty" >}}PagerDuty{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/incidents/" >}}Incident event API{{< /nextlink >}}
 {{< /whatsnext >}}

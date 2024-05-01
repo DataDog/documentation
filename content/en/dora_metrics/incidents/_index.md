@@ -27,7 +27,7 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 ## Overview
 
-Incident events are used in order to compute Change Failure Rate and Mean Time to Restore.
+Incident events are used in order to compute change failure rate and mean time to restore.
 To send your own incident events, use the [DORA Metrics API][1]. The following attributes are required:
 
 - `services` or `team` (at least one must be present)
@@ -72,14 +72,14 @@ curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/inciden
 EOF
 ```
 
-## Change Failure Rate
+## Calculating change failure rate
 
-The Change Failure Rate metric is calculated as the percentage of incident events out of the total number of deployments.
+The change failure rate metric is calculated as the percentage of incident events out of the total number of deployments.
 Send both [deployment events][2] and [incident events](#overview) to correctly populate this metric.
 
-## Time to restore service
+## Calculating mean time to restore
 
-The Mean Time to Restore (MTTR) metric is calculated as the duration distribution for *resolved incident* events.
+The mean time to restore (MTTR) metric is calculated as the duration distribution for *resolved incident* events.
 Include the `finished_at` attribute in an incident event to mark that the incident is resolved.
 
 Events can be sent both at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.

@@ -32,16 +32,16 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 DevOps Research and Assessment (DORA) metrics are [four key metrics][1] that indicate the velocity and stability of software development. 
 
-Deployment Frequency
+Deployment frequency
 : How often an organization successfully releases to production.
 
-Lead Time for Changes
+Lead time for changes
 : The amount of time it takes a commit to get into production.
 
-Change Failure Rate
+Change failure rate
 : The percentage of deployments causing a failure in production.
 
-Time to Restore Service
+Time to restore service
 : How long it takes an organization to recover from a failure in production.
 
 Defining and tracking DORA metrics can help you identify areas of improvement for your team or organization's speed and quality of software delivery.
