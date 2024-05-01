@@ -1,7 +1,7 @@
 ---
 title: Components
 kind: documentation
-disable_toc: false
+disable_toc: true
 further_reading:
 - link: "/service_management/workflows/build/"
   tag: "Documentation"
