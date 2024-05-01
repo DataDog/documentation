@@ -39,13 +39,13 @@ La acción **Sleep** (Inactividad) detiene la ejecución del flujo de trabajo du
 
 ## Iteración
 
-La acción **For each** (Para cada) permite ejecutar una acción específica de forma iterativa para cada elemento de una entrada determinada lista. Esto te permite automatizar tareas repetitivas aplicando la misma acción a varios elementos de un lista.
+La acción **For each** (Para cada) permite ejecutar una acción específica de forma iterativa para cada elemento de una lista de entrada determinada. Esto te permite automatizar tareas repetitivas aplicando la misma acción a varios elementos de una lista.
 
 {{< img src="service_management/workflows/iteration.png" alt="Ejemplo de paso iterativo" style="width:100%;" >}}
 
 La acción se compone del paso For each (Para cada) y de un paso interno que quieres realizar de forma iterativa. La salida de un paso For each es una matriz de salidas del paso interno.
 
-Por ejemplo, utilizando For each (Para cada) junto con una acción de CloudFlare, puedes iterar y bloquear una lista de direcciones IP. En este escenario, añades la lista de direcciones IP como **lista de entrada** en el paso For each. A continuación, añades una acción CloudFlare como paso interno y la configuras para bloquear el valor actual en el bucle de iteración. Cuando el flujo de trabajo se ejecuta, el paso CloudFlare se repite para cada valor en la lista, accediendo al valor actual de IP y bloqueándolo.
+Por ejemplo, utilizando For each (Para cada) junto con una acción de CloudFlare, puedes iterar y bloquear una lista de direcciones IP. En este escenario, añades la lista de direcciones IP como **Input list** (Lista de entrada) en el paso For each. A continuación, añades una acción CloudFlare como paso interno y la configuras para bloquear el valor actual en el bucle de iteración. Cuando el flujo de trabajo se ejecuta, el paso CloudFlare se repite para cada valor en la lista, accediendo al valor actual de IP y bloqueándolo.
 
 Para configurar una iteración **For each** (Para cada):
 1. Haz clic en el icono más (**+**) del lienzo del flujo de trabajo para abrir el [catálogo de acciones][1].
