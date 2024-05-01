@@ -76,6 +76,8 @@ SCA performs scans by looking at the libraries contained in your lockfiles. Belo
 
 ## Search and filter results
 
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
+
 After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [**Code Analysis Repositories** page][4]. Click on a repository to analyze **Library Vulnerabilities** and **Library List** results from Software Composition Analysis. 
 
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA.
