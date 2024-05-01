@@ -15,15 +15,13 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 ## Overview
 
-You can programmatically send deployment and incident events to Datadog using the [DORA Metrics API][1]. 
+You can programmatically send deployment and incident events to Datadog.
 
 [**Deployment events**][8]
 : Indicate that a new deployment has occurred for a service in a specific environment. 
 
 [**Incident events**][9]
 : Indicate that a new issue has occurred for a service in a specific environment.
-
-You also have the option of marking a CI job as a deployment and sending a deployment event to Datadog using the [`datadog-ci` NPM package][2].
 
 **Notes:**
 
@@ -36,12 +34,12 @@ Each event type supports different data sources.
 
 {{< whatsnext desc="Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate. See the respective documentation to set up a data source for your deployment events:" >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/deployments/" >}}Send a Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/deployments/" >}}Deployment event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Incident events are used to compute Change Failure Rate and Mean Time to Restore. See the respective documentation to set up a data source for your incident events:">}}
   {{< nextlink href="/dora_metrics/incidents/pagerduty" >}}PagerDuty{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/incidents/" >}}Send an Incident Event API{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/incidents/" >}}Incident event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Examine metrics
@@ -54,8 +52,6 @@ For more information, see the [Data Collected documentation][7].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/dora-metrics/
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci#usage
 [3]: /dora_metrics/
 [4]: /service_management/events/explorer/
 [5]: /api/latest/metrics/#query-timeseries-points
