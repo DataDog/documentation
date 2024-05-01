@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Oracle Linux. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for Oracle Linux.
+This page outlines the basic features of the Datadog Agent for Oracle Linux. To install the Datadog Agent, follow the [Agent Installation Instructions][1].
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 

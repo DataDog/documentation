@@ -302,7 +302,7 @@ menu:
       parent: basic_agent_usage
     - name: Oracle Linux
       identifier: basic_agent_usage_oracle
-      url: agent/basic_agent_usage/redhat/
+      url: agent/basic_agent_usage/oracle/
       weight: 111
       parent: basic_agent_usage
     - name: Puppet
