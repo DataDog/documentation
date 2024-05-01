@@ -14,28 +14,22 @@ products:
   icon: app-sec
 ---
 
+<div class="alert alert-warning">Cloud Security Management on AWS Fargate is in private beta.</div>
+
 This guide walks you through configuring [Amazon Elastic Container Service (Amazon ECS)][1] and [Amazon Elastic Kubernetes Service (Amazon EKS)][2] on AWS Fargate for [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5].
 
-## Prerequisites
+## Cloud Security Management
 
-### Cloud Security Management
+### Prerequisites
 
 - CSM Enterprise or CSM Workload Security with the AWS integration configured
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
-### Application Security Management
-
-- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-- Datadog APM is configured for your application or service, and traces are being received by Datadog.
-
-## Cloud Security Management
-
 {{< tabs >}}
 {{% tab "Amazon ECS" %}}
 
-
-#### AWS Console
+### AWS Console
 
 1. Log in to the [AWS Management Console][6].
 2. Navigate to the ECS section.
@@ -43,8 +37,7 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 4. Use the JSON definition, or the [AWS CLI method](#aws-cli).
 5. Click **Create** to create the task definition.
 
-#### AWS CLI
-
+### AWS CLI
 
 1. Download [datadog-agent-cws-ecs-fargate.json][7].
 ```json
@@ -174,28 +167,37 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
 ```
 
+[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[7]: /resources/json/datadog-agent-cws-ecs-fargate.json
+[8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+
 {{% /tab %}}
 
 {{% tab "Amazon EKS" %}}
 
-To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod with custom RBAC.
+To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod and set up Role-Based Access Control (RBAC) rules.
 
-#### Set up AWS EKS Fargate RBAC rules
+<div class="alert alert-info">If the Agent is running as a sidecar, it can only communicate with containers on the same pod. Run an Agent for every pod you wish to monitor.</div>
+
+### Set up RBAC rules
 
 Use the following [Agent RBAC deployment instruction][6] before deploying the Agent as a sidecar.
 
-#### Deploy the Agent as a sidecar
-
-<!-- To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod with custom RBAC.
-
-**Note**: If the Agent is running as a sidecar, it can communicate only with containers on the same pod. Run an Agent for every pod you wish to monitor. -->
+### Deploy the Agent as a sidecar
 
 {{% csm-fargate-eks-sidecar %}}
+
+[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Application Security Management
+
+### Prerequisites
+
+- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
+- Datadog APM is configured for your application or service, and traces are being received by Datadog.
 
 {{< tabs >}}
 {{% tab "Amazon ECS" %}}
