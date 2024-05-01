@@ -120,12 +120,13 @@ Read more about sampling controls in the [Python tracing library documentation][
 [1]: /tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
-For Ruby applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
+For Ruby applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-For example, to send 10% of the traces:
+For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
 
 ```
 export DD_TRACE_SAMPLE_RATE=0.1
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
@@ -198,7 +199,7 @@ Read more about sampling controls in the [PHP tracing library documentation][1].
 [1]: /tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-Starting in version version `1.3.2`, the Datadog C++ library supports the following configurations:
+Starting in [v0.1.0][1], the Datadog C++ library supports the following configurations:
 - Global sampling rate: `DD_TRACE_SAMPLE_RATE` environment variable
 - Sampling rates by service: `DD_TRACE_SAMPLING_RULES` environment variable.
 - Rate limit setting: `DD_TRACE_RATE_LIMIT` environment variable.
@@ -210,9 +211,10 @@ export DD_TRACE_SAMPLE_RATE=0.1
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
-C++ does not provide integrations for out-of-the-box instrumentation, but it's used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][1].
+C++ does not provide integrations for automatic instrumentation, but it's used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][2].
 
-[1]: /tracing/trace_collection/proxy_setup
+[1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
+[2]: /tracing/trace_collection/proxy_setup
 {{% /tab %}}
 {{% tab ".NET" %}}
 For .NET applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
@@ -583,12 +585,16 @@ Manually keep a trace:
 ```cpp
 ...
 #include <datadog/tags.h>
+#include <datadog/trace_segment.h>
+#include <datadog/sampling_priority.h>
 ...
 
-auto tracer = ...
-auto span = tracer->StartSpan("operation_name");
+dd::SpanConfig span_cfg;
+span_cfg.resource = "operation_name";
+
+auto span = tracer.create_span(span_cfg);
 // Always keep this trace
-span->SetTag(datadog::tags::manual_keep, {});
+span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_KEEP));
 //method impl follows
 ```
 
@@ -597,13 +603,18 @@ Manually drop a trace:
 ```cpp
 ...
 #include <datadog/tags.h>
+#include <datadog/trace_segment.h>
+#include <datadog/sampling_priority.h>
 ...
 
-auto tracer = ...
-auto another_span = tracer->StartSpan("operation_name");
-// Always drop this trace
+using namespace dd = datadog::tracing;
 
-another_span->SetTag(datadog::tags::manual_drop, {});
+dd::SpanConfig span_cfg;
+span_cfg.resource = "operation_name";
+
+auto another_span = tracer.create_span(span_cfg);
+// Always drop this trace
+span.trace_segment().override_sampling_priority(int(dd::SamplingPriority::USER_DROP));
 //method impl follows
 ```
 
@@ -718,7 +729,7 @@ Read more about sampling controls in the [PHP tracing library documentation][2].
 [2]: /tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-Starting from version [v1.3.3][1], for C++ applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+Starting from version [v0.1.0][1], for C++ applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
@@ -726,7 +737,7 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-[1]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.3.3
+[1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
 {{% /tab %}}
 {{% tab ".NET" %}}
 Starting from version [v2.18.0][1], for .NET applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.

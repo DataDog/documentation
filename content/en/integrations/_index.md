@@ -9,6 +9,7 @@ aliases:
     - /integrations/mainstorconcept_ziris/
     - /integrations/rookout/
     - /integrations/rookout_license/
+    - /integrations/amazon_cloudformation/
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
@@ -95,6 +96,23 @@ cascade:
     path: /integrations/feed.md
   aliases:
     - /integrations/rss/
+- _target:
+    path: /integrations/java.md
+  aliases:
+    - /agent/faq/jmx_integrations/
+    - /agent/faq/docker-jmx/
+- _target:
+    path: /integrations/amazon_elb.md
+  aliases:
+    - /integrations/awselb
+- _target:
+    path: /integrations/elastic.md
+  aliases:
+    - /integrations/awses
+- _target:
+    path: /integrations/amazon_s3.md
+  aliases:
+    - /integrations/awss3
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

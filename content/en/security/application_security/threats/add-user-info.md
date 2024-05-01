@@ -78,7 +78,7 @@ Blocking
     .blockIfMatch();
 ```
 
-[1]: /tracing/trace_collection/compatibility/java/#setup
+[1]: /tracing/trace_collection/custom_instrumentation/opentracing/java#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}

@@ -87,6 +87,24 @@ For more information on triggering a workflow, see [Trigger a workflow][8].
 
 For more information on building a workflow, see [Build workflows][9].
 
+### Priority
+
+Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
+To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5.
+
+For example, you can set different priorities for `alert` and `warning` notifications:
+
+```
+{{#is_alert}}
+{{override_priority 'P1'}}
+ ...
+{{/is_alert}}
+{{#is_warning}}
+{{override_priority 'P4'}}
+...
+{{/is_warning}}
+```
+
 ### Toggle additional content
 
 Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors.
@@ -108,7 +126,7 @@ The options are:
 
 Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tag--which are different from metric tags--are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][10]. Datadog Teams allows you to set a layer of ownership to this monitor and view all the monitors linked to your team. To learn more, see [Datadog Teams][11].
 
-{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
+{{< img src="monitors/notifications/notifications_metadata.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
 
 ### Renotify
 

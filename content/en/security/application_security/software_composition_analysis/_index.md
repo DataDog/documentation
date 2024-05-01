@@ -23,6 +23,9 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/articles/guarddog-identify-malicious-pypi-packages/"
   tag: "Blog"
   text: "Finding malicious PyPI packages through static code analysis: Meet GuardDog"
+- link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
+  tag: "Blog"
+  text: "Prioritize vulnerability remediation with Datadog SCA"
 algolia:
   tags: ['Software Composition Analysis', 'Vulnerability Management', 'SCA', 'AVM', 'GuardDog']
 ---
@@ -53,6 +56,8 @@ Since Datadog SCA covers your software development lifecycle end-to-end, the lib
 {{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="Software Composition Analysis (SCA) library explorer page showing library vulnerabilities grouped by library." style="width:100%;" >}}
 
 ## Explore and manage SCA vulnerabilities
+
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Application Security summarizes results found in the default branches of your repositories and in your running services. To view vulnerabilities found in different branches and commits, see <a href="/code_analysis/software_composition_analysis" target="_blank">Code Analysis</a> for more details.</div>
 
 The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA and reports security vulnerabilities associated with them. 
 
