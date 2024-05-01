@@ -32,9 +32,9 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 {{< /callout >}}
 
 ## Configuring deployment data sources 
-Deployment events are used to compute deployment frequency, change lead time, and change failure rate. See the respective documentation to set up a data source for your deployment events:
+Deployment events are used to compute deployment frequency, change lead time, and change failure rate. DORA Metrics supports the data sources below for deployment events. Select an option below to set up the data source for your deployment events:
 
-{{< whatsnext desc="DORA Metrics supports the following data sources for deployment events:" >}}
+{{< whatsnext >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/deployments/" >}}Send a Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
