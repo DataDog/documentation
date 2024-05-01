@@ -33,7 +33,7 @@ The report PDF is included as an email attachment or as a link, depending on its
 
 ## Schedule a report
 
-Create a report from any [dashboard or timeboard][dashboard] that has at least one [supported widget](#unsupported-widget-types).
+Create a report from any [dashboard or timeboard][1] that has at least one [supported widget](#unsupported-widget-types).
 
 Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
 
@@ -66,33 +66,33 @@ From the configuration modal that opens, you can pause an existing report or cre
 
 ## Permissions
 
-Users need the **Dashboards Report Write** [permission][permissions] to create and edit report schedules.
-This permission can be granted by another user with the **User Access Manage** permission, and is available by default to users with the **Datadog Admin** [out-of-the-box role][ootb-role].
+Users need the **Dashboards Report Write** [permission][2] to create and edit report schedules.
+This permission can be granted by another user with the **User Access Manage** permission, and is available by default to users with the **Datadog Admin** [out-of-the-box role][3].
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
 
-Users with the **Org Management** permission can enable or disable the scheduled reports feature for their organization from the **Settings** tab under [Public Sharing][public-sharing] in **Organization Settings**.
+Users with the **Org Management** permission can enable or disable the scheduled reports feature for their organization from the **Settings** tab under [Public Sharing][4] in **Organization Settings**.
 
 {{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:90%;" >}}
 
 ## Unsupported widget types
 
 The following widget types are **not** supported and will be shown as empty in the report:
-- [Iframe][iframe-widget]
-- [Image][image-widget]
-- [Hostmap][hostmap-widget]
-- [Run Workflow][run-workflow-widget]
+- [Iframe][5]
+- [Image][6]
+- [Hostmap][7]
+- [Run Workflow][8]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[dashboard]: /dashboards/#get-started
-[iframe-widget]: /dashboards/widgets/iframe/
-[image-widget]: /dashboards/widgets/image/
-[hostmap-widget]: /dashboards/widgets/hostmap/
-[ootb-role]: /account_management/rbac/permissions/#out-of-the-box-roles
-[permissions]: /account_management/rbac/permissions/
-[public-sharing]: /account_management/org_settings/#public-sharing
-[run-workflow-widget]: /dashboards/widgets/run_workflow/
+[1]: /dashboards/#get-started
+[2]: /account_management/rbac/permissions/
+[3]: /account_management/rbac/permissions/#out-of-the-box-roles
+[4]: /account_management/org_settings/#public-sharing
+[5]: /dashboards/widgets/iframe/
+[6]: /dashboards/widgets/image/
+[7]: /dashboards/widgets/hostmap/
+[8]: /dashboards/widgets/run_workflow/
 
