@@ -1,9 +1,7 @@
 ---
-title: Basic Agent Usage for CentOS, Rocky, and Alma Linux
+title: Basic Agent Usage for Oracle Linux
 kind: documentation
-platform: CentOS
-aliases:
-    - /guides/basic_agent_usage/centos/
+platform: Oracle
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -24,11 +22,9 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for CentOS and its derivatives, Rocky Linux and Alma Linux. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for CentOs.
+This page outlines the basic features of the Datadog Agent for Oracle Linux. To install the Datadog Agent, follow the [Agent Installation Instructions][1].
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
-
-**Note**: CentOS 6 and above are supported on the 64-bit x86 architecture. CentOS/Rocky/Alma 8 and above are supported on the 64-bit Arm v8 architecture.
 
 ## Commands
 
@@ -37,7 +33,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-### CentOS 7 and higher
+### Oracle Linux 7 and higher
 
 | Description                        | Command                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -50,7 +46,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Display command usage              | `sudo datadog-agent --help`                            |
 | Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-### CentOS 6
+### Oracle Linux 6
 
 | Description                        | Command                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -181,6 +177,6 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=oracle
 [2]: /agent/troubleshooting/
 [3]: /developers/guide/custom-python-package/
