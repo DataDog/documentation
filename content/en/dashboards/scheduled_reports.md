@@ -31,7 +31,7 @@ Scheduled reports enable Datadog users to share dashboards as high-density PDFs 
 
 ## Schedule a report
 
-Create a report from any [grid-based dashboard](https://www.datadoghq.com/blog/datadog-dashboards/) or timeboard.
+Create a report from any [dashboard or timeboard][dashboard].
 The dashboard must have at least one [supported widget](#unsupported-widget-types).
 Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
 
@@ -81,11 +81,11 @@ The following widget types are **not** supported and will be shown as empty in t
 - [Hostmap][hostmap-widget]
 - [Run Workflow][run-workflow-widget]
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[dashboard]: /dashboards/#get-started
 [iframe-widget]: /dashboards/widgets/iframe/
 [image-widget]: /dashboards/widgets/image/
 [hostmap-widget]: /dashboards/widgets/hostmap/
