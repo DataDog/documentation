@@ -101,10 +101,10 @@ CSM Threats supports the following Linux distributions:
 
 ### CSM Vulnerabilities 
 
-| Component                | Version/Requirement                     |
-| ------------------------ | ----------------------------------------|
-| [Helm Chart][103]            | v3.49.6 or later (Kubernetes only)      |
-| [containerd][104]              | v1.5.6 or later (Kubernetes and hosts only)|
+| Component         | Version/Requirement                         |
+|-------------------|---------------------------------------------|
+| [Helm Chart][103] | v3.49.6 or later (Kubernetes only)          |
+| [containerd][104] | v1.5.6 or later (Kubernetes and hosts only) |
 
 **Note**: CSM Vulnerabilities is **not** available for CRI-O runtime and podman runtime.
 
@@ -130,7 +130,7 @@ Vulnerability scanning is supported for hosts and containers running the followi
 
 ### CSM Identity Risks 
 
-<div class="alert alert-info"><strong>Note</strong>: At this time, CSM Identity Risks is available for AWS only.</div>
+<div class="alert alert-info"><strong>Note</strong>: CSM Identity Risks is available for AWS and Azure.</div>
 
 To use CSM Identity Risks, you must [enable resource collection for AWS][105]. If you've already done this, no additional setup is required.
 
