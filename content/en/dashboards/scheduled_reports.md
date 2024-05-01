@@ -75,13 +75,14 @@ Users with the **Org Management** permission can enable or disable the scheduled
 
 ## Unsupported widget types
 
-The following widget types are **not** supported:
+The following widget types are **not** supported and will be shown as empty in the report:
 - [Embedded App][embedded-app-widget]
 - [Iframe][iframe-widget]
 - [Image][image-widget]
 - [Hostmap][hostmap-widget]
 - [Run Workflow][run-workflow-widget]
 - [Wildcard][wildcard-widget]
+
 
 ## Further Reading
 
