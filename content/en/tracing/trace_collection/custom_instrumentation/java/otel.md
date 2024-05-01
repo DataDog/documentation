@@ -46,7 +46,7 @@ public void doSomething() {
 
 ## Adding tags globally to all spans
 
-The `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, or any other tags you would like to see within the Datadog UI.
+The `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, or any other tags you would like to see in Datadog.
 
 ```shell
 java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
