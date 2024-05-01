@@ -167,7 +167,7 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 
 ### AWS EKS Fargate RBAC
 
-Use the following [Agent RBAC deployment instruction][10] before deploying the Agent as a sidecar.
+Use the following [Agent RBAC deployment instruction][12] before deploying the Agent as a sidecar.
 
 ### Running the Agent as a sidecar
 
@@ -262,16 +262,13 @@ In the task definition, replace the "workload" container with the following:
 {{< /code-block >}}
 
 ## Next steps
-If you still have issues with the configuration, please [contact Datadog support][10] for help and attach the `security-agent` flare to the ticket.
+If you still have issues with the configuration, [contact Datadog support][10] for help and attach the `security-agent` flare to the ticket.
 Use the appropriate command below to create a `security-agent` flare based on your deployment:
 
-| Platform     | Command                                                                             |
-| --------     | -------                                                                             |
-| ECS Fargate      | Use the full command `aws ecs execute-command` shared in [ECS Fargate][11] and run `"security-agent flare <CASE_ID>"` |
-| EKS Fargate  | `kubectl exec -it <POD> -c datadog-agent -- security-agent flare <CASE_ID>`   |
-
-
-
+| Platform    | Command                                                                                                               |
+|-------------|-----------------------------------------------------------------------------------------------------------------------|
+| ECS Fargate | Use the full command `aws ecs execute-command` shared in [ECS Fargate][11] and run `"security-agent flare <CASE_ID>"` |
+| EKS Fargate | `kubectl exec -it <POD> -c datadog-agent -- security-agent flare <CASE_ID>`                                           |
 
 [1]: /security/threats/
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
@@ -284,4 +281,4 @@ Use the appropriate command below to create a `security-agent` flare based on yo
 [9]: https://app.datadoghq.com/logs
 [10]: /help/
 [11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#ecs-fargate
-
+[12]: https://docs.datadoghq.com/integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
