@@ -281,4 +281,4 @@ Use the appropriate command below to create a `security-agent` flare based on yo
 [9]: https://app.datadoghq.com/logs
 [10]: /help/
 [11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#ecs-fargate
-[12]: https://docs.datadoghq.com/integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[12]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
