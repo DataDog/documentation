@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -131,7 +131,7 @@
         contents:
 
         - action: marketplace-integrations
-          branch: master
+          branch: io_mule_ins
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
