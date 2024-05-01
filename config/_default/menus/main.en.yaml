@@ -4656,116 +4656,116 @@ menu:
       url: synthetics/browser_tests/app-that-requires-login
       parent: synthetics_browser_tests
       weight: 304
-    - name: Private Locations
-      url: synthetics/private_locations
-      parent: synthetics
-      identifier: synthetics_private_location
-      weight: 4
-    - name: Configuration
-      url: synthetics/private_locations/configuration
-      parent: synthetics_private_location
-      identifier: synthetics_private_location_configuration
-      weight: 401
-    - name: Dimensioning
-      url: synthetics/private_locations/dimensioning
-      parent: synthetics_private_location
-      identifier: synthetics_private_location_dimensioning
-      weight: 402
-    - name: Monitoring
-      url: synthetics/private_locations/monitoring
-      parent: synthetics_private_location
-      identifier: synthetics_private_location_monitoring
-      weight: 403
-    - name: Search and Manage
-      url: synthetics/search/
-      parent: synthetics
-      identifier: synthetics_search
-      weight: 5
-    - name: Saved Views
-      url: synthetics/search/saved_views
-      parent: synthetics_search
-      identifier: synthetics_search_saved_views
-      weight: 501
-    - name: Results Explorer
-      url: continuous_testing/explorer/
-      parent: synthetics
-      identifier: synthetics_results_explorer
-      weight: 6
-    - name: Search Test Batches
-      url: continuous_testing/explorer/search/
-      parent: synthetics_results_explorer
-      identifier: continuous_testing_results_explorer_search
-      weight: 601
-    - name: Search Test Runs
-      url: continuous_testing/explorer/search_runs/
-      parent: synthetics_results_explorer
-      identifier: continuous_testing_results_explorer_search_runs
-      weight: 602
-    - name: Search Syntax
-      url: continuous_testing/explorer/search_syntax/
-      parent: synthetics_results_explorer
-      identifier: continuous_testing_results_explorer_search_syntax
-      weight: 603
-    - name: Saved Views
-      url: continuous_testing/explorer/saved_views/
-      parent: synthetics_results_explorer
-      identifier: continuous_testing_results_explorer_saved_views
-      weight: 604
-    - name: Test Coverage
-      url: synthetics/test_coverage
-      parent: synthetics
-      identifier: synthetics_test_coverage
-      weight: 7
-    - name: Dashboards
-      url: synthetics/dashboards
-      parent: synthetics
-      identifier: synthetics_dashboards
-      weight: 8
-    - name: API Test
-      url: synthetics/dashboards/api_test
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_api_test
-      weight: 801
-    - name: Browser Test
-      url: synthetics/dashboards/browser_test
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_browser_test
-      weight: 802
-    - name: Test Summary
-      url: synthetics/dashboards/test_summary
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_test_summary
-      weight: 803
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/
       parent: synthetics
       identifier: synthetics_mobile_app_testing
-      weight: 9
+      weight: 4
     - name: Mobile App Tests
       url: synthetics/mobile_app_testing/mobile_app_tests
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests
-      weight: 901
+      weight: 401
     - name: Test Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/steps
       parent: synthetics_mobile_app_testing_mobile_app_tests
       identifier: synthetics_mobile_app_testing_mobile_app_tests_steps
-      weight: 9101
+      weight: 4101
     - name: Test Results
       url: synthetics/mobile_app_testing/mobile_app_tests/results
       parent: synthetics_mobile_app_testing_mobile_app_tests
       identifier: synthetics_mobile_app_testing_mobile_app_tests_results
-      weight: 9102
+      weight: 4102
     - name: Advanced Options for Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/advanced_options
       parent: synthetics_mobile_app_testing_mobile_app_tests
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
-      weight: 9103
+      weight: 4103
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
+      weight: 402
+    - name: Private Locations
+      url: synthetics/private_locations
+      parent: synthetics
+      identifier: synthetics_private_location
+      weight: 5
+    - name: Configuration
+      url: synthetics/private_locations/configuration
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_configuration
+      weight: 501
+    - name: Dimensioning
+      url: synthetics/private_locations/dimensioning
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_dimensioning
+      weight: 502
+    - name: Monitoring
+      url: synthetics/private_locations/monitoring
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_monitoring
+      weight: 503
+    - name: Search and Manage
+      url: synthetics/search/
+      parent: synthetics
+      identifier: synthetics_search
+      weight: 6
+    - name: Saved Views
+      url: synthetics/search/saved_views
+      parent: synthetics_search
+      identifier: synthetics_search_saved_views
+      weight: 601
+    - name: Results Explorer
+      url: continuous_testing/explorer/
+      parent: synthetics
+      identifier: synthetics_results_explorer
+      weight: 7
+    - name: Search Test Batches
+      url: continuous_testing/explorer/search/
+      parent: synthetics_results_explorer
+      identifier: continuous_testing_results_explorer_search
+      weight: 701
+    - name: Search Test Runs
+      url: continuous_testing/explorer/search_runs/
+      parent: synthetics_results_explorer
+      identifier: continuous_testing_results_explorer_search_runs
+      weight: 702
+    - name: Search Syntax
+      url: continuous_testing/explorer/search_syntax/
+      parent: synthetics_results_explorer
+      identifier: continuous_testing_results_explorer_search_syntax
+      weight: 703
+    - name: Saved Views
+      url: continuous_testing/explorer/saved_views/
+      parent: synthetics_results_explorer
+      identifier: continuous_testing_results_explorer_saved_views
+      weight: 704
+    - name: Test Coverage
+      url: synthetics/test_coverage
+      parent: synthetics
+      identifier: synthetics_test_coverage
+      weight: 8
+    - name: Dashboards
+      url: synthetics/dashboards
+      parent: synthetics
+      identifier: synthetics_dashboards
+      weight: 9
+    - name: API Test
+      url: synthetics/dashboards/api_test
+      parent: synthetics_dashboards
+      identifier: synthetics_dashboards_api_test
       weight: 902
+    - name: Browser Test
+      url: synthetics/dashboards/browser_test
+      parent: synthetics_dashboards
+      identifier: synthetics_dashboards_browser_test
+      weight: 903
+    - name: Test Summary
+      url: synthetics/dashboards/test_summary
+      parent: synthetics_dashboards
+      identifier: synthetics_dashboards_test_summary
+      weight: 904
     - name: APM Integration
       url: synthetics/apm/
       parent: synthetics
