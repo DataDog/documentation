@@ -31,7 +31,9 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 
 ## Cloud Security Management
 
-### Amazon ECS
+{{< tabs >}}
+{{% tab "Amazon ECS" %}}
+
 
 #### AWS Console
 
@@ -45,7 +47,7 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 
 
 1. Download [datadog-agent-cws-ecs-fargate.json][7].
-{{< code-block lang="json" filename="datadog-agent-cws-ecs-fargate.json" collapsible="true" >}}
+```json
 {
     "family": "<YOUR_TASK_NAME>",
     "cpu": "256",
@@ -153,7 +155,7 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
         }
     ]
 }
-{{< /code-block >}}
+```
 
 2. Update the following items in the JSON file:
     - `TASK_NAME`
@@ -168,11 +170,13 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 3. Add your other application containers to the task definition. For details on collecting integration metrics, see [Integration Setup for ECS Fargate][8].
 4. Run the following command to register the ECS task definition:
 
-{{< code-block lang="shell" collapsible="true" >}}
+```shell
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
-{{< /code-block >}}
+```
 
-### Amazon EKS
+{{% /tab %}}
+
+{{% tab "Amazon EKS" %}}
 
 To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod with custom RBAC.
 
@@ -188,9 +192,13 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 {{% csm-fargate-eks-sidecar %}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Application Security Management
 
-### Amazon ECS
+{{< tabs >}}
+{{% tab "Amazon ECS" %}}
 
 - Only threat detection using tracing libraries? (i.e., no single-step instrumentation and no code security.)
 - What is VULNERABILITY MANAGEMENT FOR OSS SUPPORT? https://docs.datadoghq.com/security/application_security/enabling/compatibility/ruby#supported-deployment-types
@@ -204,11 +212,16 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 1. Update to the latest Datadog library (the most recent APM tracing library).
 1. Enable ASM when starting the Python application.
 
-### Amazon EKS
+{{% /tab %}}
+
+{{% tab "Amazon EKS" %}}
 
 To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod with custom RBAC.
 
 - Confirm that ASM supports EKS on Fargate.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Cloud SIEM
 
