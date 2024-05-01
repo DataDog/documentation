@@ -3740,7 +3740,7 @@ menu:
       identifier: dora_metrics_deployment_apm
       weight: 201
     - name: API
-      url: api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+      url: dora_metrics/deployments/deployment_api
       parent: dora_metrics_deployments
       identifier: dora_metrics_deployment_events_api
       weight: 202
@@ -3755,7 +3755,7 @@ menu:
       identifier: dora_metrics_incident_pagerduty
       weight: 301
     - name: API
-      url: api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+      url: dora_metrics/incidents/incident_api
       parent: dora_metrics_incidents
       identifier: dora_metrics_incident_events_api
       weight: 302
