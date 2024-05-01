@@ -53,7 +53,7 @@ Add recipients to your report by entering their email addresses. The email assoc
 
 Finally, customize the report to provide recipients with more context or a tailored view. The optional description is included in the report email body.
 
-Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard's defaults.
+Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the dashboard's default template variable values.
 
 To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
 
