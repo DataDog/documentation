@@ -76,19 +76,16 @@ Users with the **Org Management** permission can enable or disable the scheduled
 ## Unsupported widget types
 
 The following widget types are **not** supported and will be shown as empty in the report:
-- [Embedded App][embedded-app-widget]
 - [Iframe][iframe-widget]
 - [Image][image-widget]
 - [Hostmap][hostmap-widget]
 - [Run Workflow][run-workflow-widget]
-- [Wildcard][wildcard-widget]
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[embedded-app-widget]: /dashboards/widgets/embedded_app/
 [iframe-widget]: /dashboards/widgets/iframe/
 [image-widget]: /dashboards/widgets/image/
 [hostmap-widget]: /dashboards/widgets/hostmap/
@@ -96,5 +93,4 @@ The following widget types are **not** supported and will be shown as empty in t
 [permissions]: /account_management/rbac/permissions/
 [public-sharing]: /account_management/org_settings/#public-sharing
 [run-workflow-widget]: /dashboards/widgets/run_workflow/
-[wildcard-widget]: /dashboards/widgets/wildcard/
 
