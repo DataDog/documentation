@@ -39,7 +39,9 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-## Upload your mapping file
+## Get deobfuscated stack traces
+
+### Upload your mapping file
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
@@ -157,7 +159,7 @@ For example:
 tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ```
 
-### Limitations
+## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 Mapping files are limited to **500** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
@@ -180,6 +182,23 @@ datadog {
     )
 }
 ```
+
+## Test your implementation
+
+To verify your Android Crash Reporting and Error Tracking configuration, you need to trigger a crash in your RUM application and confirm that the error appears in Datadog.
+
+To test your implementation:
+
+1. Run your application on an Android emulator or a real device.
+2. Execute some code containing an error or crash. For example:
+
+   ```kotlin
+   fun onEvent() {
+       throw RuntimeException("Crash the app")
+   }
+   ```
+
+3. After the crash happens, restart your application and wait for the Android SDK to upload the crash report in [**Error Tracking**][1].
 
 ## Further Reading
 

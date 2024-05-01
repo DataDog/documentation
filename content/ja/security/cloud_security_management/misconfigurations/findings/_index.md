@@ -15,10 +15,6 @@ kind: ドキュメント
 title: 誤構成を探索する
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management Misconfigurations はサポートされていません。</div>
-{{< /site-region >}}
-
 Cloud Security Management Misconfigurations (CSM Misconfigurations) [Explorer][1] では、以下のことができます。
 
 - リソースのコンフィギュレーションの詳細を確認する。
