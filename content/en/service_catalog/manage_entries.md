@@ -40,7 +40,7 @@ Service color is used in trace visualizations. Click the service type icon to ch
 With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
 
 ### Enrich auto-detected services with metadata 
-To specify on-call, source code, or documentation for your services, you can add metadata to any existing services via the UI, APIs, or other automation. 2.2 is the recommended version. To try experimental features, you can opt into the beta program for [schema 3.0][21].
+To specify on-call, source code, or documentation for your services, you can add metadata to any existing services via the UI, APIs, or other automation. 2.2 is the recommended version. To try experimental features, you can opt into the beta program for [schema 3.0][21] by [submitting a request][22].
 
 #### Service Definition Schema (v2.2) (Recommended)
 
@@ -128,3 +128,4 @@ extensions:
 [19]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
 [20]: /service_catalog/service_definitions
 [21]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
+[22]: https://forms.gle/zbLfnJYhD5Ab4Wr18
