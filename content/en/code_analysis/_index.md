@@ -43,7 +43,7 @@ Software Composition Analysis
 
 <div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
-Once you have configured Code Analysis, you can head to the [Code Analysis page][9] to see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories. The summarized results will always be for the latest commit on the default branch of each repository to ensure you are seeing all the existing problems on each repository that you may want to triage and fix.
+After you have configured Code Analysis, you can use the [**Code Analysis** page][9] to see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories. The summarized results are always for the latest commit on the default branch of each repository, which ensures that you are seeing all the existing problems on each repository that you may want to triage and fix.
 
 Select a repository from the list to search through and manage violations for that specific repository. By default, the results are filtered to the latest commit on the default branch of the repository, but you may change the branch or commit at the top of the page. Regardless of the selected branch or commit, all results will be organized into the following views:
 
@@ -82,7 +82,7 @@ With Static Analysis, you can receive automated feedback on poor coding practice
 
 ## Set up Code Analysis on your repository
 
-Click **+ Setup a Repository** on the [Code Analysis page][9] and select the relevant programming languages to add Code Analysis to your project. Datadog provides out-of-the-box rulesets for the following languages:
+Click **+ Add a Repository** on the [**Code Analysis Repositories** page][9] and select the relevant programming languages to add Code Analysis to your project. Datadog provides out-of-the-box rulesets for the following languages:
 
 {{< partial name="code_analysis/languages-getting-started.html" >}}
 

@@ -1,16 +1,17 @@
 ---
-title: Agent v6 の変更点
-kind: faq
 aliases:
-  - /ja/agent/faq/agent-v6-changes
+- /ja/agent/faq/agent-v6-changes
 further_reading:
-  - link: /agent/versions/upgrade_to_agent_v6/
-    tag: Documentation
-    text: Datadog Agent v6 へのアップグレード
-  - link: /agent/faq/how-datadog-agent-determines-the-hostname/
-    tag: Documentation
-    text: Datadog が Agent ホスト名を決定する方法
+- link: /agent/versions/upgrade_to_agent_v6/
+  tag: Documentation
+  text: Datadog Agent v6 へのアップグレード
+- link: /agent/faq/how-datadog-agent-determines-the-hostname/
+  tag: Documentation
+  text: Datadog が Agent ホスト名を決定する方法
+kind: faq
+title: Agent v6 の変更点
 ---
+
 ## 概要
 
 Datadog Agent v6 には、以前の Agent バージョンと比較して多くの変更が含まれています。変更と非推奨については、以下のセクションで詳しく説明します。
@@ -41,7 +42,7 @@ Agent コンフィギュレーションのパスと形式を切り替えるに�
 sudo -u dd-agent -- datadog-agent import
 ```
 
-このコマンドは、既存の `datadog.conf` を解析し、サポートされているパラメーターを `datadog.yaml` の新しい形式に変換します。このコマンドは、現在有効になっているチェックのコンフィギュレーションファイルもコピーします。詳細については、[Datadog Agent v6 へのアップグレード][2]を参照してください。
+このコマンドは、既存の `datadog.conf` を解析し、サポートされているパラメーターを `datadog.yaml` の新しい形式に変換します。このコマンドは、有効になっているチェックのコンフィギュレーションファイルもコピーします。詳細については、[Datadog Agent v6 へのアップグレード][2]を参照してください。
 
 #### オプション
 
@@ -89,9 +90,9 @@ sudo -u dd-agent -- datadog-agent import
 | `use_curl_http_client`       |                                                                                                                       |
 | `collect_security_groups`    | 廃止。機能は、[AWS インテグレーション][6]で利用可能です。                                                         |
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/agent/guide/upgrade-to-agent-v6/
-[3]: /ja/agent/proxy/
+[3]: /ja/agent/configuration/proxy/
 [4]: /ja/integrations/disk/
 [5]: /ja/logs/
 [6]: /ja/integrations/amazon_web_services/
@@ -164,7 +165,7 @@ Agent v6 のプロキシオプションの優先順位は、以前のバージ�
 {{% /tab %}}
 {{% tab "ホスト名" %}}
 
-Agent v5 と Agent v6 ではホスト名解決に違いがあります。詳細については、[専用ドキュメント][1]をご覧ください。
+Agent v5 と Agent v6 ではホスト名解決に違いがあります。詳細については、[Datadog が Agent ホスト名を決定する方法][1]をご覧ください。
 
 [1]: /ja/agent/faq/how-datadog-agent-determines-the-hostname/#agent-versions
 {{% /tab %}}
@@ -257,7 +258,7 @@ Windows 上の Agent v6 の主な変更点は次のとおりです。
 
 * Agent v5 Windows Agent Manager GUI は、ブラウザベースのクロスプラットフォームマネージャーに置き換えられました。詳細については、[Windows 用 Datadog Agent Manager][1] を参照してください。
 * メインの実行可能ファイルは `agent.exe` (以前は `ddagent.exe`) です。
-* **Administrator** コマンドプロンプトからコマンドライン `"%PROGRAMFILES%\datadog\datadog agent\embedded\agent.exe" <COMMAND>` を使用してコマンドを実行する必要があります。
+* **Administrator** コマンドプロンプトからコマンドライン `"%ProgramFiles%\datadog\datadog agent\embedded\agent.exe" <COMMAND>` を使用してコマンドを実行する必要があります。
 * Windows サービスが「自動遅延」として開始されます。起動時に自動的に開始されますが、他のすべてのサービスの後に開始されます。これにより、再起動後のメトリクスのレポートにわずかな遅延が生じます。
 * Windows GUI と Windows システムトレイアイコンが個別に実装されるようになりました。詳細については、[Windows 用 Datadog Agent Manager][1] を参照してください。
 
@@ -371,7 +372,7 @@ Kubernetes インテグレーションは、以下を組み合わせることに
 
 #### タグ付け
 
-Agent v5 はすべてのポッドラベルをタグとして自動的に収集しましたが、Agent v6 にはホワイトリストが必要です。これは、`datadog.yaml` の `kubernetes_pod_labels_as_tags` オプションで行われます。詳細については、[タグの割り当てと抽出][5]を参照してください。
+Agent v5 はすべてのポッドラベルをタグとして自動的に収集しましたが、Agent v6 には許可リストが必要です。これは、`datadog.yaml` の `kubernetes_pod_labels_as_tags` オプションで行われます。詳細については、[タグの割り当てと抽出][5]を参照してください。
 
 次のオプションとタグは非推奨になりました。
 
@@ -389,7 +390,7 @@ Agent v5 はすべてのポッドラベルをタグとして自動的に収集�
 
 Agent v6 には JMXFetch が付属していますが、次の変更が加えられています。
 
-#### JMXTerm JAR
+#### Jmxterm
 
 Agent v6 には `jmxterm` JAR が付属していません。`jmxterm` をダウンロードして使用するには、[アップストリームプロジェクト][1]を参照してください。
 
@@ -402,7 +403,7 @@ Agent v6 には `jmxterm` JAR が付属していません。`jmxterm` をダウ�
 | `sudo -u dd-agent datadog-agent jmx list matching`     | 1 つ以上のインスタンスコンフィギュレーションに一致する属性をリストします。                                                                                        |
 | `sudo -u dd-agent datadog-agent jmx list limited`      | インスタンスコンフィギュレーションの 1 つに一致するが、収集可能なメトリクス数を超えるために収集されない属性をリストします。 |
 | `sudo -u dd-agent datadog-agent jmx list collected`    | 現在のインスタンスコンフィギュレーションによって収集される属性をリストします。                                                                                     |
-| `sudo -u dd-agent datadog-agent jmx list not-matching` | どのインスタンスコンフィギュレーションにも一致しない属性をリストします。                                                                                           |
+| `sudo -u dd-agent datadog-agent jmx list not-matching` | どのインスタンス構成にも一致しない属性をリストする。                                                                                           |
 | `sudo -u dd-agent datadog-agent jmx list everything`   | JMXFetch でサポートされているタイプのすべての使用可能な属性をリストします。                                                                                           |
 | `sudo -u dd-agent datadog-agent jmx collect`           | 現在のコンフィギュレーションに基づいてメトリクスの収集を開始し、コンソールに表示します。                                                            |
 
@@ -455,7 +456,7 @@ Agent v6 では、すべてのチェック関連の Python コードは、`datad
 
 **注**: すべての公式インテグレーションは廃止されたモジュールを削除するように更新されたため、これらの変更はカスタムチェックにのみ影響します。
 
-多くの `utils` ディレクトリが Agent v6 から削除されましたが、削除されたコンテンツのほとんどはチェックに直接関係していませんでした。たとえば、flare モジュールは Go で削除され、再実装されましたが、カスタムチェックで誰も使用していなかった可能性があります。詳細については、[開発ドキュメント][9]を参照してください。
+多くの `utils` ディレクトリが Agent v6 から削除されましたが、削除されたコンテンツのほとんどはチェックに直接関係していませんでした。たとえば、flare モジュールは Go で削除され、再実装されましたが、カスタムチェックで誰かが使用したことはまずありません。詳細については、[カスタムチェック開発者ガイド][9]をお読みください。
 
 {{< tabs >}}
 {{% tab "インテグレーション" %}}
@@ -469,7 +470,7 @@ Agent v6 は Python チェックを完全にサポートしていますが、公
 {{% /tab %}}
 {{% tab "Check API" %}}
 
-Python チェックの基本クラス (`AgentCheck`) が `datadog_checks.base.checks` からインポートされました。クラス API で削除または変更されたものは多数あります。さらに、各チェックインスタンスは、クラスの独自のインスタンスになりました。したがって、それらの間で状態を共有することはできません。
+Python チェックの基本クラス (`AgentCheck`) が `datadog_checks.base.checks` からインポートされました。クラス API で削除または変更されたものはいくつかあります。さらに、各チェックインスタンスは、クラスの独自のインスタンスになりました。したがって、それらの間で状態を共有することはできません。
 
 `AgentCheck` クラスの以下のメソッドは実装されていません。
 
@@ -560,12 +561,12 @@ sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/proxy/#using-the-agent-as-a-proxy
+[1]: /ja/agent/configuration/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
 [3]: /ja/agent/guide/dogstream/
 [4]: /ja/integrations/go-metro/
-[5]: /ja/agent/guide/agent-log-files/
-[6]: /ja/agent/guide/agent-commands/
+[5]: /ja/agent/configuration/agent-log-files/
+[6]: /ja/agent/configuration/agent-commands/
 [7]: /ja/getting_started/agent/autodiscovery/
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
-[9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks
+[9]: https://github.com/DataDog/datadog-agent/tree/main/docs/dev/checks
