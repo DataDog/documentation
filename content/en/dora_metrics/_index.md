@@ -59,13 +59,7 @@ Once you've set up the data sources for your deployment and incident events, nav
 
 You can access and visualize your DORA metrics and filter them by team, service, repository, environment, and time period on the [**DORA Metrics** page][4]. For more information about the metrics calculated by DORA Metrics, see the [Data Collected documentation][3].
 
-## Explore DORA Metrics events in Event Management
-
-DORA Metrics provides individual `deployment`, `incident`, and `incident_finished` events under the `Software Delivery Insights` source in [Event Management][7]. Navigate to [**Service Management** > **Event Management** > **Explorer**][8] and enter `source:software_delivery_insights` in the search query to filter on DORA Metrics events.
-
-{{< img src="dora_metrics/events.png" alt="Events collected from DORA Metrics in the Events Explorer" style="width:100%;" >}}
-
-You can export your DORA Metrics data to dashboards or notebooks and create [metric monitors][5] to trigger alerts on your metrics. For more information, see the [Monitors documentation][6].
+You can also export your DORA Metrics data to dashboards or notebooks and create [metric monitors][5] to trigger alerts on your metrics. For more information, see the [Monitors documentation][6].
 
 ## Further Reading
 
@@ -77,5 +71,3 @@ You can export your DORA Metrics data to dashboards or notebooks and create [met
 [4]: https://app.datadoghq.com/ci/dora
 [5]: /monitors/types/metric/?tab=threshold
 [6]: /monitors/
-[7]: /service_management/events/
-[8]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true

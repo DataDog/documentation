@@ -42,12 +42,6 @@ Each event type supports different data sources.
   {{< nextlink href="/dora_metrics/incidents/" >}}Incident event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Examine metrics
-
-[DORA Metrics][3] generates metrics from these events, which are available in the [Events Explorer][4], and can be queried programmatically by using the [Query timeseries points][5] and [Query timeseries data across multiple products][6] API endpoints. 
-
-For more information, see the [Data Collected documentation][7].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
