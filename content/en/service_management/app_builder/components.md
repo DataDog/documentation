@@ -18,8 +18,7 @@ Datadog App Builder is in private beta. Complete the form to request access.
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-## Button
-
+{{% collapse-content title="Button" level="h2" %}}
 Button components have the following properties.
 
 ### General
@@ -78,11 +77,10 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}} 
 
 
-
-## Callout value
-
+{{% collapse-content title="Callout value" level="h2" %}}
 Callout value components have the following properties.
 
 ### General
@@ -133,11 +131,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [EC2 Instance Manager][3] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## Checkbox
-
+{{% collapse-content title="Checkbox" level="h2" %}}
 Checkbox components have the following properties.
 
 ### General
@@ -195,11 +193,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## Container
-
+{{% collapse-content title="Container" level="h2" %}}
 Container components have the following properties.
 
 ### Appearance
@@ -216,11 +214,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## Date range picker
-
+{{% collapse-content title="Date range picker" level="h2" %}}
 Date range picker components have the following properties.
 
 ### General
@@ -253,11 +251,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## JSON input
-
+{{% collapse-content title="JSON input" level="h2" %}}
 JSON input components have the following properties.
 
 ### General
@@ -293,11 +291,11 @@ For more information on events, see [Events][1].
 ### Inspect data
 
 Displays property and value pairs in JSON format.
+{{% /collapse-content %}}
 
 
 
-## Modal
-
+{{% collapse-content title="Modal" level="h2" %}}
 Modal components have the following properties.
 
 ### General
@@ -334,11 +332,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## Number input
-
+{{% collapse-content title="Number input" level="h2" %}}
 Number input components have the following properties.
 
 Label
@@ -392,12 +390,12 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [ECS Task Manager][4] app blueprint.
+{{% /collapse-content %}}
 
 
 
 
-## Radio
-
+{{% collapse-content title="Radio" level="h2" %}}
 Radio components have the following properties.
 
 ### General
@@ -450,11 +448,11 @@ For more information on events, see [Events][1].
 ### Inspect data
 
 Displays property and value pairs in JSON format.
+{{% /collapse-content %}}
 
 
 
-## Search
-
+{{% collapse-content title="Search" level="h2" %}}
 Search components have the following properties.
 
 ### General
@@ -500,11 +498,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [EC2 Instance Manager][3] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## Select
-
+{{% collapse-content title="Select" level="h2" %}}
 Select components have the following properties.
 
 ### General
@@ -569,11 +567,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## Table
-
+{{% collapse-content title="Table" level="h2" %}}
 Table components have the following properties.
 
 ### General
@@ -690,11 +688,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## Text
-
+{{% collapse-content title="Text" level="h2" %}}
 Text components have the following properties.
 
 ### General
@@ -729,11 +727,11 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
 
 
 
-## Text input
-
+{{% collapse-content title="Text input" level="h2" %}}
 Text input components have the following properties.
 
 Label
@@ -777,6 +775,7 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
 
 
 ## Further reading
