@@ -122,6 +122,15 @@ You can use services and tags to generate an expression. Datadog matches the rul
     - `image_tag`: `2.5`.
     - `short_image`: `MY_IMAGE`.
 
+## Blocked attack example
+
+After Active Protection is enabled at set to **Blocking** for an Agent rule, blocked threats appear in [Signals][1].
+
+A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The malicious process THREAT NAME has automatically been killed.`:
+
+{{< img src="security/cws/guide/active-protection-signal-messages.png" alt="Your image description" style="width:100%;" >}}
+
+
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [3]: #scoping-the-agent-rule
