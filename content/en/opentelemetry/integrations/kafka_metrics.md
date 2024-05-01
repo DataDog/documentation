@@ -7,7 +7,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-OTel Kafka Metrics Remapping is in public alpha. It is available in versions >= 0.93.0 of the collector. If you have feedback related to this, reach out your account team to provide your input.
+OTel Kafka Metrics Remapping is in public alpha. It is available in versions >= 0.93.0 of the collector. If you have feedback related to this, reach out to your account team to provide your input.
 </div>
 
 
