@@ -35,7 +35,7 @@ Las variables de plantilla te permiten filtrar dinámicamente uno o más widgets
 Una variable de plantilla se determina por:
 
 * **Tag or Attribute** (Etiqueta o atributo):
-    * Etiqueta (tag): Si aplicas el [formato de etiquetado][1] recomendado (`<KEY>:<VALUE>`), la *Etiqueta* es la `<KEY>`.
+    * Etiqueta: Si aplicas el [formato de etiquetado][1] recomendado (`<KEY>:<VALUE>`), la *Etiqueta* es la `<KEY>`.
     * Atributo: Usa una [faceta o medida como variable de plantilla](#logs-apm-and-rum-queries).
 * **Name** (Nombre): Un nombre único para la variable de plantilla que aparece en las consultas del dashboard. Las variables de plantilla reciben automáticamente el nombre de la etiqueta o atributo seleccionado.
 * **Default Value** (Valor predeterminado): El valor de la etiqueta o el atributo que aparece automáticamente cuando se carga el dashboard. El valor por defecto es `*`.
@@ -47,8 +47,8 @@ Para añadir una variable de plantilla en un dashboard:
 1. Haga clic en **Add Variables** (Añadir variables). 
 1. Si las variables de plantilla ya están definidas, pasa el cursor sobre el encabezado del dashboard y haz clic en el botón **Edit** (Editar) para acceder al modo de edición.
 1. En el modo de edición, haz clic en el icono **+ (más)** para crear una nueva variable de plantilla.
-1. (Opcional) Después de seleccionar una etiqueta (tag), haz clic en el botón **+ Configure Dropdown Values** (+ Configurar valores desplegables), para cambiar el nombre de la variable y establecer valores predeterminados o disponibles.
-  {{< img src="dashboards/template_variables/add_template_variable_configure_dropdown_values.png" alt="Agregar ventana emergente de la variable que muestra el botón **+ Configure Dropdown Values** (+ Configurar valores desplegables)" style="width:80%;" >}}
+1. (Opcional) Después de seleccionar una etiqueta, haz clic en el botón **+ Configure Dropdown Values** (+ Configurar valores desplegables), para cambiar el nombre de la variable y establecer valores predeterminados o disponibles.
+  {{< img src="dashboards/template_variables/add_template_variable_configure_dropdown_values.png" alt="Añadir ventana emergente de la variable que muestra el botón **+ Configure Dropdown Values** (+ Configurar valores desplegables)" style="width:80%;" >}}
 
 ## Editar una variable de plantilla
 
@@ -60,7 +60,7 @@ Para editar una variable de plantilla en un dashboard:
 
 ## Aplicar una variable de plantilla a widgets
 
-Para añadir una variable de plantilla a las consultas de widget:
+Para añadir una variable de plantilla a las consultas de widgets:
 1. Haz clic en el botón **Edit** (Editar) del encabezado del dashboard.
 1. En el modo de edición, haz clic en una variable de plantilla para abrir su ventana emergente.
 1. Haz clic en **Select Widgets** (Seleccionar widgets), para entrar al modo de selección de widgets.
@@ -97,7 +97,7 @@ Las variables de plantilla se utilizan en widgets y superposiciones de eventos.
 
 ### Consultas de logs, APM y RUM
 
-Las variables de plantilla funcionan con widgets de logs, APM, y RUM, ya que comparten las mismas etiquetas (tags). Puedes definir variables de plantilla de logs, APM, y RUM, en función de las facetas. Estas variables empiezan por `@`,; por ejemplo: `@http.status_code`.
+Las variables de plantilla funcionan con widgets de logs, APM, y RUM, ya que comparten las mismas etiquetas. Puedes definir variables de plantilla de logs, APM, y RUM, en función de las facetas. Estas variables empiezan por `@`,; por ejemplo: `@http.status_code`.
 
 En los widgets de log, APM y RUM, se pueden utilizar comodines en mitad de un valor (por ejemplo, `eng*@example.com`) o varios comodines en un valor (por ejemplo, `*prod*`).
 
