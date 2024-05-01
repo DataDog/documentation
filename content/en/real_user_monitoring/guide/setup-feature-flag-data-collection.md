@@ -652,16 +652,7 @@ For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK d
 ```typescript
 const assignmentLogger: IAssignmentLogger = {
   logAssignment(assignment) {
-    // Send the assignment event to customers' event logging
-    analytics.track({
-      userId: assignment.subject,
-      event: "Eppo Randomized Assignment",
-      type: "track",
-      properties: { ...assignment },
-    });
-
-    // Assuming `exposure` is defined in this context and has a property `variation`
-    datadogRum.addFeatureFlagEvaluation(assignment.experiment, exposure.variation);
+    datadogRum.addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation);
   },
 };
 
@@ -680,26 +671,11 @@ Initialize Eppo's SDK and create an assignment logger that additionally reports 
 For more information about initializing Eppo's SDK, see [Eppo's iOS SDK documentation][1]
 
 ```swift
-func segmentAssignmentLogger(assignment: Assignment) {
-    let assignmentDictionary: [String: Any] = [
-        "allocation": assignment.allocation,
-        "experiment": assignment.experiment,
-        "featureFlag": assignment.featureFlag,
-        "variation": assignment.variation,
-        "subject": assignment.subject,
-        "timestamp": assignment.timestamp
-    ]
-
-    analytics.track(
-        name: "AssignmentLogged", 
-        properties: TrackProperties(assignmentDictionary)
-    )
-
-    // Send the feature flag when Eppo reports the exposure
-    RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: assignment.featureFlag, variation: assignment.variation)
+func IAssignmentLogger(assignment: Assignment) {
+  RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: assignment.featureFlag, variation: assignment.variation)
 }
 
-let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: segmentAssignmentLogger)
+let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmentLogger)
 ```
 
 [1]: https://docs.geteppo.com/sdks/client-sdks/ios
@@ -715,16 +691,7 @@ For more information about initializing Eppo's SDK, see [Eppo's Android SDK docu
 AssignmentLogger logger = new AssignmentLogger() {
     @Override
     public void logAssignment(Assignment assignment) {
-        analytics.enqueue(TrackMessage.builder("Eppo Randomized Assignment")
-            .userId(assignment.getSubject())
-            .properties(ImmutableMap.builder()
-                .put("timestamp", assignment.getTimestamp())
-                .put("experiment", assignment.getExperiment())
-                .put("variation", assignment.getVariation())
-                .build())
-        );
-
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(assignment.getExperiment(), assignment.getVariation());
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(assignment.getFeatureFlag(), assignment.getVariation());
     }
 };
 
@@ -754,17 +721,7 @@ For more information about initializing Eppo's SDK, see [Eppo's React native SDK
 ```typescript
 const assignmentLogger: IAssignmentLogger = {
   logAssignment(assignment) {
-    const { track } = useAnalytics();
-
-    track(
-        'Eppo Randomized Assignment',
-        {
-            userId: assignment.subject,
-            type: 'track',
-            properties: { ...assignment }
-        }
-    );
-  DdRum.addFeatureFlagEvaluation(assignment.experiment, exposure.variation);
+    DdRum.addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation);
   },
 };
 
