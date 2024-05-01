@@ -57,7 +57,7 @@ current_span = trace.get_current_span()
 
 ## Adding span tags
 
-In OpenTelemetry, span tags are referred to as attributes. You can add attributes to a span to provide additional context or metadata.
+Add attributes to a span to provide additional context or metadata.
 
 Here's an example of how to add attributes to the current span:
 
