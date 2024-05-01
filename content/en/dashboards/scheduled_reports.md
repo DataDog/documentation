@@ -33,8 +33,8 @@ The report PDF is included as an email attachment or via link, depending on its 
 
 ## Schedule a report
 
-Create a report from any [dashboard or timeboard][dashboard].
-The dashboard must have at least one [supported widget](#unsupported-widget-types).
+Create a report from any [dashboard or timeboard][dashboard] that has at least one [supported widget](#unsupported-widget-types).
+
 Click the **Share** button at the top of your dashboard and select **Schedule a Report**.
 
 {{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:90%;" >}}
