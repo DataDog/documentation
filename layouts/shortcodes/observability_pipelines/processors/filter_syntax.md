@@ -7,8 +7,8 @@ For any attribute, tag, or `key:value` pair that is not a [reserved attribute][4
 For example, to filter out and drop `status:info` logs, your filter can be set as `NOT (status:info)`. To filter out and drop `system-status:info`, your filter must be set as `NOT (@system-status:info)`.
 
 Filter query examples:
-- `NOT (status:debug)`: This filters for only logs that do not have status `DEBUG`.
-- `status:ok service:flask-web-app`: This filters for all logs with the status `OK` and originates from your `flask-web-app` service.
+- `NOT (status:debug)`: This filters for only logs that do not have the status `DEBUG`.
+- `status:ok service:flask-web-app`: This filters for all logs with the status `OK` from your `flask-web-app` service.
     - This query can also be written as: `status:ok AND service:flask-web-app`.
 - `host:COMP-A9JNGYK OR host:COMP-J58KAS`: This filter query only matches logs from the labeled hosts.
 
