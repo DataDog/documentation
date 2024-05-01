@@ -235,7 +235,7 @@ menu:
       identifier: getting_started_support
       url: getting_started/support/
       parent: getting_started
-      weight: 28
+      weight: 29
     - name: Glossary
       url: glossary/
       pre: features
