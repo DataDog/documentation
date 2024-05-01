@@ -83,7 +83,7 @@ await DdSdkReactNative.initialize(config);
 
 #### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while initializing the Expo RUM SDK as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Expo SDK][9] as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter. 
 
 ### Upload source maps on EAS builds
 
@@ -200,10 +200,6 @@ import { DdSdkReactNative } from 'expo-datadog';
 const config = new DdSdkReactNativeConfiguration(/* your config */);
 DdSdkReactNative.initialize(config);
 ```
-
-## Sample RUM sessions
-
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Expo SDK][9] as a percentage between 0 and 100.
 
 ## Troubleshooting
 
