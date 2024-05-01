@@ -23,6 +23,8 @@ further_reading:
 
 <div class="alert alert-info">OpenTelemetry is supported in Java after version 1.24.0.</div>
 
+To configure OpenTelemetry to use the Datadog trace provider:
+
 1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Java Setup Instructions][15].
 
 1. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
@@ -55,6 +57,8 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 ## Setting errors on a root span from a child span
 
+To set an error on a root span from a child span, you can use the `setStatus` method on the current span like this:
+
 ```java
 import static io.opentelemetry.api.trace.StatusCode.ERROR;
 import io.opentelemetry.api.trace.Span;
@@ -66,6 +70,8 @@ public void doSomething() {
 ```
 
 ## Setting tags and errors on a root span from a child span
+
+This example demonstrates how to set tags and errors on a root span from a child span:
 
 ```java
 import io.opentelemetry.api.OpenTelemetry;
@@ -147,7 +153,9 @@ public class SessionManager {
 }
 ```
 
-## Creating a new span manually
+## Creating new spans
+
+To manually create new spans that start a new, independent trace:
 
 ```java
 import io.opentelemetry.api.OpenTelemetry;
