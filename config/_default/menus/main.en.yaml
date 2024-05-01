@@ -310,50 +310,55 @@ menu:
       url: agent/basic_agent_usage/osx/
       weight: 110
       parent: basic_agent_usage
+    - name: Oracle Linux
+      identifier: basic_agent_usage_oracle
+      url: agent/basic_agent_usage/oracle/
+      weight: 111
+      parent: basic_agent_usage
     - name: Puppet
       identifier: basic_agent_usage_puppet
       url: agent/basic_agent_usage/puppet/
-      weight: 111
+      weight: 112
       parent: basic_agent_usage
     - name: Red Hat
       identifier: basic_agent_usage_redhat
       url: agent/basic_agent_usage/redhat/
-      weight: 112
+      weight: 113
       parent: basic_agent_usage
     - name: Rocky Linux
       identifier: basic_agent_usage_rockylinux
       url: agent/basic_agent_usage/centos/
-      weight: 113
+      weight: 114
       parent: basic_agent_usage
     - name: SaltStack
       identifier: basic_agent_usage_saltstack
       url: agent/basic_agent_usage/saltstack/
-      weight: 114
+      weight: 115
       parent: basic_agent_usage
     - name: SCCM
       identifier: basic_agent_usage_sccm
       url: agent/basic_agent_usage/sccm/
-      weight: 115
+      weight: 116
       parent: basic_agent_usage
     - name: SUSE
       identifier: basic_agent_usage_suse
       url: agent/basic_agent_usage/suse/
-      weight: 116
+      weight: 117
       parent: basic_agent_usage
     - name: Ubuntu
       identifier: basic_agent_usage_ubuntu
       url: agent/basic_agent_usage/ubuntu/
-      weight: 117
+      weight: 118
       parent: basic_agent_usage
     - name: Windows
       identifier: basic_agent_usage_windows
       url: agent/basic_agent_usage/windows/
-      weight: 118
+      weight: 119
       parent: basic_agent_usage
     - name: From Source
       identifier: basic_agent_usage_source
       url: agent/basic_agent_usage/source/
-      weight: 119
+      weight: 120
       parent: basic_agent_usage
     - name: Architecture
       url: agent/architecture/
