@@ -388,7 +388,7 @@ Este endpoint está obsoleto. Utiliza en su lugar el endpoint <a href="https://d
 *   **`dashboards`** [*required* (requerido)]:
     Una lista de dashboards para añadir a la lista.
     Las definiciones de dashboard siguen esta forma:
-    *   **`type`** [*required* (requerido)]:
+    *   **`type`** (tipo) [*required* (requerido)]:
         El tipo del dashboard.
         El tipo debe ser uno de los siguientes:
 
