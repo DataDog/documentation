@@ -108,7 +108,7 @@ Datadog ofrece 4 agregadores espaciales:
 
 ## Aplica funciones (opcional)
 
-Funciones puede aplicarse a la aritmética en el cuadro `Fórmula` cuando se crean gráficas de datos. La mayoría de los funciones se aplican en el último paso. A partir de los ~300 puntos obtenidos tras las agregaciones temporales (paso 2) y espaciales (paso 3), la función calcula nuevos valores que pueden verse en tu gráfico.
+Funciones puede aplicarse a la aritmética en el cuadro `Fórmula` cuando se crean gráficas de datos. La mayoría de las funciones se aplican en el último paso. A partir de los ~300 puntos obtenidos tras las agregaciones temporales (paso 2) y espaciales (paso 3), la función calcula nuevos valores que pueden verse en tu gráfico.
 
 En este ejemplo la función `abs` asegura que tus resultados son números positivos.
 
