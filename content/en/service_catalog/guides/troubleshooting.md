@@ -3,13 +3,12 @@ title: Troubleshooting Service Catalog
 kind: documentation
 aliases:
   - /tracing/service_catalog/troubleshooting
+  - /service_catalog/troubleshooting
 further_reading:
 - link: "/tracing/service_catalog/setup/"
   tag: "Documentation"
   text: "Setting Up Service Catalog"
 ---
-
-
 
 ## APM-instrumented services not appearing
 

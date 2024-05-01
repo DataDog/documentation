@@ -1669,51 +1669,61 @@ menu:
       parent: platform_heading
       identifier: service_catalog
       weight: 80000
-    - name: Browsing
-      url: service_catalog/browsing
+    - name: Navigate the Service Catalog
+      url: service_catalog/navigating
       parent: service_catalog
       identifier: service_catalog_browse
       weight: 1
-    - name: Investigating a Service
+    - name: Investigate a Service
       url: service_catalog/investigating
       parent: service_catalog
-      identifier: service_investigate
+      identifier: service_catalog_investigate
       weight: 2
-    - name: Adding Entries to Service Catalog
-      url: service_catalog/setup
+    - name: Create Entries
+      url: service_catalog/create_entries
       parent: service_catalog
-      identifier: service_catalog_setup
+      identifier: service_catalog_create_entry
       weight: 3
-    - name: Adding Metadata
-      url: service_catalog/add_metadata
+    - name: Import Entries from Datadog
+      url: service_catalog/import_entries_dd
       parent: service_catalog
-      identifier: service_metadata
+      identifier: service_catalog_import_from_telemetries
       weight: 4
-    - name: Service Catalog API
-      url: service_catalog/service_definition_api
+    - name: Import Entries from Integrations
+      url: service_catalog/import_entries_integrations
       parent: service_catalog
-      identifier: service_catalog_api
+      identifier: service_catalog_import_from_integrations
       weight: 5
+    - name: Manage Entries
+      url: service_catalog/manage_entries
+      parent: service_catalog
+      identifier: service_catalog_managing_entries
+      weight: 6
+    - name: Service Definitions
+      url: service_catalog/service_definitions
+      parent: service_catalog
+      identifier: service_catalog_definitions_versions
+      weight: 7
     - name: Service Scorecards
       url: service_catalog/scorecards
       parent: service_catalog
       identifier: service_catalog_scorecards
-      weight: 6
+      weight: 8
+    - name: APIs
+      url: service_catalog/apis
+      parent: service_catalog
+      identifier: service_catalog_apis
+      weight: 9
     - name: Integrations
       url: service_catalog/integrations
       parent: service_catalog
       identifier: service_catalog_integrations
-      weight: 7
-    - name: Troubleshooting
-      url: service_catalog/troubleshooting
-      parent: service_catalog
-      identifier: service_catalog_troubleshooting
-      weight: 8
-    - name: Guides
+      weight: 10
+    - name: Troubleshooting and Best Practices
       url: service_catalog/guides
       parent: service_catalog
-      identifier: service_catalog_guides
-      weight: 9
+      identifier: troubleshooting_best_practices
+      weight: 11
     - name: API Catalog
       url: /api_catalog/
       pre: api-catalog
