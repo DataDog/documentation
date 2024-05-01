@@ -51,17 +51,6 @@ Defining and tracking DORA metrics can help you identify areas of improvement fo
 
 To start configuring data sources to send deployment and incident events to Datadog, see the [Setup documentation][2].
 
-The four DORA Metrics are calculated based on two types of events:
-- **Deployment events**: Indicate that a new deployment has occurred for a service in a specific environment.
-  Deployment events are used to compute Deployment Frequency, Change Lead Time, and Change Failure Rate.
-- **Incident events**: Indicate that a new issue has occurred for a service in a specific environment.
-  Incident events are used to compute Change Failure Rate and Mean Time to Restore.
-
-{{< whatsnext desc="Set up DORA Metrics in Datadog:" >}}
-    {{< nextlink href="continuous_integration/dora_metrics/setup/deployments" >}}Send Deployment Events{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/dora_metrics/setup/incidents" >}}Send Incident Events{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Analyze DORA Metrics
 
 Once you've set up the data sources for your deployment and incident events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, examine deployments by service or environment, and compare trends over time. 
