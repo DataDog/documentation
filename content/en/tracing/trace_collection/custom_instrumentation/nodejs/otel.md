@@ -66,7 +66,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [integration instrumentation][2] and [OpenTelemetry automatic instrumentation][3].
 
-## Adding tags
+## Adding span tags
 
 Add custom attributes to your spans to provide additional context:
 

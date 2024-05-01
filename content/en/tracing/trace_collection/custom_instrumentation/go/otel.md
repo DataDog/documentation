@@ -17,25 +17,11 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-{{% otel-custom-instrumentation %}}
+{{% otel-custom-instrumentation-lang %}}
 
-## Requirements and limitations
+## Setup
 
-- Datadog Go tracing library `dd-trace-go` version 1.5.0 or greater.
-- Go version 1.18 or greater.
-- The Datadog OpenTelemetry API implementation is dependent on upstream [OpenTelemetry Go][6].
-
-The following OpenTelemetry features are implemented in the Datadog library as noted:
-
-| Feature                               | Support notes                       |
-|---------------------------------------|------------------------------------|
-| [OpenTelemetry Context propagation][1]         | [W3C Trace Context and Datadog header formats][9] are enabled by default. |
-| [Span processors][2]                  | Unsupported                                          |
-| [Span Exporters][3]                   | Unsupported                                            |
-| Trace/span [ID generators][4]         | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].   |
-
-
-## Configuring OpenTelemetry to use the Datadog trace provider
+To configure OpenTelemetry to use the Datadog trace provider:
 
 1. Add your desired manual OpenTelemetry instrumentation to your Go code following the [OpenTelemetry Go Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
