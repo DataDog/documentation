@@ -1220,9 +1220,9 @@ pipeline {
 
 ## Propagate Git information
 
-Some features of the Datadog Jenkins plugin need to know Git information associated with the Jenkins builds in order to work correctly.
-The minimum required Git info for a build is repository URL, branch, commit SHA and commit author email.
-These can be determined by the plugin automatically, propagated from SCM, provided manually via environment variables, or obtained by combining these approaches.
+Some features of the Datadog Jenkins plugin need Git information associated with the Jenkins builds to work correctly.
+The minimum required Git info for a build is repository URL, branch, commit SHA, and commit author email.
+This information can be determined by the plugin automatically, propagated from SCM, provided manually with environment variables, or obtained by combining these approaches.
 
 ### Propagate Git information from SCM
 
