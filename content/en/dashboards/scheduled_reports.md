@@ -58,7 +58,7 @@ Click **Edit Template Variables** to modify the filters applied when the report 
 To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
 
 ## Managing reports
-A single dashboard can have multiple scheduled reports with different settings, for example, to support different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, click the **Share** button and select **Configure Reports**.
+A single dashboard can have multiple scheduled reports with different settings, which allows you to inform different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, click the **Share** button and select **Configure Reports**.
 
 From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click **Edit**.
 
