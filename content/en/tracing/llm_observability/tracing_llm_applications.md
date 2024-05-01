@@ -2,11 +2,14 @@
 title: Tracing LLM Applications
 ---
 
+## Overview
+
+### Levels of tracing
+
 To cover:
+- Overview
 - Required environment variables
-- Creating spans
-  - Annotating a span
-  - Manually starting and stopping spans
+- Tracking user sessions
 - Tracing multiple LLM applications
 
 Nested concepts:
