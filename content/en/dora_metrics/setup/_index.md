@@ -15,7 +15,7 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 ## Overview
 
-You can programmatically send deployment and incident events to Datadog.
+The four DORA Metrics are calculated based on two types of events:
 
 [**Deployment events**][8]
 : Indicate that a new deployment has occurred for a service in a specific environment. 
@@ -23,24 +23,24 @@ You can programmatically send deployment and incident events to Datadog.
 [**Incident events**][9]
 : Indicate that a new issue has occurred for a service in a specific environment.
 
-**Notes:**
-
-- Deployment and incident events must be sent as soon as possible. Events for which the `finished_at` timestamp is 1 hour older than the current time are not accepted.
-- Deployments or incidents of the same service cannot occur at the same second.
-
 ## Configure data sources
 
 Each event type supports different data sources.
 
+### Deployments 
 {{< whatsnext desc="Deployment events are used to compute deployment frequency, change lead time, and change failure rate. See the respective documentation to set up a data source for your deployment events:" >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/deployments/" >}}Deployment event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Incident events are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your incident events:">}}
+### Failures
+{{< whatsnext desc="Failure events, currently interpreted via incident events, are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your incident events:">}}
   {{< nextlink href="/dora_metrics/incidents/pagerduty" >}}PagerDuty{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/incidents/" >}}Incident event API{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Limitations
+- Deployments or incidents of the same service cannot occur at the same second.
 
 ## Further Reading
 

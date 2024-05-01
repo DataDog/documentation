@@ -48,7 +48,6 @@ Defining and tracking DORA metrics can help you identify areas of improvement fo
 
 ## Set up DORA Metrics
 
-
 To start configuring data sources to send deployment and incident events to Datadog, see the [Setup documentation][2].
 
 ## Analyze DORA Metrics
