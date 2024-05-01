@@ -67,7 +67,7 @@ From the configuration modal that opens, you can pause an existing report or cre
 ## Permissions
 
 Users need the **Dashboards Report Write** [permission][permissions] to create and edit report schedules.
-This permission can be granted by another user with the **User Access Manage** permission and is available by default to users with the **Datadog Admin** [out-of-the-box role][ootb-role].
+This permission can be granted by another user with the **User Access Manage** permission, and is available by default to users with the **Datadog Admin** [out-of-the-box role][ootb-role].
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:90%;" >}}
 
