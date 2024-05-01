@@ -68,7 +68,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 {{< img src="ci/static-analysis-github-comments.png" alt="Example of a Code Analysis comment on a pull request" style="width:100%;" >}}
 
-1. If you are using [GitHub Actions][6] to run your scans, ensure that you are triggering the action on `push` in order for comments to appear
+1. If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
 
 ## Further Reading
 
