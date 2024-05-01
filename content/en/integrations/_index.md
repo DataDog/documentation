@@ -9,6 +9,7 @@ aliases:
     - /integrations/mainstorconcept_ziris/
     - /integrations/rookout/
     - /integrations/rookout_license/
+    - /integrations/amazon_cloudformation/
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
