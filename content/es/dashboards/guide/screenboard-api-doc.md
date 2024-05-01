@@ -25,7 +25,7 @@ El endpoint `screenboard` permite crear, actualizar, eliminar y consultar screen
 * **`description`** (descripción) [*opcional*, *por defecto*=**Ninguno**]:
     Una descripción del contenido de dashboard.
 * **`widgets`** [*required* (requerido)]:
-    Uns lista de definiciones de widget. Para obtener una definición de widget, utiliza la *pestaña JSON* en la IU de la configuración de widget.
+    Una lista de definiciones de widget. Para obtener una definición de widget, utiliza la *pestaña JSON* en la IU de la configuración de widget.
 * **`template_variables`** [*opcional*, *default*=**None**]:
     Una lista de variables de plantilla para utilizar la plantilla dashboard.
 * **`read_only`** [*opcional*, *default*=**False**]:
@@ -47,7 +47,7 @@ opciones = {
 inicializar(**opciones)
 
 board_title = "Mi screenboard"
-description = "Un screenboard informativo."
+descripción = "Un screenboard informativo."
 ancho = 1024
 widgets = [{
     "tipo": "imagen",
