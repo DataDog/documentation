@@ -4,7 +4,7 @@ kind: documentation
 disable_toc: false
 aliases:
     - /dashboards/reporting/
-    - content/en/dashboards/scheduled_reports.md
+    - content/en/dashboards/scheduled_reports
 further_reading:
   - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
     tag: "Blog"
