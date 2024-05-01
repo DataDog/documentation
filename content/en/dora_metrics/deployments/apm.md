@@ -39,7 +39,7 @@ For service deployments tracked by APM to contribute to DORA Metrics, the follow
 - Your service has [unified service tagging][3] enabled. Deployments are identified via the `version` tag.
 
 ## Change lead time
-For service deployments tracked by APM to contribute to Change Lead Time, the following requirement must be met:
+For service deployments tracked by APM to contribute to change lead time, the following requirement must be met:
 - Your application telemetry is tagged with git information. You can enable this [in APM][4] or see [documentation][5].
 - Your repository metadata is synchronized to Datadog via the GitHub integration.
 

@@ -31,8 +31,8 @@ further_reading:
 The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
-## Configuring incident data sources 
-Incident events are used to compute change failure rate and mean time to restore (MTTR). DORA Metrics supports the data sources below for deployment events. Select an option below to set up the data source for your deployment events:
+## Configuring failure data sources 
+Failure events, currently interpreted via incident events, are used to compute change failure rate and mean time to restore (MTTR). DORA Metrics supports the data sources below for deployment events. Select an option below to set up the data source for your deployment events:
 
 {{< whatsnext >}}
   {{< nextlink href="/dora_metrics/incidents/pagerduty" >}}PagerDuty{{< /nextlink >}}
@@ -41,7 +41,7 @@ Incident events are used to compute change failure rate and mean time to restore
 
 ## Calculating change failure rate 
 
-Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an incident and a deployment event. 
+Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an failure and a deployment event. 
 
 ## Calculating mean time to restore 
 
