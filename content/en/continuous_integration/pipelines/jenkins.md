@@ -12,7 +12,7 @@ further_reading:
       text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -651,7 +651,7 @@ TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 
 ## Install the Datadog Agent
 
-The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions][14]. Whether you choose to use Agentless mode or the Agent-based mode, you are **required** to use the plugin. 
+The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions][14]. Whether you choose to use Agentless mode or the Agent-based mode, you are **required** to use the plugin.
 
 If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
 
@@ -1039,7 +1039,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% tab "Agentless (using an API key)" %}}
 
 1. Add the following environment variables on your Jenkins instance machine:
-  
+
    {{% site-region region="us" %}}
    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
    # Endpoint URLs correspond to your Datadog site
@@ -1218,7 +1218,13 @@ pipeline {
 }
 {{< /code-block >}}
 
-## Propagate Git information from SCM
+## Propagate Git information
+
+Some features of the Datadog Jenkins plugin need Git information associated with the Jenkins builds to work correctly.
+The minimum required Git info for a build is repository URL, branch, commit SHA, and commit author email.
+This information can be determined by the plugin automatically, propagated from SCM, provided manually with environment variables, or obtained by combining these approaches.
+
+### Propagate Git information from SCM
 
 The Jenkins plugin is capable of automatically detecting Git information associated with a build or a pipeline.
 However, depending on the Jenkins version and the pipeline details, there may be cases when automatic Git data detection is not possible.
@@ -1285,7 +1291,7 @@ node {
 {{< /tabs >}}
 
 
-## Set Git information manually
+### Set Git information manually
 
 In case the plugin cannot detect Git information automatically and propagating Git data via SCM is not an option,
 the necessary Git information can be set manually.
@@ -1453,9 +1459,9 @@ Lists of included and excluded jobs can contain regular expressions, but not glo
 
 ## Visualize pipeline data in Datadog
 
-Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.
+Once the integration is successfully configured, both the [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Troubleshooting
 
