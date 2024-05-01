@@ -34,7 +34,7 @@ Each event type supports different data sources.
 {{< /whatsnext >}}
 
 ### Failures
-{{< whatsnext desc="Failure events, currently interpreted via incident events, are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your incident events:">}}
+{{< whatsnext desc="Failure events, currently interpreted via incident events, are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your failure events:">}}
   {{< nextlink href="/dora_metrics/incidents/pagerduty" >}}PagerDuty{{< /nextlink >}}
   {{< nextlink href="/dora_metrics/incidents/" >}}Incident event API{{< /nextlink >}}
 {{< /whatsnext >}}

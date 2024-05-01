@@ -1,5 +1,5 @@
 ---
-title: Sending Incident Events for DORA Metrics
+title: Sending Failure Events for DORA Metrics
 kind: documentation
 description: Learn how to send incident events for DORA Metrics.
 aliases:
@@ -9,9 +9,9 @@ further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
   text: "Check out the latest Software Delivery releases! (App login required)"
-- link: "/continuous_integration/dora_metrics/setup/incidents"
+- link: "/continuous_integration/dora_metrics/setup/failures"
   tag: "Documentation"
-  text: "Learn about sending incident events"
+  text: "Learn about sending failure events"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
