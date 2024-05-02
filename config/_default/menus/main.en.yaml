@@ -1169,9 +1169,9 @@ menu:
       weight: 3
     - name: Querying
       identifier: dashboards_querying
-      url: dashboards/querying/
-      parent: dashboards
-      weight: 4
+      url: dashboards/widgets/querying
+      parent: dashboards_widgets
+      weight: 301
     - name: Functions
       url: dashboards/functions/
       parent: dashboards
@@ -1259,7 +1259,7 @@ menu:
       weight: 10
     - name: Public Dashboards
       identifier: dashboards_sharing_public_dashboards
-      url: dashboards/sharing/dashboards
+      url: dashboards/sharing/public_dashboards
       parent: dashboards_sharing
       weight: 1001
     - name: Share Graphs

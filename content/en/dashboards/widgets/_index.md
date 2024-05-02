@@ -14,9 +14,26 @@ further_reading:
 
 ## Overview
 
-Widgets are building blocks for your dashboards. They allow you to visualize and correlate your data across your infrastructure.
+Widgets are building blocks for your dashboards. They are customizable graphical elements that allow you to visualize and interpret data from Datadog monitoring and analytics tools. They can display metrics, logs, events, and other important data in various formats such as graphs, tables, and heatmaps. Use widgets for:
+- Data Visualization: make it easy to visualize complex data sets and trends, helping users quickly identify and understand key insights.
+- Real-time Monitoring: display real-time data, allowing users to stay informed about the performance and health of their systems and applications.
+- Customization: display specific metrics and data points that are most relevant to your monitoring needs.
+- Collaboration: share with team members, enabling collaboration and aligning teams around common performance metrics and goals.
+
+## Graphing components
+
+Learn more about widget components from the following documentation pages. Find specific configuration in the individual widget types below.
+
+{{< whatsnext desc="Widget and graphing components:">}}
+    {{< nextlink href="/dashboards/widgets/querying">}}Querying{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/functions">}}Functions{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/split_graph">}}Correlations{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/overlays">}}Overlays{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### Graphs
+{{< collapse-content title="Widget Types" level="h4" >}}
+
 {{< whatsnext desc="Generic widgets to graph data from Datadog products: ">}}
     {{< nextlink href="/dashboards/widgets/change" 
         img="dashboards/widgets/icons/change_light_large.png">}} Change {{< /nextlink >}}
@@ -44,7 +61,11 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/top-list_light_large.png">}} Top List{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< /collapse-content >}} 
+
 ### Groups
+{{< collapse-content title="Widget Types" level="h4" >}}
+
 {{< whatsnext desc="Display your widgets under groups: ">}}
     {{< nextlink href="/dashboards/widgets/group"
         img="dashboards/widgets/icons/group_default_light_large.svg">}} Group{{< /nextlink >}}
@@ -54,7 +75,13 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/group-split_light_small.svg">}} Split Graph{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< /collapse-content >}} 
+
+
 ### Annotations and embeds
+
+{{< collapse-content title="Widget Types" level="h4" >}}
+
 {{< whatsnext desc="Decoration widgets to visually structure and annotate dashboards: ">}}
     {{< nextlink href="/dashboards/widgets/free_text" 
         img="dashboards/widgets/icons/free-text_light_large.png">}} Free Text{{< /nextlink >}}
@@ -66,13 +93,21 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/notes_light_large.png">}} Notes and Links{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< /collapse-content >}} 
+
 ### Lists and streams
+{{< collapse-content title="Widget Types" level="h4" >}}
+
 {{< whatsnext desc="Display a list of events and issues coming from different sources: ">}}
     {{< nextlink href="/dashboards/widgets/list"
         img="dashboards/widgets/icons/change_light_large.png">}} List{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< /collapse-content >}} 
+
 ### Alerting and response
+{{< collapse-content title="Widget Types" level="h4" >}}
+
 {{< whatsnext desc="Summary widgets to display Monitoring information: ">}}
     {{< nextlink href="/dashboards/widgets/alert_graph" 
         img="dashboards/widgets/icons/alert-graph_light_large.png">}} Alert Graph{{< /nextlink >}}
@@ -86,7 +121,12 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< /collapse-content >}} 
+
+
 ### Architecture
+{{< collapse-content title="Widget Types" level="h4" >}}
+
 {{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
     {{< nextlink href="/dashboards/widgets/hostmap" 
         img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
@@ -96,7 +136,12 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/service-summary_light_large.png">}} Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< /collapse-content >}} 
+
+
 ### Performance and reliability
+{{< collapse-content title="Widget Types" level="h4" >}}
+
 {{< whatsnext desc="Site reliability visualizations: ">}}
     {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
         img="dashboards/widgets/icons/profiling_flame_graph.svg">}} Profiling Flame Graph{{< /nextlink >}}
@@ -105,6 +150,9 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
     {{< nextlink href="/dashboards/widgets/slo_list" 
         img="dashboards/widgets/icons/slo-list_light_large.png">}} Service Level Objective (SLO) List{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< /collapse-content >}} 
+
 
 ## Full screen
 
