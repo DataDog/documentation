@@ -283,10 +283,6 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 {{% ci-git-metadata %}}
 
-## Uploading Git metadata
-
-From `datadog-ci` version [2.34.0][9] or later, CI Visibility automatically uploads Git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, pass the flag `--skip-git-metadata-upload`.
-
 ## Collecting environment configuration metadata
 
 Datadog uses special dedicated tags to identify the configuration of the environment in which tests run, including the operating system, runtime, and device information, if applicable. When the same test for the same commit runs in more than one configuration (for example, on Windows and on Linux), the tags are used to differentiate the test in failure and flakiness detection.
@@ -338,14 +334,14 @@ For mobile apps (Swift, Android):
 **Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
 ## Adding code owners
-To add [codeowners][10] information to your JUnit XML tests, you can use the [GitHub integration][11] to read the `CODEOWNERS` file in your repository or provide some additional information manually.
+To add [codeowners][9] information to your JUnit XML tests, you can use the [GitHub integration][10] to read the `CODEOWNERS` file in your repository or provide some additional information manually.
 
 As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of those tests.
 
 ### Using the GitHub integration (recommended)
 
 To automatically add the `test.codeowners` tag to your tests, you need to:
-1. Have a `CODEOWNERS` file [in one of the allowed locations][12] in your repository.
+1. Have a `CODEOWNERS` file [in one of the allowed locations][11] in your repository.
 2. Provide the tests source file in your JUnit XML report. The following plugins do this automatically and add the `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report:
 
     * phpunit
@@ -362,16 +358,16 @@ To automatically add the `test.codeowners` tag to your tests, you need to:
   </testsuite>
   {{< /code-block >}}
 
-3. Enable the [GitHub app][13]. If you do not have a GitHub app, follow the steps in the next section. If you already have
+3. Enable the [GitHub app][12]. If you do not have a GitHub app, follow the steps in the next section. If you already have
    a GitHub app, enable the `Contents: Read` permission so Datadog can read the `CODEOWNERS` file. Once enabled, wait a few minutes for the changes to take effect.
 
 **Note:** Github is the only supported Git provider.
 
 #### Configure a GitHub App
 
-The JUnit XML uses a private [GitHub App][13] to read the `CODEOWNERS` file.
+The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 
-1. Go to the [GitHub integration tile][14].
+1. Go to the [GitHub integration tile][13].
 2. Click **Link GitHub Account**.
 3. Follow the instructions to configure the integration for a personal or organization account.
 4. In **Edit Permissions**, grant `Contents: Read` access.
@@ -383,7 +379,7 @@ The JUnit XML uses a private [GitHub App][13] to read the `CODEOWNERS` file.
 This is an alternative to using the GitHub integration.
 
 For those plugins that do not provide the `file` attribute in the XML report, you can provide the `test.source.file` tag.
-There is no need to provide the exact path to a specific file, [you can use any syntax you would use in the CODEOWNERS file][15]
+There is no need to provide the exact path to a specific file, [you can use any syntax you would use in the CODEOWNERS file][14]
 such as `src/myTeamFolder` or `*.md`.
 
 There are multiple ways to provide the `test.source.file` tag:
@@ -400,7 +396,7 @@ There are multiple ways to provide the `test.source.file` tag:
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, the `--xpath-tag` parameter provides custom rules to add tags from different attributes within the XML to each test.
 
-The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][16] expression within the ones supported.
+The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][15] expression within the ones supported.
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
 
@@ -548,7 +544,7 @@ It is possible to report code coverage for a given JUnit report via the `--repor
 datadog-ci junit upload --service my-api-service --report-measures test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
 ```
 
-For more information, see [Code Coverage][17].
+For more information, see [Code Coverage][16].
 
 ## Further reading
 
@@ -562,12 +558,11 @@ For more information, see [Code Coverage][17].
 [6]: /logs/
 [7]: /getting_started/tagging/unified_service_tagging
 [8]: /getting_started/site/
-[9]: https://github.com/DataDog/datadog-ci/releases/tag/v2.34.0
-[10]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
-[11]: https://docs.datadoghq.com/integrations/github/
-[12]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
-[13]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
-[14]: https://app.datadoghq.com/integrations/github/
-[15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
-[16]: https://www.w3schools.com/xml/xpath_syntax.asp
-[17]: /continuous_integration/tests/code_coverage/?tab=junitreportuploads
+[9]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[10]: https://docs.datadoghq.com/integrations/github/
+[11]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
+[12]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
+[13]: https://app.datadoghq.com/integrations/github/
+[14]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
+[15]: https://www.w3schools.com/xml/xpath_syntax.asp
+[16]: /continuous_integration/tests/code_coverage/?tab=junitreportuploads

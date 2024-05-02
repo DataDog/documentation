@@ -1,5 +1,5 @@
 ---
-title: Using Integrations with Service Catalog
+title: Use Integrations with Service Catalog
 kind: documentation
 aliases:
   - /tracing/service_catalog/integrations

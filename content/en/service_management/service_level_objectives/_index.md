@@ -229,16 +229,16 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 ## SLO widgets
 
-{{< learning-center-callout header="Try Create Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
+{{< learning-center-callout header="Try Creating Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
   Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
 {{< /learning-center-callout >}}
 
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
-  - Use the SLO Summary widget to visualize the status of a single SLO
+  - Use the SLO widget to visualize the status of a single SLO
   - Use the SLO List widget to visualize a set of SLOs
   - Graph 15 months' worth of metric-based SLO data with the [SLO data source][20] in both timeseries and scalar (query value, top list, table, change) widgets. 
   
-For more information about SLO Widgets, see the [SLO Summary][21] and [SLO List][22] widget pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
+For more information about SLO Widgets, see the [SLO widget][21] and [SLO List widget][22] pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
 
 To proactively manage the configurations of your SLOs, set an [Event Monitor][23] to notify you when events corresponding to certain tags occur.
 

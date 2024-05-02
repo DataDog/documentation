@@ -1,15 +1,18 @@
 ---
-title: Enregistrer des étapes avec un user-agent personnalisé
-kind: documentation
 description: Enregistrer des étapes de test Browser avec une chaîne user-agent personnalisée
 further_reading:
-  - link: /synthetics/browser_tests/actions
-    tag: Documentation
-    text: En savoir plus sur les étapes des tests Browser
-  - link: /synthetics/browser_tests/advanced_options/
-    tag: Documentation
-    text: Configurer des options avancées pour les étapes
+- link: /synthetics/browser_tests/actions
+  tag: Documentation
+  text: En savoir plus sur les étapes des tests Browser
+- link: /synthetics/browser_tests/advanced_options/
+  tag: Documentation
+  text: Configurer des options avancées pour les étapes
+kind: documentation
+title: Enregistrer des étapes avec un user-agent personnalisé
 ---
+
+## Présentation
+
 Certaines pages sont configurées pour s'afficher d'une certaine façon lorsqu'une chaîne `User-Agent` spécifique est utilisée (par exemple, lors de l'utilisation d'un `User-Agent` mobile). Lorsque c'est le cas, vous devez définir l'en-tête `User-Agent` sur une chaîne personnalisée pour pouvoir enregistrer les étapes de vos tests Browser dans votre application. Pour ce faire, procédez comme suit :
 
 1. Ouvrez votre application dans une fenêtre contextuelle en cliquant sur **Open in Popup** dans l'enregistreur de test Browser.
