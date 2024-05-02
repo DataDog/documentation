@@ -201,7 +201,7 @@ The new Oracle check can be activated as of the Agent release `7.50.1`.
 
 The configuration subdirectory for the Agent releases between `7.50.1` and `7.52.1` is `oracle-dbm.d`.
 
-**Note**: The Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
+**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
 
 1. Copy the configuration file from the subdirectory `oracle.d` to `oracle-dbm.d`, for example:
 
