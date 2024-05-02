@@ -104,7 +104,7 @@ Select a visualization type to visualize the outcomes of filters and aggregation
 
 ## Export
 
-Export your view in the [Quality Gates Explorer][4] to reuse it later or in different contexts.
+Export your view in the [Quality Gates Explorer][5] to reuse it later or in different contexts. For more information, see [Saved Views][4].
 
 ## Further reading
 
@@ -114,3 +114,4 @@ Export your view in the [Quality Gates Explorer][4] to reuse it later or in diff
 [2]: /quality_gates/explorer/search_syntax
 [3]: /quality_gates/explorer/facets
 [4]: /quality_gates/explorer/saved_views
+[5]: /quality_gates/explorer
