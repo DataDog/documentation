@@ -310,14 +310,14 @@ DevCycle does not support this integration. Create a ticket with DevCycle to req
 {{% /tab %}}
 {{< /tabs >}}
 
-### Eppo Integration
+### Eppo integration
 
 {{< tabs >}}
 {{% tab "Browser" %}}
 
 Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
 
-For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK documentation][1]
+For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK documentation][1].
 
 ```typescript
 const assignmentLogger: IAssignmentLogger = {
@@ -338,7 +338,7 @@ await eppoInit({
 
 Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
 
-For more information about initializing Eppo's SDK, see [Eppo's iOS SDK documentation][1]
+For more information about initializing Eppo's SDK, see [Eppo's iOS SDK documentation][1].
 
 ```swift
 func IAssignmentLogger(assignment: Assignment) {
@@ -355,7 +355,7 @@ let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmen
 
 Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
 
-For more information about initializing Eppo's SDK, see [Eppo's Android SDK documentation][1]
+For more information about initializing Eppo's SDK, see [Eppo's Android SDK documentation][1].
 
 ```java
 AssignmentLogger logger = new AssignmentLogger() {
@@ -387,7 +387,7 @@ Eppo does not support this integration. [Contact Eppo][1] to request this featur
 
 Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
 
-For more information about initializing Eppo's SDK, see [Eppo's React native SDK documentation][1]
+For more information about initializing Eppo's SDK, see [Eppo's React native SDK documentation][1].
 
 ```typescript
 const assignmentLogger: IAssignmentLogger = {
