@@ -194,11 +194,11 @@ Variables are enclosed in braces and are preceded by a dollar sign (`${}`). To u
 
 ### Interact with an app in JSON
 
-#### Edit an app with JSON
+#### Edit an app
 
 To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
-#### Copy or back up an app in JSON
+#### Copy or back up an app
 
 To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
