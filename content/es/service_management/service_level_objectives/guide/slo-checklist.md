@@ -84,7 +84,7 @@ _Ejemplo: el 99% de las solicitudes deben completarse en menos de 250 ms en un 
 ## Establece tu objetivo y la ventana de tiempo
 
 1. Seleccione su objetivo: `99%`, `99.5%`, `99.9%`, `99.95%`, o el que mejor se adapte a sus necesidades.
-2. Seleccione la ventana temporal: durante los últimos `7`, `30`, o `90 days`
+2. Seleccione la ventana temporal: durante los últimos `7`, `30`, o `90 días`
 
 ## Nombra, describe y etiquetar tus SLOs
 
