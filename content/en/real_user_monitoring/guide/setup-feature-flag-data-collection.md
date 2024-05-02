@@ -380,7 +380,7 @@ EppoClient eppoClient = new EppoClient.Builder()
 
 Eppo does not support this integration. [Contact Eppo][1] to request this feature.
 
-[1]: support@geteppo.com
+[1]: mailto:support@geteppo.com
 
 {{% /tab %}}
 {{% tab "React Native" %}}
