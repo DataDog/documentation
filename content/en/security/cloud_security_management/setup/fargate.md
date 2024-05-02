@@ -154,6 +154,18 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     - `YOUR_APP_IMAGE`
     - `ENTRYPOINT`
 
+    You can use the following command to find the entry point of your workload:
+
+    ```shell
+    docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Entrypoint}}'
+    ```
+
+    or
+
+    ```shell
+    docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Cmd}}'
+    ```
+
     **Note**: The environment variable `ECS_FARGATE` is already set to "true".
 
 3. Add your other application containers to the task definition. For details on collecting integration metrics, see [Integration Setup for ECS Fargate][8].
