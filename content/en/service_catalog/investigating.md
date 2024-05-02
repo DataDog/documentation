@@ -1,5 +1,5 @@
 ---
-title: Investigating a Service
+title: Investigate a Service
 kind: documentation
 aliases:
   - /tracing/service_catalog/investigating
@@ -50,8 +50,7 @@ The Service Context Map provides an overview of the relationships and dependenci
 
 ## Configuration details 
 - **Setup completeness status** for Datadog products that can collect data for the service.
-- **External libraries used** which includes the ability to download the Software Bill of Materials (SBOM).
-  {{< img src="tracing/service_catalog/libraries_sbom.png" alt="Showing an individual service from Service Catalog, highlighting the libraries tab and ability to download the SBOM" style="width:100%;" >}}
+- **External libraries used** which includes the ability to download the Inventory of Libraries.
 - **Service definition** in YAML with a link to the service's source code.
 - An interactive service map displaying services upstream and downstream from this service.
 - **Defined and Related Dashboards** showing a list of pre-defined and Watchdog recommended dashboards when available. 

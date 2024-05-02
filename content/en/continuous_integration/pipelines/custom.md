@@ -12,7 +12,7 @@ further_reading:
       text: "Learn about the Pipeline Data Model and Execution Types"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 
 ---
 
@@ -37,9 +37,9 @@ You can send custom pipelines through HTTP using the [public API endpoint][1]. F
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after the pipelines are accepted for processing.
+The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines are accepted for processing.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Further reading
 

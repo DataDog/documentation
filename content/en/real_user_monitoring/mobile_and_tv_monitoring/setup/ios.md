@@ -364,6 +364,30 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+## Sample RUM sessions
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][1] as a percentage between 0 and 100.
+
+For example, to only keep 50% of sessions use:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+let configuration = RUM.Configuration(
+    applicationID: "<rum application id>",
+    sessionSampleRate: 50
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
+configuration.sessionSampleRate = 50;
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Track background events
 
 <div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>

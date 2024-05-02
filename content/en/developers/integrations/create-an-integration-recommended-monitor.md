@@ -18,7 +18,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 ## Steps to create a recommended monitor
 ### Build a monitor JSON Schema
 
-1. Navigate to **[Monitors > New Monitor][4]** and create a new monitor.
+1. [Create a monitor][4].
 
 2. Follow the [best practices](#configuration-best-practices) listed in this guide to configure your monitor.
  

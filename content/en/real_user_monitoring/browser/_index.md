@@ -1968,7 +1968,7 @@ Compress requests sent to the Datadog intake to reduce bandwidth usage when send
 
 `storeContextsAcrossPages`
 : Optional<br/>
-**Type**: String<br/>
+**Type**: Boolean<br/>
 **Default**: `false`<br/>
 Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][25] for more details and specific limitations.
 
