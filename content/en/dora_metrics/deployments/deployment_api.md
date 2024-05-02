@@ -1,7 +1,7 @@
 ---
-title: Configuring custom event submission for DORA Metrics.
+title: Configuring Custom Event Submission for DORA Metrics
 kind: documentation
-description: Learn how to send deployment events for DORA Metrics via API or CLI.
+description: Learn how to send deployment events for DORA Metrics by using the API or CLI.
 aliases:
 - /continuous_integration/dora_metrics/setup/deployments
 is_beta: true
@@ -33,21 +33,20 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 ## Overview
 
-To send your own deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. The following attributes are required:
+To send your own deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. 
+
+The following attributes are required:
 - `started_at`: The time the deployment started.
 - `finished_at`: The time the deployment finished.
-- `service`: The service that was deployed. The provided service must be registered in the [Service Catalog][3] (see [Adding Entries to Service Catalog][4]) with metadata set up (see [Adding Metadata][5]).
-The `team` ownership of the service is automatically inferred from the Service Catalog and associated with all metrics.
+- `service`: The service that was deployed. The provided service must be registered in the [Service Catalog][3] (see [Adding Entries to Service Catalog][4]) with metadata set up (see [Adding Metadata][5]). The `team` ownership of the service is automatically inferred from the Service Catalog and associated with all metrics.
 
-The `repository_url` and `commit_sha` attributes are required for calculating the Change Lead Time metric. For more information, see [Calculating Change Lead Time](#calculating-change-lead-time).
-
-You can optionally specify the `env` attribute to accurately filter your DORA metrics by environment.
+The `repository_url` and `commit_sha` attributes are also required for calculating the Change Lead Time metric. You can optionally specify the `env` attribute to filter your DORA metrics by environment on the [**DORA Metrics** page][7].
 
 ### Example
 {{< tabs >}}
 {{% tab "API - cURL" %}}
 
-See the [DORA Metrics API reference documentation][1] for the full spec and more examples with the API SDKs.
+See the [DORA Metrics API reference documentation][1] for the full spec and additional code samples.
 
 For the following example, replace `<DD_SITE>` in the URL with {{< region-param key="dd_site" code="true" >}} and `${DD_API_KEY}` with your [Datadog API Key][2]:
 ```shell
@@ -97,8 +96,9 @@ datadog-ci dora deployment --service shopist --env prod \
 
 The deployment finish time is automatically set to now if `--finished-at` is not provided.
 
-If the deployment CI job is running on the exact same Git revision that is being deployed, `git-repository-url` and `git-commit-sha` can be omitted and will be automatically inferred from the CI context.
-The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric will not be available.
+If the deployment CI job is running on the exact same Git revision that is being deployed, `git-repository-url` and `git-commit-sha` can be omitted and is automatically inferred from the CI context.
+
+The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric becomes unavailable.
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -116,3 +116,4 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 [4]: /tracing/service_catalog/setup
 [5]: /tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
+[7]: https://app.datadoghq.com/ci/dora

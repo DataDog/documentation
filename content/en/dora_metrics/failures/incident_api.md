@@ -27,22 +27,24 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 ## Overview
 
-Incident events are used in order to compute change failure rate and mean time to restore.
-To send your own incident events, use the [DORA Metrics API][1]. The following attributes are required:
+To send your own incident events, use the [DORA Metrics API][1]. Incident events are used in order to compute change failure rate and mean time to restore.
+
+The following attributes are required:
 
 - `services` or `team` (at least one must be present)
 - `started_at`
 
 You can optionally add the following attributes to the incident events:
-- `finished_at` for *resolved incidents*. This attribute is required for [time to restore service](#time-to-restore-service).
+
+- `finished_at` for *resolved incidents*. This attribute is required for calculating the time to restore service.
 - `id` for identifying incidents when they are created and resolved. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
 - `name` to describe the incident.
 - `severity`
-- `env` to accurately filter your DORA metrics by environment.
+- `env` to filter your DORA metrics by environment on the [**DORA Metrics** page][3].
 - `repository_url`
 - `commit_sha`
 
-See the [DORA Metrics API reference documentation][1] for the full spec and more examples with the API SDKs.
+See the [DORA Metrics API reference documentation][1] for the full spec and additional code samples.
 
 ### Example
 
@@ -75,19 +77,19 @@ EOF
 ## Calculating change failure rate
 
 The change failure rate metric is calculated as the percentage of incident events out of the total number of deployments.
-Send both [deployment events][2] and [incident events](#overview) to correctly populate this metric.
+
+To populate this metric, send your [deployment events][2] and [incident events](#overview) to Datadog.
 
 ## Calculating mean time to restore
 
 The mean time to restore (MTTR) metric is calculated as the duration distribution for *resolved incident* events.
-Include the `finished_at` attribute in an incident event to mark that the incident is resolved.
 
-Events can be sent both at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
+Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
-[2]: /continuous_integration/dora_metrics/setup/deployments
+[2]: /dora_metrics/setup/deployments
+[3]: https://app.datadoghq.com/ci/dora

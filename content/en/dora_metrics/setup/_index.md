@@ -17,30 +17,28 @@ The DORA Metrics private beta is closed. Fill out the form below to be added to 
 
 The four DORA Metrics are calculated based on two types of events:
 
-[**Deployment events**][8]
-: Indicate that a new deployment has occurred for a service in a specific environment. 
-
-[**Incident events**][9]
-: Indicate that a new issue has occurred for a service in a specific environment.
-
-## Configure data sources
+- [**Deployment events**][8]: Indicate that a new deployment has occurred for a service in a specific environment. 
+- [**Incident events**][9]: Indicate that a new failure has occurred for a service in a specific environment.
 
 Each event type supports different data sources.
+
+## Configure data sources
 
 ### Deployments 
 {{< whatsnext desc="Deployment events are used to compute deployment frequency, change lead time, and change failure rate. See the respective documentation to set up a data source for your deployment events:" >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/deployments/" >}}Deployment event API or datadog-ci CLI{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/deployments/deployment_api" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Failures
-{{< whatsnext desc="Failure events, currently interpreted via incident events, are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your failure events:">}}
-  {{< nextlink href="/dora_metrics/incidents/pagerduty" >}}PagerDuty{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/incidents/" >}}Incident event API{{< /nextlink >}}
+{{< whatsnext desc="Failure events, interpreted through incident events, are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your failure events:">}}
+  {{< nextlink href="/dora_metrics/failures/pagerduty" >}}PagerDuty{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/failures/incident_api" >}}Incident Event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Limitations
-- Deployments or incidents of the same service cannot occur at the same second.
+
+Deployments or incidents of the same service cannot occur at the same second.
 
 ## Further Reading
 
@@ -51,5 +49,5 @@ Each event type supports different data sources.
 [5]: /api/latest/metrics/#query-timeseries-points
 [6]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [7]: /dora_metrics/data_collected/
-[8]: /dora_metrics/deployments/_index.md
-[9]: /dora_metrics/incidents/_index.md
+[8]: /dora_metrics/deployments/
+[9]: /dora_metrics/failures/
