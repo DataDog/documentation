@@ -1826,6 +1826,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_rum
       weight: 6
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: error_tracking
+      identifier: error_tracking_troubleshooting
+      weight: 7
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
