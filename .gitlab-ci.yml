@@ -563,6 +563,7 @@ set_redirect_metadata_live:
   interruptible: true
 
 run_notranslate_tag:schedule:
+  <<: *base_template
   script:
     - chmod +x ./local/bin/py/add_notranslate_tag.py
     - export transifex_api_key="$(get_secret 'transifex_api_key')"
@@ -575,6 +576,20 @@ run_notranslate_tag:schedule:
     - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
       when: never
   timeout: 2h
+
+run_notranslate_tag:manual:
+  <<: *base_template
+  dependencies:
+    - build_preview
+  script:
+    - chmod +x ./local/bin/py/add_notranslate_tag.py
+    - export transifex_api_key="$(get_secret 'transifex_api_key')"
+    - ./local/bin/py/add_notranslate_tag.py
+  rules:
+    - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+      when: never
+    - if: $CI_COMMIT_TAG == null
+      when: manual
 
 
 ####################################
