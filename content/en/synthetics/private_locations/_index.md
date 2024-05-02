@@ -57,7 +57,7 @@ Private locations are Docker containers that you can install anywhere inside you
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Private locations are Kubernetes deployments that you can install on your Kubernetes cluster with Helm. You can access the [helm chart][101] on Github. It can run on Linux-based Kubernetes.**\***
+Private locations are Kubernetes deployments that you can install on your Kubernetes cluster with Helm. The [helm chart][101] can run on Linux-based Kubernetes.
 
 **\*** **Use and operation of this software is governed by the End User License Agreement available [here][102].**
 
