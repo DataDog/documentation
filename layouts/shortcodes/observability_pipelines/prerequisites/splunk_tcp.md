@@ -1,5 +1,5 @@
 To use Observability Pipelines's Splunk TCP source, you have a Splunk Enterprise or Cloud Instance alongside either a Splunk Universal Forwarder or a Splunk Heavy Forwarder routing data to your Splunk instance. You also have the following information available:
-- The bind address that your Observability Pipelines Worker will listen on to receive logs. For example, `0.0.0.0:8088`.
+- The bind address that your Observability Pipelines Worker will listen on to receive logs from your applications. For example, `0.0.0.0:8088`. Later on, you [configure your applications](#connect-splunk-forwarder-to-the-observability-pipelines-worker) to send logs to this address.
 - The appropriate [TLS certificates][101] and the password you used to create your private key if your forwarders are globally configured to enable SSL.
 
 See [Deploy a Universal Forwarder][102] or [Deploy a Heavy Forwarder][103] for more information on Splunk forwarders.

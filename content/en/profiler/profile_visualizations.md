@@ -19,7 +19,7 @@ further_reading:
 
 ## Search profiles
 
-{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles3.mp4" alt="Search profiles by tags" video=true >}}
 
 Go to **APM -> Profiles** and select a service to view its profiles. Select a profile type to view different resources (for example, CPU, Memory, Exception, and I/O).
 
@@ -67,7 +67,7 @@ By default, profiles are uploaded once a minute. Depending on the language, thes
 
 To view a specific profile, set the **Visualize as** option to **Profile List** and click an item in the list:
 
-{{< img src="profiler/profiling_single-profile.mp4" alt="Select a single profile" video=true >}}
+{{< img src="profiler/profiling_single-profile.png" alt="Select a single profile" >}}
 
 The header contains information associated with your profile, like the service that generated it, or the environment and code version associated to it.
 
@@ -92,7 +92,7 @@ Four tabs are below the profile header:
 
 The timeline view is the equivalent of the flame graph, with a distribution over time.
 
-{{< img src="profiler/profiling_viz-timeline.png" alt="A timeline" >}}
+{{< img src="profiler/profiling_viz-timeline2.png" alt="A timeline" >}}
 
 It shows time-based patterns and work distribution over:
 - [The period of a single profile](#single-profile)

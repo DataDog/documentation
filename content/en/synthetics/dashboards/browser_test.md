@@ -5,7 +5,7 @@ description: Learn about the out-of-the-box Synthetic browser test performance d
 further_reading:
 - link: '/continuous_testing/explorer/'
   tag: 'Documentation'
-  text: 'Learn about the Synthetic Monitoring & Continuous Testing Explorer'
+  text: 'Learn about the Synthetic Monitoring & Testing Results Explorer'
 ---
 
 ## Overview

@@ -23,14 +23,14 @@ This document walks you through the following steps to set up dual shipping:
 ### Splunk HEC
 {{% observability_pipelines/prerequisites/splunk_hec %}}
 
-### Datadog Agent
+### Datadog Log Management
 
-{{% observability_pipelines/prerequisites/datadog_agent %}}
+{{% observability_pipelines/prerequisites/datadog_agent_destination_only %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][2].
-1. Select the **Dual Ship Logs** use case to create a new pipeline.
+1. Select the **Dual Ship Logs** template to create a new pipeline.
 1. Select **Splunk HEC** as the source.
 
 ### Set up the source

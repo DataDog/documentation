@@ -27,7 +27,7 @@ Watchdog RCA considers the following sources of data in its analysis:
 
 ## Components of a Watchdog Root Cause Analysis
 
-{{< img src="watchdog/rca/root_cause.png" alt="Watchdog Root Cause Analysis showing Root Cause, Critical Failure, and Impact">}}
+{{< img src="watchdog/rca/root_cause_cropped.png" alt="Watchdog Root Cause Analysis showing Root Cause, Critical Failure, and Impact">}}
 
 A Watchdog Root Cause Analysis includes three components: root cause, critical failure, and impact.
 
