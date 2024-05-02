@@ -64,7 +64,7 @@ You can also export your DORA Metrics data to dashboards or notebooks and create
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
+[1]: https://www.datadoghq.com/knowledge-center/dora-metrics/
 [2]: /dora_metrics/setup/
 [3]: /dora_metrics/data_collected/
 [4]: https://app.datadoghq.com/ci/dora
