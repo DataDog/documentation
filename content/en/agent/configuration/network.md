@@ -243,7 +243,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 See [default NTP targets][2].
 
 8443/tcp
-: Port for [Custom Agent Autoscaling][5]
+: Port for [Custom Agent Autoscaling][5].
 
 10516/tcp
 : Port for log collection over TCP.<br>
@@ -259,7 +259,7 @@ See [logs endpoints][3] for other connection types.
 [2]: /integrations/ntp/#overview
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
-[5]: /containers/guide/cluster_agent_autoscaling_metrics.md
+[5]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
