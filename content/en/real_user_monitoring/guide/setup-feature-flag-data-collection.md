@@ -200,6 +200,105 @@ Amplitude does not support this integration. Create a ticket with Amplitude to r
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### ConfigCat integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize ConfigCat's SDK and subscribe to the `flagEvaluated` event reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing ConfigCat's SDK, see ConfigCat's [JavaScript SDK documentation][1].
+
+```javascript
+  const configCatClient = configcat.getClient(
+  '#YOUR-SDK-KEY#',
+  configcat.PollingMode.ManualPoll,
+  {
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', () => {
+        // TODO
+        //datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
+      })
+  }
+);
+```
+
+
+[1]: https://configcat.com/docs/sdk-reference/js
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Initialize ConfigCat's SDK and subscribe to the `flagEvaluated` event reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing ConfigCat's SDK, see ConfigCat's [Swift (iOS) SDK documentation][1].
+
+```swift
+  // TODO
+```
+
+[1]: https://configcat.com/docs/sdk-reference/ios/
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Initialize ConfigCat's SDK and subscribe to the `flagEvaluated` event reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing ConfigCat's SDK, see ConfigCat's [Android SDK documentation][1].
+
+```java
+  // TODO
+```
+
+[1]: https://configcat.com/docs/sdk-reference/android/
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Initialize ConfigCat's SDK and subscribe to the `flagEvaluated` event reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing ConfigCat's SDK, see ConfigCat's [Dart (Flutter) SDK documentation][1].
+
+```dart
+  // TODO
+```
+
+[1]: https://configcat.com/docs/sdk-reference/dart/
+
+{{% /tab %}}
+
+
+{{% tab "React" %}}
+
+Initialize ConfigCat's SDK and subscribe to the `flagEvaluated` event reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing ConfigCat's SDK, see ConfigCat's [Dart (Flutter) SDK documentation][1].
+
+```typescript
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  pollingMode={PollingMode.ManualPoll}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', () => {
+        // TODO
+      }),
+  }}
+>
+  ...
+</ConfigCatProvider>
+```
+
+[1]: https://configcat.com/docs/sdk-reference/dart/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+
 ### Custom feature flag management
 
 {{< tabs >}}
