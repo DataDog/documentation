@@ -17,6 +17,10 @@ kind: documentation
 title: スケジュールされたレポート
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Scheduled Reports はこのサイトではサポートされていません。</div>
+{{< /site-region >}}
+
 ## 概要
 
 スケジュールされたダッシュボードレポートは、ダッシュボードの視覚化された要約を、スケジュールに従って選択した受信者に自動的に送信します。生成されたレポートには、ダッシュボードのウィジェットの画像がリニアな HTML フォーマットで表示されます。
@@ -74,7 +78,7 @@ title: スケジュールされたレポート
 
 {{< img src="dashboards/scheduled_reports/scheduled_reports_configuration_modal.png" alt="スケジュールされたレポート用の構成モーダル。2 つのレポートが表示され、それぞれのタイトル、タグ、受信者、頻度、レポートのオン/オフを切り替えるオプション、レポートを編集するボタンが表示されている。下部には、新しいレポートを追加するためのボタンと完了ボタンがある" style="width:100%;" >}}
 
-## アクセス許可
+## ヘルプ
 
 レポートを作成できるのは、**Dashboard Report Write** 権限を持つユーザーのみです。この権限は、Admins ではデフォルトでオンに、その他のすべてのロールではオフに設定されています。
 

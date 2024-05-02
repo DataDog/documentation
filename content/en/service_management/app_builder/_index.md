@@ -19,15 +19,15 @@ further_reading:
 Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}}
 
-Datadog App Builder is a low-code application building platform that streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder makes use of integrations with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context, empowering you to take preventive actions or respond to ongoing incidents, all within the same view you use for troubleshooting.
+Datadog App Builder is a low-code application building platform. It streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder integrates with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context that enables you to take preventive actions or respond to ongoing incidents, all from within the same view that you use for troubleshooting.
 
-{{< img src="/service_management/app_builder/datadog-app-builder-1.png" alt="An app in App Builder" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder.png" alt="An app in App Builder" style="width:100%;" >}}
 
 ## Configure App Builder actions
 
-Datadog App Builder provides an [Action Catalog][1] of over 300 actions across several integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, generic actions such as the HTTP request and JavaScript function allow you to perform any task your app requires.
+Datadog App Builder provides an [Action Catalog][1] of over 300 actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP request and JavaScript function to perform any task that your app requires.
 
-{{< img src="/service_management/app_builder/app-builder-actions.png" alt="Datadog App Builder provides an Action Catalog of over 300 actions across several integrations." style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-actions.png" alt="Datadog App Builder provides an Action Catalog of over 300 actions across multiple integrations." style="width:100%;" >}}
 
 ## Start with blueprints
 
@@ -45,9 +45,9 @@ Below are a few examples of what App Builder apps can do:
 
 ## Take action directly from dashboards
 
-Use your apps from the Apps page, or access them independently from dashboards. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
+You can use your apps from the Apps page or access them directly from within your dashboards. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
 
-{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-1.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
 
 ## Further reading
 
