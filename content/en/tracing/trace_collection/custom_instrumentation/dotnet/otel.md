@@ -35,7 +35,7 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 
 ## Creating custom spans
 
-To create custom spans within an existing trace context:
+To manually create new spans that start a new, independent trace:
 
 ```csharp
 using OpenTelemetry.Resources;
@@ -52,7 +52,7 @@ using (Activity? activity = Telemetry.ActivitySource.StartActivity("<RESOURCE NA
 
 ## Creating new spans
 
-To manually create new spans that start a new, independent trace:
+To create custom spans within an existing trace context:
 
 ```csharp
 using OpenTelemetry.Resources;
