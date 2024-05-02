@@ -40,10 +40,10 @@ The following diagram illustrates the RUM event hierarchy:
 
 During initialization, the RUM Android SDK creates a view called "ApplicationLaunch". This view's start time matches the start of the Android process, and can be used to track your application launch time.
 
-The ApplicationLaunch view includes any logs, actions, and resources created before your first call to `startView`. Use the duration of this view to determine time to first view. This view has an action, `application_start`, with a duration equal to the amount of time from process start until the call to `applicationDidBecomeActive`.
+The `ApplicationLaunch` view includes any logs, actions, and resources created before your first call to `startView`. Use the duration of this view to determine time to first view. This view has an action, `application_start`, with a duration that depends on Android version:
 
-- In *Android 7.0* and above, this view captures the period before any application code is executed (right before `Application.onCreate`) and when the first RUM event is recorded.
-- In versions before * Android 7.0*, the view captures the period between the `RumFeature` class loads and when the first RUM event is recorded.
+- In *Android 7.0* and above, this view/action captures the period before any application code is executed (right before `Application.onCreate`) and when the first RUM event is recorded.
+- In versions before * Android 7.0*, the view/action captures the period between the `RumFeature` class loads and when the first RUM event is recorded.
 
 ## Default attributes
 
