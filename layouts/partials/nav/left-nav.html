@@ -53,7 +53,7 @@
                                     <span>{{ .Name }}</span>
                                 </a>
                             {{ if .HasChildren }}
-                                <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widgets")) }} d-none {{ end }}">
+                                <ul class="list-unstyled sub-menu {{ if (eq .Name "Guides") }} d-none {{ end }}">
                                 {{/*  LEVEL 3  */}}
                                 {{ range .Children }}
                                     <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
