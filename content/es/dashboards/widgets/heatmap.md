@@ -52,7 +52,7 @@ Están disponibles las siguientes opciones de configuración:
 | `Escala`               | No       | Especifica el tipo de escala. Valores posibles:<br>- *linear* (lineal): una escala lineal (por defecto)<br>- *log*: una escala logarítmica<br> - *pow*: una potencia de escala 2 (2 por defecto, modificar en JSON)<br>- *sqrt*: una escala de raíz cuadrada |
 | `Siempre incluir cero` | No       | Incluir siempre cero o ajustar el eje al rango de datos. El valor predeterminado es incluir siempre cero.                                                                                                                     |
 
-**Nota**: Debido a que la función de log matemática loguear no acepta valores negativos, la escala de log Datadog solo funciona si los valores son del mismo signo (todo> 0 o todo < 0). En caso contrario, se devuelve un gráfico vacío.
+**Nota**: Debido a que la función de log matemática no acepta valores negativos, la escala de log Datadog solo funciona si los valores son del mismo signo (todo> 0 o todo < 0). En caso contrario, se devuelve un gráfico vacío.
 
 ## API
 
