@@ -9,7 +9,7 @@ aliases:
 
 In versions 0.95.0 and later, the calculation of Trace Metrics is handled by the Datadog Connector. This change ensures that:
 - Trace Metrics are consistently calculated on 100% of the trace data, even when sampling is applied.
-- Calculation to the Datadog Connector better aligns with the OpenTelemetry recommended architecture.
+- Moving calculation to the Datadog Connector better aligns with the OpenTelemetry recommended architecture.
 
 To continue receiving Trace Metrics, configure the Datadog Connector in the OpenTelemetry Collector.
 
