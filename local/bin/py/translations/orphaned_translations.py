@@ -64,7 +64,7 @@ def main():
             print('\n'.join(orphaned))
 
             # Uncomment if running locally
-            delete_local_files(orphaned)
+            # delete_local_files(orphaned)
 
 
 if __name__ == "__main__":
