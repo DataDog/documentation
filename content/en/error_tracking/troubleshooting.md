@@ -3,23 +3,32 @@ title: Error Tracking Troubleshooting
 kind: documentation
 ---
 
-If you experience unexpected behavior with Datadog Error Tracking, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes.
+If you experience unexpected behavior with Datadog Error Tracking, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries, mobile and web SDKs you use, as each release contains improvements and fixes.
 
 ## Errors are not turned into issues
 
 ### Logs
 
-Make sure that the error message has the [required attributes][2] and that Error Tracking is activated.
+Make sure that the error message has the [required attributes][2] and that Error Tracking for Logs is activated.
+
 [Example query][3]
+
+FIXME: add link for ET Logs pricing activated. Check Critical / Emergency
+
+
 
 ### APM
 
 Make sure that the error message has the [required attributes][4] and the error is located in a service entry span. 
+
 [Example query][5]
+
+FIXME: is there an attribute for service entry span?
 
 ### RUM
 
 Error Tracking processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as console) or sent from browser extensions are not processed by Error Tracking.
+
 [Example query][6]
 
 
