@@ -38,6 +38,137 @@ For more information about the latest updates, see the schemas on GitHub.
 ### Metadata Schema v3.0 (beta) 
 The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][1].
 
+#### Example 
+
+##### YAML for `kind:application`
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: application
+metadata:
+  name: myapp
+  namespace: default
+  displayName: My App
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+    - name: shopping-cart architecture
+      provider: gdoc
+      url: https://google.drive/shopping-cart-architecture
+      type: doc
+    - name: shopping-cart Wiki
+      provider: wiki
+      url: https://wiki/shopping-cart
+      type: doc
+    - name: shopping-cart source code
+      provider: github
+      url: http://github/shopping-cart
+      type: repo
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+  additionalOwners:
+    - name: opsTeam
+      type: operator
+integrations:
+  pagerduty:
+    serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
+  opsgenie:
+    serviceURL: https://www.opsgenie.com/service/shopping-cart
+    region: US
+spec:
+  components:
+    - service:myservice
+    - service:otherservice
+extensions:
+  datadoghq.com/shopping-cart:
+    customField: customValue
+datadog:
+  performanceData:
+    tags:
+      - 'service:shopping-cart'
+      - 'hostname:shopping-cart'
+  events:
+    - name: "deployment events"
+      query: "app:myapp AND type:github"
+    - name: "event type B"
+      query: "app:myapp AND type:github"
+  logs:
+    - name: "critical logs"
+      query: "app:myapp AND type:github"
+    - name: "ops logs"
+      query: "app:myapp AND type:github"
+  pipelines:
+    fingerprints:
+      - fp1
+      - fp2
+{{< /code-block >}}
+
+#### Common Questions
+##### How do I specify common components (e.g., orders-postgres) that are part of multiple applications
+For example, if orders-postgres is a part of the overall postgres fleet managed by a database admin or infrastructure team, but also a critical part of the shopping-cart application. In this case, you will specify two application YAMLs. 
+
+One for the postgres fleet (managed-postgres):
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: application
+spec:
+  components:
+    - datastore:orders-postgres
+    - datastore:foo-postgres
+    - datastore:bar-postgres
+metadata:
+  name: managed-postgres
+  owner: db-team
+{{< /code-block >}}
+
+A separate one for the shopping-cart application:
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+
+apiVersion: v3
+kind: application
+spec:
+  lifecycle: production
+  tier: critical
+  components:
+    - service:shopping-cart-api
+    - service:shopping-cart-processor
+    - queue:orders-queue
+    - datastore:orders-postgres
+metadata:
+  name: shopping-cart
+  owner: shopping-team
+  additionalOwners:
+    - name: sre-team
+      type: operator
+---
+apiVersion: v3
+kind: datastore
+metadata:
+  name: orders-postgres
+  additionalOwners:
+    - name: db-team
+      type: operator
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-api
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-processor
+---
+{{< /code-block >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
