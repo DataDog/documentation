@@ -47,7 +47,7 @@ Définissez la configuration de votre test Browser.
    Sélectionnez l'option **Disable CORS** pour éviter que la stratégie Cross-Origin Resource Sharing (CORS) ne bloque votre test. Pour empêcher la Content Security Policy (CSP) de bloquer votre test, sélectionnez **Disable CSP**.
 
    * **Request Headers** : définissez les en-têtes dans les champs **Name** et **Value** à ajouter ou à utiliser pour remplacer les en-têtes par défaut du navigateur. Par exemple, vous pouvez modifier le user-agent dans l'en-tête de façon à [identifier les scripts Datadog][1].
-   * **Cookirs** : définissez les cookies à ajouter aux cookies par défaut du navigateur. Saisissez un cookie par ligne, en prenant soin de respecter la syntaxe de [`Set-Cookie`][2].
+   * **Cookies** : définissez les cookies à ajouter aux cookies par défaut du navigateur. Saisissez un cookie par ligne, en prenant soin de respecter la syntaxe de [`Set-Cookie`][2].
    * **HTTP Authentication** : effectuez l'authentification via HTTP Basic, Digest ou NTLM avec un nom d'utilisateur et un mot de passe. Vos identifiants sont utilisés lors de chaque étape de votre test Browser.
 
    Les options de requête sont définies à chaque exécution de test. Elles sont appliquées à toutes les étapes de votre test Browser lors de son exécution, et non lors de son enregistrement. Si vous souhaitez que ces options restent actives lors de l'enregistrement des étapes suivantes, appliquez-les manuellement sur la page à partir de laquelle l'enregistrement est effectué, puis créez les prochaines étapes de votre test.

@@ -5,12 +5,14 @@ description: Examine all of your test runs and troubleshoot failing test results
 further_reading:
 - link: '/continuous_testing/explorer'
   tag: 'Documentation'
-  text: 'Learn about the Synthetic Monitoring & Continuous Testing Explorer'
+  text: 'Learn about the Synthetic Monitoring & Testing Results Explorer'
 ---
 
 ## Overview
 
-After selecting a time frame from the dropdown menu on the top right, you can search for test runs by clicking on the **Test Runs** event type in the [Synthetic Monitoring & Continuous Testing Explorer][1].
+After selecting a time frame from the dropdown menu on the top right, you can search for test runs by clicking on the **Test Runs** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
+
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 You can use facets to accomplish the following actions:
 

@@ -43,16 +43,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
     tag: "Blog"
     text: "Detect malware in your containers with Datadog Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/security-posture-csm/"
+    tag: "Blog"
+    text: "Report on changes to your security posture with Cloud Security Management"
 algolia:
   tags: ['inbox']
 cascade:
     algolia:
         subcategory: Cloud Security Management
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
@@ -81,6 +80,10 @@ Use the [Explorers][7] to review and remediate your organization's security dete
 
 ## Investigate resources
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Resource Catalog is in beta.</div>
 
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
@@ -93,7 +96,7 @@ Receive a weekly summary of Cloud Security Management activity over the past wee
 
 ## Next steps
 
-To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
+To get started with CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
 
 ## Further reading
 
@@ -101,7 +104,7 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 
 [1]: /security/threats/
 [2]: /security/cloud_security_management/misconfigurations/
-[3]: https://app.datadoghq.com/security/configuration
+[3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/security/csm
 [5]: /glossary/#posture-score
 [6]: /security/notifications/

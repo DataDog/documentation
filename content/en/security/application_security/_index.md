@@ -83,7 +83,7 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [1]: /tracing/
 [2]: /agent/
 [3]: /security/application_security/how-appsec-works/
-[4]: /security/default_rules/#cat-application-security
+[4]: /security/default_rules/?category=cat-application-security
 [5]: /security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec

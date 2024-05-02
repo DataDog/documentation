@@ -1,0 +1,28 @@
+# Fail if the "Do Not Merge" label is present on a PR.
+name: Merge label check
+on: 
+  pull_request:
+    types:
+      - opened
+      - labeled
+      - unlabeled
+      - synchronize
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  new-check-for-merge-label:
+    runs-on: ubuntu-latest
+    name: "Merge is not allowed when 'Do Not Merge' label is present"
+    steps:
+      - name: Verify lack of "Do Not Merge" label
+        env:
+          DO_NOT_MERGE_LABEL_IS_PRESENT: ${{ contains( github.event.pull_request.labels.*.name, 'Do Not Merge') }}
+        run: |
+          if [[ $DO_NOT_MERGE_LABEL_IS_PRESENT == "true" ]]; then
+          exit 1
+          else
+          exit 0
+          fi

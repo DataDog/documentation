@@ -356,12 +356,18 @@
     "other": "個別デモのリクエスト"
   },
   "configuration_management" : {
-    "other": "Configuration management"
+    "other": "構成管理"
   },
   "cloud_and_container" : {
-    "other": "Cloud and container"
+    "other": "クラウドとコンテナ"
   },
   "source" : {
-    "other": "Source"
+    "other": "ソース"
+  },
+  "try_this_rule" : {
+    "other": "TRY THIS RULE"
+  },
+  "available_for": {
+    "other": "次で利用可能"
   }
 }
