@@ -127,5 +127,6 @@ tile:
 [4]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
 [5]: https://www.datadoghq.com/blog/workday-monitoring-with-avm-and-datadog/
 [6]: mailto:integrations@avmconsulting.net
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/avmconsulting-workday" target="_blank">こちらをクリック</a>してください。

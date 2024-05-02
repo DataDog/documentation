@@ -25,9 +25,9 @@ You can use your CI Visibility search query and visualization graphs in dashboar
 {{< tabs >}}
 {{% tab "Test Runs" %}}
 
-You can copy, export, or download your aggregated search query and visualization graphs in the [CI Visibility Explorer][101].
+You can copy, export, or download your aggregated search query and visualization graphs in the [Test Visibility Explorer][101].
 
-{{< img src="continuous_integration/explorer/test_export.png" alt="Export your test runs view in the CI Visibility Explorer" style="width:100%;">}}
+{{< img src="continuous_integration/explorer/test_export.png" alt="Export your test runs view in the Test Visibility Explorer" style="width:100%;">}}
 
 [101]: https://app.datadoghq.com/ci/test-runs
 

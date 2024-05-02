@@ -222,7 +222,7 @@ With the application running, send some curl requests to it:
 
 Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
 The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
