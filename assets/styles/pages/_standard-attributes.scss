@@ -34,7 +34,7 @@
         }
     }
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(xl) {
         .table-wrapper {
             overflow-x: unset;
             
