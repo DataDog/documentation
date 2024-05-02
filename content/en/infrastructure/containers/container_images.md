@@ -38,12 +38,7 @@ To enable live container collection, see the [containers][3] documentation. It p
 
 Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][8] (CSM) vulnerabilities.
 
-#### Configure the Agent
-
-The following instructions enable the container image metadata collection and [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour.
-
-**Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
-
+#### Enable Container Image collection
 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
@@ -60,7 +55,6 @@ spec:
   features:
     # ...
     sbom:
-      enabled: true
       containerImage:
         enabled: true
 ```
@@ -76,6 +70,81 @@ Or, add the following to your `values.yaml` Helm configuration file:
 datadog:
   containerImageCollection:
     enabled: true
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
+{{% /tab %}}
+
+{{% tab "ECS EC2" %}}
+
+To enable container image collection on your [ECS EC2 instances][1], add the following environment variables to your `datadog-agent` container definition:
+
+```yaml
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+             ...
+            "environment": [
+              ...
+              {
+                "name": "DD_CONTAINER_IMAGE_ENABLED",
+                "value": "true"
+              }
+            ]
+        }
+    ]
+  ...
+}
+```
+
+[1]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli#setup
+
+{{% /tab %}}
+
+{{% tab "Hosts" %}}
+
+Add the following to your `datadog.yaml` configuration file:
+
+```yaml
+container_image:
+  enabled: true
+```
+
+[1]: /containers/amazon_ecs/?tab=awscli#setup
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Enable SBOM collection
+
+The following instructions enable the [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [CSM Pro and Enterprise plans][10].
+
+**Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
+
+{{< tabs >}}
+{{% tab "Kubernetes (Operator)" %}}
+
+Add the following to the spec section of your `values.yaml` file:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    # ...
+    sbom:
+      enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+Add the following to your `values.yaml` Helm configuration file:
+
+```yaml
+datadog:
   sbom:
     containerImage:
       enabled: true
@@ -95,10 +164,6 @@ To enable container image vulnerability scanning on your [ECS EC2 instances][1],
              ...
             "environment": [
               ...
-              {
-                "name": "DD_CONTAINER_IMAGE_ENABLED",
-                "value": "true"
-              },
               {
                 "name": "DD_SBOM_ENABLED",
                 "value": "true"
@@ -141,8 +206,6 @@ sbom:
   enabled: true
   container_image:
     enabled: true
-container_image:
-  enabled: true
 ```
 
 [1]: /containers/amazon_ecs/?tab=awscli#setup
@@ -179,3 +242,4 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [8]: /security/cloud_security_management/vulnerabilities
 [9]: https://app.datadoghq.com/container-images/image-trends
+[10]: https://www.datadoghq.com/pricing/?product=cloud-security-management#products
