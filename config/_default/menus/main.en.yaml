@@ -1104,11 +1104,21 @@ menu:
       identifier: cloudcraft_api_budgets_export
       parent: cloudcraft_api_budgets
       weight: 1
+    - name: Teams
+      url: cloudcraft/api/teams/
+      identifier: cloudcraft_api_teams
+      parent: cloudcraft_api
+      weight: 5
+    - name: List teams
+      url: cloudcraft/api/teams/#list-teams
+      identifier: cloudcraft_api_teams_list
+      parent: cloudcraft_api_teams
+      weight: 1
     - name: Users
       url: cloudcraft/api/users/
       identifier: cloudcraft_api_users
       parent: cloudcraft_api
-      weight: 5
+      weight: 6
     - name: Get user profile
       url: cloudcraft/api/users/#get-user-profile
       identifier: cloudcraft_api_users_info
