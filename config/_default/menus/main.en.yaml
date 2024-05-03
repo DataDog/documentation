@@ -2908,21 +2908,26 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
       weight: 1001
+    - name: Default Grouping
+      url: tracing/error_tracking/default_grouping
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_default_grouping
+      weight: 1002
     - name: Custom Grouping
       url: tracing/error_tracking/custom_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_custom_grouping
-      weight: 1002
+      weight: 1003
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1003
+      weight: 1004
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1004
+      weight: 1005
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4127,26 +4132,31 @@ menu:
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
       weight: 603
+    - name: Default Grouping
+      url: logs/error_tracking/default_grouping
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_default_grouping
+      weight: 604
     - name: Custom Grouping
       url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
-      weight: 604
+      weight: 605
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
-      weight: 605
+      weight: 606
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 606
+      weight: 607
     - name: Exclude Logs
       url: logs/error_tracking/excluding_logs
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_excluding_logs
-      weight: 607
+      weight: 608
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5189,16 +5199,21 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_mobile
       weight: 803
+    - name: Default Grouping
+      url: real_user_monitoring/error_tracking/default_grouping
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_default_grouping
+      weight: 805
     - name: Custom Grouping
       url: real_user_monitoring/error_tracking/custom_grouping
       parent: rum_error_tracking
       identifier: rum_error_tracking_custom_grouping
-      weight: 804
+      weight: 806
     - name: Identify Suspect Commits
       url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
-      weight: 805
+      weight: 807
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
