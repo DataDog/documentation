@@ -26,6 +26,11 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
+#### Images
+
+* cws-instrumentation: datadog/cws-instrumentation:latest
+* Datadog-agent: datadog/agent:latest
+
 {{< tabs >}}
 {{% tab "Amazon ECS" %}}
 
@@ -40,7 +45,7 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 ### AWS CLI
 
 1. Download [datadog-agent-cws-ecs-fargate.json][7].
-```json
+{{< code-block lang="json" filename="datadog-agent-cws-ecs-fargate.json" collapsible="true" >}}
 {
     "family": "<YOUR_TASK_NAME>",
     "cpu": "256",
@@ -148,7 +153,7 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
         }
     ]
 }
-```
+{{< /code-block >}}
 
 2. Update the following items in the JSON file:
     - `TASK_NAME`
@@ -158,14 +163,26 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
     - `YOUR_APP_IMAGE`
     - `ENTRYPOINT`
 
+    You can use the following command to find the entry point of your workload:
+
+    ```shell
+    docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Entrypoint}}'
+    ```
+
+    or
+
+    ```shell
+    docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Cmd}}'
+    ```
+
     **Note**: The environment variable `ECS_FARGATE` is already set to "true".
 
 3. Add your other application containers to the task definition. For details on collecting integration metrics, see [Integration Setup for ECS Fargate][8].
 4. Run the following command to register the ECS task definition:
 
-```shell
+{{< code-block lang="shell" collapsible="true" >}}
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
-```
+{{< /code-block >}}
 
 [6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
@@ -194,6 +211,13 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 ## Application Security Management
 
+- [Java][10]
+- [.NET][11]
+- [Go][12]
+- [Ruby][13]
+- [Node.js][14]
+- [Python][15]
+
 ### Prerequisites
 
 - The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
@@ -204,12 +228,6 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 - Only threat detection using tracing libraries? (i.e., no single-step instrumentation and no code security.)
 - What is VULNERABILITY MANAGEMENT FOR OSS SUPPORT? https://docs.datadoghq.com/security/application_security/enabling/compatibility/ruby#supported-deployment-types
-
-- Java
-- .NET
-- Ruby
-- Node.js
-- Python
 
 1. Update to the latest Datadog library (the most recent APM tracing library).
 1. Enable ASM when starting the Python application.
@@ -241,3 +259,9 @@ AWS account logs (not the eks logs), CloudTrail
 [6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[10]: /security/application_security/enabling/tracing_libraries/threat_detection/java?tab=awsfargate
+[11]: /security/application_security/enabling/tracing_libraries/threat_detection/go/?tab=amazonecs
+[12]: /security/application_security/enabling/tracing_libraries/threat_detection/dotnet?tab=awsfargate
+[13]: /security/application_security/enabling/tracing_libraries/threat_detection/ruby?tab=awsfargate
+[14]: /security/application_security/enabling/tracing_libraries/threat_detection/nodejs?tab=awsfargate
+[15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
