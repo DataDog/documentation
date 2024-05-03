@@ -1,5 +1,6 @@
 ---
 title: Exploring LLM Traces
+kind: documentation
 ---
 
 TODO

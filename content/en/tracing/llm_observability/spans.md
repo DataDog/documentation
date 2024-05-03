@@ -1,16 +1,15 @@
 ---
 title: Spans
+kind: documentation
 ---
 
 ## Overview
 
 A *span* represents some unit of work that your application is performing. Spans have a start time, duration, name, tags, and attributes.
 
-Multiple spans combine to form a trace:
+Multiple spans combine to form a trace, and a *root span* is the first span in a trace.
 
 {{< img src="tracing/llm_observability/example-trace.png" alt="An LLM Observability trace made up of several spans" style="width:90%;" >}}
-
-TODO: Link to the higher-level tracing documentation for a sense of how spans fit into the bigger picture.
 
 ## Span kinds
 

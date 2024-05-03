@@ -7,7 +7,7 @@ kind: documentation
 
 With LLM Observability, you can monitor the quality, security, and performance of your LLM applications. 
 
-Each request fulfilled by your application is represented as a trace in the [LLM Observability traces list][3] in Datadog. A trace contains [spans][1] representing each choice made by an agent or each step of a given workflow. Each trace also includes input and output, execution duration, privacy issues, errors, and more.
+Each request fulfilled by your application is represented as a trace on the [LLM Observability traces list page][3] in Datadog. A trace contains [spans][1] representing each choice made by an agent or each step of a given workflow. Each trace also includes input and output, execution duration, privacy issues, errors, and more.
 
 A trace can represent:
 - An individual LLM inference, including tokens, error rates, latencies
@@ -24,5 +24,4 @@ You can submit data to LLM Observability in two ways: with the Python SDK or wit
 {{< /whatsnext >}}
 
 [1]: /tracing/llm_observability/spans/
-[2]: /tracing/llm_observability/api
-[3]: https://app.datadoghq.com/llm/traces
+[3]: /tracing/llm_observability/exploring_llm_traces
