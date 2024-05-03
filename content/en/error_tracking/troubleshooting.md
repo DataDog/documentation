@@ -11,20 +11,40 @@ If you experience unexpected behavior with Datadog Error Tracking, there are a f
 
 Make sure that the error message has the [required attributes][2] and that Error Tracking for Logs is [activated][7].
 
-[Example query][3]
+[Example query of logs meeting the criteria][3]
 
 
 ### APM
 
-Make sure that the error message has the [required attributes][4] and the error is located in a service entry span. 
 
-[Example query][5]
+A span must have a stack, a type and a message to be processed by Error Tracking.
+The stack must have at least two lines and one *meaningful* frame (a frame with a function name and a filename in most languages)
+
+Only the errors from **Service Entry Spans** (uppermost service span) are processed by Error Tracking. Error Tracking primarily captures unhandled exceptions and this is in place to avoid capturing errors handled internally by the service.
+
+[Example query of spans meeting the criteria][5]
+
+#### Workarounds for bubbling up child span errors to service entry span
+
+Some tracers provide a feature to access the root span and bubble up the error from child to root.
+
+##### Java
+[Java Custom Instrumentation using Datadog API][6]
 
 ### RUM
 
 Error Tracking only processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as console) or sent from browser extensions are not processed by Error Tracking.
 
-[Example query][6]
+[Example query of RUM errors meeting the criteria][6]
+
+
+## APM troubleshooting
+
+### Clicking Error Displays `No issues are found - Create Retention Filter` or the Error Page is Empty?
+Spans where this error was capture needs to be retained with a custom retention filter to have samples for that error show up in the issue panel.
+
+All errors are processed but only retained errors are available in the issue panel as an error sample.
+
 
 
 
@@ -35,3 +55,4 @@ Error Tracking only processes errors that are sent with the source set to `custo
 [5]: https://app.datadoghq.com/apm/traces?query=%40_top_level%3A1%20%40error.stack%3A%2A%20AND%20%40error.message%3A%2A%20AND%20error.type%3A%2A%20AND%20%40_top_level%3A1%20
 [6]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aerror%20%40error.stack%3A%2A
 [7]: https://app.datadoghq.com/error-tracking/settings
+[8]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/java/dd-api/#set-tags--errors-on-a-root-span-from-a-child-span
