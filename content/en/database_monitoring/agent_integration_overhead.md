@@ -45,7 +45,7 @@ MySQL integration overhead tests were run on an Amazon EC2 machine `c5.xlarge` i
 * Network bandwidth: ~40 KB/s ▼ | 30 KB/s ▲
 * Agent query overhead on database: ~1% CPU Time
 
-## SQLServer integration overhead
+### SQLServer integration overhead
 
 SQLServer integration overhead tests were run on an Amazon EC2 machine `c5.xlarge` instance (4 vCPUs, 8 GB RAM). The database used for the tests was a SQL Server 2019 Standard Edition instance running on an Amazon RDS `db.m5.large` instance (2 vCPUs, 8 GB RAM). The database was running a TPC-C workload with 20 warehouses.
 
