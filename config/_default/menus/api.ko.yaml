@@ -3229,7 +3229,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-all-locations-public-and-private'
   - generated: true
     identifier: synthetics-get-details-of-batch
@@ -3241,10 +3241,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-details-of-batch'
   - generated: true
-    identifier: tags
+    identifier: 태그
     name: 태그
     url: /api/latest/tags/
   - generated: true
@@ -3257,7 +3257,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: tags
+    parent: 태그
     url: '#update-host-tags'
   - generated: true
     identifier: tags-add-tags-to-a-host
@@ -3269,7 +3269,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: tags
+    parent: 태그
     url: '#add-tags-to-a-host'
   - generated: true
     identifier: tags-get-host-tags
@@ -3281,7 +3281,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: tags
+    parent: 태그
     url: '#get-host-tags'
   - generated: true
     identifier: tags-remove-host-tags
@@ -3293,7 +3293,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: tags
+    parent: 태그
     url: '#remove-host-tags'
   - generated: true
     identifier: tags-get-tags
@@ -3305,7 +3305,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: tags
+    parent: 태그
     url: '#get-tags'
   - generated: true
     identifier: timeboards
