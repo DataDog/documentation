@@ -1,5 +1,5 @@
 ---
-title: Exploring LLM Traces
+title: Viewing LLM Traces
 kind: documentation
 ---
 
