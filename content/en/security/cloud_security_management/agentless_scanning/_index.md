@@ -52,7 +52,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 **Notes**:
 - The scanner operates as a separate EC2 instance within your infrastructure, ensuring minimal impact on existing systems and resources.
-- The scanner securely collects a list of packages from your hosts without transmitting any confidential or private information outside your infrastructure.
+- The scanner securely collects a list of packages from your hosts without transmitting any confidential or private personal information outside your infrastructure.
 - The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and uses exponential backoff if needed.
 
 ## What data is sent to Datadog
