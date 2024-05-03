@@ -38,20 +38,19 @@ To enable live container collection, see the [containers][3] documentation. It p
 
 Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][8] (CSM) vulnerabilities.
 
-#### Enable Container Image collection
+#### Enable container image collection
 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
 
-Image collection is enabled by default with Datadog Operator version `>= 1.3.0`. If you are using an older version, Datadog recommends you to update it to `1.3.0` or a newer one. </br>
+In Datadog Operator v1.3.0+, image collection is enabled by default. If you are using an older version of the Datadog Operator, Datadog recommends that you update it to v1.3.0+.
 
 
 {{% /tab %}}
 
 {{% tab "Kubernetes (Helm)" %}}
 
-If you are using Helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
-Or, add the following to your `values.yaml` Helm configuration file:
+In the Datadog Helm chart v3.46.0+, image collection is [enabled by default][1]. To verify this, or if you are using an earlier Helm chart version, ensure that `datadog.containerImageCollection.enabled` is set to `true` in `datadog-values.yaml`.
 
 ```yaml
 datadog:
@@ -103,14 +102,14 @@ container_image:
 
 #### Enable SBOM collection
 
-The following instructions enable the [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [CSM Pro and Enterprise plans][10].
+The following instructions turn on [Software Bill of Materials][5] (SBOM) collection for CSM Vulnerabilities. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [CSM Pro and Enterprise plans][10].
 
 **Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
 
-Add the following to the spec section of your `values.yaml` file:
+Add the following to the spec section of your `datadog-agent.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -130,7 +129,7 @@ spec:
 
 {{% tab "Kubernetes (Helm)" %}}
 
-Add the following to your `values.yaml` Helm configuration file:
+Add the following to your `datadog-values.yaml` Helm configuration file:
 
 ```yaml
 datadog:
