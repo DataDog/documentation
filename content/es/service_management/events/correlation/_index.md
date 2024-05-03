@@ -20,7 +20,7 @@ title: Correlación
 La correlación de eventos agrupa eventos en función de sus relaciones o de configuraciones definidas por el usuario para reducir la cantidad de notificaciones y problemas identificados en el entorno. Utiliza la correlación y los casos para: 
 * Reducir la fatiga de alertas 
 * Reducir la cantidad de tickets y notificaciones que recibes 
-* Haz que todos los equipos afectados sean conscientes de un único problema en lugar de trabajar en silos
+* Hacer que todos los equipos afectados sean conscientes de un único problema en lugar de trabajar en silos
 
 {{< whatsnext desc="Comienza con:">}}
     {{< nextlink href="/service_management/events/correlation/configuration" >}}<u>Correlación</u>: comienza con nuestros dos tipos diferentes de correlación{{< /nextlink >}}
