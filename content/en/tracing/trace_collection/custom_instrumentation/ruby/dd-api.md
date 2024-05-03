@@ -34,11 +34,38 @@ Add custom [span tags][1] to your [spans][2] to customize your observability wit
 
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
-{{< tabs >}}
-{{% tab "Active Span" %}}
+#### Active spans
+
 Access the current active [span][1] from any method within your code. 
 
 **Note**: If the method is called and there is no active span, `active_span` is `nil`.
+
+{{< tabs >}}
+{{% tab "datadog (v2)" %}}
+
+```ruby
+require 'datadog'
+
+# get '/shopping_cart/:customer_id', to: 'shopping_cart#index'
+class ShoppingCartController < ApplicationController
+  # GET /shopping_cart
+  def index
+    # Get the active span and set customer_id -> 254889
+    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
+
+    # [...]
+  end
+
+  # POST /shopping_cart
+  def create
+    # [...]
+  end
+end
+```
+
+{{% /tab %}}
+
+{{% tab "ddtrace (v1)" %}}
 
 ```ruby
 require 'ddtrace'
@@ -60,10 +87,10 @@ class ShoppingCartController < ApplicationController
 end
 ```
 
-[1]: /tracing/glossary/#spans
 {{% /tab %}}
+{{< /tabs >}}
 
-{{% tab "Manually Instrumented Spans" %}}
+#### Manually instrumented spans
 
 Add [tags][1] directly to `Datadog::Span` objects by calling `#set_tag`:
 
@@ -78,10 +105,8 @@ get '/posts' do
 end
 ```
 
-
 [1]: /tracing/glossary/#span-tags
-{{% /tab %}}
-{{< /tabs >}}
+
 
 ### Adding tags globally to all spans
 
@@ -101,6 +126,29 @@ There are two ways to set an error on a span:
 
 - Call `span.set_error` and pass in the Exception Object. This automatically extracts the error type, message, and backtrace.
 
+{{< tabs >}}
+{{% tab "datadog (v2)" %}}
+
+```ruby
+require 'datadog'
+require 'timeout'
+
+def example_method
+  span = Datadog::Tracing.trace('example.trace')
+  puts 'some work'
+  sleep(1)
+  raise StandardError, "This is an exception"
+rescue StandardError => error
+  Datadog::Tracing.active_span&.set_error(error)
+  raise
+ensure
+  span.finish
+end
+
+example_method()
+```
+{{% /tab %}}
+{{% tab "ddtrace (v1)" %}}
 ```ruby
 require 'ddtrace'
 require 'timeout'
@@ -120,10 +168,54 @@ end
 example_method()
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 - Or, use `tracer.trace` which by default sets the error type, message, and backtrace. To configure this behavior you can use the `on_error` option, which is the Handler invoked when a block is provided to `trace`, and the block raises an error. The Proc is provided `span` and `error` as arguments. By default, `on_error` sets error on the span.
 
 Default behavior for `on_error`:
 
+{{< tabs >}}
+{{% tab "datadog (v2)" %}}
+
+```ruby
+require 'datadog'
+require 'timeout'
+
+def example_method
+  puts 'some work'
+  sleep(1)
+  raise StandardError, "This is an exception"
+end
+
+Datadog::Tracing.trace('example.trace') do |span|
+  example_method()
+end
+```
+
+Custom behavior for `on_error`:
+
+```ruby
+require 'datadog'
+require 'timeout'
+
+def example_method
+  puts 'some work'
+  sleep(1)
+  raise StandardError.new "This is a special exception"
+end
+
+custom_error_handler = proc do |span, error|
+  span.set_tag('custom_tag', 'custom_value')
+  span.set_error(error) unless error.message.include?("a special exception")
+end
+
+Datadog::Tracing.trace('example.trace', on_error: custom_error_handler) do |span|
+  example_method()
+end
+```
+{{% /tab %}}
+{{% tab "ddtrace (v1)" %}}
 ```ruby
 require 'ddtrace'
 require 'timeout'
@@ -160,6 +252,8 @@ Datadog::Tracing.trace('example.trace', on_error: custom_error_handler) do |span
   example_method()
 end
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Adding spans
 
