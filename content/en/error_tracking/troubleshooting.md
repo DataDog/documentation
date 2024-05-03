@@ -32,14 +32,10 @@ Only errors from service entry spans - the uppermost service spans - are process
 
 #### Workarounds for bubbling up child span errors to service entry span
 
-Some tracers provide a feature to access the root span and bubble up the error from child to root.
+Some tracers provide a way to access the root span and bubble up the error from child to root.
 
 {{< tabs >}}
 {{% tab "Java" %}}
-
-Initialize Amplitude's SDK and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
-
-For more information about initializing Amplitude's SDK, see Amplitude's [JavaScript SDK documentation][1].
 
 ```java
 final Span span = GlobalTracer.get().activeSpan();
@@ -68,12 +64,7 @@ current_root_span.set_tag('my_tag', 'my_value') unless current_root_span.nil?
 ```
 
 {{% /tab %}}
-{{% tab "Flutter" %}}
 
-Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
-
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ### RUM
