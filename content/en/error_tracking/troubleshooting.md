@@ -17,10 +17,15 @@ Make sure that the error message has the [required attributes][2] and that Error
 ### APM
 
 
-A span must have a stack, a type and a message to be processed by Error Tracking.
-The stack must have at least two lines and one *meaningful* frame (a frame with a function name and a filename in most languages)
+To be processed by Error Tracking a span must have these following attributes:
+- `error.type`
+- `error.message`
+- `error.stack`
 
-Only the errors from **Service Entry Spans** (uppermost service span) are processed by Error Tracking. Error Tracking primarily captures unhandled exceptions and this is in place to avoid capturing errors handled internally by the service.
+**Note**: The stack must have at least two lines and one *meaningful* frame (a frame with a function name and a filename in most languages)
+
+**Service Entry Spans**
+Only errors from service entry spans - the uppermost service spans - are processed by Error Tracking. Error Tracking primarily captures unhandled exceptions and this is in place to avoid capturing errors handled internally by the service.
 
 [Example query of spans meeting the criteria][5]
 
@@ -29,7 +34,7 @@ Only the errors from **Service Entry Spans** (uppermost service span) are proces
 Some tracers provide a feature to access the root span and bubble up the error from child to root.
 
 ##### Java
-[Java Custom Instrumentation using Datadog API][6]
+[Java Custom Instrumentation using Datadog API][8]
 
 ### RUM
 
@@ -41,7 +46,7 @@ Error Tracking only processes errors that are sent with the source set to `custo
 ## APM troubleshooting
 
 ### Clicking Error Displays `No issues are found - Create Retention Filter` or the Error Page is Empty?
-Spans where this error was capture needs to be retained with a custom retention filter to have samples for that error show up in the issue panel.
+Spans associated to the error needs to be retained with a custom retention filter to have samples for that error show up in the issue panel.
 
 All errors are processed but only retained errors are available in the issue panel as an error sample.
 
