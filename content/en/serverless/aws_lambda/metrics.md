@@ -97,7 +97,7 @@ You can also generate metrics from all ingested spans, regardless of whether the
 
 All custom metrics are submitted as [distributions](#understanding-distribution-metrics).
 
-Note: Distribution metrics must be submitted with a new name, do not re-use a name of a previously submitted metric.
+**Note**: Distribution metrics must be submitted with a new name, do not re-use a name of a previously submitted metric.
 
 1. [Install Serverless Monitoring for AWS Lambda][1] and ensure that you have installed the Datadog Lambda extension.
 
