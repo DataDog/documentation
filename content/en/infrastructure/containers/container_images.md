@@ -43,21 +43,8 @@ Datadog collects container image metadata to provide enhanced debugging context 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
 
-Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
-Or, add the following to the spec section of your `values.yaml` file:
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`. If you are using a previous version, Datadog recommends you to update it to 1.3.0 or a newer one. </br>
 
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  features:
-    # ...
-    sbom:
-      containerImage:
-        enabled: true
-```
 
 {{% /tab %}}
 
