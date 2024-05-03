@@ -5,7 +5,7 @@ kind: documentation
 
 If you experience unexpected behavior with Datadog Error Tracking, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries, mobile and web SDKs you use, as each release contains improvements and fixes.
 
-## Errors are not turned into issues
+## Errors are not converted into issues.
 
 ### Logs
 
@@ -43,14 +43,13 @@ Error Tracking only processes errors that are sent with the source set to `custo
 [Example query of RUM errors meeting the criteria][6]
 
 
-## APM troubleshooting
-
-### Clicking Error Displays `No issues are found - Create Retention Filter` or the Error Page is Empty?
-Spans associated to the error needs to be retained with a custom retention filter to have samples for that error show up in the issue panel.
+## Clicking on an issue shows `No issue samples found` or the error page is empty
 
 All errors are processed but only retained errors are available in the issue panel as an error sample.
 
+### APM
 
+Spans associated to the error needs to be retained with a custom retention filter to have samples for that error show up in the issue panel.
 
 
 [1]: /help/
