@@ -1,23 +1,7 @@
 ---
-title: Spans
+title: Span kinds
 kind: documentation
 ---
-
-## Overview
-
-A *span* represents some unit of work that your application is performing. Spans have a start time, duration, name, tags, and attributes.
-
-Multiple spans combine to form a trace, and a *root span* is the first span in a trace.
-
-{{< img src="tracing/llm_observability/example-trace.png" alt="An LLM Observability trace made up of several spans" style="width:90%;" >}}
-
-See [Tracing LLM Applications] for detailed instructions on creating spans in your application and viewing them in Datadog.
-
-## Span kinds
-
-As shown in the image above, an LLM Observability trace can contain several kinds of spans: Agent, LLM, Workflow, and so on. The *span kind* categorizes the type of work the span is performing in an LLM application. 
-
-Different span kinds have different parent-child relationships, and only some kinds can be the root span of a trace.
 
 LLM Observability supports the following span kinds:
 

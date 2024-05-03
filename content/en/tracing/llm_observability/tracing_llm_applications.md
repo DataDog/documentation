@@ -2,12 +2,25 @@
 title: Tracing LLM Applications
 kind: guide
 ---
-
-<div class="alert alert-info">If your application is not written in Python, you can still complete the steps below by making API requests instead of calling SDK functions.</a></div>
-
 ## Overview
 
-This guide describes the steps for instrumenting LLM applications. For a higher-level product overview, see [LLM Observability][1].
+You can submit data to LLM Observability in two ways: by using Datadog's Python SDK, or by submitting data through the LLM Observability API. 
+
+Each request fulfilled by your application is represented as a trace on the [LLM Observability traces list page][3] in Datadog:
+
+{{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
+
+Each trace contains spans representing each choice made by an agent or each step of a given workflow. A *span* represents some unit of work that your application is performing. Spans have a start time, duration, name, tags, and attributes.
+
+Multiple spans combine to form a trace, and a *root span* is the first span in a trace.
+
+A trace can contain several kinds of spans: Agent, LLM, Workflow, and so on. The *span kind* categorizes the type of work the span is performing in an LLM application. For details on the available span kinds, see [the documentation].
+
+Different span kinds have different parent-child relationships, and only some kinds can be the root span of a trace.
+
+## Instrument an LLM application
+
+<div class="alert alert-info">This guide uses the Python SDK. If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</a></div>
 
 To trace a given LLM application:
 

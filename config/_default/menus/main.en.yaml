@@ -2884,14 +2884,14 @@ menu:
       identifier: tracing_llm_obs_quickstart
       weight: 701
     - name: Tracing LLM Applications
-      url: tracing/llm_observability/trace_an_application/
+      url: tracing/llm_observability/tracing_llm_applications/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_trace_an_application
       weight: 702
-    - name: Spans
-      url: tracing/llm_observability/spans/
-      parent: tracing_llm_obs_trace_an_application
-      identifier: tracing_llm_obs_spans
+    - name: Span kinds
+      url: tracing/llm_observability/span_kinds/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_span_kinds
       weight: 7001
     - name: Viewing LLM Traces
       url: tracing/llm_observability/viewing_llm_traces/
