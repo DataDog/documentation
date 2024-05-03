@@ -1126,22 +1126,22 @@ menu:
     url: watchdog/alerts
     weight: 1
   - identifier: watchdog_impact_analysis
-    name: 타임시프트
+    name: 영향 분석
     parent: watchdog_top_level
     url: watchdog/impact_analysis/
     weight: 2
   - identifier: watchdog_rca
-    name: 네트워크 맵
+    name: RCA
     parent: watchdog_top_level
     url: watchdog/rca/
     weight: 3
   - identifier: watchdog_insights
-    name: 가이드
+    name: 인사이트
     parent: watchdog_top_level
     url: watchdog/insights
     weight: 4
   - identifier: watchdog_faulty_deployment_detection
-    name: 리포트 스케줄링
+    name: "\b잘못된 배포 탐지"
     parent: watchdog_top_level
     url: watchdog/faulty_deployment_detection/
     weight: 5
@@ -1310,7 +1310,7 @@ menu:
     url: monitors/configuration/
     weight: 1
   - identifier: monitor_types
-    name: 다운타임
+    name: 모니터 유형
     parent: 경고
     url: monitors/types/
     weight: 2
