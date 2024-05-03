@@ -367,12 +367,12 @@ menu:
     weight: 120
   - identifier: 아킥텍처
     name: 아키텍처
-    parent: agent
+    parent: 에이전트
     url: agent/architecture/
     weight: 2
   - identifier: agent_iot
     name: IoT
-    parent: agent
+    parent: 에이전트
     url: agent/iot/
     weight: 3
   - identifier: agent_supported_platforms
@@ -386,22 +386,22 @@ menu:
     url: agent/logs/
     weight: 5
   - identifier: agent_logs_advanced_log_collection
-    name: TCP
+    name: 고급 설정
     parent: agent_logs
     url: agent/logs/advanced_log_collection
     weight: 501
   - identifier: agent_logs_proxy
-    name: 버전
+    name: 프록시
     parent: agent_logs
     url: agent/logs/proxy
     weight: 502
   - identifier: agent_logs_transport
-    name: Agent v7로 업그레이드
+    name: 전송
     parent: agent_logs
     url: agent/logs/log_transport
     weight: 503
   - identifier: agent_configuration
-    name: 구성
+    name: 설정
     parent: 에이전트
     url: agent/configuration
     weight: 6
@@ -411,7 +411,7 @@ menu:
     url: agent/configuration/agent-commands/
     weight: 601
   - identifier: agent_configuration_files
-    name: 문제 해결
+    name: 설정 파일
     parent: agent_configuration
     url: agent/configuration/agent-configuration-files/
     weight: 602
@@ -421,7 +421,7 @@ menu:
     url: agent/configuration/agent-log-files/
     weight: 603
   - identifier: agent_configuration_status_page
-    name: 디버그 모드
+    name: 상태 페이지
     parent: agent_configuration
     url: agent/configuration/agent-status-page/
     weight: 604
@@ -431,17 +431,17 @@ menu:
     url: agent/configuration/network/
     weight: 605
   - identifier: agent_configuration_proxy
-    name: 원격 구성
+    name: 프록시 설정
     parent: agent_configuration
     url: agent/configuration/proxy/
     weight: 606
   - identifier: agent_configuration_fips_compliance
-    name: 이중 전달
+    name: FIPS 규정 준수
     parent: agent_configuration
     url: agent/configuration/agent-fips-proxy/
     weight: 607
   - identifier: agent_configuration_dual_shipping
-    name: 이중 전달
+    name: Dual Shipping
     parent: agent_configuration
     url: agent/configuration/dual-shipping/
     weight: 608
@@ -456,7 +456,7 @@ menu:
     url: agent/remote_config
     weight: 7
   - identifier: agent_fleet_automation
-    name: 플릿 자동화
+    name: 장치 그룹 자동화
     parent: 에이전트
     url: agent/fleet_automation
     weight: 8
@@ -466,17 +466,17 @@ menu:
     url: agent/versions
     weight: 9
   - identifier: agent_versions_upgrade_to_agent_v7
-    name: Agent v7로 업그레이드
+    name: 에이전트 v7로 업그레이드
     parent: agent_versions
     url: agent/versions/upgrade_to_agent_v7/
     weight: 901
   - identifier: agent_versions_upgrade_to_agent_v6
-    name: Agent Flare
+    name: 에이전트 v6으로 업그레이드
     parent: agent_versions
     url: agent/versions/upgrade_to_agent_v6/
     weight: 902
   - identifier: agent_versions_upgrade_between_agent_minor_versions
-    name: 가이드
+    name: 에이전트 부 버전 간 업그레이드
     parent: agent_versions
     url: agent/versions/upgrade_between_agent_minor_versions
     weight: 903
@@ -486,7 +486,7 @@ menu:
     url: agent/troubleshooting/
     weight: 10
   - identifier: agent_troubleshooting_hostname_containers
-    name: 컨테이너
+    name: 컨테이너 호스트 이름 탐지
     parent: agent_troubleshooting
     url: agent/troubleshooting/hostname_containers/
     weight: 1001
@@ -496,17 +496,17 @@ menu:
     url: agent/troubleshooting/debug_mode/
     weight: 1002
   - identifier: agent_troubleshooting_agent_flare
-    name: APM
+    name: 에이전트 Flare
     parent: agent_troubleshooting
     url: agent/troubleshooting/send_a_flare/
     weight: 1003
   - identifier: agent_troubleshooting_agent_check_status
-    name: 로그 수집
+    name: 에이전트 점검 상태
     parent: agent_troubleshooting
     url: agent/troubleshooting/agent_check_status/
     weight: 1004
   - identifier: agent_troubleshooting_ntp
-    name: 로그 수집
+    name: NTP 이슈
     parent: agent_troubleshooting
     url: agent/troubleshooting/ntp/
     weight: 1005
