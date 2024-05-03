@@ -1,5 +1,5 @@
 ---
-title: SDK Quickstart
+title: Quickstart
 ---
 
 Our quickstart docs make use of our Python SDK. For detailed usage, see [SDK Usage].

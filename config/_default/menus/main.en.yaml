@@ -2878,11 +2878,16 @@ menu:
       parent: tracing
       identifier: tracing_llm_obs
       weight: 7
+    - name: Quickstart
+      url: tracing/llm_observability/quickstart/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_quickstart
+      weight: 701
     - name: Tracing LLM Applications
       url: tracing/llm_observability/trace_an_application/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_trace_an_application
-      weight: 701
+      weight: 702
     - name: Spans
       url: tracing/llm_observability/spans/
       parent: tracing_llm_obs_trace_an_application
@@ -2892,17 +2897,12 @@ menu:
       url: tracing/llm_observability/viewing_llm_traces/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_exploring_traces
-      weight: 702
-    - name: SDK Quickstart
-      url: tracing/llm_observability/sdk_quickstart/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_sdk_quickstart
-      weight: 704
+      weight: 703
     - name: SDK Usage
       url: tracing/llm_observability/sdk_usage/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_sdk_usage
-      weight: 705s
+      weight: 704
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
