@@ -4406,7 +4406,7 @@ menu:
     url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
     weight: 303
   - identifier: cspm_custom_frameworks
-    name: Create Custom Frameworks
+    name: 커스텀 프레임워크 생성
     parent: cspm_frameworks_benchmarks
     url: security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks
     weight: 101
