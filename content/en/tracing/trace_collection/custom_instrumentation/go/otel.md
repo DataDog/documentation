@@ -84,7 +84,7 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 
 ## Adding span tags
 
-Add custom tags to your spans allows you to attach additional metadata and context to your traces.
+Add custom tags to your spans to attach additional metadata and context to your traces.
 
 ```go
 // Can only be done after the setup steps, such as initialising the tracer.
@@ -135,7 +135,7 @@ sp.End()
 
 ## Adding spans
 
-Unlike other Datadog tracing libraries, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
+Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
 
 ```go
 // Can only be done after the setup steps.
@@ -218,7 +218,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 ## Trace client and Agent configuration
 
-There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as excluding specific resources from sending traces to Datadog in the event these traces are not wanted in metrics calculated, such as Health Checks.
+There are additional configurations to consider for both the tracing client and Datadog Agent:
+- Context propagation with B3 Headers
+- Exclude specific resources from sending traces to Datadog if you do not want to include these traces in metrics calculated, such as Health Checks.
 
 
 ### Propagating context with headers extraction and injection

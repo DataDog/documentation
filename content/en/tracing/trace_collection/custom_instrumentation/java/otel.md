@@ -46,7 +46,7 @@ public void doSomething() {
 
 ## Adding tags globally to all spans
 
-The `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, or any other tags you would like to see in Datadog.
+The `dd.tags` property allows you to set tags across all generated spans for an application. This is useful for grouping stats for your applications, data centers, or any other tags you would like to see in Datadog.
 
 ```shell
 java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
@@ -205,7 +205,9 @@ public class Example {
 
 ## Trace client and Agent configuration
 
-There are additional configurations possible for both the tracing client and Datadog Agent for context propagation, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
+There are additional configurations to consider for both the tracing client and Datadog Agent:
+- Context propagation with B3 Headers
+- Exclude specific resources from sending traces to Datadog if you do not want to include these traces in metrics calculated, such as Health Checks.
 
 ### Propagating context with headers extraction and injection
 
