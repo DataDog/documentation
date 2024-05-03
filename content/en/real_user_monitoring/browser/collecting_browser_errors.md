@@ -14,7 +14,7 @@ further_reading:
   - link: "/real_user_monitoring/explorer/visualize/"
     tag: "Documentation"
     text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/dashboards/"
+  - link: "/real_user_monitoring/platform/dashboards/"
     tag: "Documentation"
     text: "RUM Dashboards"
 ---
@@ -61,7 +61,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: The [Error Tracking][4] feature processes errors that are sent with the source set to `custom` or `source`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
+**Note**: The [Error Tracking][4] feature processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}

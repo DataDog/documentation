@@ -8,13 +8,13 @@ further_reading:
   - link: "/security/threats/"
     tag: "Documentation"
     text: "Cloud Security Management Threats"
-  - link: "/security/misconfigurations/"
+  - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Cloud Security Management Misconfigurations"
-  - link: "/security/identity_risks/"
+  - link: "/security/cloud_security_management/identity_risks/"
     tag: "Documentation"
     text: "Cloud Security Management Identity Risks"
-  - link: "/security/vulnerabilities/"
+  - link: "/security/cloud_security_management/vulnerabilities/"
     tag: "Documentation"
     text: "Cloud Security Management Vulnerabilities"
   - link: "/agent/remote_config"
@@ -22,7 +22,7 @@ further_reading:
     text: "Remote Configuration"
 ---
 
-The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
+The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], [CSM Vulnerabilities][4] (container images and hosts), and [Agentless Scanning][23] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
 
 ## Getting started
 
@@ -49,9 +49,9 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threats
-[2]: /security/misconfigurations
-[3]: /security/identity_risks
-[4]: /security/vulnerabilities
+[2]: /security/cloud_security_management/misconfigurations/
+[3]: /security/cloud_security_management/identity_risks
+[4]: /security/cloud_security_management/vulnerabilities
 [5]: https://app.datadoghq.com/security/configuration/csm/setup
 [6]: /agent/remote_config
 [7]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
@@ -67,3 +67,4 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 [20]: https://console.aws.amazon.com/lambda/home
 [21]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
 [22]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
+[23]: /security/cloud_security_management/agentless_scanning

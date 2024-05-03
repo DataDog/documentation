@@ -96,6 +96,10 @@ cascade:
     path: /integrations/stormforge_license.md
   aliases:
   - /integrations/stormforge_stormforge_license/
+- _target:
+    path: /integrations/feed.md
+  aliases:
+  - /integrations/rss/
 description: すべてのシステム、アプリケーション、およびサービスからデータを収集
 disable_sidebar: true
 kind: documentation

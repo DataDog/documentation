@@ -19,6 +19,7 @@ The following documentation describes how OpenTelemetry and Datadog conventions 
     {{< nextlink href="/opentelemetry/schema_semantics/semantic_mapping/" >}}Resource Attribute Mapping{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/schema_semantics/metrics_mapping/" >}}Metrics Mapping{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/schema_semantics/host_metadata/" >}}Infrastructure Host Mapping{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/schema_semantics/hostname/" >}}Hostname Mapping{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

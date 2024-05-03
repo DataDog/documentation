@@ -9,7 +9,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: 설명서
   text: 이벤트에 시각화 적용
-- link: /real_user_monitoring/dashboards/
+- link: /real_user_monitoring/platform/dashboards/
   tag: 설명서
   text: RUM 대시보드
 kind: 설명서
@@ -44,7 +44,7 @@ RUM 리소스는 수집 시점에 활성 RUM 보기와 관련된 모든 컨텍�
 | `resource.ssl.duration`        | 숫자 (ns)    | TLS 핸드셰이크에 소요된 시간. 마지막 요청이 HTTPS를 넘지 않으면 이 메트릭이 나타나지 않습니다 (connectEnd - secureConnectionStart).|
 | `resource.dns.duration`        | 숫자 (ns)    | 마지막 요청의 DNS 이름을 확인하는 데 소요된 시간 (domainLookupEnd - domainLookupStart).                                              |
 | `resource.redirect.duration`   | 숫자 (ns)    | 후속 HTTP 요청에 소요된 시간 (redirectEnd - redirectStart).                                                                     |
-| `resource.first_byte.duration` | 숫자 (ns)    | 응답의 첫 번째 바이트가 수신될 때까지 기다린 시간 (response Start - Request Start).                                           |
+| `resource.first_byte.duration` | 숫자 (ns)    | 응답의 첫 번째 바이트가 수신될 때까지 기다린 시간 (responseStart - RequestStart).                                           |
 | `resource.download.duration`   | 숫자 (ns)    | 응답을 다운로드하는 데 소요된 시간 (responseEnd - responseStart).                                                                        |
 
 **참고**: 일부 리소스에 대한 자세한 타이밍을 수집하는 데 문제가 있는 경우 [리소스 타이밍 및 CORS](#resource-timing-and-cors)를 참조하세요.
@@ -80,6 +80,6 @@ RUM은 리소스 URL 호스트 부분에서 리소스 공급자의 이름과 카
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /ko/real_user_monitoring/connect_rum_and_traces
+[2]: /ko/real_user_monitoring/platform/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

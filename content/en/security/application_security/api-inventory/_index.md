@@ -1,6 +1,10 @@
 ---
 title: API Security Inventory
 kind: documentation
+further_reading:
+- link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
+  tag: "Blog"
+  text: "Mitigate the primary risks to API security"
 ---
 
 <div class="alert alert-info">API Security Inventory is in beta.</div>
@@ -31,7 +35,13 @@ The following library versions are compatible with API Security Inventory. [Remo
 |Technology|Minimum version| Support for sensitive data scanning |
 |----------|----------|----------|
 |Python    | v2.1.6   | Requests and responses |
-|Golang    | v1.59.0  | Requests |
+|Java      | v1.31.0  | Requests only |
+|PHP      | v0.98.0  | Requests and responses |
+|.NET Core | v2.42.0  | Requests and responses |
+|.NET Fx   | v2.47.0  | Requests and responses |
+|Ruby      | v1.15.0  | Requests only |
+|Golang    | v1.59.0  | Requests only |
+|Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
 
 ## How it works
 
@@ -102,6 +112,10 @@ This risk is determined by [Software Composition Analysis][3] for the service ho
 ## Performance impact
 
 By default, API Security Inventory evaluates every tenth request (10% sample rate).
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [2]: /security/application_security/threats/

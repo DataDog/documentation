@@ -34,12 +34,22 @@ network_devices:
       - <STRING_1>
       - <STRING_2>
     bind_host: 0.0.0.0
-    users: # limited to only a single v3 user
-      - username: 'user'
-        authKey: 'fakeKey'
-        authProtocol: 'SHA' # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
-        privKey: 'fakePrivKey'
-        privProtocol: 'AES' # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+    users: # SNMP v3
+    - user: "user"
+      authKey: myAuthKey
+      authProtocol: "SHA"
+      privKey: myPrivKey
+      privProtocol: "AES" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+    - user: "user"
+      authKey: myAuthKey
+      authProtocol: "MD5"
+      privKey: myPrivKey
+      privProtocol: "DES"
+    - user: "user2"
+      authKey: myAuthKey2
+      authProtocol: "SHA"
+      privKey: myPrivKey2
+      privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
 ```
 
 ## Device namespaces

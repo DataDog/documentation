@@ -3,6 +3,9 @@ title: Advanced Log Collection Configurations
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
+- link: "/logs/guide/how-to-set-up-only-logs/"
+  tag: "Documentation"
+  text: "Use the Datadog Agent for log collection only"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"

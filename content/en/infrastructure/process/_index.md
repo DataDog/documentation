@@ -32,7 +32,7 @@ Live Processes is included in the Enterprise plan. For all other plans, contact 
 
 ## Introduction
 
-Datadog's Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
+Datadog's Live Processes gives you real-time visibility into the processes running on your infrastructure. Use Live Processes to:
 
 * View all of your running processes in one place
 * Break down the resource consumption on your hosts and containers at the process level
@@ -300,12 +300,12 @@ datadog:
     processAgent:
         enabled: true
         processCollection: true
-    agents:
-        containers:
-            processAgent:
-                env:
-                - name: DD_STRIP_PROCESS_ARGS
-                  value: "true"
+agents:
+    containers:
+        processAgent:
+            env:
+            - name: DD_STRIP_PROCESS_ARGS
+              value: "true"
 ```
 
 {{% /tab %}}
@@ -436,8 +436,6 @@ After a third-party software has been detected, Live Processes helps to analyze 
 You can customize integration views (for example, when aggregating a query for Nginx processes by host) and other custom queries by clicking the *+Save* button at the top of the page. This saves your query, table column selections, and visualization settings. Create saved views for quick access to the processes you care about without addition configuration, and to share process data with your teammates.
 
 ## Processes across the platform
-
-{{< img src="infrastructure/process/process_platform.mp4" alt="Processes across the Platform" video=true >}}
 
 ### Live containers
 

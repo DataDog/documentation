@@ -1,7 +1,8 @@
 ---
 categories:
 - network
-- web
+- metrics
+- oracle
 dependencies: []
 description: ゾーン変更を監視し、ゾーンまたはレコード別に秒単位でクエリを追跡。
 doc_link: https://docs.datadoghq.com/integrations/dyn/
@@ -21,18 +22,24 @@ team: web-integrations
 version: '1.0'
 ---
 
-{{< img src="integrations/dyn/dyn_overview.png" alt="Dyn の概要" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/dyn/dyn_overview.png" alt="Dyn 概要" popup="true">}}
 
 ## 概要
+
+<div class="alert alert-warning">
+Oracle Cloud Infrastructure は 2016 年に Dyn を買収し、Dyn の製品とサービスを Oracle Cloud Infrastructure プラットフォームにインテグレーションしました。サービスの移行については、<a href="https://www.oracle.com/corporate/acquisitions/dyn/technologies/migrate-your-services/" target="_blank">Dyn サービスの Oracle Cloud Infrastructure への移行</a>を参照してください。
+</div>
+
 
 最先端のグラフやイベントを使用してゾーンを監視します。
 
 - ゾーンが更新されたときに行われる変更を追跡します。
 - 最先端のグラフ作成ツールを利用してゾーンまたはレコードタイプ別の QPS を分析します。
 
-## セットアップ
+## 計画と使用
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 Dyn で `datadog` 読み取り専用ユーザーをまだ作成していない場合は、[Dyn にログイン][1]し、以下の手順を実行します。
 
@@ -53,33 +60,33 @@ Datadog 読み取り専用ユーザーを作成し、次の手順を行います
 
 {{< img src="integrations/dyn/dyn_zone.png" alt="Dyn ゾーン" style="width:75%;" popup="true">}}
 
-デフォルトでは、すべてのゾーンの Dyn 「QPS」メトリクスが収集されます。
+デフォルトでは、すべてのゾーンの Dyn `QPS` メトリクスが収集されます。
 
 <div class="alert alert-info">
 Dyn インテグレーションでは、IP ACL を無効にする必要があります。
 </div>
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "dyn" >}}
 
 
 **注**: `dyn.qps` メトリクスは、現在の時刻から約 90 分後に Datadog で使用できるようになります。
 
-### イベント
+### ヘルプ
 
 Dyn インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Dyn インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://manage.dynect.net/login
-[2]: https://app.datadoghq.com/account/settings#integrations/dyn
+[2]: https://app.datadoghq.com/integrations/dyn
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/dyn/dyn_metadata.csv
 [4]: https://docs.datadoghq.com/ja/help/

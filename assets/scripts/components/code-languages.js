@@ -32,7 +32,7 @@ function addCodeBlockVisibilityToggleEventListeners() {
 
 function addCodeTabEventListeners() {
     const codeLinks = document.querySelectorAll('.js-code-example-link');
-    
+
     if (codeLinks.length) {
         codeLinks.forEach((codeLink) => {
             codeLink.addEventListener('click', codeLangTabClickHandler);
@@ -87,7 +87,7 @@ function codeLangTabHoverHandler(event) {
         const { currentSection, baseUrl } = document.documentElement.dataset;
         const updatedHref = `${baseUrl}${currentSection}${codeLang}/?code-lang=${codeLang}`;
         tabElement.href = updatedHref;
-    } 
+    }
 }
 
 function codeLangTabClickHandler(event) {
@@ -194,7 +194,10 @@ function toggleCodeBlocks(activeLang) {
                 // find the first code block in the code wrapper and turn on
                 const firstCodeBlock = codeWrapper.querySelector('.js-code-block');
                 firstCodeBlock.style.display = 'block';
-                codeWrapper.querySelector('[data-code-lang-trigger]').classList.add('active');
+                const dcl = codeWrapper.querySelector('[data-code-lang-trigger]');
+                if(dcl) {
+                  dcl.classList.add('active');
+                }
             }
         });
     }

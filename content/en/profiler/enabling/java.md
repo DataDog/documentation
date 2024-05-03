@@ -52,7 +52,8 @@ Supported operating systems:
 Minimum JDK versions:
 - OpenJDK [1.8.0.262/8u262+][3], 11+ (including builds on top of it: Amazon Corretto, and others)
 - Oracle JDK 11+ (Enabling the JFR may require a commercial license from Oracle. Reach out to your Oracle representative to confirm whether this is part of your license)
-- Azul Zulu 8 (version 1.8.0.212/8u212+), 11+.
+- Azul Zulu 8 (version 1.8.0.212/8u212+), 11+
+- GraalVM 17+ - both, JIT and AOT (native-image) versions
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
@@ -74,29 +75,29 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][4]+ or [6.20.2][5]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][4]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
-{{< tabs >}}
-{{% tab "Wget" %}}
+   {{< tabs >}}
+   {{% tab "Wget" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
-{{% /tab %}}
-{{% tab "cURL" %}}
+   {{% /tab %}}
+   {{% tab "cURL" %}}
    ```shell
    curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
+   {{% /tab %}}
+   {{% tab "Dockerfile" %}}
    ```dockerfile
    ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
    ```
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
-     **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
+   **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
 3. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
    {{< tabs >}}
@@ -131,14 +132,20 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-    **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
+{{% collapse-content title="(Optional) Build and run native-image" level="h4" %}}
 
-    ```shell
-    # Good:
-    java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
-    # Bad:
-    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
-    ```
+Follow the [Tracer Setup Instructions][13] to build your native image with the Datadog Java Profiler.
+
+When the service binary is built, you can use environment variables to enable and configure the Datadog Java Profiler:
+
+   ```shell
+   DD_PROFILING_ENABLED=true DD_PROFILING_DIRECTALLOCATION_ENABLED=true ./my_service
+   ```
+
+**Note**: Only JFR-based profiling is supported for the GraalVM native-image applications. None of the <code>DDPROF</code> related configuration options are effective.
+{{% /collapse-content %}}
+
+   **Note**: The `-javaagent` argument needs to be before `-jar`. This adds it as a JVM option rather than an application argument. For example, `java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags`. For more information, see the [Oracle documentation][6].
 
 4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][7].
 
@@ -265,9 +272,11 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 
 {{< /tabs >}}
 
-### Live-heap profiler engine
+### Live-heap profiler engine (alpha)
 
 _Since: v1.17.0. Requires JDK 11+._
+
+<div class="alert alert-warning">This is an alpha feature, it is not recommended to enable this feature in production environments.</a></div>
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
@@ -344,3 +353,4 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [10]: /getting_started/profiler/
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [12]: /profiler/enabling/supported_versions/
+[13]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup

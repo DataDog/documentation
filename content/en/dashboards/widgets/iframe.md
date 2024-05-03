@@ -11,7 +11,7 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-The iframe widget allows you to embed a portion of any other web page on your dashboard.
+An inline frame (iframe) is a HTML element that loads another HTML page within the document. The iframe widget allows you to embed a portion of any other web page on your dashboard.
 
 ## Setup
 

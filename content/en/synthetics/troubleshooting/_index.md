@@ -159,7 +159,7 @@ This might mean your private location is unable to reach the endpoint your API t
 
 {{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
 
-[101]: /synthetics/private_locations#private-location-total-hardware-requirements
+[101]: /synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/
 [103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [104]: /help/
