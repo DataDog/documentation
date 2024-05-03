@@ -25,6 +25,7 @@ To be processed by Error Tracking a span must have these following attributes:
 **Note**: The stack must have at least two lines and one *meaningful* frame (a frame with a function name and a filename in most languages)
 
 **Service Entry Spans**
+
 Only errors from service entry spans - the uppermost service spans - are processed by Error Tracking. Error Tracking primarily captures unhandled exceptions and this is in place to avoid capturing errors handled internally by the service.
 
 [Example query of spans meeting the criteria][5]
@@ -43,7 +44,7 @@ Error Tracking only processes errors that are sent with the source set to `custo
 [Example query of RUM errors meeting the criteria][6]
 
 
-## Clicking on an issue shows `No issue samples found` or the error page is empty
+## Clicking on an issue shows "No issue samples found" or the error page is empty
 
 All errors are processed but only retained errors are available in the issue panel as an error sample.
 
