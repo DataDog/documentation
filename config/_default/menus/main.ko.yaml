@@ -72,7 +72,7 @@ menu:
     url: getting_started/integrations/aws/
     weight: 601
   - identifier: getting_started_with_terraform
-    name: 테라폼
+    name: Terraform
     parent: getting_started_integrations
     url: getting_started/integrations/terraform/
     weight: 602
@@ -245,7 +245,7 @@ menu:
   - identifier: agent_standard_attributes
     name: 표준 속성
     parent: essentials_heading
-    pre: search
+    pre: 검색
     url: /standard-attributes
     weight: 30000
   - identifier: 가이드
@@ -255,13 +255,13 @@ menu:
     url: all_guides/
     weight: 40000
   - identifier: 에이전트
-    name: Agent
+    name: 에이전트
     parent: essentials_heading
     pre: agent-fill
     url: agent/
     weight: 50000
   - identifier: basic_agent_usage
-    name: ' 기본 에이전트 사용'
+    name: ' 기본 에이전트 사용량'
     parent: 에이전트
     url: agent/basic_agent_usage/
     weight: 1
@@ -276,7 +276,7 @@ menu:
     url: agent/basic_agent_usage/amazonlinux/
     weight: 102
   - identifier: basic_agent_usage_alma_linux
-    name: CentOS
+    name: Alma Linux
     parent: basic_agent_usage
     url: agent/basic_agent_usage/centos/
     weight: 103
@@ -331,7 +331,7 @@ menu:
     url: agent/basic_agent_usage/redhat/
     weight: 113
   - identifier: basic_agent_usage_rockylinux
-    name: SUSE
+    name: Rocky Linux
     parent: basic_agent_usage
     url: agent/basic_agent_usage/centos/
     weight: 114
@@ -361,11 +361,11 @@ menu:
     url: agent/basic_agent_usage/windows/
     weight: 119
   - identifier: basic_agent_usage_source
-    name: 로그 수집
+    name: 소스로부터
     parent: basic_agent_usage
     url: agent/basic_agent_usage/source/
     weight: 120
-  - identifier: architecture
+  - identifier: 아킥텍처
     name: 아키텍처
     parent: agent
     url: agent/architecture/
