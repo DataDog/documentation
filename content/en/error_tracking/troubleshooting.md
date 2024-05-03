@@ -9,12 +9,9 @@ If you experience unexpected behavior with Datadog Error Tracking, there are a f
 
 ### Logs
 
-Make sure that the error message has the [required attributes][2] and that Error Tracking for Logs is activated.
+Make sure that the error message has the [required attributes][2] and that Error Tracking for Logs is [activated][7].
 
 [Example query][3]
-
-FIXME: add link for ET Logs pricing activated. Check Critical / Emergency
-
 
 
 ### APM
@@ -22,8 +19,6 @@ FIXME: add link for ET Logs pricing activated. Check Critical / Emergency
 Make sure that the error message has the [required attributes][4] and the error is located in a service entry span. 
 
 [Example query][5]
-
-FIXME: is there an attribute for service entry span?
 
 ### RUM
 
@@ -37,5 +32,6 @@ Error Tracking only processes errors that are sent with the source set to `custo
 [2]: https://docs.datadoghq.com/logs/error_tracking/backend/?tab=serilog#attributes-for-error-tracking
 [3]: https://app.datadoghq.com/logs?query=status%3A%28emergency%20OR%20alert%20OR%20critical%20OR%20error%29%20AND%20%28%40error.stack%3A%2A%20OR%20%40error.kind%3A%2A%29%20
 [4]: /tracing/error_tracking/#use-span-tags-to-track-error-spans
-[5]: https://app.datadoghq.com/apm/traces?query=%40_top_level%3A1%20%40error.stack%3A%2A%20AND%20%40error.message%3A%2A%20AND%20error.type%3A%2A 
+[5]: https://app.datadoghq.com/apm/traces?query=%40_top_level%3A1%20%40error.stack%3A%2A%20AND%20%40error.message%3A%2A%20AND%20error.type%3A%2A%20AND%20%40_top_level%3A1%20
 [6]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aerror%20%40error.stack%3A%2A
+[7]: https://app.datadoghq.com/error-tracking/settings
