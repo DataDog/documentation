@@ -38,12 +38,12 @@ To enable live container collection, see the [containers][3] documentation. It p
 
 Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][8] (CSM) vulnerabilities.
 
-#### Enable Container Image collection
+#### Enable Container Image Collection
 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
 
-Image collection is enabled by default with Datadog Operator version `>= 1.3.0`. If you are using a previous version, Datadog recommends you to update it to 1.3.0 or a newer one. </br>
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`. If you are using an older version, Datadog recommends you to update it to `1.3.0` or a newer one. </br>
 
 
 {{% /tab %}}
@@ -122,6 +122,8 @@ spec:
     # ...
     sbom:
       enabled: true
+      containerImage:
+        enabled: true
 ```
 
 {{% /tab %}}
