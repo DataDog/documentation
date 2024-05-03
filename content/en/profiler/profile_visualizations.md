@@ -164,7 +164,8 @@ The thread ID is shown as `<unique-id> [#OS-thread-id]`.
 {{< programming-lang lang="php" >}}
 See [prerequisites][1] to learn how to enable this feature for PHP.
 
-There is one lane for the PHP **thread**. Fibers that run in this **thread** are represented in separate lanes that are grouped together.
+There is one lane for each PHP **thread** (in PHP NTS, this is only one lane as there is only one thread per process).
+Fibers that run in this **thread** are represented in the same lane.
 
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 
