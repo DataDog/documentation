@@ -5,7 +5,7 @@ kind: documentation
 
 If you experience unexpected behavior with Datadog Error Tracking, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries, mobile and web SDKs you use, as each release contains improvements and fixes.
 
-## Errors are not converted into issues.
+##  Errors are not found in Error Tracking
 
 ### Logs
 
@@ -34,8 +34,47 @@ Only errors from service entry spans - the uppermost service spans - are process
 
 Some tracers provide a feature to access the root span and bubble up the error from child to root.
 
-##### Java
-[Java Custom Instrumentation using Datadog API][8]
+{{< tabs >}}
+{{% tab "Java" %}}
+
+Initialize Amplitude's SDK and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing Amplitude's SDK, see Amplitude's [JavaScript SDK documentation][1].
+
+```java
+final Span span = GlobalTracer.get().activeSpan();
+if (span != null && (span instanceof MutableSpan)) {
+    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+    // do stuff with root span
+    localRootSpan.setTag("root", "true");
+}
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+context = tracer.get_call_context() 
+root_span = context.get_current_root_span() 
+root_span.set_tag('exampletag', 'blahblah') 
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+current_root_span = Datadog.tracer.active_root_span
+current_root_span.set_tag('my_tag', 'my_value') unless current_root_span.nil?
+```
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
+
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### RUM
 
@@ -44,7 +83,7 @@ Error Tracking only processes errors that are sent with the source set to `custo
 [Example query of RUM errors meeting the criteria][6]
 
 
-## Clicking on an issue shows "No issue samples found" or the error page is empty
+## No issue samples found for an Issue
 
 All errors are processed but only retained errors are available in the issue panel as an error sample.
 
