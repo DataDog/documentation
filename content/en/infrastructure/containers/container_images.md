@@ -116,7 +116,7 @@ container_image:
 
 #### Enable SBOM collection
 
-The following instructions enable the [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [CSM Pro and Enterprise plans][10].
+The following instructions enable the [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [CSM Pro and Enterprise plans][10].
 
 **Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
 
