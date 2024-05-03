@@ -32,7 +32,7 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ### Build an app from a blueprint
 
-Blueprints are helpful starter apps. They cover common use cases and come loaded with demo data that you can use to familiarize yourself with the app.
+Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
 1. From [App Builder][1], click the [Blueprints][2] tab.
 1. Find the blueprint that you want to use and click **Preview**.
