@@ -154,7 +154,7 @@ You can configure or remove this quota at any time when editing the Index:
 - (Optional) Set a custom reset time; by default, index daily quotas reset automatically at [2:00pm UTC][19]
 - (Optional) Set a warning threshold as a percentage of the daily quota (minimum 50%)
 
-Note that changes to daily quotas and warning thresholds take effect immediately.
+**Note**: Changes to daily quotas and warning thresholds take effect immediately.
 
 {{< img src="logs/indexes/daily_quota_config.png" alt="index details" style="width:70%;">}}
 
