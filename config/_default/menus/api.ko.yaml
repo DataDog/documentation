@@ -2844,7 +2844,7 @@ menu:
     parent: snapshots
     url: '#take-graph-snapshots'
   - generated: true
-    identifier: synthetics
+    identifier: 신서틱(Synthetic)
     name: 신서틱(Synthetic)
     url: /api/latest/synthetics/
   - generated: true
@@ -2857,7 +2857,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#save-new-value-for-on-demand-concurrency-cap'
   - generated: true
     identifier: synthetics-get-the-on-demand-concurrency-cap
@@ -2869,7 +2869,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-the-on-demand-concurrency-cap'
   - generated: true
     identifier: synthetics-edit-a-global-variable
@@ -2881,7 +2881,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#edit-a-global-variable'
   - generated: true
     identifier: synthetics-get-a-global-variable
@@ -2893,7 +2893,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-a-global-variable'
   - generated: true
     identifier: synthetics-delete-a-global-variable
@@ -2905,7 +2905,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#delete-a-global-variable'
   - generated: true
     identifier: synthetics-create-a-global-variable
@@ -2917,7 +2917,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#create-a-global-variable'
   - generated: true
     identifier: synthetics-get-all-global-variables
@@ -2929,7 +2929,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-all-global-variables'
   - generated: true
     identifier: synthetics-pause-or-start-a-test
@@ -2941,7 +2941,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#pause-or-start-a-test'
   - generated: true
     identifier: synthetics-get-an-api-test-result
@@ -2953,7 +2953,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-an-api-test-result'
   - generated: true
     identifier: synthetics-get-an-api-tests-latest-results-summaries
@@ -2965,7 +2965,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-an-api-tests-latest-results-summaries'
   - generated: true
     identifier: synthetics-edit-a-test
@@ -2977,7 +2977,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#edit-a-test'
   - generated: true
     identifier: synthetics-patch-a-synthetic-test
@@ -2989,7 +2989,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#patch-a-synthetic-test'
   - generated: true
     identifier: synthetics-get-a-test-configuration
@@ -3001,7 +3001,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-a-test-configuration'
   - generated: true
     identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -3013,7 +3013,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#trigger-tests-from-ci/cd-pipelines'
   - generated: true
     identifier: synthetics-trigger-synthetic-tests
@@ -3025,7 +3025,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#trigger-synthetic-tests'
   - generated: true
     identifier: synthetics-delete-tests
@@ -3037,7 +3037,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#delete-tests'
   - generated: true
     identifier: synthetics-get-a-browser-test-result
@@ -3049,7 +3049,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-a-browser-test-result'
   - generated: true
     identifier: synthetics-get-a-browser-tests-latest-results-summaries
@@ -3061,7 +3061,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-a-browser-tests-latest-results-summaries'
   - generated: true
     identifier: synthetics-edit-a-browser-test
@@ -3073,7 +3073,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#edit-a-browser-test'
   - generated: true
     identifier: synthetics-get-a-browser-test
@@ -3085,7 +3085,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-a-browser-test'
   - generated: true
     identifier: synthetics-create-a-browser-test
@@ -3097,7 +3097,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#create-a-browser-test'
   - generated: true
     identifier: synthetics-edit-an-api-test
@@ -3109,7 +3109,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#edit-an-api-test'
   - generated: true
     identifier: synthetics-get-an-api-test
@@ -3121,7 +3121,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-an-api-test'
   - generated: true
     identifier: synthetics-create-an-api-test
@@ -3133,7 +3133,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#create-an-api-test'
   - generated: true
     identifier: synthetics-create-a-test
@@ -3145,7 +3145,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#create-a-test'
   - generated: true
     identifier: synthetics-get-the-list-of-all-synthetic-tests
@@ -3157,7 +3157,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-the-list-of-all-synthetic-tests'
   - generated: true
     identifier: synthetics-get-the-default-locations
@@ -3169,7 +3169,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-the-default-locations'
   - generated: true
     identifier: synthetics-edit-a-private-location
@@ -3181,7 +3181,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#edit-a-private-location'
   - generated: true
     identifier: synthetics-get-a-private-location
@@ -3193,7 +3193,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#get-a-private-location'
   - generated: true
     identifier: synthetics-delete-a-private-location
@@ -3205,7 +3205,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#delete-a-private-location'
   - generated: true
     identifier: synthetics-create-a-private-location
@@ -3217,7 +3217,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: synthetics
+    parent: 신서틱(Synthetic)
     url: '#create-a-private-location'
   - generated: true
     identifier: synthetics-get-all-locations-public-and-private
