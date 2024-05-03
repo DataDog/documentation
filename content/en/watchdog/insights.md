@@ -23,7 +23,7 @@ Investigating an incident requires trial and error. Drawing from their experienc
 
 Throughout most of Datadog, Watchdog returns two types of insights:
 
-- **Anomalies**: All the pre-calculated [Watchdog alerts][1] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][2].
+- **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
 - **Outliers**: Calculated on the product data matching the active query, outliers surface tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
@@ -32,18 +32,18 @@ Throughout most of Datadog, Watchdog returns two types of insights:
 
 The Watchdog Insights carousel sits near the top of the following product pages:
 
-- [Log explorer][3]
+- [Log explorer][1]
 - APM:
-    - [Trace Explorer][4]
-    - [Service Page][5]
-    - [Resource Page][6]
-    - [Database Explorer][7]
-    - [Profile Explorer][8]
+    - [Trace Explorer][2]
+    - [Service Page][3]
+    - [Resource Page][4]
+    - [Database Explorer][5]
+    - [Profile Explorer][6]
 - Infrastructure:
-    - [Processes Explorer][9]
-    - [Serverless Explorer][10]
-    - [Kubernetes Explorer][11]
-- [Real User Monitoring (RUM) Explorer][12]
+    - [Processes Explorer][7]
+    - [Serverless Explorer][8]
+    - [Kubernetes Explorer][9]
+- [Real User Monitoring (RUM) Explorer][10]
 - [Error Tracking issue side panel][13]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
@@ -100,9 +100,9 @@ In the full side panel view, you can see:
 {{% tab "APM" %}}
 
 APM outliers are available on all APM pages where the Watchdog Insights carousel is available:
- - [Trace Explorer][1]
- - [Service Page][2]
- - [Resource Page][3]
+ - [Trace Explorer](/tracing/trace_explorer/?tab=listview)
+ - [Service Page](/tracing/services/service_page/)
+ - [Resource Page](/tracing/services/resource_page/)
 
 ### Error outliers
 
@@ -143,9 +143,6 @@ In the full side panel, you can see a latency distribution graph for the tag and
 
 {{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
-[1]: /tracing/trace_explorer/?tab=listview
-[2]: /tracing/services/service_page/
-[3]: /tracing/services/resource_page/
 {{% /tab %}}
 {{% tab "Profiling" %}}
 
@@ -161,7 +158,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to resolve the lock contention:
 
-{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to address the Lock Contention outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Contention outlier" style="width:100%;">}}
 
 ### Garbage collection outlier
 
@@ -174,7 +171,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to better configure garbage collection to free up some CPU time:
 
-{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to address the Garbage Collection outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to adress the Garbage Collection outlier" style="width:100%;">}}
 
 ### Regex compilation outlier
 
@@ -187,7 +184,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to improve regex compilation time, as well as examples of functions within your code that could be improved:
 
-{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to address the Regex Compilation outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to adress the Regex Compilation outlier" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "Databases" %}}
@@ -214,7 +211,7 @@ An overlay is then set on the databases, with pink pills highlighting the differ
 
 ### Error outlier
 
-Error outliers display fields such as [faceted tags or attributes][1] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root causes of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
+Error outliers display fields such as [faceted tags or attributes][3] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root causes of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
 
 In the banner card view, you can see:
 
@@ -228,9 +225,9 @@ In the full side panel, you can see a timeseries graph about the total number of
 
 ### Latency outlier
 
-Latency outliers display fields such as [faceted tags or attributes][2] that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of real users.
+Latency outliers display fields such as [faceted tags or attributes][1] that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of real users.
 
-Latency outliers are computed for [Core Web Vitals][3] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][1]. For more information, see [Monitoring Page Performance][3].
+Latency outliers are computed for [Core Web Vitals][2] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][3]. For more information, see [Monitoring Page Performance][2].
 
 In the banner card view, you can see:
 
@@ -241,9 +238,9 @@ In the full side panel, you can see a timeseries graph about the performance met
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
-[1]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
-[2]: /real_user_monitoring/explorer/search/#facets
-[3]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[1]: /real_user_monitoring/explorer/search/#facets
+[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
@@ -265,6 +262,7 @@ An overlay is then set on the function, with pink pills highlighting the differe
 
 {{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog insight overlay on the function to highlight what is happening" style="width:100%;">}}
 
+[1]: /serverless/guide/serverless_warnings/#errors
 {{% /tab %}}
 {{% tab "Processes" %}}
 
@@ -285,16 +283,16 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /watchdog/#overview
-[2]: https://app.datadoghq.com/watchdog
-[3]: https://app.datadoghq.com/logs
-[4]: https://app.datadoghq.com/apm/traces
-[5]: /tracing/services/service_page/
-[6]: /tracing/services/resource_page/
-[7]: https://app.datadoghq.com/databases/list
-[8]: https://app.datadoghq.com/profiling/search
-[9]: https://app.datadoghq.com/process
-[10]: https://app.datadoghq.com/functions
-[11]: https://app.datadoghq.com/orchestration/overview/pod
-[12]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
+[1]: https://app.datadoghq.com/logs
+[2]: https://app.datadoghq.com/apm/traces
+[3]: /tracing/services/service_page/
+[4]: /tracing/services/resource_page/
+[5]: https://app.datadoghq.com/databases/list
+[6]: https://app.datadoghq.com/profiling/search
+[7]: https://app.datadoghq.com/process
+[8]: https://app.datadoghq.com/functions
+[9]: https://app.datadoghq.com/orchestration/overview/pod
+[10]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
+[11]: /watchdog/#overview
+[12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
