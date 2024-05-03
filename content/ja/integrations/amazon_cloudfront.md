@@ -13,7 +13,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_cloudfront/
 draft: false
 git_integration_title: amazon_cloudfront
 has_logo: true
-integration_id: amazon-cloudfront
+integration_id: ''
 integration_title: Amazon CloudFront
 integration_version: ''
 is_public: true

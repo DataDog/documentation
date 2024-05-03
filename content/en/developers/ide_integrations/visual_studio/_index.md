@@ -12,6 +12,9 @@ further_reading:
 - link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
   tag: "External Site"
   text: "Visual Studio Marketplace"  
+- link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
+  tag: "Blog"
+  text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 ---
 
 ## Overview
@@ -31,6 +34,14 @@ Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], [
 Analyze and improve the performance of your applications with real-time profiling metrics for CPU, Memory, I/O, and others.
 
 {{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Code Insights view">}}
+
+### Logs navigation
+
+You can navigate to the [Log Explorer][18] on the Datadog platform directly from your C# source files. Look for the clickable icon preceding message strings from log statements within your source code:
+
+{{< img src="/developers/ide_integrations/visual_studio/logs-navigation.png" alt="A source file showing log lines with clickable icons." style="width:100%;" >}}
+
+Clicking the icon opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
 
 ### Open code in Visual Studio from Datadog
 
@@ -79,3 +90,4 @@ Report a bug, request a new feature, or ask for help on the [Discussion Forum][1
 [15]: https://github.com/DataDog/datadog-for-visual-studio/discussions
 [16]: https://github.com/DataDog/datadog-for-visual-studio/issues
 [17]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
+[18]: /logs/explorer/

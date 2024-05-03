@@ -12,7 +12,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_iot/
 draft: false
 git_integration_title: amazon_iot
 has_logo: true
-integration_id: amazon-iot
+integration_id: ''
 integration_title: AWS IoT Core
 integration_version: ''
 is_public: true

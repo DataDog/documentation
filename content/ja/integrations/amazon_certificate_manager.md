@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_certificate_manager/
 draft: false
 git_integration_title: amazon_certificate_manager
 has_logo: true
-integration_id: amazon-certificate-manager
+integration_id: ''
 integration_title: AWS Certificate Manager
 integration_version: ''
 is_public: true

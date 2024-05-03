@@ -6,6 +6,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/dd-101-sre
   tag: Centro de aprendizaje
   text: 'Introducción a Datadog: ingeniero de confiabilidad de sitios'
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participa en una sesión interactiva para construir una base sólida de Datadog
 - link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
   tag: Blog
   text: Introducción al menú de navegación rápida de Datadog
@@ -22,7 +25,7 @@ Esta página ofrece información general de alto nivel sobre las funciones dispo
 
 La experiencia de navegación en el sitio de Datadog varía en función del ancho que tenga tu navegador. Hay hasta tres tipos de navegación disponibles y, para cambiar de uno a otro, es necesario que ajustes el ancho de tu navegador.
 
-## Integrations (Integraciones)
+## Integraciones
 
 {{< img src="getting_started/integrations.png" alt="Integrations (Integraciones)" >}}
 
@@ -31,7 +34,7 @@ La experiencia de navegación en el sitio de Datadog varía en función del anch
 - El Agent es de [código abierto][4].
 - Una vez que se hayan configurado las integraciones, Datadog tratará todos los datos de la misma manera, independientemente de si están en un centro de datos o en un servicio en línea.
 
-## Gestión de logs
+## Log Management
 
 {{< img src="getting_started/logs.png" alt="Logs" >}}
 
@@ -41,7 +44,7 @@ La herramienta [Log Management de Datadog][5] te permite enviar y procesar todos
 
 {{< img src="getting_started/apm.png" alt="Dashboard de APM" >}}
 
-La herramienta [Application Performance Monitoring de Datadog][6] (APM o rastreo) te ofrece información pormenorizada sobre el rendimiento de tu aplicación —desde dashboards generados automáticamente para monitorizar métricas clave, como el volumen o la latencia de las solicitudes, hasta trazas (traces) detalladas de solicitudes individuales— y sobre la monitorización de tus logs e infraestructura. Cuando se realiza una solicitud en una aplicación, Datadog puede detectar las trazas en un sistema distribuido y mostrarte datos sistemáticos sobre lo que se está haciendo exactamente con esa solicitud.
+La herramienta [Application Performance Monitoring de Datadog][6] (APM o rastreo) te ofrece información pormenorizada sobre el rendimiento de tu aplicación, desde dashboards generados automáticamente para monitorizar métricas clave, como el volumen o la latencia de las solicitudes, hasta trazas detalladas de solicitudes individuales, junto a la monitorización de tus logs e infraestructura. Cuando se realiza una solicitud a una aplicación, Datadog puede detectar las trazas en un sistema distribuido y mostrarte datos sistemáticos sobre lo que se está haciendo exactamente con esa solicitud.
 
 ## Infrastructure (Infraestructura)
 
@@ -49,9 +52,9 @@ La herramienta [Application Performance Monitoring de Datadog][6] (APM o rastreo
 
 - La [lista de la infraestructura][7] muestra todas las máquinas.
 - Puedes ver las etiquetas (tags) que tiene cada máquina. El etiquetado te permite indicar qué máquinas tienen un objetivo concreto.
-- Datadog trata de clasificar tus servidores automáticamente. Si se etiqueta una máquina nueva, verás de inmediato que las estadísticas de esa máquina variarán en función de cómo se haya configurado previamente la etiqueta en cuestión. [Más información sobre el etiquetado][8].
+- Datadog trata de clasificar tus servidores automáticamente. Si se etiqueta una máquina nueva, verás de inmediato que las estadísticas de esa máquina variarán en función de cómo se haya configurado previamente esa etiqueta. [Más información sobre el etiquetado][8].
 
-## Mapa del host
+## Host map (Mapa del host)
 
 {{< img src="getting_started/hostmap-overview.png" alt="Información general del mapa del host" >}}
 
@@ -66,7 +69,7 @@ Para más información, consulta [Mapa del host][9].
 
 ## Events (Eventos)
 
-{{< img src="events/explorer/events-overview.png" alt="Events Explorer (Navegador de eventos)" style="width:100%;" >}}
+{{< img src="service_management/eventos/explorer/eventos-overview.png" alt="Eventos Explorer" style="width:100%;" >}}
 
 El [Event Explorer][10] (Navegador de eventos) muestra los últimos eventos generados por tus servicios e infraestructura.
 
@@ -96,7 +99,7 @@ Los [dashboards][12] contienen gráficos con métricas de rendimiento en tiempo 
 - Vistas disponibles por zona, host o uso total.
 - Datadog expone un editor JSON para el gráfico, con el que se pueden someter las métricas a [cálculos aritméticos][14] y [funciones][15].
 - Puedes compartir un snapshot del gráfico que aparezca en el flujo (stream).
-- Los gráficos pueden estar integrados en un iframe. Si se da el caso, puedes permitir que un tercero acceda a un gráfico en directo sin necesidad de darle acceso a tus datos ni a ningún otro tipo de información.
+- Los gráficos pueden estar integrados en un iframe. Si se da el caso, puedes permitir que un tercero acceda a un gráfico en tiempo real sin necesidad de darle acceso a tus datos ni a ningún otro tipo de información.
 
 ## Monitores
 
@@ -155,8 +158,8 @@ La [aplicación móvil de Datadog][23], disponible en el [App Store de Apple][24
 [7]: /es/infrastructure/
 [8]: /es/getting_started/tagging/
 [9]: /es/infrastructure/hostmap/
-[10]: /es/events/
-[11]: /es/events/explorer/#event-analytics
+[10]: /es/service_management/events/
+[11]: /es/service_management/events/explorer/analytics
 [12]: /es/dashboards/
 [13]: /es/dashboards/#screenboards
 [14]: /es/dashboards/functions/arithmetic/
@@ -164,10 +167,10 @@ La [aplicación móvil de Datadog][23], disponible en el [App Store de Apple][24
 [16]: /es/monitors/
 [17]: /es/network_monitoring/performance/
 [18]: /es/real_user_monitoring/
-[19]: /es/real_user_monitoring/session_replay/
+[19]: /es/real_user_monitoring/session_replay/browser/
 [20]: /es/serverless
 [21]: /es/security/cloud_siem/
 [22]: /es/synthetics/
-[23]: /es/mobile/
+[23]: /es/service_management/mobile/
 [24]: https://apps.apple.com/app/datadog/id1391380318
 [25]: https://play.google.com/store/apps/details?id=com.datadog.app

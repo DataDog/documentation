@@ -11,4 +11,4 @@ Select your infrastructure type for details on how to enable CSM Pro on the Agen
 {{< partial name="csm/csm-pro-agent-tiles.html" >}}
 
 [1]: https://www.cisa.gov/sbom
-[2]: /security/vulnerabilities
+[2]: /security/cloud_security_management/vulnerabilities

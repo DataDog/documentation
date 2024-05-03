@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/"
     tag: "Blog"
     text: "Best practices for CI/CD monitoring"
+  - link: "https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/"
+    tag: "Blog"
+    text: "Best practices for monitoring software testing in CI/CD"
 cascade:
     algolia:
         rank: 70

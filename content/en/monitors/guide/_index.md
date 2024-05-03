@@ -14,7 +14,6 @@ cascade:
     {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}Troubleshooting monitor alerts{{< /nextlink >}}
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template variable evaluation{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Monitoring ranges{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/suppress-alert-with-downtimes" >}}Suppress alerts with downtimes{{< /nextlink >}}
     {{< nextlink href="/monitors/guide/scoping_downtimes" >}}Scoping Downtimes{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}Alert on no change in value{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}Create cluster alerts for metric monitor{{< /nextlink >}}
@@ -41,6 +40,7 @@ cascade:
     {{< nextlink href="monitors/guide/change-alert" >}}Change Alert monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/history_and_evaluation_graphs" >}}Monitor History and Evaluation Graph{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}

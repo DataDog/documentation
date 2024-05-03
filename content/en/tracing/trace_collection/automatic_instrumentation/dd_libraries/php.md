@@ -70,6 +70,10 @@ php datadog-setup.php --php-bin=all --enable-appsec
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
+<div class="alert alert-danger">
+<strong>Note</strong>: Windows only supports APM. Do not use the <code>--enable-appsec</code> and <code>--enable-profiling</code> flags when tracing PHP applications on Windows.
+</div>
+
 This command installs the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted, the installer runs in interactive mode and asks the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
 
 Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. To see the generated traces, go to the [APM Traces page][4].

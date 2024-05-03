@@ -14,7 +14,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
 draft: false
 git_integration_title: amazon_elasticache
 has_logo: true
-integration_id: amazon-elasticache
+integration_id: ''
 integration_title: Amazon ElastiCache
 integration_version: ''
 is_public: true

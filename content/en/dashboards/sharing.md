@@ -122,7 +122,7 @@ Datadog has a [dedicated API][8] allowing you to interact with your shared graph
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/#global-time-selector
+[1]: /dashboards/widgets/#global-time-selector
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: /dashboards/#timeboards
 [4]: /dashboards/#screenboards

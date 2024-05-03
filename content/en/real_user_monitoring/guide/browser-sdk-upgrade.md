@@ -330,10 +330,10 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [17]: /api/latest/rum/
 [18]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[20]: /real_user_monitoring/session_replay/privacy_options/#configuration
+[20]: /real_user_monitoring/session_replay/browser/privacy_options/#configuration
 [21]: /real_user_monitoring/guide/sampling-browser-plans/#setup
-[22]: /real_user_monitoring/session_replay/#usage
+[22]: /real_user_monitoring/session_replay/browser/#usage
 [23]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
 [26]: /real_user_monitoring/browser/
-[25]: /real_user_monitoring/connect_rum_and_traces#opentelemetry-support
+[25]: /real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support

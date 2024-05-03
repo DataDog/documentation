@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_textract/
 draft: false
 git_integration_title: amazon_textract
 has_logo: true
-integration_id: amazon-textract
+integration_id: ''
 integration_title: Amazon Textract
 integration_version: ''
 is_public: true

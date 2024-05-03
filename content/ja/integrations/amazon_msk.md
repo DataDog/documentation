@@ -13,7 +13,7 @@ further_reading:
   text: Datadog による Amazon Managed Streaming for Apache Kafka の監視
 git_integration_title: amazon_msk
 has_logo: true
-integration_id: amazon-msk
+integration_id: ''
 integration_title: Amazon Managed Streaming for Apache Kafka (MSK)
 integration_version: ''
 is_public: true

@@ -179,7 +179,7 @@ Previous versions logged to multiple files (`collector.log`, `forwarder.log`, `d
 
 ## Interface
 
-The Agent v6 command line interface is sub-command based. To see the list of available sub-commands, run:
+The Agent v6 command-line interface is sub-command based. To see the list of available sub-commands, run:
 ```shell
 <AGENT_BINARY> --help
 ```

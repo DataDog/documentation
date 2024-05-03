@@ -16,12 +16,16 @@ further_reading:
   text: "Best practices for maintaining end-to-end tests"
 ---
 
-{{< site-region region="us3,us5,gov,eu,ap1" >}}
+{{< site-region region="us,us5,eu" >}}
+<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
+{{< /site-region >}}
+
+{{< site-region region="us3,ap1" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">Mobile Application Testing is in limited availability and is only supported for the Datadog US1 site.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -30,7 +34,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 Mobile app tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][1].
 
-You can create mobile app tests in Datadog by navigating to [**UX Monitoring** > **New Test**][12] and selecting **Mobile Application Test**.
+You can create mobile app tests in Datadog by navigating to [**Digital Experience** > **New Test**][12] and selecting **Mobile Application Test**.
 
 {{< img src="mobile_app_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
 

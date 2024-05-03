@@ -1,6 +1,8 @@
 {{- if  not (.Get "key") -}}{{ errorf "region-param shortcode error: Missing value for param 'key': %s" .Position }}{{- end -}}
 {{- if eq (.Get "code") "true" -}}
     <code class="js-region-param region-param" data-region-param="{{ .Get "key" }}"></code>
+{{- else if eq (.Get "link") "true" -}}
+    <a class="js-region-param region-param" data-region-param="{{ .Get "key" }}" href="">{{ .Get "text" }}</a>
 {{- else -}}
     <span class="js-region-param region-param" data-region-param="{{ .Get "key" }}"></span>
 {{- end -}}

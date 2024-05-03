@@ -17,15 +17,15 @@ Quality Gates is in public beta.
 
 ## Overview
 
-The [Quality Gate Rules page][1] is useful for developers who want to keep an eye on the quality gates for their build pipelines.
+The [**Quality Gate Rules** page][1] is useful for developers who want to keep an eye on the quality gates for their build pipelines.
 
 {{< img src="quality_gates/search.png" alt="Quality Gate rules in Datadog displaying the rule name, evaluation, scope, blocking status, last modified date, and the creator avatar" style="width:100%" >}}
 
 ## Search for rules
 
-To see your quality gate rules, navigate to [**CI** > **Quality Gate Rules**][1].
+To see your quality gate rules, navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Rules**][1].
 
-The [Quality Gate Rules page][1] shows all of the rules defined by the organization. Use this page to create a rule, edit an existing rule, or click on a rule to investigate its past executions.
+The [**Quality Gate Rules** page][1] shows all of the rules defined by the organization. Use this page to create a rule, edit an existing rule, or click on a rule to investigate its past executions.
 
 You can filter the page by rule name to see the rules you're most concerned with. Click on a rule to investigate details that show, for example, what commit might have introduced a performance regression or build error. 
 

@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_nat_gateway/
 draft: false
 git_integration_title: amazon_nat_gateway
 has_logo: true
-integration_id: amazon-nat-gateway
+integration_id: ''
 integration_title: AWS NAT Gateway
 integration_version: ''
 is_public: true

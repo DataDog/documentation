@@ -23,6 +23,7 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10340
     source_type_name: Ably
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://ably.com
   name: Ably

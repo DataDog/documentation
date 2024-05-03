@@ -55,4 +55,4 @@ The **Browser RUM & Session Replay** Plan unlocks session recordings (replays).
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/#how-do-you-disable-session-replay
+[1]: /real_user_monitoring/session_replay/browser#disable-session-replay

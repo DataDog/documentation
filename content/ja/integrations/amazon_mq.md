@@ -15,7 +15,7 @@ further_reading:
   text: Datadog で Amazon MQ のメトリクスを監視
 git_integration_title: amazon_mq
 has_logo: true
-integration_id: amazon-mq
+integration_id: ''
 integration_title: Amazon MQ
 integration_version: ''
 is_public: true
