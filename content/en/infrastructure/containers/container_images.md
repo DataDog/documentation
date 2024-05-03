@@ -38,7 +38,7 @@ To enable live container collection, see the [containers][3] documentation. It p
 
 Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][8] (CSM) vulnerabilities.
 
-#### Enable Container Image Collection
+#### Enable Container Image collection
 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
