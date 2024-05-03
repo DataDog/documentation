@@ -29,7 +29,9 @@ Cloud SIEM Content Packs provide out-of-the box content for key security integra
 
 ### AWS CloudTrail
 
-Monitor security and compliance levels of your AWS operations. The Content Pack includes:
+Monitor security and compliance levels of your AWS operations.
+
+The Content Pack includes:
 - Detection Rules
 - Dashboard
 - AWS Investigator
@@ -38,7 +40,9 @@ Monitor security and compliance levels of your AWS operations. The Content Pack 
 
 ### GCP Audit Logs
 
-Protect your GCP environment by monitoring audit logs. The Content Pack includes:
+Protect your GCP environment by monitoring audit logs.
+
+The Content Pack includes:
 - Detection Rules
 - Dashboard
 - GCP Investigator
@@ -46,14 +50,18 @@ Protect your GCP environment by monitoring audit logs. The Content Pack includes
 
 ### Azure Security
 
-Protect your Azure environment ny tracking attacker activity. The Content Pack includes:
+Protect your Azure environment ny tracking attacker activity.
+
+The Content Pack includes:
 - Detection Rules
 - Dashboard
 - Azure Investigator
 - Configuration guide
 
 ### Kubernetes Audit Logs
-Gain coverage by monitoring audit logs in your Kubernetes control plane. The Content Pack includes:
+Gain coverage by monitoring audit logs in your Kubernetes control plane.
+
+The Content Pack includes:
 - Detection Rules
 - Dashboard
 
