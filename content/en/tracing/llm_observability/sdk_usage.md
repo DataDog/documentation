@@ -1,0 +1,266 @@
+---
+title: SDK Usage
+---
+
+## Tracing spans
+
+To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). Learn more about the available span kinds in [the span documentation].
+
+### Tracing an Agent span
+
+Use `LLMObs.agent()` as a context manager.
+
+#### Arguments
+
+`name`
+: optional - _string_ - **default**: `"agent"`
+<br/>The name of the operation.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def run_agent():
+	with LLMObs.agent(name="react_agent") as agent_span:
+		... # user application logic
+	return 
+{{< /code-block >}}
+
+### Tracing a workflow span
+
+Use `LLMObs.workflow()` as a context manager.
+
+#### Arguments
+
+`name`
+: optional - _string_ - **default**: `"workflow"`
+<br/>The name of the operation.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def process_message():
+	with LLMObs.workflow(name="process_message") as workflow_span:
+		... # user application logic
+	return 
+{{< /code-block >}}
+
+### Tracing an LLM span
+
+If you are using one of the following LLM providers, you do not need to manually start a span to trace these operations, as Datadog's existing integrations automatically trace and annotate the LLM calls:
+
+- OpenAI (using the [OpenAI Python SDK][open-ai-python-sdk])
+- AWS Bedrock (using [Boto3][boto3]/[Botocore][botocore])
+- LangChain LLM/Chat Models/Chains (using [LangChain][langchain])
+
+You can trace an LLM span by using `LLMObs.llm()` as a context manager.
+
+#### Arguments
+
+`model_name`
+: required - _string_
+<br/>The name of the invoked LLM.
+
+`name`
+: optional - _string_ - **default**: `"llm"`
+<br/>The name of the operation.
+
+`model_provider`
+: optional - _string_ - **default**: `"custom"`
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def llm_call():
+	with LLMObs.llm(name="invoke_llm", model_name="claude", model_provider="anthropic") as llm_span:
+		completion = ... # user application logic to invoke LLM
+	return completion
+{{< /code-block >}}
+
+### Tracing a tool span
+
+Use `LLMObs.tool()` as a context manager.
+
+#### Arguments
+
+`name`
+: optional - _string_ - **default**: `"tool"`
+<br/>The name of the operation.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def call_weather_api():
+	with LLMObs.tool(name="get_current_weather") as tool_span:
+		... # user application logic
+	return 
+{{< /code-block >}}
+
+### Tracing an embedding span
+
+Use `LLMObx.embedding()` as a context manager.
+
+#### Arguments
+
+`name`
+: optional - _string_ - **default**: `"embedding"`
+<br/>The name of the operation.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def perform_embedding():
+	with LLMObs.embedding(name="openai_embedding") as embedding_span:
+		... # user application logic
+	return 
+{{< /code-block >}}
+
+### Tracing a retrieval span
+
+Use `LLMObs.retrieval()` as a context manager.
+
+#### Arguments
+
+`name`
+: optional - _string_ - **default**: `"retrieval"`
+<br/>The name of the operation.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def similarity_search():
+	with LLMObs.retrieval(name="get_relevant_docs") as retrieval_span:
+		... # user application logic
+	return 
+{{< /code-block >}}
+
+### Tracing a task span
+
+Use `LLMObs.task()` as a context manager.
+
+#### Arguments
+
+`name`
+: optional - _string_ - **default**: `"task"`
+<br/>The name of the operation.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def sanitize_input():
+	with LLMObs.task(name="sanitize_input") as task_span:
+		... # user application logic
+	return 
+{{< /code-block >}}
+
+## Tracing spans with function decorators
+
+For each span kind, the LLM Observability Python SDK `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators can be used the same way as their inline counterparts.
+
+### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow
+
+@workflow(name="process_message", session_id="<SESSION_ID>", ml_app="<ML_APP>")
+def process_message():
+	... # user application logic
+	return
+{{< /code-block >}}
+
+## Annotating a span
+
+The LLM Observability Python SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata. 
+
+### Arguments
+
+The `LLMObs.annotate()` method accepts the following arguments:
+
+`span` : optional - _Span_ - **default**: the current active span
+<br />The span to annotate. If `span` is not provided (as when using function decorators), the SDK annotates the current active span.
+
+`input_data` : optional - _JSON serializable type or list of dictionaries_ 
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).
+
+`output_data` : optional - _JSON serializable type or list of dictionaries_ 
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a list of dictionaries with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+
+`metadata` : optional - _dictionary_
+<br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input/output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
+
+`tags` : optional - _dictionary_
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on).
+
+### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+def llm_call(prompt):
+	with LLMObs.llm(name="llm_call", model="model_name", model_provider="model_provider") as llm_span:
+		resp = ... # llm call here
+		LLMObs.annotate(
+  			span=llm_span,
+input_data=[{"role": "user", "content": "Hello world!"}],
+output_data=[{"role": "assistant", "content": "How can I help?"}],
+metadata={"temperature": 0, "max_tokens": 200},
+tags={"host": "host_name"},
+)
+	return resp
+
+@workflow(name="process_message")
+def process_message(prompt):
+	resp = llm_call_inline(prompt)
+	LLMObs.annotate(
+span=None,
+input_data="prompt",
+output_data="output",
+tags={"host": "host_name"},
+)
+	return resp
+{{< /code-block >}}
+
+## Persisting a span across different scopes or contexts
+
+To manually start and stop a span across different contexts or scopes:
+
+1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but inline rather than as a context manager. 
+2. Pass the span object as an argument to other functions.
+3. Stop the span manually with the `span.finish()` method.
+
+### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def separate_task(workflow_span):
+	... # user application logic 
+	workflow_span.finish()
+	return
+
+def process_message():
+workflow_span = LLMObs.workflow(name="process_message")	
+	... # user application logic
+	separate_task(workflow_span)
+	return
+{{< /code-block >}}
+
+[open-ai-python-sdk]: https://github.com/openai/openai-python
+[boto3]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+[botocore]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
+[langchain]: https://github.com/langchain-ai/langchain
+[react-agent]: https://react-lm.github.io/
