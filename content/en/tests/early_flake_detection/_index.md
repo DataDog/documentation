@@ -37,7 +37,7 @@ Detection of New Tests
 Flakiness Identification
 : Running a test multiple times helps uncover issues like race conditions, which may cause the test to pass and fail intermittently. If any of the test attempts fail, the test is automatically tagged as flaky.
 
-Running a test multiple times increases the likelihood of exposing random conditions that cause flakiness. Early Flake Detection helps ensure that only stable, reliable tests are integrated into the main branch. 
+Running a test multiple times increases the likelihood of exposing random conditions that cause flakiness. Early Flake Detection helps ensure that only stable, reliable tests are integrated into the main branch.
 
 You can choose to block the merge of the feature branch with a [Quality Gate][2]. For more information, see the [Quality Gates documentation][8].
 
@@ -56,6 +56,33 @@ After you have set up your Datadog library for Test Visibility, you can configur
 1. Click the toggle to enable Early Flake Detection and add or modify the list of [**Excluded Branches from Early Flake Detection**](#manage-excluded-branches).
 
 {{< img src="continuous_integration/early_flake_detection_configuration_modal.png" alt="Enabling Early Flake Detection and defining excluded branches in the test service configuration" style="width:60%">}}
+
+#### Compatibility
+{{< tabs >}}
+{{% tab "JavaScript/TypeScript" %}}
+
+The required test framework and dd-trace versions are:
+
+* `dd-trace`:
+  * `>=5.12.0` for the 5.x release.
+  * `>=4.36.0` for the 4.x release.
+  * `>=3.57.0` for the 3.x release.
+* `jest>=24.8.0`, only when run with `jest-circus`.
+* `mocha>=5.2.0`.
+* `cucumber-js>=7.0.0`.
+* `playwright>=1.38.0`.
+* `cypress>=6.7.0`.
+
+
+{{% /tab %}}
+
+{{% tab "Java" %}}
+
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+
+{{% /tab %}}
 
 ## Manage Excluded Branches
 
