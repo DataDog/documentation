@@ -16,13 +16,13 @@ further_reading:
 
 ## Overview
 
-[Cloud SIEM Content Packs][1] provide out-of-the box content for key security integrations. The content can include the following:
+[Cloud SIEM Content Packs][1] provide out-of-the box content for key security integrations. The specific content depends on the integration and can include the following:
 
-- Detection Rules
-- Dashboard
-- Investigator
-- Workflow Automation
-- Configuration guide
+- Detection Rules to provide comprehensive coverage of your environment
+- An interactive dashboard with detailed insights into the state of logs and security signals for the Content Pack
+- Investigator, an interactive graphical interface for investigating suspicious activity by a user or resource
+- Workflow Automations to automate actions and accelerate investigation and remediation of issues
+- Configuration guides
 
 {{< whatsnext desc="Content Packs are grouped into the following categories:" >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-audit-content-packs" >}}Cloud Audit{{< /nextlink >}}
@@ -41,10 +41,20 @@ Monitor security and compliance levels of your AWS operations.
 
 The [AWS CloudTrail Content Pack][2] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 - AWS Investigator
-- Workflow Automation
-- Configuration guide
+- Workflow Automations
+- Configuration guides
+
+### Azure Security
+
+Protect your Azure environment by tracking attacker activity.
+
+The [Azure Security Content Pack][4] includes:
+- Detection Rules
+- An interactive dashboard
+- Azure Investigator
+- Configuration guides
 
 ### GCP Audit Logs
 
@@ -52,37 +62,18 @@ Protect your GCP environment by monitoring audit logs.
 
 The [GCP Audit Logs Content Pack][3] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 - GCP Investigator
-- Configuration guide
-
-### Azure Security
-
-Protect your Azure environment ny tracking attacker activity.
-
-The [Azure Security Content Pack][4] includes:
-- Detection Rules
-- Dashboard
-- Azure Investigator
-- Configuration guide
+- Configuration guides
 
 ### Kubernetes Audit Logs
 Gain coverage by monitoring audit logs in your Kubernetes control plane.
 
 The [Kubernetes Audit Logs Content Pack][5] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 
 ## Authentication Content Packs
-
-### Okta
-
-Track user activity by monitoring Okta audit logs.
-
-The [Okta Content Pack][6] includes:
-- Detection Rules
-- Dashboard
-- Workflow Automation
 
 ### 1Password
 
@@ -90,7 +81,7 @@ Monitor account activity with 1Password Events Reporting.
 
 The [1Password Content Pack][7] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 
 ### Auth0
 
@@ -98,7 +89,7 @@ Monitor and generate signals around Auth0 user activity.
 
 The[ Auth0 Content Pack][8] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 
 ### Jumpcloud
 
@@ -106,6 +97,15 @@ Tracks user activity by monitoring Jumpcloud audit logs.
 
 The [Jumpcloud Content Pack][9] includes:
 - Detection Rules
+
+### Okta
+
+Track user activity by monitoring Okta audit logs.
+
+The [Okta Content Pack][6] includes:
+- Detection Rules
+- An interactive dashboard
+- Workflow Automation
 
 ## Collaboration Content Packs
 
@@ -115,7 +115,7 @@ Optimize your security monitoring within Google Workspace.
 
 The [Google Workspace Content Pack][10] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 
 ### Microsoft 365
 
@@ -123,7 +123,7 @@ Monitor key security events from Microsoft 365 logs.
 
 The [Microsoft 365 Content Pack][11] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 
 ## Network Content Packs
 
@@ -133,8 +133,8 @@ Enhance security for your web applications.
 
 The [Cloudflare Content Pack][12] includes:
 - Detection Rules
-- Dashboard
-- Workflow Automation
+- An interactive dashboard
+- Workflow Automations
 
 ## Cloud developer tools Content Packs
 
@@ -144,7 +144,7 @@ Track user activity and code change history by monitoring Github audit logs.
 
 The [Github Content Pack][13] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 
 ## Endpoint Content Packs
 
@@ -154,7 +154,7 @@ Improve the security posture of your endpoints with Crowdstrike.
 
 The [Crowdstrike Content Pack][14] includes:
 - Detection Rules
-- Dashboard
+- An interactive dashboard
 
 ## Further reading
 
