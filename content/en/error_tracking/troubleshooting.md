@@ -42,7 +42,7 @@ final Span span = GlobalTracer.get().activeSpan();
 if (span != null && (span instanceof MutableSpan)) {
     MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
     // do stuff with root span
-    localRootSpan.setTag("root", "true");
+    localRootSpan.setTag("my_tag", "my_value");
 }
 ```
 
@@ -52,7 +52,7 @@ if (span != null && (span instanceof MutableSpan)) {
 ```python
 context = tracer.get_call_context() 
 root_span = context.get_current_root_span() 
-root_span.set_tag('exampletag', 'blahblah') 
+root_span.set_tag('my_tag', 'my_value') 
 ```
 
 {{% /tab %}}
