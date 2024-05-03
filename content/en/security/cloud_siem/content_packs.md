@@ -50,7 +50,7 @@ The [AWS CloudTrail Content Pack][2] includes:
 
 Protect your GCP environment by monitoring audit logs.
 
-The GCP Audit Logs Content Pack includes:
+The [GCP Audit Logs Content Pack][3] includes:
 - Detection Rules
 - Dashboard
 - GCP Investigator
@@ -60,7 +60,7 @@ The GCP Audit Logs Content Pack includes:
 
 Protect your Azure environment ny tracking attacker activity.
 
-The Azure Security Content Pack includes:
+The [Azure Security Content Pack][4] includes:
 - Detection Rules
 - Dashboard
 - Azure Investigator
@@ -69,18 +69,9 @@ The Azure Security Content Pack includes:
 ### Kubernetes Audit Logs
 Gain coverage by monitoring audit logs in your Kubernetes control plane.
 
-The Kubernetes Audit Logs Content Pack includes:
+The [Kubernetes Audit Logs Content Pack][5] includes:
 - Detection Rules
 - Dashboard
-
-<!-- ### Cloud Audit content summary
-
-| Name  | Detection rules | Dashboard | Investigator| Workflow Automation| Configuration guide|
-| ----| :-----------: |:-----------: |:-----------: |:-----------: |:-----------: |
-| [AWS CloudTrail][1] | {{< X >}} | {{< X >}} | AWS Investigator |{{< X >}} |{{< X >}} |{{< X >}} |
-| GCP Audit Logs | {{< X >}} | {{< X >}} | GCP Investigator | |{{< X >}} |{{< X >}} |
-| Azure Security | {{< X >}} | {{< X >}} | Azure Investigator| |{{< X >}} |{{< X >}} |
-| Kubernetes Audit Logs | {{< X >}} | {{< X >}} | | | | | -->
 
 ## Authentication Content Packs
 
@@ -88,7 +79,7 @@ The Kubernetes Audit Logs Content Pack includes:
 
 Track user activity by monitoring Okta audit logs.
 
-The Okta Content Pack includes:
+The [Okta Content Pack][6] includes:
 - Detection Rules
 - Dashboard
 - Workflow Automation
@@ -97,7 +88,7 @@ The Okta Content Pack includes:
 
 Monitor account activity with 1Password Events Reporting.
 
-The 1Password Content Pack includes:
+The [1Password Content Pack][7] includes:
 - Detection Rules
 - Dashboard
 
@@ -105,7 +96,7 @@ The 1Password Content Pack includes:
 
 Monitor and generate signals around Auth0 user activity.
 
-The Auth0 Content Pack includes:
+The[ Auth0 Content Pack][8] includes:
 - Detection Rules
 - Dashboard
 
@@ -113,7 +104,7 @@ The Auth0 Content Pack includes:
 
 Tracks user activity by monitoring Jumpcloud audit logs.
 
-The Jumpcloud Content Pack includes:
+The [Jumpcloud Content Pack][9] includes:
 - Detection Rules
 
 ## Collaboration Content Packs
@@ -122,7 +113,7 @@ The Jumpcloud Content Pack includes:
 
 Optimize your security monitoring within Google Workspace.
 
-The Google Workspace Content Pack includes:
+The [Google Workspace Content Pack][10] includes:
 - Detection Rules
 - Dashboard
 
@@ -130,7 +121,7 @@ The Google Workspace Content Pack includes:
 
 Monitor key security events from Microsoft 365 logs.
 
-The Microsoft 365 Content Pack includes:
+The [Microsoft 365 Content Pack][11] includes:
 - Detection Rules
 - Dashboard
 
@@ -140,7 +131,7 @@ The Microsoft 365 Content Pack includes:
 
 Enhance security for your web applications.
 
-The Cloudflare Content Pack includes:
+The [Cloudflare Content Pack][12] includes:
 - Detection Rules
 - Dashboard
 - Workflow Automation
@@ -151,7 +142,7 @@ The Cloudflare Content Pack includes:
 
 Track user activity and code change history by monitoring Github audit logs.
 
-The Github Content Pack includes:
+The [Github Content Pack][13] includes:
 - Detection Rules
 - Dashboard
 
@@ -161,7 +152,7 @@ The Github Content Pack includes:
 
 Improve the security posture of your endpoints with Crowdstrike.
 
-The Crowdstrike Content Pack includes:
+The [Crowdstrike Content Pack][14] includes:
 - Detection Rules
 - Dashboard
 
@@ -171,3 +162,15 @@ The Crowdstrike Content Pack includes:
 
 [1]: https://app.datadoghq.com/security/content-packs
 [2]: https://app.datadoghq.com/security/content-packs/aws-cloudtrail
+[3]: https://app.datadoghq.com/security/content-packs/gcp-audit-logs
+[4]: https://app.datadoghq.com/security/content-packs/azure
+[5]: https://app.datadoghq.com/security/content-packs/kubernetes-audit-logs
+[6]: https://app.datadoghq.com/security/content-packs/okta
+[7]: https://app.datadoghq.com/security/content-packs/1password
+[8]: https://app.datadoghq.com/security/content-packs/auth0
+[9]: https://app.datadoghq.com/security/content-packs/jumpcloud
+[10]: https://app.datadoghq.com/security/content-packs/google-workspace
+[11]: https://app.datadoghq.com/security/content-packs/microsoft-365
+[12]: https://app.datadoghq.com/security/content-packs/cloudflare
+[13]: https://app.datadoghq.com/security/content-packs/github
+[14]: https://app.datadoghq.com/security/content-packs/crowdstrike
