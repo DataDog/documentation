@@ -1,6 +1,9 @@
 ---
-title: Collecting Browser Errors
+title: Browser Error collection
 kind: documentation
+aliases:
+- /real_user_monitoring/error_tracking/browser
+- /real_user_monitoring/error_tracking/browsertest
 further_reading:
   - link: "/real_user_monitoring/error_tracking/"
     tag: Documentation
@@ -22,6 +25,8 @@ further_reading:
 
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
+[Upload your JavaScript source maps][6] to access unminified stack traces.
+
 ## Error sources
 Front-end errors come from several different sources:
 
@@ -30,6 +35,12 @@ Front-end errors come from several different sources:
 - **custom**: Sent with the [RUM `addError` API](#collect-errors-manually)
 - **report**: From the `ReportingObserver` API
 - **source**: From unhandled exceptions or unhandled promise rejections in the source code
+
+## Error Tracking
+
+Whenever a `source`, `custom` or `report` error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
+
+Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking. 
 
 ## Error attributes
 
@@ -41,6 +52,7 @@ For information about the default attributes for all RUM event types, see [Data 
 | `error.type`    | string | The error type (or error code in some cases).                     |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
+
 
 ### Source errors
 
@@ -60,8 +72,6 @@ addError(
     context?: Context
 );
 {{< /code-block >}}
-
-**Note**: The [Error Tracking][4] feature processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
