@@ -56,22 +56,22 @@ For applications built on .NET Framework, see [Tracing .NET Framework Applicatio
 
 For a full list of Datadog's .NET runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
-<div class="alert alert-info">
-  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
-</div>
-
 ## Installation and getting started
+
+<div class="alert alert-info">
+  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. This page may refer to <strong>.NET Core</strong> or <strong>.NET</strong> interchangeably unless referring to a specific version.
+</div>
 
 <div class="alert alert-info">
   To set up Datadog APM in AWS Lambda, see [Tracing Serverless Functions][8]. To set up Datadog APM in Azure App Service, see [Tracing Azure App Services][9].
 </div>
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment. 
-</div>
-
 <div class="alert alert-info">
   To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project. Support for trimmed apps is in beta.
+</div>
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment. 
 </div>
 
 ### Installation

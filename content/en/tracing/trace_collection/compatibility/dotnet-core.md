@@ -43,7 +43,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
  Additional information can be found within [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET APM](#runtime-support-policy-for-net-apm).
 
 <div class="alert alert-info">
-  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
+  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. This page may refer to <strong>.NET Core</strong> or <strong>.NET</strong> interchangeably unless referring to a specific version.
 </div>
 
 ## Supported processor architectures
