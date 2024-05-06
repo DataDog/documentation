@@ -14,11 +14,11 @@ Gráfica SLOs basados en métricas y en intervalos de tiempo en dashboards, y re
 
 ## Configuración
 
-{{< img src="dashboards/guide/slo_data_type/slo-data-source-good-events.png" alt="Configuración del editor de gráficos con el tipo de datos de slos seleccionado y la correcta medición de eventos seleccionada" style="width:100%;" >}}
+{{< img src="dashboards/guide/slo_data_type/slo-data-source-good-events.png" alt="Configuración del editor de gráficos con el tipo de datos de slos seleccionado y la medición de eventos correcta seleccionada" style="width:100%;" >}}
 
-Para empezar, elige uno de los tipos de visualización estándar de la bandeja de widgets de dashboard widget y selecciona *SLOs* como fuente de datos en el menú desplegable de consulta. 
+Para empezar, elige uno de los tipos de visualización estándar de la bandeja de widgets de dashboard y selecciona *SLOs* como fuente de datos, en el menú desplegable de consulta. 
 
-Para el parámetro *Measure* (Medición), consulta la siguiente tabla para obtener más información sobre lo que visualiza cada medición. El parámetro *Display* (visualización) te permite desglosar la consulta en función de los grupos que ya están configurados para un SLO. 
+Para el parámetro *Measure* (Medición), consulta la siguiente tabla para obtener más información sobre lo que visualiza cada medición. El parámetro *Display* (visualización) te permite desglosar la consulta en función de los grupos que ya están configurados para el SLO. 
 
 {{< callout url="#" btn_hidden="true" header="Key Information">}}
   Cuando se utiliza una medición de la fuente de datos SLO en el widget de series temporales, el valor que se muestra en cada punto se basa en el valor de agrupación predeterminado en el widget, no en el período de tiempo de agrupación del SLO. Además, las correcciones de estado del SLO sólo se aplican a widgets escalares, no al widget de series temporales. 
