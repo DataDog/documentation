@@ -49,12 +49,13 @@ You can use your apps from the Apps page or access them directly from within you
 
 {{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
 
-<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#app-builder</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack</a>.</div>
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][4].
+
 [1]: /service_management/workflows/actions_catalog/
 [2]: /service_management/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
+[4]: https://datadoghq.slack.com/

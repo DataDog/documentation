@@ -112,7 +112,6 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
 
-
 [1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections

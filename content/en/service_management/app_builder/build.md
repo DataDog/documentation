@@ -202,8 +202,6 @@ To edit an app with JSON, click the cog (**Settings**) icon and select **Switch 
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][8].
 
-
-
 [1]: https://app.datadoghq.com/app-builder/
 [2]: https://app.datadoghq.com/app-builder/blueprints
 [3]: /service_management/app_builder/embedded_apps

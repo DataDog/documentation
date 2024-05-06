@@ -55,7 +55,6 @@ Below are a few examples of workflows you can build:
 - Execute workflows to roll back to stable versions of your application directly from the Dashboards you use to track the health of your systems.
 - Manage feature flags by automatically updating your feature flag config files in GitHub and automating the pull request and merge process.
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
