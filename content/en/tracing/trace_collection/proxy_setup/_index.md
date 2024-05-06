@@ -691,15 +691,15 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 {{% tab "Apache HTTPd" %}}
 
 ## HTTPd with Datadog module
-Datadog provides a [module][1] for [Apache HTTP Server][2].
+Datadog provides a [module][1] for enhancing [Apache HTTP Server][2] capabilities with APM Tracing.
 
 ### Module installation
 <div class="alert alert-warning">
   <strong>Note:</strong> Only Apache HTTP Server 2.4.x is supported.
 </div>
 
-The module is delivered as a shared library that can be loaded dynamically by HTTPd. There's one module per platform supported hosted on
-[httpd-datadog's repository][1].
+The module is provided as a shared library for dynamical loading by HTTPd. Each supported platform
+and architecture has its own artifact hosted on [httpd-datadog's repository][1].
 
 Run the following script to download the latest version of the module:
 
@@ -712,17 +712,21 @@ RELEASE_TAG=$(get_latest_release DataDog/httpd-datadog)
 wget "https://github.com/DataDog/httpd-datadog/releases/download/$RELEASE_TAG/linux-x86_64-mod_datadog.tar.gz"
 ```
 
-When unpacking the tarball, you'll find `mod_datadog.so` — the shared library that the server needs to load.
+When unpacking the tarball, the resulting file is `mod_datadog.so`, the shared library that must
+be loaded by the server.
+
 Place it in the directory where HTTPd searches for modules, typically `/usr/local/apache2/modules`.
 
-### Module configuration
 Load the module by adding the following line in the configuration file:
 
 ```nginx
 LoadModule datadog_module modules/mod_datadog.so
 ```
 
-Restart HTTPd to load the module. By default, all requests are traced and sent to the Datadog Agent.
+To enable the module, make sure to restart or reload HTTPd.
+
+### Module configuration
+By default, all requests are traced and sent to the Datadog Agent.
 To change the module default behaviour, use `Datadog*` directives described in the Datadog module's [API documentation][3].
 
 For example, the following configuration sets the service name to `my-service` and the sampling rate to 10%
