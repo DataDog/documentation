@@ -12,9 +12,9 @@ further_reading:
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
-- link: "/code_analysis"
+- link: "/continuous_delivery/deployments"
   tag: "Documentation"
-  text: "Learn about Code Analysis"
+  text: "Learn about Deployment Visibility"
 ---
 
 {{< site-region region="gov" >}}

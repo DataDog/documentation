@@ -5,12 +5,15 @@ further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
-- link: '/getting_started/tagging/'
-  tag: 'Documentation'
-  text: 'Getting Started with Tags'
 - link: '/dora_metrics/setup/'
   tag: 'Documentation'
   text: 'Send deployment and incident events to Datadog'
+- link: '/metrics/'
+  tag: 'Documentation'
+  text: 'Learn more about Metrics'
+- link: '/getting_started/tagging/'
+  tag: 'Documentation'
+  text: 'Getting Started with Tags'
 ---
 
 ## Overview
@@ -41,9 +44,10 @@ All default metrics contain the following tags if any are available:
 
 For more information about using `env`, `service`, and `version` tags, see [Getting Started with Tags][6].
 
+
 ## Examine metrics in Event Management
 
-DORA default metrics are available in the [Events Explorer][4] under the `Software Delivery Insights` source in [Event Management][1]. To search and filter on DORA Metrics events in the explorer, navigate to [**Service Management** > **Event Management** > **Explorer**][11] and enter `source:software_delivery_insights` in the search query to filter on DORA Metrics events.
+DORA default metrics are available in the [Events Explorer][4]. To search and filter on DORA Metrics events in the explorer, navigate to [**Service Management** > **Event Management** > **Explorer**][11] and enter `source:software_delivery_insights` in the search query to filter on DORA Metrics events.
 
 {{< img src="dora_metrics/events.png" alt="Events collected from DORA Metrics in the Events Explorer" style="width:100%;" >}}
 
@@ -53,10 +57,9 @@ These metrics can be queried programmatically by using the [Query timeseries poi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/events/explorer/
 [2]: /api/latest/metrics/#query-timeseries-points
 [3]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
-[4]: /service_management/events/
+[4]: /service_management/events/explorer/
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
 [6]: /getting_started/tagging/
 [7]: /api/latest/dora-metrics/

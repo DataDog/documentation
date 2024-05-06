@@ -11,7 +11,7 @@ further_reading:
   text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "/continuous_integration/dora_metrics/setup/deployments"
   tag: "Documentation"
-  text: "Learn about sending deployment events"
+  text: "Learn about setting up deployments in DORA Metrics"
 - link: "/service_management/events"
   tag: "Documentation"
   text: "Learn about Event Management"
