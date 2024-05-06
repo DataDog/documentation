@@ -16,7 +16,7 @@ This topic describes [threat intelligence][1] for Application Security Managemen
 
 Datadog provides built-in [threat intelligence][1] datasets for ASM. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
 
-Additionally, ASM supports *bring your own threat intel* (private beta). This functionality enriches detections with business-specific threat intelligence. 
+Additionally, ASM supports *bring your own threat intel*. This functionality enriches detections with business-specific threat intelligence. 
 
 Datadog curates threat intelligence into a standardized list of categories and intents. Intents include _benign_, _suspicious_, and _malicious_. 
 
@@ -26,7 +26,7 @@ Upstream threat intelligence information is passed through for all threat intell
 
 Datadog recommends the following methods for consuming threat intelligence:
 
-1. Reducing detection rule thresholds for business logic threats such as credential stuffing. Users can clone the default [Credential Stuffing](https://app.datadoghq.com/security/configuration/asm/rules/view/wnp-zlu-woa) rule and modify it to meet their needs.
+1. Reducing detection rule thresholds for business logic threats such as credential stuffing. Users can clone the default [Credential Stuffing][6] rule and modify it to meet their needs.
 2. Using threat intelligence as a indicator of reputation with security activity.
 
 Datadog recommends _against_ the following:
@@ -118,3 +118,4 @@ Under `@threat_intel.results` you can always see the full details of what was ma
 [3]: /security/threat_intelligence/#threat-intelligence-facets
 [4]: https://app.datadoghq.com/reference-tables/create
 [5]: https://app.datadoghq.com/security/configuration/asm/threat-intel
+[6]: https://app.datadoghq.com/security/configuration/asm/rules/edit/kdb-irk-nua?product=appsec
