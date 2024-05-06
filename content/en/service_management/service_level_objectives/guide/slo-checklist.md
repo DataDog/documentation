@@ -2,7 +2,7 @@
 title: SLO Checklist
 kind: guide
 aliases:
-- /monitors/guide/slo-checklis
+- /monitors/guide/slo-checklist/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
   tag: 'Blog'
