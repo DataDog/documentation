@@ -5,9 +5,7 @@ aliases:
     - /serverless/troubleshooting/connect_invoking_resources/
 ---
 
-{{< img src="serverless/serverless-view.png" alt="Serverless View" >}}
-
-By default, the Serverless View groups your serverless resources by service to help you visualize how each part of your application is performing. For each service, you see the functions that belong to it, along with the resources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) that invoked them. 
+By default, the [Serverless View][4] groups your serverless resources by service to help you visualize how each part of your application is performing. For each service, you see the functions that belong to it, along with the resources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) that invoked them. 
 
 While grouping by service is the default, you can also group your resources by AWS CloudFormation stack name, as well as any other tags you've configured (such as team, project, or environment).
 
@@ -24,3 +22,4 @@ Managed resources are automatically connected to your AWS Lambda functions if al
 [1]: /serverless/installation
 [2]: /serverless/distributed_tracing#choose-your-tracing-library
 [3]: /integrations/amazon_xray/#enriching-xray-segments-with-datadog-libraries
+[4]: https://app.datadoghq.com/functions

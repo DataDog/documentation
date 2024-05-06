@@ -68,7 +68,7 @@ span.addTags({
 ```
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Scope.html
 {{% /tab %}}
 
 {{% tab "Globally" %}}

@@ -9,7 +9,7 @@ further_reading:
       text: "Monitor Azure Pipelines with Datadog CI Visibility"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and measures"
@@ -64,15 +64,15 @@ Not enabling one or more events results in an an incomplete installation, leadin
 ### Configuring multiple projects in bulk
 
 
-If you want to enable the hooks for many or all your Azure projects, Datadog provides a [script](https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py) to help you do it through the Azure API.
+If you want to enable the hooks for many or all your Azure projects, Datadog provides a [script][12] to help you do it through the Azure API.
 
 To run the script, you need:
 
 - An Azure DevOps username
-- An Azure DevOps [API Token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat)
+- An Azure DevOps [API Token][13]
 - An Azure DevOps organization name
 
-The script only needs python3 and the requests package. For more info, run:
+The script only needs python3 and the requests package. For more information, run:
 ```shell
 ./service_hooks.py --help
 ```
@@ -101,9 +101,9 @@ Example for enabling the hooks in specified projects:
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the workflows finish.
+The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Further reading
 
@@ -119,3 +119,5 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
 [10]: /glossary/#custom-tag
 [11]: /glossary/#custom-measure
+[12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
+[13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat

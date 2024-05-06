@@ -28,7 +28,7 @@ This document walks you through the following steps:
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Dual Ship** use case to create a new pipeline.
+1. Select the **Dual Ship** template to create a new pipeline.
 1. Select **Splunk TCP** as the source.
 
 ### Set up the source
