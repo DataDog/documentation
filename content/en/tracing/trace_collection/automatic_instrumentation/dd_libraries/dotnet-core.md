@@ -50,7 +50,7 @@ further_reading:
 
 ### Supported .NET and .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7, and .NET 8.
+The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5 to .NET 8.
 
 For applications built on .NET Framework, see [Tracing .NET Framework Applications][7].
 
