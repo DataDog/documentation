@@ -59,9 +59,7 @@ The .NET Tracer supports instrumentation on .NET Framework 4.6.1 and above. For 
 
 ## Installation and getting started
 
-<div class="alert alert-info">
-  To set up Datadog APM in AWS Lambda, see [Tracing Serverless Functions][7] . To set up Datadog APM in Azure App Service, see [Tracing Azure App Services][8].
-</div>
+To set up Datadog APM in AWS Lambda, see [Distributed Tracing with AWS Lambda Serverless Applications][7] . To set up Datadog APM in Azure App Service, see [Monitoring Azure App Service][8].
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment.
@@ -292,7 +290,7 @@ example.exe
 [4]: /tracing/trace_collection/library_config/dotnet-framework/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
-[7]: /tracing/serverless_functions/
+[7]: /serverless/aws_lambda/distributed_tracing/
 [8]: /serverless/azure_app_services/
 [11]: /tracing/trace_collection/library_injection_local/
 [12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

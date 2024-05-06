@@ -20,7 +20,7 @@ further_reading:
       text: 'Monitor containerized ASP.NET Core applications'
 ---
 
-The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
+The .NET Tracer supports all .NET-based languages (for example, C#, F#, and Visual Basic). It has [beta support for trimmed apps][12].
 
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
@@ -41,10 +41,6 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended      |
 
  Additional information can be found within [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET APM](#runtime-support-policy-for-net-apm).
-
-<div class="alert alert-info">
-  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. This page may refer to <strong>.NET Core</strong> or <strong>.NET</strong> interchangeably unless referring to a specific version.
-</div>
 
 ## Supported processor architectures
 

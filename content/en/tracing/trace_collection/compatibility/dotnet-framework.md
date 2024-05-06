@@ -18,7 +18,7 @@ further_reading:
 ---
 
 
-The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
+The .NET Tracer supports all .NET-based languages (for example, C#, F#, and Visual Basic).
 
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 

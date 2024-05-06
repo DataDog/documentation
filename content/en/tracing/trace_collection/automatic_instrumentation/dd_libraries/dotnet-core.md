@@ -50,21 +50,13 @@ further_reading:
 
 ### Supported .NET and .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5 to .NET 8. For applications built on .NET Framework, see [Tracing .NET Framework Applications][7]. For a full list of Datadog's .NET and .NET Core runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
+The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, and .NET 5 to .NET 8. For applications built on .NET Framework, see [Tracing .NET Framework Applications][7]. For a full list of Datadog's .NET and .NET Core runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
-<div class="alert alert-info">
-  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. This page may refer to <strong>.NET Core</strong> or <strong>.NET</strong> interchangeably unless referring to a specific version.
-</div>
+To set up Datadog APM in AWS Lambda, see [Distributed Tracing with AWS Lambda Serverless Applications][8]. To set up Datadog APM in Azure App Service, see [Monitoring Azure App Service][9].
 
-<div class="alert alert-info">
-  To set up Datadog APM in AWS Lambda, see [Tracing Serverless Functions][8]. To set up Datadog APM in Azure App Service, see [Tracing Azure App Services][9].
-</div>
-
-<div class="alert alert-info">
-  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project. Support for trimmed apps is in beta.
-</div>
+To instrument [trimmed apps][13], reference the [`Datadog.Trace.Trimming`][10] NuGet package in your project. Support for trimmed apps is a beta feature.
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment. 
@@ -240,8 +232,8 @@ To use custom instrumentation in your .NET application:
 1. Add the `Datadog.Trace` [NuGet package][1] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-
 [1]: https://www.nuget.org/packages/Datadog.Trace
+
 {{% /tab %}}
 
 {{% tab "Linux" %}}
@@ -251,11 +243,12 @@ To use custom instrumentation in your .NET application:
 </div>
 
 To use custom instrumentation in your .NET application:
+
 1. Add the `Datadog.Trace` [NuGet package][1] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-
 [1]: https://www.nuget.org/packages/Datadog.Trace
+
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
@@ -441,7 +434,9 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 [7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/
-[8]: /tracing/serverless_functions/
+[8]: /serverless/aws_lambda/distributed_tracing/
 [9]: /serverless/azure_app_services/
+[10]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
 [11]: /tracing/trace_collection/library_injection_local/
 [12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[13]: https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained
