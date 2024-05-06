@@ -25,39 +25,39 @@ Button components have the following properties.
 
 Label
 : The text that displays on the button.<br>
-**Value**: expression or string<br>
+**Value**: string or expression<br>
 _required_
 
 ### Appearance
 
 Intent
 : Controls the color of the button, with colors representing the purpose of the button.<br>
-**Values**: default, danger, success, warning<br>
+**Provided values**: default, danger, success, warning<br>
 _required_
 
 Is Primary
 : Designed to call user attention to the most important action(s) for a given page or workflow.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _required_
 
 Is Borderless
 : Removes the border from any button. On hover, it gets a background fill.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _required_
 
 Is Loading
 : Shows a loading indicator.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
@@ -87,41 +87,41 @@ Callout value components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Value
 : The value that the callout highlights.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Unit
 : The unit associated with the value.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 ### Style
 
 Style
 : The visual style of the component.<br>
-**Values**: default, success, warning, danger, blue, purple, pink, orange, yellow, red, green, gray, vivid blue, vivid purple, vivid pink, vivid orange, vivid yellow, vivid red, vivid green
+**Provided values**: default, success, warning, danger, blue, purple, pink, orange, yellow, red, green, gray, vivid blue, vivid purple, vivid pink, vivid orange, vivid yellow, vivid red, vivid green
 
 Size
 : Responsively sizes the metric so that it is proportional to the sizing of the value.<br>
-**Values**: sm, md, lg, xl
+**Provided values**: sm, md, lg, xl
 
 ### Appearance
 
 Is Loading
 : Shows a loading indicator.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Inspect data
@@ -142,7 +142,7 @@ Checkbox components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Options
 : The list of checkboxes that a user can select from. Minimum number of options is 1.<br>
@@ -163,17 +163,17 @@ Options
 
 Is Multiline
 : Determines whether the checkbox text should wrap onto a new line or be truncated by an ellipsis.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
@@ -204,7 +204,7 @@ Container components have the following properties.
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Inspect data
@@ -225,19 +225,19 @@ Date range picker components have the following properties.
 
 Default timeframe
 : The default timeframe that the date picker displays.<br>
-**Value**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
+**Provided values**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
 
 ### Appearance
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
 
 Event
-: **Value**: change<br>
+: **Value**: change
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
@@ -270,12 +270,12 @@ Default value
 
 Is Read Only
 : Determines whether the component is read only.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
@@ -302,17 +302,17 @@ Modal components have the following properties.
 
 Title
 : The title of the modal.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 ### Appearance
 
 Size
 : The scale of the modal.<br>
-**Values**: sm, md, lg
+**Provided values**: sm, md, lg
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
@@ -341,36 +341,36 @@ Number input components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Default value
 : The default value that the app populates in the input box.<br>
-**Value**: number
+**Value**: number or expression that evaluates to a number
 
 Placeholder text
 : The text that displays when no value is entered.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 ### Validation
 
 Min
 : The minimum value the number input accepts.<br>
-**Value**: number
+**Value**: number or expression that evaluates to a number
 
 Max
 : The maximum value the number input accepts.<br>
-**Value**: number
+**Value**: number or expression that evaluates to a number
 
 ### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
@@ -402,11 +402,11 @@ Radio components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Options
 : The list of radio button options that a user can select from.<br>
-**Value**: expression or string<br>
+**Value**: string or expression<br>
 **Example**:<br>
 : {{< code-block lang="json" disable_copy="true">}}${[
     {
@@ -421,18 +421,18 @@ Options
 
 Default value
 : The value that is selected when the radio loads.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 ### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
@@ -459,32 +459,32 @@ Search components have the following properties.
 
 Default value
 : The default value that the app populates in the search box.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Placeholder text
 : The text that displays when no value is entered.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 ### Appearance
 
 Size
 : The scale of the search component.<br>
-**Values**: sm, md, lg
+**Provided values**: sm, md, lg
 
 Is Loading
 : Shows a loading indicator.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
 
 Event
-: **Value**: change, submit
+: **Values**: change, submit
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
@@ -509,15 +509,15 @@ Select components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Placeholder text
 : The text that displays when no value is entered.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Options
 : The list of select options that a user can select from.<br>
-**Value**: expression or string<br>
+**Value**: string or expression<br>
 **Example**:<br>
 : {{< code-block lang="json" disable_copy="true">}}${[
     {
@@ -532,22 +532,22 @@ Options
 
 Default value
 : The value that is selected when the select loads.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Is Multiselect
 : Determines whether the user can select more than one option at a time.<br>
-**Values**: on, off
+**Provided values**: on, off
 
 ### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
@@ -586,19 +586,19 @@ Each column of data from the data source is represented here and has the followi
 
 Label
 : The text that displays at the top of the column.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Data path
 : JSON path to access values nested within objects and arrays of a given column.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Formatting
 : The type of format that the column takes on.<br>
-**Values**: string, link, status pill, date / time, markdown, tags, percent bar, number, score bar, avatar
+**Provided values**: string, link, status pill, date / time, markdown, tags, percent bar, number, score bar, avatar
 
 Sortable
 : Determines whether the user can sort by the column.<br>
-**Values**: on, off
+**Provided values**: on, off
 
 Some columns have additional properties based on their **Formatting** property.
 
@@ -606,19 +606,19 @@ Some columns have additional properties based on their **Formatting** property.
 
 Has summary
 : Determines whether to display a pagination summary directly above the table.<br>
-**Values**: on, off
+**Provided values**: on, off
 
 Page size
 : Number of rows per page to display.<br>
-**Value**: number or valid template expression that evaluates to a number
+**Value**: number or expression that evaluates to a number
 
 Total count
 : Total number of rows to display in the table.<br>
-**Value**: number or valid template expression that evaluates to a number
+**Value**: number or expression that evaluates to a number
 
 Type
 : Determines the type of pagination.<br>
-**Values**: client side, server side
+**Provided values**: client side, server side
 
 ### Row actions
 
@@ -626,26 +626,26 @@ Adding a row action adds an **Actions** column to the table, which contains user
 
 Label
 : The text that displays on the action button.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Primary
 : Designed to call user attention to the most important action(s) for a given page or workflow.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _required_
 
 Borderless
 : Removes the border from any button. On hover, it gets a background fill.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _required_
 
 Disabled
 : Applies disabled styling and removes interactions.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Level
 : Controls the color of the button according to its intent.<br>
-**Values**: default, danger, success, warning
+**Provided values**: default, danger, success, warning
 
 Reaction
 : The reaction type the button triggers.
@@ -655,26 +655,26 @@ Reaction
 
 Is Loading
 : Shows a loading indicator.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Has text wrapping
 : Determines whether cell text wraps.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 
 Scrollable
 : Determines what ways the table is scrollable in.<br>
-**Values**: both, vertical
+**Provided values**: both, vertical
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
 
 Event
-: **Value**: pageChange, tableRowClick
+: **Values**: pageChange, tableRowClick
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
@@ -699,25 +699,25 @@ Text components have the following properties.
 
 Content
 : The content that the component displays.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Content type
 : Determines how to render the text.<br>
-**Values**: plain text, Markdown
+**Provided values**: plain text, Markdown
 
 ### Appearance
 
 Text alignment
 : Determines the horizontal alignment of the text within the component.<br>
-**Values**: align left, align center, align right
+**Provided values**: align left, align center, align right
 
 Vertical alignment
 : Determines the vertical alignment of the text within the component.<br>
-**Values**: align top, align center, align bottom
+**Provided values**: align top, align center, align bottom
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Inspect data
@@ -736,32 +736,32 @@ Text input components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Default value
 : The value that is selected when the text input loads.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 Placeholder text
 : The text that displays when no value is entered.<br>
-**Value**: expression or string
+**Value**: string or expression
 
 ### Appearance
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Values**: on, off<br>
+**Provided values**: on, off<br>
 _optional_
 
 ### Events
 
 Event
-: **Value**: change, submit
+: **Values**: change, submit
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
