@@ -92,7 +92,11 @@ To install the .NET Tracer machine-wide:
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
-You can also script the MSI setup by running the following in PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
+You can also script the MSI setup by running the following in PowerShell:
+
+```powershell
+Start-Process -Wait msiexec -ArgumentList '/qn /i <PATH TO MSI INSTALLER>'
+```
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
@@ -115,9 +119,7 @@ To install the .NET Tracer per-application:
 
 ### Enable the tracer for your service
 
-To enable the .NET Tracer for your service, set the required environment variables and restart the application.
-
-For information about the different methods for setting environment variables, see [Configuring process environment variables](#configuring-process-environment-variables).
+To enable the .NET Tracer for your service, set the required environment variables and restart the application. For information about the different methods for setting environment variables, see [Configuring process environment variables](#configuring-process-environment-variables).
 
 {{< tabs >}}
 
@@ -125,7 +127,7 @@ For information about the different methods for setting environment variables, s
 
 #### Internet Information Services (IIS)
 
-1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure.
+1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure manually.
 
 2. To automatically instrument applications hosted in IIS, completely stop and start IIS by running the following commands as an administrator:
 
@@ -142,15 +144,13 @@ For information about the different methods for setting environment variables, s
 
 #### Services not in IIS
 
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
-
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
    ```
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
-2. For standalone applications and Windows services, manually restart the application.
+
+2. Manually restart the application.
 
 {{% /tab %}}
 
@@ -218,9 +218,9 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 To attach automatic instrumentation to your service, set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
-### Windows
-
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
+<div class="alert alert-warning">
+  <strong>Note:</strong> The .NET runtime tries to load a tracing library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to load the tracing library.</strong>
+</div>
 
 #### Windows services
 
@@ -232,7 +232,6 @@ In the Registry Editor, create a multi-string value called `Environment` in the 
 
 ```text
 COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
@@ -242,14 +241,14 @@ COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+[string[]] $v = @("COR_ENABLE_PROFILING=1")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 {{% /tab %}}
 
 {{< /tabs >}}
 
-#### IIS
+#### Internet Information Services (IIS)
 
 After installing the MSI, no additional configuration is needed to automatically instrument your IIS sites. To set additional environment variables that are inherited by all IIS sites, perform the following steps:
 
@@ -259,7 +258,7 @@ After installing the MSI, no additional configuration is needed to automatically
    DD_RUNTIME_METRICS_ENABLED=true
    ```
 2. Run the following commands to restart IIS:
-   ```cmd
+   ```bat
    net stop /y was
    net start w3svc
    # Also, start any other services that were stopped when WAS was shut down.
@@ -272,17 +271,15 @@ After installing the MSI, no additional configuration is needed to automatically
 To automatically instrument a console application, set the environment variables from a batch file before starting your application:
 
 ```bat
-rem Set environment variables
+rem Set required environment variable
 SET COR_ENABLE_PROFILING=1
-rem Unless v2.14.0+ and you installed the tracer with the MSI
-SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
-rem Set additional Datadog environment variables
+rem Example: set additional configuration variables
 SET DD_LOGS_INJECTION=true
 SET DD_RUNTIME_METRICS_ENABLED=true
 
-rem Start application
-dotnet.exe example.dll
+rem Start your application
+example.exe
 ```
 
 ## Further reading

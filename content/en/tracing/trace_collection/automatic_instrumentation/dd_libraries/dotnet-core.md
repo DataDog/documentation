@@ -92,7 +92,11 @@ To install the .NET Tracer machine-wide:
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
-You can also script the MSI setup by running the following in PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
+You can also script the MSI setup by running the following in PowerShell:
+
+```powershell
+Start-Process -Wait msiexec -ArgumentList '/qn /i <PATH TO MSI INSTALLER>'
+```
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
@@ -138,9 +142,7 @@ To install the .NET Tracer per-application:
 
 ### Enable the tracer for your service
 
-To enable the .NET Tracer for your service, set the required environment variables and restart the application.
-
-For information about the different methods for setting environment variables, see [Configuring process environment variables](#configuring-process-environment-variables).
+To enable the .NET Tracer for your service, set the required environment variables and restart the application. For information about the different methods for setting environment variables, see [Configuring process environment variables](#configuring-process-environment-variables).
 
 {{< tabs >}}
 
@@ -148,7 +150,7 @@ For information about the different methods for setting environment variables, s
 
 #### Internet Information Services (IIS)
 
-1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure.
+1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure manually.
 
    <div class="alert alert-warning">
      <strong>Note:</strong> You must set the <strong>.NET CLR version</strong> for the application pool to <strong>No Managed Code</strong> as recommended by <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
@@ -169,15 +171,13 @@ For information about the different methods for setting environment variables, s
 
 #### Services not in IIS
 
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
-
-1. Set the following required environment variables for automatic instrumentation to attach to your application:
+1. Set the following required environment variable for automatic instrumentation to attach to your application:
 
    ```
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
-2. For standalone applications and Windows services, manually restart the application.
+
+2. Manually restart the application.
 
 {{% /tab %}}
 
@@ -192,7 +192,7 @@ For information about the different methods for setting environment variables, s
    DD_DOTNET_TRACER_HOME=/opt/datadog
    ```
 
-2. For standalone applications, manually restart the application as you normally would.
+2. Manually restart the application.
 
 {{% /tab %}}
 
@@ -270,13 +270,15 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 ## Configuring process environment variables
 
-To attach automatic instrumentation to your service, you must set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
+To attach automatic instrumentation to your service, set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
 ### Windows
 
-#### Windows services
+<div class="alert alert-warning">
+  <strong>Note:</strong> The .NET runtime tries to load a tracing library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to load the tracing library.</strong>
+</div>
 
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
+#### Windows services
 
 {{< tabs >}}
 
@@ -286,7 +288,6 @@ In the Registry Editor, create a multi-string value called `Environment` in the 
 
 ```text
 CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
@@ -296,14 +297,14 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+[string[]] $v = @("CORECLR_ENABLE_PROFILING=1")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 {{% /tab %}}
 
 {{< /tabs >}}
 
-#### IIS
+#### Internet Information Services (IIS)
 
 After installing the MSI, no additional configuration is needed to automatically instrument your IIS sites. To set additional environment variables that are inherited by all IIS sites, perform the following steps:
 
@@ -313,7 +314,7 @@ After installing the MSI, no additional configuration is needed to automatically
    DD_RUNTIME_METRICS_ENABLED=true
    ```
 2. Run the following commands to restart IIS:
-   ```cmd
+   ```bat
    net stop /y was
    net start w3svc
    # Also, start any other services that were stopped when WAS was shut down.
@@ -326,16 +327,14 @@ After installing the MSI, no additional configuration is needed to automatically
 To automatically instrument a console application, set the environment variables from a batch file before starting your application:
 
 ```bat
-rem Set environment variables
+rem Set required environment variable
 SET CORECLR_ENABLE_PROFILING=1
-rem Unless v2.14.0+ and you installed the tracer with the MSI
-SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
-rem Set additional Datadog environment variables
+rem Example: set additional configuration variables
 SET DD_LOGS_INJECTION=true
 SET DD_RUNTIME_METRICS_ENABLED=true
 
-rem Start application
+rem Start your application
 dotnet.exe example.dll
 ```
 
@@ -346,13 +345,13 @@ dotnet.exe example.dll
 To set the required environment variables from a bash file before starting your application:
 
 ```bash
-# Set environment variables
+# Set required environment variables
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
-# Set additional Datadog environment variables
+# Example: set additional configuration variables
 export DD_LOGS_INJECTION=true
 export DD_RUNTIME_METRICS_ENABLED=true
 
@@ -367,13 +366,13 @@ dotnet example.dll
 To set the required environment variables on a Linux Docker container:
 
   ```docker
-  # Set environment variables
+  # Set required environment variables
   ENV CORECLR_ENABLE_PROFILING=1
   ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
   ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
   ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 
-  # Set additional Datadog environment variables
+  # Example: set additional configuration variables
   ENV DD_LOGS_INJECTION=true
   ENV DD_RUNTIME_METRICS_ENABLED=true
 
@@ -388,12 +387,13 @@ When using `systemctl` to run .NET applications as a service, you can add the re
 1. Create a file called `environment.env` containing:
 
     ```ini
+    # Set required environment variables
     CORECLR_ENABLE_PROFILING=1
     CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
     DD_DOTNET_TRACER_HOME=/opt/datadog
 
-    # Set additional Datadog environment variables
+    # Example: set additional configuration variables
     DD_LOGS_INJECTION=true
     DD_RUNTIME_METRICS_ENABLED=true
     ```
@@ -409,7 +409,7 @@ When using `systemctl` to run .NET applications as a service, you can add the re
 #### `systemctl` (all services)
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> The .NET runtime tries to load a profiler into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be traced. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to load the profiler.</strong>
+  <strong>Note:</strong> The .NET runtime tries to load a tracing library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to load the tracing library.</strong>
 </div>
 
 When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services run by `systemctl`.
@@ -417,12 +417,13 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 1. Set the required environment variables by running [`systemctl set-environment`][6]:
 
     ```bash
+    # Set required environment variables
     systemctl set-environment CORECLR_ENABLE_PROFILING=1
     systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
     systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
 
-    # Set additional Datadog environment variables
+    # Example: set additional configuration variables
     systemctl set-environment DD_LOGS_INJECTION=true
     systemctl set-environment DD_RUNTIME_METRICS_ENABLED=true
     ```
