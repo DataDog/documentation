@@ -123,7 +123,7 @@ If modifying application code is not possible, use the environment variable dd.t
 
 If you have existing @Trace or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.
 
-Traces may also be created using the OpenTelemetrey `@WithSpan` annotation as described in [Trace annotations](#trace-annotations).
+Traces may also be created using the OpenTelemetry `@WithSpan` annotation as described in [Trace annotations](#trace-annotations).
 
 ## Trace annotations
 
