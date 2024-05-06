@@ -2888,21 +2888,16 @@ menu:
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_trace_an_application
       weight: 702
-    - name: Viewing LLM Traces
-      url: tracing/llm_observability/viewing_llm_traces/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_exploring_traces
-      weight: 703
     - name: Span kinds
       url: tracing/llm_observability/span_kinds/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_span_kinds
-      weight: 704
+      weight: 703
     - name: SDK
       url: tracing/llm_observability/sdk/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_sdk
-      weight: 705
+      weight: 704
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
