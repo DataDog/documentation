@@ -110,7 +110,7 @@ datadog:
 {{< /code-block >}}
 
 #### Specify common components that are part of multiple applications
-For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
+If a single component is part of multiple applications, you must specify that component in the YAML for each application. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
 For the postgres fleet (`managed-postgres`):
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
