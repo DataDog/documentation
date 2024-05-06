@@ -1,5 +1,5 @@
 ---
-title: SDK
+title: LLM Observability SDK
 ---
 
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
