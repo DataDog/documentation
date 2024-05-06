@@ -1,5 +1,5 @@
 ---
-title: Tracing .NET Core and .NET 5+ Applications
+title: Tracing .NET and .NET Core Applications
 kind: documentation
 aliases:
   - /tracing/dotnet-core
