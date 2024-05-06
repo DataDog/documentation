@@ -49,49 +49,49 @@ Additional information can be found within [Microsoft's .NET and .NET Core Lifec
 
 The .NET Tracer supports automatic instrumentation on the following architectures:
 
-| Processor architectures                                                 | Support level         | Package version                        |
-| ------------------------------------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | latest                                 |
-| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | latest                                 |
+| Processor architectures | Support level     | Package version |
+| ------------------------|-------------------|-----------------|
+| Windows x86 (`win-x86`) | [GA](#support-ga) | latest          |
+| Windows x64 (`win-x64`) | [GA](#support-ga) | latest          |
 
 ## Integrations
 
 The [latest version of the .NET Tracer][5] can automatically instrument the following libraries:
 
-| Framework or library            | NuGet package                                                                             | Integration Name     |
-| ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
-| .NET Remoting                   | built-in                                                                                  | `Remoting`           |
-| ADO.NET                         | All ADO.NET libraries                                                                     | `AdoNet`             |
-| Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
-| ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
-| ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
-| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
-| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                 | `AwsDynamoDb`        |
-| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
-| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
-| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                           | `CosmosDb`           |
-| Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
-| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
-| GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
-| gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
-| HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
-| HttpClient / HttpMessageHandler | built-in                                                                                  | `HttpMessageHandler` |
-| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
-| Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
-| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
-| MSMQ                            | built-in                                                                                  | `Msmq`               |
-| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
-| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
-| PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
-| Process                         | `"System.Diagnostics.Process"` 4.0+                                                       | `Process`            |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+,                                                                 | `RabbitMQ`           |
-| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
-| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
-| SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                           | `Sqlite`             |
-| SQL Server                      | built-in</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+         | `SqlClient`          |
-| WCF (server)                    | built-in                                                                                  | `Wcf`                |
-| WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
+| Framework or library            | NuGet package                                                                     | Integration Name     |
+| ------------------------------- | --------------------------------------------------------------------------------- | -------------------- |
+| .NET Remoting                   | built-in                                                                          | `Remoting`           |
+| ADO.NET                         | All ADO.NET libraries                                                             | `AdoNet`             |
+| Aerospike                       | `Aerospike.Client` 4.0.0+                                                         | `Aerospike`          |
+| ASP.NET (including Web Forms)   | built-in                                                                          | `AspNet`             |
+| ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                       | `AspNetMvc`          |
+| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                    | `AspNetWebApi2`      |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                         | `AwsDynamoDb`        |
+| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                            | `AwsKinesis`         |
+| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                | `AwsSns`             |
+| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                   | `CosmosDb`           |
+| Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                       | `Couchbase`          |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                        | `ElasticsearchNet`   |
+| GraphQL .NET                    | `GraphQL` 2.3.0+                                                                  | `GraphQL`            |
+| gRPC                            | `Grpc.Core` 2.3.0+                                                                | `Grpc`               |
+| HotChocolate                    | `HotChocolate` 11.0.0+                                                            | `HotChocolate`       |
+| HttpClient / HttpMessageHandler | built-in                                                                          | `HttpMessageHandler` |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                              | `IbmMq`              |
+| Kafka                           | `Confluent.Kafka` 1.4+                                                            | `Kafka`              |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                      | `MongoDb`            |
+| MSMQ                            | built-in                                                                          | `Msmq`               |
+| MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                  | `MySql`              |
+| Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                               | `Oracle`             |
+| PostgreSQL                      | `Npgsql` 4.0+                                                                     | `Npgsql`             |
+| Process                         | `"System.Diagnostics.Process"` 4.0+                                               | `Process`            |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+,                                                         | `RabbitMQ`           |
+| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                      | `ServiceStackRedis`  |
+| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                    | `StackExchangeRedis` |
+| SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                   | `Sqlite`             |
+| SQL Server                      | built-in</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+ | `SqlClient`          |
+| WCF (server)                    | built-in                                                                          | `Wcf`                |
+| WebClient / WebRequest          | built-in                                                                          | `WebRequest`         |
 
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [`Activity`-based tracing][11]). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
@@ -103,9 +103,9 @@ For these libraries, set `DD_TRACE_OTEL_ENABLED=true`, and the .NET tracer autom
 
 The following list of libraries have been tested with this setup:
 
-| Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
-| ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
-| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14.0+                                          | `AzureServiceBus`    | See `Azure SDK` section below |
+| Framework or library | NuGet package                        | Integration Name     | Specific instructions         |
+| -------------------- | ------------------------------------ | -------------------- | ----------------------------- |
+| Azure Service Bus    | `Azure.Messaging.ServiceBus` 7.14.0+ | `AzureServiceBus`    | See `Azure SDK` section below |
 
 ### Azure SDK
 
@@ -113,11 +113,11 @@ The Azure SDK provides built-in OpenTelemetry support. Enable it by setting the 
 
 ## Supported Datadog Agent versions
 
-| **Datadog Agent version**   | **Package version** |
-|-----------------------------|---------------------|
-| [7.x][7]                   | latest              |
-| [6.x][7]                   | latest              |
-| [5.x][8]                   | latest              |
+| **Datadog Agent version** | **Package version** |
+|---------------------------|---------------------|
+| [7.x][7]                  | latest              |
+| [6.x][7]                  | latest              |
+| [5.x][8]                  | latest              |
 
 ## Runtime support policy for .NET Framework APM
 
