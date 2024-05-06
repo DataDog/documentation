@@ -41,13 +41,13 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 
 ### Flaky Tests in Default Branch
 
-The flaky tests table on the Test Branch page for the default branch shows all flaky tests that have exhibited flakiness in the default branch or in any other feature branch that had been merged.
+The flaky test table for the default branch includes tests that have flaked in the default branch as well as any test that has exhibited flakiness in a feature branch that was merged into the default branch.
 
-Flaky tests from merged feature branches are found checking which tests have exhibited flakiness up to 5000 previous commits using the Git commit history that the [Test Visibility libraries][4] collect and upload along with the test runs every time the testing phase of a particular commit is executed in your CI build.
+Flaky tests from merged feature branches are found by checking which tests have exhibited flakiness in the most recent 5,000 commits using the Git commit history. The Git commit history is collected by the [Test Visibility libraries][4] and uploaded along with the test results every time the testing phase of a particular commit is executed in your CI build.
 
 Limitations:
-* If you squash or reset + push force commits in your feature branch, flaky tests that have been detected in that branch won't be shown in the default branch as the commit history is altered. 
-* If a flaky test is detected and fixed in the same feature branch, it will appear as flaky test in the default branch as currently we cannot detect that the flaky test has been fixed. However, [you can remove that flaky test from the flaky tests table manually][5]. 
+* If you squash or reset + push force commits in your feature branch, flaky tests that have been detected in that branch will not be shown in the default branch as the commit history has been altered. 
+* If a flaky test is detected and subsequently fixed in the same feature branch, it will still appear as a flaky test in the default branch, as we cannot detect that the flaky test was fixed. However, [you can remove that flaky test from the flaky tests table manually][5]. 
 
 ### New flaky tests
 
