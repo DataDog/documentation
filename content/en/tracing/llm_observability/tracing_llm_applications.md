@@ -53,14 +53,14 @@ def process_message():
 
 For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11].
 
-[1]: /tracing/llm_observability/sdk_usage/#installation
+[1]: /tracing/llm_observability/sdk/#installation
 [2]: /tracing/llm_observability/exploring_llm_traces
 [3]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: /tracing/llm_observability/span_kinds
-[5]: /tracing/llm_observability/sdk_usage/#running-an-llm-application
-[6]: /tracing/llm_observability/sdk_usage/#tracking-user-sessions
-[7]: /tracing/llm_observability/sdk_usage/#annotating-a-span
-[8]: /tracing/llm_observability/sdk_usage/#persisting-a-span-across-contexts
-[9]: /tracing/llm_observability/sdk_usage/#tracing-multiple-applications
+[5]: /tracing/llm_observability/sdk/#running-an-llm-application
+[6]: /tracing/llm_observability/sdk/#tracking-user-sessions
+[7]: /tracing/llm_observability/sdk/#annotating-a-span
+[8]: /tracing/llm_observability/sdk/#persisting-a-span-across-contexts
+[9]: /tracing/llm_observability/sdk/#tracing-multiple-applications
 [10]: /tracing/llm_observability/quickstart/
-[11]: /tracing/llm_observability/sdk_usage/#tracing-spans
+[11]: /tracing/llm_observability/sdk/#tracing-spans

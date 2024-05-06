@@ -1,5 +1,5 @@
 ---
-title: SDK Usage
+title: SDK
 ---
 
 ## Installation

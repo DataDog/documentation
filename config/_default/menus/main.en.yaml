@@ -2898,10 +2898,10 @@ menu:
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_span_kinds
       weight: 704
-    - name: SDK Usage
-      url: tracing/llm_observability/sdk_usage/
+    - name: SDK
+      url: tracing/llm_observability/sdk/
       parent: tracing_llm_obs
-      identifier: tracing_llm_obs_sdk_usage
+      identifier: tracing_llm_obs_sdk
       weight: 705
     - name: API Catalog
       url: /tracing/api_catalog/
