@@ -129,7 +129,7 @@ metadata:
   owner: db-team
 {{< /code-block >}}
 
-A separate one for the shopping-cart application:
+For the web application (`shopping-cart`):
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 
 apiVersion: v3
