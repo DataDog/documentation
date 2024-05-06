@@ -96,7 +96,7 @@ datadog-ci dora deployment --service shopist --env prod \
 
 The deployment finish time is automatically set to now if `--finished-at` is not provided.
 
-If the deployment CI job is running on the exact same Git revision that is being deployed, `git-repository-url` and `git-commit-sha` can be omitted and is automatically inferred from the CI context.
+If the deployment CI job is running on the exact same Git revision that is being deployed, `git-repository-url` and `git-commit-sha` can be omitted and are automatically inferred from the CI context.
 
 The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric becomes unavailable.
 
