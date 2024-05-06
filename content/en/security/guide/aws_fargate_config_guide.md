@@ -28,8 +28,8 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 
 #### Images
 
-* cws-instrumentation: datadog/cws-instrumentation:latest
-* Datadog-agent: datadog/agent:latest
+* `cws-instrumentation-init`: `datadog/cws-instrumentation:latest`
+* `datadog-agent`: `datadog/agent:latest`
 
 {{< tabs >}}
 {{% tab "Amazon ECS" %}}
