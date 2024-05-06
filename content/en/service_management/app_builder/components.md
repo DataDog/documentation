@@ -410,7 +410,8 @@ Options
 : The list of radio button options that a user can select from.<br>
 **Value**: string or expression<br>
 **Example**:<br>
-: {{< code-block lang="json" disable_copy="true">}}${[
+: ```json
+  ${[
     {
         "label": "Staging",
         "value": "staging"
@@ -419,7 +420,8 @@ Options
         "label": "Production",
         "value": "production"
     }
-]}{{< /code-block >}}
+  ]}
+  ```
 
 Default value
 : The value that is selected when the radio loads.<br>
@@ -521,7 +523,8 @@ Options
 : The list of select options that a user can select from.<br>
 **Value**: string or expression<br>
 **Example**:<br>
-: {{< code-block lang="json" disable_copy="true">}}${[
+: ```json
+  ${[
     {
         "label": "Staging",
         "value": "staging"
@@ -530,7 +533,8 @@ Options
         "label": "Production",
         "value": "production"
     }
-]}{{< /code-block >}}
+  ]}
+  ```
 
 Default value
 : The value that is selected when the select loads.<br>
