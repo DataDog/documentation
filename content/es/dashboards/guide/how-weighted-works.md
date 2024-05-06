@@ -55,7 +55,7 @@ Por último, la métrica se agrega por versión para obtener los siguientes valo
 | `version:2`                  | 46           | 16               |
 
 
-La función `weighted()` remedia cualquier comportamiento incoherente con etiquetas de corta duración, ponderando los valores en función de su tasa de envío.
+La función `weighted()` resuelve cualquier comportamiento incoherente con etiquetas de corta duración, ponderando los valores en función de su tasa de envío.
 
 ## Leer más
 
