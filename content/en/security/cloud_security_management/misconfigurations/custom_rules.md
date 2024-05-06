@@ -21,10 +21,6 @@ cascade:
         subcategory: Cloud Security Posture Management
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 To extend the rules being applied to your environment to evaluate your security posture, you can clone compliance rules and edit the copies, and you can create your own rules from scratch.

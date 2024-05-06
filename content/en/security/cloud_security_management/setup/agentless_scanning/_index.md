@@ -3,6 +3,10 @@ title: Setting up CSM Agentless Scanning
 kind: documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and Amazon Machine Images (AMIs), without requiring you to install the Datadog Agent. 
@@ -46,7 +50,7 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 {{< /tabs >}}
 
 
-**Note**: The actual data that is scanned remains within your infrastructure, and only the collected list of packages are reported back to Datadog.
+**Note**: The actual data that is scanned remains within your infrastructure, and only the collected list of packages, as well as information related to collected hosts (hostnames/EC2 Instances) are reported back to Datadog.
 
 ## Installation
 
@@ -138,7 +142,7 @@ To disable Agentless Scanning in an AWS account, disable scanning for each cloud
 1. On the [Cloud Security Management Setup][10] page, click **Cloud accounts > AWS**.
 1. Click the **Edit scanning** button for the AWS account where you deployed the Agentless scanner.
 1. In the **Agentless Scanning** section, disable scanning for the cloud resources you want to stop monitoring.
-- Click **Done**.
+1. Click **Done**.
  
 ### Uninstalling with CloudFormation
 
