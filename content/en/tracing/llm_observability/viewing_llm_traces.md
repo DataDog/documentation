@@ -1,5 +1,5 @@
 ---
-title: Viewing LLM Traces
+title: Monitoring LLM Applications
 kind: documentation
 ---
 

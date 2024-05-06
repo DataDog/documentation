@@ -2,13 +2,13 @@
 title: SDK Usage
 ---
 
-## Tracing spans
+## Tracing a span
 
 To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). Learn more about the available span kinds in [the span documentation].
 
-### Tracing an Agent span
+### Agent span
 
-Use `LLMObs.agent()` as a context manager.
+To trace an agent span, use `LLMObs.agent()` as a context manager.
 
 #### Arguments
 
@@ -27,9 +27,9 @@ def run_agent():
 	return 
 {{< /code-block >}}
 
-### Tracing a workflow span
+### Workflow span
 
-Use `LLMObs.workflow()` as a context manager.
+To trace a workflow span, use `LLMObs.workflow()` as a context manager.
 
 #### Arguments
 
@@ -48,7 +48,7 @@ def process_message():
 	return 
 {{< /code-block >}}
 
-### Tracing an LLM span
+### LLM span
 
 If you are using one of the following LLM providers, you do not need to manually start a span to trace these operations, as Datadog's existing integrations automatically trace and annotate the LLM calls:
 
@@ -56,7 +56,7 @@ If you are using one of the following LLM providers, you do not need to manually
 - AWS Bedrock (using [Boto3][boto3]/[Botocore][botocore])
 - LangChain LLM/Chat Models/Chains (using [LangChain][langchain])
 
-You can trace an LLM span by using `LLMObs.llm()` as a context manager.
+To trace an LLM span, use `LLMObs.llm()` as a context manager.
 
 #### Arguments
 
@@ -82,9 +82,9 @@ def llm_call():
 	return completion
 {{< /code-block >}}
 
-### Tracing a tool span
+### Tool span
 
-Use `LLMObs.tool()` as a context manager.
+To trace a tool span, use `LLMObs.tool()` as a context manager.
 
 #### Arguments
 
@@ -103,9 +103,9 @@ def call_weather_api():
 	return 
 {{< /code-block >}}
 
-### Tracing an embedding span
+### Embedding span
 
-Use `LLMObx.embedding()` as a context manager.
+To trace an embedding span, use `LLMObs.embedding()` as a context manager.
 
 #### Arguments
 
@@ -124,9 +124,9 @@ def perform_embedding():
 	return 
 {{< /code-block >}}
 
-### Tracing a retrieval span
+### Retrieval span
 
-Use `LLMObs.retrieval()` as a context manager.
+To trace a retrieval span, use `LLMObs.retrieval()` as a context manager.
 
 #### Arguments
 
@@ -145,9 +145,9 @@ def similarity_search():
 	return 
 {{< /code-block >}}
 
-### Tracing a task span
+### Task span
 
-Use `LLMObs.task()` as a context manager.
+To trace a task span, use `LLMObs.task()` as a context manager.
 
 #### Arguments
 
@@ -166,7 +166,7 @@ def sanitize_input():
 	return 
 {{< /code-block >}}
 
-## Tracing spans with function decorators
+## Tracing spans using function decorators
 
 For each span kind, the LLM Observability Python SDK `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators can be used the same way as their inline counterparts.
 
@@ -234,7 +234,7 @@ tags={"host": "host_name"},
 	return resp
 {{< /code-block >}}
 
-## Persisting a span across different scopes or contexts
+## Persisting a span across contexts
 
 To manually start and stop a span across different contexts or scopes:
 
