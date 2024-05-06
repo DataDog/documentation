@@ -17,9 +17,11 @@ LLM Observability supports the following span kinds:
 | [Retrieval](#retrieval-span) | An array of documents returned from an external knowledge base | No | No | 
 | [Task](#task-span)      | A step in the chain that does not involve a call to an external service, such as a data preprocessing step | No | No |
 
+For instructions on creating spans from your application, including code examples, see [Tracing spans][2] in the SDK documentation.
+
 ## Agent span
 
-Agent spans represent a dynamic sequence of operations where an autonomous decision-maker determines which operations and tools to execute. For example, an agent span might represent a series of reasoning steps controlled by a [ReAct agent][react-agent].
+Agent spans represent a dynamic sequence of operations where an autonomous decision-maker determines which operations and tools to execute. For example, an agent span might represent a series of reasoning steps controlled by a [ReAct agent][1].
 
 Agent spans are frequently the root span for traces controlled by LLM reasoning engines.
 
@@ -81,8 +83,5 @@ Task spans represent a standalone step in a workflow or agent that does not invo
 
 Task spans do not have child spans.
 
-[open-ai-python-sdk]: https://github.com/openai/openai-python
-[boto3]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
-[botocore]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
-[langchain]: https://github.com/langchain-ai/langchain
-[react-agent]: https://react-lm.github.io/
+[1]: https://react-lm.github.io/
+[2]: /tracing/llm_observability/sdk/?tab=model#tracing-spans

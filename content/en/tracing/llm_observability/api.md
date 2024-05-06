@@ -3,6 +3,8 @@ title: LLM Observability API
 ---
 <div class="alert alert-warning">LLM Observability is in public beta, and this API is subject to change. If changes occur, Datadog will provide release notes with any applicable upgrade instructions.</a></div>
 
+The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, you may prefer to use the [Python SDK][1].
+
 ## Spans endpoint
 Send spans to Datadog.
 
@@ -21,16 +23,107 @@ Method
 
 #### Body data (required)
 
+{{< tabs >}}
+{{% tab "Model" %}}
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
 | type [*required*]        | string                        | Identifier for the request. Set to `span`. |
 | attributes [*required*]  | [SpansPayload](#spanspayload) | The body of the request.                   |
+{{% /tab %}}
 
-#### Example request body
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "span",
+    "attributes": {
+      "ml_app": "weather-bot",
+      "session_id": "1",
+      "tags": [
+        "env:dev",
+        "service:weather-bot",
+        "env:staging",
+        "user_handle:example-user@example.com",
+        "user_id:1234"
+      ],
+      "spans": [
+        {
+          "parent_id": "undefined",
+          "trace_id": "<TEST_TRACE_ID>",
+          "span_id": "<AGENT_SPAN_ID>",
+          "name": "health_coach_agent",
+          "meta": {
+            "kind": "agent",
+            "input": {
+              "value": "What is the weather like today and do i wear a jacket?"
+            },
+            "output": {
+              "value": "It's very hot and sunny, there is no need for a jacket"
+            }
+          },
+          "start_ns": 1713889389104152000,
+          "duration": 10000000000
+        },
+        {
+          "parent_id": "<AGENT_SPAN_ID>",
+          "trace_id": "<TEST_TRACE_ID>",
+          "span_id": "<WORKFLOW_ID>",
+          "name": "qa_workflow",
+          "meta": {
+            "kind": "workflow",
+            "input": {
+              "value": "What is the weather like today and do i wear a jacket?"
+            },
+            "output": {
+              "value":  "It's very hot and sunny, there is no need for a jacket"
+            }
+          },
+          "start_ns": 1713889389104152000,
+          "duration": 5000000000
+        },
+        {
+          "parent_id": "<WORKFLOW_SPAN_ID>",
+          "trace_id": "<TEST_TRACE_ID>",
+          "span_id": "<LLM_SPAN_ID>",
+          "name": "generate_response",
+          "meta": {
+            "kind": "llm",
+            "input": {
+              "messages": [
+                {
+                  "role": "system",
+                  "content": "Your role is to ..."
+                },
+                {
+                  "role": "user",
+                  "content": "What is the weather like today and do i wear a jacket?"
+                }
+              ]
+            },
+            "output": {
+              "messages": [
+                {
+                  "content": "It's very hot and sunny, there is no need for a jacket",
+                  "role": "assistant"
+                }
+              ]
+            }
+          },
+          "start_ns": 1713889389104152000,
+          "duration": 2000000000
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
-TODO
+### Response
+If the request is successful, the API responds with a 202 network code and an empty body.
 
-### Data schemas
+### API standards
 
 #### `Error`
 | Field   | Type   | Description        |
@@ -99,6 +192,10 @@ Tags should be formatted as a list of strings (for example, `["user_handle:dog@g
 ## Eval metrics endpoint
 Send evaluation metrics for a span to Datadog.
 
+Evaluation metrics require a `span_id` and `trace_id`. 
+- If you are not using the SDK, send the `span_id` and `trace_id` that you used to create your target span.
+- If you are using the SDK, obtain the `span_id` and `trace_id` by finding your target span, then accessing the `root_span.span_id` and the `root_span.trace_id` attributes.
+
 URL
 : `https://api.<DATADOG_SITE>/api/unstable/llm-obs/v1/eval-metric`
 <br />Replace `<DATADOG_SITE>` with your Datadog site (for example, `datadoghq.com` or `us3.datadoghq.com`).
@@ -114,24 +211,100 @@ Method
 
 #### Body data (required)
 
-#### Example request
+{{< tabs >}}
+{{% tab "Model" %}}
+| Field | Type | Description                  |
+|-------|------------------------------|------|
+| data [*required*]  | [Data](#data) | Entry point into the request body. |
+{{% /tab %}}
 
-TODO
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "evaluation_metric",
+    "attributes": {
+      "metrics": [
+        {
+          "span_id": "61399242116139924211",
+          "trace_id": "13932955089405749200",
+          "timestamp": 1609459200,
+          "metric_type": "categorical",
+          "label": "Sentiment",
+          "categorical_value": "Positive"
+        },
+        {
+          "span_id": "20245611112024561111",
+          "trace_id": "13932955089405749200",
+          "metric_type": "score",
+          "label": "Accuracy",
+          "score_value": 3
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Response
 
-| Field   | Type         | Description                             | Guaranteed |
-|---------|--------------|-----------------------------------------|------------|
-| ID      | string      | Response UUID will be generated upon submission. | Yes        |
-| metrics | [][EvalMetric](#evalmetric) | A list of eval metrics.          | Yes        |
+{{< tabs >}}
+{{% tab "Model" %}}
+| Field   | Type                        | Description                              | Guaranteed |
+|---------|-----------------------------|------------------------------------------|------------|
+| ID      | string                      | Response UUID generated upon submission. | Yes        |
+| metrics | [][EvalMetric](#evalmetric) | A list of eval metrics.                  | Yes        |
+{{% /tab %}}
 
-### Data schemas
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "evaluation_metric",
+    "id": "456f4567-e89b-12d3-a456-426655440000",
+    "attributes": {
+      "metrics": [
+        {
+"id": "d4f36434-f0cd-47fc-884d-6996cee26da4",
+          "span_id": "61399242116139924211",
+          "trace_id": "13932955089405749200",
+          "timestamp": 1609459200,
+          "metric_type": "categorical",
+          "label": "Sentiment",
+          "categorical_value": "Positive"
+        },
+        {
+"id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
+          "span_id": "20245611112024561111",
+          "trace_id": "13932955089405749200",
+          "metric_type": "score",
+          "label": "Accuracy",
+          "score_value": 3
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### API standards
 
 #### Attribute
 
 | Field   | Type         | Description                                         |
 |---------|--------------|-----------------------------------------------------|
 | metrics [*required*] | [][EvalMetric](#evalmetric) | A list of eval metrics for a given prompt-response pair. |
+
+#### Data
+
+| Field      | Type            | Description  | 
+|------------|-----------------|--------------|
+| type [*required*]      | "evaluation_metric" | Identifier for the request. Value depends on the API. |
+| attributes [*required*] | List[[EvalMetric](#evalmetric)] | The body of the request. | 
 
 #### EvalMetric
 
@@ -147,3 +320,5 @@ TODO
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation metric. |
 | flagged                | boolean| Flag content as inappropriate or incorrect. |
 | annotation             | string | A generic string note about the provided evaluation metric. |
+
+[1]: /tracing/llm_observability/sdk/

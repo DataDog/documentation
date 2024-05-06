@@ -50,7 +50,7 @@ DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart DD_API_KEY=<YOUR_DA
 
 ### 4. View the trace
 
-A trace of your LLM call now appears in [the "Traces" tab][3] of Datadog's LLM Observability product.
+A trace of your LLM call should appear in [the Traces tab][3] of LLM Observability in Datadog.
 
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from Datadog's list of supported integrations.
 
