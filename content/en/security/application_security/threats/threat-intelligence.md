@@ -14,7 +14,7 @@ further_reading:
 
 This topic describes [threat intelligence][1] for Application Security Management (ASM).
 
-Datadog provides built-in threat intelligence [datasets](https://docs-staging.datadoghq.com/michael_bentley/DOCS-7745/security/threat_intelligence#threat-intelligence-sources) for ASM. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
+Datadog provides built-in threat intelligence [datasets][1] for ASM. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
 
 Additionally, ASM supports *bring your own threat intelligence*. This functionality enriches detections with business-specific threat intelligence. 
 
@@ -57,8 +57,8 @@ Threat intelligence is supported in the CSV format and requires 4 columns.
 |------------------|-------|----|-----|--|
 | ip_address       | text | The primary key for the reference table in the IPv4 dot notation format. | true | 192.0.2.1  |
 | additional_data  | json      | Additional data to enrich the trace. | false | `{"ref":"hxxp://example.org"}`
-| category         | text  | The threat intel [category](https://docs-staging.datadoghq.com/michael_bentley/DOCS-7745/security/threat_intelligence#threat-intelligence-categories). This is used by some out of the box detection rules. | true | `residential_proxy` |
-| intention        | text | The threat intel [intent](https://docs-staging.datadoghq.com/michael_bentley/DOCS-7745/security/threat_intelligence#threat-intelligence-intents). This is used by some out of the box detection rules.| true | malicious | |
+| category         | text  | The threat intel [category][7]. This is used by some out of the box detection rules. | true | `residential_proxy` |
+| intention        | text | The threat intel [intent][8]. This is used by some out of the box detection rules.| true | malicious | |
 | source           | text  | The name of the source and the link to its site, such as your team and your teams wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
 
 
@@ -78,7 +78,7 @@ ip_address,additional_data,category,intention,source
 
 On a new [references table][4] page:
 
-1. Name the table. The table name will be referenced in ASM's **Threat Intel** config.
+1. Name the table. The table name is referenced in ASM's **Threat Intel** config.
 2. Upload a CSV.
 3. Preview the table schema and choose the IP address as the Primary Key.
    
@@ -109,9 +109,11 @@ Under `@threat_intel.results` you can always see the full details of what was ma
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threat_intelligence
+[1]: /security/threat_intelligence/#threat-intelligence-sources
 [2]: /integrations/guide/reference-tables
 [3]: /security/threat_intelligence/#threat-intelligence-facets
 [4]: https://app.datadoghq.com/reference-tables/create
 [5]: https://app.datadoghq.com/security/configuration/asm/threat-intel
 [6]: https://app.datadoghq.com/security/configuration/asm/rules/edit/kdb-irk-nua?product=appsec
+[7]: /security/threat_intelligence#threat-intelligence-categories
+[8]: /security/threat_intelligence#threat-intelligence-intents
