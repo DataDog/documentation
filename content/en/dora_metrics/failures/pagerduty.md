@@ -26,49 +26,40 @@ further_reading:
 
 ## Overview
 
-PagerDuty is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
+[PagerDuty][7] is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
+
 [PagerDuty incidents][1] can be configured as a data source for failures in DORA Metrics.
 
 ## Setup
 
-To integrate your PagerDuty account with DORA Metrics, go to **Integrations > Developer Tools** and click on **Generic Webhooks (v3)**. Then, click **+ New Webhook** and input the following details:
-   1. **Webhook URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/</code>
-   2. **Scope Type**: Select **Account** to send incidents for all PagerDuty services in your account. Alternatively, you can only send incidents for specific services/teams by selecting a different scope type.
-   3. **Description**: A description to help identifying the webhook in the future, such as "Datadog DORA Metrics integration".
-   4. **Event Subscription**:  Select the following events:
-      - incident.acknowledged
-      - incident.annotated
-      - incident.custom_field_values.updated
-      - incident.delegated
-      - incident.escalated
-      - incident.priority_updated
-      - incident.reassigned
-      - incident.reopened
-      - incident.resolved
-      - incident.triggered
-      - incident.unacknowledged
-  5. **Custom Headers**: Click on **Add custom header**, and input `DD-API-KEY` as the name and your [Datadog API Key][2] as the value.
-     Optionally, you can add an environment to all the PagerDuty incidents sent from the webhook by creating an additional custom header with name `dd_env` and the desired environment as value.
+To integrate your PagerDuty account with DORA Metrics, navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
 
-Click on **Add Webhook** to save the new webhook.
+1. Click **+ New Webhook** and enter the following details:
 
-The severity of the incident in the DORA Metrics product is based on the [incident priority][5] in Pagerduty.
+   | Variable | Description |
+   |---|---|
+   | Webhook URL | Add `https://webhook-intake.<br>datadoghq.com<br>/api/v2/webhook/`. |
+   | Scope Type | Select **Account** to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type. |
+   | Description | A description helps distinguish the webhook. Add something like `Datadog DORA Metrics integration`. |
+   | Event Subscription | Select the following events:<br>-`incident.acknowledged`<br>-`incident.annotated`<br>-`incident.custom_field_values.updated`<br>-`incident.delegated`<br>-`incident.escalated`<br>-`incident.priority_updated`<br>-`incident.reassigned`<br>-`incident.reopened`<br>-`incident.resolved`<br>-`incident.triggered`<br>-`incident.unacknowledged` |
+   | Custom Headers | Click **Add custom header**, enter `DD-API-KEY` as the name, and input your [Datadog API key][2] as the value.<br>  <br>Optionally, you can add an environment to all of the PagerDuty incidents sent from the webhook by creating an additional custom header with the name `dd_env` and the desired environment as the value. |
 
-<div class="alert alert-info"><strong>Note:</strong> Upon webhook creation, a new secret will be created and used to sign all the webhook payloads. That secret is not needed for the integration to work, as the authentication is performed via the API Key instead.</div>
+1. To save the webhook, click **Add Webhook**.
 
+The severity of the incident in the DORA Metrics product is based on the [incident priority][5] in PagerDuty.
 
-### Mapping Pagerduty services to Datadog services
+**Note:** Upon webhook creation, a new secret is created and used to sign all the webhook payloads. That secret is not needed for the integration to work, as the authentication is performed using the API key instead.
 
-When an incident event is received for a specific [PagerDuty service][3], Datadog tries to retrieve the related Datadog service and team from [Service Catalog][4].
-The matching algorithm works in the following cases:
-1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in Service Catalog. In this case, the incident metrics and events are emitted
-   with the Datadog team name. For more information on how to specify the Pagerduty service URL for a Datadog service, see [this guide][6].
-2. If the PagerDuty service of the incident has the same name of a Datadog service in Service Catalog. In this case, the incident metrics and events are emitted
-   with the Datadog service name and team retrieved from Service Catalog.
-3. If the PagerDuty team of the incident has the same name of a Datadog team in Service Catalog. In this case, the incident metrics and events are emitted
-   with the Datadog team name.
-4. If the PagerDuty service of the incident has the same name of a Datadog team in Service Catalog. In this case, the incident metrics and events are emitted
-   with the Datadog team name.
+### Mapping PagerDuty services to Datadog services
+
+When an incident event is received for a specific [PagerDuty service][3], Datadog attempts to retrieve the related Datadog service and team from the [Service Catalog][4].
+
+The matching algorithm works in the following scenarios:
+
+1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog. In this scenario, the incident metrics and events are emitted with the Datadog team name. For more information on setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][6].
+2. If the PagerDuty service name of the incident matches a Datadog service name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the Datadog service name and team retrieved from Service Catalog.
+3. If the PagerDuty team name of the incident matches a Datadog team name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the corresponding Datadog team name.
+4. If the PagerDuty service name of the incident matches a Datadog team name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the Datadog team name.
 
 ## Further Reading
 
@@ -77,6 +68,7 @@ The matching algorithm works in the following cases:
 [1]: https://support.pagerduty.com/docs/incidents
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://support.pagerduty.com/docs/services-and-integrations
-[4]: https://docs.datadoghq.com/service_catalog/
+[4]: /service_catalog/
 [5]: https://support.pagerduty.com/docs/incident-priority
-[6]: https://docs.datadoghq.com/service_catalog/integrations/#pagerduty-integration
+[6]: /service_catalog/integrations/#pagerduty-integration
+[7]: /integrations/pagerduty/

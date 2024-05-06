@@ -10,7 +10,7 @@ further_reading:
   text: 'Send deployment and incident events to Datadog'
 - link: '/metrics/'
   tag: 'Documentation'
-  text: 'Learn more about Metrics'
+  text: 'Learn about metrics'
 - link: '/getting_started/tagging/'
   tag: 'Documentation'
   text: 'Getting Started with Tags'
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-DORA Metrics generates [metrics][9] for each of the four core DORA metrics, as well as events with associated tags and attributes that are available in the [Events Explorer][1].
+DORA Metrics generates [metrics][9] for each one of the four core DORA Metrics, as well as events with associated tags and attributes that are available in the [Events Explorer][1].
 
 ## Default metrics
 
@@ -44,10 +44,25 @@ All default metrics contain the following tags if any are available:
 
 For more information about using `env`, `service`, and `version` tags, see [Getting Started with Tags][6].
 
+## Change Lead time metrics
+
+Datadog breaks down change lead time into the following metrics, which represent the different stages from commit creation to deployment.
+
+These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
+
+If a commit does not have an associated PR, only time to deploy and deploy time metrics are available.
+
+- `dora.time_to_pr_ready`: Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR was marked as ready for review.
+- `dora.review_time`: Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved.
+- `dora.merge_time`: Time from the last approval until the PR is merged.
+- `dora.time_to_deploy`: Time from PR merge to start of deployment. If a commit does not have an associated PR, this metric is calculated as the time from commit creation to start of deployment.
+- `dora.deploy_time`: Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information.
+
+**Note:** These metrics are emitted for every commit and not per deployment.
 
 ## Examine metrics in Event Management
 
-DORA default metrics are available in the [Events Explorer][4]. To search and filter on DORA Metrics events in the explorer, navigate to [**Service Management** > **Event Management** > **Explorer**][11] and enter `source:software_delivery_insights` in the search query to filter on DORA Metrics events.
+Default DORA Metrics are available in the [Events Explorer][1]. To search and filter on your DORA Metrics events, navigate to [**Service Management** > **Event Management** > **Explorer**][11] and enter `source:software_delivery_insights` in the search query.
 
 {{< img src="dora_metrics/events.png" alt="Events collected from DORA Metrics in the Events Explorer" style="width:100%;" >}}
 
@@ -57,9 +72,9 @@ These metrics can be queried programmatically by using the [Query timeseries poi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /service_management/events/explorer/
 [2]: /api/latest/metrics/#query-timeseries-points
 [3]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
-[4]: /service_management/events/explorer/
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
 [6]: /getting_started/tagging/
 [7]: /api/latest/dora-metrics/

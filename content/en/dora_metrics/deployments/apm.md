@@ -28,18 +28,26 @@ further_reading:
 {{< /site-region >}}
 
 ## Overview
+
 APM [Deployment Tracking][2] can be configured as a data source for deployments in DORA Metrics.
 
-For service deployments tracked by APM to contribute to DORA Metrics, the following requirements must be met:
+## Setup
+
+To ensure your service deployments tracked by APM contribute to DORA Metrics, the following requirements must be met:
+
 - Your service has [metadata][1] defined in the Service Catalog.
-- Your service has [unified service tagging][3] enabled. Deployments are identified via the `version` tag.
+- Your service has [unified service tagging][3] enabled. Deployments are identified using the `version` tag.
 
-## Change lead time
-For service deployments tracked by APM to contribute to change lead time, the following requirement must be met:
-- Your application telemetry is tagged with git information. You can enable this [in APM][4] or see [documentation][5].
-- Your repository metadata is synchronized to Datadog via the GitHub integration.
+### Change lead time
 
-For deployments identified via Deployment Tracking, change lead time is computed from time of first commit creation to when that commit is first seen in a new version. `dora.deploy_time` metric is not available. 
+For service deployments tracked by APM to contribute to change lead time, ensure that the following:
+
+- Your application telemetry is tagged with Git information. You can enable this [in APM][4] or see the [Source Code Integration documentation][5].
+- Your repository metadata is synchronized to Datadog through the [GitHub integration][6].
+
+For deployments identified through Deployment Tracking, change lead time is computed from the time of first commit creation to when that commit is first seen in a new version. The `dora.deploy_time` metric is not available. 
+
+For more information about change lead time metrics, see [Data Collected][7].
 
 ## Further Reading
 
@@ -49,4 +57,6 @@ For deployments identified via Deployment Tracking, change lead time is computed
 [2]: /tracing/services/deployment_tracking
 [3]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [4]: https://app.datadoghq.com/source-code/setup/apm
-[5]: https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
+[5]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
+[6]: /integrations/github/
+[7]: /dora_metrics/data_collected/#change-lead-time-metrics
