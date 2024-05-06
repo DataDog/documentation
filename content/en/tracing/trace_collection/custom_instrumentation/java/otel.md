@@ -144,7 +144,7 @@ public class SessionManager {
 
 ## Creating new spans
 
-To manually create new spans that start a new, independent trace:
+To manually create new spans within the current trace context:
 
 ```java
 import io.opentelemetry.api.OpenTelemetry;
@@ -179,9 +179,7 @@ public class Example {
 
 ## Trace client and Agent configuration
 
-There are additional configurations to consider for both the tracing client and Datadog Agent:
-- Context propagation with B3 Headers
-- Exclude specific resources from sending traces to Datadog if you do not want to include these traces in metrics calculated, such as Health Checks.
+Both the tracing client and Datadog Agent offer additional configuration options for context propagation. You can also exclude specific resources from sending traces to Datadog if you don't want those traces to be included in calculated metrics, such as traces related to health checks.
 
 ### Propagating context with headers extraction and injection
 
