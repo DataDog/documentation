@@ -134,19 +134,24 @@ The following network load metrics are available:
 | Metric          |  Description                                                                                                                                    |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Volume**      | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.                           |
-|  **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional.                                                  |
+| **Throughput**  | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional.                                                  |
 
 #### TCP
 
-TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available: All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
+TCP is a connection-oriented protocol that guarantees in-order delivery of packets. 
+
+The following TCP metrics are available: 
 
 | Metric                      | Description                                                                                                                              |
 |-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | **TCP Retransmits**         | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
-| **TCP Latency**             | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged.                              |
+| **TCP Latency**             | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged.                             |
 | **TCP Jitter**              | Measured as TCP smoothed round-trip time variance.                                                                                       |
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client.                               |
 | **Closed Connections**      | The number of TCP connections in a closed state. Measured in connections per second from the client.                                     |
+| **Failed Connections**      | The number of unsuccessful TCP connection attempts. Measured in instances of failed connections from the client.                         |
+
+All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
 
 ### Cloud service autodetection
 
@@ -154,15 +159,15 @@ If you're relying on managed cloud services like S3 or Kinesis, you can monitor 
 
 {{< img src="network_performance_monitoring/network_analytics/cloud-service-hero-docs2.png" alt="Cloud Service Map" >}}
 
-For instance, you can
+For instance, you can:
 
-- visualize data flow from your internal Kubernetes cluster to `server_service:aws.s3` in the [Network Map][2].
-- pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
-- validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic performance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab.
+- Visualize data flow from your internal Kubernetes cluster to `server_service:aws.s3` in the [Network Map][2].
+- Pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
+- Validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic performance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab.
 
-NPM automatically maps
+NPM automatically maps:
 
-- network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
+- Network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
 - API calls to AppEngine, Google DNS, Gmail, and other [Google Cloud services][4].
 
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
