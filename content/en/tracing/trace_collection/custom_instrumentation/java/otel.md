@@ -90,6 +90,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Example {
 
+  private final static ContextKey<Span> CONTEXT_KEY =
+    ContextKey.named("opentelemetry-traces-local-root-span");
+
   public void begin() {
     tracer = GlobalOpenTelemetry.getTracer("my-scope", "0.1.0");
     Span parentSpan = tracer.spanBuilder("begin").startSpan();
@@ -103,10 +106,11 @@ public class Example {
   private void createChildSpan() {
     Span childSpan = tracer.spanBuilder("child-span").startSpan();
     try {
-      Span rootSpan = Context.current()
-        .get(ContextKey.named("opentelemetry-traces-local-root-span"));
-      rootSpan.setAttribute("my-attribute", "my-attribute-value");
-      rootSpan.setStatus(StatusCode.ERROR, "Some error details...");
+      Span rootSpan = Context.current().get(CONTEXT_KEY);
+        if (null != rootSpan) {
+          rootSpan.setAttribute("my-attribute", "my-attribute-value");
+          rootSpan.setStatus(StatusCode.ERROR, "Some error details...");
+        } 
     } finally {
       childSpan.end();
     }
