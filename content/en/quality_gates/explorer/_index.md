@@ -17,10 +17,6 @@ further_reading:
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
-{{< /callout >}}
-
 ## Overview
 
 The Quality Gates Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) quality gates or rule executions at multiple levels using any tag.

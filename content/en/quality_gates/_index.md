@@ -25,13 +25,11 @@ further_reading:
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
-{{< /callout >}}
-
 ## Overview
 
 Quality Gates allows you to proactively enhance software quality by setting rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
+
+{{< img src="quality_gates/rule_type.png" alt="A pipeline rule that fails when code coverage for PCT is zero in Quality Gates" style="width:100%" >}}
 
 Use Quality Gates to:
 
@@ -43,9 +41,40 @@ By integrating Quality Gates [into your CI/CD pipelines][7], you can create a ro
 
 ## Setup
 
-You can create rules to block code from being merged if it introduces new [flaky tests][1], code quality/vulnerability violations, software vulnerabilities and forbidden licenses, or issues that wouldn't normally fail your CI/CD pipelines and end up deployed to production.
+Quality Gates offers the following rule types:
 
-{{< img src="quality_gates/rule_type.png" alt="Options for Quality Gates rule types in Datadog" style="width:80%" >}}
+{{< tabs >}}
+{{% tab "Tests" %}}
+
+You can create rules to block code from being merged that introduces new [flaky tests][101].
+
+{{< img src="quality_gates/setup/flaky_test.png" alt="A Quality Gate rule that blocks when one or more flaky tests occur" style="width:80%" >}}
+
+[101]: /tests/guides/flaky_test_management/
+
+{{% /tab %}}
+{{% tab "Pipelines" %}}
+
+You can create rules to block code from being merged that introduces issues that wouldn't normally fail your CI/CD pipelines, but end up being deployed to production.
+
+{{< img src="quality_gates/setup/pipeline.png" alt="A Quality Gate rule that fails when code coverage for PCT is zero for a CI pipeline" style="width:80%" >}}
+
+{{% /tab %}}
+{{% tab "Static Analysis" %}}
+
+You can create rules to block code from being merged that introduces code quality and code vulnerability violations.
+
+{{< img src="quality_gates/setup/static_analysis.png" alt="A Quality Gate rule that fails when one or more new code quality violations with errors occur" style="width:80%" >}}
+
+{{% /tab %}}
+{{% tab "Software Composition Analysis" %}}
+
+You can create rules to block code from being merged that introduces software vulnerabilities and forbidden licenses.
+
+{{< img src="quality_gates/setup/sca.png" alt="A Quality Gate rule that fails when one or more new critical vulnerabilities are introduced" style="width:80%" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 To create a Quality Gate rule, see the [Setup documentation][2]. 
 
@@ -55,7 +84,26 @@ You can evaluate and update quality control processes by accessing Quality Gates
 
 {{< img src="quality_gates/rules_list.png" alt="List of Quality Gate rules in Datadog" style="width:100%" >}}
 
-To access Quality Gate rules, see the [Search and Manage documentation][5].
+To search for Quality Gate rules, see the [Search and Manage documentation][5].
+
+## Analyze executions in the Quality Gates Explorer
+
+You can search and filter for quality gates or rule executions, create visualizations, and export saved views of your search query on the [**Quality Gates Executions** page][8].
+
+{{< tabs >}}
+{{% tab "Gates" %}}
+
+{{< img src="quality_gates/explorer/gates_1.png" alt="Quality Gate results in the Quality Gates Explorer" style="width:100%" >}}
+
+{{% /tab %}}
+{{% tab "Rule Executions" %}}
+
+{{< img src="quality_gates/explorer/executions_1.png" alt="Quality Gate rule execution results in the Quality Gates Explorer" style="width:100%" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+For more information, see the [Quality Gates Explorer documentation][8].
 
 ## Track changes in rules
 
@@ -76,3 +124,4 @@ For more information, see the [Audit Trail documentation][4].
 [5]: /quality_gates/search/
 [6]: https://app.datadoghq.com/ci/quality-gates
 [7]: /monitors/guide/github_gating/
+[8]: /quality_gates/explorer/

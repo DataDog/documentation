@@ -3753,6 +3753,11 @@ menu:
       parent: quality_gates_explorer
       identifier: quality_gates_explorer_saved_views
       weight: 303
+    - name: Guides
+      url: quality_gates/guide
+      parent: quality_gates
+      identifier: quality_gates_guide
+      weight: 4
     - name: DORA Metrics
       url: dora_metrics/
       pre: ci
