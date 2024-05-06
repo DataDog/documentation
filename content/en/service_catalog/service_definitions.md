@@ -113,7 +113,7 @@ datadog:
 
 #### Common Questions
 ##### How do I specify common components (e.g., orders-postgres) that are part of multiple applications
-For example, if orders-postgres is a part of the overall postgres fleet managed by a database admin or infrastructure team, but also a critical part of the shopping-cart application. In this case, you will specify two application YAMLs. 
+For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
 One for the postgres fleet (managed-postgres):
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
