@@ -683,6 +683,57 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 [3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
 
 {{% /tab %}}
+
+{{% tab "Apache HTTPd" %}}
+
+## HTTPd with Datadog module
+Datadog provides an [HTTPd module][1] for [Apache HTTP Server][2].
+
+### Module installation
+<div class="alert alert-warning">
+  <strong>Note:</strong> Only Apache HTTP Server 2.4.x is supported.
+</div>
+
+The module is delivered as a shared library that can be loaded dynamically by HTTPd. There's one module per platform supported hosted on the
+[GitHub repository][1].
+
+Run the following script to download the latest version of the module:
+```shell
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
+}
+
+RELEASE_TAG=$(get_latest_release DataDog/httpd-datadog)
+wget "https://github.com/DataDog/httpd-datadog/releases/download/$RELEASE_TAG/$tarball"
+```
+
+The tarball contains `mod_datadog.so`, the shared library that needs to be load by the server.
+Put it wherever the HTTPd instance look for modules, usually it is X/Y/Z. For the sack of the documentation we will assume it is `x/y/z`.
+
+## HTTPd configuration with Datadog's module
+Load the module by adding the following line in the HTTPd configuration:
+
+```nginx
+LoadModule datadog_module modules/mod_datadog.so
+```
+
+Restart HTTPd to load the module. By default, all requests are traced and sent to the Datadog Agent.
+To change the module default behaviour, use `Datadog*` directives described in the Datadog module's [API documentation][3].
+
+For example, the following HTTPd configuration sets the service name to `my-service` and the sampling rate to 10%
+
+```nginx
+LoadModule datadog_module modules/mod_datadog.so
+
+DatadogServiceName my-app
+DatadogSamplingRate 0.1
+```
+
+[1]: https://github.com/DataDog/httpd-datadog
+[2]: https://httpd.apache.org/
+[3]: https://github.com/DataDog/httpd-datadog/blob/dmehala/add-trace/doc/configuration.md
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further Reading
