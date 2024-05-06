@@ -1,6 +1,6 @@
 ---
 core_product:
-- 인프라스트럭처 모니터링
+- infrastructure monitoring
 title: Amazon Resource Name (ARN)
 ---
 ARN은 AWS 리소스를 고유하게 식별하는 문자열입니다. 자세한 내용은 [AWS 설명서][1]를 참조하세요.

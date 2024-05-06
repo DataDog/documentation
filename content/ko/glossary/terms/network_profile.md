@@ -1,6 +1,6 @@
 ---
 core_product:
-- 네트워크 성능 모니터링
+- network performance monitoring
 - network device monitoring
 title: 네트워크 프로필
 ---

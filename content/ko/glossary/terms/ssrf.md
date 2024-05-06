@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - appsec
 title: 서버 측 요청 위조(SSRF)
 ---

@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 synonyms:
 - XSRF
 title: 사이트 간 요청 위조(CSRF)

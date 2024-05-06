@@ -1,6 +1,6 @@
 ---
 core_product:
-- 로그 관리
+- log management
 - apm
 title: 인덱싱됨
 ---

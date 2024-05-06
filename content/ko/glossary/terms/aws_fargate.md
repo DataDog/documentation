@@ -1,6 +1,6 @@
 ---
 core_product:
-- 서버리스 모니터링
+- serverless monitoring
 synonyms:
 - Fargate
 title: Python

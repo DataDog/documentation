@@ -1,6 +1,6 @@
 ---
 core_product:
-- 네트워크 성능 모니터링
+- network performance monitoring
 title: 네트워크 성능 모니터링 (NPM)
 ---
 Datadog의 NPM(네트워크 성능 모니터링)은 서비스, 컨테이너, 가용성 영역 등 간의 네트워크 트래픽에 대한 가시성을 제공합니다.

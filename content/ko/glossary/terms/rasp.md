@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - appsec
 title: 런타임 애플리케이션 자체 보호(RASP)
 ---

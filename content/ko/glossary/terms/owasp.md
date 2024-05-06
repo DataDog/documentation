@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - appsec
 title: 오픈 웹 애플리케이션 보안 프로젝트 (OWASP)
 ---

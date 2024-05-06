@@ -1,7 +1,7 @@
 ---
 core_product:
 - apm
-- 서버리스 모니터링
+- serverless monitoring
 - service catalog
 title: 서비스
 ---

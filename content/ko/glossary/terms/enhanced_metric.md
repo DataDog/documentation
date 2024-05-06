@@ -1,6 +1,6 @@
 ---
 core_product:
-- 서버리스 모니터링
+- serverless monitoring
 synonyms:
 - 향상된 Lambda 메트릭
 title: 향상된 메트릭

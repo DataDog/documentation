@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - appsec
 title: 동적 애플리케이션 보안 테스트 (DAST)
 ---

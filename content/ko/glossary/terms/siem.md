@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - cloud siem
 title: 보안 정보 및 이벤트 관리 (SIEM)
 ---
