@@ -119,7 +119,7 @@ The Azure SDK provides built-in OpenTelemetry support. Enable it by setting the 
 | [6.x][7]                  | latest              |
 | [5.x][8]                  | latest              |
 
-## Runtime support policy for .NET Framework APM
+## Runtime support policy
 
 Datadog APM for .NET depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, Datadog APM for .NET also limits its support for that version.
 

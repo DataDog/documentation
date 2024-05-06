@@ -132,7 +132,7 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 | [6.x][8]                  | Latest              |
 | [5.x][9]                  | Latest              |
 
-## Runtime support policy for .NET APM
+## Runtime support policy
 
 Datadog APM for .NET depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET. When the external software no longer supports a version of .NET, Datadog APM for .NET also limits its support for that version.
 
