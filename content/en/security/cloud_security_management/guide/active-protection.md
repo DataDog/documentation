@@ -7,6 +7,8 @@ further_reading:
   text: "CSM Threats Detection Rules"
 ---
 
+<div class="alert alert-info">CSM Threats **Active Protection** is in beta.</div>
+
 This topic explains how to use the CSM Threats **Active Protection** feature to block threats automatically. 
 
 By default, all OOTB Agent [threat detection rules][4] are enabled and actively monitoring for threats. 
