@@ -19,8 +19,8 @@ Each trace contains spans representing each choice made by an agent or each step
 ## Getting started
 
 {{< whatsnext desc="Get started with LLM Observability:" >}}
-   {{< nextlink href="/tracing/llm_observability/sdk_quickstart" >}}SDK Quickstart{{< /nextlink >}}
-   {{< nextlink href="/tracing/llm_observability/tracing_an_LLM_application" >}}Learn more about tracing LLM applications{{< /nextlink >}}
+   {{< nextlink href="/tracing/llm_observability/sdk_quickstart" >}}Build a simple example with the Quickstart{{< /nextlink >}}
+   {{< nextlink href="/tracing/llm_observability/tracing_an_LLM_application" >}}Trace your LLM application{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /tracing/llm_observability/spans/
