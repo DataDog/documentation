@@ -1,5 +1,5 @@
 ---
-title: Sending Failure Events via API for DORA Metrics
+title: Configuring Incident Event Submission for DORA Metrics
 kind: documentation
 description: Learn how to send incident events for DORA Metrics.
 aliases:

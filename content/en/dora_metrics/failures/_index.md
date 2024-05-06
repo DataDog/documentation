@@ -1,5 +1,5 @@
 ---
-title: Sending Failure Events for DORA Metrics
+title: How to Set Up Incident Data for DORA Metrics
 kind: documentation
 description: Learn how to send incident events for DORA Metrics.
 aliases:
@@ -31,7 +31,7 @@ further_reading:
 
 Failure events, interpreted through incident events, are used to compute [change failure rate](#calculating-change-failure-rate) and [mean time to restore (MTTR)](#calculating-mean-time-to-restore). 
 
-## Configuring failure data sources 
+## Selecting an incident data source
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for deployment events. See the respective documentation to set up a data source for your deployment events:" >}}
   {{< nextlink href="/dora_metrics/failures/pagerduty" >}}PagerDuty{{< /nextlink >}}

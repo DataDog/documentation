@@ -1,5 +1,5 @@
 ---
-title: Configuring Custom Event Submission for DORA Metrics
+title: Configuring Deployment Event Submission for DORA Metrics
 kind: documentation
 description: Learn how to send deployment events for DORA Metrics by using the API or CLI.
 aliases:
