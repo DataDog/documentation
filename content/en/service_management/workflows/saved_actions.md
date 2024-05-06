@@ -60,11 +60,12 @@ If you did not create the action, you cannot edit it directly. Instead select th
 
 {{< img src="service_management/workflows/edit_saved_action.png" alt="Preview, edit, or delete a saved action from the Action Catalog." style="width:80%;" >}}
 
-<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][3].
+
 [1]: https://app.datadoghq.com/workflow/action-catalog
 [2]: https://app.datadoghq.com/workflow/
+[3]: https://datadoghq.slack.com/

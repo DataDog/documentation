@@ -140,7 +140,7 @@ You can also select whether you want to allow expired certificates, or follow re
 
 Under **Error on Status**, enter a comma-delineated list of any status codes on which to return an error. Use the **Response Parsing** dropdown to override the default response parsing method inferred from the headers, and **Response Encoding** if the target server specifies the wrong encoding in its response headers.
 
-<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][4].
 
 ## Further reading
 
@@ -149,3 +149,4 @@ Under **Error on Status**, enter a comma-delineated list of any status codes on 
 [1]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
 [2]: /service_management/workflows/access/
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
+[4]: https://datadoghq.slack.com/

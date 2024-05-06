@@ -33,10 +33,11 @@ Datadog provides a suite of workflow actions that are not associated with a spec
 
 If your use case is not covered by an integration or generic Datadog action, you can [request a new action or an entire integration][1].
 
-<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
+
 [1]: https://forms.gle/JzPazvxXox7fvA2R8
+[2]: https://datadoghq.slack.com/

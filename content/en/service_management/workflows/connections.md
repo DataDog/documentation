@@ -106,11 +106,12 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
-<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
+
 
 [1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
@@ -120,3 +121,4 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 [8]: /service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /service_management/workflows/actions/http/
+[11]: https://datadoghq.slack.com/

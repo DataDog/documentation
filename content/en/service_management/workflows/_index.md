@@ -55,12 +55,14 @@ Below are a few examples of workflows you can build:
 - Execute workflows to roll back to stable versions of your application directly from the Dashboards you use to track the health of your systems.
 - Manage feature flags by automatically updating your feature flag config files in GitHub and automating the pull request and merge process.
 
-<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][4].
+
 [1]: /service_management/workflows/actions_catalog/
 [2]: /workflows/build/#build-a-workflow-from-a-blueprint
 [3]: https://app.datadoghq.com/dashboard/lists
+[4]: https://datadoghq.slack.com/
