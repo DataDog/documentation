@@ -56,7 +56,7 @@ For a full list of Datadog's .NET and .NET Core runtime, OS, and architecture su
 
 ## Installation and getting started
 
-To set up Datadog APM in AWS Lambda, see [Distributed Tracing with AWS Lambda Serverless Applications][8]. To set up Datadog APM in Azure App Service, see [Monitoring Azure App Service][9].
+To set up APM in AWS Lambda, see [Distributed Tracing with AWS Lambda Serverless Applications][8]. To set up APM in Azure App Service, see [Monitoring Azure App Service][9].
 
 To instrument [trimmed apps][13], reference the [`Datadog.Trace.Trimming`][10] NuGet package in your project. Support for trimmed apps is a beta feature.
 

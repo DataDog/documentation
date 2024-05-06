@@ -61,7 +61,7 @@ For a full list of Datadog's .NET Framework runtime, OS, and architecture suppor
 
 ## Installation and getting started
 
-To set up Datadog APM in AWS Lambda, see [Distributed Tracing with AWS Lambda Serverless Applications][7] . To set up Datadog APM in Azure App Service, see [Monitoring Azure App Service][8].
+To set up APM in AWS Lambda, see [Distributed Tracing with AWS Lambda Serverless Applications][7]. To set up APM in Azure App Service, see [Monitoring Azure App Service][8].
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment.
