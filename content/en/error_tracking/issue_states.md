@@ -18,8 +18,7 @@ IGNORED
 
 RESOLVED
 : RESOLVED issues have been fixed. The error no longer occurs.
-
-In the RESOLVED state, if the same error recurs in a newer version of the code, or the error occurs again in code without versions, Error Tracking triggers a [regression](#regressions). The issue moves to the **Open** state.
+: In the RESOLVED state, if the same error recurs in a newer version of the code, or the error occurs again in code without versions, Error Tracking triggers a [regression](#regressions). The issue moves to the **OPEN** state.
 
 <!-- ### UNRESOLVED
 **UNRESOLVED** issues can be labelled NEW, a REGRESSION, or REVIEWED. View your issues that need to be reviewed and triaged in the Error Tracking explorer and Mark as Reviewed The issue is a problem that needs to be fixed. Reviewed issues can be assigned a PRIORITY (not implemented), which will reflect whether the issue should be fixed ASAP (high prio) or LATER (low prio) -->
