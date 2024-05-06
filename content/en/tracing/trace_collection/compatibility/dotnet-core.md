@@ -24,11 +24,7 @@ The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual B
 
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
-<div class="alert alert-info">
-  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
-</div>
-
-## Supported .NET runtimes
+## Supported .NET and .NET Core runtimes
 
 The .NET Tracer supports automatic and custom instrumentation on the following .NET versions. It also supports [.NET Framework][2].
 
@@ -45,6 +41,10 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
  Additional information can be found within [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET APM](#runtime-support-policy-for-net-apm).
+
+<div class="alert alert-info">
+  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
+</div>
 
 ## Supported processor architectures
 
