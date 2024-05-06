@@ -1806,15 +1806,15 @@ menu:
       parent: error_tracking
       identifier: error_tracking_default_grouping
       weight: 2
-    - name: Issue States and Workflows
-      url: error_tracking/issue_states
-      parent: error_tracking
-      identifier: error_tracking_states
-      weight: 3
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
+      weight: 3
+    - name: Issue States and Workflows
+      url: error_tracking/issue_states
+      parent: error_tracking
+      identifier: error_tracking_states
       weight: 4
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits

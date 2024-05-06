@@ -12,7 +12,7 @@ All Issues in Error Tracking have a status to help you triage and prioritize iss
 
 ### OPEN
 <!-- ### UNRESOLVED -->
-All issues start as Open. An Open issue is one that's ongoing (the same error is continuing to occur) and needs attention because it’s either new, its a regression (the behavior has changed ), or it needs to be fixed. 
+All issues start as Open. An Open issue is one that's ongoing (the same error is continuing to occur) and needs attention because it’s either new, it's a regression (the behavior has changed ), or it needs to be fixed. 
 
 <!-- ### UNRESOLVED
 **UNRESOLVED** issues can be labelled NEW, a REGRESSION, or REVIEWED. View your issues that need to be reviewed and triaged in the Error Tracking explorer and Mark as Reviewed The issue is a problem that needs to be fixed. Reviewed issues can be assigned a PRIORITY (not implemented), which will reflect whether the issue should be fixed ASAP (high prio) or LATER (low prio) -->
