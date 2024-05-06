@@ -12,6 +12,10 @@ further_reading:
   text: "Read more about CSM Vulnerabilities"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
 ## Overview
@@ -52,7 +56,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 **Notes**:
 - The scanner operates as a separate EC2 instance within your infrastructure, ensuring minimal impact on existing systems and resources.
-- The scanner securely collects a list of packages from your hosts without transmitting any confidential or private information outside your infrastructure.
+- The scanner securely collects a list of packages from your hosts without transmitting any confidential or private personal information outside your infrastructure.
 - The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and uses exponential backoff if needed.
 
 ## What data is sent to Datadog
