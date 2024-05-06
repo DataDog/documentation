@@ -27,13 +27,13 @@ further_reading:
 
 ## Overview
 
-Quality Gates allows you to proactively enhance software quality by setting rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
+Quality Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
 
 {{< img src="quality_gates/rule_type.png" alt="A pipeline rule that fails when code coverage for PCT is zero in Quality Gates" style="width:100%" >}}
 
 Use Quality Gates to:
 
-* Create rules that block workflows by using data in Datadog, ensuring that only code that has passed tests affects your production environment.
+* Create rules that block workflows using data in Datadog, ensuring that only code that meets your standards end up in production.
 * Give your organization the ability to decide what code makes it to production, enhancing your deployment discipline and mitigating potential issues in live environments.
 * Continually improve code quality and system performance with precise enforcement and customizable rules.
 
