@@ -243,6 +243,63 @@ To collect data from your AWS Fargate pods, you must run the Agent as a sidecar 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Threat Detection and Protection
+
+### Java
+
+1. Update your Datadog Java library to at least version 0.94.0 (at least version 1.1.4 for Software Composition Analysis detection features):
+1. Run your Java application with ASM enabled. From the command line:
+    Or one of the following methods, depending on where your application runs: (FARGATE)
+
+### .NET
+
+1. Update your Datadog .NET library to at least version 2.2.0 (at least version 2.16.0 for Software Composition Analysis detection features) for your target operating system architecture.
+1. Enable ASM by setting the DD_APPSEC_ENABLED environment variable to true. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
+
+    Or one of the following methods, depending on where your application runs: (FARGATE)
+
+1. Restart the application using a full stop and start.
+
+### Go
+
+1. Add to your program's go.mod dependencies the latest version of the Datadog Go library (version 1.53.0 or later):
+1. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of Go libraries and frameworks. A list of these packages can be found in the compatibility requirements page. Import these packages into your application and follow the configuration instructions listed alongside each integration.
+1. Recompile your program with ASM enabled:
+1. Redeploy your Go service and enable ASM by setting the DD_APPSEC_ENABLED environment variable to true:
+
+    Or one of the following methods, depending on where your application runs: (ONLY AWS ECS LISTED?)
+
+### Ruby
+
+1. Update your Gemfile to include the Datadog library:
+1. Enable ASM by enabling the APM tracer. The following options describe a quick setup that covers the most common cases. Read the Ruby tracer documentation for more details.
+
+    Or one of the following methods, depending on where your application runs: (FARGATE)
+
+### Node.JS
+
+1. Update your Datadog Node.js library package to at least version 5.0.0 (for Node 18+) or 4.0.0 (for Node 16+) or 3.10.0 (for NodeJS 14+), by running one of these commands:
+1. Where you import and initialize the Node.js library for APM, also enable ASM. This might be either in your code or with environment variables. If you initialized APM in code, add {appsec: true} to your init statement:
+
+    Or if you initialize the APM library on the command line using the --require option to Node.js:
+
+    Then use environment variables to enable ASM:
+
+    How you do this varies depending on where your service runs: (FARGATE)
+
+### Python
+
+1. Update your Datadog Python library package to at least version 1.2.2 (at least version 1.5.0 for Software Composition Analysis detection features). Run the following:
+1. Enable ASM when starting the Python application.
+
+    You can also use one of the following methods, depending on where your application runs: (FARGATE)
+
+## Code Security
+
+- Java
+- .NET
+- Node.js
+
 ## Cloud SIEM
 
 AWS Fargate and Related Resources via AWS Cloud Controlplane logs
