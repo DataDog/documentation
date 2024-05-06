@@ -24,8 +24,7 @@ See the full list of environment variables below.
 
 ### Supported environment variables
 
-`DD_API_KEY`
-: required - _string_
+`DD_API_KEY`: required - _string_
 <br />Your Datadog API key.
 
 `DD_SITE`: required - _string_ 
