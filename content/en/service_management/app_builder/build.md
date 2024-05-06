@@ -196,6 +196,8 @@ Variables are enclosed in braces and are preceded by a dollar sign (`${}`). To u
 
 To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
+<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#app-builder</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

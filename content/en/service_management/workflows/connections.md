@@ -106,6 +106,8 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
+<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

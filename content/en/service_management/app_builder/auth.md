@@ -100,6 +100,8 @@ To restrict access to the app, perform the following steps in the app canvas:
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
 1. Click **Save**.
 
+<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#app-builder</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
+
 [1]: /service_management/workflows/actions_catalog/
 [2]: /service_management/workflows/connections/
 [3]: /service_management/workflows/

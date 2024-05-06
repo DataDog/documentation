@@ -140,6 +140,8 @@ You can also select whether you want to allow expired certificates, or follow re
 
 Under **Error on Status**, enter a comma-delineated list of any status codes on which to return an error. Use the **Response Parsing** dropdown to override the default response parsing method inferred from the headers, and **Response Encoding** if the target server specifies the wrong encoding in its response headers.
 
+<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

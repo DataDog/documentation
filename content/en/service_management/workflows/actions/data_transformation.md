@@ -63,4 +63,6 @@ let object = {0:{
 ...
 ```
 
+<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
+
 [1]: https://lodash.com/

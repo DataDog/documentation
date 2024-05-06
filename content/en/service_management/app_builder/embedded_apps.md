@@ -44,6 +44,8 @@ App elements that are linked with dashboard template variables update in tandem 
 
 {{< img src="service_management/app_builder/embedded_apps/template_variables.mp4" alt="Selecting a template variable value from a graph" video="true">}}
 
+<div class="alert alert-info">Do you have questions or feedback? Join the <strong>#app-builder</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack.</a></div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
