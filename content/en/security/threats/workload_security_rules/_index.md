@@ -140,5 +140,5 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 [8]: /security/threats/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules
-[11]: https://docs.datadoghq.com/security/threats/workload_security_rules/custom_rules
+[11]: /security/threats/workload_security_rules/custom_rules
 [12]: /security/cloud_security_management/guide/active-protection
