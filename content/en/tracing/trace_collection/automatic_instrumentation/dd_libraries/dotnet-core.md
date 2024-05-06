@@ -1,5 +1,5 @@
 ---
-title: Tracing .NET Core Applications
+title: Tracing .NET Core and .NET 5+ Applications
 kind: documentation
 aliases:
   - /tracing/dotnet-core
@@ -29,9 +29,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
-  - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
-    tag: 'Blog'
-    text: 'Monitor containerized ASP.NET Core applications'
+  - link: "https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/"
+    tag: "Blog"
+    text: "Monitor containerized ASP.NET Core applications"
   - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
     tag: "Blog"
     text: "Deploy ASP.NET Core applications to Azure App Service"
@@ -48,16 +48,18 @@ further_reading:
 
 ## Compatibility requirements
 
-### Supported .NET Core runtimes
+### Supported .NET Core and .NET runtimes
 
 The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7, and .NET 8.
 
-For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
+For .NET Framework, see [Tracing .NET Framework Applications][7].
+
+For a full list of Datadog's .NET Core runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
 <div class="alert alert-info">
-    To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
+  To set up Datadog APM in AWS Lambda, see <strong>[Tracing Serverless Functions][8]</strong>. To set up in Azure App Service, see <strong>[Tracing Azure App Services][9]</strong>.
 </div>
 
 <div class="alert alert-warning">
@@ -442,5 +444,8 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [4]: /tracing/trace_collection/library_config/dotnet-core/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/
+[8]: /tracing/serverless_functions/
+[9]: /serverless/azure_app_services/
 [11]: /tracing/trace_collection/library_injection_local/
 [12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
