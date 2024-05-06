@@ -41,6 +41,8 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar p
 ### One-Click Installation
 To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][5]. Navigate to the APM Service Page and `Enable DSM`.
 
+{{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
+
 ### Supported libraries
 Data Streams Monitoring supports the [confluent-kafka library][3].
 
