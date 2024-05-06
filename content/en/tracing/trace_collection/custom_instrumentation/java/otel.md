@@ -91,7 +91,7 @@ import java.util.concurrent.TimeUnit;
 public class Example {
 
   public void begin() {
-    tracer = getOpenTelemetry().getTracer("my-scope", "0.1.0");
+    tracer = GlobalOpenTelemetry.getTracer("my-scope", "0.1.0");
     Span parentSpan = tracer.spanBuilder("begin").startSpan();
     try (Scope scope = parentSpan.makeCurrent()) {
       createChildSpan();
@@ -112,19 +112,6 @@ public class Example {
     }
   }
 
-  public OpenTelemetry getOpenTelemetry() {
-    Resource resource = Resource.getDefault().toBuilder()
-      .put(ResourceAttributes.SERVICE_NAME, "my-service").build();
-    OtlpGrpcSpanExporter otlpGrpcSpanExporter = OtlpGrpcSpanExporter.builder()
-      .setTimeout(5, TimeUnit.SECONDS).build();
-    SdkTracerProvider setTracerProvider = SdkTracerProvider.builder()
-      .addSpanProcessor(BatchSpanProcessor.builder(otlpGrpcSpanExporter)
-        .setScheduleDelay(100, TimeUnit.MILLISECONDS).build())
-      .setResource(resource)
-      .build();
-    return OpenTelemetrySdk.builder().setTracerProvider(setTracerProvider)
-      .buildAndRegisterGlobal();
-  }
 }
 ```
 
@@ -175,7 +162,7 @@ import java.util.concurrent.TimeUnit;
 public class Example {
 
   public void doSomething() {
-    Tracer tracer = getOpenTelemetry().getTracer("my-scope", "0.1.0");
+    Tracer tracer = GlobalOpenTelemetry.getTracer("my-scope", "0.1.0");
     Span span = tracer.spanBuilder("my-resource").startSpan();
     try (Scope scope = span.makeCurrent()) {
       // do some work
@@ -187,19 +174,6 @@ public class Example {
     }
   }
 
-  public OpenTelemetry getOpenTelemetry() {
-    Resource resource = Resource.getDefault().toBuilder()
-      .put(ResourceAttributes.SERVICE_NAME, "my-service").build();
-    OtlpGrpcSpanExporter otlpGrpcSpanExporter = OtlpGrpcSpanExporter.builder()
-      .setTimeout(5, TimeUnit.SECONDS).build();
-    SdkTracerProvider setTracerProvider = SdkTracerProvider.builder()
-      .addSpanProcessor(BatchSpanProcessor.builder(otlpGrpcSpanExporter)
-        .setScheduleDelay(100, TimeUnit.MILLISECONDS).build())
-      .setResource(resource)
-      .build();
-    return OpenTelemetrySdk.builder()
-      .setTracerProvider(setTracerProvider).buildAndRegisterGlobal();
-    }
 }
 ```
 
