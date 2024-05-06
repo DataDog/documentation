@@ -57,14 +57,14 @@ further_reading:
 
 The .NET Tracer supports instrumentation on .NET Framework 4.6.1 and above.
 
-For .NET Core and .NET 5 and above, see [Tracing .NET Core and .NET 5+ Applications][6].
+For applications built on .NET Core or .NET 5 and above, see [Tracing .NET Core and .NET 5+ Applications][6].
 
 For a full list of Datadog's .NET Framework runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
 <div class="alert alert-info">
-  To set up Datadog APM in AWS Lambda, see <strong>[Tracing Serverless Functions][7]</strong>. To set up in Azure App Service, see <strong>[Tracing Azure App Services][8]</strong>.
+  To set up Datadog APM in AWS Lambda, see [Tracing Serverless Functions][7] . To set up Datadog APM in Azure App Service, see [Tracing Azure App Services][8].
 </div>
 
 <div class="alert alert-warning">

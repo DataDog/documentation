@@ -1,5 +1,5 @@
 ---
-title: .NET Core Compatibility Requirements
+title: .NET Core and .NET 5+ Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the .NET tracer'
 aliases:
@@ -20,14 +20,17 @@ further_reading:
       text: 'Monitor containerized ASP.NET Core applications'
 ---
 
-
 The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
 
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
-## Supported .NET Core runtimes
+<div class="alert alert-info">
+  .NET Core was rebranded as simply ".NET" starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
+</div>
 
-The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
+## Supported .NET runtimes
+
+The .NET Tracer supports automatic and custom instrumentation on the following .NET versions. It also supports [.NET Framework][2].
 
 | Version              | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
@@ -61,15 +64,15 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 
 | Framework or library            | NuGet package                                                                                        | Integration Name     |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
-| ADO.NET                         | All AdoNet integrations                                                                              | `AdoNet`             |
+| ADO.NET                         | All ADO.NET libraries                                                                                | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                              | `AspNetCore`         |
 | Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
 | Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                            | `AwsDynamoDb`        |
-| Amazon Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
-| Amazon SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
-| Amazon SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                               | `CosmosDb`           |
+| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
+| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
+| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                                      | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                                     | `GraphQL`            |
@@ -77,7 +80,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                               | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                               | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                               | `Kafka`              |
-| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                                 | `IbmMq`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                                         | `MongoDb`            |
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
@@ -91,11 +94,15 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
-Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [activity based tracing][13]). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [`Activity`-based tracing][13]). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
-## OpenTelemetry based integrations
+## OpenTelemetry integrations
 
-Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet expliciitly tested).
+Some libraries provide built-in [`Activity`-based tracing][13]. This is the same mechanism that OpenTelemetry is based on.
+
+For these libraries, set `DD_TRACE_OTEL_ENABLED=true`, and the .NET tracer automatically captures their traces. This is supported since [version 2.21.0][4].
+
+The following list of libraries have been tested with this setup:
 
 | Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
 | ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
@@ -103,8 +110,7 @@ Some libraries provide built in [Activity based tracing][13]. This is the same m
 
 ### Azure SDK
 
-Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][14] for more details.
-
+The Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][14] for more details.
 
 ## End of life .NET and .NET Core versions
 
