@@ -38,9 +38,7 @@ For more information about the latest updates, see the schemas on GitHub.
 ### Metadata Schema v3.0 (beta) 
 The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][1].
 
-#### Example 
-
-##### YAML for `kind:application`
+#### Example YAML for `kind:application`
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: application
@@ -111,8 +109,7 @@ datadog:
       - fp2
 {{< /code-block >}}
 
-#### Common Questions
-##### How do I specify common components (e.g., orders-postgres) that are part of multiple applications
+#### Specify common components that are part of multiple applications
 For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
 For the postgres fleet (`managed-postgres`):
