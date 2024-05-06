@@ -307,8 +307,18 @@ workflow_span = LLMObs.workflow(name="process_message")
 	return
 {{< /code-block >}}
 
-## Tracking a user session
-TODO
+## Tracking user sessions
+
+Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def process_message():
+	with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>") as workflow_span:
+		... # user application logic
+	return 
+{{< /code-block >}}
 
 [open-ai-python-sdk]: https://github.com/openai/openai-python
 [boto3]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
