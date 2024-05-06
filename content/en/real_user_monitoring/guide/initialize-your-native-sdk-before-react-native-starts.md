@@ -12,7 +12,7 @@ algolia:
 
 ## Overview
 
-You can initialize your native SDK in order for Datadog to capture any crashes before the React Native layer starts.
+Starting from v2.3.0, you can initialize your native SDK in order for Datadog to capture any crashes before the React Native layer starts.
 
 ## Configuration
 
@@ -43,7 +43,7 @@ To initialize your native SDK before React Native has started:
 
    1. Add the following snippet to the `MainApplication.kt` file:
 
-      ```js
+      ```kotlin
       import com.datadog.reactnative.DdSdkNativeInitialization
 
       class MainApplication : Application(), ReactApplication {
@@ -57,7 +57,7 @@ To initialize your native SDK before React Native has started:
 
    2. Add the following snippet to the `android/app/build.gradle` file:
 
-      ```js
+      ```gradle
       apply from: "../../node_modules/@datadog/mobile-react-native/datadog-configuration.gradle"
       ```
 
@@ -68,7 +68,7 @@ To initialize your native SDK before React Native has started:
 
    1. Add the following snippet to the `AppDelegate.mm` file:
 
-      ```swift
+      ```objc
       // Add this import
       #import "DdSdk.h"
 
@@ -86,7 +86,7 @@ To initialize your native SDK before React Native has started:
 
    Change the Datadog initialization to read from the same file to ensure consistency:
 
-   ```js
+   ```jsx
    const configuration  = new FileBasedConfiguration(require("./datadog-configuration.json"))
 
    <DatadogProvider configuration={configuration}>
@@ -103,7 +103,7 @@ Depending on your OS, the configuration file may be in a different location:
 
 - In **Android**, you can specify where to get the file to copy by adding the following snippet:
 
-  ```js
+  ```gradle
   project.ext.datadog = [
       configurationFilePath: "../../../datadog-configuration.json"
   ]
