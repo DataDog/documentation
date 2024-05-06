@@ -1,5 +1,5 @@
 ---
-title: slo list
+title: slo list widget
 core_product:
   - dashboards
 related_terms:

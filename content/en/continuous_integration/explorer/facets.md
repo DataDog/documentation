@@ -26,7 +26,7 @@ The [CI Visibility Explorer][4] includes out-of-the-box facets such as `Test Sta
 {{< tabs >}}
 {{% tab "Test Runs" %}}
 
-Navigate to [**CI** > **Test Runs**][101] to access the list of facets left of the test runs list.
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] to access the list of facets left of the test runs list.
 
 {{< img src="/continuous_integration/facets-tests.png" text="Facets list on the Test Runs page of the CI Visibility Explorer" style="width:100%" >}}
 
@@ -35,7 +35,7 @@ Navigate to [**CI** > **Test Runs**][101] to access the list of facets left of t
 {{% /tab %}}
 {{% tab "Pipeline Executions" %}}
 
-Navigate to [**CI** > **Pipeline Executions**][101] to access the list of facets left of the pipeline executions list.
+Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] to access the list of facets left of the pipeline executions list.
 
 {{< img src="/continuous_integration/facets-pipelines.png" text="Facets list on the Pipeline Executions page of the CI Visibility Explorer" style="width:100%" >}}
 
