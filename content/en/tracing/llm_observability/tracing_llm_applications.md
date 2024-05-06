@@ -32,6 +32,7 @@ Optionally, you can also:
 - [Track a user session] by specifying a `session_id` to associate with traces representing your application's interactions with that user
 - [Annotate a span] with input data, output data, metadata (such as max tokens), and key-value tags (such as version).
 - [Persist a span between contexts or scopes] by manually starting and stopping it
+- [Override the name of the LLM application with a different name] when starting a root span
 
 ### Install the Python SDK
 

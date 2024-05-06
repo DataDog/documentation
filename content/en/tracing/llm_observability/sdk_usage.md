@@ -33,7 +33,7 @@ See the full list of environment variables below.
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_APP_NAME`: required - _string_ 
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
 `DD_LLMOBS_NO_APM`: optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
@@ -316,6 +316,23 @@ from ddtrace.llmobs import LLMObs
 
 def process_message():
 	with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>") as workflow_span:
+		... # user application logic
+	return 
+{{< /code-block >}}
+
+## Tracing multiple applications
+
+The SDK supports tracking multiple LLM applications from the same service.
+
+You can configure an environment variable `DD_LLMOBS_APP_NAME` to the name of your LLM application, which all generated spans are grouped into by default.
+
+To override this configuration and use a different LLM application name for a given root span, pass the `ml_app` argument with the string name of the underlying LLM application when starting a root span for a new trace or a span in a new process.
+
+{{< code-block lang="python">}}
+from ddtrace.llmobs import LLMObs
+
+def process_message():
+	with LLMObs.workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>") as workflow_span:
 		... # user application logic
 	return 
 {{< /code-block >}}
