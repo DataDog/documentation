@@ -65,7 +65,7 @@ To compute these metrics, there must be a pull request (PR) associated with a co
 
 If a commit does not have an associated PR, only time to deploy and deploy time metrics are available.
 
-- `dora.time_to_pr_ready`: Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR is ready for review.
+- `dora.time_to_pr_ready`: Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR was marked as ready for review.
 - `dora.review_time`: Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved.
 - `dora.merge_time`: Time from the last approval until the PR is merged.
 - `dora.time_to_deploy`: Time from PR merge to start of deployment. If a commit does not have an associated PR, this metric is calculated as the time from commit creation to start of deployment.
