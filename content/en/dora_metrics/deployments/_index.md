@@ -49,7 +49,7 @@ To calculate change lead time for a deployment, Datadog runs [`git log`][6] betw
 
 Datadog breaks down change lead time into the following metrics, which represent the different stages from commit creation to deployment.
 
-To compute these metrics, there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
+These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
 
 If a commit does not have an associated PR, only time to deploy and deploy time metrics are available.
 

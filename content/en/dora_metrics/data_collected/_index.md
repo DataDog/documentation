@@ -40,7 +40,7 @@ All default metrics contain the following tags if any are available:
 - `env`
 - `repository_id`
 
-**Note**: The `severity` tag is available for `dora.incidents_impact` and `dora.time_to_restore` metrics, if it is provided through the [DORA Metrics API][7].
+**Note**: The `severity` tag is available for `dora.incidents_impact` and `dora.time_to_restore` metrics when it is provided by the failure's data source.
 
 For more information about using `env`, `service`, and `version` tags, see [Getting Started with Tags][6].
 
