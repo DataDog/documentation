@@ -52,7 +52,7 @@ implementation "com.datadoghq:dd-sdk-android-webview"
 
 On iOS, add the Datadog iOS SDKs to your dependencies in your ios/Podfile to use in Objective C files:
 
-```swift
+```ruby
 # Make sure the version matches the one from node_modules/@datadog/mobile-react-native/DatadogSDKReactNative.podspec
 pod 'DatadogSDKObjc', '~> 2.5.0'
 ```
@@ -114,7 +114,7 @@ npm install @datadog/mobile-react-native.
 
 Add the Datadog Android SDK to your dependencies in your `android/app/build.gradle` file:
 
-```java
+```gradle
 // The version is set by @datadog/mobile-react-native
 implementation "com.datadoghq:dd-sdk-android-rum"
 implementation "com.datadoghq:dd-sdk-android-logs"
@@ -143,7 +143,7 @@ Initialize the SDK on the native side. See the official documentation for [iOS][
 
 Use a `ComponentPredicate` to filter out native views created by your navigation libraries:
 
-```java
+```kotlin
 // Adapt the Fragment type to your View tracking strategy
 class RNComponentPredicate : ComponentPredicate<Fragment> {
     override fun accept(component: Fragment): Boolean {
@@ -207,7 +207,7 @@ If you have enabled ProGuard obfuscation, add rules to prevent obfuscation of th
 
 Wrap your React Native app with the `DatadogProvider` component to automatically register React Native RUM errors, interactions, and resources:
 
-```java
+```jsx
 const configuration = {
     trackResources: true,
     trackErrors: true,
@@ -240,7 +240,7 @@ AppRegistry.registerComponent('RNApp', () => RNApp);
 
 To remove duplicated interactions on **Android**, filter out the React Native interactions on the native side with an EventMapper:
 
-```java
+```kotlin
 class RNActionEventMapper : EventMapper<ActionEvent> {
     override fun map(event: ActionEvent): ActionEvent? {
         var targetClassName = (event.context?.additionalProperties?.get("action.target.classname") as? String)
@@ -266,7 +266,7 @@ To keep this functionality, add the following snippets in your native configurat
 {{< tabs >}}
 {{% tab "Android" %}}
 
-```java
+```kotlin
 val config = RumConfiguration.Builder(applicationId = appId)
  .setResourceEventMapper(object : EventMapper<ResourceEvent> {
         override fun map(event: ResourceEvent): ResourceEvent? {
