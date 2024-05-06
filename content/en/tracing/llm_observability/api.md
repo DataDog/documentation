@@ -122,7 +122,7 @@ Method
 ### Response
 If the request is successful, the API responds with a 202 network code and an empty body.
 
-### API standards             |
+### API standards
 
 #### `Error`
 | Field   | Type   | Description        |
