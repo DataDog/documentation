@@ -278,11 +278,11 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 To attach automatic instrumentation to your service, set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
-### Windows
-
 <div class="alert alert-warning">
-  <strong>Note:</strong> The .NET runtime tries to load a tracing library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to load the tracing library.</strong>
+  <strong>Note:</strong> The .NET runtime tries to load the tracing library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>It is not recommended to set these environment variables globally on a host as this causes <em>all</em> .NET processes on the host to load the tracing library.</strong>
 </div>
+
+### Windows
 
 #### Windows services
 
@@ -413,10 +413,6 @@ When using `systemctl` to run .NET applications as a service, you can add the re
 3. Restart the .NET service for the environment variable settings to take effect.
 
 #### `systemctl` (all services)
-
-<div class="alert alert-warning">
-  <strong>Note:</strong> The .NET runtime tries to load a tracing library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to load the tracing library.</strong>
-</div>
 
 When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services run by `systemctl`.
 
