@@ -1,5 +1,5 @@
 ---
-title: .NET Core and .NET 5+ Compatibility Requirements
+title: .NET and .NET Core Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the .NET tracer'
 aliases:
@@ -25,7 +25,7 @@ The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual B
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
 <div class="alert alert-info">
-  .NET Core was rebranded as simply ".NET" starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
+  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
 </div>
 
 ## Supported .NET runtimes
@@ -44,7 +44,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
- Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET Core APM](#runtime-support-policy-for-net-core-apm).
+ Additional information can be found within [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET APM](#runtime-support-policy-for-net-apm).
 
 ## Supported processor architectures
 
@@ -132,9 +132,9 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 | [6.x][8]                    | Latest              |
 | [5.x][9]                    | Latest              |
 
-## Runtime support policy for .NET Core APM
+## Runtime support policy for .NET APM
 
-Datadog APM for .NET Core depends on the host operating system, .NET Core runtime, certain .NET Core libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Core. When the external software no longer supports a version of .NET Core, Datadog APM for .NET Core also limits its support for that version.
+Datadog APM for .NET depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET. When the external software no longer supports a version of .NET, Datadog APM for .NET also limits its support for that version.
 
 ### Levels of support
 
@@ -148,11 +148,11 @@ Datadog APM for .NET Core depends on the host operating system, .NET Core runtim
 
 ### Package versioning
 
-Datadog APM for .NET Core practices [semantic versioning][11].
+Datadog APM for .NET practices [semantic versioning][11].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
-  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime, but may add support for one.
   - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
 ## Further reading

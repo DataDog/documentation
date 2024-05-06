@@ -24,7 +24,7 @@ The .NET Tracer is open source. For more information, see the [.NET Tracer repos
 
 ## Supported .NET Framework runtimes
 
-The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core and .NET 5+][2]. The .NET Tracer does not support code running in partial trust environments.
+The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET 5+ and .NET Core][2]. The .NET Tracer does not support code running in partial trust environments.
 
 | .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             | Datadog End of Life |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- | ------------------- |
@@ -39,7 +39,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
 | 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
 
-Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][4] and in [Runtime support policy for .NET Framework APM](#runtime-support-policy-for-net-framework-apm).
+Additional information can be found within [Microsoft's .NET and .NET Core Lifecycle Policy][4] and in [Runtime support policy for .NET APM](#runtime-support-policy-for-net-apm).
 
 <div class="alert alert-info">
   <div class="alert-info"><b>Note:</b> When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
@@ -122,7 +122,7 @@ The Azure SDK provides built-in OpenTelemetry support. Enable it by setting the 
 
 ## Runtime support policy for .NET Framework APM
 
-Datadog APM for .NET Framework depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, Datadog APM for .NET Framework also limits its support for that version.
+Datadog APM for .NET depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, Datadog APM for .NET also limits its support for that version.
 
 ### Levels of support
 
@@ -136,11 +136,11 @@ Datadog APM for .NET Framework depends on the host operating system, .NET Framew
 
 ### Package versioning
 
-Datadog APM for .NET Framework practices [semantic versioning][10].
+Datadog APM for .NET practices [semantic versioning][10].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
-  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
+  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime, but may add support for one.
   - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
 
 ## Further reading

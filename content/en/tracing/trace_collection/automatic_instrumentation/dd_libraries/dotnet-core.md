@@ -54,10 +54,10 @@ The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5
 
 For application built on .NET Framework, see [Tracing .NET Framework Applications][7].
 
-For a full list of Datadog's .NET Core runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
+For a full list of Datadog's .NET runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 <div class="alert alert-info">
-  .NET Core was rebranded as simply ".NET" starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
+  <strong>.NET Core</strong> was rebranded as <strong>.NET</strong> starting with version 5. In this page, may refer to ".NET Core" or ".NET" interchangeably unless referring to a specific version.
 </div>
 
 ## Installation and getting started
