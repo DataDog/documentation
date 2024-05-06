@@ -39,13 +39,18 @@ Failure events, interpreted through incident events, are used to compute [change
 {{< /whatsnext >}}
 
 ## Calculating change failure rate 
+Change failure rate requires both [deployment data][2] and [incident data](#configuring-failure-data-sources).
 
-Change failure rate is calculated by dividing `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an failure and a deployment event. 
+Change failure rate is calculated as the percentage of incident events out of the total number of deployments. Datadog divides `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an failure and a deployment event. 
 
-## Calculating mean time to restore 
+## Calculating time to restore 
+Time to restore is calculated as the duration distribution for *resolved incident* events.
 
-DORA Metrics generates a `dora.time_to_restore` metric based on the start and end times for each incident event. For mean time to restore, DORA Metrics calculates the average of individual `dora.time_to_restore` data points over a selected time frame. 
+Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
 
+DORA Metrics generates a `dora.time_to_restore` metric based on the start and end times for each incident event.
+
+For mean time to restore (MTTR), DORA Metrics calculates the average of individual `dora.time_to_restore` data points over a selected time frame. 
 
 ## Further Reading
 
@@ -57,3 +62,4 @@ DORA Metrics generates a `dora.time_to_restore` metric based on the start and en
 [4]: /tracing/service_catalog/setup
 [5]: /tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
+[7]: /dora_metrics/setup/deployments

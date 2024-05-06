@@ -70,18 +70,6 @@ curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/inciden
 EOF
 ```
 
-## Calculating change failure rate
-
-The change failure rate metric is calculated as the percentage of incident events out of the total number of deployments.
-
-To populate this metric, send your [deployment events][2] and [incident events](#overview) to Datadog.
-
-## Calculating mean time to restore
-
-The mean time to restore (MTTR) metric is calculated as the duration distribution for *resolved incident* events.
-
-Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
