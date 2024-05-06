@@ -3,6 +3,8 @@ title: Span kinds
 kind: documentation
 ---
 
+<div class="alert alert-info">LLM Observability is in public beta.</a></div>
+
 LLM Observability supports the following span kinds:
 
 | Kind      | Represents   | Root span?   | Can have child spans? |

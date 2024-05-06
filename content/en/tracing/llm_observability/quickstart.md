@@ -1,6 +1,7 @@
 ---
 title: Quickstart
 ---
+<div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
 Our quickstart docs make use of our Python SDK. For detailed usage, see [the SDK documentation][1]. If your application is written in another language, you can create traces by calling the [API] instead.
 
@@ -16,9 +17,9 @@ Use the steps below to run a simple Python script that generates an LLM Observab
 
 Install the following `ddtrace` package hash:
 
-```bash
+{{< code-block lang="shell" >}}
 pip install git+https://github.com/DataDog/dd-trace-py.git@c03cc8764c508cf53ea38b7b0f0eb6cb39627d91
-```
+{{< /code-block >}}
 
 ### 2. Create the script
 
@@ -49,9 +50,10 @@ DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart DD_API_KEY=<YOUR_DA
 
 ### 4. View the trace
 
-A trace of your LLM call now appears in the "Traces" tab of Datadog's LLM Observability product.
+A trace of your LLM call now appears in [the "Traces" tab][3] of Datadog's LLM Observability product.
 
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from Datadog's list of supported integrations.
 
 [1]: http://localhost:1313/tracing/llm_observability/sdk/
 [2]: https://github.com/DataDog/llm-observability
+[3]: https://app.datadoghq.com/llm/traces

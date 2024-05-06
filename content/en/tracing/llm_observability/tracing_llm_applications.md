@@ -2,6 +2,8 @@
 title: Tracing LLM Applications
 kind: guide
 ---
+<div class="alert alert-info">LLM Observability is in public beta.</a></div>
+
 ## Overview
 
 Your application can submit data to LLM Observability in two ways: with Datadog's Python SDK, or with the LLM Observability API.

@@ -2,6 +2,8 @@
 title: SDK
 ---
 
+<div class="alert alert-info">LLM Observability is in public beta.</a></div>
+
 ## Installation
 
 Install the latest `ddtrace` package hash:

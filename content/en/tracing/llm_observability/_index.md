@@ -3,6 +3,8 @@ title: LLM Observability
 kind: documentation
 ---
 
+<div class="alert alert-info">LLM Observability is in public beta.</a></div>
+
 {{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
 With LLM Observability, you can monitor the quality, security, and performance of your LLM applications. Each request fulfilled by your application is represented as a trace on the [LLM Observability traces list page][3] in Datadog.
