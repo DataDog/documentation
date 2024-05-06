@@ -24,7 +24,7 @@ The end result is threat detection followed by immediate surgical mitigation aga
 
 You have three options for Agent rules:
 
-- **Monitoring:** This is the default setting for enabled rules regardless of whether Active Protection is enabled. The Agent monitors for the enabled rule and displays detections in [Signals][1]. 
+- **Monitoring:** This is the default setting for enabled rules, regardless of whether Active Protection is enabled. The Agent monitors for the enabled rule and displays detections in [Signals][1]. 
 - **Blocking:** 
   - Blocking is available when Active Protection is enabled. Blocking is available on select OOTB rules that have high confidence, true positives.
   - The Agent monitors for the enabled rule, terminates the corresponding actions instantly, and displays detections in [Signals][1].
@@ -38,7 +38,7 @@ Active Protection is enabled at the organization level.
 
 <div class="alert alert-info">Active Protection blocking functionality is available in a subset of the OOTB Agent rules only. Agent rule monitoring runs regardless of whether Active Protection is enabled.</div>
 
-To see if Active Protection is already enabled in your organization, go to [Agent Configuration][2] and see if there is a **Protection** column in the Agent rule list.
+To check if Active Protection is already enabled in your organization, go to [Agent Configuration][2]. If Active Protection is enabled, a **Protection** column is displayed in the Agent rule list.
 
 {{< img src="security/cws/guide/protection-column.png" alt="The protection column indicates that Active Protection is enabled in the org" style="width:100%;" >}}
 
@@ -71,7 +71,7 @@ To enable Active Protection:
 1. Go to CSM [Agent Configuration][2] rules.
 2. Select **Enable Active Protection**.
 
-    {{< img src="security/cws/guide/enable-active-protection.png" alt="Your image description" style="width:100%;" >}}
+    {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}}
 
 After Active Protection is enabled, the Agent Configuration rules list contains a **Protection** column.
 
@@ -104,7 +104,7 @@ When you select **Blocking**, you can scope where Datadog should apply the rule 
 
 #### Everywhere
 
-The rule applies to all services, hosts, images, etc.
+The rule applies to all services, hosts, and images.
 
 #### Custom
 
@@ -112,23 +112,23 @@ In **Custom**, you can specify services or tags to automatically generate an exp
 
 <div class="alert alert-info">Any service or image that is not matched by the expression is not blocked, but it is still monitored.</div>
 
-You can use services and tags to generate an expression. Datadog matches the rule using the service(s) or tag(s) you provide.
+You can use services and tags to generate an expression. Datadog matches the rule using the services or tags you provide.
 
 - **Services:** Enter one or more service names. You can use wildcards. For example, entering `a*` generates the expression `process.envp in ["DD_SERVICE=a*"]`.
 - **Tags:** Enter one or more tags for container images. If you enter multiple tags, all tags must match for the **Protection** to apply. There are two options:
-  - `image_tag`: the image tag only. For example, `stable-perl`.
-  - `short_image`: the image name without a tag. For example, `nginx`.
-  - For example, a Github Container registry image such `ghcr.io/MY_NAMESPACE/MY_IMAGE:2.5` can be referenced using:
+  - `image_tag`: The image tag only. For example, `stable-perl`.
+  - `short_image`: The image name without a tag. For example, `nginx`.
+  - For example, a Github Container registry image such as `ghcr.io/MY_NAMESPACE/MY_IMAGE:2.5` can be referenced using:
     - `image_tag`: `2.5`.
     - `short_image`: `MY_IMAGE`.
 
 ## Blocked attack example
 
-After Active Protection is enabled at set to **Blocking** for an Agent rule, blocked threats appear in [Signals][1].
+After Active Protection is enabled and set to **Blocking** for an Agent rule, blocked threats appear in [Signals][1].
 
-A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The malicious process THREAT NAME has automatically been killed.`:
+A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The malicious process <THREAT NAME> has automatically been killed.`:
 
-{{< img src="security/cws/guide/active-protection-signal-messages.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="security/cws/guide/active-protection-signal-messages.png" alt="Signal messages" style="width:100%;" >}}
 
 
 [1]: https://app.datadoghq.com/security
