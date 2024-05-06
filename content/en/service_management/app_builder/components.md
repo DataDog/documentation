@@ -782,9 +782,11 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][5].
 
 
 [1]: /service_management/app_builder/build/#events
 [2]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=datadog_metrics_and_monitors&viewMode=preview
 [3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
+[5]: https://datadoghq.slack.com/
