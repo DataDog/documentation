@@ -148,7 +148,8 @@ Options
 : The list of checkboxes that a user can select from. Minimum number of options is 1.<br>
 **Value**: expression<br>
 **Example**:<br>
-: {{< code-block lang="json" disable_copy="true">}}${[
+: ```json
+  ${[
     {
         "label": "Staging",
         "value": "staging"
@@ -157,7 +158,8 @@ Options
         "label": "Production",
         "value": "production"
     }
-]}{{< /code-block >}}
+  ]}
+  ```
 
 ### Appearance
 
