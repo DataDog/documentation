@@ -52,11 +52,6 @@ For a single Git commit, the change lead time (CLT) is calculated as time from t
 
 To calculate the change lead time for a deployment, Datadog runs [`git log`][6] between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it computes the average of the related change lead time values. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
-There are two requirements for calculating change lead time:
-
-1. Both the Git repository URL and commit SHA are provided when sending deployment events.
-2. Your repository metadata is being [synchronized to Datadog](#synchronize-repository-metadata-to-datadog).
-
 ### Breakdown metrics
 
 Datadog breaks down change lead time into the following metrics, which represent the different stages from commit creation to deployment.
@@ -158,6 +153,7 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 
 ### Limitations
 
+- Change lead time breakdown metrics are only available for GitHub.
 - The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing change lead time.
 - Change lead time is not available for the first deployment of a service that includes Git information.
 
