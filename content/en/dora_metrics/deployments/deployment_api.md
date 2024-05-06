@@ -27,10 +27,6 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
-{{< /callout >}}
-
 ## Overview
 
 To send your own deployment events, use the [DORA Metrics API][1] or the [`datadog-ci dora deployment`][2] command. 

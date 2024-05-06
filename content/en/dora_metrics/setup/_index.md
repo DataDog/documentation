@@ -9,10 +9,6 @@ further_reading:
   text: 'Learn about DORA Metrics'
 ---
 
-{{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
-{{< /callout >}}
-
 ## Overview
 
 The four DORA Metrics are calculated based on two types of events:

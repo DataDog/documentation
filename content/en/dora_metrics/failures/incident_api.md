@@ -21,10 +21,6 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
-{{< /callout >}}
-
 ## Overview
 
 To send your own incident events, use the [DORA Metrics API][1]. Incident events are used in order to compute change failure rate and mean time to restore.
