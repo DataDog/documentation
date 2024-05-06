@@ -52,7 +52,7 @@ To start configuring data sources to send deployment and incident events to Data
 
 ## Analyze DORA Metrics
 
-Once you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, examine deployments by service or environment, and compare trends over time. 
+Once you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, aggregate them by service or environment, and compare trends over time. 
 
 {{< img src="dora_metrics/home.png" alt="An Overview of your DORA Metrics calculations and insights in the last week" style="width:100%;" >}}
 
