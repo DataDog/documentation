@@ -2790,9 +2790,9 @@ menu:
       identifier: tracing_connect_rum
       weight: 503
     - name: Correlate Synthetics and Traces
-      url: /synthetics/apm/
+      url: /tracing/other_telemetry/synthetics/
       parent: tracing_other_telemetry
-      identifier: tracing_connect_sythetics
+      identifier: tracing_connect_synthetics
       weight: 504
     - name: Correlate Profiles and Traces
       url: /profiler/connect_traces_and_profiles/
@@ -4706,96 +4706,101 @@ menu:
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
       weight: 503
+    - name: Platform
+      url: synthetics/platform/
+      parent: synthetics
+      identifier: synthetics_platform
+      weight: 6
+    - name: Dashboards
+      url: synthetics/platform/dashboards
+      parent: synthetics_platform
+      identifier: synthetics_platform_dashboards
+      weight: 601
+    - name: API Test
+      url: synthetics/platform/dashboards/api_test
+      parent: synthetics_platform_dashboards
+      identifier: synthetics_platform_dashboards_api_test
+      weight: 6101
+    - name: Browser Test
+      url: synthetics/platform/dashboards/browser_test
+      parent: synthetics_platform_dashboards
+      identifier: synthetics_platform_dashboards_browser_test
+      weight: 6102
+    - name: Test Summary
+      url: synthetics/platform/dashboards/test_summary
+      parent: synthetics_platform_dashboards
+      identifier: synthetics_platform_dashboards_test_summary
+      weight: 6103
+    - name: Metrics
+      url: synthetics/platform/metrics/
+      parent: synthetics_platform
+      identifier: synthetics_platform_metrics
+      weight: 602
+    - name: Test Coverage
+      url: synthetics/platform/test_coverage
+      parent: synthetics_platform
+      identifier: synthetics_platform_test_coverage
+      weight: 603
+    - name: Connect Synthetics and APM
+      url: synthetics/platform/apm/
+      parent: synthetics_platform
+      identifier: synthetics_platform_apm
+      weight: 604
     - name: Search and Manage
       url: synthetics/search/
       parent: synthetics
       identifier: synthetics_search
-      weight: 6
+      weight: 7
     - name: Saved Views
       url: synthetics/search/saved_views
       parent: synthetics_search
       identifier: synthetics_search_saved_views
-      weight: 601
+      weight: 701
     - name: Results Explorer
       url: continuous_testing/explorer/
       parent: synthetics
       identifier: synthetics_results_explorer
-      weight: 7
+      weight: 8
     - name: Search Test Batches
       url: continuous_testing/explorer/search/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search
-      weight: 701
+      weight: 801
     - name: Search Test Runs
       url: continuous_testing/explorer/search_runs/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search_runs
-      weight: 702
+      weight: 802
     - name: Search Syntax
       url: continuous_testing/explorer/search_syntax/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search_syntax
-      weight: 703
+      weight: 803
     - name: Saved Views
       url: continuous_testing/explorer/saved_views/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_saved_views
-      weight: 704
-    - name: Test Coverage
-      url: synthetics/test_coverage
-      parent: synthetics
-      identifier: synthetics_test_coverage
-      weight: 8
-    - name: Dashboards
-      url: synthetics/dashboards
-      parent: synthetics
-      identifier: synthetics_dashboards
-      weight: 9
-    - name: API Test
-      url: synthetics/dashboards/api_test
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_api_test
-      weight: 902
-    - name: Browser Test
-      url: synthetics/dashboards/browser_test
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_browser_test
-      weight: 903
-    - name: Test Summary
-      url: synthetics/dashboards/test_summary
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_test_summary
-      weight: 904
-    - name: APM Integration
-      url: synthetics/apm/
-      parent: synthetics
-      identifier: synthetics_apm
-      weight: 10
+      weight: 804
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/settings/
       parent: synthetics
-      weight: 11
-    - name: Metrics
-      identifier: synthetics_metrics
-      url: synthetics/metrics/
-      parent: synthetics
-      weight: 12
+      weight: 10
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
       identifier: synthetics_guides
-      weight: 13
+      weight: 11
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 14
+      weight: 12
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 15
+      weight: 13
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
