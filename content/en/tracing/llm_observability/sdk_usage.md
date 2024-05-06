@@ -2,6 +2,54 @@
 title: SDK Usage
 ---
 
+## Installation
+
+Install the latest `ddtrace` package hash:
+
+{{< code-block lang="shell">}}
+pip install git+https://github.com/DataDog/dd-trace-py.git@main
+{{< /code-block >}}
+
+## Running an LLM application
+
+Your application startup command must specify the required environment variables:
+
+{{< code-block lang="shell">}}
+DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=<YOUR_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+See the full list of environment variables below.
+
+### Supported environment variables
+
+`DD_API_KEY`
+: required - _string_
+<br />Your Datadog API key.
+
+`DD_SITE`: required - _string_ 
+<br />The Datadog site to submit your LLM data. Should be `datadoghq.com` or `us3.datadoghq.com`.
+
+`DD_LLMOBS_ENABLED`: required - _integer or string_ 
+<br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
+
+`DD_LLMOBS_APP_NAME`: required - _string_ 
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments.
+
+`DD_LLMOBS_NO_APM`: optional - _integer or string_ - **default**: `false`
+<br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`: optional - _string_ - **default**: `true`
+<br />If you are not a Datadog APM customer, set to `0` or `false`.
+
+`DD_REMOTE_CONFIGURATION_ENABLED`: optional - _string_ - **default**: `true`
+<br />If you are not a Datadog APM customer, set to `0` or `false`.
+
+`DD_OPENAI_METRICS_ENABLED`: optional - _string_ - **default**: `true`
+<br />If you are not a Datadog APM customer, set to `0` or `false`.
+
+`DD_LANGCHAIN_METRICS_ENABLED`: optional - _string_ - **default**: `true`
+<br />If you are not a Datadog APM customer, set to `0` or `false`.
+
 ## Tracing a span
 
 To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). Learn more about the available span kinds in [the span documentation].
@@ -258,6 +306,9 @@ workflow_span = LLMObs.workflow(name="process_message")
 	separate_task(workflow_span)
 	return
 {{< /code-block >}}
+
+## Tracking a user session
+TODO
 
 [open-ai-python-sdk]: https://github.com/openai/openai-python
 [boto3]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
