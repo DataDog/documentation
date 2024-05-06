@@ -50,7 +50,7 @@ See the full list of environment variables below.
 `DD_LANGCHAIN_METRICS_ENABLED`: optional - _string_ - **default**: `true`
 <br />If you are not a Datadog APM customer, set to `0` or `false`.
 
-## Tracing a span
+## Tracing spans
 
 To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). Learn more about the available span kinds in [the span documentation].
 
@@ -100,9 +100,9 @@ def process_message():
 
 If you are using one of the following LLM providers, you do not need to manually start a span to trace these operations, as Datadog's existing integrations automatically trace and annotate the LLM calls:
 
-- OpenAI (using the [OpenAI Python SDK][open-ai-python-sdk])
-- AWS Bedrock (using [Boto3][boto3]/[Botocore][botocore])
-- LangChain LLM/Chat Models/Chains (using [LangChain][langchain])
+- OpenAI (using the [OpenAI Python SDK][1])
+- AWS Bedrock (using [Boto3][2]/[Botocore][3])
+- LangChain LLM/Chat Models/Chains (using [LangChain][4])
 
 To trace an LLM span, use `LLMObs.llm()` as a context manager.
 
@@ -337,8 +337,7 @@ def process_message():
 	return 
 {{< /code-block >}}
 
-[open-ai-python-sdk]: https://github.com/openai/openai-python
-[boto3]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
-[botocore]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
-[langchain]: https://github.com/langchain-ai/langchain
-[react-agent]: https://react-lm.github.io/
+[1]: https://github.com/openai/openai-python
+[2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+[3]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
+[4]: https://github.com/langchain-ai/langchain
