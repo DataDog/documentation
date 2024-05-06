@@ -149,7 +149,7 @@ The following TCP metrics are available:
 | **TCP Jitter**              | Measured as TCP smoothed round-trip time variance.                                                                                       |
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client.                               |
 | **Closed Connections**      | The number of TCP connections in a closed state. Measured in connections per second from the client.                                     |
-| **Failed Connections**      | The number of unsuccessful TCP connection attempts. Measured in instances of failed connections from the client.                         |
+| **Failed Connections** (Private Beta)     | The number of unsuccessful TCP connection attempts. Measured in instances of failed connections from the client.                         |
 
 All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
 
