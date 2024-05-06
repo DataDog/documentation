@@ -3336,7 +3336,7 @@ menu:
       identifier: dbm_guides
       weight: 12
     - name: DBM Agent Integration Overhead
-      url: database_monitoring/dbm_agent_integration_overhead
+      url: database_monitoring/agent_integration_overhead
       parent: dbm
       identifier: dbm_agent_integration_overhead
       weight: 13
