@@ -3,7 +3,7 @@ module documentation
 go 1.14
 
 require (
-	github.com/DataDog/websites-modules v1.4.136 // indirect
+	github.com/DataDog/websites-modules v1.5.2-0.20240506191002-b71138405992 // indirect
 	github.com/DataDog/websites-sources v0.0.0-20240429180210-49917b24a0b7 // indirect
 )
 
