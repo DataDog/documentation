@@ -29,11 +29,11 @@ Before you can start monitoring Reactive Native apps with native content, you ne
 
 ### Initialize the React Native SDK
 
-To initialize the React Native Datadog SDK for RUM, see the [React Native Monitoring documentation][1].
+In order to initialize the SDK on both the React Native and the native side, you can follow the [React Native Monitoring documentation][1]. 
 
-This also initializes the SDK on the native side. You are able to call both the native and React Native SDKs for logs, traces and RUM.
+You will be able to call both the native and React Native SDKs for logs, traces and RUM.
 
-If you are sure that you don't call the native SDK before the React Native SDK this is the solution we recommend.
+We recommend this solution, as long as you don't use our SDK on the native side before it has been initialized on the React Native side.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -62,7 +62,7 @@ pod 'DatadogSDKObjc', '~> 2.5.0'
 
 ### Tracking native RUM views
 
-Using the `nativeViewTracking` configuration option creates many duplicate views you use a navigation library for your React Native app like `react-navigation`.
+Using the `nativeViewTracking` configuration option creates many duplicate views if you use a navigation library for your React Native app like `react-navigation`.
 
 If this is the case, track your native RUM Views manually. See documentation for [iOS][2] and for [Android][3].
 
@@ -89,7 +89,7 @@ You can track network requests by monitoring your `URLSession`. Learn more about
 
 ### Limitations
 
-You cannot call the native SDK before the React Native SDK has been initialized. In this case, initialize the SDK on the native side.
+You cannot call the native SDK before the React Native SDK has been initialized. If you have to, you need to initialize the SDK on the native side.
 
 ## Monitor native apps with React Native screens
 
