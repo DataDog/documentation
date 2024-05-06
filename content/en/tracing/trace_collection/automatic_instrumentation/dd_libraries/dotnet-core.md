@@ -50,7 +50,9 @@ further_reading:
 
 ### Supported .NET and .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, and .NET 5 to .NET 8. For applications built on .NET Framework, see [Tracing .NET Framework Applications][7]. For a full list of Datadog's .NET and .NET Core runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
+The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, and .NET 5 to .NET 8.
+
+For a full list of Datadog's .NET and .NET Core runtime, OS, and architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1]. For applications built on .NET Framework, see [Tracing .NET Framework Applications][7].
 
 ## Installation and getting started
 
