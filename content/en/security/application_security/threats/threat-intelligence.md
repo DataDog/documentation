@@ -14,15 +14,11 @@ further_reading:
 
 This topic describes [threat intelligence][1] for Application Security Management (ASM).
 
-Datadog provides built-in [threat intelligence][1] datasets for ASM. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
+Datadog provides built-in threat intelligence [datasets](https://docs-staging.datadoghq.com/michael_bentley/DOCS-7745/security/threat_intelligence#threat-intelligence-sources) for ASM. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
 
-Additionally, ASM supports *bring your own threat intel*. This functionality enriches detections with business-specific threat intelligence. 
+Additionally, ASM supports *bring your own threat intelligence*. This functionality enriches detections with business-specific threat intelligence. 
 
-Datadog curates threat intelligence into a standardized list of categories and intents. Intents include _benign_, _suspicious_, and _malicious_. 
-
-Categories of threat intelligence include benign detections such as _corp\_vpn_ and malicious categories like _botnet_proxy_. 
-
-Upstream threat intelligence information is passed through for all threat intelligence sources, with limits based on threat intelligence payload size.
+## Best practices
 
 Datadog recommends the following methods for consuming threat intelligence:
 
@@ -33,7 +29,7 @@ Datadog recommends _against_ the following:
 1. Blocking threat intelligence traces without corresponding security activity. IP addresses might have many hosts behind them. Detection of a residential proxy means that the associated activity has been observed by a host behind that IP. It does not guarantee that the host running the malware or proxy is the same host communicating with your services.
 2. Blocking on all threat intelligence categories, as this is inclusive of benign traffic from corporate VPNs and blocks unmalicious traffic.
 
-## Filtering on Threat Intelligence in ASM
+## Filtering on threat intelligence in ASM
 
 Users can filter threat intelligence on the Signals and Traces explorers using facets and the search bar.
 
@@ -45,15 +41,15 @@ To query for all traces containing threat intelligence from any source, use the 
 
     @appsec.threat_intel:true 
 
-## Bring your own threat intel
+## Bring your own threat intelligence
 
-<div class="alert alert-info">Bring your own threat intel is in private beta.</div>
+<div class="alert alert-info">Bring your own threat intelligence is in private beta.</div>
 
-ASM supports enriching and searching traces with threat intel indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
+ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
 ### Storing indicators of compromise in reference tables
 
-Threat intel is supported in the CSV format and requires 4 columns.
+Threat intelligence is supported in the CSV format and requires 4 columns.
 
 **CSV Structure**
 
@@ -61,8 +57,8 @@ Threat intel is supported in the CSV format and requires 4 columns.
 |------------------|-------|----|-----|--|
 | ip_address       | text | The primary key for the reference table in the IPv4 dot notation format. | true | 192.0.2.1  |
 | additional_data  | json      | Additional data to enrich the trace. | false | `{"ref":"hxxp://example.org"}`
-| category         | text  | The threat intel category. This is used by some out of the box detection rules. | true | `residential_proxy` |
-| intention        | text | The threat intel intent. This is used by some out of the box detection rules.| true | malicious | |
+| category         | text  | The threat intel [category](https://docs-staging.datadoghq.com/michael_bentley/DOCS-7745/security/threat_intelligence#threat-intelligence-categories). This is used by some out of the box detection rules. | true | `residential_proxy` |
+| intention        | text | The threat intel [intent](https://docs-staging.datadoghq.com/michael_bentley/DOCS-7745/security/threat_intelligence#threat-intelligence-intents). This is used by some out of the box detection rules.| true | malicious | |
 | source           | text  | The name of the source and the link to its site, such as your team and your teams wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
 
 
@@ -95,7 +91,7 @@ On a new [references table][4] page:
 
 ### Enriching traces for detection rules
 
-Enriching traces includes the threat intel attributes in ASM traces when the indicator of compromise matches the value of the `http.client_ip` key in the ASM trace. This enables searching for traces with threat intel matches using existing facets and using threat intel with detection rules.
+Enriching traces includes the threat intelligence attributes in ASM traces when the indicator of compromise matches the value of the `http.client_ip` key in the ASM trace. This enables searching for traces with threat intelligence matches using existing facets and using threat intelligence with detection rules.
 
 
 
