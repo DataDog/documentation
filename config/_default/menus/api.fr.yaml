@@ -4855,11 +4855,11 @@ menu:
     name: Récupérer un service Fastly
     params:
       operationids:
-      - GetConfluentResource
+      - UpdateCloudflareAccount
       order: 4
       unstable: []
       versions:
-      - v1
+      - v2
     parent: fastly-integration-add-fastly-account
     url: '#mettre-a-jour-un-compte-cloudflare'
   - generated: true
