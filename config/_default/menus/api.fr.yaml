@@ -6087,8 +6087,8 @@ menu:
       order: 4
       unstable: []
       versions:
-      - v1
-    parent: roles
+      - v2
+    parent: opsgenie-integration
     url: '#mettre-a-jour-un-objet-de-service-unique'
   - generated: true
     identifier: opsgenie-integration-get-a-single-service-object
