@@ -5048,7 +5048,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: cog-2
+    parent: container-images
     url: '#get-all-container-images'
   - generated: true
     identifier: ㅊ
