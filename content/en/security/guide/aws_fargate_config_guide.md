@@ -38,8 +38,8 @@ This guide walks you through configuring [Amazon Elastic Container Service (Amaz
 
 1. Log in to the [AWS Management Console][6].
 2. Navigate to the ECS section.
-3. On the left menu, click **Task Definitions**, then click **Create new Task Definition with JSON**, or choose an existing Fargate task definition.
-4. Use the JSON definition, or the [AWS CLI method](#aws-cli).
+3. On the left menu, select **Task Definitions**, and then select **Create new Task Definition with JSON**. Alternatively, choose an existing Fargate task definition.
+4. To create a new task definition, use the JSON definition, or the [AWS CLI method](#aws-cli).
 5. Click **Create** to create the task definition.
 
 ### AWS CLI
@@ -211,6 +211,11 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 ## Application Security Management
 
+[Compatibility Requirements][16].
+
+
+For step-by-step instructions, see the following articles:
+
 - [Java][10]
 - [.NET][11]
 - [Go][12]
@@ -322,3 +327,4 @@ AWS account logs (not the eks logs), CloudTrail
 [13]: /security/application_security/enabling/tracing_libraries/threat_detection/ruby?tab=awsfargate
 [14]: /security/application_security/enabling/tracing_libraries/threat_detection/nodejs?tab=awsfargate
 [15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
+[16]: /security/application_security/enabling/compatibility/
