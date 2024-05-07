@@ -4720,7 +4720,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: dbm
+    parent: case-management
     url: '#search-cases'
   - generated: true
     identifier: cloud-cost-management
