@@ -5080,8 +5080,8 @@ menu:
       unstable:
       - v2
       versions:
-      - v1
-    parent: incident-teams-create-a-new-incident-team
+      - v2
+    parent: dora-metrics
     url: '#envoyer-un-evenement-d-incident-pour-des-metriques-dora'
   - generated: true
     identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
