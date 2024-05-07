@@ -78,6 +78,8 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
 
+<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, set `replaySampleRate` to `0`.</div>
+
 ## Retention
 
 By default, Session Replay data is retained for 30 days.
