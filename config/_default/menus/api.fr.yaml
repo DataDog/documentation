@@ -6840,8 +6840,8 @@ menu:
       order: 2
       unstable: []
       versions:
-      - v1
-    parent: teams-get-all-teams
+      - v2
+    parent: spans
     url: '#rechercher-des-spans'
   - generated: true
     identifier: spans-get-a-list-of-spans
