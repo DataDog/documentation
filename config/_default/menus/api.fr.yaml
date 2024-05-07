@@ -5826,7 +5826,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: processes-get-all-processes
+    parent: logs-metrics
     url: '#mettre-a-jour-une-metrique-basee-sur-des-logs'
   - generated: true
     identifier: logs-metrics-get-a-log-based-metric
