@@ -6,4 +6,4 @@ core_product:
 ---
 A flame graph is a visualization of a trace, where bars represent spans and show the span's execution time as well as what called it and what calls it made. 
 
-A flame graph is also the [default visualization][https://docs.datadoghq.com/profiler/profile_visualizations/#flame-graph ] for Continuous Profiler. It shows resource consumption (such as CPU usage) per method, and how each method was called.
+A flame graph is also the <a href="/profiler/profile_visualizations/#flame_graph">default visualization</a> for Continuous Profiler. It shows resource consumption (such as CPU usage) per method, and how each method was called.
