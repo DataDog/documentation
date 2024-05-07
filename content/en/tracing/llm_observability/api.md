@@ -6,7 +6,7 @@ title: LLM Observability API
 The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, you may prefer to use the [Python SDK][1].
 
 ## Spans API
-Send spans to Datadog. For details on the available kinds of spans, see [Span Kinds][2].
+Use this endpoint to send spans to Datadog. For details on the available kinds of spans, see [Span Kinds][2].
 
 Endpoint
 : `https://api.<DATADOG_SITE>/api/unstable/llm-obs/v1/trace/spans`
@@ -134,8 +134,8 @@ If the request is successful, the API responds with a 202 network code and an em
 #### `IO`
 | Field   | Type   | Description  |
 |---------|--------|--------------|
-| value   | string | Input or output value. This should be used for all spans except for `llm` spans. |
-| messages| [[Message](#message)] | List of messages. This should only be used for llm spans. |
+| value   | string | Input or output value. This should be used for all spans except for LLM spans. |
+| messages| [[Message](#message)] | List of messages. This should only be used for LLM spans. |
 
 #### `Message`
 | Field                | Type   | Description              |
@@ -147,10 +147,10 @@ If the request is successful, the API responds with a 202 network code and an em
 | Field       | Type              | Description  |
 |-------------|-------------------|--------------|
 | kind [*required*]    | string | The [span kind][2]: `"agent"`, `"workflow"`, `"llm"`, `"tool"`, `"task"`, `"embedding"`, or `"retrieval"`.      |
-| error       | [Error](#error)             | Holds error information on the span.              |
-| input       | [IO](#io)                | Holds the span's input information.               |
-| output      | [IO](#io)                | Holds the span's output information.              |
-| metadata    | Dict[key (str), val] where val is a float, bool, or string | Stores data about the span that is not input/output related. Use the following metadata keys for llm spans: `temperature`, `max_tokens`, `model_name`, `model_provider`. |
+| error       | [Error](#error)             | Error information on the span.              |
+| input       | [IO](#io)                | The span's input information.               |
+| output      | [IO](#io)                | The span's output information.              |
+| metadata    | Dict[key (str), val] where val is a float, bool, or string | Data about the span that is not input/output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`, `model_name`, `model_provider`. |
 
 #### `Metrics`
 | Field                  | Type    | Description  |
@@ -165,13 +165,13 @@ If the request is successful, the API responds with a 202 network code and an em
 
 | Field       | Type              | Description         |
 |-------------|-------------------|---------------------|
-| name [*required*]       | string            | The name of the span          |
-| span_id [*required*]     | string            | A unique ID to the span       |
-| trace_id  [*required*]   | string            | A unique ID shared by all spans in the same trace     |
+| name [*required*]       | string            | The name of the span.          |
+| span_id [*required*]     | string            | An ID unique to the span.       |
+| trace_id  [*required*]   | string            | A unique ID shared by all spans in the same trace.     |
 | parent_id  [*required*]    | string | ID of the span's direct parent. If the span is a root span, parent_id must be `undefined`. |
 | start_ns [*required*]     | uint64            | The span's start time in nanoseconds.     |
 | duration  [*required*]     | float64           | The span's duration in nanoseconds.          |
-| meta [*required*]         | [Meta](#meta)              | Holds the core content relative to the span.       |
+| meta [*required*]         | [Meta](#meta)              | The core content relative to the span.       |
 | status      | string            | Error status (`"ok"` or `"error"`). Defaults to `"ok"`.      |
 | metrics     | [Metrics](#metrics)           | Datadog metrics to collect.         |
 | session_id  | string     | The span's `session_id`. Overrides the top-level `session_id` field.    |
@@ -196,7 +196,7 @@ If the request is successful, the API responds with a 202 network code and an em
 Tags should be formatted as a list of strings (for example, `["user_handle:dog@gmail.com", "app_version:1.0.0"]`). They are meant to store contextual information surrounding the span.
 
 ## Eval metrics API
-Send evaluation metrics for a span to Datadog.
+Use this endpoint to send evaluation metrics for a span to Datadog.
 
 Endpoint
 : `https://api.<DATADOG_SITE>/api/unstable/llm-obs/v1/eval-metric`
@@ -273,7 +273,7 @@ Evaluation metrics require a `span_id` and `trace_id`.
     "attributes": {
       "metrics": [
         {
-"id": "d4f36434-f0cd-47fc-884d-6996cee26da4",
+          "id": "d4f36434-f0cd-47fc-884d-6996cee26da4",
           "span_id": "61399242116139924211",
           "trace_id": "13932955089405749200",
           "timestamp": 1609459200,
@@ -282,7 +282,7 @@ Evaluation metrics require a `span_id` and `trace_id`.
           "categorical_value": "Positive"
         },
         {
-"id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
+          "id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
           "span_id": "20245611112024561111",
           "trace_id": "13932955089405749200",
           "metric_type": "score",
@@ -310,11 +310,11 @@ Evaluation metrics require a `span_id` and `trace_id`.
 | Field                  | Type   | Description  |
 |------------------------|--------|--------------|
 | ID                     | string | Evaluation metric UUID (generated upon submission). |
-| span_id[*required*]    | string | The ID of the span that this eval metric is associated with. This should be the span ID of the root span. |
-| trace_id[*required*]   | string | The ID of the trace that this eval metric is associated with. |
+| span_id [*required*]    | string | The ID of the span that this eval metric is associated with. This should be the span ID of the root span. |
+| trace_id [*required*]   | string | The ID of the trace that this eval metric is associated with. |
 | timestamp              | int64  | A UTC UNIX timestamp representing the time the request was sent. |
-| metric_type[*required*]| string | The type of evaluation metric: `"categorical"` or `"score"`. |
-| label[*required*]      | string | The unique name or label for the provided evaluation metric. |
+| metric_type [*required*]| string | The type of evaluation metric: `"categorical"` or `"score"`. |
+| label [*required*]      | string | The unique name or label for the provided evaluation metric. |
 | categorical_value [*required if the metric_type is "score"*]    | string | A string representing the category that the evaluation metric belongs to. |
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation metric. |
 | flagged                | boolean| Flag content as inappropriate or incorrect. |

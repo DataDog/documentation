@@ -21,9 +21,7 @@ DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_APP_NAME=<YOUR_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-See the full list of environment variables below.
-
-### Supported environment variables
+The full list of supported environment variables is below.
 
 `DD_API_KEY`
 : required - _string_
@@ -285,22 +283,22 @@ def llm_call(prompt):
 		resp = ... # llm call here
 		LLMObs.annotate(
   			span=llm_span,
-input_data=[{"role": "user", "content": "Hello world!"}],
-output_data=[{"role": "assistant", "content": "How can I help?"}],
-metadata={"temperature": 0, "max_tokens": 200},
-tags={"host": "host_name"},
-)
+            input_data=[{"role": "user", "content": "Hello world!"}],
+            output_data=[{"role": "assistant", "content": "How can I help?"}],
+            metadata={"temperature": 0, "max_tokens": 200},
+            tags={"host": "host_name"},
+        )
 	return resp
 
 @workflow(name="process_message")
 def process_message(prompt):
 	resp = llm_call_inline(prompt)
 	LLMObs.annotate(
-span=None,
-input_data="prompt",
-output_data="output",
-tags={"host": "host_name"},
-)
+        span=None,
+        input_data="prompt",
+        output_data="output",
+        tags={"host": "host_name"},
+    )
 	return resp
 {{< /code-block >}}
 
