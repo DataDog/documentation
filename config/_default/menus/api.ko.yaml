@@ -6841,7 +6841,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 스팬
+    parent: spans
     url: '#search-spans'
   - generated: true
     identifier: spans-get-a-list-of-spans
