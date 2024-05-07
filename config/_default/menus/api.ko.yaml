@@ -5401,7 +5401,7 @@ menu:
       - v2
       versions:
       - v2
-    parent: 인시던트
+    parent: incidents
     url: '#update-an-incident-todo'
   - generated: true
     identifier: incidents-get-incident-todo-details
