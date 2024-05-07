@@ -5,6 +5,7 @@ assets:
   dashboards:
     HiveMQ: assets/dashboards/hivemq.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: hivemq.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10101
     source_type_name: HiveMQ
   logs:
     source: hivemq
@@ -26,7 +28,7 @@ author:
 categories:
 - iot
 - ログの収集
-- メッセージング
+- メッセージキュー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md
 display_on_public_website: true
@@ -34,7 +36,7 @@ draft: false
 git_integration_title: hivemq
 integration_id: hivemq
 integration_title: HiveMQ
-integration_version: 1.7.1
+integration_version: 1.8.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -48,9 +50,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::IOT
+  - Category::IoT
   - Category::Log Collection
-  - Category::Messaging
+  - Category::Message Queues
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -62,27 +64,28 @@ tile:
   title: HiveMQ
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 [HiveMQ][1] は、接続された IoT デバイスと行き来するデータの高速で効率的かつ信頼性の高い移動のために設計された MQTT ベースのメッセージングプラットフォームです。MQTT 3.1、3.1.1、5.0 に準拠したブローカーです。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 HiveMQ チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -97,7 +100,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 2. [Agent を再起動します][4]。
 
-##### ログの収集
+##### 収集データ
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -126,7 +129,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 [3]: https://docs.datadoghq.com/ja/help
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -134,7 +137,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
@@ -166,17 +169,17 @@ JMXFetch
 {{% /tab %}}
 {{< /tabs >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "hivemq" >}}
 
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "hivemq" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

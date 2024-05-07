@@ -1,6 +1,9 @@
 ---
 description: Datadog Code Analysis を使用して、開発中の保守性の問題、バグ、セキュリティ脆弱性に対処し、顧客への影響を防ぐ方法を学びます。
 further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
+  tag: リリースノート
+  text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
 - link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: ブログ
   text: Datadog によるすべての CI パイプラインの監視

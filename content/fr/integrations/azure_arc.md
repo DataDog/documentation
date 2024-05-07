@@ -25,6 +25,7 @@ short_description: Surveillez des métriques clés d'Azure Arc.
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure Arc est un pont qui étend la plateforme Azure pour vous permettre de créer des applications et des services exécutables dans des centres de données, en périphérie et dans des environnements multicloud.
@@ -38,27 +39,27 @@ Utilisez l'intégration Azure Arc pour :
 
 Vous pouvez également utiliser l'extension Datadog pour configurer et déployer l'Agent Datadog sur des serveurs Arc. Pour en savoir plus sur cette possibilité, consultez la page [Extension Virtual Machine Datadog][1].
 
-## Implémentation
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][2]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_arc" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Azure Arc n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure Arc n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 

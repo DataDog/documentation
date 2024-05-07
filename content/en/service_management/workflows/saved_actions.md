@@ -64,5 +64,8 @@ If you did not create the action, you cannot edit it directly. Instead select th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][3].
+
 [1]: https://app.datadoghq.com/workflow/action-catalog
 [2]: https://app.datadoghq.com/workflow/
+[3]: https://datadoghq.slack.com/

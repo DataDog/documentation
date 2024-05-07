@@ -17,6 +17,7 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10373
     source_type_name: SinglestoreDB Cloud
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.singlestore.com
   name: Singlestore

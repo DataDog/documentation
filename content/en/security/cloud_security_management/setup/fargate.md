@@ -20,8 +20,8 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 
 ### Images
 
-* cws-instrumentation: datadog/cws-instrumentation-dev:cws-instrumentation-beta
-* Datadog-agent: datadog/agent:7.52.0-rc.4
+* cws-instrumentation: datadog/cws-instrumentation:latest
+* Datadog-agent: datadog/agent:latest
 
 ## Installation
 
@@ -42,13 +42,14 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     "cpu": "256",
     "memory": "512",
     "networkMode": "awsvpc",
+    "pidMode": "task",
     "requiresCompatibilities": [
         "FARGATE"
     ],
     "containerDefinitions": [
         {
             "name": "cws-instrumentation-init",
-            "image": "datadog/cws-instrumentation-dev:cws-instrumentation-beta",
+            "image": "datadog/cws-instrumentation:latest",
             "essential": false,
             "user": "0",
             "command": [
@@ -153,6 +154,18 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     - `YOUR_APP_IMAGE`
     - `ENTRYPOINT`
 
+    You can use the following command to find the entry point of your workload:
+
+    ```shell
+    docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Entrypoint}}'
+    ```
+
+    or
+
+    ```shell
+    docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Cmd}}'
+    ```
+
     **Note**: The environment variable `ECS_FARGATE` is already set to "true".
 
 3. Add your other application containers to the task definition. For details on collecting integration metrics, see [Integration Setup for ECS Fargate][8].
@@ -163,6 +176,10 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 {{< /code-block >}}
 
 ## EKS
+
+### AWS EKS Fargate RBAC
+
+Use the following [Agent RBAC deployment instruction][12] before deploying the Agent as a sidecar.
 
 ### Running the Agent as a sidecar
 
@@ -187,7 +204,7 @@ spec:
    spec:
      initContainers:
      - name: cws-instrumentation-init
-       image: datadog/cws-instrumentation-dev:cws-instrumentation-beta
+       image: datadog/cws-instrumentation:latest
        command:
          - "/cws-instrumentation"
          - "setup"
@@ -230,6 +247,8 @@ spec:
                fieldPath: spec.nodeName
      volumes:
        - name: cws-instrumentation-volume
+     serviceAccountName: datadog-agent
+     shareProcessNamespace: true
 {{< /code-block >}}
 
 ## Verify that the Agent is sending events to CSM
@@ -254,6 +273,14 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
+## Next steps
+If you still have issues with the configuration, [contact Datadog support][10] for help and attach the `security-agent` flare to the ticket.
+Use the appropriate command below to create a `security-agent` flare based on your deployment:
+
+| Platform    | Command                                                                                                               |
+|-------------|-----------------------------------------------------------------------------------------------------------------------|
+| ECS Fargate | Use the full command `aws ecs execute-command` shared in [ECS Fargate][11] and run `"security-agent flare <CASE_ID>"` |
+| EKS Fargate | `kubectl exec -it <POD> -c datadog-agent -- security-agent flare <CASE_ID>`                                           |
 
 [1]: /security/threats/
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
@@ -261,6 +288,9 @@ In the task definition, replace the "workload" container with the following:
 [4]: /security/cloud_security_management/setup/csm_enterprise
 [5]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [6]: https://aws.amazon.com/console
-[7]: /resources/json/datadog-agent-ecs-fargate.json
+[7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs
+[10]: /help/
+[11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#ecs-fargate
+[12]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac

@@ -30,7 +30,7 @@
   {{ $data := ($.Scratch.Get "data") }}
 
   {{ if $data }}
-
+  <div class="table-wrapper">
     {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
 
         {{ $name_space := (index $params 1) }}
@@ -106,7 +106,7 @@
       {{ end }}
 
     {{ end }}
-
+  </div>
   {{ end }}
 
 {{ end }}

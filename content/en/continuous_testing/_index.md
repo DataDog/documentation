@@ -39,19 +39,21 @@ Datadog Continuous Testing offers a set of tools that enable you to automate sof
 
 ## Test with ease and speed
 
-Use scalable features such as a codeless [web recorder][2], [mobile app recorder][15], [parallel test runs][3], and built-in multi-location testing to save time and effort for your QA team.
+Use scalable features such as a codeless [web recorder][2], [mobile app recorder][15], [parallel test runs][3], and built-in multi-location testing to save time and effort for your QA team. You can run your tests sequentially and customize the number of tests you want to run at the same time on the [**Settings** page][3].
 
-{{< img src="continuous_testing/continuous_testing_selection.png" alt="Choose between running your tests sequentially and customizing the number of tests you want to run at the same time in the Continuous Testing Settings page" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="Choose between running your tests sequentially and customizing the number of tests you want to run at the same time in the Continuous Testing Settings page" style="width:100%;">}}
 
 With support for multiple protocols, frameworks, and APIs—including gRPC and WebSockets—you can test across every level of your application stack, and [across any pre-production environment][17].
 
 ## Improve test reliability
 
-Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. Gain confidence in your test results by minimizing false positives through self-healing browser tests, mobile app tests, and automatic test retries. To ensure your users have the best experience, you can automate [cross-browser testing][2] and [mobile application testing][16].
+Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. Gain confidence in your test results by minimizing false positives through self-healing browser tests, mobile app tests, and automatic test retries. 
+
+To ensure your users have the best experience, you can automate [cross-browser testing][2] and [mobile application testing][16]. These Continuous Testing features are useful in CI batches where multiple tests are executed to cover a variety of scenarios and environments.
 
 ## Increase efficiency through seamless integrations
 
-Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as Slack or Jira to merge workflows and avoid context switching.
+Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as [Slack][18] or [Jira][19] to merge workflows and avoid context switching.
 
 {{< partial name="continuous_testing/ct-getting-started.html" >}}
 
@@ -61,19 +63,27 @@ You can use the [Datadog Terraform provider][10] to control test creation and st
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform helps you find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
+Performing tests in a unified monitoring platform helps you find the root cause of failed test runs and reduce Mean Time to Resolution (MTTR). 
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/ci_execution_side_panel.png" alt="CI batches side panel in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
-## Use the Synthetic Monitoring & Continuous Testing Explorer
+You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs in the [Synthetic Monitoring & Testing Results Explorer][11].
+
+## Examine CI batches in the Synthetic Monitoring & Testing Results Explorer
 
 Create [search queries and visualizations][11] for your Synthetic test runs or batches of tests running in CI/CD pipelines.
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="A list of CI batch results in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+
+You can monitor individual test executions and comprehensive batches of tests, and access relevant insights for each testing type. 
 
 ## Ready to start?
 
-After you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][14] in your CI/CD pipelines. See [Testing Local and Staging Environments][17] to use Continuous Testing in environments that are not publicly available or production, for example, running tests against your local development environment or a staging environment within a private network. Then, start exploring details about your batch runs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
+After you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1], or use the [`datadog-ci` NPM package][14] in your CI/CD pipelines. See [Testing Local and Staging Environments][17] to use Continuous Testing in environments that are not publicly available or production, for example, running tests against your local development environment or a staging environment within a private network. Then, start exploring details about your batch runs in the [Synthetic Monitoring & Testing Results Explorer][11].
+
+{{< learning-center-callout header="Try Synthetic Tests in a CI/CD Pipeline in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to learn how to run a Datadog Synthetic test in a CI/CD pipeline.
+{{< /learning-center-callout >}}
 
 ## Further reading
 
@@ -91,3 +101,5 @@ After you have configured some [Synthetic tests][4], see the documentation for y
 [15]: /mobile_app_testing/mobile_app_tests
 [16]: /mobile_app_testing/
 [17]: /continuous_testing/environments
+[18]: /integrations/slack/
+[19]: /integrations/jira/

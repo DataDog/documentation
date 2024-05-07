@@ -13,7 +13,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-This monitor is only available for metric-based SLOs and metric monitor-based SLOs.
+This monitor is available for the Metric-based SLOs, Time Slice SLOs, and Monitor-based SLOs composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
 </div>
 
 ## Overview

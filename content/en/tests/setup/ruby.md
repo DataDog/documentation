@@ -73,7 +73,7 @@ gem 'ddtrace', "~> 1.0"
 
 2. Install the gem by running `bundle install`
 
-See the [Ruby tracer installation docs][4] for more details.
+See the [Ruby tracer installation docs][1] for more details.
 
 ## Instrumenting your tests
 
@@ -219,13 +219,13 @@ Datadog::CI.active_test&.set_tag('test_owner', 'my_team')
 # ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Ruby custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][2] section of the Ruby custom instrumentation documentation.
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
 <div class="alert alert-info">The <code>Datadog::CI</code> public API is available in <code>ddtrace</code> gem versions >= 1.17.0</div>
 
-Like tags, you can add custom metrics to your tests by using the current active test:
+Like tags, you can add custom measures to your tests by using the current active test:
 
 ```ruby
 require 'datadog/ci'
@@ -236,7 +236,7 @@ Datadog::CI.active_test&.set_metric('memory_allocations', 16)
 # ...
 ```
 
-For more information on custom metrics, see the [Add Custom Metrics Guide][7].
+For more information on custom measures, see the [Add Custom Measures Guide][3].
 
 ## Configuration settings
 
@@ -254,7 +254,7 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][9].
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][4].
 
 The following environment variable can be used to configure the location of the Datadog Agent:
 
@@ -262,7 +262,7 @@ The following environment variable can be used to configure the location of the 
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][6] options can also be used.
+All other [Datadog Tracer configuration][5] options can also be used.
 
 ## Using additional instrumentation
 
@@ -291,11 +291,11 @@ require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
 
 **Note**: In CI mode, these traces are submitted to CI Visibility, and they do **not** show up in Datadog APM.
 
-For the full list of available instrumentation methods, see the [`ddtrace` documentation][8]
+For the full list of available instrumentation methods, see the [`ddtrace` documentation][6]
 
 ## Webmock
 
-[Webmock][10]
+[Webmock][7]
 is a popular Ruby library that stubs HTTP requests when running tests.
 By default, it fails when used with datadog-ci because traces are being sent
 to Datadog with HTTP calls.
@@ -323,7 +323,7 @@ WebMock.disable_net_connect!(:allow => "localhost:8126")
 If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
-Full public API documentation is available on [YARD site][11].
+Full public API documentation is available on [YARD site][8].
 
 ### Domain model
 
@@ -417,11 +417,11 @@ Datadog::CI.active_test_session&.finish
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[4]: /tracing/trace_collection/dd_libraries/ruby/#installation
-[5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
-[6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
-[7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
-[8]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
-[9]: /getting_started/tagging/unified_service_tagging
-[10]: https://github.com/bblimke/webmock
-[11]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html
+[1]: /tracing/trace_collection/dd_libraries/ruby/#installation
+[2]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
+[3]: /tests/guides/add_custom_measures/?tab=ruby
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
+[6]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
+[7]: https://github.com/bblimke/webmock
+[8]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html

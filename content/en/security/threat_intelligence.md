@@ -8,7 +8,19 @@ further_reading:
   - link: "/security/application_security/threats/threat-intelligence/"
     tag: "documentation"
     text: "ASM Threat Intelligence"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: CSM Threats
+  url: /security/threats/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 ## Overview
 Threat Intelligence is reputation information that helps responders make informed decisions on attacks and compromises. 

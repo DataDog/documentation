@@ -30,7 +30,7 @@ If the target application is already instrumented with RUM, you should not enabl
 
 In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. 
 
-1. Navigate to [**UX Monitoring** > **Settings** > **Integration Settings**][5].
+1. Navigate to **Digital Experience** > **Settings** (under Synthetic Monitoring & Testing) > [**Integration Settings**][5].
 2. Under **Synthetic Data RUM Collection**, click **Enable Synthetic RUM data collection** to enable Datadog to collect RUM data from your test runs.
 3. Click **Save RUM Data Collection**.
 4. Under **Synthetic Data RUM Applications**, select a default RUM application suggested in the Browser Test Recorder from the dropdown menu. 
