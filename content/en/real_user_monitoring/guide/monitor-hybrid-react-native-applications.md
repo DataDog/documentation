@@ -12,7 +12,7 @@ further_reading:
 
 If you have a hybrid application built on React Native, you can use Datadog to monitor the same application both from the React Native and native sides.
 
-RUM Events are reported as coming from the same application and the same source in Datadog RUM.
+RUM Events from both of these sources are reported as coming from the same application and the same source in Datadog RUM.
 
 ## Limitations
 
