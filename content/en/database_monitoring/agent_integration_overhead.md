@@ -27,7 +27,7 @@ Postgres integration overhead tests were run on an Amazon EC2 machine `c5.xlarge
 * Network bandwidth: ~30 KB/s ▼ | 30 KB/s ▲
 * Agent query overhead on database: ~1% CPU Time
 
-Note: The network bandwidth is the sum of the incoming and outgoing traffic from the Agent to the monitored database and the Datadog backend.
+**Note**: The network bandwidth is the sum of the incoming and outgoing traffic from the Agent to the monitored database and the Datadog backend.
 
 ### MySQL integration overhead
 
@@ -47,7 +47,7 @@ MySQL integration overhead tests were run on an Amazon EC2 machine `c5.xlarge` i
 * Network bandwidth: ~40 KB/s ▼ | 30 KB/s ▲
 * Agent query overhead on database: ~1% CPU Time
 
-Note: The network bandwidth is the sum of the incoming and outgoing traffic from the Agent to the monitored database and the Datadog backend.
+**Note**: The network bandwidth is the sum of the incoming and outgoing traffic from the Agent to the monitored database and the Datadog backend.
 
 ### SQLServer integration overhead
 
@@ -66,4 +66,4 @@ SQLServer integration overhead tests were run on an Amazon EC2 machine `c5.xlarg
 * Network bandwidth: ~40 KB/s ▼ | 30 KB/s ▲
 * Agent query overhead on database: ~1% CPU Time
 
-Note: The network bandwidth is the sum of the incoming and outgoing traffic from the Agent to the monitored database and the Datadog backend.
+**Note**: The network bandwidth is the sum of the incoming and outgoing traffic from the Agent to the monitored database and the Datadog backend.
