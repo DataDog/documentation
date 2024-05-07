@@ -194,7 +194,7 @@ In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greate
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.8.0'
+gem 'ddtrace', '>= 1.8.0' # Use 'datadog' if you're using v2.x
 
 # Depends on your usage
 gem 'mysql2'
