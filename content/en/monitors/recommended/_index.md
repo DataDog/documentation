@@ -2,6 +2,9 @@
 title: Recommended Monitors
 kind: Documentation
 further_reading:
+- link: https://app.datadoghq.com/monitors/recommended?q=&only_installed=true&p=1
+  tag: "In App"
+  text: Browse recommended monitors
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
   text: "Enable preconfigured alerts with Recommended Monitors"
@@ -11,19 +14,27 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-recommended-monitors/"
   tag: "Blog"
   text: "Enable preconfigured alerts with Recommended Monitors for Azure"
-- link: https://app.datadoghq.com/monitors/recommended?q=&only_installed=true&p=1
-  tag: "In App"
-  text: Browse recommended monitors
+- link: "https://docs.datadoghq.com/developers/integrations/create-an-integration-recommended-monitor"
+  tag: "Developers Documentation"
+  text: "Create a Recommended Monitor"
 ---
 
 ## Overview
 
-Recommended monitors are a collection of monitor templates that are pre-configured by Datadog, integration partners, and other users. 
-
+Recommended monitors are a collection of monitor templates that are pre-configured by Datadog, integration partners, and other users. Use recommended monitors to: 
+- Save the time and effort of creating a new monitor from scratch.
+- Add consistency across monitors for the same integration.
+- Alert on the common issues associated with integrations
 
 ## Browse monitor templates
 
-Recommended Monitors are available out-of-the-box, so you can get started immediately after you finish installing the Datadog Agent and add your integrations. Navigate to the [**Monitors Templates**][1] page to see all monitor templates. From there, you can browse all available Recommended Monitors for your installed integrations.
+{{< img src="monitors/recommended/recommended_templates.png" alt="Recommended templates provided based on your integrations" style="width:100%;" >}}
+
+Recommended Monitors are available out-of-the-box, so you can get started immediately after you finish installing the Datadog Agent and add integrations. 
+
+Navigate to [**Monitor List**][2] page. If you have fewer than 10 monitors, Datadog automatically provides a list of recommended templates based on your installed integrations.
+
+To browse the full list of monitor templates, navigate to the [**Monitors Templates**][1] page. Filter and search all available Recommended Monitors for your installed integrations as well as all available templates.
 
 
 ## Further reading
@@ -31,18 +42,4 @@ Recommended Monitors are available out-of-the-box, so you can get started immedi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/recommended?q=&only_installed=true&p=1
-
-
-1. Time-saving: Templates provide a ready-made format for documents, presentations, or other materials, saving you the time and effort of creating a new design from scratch.
-
-2. Consistency: Using templates ensures uniformity in your branding, messaging, and overall design. This consistency can help to establish a strong and professional image for your business or organization.
-
-3. Ease of use: Templates are user-friendly and easy to customize, making it simple for anyone to create high-quality materials without needing advanced design skills.
-
-4. Cost-effective: By using templates, you can avoid the need to hire a designer or purchase expensive design software. This can help save money for individuals and small businesses.
-
-5. Increased productivity: Templates allow for quick and efficient creation of documents, presentations, or other materials, enabling you to focus on other tasks and increase your overall productivity.
-
-6. Flexibility: Templates can be easily modified and adapted to suit your specific needs, ensuring that you can tailor them to fit your unique requirements.
-
-7. Professionalism: Using templates can help you create polished and professional-looking materials, even if you are not a design expert. This can help enhance your credibility and attract more attention from your audience.
+[2]: https://app.datadoghq.com/monitors/manage
