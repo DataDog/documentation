@@ -5326,10 +5326,10 @@ menu:
     name: Accorder un rôle à une archive
     params:
       operationids:
-      - UpdateIncidentIntegration
+      - UpdateIncidentTeam
       order: 3
       unstable:
-      - v1
+      - v2
       versions:
       - v1
     parent: incidents-delete-an-incident-integration-metadata
