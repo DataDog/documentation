@@ -97,7 +97,7 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
-## Changing service color
+## Changing the service color
 
 The service color is used in trace visualizations. Click the service type icon to change it.
 
