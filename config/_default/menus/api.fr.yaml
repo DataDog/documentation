@@ -6767,10 +6767,10 @@ menu:
     name: Supprimer une règle
     params:
       operationids:
-      - CreateTeamLink
+      - DeleteScorecardRule
       order: 3
       unstable:
-      - v1
+      - v2
       versions:
       - v1
     parent: teams-create-a-team
