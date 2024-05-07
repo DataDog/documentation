@@ -166,6 +166,23 @@ metadata:
 ---
 {{< /code-block >}}
 
+
+#### Explicit and implicit metadata inheritance work
+
+##### Explicit Inheritance 
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+inheritFrom:<entity_kind>:<name>
+{{< /code-block >}}
+
+The inheritFrom field instructs the ingestion pipeline to inherit metadata from the entity’s metadata referenced by `<entity_kind>:<name>`.
+
+Note: Currently, the entity reference only applies to an entity from the same YAML file. 
+
+##### Implicit Inheritance 
+Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inherit all metadata from the application that it belongs to under specific conditions:
+- The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as a part of two separate `kind:application` definitions, it won't implicitly inherit of the metadata from either parent application. 
+- The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
