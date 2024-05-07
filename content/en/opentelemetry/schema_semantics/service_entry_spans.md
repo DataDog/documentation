@@ -50,7 +50,7 @@ The new service-entry span identification logic can be enabled by adding `"enabl
 
 This new service-entry span identification logic may increase the number of spans that generate trace metrics, which may affect existing monitors that are based on trace metrics. Users who only have internal spans will see a decrease in trace metrics.
 
-If you have existing monitors based on trace metrics, you can update them after upgrading since this change will introduce more consistency in trace metrics. If you only have internal span, please update your instrumentation according to the above table to receive trace metrics and service-entry spans.
+If you have existing monitors based on trace metrics, you can update them after upgrading since this change introduces more consistency in trace metrics. If you only have internal span, update your instrumentation according to the above table to receive trace metrics and service-entry spans.
 
 [`SpanKind`][1] is typically set when a span is created, but can also be updated by using the [transform processor][5] in the OpenTelemetry Collector to control the mapping above. For example, if trace metrics are desired for an internal span, the following configuration transforms an internal span with `http.path: "/health"` into a client span:
 ```yaml
