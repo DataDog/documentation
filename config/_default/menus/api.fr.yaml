@@ -5262,8 +5262,8 @@ menu:
       unstable:
       - v2
       versions:
-      - v1
-    parent: incidents-get-a-list-of-incidents
+      - v2
+    parent: incident-services
     url: '#mettre-a-jour-un-service-lie-a-un-incident-existant'
   - generated: true
     identifier: incident-services-get-details-of-an-incident-service
