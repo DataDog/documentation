@@ -200,7 +200,9 @@ Once you are using a saved view, you can update it by selecting that saved view,
 
 ## SLO audit events
 
-SLO audit events allow you to track the history of your SLO configurations using the Event Explorer. Audit events are added to the Event Explorer every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time.
+SLO audit events allow you to track the history of your SLO configurations using the [Event Explorer][27] or the "Audit History" tab in the SLO details. Audit events are added to the Event Explorer every time you create, modify, or delete an SLO or SLO status correction. Each event includes information on the configuration of an SLO or SLO status correction, and the stream provides a history of the configuration changes over time.
+
+**SLO audit events:**
 
 Each event includes the following SLO configuration information:
 
@@ -211,21 +213,35 @@ Each event includes the following SLO configuration information:
 
 Three types of SLO audit events appear in the Event Explorer:
 
-1. `SLO Created` events show all four pieces of SLO configuration information at creation time.
-2. `SLO Modified` events show a what configuration information changed during a modification
-3. `SLO Deleted` events show all four pieces of configuration information the SLO had right before it was deleted
+- `SLO Created` events show the SLO configuration information at creation time
+- `SLO Modified` events show what configuration information changed during a modification
+- `SLO Deleted` events show the configuration information the SLO had before it was deleted
 
-To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Explorer. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
+**SLO status correction audit events:**
 
-You can also query the Event Explorer programmatically using the [Datadog Events API][19].
+Each event includes the following SLO status correction configuration information:
+
+- SLO Name
+- Status correction start and end times and timezone
+- Status correction category
+
+Three types of SLO status correction audit events appear in the Event Explorer:
+
+- `SLO Correction Created` events show the status correction configuration information at creation time
+- `SLO Correction Modified` events show what configuration information changed during a modification
+- `SLO Correction Deleted` events show the configuration information the status correction had before it was deleted
+
+To get a full list of all SLO audit events, enter the search query `tags:(audit AND slo)` in the Event Explorer. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO. You can also query the Event Explorer programmatically using the [Datadog Events API][19].
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
 {{< img src="service_management/service_level_objectives/slo-audit-events.png" alt="SLO audit events" >}}
 
-For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
+You can also use the "Audit History" tab in the SLO details to view all audit events for an individual SLO:
 
-{{< img src="service_management/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor" >}}
+{{< img src="service_management/service_level_objectives/slo_audit_history_tab.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
+
+With [Event Monitors][28], you can set up notifications to track SLO audit events. For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
 ## SLO widgets
 
@@ -273,7 +289,7 @@ The 90-day limits per SLO are as follows:
 
 You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
 
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" >}}
+{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
 
 #### Access in the UI
 
@@ -352,3 +368,5 @@ The SLO statuses are calculated based on the SLO type:
 [24]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [25]: /api/latest/service-level-objective-corrections/
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[27]: /service_management/events/explorer/
+[28]: /monitors/types/event/
