@@ -6532,7 +6532,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams-remove-a-user-from-a-team
+    parent: sensitive-data-scanner
     url: '#enumerer-les-patterns-standard'
   - generated: true
     identifier: sensitive-data-scanner-update-scanning-rule
