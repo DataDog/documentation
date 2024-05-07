@@ -6231,8 +6231,8 @@ menu:
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: account_management_saml
+      - v2
+    parent: rum
     url: '#rechercher-des-evenements-rum'
   - generated: true
     identifier: rum-get-a-list-of-rum-events
