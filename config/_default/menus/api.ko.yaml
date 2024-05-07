@@ -6216,7 +6216,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 프로세스
+    parent: processes
     url: '#get-all-processes'
   - generated: true
     identifier: RUM
