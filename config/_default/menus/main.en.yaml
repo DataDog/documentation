@@ -1187,6 +1187,41 @@ menu:
       parent: dashboards
       identifier: dashboards_widgets
       weight: 3
+    - name: Graphs
+      url: dashboards/widgets/graphs
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_graphs
+      weight: 301
+    - name: Groups
+      url: dashboards/widgets/groups
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_groups
+      weight: 302
+    - name: Annotations and Embeds
+      url: dashboards/widgets/annotations_embeds
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_annotations_embeds
+      weight: 303
+    - name: Lists and Streams
+      url: dashboards/widgets/lists_streams
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_lists_streams
+      weight: 304
+    - name: Alerting and Response
+      url: dashboards/widgets/alerting_response
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_alerting_response
+      weight: 305
+    - name: Architecture
+      url: dashboards/widgets/architecture
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_architecture
+      weight: 306
+    - name: Performance and Reliability
+      url: dashboards/widgets/performance_reliability
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_performance_reliability
+      weight: 306
     - name: Querying
       identifier: dashboards_querying
       url: dashboards/querying/
