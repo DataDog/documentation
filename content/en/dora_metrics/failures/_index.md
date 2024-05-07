@@ -39,7 +39,7 @@ Failed deployments events, currently interpreted through incident events, are us
 {{< /whatsnext >}}
 
 ## Calculating change failure rate 
-Change failure rate requires both [deployment data][2] and [incident data](#configuring-failure-data-sources).
+Change failure rate requires both [deployment data][7] and [incident data](#configuring-failure-data-sources).
 
 Change failure rate is calculated as the percentage of incident events out of the total number of deployments. Datadog divides `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an failure and a deployment event. 
 
