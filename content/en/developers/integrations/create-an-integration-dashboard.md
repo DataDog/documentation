@@ -238,4 +238,4 @@ An integration dashboard should adhere to the following visual style guidelines:
 [11]: /developers/integrations/check_references/#manifest-file
 [12]: https://app.datadoghq.com/dashboard/lists
 [13]: https://github.com/DataDog/integrations-extras
-[14]: /dashboards/widgets/powerpack/
+[14]: /dashboards/widgets/groups/powerpack/

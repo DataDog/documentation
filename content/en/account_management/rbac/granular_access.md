@@ -33,4 +33,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [5]: /security/detection_rules/#limit-edit-access
 [6]: /service_management/service_level_objectives/#permissions
 [7]: /synthetics/browser_tests/#permissions
-[8]: /dashboards/widgets/powerpack/#powerpack-permissions
+[8]: /dashboards/widgets/groups/powerpack/#powerpack-permissions
