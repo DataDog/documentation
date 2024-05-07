@@ -106,7 +106,7 @@ The service color is used in trace visualizations. Click the service type icon t
 ## Manage service-related workflows
 [Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
-### Updating service type and language
+### Updating the service type and language
 With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
 
 
