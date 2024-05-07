@@ -6147,11 +6147,11 @@ menu:
     name: Créer un rôle
     params:
       operationids:
-      - UpdatePowerpack
+      - DeleteRestrictionPolicy
       order: 5
       unstable: []
       versions:
-      - v2
+      - v1
     parent: roles-create-a-new-role-by-cloning-an-existing-role
     url: '#mettre-a-jour-un-powerpack'
   - generated: true
