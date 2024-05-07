@@ -34,7 +34,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
   ```
   Replace `<DATADOG_API_KEY>` with your [Datadog API key][5].
 
-  **Note**: add the application key for autoscaling using external metrics server.
+  **Note**: add the application key for autoscaling using the external metrics server.
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
   ```yaml
