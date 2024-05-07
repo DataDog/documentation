@@ -6232,7 +6232,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: RUM
+    parent: rum
     url: '#search-rum-events'
   - generated: true
     identifier: rum-get-a-list-of-rum-events
