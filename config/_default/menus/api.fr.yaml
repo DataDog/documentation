@@ -4423,11 +4423,11 @@ menu:
     name: Mettre à jour un compte Confluent
     params:
       operationids:
-      - GetConfluentResource
+      - UpdateCloudWorkloadSecurityAgentRule
       order: 5
       unstable: []
       versions:
-      - v1
+      - v2
     parent: csm-threats
     url: '#modifier-une-regle-d-agent-cloud-workload-security'
   - generated: true
