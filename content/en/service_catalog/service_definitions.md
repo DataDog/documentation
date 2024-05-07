@@ -167,7 +167,7 @@ metadata:
 {{< /code-block >}}
 
 
-#### Explicit and implicit metadata inheritance work
+#### Explicit and implicit metadata inheritance 
 
 ##### Explicit Inheritance 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
