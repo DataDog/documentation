@@ -4587,8 +4587,8 @@ menu:
       order: 9
       unstable: []
       versions:
-      - v1
-    parent: tracing_compatibility_nodejs
+      - v2
+    parent: case-management
     url: '#annuler-l-archivage-d-un-cas'
   - generated: true
     identifier: case-management-update-case-status
