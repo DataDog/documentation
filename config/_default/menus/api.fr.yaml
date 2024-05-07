@@ -5257,7 +5257,7 @@ menu:
     name: Récupérer les détails d'un incident
     params:
       operationids:
-      - ListIncidentTeams
+      - UpdateIncidentService
       order: 3
       unstable:
       - v1
