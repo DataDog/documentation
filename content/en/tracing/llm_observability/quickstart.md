@@ -13,6 +13,13 @@ To try out LLM Observability in a series of guided notebooks, follow the instruc
 
 Use the steps below to run a simple Python script that generates an LLM Observability trace.
 
+### Prerequisites
+
+- LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
+- The example script below uses OpenAI, but you can modify it to use a different provider. To run the script as written, you need:
+    - An OpenAI API key stored in your environment as `OPENAI_API_KEY`. To create one, see [Account Setup][4] and [Set up your API key][6] in the OpenAI documentation.
+    - The OpenAI Python library installed. See [Setting up Python][5] in the OpenAI documentation for instructions.
+
 ### 1. Install the SDK
 
 Install the following `ddtrace` package hash:
@@ -48,6 +55,8 @@ To generate a trace, use the following command to run the Python script:
 DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> DD_LLMOBS_NO_APM=1 ddtrace-run python quickstart.py
 {{< /code-block >}}
 
+Replace `<YOUR_DATADOG_SITE>` with the Datadog site you want to send data to, such as `datadoghq.com` or `us3.datadoghq.com`.
+
 ### 4. View the trace
 
 A trace of your LLM call should appear in [the Traces tab][3] of LLM Observability in Datadog.
@@ -57,3 +66,7 @@ The trace you see is composed of a single LLM span. The `ddtrace-run` command au
 [1]: http://localhost:1313/tracing/llm_observability/sdk/
 [2]: https://github.com/DataDog/llm-observability
 [3]: https://app.datadoghq.com/llm/traces
+[4]: https://platform.openai.com/docs/quickstart/account-setup
+[5]: https://platform.openai.com/docs/quickstart/step-1-setting-up-python
+[6]: https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key
+[7]: /account_management/api-app-keys/#add-an-api-key-or-client-token

@@ -6,7 +6,7 @@ kind: guide
 
 ## Overview
 
-Your application can submit data to LLM Observability in two ways: with Datadog's Python SDK, or with the LLM Observability API.
+Your application can submit data to LLM Observability in two ways: with Datadog's [Python SDK][12], or with the [LLM Observability API][13].
 
 Each request fulfilled by your application is represented as a trace on the [LLM Observability traces list page][2] in Datadog:
 
@@ -16,7 +16,7 @@ A given trace contains spans representing each choice made by an agent or each s
 
 Multiple spans combine to form a trace, and a *root span* is the first span in a trace.
 
-A trace can contain several kinds of spans: Agent, LLM, Workflow, and so on. The *span kind* categorizes the type of work the span is performing in an LLM application. Different span kinds have different parent-child relationships, and only some kinds can be the root span of a trace. For details, see [Span Kinds].
+A trace can contain several kinds of spans: Agent, LLM, Workflow, and so on. The *span kind* categorizes the type of work the span is performing. Different span kinds have different parent-child relationships, and only some kinds can be the root span of a trace. For details, see [Span Kinds][4].
 
 ## Instrument an LLM application
 
@@ -26,8 +26,10 @@ To trace a given LLM application:
 
 1. [Install the Python SDK][1].
 1. [Start your application with the required env variables][5], including your Datadog API key. If you don't have an API key, you can [create one in Datadog][3].
-1. In your code, [use the SDK to create spans](#create-spans) representing your application's tasks, as described below.
-1. [Annotate your spans][7] with input data, output data, metadata (such as max tokens), and key-value tags (such as version).
+1. In your code, [use the SDK to create spans](#create-spans) representing your application's tasks.
+    - See the span creation example below.
+	- For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
+1. [Annotate your spans][7] with input data, output data, metadata (such as `max_tokens`), and key-value tags (such as `version:1.0.0`).
 1. Explore the resulting traces on the [traces list page][2].
 
 Optionally, you can also:
@@ -36,13 +38,9 @@ Optionally, you can also:
 - [Persist a span between contexts or scopes][8] by manually starting and stopping it.
 - [Override the name of the LLM application with a different name][9] when starting a root span, which can be useful for differentiating between services or running an experiment.
 
-### Create spans
+### Span creation example
 
-<div class="alert alert-info">The SDK creates some spans are automatically, depending on the span kind and on the LLM provider. For details, see the <a href="/tracing/llm_observability/span_kinds/">span documentation</a>.</div>
-
-A *span* represents some unit of work that your application is performing. One or more spans combine to form a *trace* that can be queried in Datadog. See the [span documentation][4] for details on the available span kinds, span attributes, and more.
-
-To create a span, use the SDK's `LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind]. The example below creates a workflow span:
+To create a span, use the SDK's `LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4]. The example below creates a workflow span:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -52,8 +50,6 @@ def process_message():
 		... # user application logic
 	return 
 {{< /code-block >}}
-
-For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11].
 
 [1]: /tracing/llm_observability/sdk/#installation
 [2]: https://app.datadoghq.com/llm/traces
@@ -66,3 +62,5 @@ For additional examples and detailed usage, see the [Quickstart][10] and the [SD
 [9]: /tracing/llm_observability/sdk/#tracing-multiple-applications
 [10]: /tracing/llm_observability/quickstart/
 [11]: /tracing/llm_observability/sdk/#tracing-spans
+[12]: /tracing/llm_observability/sdk
+[13]: /tracing/llm_observability/api
