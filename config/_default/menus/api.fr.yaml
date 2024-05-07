@@ -6083,7 +6083,7 @@ menu:
     name: Énumérer les autorisations d'un rôle
     params:
       operationids:
-      - ListOpsgenieServices
+      - UpdateOpsgenieService
       order: 4
       unstable: []
       versions:
