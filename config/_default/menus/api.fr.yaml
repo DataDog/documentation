@@ -6639,7 +6639,7 @@ menu:
     name: Supprimer un lien d'équipe
     params:
       operationids:
-      - UpdateServiceAccountApplicationKey
+      - CreateOrUpdateServiceDefinitions
       order: 2
       unstable: []
       versions:
