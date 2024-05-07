@@ -6023,7 +6023,7 @@ menu:
       order: 4
       unstable: []
       versions:
-      - v1
+      - v2
     parent: roles-list-permissions-for-a-role
     url: '#mettre-a-jour-un-compte-okta'
   - generated: true
