@@ -1279,7 +1279,7 @@ menu:
       weight: 10
     - name: Public Dashboards
       identifier: dashboards_sharing_public_dashboards
-      url: dashboards/sharing/dashboards
+      url: dashboards/sharing/public_dashboards
       parent: dashboards_sharing
       weight: 1001
     - name: Share Graphs

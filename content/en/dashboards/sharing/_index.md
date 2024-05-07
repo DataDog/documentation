@@ -22,7 +22,7 @@ further_reading:
 Shared visualizations allow you to display metric, trace, and log visualizations outside of Datadog. Share visualizations to enhance decision-making and problem-solving processes with team members. 
 
 {{< whatsnext desc="How to share visualizations:" >}}
-   {{< nextlink href="dashboards/sharing/dashboards" >}}<strong>Share dashboards</strong>: Generate a public link for users to access{{< /nextlink >}}
+   {{< nextlink href="dashboards/sharing/public_dashboards" >}}<strong>Share dashboards</strong>: Generate a public link for users to access{{< /nextlink >}}
    {{< nextlink href="dashboards/sharing/graphs" >}}<strong>Share graphs</strong>: Generate an embed code{{< /nextlink >}}
    {{< nextlink href="dashboards/sharing/scheduled_reports" >}}<strong>Scheduled reports</strong>: Set a schedule to send email reports{{< /nextlink >}}
 {{< /whatsnext >}}
