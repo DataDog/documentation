@@ -6216,7 +6216,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: sensitive-data-scanner-create-scanning-group
+    parent: processes
     url: '#recuperer-tous-les-processus'
   - generated: true
     identifier: rum
