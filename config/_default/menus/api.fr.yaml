@@ -5105,12 +5105,12 @@ menu:
     name: Incidents
     params:
       operationids:
-      - CreateIncidentTeam
+      - UpdateFastlyService
       order: 9
       unstable: []
       versions:
-      - v1
-    parent: incidents-create-an-incident-todo
+      - v2
+    parent: fastly-integration
     url: '#mettre-a-jour-un-service-fastly'
   - generated: true
     identifier: fastly-integration-get-fastly-service
