@@ -2,6 +2,8 @@
 title: Change Overlays
 kind: documentation
 description: Overlay your change events on graphs to correlate performance anomalies with changes in your application
+aliases:
+- /dashboards/change_overlays/
 further_reading:
 - link: "/tracing/services/deployment_tracking/"
   tag: "Documentation"
@@ -22,10 +24,6 @@ further_reading:
   tag: "Blog"
   text: "Quickly spot and revert faulty deployments with Change Overlays"
 ---
-<div class="alert alert-warning">
-    Change Overlays is in beta.
-</div>
-
 
 ## Overview
 

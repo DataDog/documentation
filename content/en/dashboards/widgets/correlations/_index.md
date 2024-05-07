@@ -3,6 +3,7 @@ title: Metric Correlations
 kind: documentation
 aliases:
     - /graphing/correlations/
+    - /dashboards/correlations/
 further_reading:
 - link: "/dashboards/"
   tag: "Documentation"

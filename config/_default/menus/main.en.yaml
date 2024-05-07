@@ -1187,6 +1187,16 @@ menu:
       url: dashboards/widgets/querying
       parent: dashboards_widgets
       weight: 301
+    - name: Overlays
+      url: dashboards/widgets/change_overlays/
+      parent: dashboards_widgets
+      weight: 302
+      identifier: dashboards_overlays
+    - name: Correlations
+      identifier: dashboards_correlations
+      url: dashboards/widgets/correlations/
+      parent: dashboards_widgets
+      weight: 303
     - name: Functions
       url: dashboards/functions/
       parent: dashboards
@@ -1252,46 +1262,36 @@ menu:
       url: dashboards/functions/beta/
       parent: dashboards_functions
       weight: 512
-    - name: Correlations
-      identifier: dashboards_correlations
-      url: dashboards/correlations/
-      parent: dashboards
-      weight: 6
     - name: Template Variables
       url: dashboards/template_variables/
       parent: dashboards
-      weight: 8
+      weight: 6
       identifier: dashboards_temp_variables
-    - name: Overlays
-      url: dashboards/change_overlays/
-      parent: dashboards
-      weight: 9
-      identifier: dashboards_overlays
     - name: Sharing
       identifier: dashboards_sharing
       url: dashboards/sharing/
       parent: dashboards
-      weight: 10
+      weight: 7
     - name: Public Dashboards
       identifier: dashboards_sharing_public_dashboards
       url: dashboards/sharing/public_dashboards
       parent: dashboards_sharing
-      weight: 1001
+      weight: 701
     - name: Share Graphs
       identifier: dashboards_sharing_graphs
       url: dashboards/sharing/graphs
       parent: dashboards_sharing
-      weight: 1002
+      weight: 702
     - name: Scheduled Reports
       identifier: dashboards_reporting
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
-      weight: 1003
+      weight: 703
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
       identifier: dashboards_guides
-      weight: 11
+      weight: 10
     - name: Notebooks
       url: notebooks/
       identifier: notebooks
