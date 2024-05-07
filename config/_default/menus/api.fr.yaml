@@ -6644,7 +6644,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: service-accounts
     url: '#modifier-une-cle-d-application-pour-ce-compte-de-service'
   - generated: true
     identifier: service-accounts-get-one-application-key-for-this-service-account
