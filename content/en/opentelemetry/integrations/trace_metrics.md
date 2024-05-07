@@ -6,7 +6,14 @@ further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
   text: "Getting Started with Collector"
+- link: "/opentelemetry/guide/service_entry_spans_mapping/"
+  tag: "Documentation"
+  text: "Mapping OpenTelemetry Semantic Conventions to Service-entry Spans"
 ---
+
+<div class="alert alert-info">
+<a href="/opentelemetry/guide/service_entry_spans_mapping/">Mapping OpenTelemetry Semantic Conventions to Service-entry Spans</a> is now in public beta, and includes improvements to trace metrics generated from OpenTelemetry spans.
+</div>
 
 ## Overview
 
@@ -49,36 +56,13 @@ service:
 
 ## Data collected
 
-[Trace Metrics][2] are generated for service entry spans and measured spans. These span conventions are unique to Datadog, so OpenTelemetry spans are identified with the following mapping:
-| OpenTelemetry Convention | Datadog Convention |
-| --- | --- |
-| Root span | Service entry span |
-| Server span (`span.kind: server`) | Service entry span |
-| Consumer span (`span.kind: consumer`) | Service entry span |
-| Client span (`span.kind: client`) | Measured span |
-| Producer span (`span.kind: producer`) | Measured span |
-| Internal span (`span.kind: internal`) | No trace metrics generated |
-
-[`SpanKind`][3] is typically set when a span is created, but can also be updated by using the [transform processor][4] in the OpenTelemetry Collector to control the mapping above. For example, if trace metrics are desired for an internal span, the following configuration transforms an internal span with `http.path: "/health"` into a client span:
-```yaml
-  transform:
-    trace_statements:
-      - context: span
-        statements:
-          - set(kind.string, "Client") where kind.string == "Internal" and attributes["http.path"] == "/health"
-```
-
-<div class="alert alert-info">
-This service entry span logic may increase the number of spans that generate trace metrics. If needed, you can disable this change by enabling the <code>disable_otlp_compute_top_level_by_span_kind</code> APM feature, but this may result in OpenTelemetry spans being misidentified as service entry spans. <code>apm_config.compute_stats_by_span_kind</code> also needs to be disabled to turn off computing stats by <code>SpanKind</code> for OTel traces.
-</div>
+See [Trace Metrics][2].
 
 ## Full example configuration
 
-For a full working example configuration with the Datadog exporter, see [`trace-metrics.yaml`][5].
+For a full working example configuration with the Datadog exporter, see [`trace-metrics.yaml`][3].
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
 [2]: /tracing/metrics/metrics_namespace/
-[3]: https://opentelemetry.io/docs/specs/otel/trace/api/#spankind
-[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/transformprocessor/README.md
-[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/trace-metrics.yaml
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/trace-metrics.yaml
