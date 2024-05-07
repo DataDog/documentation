@@ -6715,12 +6715,12 @@ menu:
     name: Ajouter un utilisateur à une équipe
     params:
       operationids:
-      - CreateSpansMetric
+      - GetServiceDefinition
       order: 3
       unstable: []
       versions:
-      - v1
-    parent: teams-update-a-users-membership-attributes-on-a-team
+      - v2
+    parent: service-definition
     url: '#recuperer-une-definition-de-service-unique'
   - generated: true
     identifier: service-definition-delete-a-single-service-definition
