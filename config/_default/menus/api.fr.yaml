@@ -5075,10 +5075,10 @@ menu:
     name: Supprimer une équipe liée à un incident existante
     params:
       operationids:
-      - CreateIncidentService
+      - CreateDORAIncident
       order: 4
       unstable:
-      - v1
+      - v2
       versions:
       - v1
     parent: incident-teams-create-a-new-incident-team
