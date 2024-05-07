@@ -5821,11 +5821,11 @@ menu:
     name: Screenboards
     params:
       operationids:
-      - DeleteRestrictionQuery
+      - UpdateLogsMetric
       order: 4
       unstable: []
       versions:
-      - v1
+      - v2
     parent: processes-get-all-processes
     url: '#mettre-a-jour-une-metrique-basee-sur-des-logs'
   - generated: true
