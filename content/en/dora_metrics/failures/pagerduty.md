@@ -36,7 +36,7 @@ To integrate your PagerDuty account with DORA Metrics, navigate to **Integration
 
    | Variable | Description |
    |---|---|
-   | Webhook URL | Add `https://webhook-intake.<br>datadoghq.com<br>/api/v2/webhook/`. |
+   | Webhook URL | Add `https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/`. |
    | Scope Type | Select **Account** to send incidents for all PagerDuty services in your account. Alternatively, you can send incidents for specific services or teams by selecting a different scope type. |
    | Description | A description helps distinguish the webhook. Add something like `Datadog DORA Metrics integration`. |
    | Event Subscription | Select the following events:<br>-`incident.acknowledged`<br>-`incident.annotated`<br>-`incident.custom_field_values.updated`<br>-`incident.delegated`<br>-`incident.escalated`<br>-`incident.priority_updated`<br>-`incident.reassigned`<br>-`incident.reopened`<br>-`incident.resolved`<br>-`incident.triggered`<br>-`incident.unacknowledged` |

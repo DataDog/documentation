@@ -25,6 +25,8 @@ further_reading:
 
 To send your own incident events, use the [DORA Metrics API][1]. Incident events are used in order to compute change failure rate and mean time to restore.
 
+Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
+
 The following attributes are required:
 
 - `services` or `team` (at least one must be present)

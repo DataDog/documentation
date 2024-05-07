@@ -46,11 +46,7 @@ Change failure rate is calculated as the percentage of incident events out of th
 ## Calculating time to restore 
 Time to restore is calculated as the duration distribution for *resolved incident* events.
 
-Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
-
-DORA Metrics generates a `dora.time_to_restore` metric based on the start and end times for each incident event.
-
-For mean time to restore (MTTR), DORA Metrics calculates the average of individual `dora.time_to_restore` data points over a selected time frame. 
+DORA Metrics generates the `dora.time_to_restore` metric by recording the start and end times of each incident event. It calculates the mean time to restore (MTTR) as the average of these `dora.time_to_restore` data points over a selected time frame. 
 
 ## Further Reading
 
