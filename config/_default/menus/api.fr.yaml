@@ -5637,8 +5637,8 @@ menu:
       order: 7
       unstable: []
       versions:
-      - v1
-    parent: processes
+      - v2
+    parent: logs-archives
     url: '#accorder-un-role-a-une-archive'
   - generated: true
     identifier: logs-archives-list-read-roles-for-an-archive
