@@ -5761,7 +5761,7 @@ menu:
       order: 4
       unstable: []
       versions:
-      - v1
+      - v2
     parent: logs-custom-destinations
     url: '#mettre-a-jour-une-destination-personnalisée'
   - generated: true
