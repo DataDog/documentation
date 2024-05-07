@@ -4719,7 +4719,7 @@ menu:
       order: 1
       unstable: []
       versions:
-      - v1
+      - v2
     parent: tracing_compatibility_nodejs
     url: '#rechercher-des-cas'
   - generated: true
