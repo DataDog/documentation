@@ -29,7 +29,7 @@ further_reading:
 
 Quality Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
 
-{{< img src="quality_gates/rule_type.png" alt="A pipeline rule that fails when code coverage for PCT is zero in Quality Gates" style="width:100%" >}}
+{{< img src="quality_gates/setup/pipeline_rule.png" alt="A pipeline rule that fails when code coverage for PCT is below or equal to zero in Quality Gates" style="width:100%" >}}
 
 Use Quality Gates to:
 
@@ -57,7 +57,7 @@ You can create rules to block code from being merged that introduces new [flaky 
 
 You can create rules to block code from being merged that introduces issues that wouldn't normally fail your CI/CD pipelines, but end up being deployed to production.
 
-{{< img src="quality_gates/setup/pipeline.png" alt="A Quality Gate rule that fails when code coverage for PCT is zero for a CI pipeline" style="width:80%" >}}
+{{< img src="quality_gates/setup/pipeline_rule.png" alt="A Quality Gate rule that fails when code coverage for PCT is below or equal to zero for a CI pipeline" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Static Analysis" %}}
