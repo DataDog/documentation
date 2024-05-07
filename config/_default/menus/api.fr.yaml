@@ -4860,7 +4860,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: fastly-integration-add-fastly-account
+    parent: cloudflare-integration
     url: '#mettre-a-jour-un-compte-cloudflare'
   - generated: true
     identifier: cloudflare-integration-get-cloudflare-account
@@ -4919,11 +4919,11 @@ menu:
     name: Supprimer un compte Fastly
     params:
       operationids:
-      - UpdateFastlyService
+      - UpdateConfluentResource
       order: 1
       unstable: []
       versions:
-      - v1
+      - v2
     parent: fastly-integration-delete-fastly-account
     url: '#mettre-a-jour-une-ressource-dans-un-compte-confluent'
   - generated: true
