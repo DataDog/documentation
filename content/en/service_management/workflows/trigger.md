@@ -172,9 +172,12 @@ The initial run history for a workflow provides a panel with the list of previou
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][7].
+
 [1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
 [5]: /service_management/workflows/build/#input-parameters
 [6]: https://app.datadoghq.com/incidents/settings#Rules
+[7]: https://datadoghq.slack.com/

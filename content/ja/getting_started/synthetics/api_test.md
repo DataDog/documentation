@@ -42,7 +42,7 @@ HTTP テストは、API エンドポイントを監視し、レスポンス遅�
 
 ### リクエストを定義する
 
-1. Datadog サイトで、**UX Monitoring** にカーソルを合わせ、**[Synthetic Tests][4]** を選択します。
+1. Datadog サイトで、**Digital Experience** にカーソルを合わせ、**[Tests][4]** (**Synthetic Monitoring & Testing** の下) を選択します。
 2. **New Test** > **[New API test][5]** をクリックします。
 3. `HTTP` リクエストタイプを選択します。
 4. リクエストを定義します。
@@ -209,7 +209,7 @@ Datadog の [APM と Synthetic モニタリングのインテグレーション]
 [1]: /ja/synthetics/api_tests/
 [2]: /ja/synthetics/multistep
 [3]: /ja/synthetics/api_tests/http_tests
-[4]: https://app.datadoghq.com/synthetics/list
+[4]: https://app.datadoghq.com/synthetics/tests
 [5]: https://app.datadoghq.com/synthetics/create
 [6]: /ja/synthetics/settings/#global-variables
 [7]: /ja/synthetics/api_tests/http_tests#variables

@@ -18,8 +18,20 @@ further_reading:
   tag: ブログ
   text: 不可能な旅行検出ルールで不審なログイン行為を検出する
 kind: documentation
+products:
+- icon: cloud-security-management
+  name: ディメンショニング
+  url: /security/cloud_siem/
+- icon: cloud-security-management
+  name: Cloud Security Management
+  url: /security/cloud_security_management/
+- icon: app-sec
+  name: テストステップ
+  url: /security/application_security/
 title: 検出ルール
 ---
+
+{{< product-availability >}}
 
 検出ルールは、取り込まれたすべてのログとクラウド構成に適用される条件ロジックを定義します。ルールに定義されたケースに一定期間中に少なくとも 1 つ一致すると、セキュリティシグナルが生成されます。これらのシグナルは、[Signal Explorer][16] で確認できます。
 
@@ -48,7 +60,7 @@ Datadog のセキュリティリサーチチームは、継続的に新しいす
 
 ## 検出ルールの検索とフィルタリング
 
-Datadog ですぐに使える検出ルールとカスタム検出ルールを表示するには、[**Security** > **Configuration**][15] ページに移動します。ルールは、各製品 (Application Security、Cloud Security Management、Cloud SIEM) の個別のページにリストされています。
+Datadog ですぐに使える検出ルールとカスタム検出ルールを表示するには、[**Security Settings**][15] ページに移動します。ルールは、各製品 (Application Security、Cloud Security Management、Cloud SIEM) の個別のページにリストされています。
 
 ルールを検索してフィルタリングするには、検索ボックスとファセットを使用して値でクエリします。例えば、指定したルールタイプのルールだけを表示するには、ルールタイプにカーソルを合わせて `only` を選択します。また、受信した問題を調査したりトリアージする際に、`source` や `severity` などのファセットでフィルタリングすることもできます。
 
@@ -143,7 +155,7 @@ Datadog ですぐに使える検出ルールとカスタム検出ルールを表
 [1]: /ja/security/default_rules/
 [2]: /ja/security/cloud_siem/
 [3]: /ja/security/cloud_siem/log_detection_rules/
-[4]: /ja/security/misconfigurations/
+[4]: /ja/security/cloud_security_management/misconfigurations/
 [5]: /ja/security/threats/
 [6]: /ja/security/application_security/
 [7]: /ja/tracing/
@@ -151,8 +163,8 @@ Datadog ですぐに使える検出ルールとカスタム検出ルールを表
 [9]: https://app.datadoghq.com/security/configuration/rules
 [10]: /ja/account_management/rbac/
 [11]: /ja/security/application_security/threats/custom_rules/
-[12]: /ja/security/misconfigurations/custom_rules
+[12]: /ja/security/cloud_security_management/misconfigurations/custom_rules
 [13]: /ja/security/threats/workload_security_rules?tab=host#create-custom-rules
-[14]: /ja/security/identity_risks/
+[14]: /ja/security/cloud_security_management/identity_risks/
 [15]: https://app.datadoghq.com/security/configuration/
 [16]: https://app.datadoghq.com/security

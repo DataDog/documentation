@@ -88,7 +88,7 @@ Enter an **Authentication token** in the **Datadog Cluster Agent Settings**, a s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /help/
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/signup
 [5]: /integrations/pivotal_platform/#monitor-your-pivotal-platform-cluster/
 [6]: https://github.com/DataDog/datadog-firehose-nozzle
