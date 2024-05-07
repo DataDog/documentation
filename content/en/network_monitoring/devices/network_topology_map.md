@@ -15,8 +15,6 @@ further_reading:
 <div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">The Network Device Topology Map for Datadog Network Device Monitoring is in public beta.</div>
-
 ## Overview
 
 The [Network Device Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts.
@@ -32,6 +30,57 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP.
 2. Datadog Agent version 7.46 or later is installed.
 3. If you're using [device autodiscovery][3], enable `snmp_listener.collect_topology: true` in the `datadog.yaml` file.
+
+## Navigation options
+
+In the Network Topology Map, the following navigation options are available:
+
+1. Under **View By**, select to visualize devices in groups according to tags: 
+
+{{< img src="/network_device_monitoring/network_topology_map/network_view_by_hostname.png" alt="The navigation option, with view by devices and tags selected, highlighting view by hostname" style="width:80%;" >}}
+
+2. Under **Color By"**, change how nodes on the Device Topology Map are colored based on **device state** or **ping state**:
+
+{{< img src="/network_device_monitoring/network_topology_map/device_topology_color_by.png" alt="The navigation option, with view by color selected, highlighting view by device state" style="width:80%;" >}}
+
+   The following are the definitions for each color state:
+   <div style="width:80%; margin: 0 auto;">
+
+   | Color    | Description               |
+   |----------|---------------------------|
+   | Green    | Reachable, ok states      |
+   | Red      | Unreachable, down states  |
+   | Grey     | States not configured for ping |
+   | No border| Shadow devices            |
+
+   </div>
+
+3. Under **Filter Devices**, gain further granular control over what devices are shown on the Device Topology Map. 
+
+{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_devices_2.png" alt="The navigation option, with view filer option selected, toggling by hide unmonitored devices " style="width:80%;" >}}
+
+**Note:** The filter devices setting impacts what devices are shown on the Device Topology Map for _all_ queries you may make, such as if you filter by a device facet in the search bar. 
+
+Hide _number of_ Unmonitored Devices - Turned OFF by default.
+: Toggling this on hides devices on the Device Topology Map that are not directly monitored by Network Device Monitoring, but still discovered by LLDP/CDP, and shown on the map from adjacent devices that are monitored by Network Device Monitoring.
+
+Hide _number of_ Unconnected Devices - Turned ON by default.
+: Toggling this on hides any devices that have no link connections. Devices can be unconnected for reasons such as improper configuration, or the device does not support [LLDP/CDP](#troubleshooting).
+
+## Icon Legend 
+
+SNMP devices are matched to a representative icon based on their device type in each device node. 
+
+
+| Icon        | Details       |
+|-------------|-------------|
+|      | Access Point
+|              |Firewall
+|             |Router 
+|     |Server 
+|             |Switch 
+|             |Device 
+
 
 ## Investigating devices
 
@@ -58,6 +107,7 @@ From this view, you can also view the device's interfaces in the **Interfaces** 
 ### View flow details
 
 Choose **View flow details** to open the NetFlow tab filtered by the device's `@device.ip` for a detailed exploration of the device's sources, destinations, and volume. See the [NetFlow Monitoring][1] page for more information.
+
 
 ### Troubleshooting
 
