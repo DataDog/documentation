@@ -5395,10 +5395,10 @@ menu:
     name: Créer une archive
     params:
       operationids:
-      - DeleteLogsArchive
+      - UpdateIncidentTodo
       order: 17
       unstable:
-      - v1
+      - v2
       versions:
       - v1
     parent: logs-restriction-queries-update-a-restriction-query
