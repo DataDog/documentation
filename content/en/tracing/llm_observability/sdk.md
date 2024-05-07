@@ -81,9 +81,9 @@ For a working example, see [the example Jupyter notebook for agent spans][7].
 from ddtrace.llmobs import LLMObs
 
 def run_agent():
-	with LLMObs.agent(name="react_agent") as agent_span:
-		... # user application logic
-	return 
+    with LLMObs.agent(name="react_agent") as agent_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 ### Workflow span
@@ -104,9 +104,9 @@ For a working example, see [the example Jupyter notebook for workflow spans][6].
 from ddtrace.llmobs import LLMObs
 
 def process_message():
-	with LLMObs.workflow(name="process_message") as workflow_span:
-		... # user application logic
-	return 
+    with LLMObs.workflow(name="process_message") as workflow_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 ### LLM span
@@ -140,9 +140,9 @@ For a working example, see [the example Jupyter notebook for LLM spans][5].
 from ddtrace.llmobs import LLMObs
 
 def llm_call():
-	with LLMObs.llm(name="invoke_llm", model_name="claude", model_provider="anthropic") as llm_span:
-		completion = ... # user application logic to invoke LLM
-	return completion
+    with LLMObs.llm(name="invoke_llm", model_name="claude", model_provider="anthropic") as llm_span:
+        completion = ... # user application logic to invoke LLM
+    return completion
 {{< /code-block >}}
 
 ### Tool span
@@ -161,9 +161,9 @@ To trace a tool span, use `LLMObs.tool()` as a context manager.
 from ddtrace.llmobs import LLMObs
 
 def call_weather_api():
-	with LLMObs.tool(name="get_current_weather") as tool_span:
-		... # user application logic
-	return 
+    with LLMObs.tool(name="get_current_weather") as tool_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 ### Embedding span
@@ -182,9 +182,9 @@ To trace an embedding span, use `LLMObs.embedding()` as a context manager.
 from ddtrace.llmobs import LLMObs
 
 def perform_embedding():
-	with LLMObs.embedding(name="openai_embedding") as embedding_span:
-		... # user application logic
-	return 
+    with LLMObs.embedding(name="openai_embedding") as embedding_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 ### Retrieval span
@@ -203,9 +203,9 @@ To trace a retrieval span, use `LLMObs.retrieval()` as a context manager.
 from ddtrace.llmobs import LLMObs
 
 def similarity_search():
-	with LLMObs.retrieval(name="get_relevant_docs") as retrieval_span:
-		... # user application logic
-	return 
+    with LLMObs.retrieval(name="get_relevant_docs") as retrieval_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 ### Task span
@@ -224,9 +224,9 @@ To trace a task span, use `LLMObs.task()` as a context manager.
 from ddtrace.llmobs import LLMObs
 
 def sanitize_input():
-	with LLMObs.task(name="sanitize_input") as task_span:
-		... # user application logic
-	return 
+    with LLMObs.task(name="sanitize_input") as task_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 ## Tracing spans using function decorators
@@ -240,8 +240,8 @@ from ddtrace.llmobs.decorators import workflow
 
 @workflow(name="process_message", session_id="<SESSION_ID>", ml_app="<ML_APP>")
 def process_message():
-	... # user application logic
-	return
+    ... # user application logic
+    return
 {{< /code-block >}}
 
 ## Annotating a span
@@ -279,27 +279,27 @@ from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import workflow
 
 def llm_call(prompt):
-	with LLMObs.llm(name="llm_call", model="model_name", model_provider="model_provider") as llm_span:
-		resp = ... # llm call here
-		LLMObs.annotate(
-  			span=llm_span,
+    with LLMObs.llm(name="llm_call", model="model_name", model_provider="model_provider") as llm_span:
+        resp = ... # llm call here
+        LLMObs.annotate(
+            span=llm_span,
             input_data=[{"role": "user", "content": "Hello world!"}],
             output_data=[{"role": "assistant", "content": "How can I help?"}],
             metadata={"temperature": 0, "max_tokens": 200},
             tags={"host": "host_name"},
         )
-	return resp
+    return resp
 
 @workflow(name="process_message")
 def process_message(prompt):
-	resp = llm_call_inline(prompt)
-	LLMObs.annotate(
+    resp = llm_call_inline(prompt)
+    LLMObs.annotate(
         span=None,
         input_data="prompt",
         output_data="output",
         tags={"host": "host_name"},
     )
-	return resp
+    return resp
 {{< /code-block >}}
 
 ## Persisting a span across contexts
@@ -316,15 +316,15 @@ To manually start and stop a span across different contexts or scopes:
 from ddtrace.llmobs import LLMObs
 
 def separate_task(workflow_span):
-	... # user application logic 
-	workflow_span.finish()
-	return
+    ... # user application logic 
+    workflow_span.finish()
+    return
 
 def process_message():
-workflow_span = LLMObs.workflow(name="process_message")	
-	... # user application logic
-	separate_task(workflow_span)
-	return
+workflow_span = LLMObs.workflow(name="process_message")
+    ... # user application logic
+    separate_task(workflow_span)
+    return
 {{< /code-block >}}
 
 ## Tracking user sessions
@@ -335,9 +335,9 @@ Session tracking allows you to associate multiple interactions with a given user
 from ddtrace.llmobs import LLMObs
 
 def process_message():
-	with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>") as workflow_span:
-		... # user application logic
-	return 
+    with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>") as workflow_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 ## Tracing multiple applications
@@ -352,9 +352,9 @@ To override this configuration and use a different LLM application name for a gi
 from ddtrace.llmobs import LLMObs
 
 def process_message():
-	with LLMObs.workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>") as workflow_span:
-		... # user application logic
-	return 
+    with LLMObs.workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>") as workflow_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 [1]: https://github.com/openai/openai-python

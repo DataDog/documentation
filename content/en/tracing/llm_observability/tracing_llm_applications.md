@@ -28,7 +28,7 @@ To trace a given LLM application:
 1. [Start your application with the required env variables][5], including your Datadog API key. If you don't have an API key, you can [create one in Datadog][3].
 1. In your code, [use the SDK to create spans](#create-spans) representing your application's tasks.
     - See the span creation example below.
-	- For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
+    - For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
 1. [Annotate your spans][7] with input data, output data, metadata (such as `max_tokens`), and key-value tags (such as `version:1.0.0`).
 1. Explore the resulting traces on the [traces list page][2].
 
@@ -46,9 +46,9 @@ To create a span, use the SDK's `LLMObs.<SPAN_KIND>()` as a context manager, rep
 from ddtrace.llmobs import LLMObs
 
 def process_message():
-	with LLMObs.workflow(name="process_message") as workflow_span:
-		... # user application logic
-	return 
+    with LLMObs.workflow(name="process_message") as workflow_span:
+        ... # user application logic
+    return
 {{< /code-block >}}
 
 [1]: /tracing/llm_observability/sdk/#installation
