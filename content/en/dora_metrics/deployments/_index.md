@@ -32,7 +32,7 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for deployment events. See the respective documentation to set up the data source for your deployment events:" >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/deployments/" >}}Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/deployments/deployment_api" >}}Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Calculating deployment frequency
