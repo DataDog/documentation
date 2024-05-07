@@ -5043,7 +5043,7 @@ menu:
     name: Récupérer la liste de tous les services liés à un incident
     params:
       operationids:
-      - DeleteIncidentService
+      - ListContainerImages
       order: 1
       unstable: []
       versions:
