@@ -6772,8 +6772,8 @@ menu:
       unstable:
       - v2
       versions:
-      - v1
-    parent: teams-create-a-team
+      - v2
+    parent: service-scorecards
     url: '#supprimer-une-regle'
   - generated: true
     identifier: service-scorecards-create-a-new-rule
