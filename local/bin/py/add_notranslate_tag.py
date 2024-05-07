@@ -85,3 +85,6 @@ def add_tag():
             next_page_url = data.get('links', {}).get('next', '')
             
     print('Job complete')
+
+# Start script
+add_tag()
