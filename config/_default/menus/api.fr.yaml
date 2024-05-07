@@ -6152,7 +6152,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles-create-a-new-role-by-cloning-an-existing-role
+    parent: powerpack
     url: '#mettre-a-jour-un-powerpack'
   - generated: true
     identifier: powerpack-get-a-powerpack
