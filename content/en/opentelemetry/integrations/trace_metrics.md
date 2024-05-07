@@ -62,7 +62,9 @@ See [Trace Metrics][2].
 
 For a full working example configuration with the Datadog exporter, see [`trace-metrics.yaml`][3].
 
+## Further reading
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector

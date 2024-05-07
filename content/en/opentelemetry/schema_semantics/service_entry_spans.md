@@ -61,6 +61,10 @@ If you have existing monitors based on trace metrics, you can update them after 
           - set(kind.string, "Client") where kind.string == "Internal" and attributes["http.path"] == "/health"
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.datadoghq.com/glossary/#service-entry-span
 [2]: https://docs.datadoghq.com/opentelemetry/integrations/trace_metrics/
 [3]: https://docs.datadoghq.com/tracing/trace_explorer
