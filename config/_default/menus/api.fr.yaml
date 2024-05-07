@@ -6876,7 +6876,7 @@ menu:
     name: Supprimer une équipe
     params:
       operationids:
-      - GetTeamLinks
+      - UpdateSpansMetric
       order: 4
       unstable: []
       versions:
