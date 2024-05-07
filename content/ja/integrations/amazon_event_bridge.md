@@ -22,6 +22,10 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog for Government サイトは、Amazon EventBridge をサポートしていません。</div>
+{{< /site-region >}}
+
 ## 概要
 
 Amazon EventBridge と Datadog のインテグレーションは、以下の機能を提供します。
@@ -30,8 +34,9 @@ Amazon EventBridge と Datadog のインテグレーションは、以下の機�
 - 選択したイベントバスに Datadog アラート通知イベントを送信します。
 - AWS 内で、Kinesis、Lambda などのサービスを使用してイベントバスにトリガーをセットアップします。
 - アラートイベント内の情報を使用して、自動修復パイプラインやランブックの実行、分析クエリの実行などを行います。
+- このインテグレーションは GovCloud ではサポートされていません
 
-{{< img src="integrations/amazon_event_bridge/aws_event_bridge.png" alt="Amazon EventBridge" >}}
+{{< img src="integrations/amazon_event_bridge/eventbridge_monitor_notification.png" alt="EventBridge に送信されているモニター通知" >}}
 
 ## 計画と使用
 
@@ -85,15 +90,15 @@ Amazon EventBridge インテグレーションを使用して、Datadog のモ�
 
 Amazon EventBridge インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Amazon EventBridge インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスのチェック
 
 Amazon EventBridge インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

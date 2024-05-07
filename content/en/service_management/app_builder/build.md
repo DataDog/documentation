@@ -32,7 +32,7 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ### Build an app from a blueprint
 
-Blueprints are helpful starter apps. They cover common use cases and come loaded with demo data that you can use to familiarize yourself with the app.
+Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
 1. From [App Builder][1], click the [Blueprints][2] tab.
 1. Find the blueprint that you want to use and click **Preview**.
@@ -178,9 +178,23 @@ Variables are enclosed in braces and are preceded by a dollar sign (`${}`). To u
 
 {{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestion menu with all available variables" video=true >}}
 
-### Customize an app with JSON
+### Interact with an app in JSON
+
+#### Edit an app
 
 To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+
+#### Copy or back up an app
+
+To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+
+To copy the app to another organization:
+1. Create an app. 
+1. Click the cog (**Settings**) icon and select **Switch to JSON**. 
+1. Replace the existing JSON with the JSON that you previously copied. 
+
+The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+
 
 ## Further reading
 
