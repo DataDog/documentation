@@ -6643,7 +6643,7 @@ menu:
       order: 2
       unstable: []
       versions:
-      - v1
+      - v2
     parent: teams
     url: '#modifier-une-cle-d-application-pour-ce-compte-de-service'
   - generated: true
