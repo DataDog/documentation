@@ -5229,11 +5229,11 @@ menu:
     name: Créer, mettre à jour et supprimer les pièces jointes d'un incident
     params:
       operationids:
-      - UpdateIncidentAttachments
+      - UpdateIPAllowlist
       order: 2
       unstable: []
       versions:
-      - v1
+      - v2
     parent: incidents-delete-an-existing-incident
     url: '#mettre-a-jour-une-liste-d-adresses-IP-autorisees'
   - generated: true
