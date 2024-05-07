@@ -49,10 +49,12 @@ completion = oai_client.chat.completions.create(
 
 ### 3. Run the script
 
-To generate a trace, use the following command to run the Python script:
+To generate a trace, run the Python script with the following shell command:
 
 {{< code-block lang="shell" >}}
-DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> DD_LLMOBS_NO_APM=1 ddtrace-run python quickstart.py
+DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart \ 
+DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \ 
+DD_LLMOBS_NO_APM=1 ddtrace-run python quickstart.py
 {{< /code-block >}}
 
 Replace `<YOUR_DATADOG_SITE>` with the Datadog site you want to send data to, such as `datadoghq.com` or `us3.datadoghq.com`.

@@ -17,43 +17,53 @@ pip install git+https://github.com/DataDog/dd-trace-py.git@main
 Your application startup command must specify the required environment variables:
 
 {{< code-block lang="shell">}}
-DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=<YOUR_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_LLMOBS_APP_NAME=<YOUR_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
 See the full list of environment variables below.
 
 ### Supported environment variables
 
-`DD_API_KEY`: required - _string_
+`DD_API_KEY`
+: required - _string_
 <br />Your Datadog API key.
 
-`DD_SITE`: required - _string_ 
+`DD_SITE`
+: required - _string_ 
 <br />The Datadog site to submit your LLM data. Should be `datadoghq.com` or `us3.datadoghq.com`.
 
-`DD_LLMOBS_ENABLED`: required - _integer or string_ 
+`DD_LLMOBS_ENABLED`
+: required - _integer or string_ 
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
-`DD_LLMOBS_APP_NAME`: required - _string_ 
+`DD_LLMOBS_APP_NAME`
+: required - _string_ 
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
-`DD_LLMOBS_NO_APM`: optional - _integer or string_ - **default**: `false`
+`DD_LLMOBS_NO_APM`
+: optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
 
-`DD_INSTRUMENTATION_TELEMETRY_ENABLED`: optional - _string_ - **default**: `true`
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: optional - _string_ - **default**: `true`
 <br />If you are not a Datadog APM customer, set to `0` or `false`.
 
-`DD_REMOTE_CONFIGURATION_ENABLED`: optional - _string_ - **default**: `true`
+`DD_REMOTE_CONFIGURATION_ENABLED`
+: optional - _string_ - **default**: `true`
 <br />If you are not a Datadog APM customer, set to `0` or `false`.
 
-`DD_OPENAI_METRICS_ENABLED`: optional - _string_ - **default**: `true`
+`DD_OPENAI_METRICS_ENABLED`
+: optional - _string_ - **default**: `true`
 <br />If you are not a Datadog APM customer, set to `0` or `false`.
 
-`DD_LANGCHAIN_METRICS_ENABLED`: optional - _string_ - **default**: `true`
+`DD_LANGCHAIN_METRICS_ENABLED`
+: optional - _string_ - **default**: `true`
 <br />If you are not a Datadog APM customer, set to `0` or `false`.
 
 ## Tracing spans
 
-To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). Learn more about the available span kinds in [the span documentation].
+To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). Learn more about the available span kinds in [the span documentation][8].
 
 ### Agent span
 
@@ -244,19 +254,24 @@ The LLM Observability Python SDK provides the method `LLMObs.annotate()` to anno
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
-`span` : optional - _Span_ - **default**: the current active span
+`span` 
+: optional - _Span_ - **default**: the current active span
 <br />The span to annotate. If `span` is not provided (as when using function decorators), the SDK annotates the current active span.
 
-`input_data` : optional - _JSON serializable type or list of dictionaries_ 
+`input_data` 
+: optional - _JSON serializable type or list of dictionaries_ 
 <br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).
 
-`output_data` : optional - _JSON serializable type or list of dictionaries_ 
+`output_data` 
+: optional - _JSON serializable type or list of dictionaries_ 
 <br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a list of dictionaries with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
-`metadata` : optional - _dictionary_
+`metadata` 
+: optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input/output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
 
-`tags` : optional - _dictionary_
+`tags` 
+: optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on).
 
 ### Example
@@ -351,3 +366,4 @@ def process_message():
 [5]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb
 [6]: https://github.com/DataDog/llm-observability/blob/main/2-workflow-span.ipynb
 [7]: https://github.com/DataDog/llm-observability/blob/main/3-agent-span.ipynb
+[8]: /tracing/llm_observability/span_kinds/
