@@ -40,11 +40,10 @@ def update_resource_string(string_id):
         headers = get_bearer_authorization_header()
         headers['Content-Type'] = 'application/vnd.api+json'
         payload = build_payload(string_id)
-        response = requests.patch(url, headers=headers, data=payload)
-        return response
+        requests.patch(url, headers=headers, data=payload)
     except requests.exceptions.RequestException as e:
         print(e)
-        return None
+       
 
 # Fetch string collection
 def get_string_collection(url):
@@ -64,11 +63,8 @@ def iterate_collection(collection):
         key_parts = entry['attributes']['key'].split('.') # assumption that the last value in array will be the key name
         key_val = key_parts[len(key_parts) - 1]
         if key_val != 'name':
-            resp = update_resource_string(string_id)
-            if resp is not None:
-                print('Successfully updated resource string ' + string_id)
-            else:
-                print('Failed to update resource string' + string_id)
+            update_resource_string(string_id)
+
 
 # Get string collection and store as JSON object
 def add_tag():
