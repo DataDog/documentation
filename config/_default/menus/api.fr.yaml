@@ -6836,7 +6836,7 @@ menu:
     name: Créer un lien d'équipe
     params:
       operationids:
-      - CreateTeamLink
+      - ListSpans
       order: 2
       unstable: []
       versions:
