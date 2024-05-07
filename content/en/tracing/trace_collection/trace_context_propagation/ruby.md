@@ -40,7 +40,7 @@ Extraction styles can be configured using:
 
 The value of the environment variable is a comma-separated list of header styles that are enabled for extraction. The default setting is `datadog,tracecontext`.
 
-The default extraction styles are, in order, `datadog`, and `tracecontext`.
+The default extraction styles are, in order, `datadog` and `tracecontext`.
 
 You can also enable or disable the use of these formats in code by using `Datadog.configure`:
 
