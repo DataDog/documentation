@@ -16,11 +16,11 @@ RUM Events are reported as coming from the same application and the same source 
 
 ## Limitations
 
-- For **errors, resources, and interactions tracking**, the SDKs can work in two ways:
+- For **errors, resources, and interactions tracking**, the SDKs can work in the following ways:
   - Through *auto-instrumentation* - Some React classes and methods are modified to automate this. Auto-instrumentation for JavaScript errors, resources, and interactions can only be started from JavaScript code.
-  - Through *manual instrumentation* - For example, if you want to report something you consider an error but is not going to crash the app. 
+  - Through *manual instrumentation* - For example, if you want to report something that you consider an error, but which is not going to crash the app. 
 - You can share the same instance of the core SDK between native and React Native. This allows you to initialize the native SDK on either the native side or on the React Native side (by calling `DdSdkReactNative.initialize`) and have it initialized for both sides, with events appearing in the same RUM session. React Native uses the default core instance. This means that you can use *manual instrumentation* on both sides, but *auto-instrumentation* is only activated for the side that the SDK was initialized.
-- You can only report Datadog RUM events or legs after the initialization, otherwise they are not sent.
+- You can report Datadog RUM events or logs only after the initialization. If you have not initialized the SDK yet, events and legs are not sent.
 - You cannot change the source attribute of a RUM session - all your RUM events appear under the same source.
 
 ## Monitor React Native apps with native content
@@ -31,9 +31,9 @@ Before you can start monitoring Reactive Native apps with native content, you ne
 
 In order to initialize the SDK on both the React Native and the native side, you can follow the [React Native Monitoring documentation][1]. 
 
-You will be able to call both the native and React Native SDKs for logs, traces and RUM.
+With this setup, you can call both the native and React Native SDKs for logs, traces and RUM.
 
-We recommend this solution, as long as you don't use our SDK on the native side before it has been initialized on the React Native side.
+We recommend this solution if you haven't used our SDK on the native side before you initialize it on the React Native side.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -62,18 +62,18 @@ pod 'DatadogSDKObjc', '~> 2.5.0'
 
 ### Tracking native RUM views
 
-Using the `nativeViewTracking` configuration option creates many duplicate views if you use a navigation library for your React Native app like `react-navigation`.
+If you use a navigation library for your React Native app like `react-navigation`, using the `nativeViewTracking` configuration option creates many duplicate views.
 
 If this is the case, track your native RUM Views manually. See documentation for [iOS][2] and for [Android][3].
 
 ### Tracking native RUM resources
 
-If you have enabled tracing with your backend, first party hosts for your native RUM Resources are the same as for your React Native RUM resources.
+If you have enabled tracing with your backend, first-party hosts for your native RUM Resources are the same as for your React Native RUM resources.
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-If you use okHttp, you can use Datadog's interceptor to [automatically track network requests][1]. Alternatively, you can [manually track resources][2].
+If you use OkHttp, you can use Datadog's interceptor to [automatically track network requests][1]. Alternatively, you can [manually track resources][2].
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/ios/advanced_configuration/?tab=objectivec#automatically-track-network-requests
 [2]: https://docs.datadoghq.com/real_user_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-network-requests
@@ -122,14 +122,14 @@ implementation "com.datadoghq:dd-sdk-android-trace"
 implementation "com.datadoghq:dd-sdk-android-webview"
 ```
 
-Initialize the SDK on the native side. See the official documentation for [Android][1] for instructions.
+Initialize the SDK on the native side. See the official [Android][1] documentation for instructions.
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android/?tab=kotlin
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialize the SDK on the native side. See the official documentation for [iOS][1] for instructions.
+Initialize the SDK on the native side. See the official [iOS][1] documentation for instructions.
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods
 
@@ -141,7 +141,7 @@ Initialize the SDK on the native side. See the official documentation for [iOS][
 {{< tabs >}}
 {{% tab "Android" %}}
 
-Use a `ComponentPredicate` to filter out native views created by your navigation libraries:
+Use a `ComponentPredicate` to filter out native views that are created by your navigation libraries:
 
 ```kotlin
 // Adapt the Fragment type to your View tracking strategy
@@ -172,7 +172,7 @@ If you have enabled ProGuard obfuscation, add rules to prevent obfuscation of th
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Use a `UIKitRUMViewsPredicate` to filter out native views created by your navigation libraries:
+Use a `UIKitRUMViewsPredicate` to filter out native views that are created by your navigation libraries:
 
 ```swift
 class RNHybridPredicate: UIKitRUMViewsPredicate {
