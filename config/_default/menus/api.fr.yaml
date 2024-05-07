@@ -5885,10 +5885,10 @@ menu:
     name: Rechercher des événements RUM
     params:
       operationids:
-      - ListOpsgenieServices
+      - AddRoleToRestrictionQuery
       order: 7
       unstable:
-      - v1
+      - v2
       versions:
       - v1
     parent: restriction-policies-delete-a-restriction-policy
