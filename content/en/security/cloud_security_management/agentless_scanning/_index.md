@@ -92,7 +92,7 @@ When installed, the Datadog Agent offers real-time, deep visibility into risks a
 
 As a result, Agentless Scanning excludes resources from its scans that have the Datadog Agent installed and configured for [Vulnerability Management][5]. In this way, Cloud Security Management offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
 
-The following diagram illustrations how Agentless scanning works with existing Agent installations:
+The following diagram illustrates how Agentless scanning works with existing Agent installations:
 
 {{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with CSM vulnerability management" width="90%" >}}
 
