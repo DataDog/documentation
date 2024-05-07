@@ -6367,12 +6367,12 @@ menu:
     name: Créer un groupe d'analyse
     params:
       operationids:
-      - CreateServiceAccount
+      - AddUserToRole
       order: 10
       unstable: []
       versions:
-      - v1
-    parent: spans-metrics-create-a-span-based-metric
+      - v2
+    parent: roles
     url: '#ajouter-un-utilisateur-a-un-role'
   - generated: true
     identifier: roles-get-all-users-of-a-role
