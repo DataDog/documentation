@@ -16,6 +16,14 @@ further_reading:
   text: 'Getting Started with Tags'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
+DORA Metrics is in public beta.
+{{< /callout >}}
+
 ## Overview
 
 DORA Metrics generates [metrics][9] for each one of the four core DORA Metrics, as well as events with associated tags and attributes that are available in the [Events Explorer][1].
