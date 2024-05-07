@@ -25,6 +25,7 @@ To opt into the **public beta**, enable the config option depending on the inges
 The new service-entry span identification logic can be enabled by setting the `traces::compute_top_level_by_span_kind` config option to true in the [Datadog exporter][2] and [Datadog connector][1]. This config option needs to be enabled in both the exporter and connector if both components are being used.
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.100.0/connector/datadogconnector/examples/config.yaml#L48-L53
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.100.0/exporter/datadogexporter/examples/collector.yaml#L365-L370
 {{% /tab %}}
 {{% tab "OTLP ingest pipeline in the Datadog Agent" %}}
 
