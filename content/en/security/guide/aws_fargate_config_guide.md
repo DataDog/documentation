@@ -313,6 +313,8 @@ AWS Fargate and Related Resources via AWS Cloud Controlplane logs
 
 AWS account logs (not the eks logs), CloudTrail
 
+For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
+
 [1]: /integrations/ecs_fargate/
 [2]: /integrations/eks_fargate/
 [3]: /security/cloud_security_management/
@@ -328,3 +330,4 @@ AWS account logs (not the eks logs), CloudTrail
 [14]: /security/application_security/enabling/tracing_libraries/threat_detection/nodejs?tab=awsfargate
 [15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
 [16]: /security/application_security/enabling/compatibility/
+[17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
