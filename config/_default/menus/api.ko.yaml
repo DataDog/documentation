@@ -6152,7 +6152,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: Powerpack
+    parent: powerpack
     url: '#update-a-powerpack'
   - generated: true
     identifier: powerpack-get-a-powerpack
