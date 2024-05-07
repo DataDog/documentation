@@ -174,7 +174,7 @@ metadata:
 inheritFrom:<entity_kind>:<name>
 {{< /code-block >}}
 
-The inheritFrom field instructs the ingestion pipeline to inherit metadata from the entity’s metadata referenced by `<entity_kind>:<name>`.
+The `inheritFrom` field instructs the ingestion pipeline to inherit metadata from the entity's metadata referenced by `<entity_kind>:<name>`.
 
 Note: Currently, the entity reference only applies to an entity from the same YAML file. 
 
