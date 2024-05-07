@@ -46,7 +46,7 @@ To opt in, you must adjust your Datadog Agent and APM Tracer configurations. Che
 Requirements:
 - Datadog Agent version >= [7.50.3][4].
 
-Set the following environment variables on your Datadog Agent launch configuration:
+Set the following environment variables in your Datadog Agent launch configuration:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
