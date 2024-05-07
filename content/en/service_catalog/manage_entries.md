@@ -99,7 +99,7 @@ extensions:
 
 ## Changing service color
 
-Service color is used in trace visualizations. Click the service type icon to change it.
+The service color is used in trace visualizations. Click the service type icon to change it.
 
 {{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
 
