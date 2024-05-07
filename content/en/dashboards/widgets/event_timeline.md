@@ -7,4 +7,4 @@ aliases:
     - /graphing/widgets/event_timeline/
 ---
 
-<div class="alert alert-warning">The Event Timeline widget is supported through the <a href="https://docs.datadoghq.com/dashboards/widgets/timeseries/">Timeseries widget</a>.</div>
+<div class="alert alert-warning">The Event Timeline widget is supported through the <a href="https://docs.datadoghq.com/dashboards/widgets/graphs/timeseries/">Timeseries widget</a>.</div>

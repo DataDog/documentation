@@ -200,7 +200,7 @@ Click on any dashboard graph to open an options menu:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/timeseries/#full-screen
+[1]: /dashboards/widgets/graphs/timeseries/#full-screen
 [2]: /dashboards/guide/context-links/
 [3]: /dashboards/guide/unit-override
 [4]: /dashboards/

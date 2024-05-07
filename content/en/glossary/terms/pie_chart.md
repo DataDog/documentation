@@ -5,4 +5,4 @@ core_product:
 related_terms:
   - metric
 ---
-The pie chart widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions. For more information, <a href="/dashboards/widgets/pie_chart/">see the documentation</a>.
+The pie chart widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions. For more information, <a href="/dashboards/widgets/graphs/pie_chart/">see the documentation</a>.

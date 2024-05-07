@@ -313,4 +313,4 @@ Export [Analytics][4] from the trace search or build them directly in your [Dash
 [13]: /help/
 [14]: /tracing/glossary/#indexed-span
 [15]: /dashboards/
-[16]: /dashboards/widgets/timeseries/
+[16]: /dashboards/widgets/graphs/timeseries/

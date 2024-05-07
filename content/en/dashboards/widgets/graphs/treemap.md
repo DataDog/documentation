@@ -5,11 +5,12 @@ widget_type: treemap
 description: "Graph proportions of one or more datasets"
 aliases:
 - /graphing/widgets/treemap/
+- /dashboards/widgets/treemap/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
-- link: "/dashboards/widgets/pie_chart/"
+- link: "/dashboards/widgets/graphs/pie_chart/"
   tag: "Documentation"
   text: "Pie Chart Widget"
 ---
@@ -74,4 +75,4 @@ This widget can be used with the **[Dashboards API][6]**. See the following tabl
 [5]: /dashboards/widgets/#full-screen
 [6]: /api/latest/dashboards/
 [7]: /dashboards/graphing_json/widget_json/
-[8]: /dashboards/widgets/pie_chart/
+[8]: /dashboards/widgets/graphs/pie_chart/

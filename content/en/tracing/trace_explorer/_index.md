@@ -133,7 +133,7 @@ From the timeseries view, export your query to a [dashboard][1], [monitor][2], o
 
 **Note**: Spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards, notebooks, and from trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 
-[1]: /dashboards/widgets/timeseries/
+[1]: /dashboards/widgets/graphs/timeseries/
 [2]: /monitors/types/apm/?tab=analytics
 [3]: /notebooks
 [4]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans

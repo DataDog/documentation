@@ -144,7 +144,7 @@ The mobile app enables you to view and search all of the dashboards that you hav
 [9]: /metrics/distributions/
 [10]: /dashboards/template_variables/
 [11]: /dashboards/
-[12]: /dashboards/widgets/timeseries/
+[12]: /dashboards/widgets/graphs/timeseries/
 [13]: https://learn.datadoghq.com/courses/building-better-dashboards/
 [14]: /dashboards/sharing/
 [15]: /integrations/slack/

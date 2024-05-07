@@ -46,6 +46,6 @@ The **Identify Top Traffic Sources** section shows traffic across different sour
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /dashboards/widgets/timeseries/
-[2]: /dashboards/widgets/top_list/
+[1]: /dashboards/widgets/graphs/timeseries/
+[2]: /dashboards/widgets/graphs/top_list/
 [3]: https://app.datadoghq.com/network/overview

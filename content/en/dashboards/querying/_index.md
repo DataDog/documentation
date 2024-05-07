@@ -250,5 +250,5 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [12]: /dashboards/functions/#function-types
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /logs/explorer/search_syntax/
-[15]: /dashboards/widgets/timeseries/#event-overlay
+[15]: /dashboards/widgets/graphs/timeseries/#event-overlay
 [16]: /dashboards/template_variables/

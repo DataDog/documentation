@@ -4,6 +4,7 @@ kind: documentation
 widget_type: "toplist"
 aliases:
     - /graphing/widgets/top_list/
+    - /dashboards/widgets/top_list/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

@@ -8,7 +8,7 @@ further_reading:
 - link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Learn more about tagging"
-- link: "/dashboards/widgets/table/"
+- link: "/dashboards/widgets/graphs/table/"
   tag: "Documentation"
   text: "Learn more about the table widget"
 ---
@@ -364,5 +364,5 @@ You can aggregate all products into a single widget to get visibility into the t
 [8]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [9]: /logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric
 [10]: /dashboards/#new-dashboard
-[11]: /dashboards/widgets/table/
+[11]: /dashboards/widgets/graphs/table/
 [12]: https://app.datadoghq.com/dashboard/lists

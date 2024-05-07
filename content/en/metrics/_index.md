@@ -112,8 +112,8 @@ Datadog offers a variety of visualization options to help users easily graph and
 A metric query consists of the same two evaluation steps to start: time aggregation and space aggregation. See the [anatomy of a metric query][6] for more information.
 
 {{< whatsnext desc="Two visualization offerings that Metrics users often find useful are:">}}
-    {{< nextlink href="dashboards/widgets/query_value/" >}}<u>Query Value Widget</u> - Reduces the results of those two steps into a single value.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>Top List</u> - Returns a single value per group.{{< /nextlink >}}
+    {{< nextlink href="dashboards/widgets/graphs/query_value/" >}}<u>Query Value Widget</u> - Reduces the results of those two steps into a single value.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/graphs/top_list/" >}}<u>Top List</u> - Returns a single value per group.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 Additionally, Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][7].

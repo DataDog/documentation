@@ -5,6 +5,7 @@ widget_type: change
 description: "Graph the change in a value over a chosen time period."
 aliases:
 - /graphing/widgets/change/
+- /dashboards/widgets/change
 further_reading:
 - link: "/monitors/types/metric/?tab=change"
   tag: "Documentation"

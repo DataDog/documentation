@@ -228,12 +228,12 @@ An integration dashboard should adhere to the following visual style guidelines:
 [1]: /dashboards/
 [2]: /developers/integrations/agent_integration/
 [3]: /dashboards/#new-dashboard
-[4]: /dashboards/widgets/timeseries/
-[5]: /dashboards/widgets/query_value/
-[6]: /dashboards/widgets/table/
+[4]: /dashboards/widgets/graphs/timeseries/
+[5]: /dashboards/widgets/graphs/query_value/
+[6]: /dashboards/widgets/graphs/table/
 [7]: /dashboards/widgets/
 [8]: /dashboards/template_variables/
-[9]: /dashboards/widgets/timeseries/#metric-aliasing
+[9]: /dashboards/widgets/graphs/timeseries/#metric-aliasing
 [10]: /dashboards/#copy-import-or-export-dashboard-json
 [11]: /developers/integrations/check_references/#manifest-file
 [12]: https://app.datadoghq.com/dashboard/lists

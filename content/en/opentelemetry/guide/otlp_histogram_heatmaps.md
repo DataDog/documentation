@@ -92,5 +92,5 @@ The [Datadog Agent OpenMetrics check][6] is also compatible with the pre-binned 
 [2]: /opentelemetry/guide/otlp_delta_temporality
 [3]: https://opentelemetry.io/docs/reference/specification/metrics/sdk/#explicit-bucket-histogram-aggregation
 [4]: /metrics/distributions
-[5]: /dashboards/widgets/heatmap
+[5]: /dashboards/widgets/graphs/heatmap
 [6]: /integrations/openmetrics
