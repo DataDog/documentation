@@ -6327,11 +6327,11 @@ menu:
     name: Créer une clé d'application pour ce compte de service
     params:
       operationids:
-      - DeleteScanningGroup
+      - UpdateRestrictionPolicy
       order: 1
       unstable: []
       versions:
-      - v1
+      - v2
     parent: service-definition
     url: '#mettre-a-jour-une-politique-de-restriction'
   - generated: true
