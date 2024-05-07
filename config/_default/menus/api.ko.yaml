@@ -6372,7 +6372,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 역할
+    parent: roles
     url: '#add-a-user-to-a-role'
   - generated: true
     identifier: roles-get-all-users-of-a-role
@@ -6532,7 +6532,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: security-lock
+    parent: sensitive-data-scanner
     url: '#list-standard-patterns'
   - generated: true
     identifier: sensitive-data-scanner-update-scanning-rule
