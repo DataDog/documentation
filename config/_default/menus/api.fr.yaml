@@ -6211,11 +6211,11 @@ menu:
     name: Supprimer une règle d'analyse
     params:
       operationids:
-      - DeleteScanningRule
+      - ListProcesses
       order: 1
       unstable: []
       versions:
-      - v1
+      - v2
     parent: sensitive-data-scanner-create-scanning-group
     url: '#recuperer-tous-les-processus'
   - generated: true
