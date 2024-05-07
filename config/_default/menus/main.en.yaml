@@ -4202,11 +4202,6 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
       weight: 607
-    - name: Exclude Logs
-      url: logs/error_tracking/excluding_logs
-      parent: log_management_error_tracking
-      identifier: log_management_error_tracking_excluding_logs
-      weight: 608
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: log_management_error_tracking
