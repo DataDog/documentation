@@ -6227,7 +6227,7 @@ menu:
     name: Mettre à jour un groupe d'analyse
     params:
       operationids:
-      - UpdateScanningGroup
+      - SearchRUMEvents
       order: 1
       unstable: []
       versions:
