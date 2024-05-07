@@ -5260,7 +5260,7 @@ menu:
       - UpdateIncidentService
       order: 3
       unstable:
-      - v1
+      - v2
       versions:
       - v1
     parent: incidents-get-a-list-of-incidents
