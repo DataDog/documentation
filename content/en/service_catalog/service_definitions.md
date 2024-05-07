@@ -176,7 +176,7 @@ inheritFrom:<entity_kind>:<name>
 
 The `inheritFrom` field instructs the ingestion pipeline to inherit metadata from the entity's metadata referenced by `<entity_kind>:<name>`.
 
-Note: Currently, the entity reference only applies to an entity from the same YAML file. 
+Note: The entity reference only applies to an entity from the same YAML file. 
 
 ##### Implicit Inheritance 
 Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inherit all metadata from the application that it belongs to under the following conditions:
