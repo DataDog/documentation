@@ -5633,7 +5633,7 @@ menu:
     name: Créer une requête de restriction
     params:
       operationids:
-      - DeleteRestrictionQuery
+      - AddReadRoleToArchive
       order: 7
       unstable: []
       versions:
