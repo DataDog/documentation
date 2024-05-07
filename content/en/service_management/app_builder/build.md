@@ -209,6 +209,8 @@ To copy the app to another organizations, create a new app, click the cog (**Set
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][8].
+
 [1]: https://app.datadoghq.com/app-builder/
 [2]: https://app.datadoghq.com/app-builder/blueprints
 [3]: /service_management/app_builder/embedded_apps
@@ -216,3 +218,4 @@ To copy the app to another organizations, create a new app, click the cog (**Set
 [5]: /service_management/workflows/connections
 [6]: /service_management/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
+[8]: https://datadoghq.slack.com/

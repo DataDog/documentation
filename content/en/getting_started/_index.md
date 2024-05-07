@@ -117,6 +117,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: Discover best practices for getting your team up and running with ASM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: Discover best practices for getting your team up and running with CSM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
 {{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}

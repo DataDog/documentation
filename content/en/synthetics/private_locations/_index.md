@@ -55,6 +55,16 @@ Private locations are Docker containers that you can install anywhere inside you
 [103]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Private locations are Kubernetes deployments that you can install on your Kubernetes cluster with Helm. The [helm chart][101] can run on Linux-based Kubernetes.
+
+**Note**: Use and operation of this software is governed by the [End-User License Agreement][103].
+
+[101]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
+[103]: https://www.datadoghq.com/legal/eula/
+
+{{% /tab %}}
 {{% tab "Windows" %}}
 
 Private locations are Windows services that you can install anywhere inside your private network using an [MSI file][101]. Run this file from the virtual or physical machine that you would like to install the private location on.**\***
