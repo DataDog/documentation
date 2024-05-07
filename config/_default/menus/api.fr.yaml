@@ -6024,7 +6024,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles-list-permissions-for-a-role
+    parent: okta-integration
     url: '#mettre-a-jour-un-compte-okta'
   - generated: true
     identifier: okta-integration-get-okta-account
