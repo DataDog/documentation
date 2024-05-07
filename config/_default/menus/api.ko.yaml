@@ -5064,7 +5064,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 컨테이너
+    parent: containers
     url: '#get-all-containers'
   - generated: true
     identifier: dora-metrics
