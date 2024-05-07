@@ -6332,7 +6332,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: service-definition
+    parent: restriction-policies
     url: '#mettre-a-jour-une-politique-de-restriction'
   - generated: true
     identifier: restriction-policies-get-a-restriction-policy
