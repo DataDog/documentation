@@ -43,7 +43,7 @@ To query for all traces containing threat intelligence from any source, use the 
 
 ## Bring your own threat intelligence
 
-<div class="alert alert-info">Bring your own threat intelligence is in private beta.</div>
+<div class="alert alert-info">Bring your own threat intelligence is in private beta. To request access, fill out [this form][9].</div>
 
 ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
@@ -117,3 +117,4 @@ Under `@threat_intel.results` you can always see the full details of what was ma
 [6]: https://app.datadoghq.com/security/configuration/asm/rules/edit/kdb-irk-nua?product=appsec
 [7]: /security/threat_intelligence#threat-intelligence-categories
 [8]: /security/threat_intelligence#threat-intelligence-intents
+[9]: https://forms.gle/JV8VLH1ZTzmUnK5F7
