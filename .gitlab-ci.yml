@@ -562,6 +562,37 @@ set_redirect_metadata_live:
     - in-isolation run_update_redirect_metadata
   interruptible: true
 
+run_notranslate_tag:schedule:
+  <<: *base_template
+  stage: post-deploy
+  dependencies:
+    - build_live
+  timeout: 2h
+  script:
+    - export transifex_api_key="$(get_secret 'transifex_api_key')"
+    - python3 ./local/bin/py/add_notranslate_tag.py
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+      when: never
+
+run_notranslate_tag:manual:
+  <<: *base_template
+  stage: post-deploy
+  dependencies:
+    - build_preview
+  timeout: 2h
+  script:
+    - export transifex_api_key="$(get_secret 'transifex_api_key')"
+    - python3 ./local/bin/py/add_notranslate_tag.py
+  rules:
+    - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+      when: never
+    - if: $CI_COMMIT_TAG == null
+      when: manual
+
+
 ####################################
 #                                  #
 #      Failure Notifications       #
