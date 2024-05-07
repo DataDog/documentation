@@ -60,7 +60,7 @@ Datadog Application Monitoring for VMware Tanzu has the following requirements:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /help
-[3]: https://app.datadoghq.com/account/settings#api
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/signup
 [5]: /developers/dogstatsd/?tab=hostagent
 [6]: /agent/

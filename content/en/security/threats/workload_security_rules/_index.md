@@ -21,6 +21,12 @@ further_reading:
 
 This topic explains how Cloud Security Management Threats (CSM Threats) actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
 
+## Proactively block threats with Active Protection
+
+By default, all OOTB Agent threat detection rules are enabled and actively monitoring for threats.
+
+[Active Protection][12] enables you to proactively block and terminate threats identified by the Datadog Agent threat detection rules.
+
 ## CSM Threats rules construction
 
 CSM Threats rules consist of two different components: Agent rules and threat detection rules.
@@ -134,4 +140,5 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 [8]: /security/threats/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules
-[11]: https://docs.datadoghq.com/security/threats/workload_security_rules/custom_rules
+[11]: /security/threats/workload_security_rules/custom_rules
+[12]: /security/cloud_security_management/guide/active-protection
