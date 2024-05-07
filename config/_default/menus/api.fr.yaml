@@ -5331,8 +5331,8 @@ menu:
       unstable:
       - v2
       versions:
-      - v1
-    parent: incidents-delete-an-incident-integration-metadata
+      - v2
+    parent: incident-teams
     url: '#mettre-a-jour-une-equipe-liee-a-un-incident-existante'
   - generated: true
     identifier: incident-teams-get-details-of-an-incident-team
