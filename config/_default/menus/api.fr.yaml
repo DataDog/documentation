@@ -6880,7 +6880,7 @@ menu:
       order: 4
       unstable: []
       versions:
-      - v1
+      - v2
     parent: teams-get-all-teams
     url: '#mettre-a-jour-une-metrique-basee-sur-des-spans'
   - generated: true
