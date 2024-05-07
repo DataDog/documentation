@@ -6527,11 +6527,11 @@ menu:
     name: Équipes
     params:
       operationids:
-      - ListServiceDefinitions
+      - ListStandardPatterns
       order: 3
       unstable: []
       versions:
-      - v1
+      - v2
     parent: teams-remove-a-user-from-a-team
     url: '#enumerer-les-patterns-standard'
   - generated: true
