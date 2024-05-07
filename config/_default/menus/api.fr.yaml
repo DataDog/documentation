@@ -5400,8 +5400,8 @@ menu:
       unstable:
       - v2
       versions:
-      - v1
-    parent: logs-restriction-queries-update-a-restriction-query
+      - v2
+    parent: incidents
     url: '#mettre-a-jour-un-todo-d-incident'
   - generated: true
     identifier: incidents-get-incident-todo-details
