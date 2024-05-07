@@ -179,8 +179,8 @@ The `inheritFrom` field instructs the ingestion pipeline to inherit metadata fro
 Note: Currently, the entity reference only applies to an entity from the same YAML file. 
 
 ##### Implicit Inheritance 
-Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inherit all metadata from the application that it belongs to under specific conditions:
-- The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as a part of two separate `kind:application` definitions, it won't implicitly inherit of the metadata from either parent application. 
+Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inherit all metadata from the application that it belongs to under the following conditions:
+- The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as part of two separate `kind:application` definitions, it does not implicitly inherit the metadata from either parent application. 
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file
 
 ## Further reading
