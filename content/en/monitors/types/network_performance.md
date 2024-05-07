@@ -14,10 +14,13 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "/network_monitoring/performance/recommended_monitors"
+  tag: "Documentation"
+  text: "Recommended NPM Monitors"
 ---
 
 {{< callout btn_hidden="true" header="Join the Beta!">}}
-The Network Performance monitor is in private beta. Reach out to your Datadog representative to sign up for access.
+The Network Performance monitor is in public beta. 
 {{< /callout >}}
 
 ## Overview
@@ -62,7 +65,10 @@ The following tables list the different NPM metrics you can create monitors on.
 ### TCP
 | Metric name             | Definition                                    | 
 | ----------------------  | --------------------------------------------- | 
-| Retransmits             |Retransmits between client/server.              |
+| Retransmits             | Retransmits between client/server.              |
+| Latency                 | Average time it takes to make the connection.   |
+| RTT (Round-Trip Time)   | Average time it takes to receive a response. |
+| Jitter                  | Average variance in RTT.                     |
 | Established Connections | Establishes connections between client/server. |
 | Closed Connections      | Closed connections between client/server.      |
 
@@ -70,6 +76,7 @@ The following tables list the different NPM metrics you can create monitors on.
 | Metric name              | Definition                               |
 | -----------------------  | ---------------------------------------  |
 | DNS Requests             | Total number of DNS requests.             |
+| DNS Failures             | Total number of DNS failures.             |
 | DNS Timeouts             | Total number of DNS timeouts.             |
 | DNS Failed Responses     | Total number of DNS failed responses.             |
 | DNS Successful Responses | Total number of DNS successful responses.     |
@@ -78,6 +85,7 @@ The following tables list the different NPM metrics you can create monitors on.
 | NXDOMAIN Errors          | Total number of NXDOMAIN errors.              |
 | SERVFAIL Errors          | Total number of SERVFAIL errors.          |
 | Other Errors             | Total number of other errors.           |
+
 
 ### Set alert conditions
 
@@ -103,6 +111,14 @@ Retransmission occurs when packets are either damaged or lost and indicate an un
 DNS failure monitor tracks DNS server performance to help you identify server-side and client-side DNS issues. Use this monitor to alert you if the sum of DNS failures passes a threshold. 
 
 {{< img src="monitors/monitor_types/network_performance/common_monitors_dns_failure.png" alt="Example configuration for DNS failure, set Query A to measure DNS Failures" style="width:100%;" >}}
+
+### RTT
+Need description and image 
+
+
+### Latency
+Need description and image
+
 
 ## Further Reading
 
