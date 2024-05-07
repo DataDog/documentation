@@ -4860,7 +4860,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: fastly-integration-add-fastly-account
+    parent: cloudflare-integration
     url: '#mettre-a-jour-un-compte-cloudflare'
   - generated: true
     identifier: cloudflare-integration-get-cloudflare-account
