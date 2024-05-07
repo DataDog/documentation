@@ -10,7 +10,7 @@ kind: documentation
 ## Activate your subscription
 
 1. In the **AWS Console**, navigate to [the **AWS Marketplace** page][2].
-2. Click the **Managed subscriptions** button in the **Get started** section.
+2. Click the **Manage subscriptions** button in the **Get started** section.
 3. Select the **Cloudcraft** subscription you want to activate.
 4. Click the **Set up your account** button.
 
