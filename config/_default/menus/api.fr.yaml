@@ -4720,7 +4720,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: tracing_compatibility_nodejs
+    parent: case-management
     url: '#rechercher-des-cas'
   - generated: true
     identifier: cloud-cost-management
