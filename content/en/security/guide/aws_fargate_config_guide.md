@@ -315,6 +315,14 @@ AWS account logs (not the eks logs), CloudTrail
 
 For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 
+### Enable AWS CloudTrail logging
+
+placeholder
+
+### Send AWS CloudTrail logs to Datadog
+
+placeholder
+
 [1]: /integrations/ecs_fargate/
 [2]: /integrations/eks_fargate/
 [3]: /security/cloud_security_management/
