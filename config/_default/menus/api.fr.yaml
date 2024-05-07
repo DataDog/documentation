@@ -5890,8 +5890,8 @@ menu:
       unstable:
       - v2
       versions:
-      - v1
-    parent: restriction-policies-delete-a-restriction-policy
+      - v2
+    parent: logs-restriction-queries
     url: '#accorder-un-role-a-une-requete-de-restriction'
   - generated: true
     identifier: logs-restriction-queries-list-roles-for-a-restriction-query
