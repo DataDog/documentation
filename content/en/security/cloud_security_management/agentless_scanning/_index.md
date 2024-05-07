@@ -12,6 +12,10 @@ further_reading:
   text: "Read more about CSM Vulnerabilities"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
 ## Overview
@@ -35,7 +39,7 @@ The following table provides a summary of Agentless scanning technologies in rel
 
 ## How it works
 
-After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your EC2 instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted.
+After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your EC2 instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
 
 The following diagram illustrates how Agentless Scanning works:
 
@@ -52,11 +56,11 @@ The following diagram illustrates how Agentless Scanning works:
 
 **Notes**:
 - The scanner operates as a separate EC2 instance within your infrastructure, ensuring minimal impact on existing systems and resources.
-- The scanner securely collects a list of packages from your hosts without transmitting any confidential or private information outside your infrastructure.
+- The scanner securely collects a list of packages from your hosts without transmitting any confidential or private personal information outside your infrastructure.
 - The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and uses exponential backoff if needed.
 
 ## What data is sent to Datadog
-The Agentless scanner uses the OSWAP [cycloneDX][5] format to transmit a list of packages to Datadog. No confidential or private information is ever transmitted outside of your infrastructure.
+The Agentless scanner uses the OWASP [cycloneDX][5] format to transmit a list of packages to Datadog. No confidential or private information is ever transmitted outside of your infrastructure.
 
 Datadog does **not** send:
 - System and package configurations
@@ -77,7 +81,7 @@ To further mitigate this risk, Datadog implements the following security measure
 - Unattended security updates are enabled on Datadog's scanner instances. This feature automates the process of installing critical security patches and updates without requiring manual intervention.
 - The Datadog scanner instances are automatically rotated every 24 hours. This rotation ensures that the scanner instances are continually updated with the latest Ubuntu Amazon Machine Images (AMIs).
 - Access to the scanner instances is tightly controlled through the use of security groups. No inbound access to the scanner is allowed, restricting possibility to compromise the instance.
-- No confidential or private information is ever transmitted outside your infrastructure.
+- No confidential or private personal information is ever transmitted outside of your infrastructure.
 
 ## Agentless Scanning with existing Agent installations
 
