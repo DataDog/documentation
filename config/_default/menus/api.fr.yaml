@@ -4924,7 +4924,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: fastly-integration-delete-fastly-account
+    parent: confluent-cloud
     url: '#mettre-a-jour-une-ressource-dans-un-compte-confluent'
   - generated: true
     identifier: confluent-cloud-get-resource-from-confluent-account
