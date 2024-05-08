@@ -524,6 +524,9 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 : To make sure that the Agent keeps the trace.
 {{% /tab %}}
 {{% tab "W3C Trace Context" %}}
+
+The W3C Trace Context header is sent by default. This means you need to configure `traceparent` for CORS servers in addition to the default Datadog-specific headers.
+
 `traceparent: [version]-[trace id]-[parent id]-[trace flags]`
 : `version`: The current specification assumes version is set to `00`.
 : `trace id`: 128 bits trace ID, hexadecimal on 32 characters. The source trace ID is 64 bits to keep compatibility with APM.
