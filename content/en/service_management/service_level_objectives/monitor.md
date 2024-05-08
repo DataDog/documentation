@@ -135,4 +135,3 @@ SLO Replay also triggers when you change the underlying metric monitor's query t
 [3]: /service_management/service_level_objectives/metric/
 [4]: /synthetics/api_tests/?tab=httptest#alert-conditions
 [5]: /service_management/service_level_objectives/#slo-status-corrections
-[6]: /service_management/service_level_objectives/time_slice/
