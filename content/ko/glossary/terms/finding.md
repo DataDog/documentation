@@ -1,7 +1,7 @@
 ---
 core_product:
-- 보안
-- synthetics
+- security
+- csm
 title: 결과
 ---
 
