@@ -81,7 +81,7 @@ SNMP devices are matched to a representative icon based on their device type in 
     <th>Description</th>
   </tr>
   <tr>
-    <td style="text-align:center;"><img src="/network_device_monitoring/network_topology_map/icons/access-point.png" alt="Access point icon" style="width:10%;"></td>
+    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/access-point.png" alt="Access point icon" style="width:10%;">}}</td>
     <td>Access Point</td>
   </tr>
   <tr>
