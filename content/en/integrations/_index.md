@@ -9,8 +9,9 @@ aliases:
     - /integrations/mainstorconcept_ziris/
     - /integrations/rookout/
     - /integrations/rookout_license/
-    - /shoreline/
-    - /shoreline_license/
+    - /integrations/shoreline/
+    - /integrations/shoreline_license/
+    - /integrations/shoreline_software_license/
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
