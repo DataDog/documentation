@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - synthetics
 title: 제어
 ---
