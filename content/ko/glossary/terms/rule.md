@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - csm
 synonyms:
 - 탐지 규칙
