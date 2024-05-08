@@ -23,13 +23,12 @@ The [Network Device Topology Map][2] provides an overview of your network's phys
 
 ## Setup
 
-The Datadog Agent version 7.46 and later automatically collects topology data. No additional installation is necessary.
+The Datadog Agent version 7.52 and later automatically collects topology data. No additional installation is necessary.
 
 ### Prerequisites
 
 1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP.
-2. Datadog Agent version 7.46 or later is installed.
-3. If you're using [device autodiscovery][3], enable `snmp_listener.collect_topology: true` in the `datadog.yaml` file.
+2. Datadog Agent version 7.52 or later is installed.
 
 ## Navigation options
 
@@ -67,7 +66,7 @@ Hide _number of_ Unmonitored Devices - Turned OFF by default.
 Hide _number of_ Unconnected Devices - Turned ON by default.
 : Toggling this on hides any devices that have no link connections. Devices can be unconnected for reasons such as improper configuration, or the device does not support [LLDP/CDP](#troubleshooting).
 
-## Icon Legend 
+## Icon legend 
 
 SNMP devices are matched to a representative icon based on their device type in each device node. 
 
@@ -134,7 +133,7 @@ From this view, you can also view the device's interfaces in the **Interfaces** 
 Choose **View flow details** to open the NetFlow tab filtered by the device's `@device.ip` for a detailed exploration of the device's sources, destinations, and volume. See the [NetFlow Monitoring][1] page for more information.
 
 
-### Troubleshooting
+## Troubleshooting
 
 If you don't see links or connections to your devices, verify that they are exposing LLDP and CDP data with the following commands:
 
