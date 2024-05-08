@@ -51,6 +51,9 @@ The following diagram illustrates how Remote Configuration works:
 ## Supported products and feature capabilities
 The following products and features are supported with Remote Configuration:
 
+### Fleet Automation
+**[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
+
 ### Application Security Management (ASM)
 
 - **1-click ASM activation**: Enable ASM in 1-click from the Datadog UI.
@@ -302,3 +305,4 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [24]: https://app.datadoghq.com/organization-settings/api-keys
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
+[27]: /agent/fleet_automation/#send-a-remote-flare
