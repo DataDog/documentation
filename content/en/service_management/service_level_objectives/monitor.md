@@ -16,7 +16,7 @@ further_reading:
 ## Overview
 To build an SLO from new or existing Datadog monitors, create a monitor-based SLO. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing the amount of time your system exhibits good behavior by the total time.
 
-<div class="alert alert-info">In addition to monitor-based SLOs, Time Slice SLOs are another way to create SLOs with a time-based SLI calculation. With Time Slice SLOs, you can create an uptime SLO without going through a monitor, so you don’t have to create and maintain both a monitor and an SLO.</div>
+<div class="alert alert-info">Time Slice SLOs are another way to create SLOs with a time-based SLI calculation. With Time Slice SLOs, you can create an uptime SLO without going through a monitor, so you don’t have to create and maintain both a monitor and an SLO.</div>
 
 {{< img src="service_management/service_level_objectives/monitor_slo_side_panel.png" alt="monitor-based SLO example" >}}
 
@@ -31,11 +31,14 @@ Datadog monitor-based SLOs support the following monitor types:
 
 ## Setup
 
-On the [SLO status page][2], select **New SLO +**. Then select **By Monitor Uptime**.
+On the [SLO status page][2], click **+ New SLO**. Then, select **By Monitor Uptime**.
 
 ### Define queries
 
-In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list:
+
+In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list.
+
+**Notes**:
 
 - If you're using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. 
 - If you're adding multiple monitors to your SLO, group selection is not supported. You can add up to 20 monitors.
