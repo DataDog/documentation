@@ -86,10 +86,6 @@ cascade:
   aliases:
     - /integrations/komodor_komodor/
 - _target:
-    path: /integrations/shoreline_license.md
-  aliases:
-    - /integrations/shoreline_software_license/
-- _target:
     path: /integrations/stormforge_license.md
   aliases:
     - /integrations/stormforge_stormforge_license/
