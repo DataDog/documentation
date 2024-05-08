@@ -177,7 +177,7 @@ Find out how to monitor individual client and aggregate usage of the Datadog pla
 [32]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio/
 [33]: https://www.datadoghq.com/blog/monitoring-101-collecting-data/
 [34]: /dashboards/widgets/graphs/timeseries/
-[35]: /dashboards/widgets/free_text/
+[35]: /dashboards/widgets/annotations_embeds/free_text/
 [36]: https://learn.datadoghq.com/courses/building-better-dashboards
 [37]: /notebooks/
 [38]: https://www.datadoghq.com/blog/network-device-monitoring/

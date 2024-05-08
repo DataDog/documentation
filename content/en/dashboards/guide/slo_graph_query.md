@@ -3,7 +3,7 @@ title: Scope metric-based SLO queries
 kind: guide
 disable_toc: false
 further_reading:
-- link: "/dashboards/widgets/slo/"
+- link: "/dashboards/widgets/performance_reliability/slo/"
   tag: "Documentation"
   text: "SLO Widget"
 ---
@@ -49,6 +49,6 @@ The SLO widget filters the SLO metric queries by those additional tags for your 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/slo/
+[1]: /dashboards/widgets/performance_reliability/slo/
 [2]: /service_management/service_level_objectives/metric/
 [3]: /dashboards/template_variables/

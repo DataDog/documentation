@@ -5,4 +5,4 @@ core_product:
 related_terms:
   - dashboard
 ---
-The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query. For more information, <a href="/dashboards/widgets/monitor_summary/">see the documentation</a>.
+The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query. For more information, <a href="/dashboards/widgets/alerting_response/monitor_summary/">see the documentation</a>.

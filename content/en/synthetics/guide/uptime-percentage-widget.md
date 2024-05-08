@@ -65,7 +65,7 @@ When you click **Test URL**, assertions about your website's health populate. Ad
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/
-[2]: /dashboards/widgets/slo/
+[2]: /dashboards/widgets/performance_reliability/slo/
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /getting_started/synthetics/api_test#define-request
 [5]: https://app.datadoghq.com/slo/new

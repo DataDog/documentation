@@ -53,6 +53,6 @@ When creating SLOs, you can choose from the following types:
 [6]: https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data
 [7]: /service_management/service_level_objectives/time_slice/#uptime-calculations
 [8]: https://docs.datadoghq.com/api/latest/service-level-objectives/
-[9]: https://docs.datadoghq.com/dashboards/widgets/slo/
-[10]: https://docs.datadoghq.com/dashboards/widgets/slo_list/
+[9]: https://docs.datadoghq.com/dashboards/widgets/performance_reliability/slo/
+[10]: https://docs.datadoghq.com/dashboards/widgets/performance_reliability/slo_list/
 [11]: https://docs.datadoghq.com/service_management/service_level_objectives/#slo-calendar-view

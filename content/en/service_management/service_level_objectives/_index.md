@@ -346,8 +346,8 @@ The SLO statuses are calculated based on the SLO type:
 [18]: /account_management/teams/#associate-resources-with-team-handles
 [19]: /api/latest/events/
 [20]: /dashboards/guide/slo_data_source/
-[21]: /dashboards/widgets/slo/
-[22]: /dashboards/widgets/slo_list/
+[21]: /dashboards/widgets/performance_reliability/slo/
+[22]: /dashboards/widgets/performance_reliability/slo_list/
 [23]: /monitors/types/event/
 [24]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [25]: /api/latest/service-level-objective-corrections/

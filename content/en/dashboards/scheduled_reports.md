@@ -91,8 +91,8 @@ The following widget types are **not** supported and will be shown as empty in t
 [2]: /account_management/rbac/permissions/
 [3]: /account_management/rbac/permissions/#out-of-the-box-roles
 [4]: /account_management/org_settings/#public-sharing
-[5]: /dashboards/widgets/iframe/
-[6]: /dashboards/widgets/image/
-[7]: /dashboards/widgets/hostmap/
-[8]: /dashboards/widgets/run_workflow/
+[5]: /dashboards/widgets/annotations_embeds/iframe/
+[6]: /dashboards/widgets/annotations_embeds/image/
+[7]: /dashboards/widgets/architecture/hostmap/
+[8]: /dashboards/widgets/alerting_response/run_workflow/
 

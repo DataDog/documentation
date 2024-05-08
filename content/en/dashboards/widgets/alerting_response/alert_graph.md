@@ -5,6 +5,7 @@ widget_type: alert_graph
 description: "Graph the current status of any monitor defined on your system."
 aliases:
     - /graphing/widgets/alert_graph/
+    - /dashboards/widgets/alert_graph/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

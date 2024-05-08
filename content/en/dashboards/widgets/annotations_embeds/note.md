@@ -5,6 +5,7 @@ widget_type: note
 description: "Display text in a dashboard widget."
 aliases:
 - /graphing/widgets/note/
+- /dashboards/widgets/note/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -44,6 +45,6 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/free_text/
+[1]: /dashboards/widgets/annotations_embeds/free_text/
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

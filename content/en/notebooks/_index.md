@@ -216,5 +216,5 @@ To restore general access to a notebook with restricted access, follow the steps
 [13]: /dashboards/widgets/graphs/query_value/
 [14]: /dashboards/widgets/graphs/funnel/
 [15]: /dashboards/widgets/graphs/pie_chart/
-[16]: /dashboards/widgets/slo/
+[16]: /dashboards/widgets/performance_reliability/slo/
 [17]: /account_management/rbac/

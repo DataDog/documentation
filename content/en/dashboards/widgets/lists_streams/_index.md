@@ -4,6 +4,6 @@ kind: documentation
 ---
 
 {{< whatsnext desc="Display a list of events and issues coming from different sources: ">}}
-    {{< nextlink href="/dashboards/widgets/list"
+    {{< nextlink href="/dashboards/widgets/lists_streams/list"
         img="dashboards/widgets/icons/change_light_large.png">}} List{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -181,5 +181,5 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 [2]: /tracing/glossary/#services
 [3]: https://app.datadoghq.com/profiling/search?viz=timeseries
 [4]: /profiler/profile_types/
-[5]: /dashboards/widgets/profiling_flame_graph
+[5]: /dashboards/widgets/performance_reliability/profiling_flame_graph
 [6]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
