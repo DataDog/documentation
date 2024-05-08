@@ -907,7 +907,7 @@ menu:
       identifier: ide_plugins
       weight: 7
     - name: JetBrains IDEs
-      url: developers/plugins/idea/
+      url: developers/ide_plugins/idea/
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
