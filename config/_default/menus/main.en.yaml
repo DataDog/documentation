@@ -681,6 +681,11 @@ menu:
       identifier: otel_hostname
       parent: otel_schema
       weight: 404
+    - name: Service-entry Spans Mapping
+      url: opentelemetry/schema_semantics/service_entry_spans/
+      identifier: otel_service_entry_spans
+      parent: otel_schema
+      weight: 404
     - name: Ingestion Sampling
       url: opentelemetry/ingestion_sampling_with_opentelemetry
       identifier: otel_sampling
