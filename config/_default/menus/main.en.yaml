@@ -1287,16 +1287,21 @@ menu:
       parent: dashboards_widgets
       identifier: dashboards_widgets_performance_reliability
       weight: 306
+    - name: Create a Query
+      identifier: dashboards_create_query
+      url: dashboards/create_query/
+      parent: dashboards
+      weight: 4
     - name: Querying
       identifier: dashboards_querying
       url: dashboards/querying/
-      parent: dashboards
-      weight: 4
+      parent: dashboards_create_query
+      weight: 401
     - name: Functions
       url: dashboards/functions/
-      parent: dashboards
+      parent: dashboards_create_query
       identifier: dashboards_functions
-      weight: 5
+      weight: 402
     - name: Algorithms
       identifier: dashboards_functions_algorithms
       url: dashboards/functions/algorithms/
