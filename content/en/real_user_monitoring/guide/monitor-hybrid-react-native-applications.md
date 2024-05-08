@@ -12,7 +12,7 @@ further_reading:
 
 React Native is a JavaScript framework for developing hybrid mobile applications that can run natively on both Android and iOS.
 
-If you have a hybrid application that is built on React Native, you can use Datadog to monitor the same application both from the React Native and native sides.
+If you have a hybrid application that is built on React Native, you can use Datadog to monitor the same application from both the native Android or iOS side and the React Native side.
 
 RUM Events from both of these sources are reported as coming from the same application and the same source in Datadog RUM.
 
