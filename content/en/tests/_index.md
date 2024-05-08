@@ -10,21 +10,24 @@ further_reading:
     - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
       tag: "Release Notes"
       text: "Check out the latest Software Delivery releases! (App login required)"
-    - link: "/monitors/types/ci/"
-      tag: "Documentation"
-      text: "Creating CI Test Monitors"
-    - link: "/continuous_integration/guides/find_flaky_tests/"
-      tag: "Documentation"
-      text: "Finding Flaky Tests"
-    - link: "/continuous_integration/guides/rum_integration/"
-      tag: "Documentation"
-      text: "Linking CI Visibility and RUM"
-    - link: "/continuous_integration/troubleshooting/"
-      tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+    - link: "https://www.datadoghq.com/blog/datadog-ci-visibility/"
+      tag: "Blog"
+      text: "Monitor your CI pipelines and tests with Datadog CI Visibility"
     - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
       tag: "Blog"
       text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
+    - link: "/monitors/types/ci/"
+      tag: "Documentation"
+      text: "Learn about CI Test Monitors"
+    - link: "/tests/guides/flaky_test_management/"
+      tag: "Documentation"
+      text: "Learn about Flaky Test Management"
+    - link: "/tests/browser_tests/"
+      tag: "Documentation"
+      text: "Learn how to instrument your browser tests with RUM"
+    - link: "/tests/troubleshooting/"
+      tag: "Documentation"
+      text: "Learn how to troubleshoot Test Visibility"
 cascade:
     algolia:
         rank: 70
@@ -32,25 +35,20 @@ cascade:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-[Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
+[Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that are most relevant to your work, focusing on the code you are responsible for, rather than the pipelines in which they run.
 
 ## Setup
 
-{{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
-    {{< nextlink href="tests/setup/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="tests/setup/java" >}}Java and other JVM-based languages{{< /nextlink >}}
-    {{< nextlink href="tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="tests/setup/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="tests/setup/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="tests/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="tests/setup/junit_xml" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
-    {{< nextlink href="tests/containers" >}}Tests running in containers{{< /nextlink >}}
-{{< /whatsnext >}}
+Select an option to configure Test Visibility in Datadog:
+
+{{< partial name="continuous_integration/ci-tests-setup.html" >}}
+
+</br>
 
 In addition to tests, Test Visibility provides visibility over the whole testing phase of your project.
 
@@ -74,7 +72,7 @@ In addition to tests, Test Visibility provides visibility over the whole testing
 | {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Early flake detection *" >}}Automatically retry new tests to detect flakiness.{{< /ci-details >}}                                                                                   |           |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
 
-\* the feature is opt-in and needs to be enabled in the test service settings UI.
+\* The feature is opt-in, and needs to be enabled on the [**Test Service Settings** page][5].
 
 ## Default configurations
 
@@ -108,13 +106,12 @@ The following tags are automatically collected to identify test configurations, 
 
 ### Parameterized test configurations
 
-When you run parameterized tests, the library detects and reports information about the parameters used.
-Parameters are a part of test configuration, so the same test case executed with different parameters will be considered as two different tests in Test Visibility.
+When you run parameterized tests, the library detects and reports information about the parameters used. Parameters are a part of test configuration, so the same test case executed with different parameters is considered as two different tests in Test Visibility.
 
-If a test parameter is non-deterministic and has a different value every time a test is run, each test execution will be considered a new test in Test Visibility.
-As a consequence, some product features may not work correctly for such tests: history of executions, flakiness detection, Intelligent Test Runner, and others.
+If a test parameter is non-deterministic and has a different value every time a test is run, each test execution is considered a new test in Test Visibility. As a consequence, some product features may not work correctly for such tests: history of executions, flakiness detection, Intelligent Test Runner, and others.
 
 Some examples of non-deterministic test parameters are:
+
 - current date
 - a random value
 - a value that depends on the test execution environment (such as an absolute file path or the current username)
@@ -140,18 +137,20 @@ Note: Nested `test.configuration` tags, such as `test.configuration.cpu.memory`,
 
 In order to filter using these configurations tags, [you must create facets for these tags][2].
 
+## Enhance your developer workflow
+
+{{< whatsnext desc="Integrate Test Visibility with tools for reporting code coverage data, enhancing browser tests with Real User Monitoring, and ensuring insights across platforms by streamlining issue identification and issue resolution in your development cycle." >}}
+{{< nextlink href="/tests/developer_workflows/" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
+{{< nextlink href="/tests/code_coverage" >}}Learn about Code Coverage{{< /nextlink >}}
+{{< nextlink href="/tests/browser_tests" >}}Instrument Cypress Browser Tests with Browser RUM{{< /nextlink >}}
+{{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Use CI tests data
 
 {{% ci-information-collected %}}
 
-### Integrations
-
-{{< whatsnext desc="Learn about the following integrations with Test Visibility:" >}}
-{{< nextlink href="/tests/developer_workflows/" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
-{{< nextlink href="/tests/code_coverage" >}}Code Coverage{{< /nextlink >}}
-{{< nextlink href="/tests/browser_tests" >}}Instrument Cypress Browser Tests with Browser RUM{{< /nextlink >}}
-{{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
-{{< /whatsnext >}}
+When creating a [dashboard][6] or a [notebook][7], you can use CI test data in your search query, which updates the visualization widget options. For more information, see the [Dashboards][8] and [Notebooks documentation][9].
 
 ## Alert on test data
 
@@ -165,3 +164,8 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 [2]: /continuous_integration/explorer/facets/
 [3]: https://app.datadoghq.com/ci/test-runs
 [4]: /monitors/types/ci/
+[5]: https://app.datadoghq.com/ci/settings/test-service
+[6]: https://app.datadoghq.com/dashboard/lists
+[7]: https://app.datadoghq.com/notebook/list
+[8]: /dashboards
+[9]: /notebooks
