@@ -198,11 +198,11 @@ Hover over a saved view from the list and select the hyperlink icon to copy the 
 
 Once you are using a saved view, you can update it by selecting that saved view, modifying the query, and clicking the *Update* button below its name in the *Saved Views* panel. To change the saved view's name or delete a saved view, hover over its row in the *Saved Views* panel and click the pencil icon or trash can icon, respectively.
 
-## SLO audit events
+## SLO and SLO status correction audit events
 
-SLO audit events allow you to track the history of your SLO configurations using the [Event Explorer][27] or the "Audit History" tab in the SLO details. Audit events are added to the Event Explorer every time you create, modify, or delete an SLO or SLO status correction. Each event includes information on the configuration of an SLO or SLO status correction, and the stream provides a history of the configuration changes over time.
+SLO audit events allow you to track the history of your SLO configurations using the [Event Explorer][27] or the **Audit History** tab in the SLO details. Audit events are added to the Event Explorer every time you create, modify, or delete an SLO or SLO status correction. Each event includes information on the configuration of an SLO or SLO status correction, and the stream provides a history of the configuration changes over time.
 
-**SLO audit events:**
+### Audit events
 
 Each event includes the following SLO configuration information:
 
@@ -217,12 +217,12 @@ Three types of SLO audit events appear in the Event Explorer:
 - `SLO Modified` events show what configuration information changed during a modification
 - `SLO Deleted` events show the configuration information the SLO had before it was deleted
 
-**SLO status correction audit events:**
+### Status correction audit events
 
 Each event includes the following SLO status correction configuration information:
 
 - SLO Name
-- Status correction start and end times and timezone
+- Status correction start and end times with timezone
 - Status correction category
 
 Three types of SLO status correction audit events appear in the Event Explorer:
@@ -239,7 +239,7 @@ To get a full list of all SLO audit events, enter the search query `tags:(audit 
 
 You can also use the "Audit History" tab in the SLO details to view all audit events for an individual SLO:
 
-{{< img src="service_management/service_level_objectives/slo_audit_history_tab.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
+{{< img src="service_management/service_level_objectives/slo_audit_history_tab.png" alt="SLO details audit history tab" >}}
 
 With [Event Monitors][28], you can set up notifications to track SLO audit events. For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
@@ -255,8 +255,6 @@ After creating your SLO, you can visualize the data through Dashboards and widge
   - Graph 15 months' worth of metric-based SLO data with the [SLO data source][20] in both timeseries and scalar (query value, top list, table, change) widgets. 
   
 For more information about SLO Widgets, see the [SLO widget][21] and [SLO List widget][22] pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
-
-To proactively manage the configurations of your SLOs, set an [Event Monitor][23] to notify you when events corresponding to certain tags occur.
 
 ## SLO status corrections
 
