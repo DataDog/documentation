@@ -18,7 +18,7 @@ Datadog App Builder is in private beta. Complete the form to request access.
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-Many component properties allow you to select from provided values. If you want to use a more complex expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor.
+Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor.
 <br><br>
 
 {{% collapse-content title="Button" level="h2" %}}
