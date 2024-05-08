@@ -89,7 +89,7 @@ The following widget types are **not** supported and will be shown as empty in t
 
 [1]: /dashboards/#get-started
 [2]: /account_management/rbac/permissions/
-[3] /account_management/org_settings/#public-sharing
+[3]: /account_management/org_settings/#public-sharing
 [4]: /dashboards/widgets/iframe/
 [5]: /dashboards/widgets/image/
 [6]: /dashboards/widgets/hostmap/
