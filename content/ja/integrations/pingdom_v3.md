@@ -13,6 +13,7 @@ assets:
       prefix: pingdom.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 615
     source_type_name: Pingdom
 author:
   homepage: https://www.datadoghq.com
@@ -22,8 +23,7 @@ author:
 categories:
 - メトリクス
 - モニタリング
-- notification
-- web
+- notifications
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -49,8 +49,7 @@ tile:
   - Supported OS::macOS
   - Category::Metrics
   - Category::Monitoring
-  - Category::Notification
-  - Category::Web
+  - Category::Notifications
   configuration: README.md#Setup
   description: Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照
   media: []
@@ -59,11 +58,14 @@ tile:
   title: Pingdom
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 他のイベントやメトリクスに関連付けて、ユーザー中心の Pingdom パフォーマンスメトリクスを Datadog で追跡します。
 
-Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーション (非推奨)][1] と同様の動作をしますが、[Pingdom API][2] のバージョン 3.1 を使用します
+Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーション (非推奨)][1] と同様の動作をしますが、[Pingdom API][2] のバージョン 3.1 を使用します。
+
+{{< img src="integrations/pingdom/pingdom_dashboard.png" alt="Datadog ダッシュボード上の Pingdom グラフ" popup="true">}}
 
 ## セットアップ
 
