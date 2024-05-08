@@ -75,7 +75,7 @@ tile:
 
 ## 概要
 
-**注**: このインテグレーションは、OpenStack v12 以下にのみ適用されます。OpenStack v13 以上からメトリクスを収集する場合は、[OpenStack Controller インテグレーション][2]を使用してください。
+**注**: このインテグレーションは OpenStack v12 以下に限定されます。OpenStack v13 以上からメトリクスを収集する場合は、[OpenStack Controller インテグレーション][2]を使用してください。
 
 OpenStack サービスからメトリクスをリアルタイムに取得して、以下のことができます。
 
