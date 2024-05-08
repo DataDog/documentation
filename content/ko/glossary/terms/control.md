@@ -1,7 +1,7 @@
 ---
 core_product:
 - security
-- synthetics
+- csm
 title: 제어
 ---
 
