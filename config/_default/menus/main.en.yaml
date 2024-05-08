@@ -1801,20 +1801,20 @@ menu:
       parent: error_tracking
       identifier: error_tracking_explorer
       weight: 1
+    - name: Issue States
+      url: error_tracking/issue_states
+      parent: error_tracking
+      identifier: error_tracking_states
+      weight: 2
     - name: Default Grouping
       url: error_tracking/default_grouping
       parent: error_tracking
       identifier: error_tracking_default_grouping
-      weight: 2
+      weight: 3
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 3
-    - name: Issue States and Workflows
-      url: error_tracking/issue_states
-      parent: error_tracking
-      identifier: error_tracking_states
       weight: 4
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
@@ -2943,26 +2943,31 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
       weight: 1001
+    - name: Issue States
+      url: tracing/error_tracking/issue_states
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_states
+      weight: 1002
     - name: Default Grouping
       url: tracing/error_tracking/default_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_default_grouping
-      weight: 1002
+      weight: 1003
     - name: Custom Grouping
       url: tracing/error_tracking/custom_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_custom_grouping
-      weight: 1003
+      weight: 1004
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1004
+      weight: 1005
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1005
+      weight: 1006
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4162,41 +4167,46 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_explorer
       weight: 601
+    - name: Issue States
+      url: logs/error_tracking/issue_states
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_states
+      weight: 602
     - name: Track Browser and Mobile Errors
       identifier: log_management_error_tracking_browser_and_mobile
       url: logs/error_tracking/browser_and_mobile
       parent: log_management_error_tracking
-      weight: 602
+      weight: 603
     - name: Track Backend Errors
       identifier: log_management_error_tracking_backend
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
-      weight: 603
+      weight: 604
     - name: Default Grouping
       url: logs/error_tracking/default_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_default_grouping
-      weight: 604
+      weight: 605
     - name: Custom Grouping
       url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
-      weight: 605
+      weight: 606
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
-      weight: 606
+      weight: 607
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 607
+      weight: 608
     - name: Exclude Logs
       url: logs/error_tracking/excluding_logs
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_excluding_logs
-      weight: 608
+      weight: 609
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5228,17 +5238,22 @@ menu:
       url: real_user_monitoring/error_tracking/explorer/
       parent: rum_error_tracking
       identifier: rum_error_tracking_explorer
-      weight: 1101
+      weight: 801
+    - name: Issue States
+      url: real_user_monitoring/error_tracking/issue_states
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_states
+      weight: 802
     - name: Track Browser Errors
       url: real_user_monitoring/error_tracking/browser/
       parent: rum_error_tracking
       identifier: rum_error_tracking_browser
-      weight: 802
+      weight: 803
     - name: Track Mobile Errors
       url: real_user_monitoring/error_tracking/mobile/
       parent: rum_error_tracking
       identifier: rum_error_tracking_mobile
-      weight: 803
+      weight: 804
     - name: Default Grouping
       url: real_user_monitoring/error_tracking/default_grouping
       parent: rum_error_tracking
