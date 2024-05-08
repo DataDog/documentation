@@ -409,13 +409,56 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 
 ## Troubleshooting
 
-If you are missing tags on Kubernetes logs, this may be because the Agent's internal tagger does not yet have the related container or pod tags when logs are sent. To make the Log Agent wait a few seconds for the tagger to be ready, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to set how many seconds to wait. The default value is 0.
+#### Missing tags on new containers and pods:
+
+If you are missing tags on container logs on newly spun up containers and pods, this may be because the Agent’s internal tagger does not yet have the related container or pod tags when logs are sent from those container and pods have just spun up. To make the Log Agent wait a few seconds for the tagger to be ready, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to set how many seconds to wait. The default value is 0.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
 
 ```yaml
-# The number of seconds the Log Agent waits for the internal tagger to add the related container or pod tags to the logs before the logs are sent.
-# For example, in order to set the Log Agent to wait five seconds, use an integer in the value:
-tagger_warmup_duration: 5
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION
+          value: "5"
 ```
+{{% /tab %}}
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  env:
+    - name: DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION
+      value: "5"
+```
+{{% /tab %}}
+{{< tabs >}}
+
+#### Missing host level tags on new hosts:
+
+If you are missing host level tags on your initial container logs from a new host or node that just spun up, this is probably due to the small duration when a new host is created in Datadog, it takes a few minutes for these host-level tags to be established and inherited on logs associated with that host. These tags are the ones that you can see in the infrastructure list for a given host, sourced from either the cloud provider or the Datadog Agent. Common tags such as `kube_cluster_name`, `region`, `instance-type`, `autoscaling-group`, etc. See more information in the [Integration inheritance][12] section here for more context. You can set the environment variable `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` to set how many minutes to cover the timeframe where the host tags are missing by manually sending the host tags that the Datadog Agent knows about on each log sent up. After the duration is over, this returns to relying on host-tag inheritance on Datadog intake.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+```yaml
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
+          value: "10m"
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  env:
+    - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
+      value: "10m"
+```
+{{% /tab %}}
+{{< tabs >}}
 
 ## Further Reading
 
@@ -432,3 +475,4 @@ tagger_warmup_duration: 5
 [9]: /containers/guide/kubernetes_daemonset/#log-collection
 [10]: /getting_started/containers/autodiscovery
 [11]: /logs/log_configuration/attributes_naming_convention/
+[12]: /getting_started/tagging/assigning_tags/#integration-inheritance
