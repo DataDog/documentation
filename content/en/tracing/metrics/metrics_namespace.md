@@ -58,7 +58,7 @@ With the following definitions:
 
 `trace.<SPAN_NAME>.hits`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** Represent the count of hits for a given span.<br>
+**Description:** Represent the count of spans created with a specific name (examples: `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).<br>
 **Metric type:** [COUNT][5].<br>
 **Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
