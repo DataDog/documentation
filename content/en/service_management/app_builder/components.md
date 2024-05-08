@@ -18,6 +18,9 @@ Datadog App Builder is in private beta. Complete the form to request access.
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
+Many component properties allow you to select from provided values. If you want to use a more complex expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor.
+<br><br>
+
 {{% collapse-content title="Button" level="h2" %}}
 Button components have the following properties.
 
@@ -25,40 +28,33 @@ Button components have the following properties.
 
 Label
 : The text that displays on the button.<br>
-**Value**: string or expression<br>
-_required_
+**Value**: string or expression
 
 ### Appearance
 
 Intent
 : Controls the color of the button, with colors representing the purpose of the button.<br>
-**Provided values**: default, danger, success, warning<br>
-_required_
+**Provided values**: default, danger, success, warning
 
 Is Primary
 : Designed to call user attention to the most important action(s) for a given page or workflow.<br>
-**Provided values**: on, off<br>
-_required_
+**Provided values**: on, off
 
 Is Borderless
 : Removes the border from any button. On hover, it gets a background fill.<br>
-**Provided values**: on, off<br>
-_required_
+**Provided values**: on, off
 
 Is Loading
 : Shows a loading indicator.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -111,18 +107,15 @@ Size
 
 Is Loading
 : Shows a loading indicator.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Inspect data
 
@@ -165,18 +158,15 @@ Options
 
 Is Multiline
 : Determines whether the checkbox text should wrap onto a new line or be truncated by an ellipsis.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -206,8 +196,7 @@ Container components have the following properties.
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Inspect data
 
@@ -233,8 +222,7 @@ Default timeframe
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -272,13 +260,11 @@ Default value
 
 Is Read Only
 : Determines whether the component is read only.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -314,8 +300,7 @@ Size
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -367,13 +352,11 @@ Max
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -431,13 +414,11 @@ Default value
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -477,13 +458,11 @@ Size
 
 Is Loading
 : Shows a loading indicator.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -548,13 +527,11 @@ Is Multiselect
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -636,18 +613,15 @@ Label
 
 Primary
 : Designed to call user attention to the most important action(s) for a given page or workflow.<br>
-**Provided values**: on, off<br>
-_required_
+**Provided values**: on, off
 
 Borderless
 : Removes the border from any button. On hover, it gets a background fill.<br>
-**Provided values**: on, off<br>
-_required_
+**Provided values**: on, off
 
 Disabled
 : Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Level
 : Controls the color of the button according to its intent.<br>
@@ -661,8 +635,7 @@ Reaction
 
 Is Loading
 : Shows a loading indicator.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Has text wrapping
 : Determines whether cell text wraps.<br>
@@ -674,8 +647,7 @@ Scrollable
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
@@ -723,8 +695,7 @@ Vertical alignment
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Inspect data
 
@@ -756,13 +727,11 @@ Placeholder text
 
 Is Disabled
 : Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off<br>
-_optional_
+**Provided values**: on, off
 
 ### Events
 
