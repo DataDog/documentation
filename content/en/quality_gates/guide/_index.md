@@ -11,5 +11,5 @@ cascade:
 ---
 
 {{< whatsnext desc="Quality Gates Guides:" >}}
-    {{< nextlink href="/quality_gates/guides/understanding_rule_scopes" >}}Understanding How Rule Scopes Work{{< /nextlink >}}
+    {{< nextlink href="/quality_gates/guide/understanding_rule_scopes" >}}Understanding How Rule Scopes Work{{< /nextlink >}}
 {{< /whatsnext >}}
