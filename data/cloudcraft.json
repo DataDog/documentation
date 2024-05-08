@@ -1892,7 +1892,7 @@
                       "createdAt": "2022-01-01T20:54:47.282Z",
                       "externalSharing": true,
                       "role": "admin",
-                      "settings": {
+                      "members": {
                         "id": "17cf37c9-578c-4587-acb9-299c5431ad10",
                         "role": "admin",
                         "userId": "370809cc-abdc-42ad-bb40-8541ca0dfb1a",
