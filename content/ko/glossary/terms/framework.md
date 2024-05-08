@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - csm
 synonyms:
 - 컴플라이언스 프레임워크
