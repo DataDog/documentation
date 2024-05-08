@@ -1935,6 +1935,11 @@ menu:
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
+      weight: 6
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: error_tracking
+      identifier: error_tracking_troubleshooting
       weight: 7
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
@@ -3063,6 +3068,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
       weight: 1005
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_troubleshooting
+      weight: 1006
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4292,6 +4302,11 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
       weight: 607
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_troubleshooting
+      weight: 609
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5349,6 +5364,11 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
       weight: 807
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_troubleshooting
+      weight: 808
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
