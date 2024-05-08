@@ -81,27 +81,27 @@ SNMP devices are matched to a representative icon based on their device type in 
     <th>Description</th>
   </tr>
   <tr>
-    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/access-point.png" alt="Access point icon" style="width:10%;">}}</td>
+    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/access-point.png" alt="Access point icon" style="width:10%; border:none;" popup="false">}}</td>
     <td>Access Point</td>
   </tr>
   <tr>
-    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/firewall.png" alt="Firewall icon" style="width:10%;"></td>
+    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/firewall.png" alt="Firewall icon" style="width:10%; border:none;" popup="false">}}</td>
     <td>Firewall</td>
   </tr>
   <tr>
-    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/router.png" alt="Router icon" style="width:10%;"></td>
+    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/router.png" alt="Router icon" style="width:10%; border:none;" popup="false">}}</td>
     <td>Router</td>
   </tr>
   <tr>
-   <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/server.png" alt="Server icon" style="width:10%;"></td>
+   <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/server.png" alt="Server icon" style="width:10%; border:none;" popup="false">}}</td>
     <td>Server</td>
   </tr>
   <tr>
-    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/switch.png" alt="Switch icon" style="width:10%;"></td>
+    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/switch.png" alt="Switch icon" style="width:10%; border:none;" popup="false">}}</td>
     <td>Switch</td>
   </tr>
   <tr>
-    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/device.png" alt="Device icon" style="width:10%;"></td>
+    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/device.png" alt="Device icon" style="width:10%; border:none;" popup="false">}}</td>
     <td>Device</td>
   </tr>
 </table>
