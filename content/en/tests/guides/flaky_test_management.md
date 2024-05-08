@@ -47,7 +47,7 @@ Flaky tests from merged feature branches are found by checking which tests have 
 
 Limitations:
 * If you squash or reset and force push commits in your feature branch, flaky tests that have been detected in that branch are not shown in the default branch because the commit history has been altered. 
-* If a flaky test is detected and subsequently fixed in the same feature branch, it still appears as a flaky test in the default branch, because the fix for the flakey test cannot be detected. However, [you can manually remove that flaky test from the flaky tests table][5]. 
+* If a flaky test is detected and subsequently fixed in the same feature branch, it still appears as a flaky test in the default branch, because the fix for the flaky test cannot be detected. However, [you can manually remove that flaky test from the flaky tests table][5]. 
 
 ### New flaky tests
 
@@ -59,7 +59,7 @@ New flaky tests are tests that exhibit flaky behavior and didn't previously exis
 
 1. Navigate to the [Test Runs][2] page.
 2. In the facets list on the left sidebar, expand the **New Flaky** facet in the **Test** section, and check `true`.
-All test runs that exhibited flakey behavior for the first time as per the definition above are displayed.
+All test runs that exhibited flaky behavior for the first time as per the definition above are displayed.
 
 #### Branches page
 
