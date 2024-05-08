@@ -71,15 +71,40 @@ Hide _number of_ Unconnected Devices - Turned ON by default.
 
 SNMP devices are matched to a representative icon based on their device type in each device node. 
 
-
-| Icon        | Details       |
-|-------------|-------------|
-|      | Access Point
-|              |Firewall
-|             |Router 
-|     |Server 
-|             |Switch 
-|             |Device 
+<table>
+  <colgroup>
+    <col style="width:20%">
+    <col style="width:20%">
+  </colgroup>
+  <tr>
+    <th>Icon</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/access-point.png" alt="Access point icon" style="width:10%;"></td>
+    <td>Access Point</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/firewall.png" alt="Firewall icon" style="width:10%;"></td>
+    <td>Firewall</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/router.png" alt="Router icon" style="width:10%;"></td>
+    <td>Router</td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/server.png" alt="Server icon" style="width:10%;"></td>
+    <td>Server</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/switch.png" alt="Switch icon" style="width:10%;"></td>
+    <td>Switch</td>
+  </tr>
+  <tr>
+    <td style="text-align:center;"><img src="/images/network_device_monitoring/network_topology_map/icons/device.png" alt="Device icon" style="width:10%;"></td>
+    <td>Device</td>
+  </tr>
+</table>
 
 
 ## Investigating devices
