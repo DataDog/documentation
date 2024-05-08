@@ -16380,11 +16380,17 @@ components:
       required:
       - data
       type: object
-    RetentionFilterResponse:
+    RetentionFilterCreateResponse:
       description: The retention filters definition.
       properties:
         data:
           $ref: '#/components/schemas/RetentionFilter'
+      type: object
+    RetentionFilterResponse:
+      description: The retention filters definition.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterAll'
       type: object
     RetentionFilterType:
       default: spans-sampling-processor
@@ -22674,6 +22680,7 @@ components:
       description: Included resources related to the team membership
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Team'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -22923,19 +22930,26 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            cases_read: Read all cases data.
-            cases_write: Create, update and delete cases data.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
+            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
+              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_write: Configure cloud cost accounts and global
+              customizations.
+            continuous_profiler_pgo_read: Read and query Continuous Profiler data
+              for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_scanner_read: View Data Scanner configurations.
+            data_scanner_write: Edit Data Scanner configurations.
             events_read: Read Events data.
             incident_notification_settings_write: Configure Incidents Notification
               settings.
@@ -22944,10 +22958,15 @@ components:
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
-              an organization. Mute and unmute hosts. The ability to write monitors
+              an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit and delete individual monitors.
+            org_management: Edit org configurations, including authentication and
+              certain security preferences such as configuring SAML, renaming an org,
+              configuring allowed login methods, creating child orgs, subscribing
+              & unsubscribing from apps in the marketplace, and enabling & disabling
+              Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -23611,7 +23630,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RetentionFilterResponse'
+                $ref: '#/components/schemas/RetentionFilterCreateResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -24078,10 +24097,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List all AuthN Mappings
       tags:
       - AuthN Mappings
@@ -24125,11 +24140,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Create an AuthN Mapping
       tags:
       - AuthN Mappings
@@ -24327,11 +24337,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_read
       summary: Search cases
       tags:
       - Case Management
@@ -24369,11 +24374,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Create a case
       tags:
       - Case Management
@@ -24412,11 +24412,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_read
       summary: Get all projects
       tags:
       - Case Management
@@ -24450,11 +24445,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Create a project
       tags:
       - Case Management
@@ -24484,11 +24474,6 @@ paths:
           description: API error response
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Remove a project
       tags:
       - Case Management
@@ -24517,11 +24502,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_read
       summary: Get the details of a project
       tags:
       - Case Management
@@ -24551,11 +24531,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_read
       summary: Get the details of a case
       tags:
       - Case Management
@@ -24592,11 +24567,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Archive case
       tags:
       - Case Management
@@ -24633,11 +24603,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Assign case
       tags:
       - Case Management
@@ -24674,11 +24639,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Update case priority
       tags:
       - Case Management
@@ -24715,11 +24675,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Update case status
       tags:
       - Case Management
@@ -24756,11 +24711,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Unarchive case
       tags:
       - Case Management
@@ -24797,11 +24747,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Unassign case
       tags:
       - Case Management
@@ -25405,6 +25350,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
       summary: List Cloud Cost Management AWS CUR configs
       tags:
       - Cloud Cost Management
@@ -25445,6 +25395,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Create Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -25478,6 +25433,11 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Delete Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -25514,6 +25474,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Update Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -25558,6 +25523,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
       summary: List related AWS accounts
       tags:
       - Cloud Cost Management
@@ -25587,6 +25557,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
       summary: List Cloud Cost Management Azure configs
       tags:
       - Cloud Cost Management
@@ -25627,6 +25602,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Create Cloud Cost Management Azure configs
       tags:
       - Cloud Cost Management
@@ -25660,6 +25640,11 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Delete Cloud Cost Management Azure config
       tags:
       - Cloud Cost Management
@@ -25702,6 +25687,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Update Cloud Cost Management Azure config
       tags:
       - Cloud Cost Management
@@ -25731,6 +25721,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
       summary: Cloud Cost Enabled
       tags:
       - Cloud Cost Management
@@ -25796,7 +25791,8 @@ paths:
         end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor
         != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
         := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
-        \ cursor := response.metadata.pagination.next_record_id\nEND\n```"
+        \ cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis
+        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/)."
       operationId: GetMonthlyCostAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -26817,11 +26813,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - events_read
       summary: Search events
       tags:
       - Events
@@ -28910,6 +28901,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Get IP Allowlist
       tags:
       - IP Allowlist
@@ -28940,6 +28936,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Update IP Allowlist
       tags:
       - IP Allowlist
@@ -29249,10 +29250,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get archive order
       tags:
       - Logs Archives
@@ -29331,10 +29328,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all archives
       tags:
       - Logs Archives
@@ -29450,10 +29443,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an archive
       tags:
       - Logs Archives
@@ -29585,10 +29574,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List read roles for an archive
       tags:
       - Logs Archives
@@ -29814,10 +29799,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all log-based metrics
       tags:
       - Logs Metrics
@@ -29920,10 +29901,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a log-based metric
       tags:
       - Logs Metrics
@@ -29989,10 +29966,6 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
@@ -30032,11 +30005,6 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Create a restriction query
       tags:
       - Logs Restriction Queries
@@ -30078,10 +30046,6 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
@@ -30118,10 +30082,6 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
@@ -30160,11 +30120,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Delete a restriction query
       tags:
       - Logs Restriction Queries
@@ -30208,10 +30163,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a restriction query
       tags:
       - Logs Restriction Queries
@@ -30260,11 +30211,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Update a restriction query
       tags:
       - Logs Restriction Queries
@@ -30310,11 +30256,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Revoke role from a restriction query
       tags:
       - Logs Restriction Queries
@@ -30359,10 +30300,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List roles for a restriction query
       tags:
       - Logs Restriction Queries
@@ -30407,11 +30344,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Grant role to a restriction query
       tags:
       - Logs Restriction Queries
@@ -30872,11 +30804,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - metrics_read
       summary: List active tags and aggregations
       tags:
       - Metrics
@@ -31065,10 +30992,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Tag Configuration Cardinality Estimator
       tags:
       - Metrics
@@ -31330,10 +31253,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List distinct metric volumes by metric name
       tags:
       - Metrics
@@ -31646,7 +31565,7 @@ paths:
       - Roles
       x-given:
         permission:
-          source: data[0]
+          source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
       x-undo:
@@ -32313,7 +32232,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all CSM Threats Agent rules
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 3
       x-undo:
         type: safe
@@ -32345,7 +32264,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-given:
         agent_rule:
@@ -32380,7 +32299,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 6
       x-undo:
         type: idempotent
@@ -32405,7 +32324,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 2
       x-undo:
         type: safe
@@ -32442,7 +32361,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 5
       x-undo:
@@ -32471,7 +32390,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the latest CSM Threats policy
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 1
       x-undo:
         type: safe
@@ -32534,11 +32453,11 @@ paths:
 
         Restriction policies can be applied to the following resources:
 
-        - Connections: `connection`
-
         - Dashboards: `dashboard`
 
         - Notebooks: `notebook`
+
+        - Powerpacks: `powerpack`
 
         - Security Rules: `security-rule`
 
@@ -32551,11 +32470,11 @@ paths:
 
         -------------------------|--------------------------
 
-        Connections              | `viewer`, `editor`, `resolver`
-
         Dashboards               | `viewer`, `editor`
 
         Notebooks                | `viewer`, `editor`
+
+        Powerpacks               | `viewer`, `editor`
 
         Security Rules           | `viewer`, `editor`
 
@@ -33904,7 +33823,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the latest Cloud Workload Security policy
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 1
       x-undo:
         type: safe
@@ -33925,7 +33844,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all Cloud Workload Security Agent rules
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 3
       x-undo:
         type: safe
@@ -33956,7 +33875,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-given:
         agent_rule:
@@ -33991,7 +33910,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 6
       x-undo:
         type: idempotent
@@ -34015,7 +33934,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 2
       x-undo:
         type: safe
@@ -34052,7 +33971,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 5
       x-undo:
@@ -36257,6 +36176,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Aggregate spans
       tags:
       - Spans
@@ -37536,7 +37460,10 @@ paths:
 
         [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)
 
-        instead.'
+        instead.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetCostByOrg
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -37599,7 +37526,10 @@ paths:
 
         and is delayed by up to 72 hours from when it was incurred.
 
-        To access historical costs prior to this, use the `/historical_cost` endpoint.'
+        To access historical costs prior to this, use the `/historical_cost` endpoint.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetEstimatedCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -37687,7 +37617,10 @@ paths:
       description: 'Get historical cost across multi-org and single root-org accounts.
 
         Cost data for a given month becomes available no later than the 16th of the
-        following month.'
+        following month.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetHistoricalCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -38011,7 +37944,8 @@ paths:
         Projected cost data is only available for the current month and becomes available
         around the 12th of the month.
 
-        This endpoint requires the usage_read authorization scope.'
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetProjectedCost
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -38619,10 +38553,6 @@ tags:
     Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
     page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
   name: Cloud Cost Management
-- description: Workload activity security rules for generating events using the Datadog
-    security Agent. See the [Setting up CSM Workload Security page](https://docs.datadoghq.com/security/cloud_security_management/setup/csm_workload_security/)
-    for more information.
-  name: Cloud Workload Security
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
@@ -38936,8 +38866,6 @@ tags:
     monthly usage across multiple facets of Datadog.
 
     This API is available to all Pro and Enterprise customers.
-
-    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
 
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.

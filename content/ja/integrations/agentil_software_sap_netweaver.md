@@ -32,7 +32,7 @@ author:
   support_email: support@agentil-software.com
   vendor_id: agentil-software
 categories:
-- マーケットプレイス
+- marketplace
 - sap
 dependencies: []
 display_on_public_website: true

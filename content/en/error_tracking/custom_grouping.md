@@ -2,15 +2,11 @@
 title: Custom Grouping
 kind: documentation
 description: Customize how error spans are grouped into issues.
-aliases:
-  - /logs/error_tracking/custom_grouping
-  - /real_user_monitoring/error_tracking/custom_grouping
-  - /tracing/error_tracking/custom_grouping
 ---
 
 ## Overview
 
-Error Tracking intelligently groups similar errors into issues with a default strategy. By using _custom fingerprinting_, you can gain full control over the grouping decision and customize the grouping behavior for your error spans.
+Error Tracking intelligently groups similar errors into issues with a [default strategy][5]. By using _custom fingerprinting_, you can gain full control over the grouping decision and customize the grouping behavior for your error spans.
 
 You can customize grouping by providing an `error.fingerprint` for the error. The fingerprint is provided in an attribute or tag, depending on the error source (see [Setup](#setup) for details). While the value of `error.fingerprint` does not have any particular format or requirement, the content must be a string.
 
@@ -322,3 +318,4 @@ final configuration = DatadogConfiguration(
 [2]: /logs/log_collection/
 [3]: /real_user_monitoring/browser/
 [4]: /real_user_monitoring/mobile_and_tv_monitoring/setup
+[5]: /error_tracking/default_grouping

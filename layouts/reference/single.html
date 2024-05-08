@@ -1,7 +1,10 @@
 {{ define "main" }}
     <div class="row">
       <div class="col-12 order-1">
-          <h1 id="pagetitle">{{ .Title }}</h1>
+          <h1 id="pagetitle">
+            {{ if .Params.legacy }}({{i18n "legacy" | upper}}){{end}}
+            {{ .Title }}
+          </h1>
       </div>
       <div class="col-12">
           {{ partial "breadcrumbs.html" . }}

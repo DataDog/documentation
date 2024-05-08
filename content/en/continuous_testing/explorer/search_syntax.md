@@ -1,13 +1,13 @@
 ---
 title: Search Syntax
 kind: documentation
-description: Learn how to create a search query in the Synthetic Monitoring & Continuous Testing Explorer.
+description: Learn how to create a search query in the Synthetic Monitoring & Testing Results Explorer.
 aliases:
   - /synthetics/explorer/search_syntax
 further_reading:
 - link: '/continuous_testing/explorer'
   tag: 'Documentation'
-  text: 'Learn about the Synthetic Monitoring & Continuous Testing Explorer'
+  text: 'Learn about the Synthetic Monitoring & Testing Results Explorer'
 ---
 
 ## Overview
