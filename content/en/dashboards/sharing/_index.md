@@ -36,5 +36,5 @@ To see the complete list of publicly shared dashboards, navigate to [**Organizat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/public-sharing/shared-dashboards
-[2]: dashboards/sharing/dashboards/#revoke
-[3]: dashboards/sharing/graphs/#revoke
+[2]: /dashboards/sharing/public_dashboards/#revoke
+[3]: /dashboards/sharing/graphs/#revoke
