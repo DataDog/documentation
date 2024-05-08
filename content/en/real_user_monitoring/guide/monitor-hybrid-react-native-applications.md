@@ -201,10 +201,6 @@ let rumConfiguration = RUM.Configuration(
 {{% /tab %}}
 {{< /tabs >}}
 
-Then, use `@datadog/mobile-react-navigation` to track your views.
-
-If you have enabled ProGuard obfuscation, add rules to prevent obfuscation of the target packages in release builds.
-
 ### Instrumenting React Native errors, interactions, and resources
 
 Wrap your React Native app with the `DatadogProvider` component to automatically register React Native RUM errors, interactions, and resources:
