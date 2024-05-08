@@ -211,16 +211,31 @@ menu:
       url: getting_started/workflow_automation/
       parent: getting_started
       weight: 24
+    - name: CI Visibility
+      identifier: getting_started_ci_visibility
+      url: getting_started/ci_visibility/
+      parent: getting_started
+      weight: 25
+    - name: Test Visibility
+      identifier: getting_started_test_visibility
+      url: getting_started/test_visibility/
+      parent: getting_started
+      weight: 26
+    - name: Intelligent Test Runner
+      identifier: getting_started_intelligent_test_runner
+      url: getting_started/intelligent_test_runner/
+      parent: getting_started
+      weight: 27
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
       parent: getting_started
-      weight: 25
+      weight: 28
     - name: Support
       identifier: getting_started_support
       url: getting_started/support/
       parent: getting_started
-      weight: 26
+      weight: 29
     - name: Glossary
       url: glossary/
       pre: features
@@ -300,50 +315,55 @@ menu:
       url: agent/basic_agent_usage/osx/
       weight: 110
       parent: basic_agent_usage
+    - name: Oracle Linux
+      identifier: basic_agent_usage_oracle
+      url: agent/basic_agent_usage/oracle/
+      weight: 111
+      parent: basic_agent_usage
     - name: Puppet
       identifier: basic_agent_usage_puppet
       url: agent/basic_agent_usage/puppet/
-      weight: 111
+      weight: 112
       parent: basic_agent_usage
     - name: Red Hat
       identifier: basic_agent_usage_redhat
       url: agent/basic_agent_usage/redhat/
-      weight: 112
+      weight: 113
       parent: basic_agent_usage
     - name: Rocky Linux
       identifier: basic_agent_usage_rockylinux
       url: agent/basic_agent_usage/centos/
-      weight: 113
+      weight: 114
       parent: basic_agent_usage
     - name: SaltStack
       identifier: basic_agent_usage_saltstack
       url: agent/basic_agent_usage/saltstack/
-      weight: 114
+      weight: 115
       parent: basic_agent_usage
     - name: SCCM
       identifier: basic_agent_usage_sccm
       url: agent/basic_agent_usage/sccm/
-      weight: 115
+      weight: 116
       parent: basic_agent_usage
     - name: SUSE
       identifier: basic_agent_usage_suse
       url: agent/basic_agent_usage/suse/
-      weight: 116
+      weight: 117
       parent: basic_agent_usage
     - name: Ubuntu
       identifier: basic_agent_usage_ubuntu
       url: agent/basic_agent_usage/ubuntu/
-      weight: 117
+      weight: 118
       parent: basic_agent_usage
     - name: Windows
       identifier: basic_agent_usage_windows
       url: agent/basic_agent_usage/windows/
-      weight: 118
+      weight: 119
       parent: basic_agent_usage
     - name: From Source
       identifier: basic_agent_usage_source
       url: agent/basic_agent_usage/source/
-      weight: 119
+      weight: 120
       parent: basic_agent_usage
     - name: Architecture
       url: agent/architecture/
@@ -659,6 +679,11 @@ menu:
     - name: Hostname Mapping
       url: opentelemetry/schema_semantics/hostname/
       identifier: otel_hostname
+      parent: otel_schema
+      weight: 404
+    - name: Service-entry Spans Mapping
+      url: opentelemetry/schema_semantics/service_entry_spans/
+      identifier: otel_service_entry_spans
       parent: otel_schema
       weight: 404
     - name: Ingestion Sampling
@@ -1669,51 +1694,61 @@ menu:
       parent: platform_heading
       identifier: service_catalog
       weight: 80000
-    - name: Browsing
-      url: service_catalog/browsing
+    - name: Navigate the Service Catalog
+      url: service_catalog/navigating
       parent: service_catalog
       identifier: service_catalog_browse
       weight: 1
-    - name: Investigating a Service
+    - name: Investigate a Service
       url: service_catalog/investigating
       parent: service_catalog
-      identifier: service_investigate
+      identifier: service_catalog_investigate
       weight: 2
-    - name: Adding Entries to Service Catalog
-      url: service_catalog/setup
+    - name: Create Entries
+      url: service_catalog/create_entries
       parent: service_catalog
-      identifier: service_catalog_setup
+      identifier: service_catalog_create_entry
       weight: 3
-    - name: Adding Metadata
-      url: service_catalog/add_metadata
+    - name: Import Entries from Datadog
+      url: service_catalog/import_entries_dd
       parent: service_catalog
-      identifier: service_metadata
+      identifier: service_catalog_import_from_telemetries
       weight: 4
-    - name: Service Catalog API
-      url: service_catalog/service_definition_api
+    - name: Import Entries from Integrations
+      url: service_catalog/import_entries_integrations
       parent: service_catalog
-      identifier: service_catalog_api
+      identifier: service_catalog_import_from_integrations
       weight: 5
+    - name: Manage Entries
+      url: service_catalog/manage_entries
+      parent: service_catalog
+      identifier: service_catalog_managing_entries
+      weight: 6
+    - name: Service Definitions
+      url: service_catalog/service_definitions
+      parent: service_catalog
+      identifier: service_catalog_definitions_versions
+      weight: 7
     - name: Service Scorecards
       url: service_catalog/scorecards
       parent: service_catalog
       identifier: service_catalog_scorecards
-      weight: 6
+      weight: 8
+    - name: APIs
+      url: service_catalog/apis
+      parent: service_catalog
+      identifier: service_catalog_apis
+      weight: 9
     - name: Integrations
       url: service_catalog/integrations
       parent: service_catalog
       identifier: service_catalog_integrations
-      weight: 7
-    - name: Troubleshooting
-      url: service_catalog/troubleshooting
-      parent: service_catalog
-      identifier: service_catalog_troubleshooting
-      weight: 8
-    - name: Guides
+      weight: 10
+    - name: Troubleshooting and Best Practices
       url: service_catalog/guides
       parent: service_catalog
-      identifier: service_catalog_guides
-      weight: 9
+      identifier: troubleshooting_best_practices
+      weight: 11
     - name: API Catalog
       url: /api_catalog/
       pre: api-catalog
@@ -1771,31 +1806,41 @@ menu:
       parent: error_tracking
       identifier: error_tracking_explorer
       weight: 1
+    - name: Default Grouping
+      url: error_tracking/default_grouping
+      parent: error_tracking
+      identifier: error_tracking_default_grouping
+      weight: 2
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 2
+      weight: 3
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 3
+      weight: 4
     - name: APM
       url: error_tracking/apm
       parent: error_tracking
       identifier: error_tracking_apm
-      weight: 4
+      weight: 5
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
-      weight: 5
+      weight: 6
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
       weight: 6
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: error_tracking
+      identifier: error_tracking_troubleshooting
+      weight: 7
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2903,21 +2948,31 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
       weight: 1001
+    - name: Default Grouping
+      url: tracing/error_tracking/default_grouping
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_default_grouping
+      weight: 1002
     - name: Custom Grouping
       url: tracing/error_tracking/custom_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_custom_grouping
-      weight: 1002
+      weight: 1003
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1003
+      weight: 1004
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1004
+      weight: 1005
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_troubleshooting
+      weight: 1006
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -3560,16 +3615,21 @@ menu:
       parent: tests
       identifier: tests_swift_tests
       weight: 9
+    - name: Early Flake Detection
+      url: tests/early_flake_detection
+      parent: tests
+      identifier: tests_early_flake_detection
+      weight: 10
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 11
+      weight: 12
     - name: Intelligent Test Runner
       url: intelligent_test_runner/
       pre: intelligent-test-runner
@@ -3606,6 +3666,11 @@ menu:
       parent: intelligent_test_runner_setup
       identifier: intelligent_test_runner_setup_java
       weight: 105
+    - name: Ruby
+      url: intelligent_test_runner/setup/ruby/
+      parent: intelligent_test_runner_setup
+      identifier: intelligent_test_runner_setup_ruby
+      weight: 106
     - name: How It Works
       url: intelligent_test_runner/how_it_works/
       parent: intelligent_test_runner
@@ -4117,26 +4182,31 @@ menu:
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
       weight: 603
+    - name: Default Grouping
+      url: logs/error_tracking/default_grouping
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_default_grouping
+      weight: 604
     - name: Custom Grouping
       url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
-      weight: 604
+      weight: 605
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
-      weight: 605
+      weight: 606
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 606
-    - name: Exclude Logs
-      url: logs/error_tracking/excluding_logs
-      parent: log_management_error_tracking
-      identifier: log_management_error_tracking_excluding_logs
       weight: 607
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_troubleshooting
+      weight: 609
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -4290,6 +4360,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_workload_security
       weight: 10010
+    - name: CSM Agentless Scanning
+      url: security/cloud_security_management/setup/agentless_scanning
+      parent: csm_setup
+      identifier: csm_setup_agentless_scanning
+      weight: 10015
     - name: Agent
       url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
       parent: csm_setup_cloud_workload_security
@@ -4385,16 +4460,21 @@ menu:
       parent: csm
       identifier: vulnerabilities
       weight: 5
+    - name: Agentless  Scanning
+      url: security/cloud_security_management/agentless_scanning
+      parent: csm
+      identifier: csm_agentless
+      weight: 6
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
       identifier: csm_default_rules
-      weight: 6
+      weight: 7
     - name: Review and Remediate
       url: security/cloud_security_management/review_remediate
       parent: csm
       identifier: csm_review_remediate
-      weight: 7
+      weight: 8
     - name: Mute Issues
       url: security/cloud_security_management/review_remediate/mute_issues
       parent: csm_review_remediate
@@ -4414,7 +4494,7 @@ menu:
       url: security/cloud_security_management/severity_scoring/
       parent: csm
       identifier: csm_severity_scoring
-      weight: 10
+      weight: 9
     - name: Guides
       url: security/cloud_security_management/guide/
       parent: csm
@@ -4560,11 +4640,11 @@ menu:
       parent: appsec_threats
       identifier: attack_summary_overview
       weight: 710
-    - name: Attackers Explorer
+    - name: Attacker Explorer
       url: security/application_security/threats/attacker-explorer/
       parent: appsec_threats
       identifier: threats_attackers
-      weight: 711      
+      weight: 711
     - name: API Security Inventory
       url: security/application_security/api-inventory/
       parent: application_security
@@ -5169,16 +5249,26 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_mobile
       weight: 803
+    - name: Default Grouping
+      url: real_user_monitoring/error_tracking/default_grouping
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_default_grouping
+      weight: 805
     - name: Custom Grouping
       url: real_user_monitoring/error_tracking/custom_grouping
       parent: rum_error_tracking
       identifier: rum_error_tracking_custom_grouping
-      weight: 804
+      weight: 806
     - name: Identify Suspect Commits
       url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
-      weight: 805
+      weight: 807
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_troubleshooting
+      weight: 808
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum

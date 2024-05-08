@@ -21,7 +21,7 @@ This document walks you through the following steps to set up the Observability 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Log Volume Control** use case to create a new pipeline.
+1. Select the **Log Volume Control** template to create a new pipeline.
 1. Select **Sumo Logic** as the source.
 
 ### Set up the destination
