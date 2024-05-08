@@ -2,6 +2,8 @@
 title: Datadog Extension for Visual Studio
 kind: documentation
 is_beta: true
+aliases:
+- '/developers/ide_integrations/visual_studio/'
 further_reading:
 - link: "/getting_started/profiler/"
   tag: "Documentation"
@@ -21,25 +23,25 @@ further_reading:
 
 The Datadog extension for Visual Studio helps you find and fix bugs, security issues, and performance bottlenecks based on real-time observability data from your services and runtime environments.
 
-{{< img src="/developers/ide_integrations/visual_studio/datadog-for-visual-studio.png" alt="Datadog extension for Visual Studio">}}
+{{< img src="/developers/ide_plugins/visual_studio/datadog-for-visual-studio.png" alt="Datadog extension for Visual Studio">}}
 
 ### Code insights
 
 Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], [Flaky Tests][10], and [Watchdog][7] profiling insights without leaving Visual Studio.
 
-{{< img src="/developers/ide_integrations/visual_studio/code-insights.png" alt="The Code Insights view" >}}
+{{< img src="/developers/ide_plugins/visual_studio/code-insights.png" alt="The Code Insights view" >}}
 
 ### Continuous Profiler
 
 Analyze and improve the performance of your applications with real-time profiling metrics for CPU, Memory, I/O, and others.
 
-{{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Code Insights view">}}
+{{< img src="/developers/ide_plugins/visual_studio/top-list.png" alt="The Code Insights view">}}
 
 ### Logs navigation
 
 You can navigate to the [Log Explorer][18] on the Datadog platform directly from your C# source files. Look for the clickable icon preceding message strings from log statements within your source code:
 
-{{< img src="/developers/ide_integrations/visual_studio/logs-navigation.png" alt="A source file showing log lines with clickable icons." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/visual_studio/logs-navigation.png" alt="A source file showing log lines with clickable icons." style="width:100%;" >}}
 
 Clicking the icon opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
 
@@ -47,7 +49,7 @@ Clicking the icon opens the **Log Explorer** with a query that matches the logge
 
 Navigate from Datadog to your source code with one click.
 
-{{< img src="/developers/ide_integrations/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button.">}}
+{{< img src="/developers/ide_plugins/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button.">}}
 
 ## Getting started
 
