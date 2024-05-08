@@ -1,6 +1,6 @@
 ---
 core_product:
-- 보안
+- security
 - csm
 title: 요구 사항
 ---
