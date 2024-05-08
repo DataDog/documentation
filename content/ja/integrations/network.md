@@ -29,7 +29,7 @@ draft: false
 git_integration_title: ネットワーク
 integration_id: システム
 integration_title: Network
-integration_version: 3.0.0
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -47,7 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Web
-  - Category::Network
+  - Category::ネットワーク
   configuration: README.md#Setup
   description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
   media: []
@@ -56,6 +56,7 @@ tile:
   title: Network
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Network ダッシュボード][1]
@@ -64,11 +65,11 @@ tile:
 
 ネットワークチェックは、ホストオペレーティングシステムから TCP/IP 統計を収集します。
 
-## セットアップ
+## 計画と使用
 
 以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
 
-### インストール
+### インフラストラクチャーリスト
 
 ネットワークチェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -82,7 +83,7 @@ sudo modprobe nf_conntrack_ipv6
 
 *注*: Agent イメージに conntrack バイナリをインストールする必要がある場合があります。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Agent はデフォルトでネットワークチェックを有効にしますが、チェックを自分で構成する場合は、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `network.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル network.d/conf.yaml][4] を参照してください。
 
@@ -157,23 +158,23 @@ spec:
 
 [Agent の `status` サブコマンドを実行][8]し、Checks セクションで `network` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "network" >}}
 
 
 **注**: `system.net.conntrack` メトリクスは Agent v6.12 以降で使用できます。詳細については、[CHANGELOG][10] を参照してください。
 
-### イベント
+### ヘルプ
 
 ネットワークチェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 ネットワークチェックには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 - [Datadog API への TCP/UDP ホストメトリクスの送信][11]
 
