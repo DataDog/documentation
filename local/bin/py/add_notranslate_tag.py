@@ -19,13 +19,15 @@ def get_bearer_authorization_header():
     return {'Authorization': f'Bearer {api_key}'}
 
 # Build payload for updating resource string
-def build_payload(string_id):
+def build_payload(string_id,tag=None):
+    tagArr = []
+    if(tag is not None):
+        tagArr.append(tag)
+        
     payload = {
         "data": {
             "attributes": {
-                "tags": [
-                    "notranslate"
-                ]
+                "tags": tagArr
             },
             "id": string_id,
             "type": "resource_strings"
@@ -34,12 +36,11 @@ def build_payload(string_id):
     return json.dumps(payload)
 
 # Update resource string
-def update_resource_string(string_id):
+def update_resource_string(string_id,payload):
     try:
         url = f"{api_url}/resource_strings/{string_id}"
         headers = get_bearer_authorization_header()
         headers['Content-Type'] = 'application/vnd.api+json'
-        payload = build_payload(string_id)
         requests.patch(url, headers=headers, data=payload)
     except requests.exceptions.RequestException as e:
         print(e)
@@ -63,7 +64,8 @@ def iterate_collection(collection):
         key_parts = entry['attributes']['key'].split('.') # assumption that the last value in array will be the key name
         key_val = key_parts[len(key_parts) - 1]
         if key_val != 'name':
-            update_resource_string(string_id)
+            update_resource_string(string_id,build_payload(string_id)) # clear out existing tags
+            update_resource_string(string_id,build_payload(string_id,'notranslate')) # add notranslate tag
 
 
 # Get string collection and store as JSON object
