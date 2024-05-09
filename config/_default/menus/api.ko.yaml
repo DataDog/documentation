@@ -268,8 +268,8 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 인증
-    url: '#validate-api-key'
+    parent: authentication
+    url: ''
   - generated: true
     identifier: azure-integration
     name: Azure 통합
