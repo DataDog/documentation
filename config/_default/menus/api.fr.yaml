@@ -211,7 +211,7 @@ menu:
     name: Vérifier qu'une fonction AWS Lambda existe
     params:
       operationids:
-      - CheckAWSLogsLambdaAsync
+      - ''
       order: 7
       unstable: []
       versions:
