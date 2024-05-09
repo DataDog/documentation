@@ -275,7 +275,7 @@ menu:
     name: Azure 통합
     url: /api/latest/azure-integration/
   - generated: true
-    identifier: azure-integration-update-azure-integration-host-filters
+    identifier: ''
     name: Azure 통합 호스트 필터 업데이트
     params:
       operationids:
