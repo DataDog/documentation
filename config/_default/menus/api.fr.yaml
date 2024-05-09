@@ -3514,7 +3514,7 @@ menu:
     name: Récupérer l'utilisation horaire pour les appareils SNMP
     params:
       operationids:
-      - GetUsageSNMP
+      - GetUsageNetworkFlows
       order: 24
       unstable: []
       versions:
