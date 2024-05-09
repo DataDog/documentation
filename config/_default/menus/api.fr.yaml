@@ -141,7 +141,7 @@ menu:
       versions:
       - v1
     parent: aws-integration
-    url: ''
+    url: '#create-an-aws-integration'
   - generated: true
     identifier: aws-integration-list-all-aws-integrations
     name: Énumérer toutes les intégrations AWS
