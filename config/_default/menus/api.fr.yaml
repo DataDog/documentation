@@ -13,7 +13,7 @@ menu:
     parent: API overview
     url: /api/latest/scopes/
     weight: 6
-  - identifier: ''
+  - identifier: rate-limits
     name: Limites de débit
     parent: API overview
     url: /api/latest/rate-limits/
