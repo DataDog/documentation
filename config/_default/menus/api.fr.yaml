@@ -3474,11 +3474,11 @@ menu:
     parent: usage-metering
     url: '#get-hourly-usage-for-synthetics-browser-checks'
   - generated: true
-    identifier: usage-metering-get-hourly-usage-for-profiled-hosts
+    identifier: usage-metering-get-hourly-usage-for-synthetics-api-checks
     name: Récupérer l'utilisation horaire pour les checks API Synthetic
     params:
       operationids:
-      - GetUsageSyntheticsAPI
+      - GetUsageProfiling
       order: 16
       unstable: []
       versions:
