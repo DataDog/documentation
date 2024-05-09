@@ -235,7 +235,7 @@ menu:
     name: Énumérer toutes les intégrations de logs AWS
     params:
       operationids:
-      - ListAWSLogsIntegrations
+      - ''
       order: 1
       unstable: []
       versions:
