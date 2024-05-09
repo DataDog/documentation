@@ -111,7 +111,7 @@ All integrations must include the following:
 * Out-of-the-box Integration Dashboard
 * 3 or more images for your tile
 * OAuth - for API Integrations only
-* Log pipeline - If your integration is sending in logs
+* A log pipeline - If your integration sends logs to Datadog
 
 ## Further reading
 
