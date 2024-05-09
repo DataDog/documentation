@@ -10,7 +10,7 @@ further_reading:
   text: "Building Better Dashboards"
 ---
 
-## Overview
+## Overview 
 
 Whether you are using metrics, logs, traces, monitors, dashboards, notebooks, etc., all graphs in Datadog have the same basic functionality. This page describes querying with the graphic editor. Advanced users can create and edit graphs with JSON. To learn more, see [Graphing with JSON][1].
 
