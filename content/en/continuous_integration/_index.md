@@ -52,11 +52,11 @@ CI Visibility helps developers understand the causes of pipeline disruptions and
 
 ## Improve pipeline reliability and create traces
 
-CI Visibility helps you troubleshoot pipeline failures and broken builds by connecting the most significant development outages to the commits that caused them. You can instrument your pipelines and generate traces from your CI frameworks as they execute, enabling deeper insights into pipeline performance.
+CI Visibility helps you troubleshoot pipeline failures and broken builds by connecting the most significant development outages to the commits that caused them. You can instrument your pipelines and trace them as they execute, enabling deeper insights into pipeline performance.
 
 ## Increase efficiency through seamless integrations
 
-Datadog integrates with a variety of CI providers to collect metrics that track the performance of your CI pipelines from the initial commit to deployment. These metrics are used to identify performance trends and improvement opportunities.
+Datadog integrates with a variety of CI providers to collect metrics that track the performance of your CI pipelines from commit to deployment. These metrics are used to identify performance trends and improvement opportunities.
 
 {{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
 
