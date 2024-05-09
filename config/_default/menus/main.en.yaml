@@ -1354,66 +1354,71 @@ menu:
       parent: monitor_types
       identifier: monitor_types_auditlogs
       weight: 205
+    - name: Change
+      url: monitors/types/change-alert/
+      parent: monitor_types
+      identifier: monitor_types_change
+      weight: 206
     - name: CI
       url: monitors/types/ci/
       parent: monitor_types
       identifier: monitor_types_ci
-      weight: 206
+      weight: 207
     - name: Cloud Cost
       url: monitors/types/cloud_cost/
       parent: monitor_types
       identifier: monitor_types_cloud_cost
-      weight: 207
+      weight: 208
     - name: Composite
       url: monitors/types/composite/
       parent: monitor_types
       identifier: monitor_types_composite
-      weight: 208
+      weight: 209
     - name: Database Monitoring
       url: monitors/types/database_monitoring/
       parent: monitor_types
       identifier: monitor_types_database_monitoring
-      weight: 209
+      weight: 210
     - name: Error Tracking
       url: monitors/types/error_tracking/
       parent: monitor_types
       identifier: monitor_types_error_tracking
-      weight: 210
+      weight: 211
     - name: Event
       url: monitors/types/event/
       parent: monitor_types
       identifier: monitor_types_event
-      weight: 211
+      weight: 212
     - name: Forecast
       url: monitors/types/forecasts/
       parent: monitor_types
       identifier: monitor_types_forecasts
-      weight: 212
+      weight: 213
     - name: Integration
       url: monitors/types/integration/
       parent: monitor_types
       identifier: monitor_types_integration
-      weight: 213
+      weight: 214
     - name: Live Process
       url: monitors/types/process/
       parent: monitor_types
       identifier: monitor_types_process
-      weight: 214
+      weight: 215
     - name: Logs
       url: monitors/types/log/
       parent: monitor_types
       identifier: monitor_types_log
-      weight: 215
+      weight: 216
     - name: Network
       url: monitors/types/network/
       parent: monitor_types
       identifier: monitor_types_network
-      weight: 216
+      weight: 217
     - name: Network Performance
       url: monitors/types/network_performance/
       parent: monitor_types
       identifier: monitor_types_network_performance
-      weight: 217
+      weight: 218
     - name: Outlier
       url: monitors/types/outlier/
       parent: monitor_types
@@ -1423,27 +1428,27 @@ menu:
       url: monitors/types/process_check/
       parent: monitor_types
       identifier: monitor_types_process_check
-      weight: 219
+      weight: 220
     - name: Real User Monitoring
       url: monitors/types/real_user_monitoring/
       parent: monitor_types
       identifier: monitor_types_rum
-      weight: 220
+      weight: 221
     - name: Service Check
       url: monitors/types/service_check/
       parent: monitor_types
       identifier: monitor_types_service_check
-      weight: 221
+      weight: 222
     - name: SLO Alerts
       url: monitors/types/slo/
       parent: monitor_types
       identifier: monitor_types_slo
-      weight: 222
+      weight: 223
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 223
+      weight: 224
     - name: Notifications
       url: monitors/notify/
       parent: alerting

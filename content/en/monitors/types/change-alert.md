@@ -1,7 +1,9 @@
 ---
-title: Change alert monitors
-kind: Guide
+title: Change Alert Monitor
+kind: Documentation
 disable_toc: false
+aliases:
+- monitors/guide/change-alert
 further_reading:
 - link: "/monitors/types/metric/?tab=change#choose-the-detection-method"
   tag: "Documentation"
@@ -23,11 +25,15 @@ Here is a breakdown of how monitors with the change detection method work:
 1. Aggregation is applied over the query in (3) which returns a single value.
 1. The threshold defined in **Set alert conditions** is compared to the single value returned in (4).
 
+## Monitor creation
+
+To create a [Change Alert monitor][9] in Datadog, use the main navigation: *Monitors --> New Monitor --> Change*.
+
 ## Evaluation conditions
 
 Here are the different options that you need to configure in a change alert monitor.
 
-{{< img src="/monitors/guide/change-alert/configure_define_the_metrics.png" alt="Configuration options for change alert detection method" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/change-alert/configure_define_the_metrics.png" alt="Configuration options for change alert detection method" style="width:100%;" >}}
 
 The example shows the following alert condition:
 The **average** of the **change** over **1 hour** compared to **5 minutes**
@@ -51,12 +57,16 @@ This determines the way the monitor evaluates as expressed in the formula sectio
 
 In both cases, `Change`, and `% Change` can be either positive or negative. 
 
+## Notifications
+
+For instructions on the **Notify your team** section, see the [Notifications][7] and [Monitor configuration][8] pages.
+
 ## Troubleshooting a change alert evaluation
 
 To verify the results of your change alert evaluation, reconstruct the metric queries with a Notebook. 
 Take this change alert monitor with the following settings. 
 
-{{< img src="monitors/guide/change-alert/example_monitor_config.png" alt="The create monitor page with a change alert selected, evaluating the percent change of the average of the metric system.load.1 over the last 5 minutes compared to the last 30 minutes" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/change-alert/example_monitor_config.png" alt="The create monitor page with a change alert selected, evaluating the percent change of the average of the metric system.load.1 over the last 5 minutes compared to the last 30 minutes" style="width:100%;" >}}
 
 Monitor Query:
 ```pct_change(avg(last_5m),last_30m):<METRIC> > -50```
@@ -75,7 +85,7 @@ This is a break down of the query with the following conditions:
     - Query of data points N minutes ago (this is the normal query + timeshift(-1800)).
     - The timeshift function uses a **negative** duration because you're shifting the data back. Combine these queries along with the % change formula from the table.
     - **Note**: Since this example only has one metric, it's also possible to use a single query (a) and add the formula `((a - timeshift(a, -1800)) / timeshift(a, -1800)) * 100`
-    {{< img src="monitors/guide/change-alert/notebook_query_reconstruct_timeshift.png" alt="The edit screen of a cell in a notebook, titled Reconstruct Change Alert query, configured as a timeseries using the average of the metric system.load.1, from everywhere, with the formula ((a - timeshift(a, -1800)) / timeshift(a, -1800)) * 100 being applied" style="width:100%;" >}}
+    {{< img src="monitors/monitor_types/change-alert/notebook_query_reconstruct_timeshift.png" alt="The edit screen of a cell in a notebook, titled Reconstruct Change Alert query, configured as a timeseries using the average of the metric system.load.1, from everywhere, with the formula ((a - timeshift(a, -1800)) / timeshift(a, -1800)) * 100 being applied" style="width:100%;" >}}
 2. Compare the monitor's history graph with the notebook graph. Are the values comparable?
 3. Apply the aggregation. 
     - To compare your notebook graph to the change alert monitor evaluation, scope your timeframe to match the change alert. 
@@ -88,3 +98,6 @@ This is a break down of the query with the following conditions:
 [1]: /monitors/configuration/#evaluation-window
 [2]: /monitors/manage/status/#investigate-a-monitor-in-a-notebook
 [3]: /dashboards/functions/timeshift/
+[7]: /monitors/notify/
+[8]: /monitors/configuration/?tab=thresholdalert#notify-your-team
+[9]: https://app.datadoghq.com/monitors/create/metric/change
