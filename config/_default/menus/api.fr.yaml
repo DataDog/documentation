@@ -271,7 +271,7 @@ menu:
     parent: authentication
     url: '#validate-api-key'
   - generated: true
-    identifier: ''
+    identifier: azure-integration
     name: Intégration Azure
     url: /api/latest/azure-integration/
   - generated: true
