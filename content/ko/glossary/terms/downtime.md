@@ -2,7 +2,7 @@
 core_product:
 - alerts
 - slos
-- 인시던트 관리
+- incident management
 title: 다운타임
 ---
 다운타임은 모니터의 경고 및 알림이 음소거되도록 미리 설정된 기간입니다.
