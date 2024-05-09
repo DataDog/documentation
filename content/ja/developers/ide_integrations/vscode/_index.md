@@ -8,6 +8,8 @@ further_reading:
   tag: Documentation
   text: Continuous Testing Tunnel について
 is_beta: true
+aliases:
+- '/ja/developers/ide_integrations/vscode/'
 kind: documentation
 title: Visual Studio Code の Datadog 拡張機能
 ---
@@ -20,7 +22,7 @@ title: Visual Studio Code の Datadog 拡張機能
 
 Visual Studio Code の Datadog 拡張機能は、IDE 内で直接[ローカル環境での Synthetic HTTP テストとブラウザテストを実行する][1]ことができ、これによりコードの信頼性を高めることができます。この拡張機能により、コードの変更に起因する潜在的な問題が、コードが本番環境にデプロイされてエンドユーザーに影響を与える前に特定され、対処されることを保証します。
 
-{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="Visual Studio Code での Datadog 拡張機能" style="width:100%;" >}}
+{{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="Visual Studio Code での Datadog 拡張機能" style="width:100%;" >}}
 
 Datadog 拡張機能を利用することで、以下のことが可能になります。
 
@@ -46,7 +48,7 @@ Visual Studio Marketplace から [Datadog 拡張機能][6]をインストール�
 3. ローカル環境でテストを実行するには、Synthetic テストの構成を更新して、開始 URL の変換を有効にし、**Settings** ページで `localhost` URL を指定します。
 4. テストを実行します。
 
-{{< img src="developers/ide_integrations/vscode/test_configuration_modified_starturl.png" alt="Synthetic テストの開始 URL をローカルホストの URL に指定できる Test Configuration パネルと Settings ページ" style="width:100%;" >}}
+{{< img src="developers/ide_plugins/vscode/test_configuration_modified_starturl.png" alt="Synthetic テストの開始 URL をローカルホストの URL に指定できる Test Configuration パネルと Settings ページ" style="width:100%;" >}}
 
 ## アクセス許可
 
