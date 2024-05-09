@@ -308,7 +308,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: ''
+    parent: azure-integration
     url: '#create-an-azure-integration'
   - generated: true
     identifier: azure-integration-list-all-azure-integrations
