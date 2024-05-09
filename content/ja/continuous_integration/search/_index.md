@@ -97,7 +97,7 @@ Pipeline Visibility は、CI ジョブログに基づいてパイプラインエ
 [103]: /ja/continuous_integration/pipelines/github/#enable-log-collection
 [104]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
 [105]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
-[106]: /ja/account_management/teams/
+[106]: /ja/account_management/teams/ 
 [107]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [108]: https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform
 
@@ -168,9 +168,10 @@ Default Branches ビューでは、Branches ビューと似たような情報が
 [101]: https://app.datadoghq.com/ci/test-services
 [102]: https://app.datadoghq.com/ci/test-services?view=branches
 [103]: /ja/glossary/#test-service
-[104]: /ja/glossary/#flaky-test
-[105]: /ja/glossary/#test-regression
-[106]: https://app.datadoghq.com/ci/test-services?view=default-branches
+[104]: /ja/glossary/#wall-time
+[105]: /ja/glossary/#flaky-test
+[106]: /ja/glossary/#test-regression
+[107]: https://app.datadoghq.com/ci/test-services?view=default-branches
 
 {{% /tab %}}
 {{< /tabs >}}

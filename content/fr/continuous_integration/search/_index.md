@@ -94,13 +94,13 @@ Pipeline Visibility offre des analyses générées par l'IA sur les erreurs de p
 [103]: /fr/continuous_integration/pipelines/github/#enable-log-collection
 [104]: /fr/continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
 [105]: /fr/continuous_integration/pipelines/jenkins#enable-job-log-collection
-[106]: /fr/account_management/teams/
+[106]: /fr/account_management/teams/ 
 [107]: /fr/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 
 {{% /tab %}}
 {{% tab "Test" %}}
 
-La [page Tests][101] permet aux développeurs de surveiller leurs résultats de test.
+La [page Tests][101] permet aux développeurs de surveiller leurs résultats de test. 
 
 {{< img src="/continuous_integration/tests.png" text="Page CI Tests" style="width:100%" >}}
 
@@ -164,9 +164,10 @@ Les informations fournies dans la vue Default Branches sont similaires à celles
 [101]: https://app.datadoghq.com/ci/test-services
 [102]: https://app.datadoghq.com/ci/test-services?view=branches
 [103]: /fr/glossary/#test-service
-[104]: /fr/glossary/#flaky-test
-[105]: /fr/glossary/#test-regression
-[106]: https://app.datadoghq.com/ci/test-services?view=default-branches
+[104]: /fr/glossary/#wall-time
+[105]: /fr/glossary/#flaky-test
+[106]: /fr/glossary/#test-regression
+[107]: https://app.datadoghq.com/ci/test-services?view=default-branches
 
 {{% /tab %}}
 {{< /tabs >}}
