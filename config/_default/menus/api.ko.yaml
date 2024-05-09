@@ -3514,7 +3514,7 @@ menu:
     name: SNMP 장치에 대한 시간당 사용량 받기
     params:
       operationids:
-      - GetUsageSNMP
+      - ''
       order: 24
       unstable: []
       versions:
