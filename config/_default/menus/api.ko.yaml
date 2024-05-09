@@ -3423,7 +3423,7 @@ menu:
       versions:
       - v2
     parent: usage-metering
-    url: '#get-monthly-cost-attribution'
+    url: ''
   - generated: true
     identifier: usage-metering-get-active-billing-dimensions-for-cost-attribution
     name: 비용 속성을 위한 활성 빌링 차원 얻기
