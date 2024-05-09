@@ -163,7 +163,7 @@ For instance, you can:
 
 - Visualize data flow from your internal Kubernetes cluster to `server_service:aws.s3` in the [Network Map][2].
 - Pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
-- Validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic performance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab.
+- Validate that their request is successful by analyzing S3 performance metrics, which are correlated with traffic performance directly in the side panel for a given dependency, under the *Integration Metrics* tab.
 
 NPM automatically maps:
 
