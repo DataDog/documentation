@@ -20,7 +20,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
       tag: Blog
       text: 'Add a Log Explorer url to your clipboard'
-    - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
+    - link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
       tag: "Blog"
       text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"  
 ---

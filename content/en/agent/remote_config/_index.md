@@ -51,6 +51,9 @@ The following diagram illustrates how Remote Configuration works:
 ## Supported products and feature capabilities
 The following products and features are supported with Remote Configuration:
 
+### Fleet Automation
+**[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
+
 ### Application Security Management (ASM)
 
 - **1-click ASM activation**: Enable ASM in 1-click from the Datadog UI.
@@ -114,11 +117,11 @@ To enable Remote Configuration:
 
 To opt-out of Remote Configuration use, see the [opt-out section][23].
 
-6. Select an existing API key or create a new API key, and enable the Remote Configuration capability on the key. If your new organization fulfills the conditions mentioned in step 3, Remote Configuration is enabled on your API keys be default.
+4. Select an existing API key or create a new API key, and enable the Remote Configuration capability on the key. If your new organization fulfills the conditions mentioned in step 3, Remote Configuration is enabled on your API keys be default.
 
    {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
 
-7. Update your Agent configuration file:
+5. Update your Agent configuration file:
 **Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. To opt-out of Remote Configuration use, see the [opt-out section][23].
 
 {{< tabs >}}
@@ -302,3 +305,4 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [24]: https://app.datadoghq.com/organization-settings/api-keys
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
+[27]: /agent/fleet_automation/#send-a-remote-flare

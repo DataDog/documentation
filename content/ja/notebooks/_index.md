@@ -27,7 +27,7 @@ title: ノートブック
 
 ## はじめに
 
-1. メインナビゲーションの **Notebooks > New Notebook** から、[新しいノートブック][1]を構築します。
+1. [Notebook List][1] ページで、**+ New Notebook** をクリックします。
 
 2. **Save Notebook** ボタンをクリックします。</br>
   **注**: 新しいノートブックは、デフォルトでは保存されません。
@@ -68,15 +68,13 @@ title: ノートブック
 
 ノートブックをドキュメントエディタにコピーするには、**Copy formatted contents** をクリックします。Google ドキュメントや Microsoft Word などのドキュメントエディタに貼り付けて、グラフを含むノートブックのコンテンツを元の形式で表示します。
 
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Google ドキュメントでのノートブックのエクスポートの例"  style="width:100%;">}}
-
 ### ノートブック JSON のインポートまたはエクスポート
 
 ノートブックの定義を含む JSON ファイルをダウンロードするには、**Export Notebook JSON** を使用します。**Import Notebook JSON** を使用すると、ノートブックのすべてのコンテンツがアップロード済みの JSON コンテンツで上書きされます。
 
 ### 個々のセルへのリンク設定
 
-セルの **Share** メニューの **Link directly to cell** をクリックすると、特定のセルの URL をコピーすることができます。直接リンクは、視覚化のセルと Markdown のセルの両方で利用できます。
+特定のセルの URL をコピーするには、セルの **Share** メニューをクリックし、**Link directly to cell** を選択します。直接リンクは、視覚化セルとマークダウンセルの両方で利用できます。
 
 ユーザーが特定のセルの URL にアクセスすると、ノートブックが開き、ビューポートの上部にセルが表示されます。絶対リンクのため、セルの URL はノートブック内で新しい位置に移されたとしても、変わることはありません。
 
@@ -84,7 +82,7 @@ title: ノートブック
 
 {{< img src="notebooks/notebook_list.png" alt="選択したノートブックのセルの種類をプレビューするノートブック一覧" style="width:100%;">}}
 
-[ノートブック一覧][2]で、以前に作成したノートブックの表示と検索ができます。各ノートブックの名前、作成者、最終更新日が表示されます。ノートブックは以下のグループに分けられます。
+[ノートブック一覧][1]で、以前に作成したノートブックの表示と検索ができます。各ノートブックの名前、作成者、最終更新日が表示されます。ノートブックは以下のグループに分けられます。
 
 * **Your Notebooks**: 自分が作成したノートブック。
 * **All Notebooks**: 組織内のすべてのノートブック。
@@ -93,10 +91,10 @@ title: ノートブック
 任意のノートブックのプレビューアイコンにカーソルを合わせると、ウィジェットタイプや Markdown を含むコンテンツのプレビューが表示されます。[ビューモード](#view-mode)でノートブックを開くには、ノートブックにカーソルを合わせ、右側にある **Open notebook in view mode** をクリックします。
 
 ## テンプレートギャラリー
-[テンプレートギャラリー][3]では、新しいノートブックを作成するための、すぐに使えるテンプレートが紹介されています。テンプレートには、インシデントレスポンスのポストモーテム、インシデントレポート、SLO 仕様が含まれます。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
+[テンプレートギャラリー][2]では、新しいノートブックを作成するための、すぐに使えるテンプレートが紹介されています。テンプレートには、インシデントレスポンスのポストモーテム、インシデントレポート、SLO 仕様が含まれます。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
 
 ## バージョン履歴
-ノートブックから ** Configure** アイコンをクリックし、**Version history** をクリックすると、バージョン履歴のサイドパネルが表示されます。ノートブックのバージョン履歴をプレビューしたり、復元したり、複製したりすることができます。詳しくは、[バージョン履歴ガイド][4]を参照してください。
+ノートブックから **Configure** アイコンをクリックし、**Version history** をクリックすると、バージョン履歴のサイドパネルが表示されます。ノートブックのバージョン履歴をプレビューしたり、復元したり、複製したりすることができます。詳しくは、[バージョン履歴ガイド][3]を参照してください。
 
 ## ノートブックの構成
 
@@ -138,7 +136,7 @@ title: ノートブック
 
 ### テンプレート変数
 
-ノートブックはテンプレート変数をサポートしています。テンプレート変数の値を追加・選択することで、視覚化した内容を動的にスコープすることができます。詳しくは、[テンプレート変数][5]を参照してください。
+ノートブックはテンプレート変数をサポートしています。テンプレート変数の値を追加・選択することで、視覚化した内容を動的にスコープすることができます。詳しくは、[テンプレート変数][4]を参照してください。
 
 ### セルの構成
 
@@ -162,26 +160,26 @@ title: ノートブック
 
 #### コンテンツの種類
 
-ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][6] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][7] でフォーマットされたダイアグラムもサポートしています。
+ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][5] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][6] でフォーマットされたダイアグラムもサポートしています。
 
 ノートブック内のグラフは、Datadog のすべてのデータソースに対応しています（メトリクス、ログイベント、インデックス化されたスパン、ライブプロセス、ネットワークトラフィック、RUM イベント、プロファイリングのメトリクス、セキュリティシグナルなど）。グラフは、Datadog のクエリエディターで作成します。ノートブックは以下に対応しています。
 
-* [時系列][8]
-* [トップリスト][9]
-* [Table][10]
-* [ヒートマップ][11]
-* [ディストリビューション][12]
-* [リスト][13]
-* [クエリ値][14]
-* [ファネル][15]
-* [パイ][16]
-* [SLO サマリー][17]
+* [時系列][7]
+* [トップリスト][8]
+* [テーブル][9]
+* [ヒートマップ][10]
+* [ディストリビューション][11]
+* [リスト][12]
+* [クエリ値][13]
+* [ファネル][14]
+* [パイ][15]
+* [SLO][16]
 
 ### 編集アクセス権の制限
 
 デフォルトでは、すべてのユーザーがノートブックにフルアクセスできます。
 
-きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][18]を制限することができます。
+きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][17]を制限することができます。
 1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
 1. **Permissions** を選択します。
 1. **Restrict Access** をクリックします。
@@ -197,27 +195,26 @@ title: ノートブック
 1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
 1. **Permissions** を選択します。
 1. **Restore Full Access** をクリックします。
-1. **保存**をクリックします。
+1. **Save** をクリックします。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/notebook
-[2]: https://app.datadoghq.com/notebook/list
-[3]: https://app.datadoghq.com/notebook/template-gallery
-[4]: /ja/notebooks/guide/version_history
-[5]: /ja/dashboards/template_variables/
-[6]: https://daringfireball.net/projects/markdown/
-[7]: https://mermaid.js.org/
-[8]: /ja/dashboards/widgets/timeseries/
-[9]: /ja/dashboards/widgets/top_list/
-[10]: /ja/dashboards/widgets/table/
-[11]: /ja/dashboards/widgets/heatmap/
-[12]: /ja/dashboards/widgets/distribution/
-[13]: /ja/dashboards/widgets/list/
-[14]: /ja/dashboards/widgets/query_value/
-[15]: /ja/dashboards/widgets/funnel/
-[16]: /ja/dashboards/widgets/pie_chart/
-[17]: /ja/dashboards/widgets/slo/
-[18]: /ja/account_management/rbac/
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://app.datadoghq.com/notebook/template-gallery
+[3]: /ja/notebooks/guide/version_history
+[4]: /ja/dashboards/template_variables/
+[5]: https://daringfireball.net/projects/markdown/
+[6]: https://mermaid.js.org/
+[7]: /ja/dashboards/widgets/timeseries/
+[8]: /ja/dashboards/widgets/top_list/
+[9]: /ja/dashboards/widgets/table/
+[10]: /ja/dashboards/widgets/heatmap/
+[11]: /ja/dashboards/widgets/distribution/
+[12]: /ja/dashboards/widgets/list/
+[13]: /ja/dashboards/widgets/query_value/
+[14]: /ja/dashboards/widgets/funnel/
+[15]: /ja/dashboards/widgets/pie_chart/
+[16]: /ja/dashboards/widgets/slo/
+[17]: /ja/account_management/rbac/
