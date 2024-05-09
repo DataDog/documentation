@@ -3471,10 +3471,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: users
+    parent: usage-metering
     url: '#get-hourly-usage-for-synthetics-browser-checks'
   - generated: true
-    identifier: usage-metering-get-hourly-usage-for-synthetics-api-checks
+    identifier: usage-metering-get-hourly-usage-for-profiled-hosts
     name: Récupérer l'utilisation horaire pour les checks API Synthetic
     params:
       operationids:
