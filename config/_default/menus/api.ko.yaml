@@ -217,7 +217,7 @@ menu:
       versions:
       - v1
     parent: aws-logs-integration
-    url: '#check-that-an-aws-lambda-function-exists'
+    url: ''
   - generated: true
     identifier: aws-logs-integration-add-aws-log-lambda-arn
     name: AWS 로그 람다 ARN 추가
