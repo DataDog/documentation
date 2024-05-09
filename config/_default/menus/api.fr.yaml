@@ -3522,7 +3522,7 @@ menu:
     parent: usage-metering
     url: '#get-hourly-usage-for-snmp-devices'
   - generated: true
-    identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
+    identifier: usage-metering-get-monthly-usage-attribution
     name: Récupérer l'utilisation horaire pour le scanner de données sensibles
     params:
       operationids:
