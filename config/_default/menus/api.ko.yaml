@@ -5,12 +5,12 @@ menu:
     url: /api/latest/
     weight: -10
   - name: API 사용
-    parent: API 개요
+    parent: API overview
     url: /api/latest/using-the-api/
     weight: 5
-  - identifier: API 범위
+  - identifier: API Scopes
     name: 인증 범위
-    parent: API 개요
+    parent: API overview
     url: /api/latest/scopes/
     weight: 6
   - identifier: rate-limits
