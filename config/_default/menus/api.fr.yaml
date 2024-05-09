@@ -3435,7 +3435,7 @@ menu:
       - v2
       versions:
       - v2
-    parent: users
+    parent: usage-metering
     url: '#get-active-billing-dimensions-for-cost-attribution'
   - generated: true
     identifier: usage-metering-get-all-custom-metrics-by-hourly-average
