@@ -3459,14 +3459,14 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: users
+    parent: usage-metering
     url: '#get-hourly-usage-for-custom-metrics'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-synthetics-browser-checks
     name: Récupérer l'utilisation horaire pour les checks Browser Synthetic
     params:
       operationids:
-      - GetUsageSyntheticsBrowser
+      - GetUsageRumUnits
       order: 17
       unstable: []
       versions:
