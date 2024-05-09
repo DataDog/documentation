@@ -183,7 +183,7 @@ menu:
     parent: aws-logs-integration
     url: '#check-permissions-for-log-services'
   - generated: true
-    identifier: aws-logs-integration-enable-an-aws-logs-integration
+    identifier: ''
     name: AWS 로그 통합 활성화
     params:
       operationids:
