@@ -263,7 +263,7 @@ menu:
     name: API 키 검증
     params:
       operationids:
-      - 검증
+      - Validate
       order: 1
       unstable: []
       versions:
