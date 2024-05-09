@@ -139,7 +139,7 @@ In order to filter using these configurations tags, [you must create facets for 
 
 ## Enhance your developer workflow
 
-{{< whatsnext desc="Integrate Test Visibility with tools for reporting code coverage data, enhancing browser tests with Real User Monitoring, and ensuring insights across platforms by streamlining issue identification and issue resolution in your development cycle." >}}
+{{< whatsnext desc="Integrate Test Visibility with tools to report code coverage data, enhance browser tests with RUM, and access insights across platforms by streamlining issue identification and resolution in your development cycle." >}}
 {{< nextlink href="/tests/developer_workflows/" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
 {{< nextlink href="/tests/code_coverage" >}}Learn about Code Coverage{{< /nextlink >}}
 {{< nextlink href="/tests/browser_tests" >}}Instrument Cypress Browser Tests with Browser RUM{{< /nextlink >}}
