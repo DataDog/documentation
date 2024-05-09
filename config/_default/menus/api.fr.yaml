@@ -3520,9 +3520,9 @@ menu:
       versions:
       - v1
     parent: usage-metering
-    url: '#get-hourly-usage-for-snmp-devices'
+    url: '#recuperer-l-utilisation-horaire-pour-les-flux-reseau'
   - generated: true
-    identifier: usage-metering-get-monthly-usage-attribution
+    identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
     name: Récupérer l'utilisation horaire pour le scanner de données sensibles
     params:
       operationids:
