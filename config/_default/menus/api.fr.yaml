@@ -143,7 +143,7 @@ menu:
     parent: aws-integration
     url: '#create-an-aws-integration'
   - generated: true
-    identifier: ''
+    identifier: aws-integration-list-all-aws-integrations
     name: Énumérer toutes les intégrations AWS
     params:
       operationids:
