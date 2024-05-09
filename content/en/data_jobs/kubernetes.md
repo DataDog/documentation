@@ -48,31 +48,31 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 1. Create a file, `datadog-agent.yaml`, that contains the following configuration:
 
    ```yaml
-   kind: DatadogAgent
-   apiVersion: datadoghq.com/v2alpha1
-   metadata:
-     name: datadog
-   spec:
-    features:
+    kind: DatadogAgent
+    apiVersion: datadoghq.com/v2alpha1
+    metadata:
+      name: datadog
+    spec:
+      features:
         apm:
         enabled: true
         hostPortConfig:
-            enabled: true
-            hostPort: 8126
+          enabled: true
+          hostPort: 8126
         admissionController:
-        enabled: true
-        mutateUnlabelled: false
-     global:
-       tags:
-         - 'data_workload_monitoring_trial:true'
-       site: <DATADOG_SITE>
-       credentials:
-         apiSecret:
-           secretName: datadog-secret
-           keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
+          enabled: true
+          mutateUnlabelled: false
+      global:
+        tags:
+          - "data_workload_monitoring_trial:true"
+        site: <DATADOG_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+          appSecret:
+            secretName: datadog-secret
+            keyName: app-key
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 1. Deploy the Datadog Agent with the above configuration file:
