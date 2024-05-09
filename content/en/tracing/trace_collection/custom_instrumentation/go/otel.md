@@ -95,7 +95,7 @@ ctx, span := t.Start(ctx, "read.file")
 span.SetAttributes(attribute.String(ext.ResourceName, "test.json"))
 ```
 
-## Adding tags globally to all spans
+### Adding tags globally to all spans
 
 Add tags to all spans by configuring the tracer with the `WithGlobalTag` option:
 
@@ -103,8 +103,8 @@ Add tags to all spans by configuring the tracer with the `WithGlobalTag` option:
 // Here we can leverage the Datadog tracer options by passing them into the 
 // NewTracerProvider function.
 provider := ddotel.NewTracerProvider(
-ddtracer.WithGlobalTag("datacenter", "us-1"),
-ddtracer.WithGlobalTag("env", "dev"),
+	ddtracer.WithGlobalTag("datacenter", "us-1"),
+	ddtracer.WithGlobalTag("env", "dev"),
 )
 defer provider.Shutdown()
 
@@ -115,7 +115,7 @@ otel.SetTracerProvider(provider)
 t := otel.Tracer("")
 ```
 
-## Setting errors on a span
+### Setting errors on a span
 
 To set an error on a span, use the `setStatus` method like this:
 
@@ -143,12 +143,12 @@ Unlike other Datadog tracing libraries, when tracing Go applications, Datadog re
 // Here we can leverage context.Context to pass in Datadog-specifc start span options,
 // like 'ddtracer.Measured()'
 ctx, span := t.Start(
-ddotel.ContextWithStartOptions(context.Background(), ddtracer.Measured()), "span_name")
+	ddotel.ContextWithStartOptions(context.Background(), ddtracer.Measured()), "span_name")
 
 span.End()
 ```
 
-## Asynchronous traces
+### Asynchronous traces
 
 When working with asynchronous or concurrent operations, it's important to ensure that traces are properly propagated and connected across different execution contexts. Here's an example of how to create and manage asynchronous traces:
 
@@ -165,7 +165,7 @@ func main() {
 }
 ```
 
-## Distributed tracing
+### Distributed tracing
 
 Create a distributed [trace][15] by manually propagating the tracing context:
 

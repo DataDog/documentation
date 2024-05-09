@@ -33,6 +33,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 ## Adding span tags
 
+### Add custom span tags
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
 ```java
@@ -44,7 +45,7 @@ public void doSomething() {
 }
 ```
 
-## Adding tags globally to all spans
+### Adding tags globally to all spans
 
 The `dd.tags` property allows you to set tags across all generated spans for an application. This is useful for grouping stats for your applications, data centers, or any other tags you would like to see in Datadog.
 
@@ -55,7 +56,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 ```
 
-## Setting errors on a root span from a child span
+### Setting errors on a root span from a child span
 
 To set an error on a root span from a child span, you can use the `setStatus` method on the current span like this:
 
@@ -69,7 +70,7 @@ public void doSomething() {
 }
 ```
 
-## Setting tags and errors on a root span from a child span
+### Setting tags and errors on a root span from a child span
 
 This example demonstrates how to set tags and errors on a root span from a child span:
 
@@ -129,7 +130,7 @@ If you have existing @Trace or similar annotations, or prefer to use annotations
 
 Traces may also be created using the OpenTelemetrey `@WithSpan` annotation as described in [Trace annotations](#trace-annotations).
 
-## Trace annotations
+### Trace annotations
 
 Add `@WithSpan` to methods to have them be traced when running OpenTelemetry and the `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
 OpenTelemetry's `@WithSpan` annotation is provided by the `opentelemetry-instrumentation-annotations` dependency.
@@ -146,7 +147,7 @@ public class SessionManager {
 }
 ```
 
-## Creating new spans
+### Manually creating a new span
 
 To manually create new spans within the current trace context:
 
