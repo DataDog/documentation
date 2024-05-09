@@ -155,7 +155,7 @@ menu:
     parent: aws-integration
     url: '#list-all-aws-integrations'
   - generated: true
-    identifier: ''
+    identifier: aws-integration-delete-an-aws-integration
     name: AWS 통합 삭제
     params:
       operationids:
