@@ -22,7 +22,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - メトリクス
-- モニタリング
 - notifications
 dependencies: []
 display_on_public_website: true
@@ -48,7 +47,6 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Category::Metrics
-  - Category::Monitoring
   - Category::Notifications
   configuration: README.md#Setup
   description: Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照
@@ -81,7 +79,7 @@ Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーシ
 2. 名前と API トークンを対応するフィールドに入力します。Pingdom で構成したメトリクスやチェックは、Datadog に収集されます。
 3. Pingdom のチェックのタグを管理します。Pingdom のチェックに追加されたタグは、Datadog のチェックにも自動的に追加されます。`datadog-exclude` タグを追加して、チェックを除外します。
 
-## 収集データ
+## データ収集
 
 ### メトリクス
 {{< get-metrics-from-git "pingdom_v3" >}}
@@ -91,7 +89,7 @@ Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーシ
 
 Pingdom インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 Pingdom インテグレーションは、トランザクションチェックを取得し、それをサービスチェックとしてレポートします。
 
