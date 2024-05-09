@@ -116,8 +116,8 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 [4]: /logs/explorer/visualize/#top-list
 [5]: /logs/explorer/visualize/#timeseries
 [6]: /logs/explorer/visualize/#nested-tables
-[7]: /dashboards/widgets/treemap
-[8]: /dashboards/widgets/pie_chart
+[7]: /dashboards/widgets/graphs/treemap
+[8]: /dashboards/widgets/graphs/pie_chart
 [9]: /logs/explorer/facets/#facet-panel
 [10]: /dashboards/functions/arithmetic
 [11]: /dashboards/functions/interpolation

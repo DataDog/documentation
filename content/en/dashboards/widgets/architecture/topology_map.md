@@ -5,6 +5,7 @@ description: "Displays a map of a service to all of the services that call it, a
 widget_type: "topology_map"
 aliases:
 - /dashboards/widgets/service_map
+- /dashboards/widgets/topology
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

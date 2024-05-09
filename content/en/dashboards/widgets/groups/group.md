@@ -5,6 +5,7 @@ widget_type: group
 description: "Group your widgets together in a dashboard widget."
 aliases:
 - /graphing/widgets/group/
+- /dashboards/widgets/group/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

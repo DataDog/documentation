@@ -90,4 +90,4 @@ For APM deployments, an `env` must be specified. If you have an `env` or `datace
 [12]: /dashboards/functions/#apply-functions-optional
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /logs/explorer/search_syntax/
-[15]: /dashboards/widgets/timeseries/#event-overlay
+[15]: /dashboards/widgets/graphs/timeseries/#event-overlay

@@ -5,6 +5,7 @@ description: "Graph a chosen scope over two different metrics with their respect
 widget_type: "scatterplot"
 aliases:
 - /graphing/widgets/scatter_plot/
+- /dashboards/widgets/scatter_plot/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

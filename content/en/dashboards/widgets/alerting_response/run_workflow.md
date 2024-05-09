@@ -3,6 +3,8 @@ title: Run Workflow Widget
 kind: documentation
 widget_type: run_workflow
 disable_toc: false
+aliases:
+    - /dashboards/widgets/run_workflow/
 further_reading:
 - link: "/service_management/workflows/"
   tag: "Documentation"

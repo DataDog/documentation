@@ -74,7 +74,7 @@ Click **Export** to save your work to a Dashboard or Notebook. You can always co
 [10]: /continuous_integration/pipelines/
 [11]: /continuous_integration/tests/
 [12]: /security/cloud_security_management/misconfigurations/findings/
-[13]: /dashboards/widgets/timeseries/
-[14]: /dashboards/widgets/top_list/
-[15]: /dashboards/widgets/query_value/
-[16]: /dashboards/widgets/geomap/
+[13]: /dashboards/widgets/graphs/timeseries/
+[14]: /dashboards/widgets/graphs/top_list/
+[15]: /dashboards/widgets/graphs/query_value/
+[16]: /dashboards/widgets/graphs/geomap/

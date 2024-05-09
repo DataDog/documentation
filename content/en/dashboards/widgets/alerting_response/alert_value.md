@@ -5,6 +5,7 @@ widget_type: alert_value
 description: "Graph the current value of a metric in any simple-alert metric monitor defined on your system."
 aliases:
 - /graphing/widgets/alert_value/
+- /dashboards/widgets/alert_value/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

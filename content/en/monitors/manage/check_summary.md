@@ -40,4 +40,4 @@ To view your check status on a dashboard, utilize the [Check Status Widget][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/check/summary
-[2]: /dashboards/widgets/check_status/
+[2]: /dashboards/widgets/alerting_response/check_status/

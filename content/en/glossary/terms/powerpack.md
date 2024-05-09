@@ -8,4 +8,4 @@ related_terms:
 ---
 Powerpacks are templated groups of widgets that scale graphing expertise as reusable dashboard building blocks. 
 
-Powerpacks are either preset (created by Datadog, available to all customers) or custom (created by a user, and only available within their organization). For more information, <a href="/dashboards/widgets/powerpack/">see the documentation</a>.
+Powerpacks are either preset (created by Datadog, available to all customers) or custom (created by a user, and only available within their organization). For more information, <a href="/dashboards/widgets/groups/powerpack/">see the documentation</a>.

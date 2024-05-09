@@ -5,6 +5,7 @@ description: "Graph a breakdown of top consuming lines of code (CPU, Memory, ...
 widget_type: "flame_graph"
 aliases:
 - /video-categories/flamegraph/
+- /dashboards/profiling_flame_graph/
 further_reading:
 - link: "/profiler/profile_visualizations/"
   tag: "Documentation"

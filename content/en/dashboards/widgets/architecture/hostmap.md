@@ -5,6 +5,7 @@ widget_type: hostmap
 description: "Display the Datadog host map in your dashboards."
 aliases:
 - /graphing/widgets/hostmap/
+- /dashboards/widgets/hostmap/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

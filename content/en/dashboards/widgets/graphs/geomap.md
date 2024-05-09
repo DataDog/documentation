@@ -4,6 +4,7 @@ kind: documentation
 widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/
+- /dashboards/widgets/geomap/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

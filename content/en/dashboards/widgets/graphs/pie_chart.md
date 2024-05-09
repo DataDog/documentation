@@ -7,7 +7,7 @@ further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
-- link: "/dashboards/widgets/treemap/"
+- link: "/dashboards/widgets/graphs/treemap/"
   tag: "Documentation"
   text: "Treemap Widget"
 ---

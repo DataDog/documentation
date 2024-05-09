@@ -52,7 +52,7 @@ Send monitor alerts and notifications based on significant event queries. To con
 [5]: https://app.datadoghq.com/event/configuration/generate-metrics
 [6]: /service_management/events/explorer/analytics
 [7]: /service_management/events/explorer/
-[8]: /dashboards/widgets/alert_graph/
+[8]: /dashboards/widgets/alerting_response/alert_graph/
 [9]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [10]: /dashboards/change_overlays/
 [11]: /monitors/types/event/

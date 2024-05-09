@@ -469,7 +469,7 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [5]: https://app.datadoghq.com/process
 [6]: /monitors/types/process/
 [7]: https://app.datadoghq.com/monitors#create/live_process
-[8]: /dashboards/widgets/timeseries/#pagetitle
+[8]: /dashboards/widgets/graphs/timeseries/
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
 [11]: /network_monitoring/performance/network_analytics

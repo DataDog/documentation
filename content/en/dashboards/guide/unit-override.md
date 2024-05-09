@@ -57,4 +57,4 @@ Define completely custom units that are not included in the provided list of uni
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/dashboards/widgets/table/
+[1]: https://docs.datadoghq.com/dashboards/widgets/graphs/table/

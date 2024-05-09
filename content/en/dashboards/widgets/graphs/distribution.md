@@ -5,6 +5,7 @@ widget_type: distribution
 description: "Graph a metric distribution aggregated across one or several tags."
 aliases:
 - /graphing/widgets/distribution/
+- /dashboards/widgets/distribution
 further_reading:
 - link: "/metrics/distributions/"
   tag: "Documentation"
@@ -74,7 +75,7 @@ This widget can be used with the **[Dashboards API][3]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/heatmap/
+[1]: /dashboards/widgets/graphs/heatmap/
 [2]: /dashboards/widgets/#full-screen
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

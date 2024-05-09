@@ -121,7 +121,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /dashboards/widgets/timeseries/
+[2]: /dashboards/widgets/graphs/timeseries/
 [3]: /tracing/metrics/metrics_namespace/
 [4]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [5]: /events/

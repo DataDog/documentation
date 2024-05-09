@@ -5,6 +5,7 @@ widget_type: check_status
 description: "Graph the current status or number of results for any check performed."
 aliases:
 - /graphing/widgets/check_status/
+- /dashboards/widgets/check_status/
 further_reading:
 - link: "/developers/service_checks"
   tag: "Documentation"

@@ -8,4 +8,4 @@ related_terms:
 ---
 The heatmap widget shows metrics aggregated across multiple tags. 
 
-Use heatmap widgets to visualize OpenTelemetry histograms, distribution metrics, high resolution and data display. For more information, <a href="/dashboards/widgets/heatmap/">see the documentation</a>.
+Use heatmap widgets to visualize OpenTelemetry histograms, distribution metrics, high resolution and data display. For more information, <a href="/dashboards/widgets/graphs/heatmap/">see the documentation</a>.

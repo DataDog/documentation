@@ -5,6 +5,7 @@ description: "Display a summary view of all your Datadog monitors, or a subset b
 widget_type: "manage_status"
 aliases:
 - /graphing/widgets/monitor_summary/
+- /dashboard/widgets/monitor_summary/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

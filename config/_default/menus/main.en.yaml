@@ -1192,16 +1192,116 @@ menu:
       parent: dashboards
       identifier: dashboards_widgets
       weight: 3
+    - name: Graphs
+      url: dashboards/widgets/graphs
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_graphs
+      weight: 301
+    - name: Change
+      url: dashboards/widgets/graphs/change
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_change
+      weight: 3011
+    - name: Distribution
+      url: dashboards/widgets/graphs/distribution
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_distribution
+      weight: 3012
+    - name: Funnel
+      url: dashboards/widgets/graphs/funnel
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_funnel
+      weight: 3013
+    - name: Geomap
+      url: dashboards/widgets/graphs/geomap
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_geomap
+      weight: 3014
+    - name: Heatmap
+      url: dashboards/widgets/graphs/heatmap
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_heatmap
+      weight: 3015
+    - name: Pie Chart
+      url: dashboards/widgets/graphs/pie_chart
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_pie_chart
+      weight: 3016
+    - name: Query Value
+      url: dashboards/widgets/graphs/query_value
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_query_value
+      weight: 3017
+    - name: Scatter Plot
+      url: dashboards/widgets/graphs/scatter_plot
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_scatter_plot
+      weight: 3018
+    - name: Table
+      url: dashboards/widgets/graphs/table
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_table
+      weight: 3019
+    - name: Treemap
+      url: dashboards/widgets/graphs/treemap
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_treemap
+      weight: 3020
+    - name: Timeseries
+      url: dashboards/widgets/graphs/timeseries
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_timeseries
+      weight: 3021
+    - name: Top List
+      url: dashboards/widgets/graphs/top_list
+      parent: dashboards_widgets_graphs
+      identifier: dashboards_widgets_graphs_top_list
+      weight: 3022
+    - name: Groups
+      url: dashboards/widgets/groups
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_groups
+      weight: 302
+    - name: Annotations and Embeds
+      url: dashboards/widgets/annotations_embeds
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_annotations_embeds
+      weight: 303
+    - name: Lists and Streams
+      url: dashboards/widgets/lists_streams
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_lists_streams
+      weight: 304
+    - name: Alerting and Response
+      url: dashboards/widgets/alerting_response
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_alerting_response
+      weight: 305
+    - name: Architecture
+      url: dashboards/widgets/architecture
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_architecture
+      weight: 306
+    - name: Performance and Reliability
+      url: dashboards/widgets/performance_reliability
+      parent: dashboards_widgets
+      identifier: dashboards_widgets_performance_reliability
+      weight: 306
+    - name: Create a Query
+      identifier: dashboards_create_query
+      url: dashboards/create_query/
+      parent: dashboards
+      weight: 4
     - name: Querying
       identifier: dashboards_querying
       url: dashboards/querying/
-      parent: dashboards
-      weight: 4
+      parent: dashboards_create_query
+      weight: 401
     - name: Functions
       url: dashboards/functions/
-      parent: dashboards
+      parent: dashboards_create_query
       identifier: dashboards_functions
-      weight: 5
+      weight: 402
     - name: Algorithms
       identifier: dashboards_functions_algorithms
       url: dashboards/functions/algorithms/

@@ -4,6 +4,7 @@ kind: documentation
 widget_type: "query_table"
 aliases:
 - /graphing/widgets/table/
+- /dashboards/widgets/table/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"

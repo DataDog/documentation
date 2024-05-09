@@ -244,7 +244,7 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 [5]: /infrastructure/livecontainers/configuration
 [6]: /tagging/assigning_tags?tab=agentv6v7#host-tags
 [7]: /getting_started/tagging/unified_service_tagging
-[8]: /dashboards/widgets/timeseries/
+[8]: /dashboards/widgets/graphs/timeseries/
 [9]: /logs
 [10]: /metrics
 [11]: /tracing

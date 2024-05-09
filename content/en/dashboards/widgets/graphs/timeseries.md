@@ -7,6 +7,7 @@ aliases:
     - /graphing/widgets/timeseries/
     - /dashboards/widgets/network/
     - /graphing/widgets/network/
+    - /dashboards/widgets/timeseries/
 further_reading:
 - link: "https://www.datadoghq.com/blog/full-screen-graphs"
   tag: "Blog"

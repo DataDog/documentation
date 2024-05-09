@@ -2,6 +2,8 @@
 title: Powerpack Widget
 kind: Documentation
 disable_toc: false
+aliases: 
+- /dashboards/widgets/powerpack/
 further_reading:
 - link: "/dashboards/guide/powerpacks-best-practices/"
   tag: "Guide"
@@ -9,7 +11,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/"
   tag: "Blog"
   text: "Save dashboard widgets in reusable groups with Powerpacks"
-- link: "/dashboards/widgets/group/"
+- link: "/dashboards/widgets/groups/group"
   tag: "Documentation"
   text: Group Widget
 - link: "/dashboards/graphing_json/"
