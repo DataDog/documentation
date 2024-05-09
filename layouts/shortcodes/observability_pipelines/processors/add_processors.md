@@ -1,7 +1,3 @@
 #### Add processors
 
 Enter the information for the processors you want to use. Click the **Add** button to add additional processors. To delete a processor, click the kebab on the right side of the processor and select **Delete**.
-
-<img src="/observability_pipelines/processors/general_processors.png" alt="The log processors available" width="40%">
-
-<img src="observability_pipelines/processors/general_processors.png" alt="The log processors available" width="40%">
