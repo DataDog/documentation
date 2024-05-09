@@ -3483,8 +3483,8 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: users
-    url: '#get-hourly-usage-for-synthetics-api-checks'
+    parent: usage-metering
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-profiles'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-synthetics-checks
     name: Récupérer l'utilisation horaire pour les checks Synthetics
