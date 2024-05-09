@@ -56,7 +56,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: aws-integration
+    parent: ''
     url: '#get-all-aws-tag-filters'
   - generated: true
     identifier: aws-integration-delete-a-tag-filtering-entry
