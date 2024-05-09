@@ -3447,8 +3447,8 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: users
-    url: '#get-all-custom-metrics-by-hourly-average'
+    parent: usage-metering
+    url: '#recuperer-l-utilisation-horaire-pour-le-scanner-de-donnees-sensibles'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-custom-metrics
     name: Récupérer l'utilisation horaire pour les métriques custom
