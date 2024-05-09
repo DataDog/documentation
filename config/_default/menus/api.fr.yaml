@@ -19,7 +19,7 @@ menu:
     url: /api/latest/rate-limits/
     weight: 7
   - generated: true
-    identifier: ''
+    identifier: aws-integration
     name: Intégration AWS
     url: /api/latest/aws-integration/
   - generated: true
