@@ -3454,12 +3454,12 @@ menu:
     name: Récupérer l'utilisation horaire pour les métriques custom
     params:
       operationids:
-      - GetUsageRumSessions
+      - GetUsageTimeseries
       order: 13
       unstable: []
       versions:
       - v1
-    parent: usage-metering
+    parent: users
     url: '#get-hourly-usage-for-custom-metrics'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-synthetics-browser-checks
