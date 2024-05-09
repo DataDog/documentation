@@ -127,7 +127,7 @@ menu:
       order: 9
       unstable: []
       versions:
-      - ''
+      - v1
     parent: aws-integration
     url: '#update-an-aws-integration'
   - generated: true
