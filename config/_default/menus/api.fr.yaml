@@ -268,10 +268,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: ''
+    parent: authentication
     url: '#validate-api-key'
   - generated: true
-    identifier: azure-integration
+    identifier: ''
     name: Intégration Azure
     url: /api/latest/azure-integration/
   - generated: true
