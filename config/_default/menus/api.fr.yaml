@@ -111,7 +111,7 @@ menu:
     name: Énumérer les règles d'espace de nommage
     params:
       operationids:
-      - ''
+      - ListAvailableAWSNamespaces
       order: 5
       unstable: []
       versions:
