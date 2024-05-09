@@ -3495,7 +3495,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: users
+    parent: usage-metering
     url: '#get-hourly-usage-for-synthetics-checks'
   - generated: true
     identifier: usage-metering-get-usage-across-your-account
