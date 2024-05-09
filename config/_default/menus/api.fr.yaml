@@ -211,11 +211,11 @@ menu:
     name: Vérifier qu'une fonction AWS Lambda existe
     params:
       operationids:
-      - ''
+      - CheckAWSLogsLambdaAsync
       order: 7
       unstable: []
       versions:
-      - v1
+      - ''
     parent: aws-logs-integration
     url: '#check-that-an-aws-lambda-function-exists'
   - generated: true
