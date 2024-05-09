@@ -8,9 +8,9 @@ menu:
     parent: API overview
     url: /api/latest/using-the-api/
     weight: 5
-  - identifier: ''
+  - identifier: API Scopes
     name: Contextes d'autorisation
-    parent: API overview
+    parent: ''
     url: /api/latest/scopes/
     weight: 6
   - identifier: rate-limits
