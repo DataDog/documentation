@@ -55,7 +55,7 @@ menu:
       order: 1
       unstable: []
       versions:
-      - v1
+      - ''
     parent: aws-integration
     url: '#get-all-aws-tag-filters'
   - generated: true
