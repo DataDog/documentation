@@ -203,7 +203,7 @@ menu:
       order: 4
       unstable: []
       versions:
-      - v1
+      - ''
     parent: aws-logs-integration
     url: '#get-list-of-aws-log-ready-services'
   - generated: true
