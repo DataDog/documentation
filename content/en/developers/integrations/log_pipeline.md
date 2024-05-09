@@ -99,7 +99,7 @@ To add a facet or measure:
 4. For a measure, to define the unit, click **Advanced options**. Select the unit based on what the attribute represents.
 5. Click **Add**.
 
-To easily navigate the facet list, facets are grouped together. For fields specific to the integration logs, create a **single group with the same name** as the `source` tag. 
+To help navigate the facet list, facets are grouped together. For fields specific to the integration logs, create a **single group with the same name** as the `source` tag. 
 
 1. In the log panel, click the Cog icon next to the attribute that you want in the new group.
 2. Select **Edit facet/measure for @attribute**. If there isn't a facet for the attribute yet, select **Create facet/measure for @attribute**.

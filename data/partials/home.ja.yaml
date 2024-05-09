@@ -121,7 +121,7 @@ nav_sections:
       title: RDS
     - desc: 脅威、脆弱性、誤構成の検出
       icon: security-platform
-      link: synthetics/api_tests/udp_tests
+      link: security/
       title: セキュリティ
     - desc: メトリクスの探索、検索、および分布の作成
       icon: メトリクス
