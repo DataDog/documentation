@@ -3436,13 +3436,13 @@ menu:
       versions:
       - v2
     parent: usage-metering
-    url: ''
+    url: '#get-active-billing-dimensions-for-cost-attribution'
   - generated: true
     identifier: usage-metering-get-all-custom-metrics-by-hourly-average
     name: 시간당 평균별 모든 커스텀 메트릭 받기
     params:
       operationids:
-      - GetUsageTopAvgMetrics
+      - ''
       order: 7
       unstable: []
       versions:
