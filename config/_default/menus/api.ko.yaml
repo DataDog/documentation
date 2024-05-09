@@ -1,6 +1,6 @@
 menu:
   api:
-  - identifier: API 개요
+  - identifier: API overview
     name: 개요
     url: /api/latest/
     weight: -10
@@ -6945,7 +6945,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 팀
+    parent: teams
     url: '#get-user-memberships'
   - generated: true
     identifier: teams-update-permission-setting-for-team
