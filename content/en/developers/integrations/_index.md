@@ -106,8 +106,12 @@ API-based integrations can submit telemetry—such as metrics, traces, logs, and
 
 Technology Partners write and host the implementation code that makes up the integration. [Creating an API integration][1] works well for Technology Partners building a connector between Datadog and another SaaS platform.
 
-
-
+## Requirements
+All integrations must include the following:
+* Out-of-the-box Integration Dashboard
+* 3 or more images for your tile
+* OAuth - for API Integrations only
+* Log pipeline - If your integration is sending in logs
 
 ## Further reading
 
