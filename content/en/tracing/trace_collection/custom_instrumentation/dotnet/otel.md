@@ -124,14 +124,9 @@ You can configure the propagation of context for distributed traces by injecting
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
-[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
 [5]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [8]: https://opentelemetry.io/docs/instrumentation/net/libraries/
-[9]: /tracing/trace_collection/trace_context_propagation/dotnet/
 [10]: /tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
 [11]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
-[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
 [13]: /tracing/trace_collection/single-step-apm/
 [14]: /tracing/trace_collection/trace_context_propagation/dotnet/

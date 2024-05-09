@@ -198,20 +198,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/instrumentation/java/manual/#context-propagation
-[2]: /tracing/trace_collection/trace_context_propagation/java/
-[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
-[4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[5]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
-[6]: /opentelemetry/guide/otel_api_tracing_interoperability/
-[7]: https://opentelemetry.io/docs/specs/otel/metrics/api/
-[8]: https://opentelemetry.io/docs/specs/otel/baggage/api/
-[9]: https://opentelemetry.io/docs/specs/otel/context/
-[10]: https://opentelemetry.io/docs/instrumentation/java/manual/
-[11]: /tracing/trace_collection/dd_libraries/java/?tab=springboot#add-the-java-tracer-to-the-jvm
-[12]: /tracing/trace_collection/single-step-apm/
-[13]: /tracing/trace_collection/single-step-apm/
-[14]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
 [15]: /tracing/setup/java/
 [16]: /tracing/glossary/#trace
 [17]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility

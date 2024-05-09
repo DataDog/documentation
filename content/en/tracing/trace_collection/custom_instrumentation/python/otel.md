@@ -24,7 +24,7 @@ further_reading:
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Python Setup Instructions][].
+1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Python Setup Instructions][1].
 
 1. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
@@ -32,7 +32,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 To create custom spans within an existing trace context:
 
-{{< highlight python "hl_lines=4" >}}
+{{< highlight python "hl_lines=6" >}}
 from opentelemetry import trace
 
 tracer = trace.get_tracer(__name__)
@@ -73,14 +73,4 @@ current_span.set_attribute("attribute_key1", 1)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/instrumentation/python/manual/#change-the-default-propagation-format
-[2]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
-[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
-[5]: https://opentelemetry.io/docs/instrumentation/python/manual/
-[8]: https://opentelemetry.io/docs/instrumentation/python/automatic/
-[9]: /tracing/trace_collection/trace_context_propagation/python/
-[10]: /tracing/trace_collection/dd_libraries/python/#custom-logging
-[11]: https://ddtrace.readthedocs.io/en/stable/api.html#opentelemetry-api
-[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
-[13]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
+[1]: /tracing/setup/python/
