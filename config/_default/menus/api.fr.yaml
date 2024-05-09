@@ -3423,13 +3423,13 @@ menu:
       versions:
       - v2
     parent: usage-metering
-    url: '#recuperer-l-utilisation-de-votre-compte'
+    url: '#get-monthly-cost-attribution'
   - generated: true
     identifier: usage-metering-get-active-billing-dimensions-for-cost-attribution
     name: Récupérer des dimensions de facturation actives pour l'attribution des coûts
     params:
       operationids:
-      - GetActiveBillingDimensions
+      - GetUsageSNMP
       order: 5
       unstable:
       - v2
