@@ -191,7 +191,7 @@ menu:
       order: 5
       unstable: []
       versions:
-      - ''
+      - v1
     parent: aws-logs-integration
     url: '#enable-an-aws-logs-integration'
   - generated: true
