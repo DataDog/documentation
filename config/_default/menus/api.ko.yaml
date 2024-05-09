@@ -3514,12 +3514,12 @@ menu:
     name: SNMP 장치에 대한 시간당 사용량 받기
     params:
       operationids:
-      - ''
+      - GetUsageSNMP
       order: 24
       unstable: []
       versions:
       - v1
-    parent: usage-metering
+    parent: ''
     url: '#get-hourly-usage-for-snmp-devices'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
