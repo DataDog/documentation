@@ -21,9 +21,15 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
+DORA Metrics is in public beta.
+{{< /callout >}}
+
 ## Overview
 
 To send your own incident events, use the [DORA Metrics API][1]. Incident events are used in order to compute change failure rate and mean time to restore.
+
+Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
 
 The following attributes are required:
 

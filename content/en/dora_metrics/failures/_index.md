@@ -11,7 +11,7 @@ further_reading:
   text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "/continuous_integration/dora_metrics/setup/deployments"
   tag: "Documentation"
-  text: "Learn about Learn about setting up deployment data in DORA Metrics"
+  text: "Learn about setting up deployment data in DORA Metrics"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
@@ -27,6 +27,10 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
+DORA Metrics is in public beta.
+{{< /callout >}}
+
 ## Overview
 
 Failed deployments events, currently interpreted through incident events, are used to compute [change failure rate](#calculating-change-failure-rate) and [mean time to restore (MTTR)](#calculating-mean-time-to-restore). 
@@ -39,18 +43,14 @@ Failed deployments events, currently interpreted through incident events, are us
 {{< /whatsnext >}}
 
 ## Calculating change failure rate 
-Change failure rate requires both [deployment data][2] and [incident data](#configuring-failure-data-sources).
+Change failure rate requires both [deployment data][7] and [incident data](#configuring-failure-data-sources).
 
 Change failure rate is calculated as the percentage of incident events out of the total number of deployments. Datadog divides `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an failure and a deployment event. 
 
 ## Calculating time to restore 
 Time to restore is calculated as the duration distribution for *resolved incident* events.
 
-Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
-
-DORA Metrics generates a `dora.time_to_restore` metric based on the start and end times for each incident event.
-
-For mean time to restore (MTTR), DORA Metrics calculates the average of individual `dora.time_to_restore` data points over a selected time frame. 
+DORA Metrics generates the `dora.time_to_restore` metric by recording the start and end times of each incident event. It calculates the mean time to restore (MTTR) as the average of these `dora.time_to_restore` data points over a selected time frame. 
 
 ## Further Reading
 

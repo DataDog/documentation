@@ -6,7 +6,7 @@ aliases:
 - /continuous_integration/dora_metrics/setup/deployments
 is_beta: true
 further_reading:
-- link: "/continuous_integration/dora_metrics/setup/failures"
+- link: "/dora_metrics/failures"
   tag: "Documentation"
   text: "Learn about setting up failure data in DORA Metrics"
 - link: "/tracing/service_catalog"
@@ -24,6 +24,10 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
+DORA Metrics is in public beta.
+{{< /callout >}}
+
 ## Overview
 
 Deployment events are used to compute [deployment frequency](#calculating-deployment-frequency), [change lead time](#calculating-change-lead-time), and [change failure rate](#calculating-change-failure-rate). 
@@ -32,7 +36,7 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for deployment events. See the respective documentation to set up the data source for your deployment events:" >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/deployments/" >}}Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/deployments/deployment_api" >}}Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Calculating deployment frequency
@@ -45,21 +49,7 @@ For a single Git commit, change lead time (CLT) is calculated as time from the c
 
 To calculate change lead time for a deployment, Datadog runs [`git log`][6] between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it computes the average of the related change lead time values. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
-### Breakdown metrics
-
-Datadog breaks down change lead time into the following metrics, which represent the different stages from commit creation to deployment.
-
-To compute these metrics, there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR.
-
-If a commit does not have an associated PR, only time to deploy and deploy time metrics are available.
-
-- `dora.time_to_pr_ready`: Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR was marked as ready for review.
-- `dora.review_time`: Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved.
-- `dora.merge_time`: Time from the last approval until the PR is merged.
-- `dora.time_to_deploy`: Time from PR merge to start of deployment. If a commit does not have an associated PR, this metric is calculated as the time from commit creation to start of deployment.
-- `dora.deploy_time`: Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information.
-
-**Note:** These metrics are emitted for every commit and not per deployment.
+For more information about breakdown of change lead time metrics, see [Data Collected][7].
 
 ### Synchronize repository metadata to Datadog
 
@@ -164,3 +154,4 @@ Change failure rate is calculated by dividing `dora.incidents.count` over `dora.
 [4]: /tracing/service_catalog/setup
 [5]: /tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
+[7]: /dora_metrics/data_collected
