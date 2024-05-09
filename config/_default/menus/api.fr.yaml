@@ -3423,7 +3423,7 @@ menu:
       versions:
       - v2
     parent: usage-metering
-    url: '#get-monthly-cost-attribution'
+    url: '#recuperer-l-utilisation-de-votre-compte'
   - generated: true
     identifier: usage-metering-get-active-billing-dimensions-for-cost-attribution
     name: Récupérer des dimensions de facturation actives pour l'attribution des coûts
