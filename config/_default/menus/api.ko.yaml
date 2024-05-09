@@ -43,7 +43,7 @@ menu:
       order: 2
       unstable: []
       versions:
-      - ''
+      - v1
     parent: aws-integration
     url: '#set-an-aws-tag-filter'
   - generated: true
