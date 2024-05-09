@@ -22951,6 +22951,7 @@ components:
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
             events_read: Read Events data.
+            hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
