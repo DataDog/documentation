@@ -3466,12 +3466,12 @@ menu:
     name: 신서틱 브라우저 점검에 대한 시간당 사용량 받기
     params:
       operationids:
-      - ''
+      - GetUsageSyntheticsBrowser
       order: 17
       unstable: []
       versions:
       - v1
-    parent: usage-metering
+    parent: ''
     url: '#get-hourly-usage-for-synthetics-browser-checks'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-synthetics-api-checks
