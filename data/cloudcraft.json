@@ -1751,6 +1751,167 @@
         }
       }
     },
+    "/team": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "List teams",
+        "description": "List all teams linked to your Cloudcraft account.\n\nThe response is an array of teams. Each entry includes information about the team, such as the team ID, name, and members.",
+        "operationId": "listMyTeams",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "no-cache, no-store"
+                }
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "string",
+                  "example": "271"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Wed, 14 Nov 2018 21:14:32 GMT"
+                }
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string",
+                  "example": "W/\"10f-XQrUSiTExKF+oTaRV4ZXDCtfrGc\""
+                }
+              },
+              "Vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "Accept-Encoding"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "nosniff"
+                }
+              },
+              "X-Frame-Options": {
+                "schema": {
+                  "type": "string",
+                  "example": "deny"
+                }
+              },
+              "X-XSS-Protection": {
+                "schema": {
+                  "type": "string",
+                  "example": "1; mode=block"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The unique identifier of the team.",
+                      "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the team.",
+                      "example": "Example Team Name"
+                    },
+                    "visible": {
+                      "type": "boolean",
+                      "description": "Whether the team is visible to other users.",
+                      "example": true
+                    },
+                    "crossOrganizational": {
+                      "type": "boolean",
+                      "description": "Whether the team is cross-organizational.",
+                      "example": false
+                    },
+                    "customerId": {
+                      "type": "string",
+                      "description": "The unique customer ID of the team.",
+                      "example": "86e9951e-3764-48d7-b318-969f8a6d180b"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "The date and time the team was last updated.",
+                      "example": "2022-01-01T20:54:53.963Z"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "The date and time the team was created.",
+                      "example": "2022-01-01T20:54:47.282Z"
+                    },
+                    "externalSharing": {
+                      "type": "boolean",
+                      "description": "Whether external sharing is enabled for the team.",
+                      "example": true
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "The role of the user in the team.",
+                      "example": "admin"
+                    },
+                    "members": {
+                      "type": "object",
+                      "description": "An array of key-value pairs representing the team's members.",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "example": "value"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Get team information": {
+                    "value": {
+                      "id": "us46e9aa-5806-4cd6-8e78-c22d58602d09",
+                      "name": "Example Team Name",
+                      "visible": true,
+                      "crossOrganizational": false,
+                      "customerId": "86e9951e-3764-48d7-b318-969f8a6d180b",
+                      "updatedAt": "2022-01-01T20:54:53.963Z",
+                      "createdAt": "2022-01-01T20:54:47.282Z",
+                      "externalSharing": true,
+                      "role": "admin",
+                      "members": {
+                        "id": "17cf37c9-578c-4587-acb9-299c5431ad10",
+                        "role": "admin",
+                        "userId": "370809cc-abdc-42ad-bb40-8541ca0dfb1a",
+                        "name": "Example User Name",
+                        "email": "user@example.org",
+                        "mfaEnabled": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
     "/user/me": {
       "get": {
         "tags": [
@@ -1897,6 +2058,10 @@
     },
     {
       "name": "Budgets"
+    },
+    {
+      "name": "Teams",
+      "description": "Teams are groups of users in Cloudcraft. Teams can be used to manage access to resources and share diagrams."
     },
     {
       "name": "Users",
