@@ -87,7 +87,7 @@ menu:
     name: 모든 Amazon EventBridge 소스 받기
     params:
       operationids:
-      - ListAWSEventBridgeSources
+      - ''
       order: 10
       unstable: []
       versions:
