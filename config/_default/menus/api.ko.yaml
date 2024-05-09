@@ -3519,7 +3519,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: usage-metering
+    parent: ''
     url: '#get-hourly-usage-for-snmp-devices'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
