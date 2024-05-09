@@ -247,7 +247,7 @@ menu:
     name: AWS 로그 통합 삭제
     params:
       operationids:
-      - ''
+      - DeleteAWSLambdaARN
       order: 3
       unstable: []
       versions:
