@@ -297,7 +297,7 @@ menu:
       versions:
       - v1
     parent: azure-integration
-    url: '#update-an-azure-integration'
+    url: ''
   - generated: true
     identifier: azure-integration-create-an-azure-integration
     name: Créer une intégration Azure
