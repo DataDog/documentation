@@ -87,12 +87,12 @@ menu:
     name: 모든 Amazon EventBridge 소스 받기
     params:
       operationids:
-      - ''
+      - ListAWSEventBridgeSources
       order: 10
       unstable: []
       versions:
       - v1
-    parent: aws-integration
+    parent: ''
     url: '#get-all-amazon-eventbridge-sources'
   - generated: true
     identifier: aws-integration-delete-an-amazon-eventbridge-source
