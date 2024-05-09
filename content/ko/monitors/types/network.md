@@ -6,7 +6,7 @@ description: TCP/HTTP 엔드포인트의 상태를 확인하세요.
 further_reading:
 - link: /monitors/notify/
   tag: 설명서
-  text: Configure your monitor notifications
+  text: 모니터 알림 설정
 - link: /monitors/downtimes/
   tag: 설명서
   text: 모니터 음소거를 위한 다운타임을 예약하세요.
@@ -56,7 +56,7 @@ Datadog에서 [네트워크 모니터][3]를 생성하려면 기본 탐색인 *M
 
 2. 선택한 장애가 연속적으로 발생하면 경고를 트리거합니다:`<NUMBER>`
 
-   각 검사 실행은 `OK`, `WARN` 또는 `CRITICAL` 중 하나의 상태를 제출합니다. 알림을 트리거하는 `CRITICAL` 상태의 연속 실행 횟수를 선택합니다. 예를 들어, HTTP 검사에는 연결이 실패한 단일 오류가 있을 수 있습니다. 이 값을 `> 1`로 설정하면 오류가 무시되지만 두 번 이상 연속 실패한 문제에 대해서는 알림을 트리거합니다.
+   각 검사 실행은 `OK`, `WARN` 또는 `CRITICAL` 중 하나의 상태를 제출합니다. 알림을 트리거하는 `CRITICAL` 상태의 연속 실행 횟수를 선택합니다. 예를 들어, HTTP 검사에 연결이 실패한 단일 오류가 있을 수 있습니다. 이 값을 `> 1`로 설정하면 오류가 무시되지만 두 번 이상 연속 실패한 문제에 대해서는 알림을 트리거합니다.
 
 3. 선택한 연속 성공 후 경고 해결:`<NUMBER>`
 
