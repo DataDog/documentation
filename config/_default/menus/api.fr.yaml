@@ -3466,7 +3466,7 @@ menu:
     name: Récupérer l'utilisation horaire pour les checks Browser Synthetic
     params:
       operationids:
-      - GetUsageRumUnits
+      - GetUsageSyntheticsBrowser
       order: 17
       unstable: []
       versions:
