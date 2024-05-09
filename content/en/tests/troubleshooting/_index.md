@@ -88,15 +88,15 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 ### The total test time is empty
 If you cannot see the total test time, it is likely that test suite level visibility is not enabled. To confirm, check if your language supports test suite level visibility in [Supported features][15]. If test suite level visibility is supported, update your tracer to the latest version.
 
-If after updating the tracer version you still don't see the total time, contact [Datadog support][2] for help.
+If you still don't see the total time after updating the tracer version, contact [Datadog support][2] for help.
 
 ### The total test time is different than expected
 
 #### How total time is calculated
 The total time is defined as the sum of the maximum test session durations.
 
-1. Compute the maximum duration of a test session grouped by the test session fingerprint.
-2. Sum the maximum test session durations.
+1. The maximum duration of a test session grouped by the test session fingerprint is calculated.
+2. The maximum test session durations are summed.
 
 ## The test status numbers are not what is expected
 
