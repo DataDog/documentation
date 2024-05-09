@@ -64,7 +64,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
          mutateUnlabelled: false
      global:
        tags:
-         - "data_workload_monitoring_trial:true"
+         - 'data_workload_monitoring_trial:true'
        site: <DATADOG_SITE>
        credentials:
          apiSecret:
