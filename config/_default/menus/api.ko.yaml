@@ -35,7 +35,7 @@ menu:
     parent: aws-integration
     url: '#generate-a-new-external-id'
   - generated: true
-    identifier: aws-integration-set-an-aws-tag-filter
+    identifier: ''
     name: AWS 태그 필터 설정
     params:
       operationids:
