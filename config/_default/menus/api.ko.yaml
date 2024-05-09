@@ -93,7 +93,7 @@ menu:
       versions:
       - v1
     parent: aws-integration
-    url: ''
+    url: '#get-all-amazon-eventbridge-sources'
   - generated: true
     identifier: aws-integration-delete-an-amazon-eventbridge-source
     name: Amazon EventBridge 소스 삭제
