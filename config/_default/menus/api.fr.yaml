@@ -169,7 +169,7 @@ menu:
   - generated: true
     identifier: aws-logs-integration
     name: Intégration Logs AWS
-    url: ''
+    url: /api/latest/aws-logs-integration/
   - generated: true
     identifier: aws-logs-integration-check-permissions-for-log-services
     name: Vérifier les autorisations pour les services qui génèrent des logs
