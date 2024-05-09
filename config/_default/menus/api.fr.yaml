@@ -215,7 +215,7 @@ menu:
       order: 7
       unstable: []
       versions:
-      - ''
+      - v1
     parent: aws-logs-integration
     url: '#check-that-an-aws-lambda-function-exists'
   - generated: true
