@@ -3490,7 +3490,7 @@ menu:
     name: Récupérer l'utilisation horaire pour les checks Synthetics
     params:
       operationids:
-      - GetUsageOnlineArchive
+      - GetUsageSynthetics
       order: 15
       unstable: []
       versions:
