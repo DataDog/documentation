@@ -213,7 +213,14 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 ## Application Security Management
 
-[Compatibility Requirements][16].
+### Prerequisites
+
+- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
+- Datadog APM is configured for your application or service, and traces are being received by Datadog.
+
+### Installation
+
+#### Threat Detection and Protection
 
 For step-by-step instructions, see the following articles:
 
@@ -224,32 +231,13 @@ For step-by-step instructions, see the following articles:
 - [Node.js][14]
 - [Python][15]
 
-### Prerequisites
+#### Code Security
 
-- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-- Datadog APM is configured for your application or service, and traces are being received by Datadog.
+For step-by-step instructions, see the following articles:
 
-### Installation
-
-{{< tabs >}}
-{{% tab "Amazon ECS" %}}
-
-- Only threat detection using tracing libraries? (i.e., no single-step instrumentation and no code security.)
-- What is VULNERABILITY MANAGEMENT FOR OSS SUPPORT? https://docs.datadoghq.com/security/application_security/enabling/compatibility/ruby#supported-deployment-types
-
-1. Update to the latest Datadog library (the most recent APM tracing library).
-1. Enable ASM when starting the Python application.
-
-{{% /tab %}}
-
-{{% tab "Amazon EKS" %}}
-
-To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod with custom RBAC.
-
-- Confirm that ASM supports EKS on Fargate.
-
-{{% /tab %}}
-{{< /tabs >}}
+- [Java][18]
+- [.NET][19]
+- [Node.js][20]
 
 ## Cloud SIEM
 
@@ -285,3 +273,6 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
 [16]: /security/application_security/enabling/compatibility/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+[18]: /security/application_security/enabling/tracing_libraries/code_security/java/
+[19]: /security/application_security/enabling/tracing_libraries/code_security/dotnet?tab=awsfargate
+[20]: /security/application_security/enabling/tracing_libraries/code_security/nodejs
