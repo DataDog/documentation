@@ -1,5 +1,7 @@
 ---
 disable_toc: false
+aliases:
+- '/ja/developers/ide_integrations/idea/'
 further_reading:
 - link: /getting_started/profiler/
   tag: ドキュメント
@@ -23,7 +25,7 @@ title: IntelliJ プラットフォーム用 Datadog プラグイン
 
 IntelliJ プラットフォーム (IDEA と GoLand) 用の Datadog プラグインは、リアルタイムの観測可能性データに基づいて IDE でコードレベルの有意義な洞察を提供することにより、ソフトウェアパフォーマンスの向上を支援します。
 
-{{< img src="/developers/ide_integrations/idea/overview1.png" alt="IDEA で開いた Datadog ツールのウィンドウ" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/overview1.png" alt="IDEA で開いた Datadog ツールのウィンドウ" style="width:100%;" >}}
 
 **Code Insights** ビューでは、次のような情報が得られます。
 - [エラー追跡][6]からの問題
@@ -53,7 +55,7 @@ IntelliJ プラットフォーム (IDEA と GoLand) 用の Datadog プラグイ�
 1. Datadog がサードパーティのプラグインであることを通知するプロンプトが表示された場合、**Accept** をクリックします。
 1. **Restart IDE** をクリックします。
 
-{{< img src="/developers/ide_integrations/idea/marketplace.png" alt="Datadog プラグイン" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/marketplace.png" alt="Datadog プラグイン" style="width:100%;" >}}
 
 または、[JetBrains Marketplace][4] からプラグインをインストールすることができます。
 
@@ -82,7 +84,7 @@ Datadog プラットフォームから関連データを提供するには、プ
 ## コードインサイト
 **Code Insights** タブには、Datadog プラットフォームによって生成された、現在のプロジェクトに関連するインサイトが表示されます。洞察は、パフォーマンス、信頼性、セキュリティの 3 つのカテゴリーに分類されます。
 
-{{< img src="/developers/ide_integrations/idea/code-insights.png" alt="Code Insights タブ。" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/code-insights.png" alt="Code Insights タブ。" style="width:100%;" >}}
 
 Code Insights には、各問題の詳細な説明と以下へのリンクが含まれています。
 - 関連するソースコードの場所
@@ -107,7 +109,7 @@ Code Insights には、各問題の詳細な説明と以下へのリンクが含
 
 **Top List** サブタブには、Datadog サーバーから読み込まれた集計されたプロファイルデータに基づいて、最もリソースを消費するメソッドが表示されます。**Top List** は、リソース消費の観点から最も興味深いメソッドの概要を表示するように設計されています。
 
-{{< img src="/developers/ide_integrations/idea/top-list1.png" alt="トップリストビュー" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/top-list1.png" alt="トップリストビュー" style="width:100%;" >}}
 
 - リスト内の項目をダブルクリック (またはコンテキストメニューから **Jump to Source** を選択) すると、そのメソッドが定義されている場所を示すソースコードエディターが開きます。
 - メソッドのフレームグラフ視覚化を見るには、コンテキストメニューから **Search in Flame Graph** を選択します。
@@ -124,7 +126,7 @@ Code Insights には、各問題の詳細な説明と以下へのリンクが含
 
 フレームグラフは、プロファイリングサンプルを視覚化したもので、サンプル期間中のスタックトレースとその相対的な頻度を表示するものです。Datadog プラグインは、リクエストされた時間枠から複数の個別プロファイリングを収集し、それらを集計します。個々のプロファイラーは、リクエストされた時間枠内の 60 秒のインターバルをカバーします。
 
-{{< img src="/developers/ide_integrations/idea/flamegraph1.png" alt="過去 1 時間の CPU 時間を示すフレームグラフ" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/flamegraph1.png" alt="過去 1 時間の CPU 時間を示すフレームグラフ" style="width:100%;" >}}
 
 プロファイルの種類、時間枠、環境を変更するたびに、Datadog プラグインは新しいフレームグラフを生成します。
 
@@ -140,23 +142,23 @@ Code Insights には、各問題の詳細な説明と以下へのリンクが含
 
 プロファイリングサンプルには、スタックトレースと行番号の情報が含まれています。**Separate Flame Graph by** ボタンで、フレームをメソッドで区切るか行番号で区切るかを切り替えます。
 
-{{< img src="/developers/ide_integrations/idea/separate-flamegraph-by.png" alt="ツールチップボタンでメソッドや行番号でフレームを区切る" style="width:40%;" >}}
+{{< img src="/developers/ide_plugins/idea/separate-flamegraph-by.png" alt="ツールチップボタンでメソッドや行番号でフレームを区切る" style="width:40%;" >}}
 
 ### ソースハイライト
 
 Continuous Profiler タブがアクティブな場合、プラグインはソースコードエディターマージンにコードのハイライトを追加します。トップメソッドの場合、エディターマージンにアイコンが表示され、アクティブなプロファイリングデータに基づいてコードに行レベルのハイライトが表示されます。
 - アイコンにカーソルを合わせると、詳細が表示されます。
 - アイコンをクリックして、トップリストのプロファイリングタブを開くか、Datadog のプロファイリングを開きます。
-  {{< img src="/developers/ide_integrations/idea/interest-options.png" alt="Datadog のアイコンをクリックすると、タブまたは Datadog でプロファイリングデータを開くことができます" style="width:100%;" >}}
+  {{< img src="/developers/ide_plugins/idea/interest-options.png" alt="Datadog のアイコンをクリックすると、タブまたは Datadog でプロファイリングデータを開くことができます" style="width:100%;" >}}
 
 アクティブなプロファイリングタブは、プロジェクトのツリー表示にも影響し、選択したプロファイルのメトリクスでアノテーションされます。
-{{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="プロファイルタブのプロファイルメトリクスでアノテーションされたプロジェクトツリー" style="width:60%;" >}}
+{{< img src="/developers/ide_plugins/idea/project-tree-view.png" alt="プロファイルタブのプロファイルメトリクスでアノテーションされたプロジェクトツリー" style="width:60%;" >}}
 
 ## ログナビゲーション
 
 Datadog プラットフォームの[ログエクスプローラー][5]には、Java または Go ソースファイルから直接アクセスできます。ソースコード内のログステートメントに続く **View Logs** リンクを探してください。
 
-{{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="View Logs リンクを示すソースファイル。" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/logs-navigation.png" alt="View Logs リンクを示すソースファイル。" style="width:100%;" >}}
 
 リンクをクリックすると、ロガー名、ログレベル、およびログメッセージに可能な限り一致するクエリで**ログエクスプローラー**が開きます。
 
@@ -164,7 +166,7 @@ Datadog プラットフォームの[ログエクスプローラー][5]には、J
 
 **View in IntelliJ IDEA** 機能は、Datadog プラットフォームから直接 Java ソースファイルへのリンクを提供します (Go ではまだ利用できません)。プラットフォーム上に表示されるスタックトレース (例えば、[エラー追跡][6]) のフレームの横にあるボタンを探してください。
 
-{{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="View in IntelliJ ボタンを表示している Datadog プラットフォームのスタックトレース。" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/view-in-idea.png" alt="View in IntelliJ ボタンを表示している Datadog プラットフォームのスタックトレース。" style="width:100%;" >}}
 
 <div class="alert alert-info">この機能には 2 つの前提条件があります。(1) ソースコードインテグレーションがサービスに構成されていることと、(2) JetBrains Toolbox が開発マシンにインストールされていることです。</div>
 

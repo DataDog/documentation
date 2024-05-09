@@ -1,6 +1,8 @@
 ---
 description: .NET 개발자를 위한 Datadog 확장 기능
 disable_toc: false
+aliases:
+- '/ko/developers/ide_integrations/visual_studio/'
 further_reading:
 - link: /getting_started/profiler/
   tag: 설명서
