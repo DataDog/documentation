@@ -259,7 +259,7 @@ menu:
     name: 인증
     url: /api/latest/authentication/
   - generated: true
-    identifier: ''
+    identifier: authentication-validate-api-key
     name: API 키 검증
     params:
       operationids:
