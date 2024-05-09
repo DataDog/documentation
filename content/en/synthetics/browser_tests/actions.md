@@ -1,5 +1,5 @@
 ---
-title: Browser Test Steps
+title: Browser Testing Steps
 kind: documentation
 description: Learn how to automatically record and manually set steps in a browser test recording.
 further_reading:

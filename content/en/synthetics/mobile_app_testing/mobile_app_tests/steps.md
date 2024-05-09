@@ -1,5 +1,5 @@
 ---
-title: Mobile App Test Steps
+title: Mobile App Testing Steps
 kind: documentation
 description: Learn how to automatically record and manually set steps in a mobile test recording.
 aliases:

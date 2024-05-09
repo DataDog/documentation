@@ -1,6 +1,8 @@
 ---
 title: Synthetic Monitoring Settings
 kind: documentation
+aliases:
+- /synthetics/settings
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"

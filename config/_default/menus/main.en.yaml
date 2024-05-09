@@ -4575,13 +4575,13 @@ menu:
       parent: application_security
       identifier: appsec_troubleshooting
       weight: 11
-    - name: Synthetic Monitoring
+    - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
       identifier: synthetics
       parent: digital_experience_heading
       weight: 50000
-    - name: API Tests
+    - name: API Testing
       url: synthetics/api_tests/
       parent: synthetics
       weight: 1
@@ -4626,12 +4626,12 @@ menu:
       url: synthetics/api_tests/grpc_tests
       parent: api_tests
       weight: 108
-    - name: Multistep API Tests
+    - name: Multistep API Testing
       url: synthetics/multistep
       parent: synthetics
       identifier: synthetics_multistep
       weight: 2
-    - name: Browser Tests
+    - name: Browser Testing
       url: synthetics/browser_tests/
       parent: synthetics
       identifier: synthetics_browser_tests
@@ -4641,7 +4641,7 @@ menu:
       url: synthetics/browser_tests/actions
       parent: synthetics_browser_tests
       weight: 301
-    - name: Test Results
+    - name: Browser Testing Results
       identifier: synthetics_browser_tests_test_results
       url: synthetics/browser_tests/test_results
       parent: synthetics_browser_tests
@@ -4651,7 +4651,7 @@ menu:
       url: synthetics/browser_tests/advanced_options
       parent: synthetics_browser_tests
       weight: 303
-    - name: Authentication in Browser Tests
+    - name: Authentication in Browser Testing
       identifier: synthetics_browser_tests_authentication
       url: synthetics/browser_tests/app-that-requires-login
       parent: synthetics_browser_tests
@@ -4661,146 +4661,146 @@ menu:
       parent: synthetics
       identifier: synthetics_mobile_app_testing
       weight: 4
-    - name: Mobile App Tests
+    - name: Mobile App Testing
       url: synthetics/mobile_app_testing/mobile_app_tests
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests
       weight: 401
-    - name: Test Steps
+    - name: Testing Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/steps
-      parent: synthetics_mobile_app_testing_mobile_app_tests
+      parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_steps
-      weight: 4101
-    - name: Test Results
+      weight: 402
+    - name: Testing Results
       url: synthetics/mobile_app_testing/mobile_app_tests/results
-      parent: synthetics_mobile_app_testing_mobile_app_tests
+      parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_results
-      weight: 4102
+      weight: 403
     - name: Advanced Options for Steps
       url: synthetics/mobile_app_testing/mobile_app_tests/advanced_options
-      parent: synthetics_mobile_app_testing_mobile_app_tests
+      parent: ssynthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
-      weight: 4103
+      weight: 404
     - name: Settings
       url: synthetics/mobile_app_testing/settings
       parent: synthetics_mobile_app_testing
       identifier: synthetics_mobile_app_testing_settings
-      weight: 402
-    - name: Private Locations
-      url: synthetics/private_locations
-      parent: synthetics
-      identifier: synthetics_private_location
-      weight: 5
-    - name: Configuration
-      url: synthetics/private_locations/configuration
-      parent: synthetics_private_location
-      identifier: synthetics_private_location_configuration
-      weight: 501
-    - name: Dimensioning
-      url: synthetics/private_locations/dimensioning
-      parent: synthetics_private_location
-      identifier: synthetics_private_location_dimensioning
-      weight: 502
-    - name: Monitoring
-      url: synthetics/private_locations/monitoring
-      parent: synthetics_private_location
-      identifier: synthetics_private_location_monitoring
-      weight: 503
+      weight: 405
     - name: Platform
       url: synthetics/platform/
       parent: synthetics
       identifier: synthetics_platform
-      weight: 6
+      weight: 5
     - name: Dashboards
       url: synthetics/platform/dashboards
       parent: synthetics_platform
       identifier: synthetics_platform_dashboards
-      weight: 601
-    - name: API Test
+      weight: 501
+    - name: API Testing
       url: synthetics/platform/dashboards/api_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_api_test
-      weight: 6101
-    - name: Browser Test
+      weight: 5101
+    - name: Browser Testing
       url: synthetics/platform/dashboards/browser_test
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_browser_test
-      weight: 6102
+      weight: 5102
     - name: Test Summary
       url: synthetics/platform/dashboards/test_summary
       parent: synthetics_platform_dashboards
       identifier: synthetics_platform_dashboards_test_summary
-      weight: 6103
+      weight: 5103
     - name: Metrics
       url: synthetics/platform/metrics/
       parent: synthetics_platform
       identifier: synthetics_platform_metrics
-      weight: 602
+      weight: 502
     - name: Test Coverage
       url: synthetics/platform/test_coverage
       parent: synthetics_platform
       identifier: synthetics_platform_test_coverage
-      weight: 603
+      weight: 503
+    - name: Private Locations
+      url: synthetics/platform/private_locations
+      parent: synthetics_platform
+      identifier: synthetics_private_location
+      weight: 504
+    - name: Configuration
+      url: synthetics/platform/private_locations/configuration
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_configuration
+      weight: 5401
+    - name: Dimensioning
+      url: synthetics/platform/private_locations/dimensioning
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_dimensioning
+      weight: 5402
+    - name: Monitoring
+      url: synthetics/platform/private_locations/monitoring
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_monitoring
+      weight: 5402
     - name: Connect Synthetics and APM
       url: synthetics/platform/apm/
       parent: synthetics_platform
       identifier: synthetics_platform_apm
-      weight: 604
+      weight: 505
+    - name: Settings
+      identifier: synthetics_settings
+      url: synthetics/platform/settings
+      parent: synthetics_platform
+      weight: 506
     - name: Search and Manage
       url: synthetics/search/
       parent: synthetics
       identifier: synthetics_search
-      weight: 7
+      weight: 5
     - name: Saved Views
       url: synthetics/search/saved_views
       parent: synthetics_search
       identifier: synthetics_search_saved_views
-      weight: 701
+      weight: 601
     - name: Results Explorer
       url: continuous_testing/explorer/
       parent: synthetics
       identifier: synthetics_results_explorer
-      weight: 8
+      weight: 7
     - name: Search Test Batches
       url: continuous_testing/explorer/search/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search
-      weight: 801
+      weight: 701
     - name: Search Test Runs
       url: continuous_testing/explorer/search_runs/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search_runs
-      weight: 802
+      weight: 702
     - name: Search Syntax
       url: continuous_testing/explorer/search_syntax/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search_syntax
-      weight: 803
+      weight: 703
     - name: Saved Views
       url: continuous_testing/explorer/saved_views/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_saved_views
-      weight: 804
-    - name: Settings
-      identifier: synthetics_settings
-      url: synthetics/settings/
-      parent: synthetics
-      weight: 10
+      weight: 704
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
       identifier: synthetics_guides
-      weight: 11
+      weight: 8
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 12
+      weight: 9
     - name: Data Security
       identifier: data_security_synthetics
       url: data_security/synthetics/
       parent: synthetics
-      weight: 13
+      weight: 10
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing

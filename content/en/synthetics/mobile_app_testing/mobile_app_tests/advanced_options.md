@@ -1,5 +1,5 @@
 ---
-title: Advanced Options for Mobile App Test Steps
+title: Advanced Options for Mobile App Testing Steps
 kind: documentation
 description: Configure advanced options for Mobile Test Steps
 aliases:

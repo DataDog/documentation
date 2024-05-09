@@ -2,6 +2,8 @@
 title: Run Synthetic Tests from Private Locations
 kind: documentation
 description: Run Synthetic API and browser tests from private locations
+aliases:
+- /synthetics/private_locations
 further_reading:
     - link: 'https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/'
       tag: 'Blog'

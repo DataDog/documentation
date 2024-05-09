@@ -1,5 +1,5 @@
 ---
-title: HTTP Tests
+title: HTTP Testing
 kind: documentation
 description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
