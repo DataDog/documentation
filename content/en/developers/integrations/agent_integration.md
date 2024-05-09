@@ -438,7 +438,7 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 
 For installing your wheel to test in containerized environments: 
 1. Mount the whl into a initContainer
-2. Run the whl install in a init container
+2. Run the whl install in the init container
 3. Mount the init container in the agent container
 
 For customer install commands for both host and container environments, please see [here.][35]
