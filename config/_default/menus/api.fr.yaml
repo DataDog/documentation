@@ -3432,7 +3432,7 @@ menu:
       - GetActiveBillingDimensions
       order: 5
       unstable:
-      - v2
+      - v1
       versions:
       - v2
     parent: usage-metering
