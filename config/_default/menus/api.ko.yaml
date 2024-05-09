@@ -295,7 +295,7 @@ menu:
       order: 4
       unstable: []
       versions:
-      - v1
+      - ''
     parent: azure-integration
     url: '#update-an-azure-integration'
   - generated: true
