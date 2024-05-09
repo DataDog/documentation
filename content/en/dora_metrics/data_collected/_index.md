@@ -7,7 +7,7 @@ further_reading:
   text: 'Learn about DORA Metrics'
 - link: '/dora_metrics/setup/'
   tag: 'Documentation'
-  text: 'Send deployment and incident events to Datadog'
+  text: 'Set up data sources for DORA Metrics'
 - link: '/metrics/'
   tag: 'Documentation'
   text: 'Learn about metrics'
@@ -52,7 +52,7 @@ All default metrics contain the following tags if any are available:
 
 For more information about using `env`, `service`, and `version` tags, see [Getting Started with Tags][6].
 
-## Change Lead time metrics
+## Change lead time metrics
 
 Datadog breaks down change lead time into the following metrics, which represent the different stages from commit creation to deployment.
 

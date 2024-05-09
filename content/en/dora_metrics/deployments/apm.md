@@ -6,9 +6,9 @@ aliases:
 - /continuous_integration/dora_metrics/setup/apm
 is_beta: true
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-  tag: "Release Notes"
-  text: "Check out the latest Software Delivery releases! (App login required)"
+- link: "/dora_metrics/deployments"
+  tag: "Documentation"
+  text: "See other deployment data source options"
 - link: "/continuous_integration/dora_metrics/setup/failures"
   tag: "Documentation"
   text: "Learn about setting up failure data in DORA Metrics"
@@ -21,6 +21,9 @@ further_reading:
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 ---
 
 {{< site-region region="gov" >}}

@@ -4,9 +4,9 @@ kind: documentation
 description: Learn how to configure PagerDuty as a data source for DORA Metrics incidents.
 is_beta: true
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-  tag: "Release Notes"
-  text: "Check out the latest Software Delivery releases! (App login required)"
+- link: "/dora_metrics/failures"
+  tag: "Documentation"
+  text: "See other incident data source options"
 - link: "/dora_metrics/deployments"
   tag: "Documentation"
   text: "Learn about setting up deployments in DORA Metrics"
@@ -16,6 +16,9 @@ further_reading:
 - link: "/monitors/types/metric"
   tag: "Documentation"
   text: "Learn about Metric Monitors"
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 ---
 
 {{< site-region region="gov" >}}
