@@ -46,9 +46,9 @@ datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 ```
 **注**: Datadog では、大文字は小文字に変換され、スペースはアンダースコアに置換されます。たとえば、`Team:Frontend App` タグを含む EC2 インスタンスからメトリクスを収集する場合、Datadog で適用されるタグは `team:frontend_app` になります。
 
-### Kinesis Data Firehose を使用した CloudWatch メトリクスストリーム
+### Amazon Data Firehose を使用した CloudWatch メトリクスストリーム
 
-オプションとして、デフォルトの API ポーリングメソッドを使用する代わりに、[Kinesis Data Firehose を使用して CloudWatch メトリクスを Datadog に送信する][8]ことができます。組織が Kinesis Data Firehose を使用した CloudWatch メトリクスストリームの方法を利用している場合、Datadog AWS インテグレーションページで定義されている AWS リソースの除外ルールは適用されません。各 AWS アカウントについて、AWS コンソール内の CloudWatch メトリクスストリーム設定で、メトリクスのネームスペースや特定のメトリクス名の含除ルールを全て管理する必要があります。
+デフォルトの API ポーリング方法の代わりに、オプションで [Amazon Data Firehose を利用して CloudWatch メトリクスを Datadog に送信][8]することができます。組織が Kinesis Data Firehose を使用した CloudWatch メトリクスストリームの方法を利用している場合、Datadog AWS インテグレーションページで定義されている AWS リソースの除外ルールは適用されません。各 AWS アカウントについて、AWS コンソール内の CloudWatch メトリクスストリーム設定で、メトリクスのネームスペースや特定のメトリクス名の含除ルールを全て管理する必要があります。
 
 ## ヘルプ
 

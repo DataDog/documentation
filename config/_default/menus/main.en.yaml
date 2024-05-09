@@ -681,6 +681,11 @@ menu:
       identifier: otel_hostname
       parent: otel_schema
       weight: 404
+    - name: Service-entry Spans Mapping
+      url: opentelemetry/schema_semantics/service_entry_spans/
+      identifier: otel_service_entry_spans
+      parent: otel_schema
+      weight: 404
     - name: Ingestion Sampling
       url: opentelemetry/ingestion_sampling_with_opentelemetry
       identifier: otel_sampling
@@ -896,25 +901,25 @@ menu:
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_api
       weight: 603
-    - name: IDE Integrations
-      url: developers/ide_integrations/
+    - name: IDE Plugins
+      url: developers/ide_plugins/
       parent: dev_tools
-      identifier: ide_integrations
+      identifier: ide_plugins
       weight: 7
     - name: JetBrains IDEs
-      url: developers/ide_integrations/idea/
-      parent: ide_integrations
-      identifier: ide_integrations_idea
+      url: developers/ide_plugins/idea/
+      parent: ide_plugins
+      identifier: ide_plugins_idea
       weight: 701
     - name: VS Code
-      url: developers/ide_integrations/vscode/
-      parent: ide_integrations
-      identifier: ide_integrations_vscode
+      url: developers/ide_plugins/vscode/
+      parent: ide_plugins
+      identifier: ide_plugins_vscode
       weight: 702
     - name: Visual Studio
-      url: developers/ide_integrations/visual_studio/
-      parent: ide_integrations
-      identifier: ide_integrations_visual_studio
+      url: developers/ide_plugins/visual_studio/
+      parent: ide_plugins
+      identifier: ide_plugins_visual_studio
       weight: 703
     - name: Community
       url: developers/community/
@@ -1811,31 +1816,41 @@ menu:
       parent: error_tracking
       identifier: error_tracking_explorer
       weight: 1
+    - name: Default Grouping
+      url: error_tracking/default_grouping
+      parent: error_tracking
+      identifier: error_tracking_default_grouping
+      weight: 2
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 2
+      weight: 3
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 3
+      weight: 4
     - name: APM
       url: error_tracking/apm
       parent: error_tracking
       identifier: error_tracking_apm
-      weight: 4
+      weight: 5
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
-      weight: 5
+      weight: 6
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
       weight: 6
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: error_tracking
+      identifier: error_tracking_troubleshooting
+      weight: 7
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2943,21 +2958,31 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
       weight: 1001
+    - name: Default Grouping
+      url: tracing/error_tracking/default_grouping
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_default_grouping
+      weight: 1002
     - name: Custom Grouping
       url: tracing/error_tracking/custom_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_custom_grouping
-      weight: 1002
+      weight: 1003
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1003
+      weight: 1004
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1004
+      weight: 1005
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_troubleshooting
+      weight: 1006
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4167,26 +4192,31 @@ menu:
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
       weight: 603
+    - name: Default Grouping
+      url: logs/error_tracking/default_grouping
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_default_grouping
+      weight: 604
     - name: Custom Grouping
       url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
-      weight: 604
+      weight: 605
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
-      weight: 605
+      weight: 606
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 606
-    - name: Exclude Logs
-      url: logs/error_tracking/excluding_logs
-      parent: log_management_error_tracking
-      identifier: log_management_error_tracking_excluding_logs
       weight: 607
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_troubleshooting
+      weight: 609
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5229,16 +5259,26 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_mobile
       weight: 803
+    - name: Default Grouping
+      url: real_user_monitoring/error_tracking/default_grouping
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_default_grouping
+      weight: 805
     - name: Custom Grouping
       url: real_user_monitoring/error_tracking/custom_grouping
       parent: rum_error_tracking
       identifier: rum_error_tracking_custom_grouping
-      weight: 804
+      weight: 806
     - name: Identify Suspect Commits
       url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
-      weight: 805
+      weight: 807
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_troubleshooting
+      weight: 808
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum

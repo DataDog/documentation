@@ -32,7 +32,24 @@ Microsoft Teams と統合して、以下のことができます。
 
 ### セットアップ
 
-Datadog を Microsoft Teams チャンネルと統合するには、以下のようにします。
+Microsoft のテナントを Datadog に接続します。
+
+1. Datadogで、[**Integrations > Microsoft Teams**][1] の順に移動します。
+2. **Add Tenant** をクリックすると、Microsoft に移動します。
+3. 画面の指示に従って、**OK** をクリックします。
+
+Datadog 通知を受信させたいすべてのチームに Datadog アプリが追加されていることを確認します。
+
+1. Microsoft Teams の左サイドバーで、**Apps** をクリックし、Datadog アプリを検索します。
+2. **Add** ボタンの横にあるドロップダウン矢印をクリックし、**Add to a team** をクリックします。
+3. Datadog 通知を受信させたいチームを選択します。
+4. **Set up a bot** をクリックします。
+
+ボットをチームに追加したら、Datadog で通知ハンドルを構成します。
+
+1. 構成されたテナントの下で、**Add Handle** をクリックします。ハンドルに名前を付け、ドロップダウンメニューから希望のチームとチャンネルを選択し、**Save** をクリックします。
+
+### コネクターのセットアップ (レガシー)
 
 1. チャンネルのリストで、チャンネル名の横にある `...` ボタンを選択し、**Connectors** を選択します。
 
@@ -44,12 +61,14 @@ Datadog を Microsoft Teams チャンネルと統合するには、以下のよ�
 
 3. コネクタ構成モーダルで、Webhook URL をコピーします。
 4. Datadogで、[**Integrations > Microsoft Teams**][1] の順に移動します。
-5. Configuration タブで、**Add Channel** をクリックしてチャンネルに名前を付け、webhook URL を貼り付けます。
+5. Configuration タブで、**Add Handle** をクリックしてハンドルに名前を付け、webhook URL を貼り付けます。
 6. コネクタ構成モーダルで、**Save** をクリックします。
 
-### 使用方法
+### API
 
-Datadog モニターから、[`@-notification` 機能][2]を使用して、Microsoft Teams に通知を送信します。通知を `@teams-<CHANNEL>` というアドレスに送信し、`<CHANNEL>` を Microsoft Teams のチャンネル名に置き換えます。
+Datadog モニターから、[`@-notification` 機能][2]を使用して、Microsoft Teams に通知を送信します。通知を `@teams-<HANDLE>` というアドレスに送信し、`<HANDLE>` を Microsoft Teams のハンドル名に置き換えます。
+
+注: モダン構成とレガシー構成の両方で同じ `@teams-<HANDLE>` 通知ハンドル名を構成している場合、通知はデフォルトでモダン構成を使用して送信されます。この動作を利用して、Datadog モニターですでに構成されているレガシーハンドルをオーバーライドして、モダン構成にアップグレードすることができます。
 
 ## Microsoft Teams における Datadog Incident Management
 
@@ -67,7 +86,7 @@ Datadog モニターから、[`@-notification` 機能][2]を使用して、Micro
 次に、Microsoft のテナントを Datadog に接続します。
 
 1. Datadog で、[Microsoft Teams Integration Tile][1] に移動します。
-2. **Add Account** をクリックすると、Microsoft に移動します。
+2. **Add Tenant** をクリックすると、Microsoft に移動します。
 3. 画面の指示に従って、**OK** をクリックします。
 
 Datadog Incident Management の一部の機能では、テナント上でアクションを実行するための権限が必要です。たとえば、インシデント用の新しいチームを作成する場合などです。テナント全体に対する管理者の同意を得るには、Microsoft 組織を代表して同意を与える権限を持つ人物が必要です。例えば、*Global Admin* ロールが割り当てられたユーザーが該当します。Datadog アプリケーションにテナント全体に対する管理者の同意を付与できる人物についての詳細は、[Microsoft Entra ID ドキュメント][3]をご覧ください。
@@ -75,8 +94,9 @@ Datadog Incident Management の一部の機能では、テナント上でアク�
 同意を付与するには
 
 1. Datadog で [Microsoft Teams インテグレーションタイル][1]に移動します。
-2. **Authorize** をクリックすると Microsoft にリダイレクトされます。この手順を実行するには、テナント全体に対する管理者同意を与えることができるユーザーが必要です。Microsoft のユーザーが Datadog のアカウントを持っている必要はありません。
-3. 画面の指示に従って、**OK** をクリックします。
+2. Incident Management を使用したいテナントで、右側の歯車アイコンをクリックします。
+3. **Authorize Tenant** をクリックすると Microsoft にリダイレクトされます。この手順を実行するには、テナント全体に対する管理者同意を与えることができるユーザーが必要です。Microsoft のユーザーが Datadog のアカウントを持っている必要はありません。
+4. 画面の指示に従って、**OK** をクリックします。
 
 ### ユーザー設定
 
@@ -104,7 +124,20 @@ Datadog からアカウントを接続することも可能です。
 
 {{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_datadog_v2.png" alt="Datadog Microsoft Teams インテグレーションタイルからアカウントを接続します" >}}
 
-### 使用方法
+### API
+
+#### ライブラリ
+
+ダッシュボードウィジェットのスナップショットを任意のチームまたはチャットに投稿できます。サポートされているウィジェットのリストについては、[スケジュールレポート][4]を参照してください。
+
+Teams でダッシュボードウィジェットを共有するには
+
+1. Datadog でダッシュボードウィジェットにカーソルを合わせ、`CMD + C` または `CTRL + C` を押すか、共有メニューから **Copy** ボタンをクリックします。
+1. リンクを Teams に貼り付けます。
+
+{{< img src="integrations/microsoft_teams/dashboard_share.png" alt="Microsoft Teams でのダッシュボードウィジェットの共有">}}
+
+#### ログメトリクス
 
 Microsoft Teams から新しいインシデントを宣言するには
 
@@ -112,7 +145,7 @@ Microsoft Teams から新しいインシデントを宣言するには
 2. `@Datadog` と入力するか、`...` ボタンで **Messaging extensions** メニューを開き、**Datadog** アプリを選択します。
 3. **Create an Incident** を選択します。
 4. 希望の情報をフォームに入力します。
-5. **作成**をクリックします。
+5. **Create** をクリックします。
 
 Datadog へのアクセス権の有無を問わず、Microsoft Teams テナント内の誰でもインシデントを宣言できます。
 
@@ -146,15 +179,15 @@ Microsoft Teams アプリがインストールされたら、**Incident Settings
 
 #### インシデントチャンネルの設定方法
 
-1. [Incidents Settings][4] に移動します。
+1. [Incidents Settings][5] に移動します。
 2. Microsoft Teams インテグレーションの **Incident Updates Channel** セクションを探します。
 3. インシデントアップデートのために、正しいテナント、チーム、チャンネルを選択します。
 
 {{< img src="integrations/microsoft_teams/ms_teams_incident_updates.png" alt="Microsoft Teams インシデントアップデートチャンネル設定。" >}}
 
-## 収集データ
+## Datadog Operator
 
-### メトリクス
+### データセキュリティ
 
 Microsoft Teams インテグレーションは、メトリクスを提供しません。
 
@@ -168,7 +201,7 @@ Microsoft Teams インテグレーションには、サービスのチェック�
 
 ## ヘルプ
 
-Datadog for Microsoft Teams には、以下の権限が必要です。詳細については、[Microsoft Graph 権限リファレンス][5]を参照してください。
+Datadog for Microsoft Teams には、以下の権限が必要です。詳細については、[Microsoft Graph 権限リファレンス][6]を参照してください。
 
 | API / 権限名               | タイプ        | リクエスト理由                                                                                  |
 |--------------------------------------|-------------|-------------------------------------------------------------------------------------------------|
@@ -179,7 +212,7 @@ Datadog for Microsoft Teams には、以下の権限が必要です。詳細に�
 | `TeamsAppInstallation.ReadWrite.All` | Application | Datadog Incident Management によって作成されたチームに Datadog アプリを追加します。  |
 | `TeamSettings.ReadWrite.All`         | Application | Datadog Incident Management が、インシデントチームの状態を最新の状態に保つようにします。            |
 
-## ヘルプ
+## トラブルシューティング
 
 ### SSO の使用
 
@@ -189,11 +222,12 @@ Datadog for Microsoft Teams には、以下の権限が必要です。詳細に�
 
 2. セットアップ手順 3 で MS Teams ページから Datadog にリダイレクトされたら、新しいタブを開き、SSO で Datadog にログインします。次に、セットアップ手順 4 を個別に実行します。
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/integrations/microsoft-teams
 [2]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
-[4]: https://app.datadoghq.com/incidents/settings#Integrations
-[5]: https://learn.microsoft.com/en-us/graph/permissions-reference
-[6]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/dashboards/scheduled_reports/
+[5]: https://app.datadoghq.com/incidents/settings#Integrations
+[6]: https://learn.microsoft.com/en-us/graph/permissions-reference
+[7]: https://docs.datadoghq.com/ja/help/

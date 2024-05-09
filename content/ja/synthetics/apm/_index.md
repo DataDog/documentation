@@ -59,7 +59,8 @@ https://*.datadoghq.com/*
 Datadog は、分散型トレーシングプロトコルを使用し、以下の HTTP ヘッダーを設定します。
 
 
-
+{{< tabs >}}
+{{% tab "Datadog" %}}
 `x-datadog-trace-id`
 : Synthetic モニタリングバックエンドから生成されます。このヘッダーを使用して、トレースがテスト結果にリンクされます。
 
@@ -67,21 +68,29 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 : Synthetic テストを生成されたトレースのルートスパンにします。
 
 `x-datadog-origin: synthetics`
-: API テストによって生成されたトレースが [APM クオータに影響しない](#how-are-apm-quotas-affected) ようにします。
+: API テストから生成されたトレースを識別します。これらのトレースのスパンには `ingestion_reason:synthetics` というタグが付けられます。
 
-`x-datadog-origin: synthetics-browser` 
-: ブラウザテストによって生成されたトレースが [APM クオータに影響しない](#how-are-apm-quotas-affected) ようにします。
+`x-datadog-origin: synthetics-browser`
+: ブラウザテストから生成されたトレースを識別します。これらのトレースには `ingestion_reason:synthetics-browser` というタグが付けられます。
 
 `x-datadog-sampling-priority: 1`
-: Agent がトレースを維持するようにします。
+: Agent がトレースを保持できるようにします。
+{{% /tab %}}
+{{% tab "W3C Trace Context" %}}
+`traceparent: [version]-[trace id]-[parent id]-[trace flags]`
+: `version`: 現行の仕様では、バージョンは `00` に設定することを想定しています。
+: `trace id`: 128 ビットのトレース ID (16 進数で 32 桁)。ソーストレース ID は APM との互換性を維持するため 64 ビットになっています。
+: `parent id`: 64 ビットのスパン ID (16 進数で 16 桁)。
+: `trace flags`: サンプリングあり (`01`)、またはサンプリングなし (`00`)
 
-### APM クオータへの影響
-
-`x-datadog-origin: synthetics` ヘッダーは、トレースが合成的に生成されることを APM バックエンドに通知します。このため、生成されたトレースは従来の APM クオータに影響しません。
+**例**:
+: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+{{% /tab %}}
+{{< /tabs >}}
 
 ### トレースの保持期間
 
-これらのトレースは、[従来の APM トレースと同様に][20]保持されます。
+これらのトレースは、[従来の APM のトレースと同じように][20] `Synthetics Default` という保持フィルターで 15 日間保持されます。
 
 ## その他の参考資料
 
@@ -93,7 +102,7 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 [2]: /ja/synthetics/multistep?tab=requestoptions
 [3]: /ja/synthetics/browser_tests/
 [4]: /ja/tracing/
-[5]: https://app.datadoghq.com/synthetics/settings/default
+[5]: https://app.datadoghq.com/synthetics/settings/integrations
 [6]: /ja/tracing/trace_collection/dd_libraries/python/
 [7]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
 [8]: /ja/tracing/trace_collection/dd_libraries/go/
