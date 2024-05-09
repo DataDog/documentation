@@ -3507,14 +3507,14 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: users
+    parent: usage-metering
     url: '#get-usage-across-your-account'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-snmp-devices
     name: Récupérer l'utilisation horaire pour les appareils SNMP
     params:
       operationids:
-      - GetUsageSNMP
+      - ''
       order: 24
       unstable: []
       versions:
