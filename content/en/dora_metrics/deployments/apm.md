@@ -11,7 +11,7 @@ further_reading:
   text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "/continuous_integration/dora_metrics/setup/failures"
   tag: "Documentation"
-  text: "Learn about sending failure events"
+  text: "Learn about setting up failure data in DORA Metrics"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
