@@ -901,25 +901,25 @@ menu:
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_api
       weight: 603
-    - name: IDE Integrations
-      url: developers/ide_integrations/
+    - name: IDE Plugins
+      url: developers/ide_plugins/
       parent: dev_tools
-      identifier: ide_integrations
+      identifier: ide_plugins
       weight: 7
     - name: JetBrains IDEs
-      url: developers/ide_integrations/idea/
-      parent: ide_integrations
-      identifier: ide_integrations_idea
+      url: developers/ide_plugins/idea/
+      parent: ide_plugins
+      identifier: ide_plugins_idea
       weight: 701
     - name: VS Code
-      url: developers/ide_integrations/vscode/
-      parent: ide_integrations
-      identifier: ide_integrations_vscode
+      url: developers/ide_plugins/vscode/
+      parent: ide_plugins
+      identifier: ide_plugins_vscode
       weight: 702
     - name: Visual Studio
-      url: developers/ide_integrations/visual_studio/
-      parent: ide_integrations
-      identifier: ide_integrations_visual_studio
+      url: developers/ide_plugins/visual_studio/
+      parent: ide_plugins
+      identifier: ide_plugins_visual_studio
       weight: 703
     - name: Community
       url: developers/community/
@@ -1109,11 +1109,21 @@ menu:
       identifier: cloudcraft_api_budgets_export
       parent: cloudcraft_api_budgets
       weight: 1
+    - name: Teams
+      url: cloudcraft/api/teams/
+      identifier: cloudcraft_api_teams
+      parent: cloudcraft_api
+      weight: 5
+    - name: List teams
+      url: cloudcraft/api/teams/#list-teams
+      identifier: cloudcraft_api_teams_list
+      parent: cloudcraft_api_teams
+      weight: 1
     - name: Users
       url: cloudcraft/api/users/
       identifier: cloudcraft_api_users
       parent: cloudcraft_api
-      weight: 5
+      weight: 6
     - name: Get user profile
       url: cloudcraft/api/users/#get-user-profile
       identifier: cloudcraft_api_users_info
@@ -1344,66 +1354,71 @@ menu:
       parent: monitor_types
       identifier: monitor_types_auditlogs
       weight: 205
+    - name: Change
+      url: monitors/types/change-alert/
+      parent: monitor_types
+      identifier: monitor_types_change
+      weight: 206
     - name: CI
       url: monitors/types/ci/
       parent: monitor_types
       identifier: monitor_types_ci
-      weight: 206
+      weight: 207
     - name: Cloud Cost
       url: monitors/types/cloud_cost/
       parent: monitor_types
       identifier: monitor_types_cloud_cost
-      weight: 207
+      weight: 208
     - name: Composite
       url: monitors/types/composite/
       parent: monitor_types
       identifier: monitor_types_composite
-      weight: 208
+      weight: 209
     - name: Database Monitoring
       url: monitors/types/database_monitoring/
       parent: monitor_types
       identifier: monitor_types_database_monitoring
-      weight: 209
+      weight: 210
     - name: Error Tracking
       url: monitors/types/error_tracking/
       parent: monitor_types
       identifier: monitor_types_error_tracking
-      weight: 210
+      weight: 211
     - name: Event
       url: monitors/types/event/
       parent: monitor_types
       identifier: monitor_types_event
-      weight: 211
+      weight: 212
     - name: Forecast
       url: monitors/types/forecasts/
       parent: monitor_types
       identifier: monitor_types_forecasts
-      weight: 212
+      weight: 213
     - name: Integration
       url: monitors/types/integration/
       parent: monitor_types
       identifier: monitor_types_integration
-      weight: 213
+      weight: 214
     - name: Live Process
       url: monitors/types/process/
       parent: monitor_types
       identifier: monitor_types_process
-      weight: 214
+      weight: 215
     - name: Logs
       url: monitors/types/log/
       parent: monitor_types
       identifier: monitor_types_log
-      weight: 215
+      weight: 216
     - name: Network
       url: monitors/types/network/
       parent: monitor_types
       identifier: monitor_types_network
-      weight: 216
+      weight: 217
     - name: Network Performance
       url: monitors/types/network_performance/
       parent: monitor_types
       identifier: monitor_types_network_performance
-      weight: 217
+      weight: 218
     - name: Outlier
       url: monitors/types/outlier/
       parent: monitor_types
@@ -1413,27 +1428,27 @@ menu:
       url: monitors/types/process_check/
       parent: monitor_types
       identifier: monitor_types_process_check
-      weight: 219
+      weight: 220
     - name: Real User Monitoring
       url: monitors/types/real_user_monitoring/
       parent: monitor_types
       identifier: monitor_types_rum
-      weight: 220
+      weight: 221
     - name: Service Check
       url: monitors/types/service_check/
       parent: monitor_types
       identifier: monitor_types_service_check
-      weight: 221
+      weight: 222
     - name: SLO Alerts
       url: monitors/types/slo/
       parent: monitor_types
       identifier: monitor_types_slo
-      weight: 222
+      weight: 223
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 223
+      weight: 224
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -1835,6 +1850,11 @@ menu:
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
+      weight: 6
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: error_tracking
+      identifier: error_tracking_troubleshooting
       weight: 7
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
@@ -2963,6 +2983,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
       weight: 1005
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_troubleshooting
+      weight: 1006
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4192,6 +4217,11 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
       weight: 607
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_troubleshooting
+      weight: 609
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5249,6 +5279,11 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
       weight: 807
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_troubleshooting
+      weight: 808
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
