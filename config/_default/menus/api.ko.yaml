@@ -269,7 +269,7 @@ menu:
       versions:
       - v1
     parent: authentication
-    url: ''
+    url: '#validate-api-key'
   - generated: true
     identifier: azure-integration
     name: Azure 통합
