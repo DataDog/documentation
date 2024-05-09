@@ -3462,7 +3462,7 @@ menu:
     parent: usage-metering
     url: '#get-hourly-usage-for-custom-metrics'
   - generated: true
-    identifier: usage-metering-get-hourly-usage-for-synthetics-browser-checks
+    identifier: ''
     name: 신서틱 브라우저 점검에 대한 시간당 사용량 받기
     params:
       operationids:
