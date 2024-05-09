@@ -248,6 +248,8 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Wrap your password in single quotes in case a special character is present.
+
 2. [Restart the Agent][10].
 
 ### Collecting logs (optional)
