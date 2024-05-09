@@ -3422,7 +3422,7 @@ menu:
       - v2
       versions:
       - v2
-    parent: ''
+    parent: usage-metering
     url: '#get-monthly-cost-attribution'
   - generated: true
     identifier: usage-metering-get-active-billing-dimensions-for-cost-attribution
