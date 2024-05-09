@@ -67,7 +67,7 @@ For Terraform, see the [Datadog Sensitive Data Scanner group][5] resource.
 
 To set up a scanning group:
 
-1. Navigate to the [Sensitive Data Scanner][6] configuration page. Alternatively, go to **Organization Settings** > **Sensitive Data Scanner** and click **Configuration**.
+1. Navigate to the [Sensitive Data Scanner][6] configuration page. Alternatively, go to **Organization Settings** > **Manage Sensitive Data** and click the **Configuration** tab.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
 1. Enter a name and description for the group.

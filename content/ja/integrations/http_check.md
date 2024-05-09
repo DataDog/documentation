@@ -29,7 +29,7 @@ draft: false
 git_integration_title: http_check
 integration_id: ネットワーク
 integration_title: HTTP チェック
-integration_version: 9.0.1
+integration_version: 9.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -47,7 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Web
-  - Category::Network
+  - Category::ネットワーク
   configuration: README.md#Setup
   description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
   media: []
@@ -56,19 +56,20 @@ tile:
   title: HTTP チェック
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 ローカルまたはリモート HTTP エンドポイントの上・下ステータスを監視します。HTTP チェックでは、レスポンス」がないことを示すコード (404 など) の検出、期限切れが近い SSL 証明書の特定、特定のテキストの応答の検索など、さまざまなことができます。また、HTTP 応答時間をメトリクスとして送信します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 HTTP チェックは、[Datadog Agent][1] のパッケージに含まれています。サーバーに追加でインストールする必要はありません。多くのメトリクス指向のチェックは、監視するサービスと同じホストで実行するのが最適ですが、このステータス指向のチェックは、監視するサイトを実行していないホストから実行したい場合があります。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `http_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[http_check.d/conf.yaml のサンプル][3]を参照してください。
 
@@ -121,17 +122,17 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 
 [Agent の `status` サブコマンドを実行][8]し、Checks セクションの `http_check` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "http_check" >}}
 
 
-### イベント
+### ヘルプ
 
 HTTP チェックにはイベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "http_check" >}}
 
 
@@ -139,7 +140,7 @@ HTTP チェックにはイベントは含まれません。
 
 **注:** これらのサービスチェックにアラートを設定するには、[ネットワークモニター][11]を作成します。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

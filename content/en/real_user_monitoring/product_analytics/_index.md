@@ -37,7 +37,7 @@ Explore [User Journeys][2] to see different visualizations of the user experienc
 
 [Heatmaps][5] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page.
 
-[1]: /real_user_monitoring/product_analytics/retention_analysis
+[1]: /real_user_monitoring/product_analytics/user_retention
 [2]: https://app.datadoghq.com/product-analytics/user-journey/sankey
 [3]: /real_user_monitoring/product_analytics/funnel_analysis
 [4]: https://app.datadoghq.com/product-analytics/user-journey/conversion

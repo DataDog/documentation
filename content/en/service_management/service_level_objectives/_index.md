@@ -140,9 +140,9 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 ## Viewing SLOs
 
-Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by context.
+Group your SLOs by *any* tag to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by service, team, user journey, tier, or any other tag set on your SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_group_by.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
+{{< img src="service_management/service_level_objectives/slo_group_by_new.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
 Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
@@ -152,9 +152,12 @@ Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs ne
 
 ### SLO tags
 
-When you create or edit an SLO, you can add tags for filtering on the [SLO status page][2] or for creating [SLO saved views][17].
+SLO tags can be used for filtering on the [SLO status page][2], creating [SLO saved views][17], or grouping SLOs to view. Tags can be added to SLOs in the following ways:
 
-Add tags to SLOs in bulk with the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
+- When you create or edit an SLO, you can add tags
+- From the SLO list view, you can add and update tags in bulk using the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
+
+{{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
 
 ### SLO default view
 
@@ -226,16 +229,16 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 ## SLO widgets
 
-{{< learning-center-callout header="Try Create Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
+{{< learning-center-callout header="Try Creating Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
   Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
 {{< /learning-center-callout >}}
 
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
-  - Use the SLO Summary widget to visualize the status of a single SLO.
+  - Use the SLO widget to visualize the status of a single SLO
   - Use the SLO List widget to visualize a set of SLOs
   - Graph 15 months' worth of metric-based SLO data with the [SLO data source][20] in both timeseries and scalar (query value, top list, table, change) widgets. 
   
-For more information about SLO Widgets, see the [SLO Summary][21] and [SLO List][22] widget pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
+For more information about SLO Widgets, see the [SLO widget][21] and [SLO List widget][22] pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
 
 To proactively manage the configurations of your SLOs, set an [Event Monitor][23] to notify you when events corresponding to certain tags occur.
 
@@ -298,13 +301,12 @@ The SLO Calendar View is available on the [SLO status page][2]. On the top right
 The CSV Export feature is in Private Beta. Complete the form to request access.
 {{< /callout >}}
 
-The SLO CSV Export feature is available on the [SLO status page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data.
+The SLO CSV Export feature is available on the [SLO status page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data with the following information:
 
-**Notes:**
-
-- The SLOs that are exported are based on your search query.
-- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO ID and name will be in the CSV (not the SLO’s status history data).
-- There is a limit of 1000 SLOs per export.
+- SLO id, name, and type
+- SLO tags
+- SLO target
+- Historical SLO status values
 
 {{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO calendar view" >}}
 
@@ -318,6 +320,12 @@ These times are based on the user's timezone setting in Datadog.
 The SLO statuses are calculated based on the SLO type:
 - **Metric-based SLOs:** Percent of good events out of total events for the time window
 - **Time Slice SLOs:** Percent of good minutes out of total minutes for the time window
+
+**Notes:**
+
+- The SLOs that are exported are based on your search query.
+- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO ID and name will be in the CSV (not the SLO’s status history data).
+- There is a limit of 1000 SLOs per export.
 
 ## Further Reading
 

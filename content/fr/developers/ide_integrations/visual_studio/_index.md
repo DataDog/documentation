@@ -1,6 +1,8 @@
 ---
 description: L'extension Datadog pour les développeurs .NET
 disable_toc: false
+aliases:
+- '/fr/developers/ide_integrations/visual_studio/'
 further_reading:
 - link: /getting_started/profiler/
   tag: Documentation

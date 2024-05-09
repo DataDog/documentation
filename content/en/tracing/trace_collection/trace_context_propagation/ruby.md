@@ -19,7 +19,7 @@ Datadog APM tracer supports [B3][6] and [W3C Trace Context][7] header extraction
 
 Distributed headers injection and extraction is controlled by configuring injection and extraction styles. The following styles are supported:
 
-- Datadog: `Datadog`
+- Datadog: `datadog`
 - B3 Multi Header: `b3multi`
 - B3 Single Header: `b3`
 - W3C Trace Context: `tracecontext`
@@ -27,29 +27,29 @@ Distributed headers injection and extraction is controlled by configuring inject
 
 Injection styles can be configured using:
 
-- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,b3`
+- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,b3`
 
-The value of the environment variable is a comma-separated list of header styles that are enabled for injection. The default setting is `Datadog,tracecontext`.
+The value of the environment variable is a comma-separated list of header styles that are enabled for injection. The default setting is `datadog,tracecontext`.
 
 Extraction styles can be configured using:
 
-- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,b3`
+- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,b3`
 
-The value of the environment variable is a comma-separated list of header styles that are enabled for extraction.
+The value of the environment variable is a comma-separated list of header styles that are enabled for extraction. The default setting is `datadog,tracecontext`.
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-The default extraction styles are, in order, `Datadog`, `b3multi`, `b3`, and `tracecontext`.
+The default extraction styles are, in order, `datadog`, `b3multi`, `b3`, and `tracecontext`.
 
 You can also enable or disable the use of these formats in code by using `Datadog.configure`:
 
 ```ruby
 Datadog.configure do |c|
   # List of header formats that should be extracted
-  c.tracing.distributed_tracing.propagation_extract_style = [ 'tracecontext', 'Datadog', 'b3' ]
+  c.tracing.distributed_tracing.propagation_extract_style = [ 'tracecontext', 'datadog', 'b3' ]
 
   # List of header formats that should be injected
-  c.tracing.distributed_tracing.propagation_inject_style = [ 'tracecontext', 'Datadog' ]
+  c.tracing.distributed_tracing.propagation_inject_style = [ 'tracecontext', 'datadog' ]
 end
 ```
 

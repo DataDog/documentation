@@ -1,5 +1,5 @@
 ---
-title: Go - Save 2 to 14% CPU in Production with Profile-Guided Optimization
+title: Go - Save up to 14% CPU in Production with Profile-Guided Optimization
 kind: guide
 further_reading:
 - link: "/profiler"
@@ -35,7 +35,7 @@ PGO is a standard Go compiler option that you can use by manually downloading pr
 
 To enable PGO using the `datadog-pgo` tool:
 
-1. Create a dedicated API key and unscoped application key for PGO as described in [API and Application Keys][5].
+1. Create a dedicated API key and an application key scoped to at least `continuous_profiler_pgo_read` as described in [API and Application Keys][5].
 2. Set `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE` with the environment secret mechanism of your CI provider.
 3. Run `datadog-pgo` before your build step.  
    For example, for a service `foo` that runs in `prod` and has its main package in `./cmd/foo`, you should add this step:
@@ -48,12 +48,19 @@ The Go toolchain automatically picks up any `default.pgo` file in the main packa
 
 See the [datadog-pgo GitHub repository][4] for more details.
 
+## Checking if PGO is enabled
+
+To check where PGO is enabled, search for [Go profiles without pgo tag set to true][7]. 
+
+The `pgo` tag was implemented in dd-trace-go 1.61.0, so any profiles prior to this version will not have `pgo:false`.
+
 [1]: https://tip.golang.org/doc/go1.21
 [2]: /profiler/enabling/go
 [3]: https://github.com/golang/go/issues/65532
 [4]: https://github.com/DataDog/datadog-pgo?tab=readme-ov-file#getting-started
 [5]: /account_management/api-app-keys
 [6]: https://go.dev/doc/pgo
+[7]: https://app.datadoghq.com/profiling/explorer?query=runtime%3Ago%20-pgo%3Atrue%20&viz=stream
 
 ## Further reading
 

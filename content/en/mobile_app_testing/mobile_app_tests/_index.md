@@ -34,7 +34,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 Mobile app tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][1].
 
-You can create mobile app tests in Datadog by navigating to [**UX Monitoring** > **New Test**][12] and selecting **Mobile Application Test**.
+You can create mobile app tests in Datadog by navigating to [**Digital Experience** > **New Test**][12] and selecting **Mobile Application Test**.
 
 {{< img src="mobile_app_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
 

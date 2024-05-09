@@ -24,7 +24,7 @@ This document walks through the following steps:
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Sensitive Data Redaction** use case to create a new pipeline.
+1. Select the **Sensitive Data Redaction** template to create a new pipeline.
 1. Select **Splunk HEC** as the source.
 
 ### Set up the source
