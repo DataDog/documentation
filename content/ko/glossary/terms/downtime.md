@@ -1,7 +1,7 @@
 ---
 core_product:
 - 알림
-- events
+- slos
 - 인시던트 관리
 title: 다운타임
 ---
