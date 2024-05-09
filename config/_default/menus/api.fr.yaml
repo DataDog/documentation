@@ -3496,7 +3496,7 @@ menu:
       versions:
       - v1
     parent: usage-metering
-    url: '#recuperer-l-utilisation-horaire-pour-l-archive-en-ligne'
+    url: '#get-hourly-usage-for-synthetics-checks'
   - generated: true
     identifier: usage-metering-get-usage-across-your-account
     name: Récupérer l'utilisation de votre compte
@@ -3507,7 +3507,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: usage-metering
+    parent: users
     url: '#get-usage-across-your-account'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-snmp-devices
