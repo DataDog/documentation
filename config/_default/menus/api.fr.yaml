@@ -3442,7 +3442,7 @@ menu:
     name: Récupérer toutes les métriques custom selon la moyenne horaire
     params:
       operationids:
-      - GetUsageTopAvgMetrics
+      - GetUsageSDS
       order: 7
       unstable: []
       versions:
