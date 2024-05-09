@@ -37,6 +37,16 @@ Analyze and improve the performance of your applications with real-time profilin
 
 {{< img src="/developers/ide_plugins/visual_studio/top-list.png" alt="The Code Insights view">}}
 
+### Static Analysis
+
+The Datadog extension runs [Static Analysis][14] rules on the source files you have open in your Solution. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes.
+
+Static Analysis supports scanning across multiple programming languages. For a complete list, see [Static Analysis Rules][15]. For file types belonging to supported languages, issues are shown in the source code editor using Visual Studio's code inspection system, and suggested fixes can be applied directly:
+
+{{< img src="/developers/ide_plugins/visual_studio/TBD.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
+
+Additionally, all issues detected by this feature are listed in the standard **Error List** view of Visual Studio.
+
 ### Logs navigation
 
 You can navigate to the [Log Explorer][18] on the Datadog platform directly from your C# source files. Look for the clickable icon preceding message strings from log statements within your source code:
