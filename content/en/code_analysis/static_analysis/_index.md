@@ -67,6 +67,7 @@ Static Analysis currently supports scanning the following languages and technolo
 {{< whatsnext desc="With Static Analysis, you can identify code vulnerabilities as you edit a file in your Integrated Development Environment (IDE). See the documentation for information about the following integrations:">}}
     {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/visual_studio/" >}}Datadog Extension for Visual Studio{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results
