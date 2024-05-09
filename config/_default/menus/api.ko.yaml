@@ -3484,9 +3484,9 @@ menu:
       versions:
       - v1
     parent: usage-metering
-    url: ''
+    url: '#get-hourly-usage-for-synthetics-api-checks'
   - generated: true
-    identifier: usage-metering-get-hourly-usage-for-synthetics-checks
+    identifier: ''
     name: 신서틱 점검에 대한 시간당 사용량 받기
     params:
       operationids:
