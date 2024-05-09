@@ -195,7 +195,7 @@ menu:
     parent: aws-logs-integration
     url: '#enable-an-aws-logs-integration'
   - generated: true
-    identifier: ''
+    identifier: aws-logs-integration-get-list-of-aws-log-ready-services
     name: AWS 로그 레디 서비스 목록 받기
     params:
       operationids:
