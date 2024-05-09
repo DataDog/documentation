@@ -15,7 +15,7 @@ menu:
     weight: 6
   - identifier: rate-limits
     name: 속도 제한
-    parent: API 개요
+    parent: API overview
     url: /api/latest/rate-limits/
     weight: 7
   - generated: true
