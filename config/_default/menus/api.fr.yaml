@@ -83,7 +83,7 @@ menu:
     parent: aws-integration
     url: '#create-an-amazon-eventbridge-source'
   - generated: true
-    identifier: aws-integration-get-all-amazon-eventbridge-sources
+    identifier: ''
     name: Récupérer toutes les sources Amazon EventBridge
     params:
       operationids:
