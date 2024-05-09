@@ -3435,8 +3435,8 @@ menu:
       - v2
       versions:
       - v2
-    parent: users
-    url: '#get-active-billing-dimensions-for-cost-attribution'
+    parent: usage-metering
+    url: ''
   - generated: true
     identifier: usage-metering-get-all-custom-metrics-by-hourly-average
     name: Récupérer toutes les métriques custom selon la moyenne horaire
