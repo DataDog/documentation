@@ -239,7 +239,7 @@ menu:
       order: 1
       unstable: []
       versions:
-      - ''
+      - v1
     parent: aws-logs-integration
     url: '#list-all-aws-logs-integrations'
   - generated: true
