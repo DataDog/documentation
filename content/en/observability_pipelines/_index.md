@@ -58,7 +58,7 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 ## Get started
 
-1. [Set up environment variables for the Observability Pipelines Worker][1].
+1. [Set up bootstrap options for the Observability Pipelines Worker][1].
 1. Navigate to [Observability Pipelines][2].
 1. Select a use case:
     - [Log volume control][3]

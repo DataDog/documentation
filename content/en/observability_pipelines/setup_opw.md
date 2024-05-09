@@ -27,9 +27,11 @@ further_reading:
 
 Bootstrap the Observability Pipelines Worker within your infrastructure before you set up a pipeline. These environment variables are separate from the options in the pipelines configuration file.
 
-## Environment variables
+## Bootstrap Options
 
-All configuration file paths specified remotely need to be under `DD_OP_DATA_DIR/config`.
+To set bootstrap options, do one of the following:
+- Use environmental variables.
+- Create a `bootstrap.yaml` and start the Worker instance with `--bootstrap-config /path/to/bootstrap.yaml`.
 
 `api_key`
 : env var: `DD_API_KEY`
@@ -47,6 +49,7 @@ All configuration file paths specified remotely need to be under `DD_OP_DATA_DIR
 `data_dir`
 : env var: `DD_OP_DATA_DIR`
 : The data directory (optional, default: `/var/lib/observability-pipelines-worker`). This is the file system directory that the Observability Pipelines Worker uses for local state.
+: **Note**: All configuration file paths specified remotely need to be under `DD_OP_DATA_DIR/config`.
 
 `tags: []`
 : env var: `DD_OP_TAGS`
