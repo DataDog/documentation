@@ -3484,13 +3484,13 @@ menu:
       versions:
       - v1
     parent: usage-metering
-    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-profiles'
+    url: '#get-hourly-usage-for-synthetics-api-checks'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-synthetics-checks
     name: Récupérer l'utilisation horaire pour les checks Synthetics
     params:
       operationids:
-      - GetUsageSynthetics
+      - GetUsageOnlineArchive
       order: 15
       unstable: []
       versions:
