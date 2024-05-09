@@ -105,7 +105,7 @@ menu:
       versions:
       - v1
     parent: aws-integration
-    url: ''
+    url: '#delete-an-amazon-eventbridge-source'
   - generated: true
     identifier: aws-integration-list-namespace-rules
     name: 네임스페이스 규칙 목록화
