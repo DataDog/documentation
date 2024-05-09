@@ -108,7 +108,7 @@ Technology Partners write and host the implementation code that makes up the int
 
 ## Requirements
 All integrations must include the following:
-* Out-of-the-box Integration Dashboard
+* An Out-of-the-box Integration Dashboard
 * 3 or more images for your tile
 * OAuth - for API Integrations only
 * A log pipeline - If your integration sends logs to Datadog
