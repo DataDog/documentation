@@ -11,6 +11,8 @@ further_reading:
   tag: 설명서
   text: 소스 코드 통합에 대해 알아봅니다.
 is_beta: true
+aliases:
+- '/ko/developers/ide_integrations/vscode/'
 kind: documentation
 title: Visual Studio Code를 위한 Datadog 확장 기능
 ---
@@ -19,7 +21,7 @@ title: Visual Studio Code를 위한 Datadog 확장 기능
 
  Visual Studio Code (VS Code)용 Datadog 확장 기능은 Datadog과 통합되어 개발을 촉진합니다.
 
-{{< img src="/developers/ide_integrations/vscode/datadog-vscode.png" alt="VS 코드 확장을 위한 Datadog" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/datadog-vscode.png" alt="VS 코드 확장을 위한 Datadog" style="width:100%;" >}}
 
 **Code Insights** 보기를 통해 다음과 같은 정보를 얻을 수 있습니다:
 - [Error Tracking][10]에서 발생하는 문제
@@ -47,7 +49,7 @@ Visual Studio Marketplace에서 [Datadog 확장][6]을 설치합니다.
 ## Code Insights
 **Code Insights** 트리는 코드 기반과 관련된 Datadog 플랫폼에서 생성한 인사이트를 표시합니다. 인사이트는 성능, 안정성, 보안의 세 가지 카테고리로 분류됩니다.
 
-{{< img src="/developers/ide_integrations/vscode/code-insights.png" alt="Code Insights 보기." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/code-insights.png" alt="Code Insights 보기." style="width:100%;" >}}
 
 Code Insights에는 각 문제에 대한 상세한 설명과 다음 링크가 포함됩니다:
 - 관련 소스 코드 위치
@@ -58,7 +60,7 @@ Code Insights에는 각 문제에 대한 상세한 설명과 다음 링크가 �
 ## Synthetic 테스트
 Datadog 확장 기능을 사용하면 IDE에서 직접 [로컬 환경에서 Synthetic HTTP 테스트 및 브라우저 테스트를 실행][1]할 수 있습니다. 코드가 프로덕션 환경에 배포되어 최종 사용자에게 영향을 미치기 전에 코드 변경으로 인해 발생할 수 있는 잠재적 문제를 식별하고 해결할 수 있습니다.
 
-{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="VS 코드의 Datadog 확장" style="width:100%;" >}}
+{{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="VS 코드의 Datadog 확장" style="width:100%;" >}}
 
 ### 로컬에서 Synthetic 테스트 실행
 
@@ -66,7 +68,7 @@ Datadog 확장 기능을 사용하면 IDE에서 직접 [로컬 환경에서 Synt
 2. 테스트의 설정을 변경하여 시작 URL을 변환하고 **Settings** 페이지에서 `localhost` URL을 지정합니다.
 3. 테스트를 실행합니다.
 
-{{< img src="developers/ide_integrations/vscode/test_configuration_modified_starturl.png" alt="테스트 설정 패널 및 설정 페이지에서 Synthetic 테스트의 시작 URL을 로컬 호스트 URL로 지정할 수 있습니다." style="width:100%;" >}}
+{{< img src="developers/ide_plugins/vscode/test_configuration_modified_starturl.png" alt="테스트 설정 패널 및 설정 페이지에서 Synthetic 테스트의 시작 URL을 로컬 호스트 URL로 지정할 수 있습니다." style="width:100%;" >}}
 
 Synthetic 테스트를 아직 설정하지 않은 경우 [Datadog 테스트를 생성합니다][3]. 로컬 환경에서 테스트를 실행하는 하는 방법에 대한 자세한 내용은 [API 테스트 시작][4], [브라우저 테스트 시작][5] 및 [지속적인 테스트 터널 설명서][1]를 참조하세요.
 
@@ -80,7 +82,7 @@ Synthetic 테스트를 아직 설정하지 않은 경우 [Datadog 테스트를 �
 
 **View in VS Code** 기능은 Datadog에서 소스 파일로 직접 링크를 제공합니다. UI에 표시된 스택 트레이스의 프레임 옆에 있는 버튼을 찾습니다(예: [Error Tracking][10]):
 
-{{< img src="/developers/ide_integrations/vscode/view-in-vscode.png" alt="View in VS Code 버튼을 보여주는 Datadog 플랫폼의 스택 트레이스." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/view-in-vscode.png" alt="View in VS Code 버튼을 보여주는 Datadog 플랫폼의 스택 트레이스." style="width:100%;" >}}
 
 <div class="alert alert-info">이 기능을 사용하려면 먼저 서비스에 대한 <a href="/integrations/guide/source-code-integration/">소스 코드 통합</a>을 설정하세요.</div>
 

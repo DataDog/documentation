@@ -681,6 +681,11 @@ menu:
       identifier: otel_hostname
       parent: otel_schema
       weight: 404
+    - name: Service-entry Spans Mapping
+      url: opentelemetry/schema_semantics/service_entry_spans/
+      identifier: otel_service_entry_spans
+      parent: otel_schema
+      weight: 404
     - name: Ingestion Sampling
       url: opentelemetry/ingestion_sampling_with_opentelemetry
       identifier: otel_sampling
@@ -896,25 +901,25 @@ menu:
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_api
       weight: 603
-    - name: IDE Integrations
-      url: developers/ide_integrations/
+    - name: IDE Plugins
+      url: developers/ide_plugins/
       parent: dev_tools
-      identifier: ide_integrations
+      identifier: ide_plugins
       weight: 7
     - name: JetBrains IDEs
-      url: developers/ide_integrations/idea/
-      parent: ide_integrations
-      identifier: ide_integrations_idea
+      url: developers/ide_plugins/idea/
+      parent: ide_plugins
+      identifier: ide_plugins_idea
       weight: 701
     - name: VS Code
-      url: developers/ide_integrations/vscode/
-      parent: ide_integrations
-      identifier: ide_integrations_vscode
+      url: developers/ide_plugins/vscode/
+      parent: ide_plugins
+      identifier: ide_plugins_vscode
       weight: 702
     - name: Visual Studio
-      url: developers/ide_integrations/visual_studio/
-      parent: ide_integrations
-      identifier: ide_integrations_visual_studio
+      url: developers/ide_plugins/visual_studio/
+      parent: ide_plugins
+      identifier: ide_plugins_visual_studio
       weight: 703
     - name: Community
       url: developers/community/
@@ -1104,11 +1109,21 @@ menu:
       identifier: cloudcraft_api_budgets_export
       parent: cloudcraft_api_budgets
       weight: 1
+    - name: Teams
+      url: cloudcraft/api/teams/
+      identifier: cloudcraft_api_teams
+      parent: cloudcraft_api
+      weight: 5
+    - name: List teams
+      url: cloudcraft/api/teams/#list-teams
+      identifier: cloudcraft_api_teams_list
+      parent: cloudcraft_api_teams
+      weight: 1
     - name: Users
       url: cloudcraft/api/users/
       identifier: cloudcraft_api_users
       parent: cloudcraft_api
-      weight: 5
+      weight: 6
     - name: Get user profile
       url: cloudcraft/api/users/#get-user-profile
       identifier: cloudcraft_api_users_info
@@ -1830,6 +1845,11 @@ menu:
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
+      weight: 6
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: error_tracking
+      identifier: error_tracking_troubleshooting
       weight: 7
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
@@ -2958,6 +2978,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
       weight: 1005
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_troubleshooting
+      weight: 1006
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4187,6 +4212,11 @@ menu:
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
       weight: 607
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_troubleshooting
+      weight: 609
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5249,6 +5279,11 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
       weight: 807
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_troubleshooting
+      weight: 808
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum

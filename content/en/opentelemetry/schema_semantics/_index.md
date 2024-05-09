@@ -20,6 +20,7 @@ The following documentation describes how OpenTelemetry and Datadog conventions 
     {{< nextlink href="/opentelemetry/schema_semantics/metrics_mapping/" >}}Metrics Mapping{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/schema_semantics/host_metadata/" >}}Infrastructure Host Mapping{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/schema_semantics/hostname/" >}}Hostname Mapping{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/schema_semantics/service_entry_spans/" >}}Service-entry Spans Mapping{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

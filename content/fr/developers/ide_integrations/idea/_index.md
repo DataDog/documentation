@@ -1,5 +1,7 @@
 ---
 disable_toc: false
+aliases:
+- '/fr/developers/ide_integrations/idea/'
 further_reading:
 - link: /getting_started/profiler/
   tag: Documentation
@@ -23,7 +25,7 @@ title: Plug-in Datadog pour la plateforme IntelliJ
 
 Le plug-in Datadog pour la plateforme IntelliJ (IDEA et GoLand) vous permet d'améliorer les performances de vos logiciels en profitant d'informations pertinentes sur le code dans votre IDE. Ces informations sont basées sur les données d'observabilité en temps réel.
 
-{{< img src="/developers/ide_integrations/idea/overview1.png" alt="La fenêtre de l'outil Datadog ouverte dans IDEA" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/overview1.png" alt="La fenêtre de l'outil Datadog ouverte dans IDEA" style="width:100%;" >}}
 
 La vue **Code Insights** affiche les informations suivantes :
 - Les problèmes identifiés par le [suivi des erreurs][6]
@@ -53,7 +55,7 @@ La fonctionnalité **Logs Navigation** permet d'ouvrir le Log Explorer de Datado
 1. Si un message s'affiche pour vous informer que Datadog est un plug-in tiers, cliquez sur **Accept**.
 1. Cliquez sur **Restart IDE**.
 
-{{< img src="/developers/ide_integrations/idea/marketplace.png" alt="Le plug-in Datadog" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/marketplace.png" alt="Le plug-in Datadog" style="width:100%;" >}}
 
 Vous pouvez également installer le plug-in via le [Marketplace de JetBrains][4].
 
@@ -82,7 +84,7 @@ Pour supprimer un service, sélectionnez le service concerné dans le tableau **
 ## Code Insights
 L'onglet **Code Insights** affiche les informations générées par la plateforme Datadog en fonction de votre projet actuel. Les insights sont regroupés en trois catégories : performances, fiabilité et sécurité.
 
-{{< img src="/developers/ide_integrations/idea/code-insights.png" alt="L'onglet Code Insights." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/code-insights.png" alt="L'onglet Code Insights." style="width:100%;" >}}
 
 Les Code Insights comprennent une description détaillée de chaque problème et offrent un accès facile à :
 - L'emplacement du code source associé
@@ -107,7 +109,7 @@ Les types de profiling disponibles incluent généralement des options telles qu
 
 Le sous-onglet **Top List** affiche les méthodes qui consomment le plus de ressources d'après les données de profiling agrégées issues des serveurs Datadog.  La vue **Top List** est conçue pour afficher un résumé des méthodes susceptibles d'être les plus intéressantes en termes de consommation de ressources.
 
-{{< img src="/developers/ide_integrations/idea/top-list1.png" alt="La vue Top List" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/top-list1.png" alt="La vue Top List" style="width:100%;" >}}
 
 - Double-cliquez sur un élément de la liste (ou sélectionnez **Jump to Source** dans le menu contextuel) pour ouvrir un éditeur de code source indiquant où la méthode est définie.
 - Pour visualiser une méthode sous forme de flamegraph, sélectionnez **Search in Flame Graph** dans le menu contextuel.
@@ -124,7 +126,7 @@ Faites un clic droit sur une méthode dans l'arborescence des appels pour affich
 
 La vue Flamegraph est une représentation d'échantillons de profiling qui montre les stack traces et leur fréquence relative pendant la période considérée. Le plug-in Datadog recueille plusieurs profils individuels sur l'intervalle de temps demandé et procède à leur agrégation. Chaque profil individuel couvre un intervalle de 60 secondes dans l'intervalle de temps demandé.
 
-{{< img src="/developers/ide_integrations/idea/flamegraph1.png" alt="Flamegraph affichant le temps CPU enregistré au cours de la dernière heure" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/flamegraph1.png" alt="Flamegraph affichant le temps CPU enregistré au cours de la dernière heure" style="width:100%;" >}}
 
 Chaque fois que vous modifiez le type de profil, l'intervalle de temps ou l'environnement, le plug-in Datadog génère un nouveau flamegraph.
 
@@ -140,23 +142,23 @@ Passez votre souris sur une méthode pour afficher une infobulle contenant les i
 
 Les échantillons de profiling incluent les informations sur la stack trace et le numéro de ligne. Cliquez sur **Separate Flame Graph by** pour séparer les rectangles par méthode ou par numéro de ligne.
 
-{{< img src="/developers/ide_integrations/idea/separate-flamegraph-by.png" alt="Cliquez sur l'infobulle pour séparer les rectangles par méthode ou numéro de ligne" style="width:40%;" >}}
+{{< img src="/developers/ide_plugins/idea/separate-flamegraph-by.png" alt="Cliquez sur l'infobulle pour séparer les rectangles par méthode ou numéro de ligne" style="width:40%;" >}}
 
 ### Mise en évidence de la source
 
 Lorsque l'onglet Continuous Profiler est actif, le plug-in met en évidence certaines lignes de code dans la marge de l'éditeur. Pour la top list des méthodes, une icône apparaît dans la marge de l'éditeur et les lignes de code spécifiques sont mises en évidence en fonction des données de profiling actives.
 - Passez votre souris sur l'icône pour afficher plus d'informations.
 - Cliquez sur l'icône pour ouvrir l'onglet Profiling Top List ou accéder aux profils dans Datadog.
-  {{< img src="/developers/ide_integrations/idea/interest-options.png" alt="Cliquez sur l'icône Datadog pour ouvrir les données de profiling dans un onglet ou dans Datadog" style="width:100%;" >}}
+  {{< img src="/developers/ide_plugins/idea/interest-options.png" alt="Cliquez sur l'icône Datadog pour ouvrir les données de profiling dans un onglet ou dans Datadog" style="width:100%;" >}}
 
 L'onglet Profiling actif affecte également l'arborescence du projet, qui est annotée avec les métriques du profil sélectionné :
-{{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="L'arborescence du projet annotée avec les métriques de profil d'un onglet Profile" style="width:60%;" >}}
+{{< img src="/developers/ide_plugins/idea/project-tree-view.png" alt="L'arborescence du projet annotée avec les métriques de profil d'un onglet Profile" style="width:60%;" >}}
 
 ## Accès aux logs
 
 Vous pouvez accéder au [Log Explorer][5] sur la plateforme Datadog directement depuis vos fichiers sources Java ou Go. Pour ce faire, utilisez les liens **View Logs** placés juste après les déclarations de log dans votre code source :
 
-{{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="Fichier source affichant un lien View Logs." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/logs-navigation.png" alt="Fichier source affichant un lien View Logs." style="width:100%;" >}}
 
 Cliquez sur le lien pour ouvrir le **Log Explorer** avec une requête correspondant le plus possible au nom du logger, au niveau de log et au message de log.
 
@@ -164,7 +166,7 @@ Cliquez sur le lien pour ouvrir le **Log Explorer** avec une requête correspond
 
 La fonctionnalité **View in IntelliJ IDEA** permet d'accéder directement à vos fichiers source Java depuis la plateforme Datadog (pas encore disponible pour Go). Le bouton se situe à côté des frames dans les stack traces affichées sur la plateforme (par exemple, dans la fonctionnalité de [suivi des erreurs][6]) :
 
-{{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="Une stack trace sur la plateforme Datadog affichant le bouton View in IntelliJ." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/view-in-idea.png" alt="Une stack trace sur la plateforme Datadog affichant le bouton View in IntelliJ." style="width:100%;" >}}
 
 <div class="alert alert-info">Cette fonctionnalité a deux prérequis : (1) l'intégration du code source Datadog doit être configurée pour votre service, et (2) la JetBrains Toolbox doit être installée sur votre machine de développement.</div>
 
