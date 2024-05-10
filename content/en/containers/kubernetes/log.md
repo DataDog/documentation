@@ -435,7 +435,7 @@ datadog:
       value: "5"
 ```
 {{% /tab %}}
-{{< tabs >}}
+{{< /tabs >}}
 
 #### Missing host-level tags on new hosts or nodes
 
@@ -464,7 +464,7 @@ datadog:
       value: "10m"
 ```
 {{% /tab %}}
-{{< tabs >}}
+{{< /tabs >}}
 
 ## Further Reading
 
