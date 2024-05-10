@@ -348,7 +348,7 @@ def process_message():
 
 ## Tracing multiple applications
 
-The SDK supports tracking multiple LLM applications from the same service.
+The LLM Observability SDK for Python supports tracking multiple LLM applications from the same service.
 
 You can configure an environment variable `DD_LLMOBS_APP_NAME` to the name of your LLM application, which all generated spans are grouped into by default.
 
