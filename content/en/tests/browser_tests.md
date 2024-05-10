@@ -37,8 +37,9 @@ RUM integration is supported for Cypress browser tests and Selenium-driven brows
 
 #### Selenium
 
-* `selenium-java` >= 3.141.59
-* `dd-trace-java` >= 1.34.0
+* `selenium-js` >= 4.11.0, `dd-trace-js` >= 5.11.0
+* `selenium-java` >= 3.141.59, `dd-trace-java` >= 1.34.0
+* `selenium-dotnet` >= 3.0.0, `dd-trace-dotnet` >= 2.51.0
 * `browser-sdk` >= 5.15.0
 
 <blockquote class="alert alert-info">
