@@ -252,7 +252,7 @@ def process_message():
 
 ## Annotating a span
 
-The LLM Observability Python SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata. 
+The LLM Observability SDK for Python provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata. 
 
 ### Arguments
 
