@@ -220,7 +220,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 2. [Restart the Agent][2].
 
-**The Datadog Agent supports auto-discovering all aurora endpoints in a cluster.** In order to do this, please [follow this guide.][14]
+**The Datadog Agent supports [Autodiscovery][14] of all Aurora endpoints in a cluster.** 
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
