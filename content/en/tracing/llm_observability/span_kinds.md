@@ -9,13 +9,13 @@ LLM Observability supports the following span kinds:
 
 | Kind      | Represents   | Root span?   | Can have child spans? |
 |-----------|--------------|--------------|-------------|
-| [Agent](#agent-span)     | A series of choices made by a language model, often consisting of tool calls and calls to external knowledge bases | Yes | Yes  |
-| [Workflow](#workflow-span)  | A predetermined sequence of steps, often consisting of some combination of tool calls and data retrieval | Yes | Yes |
-| [LLM](#llm-span)      | Individual LLM calls, such as a call to OpenAI GPT-4 | Yes | No |
-| [Tool](#tool-span)      | Function calls to external programs or services, such as a web search API | No | No |
-| [Embedding](#embedding-span) | A call to an embedding model to create an embedding suitable for sending into a subsequent retrieval step | No  | Yes |
-| [Retrieval](#retrieval-span) | An array of documents returned from an external knowledge base | No | No | 
-| [Task](#task-span)      | A step in the chain that does not involve a call to an external service, such as a data preprocessing step | No | No |
+| [Agent](#agent-span)     | A series of choices made by a language model, often consisting of tool calls and calls to external knowledge bases. | Yes | Yes  |
+| [Workflow](#workflow-span)  | A predetermined sequence of steps, often consisting of some combination of tool calls and data retrieval. | Yes | Yes |
+| [LLM](#llm-span)      | Individual LLM calls, such as a call to OpenAI GPT-4. | Yes | No |
+| [Tool](#tool-span)      | Function calls to external programs or services, such as a web search API. | No | No |
+| [Embedding](#embedding-span) | A call to an embedding model to create an embedding suitable for sending into a subsequent retrieval step. | No  | Yes |
+| [Retrieval](#retrieval-span) | An array of documents returned from an external knowledge base. | No | No | 
+| [Task](#task-span)      | A step in the chain that does not involve a call to an external service, such as a data preprocessing step. | No | No |
 
 For instructions on creating spans from your application, including code examples, see [Tracing spans][2] in the SDK documentation.
 
