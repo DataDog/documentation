@@ -34540,7 +34540,10 @@ paths:
         must be included. For example, when modifying a query all queries must be
         included.
 
-        Default rules can only be updated to be enabled and to change notifications.'
+        Default rules can only be updated to be enabled, to change notifications,
+        or to update
+
+        the tags (default tags cannot be removed).'
       operationId: UpdateSecurityMonitoringRule
       parameters:
       - $ref: '#/components/parameters/SecurityMonitoringRuleID'
