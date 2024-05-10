@@ -39,6 +39,31 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
+### Report ANRs
+
+An "Application Not Responding" ([ANR][6]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
+
+ANRs are only reported through the RUM SDK (not through Logs).
+
+In Error Tracking:
+
+- **Fatal ANRs** are listed as individual issues
+- **Non-fatal ANRs** are grouped under a single issue due to their level of noise
+
+#### Fatal ANRs reporting
+Fatal ANRs are ANRs that result in crashes. They are reported when the application is being unresponsive and leads to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
+
+By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][7] (available since Android 30+), which can be read on the next app launch.
+
+In *Android 29 and below*, reporting on fatal ANRs is not possible.
+
+#### Non-fatal ANR reporting
+Non-fatal ANRs may or may not have led to the application being terminated, or crashed.
+
+By default, non-fatal ANRs on *Android 30+* are **disabled** because it would create too much noise over fatal ANRs. However, they are **enabled** on *Android 29 and below* by default because reporting on fatal ANRs is not possible on those versions.
+
+In any Android version, you can override the default setting for reporting non-fatal ANRs by calling `trackNonFatalAnrs(true|false)` when initializing the RUM SDK.
+
 ## Get deobfuscated stack traces
 
 ### Upload your mapping file
@@ -209,3 +234,5 @@ To test your implementation:
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android#setup
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tabs=kotlin#initialization-parameters
+[6]: https://developer.android.com/topic/performance/vitals/anr
+[7]: https://developer.android.com/reference/android/app/ApplicationExitInfo
