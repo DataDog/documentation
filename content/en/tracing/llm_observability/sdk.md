@@ -61,7 +61,7 @@ The full list of supported environment variables is below.
 
 ## Tracing spans
 
-To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). Learn more about the available span kinds in [the span documentation][8].
+To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). For a list of available span kinds, see the [Span Kinds documentation][8].
 
 ### Agent span
 
