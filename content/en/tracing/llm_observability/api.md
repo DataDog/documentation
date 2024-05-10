@@ -333,3 +333,4 @@ Evaluation metrics require a `span_id` and `trace_id`.
 
 [1]: /tracing/llm_observability/sdk/
 [2]: /tracing/llm_observability/span_kinds/
+[3]: /getting_started/tagging/
