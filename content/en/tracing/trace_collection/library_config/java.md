@@ -317,6 +317,11 @@ When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32
 **Default**: `false`<br>
 When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
 
+`dd.trace.otel.enabled`
+: **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, enables OpenTelemetry based tracing for [custom][16] instrumentation.
+
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
@@ -521,3 +526,4 @@ Available since version 1.10.0
 [13]: /tracing/compatibility_requirements/java#disabling-integrations
 [14]: /integrations/java/?tab=host#metric-collection
 [15]: /tracing/trace_collection/trace_context_propagation/java/
+[16]: /tracing/trace_collection/custom_instrumentation/java/otel/
