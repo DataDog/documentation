@@ -266,7 +266,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `metadata` 
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input/output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
+<br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
 
 `tags` 
 : optional - _dictionary_
