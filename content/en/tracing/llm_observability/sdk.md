@@ -4,7 +4,13 @@ title: LLM Observability SDK
 
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
-## Installation
+## Overview
+
+The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. 
+
+You can install and configure tracing of various operations such as workflows, tasks, and API calls with simple context managers or function decorators. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
+
+## Setup
 
 Install the latest `ddtrace` package hash:
 
