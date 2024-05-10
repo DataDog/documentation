@@ -307,7 +307,7 @@ Evaluation metrics require a `span_id` and `trace_id`.
 
 | Field   | Type         | Description                                         |
 |---------|--------------|-----------------------------------------------------|
-| metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of eval metrics for a given prompt-response pair. |
+| metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of evaluation metrics for a given prompt-response pair. |
 
 #### EvalMetric
 
