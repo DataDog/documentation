@@ -25,6 +25,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-warning">All configuration file paths specified remotely need to be under <code>DD_OP_DATA_DIR/config</code></div>
+
 Bootstrap the Observability Pipelines Worker within your infrastructure before you set up a pipeline. These environment variables are separate from the options in the pipelines configuration file.
 
 ## Bootstrap Options
@@ -49,7 +51,6 @@ To set bootstrap options, do one of the following:
 `data_dir`
 : env var: `DD_OP_DATA_DIR`
 : The data directory (optional, default: `/var/lib/observability-pipelines-worker`). This is the file system directory that the Observability Pipelines Worker uses for local state.
-: **Note**: All configuration file paths specified remotely need to be under `DD_OP_DATA_DIR/config`.
 
 `tags: []`
 : env var: `DD_OP_TAGS`
