@@ -3,8 +3,8 @@ algolia:
   rank: 80
   tags:
   - fips
-  - fips proxy
-  - conformidad
+  - proxy fips
+  - cumplimiento
   - fedramp
   - govcloud
 alias:
@@ -17,7 +17,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-fips-enabled-agent/
   tag: Blog
   text: Monitorizar cargas de trabajo altamente reguladas con el Agent de Datadog
-    habilitado para FIPS
+    habilitado por FIPS
 kind: Guía
 title: Cumplimiento de estándares FIPS por parte de Datadog
 ---
