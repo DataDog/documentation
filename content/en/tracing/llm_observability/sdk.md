@@ -237,7 +237,7 @@ def sanitize_input():
 
 ## Tracing spans using function decorators
 
-For each span kind, the LLM Observability Python SDK `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators can be used the same way as their inline counterparts.
+For each span kind, the LLM Observability SDK for Python `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators can be used the same way as their inline counterparts.
 
 ### Example
 
