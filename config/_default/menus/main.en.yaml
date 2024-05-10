@@ -2888,7 +2888,7 @@ menu:
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_trace_an_application
       weight: 702
-    - name: Span kinds
+    - name: Span Kinds
       url: tracing/llm_observability/span_kinds/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_span_kinds
