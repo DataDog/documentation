@@ -225,6 +225,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[14]: /database_monitoring/guide/aurora_autodiscovery/?tab=postgres
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -428,4 +429,4 @@ If you have installed and configured the integrations and Agent as described and
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
 [13]: /database_monitoring/guide/managed_authentication
-[14]: /database_monitoring/guide/aurora_autodiscovery/?tab=postgres
+

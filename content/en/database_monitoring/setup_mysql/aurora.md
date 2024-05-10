@@ -204,6 +204,7 @@ instances:
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /database_monitoring/guide/aurora_autodiscovery/?tab=mysql
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -372,4 +373,4 @@ If you have installed and configured the integrations and Agent as described and
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
-[10]: /database_monitoring/guide/aurora_autodiscovery/?tab=mysql
+
