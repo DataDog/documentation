@@ -23,7 +23,7 @@ For instructions on creating spans from your application, including code example
 
 ## Agent span
 
-Agent spans represent a dynamic sequence of operations where an autonomous decision-maker determines which operations and tools to execute. For example, an agent span might represent a series of reasoning steps controlled by a [ReAct agent][1].
+Agent spans represent a dynamic sequence of operations where a large language model determines which operations to execute. For example, an agent span might represent a series of reasoning steps controlled by a [ReAct agent][1].
 
 Agent spans are frequently the root span for traces controlled by LLM reasoning engines.
 
