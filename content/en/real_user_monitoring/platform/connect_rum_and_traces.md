@@ -114,9 +114,21 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
+4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `all` by default).
+
+    For example, if you set the `traceSampleRate` to 20% in the Browser SDK:
+    - When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
+
+  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
+
+  - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+
+    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-2.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
+
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
 [1]: /real_user_monitoring/browser/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
@@ -162,10 +174,11 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM iOS Monitoring][1].
 
-2. Enable `Trace`:
+2. Enable `RUM` with the `urlSessionTracking` option and `firstPartyHostsTracing` parameter:
     ```swift
-    Trace.enable(
-        with: .init(
+    RUM.enable(
+        with: RUM.Configuration(
+            applicationID: "<rum application id>",
             urlSessionTracking: .init(
                 firstPartyHostsTracing: .trace(
                     hosts: [
@@ -204,8 +217,9 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
      To keep 100% of backend traces:
     ```swift
-    Trace.enable(
-        with: .init(
+    RUM.enable(
+        with: RUM.Configuration(
+            applicationID: "<rum application id>",
             urlSessionTracking: .init(
                 firstPartyHostsTracing: .trace(
                     hosts: [
@@ -405,10 +419,11 @@ RUM supports several propagator types to connect resources with backends that ar
 
 1. Set up RUM to connect with APM as described above.
 
-2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hostsWithHeaders:sampleRate:)` as follows:
+2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hosts:sampleRate:)` as follows:
     ```swift
-      Trace.enable(
-          with: .init(
+      RUM.enable(
+          with: RUM.Configuration(
+              applicationID: "<rum application id>",
               urlSessionTracking: .init(
                   firstPartyHostsTracing: .traceWithHeaders(
                       hostsWithHeaders: [

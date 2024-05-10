@@ -8,7 +8,6 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
 - notifications
 - network
 dependencies:
@@ -35,7 +34,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::モニタリング
   - Category::Notifications
   - Category::ネットワーク
   configuration: README.md#Setup
@@ -56,11 +54,11 @@ SNMP walk サービスからメトリクスをリアルタイムに取得して�
 - SNMP walk の状態を視覚化および監視できます。
 - SNMP walk のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
  SNMP walk チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い  SNMP walk チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -72,7 +70,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い  SNMP walk チ
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. SNMP walk [メトリクス](#メトリクス) を収集するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `snmpwalk.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル snmpwalk.d/conf.yaml][5] を参照してください。
 
@@ -82,21 +80,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い  SNMP walk チ
 
 [Agent の `status` サブコマンドを実行][7]し、Checks セクションで `snmpwalk` を探します。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 
 SNMP walk チェックには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 SNMP walk チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

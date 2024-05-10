@@ -1,7 +1,7 @@
 ---
 categories:
-- monitoring
-- notification
+- collaboration
+- notifications
 dependencies: []
 description: OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: https://docs.datadoghq.com/integrations/opsgenie/
@@ -10,6 +10,9 @@ further_reading:
 - link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#opsgenie-integration
   tag: ブログ
   text: サービスカタログとのインテグレーションを利用する
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_opsgenie_service_object
+  tag: Terraform
+  text: Terraform による Opsgenie サービスオブジェクトの作成と管理
 git_integration_title: opsgenie
 has_logo: true
 integration_id: ''
@@ -24,6 +27,7 @@ short_description: OpsGenie を Datadog のアラートとイベントで通知�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 `@opsgenie` を使用して、次の方法でアラートを作成できます。
@@ -31,15 +35,15 @@ version: '1.0'
 - スナップショットを取得して作成
 - メトリクスアラートがトリガーされたときに作成
 
-## セットアップ
+## 計画と使用
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 #### Opsgenie で Datadog インテグレーションを作成する
 
 1. Opsgenie アカウントにログインし、[Opsgenie のインテグレーション][1]ページに移動します。
 2. Datadog を検索し、タイルをクリックします。
-3. Choose the recipients of Datadog alerts in Opsgenie using the **Responders** field.
+3. Opsgenie の **Responders** フィールドを使用して、Datadog アラートの受信者を選択します。
 4. [Integrations > APIs ページ][2]にある Datadog API キーを入力します。
 5. Datadog EU サイトを使用している場合は、`Send to Datadog EU` にチェックを入れてください。
 6. 必要に応じて、インテグレーションの名前を変更します。
@@ -54,25 +58,25 @@ version: '1.0'
 3. Datadog インテグレーションごとに提供されたキー (Opsgenie で作成される) を「**Opsgenie API Key**」フィールドに貼り付け、**Service Name** にサービス名を入力します。
    {{< img src="integrations/opsgenie/datadog-add-opsgenie-api-key.png" alt="Datadog で Opsgenie キーを追加" popup="true">}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Opsgenie インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 Opsgenie インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Opsgenie インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

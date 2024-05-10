@@ -28,7 +28,7 @@ draft: false
 git_integration_title: directory
 integration_id: システム
 integration_title: Directory
-integration_version: 2.0.0
+integration_version: 2.1.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -45,7 +45,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS & System
+  - Category::OS とシステム
   configuration: README.md#Setup
   description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
   media: []
@@ -54,6 +54,7 @@ tile:
   title: Directory
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -65,13 +66,13 @@ tile:
 - 最終更新からの経過時間
 - 作成からの経過時間
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Directory チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Directory のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `directory.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル directory.d/conf.yaml][3] を参照してください。
 
@@ -96,25 +97,25 @@ Directory チェックは [Datadog Agent][1] パッケージに含まれてい�
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `directory` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "directory" >}}
 
 
-### イベント
+### ヘルプ
 
 Directory チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "directory" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 非常に大きなディレクトリに対してチェックを実行し、再帰が true に設定されている場合、I/O と CPU に負荷がかかることに注意してください。デフォルトのチェック頻度である 15 秒ごとを調整する必要があるかもしれません。
 
-例えば、15,000 個のファイルとサブディレクトリがあるディレクトリで、CPU 使用率が高いチェックが 30～40 秒実行される場合、チェック頻度を低く設定しなければ、CPU 使用率の高いチェックが効率よく継続的に実行されます。
+例えば、15,000 個のファイルとサブディレクトリがあるディレクトリで、CPU 使用率の高いチェックが 30〜40 秒実行される場合、チェック頻度を低くセットアップしなければ、CPU 使用率の高いチェックが効率よく継続的に実行されます。
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

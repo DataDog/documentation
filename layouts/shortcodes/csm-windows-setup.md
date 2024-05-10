@@ -66,6 +66,24 @@ Another method to verify that the Agent is sending events to CSM is to manually 
 
 To get alerts whenever a Windows signal is created, create a [Notification Rule][9] that focuses on the `host` tag specifically for configured Windows hosts.
 
+### Enable FIM and Registry Monitoring
+
+<div class="alert alert-warning">File Integrity Monitoring (FIM) and Registry Monitoring is in beta and should not be enabled on production workloads.</div>
+
+1. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
+    - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
+1. In `C:\ProgramData\Datadog\system-probe.yaml`, set the `fim_enabled` flag:<br><br>
+    ```
+    runtime_security_config:
+      fim_enabled: true
+    ```
+1. In `C:\ProgramData\Datadog\security-agent.yaml`, set the `fim_enabled` flag:<br><br>
+    ```
+    runtime_security_config:
+      fim_enabled: true
+    ```
+1. [Restart the Datadog Agent][6] to enable CSM.
+
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
 [3]: /agent/basic_agent_usage/windows/?tab=gui

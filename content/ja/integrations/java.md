@@ -1,6 +1,4 @@
 ---
-aliases:
-- /ja/agent/faq/docker-jmx
 categories:
 - languages
 - network
@@ -52,8 +50,7 @@ Java インテグレーションを利用して、Java アプリケーション�
 
 ### メトリクスの収集
 <div class="alert alert-warning">
-JMX チェックには、インスタンスあたり 350 メトリクスの制限が設けられています。メトリクスの追加が必要な場合は、<a href="https://docs.datadoghq.com/help/">Datadog のサポートチーム</a>にお問い合わせください。
-</div>
+JMX チェックには、インスタンスあたり 350 メトリクスの制限が設けられています。<a href="/integrations/java/?tab=host#configuration-options">構成オプション</a>を参照してください。メトリクスの追加が必要な場合は、<a href="https://docs.datadoghq.com/help/">Datadog のサポートチーム</a>にお問い合わせください。</div>
 
 アプリケーションで [JMX][1] メトリクスが公開されている場合、Datadog Agent から軽量の Java プラグインである JMXFetch (Java 1.7 以上とのみ互換) が呼び出され、MBean サーバーに接続してアプリケーションのメトリクスを収集します。また、監視対象のインスタンスのステータスを報告するサービスチェックを送信することも可能です。このプラグインは、Agent 内で稼働する [DogStatsD][2] サーバーを使用して Datadog Agent にメトリクスを送信します。このインテグレーションでは以下の JMX メトリクスも同様に使用されます。
 
@@ -71,7 +68,7 @@ JMX チェックには、インスタンスあたり 350 メトリクスの制�
 
 #### ブラウザトラブルシューティング
 
-Agent をホスト上のバイナリとして実行している場合は、JMX チェックを[別の Agent インテグレーション][5]として構成します。Agent を Kubernetes の DaemonSet として実行している場合は、[オートディスカバリー](?tab=docker#configuration)を使用して JMX チェックを構成します。
+Agent をホスト上のバイナリとして実行している場合は、[他の Agent インテグレーション][5]同様に JMX チェックを構成します。Agent を Kubernetes の DaemonSet として実行している場合は、[オートディスカバリー][6]を使用して JMX チェックを構成します。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
@@ -139,8 +136,8 @@ Agent をホスト上のバイナリとして実行している場合は、JMX �
 | `custom_jar_paths`                            | いいえ       | Agent の JVM のクラスパスに追加されるカスタムの jar を指定できます。                                                                                                                                                                                                                                                                                                                                       |
 | `jmx_url`                                     | いいえ       | Agent がデフォルト以外の JMX URL に接続する必要がある場合は、ホストとポートの代わりにここで指定します。これを使用する場合は、`name` などを指定する必要があります。                                                                                                                                                                                                                                                      |
 | `is_jmx`                                      | いいえ       | 1 つの長い JMX ファイルを使用する代わりに、各アプリケーションの各構成ファイルを作成できます。[構成](#configuration)セクションの注で説明したように、各構成ファイルにオプションを含めます。                                                                                                                                                                                   |
-| `collect_default_jvm_metrics`                 | いいえ       | インテグレーションでデフォルトの JVM メトリクス (`jvm.*`) を収集するよう指示します。デフォルトは true です。                                                                                                                                                                                                                                                                                                                                 |
-| `collect_default_metrics`                     | いいえ       | 各インテグレーションは、収集するデフォルトの Bean のリストを含む `metrics.yaml` ファイルを含みます。これを `True` に設定すると、明示的に yaml ファイルに追加しなくても、これらのメトリクスが自動的に収集されます。通常、これを Autodiscovery とのセットアップに使用するには、コンフィギュレーションオブジェクトのサイズを小さくします。[JMX メトリクスを Java トレースエージェントで][6]収集する場合は、適用されません。 |
+| `collect_default_jvm_metrics`                 | いいえ       | デフォルトの JVM メトリクス (`jvm.*`) を収集するようにインテグレーションに指示します。デフォルトは true です。 </br>      **注**: JMX 固有のメトリクスを必要としないインテグレーションを使用している場合は、`collect_default_jvm_metrics: false` を設定します                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `collect_default_metrics`                     | いいえ       | 各インテグレーションには、収集するデフォルトの Bean のリストが記載された `metrics.yaml` ファイルが含まれています。これを `True` に設定すると、明示的に yaml ファイルに追加しなくても、これらのメトリクスが自動的に収集されます。通常、これを Autodiscovery とのセットアップに使用するには、コンフィギュレーションオブジェクトのサイズを小さくします。[JMX メトリクスを Java トレースエージェントで][7]収集する場合は、適用されません。 |
 | `java_bin_path`                               | いいえ       | Agent がJava 実行可能ファイルまたはバイナリを検出できない場合、パスを指定します（たとえば `C:/path/to/java.exe` または `/etc/alternatives/java`）                                                                                                                                                                                                                                                                          |
 | `java_options`                                | いいえ       | Java JVM オプション                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `name`                                        | いいえ       | `jmx_url` とともに構成で使用されます。                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -189,7 +186,7 @@ mydomain:attr0=val0,attr1=val1
 
 **注**:
 
-- `domain_regex` および `bean_regex` で定義された正規表現は、[Java の正規表現形式][7]に従う必要があります。このフィルターはバージョン 5.5.0 で追加されました。
+- `domain_regex` および `bean_regex` で定義された正規表現は、[Java の正規表現形式][8]に従う必要があります。このフィルターはバージョン 5.5.0 で追加されました。
 - 正規表現のパターン以外のすべての値では、大文字と小文字が区別されます。
 
 これらのパラメーターに加えて、フィルターは Bean パラメーターで絞り込むことができる「カスタム」キーをサポートします。たとえば、Cassandra キャッシュに関するメトリクスを収集する場合は、`type: - Caches` フィルターを使用することが考えられます。
@@ -268,19 +265,19 @@ init_config:
 
 #### 検証
 
-[Agent の status サブコマンドを実行][8]し、JMXFetch セクションの JMX チェックを探します。
+[Agent の status サブコマンドを実行][9]し、JMXFetch セクションの JMX チェックを探します。
 
-さらに、JMX チェックには、JMX アプリケーションからメトリクスを収集するデフォルトのコンフィギュレーションがあります。[Metrics Explorer][9] で `jvm.heap_memory`、`jvm.non_heap_memory`、`jvm.gc.cms.count` をチェックします。
+さらに、JMX チェックには、JMX アプリケーションからメトリクスを収集するデフォルトのコンフィギュレーションがあります。[Metrics Explorer][10] で `jvm.heap_memory`、`jvm.non_heap_memory`、`jvm.gc.cms.count` をチェックします。
 
 ### 収集データ
 
 _Agent v6.0 以上で使用可能_
 
-[Java のログコレクションをセットアップ][10]して Datadog にログを送信するには、 個別のドキュメントを参照してください。
+[Java のログコレクションをセットアップ][11]して Datadog にログを送信するには、 個別のドキュメントを参照してください。
 
 ### トレースの収集
 
-[Agent でトレースコレクションを有効化][11]した後、[Java アプリケーションのインスツルメンテーション][12]に関するドキュメントを参照して Datadog にトレースを送信します。
+[Agent でトレースコレクションを有効化][12]した後、[Java アプリケーションのインスツルメンテーション][13]に関するドキュメントを参照して Datadog にトレースを送信します。
 
 ## リアルユーザーモニタリング
 
@@ -288,7 +285,7 @@ _Agent v6.0 以上で使用可能_
 
 {{< get-metrics-from-git >}}
 
-**注**: [jmx.d/conf.yaml][13] で `new_gc_metrics: true` と設定すると、次のメトリクスが置き換えられます。
+**注**: [jmx.d/conf.yaml][14] で `new_gc_metrics: true` と設定すると、次のメトリクスが置き換えられます。
 
 ```text
 jvm.gc.cms.count   => jvm.gc.minor_collection_count
@@ -303,7 +300,7 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
 
 ## ヘルプ
 
-[JMX トラブルシューティングのコマンドと FAQ ][15]のリストを参照してください。
+[JMX トラブルシューティングのコマンドと FAQ ][16]のリストを参照してください。
 
 ## その他の参考資料
 
@@ -314,13 +311,14 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
 [3]: https://docs.datadoghq.com/ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [4]: https://docs.oracle.com/en/java/javase/14/management/monitoring-and-management-using-jmx-technology.html
 [5]: https://docs.datadoghq.com/ja/getting_started/integrations/#setting-up-an-integration
-[6]: https://docs.datadoghq.com/ja/tracing/setup_overview/setup/java/#ddjmxfetchconfigdir-and-ddjmxfetchconfig
-[7]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/ja/metrics/explorer/
-[10]: https://docs.datadoghq.com/ja/logs/log_collection/java/
-[11]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[12]: https://docs.datadoghq.com/ja/tracing/setup/java/
-[13]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
-[14]: https://github.com/DataDog/dogweb/blob/prod/integration/java/service_checks.json
-[15]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-jmx-integrations/
+[6]: https://docs.datadoghq.com/ja/containers/guide/autodiscovery-with-jmx/?tab=operator
+[7]: https://docs.datadoghq.com/ja/tracing/setup_overview/setup/java/#ddjmxfetchconfigdir-and-ddjmxfetchconfig
+[8]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/ja/metrics/explorer/
+[11]: https://docs.datadoghq.com/ja/logs/log_collection/java/
+[12]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[13]: https://docs.datadoghq.com/ja/tracing/setup/java/
+[14]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
+[15]: https://github.com/DataDog/dogweb/blob/prod/integration/java/service_checks.json
+[16]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-jmx-integrations/

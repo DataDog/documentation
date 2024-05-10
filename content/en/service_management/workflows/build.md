@@ -181,7 +181,21 @@ To add an error path:
 
 {{< img src="service_management/workflows/error-path1.mp4" alt="Add an error path to your workflow" video=true >}}
 
-### Edit a workflow with JSON
+## Wait until condition
+
+Some actions allow you to add a condition that must be met before a workflow can mark a step as complete and continue.
+
+To add a condition:
+1. Click on the step in the workflow canvas.
+1. In the **Wait until condition** section, use the dropdown to select a preconfigured condition, or select **Configure custom wait condition** and build your own conditional.
+   - The list of available preconfigured conditions depends on the action.
+   - Conditional statement variables can be either a String, a Number, a Boolean, or a step output variable.
+   - Only the current step's output variables can be used in a custom conditional statement.
+1. Enter a maximum wait time for the workflow. If the condition is not met in time, the step fails.
+
+{{< img src="service_management/workflows/wait-until-condition.png" alt="An example of wait until condition" style="width:100%;" >}}
+
+## Edit a workflow with JSON
 
 Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
 - **Format JSON**: Beautify your JSON.
@@ -190,6 +204,8 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][10].
 
 [1]: https://app.datadoghq.com/workflow
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
@@ -200,4 +216,5 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
+[10]: https://datadoghq.slack.com/
 

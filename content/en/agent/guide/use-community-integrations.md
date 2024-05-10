@@ -1,5 +1,5 @@
 ---
-title: Use Community Integrations
+title: Use Community and Marketplace Integrations
 kind: guide
 aliases:
   - /agent/guide/community-integrations-installation-with-docker-agent
@@ -43,9 +43,9 @@ For Agent v7.21+ / v6.21+:
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
-To use a community integration in a containerized environment, you must build a custom image that includes your desired community integration.
+To use a community or Marketplace integration in a containerized environment, you must build a custom image that includes your desired community integration.
 
-Use the following Dockerfile to build a custom version of the Agent that includes the `<INTEGRATION_NAME>` from [integrations-extras][2].
+Use the following Dockerfile to build a custom version of the Agent that includes the `<INTEGRATION_NAME>` from [integrations-extras][2]. If you are installing a Marketplace integration, the `<INTEGRATION_NAME>` is available in the configuration instructions.
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest

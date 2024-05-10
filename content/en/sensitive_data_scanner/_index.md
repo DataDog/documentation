@@ -28,7 +28,9 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys 
 
 Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner as a new line of defense, helping prevent against sensitive data leaks and limiting non-compliance risks.
 
-To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data.
+To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data. 
+
+If you want to redact your sensitive data in your environment before shipping to your downstream destinations, see how to [redact sensitive data with Observability Pipelines][14].
 
 This document walks you through the following:
 
@@ -65,7 +67,7 @@ For Terraform, see the [Datadog Sensitive Data Scanner group][5] resource.
 
 To set up a scanning group:
 
-1. Navigate to the [Sensitive Data Scanner][6] configuration page. Alternatively, go to **Organization Settings** > **Sensitive Data Scanner** and click **Configuration**.
+1. Navigate to the [Sensitive Data Scanner][6] configuration page. Alternatively, go to **Organization Settings** > **Manage Sensitive Data** and click the **Configuration** tab.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
 1. Enter a name and description for the group.
@@ -182,3 +184,4 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][13] summar
 [11]: /logs/log_configuration/processors/?tab=ui#remapper
 [12]: https://app.datadoghq.com/logs/pipelines
 [13]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[14]: /observability_pipelines/sensitive_data_redaction/
