@@ -72,3 +72,4 @@ The trace you see is composed of a single LLM span. The `ddtrace-run` command au
 [5]: https://platform.openai.com/docs/quickstart/step-1-setting-up-python
 [6]: https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
+[8]: /tracing/llm_observability/api
