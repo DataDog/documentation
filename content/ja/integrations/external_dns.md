@@ -22,7 +22,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
 - ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
@@ -48,7 +47,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Web
   - Category::Network
   configuration: README.md#Setup
   description: 外部 DNS のすべてのメトリクスを Datadog で追跡
@@ -67,13 +65,13 @@ tile:
 
 外部 DNS の詳細については、[Github リポジトリ][1]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 外部 DNS チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `external_dns.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[external_dns.d/conf.yaml のサンプル][4] を参照してください。
 
@@ -98,21 +96,21 @@ metadata:
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `external_dns` を探します。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "external_dns" >}}
 
 
-### ヘルプ
+### イベント
 
 外部 DNS チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "external_dns" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

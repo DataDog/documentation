@@ -211,26 +211,31 @@ menu:
       url: getting_started/workflow_automation/
       parent: getting_started
       weight: 24
+    - name: CI Visibility
+      identifier: getting_started_ci_visibility
+      url: getting_started/ci_visibility/
+      parent: getting_started
+      weight: 25
     - name: Test Visibility
       identifier: getting_started_test_visibility
       url: getting_started/test_visibility/
       parent: getting_started
-      weight: 25
+      weight: 26
     - name: Intelligent Test Runner
       identifier: getting_started_intelligent_test_runner
       url: getting_started/intelligent_test_runner/
       parent: getting_started
-      weight: 26
+      weight: 27
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
       parent: getting_started
-      weight: 27
+      weight: 28
     - name: Support
       identifier: getting_started_support
       url: getting_started/support/
       parent: getting_started
-      weight: 28
+      weight: 29
     - name: Glossary
       url: glossary/
       pre: features
@@ -676,6 +681,11 @@ menu:
       identifier: otel_hostname
       parent: otel_schema
       weight: 404
+    - name: Service-entry Spans Mapping
+      url: opentelemetry/schema_semantics/service_entry_spans/
+      identifier: otel_service_entry_spans
+      parent: otel_schema
+      weight: 404
     - name: Ingestion Sampling
       url: opentelemetry/ingestion_sampling_with_opentelemetry
       identifier: otel_sampling
@@ -891,25 +901,25 @@ menu:
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_api
       weight: 603
-    - name: IDE Integrations
-      url: developers/ide_integrations/
+    - name: IDE Plugins
+      url: developers/ide_plugins/
       parent: dev_tools
-      identifier: ide_integrations
+      identifier: ide_plugins
       weight: 7
     - name: JetBrains IDEs
-      url: developers/ide_integrations/idea/
-      parent: ide_integrations
-      identifier: ide_integrations_idea
+      url: developers/ide_plugins/idea/
+      parent: ide_plugins
+      identifier: ide_plugins_idea
       weight: 701
     - name: VS Code
-      url: developers/ide_integrations/vscode/
-      parent: ide_integrations
-      identifier: ide_integrations_vscode
+      url: developers/ide_plugins/vscode/
+      parent: ide_plugins
+      identifier: ide_plugins_vscode
       weight: 702
     - name: Visual Studio
-      url: developers/ide_integrations/visual_studio/
-      parent: ide_integrations
-      identifier: ide_integrations_visual_studio
+      url: developers/ide_plugins/visual_studio/
+      parent: ide_plugins
+      identifier: ide_plugins_visual_studio
       weight: 703
     - name: Community
       url: developers/community/
@@ -1099,11 +1109,21 @@ menu:
       identifier: cloudcraft_api_budgets_export
       parent: cloudcraft_api_budgets
       weight: 1
+    - name: Teams
+      url: cloudcraft/api/teams/
+      identifier: cloudcraft_api_teams
+      parent: cloudcraft_api
+      weight: 5
+    - name: List teams
+      url: cloudcraft/api/teams/#list-teams
+      identifier: cloudcraft_api_teams_list
+      parent: cloudcraft_api_teams
+      weight: 1
     - name: Users
       url: cloudcraft/api/users/
       identifier: cloudcraft_api_users
       parent: cloudcraft_api
-      weight: 5
+      weight: 6
     - name: Get user profile
       url: cloudcraft/api/users/#get-user-profile
       identifier: cloudcraft_api_users_info
@@ -1339,96 +1359,101 @@ menu:
       parent: monitor_types
       identifier: monitor_types_auditlogs
       weight: 305
+    - name: Change
+      url: monitors/types/change-alert/
+      parent: monitor_types
+      identifier: monitor_types_change
+      weight: 306
     - name: CI
       url: monitors/types/ci/
       parent: monitor_types
       identifier: monitor_types_ci
-      weight: 306
+      weight: 307
     - name: Cloud Cost
       url: monitors/types/cloud_cost/
       parent: monitor_types
       identifier: monitor_types_cloud_cost
-      weight: 307
+      weight: 308
     - name: Composite
       url: monitors/types/composite/
       parent: monitor_types
       identifier: monitor_types_composite
-      weight: 308
+      weight: 309
     - name: Database Monitoring
       url: monitors/types/database_monitoring/
       parent: monitor_types
       identifier: monitor_types_database_monitoring
-      weight: 309
+      weight: 310
     - name: Error Tracking
       url: monitors/types/error_tracking/
       parent: monitor_types
       identifier: monitor_types_error_tracking
-      weight: 310
+      weight: 311
     - name: Event
       url: monitors/types/event/
       parent: monitor_types
       identifier: monitor_types_event
-      weight: 311
+      weight: 312
     - name: Forecast
       url: monitors/types/forecasts/
       parent: monitor_types
       identifier: monitor_types_forecasts
-      weight: 312
+      weight: 313
     - name: Integration
       url: monitors/types/integration/
       parent: monitor_types
       identifier: monitor_types_integration
-      weight: 313
+      weight: 314
     - name: Live Process
       url: monitors/types/process/
       parent: monitor_types
       identifier: monitor_types_process
-      weight: 314
+      weight: 315
     - name: Logs
       url: monitors/types/log/
       parent: monitor_types
       identifier: monitor_types_log
-      weight: 315
+      weight: 316
     - name: Network
       url: monitors/types/network/
       parent: monitor_types
       identifier: monitor_types_network
-      weight: 316
+      weight: 317
     - name: Network Performance
       url: monitors/types/network_performance/
       parent: monitor_types
       identifier: monitor_types_network_performance
-      weight: 317
+      weight: 318
     - name: Outlier
       url: monitors/types/outlier/
       parent: monitor_types
       identifier: monitor_types_outlier
-      weight: 318
+      weight: 319
     - name: Process Check
       url: monitors/types/process_check/
       parent: monitor_types
       identifier: monitor_types_process_check
-      weight: 319
+      weight: 320
     - name: Real User Monitoring
       url: monitors/types/real_user_monitoring/
       parent: monitor_types
       identifier: monitor_types_rum
-      weight: 320
+      weight: 321
     - name: Service Check
       url: monitors/types/service_check/
       parent: monitor_types
       identifier: monitor_types_service_check
-      weight: 321
+      weight: 322
     - name: SLO Alerts
       url: monitors/types/slo/
       parent: monitor_types
       identifier: monitor_types_slo
-      weight: 322
+      weight: 323
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 323
+      weight: 324
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -1801,31 +1826,41 @@ menu:
       parent: error_tracking
       identifier: error_tracking_explorer
       weight: 1
+    - name: Default Grouping
+      url: error_tracking/default_grouping
+      parent: error_tracking
+      identifier: error_tracking_default_grouping
+      weight: 2
     - name: Custom Grouping
       url: error_tracking/custom_grouping
       parent: error_tracking
       identifier: error_tracking_custom_grouping
-      weight: 2
+      weight: 3
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 3
+      weight: 4
     - name: APM
       url: error_tracking/apm
       parent: error_tracking
       identifier: error_tracking_apm
-      weight: 4
+      weight: 5
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
-      weight: 5
+      weight: 6
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
       identifier: error_tracking_rum
       weight: 6
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: error_tracking
+      identifier: error_tracking_troubleshooting
+      weight: 7
     - name: Service Level Objectives
       url: service_management/service_level_objectives/
       pre: slos
@@ -2933,21 +2968,31 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_explorer
       weight: 1001
+    - name: Default Grouping
+      url: tracing/error_tracking/default_grouping
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_default_grouping
+      weight: 1002
     - name: Custom Grouping
       url: tracing/error_tracking/custom_grouping
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_custom_grouping
-      weight: 1002
+      weight: 1003
     - name: Identify Suspect Commits
       url: tracing/error_tracking/suspect_commits
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_suspect_commits
-      weight: 1003
+      weight: 1004
     - name: Exception Replay
       url: tracing/error_tracking/exception_replay
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_exception_replay
-      weight: 1004
+      weight: 1005
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: tracing_error_tracking
+      identifier: tracing_error_tracking_troubleshooting
+      weight: 1006
     - name: Data Security
       url: tracing/configure_data_security/
       parent: tracing
@@ -4157,26 +4202,31 @@ menu:
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
       weight: 603
+    - name: Default Grouping
+      url: logs/error_tracking/default_grouping
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_default_grouping
+      weight: 604
     - name: Custom Grouping
       url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
-      weight: 604
+      weight: 605
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
-      weight: 605
+      weight: 606
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 606
-    - name: Exclude Logs
-      url: logs/error_tracking/excluding_logs
-      parent: log_management_error_tracking
-      identifier: log_management_error_tracking_excluding_logs
       weight: 607
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: log_management_error_tracking
+      identifier: log_management_error_tracking_troubleshooting
+      weight: 609
     - name: Guides
       url: logs/guide/
       parent: log_management
@@ -5219,16 +5269,26 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_mobile
       weight: 803
+    - name: Default Grouping
+      url: real_user_monitoring/error_tracking/default_grouping
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_default_grouping
+      weight: 805
     - name: Custom Grouping
       url: real_user_monitoring/error_tracking/custom_grouping
       parent: rum_error_tracking
       identifier: rum_error_tracking_custom_grouping
-      weight: 804
+      weight: 806
     - name: Identify Suspect Commits
       url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
-      weight: 805
+      weight: 807
+    - name: Troubleshooting
+      url: error_tracking/troubleshooting
+      parent: rum_error_tracking
+      identifier: rum_error_tracking_troubleshooting
+      weight: 808
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
