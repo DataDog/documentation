@@ -12,7 +12,7 @@ algolia:
 
 ## Overview
 
-By default, the React Native SDK initializes the native SDK underneath the `init` method called on the JS layer. As a result, the SDK does not capture native crashes that occur prior to the `init` method being called on the JS layer. Starting from v2.3.0, you can initialize your native SDK in order for Datadog to capture any crashes before the React Native layer starts.
+By default, the React Native SDK initializes the native SDK when calling `DdSdkReactNative.initialize(config)` on the JS layer, or using the `DatadogProvider`. As a result, the SDK does not capture native crashes that occur prior to the initialization being called on the JS layer. Starting from v2.3.0, you can initialize your native SDK in order for Datadog to capture any crashes before the React Native layer starts.
 
 ## Configuration
 
