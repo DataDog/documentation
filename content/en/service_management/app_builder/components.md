@@ -138,7 +138,7 @@ Label
 **Value**: string or expression
 
 Options
-: The list of checkboxes that a user can select from. Minimum number of options is 1.<br>
+: The list of checkboxes that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair. The minimum number of options is 1.<br>
 **Value**: expression<br>
 **Example**:<br>
 : ```json
@@ -390,8 +390,8 @@ Label
 **Value**: string or expression
 
 Options
-: The list of radio button options that a user can select from.<br>
-**Value**: string or expression<br>
+: The list of radio button options that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair.<br>
+**Value**: expression<br>
 **Example**:<br>
 : ```json
   ${[
@@ -499,8 +499,8 @@ Placeholder text
 **Value**: string or expression
 
 Options
-: The list of select options that a user can select from.<br>
-**Value**: string or expression<br>
+: The list of select options that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair. <br>
+**Value**: expression<br>
 **Example**:<br>
 : ```json
   ${[

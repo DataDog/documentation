@@ -73,7 +73,7 @@ Each component features a list of corresponding configuration options that contr
 
 To delete or duplicate a component, select the component and click the three dot ellipsis (*...*) to display the **Delete** or **Duplicate** options.
 
-For a list of available UI components and their properties, see [Components][8].
+For a list of available UI components and their properties, see [Components][9].
 
 #### Events
 
