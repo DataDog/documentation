@@ -10,7 +10,7 @@ Your application can submit data to LLM Observability in two ways: with Datadog'
 
 Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog:
 
-{{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:90%;" >}}
+{{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
 A given trace contains spans representing each choice made by an agent or each step of a workflow. A *span* represents some unit of work that your application is performing. Spans have a start time, duration, name, tags, and attributes.
 
