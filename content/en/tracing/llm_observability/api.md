@@ -170,7 +170,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | name [*required*]       | string            | The name of the span.          |
 | span_id [*required*]     | string            | An ID unique to the span.       |
 | trace_id  [*required*]   | string            | A unique ID shared by all spans in the same trace.     |
-| parent_id  [*required*]    | string | ID of the span's direct parent. If the span is a root span, parent_id must be `undefined`. |
+| parent_id  [*required*]    | string | ID of the span's direct parent. If the span is a root span, the `parent_id` must be `undefined`. |
 | start_ns [*required*]     | uint64            | The span's start time in nanoseconds.     |
 | duration  [*required*]     | float64           | The span's duration in nanoseconds.          |
 | meta [*required*]         | [Meta](#meta)              | The core content relative to the span.       |
