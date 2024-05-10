@@ -20,11 +20,11 @@ A trace can contain several kinds of spans: Agent, LLM, Workflow, and so on. The
 
 ## Instrument an LLM application
 
-<div class="alert alert-info">This guide uses the Python SDK. If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</a></div>
+<div class="alert alert-info">This guide uses the LLM Observability SDK for Python. If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</a></div>
 
 To trace an LLM application:
 
-1. [Install the LLM Observability SDK for Python][1].
+1. [Install the LLM Observability SDK][1].
 1. [Start your application with the required environment variables][5], including your Datadog API key. If you don't have an API key, you can [create one in Datadog][3].
 1. In your code, [use the SDK to create spans](#span-creation-example) representing your application's tasks.
     - See the span creation example below.

@@ -210,8 +210,8 @@ Method
 : `POST`
 
 Evaluation metrics require a `span_id` and `trace_id`. 
-- If you are not using the SDK, send the `span_id` and `trace_id` that you used to create your target span.
-- If you are using the SDK, obtain the `span_id` and `trace_id` by finding your target span, then accessing the `root_span.span_id` and the `root_span.trace_id` attributes.
+- If you are not using the LLM Observability SDK, send the `span_id` and `trace_id` that you used to create your target span.
+- If you are using the LLM Observability SDK, obtain the `span_id` and `trace_id` by finding your target span, and accessing the `root_span.span_id` and the `root_span.trace_id` attributes.
 
 ### Request
 

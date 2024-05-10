@@ -237,7 +237,7 @@ def sanitize_input():
 
 ## Tracing spans using function decorators
 
-For each span kind, the LLM Observability SDK for Python `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators can be used the same way as their inline counterparts.
+For each span kind, the `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators can be used the same way as their inline counterparts.
 
 ### Example
 
@@ -252,7 +252,7 @@ def process_message():
 
 ## Annotating a span
 
-The LLM Observability SDK for Python provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata. 
+The SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata. 
 
 ### Arguments
 
@@ -348,7 +348,7 @@ def process_message():
 
 ## Tracing multiple applications
 
-The LLM Observability SDK for Python supports tracking multiple LLM applications from the same service.
+The SDK supports tracking multiple LLM applications from the same service.
 
 You can configure an environment variable `DD_LLMOBS_APP_NAME` to the name of your LLM application, which all generated spans are grouped into by default.
 
