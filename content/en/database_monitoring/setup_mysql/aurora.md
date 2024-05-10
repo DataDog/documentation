@@ -186,7 +186,7 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-        
+
     # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
@@ -197,6 +197,8 @@ instances:
 **Note**: Wrap your password in single quotes in case a special character is present.
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
+
+**The Datadog Agent supports auto-discovering all aurora endpoints in a cluster.** In order to do this, please [follow this guide.][10]
 
 
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
@@ -370,3 +372,4 @@ If you have installed and configured the integrations and Agent as described and
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
+[10]: /database_monitoring/guide/aurora_autodiscovery/?tab=mysql
