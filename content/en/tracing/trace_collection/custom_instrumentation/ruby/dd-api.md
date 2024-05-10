@@ -30,14 +30,14 @@ This page details describes use cases for adding and customizing observability w
 
 Make sure you require the appropriate gem for your [Ruby tracer version][8]:
 
-- For v1.x, require the `ddtrace` gem:
-  ```ruby
-  require 'ddtrace'
-  ```
-
 - For v2.x, require the `datadog` gem:
   ```ruby
   require 'datadog'
+  ```
+
+- For v1.x, require the `ddtrace` gem:
+  ```ruby
+  require 'ddtrace'
   ```
 
 ## Adding tags
