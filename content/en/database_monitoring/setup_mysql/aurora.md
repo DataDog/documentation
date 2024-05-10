@@ -198,7 +198,7 @@ instances:
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
-**The Datadog Agent supports auto-discovering all aurora endpoints in a cluster.** In order to do this, please [follow this guide.][10]
+**The Datadog Agent supports [Autodiscovery][10] of all Aurora endpoints in a cluster.** 
 
 
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
