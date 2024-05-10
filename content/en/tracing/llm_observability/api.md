@@ -152,7 +152,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | error       | [Error](#error)             | Error information on the span.              |
 | input       | [IO](#io)                | The span's input information.               |
 | output      | [IO](#io)                | The span's output information.              |
-| metadata    | Dict[key (str), val] where val is a float, bool, or string | Data about the span that is not input/output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`, `model_name`, `model_provider`. |
+| metadata    | Dict[key (string), value] where the value is a float, bool, or string | Data about the span that is not input or output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`, `model_name`, and `model_provider`. |
 
 #### Metrics
 | Field                  | Type    | Description  |
