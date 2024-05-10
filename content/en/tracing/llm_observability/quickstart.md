@@ -65,7 +65,7 @@ A trace of your LLM call should appear in [the Traces tab][3] of LLM Observabili
 
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from Datadog's list of supported integrations.
 
-[1]: http://localhost:1313/tracing/llm_observability/sdk/
+[1]: /tracing/llm_observability/sdk/
 [2]: https://github.com/DataDog/llm-observability
 [3]: https://app.datadoghq.com/llm/traces
 [4]: https://platform.openai.com/docs/quickstart/account-setup
