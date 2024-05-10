@@ -49,7 +49,7 @@ completion = oai_client.chat.completions.create(
 
 ### 3. Run the script
 
-To generate a trace, run the Python script with the following shell command:
+Run the Python script with the following shell command, and a trace of the OpenAI call will be sent to Datadog:
 
 {{< code-block lang="shell" >}}
 DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart \ 
