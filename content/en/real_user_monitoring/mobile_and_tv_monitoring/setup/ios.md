@@ -31,6 +31,63 @@ further_reading:
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
 
+## Supported versions
+
+The RUM iOS SDK supports the following iOS versions:
+
+| Platform | Supported | Version | Notes |
+|--------|-------------|---------|-------|
+| iOS | {{< X >}} | 11+ | |
+| tvOS | {{< X >}} | 11+ | |
+| iPadOS | {{< X >}} | 11+ | |
+| macOS (Designed for iPad) | {{< X >}} | 11+ | |
+| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**:  `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit` do not build on macOS. |
+| visionOS | | 1.0+ | visionOS is not officially supported by Datadog SDK. Some features may not be fully functional. **Note**: `DatadogCrashReporting` is not supported on visionOS due to a lack of support on the [PLCrashreporter][15] side. |
+| watchOS | | n/a | |
+| Linux | | n/a | |
+
+## Supported platforms
+
+### Xcode
+The SDK is built using the most recent version of [Xcode][16], but is always backwards compatible with the [lowest supported Xcode version][17] for AppStore submission.
+
+### Dependency managers
+We currently support integration of the SDK using the following dependency managers:
+
+- [Swift Package Manager][18]
+- [Cocoapods][19]
+- [Carthage][20]
+
+### Languages
+
+| Language | Version |
+|----------|---------|
+| UIKit | 5.* |
+| Objective-C | 2.0 |
+
+### UI framework instrumentation
+
+| Framework | Automatic | Manual |
+|--------|-------|-------|
+| UIKit | {{< X >}} | {{< X >}} |
+| SwiftUI | | {{< X >}} |
+
+### Network compatibility
+
+| Framework | Automatic | Manual |
+|--------|-------|-------|
+| URLSession | {{< X >}} | {{< X >}} |
+| [AlamoFire 5+][21] | | {{< X >}} |
+| SwiftNIO | | | 
+
+**Note**: Third-party networking libraries can be instrumented by implementing custom `DDURLSessionDelegate`.
+
+### Dependencies
+
+The Datadog RUM SDK depends on the following third-party library:
+
+- [PLCrashReporter][22] 1.11.1
+
 ## Setup
 
 1. Declare the SDK as a dependency.
@@ -431,3 +488,11 @@ RUM.enable(
 [12]: https://docs.datadoghq.com/real_user_monitoring/ios/web_view_tracking/
 [13]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/
 [14]: https://docs.datadoghq.com/real_user_monitoring/ios/data_collected/
+[15]: https://github.com/microsoft/plcrashreporter/issues/288
+[16]: https://developer.apple.com/xcode/
+[17]: https://developer.apple.com/news/?id=jd9wcyov
+[18]: https://docs.datadoghq.com/logs/log_collection/ios/?tab=swiftpackagemanagerspm
+[19]:https://docs.datadoghq.com/logs/log_collection/ios/?tab=cocoapods
+[20]: https://docs.datadoghq.com/logs/log_collection/ios/?tab=carthage
+[21]: https://github.com/DataDog/dd-sdk-ios/tree/develop/DatadogExtensions/Alamofire
+[22]: https://github.com/microsoft/plcrashreporter
