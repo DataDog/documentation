@@ -475,7 +475,7 @@ RUM.enable(
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[19]:https://docs.datadoghq.com/logs/log_collection/ios/?tab=cocoapods[1]: https://github.com/microsoft/plcrashreporter/issues/288
+[1]: https://github.com/microsoft/plcrashreporter/issues/288
 [2]: https://developer.apple.com/xcode/
 [3]: https://developer.apple.com/news/?id=jd9wcyov
 [4]: https://docs.datadoghq.com/logs/log_collection/ios/?tab=swiftpackagemanagerspm
@@ -493,3 +493,4 @@ RUM.enable(
 [16]: https://github.com/DataDog/dd-sdk-ios
 [17]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/
 [18]: https://docs.datadoghq.com/real_user_monitoring/explorer/
+[19]:https://docs.datadoghq.com/logs/log_collection/ios/?tab=cocoapods
