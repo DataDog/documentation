@@ -23,8 +23,7 @@ further_reading:
 
 Recommended monitors are a collection of monitor templates that are pre-configured by Datadog, integration partners, and other users. Use recommended monitors to: 
 - Save the time and effort of creating a new monitor from scratch.
-- Add consistency across monitors for the same integration.
-- Alert on the common issues associated with integrations
+- Have comprehensive monitoring coverage for all your critical integrations.
 
 ## Browse monitor templates
 
@@ -32,7 +31,7 @@ Recommended monitors are a collection of monitor templates that are pre-configur
 
 Recommended Monitors are available out-of-the-box, so you can get started immediately after you finish installing the Datadog Agent and add integrations. 
 
-Navigate to [**Monitor List**][2] page. If you have fewer than 10 monitors, Datadog automatically provides a list of recommended templates based on your installed integrations.
+Navigate to the [**Monitor List**][2] page. If you have fewer than 10 monitors, Datadog automatically provides a list of recommended templates based on your installed integrations.
 
 To browse the full list of monitor templates, navigate to the [**Monitors Templates**][1] page. Filter and search all available Recommended Monitors for your installed integrations as well as all available templates.
 
