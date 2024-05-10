@@ -45,24 +45,20 @@ An "Application Not Responding" ([ANR][6]) is an Android-specific type of error 
 
 ANRs are only reported through the RUM SDK (not through Logs).
 
-In Error Tracking:
+#### Non-fatal ANR reporting
+Non-fatal ANRs may or may not have led to the application being terminated (crashing).
 
-- **Fatal ANRs** are listed as individual issues
-- **Non-fatal ANRs** are grouped under a single issue due to their level of noise
+- In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise
+- By default, non-fatal ANRs on *Android 30+* are **disabled** because it would create too much noise over fatal ANRs. However, they are **enabled** on *Android 29 and below* by default because reporting on fatal ANRs is not possible on those versions.
+
+For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the RUM SDK.
 
 #### Fatal ANRs reporting
 Fatal ANRs are ANRs that result in crashes. They are reported when the application is being unresponsive and leads to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
 
-By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][7] (available since Android 30+), which can be read on the next app launch.
-
-In *Android 29 and below*, reporting on fatal ANRs is not possible.
-
-#### Non-fatal ANR reporting
-Non-fatal ANRs may or may not have led to the application being terminated, or crashed.
-
-By default, non-fatal ANRs on *Android 30+* are **disabled** because it would create too much noise over fatal ANRs. However, they are **enabled** on *Android 29 and below* by default because reporting on fatal ANRs is not possible on those versions.
-
-In any Android version, you can override the default setting for reporting non-fatal ANRs by calling `trackNonFatalAnrs(true|false)` when initializing the RUM SDK.
+- In the **Error Tracking** page, fatal ANRs are listed as **individual issues**
+- By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][7] (available since Android 30+), which can be read on the next app launch.
+- In *Android 29 and below*, reporting on fatal ANRs is not possible.
 
 ## Get deobfuscated stack traces
 
