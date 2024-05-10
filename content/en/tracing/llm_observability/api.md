@@ -265,7 +265,7 @@ Evaluation metrics require a `span_id` and `trace_id`.
 | Field   | Type                        | Description                              | Guaranteed |
 |---------|-----------------------------|------------------------------------------|------------|
 | ID      | string                      | Response UUID generated upon submission. | Yes        |
-| metrics | [[EvalMetric](#evalmetric)] | A list of eval metrics.                  | Yes        |
+| metrics | [[EvalMetric](#evalmetric)] | A list of evaluation metrics.                  | Yes        |
 {{% /tab %}}
 
 {{% tab "Example" %}}
