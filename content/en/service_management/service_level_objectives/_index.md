@@ -202,7 +202,7 @@ Once you are using a saved view, you can update it by selecting that saved view,
 
 SLO audit events allow you to track the history of your SLO configurations using the [Event Explorer][27] or the **Audit History** tab in the SLO details. Audit events are added to the Event Explorer every time you create, modify, or delete an SLO or SLO status correction. Each event includes information on the configuration of an SLO or SLO status correction, and the stream provides a history of the configuration changes over time.
 
-### Audit events
+### SLO audit events
 
 Each event includes the following SLO configuration information:
 
