@@ -126,26 +126,26 @@ If the request is successful, the API responds with a 202 network code and an em
 
 ### API standards
 
-#### `Error`
+#### Error
 | Field   | Type   | Description        |
 |---------|--------|--------------------|
 | message | string | The error message. |
 | stack   | string | The stack trace.   |
 | type    | string | The error type.    |
 
-#### `IO`
+#### IO
 | Field   | Type   | Description  |
 |---------|--------|--------------|
 | value   | string | Input or output value. This should be used for all spans except for LLM spans. |
 | messages| [[Message](#message)] | List of messages. This should only be used for LLM spans. |
 
-#### `Message`
+#### Message
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
 | content [*required*] | string | The body of the message. |
 | role                 | string | The role of the entity.  |
 
-#### `Meta`
+#### Meta
 | Field       | Type              | Description  |
 |-------------|-------------------|--------------|
 | kind [*required*]    | string | The [span kind][2]: `"agent"`, `"workflow"`, `"llm"`, `"tool"`, `"task"`, `"embedding"`, or `"retrieval"`.      |
@@ -154,7 +154,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | output      | [IO](#io)                | The span's output information.              |
 | metadata    | Dict[key (str), val] where val is a float, bool, or string | Data about the span that is not input/output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`, `model_name`, `model_provider`. |
 
-#### `Metrics`
+#### Metrics
 | Field                  | Type    | Description  |
 |------------------------|---------|--------------|
 | prompt_tokens          | float64 | The number of prompt tokens. **Only valid for LLM spans.**      |
@@ -163,7 +163,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | time_to_first_token    | float64 | The time in seconds it takes for the first output token to be returned in streaming-based LLM apps. Set for root spans. |
 | time_per_output_token  | float64 | The time in seconds it takes for the per output token to be returned in streaming-based LLM apps. Set for root spans. |
 
-#### `Span`
+#### Span
 
 | Field       | Type              | Description         |
 |-------------|-------------------|---------------------|
@@ -179,13 +179,13 @@ If the request is successful, the API responds with a 202 network code and an em
 | session_id  | string     | The span's `session_id`. Overrides the top-level `session_id` field.    |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular span.       |
 
-#### `SpansRequestData`
+#### SpansRequestData
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
 | type [*required*]        | string                        | Identifier for the request. Set to `span`. |
 | attributes [*required*]  | [SpansPayload](#spanspayload) | The body of the request.  |
 
-#### `SpansPayload`
+#### SpansPayload
 | Field    | Type                | Description  |
 |----------|---------------------|--------------|
 | ml_app [*required*] | string              | The name of your LLM application.      |
@@ -193,7 +193,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | tags                | [[Tag](#tag)]   | A list of top-level tags to apply to each span.        |
 | session_id          | string              | The session the list of spans belongs to. Can be overridden or set on individual spans as well. |
 
-#### `Tag`
+#### Tag
 
 Tags should be formatted as a list of strings (for example, `["user_handle:dog@gmail.com", "app_version:1.0.0"]`). They are meant to store contextual information surrounding the span.
 

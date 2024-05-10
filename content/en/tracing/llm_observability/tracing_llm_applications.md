@@ -8,7 +8,7 @@ kind: guide
 
 Your application can submit data to LLM Observability in two ways: with Datadog's [Python SDK][12], or with the [LLM Observability API][13].
 
-Each request fulfilled by your application is represented as a trace on the [LLM Observability traces list page][2] in Datadog:
+Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog:
 
 {{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:90%;" >}}
 
