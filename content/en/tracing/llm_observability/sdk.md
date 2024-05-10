@@ -1,5 +1,5 @@
 ---
-title: LLM Observability SDK
+title: LLM Observability SDK for Python
 ---
 
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
