@@ -197,6 +197,8 @@ If the request is successful, the API responds with a 202 network code and an em
 
 Tags should be formatted as a list of strings (for example, `["user_handle:dog@gmail.com", "app_version:1.0.0"]`). They are meant to store contextual information surrounding the span.
 
+For more information about tags, see [Getting Started with Tags][3].
+
 ## Eval metrics API
 Use this endpoint to send evaluation metrics for a span to Datadog.
 
