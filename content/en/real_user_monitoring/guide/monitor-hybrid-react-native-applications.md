@@ -108,7 +108,7 @@ yarn add @datadog/mobile-react-native
 or
 
 ```shell
-npm install @datadog/mobile-react-native.
+npm install @datadog/mobile-react-native
 ```
 
 {{< tabs >}}
