@@ -18443,6 +18443,14 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        defaultTags:
+          description: Default Tags for default rules (included in tags)
+          example:
+          - security:attacks
+          items:
+            description: Default Tag.
+            type: string
+          type: array
         deprecationDate:
           description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
