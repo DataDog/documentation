@@ -6,7 +6,14 @@ further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
   text: "Getting Started with Collector"
+- link: "/opentelemetry/guide/service_entry_spans_mapping/"
+  tag: "Documentation"
+  text: "Mapping OpenTelemetry Semantic Conventions to Service-entry Spans"
 ---
+
+<div class="alert alert-info">
+<a href="/opentelemetry/guide/service_entry_spans_mapping/">Mapping OpenTelemetry Semantic Conventions to Service-entry Spans</a> is now in public beta, and includes improvements to trace metrics generated from OpenTelemetry spans.
+</div>
 
 ## Overview
 
@@ -55,7 +62,9 @@ See [Trace Metrics][2].
 
 For a full working example configuration with the Datadog exporter, see [`trace-metrics.yaml`][3].
 
+## Further reading
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector

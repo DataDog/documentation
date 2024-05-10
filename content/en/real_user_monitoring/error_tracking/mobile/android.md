@@ -75,7 +75,7 @@ For any given error, you can access the file path, line number, and a code snipp
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the RUM Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 {{% tab "EU" %}}
@@ -106,7 +106,7 @@ For any given error, you can access the file path, line number, and a code snipp
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the RUM Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 {{< /tabs >}}
