@@ -3,7 +3,9 @@ title: LLM Observability API
 ---
 <div class="alert alert-warning">LLM Observability is in public beta, and this API is subject to change. If changes occur, Datadog will provide release notes with any applicable upgrade instructions.</a></div>
 
-The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, you may prefer to use the [Python SDK][1].
+## Overview
+
+The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, you can use the [LLM Observability SDK for Python][1].
 
 ## Spans API
 Use this endpoint to send spans to Datadog. For details on the available kinds of spans, see [Span Kinds][2].
