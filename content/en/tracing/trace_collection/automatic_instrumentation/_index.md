@@ -1,5 +1,5 @@
 ---
-title: Automatic Instrumentation
+title: Automatic Instrumentation 
 kind: documentation
 algolia:
   tags: ['apm automatic instrumentation']
