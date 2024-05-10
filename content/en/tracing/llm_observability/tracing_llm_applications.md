@@ -30,7 +30,7 @@ To trace a given LLM application:
     - See the span creation example below.
     - For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
 1. [Annotate your spans][7] with input data, output data, metadata (such as `max_tokens`), and key-value tags (such as `version:1.0.0`).
-1. Explore the resulting traces on the [traces list page][2].
+1. Explore the resulting traces on the [LLM Observability traces page][2].
 
 Optionally, you can also:
 
@@ -40,7 +40,9 @@ Optionally, you can also:
 
 ### Span creation example
 
-To create a span, use the SDK's `LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4]. The example below creates a workflow span:
+To create a span, use the LLM Observability SDK's `LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4]. 
+
+The example below creates a workflow span:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
