@@ -312,8 +312,8 @@ Evaluation metrics require a `span_id` and `trace_id`.
 | Field                  | Type   | Description  |
 |------------------------|--------|--------------|
 | ID                     | string | Evaluation metric UUID (generated upon submission). |
-| span_id [*required*]    | string | The ID of the span that this eval metric is associated with. This should be the span ID of the root span. |
-| trace_id [*required*]   | string | The ID of the trace that this eval metric is associated with. |
+| span_id [*required*]    | string | The ID of the span that this evaluation metric is associated with. This should be the span ID of the root span. |
+| trace_id [*required*]   | string | The ID of the trace that this evaluation metric is associated with. |
 | timestamp              | int64  | A UTC UNIX timestamp representing the time the request was sent. |
 | metric_type [*required*]| string | The type of evaluation metric: `"categorical"` or `"score"`. |
 | label [*required*]      | string | The unique name or label for the provided evaluation metric. |
