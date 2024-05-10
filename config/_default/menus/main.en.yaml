@@ -4836,7 +4836,7 @@ menu:
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
       weight: 5402
-    - name: Connect Synthetics and APM
+    - name: Connect APM
       url: synthetics/platform/apm/
       parent: synthetics_platform
       identifier: synthetics_platform_apm

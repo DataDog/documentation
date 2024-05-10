@@ -1,5 +1,5 @@
 ---
-title: Synthetic Monitoring Settings
+title: Synthetic Testing and Monitoring Settings
 kind: documentation
 aliases:
 - /synthetics/settings

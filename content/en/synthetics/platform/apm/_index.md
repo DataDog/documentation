@@ -1,5 +1,5 @@
 ---
-title: Synthetics APM
+title: Synthetic APM
 kind: documentation
 description: APM and Distributed Tracing with Synthetic Monitoring
 aliases:
