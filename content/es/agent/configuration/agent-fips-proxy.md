@@ -150,7 +150,7 @@ sudo -u dd-agent datadog-agent diagnose --include connectivity-datadog-core-endp
 # sudo -u dd-agent datadog-agent diagnose datadog-connectivity
 ```
 
-Si no ves métricas, trazas o logs reportadas en la aplicación, consulta la sección [Troubleshooting (solucionar problemas)](#troubleshooting-a-bare-metal-or-vm-installation).
+Si no ves métricas, trazas o logs reportados en la aplicación, consulta la sección [Solucionar problemas](#troubleshooting-a-bare-metal-or-vm-installation).
 
 ### Ver logs
 
@@ -160,7 +160,7 @@ sudo journalctl -u datadog-fips-proxy
 
 #### Configuración de logs de journald
 
-Si utilizas [Log Management (Gestión de logs)][3] y deseas enviar los logs de Datadog Agent FIPS Proxy  a Datadog, configura el Datadog Agent para leer logs desde journald.
+Si utilizas [Log Management][3] y quieres enviar los logs del proxy de FIPS del Datadog Agent a Datadog, configura el Datadog Agent para leer logs desde journald.
 
 1. En el [configuration file (archivo de configuración)][2] de Agent, establece `logs_enabled` en `verdadero` para activar Logs Agent. En el [configuration directory (directorio de configuración)][4], crea un archivo en `fips_proxy.d/conf.yaml` con el siguiente contenido:
 
