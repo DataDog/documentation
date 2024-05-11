@@ -40,22 +40,7 @@ The minimum tracer version to get all supported ASM capabilities for .NET is 2.4
 
 ### Supported .NET versions
 
-| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             |
-| ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
-| 4.8                     |                       | GA   | latest                      |
-| 4.7.2                   |                       | GA | latest                      |
-| 4.7                     |                       | GA | latest                      |
-| 4.6.2                   |                       | GA | latest                      |
-| 4.6.1                   | 04/26/2022            | GA   | latest |
-
-
-These are supported on the following architectures:
-- Linux (GNU) x86-64, ARM64
-- Alpine Linux (musl) x86-64, ARM64
-- macOS (Darwin) x86-64, ARM64
-- Windows (msvc) x86, x86-64
-
-
+For a list of supported platforms and operating systems, see [.NET Framework Compatibility][16] and [.NET/.NET Core Compatiblity][17].
 
 ### Web framework compatibility
 

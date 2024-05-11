@@ -72,7 +72,7 @@ var settings = TracerSettings.FromDefaultSources();
 settings.Environment = "prod";
 settings.ServiceName = "MyService";
 settings.ServiceVersion = "abc123";
-settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
+settings.AgentUri = new Uri("http://localhost:8126/");
 
 // configure the global Tracer settings
 Tracer.Configure(settings);

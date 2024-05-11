@@ -36,9 +36,9 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
-| .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | latest               |
 | .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
+| .NET Core 2.1        | 08/21/2021            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
  Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET Core APM](#runtime-support-policy-for-net-core-apm).
@@ -49,11 +49,59 @@ The .NET Tracer supports automatic instrumentation on the following architecture
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | latest                                 |
 | Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
+| Windows x86 (`win-x86`)                   | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
 | Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | latest                                 |
 | Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | latest                                 |
 | Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
+
+Note that running 32-bit applications on Windows x64 is supported.
+
+## Supported operating systems
+
+The .NET Tracer supports automatic instrumentation on Windows and Linux operating systems. It supports macOS for CI Test Visibility only.
+
+### Windows
+
+| Operating System             | Version     | Support level         | Package version                        |
+| -----------------------------|-------------|-----------------------|----------------------------------------|
+| Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
+| Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
+| Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Windows Server (x86)         |             | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+
+Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][15]
+
+### Linux
+
+The .NET Tracer supports Linux distributions as best-effort, based on minimum libc version compatibility:
+
+- x64: [glibc][16] 2.17 (from CentOS 7)
+- Arm64: [glibc][16] 2.23 (from Debian 10)
+- Alpine x64: [musl][17] 1.2.2 (from Alpine 3.14)
+
+| Operating System         | Version | Architectures | Support level         | Package version              |
+| -------------------------|---------|---------------|-----------------------|------------------------------|
+| Alpine Linux             | 3.12+   |  x64          | [GA](#support-ga)     | latest (.NET 5+ only, v1.27.0+) |
+| CentOS Linux             | 7+      |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)  |
+| CentOS Stream Linux      | 8       |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)  |
+| Debian                   | 10+     |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+| Fedora                   | 29+     |  x64          | [GA](#support-ga)     | latest                       |
+| openSUSE                 | 15+     |  x64          | [GA](#support-ga)     | latest                       |
+| Red Hat Enterprise Linux | 7+      |  x64          | [GA](#support-ga)     | latest                       |
+| Ubuntu                   | 18.04+  |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+
+### macOS
+
+The .NET Tracer supports macOS for CI Test Visibility only
+
+| Operating System         | Version | Architectures | Support level         | Package version              |
+| -------------------------|---------|---------------|-----------------------|------------------------------|
+| macOS                    | 12.0+   |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+| macOS                    | 11.0    |  x64          | [EOL](#support-eol)     | < 3.0.0                    |
+| macOS                    | 11.0    |  Arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
+
 
 ## Integrations
 
@@ -95,7 +143,7 @@ Don't see the library you're looking for? First, check if the library produces o
 
 ## OpenTelemetry based integrations
 
-Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet expliciitly tested).
+Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. For the best Datadog APM experience, the following list of libraries have been tested for complete interoperability with the .NET Tracer (more libraries provide such tracing but aren't specifically tested).
 
 | Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
 | ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
@@ -114,6 +162,7 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions re
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
 | JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
 | Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
+| Runtime crash on application exit on Linux/macOS | 2.x.x                                  | Upgrade .NET Core to 3.0.0 or above                                    | [dotnet/runtime/issues/11885][18]        |
 
 ## Supported Datadog Agent versions
 
@@ -164,3 +213,7 @@ Version updates imply the following changes to runtime support:
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
 [13]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
 [14]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+[15]: https://github.com/dotnet/core/tree/main/release-notes
+[16]: https://www.gnu.org/software/libc/
+[17]: https://musl.libc.org/
+[18]: https://github.com/dotnet/runtime/issues/11885
