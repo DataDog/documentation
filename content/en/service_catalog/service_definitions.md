@@ -184,6 +184,84 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inhe
 - The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as part of two separate `kind:application` definitions, it does not implicitly inherit the metadata from either parent application. 
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
+#### v3.0 API Endpoints (Alpha)
+##### Upsert Entities 
+POST https://api.datadoghq.com/api/unstable/catalog/definition
+Permission: SERVICE_CATALOG_WRITE
+
+{{< code-block collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>' \
+--data-raw '
+apiVersion: v3
+kind: application
+metadata:
+  name: shopping-cart-app
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+spec:
+  code: 
+  components:
+    - service:shopping-cart-processing
+    - service:shopping-cart-checkout
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-processing
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-checkout
+'
+{{< /code-block >}}
+
+##### Get Entities
+GET https://api.datadoghq.com/api/unstable/catalog/definition
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+##### Get Entities by ID 
+GET https://api.datadoghq.com/api/unstable/catalog/definition/id/<id>
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/id/<id>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+##### Get Entities by Ref 
+GET https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+URL Parameter: `ref <kind>:<name>`
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
