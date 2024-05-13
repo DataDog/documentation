@@ -208,8 +208,7 @@ For more information about tags, see [Getting Started with Tags][3].
 Use this endpoint to send evaluation metrics for a span to Datadog.
 
 Endpoint
-: `https://api.<DATADOG_SITE>/api/unstable/llm-obs/v1/eval-metric`
-<br />Replace `<DATADOG_SITE>` with the Datadog site you want to send data to (for example, `datadoghq.com` or `us3.datadoghq.com`).
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/eval-metric`
 
 Method
 : `POST`
