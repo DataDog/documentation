@@ -3520,7 +3520,7 @@ menu:
       versions:
       - v1
     parent: usage-metering
-    url: '#get-hourly-usage-for-snmp-devices'
+    url: '#recuperer-l-utilisation-horaire-pour-les-flux-reseau'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
     name: Récupérer l'utilisation horaire pour le scanner de données sensibles
@@ -6940,12 +6940,12 @@ menu:
     name: Créer une équipe
     params:
       operationids:
-      - CreateTeam
+      - GetUserMemberships
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: teams-create-a-team
+      - v2
+    parent: teams
     url: '#récuperer-l-appartenance-d-un-utilisateur'
   - generated: true
     identifier: teams-update-permission-setting-for-team
