@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/log_configuration/pipelines"
   tag: "Documentation"
   text: "Learn about log pipelines"
+- link: "/observability_pipelines/"
+  tag: "Documentation"
+  text: "Forward logs directly from your environment with Observability Pipelines"
 ---
 
 {{% site-region region="gov" %}}

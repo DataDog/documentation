@@ -35,7 +35,7 @@ This document walks you through the following steps:
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Split Logs** use case to create a new pipeline.
+1. Select the **Split Logs** template to create a new pipeline.
 1. Select **Datadog Agent** as the source.
 
 ### Set up the source
@@ -68,7 +68,6 @@ Enter the following information based on your selected logs destination.
 
 {{% observability_pipelines/processors/intro %}}
 
-{{< img src="observability_pipelines/processors/general_processors.png" alt="The log processors available" width="40%" >}}
 {{% observability_pipelines/processors/filter_syntax %}}
 
 {{% observability_pipelines/processors/add_processors %}}

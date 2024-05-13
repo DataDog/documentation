@@ -280,48 +280,6 @@ DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_
 
 Exit and open a new shell to use the injection library.
 
-## Install only library injection
-
-**Requirements**: 
-- A host running Linux.
-- A recent [Datadog Agent v7][1] installation.
-
-If the host already has a Datadog Agent installed, you can install just the injection libraries:
-
-1. Ensure your [Agent is running][2].
-
-2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, `ruby`, or `all`:
-
-   **For Ubuntu, Debian or other Debian-based Linux distributions:**
-   ```sh
-   sudo apt-get update
-   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-   **For CentOS, RedHat, or another distribution that uses yum/RPM:**
-   ```sh
-   sudo yum makecache
-   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-
-3. Run the command `dd-host-install`.
-
-4. Exit and open a new shell to use the preload library.
-
-After enabling host injection, make sure that the `/etc/datadog-agent/datadog.yaml` configuration file has the following lines at the end:
-
-```yaml
-# BEGIN LD PRELOAD CONFIG
-apm_config:
-  receiver_socket: /opt/datadog/apm/inject/run/apm.socket
-use_dogstatsd: true
-dogstatsd_socket: /opt/datadog/apm/inject/run/dsd.socket
-remote_configuration:
-  enabled: true
-# END LD PRELOAD CONFIG
-```
-
-If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
-
 ## Next steps
 
 If you haven't already, install your app and any supporting languages or libraries it requires. 
@@ -578,48 +536,6 @@ By default, running the script installs support for Java, Node.js, Python, Ruby,
 ```shell
 DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
-
-## Install only library injection
-
-**Requirements**: 
-- A host running Linux.
-- A recent [Datadog Agent v7][1] installation.
-- [Docker Engine][2].
-
-If the host already has a Datadog Agent installed, you can install just the injection libraries:
-
-1. Ensure your [Agent is running][3].
-
-2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, `ruby`, or `all`:
-
-   **For Ubuntu, Debian or other Debian-based Linux distributions:**
-   ```sh
-   sudo apt-get update
-   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-   **For CentOS, RedHat, or another distribution that uses yum/RPM:**
-   ```sh
-   sudo yum makecache
-   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-
-3. Run the command `dd-host-container-install`.
-
-After enabling host injection, make sure that the `/etc/datadog-agent/datadog.yaml` configuration file has the following lines at the end:
-
-```yaml
-# BEGIN LD PRELOAD CONFIG
-apm_config:
-  receiver_socket: /opt/datadog/apm/inject/run/apm.socket
-use_dogstatsd: true
-dogstatsd_socket: /opt/datadog/apm/inject/run/dsd.socket
-remote_configuration:
-  enabled: true
-# END LD PRELOAD CONFIG
-```
-
-If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
-
 
 ## Configure Docker injection {#configure-docker-injection-2}
 
