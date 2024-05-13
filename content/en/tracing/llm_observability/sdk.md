@@ -45,7 +45,9 @@ LLMObs.enable(
 
 #### Command line setup
 
-You can also enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables. Note that `ddtrace-run` automatically turns on all LLM Observability integrations.
+You can also enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
+
+**Note**: `ddtrace-run` automatically turns on all LLM Observability integrations.
 
 {{< code-block lang="shell">}}
 DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
