@@ -27,6 +27,24 @@ You can instrument your application with the LLM Observability SDK for Python, o
    {{< nextlink href="/tracing/llm_observability/quickstart" >}}Build a simple example with the Quickstart{{< /nextlink >}}
    {{< nextlink href="/tracing/llm_observability/trace_an_llm_application" >}}Trace your LLM application{{< /nextlink >}}
 {{< /whatsnext >}}
+## Explore LLM Observability
+###Troubleshoot with end-to-end tracing
+View every single step of your LLM application chains and calls to pinpoint problematic requests and identify the root cause of errors.
+[Use [PRODUCT FEATURE 1 screenshot](https://www.figma.com/design/ZskpTxUOqzUwHpkEymfjhX/[LLM]-Welcome-Page?node-id=226-182352&t=U3OWFWD1OIpKKS8A-0)]
+
+
+###Monitor operational metrics and optimize cost 
+Monitor the throughput, latency, and token usage trends for all your LLM applications 
+[Use [PRODUCT FEATURE 2 screenshot](https://www.figma.com/design/ZskpTxUOqzUwHpkEymfjhX/[LLM]-Welcome-Page?node-id=226-182352&t=U3OWFWD1OIpKKS8A-0)]
+
+###Evaluate the quality and effectiveness of your LLM applications
+Identify problematic topics and monitor the quality of responses over time with topical clustering with checks like sentiment analysis
+[Use [PRODUCT FEATURE 3 screenshot](https://www.figma.com/design/ZskpTxUOqzUwHpkEymfjhX/[LLM]-Welcome-Page?node-id=226-182352&t=U3OWFWD1OIpKKS8A-0)]
+
+
+###Safeguard sensitive data and identify malicious users
+Automatically scan and redact any sensitive data in your AI applications and identify prompt injections 
+[Use [PRODUCT FEATURE 4 screenshot](https://www.figma.com/design/ZskpTxUOqzUwHpkEymfjhX/[LLM]-Welcome-Page?node-id=226-182352&t=U3OWFWD1OIpKKS8A-0)]
 
 [1]: /tracing/llm_observability/spans/
 [2]: https://app.datadoghq.com/llm/traces
