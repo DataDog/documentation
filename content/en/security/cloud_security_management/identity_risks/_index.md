@@ -35,9 +35,9 @@ CSM Identity Risk detections include users, roles, groups, policies, EC2 instanc
 
 ## Remediate identity risks
 
-For detailed insights and remediation help, click the **Insights** tab. In the following example, the **Insights** tab shows the usage of provisioned permissions.
+For detailed insights and remediation help, click the **Remediation** tab. In the following example, the **Remediation** tab shows the usage of provisioned permissions.
 
-{{< img src="security/identity_risks/side_panel_insights_tab.png" alt="The Insights tab on the identity risks side panel shows the usage of provisioned permissions" width="80%">}}
+{{< img src="security/identity_risks/side_panel_remediation_tab.png" alt="The Remediation tab on the identity risks side panel shows the usage of provisioned permissions" width="80%">}}
 
 Click **View Suggested Policy** to view a suggested downsized policy based on the actual usage.
 

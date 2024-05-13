@@ -568,7 +568,7 @@ run_notranslate_tag:schedule:
   stage: post-deploy
   dependencies:
     - build_live
-  timeout: 2h
+  timeout: 4h
   script:
     - export transifex_api_key="$(get_secret 'transifex_api_key')"
     - python3 ./local/bin/py/add_notranslate_tag.py

@@ -37,7 +37,6 @@ cascade:
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/non_static_thresholds" >}}How to monitor non-static thresholds{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}Anomaly monitors{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/change-alert" >}}Change Alert monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone{{< /nextlink >}}
     {{< nextlink href="monitors/guide/history_and_evaluation_graphs" >}}Monitor History and Evaluation Graph{{< /nextlink >}}
