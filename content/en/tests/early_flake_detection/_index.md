@@ -63,25 +63,25 @@ After you have set up your Datadog library for Test Visibility, you can configur
 
 The required test framework and dd-trace versions are:
 
-* `dd-trace`:
-  * `>=5.12.0` for the 5.x release.
-  * `>=4.36.0` for the 4.x release.
-  * `>=3.57.0` for the 3.x release.
-* `jest>=24.8.0`, only when run with `jest-circus`.
-* `mocha>=5.2.0`.
-* `cucumber-js>=7.0.0`.
-* `playwright>=1.38.0`.
-* `cypress>=6.7.0`.
+`dd-trace-js`:
+* `>=5.12.0` for the 5.x release.
+* `>=4.36.0` for the 4.x release.
+* `>=3.57.0` for the 3.x release.
 
+The supported versions for test frameworks are the same as those for [Test Visibility][10], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
 {{% /tab %}}
 
 {{% tab "Java" %}}
-TBD
+
+`dd-trace-java>=1.34.0`
+
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-TBD
+
+`dd-trace-dotnet>=2.51.0`
+
 {{% /tab %}}
 
 {{< /tabs >}}
