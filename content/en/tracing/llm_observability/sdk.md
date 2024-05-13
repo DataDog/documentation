@@ -26,7 +26,7 @@ pip install git+https://github.com/DataDog/dd-trace-py.git@main
 
 Enable LLM Observability through the `LLMOBs.enable()` function.
 
-- If you wish to have spans from any of our supported integrations (openai, bedrock, langchain) automatically traced, pass that into the `integrations` argument.
+- Use the `integrations` argument to turn on automatic tracing for supported LLM Observability integrations (openai, bedrock, langchain).
 
 - If you do not have Datadog APM setup, set `dd_llmobs_no_apm` to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM to be setup.
 
@@ -34,11 +34,11 @@ Enable LLM Observability through the `LLMOBs.enable()` function.
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(
-	ml_app="<the name of your ML application>",
+    ml_app="<the name of your ML application>",
     dd_api_key="<your Datadog API key>",
     dd_site="<your Datadog site, e.g datadoghq.com, us3.datadoghq.com, etc.>",
     dd_llmobs_no_apm=True,
-	integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
+    integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
 )
 {{< /code-block >}}
 
