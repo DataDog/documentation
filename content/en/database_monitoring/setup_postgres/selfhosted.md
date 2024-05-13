@@ -315,7 +315,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: https://www.postgresql.org/docs/12/contrib.html
-[2]: /database_monitoring/agent_integration_overhead/#postgres-integration-overhead
+[2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
