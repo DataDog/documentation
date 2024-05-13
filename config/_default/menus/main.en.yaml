@@ -2883,8 +2883,8 @@ menu:
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_quickstart
       weight: 701
-    - name: Tracing LLM Applications
-      url: tracing/llm_observability/tracing_llm_applications/
+    - name: Trace an LLM Application
+      url: tracing/llm_observability/trace_an_llm_application/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_trace_an_application
       weight: 702

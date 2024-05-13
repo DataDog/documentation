@@ -23,7 +23,7 @@ Each trace contains spans representing each choice made by an agent or each step
 
 {{< whatsnext desc="Get started with LLM Observability:" >}}
    {{< nextlink href="/tracing/llm_observability/quickstart" >}}Build a simple example with the Quickstart{{< /nextlink >}}
-   {{< nextlink href="/tracing/llm_observability/tracing_llm_applications" >}}Trace your LLM application{{< /nextlink >}}
+   {{< nextlink href="/tracing/llm_observability/trace_an_llm_application" >}}Trace your LLM application{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /tracing/llm_observability/spans/

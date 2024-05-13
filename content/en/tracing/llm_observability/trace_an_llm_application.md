@@ -1,5 +1,5 @@
 ---
-title: Tracing LLM Applications
+title: Trace an LLM Application
 kind: guide
 ---
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
