@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Monitor Quality refers to the effectiveness and accuracy of monitoring setups within Datadog. This feature highlights monitors with quality issues, such as muted monitors or missing recipients. It enables teams to maintain alerting standards and prevent crucial alerts from being missed.  
+The Monitor Quality feature in Datadog identifies common misconfigurations in monitoring setups, such as alerts that have been muted for more than 60 days or monitors lacking designated recipients. It enables teams to maintain alerting standards and prevent critical alerts from being missed. Use Monitor Quality to identify and resolve misconfigured monitors all on the same page.
 
 ## View misconfigured monitors
 
