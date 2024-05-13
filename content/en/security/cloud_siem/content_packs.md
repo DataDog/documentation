@@ -25,7 +25,7 @@ further_reading:
 - Configuration guides
 
 {{< whatsnext desc="Content Packs are grouped into the following categories:" >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#cloud-audit-content-packs" >}}Cloud Audit{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#cloud-audit-content-packs" >}}<u>Cloud Audit</u>: AWS CloudTrail, Azure Security, GCP Audit Logs, Kubernetes Audit Logs{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}Authentication{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}Collaboration{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}Network{{< /nextlink >}}
