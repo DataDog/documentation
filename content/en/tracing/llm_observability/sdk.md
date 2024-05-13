@@ -18,23 +18,23 @@ You can install and configure tracing of various operations such as workflows, t
 
 ## Setup
 
-### Pre-requisites
+### Prerequisites
 
-1. Install the latest `ddtrace` package hash:
+1. The latest `ddtrace` package must be installed:
 
 {{< code-block lang="shell">}}
 pip install git+https://github.com/DataDog/dd-trace-py.git@main
 {{< /code-block >}}
 
-2. Grab your Datadog API Key.
+2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
 
 #### In-code setup
 
-Enable LLM Observability through the `LLMOBs.enable()` function.
+Enable LLM Observability through the `LLMOBs.enable()` function, as shown in the example below.
 
-- Use the `integrations` argument to turn on automatic tracing for supported LLM Observability integrations (openai, bedrock, langchain).
+- Use the `integrations` argument to turn on automatic tracing for supported LLM Observability integrations (OpenAI, Bedrock, and LangChain).
 
-- If you do not have Datadog APM setup, set `dd_llmobs_no_apm` to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM to be setup.
+- If you do not have Datadog APM set up, set `dd_llmobs_no_apm` to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
