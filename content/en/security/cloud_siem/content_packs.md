@@ -16,12 +16,12 @@ further_reading:
 
 ## Overview
 
-[Cloud SIEM Content Packs][1] provide out-of-the box content for key security integrations. The specific content depends on the integration and can include the following:
+[Cloud SIEM Content Packs][1] provide out-of-the box content for key security integrations. Depending on the integration, a Content Pack can include the following:
 
 - [Detection Rules][2] to provide comprehensive coverage of your environment
 - An interactive dashboard with detailed insights into the state of logs and security signals for the Content Pack
 - [Investigator][3], an interactive graphical interface for investigating suspicious activity by a user or resource
-- [Workflow Automation][4] to automate actions and accelerate investigation and remediation of issues
+- [Workflow Automation][4], to automate actions and accelerate investigation and remediation of issues
 - Configuration guides
 
 {{< whatsnext desc="Content Packs are grouped into the following categories:" >}}
@@ -37,7 +37,7 @@ further_reading:
 
 ### AWS CloudTrail
 
-Monitor security and compliance levels of your AWS operations.
+Monitor the security and compliance levels of your AWS operations.
 
 The [AWS CloudTrail Content Pack][5] includes:
 - Detection Rules
@@ -87,15 +87,15 @@ The [1Password Content Pack][9] includes:
 
 Monitor and generate signals around Auth0 user activity.
 
-The[ Auth0 Content Pack][10] includes:
+The [Auth0 Content Pack][10] includes:
 - Detection Rules
 - An interactive dashboard
 
-### Jumpcloud
+### JumpCloud
 
-Tracks user activity by monitoring Jumpcloud audit logs.
+Tracks user activity by monitoring JumpCloud audit logs.
 
-The [Jumpcloud Content Pack][11] includes:
+The [JumpCloud Content Pack][11] includes:
 - Detection Rules
 
 ### Okta
@@ -138,21 +138,21 @@ The [Cloudflare Content Pack][15] includes:
 
 ## Cloud developer tools Content Packs
 
-### Github
+### GitHub
 
-Track user activity and code change history by monitoring Github audit logs.
+Track user activity and code change history by monitoring GitHub audit logs.
 
-The [Github Content Pack][16] includes:
+The [GitHub Content Pack][16] includes:
 - Detection Rules
 - An interactive dashboard
 
 ## Endpoint Content Packs
 
-### Crowdstrike
+### CrowdStrike
 
-Improve the security posture of your endpoints with Crowdstrike.
+Improve the security posture of your endpoints with CrowdStrike.
 
-The [Crowdstrike Content Pack][17] includes:
+The [CrowdStrike Content Pack][17] includes:
 - Detection Rules
 - An interactive dashboard
 
