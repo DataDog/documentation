@@ -19,6 +19,8 @@ A trace can represent:
 
 Each trace contains spans representing each choice made by an agent or each step of a given workflow. A given trace can also include input and output, execution duration, privacy issues, errors, and more.
 
+You can instrument your application with the LLM Observability SDK for Python, or by calling the LLM Observability API.
+
 ## Getting started
 
 {{< whatsnext desc="Get started with LLM Observability:" >}}
