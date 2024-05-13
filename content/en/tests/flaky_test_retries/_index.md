@@ -28,6 +28,10 @@ a failing flaky test case is retried either until it passes successfully or unti
 
 Ensure [Test Visibility][1] is configured for your test runs.
 
+### Compatibility
+
+* dd-trace-java >= 1.34.0
+
 ### Configuration
 
 After you have set up Test Visibility, you can configure Flaky Test Retries from the [Test Service Settings page][2].
