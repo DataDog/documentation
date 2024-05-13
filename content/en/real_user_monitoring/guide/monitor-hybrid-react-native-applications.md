@@ -91,7 +91,9 @@ You can track network requests by monitoring your `URLSession`. Learn more about
 
 ### Limitations
 
-You cannot call the native SDK before the React Native SDK has been initialized. If you have to, you need to initialize the SDK on the native side.
+Make sure your native code is not executed in a moment in the lifecycle where the RN initialization has not been called yet.
+
+When you initialize the SDK on the React Native side (JavaScript / TypeScript) it will also be initialized on the native side. If you write any native code that relies on our SDK, you have to make sure that you execute that code after the initialization on the React Native side.
 
 ## Monitor native apps with React Native screens
 
