@@ -51,13 +51,13 @@ Limitations:
 
 #### Flaky test metric
 
-For the default branches, we provide a metric to track the flaky tests through time. This metric is generated every 30 minutes and counts all the flaky tests in the default branch for that moment.
+For the default branches, a metric tracks the flaky tests over time. This metric is generated every 30 minutes and counts all the flaky tests in the default branch at that time.
 
-This metric is available under the graph 'Total Flaky Tests' in the default branch view:
+Find this metric under the graph **Total Flaky Tests** in the default branch view:
 
 {{< img src="continuous_integration/flaky_test_metric.png" alt="Flaky test metric" style="width:100%;">}}
 
-The metric is also available in the [CI Visibility - Tests dashboard][6]
+The metric is also available in the [CI Visibility - Tests dashboard][6].
 
 ### New flaky tests
 
