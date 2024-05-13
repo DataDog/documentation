@@ -11,7 +11,7 @@ The LLM Observability API provides an interface for developers to send LLM-relat
 Use this endpoint to send spans to Datadog. For details on the available kinds of spans, see [Span Kinds][2].
 
 Endpoint
-: `https://api.<DATADOG_SITE>/api/unstable/llm-obs/v1/trace/spans`
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/trace/spans`
 <br />Replace `<DATADOG_SITE>` with the Datadog site you want to send data to (for example, `datadoghq.com` or `us3.datadoghq.com`).
 
 Method
