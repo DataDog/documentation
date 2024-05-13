@@ -25,7 +25,7 @@ pip install git+https://github.com/DataDog/dd-trace-py.git@main
 
 #### Enabling using the `ddtrace-run` command
 
-You can also enable LLM Observability by setting the required environment variables and running your application through the `ddtrace-run` command.
+Enable LLM Observability by running your application through the `ddtrace-run` command and specifying the required environment variables.
 
 {{< code-block lang="shell">}}
 DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
