@@ -21,7 +21,7 @@ description: Learn how to create a Datadog Log integration.
 ---
 ## Overview
 
-This page walks Technology Partners through creating a log pipeline.
+This page walks Technology Partners through creating a log pipeline. A log pipeline is required if your integration is sending in logs. 
 
 ## Log integrations
 

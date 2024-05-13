@@ -23,7 +23,7 @@ further_reading:
 
 Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services. 
 
-There are three supported versions of the schema:
+There are four supported versions of the schema:
 
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
 - V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience.
@@ -89,10 +89,11 @@ extensions:
   datadoghq.com/shopping-cart:
     customField: customValue
 datadog:
-  performanceData:
-    tags:
-      - 'service:shopping-cart'
-      - 'hostname:shopping-cart'
+  code:
+    - paths:
+      - baz/*.c
+      - bat/**/*
+      - ../plop/*.java
   events:
     - name: "deployment events"
       query: "app:myapp AND type:github"
