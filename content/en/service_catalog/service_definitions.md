@@ -23,7 +23,7 @@ further_reading:
 
 Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services. 
 
-There are three supported versions of the schema:
+There are four supported versions of the schema:
 
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
 - V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience.
@@ -89,10 +89,11 @@ extensions:
   datadoghq.com/shopping-cart:
     customField: customValue
 datadog:
-  performanceData:
-    tags:
-      - 'service:shopping-cart'
-      - 'hostname:shopping-cart'
+  code:
+    - paths:
+      - baz/*.c
+      - bat/**/*
+      - ../plop/*.java
   events:
     - name: "deployment events"
       query: "app:myapp AND type:github"
@@ -182,6 +183,84 @@ Note: The entity reference only applies to an entity from the same YAML file.
 Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inherit all metadata from the application that it belongs to under the following conditions:
 - The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as part of two separate `kind:application` definitions, it does not implicitly inherit the metadata from either parent application. 
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
+
+#### v3.0 API endpoints (alpha)
+##### Upsert entities 
+POST https://api.datadoghq.com/api/unstable/catalog/definition
+Permission: SERVICE_CATALOG_WRITE
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>' \
+--data-raw '
+apiVersion: v3
+kind: application
+metadata:
+  name: shopping-cart-app
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+spec:
+  code: 
+  components:
+    - service:shopping-cart-processing
+    - service:shopping-cart-checkout
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-processing
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-checkout
+'
+{{< /code-block >}}
+
+##### Get entities
+GET https://api.datadoghq.com/api/unstable/catalog/definition
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+##### Get entities by ID 
+GET https://api.datadoghq.com/api/unstable/catalog/definition/id/<id>
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/id/<id>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+##### Get entities by reference 
+GET https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+URL Parameter: `ref <kind>:<name>`
 
 ## Further reading
 
