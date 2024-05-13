@@ -25,13 +25,13 @@ The minimum tracer version to get all supported ASM capabilities for Ruby is 1.1
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Ruby framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---   |   ---             |           ----        |
-| Docker | {{< X >}}  |  |
-| Kubernetes | {{< X >}}  | |
-| Amazon ECS | {{< X >}}  | |
-| AWS Fargate | {{< X >}}  | |
-| AWS Lambda |  | |
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                |                               |
+| Kubernetes  | {{< X >}}                |                               |
+| Amazon ECS  | {{< X >}}                |                               |
+| AWS Fargate | {{< X >}}                |                               |
+| AWS Lambda  |                          |                               |
 
 ## Language and framework compatibility
 

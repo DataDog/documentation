@@ -17,7 +17,7 @@ CD Visibility is in private beta. To request access, complete the form.
 
 ## Overview
 
-The [Deployments page][1] is useful for developers who want to keep an eye on the deployments for their environments.
+The [**Deployments** page][1] is useful for developers who want to keep an eye on the deployments for their environments.
 
 {{< img src="/continuous_delivery/search/deployments.png" text="The Deployments page in Datadog" style="width:100%" >}}
 
@@ -29,17 +29,19 @@ Access high-level accumulation and trends, including:
 
 ## Search for deployments
 
-To see your deployments, navigate to [**CI** > **Deployments**][1].
+To see your deployments, navigate to [**Software Delivery** > **CD Visibility** > **Deployments**][1].
 
-The Deployments page shows aggregate stats for deployments over the selected time frame, as well as the status of the latest deployment execution. Use this page to see all your deployments and get a view of their health. The Deployments page shows metrics for your environments.
+The **Deployments** page shows aggregate stats for deployments over the selected time frame, as well as the status of the latest deployment execution. Use this page to see all your deployments and get a view of their health. The Deployments page shows metrics for your environments.
 
 Metrics shown include the number of executions and failures, the failure rate, the median duration, and the 95th percentile duration. This information reveals which deployments are high-usage and potentially high resource consumers. The last deployment result, duration, and last status shows you the effect of the latest changes.
+
 <div class="alert alert-info">Partial deployment executions are excluded from the statistics aggregation to avoid incorrect measures. You can use the Partial Deployment facet to search for these deployments: <code>@deployment.partial_deployment:*</code>.</div>
+
 You can filter the page by deployment name to see the deployments you're most concerned with. Click on a deployment that is slow or failing to dig into details that show what commit might have introduced the failure.
 
 ## Deployment details and executions
 
-Click into a specific deployment to see the Deployment page which provides views of the data for the deployment you selected over a specified time frame.
+Click into a specific deployment to see the **Deployment**page, which provides views of the data for the deployment you selected over a specified time frame.
 
 {{< img src="continuous_delivery/search/deployments_page.png" alt="Deployment page for a single deployment" style="width:100%;">}}
 

@@ -491,7 +491,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
               title: Datadog-Amazon CloudFormation
-              kind: documentation
+              kind: guide
               aliases:
                 - /developers/amazon_cloudformation/
 

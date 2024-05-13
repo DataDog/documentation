@@ -158,7 +158,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to resolve the lock contention:
 
-{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Contention outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to address the Lock Contention outlier" style="width:100%;">}}
 
 ### Garbage collection outlier
 
@@ -171,7 +171,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to better configure garbage collection to free up some CPU time:
 
-{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to adress the Garbage Collection outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to address the Garbage Collection outlier" style="width:100%;">}}
 
 ### Regex compilation outlier
 
@@ -184,7 +184,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to improve regex compilation time, as well as examples of functions within your code that could be improved:
 
-{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to adress the Regex Compilation outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to address the Regex Compilation outlier" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "Databases" %}}

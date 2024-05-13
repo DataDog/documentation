@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: "/continuous_integration/pipelines/custom_commands/"
     tag: "Documentation"
-    text: "Troubleshooting CI"
+    text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -94,7 +94,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

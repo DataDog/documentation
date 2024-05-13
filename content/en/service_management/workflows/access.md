@@ -143,6 +143,8 @@ You can restrict access on a specific workflow either from the workflow list pag
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
+
 [1]: /account_management/audit_trail/#overview
 [2]: /account_management/org_settings/service_accounts/
 [3]: /account_management/rbac/
@@ -151,3 +153,4 @@ You can restrict access on a specific workflow either from the workflow list pag
 [6]: /service_management/workflows/connections/
 [7]: /account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow
+[9]: https://datadoghq.slack.com/

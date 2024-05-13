@@ -220,9 +220,12 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 2. [Restart the Agent][2].
 
+**The Datadog Agent supports [Autodiscovery][14] of all Aurora endpoints in a cluster.** 
+
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[14]: /database_monitoring/guide/aurora_autodiscovery/?tab=postgres
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -401,7 +404,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% dbm-postgres-agent-config-examples %}}
 ## Install the RDS Integration
 
-To collect more comprehensive database metrics from AWS, install the [RDS integration][11] (optional).
+To see infrastructure metrics from AWS, such as CPU, alongside the database telemetry directly in DBM, install the [RDS integration][11] (optional).
+
 
 ## Troubleshooting
 
@@ -425,3 +429,4 @@ If you have installed and configured the integrations and Agent as described and
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
 [13]: /database_monitoring/guide/managed_authentication
+

@@ -9,7 +9,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and measures"
@@ -95,9 +95,9 @@ In this example, you can use the value of `binary_size` to plot the change in th
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after the pipelines finish.
+The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ### Correlate infrastructure metrics to jobs
 
@@ -106,7 +106,7 @@ For this feature to work, install the [Datadog Agent][7] in the hosts running th
 
 ### View partial and downstream pipelines
 
-In the **Pipeline Executions** page, you can use the filters below in the search bar:
+On the **Executions** page, you can use the filters below in the search bar:
 
 `Downstream Pipeline`
 : Possible values: `true`, `false`
