@@ -509,7 +509,7 @@ RUM supports several propagator types to connect resources with backends that ar
 
 ## How are RUM resources linked to traces?
 
-Datadog uses the distributed tracing protocol and sets up the following HTTP headers:
+Datadog uses the distributed tracing protocol and sets up the HTTP headers below. By default, both trace context and Datadog-specific headers are used.
 {{< tabs >}} {{% tab "Datadog" %}}
 `x-datadog-trace-id`
 : Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.
