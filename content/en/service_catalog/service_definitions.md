@@ -184,7 +184,7 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inhe
 - The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as part of two separate `kind:application` definitions, it does not implicitly inherit the metadata from either parent application. 
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
-#### v3.0 API Endpoints (Alpha)
+#### v3.0 API endpoints (alpha)
 ##### Upsert Entities 
 POST https://api.datadoghq.com/api/unstable/catalog/definition
 Permission: SERVICE_CATALOG_WRITE
