@@ -185,7 +185,7 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inhe
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
 #### v3.0 API endpoints (alpha)
-##### Upsert Entities 
+##### Upsert entities 
 POST https://api.datadoghq.com/api/unstable/catalog/definition
 Permission: SERVICE_CATALOG_WRITE
 
