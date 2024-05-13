@@ -15,13 +15,13 @@ further_reading:
 
 Monitor Quality refers to the effectiveness and accuracy of monitoring setups within Datadog. This feature highlights monitors with quality issues, such as muted monitors or missing recipients. It enables teams to maintain alerting standards and prevent crucial alerts from being missed.  
 
-By monitoring and managing the quality of your monitors, you can ensure that they are configured correctly and provide valuable insights, empowering teams to maintain effective monitoring practices and optimize system performance.
-
 ## View misconfigured monitors
 
-{{< img src="monitors/quality/filter_monitor_quality.png" alt="Filtering dropdown options for creators, teams, services, and env available on the Monitor Quality page" style="width:100%;" >}}
+From the [**Manage Monitors**][8] page, click the [**Monitor Quality**][7] tab to access a list of monitors that need improvement. Datadog automatically enables this feature after you create your first monitor. 
 
-Datadog automatically enables this feature after you create your first monitor. Filter and view the Monitor Quality page based on the teams, creators, services, or environments to organize and manage the list. 
+Filter and view the [Monitor Quality page][7] based on the teams, creators, services, or environments to organize and manage the list. 
+
+{{< img src="monitors/quality/filter_monitor_quality.png" alt="Filtering dropdown options for creators, teams, services, and env available on the Monitor Quality page" style="width:100%;" >}}
 
 ## Improve monitors and follow best practices
 
@@ -73,3 +73,5 @@ Monitors in an `ALERT` state, are indications of an issue in your service that n
 [4]: integrations/guide/cloud-metric-delay/
 [5]: monitors/notify/#notifications
 [6]: monitors/types/composite/
+[7]: https://app.datadoghq.com/monitors/quality
+[8]: https://app.datadoghq.com/monitors/manage
