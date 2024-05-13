@@ -2183,11 +2183,16 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 3
+    - name: Components
+      url: service_management/app_builder/components/
+      parent: app_builder
+      identifier: app_builder_components
+      weight: 4
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: app_builder
       identifier: app_builder_actions_catalog
-      weight: 4
+      weight: 5
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
