@@ -355,9 +355,9 @@ def process_message():
 {{< /code-block >}}
 
 
-## Force flushing in serverless environments
+## Flushing in serverless environments
 
-To gaurantee spans are sent in serverless environments, use the `LLMObs.force_flush()` function right before your application exits. This function blocks until all LLM Observability data has been submitted to the Datadog backend.
+`LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
 ## Tracing multiple applications
 
