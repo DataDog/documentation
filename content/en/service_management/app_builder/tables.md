@@ -79,7 +79,7 @@ The GitHub API accepts query parameters for filtering based on organization, aut
 
 If you want to show a loading indicator on a table while the data is being fetched, you can set the _table's_ `isLoading` value equal to the _query's_ `isLoading` property. For example:
 
-1. Follow the steps in [filtering with a text input][2]
+1. Follow the steps in [filtering with a text input][2].
 1. In the properties of your table, under **Appearance**, click the **&lt;/&gt;** next to **Is Loading** to open the code editor.
 1. Set the table's `isLoading` value to the following expression:
 
