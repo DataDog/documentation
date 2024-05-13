@@ -3,6 +3,9 @@ title: Components
 kind: documentation
 disable_toc: true
 further_reading:
+- link: "/service_management/workflows/tables/"
+  tag: "Documentation"
+  text: "Tables"
 - link: "/service_management/workflows/build/"
   tag: "Documentation"
   text: "Build Apps"
