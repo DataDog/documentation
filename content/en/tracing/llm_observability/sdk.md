@@ -65,7 +65,7 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_SITE`
 : required - _string_ 
-<br />The Datadog site to submit your LLM data. Should be `datadoghq.com` or `us3.datadoghq.com`.
+<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED`
 : required - _integer or string_ 
