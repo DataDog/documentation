@@ -71,7 +71,7 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_NO_APM`
 : optional - _integer or string_ - **default**: `false`
-<br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`. Automatically set to false if `LLMObs.enable(dd_apm_enabled=False)`
+<br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
 
 ## Tracing spans
 
