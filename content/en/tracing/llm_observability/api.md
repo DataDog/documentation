@@ -46,7 +46,6 @@ Method
       "ml_app": "weather-bot",
       "session_id": "1",
       "tags": [
-        "env:dev",
         "service:weather-bot",
         "env:staging",
         "user_handle:example-user@example.com",
@@ -333,8 +332,8 @@ Evaluation metrics require a `span_id` and `trace_id`.
 
 | Field      | Type            | Description  | 
 |------------|-----------------|--------------|
-| type [*required*]      | "evaluation_metric" | Identifier for the request. Value depends on the API. |
-| attributes [*required*] | [[EvalMetric](#evalmetric)] | The body of the request. Refer to one of the available API's attribute documentation. | 
+| type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
+| attributes [*required*] | [[EvalMetric](#evalmetric)] | The body of the request. | 
 
 [1]: /tracing/llm_observability/sdk/
 [2]: /tracing/llm_observability/span_kinds/

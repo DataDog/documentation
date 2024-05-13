@@ -15,15 +15,15 @@ LLM Observability is not available in the US1-FED site.
 
 LLM Observability supports the following span kinds:
 
-| Kind      | Represents   | Root span?   | Can have child spans? |
-|-----------|--------------|--------------|-------------|
-| [Agent](#agent-span)     | A series of choices made by a language model, often consisting of tool calls and calls to external knowledge bases. | Yes | Yes  |
-| [Workflow](#workflow-span)  | A predetermined sequence of steps, often consisting of some combination of tool calls and data retrieval. | Yes | Yes |
-| [LLM](#llm-span)      | Individual LLM calls, such as a call to OpenAI GPT-4. | Yes | No |
-| [Tool](#tool-span)      | Function calls to external programs or services, such as a web search API. | No | No |
-| [Embedding](#embedding-span) | A call to an embedding model to create an embedding suitable for sending into a subsequent retrieval step. | No  | Yes |
-| [Retrieval](#retrieval-span) | An array of documents returned from an external knowledge base. | No | No | 
-| [Task](#task-span)      | A step in the chain that does not involve a call to an external service, such as a data preprocessing step. | No | No |
+| Kind      | Represents   | Root span?   | Can have child spans? | Examples |
+|-----------|--------------|--------------|-------------|----|
+| [Agent](#agent-span)     | A series of choices made by a language model, often consisting of tool calls and calls to external knowledge bases. | Yes | Yes  | A chatbot that answers customer questions.
+| [Workflow](#workflow-span)  | A predetermined sequence of steps, often consisting of some combination of tool calls and data retrieval. | Yes | Yes | A service that takes a URL and returns a summary of the page, requiring a tool call to fetch the page, some text processing tasks, and an LLM summarization. |
+| [LLM](#llm-span)      | Individual LLM calls. | Yes | No | A call to a model, such as OpenAI GPT-4. |
+| [Tool](#tool-span)      | Function calls to external programs or services. | No | No | A call to a web search API or calculator. |
+| [Embedding](#embedding-span) | A call to an embedding model to create an embedding suitable for sending into a subsequent retrieval step. | No  | Yes | A call to text-embedding-ada-002. |
+| [Retrieval](#retrieval-span) | An array of documents returned from an external knowledge base. | No | No | A call to a vector database that returns an array of ranked documents. |
+| [Task](#task-span)      | A step in the chain that does not involve a call to an external service. | No | No | A data preprocessing step. |
 
 For instructions on creating spans from your application, including code examples, see [Tracing spans][2] in the SDK documentation.
 
