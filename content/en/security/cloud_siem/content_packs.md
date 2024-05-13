@@ -26,11 +26,11 @@ further_reading:
 
 {{< whatsnext desc="Content Packs are grouped into the following categories:" >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-audit-content-packs" >}}<u>Cloud Audit</u>: AWS CloudTrail, Azure Security, GCP Audit Logs, Kubernetes Audit Logs{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}Authentication{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}Collaboration{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}Network{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#cloud-developer-tools-content-packs" >}}Cloud developer tools{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#endpoint-content-packs" >}}Endpoint{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}<u>Authentication</u>: 1Password, Auth0, JumpCloud, Okta{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}<u>Collaboration</u>: Google Workspace, Microsoft 365{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Cloudflare{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#cloud-developer-tools-content-packs" >}}<u>Cloud developer tools</u>: GitHub{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#endpoint-content-packs" >}}<u>Endpoint</u>: CrowdStrike{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Cloud Audit Content Packs
