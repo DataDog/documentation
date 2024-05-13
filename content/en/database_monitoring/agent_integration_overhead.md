@@ -7,7 +7,9 @@ description: Learn about the overhead of integrating the Datadog Agent with your
 
 ## Overview
 
-Database Monitoring runs as an integration on top of the base Datadog Agent. The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU.
+Database Monitoring runs on top of the base Datadog Agent. By default, it's configured to perform optimally while ensuring minimal impact on your system. However, you have the flexibility to adjust settings like data collection frequency and query sampling to better suit your needs.
+
+For most workloads, the Agent's resource usage remains minimal, accounting for less than one percent of query execution time and CPU usage on your database.
 
 ## Overhead testing results
 
