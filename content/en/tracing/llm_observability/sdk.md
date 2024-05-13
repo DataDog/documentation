@@ -20,50 +20,10 @@ You can install and configure tracing of various operations such as workflows, t
 pip install git+https://github.com/DataDog/dd-trace-py.git@main
 {{< /code-block >}}
 
-2. Grab your DD_API_KEY
-
-### If your application already has Datadog tracing
-
-If you already have dd-trace setup and running, simply add these two environment variables to your existing configuration:
-
-`DD_LLMOBS_ENABLED`
-: required - _integer or string_ 
-<br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
-
-`DD_LLMOBS_APP_NAME`
-: required - _string_ 
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
+2. Grab your Datadog API Key.
 
 
-### If you are new to Datadog tracing
-
-If you are new to the ddtrace library, you can either enable LLM Observability in code or through environment variables.
-
-#### Enabling in-code
-
-The LLMOBs.enable() function enables LLM Observability data to be sent to Datadog from your application.
-
-- If you wish to have spans from any of our supported integrations (openai, bedrock, langchain) automatically traced, pass that into the integrations argument.
-
-- If you do not have Datadog APM setup, set `dd_apm_enabled` to `False`. This configures ddtrace to not send any data that requires Datadog APM to be setup.
-
-- `dd_site`, `dd_api_key`, and `ml_app` are required to send LLM Observability data. These values can be directly passed into the `enable` function, or set via environment variables.
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-
-LLMObs.enable(
-	ml_app="<your-ml-app-name>", # overriden by DD_LLMOBS_APP_NAME env var
-	dd_service="<your-service-name>", # overriden by DD_SERVICE env var
-	dd_site="<your-datadog-site>", # overriden by DD_SITE env var
-	dd_env="<your-datadog-environment>", # overriden by DD_ENV env var
-	dd_api_key="<your-dd-api-key>", # overriden by DD_API_KEY env var
-	dd_apm_enabled=False,
-	integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
-)
-{{< /code-block >}}
-
-#### Using the ddtrace-run command
+#### Enabling using the `ddtrace-run` command
 
 You can also enable LLM Observability by setting the required environment variables and running your application through the `ddtrace-run` command.
 
@@ -111,13 +71,29 @@ The full list of supported environment variables is below.
 <br />If you are not a Datadog APM customer, set to `0` or `false`.
 
 
-### Turning off LLM Observability
+#### In-code setup
 
-If `DD_LLMOBS_ENABLED` is unset and the LLMObs.enable() function is never called, LLM Observability data will not be sent to Datadog.
+You can also enable LLM Observability through the `LLMOBs.enable()` function.
 
-If `DD_LLMOBS_ENABLED` is set to `false`, `0` then LLM Observability data will not be sent to Datadog even if the `LLMObs.enable()` method is called explicitly in-code.
+- If you wish to have spans from any of our supported integrations (openai, bedrock, langchain) automatically traced, pass that into the integrations argument.
 
-When LLMObs is not enabled, code instrumented with the LLM Observability SDK and auto-traced libraries will still start and stop spans locally. However, this data will not actually be sent to the Datadog backend.
+- If you do not have Datadog APM setup, set `dd_apm_enabled` to `False`. This configures ddtrace to not send any data that requires Datadog APM to be setup.
+
+- `dd_site`, `dd_api_key`, and `ml_app` are required to send LLM Observability data. These values can be directly passed into the `enable` function, or set via environment variables.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+LLMObs.enable(
+	ml_app="<your-ml-app-name>", # overriden by DD_LLMOBS_APP_NAME env var
+	dd_service="<your-service-name>", # overriden by DD_SERVICE env var
+	dd_site="<your-datadog-site>", # overriden by DD_SITE env var
+	dd_env="<your-datadog-environment>", # overriden by DD_ENV env var
+	dd_api_key="<your-dd-api-key>", # overriden by DD_API_KEY env var
+	dd_apm_enabled=False,
+	integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
+)
+{{< /code-block >}}
 
 ## Tracing spans
 
@@ -401,9 +377,9 @@ def process_message():
 {{< /code-block >}}
 
 
-## Force Flushing in Serverless Environments 
+## Force flushing in serverless environments
 
-To gaurantee spans are sent in serverless environments, use the `LLMObs.force_flush()` function right before your application exits. This function blocks until all LLM Observability data has been submitted to our backend.
+To gaurantee spans are sent in serverless environments, use the `LLMObs.force_flush()` function right before your application exits. This function blocks until all LLM Observability data has been submitted to the Datadog backend.
 
 ## Tracing multiple applications
 
