@@ -68,8 +68,9 @@ The required test framework and dd-trace versions are:
 * `>=4.36.0` for the 4.x release.
 * `>=3.57.0` for the 3.x release.
 
-The supported versions for test frameworks are the same as those for [Test Visibility][10], with the exception of `playwright`, which is only supported from `>=1.38.0`.
+The test framework compatibility is the same as [Test Visibility Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
+[1]: /tests/setup/javascript/?tab=cloudciprovideragentless#compatibility
 {{% /tab %}}
 
 {{% tab "Java" %}}
