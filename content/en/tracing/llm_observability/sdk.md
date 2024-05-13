@@ -12,22 +12,48 @@ You can install and configure tracing of various operations such as workflows, t
 
 ## Setup
 
-Install the latest `ddtrace` package hash:
+### Pre-requisites
+
+1. Install the latest `ddtrace` package hash:
 
 {{< code-block lang="shell">}}
 pip install git+https://github.com/DataDog/dd-trace-py.git@main
 {{< /code-block >}}
 
-## Running an LLM application
+2. Grab your Datadog API Key.
 
-Your application startup command must specify the required environment variables:
+#### In-code setup
+
+Enable LLM Observability through the `LLMOBs.enable()` function.
+
+- Use the `integrations` argument to turn on automatic tracing for supported LLM Observability integrations (openai, bedrock, langchain).
+
+- If you do not have Datadog APM setup, set `dd_llmobs_no_apm` to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM to be setup.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+LLMObs.enable(
+    ml_app="<the name of your ML application>",
+    dd_api_key="<your Datadog API key>",
+    dd_site="<your Datadog site, e.g datadoghq.com, us3.datadoghq.com, etc.>",
+    dd_llmobs_no_apm=True,
+    integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
+)
+{{< /code-block >}}
+
+
+#### Command line setup
+
+You can also enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
+
+**Note**: `ddtrace-run` automatically turns on all LLM Observability integrations.
 
 {{< code-block lang="shell">}}
 DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
-DD_LLMOBS_APP_NAME=<YOUR_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-The full list of supported environment variables is below.
 
 `DD_API_KEY`
 : required - _string_
@@ -48,22 +74,6 @@ The full list of supported environment variables is below.
 `DD_LLMOBS_NO_APM`
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
-
-`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: optional - _string_ - **default**: `true`
-<br />If you are not a Datadog APM customer, set to `0` or `false`.
-
-`DD_REMOTE_CONFIGURATION_ENABLED`
-: optional - _string_ - **default**: `true`
-<br />If you are not a Datadog APM customer, set to `0` or `false`.
-
-`DD_OPENAI_METRICS_ENABLED`
-: optional - _string_ - **default**: `true`
-<br />If you are not a Datadog APM customer, set to `0` or `false`.
-
-`DD_LANGCHAIN_METRICS_ENABLED`
-: optional - _string_ - **default**: `true`
-<br />If you are not a Datadog APM customer, set to `0` or `false`.
 
 ## Tracing spans
 
@@ -345,6 +355,11 @@ def process_message():
         ... # user application logic
     return 
 {{< /code-block >}}
+
+
+## Flushing in serverless environments
+
+`LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
 ## Tracing multiple applications
 
