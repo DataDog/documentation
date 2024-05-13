@@ -250,7 +250,7 @@ curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/id/<i
 --header 'DD-APPLICATION-KEY: <APP_KEY>'
 {{< /code-block >}}
 
-##### Get Entities by Ref 
+##### Get entities by reference 
 GET https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>
 Permission: SERVICE_CATALOG_READ
 
