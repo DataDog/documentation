@@ -30,7 +30,7 @@ To trace an LLM application:
     - See the span creation example below.
     - For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
 1. [Annotate your spans][7] with input data, output data, metadata (such as `max_tokens`), and key-value tags (such as `version:1.0.0`).
-1. Explore the resulting traces on the [LLM Observability traces page][2].
+1. Explore the resulting traces on the [LLM Observability traces page][2], and the resulting metrics on the out-of-the-box [LLM Observability dashboard][14].
 
 Optionally, you can also:
 
@@ -66,3 +66,4 @@ def process_message():
 [11]: /tracing/llm_observability/sdk/#tracing-spans
 [12]: /tracing/llm_observability/sdk
 [13]: /tracing/llm_observability/api
+[14]: https://app.datadoghq.com/dash/integration/llm_analytics
