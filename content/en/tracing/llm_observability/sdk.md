@@ -22,17 +22,39 @@ pip install git+https://github.com/DataDog/dd-trace-py.git@main
 
 2. Grab your Datadog API Key.
 
+#### In-code setup
 
-#### Enabling using the `ddtrace-run` command
+Enable LLM Observability through the `LLMOBs.enable()` function.
 
-Enable LLM Observability by running your application through the `ddtrace-run` command and specifying the required environment variables.
+- If you wish to have spans from any of our supported integrations (openai, bedrock, langchain) automatically traced, pass that into the integrations argument.
+
+- If you do not have Datadog APM setup, set `dd_apm_enabled` to `False`. This configures the `ddtrace` library to not send any data that requires Datadog APM to be setup.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+LLMObs.enable(
+	ml_app="<the name of your ML application>",
+    dd_api_key="<your Datadog API key>",
+    dd_site="<your Datadog site, e.g datadoghq.com, us3.datadoghq.com, etc.>",
+	integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
+)
+{{< /code-block >}}
+
+
+#### Command line setup
+
+You can also enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
 
 {{< code-block lang="shell">}}
 DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
-DD_LLMOBS_APP_NAME=<YOUR_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-The full list of supported environment variables is below.
+
+#### Configuring your environment
+
+The following environment variables override the behavior of the `LLMObs.enable()` function in code.
 
 `DD_API_KEY`
 : required - _string_
@@ -69,31 +91,6 @@ The full list of supported environment variables is below.
 `DD_LANGCHAIN_METRICS_ENABLED`
 : optional - _string_ - **default**: `true`
 <br />If you are not a Datadog APM customer, set to `0` or `false`.
-
-
-#### In-code setup
-
-You can also enable LLM Observability through the `LLMOBs.enable()` function.
-
-- If you wish to have spans from any of our supported integrations (openai, bedrock, langchain) automatically traced, pass that into the integrations argument.
-
-- If you do not have Datadog APM setup, set `dd_apm_enabled` to `False`. This configures ddtrace to not send any data that requires Datadog APM to be setup.
-
-- `dd_site`, `dd_api_key`, and `ml_app` are required to send LLM Observability data. These values can be directly passed into the `enable` function, or set via environment variables.
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-
-LLMObs.enable(
-	ml_app="<your-ml-app-name>", # overriden by DD_LLMOBS_APP_NAME env var
-	dd_service="<your-service-name>", # overriden by DD_SERVICE env var
-	dd_site="<your-datadog-site>", # overriden by DD_SITE env var
-	dd_env="<your-datadog-environment>", # overriden by DD_ENV env var
-	dd_api_key="<your-dd-api-key>", # overriden by DD_API_KEY env var
-	dd_apm_enabled=False,
-	integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
-)
-{{< /code-block >}}
 
 ## Tracing spans
 
