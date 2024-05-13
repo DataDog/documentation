@@ -1,6 +1,12 @@
 ---
 title: LLM Observability API
 ---
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+LLM Observability is not available in the US1-FED site.
+</div>
+{{% /site-region %}}
+
 <div class="alert alert-warning">LLM Observability is in public beta, and this API is subject to change. If changes occur, Datadog will provide release notes with any applicable upgrade instructions.</a></div>
 
 ## Overview
@@ -11,8 +17,7 @@ The LLM Observability API provides an interface for developers to send LLM-relat
 Use this endpoint to send spans to Datadog. For details on the available kinds of spans, see [Span Kinds][2].
 
 Endpoint
-: `https://api.<DATADOG_SITE>/api/unstable/llm-obs/v1/trace/spans`
-<br />Replace `<DATADOG_SITE>` with the Datadog site you want to send data to (for example, `datadoghq.com` or `us3.datadoghq.com`).
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/trace/spans`
 
 Method
 : `POST`

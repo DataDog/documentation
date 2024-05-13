@@ -2,6 +2,12 @@
 title: Trace an LLM Application
 kind: guide
 ---
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+LLM Observability is not available in the US1-FED site.
+</div>
+{{% /site-region %}}
+
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
 ## Overview

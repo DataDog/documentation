@@ -2,6 +2,12 @@
 title: LLM Observability SDK for Python
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+LLM Observability is not available in the US1-FED site.
+</div>
+{{% /site-region %}}
+
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
 ## Overview
@@ -34,16 +40,15 @@ Enable LLM Observability through the `LLMOBs.enable()` function.
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(
-    ml_app="<the name of your ML application>",
-    dd_api_key="<your Datadog API key>",
-    dd_site="<your Datadog site, e.g datadoghq.com, us3.datadoghq.com, etc.>",
+    ml_app="<YOUR_ML_APP_NAME>",
+    dd_api_key="<YOUR_DATADOG_API_KEY>",
+    dd_site="{{< region-param key="dd_site" code="true" >}}",
     dd_llmobs_no_apm=True,
     integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
 )
 {{< /code-block >}}
 
-
-#### Command line setup
+#### Command-line setup
 
 You can also enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
 

@@ -1,6 +1,12 @@
 ---
 title: Quickstart
 ---
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+LLM Observability is not available in the US1-FED site.
+</div>
+{{% /site-region %}}
+
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
 Our quickstart docs make use of our Python SDK. For detailed usage, see [the SDK documentation][1]. If your application is written in another language, you can create traces by calling the [API][8] instead.
