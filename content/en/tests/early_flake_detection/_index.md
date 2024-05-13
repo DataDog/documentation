@@ -37,7 +37,7 @@ Detection of New Tests
 Flakiness Identification
 : Running a test multiple times helps uncover issues like race conditions, which may cause the test to pass and fail intermittently. If any of the test attempts fail, the test is automatically tagged as flaky.
 
-Running a test multiple times increases the likelihood of exposing random conditions that cause flakiness. Early Flake Detection helps ensure that only stable, reliable tests are integrated into the main branch. 
+Running a test multiple times increases the likelihood of exposing random conditions that cause flakiness. Early Flake Detection helps ensure that only stable, reliable tests are integrated into the main branch.
 
 You can choose to block the merge of the feature branch with a [Quality Gate][2]. For more information, see the [Quality Gates documentation][8].
 
@@ -67,7 +67,7 @@ You can manage the list of excluded branches on the [Test Service Settings page]
 
 ## Explore results in the Test Visibility Explorer
 
-You can using the following facets to query sessions that run Early Flake Detection and new tests in the [Test Visibility Explorer][10].
+You can use the following facets to query sessions that run Early Flake Detection and new tests in the [Test Visibility Explorer][10].
 
 * **Test Session**: Test sessions running Early Flake Detection have the `@test.early_flake.enabled` tag set to `true`.
 * **New Tests**: New tests have the `@test.is_new` tag set to `true`, and retries for this test have the `@test.is_retry` tag set to `true`.
