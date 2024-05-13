@@ -67,11 +67,11 @@ Monitors in an `ALERT` state, are indications of an issue in your service that n
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: monitors/downtimes/
-[2]: monitors/notify/
-[3]: monitors/configuration/?tab=thresholdalert#evaluation-delay
-[4]: integrations/guide/cloud-metric-delay/
-[5]: monitors/notify/#notifications
-[6]: monitors/types/composite/
+[1]: /monitors/downtimes/
+[2]: /monitors/notify/
+[3]: /monitors/configuration/?tab=thresholdalert#evaluation-delay
+[4]: /integrations/guide/cloud-metric-delay/
+[5]: /monitors/notify/#notifications
+[6]: /monitors/types/composite/
 [7]: https://app.datadoghq.com/monitors/quality
 [8]: https://app.datadoghq.com/monitors/manage
