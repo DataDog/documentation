@@ -230,7 +230,7 @@ metadata:
 '
 {{< /code-block >}}
 
-##### Get Entities
+##### Get entities
 GET https://api.datadoghq.com/api/unstable/catalog/definition
 Permission: SERVICE_CATALOG_READ
 
