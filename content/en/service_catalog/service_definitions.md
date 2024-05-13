@@ -189,7 +189,7 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inhe
 POST https://api.datadoghq.com/api/unstable/catalog/definition
 Permission: SERVICE_CATALOG_WRITE
 
-{{< code-block collapsible="true" >}}
+{{< code-block lang="yaml" collapsible="true" >}}
 curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
 --header 'DD-API-KEY: <KEY>' \
 --header 'DD-APPLICATION-KEY: <APP_KEY>' \
@@ -234,7 +234,7 @@ metadata:
 GET https://api.datadoghq.com/api/unstable/catalog/definition
 Permission: SERVICE_CATALOG_READ
 
-{{< code-block collapsible="true" >}}
+{{< code-block lang="yaml" collapsible="true" >}}
 curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
 --header 'DD-API-KEY: <KEY>' \
 --header 'DD-APPLICATION-KEY: <APP_KEY>'
@@ -244,7 +244,7 @@ curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
 GET https://api.datadoghq.com/api/unstable/catalog/definition/id/<id>
 Permission: SERVICE_CATALOG_READ
 
-{{< code-block collapsible="true" >}}
+{{< code-block lang="yaml" collapsible="true" >}}
 curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/id/<id>' \
 --header 'DD-API-KEY: <KEY>' \
 --header 'DD-APPLICATION-KEY: <APP_KEY>'
@@ -254,7 +254,7 @@ curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/id/<i
 GET https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>
 Permission: SERVICE_CATALOG_READ
 
-{{< code-block collapsible="true" >}}
+{{< code-block lang="yaml" collapsible="true" >}}
 curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
 --header 'DD-API-KEY: <KEY>' \
 --header 'DD-APPLICATION-KEY: <APP_KEY>'
