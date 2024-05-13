@@ -55,7 +55,7 @@ You can also enable LLM Observability by running your application using the `ddt
 **Note**: `ddtrace-run` automatically turns on all LLM Observability integrations.
 
 {{< code-block lang="shell">}}
-DD_SITE=<DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_SITE={{< region-param key="dd_site" code="true" >}} DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
