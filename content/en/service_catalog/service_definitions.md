@@ -89,10 +89,11 @@ extensions:
   datadoghq.com/shopping-cart:
     customField: customValue
 datadog:
-  performanceData:
-    tags:
-      - 'service:shopping-cart'
-      - 'hostname:shopping-cart'
+  code:
+    - paths:
+      - baz/*.c
+      - bat/**/*
+      - ../plop/*.java
   events:
     - name: "deployment events"
       query: "app:myapp AND type:github"
