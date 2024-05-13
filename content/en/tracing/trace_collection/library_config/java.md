@@ -320,7 +320,7 @@ When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecima
 `dd.trace.otel.enabled`
 : **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
 **Default**: `false`<br>
-When `true`, enables OpenTelemetry based tracing for [custom][16] instrumentation.
+When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
 
 **Note**:
 
