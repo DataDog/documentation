@@ -17,7 +17,7 @@ This feature is in beta. If you have any feedback, contact <a href="/help/">Data
 Datadog uses [service-entry spans][1] throughout the platform for features such as [Trace Metrics][2] and the [APM Trace Explorer][3]. This convention is unique to Datadog, but can be mapped from the [`SpanKind`][4] attribute in OpenTelemetry by following the opt-in guide below.
 
 ## Opting in to the feature
-This feature has been released with OTel Collector Contrib v0.100.0 and Datadog Agent v7.53.0. To opt into the **public beta**, enable the config option depending on the ingestion path.
+This feature requires OTel Collector Contrib v0.100.0 or greater and Datadog Agent v7.53.0 or greater. To opt into the **public beta**, enable the config option depending on the ingestion path.
 
 {{< tabs >}}
 {{% tab "OTel Collector and Datadog Exporter" %}}
