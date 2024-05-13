@@ -57,7 +57,7 @@ After you have set up your Datadog library for Test Visibility, you can configur
 
 {{< img src="continuous_integration/early_flake_detection_configuration_modal.png" alt="Enabling Early Flake Detection and defining excluded branches in the test service configuration" style="width:60%">}}
 
-#### Compatibility
+## Compatibility
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
 
