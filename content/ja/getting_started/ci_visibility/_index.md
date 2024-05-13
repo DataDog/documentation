@@ -86,7 +86,7 @@ CI プロバイダーがサポートされていない場合、プログラム�
 [101]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Astage
 
 {{% /tab %}}
-{{% tab “ジョブ" %}}
+{{% tab "ジョブ" %}}
 
 [**Software Delivery** > **CI Visibility** > **Executions**][101] に移動し、`Job` を選択してジョブスパンの結果のフィルタリングを開始します。
 
