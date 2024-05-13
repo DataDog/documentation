@@ -2188,6 +2188,11 @@ menu:
       parent: app_builder
       identifier: app_builder_components
       weight: 4
+    - name: Tables
+      url: service_management/app_builder/tables/
+      parent: app_builder_components
+      identifier: app_builder_tables
+      weight: 1
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: app_builder

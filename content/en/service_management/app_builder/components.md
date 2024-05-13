@@ -666,6 +666,9 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+
+For examples showing how to use advanced features of tables, see [Tables][6].
+
 {{% /collapse-content %}}
 
 
@@ -765,3 +768,4 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
 [5]: https://datadoghq.slack.com/
+[6]: /service_management/app_builder/tables/
