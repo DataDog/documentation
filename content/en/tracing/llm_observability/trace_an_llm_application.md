@@ -84,6 +84,6 @@ def process_message():
 [12]: /tracing/llm_observability/sdk
 [13]: /tracing/llm_observability/api
 [14]: https://app.datadoghq.com/dash/integration/llm_analytics
-[15]: /llm_observability/api/?tab=model#eval-metrics-api
+[15]: /tracing/llm_observability/api/?tab=model#eval-metrics-api
 [16]: https://app.datadoghq.com/llm/clusters
 [17]: /tracing/llm_observability/sdk/#in-code-setup
