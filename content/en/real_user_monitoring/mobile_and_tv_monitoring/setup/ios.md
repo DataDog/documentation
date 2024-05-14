@@ -412,6 +412,10 @@ RUM.enable(
 
 [iOS Crash Reporting and Error Tracking][17] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][18].
 
+## Supported versions
+
+See [Supported versions][19] for a list operating system versions and platforms that are compatible with the RUM iOS SDK.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
