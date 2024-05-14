@@ -34,8 +34,6 @@ To get started with LLM Observability, you can build a simple example with the [
 
 ## Explore LLM Observability
 
-<!-- Figma: https://www.figma.com/design/ZskpTxUOqzUwHpkEymfjhX/[LLM]-Welcome-Page?node-id=226-182352&t=U3OWFWD1OIpKKS8A-0 -->
-
 ### Troubleshoot with end-to-end tracing
 
 View every step of your LLM application chains and calls to pinpoint problematic requests and identify the root cause of errors.
@@ -43,6 +41,8 @@ View every step of your LLM application chains and calls to pinpoint problematic
 ### Monitor operational metrics and optimize cost
 
 Monitor the throughput, latency, and token usage trends for all your LLM applications.
+
+{{< img src="tracing/llm_observability/llm-obs-dashboard.png" alt="The out-of-the-box LLM Observability dashboard" style="width:100%;" >}}
 
 ### Evaluate the quality and effectiveness of your LLM applications
 

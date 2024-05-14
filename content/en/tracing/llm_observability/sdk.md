@@ -95,8 +95,6 @@ To trace an agent span, use `LLMObs.agent()` as a context manager.
 
 #### Example
 
-For a working example, see [the example Jupyter notebook for agent spans][7].
-
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
@@ -117,8 +115,6 @@ To trace a workflow span, use `LLMObs.workflow()` as a context manager.
 <br/>The name of the operation.
 
 #### Example
-
-For a working example, see [the example Jupyter notebook for workflow spans][6].
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -153,8 +149,6 @@ To trace an LLM span, use `LLMObs.llm()` as a context manager.
 : optional - _string_ - **default**: `"custom"`
 
 #### Example
-
-For a working example, see [the example Jupyter notebook for LLM spans][5].
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -386,7 +380,4 @@ def process_message():
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 [3]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
 [4]: https://github.com/langchain-ai/langchain
-[5]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb
-[6]: https://github.com/DataDog/llm-observability/blob/main/2-workflow-span.ipynb
-[7]: https://github.com/DataDog/llm-observability/blob/main/3-agent-span.ipynb
 [8]: /tracing/llm_observability/span_kinds/

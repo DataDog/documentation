@@ -11,10 +11,6 @@ LLM Observability is not available in the US1-FED site.
 
 Our quickstart docs make use of our Python SDK. For detailed usage, see [the SDK documentation][1]. If your application is written in another language, you can create traces by calling the [API][8] instead.
 
-## Jupyter notebook quickstart
-
-To try out LLM Observability in a series of guided notebooks, follow the instructions in [the LLM Observability onboarding repo][2].
-
 ## Command line quickstart
 
 Use the steps below to run a simple Python script that generates an LLM Observability trace.
@@ -72,7 +68,6 @@ A trace of your LLM call should appear in [the Traces tab][3] of LLM Observabili
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from Datadog's list of supported integrations.
 
 [1]: /tracing/llm_observability/sdk/
-[2]: https://github.com/DataDog/llm-observability
 [3]: https://app.datadoghq.com/llm/traces
 [4]: https://platform.openai.com/docs/quickstart/account-setup
 [5]: https://platform.openai.com/docs/quickstart/step-1-setting-up-python
