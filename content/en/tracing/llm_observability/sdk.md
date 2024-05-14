@@ -35,7 +35,7 @@ You can also enable LLM Observability by running your application using the `ddt
 **Note**: `ddtrace-run` automatically turns on all LLM Observability integrations.
 
 {{< code-block lang="shell">}}
-DD_SITE=<DD_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
@@ -61,7 +61,7 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 #### Application naming guidelines
 
-Your application name (the value of `ml_app` or `DD_LLMOBS_APP_NAME`) must start with a letter. It may contain the characters listed below:
+Your application name (the value of `DD_LLMOBS_APP_NAME`) must start with a letter. It may contain the characters listed below:
 
 - Alphanumerics
 - Underscores
