@@ -6,7 +6,7 @@ further_reading:
   text: Synthetic モニタリングについて
 - link: /continuous_testing/explorer/
   tag: ドキュメント
-  text: Synthetic Monitoring & Continuous Testing Explorer について
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 - link: /continuous_testing/explorer/saved_views
   tag: ドキュメント
   text: 保存ビューについて

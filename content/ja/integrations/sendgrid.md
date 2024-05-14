@@ -15,6 +15,7 @@ assets:
       prefix: sendgrid.emails.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 620
     source_type_name: SendGrid
 author:
   homepage: https://www.datadoghq.com
@@ -22,8 +23,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
-- メトリクス
+- モニター
 - ログの収集
 dependencies: []
 display_on_public_website: true
@@ -48,7 +48,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Web
   - Category::Metrics
   - Category::Log Collection
   configuration: README.md#Setup
@@ -59,11 +58,14 @@ tile:
   title: SendGrid
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+{{< img src="integrations/sendgrid/sendgrid_dashboard_overview.png" alt="Datadog の Sendgrid ダッシュボード" popup="true">}}
+
 ## 概要
 
-SendGrid のメール配信およびエンゲージメントのメトリクスとログを収集します。
+Twilio SendGrid は、企業がトランザクションメールやマーケティングメールの送信に使用するメールプラットフォームです。このインテグレーションを使用して、SendGrid のメール配信とエンゲージメントのメトリクスとログを収集します。
 
-## セットアップ
+## 計画と使用
 
 ### SendGrid の API キーを生成する
 
@@ -74,7 +76,7 @@ SendGrid のメール配信およびエンゲージメントのメトリクス�
 5. _API Key Name_ を記入します。**Full Access**、またはアクセス制限のある場合は、**Stats** - **Read Access** および **User Account** - **Read Access** を選択します。
 6. API キーを安全な場所にコピーします。API キーは、Datadog のユーザーインターフェイスで SendGrid インテグレーションを設定する際に必要になります。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 #### メトリクスの送信
 
@@ -94,27 +96,27 @@ SendGrid のメール配信およびエンゲージメントのメトリクス�
 7. **Authorization Method** を _None_ に設定したままにします。
 8. 受け取る配信やエンゲージメントイベントの内容を選択します。
 9. **Event Webhook Status** を有効にします。
-10. **保存**をクリックします。
+10. **Save** をクリックします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "sendgrid" >}}
 
 
-### ログ管理
+### ワークフローの自動化
 
 Sendgrid の配信とエンゲージメントイベントは、ソース `sendgrid` の下にログとして表示されます。
 
-### イベント
+### ヘルプ
 
 SendGrid インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 SendGrid インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

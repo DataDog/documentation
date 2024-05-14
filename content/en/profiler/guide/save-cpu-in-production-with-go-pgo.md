@@ -1,5 +1,5 @@
 ---
-title: Go - Save up to 15% CPU in Production with Profile-Guided Optimization
+title: Go - Save up to 14% CPU in Production with Profile-Guided Optimization
 kind: guide
 further_reading:
 - link: "/profiler"
@@ -35,7 +35,7 @@ PGO is a standard Go compiler option that you can use by manually downloading pr
 
 To enable PGO using the `datadog-pgo` tool:
 
-1. Create a dedicated API key and unscoped application key for PGO as described in [API and Application Keys][5].
+1. Create a dedicated API key and an application key scoped to at least `continuous_profiler_pgo_read` as described in [API and Application Keys][5].
 2. Set `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE` with the environment secret mechanism of your CI provider.
 3. Run `datadog-pgo` before your build step.  
    For example, for a service `foo` that runs in `prod` and has its main package in `./cmd/foo`, you should add this step:

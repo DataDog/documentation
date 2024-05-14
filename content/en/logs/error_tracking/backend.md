@@ -31,7 +31,7 @@ To configure inline code snippets in issues, set up the [source code integration
 To enable Error Tracking, logs must include both of the following:
 
 - either an `error.type` or `error.stack` field
-- a status level of `ERROR` or `CRITICAL`
+- a status level of `ERROR`, `CRITICAL`, `ALERT`, or `EMERGENCY`
 
 The remaining attributes listed below are optional, but their presence improves error grouping.
 

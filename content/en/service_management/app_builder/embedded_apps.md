@@ -47,3 +47,7 @@ App elements that are linked with dashboard template variables update in tandem 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][1].
+
+[1]: https://datadoghq.slack.com/
