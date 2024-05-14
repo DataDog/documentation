@@ -44,15 +44,15 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 <br />Your Datadog API key.
 
 `DD_SITE`
-: required - _string_
+: required - _string_ 
 <br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `DD_LLMOBS_ENABLED`
-: required - _integer or string_
+: required - _integer or string_ 
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
 `DD_LLMOBS_APP_NAME`
-: required - _string_
+: required - _string_ 
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
 `DD_LLMOBS_NO_APM`
@@ -102,7 +102,7 @@ from ddtrace.llmobs import LLMObs
 def run_agent():
     with LLMObs.agent(name="react_agent") as agent_span:
         ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 ### Workflow span
@@ -131,7 +131,7 @@ from ddtrace.llmobs import LLMObs
 def process_message():
     with LLMObs.workflow(name="process_message") as workflow_span:
         ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 ### LLM span
@@ -202,7 +202,7 @@ from ddtrace.llmobs import LLMObs
 def call_weather_api():
     with LLMObs.tool(name="get_current_weather") as tool_span:
         ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 ### Embedding span
@@ -216,7 +216,7 @@ To trace an embedding span, use `LLMObs.embedding()` as a context manager.
 <br/>The name of the invoked LLM.
 
 `name`
-: optional - _string_ - **default**: `"llm"`
+: optional - _string_ - **default**: `"embedding"`
 <br/>The name of the operation.
 
 `model_provider`
@@ -238,7 +238,7 @@ from ddtrace.llmobs import LLMObs
 def perform_embedding():
     with LLMObs.embedding(name="openai_embedding") as embedding_span:
         ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 ### Retrieval span
@@ -267,7 +267,7 @@ from ddtrace.llmobs import LLMObs
 def similarity_search():
     with LLMObs.retrieval(name="get_relevant_docs") as retrieval_span:
         ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 ### Task span
@@ -296,7 +296,7 @@ from ddtrace.llmobs import LLMObs
 def sanitize_input():
     with LLMObs.task(name="sanitize_input") as task_span:
         ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 ## Tracing spans using function decorators
@@ -316,25 +316,25 @@ def process_message():
 
 ## Annotating a span
 
-The SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata.
+The SDK provides the method `LLMObs.annotate()` to annotate spans with inputs, outputs, and metadata. 
 
 ### Arguments
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
-`span`
+`span` 
 : optional - _Span_ - **default**: the current active span
 <br />The span to annotate. If `span` is not provided (as when using function decorators), the SDK annotates the current active span.
 
-`input_data`
-: optional - _JSON serializable type or list of dictionaries_
+`input_data` 
+: optional - _JSON serializable type or list of dictionaries_ 
 <br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string, dictionary, or a list of dictionaries with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
-`output_data`
-: optional - _JSON serializable type or list of dictionaries_
+`output_data` 
+: optional - _JSON serializable type or list of dictionaries_ 
 <br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string, dictionary, or a list of dictionaries with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
-`metadata`
+`metadata` 
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
 
@@ -403,7 +403,7 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 To manually start and stop a span across different contexts or scopes:
 
-1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but inline rather than as a context manager.
+1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but inline rather than as a context manager. 
 2. Pass the span object as an argument to other functions.
 3. Stop the span manually with the `span.finish()` method.
 
@@ -413,7 +413,7 @@ To manually start and stop a span across different contexts or scopes:
 from ddtrace.llmobs import LLMObs
 
 def separate_task(workflow_span):
-    ... # user application logic
+    ... # user application logic 
     workflow_span.finish()
     return
 
@@ -434,7 +434,7 @@ from ddtrace.llmobs import LLMObs
 def process_message():
     with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>") as workflow_span:
         ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 
@@ -456,7 +456,7 @@ from ddtrace.llmobs import LLMObs
 def process_message():
     with LLMObs.workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>") as workflow_span:
         ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 [1]: https://github.com/openai/openai-python
