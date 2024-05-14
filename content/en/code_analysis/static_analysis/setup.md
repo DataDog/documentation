@@ -118,7 +118,7 @@ For example, you can use the following:
 rulesets:
   - python-best-practices
   - python-security
-  - python-code-style
+  - python-code-style:
     rules:
       max-function-lines:
         # Do not apply the rule max-function-lines to the following files
