@@ -21,7 +21,7 @@ description: Learn how to create a Datadog Log integration.
 ---
 ## Overview
 
-This page walks Technology Partners through creating a log pipeline.
+This page walks Technology Partners through creating a log pipeline. A log pipeline is required if your integration is sending in logs. 
 
 ## Log integrations
 
@@ -64,11 +64,10 @@ Logs sent to Datadog are processed in [log pipelines][13] to standardize them fo
 
 To set up a log pipeline:
 
-1. Navigate to [**Logs** > **Pipelines**][3].
-2. Click **+ New Pipeline**.
-3. In the **Filter** field, enter a unique `source` tag that defines the log source for the Technology Partner's logs. For example, `source:okta` for the Okta integration. **Note**: Make sure that logs sent through the integration are tagged with the correct source tags before they are sent to Datadog.
-4. Optionally, add tags and a description.
-5. Click **Create**.
+1. From the [**Pipelines**][3] page, click **+ New Pipeline**.
+2. In the **Filter** field, enter a unique `source` tag that defines the log source for the Technology Partner's logs. For example, `source:okta` for the Okta integration. **Note**: Make sure that logs sent through the integration are tagged with the correct source tags before they are sent to Datadog.
+3. Optionally, add tags and a description.
+4. Click **Create**.
 
 You can add processors within your pipelines to restructure your data and generate attributes.
 
@@ -100,12 +99,12 @@ To add a facet or measure:
 4. For a measure, to define the unit, click **Advanced options**. Select the unit based on what the attribute represents.
 5. Click **Add**.
 
-To easily navigate the facet list, facets are grouped together. For fields specific to the integration logs, create a single group with the same name as the `source` tag. 
+To help navigate the facet list, facets are grouped together. For fields specific to the integration logs, create a **single group with the same name** as the `source` tag. 
 
 1. In the log panel, click the Cog icon next to the attribute that you want in the new group.
 2. Select **Edit facet/measure for @attribute**. If there isn't a facet for the attribute yet, select **Create facet/measure for @attribute**.
 3. Click **Advanced options**.
-4. In the **Group** field, enter the name and a description of the new group, and select **New group**.
+4. In the **Group** field, enter the name of the group matching the source tag and a description of the new group, and select **New group**.
 5. Click **Update**.
 
 **Guidelines**
@@ -141,7 +140,7 @@ Exporting your log pipeline includes two YAML files:
 
 Note: Depending on your browser, you may need to adjust your settings to allow file downloads.
 
-Once you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
+After you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
 
 Validations are run automatically in your pull request. 
 

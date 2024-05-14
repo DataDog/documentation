@@ -224,7 +224,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
     ```dockerfile
-    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
@@ -236,7 +236,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     **Note**: If you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection, you can [apply the Datadog wrapper in your function code][2] instead.
 
-4. Configure the Datadog site, API key, and tracing
+4. Configure the Datadog site, API key, and tracing in your Dockerfile
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
@@ -305,6 +305,7 @@ Fill in variables accordingly:
     </table>
 
    In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with one of the following: {{< latest-lambda-layer-version layer="python-versions" >}}.
+
 
 2. Replace `<DATADOG_EXTENSION_ARN>` with the ARN of the appropriate Datadog Lambda Extension for your region and architecture:
 

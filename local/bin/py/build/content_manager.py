@@ -277,6 +277,14 @@ def download_cached_content_into_repo(self):
     # Integrations are handled separately for now (there is active work underway to improve this)
     if self.cache_enabled:
         print('Copying integrations from cache...')
+
+        for integration in self.apw_integrations:
+            cache_path = f"temp/content/en/integrations/{integration}.md"
+
+            if os.path.isfile(cache_path):
+                print(f'ignoring APW integrations: {cache_path}')
+                os.remove(cache_path)
+
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
 
         # Copying generated data files

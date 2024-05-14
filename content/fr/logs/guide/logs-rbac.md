@@ -56,7 +56,7 @@ Ce guide aborde les étapes suivantes :
 
 Appliquez un tag `team:acme` à vos logs entrants ACME afin de pouvoir trier vos logs dans Datadog.
 
-{{< img src="logs/guide/rbac/team_tag.png" alt="Appliquer un tag d'équipe à vos logs"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/team_tag.png" alt="Appliquer un tag d'équipe à vos logs" style="width:60%;">}}
 
 Par exemple, dans le cadre de la collecte de logs Docker, associez le tag `team:acme` aux logs issus de ce conteneur en utilisant les [étiquettes Docker comme tags][2]. Reportez-vous à la [section sur le tagging][3] pour une présentation plus générale.
 
@@ -79,7 +79,7 @@ Les clés d'API et les clés d'application sont disponibles sur la [page des cl�
 
 Assurez-vous que la clé d'application que vous utilisez est associée à votre compte utilisateur ou à un compte utilisateur qui dispose d'autorisations similaires.
 
-{{< img src="logs/guide/rbac/app-api_keys.png" alt="Vérifier les clés d'API et d'application"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/app-api_keys.png" alt="Vérifier les clés d'API et d'application" style="width:60%;">}}
 
 Tout au long de ce guide, vous devrez remplacer chaque occurrence de `<CLÉ_API_DATADOG>` et `<CLÉ_APPLICATION_DATADOG>` par vos clés d'API et d'application Datadog, respectivement. Ce guide suppose également que vous avez accès à un terminal avec `CURL`.
 
@@ -203,8 +203,8 @@ Maintenant que vos rôles sont configurés avec leurs autorisations, attribuez-l
 
 Depuis la [section Team][1] de Datadog, accédez à l'onglet User. Choisissez un utilisateur et attribuez-lui le rôle `ACME Admin` ou `ACME User`, en plus des rôles qui lui sont peut-être déjà attribués. Vous trouverez de plus amples informations sur la gestion des utilisateurs dans la section [Gestion de compte][2].
 
-{{< img src="logs/guide/rbac/assign_user.png" alt="Supprimer une invitation dans la vue sous forme de tableau"  style="width:60%;">}}
-{{< img src="logs/guide/rbac/assign_user2.png" alt="Supprimer une invitation dans la vue sous forme de tableau"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user.png" alt="Supprimer une invitation dans la vue sous forme de tableau" style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user2.png" alt="Supprimer une invitation dans la vue sous forme de tableau" style="width:60%;">}}
 
 [1]: https://app.datadoghq.com/access/users
 [2]: /fr/account_management/users/
@@ -271,7 +271,7 @@ Utilisez la [page Data Access][1] dans l'application Datadog pour :
 * Créer une requête de restriction `team:acme`
 * Associer les rôles `ACME Admin` et `ACME User` à cette requête de restriction
 
-{{< img src="logs/guide/rbac/restriction_queries.png" alt="Restreindre l'accès aux logs"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/restriction_queries.png" alt="Restreindre l'accès aux logs" style="width:60%;">}}
 
 Référez-vous à la [section sur l'autorisation `logs_read_data`][1] pour en savoir plus.
 
@@ -345,13 +345,13 @@ Afin d'optimiser la granularité et de faciliter la maintenance, il est **décon
 
 Créez un [pipeline][13] pour les logs `team:acme`. Attribuez l'autorisation [Write Processor][14] aux membres `ACME Admin`, mais **limitez** cette autorisation à ce pipeline ACME « racine ».
 
-{{< img src="logs/guide/rbac/pipelines.png" alt="Pipeline ACME"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/pipelines.png" alt="Pipeline ACME" style="width:60%;">}}
 
 ### Index de logs
 
 Créez un ou plusieurs [index][15] pour les logs `team:acme`. La création de plusieurs index peut s'avérer utile si l'équipe ACME a besoin d'un contrôle budgétaire précis (par exemple, des index avec des périodes de rétention différentes ou des index avec des quotas différents). Attribuez l'autorisation [Write Exclusion Filters][16] aux membres de l'équipe `ACME Admin`, mais **limitez** cette autorisation à cet ou ces index ACME.
 
-{{< img src="logs/guide/rbac/indexes.png" alt="Index ACME"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/indexes.png" alt="Index ACME" style="width:60%;">}}
 
 ### Archives de logs
 
@@ -359,7 +359,7 @@ Créez un ou plusieurs [index][15] pour les logs `team:acme`. La création de pl
 
 Créez une ou plusieurs [archives][17] pour les logs`team:acme`. Attribuez l'autorisation [Read Archives][18] aux membres `ACME Admin`, mais **limitez** cette autorisation à cette ou ces archives ACME.
 
-{{< img src="logs/guide/rbac/archives.png" alt="Archives ACME"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/archives.png" alt="Archives ACME" style="width:60%;">}}
 
 La création de plusieurs archives peut s'avérer utile si vous disposez de différentes politiques de cycle de vie en fonction des logs (par exemple, pour les logs de production et de staging). N'oubliez pas que la réintégration des logs ne fonctionne que pour une seule archive à la fois, bien qu'il soit possible de lancer plusieurs réintégrations à partir de plusieurs archives en même temps.
 
@@ -369,11 +369,11 @@ Attribuez l'autorisation [logs_write_historical_views][19] aux membres `ACME Adm
 
 **Si vous le souhaitez**, vous pouvez configurer vos archives de logs de manière à ce que le tag `team:acme` soit appliqué à tous les logs réintégrés à partir d'une archive précise, que le tag ait déjà été appliqué ou non à ces logs dans l'archive. [Cette option][20] vous permet d'assurer la cohérence avec vos politiques de restriction existantes, ainsi que de supprimer les restrictions obsolètes qui empêchent les logs d'être acheminés ou indexés dans Datadog.
 
-{{< img src="logs/guide/rbac/archives.png" alt="Tags ACME lors de la réintégration"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/archives.png" alt="Tags ACME lors de la réintégration" style="width:60%;">}}
 
 **Remarque** : **si** vous utilisez l'autorisation obsolète [logs_read_index_data][21], ajoutez le rôle `ACME User` aux archives ACME en plus du rôle `ACME Admin`. Étant donné que les utilisateurs disposant du rôle `ACME User` ne sont pas autorisés à effectuer une réintégration à partir des archives, ils ne disposeront pas d'autorisations sensibles. Toutefois, l'autorisation logs_read_index_data est ainsi automatiquement limitée à la vue historique obtenue, permettant ainsi aux utilisateurs d'accéder au contenu.
 
-{{< img src="logs/guide/rbac/rehydration_index.png" alt="Autorisation de réintégration d'index"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/rehydration_index.png" alt="Autorisation de réintégration d'index" style="width:60%;">}}
 
 ## Pour aller plus loin
 

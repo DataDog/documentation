@@ -46,15 +46,30 @@ title: Synthetic テストをプライベートロケーションから実行す
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-プライベートロケーションは、プライベートネットワーク内のどこにでも設置できる Docker コンテナです。プライベートロケーションのワーカーイメージ][101]には、Google Container Registry からアクセスできます。ホスト上に [Docker エンジン][102]があり、Linux コンテナモードで動作可能であれば、Linux ベースの OS や Windows OS 上で動作させることができます。
+プライベートロケーションは、プライベートネットワーク内の任意の場所にインストールできる Docker コンテナです。プライベートロケーションのワーカーイメージ][101]には、Google Container Registry からアクセスできます。ホスト上に [Docker エンジン][102]があり、Linux コンテナモードで動作可能であれば、Linux ベースの OS や Windows OS 上で動作させることができます。**\***
+
+**\*** **このソフトウェアの使用および操作には、[こちら][103]から入手可能なエンドユーザーライセンス契約が適用されます。**
 
 [101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [102]: https://docs.docker.com/engine/install/
+[103]: https://www.datadoghq.com/legal/eula/
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+プライベートロケーションは、Helm を使って Kubernetes クラスターにインストールできる Kubernetes デプロイメントです。[Helm チャート][101]は Linux ベースの Kubernetes 上で実行できます。
+
+**注**: このソフトウェアの使用および操作には、[エンドユーザーライセンス契約][103]が適用されます。
+
+[101]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
+[103]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-プライベートロケーションは、[MSI ファイル][101]を使用してプライベートネットワーク内の任意の場所にインストールできる Windows サービスです。プライベートロケーションをインストールしたい仮想マシンまたは物理マシンからこのファイルを実行します。
+プライベートロケーションは、[MSI ファイル][101]を使用してプライベートネットワーク内の任意の場所にインストールできる Windows サービスです。プライベートロケーションをインストールしたい仮想マシンまたは物理マシンからこのファイルを実行します。**\***
+
+**\*** **このソフトウェアの使用および操作には、[こちら][102]から入手可能なエンドユーザーライセンス契約が適用されます。**
 
 このマシンの要件を以下の表に示します。プライベートロケーションワーカーをインストールするマシンでは、PowerShell スクリプトが有効になっている必要があります。
 
@@ -64,9 +79,18 @@ title: Synthetic テストをプライベートロケーションから実行す
 | RAM | 最低 4GB。8GB 推奨。 |
 | CPU | 64 ビット対応の Intel または AMD プロセッサー。2.8 GHz 以上のプロセッサーを推奨。 |
 
+**注**: Windows プライベートロケーションでブラウザテストを実行するには、Windows コンピュータにブラウザ (例えば、Chrome、Edge、Firefox) がインストールされている必要があります。
+
 MSI インストーラーを使用する前に、コンピューターに .NET バージョン 4.7.2 以降をインストールする必要があります。
 
-[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+{{< site-region region="gov" >}}
+
+<div class="alert alert-danger"><code>ddog-gov.com</code> に報告するプライベートロケーションでは、FIPS 準拠はサポートされていません。この動作を無効にするには、<a href"="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code>オプション</a>を使用してください。</div>
+
+{{< /site-region >}}
+
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
+[102]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -485,7 +509,7 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 {{% /tab %}}
 {{% tab "GUI 経由の Windows" %}}
 
-1. [`datadog-synthetics-worker-<version>.amd64.msi` ファイル][101]をダウンロードし、プライベートロケーションをインストールしたいマシンからこのファイルを実行します。
+1. [`datadog-synthetics-worker-1.47.0.amd64.msi` ファイル][101]をダウンロードし、プライベートロケーションをインストールしたいマシンからこのファイルを実行します。
 1. ウェルカムページで をクリックし、EULA を読み、利用規約に同意します。**Next** をクリックします。
 1. アプリケーションのインストール先を変更するか、デフォルト設定のままにします。**Next** をクリックします。
 1. Windows のプライベートロケーションを構成するには、以下のいずれかの方法があります。
@@ -520,25 +544,25 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 
 <div class="alert alert-warning">JSON 構成を入力した場合、Windows サービスはその構成を使用して実行を開始します。構成を入力していない場合は、コマンドプロンプトから <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> を実行するか、<code>スタートメニュー</code>のショートカットを使用して Synthetics Private Location Worker を起動します。</div>
 
-[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
 {{% /tab %}}
 {{% tab "CLI 経由の Windows" %}}
 
-1. [`datadog-synthetics-worker-<version>.amd64.msi` ファイル][101]をダウンロードし、プライベートロケーションをインストールしたいマシンからこのファイルを実行します。
+1. [`datadog-synthetics-worker-1.47.0.amd64.msi` ファイル][101]をダウンロードし、プライベートロケーションをインストールしたいマシンからこのファイルを実行します。
 2. インストーラをダウンロードしたディレクトリで、以下のコマンドのいずれかを実行します。
 
    - PowerShell ターミナルで
 
      ```powershell
-     Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     Start-Process msiexec "/i datadog-synthetics-worker-1.47.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
      ```
 
    - またはコマンドターミナルで
 
      ```cmd
-     msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     msiexec /i datadog-synthetics-worker-1.47.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
      ```
 
 パラメーターを追加することができます。
@@ -552,7 +576,7 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 | LOGGING_MAXDAYS | システム上でファイルログを削除する前に保持する日数。無人インストールを実行する場合は、任意の日数を指定できます。 | 7 | `--logFileMaxDays` | 整数 |
 | WORKERCONFIG_FILEPATH | これは Synthetics Private Location Worker JSON 構成ファイルのパスに変更する必要があります。パスにスペースが含まれている場合は、このパスを引用符で囲んでください。 | <None> | `--config` | 文字列 |
 
-[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
 
 {{% /tab %}}
 {{< /tabs >}}

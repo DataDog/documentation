@@ -18,11 +18,11 @@ further_reading:
 
 Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3]. For an overview on how SLOs are configured and calculated, see the [Service Level Objective][4] page.
 
-{{< img src="service_management/service_level_objectives/metric-based-slo-example.png" alt="example metric-based SLO" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="example metric-based SLO" >}}
 
 ## Setup
 
-On the [SLO status page][5], select **New SLO +**. Then select [**Metric**][6].
+On the [SLO status page][5], click **+ New SLO**. Then select, [**By Count**][6].
 
 ### Define queries
 
@@ -38,17 +38,15 @@ Why is `HTTP 3xx` excluded? - These are typically redirects and should not count
 
 #### Multi-group for metric-based SLIs
 
-Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `partition`, `availability-zone`, `resource`, or any other relevant group:
+Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `env`, `availability-zone`, `resource`, or any other relevant group:
 
-{{< img src="service_management/service_level_objectives/metric_editor.png" alt="grouped metric-based SLO editor" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="grouped metric-based SLO editor" >}}
 
 By grouping these SLIs you can visualize each individual group's status, good request counts, and remaining error budget on the detail panel:
 
-{{< img src="service_management/service_level_objectives/metric_results.png" alt="metric-based SLO group results" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="metric-based SLO group results" >}}
 
 By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
-
-**Note**: If you are using monitor-based SLIs, you can also [view monitor groups][8].
 
 ### Set your SLO targets
 

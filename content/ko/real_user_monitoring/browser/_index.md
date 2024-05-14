@@ -22,7 +22,8 @@ RUM 브라우저 SDK는 IE11를 포함해 현대의 모든 데스크탑과 모�
 
 RUM 브라우저 모니터링을 설정하려면, RUM 애플리케이션을 생성합니다.
 
-1. Datadog에서 [**RUM 애플리케이션** 페이지][1]로 이동해 **새 애플리케이션** 버튼을 클릭합니다.
+1. Datadog에서 [**Digital Experience** > **Add an Application** 페이지][1]로 이동하여 JavaScript (JS) 애플리케이션 유형을 선택합니다. 
+   - 기본적으로 자동 사용자 데이터 수집이 활성화되어 있습니다. 클라이언트 IP 또는 지리적 위치 데이터에 대한 자동 사용자 데이터 수집을 비활성화하려면 해당 설정에 대한 확인란을 선택 취소하세요. 자세한 내용은 [수집되는 RUM 브라우저 데이터][2]를 참조하세요.
    - 애플리케이션 이름을 입력하고 **클라이언트 토큰 생성**을 클릭합니다. 이를 통해 애플리케이션에 대해 `clientToken` 및 `applicationId`를 생성할 수 있습니다. 
    - RUM 브라우저 SDK에 대해 설치 유형을 선택합니다. [npm](#npm), 또는 호스팅된 버전 ([CDN 비동기화](#cdn-async) 또는 [CDN 동기화](#cdn-sync))를 선택할 수 있습니다.
    - 애플리케이션 환경 이름과 서비스 이름을 정의하여 [RUM 및 세션 재생][19]을 위한 통합 서비스 태깅을 사용합니다. 초기화 스니펫에서 구축된 애플리케이션의 버전 번호를 설정합니다. 자세한 내용은 [태깅](#tagging)을 참조하세요.
@@ -32,6 +33,7 @@ RUM 브라우저 모니터링을 설정하려면, RUM 애플리케이션을 생�
 2. 애플리케이션에 변경 사항을 구축합니다. 구축이 프로덕션으로 전환되면 Datadog가 사용자 브라우저에서 이벤트를 수집합니다.
 3. [대시보드][3]에서 [수집된 데이터][2]를 시각화하거나 [RUM 탐색기][16]에서 검색 쿼리를 생성합니다.
 4. (선택 사항) 웹 및 모바일 애플리케이션의 요청을 해당 백엔드 트레이스에 연결하려면 [RUM과 트레이스 연결][12]을 위해`allowedTracingUrls` 파라미터를 사용하여 RUM SDK를 초기화합니다. [초기화 파라미터](#initialization-parameter)의 전체 목록을 확인하세요.
+5. 사이트에서 Datadog 콘텐츠 보안 정책 (CSP) 통합을 사용하는 경우 추가 설정 단계를 확인하려면 [CSP 설명서의 RUM 섹션][22]을 참조하세요.
 
 Datadog이 데이터 수신을 시작할 때까지 애플리케이션은 **RUM Applications** 페이지에 `pending`으로 표시됩니다.
 
@@ -168,7 +170,7 @@ datadogRum.startSessionReplayRecording();
 
  `trackUserInteractions` 파라미터를 사용하면 애플리케이션에서 사용자 클릭 정보를 자동으로 수집할 수 있습니다. 이는 사용자가 상호작용한 요소를 확인할 목적으로 페이지의  **민감한 개인정보 데이터**가 포함될 수 있음을 의미합니다.
 
-### CDN async
+### CDN 비동기화
 
 애플리케이션에서 모니터링하려는 모든 HTML 페이지의 헤드 태그에 생성된 코드 스니펫을 추가하세요. **{{<region-param key="dd_site_name">}}** 사이트의 경우:
 
@@ -986,7 +988,7 @@ datadogRum.startSessionReplayRecording();
 
 초기 RUM API 호출은 `window.DD_RUM.onReady()` 콜백으로 래핑해야 합니다. 이렇게 하면 SDK가 제대로 로드된 후에만 코드가 실행됩니다.
 
-### CDN sync
+### CDN 동기화
 
 생성된 코드 스니펫을 애플리케이션에서 모니터링하려는 모든 HTML 페이지의 헤드 태그(다른 스크립트 태그 앞)에 추가합니다. 더 상위의 동기화된 스크립트 태그를 포함하면 Datadog RUM이 모든 성능 데이터 및 오류를 수집할 수 있습니다. **{{<region-param key="dd_site_name">}}** 사이트의 경우: 
 
@@ -1693,7 +1695,7 @@ window.DD_RUM.init({
 })
 ```
 
-## 그룹
+## 구성
 
 ### 초기화 파라미터
 
@@ -1729,6 +1731,12 @@ RUM 애플리케이션 ID.
 : 선택 사항<br/>
 **유형**: 문자열<br/>
 애플리케이션의 버전 (예: 1.2.3, 6c44da20 및 2020.02.13). [태그 구문 요건][15]을 따름.
+
+`trackingConsent`
+: 선택 사항<br/>
+**유형**: `"granted"` 또는 `"not-granted"`<br/>
+**기본값**: `"granted"`<br/>
+초기 사용자 추적 동의 상태를 설정합니다. [사용자 추적 동의][27]를 참조하세요.
 
 `trackViewsManually`
 : 선택 사항<br/>
@@ -1777,6 +1785,12 @@ RUM 보기 생성을 제어할 수 있도록 함. [기본 RUM 보기 이름 덮�
 **기본값**: `0`<br/>
 [브라우저 RUM 및 세션 재생 가격 책정][11] 기능을 사용해 추적된 세션 비율: `100` 전체, `0` 없음. `sessionReplaySampleRate`에 대한 자세한 내용을 확인하려면 [샘플링 설정][21]을 참조하세요.
 
+`startSessionReplayRecordingManually`
+: 선택 사항<br/>
+**유형**: 불리언(Boolean)<br/>
+**기본값**: `false`<br/>
+세션 리플레이용으로 세션을 샘플링하는 경우, 세션이 시작될 때 대신  `startSessionReplayRecording()`이 호출될 때만 레코딩을 시작합니다. 자세한 내용을 확인하려면 [세션 리플레이 사용법][26]을 참고하세요.
+
 `silentMultipleInit`
 : 선택 사항<br/>
 **유형**: 불리언(Boolean)<br/>
@@ -1815,6 +1829,12 @@ RUM 보기 생성을 제어할 수 있도록 함. [기본 RUM 보기 이름 덮�
 **유형**: 문자열<br/>
 Datadog 브라우저 SDK 워커 JavaScript 파일을 가리키는 URL입니다. URL은 상대적이거나 절대적일 수 있지만 웹 애플리케이션과 동일한 원본을 가져야 합니다. 자세한 내용은 [콘텐츠 보안 정책 가이드라인][22]을 참조하세요.
 
+`compressIntakeRequests`
+: 선택 사항<br/>
+**유형**: 불리언(Boolean)<br/>
+**기본값**: `false`<br/>
+Datadog 인테이크에 전송된 요청을 압축하여 대량의 데이터를 전송할 시 대역폭 사용량을 감소시킵니다. 압축 작업은 작업자 스레드에서 수행합니다. 자세한 내용을 확인하려면 [콘텐츠 보안 정책 지침][22]을 참조하세요.
+
 `storeContextsAcrossPages`
 : 선택 사항<br/>
 **유형**: 문자열<br/>
@@ -1841,11 +1861,17 @@ Logs Browser SDK를 사용하는 경우 일치하는 구성이 필요한 옵션 
 **기본값**: `false`<br/>
 보안 세션 쿠키를 사용합니다. 이는 안전하지 않은 (비-HTTPS) 연결에 전송된 RUM 이벤트를 비활성화합니다.
 
-`useCrossSiteSessionCookie`
+`usePartitionedCrossSiteSessionCookie`
 : 선택 사항<br/>
 **유형**: 불리언(Boolean)<br/>
 **기본값**:`false`<br/>
-안전한 사이트 간 세션 쿠키를 사용합니다. 이렇게 하면 사이트가 다른 사이트(iframe)에서 로드될 때 RUM 브라우저 SDK가 실행될 수 있습니다. `useSecureSessionCookie`를 나타냅니다.
+안전한 사이트 간 파티션 세션 쿠키를 사용합니다. 이렇게 하면 사이트가 다른 사이트(iframe)에서 로드될 때 RUM 브라우저 SDK가 실행될 수 있습니다. `useSecureSessionCookie`를 나타냅니다.
+
+`useCrossSiteSessionCookie`
+: 선택 사항 - **더 이상 사용되지 않음**<br/>
+**유형**: 불리언(Boolean)<br/>
+**기본값**:`false`<br/>
+`usePartitionedCrossSiteSessionCookie` 참조.
 
 `allowFallbackToLocalStorage`
 : 선택 사항<br/>
@@ -1907,9 +1933,9 @@ import { datadogRum } from '@datadog/browser-rum'
 datadogRum.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
 ```
 
-#### CDN async
+#### CDN 비동기화
 
-CDN async의 경우 다음을 사용합니다.
+CDN 비동기화의 경우 다음을 사용합니다.
 
 ```javascript
 window.DD_RUM.onReady(function () {
@@ -1917,9 +1943,9 @@ window.DD_RUM.onReady(function () {
 })
 ```
 
-#### CDN sync
+#### CDN 동기화
 
-CDN sync의 경우 다음을 사용합니다.
+CDN 동기화의 경우 다음을 사용합니다.
 
 ```javascript
 window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
@@ -1931,26 +1957,28 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /ko/real_user_monitoring/data_collected/
-[3]: /ko/real_user_monitoring/dashboards/
+[3]: /ko/real_user_monitoring/platform/dashboards/
 [4]: https://www.npmjs.com/package/@datadog/browser-rum
 [5]: /ko/account_management/api-app-keys/#client-tokens
 [6]: /ko/real_user_monitoring/browser/tracking_user_actions
 [7]: /ko/real_user_monitoring/guide/proxy-rum-data/
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [9]: /ko/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[10]: /ko/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[10]: /ko/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[12]: /ko/real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[12]: /ko/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [13]: /ko/real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
 [14]: /ko/getting_started/site/
 [15]: /ko/getting_started/tagging/#define-tags
 [16]: /ko/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
-[17]: /ko/real_user_monitoring/session_replay/
-[18]: /ko/real_user_monitoring/session_replay/privacy_options
+[17]: /ko/real_user_monitoring/session_replay/browser/
+[18]: /ko/real_user_monitoring/session_replay/browser/privacy_options
 [19]: /ko/getting_started/tagging/using_tags
-[20]: /ko/real_user_monitoring/frustration_signals/
+[20]: /ko/real_user_monitoring/browser/frustration_signals/
 [21]: /ko/real_user_monitoring/guide/sampling-browser-plans/
 [22]: /ko/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [23]: /ko/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
-[24]: https://docs.datadoghq.com/ko/real_user_monitoring/browser/modifying_data_and_context#contexts-life-cycle
+[24]: https://docs.datadoghq.com/ko/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+[26]: /ko/real_user_monitoring/session_replay/browser/#usage
+[27]: /ko/real_user_monitoring/browser/advanced_configuration/#user-tracking-consent

@@ -1,6 +1,8 @@
 ---
 title: Compare Profiles
 kind: documentation
+aliases:
+- /tracing/profiler/compare_profiles/
 further_reading:
     - link: 'profiler/enabling'
       tag: 'Documentation'

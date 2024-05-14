@@ -61,7 +61,7 @@ Amazon FSx は、NetApp ONTAP、OpenZFS、Windows File Server、Lustre ファイ
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Cloudwatch トリガー" popup="true" style="width:70%;">}}
 4. Datadog Log セクション][6]に移動し、ログを確認します。
 
-**注**: [Kinesis Data Firehose][7] を使用してこれらのログを Datadog に送信することもできますが、同じログパース機能と検索エクスペリエンスを得るには、カスタムログ[プロセッサー][8]を作成する必要があります。
+**注**: [Amazon Data Firehose][7] を使用してこれらのログを Datadog に送信することもできますが、同じログパース機能と検索エクスペリエンスを得るには、カスタムログ[プロセッサー][8]を作成する必要があります。
 
 
 #### FSx API アクティビティ
@@ -91,7 +91,7 @@ Amazon FSx インテグレーションには、サービスのチェック機能
 [4]: https://app.datadoghq.com/integrations/amazon-fsx
 [5]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html#faa-log-destinations
 [6]: https://app.datadoghq.com/logs
-[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=amazondatafirehosedeliverystream
 [8]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_cloudtrail/#log-collection
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_fsx/amazon_fsx_metadata.csv
