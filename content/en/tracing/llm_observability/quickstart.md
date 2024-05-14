@@ -1,5 +1,5 @@
 ---
-title: Quickstart
+title: LLM Observability Quickstart
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
