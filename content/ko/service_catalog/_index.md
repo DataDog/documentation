@@ -84,7 +84,7 @@ Datadog [Service Catalog][1]는 소유권 메타데이터, 성능 인사이트, 
 
 {{< whatsnext desc="서비스 카탈로그 기능:" >}}
     {{< nextlink href="/service_catalog/navigating/" >}}서비스 카탈로그 살펴보기{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/investigating" >}}서비스 자세히 살펴보기{< /nextlink >}}
+    {{< nextlink href="/service_catalog/investigating" >}}서비스 자세히 살펴보기{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 역할 기반 액세스 및 권한
