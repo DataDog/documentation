@@ -49,7 +49,7 @@ Early Flake Detection を実装する前に、開発環境の [Test Visibility][
 
 Datadog ライブラリを Test Visibility 用に設定したら、[Test Service Settings ページ][6]から Early Flake Detection を構成します。
 
-{{< img src="continuous_integration/early_flake_detection_test_settings.png" alt=“テストサービス設定の Early Flake Detection" style="width:100%" >}}
+{{< img src="continuous_integration/early_flake_detection_test_settings.png" alt="テストサービス設定の Early Flake Detection" style="width:100%" >}}
 
 1. [**Software Delivery** > **Test Visibility** > **Settings**][6] に移動します。
 1. テストサービスの Early Flake Detection 列の **Configure** をクリックします。
