@@ -43,7 +43,7 @@ To query for all traces containing threat intelligence from any source, use the 
 
 ## Bring your own threat intelligence
 
-<div class="alert alert-info">Bring your own threat intelligence is in private beta.</div>
+<div class="alert alert-info">Bring your own threat intelligence is in private beta. To request access, fill out <a href="https://forms.gle/JV8VLH1ZTzmUnK5F7">this form</a>.</div>
 
 ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 

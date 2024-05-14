@@ -28,6 +28,8 @@ The following examples show how it works for each deployment type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
+<div class="alert alert-warning">If you've previously used Single Step Instrumentation with Linux hosts, <a href="/tracing/trace_collection/automatic_instrumentation/ssi-0-13-1">update to the latest version</a>.</div>
+
 For an Ubuntu host:
 
 1. Run the one-line installation command:

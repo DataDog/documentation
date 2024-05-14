@@ -65,8 +65,9 @@ Static Analysis currently supports scanning the following languages and technolo
 
 ### IDEs
 {{< whatsnext desc="With Static Analysis, you can identify code vulnerabilities as you edit a file in your Integrated Development Environment (IDE). See the documentation for information about the following integrations:">}}
-    {{< nextlink href="developers/ide_integrations/idea/" >}}Datadog Plugin for IntelliJ IDEA{{< /nextlink >}}
-    {{< nextlink href="developers/ide_integrations/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/visual_studio/" >}}Datadog Extension for Visual Studio{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results
@@ -114,7 +115,7 @@ Add an ignore rule in your `static-analysis.datadog.yml` file. The example below
 
 ```
 rulesets:
-  - javascript-express
+  - javascript-express:
     rules:
       reduce-server-fingerprinting:
         ignore: "**"
@@ -125,7 +126,7 @@ Add an ignore rule in your `static-analysis.datadog.yml` file. The example below
 
 ```
 rulesets:
-  - javascript-express
+  - javascript-express:
     rules:
       reduce-server-fingerprinting:
         ignore: "ad-server/src/app.js"
