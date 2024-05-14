@@ -9,20 +9,18 @@ LLM Observability is not available in the US1-FED site.
 
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
-Our quickstart docs make use of our Python SDK. For detailed usage, see [the SDK documentation][1]. If your application is written in another language, you can create traces by calling the [API][8] instead.
-
-## Command line quickstart
+Our quickstart docs make use of the LLM Observability SDK for Python. For detailed usage, see [the SDK documentation][1]. If your application is written in another language, you can create traces by calling the [API][8] instead.
 
 Use the steps below to run a simple Python script that generates an LLM Observability trace.
 
-### Prerequisites
+## Prerequisites
 
 - LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
 - The example script below uses OpenAI, but you can modify it to use a different provider. To run the script as written, you need:
     - An OpenAI API key stored in your environment as `OPENAI_API_KEY`. To create one, see [Account Setup][4] and [Set up your API key][6] in the OpenAI documentation.
     - The OpenAI Python library installed. See [Setting up Python][5] in the OpenAI documentation for instructions.
 
-### 1. Install the SDK
+## 1. Install the SDK
 
 Install the following `ddtrace` package hash:
 
@@ -30,7 +28,7 @@ Install the following `ddtrace` package hash:
 pip install git+https://github.com/DataDog/dd-trace-py.git@main
 {{< /code-block >}}
 
-### 2. Create the script
+## 2. Create the script
 
 The Python script below makes a single OpenAI call. Save it as `quickstart.py`.
 
@@ -49,7 +47,7 @@ completion = oai_client.chat.completions.create(
 )
 {{< /code-block >}}
 
-### 3. Run the script
+## 3. Run the script
 
 Run the Python script with the following shell command, sending a trace of the OpenAI call to Datadog:
 
@@ -61,7 +59,7 @@ DD_LLMOBS_NO_APM=1 ddtrace-run python quickstart.py
 
 For details on the required environment variables, see [the SDK documentation][9].
 
-### 4. View the trace
+## 4. View the trace
 
 A trace of your LLM call should appear in [the Traces tab][3] of LLM Observability in Datadog.
 
