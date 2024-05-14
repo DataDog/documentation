@@ -67,7 +67,7 @@ For more Datadog provided profiles, see the [GitHub repository][3].
 ### Metadata definition by profile
 
 In the profiles's metadata section, you can define where and how metadata is collected. Values can be static or come from an OID value.
-Supported fields can be found [here][4].
+See the [DeviceMetadata][4] section for the supported fields.
 
 With Datadog Agent version 7.52 and later, there is a `device_type` field for device metadata. This can be set manually in the profile and can be used to filter on specific types of devices. Accepted values include:
 
@@ -95,5 +95,5 @@ See the [Profile Format Reference][5] for more information about profiles format
 [1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml
 [2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
 [3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles
-[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkdevice/metadata/payload.go
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkdevice/metadata/payload.go#L51-L76
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
