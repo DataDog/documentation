@@ -85,7 +85,7 @@ With Datadog Agent version 7.52 and later, there is a `device_type` field for de
 - ups
 - wlc
 
-To know more about the profiles format, see the [Profile Format Reference][5].
+See the [Profile Format Reference][5] for more information about profiles formats.
 
 ## Further Reading
 
