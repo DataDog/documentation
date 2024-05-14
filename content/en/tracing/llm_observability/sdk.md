@@ -380,4 +380,5 @@ def process_message():
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 [3]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
 [4]: https://github.com/langchain-ai/langchain
+[7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/span_kinds/
