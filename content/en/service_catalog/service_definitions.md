@@ -38,8 +38,18 @@ For more information about the latest updates, see the schemas on GitHub.
 ### Metadata Schema v3.0 (beta) 
 The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][1].
 
+#### New features in v3.0
+##### Expanded data model
+v3.0 supports multiple kinds of entities. You can organize your systems using various components such as applications, services, queues, and datastores.
+
+##### Enhanced relationship mapping
+With APM/USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected application topology to ensure a complete overview of how components interact within your applications.
+
+##### Inheritance of application metadata
+Components within an application automatically inherit the application's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
+
 #### Example YAML for `kind:application`
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: application
 metadata:
@@ -113,8 +123,8 @@ datadog:
 #### Specify common components that are part of multiple applications
 If a single component is part of multiple applications, you must specify that component in the YAML for each application. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
-For the postgres fleet (`managed-postgres`):
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+For the postgres fleet (`managed-postgres`), specify a definition for `kind:application`:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: application
 spec:
@@ -127,8 +137,8 @@ metadata:
   owner: db-team
 {{< /code-block >}}
 
-For the web application (`shopping-cart`):
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+For the web application (`shopping-cart`), declare a separate definition for `kind:application`:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 
 apiVersion: v3
 kind: application
@@ -171,7 +181,7 @@ metadata:
 #### Explicit and implicit metadata inheritance 
 
 ##### Explicit Inheritance 
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 inheritFrom:<entity_kind>:<name>
 {{< /code-block >}}
 
