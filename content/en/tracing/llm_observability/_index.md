@@ -15,7 +15,9 @@ LLM Observability is not available in the US1-FED site.
 
 {{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
-With LLM Observability, you can monitor the quality, security, and performance of your LLM applications. Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog.
+With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications. 
+
+Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog.
 
 A trace can represent:
 - An individual LLM inference, including tokens, error rates, and latencies
