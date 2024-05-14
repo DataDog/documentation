@@ -22,7 +22,15 @@ A given trace contains spans representing each choice made by an agent or each s
 
 Multiple spans combine to form a trace, and a *root span* is the first span in a trace.
 
-A trace can contain several kinds of spans: Agent, LLM, Workflow, and so on. The *span kind* categorizes the type of work the span is performing. Different span kinds have different parent-child relationships, and only some kinds can be the root span of a trace. For details, see [Span Kinds][4].
+A trace can contain several kinds of spans. The *span kind* categorizes the type of work the span is performing. 
+
+Only three span kinds can be the root span of a trace:
+
+- **LLM span**: An individual LLM inference. LLM spans allow you to track inputs and outputs to your LLM calls; track tokens, error rates, and latencies for your LLM calls; and break down important metrics by models and model providers.
+- **Workflow span**: A grouping of LLM calls and their contextual operations, such as tool calls or preprocessing steps.
+- **Agent span**: A dynamic LLM workflow executed by an LLM agent.
+
+Different span kinds also have different parent-child relationships. For details, see [Span Kinds][4].
 
 ## Instrument an LLM application
 
