@@ -566,12 +566,14 @@ run_notranslate_tag:schedule:
   <<: *base_template
   <<: *live_schedule_rules
   stage: post-deploy
+  cache: []
   dependencies:
     - build_live
   timeout: 4h
   script:
+    - pip -m venv ./venv && source ./venv/bin/active && pip install transifex-python
     - export transifex_api_key="$(get_secret 'transifex_api_key')"
-    - python3 ./local/bin/py/add_notranslate_tag.py
+    - source ./venv/bin/active && python3 ./local/bin/py/add_notranslate_tag.py
 
 # run_notranslate_tag:manual:
 #   <<: *base_template
