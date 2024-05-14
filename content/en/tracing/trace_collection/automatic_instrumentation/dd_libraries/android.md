@@ -693,9 +693,10 @@ val okHttpClient = OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-OkHttpClient okHttpClient =  new OkHttpClient.Builder() 
+final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+final OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(Arrays.asList("example.com", "example.eu"), RateBasedSampler(20f))
+                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
         )
         .build();
 ```
@@ -720,10 +721,14 @@ val okHttpClient =  OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu"); 
-final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
-        .addInterceptor(new DatadogInterceptor(tracedHosts, RateBasedSampler(20f)))
-        .addNetworkInterceptor(new TracingInterceptor(tracedHosts, RateBasedSampler(20f)))
+final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        .addInterceptor(
+                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+        )
+        .addNetworkInterceptor(
+                new TracingInterceptor(/** SDK instance name or null **/, tracedHosts, null, new RateBasedSampler(20f))
+        )
         .build();
 ```
 {{% /tab %}}
