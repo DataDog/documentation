@@ -49,7 +49,7 @@ ANRs are only reported through the RUM SDK (not through Logs).
 Non-fatal ANRs may or may not have led to the application being terminated (crashing).
 
 - In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise
-- By default, non-fatal ANRs on *Android 30+* are **disabled** because it would create too much noise over fatal ANRs. However, they are **enabled** on *Android 29 and below* by default because reporting on fatal ANRs is not possible on those versions.
+- By default, non-fatal ANRs on *Android 30+* are **disabled** because it would create too much noise over fatal ANRs. However, they non-fatal ANRs are **enabled** on *Android 29 and below* by default because reporting on fatal ANRs is not possible on those versions.
 
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the RUM SDK.
 
