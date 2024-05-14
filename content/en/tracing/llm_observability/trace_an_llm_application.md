@@ -31,8 +31,10 @@ A trace can contain several kinds of spans: Agent, LLM, Workflow, and so on. The
 To trace an LLM application:
 
 1. [Install the LLM Observability SDK][1].
-1. [Start your application with the required environment variables][5], including your Datadog API key. If you don't have an API key, you can [create one in Datadog][3].
-1. In your code, [use the SDK to create spans](#span-creation-example) representing your application's tasks.
+1. Configure the SDK by doing one of the following:
+    - Add [setup code to your application][17] that provides the name of your application, your Datadog API key, and so on.
+    - [Start your application using `ddtrace-run`][5], providing the required environment variables.
+1. In your code, use the SDK to create spans representing your application's tasks.
     - See the span creation example below.
     - For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
 1. [Annotate your spans][7] with input data, output data, metadata (such as `max_tokens`), and key-value tags (such as `version:1.0.0`).
@@ -64,7 +66,7 @@ def process_message():
 [2]: https://app.datadoghq.com/llm/traces
 [3]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: /tracing/llm_observability/span_kinds
-[5]: /tracing/llm_observability/sdk/#running-an-llm-application
+[5]: /tracing/llm_observability/sdk/#command-line-setup
 [6]: /tracing/llm_observability/sdk/#tracking-user-sessions
 [7]: /tracing/llm_observability/sdk/#annotating-a-span
 [8]: /tracing/llm_observability/sdk/#persisting-a-span-across-contexts
@@ -76,3 +78,4 @@ def process_message():
 [14]: https://app.datadoghq.com/dash/integration/llm_analytics
 [15]: /llm_observability/api/?tab=model#eval-metrics-api
 [16]: https://app.datadoghq.com/llm/clusters
+[17]: /tracing/llm_observability/sdk/#in-code-setup
