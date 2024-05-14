@@ -42,7 +42,7 @@ View every step of your LLM application chains and calls to pinpoint problematic
 
 Monitor the throughput, latency, and token usage trends for all your LLM applications.
 
-{{< img src="tracing/llm_observability/llm-obs-dashboard.png" alt="The out-of-the-box LLM Observability dashboard" style="width:100%;" >}}
+{{< img src="tracing/llm_observability/dashboard.png" alt="The out-of-the-box LLM Observability dashboard" style="width:100%;" >}}
 
 ### Evaluate the quality and effectiveness of your LLM applications
 
@@ -51,6 +51,8 @@ Identify problematic topics and monitor the quality of responses over time with 
 ### Safeguard sensitive data and identify malicious users
 
 Automatically scan and redact any sensitive data in your AI applications and identify prompt injections.
+
+{{< img src="tracing/llm_observability/prompt-injection.png" alt="An example of a prompt-injection attempt" style="width:100%;" >}}
 
 [1]: /tracing/llm_observability/spans/
 [2]: https://app.datadoghq.com/llm/traces
