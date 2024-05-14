@@ -42,7 +42,7 @@ from ddtrace.llmobs import LLMObs
 LLMObs.enable(
     ml_app="<YOUR_ML_APP_NAME>",
     dd_api_key="<YOUR_DATADOG_API_KEY>",
-    dd_site="{{< region-param key="dd_site" code="true" >}}",
+    dd_site="{{<region-param key="dd_site" code="true">}}",
     dd_llmobs_no_apm=True,
     integrations=["langchain", "openai"],
 )
@@ -55,7 +55,7 @@ You can also enable LLM Observability by running your application using the `ddt
 **Note**: `ddtrace-run` automatically turns on all LLM Observability integrations.
 
 {{< code-block lang="shell">}}
-DD_SITE={{< region-param key="dd_site" code="true" >}} DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_SITE={{<region-param key="dd_site" code="true">}} DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
@@ -124,7 +124,7 @@ For a working example, see [the example Jupyter notebook for workflow spans][6].
 from ddtrace.llmobs import LLMObs
 
 def process_message():
-    with LLMObs.workflow(name="process_message") as workflow_span:
+    with LLMObs.workflow(name="decide_next_action") as workflow_span:
         ... # user application logic
     return 
 {{< /code-block >}}
@@ -162,6 +162,10 @@ from ddtrace.llmobs import LLMObs
 def llm_call():
     with LLMObs.llm(name="invoke_llm", model_name="claude", model_provider="anthropic") as llm_span:
         completion = ... # user application logic to invoke LLM
+        LLMObs.annotate(
+            input_data=[{"role": "system", "content"; "Your goal is to..."}, {"role": "user", "content": "Can I wear shorts outside?"}],
+            output_data=[{"role": "assistant", "content": completion}]
+        )
     return completion
 {{< /code-block >}}
 
@@ -224,7 +228,18 @@ from ddtrace.llmobs import LLMObs
 
 def similarity_search():
     with LLMObs.retrieval(name="get_relevant_docs") as retrieval_span:
-        ... # user application logic
+        context_documents = # ... users app logic to get context documents
+        LLMObs.annotate(
+            input_data = "tell me about cats",
+            output_data = [
+                {
+                    "id": doc["id"],
+                    "source": doc["source"],
+                    "text": doc["text],
+                    "score": doc["score]
+                } for doc in context_documents
+            ]
+        )
     return 
 {{< /code-block >}}
 
