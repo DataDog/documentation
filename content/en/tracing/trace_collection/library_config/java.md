@@ -170,6 +170,11 @@ Used to rename the service name associated with spans to be identified with the 
 **Default**: `false`<br>
 When set to `true` db spans get assigned the instance name as the service name
 
+`dd.trace.db.client.split-by-host`
+: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
+**Default**: `false`<br>
+When set to `true` db spans get assigned the remote database hostname as the service name
+
 `dd.trace.elasticsearch.body.enabled`
 : **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
 **Default**: `false`<br>

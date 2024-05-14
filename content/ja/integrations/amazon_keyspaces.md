@@ -10,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_keyspaces/
 draft: false
 git_integration_title: amazon_keyspaces
 has_logo: true
-integration_id: amazon-keyspaces
+integration_id: ''
 integration_title: Amazon Keyspaces (Apache Cassandra 用)
 integration_version: ''
 is_public: true

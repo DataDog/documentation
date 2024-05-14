@@ -19,7 +19,7 @@ further_reading:
   text: AWS Elastic Beanstalk への Datadog のデプロイ
 git_integration_title: amazon_elasticbeanstalk
 has_logo: true
-integration_id: amazon-elastic-beanstalk
+integration_id: ''
 integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true

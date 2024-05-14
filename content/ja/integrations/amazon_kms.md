@@ -12,7 +12,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_kms/
 draft: false
 git_integration_title: amazon_kms
 has_logo: true
-integration_id: amazon-kms
+integration_id: ''
 integration_title: AWS Key Management Service (KMS)
 integration_version: ''
 is_public: true

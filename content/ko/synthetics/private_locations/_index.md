@@ -23,10 +23,6 @@ kind: 설명서
 title: 프라이빗 위치에서 신서틱(Synthetic) 테스트 실행
 ---
 
-<div class="alert alert-info">
-Windows 프라이빗 위치 베타 버전에 참여하려면 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하세요.
-</div>
-
 ## 개요
 
 프라이빗 위치를 사용하면 공용 인터넷에서 액세스할 수 없는 **내부 연결 애플리케이션 또는 모든 프라이빗 엔드포인트**를 모니터링할 수 있습니다. 또한 다음과 같은 용도로 사용할 수 있습니다.
@@ -35,9 +31,9 @@ Windows 프라이빗 위치 베타 버전에 참여하려면 <a href="https://do
 * [지속적인 테스트 및 CI/CD][1]를 사용하여 새로운 기능을 프로덕션에 출시하기 전에 **내부 CI 환경에서 애플리케이션 성능을 확인하세요**.
 * 내부 네트워크의 내외부에서 **애플리케이션 성능을 비교하세요**.
 
-{{< img src="synthetics/private_locations/private_locations_worker.png" alt="신서틱(Synthetic) 모니터링에서 프라이빗 위치가 작동하는 방식에 대한 아키텍처 다이어그램" style="width:100%;">}}
+{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="신서틱(Synthetic) 모니터링에서 프라이빗 위치가 작동하는 방식에 대한 아키텍처 다이어그램" style="width:100%;">}}
 
-프라이빗 위치는 프라이빗 네트워크 내부의 어느 곳에나 설치할 수 있는 Docker 컨테이너로 제공됩니다. 생성 및 설치가 완료되면 관리형 위치와 마찬가지로 [신서틱(Synthetic) 테스트][2]를 프라이빗 위치에 할당할 수 있습니다.
+프라이빗 위치는 프라이빗 네트워크 내부에 설치할 수 있는 Docker 컨테이너 또는 Windows 서비스로 제공됩니다. 프라이빗 위치를 생성하고 설치한 후에는 다른 관리 위치와 마찬가지로 여기에 [신서틱(Synthetic) 테스트][2]를 할당할 수 있습니다.
 
 프라이빗 위치 작업자는 HTTPS를 사용하여 Datadog 서버에서 테스트 설정을 가져와 일정에 따라 또는 요청 시 테스트를 실행하고 테스트 결과를 Datadog 서버에 반환합니다. 그런 다음 관리형 위치에서 실행되는 테스트를 시각화하는 방식과 동일하게 프라이빗 위치 테스트 결과를 시각화할 수 있습니다.
 
@@ -45,13 +41,43 @@ Windows 프라이빗 위치 베타 버전에 참여하려면 <a href="https://do
 
 ## 필수 구성 요소
 
-### Continuous Testing
-
 [Continuous Testing 테스트][23]를 위해 프라이빗 위치를 사용하려면 v1.27.0 이상이 필요합니다.
 
-### Docker
+{{< tabs >}}
+{{% tab "Docker" %}}
 
-프라이빗 위치는 프라이빗 네트워크 내부 어디에나 설치할 수 있는 Docker 컨테이너입니다. Google Container Registry에서 [프라이빗 위치 작업자 이미지][3]에 액세스할 수 있습니다. 호스트에서 [Docker 엔진][4]을 사용할 수 있고 Linux 컨테이너 모드에서 실행할 수 있는 경우 Linux 기반 OS 또는 Windows OS에서 실행할 수 있습니다.
+프라이빗 위치는 프라이빗 네트워크 내부 어디에나 설치할 수 있는 Docker 컨테이너입니다. Google Container Registry에서 [프라이빗 위치 작업자 이미지][3]에 액세스할 수 있습니다. 호스트에서 [Docker 엔진][4]을 사용할 수 있는 경우 Linux 기반 OS 또는 Windows OS에서 실행할 수 있고 Linux 컨테이너 모드에서도 가능합니다.
+
+[101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
+[102]: https://docs.docker.com/engine/install/
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+프라이빗 위치는 [MSI 파일][101]을 사용하여 프라이빗 네트워크 내부 어디에나 설치할 수 있는 Windows 서비스입니다. 프라이빗 위치를 설치하려는 가상 또는 물리적 머신에서 이 파일을 실행하세요.
+
+이 머신의 요구사항은 아래 표에 나열되어 있습니다. 프라이빗 위치 작업자를 설치하는 머신에서 PowerShell 스크립팅을 활성화해야 합니다.
+
+| 시스템 | 필수 요건 |
+|---|---|
+| OS | Windows Server 2016, Windows Server 2019, 또는 Windows 10. |
+| RAM | 최소 4GB. 8GB 권장. |
+| CPU | 64비트를 지원하는 Intel 또는 AMD 프로세서. 2.8GHz 이상의 프로세서가 권장됩니다. |
+
+**참고**: Windows 프라이빗 위치에서 브라우저 테스트를 실행하려면 브라우저(예: Chrome, Edge 또는 Firefox)가 Windows 컴퓨터에 설치되어 있어야 합니다.
+
+MSI 설치 프로그램을 사용하기 전에 컴퓨터에 .NET 버전 4.7.2 이상을 설치해야 합니다.
+
+{{< site-region region="gov" >}}
+
+<div class="alert alert-danger"><code>ddog-gov.com</code>에 보고하는 프라이빗 위치에는 FIPS 컴플라이언스가 지원되지 않습니다. 이 동작을 비활성화하려면 <a href"="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> 옵션을 사용하세요</a>.</div>
+
+{{< /site-region >}}
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Datadog 프라이빗 위치 엔드포인트
 
@@ -74,7 +100,7 @@ Windows 프라이빗 위치 베타 버전에 참여하려면 <a href="https://do
 | ---- | ---------------------------------- | -------------------------------------------------------------- |
 | 443  | `intake.synthetics.datadoghq.eu`   | [AWS Signature Version 4 프로토콜][1]을 기반으로 하는 내부 프로토콜을 사용하여 테스트 설정을 가져오고 테스트 결과를 Datadog에 푸시하기 위해 프라이빗 위치에서 사용됩니다. |
 
-**참고**: 이러한 도메인은 일련의 고정 IP 주소를 가리킵니다. 이 주소는 https://ip-ranges.datadoghq.eu에서 찾을 수 있으며,  `api.datadoghq.eu`의 경우 https://ip-ranges.datadoghq.eu/api.json에서, `intake-v2.synthetics.datadoghq.eu`의 경우 https://ip-ranges.datadoghq.eu/synthetics-private-locations.json에서 찾을 수 있습니다.
+**참고**: 이러한 도메인은 고정 IP 주소 집합을 가리킵니다. 이 주소는 https://ip-ranges.datadoghq.eu에서 찾을 수 있습니다.
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -122,7 +148,7 @@ Windows 프라이빗 위치 베타 버전에 참여하려면 <a href="https://do
 
 ## 프라이빗 위치 설정
 
-**Admin** 역할을 가진 사용자만 프라이빗 위치를 만들 수 있습니다. 자세한 내용은 [권한](#permissions)을 참조하세요.
+**Synthetics Private Locations Write** 역할을 가진 사용자만 프라이빗 위치를 만들 수 있습니다. 자세한 내용은 [권한](#permissions)을 참조하세요.
 
 ### 프라이빗 위치 생성하기
 
@@ -367,7 +393,7 @@ OpenShift의 경우 `anyuid` SCC를 사용하여 프라이빗 위치를 실행�
 }
 ```
 
-**참고:**
+**참고**:
 
 - 예약된 IP를 차단한 경우 [linuxParameters][1]를 설정하여 개인 위치 컨테이너에 `NET_ADMIN` 기능을 부여하세요.
 - `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM`, `DATADOG_PRIVATE_KEY` 환경 변수를 사용할 경우 `"command": [ ]` 섹션에 이를 추가할 필요가 없습니다.
@@ -465,7 +491,78 @@ Datadog은 이미 Kubernetes 및 AWS와 통합되어 있으므로 EKS를 모니�
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
+{{% tab "GUI를 통한 Windows" %}}
 
+1. [`datadog-synthetics-worker-<version>.amd64.msi` 파일][101]을 다운로드하고 프라이빗 위치를 설치하려는 머신에서 이 파일을 실행하세요.
+1. 시작 페이지에서 **Next**를 클릭하고 EULA를 읽고 이용약관에 동의하세요. 그런 다음 **Next**를 클릭하세요.
+1. 애플리케이션이 설치될 위치를 수정하거나 기본 설정을 그대로 둡니다. **Next**를 클릭하세요.
+1. Windows 프라이빗 위치를 설정하려면 다음 중 하나를 수행하세요.
+   - Datadog Synthetics Private Location Worker에 대한 JSON 설정을 붙여넣고 입력합니다. 이 파일은 [프라이빗 위치 생성][102] 시 Datadog에 의해 생성됩니다.
+   - Datadog Synthetics Private Location Worker에 대한 JSON 설정이 포함된 파일의 파일 경로를 찾아보거나 입력하세요.
+   - 공백으로 두고 설치가 완료된 후 Windows 명령줄 프롬프트에서`C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=<PathToYourConfiguration>`을 실행할 수 있습니다.
+
+   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Synthetics Private Location Worker 마법사, MSI 설치 프로그램. 'Paste in a JSON configuration' 옵션이 선택되었습니다. 이 JSON 설정에 대한 텍스트 필드가 표시됩니다." style="width:80%;" >}}
+
+1. 다음 설정 옵션을 적용할 수 있습니다.
+
+   {{< img src="synthetics/private_locations/settings.png" alt="Synthetics Private Location Worker 마법사, MSI 설치 프로그램. 방화벽 및 로그 설정이 표시됩니다." style="width:80%;" >}}
+
+   이 프로그램에 필요한 방화벽 규칙을 Windows Firewall에 적용
+   : 설치 프로그램이 설치 시 방화벽 규칙을 적용하고, 제거 시 제거할 수 있도록 허용합니다.
+
+   Windows Firewall에서 예약된 IP를 차단하는 규칙 적용
+   : Chrome, Firefox 및 Edge(설치된 경우)에 대한 차단 규칙을 설정하고 Windows Firewall에서 예약된 IP 주소 범위 아웃바운드를 차단하는 규칙을 추가합니다.
+
+   파일 로깅 활성화
+   : Synthetics Private Location Worker가 설치 디렉터리에 파일을 기록하도록 허용합니다.
+
+   로그 로테이션 일수
+   : 로컬 시스템에서 로그를 삭제하기 전에 보관할 기간(일)을 지정합니다.
+
+   로깅 상세 정도
+   : Synthetics Private Location Worker에 대한 콘솔 및 파일 로깅의 자세한 정도를 지정합니다.
+
+1. **Next** 및 **Install**을 클릭하여 설치 프로세스를 시작합니다.
+
+설치가 완료되면 설치 완료 페이지에서 **Finish**를 클릭합니다.
+
+<div class="alert alert-warning">JSON 설정을 입력한 경우 해당 설정을 사용하여 Windows 서비스가 실행되기 시작합니다. 설정을 입력하지 않은 경우, 명령 프롬프트에서 <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code>을 실행하거나  <code>시작 메뉴</code> 바로가기를 사용하여 Synthetics Private Location Worker를 시작합니다.</div>
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[102]: https://app.datadoghq.com/synthetics/settings/private-locations
+
+{{% /tab %}}
+{{% tab "CLI를 통한 Windows" %}}
+
+1. [`datadog-synthetics-worker-<version>.amd64.msi` 파일][101]을 다운로드하고 프라이빗 위치를 설치하려는 머신에서 이 파일을 실행하세요.
+2. 설치 프로그램을 다운로드한 디렉터리 내에서 다음 명령 중 하나를 실행합니다.
+
+   - PowerShell Terminal에서:
+
+     ```powershell
+     Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     ```
+
+   - 또는 Command Terminal에서:
+
+     ```cmd
+     msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     ```
+
+파라미터를 추가할 수 있습니다.
+
+| 옵션 파라미터 | 정의 | 값 | 기본값 | 유형 |
+|---|---|---|---|---|
+| APPLYDEFAULTFIREWALLRULES | 프로그램에 필요한 방화벽 규칙을 적용합니다. | 1 | N/A | 0: Disabled<br>1: Enabled |
+| APPLYFIREWALLDEFAULTBLOCKRULES | 설치된 각 브라우저(Chrome, Edge 및 Firefox)에 대해 예약된 IP 주소를 차단합니다. Windows Firewall에서는 루프백 연결을 차단할 수 없습니다. | 0 | N/A | 0: Disabled<br>1: Enabled |
+| LOGGING_ENABLED | 활성화되면 파일 로깅이 설정됩니다. 이러한 로그는 로그 폴더 아래의 설치 디렉터리에 저장됩니다. | 0 | `--enableFileLogging` | 0: Disabled<br>1: Enabled |
+| LOGGING_VERBOSITY | 프로그램에 대한 로깅의 상세 정도를 설정합니다. 이는 콘솔 및 파일 로그에 영향을 미칩니다. | 이는 콘솔 및 파일 로그에 영향을 미칩니다. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
+| LOGGING_MAXDAYS | 파일 로그를 삭제하기 전에 시스템에 보관하는 일수입니다. 무인 설치를 실행하는 경우 임의의 숫자가 될 수 있습니다. | 7 | `--logFileMaxDays` | 정수 |
+| WORKERCONFIG_FILEPATH | 이는 Synthetics Private Location Worker JSON 설정 파일의 경로로 변경되어야 합니다. 경로에 공백이 포함된 경우 이 경로를 따옴표로 묶습니다. | <None> | `--config` | 문자열 |
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+
+{{% /tab %}}
 {{< /tabs >}}
 
 #### 라이브니스 및 레디니스 프로브 설정
@@ -706,9 +803,11 @@ livenessProbe:
 
 그런 다음 [환경에 따른 설정 명령](#install-your-private-location)을 실행하여 프라이빗 위치 이미지의 최신 버전을 가져옵니다.
 
+**참고**: `docker run`을 사용하여 프라이빗 위치 이미지를 시작하고 이전에 `latest` 태그를 사용하여 프라이빗 위치 이미지를 설치한 경우 `--pull=always`를 `docker run` 명령에 추가해야 합니다. 이를 통해 동일한 `latest` 태그를 사용하여 로컬에 존재할 수 있는 이미지의 캐시된 버전에 의존하기보다는 최신 버전을 가져오도록 합니다.
+
 ### 내부 엔드포인트 테스트
 
-하나 이상의 프라이빗 위치 컨테이너가 Datadog에 보고하기 시작하면 프라이빗 위치 상태가 녹색으로 표시됩니다.
+하나 이상의 프라이빗 위치 작업자가 Datadog에 보고를 시작하면 프라이빗 위치 상태가 녹색으로 표시됩니다.
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="프라이빗 위치 보고" style="width:90%;">}}
 
@@ -732,9 +831,9 @@ Datadog 관리형 위치와 마찬가지로 프라이빗 위치를 사용하세�
 
 ## 프라이빗 위치 확장
 
-하나의 설정 파일을 사용하여 하나의 프라이빗 위치에 대해 여러 컨테이너를 실행할 수 있으므로 프라이빗 위치에 작업자를 추가하거나 제거하여 **수평적으로 확장**할 수 있습니다. 그렇게 할 때 `concurrency` 파라미터를 설정하고 프라이빗 위치에서 실행하려는 테스트 유형 및 수와 일치하는 작업자 리소스를 할당해야 합니다.
+단일 설정 파일을 사용하여 단일 프라이빗 위치에 대해 여러 작업자를 실행할 수 있으므로 작업자를 추가하거나 제거하여 프라이빗 위치를 **수평적으로 확장**할 수 있습니다. 그렇게 할 때 `concurrency` 파라미터를 설정하고 프라이빗 위치에서 실행하려는 테스트 유형 및 수와 일치하는 작업자 리소스를 할당해야 합니다.
 
-또한 프라이빗 위치 컨테이너가 처리할 수 있는 부하를 늘려 프라이빗 위치를 **수직적으로 확장**할 수도 있습니다. 마찬가지로 `concurrency` 파라미터를 사용하여 작업자가 실행할 수 있는 최대 테스트 수를 조정하고 작업자에게 할당된 리소스를 업데이트해야 합니다.
+또한 프라이빗 위치 작업자가 처리할 수 있는 부하를 늘려 프라이빗 위치를 **수직적으로 확장**할 수도 있습니다. 마찬가지로, `concurrency` 파라미터를 사용하여 작업자가 실행할 수 있는 최대 테스트 수를 조정하고 작업자에게 할당된 리소스를 업데이트해야 합니다.
 
 자세한 정보는 [프라이빗 위치 크기 조정][18]을 참조하세요.
 
@@ -746,7 +845,7 @@ Continuous Testing을 위해 프라이빗 위치를 사용하려면 `concurrency
 
 자세한 내용은 [프라이빗 위치 모니터링][19]을 참조하세요.
 
-## 권한
+## 권한
 
 기본적으로 Datadog Admin 역할이 있는 사용자만 프라이빗 위치를 생성 및 삭제할 수 있으며, 프라이빗 위치 설치 지침에 액세스할 수 있습니다.
 

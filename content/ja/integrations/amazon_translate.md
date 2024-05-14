@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_translate/
 draft: false
 git_integration_title: amazon_translate
 has_logo: true
-integration_id: amazon-translate
+integration_id: ''
 integration_title: Amazon Translate
 integration_version: ''
 is_public: true

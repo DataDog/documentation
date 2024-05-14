@@ -27,7 +27,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Fastly and Confluent Cloud Cost Integrations are in public beta. Snowflake Costs are in private beta, contact your account team to be added to the private beta.
+Cost Integrations are in public beta.
 {{< /beta-callout >}}
 
 ## Overview
@@ -38,9 +38,9 @@ SaaS Cost Integrations allow you to send cost data *directly from your providers
 
 To use SaaS Cost Integrations, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.
 
-Navigate to [**Cloud Costs** > **Settings** > **Accounts**][8] and click on the provider you want to integrate. 
+Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click on the provider you want to integrate. 
 
-{{< img src="cloud_cost/cloud_and_saas_accounts.png" alt="Integrate with Fastly, Confluent, or Snowflake." style="width:80%" >}}
+{{< img src="cloud_cost/cloud_and_saas_accounts_2.png" alt="Integrate with Fastly, Confluent, or Snowflake." style="width:80%" >}}
 
 {{< tabs >}}
 {{% tab "Fastly" %}}

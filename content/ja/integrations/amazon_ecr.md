@@ -8,7 +8,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_ecr/
 draft: false
 git_integration_title: amazon_ecr
 has_logo: true
-integration_id: amazon-ecr
+integration_id: ''
 integration_title: Amazon ECR
 integration_version: ''
 is_public: true

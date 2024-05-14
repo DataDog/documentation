@@ -95,6 +95,21 @@ CREATE USER datadog WITH password '<PASSWORD>';
 
 
 {{< tabs >}}
+{{% tab "Postgres ≥ 16" %}}
+
+Create the following schema **in every database**:
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_read_all_settings TO datadog;
+GRANT pg_read_all_stats TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{{% /tab %}}
+
 {{% tab "Postgres 15" %}}
 
 Create the following schema **in every database**:
@@ -457,6 +472,24 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ## Install the Azure PostgreSQL Integration
 
 To collect more comprehensive database metrics from Azure, install the [Azure PostgreSQL integration][10] (optional).
+
+## Known issues
+
+For Postgres 16 databases, the following error messages are written into the log file:
+
+```
+psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
+2024-03-05 12:36:16 CET | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | - | (core.py:94) | Error querying wal_metrics: permission denied for function pg_ls_waldir
+2024-03-05 12:36:30 CET | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | postgres:cc861f821fbbc2ae | (postgres.py:239) | Unhandled exception while using database connection postgres
+Traceback (most recent call last):
+  File "/opt/datadog-agent/embedded/lib/python3.11/site-packages/datadog_checks/postgres/postgres.py", line 224, in db
+    yield self._db
+  File "/opt/datadog-agent/embedded/lib/python3.11/site-packages/datadog_checks/postgres/postgres.py", line 207, in execute_query_raw
+    cursor.execute(query)
+psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
+```
+
+As a consequence, the Agent doesn't collect the following metrics for Postgres 16: `postgresql.wal_count`, `postgresql.wal_size` and `postgresql.wal_age`.
 
 ## Troubleshooting
 

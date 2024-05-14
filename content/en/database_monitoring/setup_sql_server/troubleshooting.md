@@ -325,6 +325,38 @@ The `user` tag is available for Query Activity events and Database Load metrics.
 
 In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE` statistics are over counted. This leads to seeing many executions of `CREATE PROCEDURE...` in the database-monitoring Query Metrics UI. In order to fix this issue, please upgrade to the latest version of the Datadog agent.
 
+## Known limitations
+
+### SQL Server 2012
+
+The following metrics are not available for SQL Server 2012:
+
+- `sqlserver.files.read_io_stall_queued`
+- `sqlserver.files.write_io_stall_queued`
+- `sqlserver.ao.quorum_type`
+- `sqlserver.ao.quorum_state`
+- `sqlserver.ao.member.type`
+- `sqlserver.ao.member.state`
+- `sqlserver.ao.member.number_of_quorum_votes`
+- `sqlserver.ao.log_send_queue_size`
+- `sqlserver.ao.log_send_rate`
+- `sqlserver.ao.redo_queue_size`
+- `sqlserver.ao.redo_rate`
+- `sqlserver.ao.low_water_mark_for_ghosts`
+- `sqlserver.ao.filestream_send_rate`
+- `sqlserver.ao.replica_status`
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.fci.status`
+- `sqlserver.fci.is_current_owner`
+- `sqlserver.latches.latch_wait_time`
+
+### SQL Server 2014
+
+The following metrics are not available for SQL Server 2014:
+
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.latches.latch_wait_time`
+
 [1]: /database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication
 [3]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-sql-server-authentication

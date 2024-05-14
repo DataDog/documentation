@@ -13,25 +13,26 @@ The following ASM capabilities are supported in the Java library, for the specif
 | ASM capability                   | Minimum Java tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
+| API Security | 1.31.0 |
 | Threat Protection| 1.9.0 |
 | Customize response to blocked requests | 1.11.0 |
 | Software Composition Analysis (SCA) | 1.1.4 |
 | Code Security (beta) | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 
-The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
+The minimum tracer version to get all supported ASM capabilities for Java is 1.31.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-|Type           | Threat Detection support |  Vulnerability Management for OSS support |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 |
-| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |
-| Azure App Service | {{< X >}}     | {{< X >}}                 |
+| Type              | Threat Detection support | Software Composition Analysis |
+|-------------------|--------------------------|-------------------------------|
+| Docker            | {{< X >}}                | {{< X >}}                     |
+| Kubernetes        | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda        | {{< X >}}                |                               |
+| Azure App Service | {{< X >}}                | {{< X >}}                     |
 
 **Note**: Azure App Service is supported for **web applications only**. ASM doesn't support Azure Functions.
 

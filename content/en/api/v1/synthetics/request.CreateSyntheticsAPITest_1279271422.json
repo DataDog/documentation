@@ -34,7 +34,8 @@
         "request": {
           "method": "GET",
           "timeout": 10,
-          "url": "https://datadoghq.com"
+          "url": "https://datadoghq.com",
+          "httpVersion": "http2"
         },
         "retry": {
           "count": 5,

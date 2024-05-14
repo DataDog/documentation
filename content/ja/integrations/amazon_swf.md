@@ -12,7 +12,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_swf/
 draft: false
 git_integration_title: amazon_swf
 has_logo: true
-integration_id: amazon-swf
+integration_id: ''
 integration_title: Amazon Simple Workflow Service
 integration_version: ''
 is_public: true

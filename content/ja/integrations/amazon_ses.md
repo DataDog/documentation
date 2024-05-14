@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_ses/
 draft: false
 git_integration_title: amazon_ses
 has_logo: true
-integration_id: amazon-ses
+integration_id: ''
 integration_title: Amazon Simple Email Service (SES)
 integration_version: ''
 is_public: true

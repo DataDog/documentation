@@ -10,7 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_privatelink/
 draft: false
 git_integration_title: amazon_privatelink
 has_logo: true
-integration_id: amazon-privatelink
+integration_id: ''
 integration_title: AWS PrivateLink
 integration_version: ''
 is_public: true

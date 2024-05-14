@@ -83,7 +83,7 @@ Analyze performance information about your API tests, multistep API tests, brows
 
 {{< img src="synthetics/dashboards/test_dashboard.png" alt="Synthetic Monitoring & Continuous Testing Summary Dashboard" style="width:100%;">}}
 
-## Use the Synthetic Monitoring & Continuous Testing Explorer
+## Use the Synthetic Monitoring & Testing Results Explorer
 
 Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
 

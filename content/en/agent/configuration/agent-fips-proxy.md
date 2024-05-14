@@ -34,7 +34,7 @@ Supported platforms (64-bit x86):
 
 |||
 | ---  | ----------- |
-| Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04|
+| Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04<br>SUSE >= 12 (beta)|
 | Cloud and container| Amazon ECS<br>AWS EKS (Helm)|
 
 **Note**: arm64 architecture is available in beta

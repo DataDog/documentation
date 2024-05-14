@@ -25,7 +25,7 @@ Generally, to set up Quality Gates:
 
 To create Quality Gates rules for your organization, your user account must have the `quality_gate_rules_write` [permission][1].
 
-1. In Datadog, navigate to [**CI** > **Quality Gate Rules**][2] and click **+ New Rule**.
+1. In Datadog, navigate to [**Software Delivery** > **Quality Gates** > **Quality Gate Rules**][2] and click **+ New Rule**.
 2. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. See [rule scopes](#rule-scope) for more information.
 3. Select the rule type. You can choose between `Static Analysis` and `Test`.
 4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline (if the rule is blocking). You can select one of the existing rule conditions for the rule type you have selected.
@@ -140,11 +140,11 @@ The rule is **not** evaluated when the following commands are invoked instead:
 
 ## Manage rules
 
-To edit a Quality Gates rule, click the **Edit** icon to the right of the **Creator** avatar on the [Quality Gates Rules page][2].
+To edit a Quality Gates rule, click the **Edit** icon to the right of the **Creator** avatar on the [**Quality Gates Rules** page][2].
 
 {{< img src="ci/edit_quality_gate_rule.png" alt="Edit a Quality Gates rule" style="width:90%;">}}
 
-To delete a Quality Gates rule, click the **Delete** icon next to the **Edit** button on the [Quality Gates Rules page][2]. Alternatively, you can edit the rule and click **Delete Rule**.
+To delete a Quality Gates rule, click the **Delete** icon next to the **Edit** button on the [**Quality Gates Rules** page][2]. Alternatively, you can edit the rule and click **Delete Rule**.
 
 {{< img src="ci/delete_quality_gate_rule.png" alt="Delete a Quality Gates rule" style="width:90%;">}}
 

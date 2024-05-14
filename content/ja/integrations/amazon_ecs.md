@@ -19,7 +19,7 @@ further_reading:
   text: ECS Fargate インテグレーション
 git_integration_title: amazon_ecs
 has_logo: true
-integration_id: amazon-ecs
+integration_id: ''
 integration_title: Amazon ECS on EC2
 integration_version: ''
 is_public: true

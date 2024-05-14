@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-With Live Tail, access all your log events in near real time from anywhere in your infrastructure. The Live Tail view provides visibility on **all** logs, whether you choose to index them or not - see also [Exclusion Filters][1] on logs indexes. Logs flowing through the Live Tail are all structured, processed, and enriched from [Log Pipelines][2].
+With Live Tail, access all your log events in near real time from anywhere in your infrastructure. The Live Tail view provides visibility on both indexed and non-indexed logs streaming to Datadog - see also [Exclusion Filters][1] on logs indexes. Logs flowing through the Live Tail are all structured, processed, and enriched from [Log Pipelines][2].
 
 For example, Live Tail is specifically useful to check if a process has correctly started or if a new deployment went smoothly.
 

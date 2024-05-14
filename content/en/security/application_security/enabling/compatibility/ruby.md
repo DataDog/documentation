@@ -18,19 +18,20 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 | Software Composition Analysis (SCA) | 1.11.0 |
 | Code Security (beta) | not supported |
 | Automatic user activity event tracking | 1.14.0 |
+| API Security | 1.15.0 |
 
-The minimum tracer version to get all supported ASM capabilities for Ruby is 1.11.0.
+The minimum tracer version to get all supported ASM capabilities for Ruby is 1.15.0.
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Ruby framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---   |   ---             |           ----        |
-| Docker | {{< X >}}  |  |
-| Kubernetes | {{< X >}}  | |
-| Amazon ECS | {{< X >}}  | |
-| AWS Fargate | {{< X >}}  | |
-| AWS Lambda |  | |
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                |                               |
+| Kubernetes  | {{< X >}}                |                               |
+| Amazon ECS  | {{< X >}}                |                               |
+| AWS Fargate | {{< X >}}                |                               |
+| AWS Lambda  |                          |                               |
 
 ## Language and framework compatibility
 

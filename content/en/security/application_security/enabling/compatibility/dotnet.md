@@ -18,20 +18,21 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | Software Composition Analysis (SCA) |  2.16.0  |
 | Code Security (beta)| 2.42.0  |
 | Automatic user activity event tracking | 2.32.0 |
+| API Security | 2.42.0 |
 
 The minimum tracer version to get all supported ASM capabilities for .NET is 2.42.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-|Type   | Threat Detection support |  Vulnerability Management for OSS support |
-| ---   |   ---             |           ----        |
-| Docker | {{< X >}}  | {{< X >}} |
-| Kubernetes | {{< X >}}  | {{< X >}} |
-| Amazon ECS | {{< X >}}  | {{< X >}} |
-| AWS Fargate | {{< X >}}  | {{< X >}} |
-| AWS Lambda | {{< X >}} | |
-| Azure App Service | {{< X >}}  | {{< X >}} |
+| Type              | Threat Detection support | Software Composition Analysis            |
+|-------------------|--------------------------|------------------------------------------|
+| Docker            | {{< X >}}                | {{< X >}}                                |
+| Kubernetes        | {{< X >}}                | {{< X >}}                                |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                                |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                                |
+| AWS Lambda        | {{< X >}}                |                                          |
+| Azure App Service | {{< X >}}                | {{< X >}}                                |
 
 **Note**: Azure App Service is supported for **web applications only**. ASM doesn't support Azure Functions.
 

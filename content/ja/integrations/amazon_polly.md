@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_polly/
 draft: false
 git_integration_title: amazon_polly
 has_logo: true
-integration_id: amazon-polly
+integration_id: ''
 integration_title: Amazon Polly
 integration_version: ''
 is_public: true

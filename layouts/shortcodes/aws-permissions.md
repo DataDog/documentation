@@ -101,4 +101,4 @@ The following permissions included in the policy document use wild cards such as
 ```
 ### AWS Security Audit Policy
 
-To use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection" target="_blank">Cloud Security Posture Management</a>, attach AWS's managed <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">SecurityAudit Policy</a> to your Datadog IAM role.
+To use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection" target="_blank">resource collection</a>, attach AWS's managed <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">SecurityAudit Policy</a> to your Datadog IAM role.

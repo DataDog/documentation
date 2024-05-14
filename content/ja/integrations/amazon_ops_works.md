@@ -13,7 +13,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_ops_works/
 draft: false
 git_integration_title: amazon_ops_works
 has_logo: true
-integration_id: amazon-opsworks
+integration_id: ''
 integration_title: AWS OpsWorks
 integration_version: ''
 is_public: true

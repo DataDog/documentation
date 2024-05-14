@@ -22,7 +22,7 @@ further_reading:
   tag: ブログ
   text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
 kind: documentation
-title: SAML を使用した SSO
+title: アクセス制御
 ---
 
 ## 概要

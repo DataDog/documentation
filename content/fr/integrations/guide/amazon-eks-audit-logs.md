@@ -20,7 +20,7 @@ Les logs d'audit Amazon EKS fournissent aux administrateurs de cluster des info
 
 1. Si vous avez déjà configuré un cluster Amazon EKS, accédez-y depuis la [console Amazon EKS][2].
 1. Cliquez sur votre cluster EKS.
-1. Cliquez sur l'onglet **Configuration**, puis sur l'onglet **Logging**.
+1. Cliquez sur l'onglet **Logging**.
 1. Cliquez sur le bouton **Manage logging**.
 1. Définissez l'option **Audit** sur **Enabled** et cliquez sur le bouton **Save changes**.
 
@@ -69,17 +69,17 @@ Pour créer une règle, accédez à la page [Rule Setup and Configuration][13] d
 1. Cette fonctionnalité exporte votre requête et l'utilise durant la deuxième étape de configuration de votre règle de détection des logs. Choisissez une méthode de détection (pour cet exemple, **New Value**). Sélectionnez l'attribut `@usr.name` dans la liste déroulante Detect new value. Cette règle génère une alerte lorsqu'un utilisateur exécute pour la première fois la commande exec dans un pod. Si cet utilisateur exécute une nouvelle fois cette commande, aucune alerte n'est envoyée. Si vous souhaitez plutôt être informé lorsque ces événements dépassent un seuil de votre choix, utilisez la méthode de détection **Threshold**.
 1. Consultez la section [Règles de détection des logs][14] pour découvrir comment terminer la configuration de votre règle.
 
-[1]: /fr/security_platform/cloud_siem/
+[1]: /fr/security/cloud_siem/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
 [3]: /fr/integrations/amazon_web_services/?tab=roledelegation#setup
 [4]: /fr/logs/guide/forwarder/
 [5]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /fr/security_platform/cloud_siem/log_detection_rules/
-[9]: /fr/security_platform/cloud_siem/getting_started#review-detection-rules
+[8]: /fr/security/cloud_siem/log_detection_rules/
+[9]: /fr/getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
-[11]: /fr/security_platform/default_rules/#cat-cloud-siem
-[12]: /fr/security_platform/detection_rules/#creating-and-managing-detection-rules
+[11]: /fr/security/default_rules/#cat-cloud-siem
+[12]: /fr/security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /fr/security_platform/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /fr/security/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method

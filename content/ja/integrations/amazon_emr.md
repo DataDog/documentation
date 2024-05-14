@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_emr/
 draft: false
 git_integration_title: amazon_emr
 has_logo: true
-integration_id: amazon-emr
+integration_id: ''
 integration_title: Amazon EMR
 integration_version: ''
 is_public: true
