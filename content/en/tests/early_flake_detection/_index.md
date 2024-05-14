@@ -92,7 +92,7 @@ The test framework compatibility is the same as [Test Visibility Compatibility][
 
 Excluded Branches will not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection.
 
-{{< img src="continuous_integration/early_flake_detection_commits.png" alt="How Early Flake Detection works in your commits" style="width:60%">}}
+{{< img src="continuous_integration/early_flake_detection_commits.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
 
 You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
 
