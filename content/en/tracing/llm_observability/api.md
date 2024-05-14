@@ -192,7 +192,7 @@ If the request is successful, the API responds with a 202 network code and an em
 #### SpansPayload
 | Field    | Type                | Description  |
 |----------|---------------------|--------------|
-| ml_app [*required*] | string              | The name of your LLM application.      |
+| ml_app [*required*] | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines).     |
 | spans [*required*]  | [[Span](#span)] | A list of spans.           |
 | tags                | [[Tag](#tag)]   | A list of top-level tags to apply to each span.        |
 | session_id          | string              | The session the list of spans belongs to. Can be overridden or set on individual spans as well. |
@@ -203,9 +203,10 @@ Tags should be formatted as a list of strings (for example, `["user_handle:dog@g
 
 For more information about tags, see [Getting Started with Tags][3].
 
-#### Guidelines for specifying an ml_app name
+#### Application naming guidelines
 
-Accepted ml_app's must start with a letter and after that may contain the characters listed below:
+Your application name (the value of `ml_app`) must start with a letter. It may contain the characters listed below:
+
 - Alphanumerics
 - Underscores
 - Minuses
@@ -213,7 +214,7 @@ Accepted ml_app's must start with a letter and after that may contain the charac
 - Periods
 - Slashes
 
-The specified ml_app can be up to 200 characters long and support Unicode letters (which includes most character sets, including languages such as Japanese).
+The name can be up to 200 characters long and contain Unicode letters (which includes most character sets, including languages such as Japanese).
 
 ## Eval metrics API
 Use this endpoint to send evaluation metrics for a span to Datadog.

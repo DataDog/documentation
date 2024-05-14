@@ -36,6 +36,8 @@ Enable LLM Observability through the `LLMOBs.enable()` function, as shown in the
 
 - If you do not have Datadog APM set up, set `dd_llmobs_no_apm` to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM.
 
+- When choosing a value for `ml_app`, see [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints.
+
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
@@ -73,15 +75,16 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_APP_NAME`
 : required - _string_ 
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
 `DD_LLMOBS_NO_APM`
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
 
-#### Guidelines for specifying an ml_app name
+#### Application naming guidelines
 
-Accepted ml_app's must start with a letter and after that may contain the characters listed below:
+Your application name (the value of `ml_app` or `DD_LLMOBS_APP_NAME`) must start with a letter. It may contain the characters listed below:
+
 - Alphanumerics
 - Underscores
 - Minuses
@@ -89,7 +92,7 @@ Accepted ml_app's must start with a letter and after that may contain the charac
 - Periods
 - Slashes
 
-The specified ml_app can be up to 200 characters long and support Unicode letters (which includes most character sets, including languages such as Japanese).
+The name can be up to 200 characters long and contain Unicode letters (which includes most character sets, including languages such as Japanese).
 
 ## Tracing spans
 
