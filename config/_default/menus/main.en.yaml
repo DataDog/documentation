@@ -2953,6 +2953,36 @@ menu:
       parent: tracing_services
       identifier: tracing_apm_monitors
       weight: 706
+    - name: LLM Observability
+      url: tracing/llm_observability/
+      parent: tracing
+      identifier: tracing_llm_obs
+      weight: 7
+    - name: Quickstart
+      url: tracing/llm_observability/quickstart/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_quickstart
+      weight: 701
+    - name: Trace an LLM Application
+      url: tracing/llm_observability/trace_an_llm_application/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_trace_an_application
+      weight: 702
+    - name: Span Kinds
+      url: tracing/llm_observability/span_kinds/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_span_kinds
+      weight: 703
+    - name: SDK
+      url: tracing/llm_observability/sdk/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_sdk
+      weight: 704
+    - name: API
+      url: tracing/llm_observability/api/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_api
+      weight: 705
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
