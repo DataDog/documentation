@@ -91,9 +91,7 @@ You can track network requests by monitoring your `URLSession`. Learn more about
 
 ### Limitations
 
-Make sure your native code is not executed in a moment in the lifecycle where the RN initialization has not been called yet.
-
-When you initialize the SDK on the React Native side (JavaScript / TypeScript) it will also be initialized on the native side. If you write any native code that relies on our SDK, you have to make sure that you execute that code after the initialization on the React Native side.
+If you write any native code that relies on the Datadog SDK, make sure you execute that code **after** initializing the SDK on the React Native side. When you initialize the SDK on the React Native side, it is also initialized on the native side.
 
 ## Monitor native apps with React Native screens
 
