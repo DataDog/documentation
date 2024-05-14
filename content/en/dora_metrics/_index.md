@@ -54,7 +54,7 @@ To start configuring data sources to send deployment and incident events to Data
 
 Once you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric, aggregate them by service or environment, and compare trends over time. 
 
-{{< img src="dora_metrics/home.png" alt="An Overview of your DORA Metrics calculations and insights in the last week" style="width:100%;" >}}
+{{< img src="dora_metrics/dora_page_light.png" alt="An Overview of your DORA Metrics calculations and insights in the last week" style="width:100%;" >}}
 
 You can access and visualize your DORA metrics and filter them by team, service, repository, environment, and time period on the [**DORA Metrics** page][4]. For more information about the metrics calculated by DORA Metrics, see the [Data Collected documentation][3].
 
