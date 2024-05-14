@@ -48,6 +48,8 @@ Monitor the throughput, latency, and token usage trends for all your LLM applica
 
 Identify problematic topics and monitor the quality of responses over time with topical clustering with checks like sentiment analysis.
 
+{{< img src="tracing/llm_observability/clusters-page.png" alt="The clusters page in LLM Observability" style="width:100%;" >}}
+
 ### Safeguard sensitive data and identify malicious users
 
 Automatically scan and redact any sensitive data in your AI applications and identify prompt injections.
