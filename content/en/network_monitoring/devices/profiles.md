@@ -66,7 +66,7 @@ For more Datadog provided profiles, see the [GitHub repository][3].
 
 ### Metadata definition by profile
 
-Profiles have a metadata section that can be used to define where and how metadata should be collected. Values can be static or come from an OID value.
+In the profiles's metadata section, you can define where and how metadata is collected. Values can be static or come from an OID value.
 Supported fields can be found [here][4].
 
 With Datadog Agent version 7.52 and later, a new `device_type` field is supported as a device metadata. This can be set manually in the profile and can be used to filter on specific types of devices. Accepted values include:
