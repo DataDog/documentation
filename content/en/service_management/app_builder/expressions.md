@@ -73,15 +73,42 @@ The text component is invisible and the button is disabled unless both text inpu
 
 {{< img src="service_management/app_builder/is-disabled-example.png" alt="The text component is invisible and the button is disabled unless both text input fields have content." style="width:100%;" >}}
 
+You can observe a similar interaction in the [EC2 Management blueprint][3]. The `instanceType` Select component is disabled while the `listInstances` query is loading. To accomplish this, the **Is Disabled** property uses the expression `${listInstances.isLoading}`.
+
+{{< img src="service_management/app_builder/isloading.png" alt="The 'instanceType' Select component is disabled while the 'listInstances' query is loading." style="width:100%;" >}}
+
 ## Custom query interactions
 
-** snip **
+Similar to components, you can use JS expressions to alter your queries based on user interaction.
 
+For example, the [PagerDuty On-call Manager blueprint][4] filters the result of the `listSchedules` query based on input from the user. The user selects a team and user from the `team` and `user` **Select** components.
 
+Inside the `listSchedules` query, the following post-query transformation filters the results based on the values of `team` and `user`:
 
+{{< code-block lang="js" disable_copy="true" >}}
+return outputs?.body?.schedules.map( s => {
+    return {
+        ...s,
+        users: s.users.map(u => u.summary),
+        teams: s.teams.map(u => u.summary)
+    }
+}).filter(s => {
 
-## Examples
+        const matchesName = !name.value?.length ? true : s.name.toLowerCase().includes(name.value?.toLowerCase());
+        const matchesTeam = team.value === 'Any Team' ? true : s.teams.includes(team.value);
+        const matchesUser = user.value === 'Any User' ? true : s.users.includes(user.value);
+
+        return matchesName && matchesUser && matchesTeam ;
+    }) || []
+{{< /code-block >}}
+
+Setting the query's **Run Settings** to **Auto** allows the query to run each time a user changes a value in the `team` or `user` components.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/app_builder/build/#post-query-transformation
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
-[3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-dashboard
+[3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ec2_instance_manager
+[4]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=pagerduty_oncall_manager
