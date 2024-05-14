@@ -28,7 +28,7 @@ To initialize your native SDK before React Native has started:
    }
    ```
 
-   The `"$schema"` attribute here helps most modern Integrated Development Environments (IDE) to show errors if the configuration is incomplete or invalid, as well as autocomplete enabled.
+   The `"$schema"` attribute here enables autocomplete and helps most modern Integrated Development Environments (IDE) to show errors if the configuration is incomplete or invalid.
 
    {{< img src="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts/initialize-sdk-before-rn-1.png" alt="You may see an error in your IDE if the configuration is incomplete or invalid" style="width:100%" >}}
 
