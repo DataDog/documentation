@@ -67,6 +67,8 @@ DD_LLMOBS_NO_APM=1 ddtrace-run python quickstart.py
 
 A trace of your LLM call should appear in [the Traces tab][3] of LLM Observability in Datadog.
 
+{{< img src="tracing/llm_observability/quickstart-trace.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
+
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from Datadog's list of supported integrations.
 
 [1]: /tracing/llm_observability/sdk/

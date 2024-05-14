@@ -12,7 +12,7 @@ LLM Observability is not available in the US1-FED site.
 
 ## Overview
 
-The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. 
+The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python version 3.7 and up, and all versions of LangChain.
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with simple context managers or function decorators. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
