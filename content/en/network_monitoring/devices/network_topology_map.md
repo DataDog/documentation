@@ -151,7 +151,7 @@ If you experience issues using the Network Topology Map, use the following troub
 
 This message is displayed when the rendered map has no links.
 
-**Note**: Since the "Hide _N_ Unconnected Devices" toggle is enabled by default, this message displays with an empty map.
+**Note**: Since the "Hide _N_ Unconnected Devices" toggle is enabled by default, this message displays with an empty map. 
 
 ### Empty map message
 
@@ -197,7 +197,7 @@ You can use the "Hide _N_ Unmonitored Devices" toggle to hide these nodes.
 
 ### Device duplicated on map
 
-The Device Topology Map shows all devices discovered with LLDP and/or CDP. In some cases, these devices are already monitored with SNMP but can not be resolved(#device-resolution) to the equivalent monitored device. In this case, the device is shown twice: one node representing the monitored device and one node representing the LLDP/CDP discovered device.
+The Device Topology Map shows all devices discovered with LLDP and/or CDP. In some cases, these devices are already monitored with SNMP but can not be [resolved](#device-resolution) to the equivalent monitored device. In this case, the device is shown twice: one node representing the monitored device and one node representing the LLDP/CDP discovered device.
 Use the "Hide _N_ Unmonitored Devices" toggle to hide the unmonitored nodes.
 
 ### Borderless or black nodes on the map 
