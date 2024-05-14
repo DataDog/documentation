@@ -108,11 +108,11 @@ Technology Partners write and host the implementation code that makes up the int
 
 ## Requirements
 All integrations must include the following:
-* An out-of-the-box Integration Dashboard
+* An out-of-the-box integration dashboard
 * 3 or more images for your tile
-* OAuth (for API Integrations only)
-* A log pipeline (Log Integrations only)
-* Recommended Monitor (Integrations sending in metrics)
+* OAuth (for API integrations only)
+* A log pipeline (for log integrations only)
+* Recommended Monitor (for integrations that sends in metrics)
 
 ## Further reading
 
