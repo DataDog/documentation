@@ -148,7 +148,11 @@ The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation
 
 ## Add your own performance timing
 
-On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing.
+On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility.
+
+### Relative to the page load
+
+The `addTiming` API provides you with a simple way to add extra performance timing.
 
 For example, you can add a timing when your hero image has appeared:
 
@@ -189,6 +193,42 @@ document.addEventListener("scroll", function handler() {
     });
 });
 
+```
+
+### Independent of the page load
+
+The `startDurationVital` / `stopDurationVital` API provides you with a way to measure a specific duration.
+
+For example, to measure the rendering of a list component:
+
+```javascript
+DD_RUM.startDurationVital('list_component_rendering')
+
+renderListComponent()
+
+DD_RUM.stopDurationVital('list_component_rendering')
+```
+
+Once the vital event is sent, the duration is accessible in milliseconds as `@vital.custom.<vital_name>`, for example: `@vital.custom.list_component_rendering`.
+
+You can also provide extra attributes or override the start and stop used through the API options:
+
+```javascript
+DD_RUM.startDurationVital('list_component_rendering', {
+  context: {
+    list_size: 100
+  },
+  startTime: Date.now()
+})
+
+renderListComponent()
+
+DD_RUM.stopDurationVital('list_component_rendering', {
+  context: {
+    rendering_status: 'success',
+  },
+  stopTime: Date.now()
+})
 ```
 
 ## Further Reading
