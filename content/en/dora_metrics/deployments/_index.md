@@ -36,7 +36,7 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for deployment events. See the respective documentation to set up the data source for your deployment events:" >}}
   {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
-  {{< nextlink href="/dora_metrics/deployments/deployment_api" >}}Deployment Event API or use the datadog-ci CLI{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/deployments/deployment_api" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Calculating deployment frequency
@@ -136,8 +136,7 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 
 ### Limitations
 
-- Change lead time breakdown metrics are only available for GitHub.
-- The retention of Git metadata is 1 month. Commits older than 1 month might not be taken into account when computing change lead time.
+- Change lead time stage breakdown metrics are only available for GitHub.
 - Change lead time is not available for the first deployment of a service that includes Git information.
 
 ## Calculating change failure rate
