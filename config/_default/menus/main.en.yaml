@@ -2188,6 +2188,11 @@ menu:
       parent: app_builder
       identifier: app_builder_components
       weight: 4
+    - name: JavaScript Expressions
+      url: service_management/app_builder/expressions/
+      parent: app_builder
+      identifier: app_builder_expressions
+      weight: 4  
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: app_builder
