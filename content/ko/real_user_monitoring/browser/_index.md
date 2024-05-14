@@ -4,7 +4,7 @@ aliases:
 further_reading:
 - link: /real_user_monitoring/explorer/
   tag: 설명서
-  text: RUM 탐색기에 대해 자세히 알아보기
+  text: RUM Explorer에 대해 자세히 알아보기
 - link: /logs/log_collection/javascript/
   tag: 설명서
   text: 로그를 위한 Datadog Browser SDK에 대해 자세히 알아보기
@@ -1827,7 +1827,7 @@ window.DD_RUM.init({
 })
 ```
 
-## 구성
+## 설정
 
 ### 초기화 파라미터
 
