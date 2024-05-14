@@ -43,7 +43,7 @@ The Entity Definition Schema is a structure that contains basic information abou
 v3.0 supports multiple kinds of entities. You can organize your systems using various components such as applications, services, queues, and datastores.
 
 ##### Enhanced relationship mapping
-With APM/USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected application topology to ensure a complete overview of how components interact within your applications.
+With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected application topology to ensure a complete overview of how components interact within your applications.
 
 ##### Inheritance of application metadata
 Components within an application automatically inherit the application's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
