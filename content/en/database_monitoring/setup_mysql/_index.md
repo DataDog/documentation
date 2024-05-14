@@ -5,10 +5,6 @@ description: Setting up Database Monitoring on a MySQL database
 disable_sidebar: true
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ### MySQL versions supported
 
 |  | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL with >26GB RAM | Azure |
