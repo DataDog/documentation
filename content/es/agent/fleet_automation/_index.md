@@ -49,7 +49,7 @@ Al seleccionar un Agent, obtendrás más información sobre él, como su configu
 La automatización de flotas incorpora varias funciones de Datadog, que se activan automáticamente en el Agent versión 7.49/6.49 o posterior. Para asegurarte de que tienes acceso a todas las funciones, actualiza tu Agent a la versión 7.49/6.49 o posterior.
 
 Si utilizas un Agent más antiguo, es posible que aún puedas activar las siguientes funciones de Datadog de forma individual:
-- **Configuración remota**: Para obtener información sobre las versiones compatibles del Agent y los pasos a seguir durante la configuración, consulta [Habilitación de la configuración remota][3].
+- **Configuración remota**: Para obtener información sobre las versiones compatibles del Agent y los pasos que debes seguir durante la configuración, consulta [Habilitación de la configuración remota][3].
 - **Configuración del Agent**: Necesitas tener la versión del Agent 7.39/6.39 o posterior para habilitar la pestaña de configuración del Agent. Esta se encuentra habilitada por defecto en las versiones del Agent 7.47.0/6.47.0 o posteriores. Para habilitar la configuración del Agent manualmente, define `inventories_configuration_enabled` en tu [archivo de configuración del Agent][2] como `true`. También puedes utilizar la variable de entorno`DD_INVENTORIES_CONFIGURATION_ENABLED`.
 - **Configuración de una integración del Agent**: La configuración de una integración del Agent está habilitada por defecto en las versiones 7.49/6.49 o posteriores del Agent. Para habilitar la configuración de una integración del Agent manualmente, define`inventories_checks_configuration_enabled` en tu [archivo de configuración del Agent][2] como `true`. También puedes utilizar la variable de entorno `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
 
@@ -69,8 +69,8 @@ La automatización de flotas está disponible para todos los usuarios de una org
 
 | Permiso | Descripción |
 |--------------|---------------|
-| `API keys read`| Determina cuáles usuarios pueden visualizar y buscar Agents por clave API. |
-| `Agent flare collection` | Determina cuáles usuarios pueden enviar flares de forma remota. |
+| `API keys read`| Determina qué usuarios pueden visualizar y buscar Agents por clave API. |
+| `Agent flare collection` | Determina qué usuarios pueden enviar flares de forma remota. |
 
 Para obtener información sobre la configuración de funciones y permisos, consulta [Control de acceso][5].
 
