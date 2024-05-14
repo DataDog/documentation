@@ -51,13 +51,15 @@ completion = oai_client.chat.completions.create(
 
 ### 3. Run the script
 
-Run the Python script with the following shell command, and a trace of the OpenAI call will be sent to Datadog:
+Run the Python script with the following shell command, sending a trace of the OpenAI call to Datadog:
 
 {{< code-block lang="shell" >}}
 DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart \ 
 DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \ 
 DD_LLMOBS_NO_APM=1 ddtrace-run python quickstart.py
 {{< /code-block >}}
+
+For details on the required environment variables, see [the SDK documentation][9].
 
 ### 4. View the trace
 
@@ -74,3 +76,4 @@ The trace you see is composed of a single LLM span. The `ddtrace-run` command au
 [6]: https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/api
+[9]: /tracing/llm_observability/sdk/#command-line-setup
