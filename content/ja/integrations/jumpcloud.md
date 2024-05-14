@@ -2,6 +2,7 @@
 categories:
 - event management
 - セキュリティ
+- ログの収集
 dependencies: []
 description: Jumpcloud
 doc_link: https://docs.datadoghq.com/integrations/jumpcloud/
@@ -21,7 +22,12 @@ team: web-integrations
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
+
+JumpCloud は、ユーザー認証とネットワーク管理を中心とした Active Directory と LDAP サービスの統合アプローチを提供するクラウドベースのディレクトリプラットフォームです。
+
+JumpCloud を使用すると、企業は、ソフトウェア、システム、およびネットワークへのユーザーアクセスを管理およびプロビジョニングし、監査証跡でコンプライアンスを実施し、シングルサインオン (SSO) を介して統一されたログインエクスペリエンスを提供することができます。クラウドネイティブプラットフォームである JumpCloud は、従来のディレクトリニーズにドメインレスセキュリティソリューションを提供することで、リモートで柔軟な IT 管理を可能にします。
 
 JumpCloud インテグレーションにより、以下のアクセスが提供されます。
 
@@ -41,31 +47,32 @@ JumpCloud インテグレーションにより、以下のアクセスが提供�
 
 - MDM イベント: MDM コマンドの結果に関するログ
 
-詳細については、[インサイト API 参照][1]をご覧ください。
+詳細については、[Datadog で JumpCloud ディレクトリを監視する][1]および [Insights API リファレンス][2]を参照してください。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 インストールは必要ありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 詳しくは、インテグレーションタイルを参照してください。JumpCloud 管理ポータルからの API キーが必要です。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### ログ管理
+### ワークフローの自動化
 
-ログは、単一の API エンドポイントから収集されます。[インサイト API][1] をご確認ください。
+ログは、単一の API エンドポイントから収集されます。[インサイト API][2] をご確認ください。
 
-### メトリクス
+### データセキュリティ
 
 JumpCloud インテグレーションには、メトリクスは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://docs.jumpcloud.com/api/insights/directory/1.0/index.html
-[2]: https://docs.datadoghq.com/ja/help/
+[1]: https://www.datadoghq.com/blog/monitor-jumpcloud-directory/
+[2]: https://docs.jumpcloud.com/api/insights/directory/1.0/index.html
+[3]: https://docs.datadoghq.com/ja/help/

@@ -16,7 +16,7 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
-- link: "/monitors/guide/change-alert"
+- link: "/monitors/types/change-alert"
   tag: "Documentation"
   text: "Troubleshoot change alert monitors"
 ---
@@ -50,7 +50,7 @@ This type of alert is useful to track spikes, drops, or slow changes in a metric
 
 For more information, see the [Change alert monitors][1] guide.
 
-[1]: /monitors/guide/change-alert/
+[1]: /monitors/types/change-alert/
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
