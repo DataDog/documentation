@@ -15,10 +15,11 @@ def add_tag():
     project = organization.fetch('projects').get(slug="documentation_loc")
 
     for collection_id in string_collection_ids:
-        slug = collection_id.split('.')[-1]
+        slug = collection_id.split(':')[-1]
         res = project.fetch('resources').get(slug=slug)
 
         # remove notranslate tags
+        print(f"Removing tags for {slug}")
         res_strings = transifex_api.ResourceString.filter(resource=res)
         for res_str in res_strings.data:
             tags = res_str.attributes.get('tags', [])
@@ -27,6 +28,7 @@ def add_tag():
         transifex_api.ResourceString.bulk_update(res_strings, ['tags'])
 
         # add notranslate tags again
+        print(f"Adding notranslate tags for {slug}")
         res_strings = transifex_api.ResourceString.filter(resource=res)
         for res_str in res_strings.data:
             key_parts = res_str.attributes.get('key', '').split('.')
