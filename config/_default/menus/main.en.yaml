@@ -1499,6 +1499,11 @@ menu:
       weight: 7
       parent: alerting
       identifier: monitor_settings
+    - name: Monitor Quality
+      url: monitors/quality/
+      weight: 8
+      parent: alerting
+      identifier: monitor_quality
     - name: Guides
       url: monitors/guide/
       weight: 10
