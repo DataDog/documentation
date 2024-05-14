@@ -79,6 +79,18 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
 
+#### Guidelines for specifying an ml_app name
+
+Accepted ml_app's must start with a letter and after that may contain the characters listed below:
+- Alphanumerics
+- Underscores
+- Minuses
+- Colons
+- Periods
+- Slashes
+
+The specified ml_app can be up to 200 characters long and support Unicode letters (which includes most character sets, including languages such as Japanese).
+
 ## Tracing spans
 
 To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). For a list of available span kinds, see the [Span Kinds documentation][8].

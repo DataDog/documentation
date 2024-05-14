@@ -203,6 +203,18 @@ Tags should be formatted as a list of strings (for example, `["user_handle:dog@g
 
 For more information about tags, see [Getting Started with Tags][3].
 
+#### Guidelines for specifying an ml_app name
+
+Accepted ml_app's must start with a letter and after that may contain the characters listed below:
+- Alphanumerics
+- Underscores
+- Minuses
+- Colons
+- Periods
+- Slashes
+
+The specified ml_app can be up to 200 characters long and support Unicode letters (which includes most character sets, including languages such as Japanese).
+
 ## Eval metrics API
 Use this endpoint to send evaluation metrics for a span to Datadog.
 
