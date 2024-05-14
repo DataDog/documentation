@@ -28,7 +28,7 @@ You can access low-level and immediate insights:
 - See what tests are failing and why.
 - See your last commit's test results.
 - View the total duration of your tests in your feature branch.
-- Find out if your commit introduces a new [flaky test][5] that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
+- Find out if your commit introduces a new [flaky test][4] that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
 
 You can also access high-level accumulation and trends:
 
@@ -56,7 +56,7 @@ Click on a branch to explore the test details page, which includes information a
 
 #### Test regressions
 
-[Test regressions][6] are evaluated per commit in an effort to tie performance regressions to specific code changes.
+[Test regressions][5] are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
 #### Investigate for more details
 
@@ -70,7 +70,7 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 
 ### Default Branches view
 
-The [Default Branches][7] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
+The [Default Branches][6] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 
 The Default Branches view shows similar information to the Branches view, but applied to the default branch.
 

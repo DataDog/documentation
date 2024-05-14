@@ -143,25 +143,25 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     ```
 
 4. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
-    ```java
+    ```kotlin
     val tracedHosts = listOf("example.com", "example.eu")
 
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(DatadogInterceptor(tracedHosts))
         .addNetworkInterceptor(TracingInterceptor(tracedHosts))
         .eventListenerFactory(DatadogEventListener.Factory())
-       .build()
+        .build()
     ```
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
 3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
-```java
+```kotlin
     val okHttpClient = OkHttpClient.Builder()
        .addInterceptor(DatadogInterceptor(traceSampler = RateBasedSampler(100f)))
        .build()
-  ```
+```
 
 **Note**:
 * `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
@@ -448,7 +448,7 @@ RUM supports several propagator types to connect resources with backends that ar
 1. Set up RUM to connect with APM as described above.
 
 2. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins and the tracing header type to use as follows:
-    ```java
+    ```kotlin
     val tracedHosts = mapOf("example.com" to setOf(TracingHeaderType.TRACECONTEXT),
                           "example.eu" to setOf(TracingHeaderType.DATADOG))
 
@@ -456,7 +456,7 @@ RUM supports several propagator types to connect resources with backends that ar
         .addInterceptor(DatadogInterceptor(tracedHosts))
         .addNetworkInterceptor(TracingInterceptor(tracedHosts))
         .eventListenerFactory(DatadogEventListener.Factory())
-       .build()
+        .build()
     ```
 
     `TracingHeaderType` is an enum representing the following tracing header types:
