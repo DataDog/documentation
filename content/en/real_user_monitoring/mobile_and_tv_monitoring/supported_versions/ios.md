@@ -93,8 +93,8 @@ The Datadog RUM SDK depends on the following third-party library:
 [1]: https://github.com/microsoft/plcrashreporter/issues/288
 [2]: https://developer.apple.com/xcode/
 [3]: https://developer.apple.com/news/?id=jd9wcyov
-[4]: /logs/log_collection/ios/?tab=swiftpackagemanagerspm
-[5]: /logs/log_collection/ios/?tab=cocoapods
-[6]: /logs/log_collection/ios/?tab=carthage
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=cocoapods#declare-the-sdk-as-a-dependency
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/?tab=carthage#declare-the-sdk-as-a-dependency
 [7]: https://github.com/DataDog/dd-sdk-ios/tree/develop/DatadogExtensions/Alamofire
 [8]: https://github.com/microsoft/plcrashreporter
