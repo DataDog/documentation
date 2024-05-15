@@ -60,7 +60,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 
 ### Locate the Cost and Usage Report
 
-If you have navigated away from the report that you created in the setup prerequisites section, follow AWS documentation to find and [view your Data Exports][4]. Select the legacy CUR export that you created, then select **Edit** to see the details of the export.
+If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][4]. Select the legacy CUR export that you created, then select **Edit** to see the details of the export.
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
@@ -73,7 +73,7 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 
 ### Configure access to the Cost and Usage Report
 
-Configure AWS to ensure Datadog has permissions to access the CUR and the S3 bucket it is stored in by [creating a policy][5] using the following JSON:
+[Create a policy][5] in AWS to ensure Datadog has permissions to access the CUR and the S3 bucket it is stored in. Use the following JSON:
 
 {{< code-block lang="yaml" collapsible="true" >}}
 {
