@@ -1,5 +1,5 @@
 ---
-title: Azure App Service - Linux Container with severless-init
+title: Instrument Azure App Service - Linux Containers with severless-init
 kind: guide
 further_reading:
 - link: "/integrations/azure_app_services/"
