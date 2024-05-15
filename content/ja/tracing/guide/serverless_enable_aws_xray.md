@@ -1,9 +1,9 @@
 ---
-title: AWS X-Ray トレーシングを有効にする
-kind: documentation
-description: AWS X-Ray で Lambda 関数をトレース
 aliases:
-  - /ja/tracing/serverless_functions/enable_aws_xray/
+- /ja/tracing/serverless_functions/enable_aws_xray/
+description: AWS X-Ray で Lambda 関数をトレース
+kind: documentation
+title: AWS X-Ray トレーシングを有効にする
 ---
 ## AWS X-Ray を有効にする
 

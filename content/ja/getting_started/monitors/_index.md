@@ -11,6 +11,12 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知
+- link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
+  tag: ブログ
+  text: GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: 効果的なモニターの作成に関するインタラクティブなセッションに参加できます
 kind: documentation
 title: モニターの概要
 ---
@@ -35,7 +41,7 @@ Datadog で[メトリクスモニター][5]を作成するには、メインナ�
 
 ディスク容量不足のアラートを取得するには、[Disk インテグレーション][6]から `system.disk.in_use` メトリクスを使用して、`host` と `device` のメトリクスの平均を計算します。
 
-{{< img src="getting_started/application/metric_query.png" alt="アラートのセットアップ"  >}}
+{{< img src="getting_started/application/metric_query.png" alt="アラートのセットアップ" >}}
 
 これを設定すると、メトリクスを報告している `host` と `device` ごとに個別のアラートをトリガーする `Multi Alert` がモニターによって自動的に更新されます。
 
@@ -45,7 +51,7 @@ Datadog で[メトリクスモニター][5]を作成するには、メインナ�
 
 ディスク容量不足のアラートを発生させるには、メトリクスがしきい値を`超えた`ときにモニターをトリガーする必要があります。しきい値はオプションで設定します。このメトリクスの場合、適切な値の範囲は `0` から `1` です。
 
-{{< img src="getting_started/application/monitor_configuration.png" alt="Create Monitor ページ内のメトリクスモニター構成設定、Multi Alert を選択し、メトリクスを報告している各ホストとデバイスの過去 5 分間のクエリの平均でアラートを出すように構成されています。Set alert conditions セクションは、評価された値が任意のホストまたはデバイスのしきい値を超えたときにトリガーするように構成されており、Alert しきい値は 0.9 に、Warning しきい値は 0.8 に設定され、データが不足している場合は通知しないようにモニターが構成されています"  >}}
+{{< img src="getting_started/application/monitor_configuration.png" alt="Create Monitor ページ内のメトリクスモニター構成設定、Multi Alert を選択し、メトリクスを報告している各ホストとデバイスの過去 5 分間のクエリの平均でアラートを出すように構成されています。Set alert conditions セクションは、評価された値が任意のホストまたはデバイスのしきい値を超えたときにトリガーするように構成されており、Alert しきい値は 0.9 に、Warning しきい値は 0.8 に設定され、データが不足している場合は通知しないようにモニターが構成されています" >}}
 
 この例では、このセクションの他の設定はデフォルトのままになっています。詳細については、[メトリクスモニター][7]のドキュメントを参照してください。
 
@@ -97,15 +103,15 @@ Steps to free up disk space:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/create/types/metric/
+[1]: /ja/monitors/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /ja/integrations/disk/
-[7]: /ja/monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[7]: /ja/monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /ja/monitors/notify/#conditional-variables
 [9]: /ja/account_management/rbac/
-[10]: /ja/mobile/
+[10]: /ja/service_management/mobile/
 [11]: https://apps.apple.com/app/datadog/id1391380318
 [12]: https://play.google.com/store/apps/details?id=com.datadog.app

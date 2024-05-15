@@ -1,7 +1,8 @@
 ---
-title: Docker ログ収集のトラブルシューティングガイド
 kind: documentation
+title: Docker ログ収集のトラブルシューティングガイド
 ---
+
 コンテナ Agent、またはローカルにインストールされたホスト Agent で Datadog に新しいコンテナ ログを送信する際に、よく障害となる問題がいくつかあります。新しいログを Datadog に送信する際に問題が発生した場合は、このガイドをトラブルシューティングにお役立てください。それでも問題が解決しない場合は、[Datadog サポートチーム][1]までお問い合わせください。
 
 ## Agent のステータスのチェック
@@ -30,7 +31,7 @@ kind: documentation
 
 3. ログ Agent のステータスが上記とは異なる場合、以下のセクションにあるトラブルシューティングのヒントを参照してください。
 
-4. 上記のようなステータスが表示されるが、ログを受信できない場合は、[ログ Agent のステータスがエラーを表示しない場合](#if-the-logs-agent-status-shows-no-errors)のセクションを参照してください。
+4. 上記のようなステータスが表示されるが、ログを受信できない場合は、[ステータス: エラーなし](#status-no-errors)のセクションを参照してください。
 
 ## ログ Agent
 
@@ -68,7 +69,31 @@ Logs Agent
 
 2. Agent が他のコンテナからログを収集するように構成するには、`DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 環境変数を `true` に設定してください。
 
+
+## ファイルからの Docker ログ収集の問題
+
+ディスクのログファイルが Agent によりアクセス可能であれば、Agent はバージョン 6.33.0/7.33.0 以降ではデフォルトでディスクのログファイルから Docker ログを収集します。この行動を無効にするには、`DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` を `false` に設定します。
+
+ログファイルパスにアクセスできない場合、Agent は Docker socket からコンテナを追跡します。Agent が Docker socket を使用して特定のコンテナからログを収集した場合、ログの重複送信を避けるため、それを継続します (Agent の再起動後も)。Agent にファイルからのログ収集を強制するには、`DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` を `true` に設定します。この設定は、ログが Datadog に重複して表示される原因になる場合があります。
+
+Docker コンテナのログをファイルから収集する際、Docker コンテナのログが保存されているディレクトリ (Linux では `/var/lib/docker/containers`) から読み込めない場合、Agent は Docker ソケットからの収集に頼ります。状況によっては、Datadog Agent でファイルからのログ収集ができない場合があります。この診断には、ログ Agent のステータスをチェックして、下記に類似するエラーを示すファイルタイプのエントリを探します。
+
+```text
+    - Type: file
+      Identifier: ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834
+      Path: /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log
+      Status: Error: file /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log does not exist
+```
+
+このステータスは、Agent が指定されたコンテナのログファイルを見つけられないことを意味します。この問題を解決するには、Docker コンテナログを含むフォルダーが Datadog Agent コンテナに正しく公開されていることを確認します。Linux では、Agent コンテナを起動するコマンドラインの `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` に該当します。Windows では `-v c:/programdata/docker/containers:c:/programdata/docker/containers:ro` です。基底のホストに相対的なディレクトリは、Docker Daemon の特定のコンフィギュレーションのため、異なる場合があることにご留意ください。これは、正しい Docker ボリュームのマッピングが保留となる問題ではありません。たとえば、Docker のデータディレクトリの場所が基底のホストで `/data/docker` に変わった場合は、`-v /data/docker/containers:/var/lib/docker/containers:ro` を使用します。
+
+収集されたログの単一行が分かれている場合は、Docker Daemon が [JSON ロギングドライバ](#your-containers-are-not-using-the-json-logging-driver)を使用していることを確認します。
+
+**注:** ホストに Agent をインストールする際、Agent には `/var/lib/docker/containers` へのアクセス権限がありません。したがって、ホストにインストールされた時、Agent は Docker socket からのログを収集します。
+
+
 ### ステータス: 保留中
+
 
 ログ Agent のステータスに "Status: Pending" と表示されることがあります。
 
@@ -112,12 +137,19 @@ Docker ソケットへのアクセスを可能にするには、`-v /var/run/doc
 
 #### ポート 10516 のアウトバウンドトラフィックがブロックされる
 
-Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
+Datadog Agent は、ポート 10516 を使って TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
 
-手動で接続をテストするには、次の Telnet または OpenSSL コマンドを実行します (ポート 10514 でも動作しますが、安全性は劣ります)。
+OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、接続を手動でテストすることができます。OpenSSL の場合は、以下のコマンドを実行します。
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
-* `telnet intake.logs.datadoghq.com 10514`
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+GnuTLS の場合、以下のコマンドを実行します。
+
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
+```
 
 さらに、次のようなログを送信します。
 
@@ -125,7 +157,7 @@ Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信し
 <API_KEY> これはテストメッセージです
 ```
 
-ポート 10514 または 10516 を開くことを選択できない場合は、`DD_LOGS_CONFIG_USE_HTTP` 環境変数を `true` に設定して、Datadog Agent が HTTPS 経由でログを送信するよう構成することができます。
+ポート 10516 を開くことを選択できない場合は、`DD_LOGS_CONFIG_USE_HTTP` 環境変数を `true` に設定して、Datadog Agent が HTTPS 経由でログを送信するよう構成することができます。
 
 #### コンテナに JSON ロギングドライバーが使用されていない
 

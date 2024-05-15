@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_datalakeanalytics
+- /fr/integrations/azure_datalakeanalytics
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data stores
 dependencies: []
 description: Surveillez des métriques clés Azure Data Lake Analytics.
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
@@ -22,33 +22,35 @@ public_title: Intégration Datadog/Microsoft Azure Data Lake Analytics
 short_description: Surveillez des métriques clés Azure Data Lake Analytics.
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure Data Lake Analytics est un service d'analytique à la demande qui simplifie la gestion des Big Data.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques de Data Lake Analytics.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_data_lake_analytics" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Azure Data Lake Analytics n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure Data Lake Analytics n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

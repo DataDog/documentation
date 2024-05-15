@@ -1,4 +1,7 @@
 ---
+core_product:
+- security
+- appsec
 title: Open Web Application Security Project (OWASP)
 ---
 

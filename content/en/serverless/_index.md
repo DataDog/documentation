@@ -21,6 +21,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-container-apps/"
   tag: "Blog"
   text: "Monitor Azure Container Apps with Datadog"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to learn more about serverless monitoring"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/543362476/rendition/1080p/file.mp4?loc=external&signature=4927d13b131aea1e3b4f77efca5af49bb509f5e7f1d6ca06a5267ba02a8c194a" poster="/images/poster/serverless.png" >}}
@@ -44,6 +50,16 @@ You can send [custom metrics][4] from a Lambda function by generating metrics fr
 With [Distributed Tracing][5], you can connect your serverless traces to metrics for a context-rich picture of your application's performance. The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
 
 [Deployment Tracking][6] helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
+
+### AWS Step Functions (Public Beta)
+
+AWS Step Functions is a serverless orchestration service that lets developers create and manage multi-step application workflows in AWS. 
+
+Monitor metrics and logs from the [AWS Step Functions Integration][13] to view cloud-native telemetry within the Serverless app view.
+
+Identify bugs and bottlenecks with [execution traces][14]. Traces for step functions can be generated from Step Function logs and provide granular execution information, including the state machine execution path, inputs and outputs for each step, and step execution length.
+
+Enhanced Step Function metrics, which appear in Datadog with the prefix `aws.states.enhanced`, are available at second granularity and generated directly within Datadog.
 
 ### Azure App Service
 
@@ -89,3 +105,5 @@ Datadog also provides a solution, now in public beta, for [instrumenting your Cl
 [10]: /serverless/azure_container_apps
 [11]: /integrations/google_cloud_platform/
 [12]: /serverless/google_cloud_run
+[13]: /integrations/amazon_step_functions
+[14]: /serverless/step_functions/installation

@@ -22,7 +22,7 @@ title: Rsyslog
 
 ## 概要
 
-Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集
+Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集します。
 
 ## セットアップ
 
@@ -41,16 +41,43 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 2. `/etc/rsyslog.d/datadog.conf` ファイルを作成します。
 
+{{< site-region region="us,eu" >}}
 
-3. `/etc/rsyslog.d/datadog.conf` に、以下の構成を追加します。監視したいログファイルごとに、別々の `input` 行を記述する必要があります。
+3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加し、`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
 
-    ```conf
-    ## For each file to send
-    input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
+   ```conf
+   ## For each file to send
+   input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
 
-    ## Set the Datadog Format to send the logs
-    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-    ```
+   ## Set the Datadog Format to send the logs
+   $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
+
+   ruleset(name="infiles") {
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
+   }
+   ```
+
+{{< /site-region >}}
+
+{{< site-region region="us3,us5,ap1,gov" >}}
+
+3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加します。`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+
+   ```conf
+   ## For each file to send
+   input(type="imfile" ruleset="infiles" Tag="<TAGS>" File="<PATH_TO_FILE1>")
+
+   ## Set the Datadog Format to send the logs
+   template(name="test_template" type="list") { constant(value="{") property(name="msg" outname="message" format="jsonfr") constant(value="}")}
+
+   # include the omhttp module
+   module(load="omhttp")
+
+   ruleset(name="infiles") { 
+      action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
+   }
+   ```
+{{< /site-region >}}
 
 4. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
    ```shell
@@ -138,7 +165,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 {{% /site-region %}}
 
 [1]: /ja/agent/logs/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Amazon Linux、CentOS、Red Hat" %}}
 1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
@@ -149,15 +176,43 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 2. `/etc/rsyslog.d/datadog.conf` ファイルを作成します。
 
-3. `/etc/rsyslog.d/datadog.conf` に、以下の構成を追加します。監視したいログファイルごとに、別々の `input` 行を記述する必要があります。
+{{< site-region region="us,eu" >}}
 
-    ```conf
-    ## For each file to send
-    input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
+3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加し、`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
 
-    ## Set the Datadog Format to send the logs
-    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-    ```
+   ```conf
+   ## For each file to send
+   input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
+
+   ## Set the Datadog Format to send the logs
+   $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
+
+   ruleset(name="infiles") {
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
+   }
+   ```
+
+{{< /site-region >}}
+
+{{< site-region region="us3,us5,ap1,gov" >}}
+
+3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加します。`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+
+   ```conf
+   ## For each file to send
+   input(type="imfile" ruleset="infiles" Tag="<TAGS>" File="<PATH_TO_FILE1>")
+
+   ## Set the Datadog Format to send the logs
+   template(name="test_template" type="list") { constant(value="{") property(name="msg" outname="message" format="jsonfr") constant(value="}")}
+
+   # include the omhttp module
+   module(load="omhttp")
+
+   ruleset(name="infiles") { 
+      action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
+   }
+   ```
+{{< /site-region >}}
 
 4. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
    ```shell
@@ -246,7 +301,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 {{% /site-region %}}
 
 [1]: /ja/agent/logs/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Fedora" %}}
 1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
@@ -258,15 +313,43 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 2. `/etc/rsyslog.d/datadog.conf` ファイルを作成します。
 
 
-3. `/etc/rsyslog.d/datadog.conf` に、以下の構成を追加します。監視したいログファイルごとに、別々の `input` 行を記述する必要があります。
+{{< site-region region="us,eu" >}}
 
-    ```conf
-    ## For each file to send
-    input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
+3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加し、`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
 
-    ## Set the Datadog Format to send the logs
-    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-    ```
+   ```conf
+   ## For each file to send
+   input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
+
+   ## Set the Datadog Format to send the logs
+   $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
+
+   ruleset(name="infiles") {
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
+   }
+   ```
+
+{{< /site-region >}}
+
+{{< site-region region="us3,us5,ap1,gov" >}}
+
+3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加します。`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+
+   ```conf
+   ## For each file to send
+   input(type="imfile" ruleset="infiles" Tag="<TAGS>" File="<PATH_TO_FILE1>")
+
+   ## Set the Datadog Format to send the logs
+   template(name="test_template" type="list") { constant(value="{") property(name="msg" outname="message" format="jsonfr") constant(value="}")}
+
+   # include the omhttp module
+   module(load="omhttp")
+
+   ruleset(name="infiles") { 
+      action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
+   }
+   ```
+{{< /site-region >}}
 
 4. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
    ```shell
@@ -355,7 +438,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 {{% /site-region %}}
 
 [1]: /ja/agent/logs/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

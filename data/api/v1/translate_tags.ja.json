@@ -117,7 +117,7 @@
   },
   "synthetics": {
     "name": "Synthetics",
-    "description": "Datadog Synthetics は、シミュレートされたユーザーリクエストとブラウザレンダリングを使用して、アップタイムを確保し、地域の問題を特定し、アプリケーションのパフォーマンスを追跡します。Datadog Synthetics テストには、[API テスト](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)と[ブラウザテスト](https://docs.datadoghq.com/synthetics/browser_tests)の 2 つの異なる種類があります。Datadog の API を使用して、両方のテストタイプをプログラムで管理できます。\n\nSynthetics の詳細については、[Synthetics の概要](https://docs.datadoghq.com/synthetics/)を参照してください。"
+    "description": "Datadog Synthetic Monitoring は、シミュレートされたユーザーリクエストとブラウザレンダリングを使用して、アップタイムを確保し、地域の問題を特定し、アプリケーションのパフォーマンスを追跡します。Synthetic テストには、[API テスト](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)と[ブラウザテスト](https://docs.datadoghq.com/synthetics/browser_tests)の 2 つの異なる種類があります。Datadog の API を使用して、両方のテストタイプをプログラムで管理できます。\n\n詳細については、[Synthetic Monitoring のドキュメント](https://docs.datadoghq.com/synthetics/)を参照してください。"
   },
   "tags": {
     "name": "タグ",

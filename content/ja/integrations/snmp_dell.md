@@ -30,7 +30,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp_dell
-oauth: {}
 public_title: Dell Inc.
 short_description: Dell のデバイスからメトリクスを収集します。
 supported_os:

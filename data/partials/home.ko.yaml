@@ -1,0 +1,146 @@
+guides:
+- desc: Datadog으로 데이터를 전송하는 호스트에서 이벤트와 메트릭을 수집하세요.
+  link: getting_started/agent/
+  link_text: 에이전트 시작하기
+  title: 에이전트 설치하기
+- desc: 기본으로 제공되는 600개 이상의 통합을 통해 메트릭, 트레이스, 로그를 수집하여 Datadog으로 전송하세요.
+  link: getting_started/integrations/
+  link_text: 통합 시작하기
+  title: 통합 설정하기
+- desc: Datadog에서 수집한 데이터를 시각화하고 대시보드, 알림, 모니터 등을 생성하세요.
+  link: getting_started/application/
+  link_text: Datadog 시작하기
+  title: App에서 시작하기
+heading: Datadog에 오신 것을 환영합니다!
+nav_sections:
+- nav_section:
+  - name: 플랫폼
+  - navtiles:
+    - desc: 데이터 수집 및 전송을 위한 Datadog 에이전트를 설치하고 설정하세요.
+      icon: agent-fill
+      link: agent/
+      title: 에이전트
+    - desc: 애플리케이션, 서비스, 시스템에 관한 데이터를 수집하세요.
+      icon: integrations
+      link: integrations/
+      title: 통합
+    - desc: OpenTelemetry 메트릭, 로그, 트레이스를 Datadog으로 전송하세요.
+      icon: open-telemetry
+      link: opentelemetry/
+      title: OpenTelemetry
+    - desc: 데이터를 시각화하고 분석하여 인사이트를 생성하세요.
+      icon: dashboard
+      link: dashboards/
+      title: 대시보드
+    - desc: 호스트, 컨테이너, 프로세스 및 서버리스 기능을 추적하세요.
+      icon: host-map
+      link: infrastructure/
+      title: 인프라스트럭처
+    - desc: 애플리케이션 및 인프라스트럭처에서 중요한 변경 사항 및 알림을 추적하세요.
+      icon: events
+      link: events/
+      title: '이벤트 '
+    - desc: 메트릭에 대한 배포를 탐색하고 생성하세요.
+      icon: metric
+      link: metrics/
+      title: 메트릭
+    - desc: 모니터와 알림을 생성, 편집 및 관리하세요.
+      icon: monitor
+      link: monitors/
+      title: 경고
+    - desc: 즉시 사용 가능한 성능 대시보드 및 분산된 트레이스를 탐색해 보세요.
+      icon: apm
+      link: tracing/
+      title: APM
+    - desc: 성능 스냅샷을 비교하고 병목 현상에 대해 자세히 살펴봅니다.
+      icon: profiling-1
+      link: profiler/
+      title: 지속적인 프로파일러
+    - desc: 수집된 로그를 처리하고 모니터링 및 보관합니다.
+      icon: log
+      link: logs/
+      title: 로그 관리
+    - desc: 애플리케이션 및 인프라스트럭처에서 위협과 잘못된 설정을 감지합니다.
+      icon: security-platform
+      link: security/
+      title: 보안
+    - desc: 가동 시간을 보장하고, 지역적 문제를 제기하며, 애플리케이션 성능을 테스트합니다.
+      icon: synthetics
+      link: synthetics/
+      title: Synthetic 모니터링
+    - desc: CI/CD 제공 업체와 코딩 없는 통합 및 end-to-end 테스트를 수행합니다.
+      icon: continuous-testing
+      link: continuous_testing/
+      title: 지속적인 테스트
+    - desc: 애플리케이션 사용자 경험을 수집하고 관찰 및 분석하세요.
+      icon: rum
+      link: real_user_monitoring/
+      title: 실제 사용자 모니터링
+    - desc: 태그가 지정된 개체 통해 네트워크 트래픽에 대한 데이터를 수집하고 그래프로 표시하세요.
+      icon: network
+      link: network_monitoring/
+      title: 네트워크 모니터링
+    - desc: 서버리스 애플리케이션의 성능 문제를 감지하고 해결합니다.
+      icon: serverless
+      link: serverless/
+      title: 서버리스
+    - desc: 모바일 기기에서 Datadog 알림,  인시던트 등을 확인합니다.
+      icon: mobile
+      link: mobile/
+      title: 모바일 애플리케이션
+    - desc: 애플리케이션 및 인프라스트럭처의 이상 징후를 감지하고 표면화합니다.
+      icon: watchdog
+      link: watchdog/
+      title: Datadog Watchdog
+    - desc: CI 파이프라인에 대한 테스트 메트릭, 빌드 결과 및 파이프라인 실행을 확인합니다.
+      icon: ci
+      link: continuous_integration/
+      title: CI 가시성
+    - desc: 통합된 관찰 가능성 및 비용 데이터로 클라우드 지출을 관리하세요.
+      icon: cloud-cost-management
+      link: cloud_cost_management/
+      title: 클라우드 비용 관리
+    - desc: 강화된 대시보드, 쿼리 메트릭 및 쿼리 샘플을 확인하세요.
+      icon: database-2
+      link: database_monitoring/
+      title: 데이터베이스 모니터링
+    - desc: 텔레메트리 파이프라인을 관리하고 모니터링합니다.
+      icon: pipelines
+      link: observability_pipelines/
+      title: 관찰 가능성 파이프라인
+    - desc: 코드 변경 없이 서비스를 검색하고 매핑하며, 모니터링합니다.
+      icon: usm
+      link: universal_service_monitoring/
+      title: 유니버설 서비스 모니터링
+- nav_section:
+  - name: 설정
+  - navtiles:
+    - desc: Datadog API를 사용하세요.
+      icon: api
+      link: api/latest/
+      title: API
+    - desc: 조직 기반 설정 및 빌링에 액세스합니다.
+      icon: cog-2
+      link: account_management/
+      title: 계정 관리
+    - desc: Datadog의 데이터 보호에 대해 알아보세요.
+      icon: security-lock
+      link: data_security/
+      title: 데이터 보안
+    - desc: Datadog 플랫폼에서 개발합니다.
+      icon: dev-code
+      link: developers/
+      title: 개발자
+popular_searches:
+- link: api/
+  title: "API \b설명서"
+  weight: 10
+- link: getting_started/agent/
+  title: 에이전트 설치
+  weight: 20
+- link: logs/log_collection/
+  title: 로그 수집
+  weight: 30
+- link: integrations/
+  title: 통합 설정
+  weight: 40

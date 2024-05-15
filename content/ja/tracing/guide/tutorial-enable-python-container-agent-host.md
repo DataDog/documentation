@@ -415,7 +415,7 @@ def create_note(self, desc, add_date=None):
 [2]: /ja/tracing/trace_collection/dd_libraries/python/
 [3]: /ja/account_management/api-app-keys/
 [4]: /ja/tracing/trace_collection/compatibility/python/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /ja/getting_started/site/
 [7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer

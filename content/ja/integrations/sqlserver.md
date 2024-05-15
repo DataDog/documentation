@@ -41,12 +41,11 @@ draft: false
 git_integration_title: sqlserver
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 10.1.2
+integration_version: 14.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sqlserver
-oauth: {}
 public_title: SQL Server
 short_description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
 supported_os:
@@ -75,23 +74,27 @@ tile:
 
 ## 概要
 
-SQL Server チェックを使用して、SQL Server インスタンスのパフォーマンスを追跡できます。ユーザー接続の数、SQL のコンパイル率などのメトリクスを収集できます。
+SQL Server インテグレーションを使用して、SQL Server インスタンスのパフォーマンスを追跡できます。ユーザー接続の数、SQL のコンパイル率などのメトリクスを収集できます。
 
-チェックでカスタムクエリを実行することで、独自のメトリクスを作成することもできます。
+[データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
 
 ## セットアップ
 
-<div class="alert alert-info">このページでは、SQL Server Agent のインテグレーションについて説明します。SQL Server のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
+<div class="alert alert-info">このページでは、SQL Server Agent の標準インテグレーションについて説明します。SQL Server のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### APM に Datadog Agent を構成する
+### インストール
 
-SQL Server チェックは [Datadog Agent][2] パッケージに含まれています。SQL Server インスタンスに追加でインストールする必要はありません。
+SQL Server チェックは [Datadog Agent][3] パッケージに含まれています。SQL Server インスタンスに追加でインストールする必要はありません。
 
 サーバーのプロパティで "SQL Server and Windows Authentication mode" を有効にして、SQL Server インスタンスが SQL Server 認証をサポートするよう、次のように指定します。
 
 _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode_
 
 ### 前提条件
+
+**注**: Database Monitoring for SQL Server をインストールするには、[ドキュメントサイト][4]でホスティングソリューションを選択し、手順を確認してください。
+
+標準のインテグレーションを単体でインストールする場合のみ、このガイドの下記の手順に進んでください。
 
 1. 読み取り専用ログインを作成してサーバーに接続します。
 
@@ -102,13 +105,13 @@ _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode
         GRANT VIEW SERVER STATE to datadog;
     ```
 
-   データベースごとにファイルサイズのメトリクスを収集するには、以下を実行して、作成したユーザー (`datadog`) にデータベースに[接続権限アクセス][3]があることを確認します。
+   データベースごとにファイルサイズのメトリクスを収集するには、以下を実行して、作成したユーザー (`datadog`) にデータベースに[接続権限アクセス][5]があることを確認します。
 
    ```SQL
        GRANT CONNECT ANY DATABASE to datadog; 
    ```
 
-2. SQL Server インスタンスが、特定の固定ポートをリッスンしていることを確認します。デフォルトでは、名前付きインスタンスおよび SQL Server Express は動的ポート用に構成されています。詳細は、[Microsoft のドキュメント][4] をご参照ください。
+2. SQL Server インスタンスが、特定の固定ポートをリッスンしていることを確認します。デフォルトでは、名前付きインスタンスおよび SQL Server Express は動的ポート用に構成されています。詳細は、[Microsoft のドキュメント][6]をご参照ください。
 
 3. (AlwaysOn および `sys.master_files` メトリクスの場合に必要metrics) AlwaysOn および `sys.master_files` メトリクスを収集するには、以下の追加権限を付与します。
 
@@ -222,7 +225,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションの `sqlserver` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションの `sqlserver` を探します。
 
 ## 収集データ
 
@@ -242,25 +245,29 @@ SQL Server チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
-- [Datadog を使用した Azure SQL Database の監視][7]
-- [SQL Server 監視のためのキーメトリクス][8]
-- [SQL Server 監視ツール][9]
-- [Datadog を使用した SQL Server パフォーマンスの監視][10]
-- [カスタム SQL Server メトリクスによる詳細な監視][11]
+- [Datadog を使用した Azure SQL Database の監視][9]
+- [SQL Server 監視のためのキーメトリクス][10]
+- [SQL Server 監視ツール][11]
+- [Datadog を使用した SQL Server パフォーマンスの監視][12]
+- [カスタム SQL Server メトリクスによる詳細な監視][13]
+- [Datadog で SQL ワークロードの Azure 移行を戦略化する][14]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/sqlserver/images/sqlserver_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.microsoft.com/en-us/sql/t-sql/statements/grant-server-permissions-transact-sql?view=sql-server-ver15
-[4]: https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
-[8]: https://www.datadoghq.com/blog/sql-server-monitoring
-[9]: https://www.datadoghq.com/blog/sql-server-monitoring-tools
-[10]: https://www.datadoghq.com/blog/sql-server-performance
-[11]: https://www.datadoghq.com/blog/sql-server-metrics
+[2]: https://docs.datadoghq.com/ja/database_monitoring/
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://docs.datadoghq.com/ja/database_monitoring/#sqlserver
+[5]: https://docs.microsoft.com/en-us/sql/t-sql/statements/grant-server-permissions-transact-sql?view=sql-server-ver15
+[6]: https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
+[10]: https://www.datadoghq.com/blog/sql-server-monitoring
+[11]: https://www.datadoghq.com/blog/sql-server-monitoring-tools
+[12]: https://www.datadoghq.com/blog/sql-server-performance
+[13]: https://www.datadoghq.com/blog/sql-server-metrics
+[14]: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/

@@ -28,7 +28,7 @@ L'interface graphique de Datadog Agent Manager repose sur l'utilisation d'un nav
 | Firefox       | 38                           |                         |
 | Chrome        | 60                           |                         |
 | Safari        | 8                            |                         |
-| IOS           | 12                           |  Safari mobile          |
+| iOS           | 12                           |  Safari mobile          |
 
 ### Démarrer Datadog Agent Manager
 

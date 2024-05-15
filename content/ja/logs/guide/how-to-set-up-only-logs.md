@@ -34,7 +34,7 @@ title: Datadog Agent をログ収集のみに使用
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-コンテナ Agent を使用している場合は、環境変数 `DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
+Docker コンテナ化された Agent を使用している場合は、`DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` の環境変数を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
 
 ```shell
 docker run -d --name datadog-agent \
@@ -58,132 +58,21 @@ docker run -d --name datadog-agent \
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Agent を Kubernetes にデプロイしている場合は、環境変数 `DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
-
-Datadog サイトに `DD_SITE` を設定します: {{< region-param key="dd_site" code="true">}}
+Agent を Kubernetes にデプロイしている場合は、`DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` の環境変数を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
 
 ```yaml
-# datadog-agent.yaml
-
-# Kubernetes シークレットを使用して Datadog API キーを構成するには、このセクションのコメントを解除します
-
-# apiVersion: v1
-# kind: Secret
-# metadata:
-#   name: datadog-secret
-#   labels:
-#     app: "datadog"
-# type: Opaque
-# data:
-#   api-key: "<YOUR_BASE64_ENCODED_API_KEY>"
----
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  name: datadog-agent
-  namespace: default
-spec:
-  selector:
-    matchLabels:
-      app: datadog-agent
-  template:
-    metadata:
-      labels:
-        app: datadog-agent
-      name: datadog-agent
-    spec:
-      serviceAccountName: datadog-agent
-      containers:
-      - image: gcr.io/datadoghq/agent:latest
-        imagePullPolicy: Always
-        name: datadog-agent
-        ports:
-          - containerPort: 8125
-            ## DogStatsD 経由のカスタムメトリクス - このセクションのコメントを解除して、
-            ## カスタムメトリクスコレクションを有効にします。
-            ## DD_DOGSTATSD_NON_LOCAL_TRAFFIC を "true" に設定して、
-            ## 他のコンテナから StatsD メトリクスを収集します。
-            #
-            # hostPort: 8125
-            name: dogstatsdport
-            protocol: UDP
-        env:
-          ## 組織に関連する Datadog API キーを設定します
-          ## Kubernetes Secret を使用する場合、次の環境変数を使用します:
-          ## - {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }} - {name: DD_API_KEY, value: "<DATADOG_API_KEY>"}
-
-          ## DD_SITE を Datadog サイトに設定します
-          - {name: DD_SITE, value: "<YOUR_DD_SITE>"}
-
-          ## Docker ソケットへのパス - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock} - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock} 
-
-          ## StatsD の収集を許可するには、DD_DOGSTATSD_NON_LOCAL_TRAFFIC を true に設定します。
-          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
-          - {name: KUBERNETES, value: "true"}
-          - {name: DD_HEALTH_PORT, value: "5555"}
-          - {name: DD_COLLECT_KUBERNETES_EVENTS, value: "true" }
-          - {name: DD_LEADER_ELECTION, value: "true" }
-          - {name: DD_APM_ENABLED, value: "true" }
-
-          ## ログ収集の有効化
-          - {name: DD_LOGS_ENABLED, value: "true"}
-          - {name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL, value: "true"}
-          - {name: DD_CONTAINER_EXCLUDE, value: "name:datadog-agent"}
-
-          ## ログのみを送信
-          - {name: DD_ENABLE_PAYLOADS_EVENTS, value: "false"}
-          - {name: DD_ENABLE_PAYLOADS_SERIES, value: "false"}
-          - {name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS, value: "false"}
-          - {name: DD_ENABLE_PAYLOADS_SKETCHES, value: "false"}
-
-          - name: DD_KUBERNETES_KUBELET_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-
-        ## これらは、リクエストと制限の最小推奨値です。
-        ## Agent が必要とするリソースの量は、以下によって異なります。
-        ## * チェックの数
-        ## * 有効なインテグレーションの数
-        ## * 有効な機能の数
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "200m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
-        volumeMounts:
-          - {name: dockersocketdir, mountPath: /host/var/run}
-          - {name: procdir, mountPath: /host/proc, readOnly: true}
-          - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
-          - {name: s6-run, mountPath: /var/run/s6}
-          - {name: logpodpath, mountPath: /var/log/pods}
-          - {name: pointdir, mountPath: /opt/datadog-agent/run}
-          ## Docker ランタイムディレクトリ、このパスをコンテナランタイムログディレクトリに
-          ## 置き換えるか、`/var/log/pods` が他のディレクトリへのシンボリックリンクでない
-          ## 場合、この構成を削除します。
-          - {name: logcontainerpath, mountPath: /var/lib/docker/containers}
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 5555
-          initialDelaySeconds: 15
-          periodSeconds: 15
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-      volumes:
-        - {name: dockersocketdir, hostPath: {path: /var/run}}
-        - {name: procdir, hostPath: {path: /proc}}
-        - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
-        - {name: s6-run, emptyDir: {}}
-        - {name: logpodpath, hostPath: {path: /var/log/pods}}
-        - {name: pointdir, mountPath: /opt/datadog-agent/run}
-        ## Docker ランタイムディレクトリ、このパスをコンテナランタイムログディレクトリに
-        ## 置き換えるか、`/var/log/pods` が他のディレクトリへのシンボリックリンクでない
-        ## 場合、この構成を削除します。
-        - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
+ ## ログのみ送信
+ datadog:
+ [...]
+   env:
+      - name: DD_ENABLE_PAYLOADS_EVENTS
+        value: "false"
+      - name: DD_ENABLE_PAYLOADS_SERIES
+        value: "false"
+      - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
+        value: "false"
+      - name: DD_ENABLE_PAYLOADS_SKETCHES
+        value: "false"
 ```
 
 {{% /tab %}}

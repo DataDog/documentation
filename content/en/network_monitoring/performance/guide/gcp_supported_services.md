@@ -1,5 +1,5 @@
 ---
-title: NPM GCP Supported Services
+title: NPM Google Cloud Supported Services
 kind: guide
 npm_provider: gcp
 further_reading:

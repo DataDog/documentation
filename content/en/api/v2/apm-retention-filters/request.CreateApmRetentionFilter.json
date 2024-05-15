@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "filter": {
+        "query": "@http.status_code:200 service:my-service"
+      },
+      "filter_type": "spans-sampling-processor",
+      "name": "my retention filter",
+      "rate": 1.0
+    },
+    "type": "apm_retention_filter"
+  }
+}

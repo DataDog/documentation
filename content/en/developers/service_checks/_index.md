@@ -38,21 +38,19 @@ Service checks can be visualized and used in 3 Datadog sections:
 
 ### Check summary
 
-Click **Monitors** > **Check Summary** to see the [Check Summary][1] page.
+The [Check Summary][1] page lists all checks reported across your infrastructure in the past day. Select a check to get insights on the status and tags associated with the check.
 
-{{< img src="developers/service_checks/check_summary.png" alt="Check summary"  >}}
-
-This is a list of all your checks and their statuses, reporting across your infrastructure in the past day. Select a check to get insights on the number of distinct checks for each of its associated tags.
+{{< img src="developers/service_checks/check_summary.png" alt="Check summary" >}}
 
 ### Screenboards
 
 You can visualize service checks with a **Check status** widget in a screenboard:
 
-{{< img src="developers/service_checks/check_status_widget.png" alt="Check status widget"  >}}
+{{< img src="developers/service_checks/check_status_widget.png" alt="Check status widget" >}}
 
 After clicking on the **Check status** widget icon, the following pop-up appears:
 
-{{< img src="developers/service_checks/check_widget_config.png" alt="Check widget config"  >}}
+{{< img src="developers/service_checks/check_widget_config.png" alt="Check widget config" >}}
 
 In this form, you can:
 
@@ -63,10 +61,9 @@ In this form, you can:
 
 ## Service check monitor
 
-Even if you can't graph a service check over time as you would for metrics, you can still monitor it.
-Go to **Monitors** > **New Monitor** and select **Service Check**:
+Even if you can't graph a service check over time as you would for metrics, you can still monitor it with a [Service Check Monitor][3].
 
-{{< img src="developers/service_checks/service_check_monitor.png" alt="Check monitor"  >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="Check monitor" >}}
 
 In this form, you can:
 
@@ -80,6 +77,6 @@ For more information on creating a service check see [Service Check Monitor][5]
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
-[3]: https://app.datadoghq.com/monitors#create/custom
+[3]: https://app.datadoghq.com/monitors/create/custom
 [4]: /monitors/notify/
 [5]: /monitors/types/service_check/

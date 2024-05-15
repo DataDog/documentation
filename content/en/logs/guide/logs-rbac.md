@@ -56,7 +56,7 @@ This guide explores the following:
 
 Tag ACME incoming logs with a `team:acme` tag. This is useful for triaging your logs as they flow through Datadog.
 
-{{< img src="logs/guide/rbac/team_tag.png" alt="Apply a team tag to your logs"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/team_tag.png" alt="Apply a team tag to your logs" style="width:60%;">}}
 
 For example, in the context of Docker Log Collection, attach the `team:acme` tag to logs flowing from that container with [Docker labels as tags][2]. Refer to the [Tagging Section][3] for a more general overview.
 
@@ -79,7 +79,7 @@ API keys and app keys are available in your [Datadog account API key page][9]. M
 
 Make sure that the app key you use is attached to your own user, or to a user who has similar permissions.
 
-{{< img src="logs/guide/rbac/app-api_keys.png" alt="Check API and APP Keys"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/app-api_keys.png" alt="Check API and APP Keys" style="width:60%;">}}
 
 Throughout this guide, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively. This guide also assumes that you have a terminal with `CURL`.
 
@@ -203,8 +203,8 @@ Now that your roles are configured with their permissions, assign these roles to
 
 In the [Team Section][1] of Datadog, go to the User tab. Pick a user and assign them either the `ACME Admin` or `ACME User` role, in addition to any roles they may already be assigned. More details on user management are available in the [Account Management][2] section.
 
-{{< img src="logs/guide/rbac/assign_user.png" alt="Delete invite on the grid view"  style="width:60%;">}}
-{{< img src="logs/guide/rbac/assign_user2.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user.png" alt="Delete invite on the grid view" style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user2.png" alt="Delete invite on the grid view" style="width:60%;">}}
 
 [1]: https://app.datadoghq.com/access/users
 [2]: /account_management/users/
@@ -271,7 +271,7 @@ Use the [Data Access page][1] in the Datadog App to:
 * Create a `team:acme` restriction query.
 * Assign `ACME Admin` and `ACME User` roles to that restriction query.
 
-{{< img src="logs/guide/rbac/restriction_queries.png" alt="Restrict access to logs"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/restriction_queries.png" alt="Restrict access to logs" style="width:60%;">}}
 
 Refer to the [`logs_read_data` permission section][1] for more information.
 
@@ -345,13 +345,13 @@ As a good practice for maximum granularity and easier maintainability, you shoul
 
 Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][14] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
 
-{{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline" style="width:60%;">}}
 
 ### Log indexes
 
 Create one or multiple [indexes][15] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][16] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
 
-{{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes" style="width:60%;">}}
 
 ### Log archives
 
@@ -359,7 +359,7 @@ Create one or multiple [indexes][15] for `team:acme` logs. Multiple indexes can 
 
 Create one or multiple [archives][17] for `team:acme` logs. Assign the [Read Archives][18] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s).
 
-{{< img src="logs/guide/rbac/archives.png" alt="ACME Archives"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/archives.png" alt="ACME Archives" style="width:60%;">}}
 
 Multiple archives can be useful if you have different lifecycle policies depending on logs (for instance, for production and staging logs). Keep in mind that rehydration is intended to work for only one archive at a time, though you can trigger multiple rehydrations on multiple archives at once.
 
@@ -369,11 +369,11 @@ Assign the [Write Historical View][19] permission to members of `ACME Admin`. Th
 
 **Optionally**, set up your Log Archives so that all logs rehydrated from that archive will eventually have the `team:acme` tag, whether or not they had the tag in the archive. [This option][20] enables you to enforce consistency with your existing restriction policies, as well as to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
 
-{{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration" style="width:60%;">}}
 
 **Note**: **If** you use the [Legacy Read Index Data Permission][21], add the `ACME User` role to ACME archive(s) alongside the `ACME Admin` role. As `ACME User` role members don't have the permission to perform rehydration, this does not give them sensitive permissions. However, this automatically scopes the Read Index Data permission to the resulting historical view, so that they can access the content.
 
-{{< img src="logs/guide/rbac/rehydration_index.png" alt="Rehydration Index Permission"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/rehydration_index.png" alt="Rehydration Index Permission" style="width:60%;">}}
 
 ## Further reading
 

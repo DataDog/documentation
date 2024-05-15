@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: twemproxy
-oauth: {}
 public_title: Twemproxy
 short_description: twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け
 supported_os:
@@ -69,7 +68,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含まれています。Twemproxy サーバーに追加でインストールする必要はありません。
 

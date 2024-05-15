@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: stormforge-stormforge-license
 app_uuid: 8de4db8e-f741-4168-9ef2-4594623b3605
 assets: {}
@@ -28,7 +30,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: stormforge_license
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

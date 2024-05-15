@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_datalakestore
+- /fr/integrations/azure_datalakestore
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data stores
 dependencies: []
 description: Surveillez des métriques clés Azure Data Lake Store.
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
@@ -22,35 +22,37 @@ public_title: Intégration Datadog/Microsoft Azure Data Lake Store
 short_description: Surveillez des métriques Azure Data Lake Store.
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Azure Data Lake Store est une solution Data Lake sans limite qui améliore l'analytique Big Data.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques de Data Lake Store.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_data_lake_store" >}}
 
 
 **Remarque**: cette intégration permet uniquement la collecte de métriques pour Data Lake Storage Gen1. Data Lake Storage Gen2 étant basé sur Azure Blob Storage, les métriques associées peuvent être visualisées sur Datadog en définissant l'espace de nommage Blob Storage suivant : `azure.storage_storageaccounts_blobservices.*`. Pour en savoir plus, consultez la documentation sur [Azure Data Lake Storage Gen2][3].
 
-### Événements
+### Aide
 
 L'intégration Azure Data Lake Store n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure Data Lake Store n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 

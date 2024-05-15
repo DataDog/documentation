@@ -1,11 +1,10 @@
-site_name: Datadogでインフラストラクチャーとアプリケーションのモニタリング
-meta_image: datadog_logo_share_tt.png
-meta_title: Datadogを始めてみましょう
-meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
-disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
-  desktop_message: 大規模なデータ保護を実現する Sensitive Data Scanner を発表！
-  mobile_message: Datadog Sensitive Data Scanner を発表！
-  external_link: https://www.datadoghq.com/product/sensitive-data-scanner/
+  desktop_message: Read the 2024 State of DevSecOps Study!
+  external_link: https://www.datadoghq.com/state-of-devsecops/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-security-ww-docs-announcement-report-devsecops2024
+  mobile_message: Read the State of DevSecOps Study!
+disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 exclude: []
+meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
+meta_title: Datadogを始めてみましょう
+site_name: Datadogでインフラストラクチャーとアプリケーションのモニタリング
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。

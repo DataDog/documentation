@@ -3,20 +3,20 @@ aliases:
 - /fr/tracing/profiling/intro_to_profiling
 - /fr/tracing/profiler/intro_to_profiling
 further_reading:
-- link: /tracing/profiler/
+- link: /profiler/
   tag: Documentation
   text: Profileur en continu
-- link: /tracing/profiler/enabling/
+- link: /profiler/enabling/
   tag: Documentation
   text: Activer le profileur
-- link: https://learn.datadoghq.com/course/view.php?id=18
+- link: https://learn.datadoghq.com/courses/intro-to-apm
   tag: Centre d'apprentissage
-  text: Présentation de Datadog
+  text: Présentation d'Application Performance Monitoring
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
-  tags: Blog
+  tag: GitHub
   text: Comment nous avons optimisé notre application Akka grâce au profileur en continu
     Datadog
-kind: Documentation
+kind: documentation
 title: Premiers pas avec le profileur en continu
 ---
 
@@ -67,7 +67,7 @@ docker-compose up -d
 Une fois les conteneurs créés et exécutés, vous pouvez accéder à un conteneur de testing afin de prendre en main les fonctionnalités de profiling :
 
 ```
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ```
 
 Utilisez l'API avec :
@@ -108,47 +108,47 @@ Percentage of the requests served within a certain time (ms)
 
 Utilisez la [fonctionnalité de recherche de profil][6] pour trouver le profil couvrant la période durant laquelle vous avez généré du trafic. Le chargement de la recherche peut prendre une à deux minutes. Le profil avec le test de charge possède une utilisation élevée du CPU :
 
-{{< img src="tracing/profiling/intro_to_profiling/list.png" alt="Liste des profils" style="width:80%;">}}
+{{< img src="profiler/intro_to_profiling/list.png" alt="Liste des profils" style="width:80%;">}}
 
 Lorsque vous ouvrez le profil, une visualisation s'affiche :
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph.png" alt="Flamegraph">}}
+{{< img src="profiler/intro_to_profiling/flame_graph.png" alt="Flamegraph">}}
 
 Il s'agit d'un flamegraph. Parmi les informations affichées, vous pouvez notamment voir l'utilisation du CPU par méthode (puisqu'il s'agit d'un profil CPU), ainsi que le type d'appel de chaque méthode. Par exemple, grâce à la deuxième ligne en partant du haut, vous découvrez que `Thread.run()` a appelé, entre autres, `QueuedThreadPool$2.run()`, qui a appelé `QueuedThreadPool.runjob(Runnable)`, qui a à son tour appelé `ReservedTheadExecutor$ReservedThread.run()`, etc.
 
-Si vous zoomez sur le bas du framegraph, une infobulle vous informe que le CPU a consacré environ 390 ms (0,90 % de son temps) dans cette fonction `parse()` :
+Si vous zoomez sur le bas du framegraph, une infobulle vous informe que le CPU a consacré environ 309 ms (0,90 % de son temps) dans cette fonction `parse()` :
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_parse.png" alt="Cadre parse() du flamegraph">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_parse.png" alt="Frame parse() du flamegraph">}}
 
 `String.length()` se trouve directement sous la fonction `parse()`. Cela signifie que c'est `parse()` qui l'a appelé. Lorsque vous passez votre curseur sur `String.length()`, vous pouvez voir que cette fonction utilise le CPU pendant 112 ms.
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_length.png" alt="Cadre String.length() du flamegraph">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_length.png" alt="Frame String.length() du flamegraph">}}
 
-Vous pouvez en déduire que le CPU a consacré réellement 278 ms (390 - 112) pour `parse()`. Cette différence est représentée par l'espace vide sous le cadre `parse()`.
+Vous pouvez en déduire que le CPU a consacré réellement 197 ms (309 - 112) pour `parse()`. Cette différence est représentée par l'espace vide sous le frame `parse()`.
 
 Attention : le flamegraph ne représente _pas_ une évolution temporelle. Si vous regardez cette partie du profil, vous pouvez voir que `Gson$1.write()` ne s'est pas exécuté avant `TypeAdapters$16.write()`, mais peut-être pas après non plus.
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_write.png" alt="Section du flamegraph avec les cadres write() côte à côte">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_write.png" alt="Section du flamegraph avec les frames write() côte à côte">}}
 
  En effet, il est possible que les deux fonctions aient été exécutées simultanément. Il se peut également que le programme ait exécuté plusieurs appels d'une fonction, plusieurs appels de l'autre fonction, puis qu'il ait continué à basculer d'une fonction à une autre. Le flamegraph fusionne toutes les occurrences d'exécution d'une même série de fonctions. Ainsi, vous pouvez identifier rapidement les parties du code qui utilisent le plus de CPU, sans avoir à étudier des centaines de lignes pour chaque appel de fonction.
 
 Si vous dézoomez, vous pouvez voir que 87 % de l'utilisation du CPU concerne la méthode `replyJSON()`. Sous celle-ci, le graphique affiche `replyJSON()`. Les méthodes qu'elle appelle sont réparties en quatre principaux chemins de code (ou stack traces) qui exécutent des fonctions associées au tri et au parsing de dates :
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="Flamegraph avec des flèches indiquant les stack traces sous replyJSON()">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="Flamegraph avec des flèches indiquant les stack traces sous replyJSON()">}}
 
 Enfin, vous pouvez également voir cette partie du profil CPU :
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_gc.png" alt="Flamegraph illustrant le nettoyage de la mémoire" style="width:80%;">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_gc.png" alt="Flamegraph illustrant le nettoyage de la mémoire (garbage collection)" style="width:80%;">}}
 
 ### Types de profils
 
 Le CPU a consacré quasiment 6 % de son temps au nettoyage de la mémoire. Ainsi, il est probable que nos services génèrent une grosse quantité de « déchets ». Étudiez donc le type de profil **Allocated Memory** :
 
-{{< img src="tracing/profiling/intro_to_profiling/types.png" alt="Sélecteur de type de profil" style="width:60%;">}}
+{{< img src="profiler/intro_to_profiling/types.png" alt="Sélecteur de type de profil" style="width:60%;">}}
 
 Sur ce profil, la taille des lignes indique la quantité de mémoire allouée à chaque fonction, ainsi que la pile d'appels à l'origine des fonctions qui allouent de la mémoire. Sur une période d'une minute, vous pouvez voir que la méthode `replyJSON()`, ainsi que les autres méthodes qu'elle appelle, ont alloué 17,47 Gio, principalement pour le même code de parsing de dates que dans le profil CPU :
 
-{{< img src="tracing/profiling/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="Flamegraph du profil d'allocation avec des flèches indiquant les stack traces sous replyJSON()">}}
+{{< img src="profiler/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="Flamegraph du profil d'allocation avec des flèches indiquant les stack traces sous replyJSON()">}}
 
 ## Remédiation
 
@@ -156,7 +156,7 @@ Sur ce profil, la taille des lignes indique la quantité de mémoire allouée à
 
 Examinez le code pour mieux comprendre ce qu'il se passe. D'après le flamegraph CPU, ces chemins de code problématiques passent par une fonction Lambda à la ligne 66, qui appelle `LocalDate.parse()` :
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_sort_lambda.png" alt="Flamegraph avec le curseur sur la fonction lambda de tri">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_sort_lambda.png" alt="Flamegraph avec le curseur sur la fonction lambda de tri">}}
 
 Cela correspond à la partie du code ci-dessous dans [`dd-continuous-profiler-example`][7], où s'effectue l'appel de `LocalDate.parse()` :
 
@@ -199,7 +199,7 @@ docker-compose up -d
 Pour tester les résultats, générez de nouveau du trafic :
 
 ```shell
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 
@@ -223,7 +223,7 @@ Le 99e centile est passé de 795 ms à 218 ms. Globalement, votre code est qu
 
 Repérez le [profil](#lire-le-profil) contenant le nouveau test de charge et regardez le profil CPU. Les éléments `replyJSON` du flamegraph représentent un pourcentage bien plus faible de l'utilisation totale du CPU que lors du précédent test :
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="Flamegraph avec les stack traces replyJSON() optimisées">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="Flamegraph avec les stack traces replyJSON() optimisées">}}
 
 ### Nettoyage
 
@@ -255,4 +255,4 @@ Bien que ce guide aborde uniquement les bases, vous savez désormais comment vou
 [5]: https://httpd.apache.org/docs/2.4/programs/ab.html
 [6]: https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java
 [7]: https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66
-[8]: /fr/tracing/profiler/enabling/
+[8]: /fr/profiler/enabling/

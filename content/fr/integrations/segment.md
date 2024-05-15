@@ -1,9 +1,7 @@
 ---
 categories:
-- monitoring
-- notification
 - cloud
-ddtype: crawler
+- notification
 dependencies: []
 description: L'intégration Segment permet de recueillir des métriques de diffusion
   d'événements pour les destinations de votre espace de travail.
@@ -33,7 +31,7 @@ Associez Segment pour :
 
 **Remarque** : ces métriques ont été conçues pour diffuser des événements à des destinations comme Snowflake ou Amplitude. Elles ne servent pas à diffuser des événements depuis des applications instrumentées vers Segment.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

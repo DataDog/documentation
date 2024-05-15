@@ -41,7 +41,7 @@ The on-demand calculations are performed using the allotment that is based on th
 
 **Are Datadog Agent containers counted against the allocation?**
 
-No.
+No, the Datadog Agent containers are not counted against your 5 (Pro tier) or 10 (Enterprise tier) allocation.
 
 **Are containers belonging to pods in constant `CrashLoopBackoff` counted?**
 

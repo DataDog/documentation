@@ -1,9 +1,10 @@
 ---
 categories:
-- cloud
 - aws
+- cloud
 - log collection
-- web
+- network
+- tracing
 creates_events: false
 dependencies: []
 description: AWS App Mesh est un proxy de périmètre et de service open source.
@@ -34,12 +35,13 @@ supported_os:
 - windows
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
-[AWS App Mesh][1] est un maillage de services qui facilite la surveillance des communications entre les applications de micro-services s'exécutant sur des clusters AWS ECS Fargate ou AWS EKS.
+[AWS App Mesh][1] est un maillage de services qui facilite la surveillance des communications entre les applications de micro-services s'exécutant sur des clusters Amazon ECS Fargate ou AWS EKS.
 
 
-## Configuration
+## Formule et utilisation
 
 {{< tabs >}}
 {{% tab "EKS" %}}
@@ -90,7 +92,7 @@ Utilisez les instructions suivantes pour activer la collecte de métrique pour l
                 path: envoy.yaml
     ```
 
-#### Collecte de logs
+#### APM
 
 {{< site-region region="us3" >}}
 
@@ -145,7 +147,7 @@ Vous pouvez également déployer l'injecteur appmesh en suivant les instructions
             },
     ```
 
-#### Collecte de logs
+#### APM
 
 {{< site-region region="us3" >}}
 
@@ -191,7 +193,7 @@ Définissez les paramètres AWS App Mesh `ENABLE_ENVOY_DATADOG_TRACING` et `DATA
             },
     ```
 
-#### Collecte de logs
+#### APM
 
 {{< site-region region="us3" >}}
 
@@ -221,21 +223,21 @@ Activez la collecte de logs en suivant les instructions détaillées dans la doc
 {{% /tab %}}
 {{< /tabs >}}
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 Pour obtenir la liste des métriques, consultez la documentation sur l'[intégration Envoy][2].
 
-### Événements
+### Aide
 
 L'intégration AWS App Mesh n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration AWS App Mesh n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

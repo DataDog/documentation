@@ -1,0 +1,198 @@
+{{/*  Local Partials start  */}}
+{{ define "partials/throw-error" }}
+  {{/*  Verify platorm sources (i.e. android, ios, roku, browser and flutter ) are accompanied by RUM source in product_source list */}}
+  {{ if not (in .ctx_product_source "icon-rum") }}
+  {{ errorf "Sources 'android', 'flutter', 'roku', 'browser' and 'ios' must be accompanied by 'icon-rum' source. Fix 'product_source' frontmatter in %q" .ctx_file_path }}
+  {{ end }}
+{{ end }}
+
+
+{{ define "partials/get-icon" }}
+  {{ $int_logo := partialCached "integrations-logo.html" (dict "context" .ctx "basename" .name "variant" "avatar") .name "avatar" }}
+  {{ if $int_logo }}
+    <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+  {{ else }}
+    {{ partial "icon" (dict "name" .name "size" "18px")}}
+  {{ end }}
+{{ end }}
+{{/*  Local Partials end  */}}
+
+{{ define "main" }}
+  {{ $ctx := . }}
+  <div class="row">
+    <div class="col-12 order-1">
+        <h1 id="pagetitle">{{ .Title }}</h1>
+        <p>{{ .Params.content | safeHTML }}</p>
+
+    </div>
+    <div class="col-12">
+        {{ partial "breadcrumbs.html" . }}
+    </div>
+  </div>
+  {{ partial "translate_status_banner/translate_status_banner.html" . }}
+
+  {{ $products := slice }}
+  <div
+  class="standard-attributes-main row w-100"
+  x-data="{
+    filterValue: '',
+    searchValue: '',
+    pushState (filtering=true) {
+      // Updates the url with the new query params for 'product' and 'search' without refreshing the page
+      const url = new URL(window.location.href)
+
+      if(filtering){
+        url.searchParams.set('product', this.filterValue)
+      }else if(!filtering){
+        url.searchParams.set('search', this.searchValue)
+      }
+
+      if(!this.searchValue) {
+        url.searchParams.delete('search')
+      }
+      if(!this.filterValue) {
+        url.searchParams.delete('product')
+      }
+
+      window.history.pushState(null,'', url.toString())
+      window.scroll(0, 0)
+    },
+    shouldShowAttribute (dataset) {
+      // Determines table-row display
+      // Compares search values and filter values against attributes info (dataset)
+      const datasetArr = dataset.split(';')
+      const productValues = datasetArr[0].replaceAll('icon-', '').replace('log', 'log management')
+      const searchValues = this.searchValue.split(' ')
+
+      const containsFilteredValue = productValues.includes(this.filterValue) // checks product attrs in dataset
+      const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks other attrs in dataset
+
+      return containsSearchValues && containsFilteredValue
+    },
+    updateWithURLParams () {
+      // Updates x-data properties with url param values
+      const url = new URL(window.location.href)
+      this.filterValue = url.searchParams.get('product') || ''
+      this.searchValue = url.searchParams.get('search') || ''
+    }
+  }"
+  x-init="updateWithURLParams()">
+    <div
+    class="table-wrapper order-1">
+      <table>
+        <thead class="table-header">
+          <tr>
+            <th>Source</th>
+            <th>Domain</th>
+            <th>Attribute Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          {{ range .Params.attributes }}
+
+          {{/*  concatenating attribute info for a lookup dataset */}}
+          {{ $pad := newScratch }}
+          {{ $pad.Set "attribute_info" (slice (delimit .product_source ",") .name .domain .type (replaceRE "(`|')" "" .description )) }}
+          {{ $attribute_info := (delimit ($pad.Get "attribute_info") ";") | lower }}
+
+          <tr
+          class="table-row"
+          :class="shouldShowAttribute('{{ $attribute_info }}') && 'show'"
+          x-cloak x-show="shouldShowAttribute('{{ $attribute_info }}')"
+          x-transition.opacity.duration.250ms
+          >
+            <td>
+              <div class="d-flex align-items-center flex-wrap gap-1">
+                {{$ctx_product_source := .product_source}}
+                {{ range $idx, $el := .product_source }}
+                  {{ if in . "icon-"}}
+                    {{ $product := (substr . 5) }}
+                    {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" ((cond (eq $product "log") (printf "%s management" $product) $product) | upper) )}}
+
+                  {{ else if in (slice "android" "ios" "flutter" "roku") . }}
+                    {{/*  Local partial */}}
+                    {{ partial "throw-error" (dict "ctx_product_source" $ctx_product_source "ctx_file_path" $ctx.File.Path) }}
+
+                    {{/*  Get integration logos for android, ios, roku, and flutter  */}}
+                    {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") . "avatar" }}
+                    {{ if $int_logo }}
+                      <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}" title='{{ (printf "rum %s" .) | upper }}' data-bs-toggle="tooltip" data-bs-placement="top"/>
+                    {{ end }}
+                  {{ else if eq . "browser" }}
+                    {{/*  Local partial */}}
+                    {{ partial "throw-error" (dict "ctx_product_source" $ctx_product_source "ctx_file_path" $ctx.File.Path) }}
+
+                    {{ partial "icon" (dict "name" . "size" "18px" "color" "#7c3eb9" "title" ((printf "rum %s" .) | upper))}}
+
+                  {{ end }}
+                {{ end }}
+              </div>
+            </td>
+            <td>{{ .domain }}</td>
+            <td>{{ .name }}</td>
+            <td>{{ .type }}</td>
+            <td>{{ .description | markdownify }}</td>
+          </tr>
+            <!-- Build $products slice for filtering section (.filters-standard-attributes) -->
+          {{ $products = union $products .product_source }}
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+
+    <nav id="standard-attributes-nav" class="mb-3">
+      {{/*  FILTER BTNS - Keep here. $products slice needs to form */}}
+      <div class="filters-standard-attributes">
+        {{ if  $products }}
+            <button
+            @click="filterValue = ''; pushState()"
+            class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+            :class="(filterValue === 'all' || !filterValue) && 'active'"
+            data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button>
+        {{ end }}
+
+        {{/*  Transform Product Names  */}}
+        {{ $filterScratch := newScratch }}
+        {{ $sortedProduct := slice }}
+        {{ range $products }}
+          {{ $icon_name := replaceRE `icon-` "" . }}
+          {{ $product_name := $icon_name }}
+          {{ if in (slice "android" "ios" "flutter" "roku" "browser") $icon_name }}
+            {{ $product_name = (printf "RUM %s" $icon_name) }}
+          {{ else if eq $icon_name "log" }}
+            {{ $product_name = (printf "%s management" $icon_name) }}
+          {{ end }}
+          
+          {{ $filterScratch.SetInMap "productMap" $product_name $icon_name }}
+          {{ $sortedProduct = $sortedProduct | append $product_name }}
+        {{ end }}
+
+        {{ range $sortedProduct | sort }}
+            {{ $icon_name := index ($filterScratch.Get "productMap") .}}
+
+            <button
+            @click="filterValue = '{{ $icon_name }}'; pushState()"
+            class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+            :class="($el.dataset.filter === filterValue) && 'active'"
+            data-filter="{{ $icon_name }}"
+            >
+              {{/*  Local Partial  */}}
+              <span>{{partial "get-icon" (dict "name" $icon_name "ctx" $ctx)}}</span>
+              {{ . | upper }}
+            </button>
+        {{ end }}
+      </div>
+      {{/*  SEARCH  */}}
+      <form
+      class="search-standard-attributes mt-2">
+        <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">
+      </form>
+    </nav>
+
+  </div>
+
+
+  {{ .Content }}
+{{ end }}

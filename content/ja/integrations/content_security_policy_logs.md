@@ -1,4 +1,18 @@
 ---
+algolia:
+  tags:
+  - csp-report
+  - csp
+  - report-uri
+  - report-to
+  - Content-Security-Policy
+  - violated-directive
+  - blocked-uri
+  - script-src
+  - worker-src
+  - connect-src
+aliases:
+- /ja/real_user_monitoring/faq/content_security_policy
 categories:
 - ログの収集
 - セキュリティ
@@ -12,11 +26,11 @@ further_reading:
   text: 統合サービスタグ付けについて
 has_logo: true
 integration_id: content_security_policy_logs
-integration_title: Content Security Policy ログ
+integration_title: コンテンツセキュリティポリシー
 is_public: true
 kind: integration
 name: content_security_policy_logs
-public_title: Datadog-Content Security Policy ログ
+public_title: Datadog-Content Security Policy
 short_description: CSP 違反の検出
 version: '1.0'
 ---
@@ -25,7 +39,7 @@ version: '1.0'
 
 Datadog Content Security Policy (CSP) インテグレーションは、Web ブラウザが CSP を解釈して違反を検出すると、そのログを Datadog に送信します。CSP インテグレーションを使用すると、CSP データを集計するための専用エンドポイントをホストまたは管理する必要がありません。
 
-CSP の詳細については、[Google の web.dev 投稿][1]を参照してください。
+CSP の詳細については、[Content-Security-Policy][1] を参照してください。
 
 ## 前提条件
 
@@ -38,7 +52,7 @@ CSP ヘッダーにディレクティブを追加する前に、[Datadog アカ�
 ブラウザがポリシー違反のレポートを送信できる URL が必要です。URL は以下の形式である必要があります。
 
 ```
-https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
+https://csp-report.{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
 ```
 
 オプションとして、URL に `ddtags` キー (サービス名、環境、サービスバージョン) を追加して、[統合サービスタグ付け][3]を設定します。
@@ -148,10 +162,42 @@ Datadog は、HTTP ヘッダーにコンテンツセキュリティポリシー�
 {{% /tab %}}
 {{< /tabs >}}
 
+## リアルユーザーモニタリングとセッションリプレイで CSP を使う
+
+Web サイトで CSP を使用する場合は、ユースケースに応じて、以下の URL を既存のディレクティブに追加してください。
+
+### 取込先 URL
+
+リアルユーザーモニタリング][4]または[ブラウザログ収集][5]の初期化に使用した `site` オプションに応じて、適切な `connect-src` エントリを追加してください。
+
+```txt
+connect-src https://*.{{< region-param key="browser_sdk_endpoint_domain" >}}
+```
+
+### セッションリプレイワーカー
+
+セッションリプレイを使用している場合、以下の `worker-src` エントリを追加して `blob:` URI スキームを持つワーカーを許可するようにしてください。
+
+```txt
+worker-src blob:;
+```
+
+### CDN バンドル URL
+
+[リアルユーザーモニタリング][6]または[ブラウザログ収集][7]で CDN 非同期または CDN 同期の設定を使用している場合、以下の `script-src` 項目も追加してください。
+
+```txt
+script-src https://www.datadoghq-browser-agent.com
+```
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://web.dev/csp/
+[1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
 [3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/#initialization-parameters
+[5]: /ja/logs/log_collection/javascript/#initialization-parameters
+[6]: /ja/real_user_monitoring/browser/#setup
+[7]: /ja/logs/log_collection/javascript/#cdn-async

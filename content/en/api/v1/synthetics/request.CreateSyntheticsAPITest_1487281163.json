@@ -10,7 +10,8 @@
       {
         "operator": "lessThan",
         "target": 2000,
-        "type": "responseTime"
+        "type": "responseTime",
+        "timingsScope": "withoutDNS"
       },
       {
         "operator": "validatesJSONPath",
@@ -18,6 +19,14 @@
           "jsonPath": "topKey",
           "operator": "isNot",
           "targetValue": "0"
+        },
+        "type": "body"
+      },
+      {
+        "operator": "validatesJSONSchema",
+        "target": {
+          "metaSchema": "draft-07",
+          "jsonSchema": "{\"type\": \"object\", \"properties\":{\"slideshow\":{\"type\":\"object\"}}}"
         },
         "type": "body"
       },
@@ -39,6 +48,7 @@
         "type": "text"
       }
     ],
+    "variablesFromScript": "dd.variable.set(\"FOO\", \"foo\")",
     "request": {
       "certificate": {
         "cert": {
@@ -71,7 +81,8 @@
         "scope": "yoyo",
         "tokenApiAuthentication": "header",
         "type": "oauth-client"
-      }
+      },
+      "persistCookies": true
     }
   },
   "locations": [

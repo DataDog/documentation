@@ -1,17 +1,19 @@
 ---
-title: ログ検索 API を使用してログデータにプログラマティックにアクセスする
-kind: ガイド
 further_reading:
-  - link: /logs/explorer/
-    tag: Documentation
-    text: ログエクスプローラーの詳細
-  - link: /logs/explorer/
-    tag: Documentation
-    text: 検索構文の詳細
-  - link: /logs/search_syntax/
-    tag: Documentation
-    text: ログ検索 API 向け構文の詳細
+- link: /logs/explorer/
+  tag: Documentation
+  text: ログエクスプローラーの詳細
+- link: /logs/explorer/
+  tag: Documentation
+  text: 検索構文の詳細
+- link: /logs/search_syntax/
+  tag: Documentation
+  text: ログ検索 API 向け構文の詳細
+kind: ガイド
+title: ログ検索 API を使用してログデータにプログラマティックにアクセスする
 ---
+
+
 ## 概要
 
 [ログ検索 API][1] を使用してログデータにプログラマティックにアクセスし、クエリを実行します。
@@ -26,11 +28,9 @@ further_reading:
 
 ## 前提条件
 
-- API を使用するには管理者ユーザーが保有する API キーとアプリケーションキーが必要です。これらは [Datadog アカウントの API キーページ][2]で確認できます。`<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を Datadog API キーおよび Datadog アプリケーションキーで置き換えてください。
+- ログ検索 API の使用には、[API キー][2]と[アプリケーションキー][3]が必要です。アプリケーションキーを作成したユーザーは、データにアクセスするための適切な権限を所有する必要があります。以下の例を使用する場合は、`<DATADOG_API_KEY>` および `<DATADOG_APP_KEY>` を、それぞれご使用中の Datadog API キーおよび Datadog アプリケーションキーに置き換えます。
 
-- このガイドでは `curl` の例を解説しています。[curl][3] をまだインストールしていない場合はインストールするか、[API ドキュメント][1]でこの API エンドポイントについての他言語の例を参照してください。
-
-**注:** デフォルトでは、管理者、標準、読み取り専用のロールを持つユーザー全員がすべてのログデータにアクセスすることができます。しかし、検索結果は `<DATADOG_APP_KEY>` を所有するユーザーのアクセス許可に応じて制限される場合があります。
+- このガイドでは `curl` の例を解説しています。[curl][4] をまだインストールしていない場合はインストールするか、[ログ API][1]でこの API エンドポイントについての他言語の例を参照してください。
 
 ## 例
 
@@ -437,8 +437,8 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 ```javascript
 {
   "filter": {
-    "from": "now",
-    "to": "now-1h"
+    "from": "now-1h",
+    "to": "now"
   }
 }
 ```
@@ -550,8 +550,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/api/v2/logs/
-[2]: /ja/api/v1/authentication/
-[3]: https://curl.haxx.se/download.html
-[4]: /ja/logs/search_syntax/
+[2]: /ja/account_management/api-app-keys/#api-keys
+[3]: /ja/account_management/api-app-keys/#application-keys
+[4]: https://curl.haxx.se/download.html
 [5]: /ja/account_management/rbac/permissions/?tab=ui#log-data-access
-[6]: /ja/logs/explorer/facets/#overview

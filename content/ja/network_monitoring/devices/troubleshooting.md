@@ -1,13 +1,14 @@
 ---
-title: NDM トラブルシューティング
-kind: documentation
 aliases:
-  - /ja/network_performance_monitoring/devices/troubleshooting/
+- /ja/network_performance_monitoring/devices/troubleshooting/
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-    tag: ブログ
-    text: Datadog での SNMP モニタリング
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  tag: ブログ
+  text: Datadog での SNMP モニタリング
+kind: documentation
+title: NDM トラブルシューティング
 ---
+
 ## 概要
 
 Datadog Network Device Monitoring のトラブルシューティングには、以下の情報を使用してください。さらにヘルプが必要な場合は、[Datadog サポート][1]にお問い合わせください。

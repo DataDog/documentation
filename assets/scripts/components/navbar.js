@@ -1,87 +1,46 @@
 import { debounce } from '../utils/debounce';
-import { userDeviceIsMobile } from '../helpers/window-resizer';
 
 // Navbar Dropdown Hover
-let productMenuOpen = false;
+const dropdowns = document.querySelectorAll('li.dropdown');
 
-$('li.dropdown').hover(
-    function (e) {
-        if (!userDeviceIsMobile()) {
+dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener('mouseenter', function (e) {
+        if (window.innerWidth > 992) {
             e.stopPropagation();
-            // do hover stuff
-            $(this).addClass('show');
-            $(this).find('.dropdown-menu').addClass('show');
+
+            const showDropdown = function () {
+                dropdown.classList.add('show');
+                dropdown.querySelector('.dropdown-menu').classList.add('show');
+            };
+
+            setTimeout(showDropdown, 160);
         }
-        // Product menu specific script
-        if ($(e.target).hasClass('product-menu')) {
-            productMenuOpen = false;
-        } else if ($(this).hasClass('product-dropdown')) {
-            productMenuOpen = true;
-        }
-        // Product menu specific script
-    },
-    function (e) {
-        if (!userDeviceIsMobile()) {
+    });
+
+    dropdown.addEventListener('mouseleave', function (e) {
+        if (window.innerWidth > 992) {
             e.stopPropagation();
-            $('li.dropdown.show .dropdown-menu').removeClass('show');
-            $('li.dropdown.show').removeClass('show');
-        }
+            const hideDropdown = function () {
+                dropdown.querySelector('.dropdown-menu').classList.remove('show');
+                dropdown.classList.remove('show');
+            };
+            const timer = setTimeout(hideDropdown, 160);
 
-        // Product menu specific script
-        if ($(this).hasClass('product-dropdown')) {
-            setTimeout(function () {
-                productMenuOpen = false;
-            }, 100);
+            dropdown.querySelector('.dropdown-menu').addEventListener('mouseenter', function () {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+            });
         }
-        // Product menu specific script
-    }
-);
-
-// Product menu specific script
-$('a.customers-menu').hover(
-    function () {
-        if (productMenuOpen) {
-            $('li.dropdown.product-dropdown').addClass('show');
-            $('li.dropdown.product-dropdown').find('.dropdown-menu').addClass('show');
-        }
-    },
-    function () {
-        $('li.dropdown.product-dropdown').removeClass('show');
-        $('li.dropdown.product-dropdown').find('.dropdown-menu').removeClass('show');
-    }
-);
-// Product menu specific script
-
-// Close mobile menu on click
-$('.mobile-close').on('click', function () {
-    $('.navbar-collapse').collapse('hide');
+    });
 });
-
-if (window.pageYOffset > 0 || document.documentElement.scrollTop > 0 || document.body.scrollTop > 0) {
-    if (!$('.navbar').hasClass('scrolled')) {
-        $('.navbar').addClass('scrolled');
-    }
-}
 
 function handleNavClasses() {
     const mainNavWrapper = document.querySelector('.main-nav-wrapper');
     const nav = document.querySelector('nav'); // legacy nav
     const yAxisScrollLocation = window.scrollY;
 
-    const windowWidth = $(window).width();
-    const st = $(window).scrollTop();
-    if (!$('.navbar').hasClass('navbar-small')) {
-        if (windowWidth >= 1199) {
-            if (!$('body').hasClass('resources')) {
-                if (st <= 1) {
-                    $('.navbar-custom').removeClass('compressed');
-                } else {
-                    $('.navbar-custom').addClass('compressed');
-                }
-            }
-        }
-    }
-
+    // Adds main-nav-scrolled class to the main-nav-wrapper when scrolling
     if (mainNavWrapper) {
         if (yAxisScrollLocation > 30) {
             mainNavWrapper.classList.add('main-nav-scrolled');
@@ -90,59 +49,13 @@ function handleNavClasses() {
         }
     }
 
-    // legacy nav
+    // Adds nav-scrolled class to the first <nav> element on a page when scrolling
     if (nav) {
         if (yAxisScrollLocation > 30) {
             nav.classList.add('nav-scrolled');
         } else {
             nav.classList.remove('nav-scrolled');
         }
-    }
-
-    if (st <= 1) {
-        $('.navbar-custom').removeClass('scrolled');
-    } else {
-        $('.navbar-custom').addClass('scrolled');
-    }
-}
-
-function setSearchBoxHeight() {
-    if ($('.search-box').length) {
-        const win = $(window);
-        const logo = $('.search-box');
-        const setHeight = function () {
-            let st = win.scrollTop();
-
-            if (win.width() < 1200) {
-                $('.search-box, .search-nav').removeClass('compressed');
-                logo.css({ maxHeight: '' });
-                $('.search-nav').css({ maxHeight: '' });
-            } else {
-                if (st < 0) {
-                    st = 0;
-                }
-
-                if (st === 0) {
-                    $('.search-box, .search-nav').removeClass('compressed');
-                } else {
-                    $('.search-box, .search-nav').addClass('compressed');
-                }
-            }
-        };
-
-        setHeight();
-
-        window.addEventListener('resize', function () {
-            debounce(setHeight, 100);
-        });
-
-        window.addEventListener('scroll', function () {
-            debounce(window.requestAnimationFrame(setHeight), 100);
-        });
-
-        // safari is whacked so a min height was set in CSS to ensure proper dimensions of the sticky header
-        // (safari calculated it as 36px when it should be 128 and it messed up everything) so this resets that
-        $('.search-box, .search-nav').css('minHeight', '18px');
     }
 }
 
@@ -172,18 +85,14 @@ function mainNavHandle() {
 }
 
 window.addEventListener('scroll', () => {
-  handleNavClasses();
-  mainNavHandle();
+    debounce(handleNavClasses(), 100);
+    debounce(mainNavHandle(), 100);
 });
 window.addEventListener('load', () => {
-  handleNavClasses();
-  mainNavHandle();
+    handleNavClasses();
+    mainNavHandle();
 });
 window.addEventListener('resize', () => {
-  handleNavClasses();
-  mainNavHandle();
+    debounce(handleNavClasses(), 100);
+    debounce(mainNavHandle(), 100);
 });
-
-if (!$('.navbar').hasClass('navbar-small')) {
-    setSearchBoxHeight();
-}

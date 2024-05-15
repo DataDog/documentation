@@ -1,36 +1,37 @@
 ---
-title: Syslog-ng
-name: syslog_ng
-kind: インテグレーション
-description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
-short_description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
-categories:
-  - ログの収集
-doc_link: /integrations/syslog_ng/
 aliases:
-  - /ja/logs/log_collection/syslog_ng
+- /ja/logs/log_collection/syslog_ng
+categories:
+- ログの収集
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
+description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
+doc_link: /integrations/syslog_ng/
 has_logo: true
+integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
+kind: インテグレーション
+name: syslog_ng
 public_title: Datadog-Syslog-ng インテグレーション
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
+short_description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
 supported_os:
-  - linux
-  - windows
-integration_id: syslog_ng
+- linux
+- windows
+title: Syslog-ng
 ---
+
 ## 概要
 
 Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
 
+{{< site-region region="us3,ap1" >}}
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では <code>syslog-ng</code> のログ収集は利用できません。</div>
+{{< /site-region >}}
+
 ## セットアップ
 
 ### ログの収集
-
-{{< site-region region="us3" >}}
-**ログ収集は、Datadog {{< region-param key="dd_site_name" >}} サイトでサポートされていません**。
-{{< /site-region >}}
 
 1. `/etc/syslog-ng/syslog-ng.conf` 内のシステムログとログファイルを収集し、ソースが正しく定義されていることを確認してください。
 
@@ -68,8 +69,14 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
     ...
 
     # For Datadog platform:
-    template DatadogFormat { template("YOURAPIKEY <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} ${SDATA:--} $MSG\n"); };
-    destination d_datadog { tcp("intake.logs.datadoghq.com" port(10514) template(DatadogFormat)); };
+    destination d_datadog {
+      http(
+          url("https://http-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?ddsource=<SOURCE>&ddtags=<TAG_1:VALUE_1,TAG_2:VALUE_2>")
+          method("POST")
+          headers("Content-Type: application/json", "Accept: application/json", "DD-API-KEY: <DATADOG_API_KEY>")
+          body("<${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} ${SDATA:--} $MSG\n")
+      );
+    };
     ```
 
 3. path セクションで出力を定義します。
@@ -84,35 +91,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
     log { source(s_src); source(s_files); destination(d_datadog); };
     ```
 
-4. (オプション) TLS 暗号化:
-
-    - CA 証明書をダウンロードします。
-
-        ```shell
-        sudo apt-get install ca-certificates
-        ```
-
-    - 出力先の定義を次のように変更します。
-
-        ```conf
-        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
-        ```
-
-    TLS のパラメーターと可能性について詳しくは、[syslog-ng オープンソース版管理ガイド][1]を参照してください。
-
-5. (オプション) ログにソースを設定します。ソースを設定するには、以下の形式を使用します (ソースが複数ある場合は、ファイルごとに形式の名前を変えてください)。
-
-    ```conf
-    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\"] $MSG\n"); };
-    ```
-
-    `ddtags` 属性を使用してカスタムタグを追加することもできます。
-
-    ```conf
-    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\" ddtags=\"env:test,user:test_user,<KEY:VALUE>\"] $MSG\n"); };
-    ```
-
-6. syslog-ng を再起動します。
+4. syslog-ng を再起動します。
 
 ## トラブルシューティング
 

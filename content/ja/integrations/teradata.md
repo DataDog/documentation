@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: teradata
-oauth: {}
 public_title: Teradata
 short_description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
 supported_os:
@@ -72,7 +71,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Teradata チェックは [Datadog Agent][3] パッケージに含まれています。
 

@@ -1,8 +1,11 @@
 ---
 categories:
-- クラウド
 - AWS
+- クラウド
+- data store
 - ログの収集
+- ネットワーク
+- セキュリティ
 dependencies: []
 description: Amazon Security Lake のログを取り込みます。
 doc_link: ''
@@ -63,26 +66,45 @@ Amazon Security Lake は、セキュリティログやイベントデータを�
    - サブスクライバー名に `Datadog` と入力します。
    - Datadog に送信する `All log and event sources` または `Specific log and event sources` を選択します。
    - データアクセスメソッドとして `S3` を選択します。
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
 3. 同じフォームに、サブスクライバー資格情報を入力します。
    - **Account ID** に `464622532012` を入力します。
    - **External ID** は、新しいタブを開き、Datadog の AWS Account の [AWS インテグレーションページ][7]に移動します。**AWS External ID** は、**Account Details** タブにあります。それをコピーして、AWS のフォームに貼り付けます。
    - **Subscriber role** には、`DatadogSecurityLakeRole` と入力します。**注:** `DatadogIntegrationRole` は、ステップ 1 で必要な権限を持っているので、このロールは実際には Datadog によって使用されません。
    - **API destination role** には、`DatadogSecurityLakeAPIDestinationRole` と入力します。
-   - **Subscription endpoint** の場合、この値は使用している [Datadog サイト][8]に依存します。Datadog アカウントがホストされている場所に一致する URL を入力します。
+   - **Subscription endpoint** の場合、この値は使用している [Datadog サイト][8]に依存します: <code>https://api.{{< region-param key="dd_site" >}}/api/intake/aws/securitylake</code>
 
-| サイト    | サイト URL                                                    |
-|---------|-------------------------------------------------------------|
-| US1     | `https://api.datadoghq.com/api/intake/aws/securitylake`     |
-| US3     | `https://api.us3.datadoghq.com/api/intake/aws/securitylake` |
-| US5     | `https://api.us5.datadoghq.com/api/intake/aws/securitylake` |
-| EU1     | `https://api.datadoghq.eu/api/intake/aws/securitylake`      |
-
+     **注:** 上記のエンドポイントがお住まいの地域を反映していない場合は、このドキュメントページの右にある **Datadog site** のドロップダウンメニューを切り替えて地域を切り替えてください。
    - **HTTPS key name** には、`DD-API-KEY` を入力します。
    - **HTTPS key value** については、新しいタブを開いて Datadog の [API Keys ページ][9]にアクセスし、Datadog API キーを探すか作成してください。それをコピーして、AWS のフォームに貼り付けます。
-4. **Create** をクリックすると、サブスクライバーの作成が完了します。
-5. 数分待つと、[Datadog のログエクスプローラー][10]で Amazon Security Lake からのログの探索を開始します。
 
-このインテグレーションを利用したリアルタイムの脅威検出の方法については、[ブログ][11]をご覧ください。
+[7]: https://app.datadoghq.com/integrations/amazon-web-services?panel=account-details
+[8]: https://docs.datadoghq.com/ja/getting_started/site/
+[9]: https://app.datadoghq.com/organization-settings/api-keys
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+3. 同じフォームに、サブスクライバー資格情報を入力します。
+   - **Account ID** に `417141415827` を入力します。
+   - **External ID** は、新しいタブを開き、Datadog の AWS Account の [AWS インテグレーションページ][7]に移動します。**AWS External ID** は、**Account Details** タブにあります。それをコピーして、AWS のフォームに貼り付けます。
+   - **Subscriber role** には、`DatadogSecurityLakeRole` と入力します。**注:** `DatadogIntegrationRole` は、ステップ 1 で必要な権限を持っているので、このロールは実際には Datadog によって使用されません。
+   - **API destination role** には、`DatadogSecurityLakeAPIDestinationRole` と入力します。
+   - **Subscription endpoint** の場合、この値は使用している [Datadog サイト][8]に依存します: <code>https://api.{{< region-param key="dd_site" >}}/api/intake/aws/securitylake</code>
+
+     **注:** 上記のエンドポイントがお住まいの地域を反映していない場合は、このドキュメントページの右にある **Datadog site** のドロップダウンメニューを切り替えて地域を切り替えてください。
+   - **HTTPS key name** には、`DD-API-KEY` を入力します。
+   - **HTTPS key value** については、新しいタブを開いて Datadog の [API Keys ページ][9]にアクセスし、Datadog API キーを探すか作成してください。それをコピーして、AWS のフォームに貼り付けます。
+
+[7]: https://app.datadoghq.com/integrations/amazon-web-services?panel=account-details
+[8]: https://docs.datadoghq.com/ja/getting_started/site/
+[9]: https://app.datadoghq.com/organization-settings/api-keys
+{{< /site-region >}}
+
+4. **Create** をクリックすると、サブスクライバーの作成が完了します。
+5. 数分待つと、[Datadog のログエクスプローラー][7]で Amazon Security Lake からのログの探索を開始します。
+
+このインテグレーションを利用したリアルタイムの脅威検出の方法については、[ブログ][8]をご覧ください。
 
 ## 収集データ
 
@@ -102,13 +124,13 @@ Amazon Security Lake インテグレーションには、サービスのチェ�
 
 ### アクセス許可
 
-[トラブルシューティングガイド][12]を確認し、AWS アカウントで Datadog 用の IAM ロールが正しく設定されていることを確認してください。
+[トラブルシューティングガイド][9]を確認し、AWS アカウントで Datadog 用の IAM ロールが正しく設定されていることを確認してください。
 
 ### サブスクライバーの作成
 
 トラブルシューティングのガイダンスとして、サブスクライバーの作成に関する [Amazon Security Lake ユーザーガイド][1]をご確認ください。
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -120,10 +142,7 @@ Amazon Security Lake インテグレーションには、サービスのチェ�
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [5]: https://app.datadoghq.com/integrations/amazon-web-services?panel=metric-collection
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
-[7]: https://app.datadoghq.com/integrations/amazon-web-services?panel=account-details
-[8]: https://docs.datadoghq.com/ja/getting_started/site/
-[9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://app.datadoghq.com/logs?query=source%3Aamazon-security-lake&cols=host%2Cservice%2C%40task_name%2C%40identity.user.type%2Caws.source%2C%40network.client.ip%2C%40identity.session.mfa%2C%40evt.name%2C%40connection_info.direction&index=%2A&messageDisplay=inline
-[11]: https://www.datadoghq.com/blog/analyze-amazon-security-lake-logs-with-datadog
-[12]: https://docs.datadoghq.com/ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
-[13]: https://docs.datadoghq.com/ja/help/
+[7]: https://app.datadoghq.com/logs?query=source%3Aamazon-security-lake&cols=host%2Cservice%2C%40task_name%2C%40identity.user.type%2Caws.source%2C%40network.client.ip%2C%40identity.session.mfa%2C%40evt.name%2C%40connection_info.direction&index=%2A&messageDisplay=inline
+[8]: https://www.datadoghq.com/blog/analyze-amazon-security-lake-logs-with-datadog
+[9]: https://docs.datadoghq.com/ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
+[10]: https://docs.datadoghq.com/ja/help/

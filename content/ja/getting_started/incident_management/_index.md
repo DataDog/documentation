@@ -3,7 +3,7 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-incident-management
   tag: ラーニングセンター
   text: Incident Management の紹介
-- link: /monitors/incident_management/datadog_clipboard
+- link: /service_management/incident_management/datadog_clipboard
   tag: Documentation
   text: Datadog クリップボード
 - link: https://www.youtube.com/watch?v=QIambwILy_M
@@ -12,11 +12,14 @@ further_reading:
 - link: /monitors/incident_management
   tag: Documentation
   text: インシデント管理
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: インシデントマネジメントを向上させるためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/incident-response-with-datadog/
   tag: ブログ
   text: Datadog でのインシデント管理
-- link: /monitors/incident_management/notification_rules
-  tag: ドキュメント
+- link: /service_management/incident_management/incident_settings
+  tag: Documentation
   text: 通知ルール
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: Documentation
@@ -27,13 +30,16 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
+  tag: ブログ
+  text: Datadog でのインシデント管理方法
 kind: documentation
 title: Incident Management の概要
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では Incident Management は利用できません。</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## 概要
 
@@ -49,11 +55,11 @@ Datadog Incident Management は、メトリクス、トレース、またはロ�
 
 このガイドでは、[Datadog クリップボード][2]を使ってインシデントを宣言する方法を説明します。クリップボードを使うと、グラフ、モニター、ダッシュボード全体、または[ノートブック][3]など、さまざまなソースから情報を収集することができます。これにより、インシデントを宣言する際に可能な限り多くの情報を収集することができます。
 
-1. 画面左側の Datadog メニューで、**Dashboard** > **Dashboard lists** に進み、**System - Metrics** を選択します。
+1. Datadog で [**Dashboard List**][15] に移動し、**System - Metrics** を選択します。
 2. グラフのひとつにカーソルを合わせ、次のいずれかのコマンドを使用してクリップボードにコピーします。
     - **Ctrl**/**Cmd** + **C**
     - グラフ上で **Export** アイコンをクリックして **Copy** を選択します。
-3. 画面左側の Datadog メニューで **Monitors** > **Manage Monitors** を開き、**[Auto] Clock in sync with NTP** を選択します。
+3. 左側の Datadog メニューから [**Monitors** > **Monitors List**][16] に進み、**[Auto] Clock in sync with NTP** を選択します。
 4. **Ctrl**/**Cmd** + **Shift** + **K** でクリップボードを開きます。
 5. クリップボードの **Add current page** をクリックして、モニターをクリップボードに追加します。
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="クリップボードにコピー" responsive="true" style="width:100%;">}}
@@ -93,7 +99,7 @@ _Overview_ セクションで、調査が進むにつれてインシデントの
 重大度レベルと根本原因を更新する:
 1. _Severity_  ドロップダウンをクリックして **SEV-3** を選択します。
 2. この問題についてはモニターから最初に警告を受けたため、_What happened_ の _Detection Method_ ドロップダウン (Unknown が選択されています) で **Monitor** を選択します。
-1. _Why it happened_ フィールドに値を追加します:  `TEST: Host is running out 3f memory.`
+1. _Why it happened_ フィールドに値を追加します:  `TEST: Host is running out of memory.`
 4. **Save** をクリックしてプロパティを更新します。
     Slack から、`/datadog incident update` コマンドを使って進行中の問題のタイトル、重大度、ステータスを更新することもできます。
 
@@ -138,7 +144,7 @@ _Timeline_ には、インシデントのフィールドや情報の追加・変
     タスクの追加や変更はすべて _Timeline_ に記録されます。
     また、_Remediation_ セクションにインシデント発生後のタスクを追加して、それらを管理することもできます。
 
-#### 通知
+#### デフォルトの検出ルール
 
 **シナリオ:** 問題が軽減され、チームは状況を監視しています。インシデントのステータスは安定しています。
 
@@ -174,7 +180,7 @@ _Notifications_ セクションで、インシデントのステータス更新�
 
 Datadog Incident Management はオーガニゼーションのニーズに基づいて、異なる重大度とステータスレベルでカスタマイズすることはもちろん、インシデントに関連する APM サービスやチームなどの追加情報も含めることができます。詳細については、Incident Management ページのこちらの[セクション][9]を参照してください。
 
-また、通知のルールを設定して、インシデントの重大度レベルに応じて特定の人やサービスに自動的に通知することもできます。詳しくは、[通知ルール][10]のドキュメントをご覧ください。
+また、通知のルールを設定して、インシデントの重大度レベルに応じて特定の人やサービスに自動的に通知することもできます。詳しくは、[インシデント設定][10]のドキュメントをご覧ください。
 
 Incident Management をカスタマイズするには、[インシデント設定ページ][11]にアクセスします。画面左側の Datadog メニューから、**Monitors** > **Incidents** (Incident Management のウェルカム画面が表示されたら、**Get Started** をクリックします) に進みます。そして、画面上部の **Settings** をクリックします。
 
@@ -184,23 +190,25 @@ Incident Management をカスタマイズするには、[インシデント設�
 
 また、インシデントの宣言と編集、Slack や Zoom などとのインテグレーションにより、チームへの迅速なコミュニケーションも可能です。
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのモニター">}}
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのモニター">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/slack/
-[2]: /ja/monitors/incident_management/datadog_clipboard
+[2]: /ja/service_management/incident_management/datadog_clipboard
 [3]: /ja/notebooks/#overview
-[4]: /ja/monitors/incident_management/#from-a-graph
-[5]: /ja/monitors/incident_management/#from-a-monitor
+[4]: /ja/service_management/incident_management/#from-a-graph
+[5]: /ja/service_management/incident_management/#from-a-monitor
 [6]: /ja/api/latest/incidents/#create-an-incident
 [7]: https://app.datadoghq.com/notebook/list
 [8]: https://app.datadoghq.com/incidents/settings#Messages
-[9]: /ja/monitors/incident_management/#status-levels
-[10]: /ja/monitors/incident_management/notification_rules
+[9]: /ja/service_management/incident_management/#status-levels
+[10]: /ja/service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /ja/mobile/
+[12]: /ja/service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/monitors/manage

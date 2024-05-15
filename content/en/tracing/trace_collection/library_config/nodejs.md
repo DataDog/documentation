@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
       text: 'API documentation'
+    - link: "/tracing/trace_collection/trace_context_propagation/nodejs/"
+      tag: "Documentation"
+      text: "Propagating trace context"
     - link: 'tracing/glossary/'
       tag: 'Use the APM UI'
       text: 'Explore your services, resources and traces'
@@ -44,6 +47,14 @@ The version number of the application.
 : **Configuration**: `tags`<br>
 **Default**: `{}`<br>
 Set global tags that are applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically, the format is `tracer.init({ tags: { foo: 'bar' } })`.
+
+`DD_TRACE_HEADER_TAGS`
+: **Configuration**: `headerTags` <br>
+**Default**: N/A <br>
+Accepts a comma-delimited list of case-insensitive HTTP headers optionally mapped to tag names. Automatically applies matching header values as tags on traces. When a tag name is not specified, it defaults to tags of the form `http.request.headers.<header-name>` for requests and `http.response.headers.<header-name>` for responses. **Note**: This option is only supported for HTTP/1.<br><br>
+**Example**: `User-ID:userId,Request-ID`<br>
+  - If the **Request/Response** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br>
+  - If the **Request/Response** has a header `Request-ID`, its value is applied as tag `http.request.headers.Request-ID` for requests and `http.response.headers.Request-ID` for responses.
 
 It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][1] documentation for recommendations on configuring these environment variables.
 
@@ -96,8 +107,8 @@ Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and t
 
 `DD_TRACE_RATE_LIMIT`
 : **Configuration**: `rateLimit`<br>
-**Default**: `1.0` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
-Ratio of spans to sample as a float between `0.0` and `1.0`. <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
+The maximum number of traces per second per service instance.<br>
 
 `DD_TRACE_SAMPLING_RULES`
 : **Configuration**: `samplingRules`<br>
@@ -231,16 +242,7 @@ Remote configuration polling interval in seconds.
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][5] and [W3C (TraceParent)][6] header extraction and injection for distributed tracing.
-
-You can configure injection and extraction styles for distributed headers.
-
-The Node.js Tracer supports the following styles:
-
-- Datadog: `Datadog`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
-- W3C Trace Context: `tracecontext`
-- B3 Single Header: `B3 single header`
+For information about valid values and using the following configuration options, see [Propagating Node.js Trace Context][5].
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Configuration**: `tracePropagationStyle.inject`<br>
@@ -257,7 +259,6 @@ A comma-separated list of header formats from which to attempt to extract distri
 **Default**: `Datadog,tracecontext`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configurations take priority when present.
 
-
 For more examples of how to work with the library see [API documentation][2].
 
 ## Further Reading
@@ -268,6 +269,5 @@ For more examples of how to work with the library see [API documentation][2].
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
-[5]: https://github.com/openzipkin/b3-propagation
-[6]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
-[13]: /agent/guide/network/#configure-ports
+[5]: /tracing/trace_collection/trace_context_propagation/nodejs
+[13]: /agent/configuration/network/#configure-ports

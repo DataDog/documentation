@@ -1,14 +1,23 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: サーバーレスモニタリングガイド
+disable_toc: true
 kind: ガイド
+private: true
 title: サーバーレスモニタリングガイド
 ---
 
-## サーバーレスアプリケーションを監視する
+## 一般的なサーバーレスガイド
 
 {{< whatsnext desc="サーバーレスアプリケーションを監視するためのベストプラクティス" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Lambda 関数を呼び出すリソースの詳細な視覚化{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/insights" >}}Serverless Insights{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_warnings" >}}サーバーレスの警告{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tagging" >}}サーバーレスのタグ付け{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent 構成{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/opentelemetry" >}}サーバーレスと OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Forwarder を使ったインストール
@@ -29,4 +38,5 @@ title: サーバーレスモニタリングガイド
     {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Node.js の Lambda トレースと Webpack の互換性{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}サーバーレスパッケージが大きすぎるエラーのトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/handler_wrapper" >}}Lambda ハンドラーをコードでラップする{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/layer_not_authorized" >}}レイヤーが認可されていないエラーのトラブルシューティング{{< /nextlink >}}
 {{< /whatsnext >}}

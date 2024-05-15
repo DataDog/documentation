@@ -13,6 +13,9 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
       text: 'Introduction to Application Performance Monitoring'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to boost your APM understanding'
 ---
 
 ## Overview
@@ -30,7 +33,7 @@ If you haven't already, create a [Datadog account][3].
 Before installing the Datadog Agent, set up a [Vagrant Ubuntu 22.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
 
 ```text
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
@@ -64,7 +67,7 @@ For the remaining steps, follow the [Quick start instructions][10] within the Da
 
 ### Enable APM
 
-For the latest versions of Agent v6 and v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][11]:
+For the latest versions of Agent v6 & v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][11]:
 
 ```yaml
 # apm_config:
@@ -76,7 +79,7 @@ And in `trace-agent.log`:
 
 ```bash
 # /var/log/datadog/trace-agent.log:
-2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-xenial
+2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-jammy
 2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
 2019-03-25 20:33:28 INFO (api.go:341) - no data received
 2019-03-25 20:34:18 INFO (service.go:63) - total number of tracked services: 0
@@ -84,7 +87,7 @@ And in `trace-agent.log`:
 
 ### Environment name
 
-For the best experience, it is recommended to use the the environment variable `DD_ENV` to configure `env` through your service's tracer.
+For the best experience, it is recommended to use the environment variable `DD_ENV` to configure `env` through your service's tracer.
 
 Additionally, if your tracer has logs injection enabled then the `env` is consistent across traces and logs. Read more about how this works in [Unified Service Tagging][12].
 
@@ -150,7 +153,7 @@ This outputs:
 hello world
 ```
 
-After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][14] or [trace list][15].
+After a few minutes, your trace displays in Datadog under the `hello` service. Check the [Service Catalog][14] or [trace list][15].
 
 {{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
@@ -163,13 +166,13 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [3]: https://www.datadoghq.com
 [4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [5]: https://www.vagrantup.com/intro/getting-started
-[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /agent/guide/agent-commands/#agent-information
+[8]: /agent/configuration/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://app.datadoghq.com/apm/service-setup
-[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /tracing/guide/setting_primary_tags_to_scope/
-[14]: https://app.datadoghq.com/apm/services
+[14]: https://app.datadoghq.com/services
 [15]: https://app.datadoghq.com/apm/traces

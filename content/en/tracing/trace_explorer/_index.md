@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The [Trace Explorer][1] gives you the ability to search all ingested or indexed spans using any tag on any span.  The spans found by your query change depending on whether you are searching Live (all spans ingested in the last 15 minutes, rolling) or indexed spans (spans retained for 15 days by your custom filters).
+The [Trace Explorer][1] gives you the ability to search all ingested or indexed spans using any tag on any span. The spans found by your query change depending on whether you are searching Live (all spans ingested in the last 15 minutes, rolling) or indexed spans (spans retained for 15 days by your custom filters).
 
 Instrumented applications send 100% of their traces to Datadog for [ingestion][2], making the traces available as Live traces for a rolling window of 15 minutes.
 
@@ -127,13 +127,17 @@ All spans indexed by custom retention filters *and* the intelligent retention fi
 {{% /tab %}}
 {{% tab "Timeseries View" %}}
 
-All spans indexed by custom retention filters (*not* the intelligent retention filter) are available to be searched when using trace analytics.
+All spans indexed by custom retention filters or the intelligent retention filter are available to be searched when using trace analytics.
 
-From the timeseries view, export your query to a [dashboard][1], a [monitor][2] or a [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold.
+From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. 
+
+**Note**: Spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards, notebooks, and from trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 
 [1]: /dashboards/widgets/timeseries/
 [2]: /monitors/types/apm/?tab=analytics
 [3]: /notebooks
+[4]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -154,6 +158,6 @@ You can customize which spans are retained and at what retention rates. By defau
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
 [9]: /account_management/billing/apm_distributed_tracing/
-[10]: /tracing/glossary/#service-entry-span
-[11]: /tracing/glossary/#trace-root-span
+[10]: /glossary/#service-entry-span
+[11]: /glossary/#trace-root-span
 [12]: https://app.datadoghq.com/apm/traces/retention-filters

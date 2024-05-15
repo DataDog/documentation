@@ -62,14 +62,14 @@ title: トレースメトリクス
 <br>
 **説明:** 特定のスパンのヒット数を表します。<br>
 **メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`version`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
+**タグ:** `env`、`service`、`version`、`resource`、`resource_name`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 `trace.<SPAN_NAME>.hits.by_http_status`
 : **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
 <br>
 **説明:** 特定のスパンのブレイクダウンの HTTP ステータスコード別ヒット数を表します。<br>
 **メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`version`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
+**タグ:** `env`、`service`、`version`、`resource`、`resource_name`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 ### レイテンシー分布
 
@@ -87,7 +87,7 @@ title: トレースメトリクス
 <br>
 **説明:** 特定のスパンのエラー数を表します。<br>
 **メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`version`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
+**タグ:** `env`、`service`、`version`、`resource`、`resource_name`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 `trace.<SPAN_NAME>.errors.by_http_status`
 : **前提条件:** このメトリクスは、すべての APM サービスに存在します。
@@ -118,13 +118,15 @@ title: トレースメトリクス
 
 ### Duration
 
-<div class="alert alert-warning">このトレースメトリクスの使用方法は時代遅れです。代わりに、<a href="/tracing/guide/ddsketch_trace_metrics/">DDSketch を使用してディストリビューションメトリクスをトレースする</a>ことが推奨されます。</div>
+<div class="alert alert-warning">Datadogでは、代わりに <a href="/tracing/guide/ddsketch_trace_metrics/">DDSketch を使用して分散メトリクスをトレース</a>することを推奨しています。</div>
 
 `trace.<SPAN_NAME>.duration`
-: **前提条件:** このメトリクスは、どの APM サービスにも存在します。<br>
-**説明:** [レガシー] 収集サービスで見られる子スパンを含む、時間間隔内のスパンの収集の合計時間を測定します。このメトリクスは、「下流サービスの % 実行時間」グラフを生成するために使用されます。`trace.<SPAN_NAME>.duration` を `trace.<SPAN_NAME>.hits` で割ると、平均レイテンシーが得られますが、これは平均レイテンシーを計算するための推奨アプローチではありません。平均レイテンシーの計算には、[レイテンシー分布](#latency-distribution)のセクションを参照してください。 <br>
+: **前提条件:** このメトリクスは、すべての APM サービスに存在します。<br>
+**説明:**  収集サービスで見られる子スパンを含む、時間間隔内のスパンのコレクションの合計時間を測定します。Datadog では、ほぼすべてのユースケースにおいて、平均レイテンシーまたはパーセンタイルの計算に[レイテンシー分布](#latency-distribution)を使用することが推奨されています。ホストタグフィルターを使用して平均レイテンシーを計算するには、このメトリクスを次の式で使用することができます。 <br>
+`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}` <br>
+このメトリクスは、パーセンタイル集計をサポートしていません。詳細については、[レイテンシー分布](#latency-distribution)セクションをご覧ください。
 **メトリクスタイプ:** [GAUGE][7].<br>
-**タグ:** `env`、`service`、`resource`、`http.status_code`、Datadog Host Agent のすべてのホストタグ、および [2 番目のプライマリタグ][4]。
+**タグ:** `env`、`service`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
 
 ### 継続時間
 
@@ -204,7 +206,7 @@ title: トレースメトリクス
 **メトリクスタイプ:** [GAUGE][7]。<br>
 **タグ:** `env`、`service`。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

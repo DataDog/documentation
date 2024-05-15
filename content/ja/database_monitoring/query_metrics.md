@@ -20,7 +20,7 @@ kind: documentation
 title: クエリメトリクスの確認
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -50,13 +50,13 @@ UI の **[APM > Databases][1]** をクリックして、データベースモニ
 
 - **Core**: サービス、ホスト、環境。
 - **Database**: Postgres には `database` ファセットと `user` ファセットがあります。MySQL には `schema` ファセットがあります。
-- **Infrastructure** Agent によって収集された従来の Datadog インフラストラクチャータグ。
+- **Infrastructure**: Agent によって収集された従来の Datadog インフラストラクチャータグ。
 
 ファセットを選択またはクリアして、関心のあるクエリのリストを見つけます。
 
 ### クエリメトリクスビューを単一のクエリにフィルタリングする
 
-クエリメトリクスビューのコンテンツを 1 つの[正規化クエリ][6]のみにフィルタリングする場合は、`query` ではなく `query_signature` でフィルタリングします。タグ名は 200 文字で切り捨てられます。クエリは長くなる可能性があるため、`query` タグは必ずしも一意ではありません。`query_signature` は正規化されたクエリのハッシュであり、正規化されたクエリの一意の ID として機能します。
+クエリメトリクスビューのコンテンツを 1 つの[正規化クエリ][4]のみにフィルタリングする場合は、`query` ではなく `query_signature` でフィルタリングします。タグ名は 200 文字で切り捨てられます。クエリは長くなる可能性があるため、`query` タグは必ずしも一意ではありません。`query_signature` は正規化されたクエリのハッシュであり、正規化されたクエリの一意の ID として機能します。
 
 (クエリシグネチャ値を検索せずに) 特定のクエリにフィルタリングする方法の1つが、リストからクエリをクリックすることです。これにより、[Query Details ページ](#query-details-page)が開くので、**Filter to This Query** をクリックします。これにより、クエリメトリクスページが `query_signature` ファセットでフィルタリングされます。
 
@@ -76,7 +76,7 @@ UI の **[APM > Databases][1]** をクリックして、データベースモニ
 
 ## クエリの詳細ページ
 
-クエリメトリクスリストでクエリをクリックすると、そのクエリの Query Details ページが開きます。ページの上部には、[正規化クエリ][6]の全文と、クエリに関連付けられているすべてのタグのリストが表示されます。タグのリストは、クエリが実行される各ホストからのすべてのタグの和集合です。リストを参照して、クエリが実行されているサーバーなどの情報を確認します。
+Query Metrics リストでクエリをクリックすると、そのクエリの Query Details ページが開きます。ページの上部には、[正規化クエリ][4]の全文と、クエリに関連付けられているすべてのタグのリストが表示されます。タグのリストは、クエリが実行される各ホストからのすべてのタグの和集合です。リストを参照して、クエリが実行されているサーバーなどの情報を確認します。
 
 {{< img src="database_monitoring/dbm_qd_tags.png" alt="クエリのタグリスト" style="width:100%;">}}
 
@@ -102,9 +102,9 @@ Datadog は説明プランを継続的に収集するため、特定のクエリ
 
 {{< img src="database_monitoring/dbm_qd_explain_plans.png" alt="クエリの説明プラン情報" style="width:100%;">}}
 
-プランを選択して、コストメトリクスまたはその JSON を表示します。**View All Samples for This Plan** をクリックして、[それに関連付けられているサンプル][4]の Query Samples ビューに移動します。
+プランを選択して、コストメトリクスまたはその JSON を表示します。**View All Samples for This Plan** をクリックして、[それに関連付けられているサンプル][5]の Query Samples ビューに移動します。
 
-クエリの種類やさまざまなコンフィギュレーション設定など、さまざまな理由から、すべてのクエリに説明プランがあるわけではありません。詳細については、[トラブルシューティング][5]を参照してください。
+クエリの種類やさまざまなコンフィギュレーション設定など、さまざまな理由から、すべてのクエリに説明プランがあるわけではありません。詳細については、[トラブルシューティング][6]を参照してください。
 
 ### このクエリを実行しているホスト
 
@@ -123,6 +123,6 @@ Datadog は説明プランを継続的に収集するため、特定のクエリ
 [1]: https://app.datadoghq.com/databases
 [2]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [3]: /ja/database_monitoring/query_samples/
-[4]: /ja/database_monitoring/query_samples/#sample-details
-[5]: /ja/database_monitoring/troubleshooting/#queries-are-missing-explain-plans
-[6]: /ja/database_monitoring/data_collected/#normalized-queries
+[4]: /ja/database_monitoring/data_collected/#normalized-queries
+[5]: /ja/database_monitoring/query_samples/#sample-details
+[6]: /ja/database_monitoring/troubleshooting/#queries-are-missing-explain-plans

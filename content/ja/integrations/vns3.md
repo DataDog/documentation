@@ -1,35 +1,60 @@
 ---
+app_id: vns3
+app_uuid: f6ffc9ae-a65d-41e4-8abd-c7194fc39a9a
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: vns3.peering
+      metadata_path: metadata.csv
+      prefix: vns3.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: VNS3
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Cohesive Networks
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
+- cloud
 - network
-creates_events: false
+- security
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md
-display_name: VNS3
+display_on_public_website: true
 draft: false
 git_integration_title: vns3
-guid: 1a7a2c46-37a8-4660-8d71-aaad733d987a
 integration_id: vns3
 integration_title: VNS3
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: vns3.
-metric_to_check: vns3.peering
+manifest_version: 2.0.0
 name: vns3
 public_title: VNS3
 short_description: アプリケーションの接続とセキュリティのためのクラウドネットワークアプライアンス。
-support: contrib
 supported_os:
 - linux
-- mac_os
 - windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::クラウド
+  - Category::ネットワーク
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: アプリケーションの接続とセキュリティのためのクラウドネットワークアプライアンス。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: VNS3
 ---
 
 

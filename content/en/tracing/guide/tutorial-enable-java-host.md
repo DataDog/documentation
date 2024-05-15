@@ -152,10 +152,10 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 Next, download the Java tracing library (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
 
 {{< code-block lang="sh" >}}
-curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
-If your operating system does not support curl, you can go directly to `https://dtdg.co/latest-java-tracer ` to download the `dd-java-agent.jar` file.
+If your operating system does not support curl, you can go directly to `'https://dtdg.co/latest-java-tracer' ` to download the `dd-java-agent.jar` file.
 
 ## Launch the Java application with automatic instrumentation
 
@@ -217,7 +217,7 @@ Use `curl` to again send requests to the application:
 
 Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-host-traces_cropped.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
@@ -438,7 +438,7 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [2]: /tracing/trace_collection/dd_libraries/java/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/java/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /getting_started/site/
 [7]: https://www.baeldung.com/java-instrumentation
 [8]: https://app.datadoghq.com/event/explorer

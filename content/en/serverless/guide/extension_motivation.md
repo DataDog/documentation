@@ -17,7 +17,7 @@ There are some key differences between the Lambda extension and the Forwarder. T
 
 ### Differences in functionality
 
-{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
+{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications" style="width:100%;">}}
 
 Although the Lambda Extension replaces the Forwarder as the recommended way to collect telemetry from Lambda functions, the Forwarder is required to collect and add metadata to other AWS service logs — including those from API Gateway, AppSync, and Lambda@Edge.
 
@@ -38,7 +38,7 @@ If you only want to collect logs, especially from many Lambda functions, it make
 
 ## Migrate to the Datadog Lambda Extension
 
-To migrate from the the Datadog Forwarder to the Datadog Lambda Extension, see the [Serverless configuration documentation][5].
+To migrate from the Datadog Forwarder to the Datadog Lambda Extension, see the [Serverless configuration documentation][5].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

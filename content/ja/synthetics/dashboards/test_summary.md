@@ -1,10 +1,10 @@
 ---
 further_reading:
-- link: /synthetics/ci_results_explorer
+- link: /continuous_testing/explorer/
   tag: ドキュメント
-  text: CI Results Explorer について学ぶ
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 kind: documentation
-title: Synthetics テストサマリーダッシュボード
+title: Synthetic テストサマリーダッシュボード
 ---
 
 ## 概要
@@ -12,14 +12,17 @@ title: Synthetics テストサマリーダッシュボード
 [テストサマリーダッシュボード][1]は、Synthetic テストの実行、CI/CD パイプラインの Synthetic テスト、およびプライベートロケーションに関する洞察を提供します。以下が表示されます。
 
 - **Synthetic モニタリングとテストの使用量**: Synthetic テストの使用量を、環境、チーム、テストタイプ別に表示します。
+
+  {{< img src="synthetics/dashboards/test_summary_dashboard.png" alt="すぐに使える Synthetic テストサマリーダッシュボード" style="width:100%" >}}
+
 - **テストの自動化**: CI/CD パイプラインで実行された Synthetic テストをタイプ別、チーム別に表示します。
+
+  {{< img src="synthetics/dashboards/test_automation.png" alt="Synthetic テストサマリーダッシュボードの Continuous Testing と CI/CD インテグレーションのセクション" style="width:100%" >}}
+
 - **プライベートロケーション**: プライベートロケーションごとの Synthetic ワーカーの数、平均同時実行数、平均プルテスト数を表示します。
 
-ピンクの Watchdog アイコンをクリックすると、[**Watchdog Insights**][2] サイドパネルが開き、アプリケーションパフォーマンスやトリガーされたモニターアラートにおける未解決の異常を分析することができます。
+  {{< img src="synthetics/dashboards/private_locations.png" alt="Synthetics テストサマリーダッシュボードのプライベートロケーションのセクション" style="width:100%" >}}
 
-{{< img src="synthetics/dashboards/test_summary_dashboard.png" alt="すぐに使える Synthetics テストサマリーダッシュボード" style="width:100%" >}}
-{{< img src="synthetics/dashboards/test_automation.png" alt="Synthetics テストサマリーダッシュボードの Synthetics と CI/CD インテグレーションのセクシ ョン" style="width:100%" >}}
-{{< img src="synthetics/dashboards/private_locations.png" alt="Synthetics テストサマリーダッシュボードのプライベートロケーションのセクション" style="width:100%" >}}
 
 表示されるデータの詳細については、[Synthetic モニタリングメトリクス][3]を参照してください。
 

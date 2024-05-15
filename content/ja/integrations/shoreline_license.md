@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: shoreline-software-license
 app_uuid: d1da5605-5ef5-47bc-af8d-16005945e21e
 assets: {}
@@ -21,10 +23,9 @@ integration_version: ''
 is_public: true
 kind: integration
 legal_terms:
-  eula: assets/terms_of_service_shoreline.pdf
+  eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: shoreline_license
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -63,8 +64,10 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Shoreline.io
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -77,23 +80,31 @@ Shoreline アプリは、モニターがトリガーされると自動的に自�
 
 Shoreline は、待機中の全員が最高の SRE と同等の能力を発揮できるよう支援します。Shoreline は、オンコールチームにデバッグツールと承認された修復アクションを提供し、エスカレーションを減らしてインシデントを迅速に修正し、ミスを減らして初回で正しくインシデントを修正できるよう支援します。
 
-まずは、[Shoreline][3] でトライアルアカウントを設定してください。
-## サポート
+まずは、[Shoreline][1] でトライアルアカウントを設定してください。
 
-Shoreline へのサポートやリクエストはメールにてご連絡ください。
+## Agent
 
-メール: [support@shoreline.io][2]
-詳しくは、[Shoreline のドキュメント][9]を参照してください。
+サポートおよび機能リクエストをご希望の場合は、以下のチャンネルから Shoreline にお問い合わせください。
 
-[1]: images/integrate_shoreline_and_datadog.png
+- メール: [support@shoreline.io][2]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Shoreline と Datadog による問題のデバッグと修復の自動化][11]
+- [Shoreline ドキュメント][9]
+
+[1]: https://shoreline.io/datadog?source=DatadogMarketplace
 [2]: mailto:support@shoreline.io
-[3]: https://shoreline.io/datadog?source=DatadogMarketplace
-[4]: https://docs.shoreline.io/integrations/datadog
+[3]: https://docs.shoreline.io/installation
+[4]: https://docs.shoreline.io/integrations/datadog#install-the-shoreline-integration
 [5]: https://docs.shoreline.io/installation/kubernetes
 [6]: https://docs.shoreline.io/installation/kubernetes#install-with-helm
 [7]: https://docs.shoreline.io/installation/virtual-machines
-[8]: images/link_icon.svg
+[8]: https://docs.shoreline.io/integrations/datadog#install-the-shoreline-integration
 [9]: https://docs.shoreline.io/
 [10]: https://app.datadoghq.com/account/settings#integrations/shoreline-integration
+[11]: https://www.datadoghq.com/blog/shoreline-io-marketplace-datadog/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/shoreline-software-license" target="_blank">こちらをクリック</a>してください。

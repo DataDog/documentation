@@ -29,11 +29,15 @@ aliases:
 - /es/videos/two_minute_intro/
 - /es/videos/unshare_screenboards/
 - /es/videos/weekly_monitor_report/
+- /es/video-categories/フレームグラフ/
+- /es/videos/apm
+- /es/videos/aws
+- /es/videos/host-map
 kind: documentación
 title: Centro de aprendizaje de Datadog
 ---
 
-Datadog es una plataforma extensa diseñada para que puedas entender tu infraestructura. En caso de duda, el [centro de aprendizaje de Datadog][1] está ahí para ayudarte a sacarle el máximo partido a todo lo que te ofrece la plataforma.
+Datadog es extensa una plataforma diseñada para que puedas entender tu infraestructura. En caso de dudas, el [Centro de aprendizaje de Datadog][1] está allí para ayudarte a sacarle el máximo partido a todo lo que te ofrece la plataforma.
 
 Entra en [Cursos][2] para ver la lista de todos los cursos disponibles.
 

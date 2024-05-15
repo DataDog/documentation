@@ -34,13 +34,15 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-Runtime metrics can be viewed in correlation with your Python services. See the [Service page][1] in Datadog.
+Runtime metrics can be viewed in correlation with your Python services. See the [Service Catalog][1] in Datadog.
 
 **Note**: For the runtime UI, `ddtrace` >= [`0.24.0`][2] is supported.
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][3].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
+
+Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][8].
 
 ## Data Collected
 
@@ -54,10 +56,11 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [4]: /agent/docker/#dogstatsd-custom-metrics
 [5]: /developers/dogstatsd/?tab=kubernetes#agent
 [6]: /agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30267/python-runtime-metrics
+[8]: /developers/dogstatsd/unix_socket/

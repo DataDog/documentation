@@ -147,7 +147,7 @@ Watchdog が新たな不正を検出したときに通知を受け取ること�
 
 [1]: /ja/monitors
 [2]: https://www.datadoghq.com/blog/monitoring-101-alerting/
-[3]: https://learn.datadoghq.com/courses/intro-to-monitoring
+[3]: https://learn.datadoghq.com/courses/introduction-to-observability
 [4]: /ja/monitors/create/types/anomaly/
 [5]: /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics/
 [6]: /ja/monitors/create/types/metric/?tab=change

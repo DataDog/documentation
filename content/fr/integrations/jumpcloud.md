@@ -1,7 +1,7 @@
 ---
 categories:
-  - web
-ddtype: crawler
+- event management
+- security
 dependencies: []
 description: JumpCloud
 doc_link: https://docs.datadoghq.com/integrations/jumpcloud/
@@ -20,6 +20,7 @@ short_description: Recueille des logs à partir de JumpCloud.
 team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 L'intégration JumpCloud vous permet de consulter les événements suivants :
@@ -42,13 +43,13 @@ L'intégration JumpCloud vous permet de consulter les événements suivants :
 
 Pour en savoir plus, consultez la [référence relative à l'API Insights][1].
 
-## Configuration
+## Implémentation
 
 ### Installation
 
 Aucune installation n'est requise.
 
-### Procédure à suivre
+### Configuration
 
 Consultez le carré de l'intégration pour obtenir des instructions détaillées. Une clé d'API provenant du portail d'administration de JumpCloud est requise.
 
@@ -56,7 +57,7 @@ Consultez le carré de l'intégration pour obtenir des instructions détaillées
 
 ### Logs
 
-Les logs sont recueillis à partir d'un seul endpoint d'API (voir la référence sur l'API Insights ci-dessus).
+Les logs sont recueillis à partir d'un seul endpoint d'API. Consultez la documentation relative à l'[API Insight][1] (en anglais).
 
 ### Métriques
 
@@ -66,9 +67,5 @@ L'intégration JumpCloud n'inclut aucune métrique.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
-[1]: https://jumpcloud-insights.api-docs.io/1.0/api-overview/directory-insights
+[1]: https://docs.jumpcloud.com/api/insights/directory/1.0/index.html
 [2]: https://docs.datadoghq.com/fr/help/

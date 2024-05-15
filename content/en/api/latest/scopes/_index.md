@@ -1,5 +1,6 @@
 ---
 title: Authorization Scopes
+type: documentation
 disable_sidebar: true
 ---
 ## Authorization scopes

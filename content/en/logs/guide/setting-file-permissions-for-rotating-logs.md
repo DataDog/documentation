@@ -23,7 +23,7 @@ In order to allow read-only access for `datadog-agent` only, [create ACLs and mo
 
 ### Verifying ACLs are enabled on your system
 
-[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article.  Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the `datadog-agent` user on a test directory, for example:
+[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article. Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the `datadog-agent` user on a test directory, for example:
 
 ```shell
 mkdir /var/log/test-dir
@@ -34,7 +34,7 @@ getfacl /var/log/test-dir/
 
 The permissions set for `datadog-agent` appears in the output of getfacl if ACLs are enabled.
 
-{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission"  >}}
+{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission" >}}
 
 ### Granting dd-agent read and execute permissions on log directories
 

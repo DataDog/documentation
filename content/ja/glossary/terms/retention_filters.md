@@ -1,4 +1,6 @@
 ---
+core_product:
+- apm
 synonyms:
 - インデックス化
 title: 保持フィルター

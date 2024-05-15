@@ -10,7 +10,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -19,7 +19,9 @@ further_reading:
 - link: "dashboards/functions/algorithms/#anomalies"
   tag: "Documentation"
   text: Anomalies function
-
+algolia:
+  rank: 70
+  tags: ['anomaly', 'anomaly monitor']
 ---
 
 ## Overview
@@ -38,7 +40,7 @@ Any metric reporting to Datadog is available for monitors. For more information,
 **Note**: The `anomalies` function uses the past to predict what is expected in the future, so using it on a new metric may yield poor results.
 
 After defining the metric, the anomaly detection monitor provides two preview graphs in the editor:
-{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" style="width:80%;">}}
 
 * The **Historical View** allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous.
 * The **Evaluation Preview** is longer than the alerting window and provides insight on what the anomalies algorithm takes into account when calculating the bounds.
@@ -54,13 +56,24 @@ Trigger window
 : How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
 
 Recovery window
-: How much time is required for the metric to not be considered anomalous so the alert recovers.
+: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the **Recovery Window** to the same value as the **Trigger Window**. 
+
+**Note**: The range of accepted values for the **Recovery Window** depends on the **Trigger Window** and the **Alert Threshold** to ensure the monitor can't both satisfy the recovery and the alert condition at the same time.
+Example:
+* `Threshold`: 50%
+* `Trigger window`: 4h
+The range of accepted values for the recovery window is between 121 minutes (`4h*(1-0.5) +1 min = 121 minutes`) and 4 hours. Setting a recovery window below 121 minutes could lead to a 4 hour timeframe with both 50% of anomalous points and the last 120 minutes with no anomalous points.
+
+Another example:
+* `Threshold`: 80%
+* `Trigger window`: 4h
+The range of accepted values for the recovery window is between 49 minutes (`4h*(1-0.8) +1 min = 49 minutes`) and 4 hours.
 
 ### Advanced options
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds" style="width:80%;">}}
 
 
 Deviations
@@ -82,7 +95,6 @@ Thresholds
 : The percentage of points that need to be anomalous for alerting, warning, and recovery.
 
 ### Seasonality
-<div class="alert alert-info"><strong>Note</strong>: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient. For example, a weekly seasonality requires at least two weeks of data.</div>
 
 Hourly
 : The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
@@ -93,6 +105,15 @@ Daily
 Weekly
 : The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.
 
+**Required data history for Anomaly Detection algorithm**: Machine learning algorithms require at least three time as much historical data time as the chosen seasonality time to compute the baseline.
+For example:
+
+* _weekly_ seasonality requires at least three weeks of data
+* _daily_ seasonality requires at least three days of data
+* _hourly_ seasonality requires at least three hours of data
+
+All of the seasonal algorithms may use up to six weeks of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
+
 ### Anomaly detection algorithms
 Basic
 : Use when metrics have no repeating seasonal pattern. Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
@@ -102,8 +123,6 @@ Agile
 
 Robust
 : Use when seasonal metrics expected to be stable, and slow, level shifts are considered anomalies. A [seasonal-trend decomposition][7] algorithm, it is stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (for example, if the level of a metric shifts due to a code change.)
-
-All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms can avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
 ## Examples
 The graphs below illustrate how and when these three algorithms behave differently from one another.
@@ -143,9 +162,9 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ## API
 
-Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
+Customers on an enterprise plan can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
 
-**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
+**Note**: Anomaly detection monitors are only available to customers on an enterprise plan. Customers on a pro plan interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
 Anomaly monitors are managed using the [same API][14] as other monitors. These fields are unique for anomaly monitors:
 
@@ -176,7 +195,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : The timeframe to be checked for anomalies (for example, `last_5m`, `last_1h`).
 
 `interval`
-: A positive integer representing the number of seconds in the rollup interval. The `interval` should be at least a fifth of the `alert_window` duration.
+: A positive integer representing the number of seconds in the rollup interval. It should be smaller or equal to a fifth of the `alert_window` duration.
 
 `count_default_zero`
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.

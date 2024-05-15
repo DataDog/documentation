@@ -19,6 +19,8 @@ Datadog integrations are configured through the Datadog Agent using YAML configu
 
 If an integration that you've configured is not showing up in Datadog, run the [`status` CLI command][2] and look for the integration under the *Running Checks* heading.
 
+**Note**: Community, Partner, and Marketplace integrations are not retained when the Agent is upgraded. These integrations need to be re-installed upon upgrading the Agent version.
+
 If the integration is listed under **Running Checks**, but is not visible in the Datadog app:
 1. Make sure there are no errors or warnings listed under the integration's entry in the `status` output.
 1. Check the [Metrics Explorer][3] to see if system metrics are showing up from the host. For example, on the host where you configured the integration, look for `system.cpu.user`.
@@ -35,11 +37,11 @@ If the integration is not listed under **Running Checks**:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /agent/guide/agent-commands/#agent-information
+[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/configuration/agent-commands/#agent-information
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: /agent/guide/agent-log-files/
+[4]: /agent/configuration/agent-log-files/
 [5]: /help/
 [6]: /integrations/
 [7]: https://codebeautify.org/yaml-parser-online
-[8]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[8]: /agent/configuration/agent-commands/#start-stop-restart-the-agent

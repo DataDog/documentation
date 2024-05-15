@@ -4,11 +4,11 @@ aliases:
 - /fr/integrations/rds/
 - /fr/integrations/faq/how-can-i-monitor-the-health-status-of-my-rds-instances/
 categories:
-- cloud
-- data store
 - aws
+- cloud
+- data stores
 - log collection
-ddtype: crawler
+- network
 dependencies: []
 description: Surveiller un ensemble de métriques relatives à Amazon RDS.
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
@@ -31,13 +31,18 @@ integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
+monitors:
+  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
+  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
+  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
 name: amazon_rds
 public_title: Intégration Datadog/Amazon RDS
 short_description: Surveiller un ensemble de métriques relatives à Amazon RDS.
 version: '1.0'
 ---
 
-{{< img src="integrations/awsrds/rdsdashboard.png" alt="Dashboard RDS" popup="true">}}
+<!-- SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS Dashboard" popup="true">}}
 
 ## Présentation
 
@@ -52,12 +57,12 @@ Vous pouvez surveiller les instances RDS avec les intégrations standard, améli
 {{< tabs >}}
 {{% tab "Intégration standard" %}}
 
-Pour installer l'intégration standard, sélectionnez RDS sur le côté gauche du [carré d'intégration AWS][1]. Vous pourrez ainsi recevoir des métriques relatives à votre instance aussi souvent que votre intégration CloudWatch le permet. Tous les types de moteurs RDS sont pris en charge.
+Pour installer l'intégration standard, vous devez activer RDS dans l'onglet `Metric Collection` de la [page de l'intégration AWS][1]. Vous pourrez ainsi recevoir des métriques relatives à votre instance aussi souvent que votre intégration CloudWatch le permet. Tous les types de moteurs RDS sont pris en charge.
 
 Le dashboard par défaut pour cette intégration rassemble des informations sur les connexions, le décalage de réplication, la latence et les opérations de lecture, l'ordinateur, la RAM, la latence et les opérations d'écriture ainsi que le disque.
 
 
-[1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 {{% /tab %}}
 {{% tab "Intégration améliorée" %}}
 
@@ -81,7 +86,7 @@ Il existe trois dashboards par défaut pour cette configuration : MySQL, Aurora
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -161,7 +166,7 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
 {{< tabs >}}
 {{% tab "Intégration standard" %}}
 
-1. Dans le [carré d'intégration AWS][1], assurez-vous que l'option `RDS` est cochée dans la section concernant la collecte des métriques.
+1. Sur la [page de l'intégration AWS][1], vérifiez que `RDS` est activé dans l'onglet `Metric Collection`.
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][2] afin de recueillir des métriques Amazon RDS. Pour en savoir plus, consultez la section relative aux [stratégies RDS][3] (en anglais) de la documentation AWS.
 
     | Autorisation AWS            | Description                          |
@@ -170,16 +175,16 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
     | `rds:ListTagsForResource` | Ajoute des tags personnalisés aux instances RDS.    |
     | `rds:DescribeEvents`      | Ajoute des événements associés aux bases de données RDS. |
 
-3. Installez l'[intégration Datadog/AWS RDS][4].
+3. Installez l'[intégration Datadog/Amazon RDS][4].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
+[4]: https://app.datadoghq.com/integrations/amazon-rds
 {{% /tab %}}
 {{% tab "Intégration améliorée" %}}
 
-1. Dans le [carré d'intégration AWS][1], assurez-vous que l'option `RDS` est cochée dans la section concernant la collecte des métriques.
+1. Sur la [page de l'intégration AWS][1], vérifiez que `RDS` est activé dans l'onglet `Metric Collection`.
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][2] afin de recueillir des métriques Amazon RDS. Pour en savoir plus, consultez la section relative aux [stratégies RDS][3] (en anglais) de la documentation AWS.
 
     | Autorisation AWS            | Description                          |
@@ -188,13 +193,13 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
     | `rds:ListTagsForResource` | Ajoute des tags personnalisés aux instances RDS.    |
     | `rds:DescribeEvents`      | Ajoute des événements associés aux bases de données RDS. |
 
-3. Installez l'[intégration Datadog/AWS RDS][4].
+3. Installez l'[intégration Datadog/Amazon RDS][4].
 
 
-[1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
+[4]: https://app.datadoghq.com/integrations/amazon-rds
 {{% /tab %}}
 {{% tab "Intégration native" %}}
 
@@ -209,9 +214,9 @@ init_config:
 
 instances:
     # L'URL d'endpoint de la console AWS
-    - server: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
-      user: '<NOMUTILISATEUR>'
-      pass: '<MOTDEPASSE>'
+    - server: 'mysqlrds.blah.us-east-1.rds.amazonaws.com'
+      user: '<NOM_UTILISATEUR>'
+      pass: '<MOT_DE_PASSE>'
       port: 3306
       tags:
           - 'dbinstanceidentifier:<NOM_INSTANCE>'
@@ -223,13 +228,13 @@ Si vous utilisez PostgreSQL, modifiez `postgres.yaml` :
 init_config:
 
 instances:
-    - host: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
+    - host: 'postgresqlrds.blah.us-east-1.rds.amazonaws.com'
       port: 5432
-      username: '<NOMUTILISATEUR>'
-      password: '<MOTDEPASSE>'
-      dbname: '<NOM_BDD>'
+      username: '<NOM_UTILISATEUR>'
+      password: '<MOT_DE_PASSE>'
+      dbname: '<NOM_BASE_DE_DONNÉES>'
       tags:
-          - 'dbinstanceidentifier:<NOM_INSTANCE_BDD>'
+          - 'dbinstanceidentifier:<NOM_INSTANCE_BASE_DE_DONNÉES>'
 ```
 
 Si vous utilisez Microsoft SQL Server, modifiez `sqlserver.yaml` :
@@ -238,11 +243,11 @@ Si vous utilisez Microsoft SQL Server, modifiez `sqlserver.yaml` :
 init_config:
 
 instances:
-    - host: 'mysqlrds.blah.us-east1-rds.amazonaws.com,1433'
-      username: '<NOMUTILISATEUR>'
-      password: '<MOTDEPASSE>'
+    - host: 'sqlserverrds.blah.us-east-1.rds.amazonaws.com,1433'
+      username: '<NOM_UTILISATEUR>'
+      password: '<MOT_DE_PASSE>'
       tags:
-          - 'dbinstanceidentifier:<NOM_INSTANCE_BDD>'
+          - 'dbinstanceidentifier:<NOM_INSTANCE_BASE_DE_DONNÉES>'
 ```
 
 ### Validation
@@ -295,9 +300,9 @@ Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes
 
 ### Événements
 
-L'intégration AWS RDS comprend des événements liés aux instances de base de données, aux groupes de sécurité, aux snapshots et aux groupes de paramètres. Vous trouverez ci-dessous des exemples d'événements :
+L'intégration Amazon RDS comprend des événements liés aux instances de base de données, aux groupes de sécurité, aux snapshots et aux groupes de paramètres. Vous trouverez ci-dessous des exemples d'événements :
 
-{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="Événements AWS RDS" >}}
+{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="Événements Amazon RDS" >}}
 
 ### Checks de service
 
@@ -309,9 +314,16 @@ Surveille le statut du [réplica en lecture][8]. Ce check renvoie l'un des statu
 - WARNING - Arrêté
 - UNKNOWN - Autre
 
+## Fonctionnalités de surveillance prêtes à l'emploi
+
+L'intégration Amazon RDS propose des fonctionnalités de surveillance prêtes à l'emploi vous permettant de surveiller et d'optimiser vos performances.
+
+- Dashboard Amazon RDS : bénéficiez d'une vue d'ensemble complète de vos instances RDS grâce à [ce dashboard prêt à l'emploi][9].
+- Monitors recommandés : activez les [monitors Amazon RDS recommandés][10] pour détecter des problèmes de façon proactive et recevoir des alertes en temps opportun.
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Pour aller plus loin
 
@@ -321,8 +333,10 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [2]: https://docs.datadoghq.com/fr/dashboards/
 [3]: https://docs.datadoghq.com/fr/monitors/
 [4]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[5]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
 [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
-[9]: https://docs.datadoghq.com/fr/help/
+[9]: https://app.datadoghq.com/dash/integration/62/aws-rds
+[10]: https://app.datadoghq.com/monitors/recommended
+[11]: https://docs.datadoghq.com/fr/help/

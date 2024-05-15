@@ -105,7 +105,7 @@ spec:
 
 ### Accessing the cloud provider metadata endpoint
 
-If you run in AWS, GCP, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
+If you run in AWS, Google Cloud, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
 
 Accessing the cloud provider metadata endpoint allows Datadog to properly match Agent data and cloud integration data in the application.
 
@@ -177,7 +177,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## AWS ECS and Docker VM hostname errors
+## Amazon ECS and Docker VM hostname errors
 
 When the Agent runs in Docker on a cloud provider, a hostname error usually means that the Agent cannot access at least one of:
 * Container runtime API
@@ -188,7 +188,7 @@ When the Agent runs in Docker on a cloud provider, a hostname error usually mean
 Allow the Agent to connect to the Docker socket:
 
 {{< tabs >}}
-{{% tab "AWS ECS on EC2" %}}
+{{% tab "Amazon ECS on EC2" %}}
 
 Make sure the Docker socket is mounted in your [task definition][1].
 
@@ -208,7 +208,7 @@ Make sure the Docker socket is mounted in your `docker run` command:
 
 ### Accessing the cloud provider metadata endpoint
 
-If you run in AWS, GCP, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
+If you run in AWS, Google Cloud, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
 
 Accessing the cloud provider metadata endpoint allows Datadog to properly match Agent data and cloud integration data in the application.
 

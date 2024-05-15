@@ -66,12 +66,12 @@ Epoch テンプレート変数は、通知内で人間が読みやすい文字�
 
 ### ローカルタイム
 
-`local_time` 関数を使うと、通知の中に好きなタイムゾーンで別の日付を追加することができます。この関数は、日付をローカルタイムに変換します: `{{local_time 'time_variable' 'timezone'}}`
+`local_time` 関数を使うと、通知の中に好きなタイムゾーンで別の日付を追加することができます。この関数は、日付をローカルタイムに変換します: `{{local_time "time_variable" "timezone"}}`
 
 例えば、東京のタイムゾーンで最後にトリガーされたシグナルの時刻を通知に追加するには、通知メッセージに次のように記述します。
 
 ```
-{{local_time 'last_triggered_at' 'Asia/Tokyo'}}
+{{local_time "last_triggered_at" "Asia/Tokyo"}}
 ```
 
 結果は、ISO 8601 形式 `yyyy-MM-dd HH:mm:ss±HH:mm` で表示されます。例: `2021-05-31 23:43:27+09:00`。 利用可能なタイムゾーンの値については、[tz データベースのタイムゾーンリスト][3]、特に `TZ database name` の列をご参照ください。
@@ -109,7 +109,7 @@ HIPAA 対応 Datadog 組織がセキュリティ通知に関してアクセス�
 }
 ```
 
-“Say what’s happening” セクションで以下を使用した場合
+**Say what's happening** セクションで以下を使用した場合
 
 ```
 {{@usr.id}} just logged in without MFA from {{@network.client.ip}}.

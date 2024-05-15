@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: "/continuous_integration/pipelines/custom_commands/"
     tag: "Documentation"
-    text: "Troubleshooting CI"
+    text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -21,10 +21,10 @@ Custom commands provide a way to trace individual commands in your CI pipelines,
 
 Custom commands work with the following CI providers:
 
-- Jenkins with Datadog plugin >= v3.2.0
+- Jenkins with the Datadog plugin >= v3.2.0
 - CircleCI
 
-## Installing the Datadog CI CLI
+## Install the Datadog CI CLI
 
 Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 
@@ -32,7 +32,7 @@ Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
-## Tracing a command
+## Trace a command
 
 To trace a command, run:
 
@@ -94,7 +94,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

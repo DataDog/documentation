@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - カスタムメトリクス
 aliases:
 - /ja/guides/metrics/
 - /ja/metrictypes/
@@ -7,6 +10,7 @@ aliases:
 - /ja/developers/metrics/custom_metrics/
 - /ja/getting_started/custom_metrics
 - /ja/developers/metrics/
+- /ja/metrics/guide/tag-configuration-cardinality-estimation-tool/
 further_reading:
 - link: /developers/dogstatsd/
   tag: ドキュメント
@@ -14,9 +18,15 @@ further_reading:
 - link: /developers/community/libraries/
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: メトリクスの可能性を最大限に引き出すインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/metrics-without-limits/
   tag: ブログ
   text: Metrics without Limits™ でカスタムメトリクスのボリュームをダイナミックにコントロール
+- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
+  tag: ブログ
+  text: Datadog で Azure App Service 上の Linux Web アプリを監視する
 kind: documentation
 title: カスタムメトリクス
 ---
@@ -27,7 +37,7 @@ title: カスタムメトリクス
 
 カスタムメトリクスは、**メトリクス名とタグ値 (ホストタグを含む) の組み合わせ**により、一意に識別されます。一般に、[DogStatsD][3] または[カスタム Agent チェック][4]を使用して送信されるメトリクスはすべて、カスタムメトリクスとなります。
 
-**注**: Datadog 管理者のロールを持つユーザーは、[使用量の詳細ページ][5]で、アカウントの 1 時間当たりのカスタムメトリクスの月平均数と、上位 500 個のカスタムメトリクスを参照できます。詳しくは、[カスタムメトリクスの数え方][6]を参照してください。
+**注**: Datadog 管理者のロールまたは `usage_read` 権限を持つユーザーは、[使用量の詳細ページ][5]で、アカウントの 1 時間当たりのカスタムメトリクスの月平均数と、上位 5000 個のカスタムメトリクスを参照できます。詳しくは、[カスタムメトリクスの数え方][6]を参照してください。
 
 ## カスタムメトリクスのプロパティ
 
@@ -54,6 +64,10 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 
 **注**: Datadog のメトリクス名は大文字と小文字が区別されます。
 
+### メトリクス単位
+
+[メトリクスサマリー][12]を使用してメトリクス単位を設定するか、視覚化のグラフエディタで[単位のオーバーライド][13]機能を使用してカスタムメトリクス単位を設定します。詳細については、[メトリクス単位][14]のドキュメントを参照してください。
+
 ## カスタムメトリクスの送信
 
 {{< whatsnext desc="メトリクスを Datadog に送信する方法は複数あります。">}}
@@ -64,10 +78,11 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog の HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}ログベースのメトリクスを生成する{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}APM スパンベースのメトリクスを生成する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}RUM イベントベースのメトリクスを生成する{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}ライブプロセスベースのメトリクスを生成する{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[Datadog 公式/コミュニティ寄稿の API および DogStatsD クライアントライブラリ][12]のいずれかを使用して、カスタムメトリクスを送信することもできます。
+[Datadog 公式/コミュニティ寄稿の API および DogStatsD クライアントライブラリ][15]のいずれかを使用して、カスタムメトリクスを送信することもできます。
 
 **注**: カスタムメトリクスの送信に適用される[固定のレート制限][5]はありません。デフォルトの割り当てを超えた場合は、[Datadog のカスタムメトリクスの課金ポリシー][6]に従って課金されます。
 
@@ -88,4 +103,7 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
 [9]: /ja/metrics/types/?tab=rate#metric-types
 [10]: /ja/metrics/types/?tab=count#metric-types
 [11]: /ja/developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
-[12]: /ja/developers/community/libraries/
+[12]: /ja/metrics/summary/#metric-unit
+[13]: /ja/dashboards/guide/unit-override/
+[14]: /ja/metrics/units/
+[15]: /ja/developers/community/libraries/

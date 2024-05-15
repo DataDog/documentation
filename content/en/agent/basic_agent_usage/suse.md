@@ -17,7 +17,7 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
 ---
@@ -115,6 +115,55 @@ Configuration files for [Integrations][1]:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Uninstall the Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+```shell
+sudo zypper remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/datadog-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+
+```shell
+sudo zypper remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Troubleshooting
 
 See the [Agent Troubleshooting documentation][3].
@@ -129,7 +178,7 @@ See the instructions on how to [add packages to the embedded Agent][4] for more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/suse
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=suse
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /agent/troubleshooting/
 [4]: /developers/guide/custom-python-package/

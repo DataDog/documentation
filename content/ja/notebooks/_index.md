@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/graphing/notebooks/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/
   tag: ブログ
@@ -11,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+  tag: blog
+  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
 kind: documentation
 title: ノートブック
 ---
@@ -21,7 +27,7 @@ title: ノートブック
 
 ## はじめに
 
-1. メインナビゲーションの **Notebooks > New Notebook** から、[新しいノートブック][1]を構築します。
+1. [Notebook List][1] ページで、**+ New Notebook** をクリックします。
 
 2. **Save Notebook** ボタンをクリックします。</br>
   **注**: 新しいノートブックは、デフォルトでは保存されません。
@@ -62,15 +68,13 @@ title: ノートブック
 
 ノートブックをドキュメントエディタにコピーするには、**Copy formatted contents** をクリックします。Google ドキュメントや Microsoft Word などのドキュメントエディタに貼り付けて、グラフを含むノートブックのコンテンツを元の形式で表示します。
 
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Google ドキュメントでのノートブックのエクスポートの例"  style="width:100%;">}}
-
 ### ノートブック JSON のインポートまたはエクスポート
 
 ノートブックの定義を含む JSON ファイルをダウンロードするには、**Export Notebook JSON** を使用します。**Import Notebook JSON** を使用すると、ノートブックのすべてのコンテンツがアップロード済みの JSON コンテンツで上書きされます。
 
 ### 個々のセルへのリンク設定
 
-セルの **Share** メニューの **Link directly to cell** をクリックすると、特定のセルの URL をコピーすることができます。直接リンクは、視覚化のセルと Markdown のセルの両方で利用できます。
+特定のセルの URL をコピーするには、セルの **Share** メニューをクリックし、**Link directly to cell** を選択します。直接リンクは、視覚化セルとマークダウンセルの両方で利用できます。
 
 ユーザーが特定のセルの URL にアクセスすると、ノートブックが開き、ビューポートの上部にセルが表示されます。絶対リンクのため、セルの URL はノートブック内で新しい位置に移されたとしても、変わることはありません。
 
@@ -78,7 +82,7 @@ title: ノートブック
 
 {{< img src="notebooks/notebook_list.png" alt="選択したノートブックのセルの種類をプレビューするノートブック一覧" style="width:100%;">}}
 
-[ノートブック一覧][2]で、以前に作成したノートブックの表示と検索ができます。各ノートブックの名前、作成者、最終更新日が表示されます。ノートブックは以下のグループに分けられます。
+[ノートブック一覧][1]で、以前に作成したノートブックの表示と検索ができます。各ノートブックの名前、作成者、最終更新日が表示されます。ノートブックは以下のグループに分けられます。
 
 * **Your Notebooks**: 自分が作成したノートブック。
 * **All Notebooks**: 組織内のすべてのノートブック。
@@ -87,7 +91,10 @@ title: ノートブック
 任意のノートブックのプレビューアイコンにカーソルを合わせると、ウィジェットタイプや Markdown を含むコンテンツのプレビューが表示されます。[ビューモード](#view-mode)でノートブックを開くには、ノートブックにカーソルを合わせ、右側にある **Open notebook in view mode** をクリックします。
 
 ## テンプレートギャラリー
-[テンプレートギャラリー][3]では、インシデントレスポンスのポストモーテムやインシデントレポートなど、新しいノートブックを作成するためにすぐに使えるテンプレートが紹介されています。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
+[テンプレートギャラリー][2]では、新しいノートブックを作成するための、すぐに使えるテンプレートが紹介されています。テンプレートには、インシデントレスポンスのポストモーテム、インシデントレポート、SLO 仕様が含まれます。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
+
+## バージョン履歴
+ノートブックから **Configure** アイコンをクリックし、**Version history** をクリックすると、バージョン履歴のサイドパネルが表示されます。ノートブックのバージョン履歴をプレビューしたり、復元したり、複製したりすることができます。詳しくは、[バージョン履歴ガイド][3]を参照してください。
 
 ## ノートブックの構成
 
@@ -153,36 +160,61 @@ title: ノートブック
 
 #### コンテンツの種類
 
-ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][5] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][15] でフォーマットされたダイアグラムもサポートしています。
+ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][5] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][6] でフォーマットされたダイアグラムもサポートしています。
 
 ノートブック内のグラフは、Datadog のすべてのデータソースに対応しています（メトリクス、ログイベント、インデックス化されたスパン、ライブプロセス、ネットワークトラフィック、RUM イベント、プロファイリングのメトリクス、セキュリティシグナルなど）。グラフは、Datadog のクエリエディターで作成します。ノートブックは以下に対応しています。
 
-* [時系列][6]
-* [トップリスト][7]
-* [テーブル][8]
-* [ヒートマップ][9]
-* [ディストリビューション][10]
-* [リスト][11]
-* [クエリ値][12]
-* [ファネル][13]
-* [パイ][14]
+* [時系列][7]
+* [トップリスト][8]
+* [テーブル][9]
+* [ヒートマップ][10]
+* [ディストリビューション][11]
+* [リスト][12]
+* [クエリ値][13]
+* [ファネル][14]
+* [パイ][15]
+* [SLO][16]
+
+### 編集アクセス権の制限
+
+デフォルトでは、すべてのユーザーがノートブックにフルアクセスできます。
+
+きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][17]を制限することができます。
+1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
+1. **Permissions** を選択します。
+1. **Restrict Access** をクリックします。
+1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
+1. ドロップダウンを使用して、ノートブックを編集できる 1 つまたは複数のロール、チーム、ユーザーを選択します。
+1. **Add** をクリックします。
+1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
+1. **Save** をクリックします。
+
+**注:** ノートブックの編集アクセス権を維持するために、保存する前に、少なくとも 1 つのロールのメンバーであることを含めることがシステムから要求されます。
+
+アクセスが制限されたノートブックに一般的なアクセスを戻すには、次の手順に従います。
+1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
+1. **Permissions** を選択します。
+1. **Restore Full Access** をクリックします。
+1. **Save** をクリックします。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/notebook
-[2]: https://app.datadoghq.com/notebook/list
-[3]: https://app.datadoghq.com/notebook/template-gallery
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://app.datadoghq.com/notebook/template-gallery
+[3]: /ja/notebooks/guide/version_history
 [4]: /ja/dashboards/template_variables/
 [5]: https://daringfireball.net/projects/markdown/
-[6]: /ja/dashboards/widgets/timeseries/
-[7]: /ja/dashboards/widgets/top_list/
-[8]: /ja/dashboards/widgets/table/
-[9]: /ja/dashboards/widgets/heat_map/
-[10]: /ja/dashboards/widgets/distribution/
-[11]: /ja/dashboards/widgets/list/
-[12]: /ja/dashboards/widgets/query_value/
-[13]: /ja/dashboards/widgets/funnel/
-[14]: /ja/dashboards/widgets/pie_chart/
-[15]: https://mermaid.js.org/
+[6]: https://mermaid.js.org/
+[7]: /ja/dashboards/widgets/timeseries/
+[8]: /ja/dashboards/widgets/top_list/
+[9]: /ja/dashboards/widgets/table/
+[10]: /ja/dashboards/widgets/heatmap/
+[11]: /ja/dashboards/widgets/distribution/
+[12]: /ja/dashboards/widgets/list/
+[13]: /ja/dashboards/widgets/query_value/
+[14]: /ja/dashboards/widgets/funnel/
+[15]: /ja/dashboards/widgets/pie_chart/
+[16]: /ja/dashboards/widgets/slo/
+[17]: /ja/account_management/rbac/

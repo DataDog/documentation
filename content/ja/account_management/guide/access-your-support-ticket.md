@@ -11,7 +11,7 @@ title: サポートチケットにアクセスする
 新しいサポートチケットを作成するには、該当するサイトのリンクをクリックし、**Submit a request** をクリックしてチケットフォームに必要事項を記入してください。
 
 {{< whatsnext desc="Datadog サイト別サポートページ:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1、US3、US5、EU {{< /nextlink >}}
+    {{< nextlink href="https://help.datadoghq.com/" >}} US1、US3、US5、EU、AP1 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -35,7 +35,7 @@ Datadog の[ヘルプページ][2]から左側のナビゲーションから **?
 6. 組織全体のチケットを表示したい場合は、Datadog サポートにリクエストを送信してください。
 
 {{< whatsnext desc="Datadog サイト別サポートページ:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1、US3、US5、EU {{< /nextlink >}}
+    {{< nextlink href="https://help.datadoghq.com/" >}} US1、US3、US5、EU、AP1 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 

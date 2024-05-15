@@ -311,7 +311,7 @@ data:
 - 自己署名証明書を使用する場合は、`kube_controller_manager` および `kube_scheduler` コンフィギュレーションの `ssl_verify` フィールドを `false` に設定する必要があります。
 - 安全なポートをターゲットにする場合、Controller Manager および Scheduler コンフィギュレーションの `bind-address` オプションは、Datadog Agent から到達可能である必要があります。例:
 
-```
+```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 controllerManager:

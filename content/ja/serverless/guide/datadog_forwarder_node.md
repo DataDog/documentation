@@ -62,12 +62,13 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
+
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
 [Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][6]に追加する必要があります。
 
 Datadog サーバーレスプラグインをインストールして構成するには、次の手順に従います。
 
@@ -90,12 +91,11 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 **注**: Lambda 関数が Datadog のトレーシングライブラリと　[Webpack][5] を同時に使用している場合は、これらの[追加のコンフィギュレーションステップ][4]に従ってください。
 
-
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: /ja/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
+[6]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -251,20 +251,21 @@ Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケ�
 
 #### レイヤーの使用
 
-以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][8]します。
 
 ```
-# 通常のリージョンの場合
+# us、us3、us5、eu リージョンの場合
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # 米国政府リージョンの場合
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
-```
-
-使用できる `RUNTIME` オプションは、`Node12-x`、`Node14-x`、`Node16-x` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+
+利用可能な `RUNTIME` オプションは {{< latest-lambda-layer-version layer="node-versions" >}} です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
+
+```
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][2]に追加する必要があります。
@@ -304,7 +305,6 @@ yarn add datadog-lambda-js
 1. [まだの場合は、Datadog Forwarder をインストールします][6]。
 2. [Datadog Forwarder を関数のロググループにサブスクライブします][7]。
 
-
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
@@ -312,12 +312,14 @@ yarn add datadog-lambda-js
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ### タグ
 
-オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][5]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることをお勧めします。
+オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][2]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることをお勧めします。
 
 ## 確認
 

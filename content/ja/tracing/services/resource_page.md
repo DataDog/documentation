@@ -18,13 +18,13 @@ kind: documentation
 title: リソースステータス画面
 ---
 
-{{< img src="tracing/visualization/resource/ressource.png" alt="リソース"  >}}
+{{< img src="tracing/visualization/resource/resource-page.png" alt="APM リソースページ" >}}
 
 リソースは、特定の[サービス][1]（通常は個々のエンドポイントまたはクエリ）に対する特定のアクションです。リソースの詳細については、[APM を開始する][2]をご覧ください。リソースごとに、APM は以下をカバーするダッシュボードページを自動的に生成します。
 
 * 主要なヘルスメトリクス
 * このサービスに関連付けられているすべてのモニターのモニターステータス
-* このサービスに関連付けられているすべてのリソースのリストとメトリクス
+* このサービスに関連付けられているすべてのリソースのメトリクスのリスト
 
 ## すぐに使えるグラフ
 
@@ -45,7 +45,7 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
   **注**: *Postgres* や *Redis* などのサービスは、他のサービスを呼び出さない「最終的な」オペレーションであり、サブサービスのグラフはありません。
 
-{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="すぐに使えるリソースグラフ"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="すぐに使えるリソースグラフ" style="width:90%;">}}
 
 ### ダッシュボードへのエクスポート
 
@@ -55,33 +55,38 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 リソースステータス画面にも、リソースレイテンシー分布グラフが表示されます。
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="レイテンシー分布"  style="width:100%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="レイテンシー分布" style="width:100%;">}}
 
 右上のセレクターを使用して特定のパーセンタイルを拡大するか、サイドバーにカーソルを合わせてパーセンタイルマーカーを表示します。
 
-{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="レイテンシー分布セレクター"  style="width:50%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="レイテンシー分布セレクター" style="width:50%;">}}
 
-## 依存関係マップ
+## ナビゲーター付き依存関係マップ
 
-また、リソースの上流と下流のすべてのサービスの依存関係のマップを表示することができます。依存関係マップを使用すると、特定のリソース (エンドポイントやデータベースクエリなど) をエンドツーエンドで通過するスパンを持つサービスのフローをすばやく確認することができます。
+また、リソースの上流と下流のすべてのサービスの依存関係のマップを表示することができます。依存関係マップナビゲーターを使用すると、特定のリソース (エンドポイントやデータベースクエリなど) をエンドツーエンドで通過するスパンを持つサービスのフローを、リクエスト数とともにすばやく確認することができます。
 
 依存関係マップは、サービスエントリースパンを含むリソースにのみ利用可能です。
 
-{{<img alt="resource dependency map" src="tracing/visualization/resource/resource_dependency_map.png" style="width:100%;">}}
+{{< img src="tracing/visualization/resource/dependency-map-navigator.png" alt="依存関係マップナビゲーター" style="width:100%;" >}}
 
-ノードにカーソルを合わせると、リクエスト/秒、エラーレート、平均レイテンシーなど、各サービスのメトリクスが表示されます。
+ノードにカーソルを合わせると、リクエスト/秒、エラー率、平均レイテンシーなど、各サービスのメトリクスを表示します。ノードをクリックすると、コンテキストメニューが表示され、サービスページや関連するトレースなどを表示することができます。
 
 ノードのハイライト色は、そのサービスの[モニターステータス][5]を示しています。サービスに複数のモニターが構成されている場合、最も厳しいモニターのステータスが表示されます。
 
-{{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
+{{< img src="tracing/visualization/resource/dependency-navigator.mp4" video="true" alt="リスト上でカーソルを合わせてクリック" style="width:100%;" >}}
 
-ノードをクリックすると、サービスページや関連するトレースなどを表示するオプションが付いたコンテキストメニューが表示されます。
+### 負荷増幅
+
+選択したリソースのアップストリームで受信したリクエストの 100% 以上を受信している場合、サービスには負荷増幅があります。コールパスがオレンジ色でハイライトされているサービスには負荷増幅があり、増幅倍率はパネル上のリストに表示されます。増幅は、リソースが受信したリクエスト (下のイメージで地図上にハイライト表示) と、ダウンストリームサービスが受信したリクエスト (地図上のダウンストリームサービスノード内に表示) に基づいて計算されます。リスト内のサービスをクリックすると、増幅に寄与しているスパンを確認することができます。
+
+{{< img src="tracing/visualization/resource/dependency-map-requests.png" alt="リソースのリクエスト数を示す依存関係マップ" style="width:100%;" >}}
+
 
 ## スパンサマリー
 
 特定のリソースについて、Datadog は一致するすべてのトレースの[スパン][6]分析内訳を提供します。
 
-{{< img src="tracing/visualization/resource/span_stats.png" alt="スパン統計"  style="width:80%;">}}
+{{< img src="tracing/visualization/resource/span_stats.png" alt="スパン統計" style="width:80%;">}}
 
 表示されるメトリクスは、スパンごとに次を表します。
 
@@ -105,9 +110,9 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 環境、サービス、オペレーション、およびリソース名で既にフィルタリングされている[トレース検索][8]モーダルで、このリソースに関連付けられている[トレース][7]のリストを参照してください。
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="トレースの一覧画面"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="トレースの一覧画面" style="width:90%;">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

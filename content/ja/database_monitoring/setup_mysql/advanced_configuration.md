@@ -1,13 +1,12 @@
 ---
-title: MySQL データベースモニタリングの高度なコンフィギュレーション
-kind: documentation
 description: MySQL データベースモニタリングの高度なコンフィギュレーション
-
+kind: documentation
+title: MySQL データベースモニタリングの高度なコンフィギュレーション
 ---
-{{< site-region region="us5,gov" >}}
+
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
-
 
 ## `events_statements_summary_by_digest` の切り捨て
 
@@ -35,13 +34,13 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-このような場合は、`quantize_sql_tables` オプションを使用してこのクエリを単一の正規化されたクエリとして追跡すると、このクエリのすべてのメトリクスが単一のクエリにロールアップされます。
+このような場合は、`replace_digits` オプションを使用してこのクエリを単一の正規化されたクエリとして追跡すると、このクエリのすべてのメトリクスが単一のクエリにロールアップされます。
 
 ```sql
 SELECT * FROM daily_aggregates_?
 ```
 
-Datadog Agent のデータベースインスタンスのコンフィギュレーションに `quantize_sql_tables` オプションを追加します。
+Datadog Agent のデータベースインスタンスのコンフィギュレーションに `replace_digits` オプションを追加します。
 
 ```yaml
 init_config:
@@ -49,7 +48,7 @@ init_config:
 instances:
   - dbm: true
     ...
-    quantize_sql_tables: true
+    replace_digits: true
 ```
 
 ## サンプリングレートの増加

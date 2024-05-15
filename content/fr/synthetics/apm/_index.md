@@ -1,21 +1,21 @@
 ---
-title: APM Synthetic
-kind: documentation
 description: APM et tracing distribué avec la surveillance Synthetic
-aliases:
-  - /fr/synthetics/apm
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-    tag: Blog
-    text: Présentation de la surveillance Synthetic Datadog
-  - link: /tracing/
-    tag: Documentation
-    text: APM et tracing distribué
-  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    tag: Guide
-    text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre produits.
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  tag: Blog
+  text: Présentation de la surveillance Synthetic Datadog
+- link: /tracing/
+  tag: Documentation
+  text: APM et tracing distribué
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre
+    produits.
+kind: documentation
+title: APM Synthetic
 ---
-{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et surveillance Synthetic" video="true"  >}}
+
+{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et surveillance Synthetic" video="true" >}}
 
 ## Présentation
 
@@ -25,17 +25,17 @@ En accédant à des données réseau (grâce à votre test) ainsi qu'à des info
 
 ## Utilisation
 
-Les déclarations sur cette page s'appliquent [aux tests API][1] et aux [tests Browser][2] pour l'APM, sauf indication contraire.
+Les informations sur cette page s'appliquent aux [tests API HTTP][1], aux [tests API à plusieurs étapes][2] et aux [tests Browser][3] pour APM.
 
 ### Prérequis
 
-* Votre service, et l'endpoint sur lequel vous exécutez le test, sont soumis à un [tracing côté APM][3].
+* Votre service, et l'endpoint sur lequel vous exécutez le test, sont soumis à un [tracing côté APM][4].
 * Votre service utilise un serveur HTTP.
 * Votre serveur HTTP utilise une bibliothèque qui prend en charge le tracing distribué.
 
 Créez un test qui s'applique à votre serveur HTTP tracé, et Datadog associera automatiquement la trace générée par votre serveur au résultat de test correspondant.
 
-Pour associer des résultats de test Browser, autorisez les URL auxquelles vous souhaitez ajouter les en-têtes d'intégration APM. Vous pouvez effectuer cette opération depuis les [réglages de Synthetic][4]. Utilisez `*` pour les caractères génériques :
+Pour associer des résultats de test Browser, autorisez les URL auxquelles vous souhaitez ajouter les en-têtes d'intégration APM. Vous pouvez effectuer cette opération depuis les [paramètres Synthetic][5]. Utilisez le caractère `*` pour les wildcards :
 
 ```text
 https://*.datadoghq.com/*
@@ -47,13 +47,13 @@ Les bibliothèques de tracing Datadog suivantes sont prises en charge :
 
 | Bibliothèque                             | Version minimale                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][5]                  | [0.22.0][6]                |
-| [Go][7]                  | [1.10.0][8]                |
-| [Java][9]                  | [0.24.1][10]                |
-| [Ruby][11]                  | [0.20.0][12]                |
-| [Node.js][13]                  | [0.10.0][14]                |
-| [PHP][15]                  | [0.33.0][16]                |
-| [.NET][17]                  | [1.18.2][18]                |
+| [Python][6]                  | [0.50.4][7]                |
+| [Go][8]                  | [1.10.0][9]                |
+| [Java][10]                  | [0.24.1][11]                |
+| [Ruby][12]                  | [0.20.0][13]                |
+| [Node.js][14]                  | [0.10.0][15]                |
+| [PHP][16]                  | [0.33.0][17]                |
+| [.NET][18]                  | [1.18.2][19]                |
 
 ### Comment les traces sont-elles associées aux tests ?
 
@@ -82,28 +82,31 @@ L'en-tête `x-datadog-origin: synthetics` indique au backend APM que les traces 
 
 ### Combien de temps les traces sont-elles conservées ?
 
-Ces traces sont conservées [aussi longtemps comme vos traces APM standard][19].
+Ces traces sont conservées [aussi longtemps que vos traces APM standard][20].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/synthetics/api_tests/
-[2]: /fr/synthetics/browser_tests/
-[3]: /fr/tracing/
-[4]: https://app.datadoghq.com/synthetics/settings/default
-[5]: /fr/tracing/setup_overview/setup/python/
-[6]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[7]: /fr/tracing/setup_overview/setup/go/
-[8]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[9]: /fr/tracing/setup_overview/setup/java/
-[10]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[11]: /fr/tracing/setup_overview/setup/ruby/
-[12]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[13]: /fr/tracing/setup_overview/setup/nodejs/
-[14]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[15]: /fr/tracing/setup_overview/setup/php/
-[16]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[17]: /fr/tracing/setup_overview/setup/dotnet-core/
-[18]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[19]: /fr/tracing/trace_retention/
+
+
+[1]: /fr/synthetics/api_tests/http_tests/?tab=requestoptions
+[2]: /fr/synthetics/multistep?tab=requestoptions
+[3]: /fr/synthetics/browser_tests/
+[4]: /fr/tracing/
+[5]: https://app.datadoghq.com/synthetics/settings/default
+[6]: /fr/tracing/trace_collection/dd_libraries/python/
+[7]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
+[8]: /fr/tracing/trace_collection/dd_libraries/go/
+[9]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
+[10]: /fr/tracing/trace_collection/dd_libraries/java/
+[11]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
+[12]: /fr/tracing/trace_collection/dd_libraries/ruby/
+[13]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
+[14]: /fr/tracing/trace_collection/dd_libraries/nodejs/
+[15]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
+[16]: /fr/tracing/trace_collection/dd_libraries/php/
+[17]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[18]: /fr/tracing/trace_collection/dd_libraries/dotnet-core/
+[19]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[20]: /fr/tracing/trace_pipeline/trace_retention/

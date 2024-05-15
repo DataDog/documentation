@@ -1,0 +1,30 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Dashboard with list_stream widget",
+  "widgets": [
+    {
+      "definition": {
+        "type": "list_stream",
+        "requests": [
+          {
+            "columns": [
+              {
+                "width": "auto",
+                "field": "timestamp"
+              },
+              {
+                "width": "auto",
+                "field": "service"
+              }
+            ],
+            "query": {
+              "data_source": "trace_stream",
+              "query_string": ""
+            },
+            "response_format": "event_list"
+          }
+        ]
+      }
+    }
+  ]
+}

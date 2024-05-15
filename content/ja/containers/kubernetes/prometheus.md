@@ -42,7 +42,7 @@ Datadog メトリクスにおける Prometheus および OpenMetrics メトリ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Kubernetes クラスターに Datadog Agent をデプロイします][7]。OpenMetrics および Prometheus チェックは [Datadog Agent][8] パッケージに含まれています。コンテナまたはホストに追加でインストールする必要はありません。
 
@@ -258,7 +258,7 @@ Cluster Agent が有効な場合、そのマニフェスト `cluster-agent-deplo
 - name: DD_PROMETHEUS_SCRAPE_ENABLED
   value: "true"
 - name: DD_PROMETHEUS_SCRAPE_SERVICE_ENDPOINTS
-  value: "true" 
+  value: "true"
 ```
 
 {{% /tab %}}
@@ -287,9 +287,8 @@ Cluster Agent が有効な場合、そのマニフェスト `cluster-agent-deplo
 
 オートディスカバリーのコンフィギュレーションはコンテナ名、Kubernetes アノテーション、またはその両方に基づきます。`kubernetes_container_names` および `kubernetes_annotations` の両方が定義されている場合、AND のロジックが使用されます (両方のルールに一致する必要があります)。
 
-`kubernetes_container_names` は対象とするコンテナ名のリストで、`*` を使用したワイルドカードをサポートしています。
-
-`kubernetes_annotations` には、ディスカバリーのルールを定義する `include` と `exclude` の 2 つのアノテーションマップが含まれます。
+- `kubernetes_container_names` は対象とするコンテナ名のリストで、正規表現形式です。
+- `kubernetes_annotations` には、ディスカバリーのルールを定義する `include` と `exclude` の 2 つのアノテーションマップが含まれます。
 
 **注:** Datadog Agent コンフィギュレーションでの `kubernetes_annotations` のデフォルト値は次の通りです:
 
@@ -338,9 +337,8 @@ Agent と Cluster Agent のマニフェストの `DD_PROMETHEUS_SCRAPE_CHECKS` �
 
 オートディスカバリーのコンフィギュレーションはコンテナ名、Kubernetes アノテーション、またはその両方に基づきます。`kubernetes_container_names` および `kubernetes_annotations` の両方が定義されている場合、AND のロジックが使用されます (両方のルールに一致する必要があります)。
 
-`kubernetes_container_names` は対象とするコンテナ名のリストで、`*` を使用したワイルドカードをサポートしています。
-
-`kubernetes_annotations` には、ディスカバリーのルールを定義する `include` と `exclude` の 2 つのアノテーションマップが含まれます。
+- `kubernetes_container_names` は対象とするコンテナ名のリストで、正規表現形式です。
+- `kubernetes_annotations` には、ディスカバリーのルールを定義する `include` と `exclude` の 2 つのアノテーションマップが含まれます。
 
 **注:** Datadog Agent コンフィギュレーションでの `kubernetes_annotations` のデフォルト値は次の通りです:
 
@@ -387,7 +385,7 @@ Agent と Cluster Agent のマニフェストの `DD_PROMETHEUS_SCRAPE_CHECKS` �
 [7]: /ja/agent/kubernetes/#installation
 [8]: /ja/getting_started/tagging/
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[10]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[10]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /ja/agent/faq/template_variables/

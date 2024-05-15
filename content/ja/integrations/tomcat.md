@@ -45,12 +45,11 @@ draft: false
 git_integration_title: tomcat
 integration_id: tomcat
 integration_title: Tomcat
-integration_version: 1.11.1
+integration_version: 1.11.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tomcat
-oauth: {}
 public_title: Tomcat
 short_description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
 supported_os:
@@ -87,7 +86,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Tomcat チェックは [Datadog Agent][2] パッケージに含まれています。Tomcat サーバーに追加でインストールする必要はありません。
 

@@ -9,7 +9,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule downtime to mute a monitor."
 - link: "/monitors/manage/status/"
@@ -86,7 +86,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ### Network metric
 
-Create a network metric monitor by following the instructions in the [metric monitor][8] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
+Create a network metric monitor by following the instructions in the [metric monitor][10] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 
 ## Further Reading
 
@@ -101,3 +101,4 @@ Create a network metric monitor by following the instructions in the [metric mon
 [7]: /monitors/configuration/#new-group-delay
 [8]: /monitors/notify/
 [9]: https://app.datadoghq.com/monitors/manage
+[10]: /monitors/types/metric

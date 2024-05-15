@@ -20,21 +20,29 @@ let table = null;
 $RefParser.dereference(fileData)
     .then((deref) => {
       fs.writeFileSync(output, "{\n", 'utf-8');
-      const entries = Object.entries(deref['types']['$defs']);
-      const entryLen = entries.length;
+      const actions = Object.entries(deref['actions']);
+      const actionLen = actions.length;
       let i = 0;
-      entries.forEach(([key, value]) => {
-          table = null;
-          try {
-            table = schemaTable("request", value, true);
-          } catch (e) {
-            console.log(`Couldn't created schematable for ${key} from file ${input}`);
-          }
-          if(table) {
-            const trail = (i < entryLen - 1) ? ",\n" : "\n";
-            fs.appendFileSync(output, `\t"${key}": ${JSON.stringify(table)}${trail}`, 'utf-8');
-          }
-          i++;
+      actions.forEach(([action_key, action_value]) => {
+        const inputKey = action_value.input.replace('#/$defs/', '');
+        const outputKey = action_value.output.replace('#/$defs/', '');
+        outputTableEntry(fs, input, deref, inputKey, false);
+        outputTableEntry(fs, input, deref, outputKey, (i >= actionLen - 1));
+        i++;
       });
       fs.appendFileSync(output, "}\n", 'utf-8');
     });
+
+
+function outputTableEntry(fs, input, deref, key, isLast) {
+  table = null;
+  try {
+    table = schemaTable("request", deref['types']['$defs'][key], true);
+  } catch (e) {
+    console.log(`Couldn't create schematable for ${key} from file ${input}`);
+  }
+  if(table) {
+    const trail = isLast ? "\n" : ",\n" ;
+    fs.appendFileSync(output, `\t"${key}": ${JSON.stringify(table)}${trail}`, 'utf-8');
+  }
+}

@@ -8,6 +8,12 @@
         "title_align": "left",
         "show_legend": false,
         "type": "distribution",
+        "custom_links": [
+          {
+            "label": "Example",
+            "link": "https://example.org/"
+          }
+        ],
         "xaxis": {
           "max": "auto",
           "include_zero": true,

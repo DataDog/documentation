@@ -7,12 +7,6 @@
     display: none;
   }
 
-  .main .chroma {
-    max-height: 350px;
-    overflow-wrap: break-word;
-    white-space: inherit;
-  }
-
   .main .code-snippet-wrapper {
     margin-right: 0;
   }
@@ -25,6 +19,7 @@
 
   #accordion .btn,
   .example-accordion .btn,
+  .reference-schema .btn,
   .code-snippet-wrapper button:disabled,
   .code-snippet-wrapper button[disabled] {
     font-weight: bold;
@@ -39,6 +34,10 @@
   #accordion pre,
   .example-accordion pre {
     border-bottom: 3px solid rgba(119, 0, 255, .3);
+    margin: 0;
+  }
+  
+  .reference-schema pre {
     margin: 0;
   }
 

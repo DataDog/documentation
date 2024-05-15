@@ -31,9 +31,9 @@ If you are unsure how to set your SQL Server's authentication mode, see Microsof
 **Note**: If you make any of the changes above to SQL Server, you must restart SQL Server before the changes take effect.
 
 Here's an example of some SQL Server IP/TCP settings that have worked on one of Datadog's testing environments (Windows 2012 R2, SQL Server 2014 Express):
-{{< img src="integrations/faq/sql_server_test_1.png" alt="the TCP/IP properties window with IP addresses tab selected. The IP4 section is set with active yes and enabled no. IP address is set to 127.0.0.1 and TCP dynamic ports is set to 1433. TCP port is left blank."  >}}
+{{< img src="integrations/faq/sql_server_test_1.png" alt="the TCP/IP properties window with IP addresses tab selected. The IP4 section is set with active yes and enabled no. IP address is set to 127.0.0.1 and TCP dynamic ports is set to 1433. TCP port is left blank." >}}
 
-{{< img src="integrations/faq/sql_server_test_2.png" alt="the TCP/IP properties window with IP addresses tab selected. In the IPAll section the TCP dynamic ports is set to 1433 and TCP port is left blank."  >}}
+{{< img src="integrations/faq/sql_server_test_2.png" alt="the TCP/IP properties window with IP addresses tab selected. In the IPAll section the TCP dynamic ports is set to 1433 and TCP port is left blank." >}}
 
 ## Empty connection string
 

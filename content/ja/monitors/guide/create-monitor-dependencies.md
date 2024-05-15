@@ -8,7 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 kind: ガイド
@@ -27,7 +27,7 @@ Webhook 通知と Datadog API によるダウンタイムスコープを組み�
 定義された [$scope][3] と重複するアクティブなダウンタイムがある場合、以前にスケジュールされたダウンタイムに影響を与える可能性があることに注意が必要です。
 
 まず、[Webhook を作成します][4]。
-{{< img src="monitors/guide/mute_demo_webhook.png" alt="mute_demo_webhook"  >}}
+{{< img src="monitors/guide/mute_demo_webhook.png" alt="mute_demo_webhook" >}}
 
 API エンドポイントのフルテキスト (左列の各入力ボックスの 2 つ目):
 
@@ -42,10 +42,10 @@ API エンドポイントのフルテキスト (左列の各入力ボックス�
 ```
 
 次に、"Alert A" (たとえば、各利用可能ゾーンのホストのグループ化された割合に対するデータなしアラート) を作成します。
-{{< img src="monitors/guide/alert_example.png" alt="alert_example"  >}}
+{{< img src="monitors/guide/alert_exammple.png" alt="alert_example"  >}}
 
 次に、アラートメッセージで、@notify webhook を使用して、その可用性ゾーン内の後続のすべてのホストをトリガー時にミュートし、アラートが解決したときにミュートを解除するようにします。
-{{< img src="monitors/guide/mute_demo_msg.png" alt="mute_demo_msg"  >}}
+{{< img src="monitors/guide/mute_demo_msg.png" alt="mute_demo_msg" >}}
 
 そのフルサンプルマークアップがこちらです。
 
@@ -64,7 +64,7 @@ That's alot of missing data - check first to see if there is an AWS outage?
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/create/types/composite/
+[1]: /ja/monitors/types/composite/
 [2]: /ja/api/v1/downtimes/
 [3]: /ja/api/v1/downtimes/#cancel-downtimes-by-scope
 [4]: https://app.datadoghq.com/account/settings#integrations/webhooks

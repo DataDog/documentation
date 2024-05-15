@@ -8,7 +8,11 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-rb/"
   tag: "GitHub"
   text: "Source code"
+- link: "/tracing/trace_collection/trace_context_propagation/ruby/"
+  tag: "Documentation"
+  text: "Propagating trace context"
 ---
+
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
 For information about configuring the Ruby tracing library, see [Additional Ruby configuration][2].

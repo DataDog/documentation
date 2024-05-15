@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/tracing/connect_logs_and_traces/python
-code_lang: php
+code_lang: python
 code_lang_weight: 20
 description: Python ログとトレースを接続して Datadog で関連付けます。
 further_reading:
@@ -108,7 +108,7 @@ log = structlog.get_logger()
 
 [Python ロギングのドキュメントを参照][2]して Python ログインテグレーションを適切に構成し、Python ログが自動的にパースされるようにしてください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

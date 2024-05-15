@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: circleci-circleci
 app_uuid: 3c51a71d-330c-4fd3-ae55-9146c20a3b65
 assets: {}
@@ -31,7 +33,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: circleci_circleci
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -82,6 +83,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -136,7 +138,7 @@ macOS、Linux、Windows にまたがる、あらゆる言語でのコーディ�
 
 
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから CircleCI にお問い合わせください。
 

@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data stores
 dependencies: []
 description: Surveillez des métriques clés de Stockage Table Azure.
 doc_link: https://docs.datadoghq.com/integrations/azure_table_storage/
@@ -20,6 +20,8 @@ public_title: Intégration Datadog/Stockage Table Azure Microsoft
 short_description: Surveillez des métriques clés de Stockage Table Azure.
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Stockage Table Azure est un magasin de paires valeurs/clés NoSQL qui vous permet d'effectuer un développement rapide à l'aide de volumineux jeux de données semi-structurés.
@@ -29,27 +31,27 @@ Recueillez des métriques de Stockage Table Azure pour :
 - Visualiser les performances de votre stockage de tables
 - Corréler les performances de votre stockage de tables avec vos applications
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_table_storage" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Stockage Table Azure n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Stockage Table Azure n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

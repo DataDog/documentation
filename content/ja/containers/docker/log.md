@@ -49,7 +49,8 @@ Datadog Agent 6 以降は、コンテナからログを収集します。2 通�
 Datadog Agent を埋め込みホストを監視する [Docker コンテナ][1] を実行するには、それぞれの OS で次のコマンドを使用します。
 
 ### Linux
-
+以下の構成では、`<DD_SITE>` を {{< region-param key="dd_site" >}} に置き換えてください。
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -58,6 +59,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_SITE=<DD_SITE>
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /proc/:/host/proc/:ro \
@@ -65,9 +67,11 @@ docker run -d --name datadog-agent \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
            gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
 
 ### Windows
-
+以下の構成では、`<DD_SITE>` を {{< region-param key="dd_site" >}} に置き換えてください。
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -76,15 +80,18 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_SITE=<DD_SITE>
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
            gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
 
 ### macOS
-
 Docker Desktop -> Settings -> Resources -> File sharing に `/opt/datadog-agent/run` というパスを追加します。
 
+以下の構成では、`<DD_SITE>` を {{< region-param key="dd_site" >}} に置き換えてください。
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -94,11 +101,13 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_SITE=<DD_SITE>
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
 
 最新版の Datadog Agent の使用が推奨されます。GCR で利用できる [Agent v6 のイメージ][2]リストを参照してください。
 

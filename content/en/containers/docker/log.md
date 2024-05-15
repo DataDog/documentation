@@ -49,7 +49,8 @@ The CLI commands on this page are for the Docker runtime. Replace `docker` with 
 To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command for your respective operating system:
 
 ### Linux
-
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -58,6 +59,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_SITE=<DD_SITE>
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /proc/:/host/proc/:ro \
@@ -65,9 +67,11 @@ docker run -d --name datadog-agent \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
            gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
 
 ### Windows
-
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -76,15 +80,18 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_SITE=<DD_SITE>
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
            gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
 
 ### macOS
-
 Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resources -> File sharing.
 
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
+{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -94,11 +101,13 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -e DD_SITE=<DD_SITE>
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            gcr.io/datadoghq/agent:latest
 ```
+{{< /site-region >}}
 
 It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on GCR.
 
@@ -122,6 +131,12 @@ The commands related to log collection are:
 `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` 
 : To collect containers logs from files. Available in the Datadog Agent 6.27.0/7.27.0+
 
+**Note**: If using Docker Compose, the value for `DD_CONTAINER_EXCLUDE` must not be quoted. Configure the environment variable in your docker-compose.yaml file like the example below:
+
+```yaml
+environment:
+    - DD_CONTAINER_EXCLUDE=image:datadog/agent:*
+```
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
@@ -146,7 +161,7 @@ The commands related to log collection are:
 
 [1]: /agent/basic_agent_usage/
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Host Agent with Custom Logging" %}}
 
@@ -169,8 +184,8 @@ The commands related to log collection are:
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
-[3]: /agent/guide/agent-configuration-files/
-[4]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-configuration-files/
+[4]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -203,7 +218,7 @@ LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
 {{% /tab %}}
-{{% tab "Docker-Compose" %}}
+{{% tab "Docker Compose" %}}
 
 Add the following label in your `docker-compose.yaml` file:
 

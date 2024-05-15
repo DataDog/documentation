@@ -95,7 +95,7 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 This allows the process check to use `sudo` to execute the `ls` command but only to the list of contents of the path `/proc/*/fd/`.
 
-If you see this line in the Datadog `error.log` file: `sudo: sorry, you must have a tty to run sudo`, you should `visudo` and comment out the line `Default requiretty`.
+If you see this line in the Datadog `error.log` file: `sudo: sorry, you must have a tty to run sudo`, you should use `visudo` to comment out the line `Default requiretty` in your sudoers file.
 
 {{% /tab %}}
 {{% tab "Agent v6 & v7" %}}
@@ -111,8 +111,8 @@ If you are running Agent v6 less than v6.3, try updating the Agent and using the
 3. [Start the Agent][3]
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: /agent/guide/agent-commands/#stop-the-agent
-[3]: /agent/guide/agent-commands/#start-the-agent
+[2]: /agent/configuration/agent-commands/#stop-the-agent
+[3]: /agent/configuration/agent-commands/#start-the-agent
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -128,10 +128,10 @@ If you are running Agent v5, try updating to the [latest version of Agent 6][1] 
 
 [1]: /agent/guide/upgrade-to-agent-v6/
 [2]: https://github.com/DataDog/dd-agent
-[3]: /agent/guide/agent-commands/?tab=agentv5#stop-the-agent
+[3]: /agent/configuration/agent-commands/?tab=agentv5#stop-the-agent
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
 [5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
-[6]: /agent/guide/agent-commands/?tab=agentv5#start-the-agent
+[6]: /agent/configuration/agent-commands/?tab=agentv5#start-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -144,10 +144,10 @@ See the following GitHub issues for more information and other potential methods
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-commands/
-[2]: /agent/guide/agent-log-files/
+[1]: /agent/configuration/agent-commands/
+[2]: /agent/configuration/agent-log-files/
 [3]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
 [4]: /agent/faq/network/
-[5]: /agent/guide/agent-commands/#start-the-agent
+[5]: /agent/configuration/agent-commands/#start-the-agent
 [6]: /help/
 [7]: /integrations/process/

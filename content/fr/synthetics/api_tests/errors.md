@@ -1,9 +1,7 @@
 ---
-title: Erreurs de test API
-kind: documentation
 description: Description détaillée des erreurs de test API
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: Blog
   text: Présentation de la surveillance Synthetic Datadog
 - link: /synthetics/
@@ -12,6 +10,8 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: Documentation
   text: Configurer un test Browser
+kind: documentation
+title: Erreurs de test API
 ---
 
 ## Erreurs SSL

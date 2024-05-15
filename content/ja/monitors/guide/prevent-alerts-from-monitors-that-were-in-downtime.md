@@ -9,7 +9,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: ダウンタイムについて
 kind: ガイド
@@ -23,4 +23,4 @@ title: ダウンタイムになったモニターからのアラートを防止�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/notify/downtimes/
+[1]: /ja/monitors/downtimes/

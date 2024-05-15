@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_dbforpostgresql
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure DB for PostgreSQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_postgresql/

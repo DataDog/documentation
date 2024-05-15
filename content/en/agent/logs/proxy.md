@@ -92,7 +92,7 @@ logs_config:
 
 HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 ```conf
 # Basic configuration
@@ -155,8 +155,8 @@ If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for Ce
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 ```conf
 # Basic configuration
@@ -218,7 +218,7 @@ If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for Ce
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 {{% /tab %}}
 
@@ -241,7 +241,7 @@ logs_config:
 
 In this example, `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 ```conf
 user nginx;
@@ -261,8 +261,8 @@ stream {
 }
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 ```conf
 user nginx;
@@ -282,7 +282,7 @@ stream {
 }
 ```
 
-{{< /site-region >}}
+{{% /site-region %}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -292,4 +292,4 @@ stream {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/logs/log_transport?tab=https
-[2]: /agent/proxy/
+[2]: /agent/configuration/proxy/

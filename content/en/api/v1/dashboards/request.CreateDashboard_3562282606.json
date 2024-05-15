@@ -1,0 +1,49 @@
+{
+  "title": "Example-Dashboard",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "type": "change",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "hour_before(query1)"
+              },
+              {
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "slo",
+                "slo_id": "string",
+                "measure": "slo_status",
+                "group_mode": "overall",
+                "slo_query_type": "metric",
+                "additional_query_filters": "*"
+              }
+            ],
+            "response_format": "scalar",
+            "order_by": "change",
+            "change_type": "absolute",
+            "increase_good": true,
+            "order_dir": "asc"
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 2
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

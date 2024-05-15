@@ -4,7 +4,7 @@ aliases:
 - /ja/tracing/generate_metrics/
 description: 取り込んだスパンからカスタムメトリクスを生成します。
 further_reading:
-- link: tracing/trace_retention_and_ingestion
+- link: tracing/trace_pipeline
   tag: ドキュメント
   text: トレースの取り込みをカスタマイズし、重要なトレースを保持します。
 - link: tracing/trace_search_and_analytics/query_syntax
@@ -47,13 +47,15 @@ title: スパンからメトリクスを生成する
 
 1. **追跡するフィールドを定義する:** `*` を選択してクエリに一致するすべてのスパンのカウントを生成するか、属性 (たとえば、`@cassandra_row_count`) を入力して数値を集計し、対応するカウント、最小、最大、合計、および平均の集計メトリクスを作成します。属性タイプがメジャーの場合、メトリクスの値はスパン属性の値です。
 
+   **注**: 数値でないスパン属性は集計に使用できません。スパン属性の異なる値をカウントするメトリクスを生成するには (例えば、特定のエンドポイントを訪問するユーザー ID の数をカウントする)、このディメンションを `group by` セレクタに追加し、`count_nonzero` 関数を使用してタグ値の数をカウントします。
+
 1. **グループ化ディメンションを指定する:** デフォルトでは、スパンから生成されたメトリクスには、明示的に追加されない限りタグがありません。スパンに存在する属性またはタグを使用して、メトリクスタグを作成できます。
 
 1. **ライブ分析と検索クエリのプレビューを確認する:** クエリがデータの視覚化に与える影響と、クエリで考慮される一致するスパンをライブプレビューでリアルタイムに表示できます。
 
 1. **メトリクスに名前を付ける:** メトリクス名は、[メトリクス命名規則][11]に従う必要があります。`trace.*` で始まるメトリクス名は許可されておらず、保存されません。
 
-**重要**: スパンベースのメトリクスはカスタムメトリクスと見なされ、それに応じて請求されます。請求への影響を避けるために、タイムスタンプ、ユーザー ID、リクエスト ID、セッション ID などの無制限または非常に高いカーディナリティ属性によるグループ化は避けてください。
+<div class="alert alert-warning">スパンベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>と見なされ、それに応じて請求されます。請求への影響を避けるために、タイムスタンプ、ユーザー ID、リクエスト ID、セッション ID などの無制限または非常に高いカーディナリティ属性によるグループ化は避けてください。</div>
 
 ## 既存のスパンベースのメトリクスの更新
 
@@ -73,13 +75,13 @@ title: スパンからメトリクスを生成する
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/tracing/trace_retention_and_ingestion
+[1]: /ja/tracing/trace_pipeline/trace_retention
 [2]: /ja/account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/ja/metrics/#overview
-[4]: /ja/monitors/create/types/anomaly/#overview
+[4]: /ja/monitors/types/anomaly/#overview
 [5]: /ja/tracing/trace_explorer/
 [6]: /ja/tracing/trace_explorer/query_syntax/#analytics-query
-[7]: /ja/monitors/create/types/forecasts/
+[7]: /ja/monitors/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /ja/tracing/trace_explorer/query_syntax/

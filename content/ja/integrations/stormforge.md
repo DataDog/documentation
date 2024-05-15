@@ -40,7 +40,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: stormforge
-oauth: {}
 public_title: StormForge
 short_description: 機械学習を用いた Kubernetes リソースのリアルタイム最適化
 supported_os:

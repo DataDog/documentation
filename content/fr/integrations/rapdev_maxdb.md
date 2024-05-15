@@ -46,7 +46,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_maxdb
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -56,7 +55,7 @@ pricing:
   tag: db
   unit_label: Base de données
   unit_price: 50
-public_title: Intégration MaxDB
+public_title: MaxDB
 short_description: Surveiller les volumes, les caches, les schémas, les tables et
   d'autres éléments de vos bases de données MaxDB
 supported_os:
@@ -89,7 +88,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration MaxDB
+  title: MaxDB
   uninstallation: README.md#Uninstallation
 ---
 

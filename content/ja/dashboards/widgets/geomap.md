@@ -10,49 +10,84 @@ further_reading:
   text: ノートブック
 kind: documentation
 title: ジオマップ ウィジェット
+widget_type: ジオマップ
 ---
 
-ジオマップウィジェットを使用すると、国のタグやファセットを持つメトリクスのグラフを作成できます。
+ジオマップウィジェットは、陰影をつけた地域や点を使って地理データを視覚化します。これにより、以下のようなことが可能になります。
+- 国別のユーザーセッションを表示。
+- フィルターをかけて、新しいタブで全セッションのリストを表示。
+- 従業員別にフィルターされたユーザーセッションを表示。
+- ロード時間、コア Web バイタル、エラーがあるビューの割合など、パフォーマンスメトリクスを監視。
 
-{{< img src="dashboards/widgets/geomap/geomap.png" alt="ジオマップ" >}}
+{{< img src="/dashboards/widgets/geomap/geomap-points.png" alt="ポイントオーバーレイによるジオマップの視覚化" >}}
 
-## セットアップ
+## 計画と使用
 
-{{< img src="dashboards/widgets/geomap/geomap_setup.png" alt="トップリスト" style="width:80%;">}}
+{{< img src="dashboards/widgets/geomap/geomap_setup2.png" alt="ウィジェット構成の Geomap Graph your data セクション">}}
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
+1. 視覚化レイヤーを選択します。
+    * **Regions**: 国レベルでメジャーを集計します。
+    * **Points**: イベントをマップ上でポイントとしてオーバーレイし、地理的なイベントデータを表示します。
 
-1. グラフ化するデータを選択します。
-    * RUM: RUM クエリの構成については、[RUM ドキュメント][1]を参照してください。
-    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][2]を参照してください。
-      * **注**: タグ別グループは、alpha-2 ISO 形式の国名コードを含む必要があります。これを実行するには、[GeoIP Processor][3] を使用するか、[取り込み時にタグ][4]を手動で含めます。
-    * メトリクス: メトリクスのクエリを構成するには、[クエリ作成][5]のドキュメントを参照してください。
-      * **注**: タグ別グループは、alpha-2 ISO 形式の国名コードを含む必要があります。[取り込み済みのログからメトリクスを生成][6]するか[取り込み時にタグ][4]を手動で含めます。
+2. グラフ化するデータを選択します。<br>
+  **注**: データソースのサポートは、選択した視覚化レイヤーによって異なります。
+  {{< tabs >}}
+  {{% tab "Regions" %}}
+  |  データソース    | 備考    | 
+  | --------------  | -------- |
+  |ログイベント   | group by タグには、alpha-2 の ISO フォーマットに従った国の ISO コードを含める必要があります。これを行うには、[GeoIP Processor][1] を使用するか、手動で[取り込み時にタグ][2]を含めます。ログイベントクエリを構成するには、[ログ検索ドキュメント][3]を参照してください。|
+  |メトリクス   | group by タグには、alpha-2 の ISO フォーマットに従った国の ISO コードを含める必要があります。[取り込んだログからメトリクスを生成する][4]か、手動で[取り込み時にタグ][2]を含めます。メトリクスクエリを構成するには、[クエリのドキュメント][5]を参照してください。|
+  |RUM   | RUM クエリを構成するには、[RUM ドキュメント][6]を参照してください。|
+  |SLO | SLO クエリを構成するには、[SLO 検索ドキュメント][7]を参照してください。 |
+  |セキュリティシグナル <br> アプリケーションセキュリティ <br> 監査証跡 | クエリを構成するには、[ログ検索ドキュメント][3]を参照してください。 |
 
-2. オプション: ビューボックスを構成して、デフォルトでズームインする地図上の点を設定します。
+  [1]: /logs/log_configuration/processors/#geoip-parser
+  [2]: /getting_started/tagging/#define-tags
+  [3]: /logs/search_syntax/
+  [4]: /logs/logs_to_metrics/
+  [5]: /dashboards/querying/
+  [6]: /real_user_monitoring/explorer/search_syntax/
+  [7]: /service_management/service_level_objectives/#searching-slos
+  {{% /tab %}}
+
+  {{% tab "Points" %}}
+  |  データソース | 備考 |
+  | -----------  | ----- | 
+  |ログイベント   | group by タグには、alpha-2 の ISO フォーマットに従った国の ISO コードを含める必要があります。これを行うには、[GeoIP Processor][1] を使用するか、手動で[取り込み時にタグ][2]を含めます。ログイベントクエリを構成するには、[ログ検索ドキュメント][3]を参照してください。 |
+  |RUM   | RUM クエリを構成するには、[RUM ドキュメント][4]を参照してください。 |
+
+  [1]: /logs/log_configuration/processors/#geoip-parser
+  [2]: /getting_started/tagging/#define-tags
+  [3]: /logs/search_syntax/
+  [4]: /real_user_monitoring/explorer/search_syntax/
+  {{% /tab %}}
+  {{< /tabs >}}
+
+3. オプション: マップを最初にフォーカスする場所を指定するために、ビューボックスを構成します。
 
 ### オプション
 
-#### グローバルタイム
+#### コンテキストリンク
 
-スクリーンボードとノートブックの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、グローバルタイムフレームを使用するかを選択します。
+[コンテキストリンク][7]はデフォルトで有効になっていますが、有効/無効を切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと他のページ (Datadog 内またはサードパーティ) を接続します。
 
-#### タイトル
+## ヘルプ
 
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
+このウィジェットは **[Dashboards API][8]** で使用できます。[ウィジェット JSON スキーマ定義][9]については、以下の表を参照してください。
 
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
-
-オプションで、サイズと配置を定義できます。
-
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/explorer/visualize#timeseries
-[2]: /ja/logs/search_syntax/
-[3]: /ja/logs/log_configuration/processors/#geoip-parser
-[4]: /ja/getting_started/tagging/#defining-tags
+[1]: /ja/logs/log_configuration/processors/#geoip-parser
+[2]: /ja/getting_started/tagging/#define-tags
+[3]: /ja/logs/search_syntax/
+[4]: /ja/logs/logs_to_metrics/
 [5]: /ja/dashboards/querying/
-[6]: /ja/logs/logs_to_metrics/
+[6]: /ja/real_user_monitoring/explorer/search_syntax/
+[7]: /ja/dashboards/guide/context-links/
+[8]: /ja/api/latest/dashboards/
+[9]: /ja/dashboards/graphing_json/widget_json/

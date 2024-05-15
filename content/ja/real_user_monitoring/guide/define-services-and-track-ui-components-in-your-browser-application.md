@@ -102,7 +102,7 @@ RUM の `service` 属性を使用して、指定されたチームのスコー�
    - サービス別エラー数 
    - サービス別ページビュー 
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page.jpg" alt="Shopist の Cart ページでユーザー名でグループ分けされたアクションを検索するクエリ" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Shopist の Cart ページでユーザー名でグループ分けされたアクションを検索するクエリ" style="width:90%;">}}
 
 ### チームが UI コンポーネントを所有する
 

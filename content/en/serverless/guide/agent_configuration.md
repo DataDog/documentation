@@ -15,7 +15,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 | `DD_KMS_API_KEY`               | The environment variable with your Datadog API key, using KMS. **One** key environment variable is required. See [serverless CLI environment variables][7].                                                                        |
 | `DD_API_KEY_SECRET_ARN`        | The environment variable with your Datadog API key, using an secret manager **One** key environment variable is required. See [serverless CLI environment variables][7].                                                                           |
 | `DD_LOG_LEVEL`                 | Set the level for the [Datadog Agent log][8].                                                                                                                                                                      |
-| `DD_SERVERLESS_FLUSH_STRATEGY` | Datadog Agent flushing strategy. Values permitted are `end` or `periodically[,milliseconds]`.                                                                                                                      |
+| `DD_SERVERLESS_FLUSH_STRATEGY` | Datadog Agent flushing strategy. Values permitted are `end` or `periodically[,milliseconds]`. For example, `DD_SERVERLESS_FLUSH_STRATEGY=periodically,100` flushes every 100ms.                                                                                                                  |
 | `DD_ENV`                       | Sets the global tag `env` tag for all data emitted.                                                                                                                                                                |
 | `DD_TAGS`                      | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`.                                                                                                                                  |
 | `DD_SITE`                      | Destination site for your metrics, traces, and logs. Set your Datadog site to: `{{< region-param key="dd_site" >}}`. Defaults to `datadoghq.com`.                                                                  |
@@ -110,7 +110,7 @@ Send custom metrics with [the StatsD protocol][5]:
 
 [5]: /developers/dogstatsd/
 
-[6]: /agent/proxy/#agent-v6
+[6]: /agent/configuration/proxy/#agent-v6
 
 [7]: /serverless/libraries_integrations/cli/#environment-variables
 

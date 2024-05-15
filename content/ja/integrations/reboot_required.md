@@ -15,11 +15,12 @@ assets:
     source_type_name: Reboot required
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: support@krugerheavyindustries.com
   support_email: support@krugerheavyindustries.com
 categories:
-- os system
+- developer tools
+- os & system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: reboot_required
-oauth: {}
 public_title: Reboot Required
 short_description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
 supported_os:
@@ -40,8 +40,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Developer Tools
+  - Category::OS とシステム
   - Supported OS::Linux
-  - Category::OS システム
   configuration: README.md#Setup
   description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
   media: []

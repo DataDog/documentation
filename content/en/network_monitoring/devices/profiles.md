@@ -12,6 +12,10 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Network Device Monitoring uses profiles to tell the Datadog Agent the metrics and associated tags to collect. A profile is a collection of OIDs associated with a device.
@@ -20,7 +24,7 @@ Network Device Monitoring uses profiles to tell the Datadog Agent the metrics an
 
 By default, all profiles in the Agent configuration directory are loaded. To customize the specific profiles for collection, explicitly reference them by filename under `definition_file`, or provide an inline list under `definition`. Any of the Datadog profiles can be listed by name. Additional custom profiles can be referenced by the file path in the config, or placed in the configuration directory.
 
-**Note**: The generic profile is [generic_router.yaml][1], which supports routers, switches, etc.
+**Note**: The generic profile is [generic-device.yaml][1], which supports routers, switches, etc.
 
 ### sysOID mapped devices
 
@@ -58,12 +62,38 @@ If necessary, additional metrics can be defined in the instances. These metrics 
 
 Profiles can be used interchangeably, meaning devices that share MIB dependencies can reuse the same profiles. For example, the [Cisco c3850 profile][2] can be used across many Cisco switches.
 
-For more Datadog provided profiles, see the [GitHub repository][2].
+For more Datadog provided profiles, see the [GitHub repository][3].
+
+### Metadata definition by profile
+
+In the profiles's metadata section, you can define where and how metadata is collected. Values can be static or come from an OID value.
+See the [DeviceMetadata][4] section for the supported fields.
+
+With Datadog Agent version 7.52 and later, there is a `device_type` field for device metadata. This can be set manually in the profile and can be used to filter on specific types of devices. Accepted values include:
+
+- access_point
+- firewall
+- load_balancer
+- pdu
+- printer
+- router
+- sd-wan
+- sensor
+- server
+- storage
+- switch
+- ups
+- wlc
+
+See the [Profile Format Reference][5] for more information about profiles formats.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-router.yaml
-[2]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml
+[2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
+[3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkdevice/metadata/payload.go#L51-L76
+[5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/

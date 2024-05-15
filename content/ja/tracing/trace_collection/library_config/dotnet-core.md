@@ -8,11 +8,14 @@ further_reading:
 - link: /tracing/metrics/runtime_metrics/dotnet/
   tag: ドキュメント
   text: ランタイムメトリクス
+- link: /tracing/trace_collection/trace_context_propagation/dotnet/
+  tag: ドキュメント
+  text: トレースコンテキストの伝搬
 - link: /serverless/azure_app_services/
   tag: ドキュメント
   text: Microsoft Azure App Service 拡張機能
 - link: /tracing/glossary/
-  tag: ドキュメント
+  tag: Documentation
   text: サービス、リソース、トレースの詳細
 - link: https://www.datadoghq.com/blog/net-monitoring-apm/
   tag: ブログ
@@ -24,7 +27,7 @@ further_reading:
   tag: GitHub
   text: ソースコード
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
-  tag: GitHub
+  tag: ブログ
   text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
 kind: documentation
 title: .NET Core トレーシングライブラリの構成
@@ -44,7 +47,7 @@ type: multi-code-lang
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` インスタンスを作成します。`Tracer.Configure()` を呼び出す前に、この `TracerSettings` インスタンスにプロパティを設定します。例:
 
 [1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/#configuring-process-environment-variables
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "コード" %}}
 
@@ -71,7 +74,7 @@ settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 Tracer.Configure(settings);
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "JSON ファイル" %}}
 
@@ -86,7 +89,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 }
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -136,7 +139,8 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : **TracerSettings プロパティ**: `GlobalSamplingRate` <br>
 **デフォルト**: デフォルトは、Datadog Agent から返される率です<br>
 取り込み率コントロールを有効にします。このパラメーターは、サンプリングするスパンのパーセンテージを表す浮動小数点数です。有効な値は `0.0` から `1.0` までです。
-詳しくは、[取り込みメカニズム][11]を参照してください。
+詳しくは、[取り込みメカニズム][11]を参照してください。<br><br>
+**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_TRACE_SAMPLE_RATE` を設定できます。
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings プロパティ**: `CustomSamplingRules`<br>
@@ -157,17 +161,14 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 <br>オブジェクトの JSON 配列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は、0.0 から 1.0 までの間でなければなりません (この値を含む)。詳しくは、[取り込みメカニズム][1]を参照してください。
 **例**: サービス名 `my-service` と操作名 `http.request` のスパンのサンプルレートを 50% に設定し、最大で 1 秒間に 50 個のトレースにします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
-`DD_TRACE_GLOBAL_TAGS`
-: **TracerSettings プロパティ**: `GlobalTags`<br>
-指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。
-
 自動インスツルメンテーションオプションコンフィギュレーション
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings プロパティ**:`HeaderTags` <br>
 大文字と小文字を区別しないヘッダーキーとタグ名のキーと値のペアのカンマ区切りリストを受け入れ、一致するヘッダー値をルートスパンのタグとして自動的に適用します。特定のタグ名のないエントリも受け入れます。<br>
 **例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-バージョン 1.18.3 で追加されました。レスポンスヘッダーのサポートとタグ名なしのエントリはバージョン 1.26.0 で追加されました。
+バージョン 1.18.3 で追加されました。レスポンスヘッダーのサポートとタグ名なしのエントリはバージョン 1.26.0 で追加されました。<br><br>
+**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_TRACE_HEADER_TAGS` を設定できます。
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : 関連する IP ヘッダーからクライアント IP を収集できるようにします。<br>
@@ -179,17 +180,20 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 バージョン `2.19.0` で追加されました。<br>
 **デフォルト**: Datadog は以下をパースします: `"x-forwarded-for", "x-real-ip", "true-client-ip", "x-client-ip", "x-forwarded", "forwarded-for", "x-cluster-client-ip", "fastly-client-ip", "cf-connecting-ip", "cf-connecting-ipv6",` 複数存在する場合は、リストの中から正しくパースされた最初のものが使用されます。<br>
 
-
 `DD_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
-**例**: `layer:api, team:intake` <br>
-バージョン 1.17.0 で追加されました。
-デリミタはコンマとスペース: `, ` であることに注意してください。
+**例**: `layer:api, team:intake, key:value` <br>
+**注**: デリミタはコンマとスペース: `, ` です。<br>
+バージョン 1.17.0 で追加されました。<br>
 
 `DD_TRACE_LOG_DIRECTORY`
 : .NET Tracer ログのディレクトリを設定します。<br>
 **デフォルト**: Windows は `%ProgramData%\Datadog .NET Tracer\logs\`、Linux は `/var/log/datadog/dotnet`
+
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: トレーサーの起動中に、この構成は、トレーサーの現在のログディレクトリを使用して、指定された日数と同じかそれよりも古いログファイルを削除します。バージョン 2.19.0 で追加されました。 <br>
+**デフォルト**: `31`
 
 `DD_TRACE_LOGGING_RATE`
 : ログメッセージへのレート制限を設定します。設定した場合、`x` 秒ごとに一意のログ行が記述されます。たとえば、任意のメッセージを 60 秒ごとに一回ログに残したい場合は `60` を設定します。ログのレート制限を無効化したい場合は `0` を設定します。バージョン 1.24.0 で追加されました。デフォルトでは無効です。
@@ -199,13 +203,28 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 **例**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 `from-key` はインテグレーションタイプに固有で、アプリケーション名のプレフィックスは取り除く必要があります。たとえば、`my-application-sql-server` の名前を `main-db` に変更するには、`sql-server:main-db` を使用します。バージョン 1.23.0 で追加されました。
 
-#### 自動インスツルメンテーションオプションコンフィギュレーション
+`DD_HTTP_SERVER_TAG_QUERY_STRING`
+: `true` に設定すると、`http.url` にクエリ文字列パラメーターが含まれます。詳しくは、[url 内のクエリを再編集する][14]に記載されています。
+**デフォルト**: `true`
+
+`DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
+: `DD_HTTP_SERVER_TAG_QUERY_STRING` が true のとき、難読化する前に報告するクエリ文字列の最大サイズが設定されます。サイズに制限を設けない場合は 0 を設定します。<br>
+**デフォルト**: `5000`
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: `DD_HTTP_SERVER_TAG_QUERY_STRING` が true の場合、この正規表現は `http.url` タグで報告されるリクエストのクエリ文字列から機密データを削除します (マッチすると `<redacted>` に置き換えられます)。この正規表現は、受信するリクエストごとに実行されます。
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: Datadog は、製品の改良のため、[システムの環境・診断情報][6]を収集することがあります。false の場合、このテレメトリーデータは収集されません。<br>
+**デフォルト**: `true`
+
+#### 自動インスツルメンテーションオプション構成
 
 以下の構成変数は、自動インスツルメンテーションの使用時に**のみ**利用できます。
 
 `DD_TRACE_ENABLED`
 : **TracerSettings プロパティ**: `TraceEnabled`<br>
-<br>すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` または `false`。
+<br>すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` または `false` です。
 **デフォルト**: `true`
 
 `DD_DBM_PROPAGATION_MODE`
@@ -223,11 +242,13 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `DD_LOGS_INJECTION`
 : **TracerSettings プロパティ**: `LogsInjectionEnabled` <br>
 アプリケーションログに相関識別子を自動的に注入することを有効または無効にします。 <br>
-ロガーは `trace_id` のマッピングを正しく設定する `source` を持つ必要があります。.NET アプリケーションのデフォルトのソースである `csharp` は、自動的にこれを行います。詳しくは、[トレース ID パネルの相関するログ][5]を参照してください。
+ロガーは `trace_id` のマッピングを正しく設定する `source` を持つ必要があります。.NET アプリケーションのデフォルトのソースである `csharp` は、自動的にこれを行います。詳しくは、[トレース ID パネルの相関するログ][5]を参照してください。<br><br>
+**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_TRACE_HEADER_TAGS` を設定できます。
 
-`DD_DISABLED_INTEGRATIONS`
-: **TracerSettings プロパティ**: `DisabledIntegrationNames` <br>
-無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、[インテグレーション][6]セクションでリストされているインテグレーション名です。
+`DD_RUNTIME_METRICS_ENABLED`
+: .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false` です。<br>
+**デフォルト**: `false`<br>
+バージョン 1.23.0 で追加されました。
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : ASP.NET/ASP.NET Core 用アプリケーションのすべてのルートパラメーター (ID パラメーターを除く) を拡張します<br>
@@ -236,11 +257,10 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 バージョン 2.5.1 で追加されました。
 
 `DD_TRACE_METHODS`
-: トレースするメソッドのリスト。セミコロン (`;`) で区切られたリストで、各エントリーが `TypeName[MethodNames]` という形式であることを指定します (`MethodNames` はカンマ (`,`) 区切りのメソッド名のリストまたは `*` ワイルドカードのいずれかです)。汎用型の場合は、角括弧と型パラメーターの名前をバックスティック(`` ``)に置き換え、その後に汎用型パラメーターの数を記述します。例えば、`Dictionary<TKey, TValue>` は `` Dictionary`2 `` と記述しなければなりません。汎用メソッドの場合は、指定する必要があるのはメソッド名のみです。 <br>
+: トレースするメソッドのリスト。セミコロン (`;`) で区切られたリストで、各エントリーが `TypeName[MethodNames]` という形式であることを指定します (`MethodNames` はカンマ (`,`) 区切りのメソッド名のリストまたは `*` ワイルドカードのいずれかです)。汎用型の場合は、角括弧と型パラメーターの名前をバックスティック(`` ``) に置き換え、その後に汎用型パラメーターの数を記述します。例えば、`Dictionary<TKey, TValue>` は `` Dictionary`2 `` と記述しなければなりません。汎用メソッドの場合は、指定する必要があるのはメソッド名のみです。 <br>
 **例**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
 **注:** ワイルドカードメソッドサポート (`[*]`) は、コンストラクタ、プロパティゲッターとセッター、 `Equals`、`Finalize`、`GetHashCode` そして `ToString` 以外の型のすべてのメソッドを選択します。<br>
-バージョン 2.6.0 で追加されました。
-ワイルドカードのサポート `[*]` はバージョン 2.7.0 で追加されました。
+バージョン 2.6.0 で追加されました。ワイルドカードのサポート `[*]` はバージョン 2.7.0 で追加されました。
 
 `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
 : Kafka コンシューマースパンの動作を変更します<br>
@@ -248,7 +268,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `true` に設定すると、メッセージが消費されたときにコンシューマースパンが作成され、次のメッセージを消費する前に閉じられます。このスパンの長さは、あるメッセージの消費と次のメッセージの消費との間の計算を代表するものです。この設定は、メッセージの消費がループで実行される場合に使用します。<br>
 `false` に設定すると、メッセージが消費されたときにコンシューマスパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。このパラメーターを `false` に設定すると、コンシューマースパンはすぐに閉じられます。トレースする子スパンがある場合は、コンテキストを手動で抽出する必要があります。詳しくは、[ヘッダーの抽出と挿入][12]をお読みください。
 
-#### 自動インスツルメンテーションインテグレーションコンフィギュレーション
+#### 自動インスツルメンテーションインテグレーション構成
 
 次の表に、自動インスツルメンテーションを使用しており、インテグレーションごとの設定が可能な場合に**のみ**使用できる構成変数を示します。
 
@@ -266,41 +286,20 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 以下の構成変数は現在利用可能な機能ですが、今後のリリースで変更される場合があります。
 
 `DD_TRACE_PARTIAL_FLUSH_ENABLED`
-: Datadog Agent への大規模トレースのフラッシュをインクリメント形式で有効化し、Agent に拒否される可能性を低減します。保持期間が長いトレースまたは多数のスパンを持つトレースがある場合にのみ使用してください。有効な値は `true` または `false`。バージョン 1.26.0 で追加され、Datadog Agent 7.26.0 以降とのみ互換性を有しています。<br>
+: Datadog Agent への大規模トレースのフラッシュをインクリメント形式で有効化し、Agent に拒否される可能性を低減します。保持期間が長いトレースまたは多数のスパンを持つトレースがある場合にのみ使用してください。有効な値は `true` または `false` です。バージョン 1.26.0 で追加され、Datadog Agent 7.26.0 以降とのみ互換性を有しています。<br>
 **デフォルト**: `false`
 
 #### 非推奨の設定
 
 `DD_TRACE_LOG_PATH`
-: 自動インスツルメンテーション・ログファイルにパスを設定し、他の .NET Tracer ログファイルすべてのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合、無視されます。
+: 自動インスツルメンテーションログファイルにパスを設定し、他の .NET Tracer ログファイルすべてのディレクトリを決定します。`DD_TRACE_LOG_DIRECTORY` が設定されている場合、無視されます。
 
 `DD_TRACE_ROUTE_TEMPLATE_RESOURCE_NAMES_ENABLED`
 : `true` に設定すると、Web スパンに対する改善されたリソース名を有効化します。利用可能なルートテンプレート情報を使用して ASP.NET のコアインテグレーションにスパンを追加し、追加のタグを有効化します。バージョン 1.26.0 で追加されました。2.0.0 ではデフォルトで有効になっています。<br>
 **デフォルト**: `true`
 
-### ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][9] と [W3C (TraceParent)][10] のヘッダー抽出と挿入をサポートしています。
-
-分散ヘッダーの挿入と抽出のスタイルを構成することができます。
-
-.NET トレーサーは、以下のスタイルをサポートしています。
-
-- Datadog: `Datadog`
-- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
-- W3C: `tracecontext` (`W3C` は非推奨)
-- B3 シングルヘッダー: `B3 single header` (`B3SingleHeader` は非推奨)
-
-以下の環境変数を使用して、挿入および抽出のスタイルを構成することができます。
-
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog, b3multi, tracecontext`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog, b3multi, tracecontext`
-
-環境変数の値は、挿入または抽出に有効なヘッダースタイルのカンマ区切りのリストです。デフォルトでは、`Datadog` 挿入スタイルのみが有効になっています。
-
-複数の抽出スタイルが有効な場合、抽出の試みは構成されたスタイルの順に完了し、最初に成功した抽出値を使用します。
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -315,3 +314,7 @@ Datadog APM トレーサーは、分散型トレーシングのための [B3][9]
 [11]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
 [12]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 [13]: /ja/agent/guide/network/#configure-ports
+[14]: /ja/tracing/configure_data_security/#redacting-the-query-in-the-url
+[15]: /ja/tracing/configure_data_security#telemetry-collection
+[16]: /ja/agent/remote_config/
+[17]: https://app.datadoghq.com/services

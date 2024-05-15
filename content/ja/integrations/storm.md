@@ -15,11 +15,12 @@ assets:
     source_type_name: storm
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
+- metrics
+- event management
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/storm/README.md
 display_on_public_website: true
@@ -32,20 +33,20 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: storm
-oauth: {}
 public_title: Storm
 short_description: Apache Storm 1.x.x トポロジー実行統計
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::処理
+  - Category::Metrics
+  - Category::Event Management
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Apache Storm 1.x.x トポロジー実行統計
   media: []

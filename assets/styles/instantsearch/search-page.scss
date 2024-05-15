@@ -1,0 +1,158 @@
+.searchbox-container.search_results_page {
+    flex-direction: column;
+    height: unset;
+    filter: none;
+
+    #searchbox {
+        height: 38px;
+    }
+
+    .ais-SearchBox {
+        width: 100%;
+
+        @media screen and (min-width: 992px) {
+            width: 50%;
+        }
+    }
+
+    .ais-SearchBox-form {
+        background-color: #e6e6e6;
+    }
+
+    .ais-SearchBox-input {
+        background-color: #e6e6e6;
+    }
+
+    #count {
+        padding: 20px 12px 0 12px;
+        align-self: flex-start;
+    }
+
+    .hits-container,
+    #hits {
+        position: relative;
+        z-index: unset;
+    }
+
+    .hits-container {
+        padding-top: 20px;
+    }
+
+    #hits {
+        top: 0;
+        filter: none;
+        border-top: none;
+    }
+
+    .ais-Hits-item {
+        margin-bottom: 20px;
+
+        & a {
+            flex-wrap: nowrap;
+            flex-direction: column;
+            border: none;
+            width: max-content;
+            max-width: 100%;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        & div {
+            grid-column: span 4 / span 4;
+        }
+
+        @media screen and (min-width: 768px) {
+            & div {
+                grid-column: span 3 / span 3;
+            }
+        }
+
+        & .ais-Hits-content {
+            width: auto;
+        }
+
+        & p {
+            font-size: 1rem;
+        }
+
+        & mark {
+            border-bottom: 1px solid #d6d6d6;
+        }
+    }
+
+    .ais-Hits-row {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        word-break: break-word;
+
+        & .ais-Hits-category,
+        & .ais-Hits-subcategory,
+        & .ais-Hits-title {
+            width: max-content;
+            max-width: max-content;
+            color: #000000;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 24px;
+            border: 0;
+        }
+    }
+
+    .ais-Hits-category-spacer {
+        padding: 0 12px;
+        color: #000000;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 22px;
+    }
+
+    #pagination {
+        align-self: flex-start;
+    }
+
+    .ais-Pagination-list {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        font-weight: 600;
+        row-gap: 12px;
+    }
+
+    .ais-Pagination-item a,
+    .ais-Pagination-item p {
+        padding: 4px 8px;
+        border: 1px solid #d6d6d6;
+        border-radius: 3px;
+        display: block;
+    }
+
+    .ais-Pagination-list li:not(:last-child) {
+        margin-right: 12px;
+    }
+
+    .ais-Pagination-list li:before {
+        content: none;
+    }
+
+    .ais-Pagination-item--disabled p {
+        color: #e6e6e6;
+        cursor: default;
+    }
+
+    .ais-Pagination-item.active p {
+        color: #ffffff;
+        background-color: #632ca6;
+        border-color: #632ca6;
+        cursor: default;
+    }
+
+    .ais-Pagination-item:not(.active, .ais-Pagination-item--disabled):hover a {
+        color: #ffffff;
+        background-color: #632ca6;
+        border-color: #632ca6;
+    }
+}

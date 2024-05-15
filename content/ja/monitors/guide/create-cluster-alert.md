@@ -23,14 +23,14 @@ title: クラスターアラートを作成し、グループの何割かが重�
 * ホストの総数を数えるには `count_nonzero` 関数を使用します。
 * 一方を他方で割ると、CPU 使用率が 50% 以上のホストの割合が算出されます。
 
-{{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition"  >}}
+{{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition" >}}
 
 * そして、その条件に該当するホストの割合が 40% になったらアラートを出すように設定します。
 
-{{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger"  >}}
+{{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger" >}}
 
 このモニターは、過去 10 分以内に CPU 使用率が 50% を超えたホストの割合を追跡し、それらのホストの 40% 以上が指定された条件を満たした場合に通知を生成します。
 
-{{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status"  >}}
+{{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}

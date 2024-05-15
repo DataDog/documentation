@@ -1,6 +1,4 @@
 ---
-title: Migration de checks custom vers Python 3
-kind: guide
 further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: Documentation
@@ -8,6 +6,8 @@ further_reading:
 - link: /agent/guide/agent-v6-python-3/
   tag: Documentation
   text: Utiliser Python 3 avec l'Agent v6 de Datadog
+kind: guide
+title: Migration de checks custom vers Python 3
 ---
 
 <div class="alert alert-info">

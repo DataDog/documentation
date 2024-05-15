@@ -46,7 +46,7 @@ CloudWatch's API returns only metrics with data points, so if for example an ELB
 
 ### Wrong count of aws.elb.healthy_host_count
 
-When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch’s side). For example, if you have two instances in `1a` and three instances in `ab`, the metric displays five instances per availability zone.
+When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch's side). For example, if you have two instances in `1a` and three instances in `ab`, the metric displays five instances per availability zone.
 As this can be counter intuitive, the metrics **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped** display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
 
 ## Datadog app
@@ -73,11 +73,11 @@ IMDSv2, in its default configuration, refuses connections with an IP hop count g
 
 ## Tags
 
-### Hosts still have AWS tags after removing the AWS EC2 integration
+### Hosts still have AWS tags after removing the Amazon EC2 integration
 
 You can use the AWS integration to collect data from CloudWatch, or install a Datadog Agent directly on each EC2 instance to get data and tags. If you have opted to use both of these methods to collect data, Datadog's backend merges the data from both from the integration and the Datadog Agent to a single host object.
 
-If you removed the AWS integration, but continue to run a Datadog Agent on your EC2 instances, the hosts in your Datadog account continues to have the old host-tags associated with it that were collected from AWS. This is intended behavior, and it does not indicate that the AWS integration or AWS EC2 integration is still enabled.
+If you removed the AWS integration, but continue to run a Datadog Agent on your EC2 instances, the hosts in your Datadog account continues to have the old host-tags associated with it that were collected from AWS. This is intended behavior, and it does not indicate that the AWS integration or Amazon EC2 integration is still enabled.
 
 You can verify the integration is enabled by checking the "Apps Running" for that host from the infrastructure list or by checking the metrics summary and creating a notebook scoped to that host.
 

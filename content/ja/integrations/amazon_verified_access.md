@@ -28,7 +28,7 @@ AWS Verified Access を使用すると、仮想プライベートネットワー
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

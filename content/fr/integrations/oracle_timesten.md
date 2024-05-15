@@ -39,7 +39,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: oracle_timesten
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -49,7 +48,7 @@ pricing:
   tag: host
   unit_label: Base de données Oracle TimesTen
   unit_price: 500
-public_title: Intégration Oracle TimesTen
+public_title: Oracle TimesTen
 short_description: Surveillez les performances de vos bases de données Oracle TimesTen
 supported_os:
 - linux
@@ -83,7 +82,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Oracle TimesTen
+  title: Oracle TimesTen
   uninstallation: README.md#Uninstallation
 ---
 

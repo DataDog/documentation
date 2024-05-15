@@ -23,7 +23,8 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: ArgoCD
-  logs: {}
+  logs:
+    source: argocd
   monitors:
     Sync Status: assets/recommended_monitors/application_sync_status.json
 author:
@@ -41,12 +42,11 @@ draft: false
 git_integration_title: argocd
 integration_id: argocd
 integration_title: Argo CD
-integration_version: 1.0.1
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: argocd
-oauth: {}
 public_title: Argo CD
 short_description: Argo CD
 supported_os:
@@ -77,14 +77,14 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Argo CD チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
 **注**: この機能を使用するには、Agent v7.42.0 以上が必要です。
 
-### コンフィギュレーション
+### 構成
 
 Argo CD は、以下の 3 つのコンポーネントについて Prometheus 形式のメトリクスを公開しています。
    - アプリケーションコントローラー

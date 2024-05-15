@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: fluxcd
-oauth: {}
 public_title: fluxcd
 short_description: Fluxcd の openmetric v2 とのインテグレーション
 supported_os:
@@ -65,7 +64,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 fluxcd チェックをホストにインストールするには
 

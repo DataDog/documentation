@@ -84,7 +84,7 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
 ```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';

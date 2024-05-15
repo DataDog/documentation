@@ -1,33 +1,34 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- google cloud
+- iot
+- log collection
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_IoT "
+description: 'Surveillez des métriques clés de Google Cloud IoT '
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_iot/
 draft: false
 git_integration_title: google_cloud_iot
 has_logo: true
 integration_id: google-cloud-iot
-integration_title: "Google\_Cloud\_IoT"
+integration_title: Google Cloud IoT
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_iot
-public_title: "Intégration Datadog/Google\_Cloud\_IoT"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_IoT."
+public_title: Intégration Datadog/Google Cloud IoT
+short_description: Surveillez des métriques clés de Google Cloud IoT.
 version: '1.0'
 ---
+
 ## Présentation
 
 Cloud IoT est un service entièrement géré qui vous permet de connecter, de gérer et d'ingérer, de manière simple et sécurisée, des données provenant de millions d'appareils partout dans le monde.
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud IoT.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

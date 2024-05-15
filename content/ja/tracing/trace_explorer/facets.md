@@ -20,7 +20,7 @@ title: スパンファセット
 
 {{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="トレースエクスプローラーのファセットパネル" style="width:90%;">}}
 
-{{< site-region region="us,eu,us3,us5" >}}
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 
 [ファセットの作成](#creating-facets)は、[スパンの検索][1]、[スパンからのメトリクス生成][2]、[保持フィルターによるスパンのインデックス化][3]には**必要ではありません**。これらのコンテキストにおいて、オートコンプリート機能は既存のファセットを使用しますが、受信したスパンに一致する任意の入力値も適用されます。
 

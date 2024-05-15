@@ -1,110 +1,162 @@
-heading: Bienvenue dans la documentation de Datadog !
 guides:
-  - title: Installer l'Agent
-    desc: Commencez à recueillir des événements et des métriques à partir de vos hosts et envoyez-les à Datadog.
-    link_text: Consulter les guides
-    link: getting_started/agent/
-  - title: Configurer des intégrations
-    desc: "Apprenez à recueillir des métriques, des traces et des logs avec plus de 500\_intégrations."
-    link_text: Consulter les guides
-    link: getting_started/integrations/
-  - title: Débuter avec Datadog
-    desc: 'Découvrez comment utiliser Datadog pour créer des dashboards, des graphiques, des monitors, et plus encore.'
-    link_text: Consulter les guides
-    link: getting_started/application/
+- desc: Recueillez des événements et des métriques à partir de vos hosts qui transmettent
+    des données à Datadog.
+  link: getting_started/agent/
+  link_text: Débuter avec l'Agent
+  title: Installer l'Agent
+- desc: Récupérez des métriques, des traces et des logs grâce à plus de 700 intégrations
+    afin de les envoyer à Datadog.
+  link: getting_started/integrations/
+  link_text: Débuter avec les intégrations
+  title: Configurer des intégrations
+- desc: Visualisez les données recueillies dans Datadog et créez des dashboards, des
+    alertes, des monitors, et plus encore.
+  link: getting_started/application/
+  link_text: Débuter avec Datadog
+  title: Débuter avec Datadog
+heading: Bienvenue dans la documentation de Datadog !
 nav_sections:
-  - nav_section:
-      - name: Plateforme
-      - navtiles:
-          - title: Agent
-            link: agent/
-            icon: agent-fill
-            desc: Installer et configurer l'Agent Datadog pour recueillir et envoyer des données
-          - title: Intégrations
-            link: integrations/
-            icon: integrations
-            desc: 'Rassembler des données depuis vos systèmes, apps et services'
-          - title: Dashboards
-            link: dashboards/
-            icon: dashboard
-            desc: Visualiser vos données pour mieux les comprendre
-          - title: Infrastructure
-            link: infrastructure/
-            icon: host-map
-            desc: 'Suivez vos hosts, conteneurs, processus et fonctions sans serveur'
-          - title: Métriques
-            link: metrics/
-            icon: metric
-            desc: Explorez vos métriques et créez des distributions
-          - title: Alertes
-            link: monitors/
-            icon: monitor
-            desc: Créer et gérer des monitors et des notifications
-          - title: APM et tracing distribué
-            link: tracing/
-            icon: apm
-            desc: Étudier précisément les performances de votre application
-          - title: Log Management
-            link: logs/
-            icon: log
-            desc: 'Recueillir, traiter, explorer, surveiller et archiver vos logs'
-          - title: Security Monitoring
-            link: security_monitoring/
-            icon: siem
-            desc: Détecter les menaces en temps réel et analyser les alertes de sécurité
-          - title: Surveillance synthétique
-            link: synthetics/
-            icon: synthetics
-            desc: 'Garantir la disponibilité de l''application, identifier les problèmes locaux et surveiller les performances'
-          - title: Real User Monitoring
-            link: real_user_monitoring/
-            icon: rum
-            desc: Visualisez et analysez les performances de vos applications frontend
-          - title: Surveillance réseau
-            link: network_performance_monitoring/
-            icon: network
-            desc: Visualisez en détail votre trafic réseau grâce aux objets tagués
-          - title: Informatique sans serveur
-            link: serverless/
-            icon: serverless
-            desc: Une visibilité de bout en bout sur votre cycle de développement sans serveur
-          - title: Application mobile
-            link: mobile/
-            icon: mobile
-            desc: Consultez les alertes et les dashboards Datadog sur votre appareil mobile
-          - title: Datadog Watchdog
-            link: watchdog/
-            icon: watchdog
-            desc: Identifiez automatiquement les tendances de vos métriques d'application et d'infrastructure
-  - nav_section:
-      - name: Configuration
-      - navtiles:
-          - title: API
-            link: api/
-            icon: api
-            desc: Utiliser l'API Datadog
-          - title: Gestion de compte
-            link: account_management/
-            icon: cog-2
-            desc: Gérer les réglages de votre compte
-          - title: Sécurité
-            link: 'https://www.datadoghq.com/security/'
-            icon: security-lock
-            desc: Découvrir comment Datadog protège vos données
-          - title: Outils de développement
-            link: developers/
-            icon: dev-code
-            desc: Développer des outils pour la plateforme Datadog
+- nav_section:
+  - name: Plateforme
+  - navtiles:
+    - desc: Installez et configurez l'Agent Datadog pour recueillir et envoyer des
+        données.
+      icon: agent-fill
+      link: agent/
+      title: Agent
+    - desc: Recueillez des données à propos de vos applications, services et systèmes.
+      icon: integrations
+      link: integrations/
+      title: Intégrations
+    - desc: Acheminez vos métriques, logs et traces OpenTelemetry vers Datadog.
+      icon: open-telemetry
+      link: opentelemetry/
+      title: OpenTelemetry
+    - desc: Visualisez, analysez et générez des insights à propos de vos données.
+      icon: dashboard
+      link: dashboards/
+      title: Dashboards
+    - desc: Suivez vos hosts, conteneurs, processus et fonctions sans serveur.
+      icon: host-map
+      link: infrastructure/
+      title: Infrastructure
+    - desc: Recevez une alerte en cas de changement important dans vos applications
+        et votre infrastructure.
+      icon: events
+      link: events/
+      title: Événements
+    - desc: Explorez, recherchez et créez des distributions pour vos métriques.
+      icon: metric
+      link: metrics/
+      title: Métriques
+    - desc: Créez, modifiez et gérez vos monitors et notifications.
+      icon: monitor
+      link: monitors/
+      title: Alertes
+    - desc: Explorez des dashboards prêts à l'emploi sur les performances et activez
+        le tracing distribué.
+      icon: apm
+      link: tracing/
+      title: APM
+    - desc: Comparez des snapshots des performances et analysez les goulots d'étranglement.
+      icon: profiling-1
+      link: profiler/
+      title: Profileur en continu
+    - desc: Traitez, surveillez et archivez vos logs ingérés.
+      icon: log
+      link: logs/
+      title: Log Management
+    - desc: Détectez les menaces et les problèmes de configuration liés à vos applications
+        et à votre infrastructure.
+      icon: security-platform
+      link: security/
+      title: Securité
+    - desc: Vérifiez la disponibilité de vos services, identifiez les problèmes régionaux
+        et testez les performances de vos applications.
+      icon: synthetics
+      link: synthetics/
+      title: Surveillance Synthetic
+    - desc: Mettez en place des intégrations sans code et des tests en continu grâce
+        aux fournisseurs CI/CD.
+      icon: continuous-testing
+      link: continuous_testing/
+      title: Tests continus
+    - desc: Enregistrez, observez et analysez l'expérience utilisateur de vos applications.
+      icon: rum
+      link: real_user_monitoring/
+      title: Real User Monitoring
+    - desc: Utilisez des objets tagués pour recueillir et représenter des données
+        à propos de votre trafic réseau.
+      icon: network
+      link: network_monitoring/
+      title: Network Monitoring
+    - desc: Détectez et résolvez les problèmes de performance de vos applications
+        sans serveur.
+      icon: sans serveur
+      link: serverless/
+      title: Sans serveur
+    - desc: Consultez les alertes, les incidents et d'autres insights Datadog depuis
+        votre appareil mobile.
+      icon: mobile
+      link: mobile/
+      title: Application mobile
+    - desc: Détectez et visualisez des anomalies liées à vos applications et votre
+        infrastructure.
+      icon: watchdog
+      link: watchdog/
+      title: Watchdog Datadog
+    - desc: Consultez les métriques sur les tests, les résultats de build et les exécutions
+        de pipeline pour votre pipeline de CI.
+      icon: ci
+      link: continuous_integration/
+      title: CI Visibility
+    - desc: Maîtrisez vos dépenses liées au cloud avec l'observabilité unifiée et
+        les données de coût.
+      icon: cloud-cost-management
+      link: cloud_cost_management/
+      title: Cloud Cost Management
+    - desc: Parcourez des dashboards enrichis, des métriques de requête et des échantillons
+        de requêtes.
+      icon: database-2
+      link: database_monitoring/
+      title: Database Monitoring
+    - desc: Gérez et surveillez vos pipelines de télémétrie.
+      icon: pipelines
+      link: observability_pipelines/
+      title: Pipelines d'observabilité
+    - desc: Découvrez, mappez et surveillez des services sans modification du code.
+      icon: usm
+      link: universal_service_monitoring/
+      title: Universal Service Monitoring
+- nav_section:
+  - name: Configuration
+  - navtiles:
+    - desc: Testez l'API Datadog.
+      icon: api
+      link: api/latest/
+      title: API
+    - desc: Accédez aux paramètres et à la facturation de votre organisation.
+      icon: cog-2
+      link: account_management/
+      title: Gestion de compte
+    - desc: Découvrez comment Datadog protège vos données.
+      icon: security-lock
+      link: data_security/
+      title: Sécurité des données
+    - desc: Développez des outils pour la plateforme Datadog.
+      icon: dev-code
+      link: developers/
+      title: Développeurs
 popular_searches:
-  - title: Documentation sur l'API
-    link: api/
-    weight: 10
-  - title: Installation d'Agent
-    link: getting_started/agent/
-    weight: 20
-  - title: Collecte de logs
-    link: logs/log_collection/
-    weight: 30
-  - title: Configuration d'intégration
-    link: integrations/
-    weight: 40
+- link: api/
+  title: Documentation sur l'API
+  weight: 10
+- link: getting_started/agent/
+  title: Installation de l'Agent
+  weight: 20
+- link: logs/log_collection/
+  title: Collecte de logs
+  weight: 30
+- link: integrations/
+  title: Configuration d'intégrations
+  weight: 40

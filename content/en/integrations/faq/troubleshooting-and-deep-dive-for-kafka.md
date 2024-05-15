@@ -54,7 +54,7 @@ This error means the Datadog Agent is unable to connect to the Kafka instance to
 
 By default Datadog only collects broker based metrics.
 
-For Java based producers and consumers, add the following to the `conf.yaml` and update the settings as necessary.  See the [sample kafka.d/conf.yaml][9] for all available configuration options.
+For Java based producers and consumers, add the following to the `conf.yaml` and update the settings as necessary. See the [sample kafka.d/conf.yaml][9] for all available configuration options.
 ```yaml
 - host: remotehost
   port: 9998 # Producer

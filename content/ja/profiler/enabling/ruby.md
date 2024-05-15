@@ -10,7 +10,7 @@ further_reading:
 - link: profiler/search_profiles
   tag: ドキュメント
   text: 使用可能なプロファイルタイプの詳細
-- link: profiler/profiler_troubleshooting
+- link: profiler/profiler_troubleshooting/ruby
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
 - link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
@@ -25,22 +25,22 @@ type: multi-code-lang
 
 ## 要件
 
-Datadog Profiler には MRI Ruby 2.2 以降が必要です。
+Datadog プロファイラーには Ruby 2.3+ が必要です (JRuby と TruffleRuby はサポートされていません)。
 
 以下の OS、アーキテクチャに対応しています。
 - Linux (GNU libc) x86-64、aarch64
 - Alpine Linux (musl libc) x86-64、aarch64
 
-以下のプロファイリング機能は、`dd-trace-rb` ライブラリの以下の最小バージョンで利用可能です。
+また、[`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) または [`pkgconf`](https://github.com/pkgconf/pkgconf) Linux システムユーティリティのいずれかがインストールされている必要があります。
+このユーティリティは、ほとんどの Linux ディストリビューションのソフトウェアリポジトリで入手できます。例:
 
-|      機能         | 必要な `dd-trace-rb` のバージョン          |
-|----------------------|-----------------------------------------|
-| [Code Hotspots][12]        | 0.49.0 以降                       |
-| [エンドポイントプロファイリング][13]            | 0.54.0 以降                       |
+- `pkg-config` パッケージは [Homebrew](https://formulae.brew.sh/formula/pkg-config)、[Debian](https://packages.debian.org/search?keywords=pkg-config) および [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config) ベースの Linux で利用可能です
+- `pkgconf` パッケージは [Arch](https://archlinux.org/packages/?q=pkgconf) および [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf) ベースの Linux で利用可能です
+- `pkgconf-pkg-config` パッケージは [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/) および [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config) ベースの Linux で利用可能です
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 アプリケーションのプロファイリングを開始するには
 

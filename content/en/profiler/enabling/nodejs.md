@@ -8,9 +8,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
@@ -22,7 +22,9 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires at least Node.js 14, but Node.js 16 or higher is recommended. **If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.**
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][6].
+
+The Datadog Profiler requires at least Node.js 14, but Node.js 16 or higher is recommended. If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -30,7 +32,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][2]+ or [6.20.2][3]+.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 2. Run `npm install --save dd-trace@latest` to add a dependency on the `dd-trace` module which includes the profiler.
 
@@ -46,7 +48,7 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ```
 
-**Note**: If you’re already using Datadog APM, you are already calling `init` and don’t need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
 
 ```node
 node -r dd-trace/init app.js
@@ -64,7 +66,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-**Note**: If you’re already using Datadog APM, you are already calling `init` and don’t need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
 
 ```node
 const tracer = require('dd-trace/init')
@@ -88,7 +90,8 @@ Node.js 16 or higher is recommended. On earlier versions, some applications see 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [4]: https://app.datadoghq.com/profiling
 [5]: /getting_started/profiler/
+[6]: /profiler/enabling/supported_versions/

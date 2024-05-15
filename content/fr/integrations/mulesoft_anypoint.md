@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: ioconnect-mulesoft-anypoint
 app_uuid: fdb057e7-9be6-459f-ab3e-e745766e9158
 assets:
@@ -52,7 +54,6 @@ legal_terms:
   eula: assets/EULA - IO Connect Services.pdf
 manifest_version: 2.0.0
 name: mulesoft_anypoint
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -62,7 +63,7 @@ pricing:
   tag: vcoreid
   unit_label: production vCore
   unit_price: 200
-public_title: Intégration Mule®
+public_title: Mule®
 short_description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les
   à Datadog
 supported_os:
@@ -106,7 +107,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Mule®
+  title: Mule®
   uninstallation: README.md#Uninstallation
 ---
 

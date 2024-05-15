@@ -188,7 +188,7 @@ Les paramètres sont définis comme suit :
 **Type de métrique :** [GAUGE][7].<br>
 **Tags :** `env` et `service`.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

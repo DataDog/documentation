@@ -65,7 +65,7 @@ Utilisez ce formulaire pour définir les options suivantes :
 
 Même si vous ne pouvez pas représenter graphiquement l'évolution d'un check de service (comme vous le feriez pour des métriques), vous pouvez quand même le surveiller. Accédez à l'onglet **Monitors** > **New Monitor**, puis sélectionnez **Service Check** :
 
-{{< img src="developers/service_checks/service_check_monitor.png" alt="Monitor de check"  >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="Monitor de check" >}}
 
 Utilisez ce formulaire pour définir les options suivantes :
 

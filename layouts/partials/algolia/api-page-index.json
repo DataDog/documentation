@@ -1,0 +1,58 @@
+{{- /* Outputs all API endpoint data associated to the given page as JSON. */ -}}
+{{ $hugo_context := .context }}
+{{ $page := .page }}
+{{ $title := .title }}
+{{ $lang := .lang }}
+{{ $api_version := .api_version }} {{/* "v1" or "v2" */}}
+{{ $endpoint_data := .endpoint_data }}
+{{ $api_v1_translate_actions := .api_v1_translate_actions }}
+{{ $api_v2_translate_actions := .api_v2_translate_actions }}
+
+{{/* Hugo page-level variables */}}
+{{ $type := $page.Type }}
+{{ $rank := $page.Params.algolia.rank }}
+{{ $permalink := $page.Permalink }}
+{{ $relpermalink := $page.RelPermalink }}
+
+{{/* Get API action data from spec */}}
+{{ $operationId := $endpoint_data.operationId }}
+{{ $translate_actions_datafile := cond (eq $api_version "v1") $api_v1_translate_actions $api_v2_translate_actions }}
+{{ $action_data := index $translate_actions_datafile $operationId }}
+{{ $section_header := $action_data.summary }}
+{{ $section_content := $action_data.description }}
+{{ $full_url := print $permalink "#" ($section_header | anchorize) }}
+{{ $relpermalink = print $relpermalink "#" ($section_header | anchorize) }}
+
+{{/* API actions can have both v1 and v2 endpoints, which should be reflected in search results with updated links */}}
+{{ if eq $api_version "v1" }}
+    {{ $v2_version := index $api_v2_translate_actions $operationId }}
+
+    {{ if ne $v2_version nil }}
+        {{ $hugo_context.Scratch.Add "duplicate_operation_ids" $operationId }}
+        {{ $full_url = print $full_url "-v1" }}
+        {{ $relpermalink = print $relpermalink "-v1" }}
+    {{ end }}
+{{ else if eq $api_version "v2" }}
+    {{ if in ($hugo_context.Scratch.Get "duplicate_operation_ids") $operationId }}
+        {{ $full_url = print $full_url "-v2" }}
+        {{ $relpermalink = print $relpermalink "-v2" }}
+    {{ end }}
+{{ end }}
+
+{{/* Add the resulting object to the index */}}
+{{
+    $hugo_context.Scratch.Add "algoliaindex" (
+        dict "objectID" (md5 $full_url)
+        "title" $title
+        "section_header" $section_header
+        "content" $section_content
+        "type" $type
+        "relpermalink" $relpermalink
+        "distinct_base_url" $page.RelPermalink
+        "full_url" $full_url
+        "language" $lang
+        "rank" $rank
+        "category" "API"
+        "subcategory" $title
+    )
+}}

@@ -16,9 +16,17 @@
     {{ end }}
 {{ end }}
 
-<h1 id="pagetitle">{{ .Title }}</h1>
+<div class="row">
+    <div class="col-12 order-1">
+        <h1 id="pagetitle">{{ .Title }}</h1>
+    </div>
+    <div class="col-12">
+        {{ partial "breadcrumbs.html" . }}
+    </div>
+</div>
 
 {{ .Content }}
+
 <form id="rules">
     {{- partial "grouped-item-listings.html" ( dict "context" $dot "filters" (sort ($.Scratch.Get "filters")) "listgroups" ($list.GroupByParam "source") "transformGroupTitle" true ) -}}
 </form>

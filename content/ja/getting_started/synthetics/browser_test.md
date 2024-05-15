@@ -37,7 +37,7 @@ title: ブラウザテストの概要
 {{< img src="getting_started/synthetics/browser-test-1.png" alt="ユーザージャーニーをマッピングするブラウザテスト" style="width:100%;" >}}
 ### テストの詳細を構成する
 
-1. Datadog サイトで、左側のメニューにある **UX Monitoring** にカーソルを合わせ、**[Synthetic Tests][2]** を選択します。
+1. Datadog サイトで、左側のメニューから **Digital Experience** にカーソルを合わせ、**[Tests][2]** (**Synthetic Monitoring & Testing** の下) を選択します。
 2. 右上隅にある **New Test** > **[Browser Test][3]** をクリックします。
 3. ブラウザテストを定義します。
 
@@ -81,7 +81,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 アラートメッセージを設計し、テストでアラートを送信するメールアドレスを追加します。
 
-{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="ブラウザテストのコンフィギュレーション例" video="true"  >}}
+{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="ブラウザテストのコンフィギュレーション例" video="true" >}}
 
 Slack、PagerDuty、Microsoft Teams、Webhook などの[通知インテグレーション][6]を使用することもできます。これらの通知ツールへの Synthetic アラートをトリガーするには、最初に対応する[インテグレーション][7]を設定する必要があります。
 
@@ -109,7 +109,7 @@ Slack、PagerDuty、Microsoft Teams、Webhook などの[通知インテグレー
 
 定義されたユーザージャーニーの後にアプリケーションが期待される状態になることを確認するために、**アサーション**でブラウザテストを終了することが重要です。
 
-{{< img src="getting_started/synthetics/record-test.mp4" alt="テストステップを記録する" video="true"  >}}
+{{< img src="getting_started/synthetics/record-test.mp4" alt="テストステップを記録する" video="true" >}}
 
 サンプル Web サイトは定期的にエラーをスローし、意図的に失敗を引き起こします。**Notify your team** フィールドにメールアドレスを含めると、テストが失敗して回復したときにメール通知が届きます。
 
@@ -121,7 +121,7 @@ Slack、PagerDuty、Microsoft Teams、Webhook などの[通知インテグレー
 
 以下の例では、サーバーのタイムアウトの結果としてテストが失敗しました。
 
-{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="ブラウザテストの失敗" video="true"  >}}
+{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="ブラウザテストの失敗" video="true" >}}
 
 Datadog の [APM と Synthetic Monitoring のインテグレーション][14]を使用して、**Traces** タブからのテスト実行によってバックエンドから生成されたトレースを表示します。
 
@@ -131,7 +131,7 @@ Datadog の [APM と Synthetic Monitoring のインテグレーション][14]を
 
 
 [1]: /ja/synthetics/browser_tests/
-[2]: https://app.datadoghq.com/synthetics/list
+[2]: https://app.datadoghq.com/synthetics/tests
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /ja/getting_started/synthetics/private_location
 [5]: /ja/continuous_testing/cicd_integrations

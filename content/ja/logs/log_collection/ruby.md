@@ -17,13 +17,16 @@ further_reading:
 - link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
   tag: ブログ
   text: logrotate を使ったログファイルの管理方法
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: Ruby on Rails ログ収集
 ---
 
 ## 概要
 
-Datadog にログを送信する際は、[`Lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを追跡します。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
+Datadog にログを送信する際は、[`Lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを[テール][11]します。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
 
 Lograge を使えば、この例のように、テキストベースの標準的なログ形式を、
 
@@ -208,3 +211,4 @@ logger.info(my_hash);
 [8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 [9]: /ja/logs/log_configuration/parsing
 [10]: /ja/logs/explorer/
+[11]: /ja/glossary/#tail

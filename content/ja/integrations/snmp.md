@@ -4,7 +4,9 @@ app_uuid: 4fc8e176-17ce-4346-9544-bec30ac47a00
 assets:
   dashboards:
     Datacenter Overview: assets/dashboards/datacenter_overview.json
+    Datadog NDM Environment: assets/dashboards/datadog_ndm_environment.json
     Interface Performance: assets/dashboards/interface_performance.json
+    Netflow Monitoring: assets/dashboards/netflow_monitoring.json
   integration:
     configuration:
       spec: assets/configuration/spec.yaml
@@ -20,6 +22,8 @@ assets:
   monitors:
     '[SNMP] Device Down Alert': assets/monitors/device_down.json
     '[SNMP] Device Unreachable Alert': assets/monitors/device_unreachable.json
+    '[SNMP] Interface Down Alert': assets/monitors/interface_down.json
+    '[SNMP] LinkDown Trap Alert': assets/monitors/traps_linkDown.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -36,12 +40,11 @@ draft: false
 git_integration_title: snmp
 integration_id: snmp
 integration_title: SNMP
-integration_version: 5.11.0
+integration_version: 6.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp
-oauth: {}
 public_title: SNMP
 short_description: ネットワークデバイスから SNMP メトリクスを収集。
 supported_os:

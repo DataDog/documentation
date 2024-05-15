@@ -14,6 +14,9 @@ further_reading:
     - link: /getting_started/tagging/unified_service_tagging
       tag: 'Documentation'
       text: 'Learn how to configure unified service tagging'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to optimize your Log Management'
 ---
 
 ## Overview
@@ -69,7 +72,7 @@ To begin collecting logs from a container service, follow the [in-app instructio
 
 ### Cloud
 
-You can forward logs from multiple cloud providers, such as AWS, Azure, and GCP, to Datadog. Each cloud provider has its own set of configuration instructions.
+You can forward logs from multiple cloud providers, such as AWS, Azure, and Google Cloud, to Datadog. Each cloud provider has its own set of configuration instructions.
 
 For example, ​AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. You can subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams.​
 

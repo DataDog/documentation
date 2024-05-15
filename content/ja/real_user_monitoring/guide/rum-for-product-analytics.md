@@ -40,11 +40,11 @@ Datadog RUM SDK をセットアップしたら、[ブラウザ][2]やモバイ�
 
 この例では、Shopist の `/cart` ページで上位のアクションを表示しています。
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page.png" alt="Shopist のカートページでのアクションの検索クエリ" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-2.png" alt="Shopist のカートページでのアクションの検索クエリ" style="width:90%;">}}
 
 どのユーザーがこれらのボタンをクリックしたかを調べるには、検索クエリを変更して、**Table** 視覚化タイプを選択し、**+** をクリックして `@user.name` に別の `group` フィールドを追加します。
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page.png" alt="Shopist のカートページで、ユーザー名でグループ分けされたアクションの検索クエリ" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-3.png" alt="Shopist のカートページで、ユーザー名でグループ分けされたアクションの検索クエリ" style="width:90%;">}}
 
 ## コアワークフローのコンバージョン率分析
 
@@ -80,7 +80,7 @@ Web サイトのビューやアクションに基づいたファネルを作成�
 
 このクエリは、フラストレーションシグナルが 2 回以上発生したトップページを検索します。
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query.png" alt="RUM エクスプローラーで 2 つ以上のフラストレーションシグナルを含むビューの検索クエリ" style="width:90%;" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query-1.png" alt="RUM エクスプローラーで 2 つ以上のフラストレーションシグナルを含むビューの検索クエリ" style="width:90%;" >}}
 
 トップビューの分析だけでなく、ユーザーが不満を表明しているボタンや要素も調査したいところです。
 
@@ -91,7 +91,7 @@ Web サイトのビューやアクションに基づいたファネルを作成�
 
 このクエリは、ユーザーが何らかのフラストレーションシグナルを表現した時に、そのフラストレーションが発生したユニークなアクションをカウントするものです。
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search.png" alt="Shopist のカートページで、ユーザーが 3 種類のフラストレーションシグナルを発したアクションをリストアップし、カウントする検索クエリ" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search-3.png" alt="Shopist のカートページで、ユーザーが 3 種類のフラストレーションシグナルを発したアクションをリストアップし、カウントする検索クエリ" style="width:90%;">}}
 
 ## セッションリプレイでユーザー体験を見る
 
@@ -99,7 +99,7 @@ Web サイトのビューやアクションに基づいたファネルを作成�
 
 ファネル視覚化では、**Funnel Analysis** サイドパネルにアクセスし、ユーザーが別のステップに継続した、またはドロップオフしたセッションの **Sample Replay Session** をクリックすることができます。
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay.mp4" alt="ファネル分析サイドパネルには、セッションリプレイへのリンクが含まれます" width=90%; video="true" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay-2.mp4" alt="ファネル分析サイドパネルには、セッションリプレイへのリンクが含まれます" width=90%; video="true" >}}
 
 セッションリプレイを使用すると、製品のどの部分がユーザーを混乱させ、コンバージョンを高めるために改善が必要なのかを特定できます。
 
@@ -127,7 +127,7 @@ Web サイトのビューやアクションに基づいたファネルを作成�
 [3]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#enrich-user-sessions
 [4]: /ja/real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
-[6]: /ja/real_user_monitoring/explorer/visualize#funnel
+[6]: /ja/real_user_monitoring/funnel_analysis/
 [7]: /ja/real_user_monitoring/explorer/saved_views/
 [8]: /ja/real_user_monitoring/explorer/export/
 [9]: /ja/real_user_monitoring/error_tracking/

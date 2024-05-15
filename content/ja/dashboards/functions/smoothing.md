@@ -85,7 +85,7 @@ title: スムーシング
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma20(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20" style="width:80%;">}}
 
 ## 中央値 
 
@@ -121,6 +121,25 @@ title: スムーシング
 
 注: スパン値はデータポイントの数です。したがって、`median_9()` は、最後の 9 つのデータポイントを使用して中央値を計算します。
 
+## Weighted 
+<div class="alert alert-info">Weighted() は、ゲージタイプのメトリクスで `SUM BY` をクエリする場合にのみ使用できます。</div> 
+
+| 関数       | 説明                                                           | 例                        |
+| :----          | :-------                                                              | :---------                     |
+| `weighted()`   | 一過性タグの適切な重み付けを維持したまま、ノイズを自動的に除去します。 | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
+
+`weighted()` 関数は、人工的なスパイクを防ぐために、ゲージメトリクスを空間で合計する際に、一過性で変化するタグの値の短命な寿命を考慮します。
+
+この関数は、以下の両方の条件を満たす場合、ゲージメトリクスに関するクエリに自動的に付加されます。
+1. このメトリクスは、メトリクスサマリーにも指定されている定期的で一貫した送信間隔を持っています。
+2. このメトリクスは `SUM by` で集計されます (例: `sum: mygaugemetric{*}`)
+
+ここでは、不正確なスパイクを持つ元のクエリ (紫) と、適切に重み付け計算されたクエリ (緑) のグラフの例を示します。
+
+{{< img src="dashboards/functions/smoothing/weighted.png" alt="重み付け修飾子を持つクエリと持たないクエリを比較したグラフ例" style="width:80%;">}}
+
+weighted() 修飾子の詳細については、[weighted() の仕組みは？][3]を参照してください。
+
 ## その他の関数
 
 {{< whatsnext desc="Consult the other available functions:" >}}
@@ -138,3 +157,4 @@ title: スムーシング
 
 [1]: http://futuredata.stanford.edu/asap
 [2]: https://www.datadoghq.com/blog/auto-smoother-asap
+[3]: /ja/dashboards/guide/how-weighted-works

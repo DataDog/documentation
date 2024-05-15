@@ -1,17 +1,18 @@
 ---
-title: テストファイルのアップロードとダウンロード
-kind: ガイド
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-    tag: ブログ
-    text: Datadog Synthetic モニタリングの紹介
-  - link: synthetics/
-    tag: Documentation
-    text: チェックを管理する
-  - link: synthetics/browser_tests
-    tag: Documentation
-    text: ブラウザテストの設定
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  tag: ブログ
+  text: Datadog Synthetic モニタリングの紹介
+- link: synthetics/
+  tag: Documentation
+  text: Synthetic モニタリングについて
+- link: synthetics/browser_tests
+  tag: Documentation
+  text: ブラウザテストの設定
+kind: ガイド
+title: テストファイルのアップロードとダウンロード
 ---
+
 ## 概要
 
 Web アプリケーションには多くのロジックを埋め込むことができ、ウェブサイトのテスト用のエンドツーエンドのテストは、多くの場合、基本的なインタラクション (クリックや入力フォームなど) によって作成されますが、重要なビジネストランザクションをアプリケーションで実行できるか確認するため、時にはもう一歩踏み込んで複雑なインタラクションを検証する必要があります。
@@ -20,17 +21,17 @@ Web アプリケーションには多くのロジックを埋め込むことが�
 
 プロファイルの作成をテストするための機能的なワークフローの最終ステップを検証するため、**ファイルをアップロード**できます。テストレコーダーのレベルでファイルをアップロードすると、Datadog Synthetic ブラウザテストではアップロードされたファイルを自動的に識別し、[`Upload file` 関連ステップ][1]が作成されます。それが済むと、テストの実行時にそのファイルを再びアップロードすることができます。
 
-{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="ファイルのアップロード" video="true"  width="100%">}}
+{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="ファイルのアップロード" video="true" width="100%">}}
 
 ## ファイルダウンロードのテスト
 
 **Downloading files** も、ユーザーが Web アプリケーションで利用する一般的なアクションです。たとえば、E コマースサイトから注文確認書をダウンロードしたり、銀行の口座取引記録を PDF や CSV 形式でエクスポートすることを思い浮かべてください。
 
-Datadog のブラウザテストおよび `Test a downloaded file` アサーションにより、Web アプリケーションからのダウンロード可能なファイルが（たとえば FTP サーバーから）正しく提供されているかを確認することができます。このアサーションにより、ダウンロード可能なファイルをテストし、ファイル名、ファイルサイズ、データが正しいことを確認できます。
+Datadog のブラウザテストおよび `Test a downloaded file` アサーションにより、Web アプリケーションからのダウンロード可能なファイルが (例えば FTP サーバーから) 正しく提供されているかを確認することができます。このアサーションにより、ダウンロード可能なファイルをテストし、ファイル名、ファイルサイズ、データが正しいことを確認できます。
 
 このアサーションでブラウザテストをセットアップするには
 
-1. ブラウザテストで、**ファイルのダウンロードを生成するステップを記録** します。以下の例では `.docx` ファイルのダウンロードをトリガーするボタンクリックの記録方法を示しています。
+1. ブラウザテストで、**ファイルのダウンロードを生成するステップを記録**します。以下の例では `.docx` ファイルのダウンロードをトリガーするボタンクリックの記録方法を示しています。ファイルサイズは 50Mb 以下でなければなりません。
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/recording_step.mp4" alt="ステップの記録" video="true">}}
 
@@ -52,5 +53,5 @@ Datadog のブラウザテストおよび `Test a downloaded file` アサーシ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/browser_tests/actions/#upload
+[1]: /ja/synthetics/browser_tests/actions/#upload-file
 [2]: /ja/synthetics/browser_tests/actions/#assertion

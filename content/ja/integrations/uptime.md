@@ -19,39 +19,40 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os system
+- notification
+- os & system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: uptime
 integration_id: uptime
-integration_title: Uptime
+integration_title: Uptime.com
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: uptime
-oauth: {}
-public_title: Uptime
+public_title: Uptime.com
 short_description: アップタイムとパフォーマンスの監視を容易に実行
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::通知
+  - Category::OS とシステム
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS システム
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: アップタイムとパフォーマンスの監視を容易に実行
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Uptime
+  title: Uptime.com
 ---
 
 

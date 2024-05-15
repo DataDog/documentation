@@ -31,9 +31,9 @@ title: Synthetic モニタリングのデータセキュリティ
 
 アーティファクトとは、ブラウザテストのスクリーンショット、スナップショット、エラー、リソースのことです。
 
-{{< site-region region="us,us3,us5,gov" >}}
+{{< site-region region="us,us3,us5,gov,ap1" >}}
 
-* **Storage**: [AWS S3 バケット][1]の暗号化
+* **Storage**: [Amazon S3 バケット][1]の暗号化。
 * **Transport**: [S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
@@ -73,7 +73,7 @@ title: Synthetic モニタリングのデータセキュリティ
 
 アーティファクトとは、ブラウザテストのスクリーンショット、スナップショット、エラー、リソースのことです。
 
-{{< site-region region="us,us3,us5,gov" >}}
+{{< site-region region="us,us3,us5,gov,ap1" >}}
 
 * **Storage**: [AWS][1]の暗号化。
 * **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート（API キーによる認証）、そして Datadog からストレージへの、[S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
@@ -116,5 +116,5 @@ title: Synthetic モニタリングのデータセキュリティ
 [4]: /ja/synthetics/settings/?tab=specifyvalue#global-variables
 [5]: /ja/account_management/rbac/permissions/#synthetic-monitoring
 [6]: /ja/synthetics/api_tests/http_tests?tab=privacy#define-request
-[7]: /ja/synthetics/multistep?tab=privacy#define-the-request 
+[7]: /ja/synthetics/multistep?tab=privacy#define-the-request
 [8]: /ja/synthetics/browser_tests/?tab=privacy#test-configuration

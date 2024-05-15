@@ -30,6 +30,10 @@ You can also build a [custom check][10] to define and send metrics to Datadog fr
 
 The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12]. For more information on installing or managing these integrations, see the [integrations management guide][14].
 
+### Permissions
+
+The `manage_integrations` permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
+
 ### API and application keys
 
 To [install the Datadog Agent][15], you need an [API key][16]. If the Agent is already downloaded, make sure to set up the API key in the `datadog.yaml` file. To use most additional Datadog functionality besides submitting metrics and events, you need an [application key][16]. You can manage your accounts API and application keys in the [API Settings page][17].
@@ -118,14 +122,13 @@ Installing more than one integration is a matter of adding the configuration inf
 
 If you set up [process collection][29], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
+{{< img src="getting_started/integrations/ad_integrations_1.png" alt="Autodetected integrations" >}}
 
-Each integration has one of two status types:
+Each integration has one of three status types:
 
-- **+ Detected**: This integration is not enabled on any host(s) running it.
-- **✓ Partial Visibility**: This integration is enabled on some, but not all relevant hosts are running it.
-
-Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
+- **Detected**: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the **Hosts** tab.
+- **Installed**: This integration is installed and configured on a host.
+- **Available**: All integrations that do not fall into the **Installed** and **Detected** categories.
 
 ## Security practices
 
@@ -185,7 +188,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto/
+[1]: /developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack/
 [4]: /integrations/amazon_web_services/
@@ -198,12 +201,12 @@ tagging
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [14]: /agent/guide/integration-management/
-[15]: https://app.datadoghq.com/account/settings#agent
+[15]: https://app.datadoghq.com/account/settings/agent/latest
 [16]: /account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /integrations/
-[19]: https://app.datadoghq.com/account/settings#agent/docker
-[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /agent/guide/agent-commands/#restart-the-agent
 [22]: /developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -228,3 +231,4 @@ tagging
 [42]: /metrics/
 [43]: /metrics/custom_metrics/
 [44]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /account_management/rbac/permissions/#integrations

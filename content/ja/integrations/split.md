@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: split
-oauth: {}
 public_title: Split
 short_description: エンジニアリングチームや製品チームに実験用プラットフォームを提供。
 supported_os:
@@ -57,11 +56,6 @@ tile:
 ---
 
 
-
-{{< callout url="#" btn_hidden="true" header="機能フラグ追跡のベータ版に参加しよう！">}}
-Split 機能フラグで RUM データを補強し、パフォーマンス監視や行動の変化を可視化するには、<a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">機能フラグ追跡</a>の非公開ベータ版に参加しましょう。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
-
-{{< /callout >}}
 
 ## 概要
 
@@ -133,7 +127,7 @@ Split チェックには、サービスのチェック機能は含まれませ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: http://www.split.io
 [2]: http://www.split.io/articles/controlled-rollout

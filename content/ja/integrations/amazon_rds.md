@@ -4,10 +4,11 @@ aliases:
 - /ja/integrations/rds/
 - /ja/integrations/faq/how-can-i-monitor-the-health-status-of-my-rds-instances/
 categories:
-- cloud
-- data store
 - aws
+- cloud
+- data stores
 - log collection
+- network
 dependencies: []
 description: Amazon RDS に関連する大量のメトリクスを追跡する。
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
@@ -30,12 +31,17 @@ integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
+  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
+  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
 name: amazon_rds
 public_title: Datadog-Amazon RDS インテグレーション
 short_description: Amazon RDS に関連する大量のメトリクスを追跡する。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS ダッシュボード" popup="true">}}
 
 ## 概要
@@ -169,7 +175,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
     | `rds:ListTagsForResource` | RDS インスタンスにカスタムタグを追加します。|
     | `rds:DescribeEvents`      | RDS データベースに関連するイベントを追加します。|
 
-3. [Datadog - AWS RDS インテグレーション][4]をインストールします。
+3. [Datadog - Amazon RDS インテグレーション][4]をインストールします。
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
@@ -187,7 +193,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
     | `rds:ListTagsForResource` | RDS インスタンスにカスタムタグを追加します。|
     | `rds:DescribeEvents`      | RDS データベースに関連するイベントを追加します。|
 
-3. [Datadog - AWS RDS インテグレーション][4]をインストールします。
+3. [Datadog - Amazon RDS インテグレーション][4]をインストールします。
 
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -208,7 +214,7 @@ init_config:
 
 instances:
     # AWS コンソールからのエンドポイント URL
-    - server: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
+    - server: 'mysqlrds.blah.us-east-1.rds.amazonaws.com'
       user: '<USERNAME>'
       pass: '<PASSWORD>'
       port: 3306
@@ -222,7 +228,7 @@ PostgreSQL を使用している場合は、`postgres.yaml` を編集します�
 init_config:
 
 instances:
-    - host: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
+    - host: 'postgresqlrds.blah.us-east-1.rds.amazonaws.com'
       port: 5432
       username: '<USERNAME>'
       password: '<PASSWORD>'
@@ -237,7 +243,7 @@ Microsoft SQL Server を使用している場合は、`sqlserver.yaml` を編集
 init_config:
 
 instances:
-    - host: 'mysqlrds.blah.us-east1-rds.amazonaws.com,1433'
+    - host: 'sqlserverrds.blah.us-east-1.rds.amazonaws.com,1433'
       username: '<USERNAME>'
       password: '<PASSWORD>'
       tags:
@@ -295,9 +301,9 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS RDS インテグレーションには、DB インスタンス、セキュリティグループ、スナップショット、およびパラメーターグループに関連するイベントが含まれます。以下はイベントの例です。
+Amazon RDS インテグレーションには、DB インスタンス、セキュリティグループ、スナップショット、およびパラメーターグループに関連するイベントが含まれます。以下はイベントの例です。
 
-{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="AWS RDS イベント" >}}
+{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="Amazon RDS イベント" >}}
 
 ### サービスのチェック
 
@@ -309,9 +315,16 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 - WARNING - 停止
 - UNKNOWN - その他
 
+## すぐに使える監視
+
+Amazon RDS インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+
+- Amazon RDS ダッシュボード: すぐに使える [Amazon RDS ダッシュボード][9]を使用して、RDS インスタンスの包括的な概要を得ることができます。
+- 推奨モニター: [Amazon RDS の推奨モニター][10]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 ## その他の参考資料
 
@@ -325,4 +338,6 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
 [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://app.datadoghq.com/dash/integration/62/aws-rds
+[10]: https://app.datadoghq.com/monitors/recommended
+[11]: https://docs.datadoghq.com/ja/help/

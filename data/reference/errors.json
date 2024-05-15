@@ -1,0 +1,576 @@
+{
+  "100": {
+    "anchor": "100",
+    "code": 100,
+    "title": "Unhandled root runtime error",
+    "description": "A root expression is fallible and its [runtime error](/docs/reference/vrl/errors/#runtime-errors) isn't handled in the VRL\nprogram.",
+    "rationale": "VRL is [fail safe](/docs/reference/vrl/#fail-safety) and thus requires that all possible runtime errors be handled.\nThis provides important [safety guarantees](/docs/reference/vrl#safety) to VRL and helps to ensure that VRL programs\nrun reliably when deployed.",
+    "resolution": "[Handle](/docs/reference/vrl/errors/#handling) the runtime error by [assigning](/docs/reference/vrl/errors/#assigning),\n[coalescing](/docs/reference/vrl/errors/#coalescing), or [raising](/docs/reference/vrl/errors/#raising) the\nerror.",
+    "examples": [
+      {
+        "title": "Unhandled root runtime error (assigning)",
+        "source": "get_env_var(\"HOST\")",
+        "diff": "- \tget_env_var(\"HOST\")\n+# \t.host = get_env_var(\"HOST\")"
+      }
+    ]
+  },
+  "101": {
+    "anchor": "101",
+    "code": 101,
+    "title": "Malformed regex literal",
+    "description": "A [regex literal expression](/docs/reference/vrl/expressions/#regular-expression) is malformed\nand thus doesn't result in a valid regular expression.",
+    "rationale": "Invalid regular expressions don't compile.",
+    "resolution": "Regular expressions are difficult to write and commonly result in syntax errors. If you're parsing a common\nlog format we recommend using one of VRL's [`parse_*` functions](/docs/reference/vrl/functions/#parse-functions). If\nyou don't see a function for your format please [request it](https://github.com/vectordotdev/vector/issues/new?labels=type%3A+new+feature). Otherwise, use the\n[Rust regex tester](https://rustexp.lpil.uk/) to test and correct your regular expression.",
+    "examples": [
+      {
+        "title": "Malformed regex literal (common format)",
+        "source": ". |= parse_regex!(.message, r'^(?P<host>[\\w\\.]+) - (?P<user>[\\w]+) (?P<bytes_in>[\\d]+) \\[?P<timestamp>.*)\\] \"(?P<method>[\\w]+) (?P<path>.*)\" (?P<status>[\\d]+) (?P<bytes_out>[\\d]+)$')",
+        "diff": "-. |= parse_regex!(.message, r'^(?P<host>[\\w\\.]+) - (?P<user>[\\w]+) (?P<bytes_in>[\\d]+) \\[?P<timestamp>.*)\\] \"(?P<method>[\\w]+) (?P<path>.*)\" (?P<status>[\\d]+) (?P<bytes_out>[\\d]+)$')\n+. |= parse_common_log!(.message)"
+      }
+    ]
+  },
+  "102": {
+    "anchor": "102",
+    "code": 102,
+    "title": "Non-boolean if expression predicate",
+    "description": "An [if expression](/docs/reference/vrl/expressions/#regular-expression) predicate doesn't\nevaluate to a Boolean.",
+    "rationale": "VRL doesn't implement \"truthy\" values (non-Boolean values that resolve to a Boolean, such as `1`) since these\nare common foot-guns that can result in unexpected behavior when used in if expressions. This provides important\n[safety guarantees](/docs/reference/vrl#safety) in VRL and ensures that VRL programs are reliable once deployed.",
+    "resolution": "Adjust your if expression predicate to resolve to a Boolean. Helpful functions to solve this include\n[`exists`](/docs/reference/vrl/functions#exists) and\n[`is_nullish`](/docs/reference/vrl/functions#is_nullish).",
+    "examples": [
+      {
+        "title": "Non-boolean if expression predicate (strings)",
+        "input": {
+          "log": {
+            "message": "key=value"
+          }
+        },
+        "source": "if .message {\n\t. |= parse_key_value!(.message)\n}",
+        "diff": "-if .message {\n+if exists(.message) {\n \t. |= parse_key_value!(.message)\n }"
+      }
+    ]
+  },
+  "103": {
+    "anchor": "103",
+    "code": 103,
+    "title": "Unhandled fallible assignment",
+    "description": "The right-hand side of this [assignment](/docs/reference/vrl/expressions/#regular-expression)\nis fallible (that is, it can produce a [runtime error](/docs/reference/vrl/errors/#runtime-errors)), but the error isn't\n[handled](/docs/reference/vrl/errors/#handling).",
+    "rationale": "VRL is [fail safe](/docs/reference/vrl/#fail-safety) and thus requires that all possible runtime errors be handled.\nThis provides important [safety guarantees](/docs/reference/vrl#safety) to VRL and helps to ensure that VRL programs\nrun reliably when deployed.",
+    "resolution": "[Handle](/docs/reference/vrl/errors/#handling) the runtime error by either\n[assigning](/docs/reference/vrl/errors/#assigning) it, [coalescing](/docs/reference/vrl/errors/#coalescing) it, or\n[raising](/docs/reference/vrl/errors/#raising) it.",
+    "examples": [
+      {
+        "title": "Unhandled fallible assignment (coalescing)",
+        "input": {
+          "log": {
+            "message": "key=value"
+          }
+        },
+        "diff": "-. = parse_key_value(.message)\n+. = parse_key_value(.message) ?? {}",
+        "source": ". = parse_key_value(.message)"
+      },
+      {
+        "title": "Unhandled fallible assignment (raising)",
+        "input": {
+          "log": {
+            "message": "key=value"
+          }
+        },
+        "diff": "-. = parse_key_value(.message)\n+. = parse_key_value!(.message)",
+        "source": ". = parse_key_value(.message)"
+      },
+      {
+        "title": "Unhandled fallible assignment (assigning)",
+        "input": {
+          "log": {
+            "message": "key=value"
+          }
+        },
+        "diff": "-. = parse_key_value(.message)\n+., err = parse_key_value(.message)",
+        "source": ". = parse_key_value(.message)"
+      }
+    ]
+  },
+  "104": {
+    "anchor": "104",
+    "code": 104,
+    "title": "Unnecessary error assignment",
+    "description": "The left-hand side of an [assignment expression](/docs/reference/vrl/expressions/#regular-expression)\nneedlessly handles errors even though the right-hand side _can't_ fail.",
+    "rationale": "Assigning errors when one is not possible is effectively dead code that makes your program difficult to follow.\nRemoving the error assignment simplifies your program.",
+    "resolution": "Remove the error assignment.",
+    "examples": [
+      {
+        "title": "Unnecessary error assignment (strings)",
+        "source": ".message, err = downcase(.message)",
+        "diff": "-.message, err = downcase(.message)\n+.message = downcase(.message)"
+      }
+    ]
+  },
+  "105": {
+    "anchor": "105",
+    "code": 105,
+    "title": "Undefined function",
+    "description": "A [function call expression](/docs/reference/vrl/expressions/#regular-expression) invokes an\nunknown function.",
+    "rationale": null,
+    "resolution": "This is typically due to a typo. Correcting the function name should resolve this.",
+    "examples": [
+      {
+        "title": "Undefined function (typo)",
+        "source": "parse_keyvalue(.message)",
+        "diff": "-parse_keyvalue(.message)\n+parse_key_value(.message)"
+      }
+    ]
+  },
+  "106": {
+    "anchor": "106",
+    "code": 106,
+    "title": "Function argument arity mismatch",
+    "description": "A [function call expression](/docs/reference/vrl/expressions/#regular-expression) invokes a\nfunction with too many arguments.",
+    "rationale": null,
+    "resolution": "Remove the extra arguments to adhere to the function's documented signature.",
+    "examples": [
+      {
+        "title": "Function argument arity mismatch",
+        "source": "parse_json(.message, pretty: true)",
+        "diff": "-parse_json(.message, pretty: true)\n+parse_json(.message)"
+      }
+    ]
+  },
+  "107": {
+    "anchor": "107",
+    "code": 107,
+    "title": "Required function argument missing",
+    "description": "A [function call expression](/docs/reference/vrl/expressions/#regular-expression) fails to pass\na required argument.",
+    "rationale": null,
+    "resolution": "Supply all of the required function arguments to adhere to the function's documented signature.",
+    "examples": [
+      {
+        "title": "Required function argument missing",
+        "source": "parse_timestamp(.timestamp)",
+        "diff": "-parse_timestamp(.timestamp)\n+parse_timestamp(.timestamp, format: \"%D\")"
+      }
+    ]
+  },
+  "108": {
+    "anchor": "108",
+    "code": 108,
+    "title": "Unknown function argument keyword",
+    "description": "A [function call expression](/docs/reference/vrl/expressions/#regular-expression) passes an\nunknown named argument.",
+    "rationale": null,
+    "resolution": "Correct the name to align with the documented argument names for the function.",
+    "examples": [
+      {
+        "title": "Unknown function argument keyword",
+        "source": "parse_timestamp(.timestamp, fmt: \"%D\")",
+        "diff": "-parse_timestamp(.timestamp)\n+parse_timestamp(.timestamp, format: \"%D\")"
+      }
+    ]
+  },
+  "110": {
+    "anchor": "110",
+    "code": 110,
+    "title": "Invalid argument type",
+    "description": "An argument passed to a [function call expression](/docs/reference/vrl/expressions/#regular-expression)\nisn't a supported type.",
+    "rationale": "VRL is [fail safe](/docs/reference/vrl/#fail-safety) and thus requires that all possible runtime errors be handled.\nThis provides important [safety guarantees](/docs/reference/vrl#safety) to VRL and helps to ensure that VRL programs\nrun reliably when deployed.",
+    "resolution": "You must guarantee the type of the variable by using the appropriate\n[type](/docs/reference/vrl/functions/#type-functions) or [coercion](/docs/reference/vrl/functions/#coerce-functions) function.",
+    "examples": [
+      {
+        "title": "Invalid argument type (guard with defaults)",
+        "source": "downcase(.message)",
+        "diff": "+.message = string(.message) ?? \"\"\n downcase(.message)"
+      },
+      {
+        "title": "Invalid argument type (guard with errors)",
+        "source": "downcase(.message)",
+        "diff": "downcase(string!(.message))"
+      }
+    ]
+  },
+  "111": {
+    "anchor": "111",
+    "code": 111,
+    "title": "Unhandled predicate error",
+    "description": "A predicate is fallible and its [runtime error](/docs/reference/vrl/errors/#runtime-errors) isn't handled in the VRL\nprogram.",
+    "rationale": "VRL is [fail safe](/docs/reference/vrl/#fail-safety) and thus requires that all possible runtime errors be handled.\nThis provides important [safety guarantees](/docs/reference/vrl#safety) to VRL and helps to ensure that VRL programs\nrun reliably when deployed.",
+    "resolution": "[Handle](/docs/reference/vrl/errors/#handling) the runtime error by [assigning](/docs/reference/vrl/errors/#assigning),\n[coalescing](/docs/reference/vrl/errors/#coalescing), or [raising](/docs/reference/vrl/errors/#raising) the\nerror.",
+    "examples": [
+      {
+        "title": "Unhandled predicate error (predicate)",
+        "source": "if contains(.field, \"thing\") {\n  log(\"thing\")\n}",
+        "diff": "-       if contains(.field, \"thing\") {\n+#      if contains(.field, \"thing\") ?? false {"
+      }
+    ]
+  },
+  "203": {
+    "anchor": "203",
+    "code": 203,
+    "title": "Unrecognized token",
+    "description": "Your VRL program contains a token (character) that the VRL parser doesn't recognize as valid.",
+    "rationale": null,
+    "resolution": "Use a valid token.",
+    "examples": [
+      {
+        "title": "Unrecognized token",
+        "source": "😂",
+        "diff": "-😂\n+\"some valid value\""
+      }
+    ]
+  },
+  "204": {
+    "anchor": "204",
+    "code": 204,
+    "title": "Unrecognized end-of-file (EOF)",
+    "description": "The VRL parser has reached the end of the program in an invalid state, potentially due to a\ntypo or a dangling expression.",
+    "rationale": null,
+    "resolution": "Make sure that the last expression in the program is valid.",
+    "examples": [
+      {
+        "title": "Unrecognized end-of-file (EOF)",
+        "source": ".field1 = \"value1\"\n.field2 =",
+        "diff": "-.bar =\n+.field2 = \"value2\""
+      }
+    ]
+  },
+  "205": {
+    "anchor": "205",
+    "code": 205,
+    "title": "Reserved keyword",
+    "description": "You've used a name for a variable that serves another purpose in VRL or is reserved for potential future use.",
+    "rationale": null,
+    "resolution": "Use a different variable name.",
+    "examples": [
+      {
+        "title": "Reserved keyword",
+        "source": "else = \"some value\"",
+        "diff": "-else = \"some value\"\n+some_non_reserved_name = \"some value\""
+      }
+    ]
+  },
+  "206": {
+    "anchor": "206",
+    "code": 206,
+    "title": "Invalid numeric literal",
+    "description": "The VRL compiler doesn't recognize this numeric literal as valid.",
+    "rationale": null
+  },
+  "207": {
+    "anchor": "207",
+    "code": 207,
+    "title": "Invalid string literal",
+    "description": "Your VRL program contains a string literal that the VRL parser doesn't recognize as valid.",
+    "rationale": null,
+    "resolution": "Make sure that your string is properly enclosed by single or double quotes.",
+    "examples": [
+      {
+        "title": "Invalid string literal",
+        "source": "\"Houston, we have a problem'",
+        "diff": "- \"Houston, we have a problem'\n+ \"Houston, we have a problem\""
+      }
+    ]
+  },
+  "208": {
+    "anchor": "208",
+    "code": 208,
+    "title": "Invalid literal",
+    "description": "The VRL compiler doesn't recognize this literal value as valid.",
+    "rationale": null
+  },
+  "209": {
+    "anchor": "209",
+    "code": 209,
+    "title": "Invalid escape character",
+    "description": "Your string includes an escape character that the VRL compiler doesn't recognize as valid",
+    "rationale": null
+  },
+  "300": {
+    "anchor": "300",
+    "code": 300,
+    "title": "Unexpected type",
+    "description": "The VRL compiler expected a value of a specific type but found a different type.",
+    "rationale": null
+  },
+  "301": {
+    "anchor": "301",
+    "code": 301,
+    "title": "Type coercion error",
+    "description": "This value can't be coerced into the desired type.",
+    "rationale": null
+  },
+  "302": {
+    "anchor": "302",
+    "code": 302,
+    "title": "Remainder error",
+    "description": "These two types can't produce a remainder.",
+    "rationale": null
+  },
+  "303": {
+    "anchor": "303",
+    "code": 303,
+    "title": "Multiplication error",
+    "description": "These types can't be multiplied together",
+    "rationale": null
+  },
+  "304": {
+    "anchor": "304",
+    "code": 304,
+    "title": "Division error",
+    "description": "The left-hand value can't be divided by the right-hand value.",
+    "rationale": null
+  },
+  "305": {
+    "anchor": "305",
+    "code": 305,
+    "title": "Divide by zero",
+    "description": "You've attempted to divide an integer or float by zero.",
+    "rationale": "Unlike some other programming languages, VRL doesn't have any concept of infinity, as it's\nunclear how that could be germane to observability data use cases. Thus, dividing by zero\ncan't have any meaningful result.",
+    "resolution": "If you know that a value is necessarily zero, don't divide by it. If a value *could* be\nzero, capture the potential error thrown by the operation:\n\n```coffee\nresult, err = 27 / .some_value\nif err != nil {\n\t# Handle error\n}\n```"
+  },
+  "306": {
+    "anchor": "306",
+    "code": 306,
+    "title": "NaN float",
+    "description": "Floats in VRL can't be NaN (not a number).",
+    "rationale": null
+  },
+  "307": {
+    "anchor": "307",
+    "code": 307,
+    "title": "Addition error",
+    "description": "These two values can't be added together.",
+    "rationale": null
+  },
+  "308": {
+    "anchor": "308",
+    "code": 308,
+    "title": "Subtraction error",
+    "description": "The right-hand value can't be subtracted from the left-hand value.",
+    "rationale": null
+  },
+  "309": {
+    "anchor": "309",
+    "code": 309,
+    "title": "Or expression error",
+    "description": "These two values can't be combined into an or expression.",
+    "rationale": null
+  },
+  "310": {
+    "anchor": "310",
+    "code": 310,
+    "title": "And expression error",
+    "description": "These two values can't be combined into an and expression.",
+    "rationale": null
+  },
+  "311": {
+    "anchor": "311",
+    "code": 311,
+    "title": "Greater than error",
+    "description": "These two values can't be used in a greater than expression.",
+    "rationale": null
+  },
+  "312": {
+    "anchor": "312",
+    "code": 312,
+    "title": "Greater than or equal to error",
+    "description": "These two values can't be used in a greater than or equal to expression.",
+    "rationale": null
+  },
+  "313": {
+    "anchor": "313",
+    "code": 313,
+    "title": "Less than error",
+    "description": "These two values can't be used in less than expression.",
+    "rationale": null
+  },
+  "314": {
+    "anchor": "314",
+    "code": 314,
+    "title": "Less than or equal to error",
+    "description": "These two values can't be used in a less than or equal to expression.",
+    "rationale": null
+  },
+  "315": {
+    "anchor": "315",
+    "code": 315,
+    "title": "mutation of read-only value",
+    "description": "This value is read-only and cannot be deleted or mutated.",
+    "rationale": null
+  },
+  "400": {
+    "anchor": "400",
+    "code": 400,
+    "title": "Unexpected expression",
+    "description": "The VRL compiler encountered an expression type that wasn't expected here.",
+    "rationale": null
+  },
+  "401": {
+    "anchor": "401",
+    "code": 401,
+    "title": "Invalid enum variant",
+    "description": "VRL expects an enum value for this argument, but the value you entered for the enum is\ninvalid.",
+    "rationale": null,
+    "resolution": "Check the documentation for this function in the [VRL functions\nreference](/docs/reference/vrl/functions) to see which enum values are valid for this argument."
+  },
+  "402": {
+    "anchor": "402",
+    "code": 402,
+    "title": "Expected static expression for function argument",
+    "description": "VRL expected a static expression for a function argument, but a dynamic one was provided (such as a variable).\n\nVRL requires static expressions for some function arguments to validate argument types at\ncompile time to avoid runtime errors.",
+    "rationale": null,
+    "resolution": "Replace the dynamic argument with a static expression."
+  },
+  "403": {
+    "anchor": "403",
+    "code": 403,
+    "title": "Invalid argument",
+    "description": "An invalid argument was passed to the function. The error string will contain more details about what was invalid.",
+    "rationale": null,
+    "resolution": "Check the error string for this error to see what was invalid."
+  },
+  "601": {
+    "anchor": "601",
+    "code": 601,
+    "title": "Invalid timestamp",
+    "description": "The provided [timestamp literal](/docs/reference/vrl/expressions/#timestamp) is properly\nformed (i.e. it uses `t'...'` syntax) but the timestamp doesn't adhere to [RFC 3339](https://tools.ietf.org/html/rfc3339) format.",
+    "rationale": "Invalid timestamps don't compile.",
+    "resolution": "Bring the timestamp in conformance with [RFC 3339](https://tools.ietf.org/html/rfc3339) format.",
+    "examples": [
+      {
+        "title": "Invalid timestamp formatting",
+        "source": ".timestamp = format_timestamp!(t'next Tuesday', format: \"%v %R\")",
+        "diff": "-.timestamp = format_timestamp!(t'next Tuesday', format: \"%v %R\")\n+.timestamp = format_timestamp!(t'2021-03-09T16:33:02.405806Z', format: \"%v %R\")"
+      }
+    ]
+  },
+  "620": {
+    "anchor": "620",
+    "code": 620,
+    "title": "Aborting infallible function",
+    "description": "You've specified that a function should abort on error even though the function is infallible.",
+    "rationale": "In VRL, [infallible](/docs/reference/vrl/errors/#handling) functions—functions that can't fail—don't require error\nhandling, which in turn means it doesn't make sense to abort on failure using a `!` in the function call.",
+    "resolution": "Remove the `!` from the function call.",
+    "examples": [
+      {
+        "title": "Aborting infallible function",
+        "source": "encode_json!([\"one\", \"two\", \"three\"])",
+        "diff": "- \tencode_json!([\"one\", \"two\", \"three\"])\n+# \tencode_json([\"one\", \"two\", \"three\"])"
+      }
+    ]
+  },
+  "630": {
+    "anchor": "630",
+    "code": 630,
+    "title": "Fallible argument",
+    "description": "You've passed a fallible expression as an argument to a function.",
+    "rationale": "In VRL, expressions that you pass to functions as arguments need to be infallible themselves. Otherwise, the\noutcome of the function would be indeterminate.",
+    "resolution": "Make the expression passed to the function infallible, potentially by aborting on error using `!`, coalescing\nthe error using `??`, or via some other method.",
+    "examples": [
+      {
+        "title": "Fallible argument",
+        "source": "format_timestamp!(to_timestamp(\"2021-01-17T23:27:31.891948Z\"), format: \"%v %R\")",
+        "diff": "- \tformat_timestamp!(to_timestamp(\"2021-01-17T23:27:31.891948Z\"), format: \"%v %R\")\n+ \tformat_timestamp!(to_timestamp!(\"2021-01-17T23:27:31.891948Z\"), format: \"%v %R\")"
+      }
+    ]
+  },
+  "631": {
+    "anchor": "631",
+    "code": 631,
+    "title": "Fallible abort message expression",
+    "description": "You've passed a fallible expression as a message to abort.",
+    "rationale": "An expression that you pass to abort needs to be infallible. Otherwise, the abort expression could fail at runtime.",
+    "resolution": "Make the expression infallible, potentially by handling the error, coalescing the error using `??`, or via some other method.",
+    "examples": [
+      {
+        "title": "Fallible abort message expression",
+        "source": "abort to_syslog_level(0)",
+        "diff": "- abort to_syslog_level(0)\n+ abort to_syslog_level(0) ?? \"other\""
+      }
+    ]
+  },
+  "640": {
+    "anchor": "640",
+    "code": 640,
+    "title": "No-op assignment",
+    "description": "You've assigned a value to something that is neither a variable nor a path.",
+    "rationale": "All assignments in VRL need to be to either a path or a variable. If you try to assign a value to, for example,\nunderscore (`_`), this operation is considered a \"no-op\" as it has no effect (and is thus not an assignment at\nall).",
+    "resolution": "Assign the right-hand-side value to either a variable or a path.",
+    "examples": [
+      {
+        "title": "No-op assignment",
+        "source": "_ = \"the hills are alive\"",
+        "diff": "- \t_ = \"the hills are alive\"\n+# \t.movie_song_quote = \"the hills are alive\""
+      }
+    ]
+  },
+  "650": {
+    "anchor": "650",
+    "code": 650,
+    "title": "Chained comparison operators",
+    "description": "You've chained multiple comparison operators together in a way that can't result in a valid expression.",
+    "rationale": "Comparison operators can only operate on two operands, e.g. `1 != 2`. Chaining them together, as in\n`1 < 2 < 3`, produces a meaningless non-expression.",
+    "resolution": "Use comparison operators only on a left-hand- and a right-hand-side value. You *can* chain comparisons together\nprovided that the expressions are properly grouped. While `a == b == c`, for example, isn't valid,\n`a == b && b == c` *is* valid because it involves distinct Boolean expressions.",
+    "examples": [
+      {
+        "title": "Chained comparison operators",
+        "source": "1 == 1 == 2",
+        "diff": "- \t1 == 1 == 2\n+# \t(1 == 1) && (1 == 2)"
+      }
+    ]
+  },
+  "651": {
+    "anchor": "651",
+    "code": 651,
+    "title": "Unnecessary error coalescing operation",
+    "description": "You've used a coalescing operation (`??`) to handle an error, but in this case the left-hand\noperation is infallible, and so the right-hand value after `??` is never reached.",
+    "rationale": "Error coalescing operations are useful when you want to specify what happens if an operation\nfails. Here's an example:\n\n```coffee\nresult = op1 ?? op2\n```\n\nIn this example, if `op1` is infallible (that is, it can't error) then the `result` variable\nif set to the value of `op1` while `op2` is never reached.",
+    "resolution": "If the left-hand operation is meant to be infallible, remove the `??` operator and the\nright-hand operation. If, however, the left-hand operation is supposed to be fallible,\nremove the `!` from the function call and anything else that's making it infallible."
+  },
+  "652": {
+    "anchor": "652",
+    "code": 652,
+    "title": "Only objects can be merged",
+    "description": "You're attempting to merge two values together but one or both isn't an object.",
+    "rationale": "Amongst VRL's available types, only objects can be merged together. It's not clear what it\nwould mean to merge, for example, an object with a Boolean. Please note, however,\nthat some other VRL types do have merge-like operations available:\n\n* Strings can be [concatenated](/docs/reference/vrl/expressions/#concatenation) together\n* Arrays can be [appended](/docs/reference/vrl/functions#append) to other arrays\n\nThese operations may come in handy if you've used [`merge`](/docs/reference/vrl/functions#merge) by\naccident.",
+    "resolution": "Make sure that both values that you're merging are VRL objects. If you're not sure whether\na value is an object, you can use the [`object`](/docs/reference/vrl/functions#object) function to\ncheck."
+  },
+  "660": {
+    "anchor": "660",
+    "code": 660,
+    "title": "Non-Boolean negation",
+    "description": "You've used the negation operator to negate a non-Boolean expression.",
+    "rationale": "Only Boolean values can be used with the negation operator (`!`). The expression `!false`, for example, produces\n`true`, whereas `!\"hello\"` is a meaningless non-expression.",
+    "resolution": "Use the negation operator only with Boolean expressions.",
+    "examples": [
+      {
+        "title": "Non-Boolean negation",
+        "source": "!47",
+        "diff": "- \t!47\n+# \t!(47 == 48)"
+      }
+    ]
+  },
+  "701": {
+    "anchor": "701",
+    "code": 701,
+    "title": "Call to Undefined Variable",
+    "description": "The referenced variable is undefined.",
+    "rationale": "Referencing a variable that is undefined results in unexpected behavior, and is likely due to a typo.",
+    "resolution": "\nAssign the variable first, or resolve the reference typo.",
+    "examples": [
+      {
+        "title": "Undefined variable",
+        "source": "my_variable",
+        "diff": "+my_variable = true\nmy_variable"
+      },
+      {
+        "title": "Wrong variable name",
+        "source": "my_variable = true\nmy_var",
+        "diff": "-my_var\n+my_variable"
+      }
+    ]
+  },
+  "801": {
+    "anchor": "801",
+    "code": 801,
+    "title": "Usage of deprecated item",
+    "description": "The referenced item is deprecated. Usually an alternative is given that can be used instead.",
+    "rationale": "This will be removed in the future.",
+    "resolution": "Apply the suggested alternative."
+  }
+}

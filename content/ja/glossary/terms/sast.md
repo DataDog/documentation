@@ -1,6 +1,9 @@
 ---
+core_product:
+- security
+- appsec
 synonyms:
-- 静的分析
+- static analysis
 title: スタティックアプリケーションセキュリティテスト (SAST)
 ---
 

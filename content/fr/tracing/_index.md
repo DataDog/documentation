@@ -1,4 +1,9 @@
 ---
+algolia:
+  tags:
+  - apm
+  - application performance monitoring
+  - distributed tracing
 aliases:
 - /fr/tracing/faq/terminology
 - /fr/tracing/guide/terminology
@@ -6,6 +11,9 @@ aliases:
 - /fr/tracing/advanced/
 - /fr/tracing/api
 - /fr/tracing/faq/distributed-tracing/
+cascade:
+  algolia:
+    rank: 70
 description: Instrumenter votre code pour améliorer ses performances
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=APM
@@ -36,11 +44,17 @@ further_reading:
   tag: Blog
   text: Gagner en visibilité sur les risques, vulnérabilités et attaques avec la vue
     Security d'APM
+- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
+  tag: Blog
+  text: Surveiller vos applications Web Linux sur Azure App Service avec Datadog
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive pour maîtriser la solution APM
 kind: documentation
 title: APM
 ---
 
-{{< vimeo 381554158 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
 
 </br>
 
@@ -50,33 +64,35 @@ Pour découvrir la terminologie en lien avec la solution APM Datadog, consultez 
 
 ## Envoyer des traces à Datadog
 
-Lorsque que vous passez d'une application monolithique à une architecture de microservices, implémenter l'APM Datadog sur l'ensemble de vos hosts, conteneurs et fonctions sans serveur ne prend que quelques minutes.
+Lorsque vous passez d'une application monolithique à une architecture de microservices, l'implémentation de la solution APM Datadog sur l'ensemble de vos hosts, conteneurs et fonctions sans serveur ne prend que quelques minutes.
 
-[Ajoutez la bibliothèque de tracing Datadog][2] pour votre environnement et votre langage, que vous souhaitiez effectuer le [tracing d'un proxy][3] ou un tracing sur des [fonctions Lambda AWS][4] et des hosts via l'instrumentation automatique, dd-trace-api, ou [OpenTelemetry][5].
+<div class="alert alert-info">
+<strong>Bêta : instrumentation APM en une seule étape</strong>. Activez l'instrumentation APM lors de l'installation de l'Agent Datadog pour profiter au plus vite de la surveillance des performances de votre application. Cette fonctionnalité permet d'instrumenter automatiquement vos services, sans avoir à modifier le code. Pour en savoir plus, consultez la section <a href="/tracing/trace_collection/single-step-apm">Instrumentation APM en une seule étape</a>.
+</div>
 
-{{< partial name="apm/apm-compatibility.html" >}}
+**Pour commencer, consultez la section [Envoyer des traces à Datadog][2].**
 
-<br>
+Ajoutez la bibliothèque de tracing Datadog pour votre environnement et langage, que ce soit pour [tracer un proxy][3], tracer des [fonctions Lambda AWS][4], tirer profit de l'instrumentation automatique ou personnalisée, ou encore instrumenter votre application avec [OpenTelemetry][5].
 
 ## Contrôler et gérer les données transmises et conservées par Datadog
 
 {{< img src="tracing/apm_lifecycle/apm_lifecycle_0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Cycle de vie d'APM" >}}
 
-Les traces sont créées dans vos applications instrumentées et sont transmises à Datadog. Dans le cas de services caractérisés par un débit élevé, vous pouvez visualiser et contrôler l'ingestion à l'aide des [contrôles d'ingestion][6]. Toutes les traces ingérées peuvent être utilisées afin de rechercher et d'analyser des données en temps réel sur une durée de 15 minutes. Vous pouvez utiliser des [filtres de rétention][7] personnalisés basés sur des tags afin de conserver uniquement les traces pertinentes pour votre entreprise. Ainsi, vous pourrez rechercher et analyser ces traces pendant 15 jours.
+Les traces sont créées dans vos applications instrumentées et sont transmises à Datadog. Dans le cas de services caractérisés par un débit élevé, vous pouvez visualiser et contrôler l'ingestion à l'aide des [paramètres d'ingestion][6]. Toutes les traces ingérées peuvent être utilisées afin de rechercher et d'analyser des données en temps réel sur une durée de 15 minutes. Vous pouvez utiliser des [filtres de rétention][7] personnalisés basés sur des tags afin de conserver uniquement les traces pertinentes pour votre entreprise. Ainsi, vous pourrez rechercher et analyser ces traces pendant 15 jours.
 
-{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Rétention et ingestion des traces"  style="width:100%;">}}
+{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Rétention et ingestion des traces" style="width:100%;">}}
 
 ## Générer des métriques custom à partir de spans
 
 [Générez des métriques][8] avec une période de rétention de 15 mois à partir de l'ensemble des spans ingérées, afin de créer des indicateurs de performance et d'activité clés et de surveiller leur évolution.
 
-{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Générer des métriques custom à partir des spans ingérées"  style="width:100%;">}}
+{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Générer des métriques custom à partir des spans ingérées" style="width:100%;">}}
 
 ## Associer des traces à d'autres données de télémétrie
 
 [Visualisez vos logs d'application][9] en même temps que la trace associée pour une requête distribuée spécifique grâce à l'injection automatique de l'ID de trace. [Associez vos sessions][10] à vos traces pour visualiser les traces spécifiques qui correspondent aux expériences utilisateur ainsi qu'aux problèmes signalés. [Associez les tests simulés][11] aux traces pour identifier l'origine des échecs parmi vos requêtes frontend, réseau et backend.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Associer vos logs à vos traces"  style="width:100%;">}}
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Associer vos logs à vos traces" style="width:100%;">}}
 
 ## Explorer des requêtes en temps réel et des requêtes indexées
 
@@ -102,7 +118,7 @@ Les traces sont créées dans vos applications instrumentées et sont transmises
 
 [Améliorez la latence des applications][16] et optimisez les ressources de calcul avec le profiling continu en production. Vous pourrez ainsi identifier les lignes de code qui sollicitent le plus le processeur, la mémoire et l'E/S.
 
-{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
+{{< img src="tracing/index/Profiling.png" alt="Profiling" style="width:100%;">}}
 
 
 ## Pour aller plus loin
@@ -110,10 +126,10 @@ Les traces sont créées dans vos applications instrumentées et sont transmises
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/glossary/
-[2]: /fr/tracing/trace_collection/dd_libraries/java
+[2]: /fr/tracing/trace_collection/
 [3]: /fr/tracing/trace_collection/proxy_setup/
 [4]: /fr/serverless/distributed_tracing
-[5]: /fr/opentelemetry/otel_tracing/
+[5]: /fr/tracing/trace_collection/otel_instrumentation/
 [6]: /fr/tracing/trace_pipeline/ingestion_controls/
 [7]: /fr/tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /fr/tracing/trace_pipeline/generate_metrics/

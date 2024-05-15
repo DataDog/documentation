@@ -20,7 +20,7 @@ Datadog has released a new pipeline for calculating globally accurate percentile
 - **Easier tag configuration and percentile aggregation workflows**:
   - All tag configuration-percentile aggregations are managed in one centralized location on the [Metrics Summary][1] page.
   - Use the "Manage Tags" button on the Metrics Summary details side panel to manage the queryable tags configuration for a distribution metric.
-  - To add percentile aggregations to your distribution, navigate to the new percentiles section on the side panel, click *Edit* and select "Include" for percentile aggregations on the same queryable tags defined on your baseline distribution. You’ll no longer need to specify an additional configuration rule.
+  - To add percentile aggregations to your distribution, navigate to the new percentiles section on the side panel, click *Edit* and select "Include" for percentile aggregations on the same queryable tags defined on your baseline distribution. You'll no longer need to specify an additional configuration rule.
 - **More intuitive number of custom metrics from distributions with percentiles**:
   The number of custom metrics emitted from additional percentile aggregations is no longer 5 percentile timeseries for every potentially queryable tag value combination. The new number of custom metrics emitted from distributions with percentiles is now counted more similarly to our other metric types:
 

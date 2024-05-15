@@ -8,6 +8,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
   tag: ブログ
   text: Logrotate を使ったログファイルの管理方法
+- link: /agent/logs/advanced_log_collection
+  tag: Documentation
+  text: 高度なログ収集の構成
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: ログの処理方法について
@@ -44,12 +47,12 @@ title: ログの収集とインテグレーション
 2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][5]を参照してください。
 3. Datadog Agent を有効にすると、[ログファイルの尾行または UDP/TCP 経由で送信されるログのリスニング][2]、[ログのフィルタリングまたは機密データのスクラビング][3]、[複数行ログの集約][4]を構成することができるようになります。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/logs/#custom-log-collection
 [3]: /ja/agent/logs/advanced_log_collection/#filter-logs
 [4]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
 [5]: /ja/agent/logs/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "アプリケーション" %}}
 
@@ -59,9 +62,9 @@ title: ログの収集とインテグレーション
 
 {{< partial name="logs/logs-languages.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/logs/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "コンテナ" %}}
 
@@ -90,7 +93,7 @@ title: ログの収集とインテグレーション
 環境から Datadog にログを送信する AWS Lambda 関数である Datadog Forwarder を使用します。AWS サーバーレス環境でログ収集を有効にするには、[Datadog Forwarder のドキュメント][1]を参照してください。
 
 [1]: /ja/serverless/forwarder
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "クラウド/インテグレーション" %}}
 
@@ -127,6 +130,7 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 | サイト | タイプ        | エンドポイント                                                                  | ポート         | 説明                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。                                                    |
+| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Agent が PCI DSS コンプライアンスを有効にした組織へ HTTPS でログを送信するために使用します。詳しくは、[ログ管理のための PCI DSS コンプライアンス][3]を参照してください。                 |
 | US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。                                                             |
 | US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                                                                            |
 | US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                                                                             |
@@ -138,6 +142,7 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 [1]: /ja/api/latest/logs/#send-logs
 [2]: /ja/agent/logs/#send-logs-over-https
+[3]: /ja/data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
@@ -184,6 +189,20 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+| サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
+| AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
+| AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
+| AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
+| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+
+[1]: /ja/api/latest/logs/#send-logs
+[2]: /ja/agent/logs/#send-logs-over-https
+
+{{< /site-region >}}
+
 {{< site-region region="gov" >}}
 
 | サイト    | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
@@ -213,19 +232,28 @@ HTTP 経由で Datadog プラットフォームにログを送信できます。
 
 {{< site-region region="us" >}}
 
-telnet で手動でテストします。ログエントリの前に [Datadog API キー][1]を付けて、ペイロードを追加する必要があります。
+OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、接続を手動でテストすることができます。GnuTLS の場合は、以下のコマンドを実行します。
 
-```text
-telnet intake.logs.datadoghq.com 10514 
-<DATADOG_API_キー> TCP 経由で直接送信されるログ
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
-ペイロード、または例で書かれている `Log sent directly via TCP` (TCP 経由で直接送信されたログ) は、raw、Syslog、または JSON 形式にすることができます。ペイロードが JSON 形式の場合、Datadog は自動的にその属性をパースします。
+OpenSSL の場合、以下のコマンドを実行します。
+
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+ログエントリの前に必ず [Datadog API キー][1]を付けて、ペイロードを追加する必要があります。
+
+```
+<DATADOG_API_KEY> Log sent directly using TLS
+```
+
+ペイロード、または例で書かれている `Log sent directly using TLS` (TCP 経由で直接送信されたログ) は、raw、Syslog、または JSON 形式にすることができます。ペイロードが JSON 形式の場合、Datadog は自動的にその属性をパースします。
 
 ```text
-telnet intake.logs.datadoghq.com 10514
-<DATADOG_API_キー> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
-```
+<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 
 [1]: /ja/account_management/api-app-keys/#api-keys
 
@@ -233,18 +261,28 @@ telnet intake.logs.datadoghq.com 10514
 
 {{< site-region region="eu" >}}
 
-telnet で手動でテストします。ログエントリの前に [Datadog API キー][1]を付けて、ペイロードを追加する必要があります。
+OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、手動で接続をテストすることができます。GnuTLS の場合は、以下のコマンドを実行します。
 
-```text
-telnet agent-intake.logs.datadoghq.eu 443
-<DATADOG_API_KEY> Log sent directly via TCP
+```shell
+gnutls-cli tcp-intake.logs.datadoghq.eu:443
 ```
 
-ペイロード、または例で書かれている `Log sent directly via TCP` (TCP 経由で直接送信されたログ) は、raw、Syslog、または JSON 形式にすることができます。ペイロードが JSON 形式の場合、Datadog は自動的にその属性をパースします。
+OpenSSL の場合、以下のコマンドを実行します。
+
+```shell
+openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
+```
+
+ログエントリの前に必ず [Datadog API キー][1]を付けて、ペイロードを追加する必要があります。
+
+```
+<DATADOG_API_KEY> Log sent directly using TLS
+```
+
+ペイロード、または例で書かれている `Log sent directly using TLS` (TCP 経由で直接送信されたログ) は、raw、Syslog、または JSON 形式にすることができます。ペイロードが JSON 形式の場合、Datadog は自動的にその属性をパースします。
 
 ```text
-telnet intake.logs.datadoghq.com 10514
-<DATADOG_API_キー> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
 [1]: /ja/account_management/api-app-keys/#api-keys
@@ -257,7 +295,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 [1]: /ja/help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5" >}}
+{{< site-region region="gov,us5,ap1" >}}
 
 このサイトでは、TCP エンドポイントはサポートされていません。
 
@@ -275,7 +313,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 * HTTPS API は、最大で 1MB のサイズのログをサポートします。ただし、最適なパフォーマンスには各ログが 25K バイトを超えないことをおすすめします。ログ作成に Datadog Agent を使用する場合、ログは 256kB (256000 バイト) に分割されるよう構成されています。
 * 1 つのログイベントが持つことができるタグは 100 個以下です。1 日あたり最大 1,000 万個の一意のタグに対して、各タグは 256 文字を超えてはなりません。
 * JSON 形式に変換されたログイベントが保持できる属性は 256 未満です。これらの各属性のキーは 50 文字未満、連続するネストのレベルは 10 未満、 それぞれの値は (ファセットに昇格した場合) 1024 文字未満となります。
-* ログイベントは過去 18 時間、未来の 2 時間まで送信が可能です。
+* ログイベントは、過去 18 時間までの[タイムスタンプ][14]で送信可能です。
 
 上の制限に準拠しないログイベントは、システムによって変換されるか、切り詰められます。または、所定のタイムレンジ外の場合はインデックス化されません。ただし、Datadog はユーザーデータを可能な限り維持するよう全力を尽くします。
 
@@ -287,7 +325,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 
 スタックトレースをログに記録するに当たっては、Datadog アプリケーション内に専用の UI 表示を持つ特別な属性があります。ロガー名、現在のスレッド、エラーの種類、スタックトレース自体などです。
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="スタックトレース" >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="パースされたスタックトレースの属性" >}}
 
 この機能を使用するには、以下の属性名を使用します。
 
@@ -307,7 +345,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 
 ログが収集されて取り込まれると、**ログエクスプローラー**で利用できるようになります。ログエクスプローラーでは、ログのアラートを検索、強化、表示できます。[ログエクスプローラー][12]のドキュメントを参照してログデータの分析を開始するか、以下の追加のログ管理ドキュメントを参照してください。
 
-{{< img src="logs/explore.jpg" alt="ログエクスプローラー表示"  >}}
+{{< img src="logs/explore.png" alt="ログエクスプローラーに表示されるログ" style="width:100%" >}}
 
 ## その他の参考資料
 
@@ -320,7 +358,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 [3]: /ja/integrations/nxlog/
 [4]: /ja/integrations/fluentd/#log-collection
 [5]: /ja/integrations/logstash/#log-collection
-[6]: /ja/security/logs/#information-security
+[6]: /ja/data_security/logs/#information-security
 [7]: /ja/agent/logs/#send-logs-over-https
 [8]: /ja/api/v1/logs/#send-logs
 [9]: /ja/logs/explorer/facets/
@@ -328,3 +366,4 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 [11]: /ja/logs/log_configuration/attributes_naming_convention/#source-code
 [12]: /ja/logs/explore/
 [13]: /ja/getting_started/site/
+[14]: /ja/logs/log_configuration/pipelines/?tab=date#date-attribute

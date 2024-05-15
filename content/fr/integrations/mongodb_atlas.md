@@ -70,7 +70,7 @@ L'intégration MongoDB Atlas n'inclut aucun check de service.
 
 Besoin d'aide ? [Contactez l'assistance Datadog][5].
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

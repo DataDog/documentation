@@ -362,7 +362,7 @@ using (LogContext.PushProperty("dd.span_id", ddSpanId))
 
 {{< /tabs >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

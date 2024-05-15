@@ -22,27 +22,28 @@ short_description: GCE コンテナのリソースの使用状況を監視。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 <div class="alert alert-warning">
 このインテグレーションは非推奨です。代わりに、<a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">Google Kubernetes Engine インテグレーション</a>のドキュメントをご覧ください。非推奨のメトリクスについては、<a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">Google Cloud のメトリクス</a>のドキュメントを参照してください。
 </div>
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "google_container_engine" >}}
 
 
-### イベント
+### ヘルプ
 
 Google Container Engine インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Google Container Engine インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

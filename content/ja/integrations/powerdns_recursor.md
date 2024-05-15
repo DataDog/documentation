@@ -39,12 +39,11 @@ draft: false
 git_integration_title: powerdns_recursor
 integration_id: powerdns
 integration_title: Power DNS Recursor
-integration_version: 2.2.0
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: powerdns_recursor
-oauth: {}
 public_title: Power DNS Recursor
 short_description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
 supported_os:
@@ -84,7 +83,7 @@ PowerDNS Recursor のパフォーマンスを追跡し、異常または注意�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれています。Recursor に追加でインストールする必要はありません。
 
@@ -232,6 +231,6 @@ PowerDNS Recursor チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

@@ -30,10 +30,10 @@ Si vous ne savez pas comment configurer le mode d'authentification de votre serv
 
 **Remarque** : si vous modifiez votre serveur SQL comme indiqué ci-dessus, vous devez redémarrer le serveur pour appliquer vos modifications.
 
-Voici un exemple de paramètres IP/TCP SQL Server appliqués à l'un des environnements de test Datadog ((Windows 2012 R2, SQL Server 2014 Express) :
+Voici un exemple de paramètres IP/TCP SQL Server appliqués à l'un des environnements de test Datadog (Windows 2012 R2, SQL Server 2014 Express) :
 {{< img src="integrations/faq/sql_server_test_1.png" alt="La fenêtre des propriétés TCP/IP, avec l'onglet IP Addresses sélectionné. La section IP4 est configurée avec l'option Active définie sur Yes et l'option Enable définie sur No. L'adresse IP est définie sur 127.0.0.1 et les ports dynamiques TCP sont définis sur 1433. Aucun port TCP n'est défini." >}}
 
-{{< img src="integrations/faq/sql_server_test_2.png" alt="La fenêtre des propriétés TCP/IP, avec l'onglet IP Addresses sélectionné. Dans la section IPAII, les ports dynamiques TCP sont définis sur 1433 et le port TCP n'est pas défini."  >}}
+{{< img src="integrations/faq/sql_server_test_2.png" alt="La fenêtre des propriétés TCP/IP, avec l'onglet IP Addresses sélectionné. Dans la section IPAII, les ports dynamiques TCP sont définis sur 1433 et le port TCP n'est pas défini." >}}
 
 ## Chaîne de connexion vide
 

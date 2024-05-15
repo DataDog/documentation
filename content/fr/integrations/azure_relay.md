@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- network
 dependencies: []
 description: Surveillez des métriques clés d'Azure Relay.
 doc_link: https://docs.datadoghq.com/integrations/azure_relay/
@@ -16,37 +16,39 @@ is_public: true
 kind: integration
 manifest_version: '1.0'
 name: azure_relay
-public_title: "Intégration Datadog/Microsoft\_Azure\_Relay"
+public_title: Intégration Datadog/Microsoft Azure Relay
 short_description: Surveillez des métriques clés d'Azure Relay.
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Présentation
 
 Le service Azure Relay vous permet d'exposer en toute sécurité les services exécutés dans votre réseau d'entreprise sur le cloud public. Vous pouvez le faire sans ouvrir de port sur votre pare-feu ni apporter de changements intrusifs à votre infrastructure réseau d'entreprise.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure Relay.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "azure_relay" >}}
 
 
-### Événements
+### Aide
 
 L'intégration Azure Relay n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 L'intégration Azure Relay n'inclut aucun check de service.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

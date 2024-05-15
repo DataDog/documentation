@@ -135,7 +135,6 @@ spec:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
     kubelet:
-      # Agent 7.35 から必要です。以下の Kubelet 証明書に関する注記を参照してください。
       tlsVerify: false
   override:
     clusterAgent:
@@ -197,7 +196,6 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    # サポートされているノードイメージのバージョンが必要です
     kubelet:
       host:
         fieldRef:
@@ -237,7 +235,7 @@ Agent 7.26 以降では、GKE 向けの特殊なコンフィギュレーショ�
 
 GKE Autopilot にはコンフィギュレーションが必要です（以下を参照）。
 
-Datadog では、Agent コンテナにリソースの上限を指定することをおすすめします。Autopilot は、比較的低いデフォルトの上限 (50m CPU、100Mi メモリ) を設定するため、ご使用の環境によってはすぐに Agent コンテナが OOMKill に達する可能性があります。該当する場合は、トレースエージェントおよびプロセスエージェントのコンテナにもリソース上限を指定することをおすすめします。
+Datadog では、Agent コンテナにリソースの上限を指定することをおすすめします。Autopilot は、比較的低いデフォルトの上限 (50m CPU、100Mi メモリ) を設定するため、ご使用の環境によってはすぐに Agent コンテナが OOMKill に達する可能性があります。該当する場合は、Trace Agent および Process Agent のコンテナにもリソース上限を指定することをおすすめします。さらに、Agent が確実にスケジュールされるように、Agent の優先クラスを作成することができます。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -265,29 +263,22 @@ agents:
         requests:
           cpu: 200m
           memory: 256Mi
-        limits:
-          cpu: 200m
-          memory: 256Mi
 
     traceAgent:
-      # トレースエージェントコンテナのリソースcontainer
+      # Trace Agent コンテナのリソース
       resources:
         requests:
-          cpu: 100m
-          memory: 200Mi
-        limits:
           cpu: 100m
           memory: 200Mi
 
     processAgent:
-      # プロセスエージェントコンテナのリソース
+      # Process Agent コンテナのリソース
       resources:
         requests:
           cpu: 100m
           memory: 200Mi
-        limits:
-          cpu: 100m
-          memory: 200Mi
+
+  priorityClassCreate: true
 
 providers:
   gke:
@@ -613,7 +604,7 @@ spec:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/helm-charts/tree/master/examples/datadog
+[1]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
 [2]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1
 [3]: /ja/containers/cluster_agent/admission_controller
 [4]: https://github.com/Azure/AKS/releases/tag/2022-10-30

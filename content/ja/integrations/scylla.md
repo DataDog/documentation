@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: Scylla
-oauth: {}
 public_title: Scylla
 short_description: クラスターのリソース、レイテンシー、健全性などを追跡
 supported_os:
@@ -77,7 +76,7 @@ Scylla は「ドロップインの Apache Cassandra 代替」として使用で�
 
 以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Scylla チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

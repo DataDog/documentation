@@ -20,7 +20,7 @@ further_reading:
 
 After [creating your monitor][1], use the monitor status page to view the status over time.
 
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page"  >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" >}}
 
 ## Header
 
@@ -85,16 +85,49 @@ The status graph shows your monitor's status over time, broken out by group. **N
 * The monitor's query was recently changed.
 * The monitor's timeframe is too short for a metric that provides data infrequently.
 * A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
+* The query you are filtering by is not working as expected.
 
-The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `host` and `device`, but you only want to receive alerts for the `host`. The status graph shows the monitor's status grouped by `host`. You can see the `device` subgroups by clicking **View all** which opens a panel showing status graphs for each subgroup. For more information on alert groupings, see [Configure Monitors][13].
+The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `service` and `host`, but you only want to receive alerts for the `service`. The status graph shows the monitor's status grouped by `service`. You can see the `host` subgroups by clicking **View all** which opens a panel showing status graphs for each subgroup. For more information on alert groupings, see [Configure Monitors][14].
+
+{{< img src="monitors/monitor_status/monitor_status_group_subgroup.png" alt="Monitor status grouped by service, highlighting option to view subgroups " style="width:100%;" >}}
+
+#### Filter the monitor status by groups or events
+
+To scope down the **Status & History** view to specific groups, use the filter field and enter the attributes you want to filter by. The group filter syntax follows the same principles of the [Monitor Search query][30]. Some best practices to follow:
+
+- Filters are case sensitive, `env:prod` and `env:Prod` do not return the same monitor groups. Datadog recommends practicing uniformity in tags. For more information, see [Getting Started with Tags][31]. 
+- Queries automatically append a wildcard. To apply specific filters, surround your query with double quotes (`"`).
+  For example, take the following query which does not use double quotes:
+  ```
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-1
+  ```
+  The monitor returns the follow groups even though you expect the query to show one specific group.
+  ```
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-10
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-12
+  ```
+
+  Surrounding the query with double quotes returns the expected group: 
+  `"availability-zone:us-central1-a,instance-type:*,name:gke-demo-1"`
 
 #### Investigate a Monitor in a Notebook
 
 For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][8] with a formatted graph of the monitor query.
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="Open in notebook button" style="width:90%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="Open in notebook button" style="width:90%;">}}
 
 The notebook matches the monitor evaluation period time range and includes related logs where relevant.
+
+#### Follow monitor group retention
+
+Datadog keeps monitor groups available in the UI for 24 hours unless the query is changed. Host monitors and service checks that are configured to notify on missing data are available for 48 hours. If a monitor graph displays a dotted line and is marked as non-reporting, it can be for the following reasons:
+
+- The new group is evaluated some time after the monitor is created. The evaluation graph shows the dotted line from the start of the time period to when the group is first evaluated.
+- The group stops reporting, drops out, and then starts reporting again. The dotted line appears from the time the group dropped out to when the group starts evaluating again.
+
+{{< img src="monitors/monitor_status/dotted-line.png" alt="Follow group retention" style="width:90%;">}}
+
+**Note**: Non-reporting is not the same as no data. Non-reporting status is specific to groups.
 
 ### History
 
@@ -112,15 +145,15 @@ This graph shows the results from the raw data points of a metric applied agains
 
 Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [Events Explorer][10].
 
-### Audit events
+### Audit trail
+Audit Trail automatically captures monitor changes for all monitor types and creates an event. This event documents the changes to the monitor.
 
-For all monitor types, monitor changes (monitor edits for instance) create an event in the Events Explorer. This event explains the change and displays the user that made the change. For more information, see the [Events][11] documentation.
-
-If you made changes to a monitor, you can see examples with the following event search:
-
-```text
-https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20monitor%20modified
-```
+ For example, in the case of an edit to a monitor, the Audit Trail event shows:
+ - The previous monitor configuration
+ - The current monitor configuration
+ - The user that made the change
+ 
+ For more information, see the [Audit Trail][11] documentation and read the [Audit Trail best practices][12] blog.
 
 Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the dropdown next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
 
@@ -130,7 +163,7 @@ The notify setting sends an email with the monitor audit event to all people who
 
 You can obtain a JSON export of any monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
 
-[Import a monitor][12] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
+[Import a monitor][13] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
 
 ## Further Reading
 
@@ -138,8 +171,8 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 
 
 [1]: /monitors/configuration/
-[2]: /monitors/notify/downtimes/
-[3]: /monitors/incident_management/#from-a-monitor
+[2]: /monitors/downtimes/
+[3]: /service_management/incident_management/#from-a-monitor
 [4]: /monitors/types/
 [5]: /api/v1/monitors/
 [6]: /dashboards/querying/
@@ -147,6 +180,9 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 [8]: /notebooks
 [9]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [10]: https://app.datadoghq.com/event/explorer
-[11]: /events/
-[12]: https://app.datadoghq.com/monitors#create/import
-[13]: /monitors/configuration/?tab=thresholdalert#notification-aggregation
+[11]: /account_management/audit_trail/
+[12]: https://www.datadoghq.com/blog/audit-trail-best-practices/
+[13]: https://app.datadoghq.com/monitors#create/import
+[14]: /monitors/configuration/?tab=thresholdalert#notification-aggregation
+[30]: /monitors/manage/search/#query
+[31]: /getting_started/tagging/

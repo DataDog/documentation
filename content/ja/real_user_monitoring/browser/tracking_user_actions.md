@@ -1,17 +1,20 @@
 ---
+algolia:
+  tags:
+  - ユーザーアクション
 further_reading:
-    - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-      tag: ブログ
-      text: Datadog リアルユーザーモニタリングのご紹介
-    - link: /real_user_monitoring/explorer/
-      tag: ドキュメント
-      text: Datadog でビューを検索する
-    - link: /real_user_monitoring/explorer/visualize/
-      tag: Documentation
-      text: イベントへの視覚化の適用
-    - link: /real_user_monitoring/dashboards/
-      tag: Documentation
-      text: RUM ダッシュボードについて
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: ブログ
+  text: Datadog リアルユーザーモニタリングのご紹介
+- link: /real_user_monitoring/explorer/
+  tag: ドキュメント
+  text: Datadog でビューを検索する
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: イベントへの視覚化の適用
+- link: /real_user_monitoring/platform/dashboards/
+  tag: Documentation
+  text: RUM ダッシュボードについて
 kind: documentation
 title: ユーザーアクションの追跡
 ---
@@ -22,13 +25,13 @@ title: ユーザーアクションの追跡
 
 以下の目的を達成できます。
 
--   キーとなるインタラクションの実行（**カートへ追加**ボタンのクリックなど）を把握
--   機能の適応を数値化
--   特定のブラウザエラーにつながるステップを認識
+* キーとなるインタラクションの実行（**カートへ追加**ボタンのクリックなど）を把握
+* 機能の適応を数値化
+* 特定のブラウザエラーにつながるステップを認識
 
 ## 収集する情報の管理
 
-初期化パラメーター `trackInteractions` は、アプリケーション内のユーザークリックの収集を有効にします。つまり、ページに含まれている機密データと非公開データは、ユーザーによってやり取りされた要素を特定するために含まれる場合があります。
+初期化パラメーター `trackUserInteractions` は、アプリケーション内のユーザークリックの収集を有効にします。つまり、ページに含まれている機密データと非公開データは、ユーザーによってやり取りされた要素を特定するために含まれる場合があります。
 
 Datadog に送信する情報を制御するには、[アクション名を手動で設定する](#declare-a-name-for-click-actions)か、[Datadog Browser SDK for RUM でグローバルスクラビングルールを実装する][1]必要があります。
 
@@ -36,20 +39,20 @@ Datadog に送信する情報を制御するには、[アクション名を手�
 
 RUM ブラウザ SDK は自動的にクリックを追跡します。**以下のすべて**の条件が満たされると、クリックアクションが作成されます。
 
--   クリックに続くアクティビティが検出されます。詳しくは[ページアクティビティの計算方法][2]をご覧ください。
--   クリックによって新規ページの読み込みは開始しない。この場合、Datadog ブラウザ SDK で別の RUM ビューイベントが生成されます。
--   アクションの名前を計算することができます。詳しくは、[クリックアクションの名前を宣言する](#declare-a-name-for-click-actions)を参照してください。
+* クリックに続くアクティビティが検出されます。詳しくは[ページアクティビティの計算方法][2]をご覧ください。
+* クリックによって新規ページの読み込みは開始しない。この場合、Datadog ブラウザ SDK で別の RUM ビューイベントが生成されます。
+* アクションの名前を計算することができます。詳しくは、[クリックアクションの名前を宣言する](#declare-a-name-for-click-actions)を参照してください。
 
 ## アクションタイミングメトリクス
 
 すべての RUM イベントタイプのデフォルト属性については、[RUM ブラウザのデータ収集][3]を参照してください。
 
-| メトリクス               | タイプ     | 説明                                                       |
-| ------------------------ | ---------- | ---------------------------------------------------------- |
-| `action.loading_time`    | 数値（ns） | アクションのロード時間。                                   |
-| `action.long_task.count` | 数値       | このアクションについて収集されたすべてのロングタスクの数。 |
-| `action.resource.count`  | 数値       | このアクションについて収集されたすべてのリソースの数。     |
-| `action.error.count`     | 数値       | このアクションについて収集されたすべてのエラーの数。       |
+| メトリクス    | タイプ   | 説明              |
+|--------------|--------|--------------------------|
+| `action.loading_time` | 数値（ns） | アクションのロード時間。  |
+| `action.long_task.count`        | 数値      | このアクションについて収集されたすべてのロングタスクの数。 |
+| `action.resource.count`         | 数値      | このアクションについて収集されたすべてのリソースの数。 |
+| `action.error.count`      | 数値      | このアクションについて収集されたすべてのエラーの数。|
 
 Datadog Browser SDK for RUM は、クリックごとにページのアクティビティを監視することで、アクションのロード時間を計算します。ページにアクティビティがなくなると、アクションは完了したとみなされます。詳細については、[ページアクティビティの計算方法][2]を参照してください。
 
@@ -57,12 +60,12 @@ Datadog Browser SDK for RUM は、クリックごとにページのアクティ�
 
 ## アクションの属性
 
-| 属性                 | タイプ | 説明                                                                                                                                       |
-| -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `action.id`          | 文字列 | ユーザーアクションの UUID。                                                                                                                |
-| `action.type`        | 文字列 | ユーザーアクションのタイプ。カスタムユーザーアクションの場合、`custom` に設定されます。                                                    |
-| `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象。                                                                           |
-| `action.name`        | 文字列 | 作成されたユーザーフレンドリーな名称 (`Click on #checkout` など)。カスタムユーザーアクションの場合は、API コールで提供されたアクション名。 |
+| 属性    | タイプ   | 説明              |
+|--------------|--------|--------------------------|
+| `action.id` | 文字列 | ユーザーアクションの UUID。 |
+| `action.type` | 文字列 | ユーザーアクションのタイプ。カスタムユーザーアクションの場合、`custom` に設定されます。 |
+| `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象。 |
+| `action.name` | 文字列 | 作成されたユーザーフレンドリーな名称 (`Click on #checkout` など)。カスタムユーザーアクションの場合は、API コールで提供されたアクション名。 |
 
 ## クリックアクションの名前を宣言する
 
@@ -80,18 +83,18 @@ Datadog Browser SDK for RUM は、クリックアクションの命名にさま�
 </div>
 ```
 
-[バージョン 2.16.0][4] 以降、`actionNameAttribute` 初期化パラメーターを使用して、アクションに名前を付けるために使用される独自の属性を指定できます。
+[バージョン 2.16.0][4] 以降、`actionNameAttribute` 初期化パラメーターを使用して、アクションに名前を付けるために使用されるカスタム属性を指定できます。
 
 例:
 
 ```html
 <script>
-    DD_RUM.init({
-      ...
-      trackInteractions: true,
-      actionNameAttribute: 'data-custom-name',
+  window.DD_RUM.init({
     ...
-    })
+    trackUserInteractions: true,
+    actionNameAttribute: 'data-custom-name',
+  ...
+  })
 </script>
 
 <a class="btn btn-default" href="#" role="button" data-custom-name="Login button">Try it out!</a>
@@ -109,7 +112,7 @@ Datadog Browser SDK for RUM は、クリックアクションの命名にさま�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/modifying_data_and_context/
+[1]: /ja/real_user_monitoring/browser/advanced_configuration/
 [2]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [3]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

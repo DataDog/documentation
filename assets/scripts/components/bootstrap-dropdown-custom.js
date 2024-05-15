@@ -25,16 +25,18 @@ const initBootstrapCustomDropdowns = () => {
     })
   })
 
-  document.body.addEventListener('click', () => {
-    bootstrapCustomDropdownNodeList.forEach(dropdown => {
-      const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-
-      if(dropdownMenu) {
-        if (dropdownMenu.classList.contains('show')) {
-          toggleChevronArrowIcon(dropdown);
+  document.body.addEventListener('click', (event) => {
+    if (!event.target.dataset.bsToggle) {
+      bootstrapCustomDropdownNodeList.forEach(dropdown => {
+        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+  
+        if (dropdownMenu) {
+          if (dropdownMenu.classList.contains('show')) {
+            toggleChevronArrowIcon(dropdown);
+          }
         }
-      }
-    })
+      })
+    }
   })
 }
 

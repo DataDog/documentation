@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_ec2_spot/
 draft: false
 git_integration_title: amazon_ec2_spot
 has_logo: true
-integration_id: amazon-ec2-spot
+integration_id: ''
 integration_title: Amazon EC2 スポット
 integration_version: ''
 is_public: true
@@ -21,49 +21,51 @@ short_description: Amazon EC2 スポットのキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon EC2 スポットインスタンスを使用すると、AWS クラウド内の使用されていない EC2 容量を活用できます。
 
-このインテグレーションを有効にすると、Datadog にすべての EC2 Spot メトリクスを表示できます。
+このインテグレーションを有効にすると、Datadog にすべての EC2 Spot [Fleet メトリクス][1]を表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+[Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EC2 Spot` が有効になっていることを確認します。
-2. [Datadog - Amazon EC2 Spot インテグレーション][3]をインストールします。
+1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `EC2 Spot` が有効になっていることを確認します。
+2. [Datadog - Amazon EC2 Spot インテグレーション][4]をインストールします。
 
-### ログの収集
+### 収集データ
 
-[Datadog Agent][4] または [Rsyslog][5] のような別のログシッパーを使用して、Datadog にログを送信します。
+[Datadog Agent][5] または [Rsyslog][6] のような別のログシッパーを使用して、Datadog にログを送信します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_ec2_spot" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon EC2 Spot インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon EC2 Spot インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-ec2-spot
-[4]: https://docs.datadoghq.com/ja/agent/logs/
-[5]: https://docs.datadoghq.com/ja/integrations/rsyslog/
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2_spot/amazon_ec2_spot_metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-cloudwatch-metrics.html
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://app.datadoghq.com/integrations/amazon-ec2-spot
+[5]: https://docs.datadoghq.com/ja/agent/logs/
+[6]: https://docs.datadoghq.com/ja/integrations/rsyslog/
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2_spot/amazon_ec2_spot_metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/

@@ -7,14 +7,13 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: Documentation
   text: モニターをミュートするダウンタイムのスケジュール
 - link: /monitors/manage/status/
   tag: Documentation
   text: モニターステータスの参照
 kind: documentation
-private: true
 title: クラウドコストモニター
 ---
 
@@ -37,24 +36,27 @@ Datadog でクラウドコストモニターを作成するには、メインナ
 
 | コストタイプ | 説明 | 使用例 |
 | ---  | ----------- | ----------- |
-| コストを時間で比較する  | 日、週、月単位でコストを比較する | 今日のコストと前週のコストの差が 5% 以上になるとアラート |
-| 1 日あたりのコストしきい値を設定する | 1 日の総コストがしきい値を超えた場合のアラートを設定する | 今日の総コストが 1 万ドルを超え場合のアラートを設定する |
+| Cost Changes  | 日、週、月単位でコストを比較する | 今日のコストと前週のコストの差が 5% 以上になるとアラート |
+| Cost Threshold | 1 日の総コストがしきい値を超えた場合のアラートを設定する | 今日の総コストが 1 万ドルを超え場合のアラートを設定する |
 
 ## 追跡するコストを指定する
 
-Datadog に報告するコストタイプであれば、モニターとして利用可能です。詳細は、[クラウドコストマネジメント][1]のページを参照してください。エディタを使用して、コストタイプまたはエクスポートを定義します。
+Datadog に報告されているコストタイプやメトリクスはすべてモニターに利用できます。カスタムメトリクスや観測可能性メトリクスをコストメトリクスと一緒に使用して、ユニットエコノミクスをモニタリングすることができます。詳しくは、[クラウドコストマネジメント][1]ページを参照してください。エディタを使用して、コストタイプまたはエクスポートを定義します。
 
 | 手順                              | 必須 | デフォルト              | 例             |
 |-----------------------------------|----------|----------------------|---------------------|
-| コストメトリクスを選択する                 | 〇      | `aws.cost.amortized` | `azure.cost.actual` |
+| コストメトリクスを選択する                 | はい      | `aws.cost.amortized` | `azure.cost.actual` |
 | `filter by` を定義する            | ✕       | すべての条件           | `aws_product:s3`    |
 | グループ化                          | ✕       | すべての条件           | `aws_availability_zone` |
+| 観測可能性メトリクスの追加 | ✕      | `system.cpu.user` | `aws.s3.all_requests` |
+
+{{< img src="monitors/monitor_types/cloud_cost/ccm_metrics_source.png" alt="追跡するコストを指定するための、クラウドコストとメトリクスのデータソースオプション" style="width:100%;" >}}
 
 ## アラートの条件を設定する
 
-コストモニタータイプが **Set Daily Cost Threshold** の場合、クラウドコストがしきい値より `above` (上)、`below` (下)、`above or equal` (以上)、または `below or equal to` (以下) になったときに、アラートをトリガーすることができます。
+コストモニタータイプが **Cost Threshold** の場合、クラウドコストがしきい値より `above` (上)、`below` (下)、`above or equal` (以上)、または `below or equal to` (以下) になったときに、アラートをトリガーすることができます。
 
-コストモニタータイプが **Compare Costs Over Time** の場合、コストが定義されたしきい値よりも `increases` (増加) または `decreases` (減少) した場合に、アラートをトリガーすることができます。しきい値には、**Percentage Change** (変化率) または **Dollar Amount** (ドル額) のいずれかを設定することができます。
+コストモニタータイプが **Cost Changes** の場合、コストが定義されたしきい値よりも `increases` (増加) または `decreases` (減少) した場合に、アラートをトリガーすることができます。しきい値には、**Percentage Change** (変化率) または **Dollar Amount** (ドル額) のいずれかを設定することができます。
 
 **注**: **Percentage Change** では、あるドルのしきい値以下の変化をフィルターで除外することも可能です。
 例: 500 ドル以上の変更に対して、5% 以上のコスト変更があった場合にアラートを出す

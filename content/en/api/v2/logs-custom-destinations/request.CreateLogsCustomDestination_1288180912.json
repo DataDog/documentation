@@ -1,0 +1,21 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": false,
+      "forward_tags": false,
+      "forward_tags_restriction_list": [
+        "datacenter",
+        "host"
+      ],
+      "forward_tags_restriction_list_type": "ALLOW_LIST",
+      "forwarder_destination": {
+        "access_token": "my-access-token",
+        "endpoint": "https://example.com",
+        "type": "splunk_hec"
+      },
+      "name": "Nginx logs",
+      "query": "source:nginx"
+    },
+    "type": "custom_destination"
+  }
+}

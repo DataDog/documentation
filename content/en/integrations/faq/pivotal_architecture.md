@@ -15,7 +15,7 @@ further_reading:
 
 This page describes the architecture behind the Datadog VMware Tanzu Application Service integration.
 
-{{< img src="integrations/pivotal/pivotal_datadog_diagram.png" alt="An overview of the components of the Datadog integration with VMware Tanzu Application Service and the flow of data between them."  >}}
+{{< img src="integrations/pivotal/pivotal_datadog_diagram.png" alt="An overview of the components of the Datadog integration with VMware Tanzu Application Service and the flow of data between them." >}}
 
 The following sections provide further detail about the individual components and their interrelationships.
 
@@ -53,7 +53,7 @@ Autodiscovery tags are added at the CAPI level as metadata for the application. 
 
 ### Firehose Nozzle
 
-The Datadog Firehose Nozzle consumes information from your deployment’s Loggregator (PCF’s system for aggregating deployment metrics and application logs). The nozzle collects internal nozzle metrics, application metrics, organization metrics, and logs from the Firehose, and adds the corresponding tags and application metadata it collects from the CAPI. You can configure the metadata filter from the Cluster Monitoring Tile for the Datadog Firehose Nozzle with an allow- and deny-list mechanism. Specify which metadata to add to the metrics collected from the nozzle, and view the metrics and their corresponding tags in the [Metrics Summary][5] and [Metrics Explorer][6].
+The Datadog Firehose Nozzle consumes information from your deployment's Loggregator (PCF's system for aggregating deployment metrics and application logs). The nozzle collects internal nozzle metrics, application metrics, organization metrics, and logs from the Firehose, and adds the corresponding tags and application metadata it collects from the CAPI. You can configure the metadata filter from the Cluster Monitoring Tile for the Datadog Firehose Nozzle with an allow- and deny-list mechanism. Specify which metadata to add to the metrics collected from the nozzle, and view the metrics and their corresponding tags in the [Metrics Summary][5] and [Metrics Explorer][6].
 
 #### Metadata Collected
 

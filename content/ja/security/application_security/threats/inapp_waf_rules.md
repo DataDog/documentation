@@ -54,6 +54,14 @@ _アプリ内 WAF ルール_は、受信するリクエストの条件を指定�
 | `is_xss` | クロスサイトスクリプティング (XSS) ペイロードをチェックするための特別な演算子 |
 | `is_sqli` | SQL インジェクション (SQLI) ペイロードをチェックするための特別な演算子 |
 
+## カスタムアプリ内 WAF ルール
+
+**注:** この機能はベータ版です。
+
+カスタムアプリ内 WAF ルールにより、ユーザーはアプリケーションへの特定のタイプのリクエストを記録することができます。たとえば、カスタムルールを使用して、ログインの成功または失敗を監視することができます。開始するには、**Security** -> **Application Security** -> **Configuration** -> **In-App WAF** -> [**Custom Rules**][4] へ移動します。
+
+**注:** アプリ内 WAF のデフォルトのルールは読み取り専用です。アプリ内 WAF の動作を微調整するために、アプリ内 WAF のルールを変更する必要がある場合があります。デフォルトのルールを変更することはできませんが、デフォルトのルールの 1 つに基づいてカスタムルールを作成し、必要に応じて一致条件を変更することができます。同じリクエストを評価する 2 つの非常によく似たルールが存在することにならないように、デフォルトのルールは必ず無効にしてください。
+
 ## サービスに ASM アプリ内 WAF ルールを構成する
 
 1. Datadog で、[ASM 構成のアプリ内 WAF ページ][2]に移動します。
@@ -112,3 +120,4 @@ _アプリ内 WAF ルール_は、受信するリクエストの条件を指定�
 [1]: /ja/security/application_security/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?group_by=NONE
 [3]: /ja/security/application_security/enabling/
+[4]: https://app.datadoghq.com/security/configuration/asm/in-app-waf?config_by=custom-rules

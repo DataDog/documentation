@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - 使用属性
+  - コスト属性
 aliases:
 - /ja/account_management/billing/advanced_usage_reporting/
 - /ja/account_management/billing/custom_usage_reporitng/

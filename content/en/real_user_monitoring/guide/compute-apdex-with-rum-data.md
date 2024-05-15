@@ -145,7 +145,7 @@ In the example above, the Apdex score is relevant to the View RUM events and Lar
 You can also calculate other Apdex scores with the following methods:
 
 - To see the Apdex score trend over time, select `Timeseries` instead of `Query Value` in **Select your visualization**.
-- To compute the Apdex score for a specific application, add an additional `@application.id` query and update your formula.
+- To compute the Apdex score for a specific application, add an additional `@application.name` query and update your formula.
 - To compute the Apdex score with another RUM performance metric such as First Contentful Paint, replace `@view.LargestContentfulPaint` with `@view.FirstContentfulPaint` in the queries.
 
 To compute additional performance indicators for your applications, determine what data points you need and which RUM events are relevant for you before [creating a quick graph](#create-a-quick-graph).

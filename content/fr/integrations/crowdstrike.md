@@ -1,11 +1,10 @@
 ---
 categories:
-  - monitoring
-  - network
-  - cloud
-  - security
-  - logs
-ddtype: crawler
+- cloud
+- log collection
+- log collection
+- network
+- security
 dependencies: []
 description: CrowdStrike
 doc_link: https://docs.datadoghq.com/integrations/crowdstrike/
@@ -20,9 +19,12 @@ kind: integration
 manifest_version: '1.0'
 name: crowdstrike
 public_title: CrowdStrike
-short_description: Recueillez en temps réel des événements de détection CrowdStrike sous la forme de logs Datadog.
+short_description: Recueillez en temps réel des événements de détection CrowdStrike
+  sous la forme de logs Datadog.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Installez l'intégration CrowdStrike pour ingérer des événements suivants :

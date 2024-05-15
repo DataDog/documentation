@@ -49,7 +49,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 処理後は、次のような構造化ログが生成されます。
 
-{{< img src="logs/processing/processors/_parser.png" alt="パース例 1"  style="width:80%;">}}
+{{< img src="logs/processing/processors/_parser.png" alt="パース例 1" style="width:80%;">}}
 
 **注**:
 
@@ -59,7 +59,6 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 * 同一の Grok パーサー内では同じ規則名を複数使用できません。
 * 規則名には英数字、アンダースコア (_)、ピリオド (.) のみ使用できます。最初の文字は英数字でなければなりません。
 * 値が null または空欄のプロパティは表示されません。
-* Agent で許可されている正規表現構文の全リストは、able in the [RE2 repo][1] でご確認いただけます。
 * 正規表現マッチャーは、文字列の先頭に一致するように暗黙の `^` を適用し、文字列の末尾に一致するように `$` を適用します。
 * 特定のログは、空白の大きなギャップを生成する可能性があります。改行と空白を表すには、`\n` と `\s+` を使用します。
 
@@ -181,7 +180,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 `uppercase`
 : 大文字に変換した文字列を返します。
 
-`keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])`
+`keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`
 : キー値のパターンを抽出し、JSON オブジェクトを返します。[キー値フィルターの例](#キー値またはlogfmt)を参照してください。
 
 `xml`
@@ -216,7 +215,7 @@ Grok プロセッサータイルの下部に、**Advanced Settings** セクシ�
 
 たとえば、key-value としてパースされる必要のある `command.line` 属性を持つログを例に取ると、そのログは以下のようにパースできます。
 
-{{< img src="logs/processing/parsing/parsing_attribute.png" alt="コマンドラインをパース"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="コマンドラインをパース" style="width:80%;">}}
 
 ### ヘルパー規則を使用して複数のパース規則を再利用する
 
@@ -261,10 +260,10 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 
 ### キー値または logfmt
 
-これは key-value コアフィルター `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` です。
+これは key-value コアフィルター `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` です。
 
 * `separatorStr`: キーと値を区切るセパレーターを定義します。デフォルト `=`.
-* `characterWhiteList`: デフォルトの `\\w.\\-_@` に加え、追加の非エスケープ値文字を定義します。引用符で囲まれていない値 (例: `key=@valueStr`) にのみ使用します。
+* `characterAllowList`: デフォルトの `\\w.\\-_@` に加え、追加の非エスケープ値文字を定義します。引用符で囲まれていない値 (例: `key=@valueStr`) にのみ使用します。
 * `quotingStr`: 引用符を定義し、デフォルトの引用符検出（`<>`、`""`、`''`）を置き換えます。
 * `delimiter`: 異なる key-value ペアのセパレーターを定義します（すなわち、`|` は `key1=value1|key2=value2`の区切り文字です）。デフォルトは ` ` (通常のスペース)、`,` および `;` です。
 
@@ -305,7 +304,7 @@ rule %{data::keyvalue(": ")}
 
 {{< img src="logs/processing/parsing/key_value_parser.png" alt="キー値パーサー" style="width:80%;" >}}
 
-ログの属性値に、URL の `/` などの特殊文字が含まれる場合は、それをパース規則のホワイトリストに追加します。
+ログの属性値に、URL の `/` などの特殊文字が含まれる場合は、それをパース規則の許可リストに追加します。
 
 **ログ:**
 
@@ -319,7 +318,7 @@ url=https://app.datadoghq.com/event/stream user=john
 rule %{data::keyvalue("=","/:")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_whitelist.png" alt="キー値のホワイトリスト" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_allowlist.png" alt="キー値の許可リスト" style="width:80%;" >}}
 
 その他の例
 
@@ -336,7 +335,7 @@ rule %{data::keyvalue("=","/:")}
 | key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
 **Multiple QuotingString の例**: 複数の引用文字列が定義されると、デフォルトの挙動が定義された引用文字に置き換えられます。
-`quotingStr` で指定されている値にかかわらず、キーと値は引用文字列が使用されていなくても常に入力と一致します。 引用文字列が使用されている場合、引用符内の文字列がすべて抽出されるため、`characterWhiteList` は無視されます。
+`quotingStr` で指定されている値にかかわらず、キーと値は引用文字列が使用されていなくても常に入力と一致します。 引用文字列が使用されている場合、引用符内の文字列がすべて抽出されるため、`characterAllowList` は無視されます。
 
 **ログ:**
 
@@ -479,7 +478,7 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 **ログの例**
 
 ```text
-ユーザー [John, Oliver, Marc, Tom] がデータベースに追加されました
+Users [John, Oliver, Marc, Tom] have been added to the database
 ```
 
 **規則の例**
@@ -488,18 +487,18 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
-{{< img src="logs/processing/parsing/array_parsing.png" alt="パース例 6"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/array_parsing.png" alt="パース例 6" style="width:80%;" >}}
 
 **ログの例**
 
 ```text
-ユーザー {John-Oliver-Marc-Tom} がデータベースに追加されました
+Users {John-Oliver-Marc-Tom} have been added to the database
 ```
 
 **規則の例**
 
 ```text
-myParsingRule ユーザー %{data:users:array("{}","-")} がデータベースに追加されました
+myParsingRule Users %{data:users:array("{}","-")} have been added to the database
 ```
 
 **`subRuleOrFilter` を使用したルール**:
@@ -587,7 +586,7 @@ rule %{data::xml}
 CSV フィルターは `csv(headers[, separator[, quotingcharacter]])` で定義されます。それぞれの内容は以下の通りです。
 
 * `headers`: `,` で区切られたキーの名前を定義します。キー名にはアルファベットと `_` を使用できますが、冒頭の文字はアルファベットでなければなりません。
-* `separator`: それぞれの値を区切るために使用する区切り文字を定義します。種類は 1 つのみ指定でき、デフォルトは `,` です。**注意**: タブ文字を表すには `tab` を使用します。
+* `separator`: 異なる値の区切りに使用する区切り文字を定義します。1 文字のみ使用可能です。デフォルト: `,`。**注**: TSV のタブ文字を表すには、`separator` に `tab` を使用します。
 * `quotingcharacter`: 引用符を定義します。許可されるのは 1 文字だけです。デフォルトは `"` 。
 
 **注**:
@@ -634,6 +633,7 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 | `value1,value2,value3`       | `%{data::csv("key1,key2")}`                                              | {"key1": "value1", "key2":"value2"}             |
 | `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
+| <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
 
 ### ASCII 制御文字
 

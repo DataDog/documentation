@@ -58,7 +58,7 @@ Datadog の認可プロセスは、インテグレーションタイルの **Con
 
 サードパーティーロケーション (Datadog インテグレーションタイルの外) から認可を開始する場合、認可フローでユーザーをルーティングし、`authorization` と `token` エンドポイント用の URL を構築する際に [Datadog サイト][17] (EU、US1、US3、US5 など) を考慮しなければなりません。
 
-ユーザーが正しいサイトで認可していることを確認するために、常に US1 Datadog サイト (`app.datadoghq.com`) に誘導し、そこから地域を選択するようにします。認可フローが完了したら、後続の API コールでは、クエリパラメーターとして `redirect_uri` が返される正しいサイトを使用するようにします ([OAuth プロトコルの実装](#Implement-the-oauth-protocol)のステップ 5 を参照)。
+ユーザーが正しいサイトで認可していることを確認するために、常に US1 Datadog サイト (`app.datadoghq.com`) に誘導し、そこから地域を選択するようにします。認可フローが完了したら、後続の API コールでは、クエリパラメーターとして `redirect_uri` が返される正しいサイトを使用するようにします ([OAuth プロトコルの実装](#implement-the-oauth-protocol)のステップ 5 を参照)。
 
 ユーザーが Datadog インテグレーションタイルから認可を開始する場合、要求されたすべてのスコープに対応する権限を持っていることが必要です。インテグレーションタイル以外の場所から認可を開始した場合、必要なすべての権限を持たないユーザーが認可を完了することがあります (ただし、インテグレーションタイルに戻ったときに適切な権限で再認可するよう促されます)。これを避けるには、サードパーティのプラットフォームから Datadog インテグレーションタイルにユーザーを誘導し、認可を開始する必要があります。
 
@@ -81,7 +81,7 @@ OAuth2 プロトコルはいくつかの付与フローをサポートしてい�
 | パラメーター             | 定義                                                                                                                           |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Code Verifier         | 動的に生成される暗号用乱数文字列。                                                                                 |
-| Code Challenge        | コードベリファイアの変形。                                                                                               |
+| Code Challenge        | コードベリファイアの変換。`code_challenge` は `base64url` エンコーディングを使用しなければなりません。                                           |
 | Code Challenge Method | `code_challenge` を `code_verifier` から導出するために使用するメソッド。`code_challenge` の計算には [SHA-256][16] を使用しなければなりません。 |
 
 [PKCE プロトコル][11]は、以下のアクションを完了することで、認可コードの付与フローとインテグレーションします。
@@ -92,7 +92,7 @@ OAuth2 プロトコルはいくつかの付与フローをサポートしてい�
 
 - アプリケーションはアクセストークンを取得するために、認可コードと `code_verifier` を指定して Datadog にトークンリクエストを送信します。トークンエンドポイントは `code_verifier` を `code_challenge_method` を使って変換し、元の `code_challenge` の値と比較することで認可コードを検証します。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -100,7 +100,7 @@ OAuth2 プロトコルはいくつかの付与フローをサポートしてい�
 [2]: /ja/api/latest/scopes/
 [3]: /ja/developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /ja/developers/integrations/oauth_for_data_integrations
+[5]: /ja/developers/integrations/oauth_for_integrations
 [6]: /ja/developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
 [7]: /ja/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1

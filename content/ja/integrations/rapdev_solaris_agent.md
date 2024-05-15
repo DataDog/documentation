@@ -1,8 +1,11 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-solaris-agent
 app_uuid: a994f2cf-1f77-4e74-803d-fb833455e224
 assets:
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +15,7 @@ assets:
       prefix: rapdev.solaris_agent.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10135
     source_type_name: RapDev Solaris Agent
 author:
   homepage: https://www.rapdev.io
@@ -21,6 +25,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+- oracle
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -34,7 +39,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_solaris_agent
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -51,7 +55,9 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Marketplace
+  - Category::Oracle
   - Offering::Integration
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: sparc と i86pc の Solaris 10 および 11 のメトリクスを提供する Agent
   media:
@@ -70,6 +76,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 ## 概要
 
@@ -77,9 +84,9 @@ Solaris Agent を使用すると、Datadog 内の Solaris システムメトリ�
 
 Solaris Agent は、Datadog インフラストラクチャーリストをサポートするために必要なホストメタデータを提供し、組織が他のサポートされている Datadog ホストオペレーティングシステムと同様の Solaris ホストシステムで作業できるようにします。
 
-Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用します。Solaris Agent は、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。カスタム Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
+Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用します。Solaris Agent は、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。インテグレーションまたはサービスチェックはサポートしていません。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 

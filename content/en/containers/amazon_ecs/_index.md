@@ -3,7 +3,6 @@ title: Amazon ECS
 kind: documentation
 aliases:
   - /agent/amazon_ecs/
-  - /containers/amazon_ecs/data_collected
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
@@ -11,9 +10,17 @@ further_reading:
 - link: "/agent/amazon_ecs/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
+- link: "/agent/amazon_ecs/data_collected/#metrics"
+  tag: "Documentation"
+  text: "Collect ECS metrics"
 - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
   tag: "Blog"
   text: "Announcing support for Amazon ECS Anywhere"
+- link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
+  tag: "blog"
+  text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+algolia:
+  tags: ['ecs']
 ---
 
 ## Overview
@@ -216,6 +223,134 @@ For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provide
 While it's possible to run the Agent in `awsvpc` mode, it's not the recommended setup, because it may be difficult to retrieve the ENI IP to reach the Agent for Dogstatsd metrics and APM traces.
 
 Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6].
+
+{{% site-region region="gov" %}}
+#### FIPS proxy for GOVCLOUD environments
+
+To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [supported features](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations).
+
+**Note**: This feature is available for Linux only.
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:1.1.1",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9815,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+You also need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+{{% /site-region %}}
 
 ## Troubleshooting
 

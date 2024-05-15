@@ -1,28 +1,29 @@
 ---
 categories:
-- クラウド
 - AWS
+- クラウド
+- ネットワーク
 dependencies: []
-description: Amazon Transit Gateway のキーメトリクスを追跡
+description: AWS Transit Gateway のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_transit_gateway/
 draft: false
 git_integration_title: amazon_transit_gateway
 has_logo: true
 integration_id: amazon-transit-gateway
-integration_title: Amazon Transit Gateway
+integration_title: AWS Transit Gateway
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_transit_gateway
-public_title: Datadog-Amazon Transit Gateway インテグレーション
-short_description: Amazon Transit Gateway のキーメトリクスを追跡
+public_title: Datadog-AWS Transit Gateway インテグレーション
+short_description: AWS Transit Gateway のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
 ## 概要
 
-Amazon Transit Gateway を使用して、仮想プライベートクラウド (VPC) とオンプレミスネットワークを相互接続します。
+AWS Transit Gateway を使用して、仮想プライベートクラウド (VPC) とオンプレミスネットワークを相互接続します。
 
 このインテグレーションを有効にすると、Datadog にすべての Transit Gateway メトリクスを表示できます。
 
@@ -35,7 +36,7 @@ Amazon Transit Gateway を使用して、仮想プライベートクラウド (V
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `TransitGateway` が有効になっていることを確認します。
-2. [Datadog - Amazon Transit Gateway インテグレーション][3]をインストールします。
+2. [Datadog - AWS Transit Gateway インテグレーション][3]をインストールします。
 
 ### ログの収集
 
@@ -71,11 +72,11 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 
 ### イベント
 
-Amazon Transit Gateway インテグレーションには、イベントは含まれません。
+AWS Transit Gateway インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Amazon Transit Gateway インテグレーションには、サービスのチェック機能は含まれません。
+AWS Transit Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

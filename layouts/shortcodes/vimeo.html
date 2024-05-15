@@ -7,7 +7,7 @@
 {{ end }}
 
 <div class="video-container position-relative">
-  <video poster="{{ $posterImg }}" class="shadow-card-nohover w-100 video-controls" controls="">
+  <video poster="{{ $posterImg }}" class="shadow-card-nohover w-100 video-controls" controls="" preload="none">
     <source type="video/mp4" src="{{ .Get "url" }}">
   </video>
 </div>

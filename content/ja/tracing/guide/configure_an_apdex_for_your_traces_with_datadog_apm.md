@@ -24,7 +24,7 @@ Apdex を定義するには、Datadog アカウントの管理者である必要
 
 しきい値が定義され、リクエストが分類されると、Apdex は次のように定義されます。
 
-$$\bo\text"Apdex"=({\bo\text"Satisfied"\text" requests" + {{\bo\text"Tolerated"\text"  requests"}
+$$\bo\text"Apdex"=({\bo\text"Satisfied"\text" requests" + {{\bo\text"Tolerated"\text" requests"}
  / 2}})/{\bo\text"Total"\text" requests"} $$
 
 ストレスを感じるリクエストは「通常」よりも 4 倍遅いため、正しいしきい値を選択することが重要です。T=3 の場合、ユーザーはページがロードされるまで 3 秒待ちますが、12 秒待つことは許容できないことになります。
@@ -35,27 +35,28 @@ Apdex しきい値は、Apdex スコアが計算される前に管理者によ�
 
 Web アプリケーションやサービスの Apdex を可視化するには
 
-1. Web サービスダッシュボードで、レイテンシーの代わりに Apdex を選択してください。このオプションが表示されない場合は、Web サービスが選択されていることを確認してください。
+1. [サービスカタログ][3] で、Web サービスをクリックします。右上のグラフで、Latency の代わりに Apdex を選択します。このオプションが表示されない場合は、Web サービスをクリックしたことを確認してください。
 
-   {{< img src="tracing/faq/apdex_selection.png" alt="Apdex の選択"  >}}
+   {{< img src="tracing/faq/apdex_selection.png" alt="Apdex の選択" >}}
 
 2. ウィジェットの左上にある鉛筆アイコンを使用して、Apdex を構成します (このアイコンを表示するには、管理者である必要があります)。
 
-   {{< img src="tracing/faq/apdex_edit.png" alt="Apdex の編集"  >}}
+   {{< img src="tracing/faq/apdex_edit.png" alt="Apdex の編集" >}}
 
 3. しきい値を直接入力して、リクエストの分布を視覚化します。
 
-   {{< img src="tracing/faq/apdex_update.png" alt="Apdex の更新"  >}}
+   {{< img src="tracing/faq/apdex_update.png" alt="Apdex の更新" >}}
 
 4. ウィジェットを保存して、Apdex の経時的な動きを追跡します。
 
-   {{< img src="tracing/faq/apm_save.png" alt="Apdex の保存"  >}}
+   {{< img src="tracing/faq/apm_save.png" alt="Apdex の保存" >}}
 
-## サービス詳細画面に Apdex を表示する
+## サービスカタログに Apdex を表示する
 
-[サービス詳細画面][2]に Apdex を表示するには、ページの右上隅の構成メニューで Apdex を選択します。
+[サービスカタログ][2]に Apdex スコアを表示するには、ページの右上隅の構成メニューで Apdex を選択します。
 
-{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex サービス一覧画面"  >}}
+{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex サービスカタログ" >}}
 
-[1]: https://www.apdex.org/overview.html
-[2]: https://app.datadoghq.com/apm/services
+[1]: https://www.apdex.org/
+[2]: https://app.datadoghq.com/services
+[3]: https://app.datadoghq.com/services?query=type%3Aweb

@@ -8,7 +8,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Learn more about downtimes"
 aliases:
@@ -23,4 +23,4 @@ An option is to resolve the monitor prior to cancelling the downtime to suppress
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/notify/downtimes/
+[1]: /monitors/downtimes/

@@ -1,0 +1,40 @@
+{
+  "type": "time_slice",
+  "description": "string",
+  "name": "Example-Service-Level-Objective",
+  "sli_specification": {
+    "time_slice": {
+      "query": {
+        "formulas": [
+          {
+            "formula": "query1"
+          }
+        ],
+        "queries": [
+          {
+            "data_source": "metrics",
+            "name": "query1",
+            "query": "trace.servlet.request{env:prod}"
+          }
+        ]
+      },
+      "comparator": ">",
+      "threshold": 5
+    }
+  },
+  "tags": [
+    "env:prod"
+  ],
+  "thresholds": [
+    {
+      "target": 97.0,
+      "target_display": "97.0",
+      "timeframe": "7d",
+      "warning": 98,
+      "warning_display": "98.0"
+    }
+  ],
+  "timeframe": "7d",
+  "target_threshold": 97.0,
+  "warning_threshold": 98
+}

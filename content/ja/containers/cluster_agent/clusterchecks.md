@@ -7,14 +7,14 @@ further_reading:
 - link: /containers/cluster_agent/
   tag: ドキュメント
   text: Datadog Cluster Agent
-- link: /containers/cluster_agent/troubleshooting#cluster-checks
+- link: /containers/troubleshooting/cluster-and-endpoint-checks
   tag: ドキュメント
   text: クラスターチェックのトラブルシューティング
 - link: /containers/guide/clustercheckrunners
   tag: ドキュメント
   text: クラスターチェックランナー
 kind: documentation
-title: オートディスカバリーによるクラスターチェック
+title: クラスターチェック
 ---
 
 ## 概要
@@ -338,6 +338,71 @@ instances:
 
 ### Kubernetes のサービスアノテーションからの構成
 
+{{< tabs >}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+サービスにアノテーションするための構文は、[Kubernetes ポッドにアノテーションする][1]のと同様です。
+
+```yaml
+ad.datadoghq.com/service.checks: |
+  {
+    "<INTEGRATION_NAME>": {
+      "init_config": <INIT_CONFIG>,
+      "instances": [<INSTANCE_CONFIG>]
+    }
+  }
+```
+
+この構文は `%%host%%` [テンプレート変数][11]をサポートしており、サービスの IP に置き換わります。インスタンスには `kube_namespace` と `kube_service` タグが自動的に追加されます。
+
+#### 例: NGINX によってホストされるサービスの HTTP チェック
+
+以下のサービス定義では、`my-nginx` デプロイからポッドを外部に出し、[HTTP チェック][10]を実行させて負荷分散サービスの待ち時間を測定します。
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: my-nginx
+    labels:
+        run: my-nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
+    annotations:
+      ad.datadoghq.com/service.checks: |
+        {
+          "http_check": {
+            "init_config": {},
+            "instances": [
+              {
+                "url":"http://%%host%%",
+                "name":"My Nginx",
+                "timeout":1
+              }
+            ]
+          }
+        }
+spec:
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        run: my-nginx
+```
+
+さらに、集約されたサービスだけではなく各ワーカーのモニターも可能なため、各ポッドは [NGINX チェック][12]によりモニターされます。
+
+[1]: /ja/agent/kubernetes/integrations/
+[10]: /ja/integrations/http_check/
+[11]: /ja/agent/faq/template_variables/
+[12]: /ja/integrations/nginx/
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
+
 サービスにアノテーションするための構文は、[Kubernetes ポッドにアノテーションする][1]のと同様です。
 
 ```yaml
@@ -382,6 +447,14 @@ spec:
 ```
 
 さらに、集約されたサービスだけではなく各ワーカーのモニターも可能なため、各ポッドは [NGINX チェック][12]によりモニターされます。
+
+[1]: /ja/agent/kubernetes/integrations/
+[10]: /ja/integrations/http_check/
+[11]: /ja/agent/faq/template_variables/
+[12]: /ja/integrations/nginx/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## 検証
 
@@ -440,5 +513,5 @@ Init Config:
 [10]: /ja/integrations/http_check/
 [11]: /ja/agent/faq/template_variables/
 [12]: /ja/integrations/nginx/
-[13]: /ja/containers/cluster_agent/troubleshooting/#dispatching-logic-in-the-cluster-agent
+[13]: /ja/containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
 [14]: /ja/containers/cluster_agent/commands/#cluster-agent-commands

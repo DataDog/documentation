@@ -24,9 +24,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
 display_on_public_website: true
@@ -34,27 +32,24 @@ draft: false
 git_integration_title: spark
 integration_id: spark
 integration_title: Spark
-integration_version: 3.1.1
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: spark
-oauth: {}
 public_title: Spark
 short_description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::処理
   - Category::ログの収集
-  - Category::オートディスカバリー
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
   media: []
@@ -193,7 +188,7 @@ Agent v6/7 の場合は、[各 EMR ノードに正しい値が指定][10]され�
 
 Spark インテグレーションは、実行中のアプリに関するメトリクスのみを収集します。現在実行中のアプリがない場合、チェックはヘルスチェックを送信するだけです。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

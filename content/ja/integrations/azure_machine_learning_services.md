@@ -2,10 +2,15 @@
 categories:
 - cloud
 - azure
+- ai/ml
 dependencies: []
 description: Azure Machine Learning の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_machine_learning_services/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/
+  tag: ブログ
+  text: 本番環境で ML モデルを監視するためのベストプラクティス
 git_integration_title: azure_machine_learning_services
 has_logo: true
 integration_id: ''
@@ -20,6 +25,7 @@ short_description: Azure Machine Learning の主要メトリクスを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Machine Learning サービスでは、開発者やデータサイエンティストに向けに、機械学習モデルをより速く構築、トレーニング、展開するための生産的な機能を数多く提供しています。Datadog を使用して、他のアプリケーションやインフラストラクチャーに応じて Azure Machine Learning のパフォーマンスと使用状況を監視します。
@@ -35,7 +41,7 @@ Azure Machine Learning からメトリクスを取得すると、以下のこと
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## 収集データ
+## データ収集
 ### メトリクス
 {{< get-metrics-from-git "azure_machine_learning_services" >}}
 
@@ -43,11 +49,14 @@ Azure Machine Learning からメトリクスを取得すると、以下のこと
 ### イベント
 Azure Machine Learning インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 Azure Machine Learning インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
+## その他の参考資料
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_machine_learning_services/azure_machine_learning_services_metadata.csv

@@ -1,0 +1,40 @@
+{{/*  
+    Uses the "products" frontmatter (list)
+
+    *FORMAT* 
+    products: 
+    - name: "Product Name 1"
+      url: "/product-path1"
+      icon: "product-icon-name1"
+    - name: "Product Name 2"
+      url: "/product-path2"
+      icon: "product-icon-name2"
+
+    *EXAMPLE*
+    products:
+    - name: Cloud SIEM
+      url: /security/cloud_siem/
+      icon: siem
+    - name: CSM Threats
+      url: /security/threats/
+      icon: cloud-security-management
+*/}}
+
+<div class="product-availability container mb-3 p-0">
+    <div class="d-flex">
+        <strong class="p-0">{{ i18n "available_for"}}:</strong>
+        <p class="mb-0 p-0">
+            {{ $len := len .Page.Params.products}}
+            {{ range $idx, $product := .Page.Params.products }}
+                <span class="product-wrapper">
+                    <span class="product position-relative">
+                        {{ partial "icon" (dict "name" $product.icon "size" "14px")}}
+                        <span>{{$product.name}}</span>
+                        <a class="border border-0 stretched-link" href="{{$product.url}}"></a>
+                    </span>
+                    <span>{{ if ne $idx (sub $len 1) }}|{{ end }}</span>
+                </span>
+            {{ end }}
+        </p>
+    </div>
+</div>

@@ -1,11 +1,12 @@
 ---
-title: Datadog インテグレーションをリクエストする
-kind: ガイド
 further_reading:
-  - link: developers/integrations/new_check_howto
-    tag: ドキュメント
-    text: Datadog インテグレーションを作成する
+- link: developers/integrations/agent_integration
+  tag: ドキュメント
+  text: Datadog インテグレーションを作成する
+kind: ガイド
+title: Datadog インテグレーションをリクエストする
 ---
+
 Datadog インテグレーションをリクエストするには、次の情報を確認してください。
 
 ## 代替テクノロジー

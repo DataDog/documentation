@@ -17,7 +17,7 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
 ---
@@ -35,9 +35,9 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-### Amazon Linux 2, Amazon Linux 2022
+### Amazon Linux 2, Amazon Linux 2022/2023
 
-<div class="alert alert-info">Amazon Linux 2022 installations on Agent versions <= 6.39/7.39 require the <code>libxcrypt-compat</code> package. To install the package, run:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre>.</div>
+<div class="alert alert-info">Amazon Linux 2022/2023 installations on Agent versions <= 6.39/7.39 require the <code>libxcrypt-compat</code> package. To install the package, run:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre></div>
 
 | Description                        | Command                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -115,6 +115,57 @@ Configuration files for [Integrations][1]:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Uninstall the Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+
+
+```shell
+sudo yum remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/datadog-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo yum remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Troubleshooting
 
 See the [Agent Troubleshooting documentation][2].
@@ -129,6 +180,6 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aws
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
 [2]: /agent/troubleshooting/
 [3]: /developers/guide/custom-python-package/

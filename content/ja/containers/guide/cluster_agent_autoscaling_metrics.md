@@ -39,51 +39,78 @@ v1.0.0 の時点で、Datadog Cluster Agent のカスタムメトリクスサー
 
 1. Kubernetes >v1.10: API サーバーに対して External Metrics Provider リソースを登録する必要があります。
 2. Kubernetes の[集計層][3]を有効化します。
+3. 有効な [Datadog API キー**および**アプリケーションキー][8]。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Helm の Cluster Agent で外部メトリクスサーバーを有効にするには、以下の Cluster Agent コンフィギュレーションで [values.yaml][1] ファイルを更新します。`clusterAgent.metricsProvider.enabled` を `true` に設定した後、Datadog Helm チャートを再デプロイします。
+Helm の Cluster Agent で外部メトリクスサーバーを有効にするには、[values.yaml][1] ファイルを以下の構成で更新してください。有効な Datadog API キー、アプリケーションキーを提供し、`clusterAgent.metricsProvider.enabled` を `true` に設定します。その後、Datadog Helm チャートを再デプロイします。
 
   ```yaml
+  datadog:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+    #(...)
+
   clusterAgent:
     enabled: true
     # metricsProvider を有効化して Datadog のメトリクスに基づきスケール可能に設定
     metricsProvider:
       # clusterAgent.metricsProvider.enabled
-      # Set this to true to enable Metrics Provider
+      # メトリクスプロバイダーを有効にする場合は、true に設定
       enabled: true
   ```
 
 これにより必要な RBAC コンフィギュレーションが自動的に更新され、Kubernetes が利用可能な `Service` と `APIService` がそれぞれ設定されます。
 
+キーは、データキー `api-key` と `app-key` を含む、事前に作成された `Secrets` の名前を `datadog.apiKeyExistingSecret` と `datadog.appKeyExistingSecret` という構成で参照することで設定することもできます。
+
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-Datadog Operator で管理する Cluster Agent で外部メトリクスサーバーを有効にするには、まず [Datadog Operator をセットアップします][1]。次に、`DatadogAgent` カスタムリソースで `features.externalMetricsServer.enabled` を `true` に設定します。
+Datadog Operator で管理する Cluster Agent で外部メトリクスサーバーを有効にするには、まず [Datadog Operator のセットアップ][1]を行います。次に、有効な Datadog API キー、アプリケーションキーを提供し、`DatadogAgent` カスタムリソースで `features.externalMetricsServer.enabled` を `true` に設定します。
 
   ```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: datadog
-spec:
-  features:
-    externalMetricsServer:
-      enabled: true
-      useDatadogMetrics: false
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-  override:
-    clusterAgent:
-      replicas: 2
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_API_KEY>
+
+    features:
+      externalMetricsServer:
+        enabled: true
   ```
 
 Operator により必要な RBAC コンフィギュレーションが自動的に更新され、Kubernetes が利用可能な `Service` と `APIService` がそれぞれ設定されます。
+
+キーは、あらかじめ作成された `Secrets` の名前と、Datadog API およびアプリケーションキーを格納したデータキーを参照することで設定することもできます。
+  ```yaml
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiSecret:
+          secretName: <SECRET_NAME>
+          keyName: <KEY_FOR_DATADOG_API_KEY>
+        appSecret:
+          secretName: <SECRET_NAME>
+          keyName: <KEY_FOR_DATADOG_APP_KEY>
+
+    features:
+      externalMetricsServer:
+        enabled: true
+  ```
 
 [1]: /ja/agent/guide/operator-advanced
 {{% /tab %}}
@@ -146,7 +173,7 @@ Datadog は、`DatadogMetric` オプションの使用を推奨しています�
 
 - クエリの構文は正確で**なければなりません**。正確でない場合、オートスケールに使用される**すべて**のメトリクスが更新されません (オートスケールが停止します)。
 - クエリ結果は 1 つの系列のみを出力**しなければなりません** (それ以上の場合、結果は無効とみなされます)。
-- クエリからは、少なくとも 2 つのタイムスタンプを持つポイントの結果が得られる**必要があります** (1 つのポイントを返すクエリの使用も可能ですが、この場合オートスケールは不完全なポイントを使用する可能性があります)。
+- クエリからは、少なくとも 2 つの非 NULL タイムスタンプを持つポイントの結果が得られる**必要があります** (1 つのポイントを返すクエリの使用も可能ですが、この場合オートスケールは不完全なポイントを使用する可能性があります)。
 
 **注**: クエリは任意ですが、開始および終了時間はデフォルトで `Now() - 5 minutes` および `Now()` に設定されます
 
@@ -177,24 +204,22 @@ Datadog は、`DatadogMetric` オプションの使用を推奨しています�
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-`DatadogMetric` CRD の使用をアクティブにするには、`DatadogAgent` カスタムリソースを更新し、`features.externalMetricsServer.enabled` を `true` に設定します。
+`DatadogMetric` CRD の使用をアクティブにするには、`DatadogAgent` カスタムリソースを更新し、`features.externalMetricsServer.useDatadogMetrics` を `true` に設定します。
 
   ```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: datadog
-spec:
-  features:
-    externalMetricsServer:
-      enabled: true
-      useDatadogMetrics: true
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-  override:
-    clusterAgent:
-      replicas: 2
+  kind: DatadogAgent
+  apiVersion: datadoghq.com/v2alpha1
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_API_KEY>
+    features:
+      externalMetricsServer:
+        enabled: true
+        useDatadogMetrics: true
   ```
 
 Operator により必要な RBAC コンフィギュレーションが自動的に更新され、Cluster Agent に `DatadogMetric` リソースを介してこれらの HPA クエリを管理するよう指示します。
@@ -489,3 +514,4 @@ status:
 [5]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
 [6]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions
 [7]: /ja/integrations/guide/cloud-metric-delay
+[8]: /ja/account_management/api-app-keys/

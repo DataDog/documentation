@@ -1,4 +1,5 @@
 {{ $dot := . }}
+{{ $integration_version_blocklist := slice "oracle" }}
 
 {{ if .Params.is_beta }}
     <div class="row">
@@ -27,6 +28,16 @@
                     {{ if eq . "windows" }}
                         <span>
                             {{ partial "img.html" (dict "root" $dot "src" "os-windows-bw.png" "class" "static" "alt" "Windows" "width" "24") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "android" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/android-logo.png" "class" "static" "alt" "Android" "width" "24") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "ios" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/ios_stacked.png" "class" "static" "alt" "iOS" "width" "24") }}
                         </span>
                     {{ end }}
                     {{ if eq . "solaris" }}
@@ -59,12 +70,11 @@
     {{ partial "badge.html" (dict "context" . "text" "marketplace") }}
 {{ end }}
 
-{{ with .Params.integration_version }}
+{{ if and (.Params.integration_version) (not (in $integration_version_blocklist .Params.app_id)) }}
 <div class="row integration-labels">
     <div class="integration-version col-12">
-        <span>{{ i18n "integration_version" }}</span><span>v{{ . }}</span>
+        <span>{{ i18n "integration_version" }}</span><span>{{ .Params.integration_version }}</span>
     </div>
-
 </div>
 {{ end }}
 

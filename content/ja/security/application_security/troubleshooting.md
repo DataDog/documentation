@@ -8,7 +8,7 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: ドキュメント
   text: Application Security Management を有効にして脅威の検出を開始する
-- link: /security/application_security/setup_and_configure/#compatibility
+- link: /security/application_security/enabling/compatibility/
   tag: ドキュメント
   text: プログラミング言語とフレームワークの互換性
 - link: /security/application_security/how-appsec-works/
@@ -51,7 +51,7 @@ ASM の設定をテストするには、次の curl スクリプトを含むフ�
 {{< programming-lang lang="java" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -66,7 +66,7 @@ done
 {{< programming-lang lang=".NET" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -81,7 +81,7 @@ done
 {{< programming-lang lang="go" >}}
 
  ```bash
- for ((i=1;i<=200;i++));
+ for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -94,7 +94,7 @@ done
 {{< programming-lang lang="ruby" >}}
 
  ```bash
- for ((i=1;i<=200;i++));
+ for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -107,7 +107,7 @@ done
 {{< programming-lang lang="PHP" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -122,7 +122,7 @@ done
 {{< programming-lang lang="Node.js" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -136,7 +136,7 @@ done
 {{< programming-lang lang="python" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -177,7 +177,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 - spring-web
 - tomcat
 
-[1]: /ja/security/application_security/setup_and_configure/
+[1]: /ja/security/application_security/enabling/compatibility/java
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -185,14 +185,14 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 **注:** ASP.NET Core が無効になっている場合でも、ASM はこのフレームワークで動作するはずです。
 
-[1]: /ja/security/application_security/setup_and_configure/
+[1]: /ja/security/application_security/enabling/compatibility/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
 [PHP][1] については、必須のインテグレーションはありません。
 <p></p>
 
-[1]: /ja/security/application_security/setup_and_configure/
+[1]: /ja/security/application_security/enabling/compatibility/php
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -206,7 +206,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 お使いのフレームワークがサポートされていない場合は、Go リポジトリで[新しい課題を作成][7]してください。
 
-[1]: /ja/security/application_security/setup_and_configure/
+[1]: /ja/security/application_security/enabling/compatibility/go
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -219,7 +219,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 [Node.js][1] の場合、HTTP インテグレーションが必要です。
 <p></p>
 
-[1]: /ja/security/application_security/setup_and_configure/
+[1]: /ja/security/application_security/enabling/compatibility/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -227,7 +227,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 **注:** Rack は手動で追加するか、[Rails][4] または [Sinatra][5] とのインテグレーションで自動的に追加することができます。手動で追加した場合、Rack スタックにおいて、トレーサーミドルウェアはセキュリティミドルウェアの前に表示される必要があります。
 
-[1]: /ja/security/application_security/setup_and_configure/
+[1]: /ja/security/application_security/enabling/compatibility/ruby
 [2]: /ja/tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /ja/tracing/trace_collection/dd_libraries/ruby/#rails
@@ -239,7 +239,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 [Python][1] の場合、WSGI インテグレーションと、Django や Flask のような使用中のフレームワークのインテグレーションが必要です。
 <p></p>
 
-[1]: /ja/security/application_security/setup_and_configure/
+[1]: /ja/security/application_security/enabling/compatibility/python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -540,9 +540,9 @@ Agent がトレースを転送するまで 1 分ほど待ち、APM ダッシュ�
 {{< /programming-lang-wrapper >}}
 
 
-## Risk Management で脆弱性が検出されない
+## Application Vulnerability Management で脆弱性が検出されない
 
-脆弱性情報が Service Catalog Security View または Risk Management Vulnerability Explorer に表示されるには、一連のステップを正常に実行する必要があります。この問題を調査する際には、各ステップを確認することが重要です。
+脆弱性情報が Service Catalog Security View または Application Vulnerability Management Explorer に表示されるには、一連のステップを正常に実行する必要があります。この問題を調査する際には、各ステップを確認することが重要です。
 
 ### ASM が有効であることを確認する
 

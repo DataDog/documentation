@@ -1,13 +1,14 @@
 ---
-title: Dépannage du Network Device Monitoring
-kind: documentation
 aliases:
-  - /fr/network_performance_monitoring/devices/troubleshooting/
+- /fr/network_performance_monitoring/devices/troubleshooting/
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-    tag: Blog
-    text: Surveiller des périphériques SNMP avec Datadog
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  tag: Blog
+  text: Surveiller des périphériques SNMP avec Datadog
+kind: documentation
+title: Dépannage du Network Device Monitoring
 ---
+
 ## Présentation
 
 Utilisez les informations ci-dessous pour dépanner la fonctionnalité Network Device Monitoring de Datadog. Contactez [l'assistance Datadog][1] si vous avez besoin d'une aide supplémentaire.

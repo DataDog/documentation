@@ -41,7 +41,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_box
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -51,7 +50,7 @@ pricing:
   tag: user_login
   unit_label: Utilisateurs enregistrés Box
   unit_price: 1
-public_title: Intégration Box
+public_title: Box
 short_description: Surveillez vos utilisateurs et votre stockage dans Box Enterprise
 supported_os:
 - linux
@@ -89,7 +88,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Box
+  title: Box
   uninstallation: README.md#Uninstallation
 ---
 

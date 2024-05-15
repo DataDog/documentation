@@ -44,6 +44,14 @@ Datadog Agent は、トレーシングライブラリにサンプリングレー
 
 例えば、サービス `A` が `B` よりもトラフィックが多い場合、Agent は `A` のサンプリングレートを変化させて、`A` が 1 秒間に 7 つ以上のトレースを保持しないようにし、同様に `B` のサンプリングレートを調整して `B` が 1 秒間に 3 つのトレース、合計 1 秒間に 10 個以上のトレースを保持しないようにします。
 
+#### リモート構成
+
+<div class="alert alert-warning">Agent の取り込み構成のためのリモート構成はベータ版です。アクセスリクエストは <a href="/help/">Datadog サポート</a>にご連絡ください。</div>
+
+Agent のバージョン [7.42.0][20] 以降を使用している場合、Agent のサンプリングレート構成はリモートで構成可能です。Agent でリモート構成を有効にする方法については、[リモート構成の仕組み][23]をお読みください。リモート構成では、Agent を再起動することなく、パラメーターを変更することができます。
+
+#### ローカル構成
+
 Agent のメインコンフィギュレーションファイル (`datadog.yaml`) または環境変数に、Agent の目標の 1 秒あたりのトレースを設定します。
 ```
 @param max_traces_per_second - 整数 - オプション - デフォルト: 10
@@ -51,10 +59,11 @@ Agent のメインコンフィギュレーションファイル (`datadog.yaml`)
 ```
 
 **注**: 
+- リモートで構成されたパラメーターは、ローカルでの構成 (環境変数や `datadog.yaml` の構成) よりも優先されます。
 - PHP アプリケーションの場合は、代わりにトレーシングライブラリのユーザー定義ルールを使用してください。
 - Agent で設定した traces-per-second サンプリングレートは、PHP 以外の Datadog トレースライブラリにのみ適用されます。OpenTelemetry SDK など他のトレースライブラリには影響を与えません。
 
-Datadog Agent の[自動計算されたサンプリングレート](#in-the-agent)を使ってサンプリングされたトレースの全てのスパンには、取り込み理由 `auto` のタグが付けられています。 `ingestion_reason` タグは、[使用量メトリクス][2]にも設定されています。Datadog Agent のデフォルトのメカニズムを使用するサービスは、[Ingestion Control Page][5] の Configuration の列で `Automatic` とラベル付けされます。
+Datadog Agent の[自動計算されたサンプリングレート](#in-the-agent)を使ってサンプリングされたトレースの全てのスパンには、取り込み理由 `auto` のタグが付けられています。`ingestion_reason` タグは、[使用量メトリクス][2]にも設定されています。Datadog Agent のデフォルトのメカニズムを使用するサービスは、[Ingestion Control Page][5] の Configuration の列で `Automatic` とラベル付けされます。
 
 ### トレーシングライブラリ: ユーザー定義のルール
 `ingestion_reason: rule`
@@ -109,13 +118,12 @@ Python アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を�
 [1]: /ja/tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Ruby アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
+Ruby アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。
 
-例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
+例えば、トレースの 10% を送信するには
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
 環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
@@ -242,6 +250,12 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 2. エラーサンプラーは、Agent レベルのエラースパンを持つローカルトレースをキャプチャします。トレースが分散されている場合、完全なトレースが Datadog に送信される保証はありません。
 3. デフォルトでは、トレーシングライブラリのルールや `manual.drop` などのカスタムロジックによってドロップされたスパンは、エラーサンプラーでは**除外**されます。
 
+#### Datadog Agent 7.42.0 以降
+
+<div class="alert alert-warning"> この機能は現在ベータ版です。この機能へのアクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。</div>
+
+Agent のバージョン [7.42.0][20] 以降を使用している場合、レアサンプリングはリモート構成が可能です。[ドキュメント][21]に従って、Agent のリモート構成を有効にしてください。リモート構成を使用すると、Datadog Agent を再起動することなく、レアスパンの収集を有効にすることができます。
+
 #### Datadog Agent 6/7.41.0 以降
 
 トレーシングライブラリのルールや `manual.drop` などのカスタムロジックによってドロップされたスパンがエラーサンプラーに**含まれる**ようにデフォルトの動作をオーバーライドするには、Datadog Agent (または Kubernetes の Datadog Agent ポッド内の専用 Trace Agent コンテナ) で `DD_APM_FEATURES=error_rare_sample_tracer_drop` として機能を有効にします。
@@ -258,6 +272,12 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 レアサンプラーは、Datadog にレアスパンのセットを送信します。これは、`env`、`service`、`name`、`resource`、`error.type`、`http.status` の組み合わせを最大で毎秒 5 トレース (Agent 毎) 捕捉することができます。ヘッドベースのサンプリングレートが低い場合に、低トラフィックのリソースを確実に可視化することができます。
 
 **注**: レアサンプラーは、Agent レベルのローカルトレースをキャプチャします。トレースが分散されている場合、完全なトレースが Datadog に送信されることを保証する方法はありません。
+
+#### Datadog Agent 7.42.0 以降
+
+<div class="alert alert-warning"> この機能は現在ベータ版です。この機能へのアクセスをリクエストするには、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>にご連絡ください。</div>
+
+Agent のバージョン [7.42.0][20] 以降を使用している場合、エラーサンプリングレートはリモート構成が可能です。[ドキュメント][21]に従って、Agent のリモート構成を有効にしてください。リモート構成を使用すると、Datadog Agent を再起動することなく、パラメーター値を変更することができます。
 
 #### Datadog Agent 6/7.41.0 以降
 
@@ -584,10 +604,11 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 
 例えば、特定のサービスをモニターするために[スパンからのメトリクス][6]を構築する場合、スパンのサンプリングルールを構成することで、サービスを流れるすべてのリクエストのトレースを 100% 取り込む必要がなく、これらのメトリクスが 100% のアプリケーショントラフィックに基づくことを確認することができます。
 
+**注**: この機能は、Datadog Agent のバージョン [7.40.0][19] から利用可能です。
 
 {{< tabs >}}
 {{% tab "Java" %}}
-トレーシングライブラリのバージョン [version 1.7.0][1] から、Java アプリケーションの場合、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
+トレーシングライブラリの[バージョン 1.7.0][1] から、Java アプリケーションの場合、環境変数 `DD_SPAN_SAMPLING_RULES` でサービス名別と操作名別の **span** サンプリングルールを設定します。
 
 例えば、`my-service` という名前のサービスから、`http.request` という操作で、1 秒間に最大 50 スパンを 100% 収集するには
 
@@ -735,6 +756,10 @@ HTTP テストとブラウザテストは、バックエンドサービスがイ
 | サーバーレス | `lambda` と `xray`                   | Datadog トレーシングライブラリまたは AWS X-Ray インテグレーションでトレースした[サーバーレスアプリケーション][14]から受信したトレース。 |
 | Application Security Management     | `appsec`                            | Datadog トレーシングライブラリから取り込まれたトレースで、[ASM][15] によって脅威としてフラグが立てられたもの。 |
 
+## OpenTelemetry の取り込みメカニズム
+`ingestion_reason:otel`
+
+OpenTelemetry SDK のセットアップ (OpenTelemetry Collector または Datadog Agent を使用) に応じて、取り込みサンプリングを制御する複数の方法があります。様々な OpenTelemetry のセットアップで OpenTelemetry SDK、OpenTelemetry Collector、Datadog Agent レベルでのサンプリングに利用できるオプションの詳細は [OpenTelemetry による取り込みサンプリング][22] を参照してください。
 
 ## その他の参考資料
 
@@ -758,3 +783,8 @@ HTTP テストとブラウザテストは、バックエンドサービスがイ
 [16]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.13.0
 [17]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.15.0
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
+[19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
+[20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
+[21]: /ja/agent/remote_config/#enabling-remote-configuration
+[22]: /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry
+[23]: /ja/agent/remote_config/

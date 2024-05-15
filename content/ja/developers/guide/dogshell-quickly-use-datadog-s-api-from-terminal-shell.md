@@ -1,16 +1,18 @@
 ---
-title: Dogshell - ターミナル/シェルから Datadog API をすばやく使用
-kind: ガイド
 aliases:
-  - /ja/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
+- /ja/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
+description: ターミナルまたはシェルから Datadog API を使用
+kind: ガイド
+title: Dogshell
 ---
+
 `dogshell` というラッパーを使用して、ターミナル/シェルから Datadog API を使用できます。
 
 ## セットアップ
 
-Dogshell には、公式にサポートされた [datadogpy Python ライブラリ][1]が付属しており、[DogStatsD][2] から Datadog にデータを送信するためによく使用されます。[インストール方法については、こちらを参照してください][3]。
+Dogshell には、公式にサポートされた [datadogpy Python ライブラリ][1]が付属しており、[DogStatsD][2] で Datadog にデータを送信するためによく使用されます。インストール方法については、 [datadogpy GitHub リポジトリ][3]を参照してください。
 
-このライブラリをインストールすると、ターミナル/シェルで `dog` コマンドを使用できるようになりますが、その際に「初期化」が必要です。このコマンドに API キーとアプリケーションキーを提供することで、アカウントとの間でデータを送受信できるようになります。初めて `dog` コマンドを実行しようとすると、初期化が必要と認識され、2 つのステップからなるプロセスが実行されます。
+このライブラリをインストールすると、ターミナル/シェルで `dog` コマンドを使用できるようになりますが、その際に「初期化」が必要です。初期化するには、このコマンドに API キーとアプリケーションキーを提供することで、アカウントとの間でデータを送受信できるようになります。初めて `dog` コマンドを実行しようとすると、初期化が必要と認識され、2 つのステップからなるプロセスが実行されます。
 
 初期化セットアップがトリガーされる `dog` コマンドの例として (古い dog コマンドでも機能します)、以下を実行します。
 
@@ -27,13 +29,13 @@ dog metric post test_metric 1
 「Y」を入力します。次の応答があります。
 
 ```text
-What is your api key? (Get it here: https://app.datadoghq.com/account/settings#api)
+What is your api key? (Get it here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
 API キーを貼り付け、次に進みます。
 
 ```text
-What is your application key? (Generate one here: https://app.datadoghq.com/account/settings#api)
+What is your application key? (Generate one here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
 アプリケーションキーを貼り付けます。以下のように終了します。
@@ -42,15 +44,54 @@ What is your application key? (Generate one here: https://app.datadoghq.com/acco
 Wrote ~/.dogrc.
 ```
 
-これで、ターミナル/シェルから `dog` コマンドですばやく Datadog API を使用できるように設定が完了しました。`dog` コマンドの詳細なヘルプと情報については、`dog -h` を実行してください。
+次に、ターミナル/シェルからすばやく Datadog API を使用できるよう `dog` コマンドを使用します。`dog` コマンドの詳細なヘルプと情報については、`dog -h` を実行してください。
 
-(ファイルを多くのサーバーにプログラムでプッシュして、どのサーバーからも `dog` コマンドを実行できるようにするために) `.dogrc` ファイルを自分で作成する場合、ファイルのコンテンツは以下のようになっている必要があります。
+もし、自分で `.dogrc` ファイルを書きたい場合は、このファイルの内容は次のようになります。
 
+{{< site-region region="us" >}}
 ```text
 [Connection]
 apikey = <DATADOG_API_KEY>
 appkey = <YOUR_APPLICATION_KEY>
+api_host = https://datadoghq.com
 ```
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://us3.datadoghq.com
+```
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://us5.datadoghq.com
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://datadoghq.eu
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://ddog-gov.com
+```
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://ap1.datadoghq.com
+```
+{{< /site-region >}}
+
+これは、プログラム的に多くのサーバーにファイルをプッシュし、どのサーバーからでも `dog` コマンドを実行できるようにしたい場合に便利です。
 
 ## Dogshell コマンド
 
@@ -68,6 +109,8 @@ appkey = <YOUR_APPLICATION_KEY>
 * `dog tag`
 * `dog search`
 * `dog comment`
+
+**注**: `dogshell` コマンドは、デフォルトで Datadog US1 にデータを送信します。他のサイトにデータを送信する必要がある場合は、`—api_host` オプションを使用するか、`.dogrc` ファイルに api_host を指定することで実行できます。
 
 ### 実際の Dogshell
 
@@ -89,9 +132,9 @@ Dogshell からメトリクスを送信する方法の詳細を表示するに�
 dog metric post -h
 ```
 
-{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test"  >}}
+{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" >}}
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: /ja/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://github.com/DataDog/datadogpy#installation
 [4]: https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell

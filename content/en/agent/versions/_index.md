@@ -76,7 +76,7 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 
 
 [1]: /agent/#agent-architecture
-[2]: /agent/guide/agent-commands/
+[2]: /agent/configuration/agent-commands/
 [3]: /developers/dogstatsd/unix_socket/
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
 [5]: /metrics/types/?tab=distribution#metric-types

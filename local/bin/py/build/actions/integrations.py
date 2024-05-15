@@ -26,6 +26,7 @@ from os.path import (
 )
 
 from actions.format_link import format_link_file
+from actions.comment_conversion import replace_comments
 
 try:
     from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
@@ -84,27 +85,6 @@ class Integrations:
         )
         self.regex_h1_replace = re.compile(
             r"^(#{1})(?!#)(.*)", re.MULTILINE
-        )
-        self.regex_tabs_open = re.compile(
-            r"<!-- xxx tabs xxx -->", re.MULTILINE
-        )
-        self.regex_tabs_close = re.compile(
-            r"<!-- xxz tabs xxx -->", re.MULTILINE
-        )
-        self.regex_tab_open = re.compile(
-            r"<!-- xxx tab", re.MULTILINE
-        )
-        self.regex_tab_close = re.compile(
-            r"<!-- xxz tab xxx -->", re.MULTILINE
-        )
-        self.regex_tab_end = re.compile(
-            r" xxx -->", re.MULTILINE
-        )
-        self.regex_partial_open = re.compile(
-            r"<!-- partial", re.MULTILINE
-        )
-        self.regex_partial_close = re.compile(
-            r"partial -->", re.MULTILINE
         )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
@@ -261,7 +241,7 @@ class Integrations:
                 self.process_service_checks(file_name)
 
             elif file_name.endswith(".md"):
-                self.process_integration_readme(file_name, marketplace)
+                self.process_integration_readme(file_name, marketplace, content)
 
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
@@ -661,7 +641,7 @@ class Integrations:
 
         return collision_name
 
-    def process_integration_readme(self, file_name, marketplace=False):
+    def process_integration_readme(self, file_name, marketplace=False, content=None):
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
@@ -673,6 +653,8 @@ class Integrations:
         7. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
+        if content is None:
+            content = {}
         no_integration_issue = True
         tab_logic = False
         metrics = glob.glob(
@@ -734,14 +716,22 @@ class Integrations:
         ## Formating all link as reference to avoid any corner cases
         ## Replace image filenames in markdown for marketplace iterations
         result = ''
-        if not marketplace:
+        display_on_public = True
+        source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n"
+
+        # Don't try to build markdown if display_on_public_website is False
+        if manifest_json and "/dogweb/" not in file_name:
+            if not manifest_json["display_on_public_website"]:
+                display_on_public = False
+        
+        if not marketplace and display_on_public:
             try:
-                result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
+                result = source_comment + format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
                 print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                 sys.exit(1)
-        else:
+        elif marketplace:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
@@ -758,7 +748,9 @@ class Integrations:
                 if not is_marketplace_integration_markdown_valid:
                     raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
                 else:
-                    result = updated_markdown
+                    result = source_comment + updated_markdown
+        else:
+            print(f'Skipping markdown for: {file_name}')            
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:
@@ -777,27 +769,7 @@ class Integrations:
             result = re.sub(
                 self.regex_h1, "", result, 1
             )
-            result = re.sub(
-                self.regex_tabs_open, "{{< tabs >}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tabs_close, "{{< /tabs >}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_open, "{{% tab", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_close, "{{% /tab %}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_end, " %}}", result, 0
-            )
-            result = re.sub(
-                self.regex_partial_open, "", result, 0
-            )
-            result = re.sub(
-                self.regex_partial_close, "", result, 0
-            )
+            result = replace_comments(result)
             # result = re.sub(
             #     self.regex_site_region, r"{{% \1 %}}", result, 0
             # )
@@ -866,13 +838,14 @@ class Integrations:
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
                         new_file_name, collision_name))
                     result = self.add_integration_frontmatter(
-                        collision_name, result, dependencies, integration_id, integration_version, manifest_json
+                        collision_name, result, dependencies, integration_id, integration_version, manifest_json, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
                 else:
                     result = self.add_integration_frontmatter(
-                        new_file_name, result, dependencies, integration_id, integration_version
+                        new_file_name, result, dependencies, integration_id, integration_version, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
 
+                # write to content file
                 with open(out_name, "w", ) as out:
                     out.write(result)
 
@@ -886,13 +859,13 @@ class Integrations:
                         print(e)
                         print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                         sys.exit(1)
-            else:
-                if exists(out_name):
-                    print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
-                    remove(out_name)
+            # else:
+            #     if exists(out_name):
+            #         print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
+            #         remove(out_name)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None
+        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None, extra_fm=None
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -900,6 +873,8 @@ class Integrations:
         :param content: string of markdown content
         :return: formatted string
         """
+        if extra_fm is None:
+            extra_fm = {}
         fm = {}
         template = "---\n{front_matter}\n---\n\n{content}\n"
         if file_name not in self.initial_integration_files:
@@ -943,6 +918,7 @@ class Integrations:
                             # add the alias from the list
                             item['aliases'].remove(single_alias)
                             print(f"\033[94mALIAS REMOVAL\x1b[0m: Removed redundant alias: {single_alias}")
+                item.update(extra_fm)
                 fm = yaml.safe_dump(
                     item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
@@ -950,7 +926,7 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration"}, width=float("inf"), default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
@@ -1041,4 +1017,9 @@ class Integrations:
             manifest_json["name"] = manifest_json.get("name", name)
             if skipped_tags:
                 print(f'\x1b[33mWARNING\x1b[0m: Categories skipped on integration {manifest_json["name"]}, {skipped_tags}')
+
+        # temporary workaround until we can source integration data from APW
+        # https://datadoghq.atlassian.net/browse/WEB-4579
+        if 'oauth' in manifest_json.keys(): del manifest_json['oauth']
+
         return manifest_json

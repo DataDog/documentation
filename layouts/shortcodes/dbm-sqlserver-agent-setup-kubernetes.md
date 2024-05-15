@@ -13,12 +13,12 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
+  --set 'clusterChecksRunner.enabled=true' \
   --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>
-    port: 1433
+    host: <HOSTNAME>\,1433
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
@@ -26,8 +26,8 @@ instances:
     include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'\
-  datadog/datadog"
+      - 'env:<CUSTOM_ENV>'"\
+  datadog/datadog
 ```
 
 ### Configure with mounted files
@@ -93,4 +93,4 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: /agent/configuration/secrets-management

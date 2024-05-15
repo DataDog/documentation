@@ -13,6 +13,12 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: Debian
 title: Debian 用 Agent の基本的な使用方法
@@ -24,7 +30,9 @@ title: Debian 用 Agent の基本的な使用方法
 
 64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
-**注**: Debian 7 (wheezy) 以上は、Agent < 6.36.0/7.36.0 でサポートされています。Debian 8 (jessie) 以上は、Agent >= 6.36.0/7.36.0 でサポートされています。SysVinit は Agent v6.6.0+ でサポートされています。
+**注**:
+- 64 ビット x86 アーキテクチャでは、Debian 7 (wheezy) 以上は Agent < 6.36.0/7.36.0 でサポートされています。Debian 8 (jessie) 以上は、Agent >= 6.36.0/7.36.0 でサポートされています。SysVinit は Agent v6.6.0+ でサポートされています。
+- 64 ビット Arm v8 アーキテクチャでは、Debian 9 (stretch) 以降がサポートされています。
 
 ## コマンド
 

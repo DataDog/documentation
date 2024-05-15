@@ -20,7 +20,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - network
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/http_check/README.md
@@ -29,12 +28,11 @@ draft: false
 git_integration_title: http_check
 integration_id: ネットワーク
 integration_title: HTTP チェック
-integration_version: 8.1.0
+integration_version: 9.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: http_check
-oauth: {}
 public_title: HTTP チェック
 short_description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
 supported_os:
@@ -47,8 +45,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Web
-  - Category::Network
+  - Category::ネットワーク
   configuration: README.md#Setup
   description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
   media: []
@@ -57,6 +54,7 @@ tile:
   title: HTTP チェック
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -69,7 +67,7 @@ tile:
 
 HTTP チェックは、[Datadog Agent][1] のパッケージに含まれています。サーバーに追加でインストールする必要はありません。多くのメトリクス指向のチェックは、監視するサービスと同じホストで実行するのが最適ですが、このステータス指向のチェックは、監視するサイトを実行していないホストから実行したい場合があります。
 
-### コンフィギュレーション
+### 構成
 
 [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `http_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[http_check.d/conf.yaml のサンプル][3]を参照してください。
 
@@ -108,6 +106,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 | `tls_ignore_warning`             | `tls_verify` を `true` に設定すると、SSL 接続からのすべてのセキュリティ警告が無効になります。                                                                                                                                                     |
 | `tls_ca_cert`                    | この設定を使用すると、`init_config` で指定されているデフォルトの証明書パスを上書きできます。                                                                                                                                                   |
 | `check_certificate_expiration`   | `check_certificate_expiration` が有効な場合、サービスチェックは、SSL 証明書の有効期限をチェックします。**注**: これにより、`tls_verify` 設定の値に関係なく SSL 証明書が検証されます。 |
+| `tls_retrieve_non_validated_cert`| `tls_verify` が `false` で `check_certificate_expiration` が `true` の場合、これを `true` に設定すると、証明書に有効期限があるかどうかを調べることができます。                                                                          |
 | `days_warning` と `days_critical` | `check_certificate_expiration` を有効にすると、指定された日数内に SSL 証明書の有効期限が存在する場合に、これらの設定によって警告または重要なアラートが発生します。                                                                |
 | `ssl_server_name`                | `check_certificate_expiration` を有効にすると、この設定により、接続するサービスのホスト名が指定され、check_hostname が有効になっていると一致するホストが上書きされます。                                                      |
 | `check_hostname`                 | `true` に設定すると、チェックした `url` ホスト名が SSL 証明書のホスト名と異なる場合に、警告をログに記録します。                                                                                                                           |
@@ -121,7 +120,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 
 [Agent の `status` サブコマンドを実行][8]し、Checks セクションの `http_check` を探します。
 
-## 収集データ
+## データ収集
 
 ### メトリクス
 {{< get-metrics-from-git "http_check" >}}
@@ -131,7 +130,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 
 HTTP チェックにはイベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "http_check" >}}
 
 
@@ -143,7 +142,7 @@ HTTP チェックにはイベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/developers/write_agent_check/#collection-interval

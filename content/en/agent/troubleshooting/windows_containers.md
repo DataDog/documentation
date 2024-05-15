@@ -21,9 +21,10 @@ Containerized Windows Applications Monitoring requires Datadog Agent 7.19+.
 
 The supported OS versions are:
 - Windows Server 2019 (LTSC / 1809)
-- Windows Server 2019 1909
-- Windows Server 2019 2004 / 20H1
-- Windows Server 2019 20H2 (Agent 7.33+)
+- Windows Server 2019 1909 (until Agent 7.39, as not supported by Microsoft anymore)
+- Windows Server 2019 2004 or 20H1 (until Agent 7.39, as not supported by Microsoft anymore)
+- Windows Server 2019 20H2 (Agent 7.33 to 7.39, as not supported by Microsoft anymore)
+- Windows Server 2022 LTSC (Agent >=7.34)
 
 Hyper-V isolation mode is not supported.
 

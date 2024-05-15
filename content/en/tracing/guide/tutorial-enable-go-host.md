@@ -175,7 +175,7 @@ Use `curl` to again send requests to the application:
 
 Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-go-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
@@ -372,7 +372,7 @@ If you're not receiving traces as expected, set up debug mode for the Go tracer.
 [2]: /tracing/trace_collection/dd_libraries/go/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/go/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /getting_started/site/
 [7]: https://www.baeldung.com/go-instrumentation
 [8]: https://app.datadoghq.com/event/explorer

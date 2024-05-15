@@ -26,7 +26,22 @@ CPU
 : The time each method spent running on the CPU. It includes your code that runs in the JVM (for example, Java, Kotlin), but not JVM operations or native code called from within the JVM.
 
 Allocations
-: The amount of heap memory allocated by each method, including allocations which were subsequently freed.
+: The number of heap allocations made by each method, including allocations which were subsequently freed.<br />
+_Requires: Java 11_ 
+
+Allocated Memory
+: The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
+_Requires: Java 11_ 
+
+Heap Live Objects
+: The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+_Requires: Java 11_ <br />
+_Since: 1.17.0_
+
+Heap Live Size
+: The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+_Requires: Java 11_ <br />
+_Since: 1.17.0_
 
 Wall Time in Native Code
 : The elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code.
@@ -114,7 +129,7 @@ Heap Live Objects
 : The number of objects allocated by each function in heap memory that have not yet been garbage collected. Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Heap Live Size
-: The amount of heap memory allocated by each function that has not yet been garbage collected. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The amount of heap memory allocated by each function that has not yet been garbage collected. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and [identifying potential memory leaks][4].
 
 Mutex
 : The time functions have been waiting on mutexes during the profiling period (default: 60s). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
@@ -132,6 +147,7 @@ Goroutines
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
 [2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
 [3]: /profiler/enabling/go#requirements
+[4]: /profiler/guide/solve-memory-leaks
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -143,11 +159,28 @@ CPU
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
+Allocations (beta, v1.21.1+)
+: The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
+_Requires:_ [Manual enablement][3]
+
+Heap Live Objects (alpha, v1.21.1+)
+: The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+_Requires: Ruby 2.7+_ and [manual enablement][2]
+
+Heap Live Size (alpha, v1.21.1+)
+: The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+_Requires: Ruby 2.7+_ and [manual enablement][2]
+
 [1]: /profiler/enabling/ruby/#requirements
+[2]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.19.0#:~:text=You%20can%20enable%20these%20features%3A
+[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.21.0
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
 Once profiling is enabled, the following profile types are collected for [supported Node.js versions][1]:
+
+CPU (beta, v5.11.0+, v4.35.0+, v3.56.0+)
+: The time each function spent running on the CPU, including JavaScript and native code.<br />
 
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
@@ -167,19 +200,19 @@ Wall Time
 CPU (v2.15+)
 : The time each method spent running on the CPU.
 
-Thrown Exceptions (beta, v2.10+)
+Thrown Exceptions (v2.31+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
 Allocations (beta, v2.18+)
 : The number and size of allocated objects by each method, as well as their type.<br />
 _Requires: .NET 6+_
 
-Lock (beta, v2.18+)
+Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
-_Requires: .NET 5+_
+_Requires: beta .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
 Live Heap (beta, v2.22+)
-: A subset of the allocated objects (with their class name) that are still in memory and for how long.<br />
+: A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+_
 
 [1]: /profiler/enabling/dotnet/#requirements
@@ -194,11 +227,16 @@ Wall Time
 CPU
 : Shows the time each function spent running on the CPU.
 
-Allocations (beta, v0.84+)
-: The number of allocations by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.
+Allocations (v0.88+)
+: The number of allocations by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
+_Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7`_
 
-Allocated memory (beta, v0.84+)
-: The amount of heap memory allocated by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.
+Allocated memory (v0.88+)
+: The amount of heap memory allocated by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
+_Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7`_
+
+Thrown Exceptions (v0.92+)
+: The number of caught or uncaught exceptions raised by each method, as well as their type.
 
 [1]: /profiler/enabling/php/#requirements
 {{< /programming-lang >}}
@@ -210,10 +248,10 @@ CPU
 : The time each function spent running on the CPU.
 
 Allocations
-: The number of allocations by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked. 
+: The number of allocations by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked.
 
 Allocated memory
-: The amount of heap memory allocated by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked. 
+: The amount of heap memory allocated by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked.
 
 [1]: /profiler/enabling/ddprof/
 {{< /programming-lang >}}

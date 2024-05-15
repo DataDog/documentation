@@ -31,8 +31,9 @@ Commencez par [vous connecter à Postman][4]. Datadog recommande de [télécharg
 </br>
 <div class="postman-run-button"
 data-postman-action="collection/fork"
-data-postman-var-1="20651290-b051b74a-bbe6-433a-8670-7ec450e80199"
-data-postman-collection-url="entityId=20651290-b051b74a-bbe6-433a-8670-7ec450e80199&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-visibility="public"
+data-postman-var-1="20651290-809b13c1-4ada-46c1-af65-ab276c434068"
+data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
 data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
@@ -56,7 +57,7 @@ La collection comprend un [environnement Postman][6] du nom de `Datadog Authenti
 
 Suivez ces étapes pour configurer votre environnement :
 
-1. Cliquez sur la liste déroulante **Environments** en haut à droite de Postman.
+1. Cliquez sur le menu déroulant **Environments** en haut à droite de Postman. Si aucun environnement n'est sélectionné, l'option `No Environment` est affichée.
 
 2. Sélectionnez **Datadog Authentication**.
 
@@ -111,5 +112,5 @@ Cet onglet remplace l'affichage de la structure `param1:value1&param2:value2` de
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
 [6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[7]: /fr/api/v1/organizations/
+[7]: /fr/api/latest/#api-reference
 [8]: /fr/api/

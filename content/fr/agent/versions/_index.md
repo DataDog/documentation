@@ -68,7 +68,7 @@ La principale différence entre l'Agent 5 et l'Agent 6 est que les composants 
 
 Pour découvrir l'ensemble des nouveautés de l'Agent v6 par rapport à la v5, consultez la documentation relative aux [modifications apportées à l'Agent Datadog][4]. Les principales différences sont les suivantes :
 
-- Les [métriques de distribution][5] peuvent être exécutées directement sur le serveur pour calculer les centiles globaux réels et effectifs. (REMARQUE : cette fonctionnalité est en version BÊTA. Contactez l'assistance pour découvrir comment l'activer pour votre compte.)
+- Les [métriques de distribution][5] peuvent être calculées directement sur le serveur afin de déterminer les centiles globaux réels.
 - [DogStatsD][3] peut être utilisé sur un socket Unix plutôt que via UDP.
 - [La surveillance de live processes est disponible pour Windows][6].
 - [Le format OpenMetrics de Prometheus est pris en charge de façon native][7].

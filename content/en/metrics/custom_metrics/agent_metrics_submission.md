@@ -233,7 +233,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 
 [1]: /developers/custom_checks/write_agent_check/
 [2]: /metrics/types/
-[3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: /agent/guide/agent-commands/#restart-the-agent
-[5]: /agent/guide/agent-commands/#agent-information
+[3]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[4]: /agent/configuration/agent-commands/#restart-the-agent
+[5]: /agent/configuration/agent-commands/#agent-information
 [6]: https://app.datadoghq.com/metric/summary

@@ -1,33 +1,34 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- google cloud
+- log collection
+- network
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_Router."
+description: Surveillez des métriques clés de Google Cloud Router.
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_router/
 draft: false
 git_integration_title: google_cloud_router
 has_logo: true
 integration_id: google-cloud-router
-integration_title: "Google\_Cloud\_Router"
+integration_title: Google Cloud Router
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_router
-public_title: "Intégration Datadog/Google\_Cloud\_Router"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_Router."
+public_title: Intégration Datadog/Google Cloud Router
+short_description: Surveillez des métriques clés de Google Cloud Router.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Router permet l'échange dynamique de routes entre votre cloud privé virtuel (VPC) et vos réseaux sur site à l'aide du protocole BGP (Border Gateway Protocol).
 
 Utilisez l'intégration Datadog Google Cloud Platform pour recueillir des métriques de Google Cloud Router.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

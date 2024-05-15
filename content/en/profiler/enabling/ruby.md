@@ -8,9 +8,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/ruby'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
@@ -25,13 +25,15 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires Ruby 2.3+ (JRuby and TruffleRuby are not supported).
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
+The Datadog Profiler requires Ruby 2.3+. JRuby and TruffleRuby are not supported.
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) Linux system utility installed.
+You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) system utility installed.
 This utility is available on the software repositories of most Linux distributions. For example:
 
 - The `pkg-config` package is available for [Homebrew](https://formulae.brew.sh/formula/pkg-config), and [Debian](https://packages.debian.org/search?keywords=pkg-config)- and [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config)-based Linux
@@ -40,18 +42,22 @@ This utility is available on the software repositories of most Linux distributio
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
+[Single Step Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/) is not supported for Linux hosts, VMs, or Docker.
+Single Step Instrumentation is supported for Kubernetes (using the Datadog Helm chart), but you need to manually set the `DD_PROFILING_ENABLED=true` environment variable to enable profiling.
+
 ## Installation
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][3]+.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
-2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
+2. Add the `ddtrace` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.0'
-    gem 'google-protobuf', '~> 3.0'
+    gem 'ddtrace', '~> 1.21'
     ```
+
+    If you're running a version of `ddtrace` older than 1.15.0, add the `google-protobuf` gem (version ~> 3.0) as a dependency.
 
 2. Install the gems with `bundle install`.
 
@@ -84,21 +90,23 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Add the `ddtracerb exec` command to your Ruby application start command:
+4. Add the `ddprofrb exec` command to your Ruby application start command:
 
     ```shell
-    bundle exec ddtracerb exec ruby myapp.rb
+    bundle exec ddprofrb exec ruby myapp.rb
     ```
 
     Rails example:
 
     ```shell
-    bundle exec ddtracerb exec bin/rails s
+    bundle exec ddprofrb exec bin/rails s
     ```
+
+    If you're running a version of `ddtrace` older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
 
     **Note**
 
-    If starting the application via `ddtracerb exec` is not an option (eg. when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point such as `config.ru` for a web application:
+    If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
 
     ```ruby
     require 'datadog/profiling/preload'
@@ -116,9 +124,10 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [4]: https://app.datadoghq.com/profiling
 [5]: /getting_started/profiler/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

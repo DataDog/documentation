@@ -1,6 +1,8 @@
 ---
+algolia:
+  tags:
+  - ecs
 aliases:
-- /fr/integrations/amazon_ecs/
 - /fr/agent/amazon_ecs/
 further_reading:
 - link: /agent/amazon_ecs/logs/
@@ -15,6 +17,10 @@ further_reading:
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: Blog
   text: Ajout de la prise en charge d'Amazon ECS Anywhere
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  tag: blog
+  text: Analysez vos dépenses liées à Kubernetes et ECS avec la solution Cloud Cost
+    Management de Datadog
 kind: documentation
 title: Amazon ECS
 ---
@@ -30,7 +36,7 @@ Cette page aborde la configuration d'Amazon ECS avec l'Agent de conteneur Datad
 
 **Remarque** : si vous souhaitez configurer **ECS sur Fargate**, consultez les instructions [Amazon ECS sur AWS Fargate][3]. Le conteneur de l'Agent Datadog déployé sur les instances EC2 ne peut pas surveiller les tâches Fargate. De plus, AWS Batch n'est pas pris en charge.
 
-## Configuration
+## Implémentation
 
 L'Agent Datadog dans ECS doit être déployé une fois en tant que conteneur sur chaque instance EC2 de votre cluster ECS. Pour ce faire, vous devez créer une définition de tâche pour le conteneur de l'Agent Datadog, puis la déployer en tant que service Daemon. Chaque conteneur de l'Agent Datadog surveille ensuite les autres conteneurs sur leurs instances EC2 respectives.
 
@@ -52,7 +58,7 @@ L'exemple suivant montre comment effectuer une surveillance générale de l'infr
 
 1. Pour les conteneurs Linux, téléchargez le fichier [datadog-agent-ecs.json][20]
     1. Si vous utilisez une AMI Amazon Linux 1 d'origine, utilisez [datadog-agent-ecs1.json][21]
-    2. Si vous êtes sous Windows, utilisez [datadog-agent-ecs-win.json][22]
+    2. Si vous êtes sous Windows, utilisez [datadog-agent-ecs-win.json][22] 
 
 2. Modifiez votre fichier de définition de tâche de départ
     1. Remplacez `<YOUR_DATADOG_API_KEY>` par la [clé d'API Datadog][14] de votre compte.
@@ -219,6 +225,126 @@ Pour l'Agent 6.10 et les versions ultérieures, le mode `awsvpc` est pris en ch
 Bien qu'il soit possible d'exécuter l'Agent en mode `awsvpc`, nous vous le déconseillons. En effet, il serait difficile de récupérer l'IP de l'interface réseau Elastic afin de communiquer avec l'Agent pour les métriques DogStatsd et les traces APM.
 
 Exécutez plutôt l'Agent en mode Pont, avec le mappage des ports, afin de faciliter la récupération de l'[IP du host via le serveur de métadonnées][6].
+
+{{% site-region region="gov" %}}
+#### Proxy FIPS pour les environnements GOVCLOUD
+
+Pour envoyer des données au centre de données GOVCLOUD de Datadog, ajoutez le conteneur sidecar `fips-proxy` et ouvrez les ports du conteneur afin que [toutes les fonctionnalités](https://github.com/DataDog/datadog-agent/blob/7.45.x/pkg/config/config.go#L1564-L1577) fonctionnent correctement.
+
+**Remarque** : cette fonction est uniquement disponible sous Linux.
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:0.5.3",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9815,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9816,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+Vous devez également mettre à jour les variables d'environnement du conteneur de l'Agent Datadog pour permettre l'envoi de trafic via le proxy FIPS :
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+{{< /site-region >}}
 
 ## Dépannage
 

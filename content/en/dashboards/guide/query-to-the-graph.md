@@ -86,7 +86,7 @@ In this example, `rollup(avg,60)` defines an aggregate period of 60 seconds. So 
 
 ## Proceed to space-aggregation
 
-Next, you can mix data from different source into a single line.
+Next, you can mix data from different sources into a single line.
 
 You have ~300 points for each source. Each of them represents a minute.
 In this example, for each minute, Datadog computes the average across all sources, resulting in the following graph:

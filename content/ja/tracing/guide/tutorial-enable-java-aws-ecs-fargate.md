@@ -57,7 +57,7 @@ git clone https://github.com/DataDog/apm-tutorial-java-host.git
 
 このアプリケーションでは、AWS プロファイル (ECS クラスターを作成し、ECR から読み取るための正しい権限で構成済み)、AWS リージョン、AWS ECR リポジトリの追加など、いくつかの初期構成が必要です。
 
-`terraform/Fargate/global_constants/variables.tf` を開きます。 以下の変数の値を、正しい AWS アカウント情報に置き換えます。
+`terraform/Fargate/global_constants/variables.tf` を開きます。以下の変数の値を、正しい AWS アカウント情報に置き換えます。
 
 ```
 output "aws_profile" {
@@ -154,7 +154,7 @@ terraform destroy{{< /code-block >}}
 
 Java アプリケーションが動作するようになったので、トレースを有効にするための構成を行います。
 
-1. Java tracing パッケージをプロジェクトに追加します。Agent は EC2 インスタンスで動作するため、Dockerfile が適切に構成されていることを確認し、何もインストールする必要はありません。`notes/dockerfile.notes.maven` ファイルを開き、`dd-java-agent` をダウンロードする行のコメントを解除します。
+1. dockerfile を編集して、アプリケーションがトレースを生成するために必要な Java トレーシングパッケージを追加します。`notes/dockerfile.notes.maven` ファイルを開き、`dd-java-agent` をダウンロードする行のコメントを解除します。
 
    ```
    RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer

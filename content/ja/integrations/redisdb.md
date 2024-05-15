@@ -44,12 +44,11 @@ draft: false
 git_integration_title: redisdb
 integration_id: redis
 integration_title: Redis
-integration_version: 4.6.0
+integration_version: 4.8.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: redisdb
-oauth: {}
 public_title: Redis
 short_description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
 supported_os:
@@ -90,7 +89,7 @@ Redis をデータベース、キャッシュ、メッセージキューとし�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Redis チェックは [Datadog Agent][1] パッケージに含まれています。Redis サーバーに追加でインストールする必要はありません。
 
@@ -473,6 +472,6 @@ Redis チェックには、イベントは含まれません。
 - [Redis パフォーマンスメトリクスの監視方法][3]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics

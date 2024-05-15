@@ -1,9 +1,9 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- google cloud
+- log collection
+- security
 dependencies: []
 description: Consultez le dashboard des logs d'audit.
 doc_link: ''
@@ -21,6 +21,7 @@ public_title: Intégration du dashboard des logs d'audit Datadog/Google
 short_description: Consultez le dashboard des logs d'audit.
 version: '1.0'
 ---
+
 ## Présentation
 
 La surveillance des logs d'audit GCP vous permet de déterminer l'identité des utilisateurs qui accèdent à une ressource donnée, la méthode utilisée et le statut d'autorisation d'un tel accès. 

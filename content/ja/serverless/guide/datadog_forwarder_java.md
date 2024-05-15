@@ -8,8 +8,6 @@ title: Datadog Forwarder を使用した Java サーバーレスアプリケー�
 Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/java">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
 </div>
 
-{{< img src="serverless/java-lambda-tracing.png" alt="Datadog で Java Lambda 関数を監視" style="width:100%;">}}
-
 <div class="alert alert-danger">
 <code>datadog-lambda-java</code> の一部の古いバージョンでは、推移的依存関係として <code>log4j <=2.14.0</code> をインポートします。<a href="#upgrading">アップグレードの手順</a>は以下の通りです。
 </div>
@@ -18,11 +16,11 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 [Datadog Forwarder Lambda 関数][2]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
-分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`) または Java 11 (`java11`) ランタイムを使用している必要があります。
+分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用している必要があります。
 
-## コンフィギュレーション
+## ブラウザトラブルシューティング
 
-### Install
+### インストール
 
 以下のコードブロックのいずれかを `pom.xml` (Maven) または `build.gradle` (Gradle) に追加し、Datadog Lambda Library をローカルにインストールします。以下の `VERSION` を最新のリリースに置き換えてください (直前の `v` は省略): ![Maven Cental][4]
 {{< tabs >}}

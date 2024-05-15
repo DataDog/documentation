@@ -6,10 +6,13 @@ further_reading:
   text: Synthetic テストの管理
 - link: /synthetics/browser_tests/
   tag: ドキュメント
-  text: ブラウザテストの設定
+  text: ブラウザテストの構成
 - link: /synthetics/api_tests/
   tag: ドキュメント
-  text: APIテストの設定
+  text: API テストの構成
+- link: /synthetics/private_locations/
+  tag: ドキュメント
+  text: タイムボード
 kind: documentation
 title: Synthetic モニタリングのトラブルシューティング
 ---
@@ -30,7 +33,11 @@ API テストの[時間メトリクス][2]に急激な上昇や全体的な増�
 
 #### ウェブサイトが iframe で読み込まれない
 
-[Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなり、`Your website does not support being loaded through an iframe.` (このウェブサイトは iframe 経由の読み込みをサポートしていません) と表示されます。この場合、アプリケーションの設定で iframe での表示が抑制されている場合があります。**Open in Popup** をクリックしてウェブサイトをポップアップで開き、その際のジャーニーを記録してください。
+[Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe で Web サイトを確認できなくなり、`Your website does not support being loaded through an iframe.` (この Web サイトは iframe 経由の読み込みをサポートしていません) と表示されます。この場合、アプリケーションの設定で iframe での表示が抑制されている場合があります。
+
+あるいは、iframe レコーダーで記録しているときに Web サイトにログインできない場合、アプリケーションのリクエストがブロックされている可能性があります。
+
+**Open in Popup** をクリックして Web サイトをポップアップウィンドウで開き、ユーザージャーニーを記録してみてください。 
 
 #### 一部のアプリケーションは iframe に読み込まれるが、読み込まれないものがある
 
@@ -42,9 +49,9 @@ API テストの[時間メトリクス][2]に急激な上昇や全体的な増�
 
 {{< img src="synthetics/http_iframe.png" alt="HTTP を iframe で開いた場合" style="width:100%;" >}}
 
-#### iframe でウェブサイトがロードされず、ウェブサイトをポップアップで開いてもステップを記録できない
+#### iframe で Web サイトが読み込まれず、Web サイトをポップアップで開いてもステップを記録できない
 
-[Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなります。さらに、ウェブサイトを iframe およびポップアップで開いても、ステップを記録できなくなります。
+[Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなります。さらに、ウェブサイトを iframe とポップアップのどちらで開いても、ステップを記録できなくなります。
 
 {{< img src="synthetics/recording_iframe.mp4" alt="ブラウザテストのステップの記録に関する問題" video="true" width="100%" >}}
 
@@ -60,15 +67,15 @@ Chrome ブラウザに、拡張機能が正常に記録できないようにす�
 
 #### レコーダーにログインページが表示されない
 
-デフォルトでは、レコーダーの iframe/ポップアップは独自のブラウザを使用します。これは、すでにアプリケーションにログインしている場合、iframe/ポップアップがログイン後のページを直接表示する可能性があるため、最初にログアウトせずにログイン手順を記録できないということです。
+デフォルトでは、レコーダーの iframe/ポップアップは、ユーザーが使用しているブラウザを使用します。したがって、すでにアプリケーションにログインしている場合、iframe/ポップアップがログイン後のページを直接表示し、先にログアウトしないとログイン手順を記録できない可能性があります。
 
 アプリケーションからログアウトせずに手順を記録できるようにするには、レコーダーの**シークレットモード**を利用します。
 
 {{< img src="synthetics/incognito_mode.mp4" alt="シークレットモードのブラウザテストの使用" video="true" width="100%" >}}
 
-**シークレットモードでポップアップウィンドウを開く**と、独自のブラウザのメインセッションとユーザーデータから完全に分離されたセッションで、テストコンフィギュレーションに設定された開始 URL からテストの記録を開始できます。
+**シークレットモードでポップアップウィンドウを開く**と、使用中のブラウザのメインセッションとユーザーデータから完全に分離されたセッションとして、テストコンフィギュレーションで設定した開始 URL からテストの記録を開始できます。
 
-このシークレットポップアップウィンドウは、以前のブラウザ履歴 (Cookie やローカルデータなど) を無視します。アカウントから自動的にログアウトされ、初めてウェブサイトにアクセスした場合と同じようにログイン手順の記録を開始できます。
+このシークレットポップアップウィンドウは、以前のブラウザ履歴 (Cookie やローカルデータなど) を無視します。アカウントから自動的にログアウトされ、初めて Web サイトにアクセスした場合と同じようにログイン手順の記録を開始できます。
 
 ### テスト結果
 
@@ -131,21 +138,20 @@ Synthetic テストによって返された `403 Forbidden` エラーが確認�
 
 ## プライベートロケーション
 
-### 時々、プライベートロケーションのコンテナが、強制終了された `OOM` を取得する
-
-強制終了された `Out Of Memory` を取得するプライベートロケーションのコンテナは、通常、プライベートロケーションワーカーのリソース消費の問題を明らかにします。プライベートロケーションのコンテナが、[十分なメモリリソース][13]でプロビジョニングされていることを確認してください。
+{{< tabs >}}
+{{% tab "共通" %}}
 
 ### ブラウザテストの結果で、`Page crashed` エラーが表示されることがあります
 
-これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションのコンテナが、[十分なメモリリソース][13]でプロビジョニングされていることを確認してください。
+これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションワーカーが、[十分なメモリリソース][101]でプロビジョニングされていることを確認してください。
 
 ### テストの実行が通常より遅くなることがあります
 
-これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションのコンテナが、[十分な CPU リソース][13]でプロビジョニングされていることを確認してください。
+これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションワーカーが、[十分な CPU リソース][101]でプロビジョニングされていることを確認してください。
 
 ### ブラウザテストの実行に時間がかかりすぎる
 
-プライベートロケーションのデプロイメントで、[メモリ不足の問題][14]が発生していないことを確認します。[ディメンショニングガイドライン][15]に従ってコンテナインスタンスのスケーリングを既に試した場合は、[Datadog サポート][1]に連絡してください。
+プライベートロケーションのデプロイメントで、[メモリ不足の問題][102]が発生していないことを確認します。[ディメンショニングガイドライン][103]に従ってワーカーインスタンスのスケーリングを既に試した場合は、[Datadog サポート][104]に連絡してください。
 
 ### プライベートロケーションから実行される API テストに `TIMEOUT` エラーが表示される
 
@@ -153,15 +159,62 @@ API テストの実行が設定されているエンドポイントに、プラ�
 
 {{< img src="synthetics/timeout.png" alt="プライベートロケーションがタイムアウトした API テスト" style="width:70%;" >}}
 
+[101]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
+[102]: https://docs.docker.com/config/containers/resource_constraints/
+[103]: /ja/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[104]: /ja/help/
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+### 時々、プライベートロケーションのコンテナが、強制終了された `OOM` を取得する
+
+強制終了された `Out Of Memory` を取得するプライベートロケーションのコンテナは、通常、プライベートロケーションワーカーのリソース消費の問題を明らかにします。プライベートロケーションのコンテナが、[十分なメモリリソース][101]でプロビジョニングされていることを確認してください。
+
 ### プライベートロケーションのテストを実行しようとすると、`invalid mount config for type "bind": source path must be a directory` というエラーが表示される
 
-これは、Windows ベースのコンテナで単一ファイルをマウントしようとする（非対応）と、発生します。詳しくは、[Docker マウントボリュームのドキュメント][16]をご参照ください。バインドマウントのソースがローカルディレクトリであることをご確認ください。
+これは、Windows ベースのコンテナで単一ファイルをマウントしようとした場合に発生し、これはサポートされていません。詳しくは、[Docker マウントボリュームのドキュメント][102]をご参照ください。バインドマウントのソースがローカルディレクトリであることをご確認ください。
 
-## Synthetics と CI/CD
+[101]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
+[102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
 
-### CI Results Explorer に CI メタデータが表示されない
+{{% /tab %}}
+{{% tab "Windows" %}}
 
-API エンドポイントを使用して CI/CD テストの実行をトリガーしているかどうかを確認します。CI Results Explorer に CI メタデータを入力するには、[NPM パッケージ][17]を使用する必要があります。
+### 再起動せずに Synthetics Private Location Worker サービスを再起動する
+
+まず、インストール時に指定した構成でプライベートロケーションをインストールしたことを確認します。サービスを再起動するには、GUI を使用するか、Windows PowerShell を使用します。
+
+#### GUI
+
+1. MSI インストーラーを開き、**Start** メニューで **Services** を検索します。
+1. 任意のユーザーアカウントで **Services** を起動します。
+1. **Services (Local)** をクリックし、`Datadog Synthetics Private Location` というサービスを探します。
+1. ステップ 2 で見つかったサービスを右クリックし、**Restart** を選択します。
+
+Synthetics Private Location Worker は **Local Service** アカウントで実行されるようになりました。これを確認するには、タスクマネージャーを起動し、**Details** タブで `synthetics-pl-worker` プロセスを探します。
+
+#### PowerShell
+
+1. PowerShell スクリプトの実行権限を持つ任意の Windows アカウントで **Windows PowerShell** を起動します。
+1. コマンド `Restart-Service -Name “Datadog Synthetics Private Location”` を実行します。
+
+### Synthetics Private Location Worker の実行を維持する
+
+まず、Synthetics Private Location Windows Service がインストールされているマシンにログインし、そのマシンでスケジュールタスクを作成する権限を持っていることを確認してください。
+
+Synthetics Private Location Worker がクラッシュした場合、Windows に PowerShell スクリプトを実行するスケジュールタスクを追加し、アプリケーションの実行が停止した場合に再起動するようにします。これにより、クラッシュ後にプライベートロケーションが確実に再起動されます。
+
+アプリケーションのインストール時にコンフィギュレーションファイルを提供した場合、インストール後に `Datadog Synthetics Private Location` という名前の Windows サービスが自動的に開始されます。これを確認するには、**Services** ツールでサービスが実行されていることを確認します。この Windows サービスは、プライベートロケーションを自動的に再起動します。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### sudo のパスワードを要求される/dog ユーザーのパスワードを要求される
+
+Private Location ユーザー (`dog`) は、さまざまな理由で `sudo` を必要とします。通常、このユーザーには、コンテナ上で Private Location を起動する過程で `sudo` アクセスを許可する特定の権限が付与されます。ポリシーで `dog` ユーザーの `sudo` 権限を制限しているか、`dog` ユーザー (UID 501) としてコンテナを起動できないようにしているか確認してください。
+
+さらに、Private Location のバージョン `>v1.27` では、Datadog は `clone3` システムコールの使用に依存しています。古いバージョンのコンテナランタイム環境 (Docker バージョン <20.10.10 など) では、`clone3` はデフォルトの `seccomp` ポリシーではサポートされていません。コンテナランタイム環境の `seccomp` ポリシーに `clone3` が含まれていることを確認してください。これは、使用中のランタイムのバージョンを更新したり、`seccomp` ポリシーに `clone3` を手動で追加したり、または `unconfined` seccomp ポリシーを使用することで実現できます。詳細については、[Docker の `seccomp` ドキュメント][13]を参照してください。
 
 ## その他の参考資料
 
@@ -179,8 +232,4 @@ API エンドポイントを使用して CI/CD テストの実行をトリガー
 [10]: /ja/synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /ja/synthetics/api_tests/?tab=httptest#notify-your-team
-[13]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
-[14]: https://docs.docker.com/config/containers/resource_constraints/
-[15]: /ja/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
-[16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
-[17]: /ja/synthetics/cicd_integrations#use-the-cli
+[13]: https://docs.docker.com/engine/security/seccomp/

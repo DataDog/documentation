@@ -2,7 +2,7 @@
 aliases:
 - /ja/monitors/faq/how-do-i-reduce-alert-flapping-noise
 further_reading:
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 kind: ガイド
@@ -38,7 +38,7 @@ Datadog のアラートには、デフォルトで[通知][1]ロールアップ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/alert-rollup
-[2]: /ja/monitors/create/types/anomaly/
-[3]: /ja/monitors/create/types/outlier/
+[2]: /ja/monitors/types/anomaly/
+[3]: /ja/monitors/types/outlier/
 [4]: /ja/monitors/notify/variables/?tab=is_alert#template-variables
 [5]: /ja/monitors/notify/variables/?tab=is_alert#conditional-variables
