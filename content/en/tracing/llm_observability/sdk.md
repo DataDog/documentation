@@ -28,7 +28,7 @@ pip install git+https://github.com/DataDog/dd-trace-py.git@main
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
 
-#### Command-line setup
+### Command-line setup
 
 Enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
 
@@ -59,16 +59,16 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
 
-#### In-code setup
+### In-code setup
 
-Enable LLM Observability programatically through the `LLMOBs.enable()` function instead of running with the `ddtrace-run` command. **Note**: This setup method will not work if used with `ddtrace-run`.
+Enable LLM Observability programatically through the `LLMOBs.enable()` function instead of running with the `ddtrace-run` command. **Note**: Do not use this setup method with the `ddtrace-run` command.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 LLMObs.enable(
   ml_app="<YOUR_ML_APP_NAME>",
   dd_api_key="<YOUR_DATADOG_API_KEY>",
-  dd_site=“<YOUR_DATADOG_SITE>”,
+  dd_site="<YOUR_DATADOG_SITE>",
   dd_llmobs_no_apm=True,
   integrations=["langchain", "openai"],
 )
