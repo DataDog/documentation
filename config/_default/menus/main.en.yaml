@@ -4471,7 +4471,7 @@ menu:
       identifier: cws_security_signals
       weight: 202
     - name: Investigate Agent Events
-      url: security/threats/investigate-agent-events
+      url: security/threats/investigate_agent_events
       parent: cloud_workload_security
       identifier: cws_agent_events
       weight: 203
