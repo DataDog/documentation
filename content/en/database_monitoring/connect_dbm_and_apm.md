@@ -8,9 +8,6 @@ further_reading:
     tag: 'Blog'
     text: 'Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance'
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
 
