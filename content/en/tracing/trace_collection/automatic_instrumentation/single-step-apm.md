@@ -67,7 +67,7 @@ For a Docker Linux container:
    docker run -d --name dd-agent \
      -e DD_API_KEY=${YOUR_DD_API_KEY} \
      -e DD_APM_ENABLED=true \
-     -e DD_ENV=<AGENT_ENV>
+     -e DD_ENV=<AGENT_ENV> \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
      -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
