@@ -281,6 +281,10 @@ Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise retur
 **datadog.agent.check_status**: <br>
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
+## Uninstall Single Step APM Instrumentation
+
+If you would like to uninstall the Datadog Docker Agent and originally installed it with Single Step APM Instrumentation, you need to [run additional commands to uninstall Single Step Instrumentation][33].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -317,3 +321,4 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [30]: /agent/docker/data_collected/#metrics
 [31]: /integrations/network/#metrics
 [32]: /integrations/ntp/#metrics
+[33]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=docker#removing-apm-for-all-services-on-the-infrastructure
