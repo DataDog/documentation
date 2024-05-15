@@ -16,7 +16,7 @@ Use the **Make request** action to make a custom request to an HTTP endpoint. Yo
 
 To add an HTTP Request, under **Queries**, click **+** (plus) and search for `HTTP`. Select the **Make request** action to add it to your app.
 
-Specify the request method and any necessary [authentication][2]. Read the sections below for further information about the available configuration options. Optionally, the request can wait on conditions that you specify in the **Conditional wait** section, and retry at a given interval if the condition is not satisfied.
+Specify the request method and any necessary [authentication][2]. Read the sections below for further information about the available configuration options.
 
 ## Authentication
 
