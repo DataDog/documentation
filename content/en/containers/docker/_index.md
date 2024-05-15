@@ -283,7 +283,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 ## Uninstall Single Step APM Instrumentation
 
-If you would like to uninstall the Datadog Docker Agent and originally installed it with Single Step APM Instrumentation, you need to [run additional commands to uninstall Single Step Instrumentation][33].
+If you installed the Datadog Docker Agent using Single Step APM Instrumentation and now want to uninstall the Agent, you need to [run additional commands][33].
 
 ## Further Reading
 
