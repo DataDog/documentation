@@ -175,7 +175,7 @@ With this, any pod running your application is able to send DogStatsD metrics wi
 
 Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
 
-1. To activate Origin Detection, add the `global.originDetectionUnified.enabled` setting to your `datadog-agent.yaml` manifest:
+1. To activate origin detection, add the `global.originDetectionUnified.enabled` setting to your `datadog-agent.yaml` manifest:
 
     ```yaml
     global:
