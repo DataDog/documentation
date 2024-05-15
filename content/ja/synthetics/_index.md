@@ -84,7 +84,7 @@ API テスト、マルチステップ API テスト、ブラウザテスト、�
 
 {{< img src="synthetics/dashboards/test_dashboard.png" alt="Synthetic Monitoring & Continuous Testing サマリーダッシュボード" style="width:100%;">}}
 
-## Synthetic Monitoring & Continuous Testing Explorer を使用する
+## Synthetic Monitoring & Testing Results Explorer を使用する
 
 Synthetic テストの実行や、CI/CD パイプラインで実行されているテストのバッチに対して、[検索クエリおよび視覚化][20]を作成します。
 

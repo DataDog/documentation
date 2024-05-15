@@ -33,6 +33,8 @@ This guide also goes through how to monitor your log usage by:
 - [Alerting on indexed logs when the volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
 - [Setting up exclusion filters on high-volume logs](#set-up-exclusion-filters-on-high-volume-logs)
 
+If you want to transform your logs or redact sensitive data in your logs before they leave your environment, see how to [aggregate, process, and transform your log data with Observability Pipelines][29].
+
 ## Log account configuration
 
 ### Set up multiple indexes for log segmentation
@@ -223,3 +225,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [26]: /account_management/audit_trail/
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
 [28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
+[29]: /observability_pipelines/

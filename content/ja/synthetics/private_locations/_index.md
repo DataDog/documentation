@@ -55,6 +55,16 @@ title: Synthetic テストをプライベートロケーションから実行す
 [103]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+プライベートロケーションは、Helm を使って Kubernetes クラスターにインストールできる Kubernetes デプロイメントです。[Helm チャート][101]は Linux ベースの Kubernetes 上で実行できます。
+
+**注**: このソフトウェアの使用および操作には、[エンドユーザーライセンス契約][103]が適用されます。
+
+[101]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
+[103]: https://www.datadoghq.com/legal/eula/
+
+{{% /tab %}}
 {{% tab "Windows" %}}
 
 プライベートロケーションは、[MSI ファイル][101]を使用してプライベートネットワーク内の任意の場所にインストールできる Windows サービスです。プライベートロケーションをインストールしたい仮想マシンまたは物理マシンからこのファイルを実行します。**\***

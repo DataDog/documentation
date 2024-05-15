@@ -107,11 +107,15 @@ Datadog のデフォルトおよびカスタムロールについては、[ロ�
 
 ## セキュリティ
 
+### Safety Center
+
+**Safety Center** ページには、組織内で確認すべきセキュリティアラート、警告、および推奨事項が含まれています。また、**Configuration** をクリックし、メールアドレスを 2 つまで入力し、**Save** ボタンをクリックすることで、組織のセキュリティ通知を受け取る **Security Contacts** を設定することができます。
+
 ### 公開共有
 
 **Public Sharing** タブには、共有ダッシュボードおよび共有グラフのリストが含まれています。**Enabled** ボタンをクリックして共有設定を編集することも可能です。
 
-### OAuth Apps
+### ヘルプ
 
 [**OAuth Apps**][14] ページでは、組織内の OAuth アプリケーションを表示または管理することができます。
 
@@ -149,11 +153,11 @@ Datadog のデフォルトおよびカスタムロールについては、[ロ�
 [4]: /ja/account_management/org_settings/service_accounts
 [5]: /ja/account_management/login_methods/
 [6]: /ja/account_management/saml/
-[7]: /ja/account_management/saml/#mapping-saml-attributes-to-datadog-roles
+[7]: /ja/account_management/saml/mapping
 [8]: /ja/account_management/api-app-keys/
 [9]: /ja/account_management/rbac/
 [10]: /ja/agent/remote_config/?tab=configurationyamlfile#how-it-works
 [11]: /ja/account_management/api-app-keys/#client-tokens
-[12]: /ja/events/guides/email/
+[12]: /ja/service_management/events/guides/email/
 [13]: /ja/synthetics/settings/?tab=specifyvalue#overview
 [14]: /ja/account_management/org_settings/oauth_apps

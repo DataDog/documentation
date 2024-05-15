@@ -95,7 +95,7 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 이렇게 하면 프로세스 점검에서 `sudo`를 활용해 `ls` 명령어를 실행하되, `/proc/*/fd/` 경로의 콘텐츠 목록에서만 실행합니다.
 
-Datadog `error.log` 파일에서 `sudo: sorry, you must have a tty to run sudo`라는 문구를 발견했다면 `visudo`를 실행하고 `Default requiretty` 라인에 코멘트를 추가해야 합니다.
+Datadog `error.log` 파일에서 `sudo: sorry, you must have a tty to run sudo`이라는 라인을 발견하면 sudoers 파일에서 `visudo`를 사용해 `Default requiretty` 라인을 주석 처리해야 합니다.
 
 {{% /tab %}}
 {{% tab "Agent v6 & v7" %}}
@@ -111,8 +111,8 @@ v6.3 이전의 Agent v6을 사용하는 경우 Agent를 업데이트하고 `try_
 3. [Agent를 시작합니다][3].
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: /ko/agent/guide/agent-commands/#stop-the-agent
-[3]: /ko/agent/guide/agent-commands/#start-the-agent
+[2]: /ko/agent/configuration/agent-commands/#stop-the-agent
+[3]: /ko/agent/configuration/agent-commands/#start-the-agent
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -128,10 +128,10 @@ Agent v5를 사용하는 경우 [최신 버전의 Agent 6][1]로 업데이트하
 
 [1]: /ko/agent/guide/upgrade-to-agent-v6/
 [2]: https://github.com/DataDog/dd-agent
-[3]: /ko/agent/guide/agent-commands/?tab=agentv5#stop-the-agent
+[3]: /ko/agent/configuration/agent-commands/?tab=agentv5#stop-the-agent
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
 [5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
-[6]: /ko/agent/guide/agent-commands/?tab=agentv5#start-the-agent
+[6]: /ko/agent/configuration/agent-commands/?tab=agentv5#start-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -144,10 +144,10 @@ Agent v5를 사용하는 경우 [최신 버전의 Agent 6][1]로 업데이트하
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/agent/guide/agent-commands/
-[2]: /ko/agent/guide/agent-log-files/
+[1]: /ko/agent/configuration/agent-commands/
+[2]: /ko/agent/configuration/agent-log-files/
 [3]: /ko/agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
 [4]: /ko/agent/faq/network/
-[5]: /ko/agent/guide/agent-commands/#start-the-agent
+[5]: /ko/agent/configuration/agent-commands/#start-the-agent
 [6]: /ko/help/
 [7]: /ko/integrations/process/
