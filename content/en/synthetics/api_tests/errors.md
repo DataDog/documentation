@@ -15,7 +15,7 @@ further_reading:
 ---
 ## HTTP errors
 
-HTTP failures may arise when a remote server’s HTTP support varies. As an example scenario, this can happen when a test is initially ran and reaches an endpoint on a server that supports HTTP 2. On the next run however, if the test comes across the same endpoint but on a server that only has HTTP 1.1 support, the test will fail to establish an HTTP 2 connection and will return an error. If this scenario is encountered, the recommendation is to switch to HTTP/1.1.
+The message `Error performing HTTP/2 request` may occur when a remote server’s HTTP support varies. As an example scenario, this can happen when a test is initially ran and reaches an endpoint on a server that supports HTTP 2. On the next run however, if the test comes across the same endpoint but on a server that only has HTTP 1.1 support, the test will fail to establish an HTTP 2 connection and return an error. If this scenario is encountered, the recommendation is to switch to HTTP/1.1.
 
 ## SSL errors
 
