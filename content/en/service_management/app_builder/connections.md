@@ -51,7 +51,7 @@ Where possible, use granular connections for different apps. For example, if you
 
 ### View connections
 
-1. From the [App Builder page][2], click **Connections** in the upper right. The [connections list][3] opens.
+1. From the [App Builder page][2], click the **Connections** tab. The [connections list][3] opens.
 1. Click on a single line to view connection details.
 
 ### Create a connection
@@ -69,7 +69,7 @@ To create a connection:
 Alternatively, add a connection from the app page:
 1. Navigate to the [App Builder app list][9].
 1. Select the app containing the action you need to add a credential to. The app canvas appears.
-1. Click **Edit** in the upper left.
+1. Click **Edit** in the upper right.
 1. Under **Queries** on the left-hand side, click the action to which you need to add a credential. The left side panel populates with the action details.
 1. Look for the **Connection** dropdown and click the **+** icon.
 1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
