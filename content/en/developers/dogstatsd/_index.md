@@ -127,7 +127,7 @@ StatsD metrics collection is enabled by default on [Unix domain socket][1]. To s
                 enabled: true
     ```
 
-    Here is an example `datadog-agent.yaml` manifest:
+    This is an example `datadog-agent.yaml` manifest:
     ```yaml
     apiVersion: datadoghq.com/v2alpha1
     kind: DatadogAgent
