@@ -43,7 +43,7 @@ To trace an LLM application:
 1. In your code, use the SDK to create spans representing your application's tasks.
     - See the span creation example below.
     - For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
-1. [Annotate your spans][7] with input data, output data, metadata (such as `max_tokens`), and key-value tags (such as `version:1.0.0`).
+1. [Annotate your spans][7] with input data, output data, metadata (such as `temperature`), metrics (such as `input_tokens`), and key-value tags (such as `version:1.0.0`).
 1. Explore the resulting traces on the [LLM Observability traces page][2], and the resulting metrics on the out-of-the-box [LLM Observability dashboard][14].
 
 Optionally, you can also:
@@ -51,7 +51,7 @@ Optionally, you can also:
 - Associate multiple interactions with one user by specifying a `session_id`. See [Tracking user sessions][6] in the SDK documentation.
 - [Persist a span between contexts or scopes][8] by manually starting and stopping it.
 - [Override the name of the LLM application with a different name][9] when starting a root span, which can be useful for differentiating between services or running an experiment.
-- Submit feedback from the users of your LLM application (thumbs up/thumbs down, rating from 1 to 5, and so on) as custom evaluation metrics via the [API][15]. This allows you to visualize the feedback evaluation metrics in your traces and also in the [cluster map view][16], where you can monitor any patterns in different topics of your LLM applications against these metrics.
+- Submit feedback from the users of your LLM application (thumbs up/thumbs down, rating from 1 to 5, and so on) as custom evaluation metrics via the [SDK][15] or the [API][16]. This allows you to visualize the feedback evaluation metrics in your traces and also in the [cluster map view][17], where you can monitor any patterns in different topics of your LLM applications against these metrics.
 
 ### Span creation example
 
@@ -82,6 +82,6 @@ def process_message():
 [12]: /tracing/llm_observability/sdk
 [13]: /tracing/llm_observability/api
 [14]: https://app.datadoghq.com/dash/integration/llm_analytics
-[15]: /tracing/llm_observability/api/?tab=model#eval-metrics-api
-[16]: https://app.datadoghq.com/llm/clusters
-[17]: /tracing/llm_observability/sdk/#in-code-setup
+[15]: /tracing/llm_observability/sdk/#submitting-evaluation-metrics
+[16]: /tracing/llm_observability/api/?tab=model#eval-metrics-api
+[17]: https://app.datadoghq.com/llm/clusters

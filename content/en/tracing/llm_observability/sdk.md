@@ -12,7 +12,7 @@ LLM Observability is not available in the US1-FED site.
 
 ## Overview
 
-The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python version 3.7 and up, and all versions of LangChain.
+The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python versions 3.7 and newer. For information about LLM Observability's integration support, see [LLM integrations](#llm-integrations).
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with simple context managers or function decorators. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
@@ -136,11 +136,13 @@ def process_message():
 
 ### LLM span
 
-If you are using one of the following LLM providers, you do not need to manually start a span to trace these operations, as Datadog's existing integrations automatically trace and annotate the LLM calls:
+**Note**: If you are using one of the following LLM providers, you do not need to manually start a LLM span to trace these operations, as Datadog's existing integrations automatically trace and annotate the LLM calls:
 
 - OpenAI (using the [OpenAI Python SDK][1])
 - AWS Bedrock (using [Boto3][2]/[Botocore][3])
 - LangChain LLM/Chat Models/Chains (using [LangChain][4])
+
+For more information about Datadog's LLM integrations, see [LLM integrations](#llm-integrations).
 
 To trace an LLM span, use `LLMObs.llm()` as a context manager.
 
@@ -209,6 +211,8 @@ def call_weather_api():
 
 To trace an embedding span, use `LLMObs.embedding()` as a context manager.
 
+**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
+
 #### Arguments
 
 `model_name`
@@ -236,7 +240,7 @@ To trace an embedding span, use `LLMObs.embedding()` as a context manager.
 from ddtrace.llmobs import LLMObs
 
 def perform_embedding():
-    with LLMObs.embedding(name="openai_embedding") as embedding_span:
+    with LLMObs.embedding(model_name="text-embedding-3", name="openai_embedding") as embedding_span:
         ... # user application logic
     return 
 {{< /code-block >}}
@@ -244,6 +248,8 @@ def perform_embedding():
 ### Retrieval span
 
 To trace a retrieval span, use `LLMObs.retrieval()` as a context manager.
+
+**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
 
 #### Arguments
 
@@ -299,19 +305,17 @@ def sanitize_input():
     return 
 {{< /code-block >}}
 
-## Tracing spans using function decorators
+## Tracking user sessions
 
-For each span kind, the `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators have the same argument signature as their inline counterparts, with the addition that `name` will default to the name of the given function.
-
-### Example
+Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session:
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import workflow
+from ddtrace.llmobs import LLMObs
 
-@workflow(name="process_message", session_id="<SESSION_ID>", ml_app="<ML_APP>")
 def process_message():
-    ... # user application logic
-    return
+    with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>") as workflow_span:
+        ... # user application logic
+    return 
 {{< /code-block >}}
 
 ## Annotating a span
@@ -328,19 +332,23 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `input_data` 
 : optional - _JSON serializable type or list of dictionaries_ 
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string, dictionary, or a list of dictionaries with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
 
 `output_data` 
 : optional - _JSON serializable type or list of dictionaries_ 
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string, dictionary, or a list of dictionaries with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `metadata` 
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
 
+`metrics`
+: optional - _dictionary_
+<br />A dictionary of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, and so on).
+
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on).
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][9].
 
 ### Example
 
@@ -356,6 +364,7 @@ def llm_call(prompt):
             input_data=[{"role": "user", "content": "Hello world!"}],
             output_data=[{"role": "assistant", "content": "How can I help?"}],
             metadata={"temperature": 0, "max_tokens": 200},
+            metrics={"input_tokens": 4, "output_tokens": 6, "total_tokens": 10},
             tags={"host": "host_name"},
         )
     return resp
@@ -370,9 +379,33 @@ def process_message(prompt):
         tags={"host": "host_name"},
     )
     return resp
+
+def perform_embedding():
+    with LLMObs.embedding(model_name="text-embedding-3", name="openai_embedding") as embedding_span:
+        ... # user application logic
+        LLMObs.annotate(
+            span=embedding_span,
+            input_data={"text": "Hello world!"},
+            output_data=[0.0023064255, -0.009327292, ...],
+            metrics={"input_tokens": 4},
+            tags={"host": "host_name"},
+        )
+    return
+
+def similarity_search():
+    with LLMObs.retrieval(name="get_relevant_docs") as retrieval_span:
+        ... # user application logic
+        LLMObs.annotate(
+            span=retrieval_span,
+            input_data="Hello world!",
+            output_data=[{"text": "Hello world is ...", "name": "Hello, World! program", "id": "document_id", "score": 0.9893}],
+            tags={"host": "host_name"},
+        )
+    return
+
 {{< /code-block >}}
 
-## Submitting custom evaluation metrics
+## Submitting evaluation metrics
 
 To submit evaluation metrics for a span to Datadog:
 
@@ -399,50 +432,63 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 : required - _string or numeric type_
 <br />The value of the evaluation metric. Must be a string (for categorical `metric_type`) or integer/float (for numerical/score `metric_type`).
 
-## Persisting a span across contexts
+## LLM integrations
+
+The Python SDK includes out-of-the-box integrations to automatically trace and annotate the LLM calls for:
+
+- OpenAI (using the [OpenAI Python SDK][1]): supports all versions
+- AWS Bedrock Runtime (using [Boto3][2]/[Botocore][3]): supports all versions
+- LangChain LLM/Chat Models/Chains (using [LangChain][4]): supports all versions
+
+This means that you do not need to manually instrument your LLM calls with `LLMObs.llm()` as the SDK will capture them automatically.
+
+## Advanced tracing
+
+### Tracing spans using function decorators
+
+For each span kind, the `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators have the same argument signature as their inline counterparts, with the addition that `name` will default to the name of the given function.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow
+
+@workflow(name="process_message", session_id="<SESSION_ID>", ml_app="<ML_APP>")
+def process_message():
+    ... # user application logic
+    return
+{{< /code-block >}}
+
+### Persisting a span across contexts
 
 To manually start and stop a span across different contexts or scopes:
 
-1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but inline rather than as a context manager. 
+1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but inline rather than as a context manager.
 2. Pass the span object as an argument to other functions.
 3. Stop the span manually with the `span.finish()` method.
 
-### Example
+#### Example
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
-def separate_task(workflow_span):
-    ... # user application logic 
-    workflow_span.finish()
-    return
-
 def process_message():
-workflow_span = LLMObs.workflow(name="process_message")
+    workflow_span = LLMObs.workflow(name="process_message")
     ... # user application logic
     separate_task(workflow_span)
     return
+
+def separate_task(workflow_span):
+    ... # user application logic
+    workflow_span.finish()
+    return
 {{< /code-block >}}
 
-## Tracking user sessions
-
-Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session:
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-
-def process_message():
-    with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>") as workflow_span:
-        ... # user application logic
-    return 
-{{< /code-block >}}
-
-
-## Flushing in serverless environments
+### Flushing in serverless environments
 
 `LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
-## Tracing multiple applications
+### Tracing multiple applications
 
 The SDK supports tracking multiple LLM applications from the same service.
 
@@ -456,7 +502,7 @@ from ddtrace.llmobs import LLMObs
 def process_message():
     with LLMObs.workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>") as workflow_span:
         ... # user application logic
-    return 
+    return
 {{< /code-block >}}
 
 [1]: https://github.com/openai/openai-python
@@ -465,3 +511,4 @@ def process_message():
 [4]: https://github.com/langchain-ai/langchain
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/span_kinds/
+[9]: /getting_started/tagging/
