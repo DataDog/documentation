@@ -44,6 +44,7 @@ tile:
   - Category::AWS
   - Category::Metrics
   - Category::Cloud
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Global Accelerator は、アクセラレータを使用してアプリケーションのパフォーマンスを向上させます。
   media: []
@@ -59,9 +60,9 @@ AWS Global Accelerator は、ローカルおよびグローバルユーザー向
 
 このインテグレーションを有効にすると、すべての Global Accelerator メトリクスを Datadog に表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -71,21 +72,21 @@ AWS Global Accelerator は、ローカルおよびグローバルユーザー向
 2. [Datadog - Amazon Global Accelerator インテグレーション][3]をインストールします。
 
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_globalaccelerator" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Amazon Global Accelerator には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Amazon Global Accelerator には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
