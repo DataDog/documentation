@@ -39,9 +39,7 @@ Different span kinds also have different parent-child relationships. For details
 To trace an LLM application:
 
 1. [Install the LLM Observability SDK][1].
-1. Configure the SDK by doing one of the following:
-    - Add [setup code to your application][17] that provides the name of your application, your Datadog API key, and so on.
-    - [Start your application using `ddtrace-run`][5], providing the required environment variables.
+1. Configure the SDK by providing [the required environment variables][5] in your application startup command.
 1. In your code, use the SDK to create spans representing your application's tasks.
     - See the span creation example below.
     - For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 

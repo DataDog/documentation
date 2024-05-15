@@ -6,6 +6,9 @@ description: "Collect RUM data from your iOS and tvOS applications."
 aliases:
   - /real_user_monitoring/ios
   - /real_user_monitoring/ios/getting_started
+  - /real_user_monitoring/ios/swiftui/
+  - /real_user_monitoring/swiftui/
+  - /real_user_monitoring/mobile_and_tv_monitoring/swiftui/
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
@@ -388,6 +391,52 @@ configuration.sessionSampleRate = 50;
 {{% /tab %}}
 {{< /tabs >}}
 
+### Instrument views
+
+The Datadog iOS SDK for RUM allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+
+Support for SwiftUI was introduced in the SDK in [v1.9.0][15].
+
+To instrument a `SwiftUI.View`, add the following method to your view declaration:
+
+```swift
+import SwiftUI
+import DatadogRUM
+
+struct FooView: View {
+
+    var body: some View {
+        FooContent {
+            ...
+        }
+        .trackRUMView(name: "Foo")
+    }
+}
+```
+
+The `trackRUMView(name:)` method starts and stops a RUM view when the `SwiftUI` view appears and disappears from the screen.
+
+### Instrument tap actions
+
+The Datadog iOS SDK for RUM allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+
+To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
+
+```swift
+import SwiftUI
+import DatadogRUM
+
+struct BarView: View {
+
+    var body: some View {
+        Button("BarButton") { {
+            ...
+        }
+        .trackRUMTapAction(name: "Bar")
+    }
+}
+```
+
 ## Track background events
 
 <div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
@@ -431,3 +480,4 @@ RUM.enable(
 [12]: https://docs.datadoghq.com/real_user_monitoring/ios/web_view_tracking/
 [13]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/
 [14]: https://docs.datadoghq.com/real_user_monitoring/ios/data_collected/
+[15]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.9.0

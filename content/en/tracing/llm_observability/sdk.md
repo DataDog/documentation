@@ -28,36 +28,14 @@ pip install git+https://github.com/DataDog/dd-trace-py.git@main
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
 
-#### In-code setup
-
-Enable LLM Observability through the `LLMOBs.enable()` function, as shown in the example below.
-
-- Use the `integrations` argument to turn on automatic tracing for supported LLM Observability integrations (OpenAI, Bedrock, and LangChain).
-
-- If you do not have Datadog APM set up, set `dd_llmobs_no_apm` to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM.
-
-- When choosing a value for `ml_app`, see [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints.
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-
-LLMObs.enable(
-    ml_app="<YOUR_ML_APP_NAME>",
-    dd_api_key="<YOUR_DATADOG_API_KEY>",
-    dd_site="{{< region-param key="dd_site" code="true" >}}",
-    dd_llmobs_no_apm=True,
-    integrations=[LLMObs.openai, LLMObs.botocore, LLMObs.langchain],
-)
-{{< /code-block >}}
-
 #### Command-line setup
 
-You can also enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
+Enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
 
 **Note**: `ddtrace-run` automatically turns on all LLM Observability integrations.
 
 {{< code-block lang="shell">}}
-DD_SITE={{< region-param key="dd_site" code="true" >}} DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
@@ -83,7 +61,7 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 #### Application naming guidelines
 
-Your application name (the value of `ml_app` or `DD_LLMOBS_APP_NAME`) must start with a letter. It may contain the characters listed below:
+Your application name (the value of `DD_LLMOBS_APP_NAME`) must start with a letter. It may contain the characters listed below:
 
 - Alphanumerics
 - Underscores
