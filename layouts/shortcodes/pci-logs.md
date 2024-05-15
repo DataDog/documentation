@@ -2,8 +2,8 @@
 1. If not already enabled, [Audit Trail][103] is automatically enabled when the org is configured as PCI-compliant. Audit Trail *must* be enabled and remain enabled for PCI DSS compliance.
 1. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the respective configuration file to send logs to the dedicated PCI-compliant endpoint:
 
-- `agent-http-intake-pci.logs.datadoghq.com:443` for agent traffic
-- `http-intake-pci.logs.datadoghq.com:443` for non-agent traffic
+- `agent-http-intake-pci.logs.datadoghq.com:443` for Agent traffic
+- `http-intake-pci.logs.datadoghq.com:443` for non-Agent traffic
 - `pci.browser-intake-datadoghq.com:443` for browser logs
 
 For example, updating the agent configuration file:
