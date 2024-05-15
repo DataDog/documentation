@@ -18,6 +18,39 @@ products:
 
 This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
+multiple layers of visibility for AWS Fargate
+APM and Infra Monitoring as nice-to-have for performance and reliability insights.
+
+<table>
+    <thead>
+    <th>Asset</th>
+    <th>Observability</th>
+    <th>Vulnerabilities and Misconfiguration Remediation</th>
+    <th>Threat Detection and Response</th>
+    </thead>
+    <tr>
+    </tr>
+    <tr>
+        <td>Fargate Application</td>
+        <td>Application Performance Monitoring</td>
+        <td colspan="2">Application Security Management</td>
+    </tr>
+    <tr>
+        <td>Fargate Infrastructure</td>
+        <td>Infrastructure Monitoring</td>
+        <td colspan="2">Cloud Workload Security</td>
+    </tr>
+    <tr>
+        <td colspan="4">Fargate Related Resources</td>
+    </tr>
+    <tr>
+        <td rowspan="2">AWS Account and Resources (IAM Roles & Policies, Databases, S3)</td>
+        <td rowspan="2">Log Management</td>
+        <td>Cloud Security Management</td>
+        <td>Cloud SIEM</td>
+    </tr>
+</table>
+
 ## Cloud Security Management
 
 ### Prerequisites
