@@ -32,7 +32,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 ### Apache
 
-For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the PHP tracer, for example:
+For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
