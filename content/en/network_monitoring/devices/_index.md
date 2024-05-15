@@ -62,7 +62,7 @@ Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for sele
 Datadog supports the following vendors for SD-WAN network monitoring:
 
 - [Meraki SD-WAN][7] (public beta)
-- Cisco SD-WAN (private beta)
+- [Cisco SD-WAN][800] (private beta)
 
 ### Vendor profiles
 
@@ -284,4 +284,5 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [210]: https://docs.datadoghq.com/integrations/snmp_juniper/
 [211]: https://docs.datadoghq.com/integrations/pan_firewall/
 [212]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
-[222]:https://docs.datadoghq.com/integrations/pan_firewall/
+[222]: https://docs.datadoghq.com/integrations/pan_firewall/
+[800]: /integrations/cisco/sd_wan
