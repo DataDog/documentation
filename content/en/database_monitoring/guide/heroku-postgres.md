@@ -8,10 +8,6 @@ further_reading:
   text: "Datadog Heroku Buildpack"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported on {{< region-param key=dd_datacenter >}}.</div>
-{{< /site-region >}}
-
 This guide assumes that you have configured the [Datadog Heroku buildpack][1] in your application dynos.
 
 [Datadog Database Monitoring][2] allows you to view query metrics and explain plans from all of your databases in a single place. This guide covers how to set up Database Monitoring for a [Heroku Postgres managed database][3].

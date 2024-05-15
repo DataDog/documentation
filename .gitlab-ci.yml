@@ -564,16 +564,22 @@ set_redirect_metadata_live:
 
 run_notranslate_tag:schedule:
   <<: *base_template
-  <<: *live_schedule_rules
   stage: post-deploy
   cache: []
   dependencies:
     - build_live
   timeout: 4h
   script:
-    - python -m venv ./venv && source ./venv/bin/active && pip install transifex-python
+    - python3 -m venv ./venv && source ./venv/bin/activate && pip install transifex-python
     - export transifex_api_key="$(get_secret 'transifex_api_key')"
-    - source ./venv/bin/active && python3 ./local/bin/py/add_notranslate_tag.py
+    - source ./venv/bin/activate && python3 ./local/bin/py/add_notranslate_tag.py
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+      allow_failure: true
+    - when: never
 
 # run_notranslate_tag:manual:
 #   <<: *base_template

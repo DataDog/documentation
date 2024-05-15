@@ -5,10 +5,6 @@ kind: documentation
 title: SQL Server の設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 ### サポートされる SQL Server バージョン
 
 |                 | セルフホスト | Azure     | Amazon RDS | Google Cloud SQL | 注 |
@@ -35,7 +31,7 @@ Agent インテグレーションのオーバーヘッドテストは、Amazon E
 | 最小収集間隔のチェック        | 15 秒                 |
 | クエリメトリクスの収集間隔    | 60s                 |
 | クエリアクティビティの収集間隔 | 10 秒                 |
-| 設定収集間隔         | 600 秒                |
+| 設定の収集間隔         | 600 秒                |
 
 * Agent テストのバージョン: `7.50.2`
 * CPU: 平均で CPU の約 1% を使用
