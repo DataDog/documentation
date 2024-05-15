@@ -6,4 +6,4 @@ type: multi-code-lang
 
 For information about supported OS and platforms for your application, choose a platform:
 
-{{< partial name="rum/rum-getting-started-mobile-setup.html" >}}
+{{< partial name="rum/rum-getting-started-mobile-supported-versions.html" >}}
