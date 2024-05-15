@@ -50,7 +50,7 @@ Datadog does not support Desktop (Windows, Mac, or Linux), console, or web deplo
 
 To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][2].
 
-#### Sample RUM sessions
+### Sample RUM sessions
 
 You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
 
