@@ -16,13 +16,13 @@ further_reading:
   text: "Learn more about Security notification variables"
 ---
 
-This topic explains how to create custom Datadog Agent and detection rules for [CMS Threats][8].
+This topic explains how to create custom Datadog Agent and detection rules for [CSM Threats][8].
 
 In addition to the out of the box (OOTB) [default Agent and detection rules][7], you can write custom Agent and detection rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
 ## Custom detection rules summary
 
-Understanding the dependency detection rules have on Agent rules is important when you want to use custom rules. Detection rules are composed of existing, deployed Agent rules and additional expression parameters. 
+Custom detection rules depend on Agent rules. They are composed of existing, deployed Agent rules and additional expression parameters. 
 
 There are two use cases:
 
@@ -34,17 +34,17 @@ For more information, see [CSM Threats Detection Rules][7].
 You can create custom rules using these methods:
 
 - **Simple:** Use the **Simple rule creator** to create the custom Agent and detection rules together.
-  - For steps on using the **Simple rule creator**, see [Create the custom agent and detection rules together](#create-the-custom-agent-and-detection-rules-together).
+  - For steps on using the **Simple rule creator**, see [Create the custom Agent and detection rules together](#create-the-custom-agent-and-detection-rules-together).
 - **Advanced:**  Create custom Agent and detection rules individually by defining their threat detection expressions. 
   - For steps on this method, see [Create a custom agent rule](#create-a-custom-agent-rule) and [Create a custom detection rule](#create-a-custom-detection-rule).
 
-## Create the custom agent and detection rules together
+## Create the custom Agent and detection rules together
 
 The **Simple rule creator** option helps you create the Agent and dependent detection rules together, and ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than the advanced method of creating the Agent and detection rules separately.
 
 As you define the rules using this tool, the threat expressions generated for these rules are displayed in the tool.
 
-To use the Simple rule creator:
+To use the simple rule creator:
 
 1. In [Agent Configuration][4] or [Threat Detection Rules][3], select **New Rule**, and then select **Simple rule creator**.
 2. Define the detection.
@@ -54,14 +54,14 @@ To use the Simple rule creator:
 3. Specify more conditions. Enter any arguments to add to the threat rule expression. For example, the argument `foo` is added as `process.argv in ["foo"]`.
 4. Set severity and notification lists. 
    - Select the severity for the signal generated when this threat is detected. 
-   - Select notification lists to notify when a signa is generated.
-5. Add rule name and description.
+   - Select notification lists to notify when a signal is generated.
+5. Add the rule name and description.
    
    Here's an example of a new FIM rule, including the expressions generated for each rule.
 
     {{< img src="/security/csm/csm_threats_simple_rule_creator.png" alt="Simple rule creator example" style="width:100%;" >}}
 
-6. Select **Create `<<NUMBER>>` Rules**.
+6. Select **Create `<NUMBER>` Rules**.
 7. In **Generate Rules**, select **Confirm**. The rules are generated.
 8. Select **Finish**. The [Agent Configuration][3] page displays the new rules.
 9. In [Agent Configuration][3], select **Deploy Agent Policy**.
@@ -69,7 +69,7 @@ To use the Simple rule creator:
 
 ## Create a custom Agent rule
 
-You can create an individual custom Agent rule, deploy it as a [new Agent policy](#deploy-the-policy-in-your-environment), and then reference it in a [custom detection rule](#create-a-custom-detection-rule).
+You can create an individual custom Agent rule, deploy it as a [new Agent policy](#deploy-the-policy-in-your-environment), and reference it in a [custom detection rule](#create-a-custom-detection-rule).
 
 1. On the [**Agent Configuration**][4] page, select **New Rule**, and then select **Advanced rule creation**.
 2. Add a name and description for the rule.
