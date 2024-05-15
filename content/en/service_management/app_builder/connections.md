@@ -108,12 +108,10 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][11].
 
-[1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/app-builder
 [3]: https://app.datadoghq.com/app-builder/connections
 [4]: /service_management/app_builder/auth/#restrict-access-to-a-specific-connection
 [6]: /integrations/
-[8]: /service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/app-builder/apps/list
-[10]: /service_management/workflows/actions/http/
+[10]: /service_management/app_builder/http_request/
 [11]: https://datadoghq.slack.com/
