@@ -84,6 +84,39 @@ Additional cloud provider-specific attributes are also mapped.
 | `app.kubernetes.io/part-of` | `kube_app_part_of` |
 | `app.kubernetes.io/managed-by` | `kube_app_managed_by` |
 
+## Metrics attribute mapping
+
+In the case of metrics, by default, Datadog products only map the OpenTelemetry resource attributes listed here to Datadog metric tags. If you want to map all resource attributes to tags, you can enable the `metrics::resource_attributes_as_tags` setting:
+
+{{< tabs >}}
+{{% tab "Datadog exporter" %}}
+
+```yaml
+exporters:
+  datadog:
+    # Other configuration goes here...
+    metrics:
+      # Add all resource attributes as tags for metrics
+      resource_attributes_as_tags: true
+```
+
+{{% /tab %}}
+
+{{% tab "Datadog Agent" %}}
+
+```yaml
+otlp_config:
+  # Other configuration goes here...
+  metrics:
+    # Add all resource attributes as tags for metrics
+    resource_attributes_as_tags: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Enabling this option will add both the OpenTelemetry resource attributes and the Datadog semantic conventions to the metric tags.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
