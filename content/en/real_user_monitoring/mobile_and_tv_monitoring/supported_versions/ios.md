@@ -85,3 +85,15 @@ We currently support integration of the SDK using the following dependency manag
 The Datadog RUM SDK depends on the following third-party library:
 
 - [PLCrashReporter][7] 1.11.1
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/microsoft/plcrashreporter/issues/288
+[2]: https://developer.apple.com/news/?id=jd9wcyov
+[3]: /logs/log_collection/ios/?tab=swiftpackagemanagerspm
+[4]: /logs/log_collection/ios/?tab=cocoapods
+[5]: /logs/log_collection/ios/?tab=carthage
+[6]: https://github.com/DataDog/dd-sdk-ios/tree/develop/DatadogExtensions/Alamofire
+[7]: https://github.com/microsoft/plcrashreporter

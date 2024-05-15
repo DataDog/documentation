@@ -13,6 +13,9 @@ further_reading:
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "RUM & Session Replay"
+  - link: "/real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/"
+    tag: "Documentation"
+    text: "RUM iOS and tvOS monitoring supported versions"
 ---
 
 If you have not set up the RUM iOS SDK yet, follow the [in-app setup instructions][1] or refer to the [RUM iOS setup documentation][2].

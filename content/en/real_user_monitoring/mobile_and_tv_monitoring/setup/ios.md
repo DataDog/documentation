@@ -25,6 +25,9 @@ further_reading:
  - link: "/real_user_monitoring/ios/swiftui/"
    tag: "Documentation"
    text: "Learn about instrumenting SwiftUI applications"
+ - link: "/real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/"
+   tag: "Documentation"
+   text: "RUM iOS and tvOS monitoring supported versions"
 ---
 
 ## Overview
