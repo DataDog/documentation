@@ -6,7 +6,7 @@ further_reading:
   text: 신서틱(Synthetic) 모니터링에 대해 알아보기
 - link: /continuous_testing/explorer/
   tag: 설명서
-  text: 신서틱(Synthetic) 모니터링 및 연속 테스트 탐색기에 대해 알아보기
+  text: 신서틱 모니터링 및 테스트 결과 탐색기에 대해 자세히 알아보기
 - link: /continuous_testing/explorer/saved_views
   tag: 설명서
   text: 저장된 보기에 대해 알아보기
