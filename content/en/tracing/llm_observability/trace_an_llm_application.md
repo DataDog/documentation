@@ -55,18 +55,20 @@ Optionally, you can also:
 
 ### Span creation example
 
-To create a span, use the LLM Observability SDK's `LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4]. 
+To create a span, use the LLM Observability SDK's `llmobs.decorators.<SPAN_KIND>()` as a function decorator, replacing `<SPAN_KIND>` with the desired [span kind][4].
 
 The example below creates a workflow span:
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
 
+@workflow(name="process_message")
 def process_message():
-    with LLMObs.workflow(name="process_message") as workflow_span:
-        ... # user application logic
+    ... # user application logic
     return
 {{< /code-block >}}
+
+For more information on alternative tracing methods and tracing features, see the [SDK documentation][12].
 
 [1]: /tracing/llm_observability/sdk/#installation
 [2]: https://app.datadoghq.com/llm/traces
