@@ -423,23 +423,22 @@ See [Supported versions][19] for a list operating system versions and platforms 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://github.com/microsoft/plcrashreporter/issues/288
 [2]: https://developer.apple.com/xcode/
 [3]: https://developer.apple.com/news/?id=jd9wcyov
-[4]: https://docs.datadoghq.com/logs/log_collection/ios/?tab=swiftpackagemanagerspm
-[5]: https://docs.datadoghq.com/logs/log_collection/ios/?tab=carthage
+[4]: /logs/log_collection/ios/?tab=swiftpackagemanagerspm
+[5]: /logs/log_collection/ios/?tab=carthage
 [6]: https://github.com/DataDog/dd-sdk-ios/tree/develop/DatadogExtensions/Alamofire
 [7]: https://github.com/microsoft/plcrashreporter
 [8]: https://app.datadoghq.com/rum/application/create
-[9]: https://docs.datadoghq.com/real_user_monitoring/ios/web_view_tracking/
-[10]: https://docs.datadoghq.com/real_user_monitoring/ios/data_collected/
-[11]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[12]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
-[13]: https://docs.datadoghq.com/getting_started/tagging/using_tags/#rum--session-replay
-[14]: https://docs.datadoghq.com/real_user_monitoring/ios/advanced_configuration/#initialization-parameters
-[15]: https://docs.datadoghq.com/real_user_monitoring/ios/advanced_configuration/#set-tracking-consent-gdpr-compliance
+[9]: /real_user_monitoring/ios/web_view_tracking/
+[10]: /real_user_monitoring/ios/data_collected/
+[11]: /account_management/api-app-keys/#api-keys
+[12]: /account_management/api-app-keys/#client-tokens
+[13]: /getting_started/tagging/using_tags/#rum--session-replay
+[14]: /real_user_monitoring/ios/advanced_configuration/#initialization-parameters
+[15]: /real_user_monitoring/ios/advanced_configuration/#set-tracking-consent-gdpr-compliance
 [16]: https://github.com/DataDog/dd-sdk-ios
-[17]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/
-[18]: https://docs.datadoghq.com/real_user_monitoring/explorer/
-[19]:https://docs.datadoghq.com/logs/log_collection/ios/?tab=cocoapods
+[17]: /real_user_monitoring/error_tracking/ios/
+[18]: /real_user_monitoring/explorer/
+[19]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
