@@ -24,7 +24,7 @@ The Datadog Agent evaluates system activity on the Agent host. When activity mat
 
 If an event matches an Agent detection rule *and* a backend Threat detection rule, a signal is created and displayed in [Signals][11] (`Agent detection rule + backend Threat detection rule = Signal`).
 
-With the [Agent Events explorer][13], you can investigate Agent Events separately from signals. You can review the host path where the event happened, and view its attributes, metrics, and processes. You can also review the Agent rule that generated the event and view triage and response instructions.
+With the [Agent Events explorer][13], you can investigate Agent Events separately from signals. You can review the host path where the event happened, and view the event's attributes, metrics, and processes. You can also review the Agent rule that generated the event and view triage and response instructions.
 
 ## Proactively block threats with Active Protection
 
