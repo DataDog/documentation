@@ -64,8 +64,8 @@ If you have navigated away from the report that you created in the setup prerequ
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
-* **Region**: This is the region your bucket is located. For example, `us-east-1`.
 * **Bucket Name**: This is the name of the **S3 bucket** in the Data export storage settings section.
+* **Bucket Region**: This is the region your bucket is located. For example, `us-east-1`.
 * **Export Path Prefix**: This is the **S3 path prefix** in the Data export storage settings section.
 * **Export Name**: This is the **Export name** in the Export name section.
 
