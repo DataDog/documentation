@@ -18,10 +18,7 @@ further_reading:
   tag: "Documentation"
   text: "Recommended NPM Monitors"
 ---
-
-{{< callout btn_hidden="true" header="Join the Beta!">}}
-The Network Performance monitor is in public beta. 
-{{< /callout >}}
+<div class="alert alert-info">The Network Performance monitor is in public beta.</div>
 
 ## Overview
 
@@ -111,14 +108,6 @@ Retransmission occurs when packets are either damaged or lost and indicate an un
 DNS failure monitor tracks DNS server performance to help you identify server-side and client-side DNS issues. Use this monitor to alert you if the sum of DNS failures passes a threshold. 
 
 {{< img src="monitors/monitor_types/network_performance/common_monitors_dns_failure.png" alt="Example configuration for DNS failure, set Query A to measure DNS Failures" style="width:100%;" >}}
-
-### RTT
-Need description and image 
-
-
-### Latency
-Need description and image
-
 
 ## Further Reading
 
