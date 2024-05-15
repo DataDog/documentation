@@ -24,6 +24,7 @@ categories:
 - AWS
 - クラウド
 - モニター
+- data stores
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -44,6 +45,8 @@ tile:
   - Category::AWS
   - Category::Cloud
   - Category::Metrics
+  - Category::Data Stores
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Amazon MemoryDB は、フルマネージドの Redis 互換のインメモリデータベースサービスです。
   media: []
@@ -59,9 +62,9 @@ Amazon MemoryDB for Redis は、高いインメモリパフォーマンスと複
 
 このインテグレーションを有効にすると、Datadog にすべての MemoryDB メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -70,21 +73,21 @@ Amazon MemoryDB for Redis は、高いインメモリパフォーマンスと複
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MemoryDB` が有効になっていることを確認します。
 2. [Datadog - Amazon MemoryDB インテグレーション][3]をインストールします。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_memorydb" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon MemoryDB インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon MemoryDB インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
