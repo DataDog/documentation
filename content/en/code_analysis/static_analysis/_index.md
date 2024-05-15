@@ -65,13 +65,14 @@ Static Analysis currently supports scanning the following languages and technolo
 
 ### IDEs
 {{< whatsnext desc="With Static Analysis, you can identify code vulnerabilities as you edit a file in your Integrated Development Environment (IDE). See the documentation for information about the following integrations:">}}
-    {{< nextlink href="developers/ide_integrations/idea/" >}}Datadog Plugin for IntelliJ IDEA{{< /nextlink >}}
-    {{< nextlink href="developers/ide_integrations/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/visual_studio/" >}}Datadog Extension for Visual Studio{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results
 
-After you configure your CI pipelines to run the Datadog Static Analyzer, violations are summarized per repository on the [Code Analysis page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Analysis. 
+After you configure your CI pipelines to run the Datadog Static Analyzer, violations are summarized per repository on the [**Code Analysis Repositories** page][1]. Click on a repository to analyze **Code Vulnerabilities** and **Code Quality** results from Static Analysis. 
 
 * The **Code Vulnerabilities** tab contains the violations found by Datadog's rules in the [Security category][2].
 * The **Code Quality** tab contains the violations found by Datadog's rules in the [Best Practices, Code Style, Error Prone, or Performance categories][3].
@@ -114,7 +115,7 @@ Add an ignore rule in your `static-analysis.datadog.yml` file. The example below
 
 ```
 rulesets:
-  - javascript-express
+  - javascript-express:
     rules:
       reduce-server-fingerprinting:
         ignore: "**"
@@ -125,7 +126,7 @@ Add an ignore rule in your `static-analysis.datadog.yml` file. The example below
 
 ```
 rulesets:
-  - javascript-express
+  - javascript-express:
     rules:
       reduce-server-fingerprinting:
         ignore: "ad-server/src/app.js"

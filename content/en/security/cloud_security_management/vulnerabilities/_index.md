@@ -25,6 +25,10 @@ further_reading:
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management Vulnerabilities is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep [observability context][6] and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. 
@@ -63,6 +67,11 @@ The [Vulnerabilities Explorer][1] also offers triaging options for detected vuln
 
 {{< img src="security/vulnerabilities/csm_remediate.png" alt="Details explorer of a specific vulnerability highlighting the ability to remediate and assign to team member" width="100%">}}
 
+## Video walkthrough
+
+The following video provides an overview of how to enable and use CSM Vulnerabilities:
+
+{{< img src="security/csm/how-to-use-csm-vulnerabilities.mp4" alt="Video that provides an overview of how to install and use CSM Vulnerabilities" video=true >}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images

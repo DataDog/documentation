@@ -43,17 +43,17 @@ There are several configuration mechanisms that you can use in these scenarios t
 - If you are authoring a risky commit and you'd like to run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
 - You can add a list of [excluded branches](#excluded-branches), which disables Intelligent Test Runner in those branches.
 
-
 ## Set up a Datadog library
 
 Before setting up Intelligent Test Runner, you must configure [Test Visibility][4] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
 
 {{< whatsnext desc="Choose a language to set up Intelligent Test Runner in Datadog:" >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration

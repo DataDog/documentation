@@ -34,17 +34,18 @@ title: 웹 및 모바일 애플리케이션에 대한 오류 추적
 
 RUM 오류 이슈에는 스택 트레이스, 사용자 세션 타임라인, 메타데이터(사용자 위치, 버전, 충돌 보고서에 포함된 모든 커스텀 속성 포함)가 포함됩니다.
 
-[오류 추적 탐색기][3] 문서에서 주요 오류 추적 기능을 살펴보세요. RUM용 오류 추적 탐색기를 보려면 [**UX Monitoring** > **Error Tracking**][1]으로 이동하세요.
+[오류 추적 탐색기][3] 문서에서 주요 오류 추적 기능을 살펴보세요. RUM용 오류 추적 탐색기를 보려면 [**Digital Experience** > **Error Tracking**][1]으로 이동합니다.
 
 ## 설정
 
-{{< whatsnext desc="RUM용 Datadog 오류 추적 기능을 시작하려면 해당 설명서를 참조하여 프레임워크에 대한 소스 맵을 업로드하세요.:" >}}
+{{< whatsnext desc="RUM에 대한 Datadog 오류 추적을 시작하려면 해당 설명서를 참조하세요:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

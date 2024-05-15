@@ -130,7 +130,7 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configured to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
+To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
 {{< tabs >}}
 {{% tab "Host" %}}

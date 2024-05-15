@@ -9,7 +9,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "https://www.datadoghq.com/blog/aws-codepipeline-ci-visibility/"
       tag: "Blog"
       text: "Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility"
@@ -30,9 +30,12 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
-| [Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
+| *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
+| **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#enable-log-correlation). |
+| [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 
-**Note**: AWS CodePipeline running pipelines don't have Git information until they have finished.
+*AWS CodePipeline running pipelines don't have Git information until they have finished.\
+**AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
 
 ## Configure the Datadog integration
 
@@ -111,11 +114,17 @@ Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.Pipe
 
 The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. For more information on working with variables, see the [official AWS guide][10].
 
+### Enable log correlation
+
+The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see the [AWS log forwarding guide][16].
+
+<div class="alert alert-warning"><strong>Note</strong>: Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
+
 ## Visualize pipeline data in Datadog
 
-View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after the pipelines finish.
+View your data on the [**CI Pipeline List**][11] and [**Executions**][12] pages after the pipelines finish.
 
-**Note**: The Pipelines page only shows data for the [default branch][13] of each repository.
+The **CI Pipeline List** page shows data for only the [default branch][13] of each repository.
 
 ## Further reading
 
@@ -136,3 +145,5 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 [13]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
 [14]: /glossary/#partial-retry
 [15]: /glossary/#running-pipeline
+[16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[17]: /glossary/#approval-wait-time
