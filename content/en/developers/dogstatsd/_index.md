@@ -145,7 +145,7 @@ StatsD metrics collection is enabled by default on [Unix domain socket][1]. To s
             enabled: true
     ```
 
-    This enables the Agent to collect StatsD metrics UDP on port `8125`.
+    This enables the Agent to collect StatsD metrics over UDP on port `8125`.
 
 2. Apply the change:
 
