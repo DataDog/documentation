@@ -1856,11 +1856,21 @@ menu:
       parent: error_tracking
       identifier: error_tracking_apm
       weight: 6
+    - name: Exception Replay
+      url: error_tracking/apm/exception_replay
+      parent: error_tracking_apm
+      identifier: error_tracking_apm_exception_replay
+      weight: 601
     - name: Logs
       url: error_tracking/logs
       parent: error_tracking
       identifier: error_tracking_logs
       weight: 7
+    - name: Manage Data Collection
+      url: error_tracking/logs/manage_data_collection
+      parent: error_tracking_logs
+      identifier: error_tracking_logs_manage_data_collection
+      weight: 701
     - name: Real User Monitoring
       url: error_tracking/rum
       parent: error_tracking
