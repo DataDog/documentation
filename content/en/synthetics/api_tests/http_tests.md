@@ -182,6 +182,9 @@ The most common errors include the following:
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
+`Error performing HTTP/2 request`
+: The request couldn't be performed. [See the dedicated error page for more information][16].
+
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
 
@@ -230,3 +233,4 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role
+[16]: /synthetics/api_tests/errors/#http-errors
