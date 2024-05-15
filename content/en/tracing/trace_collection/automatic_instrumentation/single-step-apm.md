@@ -65,7 +65,7 @@ For a Docker Linux container:
 2. Configure the Agent in Docker:
    ```shell
    docker run -d --name dd-agent \
-     -e DD_API_KEY=${YOUR_DD_API_KEY} \
+     -e DD_API_KEY=<YOUR_DD_API_KEY> \
      -e DD_APM_ENABLED=true \
      -e DD_ENV=<AGENT_ENV> \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
