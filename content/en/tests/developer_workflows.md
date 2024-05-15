@@ -27,7 +27,7 @@ further_reading:
 
 [Test Visibility][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
 
-- [Enable test summaries in GitHub Pull Request comments](#test-summaries-in-github-pull-requests)
+- [Enable test summaries in GitHub pull request comments](#test-summaries-in-github-pull-requests)
 - [Create and open GitHub issues](#create-and-open-github-issues) 
 - [Create Jira issues through Case Management](#create-jira-issues)
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
@@ -36,11 +36,11 @@ These features are available for all Test Visibility customers, and they do not 
 
 ## Test summaries in GitHub pull requests
 
-Datadog integrates with GitHub to show test results summaries directly in your pull requests. The summary contains an overview of the tests executions, flakiness information, error messages for failed tests, performance regressions, and code coverage changes in pull request comments.
+Datadog integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, error messages for failed tests, performance regressions, and code coverage changes.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
-With this report, developers get instant feedback about their tests results, including the ability to debug any failed or flaky tests without leaving the pull request view.
+With this information, developers get instant feedback about their tests results, and they can debug any failed or flaky tests without leaving the pull request view.
 
 <div class="alert alert-info">This integration is only available for test services hosted on `github.com`.</div>
 
@@ -51,12 +51,12 @@ You can enable test summaries in pull requests with the following steps:
 1. Install the [GitHub integration][4]:
    1. Navigate to the **Configuration** tab on the [GitHub integration tile][6] and click **+ Create GitHub App**.
    2. Give the application read and write permissions for pull requests.
-2. Enable test summaries for one or more test services. It can be done from the [Test Service Settings page][3] or from the commit/branch page.
+2. Enable test summaries for one or more test services. You can do this from the [Test Service Settings page][3] or from the commit/branch page.
 
 ### Test service settings page
 
-1. Navigate to the [Test Service Settings page][3] and search for the repository or test service.
-2. Click on the toggle under the **GitHub Comments** column for the desired service.
+1. Navigate to the [Test Service Settings page][3] and search for the test service you want to enable. You can also search by repository.
+2. For the desired service, enable the toggle under the **GitHub Comments** column.
 
 {{< img src="ci/enable-settings-github-comments.png" alt="The Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
 
