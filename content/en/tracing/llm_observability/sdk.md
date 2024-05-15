@@ -59,6 +59,49 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
 
+#### In-code setup
+
+Enable LLM Observability programatically through the `LLMOBs.enable()` function instead of running with the `ddtrace-run` command. **Note**: This setup method will not work if used with `ddtrace-run`.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+LLMObs.enable(
+  ml_app="<YOUR_ML_APP_NAME>",
+  dd_api_key="<YOUR_DATADOG_API_KEY>",
+  dd_site=“<YOUR_DATADOG_SITE>”,
+  dd_llmobs_no_apm=True,
+  integrations=["langchain", "openai"],
+)
+{{< /code-block >}}
+
+`ml_app`
+: optional - _string_
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this will default to the value of `DD_LLMOBS_ML_APP`.
+
+`integrations`
+: optional - _list_ 
+<br />A list of integration names to enable automatically tracing LLM calls for (e.g. `["openai", "langchain"]`). See [LLM integrations](#llm-integrations) for more information about Datadog's supported LLM integrations. **Note**: if not provided, all supported LLM integrations will be enabled by default. To disable all integrations, pass in an empty list `[]`.
+
+`dd_llmobs_no_apm`
+: optional - _boolean_ 
+<br />Only required if you are not a Datadog APM customer, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM. If not provided, this will default to the value of `DD_LLMOBS_NO_APM`.
+
+`dd_site`
+: optional - _string_ 
+<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this will default to the value of `DD_SITE`.
+
+`dd_api_key`
+: optional - _string_ 
+<br />Your Datadog API key. If not provided, this will default to the value of `DD_API_KEY`.
+
+`dd_env`
+: optional - _string_
+<br />The name of your application's environment (e.g. `prod`, `pre-prod`, `staging`). If not provided, this will default to the value of `DD_ENV`.
+
+`dd_service`
+: optional - _string_
+<br />The name of the service used for your application. If not provided, this will default to the value of `DD_SERVICE`.
+
 #### Application naming guidelines
 
 Your application name (the value of `DD_LLMOBS_APP_NAME`) must start with a letter. It may contain the characters listed below:
@@ -436,9 +479,9 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 The Python SDK includes out-of-the-box integrations to automatically trace and annotate the LLM calls for:
 
-- OpenAI (using the [OpenAI Python SDK][1]): supports all versions
-- AWS Bedrock Runtime (using [Boto3][2]/[Botocore][3]): supports all versions
-- LangChain LLM/Chat Models/Chains (using [LangChain][4]): supports all versions
+- `openai` - OpenAI (using the [OpenAI Python SDK][1]): supports all versions
+- `bedrock` - AWS Bedrock Runtime (using [Boto3][2]/[Botocore][3]): supports all versions
+- `langchain` - LangChain LLM/Chat Models/Chains (using [LangChain][4]): supports all versions
 
 This means that you do not need to manually instrument your LLM calls with `LLMObs.llm()` as the SDK will capture them automatically.
 
