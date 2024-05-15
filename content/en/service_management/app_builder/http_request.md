@@ -14,7 +14,10 @@ further_reading:
 
 Use the **Make request** action to make a custom request to an HTTP endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges API][1] for details.
 
-To add an HTTP Request, under **Queries**, click **+** (plus) and search for `HTTP`. Select the **Make request** action to add it to your app.
+To add an HTTP request:
+
+1. In your app, under **Queries**, click **+** (plus) and search for `HTTP`.
+1. Select the **Make request** action to add it to your app.
 
 Specify the request method and any necessary [authentication][2]. Read the sections below for further information about the available configuration options.
 
