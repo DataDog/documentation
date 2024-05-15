@@ -22,85 +22,31 @@ further_reading:
 
 Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services.
 
-This guide demonstrates how to send observability data from a sample e-commerce application, Storedog, to Datadog.
+This guide demonstrates how to get started with APM from start to finish.
 
-Follow this guide to:
+At a high level, you need to:
 
-1. Instrument the Storedog application.
-2. Run Storedog in a local Kubernetes environment using minikube.
+1. Set up Datadog APM to send observability data to Datadog.
+2. Run your application to generate observability data.
 3. Explore the collected observability data in Datadog.
 
-## Prerequisites
+## Set up Datadog APM
 
-Before you begin, you first need to:
+To set up Datadog APM without needing to touch your application code, use Single Step APM Instrumentation.
 
-1. Create a [Datadog account][1], if you haven't already.
-1. Install [minikube][2].
-1. Install [Helm][3] to deploy the Datadog Operator.
-1. Install [Kubectl CLI][4] to install the Datadog Agent.
-1. Clone the sample Storedog application:
-   ```shell
-   git clone https://github.com/DataDog/storedog.git
-   ```
+Use this approach to automatically:
 
-## Instrument the application
+- Install the Datadog Agent.
+- Enable Datadog APM.
+- Instrument your application.
 
-Enable APM with Single Step Instrumentation. This installs the Datadog Agent and automatically instruments the Storedog application.
+To complete this, follow the steps in Single Step APM Instrumentation.
 
-1. Install the [Datadog Operator][5] v1.5.0+ with Helm:
-   ```shell
-   helm repo add datadog https://helm.datadoghq.com
-   helm install my-datadog-operator datadog/datadog-operator
-   ```
-1. Create a Kubernetes secret to store your Datadog [API key][6]:
-   ```shell
-   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
-   ```
-1. Create a `datadog-agent.yaml` file with the following configuration:
-   ```yaml
-   apiVersion: datadoghq.com/v2alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-   spec:
-     global:
-       credentials:
-         apiSecret:
-           secretName: datadog-secret
-           keyName: api-key
-     features:
-       apm:
-         instrumentation:
-           enabled: true
-   ```
-1. Apply the configuration:
-   ```shell
-   kubectl apply -f datadog-agent.yaml
-   ```
-1. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
+<div class="alert alert-info">There are also in-app instructions when you <a href="https://app.datadoghq.com/account/settings/agent/latest">install the Datadog Agent</a> and select <strong>Enable APM Instrumentation</strong>.</div>
 
 ## Run the application
 
-Generate observability data by running Storedog in Minikube:
-
-1. Start minikube:
-  ```shell
-  minikube start
-  ```
-2. Apply the Kubernetes manifests:
-  ```shell
-  kubectl apply -f k8s-manifests/
-  ```
-3. Wait for the pods to start running:
-  ```shell
-  kubectl get pods
-  ```
-4. Access Storedog by opening the URL from the following command in your browser:
-  ```shell
-  minikube service storedog-frontend --url
-  ```
-5. Interact with the application to generate observability data.
-
+After you complete the setup instructions, your application automatically sends observability data to Datadog. Because you started with Single Step APM Instrumentation, your application is instrumented at runtime. Execute and interact with your application to generate observability data.
 
 ## Explore observability data in Datadog
 
@@ -108,6 +54,10 @@ Generate observability data by running Storedog in Minikube:
 2. Select a service to view its performance metrics, such as latency, throughput, and error rates.
 3. Go to **APM** > **Traces**. Select a trace to see its details, including the flame graph, which helps identify performance bottlenecks.
 4. Explore additional APM features, like [App Analytics][link-to-app-analytics-docs], [Trace Search][link-to-trace-search-docs], and [Watchdog][link-to-watchdog-docs], to gain deeper insights into Storedog's performance.
+
+## Advanced APM setup
+
+If there is 
 
 ## Further reading
 
