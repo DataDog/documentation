@@ -86,7 +86,7 @@ Additional cloud provider-specific attributes are also mapped.
 
 ## Metrics attribute mapping
 
-In the case of metrics, by default, Datadog products only map the OpenTelemetry resource attributes listed here to Datadog metric tags. If you want to map all resource attributes to tags, you can enable the `metrics::resource_attributes_as_tags` setting:
+For metrics, by default, Datadog only maps the OpenTelemetry resource attributes listed in the previous sections to Datadog metric tags. To map all resource attributes to tags, enable the `metrics::resource_attributes_as_tags` setting:
 
 {{< tabs >}}
 {{% tab "Datadog exporter" %}}
@@ -115,7 +115,7 @@ otlp_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-Enabling this option will add both the OpenTelemetry resource attributes and the Datadog semantic conventions to the metric tags.
+Enabling this option adds both the OpenTelemetry resource attributes and the Datadog semantic conventions to the metric tags.
 
 ## Further reading
 
