@@ -6,7 +6,7 @@
 - `http-intake-pci.logs.datadoghq.com:443` for non-Agent traffic
 - `pci.browser-intake-datadoghq.com:443` for browser logs
 
-For example, updating the agent configuration file:
+For example, add the following lines to the Agent configuration file:
 ```
 logs_config:
   logs_dd_url: <agent-http-intake-pci.logs.datadoghq.com:443>
