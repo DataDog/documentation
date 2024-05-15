@@ -65,16 +65,6 @@ To triage an event:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/rules/
-[2]: /account_management/audit_trail/events/#cloud-security-platform-events
-[3]: /account_management/rbac/permissions/#cloud-security-platform
-[4]: https://app.datadoghq.com/security?product=cws
-[5]: /service_management/incident_management/
-[6]: /service_management/case_management/
-[7]: /security/cloud_security_management/workflows
-[8]: /service_management/workflows
-[9]: /security/threats/
-[10]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [11]: https://docs.datadoghq.com/security/threats/security_signals
 [12]: /security/default_rules/#cat-cloud-security-management
 [13]: https://app.datadoghq.com/security/agent-events
