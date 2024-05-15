@@ -418,7 +418,7 @@ The `trackRUMView(name:)` method starts and stops a RUM view when the `SwiftUI` 
 
 ### Instrument tap actions
 
-The Datadog iOS SDK for RUM allows you to instrument actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+The Datadog iOS SDK for RUM allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
 
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 
