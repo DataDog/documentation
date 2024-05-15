@@ -16,7 +16,7 @@ products:
 
 <div class="alert alert-warning">Cloud Security Management on AWS Fargate is in private beta.</div>
 
-This guide walks you through configuring [Amazon Elastic Container Service (Amazon ECS)][1] and [Amazon Elastic Kubernetes Service (Amazon EKS)][2] on AWS Fargate for [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5].
+This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
 ## Cloud Security Management
 
@@ -210,6 +210,28 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Verify that the Agent is sending events to CSM
+
+When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+
+Another method to verify that the Agent is sending events to CSM is to manually trigger an AWS Fargate security signal.
+
+In the task definition, replace the "workload" container with the following:
+
+{{< code-block lang="yaml" collapsible="true" >}}
+            "name": "cws-signal-test",
+            "image": "ubuntu:latest",
+            "entryPoint": [
+                "/cws-instrumentation-volume/cws-instrumentation",
+                "trace",
+                "--verbose",
+                "--",
+                "/usr/bin/bash",
+                "-c",
+                "apt update;apt install -y curl; while true; do curl https://google.com; sleep 5; done"
+            ],
+{{< /code-block >}}
 
 ## Application Security Management
 
