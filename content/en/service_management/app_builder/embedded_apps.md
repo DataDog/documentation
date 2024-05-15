@@ -3,8 +3,8 @@ title: Embedded Apps
 kind: documentation
 disable_toc: false
 further_reading:
-- link: "/service_management/workflows/actions_catalog/"
-  tag: "Documentation"
+- link: "https://app.datadoghq.com/app-builder/action-catalog"
+  tag: "App"
   text: "Actions Catalog"
 ---
 
