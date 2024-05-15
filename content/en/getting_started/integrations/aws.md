@@ -167,6 +167,10 @@ Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on 
 
 Use the [Amazon ECS on AWS Fargate documentation][28] to run the Agent as a container in the same task definition as your application. **Note**: Datadog Agent version 6.1.1 or higher is needed to take full advantage of the Fargate integration.
 
+#### AWS Batch with Fargate orchestration type
+
+Use the [Amazon ECS on AWS Fargate for AWS Batch documentation][58] to run the Agent as a container in the same AWS Batch job definition as your application. **Note**: Datadog Agent version 6.1.1 or higher is needed to take full advantage of the Fargate integration.
+
 #### EKS
 
 You don't need any specific configuration for Amazon Elastic Kubernetes Service (EKS), as mentioned in the [Kubernetes Distributions documentation][29]. Use the [dedicated Kubernetes documentation][30] to deploy the Agent in your EKS cluster.
@@ -270,6 +274,6 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [55]: /security/default_rules/#cat-posture-management-cloud
 [56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/guide/aws-integration-troubleshooting/
-
+[58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 
 
