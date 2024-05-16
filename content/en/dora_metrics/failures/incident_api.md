@@ -1,48 +1,55 @@
 ---
-title: Sending Incident Events for DORA Metrics
+title: Configuring Incident Event Submission for DORA Metrics
 kind: documentation
 description: Learn how to send incident events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/incidents
 is_beta: true
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-  tag: "Release Notes"
-  text: "Check out the latest Software Delivery releases! (App login required)"
+- link: "/dora_metrics/failures"
+  tag: "Documentation"
+  text: "See other incident data source options"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
-- link: "/code_analysis"
+- link: "/continuous_delivery/deployments"
   tag: "Documentation"
-  text: "Learn about Code Analysis"
+  text: "Learn about Deployment Visibility"
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-The DORA Metrics private beta is closed. Fill out the form below to be added to the waitlist.
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
+DORA Metrics is in public beta.
 {{< /callout >}}
 
 ## Overview
 
-Incident events are used in order to compute Change Failure Rate and Mean Time to Restore.
-To send incident events, use the [DORA Metrics API][1]. The following attributes are required:
+To send your own incident events, use the [DORA Metrics API][1]. Incident events are used in order to compute change failure rate and mean time to restore.
+
+Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
+
+The following attributes are required:
 
 - `services` or `team` (at least one must be present)
 - `started_at`
 
 You can optionally add the following attributes to the incident events:
-- `finished_at` for *resolved incidents*. This attribute is required for [time to restore service](#time-to-restore-service).
+
+- `finished_at` for *resolved incidents*. This attribute is required for calculating the time to restore service.
 - `id` for identifying incidents when they are created and resolved. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
 - `name` to describe the incident.
 - `severity`
-- `env` to accurately filter your DORA metrics by environment.
+- `env` to filter your DORA metrics by environment on the [**DORA Metrics** page][3].
 - `repository_url`
 - `commit_sha`
 
-See the [DORA Metrics API reference documentation][1] for the full spec and more examples with the API SDKs.
+See the [DORA Metrics API reference documentation][1] for the full spec and additional code samples.
 
 ### Example
 
@@ -72,22 +79,10 @@ curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/inciden
 EOF
 ```
 
-## Change Failure Rate
-
-The Change Failure Rate metric is calculated as the percentage of incident events out of the total number of deployments.
-Send both [deployment events][2] and [incident events](#overview) to correctly populate this metric.
-
-## Time to restore service
-
-The Mean Time to Restore (MTTR) metric is calculated as the duration distribution for *resolved incident* events.
-Include the `finished_at` attribute in an incident event to mark that the incident is resolved.
-
-Events can be sent both at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
-[2]: /continuous_integration/dora_metrics/setup/deployments
+[2]: /dora_metrics/deployments
+[3]: https://app.datadoghq.com/ci/dora

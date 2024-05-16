@@ -5,10 +5,6 @@ description: Setting up Database Monitoring on a SQL Server database
 disable_sidebar: true
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ### SQL Server versions supported
 
 |                 | Self-hosted | Azure     | Amazon RDS | Google Cloud SQL | Note |
