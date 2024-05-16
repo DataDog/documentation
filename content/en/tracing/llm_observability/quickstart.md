@@ -67,7 +67,7 @@ A trace of your LLM call should appear in [the Traces tab][3] of LLM Observabili
 
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
 
-If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can instrument accordingly using the [instructions here][11] and the [SDK documentation][1].
+If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [instrumentation guide][11] and the [SDK documentation][1].
 
 
 [1]: /tracing/llm_observability/sdk/

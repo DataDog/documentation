@@ -46,7 +46,7 @@ Monitor the throughput, latency, and token usage trends for all your LLM applica
 
 ### Evaluate the quality and effectiveness of your LLM applications
 
-Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure-to-answer etc.
+Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure to answer, and so on.
 
 {{< img src="tracing/llm_observability/clusters-page.png" alt="The clusters page in LLM Observability" style="width:100%;" >}}
 

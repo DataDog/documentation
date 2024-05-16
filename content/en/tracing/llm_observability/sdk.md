@@ -14,7 +14,7 @@ LLM Observability is not available in the US1-FED site.
 
 The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python versions 3.7 and newer. For information about LLM Observability's integration support, see [LLM integrations](#llm-integrations).
 
-You can install and configure tracing of various operations such as workflows, tasks, and API calls with simple function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
+You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
 ## Setup
 
@@ -452,7 +452,7 @@ def similarity_search():
 
 To submit evaluation metrics for a span to Datadog:
 
-1. Extract the span context from the given span by using `LLMObs.export_span(span)`. If `span` is not provided (as when using function decorators), the SDK will export the current active span.
+1. Extract the span context from the given span by using `LLMObs.export_span(span)`. If `span` is not provided (as when using function decorators), the SDK exports the current active span.
 2. Use `LLMObs.submit_evaluation()` with the extracted span context and evaluation metric information.
 
 ### Arguments
@@ -502,13 +502,13 @@ The Python SDK includes out-of-the-box integrations to automatically trace and a
 - `bedrock` - AWS Bedrock Runtime (using [Boto3][2]/[Botocore][3]): supports all versions
 - `langchain` - LangChain LLM/Chat Models/Chains (using [LangChain][4]): supports all versions
 
-This means that you do not need to manually instrument your LLM calls with `LLMObs.llm()` as the SDK will capture them automatically.
+This means that you do not need to manually instrument your LLM calls with `LLMObs.llm()`, as the SDK captures them automatically.
 
 ## Advanced tracing
 
 ### Tracing spans using inline methods
 
-For each span kind, the `ddtrace.llmobs.LLMObs` class provides a corresponding inline method to automatically trace the operation a given code block entails. These methods have the same argument signature as their function decorator counterparts, with the addition that `name` will default to the span kind (e.g. `llm`, `workflow` and so on) if not provided. These methods can be used as context managers to automatically finish the span once the enclosed code block is completed.
+For each span kind, the `ddtrace.llmobs.LLMObs` class provides a corresponding inline method to automatically trace the operation a given code block entails. These methods have the same argument signature as their function decorator counterparts, with the addition that `name` defaults to the span kind (`llm`, `workflow`, and so on) if not provided. These methods can be used as context managers to automatically finish the span once the enclosed code block is completed.
 
 #### Example
 
