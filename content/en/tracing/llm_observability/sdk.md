@@ -171,7 +171,7 @@ To trace a workflow span, use the function decorator `ddtrace.llmobs.decorators.
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
-@workflow(name="process_message")
+@workflow
 def process_message():
     ... # user application logic
     return 
@@ -282,7 +282,7 @@ To trace an embedding span, use the function decorator `LLMObs.embedding()`.
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import embedding
 
-@embedding(model_name="text-embedding-3", name="openai_embedding")
+@embedding(model_name="text-embedding-3", model_provider="openai")
 def perform_embedding():
     ... # user application logic
     return 
@@ -342,7 +342,7 @@ To trace a task span, use the function decorator `LLMObs.task()`.
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import task
 
-@task(name="sanitize_input")
+@task
 def sanitize_input():
     ... # user application logic
     return 
@@ -355,7 +355,7 @@ Session tracking allows you to associate multiple interactions with a given user
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
-@workflow(name="process_message", session_id="<SESSION_ID>")
+@workflow(session_id="<SESSION_ID>")
 def process_message():
     ... # user application logic
     return 
@@ -399,7 +399,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import embedding, llm, retrieval, workflow
 
-@llm(name="llm_call", model="model_name", model_provider="model_provider")
+@llm(model="model_name", model_provider="model_provider")
 def llm_call(prompt):
     resp = ... # llm call here
     LLMObs.annotate(
@@ -412,7 +412,7 @@ def llm_call(prompt):
     )
     return resp
 
-@workflow(name="process_message")
+@workflow
 def process_message(prompt):
     resp = llm_call_inline(prompt)
     LLMObs.annotate(
@@ -423,7 +423,7 @@ def process_message(prompt):
     )
     return resp
 
-@embedding(model_name="text-embedding-3", name="openai_embedding")
+@embedding(model_name="text-embedding-3", model_provider="openai")
 def perform_embedding():
     ... # user application logic
     LLMObs.annotate(
