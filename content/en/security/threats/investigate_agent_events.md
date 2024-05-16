@@ -30,7 +30,7 @@ With the [Agent Events explorer][13], you can investigate Agent Events separatel
 
 By default, all OOTB Agent threat detection rules are enabled and actively monitoring for threats.
 
-[Active Protection][12] enables you to proactively block and terminate threats identified by the Datadog Agent threat detection rules.
+[Active Protection][18] enables you to proactively block and terminate threats identified by the Datadog Agent threat detection rules.
 
 ## View Agent events
 
@@ -46,6 +46,8 @@ To investigate why an event is listed on the [Agent Events explorer][13], select
 The event details include the attributes, [metrics][16], and [processes][15]. **Metrics** links to the host dashboard and **Processes** links to the host [process dashboard][17] and process agent installation steps.
 
 In **Path**, the latest process tree is displayed. This gives you the best overview of what occurred by showing you all of the commands that led to the command that initiated the event. 
+
+{{< img src="security/csm/agent_events_explorer_details.png" alt="Your image description" style="width:100%;" >}}
 
 **Path** is often the best place to start your investigation of an event.
 
@@ -72,3 +74,4 @@ To triage an event:
 [15]: /infrastructure/process/
 [16]: /metrics/
 [17]: https://app.datadoghq.com/process
+[18]: /security/cloud_security_management/guide/active-protection
