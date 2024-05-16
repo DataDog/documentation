@@ -81,7 +81,7 @@ You can trigger a [workflow automation][7] or create a new workflow from a monit
 For more information on triggering a workflow, see [Trigger a workflow][8].
 
 **To create a workflow**:
-1. Click **Add Worklfow**.
+1. Click **Add Workflow**.
 1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
