@@ -32,7 +32,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | Version              | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
 | .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
-| .NET 7               |                       | [GA](#support-ga)    | latest (>= 2.20.0)   |
+| .NET 7               | 05/14/2024            | [GA](#support-ga)    | latest (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
@@ -106,14 +106,17 @@ Some libraries provide built in [Activity based tracing][13]. This is the same m
 Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][14] for more details.
 
 
-## End of life .NET Core versions
+## End of life .NET and .NET Core versions
 
-The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET Core 3.1, .NET 5, .NET 6, or .NET 7. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
 | Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
 | JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
 | Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
+| JIT Compiler bug causing crash on shutdown    | 2.0.0-2.2.x                               | Upgrade .NET Core to 3.1.0 or above | [dotnet/runtime/pull/11885][15]   |
+| JIT Compiler bug                              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5      | Upgrade .NET 8.0.6 or above    | [dotnet/runtime/pull/73760][16]   |
+| JIT Compiler bug                              | All versions of .NET                      | No current workaround    | [dotnet/runtime/issues/85777][17]   |
 
 ## Supported Datadog Agent versions
 
@@ -164,3 +167,6 @@ Version updates imply the following changes to runtime support:
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
 [13]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
 [14]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+[15]: https://github.com/dotnet/runtime/pull/73760
+[16]: https://github.com/dotnet/runtime/issues/11885
+[17]: https://github.com/dotnet/runtime/issues/85777

@@ -395,8 +395,6 @@ configuration.sessionSampleRate = 50;
 
 The Datadog iOS SDK for RUM allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
 
-Support for SwiftUI was introduced in the SDK in [v1.9.0][15].
-
 To instrument a `SwiftUI.View`, add the following method to your view declaration:
 
 ```swift
@@ -480,4 +478,3 @@ RUM.enable(
 [12]: https://docs.datadoghq.com/real_user_monitoring/ios/web_view_tracking/
 [13]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/
 [14]: https://docs.datadoghq.com/real_user_monitoring/ios/data_collected/
-[15]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.9.0
