@@ -33,7 +33,7 @@ If the integration you need to set up is not listed above, set up connection cre
 
 ## Connection credentials
 
-App Builder connections extend your installed integrations to give you control over app action authentication. Use connection credentials to authenticate any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the App Builder product.
+App Builder connections extend your installed integrations to give you control over app action authentication. Use connection credentials to authenticate any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the App Builder and Workflow Automation products.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.
@@ -77,7 +77,7 @@ Alternatively, add a connection from the app page:
 
 The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/app_builder/new-connection.png" alt="The New Connection dialog box for the OpenAI connection" >}}
+{{< img src="service_management/new-connection.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 
