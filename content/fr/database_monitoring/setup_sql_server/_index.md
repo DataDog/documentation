@@ -5,13 +5,9 @@ kind: documentation
 title: Configuration de SQL Server
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
-
 ### Versions de SQL Server prises en charge
 
-|                 | Auto-hébergé | Azure     | Amazon RDS | Google Cloud SQL | Remarque |
+|                 | Auto-hébergé | Azure     | Amazon RDS | Google Cloud SQL | Remarque |
 |-----------------|-------------|-----------|------------|------------------|------|
 | SQL Server 2012 | {{< X >}}   |           |            |                  | SQL Server 2012 a atteint sa fin de vie le 12 juillet 2022. Database Monitoring continue de prendre en charge SQL Server 2012 avec [des limitations connues][1]. |
 | SQL Server 2014 | {{< X >}}   | {{< X >}} | {{< X >}}  |                  |      |

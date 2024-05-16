@@ -28,10 +28,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 The Query Metrics view shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as data center availability zone, and get alerted for anomalies.
 
 Navigate to [the Query Metrics page][1] in Datadog.
