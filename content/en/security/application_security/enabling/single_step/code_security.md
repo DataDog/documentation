@@ -9,7 +9,7 @@ kind: documentation
 ## Requirements
 
 - **Minimum Agent version 7.53.0**
-- **Minimum Helm version 3.62.0** (For Kubernetes deployments)
+- **Minimum Datadog Helm chart version 3.62.0** (For Kubernetes deployments)
 - **Languages and architectures**: Single step ASM instrumentation for code security only supports tracing Java, Python (private beta), Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
