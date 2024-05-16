@@ -67,8 +67,6 @@ Follow the instructions on this page to set up the **Standard Azure integration*
 
 **Note**: If you are on the US3 site, you can use the **Azure Native integration** for enhanced functionality and streamlined setup. Change the site selector on the right side of this page for the instructions on how to set this up.
 
-### Azure native integration
-
 {{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Site selector for US3 site" video=true >}}
 
 {{% /site-region %}}
@@ -76,7 +74,7 @@ Follow the instructions on this page to set up the **Standard Azure integration*
 
 {{% site-region region="us3" %}}
 
-### Azure native integration
+### Azure Native integration
 
 For automatic configuration of the Azure Native integration through Terraform, see the [Azure Native Integration Programmatic Management Guide][201].
 
@@ -89,14 +87,14 @@ For manual configuration of the Azure Native integration through creation of the
 
 
 
-### Standard Azure Integration
+### Standard Azure integration
 
 For automatic configuration for the Standard Azure integration, see the [Standard Azure Integration Programmatic Management Guide][6] for step-by-step instructions.
 
 For manual configuration for the Standard Azure integration, see the [Standard Azure Integration Manual Setup Guide][7] for instructions specific to the Azure portal and CLI.
 
 
-## Metric Collection
+## Metric collection
 Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. See the [Integrations page][9] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. 
 
 You can find your Azure metrics in the metrics summary page in the Datadog platform by navigating to `Metrics > Summary` and searching for `Azure`.
@@ -105,7 +103,7 @@ You can find your Azure metrics in the metrics summary page in the Datadog platf
 
 
 
-## Log Collection 
+## Log collection 
 
 Follow the instructions on this page to set up log collection through the **Standard Azure integration**. 
 If you are on the US3 site and use the Azure Native Integration, use the site selector on the right side of this page to select US3 for instructions on [log collection using the Azure Native integration][18]. 
@@ -114,8 +112,8 @@ If you are on the US3 site and use the Azure Native Integration, use the site se
 
 {{% site-region region="us3" %}}
 
-### Azure Native Integration
-If you are using the Azure Native Integration, see the [Send Azure Logs with the Datadog Resource][18] guide for instructions on sending your _subscription level_, _Azure resource_, and _Azure Active Directory_ logs to Datadog.
+### Azure Native integration
+If you are using the Azure Native integration, see the [Send Azure Logs with the Datadog Resource][18] guide for instructions on sending your _subscription level_, _Azure resource_, and _Azure Active Directory_ logs to Datadog.
 
 <div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
 </div>
@@ -123,8 +121,8 @@ If you are using the Azure Native Integration, see the [Send Azure Logs with the
 {{% /site-region %}}
 
 
-### Standard Azure Integration
-If you are using the Standard Azure Integration, see the [Send Azure Logs to Datadog guide][10] for instructions on sending your Azure logs to Datadog with Event Hub. You can choose between an automatic or manual process to enable log collection. 
+### Standard Azure integration
+If you are using the Standard Azure integration, see the [Send Azure Logs to Datadog guide][10] for instructions on sending your Azure logs to Datadog with Event Hub. You can choose between an automatic or manual process to enable log collection. 
 
 You can find your Azure logs in the log explorer page in the Datadog platform by navigating to the Logs Explorer and querying for `source:azure*`.
 
