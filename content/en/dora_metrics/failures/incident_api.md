@@ -84,5 +84,5 @@ EOF
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
-[2]: /dora_metrics/setup/deployments
+[2]: /dora_metrics/deployments
 [3]: https://app.datadoghq.com/ci/dora
