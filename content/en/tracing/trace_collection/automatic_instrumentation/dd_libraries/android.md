@@ -9,7 +9,7 @@ type: multi-code-lang
 code_lang_weight: 80
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-android Source code
 - link: tracing/visualization/
   tag: Documentation

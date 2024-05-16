@@ -13,7 +13,7 @@ further_reading:
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-reactnative
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: Blog

@@ -12,10 +12,10 @@ type: multi-code-lang
 code_lang_weight: 30
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-unity
 - link: https://github.com/DataDog/unity-package
-  tag: GitHub
+  tag: "Source Code"
   text: Package URL for Unity SDK
 - link: real_user_monitoring/explorer/
   tag: Documentation
