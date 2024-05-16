@@ -59,9 +59,10 @@ https://*.datadoghq.com/*
 Datadog은 분산 추적 프로토콜을 사용하며 다음과 같이 HTTP 헤더를 설정합니다.
 
 
-
+{{< tabs >}}
+{{% tab "Datadog" %}}
 `x-datadog-trace-id`
-: 신서틱(Synthetic) 모니터링 백엔드에서 생성됩니다. Datadog이 해당 트레이스와 테스트 결과값을 연결하도록 허용합니다.
+: 신서틱(Synthetic) 모니터링 백엔드에서 생성되었습니다. Datadog에서 트레이스를 테스트 결과와 연결할 수 있도록 허용합니다.
 
 `x-datadog-parent-id: 0`
 : 신서틱(Synthetic) 테스트를 생성한 트레이스의 루트 스팬으로 설정합니다.
@@ -70,10 +71,22 @@ Datadog은 분산 추적 프로토콜을 사용하며 다음과 같이 HTTP 헤�
 : API 테스트에서 생성한 트레이스를 식별합니다. 해당 트레이스 스팬(span)에는 `ingestion_reason:synthetics` 태그가 할당됩니다.
 
 `x-datadog-origin: synthetics-browser`
-: 브라우저 테스트에서 생성한 트레이스를 식별합니다. 해당 트레이스에는 `ingestion_reason:synthetics-browser` 태그가 할당됩니다.
+: 브라우저 테스트에서 생성된 트레이스을 식별합니다. 이러한 트레이스에는 `ingestion_reason:synthetics-browser` 태그가 지정됩니다.
 
 `x-datadog-sampling-priority: 1`
-: 에이전트가 트레이스를 계속 추적하도록 합니다.
+: 에이전트가 트레이스를 유지하도록 합니다.
+{{% /tab %}}
+{{% tab "W3C Trace Context" %}}
+`traceparent: [version]-[trace id]-[parent id]-[trace flags]`
+: `version`: 이 사양에서는 버전이 `00` 로 설정되어 있다고 가정합니다.
+ `trace id`: 128비트 트레이스 ID, 32자 16진수. 소스 트레이스 ID는 애플리케이션 성능 모니터링(APM) 과의 호환성을 유지하기 위해 64비트입니다.
+: `parent id`: 64비트 스팬(span) ID, 16자 16진수.
+: `trace flags`: 샘플링됨(`01`) 또는 샘플링되지 않음 (`00`)
+
+**예**:
+: `traceparent: 00-00000000000000008448eb211c80319c-b7ad6b7169203331s-01`
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 트레이스는 얼마나 오래 보관되나요?
 
@@ -89,7 +102,7 @@ Datadog은 분산 추적 프로토콜을 사용하며 다음과 같이 HTTP 헤�
 [2]: /ko/synthetics/multistep?tab=requestoptions
 [3]: /ko/synthetics/browser_tests/
 [4]: /ko/tracing/
-[5]: https://app.datadoghq.com/synthetics/settings/default
+[5]: https://app.datadoghq.com/synthetics/settings/integrations
 [6]: /ko/tracing/trace_collection/dd_libraries/python/
 [7]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
 [8]: /ko/tracing/trace_collection/dd_libraries/go/
