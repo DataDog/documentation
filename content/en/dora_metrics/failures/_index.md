@@ -62,4 +62,4 @@ DORA Metrics generates the `dora.time_to_restore` metric by recording the start 
 [4]: /tracing/service_catalog/setup
 [5]: /tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
-[7]: /dora_metrics/setup/deployments
+[7]: /dora_metrics/deployments
