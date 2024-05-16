@@ -183,7 +183,7 @@ The most common errors include the following:
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
 `Error performing HTTP/2 request`
-: The request couldn't be performed. [See the dedicated error page for more information][16].
+: The request could not be performed. See the dedicated [error][16] page for more information.
 
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
