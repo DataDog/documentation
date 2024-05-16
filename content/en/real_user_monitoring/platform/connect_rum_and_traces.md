@@ -164,7 +164,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 ```
 
 **Note**:
-* `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+* `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 * If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 [1]: /real_user_monitoring/android/
@@ -521,7 +521,7 @@ RUM supports several propagator types to connect resources with backends that ar
 
 ## How are RUM resources linked to traces?
 
-Datadog uses the distributed tracing protocol and sets up the following HTTP headers:
+Datadog uses the distributed tracing protocol and sets up the HTTP headers below. By default, both trace context and Datadog-specific headers are used.
 {{< tabs >}} {{% tab "Datadog" %}}
 `x-datadog-trace-id`
 : Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.
@@ -536,6 +536,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 : To make sure that the Agent keeps the trace.
 {{% /tab %}}
 {{% tab "W3C Trace Context" %}}
+
 `traceparent: [version]-[trace id]-[parent id]-[trace flags]`
 : `version`: The current specification assumes version is set to `00`.
 : `trace id`: 128 bits trace ID, hexadecimal on 32 characters. The source trace ID is 64 bits to keep compatibility with APM.

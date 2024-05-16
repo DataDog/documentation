@@ -48,12 +48,12 @@ There are several configuration mechanisms that you can use in these scenarios t
 Before setting up Intelligent Test Runner, you must configure [Test Visibility][4] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
 
 {{< whatsnext desc="Choose a language to set up Intelligent Test Runner in Datadog:" >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="intelligent_test_runner/setup/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration

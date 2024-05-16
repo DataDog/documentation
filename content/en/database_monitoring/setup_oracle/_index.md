@@ -5,10 +5,6 @@ description: Setting up Database Monitoring on an Oracle database
 disable_sidebar: true
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ## Supported Oracle versions
 
 |            | Self-Hosted | RDS       | RAC       | Exadata   | Autonomous Database | Automatic Storage Management |

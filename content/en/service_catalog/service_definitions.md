@@ -38,8 +38,18 @@ For more information about the latest updates, see the schemas on GitHub.
 ### Metadata Schema v3.0 (beta) 
 The Entity Definition Schema is a structure that contains basic information about an entity. See the [full schema on GitHub][1].
 
+#### New features in v3.0
+##### Expanded data model
+v3.0 supports multiple kinds of entities. You can organize your systems using various components such as applications, services, queues, and datastores.
+
+##### Enhanced relationship mapping
+With APM and USM data, you can automatically detect dependencies among components. v3.0 supports manual declaration to augment auto-detected application topology to ensure a complete overview of how components interact within your applications.
+
+##### Inheritance of application metadata
+Components within an application automatically inherit the application's metadata. It's no longer necessary to declare metadata for all related components one-by-one as in v2.1 and v2.2. 
+
 #### Example YAML for `kind:application`
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: application
 metadata:
@@ -113,8 +123,8 @@ datadog:
 #### Specify common components that are part of multiple applications
 If a single component is part of multiple applications, you must specify that component in the YAML for each application. For example, if the datastore `orders-postgres` is a component of both a postgres fleet and a web application, specify two YAMLs:
 
-For the postgres fleet (`managed-postgres`):
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+For the postgres fleet (`managed-postgres`), specify a definition for `kind:application`:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: application
 spec:
@@ -127,8 +137,8 @@ metadata:
   owner: db-team
 {{< /code-block >}}
 
-For the web application (`shopping-cart`):
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+For the web application (`shopping-cart`), declare a separate definition for `kind:application`:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 
 apiVersion: v3
 kind: application
@@ -171,7 +181,7 @@ metadata:
 #### Explicit and implicit metadata inheritance 
 
 ##### Explicit Inheritance 
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 inheritFrom:<entity_kind>:<name>
 {{< /code-block >}}
 
@@ -183,6 +193,84 @@ Note: The entity reference only applies to an entity from the same YAML file.
 Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inherit all metadata from the application that it belongs to under the following conditions:
 - The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as part of two separate `kind:application` definitions, it does not implicitly inherit the metadata from either parent application. 
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
+
+#### v3.0 API endpoints (alpha)
+##### Upsert entities 
+POST https://api.datadoghq.com/api/unstable/catalog/definition
+Permission: SERVICE_CATALOG_WRITE
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>' \
+--data-raw '
+apiVersion: v3
+kind: application
+metadata:
+  name: shopping-cart-app
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+spec:
+  code: 
+  components:
+    - service:shopping-cart-processing
+    - service:shopping-cart-checkout
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-processing
+---
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart-checkout
+'
+{{< /code-block >}}
+
+##### Get entities
+GET https://api.datadoghq.com/api/unstable/catalog/definition
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+##### Get entities by ID 
+GET https://api.datadoghq.com/api/unstable/catalog/definition/id/<id>
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/id/<id>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+##### Get entities by reference 
+GET https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>
+Permission: SERVICE_CATALOG_READ
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+URL Parameter: `ref <kind>:<name>`
 
 ## Further reading
 

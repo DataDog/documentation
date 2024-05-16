@@ -25,13 +25,13 @@ Datadog App Builder is a low-code application building platform. It streamlines 
 
 ## Configure App Builder actions
 
-Datadog App Builder provides an [Action Catalog][1] of over 300 actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP request and JavaScript function to perform any task that your app requires.
+Datadog App Builder provides an [Action Catalog][1] of hundreds of actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP requests and JavaScript functions to perform any task that your app requires.
 
-{{< img src="/service_management/app_builder/app-builder-actions.png" alt="Datadog App Builder provides an Action Catalog of over 300 actions across multiple integrations." style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-actions.png" alt="Datadog App Builder provides an Action Catalog of hundreds of actions across multiple integrations." style="width:100%;" >}}
 
 ## Start with blueprints
 
-Datadog provides you with preconfigured flows in the form of out-of-the-box [blueprints][3] to help you get started.
+Datadog provides you with preconfigured flows in the form of out-of-the-box [blueprints][3] to help you [get started][5].
 
 Below are a few examples of what App Builder apps can do:
 - Identify the most likely causes of a regression given a text description of an incident and the most recent 150 commits to a repo.
@@ -45,7 +45,7 @@ Below are a few examples of what App Builder apps can do:
 
 ## Take action directly from dashboards
 
-You can use your apps from the Apps page or access them directly from within your dashboards. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
+You can use your apps from the Apps page or [access them directly from within your dashboards][6]. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
 
 {{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
 
@@ -55,7 +55,9 @@ You can use your apps from the Apps page or access them directly from within you
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][4].
 
-[1]: /service_management/workflows/actions_catalog/
+[1]: https://app.datadoghq.com/app-builder/action-catalog
 [2]: /service_management/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
 [4]: https://datadoghq.slack.com/
+[5]: /service_management/app_builder/build/#build-an-app-from-a-blueprint
+[6]: /service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard

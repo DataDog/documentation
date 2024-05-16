@@ -3,7 +3,7 @@ title: Components
 kind: documentation
 disable_toc: true
 further_reading:
-- link: "/service_management/workflows/build/"
+- link: "/service_management/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
 ---

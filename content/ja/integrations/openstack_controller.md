@@ -29,6 +29,9 @@ author:
 categories:
 - cloud
 - ログの収集
+- プロビジョニング
+- オーケストレーション
+- 構成とデプロイ
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md
 display_on_public_website: true
@@ -55,6 +58,11 @@ tile:
   - Supported OS::Windows
   - Category::Cloud
   - Category::Log Collection
+  - Category::Provisioning
+  - Category::Orchestration
+  - Category::Configuration & Deployment
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
   media: []
@@ -72,13 +80,13 @@ tile:
 
 このチェックは、コントローラーノードから [OpenStack][2] を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 OpenStack Controller チェックは [Datadog Agent][3] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 OpenStack Controller インテグレーションは、すべてのコンピュートノードおよびそれを実行しているサーバーから情報を収集するように設計されています。また、単一の Agent から実行して OpenStack 環境を監視します。このインテグレーションは、コントローラーノード、または Keystone、Nova、Neutron、Cinder、Ironic、Octavia エンドポイントにアクセスできる隣接サーバーでデプロイできます。
 
@@ -104,7 +112,7 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 **注**: インテグレーションを v5.0.0 以前から v6.0.0 以降にアップグレードする場合、新しい機能を使用するために `use_legacy_check_version` フラグを有効にする必要があります。また、互換性を維持するためには、構成を変更する必要が生じる場合もあります。詳しくは [openstack controller.d/conf.yaml のサンプル][4]を参照してください。 
 
-##### 収集データ
+##### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にできます。
 
@@ -128,21 +136,21 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 [Agent の `status` サブコマンドを実行][6]し、Checks セクションで `openstack_controller` を探します。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "openstack_controller" >}}
 
 
-### ヘルプ
+### イベント
 
 OpenStack Controller には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "openstack_controller" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

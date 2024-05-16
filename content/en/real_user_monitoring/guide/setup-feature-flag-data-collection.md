@@ -14,11 +14,6 @@ further_reading:
   text: 'Visualize your RUM data in the RUM Explorer'
 ---
 
-<div class="alert alert-warning">
-    Feature Flag Tracking is in beta.
-</div>
-
-
 ## Overview
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
 
@@ -652,12 +647,12 @@ Initialize Statsig's SDK with `statsig.initialize`.
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
     {userID: '<USER ID>'},
-    {     
+    {
         gateEvaluationCallback: (key, value) => {
             datadogRum.addFeatureFlagEvaluation(key, value);
         }
     }
-    ); 
+    );
    ```
 
 [1]: https://docs.statsig.com/client/jsClientSDK

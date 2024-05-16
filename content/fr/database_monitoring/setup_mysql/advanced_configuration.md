@@ -4,10 +4,6 @@ kind: documentation
 title: Configuration avancée de Database Monitoring pour MySQL
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
-
 ## Tronquer `events_statements_summary_by_digest`
 
 Certaines charges de travail nécessitent une maintenance des tables dans `performance_schema`. Les statistiques de requête sont agrégées dans la table `performance_schema.events_statements_summary_by_digest`, dont le nombre de lignes est limité. Cette limite est spécifiée via la [variable système `performance_schema_digests_size`][1]. Si la table est pleine, les nouvelles synthèses de requêtes sont recueillies dans une ligne générique avec un schéma de valeur null et une synthèse de requête de valeur null, ce qui empêche l'Agent de faire la distinction entre les différentes requêtes au sein de la ligne.

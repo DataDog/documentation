@@ -5,10 +5,6 @@ kind: documentation
 title: Postgres の設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 ### サポートされる Postgres バージョン
 
 |  | セルフホスト | Amazon RDS | Amazon Aurora | Google Cloud SQL | Azure |
