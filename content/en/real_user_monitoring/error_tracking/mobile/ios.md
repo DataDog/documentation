@@ -108,7 +108,7 @@ By default, app hangs reporting is **disabled**, but you can enable it and set y
 
 When **enabled**, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in the Error Tracking page.
 
-- **Fatal app hang** - If a hang never gets recovered and the app is terminated, it is reported as a fatal app hang.
+- **Fatal app hang** - If a hang never gets recovered and the app is terminated, it is reported as a fatal app hang. Fatal app hangs are marked with a "Crash" label on them in the Error Tracking page.
 - **Non-fatal app hang** - If the app recovers from a relatively short hang and continues running, it gets reported as a non-fatal hang.
 
 **Note**: App hangs are reported through the RUM SDK (not through Logs).
