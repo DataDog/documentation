@@ -80,27 +80,27 @@ LLMObs.enable(
 
 `integrations`
 : optional - _list_ 
-<br />A list of integration names to enable automatically tracing LLM calls for (e.g. `["openai", "langchain"]`). See [LLM integrations](#llm-integrations) for more information about Datadog's supported LLM integrations. **Note**: if not provided, all supported LLM integrations will be enabled by default. To disable all integrations, pass in an empty list `[]`.
+<br />A list of integration names to enable automatically tracing LLM calls for (example: `["openai", "langchain"]`). See [LLM integrations](#llm-integrations) for more information about Datadog's supported LLM integrations. **Note**: if not provided, all supported LLM integrations are enabled by default. To disable all integrations, pass in an empty list `[]`.
 
 `llmobs_no_apm`
 : optional - _boolean_ 
-<br />Only required if you are not a Datadog APM customer, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM. If not provided, this will default to the value of `DD_LLMOBS_NO_APM`.
+<br />Only required if you are not a Datadog APM customer, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM. If not provided, this defaults to the value of `DD_LLMOBS_NO_APM`.
 
 `site`
 : optional - _string_ 
-<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this will default to the value of `DD_SITE`.
+<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
 
 `api_key`
 : optional - _string_ 
-<br />Your Datadog API key. If not provided, this will default to the value of `DD_API_KEY`.
+<br />Your Datadog API key. If not provided, this defaults to the value of `DD_API_KEY`.
 
 `env`
 : optional - _string_
-<br />The name of your application's environment (e.g. `prod`, `pre-prod`, `staging`). If not provided, this will default to the value of `DD_ENV`.
+<br />The name of your application's environment (examples: `prod`, `pre-prod`, `staging`). If not provided, this defaults to the value of `DD_ENV`.
 
 `service`
 : optional - _string_
-<br />The name of the service used for your application. If not provided, this will default to the value of `DD_SERVICE`.
+<br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
 
 #### Application naming guidelines
 
@@ -127,7 +127,7 @@ To trace an agent span, use the function decorator `ddtrace.llmobs.decorators.ag
 
 `name`
 : optional - _string_
-<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
 
 `session_id`
 : optional - _string_
@@ -156,7 +156,7 @@ To trace a workflow span, use the function decorator `ddtrace.llmobs.decorators.
 
 `name`
 : optional - _string_
-<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
 
 `session_id`
 : optional - _string_
@@ -197,7 +197,7 @@ To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm(
 
 `name`
 : optional - _string_
-<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
 
 `model_provider`
 : optional - _string_ - **default**: `"custom"`
@@ -229,7 +229,7 @@ To trace a tool span, use the function decorator `ddtrace.llmobs.decorators.tool
 
 `name`
 : optional - _string_
-<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
 
 `session_id`
 : optional - _string_
@@ -298,7 +298,7 @@ To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators
 
 `name`
 : optional - _string_
-<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
 
 `session_id`
 : optional - _string_
@@ -327,7 +327,7 @@ To trace a task span, use the function decorator `LLMObs.task()`.
 
 `name`
 : optional - _string_
-<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
 
 `session_id`
 : optional - _string_
