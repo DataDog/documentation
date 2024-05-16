@@ -38,7 +38,7 @@ In the Network Topology Map, the following navigation options are available:
 
 1. Under **View By**, select to visualize devices in groups according to tags: 
 
-{{< img src="/network_device_monitoring/network_topology_map/network_view_by_device_type.png" alt="The navigation option, with view by devices and tags selected, highlighting view by device type" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_view_by_location.png" alt="The navigation option, with view by devices and tags selected, highlighting view by location" style="width:80%;" >}}
 
 ### Color
 
@@ -47,7 +47,7 @@ In the Network Topology Map, the following navigation options are available:
 - **Device State**: Display nodes on the Device Topology Map by SNMP reachability.
 - **Ping State**: Display nodes on the Device Topology Map by Ping status. 
 
-{{< img src="/network_device_monitoring/network_topology_map/device_topology_color_by.png" alt="The navigation option, with view by color selected, highlighting view by device state" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device_topology_color_by_2.png" alt="The navigation option, with view by color selected, highlighting view by device state" style="width:80%;" >}}
 
    The following are the definitions of the nodes for each color state:
    <div style="width:80%; margin: 0 auto;">
@@ -65,7 +65,7 @@ In the Network Topology Map, the following navigation options are available:
 
 3. Under **Filter Devices**, gain further granular control over what devices are shown on the Device Topology Map. 
 
-{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_devices_2.png" alt="The navigation option, with view filer option selected, toggling by hide unmonitored devices " style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_devices_hide.png" alt="The navigation option, with view filer option selected, toggling by hide unmonitored devices " style="width:80%;" >}}
 
 **Note:** The filter devices setting impacts what devices are shown on the Device Topology Map for _all_ queries you may make, such as if you filter by a device facet in the search bar. 
 
@@ -125,17 +125,17 @@ In addition to providing an overview of your network's physical connections, you
 
 Choose **Inspect** to see the device's interface connections. Click on any of the connected interfaces for further investigation.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_2.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
 
 ### View device details
 
 Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details_tab.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details_tab_2.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
 
 From this view, you can also view the device's interfaces in the **Interfaces** tab.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_interfaces_tab.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_interfaces_tab_2.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
 
 ### View flow details
 
