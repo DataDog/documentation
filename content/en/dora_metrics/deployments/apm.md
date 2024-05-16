@@ -9,7 +9,7 @@ further_reading:
 - link: "/dora_metrics/deployments"
   tag: "Documentation"
   text: "See other deployment data source options"
-- link: "/continuous_integration/dora_metrics/setup/failures"
+- link: "/dora_metrics/failures/"
   tag: "Documentation"
   text: "Learn about setting up failure data in DORA Metrics"
 - link: "/tracing/service_catalog"
