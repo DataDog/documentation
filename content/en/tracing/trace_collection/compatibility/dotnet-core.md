@@ -21,7 +21,7 @@ further_reading:
 ---
 
 
-The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
+The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
 
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
@@ -108,7 +108,7 @@ Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZU
 
 ## End of life .NET and .NET Core versions
 
-The Datadog .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
 | Issue                                         | Affected .NET Versions                    | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
@@ -128,7 +128,7 @@ The Datadog .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .
 
 ## Runtime support policy
 
-The Datadog .NET Tracer depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, Datadog .NET Tracer also limits its support for that version.
+The .NET Tracer depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, Datadog .NET Tracer also limits its support for that version.
 
 ### Levels of support
 
@@ -142,7 +142,7 @@ The Datadog .NET Tracer depends on the host operating system, .NET runtime, cert
 
 ### Package versioning
 
-Datadog APM for .NET Core practices [semantic versioning][11].
+The .NET Tracer practices [semantic versioning][11].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
