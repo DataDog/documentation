@@ -61,7 +61,7 @@ To use the simple rule creator:
 
     {{< img src="/security/csm/csm_threats_simple_rule_creator.png" alt="Simple rule creator example" style="width:100%;" >}}
 
-6. Select **Create `<NUMBER>` Rules**.
+6. Select **Create _N_ Rules**.
 7. In **Generate Rules**, select **Confirm**. The rules are generated.
 8. Select **Finish**. The [Agent Configuration][3] page displays the new rules.
 9. In [Agent Configuration][3], select **Deploy Agent Policy**.
