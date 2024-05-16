@@ -120,7 +120,7 @@ To enable app hangs monitoring:
 1. Make sure Datadog [Crash Reporting][10] is enabled.
 2. Using the Datadog API, use the [Create a new RUM application][11] or [Update a RUM application][12] endpoint and set the `appHangThreshold` parameter to `true`.
 
-**Note**: The minimum value this option can be set to is `0.1` seconds (100 ms). However, setting the threshold to very small values may lead to excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, meaning some hangs lasting very close to this threshold may not be reported.
+**Note**: The minimum value this option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to this threshold may not be reported.
 
 #### Disable app hangs monitoring
 
