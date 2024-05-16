@@ -13,7 +13,7 @@ further_reading:
   text: 'Learn about metrics'
 - link: '/getting_started/tagging/'
   tag: 'Documentation'
-  text: 'Getting Started with Tags'
+  text: 'Getting started with Tags'
 ---
 
 {{< site-region region="gov" >}}
