@@ -218,12 +218,9 @@ To enable single step instrumentation with Helm:
 
 More information on Kubernetes Single Step Instrumentation here:
 
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#enabling-or-disabling-instrumentation-for-namespaces" >}}Enabling or Disabling Single Step Instrumentation by namespaces{{< /nextlink >}}
-     {{< nextlink href="/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#specifying-tracing-library-versions" >}}Specifying Instrumentation libraries versions{{< /nextlink >}}
-     {{< nextlink href="/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#removing-instrumentation-for-specific-services" >}}Removing Instrumentation on specific deployments{{< /nextlink >}}
-{{< /whatsnext >}}
-
+* [Enabling or Disabling Single Step Instrumentation by namespaces][15]
+* [Specifying Instrumentation libraries versions][16]
+* [Removing Instrumentation on specific deployments][17]
 
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -233,6 +230,9 @@ More information on Kubernetes Single Step Instrumentation here:
 [12]: /getting_started/site
 [13]: https://v3.helm.sh/docs/intro/install/
 [14]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[15]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#enabling-or-disabling-instrumentation-for-namespaces
+[16]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#specifying-tracing-library-versions
+[17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#removing-instrumentation-for-specific-services
 
 {{% /tab %}}
 {{< /tabs >}}
