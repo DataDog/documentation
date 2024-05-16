@@ -5169,6 +5169,11 @@ menu:
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_troubleshooting
       weight: 208
+    - name: Supported Versions
+      url: real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
+      parent: mobile_and_tv_monitoring
+      identifier: rum_mobile_supported_versions
+      weight: 209
     - name: Product Analytics
       identifier: rum_product_analytics
       url: real_user_monitoring/product_analytics
