@@ -13,7 +13,7 @@ This document walks you through the following steps:
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Sending logs to the Worker over Splunk HEC](#send-logs-to-the-observability-pipelines-worker-over-splunk-hec)
 
-{{< img src="observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
+{{< img src="observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for this use case" width="100%" >}}
 
 ## Prerequisites
 

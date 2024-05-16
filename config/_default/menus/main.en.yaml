@@ -3910,21 +3910,26 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_log_volume_control
       weight: 2
+    - name: Datadog Agent
+      url: observability_pipelines/log_volume_control/datadog_agent/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_datadog_agent
+      weight: 2001
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/log_volume_control/splunk_hec/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_hec
-      weight: 2001
+      weight: 2002
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/log_volume_control/splunk_tcp/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_tcp
-      weight: 2002
+      weight: 2003
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/log_volume_control/sumo_logic_hosted_collector/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
-      weight: 2003
+      weight: 2004
     - name: Dual Ship Logs
       url: observability_pipelines/dual_ship_logs/
       parent: observability_pipelines
