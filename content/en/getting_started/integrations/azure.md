@@ -27,7 +27,7 @@ There are multiple configuration options when integrating Azure with Datadog. Th
 
 ## Prerequisites
 
-If you haven’t already, create a [Datadog account][2]. 
+If you haven't already, create a [Datadog account][2]. 
 
 ## Deciding which way to go 
 <br>
@@ -39,7 +39,7 @@ If your organization is using the [US3 site][3], you have the ability to use the
 
 If you are on [any one of the available sites][3], including the US3 site, you can use the **Standard Azure integration** which requires: 
 - the [App Registration credential][4] process for implementing metric collection
-- the [Event Hub setup][5] for sending Azure Platform Logs.
+- the [Event Hub setup][5] for sending Azure Platform Logs
 
 You also have the option to _manually_ or _programmatically_ configure your Azure integration with Datadog. 
 
@@ -47,10 +47,14 @@ See the following table for a summary of the various configuration options avail
 
 | ORGANIZATION SITE | AZURE NATIVE INTEGRATION | STANDARD AZURE INTEGRATION | MANUAL CONFIGURATION | AUTOMATIC CONFIGURATION |
 | --- | ---- |-------- |---| ----|
-| US3 site   | Yes    |Yes    |Yes<br><br> You can create the `Datadog resource in Azure`, deploy the Datadog Agent directly in Azure with the `VM extension` or `AKS Cluster extension`, and optional configuration of single sign-on (SSO).|Yes<br><br> You can use `Terraform` to set up Datadog’s Azure Native integration with the Datadog resource in Azure.  |
+| US3 site   | Yes    |Yes    |Yes<br><br> You can create the `Datadog resource in Azure`, deploy the Datadog Agent directly in Azure with the `VM extension` or `AKS Cluster extension`, and optional configuration of single sign-on (SSO).|Yes<br><br> You can use `Terraform` to set up Datadog's Azure Native integration with the Datadog resource in Azure.  |
 | All sites   | No    | Yes    |Yes<br><br>You can use the `Azure portal` or `Azure CLI`, as well as `deploying the Datadog Agent directly in Azure` with the VM extension or AKS Cluster extension. |Yes<br><br> You can set up the integration through `Terraform` or the `Azure CLI`, deploy the Datadog Agent natively in Azure through the `Datadog Azure VM Extension`, and run `automated scripts` to enable log collection.|
 
 ***_All sites_** configurations can be used in the US3 site orgs, but only US3 site orgs can use the Azure Native integration.
+
+
+<div class="alert alert-warning"> **Note**: <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">Cloud cost management.</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
+</div>
 
 <!-- ---------------------------------------------------------- -->
 ## Setup
@@ -61,7 +65,7 @@ Follow the instructions on this page to set up the **Standard Azure integration*
 
 **Note**: If you are on the US3 site, you can use the **Azure Native integration** for enhanced functionality and streamlined setup. Change the site selector on the right side of this page for the instructions on how to set this up.
 
-### Azure Native Integration
+### Azure native integration
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Site selector for US3 site" video=true >}}
 
@@ -70,7 +74,7 @@ Follow the instructions on this page to set up the **Standard Azure integration*
 
 {{% site-region region="us3" %}}
 
-### Azure Native Integration
+### Azure native integration
 
 For automatic configuration of the Azure Native integration through Terraform, see the [Azure Native Integration Programmatic Management Guide][1].
 
