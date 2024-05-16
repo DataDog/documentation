@@ -4500,7 +4500,7 @@ menu:
       parent: cloud_workload_security
       identifier: cws_security_signals
       weight: 202
-    - name: Creating Custom Agent Rules
+    - name: Creating Agent Rule Expressions
       url: security/threats/agent_expressions
       parent: cloud_workload_security
       identifier: cws_agent_expressions
