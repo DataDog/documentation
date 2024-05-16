@@ -46,15 +46,30 @@ title: 프라이빗 위치에서 신서틱(Synthetic) 테스트 실행
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-프라이빗 위치는 프라이빗 네트워크 내부 어디에나 설치할 수 있는 Docker 컨테이너입니다. Google Container Registry에서 [프라이빗 위치 작업자 이미지][3]에 액세스할 수 있습니다. 호스트에서 [Docker 엔진][4]을 사용할 수 있는 경우 Linux 기반 OS 또는 Windows OS에서 실행할 수 있고 Linux 컨테이너 모드에서도 가능합니다.
+비공개 위치는 비공개 네트워크 내부 어디에나 설치할 수 있는 Docker 컨테이너입니다. Google Container Registry에서 [비공개 위치 작업자 이미지][101]에 액세스할 수 있습니다. 호스트에서 [Docker 엔진][102]을 사용할 수 있는 경우, Linux 기반 OS 또는 Windows OS에서 실행할 수 있고 Linux 컨테이너 모드에서도 실행 가능합니다.**\***
+
+**\*** **본 소프트웨어의 사용 및 운영은 [여기][103]**에서 확인할 수 있는 최종 사용자 라이선스 계약의 적용을 받습니다.
 
 [101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [102]: https://docs.docker.com/engine/install/
+[103]: https://www.datadoghq.com/legal/eula/
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+비공개 위치는 Helm으로 쿠버네티스(Kubernetes) 클러스터에 설치할 수 있는 쿠버네티스(Kubernetes) 배포판입니다. [Helm 차트][101]는 리눅스 기반 쿠버네티스(Kubernetes)에서 실행 가능합니다.
+
+**참고**: 본 소프트웨어의 사용 및 운영은 [최종 사용자 라이선스 계약][103]의 적용을 받습니다.
+
+[101]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
+[103]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-프라이빗 위치는 [MSI 파일][101]을 사용하여 프라이빗 네트워크 내부 어디에나 설치할 수 있는 Windows 서비스입니다. 프라이빗 위치를 설치하려는 가상 또는 물리적 머신에서 이 파일을 실행하세요.
+비공개 위치는 [MSI 파일][101]을 사용하여 비공개 네트워크 내부 어디에나 설치할 수 있는 Windows 서비스입니다. 비공개 위치를 설치하려는 가상 또는 물리 머신에서 이 파일을 실행하세요.**\***
+
+**\*** **본 소프트웨어의 사용 및 운영은 [여기][102]**에서 확인할 수 있는 최종 사용자 라이선스 계약의 적용을 받습니다.
 
 이 머신의 요구사항은 아래 표에 나열되어 있습니다. 프라이빗 위치 작업자를 설치하는 머신에서 PowerShell 스크립팅을 활성화해야 합니다.
 
@@ -74,7 +89,8 @@ MSI 설치 프로그램을 사용하기 전에 컴퓨터에 .NET 버전 4.7.2 �
 
 {{< /site-region >}}
 
-[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
+[102]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -493,7 +509,7 @@ Datadog은 이미 Kubernetes 및 AWS와 통합되어 있으므로 EKS를 모니�
 {{% /tab %}}
 {{% tab "GUI를 통한 Windows" %}}
 
-1. [`datadog-synthetics-worker-<version>.amd64.msi` 파일][101]을 다운로드하고 프라이빗 위치를 설치하려는 머신에서 이 파일을 실행하세요.
+1. [`datadog-synthetics-worker-1.47.0.amd64.msi` 파일][101]을 다운로드하고 비공개 위치를 설치하려는 머신에서 이 파일을 실행하세요.
 1. 시작 페이지에서 **Next**를 클릭하고 EULA를 읽고 이용약관에 동의하세요. 그런 다음 **Next**를 클릭하세요.
 1. 애플리케이션이 설치될 위치를 수정하거나 기본 설정을 그대로 둡니다. **Next**를 클릭하세요.
 1. Windows 프라이빗 위치를 설정하려면 다음 중 하나를 수행하세요.
@@ -528,25 +544,25 @@ Datadog은 이미 Kubernetes 및 AWS와 통합되어 있으므로 EKS를 모니�
 
 <div class="alert alert-warning">JSON 설정을 입력한 경우 해당 설정을 사용하여 Windows 서비스가 실행되기 시작합니다. 설정을 입력하지 않은 경우, 명령 프롬프트에서 <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code>을 실행하거나  <code>시작 메뉴</code> 바로가기를 사용하여 Synthetics Private Location Worker를 시작합니다.</div>
 
-[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
 {{% /tab %}}
 {{% tab "CLI를 통한 Windows" %}}
 
-1. [`datadog-synthetics-worker-<version>.amd64.msi` 파일][101]을 다운로드하고 프라이빗 위치를 설치하려는 머신에서 이 파일을 실행하세요.
+1. [`datadog-synthetics-worker-1.47.0.amd64.msi` 파일][101]을 다운로드하고 설치하려는 머신의 비공개 위치에서 이 파일을 실행하세요.
 2. 설치 프로그램을 다운로드한 디렉터리 내에서 다음 명령 중 하나를 실행합니다.
 
    - PowerShell Terminal에서:
 
      ```powershell
-     Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     Start-Process msiexec "/i datadog-synthetics-worker-1.47.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
      ```
 
    - 또는 Command Terminal에서:
 
      ```cmd
-     msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     msiexec /i datadog-synthetics-worker-1.47.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
      ```
 
 파라미터를 추가할 수 있습니다.
@@ -560,7 +576,7 @@ Datadog은 이미 Kubernetes 및 AWS와 통합되어 있으므로 EKS를 모니�
 | LOGGING_MAXDAYS | 파일 로그를 삭제하기 전에 시스템에 보관하는 일수입니다. 무인 설치를 실행하는 경우 임의의 숫자가 될 수 있습니다. | 7 | `--logFileMaxDays` | 정수 |
 | WORKERCONFIG_FILEPATH | 이는 Synthetics Private Location Worker JSON 설정 파일의 경로로 변경되어야 합니다. 경로에 공백이 포함된 경우 이 경로를 따옴표로 묶습니다. | <None> | `--config` | 문자열 |
 
-[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
 
 {{% /tab %}}
 {{< /tabs >}}

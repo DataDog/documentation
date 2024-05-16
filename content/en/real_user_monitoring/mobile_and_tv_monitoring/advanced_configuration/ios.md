@@ -532,7 +532,6 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-```swift
 URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
 ```
 {{% /tab %}}

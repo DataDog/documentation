@@ -11770,15 +11770,17 @@ components:
       - DESCENDING
     LogsStorageTier:
       default: indexes
-      description: Specifies storage type as indexes or online-archives
+      description: Specifies storage type as indexes, online-archives or flex
       enum:
       - indexes
       - online-archives
+      - flex
       example: indexes
       type: string
       x-enum-varnames:
       - INDEXES
       - ONLINE_ARCHIVES
+      - FLEX
     LogsWarning:
       description: A warning message indicating something that went wrong with the
         query
@@ -18443,6 +18445,14 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        defaultTags:
+          description: Default Tags for default rules (included in tags)
+          example:
+          - security:attacks
+          items:
+            description: Default Tag.
+            type: string
+          type: array
         deprecationDate:
           description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64

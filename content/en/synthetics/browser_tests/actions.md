@@ -265,6 +265,13 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 Create a variable from content such as a `span` or `div` by extracting the element's text.
 
+#### Email body
+
+Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12].
+
+* [`Regex`][13] searches and returns the first matching pattern (for example, `/*./`) from the email's plain text body. If the pattern is not found, it then searches the HTML body.
+
+* [`Xpath`][12] is only applicable when the email contains an HTML body. It returns the content of the corresponding location (for example, `$`).
 
 #### JavaScript
 
