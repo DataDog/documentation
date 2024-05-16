@@ -4,6 +4,7 @@ kind: documentation
 description: Learn how to send deployment events for DORA Metrics by using the API or CLI.
 aliases:
 - /continuous_integration/dora_metrics/setup/deployments
+- /dora_metrics/setup/deployments
 is_beta: true
 further_reading:
 - link: "/dora_metrics/deployments"
