@@ -128,9 +128,6 @@ In addition to default attributes, you can add user-related data to all RUM even
 
 ### Feature flag attributes
 
-{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-<a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
-{{< /callout >}}
 
 You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
 

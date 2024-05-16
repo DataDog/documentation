@@ -1290,7 +1290,7 @@
     "summary": "Get a rule's details"
   },
   "UpdateSecurityMonitoringRule": {
-    "description": "Update an existing rule. When updating `cases`, `queries` or `options`, the whole field\nmust be included. For example, when modifying a query all queries must be included.\nDefault rules can only be updated to be enabled and to change notifications.",
+    "description": "Update an existing rule. When updating `cases`, `queries` or `options`, the whole field\nmust be included. For example, when modifying a query all queries must be included.\nDefault rules can only be updated to be enabled, to change notifications, or to update\nthe tags (default tags cannot be removed).",
     "summary": "Update an existing rule",
     "request_description": "",
     "request_schema_description": "Update an existing rule."

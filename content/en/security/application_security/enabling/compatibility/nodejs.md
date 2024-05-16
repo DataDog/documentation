@@ -16,7 +16,7 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 | Threat Protection                      | 3.19.0                                                                      |
 | Customize response to blocked requests | 3.22.0 for Node.js 14+, 4.1.0 for Node.js 16+                               |
 | Software Composition Analysis (SCA)    | 3.10.0 for Node.js 14+                                                      |
-| Code Security (beta)                   | 3.19.0 for Node.js 14+                                                      |
+| Code Security (beta)                   | 3.39.0 for Node.js 14+, 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+    |
 | Automatic user activity event tracking | 3.25.0 for Node.js 14+, or 4.4.0 for Node.js 16+                            |
 | API Security                           | 3.51.0 for Node.js 14+, or 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+ |
 
@@ -27,13 +27,13 @@ The minimum tracer version to get all supported ASM capabilities for Node.js is 
 - Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-| Type        | Threat Detection support | Vulnerability Management for OSS support |
-|-------------|--------------------------|------------------------------------------|
-| Docker      | {{< X >}}                | {{< X >}}                                |
-| Kubernetes  | {{< X >}}                | {{< X >}}                                |
-| Amazon ECS  | {{< X >}}                | {{< X >}}                                |
-| AWS Fargate | {{< X >}}                | {{< X >}}                                |
-| AWS Lambda  | {{< X >}}                | beta                                     |
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda  | {{< X >}}                | beta                          |
 
 ## Language and framework compatibility
 

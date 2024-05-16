@@ -14,11 +14,6 @@ further_reading:
   text: 'Visualize your RUM data in the RUM Explorer'
 ---
 
-<div class="alert alert-warning">
-    Feature Flag Tracking is in beta.
-</div>
-
-
 ## Overview
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
 
@@ -120,7 +115,7 @@ Datadog supports integrations with:
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize Amplitude's SDK and and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Initialize Amplitude's SDK and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
 For more information about initializing Amplitude's SDK, see Amplitude's [JavaScript SDK documentation][1].
 
@@ -310,6 +305,102 @@ DevCycle does not support this integration. Create a ticket with DevCycle to req
 {{% /tab %}}
 {{< /tabs >}}
 
+### Eppo integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's JavaScript SDK documentation][1].
+
+```typescript
+const assignmentLogger: IAssignmentLogger = {
+  logAssignment(assignment) {
+    datadogRum.addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation);
+  },
+};
+
+await eppoInit({
+  apiKey: "<API_KEY>",
+  assignmentLogger,
+});
+```
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/javascript
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's iOS SDK documentation][1].
+
+```swift
+func IAssignmentLogger(assignment: Assignment) {
+  RUMMonitor.shared().addFeatureFlagEvaluation(featureFlag: assignment.featureFlag, variation: assignment.variation)
+}
+
+let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmentLogger)
+```
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/ios
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's Android SDK documentation][1].
+
+```java
+AssignmentLogger logger = new AssignmentLogger() {
+    @Override
+    public void logAssignment(Assignment assignment) {
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(assignment.getFeatureFlag(), assignment.getVariation());
+    }
+};
+
+EppoClient eppoClient = new EppoClient.Builder()
+    .apiKey("YOUR_API_KEY")
+    .assignmentLogger(logger)
+    .application(application)
+    .buildAndInit();
+```
+
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/android
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Eppo does not support this integration. [Contact Eppo][1] to request this feature.
+
+[1]: mailto:support@geteppo.com
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
+
+For more information about initializing Eppo's SDK, see [Eppo's React native SDK documentation][1].
+
+```typescript
+const assignmentLogger: IAssignmentLogger = {
+  logAssignment(assignment) {
+    DdRum.addFeatureFlagEvaluation(assignment.featureFlag, assignment.variation);
+  },
+};
+
+await eppoInit({
+  apiKey: "<API_KEY>",
+  assignmentLogger,
+});
+```
+
+[1]: https://docs.geteppo.com/sdks/client-sdks/react-native
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Flagsmith Integration
 
@@ -556,12 +647,12 @@ Initialize Statsig's SDK with `statsig.initialize`.
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
     {userID: '<USER ID>'},
-    {     
+    {
         gateEvaluationCallback: (key, value) => {
             datadogRum.addFeatureFlagEvaluation(key, value);
         }
     }
-    ); 
+    );
    ```
 
 [1]: https://docs.statsig.com/client/jsClientSDK
@@ -639,6 +730,7 @@ The following special characters are not supported for [Feature Flag Tracking][5
 ```javascript
 datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ```
+
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

@@ -56,6 +56,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-aks-cluster-extension/
   tag: ブログ
   text: Datadog AKS クラスター拡張機能で Azure コンテナ監視を効率化する
+- link: https://www.datadoghq.com/blog/azure-integration-configuration/
+  tag: ブログ
+  text: すべての Azure インテグレーションの可観測性構成を 1 か所で微調整できます
 git_integration_title: azure
 has_logo: true
 integration_id: azure

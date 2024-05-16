@@ -118,7 +118,7 @@ For example, you can use the following:
 rulesets:
   - python-best-practices
   - python-security
-  - python-code-style
+  - python-code-style:
     rules:
       max-function-lines:
         # Do not apply the rule max-function-lines to the following files
@@ -207,7 +207,7 @@ To upload a SARIF report:
 
 [1]: https://app.datadoghq.com/ci/setup/code-analysis
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif 
-[3]: /developers/ide_integrations/idea/#static-analysis
+[3]: /developers/ide_plugins/idea/#static-analysis
 [4]: /account_management/api-app-keys/
 [6]: /code_analysis/static_analysis_rules
 [7]: /getting_started/site/

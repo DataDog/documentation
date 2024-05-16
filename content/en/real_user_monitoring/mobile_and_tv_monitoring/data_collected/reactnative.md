@@ -14,6 +14,9 @@ further_reading:
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
+- link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
+  tag: Documentation
+  text: Monitor hybrid React Native applications
 
 ---
 ## Overview
