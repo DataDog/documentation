@@ -39,7 +39,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
 | 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
 
-Additional information can be found within [Microsoft's .NET and .NET Core Lifecycle Policy][4] and in [Runtime support policy](#runtime-support-policy).
+Additional information can be found within [Microsoft's .NET Framework Lifecycle Policy][4] and in [Runtime support policy](#runtime-support-policy).
 
 <div class="alert alert-info">
   <div class="alert-info"><b>Note:</b> When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
