@@ -3,7 +3,7 @@ title: Troubleshooting
 kind: documentation
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-reactnative"
-    tag: "Github"
+    tag: "Source Code"
     text: "Source code for dd-sdk-reactnative"
   - link: "/real_user_monitoring"
     tag: "Documentation"

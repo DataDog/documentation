@@ -27,7 +27,7 @@ further_reading:
     tag: "Blog"
     text: "The new Datadog dashboards experience"
   - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
-    tag: "Developer docs"
+    tag: "Best Practices"
     text: "Create great integration dashboards"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
