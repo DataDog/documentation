@@ -1,5 +1,5 @@
 ---
-title: .NET Core Compatibility Requirements
+title: .NET and .NET Core Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the .NET tracer'
 aliases:
@@ -25,9 +25,9 @@ The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual B
 
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
-## Supported .NET Core runtimes
+## Supported .NET and .NET Core runtimes
 
-The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
+The .NET Tracer supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
 
 | Version              | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
@@ -41,7 +41,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
- Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET Core APM](#runtime-support-policy-for-net-core-apm).
+Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET and .NET Core versions](#end-of-life-net-and-net-core-versions), and [Runtime support policy for .NET and .NET Core](#runtime-support-policy-for-net-and-net-core-apm).
 
 ## Supported processor architectures
 
@@ -108,9 +108,9 @@ Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZU
 
 ## End of life .NET and .NET Core versions
 
-The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
+The Datadog .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
-| Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
+| Issue                                         | Affected .NET Versions                    | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
 | JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
 | Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
@@ -126,9 +126,9 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 | [6.x][8]                    | Latest              |
 | [5.x][9]                    | Latest              |
 
-## Runtime support policy for .NET Core APM
+## Runtime support policy
 
-Datadog APM for .NET Core depends on the host operating system, .NET Core runtime, certain .NET Core libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Core. When the external software no longer supports a version of .NET Core, Datadog APM for .NET Core also limits its support for that version.
+The Datadog .NET Tracer depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, Datadog .NET Tracer also limits its support for that version.
 
 ### Levels of support
 
