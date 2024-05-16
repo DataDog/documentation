@@ -15,7 +15,7 @@ type: multi-code-lang
 code_lang_weight: 40
 further_reading:
 - link: "/tracing/guide/trace-php-cli-scripts/"
-  tags: "Guide"
+  tag: "Guide"
   text: "Tracing PHP CLI Scripts"
 - link: "https://www.datadoghq.com/blog/monitor-php-performance/"
   tag: "Blog"
