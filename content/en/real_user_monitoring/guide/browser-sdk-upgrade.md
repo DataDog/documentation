@@ -126,7 +126,7 @@ In v5, the default `sessionReplaySampleRate` is 0 instead of 100. If you don't i
 
 To promote the support and usage of OpenTelemetry, the default propagator types have been changed to include `tracecontext` in addition to `datadog`.
 
-**Action to take**: If you are not already specifying the desired propagator on the `allowedTracingUrls` initialization parameter, configure your server Access-Control-Allow-Headers to also accept `traceparent` header. For more information, see [connect RUM and Traces][25].
+**Action to take**: If you are not already specifying the desired propagator on the `allowedTracingUrls` initialization parameter, configure your server Access-Control-Allow-Headers to also accept the `traceparent` header. For more information, see [connect RUM and Traces][25].
 
 ### Session plan field
 

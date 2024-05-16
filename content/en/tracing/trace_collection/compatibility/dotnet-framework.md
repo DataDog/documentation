@@ -26,6 +26,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 
 | .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             | Datadog End of Life |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- | ------------------- |
+| 4.8.1                   |                       | [GA](#support-ga)                   | latest                      |                     |
 | 4.8                     |                       | [GA](#support-ga)                   | latest                      |                     |
 | 4.7.2                   |                       | [GA](#support-ga)                   | latest                      |                     |
 | 4.7                     |                       | [GA](#support-ga)                   | latest                      |                     |

@@ -60,6 +60,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: CockroachDB クラスターの全体的な健全性とパフォーマンスを監視
   media: []
@@ -75,9 +77,9 @@ tile:
 
 CockroachDB チェックは、[CockroachDB][1] クラスターの全体的な健全性とパフォーマンスを監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 CockroachDB チェックは [Datadog Agent][2] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
@@ -86,12 +88,12 @@ CockroachDB チェックは [Datadog Agent][2] パッケージに含まれてい
 
 Python 3 を使えないホストやレガシーモードを使うホストについては、以下の[構成][4]を参照してください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -111,7 +113,7 @@ Python 3 を使えないホストやレガシーモードを使うホストに�
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -155,7 +157,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                                            |
 | `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint":"http://%%host%%:8080/_status/vars"}` |
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -174,21 +176,21 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "cockroachdb", "service": "<SERVICE_N
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `cockroachdb` を探します。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cockroachdb" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 CockroachDB チェックには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 CockroachDB チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
