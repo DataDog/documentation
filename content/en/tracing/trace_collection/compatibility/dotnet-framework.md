@@ -18,7 +18,9 @@ further_reading:
 ---
 
 
-The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It is open source. For more information, see the [.NET Tracer repository][1].
+The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
+
+The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
 ## Supported .NET Framework runtimes
 
@@ -37,7 +39,7 @@ The .NET Tracer supports automatic and custom instrumentation on the following .
 | 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
 | 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
 
-Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][4] and in [Runtime support policy for .NET Framework APM](#runtime-support-policy-for-net-framework-apm).
+Additional information can be found within [Microsoft's .NET and .NET Core Lifecycle Policy][4] and in [Runtime support policy](#runtime-support-policy).
 
 <div class="alert alert-info">
   <div class="alert-info"><b>Note:</b> When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
@@ -118,9 +120,9 @@ Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZU
 | [6.x][7]                   | latest              |
 | [5.x][8]                   | latest              |
 
-## Runtime support policy for .NET Framework APM
+## Runtime support policy
 
-Datadog APM for .NET Framework depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, Datadog APM for .NET Framework also limits its support for that version.
+The .NET Tracer depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, the .NET Tracer also limits its support for that version.
 
 ### Levels of support
 
