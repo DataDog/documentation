@@ -285,4 +285,4 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [211]: https://docs.datadoghq.com/integrations/pan_firewall/
 [212]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
 [222]: https://docs.datadoghq.com/integrations/pan_firewall/
-[800]: /integrations/cisco_sdwan
+[800]: /integrations/cisco_sdwan/
