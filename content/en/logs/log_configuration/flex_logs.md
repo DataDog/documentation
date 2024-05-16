@@ -76,7 +76,7 @@ The following list is an example of log sources that are potentially good candid
   - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, and Virtual WAN.
 - **Loadbalancers examples**
   - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, and NGINX.
-- **Artifact Repository Management examples**
+- **Artifact repository management examples**
   - [JFrog Artifactory][4], Archiva, Sonatype Nexus
 - **Identity services and tools examples**
   - Cisco ISE, Okta, OneLogin, and Workday User Activity Logs.
