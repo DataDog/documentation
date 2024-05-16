@@ -67,9 +67,9 @@ Enable LLM Observability programatically through the `LLMOBs.enable()` function 
 from ddtrace.llmobs import LLMObs
 LLMObs.enable(
   ml_app="<YOUR_ML_APP_NAME>",
-  dd_api_key="<YOUR_DATADOG_API_KEY>",
-  dd_site="<YOUR_DATADOG_SITE>",
-  dd_llmobs_no_apm=True,
+  api_key="<YOUR_DATADOG_API_KEY>",
+  site="<YOUR_DATADOG_SITE>",
+  llmobs_no_apm=True,
   integrations=["langchain", "openai"],
 )
 {{< /code-block >}}
@@ -82,23 +82,23 @@ LLMObs.enable(
 : optional - _list_ 
 <br />A list of integration names to enable automatically tracing LLM calls for (e.g. `["openai", "langchain"]`). See [LLM integrations](#llm-integrations) for more information about Datadog's supported LLM integrations. **Note**: if not provided, all supported LLM integrations will be enabled by default. To disable all integrations, pass in an empty list `[]`.
 
-`dd_llmobs_no_apm`
+`llmobs_no_apm`
 : optional - _boolean_ 
 <br />Only required if you are not a Datadog APM customer, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM. If not provided, this will default to the value of `DD_LLMOBS_NO_APM`.
 
-`dd_site`
+`site`
 : optional - _string_ 
 <br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this will default to the value of `DD_SITE`.
 
-`dd_api_key`
+`api_key`
 : optional - _string_ 
 <br />Your Datadog API key. If not provided, this will default to the value of `DD_API_KEY`.
 
-`dd_env`
+`env`
 : optional - _string_
 <br />The name of your application's environment (e.g. `prod`, `pre-prod`, `staging`). If not provided, this will default to the value of `DD_ENV`.
 
-`dd_service`
+`service`
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this will default to the value of `DD_SERVICE`.
 
