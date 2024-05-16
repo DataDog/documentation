@@ -10760,9 +10760,24 @@ components:
           example: name
           type: string
         history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include timeseries and uptime data where `0=monitor` is
-            in `OK` state and `1=monitor` is in `alert` state.
+          description: 'The state transition history for the monitor. It is represented
+            as
+
+            an array of pairs. Each pair is an array containing the timestamp of the
+            transition
+
+            as an integer in Unix epoch format in the first element, and the state
+            as an integer in the
+
+            second element. An integer value of `0` for state means uptime, `1` means
+            downtime, and `2` means no data.
+
+            Periods of no data are counted either as uptime or downtime depending
+            on monitor settings.
+
+            See [SLO documentatio](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+
+            for detailed information.'
           example:
           - - 1579212382
             - 0
@@ -10942,9 +10957,26 @@ components:
           example: name
           type: string
         history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include timeseries and uptime data where `0=monitor` is
-            in `OK` state and `1=monitor` is in `alert` state.
+          description: 'The state transition history for `monitor` or `time-slice`
+            SLOs. It is represented as
+
+            an array of pairs. Each pair is an array containing the timestamp of the
+            transition
+
+            as an integer in Unix epoch format in the first element, and the state
+            as an integer in the
+
+            second element. An integer value of `0` for state means uptime, `1` means
+            downtime, and `2` means no data.
+
+            Periods of no data count as uptime in time-slice SLOs, while for monitor
+            SLOs, no data is counted
+
+            either as uptime or downtime depending on monitor settings. See
+
+            [SLO documentation](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+
+            for detailed information.'
           example:
           - - 1579212382
             - 0
@@ -11597,7 +11629,10 @@ components:
       - time_slice
       type: object
     SLOTimeframe:
-      description: The SLO time window options.
+      description: 'The SLO time window options. Note that "custom" is not a valid
+        option for creating
+
+        or updating SLOs. It is only used when querying SLO history over custom timeframes.'
       enum:
       - 7d
       - 30d

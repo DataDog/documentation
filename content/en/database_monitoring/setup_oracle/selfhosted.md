@@ -8,10 +8,6 @@ further_reading:
   text: "Basic Oracle Integration"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 {{% dbm-oracle-definition %}}
 
 The Agent collects telemetry directly from the database by logging in as a read-only user.
