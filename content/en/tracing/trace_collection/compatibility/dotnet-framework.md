@@ -24,7 +24,7 @@ The .NET Tracer is open source. For more information, see the [.NET Tracer repos
 
 ## Supported .NET Framework runtimes
 
-The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core][2]. The .NET Tracer does not support code running in partial trust environments.
+The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET and .NET Core][2]. The .NET Tracer does not support code running in partial trust environments.
 
 | .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             | Datadog End of Life |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- | ------------------- |
