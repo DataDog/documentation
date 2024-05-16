@@ -47,7 +47,7 @@ As you define the rules using this tool, the threat expressions generated for th
 To use the simple rule creator:
 
 1. In [Agent Configuration][4] or [Threat Detection Rules][3], select **New Rule**, and then select **Simple rule creator**.
-2. Define the detection.
+2. Define the detection. To monitor your resource effectively, you have the following detection type options:
    - To detect unauthorized changes to files, select **File integrity monitoring (FIM)**.
    - To track and analyze system software processes for malicious behavior or policy violations, select **Process activity monitoring**.
    - Enter the file/process names or paths to monitor. 
