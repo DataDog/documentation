@@ -100,6 +100,34 @@ Datadog.initialize(
 CrashReporting.enable()
 ```
 
+### Add app hang reporting
+
+App hangs are an iOS-specific type of error that happens whenever the application is being unresponsive for too long.
+
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration using the `appHangThreshold` initialization parameter. While a common threshold for reporting an app hang is between 2 and 3 seconds, having a customizable threshold makes it easier to find the right balance between fine-grained and noisy observability.
+
+When **enabled**, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in the Error Tracking page.
+
+- **Fatal app hang** - If a hang never gets recovered and the app is terminated, it is reported as a fatal app hang.
+- **Non-fatal app hang** - If the app recovers from a relatively short hang and continues running, it gets reported as a non-fatal hang.
+
+**Note**: App hangs are reported through the RUM SDK (not through Logs).
+
+#### Enable app hangs monitoring
+
+To enable app hangs monitoring:
+
+1. Make sure Datadog [Crash Reporting][10] is enabled.
+2. Using the Datadog API, use the [Create a new RUM application][11] or [Update a RUM application][12] endpoint and set the `appHangThreshold` parameter to `true`.
+
+**Note**: The minimum value this option can be set to is `0.1` seconds (100 ms). However, setting the threshold to very small values may lead to excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, meaning some hangs lasting very close to this threshold may not be reported.
+
+#### Disable app hangs monitoring
+
+To disable app hangs monitoring:
+
+1. Using the Datadog API, use the [Create a new RUM application][11] or [Update a RUM application][12] endpoint and set the `appHangThreshold` parameter to `nil`.
+
 ## Get deobfuscated stack traces
 
 ### Symbolicate crash reports
@@ -226,11 +254,14 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/real_user_monitoring/ios
+[2]: /real_user_monitoring/ios
 [3]: https://github.com/DataDog/datadog-fastlane-plugin
 [4]: https://github.com/marketplace/actions/datadog-upload-dsyms
 [5]: https://www.npmjs.com/package/@datadog/datadog-ci
 [6]: https://appstoreconnect.apple.com/
 [7]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
 [8]: https://app.datadoghq.com/rum/error-tracking
-[9]: https://docs.datadoghq.com/logs/log_collection/ios
+[9]: /logs/log_collection/ios
+[10]: /real_user_monitoring/error_tracking/mobile
+[11]: /api/latest/rum/#create-a-new-rum-application
+[12]: /api/latest/rum/#update-a-rum-application
