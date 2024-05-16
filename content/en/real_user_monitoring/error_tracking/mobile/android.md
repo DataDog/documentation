@@ -39,7 +39,7 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-### Report ANRs
+### Add ANR reporting
 
 An "Application Not Responding" ([ANR][6]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
 
