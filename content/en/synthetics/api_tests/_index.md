@@ -25,7 +25,7 @@ further_reading:
   tag: 'Documentation'
   text: 'Run API tests on internal endpoints'
 - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test'
-  tag: "External Site"'
+  tag: 'External Site'
   text: 'Create and manage Synthetic API Tests with Terraform'
 ---
 
