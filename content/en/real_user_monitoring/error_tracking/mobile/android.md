@@ -46,7 +46,7 @@ An "Application Not Responding" ([ANR][6]) is an Android-specific type of error 
 ANRs are only reported through the RUM SDK (not through Logs).
 
 #### Report fatal ANRs
-Fatal ANRs are ANRs that result in crashes. They are reported when the application is being unresponsive and leads to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
+Fatal ANRs result in crashes. The application reports them when it's unresponsive, leading to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
 
 {{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="A fatal crash report in Error Tracking." >}}
 
@@ -60,7 +60,7 @@ Non-fatal ANRs may or may not have led to the application being terminated (cras
 {{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="A non-fatal crash report in Error Tracking." >}}
 
 - In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise
-- By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
+- By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below, however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
 
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the RUM SDK.
 
