@@ -17,6 +17,9 @@ further_reading:
     - link: '/integrations/'
       text: 'Integrations'
       tag: "Datadog's full list of integrations"
+    - link: 'https://www.datadoghq.com/blog/azure-integration-configuration/'
+      text: 'Fine-tune observability configurations for all your Azure integrations in one place'
+      tag: 'Blog'
 ---
 
 
@@ -52,8 +55,7 @@ See the following table for a summary of the various configuration options avail
 
 ***_All sites_** configurations can be used in the US3 site orgs, but only US3 site orgs can use the Azure Native integration.
 
-
-<div class="alert alert-warning"> **Note**: <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">Cloud cost management.</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
+<div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">Cloud cost management.</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
 </div>
 
 <!-- ---------------------------------------------------------- -->
@@ -76,15 +78,12 @@ Follow the instructions on this page to set up the **Standard Azure integration*
 
 ### Azure native integration
 
-For automatic configuration of the Azure Native integration through Terraform, see the [Azure Native Integration Programmatic Management Guide][1].
+For automatic configuration of the Azure Native integration through Terraform, see the [Azure Native Integration Programmatic Management Guide][201].
 
-For manual configuration of the Azure Native integration through creation of the Datadog resource in Azure, see the [Azure Native Integration Manual Setup Guide][2].
+For manual configuration of the Azure Native integration through creation of the Datadog resource in Azure, see the [Azure Native Integration Manual Setup Guide][202].
 
-<div class="alert alert-warning"> **Note**: <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">Cloud cost management.</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
-</div>
-
-[1]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/?tab=windows
-[2]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=azurecli
+[201]: https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/?tab=windows
+[202]: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=azurecli
 
 {{% /site-region %}}
 
@@ -96,55 +95,51 @@ For automatic configuration for the Standard Azure integration, see the [Standar
 
 For manual configuration for the Standard Azure integration, see the [Standard Azure Integration Manual Setup Guide][7] for instructions specific to the Azure portal and CLI.
 
-<!-- ---------------------------------------------------------- -->
 
 ## Metric Collection
 Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. See the [Integrations page][9] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. 
 
-You can find your Azure metrics in the metrics summary page in the Datadog platform by navigating to:  `Metrics > Summary > Azure`
+You can find your Azure metrics in the metrics summary page in the Datadog platform by navigating to `Metrics > Summary` and searching for `Azure`.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Metric summary image" style="width:100%;" >}}
 
 
-<!-- ---------------------------------------------------------- -->
 
 ## Log Collection 
-### Azure Native Integration
 
 Follow the instructions on this page to set up log collection through the **Standard Azure integration**. 
-If you are on the US3 site and use the Azure Native Integration, use the site selector on the right side of this page to select US3 for instructions on log collection using the Azure Native integration. 
+If you are on the US3 site and use the Azure Native Integration, use the site selector on the right side of this page to select US3 for instructions on [log collection using the Azure Native integration][18]. 
 
  
 
 {{% site-region region="us3" %}}
 
 ### Azure Native Integration
-If you are using the Azure Native Integration, see the Send Azure Logs with the Datadog Resource guide for instructions on sending your _subscription level_, _Azure resource_, and _Azure Active Directory_ logs to Datadog.
+If you are using the Azure Native Integration, see the [Send Azure Logs with the Datadog Resource][18] guide for instructions on sending your _subscription level_, _Azure resource_, and _Azure Active Directory_ logs to Datadog.
 
-<div class="alert alert-warning"> **Note**: <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
+<div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
 </div>
 
 {{% /site-region %}}
 
 
 ### Standard Azure Integration
-If you are using the Standard Azure Integration, see the [Send Azure Logs to Datadog guide][10] for instructions on sending your Azure logs to Datadog with Event hub. You can choose between an automatic or manual process to enable log collection. 
+If you are using the Standard Azure Integration, see the [Send Azure Logs to Datadog guide][10] for instructions on sending your Azure logs to Datadog with Event Hub. You can choose between an automatic or manual process to enable log collection. 
 
-You can find your Azure logs in the log explorer page in the Datadog platform by navigating to: `Logs explorer > source:azure*`
+You can find your Azure logs in the log explorer page in the Datadog platform by navigating to the Logs Explorer and querying for `source:azure*`.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_logExplorer.png" alt="Log explorer image" style="width:100%;" >}}
 
 
-<!-- ---------------------------------------------------------- -->
 
 ## Get more from the Datadog Platform 
 
 ### Installing the agent for greater visibility into your application
-After you set up your Azure integration, our crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1].
+After you set up your Azure integration, Datadog crawlers automatically collect Azure metrics, but you can gain even deeper visibility into your Azure instances with the [Datadog Agent][1].
 
 #### Azure Native Agent installation
 
-The simplest way to install the Datadog Agent is directly in Azure with the [VM Extension][11] or [natively within Azure AKS][12] thus avoiding the complexity of third-party management tools. 
+The simplest way to install the Datadog Agent is directly in Azure with the [VM Extension][11] or [natively within Azure AKS][12], thus avoiding the complexity of third-party management tools. 
 
 #### Standard Azure Agent installation
 
@@ -155,9 +150,9 @@ Installing the Datadog Agent into your environment allows you to collect additio
 - **process utilization**
 - **system level metrics** 
 
-You can also use the built-in StatsD client to send custom metrics from your application in order to correlate what’s happening with your application, your users, and your system.
+You can also use the built-in StatsD client to send custom metrics from your application to correlate what's happening with your application, your users, and your system.
 
-See our guide on [_Why should I install the Datadog Agent on my cloud instances?_][15]  for more information on the benefits of installing the Datadog Agent on your instances.
+See the guide on [_Why should I install the Datadog Agent on my cloud instances?_][15]  for more information on the benefits of installing the Datadog Agent on your instances.
 
 
 ## Troubleshooting
@@ -187,3 +182,4 @@ Still need help? Contact [Datadog support][17].
 [15]: https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
 [16]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/
 [17]: https://docs.datadoghq.com/help/
+[18]: https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/
