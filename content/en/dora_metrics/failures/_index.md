@@ -4,6 +4,7 @@ kind: documentation
 description: Learn how to send incident events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/incidents
+- /dora_metrics/setup/incidents
 is_beta: true
 further_reading:
 - link: "/continuous_integration/dora_metrics/setup/deployments"
