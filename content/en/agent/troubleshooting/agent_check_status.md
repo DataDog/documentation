@@ -3,10 +3,10 @@ title: Agent Check Status
 kind: documentation
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Agent Debug Mode"
 - link: "/agent/troubleshooting/send_a_flare/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Send an Agent Flare"
 ---
 

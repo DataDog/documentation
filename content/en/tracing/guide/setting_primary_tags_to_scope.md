@@ -14,7 +14,7 @@ further_reading:
   tags: "Enrich Tracing"
   text: "Implement Opentracing across your applications."
 - link: "/tracing/glossary/"
-  tag: "Use the APM UI"
+  tag: "Documentation"
   text: "Explore your services, resources, and traces"
 ---
 

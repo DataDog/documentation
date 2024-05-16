@@ -11,7 +11,7 @@ further_reading:
   tag: "Documentation"
   text: "Service Definition API"
 - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Service Definition Schema"
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"

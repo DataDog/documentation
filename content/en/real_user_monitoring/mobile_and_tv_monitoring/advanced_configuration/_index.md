@@ -7,7 +7,7 @@ further_reading:
   tag: Github
   text: Source code for dd-sdk-android
 - link: "https://github.com/DataDog/dd-sdk-ios"
-  tag: "Github"
+  tag: "Source Code"
   text: "Source code for dd-sdk-ios"
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
