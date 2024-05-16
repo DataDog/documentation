@@ -45,7 +45,7 @@ To investigate why an event is listed on the [Agent Events explorer][13], select
 
 The event details include the attributes, [metrics][16], and [processes][15]. **Metrics** links to the host dashboard and **Processes** links to the host [process dashboard][17] and process agent installation steps.
 
-In **Path**, look at latest process tree. This gives you the best overview of what occurred by showing you all of the commands that led to the command that initiated the event. 
+In **Path**, the latest process tree is displayed. This gives you the best overview of what occurred by showing you all of the commands that led to the command that initiated the event. 
 
 **Path** is often the best place to start your investigation of an event.
 
@@ -65,10 +65,10 @@ To triage an event:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[11]: https://docs.datadoghq.com/security/threats/security_signals
+[11]: /security/threats/security_signals
 [12]: /security/default_rules/#cat-cloud-security-management
 [13]: https://app.datadoghq.com/security/agent-events
-[14]: https://docs.datadoghq.com/service_management/events/explorer/
+[14]: /service_management/events/explorer/
 [15]: /infrastructure/process/
-[16]: https://docs.datadoghq.com/metrics/
+[16]: /metrics/
 [17]: https://app.datadoghq.com/process
