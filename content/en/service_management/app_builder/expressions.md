@@ -10,7 +10,7 @@ further_reading:
   text: "Components"
 ---
 
-You can use JavaScript (JS) expressions anywhere to create custom interactions between the different parts of your app.
+You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app.
 
 Some fields, like the [post-query transformation][1], display a code editor by default and accept plain JS. In all other fields, enclose your JS expressions in `${}`. For example, to interpolate the values of two text input components named `textInput0` and `textInput1` into the **Content** property of a text component (and add an exclamation mark), use the expression `${textInput0?.value} ${textInput1?.value}!`.
 
@@ -26,7 +26,7 @@ App Builder accepts standard vanilla JavaScript syntax, however:
 Before you create an expression, it's helpful to know the available properties and defaults or current values for the component you want to interact with.
 
 You can view the available properties and values for a component using:
-- **App State**: Provides properties and values for all components and queries in your app.
+- **App State**: Provides properties and values for all components and queries in your app, as well as global variables such as state variables or dashboard template variables.
 - **Inspect Data**: Provides properties and values for a specific component or query in your app.
 - The **Admin Console**: The **Data** tab of the **Admin Console** provides properties and values for all components and queries in your app.
 
@@ -58,13 +58,23 @@ To access the **Admin Console**:
 
 Most UI components provide built-in options such as toggles and text alignment that cover basic app usage. To add a custom interaction to a component, click the code editor symbol (**</>**) and enter a JS expression.
 
+Below are some examples of common custom interactions.
+
+### Conditional visibility
+
+You can make the visibility of a component dependent on other components.
+
 For example, if you want a text component to be visible only when two text input components named `textInput0` and `textInput1` have values, use the expression `${textInput0?.value && textInput1?.value}` in the **Is Visible** property.
 
 {{< img src="service_management/app_builder/expression_example.mp4" alt="The text box is only visible if both the textInput0 and textInput1 components have values" video=true >}}
 
 <div class="alert alert-info">As you type an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.</div>
 
-Adding to the example above, if your app has a button that uses the content from a text component to send a message, you can disable the button unless the text component is visible:
+### Disable a component conditionally
+
+Similar to visibility, you can disable a component unless conditions are met by other components in your app.
+
+For example, if your app has a button that uses the content from a text component to send a message, you can disable the button unless the text component is visible:
 1. Click the button component on your canvas.
 1. Click the code editor symbol (**</>**) next to the **Is Disabled** property.
 1. Add the expression `${!text0?.isVisible}`.
@@ -73,7 +83,9 @@ The text component is invisible and the button is disabled unless both text inpu
 
 {{< img src="service_management/app_builder/is-disabled-example.png" alt="The text component is invisible and the button is disabled unless both text input fields have content." style="width:100%;" >}}
 
-You can observe a similar interaction in the [EC2 Management blueprint][3]. The `instanceType` Select component is disabled while the `listInstances` query is loading. To accomplish this, the **Is Disabled** property uses the expression `${listInstances.isLoading}`.
+### Disable a component while loading
+
+You can disable a component while a query is in a loading state. In the [EC2 Management blueprint][3], the `instanceType` Select component is disabled while the `listInstances` query is loading. To accomplish this, the **Is Disabled** property uses the expression `${listInstances.isLoading}`.
 
 {{< img src="service_management/app_builder/isloading.png" alt="The 'instanceType' Select component is disabled while the 'listInstances' query is loading." style="width:100%;" >}}
 
@@ -81,7 +93,9 @@ You can observe a similar interaction in the [EC2 Management blueprint][3]. The 
 
 Similar to components, you can use JS expressions to alter your queries based on user interaction.
 
-For example, the [PagerDuty On-call Manager blueprint][4] filters the result of the `listSchedules` query based on input from the user. The user selects a team and user from the `team` and `user` **Select** components.
+### Filter query results on user input
+
+The [PagerDuty On-call Manager blueprint][4] filters the result of the `listSchedules` query based on input from the user. The user selects a team and user from the `team` and `user` **Select** components.
 
 Inside the `listSchedules` query, the following post-query transformation filters the results based on the values of `team` and `user`:
 
