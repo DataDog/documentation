@@ -36,9 +36,9 @@ Your crash reports appear in [**Error Tracking**][8].
 
 If you have not set up the iOS SDK yet, follow the [in-app setup instructions][1] or see the [iOS RUM setup documentation][2].
 
-### Add Crash Reporting 
+### Add crash reporting 
 
-To enable Crash Reporting, make sure to also enable [RUM][2] and, or [Logs][9]. Then, add the package according to your dependency manager and update your initialize snippet.  
+To enable crash reporting, make sure to also enable [RUM][2] and, or [Logs][9]. Then, add the package according to your dependency manager and update your initialization snippet.  
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -108,25 +108,42 @@ By default, app hangs reporting is **disabled**, but you can enable it and set y
 
 When **enabled**, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in the Error Tracking page.
 
-- **Fatal app hang** - If a hang never gets recovered and the app is terminated, it is reported as a fatal app hang. Fatal app hangs are marked with a "Crash" tag on them in the Error Tracking page.
-- **Non-fatal app hang** - If the app recovers from a relatively short hang and continues running, it gets reported as a non-fatal hang.
+- **Fatal app hang** - If a hang never gets recovered and the app is terminated, it is reported as a fatal app hang. Fatal app hangs are marked as "Crash" on them in the Error Tracking page.
+
+  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the Error Tracking page." style="width:60%;" >}}
+
+- **Non-fatal app hang** - If the app recovers from a relatively short hang and continues running, it gets reported as a non-fatal hang. Non-fatal app hangs do not have a "Crash" mark on them in the Error Tracking page.
+
+  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the Error Tracking page." style="width:60%;" >}}
 
 **Note**: App hangs are reported through the RUM SDK (not through Logs).
 
 #### Enable app hangs monitoring
 
+**Note**: If Datadog [crash ceporting][10] is not enabled, you won't be able to view the relevant stack traces.
+
 To enable app hangs monitoring:
 
-1. Make sure Datadog [Crash Reporting][10] is enabled.
-2. Using the Datadog API, use the [Create a new RUM application][11] or [Update a RUM application][12] endpoint and set the `appHangThreshold` parameter to `true`.
+1. During or after the [instrumentation][13] step, update the initialization snippet with the `appHangThreshold` parameter:
 
-**Note**: The minimum value this option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to this threshold may not be reported.
+   ```swift
+   RUM.enable(
+       with: RUM.Configuration(
+           applicationID: "<rum application id>",
+           appHangThreshold: 2
+       )
+   )
+   ```
+
+2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter 0.25 to report hangs lasting at least 250 ms.
+
+**Note**: The minimum value this option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to an excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to this threshold may not be reported.
+
+**Note**: Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to .25s) and lowering it incrementally if you feel you are missing out on observability.
 
 #### Disable app hangs monitoring
 
-To disable app hangs monitoring:
-
-1. Using the Datadog API, use the [Create a new RUM application][11] or [Update a RUM application][12] endpoint and set the `appHangThreshold` parameter to `nil`.
+To disable app hangs monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
 
 ## Get deobfuscated stack traces
 
@@ -241,7 +258,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
    ```swift
    func didTapButton() {
-   fatalError(“Crash the app”)
+   fatalError("Crash the app")
    }
    ```
 
@@ -265,3 +282,4 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [10]: /real_user_monitoring/error_tracking/mobile
 [11]: /api/latest/rum/#create-a-new-rum-application
 [12]: /api/latest/rum/#update-a-rum-application
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/#initialize-the-rum-monitor-and-enable-urlsessioninstrumentation
