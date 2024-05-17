@@ -14,6 +14,7 @@ LLM Observability is not available in the US1-FED site.
 The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, you can use the [LLM Observability SDK for Python][1].
 
 ## Spans API
+
 Use this endpoint to send spans to Datadog. For details on the available kinds of spans, see [Span Kinds][2].
 
 Endpoint
@@ -216,8 +217,9 @@ Your application name (the value of `ml_app`) must start with a letter. It may c
 
 The name can be up to 200 characters long and contain Unicode letters (which includes most character sets, including languages such as Japanese).
 
-## Evaluation metrics API
-Use this endpoint to send evaluation metrics for a span to Datadog.
+## Evaluations API
+
+Use this endpoint to send evaluations associated with a given span to Datadog.
 
 Endpoint
 : `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/eval-metric`
@@ -225,7 +227,7 @@ Endpoint
 Method
 : `POST`
 
-Evaluation metrics require a `span_id` and `trace_id`. 
+Evaluations require a `span_id` and `trace_id`.
 - If you are not using the LLM Observability SDK, send the `span_id` and `trace_id` that you used to create your target span.
 - If you are using the LLM Observability SDK, obtain the `span_id` and `trace_id` by finding your target span, and accessing the `root_span.span_id` and the `root_span.trace_id` attributes.
 
@@ -281,7 +283,7 @@ Evaluation metrics require a `span_id` and `trace_id`.
 | Field   | Type                        | Description                              | Guaranteed |
 |---------|-----------------------------|------------------------------------------|------------|
 | ID      | string                      | Response UUID generated upon submission. | Yes        |
-| metrics | [[EvalMetric](#evalmetric)] | A list of evaluation metrics.                  | Yes        |
+| metrics | [[EvalMetric](#evalmetric)] | A list of evaluations.                   | Yes        |
 {{% /tab %}}
 
 {{% tab "Example" %}}
@@ -323,22 +325,22 @@ Evaluation metrics require a `span_id` and `trace_id`.
 
 | Field   | Type         | Description                                         |
 |---------|--------------|-----------------------------------------------------|
-| metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of evaluation metrics for a given prompt-response pair. |
+| metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of evaluations each associated with a span. |
 
 #### EvalMetric
 
 | Field                  | Type   | Description  |
 |------------------------|--------|--------------|
 | ID                     | string | Evaluation metric UUID (generated upon submission). |
-| span_id [*required*]    | string | The ID of the span that this evaluation metric is associated with. This should be the span ID of the root span. |
-| trace_id [*required*]   | string | The ID of the trace that this evaluation metric is associated with. |
+| span_id [*required*]    | string | The ID of the span that this evaluation is associated with. |
+| trace_id [*required*]   | string | The ID of the trace that this evaluation is associated with. |
 | timestamp              | int64  | A UTC UNIX timestamp representing the time the request was sent. |
-| metric_type [*required*]| string | The type of evaluation metric: `"categorical"` or `"score"`. |
-| label [*required*]      | string | The unique name or label for the provided evaluation metric. |
-| categorical_value [*required if the metric_type is "score"*]    | string | A string representing the category that the evaluation metric belongs to. |
-| score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation metric. |
+| metric_type [*required*]| string | The type of evaluation: `"categorical"` or `"score"`. |
+| label [*required*]      | string | The unique name or label for the provided evaluation . |
+| categorical_value [*required if the metric_type is "score"*]    | string | A string representing the category that the evaluation belongs to. |
+| score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
 | flagged                | boolean| Flag content as inappropriate or incorrect. |
-| annotation             | string | A generic string note about the provided evaluation metric. |
+| annotation             | string | A generic string note about the provided evaluation. |
 
 #### EvalMetricsRequestData
 

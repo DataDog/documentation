@@ -51,7 +51,7 @@ Optionally, you can also:
 - Associate multiple interactions with one user by specifying a `session_id`. See [Tracking user sessions][6] in the SDK documentation.
 - [Persist a span between contexts or scopes][8] by manually starting and stopping it.
 - [Override the name of the LLM application with a different name][9] when starting a root span, which can be useful for differentiating between services or running an experiment.
-- Submit feedback from the users of your LLM application (thumbs up/thumbs down, rating from 1 to 5, and so on) as custom evaluation metrics via the [SDK][15] or the [API][16]. This allows you to visualize the feedback evaluation metrics in your traces and also in the [cluster map view][17], where you can monitor any patterns in different topics of your LLM applications against these metrics.
+- Submit feedback from the users of your LLM application (thumbs up/thumbs down, rating from 1 to 5, and so on) as custom [evaluations][18] via the [SDK][15] or the [API][16]. This allows you to visualize the feedback in your traces and also in the [cluster map view][17], where you can monitor any patterns in different topics of your LLM applications against these evaluations.
 
 ### Span creation example
 
@@ -84,6 +84,7 @@ For more information on alternative tracing methods and tracing features, see th
 [12]: /tracing/llm_observability/sdk
 [13]: /tracing/llm_observability/api
 [14]: https://app.datadoghq.com/dash/integration/llm_analytics
-[15]: /tracing/llm_observability/sdk/#submitting-evaluation-metrics
-[16]: /tracing/llm_observability/api/?tab=model#eval-metrics-api
+[15]: /tracing/llm_observability/sdk/#evaluations
+[16]: /tracing/llm_observability/api/?tab=model#evaluations-api
 [17]: https://app.datadoghq.com/llm/clusters
+[18]: /tracing/llm_observability/submit-evaluations
