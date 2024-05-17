@@ -57,7 +57,7 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
-<br />Only required if you are not using the Datadog agent, in which case this should be set to `1` or `true`.
+<br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
 
 ### In-code setup
 
@@ -84,7 +84,7 @@ LLMObs.enable(
 
 `agentless_enabled`
 : optional - _boolean_ 
-<br />Only required if you are not using the Datadog agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
+<br />Only required if you are not using the Datadog Agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
 : optional - _string_ 
