@@ -106,21 +106,21 @@ App hangs are an iOS-specific type of error that happens whenever the applicatio
 
 By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration using the `appHangThreshold` initialization parameter. A common threshold for reporting an app hang is between 2 and 3 seconds. However, having a customizable threshold makes it easier to find the right balance between fine-grained and noisy observability.
 
+App hangs are reported through the RUM SDK (not through Logs).
+
 When **enabled**, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in the Error Tracking page.
 
-- **Fatal app hang** - If a hang never gets recovered and the app is terminated, it is reported as a fatal app hang. Fatal app hangs are marked as "Crash" on them in the Error Tracking page.
+- **Fatal app hang** - How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as "Crash" on them in the Error Tracking page.
 
   {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the Error Tracking page." style="width:60%;" >}}
 
-- **Non-fatal app hang** - If the app recovers from a relatively short hang and continues running, it gets reported as a non-fatal hang. Non-fatal app hangs do not have a "Crash" mark on them in the Error Tracking page.
+- **Non-fatal app hang** - How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in the Error Tracking page.
 
   {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the Error Tracking page." style="width:60%;" >}}
 
-**Note**: App hangs are reported through the RUM SDK (not through Logs).
-
 #### Enable app hangs monitoring
 
-**Note**: If Datadog [crash ceporting][10] is not enabled, you won't be able to view the relevant stack traces.
+**Note**: If Datadog [crash ceporting][10] is not enabled, you cannot view the relevant stack traces.
 
 To enable app hangs monitoring:
 
