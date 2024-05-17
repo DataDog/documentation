@@ -36279,6 +36279,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Get a list of spans
       tags:
       - Spans
@@ -36325,6 +36330,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Search spans
       tags:
       - Spans
