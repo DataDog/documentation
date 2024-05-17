@@ -18,8 +18,11 @@ products:
 
 This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
-multiple layers of visibility for AWS Fargate
-APM and Infra Monitoring as nice-to-have for performance and reliability insights.
+## Full stack coverage for AWS Fargate
+
+Datadog Security provides full stack coverage for AWS Fargate, as shown in the following tables:
+
+### Fargate assets
 
 <table>
     <thead>
@@ -33,29 +36,57 @@ APM and Infra Monitoring as nice-to-have for performance and reliability insight
     <tr>
         <td>Fargate Application</td>
         <td>Application Performance Monitoring</td>
-        <td colspan="2">Application Security Management</td>
+        <td>Application Security Management</td>
+        <td>Application Security Management</td>
     </tr>
     <tr>
         <td>Fargate Infrastructure</td>
         <td>Infrastructure Monitoring</td>
-        <td colspan="2">Cloud Workload Security</td>
+        <td>CSM Threats</td>
+        <td>CSM Threats</td>
+    </tr>
+</table>
+
+### Fargate-related resources
+
+<table>
+    <thead>
+    <th>Asset</th>
+    <th>Observability</th>
+    <th>Vulnerabilities and Misconfiguration Remediation</th>
+    <th>Threat Detection and Response</th>
+    </thead>
+    <tr>
+        <td>AWS IAM roles and policies</td>
+        <td>Log Management</td>
+        <td>Cloud Security Management</td>
+        <td>Cloud SIEM</td>
     </tr>
     <tr>
-        <td colspan="4">Fargate Related Resources</td>
+        <td>AWS databases</td>
+        <td>Log Management</td>
+        <td>Cloud Security Management</td>
+        <td>Cloud SIEM</td>
     </tr>
     <tr>
-        <td rowspan="2">AWS Account and Resources (IAM Roles & Policies, Databases, S3)</td>
-        <td rowspan="2">Log Management</td>
+        <td>AWS S3 buckets</td>
+        <td>Log Management</td>
         <td>Cloud Security Management</td>
         <td>Cloud SIEM</td>
     </tr>
 </table>
 
+## How it works
+
+{{< img src="security/csm/csm_fargate_workflow2.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="100%">}}
+
 ## Cloud Security Management
 
 ### Prerequisites
 
-- CSM Enterprise or CSM Workload Security with the AWS integration configured
+- The Datadog AWS integration is installed and configured for your AWS accounts
+- The Datadog AWS integration is installed and configured with Cloud Security Management enabled for your AWS accounts
+- The Datadog AWS integration is installed and configured with Resource Collection enabled for Cloud Security Management
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
@@ -63,6 +94,8 @@ APM and Infra Monitoring as nice-to-have for performance and reliability insight
 
 * `cws-instrumentation-init`: `datadog/cws-instrumentation:latest`
 * `datadog-agent`: `datadog/agent:latest`
+
+<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security Management.</div>
 
 ### Installation
 
@@ -248,7 +281,9 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-Another method to verify that the Agent is sending events to CSM is to manually trigger an AWS Fargate security signal.
+<div class="alert alert-info">Another method to verify that the Agent is sending events to CSM is to manually trigger an AWS Fargate security signal.</div>
+
+<div class="alert alert-info">You can also verify the Agent is sending events to CSM by manually triggering an AWS Fargate security signal.</div>
 
 In the task definition, replace the "workload" container with the following:
 
@@ -273,6 +308,8 @@ In the task definition, replace the "workload" container with the following:
 - The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 - Datadog APM is configured for your application or service, and traces are being received by Datadog.
 
+<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
+
 ### Installation
 
 #### Threat Detection and Protection
@@ -296,12 +333,6 @@ For step-by-step instructions, see the following articles:
 
 ## Cloud SIEM
 
-AWS Fargate and Related Resources via AWS Cloud Controlplane logs
-
-*Control Plane monitoring*
-
-AWS account logs (not the eks logs), CloudTrail
-
 For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 
 ### Enable AWS CloudTrail logging
@@ -320,6 +351,7 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[9]: https://app.datadoghq.com/logs
 [10]: /security/application_security/enabling/tracing_libraries/threat_detection/java?tab=awsfargate
 [11]: /security/application_security/enabling/tracing_libraries/threat_detection/go/?tab=amazonecs
 [12]: /security/application_security/enabling/tracing_libraries/threat_detection/dotnet?tab=awsfargate
