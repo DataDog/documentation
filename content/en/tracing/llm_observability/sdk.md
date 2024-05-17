@@ -55,9 +55,9 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : required - _string_ 
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
-`DD_LLMOBS_NO_APM`
+`DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
-<br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
+<br />Only required if you are not using the Datadog agent, in which case this should be set to `1` or `true`.
 
 ### In-code setup
 
@@ -69,22 +69,22 @@ LLMObs.enable(
   ml_app="<YOUR_ML_APP_NAME>",
   api_key="<YOUR_DATADOG_API_KEY>",
   site="<YOUR_DATADOG_SITE>",
-  llmobs_no_apm=True,
+  agentless_enabled=True,
   integrations=["langchain", "openai"],
 )
 {{< /code-block >}}
 
 `ml_app`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this will default to the value of `DD_LLMOBS_ML_APP`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this will default to the value of `DD_LLMOBS_APP_NAME`.
 
 `integrations`
 : optional - _list_ 
 <br />A list of integration names to enable automatically tracing LLM calls for (example: `["openai", "langchain"]`). See [LLM integrations](#llm-integrations) for more information about Datadog's supported LLM integrations. **Note**: if not provided, all supported LLM integrations are enabled by default. To disable all integrations, pass in an empty list `[]`.
 
-`llmobs_no_apm`
+`agentless_enabled`
 : optional - _boolean_ 
-<br />Only required if you are not a Datadog APM customer, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires Datadog APM. If not provided, this defaults to the value of `DD_LLMOBS_NO_APM`.
+<br />Only required if you are not using the Datadog agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
 : optional - _string_ 
