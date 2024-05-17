@@ -2,16 +2,6 @@
 title: AWS Fargate Configuration Guide for Datadog Security
 kind: documentation
 disable_toc: false
-products:
-- name: Cloud SIEM
-  url: /security/cloud_siem/
-  icon: siem
-- name: Cloud Security Management
-  url: /security/cloud_security_management/
-  icon: cloud-security-management
-- name: Application Security Management
-  url: /security/application_security/
-  icon: app-sec
 ---
 
 <div class="alert alert-warning">Cloud Security Management on AWS Fargate is in beta.</div>
@@ -85,8 +75,6 @@ Datadog Security provides full stack coverage for AWS Fargate, as shown in the f
 ### Prerequisites
 
 - The Datadog AWS integration is installed and configured for your AWS accounts
-- The Datadog AWS integration is installed and configured with Cloud Security Management enabled for your AWS accounts
-- The Datadog AWS integration is installed and configured with Resource Collection enabled for Cloud Security Management
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
@@ -281,8 +269,6 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-<div class="alert alert-info">Another method to verify that the Agent is sending events to CSM is to manually trigger an AWS Fargate security signal.</div>
-
 <div class="alert alert-info">You can also verify the Agent is sending events to CSM by manually triggering an AWS Fargate security signal.</div>
 
 In the task definition, replace the "workload" container with the following:
@@ -305,8 +291,8 @@ In the task definition, replace the "workload" container with the following:
 
 ### Prerequisites
 
-- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-- Datadog APM is configured for your application or service, and traces are being received by Datadog.
+- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment
+- Datadog APM is configured for your application or service
 
 <div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
 
@@ -333,13 +319,19 @@ For step-by-step instructions, see the following articles:
 
 ## Cloud SIEM
 
+### Prerequisites
+
+- [Log ingestion][21] is configured to collect logs from your sources.
+
+### Installation
+
 For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 
-### Enable AWS CloudTrail logging
+#### Enable AWS CloudTrail logging
 
 {{% cloud-siem-aws-cloudtrail-enable %}}
 
-### Send AWS CloudTrail logs to Datadog
+#### Send AWS CloudTrail logs to Datadog
 
 {{% cloud-siem-aws-cloudtrail-send-logs %}}
 
@@ -363,3 +355,4 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [18]: /security/application_security/enabling/tracing_libraries/code_security/java/
 [19]: /security/application_security/enabling/tracing_libraries/code_security/dotnet?tab=awsfargate
 [20]: /security/application_security/enabling/tracing_libraries/code_security/nodejs
+[21]: https://app.datadoghq.com/security/configuration/siem/setup
