@@ -11770,15 +11770,17 @@ components:
       - DESCENDING
     LogsStorageTier:
       default: indexes
-      description: Specifies storage type as indexes or online-archives
+      description: Specifies storage type as indexes, online-archives or flex
       enum:
       - indexes
       - online-archives
+      - flex
       example: indexes
       type: string
       x-enum-varnames:
       - INDEXES
       - ONLINE_ARCHIVES
+      - FLEX
     LogsWarning:
       description: A warning message indicating something that went wrong with the
         query

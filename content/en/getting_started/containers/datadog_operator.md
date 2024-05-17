@@ -6,10 +6,10 @@ further_reading:
     tag: 'documentation'
     text: 'Datadog Operator'
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
-    tag: 'GitHub'
+    tag: "Source Code"
     text: 'Datadog Operator: Advanced Installation'
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
-    tag: 'GitHub'
+    tag: "Source Code"
     text: 'Datadog Operator: Configuration'
 ---
 

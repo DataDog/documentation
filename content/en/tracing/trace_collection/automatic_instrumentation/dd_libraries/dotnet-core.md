@@ -39,10 +39,10 @@ further_reading:
     tag: "Blog"
     text: "Optimize your .NET application performance with the Datadog Continuous Profiler"
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Source code"
 ---
 
