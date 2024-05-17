@@ -1,5 +1,5 @@
 ---
-title: Submit evaluations
+title: Submit Evaluations
 kind: guide
 ---
 {{% site-region region="gov" %}}
@@ -13,14 +13,14 @@ LLM Observability is not available in the US1-FED site.
 ## Overview
 
 In the context of LLM applications, it's important to track user feedback and evaluate the quality of your LLM application's responses.
-While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [Python SDK](#submitting-evaluations-via-sdk), or with the [LLM Observability API](#submitting-evaluations-via-api).
+While LLM Observability provides a few out-of-the-box evaluations for your traces, you can submit your own evaluations to LLM Observability in two ways: with Datadog's [Python SDK](#submitting-evaluations-with-the-sdk), or with the [LLM Observability API](#submitting-evaluations-with-the-api).
 
-## Submitting evaluations via SDK
+## Submitting evaluations with the SDK
 
 To submit evaluations from your traced LLM application to Datadog, you'll need to associate it with a span using the below steps:
 
 1. Extract the span context from the given span by using `LLMObs.export_span(span)`. If `span` is not provided (as when using function decorators), the SDK exports the current active span. See [Exporting a span][1] for more details.
-2. Use `LLMObs.submit_evaluation()` with the extracted span context and evaluation information. See [Submitting evalutions][2] for more details.
+2. Use `LLMObs.submit_evaluation()` with the extracted span context and evaluation information. See [Submitting evaluations][2] in the SDK documentation for details.
 
 ### Example
 
@@ -42,7 +42,7 @@ def llm_call():
 {{< /code-block >}}
 
 
-## Submitting evaluations via API
+## Submitting evaluations with the API
 
 You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][3] for more details on the API specifications.
 

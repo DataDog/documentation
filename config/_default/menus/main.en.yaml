@@ -2983,21 +2983,26 @@ menu:
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_trace_an_application
       weight: 702
+    - name: Submit Evaluations
+      url: tracing/llm_observability/submit_evaluations/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_submit_evaluations
+      weight: 703
     - name: Span Kinds
       url: tracing/llm_observability/span_kinds/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_span_kinds
-      weight: 703
+      weight: 704
     - name: SDK
       url: tracing/llm_observability/sdk/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_sdk
-      weight: 704
+      weight: 705
     - name: API
       url: tracing/llm_observability/api/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_api
-      weight: 705
+      weight: 706
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog

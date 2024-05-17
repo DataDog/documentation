@@ -87,4 +87,4 @@ For more information on alternative tracing methods and tracing features, see th
 [15]: /tracing/llm_observability/sdk/#evaluations
 [16]: /tracing/llm_observability/api/?tab=model#evaluations-api
 [17]: https://app.datadoghq.com/llm/clusters
-[18]: /tracing/llm_observability/submit-evaluations
+[18]: /tracing/llm_observability/submit_evaluations
