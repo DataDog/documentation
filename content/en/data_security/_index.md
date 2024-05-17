@@ -40,6 +40,8 @@ Datadog allows you to send data to Datadog in multiple ways, including from the 
 
 Data in motion through Datadog provided tools is protected with TLS and HSTS. Data stored by Datadog is protected by encryption, access controls, and authentication. For specifics, read more at [Datadog Security][1].
 
+Starting **July 1st, 2024**, Datadog will force HTTP to HTTPS redirection for all intake endpoints, using an HTTP 308 response code. This change is necessary as some intake endpoints still accept plain HTTP payloads to maintain compatibility with older API clients. Ensure that your application clients can follow these redirection codes, or update their configuration to use HTTPS. Otherwise, you might receive connection error messages.
+
 ### The Datadog Agent
 
 The Agent is the main channel for data getting from your systems to Datadog. [Read all about data security measures in the Agent][4]. 
