@@ -2080,26 +2080,31 @@ menu:
       parent: case_management
       identifier: case_management_projects
       weight: 1
+    - name: View and Manage
+      url: service_management/case_management/view_and_manage
+      parent: case_management_projects
+      identifier: case_management_view_and_manage
+      weight: 101
+    - name: Create notifications and tickets 
+      url: service_management/case_management/create_notifications_and_third_party_tickets
+      parent: case_management_projects
+      identifier: case_management_create_notifications_and_third_party_tickets
+      weight: 102   
+    - name: Settings
+      url: service_management/case_management/settings
+      parent: case_management_projects
+      identifier: case_management_settings
+      weight: 103
     - name: Create a Case
       url: service_management/case_management/create_case
       parent: case_management
       identifier: case_management_create_case
       weight: 2
-    - name: View and Manage
-      url: service_management/case_management/view_and_manage
-      parent: case_management
-      identifier: case_management_view_and_manage
-      weight: 3
-    - name: Settings
-      url: service_management/case_management/settings
-      parent: case_management
-      identifier: case_management_settings
-      weight: 4
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 5
+      weight: 3
     - name: Mobile Application
       url: service_management/mobile/
       identifier: mobile
