@@ -18,7 +18,7 @@ This page describes advanced features you can use to manipulate table components
 
 When you have a full list of items already and you want to filter them, there are multiple methods to do so on the client side.
 
-### Filter with a text input
+### Filter with a text input or search component
 
 One common use case is filtering a table component using the value in a text input component.
 
@@ -26,9 +26,9 @@ For example, if you want to list your dashboards in a table that you can filter 
 
 1. Add a new query using the **+** button.
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
-1. Add a text input component to your app. Name it `searchInput`.
+1. Add a text input or search component to your app. Name it `searchInput`.
 1. Add a table component.
-1. Set the table's **data source** property to your data filtered by the text input component. In this example, set the **data source** to the following expression:
+1. Set the table's **data source** property to your data filtered by the text input or search component you created. In this example, set the **data source** to the following expression:
 
     ```
     ${listDashboards0?.outputs.dashboards.filter(row => row.title.includes(searchInput.value))}
@@ -36,7 +36,7 @@ For example, if you want to list your dashboards in a table that you can filter 
 
 You can type text into the text input component and the rows of table are filtered by that text.
 
-### Filter with a select input
+### Filter with a select component
 
 Another common use case is filtering a table using a select component.
 
