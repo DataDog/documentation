@@ -216,7 +216,7 @@ Your application name (the value of `ml_app`) must start with a letter. It may c
 
 The name can be up to 200 characters long and contain Unicode letters (which includes most character sets, including languages such as Japanese).
 
-## Eval metrics API
+## Evaluation metrics API
 Use this endpoint to send evaluation metrics for a span to Datadog.
 
 Endpoint

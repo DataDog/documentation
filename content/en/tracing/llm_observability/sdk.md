@@ -12,9 +12,9 @@ LLM Observability is not available in the US1-FED site.
 
 ## Overview
 
-The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python version 3.7 and up, and all versions of LangChain.
+The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python versions 3.7 and newer. For information about LLM Observability's integration support, see [LLM integrations](#llm-integrations).
 
-You can install and configure tracing of various operations such as workflows, tasks, and API calls with simple context managers or function decorators. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
+You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
 ## Setup
 
@@ -28,7 +28,7 @@ pip install git+https://github.com/DataDog/dd-trace-py.git@main
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
 
-#### Command-line setup
+### Command-line setup
 
 Enable LLM Observability by running your application using the `ddtrace-run` command and specifying the required environment variables.
 
@@ -55,9 +55,52 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : required - _string_ 
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
-`DD_LLMOBS_NO_APM`
+`DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
-<br />Only required if you are not a Datadog APM customer, in which case this should be set to `1` or `true`.
+<br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
+
+### In-code setup
+
+Enable LLM Observability programatically through the `LLMOBs.enable()` function instead of running with the `ddtrace-run` command. **Note**: Do not use this setup method with the `ddtrace-run` command.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+LLMObs.enable(
+  ml_app="<YOUR_ML_APP_NAME>",
+  api_key="<YOUR_DATADOG_API_KEY>",
+  site="<YOUR_DATADOG_SITE>",
+  agentless_enabled=True,
+  integrations=["langchain", "openai"],
+)
+{{< /code-block >}}
+
+`ml_app`
+: optional - _string_
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this will default to the value of `DD_LLMOBS_APP_NAME`.
+
+`integrations`
+: optional - _list_ 
+<br />A list of integration names to enable automatically tracing LLM calls for (example: `["openai", "langchain"]`). See [LLM integrations](#llm-integrations) for more information about Datadog's supported LLM integrations. **Note**: if not provided, all supported LLM integrations are enabled by default. To disable all integrations, pass in an empty list `[]`.
+
+`agentless_enabled`
+: optional - _boolean_ 
+<br />Only required if you are not using the Datadog Agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
+
+`site`
+: optional - _string_ 
+<br />The Datadog site to submit your LLM data. Your site is {{< region-param key="dd_site" code="true" >}}. If not provided, this defaults to the value of `DD_SITE`.
+
+`api_key`
+: optional - _string_ 
+<br />Your Datadog API key. If not provided, this defaults to the value of `DD_API_KEY`.
+
+`env`
+: optional - _string_
+<br />The name of your application's environment (examples: `prod`, `pre-prod`, `staging`). If not provided, this defaults to the value of `DD_ENV`.
+
+`service`
+: optional - _string_
+<br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
 
 #### Application naming guidelines
 
@@ -74,59 +117,77 @@ The name can be up to 200 characters long and contain Unicode letters (which inc
 
 ## Tracing spans
 
-To trace a span, use `LLMObs.<SPAN_KIND>()` as a context manager (for example, `LLMObs.task()` for a task span). For a list of available span kinds, see the [Span Kinds documentation][8].
+To trace a span, use `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a function decorator (for example, `llmobs.decorators.task()` for a task span) for the function you'd like to trace. For a list of available span kinds, see the [Span Kinds documentation][8]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
 
 ### Agent span
 
-To trace an agent span, use `LLMObs.agent()` as a context manager.
+To trace an agent span, use the function decorator `ddtrace.llmobs.decorators.agent()`.
 
 #### Arguments
 
 `name`
-: optional - _string_ - **default**: `"agent"`
-<br/>The name of the operation.
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 #### Example
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import agent
 
+@agent(name="react_agent")
 def run_agent():
-    with LLMObs.agent(name="react_agent") as agent_span:
-        ... # user application logic
+    ... # user application logic
     return 
 {{< /code-block >}}
 
 ### Workflow span
 
-To trace a workflow span, use `LLMObs.workflow()` as a context manager.
+To trace a workflow span, use the function decorator `ddtrace.llmobs.decorators.workflow()`.
 
 #### Arguments
 
 `name`
-: optional - _string_ - **default**: `"workflow"`
-<br/>The name of the operation.
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 #### Example
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
 
+@workflow
 def process_message():
-    with LLMObs.workflow(name="process_message") as workflow_span:
-        ... # user application logic
+    ... # user application logic
     return 
 {{< /code-block >}}
 
 ### LLM span
 
-If you are using one of the following LLM providers, you do not need to manually start a span to trace these operations, as Datadog's existing integrations automatically trace and annotate the LLM calls:
+**Note**: If you are using one of the following LLM providers, you do not need to manually start a LLM span to trace these operations, as Datadog's existing integrations automatically trace and annotate the LLM calls:
 
 - OpenAI (using the [OpenAI Python SDK][1])
 - AWS Bedrock (using [Boto3][2]/[Botocore][3])
 - LangChain LLM/Chat Models/Chains (using [LangChain][4])
 
-To trace an LLM span, use `LLMObs.llm()` as a context manager.
+For more information about Datadog's LLM integrations, see [LLM integrations](#llm-integrations).
+
+To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm()`.
 
 #### Arguments
 
@@ -135,120 +196,169 @@ To trace an LLM span, use `LLMObs.llm()` as a context manager.
 <br/>The name of the invoked LLM.
 
 `name`
-: optional - _string_ - **default**: `"llm"`
-<br/>The name of the operation.
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
 
 `model_provider`
 : optional - _string_ - **default**: `"custom"`
 
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
 #### Example
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
 
+@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
 def llm_call():
-    with LLMObs.llm(name="invoke_llm", model_name="claude", model_provider="anthropic") as llm_span:
-        completion = ... # user application logic to invoke LLM
+    completion = ... # user application logic to invoke LLM
     return completion
 {{< /code-block >}}
 
 ### Tool span
 
-To trace a tool span, use `LLMObs.tool()` as a context manager.
+To trace a tool span, use the function decorator `ddtrace.llmobs.decorators.tool()`.
 
 #### Arguments
 
 `name`
-: optional - _string_ - **default**: `"tool"`
-<br/>The name of the operation.
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 #### Example
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import tool
 
+@tool(name="get_current_weather")
 def call_weather_api():
-    with LLMObs.tool(name="get_current_weather") as tool_span:
-        ... # user application logic
+    ... # user application logic
     return 
 {{< /code-block >}}
 
 ### Embedding span
 
-To trace an embedding span, use `LLMObs.embedding()` as a context manager.
+To trace an embedding span, use the function decorator `LLMObs.embedding()`.
+
+**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
 
 #### Arguments
 
+`model_name`
+: required - _string_
+<br/>The name of the invoked LLM.
+
 `name`
-: optional - _string_ - **default**: `"embedding"`
-<br/>The name of the operation.
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+
+`model_provider`
+: optional - _string_ - **default**: `"custom"`
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 #### Example
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import embedding
 
+@embedding(model_name="text-embedding-3", model_provider="openai")
 def perform_embedding():
-    with LLMObs.embedding(name="openai_embedding") as embedding_span:
-        ... # user application logic
+    ... # user application logic
     return 
 {{< /code-block >}}
 
 ### Retrieval span
 
-To trace a retrieval span, use `LLMObs.retrieval()` as a context manager.
+To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators.retrieval()`.
+
+**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
 
 #### Arguments
 
 `name`
-: optional - _string_ - **default**: `"retrieval"`
-<br/>The name of the operation.
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 #### Example
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import retrieval
 
+@retrieval(name="get_relevant_docs")
 def similarity_search():
-    with LLMObs.retrieval(name="get_relevant_docs") as retrieval_span:
-        ... # user application logic
+    ... # user application logic
     return 
 {{< /code-block >}}
 
 ### Task span
 
-To trace a task span, use `LLMObs.task()` as a context manager.
+To trace a task span, use the function decorator `LLMObs.task()`.
 
 #### Arguments
 
 `name`
-: optional - _string_ - **default**: `"task"`
-<br/>The name of the operation.
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
 
 #### Example
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import task
 
+@task
 def sanitize_input():
-    with LLMObs.task(name="sanitize_input") as task_span:
-        ... # user application logic
+    ... # user application logic
     return 
 {{< /code-block >}}
 
-## Tracing spans using function decorators
+## Tracking user sessions
 
-For each span kind, the `ddtrace.llmobs.decorators` module provides a corresponding function decorator to automatically trace the operation a given function entails. These function decorators can be used the same way as their inline counterparts.
-
-### Example
+Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
-@workflow(name="process_message", session_id="<SESSION_ID>", ml_app="<ML_APP>")
+@workflow(session_id="<SESSION_ID>")
 def process_message():
     ... # user application logic
-    return
+    return 
 {{< /code-block >}}
 
 ## Annotating a span
@@ -265,39 +375,44 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `input_data` 
 : optional - _JSON serializable type or list of dictionaries_ 
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
 
 `output_data` 
 : optional - _JSON serializable type or list of dictionaries_ 
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a list of dictionaries with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"role": "...", "content": "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `metadata` 
 : optional - _dictionary_
 <br />A dictionary of JSON serializable key-value pairs that users can add as metadata information relevant to the input or output operation described by the span (`model_temperature`, `max_tokens`, `top_k`, and so on).
 
-`tags` 
+`metrics`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on).
+<br />A dictionary of JSON serializable keys and numeric values that users can add as metrics relevant to the operation described by the span (`input_tokens`, `output_tokens`, `total_tokens`, and so on).
+
+`tags`
+: optional - _dictionary_
+<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the span's context (`session`, `environment`, `system`, `versioning`, and so on). For more information about tags, see [Getting Started with Tags][9].
 
 ### Example
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import workflow
+from ddtrace.llmobs.decorators import embedding, llm, retrieval, workflow
 
+@llm(model="model_name", model_provider="model_provider")
 def llm_call(prompt):
-    with LLMObs.llm(name="llm_call", model="model_name", model_provider="model_provider") as llm_span:
-        resp = ... # llm call here
-        LLMObs.annotate(
-            span=llm_span,
-            input_data=[{"role": "user", "content": "Hello world!"}],
-            output_data=[{"role": "assistant", "content": "How can I help?"}],
-            metadata={"temperature": 0, "max_tokens": 200},
-            tags={"host": "host_name"},
-        )
+    resp = ... # llm call here
+    LLMObs.annotate(
+        span=None,
+        input_data=[{"role": "user", "content": "Hello world!"}],
+        output_data=[{"role": "assistant", "content": "How can I help?"}],
+        metadata={"temperature": 0, "max_tokens": 200},
+        metrics={"input_tokens": 4, "output_tokens": 6, "total_tokens": 10},
+        tags={"host": "host_name"},
+    )
     return resp
 
-@workflow(name="process_message")
+@workflow
 def process_message(prompt):
     resp = llm_call_inline(prompt)
     LLMObs.annotate(
@@ -307,52 +422,135 @@ def process_message(prompt):
         tags={"host": "host_name"},
     )
     return resp
+
+@embedding(model_name="text-embedding-3", model_provider="openai")
+def perform_embedding():
+    ... # user application logic
+    LLMObs.annotate(
+        span=None,
+        input_data={"text": "Hello world!"},
+        output_data=[0.0023064255, -0.009327292, ...],
+        metrics={"input_tokens": 4},
+        tags={"host": "host_name"},
+    )
+    return
+
+@retrieval(name="get_relevant_docs")
+def similarity_search():
+    ... # user application logic
+    LLMObs.annotate(
+        span=None,
+        input_data="Hello world!",
+        output_data=[{"text": "Hello world is ...", "name": "Hello, World! program", "id": "document_id", "score": 0.9893}],
+        tags={"host": "host_name"},
+    )
+    return
+
 {{< /code-block >}}
 
-## Persisting a span across contexts
+## Submitting evaluation metrics
 
-To manually start and stop a span across different contexts or scopes:
+To submit evaluation metrics for a span to Datadog:
 
-1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but inline rather than as a context manager. 
-2. Pass the span object as an argument to other functions.
-3. Stop the span manually with the `span.finish()` method.
+1. Extract the span context from the given span by using `LLMObs.export_span(span)`. If `span` is not provided (as when using function decorators), the SDK exports the current active span.
+2. Use `LLMObs.submit_evaluation()` with the extracted span context and evaluation metric information.
+
+### Arguments
+
+The `LLMObs.submit_evaluation()` method accepts the following arguments:
+
+`span_context`
+: required - _dictionary_
+<br />The span context to correlate the evaluation metric to.
+
+`label`
+: required - _string_
+<br />The name of the evaluation metric.
+
+`metric_type`
+: required - _string_
+<br />The type of the evaluation metric. Must be one of "categorical", "numerical", and "score".
+
+`value`
+: required - _string or numeric type_
+<br />The value of the evaluation metric. Must be a string (for categorical `metric_type`) or integer/float (for numerical/score `metric_type`).
 
 ### Example
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
 
-def separate_task(workflow_span):
-    ... # user application logic 
-    workflow_span.finish()
-    return
-
-def process_message():
-workflow_span = LLMObs.workflow(name="process_message")
-    ... # user application logic
-    separate_task(workflow_span)
-    return
+@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
+def llm_call():
+    completion = ... # user application logic to invoke LLM
+    span_context = LLMObs.export_span(span=None)
+    LLMObs.submit_evaluation(
+        span_context,
+        label="sentiment",
+        metric_type="score",
+        value=10,
+    )
+    return completion
 {{< /code-block >}}
 
-## Tracking user sessions
+## LLM integrations
 
-Session tracking allows you to associate multiple interactions with a given user. When starting a root span for a new trace or span in a new process, specify the `session_id` argument with the string ID of the underlying user session:
+The Python SDK includes out-of-the-box integrations to automatically trace and annotate the LLM calls for:
+
+- `openai` - OpenAI (using the [OpenAI Python SDK][1]): supports all versions
+- `bedrock` - AWS Bedrock Runtime (using [Boto3][2]/[Botocore][3]): supports all versions
+- `langchain` - LangChain LLM/Chat Models/Chains (using [LangChain][4]): supports all versions
+
+This means that you do not need to manually instrument your LLM calls with `LLMObs.llm()`, as the SDK captures them automatically.
+
+## Advanced tracing
+
+### Tracing spans using inline methods
+
+For each span kind, the `ddtrace.llmobs.LLMObs` class provides a corresponding inline method to automatically trace the operation a given code block entails. These methods have the same argument signature as their function decorator counterparts, with the addition that `name` defaults to the span kind (`llm`, `workflow`, and so on) if not provided. These methods can be used as context managers to automatically finish the span once the enclosed code block is completed.
+
+#### Example
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
 def process_message():
-    with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>") as workflow_span:
+    with LLMObs.workflow(name="process_message", session_id="<SESSION_ID>", ml_app="<ML_APP>") as workflow_span:
         ... # user application logic
-    return 
+    return
 {{< /code-block >}}
 
+### Persisting a span across contexts
 
-## Flushing in serverless environments
+To manually start and stop a span across different contexts or scopes:
+
+1. Start a span manually using the same methods (for example, the `LLMObs.workflow` method for a workflow span), but as a plain function call rather than as a context manager.
+2. Pass the span object as an argument to other functions.
+3. Stop the span manually with the `span.finish()` method. **Note**: the span must be manually finished, otherwise it will not be submitted.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def process_message():
+    workflow_span = LLMObs.workflow(name="process_message")
+    ... # user application logic
+    separate_task(workflow_span)
+    return
+
+def separate_task(workflow_span):
+    ... # user application logic
+    workflow_span.finish()
+    return
+{{< /code-block >}}
+
+### Flushing in serverless environments
 
 `LLMObs.flush()` is a blocking function that submits all buffered LLM Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all LLM Observability traces are submitted.
 
-## Tracing multiple applications
+### Tracing multiple applications
 
 The SDK supports tracking multiple LLM applications from the same service.
 
@@ -361,12 +559,12 @@ You can configure an environment variable `DD_LLMOBS_APP_NAME` to the name of yo
 To override this configuration and use a different LLM application name for a given root span, pass the `ml_app` argument with the string name of the underlying LLM application when starting a root span for a new trace or a span in a new process.
 
 {{< code-block lang="python">}}
-from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
 
+@workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>")
 def process_message():
-    with LLMObs.workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>") as workflow_span:
-        ... # user application logic
-    return 
+    ... # user application logic
+    return
 {{< /code-block >}}
 
 [1]: https://github.com/openai/openai-python
@@ -375,3 +573,4 @@ def process_message():
 [4]: https://github.com/langchain-ai/langchain
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/span_kinds/
+[9]: /getting_started/tagging/
