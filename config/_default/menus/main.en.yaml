@@ -4500,16 +4500,21 @@ menu:
       parent: cloud_workload_security
       identifier: cws_security_signals
       weight: 202
+    - name: Investigate Agent Events
+      url: security/threats/investigate_agent_events
+      parent: cloud_workload_security
+      identifier: cws_agent_events
+      weight: 203
     - name: Creating Agent Rule Expressions
       url: security/threats/agent_expressions
       parent: cloud_workload_security
       identifier: cws_agent_expressions
-      weight: 203
+      weight: 204
     - name: CWS Events Formats
       url: security/threats/backend
       parent: cloud_workload_security
       identifier: cws_backend_event_schema_documentation
-      weight: 204
+      weight: 205
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm
@@ -5169,6 +5174,11 @@ menu:
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_troubleshooting
       weight: 208
+    - name: Supported Versions
+      url: real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
+      parent: mobile_and_tv_monitoring
+      identifier: rum_mobile_supported_versions
+      weight: 209
     - name: Product Analytics
       identifier: rum_product_analytics
       url: real_user_monitoring/product_analytics

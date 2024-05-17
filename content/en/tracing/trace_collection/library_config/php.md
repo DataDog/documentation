@@ -9,7 +9,7 @@ further_reading:
   tag: "Blog"
   text: "PHP monitoring with Datadog APM and distributed tracing"
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Source code"
 - link: "/tracing/trace_collection/trace_context_propagation/php/"
   tag: "Documentation"

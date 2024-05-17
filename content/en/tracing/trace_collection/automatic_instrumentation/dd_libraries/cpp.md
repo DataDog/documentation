@@ -14,13 +14,13 @@ type: multi-code-lang
 code_lang_weight: 50
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-cpp"
-  tag: "Github"
+  tag: "Source Code"
   text: Source code
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 - link: "/tracing/"
-  tag: "Advanced Usage"
+  tag: "Documentation"
   text: "Advanced Usage"
 ---
 
