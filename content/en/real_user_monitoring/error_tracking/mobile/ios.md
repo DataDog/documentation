@@ -120,7 +120,7 @@ When **enabled**, any main thread pause that is longer than the specified `appHa
 
 #### Enable app hangs monitoring
 
-**Note**: If Datadog [crash ceporting][10] is not enabled, you cannot view the relevant stack traces.
+**Note**: If Datadog [crash reporting][10] is not enabled, you cannot view the relevant stack traces.
 
 To enable app hangs monitoring:
 
