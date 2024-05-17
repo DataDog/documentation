@@ -9,19 +9,23 @@ further_reading:
 
 ## Overview
 
-Case Management provides the capability to create third-party integrations for generating notifications or tickets either automatically when a new case is created or manually when users choose to create them for specific cases. This allows you to integrate Datadog solutions into your existing workflows and processes seamlessly. With the Jira and ServiceNow integrations, you can resolve cases using full-stack telemetry in Datadog while keeping a record in these third-party systems.
+Case Management provides the capability to create third-party integrations for generating notifications or tickets automatically or manually:
+- Automatically: Each time a new case is created, it generates a new ticket or notification.
+- Manually: Users choose to create tickets or notifications for specific cases. 
+
+By linking Case Management with third-party systems, you can integrate Datadog solutions into your existing workflows and processes. With the Jira and ServiceNow integrations, you can resolve cases using full-stack telemetry in Datadog while keeping a record in these third-party systems.
 
 
 ## Notifications 
 
-To get notified when a new case is created, you need to create a view. To do so: 
-1. navigate to the project you want to receive notifications on
-2. click **add view** 
-3. give the view a name 
-4. in the search box, enter a filtered query to retrieve the cases you want to be notified on
-5. select how you would like to be notified within the recipients field
+To get notified when a new case is created, first create a view: 
+1. Navigate to the project you want to receive notifications for.
+2. Click **Add view**.
+3. Give the view a name.
+4. In the search box, enter a filtered query to retrieve the cases you want to be notified for.
+5. Select how you would like to be notified within the recipients field.
 
-**Notifications options supported**
+### Notification options
 
 | Integration     | Configuration    |
 | --------------- | ---------------- |

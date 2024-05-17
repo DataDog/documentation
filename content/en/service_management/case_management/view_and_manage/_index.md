@@ -49,7 +49,7 @@ To create a custom view:
 1. Select **Add View** from within a project.
 1. Give the view a name.
 1. In the search box, enter a query. The preview refreshes to show you the cases that match the current search query.
-1. (Optional) Send a notification with third-party tools such as Slack, Microsoft Teams, PagerDuty, or Webhooks. Click **+ Add Recipient Type** and select from the pre-configured channels or recipients. See [Create notifications and tickets ][2] to learn more about whats supported.
+1. (Optional) Send a notification with third-party tools such as Slack, Microsoft Teams, PagerDuty, or Webhooks. Click **+ Add Recipient Type** and select from the pre-configured channels or recipients. See [Create notifications and tickets ][2] to learn more about the available tools and options.
 1. Click **Save view**.
 
 ## Case details
