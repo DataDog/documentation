@@ -1,7 +1,7 @@
 ---
 title: .NET and .NET Core Compatibility Requirements
 kind: documentation
-description: 'Compatibility Requirements for the .NET tracer'
+description: 'Compatibility Requirements for the .NET Tracer'
 aliases:
   - /tracing/compatibility_requirements/dotnet-core
   - /tracing/setup_overview/compatibility_requirements/dotnet-core
@@ -29,7 +29,7 @@ The .NET Tracer is open source. For more information, see the [.NET Tracer repos
 
 The .NET Tracer supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
 
-| Version              | Microsoft End of Life | Support level        | Package version      |
+| .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
 | .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
 | .NET 7               | 05/14/2024            | [GA](#support-ga)    | latest (>= 2.20.0)   |
@@ -41,7 +41,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
-Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET and .NET Core versions](#end-of-life-net-runtime-versions), and [Runtime support policy for .NET and .NET Core](#runtime-support-policy).
+Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
 
 ## Supported processor architectures
 
@@ -105,7 +105,6 @@ Some libraries provide built in [Activity based tracing][13]. This is the same m
 
 Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][14] for more details.
 
-
 ## End of life .NET runtime versions
 
 The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
@@ -126,7 +125,7 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 | [6.x][8]                    | Latest              |
 | [5.x][9]                    | Latest              |
 
-## Runtime support policy
+## .NET runtime support policy
 
 The .NET Tracer depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, the .NET Tracer also limits its support for that version.
 
