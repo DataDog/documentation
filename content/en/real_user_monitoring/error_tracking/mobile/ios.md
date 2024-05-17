@@ -120,26 +120,26 @@ When **enabled**, any main thread pause that is longer than the specified `appHa
 
 #### Enable app hangs monitoring
 
-**Note**: If Datadog [crash reporting][10] is not enabled, you cannot view the relevant stack traces.
-
 To enable app hangs monitoring:
 
-1. During or after the [instrumentation][13] step, update the initialization snippet with the `appHangThreshold` parameter:
+1. During or after the [instrumentation][13] step of the RUM SDK, update the initialization snippet with the `appHangThreshold` parameter:
 
    ```swift
    RUM.enable(
        with: RUM.Configuration(
            applicationID: "<rum application id>",
-           appHangThreshold: 2
+           appHangThreshold: 0.25
        )
    )
    ```
 
-2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter 0.25 to report hangs lasting at least 250 ms.
+2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms.
 
 **Note**: The minimum value this option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to an excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to this threshold may not be reported.
 
-**Note**: Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to .25s) and lowering it incrementally if you feel you are missing out on observability.
+**Note**: Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to `0.25`) and lowering it incrementally if you feel you are missing out on observability.
+
+**Note**: Make sure you follow the steps below to get [deobfuscated stack traces][14].
 
 #### Disable app hangs monitoring
 
@@ -283,3 +283,4 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [11]: /api/latest/rum/#create-a-new-rum-application
 [12]: /api/latest/rum/#update-a-rum-application
 [13]: /real_user_monitoring/mobile_and_tv_monitoring/setup/ios/#initialize-the-rum-monitor-and-enable-urlsessioninstrumentation
+[14]: #get-deobfuscated-stack-traces
