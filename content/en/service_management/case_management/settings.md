@@ -39,4 +39,4 @@ To configure third party integrations, navigate to [Create notifications and tic
 
 [1]: https://app.datadoghq.com/cases/settings
 [2]: https://docs.datadoghq.com/integrations/servicenow/#itom-and-itsm-setup
-[3]: service_management/case_management/create_notifications_and_tickets
+[3]: service_management/case_management/create_notifications_and_third_party_tickets

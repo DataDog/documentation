@@ -101,7 +101,7 @@ The following widgets support Case Analytics: timeseries, top list, query value,
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: service_management/case_management/create_notifications_and_tickets
+[2]: service_management/case_management/create_notifications_and_third_party_tickets
 [3]: /notebooks/
 [4]: /service_management/incident_management/#describing-the-incident
 [5]: /service_management/case_management/settings/#jira

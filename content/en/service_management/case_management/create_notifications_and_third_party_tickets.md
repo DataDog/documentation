@@ -1,5 +1,5 @@
 ---
-title: Create notifications and tickets 
+title: Create notifications and third party tickets 
 kind: documentation
 further_reading:
 - link: "/service_management/case_management/troubleshooting"
@@ -33,7 +33,7 @@ To get notificed when a new case is created, you will need to create a view. To 
 
 
 
-## Tickets 
+## Third party tickets 
 In Project Settings, you can manage membership, configure the auto-closing of cases, and set up third-party integrations like Jira and ServiceNow. 
 
 ### Jira

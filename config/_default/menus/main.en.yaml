@@ -2086,9 +2086,9 @@ menu:
       identifier: case_management_view_and_manage
       weight: 101
     - name: Create notifications and tickets 
-      url: service_management/case_management/create_notifications_and_tickets
+      url: service_management/case_management/create_notifications_and_third_party_tickets
       parent: case_management_projects
-      identifier: case_management_create_notifications_and_tickets
+      identifier: case_management_create_notifications_and_third_party_tickets
       weight: 102   
     - name: Settings
       url: service_management/case_management/settings
