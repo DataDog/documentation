@@ -1,4 +1,4 @@
-## Uninstall Single Step APM Instrumentation
+### Uninstall Single Step APM Instrumentation
 
 If you installed the Agent with Single Step APM Instrumentation, you need to [run additional commands][1] to uninstall Single Step Instrumentation.
 
