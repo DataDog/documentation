@@ -8,7 +8,7 @@ further_reading:
     - link: 'https://docs.datadoghq.com/integrations/guide/azure-architecture-and-configuration/'
       tag: 'Configuration'
       text: 'Azure Integration Architecture and Configuration'
-    - link: https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/'
+    - link: 'https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/'
       tag: 'Integration'
       text: 'Why should I install the Datadog Agent on my cloud instances?'
     - link: 'https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension'
