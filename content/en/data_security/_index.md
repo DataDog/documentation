@@ -42,6 +42,8 @@ Data in motion through Datadog provided tools is protected with TLS and HSTS. Da
 
 Starting **July 1st, 2024**, Datadog will force HTTP to HTTPS redirection for all intake endpoints, using an HTTP 308 response code. This change is necessary as some intake endpoints still accept plain HTTP payloads to maintain compatibility with older API clients. Ensure that your application clients can follow these redirection codes, or update their configuration to use HTTPS. Otherwise, you might receive connection error messages.
 
+Our internal telemetry indicates that the majority of HTTP requests come from the [Fluent Bit][26] application. Fluent Bit can be configured to use HTTPS using the TLS configuration parameter. For any additional questions, contact the [support team][27].
+
 ### The Datadog Agent
 
 The Agent is the main channel for data getting from your systems to Datadog. [Read all about data security measures in the Agent][4]. 
@@ -169,3 +171,5 @@ Continuous Integration pipelines and tests
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
 [25]: /tracing/glossary/
+[26]: https://docs.datadoghq.com/integrations/fluentbit/
+[27]: https://docs.datadoghq.com/help/
