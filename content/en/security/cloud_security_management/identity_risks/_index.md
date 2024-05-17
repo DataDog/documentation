@@ -53,7 +53,7 @@ You can also leverage [Workflow Automation][3] to create automated workflows for
 
 Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve the permissions gap detections. If you are using AWS IAM Access Analyzer, Datadog CIEM automatically leverages its unused access findings to enrich permissions gap detections and downsized policy recommendations.
 
-Note: If you are enabling AWS IAM Access Analyzer for the first time, there is additional AWS cost associated with this enablement and it could take up to two hours before AWS IAM Access Analyzer’s insights are made available.
+Note: If you are enabling AWS IAM Access Analyzer for the first time, there is additional AWS cost associated with this enablement and it could take up to two hours before AWS IAM Access Analyzer's insights are made available.
 
 ## Video walkthrough
 
