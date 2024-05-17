@@ -11,7 +11,7 @@ further_reading:
   tag: "Documentation"
   text: "OpenTelemetry metric types"
 - link: "https://github.com/DataDog/opentelemetry-mapping-go/blob/main/pkg/otlp/attributes/attributes.go"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Implementation code for these mappings"
 ---
 

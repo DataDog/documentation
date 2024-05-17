@@ -13,7 +13,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
     - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Examples of Custom Instrumentation'
     - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
       tag: 'Blog'

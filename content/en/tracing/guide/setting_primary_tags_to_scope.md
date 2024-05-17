@@ -5,16 +5,16 @@ aliases:
   - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
 - link: "/tracing/other_telemetry/connect_logs_and_traces/"
-  tags: "Enrich Tracing"
+  tag: "Documentation"
   text: "Connect your Logs and Traces together"
 - link: "/tracing/manual_instrumentation/"
-  tags: "Enrich Tracing"
+  tag: "Documentation"
   text: "Instrument manually your application to create traces."
 - link: "/tracing/opentracing/"
-  tags: "Enrich Tracing"
+  tag: "Documentation"
   text: "Implement Opentracing across your applications."
 - link: "/tracing/glossary/"
-  tag: "Use the APM UI"
+  tag: "Documentation"
   text: "Explore your services, resources, and traces"
 ---
 
