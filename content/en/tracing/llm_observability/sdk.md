@@ -448,32 +448,59 @@ def similarity_search():
 
 {{< /code-block >}}
 
-## Submitting evaluation metrics
+## Evaluations
 
-To submit evaluation metrics for a span to Datadog:
+The LLM Observability SDK provides the methods `LLMObs.export_span()` and `LLMObs.submit_evaluation()` to help your traced LLM application submit evaluations to LLM Observability.
 
-1. Extract the span context from the given span by using `LLMObs.export_span(span)`. If `span` is not provided (as when using function decorators), the SDK exports the current active span.
-2. Use `LLMObs.submit_evaluation()` with the extracted span context and evaluation metric information.
+### Exporting a span
 
-### Arguments
+`LLMObs.export_span()` can be used to extract the span context from a span. You'll need to use this method to associate your evaluation with the corresponding span.
+
+#### Arguments
+
+The `LLMObs.export_span()` method accepts the following argument:
+
+`span`
+: optional - _Span_
+<br />The span to extract the span context (span and trace IDs) from. If not provided (as when using function decorators), the SDK exports the current active span.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
+def llm_call():
+    completion = ... # user application logic to invoke LLM
+    span_context = LLMObs.export_span(span=None)
+    return completion
+{{< /code-block >}}
+
+
+### Submit evaluations
+
+`LLMObs.submit_evaluation()` can be used to submit your custom evaluation associated with a given span.
+
+#### Arguments
 
 The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `span_context`
 : required - _dictionary_
-<br />The span context to correlate the evaluation metric to.
+<br />The span context to associate the evaluation with. This should be the output of `LLMObs.export_span()`.
 
 `label`
 : required - _string_
-<br />The name of the evaluation metric.
+<br />The name of the evaluation.
 
 `metric_type`
 : required - _string_
-<br />The type of the evaluation metric. Must be one of "categorical", "numerical", and "score".
+<br />The type of the evaluation. Must be one of "categorical" or "score".
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation metric. Must be a string (for categorical `metric_type`) or integer/float (for numerical/score `metric_type`).
+<br />The value of the evaluation. Must be a string (for categorical `metric_type`) or integer/float (for score `metric_type`).
 
 ### Example
 
