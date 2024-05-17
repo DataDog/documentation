@@ -8,8 +8,6 @@ disable_toc: false
 
 Set up the Observability Pipelines Worker with the Datadog Agent source so that you route only useful logs to your destinations.
 
-{{< img src="observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for this use case" width="100%" >}}
-
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
