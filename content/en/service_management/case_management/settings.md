@@ -30,7 +30,7 @@ Navigate to the [Project Settings page][1], click **Integrations** > **Datadog M
 Project handles can be used in monitors to automatically create cases. In the monitor message body, include `@case-<project_handle>`. Datadog suggests a handle based on the project's name. You can accept or modify it as you wish. 
 
 ### Third party integrations 
-To configure third party integrations, navigate to [Create notifications and tickets ][3]
+To configure third party integrations, navigate to [Create notifications and tickets ][2]
 
 
 ## Further Reading
@@ -38,5 +38,4 @@ To configure third party integrations, navigate to [Create notifications and tic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases/settings
-[2]: https://docs.datadoghq.com/integrations/servicenow/#itom-and-itsm-setup
-[3]: service_management/case_management/create_notifications_and_third_party_tickets
+[2]: /service_management/case_management/create_notifications_and_third_party_tickets
