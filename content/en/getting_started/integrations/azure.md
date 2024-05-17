@@ -55,7 +55,7 @@ See the following table for a summary of the various configuration options avail
 
 ***_All sites_** configurations can be used in the US3 site orgs, but only US3 site orgs can use the Azure Native integration.
 
-<div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">Cloud cost management.</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
+<div class="alert alert-warning"> <strong>Note</strong>: <a href="https://docs.datadoghq.com/cloud_cost_management/azure/?tab=billingaccounts&site=us3#overview">Cloud cost management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives </a> are only supported with App registration. For US3 sites that have set up the Datadog Azure Native integration, you need to create an <a href=""> App registration</a> to access these functionalities.
 </div>
 
 ## Setup
@@ -106,7 +106,7 @@ You can find your Azure metrics in the metrics summary page in the Datadog platf
 {{% site-region region="us,us5,eu,ap1,us-fed" %}}
 
 Follow the instructions on this page to set up log collection through the **Standard Azure integration**. 
-If you are on the US3 site and use the Azure Native Integration, use the site selector on the right side of this page to select US3 for instructions on [log collection using the Azure Native integration][18]. 
+If you are on the US3 site and use the Azure Native Integration, use the site selector on the right side of this page to select `US3` for instructions on [log collection using the Azure Native integration][18]. 
 
  {{% /site-region %}}
 
