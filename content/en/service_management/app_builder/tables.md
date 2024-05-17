@@ -28,7 +28,7 @@ For example, if you want to list your dashboards in a table that you can filter 
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
 1. Add a text input or search component to your app. Name it `searchInput`.
 1. Add a table component.
-1. Set the table's **data source** property to your data filtered by the text input or search component you created. In this example, set the **data source** to the following expression:
+1. Set the table's **data source** property to your data filtered by the text input or search component that you created. In this example, set the **data source** to the following expression:
 
     ```
     ${listDashboards0?.outputs.dashboards.filter(row => row.title.includes(searchInput.value))}
