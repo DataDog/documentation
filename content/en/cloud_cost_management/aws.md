@@ -34,7 +34,7 @@ To set up Cloud Cost Management in Datadog, you should:
 
 Select the following content options:
 
-* Export type **Legacy CUR export** (At this time, there is no support for "Standard data export".)
+* Export type: **Legacy CUR export**
 * **Include resource IDs**
 * **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][10] in Cost Explorer preferences).
 * **"Refresh automatically"**
