@@ -12,7 +12,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Increase the retention of process data with metrics'
     - link: '/infrastructure/livecontainers'
-      tag: 'Graphing'
+      tag: "Documentation"
       text: 'Get real-time visibility of all of the containers across your environment'
     - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
       tag: 'Blog'

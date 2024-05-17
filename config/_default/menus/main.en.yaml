@@ -76,6 +76,11 @@ menu:
       url: getting_started/integrations/terraform/
       weight: 602
       parent: getting_started_integrations
+    - name: Azure
+      identifier: getting_started_with_azure
+      url: getting_started/integrations/azure/
+      weight: 603
+      parent: getting_started_integrations
     - name: Containers
       identifier: getting_started_containers
       url: getting_started/containers/
@@ -876,11 +881,6 @@ menu:
       url: developers/integrations/python/
       parent: dev_tools_integrations
       weight: 411
-    - name: UI Extensions
-      url: developers/ui_extensions
-      parent: dev_tools
-      identifier: dev_tools_ui_extensions
-      weight: 5
     - name: Service Checks
       url: developers/service_checks/
       parent: dev_tools
@@ -2080,26 +2080,31 @@ menu:
       parent: case_management
       identifier: case_management_projects
       weight: 1
+    - name: View and Manage
+      url: service_management/case_management/view_and_manage
+      parent: case_management_projects
+      identifier: case_management_view_and_manage
+      weight: 101
+    - name: Create notifications and tickets 
+      url: service_management/case_management/create_notifications_and_third_party_tickets
+      parent: case_management_projects
+      identifier: case_management_create_notifications_and_third_party_tickets
+      weight: 102   
+    - name: Settings
+      url: service_management/case_management/settings
+      parent: case_management_projects
+      identifier: case_management_settings
+      weight: 103
     - name: Create a Case
       url: service_management/case_management/create_case
       parent: case_management
       identifier: case_management_create_case
       weight: 2
-    - name: View and Manage
-      url: service_management/case_management/view_and_manage
-      parent: case_management
-      identifier: case_management_view_and_manage
-      weight: 3
-    - name: Settings
-      url: service_management/case_management/settings
-      parent: case_management
-      identifier: case_management_settings
-      weight: 4
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 5
+      weight: 3
     - name: Mobile Application
       url: service_management/mobile/
       identifier: mobile
@@ -2476,16 +2481,21 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_deployment_tracking
       weight: 108
+    - name: OpenTelemetry
+      url: serverless/aws_lambda/opentelemetry
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_opentelemetry
+      weight: 109
     - name: Troubleshooting
       url: serverless/aws_lambda/troubleshooting
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
-      weight: 109
+      weight: 110
     - name: Libraries & Integrations
       url: serverless/libraries_integrations
       parent: serverless_aws_lambda
       identifier: libraries_integrations
-      weight: 110
+      weight: 111
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless
@@ -2978,21 +2988,26 @@ menu:
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_trace_an_application
       weight: 702
+    - name: Submit Evaluations
+      url: tracing/llm_observability/submit_evaluations/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_submit_evaluations
+      weight: 703
     - name: Span Kinds
       url: tracing/llm_observability/span_kinds/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_span_kinds
-      weight: 703
+      weight: 704
     - name: SDK
       url: tracing/llm_observability/sdk/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_sdk
-      weight: 704
+      weight: 705
     - name: API
       url: tracing/llm_observability/api/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_api
-      weight: 705
+      weight: 706
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
@@ -4505,16 +4520,21 @@ menu:
       parent: cloud_workload_security
       identifier: cws_security_signals
       weight: 202
-    - name: Creating Custom Agent Rules
+    - name: Investigate Agent Events
+      url: security/threats/investigate_agent_events
+      parent: cloud_workload_security
+      identifier: cws_agent_events
+      weight: 203
+    - name: Creating Agent Rule Expressions
       url: security/threats/agent_expressions
       parent: cloud_workload_security
       identifier: cws_agent_expressions
-      weight: 203
+      weight: 204
     - name: CWS Events Formats
       url: security/threats/backend
       parent: cloud_workload_security
       identifier: cws_backend_event_schema_documentation
-      weight: 204
+      weight: 205
     - name: Misconfigurations
       url: security/cloud_security_management/misconfigurations/
       parent: csm
@@ -5174,6 +5194,11 @@ menu:
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_troubleshooting
       weight: 208
+    - name: Supported Versions
+      url: real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
+      parent: mobile_and_tv_monitoring
+      identifier: rum_mobile_supported_versions
+      weight: 209
     - name: Product Analytics
       identifier: rum_product_analytics
       url: real_user_monitoring/product_analytics

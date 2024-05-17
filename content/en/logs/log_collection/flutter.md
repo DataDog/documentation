@@ -4,7 +4,7 @@ kind: documentation
 description: Collect Logs data from your Flutter projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-flutter Source code
 - link: logs/explorer/
   tag: Documentation

@@ -5,11 +5,11 @@ description: Explore and dig into your database host health and configuration
 
 ---
 
-{{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
+{{< img src="database_monitoring/databases-list-2.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
 On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
-{{< img src="database_monitoring/db-list-details-panel-cropped.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
+{{< img src="database_monitoring/db-list-details-panel-cropped-2.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 In addition to a filterable graph of active connections for that host, the host details panel displays the following features.
 
@@ -53,11 +53,11 @@ On the **Metrics** tab of the host details panel, you can view and filter metric
 
 The **Active Connections** tab of the host details panel displays the live queries being executed on the host.
 
-{{< img src="database_monitoring/db-list-active-connections.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
+{{< img src="database_monitoring/db-list-active-connections-2.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 Click on a query statement to open a panel that includes event attributes, related traces, and other relevant details.
 
-{{< img src="database_monitoring/db-list-active-connection-details.png" alt="Details panel for an individual active connection" style="width:90%;" >}}
+{{< img src="database_monitoring/db-list-active-connection-details-2.png" alt="Details panel for an individual active connection" style="width:90%;" >}}
 
 ## Schema
 

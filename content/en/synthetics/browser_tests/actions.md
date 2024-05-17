@@ -7,7 +7,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about advanced options for browser tests"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
