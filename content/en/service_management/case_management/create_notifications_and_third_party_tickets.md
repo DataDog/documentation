@@ -18,12 +18,14 @@ By linking Case Management with third-party systems, you can integrate Datadog s
 
 ## Notifications 
 
-To get notified when a new case is created, first create a view: 
+To get notified when a new case is created, create a view: 
 1. Navigate to the project you want to receive notifications for.
-2. Click **Add view**.
-3. Give the view a name.
-4. In the search box, enter a filtered query to retrieve the cases you want to be notified for.
-5. Select how you would like to be notified within the recipients field.
+1. If you are not already a member of the project, click **Join This Project**.
+1. Click **Add view**.
+1. Give the view a name in the **Name** field.
+1. In the search box, enter a filtered query to retrieve the cases you want to be notified for.
+1. Select how you would like to be notified within the recipients field.
+1. Click **Save**.
 
 ### Notification options
 
