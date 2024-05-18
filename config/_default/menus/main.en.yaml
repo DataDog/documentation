@@ -2183,11 +2183,6 @@ menu:
       parent: app_builder
       identifier: app_builder_build
       weight: 1
-    - name: HTTP Request
-      url: service_management/app_builder/http_request/
-      parent: app_builder_build
-      identifier: app_builder_http_request
-      weight: 101
     - name: Authentication
       url: service_management/app_builder/auth/
       parent: app_builder
@@ -2198,6 +2193,11 @@ menu:
       parent: app_builder
       identifier: app_builder_connections
       weight: 3
+    - name: HTTP Request
+      url: service_management/app_builder/http_request/
+      parent: app_builder_connections
+      identifier: app_builder_http_request
+      weight: 301
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
