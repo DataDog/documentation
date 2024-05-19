@@ -34,7 +34,7 @@ further_reading:
   text: "OpenTelemetry for Ingress-NGINX Controller"
 - link: "https://github.com/DataDog/httpd-datadog"
   tag: "Source Code"
-  text: "Dataodg Module for Apache HTTP Server"
+  text: "Datadog Module for Apache HTTP Server"
 aliases:
 - /tracing/proxies/envoy
 - /tracing/envoy/
@@ -688,10 +688,15 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 
 {{% /tab %}}
 
-{{% tab "Apache HTTPd" %}}
+{{% tab "Apache HTTP Server %}}
 
 ## HTTPd with Datadog module
-Datadog provides a [module][1] for enhancing [Apache HTTP Server][2] capabilities with APM Tracing.
+Datadog provides a [module][1] for enhancing [Apache HTTP Server][2] and [IHS HTTP Server][3] capabilities with APM Tracing.
+
+### Compatibility
+Our module only support Apache HTTP Server `v2.4.x`.
+
+Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, our module can also be used with IHS without any modifications.
 
 ### Module installation
 <div class="alert alert-warning">
@@ -704,12 +709,11 @@ and architecture has its own artifact hosted on [httpd-datadog's repository][1].
 Run the following script to download the latest version of the module:
 
 ```bash
-get_latest_release() {
-  curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
-}
-
-RELEASE_TAG=$(get_latest_release DataDog/httpd-datadog)
-wget "https://github.com/DataDog/httpd-datadog/releases/download/$RELEASE_TAG/linux-x86_64-mod_datadog.tar.gz"
+curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest \
+| grep "linux-x86_64-mod_datadog.tar.gz" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| wget -qi -
 ```
 
 When unpacking the tarball, the resulting file is `mod_datadog.so`, the shared library that must
