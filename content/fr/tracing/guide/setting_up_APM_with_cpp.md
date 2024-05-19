@@ -1,5 +1,5 @@
 ---
-title: Configurer l'APM en C++
+title: Configurer APM en C++
 kind: guide
 further_reading:
   - link: /tracing/setup/cpp/
@@ -8,21 +8,21 @@ further_reading:
 ---
 ## Présentation
 
-Ce guide vient compléter la [documentation sur la configuration de l'APM en C++][1]. Les instructions qui y sont détaillées vous permettent de configurer une application simple en C++ avec l'APM sur votre VM, afin de diagnostiquer vos éventuels problèmes.
+Ce guide vient compléter la [documentation sur la configuration du traceur APM en C++][1]. Les instructions qui y sont détaillées vous permettent de configurer une application simple en C++ avec APM sur votre VM, afin de diagnostiquer vos éventuels problèmes.
 
 ## Configuration de votre solution
 
 ### Environnement de base
 
-Commencez par lancer une nouvelle box Vagrant `ubuntu/xenial64` et y exécuter la commande `ssh` :
+Commencez par lancer une nouvelle box Vagrant `ubuntu/jammy64` et connectez vous a la VM :
 
 ```bash
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
 
-Installez ensuite l'Agent avec les [instructions de l'IU][2].
+Installez ensuite l'Agent en suivant les [instructions depuis l'interface Datadog][2].
 
 ### Préparation pour C++
 
@@ -33,61 +33,20 @@ sudo apt-get update
 sudo apt-get -y install g++ cmake
 ```
 
-Exécutez ces deux lignes de code conjointement afin d'obtenir la dernière version de C++ :
-
-```cpp
-get_latest_release() {
-  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
-    grep '"tag_name":' |
-    sed -E 's/.*"([^"]+)".*/\1/';
-}
-DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-```
-
-Si vous obtenez un message de GitHub indiquant que votre taux est limité, patientez quelques minutes avant de relancer la commande. Une fois le processus terminé, vérifiez votre version C++ pour vous assurer que la mise à jour a bien été installée.
+Téléchargez et installez ensuite `dd-tracer-cpp` :
 
 ```shell
-echo $DD_OPENTRACING_CPP_VERSION
+wget https://github.com/DataDog/dd-trace-cpp/archive/${DD_TRACE_CPP_VERSION}.tar.gz -O dd-trace-cpp.tar.gz
 ```
+Si vous obtenez un message de GitHub indiquant que votre taux est limité, patientez quelques minutes avant de relancer la commande.
 
-Téléchargez et installez ensuite la bibliothèque `dd-opentracing-cpp` :
-
-```shell
-wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
-```
-
-Après avoir téléchargé le fichier `tar`, créez un nouveau répertoire et un fichier `.build` pour la bibliothèque :
-
-```shell
-mkdir -p dd-opentracing-cpp/.build
-```
-
-Dézippez-le :
+Enfin, compilez et installez la bibliothèque :
 
 ```bash
-tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
-```
-
-La liste du contenu de votre bibliothèque s'affiche alors dans votre console :
-
-```shell
-dd-opentracing-cpp-1.0.1/test/integration/nginx/nginx.conf
-dd-opentracing-cpp-1.0.1/test/integration/nginx/nginx_integration_test.sh
-```
-
-Accédez ensuite à votre répertoire `.build` :
-
-```shell
-cd dd-opentracing-cpp/.build
-```
-
-Enfin, installez les dépendances :
-
-```bash
-sudo ../scripts/install_dependencies.sh
-cmake ..
-make
-sudo make install
+cd dd-trace-cpp
+cmake -B build .
+cmake --build build -j
+cmake --install build
 ```
 
 ## Créer une application simple
@@ -95,33 +54,44 @@ sudo make install
 Créez un fichier `tracer_example.cpp` et ajoutez-y ce qui suit :
 
 ```cpp
-#include <datadog/opentracing.h>
+#include <datadog/tracer.h>
 #include <iostream>
 #include <string>
 
 int main(int argc, char* argv[]) {
-  datadog::opentracing::TracerOptions tracer_options{"localhost", 8126, "compiled-in example"};
-  auto tracer = datadog::opentracing::makeTracer(tracer_options);
+  datadog::tracing::TracerConfig tracer_config;
+  tracer_config.service = "compiled-in example";
 
-  // Créer quelques spans.
-  {
-    auto span_a = tracer->StartSpan("A");
-    span_a->SetTag("tag", 123);
-    auto span_b = tracer->StartSpan("B", {opentracing::ChildOf(&span_a->context())});
-    span_b->SetTag("tag", "value");
+  const auto validated_config = dd::finalize_config(tracer_options);
+  if (!validated_config) {
+    std::cerr << validated_config.error() << '\n';
+    return 1;
   }
 
-  tracer->Close();
+  dd::Tracer tracer{*validated_config};
+
+  // Create some spans.
+  {
+    datadog::tracing::SpanConfig options;
+    options.name = "A";
+    options.tags.emplace("tag", "123");
+    auto span_a = tracer.create_span(options);
+
+    auto span_b = span_a.create_child();
+    span_b.set_name("B");
+    span_b.set_tag("tag", "value");
+  }
+
   return 0;
 }
 ```
 
 Ce code crée un traceur qui génère deux spans (une span parent `span_a` et une span enfant `span_b`) et leur applique des tags.
 
-Liez ensuite `libdd_opentracing` et `libopentracing` :
+Compilez le programme :
 
 ```shell
-g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentracing
+g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
 ```
 
 Enfin, lancez l'application :
@@ -132,15 +102,15 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 
 ## Envoyer des traces
 
-Maintenant que votre application a été créée, vous pouvez commencer à envoyer des traces pour tester l'Agent de trace.
+Maintenant que votre application a été créée, vous pouvez commencer à envoyer des traces pour tester le Trace Agent.
 
-Commencez par suivre le log de l'Agent de traces :
+Commencez par suivre le log du Trace Agent :
 
 ```shell
 tail -f /var/log/datadog/trace-agent.log
 ```
 
-Ouvrez ensuite un nouvel onglet et lancez l'exemple quelques fois :
+Lancez l'application de test :
 
 ```shell
 LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
@@ -164,5 +134,5 @@ Cliquez sur le service pour afficher vos traces.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/setup/cpp/#compile-against-dd-opentracing-cpp
+[1]: /fr/tracing/setup/cpp/
 [2]: https://app.datadoghq.com/account/settings#agent/ubuntu
