@@ -19,7 +19,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Configure an API Test'
     - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location'
-      tag: 'Terraform'
+      tag: "External Site"
       text: 'Create and manage Synthetic Private Locations with Terraform'
 ---
 

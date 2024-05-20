@@ -11770,15 +11770,17 @@ components:
       - DESCENDING
     LogsStorageTier:
       default: indexes
-      description: Specifies storage type as indexes or online-archives
+      description: Specifies storage type as indexes, online-archives or flex
       enum:
       - indexes
       - online-archives
+      - flex
       example: indexes
       type: string
       x-enum-varnames:
       - INDEXES
       - ONLINE_ARCHIVES
+      - FLEX
     LogsWarning:
       description: A warning message indicating something that went wrong with the
         query
@@ -36277,6 +36279,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Get a list of spans
       tags:
       - Spans
@@ -36323,6 +36330,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Search spans
       tags:
       - Spans

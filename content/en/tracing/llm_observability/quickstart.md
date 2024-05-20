@@ -22,10 +22,11 @@ Use the steps below to run a simple Python script that generates an LLM Observab
 
 ## 1. Install the SDK
 
-Install the following `ddtrace` package hash:
+Install the following `ddtrace` package hash and `openai` package:
 
 {{< code-block lang="shell" >}}
 pip install git+https://github.com/DataDog/dd-trace-py.git@main
+pip install openai
 {{< /code-block >}}
 
 ## 2. Create the script
@@ -54,7 +55,7 @@ Run the Python script with the following shell command, sending a trace of the O
 {{< code-block lang="shell" >}}
 DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart \ 
 DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \ 
-DD_LLMOBS_NO_APM=1 ddtrace-run python quickstart.py
+DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
 {{< /code-block >}}
 
 For details on the required environment variables, see [the SDK documentation][9].
@@ -65,7 +66,10 @@ A trace of your LLM call should appear in [the Traces tab][3] of LLM Observabili
 
 {{< img src="tracing/llm_observability/quickstart-trace.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
 
-The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from Datadog's list of supported integrations.
+The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
+
+If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [instrumentation guide][11] and the [SDK documentation][1].
+
 
 [1]: /tracing/llm_observability/sdk/
 [3]: https://app.datadoghq.com/llm/traces
@@ -75,3 +79,5 @@ The trace you see is composed of a single LLM span. The `ddtrace-run` command au
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/api
 [9]: /tracing/llm_observability/sdk/#command-line-setup
+[10]: /tracing/llm_observability/sdk/#llm-integrations
+[11]: /tracing/llm_observability/trace_an_llm_application
