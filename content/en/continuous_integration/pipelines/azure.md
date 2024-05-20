@@ -107,7 +107,7 @@ Datadog supports log collection for your Azure DevOps pipelines. To enable it:
 
 1. Install a Datadog app registration on your Azure console. Follow the steps within the [Azure integration][14].
 
-2. Add the Datadog app registration to your Azure DevOps organization and to every project for which you want to enable log collection. You can do this by going to "Organization settings" in your DevOps console. You may select "Add to all projects" to configure all projects in bulk.
+2. Add the Datadog app registration to your Azure DevOps organization and to every project for which you want to enable Log Collection. You can do this by going to "Organization settings" in your DevOps console. You may select "Add to all projects" to configure all projects in bulk.
 
 
 ## Visualize pipeline data in Datadog
