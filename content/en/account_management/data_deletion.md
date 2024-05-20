@@ -20,7 +20,7 @@ Have questions regarding something else? Reach out to Datadog [Support](https://
 ### Deletion via Datadog Support
 Contact [support](https://www.datadoghq.com/support/) with your request.
 
-### Deletion Manager
+### Deletion via UI
 #### Accessing Deletion
 - Users must first be assigned the Data Deletion [permission](https://docs.datadoghq.com/account_management/rbac/permissions/) for at least one product.
 - Self-service deletion can be accessed in Organization Settings → Data Management → Data Deletion
