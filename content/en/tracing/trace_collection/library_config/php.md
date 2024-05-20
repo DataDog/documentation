@@ -471,7 +471,7 @@ A comma-separated list of WordPress action hooks to be instrumented. This featur
 
 `DD_TRACE_WORDPRESS_CALLBACKS`
 : **INI**: `datadog.trace.wordpress_callbacks`<br>
-**Default**: `true`<br>
+**Default**: `true` for PHP tracer >= v1.0<br>
 Enables WordPress action hook callbacks instrumentation. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
 
 `DD_DBM_PROPAGATION_MODE`

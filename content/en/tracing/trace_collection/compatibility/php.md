@@ -13,6 +13,9 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
+<div class="alert alert-info">This documentation is for the PHP tracer v1.x. If you are looking for the PHP tracer v0.x documentation, see the legacy <a href="/tracing/trace_collection/compatibility/php_v0/">PHP Compatibility Requirements
+</a> documentation.</div>
+
 ## Runtime support policy for PHP APM
 
 The PHP Datadog Trace library is open source - view the [GitHub repository][1] for more information.
