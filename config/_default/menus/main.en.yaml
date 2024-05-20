@@ -3255,16 +3255,21 @@ menu:
       identifier: dbm
       parent: apm_heading
       weight: 30000
+    - name: Agent Integration Overhead
+      url: database_monitoring/agent_integration_overhead
+      parent: dbm
+      identifier: dbm_agent_integration_overhead
+      weight: 1
     - name: Setup Architectures
       url: database_monitoring/architecture/
       parent: dbm
       identifier: dbm_setup_architecture
-      weight: 1
+      weight: 2
     - name: Setting Up Postgres
       url: database_monitoring/setup_postgres/
       parent: dbm
       identifier: dbm_setup_postgres
-      weight: 2
+      weight: 3
     - name: Self-hosted
       url: database_monitoring/setup_postgres/selfhosted
       parent: dbm_setup_postgres
@@ -3304,7 +3309,7 @@ menu:
       url: database_monitoring/setup_mysql/
       parent: dbm
       identifier: dbm_setup_mysql
-      weight: 3
+      weight: 4
     - name: Self-hosted
       url: database_monitoring/setup_mysql/selfhosted
       parent: dbm_setup_mysql
@@ -3344,7 +3349,7 @@ menu:
       url: database_monitoring/setup_sql_server/
       parent: dbm
       identifier: dbm_setup_sql_server
-      weight: 4
+      weight: 5
     - name: Self-hosted
       url: database_monitoring/setup_sql_server/selfhosted/
       parent: dbm_setup_sql_server
@@ -3374,7 +3379,7 @@ menu:
       url: database_monitoring/setup_oracle/
       parent: dbm
       identifier: dbm_setup_oracle
-      weight: 5
+      weight: 6
     - name: Self-hosted
       url: database_monitoring/setup_oracle/selfhosted/
       parent: dbm_setup_oracle
@@ -3409,37 +3414,37 @@ menu:
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
       identifier: dbm_connect_dbm_and_apm
-      weight: 6
+      weight: 7
     - name: Data Collected
       url: database_monitoring/data_collected
       parent: dbm
       identifier: dbm_data_collected
-      weight: 7
+      weight: 8
     - name: Exploring Database Hosts
       url: database_monitoring/database_hosts/
       parent: dbm
       identifier: dbm_database_hosts
-      weight: 8
+      weight: 9
     - name: Exploring Query Metrics
       url: database_monitoring/query_metrics/
       parent: dbm
       identifier: dbm_query_metrics
-      weight: 9
+      weight: 10
     - name: Exploring Query Samples
       url: database_monitoring/query_samples/
       parent: dbm
       identifier: dbm_query_samples
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 11
+      weight: 12
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 12
+      weight: 13
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
