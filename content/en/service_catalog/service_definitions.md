@@ -272,6 +272,18 @@ curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<
 
 URL Parameter: `ref <kind>:<name>`
 
+##### Delete entities by reference 
+DELETE https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>
+Permission: SERVICE_CATALOG_WRITE
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location --request DELETE 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+URL Parameter: `ref <kind>:<name>`
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
