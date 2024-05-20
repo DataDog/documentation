@@ -6,6 +6,7 @@ assets:
     Vault - Overview: assets/dashboards/vault_overview_legacy.json
     Vault - Overview (OpenMetricsV2): assets/dashboards/vault_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -14,8 +15,11 @@ assets:
       check: vault.is_leader
       metadata_path: metadata.csv
       prefix: vault.
+    process_signatures:
+    - vault server
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10059
     source_type_name: Vault
   logs:
     source: vault
@@ -40,7 +44,7 @@ draft: false
 git_integration_title: vault
 integration_id: vault
 integration_title: Vault
-integration_version: 3.4.0
+integration_version: 4.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -67,87 +71,91 @@ tile:
   title: Vault
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、[Vault][1] クラスターの健全性とリーダーの変更を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Vault チェックは [Datadog Agent][2] パッケージに含まれています。
 
-#### 前提条件
 
-1. [Vault コンフィギュレーションで Prometheus メトリクス][3]が有効になっていることを確認します。
+バージョン 3.4.0 以降、この OpenMetrics ベースのインテグレーションには、*最新*モード (`use_openmetrics`: true) と*レガシー*モード (`use_openmetrics`: false) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。*最新*モードには Python 3 が必要です。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][3]を参照してください。
 
-2. Vault チェックが正しく機能するには、Vault メトリクス (Vault 1.3.0+) への未認証アクセスを有効にするか、Vault クライアントトークンを指定する必要があります。
+1. [Vault 構成で Prometheus メトリクス][4]が有効になっていることを確認します。
 
-   **未認証アクセスを有効にするには**、Vault の [`unauthenticated_metrics_access`][4] コンフィギュレーションを `true` に設定します。これにより、`/v1/sys/metrics` エンドポイントへの未認証アクセスが許可されます。
+
+2. Vault チェックが正しく機能するには、Vault メトリクスへの未認証アクセスを有効にする (Vault バージョン 1.3.0 以降を使用) か、Vault クライアントトークンを提供する必要があります。
+
+   * 未認証アクセスを有効にするには、Vault の [`unauthenticated_metrics_access`][5] 構成を `true` に設定します。これにより、`/v1/sys/metrics` エンドポイントへの未認証アクセスが許可されます。
 
      **注**: `/sys/metrics` エンドポイントでメトリクスを収集するには Vault v1.1.0 以降が必要です。
 
-    **Vault クライアントトークンを使用するには**、以下の例を参照してください。JWT 認証方法を使用した例ですが、他の[認証方法][5]を使用することもできます。
+   * Vault クライアントトークンを使用するには、以下の例を参照してください。JWT 認証方法を使用した例ですが、追加の[認証方法][6]を使用することもできます。
 
 Vault インテグレーションには以下の機能が必要です。
 
-     `metrics_policy.hcl` のコンテンツ:
-   ```text
-   path "sys/metrics*" {
-     capabilities = ["read", "list"]
-   }
-   ```
+* `metrics_policy.hcl` のコンテンツ:
 
-セットアップポリシーとロール:
+  ```text
+  path "sys/metrics*" {
+    capabilities = ["read", "list"]
+  }
+  ```
 
-   ```text
-   $ vault policy write metrics /path/to/metrics_policy.hcl
-   $ vault auth enable jwt
-   $ vault write auth/jwt/config jwt_supported_algs=RS256 jwt_validation_pubkeys=@<PATH_TO_PUBLIC_PEM>
-   $ vault write auth/jwt/role/datadog role_type=jwt bound_audiences=<AUDIENCE> user_claim=name token_policies=metrics
-   $ vault agent -config=/path/to/agent_config.hcl
-   ```
+* セットアップポリシーとロール:
 
-`agent_config.hcl` のコンテンツ:
+  ```text
+  $ vault policy write metrics /path/to/metrics_policy.hcl
+  $ vault auth enable jwt
+  $ vault write auth/jwt/config jwt_supported_algs=RS256 jwt_validation_pubkeys=@<PATH_TO_PUBLIC_PEM>
+  $ vault write auth/jwt/role/datadog role_type=jwt bound_audiences=<AUDIENCE> user_claim=name token_policies=metrics
+  $ vault agent -config=/path/to/agent_config.hcl
+  ```
 
-   ```
-   exit_after_auth = true
-   pid_file = "/tmp/agent_pid"
+* `agent_config.hcl` のコンテンツ:
 
-   auto_auth {
-     method "jwt" {
-       config = {
-         path = "<JWT_CLAIM_PATH>"
-         role = "datadog"
-       }
-     }
+  ```
+  exit_after_auth = true
+  pid_file = "/tmp/agent_pid"
 
-     sink "file" {
-       config = {
-         path = "<CLIENT_TOKEN_PATH>"
-       }
-     }
-   }
+  auto_auth {
+    method "jwt" {
+      config = {
+        path = "<JWT_CLAIM_PATH>"
+        role = "datadog"
+      }
+    }
 
-   vault {
-     address = "http://0.0.0.0:8200"
-   }
-   ```
+    sink "file" {
+      config = {
+        path = "<CLIENT_TOKEN_PATH>"
+      }
+    }
+  }
 
-### コンフィギュレーション
+  vault {
+    address = "http://0.0.0.0:8200"
+  }
+  ```
+
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. vault のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `vault.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル vault.d/conf.yaml][2] を参照してください。
 
-   トークンなしでインテグレーションを実行するためのコンフィギュレーション (vault コンフィギュレーション `unauthenticated_metrics_access` が true に設定されている場合):
+   トークンなしでインテグレーションを実行するための構成 (Vault 構成 `unauthenticated_metrics_access` が true に設定されている場合):
 
     ```yaml
     init_config:
@@ -193,7 +201,7 @@ Vault インテグレーションには以下の機能が必要です。
 [2]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -201,13 +209,13 @@ Vault インテグレーションには以下の機能が必要です。
 
 | パラメーター            | 値                                    |
 | -------------------- | ---------------------------------------- |
-| `<インテグレーション名>` | `vault`                                  |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                            |
-| `<インスタンスコンフィギュレーション>`  | `{"api_url": "http://%%host%%:8200/v1"}` |
+| `<INTEGRATION_NAME>` | `vault`                                  |
+| `<INIT_CONFIG>`      | 空白または `{}`                            |
+| `<INSTANCE_CONFIG>`  | `{"api_url": "http://%%host%%:8200/v1"}` |
 
 Vault の認証コンフィギュレーションに応じて、`INSTANCE_CONFIG` をカスタマイズする必要があります。上記のホストセクションの例を参照してください。
 
-#### ログの収集
+#### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -259,29 +267,27 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### 検証
 
-[Agent の status サブコマンド][6]を実行し、Checks セクションで `vault` を探します。
+[Agent の status サブコマンド][7]を実行し、Checks セクションで `vault` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "vault" >}}
 
 
-**注:** 
 
-* `vault.replication.fetchRemoteKeys`、`vault.replication.merkleDiff`、`vault.replication.merkleSync` で始まるメトリクスは、レプリケーションが不健全状態でなければ報告されません。
-* このチェックのバージョン3.4.0 以降では、メトリクスの収集に [OpenMetrics][7] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、構成で `use_openmetrics` の値を `false` に設定します。
+[`vault.replication.fetchRemoteKeys`、`vault.replication.merkleDiff`、`vault.replication.merkleSync` で始まるメトリクス]は、レプリケーションが不健全状態でなければ報告されません。
 
-### イベント
+### ヘルプ
 
 `vault.leader_change`:
 このイベントは、クラスターリーダーが変更されると発生します。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "vault" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
@@ -296,12 +302,12 @@ _Agent バージョン 6.0 以降で利用可能_
 
 
 [1]: https://www.vaultproject.io
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://www.vaultproject.io/docs/configuration/telemetry#prometheus
-[4]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
-[5]: https://www.vaultproject.io/docs/auth
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/integrations/openmetrics/
+[2]: https://app.datadoghq.com/account/settings/agent/latest
+[3]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
+[4]: https://www.vaultproject.io/docs/configuration/telemetry#prometheus
+[5]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
+[6]: https://www.vaultproject.io/docs/auth
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
 [10]: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/

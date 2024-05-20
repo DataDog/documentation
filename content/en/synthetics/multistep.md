@@ -19,7 +19,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage Synthetic Multistep API Tests with Terraform"
 ---
 
