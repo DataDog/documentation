@@ -48,7 +48,7 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 ## Getting started
 
-The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
+The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
 For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries. To learn more, read [Application Instrumentation][2].
 
