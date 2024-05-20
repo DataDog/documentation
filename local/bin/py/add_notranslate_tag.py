@@ -47,14 +47,12 @@ def process_tags():
         slug = collection_id.split(':')[-1]
         res = project.fetch('resources').get(slug=slug)
 
-        # remove notranslate tags
         print(f"Removing tags for {slug}")
         resource_strings = list(transifex_api.ResourceString.filter(resource=res).all())
 
         for index in range(0, len(resource_strings), transifex_bulk_operation_limit):
             remove_tags(resource_strings[index:index+transifex_bulk_operation_limit])
 
-        # add resource strings again
         print(f"Adding notranslate tags for {slug}")
         resource_strings = list(transifex_api.ResourceString.filter(resource=res).all())
 
