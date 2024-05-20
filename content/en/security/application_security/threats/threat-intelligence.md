@@ -43,7 +43,7 @@ To query for all traces containing threat intelligence from any source, use the 
 
 ## Bring your own threat intelligence
 
-<div class="alert alert-info">Bring your own threat intelligence is in private beta. To request access, fill out <a href="https://forms.gle/JV8VLH1ZTzmUnK5F7">this form</a>.</div>
+<div class="alert alert-info">Bring your own threat intelligence (BYOTI) is in private beta. To request access, fill out <a href="https://forms.gle/JV8VLH1ZTzmUnK5F7">this form</a>.</div>
 
 ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
@@ -90,21 +90,25 @@ On a new [references table][4] page:
 
 ### Filter traces by joining the list with a reference table
 
-<div class="alert alert-info">Joining traces with reference tables is in private beta. To request access, fill out <a href="https://forms.gle/JV8VLH1ZTzmUnK5F7">this form</a>.</div>
+You can use bring your own threat intelligence (BYOTI) reference tables to enrich ASM security trace queries in Datadog. Using reference tables with trace queries enhances both the depth and the utility of the security data, leading to more effective monitoring and quicker incident response.
 
-You can use reference tables to enrich ASM security trace queries in Datadog. Using reference tables with trace queries enhances both the depth and the utility of the security data, leading to more effective monitoring and quicker incident response.
-
-When you use a reference table with a trace query, perform an inner joint with the reference table.
+To you use a reference table with a trace query, you combine rows from the Datadog trace table and a reference table based on a related column between them. The traces query returns only those traces where there is a match in both tables.
 
 Examples:
 
+- Investigation and incident response. You can upload and join using IPs or other fields from attacks and see the traffic related to that incident.
 - By enriching security traces with the IP addresses from a reference table, such as associating IP addresses with geographic locations or organizational details, security teams can gain better context around attack attempts. This can help in understanding the origin and potential motivation behind the attacks.
-- By associating security traces with specific URLs from a reference table, you can identify which parts of your application are being targeted by attacks. This can help pinpoint vulnerabilities or high-risk areas within the application.
+- You can use any fields, not just IP addresses. For example, by associating security traces with specific URLs from a reference table, you can identify which parts of your application are being targeted by attacks. This can help pinpoint vulnerabilities or high-risk areas within the application.
 
 To join a trace with a reference table:
 
-1. To join a trace with a reference table, in [Traces][9], select **Add**, and then select **Join with Reference Table**.
-2. 
+1. Upload the reference table you want to use as described in [Uploading and enabling your own threat intel](#uploading-and-enabling-your-own-threat-intel).
+2. To join a trace with a reference table, in [Traces][9], select **Add**, and then select **Join with Reference Table**.
+3. In **Inner join with reference table**, select the reference table to use.
+4. In **where field**, select the Datadog traces field to use for the join.
+5. In **column**, select the reference table field to use for the join.
+
+{{< img src="security/application_security/threats/threat_intel/threat_intel_ref_join.png" alt="Your image description" style="width:100%;" >}}
 
 ### Enriching traces for detection rules
 
