@@ -15,7 +15,7 @@ Once you've started collecting data for your Synthetic tests, you can leverage D
 ## Create and view dashboards
 Use [dashboards][1] to track, analyze, and display key performance and usage metrics from your synthetics tests.
 
-{{< img src="synthetics/platform/synthetics_dashboards.png" alt="Screen shot showing the top Synthetics navigation with Dashboards highlighted" >}}
+{{< img src="synthetics/platform/synthetics_dashboards_2.png" alt="Screen shot showing the top Synthetics navigation with Dashboards highlighted" >}}
 
 ## View monitors
 View associated [monitors][2] that are automatically created from your synthetics tests to notify your teams, and manage alerts at a glance on the Alerting platform.
