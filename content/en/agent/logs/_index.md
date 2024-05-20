@@ -190,7 +190,7 @@ The `start_position` is always `beginning` when tailing a container.
 
 #### Precedence
 
-For both file and journald tailer types, if an `end` or `beginning` position is specified, but an offset is stored, the offset takes precedence. Using the `forceBeginning` or `forceEnd` value forces the Agent to use the specified value even if there is a stored offset.
+For both file and journald tailer types, if an `end` or `beginning` position is specified, but an offset is stored, the offset takes precedence. Using `forceBeginning` or `forceEnd` forces the Agent to use the specified value even if there is a stored offset.
 
 ## Further Reading
 
