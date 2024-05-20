@@ -90,8 +90,6 @@ In the Agent version 7.31.0+, the TCP connection stays open indefinitely even wh
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 
-
-
 [1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
