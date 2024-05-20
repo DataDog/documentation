@@ -18,7 +18,7 @@ This page describes advanced features you can use to manipulate table components
 
 When you have a full list of items already and you want to filter them, there are multiple methods to do so on the client side.
 
-### Filter with a text input or search component
+### Filter a table with a text input or search component
 
 One common use case is filtering a table component using the value in a text input component.
 
@@ -36,7 +36,7 @@ For example, if you want to list your dashboards in a table that you can filter 
 
 You can type text into the text input component and the rows of table are filtered by that text.
 
-### Filter with a select component
+### Filter a table with a select component
 
 Another common use case is filtering a table using a select component.
 
@@ -54,11 +54,24 @@ For example, if you want to list your dashboards in a table that you can filter 
 
 You can select a value from the select component and the rows of table are filtered by that value.
 
-<!--
-### Examples 
+### Filter query results using a post-query transformation
 
-In the [Pagerduty on-call manager][1] blueprint, you can see both of these in action. The blueprint filters the query results in the post-query transformation based on the values of the select inputs and of the text input. 
--->
+If you want to filter the results of a query itself, then use those results in your table, perform the following steps:
+
+1. Add a new query using the **+** button.
+1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
+1. Add a text input or search component to your app. Name it `searchInput`.
+1. Add a table component and set its **data source** property to the query that you added.
+1. Expand the **Advanced** section of the query and find **Post-query Tranformation**.
+1. Replace `return outputs` with the following line:
+
+    ```
+    outputs.dashboards.filter(row => row.title.includes(searchInput.value))
+    ```
+
+You can type text into the text input component and the rows of table are filtered by that text.
+
+If you need the original, untransformed query result, you can reference it as `${listDashboards0.rawOutputs}`.
 
 ## Server-side filtering
 
