@@ -114,9 +114,21 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
+4. _(Optional)_ If you set a `traceSampleRate`, to ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `sampled` (set to `all` by default).
+
+    For example, if you set the `traceSampleRate` to 20% in the Browser SDK:
+    - When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
+
+  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
+
+  - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+
+    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-2.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
+
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
 [1]: /real_user_monitoring/browser/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
@@ -131,28 +143,28 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     ```
 
 4. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
-    ```java
+    ```kotlin
     val tracedHosts = listOf("example.com", "example.eu")
 
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(DatadogInterceptor(tracedHosts))
         .addNetworkInterceptor(TracingInterceptor(tracedHosts))
         .eventListenerFactory(DatadogEventListener.Factory())
-       .build()
+        .build()
     ```
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
 3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
-```java
+```kotlin
     val okHttpClient = OkHttpClient.Builder()
        .addInterceptor(DatadogInterceptor(traceSampler = RateBasedSampler(100f)))
        .build()
-  ```
+```
 
 **Note**:
-* `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+* `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 * If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 [1]: /real_user_monitoring/android/
@@ -162,10 +174,11 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM iOS Monitoring][1].
 
-2. Enable `Trace`:
+2. Enable `RUM` with the `urlSessionTracking` option and `firstPartyHostsTracing` parameter:
     ```swift
-    Trace.enable(
-        with: .init(
+    RUM.enable(
+        with: RUM.Configuration(
+            applicationID: "<rum application id>",
             urlSessionTracking: .init(
                 firstPartyHostsTracing: .trace(
                     hosts: [
@@ -204,8 +217,9 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
      To keep 100% of backend traces:
     ```swift
-    Trace.enable(
-        with: .init(
+    RUM.enable(
+        with: RUM.Configuration(
+            applicationID: "<rum application id>",
             urlSessionTracking: .init(
                 firstPartyHostsTracing: .trace(
                     hosts: [
@@ -405,10 +419,11 @@ RUM supports several propagator types to connect resources with backends that ar
 
 1. Set up RUM to connect with APM as described above.
 
-2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hostsWithHeaders:sampleRate:)` as follows:
+2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hosts:sampleRate:)` as follows:
     ```swift
-      Trace.enable(
-          with: .init(
+      RUM.enable(
+          with: RUM.Configuration(
+              applicationID: "<rum application id>",
               urlSessionTracking: .init(
                   firstPartyHostsTracing: .traceWithHeaders(
                       hostsWithHeaders: [
@@ -433,7 +448,7 @@ RUM supports several propagator types to connect resources with backends that ar
 1. Set up RUM to connect with APM as described above.
 
 2. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins and the tracing header type to use as follows:
-    ```java
+    ```kotlin
     val tracedHosts = mapOf("example.com" to setOf(TracingHeaderType.TRACECONTEXT),
                           "example.eu" to setOf(TracingHeaderType.DATADOG))
 
@@ -441,7 +456,7 @@ RUM supports several propagator types to connect resources with backends that ar
         .addInterceptor(DatadogInterceptor(tracedHosts))
         .addNetworkInterceptor(TracingInterceptor(tracedHosts))
         .eventListenerFactory(DatadogEventListener.Factory())
-       .build()
+        .build()
     ```
 
     `TracingHeaderType` is an enum representing the following tracing header types:
@@ -506,7 +521,7 @@ RUM supports several propagator types to connect resources with backends that ar
 
 ## How are RUM resources linked to traces?
 
-Datadog uses the distributed tracing protocol and sets up the following HTTP headers:
+Datadog uses the distributed tracing protocol and sets up the HTTP headers below. By default, both trace context and Datadog-specific headers are used.
 {{< tabs >}} {{% tab "Datadog" %}}
 `x-datadog-trace-id`
 : Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.
@@ -521,6 +536,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 : To make sure that the Agent keeps the trace.
 {{% /tab %}}
 {{% tab "W3C Trace Context" %}}
+
 `traceparent: [version]-[trace id]-[parent id]-[trace flags]`
 : `version`: The current specification assumes version is set to `00`.
 : `trace id`: 128 bits trace ID, hexadecimal on 32 characters. The source trace ID is 64 bits to keep compatibility with APM.

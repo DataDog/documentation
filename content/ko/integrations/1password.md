@@ -21,8 +21,7 @@ categories:
 - 로그 수집
 - 이벤트 관리
 - 문제 추적
-- 모니터링
-- 보안
+- security
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -43,8 +42,7 @@ tile:
   - Category::Log Collection
   - 카테고리::이벤트 관리
   - 카테고리::이슈 추적
-  - 카테고리::모니터링
-  - 카테고리::보안
+  - Category::Security
   - 제출한 데이터 유형::로그
   - 제공::통합
   configuration: README.md#Setup

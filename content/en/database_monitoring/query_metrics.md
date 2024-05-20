@@ -28,13 +28,9 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 The Query Metrics view shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as data center availability zone, and get alerted for anomalies.
 
-Navigate to the Query Metrics view within Database Monitoring by clicking **[APM > Databases][1]** in the UI.
+Navigate to [the Query Metrics page][1] in Datadog.
 
 The view shows 200 _top_ queries, that is the 200 queries with the most total time running in the selected time frame. See [which queries are tracked][2] for more details. Metrics aggregation for one-off or seldom-run fast queries isn't shown in the Query Metrics view, but you can find snapshots of them represented in [Query Samples][3], if they have run in the last 15 days.
 
@@ -129,7 +125,7 @@ For quick access to dashboards that showcase database-related infrastructure and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/queries
 [2]: /database_monitoring/data_collected/#which-queries-are-tracked
 [3]: /database_monitoring/query_samples/
 [4]: /database_monitoring/data_collected/#normalized-queries

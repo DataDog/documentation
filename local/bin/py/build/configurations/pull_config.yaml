@@ -332,7 +332,7 @@
                 text: "Learn about Continuous Testing and CI/CD"
               - link: "/continuous_testing/explorer"
                 tag: "Documentation"
-                text: "Learn about the Synthetic Monitoring & Continuous Testing Explorer"
+                text: "Learn about the Synthetic Monitoring & Testing Results Explorer"
               - link: "/continuous_testing/testing_tunnel"
                 tag: "Documentation"
                 text: "Learn about the Continuous Testing Tunnel"
@@ -491,7 +491,7 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
               title: Datadog-Amazon CloudFormation
-              kind: documentation
+              kind: guide
               aliases:
                 - /developers/amazon_cloudformation/
 
@@ -532,11 +532,12 @@
           globs:
             - "docs/en/getting-started.md"
           options:
-            dest_path: "/developers/"
+            dest_path: "/developers/faq/"
             file_name: "ui_extensions.md"
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
-              aliases: ["/developers/datadog_apps/"]
+              aliases: ["/developers/datadog_apps/", "/developers/ui_extensions"]
+              private: true
 
       - repo_name: datadog-agent
         contents:

@@ -5,10 +5,6 @@ kind: documentation
 title: Postgres の設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 ### サポートされる Postgres バージョン
 
 |  | セルフホスト | Amazon RDS | Amazon Aurora | Google Cloud SQL | Azure |
@@ -20,7 +16,7 @@ title: Postgres の設定
 | Postgres 13 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 14 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 15 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 16 | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
+| Postgres 16 | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |
 
 ホスティングタイプを選択して設定の手順を確認します。
 
@@ -41,7 +37,7 @@ Agent インテグレーションのオーバーヘッドテストは、Amazon E
 | スキーマの収集間隔        | 600 秒                |
 
 * Agent テストのバージョン: `7.50.2`
-* CPU: 平均で CPU の約 0.98% を使用
-* メモリ: 約 290 MiB の RAM を使用 (RSS メモリ)
-* ネットワーク帯域幅: 約 28 KB/秒 ▼ | 23 KB/秒 ▲
+* CPU: 平均で CPU の約 1% を使用
+* メモリ: 約 300 MiB の RAM を使用 (RSS メモリ)
+* ネットワーク帯域幅: 約 30 KB/秒 ▼ | 30 KB/秒 ▲
 * Agent によるデータベースへのクエリオーバーヘッド: 約 1% の CPU 時間

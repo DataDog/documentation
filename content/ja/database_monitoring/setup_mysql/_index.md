@@ -5,10 +5,6 @@ kind: documentation
 title: MySQL の設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 ### サポートされる MySQL バージョン
 
 |  | セルフホスト | Amazon RDS | Amazon Aurora | Google Cloud SQL (26GB 以下の RAM) | Azure |
@@ -33,10 +29,10 @@ Agent インテグレーションのオーバーヘッドテストは、Amazon E
 | クエリメトリクスの収集間隔    | 10 秒                 |
 | クエリアクティビティの収集間隔 | 10 秒                 |
 | クエリサンプルの収集間隔    | 1s                  |
-| 設定収集間隔         | 600 秒                |
+| 設定の収集間隔         | 600 秒                |
 
 * Agent テストのバージョン: `7.50.2`
-* CPU: 平均で CPU の約 1.48% を使用
-* メモリ: 約 273 MiB の RAM を使用 (RSS メモリ)
-* ネットワーク帯域幅: 約 35.2 KB/秒 ▼ | 22.2 KB/秒 ▲
+* CPU: 平均で CPU の約 2% を使用
+* メモリ: 約 300 MiB の RAM を使用 (RSS メモリ)
+* ネットワーク帯域幅: 約 40 KB/秒 ▼ | 30 KB/秒 ▲
 * Agent によるデータベースへのクエリオーバーヘッド: 約 1% の CPU 時間

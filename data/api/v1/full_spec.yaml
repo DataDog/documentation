@@ -90,6 +90,12 @@ components:
             description: Regions to exclude.
             type: string
           type: array
+        extended_resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects additional attributes and configuration
+            information about the resources in your AWS account. Required for `cspm_resource_collection`.
+          example: true
+          type: boolean
         filter_tags:
           description: 'The array of EC2 tags (in the form `key:value`) defines a
             filter that Datadog uses when collecting metrics from EC2.
@@ -128,8 +134,9 @@ components:
           type: boolean
         resource_collection_enabled:
           default: false
-          description: Whether Datadog collects a standard set of resources from your
-            AWS account.
+          deprecated: true
+          description: Deprecated in favor of 'extended_resource_collection_enabled'.
+            Whether Datadog collects a standard set of resources from your AWS account.
           example: true
           type: boolean
         role_name:
@@ -4218,6 +4225,7 @@ components:
       - lambda_traced_invocations_usage
       - logs_indexed_15day_usage
       - logs_indexed_180day_usage
+      - logs_indexed_1day_usage
       - logs_indexed_30day_usage
       - logs_indexed_360day_usage
       - logs_indexed_3day_usage
@@ -4288,6 +4296,7 @@ components:
       - LAMBDA_TRACED_INVOCATIONS_USAGE
       - LOGS_INDEXED_15DAY_USAGE
       - LOGS_INDEXED_180DAY_USAGE
+      - LOGS_INDEXED_1DAY_USAGE
       - LOGS_INDEXED_30DAY_USAGE
       - LOGS_INDEXED_360DAY_USAGE
       - LOGS_INDEXED_3DAY_USAGE
@@ -7166,8 +7175,13 @@ components:
           nullable: true
           type: integer
         renotify_statuses:
-          description: The types of monitor statuses for which re-notification messages
+          description: 'The types of monitor statuses for which re-notification messages
             are sent.
+
+            Default: **null** if `renotify_interval` is **null**.
+
+            If `renotify_interval` is set, defaults to renotify on `Alert` and `No
+            Data`.'
           items:
             $ref: '#/components/schemas/MonitorRenotifyStatusType'
           nullable: true
@@ -7987,6 +8001,8 @@ components:
       - logs_indexed_7day_percentage
       - logs_indexed_3day_usage
       - logs_indexed_3day_percentage
+      - logs_indexed_1day_usage
+      - logs_indexed_1day_percentage
       - rum_replay_sessions_usage
       - rum_replay_sessions_percentage
       - rum_browser_mobile_sessions_usage
@@ -8122,6 +8138,8 @@ components:
       - LOGS_INDEXED_7DAY_PERCENTAGE
       - LOGS_INDEXED_3DAY_USAGE
       - LOGS_INDEXED_3DAY_PERCENTAGE
+      - LOGS_INDEXED_1DAY_USAGE
+      - LOGS_INDEXED_1DAY_PERCENTAGE
       - RUM_REPLAY_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_PERCENTAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
@@ -8470,6 +8488,14 @@ components:
           type: number
         logs_indexed_180day_usage:
           description: The total Indexed Logs (180-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_1day_percentage:
+          description: The percentage of Indexed Logs (1-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_1day_usage:
+          description: The total Indexed Logs (1-day Retention) usage by tag(s).
           format: double
           type: number
         logs_indexed_30day_percentage:
@@ -10734,9 +10760,24 @@ components:
           example: name
           type: string
         history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include timeseries and uptime data where `0=monitor` is
-            in `OK` state and `1=monitor` is in `alert` state.
+          description: 'The state transition history for the monitor. It is represented
+            as
+
+            an array of pairs. Each pair is an array containing the timestamp of the
+            transition
+
+            as an integer in Unix epoch format in the first element, and the state
+            as an integer in the
+
+            second element. An integer value of `0` for state means uptime, `1` means
+            downtime, and `2` means no data.
+
+            Periods of no data are counted either as uptime or downtime depending
+            on monitor settings.
+
+            See [SLO documentatio](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+
+            for detailed information.'
           example:
           - - 1579212382
             - 0
@@ -10916,9 +10957,26 @@ components:
           example: name
           type: string
         history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include timeseries and uptime data where `0=monitor` is
-            in `OK` state and `1=monitor` is in `alert` state.
+          description: 'The state transition history for `monitor` or `time-slice`
+            SLOs. It is represented as
+
+            an array of pairs. Each pair is an array containing the timestamp of the
+            transition
+
+            as an integer in Unix epoch format in the first element, and the state
+            as an integer in the
+
+            second element. An integer value of `0` for state means uptime, `1` means
+            downtime, and `2` means no data.
+
+            Periods of no data count as uptime in time-slice SLOs, while for monitor
+            SLOs, no data is counted
+
+            either as uptime or downtime depending on monitor settings. See
+
+            [SLO documentation](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+
+            for detailed information.'
           example:
           - - 1579212382
             - 0
@@ -11469,7 +11527,8 @@ components:
       description: 'The time-slice condition, composed of 3 parts: 1. the metric timeseries
         query, 2. the comparator,
 
-        and 3. the threshold.'
+        and 3. the threshold. Optionally, a fourth part, the query interval, can be
+        provided.'
       example:
         comparator: <
         query:
@@ -11488,6 +11547,8 @@ components:
           $ref: '#/components/schemas/SLOTimeSliceComparator'
         query:
           $ref: '#/components/schemas/SLOTimeSliceQuery'
+        query_interval_seconds:
+          $ref: '#/components/schemas/SLOTimeSliceInterval'
         threshold:
           description: The threshold value to which each SLI value will be compared.
           example: 5
@@ -11498,6 +11559,22 @@ components:
       - threshold
       - query
       type: object
+    SLOTimeSliceInterval:
+      description: 'The interval used when querying data, which defines the size of
+        a time slice.
+
+        Two values are allowed: 60 (1 minute) and 300 (5 minutes).
+
+        If not provided, the value defaults to 300 (5 minutes).'
+      enum:
+      - 60
+      - 300
+      example: 300
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE_MINUTE
+      - FIVE_MINUTES
     SLOTimeSliceQuery:
       description: The queries and formula used to calculate the SLI value.
       example:
@@ -11552,7 +11629,10 @@ components:
       - time_slice
       type: object
     SLOTimeframe:
-      description: The SLO time window options.
+      description: 'The SLO time window options. Note that "custom" is not a valid
+        option for creating
+
+        or updating SLOs. It is only used when querying SLO history over custom timeframes.'
       enum:
       - 7d
       - 30d
@@ -12218,7 +12298,7 @@ components:
         interval:
           default: null
           description: If the type of the metric is rate or count, define the corresponding
-            interval.
+            interval in seconds.
           example: 20
           format: int64
           nullable: true
@@ -13643,6 +13723,10 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAPIStep'
           type: array
+        variablesFromScript:
+          description: Variables defined from JavaScript code.
+          example: dd.variable.set("FOO", "foo")
+          type: string
       type: object
     SyntheticsAPITestResultData:
       description: Object containing results for your Synthetic API test.
@@ -13820,6 +13904,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
@@ -13856,6 +13941,45 @@ components:
           type: string
         targetValue:
           description: The path target value to compare to.
+      type: object
+    SyntheticsAssertionJSONSchemaMetaSchema:
+      description: The JSON Schema meta-schema version used in the assertion.
+      enum:
+      - draft-07
+      - draft-06
+      type: string
+      x-enum-varnames:
+      - DRAFT_07
+      - DRAFT_06
+    SyntheticsAssertionJSONSchemaOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesJSONSchema
+      example: validatesJSONSchema
+      type: string
+      x-enum-varnames:
+      - VALIDATES_JSON_SCHEMA
+    SyntheticsAssertionJSONSchemaTarget:
+      description: An assertion for the `validatesJSONSchema` operator.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaOperator'
+        target:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTargetTarget'
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
+    SyntheticsAssertionJSONSchemaTargetTarget:
+      description: Composed target for `validatesJSONSchema` operator.
+      properties:
+        jsonSchema:
+          description: The JSON Schema to assert.
+          type: string
+        metaSchema:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaMetaSchema'
       type: object
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
@@ -16076,6 +16200,11 @@ components:
           maximum: 65535
           minimum: 1
           type: integer
+        files:
+          description: Files to be used as part of the request in the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsTestRequestBodyFile'
+          type: array
         follow_redirects:
           description: Specifies whether or not the request follows redirects.
           type: boolean
@@ -16142,6 +16271,32 @@ components:
           example: https://example.com
           type: string
       type: object
+    SyntheticsTestRequestBodyFile:
+      description: Object describing a file to be used as part of the request in the
+        test.
+      properties:
+        bucketKey:
+          description: Bucket key of the file.
+          type: string
+        content:
+          description: Content of the file.
+          maxLength: 3145728
+          type: string
+        name:
+          description: Name of the file.
+          maxLength: 1500
+          type: string
+        size:
+          description: Size of the file.
+          format: int64
+          maximum: 3145728
+          minimum: 1
+          type: integer
+        type:
+          description: Type of the file.
+          maxLength: 1500
+          type: string
+      type: object
     SyntheticsTestRequestBodyType:
       description: Type of the request body.
       enum:
@@ -16151,6 +16306,8 @@ components:
       - text/html
       - application/x-www-form-urlencoded
       - graphql
+      - application/octet-stream
+      - multipart/form-data
       example: text/plain
       type: string
       x-enum-varnames:
@@ -16160,6 +16317,8 @@ components:
       - TEXT_HTML
       - APPLICATION_X_WWW_FORM_URLENCODED
       - GRAPHQL
+      - APPLICATION_OCTET_STREAM
+      - MULTIPART_FORM_DATA
     SyntheticsTestRequestCertificate:
       description: Client certificate to use when performing the test request.
       properties:
@@ -17307,6 +17466,8 @@ components:
         logs_indexed_15day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_180day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_1day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_30day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -21504,18 +21665,28 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
+            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
+              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_write: Configure cloud cost accounts and global
+              customizations.
+            continuous_profiler_pgo_read: Read and query Continuous Profiler data
+              for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_scanner_read: View Data Scanner configurations.
+            data_scanner_write: Edit Data Scanner configurations.
             events_read: Read Events data.
+            hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
@@ -21523,10 +21694,15 @@ components:
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
-              an organization. Mute and unmute hosts. The ability to write monitors
+              an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit and delete individual monitors.
+            org_management: Edit org configurations, including authentication and
+              certain security preferences such as configuring SAML, renaming an org,
+              configuring allowed login methods, creating child orgs, subscribing
+              & unsubscribing from apps in the marketplace, and enabling & disabling
+              Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -22165,11 +22341,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
@@ -22218,11 +22389,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
@@ -24332,7 +24498,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - hosts_read
       summary: Get all hosts for your organization
       tags:
       - Hosts
@@ -24380,7 +24547,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - hosts_read
       summary: Get the total number of active hosts
       tags:
       - Hosts
@@ -24537,9 +24705,9 @@ paths:
             value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
               {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
               true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
-              \ ],\n  \"filter_tags\": [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\":
-              [\n      \"$KEY:$VALUE\"\n  ],\n  \"metrics_collection_enabled\": false,\n
-              \ \"resource_collection_enabled\": true,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+              \ ],\n  \"extended_resource_collection_enabled\": true,\n  \"filter_tags\":
+              [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\": [\n      \"$KEY:$VALUE\"\n
+              \ ],\n  \"metrics_collection_enabled\": false,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
           step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-undo:
@@ -24714,10 +24882,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all Amazon EventBridge sources
       tags:
       - AWS Integration
@@ -26603,10 +26767,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get indexes order
       tags:
       - Logs Indexes
@@ -26838,10 +26998,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get pipeline order
       tags:
       - Logs Pipelines
@@ -26923,10 +27079,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all pipelines
       tags:
       - Logs Pipelines
@@ -27044,10 +27196,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a pipeline
       tags:
       - Logs Pipelines
@@ -28569,11 +28717,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
@@ -28628,11 +28771,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
@@ -32745,7 +32883,10 @@ paths:
         type: safe
   /api/v1/usage/billable-summary:
     get:
-      description: Get billable usage across your account.
+      description: 'Get billable usage across your account.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetUsageBillableSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -34356,7 +34497,10 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get all usage across your account.
+      description: 'Get all usage across your account.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -34829,11 +34973,6 @@ paths:
           description: Conflict
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_invite
       summary: Create a user
       tags:
       - Users
@@ -35013,7 +35152,6 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - AuthZ: []
       summary: Validate API key
       tags:
       - Authentication
@@ -35566,8 +35704,6 @@ tags:
     monthly usage across multiple facets of Datadog.
 
     This API is available to all Pro and Enterprise customers.
-
-    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
 
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.

@@ -10,7 +10,7 @@ code_lang_weight: 20
 description: Set up Error Tracking for your iOS projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-ios
 - link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: Blog
@@ -30,25 +30,25 @@ Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports
 
 In order to symbolicate your stack traces, find and upload your .dSYM files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
 
-Your crash reports appear in [**Error Tracking**][8].
+Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the iOS SDK yet, follow the [in-app setup instructions][1] or see the [iOS RUM setup documentation][2].
+If you have not set up the iOS SDK yet, follow the [in-app setup instructions][2] or see the [iOS RUM setup documentation][3].
 
 ### Add Crash Reporting 
 
-To enable Crash Reporting, make sure to also enable [RUM][2] and, or [Logs][9]. Then, add the package according to your dependency manager and update your initialize snippet.  
+To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialize snippet.  
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
 
-You can use [CocoaPods][4] to install `dd-sdk-ios`:
+You can use [CocoaPods][1] to install `dd-sdk-ios`:
 ```
 pod 'DatadogCrashReporting'
 ```
 
-[4]: https://cocoapods.org/
+[1]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -66,7 +66,7 @@ DatadogCrashReporting
 {{% /tab %}}
 {{% tab "Carthage" %}}
 
-You can use [Carthage][5] to install `dd-sdk-ios`:
+You can use [Carthage][1] to install `dd-sdk-ios`:
 ```
 github "DataDog/dd-sdk-ios"
 ```
@@ -77,7 +77,7 @@ DatadogCrashReporting.xcframework
 CrashReporter.xcframework
 ```
 
-[5]: https://github.com/Carthage/Carthage
+[1]: https://github.com/Carthage/Carthage
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -100,32 +100,34 @@ Datadog.initialize(
 CrashReporting.enable()
 ```
 
-## Symbolicate crash reports
+## Get deobfuscated stack traces
+
+### Symbolicate crash reports
 
 Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .dSYM files, which are generated in your application's build or distribution process.
 
-### Find your dSYM file
+### Find your .dSYM file
 
-Every iOS application produces .dSYM files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of .dSYM files. 
+Every iOS application produces `.dSYM` files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of `.dSYM` files. 
 
 Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine. 
 
 | Bitcode Enabled | Description |
 |---|---|
-| Yes | `.dSYM` files are available after [App Store Connect][6] completes processing your application's build. |
+| Yes | `.dSYM` files are available after [App Store Connect][5] completes processing your application's build. |
 | No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
 
-### Upload your dSYM file
+### Upload your .dSYM file
 
-By uploading your .dSYM file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
+By uploading your `.dSYM` file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
 
 Once your application crashes and you restart the application, the iOS SDK uploads a crash report to Datadog.
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
-#### Datadog CI
+### Use Datadog CI to upload your .dSYM file
 
-You can use the command line tool [@datadog/datadog-ci][5] to upload your dSYM file:
+You can use the command line tool [@datadog/datadog-ci][6] to upload your `.dSYM` file:
 
 ```sh
 export DATADOG_API_KEY="<API KEY>"
@@ -141,11 +143,11 @@ npx @datadog/datadog-ci dsyms upload /path/to/appDsyms/
 
 Alternatively, if you use Fastlane or GitHub Actions in your workflows, you can leverage these integrations instead of `datadog-ci`:
 
-#### Fastlane Plugin
+### Use Fastlane plugin to upload your .dSYM file
 
-The Datadog plugin helps you upload dSYM files to Datadog from your Fastlane configuration.
+The Fastlane plugin helps you upload `.dSYM` files to Datadog from your Fastlane configuration.
 
-1. Add [`fastlane-plugin-datadog`][3] to your project.
+1. Add [`fastlane-plugin-datadog`][7] to your project.
 
    ```sh
    fastlane add_plugin datadog
@@ -161,11 +163,11 @@ The Datadog plugin helps you upload dSYM files to Datadog from your Fastlane con
    end
    ```
 
-For more information, see [`fastlane-plugin-datadog`][3].
+For more information, see [`fastlane-plugin-datadog`][7].
 
-#### GitHub Action
+### Use GitHub Actions to upload your .dSYM file
 
-The [Datadog Upload dSYMs GitHub Action][4] allows you to upload your symbols in your GitHub Action jobs:
+The [Datadog Upload dSYMs GitHub Action][8] allows you to upload your symbols in your GitHub Action jobs:
 
 ```yml
 name: Upload dSYM Files
@@ -191,9 +193,9 @@ jobs:
             path/to/zip/dsyms.zip
 ```
 
-For more information, see [dSYMs commands][7].
+For more information, see [dSYMs commands][9].
 
-### Limitations
+## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 dSYM files are limited to **500** MB.
@@ -202,7 +204,7 @@ dSYM files are limited to **500** MB.
 dSYM files are limited to **500** MB.
 {{< /site-region >}}
 
-## Verify crash reports
+## Test your implementation
 
 To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your RUM application and confirm that the error appears in Datadog. 
 
@@ -215,7 +217,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
    }
    ```
 
-3. After the crash happens, restart your application and wait for the iOS SDK to upload the crash report in [**Error Tracking**][8].
+3. After the crash happens, restart your application and wait for the iOS SDK to upload the crash report in [**Error Tracking**][1].
 
 **Note:** RUM supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture.
 
@@ -223,12 +225,12 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/real_user_monitoring/ios
-[3]: https://github.com/DataDog/datadog-fastlane-plugin
-[4]: https://github.com/marketplace/actions/datadog-upload-dsyms
-[5]: https://www.npmjs.com/package/@datadog/datadog-ci
-[6]: https://appstoreconnect.apple.com/
-[7]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
-[8]: https://app.datadoghq.com/rum/error-tracking
-[9]: https://docs.datadoghq.com/logs/log_collection/ios
+[1]: https://app.datadoghq.com/rum/error-tracking
+[2]: https://app.datadoghq.com/rum/application/create
+[3]: /real_user_monitoring/ios
+[4]: /logs/log_collection/ios
+[5]: https://appstoreconnect.apple.com/
+[6]: https://www.npmjs.com/package/@datadog/datadog-ci
+[7]: https://github.com/DataDog/datadog-fastlane-plugin
+[8]: https://github.com/marketplace/actions/datadog-upload-dsyms
+[9]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md

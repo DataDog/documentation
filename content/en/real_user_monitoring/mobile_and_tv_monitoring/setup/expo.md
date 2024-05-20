@@ -13,7 +13,7 @@ further_reading:
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-reactnative
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: Blog
@@ -80,6 +80,10 @@ await DdSdkReactNative.initialize(config);
 
 // Once the Datadog SDK is initialized, you need to setup view tracking in order to see data in the RUM dashboard.
 ```
+
+#### Sample RUM sessions
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Expo SDK][9] as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter. 
 
 ### Upload source maps on EAS builds
 
@@ -201,7 +205,7 @@ DdSdkReactNative.initialize(config);
 
 ### App produces a lot of /logs RUM Resources
 
-When Resource tracking is enabled and SDK verbosity is set to `DEBUG`, each RUM Resource will trigger a `/logs` call to the Expo dev server to print the log, which will itself create a new RUM resource, creating an infinite loop.
+When Resource tracking is enabled and SDK verbosity is set to `DEBUG`, each RUM Resource triggers a `/logs` call to the Expo dev server to print the log, which will itself create a new RUM resource, creating an infinite loop.
 The most common patterns of Expo dev server host URL are filtered by the SDK, therefore, you may not encounter this error in most situations.
 If this error occurs, add the following RUM Resource mapper to filter out the calls:
 
@@ -233,3 +237,4 @@ config.resourceEventMapper = event => {
 [6]: /real_user_monitoring/error_tracking/expo/
 [7]: https://expo.github.io/router/docs/
 [8]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context

@@ -8,10 +8,6 @@ kind: documentation
 title: Google Cloud SQL マネージド SQL Server のデータベースモニタリングの設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
 データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
@@ -23,7 +19,7 @@ title: Google Cloud SQL マネージド SQL Server のデータベースモニ�
 ## はじめに
 
 サポートされている SQL Server バージョン
-: 2012、2014、2016、2017、2019、2022
+: 2014、2016、2017、2019、2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -97,16 +93,16 @@ adoprovider: MSOLEDBSQL19  # バージョン 18 以下の MSOLEDBSQL に置き�
 
 #### ODBC
 
-推奨する ODBC ドライバーは、[Microsoft ODBC Driver][8] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
+推奨される ODBC ドライバーは [Microsoft ODBC Driver][8] です。Agent 7.51 以降、SQL Server 用 ODBC Driver 18 が Linux 用 Agent に含まれています。Windows の場合は、Agent を実行するホストにドライバーがインストールされていることを確認してください。
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 17 for SQL Server}'
+driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
 すべての Agent の構成が完了したら、[Datadog Agent を再起動][9]します。
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][10]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][11]のページへ移動して開始します。
 
@@ -119,8 +115,8 @@ driver: '{ODBC Driver 17 for SQL Server}'
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[9]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux ホスト" %}}
@@ -156,7 +152,7 @@ instances:
 
 すべての Agent の構成が完了したら、[Datadog Agent を再起動][6]します。
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][7]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][8]のページへ移動して開始します。
 
@@ -166,20 +162,20 @@ instances:
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [5]: /ja/getting_started/tagging/unified_service_tagging
-[6]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
 Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットの読み取り権限が必要です。
 
 アカウントや環境に合わせて、値を置き換えます。利用可能なすべての構成オプションについては、[サンプルコンフィギュレーションファイル][2]を参照してください。
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.51.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -190,7 +186,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<HOSTNAME>",
     "port": <SQL_PORT>,
     "connector": "odbc",
-    "driver": "FreeTDS",
+    "driver": "ODBC Driver 18 for SQL Server",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -209,7 +205,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 `service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][4]を参照してください。
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][5]し、**Checks** セクションで `sqlserver` を探します。または、Datadog の[データベース][6]のページへ移動して開始します。
 
@@ -217,7 +213,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [4]: /ja/getting_started/tagging/unified_service_tagging
-[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -245,7 +241,7 @@ instances:
     username: datadog
     password: "<PASSWORD>"
     connector: "odbc"
-    driver: "FreeTDS"
+    driver: "ODBC Driver 18 for SQL Server"
     tags:  # オプション
       - "service:<CUSTOM_SERVICE>"
       - "env:<CUSTOM_ENV>"
@@ -260,7 +256,7 @@ instances:
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/sqlserver.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # このフラグを必ず入れてください
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
@@ -269,7 +265,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
-    driver: "FreeTDS"
+    driver: "ODBC Driver 18 for SQL Server"
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -281,7 +277,7 @@ instances:
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスの構成を Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 
 ```yaml
@@ -301,7 +297,7 @@ metadata:
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",
-          "driver": "FreeTDS",
+          "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
           "gcp": {
             "project_id": "<PROJECT_ID>",
@@ -327,7 +323,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
-[5]: /ja/agent/guide/secrets-management
+[5]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

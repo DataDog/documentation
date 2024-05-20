@@ -13,7 +13,7 @@ further_reading:
       tag: "Documentation"
       text: 'Use Analytics queries and monitors based on retained traces.'
     - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric'
-      tag: "Terraform"
+      tag: "External Site"
       text: 'Create and manage span-based metrics with Terraform'
 ---
 

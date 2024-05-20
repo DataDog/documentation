@@ -12,10 +12,10 @@ type: multi-code-lang
 code_lang_weight: 30
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-unity
 - link: https://github.com/DataDog/unity-package
-  tag: GitHub
+  tag: "Source Code"
   text: Package URL for Unity SDK
 - link: real_user_monitoring/explorer/
   tag: Documentation
@@ -43,12 +43,16 @@ Datadog does not support Desktop (Windows, Mac, or Linux), console, or web deplo
 
 ### Specify application details in the UI
 
-1. In Datadog, navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][1].
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `Unity` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
 
 To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][2].
+
+### Sample RUM sessions
+
+You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
 
 ### Installing
 

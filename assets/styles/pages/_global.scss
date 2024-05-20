@@ -909,7 +909,7 @@ dl {
     }
 
     dd {
-        padding: 0 0.75rem 1rem 1.75rem;
+        padding: 0 0.75rem 0rem 1.75rem;
 
         &:last-of-type {
             padding-bottom: 0.5rem;
@@ -1034,6 +1034,12 @@ dl {
     }
     .container__content {
         max-width: 1440px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1336px !important;
     }
 }
 
