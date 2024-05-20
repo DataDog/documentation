@@ -270,7 +270,7 @@ module "lambda-datadog" {
   version = "1.0.0"
 
   environment_variables = {
-    "DD_API_KEY_SECRET_ARN" : <API_KEY_SECRET_ARN>
+    "DD_API_KEY_SECRET_ARN" : <DATADOG_API_KEY_SECRET_ARN>
     "DD_ENV" : <ENVIRONMENT>
     "DD_SERVICE" : <SERVICE_NAME>
     "DD_SITE": "{{< region-param key="dd_site" code="true" >}}"
@@ -284,15 +284,19 @@ module "lambda-datadog" {
 }
 ```
 
-Ensure the correct Datadog Site is selected on the right.
+To set the `aws_lambda_function` arguments:
 
-Replace `<API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, use `DD_API_KEY` instead of `DD_API_KEY_SECRET_ARN` and set the value to your Datadog API key in plaintext.
-
-All of the arguments available in the [aws_lambda_function][2] resource are available in this Terraform module.
-
-Arguments defined as blocks in the `aws_lambda_function` resource are redefined as variables with their nested arguments.
+All of the arguments available in the `aws_lambda_function` resource are available in this Terraform module. Arguments defined as blocks in the `aws_lambda_function` resource are redefined as variables with their nested arguments.
 
 For example, in `aws_lambda_function`, `environment` is defined as a block with a `variables` argument. In the `lambda-datadog` Terraform module, the value for the `environment_variables` is passed to the `environment.variables` argument in `aws_lambda_function`. See [inputs][3] for a complete list of variables in this module.
+
+To fill in the placeholders:
+
+- Replace <DATADOG_API_KEY_SECRET_ARN> with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The secretsmanager:GetSecretValue permission is required. For quick testing, you can instead use apiKey and set the Datadog API key in plaintext.
+- Replace <ENVIRONMENT> with the Lambda function's environment
+- Replace <SERVICE_NAME> with the name of the Lambda function's service
+- Ensure the correct SITE is selected on the right
+- Replace <VERSION> with the version number of the Lambda function
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
 [2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
