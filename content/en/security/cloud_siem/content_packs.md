@@ -40,7 +40,7 @@ further_reading:
 Monitor the security and compliance levels of your AWS operations.
 
 The [AWS CloudTrail Content Pack][5] includes:
-- Detection Rules
+- [Detection Rules][6]
 - An interactive dashboard
 - AWS Investigator
 - Workflow Automation
@@ -50,8 +50,8 @@ The [AWS CloudTrail Content Pack][5] includes:
 
 Protect your Azure environment by tracking attacker activity.
 
-The [Azure Security Content Pack][6] includes:
-- Detection Rules
+The [Azure Security Content Pack][7] includes:
+- [Detection Rules][8]
 - An interactive dashboard
 - Azure Investigator
 - Configuration guides
@@ -60,8 +60,8 @@ The [Azure Security Content Pack][6] includes:
 
 Protect your GCP environment by monitoring audit logs.
 
-The [GCP Audit Logs Content Pack][7] includes:
-- Detection Rules
+The [GCP Audit Logs Content Pack][9] includes:
+- [Detection Rules][10]
 - An interactive dashboard
 - GCP Investigator
 - Configuration guides
@@ -69,8 +69,8 @@ The [GCP Audit Logs Content Pack][7] includes:
 ### Kubernetes Audit Logs
 Gain coverage by monitoring audit logs in your Kubernetes control plane.
 
-The [Kubernetes Audit Logs Content Pack][8] includes:
-- Detection Rules
+The [Kubernetes Audit Logs Content Pack][11] includes:
+- [Detection Rules][12]
 - An interactive dashboard
 
 ## Authentication Content Packs
@@ -79,31 +79,31 @@ The [Kubernetes Audit Logs Content Pack][8] includes:
 
 Monitor account activity with 1Password Events Reporting.
 
-The [1Password Content Pack][9] includes:
-- Detection Rules
+The [1Password Content Pack][13] includes:
+- [Detection Rules][14]
 - An interactive dashboard
 
 ### Auth0
 
 Monitor and generate signals around Auth0 user activity.
 
-The [Auth0 Content Pack][10] includes:
-- Detection Rules
+The [Auth0 Content Pack][15] includes:
+- [Detection Rules][16]
 - An interactive dashboard
 
 ### JumpCloud
 
 Tracks user activity by monitoring JumpCloud audit logs.
 
-The [JumpCloud Content Pack][11] includes:
-- Detection Rules
+The [JumpCloud Content Pack][17] includes:
+- [Detection Rules][18]
 
 ### Okta
 
 Track user activity by monitoring Okta audit logs.
 
-The [Okta Content Pack][12] includes:
-- Detection Rules
+The [Okta Content Pack][19] includes:
+- [Detection Rules][20]
 - An interactive dashboard
 - Workflow Automation
 
@@ -113,16 +113,16 @@ The [Okta Content Pack][12] includes:
 
 Optimize your security monitoring within Google Workspace.
 
-The [Google Workspace Content Pack][13] includes:
-- Detection Rules
+The [Google Workspace Content Pack][21] includes:
+- [Detection Rules][22]
 - An interactive dashboard
 
 ### Microsoft 365
 
 Monitor key security events from Microsoft 365 logs.
 
-The [Microsoft 365 Content Pack][14] includes:
-- Detection Rules
+The [Microsoft 365 Content Pack][23] includes:
+- [Detection Rules][24]
 - An interactive dashboard
 
 ## Network Content Packs
@@ -131,8 +131,8 @@ The [Microsoft 365 Content Pack][14] includes:
 
 Enhance security for your web applications.
 
-The [Cloudflare Content Pack][15] includes:
-- Detection Rules
+The [Cloudflare Content Pack][25] includes:
+- [Detection Rules][26]
 - An interactive dashboard
 - Workflow Automation
 
@@ -142,8 +142,8 @@ The [Cloudflare Content Pack][15] includes:
 
 Track user activity and code change history by monitoring GitHub audit logs.
 
-The [GitHub Content Pack][16] includes:
-- Detection Rules
+The [GitHub Content Pack][27] includes:
+- [Detection Rules][28]
 - An interactive dashboard
 
 ## Endpoint Content Packs
@@ -152,8 +152,8 @@ The [GitHub Content Pack][16] includes:
 
 Improve the security posture of your endpoints with CrowdStrike.
 
-The [CrowdStrike Content Pack][17] includes:
-- Detection Rules
+The [CrowdStrike Content Pack][29] includes:
+- [Detection Rules][30]
 - An interactive dashboard
 
 ## Further reading
@@ -165,15 +165,28 @@ The [CrowdStrike Content Pack][17] includes:
 [3]: /security/cloud_siem/investigator
 [4]: /service_management/workflows/
 [5]: https://app.datadoghq.com/security/content-packs/aws-cloudtrail
-[6]: https://app.datadoghq.com/security/content-packs/azure
-[7]: https://app.datadoghq.com/security/content-packs/gcp-audit-logs
-[8]: https://app.datadoghq.com/security/content-packs/kubernetes-audit-logs
-[9]: https://app.datadoghq.com/security/content-packs/1password
-[10]: https://app.datadoghq.com/security/content-packs/auth0
-[11]: https://app.datadoghq.com/security/content-packs/jumpcloud
-[12]: https://app.datadoghq.com/security/content-packs/okta
-[13]: https://app.datadoghq.com/security/content-packs/google-workspace
-[14]: https://app.datadoghq.com/security/content-packs/microsoft-365
-[15]: https://app.datadoghq.com/security/content-packs/cloudflare
-[16]: https://app.datadoghq.com/security/content-packs/github
-[17]: https://app.datadoghq.com/security/content-packs/crowdstrike
+[6]: /security/default_rules/#cloudtrail
+[7]: https://app.datadoghq.com/security/content-packs/azure
+[8]: /security/default_rules/#azuresecurity
+[9]: https://app.datadoghq.com/security/content-packs/gcp-audit-logs
+[10]: /security/default_rules/#gcp
+[11]: https://app.datadoghq.com/security/content-packs/kubernetes-audit-logs
+[12]: /security/default_rules/#kubernetes
+[13]: https://app.datadoghq.com/security/content-packs/1password
+[14]: /security/default_rules/#1password
+[15]: https://app.datadoghq.com/security/content-packs/auth0
+[16]: /security/default_rules/#auth0
+[17]: https://app.datadoghq.com/security/content-packs/jumpcloud
+[18]: /security/default_rules/#jumpcloud
+[19]: https://app.datadoghq.com/security/content-packs/okta
+[20]: /security/default_rules/#okta
+[21]: https://app.datadoghq.com/security/content-packs/google-workspace
+[22]: /security/default_rules/#gsuite
+[23]: https://app.datadoghq.com/security/content-packs/microsoft-365
+[24]: /security/default_rules/#microsoft-365
+[25]: https://app.datadoghq.com/security/content-packs/cloudflare
+[26]: /security/default_rules/#cloudflare
+[27]: https://app.datadoghq.com/security/content-packs/github
+[28]: /security/default_rules/#github-telemetry
+[29]: https://app.datadoghq.com/security/content-packs/crowdstrike
+[30]: /security/default_rules/#crowdstrike
