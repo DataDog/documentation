@@ -188,39 +188,15 @@ You can enable APM by installing the Agent with the Datadog Helm chart. This dep
 To enable single step instrumentation with Helm:
 
 1. Add the Helm Datadog repo:
-   ```bash
+  
+    ```bash
     helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
-2. Create a Kubernetes secret to store your Datadog [API key][10]:
+2. Create a Kubernetes Secret to store your Datadog [API key][10]:
+  
    ```bash
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
-   ```
-3. Create `datadog-values.yaml` and add the following configuration:
-   ```
-   datadog:
-    apiKeyExistingSecret: datadog-secret
-    site: <DATADOG_SITE>
-    apm:
-      instrumentation:
-         enabled: true
-    asm:
-       threats:
-         enabled: true
-   ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][12].
-
-4. Run the following command:
-   ```bash
-   helm install datadog-agent -f datadog-values.yaml datadog/datadog
-   ```
-5. Do a rolling restart on your applications for instrumentation to take effect.
-
-More information on Kubernetes Single Step Instrumentation here:
-
-* [Enabling or Disabling Single Step Instrumentation by namespaces][15]
-* [Specifying Instrumentation libraries versions][16]
-* [Removing Instrumentation on specific deployments][17]
 
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -275,20 +251,13 @@ Run the following commands and restart the service to stop injecting the library
 {{% tab "Kubernetes" %}}
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
+     
    ```yaml
    spec:
      template:
        metadata:
          labels:
            admission.datadoghq.com/enabled: "false"
-   ```
-2. Apply the configuration:
-   ```bash
-   kubectl apply -f /path/to/your/deployment.yaml
-   ```
-3. Restart the services you want to remove instrumentation for.
-
-**Note:** You can disable ASM while keeping APM up by adding the `DD_APPSEC_ENABLED=false` environment variable to your deployments.
 
 {{% /tab %}}
 
@@ -328,11 +297,9 @@ To stop producing traces, remove library injectors and restart the infrastructur
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Under `asm:`, remove `threats:` and all following configuration in`datadog-values.yaml`.
 3. Run the following command:
+   
    ```bash
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
-   ```
-4. Restart your services.
-
 {{% /tab %}}
 
 {{< /tabs >}}

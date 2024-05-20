@@ -9,8 +9,8 @@ kind: documentation
 ## Requirements
 
 - **Minimum Agent version 7.53.0**
-- **Minimum Datadog Helm chart version 3.62.0** (For Kubernetes deployments)
-- **Languages and architectures**: Single step ASM instrumentation for code security only supports tracing Java, Python (private beta), Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
+- **Minimum Datadog Helm chart version 3.62.0** (for Kubernetes deployments).
+- **Languages and architectures**: Single step ASM instrumentation for code security only supports tracing Java, Python (support available in private beta), Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ## Enabling in one step
@@ -175,7 +175,7 @@ docker run -d --name dd-agent \
 
 You can enable APM by installing the Agent with the Datadog Helm chart. This deploys the Datadog Agent across all nodes in your Linux-based Kubernetes cluster with a DaemonSet.
 
-**Note**: Single step instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.
+<div class="alert alert-info">Single step instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.</div>
 
 ### Requirements
 
@@ -190,7 +190,7 @@ To enable single step instrumentation with Helm:
     helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
-2. Create a Kubernetes secret to store your Datadog [API key][10]:
+2. Create a Kubernetes Secret to store your Datadog [API key][10]:
    ```bash
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```
@@ -214,7 +214,7 @@ To enable single step instrumentation with Helm:
    ```
 5. Do a rolling restart on your applications for instrumentation to take effect.
 
-More information on Kubernetes Single Step Instrumentation here:
+For more information on Kubernetes single step instrumentation, see the following:
 
 * [Enabling or Disabling Single Step Instrumentation by namespaces][15]
 * [Specifying Instrumentation libraries versions][16]
@@ -273,20 +273,15 @@ Run the following commands and restart the service to stop injecting the library
 {{% tab "Kubernetes" %}}
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
+  
    ```yaml
    spec:
      template:
        metadata:
          labels:
            admission.datadoghq.com/enabled: "false"
-   ```
-2. Apply the configuration:
-   ```bash
-   kubectl apply -f /path/to/your/deployment.yaml
-   ```
-3. Restart the services you want to remove instrumentation for.
 
-**Note:** You can disable ASM code security while keeping APM up by adding the `DD_IAST_ENABLED=false` environment variable to your deployments.
+<div class="alert alert-info"> You can disable ASM code security while keeping APM up by adding the <code>DD_IAST_ENABLED=false</code> environment variable to your deployments.</div>
 
 {{% /tab %}}
 
@@ -326,10 +321,9 @@ To stop producing traces, remove library injectors and restart the infrastructur
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Under `asm:`, remove `iast:` and all following configuration in`datadog-values.yaml`.
 3. Run the following command:
-   ```bash
+  
+    ```bash
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
-   ```
-4. Restart your services.
 
 {{% /tab %}}
 
