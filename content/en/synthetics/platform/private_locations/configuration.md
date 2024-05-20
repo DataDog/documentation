@@ -2,6 +2,8 @@
 title: Private Locations Configuration
 kind: documentation
 description: Configure your private locations.
+aliases:
+- /synthetics/private_locations/configuration
 further_reading:
 - link: "getting_started/synthetics/private_location"
   tag: "Documentation"
