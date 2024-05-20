@@ -42,7 +42,7 @@ cascade:
 
 ## Overview
 
-Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services. With distributed tracing, out-of-the-box dashboards, and seamless correlation with other telemetry data, Datadog APM helps ensure the best possible performance and user experience for your applications.
+Datadog Application Performance Monitoring (APM) provides visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services. With distributed tracing, out-of-the-box dashboards, and seamless correlation with other telemetry data, Datadog APM helps ensure the best possible performance and user experience for your applications.
 
 For an introduction to terminology used in Datadog APM, see [APM Terms and Concepts][1].
 
