@@ -178,7 +178,7 @@ Support:
 
 If `type` is **file**:
 - Set the position for the Agent to start reading the file.
-- Valid values are `beginning` and `end` (default: `end`).
+- Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`).
 - The `beginning` position does not support paths with wildcards.
 
 If `type` is **journald**:
@@ -190,7 +190,7 @@ The `start_position` is always `beginning` when tailing a container.
 
 #### Precedence
 
-For both file and journald tailer types, if an `end` or `beginning` position is specified, but an offset is stored, the offset takes precedence. For journald tail types, using the `forceBeginning` or `forceEnd` value forces the Agent to use the specified start position even if there is a stored offset.
+For both file and journald tailer types, if an `end` or `beginning` position is specified, but an offset is stored, the offset takes precedence. Using the `forceBeginning` or `forceEnd` value forces the Agent to use the specified value even if there is a stored offset.
 
 ## Further Reading
 
