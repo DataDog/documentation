@@ -75,11 +75,11 @@ To setup unified service tagging in a containerized environment:
 #### Automatic version tagging for containerized environments
 You can use the `version` to [monitor deployments][17] and service behavior in support of your software deployment strategy. `Version` also enables [Automatic Faulty Deployment Detection][16] to help you find faulty code deployments within minutes.
 
-Datadog will set the `version` tag for you if the following criteria are met:  
-1. You do not set version yourself. If `version` is set for a given service, Datadog will not override your `version` value.
+Datadog sets the `version` tag for you if the following criteria are met:  
+1. You do not set version yourself. If `version` is set, Datadog does not override your `version` value.
 2. Your service runs in a containerized environment and Datadog has access to `image_tag`, or you have enabled git in the Datadog tracer. 
 
-When those criteria are met, `version` is automatically set to `{image_tag}_{git_commit_sha}`. If only one tag is available then just that tag's value is be used. For example: 'version' is set to the value of `{image_tag}` if `{git_commit_sha}` is unavailable. 
+When those criteria are met, `version` is automatically set to `{image_tag}_{git_commit_sha}`. If only one tag is available then that tag's value is be used. For example: 'version' is set to the value of `{image_tag}` if `{git_commit_sha}` is unavailable. 
 
 #### Configuration
 
