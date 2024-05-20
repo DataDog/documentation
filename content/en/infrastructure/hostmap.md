@@ -7,10 +7,10 @@ aliases:
   - /guides/hostmap
 further_reading:
 - link: "/infrastructure/livecontainers/"
-  tag: "Graphing"
+  tag: "Documentation"
   text: "Get real-time visibility of all of the containers across your environment"
 - link: "/infrastructure/process/"
-  tag: "Graphing"
+  tag: "Documentation"
   text: "Understand what is going on at any level of your system"
 ---
 

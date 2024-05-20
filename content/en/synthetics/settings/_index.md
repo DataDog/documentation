@@ -6,7 +6,7 @@ further_reading:
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage Synthetic Global Variables with Terraform"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"

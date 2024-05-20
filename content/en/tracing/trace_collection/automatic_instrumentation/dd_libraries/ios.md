@@ -11,7 +11,7 @@ type: multi-code-lang
 code_lang_weight: 90
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-ios Source code
 - link: tracing/visualization/
   tag: Documentation
