@@ -77,7 +77,7 @@ You can use the `version` to [monitor deployments][17] and service behavior in s
 
 Datadog sets the `version` tag for you if the following criteria are met:  
 1. You do not set version yourself. If `version` is set, Datadog does not override your `version` value.
-2. Your service runs in a containerized environment and Datadog has access to `image_tag`, or you have enabled git in the Datadog tracer. 
+2. Your service runs in a containerized environment and Datadog has access to `image_tag`, or you have enabled Git in the Datadog tracer. If you want to learn how to enable Git in the tracer, read the [Embed Git information in your build artifacts][18] documentation. 
 
 When those criteria are met, `version` is automatically set to `{image_tag}_{git_commit_sha}`. If only one tag is available then that tag's value is be used. For example: 'version' is set to the value of `{image_tag}` if `{git_commit_sha}` is unavailable. 
 
@@ -437,3 +437,4 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [15]: /serverless/configuration/#connect-telemetry-using-tags
 [16]: /watchdog/faulty_deployment_detection/
 [17]: /tracing/services/deployment_tracking/
+[18]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
