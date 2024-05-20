@@ -73,7 +73,7 @@ To setup unified service tagging in a containerized environment:
 3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
 #### Automatic version tagging for containerized environments
-You can use the `version` to [monitor deployments][17] and service behavior in support of your software deployment strategy. `Version` also enables [Automatic Faulty Deployment Detection][16] to help you find faulty code deployments within minutes.
+You can use the `version` tag to [monitor deployments][17] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][16].
 
 Datadog sets the `version` tag for you if the following criteria are met:  
 1. You do not set version yourself. If `version` is set, Datadog does not override your `version` value.
