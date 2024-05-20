@@ -9,10 +9,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 {{% dbm-oracle-definition %}}
 
 The Agent collects telemetry directly from the database by logging in as a read-only user.
@@ -144,7 +140,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: /agent/configuration/agent-commands/#agent-status-and-information
 [4]: https://app.datadoghq.com/databases

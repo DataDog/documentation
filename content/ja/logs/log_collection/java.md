@@ -78,7 +78,9 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
       <version>6.6</version>
     </dependency>
     ```
-2. `logback.xml` の JSON レイアウトを使用してファイルアペンダーを構成します。
+2. `logback.xml` の JSON レイアウトを使用してアペンダーを構成します。
+
+   ファイル:
 
     ```xml
     <configuration>
@@ -93,13 +95,31 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
     </configuration>
     ```
 
+   コンソール:
+
+    ```xml
+    <configuration>
+      <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+          <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>
+      </appender>
+
+      <root>
+        <level value="DEBUG"/>
+          <appender-ref ref="CONSOLE"/>
+        </root>
+    </configuration>
+    ```
+
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
 Log4j 2 には JSON レイアウトが含まれています。
 
-1. `log4j2.xml` の JSON レイアウトを使用してファイルアペンダーを構成します。
+1. `log4j2.xml` の JSON レイアウトを使用してアペンダーを構成します。
+
+   ファイルアペンダー:
+
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <Configuration>
@@ -116,6 +136,28 @@ Log4j 2 には JSON レイアウトが含まれています。
       </Loggers>
     </Configuration>
     ```
+
+   コンソールアペンダー:
+
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration>
+
+        <Appenders>
+            <Console name="console" target="SYSTEM_OUT">
+                <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
+            </Console>
+        </Appenders>
+
+        <Loggers>
+            <Root level="INFO">
+                <AppenderRef ref="console"/>
+            </Root>
+
+        </Loggers>
+    </Configuration>
+    ```
+
 2. JSON レイアウトの依存関係を `pom.xml` に追加します。
     ```xml
     <dependency>
@@ -179,7 +221,7 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力する JSON ライターの構成を作成します。
+[Tinylog 公式ドキュメント][1]に基づいて、JSON ライターの構成を作成します。
 
 
 `tinylog.properties` ファイルには以下のフォーマットを使用します。

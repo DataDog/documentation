@@ -8,7 +8,7 @@ aliases:
     - /agent/docker/apm
 further_reading:
     - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/trace'
-      tag: 'Github'
+      tag: "Source Code"
       text: Source code
     - link: '/integrations/amazon_ecs/#trace-collection'
       tag: 'Documentation'

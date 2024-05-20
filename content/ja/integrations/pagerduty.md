@@ -1,7 +1,8 @@
 ---
 categories:
-- monitoring
-- notification
+- collaboration
+- incidents
+- notifications
 dependencies: []
 description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
 doc_link: https://docs.datadoghq.com/integrations/pagerduty/
@@ -16,6 +17,9 @@ further_reading:
 - link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration
   tag: ブログ
   text: サービスカタログとのインテグレーションを利用する
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_pagerduty
+  tag: Terraform
+  text: Terraform による Datadog Pagerduty インテグレーションの作成と管理
 git_integration_title: pagerduty
 has_logo: true
 integration_id: ''
@@ -30,43 +34,42 @@ short_description: Datadog のメトリクスとイベントから PagerDuty ア
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PagerDuty インテグレーションは、Datadog for Government サイトをサポートしていません。<b>注</b>: PagerDuty にモニター通知を送信することは可能です。</div>
+<div class="alert alert-warning">Datadog PagerDuty インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。<b>注</b>: 監視通知を PagerDuty に送信することは可能です。</div>
 {{< /site-region >}}
 
 ## 概要
 
-PagerDuty を Datadog に接続することで、以下のことが可能になります。
+PagerDuty を Datadog に接続して、以下のことができます。
 
-- 自分の投稿に `@pagerduty` と記載することで、自分のストリームからインシデントをトリガーし、解決する
-- インシデントやエスカレーションが発生した際、ストリームで確認する
-- オンコール担当者のリマインダーを毎日受け取る
+- ポストに `@pagerduty` をメンションすることで、ストリームからインシデントをトリガーおよび解決できます。
+- インシデントやエスカレーションの発生時に、それらをストリームに表示できます。
+- 誰がオンコールかのリマインダーを毎日取得できます。
 
-## セットアップ
+## 計画と使用
 
-Pagerduty の [Datadog インテグレーションガイド][1]をご参照ください。
+Pagerduty の [Datadog インテグレーションガイド][1]を参照してください。
 
 {{< site-region region="us" >}}
-Pagerduty をインテグレーションしたら、Datadog のカスタム Pagerduty Incident Trends をチェックすることができます。
+PagerDuty を統合したら、Datadog のカスタム PagerDuty インシデントトレンドを確認できます。
 {{< /site-region >}}
 
-## 収集したデータ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
-PagerDuty インテグレーションには、メトリクスは含まれていません。
+PagerDuty インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
-PagerDuty のトリガー/解決されたイベントは、[イベントエクスプローラー][2]に表示されます。
+PagerDuty のトリガーされた/解決されたイベントは[イベントエクスプローラー][2]に表示されます。
 
-<div class="alert alert-warning">PagerDuty Webhooks V3 は、Datadog Incident App にのみイベントを送信します。</div>
-
-### サービスのチェック
+### ヘルプ
 
 PagerDuty インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ### 特定の PagerDuty サービスに通知を送信する
 
@@ -95,7 +98,7 @@ PagerDuty インシデントの重大度は、アラートの原因となって�
 
 Datadog では、PagerDuty に送信されるモニター通知の長さに上限を設けています。上限は **1024 文字**です。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

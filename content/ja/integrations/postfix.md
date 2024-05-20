@@ -5,6 +5,7 @@ assets:
   dashboards:
     postfix: assets/dashboards/postfix_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,6 +19,7 @@ assets:
     - sendmail -bd
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 66
     source_type_name: Postfix
   logs:
     source: postfix
@@ -37,7 +39,7 @@ draft: false
 git_integration_title: postfix
 integration_id: postfix
 integration_title: Postfix
-integration_version: 1.13.1
+integration_version: 1.14.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -61,6 +63,7 @@ tile:
   title: Postfix
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Postfix Graph][1]
@@ -69,13 +72,13 @@ tile:
 
 このチェックは、すべての Postfix キューのサイズを監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Postfix チェックは [Datadog Agent][2] パッケージに含まれています。Postfix サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 このチェックは、`find` コマンドを使用するように構成できます。このコマンドを使用するには、`incoming`、`active`、および `deferred` メールキュー内のメッセージカウントを取得するために、`dd-agent` への `sudo` アクセスを許可する必要があります。
 
@@ -184,7 +187,7 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 3. [Agent を再起動します][5]。
 
-#### ログの収集
+#### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -218,21 +221,21 @@ Postfix は syslog デーモンにログを送信し、そのログがファイ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `postfix` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "postfix" >}}
 
 
-### イベント
+### ヘルプ
 
 Postfix チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Postfix チェックには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

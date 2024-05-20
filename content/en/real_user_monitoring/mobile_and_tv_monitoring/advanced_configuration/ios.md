@@ -8,11 +8,14 @@ aliases:
     - /real_user_monitoring/ios/advanced_configuration
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
-    tag: "Github"
+    tag: "Source Code"
     text: "Source code for dd-sdk-ios"
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "RUM & Session Replay"
+  - link: "/real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/"
+    tag: "Documentation"
+    text: "RUM iOS and tvOS monitoring supported versions"
 ---
 
 If you have not set up the RUM iOS SDK yet, follow the [in-app setup instructions][1] or refer to the [RUM iOS setup documentation][2].
@@ -528,7 +531,6 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 
 {{< tabs >}}
 {{% tab "Swift" %}}
-```swift
 ```swift
 URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
 ```

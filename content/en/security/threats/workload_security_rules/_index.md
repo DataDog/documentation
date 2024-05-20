@@ -85,8 +85,8 @@ Understanding the dependency threat detection rules have on Agent rules is impor
 
 There are two use cases:
 
-- **Create a threat detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, then you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
-- **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, then you need to create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
+- **Create a threat detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
+- **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
 
 For a detailed explanation, see [CSM Threats Detection Rules][11]. 
 
