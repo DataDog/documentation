@@ -140,8 +140,8 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 - Change lead time stage breakdown metrics are only available for GitHub.
 - Change lead time is not available for the first deployment of a service that includes Git information.
 - Change lead time handles squash commit workflows in the following ways:
-  - If commits on a feature branch are squashed into a single commit prior to reaching the default branch (i.e, commits are squashed when a pull request is merged into the default branch), commit history for that pull request is not included in the change lead time calculation. The first commit included in the calculation is the newly created single commit. 
-  - If commits on a feature branch are not squashed, and an additional merge commit is created on the default branch after commits are made on a feature branch, that merge commit will be included in change lead time calculation as the final commit.
+  - If commits on a feature branch are squashed into a single commit prior to reaching the default branch (meaning that commits are squashed when a pull request is merged into the default branch), the commit history for that pull request is not included in the change lead time calculation. The first commit included in the calculation is the newest single commit created. 
+  - If commits on a feature branch are not squashed, and an additional merge commit is created on the default branch after commits are made on a feature branch, the merge commit is included in the change lead time calculation as the final commit.
 
 ## Calculating change failure rate
 
