@@ -34,16 +34,16 @@ The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's
 
 ## Getting started
 
-Before you begin, make sure you've already [installed and configured the Agent][13]. Then, complete the following steps to add the Datadog tracing library to your Node.js application to instrument it. Read more about [compatibility information][1].
+Before you begin, make sure you've already [installed and configured the Agent][13]. Then, complete the following steps to add the Datadog tracing library to your Node.js application to instrument it. 
 
-### Install the Datadog Tracing library
+### Install the Datadog tracing library
 
-To install the Datadog Tracing library using npm for Node.js 14+, run:
+To install the Datadog tracing library using npm for Node.js 14+, run:
 
   ```sh
   npm install dd-trace --save
   ```
-If you need to trace end-of-life Node.js version 12, install version 2.x of `dd-trace` by running:
+To install the Datadog tracing library (version 2.x of `dd-trace`) for end-of-life Node.js version 12, run:
   ```
   npm install dd-trace@latest-node12
   ```
@@ -58,7 +58,7 @@ Once you have completed setup, if you are not receiving complete traces, includi
 
 When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 
-#### Adding the tracer in code
+#### Option 1: Add the tracer in code
 
 ##### JavaScript
 
@@ -89,7 +89,7 @@ initializes in one step.
 import 'dd-trace/init';
 ```
 
-#### Adding the tracer via command line arguments
+#### Option 2: Add the tracer via command line arguments
 
 Use the `--require` option to Node.js to load and initialize the tracer in one step.
 
@@ -99,9 +99,9 @@ node --require dd-trace/init app.js
 
 **Note:** This approach requires using environment variables for all configuration of the tracer.
 
-#### Additional configuration for ESM
+#### ESM applications only: import the loader
 
-ESM support requires an additional command line argument. Running this line is required regardless of how the tracer was imported and initialized. Use the following to enable experimental ESM support with your application:
+EcmaScript Modules (ESM) applications require an additional command line argument. Run this line regardless of how the tracer was imported and initialized.
 
 Node.js < v20.6
 ```sh
