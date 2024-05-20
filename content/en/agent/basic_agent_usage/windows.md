@@ -25,7 +25,7 @@ further_reading:
 
 ## Setup
 
-If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent Support Plat formsdocumentation for [supported OS versions][2].
+If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent Supported Platforms documentation for [supported OS versions][2].
 
 ### Installation
 
