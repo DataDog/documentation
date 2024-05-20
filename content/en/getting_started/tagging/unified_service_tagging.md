@@ -79,7 +79,7 @@ Datadog will set the `version` tag for you if the following criteria are met:
 1. You do not set version yourself. If `version` is set for a given service, Datadog will not override your `version` value.
 2. Your service runs in a containerized environment and Datadog has access to `image_tag`, or you have enabled git in the Datadog tracer. 
 
-When those criteria are met, `version` is automatically set to `{image_tag}_{git_commit_sha}`. If only one tag is available then just that tag's value is be used (e.g. `{image_tag}`)
+When those criteria are met, `version` is automatically set to `{image_tag}_{git_commit_sha}`. If only one tag is available then just that tag's value is be used. For example: 'version' is set to the value of `{image_tag}` if `{git_commit_sha}` is unavailable. 
 
 #### Configuration
 
