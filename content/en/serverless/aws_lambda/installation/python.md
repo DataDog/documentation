@@ -275,19 +275,21 @@ module "lambda-datadog" {
 }
 ```
 
-To set the `aws_lambda_function` arguments:
+1. Replace the `aws_lambda_function` resource with the `lambda-datadog` Terraform module then specify the `source` and `version` of the module.
+
+2. Set the `aws_lambda_function` arguments:
 
 All of the arguments available in the `aws_lambda_function` resource are available in this Terraform module. Arguments defined as blocks in the `aws_lambda_function` resource are redefined as variables with their nested arguments.
 
 For example, in `aws_lambda_function`, `environment` is defined as a block with a `variables` argument. In the `lambda-datadog` Terraform module, the value for the `environment_variables` is passed to the `environment.variables` argument in `aws_lambda_function`. See [inputs][3] for a complete list of variables in this module.
 
-To fill in the placeholders:
+3. Fill in the placeholders:
 
-- Replace <DATADOG_API_KEY_SECRET_ARN> with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The secretsmanager:GetSecretValue permission is required. For quick testing, you can instead use apiKey and set the Datadog API key in plaintext.
-- Replace <ENVIRONMENT> with the Lambda function's environment
-- Replace <SERVICE_NAME> with the name of the Lambda function's service
-- Ensure the correct SITE is selected on the right
-- Replace <VERSION> with the version number of the Lambda function
+- Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The secretsmanager:GetSecretValue permission is required. For quick testing, you can instead use apiKey and set the Datadog API key in plaintext.
+- Replace `<ENVIRONMENT>` with the Lambda function's environment
+- Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+- Ensure the correct `DATADOG SITE` is selected on the right
+- Replace `<VERSION>` with the version number of the Lambda function
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
 [2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
