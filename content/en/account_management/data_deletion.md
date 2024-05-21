@@ -30,7 +30,7 @@ Contact [support](https://www.datadoghq.com/support/) with your request.
 - Deletions will be logged to Audit Trail alongside the requesting user's details.
 
 #### Starting Deletions
-- Deletions will start 5 minutes after confirmation; matches that arrive during this period will be included in deletion.
+- Deletions will start 2 hours after confirmation; matches that arrive during this period will be included in deletion.
 - In some cases records arriving after the job has started may not be deleted since the time window for that record has already been processed.
 
 #### Stopping Deletions
