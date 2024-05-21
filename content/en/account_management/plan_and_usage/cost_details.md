@@ -32,7 +32,7 @@ Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_rea
 Use the cost summary to:
 - View estimated month-to-date costs
 - View projected end-of-month costs
-- View cost trends within the month
+- View cost trends within the current month and historical months
 - Filter and group costs by product or sub-organization
 - View cumulative day-over-day costs
 
@@ -44,7 +44,7 @@ Projected end-of-month costs are calculated by applying the current month's proj
 
 The cost summary functionality changes according to your Datadog usage as a single organization or a multi-organization. As a multi-organization, you can view estimated and projected costs for the parent organization and each sub-organization. 
 
-{{< img src="account_management/plan_and_usage/multi-org-estimated-projected-cost-summary.png" alt="Screenshot of the Cost Summary for a parent organization, showing the overall month to date cost, projected cost, a graph of cumulative cost breakdown, and a summary table." >}}
+{{< img src="static/images/account_management/plan_and_usage/single-month-cost-trends.png" alt="Screenshot of the Cost Summary for a parent organization, showing the overall month to date cost, projected cost, a graph of cumulative cost breakdown, and a summary table including month-over-month cost changes." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -52,7 +52,9 @@ The cost summary functionality changes according to your Datadog usage as a sing
 
 #### View and filter
 
-Use the search facets at the left to filter the cost by **Products** or by **Sub-Orgs**. Use the **Over Time** tab to see how the cumulative day-over-day costs have changed.
+View your projected costs, a breakdown of your estimated costs and month-over-month cost changes on the **Summary** tab. Use the search facets at the left to filter the cost by **Products** or by **Sub-Orgs**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed. View historical cost breakdowns with month-over-month cost comparisons by toggling to previous months.
+
+{{< img src="static/images/account_management/plan_and_usage/single-month-cost-trends-previous-month.png" alt="Screenshot of a previous month Cost Summary for a parent organization, showing the overall cost for the month, a graph of cumulative cost breakdown, and a summary table including month-over-month cost changes." >}}
 
 #### Download
 
