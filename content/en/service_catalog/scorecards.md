@@ -123,6 +123,16 @@ The scorecard summary is accessible on the [**Explore** page][1] in the Service 
 
 Click **View Details** from the scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the scorecards, the rules, and that service's pass-fail score for each rule.
 
+## Track scores over time
+
+You can visualize how teams' scores progress over time as they make changes and remediate known issues through historical timeseries in the Scorecards UI. 
+
+{{< img src="/tracing/service_catalog/scorecard-historical-metrics.png" alt="Timeseries that shows change in scores over time in Scorecard UI" style="width:90%;" >}}
+
+You can also add these time series and customized queries using the `dd.scorecard.outcome` metric in Dashboards and Notebooks to share with stakeholders. This metric can be filtered on different tags such as `team`, `rule`, `scorecard`, `application`, `tier`, and `lifecycle`. 
+
+{{< img src="/tracing/service_catalog/scorecard-metric.png" alt="Scorecards historical data shown in Dashboard editor" style="width:90%;" >}}
+
 ## Generating Scorecard reports
 
 You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][9], which runs at a scheduled time. 
