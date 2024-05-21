@@ -89,7 +89,7 @@ initializes in one step.
 import 'dd-trace/init';
 ```
 
-#### Option 2: Add the tracer via command line arguments
+#### Option 2: Add the tracer with command line arguments
 
 Use the `--require` option to Node.js to load and initialize the tracer in one step.
 
