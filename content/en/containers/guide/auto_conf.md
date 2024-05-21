@@ -72,6 +72,19 @@ datadog:
     - istio
 ```
 {{% /tab %}}
+{{< tabs >}}
+{{% tab "Operator" %}}
+
+To disable auto configuration integration(s) with the Operator, add the `DD_IGNORE_AUTOCONF` variable to your `datadog-agent.yaml` file:
+
+```yaml
+  override:
+    nodeAgent:
+      env:
+        - name: DD_IGNORE_AUTOCONF
+          value: "redisdb istio"
+```
+{{% /tab %}}
 {{% tab "DaemonSet" %}}
 To disable auto configuration integration(s) with your DaemonSet, add the `DD_IGNORE_AUTOCONF` variable to your Agent manifest:
 
