@@ -135,7 +135,7 @@ To enable app hang monitoring:
 
 2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Notes][5] for more guidance on what to set this value to.
 
-Make sure you follow the steps below to get [deobfuscated stack traces][6].
+   Make sure you follow the steps below to get [deobfuscated stack traces][6].
 
 #### Notes
 
@@ -151,7 +151,7 @@ To disable app hang monitoring, update the initialization snippet and set the `a
 
 ### Symbolicate crash reports
 
-Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .dSYM files, which are generated in your application's build or distribution process.
+Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .`dSYM` files, which are generated in your application's build or distribution process.
 
 ### Find your .dSYM file
 
