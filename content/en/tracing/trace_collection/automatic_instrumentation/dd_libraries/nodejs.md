@@ -47,7 +47,7 @@ To install the Datadog tracing library (version 2.x of `dd-trace`) for end-of-li
   ```shell
   npm install dd-trace@latest-node12
   ```
-For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
+For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
 If you are upgrading from a previous major version of the library (0.x, 1.x, or 2.x) to another major version (2.x or 3.x), read the [Migration Guide][5] to assess any breaking changes.
 
 ### Import and initialize the tracer
