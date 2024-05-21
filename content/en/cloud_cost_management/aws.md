@@ -328,11 +328,11 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
 [7]: https://app.datadoghq.com/cost/setup
 [8]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
-[9]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
+[9]: /cloud_cost_management/aws/#prerequisite-generate-a-cost-and-usage-report
 [10]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
-[11]: https://docs.datadoghq.com/cloud_cost_management/container_cost_allocation/#tags
+[11]: /cloud_cost_management/container_cost_allocation/#applying-tags
 [12]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [13]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
-[15]: https://docs.datadoghq.com/cloud_cost_management/tag_pipelines
+[15]: /cloud_cost_management/tag_pipelines
 [16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html
