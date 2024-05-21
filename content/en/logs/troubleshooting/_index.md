@@ -22,7 +22,7 @@ Fix the issue at the source by checking which `service` and `source` are impacte
 
 If you are unable to convert the timestamp of JSON logs to a [recognized date format][4] before they are ingested into Datadog, follow these steps to convert and map the timestamps using Datadog's [arithmetic processor][5] and [log date remapper][6]:
 
-1. Go to the [Pipelines][7] page.
+1. Navigate to the [Pipelines][7] page.
 
 2. In **Pipelines**, hover over **Preprocessing for JSON logs**, and click the pencil icon.
 

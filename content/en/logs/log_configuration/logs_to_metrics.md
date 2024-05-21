@@ -30,7 +30,7 @@ With log-based metrics, you can generate a count metric of logs that match a que
 
 To generate a new log-based metric:
 
-1. Navigate to Log > **[Generate Metrics][5]**.
+1. Navigate to the [Generate Metrics][5] page.
 1. Select the **Generate Metrics** tab.
 1. Click **+New Metric**.
 
