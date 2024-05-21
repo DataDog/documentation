@@ -52,7 +52,7 @@ If you are upgrading from a previous major version of the library (0.x, 1.x, or 
 
 ### Import and initialize the tracer
 
-Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
+Import and initialize the tracer either in code or with command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
 Once you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm the tracer has been imported and initialized correctly**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
 
