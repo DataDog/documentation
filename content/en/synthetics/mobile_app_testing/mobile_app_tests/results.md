@@ -1,11 +1,12 @@
 ---
-title: Mobile App Test Results
+title: Mobile App Testing Results
 kind: documentation
 description: View Synthetic mobile app test results and compare successful or failed sample runs to test runs.
 aliases:
 - /mobile_testing/mobile_app_tests/results
+- /mobile_app_testing/mobile_app_tests/results
 further_reading:
-- link: "/mobile_app_testing/mobile_app_tests/"
+- link: "/synthetics/mobile_app_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
 - link: "/service_management/events/explorer"

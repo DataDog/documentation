@@ -2,6 +2,8 @@
 title: Dimensioning Private Locations
 kind: documentation
 description: Dimensioning requirements for your containerized private locations.
+aliases:
+- /synthetics/private_locations/dimensioning
 further_reading:
 - link: "/synthetics/private_locations/monitoring"
   tag: "Documentation"

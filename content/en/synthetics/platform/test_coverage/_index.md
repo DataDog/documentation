@@ -4,6 +4,7 @@ kind: documentation
 description: Evaluate your testing suite's coverage of browser actions and API endpoints.
 aliases:
   - /synthetics/dashboards/testing_coverage
+  - /synthetics/test_coverage
 further_reading:
 - link: 'https://www.datadoghq.com/blog/test-coverage-monitoring-datadog/'
   tag: 'Blog'
