@@ -29,7 +29,7 @@ To create a Quality Gates rule in Datadog:
 
    {{< img src="quality_gates/setup/custom_scope.png" alt="Adding a custom scope to a rule scope in Quality Gates" style="width:80%;">}}
 
-   You can create a rule that it is evaluated only on specific repositories and branches. To customize the rule scope, click `Select when to evaluate` and specify  the branch or repository that should be included or excluded.
+   You can create a rule that is evaluated only on specific repositories and branches. To customize the rule scope, click `Select when to evaluate` and specify the branch or repository that should be included or excluded.
 
    To add a custom scope (such as a team name), click **+ Add Filter** and select **Custom scope**. Enter a tag name without spaces (such as `documentation` or `team-documentation`) and click **Add Custom Scope**. Enter values that should be included or excluded. 
    
