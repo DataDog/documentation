@@ -44,7 +44,7 @@ To install the Datadog tracing library using npm for Node.js 14+, run:
   npm install dd-trace --save
   ```
 To install the Datadog tracing library (version 2.x of `dd-trace`) for end-of-life Node.js version 12, run:
-  ```
+  ```shell
   npm install dd-trace@latest-node12
   ```
 For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
