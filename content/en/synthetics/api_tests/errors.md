@@ -1,5 +1,5 @@
 ---
-title: API Test Errors
+title: API Testing Errors
 kind: documentation
 description: Detailed description of API test errors
 further_reading:
