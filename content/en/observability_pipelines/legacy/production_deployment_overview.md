@@ -24,6 +24,7 @@ This guide walks you through what to consider when designing your Observability 
 - [Networking](#networking)
 - [Collecting data](#collecting-data)
 - [Processing data](#processing-data)
+- [Buffering data](#buffering-data)
 - [Routing data](#routing-data)
 
 ## Networking
@@ -87,6 +88,29 @@ For remote processing, the Observability Pipelines Worker can be deployed on sep
 Data processing is shifted off your nodes and onto remote aggregator nodes. Remote processing is recommended for environments that require high durability and high availability (most environments). In addition, this is easier to set up since it does not require the infrastructure restructuring necessary when adding an agent.
 
 See [Aggregator Architecture][5] for more details.
+
+## Buffering data
+
+Where and how you buffer your data can also affect the efficiency of your pipeline. 
+
+### Choosing where to buffer data
+
+Buffering should happen close to your destinations, and each destination should have its own isolated buffer, which offers the following benefits:
+
+1. Each destination can configure its buffer to meet the sink's requirements. See [Choosing how to buffer data](#choosing-how-to-buffer-data) for more details.
+2. Isolating buffers for each destination prevents one misbehaving destination from halting the entire pipeline until the buffer reaches the configured capacity.
+
+For these reasons, the Observability Pipelines Worker couples buffers with its sinks.
+
+{{< img src="observability_pipelines/production_deployment_overview/where_to_buffer.png" alt="A diagram showing the agent in a node sending data to an Observability Pipelines Worker with a buffer in a different node" style="width:50%;" >}}
+
+### Choosing how to buffer data
+
+Observability Pipelines Worker's built-in buffers simplify operation and eliminate the need for complex external buffers.
+
+When choosing an Observability Pipelines Worker buffer type, select the type that is optimal for the destination's purpose. For example, your system of record should use disk buffers for high durability, and your system of analysis should use memory buffers for low latency. Additionally, both buffers can overflow to another buffer to prevent back pressure from propagating to your clients.
+
+{{< img src="observability_pipelines/production_deployment_overview/how_to_buffer.png" alt="A diagram showing an Observability Pipelines Worker's sources sending data to the disk buffer and memory buffer that are located close to the sinks" style="width:100%;" >}}
 
 ## Routing data
 
