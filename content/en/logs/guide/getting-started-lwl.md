@@ -87,9 +87,9 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 1. Navigate to the [Generate Metrics][9] page.
 1. Click **New Metric** in the top right corner.
 1. Enter a name for your metric. Log-based metric names must follow the naming metric convention.
-1. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. (for example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`)
+1. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. For example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`.
 1. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (for example, `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
-1. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
+1. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid negatively impacting your billing.
 
 ### Create an anomaly detection monitor
 
