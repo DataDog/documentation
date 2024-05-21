@@ -51,7 +51,7 @@ Observability Pipelines Worker runs on modern CPU architectures. X86_64 architec
 
 ### Memory sizing
 
-Due to Observability Pipelines Worker's affine type system, memory is rarely constrained for Observability Pipelines Worker workloads. Therefore, Datadog recommends ≥2 GiB of memory per vCPU minimum. Memory usage increases with the number of sinks due to the in-memory buffering and batching. If you have a lot of sinks, consider increasing the memory.
+Due to Observability Pipelines Worker's affine type system, memory is rarely constrained for Observability Pipelines Worker workloads. Therefore, Datadog recommends ≥2 GiB of memory per vCPU minimum. Memory usage increases with the number of destinations due to the in-memory buffering and batching. If you have a lot of destinations, consider increasing the memory.
 
 ### Disk sizing
 
