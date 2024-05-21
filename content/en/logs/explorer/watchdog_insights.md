@@ -57,7 +57,7 @@ These aggregated logs are scanned for anomalous behaviors, such as the following
 
 The logs surface as Insights in the Log Explorer, matching the search context and any restrictions applied to your role.
 
-{{< img src="logs/explorer/watchdog_insights/log-anomalies-light.mp4" alt="A user scrolling through the details of a specific insight" video="true">}}
+{{< img src="logs/explorer/watchdog_insights/log-anomalies-light-cropped.mp4" alt="A user scrolling through the details of a specific insight" video="true">}}
 
 Click on a specific insight to see the full description of the detected anomaly as well as the list of patterns contributing to it.
 
