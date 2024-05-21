@@ -133,13 +133,15 @@ To enable app hang monitoring:
    )
    ```
 
-2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms.
+2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Notes][5] for more guidance on what to set this value to.
 
-**Note**: The minimum value this option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to an excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to this threshold may not be reported.
+Make sure you follow the steps below to get [deobfuscated stack traces][6].
 
-**Note**: Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to `0.25`) and lowering it incrementally if you feel you are missing out on observability.
+#### Notes
 
-**Note**: Make sure you follow the steps below to get [deobfuscated stack traces][14].
+- The minimum value the `appHangThreshold` option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to an excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to this threshold may not be reported.
+
+- Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to `0.25`) and lowering it incrementally if you feel you are missing out on observability.
 
 #### Disable app hang monitoring
 
@@ -159,7 +161,7 @@ Depending on your setup, you may need to download `.dSYM` files from App Store C
 
 | Bitcode Enabled | Description |
 |---|---|
-| Yes | `.dSYM` files are available after [App Store Connect][5] completes processing your application's build. |
+| Yes | `.dSYM` files are available after [App Store Connect][7] completes processing your application's build. |
 | No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
 
 ### Upload your .dSYM file
@@ -172,7 +174,7 @@ Once your application crashes and you restart the application, the iOS SDK uploa
 
 ### Use Datadog CI to upload your .dSYM file
 
-You can use the command line tool [@datadog/datadog-ci][6] to upload your `.dSYM` file:
+You can use the command line tool [@datadog/datadog-ci][8] to upload your `.dSYM` file:
 
 ```sh
 export DATADOG_API_KEY="<API KEY>"
@@ -192,7 +194,7 @@ Alternatively, if you use Fastlane or GitHub Actions in your workflows, you can 
 
 The Fastlane plugin helps you upload `.dSYM` files to Datadog from your Fastlane configuration.
 
-1. Add [`fastlane-plugin-datadog`][7] to your project.
+1. Add [`fastlane-plugin-datadog`][9] to your project.
 
    ```sh
    fastlane add_plugin datadog
@@ -208,11 +210,11 @@ The Fastlane plugin helps you upload `.dSYM` files to Datadog from your Fastlane
    end
    ```
 
-For more information, see [`fastlane-plugin-datadog`][7].
+For more information, see [`fastlane-plugin-datadog`][9].
 
 ### Use GitHub Actions to upload your .dSYM file
 
-The [Datadog Upload dSYMs GitHub Action][8] allows you to upload your symbols in your GitHub Action jobs:
+The [Datadog Upload dSYMs GitHub Action][10] allows you to upload your symbols in your GitHub Action jobs:
 
 ```yml
 name: Upload dSYM Files
@@ -238,7 +240,7 @@ jobs:
             path/to/zip/dsyms.zip
 ```
 
-For more information, see [dSYMs commands][9].
+For more information, see [dSYMs commands][11].
 
 ## Limitations
 
@@ -274,8 +276,10 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/ios
 [4]: /logs/log_collection/ios
-[5]: https://appstoreconnect.apple.com/
-[6]: https://www.npmjs.com/package/@datadog/datadog-ci
-[7]: https://github.com/DataDog/datadog-fastlane-plugin
-[8]: https://github.com/marketplace/actions/datadog-upload-dsyms
-[9]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
+[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#notes
+[6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#get-deobfuscated-stack-traces
+[7]: https://appstoreconnect.apple.com/
+[8]: https://www.npmjs.com/package/@datadog/datadog-ci
+[9]: https://github.com/DataDog/datadog-fastlane-plugin
+[10]: https://github.com/marketplace/actions/datadog-upload-dsyms
+[11]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
