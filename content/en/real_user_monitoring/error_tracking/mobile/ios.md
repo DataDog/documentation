@@ -104,7 +104,7 @@ CrashReporting.enable()
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A common threshold for reporting an app hang is between 2 and 3 seconds. A customizable threshold allows you to find the right balance between fine-grained and noisy observability.
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Notes][5] for more guidance on what to set this value to.
 
 App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
 
@@ -139,9 +139,13 @@ To enable app hang monitoring:
 
 #### Notes
 
-- The minimum value the `appHangThreshold` option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to an excessive reporting of hangs. The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to this threshold may not be reported.
+- Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to `0.25`) and then lowering it or increasing it incrementally to find the right setup.
 
-- Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to `0.25`) and lowering it incrementally if you feel you are missing out on observability.
+- To filter out most of the noisy hangs, we recommend settling on an `appHangThreshold` between 2 and 3 seconds.
+
+- The minimum value the `appHangThreshold` option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to an excessive reporting of hangs.
+
+- The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to the `appHangThreshold` may not be reported.
 
 #### Disable app hang monitoring
 
