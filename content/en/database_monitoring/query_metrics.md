@@ -103,7 +103,7 @@ Click the **Metrics** tab to see more graphs of metrics for this query.
 
 ### Explain plans
 
-Datadog collects explain plans continuously, so a given query can have multiple plans. Those plans are normalized and shown separately so that you can see if a query has plans that perform better or have higher relative cost than others. For example, the following shows two explain plans for a query, and one has much lower average latency:
+Datadog collects explain plans continuously, so a given query can have multiple plans. Those plans are normalized and shown separately so that you can see if a query has plans that perform better or have higher relative cost than others. For example, the following explain plan contains information for a query:
 
 {{< img src="database_monitoring/dbm-qd-explain-plans-2.png" alt="Explain plans information for a query" style="width:100%;">}}
 
