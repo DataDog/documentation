@@ -102,27 +102,27 @@ CrashReporting.enable()
 
 ### Add app hang reporting
 
-App hangs are an iOS-specific type of error that happens whenever the application is being unresponsive for too long.
+App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration using the `appHangThreshold` initialization parameter. A common threshold for reporting an app hang is between 2 and 3 seconds. However, having a customizable threshold makes it easier to find the right balance between fine-grained and noisy observability.
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A common threshold for reporting an app hang is between 2 and 3 seconds. A customizable threshold allows you to find the right balance between fine-grained and noisy observability.
 
-App hangs are reported through the RUM SDK (not through Logs).
+App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
 
-When **enabled**, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in the Error Tracking page.
+When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. There are two types of hangs:
 
-- **Fatal app hang** - How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as "Crash" on them in the Error Tracking page.
+- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking.
 
   {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the Error Tracking page." style="width:60%;" >}}
 
-- **Non-fatal app hang** - How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in the Error Tracking page.
+- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking.
 
   {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the Error Tracking page." style="width:60%;" >}}
 
-#### Enable app hangs monitoring
+#### Enable app hang monitoring
 
-To enable app hangs monitoring:
+To enable app hang monitoring:
 
-1. During or after the [instrumentation][13] step of the RUM SDK, update the initialization snippet with the `appHangThreshold` parameter:
+1. Update the initialization snippet with the `appHangThreshold` parameter:
 
    ```swift
    RUM.enable(
@@ -141,9 +141,9 @@ To enable app hangs monitoring:
 
 **Note**: Make sure you follow the steps below to get [deobfuscated stack traces][14].
 
-#### Disable app hangs monitoring
+#### Disable app hang monitoring
 
-To disable app hangs monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
+To disable app hang monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
 
 ## Get deobfuscated stack traces
 
