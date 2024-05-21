@@ -125,10 +125,6 @@ Click **View Details** from the scorecard, or open the service details side pane
 
 ## Generating Scorecard reports
 
-{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
-Scorecard reports are in private beta. Join the beta by requesting access.
-{{< /callout >}}
-
 You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][9], which runs at a scheduled time. 
 
 <div class="alert alert-warning">Running this Workflow may impact your billing. Read the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">pricing page</a> for more information</div>
