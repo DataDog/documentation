@@ -22,7 +22,7 @@ Additionally, the following security policies are applied to the account during 
 * Deny log on through Remote Desktop Services
 * Log on as a service
 
-The Windows Agent can also use a user-supplied account. Since the account is modified during installation to restrict its privileges, including login privileges, make sure it is not a 'real' user account but an account solely dedicated to run the Datadog Agent.
+The Windows Agent can also use a user-supplied account. Do not use a 'real' user account. The user-supplied account should be solely dedicated to running the Datadog Agent. The account is modified during installation to restrict its privileges, including login privileges.
 
 **Note**: Starting with release `7.38.0/6.38.0` the installer supports the use of a **Grouped Managed Service Account (gMSA)**. To specify a Grouped Managed Service Account, append **$** at the end of the username: `<DOMAIN>\<USERNAME>$`. The Grouped Managed Service Account must exist *prior* to installation, as the installer cannot create one.
 
