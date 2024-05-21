@@ -97,8 +97,28 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
-## Manage service-related workflows
-[Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
+## Automate Common Workflows
+[Workflow Automation][14] and App Builder allows you to automate end-to-end processes across your teams. They integrate with Datadog's Service Catalog to enable dynamic and self-service workflows.
+
+{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
+Datadog App Builder is in private beta. Complete the form to request access.
+{{< /callout >}}
+
+### Create Software Template Workflows Using Cookiecutter
+To setup software templates in Datadog, start by setting up a git repository with the template you wish to use, and then navigate to [Workflow Automation][14] to setup in Datadog. A common choice for templating is [Cookiecutter](https://www.cookiecutter.io/), an open-source project for auto-generating new projects. 
+1. **Create a workflow with below steps**:
+   - Download the template repository
+   - Generate the new project files from the template via Cookiecutter
+   - Deploy the completed project back to the repository
+2. **Navigate to App Builder**:
+   - Create a new app for templating
+   - Create a form that collects the required parameters for your template
+   - Add a button to submit the form & triggers the workflow created in Step 1
+   - Save & publish the app
+
+  {{< img src="tracing/service_catalog/workflowtemplate.png" alt="Workflow for building software template automation" style="width:100%;" >}}
+
+  {{< img src="tracing/service_catalog/template-application.png" alt="Application for managing software templates" style="width:100%;" >}}
 
 ### Find Service Catalog actions
 To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][23]. Filter for the actions you need:
