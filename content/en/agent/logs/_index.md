@@ -170,7 +170,7 @@ List of all available parameters for log collection:
 
 ### Start position
 
-The `start_position` parameter is supported by **file** and **journald** tailer types.
+The `start_position` parameter is supported by **file** and **journald** tailer types. The `start_position` is always `beginning` when tailing a container.
 
 Support:
 - **File**: Agent 6.19+/7.19+
@@ -184,9 +184,6 @@ If `type` is **file**:
 If `type` is **journald**:
 - Set the position for the Agent to start reading the journal.
 - Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`).
-- With `force` options, the Agent ignores the cursor stored on disk and always reads from the beginning or the end of the journal when it starts.
-
-The `start_position` is always `beginning` when tailing a container.
 
 #### Precedence
 
