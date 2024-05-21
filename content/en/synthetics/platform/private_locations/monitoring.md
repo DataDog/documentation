@@ -2,6 +2,8 @@
 title: Private Location Monitoring
 kind: documentation
 description: Monitor your private locations
+aliases:
+- /synthetics/private_locations/monitoring
 further_reading:
 - link: "getting_started/synthetics/private_location"
   tag: "Documentation"

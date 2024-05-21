@@ -5,15 +5,19 @@ kind: documentation
 
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
 
+<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your Company's data with OpenAI Global, LLC for the purpose of providing and improving LLM Observability.
+</div>
+
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
 LLM Observability is not available in the US1-FED site.
 </div>
+
 {{% /site-region %}}
 
 ## Overview
 
-{{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
+{{< img src="tracing/llm_observability/llm-observability-landing.png" alt="LLM Observability overview page with record of all prompt-response pair traces" style="width:100%;" >}}
 
 With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications. 
 
@@ -37,6 +41,8 @@ To get started with LLM Observability, you can build a simple example with the [
 ### Troubleshoot with end-to-end tracing
 
 View every step of your LLM application chains and calls to pinpoint problematic requests and identify the root cause of errors.
+
+{{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
 ### Monitor operational metrics and optimize cost
 

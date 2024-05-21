@@ -1,6 +1,8 @@
 ---
 title: Synthetic Test Summary Dashboard
 kind: documentation
+aliases:
+- /synthetics/dashboards/test_summary
 further_reading:
 - link: '/continuous_testing/explorer/'
   tag: 'Documentation'

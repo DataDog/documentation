@@ -1,6 +1,8 @@
 ---
 title: Synthetic API Test Performance Dashboard
 kind: documentation
+aliases:
+- /synthetics/dashboards/api_test
 further_reading:
 - link: '/continuous_testing/explorer/'
   tag: 'Documentation'

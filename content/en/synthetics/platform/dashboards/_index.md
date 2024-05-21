@@ -2,6 +2,8 @@
 title: Synthetic Dashboards
 kind: documentation
 description: Explore out-of-the-box Synthetic dashboards to learn more about your Synthetic tests.  
+aliases:
+- /synthetics/dashboards
 further_reading:
 - link: '/synthetics/'
   tag: 'Documentation'
