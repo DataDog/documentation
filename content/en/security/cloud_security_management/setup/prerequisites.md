@@ -3,7 +3,7 @@ title: Prerequisites for Cloud Security Management
 kind: documentation
 ---
 
-## Prerequsites
+## Prerequisites
 
 - The **minimum** Datadog Agent version required for CSM is `7.46` or higher.
 
