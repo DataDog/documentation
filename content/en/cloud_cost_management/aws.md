@@ -36,6 +36,7 @@ Select the Export type **Legacy CUR export**.
 
 Select the following content options:
 
+* Export type: **Legacy CUR export**
 * **Include resource IDs**
 * **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][10] in Cost Explorer preferences).
 * **"Refresh automatically"**

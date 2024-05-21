@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Adding metadata"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage service definitions with Terraform"
 - link: "/api/latest/service-definition/"
   tag: "API"
@@ -266,6 +266,18 @@ Permission: SERVICE_CATALOG_READ
 
 {{< code-block lang="yaml" collapsible="true" >}}
 curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+URL Parameter: `ref <kind>:<name>`
+
+##### Delete entities by reference 
+DELETE https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>
+Permission: SERVICE_CATALOG_WRITE
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location --request DELETE 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
 --header 'DD-API-KEY: <KEY>' \
 --header 'DD-APPLICATION-KEY: <APP_KEY>'
 {{< /code-block >}}

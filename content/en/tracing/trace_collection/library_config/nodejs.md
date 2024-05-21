@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 30
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Source code'
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
@@ -18,7 +18,7 @@ further_reading:
       tag: 'Use the APM UI'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
-      tag: 'Advanced Usage'
+      tag: 'Documentation'
       text: 'Advanced Usage'
 ---
 

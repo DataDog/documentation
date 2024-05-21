@@ -8,8 +8,8 @@ aliases:
 - /real_user_monitoring/roku/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: GitHub
-  text: dd-sdk-roku Source code
+  tag: "Source Code"
+  text: Source code for dd-sdk-roku
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
