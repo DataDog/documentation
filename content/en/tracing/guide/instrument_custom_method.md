@@ -323,22 +323,12 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
         $span = \DDTrace\start_span();
         $span->name = 'BackupLedger.persist';
 
-        // For ddtrace < v1.0, use the following instead:
-        // $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('BackupLedger.persist');
-
         // Add custom metadata to the span
         $span->meta['transaction.id'] = $transaction->getId();
-
-        // For ddtrace < v1.0, use the following instead:
-        // $scope->getSpan()->setTag('transaction.id', $transaction->getId());
-
         $this->transactions[$transaction->getId()] = $transaction;
 
         // Close the span
         \DDTrace\close_span();
-
-        // For ddtrace < v1.0.0, use the following instead:
-        // $scope->close();
       }
 
       # [...]
