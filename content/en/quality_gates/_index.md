@@ -37,6 +37,24 @@ Use Quality Gates to:
 * Give your organization the ability to decide what code makes it to production, enhancing your deployment discipline and mitigating potential issues in live environments.
 * Continually improve code quality and system performance with precise enforcement and customizable rules.
 
+You can configure Quality Gates rules for the following categories: 
+
+[Test Visibility][9]
+
+: <br> - New flaky tests <br> - Performance regressions <br> - Code coverage
+
+[Pipeline Visibility][10]
+
+: <br> - Custom measures
+
+[Static Analysis][11]
+
+: <br> - Code vulnerability violations <br> - Code quality violations
+
+[Software Composition Analysis][12]
+
+: <br> - Vulnerabilities <br> - Detected licenses
+
 By integrating Quality Gates [into your CI/CD pipelines][7], you can create a robust framework for maintaining and improving software quality that aligns with your organization's operational goals and business objectives. 
 
 ## Setup
@@ -125,3 +143,7 @@ For more information, see the [Audit Trail documentation][4].
 [6]: https://app.datadoghq.com/ci/quality-gates
 [7]: /monitors/guide/github_gating/
 [8]: /quality_gates/explorer/
+[9]: /tests/
+[10]: /continuous_integration/
+[11]: /code_analysis/static_analysis
+[12]: /code_analysis/software_composition_analysis
