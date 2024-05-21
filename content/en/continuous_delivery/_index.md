@@ -42,7 +42,7 @@ Deployment Visibility helps you monitor deployments across CI environments by tr
 
 ## Increase efficiency through seamless integrations
 
-Datadog integrates with the following CI/CD providers to collect metrics and track the execution performance and results of your deployments. Use the data aggregated over time to identify trends and improve your deployment strategies, enhancing operational efficiency.
+Datadog integrates with the following CI/CD providers to collect metrics and track the execution performance and results of your deployments. Use the data aggregated over time to identify trends and improve your deployment strategies for enhanced operational efficiency.
 
 {{< partial name="continuous_delivery/cd-pipelines-getting-started.html" >}}
 
