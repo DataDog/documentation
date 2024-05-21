@@ -141,7 +141,7 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 - Change lead time is not available for the first deployment of a service that includes Git information.
 - Change lead time handles squash commit workflows in the following ways:
   - If commits are squashed into a single commit when the branch is merged, the commit history for that branch is not included in the change lead time calculation. The squash commit that gets created is the only change considered in the calculation. 
-  - If commits on a feature branch are not squashed, and an additional merge commit is created on the default branch after commits are made on a feature branch, the merge commit is included in the change lead time calculation as the final commit.
+  - When a merge commit is created to merge the commits into the target branch, it will also be included in the change lead time calculation
 
 ## Calculating change failure rate
 
