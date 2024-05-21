@@ -90,14 +90,16 @@ On a new [references table][4] page:
 
 ### Filter traces by joining the list with a reference table
 
-You can use bring your own threat intelligence (BYOTI) reference tables to enrich ASM security trace queries in Datadog. Using reference tables with trace queries enhances both the depth and the utility of the security data, leading to more effective monitoring and quicker incident response.
+You can filter ASM traces in Datadog by joining a trace table with a reference table. 
 
-To you use a reference table with a trace query, you combine rows from the Datadog trace table and a reference table based on a related column between them. The traces query returns only those traces where there is a match in both tables.
+To join a reference table with a trace query, you combine rows from the Datadog trace table and a reference table based on a related column between them. The traces query returns only those traces where there is a match in both tables.
+
+Using a join with a reference table enables you to evaluate impact before enrichment by searching for historical matches with existing traces.
 
 Examples:
 
 - Investigation and incident response. You can upload and join using IPs or other fields from attacks and see the traffic related to that incident.
-- By enriching security traces with the IP addresses from a reference table, such as associating IP addresses with geographic locations or organizational details, security teams can gain better context around attack attempts. This can help in understanding the origin and potential motivation behind the attacks.
+- By using security traces with the IP addresses from a reference table, such as associating IP addresses with geographic locations or organizational details, security teams can gain better context around attack attempts. This can help in understanding the origin and potential motivation behind the attacks.
 - You can use any fields, not just IP addresses. For example, by associating security traces with specific URLs from a reference table, you can identify which parts of your application are being targeted by attacks. This can help pinpoint vulnerabilities or high-risk areas within the application.
 
 To join a trace with a reference table:
