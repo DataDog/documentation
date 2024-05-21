@@ -99,7 +99,7 @@ node --require dd-trace/init app.js
 
 **Note:** This approach requires using environment variables for all configuration of the tracer.
 
-#### ESM applications only: import the loader
+#### ESM applications only: Import the loader
 
 EcmaScript Modules (ESM) applications require an additional command line argument. Run this command regardless of how the tracer is imported and initialized.
 
