@@ -108,7 +108,7 @@ Node.js < v20.6
 node --loader dd-trace/loader-hook.mjs entrypoint.js
 ```
 
-Node.js >= v20.6
+**Node.js >= v20.6**
 ```shell
 node --import dd-trace/register.js entrypoint.js
 ```
