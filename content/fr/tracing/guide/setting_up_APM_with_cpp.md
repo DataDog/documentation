@@ -14,7 +14,7 @@ Ce guide vient compléter la [documentation sur la configuration du traceur APM 
 
 ### Environnement de base
 
-Commencez par lancer une nouvelle box Vagrant `ubuntu/jammy64` et connectez vous a la VM :
+Commencez par lancer une nouvelle box Vagrant `ubuntu/jammy64` et connectez vous à la VM :
 
 ```bash
 vagrant init ubuntu/jammy64
