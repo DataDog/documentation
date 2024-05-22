@@ -19,13 +19,13 @@ further_reading:
 Inferred service dependencies are in private beta. To request access, complete the form.
 {{< /callout >}}
 
-## Inferred service dependencies
+## Overview
 
-Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API even if that dependency hasn't been instrumented yet. Datadog infers the presence of these dependencies and collects its associated performance metrics based on information on the outbound requests from your instrumented services.
+Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party API, even if that dependency hasn't been instrumented yet. By analyzing outbound requests from your instrumented services, Datadog infers the presence of these dependencies and collects associated performance metrics.
 
-With the new inferred entities experience, filter [Service Catalog][3] entries by entity type (database, queue, third-party API, etc), and better visualize service dependencies from the new [Service Page dependency map](#service-page-dependency-map) and other places in the APM product experience.
+With the new inferred entities experience, you can filter [Service Catalog][3] entries by entity type, such as database, queue, or third-party API. This allows you to better visualize service dependencies using the [Service Page dependency map](https://github.com/DataDog/documentation/pull/23219/files#service-page-dependency-map) and APM features.
 
-To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes - find the full list of `peer.*` attributes [here](#inferred-service-dependencies-nomemclature) -. Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
+To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For the full list of `peer.*` attributes, see [Inferred service dependencies nomenclature](#inferred-service-dependencies-nomemclature). Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
 
 If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred entities. 
 
@@ -41,9 +41,9 @@ Use the dependency map to visualize service-to-service communication and gain in
 
 <div class="alert alert-warning">Only go through migration steps once Datadog support confirmed the feature is enabled for you on the Datadog side.</div>
 
-To opt in, you must adjust:
-- your [Datadog Agent](#datadog-agent-configuration) (or [OpenTelemetry collector](#opentelemetry-collector)) configuration
-- your [APM tracing libraries](#apm-tracing-libary-configuration) configuration
+To opt in, Datadog recommends you adjust your:
+- [Datadog Agent](#datadog-agent-configuration) (or [OpenTelemetry collector](#opentelemetry-collector)) configuration
+- [APM tracing libraries](#apm-tracing-libary-configuration) configuration
 
 ### Datadog Agent configuration
 
@@ -98,7 +98,7 @@ exporters:
 
 ### APM tracing libary configuration
 
-<div class="alert alert-warning">Going through the following step is a <b>breaking change</b>: Datadog will change the way service names are captured by default. Check the <a href="https://docs.datadoghq.com/tracing/guide/inferred-service-opt-in#global-default-service-naming-migration">Global default service naming migration</a>, to see if you need to take any migration actions.</div>
+<div class="alert alert-warning">The following steps introduce a <b>breaking change</b>: Datadog will change the way service names are captured by default. Refer to <a href="#global-default-service-naming-migration">Global default service naming migration</a>, to determine if you need to take any migration actions.</div>
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -206,7 +206,7 @@ To opt in, add the following environment variables to your tracer settings or sy
 
 
 
-## The new nomemclature: what is changing
+## The new nomenclature: What is changing
 
 ### List of newly introduced peer.* tags 
 
@@ -220,7 +220,7 @@ Previously, some tracing libraries included the name of the associated integrati
 _ | Before | After
 --|-------|--------
 Service name | `service:my-service-grpc-client` or `service:grpc-client` | `service:myservice` 
-additional `peer.*` attributes | _No `peer.*` tags set_ | `@peer.service:otherservice` (`otherservice` being the name of the remote service being called via gRPC)
+additional `peer.*` attributes | _No `peer.*` tags set_ | `@peer.service:otherservice` (`otherservice` being the name of the remote service being called with gRPC)
 
 Similarly, for a span representing a call to a mySQL database:
 
@@ -238,7 +238,7 @@ Consequently, if you have existing:
 - Sensitive data scans
 - Monitors, dashboards, or notebooks 
 
-... that target similar service names, update those items to use the global default service tag (`service:<DD_SERVICE>`) instead.
+And these target similar service names, update those items to use the global default service tag (`service:<DD_SERVICE>`) instead.
 
 ## Further reading
 
