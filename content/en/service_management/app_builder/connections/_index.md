@@ -113,5 +113,5 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 [4]: /service_management/app_builder/auth/#restrict-access-to-a-specific-connection
 [6]: /integrations/
 [9]: https://app.datadoghq.com/app-builder/apps/list
-[10]: /service_management/app_builder/http_request/
+[10]: /service_management/app_builder/connections/http_request/
 [11]: https://datadoghq.slack.com/

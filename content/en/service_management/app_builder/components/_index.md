@@ -775,5 +775,5 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
 [5]: https://datadoghq.slack.com/
-[6]: /service_management/app_builder/tables/
+[6]: /service_management/app_builder/components/tables/
 [7]: /service_management/app_builder/expressions
