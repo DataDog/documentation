@@ -2,6 +2,8 @@
 title: HTTP Requests
 kind: Documentation
 disable_toc: false
+aliases:
+- /app_builder/http_request/
 further_reading:
 - link: "/service_management/app_builder/connections/"
   tag: "Documentation"

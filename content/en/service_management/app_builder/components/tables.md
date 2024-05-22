@@ -2,6 +2,8 @@
 title: Tables
 kind: documentation
 disable_toc: false
+aliases:
+- /app_builder/tables/
 further_reading:
 - link: "/service_management/workflows/components/"
   tag: "Documentation"
@@ -12,7 +14,6 @@ further_reading:
 ---
 
 This page describes advanced features you can use to manipulate table components in your App Builder apps.
-
 
 ## Client-side filtering
 
