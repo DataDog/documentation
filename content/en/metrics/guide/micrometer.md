@@ -3,10 +3,10 @@ title: Send metrics with Micrometer
 kind: Guide
 further_reading:
 - link: "https://docs.micrometer.io/micrometer/reference/implementations/otlp.html"
-  tag: "Micrometer"
+  tag: "External Site"
   text: "Micrometer OTLP"
 - link: "https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html"
-  tag: "Micrometer"
+  tag: "External Site"
   text: "Micrometer Prometheus"
 ---
 

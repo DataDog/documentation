@@ -1,5 +1,5 @@
 ---
-title: GRPC Tests
+title: GRPC Testing
 kind: documentation
 description: Simulate gRPC requests to monitor public and internal API endpoints.
 further_reading:

@@ -9,7 +9,7 @@ code_lang: flutter
 code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-flutter Source code
 - link: real_user_monitoring/error_tracking/
   tag: Documentation

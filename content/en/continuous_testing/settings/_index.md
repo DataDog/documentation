@@ -18,7 +18,7 @@ further_reading:
   tag: "Documentation"
   text: "Explore RUM & Session Replay in Synthetics"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage tests with Terraform"
 ---
 {{< jqmath-vanilla >}}
