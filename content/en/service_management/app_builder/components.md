@@ -9,6 +9,10 @@ further_reading:
 - link: "/service_management/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
+- link: "/service_management/app_builder/expressions/"
+  tag: "Documentation"
+  text: "JavaScript Expressions"
+
 ---
 
 {{< site-region region="gov" >}}
@@ -21,7 +25,7 @@ Datadog App Builder is in private beta. Complete the form to request access.
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor.
+Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7].
 <br><br>
 
 {{% collapse-content title="Button" level="h2" %}}
@@ -772,3 +776,4 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
 [5]: https://datadoghq.slack.com/
 [6]: /service_management/app_builder/tables/
+[7]: /service_management/app_builder/expressions
