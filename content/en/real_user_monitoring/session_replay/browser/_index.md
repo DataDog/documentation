@@ -72,7 +72,7 @@ if (user.isAuthenticated) {
 
 To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
-<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call `startSessionReplayRecording()` to begin recording.</div>
+<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
 
 ## Disable Session Replay
 

@@ -56,7 +56,7 @@ Options available for some visualization types are not supported in others. For 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/ci-visibility-pipelines/#search-tests-events
+[1]: /api/latest/ci-visibility-tests/#search-tests-events
 [2]: /api/latest/ci-visibility-pipelines/#search-pipelines-events
 [3]: /continuous_integration/explorer/
 [4]: /api/latest/

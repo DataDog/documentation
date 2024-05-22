@@ -4,7 +4,7 @@ kind: documentation
 private: true
 ---
 
-<div class="alert alert-warning">Cloud Security Management on AWS Fargate is in private beta.</div>
+<div class="alert alert-warning">Cloud Security Management on AWS Fargate is in beta.</div>
 
 Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS on AWS Fargate. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
 

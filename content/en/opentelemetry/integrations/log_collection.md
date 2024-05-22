@@ -31,7 +31,7 @@ receivers:
     poll_interval: 500ms
     include:
       - /var/log/*/app.log
-   operators:
+    operators:
       - type: json_parser
       # Layout must match log timestamp format. If this section is removed, timestamp will correspond to the time of log intake by Datadog.
       - type: time_parser

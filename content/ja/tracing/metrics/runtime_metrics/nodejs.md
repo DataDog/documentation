@@ -53,13 +53,15 @@ const tracer = require('dd-trace').init({
 {{% /tab %}}
 {{< /tabs >}}
 
-ランタイムメトリクスは、Node サービスと相関して表示できます。Datadog の[サービス詳細画面][1]を参照してください。
+ランタイムメトリクスは、Node サービスと相関して表示できます。Datadog の[サービスカタログ][1]を参照してください。
 
 初期設定では、アプリケーションからのランタイムメトリクスは DogStatsD のポート `8125` から Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっていること][2]を確認してください。
 Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` が [true に設定されていること][3]、また Agent 上でポート `8125` が開いていることを確認してください。
 Kubernetes では、[DogstatsD ポートをホストポートにバインド][4]し、ECS では[タスク定義で適切なフラグを設定][5]します。
 
-## 収集データ
+または、Agent は UDP トランスポートの代わりに Unix Domain Socket (UDS) を使用してメトリクスを取り込むこともできます。詳細については、[Unix Domain Socket 経由の DogStatsD][7] を参照してください。
+
+## CoScreen
 
 以下のメトリクスはランタイムメトリクスを有効にした後、デフォルトで収集されます。
 
@@ -71,9 +73,10 @@ APM サービス詳細画面にこれらのメトリクスを表示するだけ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [3]: /ja/agent/docker/#dogstatsd-custom-metrics
 [4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
 [5]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [6]: https://app.datadoghq.com/dash/integration/30269/node-runtime-metrics
+[7]: /ja/developers/dogstatsd/unix_socket/
