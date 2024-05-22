@@ -107,13 +107,13 @@ Datadog App Builder is in private beta. Complete the form to request access.
 ### Create Software Template Workflows Using Cookiecutter
 To setup software templates in Datadog, start by setting up a git repository with the template you wish to use, and then navigate to [Workflow Automation][14] to setup in Datadog. A common choice for templating is [Cookiecutter](https://www.cookiecutter.io/), an open-source project for project templates and auto-generating new projects. 
 1. **Create a workflow with below steps**:
-   - Download the template repository
+   - Download the template repository files
    - Generate the new project files from the template via Cookiecutter
-   - Deploy the completed project back to the repository
+   - Deploy the new project files back to the repository
 2. **Navigate to App Builder**:
    - Create a new app for templating
    - Create a form that collects the required parameters for your template
-   - Add a button to submit the form & triggers the workflow created in Step 1
+   - Add a button to submit the form, triggers the workflow created in Step 1, and pass in the parameters for your template
    - Save & publish the app
 
   {{< img src="tracing/service_catalog/workflowtemplate.png" alt="Workflow for building software template automation" style="width:100%;" >}}
