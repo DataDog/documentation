@@ -124,11 +124,11 @@ Specify the number of pixels you want the mobile app test to scroll vertically a
 
 By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Starting Element** and select an element you want the mobile app test to scroll on.
 
-#### Scroll to Element
+#### Scroll to element
 
 This action allows you to scroll to a specific element horizontally or vertically.
 
-{{< img src="mobile_app_testing/test_apps/scroll_to_element_2.mp4" alt="Recording a scroll to element in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/test_steps/scroll_to_element_2.mp4" alt="Recording a scroll to element in a mobile test" style="width:60%" video=true >}}
 
 #### Press back
 
@@ -156,10 +156,10 @@ Add a name to the step and enter a deep link URI.
 
 {{< img src="mobile_app_testing/open_deep_link.png" alt="Recording an Open Deep Link step in a mobile test" style="width:60%" >}}
 
-#### Restart Application
+#### Restart application
 
 This action allows you to restart your application.
-This action will not reinstall the application but instead close and then launch the application again. 
+This action does not reinstall the application but instead close and then launch the application again. 
 
 {{< img src="mobile_app_testing/test_steps/restart_application.mp4" alt="Recording how to restart your application" style="width:60%" video=true >}}
 
@@ -180,10 +180,10 @@ For more information about advanced options for subtests, see [Advanced Options 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][6].
 
 ### Variables
-If your subtest contains variables, these will be inherited by the test you import it into. 
+If your subtest contains variables, they are inherited by the test you import it into. 
 In order to override these variables, create a variable in your parent test with the name as the variables within your subtest. 
 
-#### Extract Variable from Element
+#### Extract variable from element
 
 This action allows you to extract the value of an element and save it as a variable.
 
