@@ -155,4 +155,4 @@ Change failure rate is calculated by dividing `dora.incidents.count` over `dora.
 [4]: /tracing/service_catalog/setup
 [5]: /tracing/service_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
-[7]: /dora_metrics/data_collected
+[7]: /dora_metrics/data_collected/#change-lead-time-metrics

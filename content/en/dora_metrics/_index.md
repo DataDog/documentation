@@ -60,6 +60,8 @@ You can access and visualize your DORA metrics and filter them by team, service,
 
 You can also export your DORA Metrics data to dashboards or notebooks and create [metric monitors][5] to trigger alerts on your metrics. For more information, see the [Monitors documentation][6].
 
+Please note that DORA Metrics should _not_ be used for evaluating individual engineering performance. DORA Metrics data can be used to inform larger conversations around software delivery and engineering best practices.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
