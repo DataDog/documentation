@@ -90,7 +90,7 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 
 Diff-aware scanning is a feature that enables Datadog Static Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. To enable diff-aware scanning in your CI pipeline, follow these steps:
 
-1. Make sure your `DD_APP_KEY`, `DD_SITE` and `DD_API_KEY` variables are set in your CI pipeline
+1. Make sure your `DD_APP_KEY`, `DD_SITE` and `DD_API_KEY` variables are set in your CI pipeline.
 2. Add a call to `datadog-ci git-metadata upload` before invoking the static analyzer. This command ensures that git metadata is available to the Datadog backend. Git metadata is required to calculate the number of files to analyze.
 3. Ensure that the datadog-static-analyzer is invoked with the flag `--diff-aware`
 
