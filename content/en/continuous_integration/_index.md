@@ -28,6 +28,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/"
     tag: "Blog"
     text: "Best practices for monitoring software testing in CI/CD"
+  - link: "https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/"
+    tag: "Blog"
+    text: "Monitor your CI/CD modernizations with Datadog CI Pipeline Visibility"
 cascade:
     algolia:
         rank: 70

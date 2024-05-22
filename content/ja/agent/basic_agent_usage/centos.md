@@ -14,12 +14,12 @@ further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: Documentation
   text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
+- link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
 kind: documentation
 platform: CentOS
-title: CentOS (および Rocky/Alma Linux) の基本的な Agent の使い方
+title: CentOS、Rocky、Alma Linux の基本的な Agent の使い方
 ---
 
 ## 概要
@@ -116,7 +116,58 @@ Agent の構成ファイルおよびフォルダーの場所
 {{% /tab %}}
 {{< /tabs >}}
 
-## トラブルシューティング
+## Agent のアンインストール
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+
+
+```shell
+sudo yum remove datadog-agent
+```
+
+このコマンドでは、Agent は削除されますが以下は削除されません。
+* `datadog.yaml` コンフィギュレーションファイル
+* `/etc/datadog-agent` コンフィギュレーションフォルダ内のユーザー作成ファイル
+* `/opt/datadog-agent` フォルダ内のユーザー作成ファイル
+* `dd-agent` ユーザー
+* Datadog ログファイル
+
+以上の要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo yum remove datadog-agent
+```
+
+このコマンドでは、Agent は削除されますが以下は削除されません。
+
+* `datadog.yaml` コンフィギュレーションファイル
+* `/etc/dd-agent` コンフィギュレーションフォルダ内のユーザー作成ファイル
+* `/opt/datadog-agent` フォルダ内のユーザー作成ファイル
+* `dd-agent` ユーザー
+* Datadog ログファイル
+
+以上の要素も削除したい場合は、Agent 削除後に次のコマンドを実行します。
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## ヘルプ
 
 [Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 

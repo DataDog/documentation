@@ -1,5 +1,5 @@
 ---
-title: UDP Tests
+title: UDP Testing
 kind: documentation
 description: Simulate UDP connections on your hosts
 further_reading:
