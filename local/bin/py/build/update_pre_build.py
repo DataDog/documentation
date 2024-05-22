@@ -46,7 +46,10 @@ class Build:
 
         self.apw_integrations = [
             'ably',
-            'akamai_mpulse'
+            'akamai_mpulse',
+            'avmconsulting-workday',
+            'bottomline-mainframe',
+            'nerdvision'
         ]        
 
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
