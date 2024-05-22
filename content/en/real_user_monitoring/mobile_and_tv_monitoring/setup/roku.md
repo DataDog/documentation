@@ -11,8 +11,8 @@ further_reading:
   tag: Documentation
   text: RUM Roku Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: Github
-  text: dd-sdk-roku Source code
+  tag: "Source Code"
+  text: Source code for dd-sdk-roku
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM

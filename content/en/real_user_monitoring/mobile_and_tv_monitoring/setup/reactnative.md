@@ -13,11 +13,14 @@ further_reading:
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-reactnative
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: Blog
   text: Monitor React Native applications
+- link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
+  tag: Documentation
+  text: Monitor hybrid React Native applications
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data

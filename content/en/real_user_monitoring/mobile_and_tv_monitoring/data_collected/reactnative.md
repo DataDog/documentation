@@ -9,11 +9,14 @@ aliases:
 - /real_user_monitoring/reactnative/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-reactnative
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
+- link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
+  tag: Documentation
+  text: Monitor hybrid React Native applications
 
 ---
 ## Overview

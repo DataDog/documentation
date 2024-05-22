@@ -3,7 +3,7 @@ title: Recommended Monitors
 kind: Documentation
 further_reading:
 - link: https://app.datadoghq.com/monitors/recommended?q=&only_installed=true&p=1
-  tag: "In App"
+  tag: "App"
   text: Browse recommended monitors
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
@@ -15,13 +15,13 @@ further_reading:
   tag: "Blog"
   text: "Enable preconfigured alerts with Recommended Monitors for Azure"
 - link: "https://docs.datadoghq.com/developers/integrations/create-an-integration-recommended-monitor"
-  tag: "Developers Documentation"
+  tag: "Documentation"
   text: "Create a Recommended Monitor"
 ---
 
 ## Overview
 
-Recommended monitors are a collection of monitor templates that are pre-configured by Datadog, integration partners, and other users. Use recommended monitors to: 
+Recommended monitors are a collection of monitor templates that are pre-configured by Datadog and integration partners. Use recommended monitors to: 
 - Save the time and effort of creating a new monitor from scratch.
 - Have comprehensive monitoring coverage for all your critical integrations.
 

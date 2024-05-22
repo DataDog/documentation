@@ -26,7 +26,7 @@ further_reading:
   tag: "Foundation Enablement"
   text: "Join an interactive session on creating effective monitors and SLOs"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage SLOs with Terraform"
 ---
 
@@ -338,7 +338,7 @@ The SLO statuses are calculated based on the SLO type:
 **Notes:**
 
 - The SLOs that are exported are based on your search query.
-- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO ID and name will be in the CSV (not the SLO’s status history data).
+- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO ID and name are included in the CSV (not the SLO's status history data).
 - There is a limit of 1000 SLOs per export.
 
 ## Further Reading
