@@ -17,7 +17,52 @@ Facets are user-defined tags and attributes from your tests or pipelines. They a
 
 [Creating facets](#creating-facets) is **not required** for [searching test runs or pipeline executions][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming test runs or pipeline executions applies.
 
-The [CI Visibility Explorer][4] includes out-of-the-box facets such as `Test Status`, `Test Service`, `CI Status`, and `CI Provider`. You can use facets in the CI Visibility Explorer to:
+## Common facets
+
+The [CI Visibility Explorer][4] includes the following out-of-the-box facets:
+
+| Facet | Description |
+|---|---|
+| CI Provider | Name of the CI provider (GitHub, GitLab, and more). |
+| Pipeline Name | Name of the CI pipeline. |
+| Node Name | Name of the CI node that executed the pipeline, stage, or job. |
+| Node Labels | Labels associated with the CI node that executed the pipeline, stage, or job. |
+| Pipeline URL | Provider URL for a pipeline execution. |
+| Pipeline ID | ID of the pipeline. |
+| Pipeline Number | Execution number of a CI pipeline, provided by the CI Provider. This increases when partially retrying a pipeline. |
+| Job URL | Provider URL for a job execution. |
+| Stage Name | Name of the CI stage. |
+| Job Name | Name of the CI job. |
+| Pod Name | Kubernetes Pod Name. |
+| Kubernetes Namespace | The namespace in which the Kubernetes Pod is running. |
+| Kubernetes Pod Name | Name of the Kubernetes Pod. |
+| Image Tag | Kubernetes Container image tag. |
+| Container Name | Kubernetes Container name tag. |
+| Image Name | Kubernetes Container image name tag. |
+| Container ID | Kubernetes Container ID. |
+| Kubernetes Container Name | Name of the Kubernetes Container. |
+| Kubernetes Deployment | The Kubernetes Deployment a pod belongs to. |
+| Kubernetes Stateful Set | The Kubernetes StatefulSet a pod belongs to. |
+| Repository URL | URL of the Git repository. |
+| Repository ID | ID that uniquely identifies a Git repository. |
+| Commit SHA | Git Commit SHA. |
+| Branch | Git Branch. |
+| Tag | Git Tag. |
+| Author Email | Git Author Email. |
+| Committer Email | Git Committer Email. |
+| Committer Date | Git Committer Date. |
+| Author Date | Git Author Date. |
+| Env | The environment in which the CI pipeline is running. |
+| Resource | The resource utilized by the CI pipeline. |
+| Operation Name | The operation performed within the CI pipeline. |
+| Error Type | Type of error encountered during the CI execution. |
+| Type | Type of the CI execution or entity. |
+| Complete Trace | Full trace of the CI pipeline execution. |
+| Duration | The duration of the execution in seconds. |
+| Version | Version of the CI pipeline or tool used. |
+| Is Default Branch | Indicates if the execution was run on the default branch of the Git repository. |
+
+You can use facets in the CI Visibility Explorer to:
 
 - [Search for and filter test runs or pipeline executions][5].
 - Perform test or pipeline analytics.
