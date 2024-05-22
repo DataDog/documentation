@@ -279,7 +279,7 @@ To configure your sampling rate with `DD_TRACE_SAMPLING_RULES`, use one of the f
 ## Environment variables
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> The variables `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT` and `DD_TRACE_AGENT_URL` do not apply to Envoy, as the address of the Datadog Agent is configured using the `cluster` settings.
+  <strong>Note:</strong> The variables <code>DD_AGENT_HOST</code>, <code>DD_TRACE_AGENT_PORT</code> and <code>DD_TRACE_AGENT_URL</code> do not apply to Envoy, as the address of the Datadog Agent is configured using the <code>cluster</code> settings.
 </div>
 
 The available [environment variables][2] depend on the version of the C++ tracer embedded in Envoy.
