@@ -251,11 +251,12 @@ or:
 {{% tab "Datadog Profiler" %}}
 
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
-In dd-java-agent earlier than v1.17.0 it is **disabled** by default. Enable it with:
+In dd-java-agent earlier than v1.28.0 it is **disabled** by default. The allocation profiler relies on JVMTI APIs which could crash before OpenJDK 21.0.3 and is disabled on older JDK versions. Enable it 
+with:
 
 ```
 export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
-export DD_PROFILING_DDPROF_ALLOC_ENABLED=true # this is the default in v1.17.0+
+export DD_PROFILING_DDPROF_ALLOC_ENABLED=true # this is the default in v1.28.0+ on OpenJDK 21.0.3+
 ```
 
 or:

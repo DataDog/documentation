@@ -61,9 +61,7 @@ Enter the following information based on your selected logs destination.
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-{{< img src="observability_pipelines/processors/sdr_processors.png" alt="The log processors available" width="40%" >}}
-
-{{% observability_pipelines/processors/add_processors %}}
+{{% observability_pipelines/processors/add_processors_sds %}}
 
 {{< tabs >}}
 {{% tab "Filter" %}}

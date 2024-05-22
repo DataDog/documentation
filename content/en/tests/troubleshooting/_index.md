@@ -85,28 +85,18 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
-## The tests wall time is empty
+### The total test time is empty
+If you cannot see the total test time, it is likely that test suite level visibility is not enabled. To confirm, check if your language supports test suite level visibility in [Supported features][14]. If test suite level visibility is supported, update your tracer to the latest version.
 
-If you cannot see the tests wall time it is likely that the CI provider metadata is missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check if the `ci.pipeline.id`, `ci.pipeline.name`, `ci.pipeline.number`, or `ci.job.url` tags are missing. If these tags are not populated, then nothing shows in the wall time column.
+If you still don't see the total time after updating the tracer version, contact [Datadog support][2] for help.
 
-1. Tracers use the environment variables set by the CI provider to collect this information. See [Running tests inside a container][7] for a list of environment variables that the tracer attempts to read for each supported CI provider. Make sure that the environment variables have the expected values set.
-2. Check that you are running your tests in a supported CI provider. For a list of supported CI providers, see [Running tests inside a container][7]. Only these CI providers can extract the information to enrich the test metadata with CI information.
-3. If you still don't see the wall time, contact [Datadog support][2] for help.
+### The total test time is different than expected
 
-## The tests wall time is not what is expected
+#### How total time is calculated
+The total time is defined as the sum of the maximum test session durations.
 
-### How wall time is calculated
-The wall time is defined as the time difference between the start time of the first test and the end time of the last test for the given pipeline.
-
-This is done using the following algorithm:
-
-1. Compute a hash based on CI information to group the tests.
-    1. If the tests include `ci.job.url`, use this tag to calculate the hash.
-    2. If the tests don't include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
-2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is calculated for each job, and the maximum from all calculated wall times is shown.
-
-### Possible issues with wall time calculation
-If you're using a library for testing time-dependent code, like [timecop][8] for Ruby or [FreezeGun][9] for Python, it is possible that test timestamps are wrong, and therefore calculated wall times. If this is the case, make sure that modifications to time are rolled back before finishing your tests.
+1. The maximum duration of a test session grouped by the test session fingerprint is calculated.
+2. The maximum test session durations are summed.
 
 ## The test status numbers are not what is expected
 
@@ -145,8 +135,6 @@ The default branch is used to power some features of the products, namely:
 
 - Default branches list on the Tests page: This list only displays default branches. Setting the wrong default branch can result in missing or incorrect data in the default branches list.
 
-- Wall time comparison for non-default branches: On the Tests page, in the Branches view, the **VS Default** column is calculated by comparing wall time for the current branch against wall time for the default branch.
-
 - New flaky tests: Tests that are not currently classified as flaky in the default branch. If the default branch is not properly set, this could lead to a wrong number of detected new flaky tests.
 
 - Pipelines list: The pipelines list only displays default branches. Setting the wrong default branch can result in missing or incorrect data in the pipelines list.
@@ -182,3 +170,4 @@ The best way to fix this is to make sure that the test parameters are the same b
 [11]: https://app.datadoghq.com/ci/settings/repository
 [12]: /continuous_integration/intelligent_test_runner/
 [13]: /tests/#parameterized-test-configurations
+[14]: /tests/#supported-features

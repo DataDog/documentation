@@ -9,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Adding metadata"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage service definitions with Terraform"
 - link: "/api/latest/service-definition/"
   tag: "API"
@@ -22,24 +22,25 @@ further_reading:
   text: "Import Backstage YAML files into Datadog"
 ---
 
-## Create user-defined services 
+## Create user-defined entries 
 
-To add your own services to Service Catalog, you can either manually add them by creating Service Definitions through the API or GitHub integration or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using `service.datadog.yaml` files. 
+To manage your own components that are not currently emitting performance metrics through APM, USM, or RUM products with Datadog Service Catalog, you can either manually add them by creating Service Definitions through the API or GitHub integration or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using `service.datadog.yaml` files. 
 
 To create a user-defined service, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
-schema-version: v2.1
+schema-version: v2.2
 dd-service: my-unmonitored-cron-job
-team: shopist
+team: e-commerce
+lifecycle: production
+application: shopping-app
+description: important cron job for shopist backend
+tier: "2"
+type: web
 contacts:
  - type: slack
    contact: https://datadogincidents.slack.com/archives/XXXXX
-application: shopist
-description: important cron job for shopist backend
-tier: tier1
-lifecycle: production
 links:
  - name: Common Operations
    type: runbook

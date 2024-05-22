@@ -11770,15 +11770,17 @@ components:
       - DESCENDING
     LogsStorageTier:
       default: indexes
-      description: Specifies storage type as indexes or online-archives
+      description: Specifies storage type as indexes, online-archives or flex
       enum:
       - indexes
       - online-archives
+      - flex
       example: indexes
       type: string
       x-enum-varnames:
       - INDEXES
       - ONLINE_ARCHIVES
+      - FLEX
     LogsWarning:
       description: A warning message indicating something that went wrong with the
         query
@@ -18443,6 +18445,14 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        defaultTags:
+          description: Default Tags for default rules (included in tags)
+          example:
+          - security:attacks
+          items:
+            description: Default Tag.
+            type: string
+          type: array
         deprecationDate:
           description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
@@ -22930,6 +22940,7 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
@@ -22940,6 +22951,8 @@ components:
               access to the cloud cost data source in dashboards and notebooks.
             cloud_cost_management_write: Configure cloud cost accounts and global
               customizations.
+            continuous_profiler_pgo_read: Read and query Continuous Profiler data
+              for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
@@ -22948,6 +22961,7 @@ components:
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
             events_read: Read Events data.
+            hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
@@ -22959,6 +22973,11 @@ components:
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit and delete individual monitors.
+            org_management: Edit org configurations, including authentication and
+              certain security preferences such as configuring SAML, renaming an org,
+              configuring allowed login methods, creating child orgs, subscribing
+              & unsubscribing from apps in the marketplace, and enabling & disabling
+              Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -28893,6 +28912,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Get IP Allowlist
       tags:
       - IP Allowlist
@@ -28923,6 +28947,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Update IP Allowlist
       tags:
       - IP Allowlist
@@ -34521,7 +34550,10 @@ paths:
         must be included. For example, when modifying a query all queries must be
         included.
 
-        Default rules can only be updated to be enabled and to change notifications.'
+        Default rules can only be updated to be enabled, to change notifications,
+        or to update
+
+        the tags (default tags cannot be removed).'
       operationId: UpdateSecurityMonitoringRule
       parameters:
       - $ref: '#/components/parameters/SecurityMonitoringRuleID'
@@ -36158,6 +36190,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Aggregate spans
       tags:
       - Spans
@@ -36242,6 +36279,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Get a list of spans
       tags:
       - Spans
@@ -36288,6 +36330,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Search spans
       tags:
       - Spans

@@ -12,7 +12,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Node.js Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
