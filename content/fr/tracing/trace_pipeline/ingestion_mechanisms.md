@@ -59,7 +59,7 @@ Définissez le taux de traces par seconde cible de l'Agent dans son fichier de c
 @env DD_APM_MAX_TPS - entier - facultatif - valeur par défaut : 10
 ```
 
-**Remarques** :
+**Remarques** : 
 - Les paramètres configurés à distance prévalent sur les configurations locales, à savoir les variables d'environnement et le fichier de configuration `datadog.yaml`.
 - Pour les applications PHP, utilisez plutôt les règles définies par l'utilisateur de la bibliothèque de tracing.
 - Le taux d'échantillonnage des traces par seconde défini dans l'Agent s'applique uniquement aux bibliothèques de tracing Datadog autres que PHP. Il n'a aucun effet sur les autres bibliothèques de tracing, comme les SDK OpenTelemetry.
@@ -246,7 +246,7 @@ L'échantillonneur error intercepte des traces qui contiennent des spans d'erreu
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Échantillonnage error" style="width:100%;" >}}
 
-**Remarques** :
+**Remarques** : 
 1. Définissez le paramètre sur `0` pour désactiver l'échantillonneur error.
 2. L'échantillonneur error capture des traces locales avec des spans d'erreur au niveau de l'Agent. Si la trace est distribuée, il est impossible de garantir l'envoi de la trace complète à Datadog.
 3. Par défaut, les spans rejetées par les règles des bibliothèques de tracing ou par une logique personnalisée telle que `manual.drop` ne sont **pas évaluées** par l'échantillonneur error.
@@ -693,7 +693,7 @@ Pour en savoir plus sur les paramètres d'échantillonnage, consultez la [docume
 [2]: /fr/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
-À partir de la [version 0.1.0][1] de la bibliothèque de tracing pour les applications C++, vous pouvez définir des règles d'échantillonnage des **spans** pour des services et des opérations spécifiques avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
+À partir de la [version 1.3.3][1] de la bibliothèque de tracing pour les applications C++, vous pouvez définir des règles d'échantillonnage des **spans** pour des services et des opérations spécifiques avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
 
 Par exemple, pour recueillir 100 % des spans générées pour le service `my-service` et l'opération `http.request` à un taux maximum de 50 spans par secondes :
 
@@ -701,7 +701,7 @@ Par exemple, pour recueillir 100 % des spans générées pour le service `my-se
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
-[1]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.1.0
+[1]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.3.3
 {{% /tab %}}
 {{% tab ".NET" %}}
 À partir de la [version 2.18.0][1] de la bibliothèque de tracing pour les applications .NET, vous pouvez définir des règles d'échantillonnage des **spans** pour des services et des opérations spécifiques avec la variable d'environnement `DD_SPAN_SAMPLING_RULES`.
