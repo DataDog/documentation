@@ -3,7 +3,7 @@ title: Tables
 kind: documentation
 disable_toc: false
 aliases:
-- /app_builder/tables/
+- /service_management/app_builder/tables/
 further_reading:
 - link: "/service_management/workflows/components/"
   tag: "Documentation"
