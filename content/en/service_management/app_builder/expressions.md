@@ -12,11 +12,11 @@ further_reading:
 
 You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you type an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
 
-Some fields, like the [post-query transformation][1], display a code editor by default and accept plain JS. In all other fields, enclose your JS expressions in `${}`. For example, to interpolate the values of two text input components named `textInput0` and `textInput1` into the **Content** property of a text component (and add an exclamation mark), use the expression `${textInput0.value} ${textInput1.value}!`.
+Some fields, like [post-query transformation][1], display a code editor by default and accept plain JS. In all other fields, enclose your JS expressions in `${}`. For example, to interpolate the values of two text input components named `textInput0` and `textInput1` into the **Content** property of a text component (and add an exclamation mark), use the expression `${textInput0.value} ${textInput1.value}!`.
 
 {{< img src="service_management/app_builder/interpolation.png" alt="The text component fills with the words 'Hello' and 'World', each interpolated from a text input component value" style="width:100%;" >}}
 
-App Builder accepts standard vanilla JavaScript syntax, however:
+App Builder accepts standard vanilla JavaScript syntax, with the following caveats:
 - The result of the expression must match the result expected by the component or query property. For example, the text component's **Is Visible** property expects a Boolean. To find out what type of data a component property expects, see [View component properties](#view-component-properties).
 - Your code has read-only access to the app state, but App Builder executes the code in a sandboxed environment with no access to the Document Object Model (DOM) or browser APIs.
 
@@ -24,7 +24,7 @@ App Builder accepts standard vanilla JavaScript syntax, however:
 
 Before you create an expression, it's helpful to know the available properties and defaults or current values for the component you want to interact with.
 
-You can view the available properties and values for a component using:
+You can view the available properties and values for a component in the following ways:
 - **App State**: Provides properties and values for all components and queries in your app, as well as global variables such as state variables or dashboard template variables.
 - **Inspect Data**: Provides properties and values for a specific component or query in your app.
 - The **Admin Console**: The **Data** tab of the **Admin Console** provides properties and values for all components and queries in your app.
@@ -55,7 +55,7 @@ To access the **Admin Console**:
 
 ## Custom component interactions
 
-Most UI components provide built-in options such as toggles and text alignment that cover basic app usage. To add a custom interaction to a component, click the code editor symbol (**</>**) and enter a JS expression.
+Most UI components provide built-in options, such as toggles and text alignment, that cover basic app usage. To add a custom interaction to a component, click the code editor symbol (**</>**) and enter a JS expression.
 
 ### Conditional visibility
 
@@ -78,7 +78,7 @@ The text component is invisible and the button is disabled unless both text inpu
 
 ### Disable a component while loading
 
-Another common use case is disabling a component while a query is in a loading state. In the [EC2 Instance Manager blueprint][3], the `instanceType` Select component is disabled while the `listInstances` query is loading. To accomplish this, the **Is Disabled** property uses the expression `${listInstances.isLoading}`.
+Another common use case is disabling a component while a query is in a loading state. In the [EC2 Instance Manager blueprint][3], the `instanceType` select component is disabled while the `listInstances` query is loading. To accomplish this, the **Is Disabled** property uses the expression `${listInstances.isLoading}`.
 
 {{< img src="service_management/app_builder/isloading.png" alt="The 'instanceType' Select component is disabled while the 'listInstances' query is loading." style="width:100%;" >}}
 
@@ -88,7 +88,7 @@ Similar to components, you can use JS expressions to alter your queries based on
 
 ### Filter query results on user input
 
-The [PagerDuty On-call Manager blueprint][4] filters the result of the `listSchedules` query based on input from the user. The user selects a team and user from the `team` and `user` **Select** components.
+The [PagerDuty On-call Manager blueprint][4] filters the result of the `listSchedules` query based on input from the user. The user selects a team and user from the `team` and `user` select components.
 
 Inside the `listSchedules` query, the following post-query transformation filters the results based on the values of `team` and `user`:
 
@@ -116,6 +116,5 @@ Setting the query's **Run Settings** to **Auto** allows the query to run each ti
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/app_builder/build/#post-query-transformation
-[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
 [3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ec2_instance_manager
 [4]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=pagerduty_oncall_manager
