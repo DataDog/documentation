@@ -101,7 +101,7 @@ datadog-ci git-metadata upload
 datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –diff-aware <...other-options...>
 ```
 
-**Note:** these commands must be invoked in your Git repository.
+**Note:** These commands must be invoked in your Git repository.
 
 ## Further Reading
 
