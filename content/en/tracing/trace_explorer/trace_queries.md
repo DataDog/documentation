@@ -52,7 +52,7 @@ Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace qu
 | `\|\|` | **Or**: One or the other span are in the trace | Traces that contain spans from the service `web-store` or from the service `mobile-store`: <br/>`service:web-store \|\| service:mobile-store` |
 | `->` | **Indirect relationship**: Traces that contain a span matching the left query that is upstream of spans matching the right query | Traces where the service `checkoutservice` is upstream of the service `quoteservice`: <br/>`service:checkoutservice -> service:quoteservice` |
 | `=>` | **Direct relationship**: Traces that contain a span matching the left query that is the direct parent of a span matching the right query | Traces where the service `checkoutservice` is directly calling the service `shippingservice`: <br/>`service:checkoutservice => service:shippingservice` |
-| `NOT` | **Exclusion**: Traces that **do not** contain spans matching the query | Traces that contain spans from the service `web-store` but not from the service `payments-go`:  <br/>`service:web-store && NOT(service:payments-go)` |
+| `NOT` | **Exclusion**: Traces that **do not** contain spans matching the query | Traces that contain spans from the service `web-store`, but not from the service `payments-go`:  <br/>`service:web-store && NOT(service:payments-go)` |
 
 ### Trace-level filters
 
@@ -108,7 +108,7 @@ Datadog uses the [Intelligent Retention Filter][3] to index data for Trace Queri
 - [Flat sampling](#1-flat-sampling): A uniform 1% sample of ingested spans.
 - [Diversity sampling](#diversity-sampling): A representative, diverse selection of traces to keep visibility over each environment, service, operation, and resource.
 
-These 2 sampling mechanisms capture **complete traces**, meaning that all spans of a trace are always indexed to ensure the well-functioning of Trace Queries.
+These two sampling mechanisms capture **complete traces**, meaning that all spans of a trace are always indexed to ensure that Trace Queries return accurate results.
 
 {{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling & Diversity Sampling" >}}
 
