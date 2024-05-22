@@ -2189,7 +2189,7 @@ menu:
       identifier: app_builder_connections
       weight: 2
     - name: HTTP Request
-      url: service_management/app_builder/http_request/
+      url: service_management/app_builder/connections/http_request/
       parent: app_builder_connections
       identifier: app_builder_http_request
       weight: 201  
@@ -2204,7 +2204,7 @@ menu:
       identifier: app_builder_components
       weight: 4
     - name: Tables
-      url: service_management/app_builder/tables/
+      url: service_management/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
       weight: 401  
