@@ -45,7 +45,7 @@ Click **View Suggested Policy** to view a suggested downsized policy based on th
 
 To remediate the identity risk, click **Fix in AWS** to update the resource in AWS IAM console. To create a Jira issue and assign it to a team, click **Add Jira issue**. See [Create Jira Issues for Cloud Security Management Issues][2] for more information.
 
-{{< img src="security/identity_risks/side_panel_action_buttons.png" alt="Remediate identity risks using the action buttons on the side panel" width="100%">}}
+{{< img src="security/identity_risks/side_panel_action_buttons_2.png" alt="Remediate identity risks using the action buttons on the side panel" width="100%">}}
 
 You can also leverage [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement). See [Automate Security Workflows with Workflow Automation][3] for more information.
 
