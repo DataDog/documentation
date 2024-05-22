@@ -1,7 +1,7 @@
 announcement_banner:
-  desktop_message: Read the 2024 State of DevSecOps Study!
-  external_link: https://www.datadoghq.com/state-of-devsecops/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-security-ww-docs-announcement-report-devsecops2024
-  mobile_message: Read the State of DevSecOps Study!
+  desktop_message: Datadogではじめる モダンなモニタリング
+  external_link: https://www.datadoghq.com/ja/free-datadog-trial/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-coreplatform-japan-docs-announcement-trial-freetrial-ja
+  mobile_message: Datadogではじめる モダンなモニタリング
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 exclude: []
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。

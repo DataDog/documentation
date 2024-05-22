@@ -115,7 +115,7 @@ Add an ignore rule in your `static-analysis.datadog.yml` file. The example below
 
 ```
 rulesets:
-  - javascript-express
+  - javascript-express:
     rules:
       reduce-server-fingerprinting:
         ignore: "**"
@@ -126,7 +126,7 @@ Add an ignore rule in your `static-analysis.datadog.yml` file. The example below
 
 ```
 rulesets:
-  - javascript-express
+  - javascript-express:
     rules:
       reduce-server-fingerprinting:
         ignore: "ad-server/src/app.js"

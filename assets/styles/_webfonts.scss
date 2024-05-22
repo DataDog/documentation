@@ -9,6 +9,17 @@
 }
 @font-face {
   font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Book.woff2') format('woff2'),
+      url('../fonts/NationalWeb-Book.woff') format('woff'),
+      url('../fonts/NationalWeb-Book.eot') format('embedded-opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
   src: url('../fonts/NationalWeb-Semibold.woff2') format('woff2'),
   url('../fonts/NationalWeb-Semibold.woff') format('woff'),
   url('../fonts/NationalWeb-Semibold.eot') format('embedded-opentype');

@@ -8,6 +8,6 @@ observability_pipelines_worker:
     url: "http://<OPW_HOST>:8282"
 ```
 
-`<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use. For Kubernetes installs, the internal DNS record of the Observability Pipelines Worker service can be used. For example: `opw-observability-pipelines-worker.default.svc.cluster.local`.
+`<OPW_HOST>` is the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use. For Kubernetes installs, the internal DNS record of the Observability Pipelines Worker service can be used. For example: `datadog-observability-pipelines-worker.default.svc.cluster.local`.
 
 At this point, your observability data should be going to the Worker, processed by the pipeline, and delivered to Datadog.
