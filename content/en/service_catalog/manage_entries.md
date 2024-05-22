@@ -98,7 +98,7 @@ extensions:
 {{< /code-block >}}
 
 ## Automate Common Workflows
-[Workflow Automation][14] and App Builder allow you to automate end-to-end processes across your teams. They integrate with Datadog's Service Catalog to enable dynamic and self-service workflows.
+[Workflow Automation][14] and [App Builder](https://docs.datadoghq.com/service_management/app_builder/) allow you to automate end-to-end processes across your teams. They integrate with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
 {< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
 Datadog App Builder is in private beta. Complete the form to request access.
