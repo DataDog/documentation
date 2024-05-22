@@ -1,6 +1,7 @@
 ---
 title: Continuous Delivery Visibility
 kind: documentation
+disable_sidebar: true
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
@@ -20,7 +21,7 @@ further_reading:
 cascade:
     algolia:
         rank: 70
-        tags: ['ci/cd', 'continuous delivery']
+        tags: ['ci/cd', 'continuous delivery', 'deployment visibility', 'deployments', 'deployment executions']
 ---
 
 {{< site-region region="gov" >}}
@@ -35,13 +36,17 @@ CD Visibility is in private beta. To request access, complete the form.
 
 Datadog Continuous Delivery (CD) Visibility provides observability on your deployments. CD Visibility brings deployment metrics and data into Datadog so you can communicate the health of your deployments, and focus your efforts in improving your team's ability to deliver quality code every time.
 
+## Improve deployment frequency 
+
+Deployment Visibility helps you monitor deployments across CI environments by tracking every deployment event in real time. You can identify bottlenecks, understand failures, and measure deployment success metrics. With CD Visibility, your team can optimize processes, increase deployment frequency safely, and ensure consistent delivery performance.
+
 ## Increase efficiency through seamless integrations
 
-Datadog integrates with the following CD providers to gather deployment metrics and to track deployment execution performance and results. Use the data aggregated over time to track trends in the performance of deployments.
+Datadog integrates with the following CI/CD providers to collect metrics and track the execution performance and results of your deployments. 
 
-{{< partial name="continuous_delivery/cd-pipelines-getting-started.html" >}}
+{{< img src="continuous_delivery/supported_integrations.png" alt="CI/CD options for Deployment Visibility" width="100%" >}}
 
-</br>
+Use the data aggregated over time to identify trends and improve your deployment strategies for enhanced operational efficiency. For more information, see the [CI Providers documentation][4].
 
 ## Ready to start?
 
@@ -54,3 +59,4 @@ See [Deployment Visibility][1] for instructions on setting up CD Visibility with
 [1]: /continuous_delivery/deployments
 [2]: /continuous_delivery/explorer
 [3]: /continuous_delivery/explorer/saved_views
+[4]: /continuous_delivery/deployments/ciproviders

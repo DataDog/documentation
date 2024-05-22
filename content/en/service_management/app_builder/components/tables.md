@@ -2,6 +2,8 @@
 title: Tables
 kind: documentation
 disable_toc: false
+aliases:
+- /service_management/app_builder/tables/
 further_reading:
 - link: "/service_management/workflows/components/"
   tag: "Documentation"
@@ -12,7 +14,6 @@ further_reading:
 ---
 
 This page describes advanced features you can use to manipulate table components in your App Builder apps.
-
 
 ## Client-side filtering
 
@@ -144,6 +145,6 @@ In the table, the **User** column fills with an avatar and GitHub username for e
 
 [0]: https://datadoghq.slack.com/
 [1]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=pagerduty_oncall_manager&viewMode=preview
-[2]: /service_management/app_builder/tables/#filtering-with-a-text-input
+[2]: /service_management/app_builder/components/tables/#filtering-with-a-text-input
 [3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=github-pr-dashboard&viewMode=preview
