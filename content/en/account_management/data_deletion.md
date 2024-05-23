@@ -79,3 +79,8 @@ Contact [support](https://www.datadoghq.com/support/) with your request.
     - This only prevents data that has not yet been processed for a particular job to not be deleted.
     - Deleted data can never be recovered.
     - Deletions cannot be undone.
+  
+## Product Differences
+| Product          | Details |
+|:-----------------|--------------------|
+| Logs             |   <li>Deletions cannot be scoped to a specific index</li> <li>Deletions occur across Index, Flex Indexes and Online Archives.</li>   | 
