@@ -12,7 +12,7 @@ further_reading:
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
 kind: documentation
-title: Ruby ログとトレースの接続
+title: Ruby ログとトレースの相関付け
 type: multi-code-lang
 ---
 
