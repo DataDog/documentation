@@ -5386,35 +5386,85 @@ menu:
       parent: digital_experience_heading
       weight: 50000
     - name: User Retention
-      url: /product_analytics/user_retention
+      url: product_analytics/user_retention
       parent: product_analytics
       identifier: pa_user_retention
       weight: 1
     - name: Journeys
-      url: /product_analytics/journeys
+      url: product_analytics/journeys
       parent: product_analytics
       identifier: pa_journeys
       weight: 2
     - name: Funnel Analysis
-      url: /product_analytics/journeys/funnel_analysis
+      url: product_analytics/journeys/funnel_analysis
       parent: pa_journeys
       identifier: pa_funnel_analysis
       weight: 201
     - name: Sankey Diagrams
-      url: /product_analytics/journeys/sankey
+      url: product_analytics/journeys/sankey
       parent: pa_journeys
       identifier: pa_sankey
       weight: 202
     - name: Heatmaps
-      url: /product_analytics/heatmaps
+      url: product_analytics/heatmaps
       parent: product_analytics
       identifier: pa_heatmaps
       weight: 3
     - name: Session Replay
-      url: real_user_monitoring/session_replay/
+      url: product_analytics/session_replay/
       parent: product_analytics
-      identifier: rum_session_replay
+      identifier: pa_session_replay
       weight: 4
+    - name: Mobile
+      url: product_analytics/session_replay/mobile
+      parent: pa_session_replay
+      identifier: pa_session_replay_mobile
+      weight: 401
+    - name: Setup
+      url: product_analytics/session_replay/mobile/setup_and_configuration
+      parent: pa_session_replay_mobile
+      identifier: pa_session_replay_mobile_setup
+      weight: 101
+    - name: Privacy Options
+      url: product_analytics/session_replay/mobile/privacy_options
+      parent: pa_session_replay_mobile
+      identifier: pa_session_replay_mobile_privacy
+      weight: 102
+    - name: Impact on App Performance
+      url: product_analytics/session_replay/mobile/app_performance
+      parent: pa_session_replay_mobile
+      identifier: pa_session_replay_mobile_app_performance
+      weight: 103
+    - name: Troubleshooting
+      url: product_analytics/session_replay/mobile/troubleshooting
+      parent: pa_session_replay_mobile
+      identifier: pa_session_replay_mobile_troubleshooting
+      weight: 104
+    - name: Browser
+      url: product_analytics/session_replay/browser
+      parent: pa_session_replay
+      identifier: pa_session_replay_browser
+      weight: 402
+    - name: Privacy Options
+      url: product_analytics/session_replay/privacy_options
+      parent: pa_session_replay_browser
+      identifier: pa_session_replay_privacy_options
+      weight: 102
+    - name: Developer Tools
+      url: product_analytics/session_replay/developer_tools
+      parent: pa_session_replay_browser
+      identifier: pa_session_replay_developer_tools
+      weight: 103
+    - name: Troubleshooting
+      url: product_analytics/session_replay/troubleshooting
+      parent: pa_session_replay_browser
+      identifier: pa_session_replay_troubleshooting
+      weight: 104
+    - name: Analytics
+      url: product_analytics/analytics/
+      parent: product_analytics
+      identifier: pa_analytics
+      weight: 5
     - name: Account Management
       url: account_management/
       pre: cog-2
