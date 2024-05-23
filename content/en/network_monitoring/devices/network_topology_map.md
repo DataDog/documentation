@@ -133,7 +133,7 @@ Choose **View device details** to see information such as the device's IP addres
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details_tab_2.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
 
-From this view, you can also view the device's interfaces in the **Interfaces** tab.
+From this view, you can also view the device's connected interfaces in the **Interfaces** tab.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_inspect_details.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
 
@@ -147,7 +147,7 @@ If you experience issues using the Network Topology Map, use the following troub
 
 ### Missing topology data message box
 
-{{< img src="/network_device_monitoring/network_topology_map/missing_topology_data.png" alt="The missing topology data message that is displayed when the rendered map has no links" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/missing_topology_data_2.png" alt="The missing topology data message that is displayed when the rendered map has no links" style="width:80%;" >}}
 
 This message is displayed when the rendered map has no links.
 
@@ -161,10 +161,14 @@ There are no devices because NDM is not configured.
 
 ### No connections found / No connected devices to show
 
-Couldn't find any connected devices (XX hidden isolated devices). (need screen shot)
+{{< img src="/network_device_monitoring/network_topology_map/no_connections_found.png" alt="The no devices found message that is displayed when NDM is either not configured or because of filtering." style="width:80%;" >}}
 
 - Turn the "Hide _N_ Unconnected Devices" toggle off to show the isolated devices.
 - Use categorization tag to help understand your map view with information hierarchy.
+
+### Empty map/ no monitored devices
+
+- Ensure the "Hide _N_ Unconnected Devices toggle is off.
 
 ### Missing devices/connections
 
