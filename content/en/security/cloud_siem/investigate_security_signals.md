@@ -19,7 +19,7 @@ You must have the `Security Signals Write` permission to modify a security signa
 
 ## Signal explorer
 
-In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, you can view signals by [their severity](#view-signals-by-severity), [detection rules](#view-signals-by-detection-rules), and [MITREx](#view-signals-by-mitrex). After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
+In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, you can view signals by [their severity](#view-signals-by-severity), [detection rules](#view-signals-by-detection-rules), and [MITRE ATT&CK](#view-signals-by-mitre-attck). After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
 
 ### View signals by severity
 
@@ -42,7 +42,7 @@ Use different visualizations to investigate the threat activity in your environm
 
 To view your signals based on detections rules, click **Rules List** in the **Visualize as** field under the search bar. Click on a rule to see the signals related to that rule. Click on a signal to see the signal details.
 
-### View signals by MITREx
+### View signals by MITRE ATT&CK
 
 To view your signals by MITRE ATT&CK Tactic and Technique:
 1. Select **Table** in the **Visualize as** field under the search bar, and group by **Tactic**.
