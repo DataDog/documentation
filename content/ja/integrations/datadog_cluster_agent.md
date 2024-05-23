@@ -32,7 +32,7 @@ draft: false
 git_integration_title: datadog_cluster_agent
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
-integration_version: 3.0.0
+integration_version: 3.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0

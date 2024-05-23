@@ -4,10 +4,10 @@ kind: documentation
 disable_toc: false
 further_reading:
 - link: "/agent/troubleshooting/send_a_flare/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Send an Agent Flare"
 - link: "/agent/troubleshooting/agent_check_status/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Get the Status of an Agent Check"
 ---
 

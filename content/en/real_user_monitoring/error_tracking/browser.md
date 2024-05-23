@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 further_reading:
 - link: "https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "datadog-ci Source code"
 - link: "/real_user_monitoring/guide/upload-javascript-source-maps"
   tag: "Documentation"

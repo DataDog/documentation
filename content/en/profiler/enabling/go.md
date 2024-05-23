@@ -121,7 +121,7 @@ To add detailed C function call information to CPU profiles, you may opt to use 
 
 **Note**: This library is considered experimental. It can cause (infrequent) deadlocks in programs that use C++ exceptions, or that use libraries such as `tcmalloc`, which also collect call stacks.
 
-## Save 2 to 14% CPU in production with PGO
+## Save up to 14% CPU in production with PGO
 
 Starting [Go 1.21][14], the Go compiler supports Profile-Guided Optimization (PGO). PGO enables additional optimizations on code identified as hot by CPU profiles of production workloads. This is compatible with Datadog Go Continuous Profiler and can be used for production builds.
 

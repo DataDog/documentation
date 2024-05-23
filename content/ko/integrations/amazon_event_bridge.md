@@ -1,7 +1,7 @@
 ---
 categories:
 - aws
-- cloud
+- 클라우드
 - 알림
 dependencies: []
 description: 핵심 Amazon EventBridge 메트릭을 추적하세요.
@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Amazon EventBridge
 integration_version: ''
 is_public: true
-kind: integration
+kind: 통합
 manifest_version: '1.0'
 name: amazon_event_bridge
 public_title: Datadog-Amazon EventBridge 통합
@@ -22,6 +22,10 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">정부 사이트용 Datadog는 Amazon EventBridge를 지원하지 않습니다.</div>
+{{< /site-region >}}
+
 ## 개요
 
 Datadog와 Amazon EventBridge 통합은 다음 기능을 제공합니다.
@@ -30,12 +34,13 @@ Datadog와 Amazon EventBridge 통합은 다음 기능을 제공합니다.
 - Datadog 알림 이벤트를 원하는 이벤트 버스로 전송합니다.
 - AWS 내에서 이벤트 버스에 트리거를 설정하여 Kinesis, 람다 등과 같은 서비스로 트리거를 설정하세요.
 - 알림 이벤트 내의 정보를 사용하여 자동 수정 파이프라인 및 런북을 실행하고, 분석 쿼리 등을 실행합니다.
+- 본 통합은 GovCloud에서 지원되지 않습니다.
 
-{{< img src="integrations/amazon_event_bridge/aws_event_bridge.png" alt="Amazon EventBridge" >}}
+{{< img src="integrations/amazon_event_bridge/eventbridge_monitor_notification.png" alt="EventBridge로 전송되는 모니터링 알림" >}}
 
 ## 설정
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 설치
 
@@ -44,7 +49,7 @@ Datadog와 Amazon EventBridge 통합은 다음 기능을 제공합니다.
    `events:CreateEventBus`
 3. Amazon EventBridge 통합은 자동으로 기본 AWS 통합을 사용해 설치됩니다.
 
-### 설정
+### 구성
 
 `events:CreateEventBus` 및 `events:PutPartnerEvents` 권한이 있어야 이벤트 버스에 알림을 보낼 수 있습니다. 이 권한이 설정되어 있지 않은 경우 [Datadog IAM 권한 설명서][2]를 참조하여 설정 전에 권한을 활성화하세요.
 
@@ -79,7 +84,7 @@ Amazon EventBridge 통합을 포함해 Datadog에서 모니터와 스냅샷에 �
 
 {{< wistia uezo3fh61j >}}
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 
@@ -89,7 +94,7 @@ Amazon EventBridge 통합은 메트릭을 포함하지 않습니다.
 
 Amazon EventBridge 통합은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Amazon EventBridge 통합은 서비스 점검을 포함하지 않습니다.
 

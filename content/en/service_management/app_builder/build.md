@@ -32,7 +32,7 @@ On the App Builder page, you can access and filter your apps. Hover over an app 
 
 ### Build an app from a blueprint
 
-Blueprints are helpful starter apps. They cover common use cases and come loaded with demo data that you can use to familiarize yourself with the app.
+Blueprints are helpful starter apps that cover common use cases. They come loaded with demo data that you can use to familiarize yourself with the app. Blueprints also showcase best practices for setting up app functionality and visual presentation.
 
 1. From [App Builder][1], click the [Blueprints][2] tab.
 1. Find the blueprint that you want to use and click **Preview**.
@@ -73,21 +73,7 @@ Each component features a list of corresponding configuration options that contr
 
 To delete or duplicate a component, select the component and click the three dot ellipsis (*...*) to display the **Delete** or **Duplicate** options.
 
-Available UI components:
-- Button
-- Callout value
-- Checkbox
-- Container
-- Date range picker
-- JSON input
-- Modal
-- Number input
-- Radio
-- Search
-- Select
-- Table
-- Text
-- Text input
+For a list of available UI components and their properties, see [Components][9].
 
 #### Events
 
@@ -97,43 +83,13 @@ An event can set the state of a UI component, open or close a modal, trigger ano
 
 For example, the [GitHub PR summarizer][4] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
 
-#### Dynamic table values
-
-Similar to [post-query transformation](#post-query-transformation), the table UI component allows you to customize the data source for the table. You can use the **Data Source** field to dynamically fill table values and constrain which objects are pulled into the table as columns.
-
-For example, the [GitHub PR Summarizer][4] blueprint uses a series of GitHub queries to summarize a list of pull requests in a repository. The query uses the data source entry below to constrain the table to 6 columns: `title`,`Summary`,`updated_at`,`user`,`html_url`, and `state`. The highlighted code dynamically populates the user column for each pull request with the author's avatar and GitHub username.
-
-{{< highlight js "hl_lines=17" >}}
-${(() => {
-    const summaryById = Object.fromEntries(
-        summarizePulls.outputs.map(({id, summary}) => [id, summary])
-    );
-    return listPulls.outputs.map(result => {
-        const {title, updated_at, user, state, html_url} = result;
-        const updatedAt = new Date(result.updated_at);
-        let summary;
-        if (summarizePulls.isLoading) {
-            summary = 'Summarizing';
-        } else {
-            summary = summaryById[result.id] ?? 'N/A';
-        }
-        return {
-            title: `**${title}**`,
-            updated_at: updatedAt.toLocaleString(),
-            user: {label: user.login, src: user.avatar_url},
-            summary,
-            state, html_url};
-    })
-})()}
-{{< /highlight >}}
-
-In the table, the **User** column fills with an avatar and GitHub username for each PR author.
-
 ### Queries
 
 Queries populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
-To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app. After you've added a query, it appears in the query list above the query editor. Click and drag queries to reorder them. Select a query to configure it.
+The [Action Catalog][10] within the Datadog App provides actions that can be performed as queries against your infrastructure and integrations using App Builder. You can orchestrate and automate your end-to-end processes by linking together actions that perform tasks in your cloud providers, SaaS tools, and Datadog accounts.
+
+To add a query, click the plus (**+**) icon in the **Queries** section and search for an action to add to your app. After you've added the query action, it appears in the query list above the query editor. Click and drag queries to reorder them. Select a query to configure it.
 
 Queries rely on [Connections][5] for authentication. App Builder shares connections with [Workflow Automation][6].
 
@@ -192,9 +148,23 @@ Variables are enclosed in braces and are preceded by a dollar sign (`${}`). To u
 
 {{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestion menu with all available variables" video=true >}}
 
-### Customize an app with JSON
+### Interact with an app in JSON
+
+#### Edit an app
 
 To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+
+#### Copy or back up an app
+
+To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+
+To copy the app to another organization:
+1. Create an app. 
+1. Click the cog (**Settings**) icon and select **Switch to JSON**. 
+1. Replace the existing JSON with the JSON that you previously copied. 
+
+The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+
 
 ## Further reading
 
@@ -210,3 +180,5 @@ To edit an app with JSON, click the cog (**Settings**) icon and select **Switch 
 [6]: /service_management/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
 [8]: https://datadoghq.slack.com/
+[9]: /service_management/app_builder/components
+[10]: https://app.datadoghq.com/app-builder/action-catalog

@@ -33,7 +33,7 @@ You can access high-level accumulation and trends, including:
 
 ## Search for pipelines
 
-To see your pipelines, navigate to [**CI** > **Pipelines**][1].
+To see your pipelines, navigate to [**Software Delivery** > **CI Visibility** > **CI Pipeline List**][1].
 
 The [Pipelines page][1] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. Only pipelines with Git information associated to the default branch (usually named `main` or `prod`), as well as pipelines without any Git information, are displayed on this page.
 
@@ -81,7 +81,7 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 
 [1]: https://app.datadoghq.com/ci/pipelines
 [3]: /continuous_integration/pipelines/github/#enable-log-collection
-[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
+[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: /account_management/teams/ 
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux

@@ -148,6 +148,8 @@ sudo apt-get --purge remove datadog-agent -y
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% apm-ssi-uninstall-linux %}}
+
 ## Troubleshooting
 
 See the [Agent Troubleshooting documentation][3].
