@@ -32,7 +32,7 @@ Datadog Security provides full stack coverage for AWS Fargate, as shown in the f
     <tr>
         <td>Fargate Infrastructure</td>
         <td>Infrastructure Monitoring</td>
-        <td>CSM Threats</td>
+        <td>N/A</td>
         <td>CSM Threats</td>
     </tr>
 </table>
@@ -66,10 +66,6 @@ Datadog Security provides full stack coverage for AWS Fargate, as shown in the f
     </tr>
 </table>
 
-## How it works
-
-{{< img src="security/csm/csm_fargate_workflow2.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="100%">}}
-
 ## Cloud Security Management
 
 ### Prerequisites
@@ -78,12 +74,12 @@ Datadog Security provides full stack coverage for AWS Fargate, as shown in the f
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
-#### Images
+<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security Management.</div>
+
+### Images
 
 * `cws-instrumentation-init`: `datadog/cws-instrumentation:latest`
 * `datadog-agent`: `datadog/agent:latest`
-
-<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security Management.</div>
 
 ### Installation
 
