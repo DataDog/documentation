@@ -3,6 +3,7 @@ title: Data Deletion
 kind: documentation
 private: true
 ---
+<div class="alert alert-warning">Data Deletion via UI is in Private Beta.</div>
 
 ## Product Scope
 
