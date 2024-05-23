@@ -9,6 +9,9 @@ aliases:
     - /integrations/mainstorconcept_ziris/
     - /integrations/rookout/
     - /integrations/rookout_license/
+    - /integrations/shoreline/
+    - /integrations/shoreline_license/
+    - /integrations/shoreline_software_license/
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
@@ -83,10 +86,6 @@ cascade:
     path: /integrations/komodor_license.md
   aliases:
     - /integrations/komodor_komodor/
-- _target:
-    path: /integrations/shoreline_license.md
-  aliases:
-    - /integrations/shoreline_software_license/
 - _target:
     path: /integrations/stormforge_license.md
   aliases:

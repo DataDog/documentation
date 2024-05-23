@@ -1,5 +1,5 @@
 ---
-title: TCP Tests
+title: TCP Testing
 kind: documentation
 description: Simulate TCP connections on your hosts
 aliases:

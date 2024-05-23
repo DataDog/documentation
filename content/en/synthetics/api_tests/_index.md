@@ -1,5 +1,5 @@
 ---
-title: API Tests
+title: API Testing
 kind: documentation
 description: Simulate requests on your public and internal services
 aliases:

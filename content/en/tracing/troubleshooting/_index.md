@@ -61,7 +61,7 @@ Additionally, the number of [span tags][8] present on any span cannot exceed 102
 
 For a given 40 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, contact [support][1] to discuss your use case.
 
-- 1000 unique environments and service combinations
+- 5000 unique environments and service combinations
 - 30 unique [second primary tag][16] values per environment
 - 100 unique operation names per environment and service
 - 1000 unique resources per environment, service, and operation name
