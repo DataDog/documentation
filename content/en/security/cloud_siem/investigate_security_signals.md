@@ -64,9 +64,9 @@ You can triage a [single signal](#triage-a-single-signal) or [multiple signals](
     - You can also see specific information like username or network IP. Click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
 1. In the **Signal Status & Assignee** section:   
   a. Click the dropdown to change the triage status of the signal. The default status is `OPEN`.
-    - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
-    - `Under Review`: During an active investigation, you can switch the signal state to `Under Review`. From the `Under Review` state, you can move the signal state to `Archived` or `Open` as needed.
-    - `Archived`: When the detection that caused the signal has been resolved, you can transition it to the `Archived` state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an `Open` state within 30 days of being created.  
+      - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
+      - `Under Review`: During an active investigation, you can switch the signal state to `Under Review`. From the `Under Review` state, you can move the signal state to `Archived` or `Open` as needed.
+      - `Archived`: When the detection that caused the signal has been resolved, you can transition it to the `Archived` state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an `Open` state within 30 days of being created.</ul>
   b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
 
 ### Triage multiple signals
