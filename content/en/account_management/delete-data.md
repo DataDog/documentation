@@ -29,10 +29,8 @@ To grant an account access to delete data, perform the following steps:
 
 <div class="alert alert-danger">Deleted data can never be recovered, and deletions cannot be undone.</div>
 
-**Notes**:
-- Deletions start 2 hours after confirmation, and matches that arrive during this period are included in deletion. In some cases, records arriving after the job has started might not be deleted because the deletion has already processed the time window that record occurred in.
-- When deleting a record, data derived from that record is not deleted (for example, Metrics generated from Logs).
-- For the Logs product, deletions cannot be scoped to a specific index, and deletions occur across Index, Flex Indexes and Online Archives.
+<div class="alert alert-info"><strong>Product-specific consideration</strong>: For the Logs product, deletions cannot be scoped to a specific index, and deletions occur across Index, Flex Indexes, and Online Archives.
+</div>
 
 To delete data, perform the following steps:
 
@@ -45,6 +43,10 @@ To delete data, perform the following steps:
 The deletion begins 2 hours after you confirm the request.
 
 To validate a deletion, check the [Deletion History][5] tab, where you can see the status of deletions. You can also search deletions in Audit Trail using the string `@asset.name:"Data Deletion"`.
+
+**Notes**:
+- Deletions start 2 hours after confirmation, and matches that arrive during this period are included in deletion. In some cases, records arriving after the job has started might not be deleted because the deletion has already processed the time window that record occurred in.
+- When deleting a record, data derived from that record is not deleted (for example, Metrics generated from Logs).
 
 ### Stop deletions
 
