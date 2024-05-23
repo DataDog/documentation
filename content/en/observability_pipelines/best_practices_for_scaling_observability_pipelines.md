@@ -55,15 +55,7 @@ Due to Observability Pipelines Worker's affine type system, memory is rarely con
 
 ### Disk sizing
 
-Provision at least 30 GiB per vCPU of disk space. The recommended sizes are calculated at Observability Pipelines Worker's 10 MiB/s/vCPU throughput for one hour. For example, an 8 vCPU machine would require 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
-
-| Cloud Provider| Recommendation*                                               |
-| ------------- | --------------------------------------------------------------|
-| AWS           | EBS gp3, 30 GiB per vCPU, no additional IOPS or throughput    |
-| Azure         | Ultra-disk or standard SSD, 30 GiB per vCPU                   |
-| Google Cloud  | Balanced or SSD persistent disks, 30 GiB per vCPU             |
-| Private       | Network-based block storage equivalent, 30 GiB per vCPU       |
-
+You need 500MB of disk space to install the Observability Pipelines Worker.
 
 ## Capacity planning and scaling
 
