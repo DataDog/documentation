@@ -67,9 +67,9 @@ Contact [support](https://www.datadoghq.com/support/) with your request.
 ### Step 4 - Validate
 1. Click the **Deletion History** tab.
 2. Deletion requests will be one of 4 statuses:
-   - Upcoming
-   - In Progress
-   - Done
+   - Queued
+   - Running
+   - Complete
    - Canceled
 3. Deletions are also searchable in Audit Trail via `@asset.name:"Data Deletion"`
 
