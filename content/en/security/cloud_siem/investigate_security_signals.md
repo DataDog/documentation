@@ -34,6 +34,8 @@ Use different visualizations to investigate the threat activity in your environm
 
 - **Rules List** to see the volume and alerting trends across the different detection rules.
 - **Timeseries** to view signal trends over time.
+- **Top List** to see signals with the highest to lowest number of occurrences.
+- **Table** to see signals by the specified tag key (for example, `source`, `technique`, and so on).
 - **Pie Chart** to see the relative volume of each of the detection rules.
 
 {{< img src="security/security_monitoring/investigate_security_signals/signal_list2.png" alt="The Signal Explorer showing signals categorized by detection rules" style="width:100%;" >}}
