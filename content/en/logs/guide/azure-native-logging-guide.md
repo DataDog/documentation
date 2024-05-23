@@ -25,7 +25,7 @@ Provide insight into the operations on your resources at the [control plane][1].
 
 To send activity logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the activity logs are sent to Datadog.
 
-<div class="alert alert-warning">When log collection is enabled, the Datadog resource automatically modifies the configuration of <a href="https://learn.microsoft.com/azure/app-service/">App Service</a> logs. This causes the App Service to restart.</div>
+<div class="alert alert-warning">When log collection is enabled, the Datadog resource automatically modifies the logging configurations of <a href="https://learn.microsoft.com/azure/app-service/">App Services</a>. Azure triggers a restart for App Services when their logging configurations change.</div>
 
 ## Azure resource logs 
 
