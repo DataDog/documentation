@@ -478,7 +478,7 @@ logs_config:
   auto_multi_line_detection: true
 ```
 
-Para los despliegues contenerizados, puedes activar `auto_multi_line_detection` con la variable de entorno`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true`.
+Para los despliegues contenedorizados, puedes activar `auto_multi_line_detection` con la variable de entorno`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true`.
 
 También se puede activar o desactivar este parámetro (anulando la configuración general) en la configuración de cada log:
 
