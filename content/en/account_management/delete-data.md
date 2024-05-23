@@ -5,14 +5,14 @@ private: true
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  Deleting data using the UI is in beta.
+  Deleting data using the UI is in private beta.
 {{< /callout >}} 
 
 This page explains how to delete data from Datadog.
 
 ## Delete data through Support
 
-You can delete data from any product by contacting [support][1] with your request.
+You can delete data from any product by contacting [Support][1] with your request.
 
 ## Delete data through the UI
 
@@ -48,7 +48,7 @@ To validate a deletion, check the [Deletion History][5] tab, where you can see t
 
 ### Stop deletions
 
-**Note**: Deletions that are in progress can be canceled. However, this only prevents data that has not yet been processed for a particular job from being deleted.
+**Note**: Deletions that are in progress can be canceled. However, this only prevents deletion of data that has not yet been processed for a particular job.
 
 To cancel a deletion, click **Cancel** on an **Upcoming** or **In Progress** job.
 
