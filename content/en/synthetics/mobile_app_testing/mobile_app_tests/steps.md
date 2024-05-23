@@ -180,7 +180,7 @@ For more information about advanced options for subtests, see [Advanced Options 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][6].
 
 ### Variables
-If your subtest contains variables, they are inherited by the test you import it into. 
+If your subtest contains variables, they are inherited by the test you import them into. 
 To override these variables, create a variable in your parent test with the name as the variables within your subtest. 
 
 #### Extract variable from element
