@@ -5425,7 +5425,7 @@ menu:
       weight: 10
     - name: Product Analytics
       url: product_analytics
-      pre: ProductAnalytics
+      pre: product-analytics
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
