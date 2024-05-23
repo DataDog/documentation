@@ -159,7 +159,7 @@ Add a name to the step and enter a deep link URI.
 #### Restart application
 
 This action allows you to restart your application.
-This action does not reinstall the application but instead close and then launch the application again. 
+This action does not reinstall the application but instead closes and then launches the application again. 
 
 {{< img src="mobile_app_testing/test_steps/restart_application.mp4" alt="Recording how to restart your application" style="width:60%" video=true >}}
 
@@ -181,7 +181,7 @@ If it does not make sense for you to run your subtest independently, you can pau
 
 ### Variables
 If your subtest contains variables, they are inherited by the test you import it into. 
-In order to override these variables, create a variable in your parent test with the name as the variables within your subtest. 
+To override these variables, create a variable in your parent test with the name as the variables within your subtest. 
 
 #### Extract variable from element
 
