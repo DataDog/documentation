@@ -32,7 +32,7 @@ Use compute optimized instances with at least 8 vCPUs and 16 GiB of memory. Thes
 | AWS           | c6i.2xlarge (recommended) or c6g.2xlarge          	|
 | Azure         | f8                                                	|
 | Google Cloud  | c2 (8 vCPUs, 16 GiB memory)                       	|
-| Private       | 8 vCPUs, 16 GiB of memory, local disk is not required	|
+| Private       | 8 vCPUs, 16 GiB of memory                         	|
 
 ### CPU sizing
 
