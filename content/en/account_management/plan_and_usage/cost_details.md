@@ -45,11 +45,11 @@ Projected end-of-month costs are calculated by applying the current month's proj
 
 The cost summary functionality changes according to your Datadog usage as a single organization or a multi-organization. As a multi-organization, you can view estimated, projected, and historical costs for the parent organization and each sub-organization. 
 
-{{< img src="static/images/account_management/plan_and_usage/multiorg-current-month-historical-costs.png" alt="Screenshot of the current month's Cost Summary for a parent organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
+{{< img src="account_management/plan_and_usage/multiorg-current-month-historical-costs.png" alt="Screenshot of the current month's Cost Summary for a parent organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
 View historical costs by toggling to previous months.
 
-{{< img src="static/images/account_management/plan_and_usage/multiorg-prior-month-historical-costs.png" alt="Screenshot of a previous month's Cost Summary for a parent organization, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
+{{< img src="account_management/plan_and_usage/multiorg-prior-month-historical-costs.png" alt="Screenshot of a previous month's Cost Summary for a parent organization, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -74,7 +74,7 @@ To query estimated cost data through the API, see [Get estimated cost across you
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 
-{{< img src="static/images/account_management/plan_and_usage/suborg-cost-trends.png" alt="Screenshot of the current month's Cost Summary for a sub-organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes.">}}
+{{< img src="account_management/plan_and_usage/suborg-cost-trends.png" alt="Screenshot of the current month's Cost Summary for a sub-organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes.">}}
 
 1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
