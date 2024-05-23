@@ -38,6 +38,7 @@ further_reading:
 {{< nextlink href="/monitors/types/log" >}}<strong>Logs</strong>: Alert when a specified type of log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/network" >}}<strong>Network</strong>: Check the status of TCP/HTTP endpoints.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/network_performance" >}}<strong>Network Performance</strong>: Set alerts on your network traffic.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/netflow" >}}<strong>NetFlow</strong>: Monitor flow records from your NetFlow-enabled devices.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/outlier" >}}<strong>Outlier</strong>: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/process_check" >}}<strong>Process Check</strong>: Watch the status produced by the process.up service check.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/real_user_monitoring" >}}<strong>Real User Monitoring</strong>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
