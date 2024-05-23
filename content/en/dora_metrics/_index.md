@@ -10,7 +10,7 @@ further_reading:
   tag: "Release Notes"
   text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
-  tag: "Blog
+  tag: "Blog"
   text: "Best practices for using DORA metrics to improve software delivery"
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
