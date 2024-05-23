@@ -118,7 +118,7 @@ To setup software templates in Datadog, start by setting up a git repository wit
 
   {{< img src="tracing/service_catalog/workflowtemplate.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
-  {{< img src="tracing/service_catalog/template-application.png" alt="Application for managing software templates" style="width:100%;" >}}
+  {{< img src="tracing/service_catalog/template-application.png" alt="Application for managing software templates through App Builder" style="width:100%;" >}}
 
 ### Find Service Catalog actions
 To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][23]. Filter for the actions you need:
