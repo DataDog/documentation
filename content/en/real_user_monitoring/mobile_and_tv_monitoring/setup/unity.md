@@ -28,7 +28,7 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring is in public beta. You can get started right away and [create a Unity application][1] on Datadog.
+Unity Monitoring is in public beta.
 {{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.
