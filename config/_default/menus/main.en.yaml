@@ -1277,11 +1277,6 @@ menu:
       url: dashboards/correlations/
       parent: dashboards
       weight: 6
-    - name: Scheduled Reports
-      url: dashboards/scheduled_reports/
-      parent: dashboards
-      weight: 7
-      identifier: dashboards_reporting
     - name: Template Variables
       url: dashboards/template_variables/
       parent: dashboards
@@ -1297,6 +1292,21 @@ menu:
       url: dashboards/sharing/
       parent: dashboards
       weight: 10
+    - name: Public Dashboards
+      identifier: dashboards_sharing_public_dashboards
+      url: dashboards/sharing/public_dashboards
+      parent: dashboards_sharing
+      weight: 1001
+    - name: Share Graphs
+      identifier: dashboards_sharing_graphs
+      url: dashboards/sharing/graphs
+      parent: dashboards_sharing
+      weight: 1002
+    - name: Scheduled Reports
+      identifier: dashboards_reporting
+      url: dashboards/sharing/scheduled_reports
+      parent: dashboards_sharing
+      weight: 1003
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
@@ -3955,21 +3965,26 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_log_volume_control
       weight: 2
+    - name: Datadog Agent
+      url: observability_pipelines/log_volume_control/datadog_agent/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_datadog_agent
+      weight: 2001
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/log_volume_control/splunk_hec/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_hec
-      weight: 2001
+      weight: 2002
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/log_volume_control/splunk_tcp/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_tcp
-      weight: 2002
+      weight: 2003
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/log_volume_control/sumo_logic_hosted_collector/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
-      weight: 2003
+      weight: 2004
     - name: Dual Ship Logs
       url: observability_pipelines/dual_ship_logs/
       parent: observability_pipelines
