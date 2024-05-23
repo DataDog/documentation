@@ -8,7 +8,7 @@ further_reading:
 ---
 
 {{< callout header="false" >}}
-Our US offices are closed on Monday, May 27th for Memorial SDay. Support will be operating with limited staffing, and so Live Chat will not be available on Memorial Day for Standard Support customers during normal US business hours. Premier Support customers retain access to chat 24x7x365. For urgent issues, contact us through the <a href="https://docs.datadoghq.com/account_management/guide/access-your-support-ticket/">Support Portal</a>.
+Our US offices are closed on Monday, May 27th for Memorial Day. Support will be operating with limited staffing, and so Live Chat will not be available on Memorial Day for Standard Support customers during normal US business hours. Premier Support customers retain access to chat 24x7x365. For urgent issues, contact us through the <a href="https://docs.datadoghq.com/account_management/guide/access-your-support-ticket/">Support Portal</a>.
 
 ## Overview
 
