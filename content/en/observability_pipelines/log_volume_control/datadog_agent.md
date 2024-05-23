@@ -1,36 +1,55 @@
 ---
-title: Log Volume Control for Splunk Heavy and Universal Forwarders (TCP)
+title: Log Volume Control for the Datadog Agent
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-This document walks you through the following steps to set up the Observability Pipelines Worker with Splunk Heavy and Universal Forwarders so that you route only useful logs to your destinations:
+Set up the Observability Pipelines Worker with the Datadog Agent source so that you route only useful logs to your destinations.
 
+This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Connecting Splunk Forwarder to the Observability Pipelines Worker](#connect-splunk-forwarder-to-the-observability-pipelines-worker)
+1. [Connecting the Datadog Agent to the Observability Pipelines Worker](#connect-the-datadog-agent-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/splunk_tcp %}}
+{{% observability_pipelines/prerequisites/datadog_agent %}}
+
+{{< tabs >}}
+{{% tab "Splunk HEC" %}}
+
+{{% observability_pipelines/prerequisites/splunk_hec %}}
+
+{{% /tab %}}
+{{% tab "Sumo Logic" %}}
+
+{{% observability_pipelines/prerequisites/sumo_logic %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Log Volume** template to create a new pipeline.
-1. Select **Splunk TCP** as the source.
+1. Select the **Log Volume Control** template to create a new pipeline.
+1. Select **Datadog Agent** as the source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/splunk_tcp %}}
+{{% observability_pipelines/source_settings/datadog_agent %}}
 
-### Set up the destination
+### Set up the destinations
 
 Enter the following information based on your selected logs destination.
 
 {{< tabs >}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_settings/datadog %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
@@ -81,9 +100,14 @@ Enter the following information based on your selected logs destination.
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Splunk TCP address. This is the address and port where your applications are sending their logging data. The Observability Pipelines Worker listens to this address for incoming logs.
-1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+1. Enter the Datadog Agent address. This is the address and port where your Datadog Agent is sending its logging data. The Observability Pipelines Worker listens to this address for incoming logs.
+1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_env_vars/splunk_hec %}}
@@ -134,6 +158,6 @@ Enter the following information based on your selected logs destination.
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/log_source_configuration/splunk_tcp %}}
+{{% observability_pipelines/log_source_configuration/datadog_agent %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
