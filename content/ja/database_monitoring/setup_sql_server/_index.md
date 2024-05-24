@@ -5,10 +5,6 @@ kind: documentation
 title: SQL Server の設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 ### サポートされる SQL Server バージョン
 
 |                 | セルフホスト | Azure     | Amazon RDS | Google Cloud SQL | 注 |
@@ -25,22 +21,3 @@ title: SQL Server の設定
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 
 <br>
-
-### Agent インテグレーションのオーバーヘッド
-
-Agent インテグレーションのオーバーヘッドテストは、Amazon EC2 マシン `c5.xlarge` インスタンス (4 vCPU、8 GB RAM) で実行しました。テストに使用したデータベースは、Amazon RDS の `db.m5.large` インスタンス (2 vCPU、8 GB RAM) で動作する SQL Server 2019 Standard Edition インスタンスです。このデータベースは、20 個の倉庫を持つ TPC-C ワークロードを実行していました。
-
-| 設定                              | 収集間隔 |
-| ------------------------------------ | ------------------- |
-| 最小収集間隔のチェック        | 15 秒                 |
-| クエリメトリクスの収集間隔    | 60s                 |
-| クエリアクティビティの収集間隔 | 10 秒                 |
-| 設定収集間隔         | 600 秒                |
-
-* Agent テストのバージョン: `7.50.2`
-* CPU: 平均で CPU の約 1% を使用
-* メモリ: 約 300 MiB の RAM を使用 (RSS メモリ)
-* ネットワーク帯域幅: 約 40 KB/秒 ▼ | 30 KB/秒 ▲
-* Agent によるデータベースへのクエリオーバーヘッド: 約 1% の CPU 時間
-
-[1]: /ja/database_monitoring/setup_sql_server/troubleshooting/#known-limitations

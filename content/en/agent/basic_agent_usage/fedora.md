@@ -151,6 +151,8 @@ sudo userdel dd-agent \
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% apm-ssi-uninstall-linux %}}
+
 ## Troubleshooting
 
 See the [Agent Troubleshooting documentation][2].
