@@ -519,7 +519,7 @@ You can see links from failed Static Analysis and Software Composition Analysis 
 For more information, see the [Code Analysis documentation][102].
 
 [101]: https://app.datadoghq.com/ci/code-analysis
-[102]: /code_analysis/#set-up-the-github-integration
+[102]: /code_analysis/
 
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}
