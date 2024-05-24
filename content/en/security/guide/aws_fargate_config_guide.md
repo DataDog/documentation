@@ -10,7 +10,7 @@ This guide walks you through configuring [Cloud Security Management (CSM)][3], [
 
 ## Full stack coverage for AWS Fargate
 
-Datadog Security provides full stack coverage for AWS Fargate, as shown in the following tables:
+Datadog Security provides multiple layers of visibility for AWS Fargate. Use the products in combination with one another to gain full stack coverage, as shown in the following tables:
 
 ### Fargate assets
 
@@ -32,7 +32,7 @@ Datadog Security provides full stack coverage for AWS Fargate, as shown in the f
     <tr>
         <td>Fargate Infrastructure</td>
         <td>Infrastructure Monitoring</td>
-        <td>N/A</td>
+        <td>Not yet supported</td>
         <td>CSM Threats</td>
     </tr>
 </table>
