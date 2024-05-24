@@ -79,7 +79,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration) |         |
 | DRIVER_LOGS_ENABLED      | To collect spark driver logs in Datadog                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   |
-
+| DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Whether or not to include init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully. | false |
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
@@ -126,7 +126,9 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DD_SITE                  | Your [Datadog site][2]                                                                                                                                           |         |
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration) |         |
 | DRIVER_LOGS_ENABLED      | To collect spark driver logs in Datadog                                                                                                                          | false   |
-| WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   |
+| WORKER_LOGS_ENABLED      | To collect spark workers logs in Datadog                                                                                                                         | false   | 
+| DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Whether or not to include init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully. | false |
+
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
@@ -136,6 +138,39 @@ Optionally, you can also set other init script parameters and Datadog environmen
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Advanced settings (optional)
+
+1. set `DD_RUN_NAME` environment variable using `spark_env_vars` field for your one-time job run.
+
+   For Databricks Jobs submitted via the [one-time run API endpoint][8], set this variable to the same value as your request payload's `run_name`. This allows Data Jobs Monitoring to group your Jobs with the same `run_name` as one row in the Cluster table, showing aggregated infrastructure metrics across runs instead of one row per submitted run.
+
+   Example one-time job run request body:
+   ```json
+   {
+      "run_name": "Example Job",
+      "idempotency_token": "8f018174-4792-40d5-bcbc-3e6a527352c8",
+      "tasks": [
+         {
+            "task_key": "Example Task",
+            "description": "Description of task",
+            "depends_on": [],
+            "notebook_task": {
+               "notebook_path": "/Path/to/example/task/notebook",
+               "source": "WORKSPACE"
+            },
+            "new_cluster": {
+               "num_workers": 1,
+               "spark_version": "13.3.x-scala2.12",
+               "node_type_id": "i3.xlarge",
+               "spark_env_vars": {
+                  "DD_RUN_NAME": "Example Job"
+               }
+            }
+         }
+      ]
+   }
+   ```
 
 ## Validation
 
@@ -153,3 +188,4 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 [4]: https://docs.databricks.com/en/security/secrets/index.html
 [6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
+[8]: https://docs.databricks.com/api/workspace/jobs/submit
