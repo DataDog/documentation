@@ -3,6 +3,9 @@ title: Network Device Topology Map
 kind: documentation
 is_beta: true
 further_reading:
+- link: "https://www.datadoghq.com/blog/visualize-network-device-topology/"
+  tag: "Blog"
+  text: "Visualize relationships across your on-premise network with the Device Topology Map"
 - link: "/network_monitoring/devices/data"
   tag: "Documentation"
   text: "Data Collected with Network Device Monitoring"
@@ -38,7 +41,7 @@ In the Network Topology Map, the following navigation options are available:
 
 1. Under **View By**, select to visualize devices in groups according to tags: 
 
-{{< img src="/network_device_monitoring/network_topology_map/network_view_by_location_2.png" alt="The navigation option, with view by devices and tags selected, highlighting view by location" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device-topology-grouped.png" alt="The navigation option, with view by devices and tags selected, highlighting view by location" style="width:80%;" >}}
 
 ### Color
 
@@ -47,7 +50,7 @@ In the Network Topology Map, the following navigation options are available:
 - **Device State**: Display nodes on the Device Topology Map by SNMP reachability.
 - **Ping State**: Display nodes on the Device Topology Map by Ping status. 
 
-{{< img src="/network_device_monitoring/network_topology_map/device_topology_color_by_device.png" alt="The navigation option, with view by color selected, highlighting view by device state" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device-topology-overview-intro.png" alt="The navigation option, with view by color selected, highlighting view by device state" style="width:80%;" >}}
 
    The following are the definitions of the nodes for each color state:
    <div style="width:80%; margin: 0 auto;">
@@ -125,7 +128,7 @@ In addition to providing an overview of your network's physical connections, you
 
 Choose **Inspect** to see the device's interface connections. Click on any of the connected interfaces for further investigation.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_interfaces.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/ndm_topology_interface_updated.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
 
 ### View device details
 
@@ -135,7 +138,7 @@ Choose **View device details** to see information such as the device's IP addres
 
 From this view, you can also view the device's connected interfaces in the **Interfaces** tab.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_inspect_details.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device-topology-panel.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
 
 ### View flow details
 
@@ -147,7 +150,7 @@ If you experience issues using the Network Topology Map, use the following troub
 
 ### Missing topology data message box
 
-{{< img src="/network_device_monitoring/network_topology_map/missing_topology_data_2.png" alt="The missing topology data message that is displayed when the rendered map has no links" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/missing_topology_map.png" alt="The missing topology data message that is displayed when the rendered map has no links" style="width:80%;" >}}
 
 This message is displayed when the rendered map has no links.
 
