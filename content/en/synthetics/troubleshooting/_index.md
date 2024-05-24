@@ -111,6 +111,12 @@ To fix it, go edit your recording, open the advanced options of the step that is
 
 Automated browsers do not support emulating the CSS `pointer` media feature. Browser tests have `pointer: none` for all tests and devices (laptop, tablet, or mobile).
 
+### Resource duration
+
+#### A resource is of a longer duration than the actual step duration
+
+It is possible for long loading resources to spill over multiple steps. Inside a test result's step, Datadog will return all resources being instantiated on that particular step, however we wait up to approximately 20 seconds for important network calls to finish. After that, the synthetics worker will move on to the next step. 
+
 ## API and browser tests
 
 ### Unauthorized errors
