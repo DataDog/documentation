@@ -115,7 +115,7 @@ Automated browsers do not support emulating the CSS `pointer` media feature. Bro
 
 #### A resource is of a longer duration than the actual step duration
 
-It is possible for long loading resources to spill over multiple steps. Inside a test result's step, Datadog will return all resources being instantiated on that particular step, however we wait up to approximately 20 seconds for important network calls to finish. After that, the synthetics worker will move on to the next step. 
+Long-loading resources may span across multiple steps. Within a test result's step, Datadog returns all resources initiated during that specific step. However, we allow roughly 20 seconds for important network calls to finish. After this period, the synthetics worker proceeds to the subsequent step.
 
 ## API and browser tests
 
