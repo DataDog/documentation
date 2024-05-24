@@ -1,5 +1,5 @@
 ---
-title: Span kinds
+title: Span Kinds
 kind: documentation
 ---
 
