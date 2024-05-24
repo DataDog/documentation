@@ -46,11 +46,11 @@ This behavior can be fine-tuned with the following environment variables:
 
 ## Explore results in the Test Visibility Explorer
 
-You can query the retried tests in the [Test Visibility Explorer][4]: they will have the `@test.is_retry` tag set to `true` (some of them may also have the `@test.is_new` set to `true` - those are the ones retried by the [Early Flakiness Detection][5] feature).
+You can query the retried tests in the [Test Visibility Explorer][4]: they have the `@test.is_retry` tag set to `true` (some of them may also have the `@test.is_new` set to `true`, which indicates they have been retried by the [Early Flakiness Detection][5] feature).
 
 ## Troubleshooting
 
-If you suspect there are issues with Flaky Test Retries, navigate to the [Test Service Settings page][2], look for your test service, and click **Configure**. Disable Flaky Test Retries by clicking on the toggle.
+If you suspect there are any issues with Flaky Test Retries, navigate to the [Test Service Settings page][2], look for your test service, and click **Configure**. Disable Flaky Test Retries by clicking on the toggle.
 
 ## Further Reading
 
