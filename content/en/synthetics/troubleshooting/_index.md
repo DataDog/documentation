@@ -231,5 +231,5 @@ Additionally, in Private Location versions `>v1.27`, Datadog depends on the use 
 [9]: /synthetics/settings/?tab=createfromhttptest#global-variables
 [10]: /synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[12]: /synthetics/api_tests/?tab=httptest#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/
