@@ -22,7 +22,9 @@ further_reading:
   text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-Connecting OpenTelemetry language SDK logs and traces within Datadog is similar to connecting [Datadog SDK logs and traces][1], with a few additional steps:
+If you are using the OpenTelemetry Collector, you can automatically correlate traces and logs by configuring the Collector with the appropriate processors. Follow the [Hostname and Tagging setup instructions][4] to apply the necessary Collector configuration.
+
+If you're using the Datadog Agent, connecting OpenTelemetry language SDK logs and traces within Datadog is similar to connecting [Datadog SDK logs and traces][1], with a few additional steps:
 
 1. OpenTelemetry `TraceId` and `SpanId` properties differ from Datadog conventions. Therefore it's necessary to translate `TraceId` and `SpanId` from their OpenTelemetry formats ([a 128bit unsigned int and 64bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string, respectively][2]) into their Datadog Formats([a 64bit unsigned int][3]). 
 
@@ -289,3 +291,4 @@ using (LogContext.PushProperty("dd.span_id", ddSpanId))
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: https://github.com/open-telemetry/opentelemetry-specification/blob/eeef21259a12d61100804eff2e12ba06523821c3/specification/trace/api.md#retrieving-the-traceid-and-spanid
 [3]: /api/latest/tracing/#send-traces
+[4]:/opentelemetry/collector_exporter/hostname_tagging/?tab=host#setup
