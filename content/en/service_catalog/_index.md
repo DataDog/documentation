@@ -11,7 +11,7 @@ further_reading:
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage service definitions with Terraform"
 - link: "/tracing/service_catalog/guides/understanding-service-configuration"
   tag: "Guide"

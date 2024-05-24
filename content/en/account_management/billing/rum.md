@@ -57,7 +57,7 @@ When a mobile application contains webviews and you've instrumented both your we
 
 In other words, only the one RUM mobile session is visible in Datadog and therefore is the only one that is billable.
 
-{{< img src="account_management/billing/rum/rum-webviews-impact-on-billing-1.png" alt="If you've instrumented both your web and mobile applications with Datadog SDKs, you are only be billed for the mobile session." >}}
+{{< img src="account_management/billing/rum/rum-webviews-impact-on-billing-2.png" alt="If you've instrumented both your web and mobile applications with Datadog SDKs, you are only be billed for the mobile session." >}}
 
 ## Further Reading
 

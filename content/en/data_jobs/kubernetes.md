@@ -55,7 +55,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    spec:
      features:
        apm:
-       enabled: true
+         enabled: true
        hostPortConfig:
          enabled: true
          hostPort: 8126
