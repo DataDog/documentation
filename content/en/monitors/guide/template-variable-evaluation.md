@@ -28,7 +28,7 @@ The following operators are supported:
 
 The `{{last_triggered_at_epoch}}` template variable returns the UTC time when a monitor last triggered in milliseconds epoch format. 
 
-#### Scope links to specific times
+### Scope links to specific times
 
 Evaluation operators can be used to subtract 15 minutes (15 * 60 * 1000 milliseconds) with the following:
 
@@ -42,7 +42,7 @@ This is useful for creating time-scoped links in your monitor notification messa
 https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*1000"}}&to_ts={{last_triggered_at_epoch}}&live=false
 ```
 
-#### Routing notifications to different teams based on time of day
+### Routing notifications to different teams based on time of day
 
 You can combine a modulo `%` evaluation of the `last_triggered_at_epoch` variable with `{{#is_match}}{{/is_match}}` to customize the routing of notifications based on time of day:
 ```
