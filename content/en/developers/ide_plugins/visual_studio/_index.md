@@ -43,7 +43,7 @@ The Datadog extension runs [Static Analysis][14] rules on the source files you h
 
 Static Analysis supports scanning across multiple programming languages. For a complete list, see [Static Analysis Rules][15]. For file types belonging to supported languages, issues are shown in the source code editor using Visual Studio's code inspection system, and suggested fixes can be applied directly:
 
-{{< img src="/developers/ide_plugins/visual_studio/TBD.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/visual_studio/static_code_analysis.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
 
 Additionally, all issues detected by this feature are listed in the standard **Error List** view of Visual Studio.
 
