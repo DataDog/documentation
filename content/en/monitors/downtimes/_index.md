@@ -28,7 +28,8 @@ cascade:
 
 ## Overview
 
-Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors. Downtimes silence all monitors' alerts and notifications, but do not prevent monitor states transitions.
+While alerts are very important to know when critical changes are occurring, there are periods of time when you'll want to have them muted, such as system shutdowns, off-line maintenance, or upgrades without triggering your monitors.
+With Downtimes, you get the ability to mute your alerts during scheduled period of time. Downtimes silence all monitors' alerts and notifications, but do not prevent monitor states transitions.
 
 {{< img src="/monitors/downtimes/downtime_overview.png" alt="Example of a downtime" style="width:100%;" >}}
 
@@ -132,6 +133,24 @@ The option to disable the first recovery notification is additive between multip
 
 **Note**: This option mutes the **first** recovery notification. If a monitor proceeds to trigger and recover again during a downtime, then the corresponding notifications are always muted, regardless of this option's settings.
 
+### Expiration
+
+By default, if a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
+
+To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the "Notify Your Team" section. For downtimes created with the API, the default behavior is to exclude the `Is cancelled` option.
+
+{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="Configure Notify your team section of a monitor with specific downtime conditions" style="width:100%;">}}
+
+**Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
+1. During downtime, notifications for this alert are suppressed.
+2. The monitor remains in an alert state (because the conditions are still met).
+3. The downtime ends.
+4. The alert conditions are still met, so a notification is sent.
+
+**Example 2:** If a monitor is in an alert state *before* a downtime commences and recovers *during* that downtime:
+1. The state transitions from `ALERT` to `OK`.
+2. The recovery notification is sent during the downtime, but only for the first recovery during that downtime.
+
 ## Manage
 
 The [Manage Downtimes page][1] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
@@ -150,24 +169,6 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="Monitor status graph showing state transition to alert during downtime, will not create an alert event" style="width:80%;">}}
 
 **Note**: Muting or un-muting a monitor from the monitor status page does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][11].
-
-### Expiration
-
-By default, if a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
-
-To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the "Notify Your Team" section. For downtimes created with the API, the default behavior is to exclude the `Is cancelled` option.
-
-{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="Configure Notify your team section of a monitor with specific downtime conditions" style="width:100%;">}}
-
-**Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
-1. During downtime, notifications for this alert are suppressed.
-2. The monitor remains in an alert state (because the conditions are still met).
-3. The downtime ends.
-4. The alert conditions are still met, so a notification is sent.
-
-**Example 2:** If a monitor is in an alert state *before* a downtime commences and recovers *during* that downtime:
-1. The state transitions from `ALERT` to `OK`.
-2. The recovery notification is sent during the downtime, but only for the first recovery during that downtime.
 
 ### Monitor report
 
